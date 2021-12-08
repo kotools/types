@@ -1,6 +1,6 @@
 name: Continuous Integration
 on:
-  pull_request:
+  push:
     branches: [ master ]
     paths: [ /**/*.kts, /*gradle*, .github/workflows/*, src/** ]
 jobs:
