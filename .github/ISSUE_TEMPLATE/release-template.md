@@ -11,6 +11,6 @@ Issues of this new version should be done before resolving this issue.
 
 ## Checklist
 
-- [ ] Enable features of this version in production.
+- [ ] Upgrade the application's version.
 - [ ] Add a new version in changelog.
 - [ ] Create a release on the repository.
