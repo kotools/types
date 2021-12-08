@@ -1,5 +1,6 @@
 name: Continuous Deployment
 on:
+  push: # TODO: remove this after testing
   release:
     types: [ created ]
 jobs:
@@ -16,4 +17,4 @@ jobs:
       - name: Publish package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gradlew publish
+        run: ./gradlew publish
