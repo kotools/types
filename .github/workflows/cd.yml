@@ -1,6 +1,5 @@
 name: Continuous Deployment
 on:
-  push: # TODO: remove this after testing
   release:
     types: [ created ]
 jobs:
