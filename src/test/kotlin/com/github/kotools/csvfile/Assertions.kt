@@ -5,16 +5,16 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
-internal inline fun <T> assertNull(block: () -> T?): Unit = assertNull(block())
-
-internal infix fun <T> T.assertEquals(other: T): Unit =
+internal infix fun <T : Any?> T.assertEquals(other: T): Unit =
     assertEquals(other, actual = this)
 
-internal infix fun <T> T?.assertNotEquals(other: T) {
+internal infix fun <T : Any?> T.assertNotNullOrEquals(other: T) {
     assertNotNull()
     this?.let { assertNotEquals(other, it) }
 }
 
-private fun <T> T?.assertNotNull() {
+internal fun <T : Any?> T.assertNull(): Unit = assertNull(actual = this)
+
+private fun <T : Any?> T.assertNotNull() {
     assertNotNull(actual = this)
 }
