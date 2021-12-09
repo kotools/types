@@ -14,6 +14,7 @@ dependencies {
     setOf(Kotlin.coroutines, Library.csv)
         .forEach(::implementation)
     testImplementation(kotlin(module = "test"))
+    testRuntimeOnly(Library.slf4j)
 }
 
 publishing {
