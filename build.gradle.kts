@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
-    kotlin(module = "jvm") version "1.5.32"
+    kotlin(module = "jvm") version Kotlin.version
     `maven-publish`
 }
 
@@ -11,10 +11,9 @@ version = "0.0.0"
 repositories(RepositoryHandler::mavenCentral)
 
 dependencies {
-    setOf(
-        "com.github.doyaaaaaken:kotlin-csv-jvm:[1.2, 1.3[",
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:[1.5, 1.6["
-    ).forEach(::implementation)
+    setOf(Kotlin.coroutines, Library.csv)
+        .forEach(::implementation)
+    testImplementation(kotlin(module = "test"))
 }
 
 publishing {
