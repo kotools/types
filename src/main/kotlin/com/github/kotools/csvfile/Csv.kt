@@ -12,5 +12,6 @@ internal val csv: Csv get() = Csv()
 internal fun String.formatFileName(): String =
     takeIf { it.endsWith(EXTENSION) } ?: "$this$EXTENSION"
 
+/** Parent scope of all CSV file's related operations. */
 @CsvDsl
 public class Csv

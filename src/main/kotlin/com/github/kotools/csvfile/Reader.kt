@@ -9,6 +9,15 @@ private val reader: CsvReader by lazy {
     csvReader { skipEmptyLine = true }
 }
 
+/**
+ * Creates a new [reader][Reader] with the given [configuration][config] and
+ * reads the [corresponding file][Reader.file]'s content.
+ *
+ * If no [configuration][config] is defined, or if the [file][Reader.file]
+ * doesn't exist in **resources** folder, this function returns `null`.
+ *
+ * The `.csv` extension in the [file's name][Reader.file] is optional.
+ */
 public suspend infix fun Csv.reader(
     config: Reader.() -> Unit
 ): List<Map<String, String>>? = Reader()
@@ -21,6 +30,7 @@ private suspend fun Reader.execute(): List<CsvLine>? = withContext(IO) {
         ?.let(reader::readAllWithHeader)
 }
 
+/** Scope for reading CSV files content. */
 @CsvDsl
 public class Reader {
     public var file: String? = null
