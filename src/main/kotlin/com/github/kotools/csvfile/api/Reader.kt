@@ -17,5 +17,6 @@ public suspend fun csvReader(
 public abstract class ReaderApi {
     public var debug: Boolean = false
     public var file: String by file()
+    public var folder: String by folder()
     public var separator: Separator = comma
 }

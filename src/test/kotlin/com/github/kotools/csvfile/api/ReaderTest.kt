@@ -1,9 +1,9 @@
 package com.github.kotools.csvfile.api
 
+import com.github.kotools.csvfile.core.semicolon
 import com.github.kotools.csvfile.utils.assertEquals
 import com.github.kotools.csvfile.utils.assertNotNullOrEquals
 import com.github.kotools.csvfile.utils.assertNull
-import com.github.kotools.csvfile.core.semicolon
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 
@@ -11,6 +11,14 @@ class ReaderTest {
     @Test
     fun `should pass with empty file`(): Unit = runBlocking {
         csvReader { file = "empty.csv" }?.size assertEquals 0
+    }
+
+    @Test
+    fun `should pass with file in folder`(): Unit = runBlocking {
+        csvReader {
+            file = "nested.csv"
+            folder = "folder"
+        }?.size assertNotNullOrEquals 0
     }
 
     @Test
