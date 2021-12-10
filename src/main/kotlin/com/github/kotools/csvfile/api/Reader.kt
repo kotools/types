@@ -59,6 +59,19 @@ public abstract class ReaderApi {
     public var folder: String by folder()
 
     /**
+     * **Optional** flag for searching the [file] to read in the `resources`
+     * folder.
+     *
+     * Set to `true` by default.
+     *
+     * **Please note that files created at runtime will not be stored in the
+     * `resources` folder.**
+     * So if you try to read a [file] only available at runtime, make sure to
+     * set this flag to `false`.
+     */
+    public var resource: Boolean = true
+
+    /**
      * **Optional** property for setting the [file]'s separator.
      *
      * Set to [comma] by default.
