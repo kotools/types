@@ -7,8 +7,7 @@ import kotlinx.coroutines.*
  * Creates a [reader][ReaderApi] with the given [configuration] and reads the
  * corresponding [file][ReaderApi.file]'s content.
  *
- * If the [file][ReaderApi.file] doesn't exist in **resources** folder, it
- * returns `null`.
+ * Returns `null` if the [file][ReaderApi.file] doesn't exist.
  */
 public suspend fun csvReader(
     configuration: ReaderApi.() -> Unit
@@ -18,8 +17,7 @@ public suspend fun csvReader(
  * Creates a [reader][ReaderApi] with the given [configuration] and reads the
  * corresponding [file][ReaderApi.file]'s content **asynchronously**.
  *
- * If the [file][ReaderApi.file] doesn't exist in **resources** folder, it
- * returns `null`.
+ * Returns `null` if the [file][ReaderApi.file] doesn't exist.
  */
 public fun CoroutineScope.csvReaderAsync(
     configuration: ReaderApi.() -> Unit
