@@ -4,8 +4,8 @@ import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.kotools.csvfile.api.ReaderApi
 import java.io.File
-
-public typealias CsvLine = Map<String, String>
+import java.io.InputStream
+import java.net.URL
 
 internal val reader: Reader get() = Reader()
 
@@ -18,16 +18,26 @@ internal class Reader : ReaderApi() {
 
     private val loader: ClassLoader get() = ClassLoader.getSystemClassLoader()
 
-    fun execute(): List<CsvLine>? = file.takeIf(String::isNotBlank)
-        ?.let { if (resource) readResource() else readFile() }
-        ?.apply { if (debug) println(this) }
+    inline infix operator fun invoke(config: ReaderApi.() -> Unit):
+            List<Map<String, String>>? = apply(config).execute()
 
-    private fun readFile(): List<CsvLine>? = loader.getResource("")
-        ?.let { File("${it.path}$folder$file") }
-        ?.takeIf(File::exists)
-        ?.let(csv::readAllWithHeader)
+    private fun execute(): List<Map<String, String>>? {
+        if (file.isBlank()) return null
+        val rows: List<Map<String, String>>? = if (resource) readResource()
+        else readFile()
+        return rows?.apply { if (debug) println(rows) }
+    }
 
-    private fun readResource(): List<CsvLine>? =
-        loader.getResourceAsStream("$folder$file")
-            ?.let(csv::readAllWithHeader)
+    private fun readFile(): List<Map<String, String>>? {
+        val url: URL = loader.getResource("") ?: return null
+        val f = File("${url.path}$folder$file")
+        if (!f.exists()) return null
+        return csv.readAllWithHeader(f)
+    }
+
+    private fun readResource(): List<Map<String, String>>? {
+        val stream: InputStream =
+            loader.getResourceAsStream("$folder$file") ?: return null
+        return csv.readAllWithHeader(stream)
+    }
 }
