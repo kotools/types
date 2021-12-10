@@ -17,7 +17,8 @@ internal class Reader : ReaderApi() {
         }
 
     suspend fun execute(): List<CsvLine>? = withContext(Dispatchers.IO) {
-        file?.let(ClassLoader.getSystemClassLoader()::getResourceAsStream)
+        file.takeIf(String::isNotBlank)
+            ?.let(ClassLoader.getSystemClassLoader()::getResourceAsStream)
             ?.let(csv::readAllWithHeader)
             ?.apply { if (debug) println(this) }
     }

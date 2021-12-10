@@ -1,4 +1,4 @@
-package com.github.kotools.csvfile
+package com.github.kotools.csvfile.utils
 
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

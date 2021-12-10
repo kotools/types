@@ -8,7 +8,7 @@ import com.github.kotools.csvfile.core.*
  * If the [file][ReaderApi.file] doesn't exist in **resources** folder, it
  * returns `null`.
  */
-public suspend infix fun Csv.reader(
+public suspend fun csvReader(
     configuration: ReaderApi.() -> Unit
 ): List<CsvLine>? = reader.apply(configuration)
     .execute()
@@ -16,6 +16,6 @@ public suspend infix fun Csv.reader(
 /** Scope for reading CSV files. */
 public abstract class ReaderApi {
     public var debug: Boolean = false
-    public var file: String? by fileName()
+    public var file: String by file()
     public var separator: Separator = comma
 }
