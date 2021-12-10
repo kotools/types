@@ -1,6 +1,7 @@
 package com.github.kotools.csvfile.api
 
 import com.github.kotools.csvfile.core.*
+import kotlinx.coroutines.*
 
 /**
  * Creates a [reader][ReaderApi] with the given [configuration] and reads the
@@ -10,6 +11,21 @@ import com.github.kotools.csvfile.core.*
  * returns `null`.
  */
 public suspend fun csvReader(
+    configuration: ReaderApi.() -> Unit
+): List<CsvLine>? = withContext(Dispatchers.IO) { process(configuration) }
+
+/**
+ * Creates a [reader][ReaderApi] with the given [configuration] and reads the
+ * corresponding [file][ReaderApi.file]'s content **asynchronously**.
+ *
+ * If the [file][ReaderApi.file] doesn't exist in **resources** folder, it
+ * returns `null`.
+ */
+public fun CoroutineScope.csvReaderAsync(
+    configuration: ReaderApi.() -> Unit
+): Deferred<List<CsvLine>?> = async(Dispatchers.IO) { process(configuration) }
+
+private inline fun process(
     configuration: ReaderApi.() -> Unit
 ): List<CsvLine>? = reader.apply(configuration)
     .execute()

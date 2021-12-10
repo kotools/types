@@ -2,8 +2,6 @@ package com.github.kotools.csvfile.core
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.kotools.csvfile.api.ReaderApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 public typealias CsvLine = Map<String, String>
 
@@ -16,11 +14,9 @@ internal class Reader : ReaderApi() {
             skipEmptyLine = true
         }
 
-    suspend fun execute(): List<CsvLine>? = withContext(Dispatchers.IO) {
-        file.takeIf(String::isNotBlank)
-            ?.let { "$folder$it" }
-            ?.let(ClassLoader.getSystemClassLoader()::getResourceAsStream)
-            ?.let(csv::readAllWithHeader)
-            ?.apply { if (debug) println(this) }
-    }
+    fun execute(): List<CsvLine>? = file.takeIf(String::isNotBlank)
+        ?.let { "$folder$it" }
+        ?.let(ClassLoader.getSystemClassLoader()::getResourceAsStream)
+        ?.let(csv::readAllWithHeader)
+        ?.apply { if (debug) println(this) }
 }
