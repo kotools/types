@@ -15,3 +15,8 @@ All notable changes to this project will be documented in this file.
 - `Security` in case of vulnerabilities.
 
 ## Work in progress
+
+### Added
+
+- CSV files reading in a suspending and asynchronous
+  style ([#5](https://github.com/kotools/csv-file/issues/5)).
