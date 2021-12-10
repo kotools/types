@@ -16,8 +16,6 @@ internal class Reader : ReaderApi() {
             skipEmptyLine = true
         }
 
-    private val loader: ClassLoader get() = ClassLoader.getSystemClassLoader()
-
     inline infix operator fun invoke(config: ReaderApi.() -> Unit):
             List<Map<String, String>>? = apply(config).execute()
 

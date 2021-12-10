@@ -1,6 +1,9 @@
 package com.github.kotools.csvfile.api
 
-import com.github.kotools.csvfile.core.*
+import com.github.kotools.csvfile.core.Separator
+import com.github.kotools.csvfile.core.comma
+import com.github.kotools.csvfile.core.file
+import com.github.kotools.csvfile.core.reader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
@@ -26,34 +29,13 @@ public infix fun CoroutineScope.csvReaderAsync(config: ReaderApi.() -> Unit):
         Deferred<List<Map<String, String>>?> = async(IO) { reader(config) }
 
 /** Scope for reading CSV files. */
-public abstract class ReaderApi {
+public abstract class ReaderApi : CsvApi() {
     /**
      * **Optional** flag for printing the [file]'s content in the console.
      *
      * Set to `false` by default.
      */
     public var debug: Boolean = false
-
-    /**
-     * **Required** property for targeting a file.
-     *
-     * The `.csv` extension is optional and will be added automatically in the
-     * process.
-     * For example, `"my-file.csv"` and `"my-file"` produces the same output.
-     */
-    public var file: String by file()
-
-    /**
-     * **Optional** property for targeting the folder containing the [file] to
-     * read.
-     *
-     * Set to an empty string by default.
-     *
-     * The `'/'` suffix is optional and will be added automatically in the
-     * process.
-     * For example, `"my-folder/"` and `"my-folder"` produces the same output.
-     */
-    public var folder: String by folder()
 
     /**
      * **Optional** flag for searching the [file] to read in the `resources`

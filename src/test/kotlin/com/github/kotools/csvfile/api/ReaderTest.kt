@@ -10,8 +10,7 @@ import kotlin.test.Test
 class ReaderTest {
     @Test
     fun `should pass asynchronously`(): Unit = runBlocking {
-        csvReaderAsync { file = "test" }
-            .await()?.size assertNotNullOrEquals 0
+        csvReaderAsync { file = "test" }.await()?.size assertNotNullOrEquals 0
     }
 
     @Test
@@ -43,8 +42,7 @@ class ReaderTest {
 
     @Test
     fun `should fail with nonexistent file`(): Unit = runBlocking {
-        csvReader { file = "unknown" }
-            .assertNull()
+        csvReader { file = "unknown" }.assertNull()
     }
 
     @Test
@@ -57,7 +55,6 @@ class ReaderTest {
 
     @Test
     fun `should fail without giving file`(): Unit = runBlocking {
-        csvReader { debug = true }
-            .assertNull()
+        csvReader { debug = true }.assertNull()
     }
 }
