@@ -43,9 +43,7 @@ class ReaderTest {
 
     @Test
     fun `should fail without giving file`(): Unit = runBlocking {
-        csvReader {
-            debug = true
-            separator = semicolon
-        }.assertNull()
+        csvReader { debug = true }
+            .assertNull()
     }
 }
