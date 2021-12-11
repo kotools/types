@@ -46,14 +46,6 @@ class ReaderTest {
     }
 
     @Test
-    fun `should fail with nonexistent resource file`(): Unit = runBlocking {
-        csvReader {
-            file = "empty"
-            resource = false
-        }.assertNull()
-    }
-
-    @Test
     fun `should fail without giving file`(): Unit = runBlocking {
         csvReader { }.assertNull()
     }

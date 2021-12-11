@@ -20,8 +20,7 @@ internal class Reader : ReaderApi() {
             List<Map<String, String>>? = apply(config).execute()
 
     private fun execute(): List<Map<String, String>>? = if (file.isBlank()) null
-    else if (resource) readResource()
-    else readFile()
+    else readResource() ?: readFile()
 
     private fun readFile(): List<Map<String, String>>? {
         val url: URL = loader.getResource("") ?: return null
