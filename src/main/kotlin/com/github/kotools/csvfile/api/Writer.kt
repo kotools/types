@@ -1,7 +1,10 @@
 package com.github.kotools.csvfile.api
 
 import com.github.kotools.csvfile.core.writer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 // TODO: File exists in resources ? write in it : look in system file
@@ -9,6 +12,10 @@ import kotlinx.coroutines.withContext
 // TODO: Add tests
 public suspend fun csvWriter(config: WriterApi.() -> Unit): Unit? =
     withContext(IO) { writer(config) }
+
+public infix fun CoroutineScope.csvWriterAsync(
+    config: WriterApi.() -> Unit
+): Deferred<Unit?> = async(IO) { writer(config) }
 
 public abstract class WriterApi : CsvApi() {
     public var header: Set<String> = emptySet()
