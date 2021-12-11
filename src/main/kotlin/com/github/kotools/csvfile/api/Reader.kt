@@ -31,13 +31,6 @@ public infix fun CoroutineScope.csvReaderAsync(config: ReaderApi.() -> Unit):
 /** Scope for reading CSV files. */
 public abstract class ReaderApi : CsvApi() {
     /**
-     * **Optional** flag for printing the [file]'s content in the console.
-     *
-     * Set to `false` by default.
-     */
-    public var debug: Boolean = false
-
-    /**
      * **Optional** flag for searching the [file] to read in the `resources`
      * folder.
      *

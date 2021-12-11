@@ -19,12 +19,9 @@ internal class Reader : ReaderApi() {
     inline infix operator fun invoke(config: ReaderApi.() -> Unit):
             List<Map<String, String>>? = apply(config).execute()
 
-    private fun execute(): List<Map<String, String>>? {
-        if (file.isBlank()) return null
-        val rows: List<Map<String, String>>? = if (resource) readResource()
-        else readFile()
-        return rows?.apply { if (debug) println(rows) }
-    }
+    private fun execute(): List<Map<String, String>>? = if (file.isBlank()) null
+    else if (resource) readResource()
+    else readFile()
 
     private fun readFile(): List<Map<String, String>>? {
         val url: URL = loader.getResource("") ?: return null
