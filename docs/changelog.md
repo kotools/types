@@ -1,4 +1,4 @@
-# Kotools CSV file - Changelog
+# Kotools CSV - Changelog
 
 All notable changes to this project will be documented in this file.
 
