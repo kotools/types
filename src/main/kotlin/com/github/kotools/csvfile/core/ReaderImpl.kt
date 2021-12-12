@@ -2,28 +2,28 @@ package com.github.kotools.csvfile.core
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
-import com.github.kotools.csvfile.api.ReaderApi
+import com.github.kotools.csvfile.api.Reader
 import java.io.File
 import java.io.InputStream
 import java.net.URL
 
-internal val reader: Reader get() = Reader()
+internal inline fun reader(config: Reader.() -> Unit):
+        List<Map<String, String>>? = ReaderImpl().apply(config).process()
 
-internal class Reader : ReaderApi() {
+internal class ReaderImpl : CsvImpl(), Process<List<Map<String, String>>>,
+    Reader {
     private val csv: CsvReader
         get() = csvReader {
             delimiter = separator.value
             skipEmptyLine = true
         }
 
-    inline infix operator fun invoke(config: ReaderApi.() -> Unit):
-            List<Map<String, String>>? = apply(config).execute()
-
-    private fun execute(): List<Map<String, String>>? = if (file.isBlank()) null
-    else readResource() ?: readFile()
+    override fun process(): List<Map<String, String>>? =
+        if (file.isBlank()) null
+        else readResource() ?: readFile()
 
     private fun readFile(): List<Map<String, String>>? {
-        val url: URL = loader.getResource("") ?: return null
+        val url: URL = systemLoader.getResource("") ?: return null
         val f = File("${url.path}$folder$file")
         if (!f.exists()) return null
         return csv.readAllWithHeader(f)
@@ -31,7 +31,7 @@ internal class Reader : ReaderApi() {
 
     private fun readResource(): List<Map<String, String>>? {
         val stream: InputStream =
-            loader.getResourceAsStream("$folder$file") ?: return null
+            systemLoader.getResourceAsStream("$folder$file") ?: return null
         return csv.readAllWithHeader(stream)
     }
 }

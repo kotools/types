@@ -1,6 +1,5 @@
 package com.github.kotools.csvfile.api
 
-import com.github.kotools.csvfile.core.semicolon
 import com.github.kotools.csvfile.utils.assertEquals
 import com.github.kotools.csvfile.utils.assertNotNull
 import com.github.kotools.csvfile.utils.assertNull

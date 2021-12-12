@@ -7,29 +7,20 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
-public suspend fun csvWriter(config: WriterApi.() -> Unit): Unit? =
+public suspend fun csvWriter(config: Writer.() -> Unit): Unit? =
     withContext(IO) { writer(config) }
 
 public infix fun CoroutineScope.csvWriterAsync(
-    config: WriterApi.() -> Unit
+    config: Writer.() -> Unit
 ): Deferred<Unit?> = async(IO) { writer(config) }
 
-public abstract class WriterApi : CsvApi() {
-    public var header: Set<String> = emptySet()
-    public var overwrite: Boolean = true
-    protected var rowsApi: WriterRowsApi? = null
+public interface Writer : Csv {
+    public var header: Set<String>
+    public var overwrite: Boolean
 
-    public fun rows(config: WriterRowsApi.() -> Unit) {
-        rowsApi = object : WriterRowsApi() {}.apply(config)
-    }
-}
+    public infix fun rows(config: Rows.() -> Unit)
 
-public abstract class WriterRowsApi : CsvApi() {
-    private val _rows: MutableList<List<String>> = mutableListOf()
-
-    internal val rows: List<List<String>> get() = _rows
-
-    public operator fun Iterable<String>.unaryPlus() {
-        _rows += toList()
+    public interface Rows : Csv {
+        public operator fun Iterable<String>.unaryPlus()
     }
 }

@@ -1,16 +1,7 @@
 package com.github.kotools.csvfile.api
 
-import com.github.kotools.csvfile.core.Separator
-import com.github.kotools.csvfile.core.comma
-import com.github.kotools.csvfile.core.file
-import com.github.kotools.csvfile.core.folder
-
-@DslMarker
-internal annotation class CsvDsl
-
 /** Scope for manipulating CSV files. */
-@CsvDsl
-public abstract class CsvApi {
+public interface Csv {
     /**
      * **Required** property for targeting a file.
      *
@@ -18,11 +9,11 @@ public abstract class CsvApi {
      * process.
      * For example, `"my-file.csv"` and `"my-file"` produces the same output.
      */
-    public var file: String by file()
+    public var file: String
 
     /**
-     * **Optional** property for targeting the folder containing the [file] to
-     * read.
+     * **Optional** property for targeting the folder containing the
+     * [file][Csv.file] to read.
      *
      * Set to an empty string by default.
      *
@@ -30,14 +21,12 @@ public abstract class CsvApi {
      * process.
      * For example, `"my-folder/"` and `"my-folder"` produces the same output.
      */
-    public var folder: String by folder()
+    public var folder: String
 
     /**
-     * **Optional** property for setting the [file]'s separator.
+     * **Optional** property for setting the [file][Csv.file]'s separator.
      *
      * Set to [comma] by default.
      */
-    public var separator: Separator = comma
-
-    protected val loader: ClassLoader get() = ClassLoader.getSystemClassLoader()
+    public var separator: Separator
 }

@@ -8,22 +8,22 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 /**
- * Creates a [reader][ReaderApi] with the given [configuration][config] and
- * reads the corresponding [file][ReaderApi.file]'s content.
+ * Creates a [reader][Reader] with the given [config] and reads the
+ * corresponding [file][Csv.file]'s content.
  *
- * Returns `null` if the [file][ReaderApi.file] doesn't exist.
+ * Returns `null` if the [file][Csv.file] doesn't exist or has a blank value.
  */
-public suspend fun csvReader(config: ReaderApi.() -> Unit):
+public suspend fun csvReader(config: Reader.() -> Unit):
         List<Map<String, String>>? = withContext(IO) { reader(config) }
 
 /**
- * Creates a [reader][ReaderApi] with the given [configuration][config] and
- * reads the corresponding [file][ReaderApi.file]'s content **asynchronously**.
+ * Creates a [reader][Reader] with the given [config] and reads the
+ * corresponding [file][Csv.file]'s content **asynchronously**.
  *
- * Returns `null` if the [file][ReaderApi.file] doesn't exist.
+ * Returns `null` if the [file][Csv.file] doesn't exist or has a blank value.
  */
-public infix fun CoroutineScope.csvReaderAsync(config: ReaderApi.() -> Unit):
+public infix fun CoroutineScope.csvReaderAsync(config: Reader.() -> Unit):
         Deferred<List<Map<String, String>>?> = async(IO) { reader(config) }
 
 /** Scope for reading CSV files. */
-public abstract class ReaderApi : CsvApi()
+public interface Reader : Csv
