@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.github.kotools"
-version = "0.0.0"
+version = "1.0.0-rc"
 
 repositories(RepositoryHandler::mavenCentral)
 
@@ -20,7 +20,7 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = "KotoolsCsv"
+            name = "GitHub"
             url = uri(path = "https://maven.pkg.github.com/kotools/csv")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
