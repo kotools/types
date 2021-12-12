@@ -5,8 +5,8 @@ plugins {
     `maven-publish`
 }
 
-group = "com.github.kotools"
-version = "1.0.0-rc"
+group = "io.github.kotools"
+version = "0.0.0"
 
 repositories(RepositoryHandler::mavenCentral)
 

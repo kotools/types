@@ -1,8 +1,8 @@
-package com.github.kotools.csv.core
+package io.github.kotools.csv.core
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import com.github.kotools.csv.api.Writer
+import io.github.kotools.csv.api.Writer
 import java.io.File
 import java.net.URL
 import kotlin.io.path.Path

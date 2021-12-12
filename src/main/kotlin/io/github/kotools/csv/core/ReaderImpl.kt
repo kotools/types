@@ -1,8 +1,8 @@
-package com.github.kotools.csv.core
+package io.github.kotools.csv.core
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
-import com.github.kotools.csv.api.Reader
+import io.github.kotools.csv.api.Reader
 import java.io.File
 import java.io.InputStream
 import java.net.URL

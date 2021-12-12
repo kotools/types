@@ -1,8 +1,8 @@
-package com.github.kotools.csv.core
+package io.github.kotools.csv.core
 
-import com.github.kotools.csv.api.Csv
-import com.github.kotools.csv.api.Separator
-import com.github.kotools.csv.api.comma
+import io.github.kotools.csv.api.Csv
+import io.github.kotools.csv.api.Separator
+import io.github.kotools.csv.api.comma
 
 internal abstract class CsvImpl : Csv {
     override var file: String by file()

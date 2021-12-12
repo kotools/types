@@ -1,4 +1,4 @@
-package com.github.kotools.csv.api
+package io.github.kotools.csv.api
 
 /** Scope for manipulating CSV files. */
 public interface Csv {
