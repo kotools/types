@@ -41,7 +41,7 @@ internal class WriterImpl : CsvImpl(), Process<Unit>, Writer, Writer.Rows {
         else csv.writeAll(computedRows, f, !overwrite)
     }
 
-    override fun rows(config: Writer.Rows.() -> Unit): Unit = run(config)
+    override fun rows(def: Writer.Rows.() -> Unit): Unit = run(def)
 
     override fun Iterable<String>.unaryPlus() {
         rows += toList()

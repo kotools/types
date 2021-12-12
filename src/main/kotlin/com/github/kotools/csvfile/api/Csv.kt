@@ -12,8 +12,8 @@ public interface Csv {
     public var file: String
 
     /**
-     * **Optional** property for targeting the folder containing the
-     * [file][Csv.file] to read.
+     * **Optional** property for targeting the folder containing the [file]
+     * to read.
      *
      * Set to an empty string by default.
      *
@@ -24,7 +24,7 @@ public interface Csv {
     public var folder: String
 
     /**
-     * **Optional** property for setting the [file][Csv.file]'s separator.
+     * **Optional** property for setting the [file]'s separator.
      *
      * Set to [comma] by default.
      */
