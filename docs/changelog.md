@@ -18,5 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- CSV files reading in a suspending and asynchronous
-  style ([#5](https://github.com/kotools/csv-file/issues/5)).
+- `csvReader {...}` and `csvReaderAsync {...}` for reading CSV
+  files ([#5](https://github.com/kotools/csv-file/issues/5)).
+- `csvWriter {...}` and `csvWriterAsync {...}` for writing rows in CSV
+  files ([#8](https://github.com/kotools/csv-file/issues/8)).
