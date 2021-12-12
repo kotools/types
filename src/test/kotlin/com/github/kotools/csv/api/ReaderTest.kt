@@ -1,8 +1,8 @@
-package com.github.kotools.csvfile.api
+package com.github.kotools.csv.api
 
-import com.github.kotools.csvfile.utils.assertEquals
-import com.github.kotools.csvfile.utils.assertNotNullOrEquals
-import com.github.kotools.csvfile.utils.assertNull
+import com.github.kotools.csv.utils.assertEquals
+import com.github.kotools.csv.utils.assertNotNullOrEquals
+import com.github.kotools.csv.utils.assertNull
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 

@@ -1,1 +1,1 @@
-rootProject.name = "csv-file"
+rootProject.name = "csv"

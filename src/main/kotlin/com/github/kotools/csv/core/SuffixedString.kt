@@ -1,4 +1,4 @@
-package com.github.kotools.csvfile.core
+package com.github.kotools.csv.core
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

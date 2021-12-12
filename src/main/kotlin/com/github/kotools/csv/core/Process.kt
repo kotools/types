@@ -1,4 +1,4 @@
-package com.github.kotools.csvfile.core
+package com.github.kotools.csv.core
 
 internal fun interface Process<out R> {
     fun process(): R?

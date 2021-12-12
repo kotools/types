@@ -20,8 +20,8 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = "KotoolsCsvFile"
-            url = uri(path = "https://maven.pkg.github.com/kotools/csv-file")
+            name = "KotoolsCsv"
+            url = uri(path = "https://maven.pkg.github.com/kotools/csv")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")

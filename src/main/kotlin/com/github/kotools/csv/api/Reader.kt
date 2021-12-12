@@ -1,6 +1,6 @@
-package com.github.kotools.csvfile.api
+package com.github.kotools.csv.api
 
-import com.github.kotools.csvfile.core.reader
+import com.github.kotools.csv.core.reader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
