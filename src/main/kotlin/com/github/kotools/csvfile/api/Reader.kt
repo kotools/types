@@ -1,8 +1,5 @@
 package com.github.kotools.csvfile.api
 
-import com.github.kotools.csvfile.core.Separator
-import com.github.kotools.csvfile.core.comma
-import com.github.kotools.csvfile.core.file
 import com.github.kotools.csvfile.core.reader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -29,11 +26,4 @@ public infix fun CoroutineScope.csvReaderAsync(config: ReaderApi.() -> Unit):
         Deferred<List<Map<String, String>>?> = async(IO) { reader(config) }
 
 /** Scope for reading CSV files. */
-public abstract class ReaderApi : CsvApi() {
-    /**
-     * **Optional** property for setting the [file]'s separator.
-     *
-     * Set to [comma] by default.
-     */
-    public var separator: Separator = comma
-}
+public abstract class ReaderApi : CsvApi()

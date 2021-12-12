@@ -36,11 +36,6 @@ class ReaderTest {
         }
 
     @Test
-    fun `should pass without file's extension`(): Unit = runBlocking {
-        csvReader { file = "test" }?.size assertNotNullOrEquals 0
-    }
-
-    @Test
     fun `should fail with nonexistent file`(): Unit = runBlocking {
         csvReader { file = "unknown" }.assertNull()
     }

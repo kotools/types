@@ -18,7 +18,7 @@ internal class Writer : WriterApi() {
                 row.getOrElse(it) { "" }
             }
         }
-    private val csv: CsvWriter get() = csvWriter()
+    private val csv: CsvWriter get() = csvWriter { delimiter = separator.value }
     private val resourceFile: File?
         get() = loader.getResource("$folder$file")
             ?.let { File(it.path) }
@@ -37,7 +37,8 @@ internal class Writer : WriterApi() {
         apply(config).execute()
 
     private fun execute(): Unit? {
-        if (file.isBlank() || rowsApi == null) return null
+        if (file.isBlank() || rowsApi == null || rowsApi!!.rows.isEmpty())
+            return null
         val f: File = resourceFile ?: systemFile ?: return null
         return if (overwrite) csv writeHeaderAndRows f
         else csv.writeAll(computedRows!!, f, !overwrite)

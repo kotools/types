@@ -1,5 +1,7 @@
 package com.github.kotools.csvfile.api
 
+import com.github.kotools.csvfile.core.Separator
+import com.github.kotools.csvfile.core.comma
 import com.github.kotools.csvfile.core.file
 import com.github.kotools.csvfile.core.folder
 
@@ -29,6 +31,13 @@ public abstract class CsvApi {
      * For example, `"my-folder/"` and `"my-folder"` produces the same output.
      */
     public var folder: String by folder()
+
+    /**
+     * **Optional** property for setting the [file]'s separator.
+     *
+     * Set to [comma] by default.
+     */
+    public var separator: Separator = comma
 
     protected val loader: ClassLoader get() = ClassLoader.getSystemClassLoader()
 }

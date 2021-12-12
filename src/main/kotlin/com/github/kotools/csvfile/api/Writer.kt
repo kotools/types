@@ -7,9 +7,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
-// TODO: File exists in resources ? write in it : look in system file
-
-// TODO: Add tests
 public suspend fun csvWriter(config: WriterApi.() -> Unit): Unit? =
     withContext(IO) { writer(config) }
 
@@ -32,7 +29,7 @@ public abstract class WriterRowsApi : CsvApi() {
 
     internal val rows: List<List<String>> get() = _rows
 
-    public operator fun List<String>.unaryPlus() {
-        _rows += this
+    public operator fun Iterable<String>.unaryPlus() {
+        _rows += toList()
     }
 }
