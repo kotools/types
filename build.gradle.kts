@@ -81,7 +81,7 @@ publishing {
             name = "OSSRH"
             val path: String =
                 if (version.toString().endsWith(suffix = "SNAPSHOT"))
-                    "https://oss.sonatype.org/content/repositories/snapshots/"
+                    "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 else "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             url = uri(path)
             credentials {
