@@ -3,7 +3,8 @@ on:
   release:
     types: [ created ]
 jobs:
-  publish:
+  deploy:
+    name: Deploy to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -13,11 +14,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-      - name: Publish package
+      - name: Deploy package to GitHub Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-        run: ./gradlew publish
+        run: ./gradlew publishGprPublicationToGitHubRepository
