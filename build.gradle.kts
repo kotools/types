@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.kotools"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.1-SNAPSHOT"
 
 repositories(RepositoryHandler::mavenCentral)
 
@@ -30,7 +30,7 @@ publishing {
         maven {
             name = "OSSRH"
             url = uri(
-                path = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                path = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             )
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
