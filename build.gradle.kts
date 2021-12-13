@@ -30,12 +30,17 @@ val javadocJar: TaskProvider<Jar> = tasks.register(name = "javadocJar") {
     archiveClassifier.set("javadoc")
     from(dokkaOutputDir)
 }
+val sourcesJar: TaskProvider<Jar> = tasks.register(name = "sourcesJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
 
 publishing {
     publications {
         register<MavenPublication>(name = "gpr") { from(components["java"]) }
         withType<MavenPublication> {
             artifact(javadocJar)
+            artifact(sourcesJar)
             pom {
                 name.set("Kotools CSV")
                 description.set("Elegant CSV file's manager for Kotlin.")
