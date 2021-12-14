@@ -2,7 +2,7 @@ name: Continuous Integration
 on:
   push:
     branches: [ master ]
-    paths: [ '**/*.kts', '**/*gradle*', '**/src/**', .github/workflows/* ]
+    paths: [ '*.kts', '*gradle*', .github/workflows/*, src/** ]
 jobs:
   test:
     name: Run tests
