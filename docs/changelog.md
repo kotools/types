@@ -21,9 +21,12 @@ All notable changes to this project will be documented in this file.
 - `csvReader {...}` and `csvReaderAsync {...}` for reading a CSV file or
   returning `null` if something goes
   wrong ([#5](https://github.com/kotools/csv-file/issues/5)).
-- `strictCsvReader {...}` and `strictCsvReader {...}` for reading a CSV file or
-  throwing an exception if something goes
+- `strictCsvReader {...}` and `strictCsvReaderAsync {...}` for reading a CSV
+  file or throwing an exception if something goes
   wrong ([#7](https://github.com/kotools/csv-file/issues/7)).
 - `csvWriter {...}` and `csvWriterAsync {...}` for writing rows in a CSV file or
   returning `null` if something goes
   wrong ([#8](https://github.com/kotools/csv-file/issues/8)).
+- `strictCsvWriter {...}` and `strictCsvWriterAsync {...}` for writing rows in a
+  CSV file or throwing an exception if something goes
+  wrong ([#14](https://github.com/kotools/csv-file/issues/14)).
