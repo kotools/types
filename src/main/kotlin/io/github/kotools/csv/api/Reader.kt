@@ -32,7 +32,7 @@ public infix fun CoroutineScope.csvReaderAsync(config: Reader.() -> Unit):
  * Creates a [reader][Reader] with the given [config] and reads the
  * corresponding [file][Csv.file]'s content.
  *
- * Throws a [InvalidPropertyError] if the [file][Csv.file] value is not set or
+ * Throws an [InvalidPropertyError] if the [file][Csv.file] value is not set or
  * is invalid.
  * Throws a [CsvFileNotFoundError] if the [file][Csv.file] doesn't exist on the
  * system.
@@ -45,7 +45,7 @@ public suspend fun strictCsvReader(config: Reader.() -> Unit):
  * Creates a [reader][Reader] with the given [config] and reads the
  * corresponding [file][Csv.file]'s content **asynchronously**.
  *
- * Throws a [InvalidPropertyError] if the [file][Csv.file] value is not set or
+ * Throws an [InvalidPropertyError] if the [file][Csv.file] value is not set or
  * is invalid.
  * Throws a [CsvFileNotFoundError] if the [file][Csv.file] doesn't exist on the
  * system.
