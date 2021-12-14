@@ -29,9 +29,28 @@ public suspend fun csvWriter(config: Writer.() -> Unit): Unit? =
 public infix fun CoroutineScope.csvWriterAsync(config: Writer.() -> Unit):
         Deferred<Unit?> = async(IO) { writer(config) }
 
+/**
+ * Creates a [writer][Writer] with the given [config] and writes new
+ * [rows][Writer.rows] in the corresponding [file][Csv.file]'s.
+ *
+ * Throws an [InvalidPropertyError] if the [file][Csv.file] or the
+ * [header][Writer.header] are not set or are invalid.
+ * Throws an [InvalidConfigError] if the [rows][Writer.rows] are not defined.
+ */
+@Throws(InvalidConfigError::class, InvalidPropertyError::class)
 public suspend fun strictCsvWriter(config: Writer.() -> Unit): Unit =
     withContext(IO) { strictWriter(config) }
 
+/**
+ * Creates a [writer][Writer] with the given [config] and writes new
+ * [rows][Writer.rows] in the corresponding [file][Csv.file]'s
+ * **asynchronously**.
+ *
+ * Throws an [InvalidPropertyError] if the [file][Csv.file] or the
+ * [header][Writer.header] are not set or are invalid.
+ * Throws an [InvalidConfigError] if the [rows][Writer.rows] are not defined.
+ */
+@Throws(InvalidConfigError::class, InvalidPropertyError::class)
 public infix fun CoroutineScope.strictCsvWriterAsync(config: Writer.() -> Unit):
         Deferred<Unit> = async(IO) { strictWriter(config) }
 
