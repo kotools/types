@@ -6,6 +6,7 @@
 
 # Files
 !gradle-wrapper.jar
+gradle.properties
 
 # ---------- Java & Kotlin ----------
 

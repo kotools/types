@@ -4,6 +4,8 @@ plugins {
     kotlin("jvm") version embeddedKotlinVersion
     id("org.jetbrains.dokka") version embeddedKotlinVersion
     `java-library`
+    `maven-publish`
+    signing
 }
 
 group = "io.github.kotools"
@@ -48,4 +50,70 @@ tasks {
         from(dokkaOutputDir)
     }
     assemble { dependsOn += javadocJar }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(project.name) {
+            from(components["java"])
+            artifact(tasks.getByName("javadocJar"))
+            pom {
+                name.set("Kotools CSV")
+                description.set("Elegant CSV file's manager for Kotlin.")
+                val gitRepository = "https://github.com/kotools/csv"
+                url.set(gitRepository)
+                licenses {
+                    license {
+                        name.set("MIT")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                issueManagement {
+                    system.set("GitHub")
+                    url.set("$gitRepository/issues")
+                }
+                scm {
+                    connection.set("$gitRepository.git")
+                    url.set(gitRepository)
+                }
+                developers {
+                    developer {
+                        name.set("Loïc Lamarque")
+                        email.set("loiclamarque777@gmail.com")
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/kotools/csv")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+        maven {
+            name = "OSSRH"
+            val uri: String = if (version.toString().endsWith("SNAPSHOT"))
+                "content/repositories/snapshots/"
+            else "service/local/staging/deploy/maven2/"
+            url = uri("https://s01.oss.sonatype.org/$uri")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+}
+
+
+
+signing {
+    useInMemoryPgpKeys(
+        System.getenv("GPG_PRIVATE_KEY"),
+        System.getenv("GPG_PASSWORD")
+    )
+    sign(publishing.publications)
 }
