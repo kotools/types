@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
     kotlin("jvm") version embeddedKotlinVersion
-    id("org.jetbrains.dokka") version embeddedKotlinVersion
     `java-library`
+    id("org.jetbrains.dokka") version embeddedKotlinVersion
     `maven-publish`
     signing
 }
