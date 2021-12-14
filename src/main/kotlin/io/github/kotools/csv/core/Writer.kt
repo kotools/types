@@ -25,10 +25,12 @@ private sealed class BaseWriter : CsvImpl(), Writer, Writer.Rows {
 
     protected val csv: CsvWriter
         get() = csvWriter { delimiter = separator.value }
-    protected val resourceFile: File?
+    private val computedRows: List<List<String?>>
+        get() = rows.map { List(header.size, it::getOrNull) }
+    private val resourceFile: File?
         get() = systemLoader.getResource("$folder$file")
             ?.let { File(it.path) }
-    protected val systemFile: File?
+    private val systemFile: File?
         get() {
             val url: URL = systemLoader.getResource("") ?: return null
             val path = Path(path = "${url.path}$folder")
@@ -38,8 +40,6 @@ private sealed class BaseWriter : CsvImpl(), Writer, Writer.Rows {
             }
             return File("$path/$file")
         }
-    private val computedRows: List<List<String?>>
-        get() = rows.map { List(header.size, it::getOrNull) }
 
     override fun rows(def: Writer.Rows.() -> Unit): Unit = run(def)
 
@@ -47,9 +47,10 @@ private sealed class BaseWriter : CsvImpl(), Writer, Writer.Rows {
         rows += toList()
     }
 
-    protected infix fun writeIn(file: File): Unit =
-        if (overwrite) csv writeHeaderAndRows file
-        else csv.writeAll(computedRows, file, !overwrite)
+    protected fun write(): Unit? = (resourceFile ?: systemFile)?.let {
+        if (overwrite) csv writeHeaderAndRows it
+        else csv.writeAll(computedRows, it, !overwrite)
+    }
 
     private infix fun CsvWriter.writeHeaderAndRows(file: File) {
         val r: MutableList<List<String?>> = mutableListOf(header.toList())
@@ -62,12 +63,11 @@ private class StrictWriterImpl : BaseWriter(), StrictProcess<Unit> {
     override fun process() = if (file.isBlank()) invalidPropertyError("file")
     else if (header.isEmpty()) invalidPropertyError("header")
     else if (rows.isEmpty()) invalidConfigError("Rows are not defined!")
-    else (resourceFile ?: systemFile)?.let { writeIn(it) }
-        ?: csvFileNotFoundError("$folder/$file")
+    else write() ?: csvFileNotFoundError("$folder/$file")
 }
 
 private class WriterImpl : BaseWriter(), Process<Unit> {
     override fun process(): Unit? =
         if (file.isBlank() || header.isEmpty() || rows.isEmpty()) null
-        else (resourceFile ?: systemFile)?.let { writeIn(it) }
+        else write()
 }
