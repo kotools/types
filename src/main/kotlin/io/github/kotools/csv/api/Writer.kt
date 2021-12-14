@@ -48,7 +48,7 @@ public interface Writer : Csv {
     public infix fun rows(def: Rows.() -> Unit)
 
     /** Scope for defining the [rows] to write. */
-    public interface Rows : Csv {
+    public interface Rows {
         /** Adds the given [iterable][Iterable] as a row. */
         public operator fun Iterable<String>.unaryPlus()
     }
