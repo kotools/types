@@ -8,6 +8,9 @@ import kotlin.test.assertNull
 internal infix fun <T : Any?> T.assertEquals(other: T): Unit =
     assertEquals(other, actual = this)
 
+internal infix fun <T : Any> T.assertNotEquals(other: T): Unit =
+    assertNotEquals(other, this)
+
 internal fun <T : Any?> T.assertNotNull() {
     assertNotNull(actual = this)
 }
