@@ -9,13 +9,13 @@ import java.io.File
 import java.io.InputStream
 import java.net.URL
 
-internal inline fun reader(config: Reader.() -> Unit):
-        List<Map<String, String>>? = ReaderImpl().apply(config).process()
+internal fun reader(config: Reader.() -> Unit): List<Map<String, String>>? =
+    ReaderImpl().apply(config).process()
 
-internal inline fun strictReader(config: Reader.() -> Unit):
+internal fun strictReader(config: Reader.() -> Unit):
         List<Map<String, String>> = StrictReaderImpl().apply(config).process()
 
-internal sealed class BaseReader : CsvImpl(), Reader {
+private sealed class BaseReader : CsvImpl(), Reader {
     protected val csv: CsvReader
         get() = csvReader {
             delimiter = separator.value
@@ -36,13 +36,13 @@ internal sealed class BaseReader : CsvImpl(), Reader {
     }
 }
 
-internal class ReaderImpl : BaseReader(), Process<List<Map<String, String>>> {
+private class ReaderImpl : BaseReader(), Process<List<Map<String, String>>> {
     override fun process(): List<Map<String, String>>? =
         if (file.isBlank()) null
         else readResource() ?: readFile()
 }
 
-internal class StrictReaderImpl : BaseReader(),
+private class StrictReaderImpl : BaseReader(),
     StrictProcess<List<Map<String, String>>> {
     override fun process(): List<Map<String, String>> =
         if (file.isBlank()) invalidPropertyError("file")
