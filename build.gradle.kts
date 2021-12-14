@@ -21,7 +21,18 @@ dependencies {
 
 kotlin.explicitApi = ExplicitApiMode.Strict
 
+java {
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+}
+
 tasks {
     compileJava { enabled = false }
     compileTestJava { enabled = false }
+    jar {
+        manifest.attributes(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to project.version
+        )
+    }
 }
