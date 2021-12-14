@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version embeddedKotlinVersion
+    id("org.jetbrains.dokka") version embeddedKotlinVersion
     `java-library`
 }
 
@@ -29,10 +30,22 @@ java {
 tasks {
     compileJava { enabled = false }
     compileTestJava { enabled = false }
+
     jar {
         manifest.attributes(
             "Implementation-Title" to project.name,
             "Implementation-Version" to project.version
         )
     }
+
+    val dokkaOutputDir = "$buildDir/dokka"
+    dokkaHtml { outputDirectory.set(file(dokkaOutputDir)) }
+    val cleanDokkaOutput =
+        register<Delete>("cleanDokkaOutput") { delete(dokkaOutputDir) }
+    val javadocJar = register<Jar>("javadocJar") {
+        dependsOn(cleanDokkaOutput, dokkaHtml)
+        archiveClassifier.set("javadoc")
+        from(dokkaOutputDir)
+    }
+    assemble { dependsOn += javadocJar }
 }
