@@ -1,6 +1,7 @@
 package io.github.kotools.csv.api
 
 import io.github.kotools.csv.core.reader
+import io.github.kotools.csv.core.strictReader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
@@ -26,6 +27,12 @@ public suspend fun csvReader(config: Reader.() -> Unit):
  */
 public infix fun CoroutineScope.csvReaderAsync(config: Reader.() -> Unit):
         Deferred<List<Map<String, String>>?> = async(IO) { reader(config) }
+
+public suspend fun strictCsvReader(config: Reader.() -> Unit):
+        List<Map<String, String>> = withContext(IO) { strictReader(config) }
+
+public infix fun CoroutineScope.strictCsvReaderAsync(config: Reader.() -> Unit):
+        Deferred<List<Map<String, String>>> = async(IO) { strictReader(config) }
 
 /** Scope for reading CSV files. */
 public interface Reader : Csv
