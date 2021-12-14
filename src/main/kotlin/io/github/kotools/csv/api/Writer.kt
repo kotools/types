@@ -1,5 +1,6 @@
 package io.github.kotools.csv.api
 
+import io.github.kotools.csv.core.strictWriter
 import io.github.kotools.csv.core.writer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -25,9 +26,14 @@ public suspend fun csvWriter(config: Writer.() -> Unit): Unit? =
  * Returns `null` if the [config] is invalid or if something goes wrong in the
  * process.
  */
-public infix fun CoroutineScope.csvWriterAsync(
-    config: Writer.() -> Unit
-): Deferred<Unit?> = async(IO) { writer(config) }
+public infix fun CoroutineScope.csvWriterAsync(config: Writer.() -> Unit):
+        Deferred<Unit?> = async(IO) { writer(config) }
+
+public suspend fun strictCsvWriter(config: Writer.() -> Unit): Unit =
+    withContext(IO) { strictWriter(config) }
+
+public infix fun CoroutineScope.strictCsvWriterAsync(config: Writer.() -> Unit):
+        Deferred<Unit> = async(IO) { strictWriter(config) }
 
 /** Scope for writing in CSV files. */
 public interface Writer : Csv {
