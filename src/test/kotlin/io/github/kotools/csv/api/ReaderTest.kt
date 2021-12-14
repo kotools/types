@@ -57,14 +57,14 @@ class ReaderTest {
 
         @Test
         fun `should fail with nonexistent file`(): Unit = runBlocking {
-            assertFailsWith<CsvError.FileNotFoundError> {
+            assertFailsWith<CsvFileNotFoundError> {
                 strictCsvReader { file = "unknown" }
             }
         }
 
         @Test
         fun `should fail without giving file`(): Unit = runBlocking {
-            assertFailsWith<CsvError.InvalidPropertyError> {
+            assertFailsWith<InvalidPropertyError> {
                 strictCsvReader { }
             }
         }
