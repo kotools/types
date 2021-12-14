@@ -1,6 +1,5 @@
 package io.github.kotools.csv.api
 
-import io.github.kotools.csv.core.CsvError
 import io.github.kotools.csv.utils.assertEquals
 import io.github.kotools.csv.utils.assertNotEquals
 import io.github.kotools.csv.utils.assertNotNullOrEquals
