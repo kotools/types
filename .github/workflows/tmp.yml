@@ -5,7 +5,7 @@ jobs:
     name: Deploy documentation to GitHub Pages
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
     steps:
       - name: Checkout code
@@ -19,3 +19,5 @@ jobs:
         with:
           branch: docs
           folder: build/dokka
+          git-config-name: ${{ secrets.GIT_USER }}
+          git-config-email: ${{ secrets.GIT_EMAIL }}
