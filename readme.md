@@ -21,7 +21,7 @@ fun main(): Unit = runBlocking {
         header = setOf("h1", "h2", "h3")
         rows { +listOf("a", "b", "c") }
     }
-    csvReader { file = "my-file" }
+    csvReader { file = "my-new-file" }
 }
 ```
 
