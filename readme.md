@@ -7,7 +7,7 @@ Kotools CSV is a lightweight library for managing CSV files with
 elegant [Kotlin] DSLs.
 
 Built on top
-of [Kotlin/kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+of [Kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 and [doyaaaaaken/kotlin-csv](https://github.com/doyaaaaaken/kotlin-csv), this
 library follows the pragmatic design of [Kotlin] and provides type-safe builders
 for manipulating CSV files easily. It also solves a lot of issues like finding
