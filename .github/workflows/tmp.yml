@@ -1,0 +1,21 @@
+name: Temporary workflow
+on: workflow_dispatch
+jobs:
+  deploy-docs:
+    name: Deploy documentation to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.4
+      - name: Generate documentation with Dokka
+        run: ./gradlew dokkaHtml --no-daemon
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: docs
+          folder: build/dokka
