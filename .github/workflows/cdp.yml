@@ -13,10 +13,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+        uses: gradle/wrapper-validation-action@v1.0.4
       - name: Deploy package to GitHub Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: ./gradlew publishAllPublicationToGitHubRepository
+        run: ./gradlew publishAllPublicationToGitHubRepository --no-daemon
+  deploy-docs:
+    name: Deploy documentation to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.4
+      - name: Generate documentation with Dokka
+        run: ./gradlew dokkaHtml --no-daemon
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: docs
+          folder: build/dokka
+          git-config-name: ${{ secrets.GIT_USER }}
+          git-config-email: ${{ secrets.GIT_EMAIL }}
