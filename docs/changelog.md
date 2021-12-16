@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 1.0.0 - 2021/12/16
+
 ### Added
 
 - `csvReader {...}` and `csvReaderAsync {...}` for reading a CSV file or
