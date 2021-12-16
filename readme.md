@@ -49,13 +49,13 @@ production.
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:csv:0.1.4")
+implementation("io.github.kotools:csv:1.0.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:csv:0.1.4'
+implementation 'io.github.kotools:csv:1.0.0'
 ```
 
 ### Maven
@@ -64,7 +64,7 @@ implementation 'io.github.kotools:csv:0.1.4'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>csv</artifactId>
-    <version>0.1.4</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
