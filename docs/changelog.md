@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Changed
+
+- Type system's design with composition over
+  inheritance ([#24](https://github.com/kotools/csv-file/issues/24)).
+
 ## Version 1.0.0 - 2021/12/16
 
 ### Added
