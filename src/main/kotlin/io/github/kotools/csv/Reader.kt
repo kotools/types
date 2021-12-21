@@ -4,12 +4,20 @@ import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import io.github.kotools.csv.api.Separator
 import io.github.kotools.csv.api.comma
+import io.github.kotools.csv.api.csvFileNotFoundError
+import io.github.kotools.csv.api.invalidPropertyError
 import io.github.kotools.csv.core.file
 import io.github.kotools.csv.core.folder
 import java.io.File
 
 internal fun reader(config: ReaderDsl.() -> Unit): List<Map<String, String>>? =
     Reader().apply(config).run { if (file.isBlank()) null else read() }
+
+internal fun strictReader(config: ReaderDsl.() -> Unit):
+        List<Map<String, String>> = Reader().apply(config).run {
+    if (file.isBlank()) invalidPropertyError("file")
+    else read() ?: csvFileNotFoundError("$folder$file")
+}
 
 private class Reader : ReaderDsl {
     override var file: String by file()

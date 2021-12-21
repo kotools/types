@@ -1,5 +1,9 @@
+@file:Suppress("unused")
+
 package io.github.kotools.csv
 
+import io.github.kotools.csv.api.CsvFileNotFoundError
+import io.github.kotools.csv.api.InvalidPropertyError
 import io.github.kotools.csv.api.Separator
 import io.github.kotools.csv.api.comma
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +24,19 @@ public suspend fun csvReader(config: ReaderDsl.() -> Unit):
 
 /**
  * Creates a reader with the given [config] and reads the corresponding
+ * [file][ManagerDsl.file]'s content.
+ *
+ * Throws an [InvalidPropertyError] if the [file][ManagerDsl.file] value is not
+ * set or is invalid.
+ * Throws a [CsvFileNotFoundError] if the [file][ManagerDsl.file] doesn't exist
+ * on the system.
+ */
+@Throws(CsvFileNotFoundError::class, InvalidPropertyError::class)
+public suspend fun strictCsvReader(config: ReaderDsl.() -> Unit):
+        List<Map<String, String>> = withContext(IO) { strictReader(config) }
+
+/**
+ * Creates a reader with the given [config] and reads the corresponding
  * [file][ManagerDsl.file]'s content **asynchronously**.
  *
  * Returns `null` if the [config] is invalid or if something else goes wrong in
@@ -27,6 +44,20 @@ public suspend fun csvReader(config: ReaderDsl.() -> Unit):
  */
 public infix fun CoroutineScope.csvReaderAsync(config: ReaderDsl.() -> Unit):
         Deferred<List<Map<String, String>>?> = async(IO) { reader(config) }
+
+/**
+ * Creates a reader with the given [config] and reads the corresponding
+ * [file][ManagerDsl.file]'s content **asynchronously**.
+ *
+ * Throws an [InvalidPropertyError] if the [file][ManagerDsl.file] value is not
+ * set or is invalid.
+ * Throws a [CsvFileNotFoundError] if the [file][ManagerDsl.file] doesn't exist
+ * on the system.
+ */
+@Throws(CsvFileNotFoundError::class, InvalidPropertyError::class)
+public infix fun CoroutineScope.strictCsvReaderAsync(
+    config: ReaderDsl.() -> Unit
+): Deferred<List<Map<String, String>>> = async(IO) { strictReader(config) }
 
 public sealed interface Dsl
 
