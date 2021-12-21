@@ -84,8 +84,8 @@ publishing {
                 }
                 developers {
                     developer {
-                        name.set("Loïc Lamarque")
-                        email.set("loiclamarque777@gmail.com")
+                        name.set(System.getenv("GIT_USER"))
+                        email.set(System.getenv("GIT_EMAIL"))
                     }
                 }
             }

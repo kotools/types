@@ -17,6 +17,8 @@ jobs:
         uses: gradle/wrapper-validation-action@v1.0.4
       - name: Deliver package to OSSRH
         env:
+          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+          GIT_USER: ${{ secrets.GIT_USER }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
