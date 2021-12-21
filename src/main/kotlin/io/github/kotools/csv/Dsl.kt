@@ -2,10 +2,7 @@
 
 package io.github.kotools.csv
 
-import io.github.kotools.csv.api.CsvFileNotFoundError
-import io.github.kotools.csv.api.InvalidPropertyError
-import io.github.kotools.csv.api.Separator
-import io.github.kotools.csv.api.comma
+import io.github.kotools.csv.api.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
@@ -46,6 +43,18 @@ public suspend fun strictCsvReader(config: ReaderDsl.() -> Unit):
         List<Map<String, String>> = withContext(IO) { strictReader(config) }
 
 /**
+ * Creates a writer with the given [config] and writes new
+ * [rows][WriterDsl.rows] in the corresponding [file][ManagerDsl.file].
+ *
+ * Throws an [InvalidPropertyError] if the [file][ManagerDsl.file] or the
+ * [header][WriterDsl.header] are not set or are invalid.
+ * Throws an [InvalidConfigError] if the [rows][WriterDsl.rows] are not defined.
+ */
+@Throws(InvalidConfigError::class, InvalidPropertyError::class)
+public suspend fun strictCsvWriter(config: WriterDsl.() -> Unit): Unit =
+    withContext(IO) { strictWriter(config) }
+
+/**
  * Creates a reader with the given [config] and reads the corresponding
  * [file][ManagerDsl.file]'s content **asynchronously**.
  *
@@ -80,6 +89,21 @@ public infix fun CoroutineScope.strictCsvReaderAsync(
     config: ReaderDsl.() -> Unit
 ): Deferred<List<Map<String, String>>> = async(IO) { strictReader(config) }
 
+/**
+ * Creates a writer with the given [config] and writes new
+ * [rows][WriterDsl.rows] in the corresponding [file][ManagerDsl.file]
+ * **asynchronously**.
+ *
+ * Throws an [InvalidPropertyError] if the [file][ManagerDsl.file] or the
+ * [header][WriterDsl.header] are not set or are invalid.
+ * Throws an [InvalidConfigError] if the [rows][WriterDsl.rows] are not defined.
+ */
+@Throws(InvalidConfigError::class, InvalidPropertyError::class)
+public infix fun CoroutineScope.strictCsvWriterAsync(
+    config: WriterDsl.() -> Unit
+): Deferred<Unit> = async(IO) { strictWriter(config) }
+
+/** Parent of all scopes in this library. */
 public sealed interface Dsl
 
 /** Scope for manipulating CSV files. */
@@ -116,13 +140,27 @@ public sealed interface ManagerDsl : Dsl {
 /** Scope for reading CSV files. */
 public interface ReaderDsl : ManagerDsl
 
+/** Scope for defining the [rows][WriterDsl.rows] to write. */
 public fun interface RowsDsl : Dsl {
+    /** Adds the given [iterable][Iterable] as a row. */
     public operator fun Iterable<String>.unaryPlus()
 }
 
+/** Scope for writing in CSV files. */
 public interface WriterDsl : ManagerDsl {
+    /** **Required** property for defining the [file]'s header. */
     public var header: Set<String>
+
+    /**
+     * **Optional** flag for overwriting the [file]'s content.
+     *
+     * Set to `true` by default.
+     */
     public var overwrite: Boolean
 
+    /**
+     * **Required** function that defines the rows to write with the given
+     * [config] block.
+     */
     public infix fun rows(config: RowsDsl.() -> Unit)
 }

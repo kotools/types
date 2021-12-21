@@ -1,10 +1,14 @@
 package io.github.kotools.csv
 
+import io.github.kotools.csv.api.InvalidConfigError
+import io.github.kotools.csv.api.InvalidPropertyError
 import io.github.kotools.csv.api.semicolon
 import io.github.kotools.csv.utils.assertNotNull
 import io.github.kotools.csv.utils.assertNull
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 
 class WriterTest {
     private val header: Set<String> by lazy { setOf("h1", "h2") }
@@ -40,5 +44,49 @@ class WriterTest {
             file = "test"
             header = this@WriterTest.header
         }.assertNull()
+    }
+
+    @Nested
+    inner class Strict {
+        @Test
+        fun `should pass`(): Unit = assertDoesNotThrow {
+            strictWriter {
+                file = "test"
+                folder = "folder"
+                header = this@WriterTest.header
+                separator = semicolon
+                rows { +this@WriterTest.rows.first().values }
+            }
+        }
+
+        @Test
+        fun `should fail with blank file name`() {
+            assertFailsWith<InvalidPropertyError> {
+                strictWriter {
+                    header = this@WriterTest.header
+                    rows { +this@WriterTest.rows.first().values }
+                }
+            }
+        }
+
+        @Test
+        fun `should fail with empty header`() {
+            assertFailsWith<InvalidPropertyError> {
+                strictWriter {
+                    file = "test"
+                    rows { +this@WriterTest.rows.first().values }
+                }
+            }
+        }
+
+        @Test
+        fun `should fail with empty rows`() {
+            assertFailsWith<InvalidConfigError> {
+                strictWriter {
+                    file = "test"
+                    header = this@WriterTest.header
+                }
+            }
+        }
     }
 }

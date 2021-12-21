@@ -2,8 +2,7 @@ package io.github.kotools.csv
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import io.github.kotools.csv.api.Separator
-import io.github.kotools.csv.api.comma
+import io.github.kotools.csv.api.*
 import io.github.kotools.csv.core.file
 import io.github.kotools.csv.core.folder
 import java.io.File
@@ -11,6 +10,14 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
 import kotlin.io.path.notExists
+
+internal fun strictWriter(config: WriterDsl.() -> Unit): Unit =
+    Writer().apply(config).run {
+        if (file.isBlank()) invalidPropertyError("file")
+        if (header.isEmpty()) invalidPropertyError("header")
+        if (rows.isEmpty()) invalidConfigError("Rows are not defined!")
+        write() ?: csvFileNotFoundError("$folder/$file")
+    }
 
 internal fun writer(config: WriterDsl.() -> Unit): Unit? =
     Writer().apply(config).run {
