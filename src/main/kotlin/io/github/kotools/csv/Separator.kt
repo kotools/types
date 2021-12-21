@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package io.github.kotools.csv.api
+package io.github.kotools.csv
 
 public val comma: Separator get() = Separator.Comma
 public val semicolon: Separator get() = Separator.Semicolon

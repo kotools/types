@@ -2,7 +2,6 @@
 
 package io.github.kotools.csv
 
-import io.github.kotools.csv.api.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
@@ -35,10 +34,10 @@ public suspend fun csvWriter(config: WriterDsl.() -> Unit): Unit? =
  *
  * Throws an [InvalidPropertyError] if the [file][ManagerDsl.file] value is not
  * set or is invalid.
- * Throws a [CsvFileNotFoundError] if the [file][ManagerDsl.file] doesn't exist
+ * Throws a [FileNotFoundError] if the [file][ManagerDsl.file] doesn't exist
  * on the system.
  */
-@Throws(CsvFileNotFoundError::class, InvalidPropertyError::class)
+@Throws(FileNotFoundError::class, InvalidPropertyError::class)
 public suspend fun strictCsvReader(config: ReaderDsl.() -> Unit):
         List<Map<String, String>> = withContext(IO) { strictReader(config) }
 
@@ -81,10 +80,10 @@ public infix fun CoroutineScope.csvWriterAsync(config: WriterDsl.() -> Unit):
  *
  * Throws an [InvalidPropertyError] if the [file][ManagerDsl.file] value is not
  * set or is invalid.
- * Throws a [CsvFileNotFoundError] if the [file][ManagerDsl.file] doesn't exist
+ * Throws a [FileNotFoundError] if the [file][ManagerDsl.file] doesn't exist
  * on the system.
  */
-@Throws(CsvFileNotFoundError::class, InvalidPropertyError::class)
+@Throws(FileNotFoundError::class, InvalidPropertyError::class)
 public infix fun CoroutineScope.strictCsvReaderAsync(
     config: ReaderDsl.() -> Unit
 ): Deferred<List<Map<String, String>>> = async(IO) { strictReader(config) }

@@ -1,15 +1,15 @@
-package io.github.kotools.csv.core
+package io.github.kotools.csv
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-internal fun <T : Any> file(): ReadWriteProperty<T, String> =
-    SuffixedString(suffix = ".csv")
+internal fun <T : Dsl> file(): ReadWriteProperty<T, String> =
+    SuffixedString(".csv")
 
-internal fun <T : Any> folder(): ReadWriteProperty<T, String> =
-    SuffixedString(suffix = "/")
+internal fun <T : Dsl> folder(): ReadWriteProperty<T, String> =
+    SuffixedString("/")
 
-internal class SuffixedString<in T : Any>(private val suffix: String) :
+internal class SuffixedString<in T : Dsl>(private val suffix: String) :
     ReadWriteProperty<T, String> {
     private var value: String = ""
 

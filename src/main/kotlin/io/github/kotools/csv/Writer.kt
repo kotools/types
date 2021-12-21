@@ -2,9 +2,6 @@ package io.github.kotools.csv
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import io.github.kotools.csv.api.*
-import io.github.kotools.csv.core.file
-import io.github.kotools.csv.core.folder
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.Path

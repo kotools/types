@@ -1,8 +1,8 @@
-package io.github.kotools.csv.api
+package io.github.kotools.csv
 
-@Throws(CsvFileNotFoundError::class)
+@Throws(FileNotFoundError::class)
 internal fun csvFileNotFoundError(path: String): Nothing =
-    throw CsvFileNotFoundError(path)
+    throw FileNotFoundError(path)
 
 @Throws(InvalidConfigError::class)
 internal fun invalidConfigError(message: String): Nothing =
@@ -12,12 +12,12 @@ internal fun invalidConfigError(message: String): Nothing =
 internal fun invalidPropertyError(property: String): Nothing =
     throw InvalidPropertyError(property)
 
-public sealed class CsvError(message: String) : RuntimeException(message)
+public sealed class Error(message: String) : RuntimeException(message)
 
-public class CsvFileNotFoundError(filePath: String) :
-    CsvError("The file `$filePath` doesn't exist on the system!")
+public class FileNotFoundError(filePath: String) :
+    Error("The file `$filePath` doesn't exist on the system!")
 
-public open class InvalidConfigError(message: String) : CsvError(message)
+public open class InvalidConfigError(message: String) : Error(message)
 
 public class InvalidPropertyError(property: String) :
     InvalidConfigError("The property `$property` is invalid!")
