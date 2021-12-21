@@ -28,11 +28,11 @@ private sealed class BaseWriter : CsvImpl(), Writer, Writer.Rows {
     private val computedRows: List<List<String?>>
         get() = rows.map { List(header.size, it::getOrNull) }
     private val resourceFile: File?
-        get() = systemLoader.getResource("$folder$file")
+        get() = classLoader.getResource("$folder$file")
             ?.let { File(it.path) }
     private val systemFile: File?
         get() {
-            val url: URL = systemLoader.getResource("") ?: return null
+            val url: URL = classLoader.getResource("") ?: return null
             val path = Path(path = "${url.path}$folder")
             if (path.notExists()) {
                 path.createDirectory()
