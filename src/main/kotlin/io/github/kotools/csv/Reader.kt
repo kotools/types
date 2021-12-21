@@ -16,7 +16,7 @@ internal fun reader(config: ReaderDsl.() -> Unit): List<Map<String, String>>? =
 internal fun strictReader(config: ReaderDsl.() -> Unit):
         List<Map<String, String>> = Reader().apply(config).run {
     if (file.isBlank()) invalidPropertyError("file")
-    else read() ?: csvFileNotFoundError("$folder$file")
+    read() ?: csvFileNotFoundError("$folder$file")
 }
 
 private class Reader : ReaderDsl {
