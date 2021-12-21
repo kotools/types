@@ -23,6 +23,16 @@ public suspend fun csvReader(config: ReaderDsl.() -> Unit):
         List<Map<String, String>>? = withContext(IO) { reader(config) }
 
 /**
+ * Creates a writer with the given [config] and writes new
+ * [rows][WriterDsl.rows] in the corresponding [file][ManagerDsl.file].
+ *
+ * Returns `null` if the [config] is invalid or if something goes wrong in the
+ * process.
+ */
+public suspend fun csvWriter(config: WriterDsl.() -> Unit): Unit? =
+    withContext(IO) { writer(config) }
+
+/**
  * Creates a reader with the given [config] and reads the corresponding
  * [file][ManagerDsl.file]'s content.
  *
@@ -44,6 +54,17 @@ public suspend fun strictCsvReader(config: ReaderDsl.() -> Unit):
  */
 public infix fun CoroutineScope.csvReaderAsync(config: ReaderDsl.() -> Unit):
         Deferred<List<Map<String, String>>?> = async(IO) { reader(config) }
+
+/**
+ * Creates a writer with the given [config] and writes new
+ * [rows][WriterDsl.rows] in the corresponding [file][ManagerDsl.file]
+ * **asynchronously**.
+ *
+ * Returns `null` if the [config] is invalid or if something goes wrong in the
+ * process.
+ */
+public infix fun CoroutineScope.csvWriterAsync(config: WriterDsl.() -> Unit):
+        Deferred<Unit?> = async(IO) { writer(config) }
 
 /**
  * Creates a reader with the given [config] and reads the corresponding
