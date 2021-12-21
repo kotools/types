@@ -6,8 +6,6 @@ import io.github.kotools.csv.api.Reader
 import io.github.kotools.csv.api.csvFileNotFoundError
 import io.github.kotools.csv.api.invalidPropertyError
 import java.io.File
-import java.io.InputStream
-import java.net.URL
 
 private val ReaderImpl.csv: CsvReader
     get() = csvReader {
@@ -24,21 +22,15 @@ internal fun reader(config: Reader.() -> Unit): List<Map<String, String>>? =
 internal fun strictReader(config: Reader.() -> Unit):
         List<Map<String, String>> = ReaderImpl().apply(config).run {
     if (file.isBlank()) invalidPropertyError("file")
-    else readResource() ?: readFile()
-    ?: csvFileNotFoundError("$folder/$file")
+    else readResource() ?: readFile() ?: csvFileNotFoundError("$folder/$file")
 }
 
-private fun ReaderImpl.readFile(): List<Map<String, String>>? {
-    val url: URL = classLoader.getResource("") ?: return null
-    val f = File("${url.path}$folder$file")
-    if (!f.exists()) return null
-    return csv.readAllWithHeader(f)
-}
+private fun ReaderImpl.readFile(): List<Map<String, String>>? =
+    classLoader.getResource("")?.let { File("${it.path}$folder$file") }
+        ?.takeIf(File::exists)
+        ?.let(csv::readAllWithHeader)
 
-private fun ReaderImpl.readResource(): List<Map<String, String>>? {
-    val stream: InputStream =
-        classLoader.getResourceAsStream("$folder$file") ?: return null
-    return csv.readAllWithHeader(stream)
-}
+private fun ReaderImpl.readResource(): List<Map<String, String>>? =
+    classLoader.getResourceAsStream("$folder$file")?.let(csv::readAllWithHeader)
 
 private class ReaderImpl : CsvImpl(), Reader
