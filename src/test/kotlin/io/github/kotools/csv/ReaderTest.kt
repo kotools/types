@@ -21,11 +21,11 @@ class ReaderTest {
         }?.size assertNotNullOrEquals 0
 
         @Test
-        fun `should fail with nonexistent file`(): Unit =
-            reader { file = "unknown" }.assertNull()
+        fun `should fail with blank file name`(): Unit = reader { }.assertNull()
 
         @Test
-        fun `should fail without giving file`(): Unit = reader { }.assertNull()
+        fun `should fail with nonexistent file`(): Unit =
+            reader { file = "unknown" }.assertNull()
     }
 
     @Nested
@@ -38,16 +38,16 @@ class ReaderTest {
         }.size assertNotEquals 0
 
         @Test
-        fun `should fail with nonexistent file`() {
-            assertFailsWith<CsvFileNotFoundError> {
-                strictReader { file = "unknown" }
+        fun `should fail with blank file name`() {
+            assertFailsWith<InvalidPropertyError> {
+                strictReader { }
             }
         }
 
         @Test
-        fun `should fail without giving file`() {
-            assertFailsWith<InvalidPropertyError> {
-                strictReader { }
+        fun `should fail with nonexistent file`() {
+            assertFailsWith<CsvFileNotFoundError> {
+                strictReader { file = "unknown" }
             }
         }
     }

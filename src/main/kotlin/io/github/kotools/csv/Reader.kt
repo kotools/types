@@ -32,13 +32,13 @@ private class Reader : ReaderDsl {
 
     fun read(): List<Map<String, String>>? = readResource() ?: readFile()
 
-    private fun readFile(): List<Map<String, String>>? =
-        classLoader.getResource("")
-            ?.let { File("${it.path}$folder$file") }
-            ?.takeIf(File::exists)
-            ?.let(csv::readAllWithHeader)
+    private fun readFile(): List<Map<String, String>>? = classLoader
+        .getResource("")
+        ?.let { File("${it.path}$folder$file") }
+        ?.takeIf(File::exists)
+        ?.let(csv::readAllWithHeader)
 
-    private fun readResource(): List<Map<String, String>>? =
-        classLoader.getResourceAsStream("$folder$file")
-            ?.let(csv::readAllWithHeader)
+    private fun readResource(): List<Map<String, String>>? = classLoader
+        .getResourceAsStream("$folder$file")
+        ?.let(csv::readAllWithHeader)
 }
