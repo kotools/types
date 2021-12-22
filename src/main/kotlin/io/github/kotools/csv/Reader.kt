@@ -20,11 +20,8 @@ import java.net.URL
  */
 @Throws(CsvConfigurationException::class)
 public suspend fun csvReader(configuration: Reader.() -> Unit):
-        List<Map<String, String>> = withContext(IO) {
-    val reader: Reader = Reader create configuration
-    if (reader.file.isBlank()) invalidPropertyException(reader::file)
-    reader() ?: fileNotFoundException("${reader.folder}${reader.file}")
-}
+        List<Map<String, String>> =
+    withContext(IO) { delegateCsvReader(configuration) }
 
 /**
  * Returns the file's records according to the given [configuration], or returns
@@ -42,12 +39,33 @@ public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
  * [configuration], or returns `null` when the [configuration] is invalid or
  * when the targeted file doesn't exist.
  *
+ * Throws a [CsvConfigurationException] if the [configuration] is invalid or if
+ * the targeted file doesn't exist.
+ */
+public infix fun CoroutineScope.csvReaderAsync(
+    configuration: Reader.() -> Unit
+): Deferred<List<Map<String, String>>> =
+    async(IO) { delegateCsvReader(configuration) }
+
+/**
+ * Returns the file's records **asynchronously** according to the given
+ * [configuration], or returns `null` when the [configuration] is invalid or
+ * when the targeted file doesn't exist.
+ *
  * See [csvReaderOrNull] for a suspending implementation style.
  */
 public infix fun CoroutineScope.csvReaderOrNullAsync(
     configuration: Reader.() -> Unit
 ): Deferred<List<Map<String, String>>?> =
     async(IO) { delegateCsvReaderOrNull(configuration) }
+
+@Throws(CsvConfigurationException::class)
+private inline fun delegateCsvReader(configuration: Reader.() -> Unit):
+        List<Map<String, String>> {
+    val reader: Reader = Reader create configuration
+    if (reader.file.isBlank()) invalidPropertyException(reader::file)
+    return reader() ?: fileNotFoundException("${reader.folder}${reader.file}")
+}
 
 private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
         List<Map<String, String>>? {

@@ -1,5 +1,7 @@
 package io.github.kotools.csv
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Nested
 import kotlin.test.Test
@@ -14,18 +16,30 @@ class ReaderTest {
         }
     }
 
-    private inline fun assertIsValid(block: () -> List<Map<String, String>>?) {
-        val result: List<Map<String, String>>? = block()
-        result.assertNotNull()
-        result?.let { it.size assertNotEquals 0 }
+    private fun <T> assertIsValid(
+        block: suspend CoroutineScope.() -> Collection<T>?
+    ) {
+        runBlocking {
+            val result: Collection<T>? = block()
+            result.assertNotNull()
+            result?.let { it.size assertNotEquals 0 }
+        }
+    }
+
+    private fun <C : Collection<T>?, T> awaitAndAssertIsValid(
+        asyncBlock: CoroutineScope.() -> Deferred<C>
+    ) {
+        assertIsValid {
+            asyncBlock()
+                .await()
+        }
     }
 
     @Nested
     inner class CsvReader {
         @Test
-        fun `should pass`(): Unit = runBlocking {
+        fun `should pass`(): Unit =
             assertIsValid { csvReader(validConfiguration) }
-        }
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
@@ -43,11 +57,17 @@ class ReaderTest {
     }
 
     @Nested
+    inner class CsvReaderAsync {
+        @Test
+        fun `should pass`(): Unit =
+            awaitAndAssertIsValid { csvReaderAsync(validConfiguration) }
+    }
+
+    @Nested
     inner class CsvReaderOrNull {
         @Test
-        fun `should pass`(): Unit = runBlocking {
+        fun `should pass`(): Unit =
             assertIsValid { csvReaderOrNull(validConfiguration) }
-        }
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
@@ -67,11 +87,7 @@ class ReaderTest {
     @Nested
     inner class CsvReaderOrNullAsync {
         @Test
-        fun `should pass`(): Unit = runBlocking {
-            assertIsValid {
-                csvReaderOrNullAsync(validConfiguration)
-                    .await()
-            }
-        }
+        fun `should pass`(): Unit =
+            awaitAndAssertIsValid { csvReaderOrNullAsync(validConfiguration) }
     }
 }
