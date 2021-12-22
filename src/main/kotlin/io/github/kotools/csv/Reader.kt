@@ -15,6 +15,22 @@ import java.net.URL
  * `null` when the [configuration] is invalid or when the targeted file
  * doesn't exist.
  *
+ * Throws a [CsvConfigurationException] if the [configuration] is invalid or if
+ * the targeted file doesn't exist.
+ */
+@Throws(CsvConfigurationException::class)
+public suspend fun csvReader(configuration: Reader.() -> Unit):
+        List<Map<String, String>> = withContext(IO) {
+    val reader: Reader = Reader create configuration
+    if (reader.file.isBlank()) invalidPropertyException(reader::file)
+    reader() ?: fileNotFoundException("${reader.folder}${reader.file}")
+}
+
+/**
+ * Returns the file's records according to the given [configuration], or returns
+ * `null` when the [configuration] is invalid or when the targeted file doesn't
+ * exist.
+ *
  * See [csvReaderOrNullAsync] for an async/await implementation style.
  */
 public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
@@ -35,13 +51,12 @@ public infix fun CoroutineScope.csvReaderOrNullAsync(
 
 private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
         List<Map<String, String>>? {
-    val reader = Reader()
-    reader.configuration()
+    val reader: Reader = Reader create configuration
     return if (reader.file.isBlank()) null else reader()
 }
 
 /** Configurable object responsible for reading a CSV file. */
-public class Reader internal constructor() {
+public class Reader private constructor() {
     private val csv
         get() = csvReader {
             delimiter = separator.value
@@ -88,5 +103,13 @@ public class Reader internal constructor() {
         val f = File("${url.path}$folder$file")
         if (!f.exists()) return null
         return csv.readAllWithHeader(f)
+    }
+
+    internal companion object {
+        inline infix fun create(configuration: Reader.() -> Unit): Reader {
+            val reader = Reader()
+            reader.configuration()
+            return reader
+        }
     }
 }
