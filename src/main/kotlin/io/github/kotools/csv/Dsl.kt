@@ -7,6 +7,9 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import kotlin.reflect.KClass
+
+// TODO: Split declarations in multiple files
 
 /**
  * Creates a reader with the given [config] and reads the corresponding
@@ -17,6 +20,21 @@ import kotlinx.coroutines.withContext
  */
 public suspend fun csvReader(config: ReaderDsl.() -> Unit):
         List<Map<String, String>>? = withContext(IO) { reader(config) }
+
+// TODO: Add documentation
+@Suppress("DEPRECATION")
+public suspend inline fun <reified T : Any> csvReaderAs(
+    noinline config: ReaderDsl.() -> Unit
+): List<T>? = csvReaderAs(T::class, config)
+
+@Deprecated(
+    message = "Use the `csvReaderAs<T> {}` instead.",
+    ReplaceWith("csvReaderAs<T> {}")
+)
+public suspend fun <T : Any> csvReaderAs(
+    kClass: KClass<T>,
+    config: ReaderDsl.() -> Unit
+): List<T>? = csvReader(config)?.mapNotNull { it toTypeOrNull kClass }
 
 /**
  * Creates a writer with the given [config] and writes new

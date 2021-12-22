@@ -8,13 +8,13 @@ public val semicolon: Separator get() = Separator.Semicolon
 public sealed class Separator(internal val value: Char) {
     @Deprecated(
         message = "Use the `comma` property instead.",
-        ReplaceWith(expression = "comma")
+        ReplaceWith("comma")
     )
-    public object Comma : Separator(value = ',')
+    public object Comma : Separator(',')
 
     @Deprecated(
         message = "Use the `semicolon` property instead.",
-        ReplaceWith(expression = "semicolon")
+        ReplaceWith("semicolon")
     )
-    public object Semicolon : Separator(value = ';')
+    public object Semicolon : Separator(';')
 }

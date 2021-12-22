@@ -16,6 +16,7 @@ repositories { mavenCentral() }
 
 dependencies {
     implementation(platform(kotlin("bom")))
+    implementation(kotlin("reflect"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
 
