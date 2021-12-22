@@ -1,7 +1,10 @@
 package io.github.kotools.csv
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.InputStream
@@ -11,15 +14,34 @@ import java.net.URL
  * Returns the file's records according to the given [configuration], or returns
  * `null` when the [configuration] is invalid or when the targeted file
  * doesn't exist.
+ *
+ * See [csvReaderOrNullAsync] for an async/await implementation style.
  */
 public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
-        List<Map<String, String>>? = withContext(IO) {
-    val reader = Reader(configuration)
-    if (reader.file.isBlank()) null else reader()
+        List<Map<String, String>>? =
+    withContext(IO) { delegateCsvReaderOrNull(configuration) }
+
+/**
+ * Returns the file's records **asynchronously** according to the given
+ * [configuration], or returns `null` when the [configuration] is invalid or
+ * when the targeted file doesn't exist.
+ *
+ * See [csvReaderOrNull] for a suspending implementation style.
+ */
+public infix fun CoroutineScope.csvReaderOrNullAsync(
+    configuration: Reader.() -> Unit
+): Deferred<List<Map<String, String>>?> =
+    async(IO) { delegateCsvReaderOrNull(configuration) }
+
+private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
+        List<Map<String, String>>? {
+    val reader = Reader()
+    reader.configuration()
+    return if (reader.file.isBlank()) null else reader()
 }
 
 /** Configurable object responsible for reading a CSV file. */
-public class Reader internal constructor(configuration: Reader.() -> Unit) {
+public class Reader internal constructor() {
     private val csv
         get() = csvReader {
             delimiter = separator.value
@@ -52,10 +74,6 @@ public class Reader internal constructor(configuration: Reader.() -> Unit) {
      * Set to [comma] by default.
      */
     public var separator: Separator = comma
-
-    init {
-        configuration()
-    }
 
     internal operator fun invoke(): List<Map<String, String>>? =
         readResource() ?: readSystemFile()

@@ -5,27 +5,50 @@ import org.junit.jupiter.api.Nested
 import kotlin.test.Test
 
 class ReaderTest {
+    private val validConfiguration: Reader.() -> Unit by lazy {
+        {
+            file = "test"
+            folder = "folder"
+            separator = comma
+        }
+    }
+
+    private inline fun assertIsValid(block: () -> List<Map<String, String>>?) {
+        val result: List<Map<String, String>>? = block()
+        result.assertNotNull()
+        result?.let { it.size assertNotEquals 0 }
+    }
+
     @Nested
     inner class CsvReaderOrNull {
         @Test
         fun `should pass`(): Unit = runBlocking {
-            val result: List<Map<String, String>>? = csvReaderOrNull {
-                file = "test"
-                folder = "folder"
-                separator = comma
-            }
-            result.assertNotNull()
-            result?.let { it.size assertNotEquals 0 }
+            assertIsValid { csvReaderOrNull(validConfiguration) }
         }
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
-            csvReaderOrNull {}.assertNull()
+            assertNull {
+                csvReaderOrNull { }
+            }
         }
 
         @Test
         fun `should fail with unknown file`(): Unit = runBlocking {
-            csvReaderOrNull { file = "unknown" }.assertNull()
+            assertNull {
+                csvReaderOrNull { file = "unknown" }
+            }
+        }
+    }
+
+    @Nested
+    inner class CsvReaderOrNullAsync {
+        @Test
+        fun `should pass`(): Unit = runBlocking {
+            assertIsValid {
+                csvReaderOrNullAsync(validConfiguration)
+                    .await()
+            }
         }
     }
 }
