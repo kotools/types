@@ -1,7 +1,8 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.old
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
+import io.github.kotools.csv.loader
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.Path
@@ -34,9 +35,9 @@ private class Writer : RowsDsl, WriterDsl {
     private val computedRows: List<List<String?>>
         get() = rows.map { List(header.size, it::getOrNull) }
     private val resourceFile: File?
-        get() = classLoader.getResource("$folder$file")?.let { File(it.path) }
+        get() = loader.getResource("$folder$file")?.let { File(it.path) }
     private val systemFile: File?
-        get() = classLoader.getResource("")
+        get() = loader.getResource("")
             ?.let { Path("${it.path}$folder") }
             ?.apply { createFolderIfNotExists() }
             ?.let { File("$it/$file") }

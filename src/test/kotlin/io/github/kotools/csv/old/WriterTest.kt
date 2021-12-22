@@ -1,5 +1,7 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.old
 
+import io.github.kotools.csv.assertNotNull
+import io.github.kotools.csv.assertNull
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test

@@ -1,4 +1,4 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.old
 
 @Throws(FileNotFoundError::class)
 internal fun csvFileNotFoundError(path: String): Nothing =

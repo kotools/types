@@ -1,7 +1,8 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.old
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import io.github.kotools.csv.loader
 import java.io.File
 
 internal fun reader(config: ReaderDsl.() -> Unit): List<Map<String, String>>? =
@@ -26,13 +27,13 @@ private class Reader : ReaderDsl {
 
     fun read(): List<Map<String, String>>? = readResource() ?: readFile()
 
-    private fun readFile(): List<Map<String, String>>? = classLoader
+    private fun readFile(): List<Map<String, String>>? = loader
         .getResource("")
         ?.let { File("${it.path}$folder$file") }
         ?.takeIf(File::exists)
         ?.let(csv::readAllWithHeader)
 
-    private fun readResource(): List<Map<String, String>>? = classLoader
+    private fun readResource(): List<Map<String, String>>? = loader
         .getResourceAsStream("$folder$file")
         ?.let(csv::readAllWithHeader)
 }
