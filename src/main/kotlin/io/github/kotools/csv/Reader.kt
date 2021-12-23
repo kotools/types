@@ -17,6 +17,8 @@ import java.net.URL
  *
  * Throws a [CsvConfigurationException] if the [configuration] is invalid or if
  * the targeted file doesn't exist.
+ *
+ * See [csvReaderAsync] for an async/await implementation style.
  */
 @Throws(CsvConfigurationException::class)
 public suspend fun csvReader(configuration: Reader.() -> Unit):
@@ -41,6 +43,8 @@ public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
  *
  * Throws a [CsvConfigurationException] if the [configuration] is invalid or if
  * the targeted file doesn't exist.
+ *
+ * See [csvReader] for a suspending implementation style.
  */
 public infix fun CoroutineScope.csvReaderAsync(
     configuration: Reader.() -> Unit
@@ -74,39 +78,12 @@ private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
 }
 
 /** Configurable object responsible for reading a CSV file. */
-public class Reader private constructor() {
+public class Reader internal constructor() : Manager() {
     private val csv
         get() = csvReader {
             delimiter = separator.value
             skipEmptyLine = true
         }
-
-    /**
-     * **Required** property for targeting a file.
-     *
-     * The `.csv` extension is optional and will be added automatically in the
-     * process if not present.
-     * For example, `"my-file.csv"` and `"my-file"` produces the same output.
-     */
-    public var file: String by csvFile()
-
-    /**
-     * **Optional** property for targeting a folder containing the [file].
-     *
-     * Set to an empty string by default.
-     *
-     * The `'/'` suffix is optional and will be added automatically in the
-     * process if not present.
-     * For example, `"my-folder/"` and `"my-folder"` produces the same output.
-     */
-    public var folder: String by folder()
-
-    /**
-     * **Optional** property for setting the [file] content's separator.
-     *
-     * Set to [comma] by default.
-     */
-    public var separator: Separator = comma
 
     internal operator fun invoke(): List<Map<String, String>>? =
         readResource() ?: readSystemFile()
@@ -123,11 +100,5 @@ public class Reader private constructor() {
         return csv.readAllWithHeader(f)
     }
 
-    internal companion object {
-        inline infix fun create(configuration: Reader.() -> Unit): Reader {
-            val reader = Reader()
-            reader.configuration()
-            return reader
-        }
-    }
+    internal companion object : Factory<Reader>
 }
