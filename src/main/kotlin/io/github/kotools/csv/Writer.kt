@@ -16,22 +16,45 @@ import kotlin.io.path.notExists
 
 /**
  * Writes records in a CSV file according to the given [configuration], or
+ * throws a [CsvConfigurationException] when the [configuration] is invalid.
+ */
+@Throws(CsvConfigurationException::class)
+public suspend fun csvWriter(configuration: Writer.() -> Unit): Unit =
+    withContext(IO) { delegateCsvWriter(configuration) }
+
+/**
+ * Writes records in a CSV file according to the given [configuration], or
  * returns `null` when the [configuration] is invalid.
- *
- * See [csvWriterOrNullAsync] for an async/await implementation style.
  */
 public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
     withContext(IO) { delegateCsvWriterOrNull(configuration) }
 
 /**
  * Writes records in a CSV file **asynchronously** according to the given
+ * [configuration], or throws a [CsvConfigurationException] when the
+ * [configuration] is invalid.
+ */
+@Throws(CsvConfigurationException::class)
+public infix fun CoroutineScope.csvWriterAsync(
+    configuration: Writer.() -> Unit
+): Deferred<Unit> = async(IO) { delegateCsvWriter(configuration) }
+
+/**
+ * Writes records in a CSV file **asynchronously** according to the given
  * [configuration], or returns `null` when the [configuration] is invalid.
- *
- * See [csvWriterOrNull] for a suspending implementation style.
  */
 public infix fun CoroutineScope.csvWriterOrNullAsync(
     configuration: Writer.() -> Unit
 ): Deferred<Unit?> = async(IO) { delegateCsvWriterOrNull(configuration) }
+
+@Throws(CsvConfigurationException::class)
+private inline fun delegateCsvWriter(configuration: Writer.() -> Unit) {
+    val writer: Writer = Writer create configuration
+    if (writer.file.isBlank()) invalidPropertyException(writer::file)
+    if (writer.header.isEmpty()) invalidPropertyException(writer::header)
+    if (writer.records.isEmpty()) invalidPropertyException(writer::records)
+    writer()
+}
 
 private inline fun delegateCsvWriterOrNull(configuration: Writer.() -> Unit):
         Unit? {
@@ -41,8 +64,9 @@ private inline fun delegateCsvWriterOrNull(configuration: Writer.() -> Unit):
 
 /** Configurable object responsible for writing records in a CSV file. */
 public class Writer internal constructor() : Manager() {
+    internal val records: List<List<String>> get() = mutableRecords
     private val csv: CsvWriter get() = csvWriter { delimiter = separator.value }
-    private val rows: MutableList<List<String>> = mutableListOf()
+    private val mutableRecords: MutableList<List<String>> = mutableListOf()
 
     /** **Required** property for defining the [file] content's header. */
     public var header: Set<String> = emptySet()
@@ -56,21 +80,21 @@ public class Writer internal constructor() : Manager() {
 
     /** **Required** function that defines the records to write. */
     public infix fun records(configuration: Records.() -> Unit) {
-        rows += (Records create configuration).values
+        mutableRecords += (Records create configuration).values
     }
 
     internal operator fun invoke(): Unit? {
         val f: File = (loader getResourceFile "$folder$file")
             ?: getSystemFile()
             ?: return null
-        val computedRows: List<List<String?>> =
-            rows.map { List(header.size, it::getOrNull) }
-        return if (overwrite) computedRows writeWithHeaderIn f
-        else csv.writeAll(computedRows, f, !overwrite)
+        val computedRecords: List<List<String?>> =
+            records.map { List(header.size, it::getOrNull) }
+        return if (overwrite) computedRecords writeWithHeaderIn f
+        else csv.writeAll(computedRecords, f, !overwrite)
     }
 
     internal fun isInvalid(): Boolean =
-        file.isBlank() || header.isEmpty() || rows.isEmpty()
+        file.isBlank() || header.isEmpty() || mutableRecords.isEmpty()
 
     private fun getSystemFile(): File? {
         val url: URL = loader.baseUrl ?: return null

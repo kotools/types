@@ -11,14 +11,9 @@ import java.io.InputStream
 import java.net.URL
 
 /**
- * Returns the file's records according to the given [configuration], or returns
- * `null` when the [configuration] is invalid or when the targeted file
- * doesn't exist.
- *
- * Throws a [CsvConfigurationException] if the [configuration] is invalid or if
- * the targeted file doesn't exist.
- *
- * See [csvReaderAsync] for an async/await implementation style.
+ * Returns the file's records according to the given [configuration], or throws
+ * a [CsvConfigurationException] when the [configuration] is invalid or when the
+ * targeted file doesn't exist.
  */
 @Throws(CsvConfigurationException::class)
 public suspend fun csvReader(configuration: Reader.() -> Unit):
@@ -29,8 +24,6 @@ public suspend fun csvReader(configuration: Reader.() -> Unit):
  * Returns the file's records according to the given [configuration], or returns
  * `null` when the [configuration] is invalid or when the targeted file doesn't
  * exist.
- *
- * See [csvReaderOrNullAsync] for an async/await implementation style.
  */
 public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
         List<Map<String, String>>? =
@@ -38,13 +31,8 @@ public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
 
 /**
  * Returns the file's records **asynchronously** according to the given
- * [configuration], or returns `null` when the [configuration] is invalid or
- * when the targeted file doesn't exist.
- *
- * Throws a [CsvConfigurationException] if the [configuration] is invalid or if
- * the targeted file doesn't exist.
- *
- * See [csvReader] for a suspending implementation style.
+ * [configuration], or throws a [CsvConfigurationException] when the
+ * [configuration] is invalid or when the targeted file doesn't exist.
  */
 public infix fun CoroutineScope.csvReaderAsync(
     configuration: Reader.() -> Unit
@@ -55,8 +43,6 @@ public infix fun CoroutineScope.csvReaderAsync(
  * Returns the file's records **asynchronously** according to the given
  * [configuration], or returns `null` when the [configuration] is invalid or
  * when the targeted file doesn't exist.
- *
- * See [csvReaderOrNull] for a suspending implementation style.
  */
 public infix fun CoroutineScope.csvReaderOrNullAsync(
     configuration: Reader.() -> Unit
