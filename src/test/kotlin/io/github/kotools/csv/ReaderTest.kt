@@ -26,6 +26,9 @@ private fun <C : Collection<T>?, T> awaitAndAssertIsValid(
     }
 }
 
+@Suppress("unused")
+class InvalidExample(val first: String, val second: Int, val third: Boolean)
+
 class ReaderTest {
     private val validConfiguration: Reader.() -> Unit by lazy {
         {
@@ -99,9 +102,8 @@ class ReaderTest {
 
         @Test
         fun `should fail with invalid type`(): Unit = runBlocking {
-            assertNull {
-                csvReaderOrNullAs<InvalidExample> { }
-            }
+            assertNull { csvReaderOrNullAs<InvalidExample>(validConfiguration) }
+            assertNull { csvReaderOrNullAs<PrivateExample>(validConfiguration) }
         }
 
         @Test
@@ -128,13 +130,9 @@ class ReaderTest {
     }
 }
 
-data class Example(
-    val first: String,
-    val second: Int,
-    val third: Boolean
-)
+data class Example(val first: String, val second: Int, val third: Boolean)
 
-data class InvalidExample(
+private data class PrivateExample(
     val first: String,
     val second: Int,
     val third: Boolean

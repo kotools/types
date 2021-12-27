@@ -2,6 +2,7 @@ package io.github.kotools.csv
 
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
+import kotlin.reflect.KVisibility
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.starProjectedType
@@ -34,9 +35,11 @@ private constructor(private val value: KClass<T>) {
         }
 
     companion object {
-        infix fun <T : Any> createOrNull(type: KClass<T>): DataType<T>? {
-            if (!type.isData) return null
-            return DataType(type)
-        }
+        infix fun <T : Any> createOrNull(type: KClass<T>): DataType<T>? =
+            if (!type.isData || type.visibility?.isNotInternal() == true) null
+            else DataType(type)
+
+        private fun KVisibility.isNotInternal(): Boolean =
+            this != KVisibility.INTERNAL && this != KVisibility.PUBLIC
     }
 }
