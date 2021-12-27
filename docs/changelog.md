@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- CSV file's reading as given
+  type ([#9](https://github.com/kotools/csv-file/issues/9)).
+
 ### Changed
 
 - Methods design for explicit error
