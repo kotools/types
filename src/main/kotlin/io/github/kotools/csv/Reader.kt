@@ -22,6 +22,16 @@ public suspend fun csvReader(configuration: Reader.() -> Unit):
     withContext(IO) { delegateCsvReader(configuration) }
 
 /**
+ * Returns the file's records **asynchronously** according to the given
+ * [configuration], or throws a [CsvConfigurationException] when the
+ * [configuration] is invalid or when the targeted file doesn't exist.
+ */
+public infix fun CoroutineScope.csvReaderAsync(
+    configuration: Reader.() -> Unit
+): Deferred<List<Map<String, String>>> =
+    async(IO) { delegateCsvReader(configuration) }
+
+/**
  * Returns the file's records according to the given [configuration], or returns
  * `null` when the [configuration] is invalid or when the targeted file doesn't
  * exist.
@@ -50,16 +60,6 @@ public suspend fun <T : Any> csvReaderOrNullAs(
     type: KClass<T>,
     configuration: Reader.() -> Unit
 ): List<T>? = withContext(IO) { delegateCsvReaderOrNullAs(type, configuration) }
-
-/**
- * Returns the file's records **asynchronously** according to the given
- * [configuration], or throws a [CsvConfigurationException] when the
- * [configuration] is invalid or when the targeted file doesn't exist.
- */
-public infix fun CoroutineScope.csvReaderAsync(
-    configuration: Reader.() -> Unit
-): Deferred<List<Map<String, String>>> =
-    async(IO) { delegateCsvReader(configuration) }
 
 /**
  * Returns the file's records as a given list of type [T] **asynchronously**
