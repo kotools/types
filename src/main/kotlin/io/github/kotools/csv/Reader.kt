@@ -22,14 +22,27 @@ public suspend fun csvReader(configuration: Reader.() -> Unit):
     withContext(IO) { delegateCsvReader(configuration) }
 
 /**
- * Returns the file's records **asynchronously** according to the given
- * [configuration], or throws a [CsvConfigurationException] when the
- * [configuration] is invalid or when the targeted file doesn't exist.
+ * Returns the file's records as a given list of type [T] according to the given
+ * [configuration].
+ * This method throws a [CsvConfigurationException] when the type [T] is not a
+ * public or internal data class, or when the [configuration] is invalid, or
+ * when the targeted file doesn't exist.
  */
-public infix fun CoroutineScope.csvReaderAsync(
+@Suppress("DEPRECATION")
+@Throws(CsvConfigurationException::class)
+public suspend inline fun <reified T : Any> csvReaderAs(
+    noinline configuration: Reader.() -> Unit
+): List<T> = csvReaderAs(T::class, configuration)
+
+@Deprecated(
+    message = "Use the `csvReaderAs<T> {}` method instead.",
+    ReplaceWith("csvReaderAs<T> {}")
+)
+@Throws(CsvConfigurationException::class)
+public suspend fun <T : Any> csvReaderAs(
+    type: KClass<T>,
     configuration: Reader.() -> Unit
-): Deferred<List<Map<String, String>>> =
-    async(IO) { delegateCsvReader(configuration) }
+): List<T> = withContext(IO) { delegateCsvReaderAs(type, configuration) }
 
 /**
  * Returns the file's records according to the given [configuration], or returns
@@ -60,6 +73,40 @@ public suspend fun <T : Any> csvReaderOrNullAs(
     type: KClass<T>,
     configuration: Reader.() -> Unit
 ): List<T>? = withContext(IO) { delegateCsvReaderOrNullAs(type, configuration) }
+
+/**
+ * Returns the file's records **asynchronously** according to the given
+ * [configuration], or throws a [CsvConfigurationException] when the
+ * [configuration] is invalid or when the targeted file doesn't exist.
+ */
+@Throws(CsvConfigurationException::class)
+public infix fun CoroutineScope.csvReaderAsync(
+    configuration: Reader.() -> Unit
+): Deferred<List<Map<String, String>>> =
+    async(IO) { delegateCsvReader(configuration) }
+
+/**
+ * Returns the file's records as a given list of type [T] **asynchronously**
+ * according to the given [configuration].
+ * This method throws a [CsvConfigurationException] when the type [T] is not a
+ * public or internal data class, or when the [configuration] is invalid, or
+ * when the targeted file doesn't exist.
+ */
+@Suppress("DEPRECATION")
+@Throws(CsvConfigurationException::class)
+public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsAsync(
+    noinline configuration: Reader.() -> Unit
+): Deferred<List<T>> = csvReaderAsAsync(T::class, configuration)
+
+@Deprecated(
+    message = "Use the `csvReaderAsAsync<T> {}` method instead.",
+    ReplaceWith("csvReaderAsAsync<T> {}")
+)
+@Throws(CsvConfigurationException::class)
+public fun <T : Any> CoroutineScope.csvReaderAsAsync(
+    type: KClass<T>,
+    configuration: Reader.() -> Unit
+): Deferred<List<T>> = async(IO) { delegateCsvReaderAs(type, configuration) }
 
 /**
  * Returns the file's records as a given list of type [T] **asynchronously**
@@ -99,6 +146,15 @@ private inline fun delegateCsvReader(configuration: Reader.() -> Unit):
     val reader: Reader = Reader create configuration
     if (reader.file.isBlank()) invalidPropertyException(reader::file)
     return reader() ?: fileNotFoundException("${reader.folder}${reader.file}")
+}
+
+@Throws(CsvConfigurationException::class)
+private inline fun <T : Any> delegateCsvReaderAs(
+    type: KClass<T>,
+    configuration: Reader.() -> Unit
+): List<T> {
+    val t: DataType<T> = type.toDataTypeOrNull() ?: invalidTypeException(type)
+    return delegateCsvReader(configuration).mapNotNull(t::createTypeOrNullFrom)
 }
 
 private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
