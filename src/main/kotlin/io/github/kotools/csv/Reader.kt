@@ -1,12 +1,10 @@
 package io.github.kotools.csv
 
-import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import java.io.File
 import kotlin.reflect.KClass
 
 /**
@@ -138,63 +136,5 @@ public infix fun CoroutineScope.csvReaderOrNullAsync(
 ): Deferred<List<Map<String, String>>?> =
     async(IO) { delegateCsvReaderOrNull(configuration) }
 
-@Throws(CsvConfigurationException::class)
-private inline fun delegateCsvReader(configuration: Reader.() -> Unit):
-        List<Map<String, String>> = (ReaderImpl create configuration).process()
-
-@Throws(CsvConfigurationException::class)
-private inline fun <T : Any> delegateCsvReaderAs(
-    type: KClass<T>,
-    configuration: Reader.() -> Unit
-): List<T> {
-    val t: DataType<T> = type.toDataTypeOrNull() ?: invalidTypeException(type)
-    return delegateCsvReader(configuration).mapNotNull(t::createTypeOrNullFrom)
-}
-
-private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
-        List<Map<String, String>>? =
-    (ReaderImpl create configuration).processOrNull()
-
-private inline fun <T : Any> delegateCsvReaderOrNullAs(
-    type: KClass<T>,
-    configuration: Reader.() -> Unit
-): List<T>? {
-    val dataType: DataType<T> = type.toDataTypeOrNull() ?: return null
-    return delegateCsvReaderOrNull(configuration)
-        ?.mapNotNull(dataType::createTypeOrNullFrom)
-}
-
 /** Configurable object responsible for reading a CSV file. */
 public sealed interface Reader : Manager
-
-internal class ReaderImpl :
-    ManagerImpl(),
-    Processable<List<Map<String, String>>>,
-    Reader {
-    private val csv
-        get() = csvReader {
-            delimiter = separator.value
-            skipEmptyLine = true
-        }
-
-    @Throws(CsvConfigurationException::class)
-    override fun process(): List<Map<String, String>> {
-        if (isInvalid()) invalidConfigurationException()
-        return readResource()
-            ?: readSystemFile()
-            ?: fileNotFoundException("$folder$file")
-    }
-
-    operator fun invoke(): List<Map<String, String>>? =
-        readResource() ?: readSystemFile()
-
-    private fun readResource(): List<Map<String, String>>? =
-        (loader getStream "$folder$file")?.let(csv::readAllWithHeader)
-
-    private fun readSystemFile(): List<Map<String, String>>? =
-        loader.baseUrl?.let { File("${it.path}$folder$file") }
-            ?.takeIf(File::exists)
-            ?.let(csv::readAllWithHeader)
-
-    companion object : Factory<ReaderImpl>
-}
