@@ -23,13 +23,6 @@ public suspend fun csvWriter(configuration: Writer.() -> Unit): Unit =
     withContext(IO) { delegateCsvWriter(configuration) }
 
 /**
- * Writes records in a CSV file according to the given [configuration], or
- * returns `null` when the [configuration] is invalid.
- */
-public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
-    withContext(IO) { delegateCsvWriterOrNull(configuration) }
-
-/**
  * Writes records in a CSV file **asynchronously** according to the given
  * [configuration], or throws a [CsvConfigurationException] when the
  * [configuration] is invalid.
@@ -38,6 +31,13 @@ public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
 public infix fun CoroutineScope.csvWriterAsync(
     configuration: Writer.() -> Unit
 ): Deferred<Unit> = async(IO) { delegateCsvWriter(configuration) }
+
+/**
+ * Writes records in a CSV file according to the given [configuration], or
+ * returns `null` when the [configuration] is invalid.
+ */
+public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
+    withContext(IO) { delegateCsvWriterOrNull(configuration) }
 
 /**
  * Writes records in a CSV file **asynchronously** according to the given
