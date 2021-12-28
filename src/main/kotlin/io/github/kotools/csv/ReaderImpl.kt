@@ -12,9 +12,8 @@ internal inline fun delegateCsvReader(configuration: Reader.() -> Unit):
 internal inline fun <T : Any> delegateCsvReaderAs(
     type: KClass<T>,
     configuration: Reader.() -> Unit
-): List<T> {
-    val t: DataType<T> = type.toDataTypeOrNull() ?: invalidTypeException(type)
-    return delegateCsvReader(configuration).mapNotNull(t::createTypeOrNullFrom)
+): List<T> = type.toDataType().let {
+    delegateCsvReader(configuration).map(it::createType)
 }
 
 internal inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
@@ -24,10 +23,8 @@ internal inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
 internal inline fun <T : Any> delegateCsvReaderOrNullAs(
     type: KClass<T>,
     configuration: Reader.() -> Unit
-): List<T>? {
-    val dataType: DataType<T> = type.toDataTypeOrNull() ?: return null
-    return delegateCsvReaderOrNull(configuration)
-        ?.mapNotNull(dataType::createTypeOrNullFrom)
+): List<T>? = type.toDataTypeOrNull()?.let {
+    delegateCsvReaderOrNull(configuration)?.mapNotNull(it::createTypeOrNull)
 }
 
 internal class ReaderImpl :
