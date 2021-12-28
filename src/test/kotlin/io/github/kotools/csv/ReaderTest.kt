@@ -99,6 +99,41 @@ class ReaderTest {
     }
 
     @Nested
+    inner class CsvReaderAsOrNull {
+        @Test
+        fun `should pass`(): Unit =
+            assertIsValid { csvReaderAsOrNull<Example>(validConfiguration) }
+
+        @Test
+        fun `should fail with blank file name`(): Unit = runBlocking {
+            assertNull {
+                csvReaderAsOrNull<Example> {}
+            }
+        }
+
+        @Test
+        fun `should fail with invalid type`(): Unit = runBlocking {
+            assertNull { csvReaderAsOrNull<InvalidExample>(validConfiguration) }
+            assertNull { csvReaderAsOrNull<PrivateExample>(validConfiguration) }
+        }
+
+        @Test
+        fun `should fail with unknown file`(): Unit = runBlocking {
+            assertNull {
+                csvReaderAsOrNull<Example> { file = "unknown" }
+            }
+        }
+    }
+
+    @Nested
+    inner class CsvReaderAsOrNullAsync {
+        @Test
+        fun `should pass`(): Unit = awaitAndAssertIsValid {
+            csvReaderAsOrNullAsync<Example>(validConfiguration)
+        }
+    }
+
+    @Nested
     inner class CsvReaderAsync {
         @Test
         fun `should pass`(): Unit =
@@ -123,41 +158,6 @@ class ReaderTest {
             assertNull {
                 csvReaderOrNull { file = "unknown" }
             }
-        }
-    }
-
-    @Nested
-    inner class CsvReaderOrNullAs {
-        @Test
-        fun `should pass`(): Unit =
-            assertIsValid { csvReaderOrNullAs<Example>(validConfiguration) }
-
-        @Test
-        fun `should fail with blank file name`(): Unit = runBlocking {
-            assertNull {
-                csvReaderOrNullAs<Example> {}
-            }
-        }
-
-        @Test
-        fun `should fail with invalid type`(): Unit = runBlocking {
-            assertNull { csvReaderOrNullAs<InvalidExample>(validConfiguration) }
-            assertNull { csvReaderOrNullAs<PrivateExample>(validConfiguration) }
-        }
-
-        @Test
-        fun `should fail with unknown file`(): Unit = runBlocking {
-            assertNull {
-                csvReaderOrNullAs<Example> { file = "unknown" }
-            }
-        }
-    }
-
-    @Nested
-    inner class CsvReaderOrNullAsAsync {
-        @Test
-        fun `should pass`(): Unit = awaitAndAssertIsValid {
-            csvReaderOrNullAsAsync<Example>(validConfiguration)
         }
     }
 

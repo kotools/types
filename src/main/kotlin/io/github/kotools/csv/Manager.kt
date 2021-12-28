@@ -1,5 +1,7 @@
 package io.github.kotools.csv
 
+internal fun Manager.isValid(): Boolean = file.isNotBlank()
+
 /** Configurable object responsible for manipulating CSV files. */
 public sealed interface Manager {
     /**
@@ -28,4 +30,10 @@ public sealed interface Manager {
      * Set to [comma] by default.
      */
     public var separator: Separator
+}
+
+internal sealed class ManagerConfiguration : Manager {
+    override var file: String by csvFile()
+    override var folder: String by folder()
+    override var separator: Separator = comma
 }
