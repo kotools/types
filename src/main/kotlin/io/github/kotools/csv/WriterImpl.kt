@@ -13,7 +13,7 @@ internal inline fun delegateCsvWriter(configuration: Writer.() -> Unit): Unit =
     (WriterImpl create configuration).process()
 
 internal inline fun delegateCsvWriterOrNull(configuration: Writer.() -> Unit):
-        Unit? = (WriterImpl create configuration).processOrNull()
+        Unit? = (WriterImpl createOrNull configuration)?.processOrNull()
 
 internal class WriterImpl : ManagerImpl(), Processable<Unit>, Writer {
     override var header: Set<String> = emptySet()

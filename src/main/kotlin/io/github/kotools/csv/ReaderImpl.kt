@@ -18,7 +18,7 @@ internal inline fun <T : Any> delegateCsvReaderAs(
 
 internal inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
         List<Map<String, String>>? =
-    (ReaderImpl create configuration).processOrNull()
+    (ReaderImpl createOrNull configuration)?.processOrNull()
 
 internal inline fun <T : Any> delegateCsvReaderOrNullAs(
     type: KClass<T>,
