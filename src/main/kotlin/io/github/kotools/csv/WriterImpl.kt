@@ -22,7 +22,7 @@ internal class WriterImpl : ManagerImpl(), Processable<Unit>, Writer {
     private val mutableRecords: MutableList<List<String>> = mutableListOf()
     private val systemFile: File?
         get() = loader.baseUrl?.let { Path("${it.path}$folder") }
-            ?.createDirectoryIfNotExists()
+            ?.apply { createDirectoryIfNotExists() }
             ?.let { File("$it/$file") }
 
     override fun isValid(): Boolean =
