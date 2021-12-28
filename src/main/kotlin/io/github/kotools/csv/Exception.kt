@@ -1,15 +1,14 @@
 package io.github.kotools.csv
 
 import kotlin.reflect.KClass
-import kotlin.reflect.KProperty
+
+@Throws(InvalidConfigurationException::class)
+internal fun invalidConfigurationException(): Nothing =
+    throw InvalidConfigurationException("Given configuration is invalid!")
 
 @Throws(FileNotFoundException::class)
 internal fun fileNotFoundException(path: String): Nothing =
     throw FileNotFoundException(path)
-
-@Throws(InvalidPropertyException::class)
-internal fun <T : Any> invalidPropertyException(property: KProperty<T>): Nothing =
-    throw InvalidPropertyException(property.name)
 
 @Throws(InvalidTypeException::class)
 internal fun <T : Any> invalidTypeException(type: KClass<T>): Nothing =
@@ -21,8 +20,8 @@ public sealed class CsvConfigurationException(message: String) :
 private class FileNotFoundException(path: String) :
     CsvConfigurationException("The file `$path` doesn't exist")
 
-private class InvalidPropertyException(property: String) :
-    CsvConfigurationException("The property `$property` is invalid")
+private class InvalidConfigurationException(message: String) :
+    CsvConfigurationException(message)
 
 private class InvalidTypeException(type: KClass<*>) :
     CsvConfigurationException("The type `$type` is invalid")

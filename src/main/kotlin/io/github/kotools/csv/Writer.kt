@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.net.URL
 import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
@@ -48,59 +47,61 @@ public infix fun CoroutineScope.csvWriterOrNullAsync(
 ): Deferred<Unit?> = async(IO) { delegateCsvWriterOrNull(configuration) }
 
 @Throws(CsvConfigurationException::class)
-private inline fun delegateCsvWriter(configuration: Writer.() -> Unit) {
-    val writer: Writer = Writer create configuration
-    if (writer.file.isBlank()) invalidPropertyException(writer::file)
-    if (writer.header.isEmpty()) invalidPropertyException(writer::header)
-    if (writer.records.isEmpty()) invalidPropertyException(writer::records)
-    writer()
-}
+private inline fun delegateCsvWriter(configuration: Writer.() -> Unit) =
+    (WriterImpl create configuration).process()
 
 private inline fun delegateCsvWriterOrNull(configuration: Writer.() -> Unit):
-        Unit? {
-    val writer: Writer = Writer create configuration
-    return if (writer.isInvalid()) null else writer()
-}
+        Unit? = (WriterImpl create configuration).processOrNull()
 
 /** Configurable object responsible for writing records in a CSV file. */
-public class Writer internal constructor() : Manager() {
-    internal val records: List<List<String>> get() = mutableRecords
-    private val csv: CsvWriter get() = csvWriter { delimiter = separator.value }
-    private val mutableRecords: MutableList<List<String>> = mutableListOf()
-
+public sealed interface Writer : Manager {
     /** **Required** property for defining the [file] content's header. */
-    public var header: Set<String> = emptySet()
+    public var header: Set<String>
 
     /**
      * **Optional** flag for overwriting the [file]'s content.
      *
      * Set to `true` by default.
      */
-    public var overwrite: Boolean = true
+    public var overwrite: Boolean
 
     /** **Required** function that defines the records to write. */
-    public infix fun records(configuration: Records.() -> Unit) {
-        mutableRecords += (Records create configuration).values
+    public infix fun records(configuration: Records.() -> Unit)
+
+    /** Configurable object responsible for defining the records to write. */
+    public sealed interface Records {
+        /** Adds the given [Iterable] as a record. */
+        public operator fun Iterable<String>.unaryPlus()
+    }
+}
+
+internal class WriterImpl : ManagerImpl(), Processable<Unit>, Writer {
+    override var header: Set<String> = emptySet()
+    override var overwrite: Boolean = true
+    private val csv: CsvWriter get() = csvWriter { delimiter = separator.value }
+    private val mutableRecords: MutableList<List<String>> = mutableListOf()
+    private val systemFile: File?
+        get() = loader.baseUrl?.let { Path("${it.path}$folder") }
+            ?.createDirectoryIfNotExists()
+            ?.let { File("$it/$file") }
+
+    override fun isValid(): Boolean =
+        super.isValid() && header.isNotEmpty() && mutableRecords.isNotEmpty()
+
+    @Throws(CsvConfigurationException::class)
+    override fun process() {
+        if (isInvalid()) invalidConfigurationException()
+        val f: File? = (loader getResourceFile "$folder$file") ?: systemFile
+        val records: List<List<String?>> =
+            mutableRecords.map { List(header.size, it::getOrNull) }
+        f?.let {
+            if (overwrite) records writeWithHeaderIn it
+            else csv.writeAll(records, it)
+        }
     }
 
-    internal operator fun invoke(): Unit? {
-        val f: File = (loader getResourceFile "$folder$file")
-            ?: getSystemFile()
-            ?: return null
-        val computedRecords: List<List<String?>> =
-            records.map { List(header.size, it::getOrNull) }
-        return if (overwrite) computedRecords writeWithHeaderIn f
-        else csv.writeAll(computedRecords, f, !overwrite)
-    }
-
-    internal fun isInvalid(): Boolean =
-        file.isBlank() || header.isEmpty() || mutableRecords.isEmpty()
-
-    private fun getSystemFile(): File? {
-        val url: URL = loader.baseUrl ?: return null
-        val path = Path("${url.path}$folder")
-        path.createDirectoryIfNotExists()
-        return File("$path/$file")
+    override fun records(configuration: Writer.Records.() -> Unit) {
+        mutableRecords += (RecordsImpl create configuration).values
     }
 
     private infix fun List<List<String?>>.writeWithHeaderIn(file: File) {
@@ -116,18 +117,16 @@ public class Writer internal constructor() : Manager() {
         }
     }
 
-    internal companion object : Factory<Writer>
+    companion object : Factory<WriterImpl>
 
-    /** Configurable object responsible for defining the records to write. */
-    public class Records internal constructor() {
+    class RecordsImpl : Writer.Records {
         internal val values: List<List<String>> get() = records
         private val records: MutableList<List<String>> = mutableListOf()
 
-        /** Adds the given [Iterable] as a record. */
-        public operator fun Iterable<String>.unaryPlus() {
+        override fun Iterable<String>.unaryPlus() {
             records += toList()
         }
 
-        internal companion object : Factory<Records>
+        companion object : Factory<RecordsImpl>
     }
 }

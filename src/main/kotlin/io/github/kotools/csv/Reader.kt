@@ -7,8 +7,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.io.InputStream
-import java.net.URL
 import kotlin.reflect.KClass
 
 /**
@@ -142,11 +140,7 @@ public infix fun CoroutineScope.csvReaderOrNullAsync(
 
 @Throws(CsvConfigurationException::class)
 private inline fun delegateCsvReader(configuration: Reader.() -> Unit):
-        List<Map<String, String>> {
-    val reader: Reader = Reader create configuration
-    if (reader.file.isBlank()) invalidPropertyException(reader::file)
-    return reader() ?: fileNotFoundException("${reader.folder}${reader.file}")
-}
+        List<Map<String, String>> = (ReaderImpl create configuration).process()
 
 @Throws(CsvConfigurationException::class)
 private inline fun <T : Any> delegateCsvReaderAs(
@@ -158,10 +152,8 @@ private inline fun <T : Any> delegateCsvReaderAs(
 }
 
 private inline fun delegateCsvReaderOrNull(configuration: Reader.() -> Unit):
-        List<Map<String, String>>? {
-    val reader: Reader = Reader create configuration
-    return if (reader.file.isBlank()) null else reader()
-}
+        List<Map<String, String>>? =
+    (ReaderImpl create configuration).processOrNull()
 
 private inline fun <T : Any> delegateCsvReaderOrNullAs(
     type: KClass<T>,
@@ -173,27 +165,36 @@ private inline fun <T : Any> delegateCsvReaderOrNullAs(
 }
 
 /** Configurable object responsible for reading a CSV file. */
-public class Reader internal constructor() : Manager() {
+public sealed interface Reader : Manager
+
+internal class ReaderImpl :
+    ManagerImpl(),
+    Processable<List<Map<String, String>>>,
+    Reader {
     private val csv
         get() = csvReader {
             delimiter = separator.value
             skipEmptyLine = true
         }
 
-    internal operator fun invoke(): List<Map<String, String>>? =
+    @Throws(CsvConfigurationException::class)
+    override fun process(): List<Map<String, String>> {
+        if (isInvalid()) invalidConfigurationException()
+        return readResource()
+            ?: readSystemFile()
+            ?: fileNotFoundException("$folder$file")
+    }
+
+    operator fun invoke(): List<Map<String, String>>? =
         readResource() ?: readSystemFile()
 
-    private fun readResource(): List<Map<String, String>>? {
-        val s: InputStream = (loader getStream "$folder$file") ?: return null
-        return csv.readAllWithHeader(s)
-    }
+    private fun readResource(): List<Map<String, String>>? =
+        (loader getStream "$folder$file")?.let(csv::readAllWithHeader)
 
-    private fun readSystemFile(): List<Map<String, String>>? {
-        val url: URL = loader.baseUrl ?: return null
-        val f = File("${url.path}$folder$file")
-        if (!f.exists()) return null
-        return csv.readAllWithHeader(f)
-    }
+    private fun readSystemFile(): List<Map<String, String>>? =
+        loader.baseUrl?.let { File("${it.path}$folder$file") }
+            ?.takeIf(File::exists)
+            ?.let(csv::readAllWithHeader)
 
-    internal companion object : Factory<Reader>
+    companion object : Factory<ReaderImpl>
 }

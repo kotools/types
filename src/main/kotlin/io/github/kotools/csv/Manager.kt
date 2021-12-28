@@ -1,7 +1,7 @@
 package io.github.kotools.csv
 
 /** Configurable object responsible for manipulating CSV files. */
-public abstract class Manager internal constructor() {
+public sealed interface Manager {
     /**
      * **Required** property for targeting a file.
      *
@@ -9,7 +9,7 @@ public abstract class Manager internal constructor() {
      * process if not present.
      * For example, `"my-file.csv"` and `"my-file"` produces the same output.
      */
-    public var file: String by csvFile()
+    public var file: String
 
     /**
      * **Optional** property for targeting a folder containing the [file].
@@ -20,12 +20,20 @@ public abstract class Manager internal constructor() {
      * process if not present.
      * For example, `"my-folder/"` and `"my-folder"` produces the same output.
      */
-    public var folder: String by folder()
+    public var folder: String
 
     /**
      * **Optional** property for setting the [file] content's separator.
      *
      * Set to [comma] by default.
      */
-    public var separator: Separator = comma
+    public var separator: Separator
+}
+
+internal abstract class ManagerImpl : Configurable, Manager {
+    override var file: String by csvFile()
+    override var folder: String by folder()
+    override var separator: Separator = comma
+
+    override fun isValid(): Boolean = file.isNotBlank()
 }
