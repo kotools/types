@@ -8,7 +8,7 @@ import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
 import kotlin.io.path.notExists
 
-@Throws(CsvConfigurationException::class)
+@Throws(CsvException::class)
 internal inline fun delegateCsvWriter(configuration: Writer.() -> Unit): Unit =
     (WriterImpl create configuration).process()
 
@@ -28,7 +28,7 @@ internal class WriterImpl : ManagerImpl(), Processable<Unit>, Writer {
     override fun isValid(): Boolean =
         super.isValid() && header.isNotEmpty() && mutableRecords.isNotEmpty()
 
-    @Throws(CsvConfigurationException::class)
+    @Throws(CsvException::class)
     override fun process() {
         if (isInvalid()) invalidConfigurationException()
         val f: File? = (loader getResourceFile "$folder$file") ?: systemFile

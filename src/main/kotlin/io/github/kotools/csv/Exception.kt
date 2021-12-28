@@ -14,14 +14,14 @@ internal fun fileNotFoundException(path: String): Nothing =
 internal fun <T : Any> invalidTypeException(type: KClass<T>): Nothing =
     throw InvalidTypeException(type)
 
-public sealed class CsvConfigurationException(message: String) :
+public sealed class CsvException(message: String) :
     IllegalArgumentException("$message!")
 
 private class FileNotFoundException(path: String) :
-    CsvConfigurationException("The file `$path` doesn't exist")
+    CsvException("The file `$path` doesn't exist")
 
 private class InvalidConfigurationException(message: String) :
-    CsvConfigurationException(message)
+    CsvException(message)
 
 private class InvalidTypeException(type: KClass<*>) :
-    CsvConfigurationException("The type `$type` is invalid")
+    CsvException("The type `$type` is invalid")

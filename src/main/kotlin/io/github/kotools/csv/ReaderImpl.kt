@@ -4,11 +4,11 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import java.io.File
 import kotlin.reflect.KClass
 
-@Throws(CsvConfigurationException::class)
+@Throws(CsvException::class)
 internal inline fun delegateCsvReader(configuration: Reader.() -> Unit):
         List<Map<String, String>> = (ReaderImpl create configuration).process()
 
-@Throws(CsvConfigurationException::class)
+@Throws(CsvException::class)
 internal inline fun <T : Any> delegateCsvReaderAs(
     type: KClass<T>,
     configuration: Reader.() -> Unit
@@ -40,7 +40,7 @@ internal class ReaderImpl :
             skipEmptyLine = true
         }
 
-    @Throws(CsvConfigurationException::class)
+    @Throws(CsvException::class)
     override fun process(): List<Map<String, String>> {
         if (isInvalid()) invalidConfigurationException()
         return readResource()

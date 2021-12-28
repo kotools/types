@@ -8,18 +8,18 @@ import kotlinx.coroutines.withContext
 
 /**
  * Writes records in a CSV file according to the given [configuration], or
- * throws a [CsvConfigurationException] when the [configuration] is invalid.
+ * throws a [CsvException] when the [configuration] is invalid.
  */
-@Throws(CsvConfigurationException::class)
+@Throws(CsvException::class)
 public suspend fun csvWriter(configuration: Writer.() -> Unit): Unit =
     withContext(IO) { delegateCsvWriter(configuration) }
 
 /**
  * Writes records in a CSV file **asynchronously** according to the given
- * [configuration], or throws a [CsvConfigurationException] when the
- * [configuration] is invalid.
+ * [configuration], or throws a [CsvException] when the [configuration] is
+ * invalid.
  */
-@Throws(CsvConfigurationException::class)
+@Throws(CsvException::class)
 public infix fun CoroutineScope.csvWriterAsync(
     configuration: Writer.() -> Unit
 ): Deferred<Unit> = async(IO) { delegateCsvWriter(configuration) }

@@ -29,7 +29,7 @@ class WriterTest {
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvWriter {
                     header = this@WriterTest.header
                     records { +this@WriterTest.rows.first().values }
@@ -39,7 +39,7 @@ class WriterTest {
 
         @Test
         fun `should fail with empty header`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvWriter {
                     file = "test"
                     folder = "folder"
@@ -50,7 +50,7 @@ class WriterTest {
 
         @Test
         fun `should fail with empty records`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvWriter {
                     file = "test"
                     folder = "folder"

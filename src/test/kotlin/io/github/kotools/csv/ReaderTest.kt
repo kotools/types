@@ -46,14 +46,14 @@ class ReaderTest {
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvReader { }
             }
         }
 
         @Test
         fun `should fail with unknown file`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvReader { file = "unknown" }
             }
         }
@@ -67,24 +67,24 @@ class ReaderTest {
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvReaderAs<Example> {}
             }
         }
 
         @Test
         fun `should fail with invalid type`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvReaderAs<InvalidExample>(validConfiguration)
             }
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvReaderAs<PrivateExample>(validConfiguration)
             }
         }
 
         @Test
         fun `should fail with unknown file`(): Unit = runBlocking {
-            assertFailsWith<CsvConfigurationException> {
+            assertFailsWith<CsvException> {
                 csvReaderAs<Example> { file = "unknown" }
             }
         }

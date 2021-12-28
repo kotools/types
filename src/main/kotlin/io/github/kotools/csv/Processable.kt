@@ -2,7 +2,7 @@ package io.github.kotools.csv
 
 internal fun <R : Any> Processable<R>.processOrNull(): R? = try {
     process()
-} catch (exception: CsvConfigurationException) {
+} catch (exception: CsvException) {
     null
 }
 
