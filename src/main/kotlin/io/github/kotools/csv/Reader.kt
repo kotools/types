@@ -28,7 +28,7 @@ public suspend fun csvReader(configuration: Reader.() -> Unit):
     withContext(IO) { processCsvReader(configuration) }
 
 /**
- * Returns the file's records as a given list of type [T] according to the given
+ * Returns the file's records as a given type [T] according to the given
  * [configuration] or throws a [CsvException] when:
  * - the type [T] is not an internal data class or doesn't match the records
  * - the [configuration] is invalid
@@ -51,7 +51,7 @@ public suspend fun <T : Any> csvReaderAs(
 ): List<T> = withContext(IO) { processCsvReaderAs(type, configuration) }
 
 /**
- * Returns the file's records as a given list of type [T] according to the given
+ * Returns the file's records as a given type [T] according to the given
  * [configuration].
  * This method returns `null` when the type [T] is not a public or internal
  * data class, or when the [configuration] is invalid, or when the targeted file
@@ -81,19 +81,8 @@ public suspend fun csvReaderOrNull(configuration: Reader.() -> Unit):
     withContext(IO) { processCsvReaderOrNull(configuration) }
 
 /**
- * Returns the file's records **asynchronously** according to the given
- * [configuration], or throws a [CsvException] when the [configuration] is
- * invalid or when the targeted file doesn't exist.
- */
-@Throws(CsvException::class)
-public infix fun CoroutineScope.csvReaderAsync(
-    configuration: Reader.() -> Unit
-): Deferred<List<Map<String, String>>> =
-    async(IO) { processCsvReader(configuration) }
-
-/**
- * Returns the file's records as a given list of type [T] **asynchronously**
- * according to the given [configuration] or throws a [CsvException] when:
+ * Returns the file's records as a given type [T] **asynchronously** according
+ * to the given [configuration] or throws a [CsvException] when:
  * - the type [T] is not an internal data class or doesn't match the records
  * - the [configuration] is invalid
  * - the targeted file doesn't exist.
@@ -115,8 +104,8 @@ public fun <T : Any> CoroutineScope.csvReaderAsAsync(
 ): Deferred<List<T>> = async(IO) { processCsvReaderAs(type, configuration) }
 
 /**
- * Returns the file's records as a given list of type [T] **asynchronously**
- * according to the given [configuration].
+ * Returns the file's records as a given type [T] **asynchronously** according
+ * to the given [configuration].
  * This method returns `null` when the type [T] is not a public or internal
  * data class, or when the [configuration] is invalid, or when the targeted file
  * doesn't exist.
@@ -135,6 +124,17 @@ public fun <T : Any> CoroutineScope.csvReaderAsOrNullAsync(
     configuration: Reader.() -> Unit
 ): Deferred<List<T>?> =
     async(IO) { processCsvReaderAsOrNull(type, configuration) }
+
+/**
+ * Returns the file's records **asynchronously** according to the given
+ * [configuration], or throws a [CsvException] when the [configuration] is
+ * invalid or when the targeted file doesn't exist.
+ */
+@Throws(CsvException::class)
+public infix fun CoroutineScope.csvReaderAsync(
+    configuration: Reader.() -> Unit
+): Deferred<List<Map<String, String>>> =
+    async(IO) { processCsvReader(configuration) }
 
 /**
  * Returns the file's records **asynchronously** according to the given
