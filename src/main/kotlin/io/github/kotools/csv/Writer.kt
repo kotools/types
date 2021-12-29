@@ -22,6 +22,25 @@ public suspend fun csvWriter(configuration: Writer.() -> Unit): Unit =
 
 /**
  * Writes records as a given type [T] in a CSV file according to the given
+ * [configuration], or throws a [CsvException] when [T] is not an internal data
+ * class or when the [configuration] is invalid.
+ */
+@Suppress("DEPRECATION")
+public suspend inline fun <reified T : Any> csvWriterAs(
+    noinline configuration: TypedWriter<T>.() -> Unit
+): Unit = csvWriterAs(T::class, configuration)
+
+@Deprecated(
+    message = "Use the `csvWriterAs<T> {}` method instead.",
+    ReplaceWith("csvWriterAs<T> {}")
+)
+public suspend fun <T : Any> csvWriterAs(
+    type: KClass<T>,
+    configuration: TypedWriter<T>.() -> Unit
+): Unit = withContext(IO) { processCsvWriterAs(type, configuration) }
+
+/**
+ * Writes records as a given type [T] in a CSV file according to the given
  * [configuration], or returns `null` when [T] is not an internal data class or
  * when the [configuration] is invalid.
  */
@@ -45,6 +64,25 @@ public suspend fun <T : Any> csvWriterAsOrNull(
  */
 public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
     withContext(IO) { processCsvWriterOrNull(configuration) }
+
+/**
+ * Writes records as a given type [T] in a CSV file **asynchronously** according
+ * to the given [configuration], or throws a [CsvException] when [T] is not an
+ * internal data class or when the [configuration] is invalid.
+ */
+@Suppress("DEPRECATION")
+public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsAsync(
+    noinline configuration: TypedWriter<T>.() -> Unit
+): Deferred<Unit> = csvWriterAsAsync(T::class, configuration)
+
+@Deprecated(
+    message = "Use the `csvWriterAsAsync<T> {}` method instead.",
+    ReplaceWith("csvWriterAsAsync<T> {}")
+)
+public fun <T : Any> CoroutineScope.csvWriterAsAsync(
+    type: KClass<T>,
+    configuration: TypedWriter<T>.() -> Unit
+): Deferred<Unit> = async(IO) { processCsvWriterAs(type, configuration) }
 
 /**
  * Writes records as a given type [T] in a CSV file **asynchronously** according
@@ -89,6 +127,27 @@ private inline fun processCsvWriter(configuration: Writer.() -> Unit): Unit =
         .takeIf(WriterImpl::isValid)
         ?.writeInFile()
         ?: invalidConfigurationException()
+
+private inline fun <T : Any> processCsvWriterAs(
+    type: KClass<T>,
+    configuration: TypedWriter<T>.() -> Unit
+): Unit = type.toDataType().let { dataType: DataType<T> ->
+    TypedWriterConfiguration<T>()
+        .apply(configuration)
+        .takeIf(TypedWriterConfiguration<T>::isValid)
+        ?.let {
+            processCsvWriter {
+                file = it.file
+                folder = it.folder
+                overwrite = it.overwrite
+                separator = it.separator
+                header = dataType.properties
+                records {
+                    (dataType getValuesOf it.records).forEach { +it }
+                }
+            }
+        } ?: invalidConfigurationException()
+}
 
 private inline fun <T : Any> processCsvWriterAsOrNull(
     type: KClass<T>,

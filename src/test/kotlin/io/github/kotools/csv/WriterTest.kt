@@ -62,6 +62,65 @@ class WriterTest {
     }
 
     @Nested
+    inner class CsvWriterAs {
+        private val className: String = this::class.jvmName
+
+        @Test
+        fun `should pass`(): Unit = runBlocking {
+            csvWriterAs<Example> {
+                file = "examples"
+                records { +Example(className, 1, false) }
+            }
+        }
+
+        @Test
+        fun `should fail with blank file name`(): Unit = runBlocking {
+            assertFailsWith<CsvException> {
+                csvWriterAs<Example> {
+                    records { +Example(className, 1, false) }
+                }
+            }
+        }
+
+        @Test
+        fun `should fail with empty records`(): Unit = runBlocking {
+            assertFailsWith<CsvException> {
+                csvWriterAs<Example> { file = "examples" }
+            }
+        }
+
+        @Test
+        fun `should fail with invalid type`(): Unit = runBlocking {
+            val target = "examples"
+            assertFailsWith<CsvException> {
+                csvWriterAs<InvalidExample> {
+                    file = target
+                    records { +InvalidExample(className, 1, false) }
+                }
+            }
+            assertFailsWith<CsvException> {
+                csvWriterAs<PrivateExample2> {
+                    file = target
+                    records { +PrivateExample2(className) }
+                }
+            }
+        }
+    }
+
+    @Nested
+    inner class CsvWriterAsAsync {
+        private val className: String = this::class.jvmName
+
+        @Test
+        fun `should pass`(): Unit = runBlocking {
+            csvWriterAsAsync<Example> {
+                file = "examples"
+                records { +Example(className, 1, false) }
+            }.await()
+        }
+    }
+
+    @Nested
     inner class CsvWriterAsOrNull {
         @Test
         fun `should pass`(): Unit = runBlocking {
