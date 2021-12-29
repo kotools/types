@@ -2,6 +2,7 @@ package io.github.kotools.csv
 
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Nested
+import kotlin.reflect.jvm.jvmName
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
@@ -61,6 +62,64 @@ class WriterTest {
     }
 
     @Nested
+    inner class CsvWriterAsOrNull {
+        @Test
+        fun `should pass`(): Unit = runBlocking {
+            csvWriterAsOrNull<Example> {
+                file = "examples"
+                records {
+                    +Example(this@CsvWriterAsOrNull::class.jvmName, 1, false)
+                }
+            }.assertNotNull()
+        }
+
+        @Test
+        fun `should fail with blank file name`(): Unit = runBlocking {
+            csvWriterAsOrNull<Example> {
+                records {
+                    +Example(this@CsvWriterAsOrNull::class.jvmName, 1, false)
+                }
+            }.assertNull()
+        }
+
+        @Test
+        fun `should fail with empty records`(): Unit = runBlocking {
+            csvWriterAsOrNull<Example> { file = "examples" }.assertNull()
+        }
+
+        @Test
+        fun `should fail with invalid type`(): Unit = runBlocking {
+            val className: String = this@CsvWriterAsOrNull::class.jvmName
+            val target = "examples"
+            csvWriterAsOrNull<InvalidExample> {
+                file = target
+                records { +InvalidExample(className, 1, false) }
+            }.assertNull()
+            csvWriterAsOrNull<PrivateExample2> {
+                file = target
+                records { +PrivateExample2(className) }
+            }.assertNull()
+        }
+    }
+
+    @Nested
+    inner class CsvWriterAsOrNullAsync {
+        @Test
+        fun `should pass`(): Unit = runBlocking {
+            csvWriterAsOrNullAsync<Example> {
+                file = "examples"
+                records {
+                    +Example(
+                        this@CsvWriterAsOrNullAsync::class.jvmName,
+                        1,
+                        false
+                    )
+                }
+            }.await().assertNotNull()
+        }
+    }
+
+    @Nested
     inner class CsvWriterAsync {
         @Test
         fun `should pass`(): Unit = runBlocking {
@@ -114,3 +173,5 @@ class WriterTest {
         }
     }
 }
+
+private data class PrivateExample2(val first: String)

@@ -1,6 +1,7 @@
 package io.github.kotools.csv
 
 import kotlin.reflect.KClass
+import kotlin.reflect.KProperty1
 import kotlin.reflect.KType
 import kotlin.reflect.KVisibility
 import kotlin.reflect.full.declaredMemberProperties
@@ -27,13 +28,17 @@ private infix fun String.toType(type: KType): Any = when (type) {
 }
 
 @JvmInline
-internal value class DataType<out T : Any>
+internal value class DataType<T : Any>
 private constructor(private val value: KClass<T>) {
+    val properties: Set<String>
+        get() = value.declaredMemberProperties.map(KProperty1<T, *>::name)
+            .toSet()
+
     @Throws(CsvException::class)
-    internal infix fun createType(record: Map<String, String>): T =
+    infix fun createType(record: Map<String, String>): T =
         createTypeOrNull(record) ?: invalidTypeException(value)
 
-    internal infix fun createTypeOrNull(record: Map<String, String>): T? = try {
+    infix fun createTypeOrNull(record: Map<String, String>): T? = try {
         val arguments: Array<Any?> = value.declaredMemberProperties
             .map { record[it.name]?.toType(it.returnType) }
             .toTypedArray()
@@ -42,6 +47,13 @@ private constructor(private val value: KClass<T>) {
         exception.printStackTrace()
         null
     }
+
+    infix fun getValuesOf(list: List<T>): List<List<String>> =
+        list.map { item: T ->
+            value.declaredMemberProperties.mapNotNull {
+                it.get(item)?.toString()
+            }
+        }
 
     companion object {
         @Throws(CsvException::class)
