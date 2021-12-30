@@ -10,7 +10,6 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import kotlin.reflect.KClass
 
-private val reader: Reader get() = ReaderConfiguration()
 private val Reader.csv: CsvReader
     get() = csvReader {
         delimiter = separator.value
@@ -108,8 +107,8 @@ public fun <T : Any> CoroutineScope.csvReaderOrNullAsync(
 
 @Throws(CsvException::class)
 private inline fun processCsvReader(configuration: Reader.() -> Unit):
-        List<Map<String, String>> = reader.apply(configuration)
-    .takeIf(Manager::isValid)
+        List<Map<String, String>> = Factory.create<ReaderImpl>(configuration)
+    .takeIf(ReaderImpl::isValid)
     ?.readFile()
     ?: invalidConfigurationException()
 
@@ -129,9 +128,10 @@ private inline fun <T : Any> processCsvReaderAsOrNull(
 }
 
 private inline fun processCsvReaderOrNull(configuration: Reader.() -> Unit):
-        List<Map<String, String>>? = reader.apply(configuration)
-    .takeIf(Manager::isValid)
-    ?.readFileOrNull()
+        List<Map<String, String>>? =
+    Factory.createOrNull<ReaderImpl>(configuration)
+        ?.takeIf(ReaderImpl::isValid)
+        ?.readFileOrNull()
 
 @Throws(CsvException::class)
 private fun Reader.readFile(): List<Map<String, String>> =
@@ -151,7 +151,7 @@ private fun Reader.readSystemFile(): List<Map<String, String>>? = loader.baseUrl
 /** Configurable object responsible for reading a CSV file. */
 public sealed interface Reader : Manager
 
-internal class ReaderConfiguration : ManagerConfiguration(), Reader {
+internal class ReaderImpl : ManagerImpl(), Reader {
     override fun equals(other: Any?): Boolean = this === other
 
     override fun hashCode(): Int = System.identityHashCode(this)

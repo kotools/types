@@ -10,9 +10,7 @@ import kotlin.io.path.createDirectory
 import kotlin.io.path.notExists
 import kotlin.reflect.KClass
 
-internal class WriterImpl<T : Any> : Configurable,
-    ManagerConfiguration(),
-    Writer<T> {
+internal class WriterImpl<T : Any> : ManagerImpl(), Writer<T> {
     private val csv: CsvWriter get() = csvWriter { delimiter = separator.value }
     private val resourceFile: File?
         get() = loader getResourceFile "$folder$file"
