@@ -8,30 +8,22 @@ import kotlinx.coroutines.withContext
 import kotlin.reflect.KClass
 
 /**
- * Writes records in a CSV file according to the given [configuration], or
- * throws a [CsvException] when the [configuration] is invalid.
- */
-@Throws(CsvException::class)
-public suspend fun csvWriter(configuration: Writer.() -> Unit): Unit =
-    withContext(IO) { WriterImpl process configuration }
-
-/**
  * Writes records as a given type [T] in a CSV file according to the given
  * [configuration], or throws a [CsvException] when [T] is not an internal data
  * class or when the [configuration] is invalid.
  */
 @Suppress("DEPRECATION")
 @Throws(CsvException::class)
-public suspend inline fun <reified T : Any> csvWriterAs(
+public suspend inline fun <reified T : Any> csvWriter(
     noinline configuration: TypedWriter<T>.() -> Unit
-): Unit = csvWriterAs(T::class, configuration)
+): Unit = csvWriter(T::class, configuration)
 
 @Deprecated(
-    message = "Use the `csvWriterAs<T> {}` method instead.",
-    ReplaceWith("csvWriterAs<T> {}")
+    message = "Use the `csvWriter<T> {}` method instead.",
+    ReplaceWith("csvWriter<T> {}")
 )
 @Throws(CsvException::class)
-public suspend fun <T : Any> csvWriterAs(
+public suspend fun <T : Any> csvWriter(
     type: KClass<T>,
     configuration: TypedWriter<T>.() -> Unit
 ): Unit = withContext(IO) { TypedWriterImpl.process(type, configuration) }
@@ -42,26 +34,19 @@ public suspend fun <T : Any> csvWriterAs(
  * when the [configuration] is invalid.
  */
 @Suppress("DEPRECATION")
-public suspend inline fun <reified T : Any> csvWriterAsOrNull(
+public suspend inline fun <reified T : Any> csvWriterOrNull(
     noinline configuration: TypedWriter<T>.() -> Unit
-): Unit? = csvWriterAsOrNull(T::class, configuration)
+): Unit? = csvWriterOrNull(T::class, configuration)
 
 @Deprecated(
-    message = "Use the `csvWriterAsOrNull<T> {}` method instead.",
-    ReplaceWith("csvWriterAsOrNull<T> {}")
+    message = "Use the `csvWriterOrNull<T> {}` method instead.",
+    ReplaceWith("csvWriterOrNull<T> {}")
 )
-public suspend fun <T : Any> csvWriterAsOrNull(
+public suspend fun <T : Any> csvWriterOrNull(
     type: KClass<T>,
     configuration: TypedWriter<T>.() -> Unit
 ): Unit? =
     withContext(IO) { TypedWriterImpl.processOrNull(type, configuration) }
-
-/**
- * Writes records in a CSV file according to the given [configuration], or
- * returns `null` when the [configuration] is invalid.
- */
-public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
-    withContext(IO) { WriterImpl processOrNull configuration }
 
 /**
  * Writes records as a given type [T] in a CSV file **asynchronously** according
@@ -70,16 +55,16 @@ public suspend fun csvWriterOrNull(configuration: Writer.() -> Unit): Unit? =
  */
 @Suppress("DEPRECATION")
 @Throws(CsvException::class)
-public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsAsync(
+public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsync(
     noinline configuration: TypedWriter<T>.() -> Unit
-): Deferred<Unit> = csvWriterAsAsync(T::class, configuration)
+): Deferred<Unit> = csvWriterAsync(T::class, configuration)
 
 @Deprecated(
-    message = "Use the `csvWriterAsAsync<T> {}` method instead.",
-    ReplaceWith("csvWriterAsAsync<T> {}")
+    message = "Use the `csvWriterAsync<T> {}` method instead.",
+    ReplaceWith("csvWriterAsync<T> {}")
 )
 @Throws(CsvException::class)
-public fun <T : Any> CoroutineScope.csvWriterAsAsync(
+public fun <T : Any> CoroutineScope.csvWriterAsync(
     type: KClass<T>,
     configuration: TypedWriter<T>.() -> Unit
 ): Deferred<Unit> = async(IO) { TypedWriterImpl.process(type, configuration) }
@@ -90,37 +75,19 @@ public fun <T : Any> CoroutineScope.csvWriterAsAsync(
  * data class or when the [configuration] is invalid.
  */
 @Suppress("DEPRECATION")
-public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsOrNullAsync(
+public inline infix fun <reified T : Any> CoroutineScope.csvWriterOrNullAsync(
     noinline configuration: TypedWriter<T>.() -> Unit
-): Deferred<Unit?> = csvWriterAsOrNullAsync(T::class, configuration)
+): Deferred<Unit?> = csvWriterOrNullAsync(T::class, configuration)
 
 @Deprecated(
-    message = "Use the `csvWriterAsOrNullAsync<T> {}` method instead.",
-    ReplaceWith("csvWriterAsOrNullAsync<T> {}")
+    message = "Use the `csvWriterOrNullAsync<T> {}` method instead.",
+    ReplaceWith("csvWriterOrNullAsync<T> {}")
 )
-public fun <T : Any> CoroutineScope.csvWriterAsOrNullAsync(
+public fun <T : Any> CoroutineScope.csvWriterOrNullAsync(
     type: KClass<T>,
     configuration: TypedWriter<T>.() -> Unit
 ): Deferred<Unit?> =
     async(IO) { TypedWriterImpl.processOrNull(type, configuration) }
-
-/**
- * Writes records in a CSV file **asynchronously** according to the given
- * [configuration], or throws a [CsvException] when the [configuration] is
- * invalid.
- */
-@Throws(CsvException::class)
-public infix fun CoroutineScope.csvWriterAsync(
-    configuration: Writer.() -> Unit
-): Deferred<Unit> = async(IO) { WriterImpl process configuration }
-
-/**
- * Writes records in a CSV file **asynchronously** according to the given
- * [configuration], or returns `null` when the [configuration] is invalid.
- */
-public infix fun CoroutineScope.csvWriterOrNullAsync(
-    configuration: Writer.() -> Unit
-): Deferred<Unit?> = async(IO) { WriterImpl processOrNull configuration }
 
 /**
  * Configurable object responsible for writing records with a given type [T] in
