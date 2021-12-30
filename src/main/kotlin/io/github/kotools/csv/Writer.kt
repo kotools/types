@@ -26,7 +26,7 @@ public suspend inline fun <reified T : Any> csvWriter(
 public suspend fun <T : Any> csvWriter(
     type: KClass<T>,
     configuration: Writer<T>.() -> Unit
-): Unit = withContext(IO) { WriterImpl.process(type, configuration) }
+): Unit = withContext(IO) { WriterImplementation.process(type, configuration) }
 
 /**
  * Writes records as a given type [T] in a CSV file according to the given
@@ -45,7 +45,8 @@ public suspend inline fun <reified T : Any> csvWriterOrNull(
 public suspend fun <T : Any> csvWriterOrNull(
     type: KClass<T>,
     configuration: Writer<T>.() -> Unit
-): Unit? = withContext(IO) { WriterImpl.processOrNull(type, configuration) }
+): Unit? =
+    withContext(IO) { WriterImplementation.processOrNull(type, configuration) }
 
 /**
  * Writes records as a given type [T] in a CSV file **asynchronously** according
@@ -66,7 +67,8 @@ public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsync(
 public fun <T : Any> CoroutineScope.csvWriterAsync(
     type: KClass<T>,
     configuration: Writer<T>.() -> Unit
-): Deferred<Unit> = async(IO) { WriterImpl.process(type, configuration) }
+): Deferred<Unit> =
+    async(IO) { WriterImplementation.process(type, configuration) }
 
 /**
  * Writes records as a given type [T] in a CSV file **asynchronously** according
@@ -85,7 +87,8 @@ public inline infix fun <reified T : Any> CoroutineScope.csvWriterOrNullAsync(
 public fun <T : Any> CoroutineScope.csvWriterOrNullAsync(
     type: KClass<T>,
     configuration: Writer<T>.() -> Unit
-): Deferred<Unit?> = async(IO) { WriterImpl.processOrNull(type, configuration) }
+): Deferred<Unit?> =
+    async(IO) { WriterImplementation.processOrNull(type, configuration) }
 
 /**
  * Configurable object responsible for writing records with a given type [T] in

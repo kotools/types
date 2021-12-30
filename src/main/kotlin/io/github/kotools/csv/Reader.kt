@@ -107,10 +107,11 @@ public fun <T : Any> CoroutineScope.csvReaderOrNullAsync(
 
 @Throws(CsvException::class)
 private inline fun processCsvReader(configuration: Reader.() -> Unit):
-        List<Map<String, String>> = Factory.create<ReaderImpl>(configuration)
-    .takeIf(ReaderImpl::isValid)
-    ?.readFile()
-    ?: invalidConfigurationException()
+        List<Map<String, String>> =
+    Factory.create<ReaderImplementation>(configuration)
+        .takeIf(ReaderImplementation::isValid)
+        ?.readFile()
+        ?: invalidConfigurationException()
 
 @Throws(CsvException::class)
 private fun <T : Any> processCsvReaderAs(
@@ -129,8 +130,8 @@ private inline fun <T : Any> processCsvReaderAsOrNull(
 
 private inline fun processCsvReaderOrNull(configuration: Reader.() -> Unit):
         List<Map<String, String>>? =
-    Factory.createOrNull<ReaderImpl>(configuration)
-        ?.takeIf(ReaderImpl::isValid)
+    Factory.createOrNull<ReaderImplementation>(configuration)
+        ?.takeIf(ReaderImplementation::isValid)
         ?.readFileOrNull()
 
 @Throws(CsvException::class)
@@ -151,7 +152,7 @@ private fun Reader.readSystemFile(): List<Map<String, String>>? = loader.baseUrl
 /** Configurable object responsible for reading a CSV file. */
 public sealed interface Reader : Manager
 
-internal class ReaderImpl : ManagerImpl(), Reader {
+internal class ReaderImplementation : ManagerImplementation(), Reader {
     override fun equals(other: Any?): Boolean = this === other
 
     override fun hashCode(): Int = System.identityHashCode(this)

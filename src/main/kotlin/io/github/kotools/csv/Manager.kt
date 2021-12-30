@@ -30,7 +30,7 @@ public sealed interface Manager {
     public var separator: Separator
 }
 
-internal sealed class ManagerImpl : Configurable, Manager {
+internal sealed class ManagerImplementation : Configurable, Manager {
     override var file: String by csvFile()
     override var folder: String by folder()
     override var separator: Separator = comma

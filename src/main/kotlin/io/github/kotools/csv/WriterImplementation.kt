@@ -10,7 +10,8 @@ import kotlin.io.path.createDirectory
 import kotlin.io.path.notExists
 import kotlin.reflect.KClass
 
-internal class WriterImpl<T : Any> : ManagerImpl(), Writer<T> {
+internal class WriterImplementation<T : Any> : ManagerImplementation(),
+    Writer<T> {
     private val csv: CsvWriter get() = csvWriter { delimiter = separator.value }
     private val resourceFile: File?
         get() = loader getResourceFile "$folder$file"
@@ -70,14 +71,14 @@ internal class WriterImpl<T : Any> : ManagerImpl(), Writer<T> {
         inline fun <T : Any> process(
             type: KClass<T>,
             configuration: Writer<T>.() -> Unit
-        ): Unit = Factory.create<WriterImpl<T>>(configuration)
+        ): Unit = Factory.create<WriterImplementation<T>>(configuration)
             .write(type.toDataType())
 
         inline fun <T : Any> processOrNull(
             type: KClass<T>,
             configuration: Writer<T>.() -> Unit
         ): Unit? = type.toDataTypeOrNull()?.let {
-            Factory.createOrNull<WriterImpl<T>>(configuration)
+            Factory.createOrNull<WriterImplementation<T>>(configuration)
                 ?.writeOrNull(it)
         }
     }
