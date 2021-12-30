@@ -77,9 +77,11 @@ internal class WriterImplementation<T : Any> : ManagerImplementation(),
         inline fun <T : Any> processOrNull(
             type: KClass<T>,
             configuration: Writer<T>.() -> Unit
-        ): Unit? = type.toDataTypeOrNull()?.let {
-            Factory.createOrNull<WriterImplementation<T>>(configuration)
-                ?.writeOrNull(it)
+        ): Unit? {
+            val writer: WriterImplementation<T> =
+                (Factory createOrNull configuration) ?: return null
+            return type.toDataTypeOrNull()
+                ?.let(writer::writeOrNull)
         }
     }
 
