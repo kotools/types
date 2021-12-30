@@ -18,8 +18,10 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- CSV file's reading as given
+- CSV file's reading as a given
   type ([#9](https://github.com/kotools/csv-file/issues/9)).
+- CSV file's writing as a given
+  type ([#22](https://github.com/kotools/csv-file/issues/22)).
 
 ### Changed
 
