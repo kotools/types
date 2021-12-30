@@ -2,19 +2,18 @@ package io.github.kotools.csv
 
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Nested
-import kotlin.reflect.jvm.jvmName
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
 class WriterTest {
     @Nested
     inner class CsvWriter {
-        private val className: String = this::class.jvmName
+        private val className: String = this::class.simpleName!!.lowercase()
 
         @Test
         fun `should pass`(): Unit = runBlocking {
             csvWriter<Example> {
-                file = "examples"
+                file = "examples-$className"
                 records { +Example(className, 1, false) }
             }
         }
@@ -31,13 +30,13 @@ class WriterTest {
         @Test
         fun `should fail with empty records`(): Unit = runBlocking {
             assertFailsWith<CsvException> {
-                csvWriter<Example> { file = "examples" }
+                csvWriter<Example> { file = "examples-$className" }
             }
         }
 
         @Test
         fun `should fail with invalid type`(): Unit = runBlocking {
-            val target = "examples"
+            val target = "examples-$className"
             assertFailsWith<CsvException> {
                 csvWriter<InvalidExample> {
                     file = target
@@ -55,12 +54,12 @@ class WriterTest {
 
     @Nested
     inner class CsvWriterAsync {
-        private val className: String = this::class.jvmName
+        private val className: String = this::class.simpleName!!.lowercase()
 
         @Test
         fun `should pass`(): Unit = runBlocking {
             csvWriterAsync<Example> {
-                file = "examples"
+                file = "examples-$className"
                 records { +Example(className, 1, false) }
             }.await()
         }
@@ -68,34 +67,32 @@ class WriterTest {
 
     @Nested
     inner class CsvWriterOrNull {
+        private val className: String = this::class.simpleName!!.lowercase()
+
         @Test
         fun `should pass`(): Unit = runBlocking {
             csvWriterOrNull<Example> {
-                file = "examples"
-                records {
-                    +Example(this@CsvWriterOrNull::class.jvmName, 1, false)
-                }
+                file = "examples-$className"
+                records { +Example(className, 1, false) }
             }.assertNotNull()
         }
 
         @Test
         fun `should fail with blank file name`(): Unit = runBlocking {
             csvWriterOrNull<Example> {
-                records {
-                    +Example(this@CsvWriterOrNull::class.jvmName, 1, false)
-                }
+                records { +Example(className, 1, false) }
             }.assertNull()
         }
 
         @Test
         fun `should fail with empty records`(): Unit = runBlocking {
-            csvWriterOrNull<Example> { file = "examples" }.assertNull()
+            csvWriterOrNull<Example> { file = "examples-$className" }
+                .assertNull()
         }
 
         @Test
         fun `should fail with invalid type`(): Unit = runBlocking {
-            val className: String = this@CsvWriterOrNull::class.jvmName
-            val target = "examples"
+            val target = "examples-$className"
             csvWriterOrNull<InvalidExample> {
                 file = target
                 records { +InvalidExample(className, 1, false) }
@@ -109,17 +106,13 @@ class WriterTest {
 
     @Nested
     inner class CsvWriterOrNullAsync {
+        private val className: String = this::class.simpleName!!.lowercase()
+
         @Test
         fun `should pass`(): Unit = runBlocking {
             csvWriterOrNullAsync<Example> {
-                file = "examples"
-                records {
-                    +Example(
-                        this@CsvWriterOrNullAsync::class.jvmName,
-                        1,
-                        false
-                    )
-                }
+                file = "examples-$className"
+                records { +Example(className, 1, false) }
             }.await().assertNotNull()
         }
     }
