@@ -16,7 +16,9 @@ internal class SuffixedString<in T : Any>(private val suffix: String) :
     override fun getValue(thisRef: T, property: KProperty<*>): String = value
 
     override fun setValue(thisRef: T, property: KProperty<*>, value: String) {
-        if (value.isBlank() || this.value.contains(value)) return
-        this.value = if (value.endsWith(suffix)) value else "$value$suffix"
+        value.takeIf(String::isNotBlank)
+            ?.let { if (it.endsWith(suffix)) it else "$it$suffix" }
+            ?.takeIf { this.value != it }
+            ?.let { this.value = it }
     }
 }
