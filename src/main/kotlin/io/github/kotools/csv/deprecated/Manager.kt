@@ -1,8 +1,7 @@
 package io.github.kotools.csv.deprecated
 
 import io.github.kotools.csv.manager.Separator
-import io.github.kotools.csv.manager.csvFile
-import io.github.kotools.csv.manager.folder
+import io.github.kotools.csv.manager.SuffixedString
 
 /** Configurable object responsible for manipulating CSV files. */
 public sealed interface Manager {
@@ -35,8 +34,8 @@ public sealed interface Manager {
 }
 
 internal sealed class ManagerImplementation : Configurable, Manager {
-    override var file: String by csvFile()
-    override var folder: String by folder()
+    override var file: String by SuffixedString.csvFile()
+    override var folder: String by SuffixedString.folder()
     override var separator: Separator = Separator.Comma
 
     override fun isValid(): Boolean = file.isNotBlank()

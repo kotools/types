@@ -13,7 +13,7 @@ class SuffixedStringTest {
 
     @Nested
     inner class CsvFile {
-        private var file: String by csvFile()
+        private var file: String by SuffixedString.csvFile()
 
         @Test
         fun `should set with non-suffixed value`() {
@@ -48,7 +48,7 @@ class SuffixedStringTest {
 
     @Nested
     inner class Folder {
-        private var folder: String by folder()
+        private var folder: String by SuffixedString.folder()
 
         @Test
         fun `should set with non-suffixed value`() {

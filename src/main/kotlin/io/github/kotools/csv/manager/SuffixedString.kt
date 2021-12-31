@@ -3,14 +3,8 @@ package io.github.kotools.csv.manager
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-internal fun <T : Any> csvFile(): ReadWriteProperty<T, String> =
-    SuffixedString(".csv")
-
-internal fun <T : Any> folder(): ReadWriteProperty<T, String> =
-    SuffixedString("/")
-
-internal class SuffixedString<in T : Any>(private val suffix: String) :
-    ReadWriteProperty<T, String> {
+internal class SuffixedString<in T : Any>
+private constructor(private val suffix: String) : ReadWriteProperty<T, String> {
     private var value: String = ""
 
     override fun getValue(thisRef: T, property: KProperty<*>): String = value
@@ -20,5 +14,13 @@ internal class SuffixedString<in T : Any>(private val suffix: String) :
             ?.let { if (it.endsWith(suffix)) it else "$it$suffix" }
             ?.takeIf { this.value != it }
             ?.let { this.value = it }
+    }
+
+    companion object {
+        fun <T : Any> csvFile(): ReadWriteProperty<T, String> =
+            SuffixedString(".csv")
+
+        fun <T : Any> folder(): ReadWriteProperty<T, String> =
+            SuffixedString("/")
     }
 }
