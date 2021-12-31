@@ -8,7 +8,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import kotlin.reflect.KClass
 
-// TODO: Test and document
+// TODO: Document
 @Suppress("DEPRECATION")
 public suspend inline fun <reified T : Any> csvReader(
     noinline configuration: CsvReader.() -> Unit
@@ -21,12 +21,9 @@ public suspend inline fun <reified T : Any> csvReader(
 public suspend fun <T : Any> csvReader(
     type: KClass<T>,
     configuration: CsvReader.() -> Unit
-): List<T> = withContext(IO) {
-    ReaderProcessor(type, configuration)
-        .process()
-}
+): List<T> = withContext(IO) { TODO() }
 
-// TODO: Test and document
+// TODO: Document
 @Suppress("DEPRECATION")
 public suspend inline fun <reified T : Any> csvReaderOrNull(
     noinline configuration: CsvReader.() -> Unit
@@ -44,7 +41,7 @@ public suspend fun <T : Any> csvReaderOrNull(
         .processOrNull()
 }
 
-// TODO: Test and document
+// TODO: Document
 @Suppress("DEPRECATION")
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
     noinline configuration: CsvReader.() -> Unit
@@ -57,12 +54,9 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
 public fun <T : Any> CoroutineScope.csvReaderAsync(
     type: KClass<T>,
     configuration: CsvReader.() -> Unit
-): Deferred<List<T>> = async(IO) {
-    ReaderProcessor(type, configuration)
-        .process()
-}
+): Deferred<List<T>> = async(IO) { TODO() }
 
-// TODO: Test and document
+// TODO: Document
 @Suppress("DEPRECATION")
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
     noinline configuration: CsvReader.() -> Unit
