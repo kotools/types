@@ -27,7 +27,7 @@ public interface CsvManager {
     /**
      * **Optional** property for setting the [file] content's separator.
      *
-     * Set to [comma] by default.
+     * Set to [Separator.Comma] by default.
      */
     public var separator: Separator
 }

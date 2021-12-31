@@ -1,13 +1,16 @@
 package io.github.kotools.csv.manager
 
-/** Returns the comma [separator][Separator] (`','`). */
-public val comma: Separator get() = Comma()
-
-/** Returns the semicolon [separator][Separator] (`';'`). */
-public val semicolon: Separator get() = Semicolon()
-
 /** Representation of the character that separates values in a CSV file. */
-public sealed class Separator private constructor(internal val value: Char)
+public sealed class Separator
+private constructor(internal val value: Char) {
+    private class Comma : Separator(',')
+    private class Semicolon : Separator(';')
 
-internal class Comma : Separator(',')
-internal class Semicolon : Separator(';')
+    public companion object {
+        /** Returns the comma [separator][Separator] (`','`). */
+        public val Comma: Separator get() = Comma()
+
+        /** Returns the semicolon [separator][Separator] (`';'`). */
+        public val Semicolon: Separator get() = Semicolon()
+    }
+}
