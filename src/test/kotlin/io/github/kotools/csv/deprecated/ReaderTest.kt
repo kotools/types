@@ -3,6 +3,7 @@ package io.github.kotools.csv.deprecated
 import io.github.kotools.csv.assertNotEquals
 import io.github.kotools.csv.assertNotNull
 import io.github.kotools.csv.assertNull
+import io.github.kotools.csv.manager.comma
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking

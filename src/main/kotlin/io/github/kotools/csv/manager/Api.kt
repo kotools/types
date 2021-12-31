@@ -1,12 +1,7 @@
-package io.github.kotools.csv.deprecated
-
-import io.github.kotools.csv.manager.Separator
-import io.github.kotools.csv.manager.comma
-import io.github.kotools.csv.manager.csvFile
-import io.github.kotools.csv.manager.folder
+package io.github.kotools.csv.manager
 
 /** Configurable object responsible for manipulating CSV files. */
-public sealed interface Manager {
+public interface CsvManager {
     /**
      * **Required** property for targeting a file.
      *
@@ -33,12 +28,4 @@ public sealed interface Manager {
      * Set to [comma] by default.
      */
     public var separator: Separator
-}
-
-internal sealed class ManagerImplementation : Configurable, Manager {
-    override var file: String by csvFile()
-    override var folder: String by folder()
-    override var separator: Separator = comma
-
-    override fun isValid(): Boolean = file.isNotBlank()
 }

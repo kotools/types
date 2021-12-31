@@ -1,4 +1,4 @@
-package io.github.kotools.csv.deprecated
+package io.github.kotools.csv.manager
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
