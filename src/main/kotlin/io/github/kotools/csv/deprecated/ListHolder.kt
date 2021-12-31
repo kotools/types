@@ -1,4 +1,4 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.deprecated
 
 internal sealed class ListHolder<T : Any> : Configurable {
     val items: List<T> get() = mutableList

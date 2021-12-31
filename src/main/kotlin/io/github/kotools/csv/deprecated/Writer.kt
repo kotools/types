@@ -1,4 +1,4 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.deprecated
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred

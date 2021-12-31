@@ -1,4 +1,4 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.deprecated
 
 /** Configurable object responsible for manipulating CSV files. */
 public sealed interface Manager {

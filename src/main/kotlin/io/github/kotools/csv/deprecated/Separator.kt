@@ -1,4 +1,4 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.deprecated
 
 /** Returns the comma [separator][Separator] (`','`). */
 public val comma: Separator get() = Comma()

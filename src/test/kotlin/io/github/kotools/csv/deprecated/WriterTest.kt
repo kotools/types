@@ -1,5 +1,7 @@
-package io.github.kotools.csv
+package io.github.kotools.csv.deprecated
 
+import io.github.kotools.csv.assertNotNull
+import io.github.kotools.csv.assertNull
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Nested
 import kotlin.test.Test
