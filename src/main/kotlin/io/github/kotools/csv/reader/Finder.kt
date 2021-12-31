@@ -1,33 +1,31 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.csv.manager.ManagerConfiguration
+import io.github.kotools.csv.manager.CsvManager
 import java.io.File
 import java.io.InputStream
 import java.net.URL
 
 private val ClassLoader.baseUrl: URL? get() = getResource("")
+private val CsvManager.path: String get() = "$folder$file"
 
 private infix fun ClassLoader.getStream(path: String): InputStream? =
     getResourceAsStream(path)
 
-internal class Finder(private val configuration: ManagerConfiguration) {
+internal class Finder(private val manager: CsvManager) {
     private val loader: ClassLoader by lazy {
         ClassLoader.getSystemClassLoader()
     }
 
-    fun findOrNull(): FinderResult? {
-        val path = "${configuration.folder}${configuration.file}"
-        return streamOrNullOf(path) ?: fileOrNullOf(path)
-    }
+    fun findOrNull(): FinderResult? = streamOrNullOf() ?: fileOrNullOf()
 
-    private infix fun fileOrNullOf(path: String): FinderResult.File? = loader
-        .baseUrl?.let { File("${it.path}$path") }
+    private fun fileOrNullOf(): FinderResult.File? = loader.baseUrl
+        ?.let { File("${it.path}${manager.path}") }
         ?.takeIf(File::exists)
         ?.let(FinderResult::File)
 
-    private infix fun streamOrNullOf(path: String): FinderResult.Stream? =
-        loader.getStream(path)
-            ?.let(FinderResult::Stream)
+    private fun streamOrNullOf(): FinderResult.Stream? = loader
+        .getStream(manager.path)
+        ?.let(FinderResult::Stream)
 }
 
 internal sealed class FinderResult {
