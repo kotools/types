@@ -28,6 +28,10 @@ All notable changes to this project will be documented in this file.
 - Methods design for explicit error
   handling ([#24](https://github.com/kotools/csv-file/issues/24)).
 
+### Removed
+
+- Untyped functions ([#26](https://github.com/kotools/csv-file/issues/26)).
+
 ## Version 1.0.0 - 2021/12/16
 
 ### Added
