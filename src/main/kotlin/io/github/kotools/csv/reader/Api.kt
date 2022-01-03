@@ -23,7 +23,14 @@ public suspend fun <T : Any> csvReader(
     configuration: CsvReader.() -> Unit
 ): List<T> = withContext(IO) { TODO() }
 
-// TODO: Document
+/**
+ * Returns the file's records as a given type [T] according to the given
+ * [configuration].
+ * This method returns `null` when:
+ * - the type [T] is not a public or internal data class
+ * - the [configuration] is invalid
+ * - the targeted file doesn't exist.
+ */
 @Suppress("DEPRECATION")
 public suspend inline fun <reified T : Any> csvReaderOrNull(
     noinline configuration: CsvReader.() -> Unit
@@ -56,7 +63,14 @@ public fun <T : Any> CoroutineScope.csvReaderAsync(
     configuration: CsvReader.() -> Unit
 ): Deferred<List<T>> = async(IO) { TODO() }
 
-// TODO: Document
+/**
+ * Returns the file's records as a given type [T] **asynchronously** according
+ * to the given [configuration].
+ * This method returns `null` when:
+ * - the type [T] is not a public or internal data class
+ * - the [configuration] is invalid
+ * - the targeted file doesn't exist.
+ */
 @Suppress("DEPRECATION")
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
     noinline configuration: CsvReader.() -> Unit
