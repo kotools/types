@@ -7,11 +7,11 @@ import kotlin.test.Test
 class ReaderConfigurationTest {
     @Test
     fun `creation should pass`(): Unit = assertNotNull {
-        ReaderConfiguration.createOrNull { file = "test" }
+        ReaderConfiguration createOrNull { file = "test" }
     }
 
     @Test
     fun `creation should fail`(): Unit = assertNull {
-        ReaderConfiguration.createOrNull {}
+        ReaderConfiguration createOrNull {}
     }
 }
