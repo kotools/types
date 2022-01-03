@@ -1,15 +1,14 @@
 package io.github.kotools.csv.reader
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
-import io.github.kotools.csv.manager.Separator
 
 internal class Reader(
-    private val separator: Separator,
+    private val configuration: ReaderConfiguration,
     private val target: FinderResult
 ) {
     private val csv
         get() = csvReader {
-            delimiter = separator.value
+            delimiter = configuration.separator.value
             skipEmptyLine = true
         }
 

@@ -16,7 +16,7 @@ internal class ReaderProcessor<out T : Any>(
             ?: return@coroutineScope null
         val records: List<Map<String, String>> = Finder(readerConfiguration)
             .findOrNull()
-            ?.let { Reader(readerConfiguration.separator, it) }
+            ?.let { Reader(readerConfiguration, it) }
             ?.read()
             ?: return@coroutineScope null
         dataType.await()
