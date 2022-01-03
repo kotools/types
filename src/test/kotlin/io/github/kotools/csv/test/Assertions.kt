@@ -5,6 +5,10 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
+internal inline fun <T : Any?> assertNotNull(block: () -> T?) {
+    assertNotNull(block())
+}
+
 internal inline fun <T : Any?> assertNull(block: () -> T?): Unit =
     assertNull(block())
 
