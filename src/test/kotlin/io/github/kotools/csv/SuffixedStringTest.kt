@@ -1,7 +1,5 @@
-package io.github.kotools.csv.manager
+package io.github.kotools.csv
 
-import io.github.kotools.csv.test.assertEquals
-import io.github.kotools.csv.test.assertNotEquals
 import org.junit.jupiter.api.Nested
 import kotlin.test.Test
 

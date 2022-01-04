@@ -1,17 +1,17 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.csv.manager.CsvManager
+import io.github.kotools.csv.Manager
 import java.io.File
 import java.io.InputStream
 import java.net.URL
 
 private val ClassLoader.baseUrl: URL? get() = getResource("")
-private val CsvManager.path: String get() = "$folder$file"
+private val Manager.path: String get() = "$folder$file"
 
 private infix fun ClassLoader.getStream(path: String): InputStream? =
     getResourceAsStream(path)
 
-internal class Finder(private val manager: CsvManager) {
+internal class Finder(private val manager: Manager) {
     private val loader: ClassLoader by lazy {
         ClassLoader.getSystemClassLoader()
     }

@@ -1,7 +1,7 @@
 package io.github.kotools.csv.deprecated
 
-import io.github.kotools.csv.manager.Separator
-import io.github.kotools.csv.manager.SuffixedString
+import io.github.kotools.csv.Separator
+import io.github.kotools.csv.SuffixedString
 
 /** Configurable object responsible for manipulating CSV files. */
 public sealed interface Manager {

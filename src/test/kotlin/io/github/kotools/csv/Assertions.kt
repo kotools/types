@@ -1,4 +1,4 @@
-package io.github.kotools.csv.test
+package io.github.kotools.csv
 
 import kotlinx.coroutines.runBlocking
 import kotlin.test.assertEquals

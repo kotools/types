@@ -1,20 +1,20 @@
-package io.github.kotools.csv.manager
+package io.github.kotools.csv
 
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class CsvManagerTest {
+class ManagerTest {
     @Test
     fun `isValid should return true`(): Unit = assertTrue {
-        object : ManagerConfiguration() {}
+        object : ManagerImpl() {}
             .apply { file = "test" }
             .isValid()
     }
 
     @Test
     fun `isValid should return false`(): Unit = assertFalse {
-        object : ManagerConfiguration() {}
+        object : ManagerImpl() {}
             .isValid()
     }
 }

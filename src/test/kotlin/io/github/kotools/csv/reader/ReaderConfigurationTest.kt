@@ -1,7 +1,7 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.csv.test.assertNotNull
-import io.github.kotools.csv.test.assertNull
+import io.github.kotools.csv.assertNotNull
+import io.github.kotools.csv.assertNull
 import kotlin.test.Test
 
 class ReaderConfigurationTest {

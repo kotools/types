@@ -1,4 +1,4 @@
-package io.github.kotools.csv.manager
+package io.github.kotools.csv
 
 /** Representation of the character that separates values in a CSV file. */
 public sealed class Separator

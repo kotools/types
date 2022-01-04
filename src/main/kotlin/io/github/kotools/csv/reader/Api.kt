@@ -1,6 +1,6 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.csv.manager.CsvManager
+import io.github.kotools.csv.Manager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -59,4 +59,4 @@ public fun <T : Any> CoroutineScope.csvReaderOrNullAsync(
 }
 
 /** Configurable object responsible for reading a CSV file. */
-public sealed interface CsvReader : CsvManager
+public sealed interface CsvReader : Manager
