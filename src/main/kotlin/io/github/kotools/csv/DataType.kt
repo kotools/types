@@ -8,6 +8,9 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.starProjectedType
 
+internal fun <T : Any> KClass<T>.toDataType(): DataType<T> =
+    DataType create this
+
 internal fun <T : Any> KClass<T>.toDataTypeOrNull(): DataType<T>? =
     DataType createOrNull this
 
@@ -26,18 +29,28 @@ private infix fun String.toType(type: KType): Any = when (type) {
 @JvmInline
 internal value class DataType<out T : Any>
 private constructor(private val type: KClass<T>) {
-    infix fun createTypeOrNull(record: Map<String, String>): T? = try {
+    infix fun createType(record: Map<String, String>): T {
         val properties: Map<String, KProperty1<T, *>> =
             type.declaredMemberProperties.associateBy(KProperty1<T, *>::name)
         val arguments: Array<Any?> = record
             .map { properties[it.key]?.returnType?.let(it.value::toType) }
             .toTypedArray()
-        type.primaryConstructor?.call(*arguments)
+        return type.primaryConstructor!!.call(*arguments)
+    }
+
+    infix fun createTypeOrNull(record: Map<String, String>): T? = try {
+        createType(record)
     } catch (exception: Exception) {
         null
     }
 
     companion object {
+        infix fun <T : Any> create(type: KClass<T>): DataType<T> {
+            if (!type.isData) error("$type is not a data class")
+            if (!type.isInternal()) error("$type is not public or internal")
+            return DataType(type)
+        }
+
         infix fun <T : Any> createOrNull(type: KClass<T>): DataType<T>? = type
             .takeIf { it.isData && it.isInternal() }
             ?.let(::DataType)

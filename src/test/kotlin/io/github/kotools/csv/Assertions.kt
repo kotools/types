@@ -2,9 +2,16 @@ package io.github.kotools.csv
 
 import kotlinx.coroutines.runBlocking
 import kotlin.test.assertEquals
+import kotlin.test.assertFails
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+
+internal fun <T : Any> assertFails(block: suspend () -> T) {
+    assertFails {
+        runBlocking { block() }
+    }
+}
 
 internal fun <T : Any?> assertNotNull(block: suspend () -> T?): Unit =
     runBlocking { assertNotNull(block()) }

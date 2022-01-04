@@ -8,6 +8,9 @@ private val loader: ClassLoader get() = ClassLoader.getSystemClassLoader()
 private val ClassLoader.baseUrl: URL? get() = getResource("")
 private val Manager.path: String get() = "$folder$file"
 
+internal fun Manager.finder(): FinderResult =
+    finderOrNull() ?: error("$path doesn't exist")
+
 internal fun Manager.finderOrNull(): FinderResult? =
     findFileOrNull() ?: findStreamOrNull()
 

@@ -1,5 +1,7 @@
 package io.github.kotools.csv
 
+internal fun Manager.isValid(): Boolean = file.isNotBlank()
+
 /** Configurable object responsible for manipulating CSV files. */
 public sealed interface Manager {
     /**
