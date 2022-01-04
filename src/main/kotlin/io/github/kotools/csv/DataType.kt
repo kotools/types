@@ -27,8 +27,12 @@ private infix fun String.toType(type: KType): Any = when (type) {
 }
 
 @JvmInline
-internal value class DataType<out T : Any>
+internal value class DataType<T : Any>
 private constructor(private val type: KClass<T>) {
+    // TODO: Test
+    val properties: List<String>
+        get() = type.declaredMemberProperties.map(KProperty1<T, *>::name)
+
     infix fun createType(record: Map<String, String>): T {
         val properties: Map<String, KProperty1<T, *>> =
             type.declaredMemberProperties.associateBy(KProperty1<T, *>::name)
@@ -43,6 +47,10 @@ private constructor(private val type: KClass<T>) {
     } catch (exception: Exception) {
         null
     }
+
+    // TODO: Test
+    infix fun getValuesOf(item: T): List<String> =
+        type.declaredMemberProperties.mapNotNull { it.get(item)?.toString() }
 
     companion object {
         infix fun <T : Any> create(type: KClass<T>): DataType<T> {
