@@ -8,8 +8,8 @@ private val loader: ClassLoader get() = ClassLoader.getSystemClassLoader()
 private val ClassLoader.baseUrl: URL? get() = getResource("")
 private val Manager.path: String get() = "$folder$file"
 
-internal inline fun findOrNull(block: () -> Manager): FinderResult? = block()
-    .run { findFileOrNull() ?: findStreamOrNull() }
+internal fun Manager.finderOrNull(): FinderResult? =
+    findFileOrNull() ?: findStreamOrNull()
 
 private infix fun ClassLoader.getStream(path: String): InputStream? =
     getResourceAsStream(path)

@@ -34,6 +34,4 @@ internal sealed class ManagerImplementation : Manager {
     override var file: String by SuffixedString.csvFile()
     override var folder: String by SuffixedString.folder()
     override var separator: Separator = Separator.Comma
-
-    fun isValid(): Boolean = file.isNotBlank()
 }
