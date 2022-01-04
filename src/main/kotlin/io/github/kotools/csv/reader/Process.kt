@@ -7,6 +7,7 @@ import io.github.kotools.csv.common.ManagerImplementation
 import io.github.kotools.csv.common.Target
 import io.github.kotools.csv.common.filePath
 import io.github.kotools.csv.common.findTarget
+import io.github.kotools.csv.common.invalidConfigurationError
 import io.github.kotools.csv.common.toDataType
 import kotlin.reflect.KClass
 
@@ -22,9 +23,9 @@ internal infix fun <T : Any> KClass<T>.processReader(
     val dataType: DataType<T> = toDataType()
     val reader: Reader = ReaderImplementation()
         .apply(configuration)
-    if (!reader.isValid()) error("Given configuration is invalid")
-    val target: Target = findTarget(reader.filePath)
-    return reader.read(target)
+    if (!reader.isValid()) invalidConfigurationError()
+    return findTarget(reader.filePath)
+        .let(reader::read)
         .map(dataType::createType)
 }
 

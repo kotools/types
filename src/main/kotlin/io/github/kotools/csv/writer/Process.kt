@@ -9,6 +9,7 @@ import io.github.kotools.csv.common.Target
 import io.github.kotools.csv.common.createTarget
 import io.github.kotools.csv.common.filePath
 import io.github.kotools.csv.common.findTargetOrNull
+import io.github.kotools.csv.common.invalidConfigurationError
 import io.github.kotools.csv.common.toDataType
 import java.io.File
 import kotlin.reflect.KClass
@@ -22,7 +23,7 @@ internal infix fun <T : Any> KClass<T>.processWriter(
     val dataType: DataType<T> = toDataType()
     val writer: WriterImplementation<T> = WriterImplementation<T>()
         .apply(configuration)
-    if (!writer.isValid()) error("Given configuration is invalid")
+    if (!writer.isValid()) invalidConfigurationError()
     val target: Target =
         findTargetOrNull(writer.filePath) ?: writer.createTarget()
     val file: File = if (target is Target.File) target.file else return

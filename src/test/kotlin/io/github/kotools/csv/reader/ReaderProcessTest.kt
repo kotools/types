@@ -1,12 +1,14 @@
 package io.github.kotools.csv.reader
 
+import io.github.kotools.csv.test.ClassTypeExample
+import io.github.kotools.csv.test.TypeExample
+import io.github.kotools.csv.test.assertFails
 import io.github.kotools.csv.test.assertNotEquals
 import io.github.kotools.csv.test.assertNotNull
 import io.github.kotools.csv.test.assertNull
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
-import kotlin.test.assertFails
 
 class ReaderProcessTest {
     private val configuration: Reader.() -> Unit by lazy {
@@ -25,22 +27,17 @@ class ReaderProcessTest {
         }
 
         @Test
-        fun `should fail with blank file`() {
-            assertFails {
-                TypeExample::class processReader {}
-            }
+        fun `should fail with blank file`(): Unit = assertFails {
+            TypeExample::class processReader {}
         }
 
         @Test
-        fun `should fail with non data class type`() {
+        fun `should fail with non data class type`(): Unit =
             assertFails { ClassTypeExample::class processReader configuration }
-        }
 
         @Test
-        fun `should fail with private type`() {
-            assertFails {
-                PrivateTypeExample::class processReader configuration
-            }
+        fun `should fail with private type`(): Unit = assertFails {
+            PrivateTypeExample::class processReader configuration
         }
     }
 
@@ -66,14 +63,6 @@ class ReaderProcessTest {
             PrivateTypeExample::class processReaderOrNull configuration
         }
     }
-
-    class ClassTypeExample
-
-    data class TypeExample(
-        val first: String,
-        val second: Int,
-        val third: Boolean
-    )
 
     private data class PrivateTypeExample(val a: String)
 }

@@ -39,7 +39,10 @@ private constructor(private val type: KClass<T>) {
     }
 
     infix fun getValuesOf(item: T): List<String> =
-        type.declaredMemberProperties.mapNotNull { it.get(item)?.toString() }
+        type.declaredMemberProperties.mapNotNull {
+            it.get(item)
+                ?.toString()
+        }
 
     companion object {
         infix fun <T : Any> create(type: KClass<T>): DataType<T> {

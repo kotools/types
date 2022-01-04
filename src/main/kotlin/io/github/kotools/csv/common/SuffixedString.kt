@@ -16,9 +16,9 @@ private class SuffixedString<in T : Manager>(private val suffix: String) :
     override fun getValue(thisRef: T, property: KProperty<*>): String = value
 
     override fun setValue(thisRef: T, property: KProperty<*>, value: String) {
-        if (value.isBlank()) return
-        val nextValue: String = if (value.endsWith(suffix)) value
-        else "$value$suffix"
-        if (this.value != nextValue) this.value = nextValue
+        value.takeIf(String::isNotBlank)
+            ?.let { if (it.endsWith(suffix)) it else "$it$suffix" }
+            ?.takeIf { this.value != it }
+            ?.let { this.value = it }
     }
 }
