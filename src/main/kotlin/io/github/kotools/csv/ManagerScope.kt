@@ -1,9 +1,9 @@
 package io.github.kotools.csv
 
-internal fun Manager.isValid(): Boolean = file.isNotBlank()
+internal fun ManagerScope.isValid(): Boolean = file.isNotBlank()
 
-/** Configurable object responsible for manipulating CSV files. */
-public sealed interface Manager {
+/** Scope for manipulating CSV files. */
+public sealed interface ManagerScope {
     /**
      * **Required** property for targeting a file.
      *
@@ -32,7 +32,7 @@ public sealed interface Manager {
     public var separator: Separator
 }
 
-internal sealed class ManagerImplementation : Manager {
+internal sealed class Manager : ManagerScope {
     override var file: String by SuffixedString.csvFile()
     override var folder: String by SuffixedString.folder()
     override var separator: Separator = Separator.Comma

@@ -14,10 +14,10 @@ import kotlin.io.path.createDirectory
 import kotlin.io.path.notExists
 import kotlin.reflect.KClass
 
-private val Manager.csv: CsvWriter
+private val ManagerScope.csv: CsvWriter
     get() = csvWriter { delimiter = separator.value }
 
-private val <T : Any> Writer<T>.newTargetOrNull: FileTarget?
+private val <T : Any> WriterScope<T>.newTargetOrNull: FileTarget?
     get() = loader.baseUrlOrNull
         ?.let { Path("${it.path}$folder") }
         ?.also { if (it.notExists()) createDirectoryAt(it) }
@@ -26,19 +26,19 @@ private val <T : Any> Writer<T>.newTargetOrNull: FileTarget?
 
 // TODO: Test and document
 public suspend inline fun <reified T : Any> csvWriterOrNull(
-    noinline configuration: Writer<T>.() -> Unit
+    noinline configuration: WriterScope<T>.() -> Unit
 ): Unit? = csvWriterOrNull(T::class, configuration)
 
 // TODO: Document
 public suspend fun <T : Any> csvWriterOrNull(
     type: KClass<T>,
-    configuration: Writer<T>.() -> Unit
+    configuration: WriterScope<T>.() -> Unit
 ): Unit? = withContext(IO) {
     val dataType: DataType<T> =
         type.toDataTypeOrNull() ?: return@withContext null
-    val writer: WriterImplementation<T> = WriterImplementation<T>()
+    val writer: Writer<T> = Writer<T>()
         .apply(configuration)
-        .takeIf(WriterImplementation<T>::isValid)
+        .takeIf(Writer<T>::isValid)
         ?: return@withContext null
     val file: File = writer.run { targetOrNull ?: newTargetOrNull }
         ?.let { if (it is FileTarget.File) it.file else null }
@@ -52,30 +52,30 @@ public suspend fun <T : Any> csvWriterOrNull(
 
 // TODO: Document
 public inline infix fun <reified T : Any> CoroutineScope.csvWriterOrNullAsync(
-    noinline configuration: Writer<T>.() -> Unit
+    noinline configuration: WriterScope<T>.() -> Unit
 ): Deferred<Unit?> = async { csvWriterOrNull(configuration) }
 
-private infix fun <T : Any> Writer<T>.createDirectoryAt(path: Path) {
+private infix fun <T : Any> WriterScope<T>.createDirectoryAt(path: Path) {
     path.createDirectory()
     overwrite = true
 }
 
 // TODO: Document
-public sealed interface Records<in T : Any> {
+public sealed interface RecordsScope<in T : Any> {
     // TODO: Document
     public operator fun T.unaryPlus()
 }
 
 // TODO: Document
-public sealed interface Writer<in T : Any> : Manager {
+public sealed interface WriterScope<in T : Any> : ManagerScope {
     // TODO: Document
     public var overwrite: Boolean
 
     // TODO: Document
-    public infix fun records(configuration: Records<T>.() -> Unit)
+    public infix fun records(configuration: RecordsScope<T>.() -> Unit)
 }
 
-private class RecordsImplementation<T : Any> : Records<T> {
+private class RecordsHolder<T : Any> : RecordsScope<T> {
     val items: List<T> get() = mutableRecords
     private val mutableRecords: MutableList<T> = mutableListOf()
 
@@ -86,18 +86,17 @@ private class RecordsImplementation<T : Any> : Records<T> {
     }
 }
 
-private class WriterImplementation<T : Any> : ManagerImplementation(),
-    Writer<T> {
+private class Writer<T : Any> : Manager(), WriterScope<T> {
     val records: List<T> get() = recordsHolder!!.items
 
     override var overwrite: Boolean = true
-    private var recordsHolder: RecordsImplementation<T>? = null
+    private var recordsHolder: RecordsHolder<T>? = null
 
     fun isValid(): Boolean = file.isNotBlank() && recordsHolder != null
 
-    override fun records(configuration: Records<T>.() -> Unit) {
-        recordsHolder = RecordsImplementation<T>()
+    override fun records(configuration: RecordsScope<T>.() -> Unit) {
+        recordsHolder = RecordsHolder<T>()
             .apply(configuration)
-            .takeIf(RecordsImplementation<T>::isValid)
+            .takeIf(RecordsHolder<T>::isValid)
     }
 }

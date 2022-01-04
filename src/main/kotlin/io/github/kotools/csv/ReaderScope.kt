@@ -9,7 +9,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import kotlin.reflect.KClass
 
-private val Manager.csv: CsvReader
+private val ManagerScope.csv: CsvReader
     get() = csvReader {
         delimiter = separator.value
         skipEmptyLine = true
@@ -23,7 +23,7 @@ private val Manager.csv: CsvReader
  * - the targeted file doesn't exist.
  */
 public suspend inline fun <reified T : Any> csvReader(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: ReaderScope.() -> Unit
 ): List<T> = csvReader(T::class, configuration)
 
 /**
@@ -35,10 +35,10 @@ public suspend inline fun <reified T : Any> csvReader(
  */
 public suspend fun <T : Any> csvReader(
     type: KClass<T>,
-    configuration: Reader.() -> Unit
+    configuration: ReaderScope.() -> Unit
 ): List<T> = withContext(IO) {
     val dataType: DataType<T> = type.toDataType()
-    val reader = ReaderImplementation(configuration)
+    val reader = Reader(configuration)
     if (!reader.isValid()) error("Given configuration is invalid")
     reader.run { target readWith csv }
         .map(dataType::createType)
@@ -52,7 +52,7 @@ public suspend fun <T : Any> csvReader(
  * - the targeted file doesn't exist.
  */
 public suspend inline fun <reified T : Any> csvReaderOrNull(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: ReaderScope.() -> Unit
 ): List<T>? = csvReaderOrNull(T::class, configuration)
 
 /**
@@ -64,12 +64,12 @@ public suspend inline fun <reified T : Any> csvReaderOrNull(
  */
 public suspend fun <T : Any> csvReaderOrNull(
     type: KClass<T>,
-    configuration: Reader.() -> Unit
+    configuration: ReaderScope.() -> Unit
 ): List<T>? = withContext(IO) {
     val dataType: DataType<T> =
         type.toDataTypeOrNull() ?: return@withContext null
-    ReaderImplementation(configuration)
-        .takeIf(ReaderImplementation::isValid)
+    Reader(configuration)
+        .takeIf(Reader::isValid)
         ?.run { targetOrNull?.readWith(csv) }
         ?.mapNotNull(dataType::createTypeOrNull)
 }
@@ -82,7 +82,7 @@ public suspend fun <T : Any> csvReaderOrNull(
  * - the targeted file doesn't exist.
  */
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: ReaderScope.() -> Unit
 ): Deferred<List<T>> = async { csvReader(configuration) }
 
 /**
@@ -93,7 +93,7 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
  * - the targeted file doesn't exist.
  */
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: ReaderScope.() -> Unit
 ): Deferred<List<T>?> = async { csvReaderOrNull(configuration) }
 
 private infix fun FileTarget.readWith(csv: CsvReader):
@@ -102,12 +102,12 @@ private infix fun FileTarget.readWith(csv: CsvReader):
     is FileTarget.Stream -> csv.readAllWithHeader(stream)
 }
 
-/** Configurable object responsible for reading a CSV file. */
-public sealed interface Reader : Manager
+/** Scope for reading a CSV file. */
+public sealed interface ReaderScope : ManagerScope
 
-private class ReaderImplementation(configuration: Reader.() -> Unit) :
-    ManagerImplementation(),
-    Reader {
+private class Reader(configuration: ReaderScope.() -> Unit) :
+    Manager(),
+    ReaderScope {
     init {
         apply(configuration)
     }

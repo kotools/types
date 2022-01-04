@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Nested
 import kotlin.test.Test
 
 class ReaderTest {
-    private val configuration: Reader.() -> Unit by lazy {
+    private val configuration: ReaderScope.() -> Unit by lazy {
         {
             file = "test"
             folder = "folder"
