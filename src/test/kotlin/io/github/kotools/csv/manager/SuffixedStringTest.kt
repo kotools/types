@@ -16,28 +16,28 @@ class SuffixedStringTest {
         private var file: String by SuffixedString.csvFile()
 
         @Test
-        fun `should set with non-suffixed value`() {
+        fun `should set with a non-suffixed value`() {
             val value = "test1"
             file = value
             file assertEquals "$value$FILE_SUFFIX"
         }
 
         @Test
-        fun `should set with suffixed value`() {
+        fun `should set with a suffixed value`() {
             val value = "test2$FILE_SUFFIX"
             file = value
             file assertEquals value
         }
 
         @Test
-        fun `shouldn't set with blank value`() {
+        fun `shouldn't set with a blank value`() {
             val value = " "
             file = value
             file assertNotEquals value
         }
 
         @Test
-        fun `shouldn't set with same value`() {
+        fun `shouldn't set with the same value`() {
             val value = "test3"
             file = value
             val suffixedValue = "$value$FILE_SUFFIX"
@@ -51,28 +51,28 @@ class SuffixedStringTest {
         private var folder: String by SuffixedString.folder()
 
         @Test
-        fun `should set with non-suffixed value`() {
+        fun `should set with a non-suffixed value`() {
             val value = "test1"
             folder = value
             folder assertEquals "$value$FOLDER_SUFFIX"
         }
 
         @Test
-        fun `should set with suffixed value`() {
+        fun `should set with a suffixed value`() {
             val value = "test2$FOLDER_SUFFIX"
             folder = value
             folder assertEquals value
         }
 
         @Test
-        fun `shouldn't set with blank value`() {
+        fun `shouldn't set with a blank value`() {
             val value = " "
             folder = value
             folder assertNotEquals value
         }
 
         @Test
-        fun `shouldn't set with same value`() {
+        fun `shouldn't set with the same value`() {
             val value = "test3"
             folder = value
             val suffixedValue = "$value$FOLDER_SUFFIX"

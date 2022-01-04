@@ -3,25 +3,10 @@ package io.github.kotools.csv.reader
 import io.github.kotools.csv.manager.CsvManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import kotlin.reflect.KClass
-
-// TODO: Document
-@Suppress("DEPRECATION")
-public suspend inline fun <reified T : Any> csvReader(
-    noinline configuration: CsvReader.() -> Unit
-): List<T> = csvReader(T::class, configuration)
-
-@Deprecated(
-    message = "Use the `csvReader<T> {}` method instead.",
-    ReplaceWith("csvReader<T> {}"),
-)
-public suspend fun <T : Any> csvReader(
-    type: KClass<T>,
-    configuration: CsvReader.() -> Unit
-): List<T> = withContext(IO) { TODO() }
 
 /**
  * Returns the file's records as a given type [T] according to the given
@@ -43,25 +28,10 @@ public suspend inline fun <reified T : Any> csvReaderOrNull(
 public suspend fun <T : Any> csvReaderOrNull(
     type: KClass<T>,
     configuration: CsvReader.() -> Unit
-): List<T>? = withContext(IO) {
+): List<T>? = withContext(Dispatchers.Default) {
     ReaderProcessor(type, configuration)
         .processOrNull()
 }
-
-// TODO: Document
-@Suppress("DEPRECATION")
-public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
-    noinline configuration: CsvReader.() -> Unit
-): Deferred<List<T>> = csvReaderAsync(T::class, configuration)
-
-@Deprecated(
-    message = "Use the `csvReaderAsync<T> {}` method instead.",
-    ReplaceWith("csvReaderAsync<T> {}")
-)
-public fun <T : Any> CoroutineScope.csvReaderAsync(
-    type: KClass<T>,
-    configuration: CsvReader.() -> Unit
-): Deferred<List<T>> = async(IO) { TODO() }
 
 /**
  * Returns the file's records as a given type [T] **asynchronously** according
@@ -83,7 +53,7 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
 public fun <T : Any> CoroutineScope.csvReaderOrNullAsync(
     type: KClass<T>,
     configuration: CsvReader.() -> Unit
-): Deferred<List<T>?> = async(IO) {
+): Deferred<List<T>?> = async(Dispatchers.Default) {
     ReaderProcessor(type, configuration)
         .processOrNull()
 }
