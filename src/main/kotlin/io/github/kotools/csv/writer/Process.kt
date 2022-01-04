@@ -2,14 +2,14 @@ package io.github.kotools.csv.writer
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import io.github.kotools.csv.DataType
+import io.github.kotools.csv.common.DataType
 import io.github.kotools.csv.common.ListHolder
 import io.github.kotools.csv.common.ManagerImplementation
 import io.github.kotools.csv.common.Target
 import io.github.kotools.csv.common.createTarget
 import io.github.kotools.csv.common.filePath
 import io.github.kotools.csv.common.findTargetOrNull
-import io.github.kotools.csv.toDataType
+import io.github.kotools.csv.common.toDataType
 import java.io.File
 import kotlin.reflect.KClass
 
