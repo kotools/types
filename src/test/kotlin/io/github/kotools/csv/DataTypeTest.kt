@@ -1,6 +1,8 @@
 package io.github.kotools.csv
 
 import org.junit.jupiter.api.Nested
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.declaredMemberProperties
 import kotlin.test.Test
 
 class DataTypeTest {
@@ -34,6 +36,23 @@ class DataTypeTest {
         @Test
         fun `should fail with a record that doesn't match the type`(): Unit =
             assertNull { dataType createTypeOrNull emptyMap() }
+    }
+
+    @Nested
+    inner class GetValuesOf {
+        @Test
+        fun `should pass`(): Unit = DataType.create(TypeExample::class)
+            .getValuesOf(TypeExample("a", 1, true))
+            .assertEquals(listOf("a", "1", "true"))
+    }
+
+    @Nested
+    inner class Properties {
+        @Test
+        fun `should pass`(): Unit = TypeExample::class.run {
+            declaredMemberProperties.map(KProperty1<TypeExample, *>::name)
+                .assertEquals(DataType.create(this).properties)
+        }
     }
 
     class ClassTypeExample
