@@ -1,5 +1,7 @@
 package io.github.kotools.csv
 
+internal val ManagerScope.filePath: String get() = "$folder$file"
+
 internal fun ManagerScope.isValid(): Boolean = file.isNotBlank()
 
 /** Scope for manipulating CSV files. */

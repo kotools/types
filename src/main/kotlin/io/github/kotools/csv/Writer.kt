@@ -17,12 +17,13 @@ import kotlin.reflect.KClass
 private val ManagerScope.csv: CsvWriter
     get() = csvWriter { delimiter = separator.value }
 
-private val <T : Any> WriterScope<T>.newTargetOrNull: FileTarget?
-    get() = loader.baseUrlOrNull
+private val <T : Any> WriterScope<T>.newTargetOrNull: Target?
+    get() = ClassLoader.getSystemClassLoader()
+        .getResource("")
         ?.let { Path("${it.path}$folder") }
         ?.also { if (it.notExists()) createDirectoryAt(it) }
         ?.let { File("$it/$file") }
-        ?.let(FileTarget::File)
+        ?.let(Target::File)
 
 // TODO: Test and document
 public suspend inline fun <reified T : Any> csvWriterOrNull(
@@ -40,8 +41,9 @@ public suspend fun <T : Any> csvWriterOrNull(
         .apply(configuration)
         .takeIf(Writer<T>::isValid)
         ?: return@withContext null
-    val file: File = writer.run { targetOrNull ?: newTargetOrNull }
-        ?.let { if (it is FileTarget.File) it.file else null }
+    val file: File = writer
+        .run { Finder.findOrNull(filePath) ?: newTargetOrNull }
+        ?.let { if (it is Target.File) it.file else null }
         ?: return@withContext null
     val records: MutableList<List<String>> =
         if (writer.overwrite) mutableListOf(dataType.properties)

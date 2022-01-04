@@ -40,7 +40,8 @@ public suspend fun <T : Any> csvReader(
     val dataType: DataType<T> = type.toDataType()
     val reader = Reader(configuration)
     if (!reader.isValid()) error("Given configuration is invalid")
-    reader.run { target readWith csv }
+    Finder.find(reader.filePath)
+        .readWith(reader.csv)
         .map(dataType::createType)
 }
 
@@ -68,9 +69,11 @@ public suspend fun <T : Any> csvReaderOrNull(
 ): List<T>? = withContext(IO) {
     val dataType: DataType<T> =
         type.toDataTypeOrNull() ?: return@withContext null
-    Reader(configuration)
+    val reader: Reader = Reader(configuration)
         .takeIf(Reader::isValid)
-        ?.run { targetOrNull?.readWith(csv) }
+        ?: return@withContext null
+    Finder.findOrNull(reader.filePath)
+        ?.readWith(reader.csv)
         ?.mapNotNull(dataType::createTypeOrNull)
 }
 
@@ -96,11 +99,11 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
     noinline configuration: ReaderScope.() -> Unit
 ): Deferred<List<T>?> = async { csvReaderOrNull(configuration) }
 
-private infix fun FileTarget.readWith(csv: CsvReader):
-        List<Map<String, String>> = when (this) {
-    is FileTarget.File -> csv.readAllWithHeader(file)
-    is FileTarget.Stream -> csv.readAllWithHeader(stream)
-}
+private infix fun Target.readWith(csv: CsvReader): List<Map<String, String>> =
+    when (this) {
+        is Target.File -> csv.readAllWithHeader(file)
+        is Target.Stream -> csv.readAllWithHeader(stream)
+    }
 
 /** Scope for reading a CSV file. */
 public sealed interface ReaderScope : ManagerScope
