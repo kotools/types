@@ -20,17 +20,6 @@ public suspend inline fun <reified T : Any> csvReader(
 ): List<T> = csvReader(T::class, configuration)
 
 /**
- * Returns the file's records as a given type [T] according to the given
- * [configuration] or returns `null` when:
- * - the type [T] is not a public or internal data class
- * - the [configuration] is invalid
- * - the targeted file doesn't exist.
- */
-public suspend inline fun <reified T : Any> csvReaderOrNull(
-    noinline configuration: Reader.() -> Unit
-): List<T>? = csvReaderOrNull(T::class, configuration)
-
-/**
  * Returns the file's records as a given [type] according to the given
  * [configuration] or throws an [IllegalStateException] when:
  * - the [type] is not a public or internal data class
@@ -41,6 +30,17 @@ public suspend fun <T : Any> csvReader(
     type: KClass<T>,
     configuration: Reader.() -> Unit
 ): List<T> = withContext(IO) { type processReader configuration }
+
+/**
+ * Returns the file's records as a given type [T] according to the given
+ * [configuration] or returns `null` when:
+ * - the type [T] is not a public or internal data class
+ * - the [configuration] is invalid
+ * - the targeted file doesn't exist.
+ */
+public suspend inline fun <reified T : Any> csvReaderOrNull(
+    noinline configuration: Reader.() -> Unit
+): List<T>? = csvReaderOrNull(T::class, configuration)
 
 /**
  * Returns the file's records as a given [type] according to the given

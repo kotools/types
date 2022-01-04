@@ -1,5 +1,7 @@
 package io.github.kotools.csv.common
 
+internal val Manager.filePath: String get() = "$folder$file"
+
 /** Scope for manipulating CSV files. */
 public interface Manager {
     /**

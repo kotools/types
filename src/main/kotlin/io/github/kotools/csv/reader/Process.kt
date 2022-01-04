@@ -5,6 +5,7 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import io.github.kotools.csv.common.DataType
 import io.github.kotools.csv.common.ManagerImplementation
 import io.github.kotools.csv.common.Target
+import io.github.kotools.csv.common.filePath
 import io.github.kotools.csv.common.findTarget
 import io.github.kotools.csv.common.toDataType
 import kotlin.reflect.KClass
@@ -14,7 +15,6 @@ private val Reader.csv: CsvReader
         delimiter = separator.value
         skipEmptyLine = true
     }
-private val Reader.filePath: String get() = "$folder$file"
 
 internal infix fun <T : Any> KClass<T>.processReader(
     configuration: Reader.() -> Unit
