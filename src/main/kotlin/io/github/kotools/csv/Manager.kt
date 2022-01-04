@@ -1,8 +1,7 @@
 package io.github.kotools.csv
 
-// TODO: Seal it when possible
 /** Configurable object responsible for manipulating CSV files. */
-public interface Manager {
+public sealed interface Manager {
     /**
      * **Required** property for targeting a file.
      *
@@ -31,8 +30,7 @@ public interface Manager {
     public var separator: Separator
 }
 
-// TODO: Seal it when possible
-internal abstract class ManagerImpl : Manager {
+internal sealed class ManagerImplementation : Manager {
     override var file: String by SuffixedString.csvFile()
     override var folder: String by SuffixedString.folder()
     override var separator: Separator = Separator.Comma

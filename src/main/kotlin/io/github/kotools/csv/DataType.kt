@@ -1,4 +1,4 @@
-package io.github.kotools.csv.reader
+package io.github.kotools.csv
 
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
