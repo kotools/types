@@ -11,10 +11,10 @@ data class Person(val name: String, val age: Int, val isAdmin: Boolean = false)
 
 suspend fun main() {
   csvWriter<Person> {
-    file = "persons"
+    file = "people"
     records { +Person("Nobody", 25) }
   }
-  val people: List<Person> = csvReader { file = "persons" }
+  val people: List<Person> = csvReader { file = "people" }
   println(people)
 }
 ```
