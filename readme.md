@@ -7,13 +7,15 @@ Kotools CSV is a lightweight library for managing CSV files with
 elegant [Kotlin] DSLs.
 
 ```kotlin
-fun main(): Unit = runBlocking {
-    csvWriter {
-        file = "my-new-file"
-        header = setOf("h1", "h2", "h3")
-        rows { +listOf("a", "b", "c") }
-    }
-    csvReader { file = "my-new-file" }
+data class Person(val name: String, val age: Int, val isAdmin: Boolean = false)
+
+suspend fun main() {
+  csvWriter<Person> {
+    file = "persons"
+    records { +Person("Nobody", 25) }
+  }
+  val people: List<Person> = csvReader { file = "persons" }
+  println(people)
 }
 ```
 
@@ -21,11 +23,20 @@ fun main(): Unit = runBlocking {
 
 ### Lightweight
 
-Kotools CSV just ship what you need for manipulating CSV files, and has only 2
-dependencies:
+Kotools CSV just ship with what you need for manipulating CSV files, and has
+only 3 direct dependencies:
+- [doyaaaaaken/kotlin-csv][kotlin-csv] for reading and writing in CSV files
+- [kotlin-reflect] for parsing custom types to or from CSV records
 - [Kotlin/kotlinx.coroutines][kotlin-coroutines] for running processes
-  asynchronously on [IO dispatcher][kotlin-coroutines-io]
-- [doyaaaaaken/kotlin-csv][kotlin-csv] for parsing CSV files.
+  asynchronously on [IO dispatcher][kotlin-coroutines-io].
+
+### Explicit error handling
+
+Kotools CSV lets you choose explicitly how to handle errors following
+the [Kotlin Standard Library][kotlin-stdlib]'s design: if something goes wrong,
+functions suffixed by `OrNull` will return `null` and other functions will throw
+an `IllegalStateException`. With this explicit design, you can orchestrate
+easily your application state in production.
 
 ### Simply elegant
 
@@ -35,13 +46,6 @@ your code, instead of trying to guess what is _the good way_
 to retrieve a file from resources or a file only present at runtime. Simplicity
 is key.
 
-### Explicit error handling
-
-Kotools CSV lets you choose explicitly how to handle errors: regular processes
-return `null` and strict processes throw an exception if something goes wrong.
-This design facilitates the orchestration of your application state in
-production.
-
 ## Installation
 
 ### Gradle
@@ -49,13 +53,13 @@ production.
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:csv:1.0.0")
+implementation("io.github.kotools:csv:2.0.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:csv:1.0.0'
+implementation 'io.github.kotools:csv:2.0.0'
 ```
 
 ### Maven
@@ -64,7 +68,7 @@ implementation 'io.github.kotools:csv:1.0.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>csv</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
@@ -93,6 +97,8 @@ This project is licensed under the [MIT License][mit-license].
 [kotlin-coroutines]: https://github.com/Kotlin/kotlinx.coroutines
 [kotlin-coroutines-io]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-i-o.html
 [kotlin-csv]: https://github.com/doyaaaaaken/kotlin-csv
+[kotlin-reflect]: https://kotlinlang.org/docs/reflection.html
+[kotlin-stdlib]: https://kotlinlang.org/api/latest/jvm/stdlib
 [maven-artifacts]: https://search.maven.org/artifact/io.github.kotools/csv
 [mit-license]: https://choosealicense.com/licenses/mit
 [pull-requests]: https://github.com/kotools/csv/pulls
