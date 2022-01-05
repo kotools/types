@@ -28,7 +28,7 @@ internal infix fun <T : Any> KClass<T>.processWriter(
         findTargetOrNull(writer.filePath) ?: writer.createTarget()
     val file: File = if (target is Target.File) target.file else return
     val records: MutableList<List<String>> =
-        if (writer.overwrite) mutableListOf(dataType.properties)
+        if (writer.overwrite) mutableListOf(dataType.constructorParameters)
         else mutableListOf()
     records += writer.records.map(dataType::getValuesOf)
     writer.csv.writeAll(records, file, !writer.overwrite)
