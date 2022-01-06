@@ -12,7 +12,7 @@ plugins {
 group = "io.github.kotools"
 version = "2.1.0-SNAPSHOT"
 
-repositories { mavenCentral() }
+repositories(RepositoryHandler::mavenCentral)
 
 dependencies {
     implementation(platform(kotlin("bom")))
