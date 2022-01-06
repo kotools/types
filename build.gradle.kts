@@ -15,12 +15,14 @@ version = "2.1.0-SNAPSHOT"
 repositories(RepositoryHandler::mavenCentral)
 
 dependencies {
+    // Kotlin
     implementation(platform(kotlin("bom")))
     implementation(kotlin("reflect"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
-
     testImplementation(kotlin("test"))
+
+    // CSV
+    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
     testRuntimeOnly("org.slf4j:slf4j-simple:1.7.32")
 }
 
