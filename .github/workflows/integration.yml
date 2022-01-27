@@ -1,10 +1,10 @@
-name: Continuous Integration
+name: Integration
 on:
   pull_request:
     branches: [ master ]
     paths: [ '*.kts', '*gradle*', .github/workflows/*, src/** ]
   push:
-    branches: [ master ]
+    branches-ignore: [ master ]
     paths: [ '*.kts', '*gradle*', .github/workflows/*, src/** ]
 jobs:
   test:

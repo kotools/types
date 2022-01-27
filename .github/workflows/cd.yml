@@ -1,7 +1,7 @@
 name: Continuous Delivery
 on:
   workflow_run:
-    workflows: [ Continuous Integration ]
+    workflows: [ Integration ]
     types: [ completed ]
 jobs:
   deliver:
