@@ -23,7 +23,7 @@ dependencies {
 
     // CSV
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
-    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.32")
+    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.33")
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict
