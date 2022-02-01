@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
 
 - Paginated CSV file's reading as a given
   type ([#13](https://github.com/kotools/csv-file/issues/13)).
+- Filtered CSV file's reading as a given
+  type ([#35](https://github.com/kotools/csv-file/issues/35)).
 
 ## Version 2.0.1 - 2022/02/01
 
