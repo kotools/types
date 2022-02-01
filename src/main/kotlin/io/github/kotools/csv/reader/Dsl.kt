@@ -77,4 +77,25 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
 ): Deferred<List<T>?> = async { csvReaderOrNull(configuration) }
 
 /** Scope for reading a CSV file. */
-public sealed interface Reader : Manager
+public sealed interface Reader : Manager {
+    /** **Optional** function defining records pagination. */
+    public fun pagination(configuration: Pagination.() -> Unit)
+
+    /** Configurable object responsible for defining records pagination. */
+    public sealed interface Pagination {
+        /**
+         * **Required** property for setting the page number to return.
+         *
+         * Set to `1` by default.
+         */
+        public var page: Int
+
+        /**
+         * **Required** property for setting the number of items to return
+         * within a [page].
+         *
+         * Set to `2` by default.
+         */
+        public var size: Int
+    }
+}
