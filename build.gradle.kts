@@ -36,14 +36,12 @@ java {
 tasks {
     compileJava { enabled = false }
     compileTestJava { enabled = false }
-
     jar {
         manifest.attributes(
             "Implementation-Title" to project.name,
             "Implementation-Version" to project.version
         )
     }
-
     val dokkaOutputDir = "$buildDir/dokka"
     dokkaHtml { outputDirectory.set(file(dokkaOutputDir)) }
     val cleanDokkaOutput =
@@ -54,7 +52,6 @@ tasks {
         from(dokkaOutputDir)
     }
     assemble { dependsOn += javadocJar }
-
     test {
         testLogging.exceptionFormat = TestExceptionFormat.FULL
         useJUnitPlatform()
