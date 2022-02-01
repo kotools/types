@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Fixed
+
+- File targeting on
+  Windows ([#37](https://github.com/kotools/csv-file/issues/37)).
+
 ## Version 2.0.0 - 2022/01/05
 
 ### Added
