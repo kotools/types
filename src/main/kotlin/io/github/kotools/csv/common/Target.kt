@@ -7,6 +7,7 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
 import kotlin.io.path.notExists
+import kotlin.io.path.toPath
 
 private val loader: ClassLoader by lazy { ClassLoader.getSystemClassLoader() }
 
@@ -17,7 +18,8 @@ internal fun findTargetOrNull(path: String): Target? =
     findFile(path) ?: findStream(path)
 
 internal fun <T : Any> Writer<T>.createTarget(): Target = loader.getResource("")
-    ?.let { Path("${it.path}$folder") }
+    ?.toURI()
+    ?.let { Path("${it.toPath()}$folder") }
     ?.also { if (it.notExists()) createDirectoryAt(it) }
     ?.let { File("$it/$file") }
     ?.let(Target::File)
