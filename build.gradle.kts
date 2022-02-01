@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.kotools"
-version = "2.1.0-SNAPSHOT"
+version = "2.0.1"
 
 repositories(RepositoryHandler::mavenCentral)
 
@@ -23,7 +23,7 @@ dependencies {
 
     // CSV
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
-    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.32")
+    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.33")
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict

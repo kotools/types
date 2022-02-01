@@ -1,8 +1,8 @@
-name: Continuous Delivery
+name: Delivery
 on:
-  workflow_run:
-    workflows: [ Continuous Integration ]
-    types: [ completed ]
+  push:
+    branches: [ master ]
+    paths: [ '*.kts', '*gradle*', .github/workflows/*, src/** ]
 jobs:
   deliver:
     name: Deliver to OSSRH

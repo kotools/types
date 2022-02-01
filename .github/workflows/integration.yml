@@ -1,15 +1,24 @@
-name: Continuous Integration
+name: Integration
 on:
   pull_request:
     branches: [ master ]
     paths: [ '*.kts', '*gradle*', .github/workflows/*, src/** ]
-  push:
-    branches: [ master ]
-    paths: [ '*.kts', '*gradle*', .github/workflows/*, src/** ]
 jobs:
-  test:
-    name: Run tests
+  test-ubuntu:
+    name: Test on Ubuntu
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.4
+      - name: Run tests
+        run: ./gradlew test --no-daemon
+  test-windows:
+    name: Test on Windows
+    runs-on: windows-latest
     permissions:
       contents: read
     steps:

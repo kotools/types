@@ -1,10 +1,6 @@
 package io.github.kotools.csv.writer
 
-import io.github.kotools.csv.test.ClassTypeExample
-import io.github.kotools.csv.test.TypeExample
-import io.github.kotools.csv.test.assertFails
-import io.github.kotools.csv.test.assertNotNull
-import io.github.kotools.csv.test.assertNull
+import io.github.kotools.csv.test.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -15,7 +11,7 @@ class WriterProcessTest {
         this.file = file
         folder = "folder"
         overwrite = false
-        records { +TypeExample("d", 4, false) }
+        records { +TypeExample(first = "d", second = 4, third = false) }
     }
 
     @Nested

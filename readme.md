@@ -10,12 +10,12 @@ elegant [Kotlin] DSLs.
 data class Person(val name: String, val age: Int, val isAdmin: Boolean = false)
 
 suspend fun main() {
-  csvWriter<Person> {
-    file = "people"
-    records { +Person("Nobody", 25) }
-  }
-  val people: List<Person> = csvReader { file = "people" }
-  println(people)
+    csvWriter<Person> {
+        file = "people"
+        records { +Person("Nobody", 25) }
+    }
+    val people: List<Person> = csvReader { file = "people" }
+    println(people)
 }
 ```
 
@@ -53,13 +53,13 @@ is key.
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:csv:2.0.0")
+implementation("io.github.kotools:csv:2.0.1")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:csv:2.0.0'
+implementation 'io.github.kotools:csv:2.0.1'
 ```
 
 ### Maven
@@ -68,7 +68,7 @@ implementation 'io.github.kotools:csv:2.0.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>csv</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 
