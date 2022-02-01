@@ -6,27 +6,22 @@ import io.github.kotools.csv.common.*
 import io.github.kotools.csv.common.Target
 import kotlin.reflect.KClass
 
-private val Reader.csv: CsvReader
-    get() = csvReader {
-        delimiter = separator.value
-        skipEmptyLine = true
-    }
-
 internal infix fun <T : Any> KClass<T>.processReader(
-    configuration: Reader.() -> Unit
+    configuration: Reader<T>.() -> Unit
 ): List<T> {
     val dataType: DataType<T> = toDataType()
-    val reader: ReaderImplementation = ReaderImplementation()
+    val reader: ReaderImplementation<T> = ReaderImplementation<T>()
         .apply(configuration)
     if (!reader.isValid()) invalidConfigurationError()
     return findTarget(reader.filePath)
         .let(reader::read)
         .let { reader.pagination?.let(it::getPage) ?: it }
         .map(dataType::createType)
+        .let { reader.filter?.let(it::filter) ?: it }
 }
 
 internal infix fun <T : Any> KClass<T>.processReaderOrNull(
-    configuration: Reader.() -> Unit
+    configuration: Reader<T>.() -> Unit
 ): List<T>? = try {
     processReader(configuration)
 } catch (exception: IllegalStateException) {
@@ -37,22 +32,36 @@ private infix fun <T : Any> List<T>.getPage(pagination: Reader.Pagination):
         List<T> = chunked(pagination.size)
     .getOrElse(pagination.page - 1) { emptyList() }
 
-private fun Reader.isValid(): Boolean = file.isNotBlank()
+private fun <T : Any> Reader<T>.isValid(): Boolean = file.isNotBlank()
 
-private infix fun Reader.read(target: Target): List<Map<String, String>> =
-    when (target) {
+private infix fun <T : Any> Reader<T>.read(target: Target):
+        List<Map<String, String>> {
+    val csv: CsvReader = csvReader {
+        delimiter = separator.value
+        skipEmptyLine = true
+    }
+    return when (target) {
         is Target.File -> csv.readAllWithHeader(target.file)
         is Target.Stream -> csv.readAllWithHeader(target.stream)
     }
+}
 
 private fun Reader.Pagination.isValid(): Boolean = page > 0 && size > 1
 
-private class ReaderImplementation : ManagerImplementation(), Reader {
+private class ReaderImplementation<T : Any> : ManagerImplementation(),
+    Reader<T> {
+    val filter: (T.() -> Boolean)? get() = mutableFilter
     val pagination: Reader.Pagination? get() = mutablePagination
 
     private var mutablePagination: Reader.Pagination? = null
+    private var mutableFilter: (T.() -> Boolean)? = null
 
     override fun equals(other: Any?): Boolean = this === other
+
+    override fun filter(predicate: T.() -> Boolean) {
+        mutableFilter = predicate
+    }
+
     override fun hashCode(): Int = System.identityHashCode(this)
 
     override fun pagination(configuration: Reader.Pagination.() -> Unit) {
