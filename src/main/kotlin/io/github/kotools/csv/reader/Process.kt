@@ -15,9 +15,9 @@ internal infix fun <T : Any> KClass<T>.processReader(
     if (!reader.isValid()) invalidConfigurationError()
     return findTarget(reader.filePath)
         .let(reader::read)
-        .let { reader.pagination?.let(it::getPage) ?: it }
         .map(dataType::createType)
         .let { reader.filter?.let(it::filter) ?: it }
+        .let { reader.pagination?.let(it::getPage) ?: it }
 }
 
 internal infix fun <T : Any> KClass<T>.processReaderOrNull(
