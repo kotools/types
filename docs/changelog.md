@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 2.1.0 - 2022/02/02
+
 ### Added
 
 - Paginated CSV file's reading as a given
