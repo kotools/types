@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
  * - the targeted file doesn't exist.
  */
 public suspend inline fun <reified T : Any> csvReader(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: Reader<T>.() -> Unit
 ): List<T> = csvReader(T::class, configuration)
 
 /**
@@ -28,7 +28,7 @@ public suspend inline fun <reified T : Any> csvReader(
  */
 public suspend fun <T : Any> csvReader(
     type: KClass<T>,
-    configuration: Reader.() -> Unit
+    configuration: Reader<T>.() -> Unit
 ): List<T> = withContext(IO) { type processReader configuration }
 
 /**
@@ -39,7 +39,7 @@ public suspend fun <T : Any> csvReader(
  * - the targeted file doesn't exist.
  */
 public suspend inline fun <reified T : Any> csvReaderOrNull(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: Reader<T>.() -> Unit
 ): List<T>? = csvReaderOrNull(T::class, configuration)
 
 /**
@@ -51,7 +51,7 @@ public suspend inline fun <reified T : Any> csvReaderOrNull(
  */
 public suspend fun <T : Any> csvReaderOrNull(
     type: KClass<T>,
-    configuration: Reader.() -> Unit
+    configuration: Reader<T>.() -> Unit
 ): List<T>? = withContext(IO) { type processReaderOrNull configuration }
 
 /**
@@ -62,7 +62,7 @@ public suspend fun <T : Any> csvReaderOrNull(
  * - the targeted file doesn't exist.
  */
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: Reader<T>.() -> Unit
 ): Deferred<List<T>> = async { csvReader(configuration) }
 
 /**
@@ -73,8 +73,35 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
  * - the targeted file doesn't exist.
  */
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
-    noinline configuration: Reader.() -> Unit
+    noinline configuration: Reader<T>.() -> Unit
 ): Deferred<List<T>?> = async { csvReaderOrNull(configuration) }
 
 /** Scope for reading a CSV file. */
-public sealed interface Reader : Manager
+public sealed interface Reader<T : Any> : Manager {
+    /**
+     * **Optional** function for filtering records according to the given
+     * [predicate].
+     */
+    public fun filter(predicate: T.() -> Boolean)
+
+    /** **Optional** function defining records pagination. */
+    public fun pagination(configuration: Pagination.() -> Unit)
+
+    /** Configurable object responsible for defining records pagination. */
+    public sealed interface Pagination {
+        /**
+         * **Required** property for setting the page number to return.
+         *
+         * Set to `1` by default.
+         */
+        public var page: Int
+
+        /**
+         * **Required** property for setting the number of items to return
+         * within a [page].
+         *
+         * Set to `2` by default.
+         */
+        public var size: Int
+    }
+}

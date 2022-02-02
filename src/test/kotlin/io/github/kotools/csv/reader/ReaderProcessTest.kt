@@ -1,17 +1,12 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.csv.test.ClassTypeExample
-import io.github.kotools.csv.test.TypeExample
-import io.github.kotools.csv.test.assertFails
-import io.github.kotools.csv.test.assertNotEquals
-import io.github.kotools.csv.test.assertNotNull
-import io.github.kotools.csv.test.assertNull
+import io.github.kotools.csv.test.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
 
 class ReaderProcessTest {
-    private val configuration: Reader.() -> Unit by lazy {
+    private val configuration: Reader<*>.() -> Unit by lazy {
         {
             file = "test"
             folder = "folder"
@@ -22,8 +17,41 @@ class ReaderProcessTest {
     inner class ProcessReader {
         @Test
         fun `should pass`(): Unit = assertDoesNotThrow {
-            TypeExample::class.processReader(configuration)
-                .size assertNotEquals 0
+            TypeExample::class.processReader {
+                file = "test"
+                folder = "folder"
+            }.size assertNotEquals 0
+        }
+
+        @Test
+        fun `should pass ignoring invalid pagination`(): Unit =
+            assertDoesNotThrow {
+                TypeExample::class.processReader {
+                    file = "test"
+                    folder = "folder"
+                    pagination {
+                        page = 0
+                        size = 1
+                    }
+                }.size assertNotEquals 0
+            }
+
+        @Test
+        fun `should pass with filter`(): Unit = assertDoesNotThrow {
+            TypeExample::class.processReader {
+                file = "test"
+                folder = "folder"
+                filter { second % 2 == 0 }
+            }.size assertNotEquals 0
+        }
+
+        @Test
+        fun `should pass with pagination`(): Unit = assertDoesNotThrow {
+            TypeExample::class.processReader {
+                file = "test"
+                folder = "folder"
+                pagination { page = 2 }
+            }.size assertNotEquals 0
         }
 
         @Test
@@ -46,6 +74,36 @@ class ReaderProcessTest {
         @Test
         fun `should pass`(): Unit = assertNotNull {
             TypeExample::class processReaderOrNull configuration
+        }
+
+        @Test
+        fun `should pass ignoring invalid pagination`(): Unit = assertNotNull {
+            TypeExample::class.processReaderOrNull {
+                file = "test"
+                folder = "folder"
+                pagination {
+                    page = 0
+                    size = 1
+                }
+            }
+        }
+
+        @Test
+        fun `should pass with filter`(): Unit = assertNotNull {
+            TypeExample::class.processReaderOrNull {
+                file = "test"
+                folder = "folder"
+                filter { second % 2 == 0 }
+            }
+        }
+
+        @Test
+        fun `should pass with pagination`(): Unit = assertNotNull {
+            TypeExample::class.processReaderOrNull {
+                file = "test"
+                folder = "folder"
+                pagination { page = 2 }
+            }
         }
 
         @Test
