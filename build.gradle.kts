@@ -114,8 +114,6 @@ publishing {
     }
 }
 
-
-
 signing {
     useInMemoryPgpKeys(
         System.getenv("GPG_PRIVATE_KEY"),
