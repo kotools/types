@@ -16,8 +16,8 @@ internal infix fun <T : Any> KClass<T>.processReader(
     return findTarget(reader.filePath)
         .let(reader::read)
         .map(dataType::createType)
-        .let { reader.filter?.let(it::filter) ?: it }
         .let { reader.pagination?.let(it::getPage) ?: it }
+        .let { reader.filter?.let(it::filter) ?: it }
 }
 
 internal infix fun <T : Any> KClass<T>.processReaderOrNull(
