@@ -1,9 +1,8 @@
 name: Delivery
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths: [ '*.kts', '*gradle*', .github/workflows/delivery.yml, src/** ]
-  workflow_dispatch:
 jobs:
   deliver:
     name: Deliver to OSSRH
