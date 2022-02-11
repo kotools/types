@@ -15,3 +15,7 @@ All notable changes to this project will be documented in this file.
 - `Security` in case of vulnerabilities.
 
 ## Work in progress
+
+### Added
+
+- Equality assertions with `assertEquals` and `assertNotEquals`.
