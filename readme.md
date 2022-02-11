@@ -81,7 +81,7 @@ implementation 'io.github.kotools:csv:2.1.0'
 ## Documentation
 
 Latest documentation of Kotools CSV is available
-[here](https://kotools.github.io/csv/csv/io.github.kotools.csv.api/index.html).
+[here](https://kotools.github.io/csv).
 
 ## Contributing
 
