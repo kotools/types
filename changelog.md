@@ -19,3 +19,4 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Equality assertions with `assertEquals` and `assertNotEquals`.
+- Nullability assertions with `assertNull` and `assertNotNull`.
