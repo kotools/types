@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 
 /** Asserts that the current value is equal to the [other] value. */
 public infix fun <T : Any> T.assertEquals(other: T): Unit =
-    assertEquals(other, this)
+    assertEquals(other) { "$this should be equal to $it" }
 
 /**
  * Asserts that the current value is equal to the [other] value, or compute and
@@ -12,8 +12,8 @@ public infix fun <T : Any> T.assertEquals(other: T): Unit =
  */
 public inline fun <T : Any> T.assertEquals(
     other: T,
-    lazyMessage: () -> String
-): Unit = assertEquals(other, this, lazyMessage())
+    lazyMessage: T.(T) -> String
+): Unit = assertEquals(other, this, lazyMessage(other))
 
 /**
  * Asserts that the current value is equal to the [other] value, or report the
