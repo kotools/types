@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Failure assertions with `assertFails`
+  ([#1](https://github.com/kotools/assert/issues/1)).
+
 ## Version 1.0.0 - 2022/02/12
 
 ### Added
