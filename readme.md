@@ -25,6 +25,13 @@ assertNotNull("result shouldn't be null") { 3 }
 3.assertNotNull()
 3 assertNotNull "result shouldn't be null"
 3 assertNotNull { "result shouldn't be null" }
+
+assertFails { throw Exception() }
+assertFails<RuntimeException> { throw RuntimeException() }
+assertFails("Should fail") { throw Exception() }
+assertFails<RuntimeException>("Should fail with RuntimeException") {
+    throw RuntimeException()
+}
 ```
 
 [kotlin]: https://kotlinlang.org
@@ -36,13 +43,13 @@ assertNotNull("result shouldn't be null") { 3 }
 #### Kotlin DSL
 
 ```kotlin
-testImplementation("io.github.kotools:assert:1.0.0")
+testImplementation("io.github.kotools:assert:1.1.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-testImplementation 'io.github.kotools:assert:1.0.0'
+testImplementation 'io.github.kotools:assert:1.1.0'
 ```
 
 ### Maven
@@ -51,7 +58,7 @@ testImplementation 'io.github.kotools:assert:1.0.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>assert</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <scope>test</scope>
 </dependency>
 ```
