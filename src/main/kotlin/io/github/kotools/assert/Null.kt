@@ -1,19 +1,17 @@
 package io.github.kotools.assert
 
-import kotlin.test.assertNull
-
 /** Asserts that the result of [block] is `null`. */
 public inline fun <T : Any?> assertNull(block: () -> T): Unit =
-    assertNull(block())
+    block().assertNull()
 
 /**
  * Asserts that the result of [block] is `null`, or report the [message] if not.
  */
 public inline fun <T : Any?> assertNull(message: String, block: () -> T): Unit =
-    assertNull(block(), message)
+    block() assertNull message
 
 /** Asserts that the current value is `null`. */
-public fun <T : Any?> T.assertNull(): Unit = assertNull(this)
+public fun <T : Any?> T.assertNull(): Unit = kotlin.test.assertNull(this)
 
 /**
  * Asserts that the current value is `null`, or compute and report the
@@ -21,8 +19,8 @@ public fun <T : Any?> T.assertNull(): Unit = assertNull(this)
  */
 public inline infix fun <T : Any?> T.assertNull(
     lazyMessage: () -> String
-): Unit = assertNull(this, lazyMessage())
+): Unit = kotlin.test.assertNull(this, lazyMessage())
 
 /** Asserts that the current value is `null`, or report the [message] if not. */
 public infix fun <T : Any?> T.assertNull(message: String): Unit =
-    assertNull(this, message)
+    kotlin.test.assertNull(this, message)

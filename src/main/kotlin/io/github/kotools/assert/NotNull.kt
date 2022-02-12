@@ -1,20 +1,18 @@
 package io.github.kotools.assert
 
-import kotlin.test.assertNotNull
-
 /** Asserts that the result of [block] isn't `null`. */
 public inline fun <T : Any> assertNotNull(block: () -> T?): T =
-    assertNotNull(block())
+    block().assertNotNull()
 
 /**
  * Asserts that the result of [block] isn't `null`, or report the [message] if
  * not.
  */
 public inline fun <T : Any> assertNotNull(message: String, block: () -> T?): T =
-    assertNotNull(block(), message)
+    block() assertNotNull message
 
 /** Asserts that the current value isn't `null`. */
-public fun <T : Any> T?.assertNotNull(): T = assertNotNull(this)
+public fun <T : Any> T?.assertNotNull(): T = kotlin.test.assertNotNull(this)
 
 /**
  * Asserts that the current value isn't `null`, or compute and report the
@@ -22,10 +20,10 @@ public fun <T : Any> T?.assertNotNull(): T = assertNotNull(this)
  */
 public inline infix fun <T : Any> T?.assertNotNull(
     lazyMessage: () -> String
-): T = assertNotNull(this, lazyMessage())
+): T = kotlin.test.assertNotNull(this, lazyMessage())
 
 /**
  * Asserts that the current value isn't `null`, or report the [message] if not.
  */
 public infix fun <T : Any> T?.assertNotNull(message: String): T =
-    assertNotNull(this, message)
+    kotlin.test.assertNotNull(this, message)
