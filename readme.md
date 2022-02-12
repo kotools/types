@@ -36,13 +36,13 @@ assertNotNull("result shouldn't be null") { 3 }
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:assert:1.0.0")
+testImplementation("io.github.kotools:assert:1.0.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:assert:1.0.0'
+testImplementation 'io.github.kotools:assert:1.0.0'
 ```
 
 ### Maven
@@ -52,6 +52,7 @@ implementation 'io.github.kotools:assert:1.0.0'
     <groupId>io.github.kotools</groupId>
     <artifactId>assert</artifactId>
     <version>1.0.0</version>
+    <scope>test</scope>
 </dependency>
 ```
 
