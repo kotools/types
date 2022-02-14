@@ -1,6 +1,10 @@
 package io.github.kotools.csv.writer
 
-import io.github.kotools.csv.test.*
+import io.github.kotools.assert.assertFails
+import io.github.kotools.assert.assertNotNull
+import io.github.kotools.assert.assertNull
+import io.github.kotools.csv.test.ClassTypeExample
+import io.github.kotools.csv.test.TypeExample
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -51,35 +55,35 @@ class WriterProcessTest {
     @Nested
     inner class ProcessWriterOrNull {
         @Test
-        fun `should pass with existent file`(): Unit = assertNotNull {
-            TypeExample::class processWriterOrNull getConfiguration()
+        fun `should pass with existent file`() {
+            TypeExample::class.processWriterOrNull(getConfiguration())
+                .assertNotNull()
         }
 
         @Test
-        fun `should pass with nonexistent file`(): Unit = assertNotNull {
-            TypeExample::class processWriterOrNull getConfiguration("again")
+        fun `should pass with nonexistent file`() {
+            TypeExample::class.processWriterOrNull(getConfiguration("again"))
+                .assertNotNull()
         }
 
         @Test
-        fun `should fail with non data class type`(): Unit = assertNull {
-            ClassTypeExample::class processWriterOrNull {
+        fun `should fail with non data class type`(): Unit =
+            ClassTypeExample::class.processWriterOrNull {
                 file = "test"
                 records { +ClassTypeExample() }
-            }
-        }
+            }.assertNull()
 
         @Test
-        fun `should fail with private type`(): Unit = assertNull {
-            PrivateTypeExample::class processWriterOrNull {
+        fun `should fail with private type`(): Unit = PrivateTypeExample::class
+            .processWriterOrNull {
                 file = "test"
                 records { +PrivateTypeExample("") }
-            }
-        }
+            }.assertNull()
 
         @Test
-        fun `should fail without records`(): Unit = assertNull {
-            TypeExample::class processWriterOrNull { file = "test" }
-        }
+        fun `should fail without records`(): Unit = TypeExample::class
+            .processWriterOrNull { file = "test" }
+            .assertNull()
     }
 
     private data class PrivateTypeExample(val a: String)

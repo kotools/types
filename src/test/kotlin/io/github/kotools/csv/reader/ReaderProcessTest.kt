@@ -1,6 +1,11 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.csv.test.*
+import io.github.kotools.assert.assertFails
+import io.github.kotools.assert.assertNotEquals
+import io.github.kotools.assert.assertNotNull
+import io.github.kotools.assert.assertNull
+import io.github.kotools.csv.test.ClassTypeExample
+import io.github.kotools.csv.test.TypeExample
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -72,12 +77,13 @@ class ReaderProcessTest {
     @Nested
     inner class ProcessReaderOrNull {
         @Test
-        fun `should pass`(): Unit = assertNotNull {
-            TypeExample::class processReaderOrNull configuration
+        fun `should pass`() {
+            TypeExample::class.processReaderOrNull(configuration)
+                .assertNotNull()
         }
 
         @Test
-        fun `should pass ignoring invalid pagination`(): Unit = assertNotNull {
+        fun `should pass ignoring invalid pagination`() {
             TypeExample::class.processReaderOrNull {
                 file = "test"
                 folder = "folder"
@@ -85,41 +91,41 @@ class ReaderProcessTest {
                     page = 0
                     size = 1
                 }
-            }
+            }.assertNotNull()
         }
 
         @Test
-        fun `should pass with filter`(): Unit = assertNotNull {
+        fun `should pass with filter`() {
             TypeExample::class.processReaderOrNull {
                 file = "test"
                 folder = "folder"
                 filter { second % 2 == 0 }
-            }
+            }.assertNotNull()
         }
 
         @Test
-        fun `should pass with pagination`(): Unit = assertNotNull {
+        fun `should pass with pagination`() {
             TypeExample::class.processReaderOrNull {
                 file = "test"
                 folder = "folder"
                 pagination { page = 2 }
-            }
+            }.assertNotNull()
         }
 
         @Test
-        fun `should fail with blank file`(): Unit = assertNull {
-            TypeExample::class processReaderOrNull {}
-        }
+        fun `should fail with blank file`(): Unit = TypeExample::class
+            .processReaderOrNull {}
+            .assertNull()
 
         @Test
-        fun `should fail with non data class type`(): Unit = assertNull {
-            ClassTypeExample::class processReaderOrNull configuration
-        }
+        fun `should fail with non data class type`(): Unit =
+            ClassTypeExample::class.processReaderOrNull(configuration)
+                .assertNull()
 
         @Test
-        fun `should fail with private type`(): Unit = assertNull {
-            PrivateTypeExample::class processReaderOrNull configuration
-        }
+        fun `should fail with private type`(): Unit = PrivateTypeExample::class
+            .processReaderOrNull(configuration)
+            .assertNull()
     }
 
     private data class PrivateTypeExample(val a: String)

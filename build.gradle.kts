@@ -20,6 +20,7 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     testImplementation(kotlin("test"))
+    testImplementation("io.github.kotools:assert:1.1.0")
 
     // CSV
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
