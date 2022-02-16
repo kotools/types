@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
@@ -50,7 +51,10 @@ tasks {
         from(dokkaOutputDir)
     }
     assemble { dependsOn += javadocJar }
-    test { enabled = false }
+    test {
+        testLogging.exceptionFormat = TestExceptionFormat.FULL
+        useJUnitPlatform()
+    }
 }
 
 publishing {
