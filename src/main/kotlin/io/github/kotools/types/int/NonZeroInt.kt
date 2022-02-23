@@ -1,9 +1,15 @@
 package io.github.kotools.types.int
 
-// TODO: Test and document
+/**
+ * Transforms the current [Int] to a [NonZeroInt], or throws an
+ * [IllegalArgumentException] if the current value is `0`.
+ */
 public val Int.nonZero: NonZeroInt get() = NonZeroInt create this
 
-// TODO: Test and document
+/**
+ * Transforms the current [Int] to a [NonZeroInt], or returns `null` if the
+ * current value is `0`.
+ */
 public val Int.nonZeroOrNull: NonZeroInt? get() = NonZeroInt createOrNull this
 
 @JvmInline
@@ -11,8 +17,10 @@ public value class NonZeroInt private constructor(
     @Suppress("MemberVisibilityCanBePrivate") public val value: Int
 ) {
     internal companion object {
+        const val ERROR_MESSAGE: String = "Given value shouldn't equal 0."
+
         infix fun create(value: Int): NonZeroInt = createOrNull(value)
-            ?: throw IllegalArgumentException("Given value shouldn't equal 0.")
+            ?: throw IllegalArgumentException(ERROR_MESSAGE)
 
         infix fun createOrNull(value: Int): NonZeroInt? = value
             .takeIf { it != 0 }
