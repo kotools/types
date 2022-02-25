@@ -15,3 +15,8 @@ All notable changes to this project will be documented in this file.
 - `Security` in case of vulnerabilities.
 
 ## Work in progress
+
+### Added
+
+- Implement `NonZeroInt` type for representing integers that can't equal `0`
+  ([#3](https://github.com/kotools/types/issues/3)).
