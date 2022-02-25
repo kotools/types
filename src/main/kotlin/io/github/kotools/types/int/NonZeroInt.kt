@@ -12,10 +12,10 @@ public val Int.nonZero: NonZeroInt get() = NonZeroInt create this
  */
 public val Int.nonZeroOrNull: NonZeroInt? get() = NonZeroInt createOrNull this
 
+/** Type representing integers that can't equal 0. */
 @JvmInline
-public value class NonZeroInt private constructor(
-    @Suppress("MemberVisibilityCanBePrivate") public val value: Int
-) {
+public value class NonZeroInt private constructor(override val value: Int) :
+    IntType {
     internal companion object {
         const val ERROR_MESSAGE: String = "Given value shouldn't equal 0."
 
@@ -28,17 +28,8 @@ public value class NonZeroInt private constructor(
             ?.let(::NonZeroInt)
     }
 
-    public infix operator fun compareTo(other: NonZeroInt): Int =
-        value.compareTo(other.value)
-
     public infix operator fun div(other: NonZeroInt): NonZeroInt =
         (value / other.value).nonZero
-
-    public infix operator fun minus(other: NonZeroInt): Int =
-        value - other.value
-
-    public infix operator fun plus(other: NonZeroInt): Int =
-        value + other.value
 
     public infix operator fun times(other: NonZeroInt): NonZeroInt =
         (value * other.value).nonZero
