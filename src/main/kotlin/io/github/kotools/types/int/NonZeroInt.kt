@@ -27,29 +27,20 @@ public value class NonZeroInt private constructor(
             ?.let(::NonZeroInt)
     }
 
-    // TODO: Test and document
     public infix operator fun compareTo(other: NonZeroInt): Int =
         value.compareTo(other.value)
 
-    // TODO: Test and document
     public infix operator fun div(other: NonZeroInt): NonZeroInt =
         (value / other.value).nonZero
 
-    // TODO: Test and document
     public infix operator fun minus(other: NonZeroInt): Int =
         value - other.value
 
-    // TODO: Test and document
     public infix operator fun plus(other: NonZeroInt): Int =
         value + other.value
 
-    // TODO: Test and document
     public infix operator fun times(other: NonZeroInt): NonZeroInt =
         (value * other.value).nonZero
 
-    // TODO: Test and document
-    public operator fun unaryPlus(): NonZeroInt = (+value).nonZero
-
-    // TODO: Test and document
     public operator fun unaryMinus(): NonZeroInt = (-value).nonZero
 }
