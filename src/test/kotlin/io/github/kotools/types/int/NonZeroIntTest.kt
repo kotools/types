@@ -21,13 +21,6 @@ class NonZeroIntTest {
     }
 
     @Nested
-    inner class Div {
-        @Test
-        fun `should pass`(): Unit =
-            (6.nonZero / 3.nonZero) assertEquals 2.nonZero
-    }
-
-    @Nested
     inner class Create {
         @Test
         fun `should pass`(): Unit = assertDoesNotThrow { NonZeroInt create 1 }
@@ -52,15 +45,10 @@ class NonZeroIntTest {
     }
 
     @Nested
-    inner class Minus {
+    inner class Div {
         @Test
-        fun `should pass`(): Unit = (1.nonZero - 1.nonZero) assertEquals 0
-    }
-
-    @Nested
-    inner class Plus {
-        @Test
-        fun `should pass`(): Unit = ((-1).nonZero + 1.nonZero) assertEquals 0
+        fun `should pass`(): Unit =
+            (6.nonZero / 3.nonZero) assertEquals 2.nonZero
     }
 
     @Nested
