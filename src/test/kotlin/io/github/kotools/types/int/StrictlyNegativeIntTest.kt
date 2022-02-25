@@ -1,5 +1,6 @@
 package io.github.kotools.types.int
 
+import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertFails
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
@@ -26,5 +27,36 @@ class StrictlyNegativeIntTest {
 
         @Test
         fun `should fail`(): Unit = 0.strictlyNegativeOrNull.assertNull()
+    }
+
+    @Nested
+    inner class Div {
+        @Test
+        fun `should pass with a non-zero int`(): Unit =
+            ((-2).strictlyNegative / 2.nonZero) assertEquals (-1).nonZero
+
+        @Test
+        fun `should pass with a strictly negative int`(): Unit =
+            ((-2).strictlyNegative / (-2).strictlyNegative)
+                .assertEquals(1.nonZero)
+    }
+
+    @Nested
+    inner class Times {
+        @Test
+        fun `should pass with a non-zero int`(): Unit =
+            ((-2).strictlyNegative * 2.nonZero) assertEquals (-4).nonZero
+
+        @Test
+        fun `should pass with a strictly negative int`(): Unit =
+            ((-2).strictlyNegative * (-2).strictlyNegative)
+                .assertEquals(4.nonZero)
+    }
+
+    @Nested
+    inner class UnaryMinus {
+        @Test
+        fun `should pass`(): Unit =
+            (-(-1).strictlyNegative) assertEquals 1.nonZero
     }
 }
