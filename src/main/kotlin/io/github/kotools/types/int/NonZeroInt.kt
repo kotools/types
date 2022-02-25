@@ -19,6 +19,7 @@ public value class NonZeroInt private constructor(
     internal companion object {
         const val ERROR_MESSAGE: String = "Given value shouldn't equal 0."
 
+        @Throws(IllegalArgumentException::class)
         infix fun create(value: Int): NonZeroInt = createOrNull(value)
             ?: throw IllegalArgumentException(ERROR_MESSAGE)
 
