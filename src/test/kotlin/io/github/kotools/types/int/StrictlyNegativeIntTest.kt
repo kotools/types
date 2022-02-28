@@ -38,7 +38,12 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a strictly negative int`(): Unit =
             ((-2).strictlyNegative / (-2).strictlyNegative)
-                .assertEquals(1.nonZero)
+                .assertEquals(1.strictlyPositive)
+
+        @Test
+        fun `should pass with a strictly positive int`(): Unit =
+            ((-2).strictlyNegative / 2.strictlyPositive)
+                .assertEquals((-1).strictlyNegative)
     }
 
     @Nested
@@ -50,13 +55,18 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a strictly negative int`(): Unit =
             ((-2).strictlyNegative * (-2).strictlyNegative)
-                .assertEquals(4.nonZero)
+                .assertEquals(4.strictlyPositive)
+
+        @Test
+        fun `should pass with a strictly positive int`(): Unit =
+            ((-2).strictlyNegative * 2.strictlyPositive)
+                .assertEquals((-4).strictlyNegative)
     }
 
     @Nested
     inner class UnaryMinus {
         @Test
         fun `should pass`(): Unit =
-            (-(-1).strictlyNegative) assertEquals 1.nonZero
+            (-(-1).strictlyNegative) assertEquals 1.strictlyPositive
     }
 }

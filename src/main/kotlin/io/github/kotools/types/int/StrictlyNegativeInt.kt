@@ -35,17 +35,21 @@ public value class StrictlyNegativeInt private constructor(
     public infix operator fun div(other: NonZeroInt): NonZeroInt =
         (value / other.value).nonZero
 
-    // TODO: Return type will be `StrictlyPositiveInt`
-    public infix operator fun div(other: StrictlyNegativeInt): NonZeroInt =
-        (value / other.value).nonZero
+    public infix operator fun div(other: StrictlyNegativeInt):
+            StrictlyPositiveInt = (value / other.value).strictlyPositive
+
+    public infix operator fun div(other: StrictlyPositiveInt):
+            StrictlyNegativeInt = (value / other.value).strictlyNegative
 
     public infix operator fun times(other: NonZeroInt): NonZeroInt =
         (value * other.value).nonZero
 
-    // TODO: Return type will be `StrictlyPositiveInt`
-    public operator fun times(other: StrictlyNegativeInt): NonZeroInt =
-        (value * other.value).nonZero
+    public infix operator fun times(other: StrictlyNegativeInt):
+            StrictlyPositiveInt = (value * other.value).strictlyPositive
 
-    // TODO: Return type will be `StrictlyPositiveInt`
-    public operator fun unaryMinus(): NonZeroInt = (-value).nonZero
+    public infix operator fun times(other: StrictlyPositiveInt):
+            StrictlyNegativeInt = (value * other.value).strictlyNegative
+
+    public operator fun unaryMinus(): StrictlyPositiveInt =
+        (-value).strictlyPositive
 }
