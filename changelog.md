@@ -18,5 +18,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Implement `NonZeroInt` type for representing integers that can't equal `0`
-  ([#3](https://github.com/kotools/types/issues/3)).
+- Implement `NonZeroInt` type ([#3](https://github.com/kotools/types/issues/3)).
+- Implement `StrictlyNegativeInt` type
+  ([#4](https://github.com/kotools/types/issues/4)).
