@@ -23,3 +23,5 @@ All notable changes to this project will be documented in this file.
   ([#4](https://github.com/kotools/types/issues/4)).
 - Implement `StrictlyPositiveInt` type
   ([#1](https://github.com/kotools/types/issues/1)).
+- Implement `NotBlankString` type
+  ([#5](https://github.com/kotools/types/issues/5)).
