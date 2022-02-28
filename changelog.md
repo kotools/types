@@ -21,3 +21,5 @@ All notable changes to this project will be documented in this file.
 - Implement `NonZeroInt` type ([#3](https://github.com/kotools/types/issues/3)).
 - Implement `StrictlyNegativeInt` type
   ([#4](https://github.com/kotools/types/issues/4)).
+- Implement `StrictlyPositiveInt` type
+  ([#1](https://github.com/kotools/types/issues/1)).
