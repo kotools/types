@@ -1,5 +1,6 @@
 package io.github.kotools.types.string
 
+import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertFails
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
@@ -26,5 +27,19 @@ class NotBlankStringTest {
 
         @Test
         fun `should fail`(): Unit = " ".notBlankOrNull.assertNull()
+    }
+
+    @Nested
+    inner class Get {
+        @Test
+        fun `should pass`(): Unit = "hi"[0] assertEquals 'h'
+    }
+
+    @Nested
+    inner class Plus {
+        @Test
+        fun `should pass with a not blank string`(): Unit =
+            ("hello".notBlank + " world".notBlank)
+                .assertEquals("hello world".notBlank)
     }
 }

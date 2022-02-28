@@ -15,7 +15,7 @@ public val String.notBlankOrNull: NotBlankString?
 
 @JvmInline
 public value class NotBlankString private constructor(
-    public val value: String
+    @Suppress("MemberVisibilityCanBePrivate") public val value: String
 ) {
     internal companion object {
         private const val ERROR_MESSAGE: String =
@@ -28,4 +28,9 @@ public value class NotBlankString private constructor(
             .takeIf(String::isNotBlank)
             ?.let(::NotBlankString)
     }
+
+    public infix operator fun get(index: Int): Char = value[index]
+
+    public infix operator fun plus(other: NotBlankString): NotBlankString =
+        (value + other.value).notBlank
 }
