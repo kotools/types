@@ -30,4 +30,25 @@ public value class StrictlyPositiveInt private constructor(
             .takeIf { it > 0 }
             ?.let(::StrictlyPositiveInt)
     }
+
+    public infix operator fun div(other: NonZeroInt): NonZeroInt =
+        (value / other.value).nonZero
+
+    public infix operator fun div(other: StrictlyNegativeInt):
+            StrictlyNegativeInt = (value / other.value).strictlyNegative
+
+    public infix operator fun div(other: StrictlyPositiveInt):
+            StrictlyPositiveInt = (value / other.value).strictlyPositive
+
+    public infix operator fun times(other: NonZeroInt): NonZeroInt =
+        (value * other.value).nonZero
+
+    public infix operator fun times(other: StrictlyNegativeInt):
+            StrictlyNegativeInt = (value * other.value).strictlyNegative
+
+    public infix operator fun times(other: StrictlyPositiveInt):
+            StrictlyPositiveInt = (value * other.value).strictlyPositive
+
+    public operator fun unaryMinus(): StrictlyNegativeInt =
+        (-value).strictlyNegative
 }
