@@ -13,6 +13,7 @@ public val String.notBlank: NotBlankString get() = NotBlankString create this
 public val String.notBlankOrNull: NotBlankString?
     get() = NotBlankString createOrNull this
 
+/** Type representing strings that can't be blank. */
 @JvmInline
 public value class NotBlankString private constructor(
     @Suppress("MemberVisibilityCanBePrivate") public val value: String

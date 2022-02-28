@@ -14,7 +14,7 @@ public val Int.strictlyNegative: StrictlyNegativeInt
 public val Int.strictlyNegativeOrNull: StrictlyNegativeInt?
     get() = StrictlyNegativeInt createOrNull this
 
-/** Type representing strictly negative integer (`< 0`). */
+/** Type representing strictly negative integers (`< 0`). */
 @JvmInline
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
