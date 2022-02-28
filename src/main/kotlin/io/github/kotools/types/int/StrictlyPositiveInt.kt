@@ -14,6 +14,7 @@ public val Int.strictlyPositive: StrictlyPositiveInt
 public val Int.strictlyPositiveOrNull: StrictlyPositiveInt?
     get() = StrictlyPositiveInt createOrNull this
 
+/** Type representing strictly positive integers (`> 0`). */
 @JvmInline
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
