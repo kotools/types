@@ -59,13 +59,13 @@ is key.
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:csv:2.1.0")
+implementation("io.github.kotools:csv:2.1.1")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:csv:2.1.0'
+implementation 'io.github.kotools:csv:2.1.1'
 ```
 
 ### Maven
@@ -74,7 +74,7 @@ implementation 'io.github.kotools:csv:2.1.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>csv</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
 </dependency>
 ```
 
