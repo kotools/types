@@ -29,13 +29,13 @@ Kotools Types is a lightweight library that provides commonly used types for
 #### Kotlin DSL
 
 ```kotlin
-testImplementation("io.github.kotools:types:1.0.0")
+implementation("io.github.kotools:types:1.0.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-testImplementation 'io.github.kotools:types:1.0.0'
+implementation 'io.github.kotools:types:1.0.0'
 ```
 
 ### Maven
