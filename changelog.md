@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Fixed
+
+- Override `toString` function in all types
+  ([#9](https://github.com/kotools/types/issues/9)).
+
 ## Version 1.0.0 - 2022/02/28
 
 ### Added
