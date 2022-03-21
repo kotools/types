@@ -19,18 +19,7 @@ public val Int.strictlyNegativeOrNull: StrictlyNegativeInt?
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
 ) : IntType {
-    internal companion object {
-        private const val ERROR_MESSAGE: String =
-            "Given value should be lower than 0."
-
-        @Throws(IllegalArgumentException::class)
-        infix fun create(value: Int): StrictlyNegativeInt = createOrNull(value)
-            ?: throw IllegalArgumentException(ERROR_MESSAGE)
-
-        infix fun createOrNull(value: Int): StrictlyNegativeInt? = value
-            .takeIf { it < 0 }
-            ?.let(::StrictlyNegativeInt)
-    }
+    override fun toString(): String = value.toString()
 
     public infix operator fun div(other: NonZeroInt): NonZeroInt =
         (value / other.value).nonZero
@@ -52,4 +41,17 @@ public value class StrictlyNegativeInt private constructor(
 
     public operator fun unaryMinus(): StrictlyPositiveInt =
         (-value).strictlyPositive
+
+    internal companion object {
+        private const val ERROR_MESSAGE: String =
+            "Given value should be lower than 0."
+
+        @Throws(IllegalArgumentException::class)
+        infix fun create(value: Int): StrictlyNegativeInt = createOrNull(value)
+            ?: throw IllegalArgumentException(ERROR_MESSAGE)
+
+        infix fun createOrNull(value: Int): StrictlyNegativeInt? = value
+            .takeIf { it < 0 }
+            ?.let(::StrictlyNegativeInt)
+    }
 }

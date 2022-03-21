@@ -18,6 +18,13 @@ public val String.notBlankOrNull: NotBlankString?
 public value class NotBlankString private constructor(
     @Suppress("MemberVisibilityCanBePrivate") public val value: String
 ) {
+    override fun toString(): String = value
+
+    public infix operator fun get(index: Int): Char = value[index]
+
+    public infix operator fun plus(other: NotBlankString): NotBlankString =
+        (value + other.value).notBlank
+
     internal companion object {
         private const val ERROR_MESSAGE: String =
             "Given value shouldn't be blank."
@@ -29,9 +36,4 @@ public value class NotBlankString private constructor(
             .takeIf(String::isNotBlank)
             ?.let(::NotBlankString)
     }
-
-    public infix operator fun get(index: Int): Char = value[index]
-
-    public infix operator fun plus(other: NotBlankString): NotBlankString =
-        (value + other.value).notBlank
 }

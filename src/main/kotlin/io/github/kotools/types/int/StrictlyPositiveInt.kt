@@ -19,18 +19,7 @@ public val Int.strictlyPositiveOrNull: StrictlyPositiveInt?
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
 ) : IntType {
-    internal companion object {
-        private const val ERROR_MESSAGE: String =
-            "Given value should be greater than 0."
-
-        @Throws(IllegalArgumentException::class)
-        infix fun create(value: Int): StrictlyPositiveInt = createOrNull(value)
-            ?: throw IllegalArgumentException(ERROR_MESSAGE)
-
-        infix fun createOrNull(value: Int): StrictlyPositiveInt? = value
-            .takeIf { it > 0 }
-            ?.let(::StrictlyPositiveInt)
-    }
+    override fun toString(): String = value.toString()
 
     public infix operator fun div(other: NonZeroInt): NonZeroInt =
         (value / other.value).nonZero
@@ -52,4 +41,17 @@ public value class StrictlyPositiveInt private constructor(
 
     public operator fun unaryMinus(): StrictlyNegativeInt =
         (-value).strictlyNegative
+
+    internal companion object {
+        private const val ERROR_MESSAGE: String =
+            "Given value should be greater than 0."
+
+        @Throws(IllegalArgumentException::class)
+        infix fun create(value: Int): StrictlyPositiveInt = createOrNull(value)
+            ?: throw IllegalArgumentException(ERROR_MESSAGE)
+
+        infix fun createOrNull(value: Int): StrictlyPositiveInt? = value
+            .takeIf { it > 0 }
+            ?.let(::StrictlyPositiveInt)
+    }
 }

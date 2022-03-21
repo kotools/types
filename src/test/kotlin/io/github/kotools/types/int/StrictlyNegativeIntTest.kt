@@ -64,6 +64,13 @@ class StrictlyNegativeIntTest {
     }
 
     @Nested
+    inner class ToString {
+        @Test
+        fun `should pass`(): Unit = (-2).strictlyNegative.toString()
+            .assertEquals("-2")
+    }
+
+    @Nested
     inner class UnaryMinus {
         @Test
         fun `should pass`(): Unit =

@@ -42,4 +42,10 @@ class NotBlankStringTest {
             ("hello".notBlank + " world".notBlank)
                 .assertEquals("hello world".notBlank)
     }
+
+    @Nested
+    inner class ToString {
+        @Test
+        fun `should pass`(): Unit = "hi".notBlank.toString() assertEquals "hi"
+    }
 }
