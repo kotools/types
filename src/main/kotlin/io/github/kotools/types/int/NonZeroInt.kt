@@ -16,6 +16,16 @@ public val Int.nonZeroOrNull: NonZeroInt? get() = NonZeroInt createOrNull this
 @JvmInline
 public value class NonZeroInt private constructor(override val value: Int) :
     IntType {
+    override fun toString(): String = value.toString()
+
+    public infix operator fun div(other: NonZeroInt): NonZeroInt =
+        (value / other.value).nonZero
+
+    public infix operator fun times(other: NonZeroInt): NonZeroInt =
+        (value * other.value).nonZero
+
+    public operator fun unaryMinus(): NonZeroInt = (-value).nonZero
+
     internal companion object {
         const val ERROR_MESSAGE: String = "Given value shouldn't equal 0."
 
@@ -27,12 +37,4 @@ public value class NonZeroInt private constructor(override val value: Int) :
             .takeIf { it != 0 }
             ?.let(::NonZeroInt)
     }
-
-    public infix operator fun div(other: NonZeroInt): NonZeroInt =
-        (value / other.value).nonZero
-
-    public infix operator fun times(other: NonZeroInt): NonZeroInt =
-        (value * other.value).nonZero
-
-    public operator fun unaryMinus(): NonZeroInt = (-value).nonZero
 }

@@ -59,6 +59,12 @@ class NonZeroIntTest {
     }
 
     @Nested
+    inner class ToString {
+        @Test
+        fun `should pass`(): Unit = 2.nonZero.toString() assertEquals "2"
+    }
+
+    @Nested
     inner class UnaryMinus {
         @Test
         fun `should pass`(): Unit = -(1.nonZero) assertEquals (-1).nonZero
