@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 1.0.1 - 2022/03/21
+
 ### Fixed
 
 - Override `toString` function in all types
