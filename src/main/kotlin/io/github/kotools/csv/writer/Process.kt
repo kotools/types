@@ -19,7 +19,8 @@ internal infix fun <T : Any> KClass<T>.processWriter(
     if (!writer.isValid()) invalidConfigurationError()
     val target: Target =
         findTargetOrNull(writer.filePath) ?: writer.createTarget()
-    val file: File = if (target is Target.File) target.file else return
+    val file: File = if (target is Target.File) target.file
+    else unexpectedError()
     val records: MutableList<List<String>> =
         if (writer.overwrite) mutableListOf(dataType.constructorParameters)
         else mutableListOf()
