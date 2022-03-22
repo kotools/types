@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Integrate [Kotools Types](https://github.com/kotools/types) library
+  ([#42](https://github.com/kotools/csv-file/issues/42)).
+
 ## Version 2.1.1 - 2022/02/10
 
 ### Fixed
