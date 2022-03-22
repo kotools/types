@@ -1,8 +1,12 @@
 name: Delivery
 on:
-  workflow_run:
-    workflows: [ Integration ]
-    types: [ completed ]
+  push:
+    branches: [ master ]
+    paths:
+      - '*.kts'
+      - '*gradle*'
+      - .github/workflows/delivery.yml
+      - src/**
 jobs:
   deliver:
     name: Deliver to OSSRH

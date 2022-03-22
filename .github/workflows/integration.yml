@@ -1,11 +1,10 @@
 name: Integration
 on:
-  push:
+  pull_request:
     branches: [ master ]
     paths:
       - '*.kts'
       - '*gradle*'
-      - .github/workflows/delivery.yml
       - .github/workflows/integration.yml
       - src/**
 jobs:
