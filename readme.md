@@ -81,7 +81,8 @@ implementation 'io.github.kotools:csv:2.1.1'
 ## Documentation
 
 Latest documentation of Kotools CSV is available
-[here](https://kotools.github.io/csv).
+[here](https://kotools.github.io/csv). Also, you can find more information about
+CSV format in the [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180).
 
 ## Contributing
 
