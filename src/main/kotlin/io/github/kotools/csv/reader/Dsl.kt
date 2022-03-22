@@ -13,7 +13,8 @@ import kotlin.reflect.KClass
  * [configuration] or throws an [IllegalStateException] when:
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid
- * - the targeted file doesn't exist.
+ * - the targeted file doesn't exist
+ * - the targeted file's header line contains an empty string.
  */
 public suspend inline fun <reified T : Any> csvReader(
     noinline configuration: Reader<T>.() -> Unit
@@ -24,7 +25,8 @@ public suspend inline fun <reified T : Any> csvReader(
  * [configuration] or throws an [IllegalStateException] when:
  * - the [type] is not a public or internal data class
  * - the [configuration] is invalid
- * - the targeted file doesn't exist.
+ * - the targeted file doesn't exist
+ * - the targeted file's header line contains an empty string.
  */
 public suspend fun <T : Any> csvReader(
     type: KClass<T>,
@@ -36,7 +38,8 @@ public suspend fun <T : Any> csvReader(
  * [configuration] or returns `null` when:
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid
- * - the targeted file doesn't exist.
+ * - the targeted file doesn't exist
+ * - the targeted file's header line contains an empty string.
  */
 public suspend inline fun <reified T : Any> csvReaderOrNull(
     noinline configuration: Reader<T>.() -> Unit
@@ -47,7 +50,8 @@ public suspend inline fun <reified T : Any> csvReaderOrNull(
  * [configuration] or returns `null` when:
  * - the [type] is not a public or internal data class
  * - the [configuration] is invalid
- * - the targeted file doesn't exist.
+ * - the targeted file doesn't exist
+ * - the targeted file's header line contains an empty string.
  */
 public suspend fun <T : Any> csvReaderOrNull(
     type: KClass<T>,
@@ -59,7 +63,8 @@ public suspend fun <T : Any> csvReaderOrNull(
  * to the given [configuration] or throws [IllegalStateException] when:
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid
- * - the targeted file doesn't exist.
+ * - the targeted file doesn't exist
+ * - the targeted file's header line contains an empty string.
  */
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
     noinline configuration: Reader<T>.() -> Unit
@@ -70,7 +75,8 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
  * to the given [configuration] or returns `null` when:
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid
- * - the targeted file doesn't exist.
+ * - the targeted file doesn't exist
+ * - the targeted file's header line contains an empty string.
  */
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
     noinline configuration: Reader<T>.() -> Unit

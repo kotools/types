@@ -1,10 +1,7 @@
 package io.github.kotools.csv.common
 
-import kotlin.reflect.KClass
-import kotlin.reflect.KParameter
-import kotlin.reflect.KProperty1
-import kotlin.reflect.KType
-import kotlin.reflect.KVisibility
+import io.github.kotools.types.string.NotBlankString
+import kotlin.reflect.*
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.starProjectedType
@@ -34,9 +31,9 @@ private constructor(private val type: KClass<T>) {
         get() = type.declaredMemberProperties
             .associateBy(KProperty1<T, *>::name)
 
-    infix fun createType(record: Map<String, String>): T {
+    infix fun createType(record: Map<NotBlankString, String>): T {
         val arguments: Array<Any?> = record
-            .map { properties[it.key]?.returnType?.let(it.value::toType) }
+            .map { properties[it.key.value]?.returnType?.let(it.value::toType) }
             .toTypedArray()
         return type.primaryConstructor!!.call(*arguments)
     }

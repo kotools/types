@@ -11,10 +11,16 @@ import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
 
 class ReaderProcessTest {
-    private val configuration: Reader<*>.() -> Unit by lazy {
+    private val invalidHeaderConfiguration: Reader<*>.() -> Unit by lazy {
+        {
+            file = "invalid-header"
+            folder = FOLDER
+        }
+    }
+    private val testConfiguration: Reader<*>.() -> Unit by lazy {
         {
             file = "test"
-            folder = "folder"
+            folder = FOLDER
         }
     }
 
@@ -22,10 +28,8 @@ class ReaderProcessTest {
     inner class ProcessReader {
         @Test
         fun `should pass`(): Unit = assertDoesNotThrow {
-            TypeExample::class.processReader {
-                file = "test"
-                folder = "folder"
-            }.size assertNotEquals 0
+            TypeExample::class.processReader(testConfiguration)
+                .size assertNotEquals 0
         }
 
         @Test
@@ -33,7 +37,7 @@ class ReaderProcessTest {
             assertDoesNotThrow {
                 TypeExample::class.processReader {
                     file = "test"
-                    folder = "folder"
+                    folder = FOLDER
                     pagination {
                         page = 0
                         size = 1
@@ -45,7 +49,7 @@ class ReaderProcessTest {
         fun `should pass with filter`(): Unit = assertDoesNotThrow {
             TypeExample::class.processReader {
                 file = "test"
-                folder = "folder"
+                folder = FOLDER
                 filter { second % 2 == 0 }
             }.size assertNotEquals 0
         }
@@ -54,10 +58,16 @@ class ReaderProcessTest {
         fun `should pass with pagination`(): Unit = assertDoesNotThrow {
             TypeExample::class.processReader {
                 file = "test"
-                folder = "folder"
+                folder = FOLDER
                 pagination { page = 2 }
             }.size assertNotEquals 0
         }
+
+        @Test
+        fun `should fail with invalid header in CSV file`(): Unit =
+            assertFails {
+                TypeExample::class.processReader(invalidHeaderConfiguration)
+            }
 
         @Test
         fun `should fail with blank file`(): Unit = assertFails {
@@ -65,12 +75,13 @@ class ReaderProcessTest {
         }
 
         @Test
-        fun `should fail with non data class type`(): Unit =
-            assertFails { ClassTypeExample::class processReader configuration }
+        fun `should fail with non data class type`(): Unit = assertFails {
+            ClassTypeExample::class processReader testConfiguration
+        }
 
         @Test
         fun `should fail with private type`(): Unit = assertFails {
-            PrivateTypeExample::class processReader configuration
+            PrivateTypeExample::class processReader testConfiguration
         }
     }
 
@@ -78,7 +89,7 @@ class ReaderProcessTest {
     inner class ProcessReaderOrNull {
         @Test
         fun `should pass`() {
-            TypeExample::class.processReaderOrNull(configuration)
+            TypeExample::class.processReaderOrNull(testConfiguration)
                 .assertNotNull()
         }
 
@@ -86,7 +97,7 @@ class ReaderProcessTest {
         fun `should pass ignoring invalid pagination`() {
             TypeExample::class.processReaderOrNull {
                 file = "test"
-                folder = "folder"
+                folder = FOLDER
                 pagination {
                     page = 0
                     size = 1
@@ -98,7 +109,7 @@ class ReaderProcessTest {
         fun `should pass with filter`() {
             TypeExample::class.processReaderOrNull {
                 file = "test"
-                folder = "folder"
+                folder = FOLDER
                 filter { second % 2 == 0 }
             }.assertNotNull()
         }
@@ -107,10 +118,15 @@ class ReaderProcessTest {
         fun `should pass with pagination`() {
             TypeExample::class.processReaderOrNull {
                 file = "test"
-                folder = "folder"
+                folder = FOLDER
                 pagination { page = 2 }
             }.assertNotNull()
         }
+
+        @Test
+        fun `should fail with invalid header in CSV file`(): Unit =
+            TypeExample::class.processReaderOrNull(invalidHeaderConfiguration)
+                .assertNull()
 
         @Test
         fun `should fail with blank file`(): Unit = TypeExample::class
@@ -119,14 +135,18 @@ class ReaderProcessTest {
 
         @Test
         fun `should fail with non data class type`(): Unit =
-            ClassTypeExample::class.processReaderOrNull(configuration)
+            ClassTypeExample::class.processReaderOrNull(testConfiguration)
                 .assertNull()
 
         @Test
         fun `should fail with private type`(): Unit = PrivateTypeExample::class
-            .processReaderOrNull(configuration)
+            .processReaderOrNull(testConfiguration)
             .assertNull()
     }
 
     private data class PrivateTypeExample(val a: String)
+
+    private companion object {
+        const val FOLDER: String = "folder"
+    }
 }
