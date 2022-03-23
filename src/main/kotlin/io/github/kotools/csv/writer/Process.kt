@@ -4,6 +4,7 @@ import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import io.github.kotools.csv.common.*
 import io.github.kotools.csv.common.Target
+import io.github.kotools.types.string.NotBlankString
 import java.io.File
 import kotlin.reflect.KClass
 
@@ -13,16 +14,18 @@ private val Writer<*>.csv: CsvWriter
 internal infix fun <T : Any> KClass<T>.processWriter(
     configuration: Writer<T>.() -> Unit
 ) {
-    val dataType: DataType<T> = toDataType()
+    val dataType: DataType<T> = dataType
     val writer: WriterImplementation<T> = WriterImplementation<T>()
         .apply(configuration)
     if (!writer.isValid()) invalidConfigurationError()
     val target: Target =
         findTargetOrNull(writer.filePath) ?: writer.createTarget()
-    val file: File = if (target is Target.File) target.file else return
-    val records: MutableList<List<String>> =
-        if (writer.overwrite) mutableListOf(dataType.constructorParameters)
-        else mutableListOf()
+    val file: File = if (target is Target.File) target.file
+    else unexpectedError()
+    val records: MutableList<List<String>> = mutableListOf()
+    if (writer.overwrite) records += dataType
+        .constructorParameters
+        .map(NotBlankString::value)
     records += writer.records.map(dataType::getValuesOf)
     writer.csv.writeAll(records, file, !writer.overwrite)
 }

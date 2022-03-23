@@ -1,6 +1,9 @@
 package io.github.kotools.csv.common
 
-internal val Manager.filePath: String get() = "$folder$file"
+import io.github.kotools.types.string.NotBlankString
+import io.github.kotools.types.string.notBlank
+
+internal val Manager.filePath: NotBlankString get() = "$folder$file".notBlank
 
 /** Scope for manipulating CSV files. */
 public interface Manager {

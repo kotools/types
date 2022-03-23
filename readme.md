@@ -37,12 +37,11 @@ only 3 direct dependencies:
 
 ### Explicit error handling
 
-Kotools CSV lets you choose explicitly how to handle errors following
-the [Kotlin Standard Library](https://kotlinlang.org/api/latest/jvm/stdlib)'s
-design: if something goes wrong, functions suffixed by `OrNull` will
-return `null` and other functions will throw an `IllegalStateException`. With
-this explicit design, you can orchestrate easily your application state in
-production.
+Kotools CSV lets you choose explicitly how to handle errors following the design
+of [Kotlin Standard Library](https://kotlinlang.org/api/latest/jvm/stdlib): if
+something goes wrong, functions suffixed by `OrNull` will return `null` and
+other functions will throw an `IllegalStateException`. With this explicit
+design, you can orchestrate easily your application state in production.
 
 ### Simply elegant
 

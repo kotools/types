@@ -4,17 +4,20 @@ import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import io.github.kotools.csv.common.*
 import io.github.kotools.csv.common.Target
+import io.github.kotools.types.string.NotBlankString
+import io.github.kotools.types.string.notBlankOrNull
 import kotlin.reflect.KClass
 
 internal infix fun <T : Any> KClass<T>.processReader(
     configuration: Reader<T>.() -> Unit
 ): List<T> {
-    val dataType: DataType<T> = toDataType()
+    val dataType: DataType<T> = dataType
     val reader: ReaderImplementation<T> = ReaderImplementation<T>()
         .apply(configuration)
     if (!reader.isValid()) invalidConfigurationError()
     return findTarget(reader.filePath)
         .let(reader::read)
+        .map(Map<String, String>::withoutBlankKeys)
         .map(dataType::createType)
         .let { reader.pagination?.let(it::getPage) ?: it }
         .let { reader.filter?.let(it::filter) ?: it }
@@ -31,6 +34,12 @@ internal infix fun <T : Any> KClass<T>.processReaderOrNull(
 private infix fun <T : Any> List<T>.getPage(pagination: Reader.Pagination):
         List<T> = chunked(pagination.size)
     .getOrElse(pagination.page - 1) { emptyList() }
+
+private fun <V : Any> Map<String, V>.withoutBlankKeys():
+        Map<NotBlankString, V> = mapKeys {
+    it.key.notBlankOrNull
+        ?: error("CSV file's header shouldn't contain an empty string")
+}
 
 private fun <T : Any> Reader<T>.isValid(): Boolean = file.isNotBlank()
 
