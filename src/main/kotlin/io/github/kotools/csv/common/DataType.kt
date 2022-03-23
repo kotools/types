@@ -1,19 +1,21 @@
 package io.github.kotools.csv.common
 
 import io.github.kotools.types.string.NotBlankString
+import io.github.kotools.types.string.notBlank
+import io.github.kotools.types.string.notBlankOrNull
 import kotlin.reflect.*
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.starProjectedType
 
-internal fun <T : Any> KClass<T>.toDataType(): DataType<T> =
-    DataType create this
+internal val <T : Any> KClass<T>.dataType: DataType<T>
+    get() = DataType create this
 
-private fun <T : Any> KClass<T>.isInternal(): Boolean =
-    visibility?.isInternal() ?: false
+private val KClass<*>.isInternal: Boolean
+    get() = visibility?.isInternal ?: false
 
-private fun KVisibility.isInternal(): Boolean =
-    this == KVisibility.INTERNAL || this == KVisibility.PUBLIC
+private val KVisibility.isInternal: Boolean
+    get() = this == KVisibility.INTERNAL || this == KVisibility.PUBLIC
 
 private infix fun String.toType(type: KType): Any = when (type) {
     Boolean::class.starProjectedType -> toBooleanStrict()
@@ -24,30 +26,40 @@ private infix fun String.toType(type: KType): Any = when (type) {
 @JvmInline
 internal value class DataType<T : Any>
 private constructor(private val type: KClass<T>) {
-    val constructorParameters: List<String>
-        get() = type.primaryConstructor!!.parameters
-            .mapNotNull(KParameter::name)
-    private val properties: Map<String, KProperty1<T, *>>
-        get() = type.declaredMemberProperties
-            .associateBy(KProperty1<T, *>::name)
+    val constructorParameters: List<NotBlankString>
+        get() = type
+            .primaryConstructor!!
+            .parameters
+            .mapNotNull { it.name?.notBlankOrNull }
+
+    private val properties: Map<NotBlankString, KProperty1<T, *>>
+        get() = type
+            .declaredMemberProperties
+            .associateBy { it.name.notBlank }
 
     infix fun createType(record: Map<NotBlankString, String>): T {
         val arguments: Array<Any?> = record
-            .map { properties[it.key.value]?.returnType?.let(it.value::toType) }
+            .map(::entryToType)
             .toTypedArray()
         return type.primaryConstructor!!.call(*arguments)
     }
 
-    infix fun getValuesOf(item: T): List<String> = constructorParameters
-        .mapNotNull {
-            properties[it]?.get(item)
+    infix fun getValuesOf(item: T): List<String> =
+        constructorParameters.mapNotNull {
+            properties[it]
+                ?.get(item)
                 ?.toString()
         }
+
+    private infix fun entryToType(entry: Map.Entry<NotBlankString, String>):
+            Any? = properties[entry.key]
+        ?.returnType
+        ?.let(entry.value::toType)
 
     companion object {
         infix fun <T : Any> create(type: KClass<T>): DataType<T> {
             if (!type.isData) error("$type is not a data class")
-            if (!type.isInternal()) error("$type is not public or internal")
+            if (!type.isInternal) error("$type is not public or internal")
             return DataType(type)
         }
     }

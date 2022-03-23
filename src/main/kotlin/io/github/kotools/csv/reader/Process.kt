@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 internal infix fun <T : Any> KClass<T>.processReader(
     configuration: Reader<T>.() -> Unit
 ): List<T> {
-    val dataType: DataType<T> = toDataType()
+    val dataType: DataType<T> = dataType
     val reader: ReaderImplementation<T> = ReaderImplementation<T>()
         .apply(configuration)
     if (!reader.isValid()) invalidConfigurationError()
