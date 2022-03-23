@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.kotools"
-version = "2.1.1"
+version = "2.2.0"
 
 repositories(RepositoryHandler::mavenCentral)
 
