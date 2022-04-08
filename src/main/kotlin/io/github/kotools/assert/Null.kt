@@ -17,6 +17,10 @@ public fun <T : Any?> T.assertNull(): Unit = kotlin.test.assertNull(this)
  * Asserts that the current value is `null`, or compute and report the
  * [lazyMessage]'s result if not.
  */
+@Deprecated(
+    "Give the message directly as a parameter instead of a lazy one.",
+    ReplaceWith("assertNull(other, message)")
+)
 public inline infix fun <T : Any?> T.assertNull(
     lazyMessage: () -> String
 ): Unit = kotlin.test.assertNull(this, lazyMessage())

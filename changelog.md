@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Deprecated
 
-- Equality assertions with lazy messages
+- Equality and nullability assertions with lazy messages
   ([#5](https://github.com/kotools/assert/issues/5)).
 
 ## Version 1.1.0 - 2022/02/12
