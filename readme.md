@@ -7,29 +7,26 @@ Kotools Assert is a lightweight assertions library for [Kotlin].
 
 ```kotlin
 1 assertEquals 1
-1.assertEquals(1, "1 should equal 1")
-1.assertEquals(1) { "$this should be equal to $it" }
+1.assertEquals(1, "1 should be equal to 1")
 
 2 assertNotEquals 0
 2.assertNotEquals(0, "2 shouldn't be equal to 0")
-2.assertNotEquals(0) { "$this shouldn't be equal to $it" }
 
 assertNull { null }
 assertNull("result should be null") { null }
 null.assertNull()
 null assertNull "result should be null"
-null assertNull { "result should be null" }
 
 assertNotNull { 3 }
 assertNotNull("result shouldn't be null") { 3 }
 3.assertNotNull()
 3 assertNotNull "result shouldn't be null"
-3 assertNotNull { "result shouldn't be null" }
 
 assertFails { throw Exception() }
-assertFails<RuntimeException> { throw RuntimeException() }
 assertFails("Should fail") { throw Exception() }
-assertFails<RuntimeException>("Should fail with RuntimeException") {
+
+assertFailsWith<RuntimeException> { throw RuntimeException() }
+assertFailsWith<RuntimeException>("Should fail with RuntimeException") {
     throw RuntimeException()
 }
 ```
