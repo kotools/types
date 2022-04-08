@@ -1,19 +1,18 @@
 name: Delivery
 on:
-  push:
-    branches: [ main ]
-    paths: [ '*.kts', '*gradle*', .github/workflows/delivery.yml, src/** ]
+  workflow_run:
+    workflows: [ Integration ]
+    types: [ completed ]
 jobs:
   deliver:
     name: Deliver to OSSRH
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
       - name: Deliver package to OSSRH
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
