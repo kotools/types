@@ -5,9 +5,7 @@ title: Release version $VERSION
 labels: release
 ---
 
-## Dependencies
-
-Issues of this new version should be done before resolving this issue.
+> Issues of this new version should be done before resolving this issue.
 
 ## Checklist
 
