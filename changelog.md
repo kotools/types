@@ -22,6 +22,11 @@ All notable changes to this project will be documented in this file.
 - Split specific failure assertions `assertFailsWith` from untyped failure
   assertions `assertFails` ([#5](https://github.com/kotools/assert/issues/5)).
 
+### Deprecated
+
+- Equality assertions with lazy messages
+  ([#5](https://github.com/kotools/assert/issues/5)).
+
 ## Version 1.1.0 - 2022/02/12
 
 ### Added
