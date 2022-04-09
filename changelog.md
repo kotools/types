@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 1.2.0 - 2022/04/09
+
 ### Changed
 
 - Split specific failure assertions `assertFailsWith` from untyped failure
