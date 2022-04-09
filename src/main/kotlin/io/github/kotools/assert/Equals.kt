@@ -2,7 +2,7 @@ package io.github.kotools.assert
 
 /** Asserts that the current value is equal to the [other] value. */
 public infix fun <T : Any> T.assertEquals(other: T): Unit =
-    assertEquals(other, "$this should be equal to $other")
+    kotlin.test.assertEquals(other, this)
 
 /**
  * Asserts that the current value is equal to the [other] value, or compute and

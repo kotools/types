@@ -2,7 +2,7 @@ package io.github.kotools.assert
 
 /** Asserts that the current value isn't equal to the [other] value. */
 public infix fun <T : Any> T.assertNotEquals(other: T): Unit =
-    assertNotEquals(other, "$this shouldn't be equal to $other")
+    kotlin.test.assertNotEquals(other, this)
 
 /**
  * Asserts that the current value isn't equal to the [other] value, or compute
