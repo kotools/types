@@ -2,7 +2,12 @@ name: Integration
 on:
   push:
     branches: [ main ]
-    paths: [ '*.kts', '*gradle*', .github/workflows/delivery.yml, src/** ]
+    paths:
+      - '*.kts'
+      - '*gradle*'
+      - .github/workflows/delivery.yml
+      - .github/workflows/integration.yml
+      - src/**
 jobs:
   # ---------- Stage 1 ----------
   validate-wrapper:
