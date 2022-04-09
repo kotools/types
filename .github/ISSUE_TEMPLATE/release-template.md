@@ -10,6 +10,6 @@ labels: release
 ## Checklist
 
 - [ ] Upgrade the application's version.
-- [ ] Add a new version in changelog.
 - [ ] Update version in readme.
+- [ ] Add a new version in changelog.
 - [ ] Create a release on the repository.
