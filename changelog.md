@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Removed
+
+- Equality and nullability assertions with lazy messages
+  ([#11](https://github.com/kotools/assert/issues/11)).
+
 ## Version 1.2.0 - 2022/04/09
 
 ### Changed
