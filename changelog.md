@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Implement `NotEmptyList` type
+  ([#6](https://github.com/kotools/types/issues/6)).
+
 ## Version 1.2.0 - 2022/07/11
 
 ### Added
