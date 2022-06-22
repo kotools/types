@@ -1,9 +1,12 @@
 package io.github.kotools.types.int
 
+import kotools.types.annotations.SinceKotoolsTypes
+
 /**
  * Transforms the current [Int] to a [StrictlyNegativeInt], or throws an
  * [IllegalArgumentException] if the current value is not lower than `0`.
  */
+@SinceKotoolsTypes("1.0")
 public val Int.strictlyNegative: StrictlyNegativeInt
     get() = StrictlyNegativeInt create this
 
@@ -11,11 +14,13 @@ public val Int.strictlyNegative: StrictlyNegativeInt
  * Transforms the current [Int] to a [StrictlyNegativeInt], or returns `null`
  * if the current value is not lower than `0`.
  */
+@SinceKotoolsTypes("1.0")
 public val Int.strictlyNegativeOrNull: StrictlyNegativeInt?
     get() = StrictlyNegativeInt createOrNull this
 
 /** Type representing strictly negative integers (`< 0`). */
 @JvmInline
+@SinceKotoolsTypes("1.0")
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
 ) : IntType {

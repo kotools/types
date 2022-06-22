@@ -1,9 +1,12 @@
 package io.github.kotools.types.int
 
+import kotools.types.annotations.SinceKotoolsTypes
+
 /**
  * Transforms the current [Int] to a [StrictlyPositiveInt], or throws an
  * [IllegalArgumentException] if the current value is not greater than 0.
  */
+@SinceKotoolsTypes("1.0")
 public val Int.strictlyPositive: StrictlyPositiveInt
     get() = StrictlyPositiveInt create this
 
@@ -11,11 +14,13 @@ public val Int.strictlyPositive: StrictlyPositiveInt
  * Transforms the current [Int] to a [StrictlyPositiveInt], or returns `null` if
  * the current value is not greater than 0.
  */
+@SinceKotoolsTypes("1.0")
 public val Int.strictlyPositiveOrNull: StrictlyPositiveInt?
     get() = StrictlyPositiveInt createOrNull this
 
 /** Type representing strictly positive integers (`> 0`). */
 @JvmInline
+@SinceKotoolsTypes("1.0")
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
 ) : IntType {
