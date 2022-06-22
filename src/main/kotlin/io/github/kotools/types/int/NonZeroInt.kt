@@ -1,19 +1,24 @@
 package io.github.kotools.types.int
 
+import kotools.types.annotations.SinceKotoolsTypes
+
 /**
  * Transforms the current [Int] to a [NonZeroInt], or throws an
  * [IllegalArgumentException] if the current value is `0`.
  */
+@SinceKotoolsTypes("1.0")
 public val Int.nonZero: NonZeroInt get() = NonZeroInt create this
 
 /**
  * Transforms the current [Int] to a [NonZeroInt], or returns `null` if the
  * current value is `0`.
  */
+@SinceKotoolsTypes("1.0")
 public val Int.nonZeroOrNull: NonZeroInt? get() = NonZeroInt createOrNull this
 
 /** Type representing integers that can't equal 0. */
 @JvmInline
+@SinceKotoolsTypes("1.0")
 public value class NonZeroInt private constructor(override val value: Int) :
     IntType {
     override fun toString(): String = value.toString()
