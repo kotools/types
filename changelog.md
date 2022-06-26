@@ -21,6 +21,13 @@ All notable changes to this project will be documented in this file.
 
 - Implement and apply `SinceKotoolsTypes` annotation on every declarations
   ([#23](https://github.com/kotools/types/issues/23)).
+- Implement a new `NonZeroInt` type in `kotools.types.number` package
+  ([#16](https://github.com/kotools/types/issues/16)).
+
+### Deprecated
+
+- Deprecate the old `NonZeroInt` type in `io.github.kotools.types.int` and its
+  builders ([#16](https://github.com/kotools/types/issues/16)).
 
 ## Version 1.0.1 - 2022/03/21
 

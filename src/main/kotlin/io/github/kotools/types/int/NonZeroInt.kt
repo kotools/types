@@ -1,11 +1,20 @@
+@file:Suppress("DEPRECATION")
+
 package io.github.kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
+
+@SinceKotoolsTypes("1.1")
+private const val NEW_PACKAGE: String = "kotools.types.number"
 
 /**
  * Transforms the current [Int] to a [NonZeroInt], or throws an
  * [IllegalArgumentException] if the current value is `0`.
  */
+@Deprecated(
+    "Use toNonZeroInt() instead.",
+    ReplaceWith("toNonZeroInt()", "$NEW_PACKAGE.toNonZeroInt")
+)
 @SinceKotoolsTypes("1.0")
 public val Int.nonZero: NonZeroInt get() = NonZeroInt create this
 
@@ -13,10 +22,15 @@ public val Int.nonZero: NonZeroInt get() = NonZeroInt create this
  * Transforms the current [Int] to a [NonZeroInt], or returns `null` if the
  * current value is `0`.
  */
+@Deprecated(
+    "Use toNonZeroIntOrNull() instead.",
+    ReplaceWith("toNonZeroIntOrNull()", "$NEW_PACKAGE.toNonZeroIntOrNull")
+)
 @SinceKotoolsTypes("1.0")
 public val Int.nonZeroOrNull: NonZeroInt? get() = NonZeroInt createOrNull this
 
 /** Type representing integers that can't equal 0. */
+@Deprecated("This type will be replaced by $NEW_PACKAGE.NonZeroInt.")
 @JvmInline
 @SinceKotoolsTypes("1.0")
 public value class NonZeroInt private constructor(override val value: Int) :
