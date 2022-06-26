@@ -10,9 +10,22 @@ import kotools.types.annotations.SinceKotoolsTypes
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
+/**
+ * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
+ * if it equals `0`.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
+public fun PositiveInt.toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
 /** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
+
+/** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
+@SinceKotoolsTypes("1.1")
+public fun PositiveInt.toNonZeroIntOrNull(): NonZeroInt? =
+    NonZeroInt orNull value
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")
@@ -58,11 +71,19 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: NonZeroInt): Int = value + other.value
 
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: PositiveInt): Int =
+        value + other.value
+
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: NonZeroInt): Int =
+        value - other.value
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: PositiveInt): Int =
         value - other.value
 
     /** Multiplies this [value] by the [other] value. */
@@ -72,10 +93,14 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public infix operator fun times(other: NonZeroInt): NonZeroInt =
         NonZeroInt(value * other.value)
 
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: PositiveInt): Int =
+        value * other.value
+
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero, or throws an [ArithmeticException] if
-     * the [other] value equals `0`.
+     * integer that is closer to zero.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
     public infix operator fun div(other: Int): NonZeroInt =
@@ -86,6 +111,15 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * integer that is closer to zero.
      */
     public infix operator fun div(other: NonZeroInt): NonZeroInt =
+        NonZeroInt(value / other.value)
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
+     */
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: PositiveInt): NonZeroInt =
         NonZeroInt(value / other.value)
 
     /**
