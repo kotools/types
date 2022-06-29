@@ -19,6 +19,14 @@ public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
 public fun NonZeroInt.toPositiveInt(): PositiveInt = PositiveInt(value)
 
 /**
+ * Returns this value as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if it's strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
+public fun NegativeInt.toPositiveInt(): PositiveInt = PositiveInt(value)
+
+/**
  * Returns this value as a [PositiveInt] or `null` if it's strictly negative.
  */
 @SinceKotoolsTypes("1.1")
@@ -29,6 +37,13 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
  */
 @SinceKotoolsTypes("1.1")
 public fun NonZeroInt.toPositiveIntOrNull(): PositiveInt? =
+    PositiveInt orNull value
+
+/**
+ * Returns this value as a [PositiveInt] or `null` if it's strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun NegativeInt.toPositiveIntOrNull(): PositiveInt? =
     PositiveInt orNull value
 
 /** Adds the [other] value to this value. */
@@ -85,6 +100,10 @@ public value class PositiveInt(public val value: Int) :
     public infix operator fun plus(other: PositiveInt): PositiveInt =
         PositiveInt(value + other.value)
 
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: NegativeInt): Int =
+        value + other.value
+
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
 
@@ -96,6 +115,10 @@ public value class PositiveInt(public val value: Int) :
     public infix operator fun minus(other: PositiveInt): Int =
         value - other.value
 
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: NegativeInt): PositiveInt =
+        PositiveInt(value - other.value)
+
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: Int): Int = value * other
 
@@ -106,6 +129,10 @@ public value class PositiveInt(public val value: Int) :
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: PositiveInt): PositiveInt =
         PositiveInt(value * other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: NegativeInt): NegativeInt =
+        NegativeInt(value * other.value)
 
     /**
      * Divides this [value] by [other], truncating the result to an integer that
@@ -131,6 +158,15 @@ public value class PositiveInt(public val value: Int) :
         PositiveInt(value / other.value)
 
     /**
+     * Divides this [value] by [other], truncating the result to an integer that
+     * is closer to zero.
+     * Throws an [ArithmeticException] if other equals `0`.
+     */
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: NegativeInt): NegativeInt =
+        NegativeInt(value / other.value)
+
+    /**
      * Returns this [value] incremented by one.
      * If this [value] is the [maximum][NonZeroInt.max], it returns the
      * [minimum][NonZeroInt.min] value instead.
@@ -149,9 +185,8 @@ public value class PositiveInt(public val value: Int) :
     /** Returns this [value]. */
     public operator fun unaryPlus(): PositiveInt = this
 
-    // TODO: This function will return a NegativeInt (see issue #15).
     /** Return the negative of this [value]. */
-    public operator fun unaryMinus(): Int = -value
+    public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
     public companion object {
         /** The minimum value an instance of [PositiveInt] can have. */

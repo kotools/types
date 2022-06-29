@@ -169,6 +169,17 @@ class NonZeroIntTest {
             // THEN
             result assertEquals 0
         }
+
+        @Test
+        fun `should return an int with a negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = NegativeInt(-2)
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals -3
+        }
     }
 
     @Nested
@@ -216,6 +227,17 @@ class NonZeroIntTest {
             // THEN
             result assertEquals -1
         }
+
+        @Test
+        fun `should return an int with a negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = NegativeInt(-1)
+            // WHEN
+            val result: Int = x - y
+            // THEN
+            result assertEquals 0
+        }
     }
 
     @Nested
@@ -262,6 +284,17 @@ class NonZeroIntTest {
             val result: Int = x * y
             // THEN
             result assertEquals -2
+        }
+
+        @Test
+        fun `should return an int with a negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = NegativeInt(-2)
+            // WHEN
+            val result: Int = x * y
+            // THEN
+            result assertEquals 2
         }
     }
 
@@ -325,6 +358,26 @@ class NonZeroIntTest {
             // GIVEN
             val x = NonZeroInt(-3)
             val y = PositiveInt(0)
+            // WHEN & THEN
+            assertFailsWith<ArithmeticException> { x / y }
+        }
+
+        @Test
+        fun `should return a non zero int with a negative int other than 0`() {
+            // GIVEN
+            val x = NonZeroInt(-4)
+            val y = NegativeInt(-2)
+            // WHEN
+            val result: NonZeroInt = assertDoesNotThrow { x / y }
+            // THEN
+            result.value assertEquals 2
+        }
+
+        @Test
+        fun `should throw an error with a negative int that equals 0`() {
+            // GIVEN
+            val x = NonZeroInt(-4)
+            val y = NegativeInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }

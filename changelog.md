@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
   ([#16](https://github.com/kotools/types/issues/16)).
 - Implement `kotools.types.number.PositiveInt` type
   ([#14](https://github.com/kotools/types/issues/14)).
+- Implement `kotools.types.number.NegativeInt` type
+  ([#15](https://github.com/kotools/types/issues/15)).
 
 ### Deprecated
 
