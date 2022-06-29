@@ -8,6 +8,7 @@ on:
       - .github/workflows/delivery.yml
       - .github/workflows/integration.yml
       - src/**
+  workflow_dispatch:
 jobs:
   # ---------- Stage 1 ----------
   validate-wrapper:
