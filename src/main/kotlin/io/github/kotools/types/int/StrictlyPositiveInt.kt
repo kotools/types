@@ -1,11 +1,20 @@
+@file:Suppress("DEPRECATION")
+
 package io.github.kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
+
+@SinceKotoolsTypes("1.1")
+private const val NEW_PACKAGE: String = "kotools.types.number"
 
 /**
  * Transforms the current [Int] to a [StrictlyPositiveInt], or throws an
  * [IllegalArgumentException] if the current value is not greater than 0.
  */
+@Deprecated(
+    "Use toStrictlyPositiveInt() instead.",
+    ReplaceWith("toStrictlyPositiveInt()", "$NEW_PACKAGE.toStrictlyPositiveInt")
+)
 @SinceKotoolsTypes("1.0")
 public val Int.strictlyPositive: StrictlyPositiveInt
     get() = StrictlyPositiveInt create this
@@ -14,11 +23,19 @@ public val Int.strictlyPositive: StrictlyPositiveInt
  * Transforms the current [Int] to a [StrictlyPositiveInt], or returns `null` if
  * the current value is not greater than 0.
  */
+@Deprecated(
+    "Use toStrictlyPositiveIntOrNull() instead.",
+    ReplaceWith(
+        "toStrictlyPositiveIntOrNull()",
+        "$NEW_PACKAGE.toStrictlyPositiveIntOrNull"
+    )
+)
 @SinceKotoolsTypes("1.0")
 public val Int.strictlyPositiveOrNull: StrictlyPositiveInt?
     get() = StrictlyPositiveInt createOrNull this
 
 /** Type representing strictly positive integers (`> 0`). */
+@Deprecated("This type will be replaced by $NEW_PACKAGE.StrictlyPositiveInt.")
 @JvmInline
 @SinceKotoolsTypes("1.0")
 public value class StrictlyPositiveInt private constructor(

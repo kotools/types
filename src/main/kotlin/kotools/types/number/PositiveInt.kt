@@ -24,6 +24,14 @@ public fun NonZeroInt.toPositiveInt(): PositiveInt = PositiveInt(value)
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
+public fun StrictlyPositiveInt.toPositiveInt(): PositiveInt = PositiveInt(value)
+
+/**
+ * Returns this value as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if it's strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
 public fun NegativeInt.toPositiveInt(): PositiveInt = PositiveInt(value)
 
 /**
@@ -37,6 +45,13 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
  */
 @SinceKotoolsTypes("1.1")
 public fun NonZeroInt.toPositiveIntOrNull(): PositiveInt? =
+    PositiveInt orNull value
+
+/**
+ * Returns this value as a [PositiveInt] or `null` if it's strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun StrictlyPositiveInt.toPositiveIntOrNull(): PositiveInt? =
     PositiveInt orNull value
 
 /**
@@ -101,6 +116,11 @@ public value class PositiveInt(public val value: Int) :
         PositiveInt(value + other.value)
 
     /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(
+        other: StrictlyPositiveInt
+    ): StrictlyPositiveInt = StrictlyPositiveInt(value + other.value)
+
+    /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: NegativeInt): Int =
         value + other.value
 
@@ -116,6 +136,10 @@ public value class PositiveInt(public val value: Int) :
         value - other.value
 
     /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: StrictlyPositiveInt): Int =
+        value - other.value
+
+    /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: NegativeInt): PositiveInt =
         PositiveInt(value - other.value)
 
@@ -128,6 +152,10 @@ public value class PositiveInt(public val value: Int) :
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: PositiveInt): PositiveInt =
+        PositiveInt(value * other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: StrictlyPositiveInt): PositiveInt =
         PositiveInt(value * other.value)
 
     /** Multiplies this [value] by the [other] value. */
@@ -155,6 +183,13 @@ public value class PositiveInt(public val value: Int) :
      */
     @Throws(ArithmeticException::class)
     public infix operator fun div(other: PositiveInt): PositiveInt =
+        PositiveInt(value / other.value)
+
+    /**
+     * Divides this [value] by [other], truncating the result to an integer that
+     * is closer to zero.
+     */
+    public infix operator fun div(other: StrictlyPositiveInt): PositiveInt =
         PositiveInt(value / other.value)
 
     /**
