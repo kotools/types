@@ -171,6 +171,17 @@ class NegativeIntTest {
         }
 
         @Test
+        fun `should return an int with a strictly positive int`() {
+            // GIVEN
+            val x = NegativeInt(-5)
+            val y = StrictlyPositiveInt(2)
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals -3
+        }
+
+        @Test
         fun `should return a negative int with a negative int`() {
             // GIVEN
             val x = NegativeInt(-1)
@@ -229,6 +240,17 @@ class NegativeIntTest {
         }
 
         @Test
+        fun `should return a negative int with a strictly positive int`() {
+            // GIVEN
+            val x = NegativeInt(-1)
+            val y = StrictlyPositiveInt(1)
+            // WHEN
+            val result: NegativeInt = x - y
+            // THEN
+            result.value assertEquals -2
+        }
+
+        @Test
         fun `should return an int with a negative int`() {
             // GIVEN
             val x = NegativeInt(-1)
@@ -280,6 +302,17 @@ class NegativeIntTest {
             // GIVEN
             val x = NegativeInt(-1)
             val y = PositiveInt(2)
+            // WHEN
+            val result: NegativeInt = x * y
+            // THEN
+            result.value assertEquals -2
+        }
+
+        @Test
+        fun `should return a negative int with a strictly positive int`() {
+            // GIVEN
+            val x = NegativeInt(-1)
+            val y = StrictlyPositiveInt(2)
             // WHEN
             val result: NegativeInt = x * y
             // THEN
@@ -369,6 +402,17 @@ class NegativeIntTest {
             val y = PositiveInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
+        }
+
+        @Test
+        fun `should return a negative int with a strictly positive int`() {
+            // GIVEN
+            val x = NegativeInt(-4)
+            val y = StrictlyPositiveInt(2)
+            // WHEN
+            val result: NegativeInt = x / y
+            // THEN
+            result.value assertEquals -2
         }
 
         @Test
