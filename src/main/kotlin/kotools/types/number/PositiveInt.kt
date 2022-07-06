@@ -168,16 +168,16 @@ public value class PositiveInt(public val value: Int) :
 
     /**
      * Returns this [value] incremented by one.
-     * If this [value] is the [maximum][NonZeroInt.max], it returns the
-     * [minimum][NonZeroInt.min] value instead.
+     * If this [value] is the [maximum][PositiveInt.max], it returns the
+     * [minimum][PositiveInt.min] value instead.
      */
     public operator fun inc(): PositiveInt = if (value == max.value) min
     else PositiveInt(value + 1)
 
     /**
      * Returns this [value] decremented by one.
-     * If this [value] is the [minimum][NonZeroInt.min], it returns the
-     * [maximum][NonZeroInt.max] value instead.
+     * If this [value] is the [minimum][PositiveInt.min], it returns the
+     * [maximum][PositiveInt.max] value instead.
      */
     public operator fun dec(): PositiveInt = if (value == min.value) max
     else PositiveInt(value - 1)
@@ -185,7 +185,7 @@ public value class PositiveInt(public val value: Int) :
     /** Returns this [value]. */
     public operator fun unaryPlus(): PositiveInt = this
 
-    /** Return the negative of this [value]. */
+    /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
     public companion object {
