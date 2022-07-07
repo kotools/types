@@ -85,6 +85,20 @@ public value class PositiveInt(
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         StrictlyPositiveInt orNull value
 
+    /**
+     * Returns this [value] as a [NegativeInt], or throws an
+     * [IllegalArgumentException] if it's strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+
+    /**
+     * Returns this [value] as a [NegativeInt] or `null` if it's strictly
+     * positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
+
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
 
