@@ -11,38 +11,10 @@ import kotools.types.annotations.SinceKotoolsTypes
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
 
-/**
- * Returns this value as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if it's negative.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun NonZeroInt.toStrictlyPositiveInt(): StrictlyPositiveInt =
-    StrictlyPositiveInt(value)
-
-/**
- * Returns this value as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if it's negative.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun PositiveInt.toStrictlyPositiveInt(): StrictlyPositiveInt =
-    StrictlyPositiveInt(value)
-
 /** Returns this value as a [StrictlyPositiveInt] or `null` if it's negative. */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     StrictlyPositiveInt orNull this
-
-/** Returns this value as a [StrictlyPositiveInt] or `null` if it's negative. */
-@SinceKotoolsTypes("1.1")
-public fun NonZeroInt.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-    StrictlyPositiveInt orNull value
-
-/** Returns this value as a [StrictlyPositiveInt] or `null` if it's negative. */
-@SinceKotoolsTypes("1.1")
-public fun PositiveInt.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-    StrictlyPositiveInt orNull value
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")
