@@ -10,48 +10,9 @@ import kotools.types.annotations.SinceKotoolsTypes
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
-/**
- * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
- * if it equals `0`.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun PositiveInt.toNonZeroInt(): NonZeroInt = NonZeroInt(value)
-
-/**
- * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
- * if it equals `0`.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun StrictlyPositiveInt.toNonZeroInt(): NonZeroInt = NonZeroInt(value)
-
-/**
- * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
- * if it equals `0`.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun NegativeInt.toNonZeroInt(): NonZeroInt = NonZeroInt(value)
-
 /** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
-
-/** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
-@SinceKotoolsTypes("1.1")
-public fun PositiveInt.toNonZeroIntOrNull(): NonZeroInt? =
-    NonZeroInt orNull value
-
-/** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
-@SinceKotoolsTypes("1.1")
-public fun StrictlyPositiveInt.toNonZeroIntOrNull(): NonZeroInt? =
-    NonZeroInt orNull value
-
-/** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
-@SinceKotoolsTypes("1.1")
-public fun NegativeInt.toNonZeroIntOrNull(): NonZeroInt? =
-    NonZeroInt orNull value
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")

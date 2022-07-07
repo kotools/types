@@ -85,6 +85,9 @@ public value class StrictlyPositiveInt(
     override fun compareTo(other: StrictlyPositiveInt): Int =
         value.compareTo(other.value)
 
+    /** Returns this [value] as a [NonZeroInt]. */
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
     override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */

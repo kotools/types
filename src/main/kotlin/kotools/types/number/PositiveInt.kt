@@ -103,6 +103,16 @@ public value class PositiveInt(
     override fun compareTo(other: PositiveInt): Int =
         value.compareTo(other.value)
 
+    /**
+     * Returns this value as a [NonZeroInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
+    /** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
+    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
+
     override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */
