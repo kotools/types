@@ -171,6 +171,57 @@ class PositiveIntTest {
     }
 
     @Nested
+    inner class ToStrictlyPositiveInt {
+        @Test
+        fun `should return its value as a strictly positive int with 1`() {
+            // GIVEN
+            val value = 1
+            val x = PositiveInt(value)
+            // WHEN
+            val result: StrictlyPositiveInt =
+                assertDoesNotThrow(x::toStrictlyPositiveInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 0`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = x::toStrictlyPositiveInt
+            )
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a strictly positive int with 2`() {
+                // GIVEN
+                val value = 2
+                val x = PositiveInt(value)
+                // WHEN
+                val result: StrictlyPositiveInt? =
+                    x.toStrictlyPositiveIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 0`() {
+                // GIVEN
+                val x = PositiveInt(0)
+                // WHEN
+                val result: StrictlyPositiveInt? =
+                    x.toStrictlyPositiveIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
     inner class Plus {
         @Test
         fun `should return an int with an int`() {

@@ -61,14 +61,29 @@ public value class PositiveInt(
     override fun toString(): String = value.toString()
 
     /**
-     * Returns this value as a [NonZeroInt], or throws an
+     * Returns this [value] as a [NonZeroInt], or throws an
      * [IllegalArgumentException] if it equals `0`.
      */
     @Throws(IllegalArgumentException::class)
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
-    /** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
+    /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        StrictlyPositiveInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it equals
+     * `0`.
+     */
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        StrictlyPositiveInt orNull value
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
