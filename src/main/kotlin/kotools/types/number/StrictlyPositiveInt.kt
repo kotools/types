@@ -85,13 +85,13 @@ public value class StrictlyPositiveInt(
     override fun compareTo(other: StrictlyPositiveInt): Int =
         value.compareTo(other.value)
 
+    override fun toString(): String = value.toString()
+
     /** Returns this [value] as a [NonZeroInt]. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
     /** Returns this [value] as a [PositiveInt]. */
     public fun toPositiveInt(): PositiveInt = PositiveInt(value)
-
-    override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other

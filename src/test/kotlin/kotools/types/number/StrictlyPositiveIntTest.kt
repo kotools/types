@@ -96,6 +96,20 @@ class StrictlyPositiveIntTest {
     }
 
     @Nested
+    inner class ToString {
+        @Test
+        fun `should return its value as a string`() {
+            // GIVEN
+            val value = 1
+            val x = StrictlyPositiveInt(value)
+            // WHEN
+            val result: String = x.toString()
+            // THEN
+            result assertEquals value.toString()
+        }
+    }
+
+    @Nested
     inner class ToNonZeroInt {
         @Test
         fun `should return its value as a non zero int`() {
@@ -120,20 +134,6 @@ class StrictlyPositiveIntTest {
             val result: PositiveInt = x.toPositiveInt()
             // THEN
             result.value assertEquals value
-        }
-    }
-
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals value.toString()
         }
     }
 

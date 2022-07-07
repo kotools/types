@@ -58,6 +58,8 @@ public value class PositiveInt(
     override fun compareTo(other: PositiveInt): Int =
         value.compareTo(other.value)
 
+    override fun toString(): String = value.toString()
+
     /**
      * Returns this value as a [NonZeroInt], or throws an
      * [IllegalArgumentException] if it equals `0`.
@@ -67,8 +69,6 @@ public value class PositiveInt(
 
     /** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
-
-    override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
