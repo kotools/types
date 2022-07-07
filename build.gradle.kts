@@ -20,7 +20,7 @@ dependencies {
     }
     testImplementation(kotlin("test"))
 
-    testImplementation("io.github.kotools", "assert", "[1.1,1.2[") {
+    testImplementation("io.github.kotools", "assert", "[2.0,2.1[") {
         because("Provides additional assertions")
     }
 }
