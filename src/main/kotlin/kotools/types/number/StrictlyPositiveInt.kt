@@ -88,6 +88,9 @@ public value class StrictlyPositiveInt(
     /** Returns this [value] as a [NonZeroInt]. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
+    /** Returns this [value] as a [PositiveInt]. */
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
     override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */
