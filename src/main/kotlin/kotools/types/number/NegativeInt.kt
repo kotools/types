@@ -100,6 +100,8 @@ public value class NegativeInt(
     /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
 
+    override fun toString(): String = value.toString()
+
     /**
      * Returns this [value] as a [PositiveInt], or throws an
      * [IllegalArgumentException] if it's strictly negative.
@@ -113,8 +115,6 @@ public value class NegativeInt(
      */
     @Throws(IllegalArgumentException::class)
     public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
-
-    override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
