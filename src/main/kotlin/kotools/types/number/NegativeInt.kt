@@ -58,6 +58,8 @@ public value class NegativeInt(
     override fun compareTo(other: NegativeInt): Int =
         value.compareTo(other.value)
 
+    override fun toString(): String = value.toString()
+
     /**
      * Returns this [value] as a [NonZeroInt], or throws an
      * [IllegalArgumentException] if it equals `0`.
@@ -68,7 +70,20 @@ public value class NegativeInt(
     /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
 
-    override fun toString(): String = value.toString()
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        StrictlyNegativeInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it equals
+     * `0`.
+     */
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        StrictlyNegativeInt orNull value
 
     /**
      * Returns this [value] as a [PositiveInt], or throws an
@@ -103,6 +118,11 @@ public value class NegativeInt(
     public infix operator fun plus(other: NegativeInt): NegativeInt =
         NegativeInt(value + other.value)
 
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(
+        other: StrictlyNegativeInt
+    ): StrictlyNegativeInt = StrictlyNegativeInt(value + other.value)
+
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
 
@@ -114,17 +134,17 @@ public value class NegativeInt(
     public infix operator fun minus(other: PositiveInt): NegativeInt =
         NegativeInt(value - other.value)
 
-    /**
-     * Subtracts the [other] value from this [value].
-     *
-     * TODO: This method will return a StrictlyNegativeInt in
-     *  [this issue](https://github.com/kotools/types/issues/19).
-     */
-    public infix operator fun minus(other: StrictlyPositiveInt): NegativeInt =
-        NegativeInt(value - other.value)
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(
+        other: StrictlyPositiveInt
+    ): StrictlyNegativeInt = StrictlyNegativeInt(value - other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: NegativeInt): Int =
+        value - other.value
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: StrictlyNegativeInt): Int =
         value - other.value
 
     /** Multiplies this [value] by the [other] value. */
@@ -144,6 +164,10 @@ public value class NegativeInt(
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NegativeInt): PositiveInt =
+        PositiveInt(value * other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value * other.value)
 
     /**
@@ -183,6 +207,13 @@ public value class NegativeInt(
      */
     @Throws(ArithmeticException::class)
     public infix operator fun div(other: NegativeInt): PositiveInt =
+        PositiveInt(value / other.value)
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value / other.value)
 
     /**
