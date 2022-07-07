@@ -1,11 +1,20 @@
+@file:Suppress("DEPRECATION")
+
 package io.github.kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
+
+@SinceKotoolsTypes("1.1")
+private const val NEW_PACKAGE: String = "kotools.types.number"
 
 /**
  * Transforms the current [Int] to a [StrictlyNegativeInt], or throws an
  * [IllegalArgumentException] if the current value is not lower than `0`.
  */
+@Deprecated(
+    "Use toStrictlyNegativeInt() instead.",
+    ReplaceWith("toStrictlyNegativeInt()", "$NEW_PACKAGE.toStrictlyNegativeInt")
+)
 @SinceKotoolsTypes("1.0")
 public val Int.strictlyNegative: StrictlyNegativeInt
     get() = StrictlyNegativeInt create this
@@ -14,11 +23,19 @@ public val Int.strictlyNegative: StrictlyNegativeInt
  * Transforms the current [Int] to a [StrictlyNegativeInt], or returns `null`
  * if the current value is not lower than `0`.
  */
+@Deprecated(
+    "Use toStrictlyNegativeIntOrNull() instead.",
+    ReplaceWith(
+        "toStrictlyNegativeIntOrNull()",
+        "$NEW_PACKAGE.toStrictlyNegativeIntOrNull"
+    )
+)
 @SinceKotoolsTypes("1.0")
 public val Int.strictlyNegativeOrNull: StrictlyNegativeInt?
     get() = StrictlyNegativeInt createOrNull this
 
 /** Type representing strictly negative integers (`< 0`). */
+@Deprecated("This type will be replaced by $NEW_PACKAGE.StrictlyNegativeInt.")
 @JvmInline
 @SinceKotoolsTypes("1.0")
 public value class StrictlyNegativeInt private constructor(

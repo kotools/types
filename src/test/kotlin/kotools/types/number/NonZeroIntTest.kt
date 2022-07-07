@@ -111,6 +111,57 @@ class NonZeroIntTest {
     }
 
     @Nested
+    inner class ToStrictlyNegativeInt {
+        @Test
+        fun `should return its value as a strictly negative int with -1`() {
+            // GIVEN
+            val value = -1
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: StrictlyNegativeInt =
+                assertDoesNotThrow(x::toStrictlyNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 1`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = x::toStrictlyNegativeInt
+            )
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a strictly negative int with -2`() {
+                // GIVEN
+                val value = -2
+                val x = NonZeroInt(value)
+                // WHEN
+                val result: StrictlyNegativeInt? =
+                    x.toStrictlyNegativeIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 2`() {
+                // GIVEN
+                val x = NonZeroInt(2)
+                // WHEN
+                val result: StrictlyNegativeInt? =
+                    x.toStrictlyNegativeIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
     inner class ToString {
         @Test
         fun `should return its value as a string`() {
@@ -334,6 +385,17 @@ class NonZeroIntTest {
             // THEN
             result assertEquals -3
         }
+
+        @Test
+        fun `should return an int with a strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals 0
+        }
     }
 
     @Nested
@@ -398,6 +460,17 @@ class NonZeroIntTest {
             // GIVEN
             val x = NonZeroInt(-1)
             val y = NegativeInt(-1)
+            // WHEN
+            val result: Int = x - y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return an int with a strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x - y
             // THEN
@@ -471,6 +544,17 @@ class NonZeroIntTest {
             val result: Int = x * y
             // THEN
             result assertEquals 2
+        }
+
+        @Test
+        fun `should return a non zero int with a strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(2)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: NonZeroInt = x * y
+            // THEN
+            result.value assertEquals -2
         }
     }
 
@@ -567,6 +651,17 @@ class NonZeroIntTest {
             val y = NegativeInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
+        }
+
+        @Test
+        fun `should return a non zero int with a strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(2)
+            val y = StrictlyNegativeInt(-2)
+            // WHEN
+            val result: NonZeroInt = x / y
+            // THEN
+            result.value assertEquals -1
         }
     }
 

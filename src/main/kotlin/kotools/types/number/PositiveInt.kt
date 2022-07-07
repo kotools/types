@@ -119,6 +119,10 @@ public value class PositiveInt(
     public infix operator fun plus(other: NegativeInt): Int =
         value + other.value
 
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: StrictlyNegativeInt): Int =
+        value + other.value
+
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
 
@@ -138,6 +142,11 @@ public value class PositiveInt(
     public infix operator fun minus(other: NegativeInt): PositiveInt =
         PositiveInt(value - other.value)
 
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(
+        other: StrictlyNegativeInt
+    ): StrictlyPositiveInt = StrictlyPositiveInt(value - other.value)
+
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: Int): Int = value * other
 
@@ -155,6 +164,10 @@ public value class PositiveInt(
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NegativeInt): NegativeInt =
+        NegativeInt(value * other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: StrictlyNegativeInt): NegativeInt =
         NegativeInt(value * other.value)
 
     /**
@@ -194,6 +207,13 @@ public value class PositiveInt(
      */
     @Throws(ArithmeticException::class)
     public infix operator fun div(other: NegativeInt): NegativeInt =
+        NegativeInt(value / other.value)
+
+    /**
+     * Divides this [value] by [other], truncating the result to an integer that
+     * is closer to zero.
+     */
+    public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
         NegativeInt(value / other.value)
 
     /**

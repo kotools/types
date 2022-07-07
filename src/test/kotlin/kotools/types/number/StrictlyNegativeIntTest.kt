@@ -9,16 +9,15 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-class StrictlyPositiveIntTest {
+class StrictlyNegativeIntTest {
     @Nested
     inner class Constructor {
         @Test
-        fun `should pass with 1`() {
+        fun `should pass with -1`() {
             // GIVEN
-            val value = 1
+            val value = -1
             // WHEN
-            val result: StrictlyPositiveInt =
-                assertDoesNotThrow { StrictlyPositiveInt(value) }
+            val result = assertDoesNotThrow { StrictlyNegativeInt(value) }
             // THEN
             result.value assertEquals value
         }
@@ -29,30 +28,30 @@ class StrictlyPositiveIntTest {
             val value = 0
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException> {
-                StrictlyPositiveInt(value)
+                StrictlyNegativeInt(value)
             }
         }
 
         @Nested
         inner class OrNull {
             @Test
-            fun `should pass with 1`() {
+            fun `should pass with -2`() {
                 // GIVEN
-                val value = 1
+                val value = -2
                 // WHEN
-                val result: StrictlyPositiveInt? =
-                    StrictlyPositiveInt orNull value
+                val result: StrictlyNegativeInt? =
+                    StrictlyNegativeInt orNull value
                 // THEN
                 result.assertNotNull().value assertEquals value
             }
 
             @Test
-            fun `should return null with 0`() {
+            fun `should return null with 1`() {
                 // GIVEN
-                val value = 0
+                val value = 1
                 // WHEN
-                val result: StrictlyPositiveInt? =
-                    StrictlyPositiveInt orNull value
+                val result: StrictlyNegativeInt? =
+                    StrictlyNegativeInt orNull value
                 // THEN
                 result.assertNull()
             }
@@ -62,10 +61,10 @@ class StrictlyPositiveIntTest {
     @Nested
     inner class CompareTo {
         @Test
-        fun `should return 0 when objects have the same value`() {
+        fun `should return 0 when objects are equals`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = StrictlyPositiveInt(1)
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x.compareTo(y)
             // THEN
@@ -75,8 +74,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a negative number when this object is less than the other`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = StrictlyPositiveInt(2)
+            val x = StrictlyNegativeInt(-2)
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x.compareTo(y)
             // THEN
@@ -86,8 +85,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a positive number when this object is greater than the other`() {
             // GIVEN
-            val x = StrictlyPositiveInt(2)
-            val y = StrictlyPositiveInt(1)
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyNegativeInt(-2)
             // WHEN
             val result: Int = x.compareTo(y)
             // THEN
@@ -100,8 +99,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return its value as a string`() {
             // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
+            val value = -1
+            val x = StrictlyNegativeInt(value)
             // WHEN
             val result: String = x.toString()
             // THEN
@@ -114,8 +113,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return its value as a non zero int`() {
             // GIVEN
-            val value = 2
-            val x = StrictlyPositiveInt(value)
+            val value = -1
+            val x = StrictlyNegativeInt(value)
             // WHEN
             val result: NonZeroInt = x.toNonZeroInt()
             // THEN
@@ -124,14 +123,14 @@ class StrictlyPositiveIntTest {
     }
 
     @Nested
-    inner class ToPositiveInt {
+    inner class ToNegativeInt {
         @Test
-        fun `should return its value as a positive int`() {
+        fun `should return its value as a negative int`() {
             // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
+            val value = -1
+            val x = StrictlyNegativeInt(value)
             // WHEN
-            val result: PositiveInt = x.toPositiveInt()
+            val result: NegativeInt = x.toNegativeInt()
             // THEN
             result.value assertEquals value
         }
@@ -142,8 +141,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return an int with an int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = -1
+            val x = StrictlyNegativeInt(-1)
+            val y = 1
             // WHEN
             val result: Int = x + y
             // THEN
@@ -151,10 +150,10 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return an int when adding a strictly positive int to an int`() {
+        fun `should return an int when adding a strictly negative int to an int`() {
             // GIVEN
-            val x = -1
-            val y = StrictlyPositiveInt(1)
+            val x = 1
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x + y
             // THEN
@@ -164,8 +163,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return an int with a non zero int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = NonZeroInt(-1)
+            val x = StrictlyNegativeInt(-1)
+            val y = NonZeroInt(1)
             // WHEN
             val result: Int = x + y
             // THEN
@@ -173,21 +172,21 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return a strictly positive int with a positive int`() {
+        fun `should return an int with a positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
+            val x = StrictlyNegativeInt(-1)
             val y = PositiveInt(1)
             // WHEN
-            val result: StrictlyPositiveInt = x + y
+            val result: Int = x + y
             // THEN
-            result.value assertEquals 2
+            result assertEquals 0
         }
 
         @Test
-        fun `should return an int with a negative int`() {
+        fun `should return an int with a strictly positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = NegativeInt(-1)
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyPositiveInt(1)
             // WHEN
             val result: Int = x + y
             // THEN
@@ -195,14 +194,25 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return an int with a strictly negative int`() {
+        fun `should return a strictly negative int with a negative int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = StrictlyNegativeInt(-1)
+            val x = StrictlyNegativeInt(-1)
+            val y = NegativeInt(-2)
             // WHEN
-            val result: Int = x + y
+            val result: StrictlyNegativeInt = x + y
             // THEN
-            result assertEquals 0
+            result.value assertEquals -3
+        }
+
+        @Test
+        fun `should return a strictly negative int with a strictly negative int`() {
+            // GIVEN
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyNegativeInt(-2)
+            // WHEN
+            val result: StrictlyNegativeInt = x + y
+            // THEN
+            result.value assertEquals -3
         }
     }
 
@@ -211,8 +221,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return an int with an int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = 1
+            val x = StrictlyNegativeInt(-1)
+            val y = -1
             // WHEN
             val result: Int = x - y
             // THEN
@@ -220,10 +230,10 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return an int when subtracting a strictly positive int from an int`() {
+        fun `should return an int when subtracting a strictly negative int from an int`() {
             // GIVEN
-            val x = 1
-            val y = StrictlyPositiveInt(1)
+            val x = -1
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x - y
             // THEN
@@ -233,56 +243,56 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return an int with a non zero int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = NonZeroInt(2)
+            val x = StrictlyNegativeInt(-1)
+            val y = NonZeroInt(-1)
             // WHEN
             val result: Int = x - y
             // THEN
-            result assertEquals -1
+            result assertEquals 0
         }
 
         @Test
-        fun `should return an int with a positive int`() {
+        fun `should return a strictly negative int with a positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = PositiveInt(2)
+            val x = StrictlyNegativeInt(-1)
+            val y = PositiveInt(1)
             // WHEN
-            val result: Int = x - y
+            val result: StrictlyNegativeInt = x - y
             // THEN
-            result assertEquals -1
+            result.value assertEquals -2
         }
 
         @Test
-        fun `should return an int with a strictly positive int`() {
+        fun `should return a strictly negative int with a strictly positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = StrictlyPositiveInt(2)
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyPositiveInt(1)
             // WHEN
-            val result: Int = x - y
+            val result: StrictlyNegativeInt = x - y
             // THEN
-            result assertEquals -1
+            result.value assertEquals -2
         }
 
         @Test
-        fun `should return a strictly positive int with a negative int`() {
+        fun `should return an int with a negative int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
+            val x = StrictlyNegativeInt(-1)
             val y = NegativeInt(-1)
             // WHEN
-            val result: StrictlyPositiveInt = x - y
+            val result: Int = x - y
             // THEN
-            result.value assertEquals 2
+            result assertEquals 0
         }
 
         @Test
-        fun `should return a strictly positive int with a strictly negative int`() {
+        fun `should return an int with a strictly negative int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
+            val x = StrictlyNegativeInt(-1)
             val y = StrictlyNegativeInt(-1)
             // WHEN
-            val result: StrictlyPositiveInt = x - y
+            val result: Int = x - y
             // THEN
-            result.value assertEquals 2
+            result assertEquals 0
         }
     }
 
@@ -291,7 +301,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return an int with an int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(2)
+            val x = StrictlyNegativeInt(-1)
             val y = 0
             // WHEN
             val result: Int = x * y
@@ -300,21 +310,21 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return an int when multiplying an int with a strictly positive int`() {
+        fun `should return an int when multiplying an int by a strictly negative int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(2)
-            val y = -1
+            val x = 0
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x * y
             // THEN
-            result assertEquals -2
+            result assertEquals 0
         }
 
         @Test
         fun `should return a non zero int with a non zero int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(2)
-            val y = NonZeroInt(-1)
+            val x = StrictlyNegativeInt(-1)
+            val y = NonZeroInt(2)
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
@@ -322,32 +332,10 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return a positive int with a positive int`() {
+        fun `should return a negative int with a positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(2)
+            val x = StrictlyNegativeInt(-1)
             val y = PositiveInt(0)
-            // WHEN
-            val result: PositiveInt = x * y
-            // THEN
-            result.value assertEquals 0
-        }
-
-        @Test
-        fun `should return a strictly positive int with a strictly positive int`() {
-            // GIVEN
-            val x = StrictlyPositiveInt(2)
-            val y = StrictlyPositiveInt(3)
-            // WHEN
-            val result: StrictlyPositiveInt = x * y
-            // THEN
-            result.value assertEquals 6
-        }
-
-        @Test
-        fun `should return a negative int with a negative int`() {
-            // GIVEN
-            val x = StrictlyPositiveInt(2)
-            val y = NegativeInt(0)
             // WHEN
             val result: NegativeInt = x * y
             // THEN
@@ -355,14 +343,36 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
-        fun `should return a strictly negative int with a strictly negative int`() {
+        fun `should return a strictly negative int with a strictly positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(1)
-            val y = StrictlyNegativeInt(-2)
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyPositiveInt(2)
             // WHEN
             val result: StrictlyNegativeInt = x * y
             // THEN
             result.value assertEquals -2
+        }
+
+        @Test
+        fun `should return a positive int with a negative int`() {
+            // GIVEN
+            val x = StrictlyNegativeInt(-1)
+            val y = NegativeInt(0)
+            // WHEN
+            val result: PositiveInt = x * y
+            // THEN
+            result.value assertEquals 0
+        }
+
+        @Test
+        fun `should return a strictly positive int with a strictly negative int`() {
+            // GIVEN
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyNegativeInt(-2)
+            // WHEN
+            val result: StrictlyPositiveInt = x * y
+            // THEN
+            result.value assertEquals 2
         }
     }
 
@@ -371,164 +381,163 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a non zero int with an int other than 0`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
-            val y = -1
+            val x = StrictlyNegativeInt(-2)
+            val y = -2
             // WHEN
             val result: NonZeroInt = assertDoesNotThrow { x / y }
             // THEN
-            result.value assertEquals -3
+            result.value assertEquals 1
         }
 
         @Test
         fun `should throw an error with an int that equals 0`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
+            val x = StrictlyNegativeInt(-1)
             val y = 0
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
 
         @Test
-        fun `should return an int when dividing an int with a strictly positive int`() {
+        fun `should return an int when dividing an int by a strictly negative int`() {
             // GIVEN
-            val x = -6
-            val y = StrictlyPositiveInt(3)
+            val x = 0
+            val y = StrictlyNegativeInt(-1)
             // WHEN
             val result: Int = x / y
             // THEN
-            result assertEquals -2
+            result assertEquals 0
         }
 
         @Test
         fun `should return a non zero int with a non zero int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
-            val y = NonZeroInt(-1)
+            val x = StrictlyNegativeInt(-2)
+            val y = NonZeroInt(1)
             // WHEN
             val result: NonZeroInt = x / y
             // THEN
-            result.value assertEquals -3
+            result.value assertEquals -2
         }
 
         @Test
-        fun `should return a strictly positive int with a positive int other than 0`() {
+        fun `should return a strictly negative int with a positive int other than 0`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
-            val y = PositiveInt(3)
+            val x = StrictlyNegativeInt(-1)
+            val y = PositiveInt(1)
             // WHEN
-            val result: StrictlyPositiveInt = assertDoesNotThrow { x / y }
+            val result: StrictlyNegativeInt = assertDoesNotThrow { x / y }
             // THEN
-            result.value assertEquals 1
+            result.value assertEquals -1
         }
 
         @Test
         fun `should throw an error with a positive int that equals 0`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
+            val x = StrictlyNegativeInt(-1)
             val y = PositiveInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
 
         @Test
-        fun `should return a strictly positive int with a strictly positive int`() {
+        fun `should return a strictly negative int with a strictly positive int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
-            val y = StrictlyPositiveInt(3)
-            // WHEN
-            val result: StrictlyPositiveInt = x / y
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyPositiveInt(1)
+            // WHEN & THEN
+            val result: StrictlyNegativeInt = x / y
             // THEN
-            result.value assertEquals 1
+            result.value assertEquals -1
         }
 
         @Test
-        fun `should return a negative int with a negative int other than 0`() {
+        fun `should return a strictly positive int with a negative int other than 0`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
+            val x = StrictlyNegativeInt(-2)
             val y = NegativeInt(-1)
             // WHEN
-            val result: StrictlyNegativeInt = assertDoesNotThrow { x / y }
+            val result: StrictlyPositiveInt = assertDoesNotThrow { x / y }
             // THEN
-            result.value assertEquals -3
+            result.value assertEquals 2
         }
 
         @Test
         fun `should throw an error with a negative int that equals 0`() {
             // GIVEN
-            val x = StrictlyPositiveInt(3)
+            val x = StrictlyNegativeInt(-1)
             val y = NegativeInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
 
         @Test
-        fun `should return a strictly negative int with a strictly negative int`() {
+        fun `should return a strictly positive int with a strictly negative int`() {
             // GIVEN
-            val x = StrictlyPositiveInt(2)
-            val y = StrictlyNegativeInt(-2)
+            val x = StrictlyNegativeInt(-2)
+            val y = StrictlyNegativeInt(-1)
             // WHEN
-            val result: StrictlyNegativeInt = x / y
+            val result: StrictlyPositiveInt = x / y
             // THEN
-            result.value assertEquals -1
+            result.value assertEquals 2
         }
     }
 
     @Nested
     inner class Inc {
         @Test
-        fun `should return 2 with 1`() {
+        fun `should return -1 with -2`() {
             // GIVEN
-            val value = 1
-            var x = StrictlyPositiveInt(value)
+            var x = StrictlyNegativeInt(-2)
             // WHEN
             x++
             // THEN
-            x.value assertEquals value + 1
+            x.value assertEquals -1
         }
 
         @Test
         fun `should return the minimum value with the maximum value`() {
             // GIVEN
-            var x = StrictlyPositiveInt.max
+            var x = StrictlyNegativeInt.max
             // WHEN
             x++
             // THEN
-            x assertEquals StrictlyPositiveInt.min
+            x assertEquals StrictlyNegativeInt.min
         }
     }
 
     @Nested
     inner class Dec {
         @Test
-        fun `should return 1 with 2`() {
+        fun `should return -2 with -1`() {
             // GIVEN
-            var x = StrictlyPositiveInt(2)
+            var x = StrictlyNegativeInt(-1)
             // WHEN
             x--
             // THEN
-            x.value assertEquals 1
+            x.value assertEquals -2
         }
 
         @Test
         fun `should return the maximum value with the minimum value`() {
             // GIVEN
-            var x = StrictlyPositiveInt.min
+            var x = StrictlyNegativeInt.min
             // WHEN
             x--
             // THEN
-            x assertEquals StrictlyPositiveInt.max
+            x assertEquals StrictlyNegativeInt.max
         }
     }
 
     @Nested
     inner class UnaryPlus {
         @Test
-        fun `should return the same strictly positive int`() {
+        fun `should return the same strictly negative int`() {
             // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
+            val value = -1
+            val x = StrictlyNegativeInt(value)
             // WHEN
-            val result: StrictlyPositiveInt = +x
+            val result: StrictlyNegativeInt = +x
             // THEN
             result.value assertEquals value
         }
@@ -537,14 +546,14 @@ class StrictlyPositiveIntTest {
     @Nested
     inner class UnaryMinus {
         @Test
-        fun `should return a strictly negative int`() {
+        fun `should return 1 as a strictly positive int with -1`() {
             // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
+            val value = -1
+            val x = StrictlyNegativeInt(value)
             // WHEN
-            val result: StrictlyNegativeInt = -x
+            val result: StrictlyPositiveInt = -x
             // THEN
-            result.value assertEquals -x.value
+            result.value assertEquals -value
         }
     }
 }

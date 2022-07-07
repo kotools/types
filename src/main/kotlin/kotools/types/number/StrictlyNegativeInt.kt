@@ -3,32 +3,34 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 
 /**
- * Returns this value as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if it's negative.
+ * Returns this value as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if it's positive.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
-public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
-    StrictlyPositiveInt(this)
+public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
+    StrictlyNegativeInt(this)
 
-/** Returns this value as a [StrictlyPositiveInt] or `null` if it's negative. */
+/**
+ * Returns this value as a [StrictlyNegativeInt], or `null` if it's positive.
+ */
 @SinceKotoolsTypes("1.1")
-public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-    StrictlyPositiveInt orNull this
+public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    StrictlyNegativeInt orNull this
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")
-public infix operator fun Int.plus(other: StrictlyPositiveInt): Int =
+public infix operator fun Int.plus(other: StrictlyNegativeInt): Int =
     this + other.value
 
 /** Subtracts the [other] value from this value. */
 @SinceKotoolsTypes("1.1")
-public infix operator fun Int.minus(other: StrictlyPositiveInt): Int =
+public infix operator fun Int.minus(other: StrictlyNegativeInt): Int =
     this - other.value
 
 /** Multiplies this value by the [other] value. */
 @SinceKotoolsTypes("1.1")
-public infix operator fun Int.times(other: StrictlyPositiveInt): Int =
+public infix operator fun Int.times(other: StrictlyNegativeInt): Int =
     this * other.value
 
 /**
@@ -36,25 +38,25 @@ public infix operator fun Int.times(other: StrictlyPositiveInt): Int =
  * that is closer to zero.
  */
 @SinceKotoolsTypes("1.1")
-public infix operator fun Int.div(other: StrictlyPositiveInt): Int =
+public infix operator fun Int.div(other: StrictlyNegativeInt): Int =
     this / other.value
 
 /**
- * Represents strictly positive integers (excluding `0`).
+ * Represents strictly negative integers (excluding 0).
  *
- * @constructor Returns the [value] as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if it's negative.
+ * @constructor Returns the [value] as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if it's positive.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
-public value class StrictlyPositiveInt(
+public value class StrictlyNegativeInt(
     public val value: Int
-) : Comparable<StrictlyPositiveInt> {
+) : Comparable<StrictlyNegativeInt> {
     init {
-        require(value > 0) { "Given value shouldn't be negative." }
+        require(value < 0) { "Given value shouldn't be positive." }
     }
 
-    override fun compareTo(other: StrictlyPositiveInt): Int =
+    override fun compareTo(other: StrictlyNegativeInt): Int =
         value.compareTo(other.value)
 
     override fun toString(): String = value.toString()
@@ -62,8 +64,8 @@ public value class StrictlyPositiveInt(
     /** Returns this [value] as a [NonZeroInt]. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
-    /** Returns this [value] as a [PositiveInt]. */
-    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+    /** Returns this [value] as a [NegativeInt]. */
+    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
@@ -73,16 +75,21 @@ public value class StrictlyPositiveInt(
         value + other.value
 
     /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: PositiveInt): StrictlyPositiveInt =
-        StrictlyPositiveInt(value + other.value)
-
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: NegativeInt): Int =
+    public infix operator fun plus(other: PositiveInt): Int =
         value + other.value
 
     /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: StrictlyNegativeInt): Int =
+    public infix operator fun plus(other: StrictlyPositiveInt): Int =
         value + other.value
+
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: NegativeInt): StrictlyNegativeInt =
+        StrictlyNegativeInt(value + other.value)
+
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(
+        other: StrictlyNegativeInt
+    ): StrictlyNegativeInt = StrictlyNegativeInt(value + other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
@@ -92,21 +99,21 @@ public value class StrictlyPositiveInt(
         value - other.value
 
     /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: PositiveInt): Int =
-        value - other.value
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: StrictlyPositiveInt): Int =
-        value - other.value
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: NegativeInt): StrictlyPositiveInt =
-        StrictlyPositiveInt(value - other.value)
+    public infix operator fun minus(other: PositiveInt): StrictlyNegativeInt =
+        StrictlyNegativeInt(value - other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(
-        other: StrictlyNegativeInt
-    ): StrictlyPositiveInt = StrictlyPositiveInt(value - other.value)
+        other: StrictlyPositiveInt
+    ): StrictlyNegativeInt = StrictlyNegativeInt(value - other.value)
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: NegativeInt): Int =
+        value - other.value
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: StrictlyNegativeInt): Int =
+        value - other.value
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: Int): Int = value * other
@@ -116,22 +123,22 @@ public value class StrictlyPositiveInt(
         NonZeroInt(value * other.value)
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: PositiveInt): PositiveInt =
-        PositiveInt(value * other.value)
-
-    /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(
-        other: StrictlyPositiveInt
-    ): StrictlyPositiveInt = StrictlyPositiveInt(value * other.value)
-
-    /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: NegativeInt): NegativeInt =
+    public infix operator fun times(other: PositiveInt): NegativeInt =
         NegativeInt(value * other.value)
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(
-        other: StrictlyNegativeInt
+        other: StrictlyPositiveInt
     ): StrictlyNegativeInt = StrictlyNegativeInt(value * other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: NegativeInt): PositiveInt =
+        PositiveInt(value * other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(
+        other: StrictlyNegativeInt
+    ): StrictlyPositiveInt = StrictlyPositiveInt(value * other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -155,24 +162,7 @@ public value class StrictlyPositiveInt(
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): StrictlyPositiveInt =
-        StrictlyPositiveInt(value / other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
-     */
-    public infix operator fun div(
-        other: StrictlyPositiveInt
-    ): StrictlyPositiveInt = StrictlyPositiveInt(value / other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): StrictlyNegativeInt =
+    public infix operator fun div(other: PositiveInt): StrictlyNegativeInt =
         StrictlyNegativeInt(value / other.value)
 
     /**
@@ -180,45 +170,62 @@ public value class StrictlyPositiveInt(
      * integer that is closer to zero.
      */
     public infix operator fun div(
-        other: StrictlyNegativeInt
+        other: StrictlyPositiveInt
     ): StrictlyNegativeInt = StrictlyNegativeInt(value / other.value)
 
     /**
-     * Returns this [value] incremented by one.
-     * If this [value] is the [maximum][StrictlyPositiveInt.max], it returns the
-     * [minimum][StrictlyPositiveInt.min] value instead.
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
-    public operator fun inc(): StrictlyPositiveInt = if (value == max.value) min
-    else StrictlyPositiveInt(value + 1)
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: NegativeInt): StrictlyPositiveInt =
+        StrictlyPositiveInt(value / other.value)
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public infix operator fun div(
+        other: StrictlyNegativeInt
+    ): StrictlyPositiveInt = StrictlyPositiveInt(value / other.value)
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the [maximum][StrictlyNegativeInt.max], it returns the
+     * [minimum][StrictlyNegativeInt.min] value instead.
+     */
+    public operator fun inc(): StrictlyNegativeInt = if (value == max.value) min
+    else StrictlyNegativeInt(value + 1)
 
     /**
      * Returns this [value] decremented by one.
-     * If this [value] is the [minimum][StrictlyPositiveInt.min], it returns the
-     * [maximum][StrictlyPositiveInt.max] value instead.
+     * If this [value] is the [minimum][StrictlyNegativeInt.min], it returns the
+     * [maximum][StrictlyNegativeInt.max] value instead.
      */
-    public operator fun dec(): StrictlyPositiveInt = if (value == min.value) max
-    else StrictlyPositiveInt(value - 1)
+    public operator fun dec(): StrictlyNegativeInt = if (value == min.value) max
+    else StrictlyNegativeInt(value - 1)
 
     /** Returns this [value]. */
-    public operator fun unaryPlus(): StrictlyPositiveInt = this
+    public operator fun unaryPlus(): StrictlyNegativeInt = this
 
     /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): StrictlyNegativeInt =
-        StrictlyNegativeInt(-value)
+    public operator fun unaryMinus(): StrictlyPositiveInt =
+        StrictlyPositiveInt(-value)
 
     public companion object {
-        /** The minimum value an instance of [StrictlyPositiveInt] can have. */
-        public val min: StrictlyPositiveInt = StrictlyPositiveInt(1)
+        /** The minimum value an instance of [StrictlyNegativeInt] can have. */
+        public val min: StrictlyNegativeInt = StrictlyNegativeInt(Int.MIN_VALUE)
 
-        /** The maximum value an instance of [StrictlyPositiveInt] can have. */
-        public val max: StrictlyPositiveInt = StrictlyPositiveInt(Int.MAX_VALUE)
+        /** The maximum value an instance of [StrictlyNegativeInt] can have. */
+        public val max: StrictlyNegativeInt = StrictlyNegativeInt(-1)
 
         /**
-         * Returns the [value] as a [StrictlyPositiveInt] or `null` if it's
-         * negative.
+         * Returns the [value] as a [StrictlyNegativeInt] or `null` if it's
+         * positive.
          */
-        public infix fun orNull(value: Int): StrictlyPositiveInt? = try {
-            StrictlyPositiveInt(value)
+        public infix fun orNull(value: Int): StrictlyNegativeInt? = try {
+            StrictlyNegativeInt(value)
         } catch (_: IllegalArgumentException) {
             null
         }

@@ -334,6 +334,17 @@ class PositiveIntTest {
             // THEN
             result assertEquals -1
         }
+
+        @Test
+        fun `should return an int with strictly negative int`() {
+            // GIVEN
+            val x = PositiveInt(1)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals 0
+        }
     }
 
     @Nested
@@ -403,6 +414,17 @@ class PositiveIntTest {
             // THEN
             result.value assertEquals 2
         }
+
+        @Test
+        fun `should return a strictly positive int with a strictly negative int`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: StrictlyPositiveInt = x - y
+            // THEN
+            result.value assertEquals 1
+        }
     }
 
     @Nested
@@ -471,6 +493,17 @@ class PositiveIntTest {
             val result: NegativeInt = x * y
             // THEN
             result.value assertEquals -6
+        }
+
+        @Test
+        fun `should return a negative int with a strictly negative int`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: NegativeInt = x * y
+            // THEN
+            result.value assertEquals 0
         }
     }
 
@@ -576,6 +609,17 @@ class PositiveIntTest {
             val y = NegativeInt(0)
             // WHEN
             assertFailsWith<ArithmeticException> { x / y }
+        }
+
+        @Test
+        fun `should return a negative int with a strictly negative int`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: NegativeInt = x / y
+            // THEN
+            result.value assertEquals 0
         }
     }
 

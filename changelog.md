@@ -29,6 +29,8 @@ All notable changes to this project will be documented in this file.
   ([#15](https://github.com/kotools/types/issues/15)).
 - Implement `kotools.types.number.StrictlyPositiveInt` type
   ([#18](https://github.com/kotools/types/issues/18)).
+- Implement `kotools.types.number.StrictlyNegativeInt` type
+  ([#19](https://github.com/kotools/types/issues/19)).
 
 ### Deprecated
 
@@ -36,6 +38,8 @@ All notable changes to this project will be documented in this file.
   builders ([#16](https://github.com/kotools/types/issues/16)).
 - Deprecate the old `io.github.kotools.types.int.StrictlyPositiveInt` type and
   its builders ([#18](https://github.com/kotools/types/issues/18)).
+- Deprecate the old `io.github.kotools.types.int.StrictlyNegativeInt` type and
+  its builders ([#19](https://github.com/kotools/types/issues/19)).
 
 ## Version 1.0.1 - 2022/03/21
 
