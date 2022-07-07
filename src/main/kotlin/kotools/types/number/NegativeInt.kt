@@ -11,43 +11,11 @@ import kotools.types.annotations.SinceKotoolsTypes
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
- * Returns this value as a [NegativeInt], or throws an
- * [IllegalArgumentException] if it's strictly positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun NonZeroInt.toNegativeInt(): NegativeInt = NegativeInt(value)
-
-/**
- * Returns this value as a [NegativeInt], or throws an
- * [IllegalArgumentException] if it's strictly positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun PositiveInt.toNegativeInt(): NegativeInt = NegativeInt(value)
-
-/**
  * Returns this value as a [NegativeInt] or `null` if it's strictly positive.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
-
-/**
- * Returns this value as a [NegativeInt] or `null` if it's strictly positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun NonZeroInt.toNegativeIntOrNull(): NegativeInt? =
-    NegativeInt orNull value
-
-/**
- * Returns this value as a [NegativeInt] or `null` if it's strictly positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun PositiveInt.toNegativeIntOrNull(): NegativeInt? =
-    NegativeInt orNull value
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")

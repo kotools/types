@@ -222,6 +222,52 @@ class NonZeroIntTest {
     }
 
     @Nested
+    inner class ToNegativeInt {
+        @Test
+        fun `should return its value as a negative int with -1`() {
+            // GIVEN
+            val value = -1
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: NegativeInt = assertDoesNotThrow(x::toNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 1`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a negative int with -2`() {
+                // GIVEN
+                val value = -2
+                val x = NonZeroInt(value)
+                // WHEN
+                val result: NegativeInt? = x.toNegativeIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 2`() {
+                // GIVEN
+                val x = NonZeroInt(2)
+                // WHEN
+                val result: NegativeInt? = x.toNegativeIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
     inner class Plus {
         @Test
         fun `should return an int with an int`() {
