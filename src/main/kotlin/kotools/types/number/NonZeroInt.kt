@@ -50,6 +50,19 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     override fun compareTo(other: NonZeroInt): Int =
         value.compareTo(other.value)
 
+    /**
+     * Returns this [value] as a [PositiveInt], or throws an
+     * [IllegalArgumentException] if it's strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
+    /**
+     * Returns this [value] as a [PositiveInt] or `null` if it's strictly
+     * negative.
+     */
+    public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
+
     override fun toString(): String = value.toString()
 
     /** Adds the [other] value to this [value]. */
