@@ -111,6 +111,52 @@ class NegativeIntTest {
     }
 
     @Nested
+    inner class ToNonZeroInt {
+        @Test
+        fun `should return its value as a non zero int with -1`() {
+            // GIVEN
+            val value = -1
+            val x = NegativeInt(value)
+            // WHEN
+            val result: NonZeroInt = assertDoesNotThrow(x::toNonZeroInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 0`() {
+            // GIVEN
+            val x = NegativeInt(0)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(block = x::toNonZeroInt)
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a non zero int with -2`() {
+                // GIVEN
+                val value = -2
+                val x = NegativeInt(value)
+                // WHEN
+                val result: NonZeroInt? = x.toNonZeroIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 0`() {
+                // GIVEN
+                val x = NegativeInt(0)
+                // WHEN
+                val result: NonZeroInt? = x.toNonZeroIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
     inner class ToString {
         @Test
         fun `should return its value as a string`() {
