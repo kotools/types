@@ -75,8 +75,9 @@ public infix operator fun Int.div(other: StrictlyPositiveInt): Int =
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
-public value class StrictlyPositiveInt(public val value: Int) :
-    Comparable<StrictlyPositiveInt> {
+public value class StrictlyPositiveInt(
+    public val value: Int
+) : Comparable<StrictlyPositiveInt> {
     init {
         require(value > 0) { "Given value shouldn't be negative." }
     }
