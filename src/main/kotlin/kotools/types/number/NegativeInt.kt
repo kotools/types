@@ -80,8 +80,9 @@ public infix operator fun Int.div(other: NegativeInt): Int = this / other.value
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
-public value class NegativeInt(public val value: Int) :
-    Comparable<NegativeInt> {
+public value class NegativeInt(
+    public val value: Int
+) : Comparable<NegativeInt> {
     init {
         require(value <= 0) { "Given value shouldn't be strictly positive." }
     }
