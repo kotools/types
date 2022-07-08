@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 1.1.0 - 2022/07/09
+
 ### Added
 
 - Implement and apply `SinceKotoolsTypes` annotation on every declarations
@@ -25,10 +27,10 @@ All notable changes to this project will be documented in this file.
   ([#16](https://github.com/kotools/types/issues/16)).
 - Implement `kotools.types.number.PositiveInt` type
   ([#14](https://github.com/kotools/types/issues/14)).
-- Implement `kotools.types.number.NegativeInt` type
-  ([#15](https://github.com/kotools/types/issues/15)).
 - Implement `kotools.types.number.StrictlyPositiveInt` type
   ([#18](https://github.com/kotools/types/issues/18)).
+- Implement `kotools.types.number.NegativeInt` type
+  ([#15](https://github.com/kotools/types/issues/15)).
 - Implement `kotools.types.number.StrictlyNegativeInt` type
   ([#19](https://github.com/kotools/types/issues/19)).
 
