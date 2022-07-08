@@ -1,7 +1,7 @@
 name: Deployment
 on:
   release:
-    types: [ created ]
+    types: [ published ]
   workflow_dispatch:
 jobs:
   # ---------- Stage 1 ----------
@@ -31,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: ./gradlew publishAllPublicationToGitHubRepository --no-daemon
+        run: ./gradlew publishAllPublicationToGitHubRepository
   deploy-docs:
     name: Deploy documentation to GitHub Pages
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Generate documentation with Dokka
-        run: ./gradlew dokkaHtml --no-daemon
+        run: ./gradlew dokkaHtml
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
