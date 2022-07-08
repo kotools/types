@@ -2,7 +2,11 @@ name: Integration & Delivery
 on:
   push:
     branches: [ main, release/* ]
-    paths: [ '*.kts', '*gradle*', .github/workflows/integration.yml, src/** ]
+    paths:
+      - '*.kts'
+      - '*gradle*'
+      - .github/workflows/integration-delivery.yml
+      - src/**
   workflow_dispatch:
 permissions: read-all
 jobs:
@@ -59,7 +63,7 @@ jobs:
     name: Deliver to OSSRH
     runs-on: ubuntu-latest
     needs: [ check-branch, test-macos, test-ubuntu, test-windows ]
-    if: env.on_release_branch == true
+    if: ${{ env.on_release_branch == true }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
