@@ -1,7 +1,7 @@
 name: Integration
 on:
   push:
-    branches: [ main ]
+    branches: [ main, release/* ]
     paths:
       - '*.kts'
       - '*gradle*'
@@ -11,6 +11,14 @@ on:
   workflow_dispatch:
 jobs:
   # ---------- Stage 1 ----------
+  print_context:
+    name: Print event context
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print context
+        env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: echo $EVENT_CONTEXT
   validate-wrapper:
     name: Validate Gradle wrapper
     runs-on: ubuntu-latest
