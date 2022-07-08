@@ -561,14 +561,14 @@ class NonZeroIntTest {
     @Nested
     inner class Div {
         @Test
-        fun `should return a non zero int with an int other than 0`() {
+        fun `should return an int with an int other than 0`() {
             // GIVEN
-            val x = NonZeroInt(6)
+            val x = NonZeroInt(1)
             val y = -2
             // WHEN
-            val result: NonZeroInt = assertDoesNotThrow { x / y }
+            val result: Int = assertDoesNotThrow { x / y }
             // THEN
-            result.value assertEquals -3
+            result assertEquals 0
         }
 
         @Test
@@ -592,25 +592,25 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should return a non zero int with a non zero int`() {
+        fun `should return an int with a non zero int`() {
             // GIVEN
             val x = NonZeroInt(6)
             val y = NonZeroInt(-2)
             // WHEN
-            val result: NonZeroInt = x / y
+            val result: Int = x / y
             // THEN
-            result.value assertEquals -3
+            result assertEquals -3
         }
 
         @Test
-        fun `should return a non zero int with a positive int other than 0`() {
+        fun `should return an int with a positive int other than 0`() {
             // GIVEN
             val x = NonZeroInt(-3)
             val y = PositiveInt(3)
             // WHEN
-            val result: NonZeroInt = assertDoesNotThrow { x / y }
+            val result: Int = assertDoesNotThrow { x / y }
             // THEN
-            result.value assertEquals -1
+            result assertEquals -1
         }
 
         @Test
@@ -623,25 +623,25 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should return a non zero int with a strictly positive int`() {
+        fun `should return an int with a strictly positive int`() {
             // GIVEN
             val x = NonZeroInt(-3)
             val y = StrictlyPositiveInt(3)
             // WHEN
-            val result: NonZeroInt = x / y
+            val result: Int = x / y
             // THEN
-            result.value assertEquals -1
+            result assertEquals -1
         }
 
         @Test
-        fun `should return a non zero int with a negative int other than 0`() {
+        fun `should return an int with a negative int other than 0`() {
             // GIVEN
             val x = NonZeroInt(-4)
             val y = NegativeInt(-2)
             // WHEN
-            val result: NonZeroInt = assertDoesNotThrow { x / y }
+            val result: Int = assertDoesNotThrow { x / y }
             // THEN
-            result.value assertEquals 2
+            result assertEquals 2
         }
 
         @Test
@@ -654,14 +654,14 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should return a non zero int with a strictly negative int`() {
+        fun `should return an int with a strictly negative int`() {
             // GIVEN
             val x = NonZeroInt(2)
             val y = StrictlyNegativeInt(-2)
             // WHEN
-            val result: NonZeroInt = x / y
+            val result: Int = x / y
             // THEN
-            result.value assertEquals -1
+            result assertEquals -1
         }
     }
 

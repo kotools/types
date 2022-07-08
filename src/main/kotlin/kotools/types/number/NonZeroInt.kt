@@ -183,31 +183,13 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: Int): NonZeroInt =
-        NonZeroInt(value / other)
+    public infix operator fun div(other: Int): Int = value / other
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
-    public infix operator fun div(other: NonZeroInt): NonZeroInt =
-        NonZeroInt(value / other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): NonZeroInt =
-        NonZeroInt(value / other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
-     */
-    public infix operator fun div(other: StrictlyPositiveInt): NonZeroInt =
-        NonZeroInt(value / other.value)
+    public infix operator fun div(other: NonZeroInt): Int = value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -215,15 +197,29 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): NonZeroInt =
-        NonZeroInt(value / other.value)
+    public infix operator fun div(other: PositiveInt): Int = value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
-    public infix operator fun div(other: StrictlyNegativeInt): NonZeroInt =
-        NonZeroInt(value / other.value)
+    public infix operator fun div(other: StrictlyPositiveInt): Int =
+        value / other.value
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
+     */
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: NegativeInt): Int = value / other.value
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public infix operator fun div(other: StrictlyNegativeInt): Int =
+        value / other.value
 
     /**
      * Returns this [value] incremented by one.

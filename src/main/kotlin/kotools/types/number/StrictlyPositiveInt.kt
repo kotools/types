@@ -139,32 +139,13 @@ public value class StrictlyPositiveInt(
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: Int): NonZeroInt =
-        NonZeroInt(value / other)
+    public infix operator fun div(other: Int): Int = value / other
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
-    public infix operator fun div(other: NonZeroInt): NonZeroInt =
-        NonZeroInt(value / other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): StrictlyPositiveInt =
-        StrictlyPositiveInt(value / other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
-     */
-    public infix operator fun div(
-        other: StrictlyPositiveInt
-    ): StrictlyPositiveInt = StrictlyPositiveInt(value / other.value)
+    public infix operator fun div(other: NonZeroInt): Int = value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -172,16 +153,31 @@ public value class StrictlyPositiveInt(
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): StrictlyNegativeInt =
-        StrictlyNegativeInt(value / other.value)
+    public infix operator fun div(other: PositiveInt): PositiveInt =
+        PositiveInt(value / other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
-    public infix operator fun div(
-        other: StrictlyNegativeInt
-    ): StrictlyNegativeInt = StrictlyNegativeInt(value / other.value)
+    public infix operator fun div(other: StrictlyPositiveInt): PositiveInt =
+        PositiveInt(value / other.value)
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
+     */
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: NegativeInt): NegativeInt =
+        NegativeInt(value / other.value)
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
+        NegativeInt(value / other.value)
 
     /**
      * Returns this [value] incremented by one.
