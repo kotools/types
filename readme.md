@@ -7,14 +7,20 @@ Kotools Types is a lightweight library that provides commonly used types for
 [Kotlin].
 
 ```kotlin
-1.nonZero
-1.nonZeroOrNull
+NonZeroInt(1)
+NonZeroInt orNull -1
 
-(-1).strictlyNegative
-(-1).strictlyNegativeOrNull
+PositiveInt(0)
+PositiveInt orNull 1
 
-1.strictlyPositive
-1.strictlyPositiveOrNull
+StrictlyPositiveInt(1)
+StrictlyPositiveInt orNull 2
+
+NegativeInt(0)
+NegativeInt orNull -1
+
+StrictlyNegativeInt(-1)
+StrictlyNegativeInt orNull -2
 
 "hello".notBlank
 "hello".notBlankOrNull
@@ -29,13 +35,13 @@ Kotools Types is a lightweight library that provides commonly used types for
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:types:1.0.1")
+implementation("io.github.kotools:types:1.1.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:types:1.0.1'
+implementation 'io.github.kotools:types:1.1.0'
 ```
 
 ### Maven
@@ -44,7 +50,7 @@ implementation 'io.github.kotools:types:1.0.1'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>types</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
