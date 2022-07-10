@@ -3,6 +3,7 @@ package kotools.types.string
 import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
+import kotools.types.number.PositiveInt
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -22,6 +23,7 @@ class NotBlankStringTest {
             // THEN
             result.value assertEquals value
             result.length.value assertEquals value.length
+            result.first assertEquals value[0]
         }
 
         @Test
@@ -52,6 +54,7 @@ class NotBlankStringTest {
                 result.assertNotNull().let {
                     it.value assertEquals value
                     it.length.value assertEquals value.length
+                    it.first assertEquals value[0]
                 }
             }
 
@@ -71,6 +74,55 @@ class NotBlankStringTest {
                 val value = "  "
                 // WHEN
                 val result: NotBlankString? = NotBlankString orNull value
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
+    inner class Get {
+        @Test
+        fun `should return the first character with 0`() {
+            // GIVEN
+            val string = NotBlankString("hello")
+            val index = PositiveInt(0)
+            // WHEN
+            val result: Char = assertDoesNotThrow { string[index] }
+            // THEN
+            result assertEquals 'h'
+            result assertEquals string.first
+        }
+
+        @Test
+        fun `should throw an error with an index that is out of bounds`() {
+            // GIVEN
+            val string = NotBlankString("hi")
+            val index = PositiveInt(10)
+            // WHEN & THEN
+            assertFailsWith<IndexOutOfBoundsException> { string[index] }
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return the second character with 1`() {
+                // GIVEN
+                val string = NotBlankString("world")
+                val index = PositiveInt(1)
+                // WHEN
+                val result: Char? = string getOrNull index
+                // THEN
+                result.assertNotNull() assertEquals 'o'
+            }
+
+            @Test
+            fun `should return null with an index that is out of bounds`() {
+                // GIVEN
+                val string = NotBlankString("hi")
+                val index = PositiveInt(10)
+                // WHEN
+                val result: Char? = string getOrNull index
                 // THEN
                 result.assertNull()
             }
