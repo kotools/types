@@ -177,4 +177,18 @@ class NotBlankStringTest {
             result assertEquals string.value
         }
     }
+
+    @Nested
+    inner class Plus {
+        @Test
+        fun `should return 'hello world' with 'hello' + ' world'`() {
+            // GIVEN
+            val string = NotBlankString("hello")
+            val other = " world"
+            // WHEN
+            val result: NotBlankString = string + other
+            // THEN
+            result.value assertEquals "hello world"
+        }
+    }
 }

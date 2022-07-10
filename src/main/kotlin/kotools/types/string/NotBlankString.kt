@@ -63,6 +63,13 @@ public value class NotBlankString(
 
     override fun toString(): String = value
 
+    /**
+     * Returns the concatenation of this [value] with the string representation
+     * of the given [other] object.
+     */
+    public infix operator fun plus(other: Any?): NotBlankString =
+        NotBlankString(value + other)
+
     public companion object {
         /**
          * Returns the [value] as a [NotBlankString] or `null` if it's blank.
