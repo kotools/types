@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.string.NotBlankString
 
 /**
  * Returns this value as a [PositiveInt], or throws an
@@ -59,6 +60,11 @@ public value class PositiveInt(
         value.compareTo(other.value)
 
     override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     /**
      * Returns this [value] as a [NonZeroInt], or throws an

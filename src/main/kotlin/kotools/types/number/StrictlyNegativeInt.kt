@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.string.NotBlankString
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or throws an
@@ -60,6 +61,11 @@ public value class StrictlyNegativeInt(
         value.compareTo(other.value)
 
     override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     /** Returns this [value] as a [NonZeroInt]. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)

@@ -3,6 +3,7 @@ package kotools.types.number
 import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
+import kotools.types.string.NotBlankString
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -105,6 +106,20 @@ class StrictlyNegativeIntTest {
             val result: String = x.toString()
             // THEN
             result assertEquals value.toString()
+        }
+    }
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its value as a not blank string`() {
+            // GIVEN
+            val value = -1
+            val x = StrictlyNegativeInt(value)
+            // WHEN
+            val result: NotBlankString = x.toNotBlankString()
+            // THEN
+            result.value assertEquals value.toString()
         }
     }
 
