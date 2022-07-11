@@ -17,6 +17,16 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Implement a new `kotools.types.string.NotBlankString` type
+  ([#28](https://github.com/kotools/types/issues/28)).
+
+### Deprecated
+
+- Deprecate the old `io.github.kotools.types.string.NotBlankString` type and its
+  builders ([#28](https://github.com/kotools/types/issues/28)).
+
 ## Version 1.1.0 - 2022/07/09
 
 ### Added
