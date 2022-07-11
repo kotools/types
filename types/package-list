@@ -107,6 +107,7 @@ $dokka.location:kotools.types.number/NegativeInt/times/#kotools.types.number.Str
 $dokka.location:kotools.types.number/NegativeInt/times/#kotools.types.number.StrictlyPositiveInt/PointingToDeclaration/types/kotools.types.number/-negative-int/times.html
 $dokka.location:kotools.types.number/NegativeInt/toNonZeroInt/#/PointingToDeclaration/types/kotools.types.number/-negative-int/to-non-zero-int.html
 $dokka.location:kotools.types.number/NegativeInt/toNonZeroIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-negative-int/to-non-zero-int-or-null.html
+$dokka.location:kotools.types.number/NegativeInt/toNotBlankString/#/PointingToDeclaration/types/kotools.types.number/-negative-int/to-not-blank-string.html
 $dokka.location:kotools.types.number/NegativeInt/toPositiveInt/#/PointingToDeclaration/types/kotools.types.number/-negative-int/to-positive-int.html
 $dokka.location:kotools.types.number/NegativeInt/toPositiveIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-negative-int/to-positive-int-or-null.html
 $dokka.location:kotools.types.number/NegativeInt/toStrictlyNegativeInt/#/PointingToDeclaration/types/kotools.types.number/-negative-int/to-strictly-negative-int.html
@@ -150,6 +151,7 @@ $dokka.location:kotools.types.number/NonZeroInt/times/#kotools.types.number.Stri
 $dokka.location:kotools.types.number/NonZeroInt/times/#kotools.types.number.StrictlyPositiveInt/PointingToDeclaration/types/kotools.types.number/-non-zero-int/times.html
 $dokka.location:kotools.types.number/NonZeroInt/toNegativeInt/#/PointingToDeclaration/types/kotools.types.number/-non-zero-int/to-negative-int.html
 $dokka.location:kotools.types.number/NonZeroInt/toNegativeIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-non-zero-int/to-negative-int-or-null.html
+$dokka.location:kotools.types.number/NonZeroInt/toNotBlankString/#/PointingToDeclaration/types/kotools.types.number/-non-zero-int/to-not-blank-string.html
 $dokka.location:kotools.types.number/NonZeroInt/toPositiveInt/#/PointingToDeclaration/types/kotools.types.number/-non-zero-int/to-positive-int.html
 $dokka.location:kotools.types.number/NonZeroInt/toPositiveIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-non-zero-int/to-positive-int-or-null.html
 $dokka.location:kotools.types.number/NonZeroInt/toStrictlyNegativeInt/#/PointingToDeclaration/types/kotools.types.number/-non-zero-int/to-strictly-negative-int.html
@@ -197,6 +199,7 @@ $dokka.location:kotools.types.number/PositiveInt/toNegativeInt/#/PointingToDecla
 $dokka.location:kotools.types.number/PositiveInt/toNegativeIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-negative-int-or-null.html
 $dokka.location:kotools.types.number/PositiveInt/toNonZeroInt/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-non-zero-int.html
 $dokka.location:kotools.types.number/PositiveInt/toNonZeroIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-non-zero-int-or-null.html
+$dokka.location:kotools.types.number/PositiveInt/toNotBlankString/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-not-blank-string.html
 $dokka.location:kotools.types.number/PositiveInt/toStrictlyPositiveInt/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-strictly-positive-int.html
 $dokka.location:kotools.types.number/PositiveInt/toStrictlyPositiveIntOrNull/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-strictly-positive-int-or-null.html
 $dokka.location:kotools.types.number/PositiveInt/toString/#/PointingToDeclaration/types/kotools.types.number/-positive-int/to-string.html
@@ -238,6 +241,7 @@ $dokka.location:kotools.types.number/StrictlyNegativeInt/times/#kotools.types.nu
 $dokka.location:kotools.types.number/StrictlyNegativeInt/times/#kotools.types.number.StrictlyPositiveInt/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/times.html
 $dokka.location:kotools.types.number/StrictlyNegativeInt/toNegativeInt/#/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/to-negative-int.html
 $dokka.location:kotools.types.number/StrictlyNegativeInt/toNonZeroInt/#/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/to-non-zero-int.html
+$dokka.location:kotools.types.number/StrictlyNegativeInt/toNotBlankString/#/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/to-not-blank-string.html
 $dokka.location:kotools.types.number/StrictlyNegativeInt/toString/#/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/to-string.html
 $dokka.location:kotools.types.number/StrictlyNegativeInt/unaryMinus/#/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/unary-minus.html
 $dokka.location:kotools.types.number/StrictlyNegativeInt/unaryPlus/#/PointingToDeclaration/types/kotools.types.number/-strictly-negative-int/unary-plus.html
@@ -275,12 +279,29 @@ $dokka.location:kotools.types.number/StrictlyPositiveInt/times/#kotools.types.nu
 $dokka.location:kotools.types.number/StrictlyPositiveInt/times/#kotools.types.number.StrictlyNegativeInt/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/times.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/times/#kotools.types.number.StrictlyPositiveInt/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/times.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/toNonZeroInt/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/to-non-zero-int.html
+$dokka.location:kotools.types.number/StrictlyPositiveInt/toNotBlankString/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/to-not-blank-string.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/toPositiveInt/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/to-positive-int.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/toString/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/to-string.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/unaryMinus/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/unary-minus.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/unaryPlus/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/unary-plus.html
 $dokka.location:kotools.types.number/StrictlyPositiveInt/value/#/PointingToDeclaration/types/kotools.types.number/-strictly-positive-int/value.html
+$dokka.location:kotools.types.string////PointingToDeclaration/types/kotools.types.string/index.html
+$dokka.location:kotools.types.string//toNotBlankString/kotlin.String#/PointingToDeclaration/types/kotools.types.string/to-not-blank-string.html
+$dokka.location:kotools.types.string//toNotBlankStringOrNull/kotlin.String#/PointingToDeclaration/types/kotools.types.string/to-not-blank-string-or-null.html
+$dokka.location:kotools.types.string/NotBlankString.Companion///PointingToDeclaration/types/kotools.types.string/-not-blank-string/-companion/index.html
+$dokka.location:kotools.types.string/NotBlankString.Companion/orNull/#kotlin.String/PointingToDeclaration/types/kotools.types.string/-not-blank-string/-companion/or-null.html
+$dokka.location:kotools.types.string/NotBlankString///PointingToDeclaration/types/kotools.types.string/-not-blank-string/index.html
+$dokka.location:kotools.types.string/NotBlankString/NotBlankString/#kotlin.String/PointingToDeclaration/types/kotools.types.string/-not-blank-string/-not-blank-string.html
+$dokka.location:kotools.types.string/NotBlankString/compareTo/#kotools.types.string.NotBlankString/PointingToDeclaration/types/kotools.types.string/-not-blank-string/compare-to.html
+$dokka.location:kotools.types.string/NotBlankString/first/#/PointingToDeclaration/types/kotools.types.string/-not-blank-string/first.html
+$dokka.location:kotools.types.string/NotBlankString/get/#kotools.types.number.PositiveInt/PointingToDeclaration/types/kotools.types.string/-not-blank-string/get.html
+$dokka.location:kotools.types.string/NotBlankString/getOrNull/#kotools.types.number.PositiveInt/PointingToDeclaration/types/kotools.types.string/-not-blank-string/get-or-null.html
+$dokka.location:kotools.types.string/NotBlankString/length/#/PointingToDeclaration/types/kotools.types.string/-not-blank-string/length.html
+$dokka.location:kotools.types.string/NotBlankString/plus/#kotlin.Any?/PointingToDeclaration/types/kotools.types.string/-not-blank-string/plus.html
+$dokka.location:kotools.types.string/NotBlankString/toString/#/PointingToDeclaration/types/kotools.types.string/-not-blank-string/to-string.html
+$dokka.location:kotools.types.string/NotBlankString/value/#/PointingToDeclaration/types/kotools.types.string/-not-blank-string/value.html
 io.github.kotools.types.int
 io.github.kotools.types.string
 kotools.types.number
+kotools.types.string
 
