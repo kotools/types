@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.github.kotools.types.string
 
 import io.github.kotools.assert.assertEquals
