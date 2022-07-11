@@ -22,8 +22,8 @@ NegativeInt orNull -1
 StrictlyNegativeInt(-1)
 StrictlyNegativeInt orNull -2
 
-"hello".notBlank
-"hello".notBlankOrNull
+NotBlankString("hello")
+NotBlankString orNull "world"
 ```
 
 [kotlin]: https://kotlinlang.org
@@ -35,13 +35,13 @@ StrictlyNegativeInt orNull -2
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:types:1.1.0")
+implementation("io.github.kotools:types:1.2.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:types:1.1.0'
+implementation 'io.github.kotools:types:1.2.0'
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ implementation 'io.github.kotools:types:1.1.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>types</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
