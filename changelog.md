@@ -22,6 +22,10 @@ All notable changes to this project will be documented in this file.
 - Implement a new `kotools.types.string.NotBlankString` type
   ([#28](https://github.com/kotools/types/issues/28)).
 
+### Changed
+
+- Upgrade Gradle to `7.4.2` ([#29](https://github.com/kotools/types/issues/29)).
+
 ### Deprecated
 
 - Deprecate the old `io.github.kotools.types.string.NotBlankString` type and its
