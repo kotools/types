@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.string.NotBlankString
 
 /**
  * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
@@ -66,6 +67,11 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
         StrictlyNegativeInt orNull value
 
     override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     /**
      * Returns this [value] as a [PositiveInt], or throws an
