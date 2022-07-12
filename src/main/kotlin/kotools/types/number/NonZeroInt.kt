@@ -217,69 +217,66 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public infix operator fun plus(other: Int): Int = value + other
 
     /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: NonZeroInt): Int = value + other.value
+    public infix operator fun plus(other: NonZeroInt): Int = plus(other.value)
 
     /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: PositiveInt): Int =
-        value + other.value
+    public infix operator fun plus(other: PositiveInt): Int = plus(other.value)
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: StrictlyPositiveInt): Int =
-        value + other.value
+        plus(other.value)
 
     /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: NegativeInt): Int =
-        value + other.value
+    public infix operator fun plus(other: NegativeInt): Int = plus(other.value)
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: StrictlyNegativeInt): Int =
-        value + other.value
+        plus(other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
 
     /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: NonZeroInt): Int =
-        value - other.value
+    public infix operator fun minus(other: NonZeroInt): Int = minus(other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: PositiveInt): Int =
-        value - other.value
+        minus(other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: StrictlyPositiveInt): Int =
-        value - other.value
+        minus(other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: NegativeInt): Int =
-        value - other.value
+        minus(other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: StrictlyNegativeInt): Int =
-        value - other.value
+        minus(other.value)
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: Int): Int = value * other
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NonZeroInt): NonZeroInt =
-        NonZeroInt(value * other.value)
+        NonZeroInt(times(other.value))
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: PositiveInt): Int =
-        value * other.value
+        times(other.value)
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyPositiveInt): NonZeroInt =
-        NonZeroInt(value * other.value)
+        NonZeroInt(times(other.value))
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NegativeInt): Int =
-        value * other.value
+        times(other.value)
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
-        NonZeroInt(value * other.value)
+        NonZeroInt(times(other.value))
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -293,7 +290,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
-    public infix operator fun div(other: NonZeroInt): Int = value / other.value
+    public infix operator fun div(other: NonZeroInt): Int = div(other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -301,14 +298,14 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): Int = value / other.value
+    public infix operator fun div(other: PositiveInt): Int = div(other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
     public infix operator fun div(other: StrictlyPositiveInt): Int =
-        value / other.value
+        div(other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -316,14 +313,14 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): Int = value / other.value
+    public infix operator fun div(other: NegativeInt): Int = div(other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
     public infix operator fun div(other: StrictlyNegativeInt): Int =
-        value / other.value
+        div(other.value)
 
     public companion object {
         /** The minimum value an instance of [NonZeroInt] can have. */
