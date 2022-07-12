@@ -3,6 +3,17 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
+// ---------- Comparisons ----------
+
+/**
+ * Compares this object with the specified object for order.
+ * Returns zero if this object is equal to the specified [other] object, a
+ * negative number if it's less than [other], or a positive number if it's
+ * greater than [other].
+ */
+public infix operator fun Int.compareTo(other: NonZeroInt): Int =
+    compareTo(other.value)
+
 // ---------- Conversions ----------
 
 /**
@@ -54,8 +65,53 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
 
     // ---------- Comparisons ----------
 
-    override fun compareTo(other: NonZeroInt): Int =
-        value.compareTo(other.value)
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    public infix operator fun compareTo(other: Int): Int =
+        value.compareTo(other)
+
+    override infix operator fun compareTo(other: NonZeroInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    public infix operator fun compareTo(other: PositiveInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    public infix operator fun compareTo(other: NegativeInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    public infix operator fun compareTo(other: StrictlyNegativeInt): Int =
+        compareTo(other.value)
 
     // ---------- Conversions ----------
 
