@@ -75,6 +75,8 @@ class NonZeroIntTest {
         }
     }
 
+    // ---------- Comparisons ----------
+
     @Nested
     inner class CompareTo {
         @Test
@@ -111,84 +113,7 @@ class NonZeroIntTest {
         }
     }
 
-    @Nested
-    inner class ToStrictlyNegativeInt {
-        @Test
-        fun `should return its value as a strictly negative int with -1`() {
-            // GIVEN
-            val value = -1
-            val x = NonZeroInt(value)
-            // WHEN
-            val result: StrictlyNegativeInt =
-                assertDoesNotThrow(x::toStrictlyNegativeInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with 1`() {
-            // GIVEN
-            val x = NonZeroInt(1)
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(
-                block = x::toStrictlyNegativeInt
-            )
-        }
-
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a strictly negative int with -2`() {
-                // GIVEN
-                val value = -2
-                val x = NonZeroInt(value)
-                // WHEN
-                val result: StrictlyNegativeInt? =
-                    x.toStrictlyNegativeIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
-
-            @Test
-            fun `should return null with 2`() {
-                // GIVEN
-                val x = NonZeroInt(2)
-                // WHEN
-                val result: StrictlyNegativeInt? =
-                    x.toStrictlyNegativeIntOrNull()
-                // THEN
-                result.assertNull()
-            }
-        }
-    }
-
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val value = 1
-            val x = NonZeroInt(value)
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals "$value"
-        }
-    }
-
-    @Nested
-    inner class ToNotBlankString {
-        @Test
-        fun `should return its value as a not blank string`() {
-            // GIVEN
-            val value = 1
-            val x = NonZeroInt(value)
-            // WHEN
-            val result: NotBlankString = x.toNotBlankString()
-            // THEN
-            result.value assertEquals value.toString()
-        }
-    }
+    // ---------- Conversions ----------
 
     @Nested
     inner class ToPositiveInt {
@@ -332,6 +257,181 @@ class NonZeroIntTest {
             }
         }
     }
+
+    @Nested
+    inner class ToStrictlyNegativeInt {
+        @Test
+        fun `should return its value as a strictly negative int with -1`() {
+            // GIVEN
+            val value = -1
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: StrictlyNegativeInt =
+                assertDoesNotThrow(x::toStrictlyNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 1`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = x::toStrictlyNegativeInt
+            )
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a strictly negative int with -2`() {
+                // GIVEN
+                val value = -2
+                val x = NonZeroInt(value)
+                // WHEN
+                val result: StrictlyNegativeInt? =
+                    x.toStrictlyNegativeIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 2`() {
+                // GIVEN
+                val x = NonZeroInt(2)
+                // WHEN
+                val result: StrictlyNegativeInt? =
+                    x.toStrictlyNegativeIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
+    inner class ToString {
+        @Test
+        fun `should return its value as a string`() {
+            // GIVEN
+            val value = 1
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: String = x.toString()
+            // THEN
+            result assertEquals "$value"
+        }
+    }
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its value as a not blank string`() {
+            // GIVEN
+            val value = 1
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: NotBlankString = x.toNotBlankString()
+            // THEN
+            result.value assertEquals value.toString()
+        }
+    }
+
+    // ---------- Unary operations ----------
+
+    @Nested
+    inner class Increment {
+        @Test
+        fun `should return 2 with 1`() {
+            // GIVEN
+            var x = NonZeroInt(1)
+            // WHEN
+            x++
+            // THEN
+            x.value assertEquals 2
+        }
+
+        @Test
+        fun `should return 1 with -1`() {
+            // GIVEN
+            var x = NonZeroInt(-1)
+            // WHEN
+            x++
+            // THEN
+            x.value assertEquals 1
+        }
+
+        @Test
+        fun `should return the minimum value with the maximum value`() {
+            // GIVEN
+            var x = NonZeroInt.max
+            // WHEN
+            x++
+            // THEN
+            x assertEquals NonZeroInt.min
+        }
+    }
+
+    @Nested
+    inner class Decrement {
+        @Test
+        fun `should return 1 with 2`() {
+            // GIVEN
+            var x = NonZeroInt(2)
+            // WHEN
+            x--
+            // THEN
+            x.value assertEquals 1
+        }
+
+        @Test
+        fun `should return -1 with 1`() {
+            // GIVEN
+            var x = NonZeroInt(1)
+            // WHEN
+            x--
+            // THEN
+            x.value assertEquals -1
+        }
+
+        @Test
+        fun `should return the maximum value with the minimum value`() {
+            // GIVEN
+            var x = NonZeroInt.min
+            // WHEN
+            x--
+            // THEN
+            x assertEquals NonZeroInt.max
+        }
+    }
+
+    @Nested
+    inner class UnaryPlus {
+        @Test
+        fun `should return the same non zero int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            // WHEN
+            val result: NonZeroInt = +x
+            // THEN
+            result assertEquals x
+        }
+    }
+
+    @Nested
+    inner class UnaryMinus {
+        @Test
+        fun `should return -1 with 1`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            // WHEN
+            val result: NonZeroInt = -x
+            // THEN
+            result.value assertEquals -1
+        }
+    }
+
+    // ---------- Binary operations ----------
 
     @Nested
     inner class Plus {
@@ -677,98 +777,6 @@ class NonZeroIntTest {
             val result: Int = x / y
             // THEN
             result assertEquals -1
-        }
-    }
-
-    @Nested
-    inner class Increment {
-        @Test
-        fun `should return 2 with 1`() {
-            // GIVEN
-            var x = NonZeroInt(1)
-            // WHEN
-            x++
-            // THEN
-            x.value assertEquals 2
-        }
-
-        @Test
-        fun `should return 1 with -1`() {
-            // GIVEN
-            var x = NonZeroInt(-1)
-            // WHEN
-            x++
-            // THEN
-            x.value assertEquals 1
-        }
-
-        @Test
-        fun `should return the minimum value with the maximum value`() {
-            // GIVEN
-            var x = NonZeroInt.max
-            // WHEN
-            x++
-            // THEN
-            x assertEquals NonZeroInt.min
-        }
-    }
-
-    @Nested
-    inner class Decrement {
-        @Test
-        fun `should return 1 with 2`() {
-            // GIVEN
-            var x = NonZeroInt(2)
-            // WHEN
-            x--
-            // THEN
-            x.value assertEquals 1
-        }
-
-        @Test
-        fun `should return -1 with 1`() {
-            // GIVEN
-            var x = NonZeroInt(1)
-            // WHEN
-            x--
-            // THEN
-            x.value assertEquals -1
-        }
-
-        @Test
-        fun `should return the maximum value with the minimum value`() {
-            // GIVEN
-            var x = NonZeroInt.min
-            // WHEN
-            x--
-            // THEN
-            x assertEquals NonZeroInt.max
-        }
-    }
-
-    @Nested
-    inner class UnaryPlus {
-        @Test
-        fun `should return the same non zero int`() {
-            // GIVEN
-            val x = NonZeroInt(1)
-            // WHEN
-            val result: NonZeroInt = +x
-            // THEN
-            result assertEquals x
-        }
-    }
-
-    @Nested
-    inner class UnaryMinus {
-        @Test
-        fun `should return -1 with 1`() {
-            // GIVEN
-            val x = NonZeroInt(1)
-            // WHEN
-            val result: NonZeroInt = -x
-            // THEN
-            result.value assertEquals -1
         }
     }
 }

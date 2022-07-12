@@ -3,6 +3,8 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
+// ---------- Conversions ----------
+
 /**
  * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
  * if it equals `0`.
@@ -14,6 +16,8 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 /** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
+
+// ---------- Binary operations ----------
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")
@@ -48,30 +52,12 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
         require(value != 0) { "Given value shouldn't equal 0." }
     }
 
+    // ---------- Comparisons ----------
+
     override fun compareTo(other: NonZeroInt): Int =
         value.compareTo(other.value)
 
-    /**
-     * Returns this [value] as a [StrictlyNegativeInt], or throws an
-     * [IllegalArgumentException] if it's strictly positive.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
-        StrictlyNegativeInt(value)
-
-    /**
-     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it's
-     * strictly positive.
-     */
-    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-        StrictlyNegativeInt orNull value
-
-    override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a [NotBlankString].
-     */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
+    // ---------- Conversions ----------
 
     /**
      * Returns this [value] as a [PositiveInt], or throws an
@@ -114,6 +100,62 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      */
     @Throws(IllegalArgumentException::class)
     public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or throws an
+     * [IllegalArgumentException] if it's strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        StrictlyNegativeInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it's
+     * strictly positive.
+     */
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        StrictlyNegativeInt orNull value
+
+    override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
+
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] equals `-1`, it returns `1` instead.
+     * If this [value] is the [maximum][NonZeroInt.max], it returns the
+     * [minimum][NonZeroInt.min] value instead.
+     */
+    public operator fun inc(): NonZeroInt = when (value) {
+        -1 -> NonZeroInt(1)
+        max.value -> min
+        else -> NonZeroInt(value + 1)
+    }
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] equals `1`, it returns `-1` instead.
+     * If this [value] is the [minimum][NonZeroInt.min], it returns the
+     * [maximum][NonZeroInt.max] value instead.
+     */
+    public operator fun dec(): NonZeroInt = when (value) {
+        1 -> NonZeroInt(-1)
+        min.value -> max
+        else -> NonZeroInt(value - 1)
+    }
+
+    /** Returns this [value]. */
+    public operator fun unaryPlus(): NonZeroInt = this
+
+    /** Returns the negative of this [value]. */
+    public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
+
+    // ---------- Binary operations ----------
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
@@ -226,36 +268,6 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      */
     public infix operator fun div(other: StrictlyNegativeInt): Int =
         value / other.value
-
-    /**
-     * Returns this [value] incremented by one.
-     * If this [value] equals `-1`, it returns `1` instead.
-     * If this [value] is the [maximum][NonZeroInt.max], it returns the
-     * [minimum][NonZeroInt.min] value instead.
-     */
-    public operator fun inc(): NonZeroInt = when (value) {
-        -1 -> NonZeroInt(1)
-        max.value -> min
-        else -> NonZeroInt(value + 1)
-    }
-
-    /**
-     * Returns this [value] decremented by one.
-     * If this [value] equals `1`, it returns `-1` instead.
-     * If this [value] is the [minimum][NonZeroInt.min], it returns the
-     * [maximum][NonZeroInt.max] value instead.
-     */
-    public operator fun dec(): NonZeroInt = when (value) {
-        1 -> NonZeroInt(-1)
-        min.value -> max
-        else -> NonZeroInt(value - 1)
-    }
-
-    /** Returns this [value]. */
-    public operator fun unaryPlus(): NonZeroInt = this
-
-    /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
 
     public companion object {
         /** The minimum value an instance of [NonZeroInt] can have. */
