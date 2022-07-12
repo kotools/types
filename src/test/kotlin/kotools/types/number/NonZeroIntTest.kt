@@ -79,35 +79,247 @@ class NonZeroIntTest {
 
     @Nested
     inner class CompareTo {
+        // ---------- Int ----------
+
         @Test
-        fun `should return 0 when objects are equals`() {
+        fun `should return 0 with the same int`() {
             // GIVEN
-            val x = NonZeroInt(1)
-            val y = NonZeroInt(1)
+            val value = 1
+            val x = NonZeroInt(value)
             // WHEN
-            val result: Int = x.compareTo(y)
+            val result: Int = x compareTo value
             // THEN
             result assertEquals 0
         }
 
         @Test
-        fun `should return a negative number when this object is less than the other`() {
+        fun `should return 0 when comparing an int with the same non zero int`() {
+            // GIVEN
+            val value = 1
+            val x = NonZeroInt(1)
+            // WHEN
+            val result: Int = value compareTo x
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater int`() {
             // GIVEN
             val x = NonZeroInt(1)
-            val y = NonZeroInt(2)
+            val y = 2
             // WHEN
-            val result: Int = x.compareTo(y)
+            val result: Int = x compareTo y
             // THEN
             assertTrue { result < 0 }
         }
 
         @Test
-        fun `should return a positive number when this object is greater than the other`() {
+        fun `should return a negative number when comparing an int with a greater non zero int`() {
+            // GIVEN
+            val x = 1
+            val y = NonZeroInt(2)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = 0
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        @Test
+        fun `should return a positive number when comparing an int with a less non zero int`() {
+            // GIVEN
+            val x = 1
+            val y = NonZeroInt(-1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- NonZeroInt ----------
+
+        @Test
+        fun `should return 0 with the same non zero int`() {
+            // GIVEN
+            val value = 1
+            val x = NonZeroInt(value)
+            val y = NonZeroInt(value)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater non zero int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = NonZeroInt(2)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less non zero int`() {
             // GIVEN
             val x = NonZeroInt(2)
             val y = NonZeroInt(1)
             // WHEN
-            val result: Int = x.compareTo(y)
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should return 0 with the same positive int`() {
+            // GIVEN
+            val value = 1
+            val x = NonZeroInt(value)
+            val y = PositiveInt(value)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater positive int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = PositiveInt(2)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less positive int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = PositiveInt(0)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should return 0 with the same strictly positive int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = StrictlyPositiveInt(1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater strictly positive int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y = StrictlyPositiveInt(2)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less strictly positive int`() {
+            // GIVEN
+            val x = NonZeroInt(2)
+            val y = StrictlyPositiveInt(1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- NegativeInt ----------
+
+        @Test
+        fun `should return 0 with the same negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = NegativeInt(-1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = NegativeInt(0)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = NegativeInt(-2)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- StrictlyNegativeInt ----------
+
+        @Test
+        fun `should return 0 with the same strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-2)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less strictly negative int`() {
+            // GIVEN
+            val x = NonZeroInt(-1)
+            val y = StrictlyNegativeInt(-2)
+            // WHEN
+            val result: Int = x compareTo y
             // THEN
             assertTrue { result > 0 }
         }
