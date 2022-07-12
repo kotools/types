@@ -21,6 +21,13 @@ All notable changes to this project will be documented in this file.
 
 - Implement `NotEmptyList` type
   ([#6](https://github.com/kotools/types/issues/6)).
+- Overload `NonZeroInt`'s comparisons operations
+  ([#33](https://github.com/kotools/types/issues/33)).
+
+### Changed
+
+- Refactor `NonZeroInt`'s binary operations
+  ([#33](https://github.com/kotools/types/issues/33)).
 
 ## Version 1.2.0 - 2022/07/11
 
