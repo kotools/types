@@ -11,6 +11,7 @@ import kotools.types.string.NotBlankString
  * negative number if it's less than [other], or a positive number if it's
  * greater than [other].
  */
+@SinceKotoolsTypes("1.3")
 public infix operator fun Int.compareTo(other: NonZeroInt): Int =
     compareTo(other.value)
 
@@ -71,6 +72,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * negative number if it's less than [other], or a positive number if it's
      * greater than [other].
      */
+    @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: Int): Int =
         value.compareTo(other)
 
@@ -83,6 +85,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * negative number if it's less than [other], or a positive number if it's
      * greater than [other].
      */
+    @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: PositiveInt): Int =
         compareTo(other.value)
 
@@ -92,6 +95,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * negative number if it's less than [other], or a positive number if it's
      * greater than [other].
      */
+    @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
         compareTo(other.value)
 
@@ -101,6 +105,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * negative number if it's less than [other], or a positive number if it's
      * greater than [other].
      */
+    @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: NegativeInt): Int =
         compareTo(other.value)
 
@@ -110,6 +115,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * negative number if it's less than [other], or a positive number if it's
      * greater than [other].
      */
+    @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: StrictlyNegativeInt): Int =
         compareTo(other.value)
 
