@@ -9,8 +9,8 @@ import kotools.types.number.StrictlyPositiveInt
 // TODO: Add conversions from Array to NotEmptyList
 
 /**
- * Returns this [Collection] as a [NotEmptyList], or throws an
- * [IllegalArgumentException] if this collection is empty.
+ * Returns a not empty list containing all the elements of this collection, or
+ * throws an [IllegalArgumentException] if this collection is empty.
  */
 @Throws(IllegalArgumentException::class)
 @SinceKotoolsTypes("1.3")
@@ -24,8 +24,8 @@ public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
 }
 
 /**
- * Returns this [Collection] as a [NotEmptyList] or `null` if this collection is
- * empty.
+ * Returns a not empty list containing all the elements of this collection, or
+ * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
 public inline fun <reified E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
@@ -36,8 +36,9 @@ public inline fun <reified E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList
     }
 
 /**
- * Returns this [Collection] as a [NotEmptyList] or the result of calling the
- * [defaultValue] function if this collection is empty.
+ * Returns a not empty list containing all the elements of this collection, or
+ * returns the result of calling the [defaultValue] function if this collection
+ * is empty.
  */
 @SinceKotoolsTypes("1.3")
 public inline fun <reified E> Collection<E>.toNotEmptyListOrElse(
@@ -47,8 +48,8 @@ public inline fun <reified E> Collection<E>.toNotEmptyListOrElse(
 /**
  * Represents lists that can't be empty.
  *
- * @constructor Creates a [NotEmptyList] with a given [head] and an optional
- * [tail].
+ * @constructor Creates a not empty list starting with a [head] and containing
+ * all the elements of the optional [tail].
  */
 @SinceKotoolsTypes("1.3")
 public class NotEmptyList<out E>(
@@ -66,7 +67,7 @@ public class NotEmptyList<out E>(
 
     override val size: Int get() = tail.size + 1
 
-    /** Returns the [size] of the collection as a [StrictlyPositiveInt]. */
+    /** Returns the [size] of this not empty list as a strictly positive int. */
     public val typedSize: StrictlyPositiveInt get() = StrictlyPositiveInt(size)
 
     override fun isEmpty(): Boolean = false
@@ -91,21 +92,22 @@ public class NotEmptyList<out E>(
         get(index.toPositiveInt())
 
     /**
-     * Returns the element at the specified [index] in the list or `null` if the
-     * [index] is out of bounds.
+     * Returns the element at the specified [index] in the list, or returns
+     * `null` if the [index] is out of bounds.
      */
     public infix fun getOrNull(index: PositiveInt): E? = getOrNull(index.value)
 
     /**
-     * Returns the element at the specified [index] in the list or `null` if the
-     * [index] is out of bounds.
+     * Returns the element at the specified [index] in the list, or returns
+     * `null` if the [index] is out of bounds.
      */
     public infix fun getOrNull(index: StrictlyPositiveInt): E? =
         getOrNull(index.value)
 
     /**
-     * Returns the element at the specified [index] in the list or the result of
-     * calling the [defaultValue] function if the [index] is out of bounds.
+     * Returns the element at the specified [index] in the list, or returns the
+     * result of calling the [defaultValue] function if the [index] is out of
+     * bounds.
      */
     public inline fun getOrElse(
         index: PositiveInt,
@@ -113,8 +115,9 @@ public class NotEmptyList<out E>(
     ): E = getOrNull(index) ?: defaultValue(index)
 
     /**
-     * Returns the element at the specified [index] in the list or the result of
-     * calling the [defaultValue] function if the [index] is out of bounds.
+     * Returns the element at the specified [index] in the list, or returns the
+     * result of calling the [defaultValue] function if the [index] is out of
+     * bounds.
      */
     public inline fun getOrElse(
         index: StrictlyPositiveInt,
