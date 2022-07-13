@@ -3,6 +3,7 @@ package kotools.types.collections
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.string.NotBlankString
 
 // ---------- Conversions ----------
 
@@ -148,4 +149,9 @@ public class NotEmptyList<out E>(
         index: StrictlyPositiveInt,
         defaultValue: (StrictlyPositiveInt) -> @UnsafeVariance E
     ): E = getOrNull(index) ?: defaultValue(index)
+
+    // ---------- Conversions ----------
+
+    /** Returns the string representation of this list as a not blank string. */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 }
