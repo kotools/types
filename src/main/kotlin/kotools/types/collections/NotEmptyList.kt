@@ -94,18 +94,14 @@ public class NotEmptyList<out E>(
      * Returns the element at the specified [index] in the list or `null` if the
      * [index] is out of bounds.
      */
-    public infix fun getOrNull(index: PositiveInt): E? = try {
-        get(index)
-    } catch (_: IndexOutOfBoundsException) {
-        null
-    }
+    public infix fun getOrNull(index: PositiveInt): E? = getOrNull(index.value)
 
     /**
      * Returns the element at the specified [index] in the list or `null` if the
      * [index] is out of bounds.
      */
     public infix fun getOrNull(index: StrictlyPositiveInt): E? =
-        getOrNull(index.toPositiveInt())
+        getOrNull(index.value)
 
     /**
      * Returns the element at the specified [index] in the list or the result of
@@ -114,11 +110,7 @@ public class NotEmptyList<out E>(
     public inline fun getOrElse(
         index: PositiveInt,
         defaultValue: (PositiveInt) -> @UnsafeVariance E
-    ): E = try {
-        get(index)
-    } catch (_: IndexOutOfBoundsException) {
-        defaultValue(index)
-    }
+    ): E = getOrNull(index) ?: defaultValue(index)
 
     /**
      * Returns the element at the specified [index] in the list or the result of
@@ -127,9 +119,5 @@ public class NotEmptyList<out E>(
     public inline fun getOrElse(
         index: StrictlyPositiveInt,
         defaultValue: (StrictlyPositiveInt) -> @UnsafeVariance E
-    ): E = try {
-        get(index)
-    } catch (_: IndexOutOfBoundsException) {
-        defaultValue(index)
-    }
+    ): E = getOrNull(index) ?: defaultValue(index)
 }
