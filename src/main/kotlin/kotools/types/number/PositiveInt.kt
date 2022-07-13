@@ -3,22 +3,6 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
-// ---------- Conversions ----------
-
-/**
- * Returns this value as a [PositiveInt], or throws an
- * [IllegalArgumentException] if it's strictly negative.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
-
-/**
- * Returns this value as a [PositiveInt] or `null` if it's strictly negative.
- */
-@SinceKotoolsTypes("1.1")
-public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
-
 // ---------- Binary operations ----------
 
 /** Adds the [other] value to this value. */
@@ -45,6 +29,22 @@ public infix operator fun Int.times(other: PositiveInt): Int =
 @Throws(ArithmeticException::class)
 public infix operator fun Int.div(other: PositiveInt): Int = this / other.value
 
+// ---------- Conversions ----------
+
+/**
+ * Returns this value as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if it's strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
+public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
+
+/**
+ * Returns this value as a [PositiveInt] or `null` if it's strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
+
 /**
  * Represents positive integers (including `0`).
  *
@@ -59,59 +59,6 @@ public value class PositiveInt(
     init {
         require(value >= 0) { "Given value shouldn't be strictly negative." }
     }
-
-    // ---------- Comparisons ----------
-
-    override fun compareTo(other: PositiveInt): Int =
-        value.compareTo(other.value)
-
-    // ---------- Conversions ----------
-
-    /**
-     * Returns this [value] as a [NonZeroInt], or throws an
-     * [IllegalArgumentException] if it equals `0`.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
-
-    /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
-    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
-
-    /**
-     * Returns this [value] as a [StrictlyPositiveInt], or throws an
-     * [IllegalArgumentException] if it equals `0`.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
-        StrictlyPositiveInt(value)
-
-    /**
-     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it equals
-     * `0`.
-     */
-    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-        StrictlyPositiveInt orNull value
-
-    /**
-     * Returns this [value] as a [NegativeInt], or throws an
-     * [IllegalArgumentException] if it's strictly positive.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
-
-    /**
-     * Returns this [value] as a [NegativeInt] or `null` if it's strictly
-     * positive.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
-
-    override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a [NotBlankString].
-     */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     // ---------- Unary operations ----------
 
@@ -255,6 +202,59 @@ public value class PositiveInt(
      */
     public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
         NegativeInt(value / other.value)
+
+    // ---------- Comparisons ----------
+
+    override fun compareTo(other: PositiveInt): Int =
+        value.compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a [NonZeroInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
+    /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
+    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        StrictlyPositiveInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it equals
+     * `0`.
+     */
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        StrictlyPositiveInt orNull value
+
+    /**
+     * Returns this [value] as a [NegativeInt], or throws an
+     * [IllegalArgumentException] if it's strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+
+    /**
+     * Returns this [value] as a [NegativeInt] or `null` if it's strictly
+     * positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
+
+    override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
         /** The minimum value an instance of [PositiveInt] can have. */

@@ -59,102 +59,6 @@ class StrictlyNegativeIntTest {
         }
     }
 
-    // ---------- Comparisons ----------
-
-    @Nested
-    inner class CompareTo {
-        @Test
-        fun `should return 0 when objects are equals`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x.compareTo(y)
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return a negative number when this object is less than the other`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-2)
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x.compareTo(y)
-            // THEN
-            assertTrue { result < 0 }
-        }
-
-        @Test
-        fun `should return a positive number when this object is greater than the other`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = StrictlyNegativeInt(-2)
-            // WHEN
-            val result: Int = x.compareTo(y)
-            // THEN
-            assertTrue { result > 0 }
-        }
-    }
-
-    // ---------- Conversions ----------
-
-    @Nested
-    inner class ToNonZeroInt {
-        @Test
-        fun `should return its value as a non zero int`() {
-            // GIVEN
-            val value = -1
-            val x = StrictlyNegativeInt(value)
-            // WHEN
-            val result: NonZeroInt = x.toNonZeroInt()
-            // THEN
-            result.value assertEquals value
-        }
-    }
-
-    @Nested
-    inner class ToNegativeInt {
-        @Test
-        fun `should return its value as a negative int`() {
-            // GIVEN
-            val value = -1
-            val x = StrictlyNegativeInt(value)
-            // WHEN
-            val result: NegativeInt = x.toNegativeInt()
-            // THEN
-            result.value assertEquals value
-        }
-    }
-
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val value = -1
-            val x = StrictlyNegativeInt(value)
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals value.toString()
-        }
-    }
-
-    @Nested
-    inner class ToNotBlankString {
-        @Test
-        fun `should return its value as a not blank string`() {
-            // GIVEN
-            val value = -1
-            val x = StrictlyNegativeInt(value)
-            // WHEN
-            val result: NotBlankString = x.toNotBlankString()
-            // THEN
-            result.value assertEquals value.toString()
-        }
-    }
-
     // ---------- Unary operations ----------
 
     @Nested
@@ -577,6 +481,102 @@ class StrictlyNegativeIntTest {
             val result: PositiveInt = x / y
             // THEN
             result.value assertEquals 2
+        }
+    }
+
+    // ---------- Comparisons ----------
+
+    @Nested
+    inner class CompareTo {
+        @Test
+        fun `should return 0 when objects are equals`() {
+            // GIVEN
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x.compareTo(y)
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number when this object is less than the other`() {
+            // GIVEN
+            val x = StrictlyNegativeInt(-2)
+            val y = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x.compareTo(y)
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number when this object is greater than the other`() {
+            // GIVEN
+            val x = StrictlyNegativeInt(-1)
+            val y = StrictlyNegativeInt(-2)
+            // WHEN
+            val result: Int = x.compareTo(y)
+            // THEN
+            assertTrue { result > 0 }
+        }
+    }
+
+    // ---------- Conversions ----------
+
+    @Nested
+    inner class ToNonZeroInt {
+        @Test
+        fun `should return its value as a non zero int`() {
+            // GIVEN
+            val value = -1
+            val x = StrictlyNegativeInt(value)
+            // WHEN
+            val result: NonZeroInt = x.toNonZeroInt()
+            // THEN
+            result.value assertEquals value
+        }
+    }
+
+    @Nested
+    inner class ToNegativeInt {
+        @Test
+        fun `should return its value as a negative int`() {
+            // GIVEN
+            val value = -1
+            val x = StrictlyNegativeInt(value)
+            // WHEN
+            val result: NegativeInt = x.toNegativeInt()
+            // THEN
+            result.value assertEquals value
+        }
+    }
+
+    @Nested
+    inner class ToString {
+        @Test
+        fun `should return its value as a string`() {
+            // GIVEN
+            val value = -1
+            val x = StrictlyNegativeInt(value)
+            // WHEN
+            val result: String = x.toString()
+            // THEN
+            result assertEquals value.toString()
+        }
+    }
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its value as a not blank string`() {
+            // GIVEN
+            val value = -1
+            val x = StrictlyNegativeInt(value)
+            // WHEN
+            val result: NotBlankString = x.toNotBlankString()
+            // THEN
+            result.value assertEquals value.toString()
         }
     }
 }
