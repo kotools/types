@@ -60,6 +60,8 @@ class StrictlyPositiveIntTest {
         }
     }
 
+    // ---------- Comparisons ----------
+
     @Nested
     inner class CompareTo {
         @Test
@@ -96,33 +98,7 @@ class StrictlyPositiveIntTest {
         }
     }
 
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals value.toString()
-        }
-    }
-
-    @Nested
-    inner class ToNotBlankString {
-        @Test
-        fun `should return its value as a not blank string`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: NotBlankString = x.toNotBlankString()
-            // THEN
-            result.value assertEquals value.toString()
-        }
-    }
+    // ---------- Conversions ----------
 
     @Nested
     inner class ToNonZeroInt {
@@ -151,6 +127,113 @@ class StrictlyPositiveIntTest {
             result.value assertEquals value
         }
     }
+
+    @Nested
+    inner class ToString {
+        @Test
+        fun `should return its value as a string`() {
+            // GIVEN
+            val value = 1
+            val x = StrictlyPositiveInt(value)
+            // WHEN
+            val result: String = x.toString()
+            // THEN
+            result assertEquals value.toString()
+        }
+    }
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its value as a not blank string`() {
+            // GIVEN
+            val value = 1
+            val x = StrictlyPositiveInt(value)
+            // WHEN
+            val result: NotBlankString = x.toNotBlankString()
+            // THEN
+            result.value assertEquals value.toString()
+        }
+    }
+
+    // ---------- Unary operations ----------
+
+    @Nested
+    inner class Inc {
+        @Test
+        fun `should return 2 with 1`() {
+            // GIVEN
+            val value = 1
+            var x = StrictlyPositiveInt(value)
+            // WHEN
+            x++
+            // THEN
+            x.value assertEquals value + 1
+        }
+
+        @Test
+        fun `should return the minimum value with the maximum value`() {
+            // GIVEN
+            var x = StrictlyPositiveInt.max
+            // WHEN
+            x++
+            // THEN
+            x assertEquals StrictlyPositiveInt.min
+        }
+    }
+
+    @Nested
+    inner class Dec {
+        @Test
+        fun `should return 1 with 2`() {
+            // GIVEN
+            var x = StrictlyPositiveInt(2)
+            // WHEN
+            x--
+            // THEN
+            x.value assertEquals 1
+        }
+
+        @Test
+        fun `should return the maximum value with the minimum value`() {
+            // GIVEN
+            var x = StrictlyPositiveInt.min
+            // WHEN
+            x--
+            // THEN
+            x assertEquals StrictlyPositiveInt.max
+        }
+    }
+
+    @Nested
+    inner class UnaryPlus {
+        @Test
+        fun `should return the same strictly positive int`() {
+            // GIVEN
+            val value = 1
+            val x = StrictlyPositiveInt(value)
+            // WHEN
+            val result: StrictlyPositiveInt = +x
+            // THEN
+            result.value assertEquals value
+        }
+    }
+
+    @Nested
+    inner class UnaryMinus {
+        @Test
+        fun `should return a strictly negative int`() {
+            // GIVEN
+            val value = 1
+            val x = StrictlyPositiveInt(value)
+            // WHEN
+            val result: StrictlyNegativeInt = -x
+            // THEN
+            result.value assertEquals -x.value
+        }
+    }
+
+    // ---------- Binary operations ----------
 
     @Nested
     inner class Plus {
@@ -485,81 +568,6 @@ class StrictlyPositiveIntTest {
             val result: NegativeInt = x / y
             // THEN
             result.value assertEquals -1
-        }
-    }
-
-    @Nested
-    inner class Inc {
-        @Test
-        fun `should return 2 with 1`() {
-            // GIVEN
-            val value = 1
-            var x = StrictlyPositiveInt(value)
-            // WHEN
-            x++
-            // THEN
-            x.value assertEquals value + 1
-        }
-
-        @Test
-        fun `should return the minimum value with the maximum value`() {
-            // GIVEN
-            var x = StrictlyPositiveInt.max
-            // WHEN
-            x++
-            // THEN
-            x assertEquals StrictlyPositiveInt.min
-        }
-    }
-
-    @Nested
-    inner class Dec {
-        @Test
-        fun `should return 1 with 2`() {
-            // GIVEN
-            var x = StrictlyPositiveInt(2)
-            // WHEN
-            x--
-            // THEN
-            x.value assertEquals 1
-        }
-
-        @Test
-        fun `should return the maximum value with the minimum value`() {
-            // GIVEN
-            var x = StrictlyPositiveInt.min
-            // WHEN
-            x--
-            // THEN
-            x assertEquals StrictlyPositiveInt.max
-        }
-    }
-
-    @Nested
-    inner class UnaryPlus {
-        @Test
-        fun `should return the same strictly positive int`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: StrictlyPositiveInt = +x
-            // THEN
-            result.value assertEquals value
-        }
-    }
-
-    @Nested
-    inner class UnaryMinus {
-        @Test
-        fun `should return a strictly negative int`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: StrictlyNegativeInt = -x
-            // THEN
-            result.value assertEquals -x.value
         }
     }
 }
