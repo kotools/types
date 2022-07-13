@@ -4,6 +4,8 @@ import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 
+// ---------- Conversions ----------
+
 /**
  * Returns this value as a [NotBlankString], or throws an
  * [IllegalArgumentException] if it's blank.
@@ -29,16 +31,20 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
 public value class NotBlankString(
     public val value: String
 ) : Comparable<NotBlankString> {
-    /** Returns the first character of this [value]. */
-    public val first: Char get() = value[0]
+    init {
+        require(value.isNotBlank()) { "Given value shouldn't be blank." }
+    }
+
+    // ---------- Query operations ----------
 
     /** Returns the length of this [value]. */
     public val length: StrictlyPositiveInt
         get() = StrictlyPositiveInt(value.length)
 
-    init {
-        require(value.isNotBlank()) { "Given value shouldn't be blank." }
-    }
+    // ---------- Positional Access Operations ----------
+
+    /** Returns the first character of this [value]. */
+    public val first: Char get() = value[0]
 
     /**
      * Returns the character of this [value] at the specified [index], or throws
@@ -58,10 +64,7 @@ public value class NotBlankString(
         null
     }
 
-    override fun compareTo(other: NotBlankString): Int =
-        value.compareTo(other.value)
-
-    override fun toString(): String = value
+    // ---------- Binary operations ----------
 
     /**
      * Returns the concatenation of this [value] with the string representation
@@ -69,6 +72,15 @@ public value class NotBlankString(
      */
     public infix operator fun plus(other: Any?): NotBlankString =
         NotBlankString(value + other)
+
+    // ---------- Comparisons ----------
+
+    override fun compareTo(other: NotBlankString): Int =
+        value.compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value
 
     public companion object {
         /**

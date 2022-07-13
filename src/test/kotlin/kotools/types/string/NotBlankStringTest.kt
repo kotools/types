@@ -80,6 +80,8 @@ class NotBlankStringTest {
         }
     }
 
+    // ---------- Positional Access Operations ----------
+
     @Nested
     inner class Get {
         @Test
@@ -129,6 +131,24 @@ class NotBlankStringTest {
         }
     }
 
+    // ---------- Binary operations ----------
+
+    @Nested
+    inner class Plus {
+        @Test
+        fun `should return 'hello world' with 'hello' + ' world'`() {
+            // GIVEN
+            val string = NotBlankString("hello")
+            val other = " world"
+            // WHEN
+            val result: NotBlankString = string + other
+            // THEN
+            result.value assertEquals "hello world"
+        }
+    }
+
+    // ---------- Comparisons ----------
+
     @Nested
     inner class CompareTo {
         @Test
@@ -165,6 +185,8 @@ class NotBlankStringTest {
         }
     }
 
+    // ---------- Conversions ----------
+
     @Nested
     inner class ToString {
         @Test
@@ -175,20 +197,6 @@ class NotBlankStringTest {
             val result: String = string.toString()
             // THEN
             result assertEquals string.value
-        }
-    }
-
-    @Nested
-    inner class Plus {
-        @Test
-        fun `should return 'hello world' with 'hello' + ' world'`() {
-            // GIVEN
-            val string = NotBlankString("hello")
-            val other = " world"
-            // WHEN
-            val result: NotBlankString = string + other
-            // THEN
-            result.value assertEquals "hello world"
         }
     }
 }
