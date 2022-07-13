@@ -3,6 +3,28 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
+// ---------- Binary operations ----------
+
+/** Adds the [other] value to this value. */
+@SinceKotoolsTypes("1.1")
+public infix operator fun Int.plus(other: NonZeroInt): Int = this + other.value
+
+/** Subtracts the [other] value from this value. */
+@SinceKotoolsTypes("1.1")
+public infix operator fun Int.minus(other: NonZeroInt): Int =
+    this - other.value
+
+/** Multiplies this value by the [other] value. */
+@SinceKotoolsTypes("1.1")
+public infix operator fun Int.times(other: NonZeroInt): Int = this * other.value
+
+/**
+ * Divides this value by the [other] value, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotoolsTypes("1.1")
+public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
+
 // ---------- Comparisons ----------
 
 /**
@@ -29,28 +51,6 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 
-// ---------- Binary operations ----------
-
-/** Adds the [other] value to this value. */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.plus(other: NonZeroInt): Int = this + other.value
-
-/** Subtracts the [other] value from this value. */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.minus(other: NonZeroInt): Int =
-    this - other.value
-
-/** Multiplies this value by the [other] value. */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.times(other: NonZeroInt): Int = this * other.value
-
-/**
- * Divides this value by the [other] value, truncating the result to an integer
- * that is closer to zero.
- */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
-
 /**
  * Represents integers that can't equal `0`.
  *
@@ -63,127 +63,6 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     init {
         require(value != 0) { "Given value shouldn't equal 0." }
     }
-
-    // ---------- Comparisons ----------
-
-    /**
-     * Compares this object with the specified object for order.
-     * Returns zero if this object is equal to the specified [other] object, a
-     * negative number if it's less than [other], or a positive number if it's
-     * greater than [other].
-     */
-    @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: Int): Int =
-        value.compareTo(other)
-
-    override infix operator fun compareTo(other: NonZeroInt): Int =
-        compareTo(other.value)
-
-    /**
-     * Compares this object with the specified object for order.
-     * Returns zero if this object is equal to the specified [other] object, a
-     * negative number if it's less than [other], or a positive number if it's
-     * greater than [other].
-     */
-    @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: PositiveInt): Int =
-        compareTo(other.value)
-
-    /**
-     * Compares this object with the specified object for order.
-     * Returns zero if this object is equal to the specified [other] object, a
-     * negative number if it's less than [other], or a positive number if it's
-     * greater than [other].
-     */
-    @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
-        compareTo(other.value)
-
-    /**
-     * Compares this object with the specified object for order.
-     * Returns zero if this object is equal to the specified [other] object, a
-     * negative number if it's less than [other], or a positive number if it's
-     * greater than [other].
-     */
-    @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: NegativeInt): Int =
-        compareTo(other.value)
-
-    /**
-     * Compares this object with the specified object for order.
-     * Returns zero if this object is equal to the specified [other] object, a
-     * negative number if it's less than [other], or a positive number if it's
-     * greater than [other].
-     */
-    @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: StrictlyNegativeInt): Int =
-        compareTo(other.value)
-
-    // ---------- Conversions ----------
-
-    /**
-     * Returns this [value] as a [PositiveInt], or throws an
-     * [IllegalArgumentException] if it's strictly negative.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
-
-    /**
-     * Returns this [value] as a [PositiveInt] or `null` if it's strictly
-     * negative.
-     */
-    public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
-
-    /**
-     * Returns this [value] as a [StrictlyPositiveInt], or throws an
-     * [IllegalArgumentException] if it's strictly negative.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
-        StrictlyPositiveInt(value)
-
-    /**
-     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it's
-     * strictly negative.
-     */
-    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-        StrictlyPositiveInt orNull value
-
-    /**
-     * Returns this [value] as a [NegativeInt], or throws an
-     * [IllegalArgumentException] if it's strictly positive.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
-
-    /**
-     * Returns this [value] as a [NegativeInt] or `null` if it's strictly
-     * positive.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
-
-    /**
-     * Returns this [value] as a [StrictlyNegativeInt], or throws an
-     * [IllegalArgumentException] if it's strictly positive.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
-        StrictlyNegativeInt(value)
-
-    /**
-     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it's
-     * strictly positive.
-     */
-    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-        StrictlyNegativeInt orNull value
-
-    override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a [NotBlankString].
-     */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     // ---------- Unary operations ----------
 
@@ -327,6 +206,127 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      */
     public infix operator fun div(other: StrictlyNegativeInt): Int =
         div(other.value)
+
+    // ---------- Comparisons ----------
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: Int): Int =
+        value.compareTo(other)
+
+    override infix operator fun compareTo(other: NonZeroInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: PositiveInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: NegativeInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this object with the specified object for order.
+     * Returns zero if this object is equal to the specified [other] object, a
+     * negative number if it's less than [other], or a positive number if it's
+     * greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: StrictlyNegativeInt): Int =
+        compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a [PositiveInt], or throws an
+     * [IllegalArgumentException] if it's strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
+    /**
+     * Returns this [value] as a [PositiveInt] or `null` if it's strictly
+     * negative.
+     */
+    public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or throws an
+     * [IllegalArgumentException] if it's strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        StrictlyPositiveInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it's
+     * strictly negative.
+     */
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        StrictlyPositiveInt orNull value
+
+    /**
+     * Returns this [value] as a [NegativeInt], or throws an
+     * [IllegalArgumentException] if it's strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+
+    /**
+     * Returns this [value] as a [NegativeInt] or `null` if it's strictly
+     * positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or throws an
+     * [IllegalArgumentException] if it's strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        StrictlyNegativeInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it's
+     * strictly positive.
+     */
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        StrictlyNegativeInt orNull value
+
+    override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
         /** The minimum value an instance of [NonZeroInt] can have. */

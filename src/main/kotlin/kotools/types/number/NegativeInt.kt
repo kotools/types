@@ -3,23 +3,6 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
-// ---------- Conversions ----------
-
-/**
- * Returns this value as a [NegativeInt], or throws an
- * [IllegalArgumentException] if it's strictly positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
-
-/**
- * Returns this value as a [NegativeInt] or `null` if it's strictly positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
-
 // ---------- Binary operations ----------
 
 /** Adds the [other] value to this value. */
@@ -45,6 +28,23 @@ public infix operator fun Int.times(other: NegativeInt): Int =
 @SinceKotoolsTypes("1.1")
 public infix operator fun Int.div(other: NegativeInt): Int = this / other.value
 
+// ---------- Conversions ----------
+
+/**
+ * Returns this value as a [NegativeInt], or throws an
+ * [IllegalArgumentException] if it's strictly positive.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
+public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
+
+/**
+ * Returns this value as a [NegativeInt] or `null` if it's strictly positive.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
+public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
+
 /**
  * Represents negative integers (including 0).
  *
@@ -59,59 +59,6 @@ public value class NegativeInt(
     init {
         require(value <= 0) { "Given value shouldn't be strictly positive." }
     }
-
-    // ---------- Comparisons ----------
-
-    override fun compareTo(other: NegativeInt): Int =
-        value.compareTo(other.value)
-
-    // ---------- Conversions ----------
-
-    /**
-     * Returns this [value] as a [NonZeroInt], or throws an
-     * [IllegalArgumentException] if it equals `0`.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
-
-    /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
-    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
-
-    /**
-     * Returns this [value] as a [StrictlyNegativeInt], or throws an
-     * [IllegalArgumentException] if it equals `0`.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
-        StrictlyNegativeInt(value)
-
-    /**
-     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it equals
-     * `0`.
-     */
-    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-        StrictlyNegativeInt orNull value
-
-    /**
-     * Returns this [value] as a [PositiveInt], or throws an
-     * [IllegalArgumentException] if it's strictly negative.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
-
-    /**
-     * Returns this [value] as a [PositiveInt] or `null` if it's strictly
-     * negative.
-     */
-    @Throws(IllegalArgumentException::class)
-    public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
-
-    override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a [NotBlankString].
-     */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     // ---------- Unary operations ----------
 
@@ -255,6 +202,59 @@ public value class NegativeInt(
      */
     public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value / other.value)
+
+    // ---------- Comparisons ----------
+
+    override fun compareTo(other: NegativeInt): Int =
+        value.compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a [NonZeroInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
+    /** Returns this [value] as a [NonZeroInt] or `null` if it equals `0`. */
+    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or throws an
+     * [IllegalArgumentException] if it equals `0`.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        StrictlyNegativeInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it equals
+     * `0`.
+     */
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        StrictlyNegativeInt orNull value
+
+    /**
+     * Returns this [value] as a [PositiveInt], or throws an
+     * [IllegalArgumentException] if it's strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
+    /**
+     * Returns this [value] as a [PositiveInt] or `null` if it's strictly
+     * negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
+
+    override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
         /** The minimum value an instance of [NegativeInt] can have. */

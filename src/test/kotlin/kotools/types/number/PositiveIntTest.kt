@@ -75,217 +75,6 @@ class PositiveIntTest {
         }
     }
 
-    // ---------- Comparisons ----------
-
-    @Nested
-    inner class CompareTo {
-        @Test
-        fun `should return 0 when objects have the same value`() {
-            // GIVEN
-            val x = PositiveInt(1)
-            val y = PositiveInt(1)
-            // WHEN
-            val result: Int = x.compareTo(y)
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return a negative number when this object is less than the other`() {
-            // GIVEN
-            val x = PositiveInt(1)
-            val y = PositiveInt(2)
-            // WHEN
-            val result: Int = x.compareTo(y)
-            // THEN
-            assertTrue { result < 0 }
-        }
-
-        @Test
-        fun `should return a positive number when this object is greater than the other`() {
-            // GIVEN
-            val x = PositiveInt(2)
-            val y = PositiveInt(1)
-            // WHEN
-            val result: Int = x.compareTo(y)
-            // THEN
-            assertTrue { result > 0 }
-        }
-    }
-
-    // ---------- Conversions ----------
-
-    @Nested
-    inner class ToNonZeroInt {
-        @Test
-        fun `should return its value as a non zero int with 1`() {
-            // GIVEN
-            val value = 1
-            val x = PositiveInt(value)
-            // WHEN
-            val result: NonZeroInt = assertDoesNotThrow(x::toNonZeroInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with 0`() {
-            // GIVEN
-            val x = PositiveInt(0)
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(block = x::toNonZeroInt)
-        }
-
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a non zero int with 2`() {
-                // GIVEN
-                val value = 2
-                val x = PositiveInt(value)
-                // WHEN
-                val result: NonZeroInt? = x.toNonZeroIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
-
-            @Test
-            fun `should return null with 0`() {
-                // GIVEN
-                val x = PositiveInt(0)
-                // WHEN
-                val result: NonZeroInt? = x.toNonZeroIntOrNull()
-                // THEN
-                result.assertNull()
-            }
-        }
-    }
-
-    @Nested
-    inner class ToStrictlyPositiveInt {
-        @Test
-        fun `should return its value as a strictly positive int with 1`() {
-            // GIVEN
-            val value = 1
-            val x = PositiveInt(value)
-            // WHEN
-            val result: StrictlyPositiveInt =
-                assertDoesNotThrow(x::toStrictlyPositiveInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with 0`() {
-            // GIVEN
-            val x = PositiveInt(0)
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(
-                block = x::toStrictlyPositiveInt
-            )
-        }
-
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a strictly positive int with 2`() {
-                // GIVEN
-                val value = 2
-                val x = PositiveInt(value)
-                // WHEN
-                val result: StrictlyPositiveInt? =
-                    x.toStrictlyPositiveIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
-
-            @Test
-            fun `should return null with 0`() {
-                // GIVEN
-                val x = PositiveInt(0)
-                // WHEN
-                val result: StrictlyPositiveInt? =
-                    x.toStrictlyPositiveIntOrNull()
-                // THEN
-                result.assertNull()
-            }
-        }
-    }
-
-    @Nested
-    inner class ToNegativeInt {
-        @Test
-        fun `should return its value as a negative int with 0`() {
-            // GIVEN
-            val value = 0
-            val x = PositiveInt(value)
-            // WHEN
-            val result: NegativeInt = assertDoesNotThrow(x::toNegativeInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with 1`() {
-            // GIVEN
-            val x = PositiveInt(1)
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
-        }
-
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a negative int with 0`() {
-                // GIVEN
-                val value = 0
-                val x = PositiveInt(value)
-                // WHEN
-                val result: NegativeInt? = x.toNegativeIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
-
-            @Test
-            fun `should return null with 2`() {
-                // GIVEN
-                val x = PositiveInt(2)
-                // WHEN
-                val result: NegativeInt? = x.toNegativeIntOrNull()
-                // THEN
-                result.assertNull()
-            }
-        }
-    }
-
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val value = 1
-            val x = PositiveInt(value)
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals "$value"
-        }
-    }
-
-    @Nested
-    inner class ToNotBlankString {
-        @Test
-        fun `should return its value as a not blank string`() {
-            // GIVEN
-            val value = 0
-            val x = PositiveInt(value)
-            // WHEN
-            val result: NotBlankString = x.toNotBlankString()
-            // THEN
-            result.value assertEquals value.toString()
-        }
-    }
-
     // ---------- Unary operations ----------
 
     @Nested
@@ -715,6 +504,217 @@ class PositiveIntTest {
             val result: NegativeInt = x / y
             // THEN
             result.value assertEquals 0
+        }
+    }
+
+    // ---------- Comparisons ----------
+
+    @Nested
+    inner class CompareTo {
+        @Test
+        fun `should return 0 when objects have the same value`() {
+            // GIVEN
+            val x = PositiveInt(1)
+            val y = PositiveInt(1)
+            // WHEN
+            val result: Int = x.compareTo(y)
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number when this object is less than the other`() {
+            // GIVEN
+            val x = PositiveInt(1)
+            val y = PositiveInt(2)
+            // WHEN
+            val result: Int = x.compareTo(y)
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number when this object is greater than the other`() {
+            // GIVEN
+            val x = PositiveInt(2)
+            val y = PositiveInt(1)
+            // WHEN
+            val result: Int = x.compareTo(y)
+            // THEN
+            assertTrue { result > 0 }
+        }
+    }
+
+    // ---------- Conversions ----------
+
+    @Nested
+    inner class ToNonZeroInt {
+        @Test
+        fun `should return its value as a non zero int with 1`() {
+            // GIVEN
+            val value = 1
+            val x = PositiveInt(value)
+            // WHEN
+            val result: NonZeroInt = assertDoesNotThrow(x::toNonZeroInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 0`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(block = x::toNonZeroInt)
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a non zero int with 2`() {
+                // GIVEN
+                val value = 2
+                val x = PositiveInt(value)
+                // WHEN
+                val result: NonZeroInt? = x.toNonZeroIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 0`() {
+                // GIVEN
+                val x = PositiveInt(0)
+                // WHEN
+                val result: NonZeroInt? = x.toNonZeroIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
+    inner class ToStrictlyPositiveInt {
+        @Test
+        fun `should return its value as a strictly positive int with 1`() {
+            // GIVEN
+            val value = 1
+            val x = PositiveInt(value)
+            // WHEN
+            val result: StrictlyPositiveInt =
+                assertDoesNotThrow(x::toStrictlyPositiveInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 0`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = x::toStrictlyPositiveInt
+            )
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a strictly positive int with 2`() {
+                // GIVEN
+                val value = 2
+                val x = PositiveInt(value)
+                // WHEN
+                val result: StrictlyPositiveInt? =
+                    x.toStrictlyPositiveIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 0`() {
+                // GIVEN
+                val x = PositiveInt(0)
+                // WHEN
+                val result: StrictlyPositiveInt? =
+                    x.toStrictlyPositiveIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
+    inner class ToNegativeInt {
+        @Test
+        fun `should return its value as a negative int with 0`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            // WHEN
+            val result: NegativeInt = assertDoesNotThrow(x::toNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with 1`() {
+            // GIVEN
+            val x = PositiveInt(1)
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
+        }
+
+        @Nested
+        inner class OrNull {
+            @Test
+            fun `should return its value as a negative int with 0`() {
+                // GIVEN
+                val value = 0
+                val x = PositiveInt(value)
+                // WHEN
+                val result: NegativeInt? = x.toNegativeIntOrNull()
+                // THEN
+                result.assertNotNull().value assertEquals value
+            }
+
+            @Test
+            fun `should return null with 2`() {
+                // GIVEN
+                val x = PositiveInt(2)
+                // WHEN
+                val result: NegativeInt? = x.toNegativeIntOrNull()
+                // THEN
+                result.assertNull()
+            }
+        }
+    }
+
+    @Nested
+    inner class ToString {
+        @Test
+        fun `should return its value as a string`() {
+            // GIVEN
+            val value = 1
+            val x = PositiveInt(value)
+            // WHEN
+            val result: String = x.toString()
+            // THEN
+            result assertEquals "$value"
+        }
+    }
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its value as a not blank string`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            // WHEN
+            val result: NotBlankString = x.toNotBlankString()
+            // THEN
+            result.value assertEquals value.toString()
         }
     }
 }

@@ -3,24 +3,6 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
-// ---------- Conversions ----------
-
-/**
- * Returns this value as a [StrictlyNegativeInt], or throws an
- * [IllegalArgumentException] if it's positive.
- */
-@SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
-public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
-    StrictlyNegativeInt(this)
-
-/**
- * Returns this value as a [StrictlyNegativeInt], or `null` if it's positive.
- */
-@SinceKotoolsTypes("1.1")
-public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    StrictlyNegativeInt orNull this
-
 // ---------- Binary operations ----------
 
 /** Adds the [other] value to this value. */
@@ -46,6 +28,24 @@ public infix operator fun Int.times(other: StrictlyNegativeInt): Int =
 public infix operator fun Int.div(other: StrictlyNegativeInt): Int =
     this / other.value
 
+// ---------- Conversions ----------
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if it's positive.
+ */
+@SinceKotoolsTypes("1.1")
+@Throws(IllegalArgumentException::class)
+public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
+    StrictlyNegativeInt(this)
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or `null` if it's positive.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    StrictlyNegativeInt orNull this
+
 /**
  * Represents strictly negative integers (excluding 0).
  *
@@ -60,26 +60,6 @@ public value class StrictlyNegativeInt(
     init {
         require(value < 0) { "Given value shouldn't be positive." }
     }
-
-    // ---------- Comparisons ----------
-
-    override fun compareTo(other: StrictlyNegativeInt): Int =
-        value.compareTo(other.value)
-
-    // ---------- Conversions ----------
-
-    /** Returns this [value] as a [NonZeroInt]. */
-    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
-
-    /** Returns this [value] as a [NegativeInt]. */
-    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
-
-    override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a [NotBlankString].
-     */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     // ---------- Unary operations ----------
 
@@ -226,6 +206,26 @@ public value class StrictlyNegativeInt(
      */
     public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value / other.value)
+
+    // ---------- Comparisons ----------
+
+    override fun compareTo(other: StrictlyNegativeInt): Int =
+        value.compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /** Returns this [value] as a [NonZeroInt]. */
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
+    /** Returns this [value] as a [NegativeInt]. */
+    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+
+    override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
         /** The minimum value an instance of [StrictlyNegativeInt] can have. */
