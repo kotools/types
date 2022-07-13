@@ -1,6 +1,7 @@
 package kotools.types.collections
 
 import io.github.kotools.assert.assertEquals
+import io.github.kotools.assert.assertNotEquals
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
 import kotools.types.number.PositiveInt
@@ -329,6 +330,93 @@ class NotEmptyListTest {
             val element: Int = list.getOrElse(index) { defaultValue }
             // THEN
             element assertEquals defaultValue
+        }
+    }
+
+    // ---------- Conversions ----------
+
+    @Nested
+    inner class CollectionToNotEmptyList {
+        @Test
+        fun `should pass with a collection containing 3 elements`() {
+            // GIVEN
+            val collection: Collection<Int> = listOf(1, 2, 3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                assertDoesNotThrow(collection::toNotEmptyList)
+            // THEN
+            collection.forEachIndexed { index: Int, element: Int ->
+                element assertEquals list[index]
+            }
+        }
+
+        @Test
+        fun `should throw an error with an empty collection`() {
+            // GIVEN
+            val collection: Collection<Int> = emptyList()
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = collection::toNotEmptyList
+            )
+        }
+    }
+
+    @Nested
+    inner class CollectionToNotEmptyListOrNull {
+        @Test
+        fun `should pass with a collection containing 3 elements`() {
+            // GIVEN
+            val collection: Collection<Int> = setOf(1, 2, 3)
+            // WHEN
+            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
+            // THEN
+            list.assertNotNull().let {
+                collection.forEachIndexed { index: Int, element: Int ->
+                    element assertEquals it[index]
+                }
+            }
+        }
+
+        @Test
+        fun `should return null with an empty collection`() {
+            // GIVEN
+            val collection: Collection<Int> = emptySet()
+            // WHEN
+            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
+            // THEN
+            list.assertNull()
+        }
+    }
+
+    @Nested
+    inner class CollectionToNotEmptyListOrElse {
+        @Test
+        fun `should pass with a collection containing 3 elements`() {
+            // GIVEN
+            val collection: Collection<Int> = listOf(1, 2, 3)
+            val defaultValue = NotEmptyList(-1, -2, -3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                collection.toNotEmptyListOrElse { defaultValue }
+            // THEN
+            collection.forEachIndexed { index: Int, element: Int ->
+                element assertEquals list[index]
+                element assertNotEquals defaultValue[index]
+            }
+        }
+
+        @Test
+        fun `should return the default value with an empty collection`() {
+            // GIVEN
+            val collection: Collection<Int> = emptyList()
+            val defaultValue = NotEmptyList(-1, -2, -3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                collection.toNotEmptyListOrElse { defaultValue }
+            // THEN
+            list.forEachIndexed { index: Int, element: Int ->
+                element assertEquals defaultValue[index]
+            }
         }
     }
 }

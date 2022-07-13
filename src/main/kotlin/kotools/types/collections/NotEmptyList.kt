@@ -4,6 +4,46 @@ import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 
+// ---------- Conversions ----------
+
+// TODO: Add conversions from Array to NotEmptyList
+
+/**
+ * Returns this [Collection] as a [NotEmptyList], or throws an
+ * [IllegalArgumentException] if this collection is empty.
+ */
+@Throws(IllegalArgumentException::class)
+@SinceKotoolsTypes("1.3")
+public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
+    require(isNotEmpty()) { "Given collection shouldn't be empty." }
+    val list: MutableList<E> = mutableListOf()
+    forEach { list += it }
+    val head: E = list.removeFirst()
+    val tail: Array<E> = list.toTypedArray()
+    return NotEmptyList(head, *tail)
+}
+
+/**
+ * Returns this [Collection] as a [NotEmptyList] or `null` if this collection is
+ * empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline fun <reified E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    try {
+        toNotEmptyList()
+    } catch (_: IllegalArgumentException) {
+        null
+    }
+
+/**
+ * Returns this [Collection] as a [NotEmptyList] or the result of calling the
+ * [defaultValue] function if this collection is empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline fun <reified E> Collection<E>.toNotEmptyListOrElse(
+    defaultValue: (Collection<E>) -> NotEmptyList<E>
+): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+
 /**
  * Represents lists that can't be empty.
  *
