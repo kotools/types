@@ -6,14 +6,21 @@ import kotools.types.number.StrictlyPositiveInt
 
 // ---------- Conversions ----------
 
-// TODO: Add conversions from Array to NotEmptyList
+/**
+ * Returns a not empty list containing all the elements of this array, or throws
+ * an [IllegalArgumentException] if this array is empty.
+ */
+@SinceKotoolsTypes("1.3")
+@Throws(IllegalArgumentException::class)
+public inline fun <reified E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
+    toList().toNotEmptyList()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
-@Throws(IllegalArgumentException::class)
 @SinceKotoolsTypes("1.3")
+@Throws(IllegalArgumentException::class)
 public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
     val list: MutableList<E> = mutableListOf()
@@ -22,6 +29,14 @@ public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     val tail: Array<E> = list.toTypedArray()
     return NotEmptyList(head, *tail)
 }
+
+/**
+ * Returns a not empty list containing all the elements of this array, or
+ * returns `null` if this array is empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline fun <reified E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    toList().toNotEmptyListOrNull()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
@@ -36,12 +51,22 @@ public inline fun <reified E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList
     }
 
 /**
+ * Returns a not empty list containing all the elements of this array, or
+ * returns the result of calling the [defaultValue] function if this array is
+ * empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline infix fun <reified E> Array<E>.toNotEmptyListOrElse(
+    defaultValue: (Array<E>) -> NotEmptyList<E>
+): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+
+/**
  * Returns a not empty list containing all the elements of this collection, or
  * returns the result of calling the [defaultValue] function if this collection
  * is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptyListOrElse(
+public inline infix fun <reified E> Collection<E>.toNotEmptyListOrElse(
     defaultValue: (Collection<E>) -> NotEmptyList<E>
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
 
