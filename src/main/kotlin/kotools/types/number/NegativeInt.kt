@@ -3,6 +3,8 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
+// ---------- Conversions ----------
+
 /**
  * Returns this value as a [NegativeInt], or throws an
  * [IllegalArgumentException] if it's strictly positive.
@@ -17,6 +19,8 @@ public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
+
+// ---------- Binary operations ----------
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("1.1")
@@ -56,15 +60,12 @@ public value class NegativeInt(
         require(value <= 0) { "Given value shouldn't be strictly positive." }
     }
 
+    // ---------- Comparisons ----------
+
     override fun compareTo(other: NegativeInt): Int =
         value.compareTo(other.value)
 
-    override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a [NotBlankString].
-     */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
+    // ---------- Conversions ----------
 
     /**
      * Returns this [value] as a [NonZeroInt], or throws an
@@ -104,6 +105,39 @@ public value class NegativeInt(
      */
     @Throws(IllegalArgumentException::class)
     public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
+
+    override fun toString(): String = value.toString()
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
+
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the [maximum][NegativeInt.max], it returns the
+     * [minimum][NegativeInt.min] value instead.
+     */
+    public operator fun inc(): NegativeInt = if (value == max.value) min
+    else NegativeInt(value + 1)
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] is the [minimum][NegativeInt.min], it returns the
+     * [maximum][NegativeInt.max] value instead.
+     */
+    public operator fun dec(): NegativeInt = if (value == min.value) max
+    else NegativeInt(value - 1)
+
+    /** Returns this [value]. */
+    public operator fun unaryPlus(): NegativeInt = this
+
+    /** Returns the negative of this [value]. */
+    public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
+
+    // ---------- Binary operations ----------
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
@@ -221,28 +255,6 @@ public value class NegativeInt(
      */
     public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value / other.value)
-
-    /**
-     * Returns this [value] incremented by one.
-     * If this [value] is the [maximum][NegativeInt.max], it returns the
-     * [minimum][NegativeInt.min] value instead.
-     */
-    public operator fun inc(): NegativeInt = if (value == max.value) min
-    else NegativeInt(value + 1)
-
-    /**
-     * Returns this [value] decremented by one.
-     * If this [value] is the [minimum][NegativeInt.min], it returns the
-     * [maximum][NegativeInt.max] value instead.
-     */
-    public operator fun dec(): NegativeInt = if (value == min.value) max
-    else NegativeInt(value - 1)
-
-    /** Returns this [value]. */
-    public operator fun unaryPlus(): NegativeInt = this
-
-    /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
 
     public companion object {
         /** The minimum value an instance of [NegativeInt] can have. */
