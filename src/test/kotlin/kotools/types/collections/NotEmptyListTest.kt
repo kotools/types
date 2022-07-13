@@ -336,6 +336,89 @@ class NotEmptyListTest {
     // ---------- Conversions ----------
 
     @Nested
+    inner class ArrayToNotEmptyList {
+        @Test
+        fun `should pass with an array containing 3 elements`() {
+            // GIVEN
+            val array: Array<Int> = arrayOf(1, 2, 3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                assertDoesNotThrow(array::toNotEmptyList)
+            // THEN
+            list.forEachIndexed { index: Int, element: Int ->
+                element assertEquals array[index]
+            }
+        }
+
+        @Test
+        fun `should throw an error with an empty array`() {
+            // GIVEN
+            val array: Array<Int> = emptyArray()
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = array::toNotEmptyList
+            )
+        }
+    }
+
+    @Nested
+    inner class ArrayToNotEmptyListOrNull {
+        @Test
+        fun `should pass with an array containing 3 elements`() {
+            // GIVEN
+            val array: Array<Int> = arrayOf(1, 2, 3)
+            // WHEN
+            val list: NotEmptyList<Int>? = array.toNotEmptyListOrNull()
+            // THEN
+            list.assertNotNull().forEachIndexed { index: Int, element: Int ->
+                element assertEquals array[index]
+            }
+        }
+
+        @Test
+        fun `should return null with an empty array`() {
+            // GIVEN
+            val array: Array<Int> = emptyArray()
+            // WHEN
+            val list: NotEmptyList<Int>? = array.toNotEmptyListOrNull()
+            // THEN
+            list.assertNull()
+        }
+    }
+
+    @Nested
+    inner class ArrayToNotEmptyListOrElse {
+        @Test
+        fun `should pass with an array containing 3 elements`() {
+            // GIVEN
+            val array: Array<Int> = arrayOf(1, 2, 3)
+            val defaultValue = NotEmptyList(-1, -2, -3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                array toNotEmptyListOrElse { defaultValue }
+            // THEN
+            list.forEachIndexed { index: Int, element: Int ->
+                element assertEquals array[index]
+                element assertNotEquals defaultValue[index]
+            }
+        }
+
+        @Test
+        fun `should return the default value with an empty array`() {
+            // GIVEN
+            val array: Array<Int> = emptyArray()
+            val defaultValue = NotEmptyList(-1, -2, -3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                array toNotEmptyListOrElse { defaultValue }
+            // THEN
+            list.forEachIndexed { index: Int, element: Int ->
+                element assertEquals defaultValue[index]
+            }
+        }
+    }
+
+    @Nested
     inner class CollectionToNotEmptyList {
         @Test
         fun `should pass with a collection containing 3 elements`() {
@@ -397,7 +480,7 @@ class NotEmptyListTest {
             val defaultValue = NotEmptyList(-1, -2, -3)
             // WHEN
             val list: NotEmptyList<Int> =
-                collection.toNotEmptyListOrElse { defaultValue }
+                collection toNotEmptyListOrElse { defaultValue }
             // THEN
             collection.forEachIndexed { index: Int, element: Int ->
                 element assertEquals list[index]
@@ -412,7 +495,7 @@ class NotEmptyListTest {
             val defaultValue = NotEmptyList(-1, -2, -3)
             // WHEN
             val list: NotEmptyList<Int> =
-                collection.toNotEmptyListOrElse { defaultValue }
+                collection toNotEmptyListOrElse { defaultValue }
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals defaultValue[index]
