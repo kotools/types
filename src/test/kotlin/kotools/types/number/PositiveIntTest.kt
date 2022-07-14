@@ -581,6 +581,44 @@ class PositiveIntTest {
             assertTrue { result > 0 }
         }
 
+        // ---------- NonZeroInt ----------
+
+        @Test
+        fun `should return 0 with the same non zero int`() {
+            // GIVEN
+            val value = 1
+            val x = PositiveInt(value)
+            val y = NonZeroInt(value)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater non zero int`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            val y = NonZeroInt(value + 1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less non zero int`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            val y = NonZeroInt(value - 1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
         // ---------- PositiveInt ----------
 
         @Test
