@@ -205,7 +205,13 @@ public value class PositiveInt(
 
     // ---------- Comparisons ----------
 
-    override fun compareTo(other: PositiveInt): Int =
+    /**
+     * Compares this positive int with [other].
+     * Returns `0` if this positive int equals [other], a negative number if
+     * it's less than [other], or a positive number if it's greater than
+     * [other].
+     */
+    override infix fun compareTo(other: PositiveInt): Int =
         value.compareTo(other.value)
 
     // ---------- Conversions ----------
