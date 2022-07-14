@@ -512,34 +512,34 @@ class PositiveIntTest {
     @Nested
     inner class CompareTo {
         @Test
-        fun `should return 0 when objects have the same value`() {
+        fun `should return 0 with the same positive int`() {
             // GIVEN
             val x = PositiveInt(1)
             val y = PositiveInt(1)
             // WHEN
-            val result: Int = x.compareTo(y)
+            val result: Int = x compareTo y
             // THEN
             result assertEquals 0
         }
 
         @Test
-        fun `should return a negative number when this object is less than the other`() {
+        fun `should return a negative number with a greater positive int`() {
             // GIVEN
             val x = PositiveInt(1)
             val y = PositiveInt(2)
             // WHEN
-            val result: Int = x.compareTo(y)
+            val result: Int = x compareTo y
             // THEN
             assertTrue { result < 0 }
         }
 
         @Test
-        fun `should return a positive number when this object is greater than the other`() {
+        fun `should return a positive number with a less positive int`() {
             // GIVEN
             val x = PositiveInt(2)
             val y = PositiveInt(1)
             // WHEN
-            val result: Int = x.compareTo(y)
+            val result: Int = x compareTo y
             // THEN
             assertTrue { result > 0 }
         }
