@@ -29,6 +29,17 @@ public infix operator fun Int.times(other: PositiveInt): Int =
 @Throws(ArithmeticException::class)
 public infix operator fun Int.div(other: PositiveInt): Int = this / other.value
 
+// ---------- Comparisons ----------
+
+/**
+ * Compares this int with [other] for order.
+ * Returns `0` if this int equals [other], a negative number if it's less than
+ * [other], or a positive number if it's greater than [other].
+ */
+@SinceKotoolsTypes("1.3")
+public infix operator fun Int.compareTo(other: PositiveInt): Int =
+    compareTo(other.value)
+
 // ---------- Conversions ----------
 
 /**
@@ -206,13 +217,23 @@ public value class PositiveInt(
     // ---------- Comparisons ----------
 
     /**
-     * Compares this positive int with [other].
+     * Compares this positive int with [other] for order.
+     * Returns `0` if this positive int equals [other], a negative number if
+     * it's less than [other], or a positive number if it's greater than
+     * [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: Int): Int =
+        value.compareTo(other)
+
+    /**
+     * Compares this positive int with [other] for order.
      * Returns `0` if this positive int equals [other], a negative number if
      * it's less than [other], or a positive number if it's greater than
      * [other].
      */
     override infix fun compareTo(other: PositiveInt): Int =
-        value.compareTo(other.value)
+        compareTo(other.value)
 
     // ---------- Conversions ----------
 
