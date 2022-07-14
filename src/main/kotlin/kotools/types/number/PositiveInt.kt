@@ -255,6 +255,15 @@ public value class PositiveInt(
     public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
         compareTo(other.value)
 
+    /**
+     * Compares this positive int with [other] for order.
+     * Returns `0` if this positive int equals [other], or a positive number if
+     * it's greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: NegativeInt): Int =
+        compareTo(other.value)
+
     // ---------- Conversions ----------
 
     /**

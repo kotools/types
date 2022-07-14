@@ -691,6 +691,32 @@ class PositiveIntTest {
             // THEN
             assertTrue { result > 0 }
         }
+
+        // ---------- NegativeInt ----------
+
+        @Test
+        fun `should return 0 with the same negative int`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            val y = NegativeInt(value)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a positive number with a less negative int`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            val y = NegativeInt(value - 1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
     }
 
     // ---------- Conversions ----------
