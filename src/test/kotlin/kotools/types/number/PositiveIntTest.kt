@@ -717,6 +717,20 @@ class PositiveIntTest {
             // THEN
             assertTrue { result > 0 }
         }
+
+        // ---------- StrictlyNegativeInt ----------
+
+        @Test
+        fun `should return a positive number with a less strictly negative int`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            val y = StrictlyNegativeInt(value - 1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
     }
 
     // ---------- Conversions ----------
