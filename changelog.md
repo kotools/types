@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
   ([#33](https://github.com/kotools/types/issues/33)).
 - Overload comparisons of `kotools.types.number.PositiveInt`
   ([#34](https://github.com/kotools/types/issues/34)).
+- Overload comparisons of `kotools.types.number.StrictlyPositiveInt`
+  ([#35](https://github.com/kotools/types/issues/35)).
 
 ### Changed
 
