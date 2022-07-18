@@ -201,8 +201,61 @@ public value class NegativeInt(
 
     // ---------- Comparisons ----------
 
-    override fun compareTo(other: NegativeInt): Int =
-        value.compareTo(other.value)
+    /**
+     * Compares this negative int with [other] for order.
+     * Returns `0` if this negative int equals [other], a negative number if
+     * it's less than [other], or a positive number if it's greater than
+     * [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: Int): Int =
+        value.compareTo(other)
+
+    /**
+     * Compares this negative int with [other] for order.
+     * Returns `0` if this negative int equals [other], a negative number if
+     * it's less than [other], or a positive number if it's greater than
+     * [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: NonZeroInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this negative int with [other] for order.
+     * Returns `0` if this negative int equals [other], or a positive number if
+     * it's greater than [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: PositiveInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this negative int with [other] and returns a negative number for
+     * order.
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this negative int with [other] for order.
+     * Returns `0` if this negative int equals [other], a negative number if
+     * it's less than [other], or a positive number if it's greater than
+     * [other].
+     */
+    override infix fun compareTo(other: NegativeInt): Int =
+        compareTo(other.value)
+
+    /**
+     * Compares this negative int with [other] for order.
+     * Returns `0` if this negative int equals [other], a negative number if
+     * it's less than [other], or a positive number if it's greater than
+     * [other].
+     */
+    @SinceKotoolsTypes("1.3")
+    public infix operator fun compareTo(other: StrictlyNegativeInt): Int =
+        compareTo(other.value)
 
     // ---------- Conversions ----------
 
