@@ -89,6 +89,8 @@ public class NotEmptySet<out E>(
 
     override val size: Int get() = tail.size + 1
 
+    override fun isEmpty(): Boolean = false
+
     override fun iterator(): Iterator<E> = mutableSetOf(head).run {
         this += tail
         toSet().iterator()

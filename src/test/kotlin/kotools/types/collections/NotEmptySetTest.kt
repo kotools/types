@@ -4,6 +4,7 @@ import io.github.kotools.assert.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
+import kotlin.test.assertFalse
 
 class NotEmptySetTest {
     @Nested
@@ -53,6 +54,17 @@ class NotEmptySetTest {
             val set: NotEmptySet<Int> = NotEmptySet(1, 2, 3)
             // WHEN & THEN
             set.size assertEquals 3
+        }
+    }
+
+    @Nested
+    inner class IsEmpty {
+        @Test
+        fun `should always return false`() {
+            // GIVEN
+            val set: NotEmptySet<Int> = NotEmptySet(1, 2, 3)
+            // WHEN & THEN
+            assertFalse(block = set::isEmpty)
         }
     }
 
