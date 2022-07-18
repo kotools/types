@@ -32,6 +32,8 @@ All notable changes to this project will be documented in this file.
   ([#33](https://github.com/kotools/types/issues/33)).
 - Refactor binary operations of `kotools.types.number.PositiveInt`
   ([#34](https://github.com/kotools/types/issues/34)).
+- Refactor binary operations of `kotools.types.number.StrictlyPositiveInt`
+  ([#35](https://github.com/kotools/types/issues/35)).
 
 ## Version 1.2.0 - 2022/07/11
 
