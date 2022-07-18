@@ -24,9 +24,9 @@ public inline fun <reified E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
 @Throws(IllegalArgumentException::class)
 public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
+    val head: E = first()
     val list: MutableList<E> = mutableListOf()
-    forEach { list += it }
-    val head: E = list.removeFirst()
+    for (index in 1 until size) list += elementAt(index)
     val tail: Array<E> = list.toTypedArray()
     return NotEmptyList(head, *tail)
 }
