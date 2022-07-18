@@ -19,8 +19,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Implement a new `NotEmptyList` type in `kotools.types.collections`
-  ([#6](https://github.com/kotools/types/issues/6)).
+- Implement the following types in `kotools.types.collections`:
+    - `NotEmptyList` ([#6](https://github.com/kotools/types/issues/6))
+    - `NotEmptySet` ([#7](https://github.com/kotools/types/issues/7)).
 - Overload comparisons of the following types in `kotools.types.number`:
     - `NonZeroInt` ([#33](https://github.com/kotools/types/issues/33))
     - `PositiveInt` ([#34](https://github.com/kotools/types/issues/34))
