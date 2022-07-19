@@ -1,6 +1,9 @@
 package kotools.types.collections
 
 import io.github.kotools.assert.assertEquals
+import io.github.kotools.assert.assertNotEquals
+import io.github.kotools.assert.assertNotNull
+import io.github.kotools.assert.assertNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import org.junit.jupiter.api.Nested
@@ -180,6 +183,242 @@ class NotEmptyCollectionTest {
             val index = StrictlyPositiveInt(10)
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { list[index] }
+        }
+    }
+
+    @Nested
+    inner class GetOrNull {
+        // ---------- Int ----------
+
+        @Test
+        fun `should return the first element with an int that equals 0`() {
+            // GIVEN
+            val head = 1
+            val collection: NotEmptyCollection<Int> = NotEmptyList(head)
+            val index = 0
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertEquals(collection.head)
+            }
+        }
+
+        @Test
+        fun `should return the second element with an int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = 1
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNotNull() assertEquals tail
+        }
+
+        @Test
+        fun `should return null with an int that is out of bounds`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val index = 10
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNull()
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should return the first element with a positive int that equals 0`() {
+            // GIVEN
+            val head = 1
+            val collection: NotEmptyCollection<Int> = NotEmptyList(head, 2)
+            val index = PositiveInt(0)
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertEquals(collection.head)
+            }
+        }
+
+        @Test
+        fun `should return the second element with a positive int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = PositiveInt(1)
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNotNull() assertEquals tail
+        }
+
+        @Test
+        fun `should return null with a positive int that is out of bounds`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val index = PositiveInt(10)
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNull()
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should return the second element with a strictly positive int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = StrictlyPositiveInt(1)
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNotNull() assertEquals tail
+        }
+
+        @Test
+        fun `should return null with a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val index = StrictlyPositiveInt(10)
+            // WHEN
+            val element: Int? = collection getOrNull index
+            // THEN
+            element.assertNull()
+        }
+    }
+
+    @Nested
+    inner class GetOrElse {
+        // ---------- Int ----------
+
+        @Test
+        fun `should return the first element with an int that equals 0`() {
+            // GIVEN
+            val head = 1
+            val collection: NotEmptyCollection<Int> = NotEmptyList(head)
+            val index = 0
+            val defaultValue: Int = -head
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element.run {
+                assertEquals(head)
+                assertEquals(collection.head)
+                assertNotEquals(defaultValue)
+            }
+        }
+
+        @Test
+        fun `should return the second element with an int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = 1
+            val defaultValue: Int = -tail
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element.run {
+                assertEquals(tail)
+                assertNotEquals(defaultValue)
+            }
+        }
+
+        @Test
+        fun `should return the default value with an int that is out of bounds`() {
+            // GIVEN
+            val head = 1
+            val collection: NotEmptyCollection<Int> = NotEmptyList(head)
+            val index = 10
+            val defaultValue: Int = -head
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element assertEquals defaultValue
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should return the first element with a positive int that equals 0`() {
+            // GIVEN
+            val head = 1
+            val collection: NotEmptyCollection<Int> = NotEmptyList(head, 2)
+            val index = PositiveInt(0)
+            val defaultValue = -1
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element.run {
+                assertEquals(head)
+                assertEquals(collection.head)
+                assertNotEquals(defaultValue)
+            }
+        }
+
+        @Test
+        fun `should return the second element with a positive int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = PositiveInt(1)
+            val defaultValue = -1
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element.run {
+                assertEquals(tail)
+                assertNotEquals(defaultValue)
+            }
+        }
+
+        @Test
+        fun `should return the default value with a positive int that is out of bounds`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val index = PositiveInt(10)
+            val defaultValue = -1
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element assertEquals defaultValue
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should return the second element with a strictly positive int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = StrictlyPositiveInt(1)
+            val defaultValue = -1
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element.run {
+                assertEquals(tail)
+                assertNotEquals(defaultValue)
+            }
+        }
+
+        @Test
+        fun `should return the default value with a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val index = StrictlyPositiveInt(10)
+            val defaultValue = -1
+            // WHEN
+            val element: Int = collection.getOrElse(index) { defaultValue }
+            // THEN
+            element assertEquals defaultValue
         }
     }
 }

@@ -1,8 +1,6 @@
 package kotools.types.collections
 
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.number.PositiveInt
-import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
 
 // ---------- Conversions ----------
@@ -98,39 +96,6 @@ public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
     // ---------- Positional Access Operations ----------
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
-
-    /**
-     * Returns the element at the specified [index] in the list, or returns
-     * `null` if the [index] is out of bounds.
-     */
-    public infix fun getOrNull(index: PositiveInt): E? = getOrNull(index.value)
-
-    /**
-     * Returns the element at the specified [index] in the list, or returns
-     * `null` if the [index] is out of bounds.
-     */
-    public infix fun getOrNull(index: StrictlyPositiveInt): E? =
-        getOrNull(index.value)
-
-    /**
-     * Returns the element at the specified [index] in the list, or returns the
-     * result of calling the [defaultValue] function if the [index] is out of
-     * bounds.
-     */
-    public inline fun getOrElse(
-        index: PositiveInt,
-        defaultValue: (PositiveInt) -> @UnsafeVariance E
-    ): E = getOrNull(index) ?: defaultValue(index)
-
-    /**
-     * Returns the element at the specified [index] in the list, or returns the
-     * result of calling the [defaultValue] function if the [index] is out of
-     * bounds.
-     */
-    public inline fun getOrElse(
-        index: StrictlyPositiveInt,
-        defaultValue: (StrictlyPositiveInt) -> @UnsafeVariance E
-    ): E = getOrNull(index) ?: defaultValue(index)
 
     // ---------- Conversions ----------
 
