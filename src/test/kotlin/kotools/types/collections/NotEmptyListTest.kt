@@ -79,64 +79,6 @@ class NotEmptyListTest {
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { list[index] }
         }
-
-        // ---------- PositiveInt ----------
-
-        @Test
-        fun `should return the first element with a positive int that equals 0`() {
-            // GIVEN
-            val head = 1
-            val list: NotEmptyList<Int> = NotEmptyList(head, 2)
-            val index = PositiveInt(0)
-            // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
-            // THEN
-            element assertEquals head
-        }
-
-        @Test
-        fun `should return the second element with a positive int that equals 1`() {
-            // GIVEN
-            val expectedElement = 2
-            val list: NotEmptyList<Int> = NotEmptyList(1, expectedElement)
-            val index = PositiveInt(1)
-            // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
-            // THEN
-            element assertEquals expectedElement
-        }
-
-        @Test
-        fun `should throw an error with a positive int that is out of bounds`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1)
-            val index = PositiveInt(10)
-            // WHEN & THEN
-            assertFailsWith<IndexOutOfBoundsException> { list[index] }
-        }
-
-        // ---------- StrictlyPositiveInt ----------
-
-        @Test
-        fun `should return the second element with a strictly positive int that equals 1`() {
-            // GIVEN
-            val expectedElement = 2
-            val list: NotEmptyList<Int> = NotEmptyList(1, expectedElement)
-            val index = StrictlyPositiveInt(1)
-            // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
-            // THEN
-            element assertEquals expectedElement
-        }
-
-        @Test
-        fun `should throw an error with a strictly positive int that is out of bounds`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1)
-            val index = StrictlyPositiveInt(10)
-            // WHEN & THEN
-            assertFailsWith<IndexOutOfBoundsException> { list[index] }
-        }
     }
 
     @Nested

@@ -43,8 +43,9 @@ class NotEmptySetTest {
         fun `should return the first element with an int that equals 0`() {
             // GIVEN
             val set: NotEmptySet<Int> = NotEmptySet(1)
+            val index = 0
             // WHEN
-            val element: Int = set[0]
+            val element: Int = assertDoesNotThrow { set[index] }
             // THEN
             element assertEquals set.head
         }
@@ -54,8 +55,9 @@ class NotEmptySetTest {
             // GIVEN
             val tail: Array<Int> = arrayOf(2, 3)
             val set: NotEmptySet<Int> = NotEmptySet(1, *tail)
+            val index = 1
             // WHEN
-            val element: Int = set[1]
+            val element: Int = assertDoesNotThrow { set[index] }
             // THEN
             element assertEquals tail[0]
         }
@@ -64,8 +66,9 @@ class NotEmptySetTest {
         fun `should throw an error with an int that is out of bounds`() {
             // GIVEN
             val set: NotEmptySet<Int> = NotEmptySet(1)
+            val index = 10
             // WHEN & THEN
-            assertFailsWith<IndexOutOfBoundsException> { set[10] }
+            assertFailsWith<IndexOutOfBoundsException> { set[index] }
         }
     }
 

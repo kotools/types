@@ -100,21 +100,6 @@ public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
 
     /**
-     * Returns the element at the specified [index] in the list, or throws an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: PositiveInt): E = get(index.value)
-
-    /**
-     * Returns the element at the specified [index] in the list, or throws an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: StrictlyPositiveInt): E =
-        get(index.value)
-
-    /**
      * Returns the element at the specified [index] in the list, or returns
      * `null` if the [index] is out of bounds.
      */
