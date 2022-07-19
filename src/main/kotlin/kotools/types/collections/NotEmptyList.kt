@@ -74,15 +74,15 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyListOrElse(
 /**
  * Represents lists that can't be empty.
  *
+ * @param E The type of elements contained in this list.
+ *
  * @constructor Creates a not empty list starting with a [head] and containing
  * all the elements of the optional [tail].
  */
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E>(
-    /** First element of the current list. */
-    public val head: E,
-    vararg tail: E
-) : AbstractList<E>() {
+public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
+    AbstractList<E>(),
+    NotEmptyCollection<E> {
     private val tail: List<E>
 
     init {
@@ -91,12 +91,9 @@ public class NotEmptyList<out E>(
 
     // ---------- Query operations ----------
 
-    override val size: Int get() = tail.size + 1
+    override val size: Int get() = tail.size + super.size
 
-    /** Returns the [size] of this not empty list as a strictly positive int. */
-    public val typedSize: StrictlyPositiveInt get() = StrictlyPositiveInt(size)
-
-    override fun isEmpty(): Boolean = false
+    override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
 
     // ---------- Positional Access Operations ----------
 
@@ -115,7 +112,7 @@ public class NotEmptyList<out E>(
      */
     @Throws(IndexOutOfBoundsException::class)
     public infix operator fun get(index: StrictlyPositiveInt): E =
-        get(index.toPositiveInt())
+        get(index.value)
 
     /**
      * Returns the element at the specified [index] in the list, or returns

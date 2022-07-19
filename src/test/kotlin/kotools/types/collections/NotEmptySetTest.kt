@@ -4,7 +4,6 @@ import io.github.kotools.assert.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
-import kotlin.test.assertFalse
 
 class NotEmptySetTest {
     @Nested
@@ -36,35 +35,37 @@ class NotEmptySetTest {
         }
     }
 
-    // ---------- Query operations ----------
+    // ---------- Positional Access Operations ----------
 
     @Nested
-    inner class Size {
+    inner class Get {
         @Test
-        fun `should return 1 with a singleton not empty set`() {
+        fun `should return the first element with an int that equals 0`() {
+            // GIVEN
+            val set: NotEmptySet<Int> = NotEmptySet(1)
+            // WHEN
+            val element: Int = set[0]
+            // THEN
+            element assertEquals set.head
+        }
+
+        @Test
+        fun `should return the second element with an int that equals 1`() {
+            // GIVEN
+            val tail: Array<Int> = arrayOf(2, 3)
+            val set: NotEmptySet<Int> = NotEmptySet(1, *tail)
+            // WHEN
+            val element: Int = set[1]
+            // THEN
+            element assertEquals tail[0]
+        }
+
+        @Test
+        fun `should throw an error with an int that is out of bounds`() {
             // GIVEN
             val set: NotEmptySet<Int> = NotEmptySet(1)
             // WHEN & THEN
-            set.size assertEquals 1
-        }
-
-        @Test
-        fun `should return 3 with a not empty set of 3 elements`() {
-            // GIVEN
-            val set: NotEmptySet<Int> = NotEmptySet(1, 2, 3)
-            // WHEN & THEN
-            set.size assertEquals 3
-        }
-    }
-
-    @Nested
-    inner class IsEmpty {
-        @Test
-        fun `should always return false`() {
-            // GIVEN
-            val set: NotEmptySet<Int> = NotEmptySet(1, 2, 3)
-            // WHEN & THEN
-            assertFalse(block = set::isEmpty)
+            assertFailsWith<IndexOutOfBoundsException> { set[10] }
         }
     }
 

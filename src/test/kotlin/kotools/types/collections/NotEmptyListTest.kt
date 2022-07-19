@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 
 class NotEmptyListTest {
     @Nested
@@ -39,65 +38,6 @@ class NotEmptyListTest {
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals expectedList[index]
             }
-        }
-    }
-
-    // ---------- Query operations ----------
-
-    @Nested
-    inner class Size {
-        @Test
-        fun `should return 1 with a singleton list`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1)
-            // WHEN
-            val size: Int = list.size
-            // THEN
-            size assertEquals 1
-        }
-
-        @Test
-        fun `should return 3 with a list of 3 elements`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1, 2, 3)
-            // WHEN
-            val size: Int = list.size
-            // THEN
-            size assertEquals 3
-        }
-    }
-
-    @Nested
-    inner class TypedSize {
-        @Test
-        fun `should return 1 as a strictly positive int with a singleton list`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1)
-            // WHEN
-            val size: StrictlyPositiveInt = list.typedSize
-            // THEN
-            size.value assertEquals 1
-        }
-
-        @Test
-        fun `should return 3 as a strictly positive int with a list of 3 elements`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1, 2, 3)
-            // WHEN
-            val size: StrictlyPositiveInt = list.typedSize
-            // THEN
-            size.value assertEquals 3
-        }
-    }
-
-    @Nested
-    inner class IsEmpty {
-        @Test
-        fun `should always return false`() {
-            // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1)
-            // WHEN & THEN
-            assertFalse(block = list::isEmpty)
         }
     }
 
