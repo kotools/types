@@ -1,6 +1,7 @@
 package kotools.types.collections
 
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 
 /**
@@ -30,4 +31,18 @@ internal sealed interface NotEmptyCollection<out E> : Collection<E> {
      */
     @Throws(IndexOutOfBoundsException::class)
     infix operator fun get(index: Int): E
+
+    /**
+     * Returns the element at the specified [index] in the list, or throws an
+     * [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    infix operator fun get(index: PositiveInt): E = get(index.value)
+
+    /**
+     * Returns the element at the specified [index] in the list, or throws an
+     * [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    infix operator fun get(index: StrictlyPositiveInt): E = get(index.value)
 }

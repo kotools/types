@@ -1,9 +1,12 @@
 package kotools.types.collections
 
 import io.github.kotools.assert.assertEquals
+import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 
 class NotEmptyCollectionTest {
@@ -115,6 +118,68 @@ class NotEmptyCollectionTest {
             val collection: NotEmptyCollection<Int> = NotEmptySet(1, 2, 3)
             // WHEN & THEN
             assertFalse(block = collection::isEmpty)
+        }
+    }
+
+    // ---------- Positional Access Operations ----------
+
+    @Nested
+    inner class Get {
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should return the first element with a positive int that equals 0`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, 2)
+            val index = PositiveInt(0)
+            // WHEN
+            val element: Int = assertDoesNotThrow { collection[index] }
+            // THEN
+            element assertEquals collection.head
+        }
+
+        @Test
+        fun `should return the second element with a positive int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = PositiveInt(1)
+            // WHEN
+            val element: Int = assertDoesNotThrow { collection[index] }
+            // THEN
+            element assertEquals tail
+        }
+
+        @Test
+        fun `should throw an error with a positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyList<Int> = NotEmptyList(1)
+            val index = PositiveInt(10)
+            // WHEN & THEN
+            assertFailsWith<IndexOutOfBoundsException> { list[index] }
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should return the second element with a strictly positive int that equals 1`() {
+            // GIVEN
+            val tail = 2
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
+            val index = StrictlyPositiveInt(1)
+            // WHEN
+            val element: Int = assertDoesNotThrow { collection[index] }
+            // THEN
+            element assertEquals tail
+        }
+
+        @Test
+        fun `should throw an error with a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyList<Int> = NotEmptyList(1)
+            val index = StrictlyPositiveInt(10)
+            // WHEN & THEN
+            assertFailsWith<IndexOutOfBoundsException> { list[index] }
         }
     }
 }
