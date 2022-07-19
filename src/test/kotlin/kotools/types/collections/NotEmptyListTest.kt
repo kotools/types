@@ -4,7 +4,6 @@ import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertNotEquals
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
-import kotools.types.string.NotBlankString
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -246,21 +245,6 @@ class NotEmptyListTest {
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals defaultValue[index]
             }
-        }
-    }
-
-    @Nested
-    inner class ToNotBlankString {
-        @Test
-        fun `should return its string representation as a not blank string`() {
-            // GIVEN
-            val head = 1
-            val list = NotEmptyList(head)
-            val expectedString: String = listOf(head).toString()
-            // WHEN
-            val string: NotBlankString = list.toNotBlankString()
-            // THEN
-            string.value assertEquals expectedString
         }
     }
 }

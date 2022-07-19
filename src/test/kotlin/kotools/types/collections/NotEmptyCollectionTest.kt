@@ -6,6 +6,7 @@ import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.string.NotBlankString
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -419,6 +420,21 @@ class NotEmptyCollectionTest {
             val element: Int = collection.getOrElse(index) { defaultValue }
             // THEN
             element assertEquals defaultValue
+        }
+    }
+
+    // ---------- Conversions ----------
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its string representation as a not blank string`() {
+            // GIVEN
+            val collection: NotEmptyCollection<Int> = NotEmptyList(1)
+            // WHEN
+            val string: NotBlankString = collection.toNotBlankString()
+            // THEN
+            string.value assertEquals collection.toString()
         }
     }
 }
