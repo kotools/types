@@ -26,22 +26,22 @@ internal sealed interface NotEmptyCollection<out E> : Collection<E> {
     // ---------- Positional Access Operations ----------
 
     /**
-     * Returns the element at the specified [index] in the list, or throws an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds.
+     * Returns the element at the specified [index] in this collection, or
+     * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
     infix operator fun get(index: Int): E
 
     /**
-     * Returns the element at the specified [index] in the list, or throws an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds.
+     * Returns the element at the specified [index] in this collection, or
+     * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
     infix operator fun get(index: PositiveInt): E = get(index.value)
 
     /**
-     * Returns the element at the specified [index] in the list, or throws an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds.
+     * Returns the element at the specified [index] in this collection, or
+     * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
     infix operator fun get(index: StrictlyPositiveInt): E = get(index.value)
