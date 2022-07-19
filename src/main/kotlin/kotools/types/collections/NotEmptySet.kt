@@ -70,15 +70,15 @@ public inline infix fun <reified E> Collection<E>.toNotEmptySetOrElse(
 /**
  * Represents sets that can't be empty.
  *
+ * @param E The type of elements contained in this set.
+ *
  * @constructor Creates a not empty set starting with a [head] and containing
  * all the elements of the optional [tail].
  */
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E>(
-    /** First element of this set. */
-    public val head: E,
-    vararg tail: E
-) : AbstractSet<E>() {
+public class NotEmptySet<out E>(override val head: E, vararg tail: E) :
+    AbstractSet<E>(),
+    NotEmptyCollection<E> {
     private val tail: Set<E>
 
     init {
@@ -87,12 +87,16 @@ public class NotEmptySet<out E>(
 
     // ---------- Query operations ----------
 
-    override val size: Int get() = tail.size + 1
+    override val size: Int get() = tail.size + super.size
 
-    override fun isEmpty(): Boolean = false
+    override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
 
     override fun iterator(): Iterator<E> = mutableSetOf(head).run {
         this += tail
         toSet().iterator()
     }
+
+    // ---------- Positional Access Operations ----------
+
+    override fun get(index: Int): E = elementAt(index)
 }
