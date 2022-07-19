@@ -1,7 +1,6 @@
 package kotools.types.collections
 
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.string.NotBlankString
 
 // ---------- Conversions ----------
 
@@ -96,9 +95,4 @@ public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
     // ---------- Positional Access Operations ----------
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
-
-    // ---------- Conversions ----------
-
-    /** Returns the string representation of this list as a not blank string. */
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 }

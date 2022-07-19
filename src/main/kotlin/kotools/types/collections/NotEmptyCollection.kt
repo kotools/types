@@ -3,6 +3,7 @@ package kotools.types.collections
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.string.NotBlankString
 
 /**
  * Returns the element at the specified [index] in this collection, or returns
@@ -102,4 +103,9 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      */
     public infix fun getOrNull(index: StrictlyPositiveInt): E? =
         getOrNull(index.value)
+
+    // ---------- Conversions ----------
+
+    /** Returns the string representation of this list as a not blank string. */
+    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 }
