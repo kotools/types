@@ -4,7 +4,6 @@ package io.github.kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
 
-@SinceKotoolsTypes("1.1")
 private const val NEW_PACKAGE: String = "kotools.types.number"
 
 /**
