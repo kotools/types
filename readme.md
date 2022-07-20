@@ -24,9 +24,6 @@ StrictlyNegativeInt orNull -2
 
 NotBlankString("hello")
 NotBlankString orNull "world"
-
-NotEmptyList(1, 2, 3)
-NotEmptySet(1, 2, 3)
 ```
 
 [kotlin]: https://kotlinlang.org
