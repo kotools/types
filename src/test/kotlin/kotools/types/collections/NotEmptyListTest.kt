@@ -107,6 +107,32 @@ class NotEmptyListTest {
     }
 
     @Nested
+    inner class CollectionToNotEmptyList {
+        @Test
+        fun `should pass with a collection containing 3 elements`() {
+            // GIVEN
+            val collection: Collection<Int> = listOf(1, 2, 3)
+            // WHEN
+            val list: NotEmptyList<Int> =
+                assertDoesNotThrow(collection::toNotEmptyList)
+            // THEN
+            collection.forEachIndexed { index: Int, element: Int ->
+                element assertEquals list[index]
+            }
+        }
+
+        @Test
+        fun `should throw an error with an empty collection`() {
+            // GIVEN
+            val collection: Collection<Int> = emptyList()
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                block = collection::toNotEmptyList
+            )
+        }
+    }
+
+    @Nested
     inner class ArrayToNotEmptyListOrNull {
         @Test
         fun `should pass with an array containing 3 elements`() {
@@ -126,6 +152,33 @@ class NotEmptyListTest {
             val array: Array<Int> = emptyArray()
             // WHEN
             val list: NotEmptyList<Int>? = array.toNotEmptyListOrNull()
+            // THEN
+            list.assertNull()
+        }
+    }
+
+    @Nested
+    inner class CollectionToNotEmptyListOrNull {
+        @Test
+        fun `should pass with a collection containing 3 elements`() {
+            // GIVEN
+            val collection: Collection<Int> = setOf(1, 2, 3)
+            // WHEN
+            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
+            // THEN
+            list.assertNotNull().let {
+                collection.forEachIndexed { index: Int, element: Int ->
+                    element assertEquals it[index]
+                }
+            }
+        }
+
+        @Test
+        fun `should return null with an empty collection`() {
+            // GIVEN
+            val collection: Collection<Int> = emptySet()
+            // WHEN
+            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
             // THEN
             list.assertNull()
         }
@@ -160,59 +213,6 @@ class NotEmptyListTest {
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals defaultValue[index]
             }
-        }
-    }
-
-    @Nested
-    inner class CollectionToNotEmptyList {
-        @Test
-        fun `should pass with a collection containing 3 elements`() {
-            // GIVEN
-            val collection: Collection<Int> = listOf(1, 2, 3)
-            // WHEN
-            val list: NotEmptyList<Int> =
-                assertDoesNotThrow(collection::toNotEmptyList)
-            // THEN
-            collection.forEachIndexed { index: Int, element: Int ->
-                element assertEquals list[index]
-            }
-        }
-
-        @Test
-        fun `should throw an error with an empty collection`() {
-            // GIVEN
-            val collection: Collection<Int> = emptyList()
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(
-                block = collection::toNotEmptyList
-            )
-        }
-    }
-
-    @Nested
-    inner class CollectionToNotEmptyListOrNull {
-        @Test
-        fun `should pass with a collection containing 3 elements`() {
-            // GIVEN
-            val collection: Collection<Int> = setOf(1, 2, 3)
-            // WHEN
-            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
-            // THEN
-            list.assertNotNull().let {
-                collection.forEachIndexed { index: Int, element: Int ->
-                    element assertEquals it[index]
-                }
-            }
-        }
-
-        @Test
-        fun `should return null with an empty collection`() {
-            // GIVEN
-            val collection: Collection<Int> = emptySet()
-            // WHEN
-            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
-            // THEN
-            list.assertNull()
         }
     }
 
