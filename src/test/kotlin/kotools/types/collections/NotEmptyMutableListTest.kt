@@ -92,7 +92,7 @@ class NotEmptyMutableListTest {
         }
 
         @Test
-        fun `should insert the element in the middle of the list with an index between 1 until the list's size`() {
+        fun `should insert the element into the list with an index in 1 until the list's size`() {
             // GIVEN
             val expectedList: NotEmptyList<String> =
                 NotEmptyList("one", "two", "three")
