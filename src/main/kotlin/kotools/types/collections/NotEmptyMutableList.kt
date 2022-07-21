@@ -112,7 +112,20 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
     }
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
-    override fun removeAt(index: Int): E = TODO("Not implemented yet")
+
+    /**
+     * Removes an element at the specified [index] from the list, or throws an
+     * [IndexOutOfBoundsException] if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    override infix fun removeAt(index: Int): E = when (index) {
+        in 1 until size -> tail.removeAt(index - 1)
+        0 -> head.also { if (tail.isNotEmpty()) head = tail.removeFirst() }
+        else -> indexOutOfBounds(index, size)
+    }
 
     /**
      * Replaces the element at the specified [index] in this list with the
