@@ -96,11 +96,6 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     // ---------- Positional Access Operations ----------
 
-    /**
-     * Inserts the [element] into this list at the specified [index], or throws
-     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
     override fun add(index: Int, element: E): Unit = when (index) {
         in 1 until size -> tail.add(index - 1, element)
         0 -> {
@@ -113,26 +108,12 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
 
-    /**
-     * Removes an element at the specified [index] from the list, or throws an
-     * [IndexOutOfBoundsException] if the index is out of bounds.
-     *
-     * Because this list shouldn't be empty, the element will not be removed if
-     * this list contains only one element.
-     */
-    @Throws(IndexOutOfBoundsException::class)
-    override infix fun removeAt(index: Int): E = when (index) {
+    override fun removeAt(index: Int): E = when (index) {
         in 1 until size -> tail.removeAt(index - 1)
         0 -> head.also { if (tail.isNotEmpty()) head = tail.removeFirst() }
         else -> indexOutOfBounds(index, size)
     }
 
-    /**
-     * Replaces the element at the specified [index] in this list with the
-     * specified [element], or throws an [IndexOutOfBoundsException] if the
-     * [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
     override fun set(index: Int, element: E): E = when (index) {
         in 1 until size -> element.also { tail[index - 1] = it }
         0 -> element.also { head = it }
