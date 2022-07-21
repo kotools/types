@@ -113,5 +113,16 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
     override fun removeAt(index: Int): E = TODO("Not implemented yet")
-    override fun set(index: Int, element: E): E = TODO("Not implemented yet")
+
+    /**
+     * Replaces the element at the specified [index] in this list with the
+     * specified [element], or throws an [IndexOutOfBoundsException] if the
+     * [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    override fun set(index: Int, element: E): E = when (index) {
+        in 1 until size -> element.also { tail[index - 1] = it }
+        0 -> element.also { head = it }
+        else -> indexOutOfBounds(index, size)
+    }
 }

@@ -176,7 +176,80 @@ class NotEmptyMutableListTest {
     inner class RemoveAt // TODO: 21/07/2022 Not implemented yet
 
     @Nested
-    inner class Set // TODO: 21/07/2022 Not implemented yet
+    inner class Set {
+        @Test
+        fun `should replace the head with an index that equals 0`() {
+            // GIVEN
+            val expectedList: NotEmptyList<String> =
+                NotEmptyList("one", "two", "three")
+            val index = 0
+            val previousElement = "four"
+            val list: NotEmptyMutableList<String> = expectedList
+                .subList(1, expectedList.size)
+                .toNotEmptyMutableList()
+                .apply { add(index, previousElement) }
+            val element: String = expectedList.head
+            // WHEN
+            assertDoesNotThrow { list[index] = element }
+            // THEN
+            list.run {
+                head assertEquals element
+                head assertNotEquals previousElement
+                this[index] assertEquals element
+                this[index] assertNotEquals previousElement
+                size assertEquals expectedList.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should replace a tail's element with an index in 1 until the list's size`() {
+            // GIVEN
+            val expectedList: NotEmptyList<String> =
+                NotEmptyList("one", "two", "three")
+            val previousElement = "four"
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList(
+                expectedList.head,
+                previousElement,
+                expectedList.last()
+            )
+            val index = 1
+            val element: String = expectedList[index]
+            // WHEN
+            assertDoesNotThrow { list[index] = element }
+            // THEN
+            list.run {
+                this[index] assertEquals element
+                this[index] assertNotEquals previousElement
+                size assertEquals expectedList.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should throw an error with an index that is out of bounds`() {
+            // GIVEN
+            val expectedList: NotEmptyList<String> =
+                NotEmptyList("one", "two", "three")
+            val list: NotEmptyMutableList<String> =
+                expectedList.toNotEmptyMutableList()
+            val index = list.size
+            val element = "error"
+            // WHEN
+            assertFailsWith<IndexOutOfBoundsException> { list[index] = element }
+            // THEN
+            list.run {
+                size assertEquals expectedList.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
+            }
+        }
+    }
 
     // ---------- Conversions ----------
 
