@@ -50,7 +50,7 @@ class NotEmptyMutableListTest {
     @Nested
     inner class Add {
         @Test
-        fun `should insert the element to the beginning of the list with an index that equals 0`() {
+        fun `should insert the element at the beginning of the list with an index that equals 0`() {
             // GIVEN
             val expectedList: NotEmptyList<String> =
                 NotEmptyList("one", "two", "three")
@@ -71,7 +71,7 @@ class NotEmptyMutableListTest {
         }
 
         @Test
-        fun `should insert the element to the end of the list with an index that equals the list's size`() {
+        fun `should insert the element at the end of the list with an index that equals the list's size`() {
             // GIVEN
             val expectedList: NotEmptyList<String> =
                 NotEmptyList("one", "two", "three")
