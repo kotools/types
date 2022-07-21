@@ -1,6 +1,7 @@
 package kotools.types.collections
 
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.indexOutOfBounds
 
 // ---------- Conversions ----------
 
@@ -78,13 +79,13 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyMutableListOrElse(
  * containing all the elements of the optional [tail].
  */
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableList<E>(override val head: E, vararg tail: E) :
+public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
     AbstractMutableList<E>(),
     NotEmptyMutableCollection<E> {
-    private val tail: List<E>
+    private val tail: MutableList<E>
 
     init {
-        this.tail = tail.toList()
+        this.tail = tail.toMutableList()
     }
 
     // ---------- Query operations ----------
@@ -95,7 +96,21 @@ public class NotEmptyMutableList<E>(override val head: E, vararg tail: E) :
 
     // ---------- Positional Access Operations ----------
 
-    override fun add(index: Int, element: E): Unit = TODO("Not implemented yet")
+    /**
+     * Inserts the [element] into this list at the specified [index], or throws
+     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    override fun add(index: Int, element: E): Unit = when (index) {
+        in 1 until size -> tail.add(index - 1, element)
+        0 -> {
+            tail.add(0, head)
+            head = element
+        }
+        size -> tail += element
+        else -> indexOutOfBounds(index, size)
+    }
+
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
     override fun removeAt(index: Int): E = TODO("Not implemented yet")
     override fun set(index: Int, element: E): E = TODO("Not implemented yet")

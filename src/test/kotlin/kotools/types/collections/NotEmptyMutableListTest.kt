@@ -4,11 +4,12 @@ import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertNotEquals
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
+import kotools.types.indexOutOfBoundsMessage
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 
 class NotEmptyMutableListTest {
     @Nested
@@ -47,7 +48,6 @@ class NotEmptyMutableListTest {
 
     @Nested
     inner class Add {
-        @Ignore
         @Test
         fun `should insert the element to the beginning of the list with an index that equals 0`() {
             // GIVEN
@@ -61,14 +61,79 @@ class NotEmptyMutableListTest {
             // WHEN
             assertDoesNotThrow { list.add(index, element) }
             // THEN
-            list.forEachIndexed { index2: Int, element2: String ->
-                element2 assertEquals expectedList[index2]
+            list.run {
+                size assertEquals expectedList.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
             }
-            TODO()
         }
-        // TODO: 21/07/2022 Should insert the element to the end of the list with an index that equals the list's size
-        // TODO: 21/07/2022 Should insert the element in the middle of the list with an index between 0 and the list's size excluded
-        // TODO: 21/07/2022 Should throw an error with an index that is out of bounds
+
+        @Test
+        fun `should insert the element to the end of the list with an index that equals the list's size`() {
+            // GIVEN
+            val expectedList: NotEmptyList<String> =
+                NotEmptyList("one", "two", "three")
+            val list: NotEmptyMutableList<String> = expectedList
+                .subList(0, expectedList.size - 1)
+                .toNotEmptyMutableList()
+            val index = list.size
+            val element: String = expectedList.last()
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            list.run {
+                size assertEquals expectedList.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should insert the element in the middle of the list with an index between 1 until the list's size`() {
+            // GIVEN
+            val expectedList: NotEmptyList<String> =
+                NotEmptyList("one", "two", "three")
+            val list: NotEmptyMutableList<String> = expectedList
+                .subList(1, expectedList.size)
+                .toNotEmptyMutableList()
+            val index = 0
+            val element: String = expectedList.head
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            list.run {
+                size assertEquals expectedList.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should throw an error with an index that is out of bounds`() {
+            // GIVEN
+            val expectedList: NotEmptyList<String> = NotEmptyList("one", "two")
+            val list: NotEmptyMutableList<String> =
+                expectedList.toNotEmptyMutableList()
+            val index = expectedList.size + 1
+            val element = "three"
+            val expectedMessage: String =
+                indexOutOfBoundsMessage(index, list.size)
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list.add(index, element) }
+            // THEN
+            error.message.assertNotNull() assertEquals expectedMessage
+            list.run {
+                size assertEquals expectedList.size
+                assertFalse { contains(element) }
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedList[index2]
+                }
+            }
+        }
     }
 
     @Nested
