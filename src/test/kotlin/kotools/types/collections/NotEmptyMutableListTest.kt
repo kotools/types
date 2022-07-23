@@ -176,7 +176,7 @@ class NotEmptyMutableListTest {
     @Nested
     inner class RemoveAt {
         @Test
-        fun `should remove the head from a list containing several elements and with an index that equals 0`() {
+        fun `should remove the head from a list containing several elements and with an index as an int that equals 0`() {
             // GIVEN
             val expectedList: NotEmptyList<String> = NotEmptyList("one", "two")
             val index = 0
@@ -200,7 +200,7 @@ class NotEmptyMutableListTest {
         }
 
         @Test
-        fun `shouldn't remove the head from a singleton list and with an index that equals 0`() {
+        fun `shouldn't remove the head from a singleton list and with an index as an int that equals 0`() {
             // GIVEN
             val expectedList: NotEmptyList<String> = NotEmptyList("one")
             val list: NotEmptyMutableList<String> =
@@ -216,7 +216,7 @@ class NotEmptyMutableListTest {
         }
 
         @Test
-        fun `should remove an element with an index in 1 until the list's size`() {
+        fun `should remove an element with an index as an int in 1 until the list's size`() {
             // GIVEN
             val expectedList: NotEmptyList<String> = NotEmptyList("one", "two")
             val target = "three"
@@ -238,7 +238,7 @@ class NotEmptyMutableListTest {
         }
 
         @Test
-        fun `should throw an error with an index that is out of bounds`() {
+        fun `should throw an error with an index as an int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
             val index: Int = list.size

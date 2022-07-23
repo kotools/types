@@ -1,9 +1,6 @@
 package kotools.types.collections
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertFailsWith
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import io.github.kotools.assert.*
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import org.junit.jupiter.api.Nested
@@ -414,6 +411,146 @@ class NotEmptyMutableCollectionTest {
                 size assertEquals expectedCollection.size
                 forEachIndexed { index2: Int, element2: String ->
                     element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+    }
+
+    @Nested
+    inner class RemoveAt {
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should remove the head from a collection containing several elements and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<String> =
+                NotEmptyList("two", "three")
+            val index = PositiveInt(0)
+            val expectedElement = "one"
+            val collection: NotEmptyMutableCollection<String> =
+                expectedCollection.toNotEmptyMutableList()
+                    .apply { add(index, expectedElement) }
+            // WHEN
+            val element: String =
+                assertDoesNotThrow { collection removeAt index }
+            // THEN
+            element assertEquals expectedElement
+            collection.run {
+                head.run {
+                    assertNotEquals(expectedElement)
+                    assertEquals(expectedCollection.head)
+                }
+                size assertEquals expectedCollection.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `shouldn't remove the head from a singleton collection and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<String> =
+                NotEmptyList("one")
+            val collection: NotEmptyMutableCollection<String> =
+                expectedCollection.toNotEmptyMutableList()
+            val index = PositiveInt(0)
+            // WHEN
+            val element: String =
+                assertDoesNotThrow { collection removeAt index }
+            // THEN
+            element.run {
+                assertEquals(collection.head)
+                assertEquals(expectedCollection.head)
+            }
+            collection.run {
+                size assertEquals expectedCollection.size
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should remove an element with an index as a positive int in 1 until the collection's size`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<Int> = NotEmptyList(1, 3)
+            val index = PositiveInt(1)
+            val expectedElement = 2
+            val collection: NotEmptyMutableCollection<Int> =
+                expectedCollection.toNotEmptyMutableList()
+                    .apply { add(index, expectedElement) }
+            // WHEN
+            val element: Int = assertDoesNotThrow { collection removeAt index }
+            // THEN
+            element assertEquals expectedElement
+            collection.run {
+                size assertEquals expectedCollection.size
+                forEachIndexed { index2: Int, element2: Int ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should throw an error with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val collection: NotEmptyMutableCollection<Int> =
+                expectedCollection.toNotEmptyMutableList()
+            val index = PositiveInt(collection.size)
+            // WHEN
+            assertFailsWith<IndexOutOfBoundsException> {
+                collection removeAt index
+            }
+            // THEN
+            collection.run {
+                size assertEquals expectedCollection.size
+                forEachIndexed { index2: Int, element: Int ->
+                    element assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should remove an element with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<Int> = NotEmptyList(1, 3)
+            val index = StrictlyPositiveInt(1)
+            val expectedElement = 2
+            val collection: NotEmptyMutableCollection<Int> =
+                expectedCollection.toNotEmptyMutableList()
+                    .apply { add(index, expectedElement) }
+            // WHEN
+            val element: Int = assertDoesNotThrow { collection removeAt index }
+            // THEN
+            element assertEquals expectedElement
+            collection.run {
+                size assertEquals expectedCollection.size
+                forEachIndexed { index2: Int, element2: Int ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should throw an error with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<Int> = NotEmptyList(1)
+            val collection: NotEmptyMutableCollection<Int> =
+                expectedCollection.toNotEmptyMutableList()
+            val index = StrictlyPositiveInt(collection.size)
+            // WHEN
+            assertFailsWith<IndexOutOfBoundsException> {
+                collection removeAt index
+            }
+            // THEN
+            collection.run {
+                size assertEquals expectedCollection.size
+                forEachIndexed { index2: Int, element: Int ->
+                    element assertEquals expectedCollection[index2]
                 }
             }
         }

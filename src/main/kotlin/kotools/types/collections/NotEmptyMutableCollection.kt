@@ -72,6 +72,27 @@ public sealed interface NotEmptyMutableCollection<E> : MutableCollection<E>,
     public infix fun removeAt(index: Int): E
 
     /**
+     * Removes an element at the specified [index] from the list, or throws an
+     * [IndexOutOfBoundsException] if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public infix fun removeAt(index: PositiveInt): E = removeAt(index.value)
+
+    /**
+     * Removes an element at the specified [index] from the list, or throws an
+     * [IndexOutOfBoundsException] if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public infix fun removeAt(index: StrictlyPositiveInt): E =
+        removeAt(index.value)
+
+    /**
      * Replaces the element at the specified [index] in this list with the
      * specified [element], or throws an [IndexOutOfBoundsException] if the
      * [index] is out of bounds.
