@@ -555,4 +555,104 @@ class NotEmptyMutableCollectionTest {
             }
         }
     }
+
+    @Nested
+    inner class RemoveAtOrNull {
+        // ---------- Int ----------
+
+        @Test
+        fun `should remove the head from a collection containing several elements and with an index as an int that equals 0`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<String> =
+                NotEmptyList("two", "three")
+            val index = 0
+            val expectedElement = "one"
+            val collection: NotEmptyMutableCollection<String> =
+                expectedCollection.toNotEmptyMutableList()
+                    .apply { add(index, expectedElement) }
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(expectedElement)
+                assertNotEquals(collection.head)
+            }
+            collection.run {
+                size assertEquals expectedCollection.size
+                head assertEquals expectedCollection.head
+                forEachIndexed { index2: Int, element2: String ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `shouldn't remove the head from a singleton collection and with an index as an int that equals 0`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<String> =
+                NotEmptyList("one")
+            val collection: NotEmptyMutableCollection<String> =
+                expectedCollection.toNotEmptyMutableList()
+            val index = 0
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(expectedCollection.head)
+                assertEquals(collection.head)
+            }
+        }
+
+        @Test
+        fun `should remove an element with an index as an int in 1 until the collection's size`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<String> =
+                NotEmptyList("one", "three")
+            val index = 1
+            val expectedElement = "two"
+            val collection: NotEmptyMutableCollection<String> =
+                expectedCollection.toNotEmptyMutableList()
+                    .apply { add(index, expectedElement) }
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNotNull() assertEquals expectedElement
+            collection.run {
+                size assertEquals expectedCollection.size
+                head assertEquals expectedCollection.head
+                forEachIndexed { index2, element2 ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+
+        @Test
+        fun `should return null with an index as an int that is out of bounds`() {
+            // GIVEN
+            val expectedCollection: NotEmptyCollection<String> =
+                NotEmptyList("one")
+            val collection: NotEmptyMutableList<String> =
+                expectedCollection.toNotEmptyMutableList()
+            val index: Int = expectedCollection.typedSize + 1
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNull()
+            collection.run {
+                size assertEquals expectedCollection.size
+                head assertEquals expectedCollection.head
+                forEachIndexed { index2, element2 ->
+                    element2 assertEquals expectedCollection[index2]
+                }
+            }
+        }
+        // ---------- PositiveInt ----------
+        // TODO: Should remove the head from a collection containing several elements and with an index as a positive int that equals 0
+        // TODO: Shouldn't remove the head from a singleton collection and with an index as a positive int that equals 0
+        // TODO: Should remove an element with an index as a positive int in 1 until the collection's size
+        // TODO: Should return null with an index as a positive int that is out of bounds
+        // ---------- StrictlyPositiveInt ----------
+        // TODO: Should remove an element with an index as a strictly positive int in 1 until the collection's size
+        // TODO: Should return null with an index as a strictly positive int that is out of bounds
+    }
 }
