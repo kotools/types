@@ -131,5 +131,47 @@ public sealed interface NotEmptyMutableCollection<E> : MutableCollection<E>,
      * [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public fun set(index: Int, element: E): E
+    public operator fun set(index: Int, element: E): E
+
+    /**
+     * Replaces the element at the specified [index] in this list with the
+     * specified [element], or throws an [IndexOutOfBoundsException] if the
+     * [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public operator fun set(index: PositiveInt, element: E): E =
+        set(index.value, element)
+
+    /**
+     * Replaces the element at the specified [index] in this list with the
+     * specified [element], or throws an [IndexOutOfBoundsException] if the
+     * [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public operator fun set(index: StrictlyPositiveInt, element: E): E =
+        set(index.value, element)
+
+    /**
+     * Replaces the element at the specified [index] in this list with the
+     * specified [element], or returns `null` if the [index] is out of bounds.
+     */
+    public fun setOrNull(index: Int, element: E): E? = try {
+        set(index, element)
+    } catch (_: IndexOutOfBoundsException) {
+        null
+    }
+
+    /**
+     * Replaces the element at the specified [index] in this list with the
+     * specified [element], or returns `null` if the [index] is out of bounds.
+     */
+    public fun setOrNull(index: PositiveInt, element: E): E? =
+        setOrNull(index.value, element)
+
+    /**
+     * Replaces the element at the specified [index] in this list with the
+     * specified [element], or returns `null` if the [index] is out of bounds.
+     */
+    public fun setOrNull(index: StrictlyPositiveInt, element: E): E? =
+        setOrNull(index.value, element)
 }
