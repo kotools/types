@@ -11,8 +11,8 @@ import kotools.types.indexOutOfBounds
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public inline fun <reified E> Array<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> =
-    toList().toNotEmptyMutableList()
+public inline fun <reified E> Array<E>.toNotEmptyMutableList():
+        NotEmptyMutableList<E> = toList().toNotEmptyMutableList()
 
 /**
  * Returns a not empty mutable list containing all the elements of this
@@ -21,7 +21,8 @@ public inline fun <reified E> Array<E>.toNotEmptyMutableList(): NotEmptyMutableL
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public inline fun <reified E> Collection<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> {
+public inline fun <reified E> Collection<E>.toNotEmptyMutableList():
+        NotEmptyMutableList<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
     val head: E = first()
     val list: MutableList<E> = mutableListOf()
@@ -35,20 +36,20 @@ public inline fun <reified E> Collection<E>.toNotEmptyMutableList(): NotEmptyMut
  * or returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Array<E>.toNotEmptyMutableListOrNull(): NotEmptyMutableList<E>? =
-    toList().toNotEmptyMutableListOrNull()
+public inline fun <reified E> Array<E>.toNotEmptyMutableListOrNull():
+        NotEmptyMutableList<E>? = toList().toNotEmptyMutableListOrNull()
 
 /**
  * Returns a not empty mutable list containing all the elements of this
  * collection, or returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptyMutableListOrNull(): NotEmptyMutableList<E>? =
-    try {
-        toNotEmptyMutableList()
-    } catch (_: IllegalArgumentException) {
-        null
-    }
+public inline fun <reified E> Collection<E>.toNotEmptyMutableListOrNull():
+        NotEmptyMutableList<E>? = try {
+    toNotEmptyMutableList()
+} catch (_: IllegalArgumentException) {
+    null
+}
 
 /**
  * Returns a not empty mutable list containing all the elements of this array,

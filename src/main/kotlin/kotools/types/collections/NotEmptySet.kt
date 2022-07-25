@@ -41,12 +41,12 @@ public inline fun <reified E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
  * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    try {
-        toNotEmptySet()
-    } catch (_: IllegalArgumentException) {
-        null
-    }
+public inline fun <reified E> Collection<E>.toNotEmptySetOrNull():
+        NotEmptySet<E>? = try {
+    toNotEmptySet()
+} catch (_: IllegalArgumentException) {
+    null
+}
 
 /**
  * Returns a not empty set containing all the elements of this array, or returns

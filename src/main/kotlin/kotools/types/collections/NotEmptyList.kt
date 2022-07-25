@@ -33,20 +33,20 @@ public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
  * returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    toList().toNotEmptyListOrNull()
+public inline fun <reified E> Array<E>.toNotEmptyListOrNull():
+        NotEmptyList<E>? = toList().toNotEmptyListOrNull()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    try {
-        toNotEmptyList()
-    } catch (_: IllegalArgumentException) {
-        null
-    }
+public inline fun <reified E> Collection<E>.toNotEmptyListOrNull():
+        NotEmptyList<E>? = try {
+    toNotEmptyList()
+} catch (_: IllegalArgumentException) {
+    null
+}
 
 /**
  * Returns a not empty list containing all the elements of this array, or
