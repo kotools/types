@@ -646,13 +646,117 @@ class NotEmptyMutableCollectionTest {
                 }
             }
         }
+
         // ---------- PositiveInt ----------
-        // TODO: Should remove the head from a collection containing several elements and with an index as a positive int that equals 0
-        // TODO: Shouldn't remove the head from a singleton collection and with an index as a positive int that equals 0
-        // TODO: Should remove an element with an index as a positive int in 1 until the collection's size
-        // TODO: Should return null with an index as a positive int that is out of bounds
+
+        @Test
+        fun `should remove the head from a collection containing several elements and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val collection: NotEmptyMutableCollection<String> =
+                NotEmptyMutableList(head, "two")
+            val index = PositiveInt(0)
+            val size: Int = collection.size
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertNotEquals(collection.head)
+            }
+            collection.size assertEquals size - 1
+        }
+
+        @Test
+        fun `shouldn't remove the head from a singleton collection and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val collection: NotEmptyMutableCollection<String> =
+                NotEmptyMutableList(head)
+            val index = PositiveInt(0)
+            val size: Int = collection.size
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            head.let {
+                element.assertNotNull() assertEquals it
+                collection.head assertEquals it
+            }
+            collection.size assertEquals size
+        }
+
+        @Test
+        fun `should remove an element with an index as a positive int in 1 until the collection's size`() {
+            // GIVEN
+            val tail: NotEmptyList<String> = NotEmptyList("two", "three")
+            val collection: NotEmptyMutableCollection<String> =
+                NotEmptyMutableList("one", *tail.toTypedArray())
+            val index = PositiveInt(1)
+            val size: Int = collection.size
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNotNull() assertEquals tail.head
+            collection.size assertEquals size - 1
+        }
+
+        @Test
+        fun `should return null with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val initialCollection: NotEmptyCollection<String> =
+                NotEmptyList("one")
+            val collection: NotEmptyMutableCollection<String> =
+                initialCollection.toNotEmptyMutableList()
+            val index = PositiveInt(collection.size)
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNull()
+            collection.run {
+                size assertEquals initialCollection.size
+                head assertEquals initialCollection.head
+                forEachIndexed { index2, element2 ->
+                    element2 assertEquals initialCollection[index2]
+                }
+            }
+        }
+
         // ---------- StrictlyPositiveInt ----------
-        // TODO: Should remove an element with an index as a strictly positive int in 1 until the collection's size
-        // TODO: Should return null with an index as a strictly positive int that is out of bounds
+
+        @Test
+        fun `should remove an element with an index as a strictly positive int in 1 until the collection's size`() {
+            // GIVEN
+            val tail = "two"
+            val collection: NotEmptyMutableCollection<String> =
+                NotEmptyMutableList("one", tail)
+            val index = StrictlyPositiveInt(1)
+            val size: Int = collection.size
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNotNull() assertEquals tail
+            collection.size assertEquals size - 1
+        }
+
+        @Test
+        fun `should return null with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val initialCollection: NotEmptyCollection<String> =
+                NotEmptyList("one")
+            val collection: NotEmptyMutableCollection<String> =
+                initialCollection.toNotEmptyMutableList()
+            val index = StrictlyPositiveInt(collection.size)
+            // WHEN
+            val element: String? = collection removeAtOrNull index
+            // THEN
+            element.assertNull()
+            collection.run {
+                size assertEquals initialCollection.size
+                head assertEquals initialCollection.head
+                forEachIndexed { index2, element2 ->
+                    element2 assertEquals initialCollection[index2]
+                }
+            }
+        }
     }
 }

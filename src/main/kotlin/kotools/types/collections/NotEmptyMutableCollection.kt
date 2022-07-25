@@ -112,7 +112,8 @@ public sealed interface NotEmptyMutableCollection<E> : MutableCollection<E>,
      * Because this list shouldn't be empty, the element will not be removed if
      * this list contains only one element.
      */
-    public infix fun removeAtOrNull(index: PositiveInt): E? = TODO()
+    public infix fun removeAtOrNull(index: PositiveInt): E? =
+        removeAtOrNull(index.value)
 
     /**
      * Removes an element at the specified [index] from the list, or returns
@@ -121,7 +122,8 @@ public sealed interface NotEmptyMutableCollection<E> : MutableCollection<E>,
      * Because this list shouldn't be empty, the element will not be removed if
      * this list contains only one element.
      */
-    public infix fun removeAtOrNull(index: StrictlyPositiveInt): E? = TODO()
+    public infix fun removeAtOrNull(index: StrictlyPositiveInt): E? =
+        removeAtOrNull(index.value)
 
     /**
      * Replaces the element at the specified [index] in this list with the
