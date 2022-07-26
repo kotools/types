@@ -405,66 +405,53 @@ class NotEmptyMutableListTest {
 
     @Nested
     inner class RemoveAt {
+        // ---------- Int ----------
+
         @Test
         fun `should remove the head from a list containing several elements and with an index as an int that equals 0`() {
             // GIVEN
-            val expectedList: NotEmptyList<String> = NotEmptyList("one", "two")
+            val head = "one"
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList(head, "two")
             val index = 0
-            val target = "target"
-            val list: NotEmptyMutableList<String> = expectedList
-                .toNotEmptyMutableList()
-                .apply { add(index, target) }
             // WHEN
             val element: String = assertDoesNotThrow { list removeAt index }
             // THEN
-            element assertEquals target
-            list.run {
-                assertFalse { element in this }
-                head assertNotEquals element
-                size assertEquals expectedList.size
-                head assertEquals expectedList.head
-                forEachIndexed { index2: Int, element2: String ->
-                    element2 assertEquals expectedList[index2]
-                }
+            element.run {
+                assertEquals(head)
+                assertNotEquals(list.head)
+                assertFalse { this in list }
             }
         }
 
         @Test
         fun `shouldn't remove the head from a singleton list and with an index as an int that equals 0`() {
             // GIVEN
-            val expectedList: NotEmptyList<String> = NotEmptyList("one")
-            val list: NotEmptyMutableList<String> =
-                expectedList.toNotEmptyMutableList()
+            val head = "one"
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList(head)
             val index = 0
             // WHEN
             val element: String = assertDoesNotThrow { list removeAt index }
             // THEN
-            element assertEquals expectedList.head
-            assertTrue { element in list }
-            list.size assertEquals expectedList.size
-            list.head assertEquals expectedList.head
+            element.run {
+                assertEquals(head)
+                assertEquals(list.head)
+                assertTrue { this in list }
+            }
         }
 
         @Test
         fun `should remove an element with an index as an int in 1 until the list's size`() {
             // GIVEN
-            val expectedList: NotEmptyList<String> = NotEmptyList("one", "two")
-            val target = "three"
-            val list: NotEmptyMutableList<String> = expectedList
-                .toNotEmptyMutableList()
-                .also { it += target }
+            val tail = "two"
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", tail)
             val index: Int = list.size - 1
             // WHEN
             val element: String = assertDoesNotThrow { list removeAt index }
             // THEN
-            element assertEquals target
-            list.run {
-                assertFalse { element in this }
-                size assertEquals expectedList.size
-                forEachIndexed { index2: Int, element2: String ->
-                    element2 assertEquals expectedList[index2]
-                }
-            }
+            element assertEquals tail
+            assertFalse { element in list }
         }
 
         @Test
@@ -472,8 +459,14 @@ class NotEmptyMutableListTest {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
             val index: Int = list.size
-            // WHEN & THEN
-            assertFailsWith<IndexOutOfBoundsException> { list removeAt index }
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list removeAt index }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index,
+                list.size
+            )
         }
     }
 
