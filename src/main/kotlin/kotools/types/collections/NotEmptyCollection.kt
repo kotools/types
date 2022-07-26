@@ -57,7 +57,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
 
     override fun isEmpty(): Boolean = false
 
-    // ---------- Positional Access Operations ----------
+    // ---------- Positional access operations ----------
 
     /**
      * Returns the element at the specified [index] in this collection, or

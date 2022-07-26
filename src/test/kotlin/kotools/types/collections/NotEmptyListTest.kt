@@ -38,7 +38,7 @@ class NotEmptyListTest {
         }
     }
 
-    // ---------- Positional Access Operations ----------
+    // ---------- Positional access operations ----------
 
     @Nested
     inner class Get {

@@ -97,7 +97,7 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
 
-    // ---------- Positional Access Operations ----------
+    // ---------- Positional access operations ----------
 
     /**
      * Inserts the [element] into this list at the specified [index], or throws

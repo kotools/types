@@ -41,7 +41,7 @@ public value class NotBlankString(
     public val length: StrictlyPositiveInt
         get() = StrictlyPositiveInt(value.length)
 
-    // ---------- Positional Access Operations ----------
+    // ---------- Positional access operations ----------
 
     /** Returns the first character of this [value]. */
     public val first: Char get() = value[0]

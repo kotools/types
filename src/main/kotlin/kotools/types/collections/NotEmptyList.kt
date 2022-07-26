@@ -92,7 +92,7 @@ public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
 
     override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
 
-    // ---------- Positional Access Operations ----------
+    // ---------- Positional access operations ----------
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
 }

@@ -96,7 +96,7 @@ public class NotEmptySet<out E>(override val head: E, vararg tail: E) :
         toSet().iterator()
     }
 
-    // ---------- Positional Access Operations ----------
+    // ---------- Positional access operations ----------
 
     override fun get(index: Int): E = elementAt(index)
 }
