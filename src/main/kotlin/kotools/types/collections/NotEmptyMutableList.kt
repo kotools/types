@@ -156,11 +156,73 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
 
-    override fun removeAt(index: Int): E = when (index) {
+    /**
+     * Removes an element at the specified [index] from the list, or throws an
+     * [IndexOutOfBoundsException] if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    override infix fun removeAt(index: Int): E = when (index) {
         in 1 until size -> tail.removeAt(index - 1)
         0 -> head.also { if (tail.isNotEmpty()) head = tail.removeFirst() }
         else -> indexOutOfBounds(index, size)
     }
+
+    /**
+     * Removes an element at the specified [index] from the list, or throws an
+     * [IndexOutOfBoundsException] if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public infix fun removeAt(index: PositiveInt): E = removeAt(index.value)
+
+    /**
+     * Removes an element at the specified [index] from the list, or throws an
+     * [IndexOutOfBoundsException] if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public infix fun removeAt(index: StrictlyPositiveInt): E =
+        removeAt(index.value)
+
+    /**
+     * Removes an element at the specified [index] from the list, or returns
+     * `null` if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    public infix fun removeAtOrNull(index: Int): E? = try {
+        removeAt(index)
+    } catch (_: IndexOutOfBoundsException) {
+        null
+    }
+
+    /**
+     * Removes an element at the specified [index] from the list, or returns
+     * `null` if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    public infix fun removeAtOrNull(index: PositiveInt): E? =
+        removeAtOrNull(index.value)
+
+    /**
+     * Removes an element at the specified [index] from the list, or returns
+     * `null` if the index is out of bounds.
+     *
+     * Because this list shouldn't be empty, the element will not be removed if
+     * this list contains only one element.
+     */
+    public infix fun removeAtOrNull(index: StrictlyPositiveInt): E? =
+        removeAtOrNull(index.value)
 
     override fun set(index: Int, element: E): E = when (index) {
         in 1 until size -> element.also { tail[index - 1] = it }

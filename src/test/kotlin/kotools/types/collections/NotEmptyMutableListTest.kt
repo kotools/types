@@ -468,6 +468,254 @@ class NotEmptyMutableListTest {
                 list.size
             )
         }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should remove the head from a list containing several elements and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList(head, "two")
+            val index = PositiveInt(0)
+            // WHEN
+            val element: String = assertDoesNotThrow { list removeAt index }
+            // THEN
+            element.run {
+                assertEquals(head)
+                assertNotEquals(list.head)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `should remove the head from a singleton list and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = PositiveInt(0)
+            // WHEN
+            val element: String = assertDoesNotThrow { list removeAt index }
+            // THEN
+            element.run {
+                assertEquals(list.head)
+                assertTrue { element in list }
+            }
+        }
+
+        @Test
+        fun `should remove an element with an index as a positive int in 1 until the list's size`() {
+            // GIVEN
+            val tail = "two"
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", tail)
+            val index = PositiveInt(list.size - 1)
+            // WHEN
+            val element: String = assertDoesNotThrow { list removeAt index }
+            // THEN
+            element.run {
+                assertEquals(tail)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `should throw an error with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = PositiveInt(list.size)
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list removeAt index }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index.value,
+                list.size
+            )
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should remove an element with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val tail = "two"
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", tail)
+            val index = StrictlyPositiveInt(list.size - 1)
+            // WHEN
+            val element: String = assertDoesNotThrow { list removeAt index }
+            // THEN
+            element.run {
+                assertEquals(tail)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `should throw an error with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index: StrictlyPositiveInt = list.typedSize
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list removeAt index }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index.value,
+                list.size
+            )
+        }
+    }
+
+    @Nested
+    inner class RemoveAtOrNull {
+        // ---------- Int ----------
+
+        @Test
+        fun `should remove the head from a list containing several elements and with an index as an int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val list = NotEmptyMutableList(head, "two")
+            val index = 0
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertNotEquals(list.head)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `shouldn't remove the head from a singleton list and with an index as an int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val list = NotEmptyMutableList(head)
+            val index = 0
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertEquals(list.head)
+                assertTrue { this in list }
+            }
+        }
+
+        @Test
+        fun `should remove an element with an index as an int in 1 until the list's size`() {
+            // GIVEN
+            val tail = "two"
+            val list = NotEmptyMutableList("one", tail)
+            val index = 1
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(tail)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `should return null with an index as an int that is out of bounds`() {
+            // GIVEN
+            val list = NotEmptyMutableList("one")
+            val index: Int = list.size
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNull()
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should remove the head from a list containing several elements and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val list = NotEmptyMutableList(head, "two")
+            val index = PositiveInt(0)
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertNotEquals(list.head)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `shouldn't remove the head from a singleton list and with an index as a positive int that equals 0`() {
+            // GIVEN
+            val head = "one"
+            val list = NotEmptyMutableList(head)
+            val index = PositiveInt(0)
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(head)
+                assertEquals(list.head)
+                assertTrue { this in list }
+            }
+        }
+
+        @Test
+        fun `should remove an element with an index as a positive int in 1 until the list's size`() {
+            // GIVEN
+            val tail = "two"
+            val list = NotEmptyMutableList("one", tail)
+            val index = PositiveInt(list.size - 1)
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(tail)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `should return null with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val list = NotEmptyMutableList("one")
+            val index = PositiveInt(list.size)
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNull()
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should remove an element with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val tail = "two"
+            val list = NotEmptyMutableList("one", tail)
+            val index = StrictlyPositiveInt(list.size - 1)
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNotNull().run {
+                assertEquals(tail)
+                assertFalse { this in list }
+            }
+        }
+
+        @Test
+        fun `should return null with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list = NotEmptyMutableList("one")
+            val index: StrictlyPositiveInt = list.typedSize
+            // WHEN
+            val element: String? = list removeAtOrNull index
+            // THEN
+            element.assertNull()
+        }
     }
 
     @Nested
