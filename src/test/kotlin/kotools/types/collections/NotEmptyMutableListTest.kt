@@ -720,77 +720,252 @@ class NotEmptyMutableListTest {
 
     @Nested
     inner class Set {
+        // ---------- Int ----------
+
         @Test
-        fun `should replace the head with an index that equals 0`() {
+        fun `should replace the head with an index as an int that equals 0`() {
             // GIVEN
-            val expectedList: NotEmptyList<String> =
-                NotEmptyList("one", "two", "three")
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
             val index = 0
-            val previousElement = "four"
-            val list: NotEmptyMutableList<String> = expectedList
-                .subList(1, expectedList.size)
-                .toNotEmptyMutableList()
-                .apply { add(index, previousElement) }
-            val element: String = expectedList.head
+            val element = "b"
             // WHEN
             assertDoesNotThrow { list[index] = element }
             // THEN
-            list.run {
-                head assertEquals element
-                head assertNotEquals previousElement
-                this[index] assertEquals element
-                this[index] assertNotEquals previousElement
-                size assertEquals expectedList.size
-                forEachIndexed { index2: Int, element2: String ->
-                    element2 assertEquals expectedList[index2]
-                }
+            element.run {
+                assertEquals(list[index])
+                assertEquals(list.head)
             }
         }
 
         @Test
-        fun `should replace a tail's element with an index in 1 until the list's size`() {
+        fun `should replace a tail's element with an index as an int in 1 until the list's size`() {
             // GIVEN
-            val expectedList: NotEmptyList<String> =
-                NotEmptyList("one", "two", "three")
-            val previousElement = "four"
-            val list: NotEmptyMutableList<String> = NotEmptyMutableList(
-                expectedList.head,
-                previousElement,
-                expectedList.last()
-            )
-            val index = 1
-            val element: String = expectedList[index]
-            // WHEN
-            assertDoesNotThrow { list[index] = element }
-            // THEN
-            list.run {
-                this[index] assertEquals element
-                this[index] assertNotEquals previousElement
-                size assertEquals expectedList.size
-                forEachIndexed { index2: Int, element2: String ->
-                    element2 assertEquals expectedList[index2]
-                }
-            }
-        }
-
-        @Test
-        fun `should throw an error with an index that is out of bounds`() {
-            // GIVEN
-            val expectedList: NotEmptyList<String> =
-                NotEmptyList("one", "two", "three")
             val list: NotEmptyMutableList<String> =
-                expectedList.toNotEmptyMutableList()
-            val index = list.size
+                NotEmptyMutableList("a", "b")
+            val index = 1
+            val element = "c"
+            // WHEN
+            assertDoesNotThrow { list[index] = element }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should throw an error with an index as an int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index: Int = list.size
             val element = "error"
             // WHEN
-            assertFailsWith<IndexOutOfBoundsException> { list[index] = element }
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list[index] = element }
             // THEN
-            list.run {
-                size assertEquals expectedList.size
-                forEachIndexed { index2: Int, element2: String ->
-                    element2 assertEquals expectedList[index2]
-                }
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index,
+                list.size
+            )
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should replace the head with an index as a positive int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index = PositiveInt(0)
+            val element = "b"
+            // WHEN
+            assertDoesNotThrow { list[index] = element }
+            // THEN
+            element.run {
+                assertEquals(list[index])
+                assertEquals(list.head)
             }
+        }
+
+        @Test
+        fun `should replace a tail's element with an index as a positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("a", "b")
+            val index = PositiveInt(1)
+            val element = "c"
+            // WHEN
+            assertDoesNotThrow { list[index] = element }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should throw an error with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index = PositiveInt(list.size)
+            val element = "b"
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list[index] = element }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index.value,
+                list.size
+            )
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should replace a tail's element with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("a", "b")
+            val index = StrictlyPositiveInt(1)
+            val element = "c"
+            // WHEN
+            assertDoesNotThrow { list[index] = element }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should throw an error with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index: StrictlyPositiveInt = list.typedSize
+            val element = "b"
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list[index] = element }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index.value,
+                list.size
+            )
+        }
+    }
+
+    @Nested
+    inner class SetOrNull {
+        // ---------- Int ----------
+
+        @Test
+        fun `should replace the head with an index as an int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index = 0
+            val element = "b"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNotNull().run {
+                assertEquals(element)
+                assertEquals(list[index])
+                assertEquals(list.head)
+            }
+        }
+
+        @Test
+        fun `should replace a tail's element with an index as an int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("a", "b")
+            val index = 1
+            val element = "c"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNotNull().run {
+                assertEquals(element)
+                assertEquals(list[index])
+            }
+        }
+
+        @Test
+        fun `should return null with an index as an int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index: Int = list.size
+            val element = "b"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNull()
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should replace the head with an index as a positive int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index = PositiveInt(0)
+            val element = "b"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNotNull().run {
+                assertEquals(element)
+                assertEquals(list[index])
+                assertEquals(list.head)
+            }
+        }
+
+        @Test
+        fun `should replace a tail's element with an index as a positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("a", "b")
+            val index = PositiveInt(1)
+            val element = "c"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNotNull().run {
+                assertEquals(element)
+                assertEquals(list[index])
+            }
+        }
+
+        @Test
+        fun `should return null with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index = PositiveInt(list.size)
+            val element = "b"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNull()
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should replace a tail's element with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("a", "b")
+            val index = StrictlyPositiveInt(1)
+            val element = "c"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNotNull().run {
+                assertEquals(element)
+                assertEquals(list[index])
+            }
+        }
+
+        @Test
+        fun `should return null with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
+            val index: StrictlyPositiveInt = list.typedSize
+            val element = "b"
+            // WHEN
+            val result: String? = list.setOrNull(index, element)
+            // THEN
+            result.assertNull()
         }
     }
 
