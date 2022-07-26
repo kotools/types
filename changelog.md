@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
     - `NotEmptyList` ([#6](https://github.com/kotools/types/issues/6))
     - `NotEmptyCollection` and `NotEmptySet`
       ([#7](https://github.com/kotools/types/issues/7))
-    - `NotEmptyMutableCollection` and `NotEmptyMutableList`
+    - `NotEmptyMutableList`
       ([#12](https://github.com/kotools/types/issues/12)).
 - Overload comparisons of the following types in `kotools.types.number`:
     - `NonZeroInt` ([#33](https://github.com/kotools/types/issues/33))

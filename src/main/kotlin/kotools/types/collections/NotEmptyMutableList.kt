@@ -84,7 +84,7 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyMutableListOrElse(
 @SinceKotoolsTypes("1.3")
 public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
     AbstractMutableList<E>(),
-    NotEmptyMutableCollection<E> {
+    NotEmptyCollection<E> {
     private val tail: MutableList<E>
 
     init {
@@ -95,7 +95,7 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     override val size: Int get() = tail.size + super.size
 
-    override fun isEmpty(): Boolean = super<NotEmptyMutableCollection>.isEmpty()
+    override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
 
     // ---------- Positional Access Operations ----------
 
