@@ -2,6 +2,8 @@ package kotools.types.collections
 
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.indexOutOfBounds
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 
 // ---------- Conversions ----------
 
@@ -97,6 +99,11 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
 
     // ---------- Positional Access Operations ----------
 
+    /**
+     * Inserts the [element] into this list at the specified [index], or throws
+     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
     override fun add(index: Int, element: E): Unit = when (index) {
         in 1 until size -> tail.add(index - 1, element)
         0 -> {
@@ -106,6 +113,46 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
         size -> tail += element
         else -> indexOutOfBounds(index, size)
     }
+
+    /**
+     * Inserts the [element] into this list at the specified [index], or throws
+     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public fun add(index: PositiveInt, element: E): Unit =
+        add(index.value, element)
+
+    /**
+     * Inserts the [element] into this list at the specified [index], or throws
+     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public fun add(index: StrictlyPositiveInt, element: E): Unit =
+        add(index.value, element)
+
+    /**
+     * Inserts the [element] into this list at the specified [index], or returns
+     * `null` if the [index] is out of bounds.
+     */
+    public fun addOrNull(index: Int, element: E): Unit? = try {
+        add(index, element)
+    } catch (_: IndexOutOfBoundsException) {
+        null
+    }
+
+    /**
+     * Inserts the [element] into this list at the specified [index], or returns
+     * `null` if the [index] is out of bounds.
+     */
+    public fun addOrNull(index: PositiveInt, element: E): Unit? =
+        addOrNull(index.value, element)
+
+    /**
+     * Inserts the [element] into this list at the specified [index], or returns
+     * `null` if the [index] is out of bounds.
+     */
+    public fun addOrNull(index: StrictlyPositiveInt, element: E): Unit? =
+        addOrNull(index.value, element)
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
 

@@ -15,53 +15,6 @@ public sealed interface NotEmptyMutableCollection<E> : MutableCollection<E>,
     // ---------- Positional Access Operations ----------
 
     /**
-     * Inserts the [element] into this list at the specified [index], or throws
-     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
-    public fun add(index: Int, element: E)
-
-    /**
-     * Inserts the [element] into this list at the specified [index], or throws
-     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
-    public fun add(index: PositiveInt, element: E): Unit =
-        add(index.value, element)
-
-    /**
-     * Inserts the [element] into this list at the specified [index], or throws
-     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
-     */
-    @Throws(IndexOutOfBoundsException::class)
-    public fun add(index: StrictlyPositiveInt, element: E): Unit =
-        add(index.value, element)
-
-    /**
-     * Inserts the [element] into this list at the specified [index], or returns
-     * `null` if the [index] is out of bounds.
-     */
-    public fun addOrNull(index: Int, element: E): Unit? = try {
-        add(index, element)
-    } catch (_: IndexOutOfBoundsException) {
-        null
-    }
-
-    /**
-     * Inserts the [element] into this list at the specified [index], or returns
-     * `null` if the [index] is out of bounds.
-     */
-    public fun addOrNull(index: PositiveInt, element: E): Unit? =
-        addOrNull(index.value, element)
-
-    /**
-     * Inserts the [element] into this list at the specified [index], or returns
-     * `null` if the [index] is out of bounds.
-     */
-    public fun addOrNull(index: StrictlyPositiveInt, element: E): Unit? =
-        addOrNull(index.value, element)
-
-    /**
      * Removes an element at the specified [index] from the list, or throws an
      * [IndexOutOfBoundsException] if the index is out of bounds.
      *

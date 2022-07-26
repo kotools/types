@@ -4,6 +4,9 @@ import io.github.kotools.assert.assertEquals
 import io.github.kotools.assert.assertNotEquals
 import io.github.kotools.assert.assertNotNull
 import io.github.kotools.assert.assertNull
+import kotools.types.indexOutOfBoundsMessage
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -49,6 +52,7 @@ class NotEmptyMutableListTest {
     @Nested
     inner class Add {
         // ---------- Int ----------
+
         @Test
         fun `should insert an element at the beginning of the list with an index as an int that equals 0`() {
             // GIVEN
@@ -93,10 +97,273 @@ class NotEmptyMutableListTest {
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
             val index: Int = list.size + 1
             val element = "two"
-            // WHEN & THEN
-            assertFailsWith<IndexOutOfBoundsException> {
-                list.add(index, element)
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list.add(index, element) }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index,
+                list.size
+            )
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should insert an element at the beginning of the list with an index as a positive int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("two")
+            val index = PositiveInt(0)
+            val element = "one"
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            element.run {
+                assertEquals(list.head)
+                assertEquals(list[index])
             }
+        }
+
+        @Test
+        fun `should insert an element at the end of the list with an index as a positive int that equals the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = PositiveInt(list.size)
+            val element = "two"
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should insert an element into the list with an index as a positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", "three")
+            val index = PositiveInt(1)
+            val element = "two"
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should throw an error with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = PositiveInt(list.size + 1)
+            val element = "two"
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list.add(index, element) }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index.value,
+                list.size
+            )
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should insert an element at the end of the list with an index as a strictly positive int that equals the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index: StrictlyPositiveInt = list.typedSize
+            val element = "two"
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should insert an element into the list with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", "three")
+            val index = StrictlyPositiveInt(1)
+            val element = "two"
+            // WHEN
+            assertDoesNotThrow { list.add(index, element) }
+            // THEN
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should throw an error with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = StrictlyPositiveInt(list.size + 1)
+            val element = "two"
+            // WHEN
+            val error: IndexOutOfBoundsException =
+                assertFailsWith { list.add(index, element) }
+            // THEN
+            error.message.assertNotNull() assertEquals indexOutOfBoundsMessage(
+                index.value,
+                list.size
+            )
+        }
+    }
+
+    @Nested
+    inner class AddOrNull {
+        // ---------- Int ----------
+
+        @Test
+        fun `should insert an element at the beginning of the list with an index as an int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("two")
+            val index = 0
+            val element = "one"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            element.run {
+                assertEquals(list.head)
+                assertEquals(list[index])
+            }
+        }
+
+        @Test
+        fun `should insert an element at the end of the list with an index as an int that equals the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index: Int = list.size
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should insert an element into the list with an index as an int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", "three")
+            val index = 1
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should return null with an index as an int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index: Int = list.size + 1
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNull()
+        }
+
+        // ---------- PositiveInt ----------
+
+        @Test
+        fun `should insert an element at the beginning of the list with an index as a positive int that equals 0`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("two")
+            val index = PositiveInt(0)
+            val element = "one"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            element.run {
+                assertEquals(list.head)
+                assertEquals(list[index])
+            }
+        }
+
+        @Test
+        fun `should insert an element at the end of the list with an index as a positive int that equals the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = PositiveInt(list.size)
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should insert an element into the list with an index as a positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", "three")
+            val index = PositiveInt(1)
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should return null with an index as a positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = PositiveInt(list.size + 1)
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNull()
+        }
+
+        // ---------- StrictlyPositiveInt ----------
+
+        @Test
+        fun `should insert an element at the end of the list with an index as a strictly positive int that equals the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index: StrictlyPositiveInt = list.typedSize
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should insert an element into the list with an index as a strictly positive int in 1 until the list's size`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> =
+                NotEmptyMutableList("one", "three")
+            val index = StrictlyPositiveInt(1)
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNotNull()
+            list[index] assertEquals element
+        }
+
+        @Test
+        fun `should return null with an index as a strictly positive int that is out of bounds`() {
+            // GIVEN
+            val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
+            val index = StrictlyPositiveInt(list.size + 1)
+            val element = "two"
+            // WHEN
+            val result: Unit? = list.addOrNull(index, element)
+            // THEN
+            result.assertNull()
         }
     }
 
