@@ -100,9 +100,18 @@ public class NotEmptyMutableSet<E>(override var head: E, vararg tail: E) :
 
     // ---------- Positional access operations ----------
 
-    override fun get(index: Int): E = elementAt(index)
+    override fun get(index: Int): E = if (index == 0) head
+    else tail.elementAt(index - 1)
 
     // ---------- Modification operations ----------
 
-    override fun add(element: E): Boolean = TODO("Not yet implemented")
+    override infix fun add(element: E): Boolean = if (element in this) false
+    else tail.add(element)
+
+    override infix fun remove(element: E): Boolean =
+        if (size == 1 || element !in this) false
+        else if (element == head) {
+            head = tail.first().also(tail::remove)
+            true
+        } else tail.remove(element)
 }

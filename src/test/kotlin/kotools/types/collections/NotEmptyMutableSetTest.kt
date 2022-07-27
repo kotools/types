@@ -4,6 +4,8 @@ import io.github.kotools.assert.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class NotEmptyMutableSetTest {
     @Nested
@@ -273,6 +275,102 @@ class NotEmptyMutableSetTest {
                     element assertEquals defaultValue[index]
                 }
             }
+        }
+    }
+
+    // ---------- Modification operations ----------
+
+    @Nested
+    inner class Add {
+        @Test
+        fun `should return true with a new element`() {
+            // GIVEN
+            val set: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1, 2, 3)
+            val element = 4
+            val initialSize: Int = set.size
+            // WHEN
+            val result: Boolean = set add element
+            // THEN
+            set.run {
+                assertTrue { result && element in this }
+                size assertEquals initialSize + 1
+            }
+        }
+
+        @Test
+        fun `should return false with an element that is contained in the set`() {
+            // GIVEN
+            val set: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1, 2, 3)
+            val element: Int = set[1]
+            val initialSize: Int = set.size
+            // WHEN
+            val result: Boolean = set add element
+            // THEN
+            assertFalse(result)
+            set.size assertEquals initialSize
+        }
+    }
+
+    @Nested
+    inner class Remove {
+        @Test
+        fun `should return true with an element that equals the head`() {
+            // GIVEN
+            val set: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1, 2, 3)
+            val element: Int = set.head
+            val initialSize: Int = set.size
+            // WHEN
+            val result: Boolean = set remove element
+            // THEN
+            set.run {
+                assertTrue { result && element !in this }
+                head assertNotEquals element
+                size assertEquals initialSize - 1
+            }
+        }
+
+        @Test
+        fun `should return true with an element that is contained in the tail`() {
+            // GIVEN
+            val set: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1, 2, 3)
+            val element: Int = set[1]
+            val initialSize: Int = set.size
+            // WHEN
+            val result: Boolean = set remove element
+            // THEN
+            set.run {
+                assertTrue { result && element !in this }
+                size assertEquals initialSize - 1
+            }
+        }
+
+        @Test
+        fun `should return false from a singleton set`() {
+            // GIVEN
+            val set: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1)
+            val element: Int = set.head
+            val initialSize: Int = set.size
+            // WHEN
+            val result: Boolean = set remove element
+            // THEN
+            assertFalse(result)
+            set.run {
+                assertTrue { element in this }
+                size assertEquals initialSize
+            }
+        }
+
+        @Test
+        fun `should return false with an element that is not present in the set`() {
+            // GIVEN
+            val set: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1)
+            val element = 10
+            val initialSize: Int = set.size
+            // WHEN
+            val result: Boolean = set remove element
+            // THEN
+            assertFalse(result)
+            set.size assertEquals initialSize
         }
     }
 }
