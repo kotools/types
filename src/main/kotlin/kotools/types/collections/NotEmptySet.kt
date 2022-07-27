@@ -98,5 +98,6 @@ public class NotEmptySet<out E>(override val head: E, vararg tail: E) :
 
     // ---------- Positional access operations ----------
 
-    override fun get(index: Int): E = elementAt(index)
+    override fun get(index: Int): E = if (index == 0) head
+    else tail.elementAt(index - 1)
 }
