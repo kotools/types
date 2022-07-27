@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 1.3.0 - 2022/07/27
+
 ### Added
 
 - Implement the following types in `kotools.types.collections`:

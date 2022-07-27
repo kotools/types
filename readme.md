@@ -24,6 +24,11 @@ StrictlyNegativeInt orNull -2
 
 NotBlankString("hello")
 NotBlankString orNull "world"
+
+NotEmptyList(0, 1)
+NotEmptyMutableList(2, 3)
+NotEmptySet(0, 1)
+NotEmptyMutableSet(2, 3)
 ```
 
 [kotlin]: https://kotlinlang.org
@@ -35,13 +40,13 @@ NotBlankString orNull "world"
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:types:1.2.0")
+implementation("io.github.kotools:types:1.3.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:types:1.2.0'
+implementation 'io.github.kotools:types:1.3.0'
 ```
 
 ### Maven
@@ -50,7 +55,7 @@ implementation 'io.github.kotools:types:1.2.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>types</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
