@@ -75,17 +75,22 @@ class NotEmptySetTest {
     // ---------- Conversions ----------
 
     @Nested
-    inner class ArrayToNotEmptySet {
+    inner class ToNotEmptySet {
+        // ---------- Array ----------
+
         @Test
         fun `should pass with an array with at least 1 element`() {
             // GIVEN
-            val expectedSet: Set<Int> = setOf(1, 2, 3)
-            val array: Array<Int> = arrayOf(*expectedSet.toTypedArray(), 1, 2)
+            val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
             val set: NotEmptySet<Int> = assertDoesNotThrow(array::toNotEmptySet)
             // THEN
-            set.forEachIndexed { index: Int, element: Int ->
-                element assertEquals expectedSet.elementAt(index)
+            set.run {
+                head assertEquals array.first()
+                size assertEquals array.size
+                forEachIndexed { index: Int, element: Int ->
+                    element assertEquals array[index]
+                }
             }
         }
 
@@ -96,79 +101,23 @@ class NotEmptySetTest {
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(array::toNotEmptySet)
         }
-    }
 
-    @Nested
-    inner class ArrayToNotEmptySetOrNull {
-        @Test
-        fun `should pass with an array with at least 1 element`() {
-            // GIVEN
-            val expectedSet: NotEmptySet<Int> = NotEmptySet(1, 2, 3)
-            val array: Array<Int> = arrayOf(*expectedSet.toTypedArray(), 1, 2)
-            // WHEN
-            val set: NotEmptySet<Int>? = array.toNotEmptySetOrNull()
-            // THEN
-            set.assertNotNull().forEachIndexed { index: Int, element: Int ->
-                element assertEquals expectedSet.elementAt(index)
-            }
-        }
+        // ---------- Collection ----------
 
-        @Test
-        fun `should return null with an empty array`() {
-            // GIVEN
-            val array: Array<Int> = emptyArray()
-            // WHEN
-            val set: NotEmptySet<Int>? = array.toNotEmptySetOrNull()
-            // THEN
-            set.assertNull()
-        }
-    }
-
-    @Nested
-    inner class ArrayToNotEmptySetOrElse {
-        @Test
-        fun `should pass with an array with at least 1 element`() {
-            // GIVEN
-            val expectedSet: NotEmptySet<Int> = NotEmptySet(1, 2, 3)
-            val array: Array<Int> = arrayOf(*expectedSet.toTypedArray(), 1, 2)
-            val defaultValue: NotEmptySet<Int> = NotEmptySet(-1, -2, -3)
-            // WHEN
-            val set: NotEmptySet<Int> =
-                array toNotEmptySetOrElse { defaultValue }
-            // THEN
-            set.forEachIndexed { index: Int, element: Int ->
-                element assertEquals expectedSet.elementAt(index)
-                element assertNotEquals defaultValue.elementAt(index)
-            }
-        }
-
-        @Test
-        fun `should return the default value with an empty array`() {
-            // GIVEN
-            val array: Array<Int> = emptyArray()
-            val defaultValue: NotEmptySet<Int> = NotEmptySet(-1, -2, -3)
-            // WHEN
-            val set: NotEmptySet<Int> =
-                array toNotEmptySetOrElse { defaultValue }
-            // THEN
-            set.forEachIndexed { index: Int, element: Int ->
-                element assertEquals defaultValue.elementAt(index)
-            }
-        }
-    }
-
-    @Nested
-    inner class CollectionToNotEmptySet {
         @Test
         fun `should pass with a collection with at least 1 element`() {
             // GIVEN
-            val collection: Collection<Int> = listOf(1, 2, 3)
+            val collection: Collection<Int> = setOf(1, 1, 2, 3)
             // WHEN
             val set: NotEmptySet<Int> =
                 assertDoesNotThrow(collection::toNotEmptySet)
             // THEN
-            set.forEachIndexed { index: Int, element: Int ->
-                element assertEquals collection.elementAt(index)
+            set.run {
+                head assertEquals collection.first()
+                size assertEquals collection.size
+                forEachIndexed { index: Int, element: Int ->
+                    element assertEquals collection.elementAt(index)
+                }
             }
         }
 
@@ -182,20 +131,50 @@ class NotEmptySetTest {
     }
 
     @Nested
-    inner class CollectionToNotEmptySetOrNull {
+    inner class ToNotEmptySetOrNull {
+        // ---------- Array ----------
+
+        @Test
+        fun `should pass with an array with at least 1 element`() {
+            // GIVEN
+            val array: Array<Int> = arrayOf(1, 2, 3)
+            // WHEN
+            val set: NotEmptySet<Int>? = array.toNotEmptySetOrNull()
+            // THEN
+            set.assertNotNull().run {
+                head assertEquals array.first()
+                size assertEquals array.size
+                forEachIndexed { index: Int, element: Int ->
+                    element assertEquals array[index]
+                }
+            }
+        }
+
+        @Test
+        fun `should return null with an empty array`() {
+            // GIVEN
+            val array: Array<Int> = emptyArray()
+            // WHEN
+            val set: NotEmptySet<Int>? = array.toNotEmptySetOrNull()
+            // THEN
+            set.assertNull()
+        }
+
+        // ---------- Collection ----------
+
         @Test
         fun `should pass with a collection with at least 1 element`() {
             // GIVEN
-            val expectedSet: Set<Int> = setOf(1, 2, 3)
-            val collection: Collection<Int> = expectedSet.toMutableList().run {
-                this += 2
-                toList()
-            }
+            val collection: Collection<Int> = setOf(1, 1, 2, 3)
             // WHEN
             val set: NotEmptySet<Int>? = collection.toNotEmptySetOrNull()
             // THEN
-            set.assertNotNull().forEachIndexed { index: Int, element: Int ->
-                element assertEquals expectedSet.elementAt(index)
+            set.assertNotNull().run {
+                head assertEquals collection.first()
+                size assertEquals collection.size
+                forEachIndexed { index: Int, element: Int ->
+                    element assertEquals collection.elementAt(index)
+                }
             }
         }
 
@@ -211,23 +190,90 @@ class NotEmptySetTest {
     }
 
     @Nested
-    inner class CollectionToNotEmptySetOrElse {
+    inner class ToNotEmptySetOrElse {
+        // ---------- Array ----------
+
+        @Test
+        fun `should pass with an array with at least 1 element`() {
+            // GIVEN
+            val array: Array<Int> = arrayOf(1, 2, 3)
+            val defaultValue: NotEmptySet<Int> = array.map { -it }
+                .run {
+                    val head: Int = first()
+                    val tail: Array<Int> = subList(1, size).toTypedArray()
+                    NotEmptySet(head, *tail)
+                }
+            // WHEN
+            val set: NotEmptySet<Int> =
+                array toNotEmptySetOrElse { defaultValue }
+            // THEN
+            set.run {
+                head.run {
+                    assertEquals(array.first())
+                    assertNotEquals(defaultValue.head)
+                }
+                size.run {
+                    assertEquals(array.size)
+                    assertEquals(defaultValue.size)
+                }
+                forEachIndexed { index: Int, element: Int ->
+                    element.run {
+                        assertEquals(array[index])
+                        assertNotEquals(defaultValue[index])
+                    }
+                }
+            }
+        }
+
+        @Test
+        fun `should return the default value with an empty array`() {
+            // GIVEN
+            val array: Array<Int> = emptyArray()
+            val defaultValue: NotEmptySet<Int> = NotEmptySet(-1, -2, -3)
+            // WHEN
+            val set: NotEmptySet<Int> =
+                array toNotEmptySetOrElse { defaultValue }
+            // THEN
+            set.run {
+                head assertEquals defaultValue.head
+                size assertEquals defaultValue.size
+                forEachIndexed { index: Int, element: Int ->
+                    element assertEquals defaultValue[index]
+                }
+            }
+        }
+
+        // ---------- Collection ----------
+
         @Test
         fun `should pass with a collection with at least 1 element`() {
             // GIVEN
-            val expectedSet: Set<Int> = setOf(1, 2, 3)
-            val collection: Collection<Int> = expectedSet.toMutableList().run {
-                this += 1
-                toList()
-            }
-            val defaultValue: NotEmptySet<Int> = NotEmptySet(-1, -2, -3)
+            val collection: Collection<Int> = setOf(1, 1, 2, 3)
+            val defaultValue: NotEmptySet<Int> = collection.map { -it }
+                .run {
+                    val head: Int = first()
+                    val tail: Array<Int> = subList(1, size).toTypedArray()
+                    NotEmptySet(head, *tail)
+                }
             // WHEN
             val set: NotEmptySet<Int> =
                 collection toNotEmptySetOrElse { defaultValue }
             // THEN
-            set.forEachIndexed { index: Int, element: Int ->
-                element assertEquals expectedSet.elementAt(index)
-                element assertNotEquals defaultValue.elementAt(index)
+            set.run {
+                head.run {
+                    assertEquals(collection.first())
+                    assertNotEquals(defaultValue.head)
+                }
+                size.run {
+                    assertEquals(collection.size)
+                    assertEquals(defaultValue.size)
+                }
+                forEachIndexed { index: Int, element: Int ->
+                    element.run {
+                        assertEquals(collection.elementAt(index))
+                        assertNotEquals(defaultValue[index])
+                    }
+                }
             }
         }
 
@@ -240,8 +286,12 @@ class NotEmptySetTest {
             val set: NotEmptySet<Int> =
                 collection toNotEmptySetOrElse { defaultValue }
             // THEN
-            set.forEachIndexed { index: Int, element: Int ->
-                element assertEquals defaultValue.elementAt(index)
+            set.run {
+                head assertEquals defaultValue.head
+                size assertEquals defaultValue.size
+                forEachIndexed { index: Int, element: Int ->
+                    element assertEquals defaultValue[index]
+                }
             }
         }
     }

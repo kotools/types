@@ -11,7 +11,7 @@ import kotools.types.annotations.SinceKotoolsTypes
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
 public inline fun <reified E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
-    toList().toNotEmptySet()
+    toSet().toNotEmptySet()
 
 /**
  * Returns a not empty set containing all the elements of this collection, or
@@ -34,7 +34,7 @@ public inline fun <reified E> Collection<E>.toNotEmptySet(): NotEmptySet<E> {
  */
 @SinceKotoolsTypes("1.3")
 public inline fun <reified E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    toList().toNotEmptySetOrNull()
+    toSet().toNotEmptySetOrNull()
 
 /**
  * Returns a not empty set containing all the elements of this collection, or
