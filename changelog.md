@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Removed
+
+- Remove the old `io.github.kotools.types.string.NotBlankString` type and its
+  builders ([#41](https://github.com/kotools/types/issues/41)).
+
 ## Version 1.3.0 - 2022/07/27
 
 ### Added
