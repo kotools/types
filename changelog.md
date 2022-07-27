@@ -21,6 +21,9 @@ All notable changes to this project will be documented in this file.
 
 - Remove the old `io.github.kotools.types.string.NotBlankString` type and its
   builders ([#41](https://github.com/kotools/types/issues/41)).
+- Remove the old `NonZeroInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
+  types in `io.github.kotools.types.int`
+  ([#45](https://github.com/kotools/types/issues/45)).
 
 ## Version 1.3.0 - 2022/07/27
 
