@@ -69,7 +69,7 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyListOrElse(
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
 
 /**
- * Represents lists that can't be empty.
+ * Represents lists containing at least one element.
  *
  * @param E The type of elements contained in this list.
  *

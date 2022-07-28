@@ -68,7 +68,7 @@ public inline infix fun <reified E> Collection<E>.toNotEmptySetOrElse(
 ): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
 
 /**
- * Represents sets that can't be empty.
+ * Represents sets containing at least one element.
  *
  * @param E The type of elements contained in this set.
  *
