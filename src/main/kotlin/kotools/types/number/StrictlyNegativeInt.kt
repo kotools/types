@@ -64,7 +64,7 @@ public value class StrictlyNegativeInt(
     /** Returns this [value] as a [NonZeroInt]. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
-    /** Returns this [value] as a [NegativeInt]. */
+    /** Returns this [value] as a negative int. */
     public fun toNegativeInt(): NegativeInt = NegativeInt(value)
 
     /** Adds the [other] value to this [value]. */
