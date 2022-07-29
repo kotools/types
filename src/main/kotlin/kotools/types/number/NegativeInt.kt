@@ -289,15 +289,15 @@ public value class NegativeInt(
         StrictlyNegativeInt orNull value
 
     /**
-     * Returns this [value] as a [PositiveInt], or throws an
-     * [IllegalArgumentException] if it's strictly negative.
+     * Returns this [value] as a positive int, or throws an
+     * [IllegalArgumentException] if this [value] is strictly negative.
      */
     @Throws(IllegalArgumentException::class)
     public fun toPositiveInt(): PositiveInt = PositiveInt(value)
 
     /**
-     * Returns this [value] as a [PositiveInt] or `null` if it's strictly
-     * negative.
+     * Returns this [value] as a positive int or `null` if this [value] is
+     * strictly negative.
      */
     @Throws(IllegalArgumentException::class)
     public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
