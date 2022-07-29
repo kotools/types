@@ -47,12 +47,15 @@ public infix operator fun Int.compareTo(other: NonZeroInt): Int =
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
-/** Returns this value as a non-zero int or `null` if this value equals `0`. */
+/**
+ * Returns this value as a non-zero int, or returns `null` if this value equals
+ * `0`.
+ */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 
 /**
- * Represents integers that can't equal `0`.
+ * Represents integers that don't equal `0`.
  *
  * @constructor Returns the [value] as a non-zero int, or throws an
  * [IllegalArgumentException] if this [value] equals `0`.
@@ -67,7 +70,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     // ---------- Unary operations ----------
 
     /**
-     * Returns this [value] incremented by one.
+     * Returns this [value] incremented by `1`.
      * If this [value] equals `-1`, it returns `1` instead.
      * If this [value] is the [maximum][NonZeroInt.max], it returns the
      * [minimum][NonZeroInt.min] value instead.
@@ -79,7 +82,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     }
 
     /**
-     * Returns this [value] decremented by one.
+     * Returns this [value] decremented by `1`.
      * If this [value] equals `1`, it returns `-1` instead.
      * If this [value] is the [minimum][NonZeroInt.min], it returns the
      * [maximum][NonZeroInt.max] value instead.
@@ -219,6 +222,12 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public infix operator fun compareTo(other: Int): Int =
         value.compareTo(other)
 
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this object equals the [other] value, a negative number if
+     * this [value] is less than the [other] value, or a positive number if this
+     * [value] is greater than the [other] value.
+     */
     override infix operator fun compareTo(other: NonZeroInt): Int =
         compareTo(other.value)
 
@@ -272,8 +281,8 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public fun toPositiveInt(): PositiveInt = PositiveInt(value)
 
     /**
-     * Returns this [value] as a positive int or `null` if this [value] is
-     * strictly negative.
+     * Returns this [value] as a positive int, or returns `null` if this [value]
+     * is strictly negative.
      */
     public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
 
@@ -286,8 +295,8 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
         StrictlyPositiveInt(value)
 
     /**
-     * Returns this [value] as a strictly positive int or `null` if this [value]
-     * is strictly negative.
+     * Returns this [value] as a strictly positive int, or returns `null` if
+     * this [value] is strictly negative.
      */
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         StrictlyPositiveInt orNull value
@@ -300,8 +309,8 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public fun toNegativeInt(): NegativeInt = NegativeInt(value)
 
     /**
-     * Returns this [value] as a negative int or `null` if this [value] is
-     * strictly positive.
+     * Returns this [value] as a negative int, or returns `null` if this [value]
+     * is strictly positive.
      */
     @Throws(IllegalArgumentException::class)
     public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
@@ -315,8 +324,8 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
         StrictlyNegativeInt(value)
 
     /**
-     * Returns this [value] as a strictly negative int or `null` if this [value]
-     * is strictly positive.
+     * Returns this [value] as a strictly negative int, or returns `null` if
+     * this [value] is strictly positive.
      */
     public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
         StrictlyNegativeInt orNull value
@@ -329,13 +338,16 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
-        /** The minimum value an instance of [NonZeroInt] can have. */
+        /** The minimum value of a non-zero int. */
         public val min: NonZeroInt = NonZeroInt(Int.MIN_VALUE)
 
-        /** The maximum value an instance of [NonZeroInt] can have. */
+        /** The maximum value of a non-zero int. */
         public val max: NonZeroInt = NonZeroInt(Int.MAX_VALUE)
 
-        /** Returns the [value] as a [NonZeroInt] or `null` if it equals `0`. */
+        /**
+         * Returns the [value] as a non-zero int, or returns `null` if the
+         * [value] equals `0`.
+         */
         public infix fun orNull(value: Int): NonZeroInt? = try {
             NonZeroInt(value)
         } catch (_: IllegalArgumentException) {
