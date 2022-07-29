@@ -31,15 +31,18 @@ public infix operator fun Int.div(other: StrictlyPositiveInt): Int =
 // ---------- Conversions ----------
 
 /**
- * Returns this value as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if it's negative.
+ * Returns this value as a strictly positive int, or throws an
+ * [IllegalArgumentException] if this value is negative.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
 
-/** Returns this value as a [StrictlyPositiveInt] or `null` if it's negative. */
+/**
+ * Returns this value as a strictly positive int or `null` if this value is
+ * negative.
+ */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     StrictlyPositiveInt orNull this
@@ -47,8 +50,8 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 /**
  * Represents strictly positive integers (excluding `0`).
  *
- * @constructor Returns the [value] as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if it's negative.
+ * @constructor Returns the [value] as a strictly positive int, or throws an
+ * [IllegalArgumentException] if this [value] is negative.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
