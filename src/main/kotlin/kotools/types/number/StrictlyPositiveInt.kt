@@ -256,7 +256,7 @@ public value class StrictlyPositiveInt(
 
     // ---------- Conversions ----------
 
-    /** Returns this [value] as a [NonZeroInt]. */
+    /** Returns this [value] as a non-zero int. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
     /** Returns this [value] as a [PositiveInt]. */
