@@ -87,16 +87,16 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
 
     /**
-     * Returns this [value] as a [StrictlyPositiveInt], or throws an
-     * [IllegalArgumentException] if it's strictly negative.
+     * Returns this [value] as a strictly positive int, or throws an
+     * [IllegalArgumentException] if this [value] is strictly negative.
      */
     @Throws(IllegalArgumentException::class)
     public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
         StrictlyPositiveInt(value)
 
     /**
-     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it's
-     * strictly negative.
+     * Returns this [value] as a strictly positive int or `null` if this [value]
+     * is strictly negative.
      */
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         StrictlyPositiveInt orNull value
