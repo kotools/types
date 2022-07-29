@@ -4,15 +4,16 @@ import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
 /**
- * Returns this value as a [NegativeInt], or throws an
- * [IllegalArgumentException] if it's strictly positive.
+ * Returns this value as a negative int, or throws an
+ * [IllegalArgumentException] if this value is strictly positive.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
- * Returns this value as a [NegativeInt] or `null` if it's strictly positive.
+ * Returns this value as a negative int or `null` if this value is strictly
+ * positive.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
@@ -44,8 +45,8 @@ public infix operator fun Int.div(other: NegativeInt): Int = this / other.value
 /**
  * Represents negative integers (including 0).
  *
- * @constructor Returns the [value] as a [NegativeInt], or throws an
- * [IllegalArgumentException] if it's strictly positive.
+ * @constructor Returns the [value] as a negative int, or throws an
+ * [IllegalArgumentException] if the [value] is strictly positive.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
