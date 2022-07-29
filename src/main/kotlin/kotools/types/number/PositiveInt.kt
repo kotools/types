@@ -75,16 +75,16 @@ public value class PositiveInt(
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
 
     /**
-     * Returns this [value] as a [StrictlyPositiveInt], or throws an
-     * [IllegalArgumentException] if it equals `0`.
+     * Returns this [value] as a strictly positive int, or throws an
+     * [IllegalArgumentException] if this [value] equals `0`.
      */
     @Throws(IllegalArgumentException::class)
     public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
         StrictlyPositiveInt(value)
 
     /**
-     * Returns this [value] as a [StrictlyPositiveInt] or `null` if it equals
-     * `0`.
+     * Returns this [value] as a strictly positive int or `null` if this [value]
+     * equals `0`.
      */
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         StrictlyPositiveInt orNull value
