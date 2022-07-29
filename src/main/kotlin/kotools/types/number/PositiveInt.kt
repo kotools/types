@@ -43,15 +43,16 @@ public infix operator fun Int.compareTo(other: PositiveInt): Int =
 // ---------- Conversions ----------
 
 /**
- * Returns this value as a [PositiveInt], or throws an
- * [IllegalArgumentException] if it's strictly negative.
+ * Returns this value as a positive int, or throws an
+ * [IllegalArgumentException] if this value is strictly negative.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
 
 /**
- * Returns this value as a [PositiveInt] or `null` if it's strictly negative.
+ * Returns this value as a positive int or `null` if this value is strictly
+ * negative.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
@@ -59,8 +60,8 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
 /**
  * Represents positive integers (including `0`).
  *
- * @constructor Returns the [value] as a [PositiveInt], or throws an
- * [IllegalArgumentException] if it's strictly negative.
+ * @constructor Returns the [value] as a positive int, or throws an
+ * [IllegalArgumentException] if this [value] is strictly negative.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")

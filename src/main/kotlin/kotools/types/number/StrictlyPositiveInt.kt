@@ -259,7 +259,7 @@ public value class StrictlyPositiveInt(
     /** Returns this [value] as a non-zero int. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
-    /** Returns this [value] as a [PositiveInt]. */
+    /** Returns this [value] as a positive int. */
     public fun toPositiveInt(): PositiveInt = PositiveInt(value)
 
     override fun toString(): String = value.toString()
