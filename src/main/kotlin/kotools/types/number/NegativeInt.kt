@@ -274,16 +274,16 @@ public value class NegativeInt(
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
 
     /**
-     * Returns this [value] as a [StrictlyNegativeInt], or throws an
-     * [IllegalArgumentException] if it equals `0`.
+     * Returns this [value] as a strictly negative int, or throws an
+     * [IllegalArgumentException] if this [value] equals `0`.
      */
     @Throws(IllegalArgumentException::class)
     public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
         StrictlyNegativeInt(value)
 
     /**
-     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it equals
-     * `0`.
+     * Returns this [value] as a strictly negative int or `null` if this [value]
+     * equals `0`.
      */
     public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
         StrictlyNegativeInt orNull value

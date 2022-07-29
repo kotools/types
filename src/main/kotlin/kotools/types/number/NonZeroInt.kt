@@ -307,16 +307,16 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
 
     /**
-     * Returns this [value] as a [StrictlyNegativeInt], or throws an
-     * [IllegalArgumentException] if it's strictly positive.
+     * Returns this [value] as a strictly negative int, or throws an
+     * [IllegalArgumentException] if this [value] is strictly positive.
      */
     @Throws(IllegalArgumentException::class)
     public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
         StrictlyNegativeInt(value)
 
     /**
-     * Returns this [value] as a [StrictlyNegativeInt] or `null` if it's
-     * strictly positive.
+     * Returns this [value] as a strictly negative int or `null` if this [value]
+     * is strictly positive.
      */
     public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
         StrictlyNegativeInt orNull value
