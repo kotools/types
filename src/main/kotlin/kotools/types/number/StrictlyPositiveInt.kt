@@ -65,7 +65,7 @@ public value class StrictlyPositiveInt(
      */
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
-    /** Returns this [value] as a [NonZeroInt]. */
+    /** Returns this [value] as a non-zero int. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
     /** Returns this [value] as a [PositiveInt]. */
