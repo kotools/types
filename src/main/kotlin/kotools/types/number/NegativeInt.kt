@@ -34,7 +34,7 @@ public infix operator fun Int.times(other: NegativeInt): Int =
 
 /**
  * Divides this value by the [other] value, truncating the result to an integer
- * that is closer to zero.
+ * that is closer to `0`.
  * Throws an [ArithmeticException] if the [other] value equals `0`.
  */
 @SinceKotoolsTypes("1.1")
@@ -172,7 +172,7 @@ public value class NegativeInt(
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
@@ -180,13 +180,13 @@ public value class NegativeInt(
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      */
     public infix operator fun div(other: NonZeroInt): Int = value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
@@ -195,14 +195,14 @@ public value class NegativeInt(
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      */
     public infix operator fun div(other: StrictlyPositiveInt): NegativeInt =
         NegativeInt(value / other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
@@ -211,7 +211,7 @@ public value class NegativeInt(
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      */
     public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value / other.value)
