@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file.
 
 - Fix the documentation of `NotEmptyList` and `NotEmptySet` types
   ([#46](https://github.com/kotools/types/issues/46)).
+- Fix the documentation of version 1.1
+  ([#51](https://github.com/kotools/types/issues/51)).
 
 ## Version 1.3.0 - 2022/07/27
 
