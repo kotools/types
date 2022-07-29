@@ -30,7 +30,7 @@ public infix operator fun Int.times(other: NonZeroInt): Int = this * other.value
 
 /**
  * Divides this value by the [other] value, truncating the result to an integer
- * that is closer to zero.
+ * that is closer to `0`.
  */
 @SinceKotoolsTypes("1.1")
 public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
@@ -185,7 +185,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
@@ -193,13 +193,13 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      */
     public infix operator fun div(other: NonZeroInt): Int = value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
@@ -207,14 +207,14 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      */
     public infix operator fun div(other: StrictlyPositiveInt): Int =
         value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
@@ -222,7 +222,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to zero.
+     * integer that is closer to `0`.
      */
     public infix operator fun div(other: StrictlyNegativeInt): Int =
         value / other.value
