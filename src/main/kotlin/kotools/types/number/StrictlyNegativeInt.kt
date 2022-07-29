@@ -3,8 +3,8 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 
 /**
- * Returns this value as a [StrictlyNegativeInt], or throws an
- * [IllegalArgumentException] if it's positive.
+ * Returns this value as a strictly negative int, or throws an
+ * [IllegalArgumentException] if this value is positive.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
@@ -12,7 +12,8 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
 
 /**
- * Returns this value as a [StrictlyNegativeInt], or `null` if it's positive.
+ * Returns this value as a strictly negative int, or `null` if this value is
+ * positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
@@ -44,8 +45,8 @@ public infix operator fun Int.div(other: StrictlyNegativeInt): Int =
 /**
  * Represents strictly negative integers (excluding 0).
  *
- * @constructor Returns the [value] as a [StrictlyNegativeInt], or throws an
- * [IllegalArgumentException] if it's positive.
+ * @constructor Returns the [value] as a strictly negative int, or throws an
+ * [IllegalArgumentException] if this [value] is positive.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
