@@ -61,7 +61,7 @@ public value class StrictlyNegativeInt(
 
     override fun toString(): String = value.toString()
 
-    /** Returns this [value] as a [NonZeroInt]. */
+    /** Returns this [value] as a non-zero int. */
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
     /** Returns this [value] as a negative int. */

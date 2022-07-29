@@ -3,14 +3,14 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 
 /**
- * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
- * if it equals `0`.
+ * Returns this value as a non-zero int, or throws an [IllegalArgumentException]
+ * if this value equals `0`.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
-/** Returns this value as a [NonZeroInt] or `null` if it equals `0`. */
+/** Returns this value as a non-zero int or `null` if this value equals `0`. */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 
@@ -37,8 +37,8 @@ public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
 /**
  * Represents integers that can't equal `0`.
  *
- * @constructor Returns the [value] as a [NonZeroInt], or throws an
- * [IllegalArgumentException] if it equals `0`.
+ * @constructor Returns the [value] as a non-zero int, or throws an
+ * [IllegalArgumentException] if this [value] equals `0`.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
