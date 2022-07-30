@@ -15,14 +15,12 @@ version = "2.0.0-SNAPSHOT"
 repositories(RepositoryHandler::mavenCentral)
 
 dependencies {
-    implementation(platform(kotlin("bom"))) {
-        because("Sets version for all Kotlin dependencies")
-    }
+    // Kotlin
+    implementation(platform(kotlin("bom")))
     testImplementation(kotlin("test"))
 
-    testImplementation("io.github.kotools", "assert", "[2.0,2.1[") {
-        because("Provides additional assertions")
-    }
+    // Kotools
+    testImplementation("io.github.kotools", "assert", "[2.0,2.1[")
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict
@@ -32,36 +30,43 @@ java {
     withSourcesJar()
 }
 
-tasks {
-    compileJava { enabled = false }
-    compileTestJava { enabled = false }
-    jar {
-        manifest.attributes(
-            "Implementation-Title" to project.name,
-            "Implementation-Version" to project.version
-        )
-    }
-    val dokkaOutputDir = "$buildDir/dokka"
-    dokkaHtml { outputDirectory.set(file(dokkaOutputDir)) }
-    val cleanDokkaOutput =
-        register<Delete>("cleanDokkaOutput") { delete(dokkaOutputDir) }
-    val javadocJar = register<Jar>("javadocJar") {
-        dependsOn(cleanDokkaOutput, dokkaHtml)
-        archiveClassifier.set("javadoc")
-        from(dokkaOutputDir)
-    }
-    assemble { dependsOn += javadocJar }
-    test {
-        testLogging.exceptionFormat = TestExceptionFormat.FULL
-        useJUnitPlatform()
-    }
+// ---------- Tasks ----------
+
+tasks.compileJava { enabled = false }
+tasks.compileTestJava { enabled = false }
+
+tasks.jar {
+    fun key(suffix: String): String = "Implementation-$suffix"
+    val name: Pair<String, String> = key("Title") to project.name
+    val version: Pair<String, Any> = key("Version") to project.version
+    manifest.attributes(name, version)
 }
+
+val dokkaDirectory: File = buildDir.resolve("dokka")
+tasks.dokkaHtml { outputDirectory.set(dokkaDirectory) }
+val cleanDokkaHtml: TaskProvider<Delete> =
+    tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }
+
+val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
+    dependsOn(cleanDokkaHtml, tasks.dokkaHtml)
+    archiveClassifier.set("javadoc")
+    from(dokkaDirectory)
+}
+
+tasks.assemble { dependsOn(javadocJar) }
+
+tasks.test {
+    testLogging.exceptionFormat = TestExceptionFormat.FULL
+    useJUnitPlatform()
+}
+
+// ---------- Publishing & signing ----------
 
 publishing {
     publications {
         create<MavenPublication>(project.name) {
             from(components["java"])
-            artifact(tasks.getByName("javadocJar"))
+            artifact(javadocJar)
             pom {
                 name.set("Kotools Types")
                 description.set("Commonly used types for Kotlin.")
@@ -114,9 +119,8 @@ publishing {
 }
 
 signing {
-    useInMemoryPgpKeys(
-        System.getenv("GPG_PRIVATE_KEY"),
-        System.getenv("GPG_PASSWORD")
-    )
+    val secretKey: String? = System.getenv("GPG_PRIVATE_KEY")
+    val password: String? = System.getenv("GPG_PASSWORD")
+    useInMemoryPgpKeys(secretKey, password)
     sign(publishing.publications)
 }
