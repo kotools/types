@@ -335,6 +335,7 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
     /**
      * Returns the string representation of this [value] as a [NotBlankString].
      */
+    @SinceKotoolsTypes("1.2")
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {

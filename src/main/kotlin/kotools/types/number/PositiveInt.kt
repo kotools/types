@@ -318,6 +318,7 @@ public value class PositiveInt(
     /**
      * Returns the string representation of this [value] as a [NotBlankString].
      */
+    @SinceKotoolsTypes("1.2")
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
