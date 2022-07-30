@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Add missing versioning annotations for version 1.2
+  ([#56](https://github.com/kotools/types/issues/56)).
+
 ### Removed
 
 - Remove the old `io.github.kotools.types.string.NotBlankString` type and its
