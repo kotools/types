@@ -11,8 +11,8 @@ import kotools.types.annotations.SinceKotoolsTypes
 public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
 
 /**
- * Returns this value as a positive int or `null` if this value is strictly
- * negative.
+ * Returns this value as a positive int, or returns `null` if this value is
+ * strictly negative.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
@@ -42,7 +42,7 @@ public infix operator fun Int.times(other: PositiveInt): Int =
 public infix operator fun Int.div(other: PositiveInt): Int = this / other.value
 
 /**
- * Represents positive integers (including `0`).
+ * Represents positive integers, including `0`.
  *
  * @constructor Returns the [value] as a positive int, or throws an
  * [IllegalArgumentException] if this [value] is strictly negative.
@@ -56,6 +56,12 @@ public value class PositiveInt(
         require(value >= 0) { "Given value shouldn't be strictly negative." }
     }
 
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this object equals the [other] value, a negative number if
+     * this [value] is less than the [other] value, or a positive number if this
+     * [value] is greater than the [other] value.
+     */
     override fun compareTo(other: PositiveInt): Int =
         value.compareTo(other.value)
 
@@ -69,8 +75,8 @@ public value class PositiveInt(
     public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
 
     /**
-     * Returns this [value] as a non-zero int or `null` if this [value] equals
-     * `0`.
+     * Returns this [value] as a non-zero int, or returns `null` if this [value]
+     * equals `0`.
      */
     public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
 
@@ -83,8 +89,8 @@ public value class PositiveInt(
         StrictlyPositiveInt(value)
 
     /**
-     * Returns this [value] as a strictly positive int or `null` if this [value]
-     * equals `0`.
+     * Returns this [value] as a strictly positive int, or returns `null` if
+     * this [value] equals `0`.
      */
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         StrictlyPositiveInt orNull value
@@ -97,8 +103,8 @@ public value class PositiveInt(
     public fun toNegativeInt(): NegativeInt = NegativeInt(value)
 
     /**
-     * Returns this [value] as a negative int or `null` if this [value] is
-     * strictly positive.
+     * Returns this [value] as a negative int, or returns `null` if this [value]
+     * is strictly positive.
      */
     @Throws(IllegalArgumentException::class)
     public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
@@ -221,7 +227,7 @@ public value class PositiveInt(
         NegativeInt(value / other.value)
 
     /**
-     * Returns this [value] incremented by one.
+     * Returns this [value] incremented by `1`.
      * If this [value] is the [maximum][PositiveInt.max], it returns the
      * [minimum][PositiveInt.min] value instead.
      */
@@ -229,7 +235,7 @@ public value class PositiveInt(
     else PositiveInt(value + 1)
 
     /**
-     * Returns this [value] decremented by one.
+     * Returns this [value] decremented by `1`.
      * If this [value] is the [minimum][PositiveInt.min], it returns the
      * [maximum][PositiveInt.max] value instead.
      */
@@ -243,15 +249,15 @@ public value class PositiveInt(
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
     public companion object {
-        /** The minimum value an instance of [PositiveInt] can have. */
+        /** The minimum value of a positive int. */
         public val min: PositiveInt = PositiveInt(0)
 
-        /** The maximum value an instance of [PositiveInt] can have. */
+        /** The maximum value of a positive int. */
         public val max: PositiveInt = PositiveInt(Int.MAX_VALUE)
 
         /**
-         * Returns the [value] as a [PositiveInt] or `null` if it's strictly
-         * negative.
+         * Returns the [value] as a positive int, or returns `null` if the
+         * [value] is strictly negative.
          */
         public infix fun orNull(value: Int): PositiveInt? = try {
             PositiveInt(value)
