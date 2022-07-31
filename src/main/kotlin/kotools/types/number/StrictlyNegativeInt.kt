@@ -51,7 +51,7 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  * Represents strictly negative integers, excluding `0`.
  *
  * @constructor Returns the [value] as a strictly negative int, or throws an
- * [IllegalArgumentException] if this [value] is positive.
+ * [IllegalArgumentException] if the [value] is positive.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
