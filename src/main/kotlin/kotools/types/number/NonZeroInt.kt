@@ -46,7 +46,9 @@ public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
-public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
+public value class NonZeroInt
+@Throws(IllegalArgumentException::class)
+public constructor(public val value: Int) : Comparable<NonZeroInt> {
     init {
         require(value != 0) { "Given value shouldn't equal 0." }
     }
@@ -122,7 +124,6 @@ public value class NonZeroInt(public val value: Int) : Comparable<NonZeroInt> {
      * Returns this [value] as a negative int, or returns `null` if this [value]
      * is strictly positive.
      */
-    @Throws(IllegalArgumentException::class)
     public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
 
     /** Adds the [other] value to this [value]. */
