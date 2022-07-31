@@ -21,8 +21,8 @@ public infix operator fun Int.times(other: PositiveInt): Int =
     this * other.value
 
 /**
- * Divides this value by [other], truncating the result to an integer that is
- * closer to `0`.
+ * Divides this value by the [other] value, truncating the result to an integer
+ * that is closer to `0`.
  * Throws an [ArithmeticException] if the [other] value equals `0`.
  */
 @SinceKotoolsTypes("1.1")
