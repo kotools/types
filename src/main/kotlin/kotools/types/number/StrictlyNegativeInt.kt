@@ -48,7 +48,7 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     StrictlyNegativeInt orNull this
 
 /**
- * Represents strictly negative integers (excluding 0).
+ * Represents strictly negative integers, excluding `0`.
  *
  * @constructor Returns the [value] as a strictly negative int, or throws an
  * [IllegalArgumentException] if this [value] is positive.
@@ -65,7 +65,7 @@ public value class StrictlyNegativeInt(
     // ---------- Unary operations ----------
 
     /**
-     * Returns this [value] incremented by one.
+     * Returns this [value] incremented by `1`.
      * If this [value] is the [maximum][StrictlyNegativeInt.max], it returns the
      * [minimum][StrictlyNegativeInt.min] value instead.
      */
@@ -73,7 +73,7 @@ public value class StrictlyNegativeInt(
     else StrictlyNegativeInt(value + 1)
 
     /**
-     * Returns this [value] decremented by one.
+     * Returns this [value] decremented by `1`.
      * If this [value] is the [minimum][StrictlyNegativeInt.min], it returns the
      * [maximum][StrictlyNegativeInt.max] value instead.
      */
@@ -254,10 +254,10 @@ public value class StrictlyNegativeInt(
         compareTo(other.value)
 
     /**
-     * Compares this strictly negative int with [other] for order.
-     * Returns `0` if this strictly negative int equals [other], a negative
-     * number if it's less than [other], or a positive number if it's greater
-     * than [other].
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
      */
     override infix fun compareTo(other: StrictlyNegativeInt): Int =
         compareTo(other.value)
@@ -279,15 +279,15 @@ public value class StrictlyNegativeInt(
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
-        /** The minimum value an instance of [StrictlyNegativeInt] can have. */
+        /** The minimum value of a strictly negative int. */
         public val min: StrictlyNegativeInt = StrictlyNegativeInt(Int.MIN_VALUE)
 
-        /** The maximum value an instance of [StrictlyNegativeInt] can have. */
+        /** The maximum value of a strictly negative int. */
         public val max: StrictlyNegativeInt = StrictlyNegativeInt(-1)
 
         /**
-         * Returns the [value] as a [StrictlyNegativeInt] or `null` if it's
-         * positive.
+         * Returns the [value] as a strictly negative int, or returns `null` if
+         * the [value] is positive.
          */
         public infix fun orNull(value: Int): StrictlyNegativeInt? = try {
             StrictlyNegativeInt(value)
