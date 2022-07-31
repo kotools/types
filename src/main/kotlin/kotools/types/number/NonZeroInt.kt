@@ -58,7 +58,7 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
  * Represents integers that don't equal `0`.
  *
  * @constructor Returns the [value] as a non-zero int, or throws an
- * [IllegalArgumentException] if this [value] equals `0`.
+ * [IllegalArgumentException] if the [value] equals `0`.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")

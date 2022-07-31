@@ -61,7 +61,7 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
  * Represents positive integers, including `0`.
  *
  * @constructor Returns the [value] as a positive int, or throws an
- * [IllegalArgumentException] if this [value] is strictly negative.
+ * [IllegalArgumentException] if the [value] is strictly negative.
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
