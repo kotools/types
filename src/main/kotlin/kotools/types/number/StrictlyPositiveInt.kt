@@ -12,8 +12,8 @@ public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
 
 /**
- * Returns this value as a strictly positive int or `null` if this value is
- * negative.
+ * Returns this value as a strictly positive int, or returns `null` if this
+ * value is negative.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
@@ -43,7 +43,7 @@ public infix operator fun Int.div(other: StrictlyPositiveInt): Int =
     this / other.value
 
 /**
- * Represents strictly positive integers (excluding `0`).
+ * Represents strictly positive integers, excluding `0`.
  *
  * @constructor Returns the [value] as a strictly positive int, or throws an
  * [IllegalArgumentException] if this [value] is negative.
@@ -57,6 +57,12 @@ public value class StrictlyPositiveInt(
         require(value > 0) { "Given value shouldn't be negative." }
     }
 
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
     override fun compareTo(other: StrictlyPositiveInt): Int =
         value.compareTo(other.value)
 
@@ -183,7 +189,7 @@ public value class StrictlyPositiveInt(
         NegativeInt(value / other.value)
 
     /**
-     * Returns this [value] incremented by one.
+     * Returns this [value] incremented by `1`.
      * If this [value] is the [maximum][StrictlyPositiveInt.max], it returns the
      * [minimum][StrictlyPositiveInt.min] value instead.
      */
@@ -191,7 +197,7 @@ public value class StrictlyPositiveInt(
     else StrictlyPositiveInt(value + 1)
 
     /**
-     * Returns this [value] decremented by one.
+     * Returns this [value] decremented by `1`.
      * If this [value] is the [minimum][StrictlyPositiveInt.min], it returns the
      * [maximum][StrictlyPositiveInt.max] value instead.
      */
@@ -206,15 +212,15 @@ public value class StrictlyPositiveInt(
         StrictlyNegativeInt(-value)
 
     public companion object {
-        /** The minimum value an instance of [StrictlyPositiveInt] can have. */
+        /** The minimum value of a strictly positive int. */
         public val min: StrictlyPositiveInt = StrictlyPositiveInt(1)
 
-        /** The maximum value an instance of [StrictlyPositiveInt] can have. */
+        /** The maximum value of a strictly positive int. */
         public val max: StrictlyPositiveInt = StrictlyPositiveInt(Int.MAX_VALUE)
 
         /**
-         * Returns the [value] as a [StrictlyPositiveInt] or `null` if it's
-         * negative.
+         * Returns the [value] as a strictly positive int, or returns `null` if
+         * the [value] is negative.
          */
         public infix fun orNull(value: Int): StrictlyPositiveInt? = try {
             StrictlyPositiveInt(value)
