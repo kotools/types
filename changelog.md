@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file.
 
 - Fix the documentation of version 1.1
   ([#51](https://github.com/kotools/types/issues/51)).
+- Fix usages of `@Throws` annotation
+  ([#57](https://github.com/kotools/types/issues/57)).
 
 ## Version 1.1.0 - 2022/07/09
 
