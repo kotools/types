@@ -13,8 +13,8 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
 
 /**
- * Returns this value as a strictly negative int, or `null` if this value is
- * positive.
+ * Returns this value as a strictly negative int, or returns `null` if this
+ * value is positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
