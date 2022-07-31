@@ -55,9 +55,9 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
-public value class StrictlyPositiveInt(
-    public val value: Int
-) : Comparable<StrictlyPositiveInt> {
+public value class StrictlyPositiveInt
+@Throws(IllegalArgumentException::class)
+public constructor(public val value: Int) : Comparable<StrictlyPositiveInt> {
     init {
         require(value > 0) { "Given value shouldn't be negative." }
     }

@@ -26,6 +26,7 @@ public infix operator fun Int.times(other: NegativeInt): Int =
  * Throws an [ArithmeticException] if the [other] value equals `0`.
  */
 @SinceKotoolsTypes("1.1")
+@Throws(ArithmeticException::class)
 public infix operator fun Int.div(other: NegativeInt): Int = this / other.value
 
 // ---------- Conversions ----------
@@ -43,7 +44,6 @@ public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
  * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
-@Throws(IllegalArgumentException::class)
 public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
 
 /**
@@ -54,9 +54,9 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
-public value class NegativeInt(
-    public val value: Int
-) : Comparable<NegativeInt> {
+public value class NegativeInt
+@Throws(IllegalArgumentException::class)
+public constructor(public val value: Int) : Comparable<NegativeInt> {
     init {
         require(value <= 0) { "Given value shouldn't be strictly positive." }
     }
@@ -299,7 +299,6 @@ public value class NegativeInt(
      * Returns this [value] as a positive int, or returns `null` if this [value]
      * is strictly negative.
      */
-    @Throws(IllegalArgumentException::class)
     public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
 
     override fun toString(): String = value.toString()
