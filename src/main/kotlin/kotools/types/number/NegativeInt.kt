@@ -11,8 +11,8 @@ import kotools.types.annotations.SinceKotoolsTypes
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
- * Returns this value as a negative int or `null` if this value is strictly
- * positive.
+ * Returns this value as a negative int, or returns `null` if this value is
+ * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
