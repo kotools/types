@@ -70,7 +70,7 @@ public constructor(public val value: Int) : Comparable<StrictlyPositiveInt> {
     override fun toString(): String = value.toString()
 
     /**
-     * Returns the string representation of this [value] as a [NotBlankString].
+     * Returns the string representation of this [value] as a not blank string.
      */
     @SinceKotoolsTypes("1.2")
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())

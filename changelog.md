@@ -28,6 +28,9 @@ All notable changes to this project will be documented in this file.
   ([#51](https://github.com/kotools/types/issues/51)).
 - Fix usages of `@Throws` annotation
   ([#57](https://github.com/kotools/types/issues/57)).
+- Fix the documentation of declarations in `kotools.types.string` and of
+  `toNotBlankString` functions in `kotools.types.number`
+  ([#52](https://github.com/kotools/types/issues/52)).
 
 ## Version 1.2.0 - 2022/07/11
 
