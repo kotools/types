@@ -106,6 +106,9 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
 
     // ---------- Conversions ----------
 
-    /** Returns the string representation of this list as a not blank string. */
+    /**
+     * Returns the string representation of this collection as a not blank
+     * string.
+     */
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 }
