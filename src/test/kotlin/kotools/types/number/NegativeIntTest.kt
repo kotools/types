@@ -525,6 +525,17 @@ class NegativeIntTest {
         }
 
         @Test
+        fun `should return 0 when comparing an int with the same negative int`() {
+            // GIVEN
+            val x = 0
+            val y = NegativeInt(x)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
         fun `should return a negative number with a greater int`() {
             // GIVEN
             val x = NegativeInt(0)
@@ -536,10 +547,32 @@ class NegativeIntTest {
         }
 
         @Test
+        fun `should return a negative number when comparing an int with a greater negative int`() {
+            // GIVEN
+            val x = -1
+            val y = NegativeInt(0)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
         fun `should return a positive number with a less int`() {
             // GIVEN
             val x = NegativeInt(0)
             val y = -10
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        @Test
+        fun `should return a positive number when comparing an int with a less negative int`() {
+            // GIVEN
+            val x = 0
+            val y = NegativeInt(-10)
             // WHEN
             val result: Int = x compareTo y
             // THEN
