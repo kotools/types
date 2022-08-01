@@ -19,8 +19,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Overload `Int` comparisons with `StrictlyPositiveInt` and `NegativeInt`
-  ([#48](https://github.com/kotools/types/issues/48)).
+- Overload `Int` comparisons with `StrictlyPositiveInt`, `NegativeInt` and
+  `StrictlyNegativeInt` ([#48](https://github.com/kotools/types/issues/48)).
 
 ### Changed
 
