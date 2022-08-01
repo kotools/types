@@ -151,13 +151,26 @@ class NotBlankStringTest {
 
     @Nested
     inner class CompareTo {
+        // ---------- String ----------
+
         @Test
         fun `should return 0 with the same string`() {
             // GIVEN
             val string = NotBlankString("a")
-            val other = NotBlankString("a")
+            val other: String = string.value
             // WHEN
-            val result: Int = string.compareTo(other)
+            val result: Int = string compareTo other
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return 0 when comparing a string with the same not blank string`() {
+            // GIVEN
+            val string = "a"
+            val other = NotBlankString(string)
+            // WHEN
+            val result: Int = string compareTo other
             // THEN
             result assertEquals 0
         }
@@ -166,9 +179,20 @@ class NotBlankStringTest {
         fun `should return a negative number with a greater string lexicographically`() {
             // GIVEN
             val string = NotBlankString("a")
+            val other = "z"
+            // WHEN
+            val result: Int = string compareTo other
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a negative number when comparing a string with a greater not blank string lexicographically`() {
+            // GIVEN
+            val string = "a"
             val other = NotBlankString("z")
             // WHEN
-            val result: Int = string.compareTo(other)
+            val result: Int = string compareTo other
             // THEN
             assertTrue { result < 0 }
         }
@@ -177,9 +201,55 @@ class NotBlankStringTest {
         fun `should return a positive number with a less string lexicographically`() {
             // GIVEN
             val string = NotBlankString("z")
+            val other = "a"
+            // WHEN
+            val result: Int = string compareTo other
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        @Test
+        fun `should return a positive number when comparing a string with a less not blank string lexicographically`() {
+            // GIVEN
+            val string = "z"
             val other = NotBlankString("a")
             // WHEN
-            val result: Int = string.compareTo(other)
+            val result: Int = string compareTo other
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- NotBlankString ----------
+
+        @Test
+        fun `should return 0 with the same not blank string`() {
+            // GIVEN
+            val string = NotBlankString("a")
+            val other = NotBlankString("a")
+            // WHEN
+            val result: Int = string compareTo other
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater not blank string lexicographically`() {
+            // GIVEN
+            val string = NotBlankString("a")
+            val other = NotBlankString("z")
+            // WHEN
+            val result: Int = string compareTo other
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less not blank string lexicographically`() {
+            // GIVEN
+            val string = NotBlankString("z")
+            val other = NotBlankString("a")
+            // WHEN
+            val result: Int = string compareTo other
             // THEN
             assertTrue { result > 0 }
         }

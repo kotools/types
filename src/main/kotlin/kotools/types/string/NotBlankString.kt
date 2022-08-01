@@ -4,6 +4,18 @@ import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 
+// ---------- Comparisons ----------
+
+/**
+ * Compares this value lexicographically with the [other] value for order.
+ * Returns `0` if this value equals the [other] value, a negative number if this
+ * value is less than the [other] value, or a positive number if this value is
+ * greater than the [other] value.
+ */
+@SinceKotoolsTypes("2.0")
+public infix operator fun String.compareTo(other: NotBlankString): Int =
+    compareTo(other.value)
+
 // ---------- Conversions ----------
 
 /**
@@ -32,7 +44,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
 @SinceKotoolsTypes("1.2")
 public value class NotBlankString
 @Throws(IllegalArgumentException::class)
-public constructor(public val value: String) : Comparable<NotBlankString> {
+public constructor(public val value: String) : Comparable<String> {
     init {
         require(value.isNotBlank()) { "Given value shouldn't be blank." }
     }
@@ -83,8 +95,17 @@ public constructor(public val value: String) : Comparable<NotBlankString> {
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    override fun compareTo(other: NotBlankString): Int =
-        value.compareTo(other.value)
+    @SinceKotoolsTypes("2.0")
+    override infix fun compareTo(other: String): Int = value.compareTo(other)
+
+    /**
+     * Compares this [value] lexicographically with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    public infix operator fun compareTo(other: NotBlankString): Int =
+        compareTo(other.value)
 
     // ---------- Conversions ----------
 

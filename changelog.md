@@ -21,11 +21,15 @@ All notable changes to this project will be documented in this file.
 
 - Overload `Int` comparisons with `StrictlyPositiveInt`, `NegativeInt` and
   `StrictlyNegativeInt` ([#48](https://github.com/kotools/types/issues/48)).
+- Add comparisons between `String` and `NotBlankString`
+  ([#58](https://github.com/kotools/types/issues/58)).
 
 ### Changed
 
 - Integer's types in `kotools.types.number` now implements `Comparable<Int>`
   ([#48](https://github.com/kotools/types/issues/48)).
+- The type `NotBlankString` now implements `Comparable<String>`
+  ([#58](https://github.com/kotools/types/issues/58)).
 
 ### Removed
 
