@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 1.1.1 - 2022/08/01
+
 ### Fixed
 
 - Fix the documentation of version 1.1

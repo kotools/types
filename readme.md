@@ -35,13 +35,13 @@ StrictlyNegativeInt orNull -2
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:types:1.1.0")
+implementation("io.github.kotools:types:1.1.1")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:types:1.1.0'
+implementation 'io.github.kotools:types:1.1.1'
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ implementation 'io.github.kotools:types:1.1.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>types</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
