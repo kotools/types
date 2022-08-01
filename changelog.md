@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
   types in `io.github.kotools.types.int`
   ([#45](https://github.com/kotools/types/issues/45)).
 
+## Version 1.3.1 - 2022/08/01
+
 ### Fixed
 
 - Fix the documentation of `NotEmptyList` and `NotEmptySet` types
