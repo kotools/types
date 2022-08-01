@@ -57,7 +57,7 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt
 @Throws(IllegalArgumentException::class)
-public constructor(public val value: Int) : Comparable<StrictlyPositiveInt> {
+public constructor(public val value: Int) : Comparable<Int> {
     init {
         require(value > 0) { "Given value shouldn't be negative." }
     }
@@ -209,8 +209,7 @@ public constructor(public val value: Int) : Comparable<StrictlyPositiveInt> {
      * this [value] is greater than the [other] value.
      */
     @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: Int): Int =
-        value.compareTo(other)
+    override infix fun compareTo(other: Int): Int = value.compareTo(other)
 
     /**
      * Compares this [value] with the [other] value for order.
@@ -238,7 +237,7 @@ public constructor(public val value: Int) : Comparable<StrictlyPositiveInt> {
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    override infix fun compareTo(other: StrictlyPositiveInt): Int =
+    public infix operator fun compareTo(other: StrictlyPositiveInt): Int =
         compareTo(other.value)
 
     /**

@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Changed
+
+- Integer's types in `kotools.types.number` now implements `Comparable<Int>`
+  ([#48](https://github.com/kotools/types/issues/48)).
+
 ### Removed
 
 - Remove the old `io.github.kotools.types.string.NotBlankString` type and its

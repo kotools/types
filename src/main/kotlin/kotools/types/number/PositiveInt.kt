@@ -68,7 +68,7 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
 @SinceKotoolsTypes("1.1")
 public value class PositiveInt
 @Throws(IllegalArgumentException::class)
-public constructor(public val value: Int) : Comparable<PositiveInt> {
+public constructor(public val value: Int) : Comparable<Int> {
     init {
         require(value >= 0) { "Given value shouldn't be strictly negative." }
     }
@@ -221,8 +221,7 @@ public constructor(public val value: Int) : Comparable<PositiveInt> {
      * this [value] is greater than the [other] value.
      */
     @SinceKotoolsTypes("1.3")
-    public infix operator fun compareTo(other: Int): Int =
-        value.compareTo(other)
+    override infix fun compareTo(other: Int): Int = value.compareTo(other)
 
     /**
      * Compares this [value] with the [other] value for order.
@@ -240,7 +239,7 @@ public constructor(public val value: Int) : Comparable<PositiveInt> {
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    override infix fun compareTo(other: PositiveInt): Int =
+    public infix operator fun compareTo(other: PositiveInt): Int =
         compareTo(other.value)
 
     /**
