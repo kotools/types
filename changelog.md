@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
 - Fix the documentation of declarations in `kotools.types.string` and of
   `toNotBlankString` functions in `kotools.types.number`
   ([#52](https://github.com/kotools/types/issues/52)).
+- Fix the documentation of comparisons in `kotools.types.number` and of
+  `NotEmptyCollection` ([#49](https://github.com/kotools/types/issues/49)).
 
 ## Version 1.3.0 - 2022/07/27
 

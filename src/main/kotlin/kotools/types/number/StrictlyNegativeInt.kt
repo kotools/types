@@ -208,27 +208,27 @@ public constructor(public val value: Int) : Comparable<StrictlyNegativeInt> {
     // ---------- Comparisons ----------
 
     /**
-     * Compares this strictly negative int with [other] for order.
-     * Returns `0` if this strictly negative int equals [other], a negative
-     * number if it's less than [other], or a positive number if it's greater
-     * than [other].
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
      */
     @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: Int): Int =
         value.compareTo(other)
 
     /**
-     * Compares this strictly negative int with [other] for order.
-     * Returns `0` if this strictly negative int equals [other], a negative
-     * number if it's less than [other], or a positive number if it's greater
-     * than [other].
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
      */
     @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: NonZeroInt): Int =
         compareTo(other.value)
 
     /**
-     * Compares this strictly negative int with [other] and returns a negative
+     * Compares this [value] with the [other] value and returns a negative
      * number for order.
      */
     @SinceKotoolsTypes("1.3")
@@ -236,7 +236,7 @@ public constructor(public val value: Int) : Comparable<StrictlyNegativeInt> {
         compareTo(other.value)
 
     /**
-     * Compares this strictly negative int with [other] and returns a negative
+     * Compares this [value] with the [other] value and returns a negative
      * number for order.
      */
     @SinceKotoolsTypes("1.3")
@@ -244,10 +244,10 @@ public constructor(public val value: Int) : Comparable<StrictlyNegativeInt> {
         compareTo(other.value)
 
     /**
-     * Compares this strictly negative int with [other] for order.
-     * Returns `0` if this strictly negative int equals [other], a negative
-     * number if it's less than [other], or a positive number if it's greater
-     * than [other].
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
      */
     @SinceKotoolsTypes("1.3")
     public infix operator fun compareTo(other: NegativeInt): Int =
