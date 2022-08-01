@@ -493,6 +493,17 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
+        fun `should return 0 when comparing an int with the same strictly positive int`() {
+            // GIVEN
+            val x = 1
+            val y = StrictlyPositiveInt(x)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
         fun `should return a negative number with a greater int`() {
             // GIVEN
             val x = StrictlyPositiveInt(1)
@@ -504,10 +515,32 @@ class StrictlyPositiveIntTest {
         }
 
         @Test
+        fun `should return a negative number when comparing an int with a greater strictly positive int`() {
+            // GIVEN
+            val x = 1
+            val y = StrictlyPositiveInt(10)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result < 0 }
+        }
+
+        @Test
         fun `should return a positive number with a less int`() {
             // GIVEN
             val x = StrictlyPositiveInt(1)
             val y = 0
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            assertTrue { result > 0 }
+        }
+
+        @Test
+        fun `should return a positive number when comparing an int with a less strictly positive int`() {
+            // GIVEN
+            val x = 10
+            val y = StrictlyPositiveInt(1)
             // WHEN
             val result: Int = x compareTo y
             // THEN

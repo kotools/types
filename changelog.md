@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Comparisons between `Int` and `StrictlyPositiveInt`
+  ([#48](https://github.com/kotools/types/issues/48)).
+
 ### Changed
 
 - Integer's types in `kotools.types.number` now implements `Comparable<Int>`
