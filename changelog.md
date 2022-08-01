@@ -34,15 +34,20 @@ All notable changes to this project will be documented in this file.
 
 - Fix the documentation of `NotEmptyList` and `NotEmptySet` types
   ([#46](https://github.com/kotools/types/issues/46)).
-- Fix the documentation of version 1.1
-  ([#51](https://github.com/kotools/types/issues/51)).
-- Fix usages of `@Throws` annotation
-  ([#57](https://github.com/kotools/types/issues/57)).
 - Fix the documentation of declarations in `kotools.types.string` and of
   `toNotBlankString` functions in `kotools.types.number`
   ([#52](https://github.com/kotools/types/issues/52)).
 - Fix the documentation of comparisons in `kotools.types.number` and of
   `NotEmptyCollection` ([#49](https://github.com/kotools/types/issues/49)).
+
+## Version 1.1.1 - 2022/08/01
+
+### Fixed
+
+- Fix the documentation of version 1.1
+  ([#51](https://github.com/kotools/types/issues/51)).
+- Fix usages of `@Throws` annotation
+  ([#57](https://github.com/kotools/types/issues/57)).
 
 ## Version 1.3.0 - 2022/07/27
 
