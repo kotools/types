@@ -26,33 +26,43 @@ java {
     withSourcesJar()
 }
 
-tasks {
-    compileJava { enabled = false }
-    compileTestJava { enabled = false }
-    jar {
-        manifest.attributes(
-            "Implementation-Title" to project.name,
-            "Implementation-Version" to project.version
-        )
-    }
-    val dokkaOutputDir = "$buildDir/dokka"
-    dokkaHtml { outputDirectory.set(file(dokkaOutputDir)) }
-    val cleanDokkaOutput =
-        register<Delete>("cleanDokkaOutput") { delete(dokkaOutputDir) }
-    val javadocJar = register<Jar>("javadocJar") {
-        dependsOn(cleanDokkaOutput, dokkaHtml)
-        archiveClassifier.set("javadoc")
-        from(dokkaOutputDir)
-    }
-    assemble { dependsOn += javadocJar }
-    test { enabled = false }
+// ---------- Tasks ----------
+
+tasks.compileJava { enabled = false }
+tasks.processResources { enabled = false }
+tasks.compileTestKotlin { enabled = false }
+tasks.compileTestJava { enabled = false }
+tasks.processTestResources { enabled = false }
+tasks.testClasses { enabled = false }
+tasks.test { enabled = false }
+
+tasks.jar {
+    fun key(suffix: String): String = "Implementation-$suffix"
+    val name: Pair<String, String> = key("Title") to project.name
+    val version: Pair<String, Any> = key("Version") to project.version
+    manifest.attributes(name, version)
 }
+
+val dokkaDirectory: File = buildDir.resolve("dokka")
+tasks.dokkaHtml { outputDirectory.set(dokkaDirectory) }
+val cleanDokkaHtml: TaskProvider<Delete> =
+    tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }
+
+val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
+    dependsOn(cleanDokkaHtml, tasks.dokkaHtml)
+    archiveClassifier.set("javadoc")
+    from(dokkaDirectory)
+}
+
+tasks.assemble { dependsOn(javadocJar) }
+
+// ---------- Publishing & signing ----------
 
 publishing {
     publications {
         create<MavenPublication>(project.name) {
             from(components["java"])
-            artifact(tasks.getByName("javadocJar"))
+            artifact(javadocJar)
             pom {
                 name.set("Kotools Assert")
                 description.set("Lightweight and elegant assertions library.")
@@ -74,8 +84,10 @@ publishing {
                 }
                 developers {
                     developer {
-                        name.set(System.getenv("GIT_USER"))
-                        email.set(System.getenv("GIT_EMAIL"))
+                        val gitUser: String? = System.getenv("GIT_USER")
+                        name.set(gitUser)
+                        val gitEmail: String? = System.getenv("GIT_EMAIL")
+                        email.set(gitEmail)
                     }
                 }
             }
@@ -92,8 +104,8 @@ publishing {
         }
         maven {
             name = "OSSRH"
-            val uri: String = if (version.toString().endsWith("SNAPSHOT"))
-                "content/repositories/snapshots/"
+            val isSnapshot: Boolean = version.toString().endsWith("SNAPSHOT")
+            val uri: String = if (isSnapshot) "content/repositories/snapshots/"
             else "service/local/staging/deploy/maven2/"
             url = uri("https://s01.oss.sonatype.org/$uri")
             credentials {
@@ -105,9 +117,8 @@ publishing {
 }
 
 signing {
-    useInMemoryPgpKeys(
-        System.getenv("GPG_PRIVATE_KEY"),
-        System.getenv("GPG_PASSWORD")
-    )
+    val secretKey: String? = System.getenv("GPG_PRIVATE_KEY")
+    val password: String? = System.getenv("GPG_PASSWORD")
+    useInMemoryPgpKeys(secretKey, password)
     sign(publishing.publications)
 }
