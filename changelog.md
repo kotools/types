@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Create and apply the `@SinceKotoolsAssert` annotation on every declaration
+  ([#16](https://github.com/kotools/assert/issues/16)).
+
 ## Version 2.0.0 - 2022/04/11
 
 ### Removed
