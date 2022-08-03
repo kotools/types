@@ -1,11 +1,13 @@
 package kotools.assert
 
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+
 /** Asserts that this value equals the [other] value. */
 @SinceKotoolsAssert("2.1")
-public infix fun <T> T.assertEquals(other: T): Unit =
-    kotlin.test.assertEquals(other, this)
+public infix fun <T> T.assertEquals(other: T): Unit = assertEquals(other, this)
 
 /** Asserts that this value is not equal to the [other] value. */
 @SinceKotoolsAssert("2.1")
 public infix fun <T> T.assertNotEquals(other: T): Unit =
-    kotlin.test.assertNotEquals(other, this)
+    assertNotEquals(other, this)
