@@ -23,6 +23,8 @@ All notable changes to this project will be documented in this file.
   ([#16](https://github.com/kotools/assert/issues/16)).
 - Add boolean, nullability, equality and failure assertions in the
   `kotools.assert` package ([#15](https://github.com/kotools/assert/issues/15)).
+- Add `@Test` and `@Nested` annotations
+  ([#20](https://github.com/kotools/assert/issues/20)).
 
 ### Deprecated
 
