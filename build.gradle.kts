@@ -17,6 +17,9 @@ dependencies {
     // Kotlin
     implementation(platform(kotlin("bom")))
     implementation(kotlin("test"))
+
+    // JUnit
+    implementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict

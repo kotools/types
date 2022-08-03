@@ -21,12 +21,12 @@ All notable changes to this project will be documented in this file.
 
 - Create and apply the `@SinceKotoolsAssert` annotation on every declaration
   ([#16](https://github.com/kotools/assert/issues/16)).
-- Add boolean, nullability and equality assertions in the `kotools.assert`
-  package ([#15](https://github.com/kotools/assert/issues/15)).
+- Add boolean, nullability, equality and failure assertions in the
+  `kotools.assert` package ([#15](https://github.com/kotools/assert/issues/15)).
 
 ### Deprecated
 
-- Deprecate nullability and equality assertions in the
+- Deprecate nullability, equality and failure assertions in the
   `io.github.kotools.assert` package
   ([#15](https://github.com/kotools/assert/issues/15)).
 
