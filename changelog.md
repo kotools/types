@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file.
 
 - Create and apply the `@SinceKotoolsAssert` annotation on every declaration
   ([#16](https://github.com/kotools/assert/issues/16)).
+- Add boolean assertions in `kotools.assert`
+  ([#15](https://github.com/kotools/assert/issues/15)).
 
 ## Version 2.0.0 - 2022/04/11
 
