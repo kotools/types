@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 2.1.0 - 2022/08/03
+
 ### Added
 
 - Create and apply the `@SinceKotoolsAssert` annotation on every declaration

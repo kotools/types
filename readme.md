@@ -7,28 +7,17 @@ Kotools Assert is a lightweight assertions library for [Kotlin].
 
 ```kotlin
 1 assertEquals 1
-1.assertEquals(1, "1 should be equal to 1")
-
 2 assertNotEquals 0
-2.assertNotEquals(0, "2 shouldn't be equal to 0")
 
 assertNull { null }
-assertNull("result should be null") { null }
 null.assertNull()
-null assertNull "result should be null"
 
 assertNotNull { 3 }
-assertNotNull("result shouldn't be null") { 3 }
 3.assertNotNull()
-3 assertNotNull "result shouldn't be null"
 
+assertPass { println("Hello") }
 assertFails { throw Exception() }
-assertFails("Should fail") { throw Exception() }
-
 assertFailsWith<RuntimeException> { throw RuntimeException() }
-assertFailsWith<RuntimeException>("Should fail with RuntimeException") {
-    throw RuntimeException()
-}
 ```
 
 [kotlin]: https://kotlinlang.org
@@ -40,13 +29,13 @@ assertFailsWith<RuntimeException>("Should fail with RuntimeException") {
 #### Kotlin DSL
 
 ```kotlin
-testImplementation("io.github.kotools:assert:2.0.0")
+testImplementation("io.github.kotools:assert:2.1.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-testImplementation 'io.github.kotools:assert:2.0.0'
+testImplementation 'io.github.kotools:assert:2.1.0'
 ```
 
 ### Maven
@@ -55,7 +44,7 @@ testImplementation 'io.github.kotools:assert:2.0.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>assert</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <scope>test</scope>
 </dependency>
 ```
