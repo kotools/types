@@ -70,6 +70,13 @@ Feel free to contribute to the project with
 [issues](https://github.com/kotools/types/issues) and
 [pull requests](https://github.com/kotools/types/pulls).
 
+This project follows the [Conventional Commits][conventional-commits] guidelines
+for committing with Git.
+Please read [the specifications][conventional-commits] before committing to this
+project.
+
+[conventional-commits]: https://www.conventionalcommits.org/en/v1.0.0/
+
 ## License
 
 This project is licensed under the
