@@ -1,14 +1,7 @@
 package kotools.types.string
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.number.PositiveInt
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class NotBlankStringTest {
     @Nested
@@ -18,8 +11,7 @@ class NotBlankStringTest {
             // GIVEN
             val value = "hello"
             // WHEN
-            val result: NotBlankString =
-                assertDoesNotThrow { NotBlankString(value) }
+            val result: NotBlankString = assertPass { NotBlankString(value) }
             // THEN
             result.value assertEquals value
             result.length.value assertEquals value.length
@@ -90,7 +82,7 @@ class NotBlankStringTest {
             val string = NotBlankString("hello")
             val index = PositiveInt(0)
             // WHEN
-            val result: Char = assertDoesNotThrow { string[index] }
+            val result: Char = assertPass { string[index] }
             // THEN
             result assertEquals 'h'
             result assertEquals string.first
