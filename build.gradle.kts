@@ -20,7 +20,7 @@ dependencies {
     testImplementation(kotlin("test"))
 
     // Kotools
-    testImplementation("io.github.kotools", "assert", "[2.0,2.1[")
+    testImplementation("io.github.kotools:assert:[2.1,2.2[")
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict
