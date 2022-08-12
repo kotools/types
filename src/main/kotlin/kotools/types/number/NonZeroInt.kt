@@ -48,11 +48,28 @@ public infix operator fun Int.compareTo(other: NonZeroInt): Int =
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
 /**
+ * Returns this value as a non-zero int.
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents `0`.
+ */
+@SinceKotoolsTypes("2.1")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toNonZeroInt(): NonZeroInt = toInt().toNonZeroInt()
+
+/**
  * Returns this value as a non-zero int, or returns `null` if this value equals
  * `0`.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
+
+/**
+ * Returns this value as a non-zero int, or returns `null` if this value is not
+ * a valid representation of a number or if it represents `0`.
+ */
+@SinceKotoolsTypes("2.1")
+public fun String.toNonZeroIntOrNull(): NonZeroInt? =
+    toIntOrNull()?.toNonZeroIntOrNull()
 
 /**
  * Represents integers that don't equal `0`.

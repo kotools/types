@@ -1,8 +1,7 @@
 package kotools.types.string
 
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.number.PositiveInt
-import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.*
 
 // ---------- Comparisons ----------
 
@@ -108,6 +107,23 @@ public constructor(public val value: String) : Comparable<String> {
         compareTo(other.value)
 
     // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a non-zero int.
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents `0`.
+     */
+    @SinceKotoolsTypes("2.1")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+
+    /**
+     * Returns this [value] as a non-zero int, or returns `null` if this [value]
+     * is not a valid representation of a number or if it represents `0`.
+     */
+    @SinceKotoolsTypes("2.1")
+    public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
 
     override fun toString(): String = value
 
