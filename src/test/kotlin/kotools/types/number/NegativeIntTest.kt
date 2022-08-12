@@ -1,14 +1,7 @@
 package kotools.types.number
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.string.NotBlankString
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class NegativeIntTest {
     @Nested
@@ -18,7 +11,7 @@ class NegativeIntTest {
             // GIVEN
             val value = 0
             // WHEN
-            val result: NegativeInt = assertDoesNotThrow { NegativeInt(value) }
+            val result: NegativeInt = assertPass { NegativeInt(value) }
             // THEN
             result.value assertEquals value
         }
@@ -28,7 +21,7 @@ class NegativeIntTest {
             // GIVEN
             val value = -1
             // WHEN
-            val result: NegativeInt = assertDoesNotThrow { NegativeInt(value) }
+            val result: NegativeInt = assertPass { NegativeInt(value) }
             // THEN
             result.value assertEquals value
         }
@@ -399,7 +392,7 @@ class NegativeIntTest {
             val x = NegativeInt(-4)
             val y = 2
             // WHEN
-            val result: Int = assertDoesNotThrow { x / y }
+            val result: Int = assertPass { x / y }
             // THEN
             result assertEquals -2
         }
@@ -419,7 +412,7 @@ class NegativeIntTest {
             val x = 4
             val y = NegativeInt(-2)
             // WHEN
-            val result: Int = assertDoesNotThrow { x / y }
+            val result: Int = assertPass { x / y }
             // THEN
             result assertEquals -2
         }
@@ -450,7 +443,7 @@ class NegativeIntTest {
             val x = NegativeInt(-4)
             val y = PositiveInt(2)
             // WHEN
-            val result: NegativeInt = assertDoesNotThrow { x / y }
+            val result: NegativeInt = assertPass { x / y }
             // THEN
             result.value assertEquals -2
         }
@@ -481,7 +474,7 @@ class NegativeIntTest {
             val x = NegativeInt(-4)
             val y = NegativeInt(-2)
             // WHEN
-            val result: PositiveInt = assertDoesNotThrow { x / y }
+            val result: PositiveInt = assertPass { x / y }
             // THEN
             result.value assertEquals 2
         }
@@ -732,7 +725,7 @@ class NegativeIntTest {
             val value = -1
             val x = NegativeInt(value)
             // WHEN
-            val result: NonZeroInt = assertDoesNotThrow(x::toNonZeroInt)
+            val result: NonZeroInt = assertPass(x::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -778,7 +771,7 @@ class NegativeIntTest {
             val value = 0
             val x = NegativeInt(value)
             // WHEN
-            val result: PositiveInt = assertDoesNotThrow(x::toPositiveInt)
+            val result: PositiveInt = assertPass(x::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -825,7 +818,7 @@ class NegativeIntTest {
             val x = NegativeInt(value)
             // WHEN
             val result: StrictlyNegativeInt =
-                assertDoesNotThrow(x::toStrictlyNegativeInt)
+                assertPass(x::toStrictlyNegativeInt)
             // THEN
             result.value assertEquals value
         }

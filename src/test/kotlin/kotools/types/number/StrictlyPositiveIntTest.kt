@@ -1,14 +1,7 @@
 package kotools.types.number
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.string.NotBlankString
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class StrictlyPositiveIntTest {
     @Nested
@@ -19,7 +12,7 @@ class StrictlyPositiveIntTest {
             val value = 1
             // WHEN
             val result: StrictlyPositiveInt =
-                assertDoesNotThrow { StrictlyPositiveInt(value) }
+                assertPass { StrictlyPositiveInt(value) }
             // THEN
             result.value assertEquals value
         }
@@ -376,7 +369,7 @@ class StrictlyPositiveIntTest {
             val x = StrictlyPositiveInt(3)
             val y = -1
             // WHEN
-            val result: Int = assertDoesNotThrow { x / y }
+            val result: Int = assertPass { x / y }
             // THEN
             result assertEquals -3
         }
@@ -418,7 +411,7 @@ class StrictlyPositiveIntTest {
             val x = StrictlyPositiveInt(3)
             val y = PositiveInt(4)
             // WHEN
-            val result: PositiveInt = assertDoesNotThrow { x / y }
+            val result: PositiveInt = assertPass { x / y }
             // THEN
             result.value assertEquals 0
         }
@@ -449,7 +442,7 @@ class StrictlyPositiveIntTest {
             val x = StrictlyPositiveInt(3)
             val y = NegativeInt(-1)
             // WHEN
-            val result: NegativeInt = assertDoesNotThrow { x / y }
+            val result: NegativeInt = assertPass { x / y }
             // THEN
             result.value assertEquals -3
         }

@@ -1,14 +1,7 @@
 package kotools.types.number
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.string.NotBlankString
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class NonZeroIntTest {
     @Nested
@@ -18,7 +11,7 @@ class NonZeroIntTest {
             // GIVEN
             val x = 1
             // WHEN
-            val result: NonZeroInt = assertDoesNotThrow { NonZeroInt(x) }
+            val result: NonZeroInt = assertPass { NonZeroInt(x) }
             // THEN
             result.value assertEquals x
         }
@@ -28,7 +21,7 @@ class NonZeroIntTest {
             // GIVEN
             val x = -1
             // WHEN
-            val result: NonZeroInt = assertDoesNotThrow { NonZeroInt(x) }
+            val result: NonZeroInt = assertPass { NonZeroInt(x) }
             // THEN
             result.value assertEquals x
         }
@@ -419,7 +412,7 @@ class NonZeroIntTest {
             val x = NonZeroInt(1)
             val y = -2
             // WHEN
-            val result: Int = assertDoesNotThrow { x / y }
+            val result: Int = assertPass { x / y }
             // THEN
             result assertEquals 0
         }
@@ -461,7 +454,7 @@ class NonZeroIntTest {
             val x = NonZeroInt(-3)
             val y = PositiveInt(3)
             // WHEN
-            val result: Int = assertDoesNotThrow { x / y }
+            val result: Int = assertPass { x / y }
             // THEN
             result assertEquals -1
         }
@@ -492,7 +485,7 @@ class NonZeroIntTest {
             val x = NonZeroInt(-4)
             val y = NegativeInt(-2)
             // WHEN
-            val result: Int = assertDoesNotThrow { x / y }
+            val result: Int = assertPass { x / y }
             // THEN
             result assertEquals 2
         }
@@ -778,7 +771,7 @@ class NonZeroIntTest {
             val value = 1
             val x = NonZeroInt(value)
             // WHEN
-            val result: PositiveInt = assertDoesNotThrow(x::toPositiveInt)
+            val result: PositiveInt = assertPass(x::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -825,7 +818,7 @@ class NonZeroIntTest {
             val x = NonZeroInt(value)
             // WHEN
             val result: StrictlyPositiveInt =
-                assertDoesNotThrow(x::toStrictlyPositiveInt)
+                assertPass(x::toStrictlyPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -875,7 +868,7 @@ class NonZeroIntTest {
             val value = -1
             val x = NonZeroInt(value)
             // WHEN
-            val result: NegativeInt = assertDoesNotThrow(x::toNegativeInt)
+            val result: NegativeInt = assertPass(x::toNegativeInt)
             // THEN
             result.value assertEquals value
         }
@@ -922,7 +915,7 @@ class NonZeroIntTest {
             val x = NonZeroInt(value)
             // WHEN
             val result: StrictlyNegativeInt =
-                assertDoesNotThrow(x::toStrictlyNegativeInt)
+                assertPass(x::toStrictlyNegativeInt)
             // THEN
             result.value assertEquals value
         }
