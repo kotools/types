@@ -1,17 +1,9 @@
 package kotools.types.collections
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 
 class NotEmptyCollectionTest {
     // ---------- Query operations ----------
@@ -137,7 +129,7 @@ class NotEmptyCollectionTest {
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, 2)
             val index = PositiveInt(0)
             // WHEN
-            val element: Int = assertDoesNotThrow { collection[index] }
+            val element: Int = assertPass { collection[index] }
             // THEN
             element assertEquals collection.head
         }
@@ -149,7 +141,7 @@ class NotEmptyCollectionTest {
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
             val index = PositiveInt(1)
             // WHEN
-            val element: Int = assertDoesNotThrow { collection[index] }
+            val element: Int = assertPass { collection[index] }
             // THEN
             element assertEquals tail
         }
@@ -172,7 +164,7 @@ class NotEmptyCollectionTest {
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
             val index = StrictlyPositiveInt(1)
             // WHEN
-            val element: Int = assertDoesNotThrow { collection[index] }
+            val element: Int = assertPass { collection[index] }
             // THEN
             element assertEquals tail
         }

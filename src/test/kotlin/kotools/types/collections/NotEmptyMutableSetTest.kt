@@ -1,11 +1,6 @@
 package kotools.types.collections
 
-import io.github.kotools.assert.*
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotools.assert.*
 
 class NotEmptyMutableSetTest {
     @Nested
@@ -55,7 +50,7 @@ class NotEmptyMutableSetTest {
             val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
             val set: NotEmptyMutableSet<Int> =
-                assertDoesNotThrow(array::toNotEmptyMutableSet)
+                assertPass(array::toNotEmptyMutableSet)
             // THEN
             set.run {
                 head assertEquals array.first()
@@ -84,7 +79,7 @@ class NotEmptyMutableSetTest {
             val collection: Collection<String> = setOf("a", "a", "b", "c")
             // WHEN
             val set: NotEmptyMutableSet<String> =
-                assertDoesNotThrow(collection::toNotEmptyMutableSet)
+                assertPass(collection::toNotEmptyMutableSet)
             // THEN
             set.run {
                 head assertEquals collection.first()
@@ -306,7 +301,7 @@ class NotEmptyMutableSetTest {
             // WHEN
             val result: Boolean = set add element
             // THEN
-            assertFalse(result)
+            result.assertFalse()
             set.size assertEquals initialSize
         }
     }
@@ -353,7 +348,7 @@ class NotEmptyMutableSetTest {
             // WHEN
             val result: Boolean = set remove element
             // THEN
-            assertFalse(result)
+            result.assertFalse()
             set.run {
                 assertTrue { element in this }
                 size assertEquals initialSize
@@ -369,7 +364,7 @@ class NotEmptyMutableSetTest {
             // WHEN
             val result: Boolean = set remove element
             // THEN
-            assertFalse(result)
+            result.assertFalse()
             set.size assertEquals initialSize
         }
     }

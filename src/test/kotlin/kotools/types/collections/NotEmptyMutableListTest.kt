@@ -1,18 +1,9 @@
 package kotools.types.collections
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.indexOutOfBoundsMessage
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 class NotEmptyMutableListTest {
     @Nested
@@ -60,7 +51,7 @@ class NotEmptyMutableListTest {
             val index = 0
             val element = "one"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list.head assertEquals element
             list[index] assertEquals element
@@ -73,7 +64,7 @@ class NotEmptyMutableListTest {
             val index: Int = list.size
             val element = "two"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list[index] assertEquals element
         }
@@ -86,7 +77,7 @@ class NotEmptyMutableListTest {
             val index = 1
             val element = "two"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list[index] assertEquals element
         }
@@ -116,7 +107,7 @@ class NotEmptyMutableListTest {
             val index = PositiveInt(0)
             val element = "one"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             element.run {
                 assertEquals(list.head)
@@ -131,7 +122,7 @@ class NotEmptyMutableListTest {
             val index = PositiveInt(list.size)
             val element = "two"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list[index] assertEquals element
         }
@@ -144,7 +135,7 @@ class NotEmptyMutableListTest {
             val index = PositiveInt(1)
             val element = "two"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list[index] assertEquals element
         }
@@ -174,7 +165,7 @@ class NotEmptyMutableListTest {
             val index: StrictlyPositiveInt = list.typedSize
             val element = "two"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list[index] assertEquals element
         }
@@ -187,7 +178,7 @@ class NotEmptyMutableListTest {
             val index = StrictlyPositiveInt(1)
             val element = "two"
             // WHEN
-            assertDoesNotThrow { list.add(index, element) }
+            assertPass { list.add(index, element) }
             // THEN
             list[index] assertEquals element
         }
@@ -376,7 +367,7 @@ class NotEmptyMutableListTest {
             val list: NotEmptyMutableList<Int> = NotEmptyMutableList(head, 2)
             val index = 0
             // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
+            val element: Int = assertPass { list[index] }
             // THEN
             element assertEquals head
         }
@@ -388,7 +379,7 @@ class NotEmptyMutableListTest {
             val list: NotEmptyMutableList<Int> = NotEmptyMutableList(1, tail)
             val index = 1
             // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
+            val element: Int = assertPass { list[index] }
             // THEN
             element assertEquals tail
         }
@@ -415,7 +406,7 @@ class NotEmptyMutableListTest {
                 NotEmptyMutableList(head, "two")
             val index = 0
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element.run {
                 assertEquals(head)
@@ -431,7 +422,7 @@ class NotEmptyMutableListTest {
             val list: NotEmptyMutableList<String> = NotEmptyMutableList(head)
             val index = 0
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element.run {
                 assertEquals(head)
@@ -448,7 +439,7 @@ class NotEmptyMutableListTest {
                 NotEmptyMutableList("one", tail)
             val index: Int = list.size - 1
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element assertEquals tail
             assertFalse { element in list }
@@ -479,7 +470,7 @@ class NotEmptyMutableListTest {
                 NotEmptyMutableList(head, "two")
             val index = PositiveInt(0)
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element.run {
                 assertEquals(head)
@@ -494,7 +485,7 @@ class NotEmptyMutableListTest {
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
             val index = PositiveInt(0)
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element.run {
                 assertEquals(list.head)
@@ -510,7 +501,7 @@ class NotEmptyMutableListTest {
                 NotEmptyMutableList("one", tail)
             val index = PositiveInt(list.size - 1)
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element.run {
                 assertEquals(tail)
@@ -543,7 +534,7 @@ class NotEmptyMutableListTest {
                 NotEmptyMutableList("one", tail)
             val index = StrictlyPositiveInt(list.size - 1)
             // WHEN
-            val element: String = assertDoesNotThrow { list removeAt index }
+            val element: String = assertPass { list removeAt index }
             // THEN
             element.run {
                 assertEquals(tail)
@@ -729,7 +720,7 @@ class NotEmptyMutableListTest {
             val index = 0
             val element = "b"
             // WHEN
-            assertDoesNotThrow { list[index] = element }
+            assertPass { list[index] = element }
             // THEN
             element.run {
                 assertEquals(list[index])
@@ -745,7 +736,7 @@ class NotEmptyMutableListTest {
             val index = 1
             val element = "c"
             // WHEN
-            assertDoesNotThrow { list[index] = element }
+            assertPass { list[index] = element }
             // THEN
             list[index] assertEquals element
         }
@@ -775,7 +766,7 @@ class NotEmptyMutableListTest {
             val index = PositiveInt(0)
             val element = "b"
             // WHEN
-            assertDoesNotThrow { list[index] = element }
+            assertPass { list[index] = element }
             // THEN
             element.run {
                 assertEquals(list[index])
@@ -791,7 +782,7 @@ class NotEmptyMutableListTest {
             val index = PositiveInt(1)
             val element = "c"
             // WHEN
-            assertDoesNotThrow { list[index] = element }
+            assertPass { list[index] = element }
             // THEN
             list[index] assertEquals element
         }
@@ -822,7 +813,7 @@ class NotEmptyMutableListTest {
             val index = StrictlyPositiveInt(1)
             val element = "c"
             // WHEN
-            assertDoesNotThrow { list[index] = element }
+            assertPass { list[index] = element }
             // THEN
             list[index] assertEquals element
         }
@@ -979,7 +970,7 @@ class NotEmptyMutableListTest {
             val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
             val list: NotEmptyMutableList<Int> =
-                assertDoesNotThrow(array::toNotEmptyMutableList)
+                assertPass(array::toNotEmptyMutableList)
             // THEN
             list.run {
                 size assertEquals array.size
@@ -1008,7 +999,7 @@ class NotEmptyMutableListTest {
             val collection: Collection<Int> = listOf(1, 2, 3)
             // WHEN
             val list: NotEmptyMutableList<Int> =
-                assertDoesNotThrow(collection::toNotEmptyMutableList)
+                assertPass(collection::toNotEmptyMutableList)
             // THEN
             list.run {
                 size assertEquals collection.size

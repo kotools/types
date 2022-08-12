@@ -1,9 +1,6 @@
 package kotools.types.collections
 
-import io.github.kotools.assert.*
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
+import kotools.assert.*
 
 class NotEmptySetTest {
     @Nested
@@ -45,7 +42,7 @@ class NotEmptySetTest {
             val set: NotEmptySet<Int> = NotEmptySet(1)
             val index = 0
             // WHEN
-            val element: Int = assertDoesNotThrow { set[index] }
+            val element: Int = assertPass { set[index] }
             // THEN
             element assertEquals set.head
         }
@@ -57,7 +54,7 @@ class NotEmptySetTest {
             val set: NotEmptySet<Int> = NotEmptySet(1, *tail)
             val index = 1
             // WHEN
-            val element: Int = assertDoesNotThrow { set[index] }
+            val element: Int = assertPass { set[index] }
             // THEN
             element assertEquals tail[0]
         }
@@ -83,7 +80,7 @@ class NotEmptySetTest {
             // GIVEN
             val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
-            val set: NotEmptySet<Int> = assertDoesNotThrow(array::toNotEmptySet)
+            val set: NotEmptySet<Int> = assertPass(array::toNotEmptySet)
             // THEN
             set.run {
                 head assertEquals array.first()
@@ -109,8 +106,7 @@ class NotEmptySetTest {
             // GIVEN
             val collection: Collection<Int> = setOf(1, 1, 2, 3)
             // WHEN
-            val set: NotEmptySet<Int> =
-                assertDoesNotThrow(collection::toNotEmptySet)
+            val set: NotEmptySet<Int> = assertPass(collection::toNotEmptySet)
             // THEN
             set.run {
                 head assertEquals collection.first()

@@ -1,13 +1,6 @@
 package kotools.types.collections
 
-import io.github.kotools.assert.assertEquals
-import io.github.kotools.assert.assertNotEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.assertDoesNotThrow
-import kotlin.test.Test
-import kotlin.test.assertFailsWith
+import kotools.assert.*
 
 class NotEmptyListTest {
     @Nested
@@ -51,7 +44,7 @@ class NotEmptyListTest {
             val list: NotEmptyList<Int> = NotEmptyList(head, 2)
             val index = 0
             // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
+            val element: Int = assertPass { list[index] }
             // THEN
             element assertEquals head
         }
@@ -63,7 +56,7 @@ class NotEmptyListTest {
             val list: NotEmptyList<Int> = NotEmptyList(1, expectedElement)
             val index = 1
             // WHEN
-            val element: Int = assertDoesNotThrow { list[index] }
+            val element: Int = assertPass { list[index] }
             // THEN
             element assertEquals expectedElement
         }
@@ -87,8 +80,7 @@ class NotEmptyListTest {
             // GIVEN
             val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
-            val list: NotEmptyList<Int> =
-                assertDoesNotThrow(array::toNotEmptyList)
+            val list: NotEmptyList<Int> = assertPass(array::toNotEmptyList)
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals array[index]
@@ -113,8 +105,7 @@ class NotEmptyListTest {
             // GIVEN
             val collection: Collection<Int> = listOf(1, 2, 3)
             // WHEN
-            val list: NotEmptyList<Int> =
-                assertDoesNotThrow(collection::toNotEmptyList)
+            val list: NotEmptyList<Int> = assertPass(collection::toNotEmptyList)
             // THEN
             collection.forEachIndexed { index: Int, element: Int ->
                 element assertEquals list[index]
