@@ -125,6 +125,25 @@ public constructor(public val value: String) : Comparable<String> {
     @SinceKotoolsTypes("2.1")
     public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
 
+    /**
+     * Returns this [value] as a positive int.
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents a strictly negative number.
+     */
+    @SinceKotoolsTypes("2.1")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
+
+    /**
+     * Returns this [value] as a positive int, or returns `null` if this [value]
+     * is not a valid representation of a number or if it represents a strictly
+     * negative number.
+     */
+    @SinceKotoolsTypes("2.1")
+    public fun toPositiveIntOrNull(): PositiveInt? =
+        value.toPositiveIntOrNull()
+
     override fun toString(): String = value
 
     public companion object {
