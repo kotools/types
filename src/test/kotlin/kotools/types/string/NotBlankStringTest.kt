@@ -3,6 +3,7 @@ package kotools.types.string
 import kotools.assert.*
 import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 
 class NotBlankStringTest {
     @Nested
@@ -417,6 +418,78 @@ class NotBlankStringTest {
             val string = NotBlankString("-1")
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+    }
+
+    @Nested
+    inner class ToStrictlyPositiveInt {
+        @Test
+        fun `should pass with a string representation of 1`() {
+            // GIVEN
+            val value = 1
+            val string = NotBlankString("$value")
+            // WHEN
+            val result: StrictlyPositiveInt =
+                assertPass(string::toStrictlyPositiveInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with an invalid string`() {
+            // GIVEN
+            val string = NotBlankString("a")
+            // WHEN & THEN
+            assertFailsWith<NumberFormatException>(
+                string::toStrictlyPositiveInt
+            )
+        }
+
+        @Test
+        fun `should throw an error with a string representation of 0`() {
+            // GIVEN
+            val string = NotBlankString("0")
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                string::toStrictlyPositiveInt
+            )
+        }
+    }
+
+    @Nested
+    inner class ToStrictlyPositiveIntOrNull {
+        @Test
+        fun `should pass with a string representation of 1`() {
+            // GIVEN
+            val value = 1
+            val string = NotBlankString("$value")
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                string.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should return null with an invalid string`() {
+            // GIVEN
+            val string = NotBlankString("a")
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                string.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+
+        @Test
+        fun `should return null with a string representation of 0`() {
+            // GIVEN
+            val string = NotBlankString("0")
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                string.toStrictlyPositiveIntOrNull()
             // THEN
             result.assertNull()
         }
