@@ -1,5 +1,8 @@
 package kotools.types.number
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.*
 import kotools.types.string.NotBlankString
 
@@ -1069,5 +1072,28 @@ class NonZeroIntTest {
             // THEN
             result.value assertEquals value.toString()
         }
+    }
+}
+
+class NonZeroIntSerializerTest {
+    @Test
+    fun `should serialize properly the class`() {
+        // GIVEN
+        val x = NonZeroInt(10)
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals "$x"
+    }
+
+    @Test
+    fun `should deserialize properly the class`() {
+        // GIVEN
+        val x = NonZeroInt(10)
+        val encodedString: String = Json.encodeToString(x)
+        // WHEN
+        val result: NonZeroInt = Json.decodeFromString(encodedString)
+        // THEN
+        result.value assertEquals x.value
     }
 }

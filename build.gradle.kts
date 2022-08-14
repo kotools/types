@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
     kotlin("jvm") version embeddedKotlinVersion
+    kotlin("plugin.serialization") version embeddedKotlinVersion
     `java-library`
     id("org.jetbrains.dokka") version embeddedKotlinVersion
     `maven-publish`
@@ -17,6 +18,7 @@ repositories(RepositoryHandler::mavenCentral)
 dependencies {
     // Kotlin
     implementation(platform(kotlin("bom")))
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     testImplementation(kotlin("test"))
 
     // Kotools
