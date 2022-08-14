@@ -1,5 +1,12 @@
 package kotools.types.string
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.*
 
@@ -40,6 +47,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * [IllegalArgumentException] if the [value] is blank.
  */
 @JvmInline
+@Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("1.2")
 public value class NotBlankString
 @Throws(IllegalArgumentException::class)
@@ -216,4 +224,18 @@ public constructor(public val value: String) : Comparable<String> {
             null
         }
     }
+}
+
+@SinceKotoolsTypes("2.1")
+internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        NotBlankString::class.simpleName ?: "AnonymousNotBlankString",
+        PrimitiveKind.STRING
+    )
+
+    override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
+        encoder.encodeString(value.value)
+
+    override fun deserialize(decoder: Decoder): NotBlankString =
+        decoder.decodeString().toNotBlankString()
 }
