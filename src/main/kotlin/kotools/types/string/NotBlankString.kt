@@ -47,7 +47,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * [IllegalArgumentException] if the [value] is blank.
  */
 @JvmInline
-@Serializable(NotBlankStringSerializer::class)
+@Serializable(NotBlankString.Serializer::class)
 @SinceKotoolsTypes("1.2")
 public value class NotBlankString
 @Throws(IllegalArgumentException::class)
@@ -224,18 +224,18 @@ public constructor(public val value: String) : Comparable<String> {
             null
         }
     }
-}
 
-@SinceKotoolsTypes("2.1")
-internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        NotBlankString::class.simpleName ?: "AnonymousNotBlankString",
-        PrimitiveKind.STRING
-    )
+    @SinceKotoolsTypes("2.1")
+    internal object Serializer : KSerializer<NotBlankString> {
+        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+            NotBlankString::class.qualifiedName!!,
+            PrimitiveKind.STRING
+        )
 
-    override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
-        encoder.encodeString(value.value)
+        override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
+            encoder.encodeString(value.value)
 
-    override fun deserialize(decoder: Decoder): NotBlankString =
-        decoder.decodeString().toNotBlankString()
+        override fun deserialize(decoder: Decoder): NotBlankString =
+            decoder.decodeString().toNotBlankString()
+    }
 }

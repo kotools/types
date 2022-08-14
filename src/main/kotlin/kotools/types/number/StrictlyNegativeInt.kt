@@ -93,7 +93,7 @@ public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  * [IllegalArgumentException] if the [value] is positive.
  */
 @JvmInline
-@Serializable(StrictlyNegativeIntSerializer::class)
+@Serializable(StrictlyNegativeInt.Serializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt
 @Throws(IllegalArgumentException::class)
@@ -334,19 +334,20 @@ public constructor(public val value: Int) : Comparable<Int> {
             null
         }
     }
-}
 
-@SinceKotoolsTypes("2.1")
-internal object StrictlyNegativeIntSerializer :
-    KSerializer<StrictlyNegativeInt> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        StrictlyNegativeInt::class.simpleName ?: "AnonymousStrictlyNegativeInt",
-        PrimitiveKind.INT
-    )
+    @SinceKotoolsTypes("2.1")
+    internal object Serializer : KSerializer<StrictlyNegativeInt> {
+        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+            StrictlyNegativeInt::class.qualifiedName!!,
+            PrimitiveKind.INT
+        )
 
-    override fun serialize(encoder: Encoder, value: StrictlyNegativeInt): Unit =
-        encoder.encodeInt(value.value)
+        override fun serialize(
+            encoder: Encoder,
+            value: StrictlyNegativeInt
+        ): Unit = encoder.encodeInt(value.value)
 
-    override fun deserialize(decoder: Decoder): StrictlyNegativeInt =
-        decoder.decodeInt().toStrictlyNegativeInt()
+        override fun deserialize(decoder: Decoder): StrictlyNegativeInt =
+            decoder.decodeInt().toStrictlyNegativeInt()
+    }
 }
