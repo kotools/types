@@ -718,6 +718,92 @@ class NegativeIntTest {
     // ---------- Conversions ----------
 
     @Nested
+    inner class StringToNegativeInt {
+        @Test
+        fun `should pass with a string representation of 0`() {
+            // GIVEN
+            val value = 0
+            val string = "$value"
+            // WHEN
+            val result: NegativeInt = assertPass(string::toNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should pass with a string representation of -1`() {
+            // GIVEN
+            val value = -1
+            val string = "$value"
+            // WHEN
+            val result: NegativeInt = assertPass(string::toNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with an invalid string`() {
+            // GIVEN
+            val string = ""
+            // WHEN & THEN
+            assertFailsWith<NumberFormatException>(string::toNegativeInt)
+        }
+
+        @Test
+        fun `should throw an error with a string representation of 1`() {
+            // GIVEN
+            val string = "1"
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(string::toNegativeInt)
+        }
+    }
+
+    @Nested
+    inner class StringToNegativeIntOrNull {
+        @Test
+        fun `should pass with a string representation of 0`() {
+            // GIVEN
+            val value = 0
+            val string = "$value"
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should pass with a string representation of -1`() {
+            // GIVEN
+            val value = -1
+            val string = "$value"
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should return null with an invalid string`() {
+            // GIVEN
+            val string = ""
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+
+        @Test
+        fun `should return null with a string representation of 1`() {
+            // GIVEN
+            val string = "1"
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+    }
+
+    @Nested
     inner class ToNonZeroInt {
         @Test
         fun `should return its value as a non zero int with -1`() {

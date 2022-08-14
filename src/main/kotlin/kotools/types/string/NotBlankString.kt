@@ -164,6 +164,25 @@ public constructor(public val value: String) : Comparable<String> {
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         value.toStrictlyPositiveIntOrNull()
 
+    /**
+     * Returns this [value] as a negative int.
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents a strictly positive number.
+     */
+    @SinceKotoolsTypes("2.1")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
+
+    /**
+     * Returns this [value] as a negative int, or returns `null` if this [value]
+     * is not a valid representation of a number or if it represents a strictly
+     * positive number.
+     */
+    @SinceKotoolsTypes("2.1")
+    public fun toNegativeIntOrNull(): NegativeInt? =
+        value.toNegativeIntOrNull()
+
     override fun toString(): String = value
 
     public companion object {

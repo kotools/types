@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Conversions from `String` and `NotBlankString` types to `NonZeroInt`,
-  `PositiveInt` and `StrictlyPositiveInt`
+  `PositiveInt`, `StrictlyPositiveInt` and `NegativeInt`
   ([#48](https://github.com/kotools/types/issues/48)).
 
 ## Version 2.0.0 - 2022/08/01

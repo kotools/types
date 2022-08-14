@@ -1,6 +1,7 @@
 package kotools.types.string
 
 import kotools.assert.*
+import kotools.types.number.NegativeInt
 import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
@@ -490,6 +491,92 @@ class NotBlankStringTest {
             // WHEN
             val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+    }
+
+    @Nested
+    inner class ToNegativeInt {
+        @Test
+        fun `should pass with a string representation of 0`() {
+            // GIVEN
+            val value = 0
+            val string = NotBlankString("$value")
+            // WHEN
+            val result: NegativeInt = assertPass(string::toNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should pass with a string representation of -1`() {
+            // GIVEN
+            val value = -1
+            val string = NotBlankString("$value")
+            // WHEN
+            val result: NegativeInt = assertPass(string::toNegativeInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with an invalid string`() {
+            // GIVEN
+            val string = NotBlankString("a")
+            // WHEN & THEN
+            assertFailsWith<NumberFormatException>(string::toNegativeInt)
+        }
+
+        @Test
+        fun `should throw an error with a string representation of 1`() {
+            // GIVEN
+            val string = NotBlankString("1")
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(string::toNegativeInt)
+        }
+    }
+
+    @Nested
+    inner class ToNegativeIntOrNull {
+        @Test
+        fun `should pass with a string representation of 0`() {
+            // GIVEN
+            val value = 0
+            val string = NotBlankString("$value")
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should pass with a string representation of -1`() {
+            // GIVEN
+            val value = -1
+            val string = NotBlankString("$value")
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with an invalid string`() {
+            // GIVEN
+            val string = NotBlankString("a")
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+
+        @Test
+        fun `should throw an error with a string representation of 1`() {
+            // GIVEN
+            val string = NotBlankString("1")
+            // WHEN
+            val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
             result.assertNull()
         }

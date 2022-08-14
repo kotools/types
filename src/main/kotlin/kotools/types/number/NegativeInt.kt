@@ -52,11 +52,30 @@ public infix operator fun Int.compareTo(other: NegativeInt): Int =
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
+ * Returns this value as a negative int.
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents a
+ * strictly positive number.
+ */
+@SinceKotoolsTypes("2.1")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toNegativeInt(): NegativeInt = toInt().toNegativeInt()
+
+/**
  * Returns this value as a negative int, or returns `null` if this value is
  * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
+
+/**
+ * Returns this value as a negative int, or returns `null` if this value is not
+ * a valid representation of a number or if it represents a strictly positive
+ * number.
+ */
+@SinceKotoolsTypes("2.1")
+public fun String.toNegativeIntOrNull(): NegativeInt? =
+    toIntOrNull()?.toNegativeIntOrNull()
 
 /**
  * Represents negative integers, including `0`.
