@@ -1,5 +1,12 @@
 package kotools.types.number
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
@@ -84,6 +91,7 @@ public fun String.toNegativeIntOrNull(): NegativeInt? =
  * [IllegalArgumentException] if the [value] is strictly positive.
  */
 @JvmInline
+@Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt
 @Throws(IllegalArgumentException::class)
@@ -356,4 +364,18 @@ public constructor(public val value: Int) : Comparable<Int> {
             null
         }
     }
+}
+
+@SinceKotoolsTypes("2.1")
+internal object NegativeIntSerializer : KSerializer<NegativeInt> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        NegativeInt::class.simpleName ?: "AnonymousNegativeInt",
+        PrimitiveKind.INT
+    )
+
+    override fun serialize(encoder: Encoder, value: NegativeInt): Unit =
+        encoder.encodeInt(value.value)
+
+    override fun deserialize(decoder: Decoder): NegativeInt =
+        decoder.decodeInt().toNegativeInt()
 }
