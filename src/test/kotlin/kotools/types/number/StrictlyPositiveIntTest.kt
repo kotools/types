@@ -1,5 +1,8 @@
 package kotools.types.number
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.*
 import kotools.types.string.NotBlankString
 
@@ -801,5 +804,28 @@ class StrictlyPositiveIntTest {
             // THEN
             result.value assertEquals value.toString()
         }
+    }
+}
+
+class StrictlyPositiveIntSerializerTest {
+    @Test
+    fun `should serialize properly the class`() {
+        // GIVEN
+        val x = StrictlyPositiveInt(1)
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals "$x"
+    }
+
+    @Test
+    fun `should deserialize properly the class`() {
+        // GIVEN
+        val x = StrictlyPositiveInt(1)
+        val encodedString: String = Json.encodeToString(x)
+        // WHEN
+        val result: StrictlyPositiveInt = Json.decodeFromString(encodedString)
+        // THEN
+        result.value assertEquals x.value
     }
 }

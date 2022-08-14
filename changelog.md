@@ -22,8 +22,8 @@ All notable changes to this project will be documented in this file.
 - Conversions from `String` and `NotBlankString` types to `NonZeroInt`,
   `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt`
   ([#48](https://github.com/kotools/types/issues/48)).
-- Serialization and deserialization of `NonZeroInt` and `PositiveInt`
-  ([#65](https://github.com/kotools/types/issues/65)).
+- Serialization and deserialization of `NonZeroInt`, `PositiveInt` and
+  `StrictlyPositiveInt` ([#65](https://github.com/kotools/types/issues/65)).
 
 ## Version 2.0.0 - 2022/08/01
 
