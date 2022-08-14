@@ -52,12 +52,32 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
 
 /**
+ * Returns this value as a strictly negative int.
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents a
+ * positive number.
+ */
+@SinceKotoolsTypes("2.1")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toStrictlyNegativeInt(): StrictlyNegativeInt =
+    toInt().toStrictlyNegativeInt()
+
+/**
  * Returns this value as a strictly negative int, or returns `null` if this
  * value is positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     StrictlyNegativeInt orNull this
+
+/**
+ * Returns this value as a strictly negative int, or returns `null` if this
+ * value is not a valid representation of a number or if it represents a
+ * positive number.
+ */
+@SinceKotoolsTypes("2.1")
+public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    toIntOrNull()?.toStrictlyNegativeIntOrNull()
 
 /**
  * Represents strictly negative integers, excluding `0`.
