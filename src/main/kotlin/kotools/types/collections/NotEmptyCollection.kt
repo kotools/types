@@ -1,5 +1,11 @@
 package kotools.types.collections
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
@@ -111,4 +117,31 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * string.
      */
     public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
+}
+
+@SinceKotoolsTypes("2.1")
+internal sealed class NotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(
+    elementSerializer: KSerializer<E>,
+    private val builder: (head: E, tail: Collection<E>) -> C
+) : KSerializer<C> {
+    private val delegate: KSerializer<List<E>> =
+        ListSerializer(elementSerializer)
+
+    @ExperimentalSerializationApi
+    override val descriptor: SerialDescriptor = SerialDescriptor(
+        NotEmptyCollection::class.qualifiedName!!,
+        delegate.descriptor
+    )
+
+    override fun serialize(encoder: Encoder, value: C) {
+        val list: List<E> = value.toList()
+        delegate.serialize(encoder, list)
+    }
+
+    override fun deserialize(decoder: Decoder): C {
+        val list: List<E> = delegate.deserialize(decoder)
+        val head: E = list.first()
+        val tail: List<E> = list.subList(1, list.size)
+        return builder(head, tail)
+    }
 }

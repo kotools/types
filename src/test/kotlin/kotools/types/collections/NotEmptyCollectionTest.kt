@@ -1,6 +1,11 @@
 package kotools.types.collections
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.*
+import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
@@ -427,6 +432,68 @@ class NotEmptyCollectionTest {
             val string: NotBlankString = collection.toNotBlankString()
             // THEN
             string.value assertEquals collection.toString()
+        }
+    }
+}
+
+class NotEmptyCollectionSerializerTest {
+    @ExperimentalSerializationApi
+    @Test
+    fun `should have the correct descriptor`() {
+        // GIVEN
+        val serializer: NotEmptyCollectionSerializer<NonZeroInt, NotEmptyList<NonZeroInt>> =
+            NotEmptyList.Serializer(NonZeroInt.Serializer)
+        // WHEN
+        val result: String = serializer.descriptor.serialName
+        // THEN
+        result assertEquals NotEmptyCollection::class.qualifiedName
+    }
+
+    @Test
+    fun `should serialize correctly a not empty list`() {
+        // GIVEN
+        val list: NotEmptyList<Int> = NotEmptyList(1, 1)
+        // WHEN
+        val result: String = Json.encodeToString(list)
+        // THEN
+        result assertEquals "$list".replace(" ", "")
+    }
+
+    @Test
+    fun `should serialize correctly a not empty mutable list`() {
+        // GIVEN
+        val mutableList: NotEmptyMutableList<Int> = NotEmptyMutableList(1, 1)
+        // WHEN
+        val result: String = Json.encodeToString(mutableList)
+        // THEN
+        result assertEquals "$mutableList".replace(" ", "")
+    }
+
+    @Test
+    fun `should deserialize correctly to a not empty list`() {
+        // GIVEN
+        val x = 1
+        val string = "[$x,$x]"
+        // WHEN
+        val result: NotEmptyList<Int> = Json.decodeFromString(string)
+        // THEN
+        x.run {
+            assertEquals(result.head)
+            assertEquals(result[1])
+        }
+    }
+
+    @Test
+    fun `should deserialize correctly to a not empty mutable list`() {
+        // GIVEN
+        val x = 1
+        val string = "[$x,$x]"
+        // WHEN
+        val result: NotEmptyMutableList<Int> = Json.decodeFromString(string)
+        // THEN
+        x.run {
+            assertEquals(result.head)
+            assertEquals(result[1])
         }
     }
 }

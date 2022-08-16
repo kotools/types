@@ -25,8 +25,8 @@ All notable changes to this project will be documented in this file.
 - Serialization and deserialization with
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
-  `StrictlyNegativeInt`, `NotBlankString` and `NotEmptyList`
-  ([#65](https://github.com/kotools/types/issues/65)).
+  `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList` and
+  `NotEmptyMutableList` ([#65](https://github.com/kotools/types/issues/65)).
 
 ## Version 2.0.0 - 2022/08/01
 

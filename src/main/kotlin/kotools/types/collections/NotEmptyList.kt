@@ -1,12 +1,7 @@
 package kotools.types.collections
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Conversions ----------
@@ -103,24 +98,11 @@ public class NotEmptyList<out E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        KSerializer<NotEmptyList<E>> {
-        private val delegate: KSerializer<List<E>> =
-            ListSerializer(elementSerializer)
-
-        @ExperimentalSerializationApi
-        override val descriptor: SerialDescriptor = SerialDescriptor(
-            NotEmptyList::class.qualifiedName!!,
-            delegate.descriptor
+        NotEmptyCollectionSerializer<E, NotEmptyList<E>>(
+            elementSerializer,
+            { head: E, tail: Collection<E> ->
+                val list: List<E> = tail.toList()
+                NotEmptyList(head, list)
+            }
         )
-
-        override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
-            delegate.serialize(encoder, value)
-
-        override fun deserialize(decoder: Decoder): NotEmptyList<E> {
-            val list: List<E> = delegate.deserialize(decoder)
-            val head: E = list.first()
-            val tail: List<E> = list.subList(1, list.size)
-            return NotEmptyList(head, tail)
-        }
-    }
 }

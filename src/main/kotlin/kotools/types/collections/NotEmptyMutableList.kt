@@ -1,5 +1,7 @@
 package kotools.types.collections
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.indexOutOfBounds
 import kotools.types.number.PositiveInt
@@ -81,15 +83,14 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyMutableListOrElse(
  * @constructor Creates a not empty mutable list starting with a [head] and
  * containing all the elements of the optional [tail].
  */
+@Serializable(NotEmptyMutableList.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
-    AbstractMutableList<E>(),
-    NotEmptyCollection<E> {
+public class NotEmptyMutableList<E> private constructor(
+    override var head: E,
     private val tail: MutableList<E>
-
-    init {
-        this.tail = tail.toMutableList()
-    }
+) : AbstractMutableList<E>(), NotEmptyCollection<E> {
+    public constructor(head: E, vararg tail: E) :
+            this(head, tail.toMutableList())
 
     // ---------- Query operations ----------
 
@@ -277,4 +278,14 @@ public class NotEmptyMutableList<E>(override var head: E, vararg tail: E) :
      */
     public fun setOrNull(index: StrictlyPositiveInt, element: E): E? =
         setOrNull(index.value, element)
+
+    @SinceKotoolsTypes("2.1")
+    internal class Serializer<E>(elementSerializer: KSerializer<E>) :
+        NotEmptyCollectionSerializer<E, NotEmptyMutableList<E>>(
+            elementSerializer,
+            { head: E, tail: Collection<E> ->
+                val mutableList: MutableList<E> = tail.toMutableList()
+                NotEmptyMutableList(head, mutableList)
+            }
+        )
 }
