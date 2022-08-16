@@ -1,5 +1,12 @@
 package kotools.types.collections
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Conversions ----------
@@ -76,15 +83,13 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyListOrElse(
  * @constructor Creates a not empty list starting with a [head] and containing
  * all the elements of the optional [tail].
  */
+@Serializable(NotEmptyList.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
-    AbstractList<E>(),
-    NotEmptyCollection<E> {
+public class NotEmptyList<out E> private constructor(
+    override val head: E,
     private val tail: List<E>
-
-    init {
-        this.tail = tail.toList()
-    }
+) : AbstractList<E>(), NotEmptyCollection<E> {
+    public constructor(head: E, vararg tail: E) : this(head, tail.toList())
 
     // ---------- Query operations ----------
 
@@ -95,4 +100,27 @@ public class NotEmptyList<out E>(override val head: E, vararg tail: E) :
     // ---------- Positional access operations ----------
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
+
+    @SinceKotoolsTypes("2.1")
+    internal class Serializer<E>(elementSerializer: KSerializer<E>) :
+        KSerializer<NotEmptyList<E>> {
+        private val delegate: KSerializer<List<E>> =
+            ListSerializer(elementSerializer)
+
+        @ExperimentalSerializationApi
+        override val descriptor: SerialDescriptor = SerialDescriptor(
+            NotEmptyList::class.qualifiedName!!,
+            delegate.descriptor
+        )
+
+        override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
+            delegate.serialize(encoder, value)
+
+        override fun deserialize(decoder: Decoder): NotEmptyList<E> {
+            val list: List<E> = delegate.deserialize(decoder)
+            val head: E = list.first()
+            val tail: List<E> = list.subList(1, list.size)
+            return NotEmptyList(head, tail)
+        }
+    }
 }

@@ -1,6 +1,12 @@
 package kotools.types.collections
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.*
+import kotools.types.number.NonZeroInt
 
 class NotEmptyListTest {
     @Nested
@@ -236,6 +242,45 @@ class NotEmptyListTest {
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals defaultValue[index]
             }
+        }
+    }
+
+    @Nested
+    inner class Serializer {
+        @ExperimentalSerializationApi
+        @Test
+        fun `should have the correct serial name`() {
+            // GIVEN
+            val serializer: KSerializer<NotEmptyList<NonZeroInt>> =
+                NotEmptyList.serializer(NonZeroInt.Serializer)
+            // WHEN
+            val result: String = serializer.descriptor.serialName
+            // THEN
+            result assertEquals NotEmptyList::class.qualifiedName
+        }
+
+        @Test
+        fun `should serialize like a list`() {
+            // GIVEN
+            val list: NotEmptyList<Int> = NotEmptyList(1, 1, 2)
+            // WHEN
+            val result: String = Json.encodeToString(list)
+            // THEN
+            result assertEquals "$list".replace(" ", "")
+        }
+
+        @Test
+        fun `should deserialize a list`() {
+            // GIVEN
+            val x = 1
+            val y = 2
+            val string = "[$x,$x,$y]"
+            // WHEN
+            val result: NotEmptyList<Int> = Json.decodeFromString(string)
+            // THEN
+            result.head assertEquals x
+            result[1] assertEquals x
+            result[2] assertEquals y
         }
     }
 }
