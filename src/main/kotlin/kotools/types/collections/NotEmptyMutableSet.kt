@@ -1,5 +1,7 @@
 package kotools.types.collections
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Conversions ----------
@@ -78,15 +80,16 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyMutableSetOrElse(
  * @constructor Creates a not empty mutable set starting with a [head] and
  * containing all the elements of the optional [tail].
  */
+@Serializable(NotEmptyMutableSet.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableSet<E>(override var head: E, vararg tail: E) :
-    AbstractMutableSet<E>(),
-    NotEmptyCollection<E> {
+public class NotEmptyMutableSet<E> private constructor(
+    override var head: E,
     private val tail: MutableSet<E>
-
-    init {
-        this.tail = tail.filterNot { it == head }.toMutableSet()
-    }
+) : AbstractMutableSet<E>(), NotEmptyCollection<E> {
+    public constructor(head: E, vararg tail: E) : this(
+        head,
+        tail.filterNot { it == head }.toMutableSet()
+    )
 
     // ---------- Query operations ----------
 
@@ -114,4 +117,15 @@ public class NotEmptyMutableSet<E>(override var head: E, vararg tail: E) :
             head = tail.first().also(tail::remove)
             true
         } else tail.remove(element)
+
+    @SinceKotoolsTypes("2.1")
+    internal class Serializer<E>(elementSerializer: KSerializer<E>) :
+        NotEmptyCollectionSerializer<E, NotEmptyMutableSet<E>>(
+            elementSerializer,
+            { head: E, tail: Collection<E> ->
+                val mutableSet: MutableSet<E> =
+                    tail.filterNot { it == head }.toMutableSet()
+                NotEmptyMutableSet(head, mutableSet)
+            }
+        )
 }

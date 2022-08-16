@@ -480,6 +480,16 @@ class NotEmptyCollectionSerializerTest {
     }
 
     @Test
+    fun `should serialize correctly a not empty mutable set`() {
+        // GIVEN
+        val mutableSet: NotEmptyMutableSet<Int> = NotEmptyMutableSet(1, 1)
+        // WHEN
+        val result: String = Json.encodeToString(mutableSet)
+        // THEN
+        result assertEquals "$mutableSet".replace(" ", "")
+    }
+
+    @Test
     fun `should deserialize correctly to a not empty list`() {
         // GIVEN
         val x = 1
@@ -516,5 +526,19 @@ class NotEmptyCollectionSerializerTest {
         val result: NotEmptySet<Int> = Json.decodeFromString(string)
         // THEN
         result.head assertEquals x
+    }
+
+    @Test
+    fun `should deserialize correctly to a not empty mutable set`() {
+        // GIVEN
+        val x = 1
+        val string = "[$x,$x]"
+        // WHEN
+        val result: NotEmptyMutableSet<Int> = Json.decodeFromString(string)
+        // THEN
+        result.run {
+            size assertEquals 1
+            head assertEquals x
+        }
     }
 }
