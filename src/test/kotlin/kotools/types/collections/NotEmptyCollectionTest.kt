@@ -497,6 +497,7 @@ class NotEmptyCollectionSerializerTest {
         // WHEN
         val result: NotEmptyList<Int> = Json.decodeFromString(string)
         // THEN
+        result.size assertEquals 2
         x.run {
             assertEquals(result.head)
             assertEquals(result[1])
@@ -511,6 +512,7 @@ class NotEmptyCollectionSerializerTest {
         // WHEN
         val result: NotEmptyMutableList<Int> = Json.decodeFromString(string)
         // THEN
+        result.size assertEquals 2
         x.run {
             assertEquals(result.head)
             assertEquals(result[1])
@@ -525,7 +527,10 @@ class NotEmptyCollectionSerializerTest {
         // WHEN
         val result: NotEmptySet<Int> = Json.decodeFromString(string)
         // THEN
-        result.head assertEquals x
+        result.run {
+            size assertEquals 1
+            head assertEquals x
+        }
     }
 
     @Test
