@@ -120,7 +120,7 @@ public class NotEmptyMutableSet<E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        NotEmptyCollectionSerializer<E, NotEmptyMutableSet<E>>(
+        SealedNotEmptyCollectionSerializer<E, NotEmptyMutableSet<E>>(
             elementSerializer,
             { head: E, tail: Collection<E> ->
                 val mutableSet: MutableSet<E> =

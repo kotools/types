@@ -80,7 +80,7 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyListOrElse(
  */
 @Serializable(NotEmptyList.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E> private constructor(
+public class NotEmptyList<out E> internal constructor(
     override val head: E,
     private val tail: List<E>
 ) : AbstractList<E>(), NotEmptyCollection<E> {
@@ -98,7 +98,7 @@ public class NotEmptyList<out E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        NotEmptyCollectionSerializer<E, NotEmptyList<E>>(
+        SealedNotEmptyCollectionSerializer<E, NotEmptyList<E>>(
             elementSerializer,
             { head: E, tail: Collection<E> ->
                 val list: List<E> = tail.toList()

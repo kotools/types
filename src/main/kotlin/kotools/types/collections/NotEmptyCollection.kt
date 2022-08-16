@@ -2,6 +2,7 @@ package kotools.types.collections
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
@@ -49,6 +50,7 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  *
  * @param E The type of elements contained in this collection.
  */
+@Serializable(NotEmptyCollectionSerializer::class)
 @SinceKotoolsTypes("1.3")
 public sealed interface NotEmptyCollection<out E> : Collection<E> {
     /** First element of this collection. */
@@ -120,7 +122,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
 }
 
 @SinceKotoolsTypes("2.1")
-internal sealed class NotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(
+internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(
     elementSerializer: KSerializer<E>,
     private val builder: (head: E, tail: Collection<E>) -> C
 ) : KSerializer<C> {
@@ -145,3 +147,14 @@ internal sealed class NotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>
         return builder(head, tail)
     }
 }
+
+@SinceKotoolsTypes("2.1")
+internal class NotEmptyCollectionSerializer<E>(
+    elementSerializer: KSerializer<E>
+) : SealedNotEmptyCollectionSerializer<E, NotEmptyCollection<E>>(
+    elementSerializer,
+    { head: E, tail: Collection<E> ->
+        val list: List<E> = tail.toList()
+        NotEmptyList(head, list)
+    }
+)

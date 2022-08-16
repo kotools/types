@@ -281,7 +281,7 @@ public class NotEmptyMutableList<E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        NotEmptyCollectionSerializer<E, NotEmptyMutableList<E>>(
+        SealedNotEmptyCollectionSerializer<E, NotEmptyMutableList<E>>(
             elementSerializer,
             { head: E, tail: Collection<E> ->
                 val mutableList: MutableList<E> = tail.toMutableList()

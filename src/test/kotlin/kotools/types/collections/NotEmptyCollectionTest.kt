@@ -9,6 +9,7 @@ import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
+import kotlin.test.Ignore
 
 class NotEmptyCollectionTest {
     // ---------- Query operations ----------
@@ -436,17 +437,28 @@ class NotEmptyCollectionTest {
     }
 }
 
-class NotEmptyCollectionSerializerTest {
+class SealedNotEmptyCollectionSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun `should have the correct descriptor`() {
         // GIVEN
-        val serializer: NotEmptyCollectionSerializer<NonZeroInt, NotEmptyList<NonZeroInt>> =
-            NotEmptyList.Serializer(NonZeroInt.Serializer)
+        val serializer: NotEmptyCollectionSerializer<NonZeroInt> =
+            NotEmptyCollectionSerializer(NonZeroInt.Serializer)
         // WHEN
         val result: String = serializer.descriptor.serialName
         // THEN
         result assertEquals NotEmptyCollection::class.qualifiedName
+    }
+
+    @Ignore("The serializer for NotEmptyCollection is not found in this test.")
+    @Test
+    fun `should serialize correctly a not empty collection`() {
+        // GIVEN
+        val list: NotEmptyCollection<Int> = NotEmptyList(1, 1)
+        // WHEN
+        val result: String = Json.encodeToString(list)
+        // THEN
+        result assertEquals "$list".replace(" ", "")
     }
 
     @Test
@@ -487,6 +499,22 @@ class NotEmptyCollectionSerializerTest {
         val result: String = Json.encodeToString(mutableSet)
         // THEN
         result assertEquals "$mutableSet".replace(" ", "")
+    }
+
+    @Ignore("The serializer for NotEmptyCollection is not found in this test.")
+    @Test
+    fun `should deserialize correctly to a not empty collection`() {
+        // GIVEN
+        val x = 1
+        val string = "[$x,$x]"
+        // WHEN
+        val result: NotEmptyCollection<Int> = Json.decodeFromString(string)
+        // THEN
+        result.size assertEquals 2
+        x.run {
+            assertEquals(result.head)
+            assertEquals(result[1])
+        }
     }
 
     @Test

@@ -106,7 +106,7 @@ public class NotEmptySet<out E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        NotEmptyCollectionSerializer<E, NotEmptySet<E>>(
+        SealedNotEmptyCollectionSerializer<E, NotEmptySet<E>>(
             elementSerializer,
             { head: E, tail: Collection<E> ->
                 val set: Set<E> = tail.filterNot { it == head }.toSet()
