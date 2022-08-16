@@ -1,5 +1,7 @@
 package kotools.types.collections
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Conversions ----------
@@ -75,15 +77,16 @@ public inline infix fun <reified E> Collection<E>.toNotEmptySetOrElse(
  * @constructor Creates a not empty set starting with a [head] and containing
  * all the elements of the optional [tail].
  */
+@Serializable(NotEmptySet.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E>(override val head: E, vararg tail: E) :
-    AbstractSet<E>(),
-    NotEmptyCollection<E> {
+public class NotEmptySet<out E> private constructor(
+    override val head: E,
     private val tail: Set<E>
-
-    init {
-        this.tail = tail.filterNot { it == head }.toSet()
-    }
+) : AbstractSet<E>(), NotEmptyCollection<E> {
+    public constructor(head: E, vararg tail: E) : this(
+        head,
+        tail.filterNot { it == head }.toSet()
+    )
 
     // ---------- Query operations ----------
 
@@ -100,4 +103,14 @@ public class NotEmptySet<out E>(override val head: E, vararg tail: E) :
 
     override fun get(index: Int): E = if (index == 0) head
     else tail.elementAt(index - 1)
+
+    @SinceKotoolsTypes("2.1")
+    internal class Serializer<E>(elementSerializer: KSerializer<E>) :
+        NotEmptyCollectionSerializer<E, NotEmptySet<E>>(
+            elementSerializer,
+            { head: E, tail: Collection<E> ->
+                val set: Set<E> = tail.filterNot { it == head }.toSet()
+                NotEmptySet(head, set)
+            }
+        )
 }

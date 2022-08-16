@@ -470,6 +470,16 @@ class NotEmptyCollectionSerializerTest {
     }
 
     @Test
+    fun `should serialize correctly a not empty set`() {
+        // GIVEN
+        val set: NotEmptySet<Int> = NotEmptySet(1, 1)
+        // WHEN
+        val result: String = Json.encodeToString(set)
+        // THEN
+        result assertEquals "$set".replace(" ", "")
+    }
+
+    @Test
     fun `should deserialize correctly to a not empty list`() {
         // GIVEN
         val x = 1
@@ -495,5 +505,16 @@ class NotEmptyCollectionSerializerTest {
             assertEquals(result.head)
             assertEquals(result[1])
         }
+    }
+
+    @Test
+    fun `should deserialize correctly to a not empty set`() {
+        // GIVEN
+        val x = 1
+        val string = "[$x,$x]"
+        // WHEN
+        val result: NotEmptySet<Int> = Json.decodeFromString(string)
+        // THEN
+        result.head assertEquals x
     }
 }
