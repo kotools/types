@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
   `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`,
   `NotEmptyMutableList`, `NotEmptySet`, `NotEmptyMutableSet` and
   `NotEmptyCollection` ([#65](https://github.com/kotools/types/issues/65)).
+- `KotoolsInt` type for unifying integer's types
+  ([#60](https://github.com/kotools/types/issues/60)).
 
 ### Changed
 

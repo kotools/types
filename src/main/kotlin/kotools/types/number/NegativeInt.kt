@@ -36,18 +36,6 @@ public infix operator fun Int.times(other: NegativeInt): Int =
 @Throws(ArithmeticException::class)
 public infix operator fun Int.div(other: NegativeInt): Int = this / other.value
 
-// ---------- Comparisons ----------
-
-/**
- * Compares this value with the [other] value for order.
- * Returns `0` if this value equals the [other] value, a negative number if this
- * value is less than the [other] value, or a positive number if this value is
- * greater than the [other] value.
- */
-@SinceKotoolsTypes("2.0")
-public infix operator fun Int.compareTo(other: NegativeInt): Int =
-    compareTo(other.value)
-
 // ---------- Conversions ----------
 
 /**
@@ -95,7 +83,7 @@ public fun String.toNegativeIntOrNull(): NegativeInt? =
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt
 @Throws(IllegalArgumentException::class)
-public constructor(public val value: Int) : Comparable<Int> {
+public constructor(override val value: Int) : KotoolsInt {
     init {
         require(value <= 0) { "Given value shouldn't be strictly positive." }
     }
@@ -240,15 +228,6 @@ public constructor(public val value: Int) : Comparable<Int> {
         PositiveInt(div(other.value))
 
     // ---------- Comparisons ----------
-
-    /**
-     * Compares this [value] with the [other] value for order.
-     * Returns `0` if this [value] equals the [other] value, a negative number
-     * if this [value] is less than the [other] value, or a positive number if
-     * this [value] is greater than the [other] value.
-     */
-    @SinceKotoolsTypes("1.3")
-    override infix fun compareTo(other: Int): Int = value.compareTo(other)
 
     /**
      * Compares this [value] with the [other] value for order.

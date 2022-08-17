@@ -32,18 +32,6 @@ public infix operator fun Int.times(other: NonZeroInt): Int = this * other.value
 @SinceKotoolsTypes("1.1")
 public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
 
-// ---------- Comparisons ----------
-
-/**
- * Compares this value with the [other] value for order.
- * Returns `0` if this value equals the [other] value, a negative number if this
- * value is less than the [other] value, or a positive number if this value is
- * greater than the [other] value.
- */
-@SinceKotoolsTypes("1.3")
-public infix operator fun Int.compareTo(other: NonZeroInt): Int =
-    compareTo(other.value)
-
 // ---------- Conversions ----------
 
 /**
@@ -89,7 +77,7 @@ public fun String.toNonZeroIntOrNull(): NonZeroInt? =
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt
 @Throws(IllegalArgumentException::class)
-public constructor(public val value: Int) : Comparable<Int> {
+public constructor(override val value: Int) : KotoolsInt {
     init {
         require(value != 0) { "Given value shouldn't equal 0." }
     }
@@ -238,15 +226,6 @@ public constructor(public val value: Int) : Comparable<Int> {
         div(other.value)
 
     // ---------- Comparisons ----------
-
-    /**
-     * Compares this [value] with the [other] value for order.
-     * Returns `0` if this [value] equals the [other] value, a negative number
-     * if this [value] is less than the [other] value, or a positive number if
-     * this [value] is greater than the [other] value.
-     */
-    @SinceKotoolsTypes("1.3")
-    override infix fun compareTo(other: Int): Int = value.compareTo(other)
 
     /**
      * Compares this [value] with the [other] value for order.
