@@ -4,7 +4,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
-import kotools.types.string.NotBlankString
 
 class NegativeIntTest {
     @Nested
@@ -745,20 +744,6 @@ class NegativeIntTest {
             val result: String = x.toString()
             // THEN
             result assertEquals value.toString()
-        }
-    }
-
-    @Nested
-    inner class ToNotBlankString {
-        @Test
-        fun `should return its value as a not blank string`() {
-            // GIVEN
-            val value = 0
-            val x = NegativeInt(value)
-            // WHEN
-            val result: NotBlankString = x.toNotBlankString()
-            // THEN
-            result.value assertEquals value.toString()
         }
     }
 }

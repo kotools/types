@@ -4,8 +4,11 @@ import kotools.assert.Nested
 import kotools.assert.Test
 import kotools.assert.assertEquals
 import kotools.assert.assertTrue
+import kotools.types.string.NotBlankString
 
 class KotoolsIntTest {
+    // ---------- Comparisons ----------
+
     @Nested
     inner class CompareTo {
         // ---------- Int ----------
@@ -111,6 +114,22 @@ class KotoolsIntTest {
             // THEN
             println("result = $result")
             assertTrue { result > 0 }
+        }
+    }
+
+    // ---------- Conversions ----------
+
+    @Nested
+    inner class ToNotBlankString {
+        @Test
+        fun `should return its value as a not blank string`() {
+            // GIVEN
+            val value = 1
+            val x: KotoolsInt = NonZeroInt(value)
+            // WHEN
+            val result: NotBlankString = x.toNotBlankString()
+            // THEN
+            result.value assertEquals value.toString()
         }
     }
 }

@@ -8,7 +8,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.string.NotBlankString
 
 // ---------- Binary operations ----------
 
@@ -237,12 +236,6 @@ public constructor(override val value: Int) : KotoolsInt {
     public fun toPositiveInt(): PositiveInt = PositiveInt(value)
 
     override fun toString(): String = value.toString()
-
-    /**
-     * Returns the string representation of this [value] as a not blank string.
-     */
-    @SinceKotoolsTypes("1.2")
-    public fun toNotBlankString(): NotBlankString = NotBlankString(toString())
 
     public companion object {
         /** The minimum value of a strictly positive int. */

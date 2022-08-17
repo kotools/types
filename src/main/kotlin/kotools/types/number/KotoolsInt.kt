@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.string.NotBlankString
 
 /**
  * Compares this value with the [other] value for order.
@@ -16,6 +17,8 @@ public infix operator fun Int.compareTo(other: KotoolsInt): Int =
 @SinceKotoolsTypes("2.1")
 public sealed interface KotoolsInt : Comparable<Int> {
     public val value: Int
+
+    // ---------- Comparisons ----------
 
     /**
      * Compares this [value] with the [other] value for order.
@@ -33,4 +36,14 @@ public sealed interface KotoolsInt : Comparable<Int> {
      */
     public infix operator fun compareTo(other: KotoolsInt): Int =
         compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /**
+     * Returns the string representation of this [value] as a not blank string.
+     */
+    public fun toNotBlankString(): NotBlankString {
+        val string: String = value.toString()
+        return NotBlankString(string)
+    }
 }
