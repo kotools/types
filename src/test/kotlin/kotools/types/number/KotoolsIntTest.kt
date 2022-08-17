@@ -8,6 +8,8 @@ import kotools.assert.assertTrue
 class KotoolsIntTest {
     @Nested
     inner class CompareTo {
+        // ---------- Int ----------
+
         @Test
         fun `should return 0 with the same int`() {
             // GIVEN
@@ -71,6 +73,43 @@ class KotoolsIntTest {
             // WHEN
             val result: Int = x compareTo y
             // THEN
+            assertTrue { result > 0 }
+        }
+
+        // ---------- KotoolsInt ----------
+
+        @Test
+        fun `should return 0 with the same kotools int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y: KotoolsInt = x.toPositiveInt()
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return a negative number with a greater kotools int`() {
+            // GIVEN
+            val x = NegativeInt(0)
+            val y: KotoolsInt = StrictlyPositiveInt(1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            println("result = $result")
+            assertTrue { result < 0 }
+        }
+
+        @Test
+        fun `should return a positive number with a less kotools int`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            val y: KotoolsInt = StrictlyNegativeInt(-1)
+            // WHEN
+            val result: Int = x compareTo y
+            // THEN
+            println("result = $result")
             assertTrue { result > 0 }
         }
     }

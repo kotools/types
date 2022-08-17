@@ -24,4 +24,13 @@ public sealed interface KotoolsInt : Comparable<Int> {
      * this [value] is greater than the [other] value.
      */
     override infix fun compareTo(other: Int): Int = value.compareTo(other)
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns `0` if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    public infix operator fun compareTo(other: KotoolsInt): Int =
+        compareTo(other.value)
 }
