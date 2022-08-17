@@ -124,7 +124,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
 @SinceKotoolsTypes("2.1")
 internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(
     elementSerializer: KSerializer<E>,
-    private val builder: (head: E, tail: Collection<E>) -> C
+    private val builder: (Collection<E>) -> C
 ) : KSerializer<C> {
     private val delegate: KSerializer<List<E>> =
         ListSerializer(elementSerializer)
@@ -142,9 +142,7 @@ internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollecti
 
     override fun deserialize(decoder: Decoder): C {
         val list: List<E> = delegate.deserialize(decoder)
-        val head: E = list.first()
-        val tail: List<E> = list.subList(1, list.size)
-        return builder(head, tail)
+        return builder(list)
     }
 }
 
@@ -153,8 +151,5 @@ internal class NotEmptyCollectionSerializer<E>(
     elementSerializer: KSerializer<E>
 ) : SealedNotEmptyCollectionSerializer<E, NotEmptyCollection<E>>(
     elementSerializer,
-    { head: E, tail: Collection<E> ->
-        val list: List<E> = tail.toList()
-        NotEmptyList(head, list)
-    }
+    Collection<E>::toNotEmptyList
 )

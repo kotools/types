@@ -104,9 +104,6 @@ internal constructor(
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptyCollectionSerializer<E, NotEmptyList<E>>(
             elementSerializer,
-            { head: E, tail: Collection<E> ->
-                val list: List<E> = tail.toList()
-                NotEmptyList(head, list)
-            }
+            Collection<E>::toNotEmptyList
         )
 }

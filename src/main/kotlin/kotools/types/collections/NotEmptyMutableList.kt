@@ -287,9 +287,6 @@ private constructor(
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptyCollectionSerializer<E, NotEmptyMutableList<E>>(
             elementSerializer,
-            { head: E, tail: Collection<E> ->
-                val mutableList: MutableList<E> = tail.toMutableList()
-                NotEmptyMutableList(head, mutableList)
-            }
+            Collection<E>::toNotEmptyMutableList
         )
 }
