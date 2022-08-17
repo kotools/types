@@ -12,44 +12,32 @@ import kotools.types.annotations.SinceKotoolsTypes
 // ---------- Conversions ----------
 
 /**
- * Returns a not empty set containing all the elements of this array, or throws
- * an [IllegalArgumentException] if this array is empty.
- */
-@SinceKotoolsTypes("1.3")
-@Throws(IllegalArgumentException::class)
-public inline fun <reified E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
-    toSet().toNotEmptySet()
-
-/**
  * Returns a not empty set containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public inline fun <reified E> Collection<E>.toNotEmptySet(): NotEmptySet<E> {
+public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
-    val head: E = first()
-    val set: MutableSet<E> = mutableSetOf()
-    for (index in 1 until size) set += elementAt(index)
-    val tail: Array<E> = set.toTypedArray()
-    return NotEmptySet(head, *tail)
+    val set: Set<E> = toSet()
+    return NotEmptySet(set)
 }
 
 /**
- * Returns a not empty set containing all the elements of this array, or returns
- * `null` if this array is empty.
+ * Returns a not empty set containing all the elements of this array, or throws
+ * an [IllegalArgumentException] if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    toSet().toNotEmptySetOrNull()
+@Throws(IllegalArgumentException::class)
+public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
+    toSet().toNotEmptySet()
 
 /**
  * Returns a not empty set containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptySetOrNull():
-        NotEmptySet<E>? = try {
+public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? = try {
     toNotEmptySet()
 } catch (_: IllegalArgumentException) {
     null
@@ -57,12 +45,11 @@ public inline fun <reified E> Collection<E>.toNotEmptySetOrNull():
 
 /**
  * Returns a not empty set containing all the elements of this array, or returns
- * the result of calling the [defaultValue] function if this array is empty.
+ * `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Array<E>.toNotEmptySetOrElse(
-    defaultValue: (Array<E>) -> NotEmptySet<E>
-): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
+public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
+    toSet().toNotEmptySetOrNull()
 
 /**
  * Returns a not empty set containing all the elements of this collection, or
@@ -70,8 +57,17 @@ public inline infix fun <reified E> Array<E>.toNotEmptySetOrElse(
  * is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Collection<E>.toNotEmptySetOrElse(
+public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
     defaultValue: (Collection<E>) -> NotEmptySet<E>
+): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
+
+/**
+ * Returns a not empty set containing all the elements of this array, or returns
+ * the result of calling the [defaultValue] function if this array is empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
+    defaultValue: (Array<E>) -> NotEmptySet<E>
 ): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
 
 /**
@@ -96,7 +92,7 @@ internal constructor(
     )
 
     @SinceKotoolsTypes("2.1")
-    private constructor(set: Set<E>) : this(
+    internal constructor(set: Set<E>) : this(
         set.first(),
         set.filterNot { it == set.first() }.toSet()
     )
