@@ -10,45 +10,33 @@ import kotools.types.number.StrictlyPositiveInt
 // ---------- Conversions ----------
 
 /**
- * Returns a not empty mutable list containing all the elements of this array,
- * or throws an [IllegalArgumentException] if this array is empty.
- */
-@SinceKotoolsTypes("1.3")
-@Throws(IllegalArgumentException::class)
-public inline fun <reified E> Array<E>.toNotEmptyMutableList():
-        NotEmptyMutableList<E> = toList().toNotEmptyMutableList()
-
-/**
  * Returns a not empty mutable list containing all the elements of this
  * collection, or throws an [IllegalArgumentException] if this collection is
  * empty.
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public inline fun <reified E> Collection<E>.toNotEmptyMutableList():
-        NotEmptyMutableList<E> {
+public fun <E> Collection<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
-    val head: E = first()
-    val list: MutableList<E> = mutableListOf()
-    for (index in 1 until size) list += elementAt(index)
-    val tail: Array<E> = list.toTypedArray()
-    return NotEmptyMutableList(head, *tail)
+    val mutableList: MutableList<E> = toMutableList()
+    return NotEmptyMutableList(mutableList)
 }
 
 /**
  * Returns a not empty mutable list containing all the elements of this array,
- * or returns `null` if this array is empty.
+ * or throws an [IllegalArgumentException] if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Array<E>.toNotEmptyMutableListOrNull():
-        NotEmptyMutableList<E>? = toList().toNotEmptyMutableListOrNull()
+@Throws(IllegalArgumentException::class)
+public fun <E> Array<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> =
+    toList().toNotEmptyMutableList()
 
 /**
  * Returns a not empty mutable list containing all the elements of this
  * collection, or returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptyMutableListOrNull():
+public fun <E> Collection<E>.toNotEmptyMutableListOrNull():
         NotEmptyMutableList<E>? = try {
     toNotEmptyMutableList()
 } catch (_: IllegalArgumentException) {
@@ -57,13 +45,11 @@ public inline fun <reified E> Collection<E>.toNotEmptyMutableListOrNull():
 
 /**
  * Returns a not empty mutable list containing all the elements of this array,
- * or returns the result of calling the [defaultValue] function if this array is
- * empty.
+ * or returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Array<E>.toNotEmptyMutableListOrElse(
-    defaultValue: (Array<E>) -> NotEmptyMutableList<E>
-): NotEmptyMutableList<E> = toNotEmptyMutableListOrNull() ?: defaultValue(this)
+public fun <E> Array<E>.toNotEmptyMutableListOrNull(): NotEmptyMutableList<E>? =
+    toList().toNotEmptyMutableListOrNull()
 
 /**
  * Returns a not empty mutable list containing all the elements of this
@@ -71,8 +57,18 @@ public inline infix fun <reified E> Array<E>.toNotEmptyMutableListOrElse(
  * this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Collection<E>.toNotEmptyMutableListOrElse(
+public inline infix fun <E> Collection<E>.toNotEmptyMutableListOrElse(
     defaultValue: (Collection<E>) -> NotEmptyMutableList<E>
+): NotEmptyMutableList<E> = toNotEmptyMutableListOrNull() ?: defaultValue(this)
+
+/**
+ * Returns a not empty mutable list containing all the elements of this array,
+ * or returns the result of calling the [defaultValue] function if this array is
+ * empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline infix fun <E> Array<E>.toNotEmptyMutableListOrElse(
+    defaultValue: (Array<E>) -> NotEmptyMutableList<E>
 ): NotEmptyMutableList<E> = toNotEmptyMutableListOrNull() ?: defaultValue(this)
 
 /**
@@ -93,6 +89,12 @@ private constructor(
 ) : AbstractMutableList<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) :
             this(head, tail.toMutableList())
+
+    @SinceKotoolsTypes("2.1")
+    internal constructor(mutableList: MutableList<E>) : this(
+        mutableList.first(),
+        mutableList.subList(1, mutableList.size)
+    )
 
     // ---------- Query operations ----------
 
