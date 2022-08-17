@@ -7,45 +7,33 @@ import kotools.types.annotations.SinceKotoolsTypes
 // ---------- Conversions ----------
 
 /**
- * Returns a not empty mutable set containing all the elements of this array, or
- * throws an [IllegalArgumentException] if this array is empty.
- */
-@SinceKotoolsTypes("1.3")
-@Throws(IllegalArgumentException::class)
-public inline fun <reified E> Array<E>.toNotEmptyMutableSet():
-        NotEmptyMutableSet<E> = toSet().toNotEmptyMutableSet()
-
-/**
  * Returns a not empty mutable set containing all the elements of this
  * collection, or throws an [IllegalArgumentException] if this collection is
  * empty.
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public inline fun <reified E> Collection<E>.toNotEmptyMutableSet():
-        NotEmptyMutableSet<E> {
+public fun <E> Collection<E>.toNotEmptyMutableSet(): NotEmptyMutableSet<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
-    val head: E = first()
-    val set: MutableSet<E> = mutableSetOf()
-    for (index in 1 until size) set += elementAt(index)
-    val tail: Array<E> = set.toTypedArray()
-    return NotEmptyMutableSet(head, *tail)
+    val mutableSet: MutableSet<E> = toMutableSet()
+    return NotEmptyMutableSet(mutableSet)
 }
 
 /**
  * Returns a not empty mutable set containing all the elements of this array, or
- * returns `null` if this array is empty.
+ * throws an [IllegalArgumentException] if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Array<E>.toNotEmptyMutableSetOrNull():
-        NotEmptyMutableSet<E>? = toSet().toNotEmptyMutableSetOrNull()
+@Throws(IllegalArgumentException::class)
+public fun <E> Array<E>.toNotEmptyMutableSet(): NotEmptyMutableSet<E> =
+    toSet().toNotEmptyMutableSet()
 
 /**
  * Returns a not empty mutable set containing all the elements of this
  * collection, or returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptyMutableSetOrNull():
+public fun <E> Collection<E>.toNotEmptyMutableSetOrNull():
         NotEmptyMutableSet<E>? = try {
     toNotEmptyMutableSet()
 } catch (_: IllegalArgumentException) {
@@ -54,13 +42,11 @@ public inline fun <reified E> Collection<E>.toNotEmptyMutableSetOrNull():
 
 /**
  * Returns a not empty mutable set containing all the elements of this array, or
- * returns the result of calling the [defaultValue] function if this array is
- * empty.
+ * returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Array<E>.toNotEmptyMutableSetOrElse(
-    defaultValue: (Array<E>) -> NotEmptyMutableSet<E>
-): NotEmptyMutableSet<E> = toNotEmptyMutableSetOrNull() ?: defaultValue(this)
+public fun <E> Array<E>.toNotEmptyMutableSetOrNull(): NotEmptyMutableSet<E>? =
+    toSet().toNotEmptyMutableSetOrNull()
 
 /**
  * Returns a not empty mutable set containing all the elements of this
@@ -68,8 +54,18 @@ public inline infix fun <reified E> Array<E>.toNotEmptyMutableSetOrElse(
  * this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Collection<E>.toNotEmptyMutableSetOrElse(
+public inline infix fun <E> Collection<E>.toNotEmptyMutableSetOrElse(
     defaultValue: (Collection<E>) -> NotEmptyMutableSet<E>
+): NotEmptyMutableSet<E> = toNotEmptyMutableSetOrNull() ?: defaultValue(this)
+
+/**
+ * Returns a not empty mutable set containing all the elements of this array, or
+ * returns the result of calling the [defaultValue] function if this array is
+ * empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline infix fun <E> Array<E>.toNotEmptyMutableSetOrElse(
+    defaultValue: (Array<E>) -> NotEmptyMutableSet<E>
 ): NotEmptyMutableSet<E> = toNotEmptyMutableSetOrNull() ?: defaultValue(this)
 
 /**
@@ -94,7 +90,7 @@ private constructor(
     )
 
     @SinceKotoolsTypes("2.1")
-    private constructor(mutableSet: MutableSet<E>) : this(
+    internal constructor(mutableSet: MutableSet<E>) : this(
         mutableSet.first(),
         mutableSet.filterNot { it == mutableSet.first() }.toMutableSet()
     )
@@ -130,9 +126,6 @@ private constructor(
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptySetSerializer<E, NotEmptyMutableSet<E>>(
             elementSerializer,
-            {
-                val mutableSet: MutableSet<E> = it.toMutableSet()
-                NotEmptyMutableSet(mutableSet)
-            }
+            Set<E>::toNotEmptyMutableSet
         )
 }

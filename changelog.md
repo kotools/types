@@ -31,8 +31,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Builders of `NotEmptyList`, `NotEmptyMutableList` and `NotEmptySet` now work
-  without reifying type ([#68](https://github.com/kotools/types/issues/68)).
+- Builders of `NotEmptyList`, `NotEmptyMutableList`, `NotEmptySet` and
+  `NotEmptyMutableSet` now work without reifying type
+  ([#68](https://github.com/kotools/types/issues/68)).
 
 ## Version 2.0.0 - 2022/08/01
 
