@@ -1,7 +1,12 @@
 package kotools.types.collections
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.SetSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Conversions ----------
@@ -79,13 +84,18 @@ public inline infix fun <reified E> Collection<E>.toNotEmptySetOrElse(
  */
 @Serializable(NotEmptySet.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E> private constructor(
+public class NotEmptySet<out E> internal constructor(
     override val head: E,
     private val tail: Set<E>
 ) : AbstractSet<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) : this(
         head,
         tail.filterNot { it == head }.toSet()
+    )
+
+    private constructor(set: Set<E>) : this(
+        set.first(),
+        set.filterNot { it == set.first() }.toSet()
     )
 
     // ---------- Query operations ----------
@@ -106,11 +116,30 @@ public class NotEmptySet<out E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        SealedNotEmptyCollectionSerializer<E, NotEmptySet<E>>(
+        SealedNotEmptySetSerializer<E, NotEmptySet<E>>(
             elementSerializer,
-            { head: E, tail: Collection<E> ->
-                val set: Set<E> = tail.filterNot { it == head }.toSet()
-                NotEmptySet(head, set)
-            }
+            ::NotEmptySet
         )
+}
+
+@SinceKotoolsTypes("2.1")
+internal sealed class SealedNotEmptySetSerializer<E, C : Set<E>>(
+    elementSerializer: KSerializer<E>,
+    private val builder: (Set<E>) -> C
+) : KSerializer<C> {
+    private val delegate: KSerializer<Set<E>> = SetSerializer(elementSerializer)
+
+    @ExperimentalSerializationApi
+    override val descriptor: SerialDescriptor = SerialDescriptor(
+        NotEmptySet::class.qualifiedName!!,
+        delegate.descriptor
+    )
+
+    override fun serialize(encoder: Encoder, value: C): Unit =
+        delegate.serialize(encoder, value)
+
+    override fun deserialize(decoder: Decoder): C {
+        val set: Set<E> = delegate.deserialize(decoder)
+        return builder(set)
+    }
 }

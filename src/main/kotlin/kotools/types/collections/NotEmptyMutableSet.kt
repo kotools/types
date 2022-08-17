@@ -91,6 +91,11 @@ public class NotEmptyMutableSet<E> private constructor(
         tail.filterNot { it == head }.toMutableSet()
     )
 
+    private constructor(mutableSet: MutableSet<E>) : this(
+        mutableSet.first(),
+        mutableSet.filterNot { it == mutableSet.first() }.toMutableSet()
+    )
+
     // ---------- Query operations ----------
 
     override val size: Int get() = tail.size + super.size
@@ -120,12 +125,11 @@ public class NotEmptyMutableSet<E> private constructor(
 
     @SinceKotoolsTypes("2.1")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        SealedNotEmptyCollectionSerializer<E, NotEmptyMutableSet<E>>(
+        SealedNotEmptySetSerializer<E, NotEmptyMutableSet<E>>(
             elementSerializer,
-            { head: E, tail: Collection<E> ->
-                val mutableSet: MutableSet<E> =
-                    tail.filterNot { it == head }.toMutableSet()
-                NotEmptyMutableSet(head, mutableSet)
+            {
+                val mutableSet: MutableSet<E> = it.toMutableSet()
+                NotEmptyMutableSet(mutableSet)
             }
         )
 }
