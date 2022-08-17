@@ -7,44 +7,32 @@ import kotools.types.annotations.SinceKotoolsTypes
 // ---------- Conversions ----------
 
 /**
- * Returns a not empty list containing all the elements of this array, or throws
- * an [IllegalArgumentException] if this array is empty.
- */
-@SinceKotoolsTypes("1.3")
-@Throws(IllegalArgumentException::class)
-public inline fun <reified E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
-    toList().toNotEmptyList()
-
-/**
  * Returns a not empty list containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public inline fun <reified E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
+public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
-    val head: E = first()
-    val list: MutableList<E> = mutableListOf()
-    for (index in 1 until size) list += elementAt(index)
-    val tail: Array<E> = list.toTypedArray()
-    return NotEmptyList(head, *tail)
+    val list: List<E> = toList()
+    return NotEmptyList(list)
 }
 
 /**
- * Returns a not empty list containing all the elements of this array, or
- * returns `null` if this array is empty.
+ * Returns a not empty list containing all the elements of this array, or throws
+ * an [IllegalArgumentException] if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Array<E>.toNotEmptyListOrNull():
-        NotEmptyList<E>? = toList().toNotEmptyListOrNull()
+@Throws(IllegalArgumentException::class)
+public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
+    toList().toNotEmptyList()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <reified E> Collection<E>.toNotEmptyListOrNull():
-        NotEmptyList<E>? = try {
+public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = try {
     toNotEmptyList()
 } catch (_: IllegalArgumentException) {
     null
@@ -52,13 +40,11 @@ public inline fun <reified E> Collection<E>.toNotEmptyListOrNull():
 
 /**
  * Returns a not empty list containing all the elements of this array, or
- * returns the result of calling the [defaultValue] function if this array is
- * empty.
+ * returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Array<E>.toNotEmptyListOrElse(
-    defaultValue: (Array<E>) -> NotEmptyList<E>
-): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    toList().toNotEmptyListOrNull()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
@@ -66,8 +52,18 @@ public inline infix fun <reified E> Array<E>.toNotEmptyListOrElse(
  * is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <reified E> Collection<E>.toNotEmptyListOrElse(
+public inline infix fun <E> Collection<E>.toNotEmptyListOrElse(
     defaultValue: (Collection<E>) -> NotEmptyList<E>
+): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+
+/**
+ * Returns a not empty list containing all the elements of this array, or
+ * returns the result of calling the [defaultValue] function if this array is
+ * empty.
+ */
+@SinceKotoolsTypes("1.3")
+public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
+    defaultValue: (Array<E>) -> NotEmptyList<E>
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
 
 /**
@@ -87,6 +83,12 @@ internal constructor(
     private val tail: List<E>
 ) : AbstractList<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) : this(head, tail.toList())
+
+    @SinceKotoolsTypes("2.1")
+    internal constructor(list: List<E>) : this(
+        list.first(),
+        list.subList(1, list.size)
+    )
 
     // ---------- Query operations ----------
 
