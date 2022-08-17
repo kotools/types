@@ -84,7 +84,9 @@ public inline infix fun <reified E> Collection<E>.toNotEmptySetOrElse(
  */
 @Serializable(NotEmptySet.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E> internal constructor(
+public class NotEmptySet<out E>
+@SinceKotoolsTypes("2.1")
+internal constructor(
     override val head: E,
     private val tail: Set<E>
 ) : AbstractSet<E>(), NotEmptyCollection<E> {
@@ -93,6 +95,7 @@ public class NotEmptySet<out E> internal constructor(
         tail.filterNot { it == head }.toSet()
     )
 
+    @SinceKotoolsTypes("2.1")
     private constructor(set: Set<E>) : this(
         set.first(),
         set.filterNot { it == set.first() }.toSet()

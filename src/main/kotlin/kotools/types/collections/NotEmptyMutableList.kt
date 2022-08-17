@@ -85,7 +85,9 @@ public inline infix fun <reified E> Collection<E>.toNotEmptyMutableListOrElse(
  */
 @Serializable(NotEmptyMutableList.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableList<E> private constructor(
+public class NotEmptyMutableList<E>
+@SinceKotoolsTypes("2.1")
+private constructor(
     override var head: E,
     private val tail: MutableList<E>
 ) : AbstractMutableList<E>(), NotEmptyCollection<E> {
