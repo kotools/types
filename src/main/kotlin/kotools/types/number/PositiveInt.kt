@@ -11,11 +11,6 @@ import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Binary operations ----------
 
-/** Adds the [other] value to this value. */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.plus(other: PositiveInt): Int =
-    this + other.value
-
 /** Subtracts the [other] value from this value. */
 @SinceKotoolsTypes("1.1")
 public infix operator fun Int.minus(other: PositiveInt): Int =
@@ -115,9 +110,6 @@ public constructor(override val value: Int) : KotoolsInt {
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
     // ---------- Binary operations ----------
-
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: Int): Int = value + other
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: NonZeroInt): Int = plus(other.value)

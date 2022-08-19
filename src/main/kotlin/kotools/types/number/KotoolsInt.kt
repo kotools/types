@@ -3,6 +3,14 @@ package kotools.types.number
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 
+// ---------- Binary operations ----------
+
+/** Adds the [other] value to this value. */
+@SinceKotoolsTypes("2.1")
+public infix operator fun Int.plus(other: KotoolsInt): Int = plus(other.value)
+
+// ---------- Comparisons ----------
+
 /**
  * Compares this value with the [other] value for order.
  * Returns `0` if this value equals the [other] value, a negative number if this
@@ -17,6 +25,11 @@ public infix operator fun Int.compareTo(other: KotoolsInt): Int =
 @SinceKotoolsTypes("2.1")
 public sealed interface KotoolsInt : Comparable<Int> {
     public val value: Int
+
+    // ---------- Binary operations ----------
+
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: Int): Int = value + other
 
     // ---------- Comparisons ----------
 

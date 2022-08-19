@@ -7,6 +7,33 @@ import kotools.assert.assertTrue
 import kotools.types.string.NotBlankString
 
 class KotoolsIntTest {
+    // ---------- Binary operations ----------
+
+    @Nested
+    inner class Plus {
+        @Test
+        fun `should return an int with an int`() {
+            // GIVEN
+            val x: KotoolsInt = NonZeroInt(1)
+            val y = 2
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals 3
+        }
+
+        @Test
+        fun `should return an int when adding a kotools int to an int`() {
+            // GIVEN
+            val x = 1
+            val y: KotoolsInt = NonZeroInt(2)
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals 3
+        }
+    }
+
     // ---------- Comparisons ----------
 
     @Nested

@@ -149,28 +149,6 @@ class PositiveIntTest {
     @Nested
     inner class Plus {
         @Test
-        fun `should return an int with an int`() {
-            // GIVEN
-            val x = PositiveInt(1)
-            val y = -1
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int when adding a positive int to an int`() {
-            // GIVEN
-            val x = -1
-            val y = PositiveInt(1)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
         fun `should return an int with a non zero int`() {
             // GIVEN
             val x = PositiveInt(1)
