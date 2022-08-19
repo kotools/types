@@ -53,7 +53,10 @@ public value class NotBlankString
 @Throws(IllegalArgumentException::class)
 public constructor(public val value: String) : Comparable<String> {
     init {
-        require(value.isNotBlank()) { "Given value shouldn't be blank." }
+        require(value.isNotBlank()) {
+            val type: String = this::class.simpleName!!
+            "$type doesn't accept blank values."
+        }
     }
 
     // ---------- Query operations ----------

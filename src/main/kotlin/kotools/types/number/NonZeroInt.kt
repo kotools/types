@@ -78,7 +78,10 @@ public value class NonZeroInt
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsInt {
     init {
-        require(value != 0) { "Given value shouldn't equal 0." }
+        require(value != 0) {
+            val type: String = this::class.simpleName!!
+            "$type doesn't accept 0."
+        }
     }
 
     // ---------- Unary operations ----------

@@ -84,7 +84,10 @@ public value class NegativeInt
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsInt {
     init {
-        require(value <= 0) { "Given value shouldn't be strictly positive." }
+        require(value <= 0) {
+            val type: String = this::class.simpleName!!
+            "$type doesn't accept strictly positive values (tried with $value)."
+        }
     }
 
     // ---------- Unary operations ----------
