@@ -11,11 +11,6 @@ import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Binary operations ----------
 
-/** Multiplies this value by the [other] value. */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.times(other: StrictlyPositiveInt): Int =
-    this * other.value
-
 /**
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to `0`.
@@ -121,9 +116,6 @@ public constructor(override val value: Int) : KotoolsInt {
     public infix operator fun minus(
         other: StrictlyNegativeInt
     ): StrictlyPositiveInt = StrictlyPositiveInt(minus(other.value))
-
-    /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: Int): Int = value * other
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NonZeroInt): NonZeroInt =

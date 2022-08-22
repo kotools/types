@@ -169,28 +169,6 @@ class NonZeroIntTest {
     @Nested
     inner class Times {
         @Test
-        fun `should return an int with an int`() {
-            // GIVEN
-            val x = NonZeroInt(1)
-            val y = 0
-            // WHEN
-            val result: Int = x * y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int when multiplying an int by a non zero int`() {
-            // GIVEN
-            val x = 0
-            val y = NonZeroInt(1)
-            // WHEN
-            val result: Int = x * y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
         fun `should return a non zero int with a non zero int`() {
             // GIVEN
             val x = NonZeroInt(-1)
@@ -202,17 +180,6 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should return an int with a positive int`() {
-            // GIVEN
-            val x = NonZeroInt(-1)
-            val y = PositiveInt(2)
-            // WHEN
-            val result: Int = x * y
-            // THEN
-            result assertEquals -2
-        }
-
-        @Test
         fun `should return a non zero int with a strictly positive int`() {
             // GIVEN
             val x = NonZeroInt(-1)
@@ -221,17 +188,6 @@ class NonZeroIntTest {
             val result: NonZeroInt = x * y
             // THEN
             result.value assertEquals -2
-        }
-
-        @Test
-        fun `should return an int with a negative int`() {
-            // GIVEN
-            val x = NonZeroInt(-1)
-            val y = NegativeInt(-2)
-            // WHEN
-            val result: Int = x * y
-            // THEN
-            result assertEquals 2
         }
 
         @Test

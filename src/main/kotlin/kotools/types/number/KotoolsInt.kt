@@ -14,6 +14,11 @@ public infix operator fun Int.plus(other: KotoolsInt): Int = plus(other.value)
 public infix operator fun Int.minus(other: KotoolsInt): Int =
     minus(other.value)
 
+/** Multiplies this value by the [other] value. */
+@SinceKotoolsTypes("2.1")
+public infix operator fun Int.times(other: KotoolsInt): Int =
+    times(other.value)
+
 // ---------- Comparisons ----------
 
 /**
@@ -44,6 +49,13 @@ public sealed interface KotoolsInt : Comparable<Int> {
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: KotoolsInt): Int = minus(other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: Int): Int = value * other
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: KotoolsInt): Int =
+        times(other.value)
 
     // ---------- Comparisons ----------
 

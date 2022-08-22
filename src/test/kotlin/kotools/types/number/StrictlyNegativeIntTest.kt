@@ -185,28 +185,6 @@ class StrictlyNegativeIntTest {
     @Nested
     inner class Times {
         @Test
-        fun `should return an int with an int`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = 0
-            // WHEN
-            val result: Int = x * y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int when multiplying an int by a strictly negative int`() {
-            // GIVEN
-            val x = 0
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x * y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
         fun `should return a non zero int with a non zero int`() {
             // GIVEN
             val x = StrictlyNegativeInt(-1)

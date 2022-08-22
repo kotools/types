@@ -65,7 +65,7 @@ class KotoolsIntTest {
         }
 
         @Test
-        fun `should return an int when subtracting a kotools int to an int`() {
+        fun `should return an int when subtracting a kotools int from an int`() {
             // GIVEN
             val x = 1
             val y: KotoolsInt = NonZeroInt(x)
@@ -86,6 +86,46 @@ class KotoolsIntTest {
             val result: Int = x - y
             // THEN
             result assertEquals 0
+        }
+    }
+
+    @Nested
+    inner class Times {
+        // ---------- Int ----------
+
+        @Test
+        fun `should return an int with an int`() {
+            // GIVEN
+            val x: KotoolsInt = NonZeroInt(2)
+            val y = 4
+            // WHEN
+            val result: Int = x * y
+            // THEN
+            result assertEquals 8
+        }
+
+        @Test
+        fun `should return an int when multiplying an int by a kotools int`() {
+            // GIVEN
+            val x = 2
+            val y: KotoolsInt = StrictlyPositiveInt(4)
+            // WHEN
+            val result: Int = x * y
+            // THEN
+            result assertEquals 8
+        }
+
+        // ---------- KotoolsInt ----------
+
+        @Test
+        fun `should return an int with a kotools int`() {
+            // GIVEN
+            val x: KotoolsInt = StrictlyPositiveInt(2)
+            val y: KotoolsInt = StrictlyNegativeInt(-4)
+            // WHEN
+            val result: Int = x * y
+            // THEN
+            result assertEquals -8
         }
     }
 
