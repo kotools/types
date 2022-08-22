@@ -9,6 +9,11 @@ import kotools.types.string.NotBlankString
 @SinceKotoolsTypes("2.1")
 public infix operator fun Int.plus(other: KotoolsInt): Int = plus(other.value)
 
+/** Subtracts the [other] value from this value. */
+@SinceKotoolsTypes("2.1")
+public infix operator fun Int.minus(other: KotoolsInt): Int =
+    minus(other.value)
+
 // ---------- Comparisons ----------
 
 /**
@@ -33,6 +38,12 @@ public sealed interface KotoolsInt : Comparable<Int> {
 
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: KotoolsInt): Int = plus(other.value)
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: Int): Int = value - other
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: KotoolsInt): Int = minus(other.value)
 
     // ---------- Comparisons ----------
 

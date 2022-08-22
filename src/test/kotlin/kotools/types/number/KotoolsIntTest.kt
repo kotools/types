@@ -49,6 +49,46 @@ class KotoolsIntTest {
         }
     }
 
+    @Nested
+    inner class Minus {
+        // ---------- Int ----------
+
+        @Test
+        fun `should return an int with an int`() {
+            // GIVEN
+            val x: KotoolsInt = NonZeroInt(1)
+            val y: Int = x.value
+            // WHEN
+            val result: Int = x - y
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should return an int when subtracting a kotools int to an int`() {
+            // GIVEN
+            val x = 1
+            val y: KotoolsInt = NonZeroInt(x)
+            // WHEN
+            val result: Int = x - y
+            // THEN
+            result assertEquals 0
+        }
+
+        // ---------- KotoolsInt ----------
+
+        @Test
+        fun `should return an int with a kotools int`() {
+            // GIVEN
+            val x = NonZeroInt(1)
+            val y: KotoolsInt = x.toPositiveInt()
+            // WHEN
+            val result: Int = x - y
+            // THEN
+            result assertEquals 0
+        }
+    }
+
     // ---------- Comparisons ----------
 
     @Nested

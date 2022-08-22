@@ -160,39 +160,6 @@ class StrictlyNegativeIntTest {
     @Nested
     inner class Minus {
         @Test
-        fun `should return an int with an int`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = -1
-            // WHEN
-            val result: Int = x - y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int when subtracting a strictly negative int from an int`() {
-            // GIVEN
-            val x = -1
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x - y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a non zero int`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = NonZeroInt(-1)
-            // WHEN
-            val result: Int = x - y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
         fun `should return a strictly negative int with a positive int`() {
             // GIVEN
             val x = StrictlyNegativeInt(-1)
@@ -212,28 +179,6 @@ class StrictlyNegativeIntTest {
             val result: StrictlyNegativeInt = x - y
             // THEN
             result.value assertEquals -2
-        }
-
-        @Test
-        fun `should return an int with a negative int`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = NegativeInt(-1)
-            // WHEN
-            val result: Int = x - y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a strictly negative int`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x - y
-            // THEN
-            result assertEquals 0
         }
     }
 

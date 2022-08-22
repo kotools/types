@@ -11,11 +11,6 @@ import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Binary operations ----------
 
-/** Subtracts the [other] value from this value. */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.minus(other: StrictlyPositiveInt): Int =
-    this - other.value
-
 /** Multiplies this value by the [other] value. */
 @SinceKotoolsTypes("1.1")
 public infix operator fun Int.times(other: StrictlyPositiveInt): Int =
@@ -117,20 +112,6 @@ public constructor(override val value: Int) : KotoolsInt {
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: PositiveInt): StrictlyPositiveInt =
         StrictlyPositiveInt(plus(other.value))
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: Int): Int = value - other
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: NonZeroInt): Int = minus(other.value)
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: PositiveInt): Int =
-        minus(other.value)
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: StrictlyPositiveInt): Int =
-        minus(other.value)
 
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: NegativeInt): StrictlyPositiveInt =
