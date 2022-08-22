@@ -149,39 +149,6 @@ class NegativeIntTest {
     @Nested
     inner class Plus {
         @Test
-        fun `should return an int with a non zero int`() {
-            // GIVEN
-            val x = NegativeInt(-1)
-            val y = NonZeroInt(1)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a positive int`() {
-            // GIVEN
-            val x = NegativeInt(-5)
-            val y = PositiveInt(2)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals -3
-        }
-
-        @Test
-        fun `should return an int with a strictly positive int`() {
-            // GIVEN
-            val x = NegativeInt(-5)
-            val y = StrictlyPositiveInt(2)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals -3
-        }
-
-        @Test
         fun `should return a negative int with a negative int`() {
             // GIVEN
             val x = NegativeInt(-1)

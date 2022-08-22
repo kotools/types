@@ -167,64 +167,6 @@ class NonZeroIntTest {
     // ---------- Binary operations ----------
 
     @Nested
-    inner class Plus {
-        @Test
-        fun `should return an int with a non zero int`() {
-            // GIVEN
-            val x = NonZeroInt(1)
-            val y = NonZeroInt(-1)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a positive int`() {
-            // GIVEN
-            val x = NonZeroInt(-1)
-            val y = PositiveInt(1)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a strictly positive int`() {
-            // GIVEN
-            val x = NonZeroInt(-1)
-            val y = StrictlyPositiveInt(1)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a negative int`() {
-            // GIVEN
-            val x = NonZeroInt(-1)
-            val y = NegativeInt(-2)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals -3
-        }
-
-        @Test
-        fun `should return an int with a strictly negative int`() {
-            // GIVEN
-            val x = NonZeroInt(1)
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x + y
-            // THEN
-            result assertEquals 0
-        }
-    }
-
-    @Nested
     inner class Minus {
         @Test
         fun `should return an int with an int`() {

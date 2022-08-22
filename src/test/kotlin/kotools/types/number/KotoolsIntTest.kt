@@ -11,6 +11,8 @@ class KotoolsIntTest {
 
     @Nested
     inner class Plus {
+        // ---------- Int ----------
+
         @Test
         fun `should return an int with an int`() {
             // GIVEN
@@ -31,6 +33,19 @@ class KotoolsIntTest {
             val result: Int = x + y
             // THEN
             result assertEquals 3
+        }
+
+        // ---------- KotoolsInt ----------
+
+        @Test
+        fun `should return an int with a kotools int`() {
+            // GIVEN
+            val x = NonZeroInt(10)
+            val y: KotoolsInt = StrictlyNegativeInt(-x.value)
+            // WHEN
+            val result: Int = x + y
+            // THEN
+            result assertEquals 0
         }
     }
 
@@ -127,7 +142,6 @@ class KotoolsIntTest {
             // WHEN
             val result: Int = x compareTo y
             // THEN
-            println("result = $result")
             assertTrue { result < 0 }
         }
 
@@ -139,7 +153,6 @@ class KotoolsIntTest {
             // WHEN
             val result: Int = x compareTo y
             // THEN
-            println("result = $result")
             assertTrue { result > 0 }
         }
     }

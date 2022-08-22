@@ -31,6 +31,9 @@ public sealed interface KotoolsInt : Comparable<Int> {
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: Int): Int = value + other
 
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: KotoolsInt): Int = plus(other.value)
+
     // ---------- Comparisons ----------
 
     /**

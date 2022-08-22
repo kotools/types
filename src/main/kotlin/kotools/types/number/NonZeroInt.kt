@@ -114,23 +114,6 @@ public constructor(override val value: Int) : KotoolsInt {
 
     // ---------- Binary operations ----------
 
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: NonZeroInt): Int = plus(other.value)
-
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: PositiveInt): Int = plus(other.value)
-
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: StrictlyPositiveInt): Int =
-        plus(other.value)
-
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: NegativeInt): Int = plus(other.value)
-
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: StrictlyNegativeInt): Int =
-        plus(other.value)
-
     /** Subtracts the [other] value from this [value]. */
     public infix operator fun minus(other: Int): Int = value - other
 
