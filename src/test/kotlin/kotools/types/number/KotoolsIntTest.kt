@@ -1,9 +1,6 @@
 package kotools.types.number
 
-import kotools.assert.Nested
-import kotools.assert.Test
-import kotools.assert.assertEquals
-import kotools.assert.assertTrue
+import kotools.assert.*
 import kotools.types.string.NotBlankString
 
 class KotoolsIntTest {
@@ -126,6 +123,72 @@ class KotoolsIntTest {
             val result: Int = x * y
             // THEN
             result assertEquals -8
+        }
+    }
+
+    @Nested
+    inner class Div {
+        // ---------- Int ----------
+        @Test
+        fun `should return an int with an int other than 0`() {
+            // GIVEN
+            val x: KotoolsInt = PositiveInt(0)
+            val y = 2
+            // WHEN
+            val result: Int = assertPass { x / y }
+            // THEN
+            result assertEquals 0
+        }
+
+        @Test
+        fun `should throw an error with an int that equals 0`() {
+            // GIVEN
+            val x: KotoolsInt = PositiveInt(0)
+            val y: Int = x.value
+            // WHEN & THEN
+            assertFailsWith<ArithmeticException> { x / y }
+        }
+
+        @Test
+        fun `should return an int when dividing an int with a kotools int other than 0`() {
+            // GIVEN
+            val x = 8
+            val y: KotoolsInt = StrictlyPositiveInt(2)
+            // WHEN
+            val result: Int = assertPass { x / y }
+            // THEN
+            result assertEquals 4
+        }
+
+        @Test
+        fun `should throw an error when dividing an an int with a kotools int that equals 0`() {
+            // GIVEN
+            val x = 8
+            val y: KotoolsInt = PositiveInt(0)
+            // WHEN & THEN
+            assertFailsWith<ArithmeticException> { x / y }
+        }
+
+        // ---------- KotoolsInt ----------
+
+        @Test
+        fun `should return an int with a kotools int other than 0`() {
+            // GIVEN
+            val x: KotoolsInt = StrictlyPositiveInt(8)
+            val y: KotoolsInt = StrictlyNegativeInt(-4)
+            // WHEN
+            val result: Int = assertPass { x / y }
+            // THEN
+            result assertEquals -2
+        }
+
+        @Test
+        fun `should throw an error with a kotools int that equals 0`() {
+            // GIVEN
+            val x: KotoolsInt = StrictlyPositiveInt(8)
+            val y: KotoolsInt = PositiveInt(0)
+            // WHEN & THEN
+            assertFailsWith<ArithmeticException> { x / y }
         }
     }
 

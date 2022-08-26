@@ -246,57 +246,6 @@ class PositiveIntTest {
     @Nested
     inner class Div {
         @Test
-        fun `should return an int with an int other than 0`() {
-            // GIVEN
-            val x = PositiveInt(2)
-            val y = -2
-            // WHEN
-            val result: Int = assertPass { x / y }
-            // THEN
-            result assertEquals -1
-        }
-
-        @Test
-        fun `should throw an error with an int that equals 0`() {
-            // GIVEN
-            val x = PositiveInt(2)
-            val y = 0
-            // WHEN & THEN
-            assertFailsWith<ArithmeticException> { x / y }
-        }
-
-        @Test
-        fun `should return an int when dividing an int by a positive int other than 0`() {
-            // GIVEN
-            val x = 0
-            val y = PositiveInt(2)
-            // WHEN
-            val result: Int = assertPass { x / y }
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should throw an error when dividing an int by a positive int that equals 0`() {
-            // GIVEN
-            val x = 0
-            val y = PositiveInt(0)
-            // WHEN & THEN
-            assertFailsWith<ArithmeticException> { x / y }
-        }
-
-        @Test
-        fun `should return an int with a non zero int`() {
-            // GIVEN
-            val x = PositiveInt(0)
-            val y = NonZeroInt(-1)
-            // WHEN
-            val result: Int = x / y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
         fun `should return a positive int with a positive int other than 0`() {
             // GIVEN
             val x = PositiveInt(0)

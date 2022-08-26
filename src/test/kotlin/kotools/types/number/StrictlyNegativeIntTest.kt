@@ -243,48 +243,6 @@ class StrictlyNegativeIntTest {
     @Nested
     inner class Div {
         @Test
-        fun `should return an int with an int other than 0`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-2)
-            val y = -3
-            // WHEN
-            val result: Int = assertPass { x / y }
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should throw an error with an int that equals 0`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-1)
-            val y = 0
-            // WHEN & THEN
-            assertFailsWith<ArithmeticException> { x / y }
-        }
-
-        @Test
-        fun `should return an int when dividing an int by a strictly negative int`() {
-            // GIVEN
-            val x = 0
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: Int = x / y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
-        fun `should return an int with a non zero int`() {
-            // GIVEN
-            val x = StrictlyNegativeInt(-2)
-            val y = NonZeroInt(3)
-            // WHEN
-            val result: Int = x / y
-            // THEN
-            result assertEquals 0
-        }
-
-        @Test
         fun `should return a negative int with a positive int other than 0`() {
             // GIVEN
             val x = StrictlyNegativeInt(-1)

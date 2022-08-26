@@ -9,15 +9,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
-// ---------- Binary operations ----------
-
-/**
- * Divides this value by the [other] value, truncating the result to an integer
- * that is closer to `0`.
- */
-@SinceKotoolsTypes("1.1")
-public infix operator fun Int.div(other: NonZeroInt): Int = this / other.value
-
 // ---------- Conversions ----------
 
 /**
@@ -116,50 +107,6 @@ public constructor(override val value: Int) : KotoolsInt {
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
         NonZeroInt(times(other.value))
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to `0`.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: Int): Int = value / other
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to `0`.
-     */
-    public infix operator fun div(other: NonZeroInt): Int = div(other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to `0`.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): Int = div(other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to `0`.
-     */
-    public infix operator fun div(other: StrictlyPositiveInt): Int =
-        div(other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to `0`.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): Int = div(other.value)
-
-    /**
-     * Divides this [value] by the [other] value, truncating the result to an
-     * integer that is closer to `0`.
-     */
-    public infix operator fun div(other: StrictlyNegativeInt): Int =
-        div(other.value)
 
     // ---------- Conversions ----------
 

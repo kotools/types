@@ -19,6 +19,15 @@ public infix operator fun Int.minus(other: KotoolsInt): Int =
 public infix operator fun Int.times(other: KotoolsInt): Int =
     times(other.value)
 
+/**
+ * Divides this value by the [other] value, truncating the result to an integer
+ * that is closer to `0`.
+ * Throws an [ArithmeticException] if the [other] value equals `0`.
+ */
+@SinceKotoolsTypes("2.1")
+@Throws(ArithmeticException::class)
+public infix operator fun Int.div(other: KotoolsInt): Int = div(other.value)
+
 // ---------- Comparisons ----------
 
 /**
@@ -56,6 +65,22 @@ public sealed interface KotoolsInt : Comparable<Int> {
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: KotoolsInt): Int =
         times(other.value)
+
+    /**
+     * Divides this [value] by [other], truncating the result to an integer that
+     * is closer to `0`.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
+     */
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: Int): Int = value / other
+
+    /**
+     * Divides this [value] by [other], truncating the result to an integer that
+     * is closer to `0`.
+     * Throws an [ArithmeticException] if the [other] value equals `0`.
+     */
+    @Throws(ArithmeticException::class)
+    public infix operator fun div(other: KotoolsInt): Int = div(other.value)
 
     // ---------- Comparisons ----------
 
