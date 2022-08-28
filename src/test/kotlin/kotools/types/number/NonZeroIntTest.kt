@@ -16,69 +16,59 @@ class NonZeroIntTest {
     fun `the maximum value of NonZeroInt should equal the one of Int`() =
         NonZeroInt.max.value assertEquals Int.MAX_VALUE
 
+    @Test
+    fun `the ranges of NonZeroInt shouldn't contain 0`() {
+        // GIVEN
+        val x = 0
+        // WHEN
+        val result: Boolean = NonZeroInt.ranges.all { x !in it }
+        // THEN
+        result.assertTrue()
+    }
+
     // ---------- Builders ----------
 
     @Nested
     inner class Constructor {
         @Test
-        fun `should pass with 1`() {
+        fun `should pass with an Int other than 0`() {
             // GIVEN
-            val x = 1
+            val value: Int = NonZeroInt.ranges.random().random()
             // WHEN
-            val result: NonZeroInt = assertPass { NonZeroInt(x) }
+            val result: NonZeroInt = assertPass { NonZeroInt(value) }
             // THEN
-            result.value assertEquals x
-        }
-
-        @Test
-        fun `should pass with -1`() {
-            // GIVEN
-            val x = -1
-            // WHEN
-            val result: NonZeroInt = assertPass { NonZeroInt(x) }
-            // THEN
-            result.value assertEquals x
+            result.value assertEquals value
         }
 
         @Test
         fun `should throw an error with 0`() {
             // GIVEN
-            val x = 0
+            val value = 0
             // WHEN & THEN
-            assertFailsWith<IllegalArgumentException> { NonZeroInt(x) }
+            assertFailsWith<IllegalArgumentException> { NonZeroInt(value) }
+        }
+    }
+
+    @Nested
+    inner class OrNull {
+        @Test
+        fun `should pass with an Int other than 0`() {
+            // GIVEN
+            val value: Int = NonZeroInt.ranges.random().random()
+            // WHEN
+            val result: NonZeroInt? = NonZeroInt orNull value
+            // THEN
+            result.assertNotNull().value assertEquals value
         }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should pass with 1`() {
-                // GIVEN
-                val x = 1
-                // WHEN
-                val result: NonZeroInt? = NonZeroInt orNull x
-                // THEN
-                result.assertNotNull().value assertEquals x
-            }
-
-            @Test
-            fun `should pass with -1`() {
-                // GIVEN
-                val x = -1
-                // WHEN
-                val result: NonZeroInt? = NonZeroInt orNull x
-                // THEN
-                result.assertNotNull().value assertEquals x
-            }
-
-            @Test
-            fun `should return null with 0`() {
-                // GIVEN
-                val x = 0
-                // WHEN
-                val result: NonZeroInt? = NonZeroInt orNull x
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with 0`() {
+            // GIVEN
+            val value = 0
+            // WHEN
+            val result: NonZeroInt? = NonZeroInt orNull value
+            // THEN
+            result.assertNull()
         }
     }
 
@@ -219,20 +209,9 @@ class NonZeroIntTest {
     @Nested
     inner class StringToNonZeroInt {
         @Test
-        fun `should return a non-zero int with a string representation of 1`() {
+        fun `should pass with a string representation of an Int other than 0`() {
             // GIVEN
-            val value = 1
-            val string: String = value.toString()
-            // WHEN
-            val result: NonZeroInt = assertPass(string::toNonZeroInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should return a non-zero int with a string representation of -1`() {
-            // GIVEN
-            val value = -1
+            val value: Int = NonZeroInt.ranges.random().random()
             val string: String = value.toString()
             // WHEN
             val result: NonZeroInt = assertPass(string::toNonZeroInt)
@@ -260,20 +239,9 @@ class NonZeroIntTest {
     @Nested
     inner class StringToNonZeroIntOrNull {
         @Test
-        fun `should return a non-zero int with a string representation of 1`() {
+        fun `should pass with a string representation of an Int other than 0`() {
             // GIVEN
-            val value = 1
-            val string: String = value.toString()
-            // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
-            // THEN
-            result.assertNotNull().value assertEquals value
-        }
-
-        @Test
-        fun `should return a non-zero int with a string representation of -1`() {
-            // GIVEN
-            val value = -1
+            val value: Int = NonZeroInt.ranges.random().random()
             val string: String = value.toString()
             // WHEN
             val result: NonZeroInt? = string.toNonZeroIntOrNull()
@@ -305,9 +273,9 @@ class NonZeroIntTest {
     @Nested
     inner class ToPositiveInt {
         @Test
-        fun `should return its value as a positive int with 1`() {
+        fun `should pass with a positive NonZeroInt`() {
             // GIVEN
-            val value = 1
+            val value: Int = NonZeroInt.positiveRange.random()
             val x = NonZeroInt(value)
             // WHEN
             val result: PositiveInt = assertPass(x::toPositiveInt)
@@ -316,44 +284,46 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should throw an error with -1`() {
+        fun `should throw an error with a negative NonZeroInt`() {
             // GIVEN
-            val x = NonZeroInt(-1)
+            val value: Int = NonZeroInt.negativeRange.random()
+            val x = NonZeroInt(value)
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toPositiveInt)
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a positive int with 2`() {
-                // GIVEN
-                val value = 2
-                val x = NonZeroInt(2)
-                // WHEN
-                val result: PositiveInt? = x.toPositiveIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class ToPositiveIntOrNull {
+        @Test
+        fun `should pass with a positive NonZeroInt`() {
+            // GIVEN
+            val value: Int = NonZeroInt.positiveRange.random()
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: PositiveInt? = x.toPositiveIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should return null with -2`() {
-                // GIVEN
-                val x = NonZeroInt(-2)
-                // WHEN
-                val result: PositiveInt? = x.toPositiveIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a negative NonZeroInt`() {
+            // GIVEN
+            val value: Int = NonZeroInt.negativeRange.random()
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: PositiveInt? = x.toPositiveIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 
     @Nested
     inner class ToStrictlyPositiveInt {
         @Test
-        fun `should return its value as a strictly positive int with 1`() {
+        fun `should pass with a positive NonZeroInt`() {
             // GIVEN
-            val value = 1
+            val value: Int = NonZeroInt.positiveRange.random()
             val x = NonZeroInt(value)
             // WHEN
             val result: StrictlyPositiveInt =
@@ -363,48 +333,44 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should throw an error with -1`() {
+        fun `should throw an error with a negative NonZeroInt`() {
             // GIVEN
-            val x = NonZeroInt(-1)
+            val x: NonZeroInt = NonZeroInt.negativeRange.random().toNonZeroInt()
             // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(
-                block = x::toStrictlyPositiveInt
-            )
+            assertFailsWith<IllegalArgumentException>(x::toStrictlyPositiveInt)
+        }
+    }
+
+    @Nested
+    inner class ToStrictlyPositiveIntOrNull {
+        @Test
+        fun `should pass with a positive NonZeroInt`() {
+            // GIVEN
+            val value: Int = NonZeroInt.positiveRange.random()
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
         }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a strictly positive int with 2`() {
-                // GIVEN
-                val value = 2
-                val x = NonZeroInt(value)
-                // WHEN
-                val result: StrictlyPositiveInt? =
-                    x.toStrictlyPositiveIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
-
-            @Test
-            fun `should return null with -2`() {
-                // GIVEN
-                val x = NonZeroInt(-2)
-                // WHEN
-                val result: StrictlyPositiveInt? =
-                    x.toStrictlyPositiveIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a negative NonZeroInt`() {
+            // GIVEN
+            val x: NonZeroInt = NonZeroInt.negativeRange.random().toNonZeroInt()
+            // WHEN
+            val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 
     @Nested
     inner class ToNegativeInt {
         @Test
-        fun `should return its value as a negative int with -1`() {
+        fun `should pass with a negative NonZeroInt`() {
             // GIVEN
-            val value = -1
+            val value: Int = NonZeroInt.negativeRange.random()
             val x = NonZeroInt(value)
             // WHEN
             val result: NegativeInt = assertPass(x::toNegativeInt)
@@ -413,44 +379,44 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should throw an error with 1`() {
+        fun `should throw an error with a positive NonZeroInt`() {
             // GIVEN
-            val x = NonZeroInt(1)
+            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a negative int with -2`() {
-                // GIVEN
-                val value = -2
-                val x = NonZeroInt(value)
-                // WHEN
-                val result: NegativeInt? = x.toNegativeIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class ToNegativeIntOrNull {
+        @Test
+        fun `should pass with a negative NonZeroInt`() {
+            // GIVEN
+            val value: Int = NonZeroInt.negativeRange.random()
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: NegativeInt? = x.toNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should return null with 2`() {
-                // GIVEN
-                val x = NonZeroInt(2)
-                // WHEN
-                val result: NegativeInt? = x.toNegativeIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a positive NonZeroInt`() {
+            // GIVEN
+            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
+            // WHEN
+            val result: NegativeInt? = x.toNegativeIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 
     @Nested
     inner class ToStrictlyNegativeInt {
         @Test
-        fun `should return its value as a strictly negative int with -1`() {
+        fun `should pass with a negative NonZeroInt`() {
             // GIVEN
-            val value = -1
+            val value: Int = NonZeroInt.negativeRange.random()
             val x = NonZeroInt(value)
             // WHEN
             val result: StrictlyNegativeInt =
@@ -460,39 +426,37 @@ class NonZeroIntTest {
         }
 
         @Test
-        fun `should throw an error with 1`() {
+        fun `should throw an error with a positive NonZeroInt`() {
             // GIVEN
-            val x = NonZeroInt(1)
+            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
                 block = x::toStrictlyNegativeInt
             )
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a strictly negative int with -2`() {
-                // GIVEN
-                val value = -2
-                val x = NonZeroInt(value)
-                // WHEN
-                val result: StrictlyNegativeInt? =
-                    x.toStrictlyNegativeIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class ToStrictlyNegativeIntOrNull {
+        @Test
+        fun `should pass with a negative NonZeroInt`() {
+            // GIVEN
+            val value: Int = NonZeroInt.negativeRange.random()
+            val x = NonZeroInt(value)
+            // WHEN
+            val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should return null with 2`() {
-                // GIVEN
-                val x = NonZeroInt(2)
-                // WHEN
-                val result: StrictlyNegativeInt? =
-                    x.toStrictlyNegativeIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a positive NonZeroInt`() {
+            // GIVEN
+            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
+            // WHEN
+            val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 

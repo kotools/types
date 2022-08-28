@@ -56,7 +56,8 @@ public value class NonZeroInt
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsInt {
     init {
-        require(value != 0) {
+        val valueIsInRanges: Boolean = ranges.any { value in it }
+        require(valueIsInRanges) {
             val type: String = this::class.simpleName!!
             "$type doesn't accept 0."
         }
@@ -169,11 +170,20 @@ public constructor(override val value: Int) : KotoolsInt {
     override fun toString(): String = value.toString()
 
     public companion object {
+        @SinceKotoolsTypes("2.1")
+        internal val negativeRange: IntRange = Int.MIN_VALUE..-1
+
+        @SinceKotoolsTypes("2.1")
+        internal val positiveRange: IntRange = 1..Int.MAX_VALUE
+
+        @SinceKotoolsTypes("2.1")
+        internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
+
         /** The minimum value of a non-zero int. */
-        public val min: NonZeroInt = NonZeroInt(Int.MIN_VALUE)
+        public val min: NonZeroInt = NonZeroInt(negativeRange.first)
 
         /** The maximum value of a non-zero int. */
-        public val max: NonZeroInt = NonZeroInt(Int.MAX_VALUE)
+        public val max: NonZeroInt = NonZeroInt(positiveRange.last)
 
         /**
          * Returns the [value] as a non-zero int, or returns `null` if the
