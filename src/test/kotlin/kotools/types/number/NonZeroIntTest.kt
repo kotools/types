@@ -6,6 +6,18 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class NonZeroIntTest {
+    // ---------- Constants ----------
+
+    @Test
+    fun `the minimum value of NonZeroInt should equal the one of Int`() =
+        NonZeroInt.min.value assertEquals Int.MIN_VALUE
+
+    @Test
+    fun `the maximum value of NonZeroInt should equal the one of Int`() =
+        NonZeroInt.max.value assertEquals Int.MAX_VALUE
+
+    // ---------- Builders ----------
+
     @Nested
     inner class Constructor {
         @Test
