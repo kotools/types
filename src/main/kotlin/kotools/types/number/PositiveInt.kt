@@ -58,9 +58,9 @@ public value class PositiveInt
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsInt {
     init {
-        require(value >= 0) {
+        require(value in range) {
             val type: String = this::class.simpleName!!
-            "$type doesn't accept strictly negative values (tried with $value)."
+            "$type accepts values included in $range (tried with $value)."
         }
     }
 
@@ -202,11 +202,14 @@ public constructor(override val value: Int) : KotoolsInt {
     override fun toString(): String = value.toString()
 
     public companion object {
+        @SinceKotoolsTypes("2.1")
+        internal val range: IntRange = 0..Int.MAX_VALUE
+
         /** The minimum value of a positive int. */
-        public val min: PositiveInt = PositiveInt(0)
+        public val min: PositiveInt = PositiveInt(range.first)
 
         /** The maximum value of a positive int. */
-        public val max: PositiveInt = PositiveInt(Int.MAX_VALUE)
+        public val max: PositiveInt = PositiveInt(range.last)
 
         /**
          * Returns the [value] as a positive int, or returns `null` if the

@@ -6,67 +6,63 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class PositiveIntTest {
+    // ---------- Constants ----------
+
+    @Test
+    fun `the minimum value should be 0`(): Unit =
+        PositiveInt.min.value assertEquals 0
+
+    @Test
+    fun `the maximum value should be the maximum value of Int`(): Unit =
+        PositiveInt.max.value assertEquals Int.MAX_VALUE
+
+    // ---------- Builders ----------
+
     @Nested
     inner class Constructor {
         @Test
-        fun `should pass with 0`() {
+        fun `should pass with a positive Int`() {
             // GIVEN
-            val x = 0
+            val value: Int = PositiveInt.range.random()
             // WHEN
-            val result: PositiveInt = assertPass { PositiveInt(x) }
+            val result: PositiveInt = assertPass { PositiveInt(value) }
             // THEN
-            result.value assertEquals x
+            result.value assertEquals value
         }
 
         @Test
-        fun `should pass with 1`() {
+        fun `should throw an error with a strictly negative Int`() {
             // GIVEN
-            val x = 1
-            // WHEN
-            val result: PositiveInt = assertPass { PositiveInt(x) }
-            // THEN
-            result.value assertEquals x
-        }
-
-        @Test
-        fun `should throw an error with -1`() {
-            // GIVEN
-            val x = -1
+            var value = 0
+            while (value == 0) value = PositiveInt.range.random()
+            value = -value
             // WHEN & THEN
-            assertFailsWith<IllegalArgumentException> { PositiveInt(x) }
+            assertFailsWith<IllegalArgumentException> { PositiveInt(value) }
+        }
+    }
+
+    @Nested
+    inner class OrNull {
+        @Test
+        fun `should pass with a positive Int`() {
+            // GIVEN
+            val value: Int = PositiveInt.range.random()
+            // WHEN
+            val result: PositiveInt? = PositiveInt orNull value
+            // THEN
+            result.assertNotNull().value assertEquals value
         }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should pass with 0`() {
-                // GIVEN
-                val x = 0
-                // WHEN
-                val result: PositiveInt? = PositiveInt orNull x
-                // THEN
-                result.assertNotNull().value assertEquals x
-            }
-
-            @Test
-            fun `should pass with 1`() {
-                // GIVEN
-                val x = 1
-                // WHEN
-                val result: PositiveInt? = PositiveInt orNull x
-                // THEN
-                result.assertNotNull().value assertEquals x
-            }
-
-            @Test
-            fun `should return null with -1`() {
-                // GIVEN
-                val x = -1
-                // WHEN
-                val result: PositiveInt? = PositiveInt orNull x
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a strictly negative Int`() {
+            // GIVEN
+            var value = 0
+            while (value == 0) value = PositiveInt.range.random()
+            value = -value
+            // WHEN
+            val result: PositiveInt? = PositiveInt orNull value
+            // THEN
+            result.assertNull()
         }
     }
 
@@ -75,19 +71,22 @@ class PositiveIntTest {
     @Nested
     inner class Inc {
         @Test
-        fun `should return 1 with 0`() {
+        fun `should return the value incremented by 1 with a value other than the maximum value`() {
             // GIVEN
-            var x = PositiveInt(0)
+            var value: Int = PositiveInt.max.value
+            while (value == PositiveInt.max.value)
+                value = PositiveInt.range.random()
+            var positiveInt = PositiveInt(value)
             // WHEN
-            x++
+            positiveInt++
             // THEN
-            x.value assertEquals 1
+            positiveInt.value assertEquals value + 1
         }
 
         @Test
         fun `should return the minimum value with the maximum value`() {
             // GIVEN
-            var x = PositiveInt.max
+            var x: PositiveInt = PositiveInt.max
             // WHEN
             x++
             // THEN
@@ -98,19 +97,22 @@ class PositiveIntTest {
     @Nested
     inner class Dec {
         @Test
-        fun `should return 1 with 2`() {
+        fun `should return the value decremented by 1 with a value other than the minimum value`() {
             // GIVEN
-            var x = PositiveInt(2)
+            var value: Int = PositiveInt.min.value
+            while (value == PositiveInt.min.value)
+                value = PositiveInt.range.random()
+            var positiveInt = PositiveInt(value)
             // WHEN
-            x--
+            positiveInt--
             // THEN
-            x.value assertEquals 1
+            positiveInt.value assertEquals value - 1
         }
 
         @Test
         fun `should return the maximum value with the minimum value`() {
             // GIVEN
-            var x = PositiveInt.min
+            var x: PositiveInt = PositiveInt.min
             // WHEN
             x--
             // THEN
@@ -121,9 +123,10 @@ class PositiveIntTest {
     @Nested
     inner class UnaryPlus {
         @Test
-        fun `should return the same positive int`() {
+        fun `should return the same value as a PositiveInt`() {
             // GIVEN
-            val x = PositiveInt(1)
+            val value: Int = PositiveInt.range.random()
+            val x = PositiveInt(value)
             // WHEN
             val result: PositiveInt = +x
             // THEN
@@ -134,13 +137,14 @@ class PositiveIntTest {
     @Nested
     inner class UnaryMinus {
         @Test
-        fun `should return a negative int`() {
+        fun `should return the same value as a NegativeInt`() {
             // GIVEN
-            val x = PositiveInt(1)
+            val value: Int = PositiveInt.range.random()
+            val x = PositiveInt(value)
             // WHEN
             val result: NegativeInt = -x
             // THEN
-            result.value assertEquals -1
+            result.value assertEquals -value
         }
     }
 
@@ -149,18 +153,20 @@ class PositiveIntTest {
     @Nested
     inner class Plus {
         @Test
-        fun `should return a positive int with a positive int`() {
+        fun `should return a PositiveInt with a PositiveInt`() {
             // GIVEN
-            val x = PositiveInt(1)
-            val y = PositiveInt(2)
+            val xValue: Int = PositiveInt.range.random()
+            val x = PositiveInt(xValue)
+            val yValue: Int = PositiveInt.range.random()
+            val y = PositiveInt(yValue)
             // WHEN
             val result: PositiveInt = x + y
             // THEN
-            result.value assertEquals 3
+            result.value assertEquals xValue + yValue
         }
 
         @Test
-        fun `should return a strictly positive int with a strictly positive int`() {
+        fun `should return a StrictlyPositiveInt with a StrictlyPositiveInt`() {
             // GIVEN
             val x = PositiveInt(1)
             val y = StrictlyPositiveInt(2)
