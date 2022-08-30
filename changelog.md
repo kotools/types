@@ -38,6 +38,11 @@ All notable changes to this project will be documented in this file.
   ([#68](https://github.com/kotools/types/issues/68)).
 - Improve error messages ([#70](https://github.com/kotools/types/issues/70)).
 
+### Fixed
+
+- Binary operations with bad return types in `PositiveInt`
+  ([#69](https://github.com/kotools/types/issues/69)).
+
 ## Version 2.0.0 - 2022/08/01
 
 ### Added

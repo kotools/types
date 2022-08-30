@@ -151,166 +151,83 @@ class PositiveIntTest {
     // ---------- Binary operations ----------
 
     @Nested
-    inner class Plus {
-        @Test
-        fun `should return a PositiveInt with a PositiveInt`() {
-            // GIVEN
-            val xValue: Int = PositiveInt.range.random()
-            val x = PositiveInt(xValue)
-            val yValue: Int = PositiveInt.range.random()
-            val y = PositiveInt(yValue)
-            // WHEN
-            val result: PositiveInt = x + y
-            // THEN
-            result.value assertEquals xValue + yValue
-        }
-
-        @Test
-        fun `should return a StrictlyPositiveInt with a StrictlyPositiveInt`() {
-            // GIVEN
-            val x = PositiveInt(1)
-            val y = StrictlyPositiveInt(2)
-            // WHEN
-            val result: StrictlyPositiveInt = x + y
-            // THEN
-            result.value assertEquals 3
-        }
-    }
-
-    @Nested
-    inner class Minus {
-        @Test
-        fun `should return a positive int with a negative int`() {
-            // GIVEN
-            val x = PositiveInt(1)
-            val y = NegativeInt(-1)
-            // WHEN
-            val result: PositiveInt = x - y
-            // THEN
-            result.value assertEquals 2
-        }
-
-        @Test
-        fun `should return a strictly positive int with a strictly negative int`() {
-            // GIVEN
-            val x = PositiveInt(0)
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: StrictlyPositiveInt = x - y
-            // THEN
-            result.value assertEquals 1
-        }
-    }
-
-    @Nested
-    inner class Times {
-        @Test
-        fun `should return a positive int with a positive int`() {
-            // GIVEN
-            val x = PositiveInt(2)
-            val y = PositiveInt(1)
-            // WHEN
-            val result: PositiveInt = x * y
-            // THEN
-            result.value assertEquals 2
-        }
-
-        @Test
-        fun `should return a positive int with a strictly positive int`() {
-            // GIVEN
-            val x = PositiveInt(0)
-            val y = StrictlyPositiveInt(1)
-            // WHEN
-            val result: PositiveInt = x * y
-            // THEN
-            result.value assertEquals 0
-        }
-
-        @Test
-        fun `should return a negative int with a negative int`() {
-            // GIVEN
-            val x = PositiveInt(2)
-            val y = NegativeInt(-3)
-            // WHEN
-            val result: NegativeInt = x * y
-            // THEN
-            result.value assertEquals -6
-        }
-
-        @Test
-        fun `should return a negative int with a strictly negative int`() {
-            // GIVEN
-            val x = PositiveInt(0)
-            val y = StrictlyNegativeInt(-1)
-            // WHEN
-            val result: NegativeInt = x * y
-            // THEN
-            result.value assertEquals 0
-        }
-    }
-
-    @Nested
     inner class Div {
+        // ---------- PositiveInt ----------
+
         @Test
-        fun `should return a positive int with a positive int other than 0`() {
+        fun `should return a PositiveInt with a PositiveInt other than 0`() {
             // GIVEN
-            val x = PositiveInt(0)
-            val y = PositiveInt(2)
+            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            var value = 0
+            while (value == 0) value = PositiveInt.range.random()
+            val y = PositiveInt(value)
             // WHEN
             val result: PositiveInt = assertPass { x / y }
             // THEN
-            result.value assertEquals 0
+            result.value assertEquals x.value / y.value
         }
 
         @Test
-        fun `should throw an error with a positive int that equals 0`() {
+        fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
-            val x = PositiveInt(2)
+            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
             val y = PositiveInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
 
+        // ---------- StrictlyPositiveInt ----------
+
         @Test
-        fun `should return a positive int with a strictly positive int`() {
+        fun `should return a PositiveInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x = PositiveInt(0)
-            val y = StrictlyPositiveInt(2)
+            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val y: StrictlyPositiveInt = (1..PositiveInt.max.value)
+                .random()
+                .toStrictlyPositiveInt()
             // WHEN
             val result: PositiveInt = x / y
             // THEN
-            result.value assertEquals 0
+            result.value assertEquals x.value / y.value
         }
 
+        // ---------- NegativeInt ----------
+
         @Test
-        fun `should return a negative int with a negative int other than 0`() {
+        fun `should return a NegativeInt with a NegativeInt other than 0`() {
             // GIVEN
-            val x = PositiveInt(4)
-            val y = NegativeInt(-2)
+            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            var value = 0
+            while (value == 0) value = NegativeInt.range.random()
+            val y = NegativeInt(value)
             // WHEN
             val result: NegativeInt = assertPass { x / y }
             // THEN
-            result.value assertEquals -2
+            result.value assertEquals x.value / y.value
         }
 
         @Test
-        fun `should throw an error with a negative int that equals 0`() {
+        fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
-            val x = PositiveInt(4)
+            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
             val y = NegativeInt(0)
             // WHEN
             assertFailsWith<ArithmeticException> { x / y }
         }
 
+        // ---------- StrictlyNegativeInt ----------
+
         @Test
-        fun `should return a negative int with a strictly negative int`() {
+        fun `should return a NegativeInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x = PositiveInt(0)
-            val y = StrictlyNegativeInt(-1)
+            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val y: StrictlyNegativeInt = (NegativeInt.min.value..-1)
+                .random()
+                .toStrictlyNegativeInt()
             // WHEN
             val result: NegativeInt = x / y
             // THEN
-            result.value assertEquals 0
+            result.value assertEquals x.value / y.value
         }
     }
 
