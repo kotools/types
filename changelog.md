@@ -40,8 +40,8 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Binary operations with bad return types in `PositiveInt`
-  ([#69](https://github.com/kotools/types/issues/69)).
+- Binary operations with bad return types in `PositiveInt` and
+  `StrictlyPositiveInt` ([#69](https://github.com/kotools/types/issues/69)).
 
 ## Version 2.0.0 - 2022/08/01
 

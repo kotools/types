@@ -94,40 +94,17 @@ public constructor(override val value: Int) : KotoolsInt {
 
     // ---------- Binary operations ----------
 
-    /** Adds the [other] value to this [value]. */
-    public infix operator fun plus(other: PositiveInt): StrictlyPositiveInt =
-        StrictlyPositiveInt(plus(other.value))
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(other: NegativeInt): StrictlyPositiveInt =
-        StrictlyPositiveInt(minus(other.value))
-
-    /** Subtracts the [other] value from this [value]. */
-    public infix operator fun minus(
-        other: StrictlyNegativeInt
-    ): StrictlyPositiveInt = StrictlyPositiveInt(minus(other.value))
-
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NonZeroInt): NonZeroInt =
-        NonZeroInt(times(other.value))
+        times(other.value).toNonZeroInt()
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: PositiveInt): PositiveInt =
-        PositiveInt(times(other.value))
+    public infix operator fun times(other: StrictlyPositiveInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(
-        other: StrictlyPositiveInt
-    ): StrictlyPositiveInt = StrictlyPositiveInt(times(other.value))
-
-    /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: NegativeInt): NegativeInt =
-        NegativeInt(times(other.value))
-
-    /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(
-        other: StrictlyNegativeInt
-    ): StrictlyNegativeInt = StrictlyNegativeInt(times(other.value))
+    public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -136,14 +113,14 @@ public constructor(override val value: Int) : KotoolsInt {
      */
     @Throws(ArithmeticException::class)
     public infix operator fun div(other: PositiveInt): PositiveInt =
-        PositiveInt(div(other.value))
+        div(other.value).toPositiveInt()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
     public infix operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        PositiveInt(div(other.value))
+        div(other.value).toPositiveInt()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -152,14 +129,14 @@ public constructor(override val value: Int) : KotoolsInt {
      */
     @Throws(ArithmeticException::class)
     public infix operator fun div(other: NegativeInt): NegativeInt =
-        NegativeInt(div(other.value))
+        div(other.value).toNegativeInt()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
     public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
-        NegativeInt(div(other.value))
+        div(other.value).toNegativeInt()
 
     // ---------- Conversions ----------
 
