@@ -21,9 +21,9 @@ class NegativeIntTest {
     @Nested
     inner class Constructor {
         @Test
-        fun `should pass with 0`() {
+        fun `should pass with a negative Int`() {
             // GIVEN
-            val value = 0
+            val value: Int = NegativeInt.range.random()
             // WHEN
             val result: NegativeInt = assertPass { NegativeInt(value) }
             // THEN
@@ -31,54 +31,36 @@ class NegativeIntTest {
         }
 
         @Test
-        fun `should pass with -1`() {
+        fun `should throw an error with a strictly positive Int`() {
             // GIVEN
-            val value = -1
-            // WHEN
-            val result: NegativeInt = assertPass { NegativeInt(value) }
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with 1`() {
-            // GIVEN
-            val value = 1
+            var value = 0
+            while (value == 0) value = -NegativeInt.range.random()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException> { NegativeInt(value) }
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should pass with 0`() {
-                // GIVEN
-                val value = 0
-                // WHEN
-                val result: NegativeInt? = NegativeInt orNull value
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class OrNull {
+        @Test
+        fun `should pass with a negative Int`() {
+            // GIVEN
+            val value: Int = NegativeInt.range.random()
+            // WHEN
+            val result: NegativeInt? = NegativeInt orNull value
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should pass with -1`() {
-                // GIVEN
-                val value = -1
-                // WHEN
-                val result: NegativeInt? = NegativeInt orNull value
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
-
-            @Test
-            fun `should return null with 1`() {
-                // GIVEN
-                val value = 1
-                // WHEN
-                val result: NegativeInt? = NegativeInt orNull value
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a strictly positive Int`() {
+            // GIVEN
+            var value = 0
+            while (value == 0) value = -NegativeInt.range.random()
+            // WHEN
+            val result: NegativeInt? = NegativeInt orNull value
+            // THEN
+            result.assertNull()
         }
     }
 
