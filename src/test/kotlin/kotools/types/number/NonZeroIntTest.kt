@@ -9,11 +9,11 @@ class NonZeroIntTest {
     // ---------- Constants ----------
 
     @Test
-    fun `the minimum value of NonZeroInt be the minimum value of Int`() =
+    fun `the minimum value of NonZeroInt should be the minimum value of Int`() =
         NonZeroInt.min.value assertEquals Int.MIN_VALUE
 
     @Test
-    fun `the maximum value of NonZeroInt be the maximum of Int`() =
+    fun `the maximum value of NonZeroInt should be the maximum of Int`() =
         NonZeroInt.max.value assertEquals Int.MAX_VALUE
 
     @Test
