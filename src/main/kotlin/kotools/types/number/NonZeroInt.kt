@@ -174,7 +174,7 @@ public constructor(override val value: Int) : KotoolsInt {
         internal val negativeRange: IntRange = Int.MIN_VALUE..-1
 
         @SinceKotoolsTypes("2.1")
-        internal val positiveRange: IntRange = 1..Int.MAX_VALUE
+        internal val positiveRange: IntRange = StrictlyPositiveInt.range
 
         @SinceKotoolsTypes("2.1")
         internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
