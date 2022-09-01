@@ -6,7 +6,7 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class StrictlyPositiveIntTest {
-    // ---------- Constants ----------
+    // ---------- Constants & Getters ----------
 
     @Test
     fun `the minimum value of StrictlyPositiveInt should be 1`(): Unit =
@@ -16,6 +16,10 @@ class StrictlyPositiveIntTest {
     fun `the maximum value of StrictlyPositiveInt should be the maximum value of PositiveInt`(): Unit =
         StrictlyPositiveInt.max.value assertEquals PositiveInt.max.value
 
+    @Test
+    fun `the random getter should pass`(): Unit =
+        StrictlyPositiveInt.random.value assertNotEquals StrictlyPositiveInt.random.value
+
     // ---------- Builders ----------
 
     @Nested
@@ -23,7 +27,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should pass with a strictly positive Int`() {
             // GIVEN
-            val value: Int = StrictlyPositiveInt.range.random()
+            val value: Int = StrictlyPositiveInt.random.value
             // WHEN
             val result: StrictlyPositiveInt =
                 assertPass { StrictlyPositiveInt(value) }
@@ -47,7 +51,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should pass with a strictly positive Int`() {
             // GIVEN
-            val value: Int = StrictlyPositiveInt.range.random()
+            val value: Int = StrictlyPositiveInt.random.value
             // WHEN
             val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
             // THEN
@@ -149,8 +153,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a NonZeroInt with a NonZeroInt`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: NonZeroInt = x * y
@@ -161,10 +164,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a NonZeroInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
-            val y: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
@@ -174,8 +175,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a NonZeroInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: StrictlyPositiveInt =
-                StrictlyPositiveInt.range.random().toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
             // WHEN
@@ -192,8 +192,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a PositiveInt with a PositiveInt other than 0`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y: PositiveInt = PositiveInt.random
             // WHEN
             val result: PositiveInt = assertPass { x / y }
@@ -204,8 +203,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y = PositiveInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -216,10 +214,8 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a PositiveInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
-            val y: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: PositiveInt = x / y
             // THEN
@@ -231,8 +227,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a NegativeInt with a NegativeInt other than 0`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y: NegativeInt = NegativeInt.random
             // WHEN
             val result: NegativeInt = assertPass { x / y }
@@ -243,8 +238,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
-            val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y = NegativeInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -255,8 +249,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return a NegativeInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: StrictlyPositiveInt =
-                StrictlyPositiveInt.range.random().toStrictlyPositiveInt()
+            val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
             // WHEN

@@ -164,8 +164,7 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val x: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
-            val y: StrictlyPositiveInt =
-                StrictlyPositiveInt.range.random().toStrictlyPositiveInt()
+            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
@@ -221,8 +220,7 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val x: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
-            val y: StrictlyPositiveInt =
-                StrictlyPositiveInt.range.random().toStrictlyPositiveInt()
+            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: NegativeInt = x / y
             // THEN

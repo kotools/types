@@ -186,8 +186,7 @@ class PositiveIntTest {
         fun `should return a PositiveInt with a StrictlyPositiveInt`() {
             // GIVEN
             val x: PositiveInt = PositiveInt.random
-            val y: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
-                .toStrictlyPositiveInt()
+            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: PositiveInt = x / y
             // THEN
