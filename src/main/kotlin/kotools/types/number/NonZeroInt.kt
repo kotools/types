@@ -171,7 +171,7 @@ public constructor(override val value: Int) : KotoolsInt {
 
     public companion object {
         @SinceKotoolsTypes("2.1")
-        internal val negativeRange: IntRange = Int.MIN_VALUE..-1
+        internal val negativeRange: IntRange = StrictlyNegativeInt.range
 
         @SinceKotoolsTypes("2.1")
         internal val positiveRange: IntRange = StrictlyPositiveInt.range
