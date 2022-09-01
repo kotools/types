@@ -169,17 +169,17 @@ public constructor(override val value: Int) : KotoolsInt {
 
     public companion object {
         @SinceKotoolsTypes("3.0")
-        internal val range: IntRange = 0..Int.MAX_VALUE
-
-        /** Returns a random positive int. */
-        @SinceKotoolsTypes("3.0")
-        public val random: PositiveInt get() = range.random().toPositiveInt()
+        private val range: IntRange = 0..Int.MAX_VALUE
 
         /** The minimum value of a positive int. */
         public val min: PositiveInt = PositiveInt(range.first)
 
         /** The maximum value of a positive int. */
         public val max: PositiveInt = PositiveInt(range.last)
+
+        /** Returns a random positive int. */
+        @SinceKotoolsTypes("3.0")
+        public val random: PositiveInt get() = range.random().toPositiveInt()
 
         /**
          * Returns the [value] as a positive int, or returns `null` if the

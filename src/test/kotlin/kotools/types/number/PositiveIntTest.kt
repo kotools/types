@@ -27,7 +27,7 @@ class PositiveIntTest {
         @Test
         fun `should pass with a positive Int`() {
             // GIVEN
-            val value: Int = PositiveInt.range.random()
+            val value: Int = PositiveInt.random.value
             // WHEN
             val result: PositiveInt = assertPass { PositiveInt(value) }
             // THEN
@@ -38,7 +38,7 @@ class PositiveIntTest {
         fun `should throw an error with a strictly negative Int`() {
             // GIVEN
             var value = 0
-            while (value == 0) value = PositiveInt.range.random()
+            while (value == 0) value = PositiveInt.random.value
             value = -value
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException> { PositiveInt(value) }
@@ -50,7 +50,7 @@ class PositiveIntTest {
         @Test
         fun `should pass with a positive Int`() {
             // GIVEN
-            val value: Int = PositiveInt.range.random()
+            val value: Int = PositiveInt.random.value
             // WHEN
             val result: PositiveInt? = PositiveInt orNull value
             // THEN
@@ -61,7 +61,7 @@ class PositiveIntTest {
         fun `should return null with a strictly negative Int`() {
             // GIVEN
             var value = 0
-            while (value == 0) value = PositiveInt.range.random()
+            while (value == 0) value = PositiveInt.random.value
             value = -value
             // WHEN
             val result: PositiveInt? = PositiveInt orNull value
@@ -79,7 +79,7 @@ class PositiveIntTest {
             // GIVEN
             var value: Int = PositiveInt.max.value
             while (value == PositiveInt.max.value)
-                value = PositiveInt.range.random()
+                value = PositiveInt.random.value
             var positiveInt = PositiveInt(value)
             // WHEN
             positiveInt++
@@ -105,7 +105,7 @@ class PositiveIntTest {
             // GIVEN
             var value: Int = PositiveInt.min.value
             while (value == PositiveInt.min.value)
-                value = PositiveInt.range.random()
+                value = PositiveInt.random.value
             var positiveInt = PositiveInt(value)
             // WHEN
             positiveInt--
@@ -129,7 +129,7 @@ class PositiveIntTest {
         @Test
         fun `should return the same value as a PositiveInt`() {
             // GIVEN
-            val value: Int = PositiveInt.range.random()
+            val value: Int = PositiveInt.random.value
             val x = PositiveInt(value)
             // WHEN
             val result: PositiveInt = +x
@@ -143,7 +143,7 @@ class PositiveIntTest {
         @Test
         fun `should return the same value as a NegativeInt`() {
             // GIVEN
-            val value: Int = PositiveInt.range.random()
+            val value: Int = PositiveInt.random.value
             val x = PositiveInt(value)
             // WHEN
             val result: NegativeInt = -x
@@ -163,7 +163,7 @@ class PositiveIntTest {
             // GIVEN
             val x: PositiveInt = PositiveInt.random
             var value = 0
-            while (value == 0) value = PositiveInt.range.random()
+            while (value == 0) value = PositiveInt.random.value
             val y = PositiveInt(value)
             // WHEN
             val result: PositiveInt = assertPass { x / y }

@@ -153,7 +153,7 @@ class NegativeIntTest {
             // GIVEN
             val x: NegativeInt = NegativeInt.random
             var value = 0
-            while (value == 0) value = PositiveInt.range.random()
+            while (value == 0) value = PositiveInt.random.value
             val y = PositiveInt(value)
             // WHEN
             val result: NegativeInt = assertPass { x / y }
