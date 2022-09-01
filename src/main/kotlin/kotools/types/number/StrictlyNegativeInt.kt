@@ -85,9 +85,6 @@ public constructor(override val value: Int) : KotoolsInt {
     public operator fun dec(): StrictlyNegativeInt = if (value == min.value) max
     else StrictlyNegativeInt(value - 1)
 
-    /** Returns this [value]. */
-    public operator fun unaryPlus(): StrictlyNegativeInt = this
-
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): StrictlyPositiveInt =
         StrictlyPositiveInt(-value)

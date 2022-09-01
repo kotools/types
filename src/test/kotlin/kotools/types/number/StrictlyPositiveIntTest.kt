@@ -119,20 +119,6 @@ class StrictlyPositiveIntTest {
     }
 
     @Nested
-    inner class UnaryPlus {
-        @Test
-        fun `should return the same strictly positive int`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: StrictlyPositiveInt = +x
-            // THEN
-            result.value assertEquals value
-        }
-    }
-
-    @Nested
     inner class UnaryMinus {
         @Test
         fun `should return a strictly negative int`() {

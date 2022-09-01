@@ -41,6 +41,11 @@ All notable changes to this project will be documented in this file.
   ([#68](https://github.com/kotools/types/issues/68)).
 - Improve error messages ([#70](https://github.com/kotools/types/issues/70)).
 
+### Removed
+
+- The operation `unaryPlus` from the `kotools.types.number` package
+  ([#77](https://github.com/kotools/types/issues/77)).
+
 ### Fixed
 
 - Binary operations with bad return types in `PositiveInt`,

@@ -89,9 +89,6 @@ public constructor(override val value: Int) : KotoolsInt {
         else -> NonZeroInt(value - 1)
     }
 
-    /** Returns this [value]. */
-    public operator fun unaryPlus(): NonZeroInt = this
-
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
 

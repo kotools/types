@@ -129,19 +129,6 @@ class NonZeroIntTest {
     }
 
     @Nested
-    inner class UnaryPlus {
-        @Test
-        fun `should return the same non zero int`() {
-            // GIVEN
-            val x: NonZeroInt = NonZeroInt.random
-            // WHEN
-            val result: NonZeroInt = +x
-            // THEN
-            result assertEquals x
-        }
-    }
-
-    @Nested
     inner class UnaryMinus {
         @Test
         fun `should return -1 with 1`() {

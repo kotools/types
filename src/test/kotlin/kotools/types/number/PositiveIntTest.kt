@@ -125,20 +125,6 @@ class PositiveIntTest {
     }
 
     @Nested
-    inner class UnaryPlus {
-        @Test
-        fun `should return the same value as a PositiveInt`() {
-            // GIVEN
-            val value: Int = PositiveInt.random.value
-            val x = PositiveInt(value)
-            // WHEN
-            val result: PositiveInt = +x
-            // THEN
-            result assertEquals x
-        }
-    }
-
-    @Nested
     inner class UnaryMinus {
         @Test
         fun `should return the same value as a NegativeInt`() {

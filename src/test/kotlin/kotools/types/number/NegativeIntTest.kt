@@ -117,19 +117,6 @@ class NegativeIntTest {
     }
 
     @Nested
-    inner class UnaryPlus {
-        @Test
-        fun `should return the same negative int`() {
-            // GIVEN
-            val x = NegativeInt(-1)
-            // WHEN
-            val result: NegativeInt = +x
-            // THEN
-            result assertEquals x
-        }
-    }
-
-    @Nested
     inner class UnaryMinus {
         @Test
         fun `should return a positive int that equals 1 with -1`() {
