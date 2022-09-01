@@ -81,23 +81,15 @@ class NonZeroIntTest {
     @Nested
     inner class Increment {
         @Test
-        fun `should return 2 with 1`() {
+        fun `should increment the value by 1 with a value other than the maximum value`() {
             // GIVEN
-            var x = NonZeroInt(1)
+            var x: NonZeroInt = NonZeroInt.max
+            while (x == NonZeroInt.max) x = NonZeroInt.random
+            val oldValue: Int = x.value
             // WHEN
             x++
             // THEN
-            x.value assertEquals 2
-        }
-
-        @Test
-        fun `should return 1 with -1`() {
-            // GIVEN
-            var x = NonZeroInt(-1)
-            // WHEN
-            x++
-            // THEN
-            x.value assertEquals 1
+            x.value assertEquals oldValue + 1
         }
 
         @Test
@@ -114,23 +106,15 @@ class NonZeroIntTest {
     @Nested
     inner class Decrement {
         @Test
-        fun `should return 1 with 2`() {
+        fun `should decrement the value by 1 with a value other than the minimum value`() {
             // GIVEN
-            var x = NonZeroInt(2)
+            var x: NonZeroInt = NonZeroInt.min
+            while (x == NonZeroInt.min) x = NonZeroInt.random
+            val oldValue: Int = x.value
             // WHEN
             x--
             // THEN
-            x.value assertEquals 1
-        }
-
-        @Test
-        fun `should return -1 with 1`() {
-            // GIVEN
-            var x = NonZeroInt(1)
-            // WHEN
-            x--
-            // THEN
-            x.value assertEquals -1
+            x.value assertEquals oldValue - 1
         }
 
         @Test
@@ -149,7 +133,7 @@ class NonZeroIntTest {
         @Test
         fun `should return the same non zero int`() {
             // GIVEN
-            val x = NonZeroInt(1)
+            val x: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: NonZeroInt = +x
             // THEN
@@ -162,11 +146,11 @@ class NonZeroIntTest {
         @Test
         fun `should return -1 with 1`() {
             // GIVEN
-            val x = NonZeroInt(1)
+            val x: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: NonZeroInt = -x
             // THEN
-            result.value assertEquals -1
+            result.value assertEquals -x.value
         }
     }
 
@@ -177,34 +161,34 @@ class NonZeroIntTest {
         @Test
         fun `should return a non zero int with a non zero int`() {
             // GIVEN
-            val x = NonZeroInt(-1)
-            val y = NonZeroInt(2)
+            val x: NonZeroInt = NonZeroInt.random
+            val y: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
-            result.value assertEquals -2
+            result.value assertEquals x.value * y.value
         }
 
         @Test
         fun `should return a non zero int with a strictly positive int`() {
             // GIVEN
-            val x = NonZeroInt(-1)
-            val y = StrictlyPositiveInt(2)
+            val x: NonZeroInt = NonZeroInt.random
+            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
-            result.value assertEquals -2
+            result.value assertEquals x.value * y.value
         }
 
         @Test
         fun `should return a non zero int with a strictly negative int`() {
             // GIVEN
-            val x = NonZeroInt(2)
-            val y = StrictlyNegativeInt(-1)
+            val x: NonZeroInt = NonZeroInt.random
+            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
-            result.value assertEquals -2
+            result.value assertEquals x.value * y.value
         }
     }
 
@@ -469,12 +453,11 @@ class NonZeroIntTest {
         @Test
         fun `should return its value as a string`() {
             // GIVEN
-            val value = 1
-            val x = NonZeroInt(value)
+            val x: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: String = x.toString()
             // THEN
-            result assertEquals "$value"
+            result assertEquals "${x.value}"
         }
     }
 }
@@ -483,7 +466,7 @@ class NonZeroIntSerializerTest {
     @Test
     fun `should serialize properly the class`() {
         // GIVEN
-        val x = NonZeroInt(10)
+        val x: NonZeroInt = NonZeroInt.random
         // WHEN
         val result: String = Json.encodeToString(x)
         // THEN
@@ -493,7 +476,7 @@ class NonZeroIntSerializerTest {
     @Test
     fun `should deserialize properly the class`() {
         // GIVEN
-        val x = NonZeroInt(10)
+        val x: NonZeroInt = NonZeroInt.random
         val encodedString: String = Json.encodeToString(x)
         // WHEN
         val result: NonZeroInt = Json.decodeFromString(encodedString)
