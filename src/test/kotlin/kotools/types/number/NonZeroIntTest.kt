@@ -6,7 +6,7 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class NonZeroIntTest {
-    // ---------- Constants ----------
+    // ---------- Constants & Getters ----------
 
     @Test
     fun `the minimum value of NonZeroInt should be the minimum value of Int`() =
@@ -26,6 +26,10 @@ class NonZeroIntTest {
         result.assertTrue()
     }
 
+    @Test
+    fun `the random getter should pass`(): Unit =
+        NonZeroInt.random.value assertNotEquals NonZeroInt.random.value
+
     // ---------- Builders ----------
 
     @Nested
@@ -33,7 +37,7 @@ class NonZeroIntTest {
         @Test
         fun `should pass with an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.ranges.random().random()
+            val value: Int = NonZeroInt.random.value
             // WHEN
             val result: NonZeroInt = assertPass { NonZeroInt(value) }
             // THEN
@@ -54,7 +58,7 @@ class NonZeroIntTest {
         @Test
         fun `should pass with an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.ranges.random().random()
+            val value: Int = NonZeroInt.random.value
             // WHEN
             val result: NonZeroInt? = NonZeroInt orNull value
             // THEN
@@ -211,7 +215,7 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a string representation of an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.ranges.random().random()
+            val value: Int = NonZeroInt.random.value
             val string: String = value.toString()
             // WHEN
             val result: NonZeroInt = assertPass(string::toNonZeroInt)
@@ -241,7 +245,7 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a string representation of an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.ranges.random().random()
+            val value: Int = NonZeroInt.random.value
             val string: String = value.toString()
             // WHEN
             val result: NonZeroInt? = string.toNonZeroIntOrNull()

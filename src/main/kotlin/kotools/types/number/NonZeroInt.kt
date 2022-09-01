@@ -185,6 +185,13 @@ public constructor(override val value: Int) : KotoolsInt {
         /** The maximum value of a non-zero int. */
         public val max: NonZeroInt = NonZeroInt(positiveRange.last)
 
+        /** Returns a random non-zero int. */
+        @SinceKotoolsTypes("2.1")
+        public val random: NonZeroInt
+            get() = ranges.random()
+                .random()
+                .toNonZeroInt()
+
         /**
          * Returns the [value] as a non-zero int, or returns `null` if the
          * [value] equals `0`.

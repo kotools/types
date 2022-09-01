@@ -152,9 +152,7 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val x: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
-            val y: NonZeroInt = NonZeroInt.ranges.random()
-                .random()
-                .toNonZeroInt()
+            val y: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
