@@ -70,6 +70,70 @@ class PositiveIntTest {
         }
     }
 
+    @Nested
+    inner class StringToPositiveInt {
+        @Test
+        fun `should pass with a string representation of a positive Int`() {
+            // GIVEN
+            val value: Int = PositiveInt.random.value
+            val string = "$value"
+            // WHEN
+            val result: PositiveInt = assertPass(string::toPositiveInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with an invalid string`() {
+            // GIVEN
+            val string = ""
+            // WHEN & THEN
+            assertFailsWith<NumberFormatException>(string::toPositiveInt)
+        }
+
+        @Test
+        fun `should throw an error with a string representation of a strictly negative Int`() {
+            // GIVEN
+            val string = "${StrictlyNegativeInt.random.value}"
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(string::toPositiveInt)
+        }
+    }
+
+    @Nested
+    inner class StringToPositiveIntOrNull {
+        @Test
+        fun `should pass with a string representation of a positive Int`() {
+            // GIVEN
+            val value: Int = PositiveInt.random.value
+            val string = "$value"
+            // WHEN
+            val result: PositiveInt? = string.toPositiveIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should return null with an invalid string`() {
+            // GIVEN
+            val string = ""
+            // WHEN
+            val result: PositiveInt? = string.toPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+
+        @Test
+        fun `should return null with a string representation of a strictly negative Int`() {
+            // GIVEN
+            val string = "${StrictlyNegativeInt.random.value}"
+            // WHEN
+            val result: PositiveInt? = string.toPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+    }
+
     // ---------- Unary operations ----------
 
     @Nested
@@ -218,70 +282,6 @@ class PositiveIntTest {
     }
 
     // ---------- Conversions ----------
-
-    @Nested
-    inner class StringToPositiveInt {
-        @Test
-        fun `should pass with a string representation of a positive Int`() {
-            // GIVEN
-            val value: Int = PositiveInt.random.value
-            val string = "$value"
-            // WHEN
-            val result: PositiveInt = assertPass(string::toPositiveInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with an invalid string`() {
-            // GIVEN
-            val string = ""
-            // WHEN & THEN
-            assertFailsWith<NumberFormatException>(string::toPositiveInt)
-        }
-
-        @Test
-        fun `should throw an error with a string representation of a strictly negative Int`() {
-            // GIVEN
-            val string = "${StrictlyNegativeInt.random.value}"
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(string::toPositiveInt)
-        }
-    }
-
-    @Nested
-    inner class StringToPositiveIntOrNull {
-        @Test
-        fun `should pass with a string representation of a positive Int`() {
-            // GIVEN
-            val value: Int = PositiveInt.random.value
-            val string = "$value"
-            // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
-            // THEN
-            result.assertNotNull().value assertEquals value
-        }
-
-        @Test
-        fun `should return null with an invalid string`() {
-            // GIVEN
-            val string = ""
-            // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
-            // THEN
-            result.assertNull()
-        }
-
-        @Test
-        fun `should return null with a string representation of a strictly negative Int`() {
-            // GIVEN
-            val string = "${StrictlyNegativeInt.random.value}"
-            // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
-            // THEN
-            result.assertNull()
-        }
-    }
 
     @Nested
     inner class ToNonZeroInt {
