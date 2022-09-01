@@ -6,6 +6,18 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class StrictlyNegativeIntTest {
+    // ---------- Constants ----------
+
+    @Test
+    fun `should the minimum value of StrictlyNegativeInt should be the minimum value of NegativeInt`(): Unit =
+        StrictlyNegativeInt.min.value assertEquals NegativeInt.min.value
+
+    @Test
+    fun `should the maximum value of StrictlyNegativeInt should be -1`(): Unit =
+        StrictlyNegativeInt.max.value assertEquals -1
+
+    // ---------- Builders ----------
+
     @Nested
     inner class Constructor {
         @Test
