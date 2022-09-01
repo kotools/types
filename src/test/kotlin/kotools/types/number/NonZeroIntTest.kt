@@ -192,17 +192,14 @@ class NonZeroIntTest {
         }
     }
 
-    @Nested
-    inner class UnaryMinus {
-        @Test
-        fun `should return -1 with 1`() {
-            // GIVEN
-            val x: NonZeroInt = NonZeroInt.random
-            // WHEN
-            val result: NonZeroInt = -x
-            // THEN
-            result.value assertEquals -x.value
-        }
+    @Test
+    fun `unaryMinus() should return a NonZeroInt`() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        // WHEN
+        val result: NonZeroInt = -x
+        // THEN
+        result.value assertEquals -x.value
     }
 
     // ---------- Binary operations ----------
@@ -435,17 +432,14 @@ class NonZeroIntTest {
         }
     }
 
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val x: NonZeroInt = NonZeroInt.random
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals "${x.value}"
-        }
+    @Test
+    fun `toString() should return its value as a string`() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        // WHEN
+        val result: String = x.toString()
+        // THEN
+        result assertEquals "${x.value}"
     }
 }
 

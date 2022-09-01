@@ -184,17 +184,14 @@ class NegativeIntTest {
         }
     }
 
-    @Nested
-    inner class UnaryMinus {
-        @Test
-        fun `unaryMinus should return a PositiveInt`() {
-            // GIVEN
-            val x: NegativeInt = NegativeInt.random
-            // WHEN
-            val result: PositiveInt = -x
-            // THEN
-            result.value assertEquals -x.value
-        }
+    @Test
+    fun `unaryMinus() should return a PositiveInt`() {
+        // GIVEN
+        val x: NegativeInt = NegativeInt.random
+        // WHEN
+        val result: PositiveInt = -x
+        // THEN
+        result.value assertEquals -x.value
     }
 
     // ---------- Binary operations ----------
@@ -421,17 +418,14 @@ class NegativeIntTest {
         }
     }
 
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val x: NegativeInt = NegativeInt.random
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals "${x.value}"
-        }
+    @Test
+    fun `toString() should return its value as a string`() {
+        // GIVEN
+        val x: NegativeInt = NegativeInt.random
+        // WHEN
+        val result: String = x.toString()
+        // THEN
+        result assertEquals "${x.value}"
     }
 }
 
