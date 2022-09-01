@@ -169,13 +169,17 @@ public constructor(override val value: Int) : KotoolsInt {
 
     public companion object {
         @SinceKotoolsTypes("3.0")
-        internal val range: IntRange = Int.MIN_VALUE..0
+        private val range: IntRange = Int.MIN_VALUE..0
 
         /** The minimum value of a negative int. */
         public val min: NegativeInt = NegativeInt(range.first)
 
         /** The maximum value of a negative int. */
         public val max: NegativeInt = NegativeInt(range.last)
+
+        /** Returns a random negative int. */
+        @SinceKotoolsTypes("3.0")
+        public val random: NegativeInt get() = range.random().toNegativeInt()
 
         /**
          * Returns the [value] as a negative int, or returns `null` if the

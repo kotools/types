@@ -30,8 +30,8 @@ All notable changes to this project will be documented in this file.
   `NotEmptyCollection` ([#65](https://github.com/kotools/types/issues/65)).
 - `KotoolsInt` type for unifying integer's types
   ([#60](https://github.com/kotools/types/issues/60)).
-- Random number retrieving from the ranges of `NonZeroInt` and `PositiveInt`
-  ([#79](https://github.com/kotools/types/issues/79)).
+- Random number retrieving from the ranges of `NonZeroInt`, `PositiveInt` and
+  `NegativeInt` ([#79](https://github.com/kotools/types/issues/79)).
 
 ### Changed
 

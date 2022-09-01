@@ -237,7 +237,7 @@ class StrictlyNegativeIntTest {
             val x: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
             var value = 0
-            while (value == 0) value = NegativeInt.range.random()
+            while (value == 0) value = NegativeInt.random.value
             val y = NegativeInt(value)
             // WHEN
             val result: PositiveInt = assertPass { x / y }

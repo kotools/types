@@ -34,7 +34,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should throw an error with a negative Int`() {
             // GIVEN
-            val value: Int = NegativeInt.range.random()
+            val value: Int = NegativeInt.random.value
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException> {
                 StrictlyPositiveInt(value)
@@ -57,7 +57,7 @@ class StrictlyPositiveIntTest {
         @Test
         fun `should return null with a negative Int`() {
             // GIVEN
-            val value: Int = NegativeInt.range.random()
+            val value: Int = NegativeInt.random.value
             // WHEN
             val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
             // THEN
@@ -233,7 +233,7 @@ class StrictlyPositiveIntTest {
             // GIVEN
             val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
                 .toStrictlyPositiveInt()
-            val y: NegativeInt = NegativeInt.range.random().toNegativeInt()
+            val y: NegativeInt = NegativeInt.random
             // WHEN
             val result: NegativeInt = assertPass { x / y }
             // THEN
