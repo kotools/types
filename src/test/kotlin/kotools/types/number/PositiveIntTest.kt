@@ -236,20 +236,9 @@ class PositiveIntTest {
     @Nested
     inner class StringToPositiveInt {
         @Test
-        fun `should pass with a string representation of 0`() {
+        fun `should pass with a string representation of a positive Int`() {
             // GIVEN
-            val value = 0
-            val string = "$value"
-            // WHEN
-            val result: PositiveInt = assertPass(string::toPositiveInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should pass with a string representation of 1`() {
-            // GIVEN
-            val value = 1
+            val value: Int = PositiveInt.random.value
             val string = "$value"
             // WHEN
             val result: PositiveInt = assertPass(string::toPositiveInt)
@@ -266,9 +255,9 @@ class PositiveIntTest {
         }
 
         @Test
-        fun `should throw an error with a string representation of -1`() {
+        fun `should throw an error with a string representation of a strictly negative Int`() {
             // GIVEN
-            val string = "-1"
+            val string = "${StrictlyNegativeInt.random.value}"
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(string::toPositiveInt)
         }
@@ -277,20 +266,9 @@ class PositiveIntTest {
     @Nested
     inner class StringToPositiveIntOrNull {
         @Test
-        fun `should pass with a string representation of 0`() {
+        fun `should pass with a string representation of a positive Int`() {
             // GIVEN
-            val value = 0
-            val string = "$value"
-            // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
-            // THEN
-            result.assertNotNull().value assertEquals value
-        }
-
-        @Test
-        fun `should pass with a string representation of 1`() {
-            // GIVEN
-            val value = 1
+            val value: Int = PositiveInt.random.value
             val string = "$value"
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
@@ -309,9 +287,9 @@ class PositiveIntTest {
         }
 
         @Test
-        fun `should return null with a string representation of -1`() {
+        fun `should return null with a string representation of a strictly negative Int`() {
             // GIVEN
-            val string = "-1"
+            val string = "${StrictlyNegativeInt.random.value}"
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
@@ -322,9 +300,9 @@ class PositiveIntTest {
     @Nested
     inner class ToNonZeroInt {
         @Test
-        fun `should return its value as a non zero int with 1`() {
+        fun `should pass with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val value = 1
+            val value: Int = StrictlyPositiveInt.random.value
             val x = PositiveInt(value)
             // WHEN
             val result: NonZeroInt = assertPass(x::toNonZeroInt)
@@ -339,38 +317,38 @@ class PositiveIntTest {
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toNonZeroInt)
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a non zero int with 2`() {
-                // GIVEN
-                val value = 2
-                val x = PositiveInt(value)
-                // WHEN
-                val result: NonZeroInt? = x.toNonZeroIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class ToNonZeroIntOrNull {
+        @Test
+        fun `should pass with a PositiveInt holding a strictly positive Int`() {
+            // GIVEN
+            val value: Int = StrictlyPositiveInt.random.value
+            val x = PositiveInt(value)
+            // WHEN
+            val result: NonZeroInt? = x.toNonZeroIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should return null with 0`() {
-                // GIVEN
-                val x = PositiveInt(0)
-                // WHEN
-                val result: NonZeroInt? = x.toNonZeroIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with 0`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            // WHEN
+            val result: NonZeroInt? = x.toNonZeroIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 
     @Nested
     inner class ToStrictlyPositiveInt {
         @Test
-        fun `should return its value as a strictly positive int with 1`() {
+        fun `should pass with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val value = 1
+            val value: Int = StrictlyPositiveInt.random.value
             val x = PositiveInt(value)
             // WHEN
             val result: StrictlyPositiveInt =
@@ -388,38 +366,38 @@ class PositiveIntTest {
                 block = x::toStrictlyPositiveInt
             )
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a strictly positive int with 2`() {
-                // GIVEN
-                val value = 2
-                val x = PositiveInt(value)
-                // WHEN
-                val result: StrictlyPositiveInt? =
-                    x.toStrictlyPositiveIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class ToStrictlyPositiveIntOrNull {
+        @Test
+        fun `should pass with a PositiveInt holding a strictly positive Int`() {
+            // GIVEN
+            val value: Int = StrictlyPositiveInt.random.value
+            val x = PositiveInt(value)
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                x.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should return null with 0`() {
-                // GIVEN
-                val x = PositiveInt(0)
-                // WHEN
-                val result: StrictlyPositiveInt? =
-                    x.toStrictlyPositiveIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with 0`() {
+            // GIVEN
+            val x = PositiveInt(0)
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                x.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 
     @Nested
     inner class ToNegativeInt {
         @Test
-        fun `should return its value as a negative int with 0`() {
+        fun `should pass with 0`() {
             // GIVEN
             val value = 0
             val x = PositiveInt(value)
@@ -430,35 +408,35 @@ class PositiveIntTest {
         }
 
         @Test
-        fun `should throw an error with 1`() {
+        fun `should throw an error with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val x = PositiveInt(1)
+            val x = PositiveInt(StrictlyPositiveInt.random.value)
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
         }
+    }
 
-        @Nested
-        inner class OrNull {
-            @Test
-            fun `should return its value as a negative int with 0`() {
-                // GIVEN
-                val value = 0
-                val x = PositiveInt(value)
-                // WHEN
-                val result: NegativeInt? = x.toNegativeIntOrNull()
-                // THEN
-                result.assertNotNull().value assertEquals value
-            }
+    @Nested
+    inner class ToNegativeIntOrNull {
+        @Test
+        fun `should pass with 0`() {
+            // GIVEN
+            val value = 0
+            val x = PositiveInt(value)
+            // WHEN
+            val result: NegativeInt? = x.toNegativeIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
 
-            @Test
-            fun `should return null with 2`() {
-                // GIVEN
-                val x = PositiveInt(2)
-                // WHEN
-                val result: NegativeInt? = x.toNegativeIntOrNull()
-                // THEN
-                result.assertNull()
-            }
+        @Test
+        fun `should return null with a PositiveInt holding a strictly positive Int`() {
+            // GIVEN
+            val x = PositiveInt(StrictlyPositiveInt.random.value)
+            // WHEN
+            val result: NegativeInt? = x.toNegativeIntOrNull()
+            // THEN
+            result.assertNull()
         }
     }
 
@@ -467,12 +445,11 @@ class PositiveIntTest {
         @Test
         fun `should return its value as a string`() {
             // GIVEN
-            val value = 1
-            val x = PositiveInt(value)
+            val x: PositiveInt = PositiveInt.random
             // WHEN
             val result: String = x.toString()
             // THEN
-            result assertEquals "$value"
+            result assertEquals "${x.value}"
         }
     }
 }
@@ -481,7 +458,7 @@ class PositiveIntSerializerTest {
     @Test
     fun `should serialize properly the class`() {
         // GIVEN
-        val x = PositiveInt(1)
+        val x: PositiveInt = PositiveInt.random
         // WHEN
         val result: String = Json.encodeToString(x)
         // THEN
@@ -491,7 +468,7 @@ class PositiveIntSerializerTest {
     @Test
     fun `should deserialize properly the class`() {
         // GIVEN
-        val x = PositiveInt(0)
+        val x: PositiveInt = PositiveInt.random
         val encodedString: String = Json.encodeToString(x)
         // WHEN
         val result: PositiveInt = Json.decodeFromString(encodedString)
