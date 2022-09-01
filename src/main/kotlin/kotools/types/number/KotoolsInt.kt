@@ -13,16 +13,16 @@ import kotools.types.string.NotBlankString
 // ---------- Binary operations ----------
 
 /** Adds the [other] value to this value. */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public infix operator fun Int.plus(other: KotoolsInt): Int = plus(other.value)
 
 /** Subtracts the [other] value from this value. */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public infix operator fun Int.minus(other: KotoolsInt): Int =
     minus(other.value)
 
 /** Multiplies this value by the [other] value. */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public infix operator fun Int.times(other: KotoolsInt): Int =
     times(other.value)
 
@@ -31,7 +31,7 @@ public infix operator fun Int.times(other: KotoolsInt): Int =
  * that is closer to `0`.
  * Throws an [ArithmeticException] if the [other] value equals `0`.
  */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 @Throws(ArithmeticException::class)
 public infix operator fun Int.div(other: KotoolsInt): Int = div(other.value)
 
@@ -43,13 +43,13 @@ public infix operator fun Int.div(other: KotoolsInt): Int = div(other.value)
  * value is less than the [other] value, or a positive number if this value is
  * greater than the [other] value.
  */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public infix operator fun Int.compareTo(other: KotoolsInt): Int =
     compareTo(other.value)
 
 /** Parent of every integer's representation in this library. */
 @Serializable(KotoolsIntSerializer::class)
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public sealed interface KotoolsInt : Comparable<Int> {
     public val value: Int
 
@@ -120,7 +120,7 @@ public sealed interface KotoolsInt : Comparable<Int> {
     }
 }
 
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 internal object KotoolsIntSerializer : KSerializer<KotoolsInt> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
         KotoolsInt::class.qualifiedName!!,

@@ -125,7 +125,7 @@ public constructor(public val value: String) : Comparable<String> {
      * representation of a number, or throws an [IllegalArgumentException] if it
      * represents `0`.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
     public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
 
@@ -133,7 +133,7 @@ public constructor(public val value: String) : Comparable<String> {
      * Returns this [value] as a non-zero int, or returns `null` if this [value]
      * is not a valid representation of a number or if it represents `0`.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
 
     /**
@@ -142,7 +142,7 @@ public constructor(public val value: String) : Comparable<String> {
      * representation of a number, or throws an [IllegalArgumentException] if it
      * represents a strictly negative number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
     public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
 
@@ -151,7 +151,7 @@ public constructor(public val value: String) : Comparable<String> {
      * is not a valid representation of a number or if it represents a strictly
      * negative number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     public fun toPositiveIntOrNull(): PositiveInt? =
         value.toPositiveIntOrNull()
 
@@ -161,7 +161,7 @@ public constructor(public val value: String) : Comparable<String> {
      * representation of a number, or throws an [IllegalArgumentException] if it
      * represents a negative number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
     public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
         value.toStrictlyPositiveInt()
@@ -171,7 +171,7 @@ public constructor(public val value: String) : Comparable<String> {
      * this [value] is not a valid representation of a number or if it
      * represents a negative number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         value.toStrictlyPositiveIntOrNull()
 
@@ -181,7 +181,7 @@ public constructor(public val value: String) : Comparable<String> {
      * representation of a number, or throws an [IllegalArgumentException] if it
      * represents a strictly positive number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
     public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
 
@@ -190,7 +190,7 @@ public constructor(public val value: String) : Comparable<String> {
      * is not a valid representation of a number or if it represents a strictly
      * positive number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     public fun toNegativeIntOrNull(): NegativeInt? =
         value.toNegativeIntOrNull()
 
@@ -200,7 +200,7 @@ public constructor(public val value: String) : Comparable<String> {
      * representation of a number, or throws an [IllegalArgumentException] if it
      * represents a positive number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
     public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
         value.toStrictlyNegativeInt()
@@ -210,7 +210,7 @@ public constructor(public val value: String) : Comparable<String> {
      * this [value] is not a valid representation of a number or if it
      * represents a positive number.
      */
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
         value.toStrictlyNegativeIntOrNull()
 
@@ -228,7 +228,7 @@ public constructor(public val value: String) : Comparable<String> {
         }
     }
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal object Serializer : KSerializer<NotBlankString> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
             NotBlankString::class.qualifiedName!!,

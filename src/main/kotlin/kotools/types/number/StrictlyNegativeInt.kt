@@ -26,7 +26,7 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
  * of a number, or throws an [IllegalArgumentException] if it represents a
  * positive number.
  */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
 public fun String.toStrictlyNegativeInt(): StrictlyNegativeInt =
     toInt().toStrictlyNegativeInt()
@@ -44,7 +44,7 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  * value is not a valid representation of a number or if it represents a
  * positive number.
  */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     toIntOrNull()?.toStrictlyNegativeIntOrNull()
 
@@ -149,7 +149,7 @@ public constructor(override val value: Int) : KotoolsInt {
     override fun toString(): String = value.toString()
 
     public companion object {
-        @SinceKotoolsTypes("2.1")
+        @SinceKotoolsTypes("3.0")
         internal val range: IntRange = NegativeInt.min.value..-1
 
         /** The minimum value of a strictly negative int. */
@@ -169,7 +169,7 @@ public constructor(override val value: Int) : KotoolsInt {
         }
     }
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal object Serializer : KSerializer<StrictlyNegativeInt> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
             StrictlyNegativeInt::class.qualifiedName!!,

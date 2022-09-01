@@ -81,7 +81,7 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
 @Serializable(NotEmptySet.Serializer::class)
 @SinceKotoolsTypes("1.3")
 public class NotEmptySet<out E>
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 internal constructor(
     override val head: E,
     private val tail: Set<E>
@@ -91,7 +91,7 @@ internal constructor(
         tail.filterNot { it == head }.toSet()
     )
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal constructor(set: Set<E>) : this(
         set.first(),
         set.filterNot { it == set.first() }.toSet()
@@ -113,7 +113,7 @@ internal constructor(
     override fun get(index: Int): E = if (index == 0) head
     else tail.elementAt(index - 1)
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptySetSerializer<E, NotEmptySet<E>>(
             elementSerializer,
@@ -121,7 +121,7 @@ internal constructor(
         )
 }
 
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 internal sealed class SealedNotEmptySetSerializer<E, C : Set<E>>(
     elementSerializer: KSerializer<E>,
     private val builder: (Set<E>) -> C

@@ -79,7 +79,7 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableSetOrElse(
 @Serializable(NotEmptyMutableSet.Serializer::class)
 @SinceKotoolsTypes("1.3")
 public class NotEmptyMutableSet<E>
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 private constructor(
     override var head: E,
     private val tail: MutableSet<E>
@@ -89,7 +89,7 @@ private constructor(
         tail.filterNot { it == head }.toMutableSet()
     )
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal constructor(mutableSet: MutableSet<E>) : this(
         mutableSet.first(),
         mutableSet.filterNot { it == mutableSet.first() }.toMutableSet()
@@ -122,7 +122,7 @@ private constructor(
             true
         } else tail.remove(element)
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptySetSerializer<E, NotEmptyMutableSet<E>>(
             elementSerializer,

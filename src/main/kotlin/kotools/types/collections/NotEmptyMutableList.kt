@@ -82,7 +82,7 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableListOrElse(
 @Serializable(NotEmptyMutableList.Serializer::class)
 @SinceKotoolsTypes("1.3")
 public class NotEmptyMutableList<E>
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 private constructor(
     override var head: E,
     private val tail: MutableList<E>
@@ -90,7 +90,7 @@ private constructor(
     public constructor(head: E, vararg tail: E) :
             this(head, tail.toMutableList())
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal constructor(mutableList: MutableList<E>) : this(
         mutableList.first(),
         mutableList.subList(1, mutableList.size)
@@ -283,7 +283,7 @@ private constructor(
     public fun setOrNull(index: StrictlyPositiveInt, element: E): E? =
         setOrNull(index.value, element)
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptyCollectionSerializer<E, NotEmptyMutableList<E>>(
             elementSerializer,

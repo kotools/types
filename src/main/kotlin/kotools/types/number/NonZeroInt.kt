@@ -24,7 +24,7 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  * Throws a [NumberFormatException] if this value is not a valid representation
  * of a number, or throws an [IllegalArgumentException] if it represents `0`.
  */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
 public fun String.toNonZeroInt(): NonZeroInt = toInt().toNonZeroInt()
 
@@ -39,7 +39,7 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
  * Returns this value as a non-zero int, or returns `null` if this value is not
  * a valid representation of a number or if it represents `0`.
  */
-@SinceKotoolsTypes("2.1")
+@SinceKotoolsTypes("3.0")
 public fun String.toNonZeroIntOrNull(): NonZeroInt? =
     toIntOrNull()?.toNonZeroIntOrNull()
 
@@ -170,13 +170,13 @@ public constructor(override val value: Int) : KotoolsInt {
     override fun toString(): String = value.toString()
 
     public companion object {
-        @SinceKotoolsTypes("2.1")
+        @SinceKotoolsTypes("3.0")
         internal val negativeRange: IntRange = StrictlyNegativeInt.range
 
-        @SinceKotoolsTypes("2.1")
+        @SinceKotoolsTypes("3.0")
         internal val positiveRange: IntRange = StrictlyPositiveInt.range
 
-        @SinceKotoolsTypes("2.1")
+        @SinceKotoolsTypes("3.0")
         internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
 
         /** The minimum value of a non-zero int. */
@@ -186,7 +186,7 @@ public constructor(override val value: Int) : KotoolsInt {
         public val max: NonZeroInt = NonZeroInt(positiveRange.last)
 
         /** Returns a random non-zero int. */
-        @SinceKotoolsTypes("2.1")
+        @SinceKotoolsTypes("3.0")
         public val random: NonZeroInt
             get() = ranges.random()
                 .random()
@@ -203,7 +203,7 @@ public constructor(override val value: Int) : KotoolsInt {
         }
     }
 
-    @SinceKotoolsTypes("2.1")
+    @SinceKotoolsTypes("3.0")
     internal object Serializer : KSerializer<NonZeroInt> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
             NonZeroInt::class.qualifiedName!!,
