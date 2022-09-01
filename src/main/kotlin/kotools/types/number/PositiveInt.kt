@@ -171,6 +171,10 @@ public constructor(override val value: Int) : KotoolsInt {
         @SinceKotoolsTypes("3.0")
         internal val range: IntRange = 0..Int.MAX_VALUE
 
+        /** Returns a random positive int. */
+        @SinceKotoolsTypes("3.0")
+        public val random: PositiveInt get() = range.random().toPositiveInt()
+
         /** The minimum value of a positive int. */
         public val min: PositiveInt = PositiveInt(range.first)
 

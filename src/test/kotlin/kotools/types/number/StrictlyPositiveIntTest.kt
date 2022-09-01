@@ -194,7 +194,7 @@ class StrictlyPositiveIntTest {
             // GIVEN
             val x: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
                 .toStrictlyPositiveInt()
-            val y: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val y: PositiveInt = PositiveInt.random
             // WHEN
             val result: PositiveInt = assertPass { x / y }
             // THEN

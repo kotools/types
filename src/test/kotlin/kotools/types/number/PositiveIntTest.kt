@@ -6,7 +6,7 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class PositiveIntTest {
-    // ---------- Constants ----------
+    // ---------- Constants & Getters ----------
 
     @Test
     fun `the minimum value should be 0`(): Unit =
@@ -15,6 +15,10 @@ class PositiveIntTest {
     @Test
     fun `the maximum value should be the maximum value of Int`(): Unit =
         PositiveInt.max.value assertEquals Int.MAX_VALUE
+
+    @Test
+    fun `the random getter should pass`(): Unit =
+        PositiveInt.random.value assertNotEquals PositiveInt.random.value
 
     // ---------- Builders ----------
 
@@ -157,7 +161,7 @@ class PositiveIntTest {
         @Test
         fun `should return a PositiveInt with a PositiveInt other than 0`() {
             // GIVEN
-            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val x: PositiveInt = PositiveInt.random
             var value = 0
             while (value == 0) value = PositiveInt.range.random()
             val y = PositiveInt(value)
@@ -170,7 +174,7 @@ class PositiveIntTest {
         @Test
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
-            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val x: PositiveInt = PositiveInt.random
             val y = PositiveInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -181,7 +185,7 @@ class PositiveIntTest {
         @Test
         fun `should return a PositiveInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val x: PositiveInt = PositiveInt.random
             val y: StrictlyPositiveInt = StrictlyPositiveInt.range.random()
                 .toStrictlyPositiveInt()
             // WHEN
@@ -195,7 +199,7 @@ class PositiveIntTest {
         @Test
         fun `should return a NegativeInt with a NegativeInt other than 0`() {
             // GIVEN
-            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val x: PositiveInt = PositiveInt.random
             var value = 0
             while (value == 0) value = NegativeInt.range.random()
             val y = NegativeInt(value)
@@ -208,7 +212,7 @@ class PositiveIntTest {
         @Test
         fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
-            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val x: PositiveInt = PositiveInt.random
             val y = NegativeInt(0)
             // WHEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -219,7 +223,7 @@ class PositiveIntTest {
         @Test
         fun `should return a NegativeInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: PositiveInt = PositiveInt.range.random().toPositiveInt()
+            val x: PositiveInt = PositiveInt.random
             val y: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
             // WHEN
