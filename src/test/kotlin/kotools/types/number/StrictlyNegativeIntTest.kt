@@ -6,7 +6,7 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 
 class StrictlyNegativeIntTest {
-    // ---------- Constants ----------
+    // ---------- Constants & Getters ----------
 
     @Test
     fun `should the minimum value of StrictlyNegativeInt should be the minimum value of NegativeInt`(): Unit =
@@ -16,6 +16,10 @@ class StrictlyNegativeIntTest {
     fun `should the maximum value of StrictlyNegativeInt should be -1`(): Unit =
         StrictlyNegativeInt.max.value assertEquals -1
 
+    @Test
+    fun `the random getter should pass`(): Unit =
+        StrictlyNegativeInt.random.value assertNotEquals StrictlyNegativeInt.random.value
+
     // ---------- Builders ----------
 
     @Nested
@@ -23,7 +27,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.range.random()
+            val value: Int = StrictlyNegativeInt.random.value
             // WHEN
             val result: StrictlyNegativeInt =
                 assertPass { StrictlyNegativeInt(value) }
@@ -47,7 +51,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.range.random()
+            val value: Int = StrictlyNegativeInt.random.value
             // WHEN
             val result: StrictlyNegativeInt? =
                 StrictlyNegativeInt orNull value
@@ -150,8 +154,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NonZeroInt with a NonZeroInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: NonZeroInt = NonZeroInt.random
             // WHEN
             val result: NonZeroInt = x * y
@@ -162,8 +165,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NonZeroInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: NonZeroInt = x * y
@@ -174,10 +176,8 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NonZeroInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
-            val y: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
             val result: NonZeroInt = x * y
             // THEN
@@ -192,8 +192,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NegativeInt with a PositiveInt other than 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             var value = 0
             while (value == 0) value = PositiveInt.random.value
             val y = PositiveInt(value)
@@ -206,8 +205,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y = PositiveInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -218,8 +216,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NegativeInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
             val result: NegativeInt = x / y
@@ -232,8 +229,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a PositiveInt with a NegativeInt other than 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             var value = 0
             while (value == 0) value = NegativeInt.random.value
             val y = NegativeInt(value)
@@ -246,8 +242,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y = NegativeInt(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -258,10 +253,8 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a PositiveInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
-            val y: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.random().toStrictlyNegativeInt()
+            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
             val result: PositiveInt = x / y
             // THEN

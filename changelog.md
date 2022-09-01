@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 - `KotoolsInt` type for unifying integer's types
   ([#60](https://github.com/kotools/types/issues/60)).
 - Random number retrieving from the ranges of `NonZeroInt`, `PositiveInt`,
-  `NegativeInt` and `StrictlyPositiveInt`
+  `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   ([#79](https://github.com/kotools/types/issues/79)).
 
 ### Changed

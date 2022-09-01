@@ -158,6 +158,11 @@ public constructor(override val value: Int) : KotoolsInt {
         /** The maximum value of a strictly negative int. */
         public val max: StrictlyNegativeInt = StrictlyNegativeInt(range.last)
 
+        /** Returns a random strictly negative int. */
+        @SinceKotoolsTypes("3.0")
+        public val random: StrictlyNegativeInt
+            get() = range.random().toStrictlyNegativeInt()
+
         /**
          * Returns the [value] as a strictly negative int, or returns `null` if
          * the [value] is positive.
