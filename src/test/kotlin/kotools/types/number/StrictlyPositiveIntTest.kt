@@ -69,19 +69,92 @@ class StrictlyPositiveIntTest {
         }
     }
 
+    @Nested
+    inner class StringToStrictlyPositiveInt {
+        @Test
+        fun `should pass with a string representation of a strictly positive Int`() {
+            // GIVEN
+            val value: Int = StrictlyPositiveInt.random.value
+            val string = "$value"
+            // WHEN
+            val result: StrictlyPositiveInt =
+                assertPass(string::toStrictlyPositiveInt)
+            // THEN
+            result.value assertEquals value
+        }
+
+        @Test
+        fun `should throw an error with an invalid string`() {
+            // GIVEN
+            val string = ""
+            // WHEN & THEN
+            assertFailsWith<NumberFormatException>(
+                string::toStrictlyPositiveInt
+            )
+        }
+
+        @Test
+        fun `should throw an error with a string representation of a negative Int`() {
+            // GIVEN
+            val string = "${NegativeInt.random.value}"
+            // WHEN & THEN
+            assertFailsWith<IllegalArgumentException>(
+                string::toStrictlyPositiveInt
+            )
+        }
+    }
+
+    @Nested
+    inner class StringToStrictlyPositiveIntOrNull {
+        @Test
+        fun `should pass with a string representation of a strictly positive Int`() {
+            // GIVEN
+            val value: Int = StrictlyPositiveInt.random.value
+            val string = "$value"
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                string.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNotNull().value assertEquals value
+        }
+
+        @Test
+        fun `should return null with an invalid string`() {
+            // GIVEN
+            val string = ""
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                string.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+
+        @Test
+        fun `should return null with a string representation of a negative Int`() {
+            // GIVEN
+            val string = "${NegativeInt.random.value}"
+            // WHEN
+            val result: StrictlyPositiveInt? =
+                string.toStrictlyPositiveIntOrNull()
+            // THEN
+            result.assertNull()
+        }
+    }
+
     // ---------- Unary operations ----------
 
     @Nested
     inner class Inc {
         @Test
-        fun `should return 2 with 1`() {
+        fun `should increment the value by 1 with a value other than the maximum value`() {
             // GIVEN
-            val value = 1
-            var x = StrictlyPositiveInt(value)
+            var x: StrictlyPositiveInt = StrictlyPositiveInt.max
+            while (x == StrictlyPositiveInt.max) x = StrictlyPositiveInt.random
+            val oldValue: Int = x.value
             // WHEN
             x++
             // THEN
-            x.value assertEquals value + 1
+            x.value assertEquals oldValue + 1
         }
 
         @Test
@@ -98,13 +171,15 @@ class StrictlyPositiveIntTest {
     @Nested
     inner class Dec {
         @Test
-        fun `should return 1 with 2`() {
+        fun `should decrement the value by 1 with a value other than the minimum value`() {
             // GIVEN
-            var x = StrictlyPositiveInt(2)
+            var x: StrictlyPositiveInt = StrictlyPositiveInt.min
+            while (x == StrictlyPositiveInt.min) x = StrictlyPositiveInt.random
+            val oldValue: Int = x.value
             // WHEN
             x--
             // THEN
-            x.value assertEquals 1
+            x.value assertEquals oldValue - 1
         }
 
         @Test
@@ -118,18 +193,14 @@ class StrictlyPositiveIntTest {
         }
     }
 
-    @Nested
-    inner class UnaryMinus {
-        @Test
-        fun `should return a strictly negative int`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: StrictlyNegativeInt = -x
-            // THEN
-            result.value assertEquals -x.value
-        }
+    @Test
+    fun `unaryMinus() should return a StrictlyNegativeInt`() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: StrictlyNegativeInt = -x
+        // THEN
+        result.value assertEquals -x.value
     }
 
     // ---------- Binary operations ----------
@@ -245,118 +316,34 @@ class StrictlyPositiveIntTest {
 
     // ---------- Conversions ----------
 
-    @Nested
-    inner class StringToStrictlyPositiveInt {
-        @Test
-        fun `should pass with a string representation of 1`() {
-            // GIVEN
-            val value = 1
-            val string = "$value"
-            // WHEN
-            val result: StrictlyPositiveInt =
-                assertPass(string::toStrictlyPositiveInt)
-            // THEN
-            result.value assertEquals value
-        }
-
-        @Test
-        fun `should throw an error with an invalid string`() {
-            // GIVEN
-            val string = ""
-            // WHEN & THEN
-            assertFailsWith<NumberFormatException>(
-                string::toStrictlyPositiveInt
-            )
-        }
-
-        @Test
-        fun `should throw an error with a string representation of 0`() {
-            // GIVEN
-            val string = "0"
-            // WHEN & THEN
-            assertFailsWith<IllegalArgumentException>(
-                string::toStrictlyPositiveInt
-            )
-        }
+    @Test
+    fun `toNonZeroInt() should pass`() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: NonZeroInt = x.toNonZeroInt()
+        // THEN
+        result.value assertEquals x.value
     }
 
-    @Nested
-    inner class StringToStrictlyPositiveIntOrNull {
-        @Test
-        fun `should pass with a string representation of 1`() {
-            // GIVEN
-            val value = 1
-            val string = "$value"
-            // WHEN
-            val result: StrictlyPositiveInt? =
-                string.toStrictlyPositiveIntOrNull()
-            // THEN
-            result.assertNotNull().value assertEquals value
-        }
-
-        @Test
-        fun `should return null with an invalid string`() {
-            // GIVEN
-            val string = ""
-            // WHEN
-            val result: StrictlyPositiveInt? =
-                string.toStrictlyPositiveIntOrNull()
-            // THEN
-            result.assertNull()
-        }
-
-        @Test
-        fun `should return null with a string representation of 0`() {
-            // GIVEN
-            val string = "0"
-            // WHEN
-            val result: StrictlyPositiveInt? =
-                string.toStrictlyPositiveIntOrNull()
-            // THEN
-            result.assertNull()
-        }
+    @Test
+    fun `toPositiveInt() should pass`() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: PositiveInt = x.toPositiveInt()
+        // THEN
+        result.value assertEquals x.value
     }
 
-    @Nested
-    inner class ToNonZeroInt {
-        @Test
-        fun `should return its value as a non zero int`() {
-            // GIVEN
-            val value = 2
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: NonZeroInt = x.toNonZeroInt()
-            // THEN
-            result.value assertEquals value
-        }
-    }
-
-    @Nested
-    inner class ToPositiveInt {
-        @Test
-        fun `should return its value as a positive int`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: PositiveInt = x.toPositiveInt()
-            // THEN
-            result.value assertEquals value
-        }
-    }
-
-    @Nested
-    inner class ToString {
-        @Test
-        fun `should return its value as a string`() {
-            // GIVEN
-            val value = 1
-            val x = StrictlyPositiveInt(value)
-            // WHEN
-            val result: String = x.toString()
-            // THEN
-            result assertEquals value.toString()
-        }
+    @Test
+    fun `toString() should pass`() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: String = x.toString()
+        // THEN
+        result assertEquals "${x.value}"
     }
 }
 
@@ -364,7 +351,7 @@ class StrictlyPositiveIntSerializerTest {
     @Test
     fun `should serialize properly the class`() {
         // GIVEN
-        val x = StrictlyPositiveInt(1)
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
         // WHEN
         val result: String = Json.encodeToString(x)
         // THEN
@@ -374,7 +361,7 @@ class StrictlyPositiveIntSerializerTest {
     @Test
     fun `should deserialize properly the class`() {
         // GIVEN
-        val x = StrictlyPositiveInt(1)
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
         val encodedString: String = Json.encodeToString(x)
         // WHEN
         val result: StrictlyPositiveInt = Json.decodeFromString(encodedString)
