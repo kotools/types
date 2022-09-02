@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
-// ---------- Conversions ----------
+// ---------- Builders ----------
 
 /**
  * Returns this value as a strictly negative int, or throws an
