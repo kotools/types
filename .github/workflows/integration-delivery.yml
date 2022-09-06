@@ -21,7 +21,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
   # ---------- Stage 2 ----------
   build-macos:
-    name: Test on macOS
+    name: Build on macOS
     runs-on: macos-latest
     needs: validate-wrapper
     steps:
@@ -30,7 +30,7 @@ jobs:
       - name: Build the application
         run: ./gradlew build --no-daemon
   build-ubuntu:
-    name: Test on Ubuntu
+    name: Build on Ubuntu
     runs-on: ubuntu-latest
     needs: validate-wrapper
     steps:
@@ -39,7 +39,7 @@ jobs:
       - name: Build the application
         run: ./gradlew build --no-daemon
   build-windows:
-    name: Test on Windows
+    name: Build on Windows
     runs-on: windows-latest
     needs: validate-wrapper
     steps:
