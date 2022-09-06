@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Removed
+
+- Nullability, equality and failure assertions in the `io.github.kotools.assert`
+  package ([#19](https://github.com/kotools/assert/issues/19)).
+
 ## Version 2.1.0 - 2022/08/03
 
 ### Added
