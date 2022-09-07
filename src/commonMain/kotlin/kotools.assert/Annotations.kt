@@ -1,8 +1,5 @@
 package kotools.assert
 
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-
 /**
  * Specifies the first [version] of Kotools Assert where a declaration has
  * appeared.
@@ -24,9 +21,3 @@ import org.junit.jupiter.api.Test
     AnnotationTarget.TYPEALIAS
 )
 internal annotation class SinceKotoolsAssert(val version: String)
-
-@SinceKotoolsAssert("2.1")
-public typealias Nested = Nested
-
-@SinceKotoolsAssert("2.1")
-public typealias Test = Test

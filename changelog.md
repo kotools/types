@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+- Support for Kotlin Multiplatform targeting JVM, JS and Native runtimes
+  ([#21](https://github.com/kotools/assert/issues/21)).
+
 ### Removed
 
 - Nullability, equality and failure assertions in the `io.github.kotools.assert`
