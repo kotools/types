@@ -3,7 +3,9 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.kotools/assert)](https://search.maven.org/artifact/io.github.kotools/assert)
 [![Kotlin](https://img.shields.io/badge/kotlin-1.5.31-blue.svg?logo=kotlin)][kotlin]
 
-Kotools Assert is a lightweight assertions library for [Kotlin].
+Kotools Assert is a multiplatform library providing lightweight assertions for
+[Kotlin].
+> This library currently supports the following runtimes: JVM, JS and Native.
 
 ```kotlin
 1 assertEquals 1
@@ -29,13 +31,13 @@ assertFailsWith<RuntimeException> { throw RuntimeException() }
 #### Kotlin DSL
 
 ```kotlin
-testImplementation("io.github.kotools:assert:2.1.0")
+testImplementation("io.github.kotools:assert:3.0.0")
 ```
 
 #### Groovy DSL
 
 ```groovy
-testImplementation 'io.github.kotools:assert:2.1.0'
+testImplementation 'io.github.kotools:assert:3.0.0'
 ```
 
 ### Maven
@@ -44,7 +46,7 @@ testImplementation 'io.github.kotools:assert:2.1.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>assert</artifactId>
-    <version>2.1.0</version>
+    <version>3.0.0</version>
     <scope>test</scope>
 </dependency>
 ```

@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 3.0.0 - 2022/09/07
+
 ### Added
 
 - Support for Kotlin Multiplatform targeting JVM, JS and Native runtimes
