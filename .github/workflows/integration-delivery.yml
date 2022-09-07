@@ -51,7 +51,7 @@ jobs:
   deliver:
     name: Deliver to OSSRH
     runs-on: ubuntu-latest
-    needs: [ build-macos, build-ubuntu, build-windows ]
+    needs: [ check-macos, check-ubuntu, check-windows ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
