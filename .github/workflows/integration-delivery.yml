@@ -20,33 +20,33 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
   # ---------- Stage 2 ----------
-  build-macos:
-    name: Build on macOS
+  check-macos:
+    name: Check on macOS
     runs-on: macos-latest
     needs: validate-wrapper
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build the application
-        run: ./gradlew build --no-daemon
-  build-ubuntu:
-    name: Build on Ubuntu
+      - name: Check the application
+        run: ./gradlew check --no-daemon
+  check-ubuntu:
+    name: Check on Ubuntu
     runs-on: ubuntu-latest
     needs: validate-wrapper
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build the application
-        run: ./gradlew build --no-daemon
-  build-windows:
-    name: Build on Windows
+      - name: Check the application
+        run: ./gradlew check --no-daemon
+  check-windows:
+    name: Check on Windows
     runs-on: windows-latest
     needs: validate-wrapper
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build the application
-        run: ./gradlew build --no-daemon
+      - name: Check the application
+        run: ./gradlew check --no-daemon
   # ---------- Stage 3 ----------
   deliver:
     name: Deliver to OSSRH
