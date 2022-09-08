@@ -19,15 +19,27 @@ All notable changes to this project will be documented in this file.
 
 ## Version 3.0.0 - 2022/09/07
 
-### Added
+### Global changes
 
-- Support for Kotlin Multiplatform targeting JVM, JS and Native runtimes
-  ([#21](https://github.com/kotools/assert/issues/21)).
+#### Added
 
-### Removed
+Support for JS and Native platforms
+([#21](https://github.com/kotools/assert/issues/21)).
 
-- Nullability, equality and failure assertions in the `io.github.kotools.assert`
-  package ([#19](https://github.com/kotools/assert/issues/19)).
+#### Removed
+
+Deprecated assertions in the `io.github.kotools.assert` package
+([#19](https://github.com/kotools/assert/issues/19)).
+
+### All platforms
+
+#### Added
+
+The functions `assertTrue`, `assertFalse`, `assertEquals`, `assertNotEquals`,
+`assertFails`, `assertFailsWith`, `assertNull` and `assertNotNull` are now
+available on all platforms.
+These assertions were only available for the JVM platform in the previous
+version ([#21](https://github.com/kotools/assert/issues/21)).
 
 ## Version 2.1.0 - 2022/08/03
 
