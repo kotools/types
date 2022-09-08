@@ -17,6 +17,14 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### All platforms
+
+#### Fixed
+
+Versioning annotations for keeping the first version of Kotools Assert where
+a given declaration has appeared
+([#26](https://github.com/kotools/assert/issues/26)).
+
 ## Version 3.0.0 - 2022/09/07
 
 ### Global changes
