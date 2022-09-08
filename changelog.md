@@ -54,40 +54,39 @@ version ([#21](https://github.com/kotools/assert/issues/21)).
 
 ### Deprecated
 
-- Deprecate nullability, equality and failure assertions in the
-  `io.github.kotools.assert` package
-  ([#15](https://github.com/kotools/assert/issues/15)).
+Deprecate assertions in the `io.github.kotools.assert` package
+([#15](https://github.com/kotools/assert/issues/15)).
 
 ## Version 2.0.0 - 2022/04/11
 
 ### Removed
 
-- Equality and nullability assertions with lazy messages
-  ([#11](https://github.com/kotools/assert/issues/11)).
+Equality and nullability assertions with lazy messages
+([#11](https://github.com/kotools/assert/issues/11)).
 
 ## Version 1.2.0 - 2022/04/09
 
 ### Changed
 
-- Split specific failure assertions `assertFailsWith` from untyped failure
-  assertions `assertFails` ([#5](https://github.com/kotools/assert/issues/5)).
+Split specific failure assertions `assertFailsWith` from untyped failure
+assertions `assertFails` ([#5](https://github.com/kotools/assert/issues/5)).
 
 ### Deprecated
 
-- Equality and nullability assertions with lazy messages
-  ([#5](https://github.com/kotools/assert/issues/5)).
+Equality and nullability assertions with lazy messages
+([#5](https://github.com/kotools/assert/issues/5)).
 
 ### Removed
 
-- Default messages from equality assertions
-  ([#10](https://github.com/kotools/assert/issues/10)).
+Default messages from equality assertions
+([#10](https://github.com/kotools/assert/issues/10)).
 
 ## Version 1.1.0 - 2022/02/12
 
 ### Added
 
-- Failure assertions with `assertFails`
-  ([#1](https://github.com/kotools/assert/issues/1)).
+Failure assertions with `assertFails`
+([#1](https://github.com/kotools/assert/issues/1)).
 
 ## Version 1.0.0 - 2022/02/12
 
