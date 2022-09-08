@@ -21,30 +21,30 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Integrate [Kotools Types](https://github.com/kotools/types) library
-  ([#42](https://github.com/kotools/csv-file/issues/42)).
+Integrate [Kotools Types](https://github.com/kotools/types) library
+([#42](https://github.com/kotools/csv-file/issues/42)).
 
 ## Version 2.1.1 - 2022/02/10
 
 ### Fixed
 
-- Fix pagination and filter ordering in the reader.
+Fix pagination and filter ordering in the reader.
 
 ## Version 2.1.0 - 2022/02/02
 
 ### Added
 
-- Paginated CSV file's reading as a given
-  type ([#13](https://github.com/kotools/csv-file/issues/13)).
-- Filtered CSV file's reading as a given
-  type ([#35](https://github.com/kotools/csv-file/issues/35)).
+- Paginated CSV file's reading as a given type
+  ([#13](https://github.com/kotools/csv-file/issues/13)).
+- Filtered CSV file's reading as a given type
+  ([#35](https://github.com/kotools/csv-file/issues/35)).
 
 ## Version 2.0.1 - 2022/02/01
 
 ### Fixed
 
-- File targeting on
-  Windows ([#37](https://github.com/kotools/csv-file/issues/37)).
+File targeting on Windows
+([#37](https://github.com/kotools/csv-file/issues/37)).
 
 ## Version 2.0.0 - 2022/01/05
 
@@ -57,12 +57,12 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Methods design for explicit error
-  handling ([#24](https://github.com/kotools/csv-file/issues/24)).
+Methods design for explicit error handling
+([#24](https://github.com/kotools/csv-file/issues/24)).
 
 ### Removed
 
-- Untyped functions ([#26](https://github.com/kotools/csv-file/issues/26)).
+Untyped functions ([#26](https://github.com/kotools/csv-file/issues/26)).
 
 ## Version 1.0.0 - 2021/12/16
 
