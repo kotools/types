@@ -5,7 +5,7 @@
 
 Kotools Assert is a multiplatform library providing lightweight assertions for
 [Kotlin].
-> This library currently supports the following runtimes: JVM, JS and Native.
+> This library currently supports the JVM, JS and Native platforms.
 
 ```kotlin
 1 assertEquals 1
