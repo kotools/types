@@ -1,7 +1,7 @@
 name: Deployment
 on:
   release:
-    types: [ published ]
+    types: [ released ]
   workflow_dispatch:
 jobs:
   # ---------- Stage 1 ----------
@@ -31,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: ./gradlew publishAllPublicationToGitHubRepository --no-daemon
+        run: ./gradlew publishAllPublicationsToGitHubRepository --no-daemon
   deploy-docs:
     name: Deploy documentation to GitHub Pages
     runs-on: ubuntu-latest
