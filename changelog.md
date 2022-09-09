@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
 - Random number retrieving from the ranges of `NonZeroInt`, `PositiveInt`,
   `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   ([#79](https://github.com/kotools/types/issues/79)).
+- Support for JS and Native platforms
+  ([#62](https://github.com/kotools/types/issues/62)).
 
 ### Changed
 
