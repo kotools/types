@@ -13,7 +13,10 @@ plugins {
 group = "io.github.kotools"
 version = "3.0.0-SNAPSHOT"
 
-repositories(RepositoryHandler::mavenCentral)
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
 
 dependencies {
     // Kotlin
@@ -22,7 +25,7 @@ dependencies {
     testImplementation(kotlin("test"))
 
     // Kotools
-    testImplementation("io.github.kotools:assert:[2.1,2.2[")
+    testImplementation("io.github.kotools:assert:[3.0,3.1[")
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict
