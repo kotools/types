@@ -21,7 +21,7 @@ dependencies {
 }
 
 object LibrarySourceSets {
-    const val COMMON: String = "Common"
+    const val COMMON: String = "All platforms"
     const val JS: String = "JS"
     const val JVM: String = "JVM"
     const val NATIVE: String = "Native"
