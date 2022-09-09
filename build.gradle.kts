@@ -132,7 +132,14 @@ val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
 tasks.assemble { dependsOn(javadocJar) }
 
 tasks.withType<Sign> {
-    onlyIf { !project.version.toString().endsWith("SNAPSHOT") }
+    onlyIf {
+        val version: String = project.version.toString()
+        val isSnapshot: Boolean = version.endsWith("SNAPSHOT")
+        val taskNames: List<String> = project.gradle.startParameter.taskNames
+        val isPublishingToMavenLocal: Boolean =
+            tasks.publishToMavenLocal.name in taskNames
+        !isSnapshot && !isPublishingToMavenLocal
+    }
 }
 
 // ---------- Publishing & signing ----------
