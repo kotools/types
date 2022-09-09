@@ -8,7 +8,7 @@ import kotlin.test.assertFailsWith
 
 class ErrorsTest {
     @Test
-    fun `indexOutOfBounds should throw an IndexOutOfBoundsException`() {
+    fun indexOutOfBounds_should_throw_an_IndexOutOfBoundsException() {
         // GIVEN
         val index: Int = Random.nextInt()
         val size: Int = Random.nextInt()
@@ -20,7 +20,7 @@ class ErrorsTest {
     }
 
     @Test
-    fun `indexOutOfBoundsMessage should pass`() {
+    fun indexOutOfBoundsMessage_should_pass() {
         // GIVEN
         val index: Int = Random.nextInt()
         val size: Int = Random.nextInt()
