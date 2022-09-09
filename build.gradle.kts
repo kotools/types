@@ -15,12 +15,13 @@ plugins {
 group = "io.github.kotools"
 version = "3.0.0-SNAPSHOT"
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
+val isPublishingToMavenLocal: Boolean by lazy {
+    val taskNames: List<String> = project.gradle.startParameter.taskNames
+    tasks.publishToMavenLocal.name in taskNames
 }
 
-val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
+repositories { if (isPublishingToMavenLocal) mavenLocal() else mavenCentral() }
 
 object LibrarySourceSets {
     const val COMMON: String = "All platforms"
@@ -119,12 +120,7 @@ val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
 tasks.assemble { dependsOn(javadocJar) }
 
 tasks.withType<Sign> {
-    onlyIf {
-        val taskNames: List<String> = project.gradle.startParameter.taskNames
-        val isPublishingToMavenLocal: Boolean =
-            tasks.publishToMavenLocal.name in taskNames
-        !isSnapshot && !isPublishingToMavenLocal
-    }
+    onlyIf { !isSnapshot && !isPublishingToMavenLocal }
 }
 
 // ---------- Publishing & signing ----------
