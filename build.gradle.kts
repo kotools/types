@@ -15,10 +15,7 @@ version = "3.0.1"
 
 repositories(RepositoryHandler::mavenCentral)
 
-dependencies {
-    commonMainImplementation(platform(kotlin("bom")))
-    commonMainImplementation(kotlin("test"))
-}
+val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
 
 object LibrarySourceSets {
     const val COMMON: String = "All platforms"
@@ -31,7 +28,7 @@ object LibrarySourceSets {
     fun add(vararg sourceSets: Pair<String, KotlinSourceSet>): Unit =
         sourceSets.forEach { mutableMap += it }
 
-    fun configure(task: DokkaTask) {
+    infix fun configure(task: DokkaTask) {
         task.dokkaSourceSets {
             mutableMap.forEach {
                 named(it.value.name) { displayName.set(it.key) }
@@ -59,15 +56,19 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
-        val jsMain: KotlinSourceSet by getting { dependsOn(commonMain) }
+        val commonMain: KotlinSourceSet by getting {
+            dependencies {
+                implementation(project.dependencies.platform(kotlin("bom")))
+                implementation(kotlin("test"))
+            }
+        }
+        val jsMain: KotlinSourceSet by getting
         val jvmMain: KotlinSourceSet by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation("org.junit.jupiter:junit-jupiter-api:[5.6,5.7[")
             }
         }
-        val nativeMain by getting { dependsOn(commonMain) }
+        val nativeMain: KotlinSourceSet by getting
         LibrarySourceSets.run {
             add(
                 COMMON to commonMain,
@@ -81,33 +82,6 @@ kotlin {
 
 // ---------- Tasks ----------
 
-setOf(
-    "jsIrProcessResources",
-    "jsLegacyProcessResources",
-    "compileTestKotlinJsIr",
-    "jsIrTestProcessResources",
-    "jsIrTestClasses",
-    "compileTestDevelopmentExecutableKotlinJsIr",
-    "jsIrTestTestDevelopmentExecutableCompileSync",
-    "jsIrTest",
-    "compileTestKotlinJsLegacy",
-    "jsLegacyTestProcessResources",
-    "jsLegacyTestClasses",
-    "jsLegacyTest",
-    "jvmProcessResources",
-    "compileTestKotlinJvm",
-    "jvmTestProcessResources",
-    "jvmTestClasses",
-    "jvmTest",
-    "nativeProcessResources",
-    "compileTestKotlinNative",
-    "linkDebugTestNative",
-    "nativeTest",
-    "allTests"
-).forEach {
-    tasks.getByName(it) { enabled = false }
-}
-
 tasks.withType<Jar> {
     fun key(suffix: String): String = "Implementation-$suffix"
     val name: Pair<String, String> = key("Title") to project.name
@@ -118,7 +92,7 @@ tasks.withType<Jar> {
 val dokkaDirectory: File = buildDir.resolve("dokka")
 tasks.dokkaHtml {
     outputDirectory.set(dokkaDirectory)
-    LibrarySourceSets.configure(this)
+    LibrarySourceSets configure this
 }
 val cleanDokkaHtml: TaskProvider<Delete> =
     tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }
@@ -133,8 +107,6 @@ tasks.assemble { dependsOn(javadocJar) }
 
 tasks.withType<Sign> {
     onlyIf {
-        val version: String = project.version.toString()
-        val isSnapshot: Boolean = version.endsWith("SNAPSHOT")
         val taskNames: List<String> = project.gradle.startParameter.taskNames
         val isPublishingToMavenLocal: Boolean =
             tasks.publishToMavenLocal.name in taskNames
@@ -156,10 +128,10 @@ publishing {
         }
         maven {
             name = "OSSRH"
-            val isSnapshot: Boolean = version.toString().endsWith("SNAPSHOT")
-            val uri: String = if (isSnapshot) "content/repositories/snapshots/"
-            else "service/local/staging/deploy/maven2/"
-            url = uri("https://s01.oss.sonatype.org/$uri")
+            val uriSuffix: String =
+                if (isSnapshot) "content/repositories/snapshots/"
+                else "service/local/staging/deploy/maven2/"
+            url = uri("https://s01.oss.sonatype.org/$uriSuffix")
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
