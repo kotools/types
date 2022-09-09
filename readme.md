@@ -31,13 +31,13 @@ assertFailsWith<RuntimeException> { throw RuntimeException() }
 #### Kotlin DSL
 
 ```kotlin
-testImplementation("io.github.kotools:assert:3.0.0")
+testImplementation("io.github.kotools:assert:3.0.1")
 ```
 
 #### Groovy DSL
 
 ```groovy
-testImplementation 'io.github.kotools:assert:3.0.0'
+testImplementation 'io.github.kotools:assert:3.0.1'
 ```
 
 ### Maven
@@ -46,7 +46,7 @@ testImplementation 'io.github.kotools:assert:3.0.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>assert</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 ```

@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 3.0.1 - 2022/09/09
+
 ### All platforms
 
 #### Fixed
