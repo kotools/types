@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 
 - Conversions from `String` and `NotBlankString` types to `NonZeroInt`,
   `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt`
-  ([#48](https://github.com/kotools/types/issues/48)).
+  ([#64](https://github.com/kotools/types/issues/64)).
 - Serialization and deserialization with
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
