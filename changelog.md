@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 3.0.2 - 2022/09/10
+
 ### Native
 
 Fix delivery and deployment for macOS and Windows platforms
