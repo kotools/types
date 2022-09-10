@@ -20,8 +20,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies { commonMainImplementation(platform(kotlin("bom"))) }
-
 val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
 
 object LibrarySourceSets {
@@ -70,6 +68,7 @@ kotlin {
     sourceSets {
         val commonMain: KotlinSourceSet by getting {
             dependencies {
+                implementation(project.dependencies.platform(kotlin("bom")))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
             }
         }
@@ -80,9 +79,11 @@ kotlin {
             }
         }
         val jsMain: KotlinSourceSet by getting
+        val jsTest: KotlinSourceSet by getting
         val jvmMain: KotlinSourceSet by getting
         val jvmTest: KotlinSourceSet by getting
         val nativeMain: KotlinSourceSet by getting
+        val nativeTest: KotlinSourceSet by getting
         LibrarySourceSets.run {
             add(
                 COMMON to commonMain,
