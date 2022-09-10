@@ -16,6 +16,7 @@ version = "3.0.2-SNAPSHOT"
 repositories(RepositoryHandler::mavenCentral)
 
 val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
+val hostOs: String? = System.getProperty("os.name")
 
 object LibrarySourceSets {
     const val COMMON: String = "All platforms"
@@ -45,16 +46,9 @@ kotlin {
         compilations.all { kotlinOptions.jvmTarget = "1.8" }
     }
     js(BOTH, KotlinJsTargetDsl::browser)
-    System.getProperty("os.name")?.let {
-        when {
-            it == "Mac OS X" -> macosX64("native")
-            it == "Linux" -> linuxX64("native")
-            it.startsWith("Windows") -> mingwX64("native")
-            else -> throw GradleException(
-                "Host OS is not supported in Kotlin/Native."
-            )
-        }
-    }
+    linuxX64()
+    macosX64()
+    mingwX64()
     sourceSets {
         val commonMain: KotlinSourceSet by getting {
             dependencies {
@@ -62,21 +56,12 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val jsMain: KotlinSourceSet by getting
         val jvmMain: KotlinSourceSet by getting {
             dependencies {
                 implementation("org.junit.jupiter:junit-jupiter-api:[5.6,5.7[")
             }
         }
-        val nativeMain: KotlinSourceSet by getting
-        LibrarySourceSets.run {
-            add(
-                COMMON to commonMain,
-                JS to jsMain,
-                JVM to jvmMain,
-                NATIVE to nativeMain
-            )
-        }
+        LibrarySourceSets.run { add(COMMON to commonMain, JVM to jvmMain) }
     }
 }
 
@@ -104,6 +89,28 @@ val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
 }
 
 tasks.assemble { dependsOn(javadocJar) }
+
+tasks {
+    setOf("GitHubRepository", "OSSRHRepository", "MavenLocal").forEach {
+        register("publishJsJvmAndLinuxPublicationsTo$it") {
+            val multiplatformTask: Task =
+                getByName("publishKotlinMultiplatformPublicationTo$it")
+            val jsTask: Task = getByName("publishJsPublicationTo$it")
+            val jvmTask: Task = getByName("publishJvmPublicationTo$it")
+            val linuxTask: Task = getByName("publishLinuxX64PublicationTo$it")
+            dependsOn(multiplatformTask, jsTask, jvmTask, linuxTask)
+        }
+        if (hostOs?.startsWith("Mac OS") == true)
+            register("publishMacOSPublicationTo$it") {
+                val task: Task = getByName("publishMacosX64PublicationTo$it")
+                dependsOn(task)
+            }
+        register("publishWindowsPublicationTo$it") {
+            val task: Task = getByName("publishMingwX64PublicationTo$it")
+            dependsOn(task)
+        }
+    }
+}
 
 tasks.withType<Sign> {
     onlyIf {

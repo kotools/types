@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Native
+
+Fix delivery and deployment for macOS and Windows platforms
+([#33](https://github.com/kotools/assert/issues/33)).
+
 ## Version 3.0.1 - 2022/09/09
 
 ### All platforms
