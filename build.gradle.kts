@@ -16,7 +16,6 @@ version = "3.0.3-SNAPSHOT"
 repositories(RepositoryHandler::mavenCentral)
 
 val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
-val hostOs: String? = System.getProperty("os.name")
 
 object LibrarySourceSets {
     const val COMMON: String = "All platforms"
@@ -89,28 +88,6 @@ val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
 }
 
 tasks.assemble { dependsOn(javadocJar) }
-
-tasks {
-    setOf("GitHubRepository", "OSSRHRepository", "MavenLocal").forEach {
-        register("publishJsJvmAndLinuxPublicationsTo$it") {
-            val multiplatformTask: Task =
-                getByName("publishKotlinMultiplatformPublicationTo$it")
-            val jsTask: Task = getByName("publishJsPublicationTo$it")
-            val jvmTask: Task = getByName("publishJvmPublicationTo$it")
-            val linuxTask: Task = getByName("publishLinuxX64PublicationTo$it")
-            dependsOn(multiplatformTask, jsTask, jvmTask, linuxTask)
-        }
-        if (hostOs?.startsWith("Mac OS") == true)
-            register("publishMacOSPublicationTo$it") {
-                val task: Task = getByName("publishMacosX64PublicationTo$it")
-                dependsOn(task)
-            }
-        register("publishWindowsPublicationTo$it") {
-            val task: Task = getByName("publishMingwX64PublicationTo$it")
-            dependsOn(task)
-        }
-    }
-}
 
 tasks.withType<Sign> {
     onlyIf {
@@ -189,6 +166,25 @@ publishing {
             val password: String? = System.getenv("GPG_PASSWORD")
             useInMemoryPgpKeys(secretKey, password)
             sign(it)
+        }
+    }
+}
+
+System.getenv("OS")?.let {
+    setOf("GitHubRepository", "OSSRHRepository").forEach { repository: String ->
+        tasks.getByName("publishAllPublicationsTo$repository") {
+            val platforms: MutableList<String> = mutableListOf()
+            when {
+                it.startsWith("macos") -> platforms += "MacosX64"
+                it.startsWith("windows") -> platforms += "MingwX64"
+                it.startsWith("ubuntu") ->
+                    setOf("KotlinMultiplatform", "Js", "Jvm", "LinuxX64")
+                        .forEach { platforms += it }
+            }
+            val paths: Array<Task> = platforms.map { prefix: String ->
+                tasks.getByName("publish${prefix}PublicationTo$repository")
+            }.toTypedArray()
+            dependsOn(*paths)
         }
     }
 }

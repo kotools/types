@@ -16,9 +16,12 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
   # ---------- Stage 2 ----------
-  deploy-kmp-js-jvm-linux:
-    name: Deploy Kotlin Multiplatform, JS, JVM and Linux publications to GitHub Packages
-    runs-on: ubuntu-latest
+  deploy:
+    name: Deploy to GitHub Packages
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
     needs: validate-wrapper
     permissions:
       contents: read
@@ -31,39 +34,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: ./gradlew publishJsJvmAndLinuxPublicationsToGitHubRepository --no-daemon
-  deploy-macos:
-    name: Deploy macOS publication to GitHub Packages
-    runs-on: macos-latest
-    needs: validate-wrapper
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Deploy to GitHub Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: ./gradlew publishMacOSPublicationToGitHubRepository --no-daemon
-  deploy-windows:
-    name: Deploy Windows publication to GitHub Packages
-    runs-on: windows-latest
-    needs: validate-wrapper
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Deploy to GitHub Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: ./gradlew publishWindowsPublicationToGitHubRepository --no-daemon
+          OS: ${{ matrix.os }}
+        run: ./gradlew publishAllPublicationsToGitHubRepository --no-daemon
   deploy-docs:
     name: Deploy documentation to GitHub Pages
     runs-on: ubuntu-latest
