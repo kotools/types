@@ -18,7 +18,10 @@ jobs:
   # ---------- Stage 2 ----------
   deploy:
     name: Deploy to GitHub Packages
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
     needs: validate-wrapper
     permissions:
       contents: read
@@ -31,6 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          OS: ${{ matrix.os }}
         run: ./gradlew publishAllPublicationsToGitHubRepository --no-daemon
   deploy-docs:
     name: Deploy documentation to GitHub Pages

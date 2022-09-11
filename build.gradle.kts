@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
@@ -15,10 +14,7 @@ plugins {
 group = "io.github.kotools"
 version = "3.0.0-SNAPSHOT"
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
+repositories(RepositoryHandler::mavenCentral)
 
 val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
 
@@ -48,28 +44,20 @@ kotlin {
     explicitApi = ExplicitApiMode.Strict
     jvm {
         compilations.all { kotlinOptions.jvmTarget = "1.8" }
-        testRuns["test"].executionTask {
-            testLogging.exceptionFormat = TestExceptionFormat.FULL
-            useJUnitPlatform()
-        }
+        testRuns["test"].executionTask.configure(Test::useJUnitPlatform)
     }
     js(BOTH, KotlinJsTargetDsl::browser)
-    System.getProperty("os.name")?.let {
-        when {
-            it == "Mac OS X" -> macosX64("native")
-            it == "Linux" -> linuxX64("native")
-            it.startsWith("Windows") -> mingwX64("native")
-            else -> throw GradleException(
-                "Host OS is not supported in Kotlin/Native."
-            )
-        }
-    }
+    linuxX64()
+    macosX64()
+    mingwX64()
     @Suppress("UNUSED_VARIABLE")
     sourceSets {
         val commonMain: KotlinSourceSet by getting {
             dependencies {
                 implementation(project.dependencies.platform(kotlin("bom")))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+                implementation(
+                    "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1"
+                )
             }
         }
         val commonTest: KotlinSourceSet by getting {
@@ -78,20 +66,9 @@ kotlin {
                 implementation("io.github.kotools:assert:[3.0,3.1[")
             }
         }
-        val jsMain: KotlinSourceSet by getting
-        val jsTest: KotlinSourceSet by getting
         val jvmMain: KotlinSourceSet by getting
         val jvmTest: KotlinSourceSet by getting
-        val nativeMain: KotlinSourceSet by getting
-        val nativeTest: KotlinSourceSet by getting
-        LibrarySourceSets.run {
-            add(
-                COMMON to commonMain,
-                JS to jsMain,
-                JVM to jvmMain,
-                NATIVE to nativeMain
-            )
-        }
+        LibrarySourceSets.run { add(COMMON to commonMain, JVM to jvmMain) }
     }
 }
 
@@ -195,6 +172,25 @@ publishing {
             val password: String? = System.getenv("GPG_PASSWORD")
             useInMemoryPgpKeys(secretKey, password)
             sign(it)
+        }
+    }
+}
+
+System.getenv("OS")?.let {
+    setOf("GitHubRepository", "OSSRHRepository").forEach { repository: String ->
+        tasks.getByName("publishAllPublicationsTo$repository") {
+            val platforms: MutableList<String> = mutableListOf()
+            when {
+                it.startsWith("macos") -> platforms += "MacosX64"
+                it.startsWith("windows") -> platforms += "MingwX64"
+                it.startsWith("ubuntu") ->
+                    setOf("KotlinMultiplatform", "Js", "Jvm", "LinuxX64")
+                        .forEach { platforms += it }
+            }
+            val paths: Array<Task> = platforms.map { prefix: String ->
+                tasks.getByName("publish${prefix}PublicationTo$repository")
+            }.toTypedArray()
+            dependsOn(*paths)
         }
     }
 }
