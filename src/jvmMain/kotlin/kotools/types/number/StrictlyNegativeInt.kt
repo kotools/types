@@ -59,7 +59,7 @@ public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt
 @Throws(IllegalArgumentException::class)
-public constructor(override val value: Int) : KotoolsJvmInt {
+public constructor(override val value: Int) : KotoolsIntJvm {
     init {
         require(value in range) {
             val type: String = this::class.simpleName!!

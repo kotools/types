@@ -16,10 +16,6 @@ public infix operator fun Int.minus(other: KotoolsInt): Int = minus(other.value)
 @SinceKotoolsTypes("3.0")
 public infix operator fun Int.times(other: KotoolsInt): Int = times(other.value)
 
-/*
-TODO: This function doesn't throw an error when dividing a number by 0 on
- the Kotlin/JS platform.
- */
 /**
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to `0`.
@@ -27,7 +23,25 @@ TODO: This function doesn't throw an error when dividing a number by 0 on
  */
 @SinceKotoolsTypes("3.0")
 @Throws(ArithmeticException::class)
-public infix operator fun Int.div(other: KotoolsInt): Int = div(other.value)
+public expect infix operator fun Int.div(other: KotoolsInt): Int
+
+/**
+ * Divides this value by the [other] value, truncating the result to an integer
+ * that is closer to `0`.
+ * Throws an [ArithmeticException] if the [other] value equals `0`.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(ArithmeticException::class)
+public expect infix operator fun KotoolsInt.div(other: Int): Int
+
+/**
+ * Divides this value by the [other] value, truncating the result to an integer
+ * that is closer to `0`.
+ * Throws an [ArithmeticException] if the [other] value equals `0`.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(ArithmeticException::class)
+public expect infix operator fun KotoolsInt.div(other: KotoolsInt): Int
 
 // ---------- Comparisons ----------
 
@@ -65,30 +79,6 @@ public interface KotoolsInt : Comparable<Int> {
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: KotoolsInt): Int = times(other.value)
-
-    /*
-    TODO: This function doesn't throw an error when dividing a number by 0 on
-     the Kotlin/JS platform.
-     */
-    /**
-     * Divides this [value] by [other], truncating the result to an integer that
-     * is closer to `0`.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: Int): Int = value / other
-
-    /*
-    TODO: This function doesn't throw an error when dividing a number by 0 on
-     the Kotlin/JS platform.
-     */
-    /**
-     * Divides this [value] by [other], truncating the result to an integer that
-     * is closer to `0`.
-     * Throws an [ArithmeticException] if the [other] value equals `0`.
-     */
-    @Throws(ArithmeticException::class)
-    public infix operator fun div(other: KotoolsInt): Int = div(other.value)
 
     // ---------- Comparisons ----------
 

@@ -1,4 +1,5 @@
-import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.Platform
+import org.jetbrains.dokka.gradle.GradleDokkaSourceSetBuilder
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
@@ -17,26 +18,13 @@ version = "3.0.0-SNAPSHOT"
 repositories(RepositoryHandler::mavenCentral)
 
 val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
-
-object LibrarySourceSets {
-    const val COMMON: String = "All platforms"
-    const val JS: String = "JS"
-    const val JVM: String = "JVM"
-    const val NATIVE: String = "Native"
-
-    private val mutableMap: MutableMap<String, KotlinSourceSet> = mutableMapOf()
-
-    fun add(vararg sourceSets: Pair<String, KotlinSourceSet>): Unit =
-        sourceSets.forEach { mutableMap += it }
-
-    infix fun configure(task: DokkaTask) {
-        task.dokkaSourceSets {
-            mutableMap.forEach {
-                named(it.value.name) { displayName.set(it.key) }
-            }
-        }
-    }
-}
+lateinit var commonSourceSet: KotlinSourceSet
+lateinit var jvmSourceSet: KotlinSourceSet
+lateinit var jsSourceSet: KotlinSourceSet
+lateinit var nativeSourceSet: KotlinSourceSet
+lateinit var linuxSourceSet: KotlinSourceSet
+lateinit var macosSourceSet: KotlinSourceSet
+lateinit var windowsSourceSet: KotlinSourceSet
 
 java.targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -66,24 +54,24 @@ kotlin {
                 implementation("io.github.kotools:assert:[3.0,3.1[")
             }
         }
-        val jvmAndNativeMain by creating { dependsOn(commonMain) }
-        val jvmMain: KotlinSourceSet by getting { dependsOn(jvmAndNativeMain) }
-        val jvmTest: KotlinSourceSet by getting
+        commonSourceSet = commonMain
         val jsMain: KotlinSourceSet by getting
-        val nativeMain: KotlinSourceSet by creating {
-            dependsOn(jvmAndNativeMain)
-        }
+        jsSourceSet = jsMain
+        val jvmMain: KotlinSourceSet by getting
+        val jvmTest: KotlinSourceSet by getting
+        jvmSourceSet = jvmMain
+        val nativeMain: KotlinSourceSet by creating { dependsOn(commonMain) }
+        val nativeTest: KotlinSourceSet by creating { dependsOn(commonTest) }
+        nativeSourceSet = nativeMain
         val linuxX64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
+        val linuxX64Test: KotlinSourceSet by getting { dependsOn(nativeTest) }
+        linuxSourceSet = linuxX64Main
         val macosX64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
+        val macosX64Test: KotlinSourceSet by getting { dependsOn(nativeTest) }
+        macosSourceSet = macosX64Main
         val mingwX64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
-        LibrarySourceSets.run {
-            add(
-                COMMON to commonMain,
-                JVM to jvmMain,
-                JS to jsMain,
-                NATIVE to nativeMain
-            )
-        }
+        val mingwX64Test: KotlinSourceSet by getting { dependsOn(nativeTest) }
+        windowsSourceSet = mingwX64Main
     }
 }
 
@@ -99,7 +87,40 @@ tasks.withType<Jar> {
 val dokkaDirectory: File = buildDir.resolve("dokka")
 tasks.dokkaHtml {
     outputDirectory.set(dokkaDirectory)
-    LibrarySourceSets configure this
+    dokkaSourceSets {
+        fun GradleDokkaSourceSetBuilder.sourceRoots(
+            vararg sourceSets: KotlinSourceSet
+        ): Unit = sourceSets.forEach { sourceRoots.from(it.kotlin.srcDirs) }
+
+        configureEach {
+            reportUndocumented.set(true)
+            skipEmptyPackages.set(true)
+        }
+        named(commonSourceSet.name) { displayName.set("All platforms") }
+        named(jsSourceSet.name) {
+            displayName.set("JS")
+            platform.set(Platform.js)
+            dependsOn(commonSourceSet.name)
+            sourceRoots(jsSourceSet)
+        }
+        named(jvmSourceSet.name) {
+            displayName.set("JVM")
+            platform.set(Platform.jvm)
+            dependsOn(commonSourceSet.name)
+            sourceRoots(jvmSourceSet)
+        }
+        named(nativeSourceSet.name) {
+            displayName.set("Native")
+            platform.set(Platform.native)
+            dependsOn(commonSourceSet.name)
+            sourceRoots(
+                nativeSourceSet,
+                linuxSourceSet,
+                macosSourceSet,
+                windowsSourceSet
+            )
+        }
+    }
 }
 val cleanDokkaHtml: TaskProvider<Delete> =
     tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }

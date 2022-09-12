@@ -54,7 +54,7 @@ public fun String.toNonZeroIntOrNull(): NonZeroInt? =
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt
 @Throws(IllegalArgumentException::class)
-public constructor(override val value: Int) : KotoolsJvmInt {
+public constructor(override val value: Int) : KotoolsIntJvm {
     init {
         val valueIsInRanges: Boolean = ranges.any { value in it }
         require(valueIsInRanges) {
