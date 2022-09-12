@@ -16,6 +16,10 @@ public infix operator fun Int.minus(other: KotoolsInt): Int = minus(other.value)
 @SinceKotoolsTypes("3.0")
 public infix operator fun Int.times(other: KotoolsInt): Int = times(other.value)
 
+/*
+TODO: This function doesn't throw an error when dividing a number by 0 on
+ the Kotlin/JS platform.
+ */
 /**
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to `0`.
