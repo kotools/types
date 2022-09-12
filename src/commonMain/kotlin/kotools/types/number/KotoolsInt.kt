@@ -115,7 +115,7 @@ public interface KotoolsInt : Comparable<Int> {
 @SinceKotoolsTypes("3.0")
 internal object KotoolsIntSerializer : KSerializer<KotoolsInt> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        KotoolsInt::class.qualifiedName!!,
+        "kotools.types.number.KotoolsInt",
         PrimitiveKind.INT
     )
 
