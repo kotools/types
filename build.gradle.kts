@@ -22,10 +22,7 @@ object LibrarySourceSets {
     const val COMMON: String = "All platforms"
     const val JS: String = "JS"
     const val JVM: String = "JVM"
-    const val LINUX: String = "Linux"
-    const val MACOS: String = "macOS"
     const val NATIVE: String = "Native"
-    const val WINDOWS: String = "Windows"
 
     private val mutableMap: MutableMap<String, KotlinSourceSet> = mutableMapOf()
 
@@ -69,9 +66,13 @@ kotlin {
                 implementation("io.github.kotools:assert:[3.0,3.1[")
             }
         }
-        val jvmMain: KotlinSourceSet by getting
+        val jvmAndNativeMain by creating { dependsOn(commonMain) }
+        val jvmMain: KotlinSourceSet by getting { dependsOn(jvmAndNativeMain) }
         val jvmTest: KotlinSourceSet by getting
-        val nativeMain: KotlinSourceSet by creating { dependsOn(commonMain) }
+        val jsMain: KotlinSourceSet by getting
+        val nativeMain: KotlinSourceSet by creating {
+            dependsOn(jvmAndNativeMain)
+        }
         val linuxX64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
         val macosX64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
         val mingwX64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
@@ -79,10 +80,8 @@ kotlin {
             add(
                 COMMON to commonMain,
                 JVM to jvmMain,
-                NATIVE to nativeMain,
-                LINUX to linuxX64Main,
-                MACOS to macosX64Main,
-                WINDOWS to mingwX64Main
+                JS to jsMain,
+                NATIVE to nativeMain
             )
         }
     }
