@@ -251,4 +251,12 @@ class KotoolsIntTest {
         // THEN
         assertTrue { result > 0 }
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toNotBlankString_should_pass(): Unit =
+        Random.nextInt().toKotoolsIntExample().run {
+            toNotBlankString().value assertEquals value.toString()
+        }
 }

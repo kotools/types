@@ -8,6 +8,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.string.NotBlankString
+import kotools.types.string.toNotBlankString
 
 // ---------- Binary operations ----------
 
@@ -109,7 +111,11 @@ public interface KotoolsInt : Comparable<Int> {
 
     // ---------- Conversions ----------
 
-    // TODO: toNotBlankString needs NotBlankString to be available on all platforms
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString =
+        value.toString().toNotBlankString()
 }
 
 @SinceKotoolsTypes("3.0")

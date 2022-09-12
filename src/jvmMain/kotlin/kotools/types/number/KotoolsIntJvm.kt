@@ -8,7 +8,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.string.NotBlankStringJvm
 
 /**
  * Divides this value by the [other] value, truncating the result to an integer
@@ -42,15 +41,7 @@ public actual infix operator fun KotoolsInt.div(other: KotoolsInt): Int =
 /** Parent of every integer's representation in this library. */
 @Serializable(KotoolsIntJvmSerializer::class)
 @SinceKotoolsTypes("3.0")
-public sealed interface KotoolsIntJvm : KotoolsInt {
-    /**
-     * Returns the string representation of this [value] as a not blank string.
-     */
-    public fun toNotBlankString(): NotBlankStringJvm {
-        val string: String = value.toString()
-        return NotBlankStringJvm(string)
-    }
-}
+public sealed interface KotoolsIntJvm : KotoolsInt
 
 @SinceKotoolsTypes("3.0")
 internal object KotoolsIntJvmSerializer : KSerializer<KotoolsIntJvm> {
