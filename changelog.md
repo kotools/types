@@ -54,6 +54,13 @@ All notable changes to this project will be documented in this file.
   `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt`
   ([#69](https://github.com/kotools/types/issues/69)).
 
+### All platforms
+
+#### Added
+
+- The `KotoolsInt` type are now supported on JVM, JS and Native platforms
+  ([#83](https://github.com/kotools/types/issues/83)).
+
 ## Version 2.0.0 - 2022/08/01
 
 ### Added
