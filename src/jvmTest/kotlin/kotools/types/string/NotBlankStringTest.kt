@@ -14,7 +14,8 @@ class NotBlankStringTest {
             // GIVEN
             val value = "hello"
             // WHEN
-            val result: NotBlankString = assertPass { NotBlankString(value) }
+            val result: NotBlankStringJvm =
+                assertPass { NotBlankStringJvm(value) }
             // THEN
             result.value assertEquals value
             result.length.value assertEquals value.length
@@ -26,7 +27,9 @@ class NotBlankStringTest {
             // GIVEN
             val value = ""
             // WHEN & THEN
-            assertFailsWith<IllegalArgumentException> { NotBlankString(value) }
+            assertFailsWith<IllegalArgumentException> {
+                NotBlankStringJvm(value)
+            }
         }
 
         @Test
@@ -34,7 +37,9 @@ class NotBlankStringTest {
             // GIVEN
             val value = " "
             // WHEN & THEN
-            assertFailsWith<IllegalArgumentException> { NotBlankString(value) }
+            assertFailsWith<IllegalArgumentException> {
+                NotBlankStringJvm(value)
+            }
         }
 
         @Nested
@@ -44,7 +49,7 @@ class NotBlankStringTest {
                 // GIVEN
                 val value = "world"
                 // WHEN
-                val result: NotBlankString? = NotBlankString orNull value
+                val result: NotBlankStringJvm? = NotBlankStringJvm orNull value
                 // THEN
                 result.assertNotNull().let {
                     it.value assertEquals value
@@ -58,7 +63,7 @@ class NotBlankStringTest {
                 // GIVEN
                 val value = ""
                 // WHEN
-                val result: NotBlankString? = NotBlankString orNull value
+                val result: NotBlankStringJvm? = NotBlankStringJvm orNull value
                 // THEN
                 result.assertNull()
             }
@@ -68,7 +73,7 @@ class NotBlankStringTest {
                 // GIVEN
                 val value = "  "
                 // WHEN
-                val result: NotBlankString? = NotBlankString orNull value
+                val result: NotBlankStringJvm? = NotBlankStringJvm orNull value
                 // THEN
                 result.assertNull()
             }
@@ -82,7 +87,7 @@ class NotBlankStringTest {
         @Test
         fun `should return the first character with 0`() {
             // GIVEN
-            val string = NotBlankString("hello")
+            val string = NotBlankStringJvm("hello")
             val index = PositiveInt(0)
             // WHEN
             val result: Char = assertPass { string[index] }
@@ -94,7 +99,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an index that is out of bounds`() {
             // GIVEN
-            val string = NotBlankString("hi")
+            val string = NotBlankStringJvm("hi")
             val index = PositiveInt(10)
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { string[index] }
@@ -105,7 +110,7 @@ class NotBlankStringTest {
             @Test
             fun `should return the second character with 1`() {
                 // GIVEN
-                val string = NotBlankString("world")
+                val string = NotBlankStringJvm("world")
                 val index = PositiveInt(1)
                 // WHEN
                 val result: Char? = string getOrNull index
@@ -116,7 +121,7 @@ class NotBlankStringTest {
             @Test
             fun `should return null with an index that is out of bounds`() {
                 // GIVEN
-                val string = NotBlankString("hi")
+                val string = NotBlankStringJvm("hi")
                 val index = PositiveInt(10)
                 // WHEN
                 val result: Char? = string getOrNull index
@@ -133,10 +138,10 @@ class NotBlankStringTest {
         @Test
         fun `should return 'hello world' with 'hello' + ' world'`() {
             // GIVEN
-            val string = NotBlankString("hello")
+            val string = NotBlankStringJvm("hello")
             val other = " world"
             // WHEN
-            val result: NotBlankString = string + other
+            val result: NotBlankStringJvm = string + other
             // THEN
             result.value assertEquals "hello world"
         }
@@ -151,7 +156,7 @@ class NotBlankStringTest {
         @Test
         fun `should return 0 with the same string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             val other: String = string.value
             // WHEN
             val result: Int = string compareTo other
@@ -163,7 +168,7 @@ class NotBlankStringTest {
         fun `should return 0 when comparing a string with the same not blank string`() {
             // GIVEN
             val string = "a"
-            val other = NotBlankString(string)
+            val other = NotBlankStringJvm(string)
             // WHEN
             val result: Int = string compareTo other
             // THEN
@@ -173,7 +178,7 @@ class NotBlankStringTest {
         @Test
         fun `should return a negative number with a greater string lexicographically`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             val other = "z"
             // WHEN
             val result: Int = string compareTo other
@@ -185,7 +190,7 @@ class NotBlankStringTest {
         fun `should return a negative number when comparing a string with a greater not blank string lexicographically`() {
             // GIVEN
             val string = "a"
-            val other = NotBlankString("z")
+            val other = NotBlankStringJvm("z")
             // WHEN
             val result: Int = string compareTo other
             // THEN
@@ -195,7 +200,7 @@ class NotBlankStringTest {
         @Test
         fun `should return a positive number with a less string lexicographically`() {
             // GIVEN
-            val string = NotBlankString("z")
+            val string = NotBlankStringJvm("z")
             val other = "a"
             // WHEN
             val result: Int = string compareTo other
@@ -207,7 +212,7 @@ class NotBlankStringTest {
         fun `should return a positive number when comparing a string with a less not blank string lexicographically`() {
             // GIVEN
             val string = "z"
-            val other = NotBlankString("a")
+            val other = NotBlankStringJvm("a")
             // WHEN
             val result: Int = string compareTo other
             // THEN
@@ -219,8 +224,8 @@ class NotBlankStringTest {
         @Test
         fun `should return 0 with the same not blank string`() {
             // GIVEN
-            val string = NotBlankString("a")
-            val other = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
+            val other = NotBlankStringJvm("a")
             // WHEN
             val result: Int = string compareTo other
             // THEN
@@ -230,8 +235,8 @@ class NotBlankStringTest {
         @Test
         fun `should return a negative number with a greater not blank string lexicographically`() {
             // GIVEN
-            val string = NotBlankString("a")
-            val other = NotBlankString("z")
+            val string = NotBlankStringJvm("a")
+            val other = NotBlankStringJvm("z")
             // WHEN
             val result: Int = string compareTo other
             // THEN
@@ -241,8 +246,8 @@ class NotBlankStringTest {
         @Test
         fun `should return a positive number with a less not blank string lexicographically`() {
             // GIVEN
-            val string = NotBlankString("z")
-            val other = NotBlankString("a")
+            val string = NotBlankStringJvm("z")
+            val other = NotBlankStringJvm("a")
             // WHEN
             val result: Int = string compareTo other
             // THEN
@@ -258,7 +263,7 @@ class NotBlankStringTest {
         fun `should return a non-zero int with a string representation of 1`() {
             // GIVEN
             val value = 1
-            val string = NotBlankString(value.toString())
+            val string = NotBlankStringJvm(value.toString())
             // WHEN
             val result: NonZeroInt = assertPass(string::toNonZeroInt)
             // THEN
@@ -269,7 +274,7 @@ class NotBlankStringTest {
         fun `should return a non-zero int with a string representation of -1`() {
             // GIVEN
             val value = -1
-            val string = NotBlankString(value.toString())
+            val string = NotBlankStringJvm(value.toString())
             // WHEN
             val result: NonZeroInt = assertPass(string::toNonZeroInt)
             // THEN
@@ -279,7 +284,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("hello")
+            val string = NotBlankStringJvm("hello")
             // WHEN & THEN
             assertFailsWith<NumberFormatException>(string::toNonZeroInt)
         }
@@ -287,7 +292,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with a string representation of 0`() {
             // GIVEN
-            val string = NotBlankString("0")
+            val string = NotBlankStringJvm("0")
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(string::toNonZeroInt)
         }
@@ -299,7 +304,7 @@ class NotBlankStringTest {
         fun `should return a non-zero int with a string representation of 1`() {
             // GIVEN
             val value = 1
-            val string = NotBlankString(value.toString())
+            val string = NotBlankStringJvm(value.toString())
             // WHEN
             val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
@@ -310,7 +315,7 @@ class NotBlankStringTest {
         fun `should return a non-zero int with a string representation of -1`() {
             // GIVEN
             val value = -1
-            val string = NotBlankString(value.toString())
+            val string = NotBlankStringJvm(value.toString())
             // WHEN
             val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
@@ -320,7 +325,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("hello")
+            val string = NotBlankStringJvm("hello")
             // WHEN
             val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
@@ -330,7 +335,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with a string representation of 0`() {
             // GIVEN
-            val string = NotBlankString("0")
+            val string = NotBlankStringJvm("0")
             // WHEN
             val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
@@ -344,7 +349,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 0`() {
             // GIVEN
             val value = 0
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: PositiveInt = assertPass(string::toPositiveInt)
             // THEN
@@ -355,7 +360,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 1`() {
             // GIVEN
             val value = 1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: PositiveInt = assertPass(string::toPositiveInt)
             // THEN
@@ -365,7 +370,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN & THEN
             assertFailsWith<NumberFormatException>(string::toPositiveInt)
         }
@@ -373,7 +378,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with a string representation of -1`() {
             // GIVEN
-            val string = NotBlankString("-1")
+            val string = NotBlankStringJvm("-1")
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(string::toPositiveInt)
         }
@@ -385,7 +390,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 0`() {
             // GIVEN
             val value = 0
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
@@ -396,7 +401,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 1`() {
             // GIVEN
             val value = 1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
@@ -406,7 +411,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
@@ -416,7 +421,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with a string representation of -1`() {
             // GIVEN
-            val string = NotBlankString("-1")
+            val string = NotBlankStringJvm("-1")
             // WHEN
             val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
@@ -430,7 +435,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 1`() {
             // GIVEN
             val value = 1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: StrictlyPositiveInt =
                 assertPass(string::toStrictlyPositiveInt)
@@ -441,7 +446,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN & THEN
             assertFailsWith<NumberFormatException>(
                 string::toStrictlyPositiveInt
@@ -451,7 +456,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with a string representation of 0`() {
             // GIVEN
-            val string = NotBlankString("0")
+            val string = NotBlankStringJvm("0")
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
                 string::toStrictlyPositiveInt
@@ -465,7 +470,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 1`() {
             // GIVEN
             val value = 1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
@@ -476,7 +481,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN
             val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
@@ -487,7 +492,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with a string representation of 0`() {
             // GIVEN
-            val string = NotBlankString("0")
+            val string = NotBlankStringJvm("0")
             // WHEN
             val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
@@ -502,7 +507,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 0`() {
             // GIVEN
             val value = 0
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: NegativeInt = assertPass(string::toNegativeInt)
             // THEN
@@ -513,7 +518,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of -1`() {
             // GIVEN
             val value = -1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: NegativeInt = assertPass(string::toNegativeInt)
             // THEN
@@ -523,7 +528,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN & THEN
             assertFailsWith<NumberFormatException>(string::toNegativeInt)
         }
@@ -531,7 +536,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with a string representation of 1`() {
             // GIVEN
-            val string = NotBlankString("1")
+            val string = NotBlankStringJvm("1")
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(string::toNegativeInt)
         }
@@ -543,7 +548,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of 0`() {
             // GIVEN
             val value = 0
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
@@ -554,7 +559,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of -1`() {
             // GIVEN
             val value = -1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
@@ -564,7 +569,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN
             val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
@@ -574,7 +579,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with a string representation of 1`() {
             // GIVEN
-            val string = NotBlankString("1")
+            val string = NotBlankStringJvm("1")
             // WHEN
             val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
@@ -588,7 +593,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of -1`() {
             // GIVEN
             val value = -1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: StrictlyNegativeInt =
                 assertPass(string::toStrictlyNegativeInt)
@@ -599,7 +604,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN & THEN
             assertFailsWith<NumberFormatException>(
                 string::toStrictlyNegativeInt
@@ -609,7 +614,7 @@ class NotBlankStringTest {
         @Test
         fun `should throw an error with a string representation of 0`() {
             // GIVEN
-            val string = NotBlankString("0")
+            val string = NotBlankStringJvm("0")
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
                 string::toStrictlyNegativeInt
@@ -623,7 +628,7 @@ class NotBlankStringTest {
         fun `should pass with a string representation of -1`() {
             // GIVEN
             val value = -1
-            val string = NotBlankString("$value")
+            val string = NotBlankStringJvm("$value")
             // WHEN
             val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
@@ -634,7 +639,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with an invalid string`() {
             // GIVEN
-            val string = NotBlankString("a")
+            val string = NotBlankStringJvm("a")
             // WHEN
             val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
@@ -645,7 +650,7 @@ class NotBlankStringTest {
         @Test
         fun `should return null with a string representation of 0`() {
             // GIVEN
-            val string = NotBlankString("0")
+            val string = NotBlankStringJvm("0")
             // WHEN
             val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
@@ -659,7 +664,7 @@ class NotBlankStringTest {
         @Test
         fun `should return its value`() {
             // GIVEN
-            val string = NotBlankString("Hello world")
+            val string = NotBlankStringJvm("Hello world")
             // WHEN
             val result: String = string.toString()
             // THEN
@@ -672,7 +677,7 @@ class NotBlankStringSerializerTest {
     @Test
     fun `should serialize properly this class`() {
         // GIVEN
-        val string = NotBlankString("hello")
+        val string = NotBlankStringJvm("hello")
         // WHEN
         val result: String = Json.encodeToString(string)
         // THEN
@@ -682,10 +687,10 @@ class NotBlankStringSerializerTest {
     @Test
     fun `should deserialize properly this class`() {
         // GIVEN
-        val string = NotBlankString("hello")
+        val string = NotBlankStringJvm("hello")
         val encodedString: String = Json.encodeToString(string)
         // WHEN
-        val result: NotBlankString = Json.decodeFromString(encodedString)
+        val result: NotBlankStringJvm = Json.decodeFromString(encodedString)
         // THEN
         result.value assertEquals string.value
     }

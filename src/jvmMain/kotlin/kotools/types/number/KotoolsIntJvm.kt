@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.string.NotBlankString
+import kotools.types.string.NotBlankStringJvm
 
 /**
  * Divides this value by the [other] value, truncating the result to an integer
@@ -46,9 +46,9 @@ public sealed interface KotoolsIntJvm : KotoolsInt {
     /**
      * Returns the string representation of this [value] as a not blank string.
      */
-    public fun toNotBlankString(): NotBlankString {
+    public fun toNotBlankString(): NotBlankStringJvm {
         val string: String = value.toString()
-        return NotBlankString(string)
+        return NotBlankStringJvm(string)
     }
 }
 

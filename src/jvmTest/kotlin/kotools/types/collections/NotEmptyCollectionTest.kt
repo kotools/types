@@ -8,7 +8,7 @@ import kotools.assert.*
 import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.string.NotBlankString
+import kotools.types.string.NotBlankStringJvm
 
 class NotEmptyCollectionTest {
     // ---------- Query operations ----------
@@ -429,7 +429,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptyList(1)
             // WHEN
-            val string: NotBlankString = collection.toNotBlankString()
+            val string: NotBlankStringJvm = collection.toNotBlankString()
             // THEN
             string.value assertEquals collection.toString()
         }

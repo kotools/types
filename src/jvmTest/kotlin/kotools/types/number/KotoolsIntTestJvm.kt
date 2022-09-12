@@ -4,7 +4,7 @@ import kotools.assert.Nested
 import kotools.assert.Test
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
-import kotools.types.string.NotBlankString
+import kotools.types.string.NotBlankStringJvm
 import kotlin.random.Random
 
 class KotoolsIntTestJvm {
@@ -50,7 +50,7 @@ class KotoolsIntTestJvm {
             val value = 1
             val x: KotoolsIntJvm = NonZeroInt(value)
             // WHEN
-            val result: NotBlankString = x.toNotBlankString()
+            val result: NotBlankStringJvm = x.toNotBlankString()
             // THEN
             result.value assertEquals value.toString()
         }

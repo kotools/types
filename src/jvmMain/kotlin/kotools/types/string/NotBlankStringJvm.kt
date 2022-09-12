@@ -19,7 +19,7 @@ import kotools.types.number.*
  * greater than the [other] value.
  */
 @SinceKotoolsTypes("2.0")
-public infix operator fun String.compareTo(other: NotBlankString): Int =
+public infix operator fun String.compareTo(other: NotBlankStringJvm): Int =
     compareTo(other.value)
 
 // ---------- Conversions ----------
@@ -30,15 +30,16 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
  */
 @SinceKotoolsTypes("1.2")
 @Throws(IllegalArgumentException::class)
-public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
+public fun String.toNotBlankString(): NotBlankStringJvm =
+    NotBlankStringJvm(this)
 
 /**
  * Returns this value as a not blank string, or returns `null` if this value is
  * blank.
  */
 @SinceKotoolsTypes("1.2")
-public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    NotBlankString orNull this
+public fun String.toNotBlankStringOrNull(): NotBlankStringJvm? =
+    NotBlankStringJvm orNull this
 
 /**
  * Represents strings containing at least 1 character, excluding whitespaces.
@@ -47,9 +48,9 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * [IllegalArgumentException] if the [value] is blank.
  */
 @JvmInline
-@Serializable(NotBlankString.Serializer::class)
+@Serializable(NotBlankStringJvm.Serializer::class)
 @SinceKotoolsTypes("1.2")
-public value class NotBlankString
+public value class NotBlankStringJvm
 @Throws(IllegalArgumentException::class)
 public constructor(public val value: String) : Comparable<String> {
     init {
@@ -94,8 +95,8 @@ public constructor(public val value: String) : Comparable<String> {
      * Returns the concatenation of this [value] with the string representation
      * of the [other] object.
      */
-    public infix operator fun plus(other: Any?): NotBlankString =
-        NotBlankString(value + other)
+    public infix operator fun plus(other: Any?): NotBlankStringJvm =
+        NotBlankStringJvm(value + other)
 
     // ---------- Comparisons ----------
 
@@ -114,7 +115,7 @@ public constructor(public val value: String) : Comparable<String> {
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    public infix operator fun compareTo(other: NotBlankString): Int =
+    public infix operator fun compareTo(other: NotBlankStringJvm): Int =
         compareTo(other.value)
 
     // ---------- Conversions ----------
@@ -221,24 +222,26 @@ public constructor(public val value: String) : Comparable<String> {
          * Returns the [value] as a not blank string, or returns `null` if the
          * [value] is blank.
          */
-        public infix fun orNull(value: String): NotBlankString? = try {
-            NotBlankString(value)
+        public infix fun orNull(value: String): NotBlankStringJvm? = try {
+            NotBlankStringJvm(value)
         } catch (_: IllegalArgumentException) {
             null
         }
     }
 
     @SinceKotoolsTypes("3.0")
-    internal object Serializer : KSerializer<NotBlankString> {
+    internal object Serializer : KSerializer<NotBlankStringJvm> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            NotBlankString::class.qualifiedName!!,
+            NotBlankStringJvm::class.qualifiedName!!,
             PrimitiveKind.STRING
         )
 
-        override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
-            encoder.encodeString(value.value)
+        override fun serialize(
+            encoder: Encoder,
+            value: NotBlankStringJvm
+        ): Unit = encoder.encodeString(value.value)
 
-        override fun deserialize(decoder: Decoder): NotBlankString =
+        override fun deserialize(decoder: Decoder): NotBlankStringJvm =
             decoder.decodeString().toNotBlankString()
     }
 }
