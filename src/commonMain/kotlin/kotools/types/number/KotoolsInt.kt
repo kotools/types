@@ -1,5 +1,12 @@
 package kotools.types.number
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Binary operations ----------
@@ -56,6 +63,7 @@ public infix operator fun Int.compareTo(other: KotoolsInt): Int =
     compareTo(other.value)
 
 /** Parent of every integer's representation in this library. */
+@Serializable(KotoolsIntSerializer::class)
 @SinceKotoolsTypes("3.0")
 public interface KotoolsInt : Comparable<Int> {
     public val value: Int
@@ -98,4 +106,18 @@ public interface KotoolsInt : Comparable<Int> {
      */
     public infix operator fun compareTo(other: KotoolsInt): Int =
         compareTo(other.value)
+}
+
+@SinceKotoolsTypes("3.0")
+internal object KotoolsIntSerializer : KSerializer<KotoolsInt> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        KotoolsInt::class.qualifiedName!!,
+        PrimitiveKind.INT
+    )
+
+    override fun serialize(encoder: Encoder, value: KotoolsInt): Unit =
+        encoder.encodeInt(value.value)
+
+    override fun deserialize(decoder: Decoder): KotoolsInt =
+        TODO("Needs NonZeroInt and PositiveInt types on all platforms")
 }
