@@ -30,7 +30,7 @@ public infix operator fun String.compareTo(other: NotBlankStringJvm): Int =
  */
 @SinceKotoolsTypes("1.2")
 @Throws(IllegalArgumentException::class)
-public fun String.toNotBlankString(): NotBlankStringJvm =
+public fun String.toNotBlankStringJvm(): NotBlankStringJvm =
     NotBlankStringJvm(this)
 
 /**
@@ -38,7 +38,7 @@ public fun String.toNotBlankString(): NotBlankStringJvm =
  * blank.
  */
 @SinceKotoolsTypes("1.2")
-public fun String.toNotBlankStringOrNull(): NotBlankStringJvm? =
+public fun String.toNotBlankStringJvmOrNull(): NotBlankStringJvm? =
     NotBlankStringJvm orNull this
 
 /**
@@ -242,6 +242,6 @@ public constructor(public val value: String) : Comparable<String> {
         ): Unit = encoder.encodeString(value.value)
 
         override fun deserialize(decoder: Decoder): NotBlankStringJvm =
-            decoder.decodeString().toNotBlankString()
+            decoder.decodeString().toNotBlankStringJvm()
     }
 }

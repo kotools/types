@@ -6,7 +6,7 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 import kotools.types.number.*
 
-class NotBlankStringTest {
+class NotBlankStringJvmTest {
     @Nested
     inner class Constructor {
         @Test

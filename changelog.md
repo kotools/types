@@ -58,8 +58,10 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- The `KotoolsInt` type are now supported on JVM, JS and Native platforms
-  ([#83](https://github.com/kotools/types/issues/83)).
+The following types are now supported on JVM, JS and Native platforms:
+
+- `KotoolsInt` ([#83](https://github.com/kotools/types/issues/83))
+- `NotBlankString` ([#89](https://github.com/kotools/types/issues/89)).
 
 ## Version 2.0.0 - 2022/08/01
 
