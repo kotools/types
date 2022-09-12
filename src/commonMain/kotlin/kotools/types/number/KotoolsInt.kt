@@ -106,6 +106,10 @@ public interface KotoolsInt : Comparable<Int> {
      */
     public infix operator fun compareTo(other: KotoolsInt): Int =
         compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    // TODO: toNotBlankString needs NotBlankString to be available on all platforms
 }
 
 @SinceKotoolsTypes("3.0")
@@ -118,6 +122,7 @@ internal object KotoolsIntSerializer : KSerializer<KotoolsInt> {
     override fun serialize(encoder: Encoder, value: KotoolsInt): Unit =
         encoder.encodeInt(value.value)
 
-    override fun deserialize(decoder: Decoder): KotoolsInt =
-        TODO("Needs NonZeroInt and PositiveInt types on all platforms")
+    override fun deserialize(decoder: Decoder): KotoolsInt = TODO(
+        "Needs NonZeroInt and PositiveInt to be available on all platforms"
+    )
 }
