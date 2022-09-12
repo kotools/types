@@ -56,7 +56,7 @@ public fun String.toNegativeIntOrNull(): NegativeInt? =
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt
 @Throws(IllegalArgumentException::class)
-public constructor(override val value: Int) : KotoolsInt {
+public constructor(override val value: Int) : KotoolsJvmInt {
     init {
         require(value in range) {
             val type: String = this::class.simpleName!!
