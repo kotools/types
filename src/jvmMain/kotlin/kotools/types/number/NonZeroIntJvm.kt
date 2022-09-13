@@ -17,7 +17,7 @@ import kotools.types.annotations.SinceKotoolsTypes
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
-public fun Int.toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(this)
+public fun Int.toNonZeroIntJvm(): NonZeroIntJvm = NonZeroIntJvm(this)
 
 /**
  * Returns this value as a non-zero int.
@@ -26,22 +26,23 @@ public fun Int.toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(this)
  */
 @SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toNonZeroInt(): NonZeroIntJvm = toInt().toNonZeroInt()
+public fun String.toNonZeroIntJvm(): NonZeroIntJvm = toInt().toNonZeroIntJvm()
 
 /**
  * Returns this value as a non-zero int, or returns `null` if this value equals
  * `0`.
  */
 @SinceKotoolsTypes("1.1")
-public fun Int.toNonZeroIntOrNull(): NonZeroIntJvm? = NonZeroIntJvm orNull this
+public fun Int.toNonZeroIntJvmOrNull(): NonZeroIntJvm? =
+    NonZeroIntJvm orNull this
 
 /**
  * Returns this value as a non-zero int, or returns `null` if this value is not
  * a valid representation of a number or if it represents `0`.
  */
 @SinceKotoolsTypes("3.0")
-public fun String.toNonZeroIntOrNull(): NonZeroIntJvm? =
-    toIntOrNull()?.toNonZeroIntOrNull()
+public fun String.toNonZeroIntJvmOrNull(): NonZeroIntJvm? =
+    toIntOrNull()?.toNonZeroIntJvmOrNull()
 
 /**
  * Represents integers that don't equal `0`.
@@ -187,7 +188,7 @@ public constructor(override val value: Int) : KotoolsIntJvm {
         public val random: NonZeroIntJvm
             get() = ranges.random()
                 .random()
-                .toNonZeroInt()
+                .toNonZeroIntJvm()
 
         /**
          * Returns the [value] as a non-zero int, or returns `null` if the
@@ -211,6 +212,6 @@ public constructor(override val value: Int) : KotoolsIntJvm {
             encoder.encodeInt(value.value)
 
         override fun deserialize(decoder: Decoder): NonZeroIntJvm =
-            decoder.decodeInt().toNonZeroInt()
+            decoder.decodeInt().toNonZeroIntJvm()
     }
 }

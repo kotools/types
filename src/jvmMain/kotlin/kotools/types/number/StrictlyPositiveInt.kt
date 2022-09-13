@@ -93,15 +93,15 @@ public constructor(override val value: Int) : KotoolsIntJvm {
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: NonZeroIntJvm): NonZeroIntJvm =
-        times(other.value).toNonZeroInt()
+        times(other.value).toNonZeroIntJvm()
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyPositiveInt): NonZeroIntJvm =
-        times(other.value).toNonZeroInt()
+        times(other.value).toNonZeroIntJvm()
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyNegativeInt): NonZeroIntJvm =
-        times(other.value).toNonZeroInt()
+        times(other.value).toNonZeroIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an

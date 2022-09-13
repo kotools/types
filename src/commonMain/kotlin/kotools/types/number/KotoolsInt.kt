@@ -128,7 +128,6 @@ internal object KotoolsIntSerializer : KSerializer<KotoolsInt> {
     override fun serialize(encoder: Encoder, value: KotoolsInt): Unit =
         encoder.encodeInt(value.value)
 
-    override fun deserialize(decoder: Decoder): KotoolsInt = TODO(
-        "Needs NonZeroInt and PositiveInt to be available on all platforms"
-    )
+    override fun deserialize(decoder: Decoder): KotoolsInt =
+        TODO("Needs PositiveInt to be available on all platforms.")
 }
