@@ -58,7 +58,7 @@ public fun String.toPositiveIntJvmOrNull(): PositiveIntJvm? =
 @SinceKotoolsTypes("1.1")
 public value class PositiveIntJvm
 @Throws(IllegalArgumentException::class)
-public constructor(override val value: Int) : KotoolsIntJvm {
+public constructor(override val value: Int) : KotoolsInt {
     init {
         require(value in range) {
             val type: String = this::class.simpleName!!
