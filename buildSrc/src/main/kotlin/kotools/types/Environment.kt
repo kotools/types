@@ -8,7 +8,7 @@ package kotools.types
 fun env(name: String): String? = System.getenv(name)
 
 /** Represents a group of environment variables. */
-sealed class EnvironmentGroup(private val prefix: String? = null) {
+sealed class EnvironmentGroup(private val prefix: String) {
     /**
      * Returns the value of the environment variable corresponding to the
      * given [name], or returns `null` if no environment variable exists with
@@ -22,8 +22,8 @@ sealed class EnvironmentGroup(private val prefix: String? = null) {
      * called `HELLO_WORLD`.
      */
     internal infix operator fun get(name: String): String? {
-        val key: String = prefix?.let { "${it}_$name" } ?: name
-        return env(key)
+        println("> Searching for environment variable called '${prefix}_$name'")
+        return env("${prefix}_$name")
     }
 }
 
