@@ -28,21 +28,21 @@ sealed class EnvironmentGroup(private val prefix: String? = null) {
 }
 
 object Git : EnvironmentGroup("GIT") {
-    val email: String? = this["EMAIL"]
-    val user: String? = this["USER"]
+    val email: String? by lazy { this["EMAIL"] }
+    val user: String? by lazy { this["USER"] }
 }
 
 object GitHub : EnvironmentGroup("GITHUB") {
-    val password: String? = this["TOKEN"]
-    val username: String? = this["ACTOR"]
+    val password: String? by lazy { this["TOKEN"] }
+    val username: String? by lazy { this["ACTOR"] }
 }
 
 object Gpg : EnvironmentGroup("GPG") {
-    val password: String? = this["PASSWORD"]
-    val secretKey: String? = this["PRIVATE_KEY"]
+    val password: String? by lazy { this["PASSWORD"] }
+    val secretKey: String? by lazy { this["PRIVATE_KEY"] }
 }
 
 object Maven : EnvironmentGroup("MAVEN") {
-    val password: String? = this["PASSWORD"]
-    val username: String? = this["USERNAME"]
+    val password: String? by lazy { this["PASSWORD"] }
+    val username: String? by lazy { this["USERNAME"] }
 }
