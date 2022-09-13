@@ -1,3 +1,4 @@
+import kotools.types.*
 import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.gradle.GradleDokkaSourceSetBuilder
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
@@ -17,7 +18,6 @@ version = "3.0.0-SNAPSHOT"
 
 repositories(RepositoryHandler::mavenCentral)
 
-val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
 lateinit var commonSourceSet: KotlinSourceSet
 lateinit var jvmSourceSet: KotlinSourceSet
 lateinit var jsSourceSet: KotlinSourceSet
@@ -133,16 +133,18 @@ val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
 
 tasks.assemble { dependsOn(javadocJar) }
 
-tasks.withType<Sign> {
-    onlyIf {
+// ---------- Publishing & signing ----------
+
+val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
+
+tasks {
+    withType<Sign> {
         val taskNames: List<String> = project.gradle.startParameter.taskNames
         val isPublishingToMavenLocal: Boolean =
-            tasks.publishToMavenLocal.name in taskNames
-        !isSnapshot && !isPublishingToMavenLocal
+            publishToMavenLocal.name in taskNames
+        onlyIf { !isSnapshot && !isPublishingToMavenLocal }
     }
 }
-
-// ---------- Publishing & signing ----------
 
 publishing {
     repositories {
@@ -150,8 +152,8 @@ publishing {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/kotools/types")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv(GitHub.username)
+                password = System.getenv(GitHub.password)
             }
         }
         maven {
@@ -161,8 +163,29 @@ publishing {
                 else "service/local/staging/deploy/maven2/"
             url = uri("https://s01.oss.sonatype.org/$uriSuffix")
             credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
+                username = System.getenv(Maven.username)
+                password = System.getenv(Maven.password)
+            }
+        }
+        forEach { repository: ArtifactRepository ->
+            val action = "publish"
+            val target = "To${repository.name}Repository"
+            tasks.getByName("${action}AllPublications$target") {
+                val platforms: MutableSet<String> = mutableSetOf()
+                val os: String = System.getProperty("os.name")
+                    ?: System.getenv("OS")
+                    ?: return@getByName
+                when {
+                    os.startsWith("macos") -> platforms += "MacosX64"
+                    os.startsWith("windows") -> platforms += "MingwX64"
+                    os.startsWith("ubuntu") ->
+                        setOf("KotlinMultiplatform", "Js", "Jvm", "LinuxX64")
+                            .forEach { platforms += it }
+                }
+                val paths: Array<Task> = platforms.map {
+                    tasks.getByName("$action${it}Publication$target")
+                }.toTypedArray()
+                dependsOn(*paths)
             }
         }
     }
@@ -173,60 +196,41 @@ publishing {
             artifactId = project.name
             version = project.version.toString()
         }
-    }
-    publications.forEach {
-        if (it !is MavenPublication) return@forEach
-        it.artifact(javadocJar)
-        it.pom {
-            name.set("Kotools Types")
-            description.set("Commonly used types for Kotlin.")
-            val gitRepository = "https://github.com/kotools/types"
-            url.set(gitRepository)
-            licenses {
-                license {
-                    name.set("MIT")
-                    url.set("https://opensource.org/licenses/MIT")
-                }
-            }
-            issueManagement {
-                system.set("GitHub")
-                url.set("$gitRepository/issues")
-            }
-            scm {
-                connection.set("$gitRepository.git")
+        forEach {
+            if (it !is MavenPublication) return@forEach
+            it.artifact(javadocJar)
+            it.pom {
+                name.set("Kotools Types")
+                description.set("Commonly used types for Kotlin.")
+                val gitRepository = "https://github.com/kotools/types"
                 url.set(gitRepository)
-            }
-            developers {
-                developer {
-                    name.set(System.getenv("GIT_USER"))
-                    email.set(System.getenv("GIT_EMAIL"))
+                licenses {
+                    license {
+                        name.set("MIT")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                issueManagement {
+                    system.set("GitHub")
+                    url.set("$gitRepository/issues")
+                }
+                scm {
+                    connection.set("$gitRepository.git")
+                    url.set(gitRepository)
+                }
+                developers {
+                    developer {
+                        name.set(System.getenv(Git.user))
+                        email.set(System.getenv(Git.email))
+                    }
                 }
             }
-        }
-        signing {
-            val secretKey: String? = System.getenv("GPG_PRIVATE_KEY")
-            val password: String? = System.getenv("GPG_PASSWORD")
-            useInMemoryPgpKeys(secretKey, password)
-            sign(it)
-        }
-    }
-}
-
-System.getenv("OS")?.let {
-    setOf("GitHubRepository", "OSSRHRepository").forEach { repository: String ->
-        tasks.getByName("publishAllPublicationsTo$repository") {
-            val platforms: MutableList<String> = mutableListOf()
-            when {
-                it.startsWith("macos") -> platforms += "MacosX64"
-                it.startsWith("windows") -> platforms += "MingwX64"
-                it.startsWith("ubuntu") ->
-                    setOf("KotlinMultiplatform", "Js", "Jvm", "LinuxX64")
-                        .forEach { platforms += it }
+            signing {
+                val secretKey: String? = System.getenv(Gpg.secretKey)
+                val password: String? = System.getenv(Gpg.password)
+                useInMemoryPgpKeys(secretKey, password)
+                sign(it)
             }
-            val paths: Array<Task> = platforms.map { prefix: String ->
-                tasks.getByName("publish${prefix}PublicationTo$repository")
-            }.toTypedArray()
-            dependsOn(*paths)
         }
     }
 }
