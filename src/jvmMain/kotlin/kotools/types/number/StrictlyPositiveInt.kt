@@ -109,15 +109,15 @@ public constructor(override val value: Int) : KotoolsIntJvm {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): PositiveInt =
-        div(other.value).toPositiveInt()
+    public infix operator fun div(other: PositiveIntJvm): PositiveIntJvm =
+        div(other.value).toPositiveIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        div(other.value).toPositiveInt()
+    public infix operator fun div(other: StrictlyPositiveInt): PositiveIntJvm =
+        div(other.value).toPositiveIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -141,13 +141,13 @@ public constructor(override val value: Int) : KotoolsIntJvm {
     public fun toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(value)
 
     /** Returns this [value] as a positive int. */
-    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+    public fun toPositiveInt(): PositiveIntJvm = PositiveIntJvm(value)
 
     override fun toString(): String = value.toString()
 
     public companion object {
         @SinceKotoolsTypes("3.0")
-        internal val range: IntRange = 1..PositiveInt.max.value
+        internal val range: IntRange = 1..PositiveIntJvm.max.value
 
         /** The minimum value of a strictly positive int. */
         public val min: StrictlyPositiveInt = StrictlyPositiveInt(range.first)

@@ -2,7 +2,7 @@ package kotools.types.collections
 
 import kotools.assert.*
 import kotools.types.indexOutOfBoundsMessage
-import kotools.types.number.PositiveInt
+import kotools.types.number.PositiveIntJvm
 import kotools.types.number.StrictlyPositiveInt
 
 class NotEmptyMutableListTest {
@@ -104,7 +104,7 @@ class NotEmptyMutableListTest {
         fun `should insert an element at the beginning of the list with an index as a positive int that equals 0`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("two")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             val element = "one"
             // WHEN
             assertPass { list.add(index, element) }
@@ -119,7 +119,7 @@ class NotEmptyMutableListTest {
         fun `should insert an element at the end of the list with an index as a positive int that equals the list's size`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
-            val index = PositiveInt(list.size)
+            val index = PositiveIntJvm(list.size)
             val element = "two"
             // WHEN
             assertPass { list.add(index, element) }
@@ -132,7 +132,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val list: NotEmptyMutableList<String> =
                 NotEmptyMutableList("one", "three")
-            val index = PositiveInt(1)
+            val index = PositiveIntJvm(1)
             val element = "two"
             // WHEN
             assertPass { list.add(index, element) }
@@ -144,7 +144,7 @@ class NotEmptyMutableListTest {
         fun `should throw an error with an index as a positive int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
-            val index = PositiveInt(list.size + 1)
+            val index = PositiveIntJvm(list.size + 1)
             val element = "two"
             // WHEN
             val error: IndexOutOfBoundsException =
@@ -265,7 +265,7 @@ class NotEmptyMutableListTest {
         fun `should insert an element at the beginning of the list with an index as a positive int that equals 0`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("two")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             val element = "one"
             // WHEN
             val result: Unit? = list.addOrNull(index, element)
@@ -281,7 +281,7 @@ class NotEmptyMutableListTest {
         fun `should insert an element at the end of the list with an index as a positive int that equals the list's size`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
-            val index = PositiveInt(list.size)
+            val index = PositiveIntJvm(list.size)
             val element = "two"
             // WHEN
             val result: Unit? = list.addOrNull(index, element)
@@ -295,7 +295,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val list: NotEmptyMutableList<String> =
                 NotEmptyMutableList("one", "three")
-            val index = PositiveInt(1)
+            val index = PositiveIntJvm(1)
             val element = "two"
             // WHEN
             val result: Unit? = list.addOrNull(index, element)
@@ -308,7 +308,7 @@ class NotEmptyMutableListTest {
         fun `should return null with an index as a positive int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
-            val index = PositiveInt(list.size + 1)
+            val index = PositiveIntJvm(list.size + 1)
             val element = "two"
             // WHEN
             val result: Unit? = list.addOrNull(index, element)
@@ -468,7 +468,7 @@ class NotEmptyMutableListTest {
             val head = "one"
             val list: NotEmptyMutableList<String> =
                 NotEmptyMutableList(head, "two")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             // WHEN
             val element: String = assertPass { list removeAt index }
             // THEN
@@ -483,7 +483,7 @@ class NotEmptyMutableListTest {
         fun `should remove the head from a singleton list and with an index as a positive int that equals 0`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             // WHEN
             val element: String = assertPass { list removeAt index }
             // THEN
@@ -499,7 +499,7 @@ class NotEmptyMutableListTest {
             val tail = "two"
             val list: NotEmptyMutableList<String> =
                 NotEmptyMutableList("one", tail)
-            val index = PositiveInt(list.size - 1)
+            val index = PositiveIntJvm(list.size - 1)
             // WHEN
             val element: String = assertPass { list removeAt index }
             // THEN
@@ -513,7 +513,7 @@ class NotEmptyMutableListTest {
         fun `should throw an error with an index as a positive int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("one")
-            val index = PositiveInt(list.size)
+            val index = PositiveIntJvm(list.size)
             // WHEN
             val error: IndexOutOfBoundsException =
                 assertFailsWith { list removeAt index }
@@ -627,7 +627,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val head = "one"
             val list = NotEmptyMutableList(head, "two")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             // WHEN
             val element: String? = list removeAtOrNull index
             // THEN
@@ -643,7 +643,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val head = "one"
             val list = NotEmptyMutableList(head)
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             // WHEN
             val element: String? = list removeAtOrNull index
             // THEN
@@ -659,7 +659,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val tail = "two"
             val list = NotEmptyMutableList("one", tail)
-            val index = PositiveInt(list.size - 1)
+            val index = PositiveIntJvm(list.size - 1)
             // WHEN
             val element: String? = list removeAtOrNull index
             // THEN
@@ -673,7 +673,7 @@ class NotEmptyMutableListTest {
         fun `should return null with an index as a positive int that is out of bounds`() {
             // GIVEN
             val list = NotEmptyMutableList("one")
-            val index = PositiveInt(list.size)
+            val index = PositiveIntJvm(list.size)
             // WHEN
             val element: String? = list removeAtOrNull index
             // THEN
@@ -763,7 +763,7 @@ class NotEmptyMutableListTest {
         fun `should replace the head with an index as a positive int that equals 0`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             val element = "b"
             // WHEN
             assertPass { list[index] = element }
@@ -779,7 +779,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val list: NotEmptyMutableList<String> =
                 NotEmptyMutableList("a", "b")
-            val index = PositiveInt(1)
+            val index = PositiveIntJvm(1)
             val element = "c"
             // WHEN
             assertPass { list[index] = element }
@@ -791,7 +791,7 @@ class NotEmptyMutableListTest {
         fun `should throw an error with an index as a positive int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
-            val index = PositiveInt(list.size)
+            val index = PositiveIntJvm(list.size)
             val element = "b"
             // WHEN
             val error: IndexOutOfBoundsException =
@@ -889,7 +889,7 @@ class NotEmptyMutableListTest {
         fun `should replace the head with an index as a positive int that equals 0`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             val element = "b"
             // WHEN
             val result: String? = list.setOrNull(index, element)
@@ -906,7 +906,7 @@ class NotEmptyMutableListTest {
             // GIVEN
             val list: NotEmptyMutableList<String> =
                 NotEmptyMutableList("a", "b")
-            val index = PositiveInt(1)
+            val index = PositiveIntJvm(1)
             val element = "c"
             // WHEN
             val result: String? = list.setOrNull(index, element)
@@ -921,7 +921,7 @@ class NotEmptyMutableListTest {
         fun `should return null with an index as a positive int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyMutableList<String> = NotEmptyMutableList("a")
-            val index = PositiveInt(list.size)
+            val index = PositiveIntJvm(list.size)
             val element = "b"
             // WHEN
             val result: String? = list.setOrNull(index, element)

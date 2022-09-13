@@ -17,7 +17,7 @@ import kotools.types.annotations.SinceKotoolsTypes
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
-public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
+public fun Int.toPositiveIntJvm(): PositiveIntJvm = PositiveIntJvm(this)
 
 /**
  * Returns this value as a positive int.
@@ -27,14 +27,16 @@ public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
  */
 @SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toPositiveInt(): PositiveInt = toInt().toPositiveInt()
+public fun String.toPositiveIntJvm(): PositiveIntJvm =
+    toInt().toPositiveIntJvm()
 
 /**
  * Returns this value as a positive int, or returns `null` if this value is
  * strictly negative.
  */
 @SinceKotoolsTypes("1.1")
-public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
+public fun Int.toPositiveIntJvmOrNull(): PositiveIntJvm? =
+    PositiveIntJvm orNull this
 
 /**
  * Returns this value as a positive int, or returns `null` if this value is not
@@ -42,8 +44,8 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
  * number.
  */
 @SinceKotoolsTypes("3.0")
-public fun String.toPositiveIntOrNull(): PositiveInt? =
-    toIntOrNull()?.toPositiveIntOrNull()
+public fun String.toPositiveIntJvmOrNull(): PositiveIntJvm? =
+    toIntOrNull()?.toPositiveIntJvmOrNull()
 
 /**
  * Represents positive integers, including `0`.
@@ -52,9 +54,9 @@ public fun String.toPositiveIntOrNull(): PositiveInt? =
  * [IllegalArgumentException] if the [value] is strictly negative.
  */
 @JvmInline
-@Serializable(PositiveInt.Serializer::class)
+@Serializable(PositiveIntJvm.Serializer::class)
 @SinceKotoolsTypes("1.1")
-public value class PositiveInt
+public value class PositiveIntJvm
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsIntJvm {
     init {
@@ -68,19 +70,19 @@ public constructor(override val value: Int) : KotoolsIntJvm {
 
     /**
      * Returns this [value] incremented by `1`.
-     * If this [value] is the [maximum][PositiveInt.max], it returns the
-     * [minimum][PositiveInt.min] value instead.
+     * If this [value] is the [maximum][PositiveIntJvm.max], it returns the
+     * [minimum][PositiveIntJvm.min] value instead.
      */
-    public operator fun inc(): PositiveInt = if (value == max.value) min
-    else PositiveInt(value + 1)
+    public operator fun inc(): PositiveIntJvm = if (value == max.value) min
+    else PositiveIntJvm(value + 1)
 
     /**
      * Returns this [value] decremented by `1`.
-     * If this [value] is the [minimum][PositiveInt.min], it returns the
-     * [maximum][PositiveInt.max] value instead.
+     * If this [value] is the [minimum][PositiveIntJvm.min], it returns the
+     * [maximum][PositiveIntJvm.max] value instead.
      */
-    public operator fun dec(): PositiveInt = if (value == min.value) max
-    else PositiveInt(value - 1)
+    public operator fun dec(): PositiveIntJvm = if (value == min.value) max
+    else PositiveIntJvm(value - 1)
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
@@ -93,15 +95,15 @@ public constructor(override val value: Int) : KotoolsIntJvm {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): PositiveInt =
-        div(other.value).toPositiveInt()
+    public infix operator fun div(other: PositiveIntJvm): PositiveIntJvm =
+        div(other.value).toPositiveIntJvm()
 
     /**
      * Divides this [value] by [other], truncating the result to an integer that
      * is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        div(other.value).toPositiveInt()
+    public infix operator fun div(other: StrictlyPositiveInt): PositiveIntJvm =
+        div(other.value).toPositiveIntJvm()
 
     /**
      * Divides this [value] by [other], truncating the result to an integer that
@@ -169,37 +171,38 @@ public constructor(override val value: Int) : KotoolsIntJvm {
         private val range: IntRange = 0..Int.MAX_VALUE
 
         /** The minimum value of a positive int. */
-        public val min: PositiveInt = PositiveInt(range.first)
+        public val min: PositiveIntJvm = PositiveIntJvm(range.first)
 
         /** The maximum value of a positive int. */
-        public val max: PositiveInt = PositiveInt(range.last)
+        public val max: PositiveIntJvm = PositiveIntJvm(range.last)
 
         /** Returns a random positive int. */
         @SinceKotoolsTypes("3.0")
-        public val random: PositiveInt get() = range.random().toPositiveInt()
+        public val random: PositiveIntJvm
+            get() = range.random().toPositiveIntJvm()
 
         /**
          * Returns the [value] as a positive int, or returns `null` if the
          * [value] is strictly negative.
          */
-        public infix fun orNull(value: Int): PositiveInt? = try {
-            PositiveInt(value)
+        public infix fun orNull(value: Int): PositiveIntJvm? = try {
+            PositiveIntJvm(value)
         } catch (_: IllegalArgumentException) {
             null
         }
     }
 
     @SinceKotoolsTypes("3.0")
-    internal object Serializer : KSerializer<PositiveInt> {
+    internal object Serializer : KSerializer<PositiveIntJvm> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            PositiveInt::class.qualifiedName!!,
+            PositiveIntJvm::class.qualifiedName!!,
             PrimitiveKind.INT
         )
 
-        override fun serialize(encoder: Encoder, value: PositiveInt): Unit =
+        override fun serialize(encoder: Encoder, value: PositiveIntJvm): Unit =
             encoder.encodeInt(value.value)
 
-        override fun deserialize(decoder: Decoder): PositiveInt =
-            decoder.decodeInt().toPositiveInt()
+        override fun deserialize(decoder: Decoder): PositiveIntJvm =
+            decoder.decodeInt().toPositiveIntJvm()
     }
 }

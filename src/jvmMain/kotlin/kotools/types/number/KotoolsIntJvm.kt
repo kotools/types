@@ -55,6 +55,6 @@ internal object KotoolsIntJvmSerializer : KSerializer<KotoolsIntJvm> {
 
     override fun deserialize(decoder: Decoder): KotoolsIntJvm {
         val value: Int = decoder.decodeInt()
-        return if (value != 0) value.toNonZeroIntJvm() else PositiveInt(0)
+        return if (value != 0) value.toNonZeroIntJvm() else PositiveIntJvm(0)
     }
 }

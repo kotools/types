@@ -189,7 +189,7 @@ class NegativeIntTest {
         // GIVEN
         val x: NegativeInt = NegativeInt.random
         // WHEN
-        val result: PositiveInt = -x
+        val result: PositiveIntJvm = -x
         // THEN
         result.value assertEquals -x.value
     }
@@ -205,8 +205,8 @@ class NegativeIntTest {
             // GIVEN
             val x: NegativeInt = NegativeInt.random
             var value = 0
-            while (value == 0) value = PositiveInt.random.value
-            val y = PositiveInt(value)
+            while (value == 0) value = PositiveIntJvm.random.value
+            val y = PositiveIntJvm(value)
             // WHEN
             val result: NegativeInt = assertPass { x / y }
             // THEN
@@ -217,7 +217,7 @@ class NegativeIntTest {
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
             val x: NegativeInt = NegativeInt.random
-            val y = PositiveInt(0)
+            val y = PositiveIntJvm(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
@@ -245,7 +245,7 @@ class NegativeIntTest {
             while (value == 0) value = NegativeInt.random.value
             val y = NegativeInt(value)
             // WHEN
-            val result: PositiveInt = assertPass { x / y }
+            val result: PositiveIntJvm = assertPass { x / y }
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -267,7 +267,7 @@ class NegativeIntTest {
             val x: NegativeInt = NegativeInt.random
             val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
-            val result: PositiveInt = x / y
+            val result: PositiveIntJvm = x / y
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -329,7 +329,7 @@ class NegativeIntTest {
             val value = 0
             val x = NegativeInt(value)
             // WHEN
-            val result: PositiveInt = assertPass(x::toPositiveInt)
+            val result: PositiveIntJvm = assertPass(x::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -351,7 +351,7 @@ class NegativeIntTest {
             val value = 0
             val x = NegativeInt(value)
             // WHEN
-            val result: PositiveInt? = x.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = x.toPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -361,7 +361,7 @@ class NegativeIntTest {
             // GIVEN
             val x = NegativeInt(StrictlyNegativeInt.random.value)
             // WHEN
-            val result: PositiveInt? = x.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = x.toPositiveIntOrNull()
             // THEN
             result.assertNull()
         }

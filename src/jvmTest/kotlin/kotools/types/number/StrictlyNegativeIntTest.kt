@@ -38,7 +38,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should throw an error with a positive Int`() {
             // GIVEN
-            val value: Int = PositiveInt.random.value
+            val value: Int = PositiveIntJvm.random.value
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException> {
                 StrictlyNegativeInt(value)
@@ -62,7 +62,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return null with a positive Int`() {
             // GIVEN
-            val value: Int = PositiveInt.random.value
+            val value: Int = PositiveIntJvm.random.value
             // WHEN
             val result: StrictlyNegativeInt? =
                 StrictlyNegativeInt orNull value
@@ -98,7 +98,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should throw an error with a string representation of a positive Int`() {
             // GIVEN
-            val string = "${PositiveInt.random.value}"
+            val string = "${PositiveIntJvm.random.value}"
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
                 string::toStrictlyNegativeInt
@@ -134,7 +134,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return null with a string representation of a positive Int`() {
             // GIVEN
-            val string = "${PositiveInt.random.value}"
+            val string = "${PositiveIntJvm.random.value}"
             // WHEN
             val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
@@ -252,8 +252,8 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             var value = 0
-            while (value == 0) value = PositiveInt.random.value
-            val y = PositiveInt(value)
+            while (value == 0) value = PositiveIntJvm.random.value
+            val y = PositiveIntJvm(value)
             // WHEN
             val result: NegativeInt = assertPass { x / y }
             // THEN
@@ -264,7 +264,7 @@ class StrictlyNegativeIntTest {
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
-            val y = PositiveInt(0)
+            val y = PositiveIntJvm(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
@@ -292,7 +292,7 @@ class StrictlyNegativeIntTest {
             while (value == 0) value = NegativeInt.random.value
             val y = NegativeInt(value)
             // WHEN
-            val result: PositiveInt = assertPass { x / y }
+            val result: PositiveIntJvm = assertPass { x / y }
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -314,7 +314,7 @@ class StrictlyNegativeIntTest {
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
-            val result: PositiveInt = x / y
+            val result: PositiveIntJvm = x / y
             // THEN
             result.value assertEquals x.value / y.value
         }

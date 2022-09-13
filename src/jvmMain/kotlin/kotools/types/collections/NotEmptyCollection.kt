@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.number.PositiveInt
+import kotools.types.number.PositiveIntJvm
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankStringJvm
 
@@ -30,8 +30,8 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  */
 @SinceKotoolsTypes("1.3")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
-    index: PositiveInt,
-    defaultValue: (PositiveInt) -> @UnsafeVariance E
+    index: PositiveIntJvm,
+    defaultValue: (PositiveIntJvm) -> @UnsafeVariance E
 ): E = getOrNull(index) ?: defaultValue(index)
 
 /**
@@ -79,7 +79,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: PositiveInt): E = get(index.value)
+    public infix operator fun get(index: PositiveIntJvm): E = get(index.value)
 
     /**
      * Returns the element at the specified [index] in this collection, or
@@ -103,7 +103,8 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * returns `null` if the [index] is out of bounds.
      */
-    public infix fun getOrNull(index: PositiveInt): E? = getOrNull(index.value)
+    public infix fun getOrNull(index: PositiveIntJvm): E? =
+        getOrNull(index.value)
 
     /**
      * Returns the element at the specified [index] in this collection, or

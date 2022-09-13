@@ -14,7 +14,7 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun `the maximum value of StrictlyPositiveInt should be the maximum value of PositiveInt`(): Unit =
-        StrictlyPositiveInt.max.value assertEquals PositiveInt.max.value
+        StrictlyPositiveInt.max.value assertEquals PositiveIntJvm.max.value
 
     @Test
     fun `the random getter should pass`(): Unit =
@@ -249,9 +249,9 @@ class StrictlyPositiveIntTest {
         fun `should return a PositiveInt with a PositiveInt other than 0`() {
             // GIVEN
             val x: StrictlyPositiveInt = StrictlyPositiveInt.random
-            val y: PositiveInt = PositiveInt.random
+            val y: PositiveIntJvm = PositiveIntJvm.random
             // WHEN
-            val result: PositiveInt = assertPass { x / y }
+            val result: PositiveIntJvm = assertPass { x / y }
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -260,7 +260,7 @@ class StrictlyPositiveIntTest {
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
             val x: StrictlyPositiveInt = StrictlyPositiveInt.random
-            val y = PositiveInt(0)
+            val y = PositiveIntJvm(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
@@ -273,7 +273,7 @@ class StrictlyPositiveIntTest {
             val x: StrictlyPositiveInt = StrictlyPositiveInt.random
             val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
-            val result: PositiveInt = x / y
+            val result: PositiveIntJvm = x / y
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -331,7 +331,7 @@ class StrictlyPositiveIntTest {
         // GIVEN
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random
         // WHEN
-        val result: PositiveInt = x.toPositiveInt()
+        val result: PositiveIntJvm = x.toPositiveInt()
         // THEN
         result.value assertEquals x.value
     }

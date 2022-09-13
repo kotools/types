@@ -83,7 +83,7 @@ public constructor(override val value: Int) : KotoolsIntJvm {
     else NegativeInt(value - 1)
 
     /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
+    public operator fun unaryMinus(): PositiveIntJvm = PositiveIntJvm(-value)
 
     // ---------- Binary operations ----------
 
@@ -93,7 +93,7 @@ public constructor(override val value: Int) : KotoolsIntJvm {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveInt): NegativeInt =
+    public infix operator fun div(other: PositiveIntJvm): NegativeInt =
         div(other.value).toNegativeInt()
 
     /**
@@ -109,15 +109,15 @@ public constructor(override val value: Int) : KotoolsIntJvm {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): PositiveInt =
-        div(other.value).toPositiveInt()
+    public infix operator fun div(other: NegativeInt): PositiveIntJvm =
+        div(other.value).toPositiveIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
-        div(other.value).toPositiveInt()
+    public infix operator fun div(other: StrictlyNegativeInt): PositiveIntJvm =
+        div(other.value).toPositiveIntJvm()
 
     // ---------- Conversions ----------
 
@@ -154,13 +154,14 @@ public constructor(override val value: Int) : KotoolsIntJvm {
      * [IllegalArgumentException] if this [value] is strictly negative.
      */
     @Throws(IllegalArgumentException::class)
-    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+    public fun toPositiveInt(): PositiveIntJvm = PositiveIntJvm(value)
 
     /**
      * Returns this [value] as a positive int, or returns `null` if this [value]
      * is strictly negative.
      */
-    public fun toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull value
+    public fun toPositiveIntOrNull(): PositiveIntJvm? =
+        PositiveIntJvm orNull value
 
     override fun toString(): String = value.toString()
 

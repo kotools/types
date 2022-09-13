@@ -4,7 +4,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.indexOutOfBounds
-import kotools.types.number.PositiveInt
+import kotools.types.number.PositiveIntJvm
 import kotools.types.number.StrictlyPositiveInt
 
 // ---------- Conversions ----------
@@ -124,7 +124,7 @@ private constructor(
      * an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public fun add(index: PositiveInt, element: E): Unit =
+    public fun add(index: PositiveIntJvm, element: E): Unit =
         add(index.value, element)
 
     /**
@@ -149,7 +149,7 @@ private constructor(
      * Inserts the [element] into this list at the specified [index], or returns
      * `null` if the [index] is out of bounds.
      */
-    public fun addOrNull(index: PositiveInt, element: E): Unit? =
+    public fun addOrNull(index: PositiveIntJvm, element: E): Unit? =
         addOrNull(index.value, element)
 
     /**
@@ -183,7 +183,7 @@ private constructor(
      * this list contains only one element.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public infix fun removeAt(index: PositiveInt): E = removeAt(index.value)
+    public infix fun removeAt(index: PositiveIntJvm): E = removeAt(index.value)
 
     /**
      * Removes an element at the specified [index] from the list, or throws an
@@ -216,7 +216,7 @@ private constructor(
      * Because this list shouldn't be empty, the element will not be removed if
      * this list contains only one element.
      */
-    public infix fun removeAtOrNull(index: PositiveInt): E? =
+    public infix fun removeAtOrNull(index: PositiveIntJvm): E? =
         removeAtOrNull(index.value)
 
     /**
@@ -247,7 +247,7 @@ private constructor(
      * [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public operator fun set(index: PositiveInt, element: E): E =
+    public operator fun set(index: PositiveIntJvm, element: E): E =
         set(index.value, element)
 
     /**
@@ -273,7 +273,7 @@ private constructor(
      * Replaces the element at the specified [index] in this list with the
      * specified [element], or returns `null` if the [index] is out of bounds.
      */
-    public fun setOrNull(index: PositiveInt, element: E): E? =
+    public fun setOrNull(index: PositiveIntJvm, element: E): E? =
         setOrNull(index.value, element)
 
     /**

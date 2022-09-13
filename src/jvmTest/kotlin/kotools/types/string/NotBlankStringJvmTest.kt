@@ -88,7 +88,7 @@ class NotBlankStringJvmTest {
         fun `should return the first character with 0`() {
             // GIVEN
             val string = NotBlankStringJvm("hello")
-            val index = PositiveInt(0)
+            val index = PositiveIntJvm(0)
             // WHEN
             val result: Char = assertPass { string[index] }
             // THEN
@@ -100,7 +100,7 @@ class NotBlankStringJvmTest {
         fun `should throw an error with an index that is out of bounds`() {
             // GIVEN
             val string = NotBlankStringJvm("hi")
-            val index = PositiveInt(10)
+            val index = PositiveIntJvm(10)
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { string[index] }
         }
@@ -111,7 +111,7 @@ class NotBlankStringJvmTest {
             fun `should return the second character with 1`() {
                 // GIVEN
                 val string = NotBlankStringJvm("world")
-                val index = PositiveInt(1)
+                val index = PositiveIntJvm(1)
                 // WHEN
                 val result: Char? = string getOrNull index
                 // THEN
@@ -122,7 +122,7 @@ class NotBlankStringJvmTest {
             fun `should return null with an index that is out of bounds`() {
                 // GIVEN
                 val string = NotBlankStringJvm("hi")
-                val index = PositiveInt(10)
+                val index = PositiveIntJvm(10)
                 // WHEN
                 val result: Char? = string getOrNull index
                 // THEN
@@ -351,7 +351,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveInt = assertPass(string::toPositiveInt)
+            val result: PositiveIntJvm = assertPass(string::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -362,7 +362,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveInt = assertPass(string::toPositiveInt)
+            val result: PositiveIntJvm = assertPass(string::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -392,7 +392,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -403,7 +403,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -413,7 +413,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("a")
             // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -423,7 +423,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("-1")
             // WHEN
-            val result: PositiveInt? = string.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
             // THEN
             result.assertNull()
         }

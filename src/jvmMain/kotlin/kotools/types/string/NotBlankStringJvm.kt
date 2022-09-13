@@ -76,14 +76,14 @@ public constructor(public val value: String) : Comparable<String> {
      * an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: PositiveInt): Char =
+    public infix operator fun get(index: PositiveIntJvm): Char =
         value[index.value]
 
     /**
      * Returns the character of this [value] at the specified [index], or
      * returns `null` if the [index] is out of bounds.
      */
-    public infix fun getOrNull(index: PositiveInt): Char? = try {
+    public infix fun getOrNull(index: PositiveIntJvm): Char? = try {
         get(index)
     } catch (_: IndexOutOfBoundsException) {
         null
@@ -146,7 +146,7 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
+    public fun toPositiveInt(): PositiveIntJvm = value.toPositiveIntJvm()
 
     /**
      * Returns this [value] as a positive int, or returns `null` if this [value]
@@ -154,8 +154,8 @@ public constructor(public val value: String) : Comparable<String> {
      * negative number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toPositiveIntOrNull(): PositiveInt? =
-        value.toPositiveIntOrNull()
+    public fun toPositiveIntOrNull(): PositiveIntJvm? =
+        value.toPositiveIntJvmOrNull()
 
     /**
      * Returns this [value] as a strictly positive int.

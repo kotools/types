@@ -250,7 +250,7 @@ class NonZeroIntJvmTest {
             val value: Int = NonZeroIntJvm.positiveRange.random()
             val x = NonZeroIntJvm(value)
             // WHEN
-            val result: PositiveInt = assertPass(x::toPositiveInt)
+            val result: PositiveIntJvm = assertPass(x::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -273,7 +273,7 @@ class NonZeroIntJvmTest {
             val value: Int = NonZeroIntJvm.positiveRange.random()
             val x = NonZeroIntJvm(value)
             // WHEN
-            val result: PositiveInt? = x.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = x.toPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -284,7 +284,7 @@ class NonZeroIntJvmTest {
             val value: Int = NonZeroIntJvm.negativeRange.random()
             val x = NonZeroIntJvm(value)
             // WHEN
-            val result: PositiveInt? = x.toPositiveIntOrNull()
+            val result: PositiveIntJvm? = x.toPositiveIntOrNull()
             // THEN
             result.assertNull()
         }
