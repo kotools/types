@@ -128,14 +128,14 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+    public fun toNonZeroInt(): NonZeroIntJvm = value.toNonZeroInt()
 
     /**
      * Returns this [value] as a non-zero int, or returns `null` if this [value]
      * is not a valid representation of a number or if it represents `0`.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
+    public fun toNonZeroIntOrNull(): NonZeroIntJvm? = value.toNonZeroIntOrNull()
 
     /**
      * Returns this [value] as a positive int.

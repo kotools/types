@@ -213,9 +213,9 @@ class StrictlyNegativeIntTest {
         fun `should return a NonZeroInt with a NonZeroInt`() {
             // GIVEN
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
-            val y: NonZeroInt = NonZeroInt.random
+            val y: NonZeroIntJvm = NonZeroIntJvm.random
             // WHEN
-            val result: NonZeroInt = x * y
+            val result: NonZeroIntJvm = x * y
             // THEN
             result.value assertEquals x.value * y.value
         }
@@ -226,7 +226,7 @@ class StrictlyNegativeIntTest {
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
-            val result: NonZeroInt = x * y
+            val result: NonZeroIntJvm = x * y
             // THEN
             result.value assertEquals x.value * y.value
         }
@@ -237,7 +237,7 @@ class StrictlyNegativeIntTest {
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
-            val result: NonZeroInt = x * y
+            val result: NonZeroIntJvm = x * y
             // THEN
             result.value assertEquals x.value * y.value
         }
@@ -327,7 +327,7 @@ class StrictlyNegativeIntTest {
         // GIVEN
         val x: StrictlyNegativeInt = StrictlyNegativeInt.random
         // WHEN
-        val result: NonZeroInt = x.toNonZeroInt()
+        val result: NonZeroIntJvm = x.toNonZeroInt()
         // THEN
         result.value assertEquals x.value
     }

@@ -288,7 +288,7 @@ class PositiveIntTest {
             val value: Int = StrictlyPositiveInt.random.value
             val x = PositiveInt(value)
             // WHEN
-            val result: NonZeroInt = assertPass(x::toNonZeroInt)
+            val result: NonZeroIntJvm = assertPass(x::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -310,7 +310,7 @@ class PositiveIntTest {
             val value: Int = StrictlyPositiveInt.random.value
             val x = PositiveInt(value)
             // WHEN
-            val result: NonZeroInt? = x.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = x.toNonZeroIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -320,7 +320,7 @@ class PositiveIntTest {
             // GIVEN
             val x = PositiveInt(0)
             // WHEN
-            val result: NonZeroInt? = x.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = x.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }

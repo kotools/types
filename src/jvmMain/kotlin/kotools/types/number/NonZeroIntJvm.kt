@@ -17,7 +17,7 @@ import kotools.types.annotations.SinceKotoolsTypes
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
-public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
+public fun Int.toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(this)
 
 /**
  * Returns this value as a non-zero int.
@@ -26,21 +26,21 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  */
 @SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toNonZeroInt(): NonZeroInt = toInt().toNonZeroInt()
+public fun String.toNonZeroInt(): NonZeroIntJvm = toInt().toNonZeroInt()
 
 /**
  * Returns this value as a non-zero int, or returns `null` if this value equals
  * `0`.
  */
 @SinceKotoolsTypes("1.1")
-public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
+public fun Int.toNonZeroIntOrNull(): NonZeroIntJvm? = NonZeroIntJvm orNull this
 
 /**
  * Returns this value as a non-zero int, or returns `null` if this value is not
  * a valid representation of a number or if it represents `0`.
  */
 @SinceKotoolsTypes("3.0")
-public fun String.toNonZeroIntOrNull(): NonZeroInt? =
+public fun String.toNonZeroIntOrNull(): NonZeroIntJvm? =
     toIntOrNull()?.toNonZeroIntOrNull()
 
 /**
@@ -50,9 +50,9 @@ public fun String.toNonZeroIntOrNull(): NonZeroInt? =
  * [IllegalArgumentException] if the [value] equals `0`.
  */
 @JvmInline
-@Serializable(NonZeroInt.Serializer::class)
+@Serializable(NonZeroIntJvm.Serializer::class)
 @SinceKotoolsTypes("1.1")
-public value class NonZeroInt
+public value class NonZeroIntJvm
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsIntJvm {
     init {
@@ -68,43 +68,43 @@ public constructor(override val value: Int) : KotoolsIntJvm {
     /**
      * Returns this [value] incremented by `1`.
      * If this [value] equals `-1`, it returns `1` instead.
-     * If this [value] is the [maximum][NonZeroInt.max], it returns the
-     * [minimum][NonZeroInt.min] value instead.
+     * If this [value] is the [maximum][NonZeroIntJvm.max], it returns the
+     * [minimum][NonZeroIntJvm.min] value instead.
      */
-    public operator fun inc(): NonZeroInt = when (value) {
-        -1 -> NonZeroInt(1)
+    public operator fun inc(): NonZeroIntJvm = when (value) {
+        -1 -> NonZeroIntJvm(1)
         max.value -> min
-        else -> NonZeroInt(value + 1)
+        else -> NonZeroIntJvm(value + 1)
     }
 
     /**
      * Returns this [value] decremented by `1`.
      * If this [value] equals `1`, it returns `-1` instead.
-     * If this [value] is the [minimum][NonZeroInt.min], it returns the
-     * [maximum][NonZeroInt.max] value instead.
+     * If this [value] is the [minimum][NonZeroIntJvm.min], it returns the
+     * [maximum][NonZeroIntJvm.max] value instead.
      */
-    public operator fun dec(): NonZeroInt = when (value) {
-        1 -> NonZeroInt(-1)
+    public operator fun dec(): NonZeroIntJvm = when (value) {
+        1 -> NonZeroIntJvm(-1)
         min.value -> max
-        else -> NonZeroInt(value - 1)
+        else -> NonZeroIntJvm(value - 1)
     }
 
     /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
+    public operator fun unaryMinus(): NonZeroIntJvm = NonZeroIntJvm(-value)
 
     // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: NonZeroInt): NonZeroInt =
-        NonZeroInt(times(other.value))
+    public infix operator fun times(other: NonZeroIntJvm): NonZeroIntJvm =
+        NonZeroIntJvm(times(other.value))
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: StrictlyPositiveInt): NonZeroInt =
-        NonZeroInt(times(other.value))
+    public infix operator fun times(other: StrictlyPositiveInt): NonZeroIntJvm =
+        NonZeroIntJvm(times(other.value))
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
-        NonZeroInt(times(other.value))
+    public infix operator fun times(other: StrictlyNegativeInt): NonZeroIntJvm =
+        NonZeroIntJvm(times(other.value))
 
     // ---------- Conversions ----------
 
@@ -177,14 +177,14 @@ public constructor(override val value: Int) : KotoolsIntJvm {
         internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
 
         /** The minimum value of a non-zero int. */
-        public val min: NonZeroInt = NonZeroInt(negativeRange.first)
+        public val min: NonZeroIntJvm = NonZeroIntJvm(negativeRange.first)
 
         /** The maximum value of a non-zero int. */
-        public val max: NonZeroInt = NonZeroInt(positiveRange.last)
+        public val max: NonZeroIntJvm = NonZeroIntJvm(positiveRange.last)
 
         /** Returns a random non-zero int. */
         @SinceKotoolsTypes("3.0")
-        public val random: NonZeroInt
+        public val random: NonZeroIntJvm
             get() = ranges.random()
                 .random()
                 .toNonZeroInt()
@@ -193,24 +193,24 @@ public constructor(override val value: Int) : KotoolsIntJvm {
          * Returns the [value] as a non-zero int, or returns `null` if the
          * [value] equals `0`.
          */
-        public infix fun orNull(value: Int): NonZeroInt? = try {
-            NonZeroInt(value)
+        public infix fun orNull(value: Int): NonZeroIntJvm? = try {
+            NonZeroIntJvm(value)
         } catch (_: IllegalArgumentException) {
             null
         }
     }
 
     @SinceKotoolsTypes("3.0")
-    internal object Serializer : KSerializer<NonZeroInt> {
+    internal object Serializer : KSerializer<NonZeroIntJvm> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            NonZeroInt::class.qualifiedName!!,
+            NonZeroIntJvm::class.qualifiedName!!,
             PrimitiveKind.INT
         )
 
-        override fun serialize(encoder: Encoder, value: NonZeroInt): Unit =
+        override fun serialize(encoder: Encoder, value: NonZeroIntJvm): Unit =
             encoder.encodeInt(value.value)
 
-        override fun deserialize(decoder: Decoder): NonZeroInt =
+        override fun deserialize(decoder: Decoder): NonZeroIntJvm =
             decoder.decodeInt().toNonZeroInt()
     }
 }

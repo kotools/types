@@ -10,25 +10,25 @@ class NonZeroIntTest {
 
     @Test
     fun `the minimum value of NonZeroInt should be the minimum value of Int`() =
-        NonZeroInt.min.value assertEquals Int.MIN_VALUE
+        NonZeroIntJvm.min.value assertEquals Int.MIN_VALUE
 
     @Test
     fun `the maximum value of NonZeroInt should be the maximum of Int`() =
-        NonZeroInt.max.value assertEquals Int.MAX_VALUE
+        NonZeroIntJvm.max.value assertEquals Int.MAX_VALUE
 
     @Test
     fun `the ranges of NonZeroInt shouldn't contain 0`() {
         // GIVEN
         val x = 0
         // WHEN
-        val result: Boolean = NonZeroInt.ranges.all { x !in it }
+        val result: Boolean = NonZeroIntJvm.ranges.all { x !in it }
         // THEN
         result.assertTrue()
     }
 
     @Test
     fun `the random getter should pass`(): Unit =
-        NonZeroInt.random.value assertNotEquals NonZeroInt.random.value
+        NonZeroIntJvm.random.value assertNotEquals NonZeroIntJvm.random.value
 
     // ---------- Builders ----------
 
@@ -37,9 +37,9 @@ class NonZeroIntTest {
         @Test
         fun `should pass with an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.random.value
+            val value: Int = NonZeroIntJvm.random.value
             // WHEN
-            val result: NonZeroInt = assertPass { NonZeroInt(value) }
+            val result: NonZeroIntJvm = assertPass { NonZeroIntJvm(value) }
             // THEN
             result.value assertEquals value
         }
@@ -49,7 +49,7 @@ class NonZeroIntTest {
             // GIVEN
             val value = 0
             // WHEN & THEN
-            assertFailsWith<IllegalArgumentException> { NonZeroInt(value) }
+            assertFailsWith<IllegalArgumentException> { NonZeroIntJvm(value) }
         }
     }
 
@@ -58,9 +58,9 @@ class NonZeroIntTest {
         @Test
         fun `should pass with an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.random.value
+            val value: Int = NonZeroIntJvm.random.value
             // WHEN
-            val result: NonZeroInt? = NonZeroInt orNull value
+            val result: NonZeroIntJvm? = NonZeroIntJvm orNull value
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -70,7 +70,7 @@ class NonZeroIntTest {
             // GIVEN
             val value = 0
             // WHEN
-            val result: NonZeroInt? = NonZeroInt orNull value
+            val result: NonZeroIntJvm? = NonZeroIntJvm orNull value
             // THEN
             result.assertNull()
         }
@@ -81,10 +81,10 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a string representation of an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.random.value
+            val value: Int = NonZeroIntJvm.random.value
             val string: String = value.toString()
             // WHEN
-            val result: NonZeroInt = assertPass(string::toNonZeroInt)
+            val result: NonZeroIntJvm = assertPass(string::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -111,10 +111,10 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a string representation of an Int other than 0`() {
             // GIVEN
-            val value: Int = NonZeroInt.random.value
+            val value: Int = NonZeroIntJvm.random.value
             val string: String = value.toString()
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -124,7 +124,7 @@ class NonZeroIntTest {
             // GIVEN
             val string = "hello"
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -134,7 +134,7 @@ class NonZeroIntTest {
             // GIVEN
             val string = "0"
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -147,8 +147,8 @@ class NonZeroIntTest {
         @Test
         fun `should increment the value by 1 with a value other than the maximum value`() {
             // GIVEN
-            var x: NonZeroInt = NonZeroInt.max
-            while (x == NonZeroInt.max) x = NonZeroInt.random
+            var x: NonZeroIntJvm = NonZeroIntJvm.max
+            while (x == NonZeroIntJvm.max) x = NonZeroIntJvm.random
             val oldValue: Int = x.value
             // WHEN
             x++
@@ -159,11 +159,11 @@ class NonZeroIntTest {
         @Test
         fun `should return the minimum value with the maximum value`() {
             // GIVEN
-            var x = NonZeroInt.max
+            var x = NonZeroIntJvm.max
             // WHEN
             x++
             // THEN
-            x assertEquals NonZeroInt.min
+            x assertEquals NonZeroIntJvm.min
         }
     }
 
@@ -172,8 +172,8 @@ class NonZeroIntTest {
         @Test
         fun `should decrement the value by 1 with a value other than the minimum value`() {
             // GIVEN
-            var x: NonZeroInt = NonZeroInt.min
-            while (x == NonZeroInt.min) x = NonZeroInt.random
+            var x: NonZeroIntJvm = NonZeroIntJvm.min
+            while (x == NonZeroIntJvm.min) x = NonZeroIntJvm.random
             val oldValue: Int = x.value
             // WHEN
             x--
@@ -184,20 +184,20 @@ class NonZeroIntTest {
         @Test
         fun `should return the maximum value with the minimum value`() {
             // GIVEN
-            var x = NonZeroInt.min
+            var x = NonZeroIntJvm.min
             // WHEN
             x--
             // THEN
-            x assertEquals NonZeroInt.max
+            x assertEquals NonZeroIntJvm.max
         }
     }
 
     @Test
     fun `unaryMinus() should return a NonZeroInt`() {
         // GIVEN
-        val x: NonZeroInt = NonZeroInt.random
+        val x: NonZeroIntJvm = NonZeroIntJvm.random
         // WHEN
-        val result: NonZeroInt = -x
+        val result: NonZeroIntJvm = -x
         // THEN
         result.value assertEquals -x.value
     }
@@ -209,10 +209,10 @@ class NonZeroIntTest {
         @Test
         fun `should return a non zero int with a non zero int`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.random
-            val y: NonZeroInt = NonZeroInt.random
+            val x: NonZeroIntJvm = NonZeroIntJvm.random
+            val y: NonZeroIntJvm = NonZeroIntJvm.random
             // WHEN
-            val result: NonZeroInt = x * y
+            val result: NonZeroIntJvm = x * y
             // THEN
             result.value assertEquals x.value * y.value
         }
@@ -220,10 +220,10 @@ class NonZeroIntTest {
         @Test
         fun `should return a non zero int with a strictly positive int`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.random
+            val x: NonZeroIntJvm = NonZeroIntJvm.random
             val y: StrictlyPositiveInt = StrictlyPositiveInt.random
             // WHEN
-            val result: NonZeroInt = x * y
+            val result: NonZeroIntJvm = x * y
             // THEN
             result.value assertEquals x.value * y.value
         }
@@ -231,10 +231,10 @@ class NonZeroIntTest {
         @Test
         fun `should return a non zero int with a strictly negative int`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.random
+            val x: NonZeroIntJvm = NonZeroIntJvm.random
             val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
-            val result: NonZeroInt = x * y
+            val result: NonZeroIntJvm = x * y
             // THEN
             result.value assertEquals x.value * y.value
         }
@@ -247,8 +247,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a positive NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.positiveRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.positiveRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: PositiveInt = assertPass(x::toPositiveInt)
             // THEN
@@ -258,8 +258,8 @@ class NonZeroIntTest {
         @Test
         fun `should throw an error with a negative NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.negativeRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.negativeRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toPositiveInt)
         }
@@ -270,8 +270,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a positive NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.positiveRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.positiveRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: PositiveInt? = x.toPositiveIntOrNull()
             // THEN
@@ -281,8 +281,8 @@ class NonZeroIntTest {
         @Test
         fun `should return null with a negative NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.negativeRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.negativeRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: PositiveInt? = x.toPositiveIntOrNull()
             // THEN
@@ -295,8 +295,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a positive NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.positiveRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.positiveRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: StrictlyPositiveInt =
                 assertPass(x::toStrictlyPositiveInt)
@@ -307,7 +307,8 @@ class NonZeroIntTest {
         @Test
         fun `should throw an error with a negative NonZeroInt`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.negativeRange.random().toNonZeroInt()
+            val x: NonZeroIntJvm =
+                NonZeroIntJvm.negativeRange.random().toNonZeroInt()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(x::toStrictlyPositiveInt)
         }
@@ -318,8 +319,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a positive NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.positiveRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.positiveRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
             // THEN
@@ -329,7 +330,8 @@ class NonZeroIntTest {
         @Test
         fun `should return null with a negative NonZeroInt`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.negativeRange.random().toNonZeroInt()
+            val x: NonZeroIntJvm =
+                NonZeroIntJvm.negativeRange.random().toNonZeroInt()
             // WHEN
             val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
             // THEN
@@ -342,8 +344,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a negative NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.negativeRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.negativeRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: NegativeInt = assertPass(x::toNegativeInt)
             // THEN
@@ -353,7 +355,8 @@ class NonZeroIntTest {
         @Test
         fun `should throw an error with a positive NonZeroInt`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
+            val x: NonZeroIntJvm =
+                NonZeroIntJvm.positiveRange.random().toNonZeroInt()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
         }
@@ -364,8 +367,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a negative NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.negativeRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.negativeRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: NegativeInt? = x.toNegativeIntOrNull()
             // THEN
@@ -375,7 +378,8 @@ class NonZeroIntTest {
         @Test
         fun `should return null with a positive NonZeroInt`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
+            val x: NonZeroIntJvm =
+                NonZeroIntJvm.positiveRange.random().toNonZeroInt()
             // WHEN
             val result: NegativeInt? = x.toNegativeIntOrNull()
             // THEN
@@ -388,8 +392,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a negative NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.negativeRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.negativeRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: StrictlyNegativeInt =
                 assertPass(x::toStrictlyNegativeInt)
@@ -400,7 +404,8 @@ class NonZeroIntTest {
         @Test
         fun `should throw an error with a positive NonZeroInt`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
+            val x: NonZeroIntJvm =
+                NonZeroIntJvm.positiveRange.random().toNonZeroInt()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
                 block = x::toStrictlyNegativeInt
@@ -413,8 +418,8 @@ class NonZeroIntTest {
         @Test
         fun `should pass with a negative NonZeroInt`() {
             // GIVEN
-            val value: Int = NonZeroInt.negativeRange.random()
-            val x = NonZeroInt(value)
+            val value: Int = NonZeroIntJvm.negativeRange.random()
+            val x = NonZeroIntJvm(value)
             // WHEN
             val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
             // THEN
@@ -424,7 +429,8 @@ class NonZeroIntTest {
         @Test
         fun `should return null with a positive NonZeroInt`() {
             // GIVEN
-            val x: NonZeroInt = NonZeroInt.positiveRange.random().toNonZeroInt()
+            val x: NonZeroIntJvm =
+                NonZeroIntJvm.positiveRange.random().toNonZeroInt()
             // WHEN
             val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
             // THEN
@@ -435,7 +441,7 @@ class NonZeroIntTest {
     @Test
     fun `toString() should return its value as a string`() {
         // GIVEN
-        val x: NonZeroInt = NonZeroInt.random
+        val x: NonZeroIntJvm = NonZeroIntJvm.random
         // WHEN
         val result: String = x.toString()
         // THEN
@@ -447,7 +453,7 @@ class NonZeroIntSerializerTest {
     @Test
     fun `should serialize properly the class`() {
         // GIVEN
-        val x: NonZeroInt = NonZeroInt.random
+        val x: NonZeroIntJvm = NonZeroIntJvm.random
         // WHEN
         val result: String = Json.encodeToString(x)
         // THEN
@@ -457,10 +463,10 @@ class NonZeroIntSerializerTest {
     @Test
     fun `should deserialize properly the class`() {
         // GIVEN
-        val x: NonZeroInt = NonZeroInt.random
+        val x: NonZeroIntJvm = NonZeroIntJvm.random
         val encodedString: String = Json.encodeToString(x)
         // WHEN
-        val result: NonZeroInt = Json.decodeFromString(encodedString)
+        val result: NonZeroIntJvm = Json.decodeFromString(encodedString)
         // THEN
         result.value assertEquals x.value
     }

@@ -265,7 +265,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroInt = assertPass(string::toNonZeroInt)
+            val result: NonZeroIntJvm = assertPass(string::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -276,7 +276,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroInt = assertPass(string::toNonZeroInt)
+            val result: NonZeroIntJvm = assertPass(string::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -306,7 +306,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -317,7 +317,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -327,7 +327,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("hello")
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -337,7 +337,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("0")
             // WHEN
-            val result: NonZeroInt? = string.toNonZeroIntOrNull()
+            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }

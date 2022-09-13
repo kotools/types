@@ -92,15 +92,15 @@ public constructor(override val value: Int) : KotoolsIntJvm {
     // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: NonZeroInt): NonZeroInt =
+    public infix operator fun times(other: NonZeroIntJvm): NonZeroIntJvm =
         times(other.value).toNonZeroInt()
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: StrictlyPositiveInt): NonZeroInt =
+    public infix operator fun times(other: StrictlyPositiveInt): NonZeroIntJvm =
         times(other.value).toNonZeroInt()
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
+    public infix operator fun times(other: StrictlyNegativeInt): NonZeroIntJvm =
         times(other.value).toNonZeroInt()
 
     /**
@@ -138,7 +138,7 @@ public constructor(override val value: Int) : KotoolsIntJvm {
     // ---------- Conversions ----------
 
     /** Returns this [value] as a non-zero int. */
-    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+    public fun toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(value)
 
     /** Returns this [value] as a negative int. */
     public fun toNegativeInt(): NegativeInt = NegativeInt(value)

@@ -126,13 +126,13 @@ public constructor(override val value: Int) : KotoolsIntJvm {
      * [IllegalArgumentException] if this [value] equals `0`.
      */
     @Throws(IllegalArgumentException::class)
-    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+    public fun toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(value)
 
     /**
      * Returns this [value] as a non-zero int, or returns `null` if this [value]
      * equals `0`.
      */
-    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull value
+    public fun toNonZeroIntOrNull(): NonZeroIntJvm? = NonZeroIntJvm orNull value
 
     /**
      * Returns this [value] as a strictly positive int, or throws an

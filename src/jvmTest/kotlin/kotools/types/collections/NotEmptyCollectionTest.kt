@@ -5,7 +5,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
-import kotools.types.number.NonZeroInt
+import kotools.types.number.NonZeroIntJvm
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankStringJvm
@@ -441,8 +441,8 @@ class SealedNotEmptyCollectionSerializerTest {
     @Test
     fun `should have the correct descriptor`() {
         // GIVEN
-        val serializer: NotEmptyCollectionSerializer<NonZeroInt> =
-            NotEmptyCollectionSerializer(NonZeroInt.Serializer)
+        val serializer: NotEmptyCollectionSerializer<NonZeroIntJvm> =
+            NotEmptyCollectionSerializer(NonZeroIntJvm.Serializer)
         // WHEN
         val result: String = serializer.descriptor.serialName
         // THEN
