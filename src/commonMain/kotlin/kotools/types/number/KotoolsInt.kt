@@ -112,7 +112,7 @@ public interface KotoolsInt : Comparable<Int> {
     // ---------- Conversions ----------
 
     /**
-     * Returns the string representation of this [value] as a [NotBlankString].
+     * Returns the string representation of this [value] as a not blank string.
      */
     public fun toNotBlankString(): NotBlankString =
         value.toString().toNotBlankString()
