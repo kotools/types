@@ -29,8 +29,7 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun constructor_should_throw_an_error_with_a_negative_Int() {
-        // TODO: Use NegativeInt.random.value instead
-        val value: Int = NonZeroInt.negativeRange.random()
+        val value: Int = NegativeInt.random.value
         assertFailsWith<IllegalArgumentException> { StrictlyPositiveInt(value) }
     }
 
@@ -43,8 +42,7 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun companionOrNull_should_return_null_with_a_negative_Int() {
-        // TODO: Use NegativeInt.random.value instead
-        val value: Int = NonZeroInt.negativeRange.random()
+        val value: Int = NegativeInt.random.value
         val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
         result.assertNull()
     }

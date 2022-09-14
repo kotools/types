@@ -5,53 +5,48 @@ import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
-// TODO: Add the link [negative][NegativeInt] in the documentation.
 /**
- * Returns this value as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if this value is negative.
+ * Returns this value as a strictly positive int, or throws an
+ * [IllegalArgumentException] if this value is [negative][NegativeInt].
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
 
-// TODO: Add the link [negative number][NegativeInt] in the documentation.
 /**
- * Returns this value as a [StrictlyPositiveInt].
+ * Returns this value as a strictly positive int.
  * Throws a [NumberFormatException] if this value is not a valid representation
  * of a number, or throws an [IllegalArgumentException] if it represents a
- * negative number.
+ * [negative number][NegativeInt].
  */
 @SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
 public fun String.toStrictlyPositiveInt(): StrictlyPositiveInt =
     toInt().toStrictlyPositiveInt()
 
-// TODO: Add the link [negative number][NegativeInt] in the documentation.
 /**
- * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
- * value is negative.
+ * Returns this value as a strictly positive int, or returns `null` if this
+ * value is [negative][NegativeInt].
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     StrictlyPositiveInt orNull this
 
-// TODO: Add the link [negative number][NegativeInt] in the documentation.
 /**
- * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
+ * Returns this value as a strictly positive int, or returns `null` if this
  * value is not a valid representation of a number or if it represents a
- * negative number.
+ * [negative number][NegativeInt].
  */
 @SinceKotoolsTypes("3.0")
 public fun String.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     toIntOrNull()?.toStrictlyPositiveIntOrNull()
 
-// TODO: Add the link [negative][NegativeInt] in the documentation.
 /**
- * Represents strictly positive integers, excluding `0`.
+ * Represents strictly positive integers (`x > 0`).
  *
- * @constructor Returns the [value] as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if the [value] is negative.
+ * @constructor Returns the [value] as a strictly positive int, or throws an
+ * [IllegalArgumentException] if the [value] is [negative][NegativeInt].
  */
 @JvmInline
 @SinceKotoolsTypes("1.1")
@@ -69,21 +64,20 @@ public constructor(override val value: Int) : KotoolsInt {
         @SinceKotoolsTypes("3.0")
         internal val range: IntRange = 1..PositiveInt.max.value
 
-        /** The minimum value of a [StrictlyPositiveInt]. */
+        /** The minimum value of a strictly positive int. */
         public val min: StrictlyPositiveInt = StrictlyPositiveInt(range.first)
 
-        /** The maximum value of a [StrictlyPositiveInt]. */
+        /** The maximum value of a strictly positive int. */
         public val max: StrictlyPositiveInt = StrictlyPositiveInt(range.last)
 
-        /** Returns a random [StrictlyPositiveInt]. */
+        /** Returns a random strictly positive int. */
         @SinceKotoolsTypes("3.0")
         public val random: StrictlyPositiveInt
             get() = range.random().toStrictlyPositiveInt()
 
-        // TODO: Add the link [negative][NegativeInt] in the documentation.
         /**
-         * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if
-         * the [value] is negative.
+         * Returns the [value] as a strictly positive int, or returns `null` if
+         * the [value] is [negative][NegativeInt].
          */
         public infix fun orNull(value: Int): StrictlyPositiveInt? = try {
             StrictlyPositiveInt(value)

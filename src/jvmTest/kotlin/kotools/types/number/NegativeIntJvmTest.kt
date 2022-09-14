@@ -5,7 +5,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
 
-class NegativeIntTest {
+class NegativeIntJvmTest {
     // ---------- Constants & Getters ----------
 
     @Test
