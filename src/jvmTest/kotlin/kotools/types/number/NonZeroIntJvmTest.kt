@@ -232,7 +232,7 @@ class NonZeroIntJvmTest {
         fun `should return a non zero int with a strictly negative int`() {
             // GIVEN
             val x: NonZeroIntJvm = NonZeroIntJvm.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: NonZeroIntJvm = x * y
             // THEN
@@ -397,7 +397,7 @@ class NonZeroIntJvmTest {
             val value: Int = NonZeroIntJvm.negativeRange.random()
             val x = NonZeroIntJvm(value)
             // WHEN
-            val result: StrictlyNegativeInt =
+            val result: StrictlyNegativeIntJvm =
                 assertPass(x::toStrictlyNegativeInt)
             // THEN
             result.value assertEquals value
@@ -423,7 +423,8 @@ class NonZeroIntJvmTest {
             val value: Int = NonZeroIntJvm.negativeRange.random()
             val x = NonZeroIntJvm(value)
             // WHEN
-            val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
+            val result: StrictlyNegativeIntJvm? =
+                x.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -434,7 +435,8 @@ class NonZeroIntJvmTest {
             val x: NonZeroIntJvm =
                 NonZeroIntJvm.positiveRange.random().toNonZeroIntJvm()
             // WHEN
-            val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
+            val result: StrictlyNegativeIntJvm? =
+                x.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNull()
         }

@@ -204,8 +204,8 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
-        value.toStrictlyNegativeInt()
+    public fun toStrictlyNegativeInt(): StrictlyNegativeIntJvm =
+        value.toStrictlyNegativeIntJvm()
 
     /**
      * Returns this [value] as a strictly negative int, or returns `null` if
@@ -213,8 +213,8 @@ public constructor(public val value: String) : Comparable<String> {
      * represents a positive number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-        value.toStrictlyNegativeIntOrNull()
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeIntJvm? =
+        value.toStrictlyNegativeIntJvmOrNull()
 
     override fun toString(): String = value
 

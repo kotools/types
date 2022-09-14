@@ -202,7 +202,7 @@ class StrictlyPositiveIntJvmTest {
         // GIVEN
         val x: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
         // WHEN
-        val result: StrictlyNegativeInt = -x
+        val result: StrictlyNegativeIntJvm = -x
         // THEN
         result.value assertEquals -x.value
     }
@@ -237,7 +237,7 @@ class StrictlyPositiveIntJvmTest {
         fun `should return a NonZeroInt with a StrictlyNegativeInt`() {
             // GIVEN
             val x: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: NonZeroIntJvm = x * y
             // THEN
@@ -310,7 +310,7 @@ class StrictlyPositiveIntJvmTest {
         fun `should return a NegativeInt with a StrictlyNegativeInt`() {
             // GIVEN
             val x: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: NegativeIntJvm = x / y
             // THEN

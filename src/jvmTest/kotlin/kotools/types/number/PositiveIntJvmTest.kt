@@ -206,7 +206,7 @@ class PositiveIntJvmTest {
         fun `should return a NegativeInt with a StrictlyNegativeInt`() {
             // GIVEN
             val x: PositiveIntJvm = PositiveIntJvm.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: NegativeIntJvm = x / y
             // THEN

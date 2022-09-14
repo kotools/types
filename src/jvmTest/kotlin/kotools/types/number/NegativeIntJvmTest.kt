@@ -265,7 +265,7 @@ class NegativeIntJvmTest {
         fun `should return a PositiveInt with a StrictlyNegativeInt`() {
             // GIVEN
             val x: NegativeIntJvm = NegativeIntJvm.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: PositiveIntJvm = x / y
             // THEN
@@ -280,7 +280,7 @@ class NegativeIntJvmTest {
         @Test
         fun `should pass with a NegativeInt holding a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             val x = NegativeIntJvm(value)
             // WHEN
             val result: NonZeroIntJvm = assertPass(x::toNonZeroInt)
@@ -302,7 +302,7 @@ class NegativeIntJvmTest {
         @Test
         fun `should pass with a NegativeInt holding a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             val x = NegativeIntJvm(value)
             // WHEN
             val result: NonZeroIntJvm? = x.toNonZeroIntOrNull()
@@ -337,7 +337,7 @@ class NegativeIntJvmTest {
         @Test
         fun `should throw an error with a NegativeInt holding a strictly negative Int`() {
             // GIVEN
-            val x = NegativeIntJvm(StrictlyNegativeInt.random.value)
+            val x = NegativeIntJvm(StrictlyNegativeIntJvm.random.value)
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toPositiveInt)
         }
@@ -359,7 +359,7 @@ class NegativeIntJvmTest {
         @Test
         fun `should return null with a NegativeInt holding a strictly negative Int`() {
             // GIVEN
-            val x = NegativeIntJvm(StrictlyNegativeInt.random.value)
+            val x = NegativeIntJvm(StrictlyNegativeIntJvm.random.value)
             // WHEN
             val result: PositiveIntJvm? = x.toPositiveIntOrNull()
             // THEN
@@ -372,10 +372,10 @@ class NegativeIntJvmTest {
         @Test
         fun `should pass with a NegativeInt holding a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             val x = NegativeIntJvm(value)
             // WHEN
-            val result: StrictlyNegativeInt =
+            val result: StrictlyNegativeIntJvm =
                 assertPass(x::toStrictlyNegativeInt)
             // THEN
             result.value assertEquals value
@@ -397,10 +397,10 @@ class NegativeIntJvmTest {
         @Test
         fun `should pass with a NegativeInt holding a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             val x = NegativeIntJvm(value)
             // WHEN
-            val result: StrictlyNegativeInt? =
+            val result: StrictlyNegativeIntJvm? =
                 x.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
@@ -411,7 +411,7 @@ class NegativeIntJvmTest {
             // GIVEN
             val x = NegativeIntJvm(0)
             // WHEN
-            val result: StrictlyNegativeInt? =
+            val result: StrictlyNegativeIntJvm? =
                 x.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNull()

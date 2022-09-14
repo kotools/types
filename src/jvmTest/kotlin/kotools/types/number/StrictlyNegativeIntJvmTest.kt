@@ -5,20 +5,21 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
 
-class StrictlyNegativeIntTest {
+class StrictlyNegativeIntJvmTest {
     // ---------- Constants & Getters ----------
 
     @Test
     fun `should the minimum value of StrictlyNegativeInt should be the minimum value of NegativeInt`(): Unit =
-        StrictlyNegativeInt.min.value assertEquals NegativeIntJvm.min.value
+        StrictlyNegativeIntJvm.min.value assertEquals NegativeIntJvm.min.value
 
     @Test
     fun `should the maximum value of StrictlyNegativeInt should be -1`(): Unit =
-        StrictlyNegativeInt.max.value assertEquals -1
+        StrictlyNegativeIntJvm.max.value assertEquals -1
 
     @Test
     fun `the random getter should pass`(): Unit =
-        StrictlyNegativeInt.random.value assertNotEquals StrictlyNegativeInt.random.value
+        StrictlyNegativeIntJvm.random.value
+            .assertNotEquals(StrictlyNegativeIntJvm.random.value)
 
     // ---------- Builders ----------
 
@@ -27,10 +28,10 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             // WHEN
-            val result: StrictlyNegativeInt =
-                assertPass { StrictlyNegativeInt(value) }
+            val result: StrictlyNegativeIntJvm =
+                assertPass { StrictlyNegativeIntJvm(value) }
             // THEN
             result.value assertEquals value
         }
@@ -41,7 +42,7 @@ class StrictlyNegativeIntTest {
             val value: Int = PositiveIntJvm.random.value
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException> {
-                StrictlyNegativeInt(value)
+                StrictlyNegativeIntJvm(value)
             }
         }
     }
@@ -51,10 +52,10 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             // WHEN
-            val result: StrictlyNegativeInt? =
-                StrictlyNegativeInt orNull value
+            val result: StrictlyNegativeIntJvm? =
+                StrictlyNegativeIntJvm orNull value
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -64,8 +65,8 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val value: Int = PositiveIntJvm.random.value
             // WHEN
-            val result: StrictlyNegativeInt? =
-                StrictlyNegativeInt orNull value
+            val result: StrictlyNegativeIntJvm? =
+                StrictlyNegativeIntJvm orNull value
             // THEN
             result.assertNull()
         }
@@ -76,11 +77,11 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a string representation of a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             val string = "$value"
             // WHEN
-            val result: StrictlyNegativeInt =
-                assertPass(string::toStrictlyNegativeInt)
+            val result: StrictlyNegativeIntJvm =
+                assertPass(string::toStrictlyNegativeIntJvm)
             // THEN
             result.value assertEquals value
         }
@@ -91,7 +92,7 @@ class StrictlyNegativeIntTest {
             val string = ""
             // WHEN & THEN
             assertFailsWith<NumberFormatException>(
-                string::toStrictlyNegativeInt
+                string::toStrictlyNegativeIntJvm
             )
         }
 
@@ -101,7 +102,7 @@ class StrictlyNegativeIntTest {
             val string = "${PositiveIntJvm.random.value}"
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
-                string::toStrictlyNegativeInt
+                string::toStrictlyNegativeIntJvm
             )
         }
     }
@@ -111,11 +112,11 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should pass with a string representation of a strictly negative Int`() {
             // GIVEN
-            val value: Int = StrictlyNegativeInt.random.value
+            val value: Int = StrictlyNegativeIntJvm.random.value
             val string = "$value"
             // WHEN
-            val result: StrictlyNegativeInt? =
-                string.toStrictlyNegativeIntOrNull()
+            val result: StrictlyNegativeIntJvm? =
+                string.toStrictlyNegativeIntJvmOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -125,8 +126,8 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val string = ""
             // WHEN
-            val result: StrictlyNegativeInt? =
-                string.toStrictlyNegativeIntOrNull()
+            val result: StrictlyNegativeIntJvm? =
+                string.toStrictlyNegativeIntJvmOrNull()
             // THEN
             result.assertNull()
         }
@@ -136,8 +137,8 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val string = "${PositiveIntJvm.random.value}"
             // WHEN
-            val result: StrictlyNegativeInt? =
-                string.toStrictlyNegativeIntOrNull()
+            val result: StrictlyNegativeIntJvm? =
+                string.toStrictlyNegativeIntJvmOrNull()
             // THEN
             result.assertNull()
         }
@@ -150,8 +151,9 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should increment the value by 1 with a value other than the maximum value`() {
             // GIVEN
-            var x: StrictlyNegativeInt = StrictlyNegativeInt.max
-            while (x == StrictlyNegativeInt.max) x = StrictlyNegativeInt.random
+            var x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.max
+            while (x == StrictlyNegativeIntJvm.max)
+                x = StrictlyNegativeIntJvm.random
             val oldValue: Int = x.value
             // WHEN
             x++
@@ -162,11 +164,11 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return the minimum value with the maximum value`() {
             // GIVEN
-            var x = StrictlyNegativeInt.max
+            var x = StrictlyNegativeIntJvm.max
             // WHEN
             x++
             // THEN
-            x assertEquals StrictlyNegativeInt.min
+            x assertEquals StrictlyNegativeIntJvm.min
         }
     }
 
@@ -175,8 +177,9 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should decrement the value by 1 with a value other than the minimum value`() {
             // GIVEN
-            var x: StrictlyNegativeInt = StrictlyNegativeInt.min
-            while (x == StrictlyNegativeInt.min) x = StrictlyNegativeInt.random
+            var x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.min
+            while (x == StrictlyNegativeIntJvm.min)
+                x = StrictlyNegativeIntJvm.random
             val oldValue: Int = x.value
             // WHEN
             x--
@@ -187,18 +190,18 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return the maximum value with the minimum value`() {
             // GIVEN
-            var x = StrictlyNegativeInt.min
+            var x = StrictlyNegativeIntJvm.min
             // WHEN
             x--
             // THEN
-            x assertEquals StrictlyNegativeInt.max
+            x assertEquals StrictlyNegativeIntJvm.max
         }
     }
 
     @Test
     fun `unaryMinus() should return a StrictlyPositiveInt`() {
         // GIVEN
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
         // WHEN
         val result: StrictlyPositiveIntJvm = -x
         // THEN
@@ -212,7 +215,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NonZeroInt with a NonZeroInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             val y: NonZeroIntJvm = NonZeroIntJvm.random
             // WHEN
             val result: NonZeroIntJvm = x * y
@@ -223,7 +226,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NonZeroInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             val y: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
             // WHEN
             val result: NonZeroIntJvm = x * y
@@ -234,8 +237,8 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NonZeroInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: NonZeroIntJvm = x * y
             // THEN
@@ -250,7 +253,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NegativeInt with a PositiveInt other than 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             var value = 0
             while (value == 0) value = PositiveIntJvm.random.value
             val y = PositiveIntJvm(value)
@@ -263,7 +266,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should throw an error with a PositiveInt that equals 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             val y = PositiveIntJvm(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -274,7 +277,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a NegativeInt with a StrictlyPositiveInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             val y: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
             // WHEN
             val result: NegativeIntJvm = x / y
@@ -287,7 +290,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a PositiveInt with a NegativeInt other than 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             var value = 0
             while (value == 0) value = NegativeIntJvm.random.value
             val y = NegativeIntJvm(value)
@@ -300,7 +303,7 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             val y = NegativeIntJvm(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
@@ -311,8 +314,8 @@ class StrictlyNegativeIntTest {
         @Test
         fun `should return a PositiveInt with a StrictlyNegativeInt`() {
             // GIVEN
-            val x: StrictlyNegativeInt = StrictlyNegativeInt.random
-            val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+            val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
+            val y: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
             // WHEN
             val result: PositiveIntJvm = x / y
             // THEN
@@ -325,7 +328,7 @@ class StrictlyNegativeIntTest {
     @Test
     fun `toNonZeroInt() should pass`() {
         // GIVEN
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
         // WHEN
         val result: NonZeroIntJvm = x.toNonZeroInt()
         // THEN
@@ -335,7 +338,7 @@ class StrictlyNegativeIntTest {
     @Test
     fun `toNegativeInt() should pass`() {
         // GIVEN
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
         // WHEN
         val result: NegativeIntJvm = x.toNegativeInt()
         // THEN
@@ -345,7 +348,7 @@ class StrictlyNegativeIntTest {
     @Test
     fun `toString() should pass`() {
         // GIVEN
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
         // WHEN
         val result: String = x.toString()
         // THEN
@@ -353,11 +356,11 @@ class StrictlyNegativeIntTest {
     }
 }
 
-class StrictlyNegativeIntSerializerTest {
+class StrictlyNegativeIntJvmSerializerTest {
     @Test
     fun `should serialize properly this class`() {
         // GIVEN
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
         // WHEN
         val result: String = Json.encodeToString(x)
         // THEN
@@ -367,10 +370,11 @@ class StrictlyNegativeIntSerializerTest {
     @Test
     fun `should deserialize properly this class`() {
         // GIVEN
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val x: StrictlyNegativeIntJvm = StrictlyNegativeIntJvm.random
         val encodedString: String = Json.encodeToString(x)
         // WHEN
-        val result: StrictlyNegativeInt = Json.decodeFromString(encodedString)
+        val result: StrictlyNegativeIntJvm =
+            Json.decodeFromString(encodedString)
         // THEN
         result.value assertEquals x.value
     }
