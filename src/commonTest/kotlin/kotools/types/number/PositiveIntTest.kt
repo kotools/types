@@ -27,6 +27,7 @@ class PositiveIntTest {
 
     @Test
     fun constructor_should_throw_an_error_with_a_strictly_negative_Int() {
+        // TODO: Use StrictlyNegativeInt.random.value instead
         val value: Int = NonZeroInt.negativeRange.random()
         assertFailsWith<IllegalArgumentException> { PositiveInt(value) }
     }
@@ -40,8 +41,9 @@ class PositiveIntTest {
 
     @Test
     fun companionOrNull_should_return_null_with_a_strictly_negative_Int() {
-        val result: PositiveInt? =
-            PositiveInt orNull NonZeroInt.negativeRange.random()
+        // TODO: Use StrictlyNegativeInt.random.value instead
+        val value: Int = NonZeroInt.negativeRange.random()
+        val result: PositiveInt? = PositiveInt orNull value
         result.assertNull()
     }
 }
