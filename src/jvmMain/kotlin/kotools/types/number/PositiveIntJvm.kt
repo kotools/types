@@ -102,8 +102,9 @@ public constructor(override val value: Int) : KotoolsInt {
      * Divides this [value] by [other], truncating the result to an integer that
      * is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveInt): PositiveIntJvm =
-        div(other.value).toPositiveIntJvm()
+    public infix operator fun div(
+        other: StrictlyPositiveIntJvm
+    ): PositiveIntJvm = div(other.value).toPositiveIntJvm()
 
     /**
      * Divides this [value] by [other], truncating the result to an integer that
@@ -141,15 +142,15 @@ public constructor(override val value: Int) : KotoolsInt {
      * [IllegalArgumentException] if this [value] equals `0`.
      */
     @Throws(IllegalArgumentException::class)
-    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
-        StrictlyPositiveInt(value)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveIntJvm =
+        StrictlyPositiveIntJvm(value)
 
     /**
      * Returns this [value] as a strictly positive int, or returns `null` if
      * this [value] equals `0`.
      */
-    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-        StrictlyPositiveInt orNull value
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveIntJvm? =
+        StrictlyPositiveIntJvm orNull value
 
     /**
      * Returns this [value] as a negative int, or throws an

@@ -100,8 +100,9 @@ public constructor(override val value: Int) : KotoolsInt {
         NonZeroIntJvm(times(other.value))
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: StrictlyPositiveInt): NonZeroIntJvm =
-        NonZeroIntJvm(times(other.value))
+    public infix operator fun times(
+        other: StrictlyPositiveIntJvm
+    ): NonZeroIntJvm = NonZeroIntJvm(times(other.value))
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyNegativeInt): NonZeroIntJvm =
@@ -128,15 +129,15 @@ public constructor(override val value: Int) : KotoolsInt {
      * [IllegalArgumentException] if this [value] is strictly negative.
      */
     @Throws(IllegalArgumentException::class)
-    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
-        StrictlyPositiveInt(value)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveIntJvm =
+        StrictlyPositiveIntJvm(value)
 
     /**
      * Returns this [value] as a strictly positive int, or returns `null` if
      * this [value] is strictly negative.
      */
-    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-        StrictlyPositiveInt orNull value
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveIntJvm? =
+        StrictlyPositiveIntJvm orNull value
 
     /**
      * Returns this [value] as a negative int, or throws an
@@ -173,7 +174,7 @@ public constructor(override val value: Int) : KotoolsInt {
         internal val negativeRange: IntRange = StrictlyNegativeInt.range
 
         @SinceKotoolsTypes("3.0")
-        internal val positiveRange: IntRange = StrictlyPositiveInt.range
+        internal val positiveRange: IntRange = StrictlyPositiveIntJvm.range
 
         @SinceKotoolsTypes("3.0")
         internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)

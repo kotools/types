@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 import kotools.types.number.NonZeroIntJvm
 import kotools.types.number.PositiveIntJvm
-import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.StrictlyPositiveIntJvm
 import kotools.types.string.NotBlankStringJvm
 
 class NotEmptyCollectionTest {
@@ -61,7 +61,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptyList(1)
             // WHEN
-            val size: StrictlyPositiveInt = collection.typedSize
+            val size: StrictlyPositiveIntJvm = collection.typedSize
             // THEN
             size.value assertEquals 1
         }
@@ -71,7 +71,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, 2, 3)
             // WHEN
-            val size: StrictlyPositiveInt = collection.typedSize
+            val size: StrictlyPositiveIntJvm = collection.typedSize
             // THEN
             size.value assertEquals 3
         }
@@ -83,7 +83,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptySet(1)
             // WHEN
-            val size: StrictlyPositiveInt = collection.typedSize
+            val size: StrictlyPositiveIntJvm = collection.typedSize
             // THEN
             size.value assertEquals 1
         }
@@ -93,7 +93,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptySet(1, 2, 3)
             // WHEN
-            val size: StrictlyPositiveInt = collection.typedSize
+            val size: StrictlyPositiveIntJvm = collection.typedSize
             // THEN
             size.value assertEquals 3
         }
@@ -167,7 +167,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val tail = 2
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
-            val index = StrictlyPositiveInt(1)
+            val index = StrictlyPositiveIntJvm(1)
             // WHEN
             val element: Int = assertPass { collection[index] }
             // THEN
@@ -178,7 +178,7 @@ class NotEmptyCollectionTest {
         fun `should throw an error with a strictly positive int that is out of bounds`() {
             // GIVEN
             val list: NotEmptyList<Int> = NotEmptyList(1)
-            val index = StrictlyPositiveInt(10)
+            val index = StrictlyPositiveIntJvm(10)
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { list[index] }
         }
@@ -273,7 +273,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val tail = 2
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
-            val index = StrictlyPositiveInt(1)
+            val index = StrictlyPositiveIntJvm(1)
             // WHEN
             val element: Int? = collection getOrNull index
             // THEN
@@ -284,7 +284,7 @@ class NotEmptyCollectionTest {
         fun `should return null with a strictly positive int that is out of bounds`() {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptyList(1)
-            val index = StrictlyPositiveInt(10)
+            val index = StrictlyPositiveIntJvm(10)
             // WHEN
             val element: Int? = collection getOrNull index
             // THEN
@@ -396,7 +396,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val tail = 2
             val collection: NotEmptyCollection<Int> = NotEmptyList(1, tail)
-            val index = StrictlyPositiveInt(1)
+            val index = StrictlyPositiveIntJvm(1)
             val defaultValue = -1
             // WHEN
             val element: Int = collection.getOrElse(index) { defaultValue }
@@ -411,7 +411,7 @@ class NotEmptyCollectionTest {
         fun `should return the default value with a strictly positive int that is out of bounds`() {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptyList(1)
-            val index = StrictlyPositiveInt(10)
+            val index = StrictlyPositiveIntJvm(10)
             val defaultValue = -1
             // WHEN
             val element: Int = collection.getOrElse(index) { defaultValue }

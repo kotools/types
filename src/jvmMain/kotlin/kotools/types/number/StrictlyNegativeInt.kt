@@ -86,8 +86,8 @@ public constructor(override val value: Int) : KotoolsInt {
     else StrictlyNegativeInt(value - 1)
 
     /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): StrictlyPositiveInt =
-        StrictlyPositiveInt(-value)
+    public operator fun unaryMinus(): StrictlyPositiveIntJvm =
+        StrictlyPositiveIntJvm(-value)
 
     // ---------- Binary operations ----------
 
@@ -96,8 +96,9 @@ public constructor(override val value: Int) : KotoolsInt {
         times(other.value).toNonZeroIntJvm()
 
     /** Multiplies this [value] by the [other] value. */
-    public infix operator fun times(other: StrictlyPositiveInt): NonZeroIntJvm =
-        times(other.value).toNonZeroIntJvm()
+    public infix operator fun times(
+        other: StrictlyPositiveIntJvm
+    ): NonZeroIntJvm = times(other.value).toNonZeroIntJvm()
 
     /** Multiplies this [value] by the [other] value. */
     public infix operator fun times(other: StrictlyNegativeInt): NonZeroIntJvm =
@@ -116,7 +117,7 @@ public constructor(override val value: Int) : KotoolsInt {
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveInt): NegativeInt =
+    public infix operator fun div(other: StrictlyPositiveIntJvm): NegativeInt =
         div(other.value).toNegativeInt()
 
     /**

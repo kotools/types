@@ -169,7 +169,7 @@ class PositiveIntJvmTest {
         fun `should return a PositiveInt with a StrictlyPositiveInt`() {
             // GIVEN
             val x: PositiveIntJvm = PositiveIntJvm.random
-            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+            val y: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
             // WHEN
             val result: PositiveIntJvm = x / y
             // THEN
@@ -221,7 +221,7 @@ class PositiveIntJvmTest {
         @Test
         fun `should pass with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val value: Int = StrictlyPositiveInt.random.value
+            val value: Int = StrictlyPositiveIntJvm.random.value
             val x = PositiveIntJvm(value)
             // WHEN
             val result: NonZeroIntJvm = assertPass(x::toNonZeroInt)
@@ -243,7 +243,7 @@ class PositiveIntJvmTest {
         @Test
         fun `should pass with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val value: Int = StrictlyPositiveInt.random.value
+            val value: Int = StrictlyPositiveIntJvm.random.value
             val x = PositiveIntJvm(value)
             // WHEN
             val result: NonZeroIntJvm? = x.toNonZeroIntOrNull()
@@ -267,10 +267,10 @@ class PositiveIntJvmTest {
         @Test
         fun `should pass with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val value: Int = StrictlyPositiveInt.random.value
+            val value: Int = StrictlyPositiveIntJvm.random.value
             val x = PositiveIntJvm(value)
             // WHEN
-            val result: StrictlyPositiveInt =
+            val result: StrictlyPositiveIntJvm =
                 assertPass(x::toStrictlyPositiveInt)
             // THEN
             result.value assertEquals value
@@ -292,10 +292,10 @@ class PositiveIntJvmTest {
         @Test
         fun `should pass with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val value: Int = StrictlyPositiveInt.random.value
+            val value: Int = StrictlyPositiveIntJvm.random.value
             val x = PositiveIntJvm(value)
             // WHEN
-            val result: StrictlyPositiveInt? =
+            val result: StrictlyPositiveIntJvm? =
                 x.toStrictlyPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
@@ -306,7 +306,7 @@ class PositiveIntJvmTest {
             // GIVEN
             val x = PositiveIntJvm(0)
             // WHEN
-            val result: StrictlyPositiveInt? =
+            val result: StrictlyPositiveIntJvm? =
                 x.toStrictlyPositiveIntOrNull()
             // THEN
             result.assertNull()
@@ -329,7 +329,7 @@ class PositiveIntJvmTest {
         @Test
         fun `should throw an error with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val x = PositiveIntJvm(StrictlyPositiveInt.random.value)
+            val x = PositiveIntJvm(StrictlyPositiveIntJvm.random.value)
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(block = x::toNegativeInt)
         }
@@ -351,7 +351,7 @@ class PositiveIntJvmTest {
         @Test
         fun `should return null with a PositiveInt holding a strictly positive Int`() {
             // GIVEN
-            val x = PositiveIntJvm(StrictlyPositiveInt.random.value)
+            val x = PositiveIntJvm(StrictlyPositiveIntJvm.random.value)
             // WHEN
             val result: NegativeInt? = x.toNegativeIntOrNull()
             // THEN

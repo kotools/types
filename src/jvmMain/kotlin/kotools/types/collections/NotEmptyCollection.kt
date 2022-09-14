@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.number.PositiveIntJvm
-import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.StrictlyPositiveIntJvm
 import kotools.types.string.NotBlankStringJvm
 
 /**
@@ -41,8 +41,8 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  */
 @SinceKotoolsTypes("1.3")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
-    index: StrictlyPositiveInt,
-    defaultValue: (StrictlyPositiveInt) -> @UnsafeVariance E
+    index: StrictlyPositiveIntJvm,
+    defaultValue: (StrictlyPositiveIntJvm) -> @UnsafeVariance E
 ): E = getOrNull(index) ?: defaultValue(index)
 
 /**
@@ -61,7 +61,8 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
     override val size: Int get() = 1
 
     /** Returns the [size] of this collection as a strictly positive int. */
-    public val typedSize: StrictlyPositiveInt get() = StrictlyPositiveInt(size)
+    public val typedSize: StrictlyPositiveIntJvm
+        get() = StrictlyPositiveIntJvm(size)
 
     override fun isEmpty(): Boolean = false
 
@@ -86,7 +87,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: StrictlyPositiveInt): E =
+    public infix operator fun get(index: StrictlyPositiveIntJvm): E =
         get(index.value)
 
     /**
@@ -110,7 +111,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * returns `null` if the [index] is out of bounds.
      */
-    public infix fun getOrNull(index: StrictlyPositiveInt): E? =
+    public infix fun getOrNull(index: StrictlyPositiveIntJvm): E? =
         getOrNull(index.value)
 
     // ---------- Conversions ----------

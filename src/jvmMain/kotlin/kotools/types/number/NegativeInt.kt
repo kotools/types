@@ -100,7 +100,7 @@ public constructor(override val value: Int) : KotoolsInt {
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveInt): NegativeInt =
+    public infix operator fun div(other: StrictlyPositiveIntJvm): NegativeInt =
         div(other.value).toNegativeInt()
 
     /**

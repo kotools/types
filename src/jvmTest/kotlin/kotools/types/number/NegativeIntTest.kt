@@ -92,7 +92,7 @@ class NegativeIntTest {
         @Test
         fun `should throw an error with a string representation of strictly positive Int`() {
             // GIVEN
-            val string = "${StrictlyPositiveInt.random.value}"
+            val string = "${StrictlyPositiveIntJvm.random.value}"
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(string::toNegativeInt)
         }
@@ -124,7 +124,7 @@ class NegativeIntTest {
         @Test
         fun `should return null with a string representation of a strictly positive Int`() {
             // GIVEN
-            val string = "${StrictlyPositiveInt.random.value}"
+            val string = "${StrictlyPositiveIntJvm.random.value}"
             // WHEN
             val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
@@ -228,7 +228,7 @@ class NegativeIntTest {
         fun `should return a NegativeInt with a StrictlyPositiveInt`() {
             // GIVEN
             val x: NegativeInt = NegativeInt.random
-            val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+            val y: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
             // WHEN
             val result: NegativeInt = x / y
             // THEN

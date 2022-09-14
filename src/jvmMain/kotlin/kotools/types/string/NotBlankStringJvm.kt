@@ -63,8 +63,8 @@ public constructor(public val value: String) : Comparable<String> {
     // ---------- Query operations ----------
 
     /** Returns the length of this [value]. */
-    public val length: StrictlyPositiveInt
-        get() = StrictlyPositiveInt(value.length)
+    public val length: StrictlyPositiveIntJvm
+        get() = StrictlyPositiveIntJvm(value.length)
 
     // ---------- Positional access operations ----------
 
@@ -165,8 +165,8 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
-        value.toStrictlyPositiveInt()
+    public fun toStrictlyPositiveInt(): StrictlyPositiveIntJvm =
+        value.toStrictlyPositiveIntJvm()
 
     /**
      * Returns this [value] as a strictly positive int, or returns `null` if
@@ -174,8 +174,8 @@ public constructor(public val value: String) : Comparable<String> {
      * represents a negative number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-        value.toStrictlyPositiveIntOrNull()
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveIntJvm? =
+        value.toStrictlyPositiveIntJvmOrNull()
 
     /**
      * Returns this [value] as a negative int.
