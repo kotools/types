@@ -10,7 +10,7 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun `should the minimum value of StrictlyNegativeInt should be the minimum value of NegativeInt`(): Unit =
-        StrictlyNegativeInt.min.value assertEquals NegativeInt.min.value
+        StrictlyNegativeInt.min.value assertEquals NegativeIntJvm.min.value
 
     @Test
     fun `should the maximum value of StrictlyNegativeInt should be -1`(): Unit =
@@ -255,7 +255,7 @@ class StrictlyNegativeIntTest {
             while (value == 0) value = PositiveIntJvm.random.value
             val y = PositiveIntJvm(value)
             // WHEN
-            val result: NegativeInt = assertPass { x / y }
+            val result: NegativeIntJvm = assertPass { x / y }
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -277,7 +277,7 @@ class StrictlyNegativeIntTest {
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             val y: StrictlyPositiveIntJvm = StrictlyPositiveIntJvm.random
             // WHEN
-            val result: NegativeInt = x / y
+            val result: NegativeIntJvm = x / y
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -289,8 +289,8 @@ class StrictlyNegativeIntTest {
             // GIVEN
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
             var value = 0
-            while (value == 0) value = NegativeInt.random.value
-            val y = NegativeInt(value)
+            while (value == 0) value = NegativeIntJvm.random.value
+            val y = NegativeIntJvm(value)
             // WHEN
             val result: PositiveIntJvm = assertPass { x / y }
             // THEN
@@ -301,7 +301,7 @@ class StrictlyNegativeIntTest {
         fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
             val x: StrictlyNegativeInt = StrictlyNegativeInt.random
-            val y = NegativeInt(0)
+            val y = NegativeIntJvm(0)
             // WHEN & THEN
             assertFailsWith<ArithmeticException> { x / y }
         }
@@ -337,7 +337,7 @@ class StrictlyNegativeIntTest {
         // GIVEN
         val x: StrictlyNegativeInt = StrictlyNegativeInt.random
         // WHEN
-        val result: NegativeInt = x.toNegativeInt()
+        val result: NegativeIntJvm = x.toNegativeInt()
         // THEN
         result.value assertEquals x.value
     }

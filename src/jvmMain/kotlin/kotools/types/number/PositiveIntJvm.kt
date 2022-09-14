@@ -85,7 +85,7 @@ public constructor(override val value: Int) : KotoolsInt {
     else PositiveIntJvm(value - 1)
 
     /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
+    public operator fun unaryMinus(): NegativeIntJvm = NegativeIntJvm(-value)
 
     // ---------- Binary operations ----------
 
@@ -112,15 +112,15 @@ public constructor(override val value: Int) : KotoolsInt {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(other: NegativeIntJvm): NegativeIntJvm =
+        div(other.value).toNegativeIntJvm()
 
     /**
      * Divides this [value] by [other], truncating the result to an integer that
      * is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(other: StrictlyNegativeInt): NegativeIntJvm =
+        div(other.value).toNegativeIntJvm()
 
     // ---------- Conversions ----------
 
@@ -157,13 +157,14 @@ public constructor(override val value: Int) : KotoolsInt {
      * [IllegalArgumentException] if this [value] is strictly positive.
      */
     @Throws(IllegalArgumentException::class)
-    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+    public fun toNegativeInt(): NegativeIntJvm = NegativeIntJvm(value)
 
     /**
      * Returns this [value] as a negative int, or returns `null` if this [value]
      * is strictly positive.
      */
-    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
+    public fun toNegativeIntOrNull(): NegativeIntJvm? =
+        NegativeIntJvm orNull value
 
     override fun toString(): String = value.toString()
 

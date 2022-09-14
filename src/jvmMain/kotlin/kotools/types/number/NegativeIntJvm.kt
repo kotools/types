@@ -17,7 +17,7 @@ import kotools.types.annotations.SinceKotoolsTypes
  */
 @SinceKotoolsTypes("1.1")
 @Throws(IllegalArgumentException::class)
-public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
+public fun Int.toNegativeIntJvm(): NegativeIntJvm = NegativeIntJvm(this)
 
 /**
  * Returns this value as a negative int.
@@ -27,14 +27,16 @@ public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
  */
 @SinceKotoolsTypes("3.0")
 @Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toNegativeInt(): NegativeInt = toInt().toNegativeInt()
+public fun String.toNegativeIntJvm(): NegativeIntJvm =
+    toInt().toNegativeIntJvm()
 
 /**
  * Returns this value as a negative int, or returns `null` if this value is
  * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
-public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
+public fun Int.toNegativeIntJvmOrNull(): NegativeIntJvm? =
+    NegativeIntJvm orNull this
 
 /**
  * Returns this value as a negative int, or returns `null` if this value is not
@@ -42,8 +44,8 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
  * number.
  */
 @SinceKotoolsTypes("3.0")
-public fun String.toNegativeIntOrNull(): NegativeInt? =
-    toIntOrNull()?.toNegativeIntOrNull()
+public fun String.toNegativeIntJvmOrNull(): NegativeIntJvm? =
+    toIntOrNull()?.toNegativeIntJvmOrNull()
 
 /**
  * Represents negative integers, including `0`.
@@ -52,9 +54,9 @@ public fun String.toNegativeIntOrNull(): NegativeInt? =
  * [IllegalArgumentException] if the [value] is strictly positive.
  */
 @JvmInline
-@Serializable(NegativeInt.Serializer::class)
+@Serializable(NegativeIntJvm.Serializer::class)
 @SinceKotoolsTypes("1.1")
-public value class NegativeInt
+public value class NegativeIntJvm
 @Throws(IllegalArgumentException::class)
 public constructor(override val value: Int) : KotoolsInt {
     init {
@@ -68,19 +70,19 @@ public constructor(override val value: Int) : KotoolsInt {
 
     /**
      * Returns this [value] incremented by `1`.
-     * If this [value] is the [maximum][NegativeInt.max], it returns the
-     * [minimum][NegativeInt.min] value instead.
+     * If this [value] is the [maximum][NegativeIntJvm.max], it returns the
+     * [minimum][NegativeIntJvm.min] value instead.
      */
-    public operator fun inc(): NegativeInt = if (value == max.value) min
-    else NegativeInt(value + 1)
+    public operator fun inc(): NegativeIntJvm = if (value == max.value) min
+    else NegativeIntJvm(value + 1)
 
     /**
      * Returns this [value] decremented by `1`.
-     * If this [value] is the [minimum][NegativeInt.min], it returns the
-     * [maximum][NegativeInt.max] value instead.
+     * If this [value] is the [minimum][NegativeIntJvm.min], it returns the
+     * [maximum][NegativeIntJvm.max] value instead.
      */
-    public operator fun dec(): NegativeInt = if (value == min.value) max
-    else NegativeInt(value - 1)
+    public operator fun dec(): NegativeIntJvm = if (value == min.value) max
+    else NegativeIntJvm(value - 1)
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): PositiveIntJvm = PositiveIntJvm(-value)
@@ -93,15 +95,16 @@ public constructor(override val value: Int) : KotoolsInt {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveIntJvm): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(other: PositiveIntJvm): NegativeIntJvm =
+        div(other.value).toNegativeIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveIntJvm): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(
+        other: StrictlyPositiveIntJvm
+    ): NegativeIntJvm = div(other.value).toNegativeIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -109,7 +112,7 @@ public constructor(override val value: Int) : KotoolsInt {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): PositiveIntJvm =
+    public infix operator fun div(other: NegativeIntJvm): PositiveIntJvm =
         div(other.value).toPositiveIntJvm()
 
     /**
@@ -170,37 +173,38 @@ public constructor(override val value: Int) : KotoolsInt {
         private val range: IntRange = Int.MIN_VALUE..0
 
         /** The minimum value of a negative int. */
-        public val min: NegativeInt = NegativeInt(range.first)
+        public val min: NegativeIntJvm = NegativeIntJvm(range.first)
 
         /** The maximum value of a negative int. */
-        public val max: NegativeInt = NegativeInt(range.last)
+        public val max: NegativeIntJvm = NegativeIntJvm(range.last)
 
         /** Returns a random negative int. */
         @SinceKotoolsTypes("3.0")
-        public val random: NegativeInt get() = range.random().toNegativeInt()
+        public val random: NegativeIntJvm
+            get() = range.random().toNegativeIntJvm()
 
         /**
          * Returns the [value] as a negative int, or returns `null` if the
          * [value] is strictly positive.
          */
-        public infix fun orNull(value: Int): NegativeInt? = try {
-            NegativeInt(value)
+        public infix fun orNull(value: Int): NegativeIntJvm? = try {
+            NegativeIntJvm(value)
         } catch (_: IllegalArgumentException) {
             null
         }
     }
 
     @SinceKotoolsTypes("3.0")
-    internal object Serializer : KSerializer<NegativeInt> {
+    internal object Serializer : KSerializer<NegativeIntJvm> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            NegativeInt::class.qualifiedName!!,
+            NegativeIntJvm::class.qualifiedName!!,
             PrimitiveKind.INT
         )
 
-        override fun serialize(encoder: Encoder, value: NegativeInt): Unit =
+        override fun serialize(encoder: Encoder, value: NegativeIntJvm): Unit =
             encoder.encodeInt(value.value)
 
-        override fun deserialize(decoder: Decoder): NegativeInt =
-            decoder.decodeInt().toNegativeInt()
+        override fun deserialize(decoder: Decoder): NegativeIntJvm =
+            decoder.decodeInt().toNegativeIntJvm()
     }
 }

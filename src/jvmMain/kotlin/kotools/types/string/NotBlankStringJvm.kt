@@ -185,7 +185,7 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
+    public fun toNegativeInt(): NegativeIntJvm = value.toNegativeIntJvm()
 
     /**
      * Returns this [value] as a negative int, or returns `null` if this [value]
@@ -193,8 +193,8 @@ public constructor(public val value: String) : Comparable<String> {
      * positive number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toNegativeIntOrNull(): NegativeInt? =
-        value.toNegativeIntOrNull()
+    public fun toNegativeIntOrNull(): NegativeIntJvm? =
+        value.toNegativeIntJvmOrNull()
 
     /**
      * Returns this [value] as a strictly negative int.

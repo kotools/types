@@ -130,7 +130,7 @@ class PositiveIntJvmTest {
         val value: Int = PositiveIntJvm.random.value
         val x = PositiveIntJvm(value)
         // WHEN
-        val result: NegativeInt = -x
+        val result: NegativeIntJvm = -x
         // THEN
         result.value assertEquals -value
     }
@@ -183,10 +183,10 @@ class PositiveIntJvmTest {
             // GIVEN
             val x: PositiveIntJvm = PositiveIntJvm.random
             var value = 0
-            while (value == 0) value = NegativeInt.random.value
-            val y = NegativeInt(value)
+            while (value == 0) value = NegativeIntJvm.random.value
+            val y = NegativeIntJvm(value)
             // WHEN
-            val result: NegativeInt = assertPass { x / y }
+            val result: NegativeIntJvm = assertPass { x / y }
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -195,7 +195,7 @@ class PositiveIntJvmTest {
         fun `should throw an error with a NegativeInt that equals 0`() {
             // GIVEN
             val x: PositiveIntJvm = PositiveIntJvm.random
-            val y = NegativeInt(0)
+            val y = NegativeIntJvm(0)
             // WHEN
             assertFailsWith<ArithmeticException> { x / y }
         }
@@ -208,7 +208,7 @@ class PositiveIntJvmTest {
             val x: PositiveIntJvm = PositiveIntJvm.random
             val y: StrictlyNegativeInt = StrictlyNegativeInt.random
             // WHEN
-            val result: NegativeInt = x / y
+            val result: NegativeIntJvm = x / y
             // THEN
             result.value assertEquals x.value / y.value
         }
@@ -321,7 +321,7 @@ class PositiveIntJvmTest {
             val value = 0
             val x = PositiveIntJvm(value)
             // WHEN
-            val result: NegativeInt = assertPass(x::toNegativeInt)
+            val result: NegativeIntJvm = assertPass(x::toNegativeInt)
             // THEN
             result.value assertEquals value
         }
@@ -343,7 +343,7 @@ class PositiveIntJvmTest {
             val value = 0
             val x = PositiveIntJvm(value)
             // WHEN
-            val result: NegativeInt? = x.toNegativeIntOrNull()
+            val result: NegativeIntJvm? = x.toNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -353,7 +353,7 @@ class PositiveIntJvmTest {
             // GIVEN
             val x = PositiveIntJvm(StrictlyPositiveIntJvm.random.value)
             // WHEN
-            val result: NegativeInt? = x.toNegativeIntOrNull()
+            val result: NegativeIntJvm? = x.toNegativeIntOrNull()
             // THEN
             result.assertNull()
         }

@@ -129,15 +129,15 @@ public constructor(override val value: Int) : KotoolsInt {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(other: NegativeIntJvm): NegativeIntJvm =
+        div(other.value).toNegativeIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(other: StrictlyNegativeInt): NegativeIntJvm =
+        div(other.value).toNegativeIntJvm()
 
     // ---------- Conversions ----------
 

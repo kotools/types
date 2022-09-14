@@ -144,13 +144,14 @@ public constructor(override val value: Int) : KotoolsInt {
      * [IllegalArgumentException] if this [value] is strictly positive.
      */
     @Throws(IllegalArgumentException::class)
-    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+    public fun toNegativeInt(): NegativeIntJvm = NegativeIntJvm(value)
 
     /**
      * Returns this [value] as a negative int, or returns `null` if this [value]
      * is strictly positive.
      */
-    public fun toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull value
+    public fun toNegativeIntOrNull(): NegativeIntJvm? =
+        NegativeIntJvm orNull value
 
     /**
      * Returns this [value] as a strictly negative int, or throws an

@@ -509,7 +509,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeInt = assertPass(string::toNegativeInt)
+            val result: NegativeIntJvm = assertPass(string::toNegativeInt)
             // THEN
             result.value assertEquals value
         }
@@ -520,7 +520,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeInt = assertPass(string::toNegativeInt)
+            val result: NegativeIntJvm = assertPass(string::toNegativeInt)
             // THEN
             result.value assertEquals value
         }
@@ -550,7 +550,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeInt? = string.toNegativeIntOrNull()
+            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -561,7 +561,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeInt? = string.toNegativeIntOrNull()
+            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -571,7 +571,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("a")
             // WHEN
-            val result: NegativeInt? = string.toNegativeIntOrNull()
+            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -581,7 +581,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("1")
             // WHEN
-            val result: NegativeInt? = string.toNegativeIntOrNull()
+            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
             // THEN
             result.assertNull()
         }

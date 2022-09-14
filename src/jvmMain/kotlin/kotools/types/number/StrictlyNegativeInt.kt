@@ -110,15 +110,16 @@ public constructor(override val value: Int) : KotoolsInt {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: PositiveIntJvm): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(other: PositiveIntJvm): NegativeIntJvm =
+        div(other.value).toNegativeIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to `0`.
      */
-    public infix operator fun div(other: StrictlyPositiveIntJvm): NegativeInt =
-        div(other.value).toNegativeInt()
+    public infix operator fun div(
+        other: StrictlyPositiveIntJvm
+    ): NegativeIntJvm = div(other.value).toNegativeIntJvm()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -126,7 +127,7 @@ public constructor(override val value: Int) : KotoolsInt {
      * Throws an [ArithmeticException] if the [other] value equals `0`.
      */
     @Throws(ArithmeticException::class)
-    public infix operator fun div(other: NegativeInt): PositiveIntJvm =
+    public infix operator fun div(other: NegativeIntJvm): PositiveIntJvm =
         div(other.value).toPositiveIntJvm()
 
     /**
@@ -142,13 +143,13 @@ public constructor(override val value: Int) : KotoolsInt {
     public fun toNonZeroInt(): NonZeroIntJvm = NonZeroIntJvm(value)
 
     /** Returns this [value] as a negative int. */
-    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+    public fun toNegativeInt(): NegativeIntJvm = NegativeIntJvm(value)
 
     override fun toString(): String = value.toString()
 
     public companion object {
         @SinceKotoolsTypes("3.0")
-        internal val range: IntRange = NegativeInt.min.value..-1
+        internal val range: IntRange = NegativeIntJvm.min.value..-1
 
         /** The minimum value of a strictly negative int. */
         public val min: StrictlyNegativeInt = StrictlyNegativeInt(range.first)
