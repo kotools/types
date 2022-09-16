@@ -86,9 +86,8 @@ public constructor(override val value: Int) : KotoolsInt {
     public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
 
     public companion object {
-        // TODO: Use StrictlyNegativeInt.range instead.
         @SinceKotoolsTypes("3.0")
-        internal val negativeRange: IntRange = Int.MIN_VALUE..-1
+        internal val negativeRange: IntRange = StrictlyNegativeInt.range
 
         @SinceKotoolsTypes("3.0")
         internal val positiveRange: IntRange = StrictlyPositiveInt.range
