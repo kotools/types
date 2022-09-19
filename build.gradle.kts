@@ -167,27 +167,6 @@ publishing {
                 password = System.getenv(Maven.password)
             }
         }
-        forEach { repository: ArtifactRepository ->
-            val action = "publish"
-            val target = "To${repository.name}Repository"
-            tasks.getByName("${action}AllPublications$target") {
-                val platforms: MutableSet<String> = mutableSetOf()
-                val os: String = System.getProperty("os.name")
-                    ?: System.getenv("OS")
-                    ?: return@getByName
-                when {
-                    os.startsWith("macos") -> platforms += "MacosX64"
-                    os.startsWith("windows") -> platforms += "MingwX64"
-                    os.startsWith("ubuntu") ->
-                        setOf("KotlinMultiplatform", "Js", "Jvm", "LinuxX64")
-                            .forEach { platforms += it }
-                }
-                val paths: Array<Task> = platforms.map {
-                    tasks.getByName("$action${it}Publication$target")
-                }.toTypedArray()
-                dependsOn(*paths)
-            }
-        }
     }
     publications {
         @Suppress("UNUSED_VARIABLE")
