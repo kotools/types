@@ -2,6 +2,23 @@ package kotools.types.number
 
 import kotools.types.annotations.SinceKotoolsTypes
 
+/**
+ * Returns this value as a [NonZeroNumber], or throws an
+ * [IllegalArgumentException] if this value equals `0`.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(IllegalArgumentException::class)
+public fun <T : kotlin.Number> T.toNonZeroNumber(): NonZeroNumber<T> =
+    NonZeroNumber(this)
+
+/**
+ * Returns this value as a [NonZeroNumber], or returns `null` if this value
+ * equals `0`.
+ */
+@SinceKotoolsTypes("3.0")
+public fun <T : kotlin.Number> T.toNonZeroNumberOrNull(): NonZeroNumber<T>? =
+    NonZeroNumber orNull this
+
 /** Represents numeric values that don't equal `0`. */
 @SinceKotoolsTypes("3.0")
 public sealed interface NonZeroNumber<T : kotlin.Number> : Number<T> {
