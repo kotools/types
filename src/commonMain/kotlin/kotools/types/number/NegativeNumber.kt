@@ -19,7 +19,7 @@ public fun <T : kotlin.Number> T.toNegativeNumber(): NegativeNumber<T> =
 public fun <T : kotlin.Number> T.toNegativeNumberOrNull(): NegativeNumber<T>? =
     NegativeNumber orNull this
 
-/** Represents negative numeric values, including `0`. */
+/** Represents numeric values that are negative, including `0`. */
 @SinceKotoolsTypes("3.0")
 public sealed interface NegativeNumber<T : kotlin.Number> : Number<T> {
     public companion object {
