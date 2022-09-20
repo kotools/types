@@ -68,8 +68,7 @@ Also, the new types listed below are supported on JVM, JS and Native platforms:
 
 - `kotools.types.number.Number`
   ([#99](https://github.com/kotools/types/issues/99))
-- `NonZeroNumber` ([#100](https://github.com/kotools/types/issues/100))
-- `PositiveNumber` ([#101](https://github.com/kotools/types/issues/101)).
+- `NonZeroNumber` ([#100](https://github.com/kotools/types/issues/100)).
 
 ## Version 2.0.0 - 2022/08/01
 
