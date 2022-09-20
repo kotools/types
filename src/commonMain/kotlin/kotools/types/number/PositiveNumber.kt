@@ -19,7 +19,7 @@ public fun <T : kotlin.Number> T.toPositiveNumber(): PositiveNumber<T> =
 public fun <T : kotlin.Number> T.toPositiveNumberOrNull(): PositiveNumber<T>? =
     PositiveNumber orNull this
 
-/** Represents numeric values that are positive, including `0`. */
+/** Represents positive numeric values, including `0`. */
 @SinceKotoolsTypes("3.0")
 public sealed interface PositiveNumber<T : kotlin.Number> : Number<T> {
     public companion object {
