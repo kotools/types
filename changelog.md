@@ -60,15 +60,11 @@ All notable changes to this project will be documented in this file.
 
 The following types are now supported on JVM, JS and Native platforms:
 
+- `kotools.types.number.Number`
+  ([#99](https://github.com/kotools/types/issues/99))
 - `KotoolsInt` ([#83](https://github.com/kotools/types/issues/83))
 - `NonZeroInt` ([#84](https://github.com/kotools/types/issues/84))
 - `NotBlankString` ([#89](https://github.com/kotools/types/issues/89)).
-
-Also, the new types listed below are supported on JVM, JS and Native platforms:
-
-- `kotools.types.number.Number`
-  ([#99](https://github.com/kotools/types/issues/99))
-- `NonZeroNumber` ([#100](https://github.com/kotools/types/issues/100)).
 
 ## Version 2.0.0 - 2022/08/01
 
