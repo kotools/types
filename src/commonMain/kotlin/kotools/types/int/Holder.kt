@@ -2,6 +2,19 @@ package kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
 
+// ---------- Binary operations ----------
+
+// TODO: Add the plus operation between an Int and an IntHolder
+// TODO: Add the minus operation between an Int and an IntHolder
+// TODO: Add the times operation between an Int and an IntHolder
+// TODO: Add the div operation between an Int and an IntHolder
+// TODO: Add the div operation between an IntHolder and an Int
+// TODO: Add the div operation between an IntHolder and an IntHolder
+
+// ---------- Comparisons ----------
+
+// TODO: Add the comparison operation between an Int and an IntHolder
+
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolder : Comparable<IntHolder> {
@@ -11,6 +24,19 @@ public sealed interface IntHolder : Comparable<IntHolder> {
     /** Optional property responsible for checking the [value]'s validity. */
     public val validator: IntValidator?
 
+    // ---------- Binary operations ----------
+
+    // TODO: Add the plus operation with an Int
+    // TODO: Add the plus operation with an IntHolder
+    // TODO: Add the minus operation with an Int
+    // TODO: Add the minus operation with an IntHolder
+    // TODO: Add the times operation with an Int
+    // TODO: Add the times operation with an IntHolder
+
+    // ---------- Comparisons ----------
+
+    // TODO: Add the comparison operation with an Int
+
     /**
      * Compares this [value] with the [other] value for order.
      * Returns `0` if this [value] equals the [other] value, a negative number
@@ -18,6 +44,10 @@ public sealed interface IntHolder : Comparable<IntHolder> {
      * this [value] is greater than the [other] value.
      */
     override fun compareTo(other: IntHolder): Int
+
+    // ---------- Conversions ----------
+
+    // TODO: Add the conversion to a NotBlankString
 }
 
 @SinceKotoolsTypes("3.0")
