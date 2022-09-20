@@ -23,9 +23,6 @@ public fun <T : kotlin.Number> T.toPositiveNumberOrNull(): PositiveNumber<T>? =
 @SinceKotoolsTypes("3.0")
 public sealed interface PositiveNumber<T : kotlin.Number> : Number<T> {
     public companion object {
-        internal infix fun <T : kotlin.Number> isValid(value: T): Boolean =
-            value.toDouble() >= 0.toDouble()
-
         /**
          * Returns the [value] as a [PositiveNumber], or throws an
          * [IllegalArgumentException] if the [value] is strictly negative.
@@ -34,7 +31,8 @@ public sealed interface PositiveNumber<T : kotlin.Number> : Number<T> {
         public infix operator fun <T : kotlin.Number> invoke(
             value: T
         ): PositiveNumber<T> {
-            require(this isValid value) {
+            val isPositive: Boolean = value.toDouble() >= 0.toDouble()
+            require(isPositive) {
                 val type: String = PositiveNumber::class.simpleName!!
                 val range: IntRange = 0..Int.MAX_VALUE
                 "$type accepts values included in $range (tried with $value)."

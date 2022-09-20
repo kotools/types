@@ -23,9 +23,6 @@ public fun <T : kotlin.Number> T.toNonZeroNumberOrNull(): NonZeroNumber<T>? =
 @SinceKotoolsTypes("3.0")
 public sealed interface NonZeroNumber<T : kotlin.Number> : Number<T> {
     public companion object {
-        internal infix fun <T : kotlin.Number> isValid(value: T): Boolean =
-            value != 0
-
         /**
          * Returns the [value] as a [NonZeroNumber], or throws an
          * [IllegalArgumentException] if the [value] equals `0`.
@@ -34,7 +31,7 @@ public sealed interface NonZeroNumber<T : kotlin.Number> : Number<T> {
         public infix operator fun <T : kotlin.Number> invoke(
             value: T
         ): NonZeroNumber<T> {
-            require(this isValid value) {
+            require(value != 0) {
                 val type: String = NonZeroNumber::class.simpleName!!
                 "$type doesn't accept 0."
             }
