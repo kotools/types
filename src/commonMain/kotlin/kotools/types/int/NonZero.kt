@@ -61,6 +61,5 @@ public fun String.toNonZeroIntOrNull(): NonZeroInt? =
 public sealed interface NonZeroInt : IntHolder
 
 @SinceKotoolsTypes("3.0")
-internal data class NonZeroIntImplementation(override val value: Int) :
-    NonZeroInt,
+private class NonZeroIntImplementation(value: Int) : NonZeroInt,
     IntHolder by IntHolder(value, { it != 0 })

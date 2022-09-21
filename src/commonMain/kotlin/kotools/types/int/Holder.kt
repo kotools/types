@@ -114,4 +114,6 @@ private class IntHolderImplementation(
         other is IntHolder && value == other.value
 
     override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = "$value"
 }
