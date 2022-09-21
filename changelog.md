@@ -58,8 +58,8 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- The `kotools.types.int` package containing the `IntHolder` and the `ZeroInt`
-  types ([#106](https://github.com/kotools/types/issues/106)).
+- The `kotools.types.int` package containing the `IntHolder`, the `ZeroInt` and
+  the `NonZeroInt` types ([#106](https://github.com/kotools/types/issues/106)).
 
 The following types are now supported on JVM, JS and Native platforms:
 
