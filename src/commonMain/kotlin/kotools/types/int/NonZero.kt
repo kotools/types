@@ -58,7 +58,30 @@ public fun String.toNonZeroIntOrNull(): NonZeroInt? =
 
 /** Parent of classes responsible for holding integers other than zero. */
 @SinceKotoolsTypes("3.0")
-public sealed interface NonZeroInt : IntHolder
+public sealed interface NonZeroInt : IntHolder {
+    public companion object {
+        // TODO: Use kotools.types.int.StrictlyNegativeInt.range instead
+        private val negativeRange: IntRange = Int.MIN_VALUE..-1
+
+        // TODO: Use kotools.types.int.StrictlyPositiveInt.range instead
+        private val positiveRange: IntRange = 1..Int.MAX_VALUE
+
+        // TODO: Use the NotEmptySet<IntRange> type instead
+        private val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
+
+        /** The minimum value of a [NonZeroInt]. */
+        public val min: NonZeroInt = NonZeroInt(negativeRange.first)
+
+        /** The maximum value of a [NonZeroInt]. */
+        public val max: NonZeroInt = NonZeroInt(positiveRange.last)
+
+        /** Returns a random [NonZeroInt]. */
+        public val random: NonZeroInt
+            get() = ranges.random()
+                .random()
+                .toNonZeroInt()
+    }
+}
 
 @SinceKotoolsTypes("3.0")
 private class NonZeroIntImplementation(value: Int) : NonZeroInt,
