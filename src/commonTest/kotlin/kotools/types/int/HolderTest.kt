@@ -1,6 +1,8 @@
 package kotools.types.int
 
 import kotools.assert.assertEquals
+import kotools.assert.assertFalse
+import kotools.assert.assertTrue
 import kotlin.random.Random
 import kotlin.test.Test
 
@@ -147,5 +149,24 @@ class IntHolderTest {
         val y = IntHolder(yValue)
         val result: Int = x compareTo y
         result assertEquals x.compareTo(yValue)
+    }
+}
+
+class IntHolderImplementationTest {
+    @Test
+    fun equals_should_pass_with_the_same_IntHolder() {
+        val value: Int = Random.nextInt()
+        val x = IntHolder(value)
+        val y = IntHolder(value)
+        assertTrue { x == y }
+    }
+
+    @Test
+    fun equals_should_return_false_with_different_IntHolders() {
+        val xValue: Int = Random.nextInt()
+        val yValue: Int = Random.nextInt()
+        val x = IntHolder(xValue)
+        val y = IntHolder(yValue)
+        assertFalse { x == y }
     }
 }
