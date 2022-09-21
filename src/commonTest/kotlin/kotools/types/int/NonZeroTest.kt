@@ -1,5 +1,7 @@
 package kotools.types.int
 
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
@@ -119,5 +121,23 @@ class NonZeroIntTest {
         val x: NonZeroInt = NonZeroInt.random
         val result: NonZeroInt = -x
         result.value assertEquals -x.value
+    }
+}
+
+class NonZeroIntSerializerTest {
+    @Test
+    fun serialize_should_pass() {
+        val x: NonZeroInt = NonZeroInt.random
+        val result: String = Json.encodeToString(NonZeroIntSerializer, x)
+        result assertEquals Json.encodeToString(x.value)
+    }
+
+    @Test
+    fun deserialize_should_pass() {
+        val value: Int = NonZeroInt.random.value
+        val encoded: String = Json.encodeToString(value)
+        val result: NonZeroInt =
+            Json.decodeFromString(NonZeroIntSerializer, encoded)
+        result.value assertEquals value
     }
 }
