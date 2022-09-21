@@ -12,6 +12,10 @@ internal fun IntHolder(value: Int, validator: IntValidator? = null): IntHolder =
 @SinceKotoolsTypes("3.0")
 public infix operator fun Int.plus(other: IntHolder): Int = plus(other.value)
 
+/** Subtracts the [other] value from this value. */
+@SinceKotoolsTypes("3.0")
+public infix operator fun Int.minus(other: IntHolder): Int = minus(other.value)
+
 // TODO: Add the minus operation between an Int and an IntHolder
 // TODO: Add the times operation between an Int and an IntHolder
 // TODO: Add the div operation between an Int and an IntHolder
@@ -44,8 +48,12 @@ public sealed interface IntHolder : Comparable<IntHolder> {
     /** Adds the [other] value to this [value]. */
     public infix operator fun plus(other: IntHolder): Int = plus(other.value)
 
-    // TODO: Add the minus operation with an Int
-    // TODO: Add the minus operation with an IntHolder
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: Int): Int = value - other
+
+    /** Subtracts the [other] value from this [value]. */
+    public infix operator fun minus(other: IntHolder): Int = minus(other.value)
+
     // TODO: Add the times operation with an Int
     // TODO: Add the times operation with an IntHolder
 
