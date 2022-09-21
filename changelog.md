@@ -58,14 +58,22 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- The `kotools.types.int` package containing the `IntHolder`, the `ZeroInt` and
-  the `NonZeroInt` types ([#106](https://github.com/kotools/types/issues/106)).
+The `kotools.types.int` package with the following types:
+
+- `IntHolder` ([#106](https://github.com/kotools/types/issues/106))
+- `ZeroInt` ([#108](https://github.com/kotools/types/issues/108)).
 
 The following types are now supported on JVM, JS and Native platforms:
 
 - `KotoolsInt` ([#83](https://github.com/kotools/types/issues/83))
-- `NonZeroInt` ([#84](https://github.com/kotools/types/issues/84))
 - `NotBlankString` ([#89](https://github.com/kotools/types/issues/89)).
+
+#### Changed
+
+Moved the following types to the `kotools.types.int` package:
+
+- `NonZeroInt` ([#84](https://github.com/kotools/types/issues/84))
+- `PositiveInt` ([#85](https://github.com/kotools/types/issues/85)).
 
 ## Version 2.0.0 - 2022/08/01
 
