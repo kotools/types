@@ -110,8 +110,3 @@ private class IntHolderImplementation(
         validator?.let { require(it isValid value) }
     }
 }
-
-@SinceKotoolsTypes("3.0")
-internal fun interface IntValidator {
-    infix fun isValid(value: Int): Boolean
-}
