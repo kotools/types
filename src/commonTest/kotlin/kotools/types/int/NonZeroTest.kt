@@ -65,4 +65,59 @@ class NonZeroIntTest {
     @Test
     fun String_toNonZeroIntOrNull_should_return_null_with_a_String_representing_an_Int_that_equals_0() =
         "0".toNonZeroIntOrNull().assertNull()
+
+    // ---------- Unary operations ----------
+
+    @Test
+    fun inc_should_return_1_with_a_value_that_equals_minus1() {
+        var x = NonZeroInt(-1)
+        x++
+        x.value assertEquals 1
+    }
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+        var x: NonZeroInt = NonZeroInt.max
+        x++
+        x assertEquals NonZeroInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_1_with_an_initial_value_other_than_minus1_and_the_maximum_value() {
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value == -1 || x == NonZeroInt.max) x = NonZeroInt.random
+        val initialValue: Int = x.value
+        x++
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_minus1_with_a_value_that_equals_1() {
+        var x = NonZeroInt(1)
+        x--
+        x.value assertEquals -1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        var x: NonZeroInt = NonZeroInt.min
+        x--
+        x assertEquals NonZeroInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_1_with_an_initial_value_other_than_1_and_the_minimum_value() {
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value == 1 || x == NonZeroInt.min) x = NonZeroInt.random
+        val initialValue: Int = x.value
+        x--
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
+    fun unaryMinus_should_pass() {
+        val x: NonZeroInt = NonZeroInt.random
+        val result: NonZeroInt = -x
+        result.value assertEquals -x.value
+    }
 }
