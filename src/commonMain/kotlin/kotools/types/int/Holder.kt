@@ -2,6 +2,7 @@ package kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
 
+@SinceKotoolsTypes("3.0")
 internal fun IntHolder(value: Int, validator: IntValidator? = null): IntHolder =
     IntHolderImplementation(value, validator)
 
