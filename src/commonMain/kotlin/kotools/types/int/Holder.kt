@@ -7,7 +7,10 @@ internal fun IntHolder(value: Int, validator: IntValidator? = null): IntHolder =
 
 // ---------- Binary operations ----------
 
-// TODO: Add the plus operation between an Int and an IntHolder
+/** Adds the [other] value to this value. */
+@SinceKotoolsTypes("3.0")
+public infix operator fun Int.plus(other: IntHolder): Int = plus(other.value)
+
 // TODO: Add the minus operation between an Int and an IntHolder
 // TODO: Add the times operation between an Int and an IntHolder
 // TODO: Add the div operation between an Int and an IntHolder
@@ -34,8 +37,12 @@ public sealed interface IntHolder : Comparable<IntHolder> {
 
     // ---------- Binary operations ----------
 
-    // TODO: Add the plus operation with an Int
-    // TODO: Add the plus operation with an IntHolder
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: Int): Int = value + other
+
+    /** Adds the [other] value to this [value]. */
+    public infix operator fun plus(other: IntHolder): Int = plus(other.value)
+
     // TODO: Add the minus operation with an Int
     // TODO: Add the minus operation with an IntHolder
     // TODO: Add the times operation with an Int
