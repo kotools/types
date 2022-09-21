@@ -49,7 +49,7 @@ class NonZeroIntTest {
     }
 
     @Test
-    fun String_toNonZeroInt_should_throw_an_error_with_a_String_representing_an_Int_that_equals_0() {
+    fun String_toNonZeroInt_should_throw_an_error_with_a_String_representing_0() {
         assertFailsWith<IllegalArgumentException>("0"::toNonZeroInt)
     }
 
@@ -65,7 +65,7 @@ class NonZeroIntTest {
         "a".toNonZeroIntOrNull().assertNull()
 
     @Test
-    fun String_toNonZeroIntOrNull_should_return_null_with_a_String_representing_an_Int_that_equals_0() =
+    fun String_toNonZeroIntOrNull_should_return_null_with_a_String_representing_0() =
         "0".toNonZeroIntOrNull().assertNull()
 
     // ---------- Unary operations ----------
