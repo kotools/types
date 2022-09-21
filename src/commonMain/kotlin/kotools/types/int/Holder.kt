@@ -2,6 +2,9 @@ package kotools.types.int
 
 import kotools.types.annotations.SinceKotoolsTypes
 
+internal fun IntHolder(value: Int, validator: IntValidator? = null): IntHolder =
+    IntHolderImplementation(value, validator)
+
 // ---------- Binary operations ----------
 
 // TODO: Add the plus operation between an Int and an IntHolder
@@ -20,9 +23,6 @@ import kotools.types.annotations.SinceKotoolsTypes
 public sealed interface IntHolder : Comparable<IntHolder> {
     /** The value to hold. */
     public val value: Int
-
-    /** Optional property responsible for checking the [value]'s validity. */
-    public val validator: IntValidator?
 
     // ---------- Binary operations ----------
 
@@ -43,7 +43,7 @@ public sealed interface IntHolder : Comparable<IntHolder> {
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    override fun compareTo(other: IntHolder): Int
+    override infix fun compareTo(other: IntHolder): Int
 
     // ---------- Conversions ----------
 
@@ -51,9 +51,9 @@ public sealed interface IntHolder : Comparable<IntHolder> {
 }
 
 @SinceKotoolsTypes("3.0")
-internal class IntHolderImplementation(
+private class IntHolderImplementation(
     override val value: Int,
-    override val validator: IntValidator? = null
+    validator: IntValidator? = null
 ) : IntHolder {
     init {
         validator?.let { require(it isValid value) }
@@ -62,12 +62,7 @@ internal class IntHolderImplementation(
     override fun compareTo(other: IntHolder): Int = value.compareTo(other.value)
 }
 
-/** Parent of classes responsible for validating integers. */
 @SinceKotoolsTypes("3.0")
-public fun interface IntValidator {
-    /** Returns `true` if the [value] is valid, or returns `false` if not. */
-    public infix fun isValid(value: Int): Boolean
-
-    /** Returns `true` if the [value] is invalid, or returns `false` if not. */
-    public infix fun isNotValid(value: Int): Boolean = !isValid(value)
+internal fun interface IntValidator {
+    infix fun isValid(value: Int): Boolean
 }

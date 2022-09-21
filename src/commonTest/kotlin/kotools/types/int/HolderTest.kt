@@ -1,29 +1,26 @@
 package kotools.types.int
 
-import kotools.assert.*
+import kotools.assert.assertEquals
+import kotools.assert.assertFailsWith
 import kotlin.random.Random
 import kotlin.test.Test
 
-class IntHolderImplementationTest {
+class IntHolderTest {
     // ---------- Constructor ----------
 
     @Test
     fun constructor_should_pass_without_a_validator() {
         val value: Int = Random.nextInt()
-        val result: IntHolder = IntHolderImplementation(value)
+        val result = IntHolder(value)
         result.value assertEquals value
-        result.validator.assertNull()
     }
 
     @Test
     fun constructor_should_pass_with_a_succeeding_validator() {
         val range: IntRange = 1..Int.MAX_VALUE
         val value: Int = Random.nextInt(range.first, range.last)
-        val result: IntHolder = IntHolderImplementation(value) { it in range }
+        val result = IntHolder(value) { it in range }
         result.value assertEquals value
-        result.validator.assertNotNull()
-            .isValid(value)
-            .assertTrue()
     }
 
     @Test
@@ -31,7 +28,7 @@ class IntHolderImplementationTest {
         val range: IntRange = 1..Int.MAX_VALUE
         val value: Int = Random.nextInt(range.first, range.last)
         assertFailsWith<IllegalArgumentException> {
-            IntHolderImplementation(value) { it !in range }
+            IntHolder(value) { it !in range }
         }
     }
 
@@ -40,10 +37,10 @@ class IntHolderImplementationTest {
     @Test
     fun compareTo_should_pass_with_an_IntHolder() {
         val xValue: Int = Random.nextInt()
-        val x: IntHolder = IntHolderImplementation(xValue)
         val yValue: Int = Random.nextInt()
-        val y: IntHolder = IntHolderImplementation(yValue)
-        val result: Int = x.compareTo(y)
+        val x = IntHolder(xValue)
+        val y = IntHolder(yValue)
+        val result: Int = x compareTo y
         result assertEquals xValue.compareTo(yValue)
     }
 }
