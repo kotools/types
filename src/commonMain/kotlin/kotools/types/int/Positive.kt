@@ -2,6 +2,7 @@ package kotools.types.int
 
 import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.tryOrNull
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
@@ -18,11 +19,8 @@ public fun PositiveInt(value: Int): PositiveInt =
  */
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
-public fun PositiveIntOrNull(value: Int): PositiveInt? = try {
-    PositiveInt(value)
-} catch (_: IllegalArgumentException) {
-    null
-}
+public fun PositiveIntOrNull(value: Int): PositiveInt? =
+    tryOrNull { PositiveInt(value) }
 
 /**
  * Returns this value as a [PositiveInt], or throws an

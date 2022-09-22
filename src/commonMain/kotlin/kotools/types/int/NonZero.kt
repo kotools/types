@@ -2,6 +2,7 @@ package kotools.types.int
 
 import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.tryOrNull
 
 // ---------- Builders ----------
 
@@ -19,11 +20,8 @@ public fun NonZeroInt(value: Int): NonZeroInt = NonZeroIntImplementation(value)
  */
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
-public fun NonZeroIntOrNull(value: Int): NonZeroInt? = try {
-    NonZeroInt(value)
-} catch (_: IllegalArgumentException) {
-    null
-}
+public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
+    tryOrNull { NonZeroInt(value) }
 
 /**
  * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
