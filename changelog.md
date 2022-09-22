@@ -73,7 +73,8 @@ The following types are now supported on JVM, JS and Native platforms:
 Moved the following types to the `kotools.types.int` package:
 
 - `NonZeroInt` ([#84](https://github.com/kotools/types/issues/84))
-- `PositiveInt` ([#85](https://github.com/kotools/types/issues/85)).
+- `PositiveInt` ([#85](https://github.com/kotools/types/issues/85))
+- `NegativeInt` ([#86](https://github.com/kotools/types/issues/86)).
 
 ## Version 2.0.0 - 2022/08/01
 
