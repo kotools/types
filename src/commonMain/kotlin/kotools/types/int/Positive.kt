@@ -1,5 +1,6 @@
 package kotools.types.int
 
+import kotlinx.serialization.Serializable
 import kotools.types.annotations.SinceKotoolsTypes
 
 /**
@@ -60,6 +61,7 @@ public fun String.toPositiveIntOrNull(): PositiveInt? =
 /**
  * Parent of classes responsible for holding positive integers, including zero.
  */
+@Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface PositiveInt : IntHolder {
     public companion object {
@@ -79,3 +81,7 @@ public sealed interface PositiveInt : IntHolder {
 @SinceKotoolsTypes("3.0")
 private class PositiveIntImplementation(value: Int) : PositiveInt,
     IntHolder by IntHolder(value, { it >= 0 })
+
+@SinceKotoolsTypes("3.0")
+internal object PositiveIntSerializer :
+    IntHolderSerializer<PositiveInt> by IntHolderSerializer(Int::toPositiveInt)
