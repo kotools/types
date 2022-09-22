@@ -92,8 +92,7 @@ public sealed interface NonZeroInt : IntHolder {
         // TODO: Use kotools.types.int.StrictlyNegativeInt.range instead
         private val negativeRange: IntRange = Int.MIN_VALUE..-1
 
-        // TODO: Use kotools.types.int.StrictlyPositiveInt.range instead
-        private val positiveRange: IntRange = 1..Int.MAX_VALUE
+        private val positiveRange: IntRange = StrictlyPositiveInt.range
 
         // TODO: Use the NotEmptySet<IntRange> type instead
         private val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
