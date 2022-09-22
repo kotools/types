@@ -1,5 +1,11 @@
 package kotools.types.int
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
 @SinceKotoolsTypes("3.0")
@@ -116,4 +122,29 @@ private class IntHolderImplementation(
     override fun hashCode(): Int = value.hashCode()
 
     override fun toString(): String = "$value"
+}
+
+@SinceKotoolsTypes("3.0")
+@Suppress("FunctionName")
+internal fun <T : IntHolder> IntHolderSerializer(
+    builder: (Int) -> T
+): IntHolderSerializer<T> = IntHolderSerializerImplementation(builder)
+
+@SinceKotoolsTypes("3.0")
+internal sealed interface IntHolderSerializer<T : IntHolder> : KSerializer<T>
+
+@SinceKotoolsTypes("3.0")
+private class IntHolderSerializerImplementation<T : IntHolder>(
+    private val builder: (Int) -> T
+) : IntHolderSerializer<T> {
+    override val descriptor: SerialDescriptor
+        get() = PrimitiveSerialDescriptor("IntHolder", PrimitiveKind.INT)
+
+    override fun serialize(encoder: Encoder, value: T): Unit =
+        encoder.encodeInt(value.value)
+
+    override fun deserialize(decoder: Decoder): T {
+        val value: Int = decoder.decodeInt()
+        return builder(value)
+    }
 }

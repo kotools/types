@@ -1,12 +1,6 @@
 package kotools.types.int
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 
 // ---------- Builders ----------
@@ -125,13 +119,5 @@ private class NonZeroIntImplementation(value: Int) : NonZeroInt,
     IntHolder by IntHolder(value, { it != 0 })
 
 @SinceKotoolsTypes("3.0")
-internal object NonZeroIntSerializer : KSerializer<NonZeroInt> {
-    override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("NonZeroInt", PrimitiveKind.INT)
-
-    override fun serialize(encoder: Encoder, value: NonZeroInt): Unit =
-        encoder.encodeInt(value.value)
-
-    override fun deserialize(decoder: Decoder): NonZeroInt =
-        decoder.decodeInt().toNonZeroInt()
-}
+internal object NonZeroIntSerializer :
+    IntHolderSerializer<NonZeroInt> by IntHolderSerializer(Int::toNonZeroInt)

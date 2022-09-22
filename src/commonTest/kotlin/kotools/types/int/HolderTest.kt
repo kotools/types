@@ -1,5 +1,7 @@
 package kotools.types.int
 
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFalse
 import kotools.assert.assertTrue
@@ -168,5 +170,27 @@ class IntHolderImplementationTest {
         val x = IntHolder(xValue)
         val y = IntHolder(yValue)
         assertFalse { x == y }
+    }
+}
+
+class IntHolderSerializerTest {
+    private val serializer: IntHolderSerializer<IntHolder> by lazy {
+        IntHolderSerializer(::IntHolder)
+    }
+
+    @Test
+    fun serialize_should_pass() {
+        val value: Int = Random.nextInt()
+        val x = IntHolder(value)
+        val result: String = Json.encodeToString(serializer, x)
+        result assertEquals Json.encodeToString(value)
+    }
+
+    @Test
+    fun deserialize_should_pass() {
+        val value: Int = Random.nextInt()
+        val encoded: String = Json.encodeToString(value)
+        val result: IntHolder = Json.decodeFromString(serializer, encoded)
+        result.value assertEquals value
     }
 }
