@@ -113,6 +113,11 @@ private class IntHolderImplementation(
     init {
         validator?.let { require(it isValid value) }
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is IntHolder && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
 }
 
 @SinceKotoolsTypes("3.0")
