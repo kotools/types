@@ -1,4 +1,7 @@
-import kotools.types.*
+import kotools.types.Git
+import kotools.types.GitHub
+import kotools.types.Gpg
+import kotools.types.Maven
 import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.gradle.GradleDokkaSourceSetBuilder
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
@@ -93,6 +96,7 @@ tasks.dokkaHtml {
         ): Unit = sourceSets.forEach { sourceRoots.from(it.kotlin.srcDirs) }
 
         configureEach {
+            includes.from += "packages.md"
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
         }
