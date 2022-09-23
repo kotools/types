@@ -8,6 +8,8 @@ import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class PositiveIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun PositiveInt_should_pass_with_a_positive_Int() {
         val value: Int = PositiveInt.random.value
@@ -69,4 +71,45 @@ class PositiveIntTest {
         StrictlyNegativeInt.random.value.toString()
             .toPositiveIntOrNull()
             .assertNull()
+
+    // ---------- Unary operations ----------
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+        var x: PositiveInt = PositiveInt.max
+        x++
+        x assertEquals PositiveInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_1_with_an_initial_value_other_than_the_maximum_value() {
+        var x: PositiveInt = PositiveInt.random
+        while (x.value == PositiveInt.max.value) x = PositiveInt.random
+        val initialValue: Int = x.value
+        x++
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        var x: PositiveInt = PositiveInt.min
+        x--
+        x assertEquals PositiveInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_1_with_an_initial_value_other_than_the_minimum_value() {
+        var x: PositiveInt = PositiveInt.random
+        while (x.value == PositiveInt.min.value) x = PositiveInt.random
+        val initialValue: Int = x.value
+        x--
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
+    fun unaryMinus_should_pass() {
+        val x: PositiveInt = PositiveInt.random
+        val result: NegativeInt = -x
+        result.value assertEquals -x.value
+    }
 }
