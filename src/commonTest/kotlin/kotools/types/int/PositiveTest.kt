@@ -8,9 +8,6 @@ import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class PositiveIntTest {
-    // TODO: Use StrictlyNegativeInt.range instead
-    private val strictlyNegativeRange: IntRange = Int.MIN_VALUE..-1
-
     @Test
     fun PositiveInt_should_pass_with_a_positive_Int() {
         val value: Int = PositiveInt.random.value
@@ -20,7 +17,7 @@ class PositiveIntTest {
 
     @Test
     fun PositiveInt_should_throw_an_error_with_a_strictly_negative_Int() {
-        val value: Int = strictlyNegativeRange.random()
+        val value: Int = StrictlyNegativeInt.random.value
         assertFailsWith<IllegalArgumentException> { PositiveInt(value) }
     }
 
@@ -33,7 +30,7 @@ class PositiveIntTest {
 
     @Test
     fun PositiveIntOrNull_should_return_null_with_a_strictly_negative_Int() {
-        val value: Int = strictlyNegativeRange.random()
+        val value: Int = StrictlyNegativeInt.random.value
         val result: PositiveInt? = PositiveIntOrNull(value)
         result.assertNull()
     }
@@ -52,7 +49,7 @@ class PositiveIntTest {
 
     @Test
     fun String_toPositiveInt_should_throw_an_error_with_a_String_representing_a_strictly_negative_number() {
-        val value: String = strictlyNegativeRange.random().toString()
+        val value: String = StrictlyNegativeInt.random.value.toString()
         assertFailsWith<IllegalArgumentException>(value::toPositiveInt)
     }
 
@@ -69,8 +66,7 @@ class PositiveIntTest {
 
     @Test
     fun String_toPositiveIntOrNull_should_return_null_with_a_String_representing_a_strictly_negative_number(): Unit =
-        strictlyNegativeRange.random()
-            .toString()
+        StrictlyNegativeInt.random.value.toString()
             .toPositiveIntOrNull()
             .assertNull()
 }
