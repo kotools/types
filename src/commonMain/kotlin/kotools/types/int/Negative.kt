@@ -83,6 +83,36 @@ public sealed interface NegativeInt : IntHolder {
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
 
+    // ---------- Binary operations ----------
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: PositiveInt): NegativeInt =
+        div(other.value).toNegativeInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: StrictlyPositiveInt): NegativeInt =
+        div(other.value).toNegativeInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: NegativeInt): PositiveInt =
+        div(other.value).toPositiveInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
+        div(other.value).toPositiveInt()
+
     public companion object {
         private val range: IntRange = Int.MIN_VALUE..0
 
