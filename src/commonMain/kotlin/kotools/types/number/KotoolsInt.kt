@@ -1,12 +1,5 @@
 package kotools.types.number
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.annotations.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
@@ -65,7 +58,6 @@ public infix operator fun Int.compareTo(other: KotoolsInt): Int =
     compareTo(other.value)
 
 /** Parent of every integer's representation in this library. */
-@Serializable(KotoolsIntSerializer::class)
 @SinceKotoolsTypes("3.0")
 public interface KotoolsInt : Comparable<Int> {
     public val value: Int
@@ -116,20 +108,4 @@ public interface KotoolsInt : Comparable<Int> {
      */
     public fun toNotBlankString(): NotBlankString =
         value.toString().toNotBlankString()
-}
-
-@SinceKotoolsTypes("3.0")
-internal object KotoolsIntSerializer : KSerializer<KotoolsInt> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        "kotools.types.number.KotoolsInt",
-        PrimitiveKind.INT
-    )
-
-    override fun serialize(encoder: Encoder, value: KotoolsInt): Unit =
-        encoder.encodeInt(value.value)
-
-    override fun deserialize(decoder: Decoder): KotoolsInt {
-        val value: Int = decoder.decodeInt()
-        return if (value != 0) value.toNonZeroInt() else PositiveInt(0)
-    }
 }
