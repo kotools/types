@@ -81,16 +81,13 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableListOrElse(
  */
 @Serializable(NotEmptyMutableList.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableList<E>
-@SinceKotoolsTypes("3.0")
-private constructor(
+public class NotEmptyMutableList<E> private constructor(
     override var head: E,
     private val tail: MutableList<E>
 ) : AbstractMutableList<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) :
             this(head, tail.toMutableList())
 
-    @SinceKotoolsTypes("3.0")
     internal constructor(mutableList: MutableList<E>) : this(
         mutableList.first(),
         mutableList.subList(1, mutableList.size)

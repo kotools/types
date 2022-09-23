@@ -170,11 +170,9 @@ public sealed interface NegativeInt : IntHolder {
     }
 }
 
-@SinceKotoolsTypes("3.0")
 private class NegativeIntImplementation(value: Int) : NegativeInt,
     IntHolder by IntHolder(value, { it <= 0 })
 
-@SinceKotoolsTypes("3.0")
 internal object NegativeIntSerializer :
     IntHolderSerializer<NegativeInt> by IntHolderSerializer(
         "NegativeInt",

@@ -124,7 +124,6 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
         NotBlankStringJvm(toString())
 }
 
-@SinceKotoolsTypes("3.0")
 internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(
     elementSerializer: KSerializer<E>,
     private val builder: (Collection<E>) -> C
@@ -149,7 +148,6 @@ internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollecti
     }
 }
 
-@SinceKotoolsTypes("3.0")
 internal class NotEmptyCollectionSerializer<E>(
     elementSerializer: KSerializer<E>
 ) : SealedNotEmptyCollectionSerializer<E, NotEmptyCollection<E>>(

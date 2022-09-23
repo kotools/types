@@ -76,15 +76,12 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  */
 @Serializable(NotEmptyList.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E>
-@SinceKotoolsTypes("3.0")
-internal constructor(
+public class NotEmptyList<out E> internal constructor(
     override val head: E,
     private val tail: List<E>
 ) : AbstractList<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) : this(head, tail.toList())
 
-    @SinceKotoolsTypes("3.0")
     internal constructor(list: List<E>) : this(
         list.first(),
         list.subList(1, list.size)

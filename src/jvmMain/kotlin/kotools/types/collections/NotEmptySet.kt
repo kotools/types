@@ -80,9 +80,7 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
  */
 @Serializable(NotEmptySet.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E>
-@SinceKotoolsTypes("3.0")
-internal constructor(
+public class NotEmptySet<out E> internal constructor(
     override val head: E,
     private val tail: Set<E>
 ) : AbstractSet<E>(), NotEmptyCollection<E> {

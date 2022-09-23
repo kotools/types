@@ -78,9 +78,7 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableSetOrElse(
  */
 @Serializable(NotEmptyMutableSet.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableSet<E>
-@SinceKotoolsTypes("3.0")
-private constructor(
+public class NotEmptyMutableSet<E> private constructor(
     override var head: E,
     private val tail: MutableSet<E>
 ) : AbstractMutableSet<E>(), NotEmptyCollection<E> {
@@ -89,7 +87,6 @@ private constructor(
         tail.filterNot { it == head }.toMutableSet()
     )
 
-    @SinceKotoolsTypes("3.0")
     internal constructor(mutableSet: MutableSet<E>) : this(
         mutableSet.first(),
         mutableSet.filterNot { it == mutableSet.first() }.toMutableSet()

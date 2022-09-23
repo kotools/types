@@ -11,6 +11,5 @@ public sealed interface ZeroInt : IntHolder {
     }
 }
 
-@SinceKotoolsTypes("3.0")
 internal object ZeroIntImplementation : ZeroInt,
     IntHolder by IntHolder(0)

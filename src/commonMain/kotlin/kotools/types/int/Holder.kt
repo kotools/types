@@ -10,7 +10,6 @@ import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
 
-@SinceKotoolsTypes("3.0")
 internal fun IntHolder(
     value: Int,
     validator: Validator<Int>? = null
@@ -104,7 +103,6 @@ public sealed interface IntHolder : Holder<Int>, Comparable<IntHolder> {
     override infix fun compareTo(other: IntHolder): Int = compareTo(other.value)
 }
 
-@SinceKotoolsTypes("3.0")
 private class IntHolderImplementation(
     override val value: Int,
     validator: Validator<Int>? = null
@@ -120,7 +118,6 @@ private class IntHolderImplementation(
     override fun hashCode(): Int = value.hashCode()
 }
 
-@SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 internal fun <T : IntHolder> IntHolderSerializer(
     serialName: String = "IntHolder",
@@ -128,10 +125,8 @@ internal fun <T : IntHolder> IntHolderSerializer(
 ): IntHolderSerializer<T> =
     IntHolderSerializerImplementation(serialName, builder)
 
-@SinceKotoolsTypes("3.0")
 internal sealed interface IntHolderSerializer<T : IntHolder> : KSerializer<T>
 
-@SinceKotoolsTypes("3.0")
 private class IntHolderSerializerImplementation<T : IntHolder>(
     private val serialName: String,
     private val builder: (Int) -> T
