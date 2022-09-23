@@ -66,6 +66,28 @@ public fun String.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface StrictlyPositiveInt : IntHolder {
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the [maximum][StrictlyPositiveInt.max], it returns
+     * the [minimum][StrictlyPositiveInt.min] value instead.
+     */
+    public operator fun inc(): StrictlyPositiveInt = if (value == max.value) min
+    else StrictlyPositiveInt(value + 1)
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] is the [minimum][StrictlyPositiveInt.min], it returns
+     * the [maximum][StrictlyPositiveInt.max] value instead.
+     */
+    public operator fun dec(): StrictlyPositiveInt = if (value == min.value) max
+    else StrictlyPositiveInt(value - 1)
+
+    /** Returns the negative of this [value]. */
+    public operator fun unaryMinus(): StrictlyNegativeInt =
+        StrictlyNegativeInt(-value)
+
     public companion object {
         internal val range: IntRange = 1..PositiveInt.max.value
 
