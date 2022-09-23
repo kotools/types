@@ -88,6 +88,48 @@ public sealed interface StrictlyNegativeInt : IntHolder {
     public operator fun unaryMinus(): StrictlyPositiveInt =
         StrictlyPositiveInt(-value)
 
+    // ---------- Binary operations ----------
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: NonZeroInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: StrictlyPositiveInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
+
+    /** Multiplies this [value] by the [other] value. */
+    public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: PositiveInt): NegativeInt =
+        div(other.value).toNegativeInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: StrictlyPositiveInt): NegativeInt =
+        div(other.value).toNegativeInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: NegativeInt): PositiveInt =
+        div(other.value).toPositiveInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to `0`.
+     */
+    public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
+        div(other.value).toPositiveInt()
+
     public companion object {
         internal val range: IntRange = NegativeInt.min.value..-1
 
