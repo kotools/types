@@ -67,7 +67,7 @@ public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 @SinceKotoolsTypes("3.0")
 public sealed interface StrictlyNegativeInt : IntHolder {
     public companion object {
-        private val range: IntRange = NegativeInt.min.value..-1
+        internal val range: IntRange = NegativeInt.min.value..-1
 
         /** The minimum value of a [StrictlyNegativeInt]. */
         public val min: StrictlyNegativeInt = StrictlyNegativeInt(range.first)

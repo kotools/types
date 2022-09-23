@@ -89,8 +89,7 @@ public sealed interface NonZeroInt : IntHolder {
     public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
 
     public companion object {
-        // TODO: Use kotools.types.int.StrictlyNegativeInt.range instead
-        private val negativeRange: IntRange = Int.MIN_VALUE..-1
+        private val negativeRange: IntRange = StrictlyNegativeInt.range
 
         private val positiveRange: IntRange = StrictlyPositiveInt.range
 
