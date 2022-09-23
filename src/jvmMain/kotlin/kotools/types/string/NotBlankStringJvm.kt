@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
-import kotools.types.number.*
+import kotools.types.int.*
 
 // ---------- Comparisons ----------
 
@@ -63,8 +63,8 @@ public constructor(public val value: String) : Comparable<String> {
     // ---------- Query operations ----------
 
     /** Returns the length of this [value]. */
-    public val length: StrictlyPositiveIntJvm
-        get() = StrictlyPositiveIntJvm(value.length)
+    public val length: StrictlyPositiveInt
+        get() = StrictlyPositiveInt(value.length)
 
     // ---------- Positional access operations ----------
 
@@ -76,14 +76,14 @@ public constructor(public val value: String) : Comparable<String> {
      * an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: PositiveIntJvm): Char =
+    public infix operator fun get(index: PositiveInt): Char =
         value[index.value]
 
     /**
      * Returns the character of this [value] at the specified [index], or
      * returns `null` if the [index] is out of bounds.
      */
-    public infix fun getOrNull(index: PositiveIntJvm): Char? = try {
+    public infix fun getOrNull(index: PositiveInt): Char? = try {
         get(index)
     } catch (_: IndexOutOfBoundsException) {
         null
@@ -128,15 +128,14 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toNonZeroInt(): NonZeroIntJvm = value.toNonZeroIntJvm()
+    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
 
     /**
      * Returns this [value] as a non-zero int, or returns `null` if this [value]
      * is not a valid representation of a number or if it represents `0`.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toNonZeroIntOrNull(): NonZeroIntJvm? =
-        value.toNonZeroIntJvmOrNull()
+    public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
 
     /**
      * Returns this [value] as a positive int.
@@ -146,7 +145,7 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toPositiveInt(): PositiveIntJvm = value.toPositiveIntJvm()
+    public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
 
     /**
      * Returns this [value] as a positive int, or returns `null` if this [value]
@@ -154,8 +153,8 @@ public constructor(public val value: String) : Comparable<String> {
      * negative number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toPositiveIntOrNull(): PositiveIntJvm? =
-        value.toPositiveIntJvmOrNull()
+    public fun toPositiveIntOrNull(): PositiveInt? =
+        value.toPositiveIntOrNull()
 
     /**
      * Returns this [value] as a strictly positive int.
@@ -165,8 +164,8 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toStrictlyPositiveInt(): StrictlyPositiveIntJvm =
-        value.toStrictlyPositiveIntJvm()
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        value.toStrictlyPositiveInt()
 
     /**
      * Returns this [value] as a strictly positive int, or returns `null` if
@@ -174,8 +173,8 @@ public constructor(public val value: String) : Comparable<String> {
      * represents a negative number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveIntJvm? =
-        value.toStrictlyPositiveIntJvmOrNull()
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        value.toStrictlyPositiveIntOrNull()
 
     /**
      * Returns this [value] as a negative int.
@@ -185,7 +184,7 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toNegativeInt(): NegativeIntJvm = value.toNegativeIntJvm()
+    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
 
     /**
      * Returns this [value] as a negative int, or returns `null` if this [value]
@@ -193,8 +192,8 @@ public constructor(public val value: String) : Comparable<String> {
      * positive number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toNegativeIntOrNull(): NegativeIntJvm? =
-        value.toNegativeIntJvmOrNull()
+    public fun toNegativeIntOrNull(): NegativeInt? =
+        value.toNegativeIntOrNull()
 
     /**
      * Returns this [value] as a strictly negative int.
@@ -204,8 +203,8 @@ public constructor(public val value: String) : Comparable<String> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IllegalArgumentException::class, NumberFormatException::class)
-    public fun toStrictlyNegativeInt(): StrictlyNegativeIntJvm =
-        value.toStrictlyNegativeIntJvm()
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        value.toStrictlyNegativeInt()
 
     /**
      * Returns this [value] as a strictly negative int, or returns `null` if
@@ -213,8 +212,8 @@ public constructor(public val value: String) : Comparable<String> {
      * represents a positive number.
      */
     @SinceKotoolsTypes("3.0")
-    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeIntJvm? =
-        value.toStrictlyNegativeIntJvmOrNull()
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        value.toStrictlyNegativeIntOrNull()
 
     override fun toString(): String = value
 

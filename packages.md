@@ -16,11 +16,6 @@ Core functions and types available for all platforms.
 Useful functions and explicit types such as `NonZeroInt` or `PositiveInt` for
 manipulating integers.
 
-# Package kotools.types.number
-
-Deprecated package containing old declarations for manipulating integers, mostly
-available for the JVM platform.
-
 # Package kotools.types.string
 
 Useful declarations for manipulating strings.

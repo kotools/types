@@ -78,6 +78,10 @@ Moved the following types to the `kotools.types.int` package:
 - `StrictlyPositiveInt` ([#87](https://github.com/kotools/types/issues/87))
 - `StrictlyNegativeInt` ([#88](https://github.com/kotools/types/issues/88)).
 
+#### Removed
+
+- Removed all declarations from the `kotools.types.number` package.
+
 ## Version 2.0.0 - 2022/08/01
 
 ### Added

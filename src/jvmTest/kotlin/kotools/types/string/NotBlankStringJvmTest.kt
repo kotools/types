@@ -4,7 +4,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
-import kotools.types.number.*
+import kotools.types.int.*
 
 class NotBlankStringJvmTest {
     @Nested
@@ -88,7 +88,7 @@ class NotBlankStringJvmTest {
         fun `should return the first character with 0`() {
             // GIVEN
             val string = NotBlankStringJvm("hello")
-            val index = PositiveIntJvm(0)
+            val index = PositiveInt(0)
             // WHEN
             val result: Char = assertPass { string[index] }
             // THEN
@@ -100,7 +100,7 @@ class NotBlankStringJvmTest {
         fun `should throw an error with an index that is out of bounds`() {
             // GIVEN
             val string = NotBlankStringJvm("hi")
-            val index = PositiveIntJvm(10)
+            val index = PositiveInt(10)
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { string[index] }
         }
@@ -111,7 +111,7 @@ class NotBlankStringJvmTest {
             fun `should return the second character with 1`() {
                 // GIVEN
                 val string = NotBlankStringJvm("world")
-                val index = PositiveIntJvm(1)
+                val index = PositiveInt(1)
                 // WHEN
                 val result: Char? = string getOrNull index
                 // THEN
@@ -122,7 +122,7 @@ class NotBlankStringJvmTest {
             fun `should return null with an index that is out of bounds`() {
                 // GIVEN
                 val string = NotBlankStringJvm("hi")
-                val index = PositiveIntJvm(10)
+                val index = PositiveInt(10)
                 // WHEN
                 val result: Char? = string getOrNull index
                 // THEN
@@ -265,7 +265,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroIntJvm = assertPass(string::toNonZeroInt)
+            val result: NonZeroInt = assertPass(string::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -276,7 +276,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroIntJvm = assertPass(string::toNonZeroInt)
+            val result: NonZeroInt = assertPass(string::toNonZeroInt)
             // THEN
             result.value assertEquals value
         }
@@ -306,7 +306,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
+            val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -317,7 +317,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm(value.toString())
             // WHEN
-            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
+            val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -327,7 +327,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("hello")
             // WHEN
-            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
+            val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -337,7 +337,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("0")
             // WHEN
-            val result: NonZeroIntJvm? = string.toNonZeroIntOrNull()
+            val result: NonZeroInt? = string.toNonZeroIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -351,7 +351,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveIntJvm = assertPass(string::toPositiveInt)
+            val result: PositiveInt = assertPass(string::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -362,7 +362,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveIntJvm = assertPass(string::toPositiveInt)
+            val result: PositiveInt = assertPass(string::toPositiveInt)
             // THEN
             result.value assertEquals value
         }
@@ -392,7 +392,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
+            val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -403,7 +403,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
+            val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -413,7 +413,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("a")
             // WHEN
-            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
+            val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -423,7 +423,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("-1")
             // WHEN
-            val result: PositiveIntJvm? = string.toPositiveIntOrNull()
+            val result: PositiveInt? = string.toPositiveIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -437,7 +437,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: StrictlyPositiveIntJvm =
+            val result: StrictlyPositiveInt =
                 assertPass(string::toStrictlyPositiveInt)
             // THEN
             result.value assertEquals value
@@ -472,7 +472,7 @@ class NotBlankStringJvmTest {
             val value = 1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: StrictlyPositiveIntJvm? =
+            val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
@@ -483,7 +483,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("a")
             // WHEN
-            val result: StrictlyPositiveIntJvm? =
+            val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
             // THEN
             result.assertNull()
@@ -494,7 +494,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("0")
             // WHEN
-            val result: StrictlyPositiveIntJvm? =
+            val result: StrictlyPositiveInt? =
                 string.toStrictlyPositiveIntOrNull()
             // THEN
             result.assertNull()
@@ -509,7 +509,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeIntJvm = assertPass(string::toNegativeInt)
+            val result: NegativeInt = assertPass(string::toNegativeInt)
             // THEN
             result.value assertEquals value
         }
@@ -520,7 +520,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeIntJvm = assertPass(string::toNegativeInt)
+            val result: NegativeInt = assertPass(string::toNegativeInt)
             // THEN
             result.value assertEquals value
         }
@@ -550,7 +550,7 @@ class NotBlankStringJvmTest {
             val value = 0
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
+            val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -561,7 +561,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
+            val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
         }
@@ -571,7 +571,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("a")
             // WHEN
-            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
+            val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -581,7 +581,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("1")
             // WHEN
-            val result: NegativeIntJvm? = string.toNegativeIntOrNull()
+            val result: NegativeInt? = string.toNegativeIntOrNull()
             // THEN
             result.assertNull()
         }
@@ -595,7 +595,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: StrictlyNegativeIntJvm =
+            val result: StrictlyNegativeInt =
                 assertPass(string::toStrictlyNegativeInt)
             // THEN
             result.value assertEquals value
@@ -630,7 +630,7 @@ class NotBlankStringJvmTest {
             val value = -1
             val string = NotBlankStringJvm("$value")
             // WHEN
-            val result: StrictlyNegativeIntJvm? =
+            val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNotNull().value assertEquals value
@@ -641,7 +641,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("a")
             // WHEN
-            val result: StrictlyNegativeIntJvm? =
+            val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNull()
@@ -652,7 +652,7 @@ class NotBlankStringJvmTest {
             // GIVEN
             val string = NotBlankStringJvm("0")
             // WHEN
-            val result: StrictlyNegativeIntJvm? =
+            val result: StrictlyNegativeInt? =
                 string.toStrictlyNegativeIntOrNull()
             // THEN
             result.assertNull()
