@@ -1,7 +1,7 @@
 package kotools.types.collections
 
 import kotools.assert.*
-import kotools.types.indexOutOfBoundsMessage
+import kotools.types.core.indexOutOfBoundsMessage
 import kotools.types.number.PositiveIntJvm
 import kotools.types.number.StrictlyPositiveIntJvm
 

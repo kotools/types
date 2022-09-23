@@ -7,7 +7,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.SinceKotoolsTypes
 import kotools.types.number.PositiveIntJvm
 import kotools.types.number.StrictlyPositiveIntJvm
 import kotools.types.string.NotBlankStringJvm

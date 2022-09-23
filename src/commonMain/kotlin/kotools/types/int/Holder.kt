@@ -6,11 +6,15 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.Holder
+import kotools.types.core.SinceKotoolsTypes
+import kotools.types.core.Validator
 
 @SinceKotoolsTypes("3.0")
-internal fun IntHolder(value: Int, validator: IntValidator? = null): IntHolder =
-    IntHolderImplementation(value, validator)
+internal fun IntHolder(
+    value: Int,
+    validator: Validator<Int>? = null
+): IntHolder = IntHolderImplementation(value, validator)
 
 // ---------- Binary operations ----------
 
@@ -47,10 +51,7 @@ public infix operator fun Int.compareTo(other: IntHolder): Int =
 
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
-public sealed interface IntHolder : Comparable<IntHolder> {
-    /** The value to hold. */
-    public val value: Int
-
+public sealed interface IntHolder : Holder<Int>, Comparable<IntHolder> {
     // ---------- Binary operations ----------
 
     /** Adds the [other] value to this [value]. */
@@ -101,27 +102,17 @@ public sealed interface IntHolder : Comparable<IntHolder> {
      * this [value] is greater than the [other] value.
      */
     override infix fun compareTo(other: IntHolder): Int = compareTo(other.value)
-
-    // ---------- Conversions ----------
-
-    // TODO: Add the conversion to a NotBlankString
 }
 
 @SinceKotoolsTypes("3.0")
 private class IntHolderImplementation(
     override val value: Int,
-    validator: IntValidator? = null
-) : IntHolder {
+    validator: Validator<Int>? = null
+) : IntHolder,
+    Holder<Int> by Holder(value) {
     init {
         validator?.let { require(it isValid value) }
     }
-
-    override fun equals(other: Any?): Boolean =
-        other is IntHolder && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = "$value"
 }
 
 @SinceKotoolsTypes("3.0")

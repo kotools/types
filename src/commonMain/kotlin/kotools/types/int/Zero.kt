@@ -1,6 +1,6 @@
 package kotools.types.int
 
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.SinceKotoolsTypes
 
 /** Parent of classes responsible for holding the zero integer. */
 @SinceKotoolsTypes("3.0")

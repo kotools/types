@@ -1,8 +1,8 @@
 package kotools.types.int
 
 import kotlinx.serialization.Serializable
-import kotools.types.annotations.SinceKotoolsTypes
-import kotools.types.tryOrNull
+import kotools.types.core.SinceKotoolsTypes
+import kotools.types.core.tryOrNull
 
 // ---------- Builders ----------
 

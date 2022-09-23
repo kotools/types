@@ -1,6 +1,6 @@
 package kotools.types.number
 
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 

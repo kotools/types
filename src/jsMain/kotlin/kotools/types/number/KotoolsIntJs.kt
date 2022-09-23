@@ -1,6 +1,6 @@
 package kotools.types.number
 
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.SinceKotoolsTypes
 
 /**
  * Divides this value by the [other] value, truncating the result to an integer

@@ -2,7 +2,7 @@ package kotools.types.collections
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.SinceKotoolsTypes
 
 // ---------- Conversions ----------
 

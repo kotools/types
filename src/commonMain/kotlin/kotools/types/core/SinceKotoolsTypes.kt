@@ -1,4 +1,4 @@
-package kotools.types.annotations
+package kotools.types.core
 
 /**
  * Specifies the first [version] of Kotools Types where a declaration has

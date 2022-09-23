@@ -1,6 +1,7 @@
 package kotools.types.string
 
-import kotools.types.annotations.SinceKotoolsTypes
+import kotools.types.core.Holder
+import kotools.types.core.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -31,7 +32,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
 @SinceKotoolsTypes("1.2")
 public value class NotBlankString
 @Throws(IllegalArgumentException::class)
-public constructor(public val value: String) {
+public constructor(override val value: String) : Holder<String> {
     init {
         require(value.isNotBlank()) {
             val type: String = this::class.simpleName!!
