@@ -120,4 +120,30 @@ class NonZeroIntTest {
         val result: NonZeroInt = -x
         result.value assertEquals -x.value
     }
+
+    // ---------- Binary operations ----------
+
+    @Test
+    fun times_should_pass_with_a_NonZeroInt() {
+        val x: NonZeroInt = NonZeroInt.random
+        val y: NonZeroInt = NonZeroInt.random
+        val result: NonZeroInt = x * y
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun times_should_pass_with_a_StrictlyPositiveInt() {
+        val x: NonZeroInt = NonZeroInt.random
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val result: NonZeroInt = x * y
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun times_should_pass_with_a_StrictlyNegativeInt() {
+        val x: NonZeroInt = NonZeroInt.random
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val result: NonZeroInt = x * y
+        result.value assertEquals x.value * y.value
+    }
 }
