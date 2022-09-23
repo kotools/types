@@ -112,4 +112,38 @@ class PositiveIntTest {
         val result: NegativeInt = -x
         result.value assertEquals -x.value
     }
+
+    // ---------- Binary operations ----------
+
+    @Test
+    fun div_should_pass_with_a_PositiveInt() {
+        val x: PositiveInt = PositiveInt.random
+        val y = PositiveInt(StrictlyPositiveInt.random.value)
+        val result: PositiveInt = x / y
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_StrictlyPositiveInt() {
+        val x: PositiveInt = PositiveInt.random
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val result: PositiveInt = x / y
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_NegativeInt() {
+        val x: PositiveInt = PositiveInt.random
+        val y = NegativeInt(StrictlyNegativeInt.random.value)
+        val result: NegativeInt = x / y
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_StrictlyNegativeInt() {
+        val x: PositiveInt = PositiveInt.random
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val result: NegativeInt = x / y
+        result.value assertEquals x.value / y.value
+    }
 }
