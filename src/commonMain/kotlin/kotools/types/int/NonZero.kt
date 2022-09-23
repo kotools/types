@@ -102,6 +102,64 @@ public sealed interface NonZeroInt : IntHolder {
     public infix operator fun times(other: StrictlyNegativeInt): NonZeroInt =
         times(other.value).toNonZeroInt()
 
+    // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a [PositiveInt], or throws an
+     * [IllegalArgumentException] if this [value] is strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
+    /**
+     * Returns this [value] as a [PositiveInt], or returns `null` if this
+     * [value] is strictly negative.
+     */
+    public fun toPositiveIntOrNull(): PositiveInt? = PositiveIntOrNull(value)
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or throws an
+     * [IllegalArgumentException] if this [value] is strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        StrictlyPositiveInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or returns `null` if
+     * this [value] is strictly negative.
+     */
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        StrictlyPositiveIntOrNull(value)
+
+    /**
+     * Returns this [value] as a [NegativeInt], or throws an
+     * [IllegalArgumentException] if this [value] is strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNegativeInt(): NegativeInt = NegativeInt(value)
+
+    /**
+     * Returns this [value] as a [NegativeInt], or returns `null` if this
+     * [value] is strictly positive.
+     */
+    public fun toNegativeIntOrNull(): NegativeInt? = NegativeIntOrNull(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or throws an
+     * [IllegalArgumentException] if this [value] is strictly positive.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        StrictlyNegativeInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or returns `null` if
+     * this [value] is strictly positive.
+     */
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        StrictlyNegativeIntOrNull(value)
+
     public companion object {
         private val negativeRange: IntRange = StrictlyNegativeInt.range
 
