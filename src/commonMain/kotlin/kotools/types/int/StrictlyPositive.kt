@@ -130,6 +130,14 @@ public sealed interface StrictlyPositiveInt : IntHolder {
     public infix operator fun div(other: StrictlyNegativeInt): NegativeInt =
         div(other.value).toNegativeInt()
 
+    // ---------- Conversions ----------
+
+    /** Returns this [value] as a [NonZeroInt]. */
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
+    /** Returns this [value] as a [PositiveInt]. */
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
     public companion object {
         internal val range: IntRange = 1..PositiveInt.max.value
 
