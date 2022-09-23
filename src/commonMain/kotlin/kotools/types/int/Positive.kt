@@ -82,4 +82,7 @@ private class PositiveIntImplementation(value: Int) : PositiveInt,
 
 @SinceKotoolsTypes("3.0")
 internal object PositiveIntSerializer :
-    IntHolderSerializer<PositiveInt> by IntHolderSerializer(Int::toPositiveInt)
+    IntHolderSerializer<PositiveInt> by IntHolderSerializer(
+        "PositiveInt",
+        Int::toPositiveInt
+    )

@@ -175,7 +175,7 @@ class IntHolderImplementationTest {
 
 class IntHolderSerializerTest {
     private val serializer: IntHolderSerializer<IntHolder> by lazy {
-        IntHolderSerializer(::IntHolder)
+        IntHolderSerializer(builder = ::IntHolder)
     }
 
     @Test

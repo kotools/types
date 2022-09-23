@@ -117,4 +117,7 @@ private class NonZeroIntImplementation(value: Int) : NonZeroInt,
 
 @SinceKotoolsTypes("3.0")
 internal object NonZeroIntSerializer :
-    IntHolderSerializer<NonZeroInt> by IntHolderSerializer(Int::toNonZeroInt)
+    IntHolderSerializer<NonZeroInt> by IntHolderSerializer(
+        "NonZeroInt",
+        Int::toNonZeroInt
+    )

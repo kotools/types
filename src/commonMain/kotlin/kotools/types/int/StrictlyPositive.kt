@@ -89,5 +89,6 @@ private class StrictlyPositiveIntImplementation(value: Int) :
 @SinceKotoolsTypes("3.0")
 internal object StrictlyPositiveIntSerializer :
     IntHolderSerializer<StrictlyPositiveInt> by IntHolderSerializer(
+        "StrictlyPositiveInt",
         Int::toStrictlyPositiveInt
     )

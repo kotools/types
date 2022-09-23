@@ -127,18 +127,21 @@ private class IntHolderImplementation(
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 internal fun <T : IntHolder> IntHolderSerializer(
+    serialName: String = "IntHolder",
     builder: (Int) -> T
-): IntHolderSerializer<T> = IntHolderSerializerImplementation(builder)
+): IntHolderSerializer<T> =
+    IntHolderSerializerImplementation(serialName, builder)
 
 @SinceKotoolsTypes("3.0")
 internal sealed interface IntHolderSerializer<T : IntHolder> : KSerializer<T>
 
 @SinceKotoolsTypes("3.0")
 private class IntHolderSerializerImplementation<T : IntHolder>(
+    private val serialName: String,
     private val builder: (Int) -> T
 ) : IntHolderSerializer<T> {
     override val descriptor: SerialDescriptor
-        get() = PrimitiveSerialDescriptor("IntHolder", PrimitiveKind.INT)
+        get() = PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
 
     override fun serialize(encoder: Encoder, value: T): Unit =
         encoder.encodeInt(value.value)

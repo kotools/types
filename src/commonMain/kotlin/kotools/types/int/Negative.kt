@@ -82,4 +82,7 @@ private class NegativeIntImplementation(value: Int) : NegativeInt,
 
 @SinceKotoolsTypes("3.0")
 internal object NegativeIntSerializer :
-    IntHolderSerializer<NegativeInt> by IntHolderSerializer(Int::toNegativeInt)
+    IntHolderSerializer<NegativeInt> by IntHolderSerializer(
+        "NegativeInt",
+        Int::toNegativeInt
+    )
