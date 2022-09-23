@@ -113,6 +113,49 @@ public sealed interface NegativeInt : IntHolder {
     public infix operator fun div(other: StrictlyNegativeInt): PositiveInt =
         div(other.value).toPositiveInt()
 
+    // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a [NonZeroInt], or throws an
+     * [IllegalArgumentException] if this [value] equals zero.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNonZeroInt(): NonZeroInt = NonZeroInt(value)
+
+    /**
+     * Returns this [value] as a [NonZeroInt], or returns `null` if this [value]
+     * equals zero.
+     */
+    public fun toNonZeroIntOrNull(): NonZeroInt? = NonZeroIntOrNull(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or throws an
+     * [IllegalArgumentException] if this [value] equals zero.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        StrictlyNegativeInt(value)
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or returns `null` if
+     * this [value] equals zero.
+     */
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        StrictlyNegativeIntOrNull(value)
+
+    /**
+     * Returns this [value] as a [PositiveInt], or throws an
+     * [IllegalArgumentException] if this [value] is strictly negative.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toPositiveInt(): PositiveInt = PositiveInt(value)
+
+    /**
+     * Returns this [value] as a [PositiveInt], or returns `null` if this
+     * [value] is strictly negative.
+     */
+    public fun toPositiveIntOrNull(): PositiveInt? = PositiveIntOrNull(value)
+
     public companion object {
         private val range: IntRange = Int.MIN_VALUE..0
 
