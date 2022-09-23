@@ -115,4 +115,62 @@ class StrictlyPositiveIntTest {
         val result: StrictlyNegativeInt = -x
         result.value assertEquals -x.value
     }
+
+    // ---------- Binary operations ----------
+
+    @Test
+    fun times_should_pass_with_a_NonZeroInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: NonZeroInt = NonZeroInt.random
+        val result: NonZeroInt = x * y
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun times_should_pass_with_a_StrictlyPositiveInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val result: NonZeroInt = x * y
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun times_should_pass_with_a_StrictlyNegativeInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val result: NonZeroInt = x * y
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_PositiveInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: PositiveInt = PositiveInt.random
+        val result: PositiveInt = x / y
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_StrictlyPositiveInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val result: PositiveInt = x / y
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_NegativeInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: NegativeInt = NegativeInt.random
+        val result: NegativeInt = x / y
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_pass_with_a_StrictlyNegativeInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+        val result: NegativeInt = x / y
+        result.value assertEquals x.value / y.value
+    }
 }
