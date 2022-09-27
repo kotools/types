@@ -5,6 +5,8 @@ import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
 import kotlin.jvm.JvmInline
 
+// ---------- Builders ----------
+
 /**
  * Returns the [value] as a [NotBlankString], or throws an
  * [IllegalArgumentException] if the [value] is blank.
@@ -42,10 +44,33 @@ public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
     NotBlankStringOrNull(this)
 
+// ---------- Comparisons ----------
+
+/**
+ * Compares this value lexicographically with the [other] value for order.
+ * Returns zero if this value equals the [other] value, a negative number if
+ * this value is less than the [other] value, or a positive number if this value
+ * is greater than the [other] value.
+ */
+@SinceKotoolsTypes("2.0")
+public infix operator fun String.compareTo(other: NotBlankString): Int =
+    compareTo(other.value)
+
 /** Parent of classes responsible for holding not blank strings. */
 @SinceKotoolsTypes("1.2")
 public sealed interface NotBlankString : Holder<String>,
     Comparable<NotBlankString> {
+    // ---------- Comparisons ----------
+
+    /**
+     * Compares this [value] lexicographically with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    @SinceKotoolsTypes("2.0")
+    public infix fun compareTo(other: String): Int = value.compareTo(other)
+
     /**
      * Compares this [value] lexicographically with the [other] value for order.
      * Returns zero if this [value] equals the [other] value, a negative number
