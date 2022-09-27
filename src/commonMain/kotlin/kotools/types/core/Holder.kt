@@ -15,6 +15,5 @@ public interface Holder<out T : Any> {
     public val value: T
 }
 
-@SinceKotoolsTypes("3.0")
 private data class HolderImplementation<out T : Any>(override val value: T) :
     Holder<T>

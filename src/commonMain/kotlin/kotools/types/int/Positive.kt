@@ -170,11 +170,9 @@ public sealed interface PositiveInt : IntHolder {
     }
 }
 
-@SinceKotoolsTypes("3.0")
 private class PositiveIntImplementation(value: Int) : PositiveInt,
     IntHolder by IntHolder(value, { it >= 0 })
 
-@SinceKotoolsTypes("3.0")
 internal object PositiveIntSerializer :
     IntHolderSerializer<PositiveInt> by IntHolderSerializer(
         "PositiveInt",

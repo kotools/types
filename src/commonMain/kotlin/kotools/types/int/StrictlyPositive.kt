@@ -153,12 +153,10 @@ public sealed interface StrictlyPositiveInt : IntHolder {
     }
 }
 
-@SinceKotoolsTypes("3.0")
 private class StrictlyPositiveIntImplementation(value: Int) :
     StrictlyPositiveInt,
     IntHolder by IntHolder(value, { it > 0 })
 
-@SinceKotoolsTypes("3.0")
 internal object StrictlyPositiveIntSerializer :
     IntHolderSerializer<StrictlyPositiveInt> by IntHolderSerializer(
         "StrictlyPositiveInt",

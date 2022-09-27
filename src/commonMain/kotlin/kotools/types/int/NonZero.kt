@@ -182,11 +182,9 @@ public sealed interface NonZeroInt : IntHolder {
     }
 }
 
-@SinceKotoolsTypes("3.0")
 private class NonZeroIntImplementation(value: Int) : NonZeroInt,
     IntHolder by IntHolder(value, { it != 0 })
 
-@SinceKotoolsTypes("3.0")
 internal object NonZeroIntSerializer :
     IntHolderSerializer<NonZeroInt> by IntHolderSerializer(
         "NonZeroInt",
