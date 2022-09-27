@@ -64,7 +64,10 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
 public infix operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.value)
 
-/** Parent of classes responsible for holding not blank strings. */
+/**
+ * Parent of classes responsible for holding strings that have at least one
+ * character, excluding whitespaces.
+ */
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("1.2")
 public sealed interface NotBlankString : Holder<String>,
