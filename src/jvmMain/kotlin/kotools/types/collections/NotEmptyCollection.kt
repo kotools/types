@@ -10,7 +10,8 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.int.PositiveInt
 import kotools.types.int.StrictlyPositiveInt
-import kotools.types.string.NotBlankStringJvm
+import kotools.types.string.NotBlankString
+import kotools.types.string.toNotBlankString
 
 /**
  * Returns the element at the specified [index] in this collection, or returns
@@ -120,8 +121,8 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the string representation of this collection as a not blank
      * string.
      */
-    public fun toNotBlankString(): NotBlankStringJvm =
-        NotBlankStringJvm(toString())
+    public fun toNotBlankString(): NotBlankString =
+        toString().toNotBlankString()
 }
 
 internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(

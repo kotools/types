@@ -9,7 +9,7 @@ import kotools.types.int.NonZeroInt
 import kotools.types.int.NonZeroIntSerializer
 import kotools.types.int.PositiveInt
 import kotools.types.int.StrictlyPositiveInt
-import kotools.types.string.NotBlankStringJvm
+import kotools.types.string.NotBlankString
 
 class NotEmptyCollectionTest {
     // ---------- Query operations ----------
@@ -430,7 +430,7 @@ class NotEmptyCollectionTest {
             // GIVEN
             val collection: NotEmptyCollection<Int> = NotEmptyList(1)
             // WHEN
-            val string: NotBlankStringJvm = collection.toNotBlankString()
+            val string: NotBlankString = collection.toNotBlankString()
             // THEN
             string.value assertEquals collection.toString()
         }
