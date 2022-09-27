@@ -5,13 +5,17 @@ package kotools.types.core
 @Suppress("FunctionName")
 public fun <T : Any> Holder(value: T): Holder<T> = HolderImplementation(value)
 
-/** Parent of classes responsible for holding values. */
+/**
+ * Parent of classes responsible for holding values.
+ *
+ * @param T The type of values to hold.
+ */
 @SinceKotoolsTypes("3.0")
-public interface Holder<T : Any> {
+public interface Holder<out T : Any> {
     /** The value to hold. */
     public val value: T
 }
 
 @SinceKotoolsTypes("3.0")
-private data class HolderImplementation<T : Any>(override val value: T) :
+private data class HolderImplementation<out T : Any>(override val value: T) :
     Holder<T>
