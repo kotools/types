@@ -65,7 +65,8 @@ The `kotools.types.int` package with the following types:
 
 The following types are now supported on JVM, JS and Native platforms:
 
-- `NotBlankString` ([#89](https://github.com/kotools/types/issues/89)).
+- `NotBlankString` ([#89](https://github.com/kotools/types/issues/89))
+- `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
 
 #### Changed
 
