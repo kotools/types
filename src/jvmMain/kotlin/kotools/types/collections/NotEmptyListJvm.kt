@@ -12,10 +12,10 @@ import kotools.types.core.SinceKotoolsTypes
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
+public fun <E> Collection<E>.toNotEmptyListJvm(): NotEmptyListJvm<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
     val list: List<E> = toList()
-    return NotEmptyList(list)
+    return NotEmptyListJvm(list)
 }
 
 /**
@@ -24,27 +24,28 @@ public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
-    toList().toNotEmptyList()
+public fun <E> Array<E>.toNotEmptyListJvm(): NotEmptyListJvm<E> =
+    toList().toNotEmptyListJvm()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = try {
-    toNotEmptyList()
-} catch (_: IllegalArgumentException) {
-    null
-}
+public fun <E> Collection<E>.toNotEmptyListJvmOrNull(): NotEmptyListJvm<E>? =
+    try {
+        toNotEmptyListJvm()
+    } catch (_: IllegalArgumentException) {
+        null
+    }
 
 /**
  * Returns a not empty list containing all the elements of this array, or
  * returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    toList().toNotEmptyListOrNull()
+public fun <E> Array<E>.toNotEmptyListJvmOrNull(): NotEmptyListJvm<E>? =
+    toList().toNotEmptyListJvmOrNull()
 
 /**
  * Returns a not empty list containing all the elements of this collection, or
@@ -52,9 +53,9 @@ public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
  * is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <E> Collection<E>.toNotEmptyListOrElse(
-    defaultValue: (Collection<E>) -> NotEmptyList<E>
-): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+public inline infix fun <E> Collection<E>.toNotEmptyListJvmOrElse(
+    defaultValue: (Collection<E>) -> NotEmptyListJvm<E>
+): NotEmptyListJvm<E> = toNotEmptyListJvmOrNull() ?: defaultValue(this)
 
 /**
  * Returns a not empty list containing all the elements of this array, or
@@ -62,9 +63,9 @@ public inline infix fun <E> Collection<E>.toNotEmptyListOrElse(
  * empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
-    defaultValue: (Array<E>) -> NotEmptyList<E>
-): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+public inline infix fun <E> Array<E>.toNotEmptyListJvmOrElse(
+    defaultValue: (Array<E>) -> NotEmptyListJvm<E>
+): NotEmptyListJvm<E> = toNotEmptyListJvmOrNull() ?: defaultValue(this)
 
 /**
  * Represents lists containing at least one element.
@@ -74,9 +75,9 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  * @constructor Creates a not empty list starting with a [head] and containing
  * all the elements of the optional [tail].
  */
-@Serializable(NotEmptyList.Serializer::class)
+@Serializable(NotEmptyListJvm.Serializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E> internal constructor(
+public class NotEmptyListJvm<out E> internal constructor(
     override val head: E,
     private val tail: List<E>
 ) : AbstractList<E>(), NotEmptyCollection<E> {
@@ -99,8 +100,8 @@ public class NotEmptyList<out E> internal constructor(
 
     @SinceKotoolsTypes("3.0")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        SealedNotEmptyCollectionSerializer<E, NotEmptyList<E>>(
+        SealedNotEmptyCollectionSerializer<E, NotEmptyListJvm<E>>(
             elementSerializer,
-            Collection<E>::toNotEmptyList
+            Collection<E>::toNotEmptyListJvm
         )
 }

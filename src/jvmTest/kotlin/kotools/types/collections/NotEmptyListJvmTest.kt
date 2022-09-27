@@ -2,7 +2,7 @@ package kotools.types.collections
 
 import kotools.assert.*
 
-class NotEmptyListTest {
+class NotEmptyListJvmTest {
     @Nested
     inner class Constructor {
         @Test
@@ -10,7 +10,7 @@ class NotEmptyListTest {
             // GIVEN
             val head = 1
             // WHEN
-            val list: NotEmptyList<Int> = NotEmptyList(head)
+            val list: NotEmptyListJvm<Int> = NotEmptyListJvm(head)
             // THEN
             list.head assertEquals head
         }
@@ -23,7 +23,7 @@ class NotEmptyListTest {
             val tail: Array<Int> = expectedList.subList(1, expectedList.size)
                 .toTypedArray()
             // WHEN
-            val list: NotEmptyList<Int> = NotEmptyList(head, *tail)
+            val list: NotEmptyListJvm<Int> = NotEmptyListJvm(head, *tail)
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals expectedList[index]
@@ -41,7 +41,7 @@ class NotEmptyListTest {
         fun `should return the first element with an int that equals 0`() {
             // GIVEN
             val head = 1
-            val list: NotEmptyList<Int> = NotEmptyList(head, 2)
+            val list: NotEmptyListJvm<Int> = NotEmptyListJvm(head, 2)
             val index = 0
             // WHEN
             val element: Int = assertPass { list[index] }
@@ -53,7 +53,7 @@ class NotEmptyListTest {
         fun `should return the second element with an int that equals 1`() {
             // GIVEN
             val expectedElement = 2
-            val list: NotEmptyList<Int> = NotEmptyList(1, expectedElement)
+            val list: NotEmptyListJvm<Int> = NotEmptyListJvm(1, expectedElement)
             val index = 1
             // WHEN
             val element: Int = assertPass { list[index] }
@@ -64,7 +64,7 @@ class NotEmptyListTest {
         @Test
         fun `should throw an error with an int that is out of bounds`() {
             // GIVEN
-            val list: NotEmptyList<Int> = NotEmptyList(1)
+            val list: NotEmptyListJvm<Int> = NotEmptyListJvm(1)
             val index = 10
             // WHEN & THEN
             assertFailsWith<IndexOutOfBoundsException> { list[index] }
@@ -80,7 +80,8 @@ class NotEmptyListTest {
             // GIVEN
             val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
-            val list: NotEmptyList<Int> = assertPass(array::toNotEmptyList)
+            val list: NotEmptyListJvm<Int> =
+                assertPass(array::toNotEmptyListJvm)
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals array[index]
@@ -93,7 +94,7 @@ class NotEmptyListTest {
             val array: Array<Int> = emptyArray()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
-                block = array::toNotEmptyList
+                block = array::toNotEmptyListJvm
             )
         }
     }
@@ -105,7 +106,8 @@ class NotEmptyListTest {
             // GIVEN
             val collection: Collection<Int> = listOf(1, 2, 3)
             // WHEN
-            val list: NotEmptyList<Int> = assertPass(collection::toNotEmptyList)
+            val list: NotEmptyListJvm<Int> =
+                assertPass(collection::toNotEmptyListJvm)
             // THEN
             collection.forEachIndexed { index: Int, element: Int ->
                 element assertEquals list[index]
@@ -118,7 +120,7 @@ class NotEmptyListTest {
             val collection: Collection<Int> = emptyList()
             // WHEN & THEN
             assertFailsWith<IllegalArgumentException>(
-                block = collection::toNotEmptyList
+                block = collection::toNotEmptyListJvm
             )
         }
     }
@@ -130,7 +132,7 @@ class NotEmptyListTest {
             // GIVEN
             val array: Array<Int> = arrayOf(1, 2, 3)
             // WHEN
-            val list: NotEmptyList<Int>? = array.toNotEmptyListOrNull()
+            val list: NotEmptyListJvm<Int>? = array.toNotEmptyListJvmOrNull()
             // THEN
             list.assertNotNull().forEachIndexed { index: Int, element: Int ->
                 element assertEquals array[index]
@@ -142,7 +144,7 @@ class NotEmptyListTest {
             // GIVEN
             val array: Array<Int> = emptyArray()
             // WHEN
-            val list: NotEmptyList<Int>? = array.toNotEmptyListOrNull()
+            val list: NotEmptyListJvm<Int>? = array.toNotEmptyListJvmOrNull()
             // THEN
             list.assertNull()
         }
@@ -155,7 +157,8 @@ class NotEmptyListTest {
             // GIVEN
             val collection: Collection<Int> = setOf(1, 2, 3)
             // WHEN
-            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
+            val list: NotEmptyListJvm<Int>? =
+                collection.toNotEmptyListJvmOrNull()
             // THEN
             list.assertNotNull().let {
                 collection.forEachIndexed { index: Int, element: Int ->
@@ -169,7 +172,8 @@ class NotEmptyListTest {
             // GIVEN
             val collection: Collection<Int> = emptySet()
             // WHEN
-            val list: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
+            val list: NotEmptyListJvm<Int>? =
+                collection.toNotEmptyListJvmOrNull()
             // THEN
             list.assertNull()
         }
@@ -181,10 +185,10 @@ class NotEmptyListTest {
         fun `should pass with an array containing 3 elements`() {
             // GIVEN
             val array: Array<Int> = arrayOf(1, 2, 3)
-            val defaultValue = NotEmptyList(-1, -2, -3)
+            val defaultValue = NotEmptyListJvm(-1, -2, -3)
             // WHEN
-            val list: NotEmptyList<Int> =
-                array toNotEmptyListOrElse { defaultValue }
+            val list: NotEmptyListJvm<Int> =
+                array toNotEmptyListJvmOrElse { defaultValue }
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals array[index]
@@ -196,10 +200,10 @@ class NotEmptyListTest {
         fun `should return the default value with an empty array`() {
             // GIVEN
             val array: Array<Int> = emptyArray()
-            val defaultValue = NotEmptyList(-1, -2, -3)
+            val defaultValue = NotEmptyListJvm(-1, -2, -3)
             // WHEN
-            val list: NotEmptyList<Int> =
-                array toNotEmptyListOrElse { defaultValue }
+            val list: NotEmptyListJvm<Int> =
+                array toNotEmptyListJvmOrElse { defaultValue }
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals defaultValue[index]
@@ -213,10 +217,10 @@ class NotEmptyListTest {
         fun `should pass with a collection containing 3 elements`() {
             // GIVEN
             val collection: Collection<Int> = listOf(1, 2, 3)
-            val defaultValue = NotEmptyList(-1, -2, -3)
+            val defaultValue = NotEmptyListJvm(-1, -2, -3)
             // WHEN
-            val list: NotEmptyList<Int> =
-                collection toNotEmptyListOrElse { defaultValue }
+            val list: NotEmptyListJvm<Int> =
+                collection toNotEmptyListJvmOrElse { defaultValue }
             // THEN
             collection.forEachIndexed { index: Int, element: Int ->
                 element assertEquals list[index]
@@ -228,10 +232,10 @@ class NotEmptyListTest {
         fun `should return the default value with an empty collection`() {
             // GIVEN
             val collection: Collection<Int> = emptyList()
-            val defaultValue = NotEmptyList(-1, -2, -3)
+            val defaultValue = NotEmptyListJvm(-1, -2, -3)
             // WHEN
-            val list: NotEmptyList<Int> =
-                collection toNotEmptyListOrElse { defaultValue }
+            val list: NotEmptyListJvm<Int> =
+                collection toNotEmptyListJvmOrElse { defaultValue }
             // THEN
             list.forEachIndexed { index: Int, element: Int ->
                 element assertEquals defaultValue[index]

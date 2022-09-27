@@ -153,5 +153,5 @@ internal class NotEmptyCollectionSerializer<E>(
     elementSerializer: KSerializer<E>
 ) : SealedNotEmptyCollectionSerializer<E, NotEmptyCollection<E>>(
     elementSerializer,
-    Collection<E>::toNotEmptyList
+    Collection<E>::toNotEmptyListJvm
 )
