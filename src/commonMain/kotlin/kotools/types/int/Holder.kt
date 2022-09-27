@@ -9,6 +9,8 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
+import kotools.types.string.NotBlankString
+import kotools.types.string.toNotBlankString
 
 internal fun IntHolder(
     value: Int,
@@ -101,6 +103,14 @@ public sealed interface IntHolder : Holder<Int>, Comparable<IntHolder> {
      * this [value] is greater than the [other] value.
      */
     override infix fun compareTo(other: IntHolder): Int = compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /**
+     * Returns the string representation of this [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString =
+        value.toString().toNotBlankString()
 }
 
 private class IntHolderImplementation(
