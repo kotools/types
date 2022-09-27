@@ -81,7 +81,7 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableSetOrElse(
 public class NotEmptyMutableSet<E> private constructor(
     override var head: E,
     private val tail: MutableSet<E>
-) : AbstractMutableSet<E>(), NotEmptyCollection<E> {
+) : AbstractMutableSet<E>(), NotEmptyCollectionJvm<E> {
     public constructor(head: E, vararg tail: E) : this(
         head,
         tail.filterNot { it == head }.toMutableSet()
@@ -96,7 +96,7 @@ public class NotEmptyMutableSet<E> private constructor(
 
     override val size: Int get() = tail.size + super.size
 
-    override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
+    override fun isEmpty(): Boolean = super<NotEmptyCollectionJvm>.isEmpty()
 
     override fun iterator(): MutableIterator<E> = mutableSetOf(head)
         .apply { this += tail }

@@ -80,7 +80,7 @@ public inline infix fun <E> Array<E>.toNotEmptyListJvmOrElse(
 public class NotEmptyListJvm<out E> internal constructor(
     override val head: E,
     private val tail: List<E>
-) : AbstractList<E>(), NotEmptyCollection<E> {
+) : AbstractList<E>(), NotEmptyCollectionJvm<E> {
     public constructor(head: E, vararg tail: E) : this(head, tail.toList())
 
     internal constructor(list: List<E>) : this(
@@ -92,7 +92,7 @@ public class NotEmptyListJvm<out E> internal constructor(
 
     override val size: Int get() = tail.size + super.size
 
-    override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
+    override fun isEmpty(): Boolean = super<NotEmptyCollectionJvm>.isEmpty()
 
     // ---------- Positional access operations ----------
 
@@ -100,7 +100,7 @@ public class NotEmptyListJvm<out E> internal constructor(
 
     @SinceKotoolsTypes("3.0")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        SealedNotEmptyCollectionSerializer<E, NotEmptyListJvm<E>>(
+        SealedNotEmptyCollectionJvmSerializer<E, NotEmptyListJvm<E>>(
             elementSerializer,
             Collection<E>::toNotEmptyListJvm
         )

@@ -11,7 +11,7 @@ import kotools.types.int.PositiveInt
 import kotools.types.int.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
 
-class NotEmptyCollectionTest {
+class NotEmptyCollectionJvmTest {
     // ---------- Query operations ----------
 
     @Nested
@@ -21,7 +21,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 1 with a singleton list`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             // WHEN & THEN
             collection.size assertEquals 1
         }
@@ -29,7 +29,8 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 3 with a not empty list containing 3 elements`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, 2, 3)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, 2, 3)
             // WHEN & THEN
             collection.size assertEquals 3
         }
@@ -39,7 +40,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 1 with a singleton set`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptySet(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptySet(1)
             // WHEN & THEN
             collection.size assertEquals 1
         }
@@ -47,7 +48,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 3 with a not empty set containing 3 elements`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptySet(1, 2, 3)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptySet(1, 2, 3)
             // WHEN & THEN
             collection.size assertEquals 3
         }
@@ -60,7 +61,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 1 as a strictly positive int with a singleton list`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             // WHEN
             val size: StrictlyPositiveInt = collection.typedSize
             // THEN
@@ -70,7 +71,8 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 3 as a strictly positive int with a list of 3 elements`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, 2, 3)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, 2, 3)
             // WHEN
             val size: StrictlyPositiveInt = collection.typedSize
             // THEN
@@ -82,7 +84,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 1 as a strictly positive int with a singleton set`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptySet(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptySet(1)
             // WHEN
             val size: StrictlyPositiveInt = collection.typedSize
             // THEN
@@ -92,7 +94,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return 3 as a strictly positive int with a set of 3 elements`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptySet(1, 2, 3)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptySet(1, 2, 3)
             // WHEN
             val size: StrictlyPositiveInt = collection.typedSize
             // THEN
@@ -107,7 +109,8 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return false with a not empty list`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, 2, 3)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, 2, 3)
             // WHEN & THEN
             assertFalse(block = collection::isEmpty)
         }
@@ -117,7 +120,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return false with a not empty set`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptySet(1, 2, 3)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptySet(1, 2, 3)
             // WHEN & THEN
             assertFalse(block = collection::isEmpty)
         }
@@ -132,7 +135,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return the first element with a positive int that equals 0`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, 2)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1, 2)
             val index = PositiveInt(0)
             // WHEN
             val element: Int = assertPass { collection[index] }
@@ -144,7 +147,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with a positive int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = PositiveInt(1)
             // WHEN
             val element: Int = assertPass { collection[index] }
@@ -167,7 +171,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with a strictly positive int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = StrictlyPositiveInt(1)
             // WHEN
             val element: Int = assertPass { collection[index] }
@@ -193,7 +198,7 @@ class NotEmptyCollectionTest {
         fun `should return the first element with an int that equals 0`() {
             // GIVEN
             val head = 1
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(head)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(head)
             val index = 0
             // WHEN
             val element: Int? = collection getOrNull index
@@ -208,7 +213,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with an int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = 1
             // WHEN
             val element: Int? = collection getOrNull index
@@ -219,7 +225,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return null with an int that is out of bounds`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             val index = 10
             // WHEN
             val element: Int? = collection getOrNull index
@@ -233,7 +239,8 @@ class NotEmptyCollectionTest {
         fun `should return the first element with a positive int that equals 0`() {
             // GIVEN
             val head = 1
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(head, 2)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(head, 2)
             val index = PositiveInt(0)
             // WHEN
             val element: Int? = collection getOrNull index
@@ -248,7 +255,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with a positive int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = PositiveInt(1)
             // WHEN
             val element: Int? = collection getOrNull index
@@ -259,7 +267,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return null with a positive int that is out of bounds`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             val index = PositiveInt(10)
             // WHEN
             val element: Int? = collection getOrNull index
@@ -273,7 +281,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with a strictly positive int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = StrictlyPositiveInt(1)
             // WHEN
             val element: Int? = collection getOrNull index
@@ -284,7 +293,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return null with a strictly positive int that is out of bounds`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             val index = StrictlyPositiveInt(10)
             // WHEN
             val element: Int? = collection getOrNull index
@@ -301,7 +310,7 @@ class NotEmptyCollectionTest {
         fun `should return the first element with an int that equals 0`() {
             // GIVEN
             val head = 1
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(head)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(head)
             val index = 0
             val defaultValue: Int = -head
             // WHEN
@@ -318,7 +327,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with an int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = 1
             val defaultValue: Int = -tail
             // WHEN
@@ -334,7 +344,7 @@ class NotEmptyCollectionTest {
         fun `should return the default value with an int that is out of bounds`() {
             // GIVEN
             val head = 1
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(head)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(head)
             val index = 10
             val defaultValue: Int = -head
             // WHEN
@@ -349,7 +359,8 @@ class NotEmptyCollectionTest {
         fun `should return the first element with a positive int that equals 0`() {
             // GIVEN
             val head = 1
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(head, 2)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(head, 2)
             val index = PositiveInt(0)
             val defaultValue = -1
             // WHEN
@@ -366,7 +377,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with a positive int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = PositiveInt(1)
             val defaultValue = -1
             // WHEN
@@ -381,7 +393,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return the default value with a positive int that is out of bounds`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             val index = PositiveInt(10)
             val defaultValue = -1
             // WHEN
@@ -396,7 +408,8 @@ class NotEmptyCollectionTest {
         fun `should return the second element with a strictly positive int that equals 1`() {
             // GIVEN
             val tail = 2
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1, tail)
+            val collection: NotEmptyCollectionJvm<Int> =
+                NotEmptyListJvm(1, tail)
             val index = StrictlyPositiveInt(1)
             val defaultValue = -1
             // WHEN
@@ -411,7 +424,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return the default value with a strictly positive int that is out of bounds`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             val index = StrictlyPositiveInt(10)
             val defaultValue = -1
             // WHEN
@@ -428,7 +441,7 @@ class NotEmptyCollectionTest {
         @Test
         fun `should return its string representation as a not blank string`() {
             // GIVEN
-            val collection: NotEmptyCollection<Int> = NotEmptyListJvm(1)
+            val collection: NotEmptyCollectionJvm<Int> = NotEmptyListJvm(1)
             // WHEN
             val string: NotBlankString = collection.toNotBlankString()
             // THEN
@@ -437,17 +450,17 @@ class NotEmptyCollectionTest {
     }
 }
 
-class SealedNotEmptyCollectionSerializerTest {
+class SealedNotEmptyCollectionJvmSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun `should have the correct descriptor`() {
         // GIVEN
-        val serializer: NotEmptyCollectionSerializer<NonZeroInt> =
-            NotEmptyCollectionSerializer(NonZeroIntSerializer)
+        val serializer: NotEmptyCollectionJvmSerializer<NonZeroInt> =
+            NotEmptyCollectionJvmSerializer(NonZeroIntSerializer)
         // WHEN
         val result: String = serializer.descriptor.serialName
         // THEN
-        result assertEquals NotEmptyCollection::class.qualifiedName
+        result assertEquals NotEmptyCollectionJvm::class.qualifiedName
     }
 
     @Test

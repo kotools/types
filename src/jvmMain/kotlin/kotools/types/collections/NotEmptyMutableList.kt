@@ -84,7 +84,7 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableListOrElse(
 public class NotEmptyMutableList<E> private constructor(
     override var head: E,
     private val tail: MutableList<E>
-) : AbstractMutableList<E>(), NotEmptyCollection<E> {
+) : AbstractMutableList<E>(), NotEmptyCollectionJvm<E> {
     public constructor(head: E, vararg tail: E) :
             this(head, tail.toMutableList())
 
@@ -97,7 +97,7 @@ public class NotEmptyMutableList<E> private constructor(
 
     override val size: Int get() = tail.size + super.size
 
-    override fun isEmpty(): Boolean = super<NotEmptyCollection>.isEmpty()
+    override fun isEmpty(): Boolean = super<NotEmptyCollectionJvm>.isEmpty()
 
     // ---------- Positional access operations ----------
 
@@ -283,7 +283,7 @@ public class NotEmptyMutableList<E> private constructor(
 
     @SinceKotoolsTypes("3.0")
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        SealedNotEmptyCollectionSerializer<E, NotEmptyMutableList<E>>(
+        SealedNotEmptyCollectionJvmSerializer<E, NotEmptyMutableList<E>>(
             elementSerializer,
             Collection<E>::toNotEmptyMutableList
         )

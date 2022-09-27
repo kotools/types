@@ -19,7 +19,7 @@ import kotools.types.string.toNotBlankString
  * bounds.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <E> NotEmptyCollection<E>.getOrElse(
+public inline fun <E> NotEmptyCollectionJvm<E>.getOrElse(
     index: Int,
     defaultValue: (Int) -> @UnsafeVariance E
 ): E = getOrNull(index) ?: defaultValue(index)
@@ -30,7 +30,7 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  * bounds.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <E> NotEmptyCollection<E>.getOrElse(
+public inline fun <E> NotEmptyCollectionJvm<E>.getOrElse(
     index: PositiveInt,
     defaultValue: (PositiveInt) -> @UnsafeVariance E
 ): E = getOrNull(index) ?: defaultValue(index)
@@ -41,7 +41,7 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  * bounds.
  */
 @SinceKotoolsTypes("1.3")
-public inline fun <E> NotEmptyCollection<E>.getOrElse(
+public inline fun <E> NotEmptyCollectionJvm<E>.getOrElse(
     index: StrictlyPositiveInt,
     defaultValue: (StrictlyPositiveInt) -> @UnsafeVariance E
 ): E = getOrNull(index) ?: defaultValue(index)
@@ -51,9 +51,9 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  *
  * @param E The type of elements contained in this collection.
  */
-@Serializable(NotEmptyCollectionSerializer::class)
+@Serializable(NotEmptyCollectionJvmSerializer::class)
 @SinceKotoolsTypes("1.3")
-public sealed interface NotEmptyCollection<out E> : Collection<E> {
+public sealed interface NotEmptyCollectionJvm<out E> : Collection<E> {
     /** First element of this collection. */
     public val head: E
 
@@ -125,7 +125,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
         toString().toNotBlankString()
 }
 
-internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollection<E>>(
+internal sealed class SealedNotEmptyCollectionJvmSerializer<E, C : NotEmptyCollectionJvm<E>>(
     elementSerializer: KSerializer<E>,
     private val builder: (Collection<E>) -> C
 ) : KSerializer<C> {
@@ -134,7 +134,7 @@ internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollecti
 
     @ExperimentalSerializationApi
     override val descriptor: SerialDescriptor = SerialDescriptor(
-        NotEmptyCollection::class.qualifiedName!!,
+        NotEmptyCollectionJvm::class.qualifiedName!!,
         delegate.descriptor
     )
 
@@ -149,9 +149,9 @@ internal sealed class SealedNotEmptyCollectionSerializer<E, C : NotEmptyCollecti
     }
 }
 
-internal class NotEmptyCollectionSerializer<E>(
+internal class NotEmptyCollectionJvmSerializer<E>(
     elementSerializer: KSerializer<E>
-) : SealedNotEmptyCollectionSerializer<E, NotEmptyCollection<E>>(
+) : SealedNotEmptyCollectionJvmSerializer<E, NotEmptyCollectionJvm<E>>(
     elementSerializer,
     Collection<E>::toNotEmptyListJvm
 )
