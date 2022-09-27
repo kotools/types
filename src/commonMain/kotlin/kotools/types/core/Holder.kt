@@ -1,9 +1,8 @@
 package kotools.types.core
 
-/** Returns the [value] as an [Holder] of type [T]. */
+/** Returns the [value] as an [holderOf] of type [T]. */
 @SinceKotoolsTypes("3.0")
-@Suppress("FunctionName")
-public fun <T : Any> Holder(value: T): Holder<T> = HolderImplementation(value)
+public fun <T : Any> holderOf(value: T): Holder<T> = HolderImplementation(value)
 
 /**
  * Parent of classes responsible for holding values.

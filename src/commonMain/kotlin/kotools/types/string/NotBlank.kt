@@ -10,8 +10,8 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
+import kotools.types.core.holderOf
 import kotools.types.int.*
-import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
@@ -225,9 +225,8 @@ public sealed interface NotBlankString : Holder<String>,
         value.toStrictlyNegativeIntOrNull()
 }
 
-@JvmInline
-private value class NotBlankStringImplementation(override val value: String) :
-    NotBlankString {
+private class NotBlankStringImplementation(value: String) : NotBlankString,
+    Holder<String> by holderOf(value) {
     init {
         val validator: Validator<String> = Validator(String::isNotBlank)
         require(validator isValid value)
