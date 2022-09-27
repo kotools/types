@@ -76,8 +76,7 @@ public constructor(public val value: String) : Comparable<String> {
      * an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: PositiveInt): Char =
-        value[index.value]
+    public infix operator fun get(index: PositiveInt): Char = value[index.value]
 
     /**
      * Returns the character of this [value] at the specified [index], or

@@ -3,6 +3,8 @@ package kotools.types.string
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
+import kotools.types.int.PositiveInt
+import kotools.types.int.StrictlyPositiveInt
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -60,6 +62,43 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
 @SinceKotoolsTypes("1.2")
 public sealed interface NotBlankString : Holder<String>,
     Comparable<NotBlankString> {
+    // ---------- Query operations ----------
+
+    /** Returns the length of this [value]. */
+    public val length: StrictlyPositiveInt
+        get() = StrictlyPositiveInt(value.length)
+
+    // ---------- Positional access operations ----------
+
+    /** Returns the first character of this [value]. */
+    public val first: Char get() = value[0]
+
+    /**
+     * Returns the character of this [value] at the specified [index], or throws
+     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
+     */
+    @Throws(IndexOutOfBoundsException::class)
+    public infix operator fun get(index: PositiveInt): Char = value[index.value]
+
+    /**
+     * Returns the character of this [value] at the specified [index], or
+     * returns `null` if the [index] is out of bounds.
+     */
+    public infix fun getOrNull(index: PositiveInt): Char? = try {
+        get(index)
+    } catch (_: IndexOutOfBoundsException) {
+        null
+    }
+
+    // ---------- Binary operations ----------
+
+    /**
+     * Returns the concatenation of this [value] with the string representation
+     * of the [other] object.
+     */
+    public infix operator fun plus(other: Any?): NotBlankString =
+        NotBlankString(value + other)
+
     // ---------- Comparisons ----------
 
     /**
