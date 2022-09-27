@@ -237,10 +237,8 @@ private value class NotBlankStringImplementation(override val value: String) :
 }
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        NotBlankString::class.qualifiedName!!,
-        PrimitiveKind.STRING
-    )
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("NotBlankString", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
         encoder.encodeString(value.value)
