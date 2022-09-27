@@ -103,10 +103,7 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("1.3")
-public sealed interface NotEmptyList<out E> : List<E> {
-    /** First element of this collection. */
-    public val head: E
-}
+public sealed interface NotEmptyList<out E> : List<E>, NotEmptyCollection<E>
 
 private class NotEmptyListImplementation<out E>(
     override val head: E,
