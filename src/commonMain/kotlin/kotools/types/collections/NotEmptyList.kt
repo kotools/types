@@ -1,5 +1,11 @@
 package kotools.types.collections
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 
 /**
@@ -95,6 +101,7 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  *
  * @param E The type of elements contained in this list.
  */
+@Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("1.3")
 public sealed interface NotEmptyList<out E> : List<E> {
     /** First element of this collection. */
@@ -106,3 +113,18 @@ private class NotEmptyListImplementation<out E>(
     tail: List<E>
 ) : NotEmptyList<E>,
     List<E> by listOf(head) + tail
+
+internal sealed class NotEmptyListSerializer<E>(
+    elementSerializer: KSerializer<E>
+) : KSerializer<NotEmptyList<E>> {
+    private val delegate: KSerializer<List<E>> =
+        ListSerializer(elementSerializer)
+
+    override val descriptor: SerialDescriptor = delegate.descriptor
+
+    override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
+        delegate.serialize(encoder, value)
+
+    override fun deserialize(decoder: Decoder): NotEmptyList<E> =
+        delegate.deserialize(decoder).toNotEmptyList()
+}
