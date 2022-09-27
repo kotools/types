@@ -3,8 +3,7 @@ package kotools.types.string
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
-import kotools.types.int.PositiveInt
-import kotools.types.int.StrictlyPositiveInt
+import kotools.types.int.*
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -118,6 +117,101 @@ public sealed interface NotBlankString : Holder<String>,
      */
     override infix fun compareTo(other: NotBlankString): Int =
         value.compareTo(other.value)
+
+    // ---------- Conversions ----------
+
+    /**
+     * Returns this [value] as a [NonZeroInt].
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents zero.
+     */
+    @SinceKotoolsTypes("3.0")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+
+    /**
+     * Returns this [value] as a [NonZeroInt], or returns `null` if this [value]
+     * is not a valid representation of a number or if it represents zero.
+     */
+    @SinceKotoolsTypes("3.0")
+    public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
+
+    /**
+     * Returns this [value] as a [PositiveInt].
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents a strictly negative number.
+     */
+    @SinceKotoolsTypes("3.0")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
+
+    /**
+     * Returns this [value] as a [PositiveInt], or returns `null` if this
+     * [value] is not a valid representation of a number or if it represents a
+     * strictly negative number.
+     */
+    @SinceKotoolsTypes("3.0")
+    public fun toPositiveIntOrNull(): PositiveInt? = value.toPositiveIntOrNull()
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt].
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents a negative number.
+     */
+    @SinceKotoolsTypes("3.0")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        value.toStrictlyPositiveInt()
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or returns `null` if
+     * this [value] is not a valid representation of a number or if it
+     * represents a negative number.
+     */
+    @SinceKotoolsTypes("3.0")
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        value.toStrictlyPositiveIntOrNull()
+
+    /**
+     * Returns this [value] as a [NegativeInt].
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents a strictly positive number.
+     */
+    @SinceKotoolsTypes("3.0")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
+
+    /**
+     * Returns this [value] as a [NegativeInt], or returns `null` if this
+     * [value] is not a valid representation of a number or if it represents a
+     * strictly positive number.
+     */
+    @SinceKotoolsTypes("3.0")
+    public fun toNegativeIntOrNull(): NegativeInt? = value.toNegativeIntOrNull()
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt].
+     * Throws a [NumberFormatException] if this [value] is not a valid
+     * representation of a number, or throws an [IllegalArgumentException] if it
+     * represents a positive number.
+     */
+    @SinceKotoolsTypes("3.0")
+    @Throws(IllegalArgumentException::class, NumberFormatException::class)
+    public fun toStrictlyNegativeInt(): StrictlyNegativeInt =
+        value.toStrictlyNegativeInt()
+
+    /**
+     * Returns this [value] as a [StrictlyNegativeInt], or returns `null` if
+     * this [value] is not a valid representation of a number or if it
+     * represents a positive number.
+     */
+    @SinceKotoolsTypes("3.0")
+    public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+        value.toStrictlyNegativeIntOrNull()
 }
 
 @JvmInline
@@ -128,4 +222,6 @@ private value class NotBlankStringImplementation(override val value: String) :
         val validator: Validator<String> = Validator(String::isNotBlank)
         require(validator isValid value)
     }
+
+    override fun toString(): String = value
 }
