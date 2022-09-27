@@ -1,5 +1,12 @@
 package kotools.types.string
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
@@ -58,6 +65,7 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.value)
 
 /** Parent of classes responsible for holding not blank strings. */
+@Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("1.2")
 public sealed interface NotBlankString : Holder<String>,
     Comparable<NotBlankString> {
@@ -215,7 +223,6 @@ public sealed interface NotBlankString : Holder<String>,
 }
 
 @JvmInline
-@SinceKotoolsTypes("3.0")
 private value class NotBlankStringImplementation(override val value: String) :
     NotBlankString {
     init {
@@ -224,4 +231,17 @@ private value class NotBlankStringImplementation(override val value: String) :
     }
 
     override fun toString(): String = value
+}
+
+internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        NotBlankString::class.qualifiedName!!,
+        PrimitiveKind.STRING
+    )
+
+    override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
+        encoder.encodeString(value.value)
+
+    override fun deserialize(decoder: Decoder): NotBlankString =
+        decoder.decodeString().toNotBlankString()
 }
