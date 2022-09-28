@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All tests and documentation generation" type="CompoundRunConfigurationType">
+    <toRun name="All tests" type="GradleRunConfiguration" />
+    <toRun name="Documentation generation" type="GradleRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>

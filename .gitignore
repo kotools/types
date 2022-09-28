@@ -31,7 +31,6 @@ hs_err_pid*
 
 # Directories
 .idea*/
-!.idea*/runConfigurations/
 cmake-build-*/
 out/
 
