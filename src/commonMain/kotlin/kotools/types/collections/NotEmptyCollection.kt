@@ -39,7 +39,10 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
     defaultValue: (StrictlyPositiveInt) -> E
 ): E = getOrNull(index) ?: defaultValue(index)
 
-// TODO: Make the NotEmptyCollection sealed when migrating collections for all platforms is done.
+/*
+TODO: Make the NotEmptyCollection sealed when migrating collections for all
+  platforms is done. This is a breaking change!
+ */
 /**
  * Parent of classes representing collections that contain at least one element.
  *
