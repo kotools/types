@@ -26,8 +26,8 @@ All notable changes to this project will be documented in this file.
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
   `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`,
-  `NotEmptyMutableList`, `NotEmptySet`, `NotEmptyMutableSet` and
-  `NotEmptyCollection` ([#65](https://github.com/kotools/types/issues/65)).
+  `NotEmptyMutableList`, `NotEmptySet` and
+  `NotEmptyMutableSet` ([#65](https://github.com/kotools/types/issues/65)).
 - `KotoolsInt` type for unifying integer's types
   ([#60](https://github.com/kotools/types/issues/60)).
 - Random number retrieving from the ranges of `NonZeroInt`, `PositiveInt`,
@@ -66,6 +66,7 @@ The `kotools.types.int` package with the following types:
 The following types are now supported on JVM, JS and Native platforms:
 
 - `NotBlankString` ([#89](https://github.com/kotools/types/issues/89))
+- `NotEmptyCollection` ([#91](https://github.com/kotools/types/issues/91))
 - `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
 
 #### Changed
