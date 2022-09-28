@@ -83,7 +83,7 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
 public class NotEmptySet<out E> internal constructor(
     override val head: E,
     private val tail: Set<E>
-) : AbstractSet<E>(), NotEmptyCollectionJvm<E> {
+) : AbstractSet<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) : this(
         head,
         tail.filterNot { it == head }.toSet()
@@ -97,9 +97,7 @@ public class NotEmptySet<out E> internal constructor(
 
     // ---------- Query operations ----------
 
-    override val size: Int get() = tail.size + super.size
-
-    override fun isEmpty(): Boolean = super<NotEmptyCollectionJvm>.isEmpty()
+    override val size: Int get() = 1 + tail.size
 
     override fun iterator(): Iterator<E> = mutableSetOf(head).run {
         this += tail

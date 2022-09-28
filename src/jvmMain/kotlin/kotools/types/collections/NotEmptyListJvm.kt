@@ -1,7 +1,5 @@
 package kotools.types.collections
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
 import kotools.types.core.SinceKotoolsTypes
 
 // ---------- Conversions ----------
@@ -75,12 +73,11 @@ public inline infix fun <E> Array<E>.toNotEmptyListJvmOrElse(
  * @constructor Creates a not empty list starting with a [head] and containing
  * all the elements of the optional [tail].
  */
-@Serializable(NotEmptyListJvm.Serializer::class)
 @SinceKotoolsTypes("1.3")
 public class NotEmptyListJvm<out E> internal constructor(
     override val head: E,
     private val tail: List<E>
-) : AbstractList<E>(), NotEmptyCollectionJvm<E> {
+) : AbstractList<E>(), NotEmptyCollection<E> {
     public constructor(head: E, vararg tail: E) : this(head, tail.toList())
 
     internal constructor(list: List<E>) : this(
@@ -90,18 +87,9 @@ public class NotEmptyListJvm<out E> internal constructor(
 
     // ---------- Query operations ----------
 
-    override val size: Int get() = tail.size + super.size
-
-    override fun isEmpty(): Boolean = super<NotEmptyCollectionJvm>.isEmpty()
+    override val size: Int get() = 1 + tail.size
 
     // ---------- Positional access operations ----------
 
     override fun get(index: Int): E = if (index == 0) head else tail[index - 1]
-
-    @SinceKotoolsTypes("3.0")
-    internal class Serializer<E>(elementSerializer: KSerializer<E>) :
-        SealedNotEmptyCollectionJvmSerializer<E, NotEmptyListJvm<E>>(
-            elementSerializer,
-            Collection<E>::toNotEmptyListJvm
-        )
 }
