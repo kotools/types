@@ -14,10 +14,10 @@ import kotools.types.int.StrictlyPositiveInt
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Collection<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> {
+public fun <E> Collection<E>.toNotEmptyMutableListJvm(): NotEmptyMutableListJvm<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
     val mutableList: MutableList<E> = toMutableList()
-    return NotEmptyMutableList(mutableList)
+    return NotEmptyMutableListJvm(mutableList)
 }
 
 /**
@@ -26,28 +26,28 @@ public fun <E> Collection<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> {
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Array<E>.toNotEmptyMutableList(): NotEmptyMutableList<E> =
-    toList().toNotEmptyMutableList()
+public fun <E> Array<E>.toNotEmptyMutableListJvm(): NotEmptyMutableListJvm<E> =
+    toList().toNotEmptyMutableListJvm()
 
 /**
  * Returns a not empty mutable list containing all the elements of this
  * collection, or returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Collection<E>.toNotEmptyMutableListOrNull():
-        NotEmptyMutableList<E>? = try {
-    toNotEmptyMutableList()
-} catch (_: IllegalArgumentException) {
-    null
-}
+public fun <E> Collection<E>.toNotEmptyMutableListJvmOrNull(): NotEmptyMutableListJvm<E>? =
+    try {
+        toNotEmptyMutableListJvm()
+    } catch (_: IllegalArgumentException) {
+        null
+    }
 
 /**
  * Returns a not empty mutable list containing all the elements of this array,
  * or returns `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Array<E>.toNotEmptyMutableListOrNull(): NotEmptyMutableList<E>? =
-    toList().toNotEmptyMutableListOrNull()
+public fun <E> Array<E>.toNotEmptyMutableListJvmOrNull(): NotEmptyMutableListJvm<E>? =
+    toList().toNotEmptyMutableListJvmOrNull()
 
 /**
  * Returns a not empty mutable list containing all the elements of this
@@ -55,9 +55,10 @@ public fun <E> Array<E>.toNotEmptyMutableListOrNull(): NotEmptyMutableList<E>? =
  * this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <E> Collection<E>.toNotEmptyMutableListOrElse(
-    defaultValue: (Collection<E>) -> NotEmptyMutableList<E>
-): NotEmptyMutableList<E> = toNotEmptyMutableListOrNull() ?: defaultValue(this)
+public inline infix fun <E> Collection<E>.toNotEmptyMutableListJvmOrElse(
+    defaultValue: (Collection<E>) -> NotEmptyMutableListJvm<E>
+): NotEmptyMutableListJvm<E> =
+    toNotEmptyMutableListJvmOrNull() ?: defaultValue(this)
 
 /**
  * Returns a not empty mutable list containing all the elements of this array,
@@ -65,9 +66,10 @@ public inline infix fun <E> Collection<E>.toNotEmptyMutableListOrElse(
  * empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <E> Array<E>.toNotEmptyMutableListOrElse(
-    defaultValue: (Array<E>) -> NotEmptyMutableList<E>
-): NotEmptyMutableList<E> = toNotEmptyMutableListOrNull() ?: defaultValue(this)
+public inline infix fun <E> Array<E>.toNotEmptyMutableListJvmOrElse(
+    defaultValue: (Array<E>) -> NotEmptyMutableListJvm<E>
+): NotEmptyMutableListJvm<E> =
+    toNotEmptyMutableListJvmOrNull() ?: defaultValue(this)
 
 /**
  * Represents mutable lists containing at least one element.
@@ -78,7 +80,7 @@ public inline infix fun <E> Array<E>.toNotEmptyMutableListOrElse(
  * containing all the elements of the optional [tail].
  */
 @SinceKotoolsTypes("1.3")
-public class NotEmptyMutableList<E> private constructor(
+public class NotEmptyMutableListJvm<E> private constructor(
     override var head: E,
     private val tail: MutableList<E>
 ) : AbstractMutableList<E>(), NotEmptyCollection<E> {
