@@ -6,10 +6,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.core.Holder
-import kotools.types.core.holderOf
-import kotools.types.core.SinceKotoolsTypes
-import kotools.types.core.Validator
+import kotools.types.core.*
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 
@@ -114,19 +111,17 @@ public sealed interface IntHolder : Holder<Int>, Comparable<IntHolder> {
         value.toString().toNotBlankString()
 }
 
+private abstract class AbstractIntHolder(value: Int) :
+    AbstractHolder<Int>(value),
+    IntHolder
+
 private class IntHolderImplementation(
     override val value: Int,
     validator: Validator<Int>? = null
-) : IntHolder,
-    Holder<Int> by holderOf(value) {
+) : AbstractIntHolder(value) {
     init {
         validator?.let { require(it isValid value) }
     }
-
-    override fun equals(other: Any?): Boolean =
-        other is IntHolder && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
 }
 
 @Suppress("FunctionName")

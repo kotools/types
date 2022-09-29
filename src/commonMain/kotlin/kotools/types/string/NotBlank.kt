@@ -7,10 +7,10 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.core.AbstractHolder
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
-import kotools.types.core.holderOf
 import kotools.types.int.*
 
 // ---------- Builders ----------
@@ -225,15 +225,17 @@ public sealed interface NotBlankString : Holder<String>,
         value.toStrictlyNegativeIntOrNull()
 }
 
-private class NotBlankStringImplementation(value: String) : NotBlankString,
-    Holder<String> by holderOf(value) {
+private abstract class AbstractNotBlankString(value: String) :
+    AbstractHolder<String>(value),
+    NotBlankString {
     init {
         val validator: Validator<String> = Validator(String::isNotBlank)
         require(validator isValid value)
     }
-
-    override fun toString(): String = value
 }
+
+private class NotBlankStringImplementation(value: String) :
+    AbstractNotBlankString(value)
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor =
