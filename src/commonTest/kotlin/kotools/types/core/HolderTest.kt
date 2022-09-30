@@ -1,14 +1,11 @@
 package kotools.types.core
 
 import kotools.assert.assertEquals
-import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class HolderTest {
-    private val randomInt: Int get() = Random.nextInt()
-
+class HolderTest : Randomizer {
     // ---------- Comparisons ----------
 
     @Test
@@ -34,7 +31,7 @@ class HolderTest {
     fun equals_should_return_false_with_another_Holder_holding_another_value_with_another_type() {
         // GIVEN
         val x: Holder<Int> = holderOf(randomInt)
-        val y: Holder<String> = holderOf("hello world")
+        val y: Holder<String> = holderOf(randomString)
         // WHEN & THEN
         assertFalse { x == y }
     }
