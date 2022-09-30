@@ -225,7 +225,7 @@ public sealed interface NotBlankString : Holder<String>,
         value.toStrictlyNegativeIntOrNull()
 }
 
-private abstract class AbstractNotBlankString(value: String) :
+private class NotBlankStringImplementation(value: String) :
     AbstractHolder<String>(value),
     NotBlankString {
     init {
@@ -233,9 +233,6 @@ private abstract class AbstractNotBlankString(value: String) :
         require(validator isValid value)
     }
 }
-
-private class NotBlankStringImplementation(value: String) :
-    AbstractNotBlankString(value)
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor =
