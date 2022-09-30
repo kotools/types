@@ -10,21 +10,7 @@ import kotools.types.core.*
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 
-// ---------- Builders ----------
-
-internal fun IntHolder(
-    value: Int,
-    validator: Validator<Int>? = null
-): IntHolder = IntHolderImplementation(value, validator)
-
-@Suppress("FunctionName")
-internal fun <T : IntHolder> IntHolderSerializer(
-    serialName: String = "IntHolder",
-    builder: (Int) -> T
-): IntHolderSerializer<T> =
-    IntHolderSerializerImplementation(serialName, builder)
-
-// ---------- Binary operations ----------
+// ---------- IntHolder ----------
 
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("3.0")
@@ -45,8 +31,6 @@ public infix operator fun Int.times(other: IntHolder): Int = times(other.value)
 @SinceKotoolsTypes("3.0")
 public infix operator fun Int.div(other: IntHolder): Int = div(other.value)
 
-// ---------- Comparisons ----------
-
 /**
  * Compares this value with the [other] value for order.
  * Returns zero if this value equals the [other] value, a negative number if
@@ -56,6 +40,11 @@ public infix operator fun Int.div(other: IntHolder): Int = div(other.value)
 @SinceKotoolsTypes("3.0")
 public infix operator fun Int.compareTo(other: IntHolder): Int =
     compareTo(other.value)
+
+internal fun IntHolder(
+    value: Int,
+    validator: Validator<Int>? = null
+): IntHolder = IntHolderImplementation(value, validator)
 
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
@@ -130,6 +119,15 @@ private class IntHolderImplementation(
         validator?.let { require(it isValid value) }
     }
 }
+
+// ---------- IntHolderSerializer ----------
+
+@Suppress("FunctionName")
+internal fun <T : IntHolder> IntHolderSerializer(
+    serialName: String = "IntHolder",
+    builder: (Int) -> T
+): IntHolderSerializer<T> =
+    IntHolderSerializerImplementation(serialName, builder)
 
 internal sealed interface IntHolderSerializer<T : IntHolder> : KSerializer<T>
 
