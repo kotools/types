@@ -111,14 +111,11 @@ public sealed interface IntHolder : Holder<Int>, Comparable<IntHolder> {
         value.toString().toNotBlankString()
 }
 
-private abstract class AbstractIntHolder(value: Int) :
-    AbstractHolder<Int>(value),
-    IntHolder
-
 private class IntHolderImplementation(
     override val value: Int,
     validator: Validator<Int>? = null
-) : AbstractIntHolder(value) {
+) : AbstractHolder<Int>(value),
+    IntHolder {
     init {
         validator?.let { require(it isValid value) }
     }
