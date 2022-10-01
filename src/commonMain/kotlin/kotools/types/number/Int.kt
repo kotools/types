@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotools.types.core.SinceKotoolsTypes
+import kotools.types.core.tryOrNull
 import kotlin.jvm.JvmInline
 
 /** Parent of classes responsible for holding integers. */
@@ -31,6 +32,10 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
     @SinceKotoolsTypes("1.1")
     @Throws(IllegalArgumentException::class)
     public operator fun invoke(value: Int): T
+
+    /** Returns the [value] as a type [T], or returns `null` if it fails. */
+    @SinceKotoolsTypes("1.1")
+    public infix fun orNull(value: Int): T? = tryOrNull { this(value) }
 }
 
 /** Representation of integers other than zero. */

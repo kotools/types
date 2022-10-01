@@ -3,6 +3,7 @@ package kotools.types.number
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
+import kotools.assert.assertNull
 import kotlin.test.Test
 
 class NonZeroIntTest {
@@ -29,6 +30,24 @@ class NonZeroIntTest {
         // GIVEN & WHEN & THEN
         val error: IllegalArgumentException = assertFailsWith { NonZeroInt(0) }
         error.message.assertNotNull()
+    }
+
+    @Test
+    fun companion_orNull_should_pass_with_an_Int_other_than_zero() {
+        // GIVEN
+        val value: Int = NonZeroInt.random.value
+        // WHEN
+        val result: NonZeroInt? = NonZeroInt orNull value
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun companion_orNull_should_return_null_with_an_Int_that_equals_zero() {
+        // GIVEN & WHEN
+        val result: NonZeroInt? = NonZeroInt orNull 0
+        // THEN
+        result.assertNull()
     }
 }
 
@@ -60,6 +79,26 @@ class PositiveIntTest {
             assertFailsWith { PositiveInt(value) }
         error.message.assertNotNull()
     }
+
+    @Test
+    fun companion_orNull_should_pass_with_a_positive_Int() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: PositiveInt? = PositiveInt orNull value
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun companion_orNull_should_return_null_with_a_strictly_negative_Int() {
+        // GIVEN
+        val value: Int = StrictlyNegativeInt.random.value
+        // WHEN
+        val result: PositiveInt? = PositiveInt orNull value
+        // THEN
+        result.assertNull()
+    }
 }
 
 class StrictlyPositiveIntTest {
@@ -89,6 +128,26 @@ class StrictlyPositiveIntTest {
         val error: IllegalArgumentException =
             assertFailsWith { StrictlyPositiveInt(value) }
         error.message.assertNotNull()
+    }
+
+    @Test
+    fun companion_orNull_should_pass_with_a_strictly_positive_Int() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        // WHEN
+        val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun companion_orNull_should_return_null_with_a_negative_Int() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        // WHEN
+        val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
+        // THEN
+        result.assertNull()
     }
 }
 
@@ -120,6 +179,26 @@ class NegativeIntTest {
             assertFailsWith { NegativeInt(value) }
         error.message.assertNotNull()
     }
+
+    @Test
+    fun companion_orNull_should_pass_with_a_negative_Int() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        // WHEN
+        val result: NegativeInt? = NegativeInt orNull value
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun companion_orNull_should_return_null_with_a_strictly_positive_Int() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        // WHEN
+        val result: NegativeInt? = NegativeInt orNull value
+        // THEN
+        result.assertNull()
+    }
 }
 
 class StrictlyNegativeIntTest {
@@ -149,5 +228,25 @@ class StrictlyNegativeIntTest {
         val error: IllegalArgumentException =
             assertFailsWith { StrictlyNegativeInt(value) }
         error.message.assertNotNull()
+    }
+
+    @Test
+    fun companion_orNull_should_pass_with_a_strictly_negative_Int() {
+        // GIVEN
+        val value: Int = StrictlyNegativeInt.random.value
+        // WHEN
+        val result: StrictlyNegativeInt? = StrictlyNegativeInt orNull value
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun companion_orNull_return_null_with_a_positive_Int() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: StrictlyNegativeInt? = StrictlyNegativeInt orNull value
+        // THEN
+        result.assertNull()
     }
 }
