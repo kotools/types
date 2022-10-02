@@ -121,6 +121,38 @@ class IntHolderTest {
 
 class IntHolderCompanionTest {
     @Test
+    fun invoke_should_pass_with_a_valid_value() {
+        // GIVEN
+        val holder: IntHolder = randomIntHolder
+        // WHEN
+        val result: IntHolder = when (holder) {
+            is NonZeroInt -> NonZeroInt(holder.value)
+            is PositiveInt -> PositiveInt(holder.value)
+            is StrictlyPositiveInt -> StrictlyPositiveInt(holder.value)
+            is NegativeInt -> NegativeInt(holder.value)
+            is StrictlyNegativeInt -> StrictlyNegativeInt(holder.value)
+        }
+        // THEN
+        result.value assertEquals holder.value
+    }
+
+    @Test
+    fun invoke_should_throw_an_error_with_an_invalid_value() {
+        // GIVEN
+        val holder: IntHolder = randomIntHolder
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException> {
+            when (holder) {
+                is NonZeroInt -> NonZeroInt(0)
+                is PositiveInt -> PositiveInt(StrictlyNegativeInt.random.value)
+                is StrictlyPositiveInt -> StrictlyPositiveInt(NegativeInt.random.value)
+                is NegativeInt -> NegativeInt(StrictlyPositiveInt.random.value)
+                is StrictlyNegativeInt -> StrictlyNegativeInt(PositiveInt.random.value)
+            }
+        }
+    }
+
+    @Test
     fun orNull_should_pass_with_a_valid_value() {
         // GIVEN
         val holder: IntHolder = randomIntHolder
@@ -161,23 +193,6 @@ class NonZeroIntTest {
     @Test
     fun companion_max_should_equal_the_maximum_value_of_Int(): Unit =
         NonZeroInt.max.value assertEquals Int.MAX_VALUE
-
-    @Test
-    fun constructor_should_pass_with_an_Int_other_than_zero() {
-        // GIVEN
-        val value: Int = NonZeroInt.random.value
-        // WHEN
-        val result = NonZeroInt(value)
-        // THEN
-        result.value assertEquals value
-    }
-
-    @Test
-    fun constructor_should_throw_an_error_with_an_Int_that_equals_zero() {
-        // GIVEN & WHEN & THEN
-        val error: IllegalArgumentException = assertFailsWith { NonZeroInt(0) }
-        error.message.assertNotNull()
-    }
 
     @Suppress("TestFunctionName")
     @Test
@@ -301,26 +316,6 @@ class PositiveIntTest {
     fun companion_max_should_equal_the_maximum_value_of_Int(): Unit =
         PositiveInt.max.value assertEquals Int.MAX_VALUE
 
-    @Test
-    fun constructor_should_pass_with_a_positive_Int() {
-        // GIVEN
-        val value: Int = PositiveInt.random.value
-        // WHEN
-        val result = PositiveInt(value)
-        // THEN
-        result.value assertEquals value
-    }
-
-    @Test
-    fun constructor_should_throw_an_error_with_a_strictly_negative_Int() {
-        // GIVEN
-        val value: Int = StrictlyNegativeInt.random.value
-        // WHEN & THEN
-        val error: IllegalArgumentException =
-            assertFailsWith { PositiveInt(value) }
-        error.message.assertNotNull()
-    }
-
     @Suppress("TestFunctionName")
     @Test
     fun Int_toPositiveInt_should_pass_with_a_positive_Int() {
@@ -430,26 +425,6 @@ class StrictlyPositiveIntTest {
     @Test
     fun companion_max_should_equal_the_maximum_value_of_Int(): Unit =
         StrictlyPositiveInt.max.value assertEquals Int.MAX_VALUE
-
-    @Test
-    fun constructor_should_pass_with_a_strictly_positive_Int() {
-        // GIVEN
-        val value: Int = StrictlyPositiveInt.random.value
-        // WHEN
-        val result = StrictlyPositiveInt(value)
-        // THEN
-        result.value assertEquals value
-    }
-
-    @Test
-    fun constructor_should_throw_an_error_with_a_negative_Int() {
-        // GIVEN
-        val value: Int = NegativeInt.random.value
-        // WHEN & THEN
-        val error: IllegalArgumentException =
-            assertFailsWith { StrictlyPositiveInt(value) }
-        error.message.assertNotNull()
-    }
 
     @Suppress("TestFunctionName")
     @Test
@@ -563,26 +538,6 @@ class NegativeIntTest {
     fun companion_max_should_equal_zero(): Unit =
         NegativeInt.max.value assertEquals 0
 
-    @Test
-    fun constructor_should_pass_with_a_negativeInt() {
-        // GIVEN
-        val value: Int = NegativeInt.random.value
-        // WHEN
-        val result = NegativeInt(value)
-        // THEN
-        result.value assertEquals value
-    }
-
-    @Test
-    fun constructor_should_throw_an_error_with_a_strictly_positive_Int() {
-        // GIVEN
-        val value: Int = StrictlyPositiveInt.random.value
-        // WHEN & THEN
-        val error: IllegalArgumentException =
-            assertFailsWith { NegativeInt(value) }
-        error.message.assertNotNull()
-    }
-
     @Suppress("TestFunctionName")
     @Test
     fun Int_toNegativeInt_should_pass_with_a_negative_Int() {
@@ -692,26 +647,6 @@ class StrictlyNegativeIntTest {
     @Test
     fun companion_max_should_equal_minus1(): Unit =
         StrictlyNegativeInt.max.value assertEquals -1
-
-    @Test
-    fun constructor_should_pass_with_a_strictly_negative_Int() {
-        // GIVEN
-        val value: Int = StrictlyNegativeInt.random.value
-        // WHEN
-        val result = StrictlyNegativeInt(value)
-        // THEN
-        result.value assertEquals value
-    }
-
-    @Test
-    fun constructor_should_throw_an_error_with_a_positive_Int() {
-        // GIVEN
-        val value: Int = PositiveInt.random.value
-        // WHEN & THEN
-        val error: IllegalArgumentException =
-            assertFailsWith { StrictlyNegativeInt(value) }
-        error.message.assertNotNull()
-    }
 
     @Suppress("TestFunctionName")
     @Test
