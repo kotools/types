@@ -165,6 +165,20 @@ public value class StrictlyPositiveInt private constructor(
 
 // ---------- NegativeInt ----------
 
+/**
+ * Returns this value as a [NegativeInt], or throws an
+ * [IllegalArgumentException] if this value is strictly positive.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
+
+/**
+ * Returns this value as a [NegativeInt], or returns `null` if this value is
+ * strictly positive.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
+
 /** Representation of negative integers, including zero. */
 @JvmInline
 @Serializable

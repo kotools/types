@@ -317,6 +317,48 @@ class NegativeIntTest {
         // THEN
         result.assertNull()
     }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNegativeInt_should_pass_with_a_negative_Int() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        // WHEN
+        val result: NegativeInt = value.toNegativeInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNegative_Int_should_throw_an_error_with_a_strictly_positive_Int() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(value::toNegativeInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNegativeIntOrNull_should_pass_with_a_negative_Int() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        // WHEN
+        val result: NegativeInt? = value.toNegativeIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNegativeIntOrNull_should_return_null_with_a_strictly_positive_Int() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        // WHEN
+        val result: NegativeInt? = value.toNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
 }
 
 class StrictlyNegativeIntTest {
