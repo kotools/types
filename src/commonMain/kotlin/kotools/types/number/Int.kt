@@ -203,6 +203,22 @@ public value class NegativeInt private constructor(override val value: Int) :
 
 // ---------- StrictlyNegativeInt ----------
 
+/**
+ * Returns this value as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if this value is positive.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
+    StrictlyNegativeInt(this)
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
+ * value is positive.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    StrictlyNegativeInt orNull this
+
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline
 @Serializable
