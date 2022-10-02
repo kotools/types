@@ -19,7 +19,7 @@ public sealed interface IntHolder {
 public infix fun <T : IntHolder> IntHolderCompanion<T>.orNull(value: Int): T? =
     tryOrNull { this(value) }
 
-/** Parent of classes responsible for creating instances of [IntHolder]. */
+/** Parent of companion objects in subtypes of [IntHolder]. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolderCompanion<out T : IntHolder> {
     /** The minimum value of the type [T]. */
@@ -64,6 +64,7 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt private constructor(override val value: Int) :
     IntHolder {
+    /** Contains static declarations for creating or holding a [NonZeroInt]. */
     public companion object : IntHolderCompanion<NonZeroInt> {
         private val negativeRange: IntRange = StrictlyNegativeInt.range
         private val positiveRange: IntRange = StrictlyPositiveInt.range
@@ -135,6 +136,7 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
 @SinceKotoolsTypes("1.1")
 public value class PositiveInt private constructor(override val value: Int) :
     IntHolder {
+    /** Contains static declarations for creating or holding a [PositiveInt]. */
     public companion object : IntHolderCompanion<PositiveInt> {
         private val range: IntRange = 0..Int.MAX_VALUE
         override val min: PositiveInt = PositiveInt(range.first)
@@ -197,6 +199,10 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
 ) : IntHolder {
+    /**
+     * Contains static declarations for creating or holding a
+     * [StrictlyPositiveInt].
+     */
     public companion object : IntHolderCompanion<StrictlyPositiveInt> {
         internal val range: IntRange = 1..Int.MAX_VALUE
         override val min: StrictlyPositiveInt = StrictlyPositiveInt(range.first)
@@ -257,6 +263,7 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt private constructor(override val value: Int) :
     IntHolder {
+    /** Contains static declarations for creating or holding a [NegativeInt]. */
     public companion object : IntHolderCompanion<NegativeInt> {
         private val range: IntRange = Int.MIN_VALUE..0
         override val min: NegativeInt = NegativeInt(range.first)
@@ -319,6 +326,10 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
 ) : IntHolder {
+    /**
+     * Contains static declarations for creating or holding a
+     * [StrictlyNegativeInt].
+     */
     public companion object : IntHolderCompanion<StrictlyNegativeInt> {
         internal val range: IntRange = Int.MIN_VALUE..-1
         override val min: StrictlyNegativeInt = StrictlyNegativeInt(range.first)
