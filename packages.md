@@ -11,10 +11,10 @@ manipulating collections.
 
 Core functions and types available for all platforms.
 
-# Package kotools.types.int
+# Package kotools.types.number
 
 Useful functions and explicit types such as `NonZeroInt` or `PositiveInt` for
-manipulating integers.
+manipulating numbers.
 
 # Package kotools.types.string
 
