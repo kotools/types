@@ -11,6 +11,10 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("3.0")
 public operator fun Int.plus(other: IntHolder): Int = plus(other.value)
 
+/** Subtracts the [other] value from this value. */
+@SinceKotoolsTypes("3.0")
+public operator fun Int.minus(other: IntHolder): Int = minus(other.value)
+
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolder {
@@ -24,6 +28,12 @@ public sealed interface IntHolder {
 
     /** Adds the [other] value to this [value]. */
     public operator fun plus(other: IntHolder): Int = plus(other.value)
+
+    /** Subtracts the [other] value from this [value]. */
+    public operator fun minus(other: Int): Int = value - other
+
+    /** Subtracts the [other] value from this [value]. */
+    public operator fun minus(other: IntHolder): Int = minus(other.value)
 }
 
 // ---------- IntHolderCompanion ----------
