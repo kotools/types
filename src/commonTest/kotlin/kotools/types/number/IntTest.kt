@@ -7,16 +7,16 @@ import kotools.assert.assertNull
 import kotlin.random.Random
 import kotlin.test.Test
 
-class IntHolderTest {
-    private val randomIntHolder: IntHolder
-        get() = listOf(
-            NonZeroInt.random,
-            PositiveInt.random,
-            StrictlyPositiveInt.random,
-            NegativeInt.random,
-            StrictlyNegativeInt.random
-        ).random()
+private val randomIntHolder: IntHolder
+    get() = listOf(
+        NonZeroInt.random,
+        PositiveInt.random,
+        StrictlyPositiveInt.random,
+        NegativeInt.random,
+        StrictlyNegativeInt.random
+    ).random()
 
+class IntHolderTest {
     // ---------- Binary operations ----------
 
     @Test
@@ -119,6 +119,38 @@ class IntHolderTest {
     }
 }
 
+class IntHolderCompanionTest {
+    @Test
+    fun orNull_should_pass_with_a_valid_value() {
+        // GIVEN
+        val holder: IntHolder = randomIntHolder
+        // WHEN
+        val result: IntHolder? = when (holder) {
+            is NonZeroInt -> NonZeroInt orNull holder.value
+            is PositiveInt -> PositiveInt orNull holder.value
+            is StrictlyPositiveInt -> StrictlyPositiveInt orNull holder.value
+            is NegativeInt -> NegativeInt orNull holder.value
+            is StrictlyNegativeInt -> StrictlyNegativeInt orNull holder.value
+        }
+        // THEN
+        result.assertNotNull().value assertEquals holder.value
+    }
+
+    @Test
+    fun orNull_should_return_null_with_an_invalid_value() {
+        // GIVEN & WHEN
+        val result: IntHolder? = when (randomIntHolder) {
+            is NonZeroInt -> NonZeroInt orNull 0
+            is PositiveInt -> PositiveInt orNull StrictlyNegativeInt.random.value
+            is StrictlyPositiveInt -> StrictlyPositiveInt orNull NegativeInt.random.value
+            is NegativeInt -> NegativeInt orNull StrictlyPositiveInt.random.value
+            is StrictlyNegativeInt -> StrictlyNegativeInt orNull PositiveInt.random.value
+        }
+        // THEN
+        result.assertNull()
+    }
+}
+
 class NonZeroIntTest {
     // ---------- Builders ----------
 
@@ -145,24 +177,6 @@ class NonZeroIntTest {
         // GIVEN & WHEN & THEN
         val error: IllegalArgumentException = assertFailsWith { NonZeroInt(0) }
         error.message.assertNotNull()
-    }
-
-    @Test
-    fun companion_orNull_should_pass_with_an_Int_other_than_zero() {
-        // GIVEN
-        val value: Int = NonZeroInt.random.value
-        // WHEN
-        val result: NonZeroInt? = NonZeroInt orNull value
-        // THEN
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun companion_orNull_should_return_null_with_an_Int_that_equals_zero() {
-        // GIVEN & WHEN
-        val result: NonZeroInt? = NonZeroInt orNull 0
-        // THEN
-        result.assertNull()
     }
 
     @Suppress("TestFunctionName")
@@ -307,26 +321,6 @@ class PositiveIntTest {
         error.message.assertNotNull()
     }
 
-    @Test
-    fun companion_orNull_should_pass_with_a_positive_Int() {
-        // GIVEN
-        val value: Int = PositiveInt.random.value
-        // WHEN
-        val result: PositiveInt? = PositiveInt orNull value
-        // THEN
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun companion_orNull_should_return_null_with_a_strictly_negative_Int() {
-        // GIVEN
-        val value: Int = StrictlyNegativeInt.random.value
-        // WHEN
-        val result: PositiveInt? = PositiveInt orNull value
-        // THEN
-        result.assertNull()
-    }
-
     @Suppress("TestFunctionName")
     @Test
     fun Int_toPositiveInt_should_pass_with_a_positive_Int() {
@@ -455,26 +449,6 @@ class StrictlyPositiveIntTest {
         val error: IllegalArgumentException =
             assertFailsWith { StrictlyPositiveInt(value) }
         error.message.assertNotNull()
-    }
-
-    @Test
-    fun companion_orNull_should_pass_with_a_strictly_positive_Int() {
-        // GIVEN
-        val value: Int = StrictlyPositiveInt.random.value
-        // WHEN
-        val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
-        // THEN
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun companion_orNull_should_return_null_with_a_negative_Int() {
-        // GIVEN
-        val value: Int = NegativeInt.random.value
-        // WHEN
-        val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
-        // THEN
-        result.assertNull()
     }
 
     @Suppress("TestFunctionName")
@@ -609,26 +583,6 @@ class NegativeIntTest {
         error.message.assertNotNull()
     }
 
-    @Test
-    fun companion_orNull_should_pass_with_a_negative_Int() {
-        // GIVEN
-        val value: Int = NegativeInt.random.value
-        // WHEN
-        val result: NegativeInt? = NegativeInt orNull value
-        // THEN
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun companion_orNull_should_return_null_with_a_strictly_positive_Int() {
-        // GIVEN
-        val value: Int = StrictlyPositiveInt.random.value
-        // WHEN
-        val result: NegativeInt? = NegativeInt orNull value
-        // THEN
-        result.assertNull()
-    }
-
     @Suppress("TestFunctionName")
     @Test
     fun Int_toNegativeInt_should_pass_with_a_negative_Int() {
@@ -757,26 +711,6 @@ class StrictlyNegativeIntTest {
         val error: IllegalArgumentException =
             assertFailsWith { StrictlyNegativeInt(value) }
         error.message.assertNotNull()
-    }
-
-    @Test
-    fun companion_orNull_should_pass_with_a_strictly_negative_Int() {
-        // GIVEN
-        val value: Int = StrictlyNegativeInt.random.value
-        // WHEN
-        val result: StrictlyNegativeInt? = StrictlyNegativeInt orNull value
-        // THEN
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun companion_orNull_return_null_with_a_positive_Int() {
-        // GIVEN
-        val value: Int = PositiveInt.random.value
-        // WHEN
-        val result: StrictlyNegativeInt? = StrictlyNegativeInt orNull value
-        // THEN
-        result.assertNull()
     }
 
     @Suppress("TestFunctionName")
