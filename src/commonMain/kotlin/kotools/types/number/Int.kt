@@ -86,6 +86,20 @@ public value class NonZeroInt private constructor(override val value: Int) :
 
 // ---------- PositiveInt ----------
 
+/**
+ * Returns this value as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if this value is strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
+
+/**
+ * Returns this value as a [PositiveInt], or returns null if this value is
+ * strictly negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
+
 /** Representation of positive integers, including zero. */
 @JvmInline
 @Serializable

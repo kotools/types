@@ -64,6 +64,7 @@ class NonZeroIntTest {
     @Suppress("TestFunctionName")
     @Test
     fun Int_to_NonZeroInt_should_throw_an_error_with_an_Int_that_equals_zero() {
+        // GIVEN & WHEN & THEN
         assertFailsWith<IllegalArgumentException>(0::toNonZeroInt)
     }
 
@@ -129,6 +130,48 @@ class PositiveIntTest {
         val value: Int = StrictlyNegativeInt.random.value
         // WHEN
         val result: PositiveInt? = PositiveInt orNull value
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toPositiveInt_should_pass_with_a_positive_Int() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: PositiveInt = value.toPositiveInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toPositiveInt_should_throw_an_error_with_a_strictly_negative_Int() {
+        // GIVEN & WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(
+            StrictlyNegativeInt.random.value::toPositiveInt
+        )
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toPositiveIntOrNull_should_pass_with_a_positive_Int() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: PositiveInt? = value.toPositiveIntOrNull()
+        // THEN
+        result?.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toPositiveIntOrNull_should_return_null_with_a_strictly_negative_Int() {
+        // GIVEN
+        val value: Int = StrictlyNegativeInt.random.value
+        // WHEN
+        val result: PositiveInt? = value.toPositiveIntOrNull()
         // THEN
         result.assertNull()
     }
