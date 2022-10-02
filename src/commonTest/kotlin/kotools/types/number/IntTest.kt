@@ -121,6 +121,26 @@ class IntHolderTest {
 
 class IntHolderCompanionTest {
     @Test
+    fun min_should_pass() {
+        // GIVEN & WHEN & THEN
+        NonZeroInt.min.value assertEquals Int.MIN_VALUE
+        PositiveInt.min.value assertEquals 0
+        StrictlyPositiveInt.min.value assertEquals 1
+        NegativeInt.min.value assertEquals Int.MIN_VALUE
+        StrictlyNegativeInt.min.value assertEquals Int.MIN_VALUE
+    }
+
+    @Test
+    fun max_should_pass() {
+        // GIVEN & WHEN & THEN
+        NonZeroInt.max.value assertEquals Int.MAX_VALUE
+        PositiveInt.max.value assertEquals Int.MAX_VALUE
+        StrictlyPositiveInt.max.value assertEquals Int.MAX_VALUE
+        NegativeInt.max.value assertEquals 0
+        StrictlyNegativeInt.max.value assertEquals -1
+    }
+
+    @Test
     fun invoke_should_pass_with_a_valid_value() {
         // GIVEN
         val holder: IntHolder = randomIntHolder
@@ -185,14 +205,6 @@ class IntHolderCompanionTest {
 
 class NonZeroIntTest {
     // ---------- Builders ----------
-
-    @Test
-    fun companion_min_should_equal_the_minimum_value_of_Int(): Unit =
-        NonZeroInt.min.value assertEquals Int.MIN_VALUE
-
-    @Test
-    fun companion_max_should_equal_the_maximum_value_of_Int(): Unit =
-        NonZeroInt.max.value assertEquals Int.MAX_VALUE
 
     @Suppress("TestFunctionName")
     @Test
@@ -308,14 +320,6 @@ class NonZeroIntTest {
 class PositiveIntTest {
     // ---------- Builders ----------
 
-    @Test
-    fun companion_min_should_equal_zero(): Unit =
-        PositiveInt.min.value assertEquals 0
-
-    @Test
-    fun companion_max_should_equal_the_maximum_value_of_Int(): Unit =
-        PositiveInt.max.value assertEquals Int.MAX_VALUE
-
     @Suppress("TestFunctionName")
     @Test
     fun Int_toPositiveInt_should_pass_with_a_positive_Int() {
@@ -417,14 +421,6 @@ class PositiveIntTest {
 
 class StrictlyPositiveIntTest {
     // ---------- Builders ----------
-
-    @Test
-    fun companion_min_should_equal_1(): Unit =
-        StrictlyPositiveInt.min.value assertEquals 1
-
-    @Test
-    fun companion_max_should_equal_the_maximum_value_of_Int(): Unit =
-        StrictlyPositiveInt.max.value assertEquals Int.MAX_VALUE
 
     @Suppress("TestFunctionName")
     @Test
@@ -530,14 +526,6 @@ class StrictlyPositiveIntTest {
 class NegativeIntTest {
     // ---------- Builders ----------
 
-    @Test
-    fun companion_min_should_equal_the_minimum_value_of_Int(): Unit =
-        NegativeInt.min.value assertEquals Int.MIN_VALUE
-
-    @Test
-    fun companion_max_should_equal_zero(): Unit =
-        NegativeInt.max.value assertEquals 0
-
     @Suppress("TestFunctionName")
     @Test
     fun Int_toNegativeInt_should_pass_with_a_negative_Int() {
@@ -639,14 +627,6 @@ class NegativeIntTest {
 
 class StrictlyNegativeIntTest {
     // ---------- Builders ----------
-
-    @Test
-    fun companion_min_should_equal_the_minimum_value_of_Int(): Unit =
-        StrictlyNegativeInt.min.value assertEquals Int.MIN_VALUE
-
-    @Test
-    fun companion_max_should_equal_minus1(): Unit =
-        StrictlyNegativeInt.max.value assertEquals -1
 
     @Suppress("TestFunctionName")
     @Test
