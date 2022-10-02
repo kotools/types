@@ -5,6 +5,8 @@ import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
 import kotlin.jvm.JvmInline
 
+// ---------- IntHolder ----------
+
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolder {
@@ -39,6 +41,8 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
     @Throws(IllegalArgumentException::class)
     public operator fun invoke(value: Int): T
 }
+
+// ---------- NonZeroInt ----------
 
 /**
  * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
@@ -80,6 +84,8 @@ public value class NonZeroInt private constructor(override val value: Int) :
     }
 }
 
+// ---------- PositiveInt ----------
+
 /** Representation of positive integers, including zero. */
 @JvmInline
 @Serializable
@@ -101,6 +107,8 @@ public value class PositiveInt private constructor(override val value: Int) :
         }
     }
 }
+
+// ---------- StrictlyPositiveInt ----------
 
 /** Representation of strictly positive integers, excluding zero. */
 @JvmInline
@@ -125,6 +133,8 @@ public value class StrictlyPositiveInt private constructor(
     }
 }
 
+// ---------- NegativeInt ----------
+
 /** Representation of negative integers, including zero. */
 @JvmInline
 @Serializable
@@ -146,6 +156,8 @@ public value class NegativeInt private constructor(override val value: Int) :
         }
     }
 }
+
+// ---------- StrictlyNegativeInt ----------
 
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline
