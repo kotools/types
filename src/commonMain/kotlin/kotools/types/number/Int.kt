@@ -1,5 +1,6 @@
 package kotools.types.number
 
+import kotlinx.serialization.Serializable
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
 import kotlin.jvm.JvmInline
@@ -41,6 +42,7 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
 
 /** Representation of integers other than zero. */
 @JvmInline
+@Serializable
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt private constructor(override val value: Int) :
     IntHolder {
@@ -66,6 +68,7 @@ public value class NonZeroInt private constructor(override val value: Int) :
 
 /** Representation of positive integers, including zero. */
 @JvmInline
+@Serializable
 @SinceKotoolsTypes("1.1")
 public value class PositiveInt private constructor(override val value: Int) :
     IntHolder {
@@ -87,6 +90,7 @@ public value class PositiveInt private constructor(override val value: Int) :
 
 /** Representation of strictly positive integers, excluding zero. */
 @JvmInline
+@Serializable
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
@@ -109,6 +113,7 @@ public value class StrictlyPositiveInt private constructor(
 
 /** Representation of negative integers, including zero. */
 @JvmInline
+@Serializable
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt private constructor(override val value: Int) :
     IntHolder {
@@ -130,6 +135,7 @@ public value class NegativeInt private constructor(override val value: Int) :
 
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline
+@Serializable
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
