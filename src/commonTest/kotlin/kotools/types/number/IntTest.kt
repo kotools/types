@@ -466,6 +466,8 @@ class StrictlyPositiveIntTest {
 }
 
 class NegativeIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun companion_min_should_equal_the_minimum_value_of_Int(): Unit =
         NegativeInt.min.value assertEquals Int.MIN_VALUE
@@ -554,6 +556,62 @@ class NegativeIntTest {
         val result: NegativeInt? = value.toNegativeIntOrNull()
         // THEN
         result.assertNull()
+    }
+
+    // ---------- Unary operations ----------
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+        // GIVEN
+        var x: NegativeInt = NegativeInt.max
+        // WHEN
+        x++
+        // THEN
+        x assertEquals NegativeInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_one_with_an_initial_value_other_than_the_maximum() {
+        // GIVEN
+        var x: NegativeInt = NegativeInt.random
+        while (x.value == NegativeInt.max.value) x = NegativeInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x++
+        // THEN
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        // GIVEN
+        var x: NegativeInt = NegativeInt.min
+        // WHEN
+        x--
+        // THEN
+        x assertEquals NegativeInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_one_with_an_initial_value_other_than_the_minimum() {
+        // GIVEN
+        var x: NegativeInt = NegativeInt.random
+        while (x.value == NegativeInt.min.value) x = NegativeInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x--
+        // THEN
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: NegativeInt = NegativeInt.random
+        // WHEN
+        val result: PositiveInt = -x
+        // THEN
+        result.value assertEquals -x.value
     }
 }
 

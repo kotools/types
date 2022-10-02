@@ -271,6 +271,27 @@ public value class NegativeInt private constructor(override val value: Int) :
             return NegativeInt(value)
         }
     }
+
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the [maximum][NegativeInt.max], it returns the
+     * [minimum][NegativeInt.min] value instead.
+     */
+    public operator fun inc(): NegativeInt = if (value == max.value) min
+    else NegativeInt(value + 1)
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] is the [minimum][NegativeInt.min], it returns the
+     * [maximum][NegativeInt.max] value instead.
+     */
+    public operator fun dec(): NegativeInt = if (value == min.value) max
+    else NegativeInt(value - 1)
+
+    /** Returns the negative of this [value]. */
+    public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
 }
 
 // ---------- StrictlyNegativeInt ----------
