@@ -15,6 +15,10 @@ public operator fun Int.plus(other: IntHolder): Int = plus(other.value)
 @SinceKotoolsTypes("3.0")
 public operator fun Int.minus(other: IntHolder): Int = minus(other.value)
 
+/** Multiplies this value by the [other] value. */
+@SinceKotoolsTypes("3.0")
+public operator fun Int.times(other: IntHolder): Int = times(other.value)
+
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolder {
@@ -34,6 +38,12 @@ public sealed interface IntHolder {
 
     /** Subtracts the [other] value from this [value]. */
     public operator fun minus(other: IntHolder): Int = minus(other.value)
+
+    /** Multiplies this [value] by the [other] value. */
+    public operator fun times(other: Int): Int = value * other
+
+    /** Multiplies this [value] by the [other] value. */
+    public operator fun times(other: IntHolder): Int = times(other.value)
 }
 
 // ---------- IntHolderCompanion ----------

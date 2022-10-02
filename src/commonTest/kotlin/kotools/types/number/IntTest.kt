@@ -84,6 +84,39 @@ class IntHolderTest {
         // THEN
         result assertEquals x.value - y.value
     }
+
+    @Test
+    fun times_should_return_an_Int_when_multiplying_an_Int_by_an_IntHolder() {
+        // GIVEN
+        val x: Int = Random.nextInt()
+        val y: IntHolder = randomIntHolder
+        // WHEN
+        val result: Int = x * y
+        // THEN
+        result assertEquals x * y.value
+    }
+
+    @Test
+    fun times_should_return_an_Int_with_an_Int() {
+        // GIVEN
+        val x: IntHolder = randomIntHolder
+        val y: Int = Random.nextInt()
+        // WHEN
+        val result: Int = x * y
+        // THEN
+        result assertEquals x.value * y
+    }
+
+    @Test
+    fun times_should_return_an_Int_with_an_IntHolder() {
+        // GIVEN
+        val x: IntHolder = randomIntHolder
+        val y: IntHolder = randomIntHolder
+        // WHEN
+        val result: Int = x * y
+        // THEN
+        result assertEquals x.value * y.value
+    }
 }
 
 class NonZeroIntTest {
