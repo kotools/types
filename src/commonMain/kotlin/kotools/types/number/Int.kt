@@ -124,6 +124,22 @@ public value class PositiveInt private constructor(override val value: Int) :
 
 // ---------- StrictlyPositiveInt ----------
 
+/**
+ * Returns this value as a [StrictlyPositiveInt], or throws an
+ * [IllegalArgumentException] if this value is negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
+    StrictlyPositiveInt(this)
+
+/**
+ * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
+ * value is negative.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+    StrictlyPositiveInt orNull this
+
 /** Representation of strictly positive integers, excluding zero. */
 @JvmInline
 @Serializable

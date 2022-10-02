@@ -225,6 +225,48 @@ class StrictlyPositiveIntTest {
         // THEN
         result.assertNull()
     }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Int() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        // WHEN
+        val result: StrictlyPositiveInt = value.toStrictlyPositiveInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toStrictlyPositiveInt_should_throw_an_error_with_a_negative_Int() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(value::toStrictlyPositiveInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toStrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_Int() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        // WHEN
+        val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toStrictlyPositiveIntOrNull_should_return_null_with_a_negative_Int() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        // WHEN
+        val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
 }
 
 class NegativeIntTest {
