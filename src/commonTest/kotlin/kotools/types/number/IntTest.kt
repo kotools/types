@@ -616,6 +616,8 @@ class NegativeIntTest {
 }
 
 class StrictlyNegativeIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun companion_min_should_equal_the_minimum_value_of_Int(): Unit =
         StrictlyNegativeInt.min.value assertEquals Int.MIN_VALUE
@@ -704,5 +706,63 @@ class StrictlyNegativeIntTest {
         val result: StrictlyNegativeInt? = value.toStrictlyNegativeIntOrNull()
         // THEN
         result.assertNull()
+    }
+
+    // ---------- Unary operations ----------
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_maximum_value() {
+        // GIVEN
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.max
+        // WHEN
+        x++
+        // THEN
+        x assertEquals StrictlyNegativeInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_one_with_an_initial_value_other_than_the_maximum() {
+        // GIVEN
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        while (x.value == StrictlyNegativeInt.max.value)
+            x = StrictlyNegativeInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x++
+        // THEN
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        // GIVEN
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.min
+        // WHEN
+        x--
+        // THEN
+        x assertEquals StrictlyNegativeInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_one_with_an_initial_value_other_than_the_minimum() {
+        // GIVEN
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        while (x.value == StrictlyNegativeInt.min.value)
+            x = StrictlyNegativeInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x--
+        // THEN
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        // WHEN
+        val result: StrictlyPositiveInt = -x
+        // THEN
+        result.value assertEquals -x.value
     }
 }

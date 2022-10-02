@@ -333,4 +333,26 @@ public value class StrictlyNegativeInt private constructor(
             return StrictlyNegativeInt(value)
         }
     }
+
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the [maximum][StrictlyNegativeInt.max], it returns
+     * the [minimum][StrictlyNegativeInt.min] value instead.
+     */
+    public operator fun inc(): StrictlyNegativeInt = if (value == max.value) min
+    else StrictlyNegativeInt(value + 1)
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] is the [minimum][StrictlyNegativeInt.min], it returns
+     * the [maximum][StrictlyNegativeInt.max] value instead.
+     */
+    public operator fun dec(): StrictlyNegativeInt = if (value == min.value) max
+    else StrictlyNegativeInt(value - 1)
+
+    /** Returns the negative of this [value]. */
+    public operator fun unaryMinus(): StrictlyPositiveInt =
+        StrictlyPositiveInt(-value)
 }
