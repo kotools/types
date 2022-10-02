@@ -7,12 +7,26 @@ import kotlin.jvm.JvmInline
 
 // ---------- IntHolder ----------
 
+/** Adds the [other] value to this value. */
+@SinceKotoolsTypes("3.0")
+public operator fun Int.plus(other: IntHolder): Int = plus(other.value)
+
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolder {
     /** The value to hold. */
     public val value: Int
+
+    // ---------- Binary operations ----------
+
+    /** Adds the [other] value to this [value]. */
+    public operator fun plus(other: Int): Int = value + other
+
+    /** Adds the [other] value to this [value]. */
+    public operator fun plus(other: IntHolder): Int = plus(other.value)
 }
+
+// ---------- IntHolderCompanion ----------
 
 /** Returns the [value] as a type [T], or returns `null` if it fails. */
 @SinceKotoolsTypes("3.0")

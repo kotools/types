@@ -4,7 +4,54 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotlin.random.Random
 import kotlin.test.Test
+
+class IntHolderTest {
+    private val randomIntHolder: IntHolder
+        get() = listOf(
+            NonZeroInt.random,
+            PositiveInt.random,
+            StrictlyPositiveInt.random,
+            NegativeInt.random,
+            StrictlyNegativeInt.random
+        ).random()
+
+    // ---------- Binary operations ----------
+
+    @Test
+    fun plus_should_return_an_Int_when_adding_an_IntHolder_to_an_Int() {
+        // GIVEN
+        val x: Int = Random.nextInt()
+        val y: IntHolder = randomIntHolder
+        // WHEN
+        val result: Int = x + y
+        // THEN
+        result assertEquals x + y.value
+    }
+
+    @Test
+    fun plus_should_return_an_Int_with_an_Int() {
+        // GIVEN
+        val x: IntHolder = randomIntHolder
+        val y: Int = Random.nextInt()
+        // WHEN
+        val result: Int = x + y
+        // THEN
+        result assertEquals x.value + y
+    }
+
+    @Test
+    fun plus_should_return_an_Int_with_another_IntHolder() {
+        // GIVEN
+        val x: IntHolder = randomIntHolder
+        val y: IntHolder = randomIntHolder
+        // WHEN
+        val result: Int = x + y
+        // THEN
+        result assertEquals x.value + y.value
+    }
+}
 
 class NonZeroIntTest {
     // ---------- Builders ----------
