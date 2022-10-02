@@ -7,6 +7,8 @@ import kotools.assert.assertNull
 import kotlin.test.Test
 
 class NonZeroIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun companion_min_should_equal_the_minimum_value_of_Int(): Unit =
         NonZeroInt.min.value assertEquals Int.MIN_VALUE
@@ -83,6 +85,82 @@ class NonZeroIntTest {
     @Test
     fun Int_toNonZeroIntOrNull_should_return_null_with_an_Int_that_equals_zero(): Unit =
         0.toNonZeroIntOrNull().assertNull()
+
+    // ---------- Unary operations ----------
+
+    @Test
+    fun inc_should_return_1_with_a_value_that_equals_minus1() {
+        // GIVEN
+        var x = NonZeroInt(-1)
+        // WHEN
+        x++
+        // THEN
+        x.value assertEquals 1
+    }
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.max
+        // WHEN
+        x++
+        // THEN
+        x assertEquals NonZeroInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_1_with_an_initial_value_other_than_minus1_and_the_maximum_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value == -1 || x == NonZeroInt.max) x = NonZeroInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x++
+        // THEN
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_minus1_with_a_value_that_equals_1() {
+        // GIVEN
+        var x = NonZeroInt(1)
+        // WHEN
+        x--
+        // THEN
+        x.value assertEquals -1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.min
+        // WHEN
+        x--
+        // THEN
+        x assertEquals NonZeroInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_1_with_an_initial_value_other_than_1_and_the_minimum_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value == 1 || x == NonZeroInt.min) x = NonZeroInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x--
+        // THEN
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        // WHEN
+        val result: NonZeroInt = -x
+        // THEN
+        result.value assertEquals -x.value
+    }
 }
 
 class PositiveIntTest {

@@ -82,6 +82,35 @@ public value class NonZeroInt private constructor(override val value: Int) :
             return NonZeroInt(value)
         }
     }
+
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] equals `-1`, it returns `1` instead.
+     * If this [value] is the [maximum][NonZeroInt.max], it returns the
+     * [minimum][NonZeroInt.min] value instead.
+     */
+    public operator fun inc(): NonZeroInt = when (value) {
+        -1 -> NonZeroInt(1)
+        max.value -> min
+        else -> NonZeroInt(value + 1)
+    }
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] equals `1`, it returns `-1` instead.
+     * If this [value] is the [minimum][NonZeroInt.min], it returns the
+     * [maximum][NonZeroInt.max] value instead.
+     */
+    public operator fun dec(): NonZeroInt = when (value) {
+        1 -> NonZeroInt(-1)
+        min.value -> max
+        else -> NonZeroInt(value - 1)
+    }
+
+    /** Returns the negative of this [value]. */
+    public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
 }
 
 // ---------- PositiveInt ----------
