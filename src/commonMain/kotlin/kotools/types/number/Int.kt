@@ -15,7 +15,7 @@ public sealed interface IntHolder {
 }
 
 /** Returns the [value] as a type [T], or returns `null` if it fails. */
-@SinceKotoolsTypes("1.1")
+@SinceKotoolsTypes("3.0")
 public infix fun <T : IntHolder> IntHolderCompanion<T>.orNull(value: Int): T? =
     tryOrNull { this(value) }
 
@@ -23,11 +23,9 @@ public infix fun <T : IntHolder> IntHolderCompanion<T>.orNull(value: Int): T? =
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolderCompanion<out T : IntHolder> {
     /** The minimum value of the type [T]. */
-    @SinceKotoolsTypes("1.1")
     public val min: T
 
     /** The maximum value of the type [T]. */
-    @SinceKotoolsTypes("1.1")
     public val max: T
 
     /** Returns an instance of type [T] holding a random value. */
@@ -37,7 +35,6 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
      * Returns the [value] as a type [T], or throws an
      * [IllegalArgumentException] if it fails.
      */
-    @SinceKotoolsTypes("1.1")
     @Throws(IllegalArgumentException::class)
     public operator fun invoke(value: Int): T
 }
