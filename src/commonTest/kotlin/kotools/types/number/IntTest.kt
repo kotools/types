@@ -314,6 +314,8 @@ class PositiveIntTest {
 }
 
 class StrictlyPositiveIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun companion_min_should_equal_1(): Unit =
         StrictlyPositiveInt.min.value assertEquals 1
@@ -402,6 +404,64 @@ class StrictlyPositiveIntTest {
         val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
         // THEN
         result.assertNull()
+    }
+
+    // ---------- Unary operations ----------
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+        // GIVEN
+        var x: StrictlyPositiveInt = StrictlyPositiveInt.max
+        // WHEN
+        x++
+        // THEN
+        x assertEquals StrictlyPositiveInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_one_with_an_initial_value_other_than_the_maximum() {
+        // GIVEN
+        var x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        while (x.value == StrictlyPositiveInt.max.value)
+            x = StrictlyPositiveInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x++
+        // THEN
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        // GIVEN
+        var x: StrictlyPositiveInt = StrictlyPositiveInt.min
+        // WHEN
+        x--
+        // THEN
+        x assertEquals StrictlyPositiveInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_one_with_an_initial_value_other_than_the_minimum() {
+        // GIVEN
+        var x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        while (x.value == StrictlyPositiveInt.min.value)
+            x = StrictlyPositiveInt.random
+        val initialValue: Int = x.value
+        // WHEN
+        x--
+        // THEN
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: StrictlyNegativeInt = -x
+        // THEN
+        result.value assertEquals -x.value
     }
 }
 
