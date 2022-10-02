@@ -40,6 +40,20 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
     public operator fun invoke(value: Int): T
 }
 
+/**
+ * Returns this value as a [NonZeroInt], or throws an [IllegalArgumentException]
+ * if this value equals zero.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
+
+/**
+ * Returns this value as a [NonZeroInt], or returns `null` if this value equals
+ * zero.
+ */
+@SinceKotoolsTypes("1.1")
+public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
+
 /** Representation of integers other than zero. */
 @JvmInline
 @Serializable

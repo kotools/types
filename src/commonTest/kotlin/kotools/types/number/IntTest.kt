@@ -49,6 +49,39 @@ class NonZeroIntTest {
         // THEN
         result.assertNull()
     }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
+        // GIVEN
+        val value: Int = NonZeroInt.random.value
+        // WHEN
+        val result: NonZeroInt = value.toNonZeroInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_to_NonZeroInt_should_throw_an_error_with_an_Int_that_equals_zero() {
+        assertFailsWith<IllegalArgumentException>(0::toNonZeroInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNonZeroIntOrNull_should_pass_with_an_Int_other_than_zero() {
+        // GIVEN
+        val value: Int = NonZeroInt.random.value
+        // WHEN
+        val result: NonZeroInt? = value.toNonZeroIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun Int_toNonZeroIntOrNull_should_return_null_with_an_Int_that_equals_zero(): Unit =
+        0.toNonZeroIntOrNull().assertNull()
 }
 
 class PositiveIntTest {
