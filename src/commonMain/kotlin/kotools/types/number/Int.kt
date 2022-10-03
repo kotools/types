@@ -1,6 +1,11 @@
 package kotools.types.number
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
 import kotlin.jvm.JvmInline
@@ -50,6 +55,21 @@ public sealed interface IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: NonZeroIntHolder): Int = value / other.value
+}
+
+internal sealed class IntHolderSerializer<T : IntHolder>(
+    private val builder: (Int) -> T
+) : KSerializer<T> {
+    private val delegate: KSerializer<Int> = Int.serializer()
+    override val descriptor: SerialDescriptor = delegate.descriptor
+
+    override fun serialize(encoder: Encoder, value: T): Unit =
+        delegate.serialize(encoder, value.value)
+
+    override fun deserialize(decoder: Decoder): T {
+        val value: Int = delegate.deserialize(decoder)
+        return builder(value)
+    }
 }
 
 // ---------- IntHolderCompanion ----------
@@ -154,7 +174,7 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 
 /** Representation of integers other than zero. */
 @JvmInline
-@Serializable
+@Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt private constructor(override val value: Int) :
     NonZeroIntHolder {
@@ -266,6 +286,9 @@ public value class NonZeroInt private constructor(override val value: Int) :
         value.toStrictlyNegativeIntOrNull()
 }
 
+internal object NonZeroIntSerializer :
+    IntHolderSerializer<NonZeroInt>(Int::toNonZeroInt)
+
 // ---------- PositiveInt ----------
 
 /**
@@ -284,7 +307,7 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
 
 /** Representation of positive integers, including zero. */
 @JvmInline
-@Serializable
+@Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class PositiveInt private constructor(override val value: Int) :
     PositiveIntHolder {
@@ -326,6 +349,9 @@ public value class PositiveInt private constructor(override val value: Int) :
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
 }
 
+internal object PositiveIntSerializer :
+    IntHolderSerializer<PositiveInt>(Int::toPositiveInt)
+
 // ---------- StrictlyPositiveInt ----------
 
 /**
@@ -346,7 +372,7 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 
 /** Representation of strictly positive integers, excluding zero. */
 @JvmInline
-@Serializable
+@Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
@@ -394,6 +420,9 @@ public value class StrictlyPositiveInt private constructor(
         StrictlyNegativeInt(-value)
 }
 
+internal object StrictlyPositiveIntSerializer :
+    IntHolderSerializer<StrictlyPositiveInt>(Int::toStrictlyPositiveInt)
+
 // ---------- NegativeInt ----------
 
 /**
@@ -412,7 +441,7 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
 
 /** Representation of negative integers, including zero. */
 @JvmInline
-@Serializable
+@Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt private constructor(override val value: Int) :
     NegativeIntHolder {
@@ -454,6 +483,9 @@ public value class NegativeInt private constructor(override val value: Int) :
     public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
 }
 
+internal object NegativeIntSerializer :
+    IntHolderSerializer<NegativeInt>(Int::toNegativeInt)
+
 // ---------- StrictlyNegativeInt ----------
 
 /**
@@ -474,7 +506,7 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline
-@Serializable
+@Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
@@ -521,3 +553,6 @@ public value class StrictlyNegativeInt private constructor(
     public operator fun unaryMinus(): StrictlyPositiveInt =
         StrictlyPositiveInt(-value)
 }
+
+internal object StrictlyNegativeIntSerializer :
+    IntHolderSerializer<StrictlyNegativeInt>(Int::toStrictlyNegativeInt)
