@@ -1,5 +1,8 @@
 package kotools.types.number
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
@@ -336,6 +339,29 @@ class NonZeroIntTest {
     fun Int_toNonZeroIntOrNull_should_return_null_with_an_Int_that_equals_zero(): Unit =
         0.toNonZeroIntOrNull().assertNull()
 
+    // ---------- Serialization ----------
+
+    @Test
+    fun serialization_should_behave_like_an_Int() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals Json.encodeToString(x.value)
+    }
+
+    @Test
+    fun deserialization_should_pass() {
+        // GIVEN
+        val value: Int = NonZeroInt.random.value
+        val encoded: String = Json.encodeToString(value)
+        // WHEN
+        val result: NonZeroInt = Json.decodeFromString(encoded)
+        // THEN
+        result.value assertEquals value
+    }
+
     // ---------- Unary operations ----------
 
     @Test
@@ -458,6 +484,29 @@ class PositiveIntTest {
         result.assertNull()
     }
 
+    // ---------- Serialization ----------
+
+    @Test
+    fun serialization_should_behave_like_an_Int() {
+        // GIVEN
+        val x: PositiveInt = PositiveInt.random
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals Json.encodeToString(x.value)
+    }
+
+    @Test
+    fun deserialization_should_pass() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        val encoded: String = Json.encodeToString(value)
+        // WHEN
+        val result: PositiveInt = Json.decodeFromString(encoded)
+        // THEN
+        result.value assertEquals value
+    }
+
     // ---------- Unary operations ----------
 
     @Test
@@ -558,6 +607,29 @@ class StrictlyPositiveIntTest {
         val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
         // THEN
         result.assertNull()
+    }
+
+    // ---------- Serialization ----------
+
+    @Test
+    fun serialization_should_behave_like_an_Int() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals Json.encodeToString(x.value)
+    }
+
+    @Test
+    fun deserialization_should_pass() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        val encoded: String = Json.encodeToString(value)
+        // WHEN
+        val result: StrictlyPositiveInt = Json.decodeFromString(encoded)
+        // THEN
+        result.value assertEquals value
     }
 
     // ---------- Unary operations ----------
@@ -664,6 +736,29 @@ class NegativeIntTest {
         result.assertNull()
     }
 
+    // ---------- Serialization ----------
+
+    @Test
+    fun serialization_should_behave_like_an_Int() {
+        // GIVEN
+        val x: NegativeInt = NegativeInt.random
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals Json.encodeToString(x.value)
+    }
+
+    @Test
+    fun deserialization_should_pass() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        val encoded: String = Json.encodeToString(value)
+        // WHEN
+        val result: NegativeInt = Json.decodeFromString(encoded)
+        // THEN
+        result.value assertEquals value
+    }
+
     // ---------- Unary operations ----------
 
     @Test
@@ -764,6 +859,29 @@ class StrictlyNegativeIntTest {
         val result: StrictlyNegativeInt? = value.toStrictlyNegativeIntOrNull()
         // THEN
         result.assertNull()
+    }
+
+    // ---------- Serialization ----------
+
+    @Test
+    fun serialization_should_behave_like_an_Int() {
+        // GIVEN
+        val x: StrictlyNegativeInt = StrictlyNegativeInt.random
+        // WHEN
+        val result: String = Json.encodeToString(x)
+        // THEN
+        result assertEquals Json.encodeToString(x.value)
+    }
+
+    @Test
+    fun deserialization_should_pass() {
+        // GIVEN
+        val value: Int = StrictlyNegativeInt.random.value
+        val encoded: String = Json.encodeToString(value)
+        // WHEN
+        val result: StrictlyNegativeInt = Json.decodeFromString(encoded)
+        // THEN
+        result.value assertEquals value
     }
 
     // ---------- Unary operations ----------
