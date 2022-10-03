@@ -437,6 +437,176 @@ class NonZeroIntTest {
         // THEN
         result.value assertEquals -x.value
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toPositiveInt_should_pass_with_a_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value < 0) x = NonZeroInt.random
+        // WHEN
+        val result: PositiveInt = x.toPositiveInt()
+        // THEN
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toPositiveInt_should_throw_an_error_with_a_strictly_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value >= 0) x = NonZeroInt.random
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(x::toPositiveInt)
+    }
+
+    @Test
+    fun toPositiveIntOrNull_should_pass_with_a_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value < 0) x = NonZeroInt.random
+        // WHEN
+        val result: PositiveInt? = x.toPositiveIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toPositiveIntOrNull_should_return_null_with_a_strictly_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value >= 0) x = NonZeroInt.random
+        // WHEN
+        val result: PositiveInt? = x.toPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Test
+    fun toStrictlyPositiveInt_should_pass_with_a_strictly_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value <= 0) x = NonZeroInt.random
+        // WHEN
+        val result: StrictlyPositiveInt = x.toStrictlyPositiveInt()
+        // THEN
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toStrictlyPositiveInt_should_throw_an_error_with_a_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value > 0) x = NonZeroInt.random
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(x::toStrictlyPositiveInt)
+    }
+
+    @Test
+    fun toStrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value <= 0) x = NonZeroInt.random
+        // WHEN
+        val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toStrictlyPositiveIntOrNull_should_return_null_with_a_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value > 0) x = NonZeroInt.random
+        // WHEN
+        val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Test
+    fun toNegativeInt_should_pass_with_a_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value > 0) x = NonZeroInt.random
+        // WHEN
+        val result: NegativeInt = x.toNegativeInt()
+        // THEN
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toNegativeInt_should_throw_an_error_with_a_strictly_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value <= 0) x = NonZeroInt.random
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(x::toNegativeInt)
+    }
+
+    @Test
+    fun toNegativeIntOrNull_should_pass_with_a_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value > 0) x = NonZeroInt.random
+        // WHEN
+        val result: NegativeInt? = x.toNegativeIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toNegativeIntOrNull_should_return_null_with_a_strictly_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value <= 0) x = NonZeroInt.random
+        // WHEN
+        val result: NegativeInt? = x.toNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Test
+    fun toStrictlyNegativeInt_should_pass_with_a_strictly_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value >= 0) x = NonZeroInt.random
+        // WHEN
+        val result: StrictlyNegativeInt = x.toStrictlyNegativeInt()
+        // THEN
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toStrictlyNegativeInt_should_throw_an_error_with_a_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value < 0) x = NonZeroInt.random
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(x::toStrictlyNegativeInt)
+    }
+
+    @Test
+    fun toStrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value >= 0) x = NonZeroInt.random
+        // WHEN
+        val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toStrictlyNegativeIntOrNull_should_return_null_with_a_positive_value() {
+        // GIVEN
+        var x: NonZeroInt = NonZeroInt.random
+        while (x.value < 0) x = NonZeroInt.random
+        // WHEN
+        val result: StrictlyNegativeInt? = x.toStrictlyNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
 }
 
 class PositiveIntTest {
