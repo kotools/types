@@ -116,6 +116,26 @@ public sealed interface PositiveIntHolder : IntHolder {
         super.div(other).toNegativeInt()
 }
 
+// ---------- NegativeIntHolder ----------
+
+/** Parent of classes responsible for holding negative integers. */
+@SinceKotoolsTypes("3.0")
+public sealed interface NegativeIntHolder : IntHolder {
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public operator fun div(other: StrictlyPositiveInt): NegativeInt =
+        super.div(other).toNegativeInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public operator fun div(other: StrictlyNegativeInt): PositiveInt =
+        super.div(other).toPositiveInt()
+}
+
 // ---------- NonZeroInt ----------
 
 /**
@@ -337,7 +357,7 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
 @Serializable
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt private constructor(override val value: Int) :
-    IntHolder {
+    NegativeIntHolder {
     /** Contains static declarations for creating or holding a [NegativeInt]. */
     public companion object : IntHolderCompanion<NegativeInt> {
         private val range: IntRange = Int.MIN_VALUE..0
@@ -400,7 +420,8 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
-) : NonZeroIntHolder {
+) : NonZeroIntHolder,
+    NegativeIntHolder {
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyNegativeInt].
