@@ -143,6 +143,20 @@ public value class NonZeroInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
+
+    // ---------- Binary operations ----------
+
+    /** Multiplies this [value] by the [other] value. */
+    public operator fun times(other: NonZeroInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
+
+    /** Multiplies this [value] by the [other] value. */
+    public operator fun times(other: StrictlyPositiveInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
+
+    /** Multiplies this [value] by the [other] value. */
+    public operator fun times(other: StrictlyNegativeInt): NonZeroInt =
+        times(other.value).toNonZeroInt()
 }
 
 // ---------- PositiveInt ----------

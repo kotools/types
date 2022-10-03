@@ -315,6 +315,41 @@ class NonZeroIntTest {
         // THEN
         result.value assertEquals -x.value
     }
+
+    // ---------- Binary operations ----------
+
+    @Test
+    fun times_should_return_a_NonZeroInt_with_a_NonZeroInt() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        val y: NonZeroInt = NonZeroInt.random
+        // WHEN
+        val result: NonZeroInt = x * y
+        // THEN
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun times_should_return_a_NonZeroInt_with_a_StrictlyPositiveInt() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: NonZeroInt = x * y
+        // THEN
+        result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun times_should_return_a_NonZeroInt_with_a_StrictlyNegativeInt() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+        // WHEN
+        val result: NonZeroInt = x * y
+        // THEN
+        result.value assertEquals x.value * y.value
+    }
 }
 
 class PositiveIntTest {
