@@ -44,6 +44,12 @@ public sealed interface IntHolder {
 
     /** Multiplies this [value] by the [other] value. */
     public operator fun times(other: IntHolder): Int = times(other.value)
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public operator fun div(other: NonZeroIntHolder): Int = value / other.value
 }
 
 // ---------- IntHolderCompanion ----------
@@ -74,6 +80,13 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
 }
 
 // ---------- NonZeroIntHolder ----------
+
+/**
+ * Divides this value by the [other] value, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotoolsTypes("3.0")
+public operator fun Int.div(other: NonZeroIntHolder): Int = div(other.value)
 
 /** Parent of classes responsible for holding non-zero integers. */
 @SinceKotoolsTypes("3.0")

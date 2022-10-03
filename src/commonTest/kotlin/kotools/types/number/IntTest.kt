@@ -7,14 +7,19 @@ import kotools.assert.assertNull
 import kotlin.random.Random
 import kotlin.test.Test
 
-private val randomIntHolder: IntHolder
-    get() = listOf(
-        NonZeroInt.random,
-        PositiveInt.random,
-        StrictlyPositiveInt.random,
-        NegativeInt.random,
-        StrictlyNegativeInt.random
-    ).random()
+private val intHolders: List<IntHolder> = listOf(
+    NonZeroInt.random,
+    PositiveInt.random,
+    StrictlyPositiveInt.random,
+    NegativeInt.random,
+    StrictlyNegativeInt.random
+)
+
+private val nonZeroIntHolders: List<NonZeroIntHolder> = listOf(
+    NonZeroInt.random,
+    StrictlyPositiveInt.random,
+    StrictlyNegativeInt.random
+)
 
 class IntHolderTest {
     // ---------- Binary operations ----------
@@ -23,7 +28,7 @@ class IntHolderTest {
     fun plus_should_return_an_Int_when_adding_an_IntHolder_to_an_Int() {
         // GIVEN
         val x: Int = Random.nextInt()
-        val y: IntHolder = randomIntHolder
+        val y: IntHolder = intHolders.random()
         // WHEN
         val result: Int = x + y
         // THEN
@@ -33,7 +38,7 @@ class IntHolderTest {
     @Test
     fun plus_should_return_an_Int_with_an_Int() {
         // GIVEN
-        val x: IntHolder = randomIntHolder
+        val x: IntHolder = intHolders.random()
         val y: Int = Random.nextInt()
         // WHEN
         val result: Int = x + y
@@ -44,8 +49,8 @@ class IntHolderTest {
     @Test
     fun plus_should_return_an_Int_with_another_IntHolder() {
         // GIVEN
-        val x: IntHolder = randomIntHolder
-        val y: IntHolder = randomIntHolder
+        val x: IntHolder = intHolders.random()
+        val y: IntHolder = intHolders.random()
         // WHEN
         val result: Int = x + y
         // THEN
@@ -56,7 +61,7 @@ class IntHolderTest {
     fun minus_should_return_an_Int_when_subtracting_an_IntHolder_from_an_Int() {
         // GIVEN
         val x: Int = Random.nextInt()
-        val y: IntHolder = randomIntHolder
+        val y: IntHolder = intHolders.random()
         // WHEN
         val result: Int = x - y
         // THEN
@@ -66,7 +71,7 @@ class IntHolderTest {
     @Test
     fun minus_should_return_an_Int_with_an_Int() {
         // GIVEN
-        val x: IntHolder = randomIntHolder
+        val x: IntHolder = intHolders.random()
         val y: Int = Random.nextInt()
         // WHEN
         val result: Int = x - y
@@ -77,8 +82,8 @@ class IntHolderTest {
     @Test
     fun minus_should_return_an_Int_with_an_IntHolder() {
         // GIVEN
-        val x: IntHolder = randomIntHolder
-        val y: IntHolder = randomIntHolder
+        val x: IntHolder = intHolders.random()
+        val y: IntHolder = intHolders.random()
         // WHEN
         val result: Int = x - y
         // THEN
@@ -89,7 +94,7 @@ class IntHolderTest {
     fun times_should_return_an_Int_when_multiplying_an_Int_by_an_IntHolder() {
         // GIVEN
         val x: Int = Random.nextInt()
-        val y: IntHolder = randomIntHolder
+        val y: IntHolder = intHolders.random()
         // WHEN
         val result: Int = x * y
         // THEN
@@ -99,7 +104,7 @@ class IntHolderTest {
     @Test
     fun times_should_return_an_Int_with_an_Int() {
         // GIVEN
-        val x: IntHolder = randomIntHolder
+        val x: IntHolder = intHolders.random()
         val y: Int = Random.nextInt()
         // WHEN
         val result: Int = x * y
@@ -110,12 +115,23 @@ class IntHolderTest {
     @Test
     fun times_should_return_an_Int_with_an_IntHolder() {
         // GIVEN
-        val x: IntHolder = randomIntHolder
-        val y: IntHolder = randomIntHolder
+        val x: IntHolder = intHolders.random()
+        val y: IntHolder = intHolders.random()
         // WHEN
         val result: Int = x * y
         // THEN
         result assertEquals x.value * y.value
+    }
+
+    @Test
+    fun div_should_return_an_Int_with_a_NonZeroIntHolder() {
+        // GIVEN
+        val x: IntHolder = intHolders.random()
+        val y: NonZeroIntHolder = nonZeroIntHolders.random()
+        // WHEN
+        val result: Int = x / y
+        // THEN
+        result assertEquals x.value / y.value
     }
 }
 
@@ -143,7 +159,7 @@ class IntHolderCompanionTest {
     @Test
     fun invoke_should_pass_with_a_valid_value() {
         // GIVEN
-        val holder: IntHolder = randomIntHolder
+        val holder: IntHolder = intHolders.random()
         // WHEN
         val result: IntHolder = when (holder) {
             is NonZeroInt -> NonZeroInt(holder.value)
@@ -159,7 +175,7 @@ class IntHolderCompanionTest {
     @Test
     fun invoke_should_throw_an_error_with_an_invalid_value() {
         // GIVEN
-        val holder: IntHolder = randomIntHolder
+        val holder: IntHolder = intHolders.random()
         // WHEN & THEN
         assertFailsWith<IllegalArgumentException> {
             when (holder) {
@@ -175,7 +191,7 @@ class IntHolderCompanionTest {
     @Test
     fun orNull_should_pass_with_a_valid_value() {
         // GIVEN
-        val holder: IntHolder = randomIntHolder
+        val holder: IntHolder = intHolders.random()
         // WHEN
         val result: IntHolder? = when (holder) {
             is NonZeroInt -> NonZeroInt orNull holder.value
@@ -191,7 +207,7 @@ class IntHolderCompanionTest {
     @Test
     fun orNull_should_return_null_with_an_invalid_value() {
         // GIVEN & WHEN
-        val result: IntHolder? = when (randomIntHolder) {
+        val result: IntHolder? = when (intHolders.random()) {
             is NonZeroInt -> NonZeroInt orNull 0
             is PositiveInt -> PositiveInt orNull StrictlyNegativeInt.random.value
             is StrictlyPositiveInt -> StrictlyPositiveInt orNull NegativeInt.random.value
@@ -204,20 +220,28 @@ class IntHolderCompanionTest {
 }
 
 class NonZeroIntHolderTest {
+    // ---------- Binary operations ----------
+
     @Test
     fun times_should_return_a_NonZeroInt() {
         // GIVEN
-        val holders: List<NonZeroIntHolder> = listOf(
-            NonZeroInt.random,
-            StrictlyPositiveInt.random,
-            StrictlyNegativeInt.random
-        )
-        val x: NonZeroIntHolder = holders.random()
-        val y: NonZeroIntHolder = holders.random()
+        val x: NonZeroIntHolder = nonZeroIntHolders.random()
+        val y: NonZeroIntHolder = nonZeroIntHolders.random()
         // WHEN
         val result: NonZeroInt = x * y
         // THEN
         result.value assertEquals x.value * y.value
+    }
+
+    @Test
+    fun div_should_return_an_Int_when_dividing_an_Int_by_a_NonZeroIntHolder() {
+        // GIVEN
+        val x: Int = Random.nextInt()
+        val y: NonZeroIntHolder = nonZeroIntHolders.random()
+        // WHEN
+        val result: Int = x / y
+        // THEN
+        result assertEquals x / y.value
     }
 }
 
