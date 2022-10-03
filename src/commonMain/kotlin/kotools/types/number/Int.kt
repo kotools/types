@@ -73,6 +73,16 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
     public operator fun invoke(value: Int): T
 }
 
+// ---------- NonZeroIntHolder ----------
+
+/** Parent of classes responsible for holding non-zero integers. */
+@SinceKotoolsTypes("3.0")
+public sealed interface NonZeroIntHolder : IntHolder {
+    /** Multiplies this [value] by the [other] value. */
+    public operator fun times(other: NonZeroIntHolder): NonZeroInt =
+        times(other.value).toNonZeroInt()
+}
+
 // ---------- NonZeroInt ----------
 
 /**
@@ -94,7 +104,7 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 @Serializable
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt private constructor(override val value: Int) :
-    IntHolder {
+    NonZeroIntHolder {
     /** Contains static declarations for creating or holding a [NonZeroInt]. */
     public companion object : IntHolderCompanion<NonZeroInt> {
         private val negativeRange: IntRange = StrictlyNegativeInt.range
@@ -143,20 +153,6 @@ public value class NonZeroInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
-
-    // ---------- Binary operations ----------
-
-    /** Multiplies this [value] by the [other] value. */
-    public operator fun times(other: NonZeroInt): NonZeroInt =
-        times(other.value).toNonZeroInt()
-
-    /** Multiplies this [value] by the [other] value. */
-    public operator fun times(other: StrictlyPositiveInt): NonZeroInt =
-        times(other.value).toNonZeroInt()
-
-    /** Multiplies this [value] by the [other] value. */
-    public operator fun times(other: StrictlyNegativeInt): NonZeroInt =
-        times(other.value).toNonZeroInt()
 }
 
 // ---------- PositiveInt ----------
@@ -243,7 +239,7 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
-) : IntHolder {
+) : NonZeroIntHolder {
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyPositiveInt].
@@ -370,7 +366,7 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
-) : IntHolder {
+) : NonZeroIntHolder {
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyNegativeInt].
