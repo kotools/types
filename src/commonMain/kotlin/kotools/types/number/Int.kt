@@ -106,14 +106,14 @@ public sealed interface PositiveIntHolder : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        div(other as NonZeroIntHolder).toPositiveInt()
+        super.div(other).toPositiveInt()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyNegativeInt): NegativeInt =
-        div(other as NonZeroIntHolder).toNegativeInt()
+        super.div(other).toNegativeInt()
 }
 
 // ---------- NonZeroInt ----------
