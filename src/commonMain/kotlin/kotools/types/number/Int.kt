@@ -365,6 +365,46 @@ public value class PositiveInt private constructor(override val value: Int) :
 
     // ---------- Conversions ----------
 
+    /**
+     * Returns this [value] as a [NonZeroInt], or throws an
+     * [IllegalArgumentException] if this [value] equals zero.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+
+    /**
+     * Returns this [value] as a [NonZeroInt], or returns `null` if this [value]
+     * equals zero.
+     */
+    public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or throws an
+     * [IllegalArgumentException] if this [value] equals zero.
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
+        value.toStrictlyPositiveInt()
+
+    /**
+     * Returns this [value] as a [StrictlyPositiveInt], or returns `null` if
+     * this [value] equals zero.
+     */
+    public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+        value.toStrictlyPositiveIntOrNull()
+
+    /**
+     * Returns this [value] as a [NegativeInt], or throws an
+     * [IllegalArgumentException] if this [value] is strictly positive.
+     */
+    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
+
+    /**
+     * Returns this [value] as a [NegativeInt], or returns `null` if this
+     * [value] is strictly positive.
+     */
+    public fun toNegativeIntOrNull(): NegativeInt? = value.toNegativeIntOrNull()
+
     override fun toString(): String = value.toString()
 }
 
