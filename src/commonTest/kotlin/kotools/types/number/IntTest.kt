@@ -245,6 +245,33 @@ class NonZeroIntHolderTest {
     }
 }
 
+class PositiveIntHolderTest {
+    private val holders: List<PositiveIntHolder> =
+        listOf(PositiveInt.random, StrictlyPositiveInt.random)
+
+    @Test
+    fun div_should_return_a_PositiveInt_with_a_StrictlyPositiveInt() {
+        // GIVEN
+        val x: PositiveIntHolder = holders.random()
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: PositiveInt = x / y
+        // THEN
+        result.value assertEquals x.value / y.value
+    }
+
+    @Test
+    fun div_should_return_a_NegativeInt_with_a_StrictlyNegativeInt() {
+        // GIVEN
+        val x: PositiveIntHolder = holders.random()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random
+        // WHEN
+        val result: NegativeInt = x / y
+        // THEN
+        result.value assertEquals x.value / y.value
+    }
+}
+
 class NonZeroIntTest {
     // ---------- Builders ----------
 

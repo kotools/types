@@ -96,6 +96,26 @@ public sealed interface NonZeroIntHolder : IntHolder {
         times(other.value).toNonZeroInt()
 }
 
+// ---------- PositiveIntHolder ----------
+
+/** Parent of classes responsible for holding positive integers. */
+@SinceKotoolsTypes("3.0")
+public sealed interface PositiveIntHolder : IntHolder {
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public operator fun div(other: StrictlyPositiveInt): PositiveInt =
+        div(other as NonZeroIntHolder).toPositiveInt()
+
+    /**
+     * Divides this [value] by the [other] value, truncating the result to an
+     * integer that is closer to zero.
+     */
+    public operator fun div(other: StrictlyNegativeInt): NegativeInt =
+        div(other as NonZeroIntHolder).toNegativeInt()
+}
+
 // ---------- NonZeroInt ----------
 
 /**
@@ -189,7 +209,7 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
 @Serializable
 @SinceKotoolsTypes("1.1")
 public value class PositiveInt private constructor(override val value: Int) :
-    IntHolder {
+    PositiveIntHolder {
     /** Contains static declarations for creating or holding a [PositiveInt]. */
     public companion object : IntHolderCompanion<PositiveInt> {
         private val range: IntRange = 0..Int.MAX_VALUE
@@ -252,7 +272,8 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
-) : NonZeroIntHolder {
+) : NonZeroIntHolder,
+    PositiveIntHolder {
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyPositiveInt].
