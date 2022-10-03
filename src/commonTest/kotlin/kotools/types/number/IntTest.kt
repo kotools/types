@@ -7,6 +7,7 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotools.types.string.NotBlankString
 import kotlin.random.Random
 import kotlin.test.Test
 
@@ -135,6 +136,24 @@ class IntHolderTest {
         val result: Int = x / y
         // THEN
         result assertEquals x.value / y.value
+    }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_behave_like_Int(): Unit = intHolders.forEach {
+        // GIVEN & WHEN
+        val result: String = it.toString()
+        // THEN
+        result assertEquals it.value.toString()
+    }
+
+    @Test
+    fun toNotBlankString_should_pass(): Unit = intHolders.forEach {
+        // GIVEN & WHEN
+        val result: NotBlankString = it.toNotBlankString()
+        // THEN
+        result.value assertEquals it.value.toString()
     }
 }
 

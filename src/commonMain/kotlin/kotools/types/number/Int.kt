@@ -8,6 +8,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
+import kotools.types.string.NotBlankString
+import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- IntHolder ----------
@@ -55,6 +57,17 @@ public sealed interface IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: NonZeroIntHolder): Int = value / other.value
+
+    // ---------- Conversions ----------
+
+    /** Returns the string representation of the [value]. */
+    override fun toString(): String
+
+    /**
+     * Returns the string representation of the [value] as a [NotBlankString].
+     */
+    public fun toNotBlankString(): NotBlankString =
+        toString().toNotBlankString()
 }
 
 internal sealed class IntHolderSerializer<T : IntHolder>(
@@ -284,6 +297,8 @@ public value class NonZeroInt private constructor(override val value: Int) :
      */
     public fun toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
         value.toStrictlyNegativeIntOrNull()
+
+    override fun toString(): String = value.toString()
 }
 
 internal object NonZeroIntSerializer :
@@ -347,6 +362,10 @@ public value class PositiveInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value.toString()
 }
 
 internal object PositiveIntSerializer :
@@ -418,6 +437,10 @@ public value class StrictlyPositiveInt private constructor(
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): StrictlyNegativeInt =
         StrictlyNegativeInt(-value)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value.toString()
 }
 
 internal object StrictlyPositiveIntSerializer :
@@ -481,6 +504,10 @@ public value class NegativeInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value.toString()
 }
 
 internal object NegativeIntSerializer :
@@ -552,6 +579,10 @@ public value class StrictlyNegativeInt private constructor(
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): StrictlyPositiveInt =
         StrictlyPositiveInt(-value)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value.toString()
 }
 
 internal object StrictlyNegativeIntSerializer :
