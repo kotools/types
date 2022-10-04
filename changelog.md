@@ -28,8 +28,6 @@ All notable changes to this project will be documented in this file.
   `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`,
   `NotEmptyMutableList`, `NotEmptySet` and
   `NotEmptyMutableSet` ([#65](https://github.com/kotools/types/issues/65)).
-- `KotoolsInt` type for unifying integer's types
-  ([#60](https://github.com/kotools/types/issues/60)).
 - Random number retrieving from the ranges of `NonZeroInt`, `PositiveInt`,
   `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   ([#79](https://github.com/kotools/types/issues/79)).
@@ -58,30 +56,13 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-The `kotools.types.int` package with the following types:
-
-- `IntHolder` ([#106](https://github.com/kotools/types/issues/106))
-- `ZeroInt` ([#108](https://github.com/kotools/types/issues/108)).
-
 The following types are now supported on JVM, JS and Native platforms:
 
+- `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and
+  `StrictlyNegativeInt` ([#110](https://github.com/kotools/types/issues/110))
 - `NotBlankString` ([#89](https://github.com/kotools/types/issues/89))
 - `NotEmptyCollection` ([#91](https://github.com/kotools/types/issues/91))
 - `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
-
-#### Changed
-
-Moved the following types to the `kotools.types.int` package:
-
-- `NonZeroInt` ([#84](https://github.com/kotools/types/issues/84))
-- `PositiveInt` ([#85](https://github.com/kotools/types/issues/85))
-- `NegativeInt` ([#86](https://github.com/kotools/types/issues/86))
-- `StrictlyPositiveInt` ([#87](https://github.com/kotools/types/issues/87))
-- `StrictlyNegativeInt` ([#88](https://github.com/kotools/types/issues/88)).
-
-#### Removed
-
-- Removed all declarations from the `kotools.types.number` package.
 
 ## Version 2.0.0 - 2022/08/01
 
