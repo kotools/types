@@ -11,7 +11,7 @@ import kotools.types.core.AbstractHolder
 import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.Validator
-import kotools.types.int.*
+import kotools.types.number.*
 
 // ---------- Builders ----------
 

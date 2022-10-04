@@ -2,8 +2,8 @@ package kotools.types.collections
 
 import kotools.assert.*
 import kotools.types.core.indexOutOfBoundsMessage
-import kotools.types.int.PositiveInt
-import kotools.types.int.StrictlyPositiveInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 
 class NotEmptyMutableListJvmTest {
     @Nested

@@ -1,8 +1,8 @@
 package kotools.types.collections
 
 import kotools.types.core.SinceKotoolsTypes
-import kotools.types.int.PositiveInt
-import kotools.types.int.StrictlyPositiveInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 

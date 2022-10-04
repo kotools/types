@@ -4,7 +4,7 @@ import kotools.assert.assertEquals
 import kotools.assert.assertNotEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
-import kotools.types.int.*
+import kotools.types.number.*
 import kotlin.random.Random
 import kotlin.test.Test
 
