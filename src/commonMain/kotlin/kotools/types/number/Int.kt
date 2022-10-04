@@ -179,11 +179,28 @@ public sealed interface NegativeIntHolder : IntHolder {
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
 /**
+ * Returns this value as a [NonZeroInt].
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents zero.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toNonZeroInt(): NonZeroInt = toInt().toNonZeroInt()
+
+/**
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
+
+/**
+ * Returns this value as a [NonZeroInt], or returns `null` if this value is not
+ * a valid representation of a number or if it represents zero.
+ */
+@SinceKotoolsTypes("3.0")
+public fun String.toNonZeroIntOrNull(): NonZeroInt? =
+    toIntOrNull()?.toNonZeroIntOrNull()
 
 /** Representation of integers other than zero. */
 @JvmInline
@@ -314,11 +331,30 @@ internal object NonZeroIntSerializer :
 public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
 
 /**
+ * Returns this value as a [PositiveInt].
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws a [IllegalArgumentException] if it represents a
+ * strictly negative number.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toPositiveInt(): PositiveInt = toInt().toPositiveInt()
+
+/**
  * Returns this value as a [PositiveInt], or returns null if this value is
  * strictly negative.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
+
+/**
+ * Returns this value as a [PositiveInt], or returns `null` if this value is not
+ * a valid representation of a number or if it represents a strictly negative
+ * number.
+ */
+@SinceKotoolsTypes("3.0")
+public fun String.toPositiveIntOrNull(): PositiveInt? =
+    toIntOrNull()?.toPositiveIntOrNull()
 
 /** Representation of positive integers, including zero. */
 @JvmInline
@@ -422,12 +458,32 @@ public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
 
 /**
+ * Returns this value as a [StrictlyPositiveInt].
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents a
+ * negative number.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toStrictlyPositiveInt(): StrictlyPositiveInt =
+    toInt().toStrictlyPositiveInt()
+
+/**
  * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
  * value is negative.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     StrictlyPositiveInt orNull this
+
+/**
+ * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
+ * value is not a valid representation of a number or if it represents a
+ * negative number.
+ */
+@SinceKotoolsTypes("3.0")
+public fun String.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+    toIntOrNull()?.toStrictlyPositiveIntOrNull()
 
 /** Representation of strictly positive integers, excluding zero. */
 @JvmInline
@@ -502,11 +558,30 @@ internal object StrictlyPositiveIntSerializer :
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
+ * Returns this value as a [NegativeInt].
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents a
+ * strictly positive number.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toNegativeInt(): NegativeInt = toInt().toNegativeInt()
+
+/**
  * Returns this value as a [NegativeInt], or returns `null` if this value is
  * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
+
+/**
+ * Returns this value as a [NegativeInt], or returns `null` if this value is not
+ * a valid representation of a number or if it represents a strictly positive
+ * number.
+ */
+@SinceKotoolsTypes("3.0")
+public fun String.toNegativeIntOrNull(): NegativeInt? =
+    toIntOrNull()?.toNegativeIntOrNull()
 
 /** Representation of negative integers, including zero. */
 @JvmInline
@@ -611,12 +686,32 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
 
 /**
+ * Returns this value as a [StrictlyNegativeInt].
+ * Throws a [NumberFormatException] if this value is not a valid representation
+ * of a number, or throws an [IllegalArgumentException] if it represents a
+ * positive number.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(IllegalArgumentException::class, NumberFormatException::class)
+public fun String.toStrictlyNegativeInt(): StrictlyNegativeInt =
+    toInt().toStrictlyNegativeInt()
+
+/**
  * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
  * value is positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     StrictlyNegativeInt orNull this
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
+ * value is not a valid representation of a number or if it represents a
+ * positive number.
+ */
+@SinceKotoolsTypes("3.0")
+public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    toIntOrNull()?.toStrictlyNegativeIntOrNull()
 
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline

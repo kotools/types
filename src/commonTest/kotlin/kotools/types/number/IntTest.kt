@@ -358,6 +358,62 @@ class NonZeroIntTest {
     fun Int_toNonZeroIntOrNull_should_return_null_with_an_Int_that_equals_zero(): Unit =
         0.toNonZeroIntOrNull().assertNull()
 
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNonZeroInt_should_pass_with_a_String_representing_a_number_other_than_0() {
+        // GIVEN
+        val value: Int = NonZeroInt.random.value
+        // WHEN
+        val result: NonZeroInt = value.toString().toNonZeroInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNonZeroInt_should_throw_an_error_with_an_invalid_String() {
+        assertFailsWith<NumberFormatException>("a"::toNonZeroInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNonZeroInt_should_throw_an_error_with_a_String_representing_0() {
+        assertFailsWith<IllegalArgumentException>("0"::toNonZeroInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNonZeroIntOrNull_should_pass_with_a_String_representing_a_number_other_than_0() {
+        // GIVEN
+        val value: Int = NonZeroInt.random.value
+        // WHEN
+        val result: NonZeroInt? = value.toString().toNonZeroIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNonZeroIntOrNull_should_return_null_with_an_invalid_String() {
+        // GIVEN
+        val value = "a"
+        // WHEN
+        val result: NonZeroInt? = value.toNonZeroIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNonZeroIntOrNull_should_return_null_with_a_String_representing_0() {
+        // GIVEN
+        val value = "0"
+        // WHEN
+        val result: NonZeroInt? = value.toNonZeroIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
     // ---------- Serialization ----------
 
     @Test
@@ -673,6 +729,65 @@ class PositiveIntTest {
         result.assertNull()
     }
 
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toPositiveInt_should_pass_with_a_String_representing_a_positive_number() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: PositiveInt = value.toString().toPositiveInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toPositiveInt_should_throw_an_error_with_an_invalid_String() {
+        assertFailsWith<NumberFormatException>("a"::toPositiveInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toPositiveInt_should_throw_an_error_with_a_String_representing_a_strictly_negative_number() {
+        // GIVEN
+        val value: String = StrictlyNegativeInt.random.value.toString()
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(value::toPositiveInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toPositiveIntOrNull_should_pass_with_a_String_representing_a_positive_number() {
+        // GIVEN
+        val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: PositiveInt? = value.toString().toPositiveIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toPositiveIntOrNull_should_return_null_with_an_invalid_String() {
+        // GIVEN
+        val value = "a"
+        // WHEN
+        val result: PositiveInt? = value.toPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toPositiveIntOrNull_should_return_null_with_a_String_representing_a_strictly_negative_number() {
+        // GIVEN
+        val value: String = StrictlyNegativeInt.random.value.toString()
+        // WHEN
+        val result: PositiveInt? = value.toPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
     // ---------- Serialization ----------
 
     @Test
@@ -920,6 +1035,68 @@ class StrictlyPositiveIntTest {
         result.assertNull()
     }
 
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyPositiveInt_should_pass_with_a_String_representing_a_strictly_positive_number() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        val valueAsString: String = value.toString()
+        // WHEN
+        val result: StrictlyPositiveInt = valueAsString.toStrictlyPositiveInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyPositiveInt_should_throw_an_error_with_an_invalid_String() {
+        assertFailsWith<NumberFormatException>("a"::toStrictlyPositiveInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyPositiveInt_should_throw_an_error_with_a_String_representing_a_negative_number() {
+        // GIVEN
+        val value: String = NegativeInt.random.value.toString()
+        // WHEN
+        assertFailsWith<IllegalArgumentException>(value::toStrictlyPositiveInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyPositiveIntOrNull_should_pass_with_a_String_representing_a_strictly_positive_number() {
+        // GIVEN
+        val value: Int = StrictlyPositiveInt.random.value
+        val valueAsString: String = value.toString()
+        // WHEN
+        val result: StrictlyPositiveInt? =
+            valueAsString.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyPositiveIntOrNull_should_return_null_with_an_invalid_String() {
+        // GIVEN
+        val value = "a"
+        // WHEN
+        val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyPositiveIntOrNull_should_return_null_with_a_String_representing_a_negative_number() {
+        // GIVEN
+        val value: String = NegativeInt.random.value.toString()
+        // WHEN
+        val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
     // ---------- Serialization ----------
 
     @Test
@@ -1063,6 +1240,67 @@ class NegativeIntTest {
     fun Int_toNegativeIntOrNull_should_return_null_with_a_strictly_positive_Int() {
         // GIVEN
         val value: Int = StrictlyPositiveInt.random.value
+        // WHEN
+        val result: NegativeInt? = value.toNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNegativeInt_should_pass_with_a_String_representing_a_negative_number() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        val valueAsString: String = value.toString()
+        // WHEN
+        val result: NegativeInt = valueAsString.toNegativeInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNegativeInt_should_throw_an_error_with_an_invalid_String() {
+        assertFailsWith<NumberFormatException>("a"::toNegativeInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNegativeInt_should_throw_an_error_with_a_String_representing_a_strictly_positive_number() {
+        // GIVEN
+        val value: String = StrictlyPositiveInt.random.value.toString()
+        // WHEN
+        assertFailsWith<IllegalArgumentException>(value::toNegativeInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNegativeOrNull_should_pass_with_a_String_representing_a_negative_number() {
+        // GIVEN
+        val value: Int = NegativeInt.random.value
+        val valueAsString: String = value.toString()
+        // WHEN
+        val result: NegativeInt? = valueAsString.toNegativeIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNegativeIntOrNull_should_return_null_with_an_invalid_String() {
+        // GIVEN
+        val value = "a"
+        // WHEN
+        val result: NegativeInt? = value.toNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toNegativeIntOrNull_should_return_null_with_a_String_representing_a_strictly_positive_number() {
+        // GIVEN
+        val value: String = StrictlyPositiveInt.random.value.toString()
         // WHEN
         val result: NegativeInt? = value.toNegativeIntOrNull()
         // THEN
@@ -1310,6 +1548,68 @@ class StrictlyNegativeIntTest {
     fun Int_toStrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int() {
         // GIVEN
         val value: Int = PositiveInt.random.value
+        // WHEN
+        val result: StrictlyNegativeInt? = value.toStrictlyNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyNegativeInt_should_pass_with_a_String_representing_a_strictly_negative_number() {
+        // GIVEN
+        val value: Int = StrictlyNegativeInt.random.value
+        val valueAsString: String = value.toString()
+        // WHEN
+        val result: StrictlyNegativeInt = valueAsString.toStrictlyNegativeInt()
+        // THEN
+        result.value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyNegativeInt_should_throw_an_error_with_an_invalid_String() {
+        assertFailsWith<NumberFormatException>("a"::toStrictlyNegativeInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyNegativeInt_should_throw_an_error_with_a_String_representing_a_positive_number() {
+        // GIVEN
+        val value: String = PositiveInt.random.value.toString()
+        // WHEN & THEN
+        assertFailsWith<IllegalArgumentException>(value::toStrictlyNegativeInt)
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyNegativeIntOrNull_should_pass_with_a_String_representing_a_strictly_negative_number() {
+        // GIVEN
+        val value: Int = StrictlyNegativeInt.random.value
+        val valueAsString: String = value.toString()
+        // WHEN
+        val result: StrictlyNegativeInt? =
+            valueAsString.toStrictlyNegativeIntOrNull()
+        // THEN
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyNegativeIntOrNull_should_return_null_with_an_invalid_String() {
+        // GIVEN
+        val value = "a"
+        // WHEN
+        val result: StrictlyNegativeInt? = value.toStrictlyNegativeIntOrNull()
+        // THEN
+        result.assertNull()
+    }
+
+    @Suppress("TestFunctionName")
+    @Test
+    fun String_toStrictlyNegativeIntOrNull_should_return_null_with_a_String_representing_a_positive_number() {
+        // GIVEN
+        val value: String = PositiveInt.random.value.toString()
         // WHEN
         val result: StrictlyNegativeInt? = value.toStrictlyNegativeIntOrNull()
         // THEN
