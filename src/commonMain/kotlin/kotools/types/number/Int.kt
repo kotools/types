@@ -480,6 +480,12 @@ public value class StrictlyPositiveInt private constructor(
 
     // ---------- Conversions ----------
 
+    /** Returns this [value] as a [NonZeroInt]. */
+    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+
+    /** Returns this [value] as a [PositiveInt]. */
+    public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
+
     override fun toString(): String = value.toString()
 }
 

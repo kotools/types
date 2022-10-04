@@ -1000,6 +1000,28 @@ class StrictlyPositiveIntTest {
         // THEN
         result.value assertEquals -x.value
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toNonZeroInt_should_pass() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: NonZeroInt = x.toNonZeroInt()
+        // THEN
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toPositiveInt_should_pass() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random
+        // WHEN
+        val result: PositiveInt = x.toPositiveInt()
+        // THEN
+        result.value assertEquals x.value
+    }
 }
 
 class NegativeIntTest {
