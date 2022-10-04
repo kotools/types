@@ -669,6 +669,12 @@ public value class StrictlyNegativeInt private constructor(
 
     // ---------- Conversions ----------
 
+    /** Returns this [value] as a [NonZeroInt]. */
+    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+
+    /** Returns this [value] as a [NegativeInt]. */
+    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
+
     override fun toString(): String = value.toString()
 }
 
