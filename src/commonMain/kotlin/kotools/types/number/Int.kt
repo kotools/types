@@ -6,6 +6,7 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.core.Holder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
 import kotools.types.string.NotBlankString
@@ -28,10 +29,7 @@ public operator fun Int.times(other: IntHolder): Int = times(other.value)
 
 /** Parent of classes responsible for holding integers. */
 @SinceKotoolsTypes("3.0")
-public sealed interface IntHolder {
-    /** The value to hold. */
-    public val value: Int
-
+public sealed interface IntHolder : Holder<Int> {
     // ---------- Binary operations ----------
 
     /** Adds the [other] value to this [value]. */
@@ -59,9 +57,6 @@ public sealed interface IntHolder {
     public operator fun div(other: NonZeroIntHolder): Int = value / other.value
 
     // ---------- Conversions ----------
-
-    /** Returns the string representation of the [value]. */
-    override fun toString(): String
 
     /**
      * Returns the string representation of the [value] as a [NotBlankString].
