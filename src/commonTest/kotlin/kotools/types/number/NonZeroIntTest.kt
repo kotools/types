@@ -43,7 +43,8 @@ class NonZeroIntTest {
     @Test
     fun string_toNonZeroInt_should_pass_with_a_String_representing_a_number_other_than_0() {
         val value: Int = NonZeroInt.random.value
-        val result: NonZeroInt = value.toString().toNonZeroInt()
+        val valueAsString: String = value.toString()
+        val result: NonZeroInt = valueAsString.toNonZeroInt()
         result.value assertEquals value
     }
 
@@ -60,7 +61,8 @@ class NonZeroIntTest {
     @Test
     fun string_toNonZeroIntOrNull_should_pass_with_a_String_representing_a_number_other_than_0() {
         val value: Int = NonZeroInt.random.value
-        val result: NonZeroInt? = value.toString().toNonZeroIntOrNull()
+        val valueAsString: String = value.toString()
+        val result: NonZeroInt? = valueAsString.toNonZeroIntOrNull()
         result.assertNotNull().value assertEquals value
     }
 
