@@ -7,6 +7,7 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotlin.random.Random
 import kotlin.test.Test
 
 class StrictlyPositiveIntTest {
@@ -14,7 +15,8 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun constructor_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = StrictlyPositiveInt.random.value
+        var value: Int = Random.nextInt()
+        while (0 >= value) value = Random.nextInt()
         val result = StrictlyPositiveInt(value)
         result.value assertEquals value
     }
@@ -27,7 +29,8 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun companion_orNull_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = StrictlyPositiveInt.random.value
+        var value: Int = Random.nextInt()
+        while (0 >= value) value = Random.nextInt()
         val result: StrictlyPositiveInt? = StrictlyPositiveInt orNull value
         result.assertNotNull().value assertEquals value
     }
