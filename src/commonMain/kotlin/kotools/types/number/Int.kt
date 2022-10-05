@@ -82,11 +82,6 @@ internal sealed class IntHolderSerializer<T : IntHolder>(
 
 // ---------- IntHolderCompanion ----------
 
-/** Returns the [value] as a type [T], or returns `null` if it fails. */
-@SinceKotoolsTypes("3.0")
-public infix fun <T : IntHolder> IntHolderCompanion<T>.orNull(value: Int): T? =
-    tryOrNull { this(value) }
-
 /** Parent of companion objects in subtypes of [IntHolder]. */
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolderCompanion<out T : IntHolder> {
@@ -105,6 +100,9 @@ public sealed interface IntHolderCompanion<out T : IntHolder> {
      */
     @Throws(IllegalArgumentException::class)
     public operator fun invoke(value: Int): T
+
+    /** Returns the [value] as a type [T], or returns `null` if it fails. */
+    public infix fun orNull(value: Int): T? = tryOrNull { this(value) }
 }
 
 // ---------- NonZeroIntHolder ----------
