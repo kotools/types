@@ -1,7 +1,6 @@
 package kotools.types.number
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
@@ -11,7 +10,6 @@ import kotools.types.core.HolderCompanion
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
-import kotlin.jvm.JvmInline
 
 // ---------- IntHolder ----------
 
@@ -179,121 +177,3 @@ public sealed interface NegativeIntHolder : IntHolder {
     public operator fun div(other: StrictlyNegativeInt): PositiveInt =
         super.div(other).toPositiveInt()
 }
-
-// ---------- StrictlyNegativeInt ----------
-
-/**
- * Returns this value as a [StrictlyNegativeInt], or throws an
- * [IllegalArgumentException] if this value is positive.
- */
-@SinceKotoolsTypes("1.1")
-public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
-    StrictlyNegativeInt(this)
-
-/**
- * Returns this value as a [StrictlyNegativeInt].
- * Throws a [NumberFormatException] if this value is not a valid representation
- * of a number, or throws an [IllegalArgumentException] if it represents a
- * positive number.
- */
-@SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toStrictlyNegativeInt(): StrictlyNegativeInt =
-    toInt().toStrictlyNegativeInt()
-
-/**
- * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
- * value is positive.
- */
-@SinceKotoolsTypes("1.1")
-public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    StrictlyNegativeInt orNull this
-
-/**
- * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
- * value is not a valid representation of a number or if it represents a
- * positive number.
- */
-@SinceKotoolsTypes("3.0")
-public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    toIntOrNull()?.toStrictlyNegativeIntOrNull()
-
-/**
- * Representation of strictly negative integers, excluding zero.
- *
- * @constructor Returns the [value] as a [StrictlyNegativeInt], or throws an
- * [IllegalArgumentException] if the [value] is positive.
- */
-@JvmInline
-@Serializable(StrictlyNegativeIntSerializer::class)
-@SinceKotoolsTypes("1.1")
-public value class StrictlyNegativeInt
-@Throws(IllegalArgumentException::class)
-constructor(override val value: Int) : Comparable<StrictlyNegativeInt>,
-    NegativeIntHolder,
-    NonZeroIntHolder {
-    init {
-        require(value < 0) {
-            "StrictlyNegativeInt doesn't accept positive values (tried with " +
-                    "$value)."
-        }
-    }
-
-    /**
-     * Contains static declarations for creating or holding a
-     * [StrictlyNegativeInt].
-     */
-    public companion object :
-        IntHolderCompanion<StrictlyNegativeInt>(::StrictlyNegativeInt) {
-        internal val range: IntRange = Int.MIN_VALUE..-1
-        override val min: StrictlyNegativeInt = builder(range.first)
-        override val max: StrictlyNegativeInt = builder(range.last)
-        override val random: StrictlyNegativeInt get() = builder(range.random())
-    }
-
-    // ---------- Unary operations ----------
-
-    /**
-     * Returns this [value] incremented by one.
-     * If this [value] is the [maximum][StrictlyNegativeInt.max], it returns
-     * the [minimum][StrictlyNegativeInt.min] value instead.
-     */
-    public operator fun inc(): StrictlyNegativeInt = if (value == max.value) min
-    else StrictlyNegativeInt(value + 1)
-
-    /**
-     * Returns this [value] decremented by one.
-     * If this [value] is the [minimum][StrictlyNegativeInt.min], it returns
-     * the [maximum][StrictlyNegativeInt.max] value instead.
-     */
-    public operator fun dec(): StrictlyNegativeInt = if (value == min.value) max
-    else StrictlyNegativeInt(value - 1)
-
-    /** Returns the negative of this [value]. */
-    public operator fun unaryMinus(): StrictlyPositiveInt =
-        StrictlyPositiveInt(-value)
-
-    // ---------- Binary operations ----------
-
-    /**
-     * Compares this [value] with the [other] value for order.
-     * Returns zero if this [value] equals the [other] value, a negative number
-     * if this [value] is less than the [other] value, or a positive number if
-     * this [value] is greater than the [other] value.
-     */
-    override fun compareTo(other: StrictlyNegativeInt): Int =
-        super<NegativeIntHolder>.compareTo(other)
-
-    // ---------- Conversions ----------
-
-    /** Returns this [value] as a [NonZeroInt]. */
-    public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
-
-    /** Returns this [value] as a [NegativeInt]. */
-    public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
-
-    override fun toString(): String = value.toString()
-}
-
-internal object StrictlyNegativeIntSerializer :
-    IntHolderSerializer<StrictlyNegativeInt>(Int::toStrictlyNegativeInt)
