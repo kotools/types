@@ -7,6 +7,7 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotlin.random.Random
 import kotlin.test.Test
 
 class PositiveIntTest {
@@ -14,29 +15,30 @@ class PositiveIntTest {
 
     @Test
     fun constructor_should_pass_with_a_positive_Int() {
-        val value: Int = PositiveInt.random.value
+        var value: Int = Random.nextInt()
+        while (0 > value) value = Random.nextInt()
         val result = PositiveInt(value)
         result.value assertEquals value
     }
 
     @Test
     fun constructor_should_throw_an_error_with_a_strictly_negative_Int() {
-        assertFailsWith<IllegalArgumentException> {
-            PositiveInt(StrictlyNegativeInt.random.value)
-        }
+        val value: Int = StrictlyNegativeInt.random.value
+        assertFailsWith<IllegalArgumentException> { PositiveInt(value) }
     }
 
     @Test
     fun companion_orNull_should_pass_with_a_positive_Int() {
-        val value: Int = PositiveInt.random.value
+        var value: Int = Random.nextInt()
+        while (0 > value) value = Random.nextInt()
         val result: PositiveInt? = PositiveInt orNull value
         result.assertNotNull().value assertEquals value
     }
 
     @Test
     fun companion_orNull_should_return_null_with_a_strictly_negative_Int() {
-        val result: PositiveInt? =
-            PositiveInt orNull StrictlyNegativeInt.random.value
+        val value: Int = StrictlyNegativeInt.random.value
+        val result: PositiveInt? = PositiveInt orNull value
         result.assertNull()
     }
 
