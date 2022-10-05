@@ -1,7 +1,6 @@
 package kotools.types.core
 
-internal fun <T : Any> holderOf(value: T): Holder<T> =
-    HolderImplementation(value)
+// ---------- Holder ----------
 
 /**
  * Parent of classes responsible for holding values.
@@ -39,6 +38,3 @@ internal abstract class AbstractHolder<out T : Any>(override val value: T) :
 
     override fun toString(): String = value.toString()
 }
-
-private class HolderImplementation<out T : Any>(value: T) :
-    AbstractHolder<T>(value)
