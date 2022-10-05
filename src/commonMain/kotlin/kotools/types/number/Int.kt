@@ -15,6 +15,16 @@ import kotlin.jvm.JvmInline
 
 // ---------- IntHolder ----------
 
+/**
+ * Compares this value with the [other] value for order.
+ * Returns zero if this value equals the [other] value, a negative number if
+ * this value is less than the [other] value, or a positive number if this value
+ * is greater than the [other] value.
+ */
+@SinceKotoolsTypes("3.0")
+public operator fun Int.compareTo(other: IntHolder): Int =
+    compareTo(other.value)
+
 /** Adds the [other] value to this value. */
 @SinceKotoolsTypes("3.0")
 public operator fun Int.plus(other: IntHolder): Int = plus(other.value)
@@ -31,6 +41,23 @@ public operator fun Int.times(other: IntHolder): Int = times(other.value)
 @SinceKotoolsTypes("3.0")
 public sealed interface IntHolder : Holder<Int> {
     // ---------- Binary operations ----------
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    public operator fun compareTo(other: Int): Int = value.compareTo(other)
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    public operator fun compareTo(other: IntHolder): Int =
+        compareTo(other.value)
 
     /** Adds the [other] value to this [value]. */
     public operator fun plus(other: Int): Int = value + other
@@ -200,6 +227,7 @@ public fun String.toNonZeroIntOrNull(): NonZeroInt? =
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class NonZeroInt private constructor(override val value: Int) :
+    Comparable<NonZeroInt>,
     NonZeroIntHolder {
     /** Contains static declarations for creating or holding a [NonZeroInt]. */
     public companion object : IntHolderCompanion<NonZeroInt> {
@@ -249,6 +277,16 @@ public value class NonZeroInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
+
+    // ---------- Binary operations ----------
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    override fun compareTo(other: NonZeroInt): Int = super.compareTo(other)
 
     // ---------- Conversions ----------
 
@@ -354,6 +392,7 @@ public fun String.toPositiveIntOrNull(): PositiveInt? =
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class PositiveInt private constructor(override val value: Int) :
+    Comparable<PositiveInt>,
     PositiveIntHolder {
     /** Contains static declarations for creating or holding a [PositiveInt]. */
     public companion object : IntHolderCompanion<PositiveInt> {
@@ -391,6 +430,16 @@ public value class PositiveInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): NegativeInt = NegativeInt(-value)
+
+    // ---------- Binary operations ----------
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    override fun compareTo(other: PositiveInt): Int = super.compareTo(other)
 
     // ---------- Conversions ----------
 
@@ -484,7 +533,8 @@ public fun String.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt private constructor(
     override val value: Int
-) : NonZeroIntHolder,
+) : Comparable<StrictlyPositiveInt>,
+    NonZeroIntHolder,
     PositiveIntHolder {
     /**
      * Contains static declarations for creating or holding a
@@ -526,6 +576,17 @@ public value class StrictlyPositiveInt private constructor(
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): StrictlyNegativeInt =
         StrictlyNegativeInt(-value)
+
+    // ---------- Binary operations ----------
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    override fun compareTo(other: StrictlyPositiveInt): Int =
+        super<PositiveIntHolder>.compareTo(other)
 
     // ---------- Conversions ----------
 
@@ -581,6 +642,7 @@ public fun String.toNegativeIntOrNull(): NegativeInt? =
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class NegativeInt private constructor(override val value: Int) :
+    Comparable<NegativeInt>,
     NegativeIntHolder {
     /** Contains static declarations for creating or holding a [NegativeInt]. */
     public companion object : IntHolderCompanion<NegativeInt> {
@@ -618,6 +680,16 @@ public value class NegativeInt private constructor(override val value: Int) :
 
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): PositiveInt = PositiveInt(-value)
+
+    // ---------- Binary operations ----------
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    override fun compareTo(other: NegativeInt): Int = super.compareTo(other)
 
     // ---------- Conversions ----------
 
@@ -712,8 +784,9 @@ public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt private constructor(
     override val value: Int
-) : NonZeroIntHolder,
-    NegativeIntHolder {
+) : Comparable<StrictlyNegativeInt>,
+    NegativeIntHolder,
+    NonZeroIntHolder {
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyNegativeInt].
@@ -754,6 +827,17 @@ public value class StrictlyNegativeInt private constructor(
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): StrictlyPositiveInt =
         StrictlyPositiveInt(-value)
+
+    // ---------- Binary operations ----------
+
+    /**
+     * Compares this [value] with the [other] value for order.
+     * Returns zero if this [value] equals the [other] value, a negative number
+     * if this [value] is less than the [other] value, or a positive number if
+     * this [value] is greater than the [other] value.
+     */
+    override fun compareTo(other: StrictlyNegativeInt): Int =
+        super<NegativeIntHolder>.compareTo(other)
 
     // ---------- Conversions ----------
 

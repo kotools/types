@@ -29,6 +29,39 @@ class IntHolderTest {
     // ---------- Binary operations ----------
 
     @Test
+    fun compareTo_should_pass_when_comparing_an_Int_with_an_IntHolder() {
+        // GIVEN
+        val x: Int = Random.nextInt()
+        val y: IntHolder = intHolders.random()
+        // WHEN
+        val result: Int = x.compareTo(y)
+        // THEN
+        result assertEquals x.compareTo(y.value)
+    }
+
+    @Test
+    fun compareTo_should_pass_with_an_Int() {
+        // GIVEN
+        val x: IntHolder = intHolders.random()
+        val y: Int = Random.nextInt()
+        // WHEN
+        val result: Int = x.compareTo(y)
+        // THEN
+        result assertEquals x.value.compareTo(y)
+    }
+
+    @Test
+    fun compareTo_should_pass_with_another_IntHolder() {
+        // GIVEN
+        val x: IntHolder = intHolders.random()
+        val y: IntHolder = intHolders.random()
+        // WHEN
+        val result: Int = x.compareTo(y)
+        // THEN
+        result assertEquals x.value.compareTo(y.value)
+    }
+
+    @Test
     fun plus_should_return_an_Int_when_adding_an_IntHolder_to_an_Int() {
         // GIVEN
         val x: Int = Random.nextInt()
