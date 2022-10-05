@@ -111,25 +111,20 @@ internal sealed class IntHolderSerializer<T : IntHolder>(
 
 /** Parent of companion objects in subtypes of [IntHolder]. */
 @SinceKotoolsTypes("3.0")
-public sealed interface IntHolderCompanion<out T : IntHolder> {
+public sealed class IntHolderCompanion<out T : IntHolder>(
+    protected val builder: (Int) -> T
+) {
     /** The minimum value of the type [T]. */
-    public val min: T
+    public abstract val min: T
 
     /** The maximum value of the type [T]. */
-    public val max: T
+    public abstract val max: T
 
     /** Returns an instance of type [T] holding a random value. */
-    public val random: T
-
-    /**
-     * Returns the [value] as a type [T], or throws an
-     * [IllegalArgumentException] if it fails.
-     */
-    @Throws(IllegalArgumentException::class)
-    public operator fun invoke(value: Int): T
+    public abstract val random: T
 
     /** Returns the [value] as a type [T], or returns `null` if it fails. */
-    public infix fun orNull(value: Int): T? = tryOrNull { this(value) }
+    public infix fun orNull(value: Int): T? = tryOrNull { builder(value) }
 }
 
 // ---------- NonZeroIntHolder ----------
@@ -222,31 +217,36 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
 public fun String.toNonZeroIntOrNull(): NonZeroInt? =
     toIntOrNull()?.toNonZeroIntOrNull()
 
-/** Representation of integers other than zero. */
+/**
+ * Representation of integers other than zero.
+ *
+ * @constructor Returns the [value] as a [NonZeroInt], or throws an
+ * [IllegalArgumentException] if the [value] equals zero.
+ */
 @JvmInline
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public value class NonZeroInt private constructor(override val value: Int) :
-    Comparable<NonZeroInt>,
+public value class NonZeroInt
+@Throws(IllegalArgumentException::class)
+constructor(override val value: Int) : Comparable<NonZeroInt>,
     NonZeroIntHolder {
+    init {
+        require(value != 0) { "NonZeroInt doesn't accept 0." }
+    }
+
     /** Contains static declarations for creating or holding a [NonZeroInt]. */
-    public companion object : IntHolderCompanion<NonZeroInt> {
+    public companion object : IntHolderCompanion<NonZeroInt>(::NonZeroInt) {
         private val negativeRange: IntRange = StrictlyNegativeInt.range
         private val positiveRange: IntRange = StrictlyPositiveInt.range
         private val ranges: Pair<IntRange, IntRange> =
             negativeRange to positiveRange
-        override val min: NonZeroInt = NonZeroInt(negativeRange.first)
-        override val max: NonZeroInt = NonZeroInt(positiveRange.last)
+        override val min: NonZeroInt = builder(negativeRange.first)
+        override val max: NonZeroInt = builder(positiveRange.last)
         override val random: NonZeroInt
             get() = ranges.toList()
                 .random()
                 .random()
-                .let(this::invoke)
-
-        override fun invoke(value: Int): NonZeroInt {
-            require(value != 0) { "NonZeroInt doesn't accept 0." }
-            return NonZeroInt(value)
-        }
+                .let(builder)
     }
 
     // ---------- Unary operations ----------
@@ -387,27 +387,32 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = PositiveInt orNull this
 public fun String.toPositiveIntOrNull(): PositiveInt? =
     toIntOrNull()?.toPositiveIntOrNull()
 
-/** Representation of positive integers, including zero. */
+/**
+ * Representation of positive integers, including zero.
+ *
+ * @constructor Returns the [value] as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if the [value] is strictly negative.
+ */
 @JvmInline
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public value class PositiveInt private constructor(override val value: Int) :
-    Comparable<PositiveInt>,
+public value class PositiveInt
+@Throws(IllegalArgumentException::class)
+constructor(override val value: Int) : Comparable<PositiveInt>,
     PositiveIntHolder {
-    /** Contains static declarations for creating or holding a [PositiveInt]. */
-    public companion object : IntHolderCompanion<PositiveInt> {
-        private val range: IntRange = 0..Int.MAX_VALUE
-        override val min: PositiveInt = PositiveInt(range.first)
-        override val max: PositiveInt = PositiveInt(range.last)
-        override val random: PositiveInt get() = this(range.random())
-
-        override fun invoke(value: Int): PositiveInt {
-            require(value >= 0) {
-                "PositiveInt doesn't accept strictly negative values (tried " +
-                        "with $value)."
-            }
-            return PositiveInt(value)
+    init {
+        require(value >= 0) {
+            "PositiveInt doesn't accept strictly negative values (tried with " +
+                    "$value)."
         }
+    }
+
+    /** Contains static declarations for creating or holding a [PositiveInt]. */
+    public companion object : IntHolderCompanion<PositiveInt>(::PositiveInt) {
+        private val range: IntRange = 0..Int.MAX_VALUE
+        override val min: PositiveInt = builder(range.first)
+        override val max: PositiveInt = builder(range.last)
+        override val random: PositiveInt get() = builder(range.random())
     }
 
     // ---------- Unary operations ----------
@@ -527,32 +532,37 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 public fun String.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     toIntOrNull()?.toStrictlyPositiveIntOrNull()
 
-/** Representation of strictly positive integers, excluding zero. */
+/**
+ * Representation of strictly positive integers, excluding zero.
+ *
+ * @constructor Returns the [value] as a [StrictlyPositiveInt], or throws an
+ * [IllegalArgumentException] if the [value] is negative.
+ */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public value class StrictlyPositiveInt private constructor(
-    override val value: Int
-) : Comparable<StrictlyPositiveInt>,
+public value class StrictlyPositiveInt
+@Throws(IllegalArgumentException::class)
+constructor(override val value: Int) : Comparable<StrictlyPositiveInt>,
     NonZeroIntHolder,
     PositiveIntHolder {
+    init {
+        require(value > 0) {
+            "StrictlyPositiveInt doesn't accept negative values (tried with " +
+                    "$value)."
+        }
+    }
+
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyPositiveInt].
      */
-    public companion object : IntHolderCompanion<StrictlyPositiveInt> {
+    public companion object :
+        IntHolderCompanion<StrictlyPositiveInt>(::StrictlyPositiveInt) {
         internal val range: IntRange = 1..Int.MAX_VALUE
-        override val min: StrictlyPositiveInt = StrictlyPositiveInt(range.first)
-        override val max: StrictlyPositiveInt = StrictlyPositiveInt(range.last)
-        override val random: StrictlyPositiveInt get() = this(range.random())
-
-        override fun invoke(value: Int): StrictlyPositiveInt {
-            require(value > 0) {
-                "StrictlyPositiveInt doesn't accept negative values (tried " +
-                        "with $value)."
-            }
-            return StrictlyPositiveInt(value)
-        }
+        override val min: StrictlyPositiveInt = builder(range.first)
+        override val max: StrictlyPositiveInt = builder(range.last)
+        override val random: StrictlyPositiveInt get() = builder(range.random())
     }
 
     // ---------- Unary operations ----------
@@ -637,27 +647,32 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
 public fun String.toNegativeIntOrNull(): NegativeInt? =
     toIntOrNull()?.toNegativeIntOrNull()
 
-/** Representation of negative integers, including zero. */
+/**
+ * Representation of negative integers, including zero.
+ *
+ * @constructor Returns the [value] as a [NegativeInt], or throws an
+ * [IllegalArgumentException] if the [value] is strictly positive.
+ */
 @JvmInline
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public value class NegativeInt private constructor(override val value: Int) :
-    Comparable<NegativeInt>,
+public value class NegativeInt
+@Throws(IllegalArgumentException::class)
+constructor(override val value: Int) : Comparable<NegativeInt>,
     NegativeIntHolder {
-    /** Contains static declarations for creating or holding a [NegativeInt]. */
-    public companion object : IntHolderCompanion<NegativeInt> {
-        private val range: IntRange = Int.MIN_VALUE..0
-        override val min: NegativeInt = NegativeInt(range.first)
-        override val max: NegativeInt = NegativeInt(range.last)
-        override val random: NegativeInt get() = this(range.random())
-
-        override fun invoke(value: Int): NegativeInt {
-            require(value <= 0) {
-                "NegativeInt doesn't accept strictly positive values (tried " +
-                        "with $value)."
-            }
-            return NegativeInt(value)
+    init {
+        require(value <= 0) {
+            "NegativeInt doesn't accept strictly positive values (tried with " +
+                    "$value)."
         }
+    }
+
+    /** Contains static declarations for creating or holding a [NegativeInt]. */
+    public companion object : IntHolderCompanion<NegativeInt>(::NegativeInt) {
+        private val range: IntRange = Int.MIN_VALUE..0
+        override val min: NegativeInt = builder(range.first)
+        override val max: NegativeInt = builder(range.last)
+        override val random: NegativeInt get() = builder(range.random())
     }
 
     // ---------- Unary operations ----------
@@ -778,32 +793,37 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     toIntOrNull()?.toStrictlyNegativeIntOrNull()
 
-/** Representation of strictly negative integers, excluding zero. */
+/**
+ * Representation of strictly negative integers, excluding zero.
+ *
+ * @constructor Returns the [value] as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if the [value] is positive.
+ */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public value class StrictlyNegativeInt private constructor(
-    override val value: Int
-) : Comparable<StrictlyNegativeInt>,
+public value class StrictlyNegativeInt
+@Throws(IllegalArgumentException::class)
+constructor(override val value: Int) : Comparable<StrictlyNegativeInt>,
     NegativeIntHolder,
     NonZeroIntHolder {
+    init {
+        require(value < 0) {
+            "StrictlyNegativeInt doesn't accept positive values (tried with " +
+                    "$value)."
+        }
+    }
+
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyNegativeInt].
      */
-    public companion object : IntHolderCompanion<StrictlyNegativeInt> {
+    public companion object :
+        IntHolderCompanion<StrictlyNegativeInt>(::StrictlyNegativeInt) {
         internal val range: IntRange = Int.MIN_VALUE..-1
-        override val min: StrictlyNegativeInt = StrictlyNegativeInt(range.first)
-        override val max: StrictlyNegativeInt = StrictlyNegativeInt(range.last)
-        override val random: StrictlyNegativeInt get() = this(range.random())
-
-        override fun invoke(value: Int): StrictlyNegativeInt {
-            require(value < 0) {
-                "StrictlyNegativeInt doesn't accept positive values (tried " +
-                        "with $value)."
-            }
-            return StrictlyNegativeInt(value)
-        }
+        override val min: StrictlyNegativeInt = builder(range.first)
+        override val max: StrictlyNegativeInt = builder(range.last)
+        override val random: StrictlyNegativeInt get() = builder(range.random())
     }
 
     // ---------- Unary operations ----------
