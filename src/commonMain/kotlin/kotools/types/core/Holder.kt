@@ -38,3 +38,14 @@ internal abstract class AbstractHolder<out T : Any>(override val value: T) :
 
     override fun toString(): String = value.toString()
 }
+
+// ---------- HolderCompanion ----------
+
+/** Parent of companion objects in subtypes of [Holder]. */
+@SinceKotoolsTypes("3.0")
+public abstract class HolderCompanion<T : Any, out R : Holder<T>>(
+    protected val builder: (T) -> R
+) {
+    /** Returns the [value] as a type [R], or returns `null` if it fails. */
+    public infix fun orNull(value: T): R? = tryOrNull { builder(value) }
+}

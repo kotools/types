@@ -7,8 +7,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.Holder
+import kotools.types.core.HolderCompanion
 import kotools.types.core.SinceKotoolsTypes
-import kotools.types.core.tryOrNull
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
@@ -111,9 +111,8 @@ internal sealed class IntHolderSerializer<T : IntHolder>(
 
 /** Parent of companion objects in subtypes of [IntHolder]. */
 @SinceKotoolsTypes("3.0")
-public sealed class IntHolderCompanion<out T : IntHolder>(
-    protected val builder: (Int) -> T
-) {
+public sealed class IntHolderCompanion<out T : IntHolder>(builder: (Int) -> T) :
+    HolderCompanion<Int, T>(builder) {
     /** The minimum value of the type [T]. */
     public abstract val min: T
 
@@ -122,9 +121,6 @@ public sealed class IntHolderCompanion<out T : IntHolder>(
 
     /** Returns an instance of type [T] holding a random value. */
     public abstract val random: T
-
-    /** Returns the [value] as a type [T], or returns `null` if it fails. */
-    public infix fun orNull(value: Int): T? = tryOrNull { builder(value) }
 }
 
 // ---------- NonZeroIntHolder ----------
