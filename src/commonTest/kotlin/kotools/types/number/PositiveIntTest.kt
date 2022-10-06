@@ -7,16 +7,16 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
-import kotlin.random.Random
+import kotools.types.core.RandomValueHolder
 import kotlin.test.Test
 
-class PositiveIntTest {
+class PositiveIntTest : RandomValueHolder {
     // ---------- Builders ----------
 
     @Test
     fun constructor_should_pass_with_a_positive_Int() {
-        var value: Int = Random.nextInt()
-        while (0 > value) value = Random.nextInt()
+        var value: Int = randomInt
+        while (0 > value) value = randomInt
         val result = PositiveInt(value)
         result.value assertEquals value
     }
@@ -29,8 +29,8 @@ class PositiveIntTest {
 
     @Test
     fun companion_orNull_should_pass_with_a_positive_Int() {
-        var value: Int = Random.nextInt()
-        while (0 > value) value = Random.nextInt()
+        var value: Int = randomInt
+        while (0 > value) value = randomInt
         val result: PositiveInt? = PositiveInt orNull value
         result.assertNotNull().value assertEquals value
     }
@@ -39,6 +39,33 @@ class PositiveIntTest {
     fun companion_orNull_should_return_null_with_a_strictly_negative_Int() {
         val value: Int = StrictlyNegativeInt.random.value
         val result: PositiveInt? = PositiveInt orNull value
+        result.assertNull()
+    }
+
+    @Test
+    fun int_toPositiveInt_should_pass_with_a_positive_Int() {
+        val value: Int = PositiveInt.random.value
+        val result: PositiveInt = value.toPositiveInt()
+        result.value assertEquals value
+    }
+
+    @Test
+    fun int_toPositiveInt_should_throw_an_error_with_a_strictly_negative_Int() {
+        val value: Int = StrictlyNegativeInt.random.value
+        assertFailsWith<IllegalArgumentException>(value::toPositiveInt)
+    }
+
+    @Test
+    fun int_toPositiveIntOrNull_should_pass_with_a_positive_Int() {
+        val value: Int = PositiveInt.random.value
+        val result: PositiveInt? = value.toPositiveIntOrNull()
+        result?.value assertEquals value
+    }
+
+    @Test
+    fun int_toPositiveIntOrNull_should_return_null_with_a_strictly_negative_Int() {
+        val value: Int = StrictlyNegativeInt.random.value
+        val result: PositiveInt? = value.toPositiveIntOrNull()
         result.assertNull()
     }
 
@@ -138,5 +165,105 @@ class PositiveIntTest {
         val x: PositiveInt = PositiveInt.random
         val result: NegativeInt = -x
         result.value assertEquals -x.value
+    }
+
+    // ---------- Binary operations ----------
+
+    @Test
+    fun compareTo_should_pass_with_another_PositiveInt() {
+        val x: PositiveInt = PositiveInt.random
+        val y: PositiveInt = PositiveInt.random
+        val result: Int = x.compareTo(y)
+        result assertEquals x.value.compareTo(y.value)
+    }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toNonZeroInt_should_pass_with_a_strictly_positive_value() {
+        val x = PositiveInt(StrictlyPositiveInt.random.value)
+        val result: NonZeroInt = x.toNonZeroInt()
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toNonZeroInt_should_throw_an_error_with_a_value_that_equals_zero() {
+        val x = PositiveInt(0)
+        assertFailsWith<IllegalArgumentException>(x::toNonZeroInt)
+    }
+
+    @Test
+    fun toNonZeroIntOrNull_should_pass_with_a_strictly_positive_value() {
+        val x = PositiveInt(StrictlyPositiveInt.random.value)
+        val result: NonZeroInt? = x.toNonZeroIntOrNull()
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toNonZeroIntOrNull_should_return_null_with_a_value_that_equals_zero() {
+        val x = PositiveInt(0)
+        val result: NonZeroInt? = x.toNonZeroIntOrNull()
+        result.assertNull()
+    }
+
+    @Test
+    fun toStrictlyPositiveInt_should_pass_with_a_strictly_positive_value() {
+        val x = PositiveInt(StrictlyPositiveInt.random.value)
+        val result: StrictlyPositiveInt = x.toStrictlyPositiveInt()
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toStrictlyPositiveInt_should_throw_an_error_with_a_value_that_equals_zero() {
+        val x = PositiveInt(0)
+        assertFailsWith<IllegalArgumentException>(x::toStrictlyPositiveInt)
+    }
+
+    @Test
+    fun toStrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_value() {
+        val x = PositiveInt(StrictlyPositiveInt.random.value)
+        val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toStrictlyPositiveIntOrNull_should_return_null_with_a_value_that_equals_zero() {
+        val x = PositiveInt(0)
+        val result: StrictlyPositiveInt? = x.toStrictlyPositiveIntOrNull()
+        result.assertNull()
+    }
+
+    @Test
+    fun toNegativeInt_should_pass_with_a_value_that_equals_zero() {
+        val x = PositiveInt(0)
+        val result: NegativeInt = x.toNegativeInt()
+        result.value assertEquals x.value
+    }
+
+    @Test
+    fun toNegativeInt_should_throw_an_error_with_a_strictly_positive_value() {
+        val x = PositiveInt(StrictlyPositiveInt.random.value)
+        assertFailsWith<IllegalArgumentException>(x::toNegativeInt)
+    }
+
+    @Test
+    fun toNegativeIntOrNull_should_pass_with_a_value_that_equals_zero() {
+        val x = PositiveInt(0)
+        val result: NegativeInt? = x.toNegativeIntOrNull()
+        result.assertNotNull().value assertEquals x.value
+    }
+
+    @Test
+    fun toNegativeIntOrNull_should_return_null_with_a_strictly_positive_value() {
+        val x = PositiveInt(StrictlyPositiveInt.random.value)
+        val result: NegativeInt? = x.toNegativeIntOrNull()
+        result.assertNull()
+    }
+
+    @Test
+    fun toString_should_return_the_string_representation_of_the_value() {
+        val x: PositiveInt = PositiveInt.random
+        val result: String = x.toString()
+        result assertEquals x.value.toString()
     }
 }
