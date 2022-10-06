@@ -29,16 +29,6 @@ public interface Holder<out T : Any> {
     override fun toString(): String
 }
 
-internal abstract class AbstractHolder<out T : Any>(override val value: T) :
-    Holder<T> {
-    override fun equals(other: Any?): Boolean =
-        other is Holder<*> && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = value.toString()
-}
-
 // ---------- HolderCompanion ----------
 
 /**

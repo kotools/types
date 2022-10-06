@@ -2,39 +2,17 @@ package kotools.types.string
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.core.AbstractHolder
 import kotools.types.core.Holder
+import kotools.types.core.HolderCompanion
 import kotools.types.core.SinceKotoolsTypes
-import kotools.types.core.Validator
 import kotools.types.number.*
+import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/**
- * Returns the [value] as a [NotBlankString], or throws an
- * [IllegalArgumentException] if the [value] is blank.
- */
-@SinceKotoolsTypes("1.2")
-@Throws(IllegalArgumentException::class)
-public fun NotBlankString(value: String): NotBlankString =
-    NotBlankStringImplementation(value)
-
-/**
- * Returns the [value] as a [NotBlankString], or returns `null` if the
- * [value] is blank.
- */
-@SinceKotoolsTypes("3.0")
-@Suppress("FunctionName")
-public fun NotBlankStringOrNull(value: String): NotBlankString? = try {
-    NotBlankString(value)
-} catch (_: IllegalArgumentException) {
-    null
-}
 
 /**
  * Returns this value as a [NotBlankString], or throws an
@@ -50,9 +28,9 @@ public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
  */
 @SinceKotoolsTypes("1.2")
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    NotBlankStringOrNull(this)
+    NotBlankString orNull this
 
-// ---------- Comparisons ----------
+// ---------- Binary operations ----------
 
 /**
  * Compares this value lexicographically with the [other] value for order.
@@ -67,11 +45,26 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
 /**
  * Parent of classes responsible for holding strings that have at least one
  * character, excluding whitespaces.
+ *
+ * @constructor Returns the [value] as a [NotBlankString], or throws an
+ * [IllegalArgumentException] if the [value] is blank.
  */
+@JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("1.2")
-public sealed interface NotBlankString : Holder<String>,
-    Comparable<NotBlankString> {
+public value class NotBlankString
+@Throws(IllegalArgumentException::class)
+constructor(override val value: String) : Comparable<NotBlankString>,
+    Holder<String> {
+    init {
+        require(value.isNotBlank()) {
+            "NotBlankString doesn't accept blank strings."
+        }
+    }
+
+    public companion object :
+        HolderCompanion<String, NotBlankString>(::NotBlankString)
+
     // ---------- Query operations ----------
 
     /** Returns the length of this [value]. */
@@ -84,32 +77,15 @@ public sealed interface NotBlankString : Holder<String>,
     public val first: Char get() = value[0]
 
     /**
-     * Returns the character of this [value] at the specified [index], or throws
-     * an [IndexOutOfBoundsException] if the [index] is out of bounds.
+     * Returns the character of this [value] at the specified [index].
+     * Throws an [IndexOutOfBoundsException] if the [index] is out of bounds,
+     * except in Kotlin/JS where the behavior is unspecified.
      */
+    @SinceKotoolsTypes("3.0")
     @Throws(IndexOutOfBoundsException::class)
-    public infix operator fun get(index: PositiveInt): Char = value[index.value]
-
-    /**
-     * Returns the character of this [value] at the specified [index], or
-     * returns `null` if the [index] is out of bounds.
-     */
-    public infix fun getOrNull(index: PositiveInt): Char? = try {
-        get(index)
-    } catch (_: IndexOutOfBoundsException) {
-        null
-    }
+    public operator fun get(index: PositiveIntHolder): Char = value[index.value]
 
     // ---------- Binary operations ----------
-
-    /**
-     * Returns the concatenation of this [value] with the string representation
-     * of the [other] object.
-     */
-    public infix operator fun plus(other: Any?): NotBlankString =
-        NotBlankString(value + other)
-
-    // ---------- Comparisons ----------
 
     /**
      * Compares this [value] lexicographically with the [other] value for order.
@@ -127,7 +103,14 @@ public sealed interface NotBlankString : Holder<String>,
      * this [value] is greater than the [other] value.
      */
     override infix fun compareTo(other: NotBlankString): Int =
-        value.compareTo(other.value)
+        compareTo(other.value)
+
+    /**
+     * Returns the concatenation of this [value] with the string representation
+     * of the [other] object.
+     */
+    public infix operator fun plus(other: Any?): NotBlankString =
+        NotBlankString(value + other)
 
     // ---------- Conversions ----------
 
@@ -225,22 +208,13 @@ public sealed interface NotBlankString : Holder<String>,
         value.toStrictlyNegativeIntOrNull()
 }
 
-private class NotBlankStringImplementation(value: String) :
-    AbstractHolder<String>(value),
-    NotBlankString {
-    init {
-        val validator: Validator<String> = Validator(String::isNotBlank)
-        require(validator isValid value)
-    }
-}
-
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
-    override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("NotBlankString", PrimitiveKind.STRING)
+    private val delegate: KSerializer<String> = String.serializer()
+    override val descriptor: SerialDescriptor = delegate.descriptor
 
     override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
-        encoder.encodeString(value.value)
+        delegate.serialize(encoder, value.value)
 
     override fun deserialize(decoder: Decoder): NotBlankString =
-        decoder.decodeString().toNotBlankString()
+        delegate.deserialize(decoder).toNotBlankString()
 }
