@@ -4,7 +4,7 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveIntOrNull
 import kotlin.random.Random
 
-interface Randomizer {
+interface RandomValueHolder {
     val randomInt: Int get() = Random.nextInt()
 
     val randomString: String
