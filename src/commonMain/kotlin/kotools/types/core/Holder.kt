@@ -41,7 +41,12 @@ internal abstract class AbstractHolder<out T : Any>(override val value: T) :
 
 // ---------- HolderCompanion ----------
 
-/** Parent of companion objects in subtypes of [Holder]. */
+/**
+ * Parent of companion objects in subtypes of [Holder].
+ *
+ * @param T The type of values to hold.
+ * @param R The type of [Holder] to return.
+ */
 @SinceKotoolsTypes("3.0")
 public abstract class HolderCompanion<T : Any, out R : Holder<T>>(
     protected val builder: (T) -> R
