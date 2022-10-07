@@ -9,7 +9,7 @@ interface RandomValueHolder {
 
     val randomString: String
         get() {
-            val characters: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+            val characters: List<Char> = ('a'..'z') + ('A'..'Z')
             val lengths: List<StrictlyPositiveInt> = listOf(2, 4, 8, 16, 32, 64)
                 .mapNotNull(Int::toStrictlyPositiveIntOrNull)
             return lengths.random()
