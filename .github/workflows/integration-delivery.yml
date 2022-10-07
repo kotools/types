@@ -45,7 +45,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: ./gradlew jsIrTest --no-daemon
+        run: ./gradlew jsTest --no-daemon
   integrate-linux:
     name: Integrate changes (Linux)
     runs-on: ubuntu-latest
