@@ -88,6 +88,8 @@ class NotEmptyCollectionTest {
         result assertEquals defaultValue
     }
 
+    // ---------- Conversions ----------
+
     @Test
     fun toNotBlankString_should_pass() {
         val expectedList: List<Int> = listOf(1, 2, 3)

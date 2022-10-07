@@ -11,6 +11,13 @@ import kotools.types.string.toNotBlankString
  * the result of calling the [defaultValue] function if the [index] is out of
  * bounds.
  */
+@Deprecated(
+    "The index should be a PositiveInt or a StrictlyPositiveInt.",
+    ReplaceWith(
+        "this.getOrElse(PositiveInt(index), defaultValue)",
+        "kotools.types.number.PositiveInt"
+    )
+)
 @SinceKotoolsTypes("1.3")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: Int,
@@ -64,6 +71,13 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
+    @Deprecated(
+        "The index should be a PositiveInt or a StrictlyPositiveInt.",
+        ReplaceWith(
+            "get(PositiveInt(index))",
+            "kotools.types.number.PositiveInt"
+        )
+    )
     @Throws(IndexOutOfBoundsException::class)
     public infix operator fun get(index: Int): E
 
@@ -86,6 +100,13 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * returns `null` if the [index] is out of bounds.
      */
+    @Deprecated(
+        "The index should be a PositiveInt or a StrictlyPositiveInt.",
+        ReplaceWith(
+            "getOrNull(PositiveInt(index))",
+            "kotools.types.number.PositiveInt"
+        )
+    )
     public infix fun getOrNull(index: Int): E? = try {
         get(index)
     } catch (_: IndexOutOfBoundsException) {

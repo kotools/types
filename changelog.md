@@ -64,6 +64,12 @@ The following types are now supported on JVM, JS and Native platforms:
 - `NotEmptyCollection` ([#91](https://github.com/kotools/types/issues/91))
 - `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
 
+#### Deprecated
+
+Deprecate positional access operations of `NotEmptyCollection` that receive an
+index of type `Int`. Use the operations that receives an index of type
+`PositiveIntHolder` instead.
+
 ## Version 2.0.0 - 2022/08/01
 
 ### Added
