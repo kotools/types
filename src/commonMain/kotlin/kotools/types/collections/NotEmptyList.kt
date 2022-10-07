@@ -15,24 +15,8 @@ import kotools.types.core.SinceKotoolsTypes
 @SinceKotoolsTypes("3.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val list: List<E> = tail.toList()
-    return NotEmptyListImplementation(head, list)
+    return NotEmptyList(head, list)
 }
-
-/**
- * Creates a [NotEmptyList] starting with a [head] and containing all the
- * elements of the optional [tail].
- */
-@Deprecated(
-    "Use the notEmptyListOf(head, *tail) function instead.",
-    ReplaceWith(
-        "notEmptyListOf(head, *tail)",
-        "kotools.types.collections.notEmptyListOf"
-    )
-)
-@SinceKotoolsTypes("1.3")
-@Suppress("FunctionName")
-public fun <E> NotEmptyList(head: E, vararg tail: E): NotEmptyList<E> =
-    notEmptyListOf(head, *tail)
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -45,7 +29,7 @@ public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     val list: List<E> = toList()
     val head: E = list.first()
     val tail: List<E> = list.subList(1, list.size)
-    return NotEmptyListImplementation(head, tail)
+    return NotEmptyList(head, tail)
 }
 
 /**
@@ -97,20 +81,21 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
 
 /**
- * Parent of classes representing lists that contain at least one element.
+ * Representation of lists that contain at least one element.
  *
  * @param E The type of elements contained in this list.
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("1.3")
-public sealed interface NotEmptyList<out E> : List<E>,
-    NotEmptyCollection<E>
-
-private class NotEmptyListImplementation<out E>(
+public class NotEmptyList<out E> internal constructor(
     override val head: E,
     tail: List<E>
 ) : List<E> by listOf(head) + tail,
-    NotEmptyList<E>
+    NotEmptyCollection<E> {
+    private val delegate: List<E> = listOf(head) + tail
+
+    override fun toString(): String = delegate.toString()
+}
 
 internal sealed class NotEmptyListSerializer<E>(
     elementSerializer: KSerializer<E>

@@ -5,6 +5,7 @@ import kotools.assert.assertNotEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.number.*
+import kotools.types.string.NotBlankString
 import kotlin.random.Random
 import kotlin.test.Test
 
@@ -85,5 +86,13 @@ class NotEmptyCollectionTest {
         val defaultValue: Int = StrictlyNegativeInt.random.value
         val result: Int = collection.getOrElse(index) { defaultValue }
         result assertEquals defaultValue
+    }
+
+    @Test
+    fun toNotBlankString_should_pass() {
+        val expectedList: List<Int> = listOf(1, 2, 3)
+        val collection: NotEmptyCollection<Int> = expectedList.toNotEmptyList()
+        val result: NotBlankString = collection.toNotBlankString()
+        result.value assertEquals expectedList.toString()
     }
 }
