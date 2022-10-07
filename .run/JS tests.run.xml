@@ -11,7 +11,6 @@
       <option name="taskNames">
         <list>
           <option value="jsIrTest" />
-          <option value="jsLegacyTest" />
         </list>
       </option>
       <option name="vmOptions" />

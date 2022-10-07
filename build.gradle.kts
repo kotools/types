@@ -37,7 +37,7 @@ kotlin {
         compilations.all { kotlinOptions.jvmTarget = "1.8" }
         testRuns["test"].executionTask.configure(Test::useJUnitPlatform)
     }
-    js(BOTH, KotlinJsTargetDsl::browser)
+    js(IR, KotlinJsTargetDsl::browser)
     linuxX64()
     macosX64()
     mingwX64()
