@@ -94,7 +94,7 @@ constructor(override val value: String) : Comparable<NotBlankString>,
      * this [value] is greater than the [other] value.
      */
     @SinceKotoolsTypes("2.0")
-    public infix fun compareTo(other: String): Int = value.compareTo(other)
+    public operator fun compareTo(other: String): Int = value.compareTo(other)
 
     /**
      * Compares this [value] lexicographically with the [other] value for order.
@@ -102,8 +102,7 @@ constructor(override val value: String) : Comparable<NotBlankString>,
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    override infix fun compareTo(other: NotBlankString): Int =
-        compareTo(other.value)
+    override fun compareTo(other: NotBlankString): Int = compareTo(other.value)
 
     /**
      * Returns the concatenation of this [value] with the string representation
