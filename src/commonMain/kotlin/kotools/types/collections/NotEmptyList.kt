@@ -97,9 +97,8 @@ public class NotEmptyList<out E> internal constructor(
     override fun toString(): String = delegate.toString()
 }
 
-internal sealed class NotEmptyListSerializer<E>(
-    elementSerializer: KSerializer<E>
-) : KSerializer<NotEmptyList<E>> {
+internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
+    KSerializer<NotEmptyList<E>> {
     private val delegate: KSerializer<List<E>> =
         ListSerializer(elementSerializer)
 
