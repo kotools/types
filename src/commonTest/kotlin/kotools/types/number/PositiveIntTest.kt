@@ -69,46 +69,6 @@ class PositiveIntTest : RandomValueHolder {
         result.assertNull()
     }
 
-    @Test
-    fun string_toPositiveInt_should_pass_with_a_String_representing_a_positive_number() {
-        val value: Int = PositiveInt.random.value
-        val valueAsString: String = value.toString()
-        val result: PositiveInt = valueAsString.toPositiveInt()
-        result.value assertEquals value
-    }
-
-    @Test
-    fun string_toPositiveInt_should_throw_an_error_with_an_invalid_String() {
-        assertFailsWith<NumberFormatException>("a"::toPositiveInt)
-    }
-
-    @Test
-    fun string_toPositiveInt_should_throw_an_error_with_a_String_representing_a_strictly_negative_number() {
-        val value: String = StrictlyNegativeInt.random.value.toString()
-        assertFailsWith<IllegalArgumentException>(value::toPositiveInt)
-    }
-
-    @Test
-    fun string_toPositiveIntOrNull_should_pass_with_a_String_representing_a_positive_number() {
-        val value: Int = PositiveInt.random.value
-        val valueAsString: String = value.toString()
-        val result: PositiveInt? = valueAsString.toPositiveIntOrNull()
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun string_toPositiveIntOrNull_should_return_null_with_an_invalid_String() {
-        val result: PositiveInt? = "a".toPositiveIntOrNull()
-        result.assertNull()
-    }
-
-    @Test
-    fun string_toPositiveIntOrNull_should_return_null_with_a_String_representing_a_strictly_negative_number() {
-        val value: String = StrictlyNegativeInt.random.value.toString()
-        val result: PositiveInt? = value.toPositiveIntOrNull()
-        result.assertNull()
-    }
-
     // ---------- Serialization ----------
 
     @Test
