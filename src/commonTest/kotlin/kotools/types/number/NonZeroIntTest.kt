@@ -65,44 +65,6 @@ class NonZeroIntTest : RandomValueHolder {
         result.assertNull()
     }
 
-    @Test
-    fun string_toNonZeroInt_should_pass_with_a_String_representing_a_number_other_than_0() {
-        val value: Int = NonZeroInt.random.value
-        val valueAsString: String = value.toString()
-        val result: NonZeroInt = valueAsString.toNonZeroInt()
-        result.value assertEquals value
-    }
-
-    @Test
-    fun string_toNonZeroInt_should_throw_an_error_with_an_invalid_String() {
-        assertFailsWith<NumberFormatException>("a"::toNonZeroInt)
-    }
-
-    @Test
-    fun string_toNonZeroInt_should_throw_an_error_with_a_String_representing_0() {
-        assertFailsWith<IllegalArgumentException>("0"::toNonZeroInt)
-    }
-
-    @Test
-    fun string_toNonZeroIntOrNull_should_pass_with_a_String_representing_a_number_other_than_0() {
-        val value: Int = NonZeroInt.random.value
-        val valueAsString: String = value.toString()
-        val result: NonZeroInt? = valueAsString.toNonZeroIntOrNull()
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun string_toNonZeroIntOrNull_should_return_null_with_an_invalid_String() {
-        val result: NonZeroInt? = "a".toNonZeroIntOrNull()
-        result.assertNull()
-    }
-
-    @Test
-    fun string_toNonZeroIntOrNull_should_return_null_with_a_String_representing_0() {
-        val result: NonZeroInt? = "0".toNonZeroIntOrNull()
-        result.assertNull()
-    }
-
     // ---------- Serialization ----------
 
     @Test

@@ -13,28 +13,11 @@ import kotlin.jvm.JvmInline
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
 /**
- * Returns this value as a [NonZeroInt].
- * Throws a [NumberFormatException] if this value is not a valid representation
- * of a number, or throws an [IllegalArgumentException] if it represents zero.
- */
-@SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toNonZeroInt(): NonZeroInt = toInt().toNonZeroInt()
-
-/**
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt orNull this
-
-/**
- * Returns this value as a [NonZeroInt], or returns `null` if this value is not
- * a valid representation of a number or if it represents zero.
- */
-@SinceKotoolsTypes("3.0")
-public fun String.toNonZeroIntOrNull(): NonZeroInt? =
-    toIntOrNull()?.toNonZeroIntOrNull()
 
 /**
  * Representation of integers other than zero.
@@ -49,10 +32,6 @@ public value class NonZeroInt
 @Throws(IllegalArgumentException::class)
 constructor(override val value: Int) : Comparable<NonZeroInt>,
     NonZeroIntHolder {
-    init {
-        require(value != 0) { "NonZeroInt doesn't accept 0." }
-    }
-
     /** Contains static declarations for creating or holding a [NonZeroInt]. */
     public companion object : IntHolderCompanion<NonZeroInt>(::NonZeroInt) {
         private val negativeRange: IntRange = StrictlyNegativeInt.range
@@ -66,6 +45,10 @@ constructor(override val value: Int) : Comparable<NonZeroInt>,
                 .random()
                 .random()
                 .let(builder)
+    }
+
+    init {
+        require(value != 0) { "NonZeroInt doesn't accept 0." }
     }
 
     // ---------- Unary operations ----------
