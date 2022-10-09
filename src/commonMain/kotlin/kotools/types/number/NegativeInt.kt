@@ -12,30 +12,11 @@ import kotlin.jvm.JvmInline
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
- * Returns this value as a [NegativeInt].
- * Throws a [NumberFormatException] if this value is not a valid representation
- * of a number, or throws an [IllegalArgumentException] if it represents a
- * strictly positive number.
- */
-@SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toNegativeInt(): NegativeInt = toInt().toNegativeInt()
-
-/**
  * Returns this value as a [NegativeInt], or returns `null` if this value is
  * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNegativeIntOrNull(): NegativeInt? = NegativeInt orNull this
-
-/**
- * Returns this value as a [NegativeInt], or returns `null` if this value is not
- * a valid representation of a number or if it represents a strictly positive
- * number.
- */
-@SinceKotoolsTypes("3.0")
-public fun String.toNegativeIntOrNull(): NegativeInt? =
-    toIntOrNull()?.toNegativeIntOrNull()
 
 /**
  * Representation of negative integers, including zero.
@@ -50,19 +31,19 @@ public value class NegativeInt
 @Throws(IllegalArgumentException::class)
 constructor(override val value: Int) : Comparable<NegativeInt>,
     NegativeIntHolder {
-    init {
-        require(value <= 0) {
-            "NegativeInt doesn't accept strictly positive values (tried with " +
-                    "$value)."
-        }
-    }
-
     /** Contains static declarations for creating or holding a [NegativeInt]. */
     public companion object : IntHolderCompanion<NegativeInt>(::NegativeInt) {
         private val range: IntRange = Int.MIN_VALUE..0
         override val min: NegativeInt = builder(range.first)
         override val max: NegativeInt = builder(range.last)
         override val random: NegativeInt get() = builder(range.random())
+    }
+
+    init {
+        require(value <= 0) {
+            "NegativeInt doesn't accept strictly positive values (tried with " +
+                    "$value)."
+        }
     }
 
     // ---------- Unary operations ----------
