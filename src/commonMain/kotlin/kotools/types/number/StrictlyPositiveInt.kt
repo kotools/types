@@ -88,9 +88,23 @@ constructor(override val value: Int) : Comparable<StrictlyPositiveInt>,
     // ---------- Conversions ----------
 
     /** Returns this [value] as a [NonZeroInt]. */
+    @Deprecated(
+        "Use the Int.toNonZeroInt function instead.",
+        ReplaceWith(
+            "this.value.toNonZeroInt()",
+            "kotools.types.number.toNonZeroInt"
+        )
+    )
     public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
 
     /** Returns this [value] as a [PositiveInt]. */
+    @Deprecated(
+        "Use the Int.toPositiveInt function instead.",
+        ReplaceWith(
+            "this.value.toPositiveInt()",
+            "kotools.types.number.toPositiveInt"
+        )
+    )
     public fun toPositiveInt(): PositiveInt = value.toPositiveInt()
 
     override fun toString(): String = value.toString()
