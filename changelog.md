@@ -70,8 +70,8 @@ The following types are now supported on JVM, JS and Native platforms:
   index of type `Int`. Use the operations that receives an index of type
   `PositiveIntHolder` instead.
 - Deprecate useless conversions of `NonZeroInt`, `PositiveInt`,
-  `StrictlyPositiveInt` and `NegativeInt` for reducing the complexity of this
-  library.
+  `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt` for reducing
+  the complexity of this library.
 
 ## Version 2.0.0 - 2022/08/01
 
