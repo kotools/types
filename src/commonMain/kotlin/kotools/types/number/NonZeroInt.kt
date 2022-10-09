@@ -48,7 +48,10 @@ constructor(override val value: Int) : Comparable<NonZeroInt>,
     }
 
     init {
-        require(value != 0) { "NonZeroInt doesn't accept 0." }
+        require(value in negativeRange || value in positiveRange) {
+            "NonZeroInt accepts values in $negativeRange and $positiveRange " +
+                    "(tried with $value)."
+        }
     }
 
     // ---------- Unary operations ----------

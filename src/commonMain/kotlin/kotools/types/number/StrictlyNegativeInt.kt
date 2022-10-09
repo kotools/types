@@ -48,9 +48,8 @@ constructor(override val value: Int) : Comparable<StrictlyNegativeInt>,
     }
 
     init {
-        require(value < 0) {
-            "StrictlyNegativeInt doesn't accept positive values (tried with " +
-                    "$value)."
+        require(value in range) {
+            "StrictlyNegativeInt accepts values in $range (tried with $value)."
         }
     }
 
