@@ -69,47 +69,6 @@ class StrictlyPositiveIntTest : RandomValueHolder {
         result.assertNull()
     }
 
-    @Test
-    fun string_toStrictlyPositiveInt_should_pass_with_a_String_representing_a_strictly_positive_number() {
-        val value: Int = StrictlyPositiveInt.random.value
-        val valueAsString: String = value.toString()
-        val result: StrictlyPositiveInt = valueAsString.toStrictlyPositiveInt()
-        result.value assertEquals value
-    }
-
-    @Test
-    fun string_toStrictlyPositiveInt_should_throw_an_error_with_an_invalid_String() {
-        assertFailsWith<NumberFormatException>("a"::toStrictlyPositiveInt)
-    }
-
-    @Test
-    fun string_toStrictlyPositiveInt_should_throw_an_error_with_a_String_representing_a_negative_number() {
-        val value: String = NegativeInt.random.value.toString()
-        assertFailsWith<IllegalArgumentException>(value::toStrictlyPositiveInt)
-    }
-
-    @Test
-    fun string_toStrictlyPositiveIntOrNull_should_pass_with_a_String_representing_a_strictly_positive_number() {
-        val value: Int = StrictlyPositiveInt.random.value
-        val valueAsString: String = value.toString()
-        val result: StrictlyPositiveInt? =
-            valueAsString.toStrictlyPositiveIntOrNull()
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun string_toStrictlyPositiveIntOrNull_should_return_null_with_an_invalid_String() {
-        val result: StrictlyPositiveInt? = "a".toStrictlyPositiveIntOrNull()
-        result.assertNull()
-    }
-
-    @Test
-    fun string_toStrictlyPositiveIntOrNull_should_return_null_with_a_String_representing_a_negative_number() {
-        val value: String = NegativeInt.random.value.toString()
-        val result: StrictlyPositiveInt? = value.toStrictlyPositiveIntOrNull()
-        result.assertNull()
-    }
-
     // ---------- Serialization ----------
 
     @Test
