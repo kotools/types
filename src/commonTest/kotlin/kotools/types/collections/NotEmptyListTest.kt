@@ -118,4 +118,13 @@ class NotEmptyListTest : RandomValueHolder {
             number assertEquals list[index]
         }
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_behave_like_a_List() {
+        val numbers: NotEmptyList<Int> = notEmptyListOf(randomInt, randomInt)
+        val result: String = numbers.toString()
+        result assertEquals numbers.toList().toString()
+    }
 }

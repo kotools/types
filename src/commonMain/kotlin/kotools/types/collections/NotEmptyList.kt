@@ -8,6 +8,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 
+// ---------- Builders ----------
+
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
@@ -93,6 +95,8 @@ public class NotEmptyList<out E> internal constructor(
 ) : List<E> by listOf(head) + tail,
     NotEmptyCollection<E> {
     private val delegate: List<E> = listOf(head) + tail
+
+    // ---------- Conversions ----------
 
     override fun toString(): String = delegate.toString()
 }
