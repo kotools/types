@@ -82,6 +82,13 @@ constructor(override val value: Int) : Comparable<PositiveInt>,
      * Returns this [value] as a [NonZeroInt], or throws an
      * [IllegalArgumentException] if this [value] equals zero.
      */
+    @Deprecated(
+        "Use the Int.toNonZeroInt function instead.",
+        ReplaceWith(
+            "this.value.toNonZeroInt()",
+            "kotools.types.number.toNonZeroInt"
+        )
+    )
     @Throws(IllegalArgumentException::class)
     public fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
 
@@ -89,12 +96,26 @@ constructor(override val value: Int) : Comparable<PositiveInt>,
      * Returns this [value] as a [NonZeroInt], or returns `null` if this [value]
      * equals zero.
      */
+    @Deprecated(
+        "Use the Int.toNonZeroIntOrNull function instead.",
+        ReplaceWith(
+            "this.value.toNonZeroIntOrNull()",
+            "kotools.types.number.toNonZeroIntOrNull"
+        )
+    )
     public fun toNonZeroIntOrNull(): NonZeroInt? = value.toNonZeroIntOrNull()
 
     /**
      * Returns this [value] as a [StrictlyPositiveInt], or throws an
      * [IllegalArgumentException] if this [value] equals zero.
      */
+    @Deprecated(
+        "Use the Int.toStrictlyPositiveInt function instead.",
+        ReplaceWith(
+            "this.value.toStrictlyPositiveInt()",
+            "kotools.types.number.toStrictlyPositiveInt"
+        )
+    )
     @Throws(IllegalArgumentException::class)
     public fun toStrictlyPositiveInt(): StrictlyPositiveInt =
         value.toStrictlyPositiveInt()
@@ -103,6 +124,13 @@ constructor(override val value: Int) : Comparable<PositiveInt>,
      * Returns this [value] as a [StrictlyPositiveInt], or returns `null` if
      * this [value] equals zero.
      */
+    @Deprecated(
+        "Use the Int.toStrictlyPositiveIntOrNull function instead.",
+        ReplaceWith(
+            "this.value.toStrictlyPositiveIntOrNull()",
+            "kotools.types.number.toStrictlyPositiveIntOrNull"
+        )
+    )
     public fun toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         value.toStrictlyPositiveIntOrNull()
 
@@ -110,12 +138,26 @@ constructor(override val value: Int) : Comparable<PositiveInt>,
      * Returns this [value] as a [NegativeInt], or throws an
      * [IllegalArgumentException] if this [value] is strictly positive.
      */
+    @Deprecated(
+        "Use the Int.toNegativeInt function instead.",
+        ReplaceWith(
+            "this.value.toNegativeInt()",
+            "kotools.types.number.toNegativeInt"
+        )
+    )
     public fun toNegativeInt(): NegativeInt = value.toNegativeInt()
 
     /**
      * Returns this [value] as a [NegativeInt], or returns `null` if this
      * [value] is strictly positive.
      */
+    @Deprecated(
+        "Use the Int.toNegativeIntOrNull function instead.",
+        ReplaceWith(
+            "this.value.toNegativeIntOrNull()",
+            "kotools.types.number.toNegativeIntOrNull"
+        )
+    )
     public fun toNegativeIntOrNull(): NegativeInt? = value.toNegativeIntOrNull()
 
     override fun toString(): String = value.toString()
