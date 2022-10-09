@@ -139,6 +139,7 @@ class NegativeIntTest : RandomValueHolder {
 
     // ---------- Conversions ----------
 
+    @Suppress("DEPRECATION")
     @Test
     fun toNonZeroInt_should_pass_with_a_strictly_negative_value() {
         val x = NegativeInt(StrictlyNegativeInt.random.value)
@@ -146,12 +147,14 @@ class NegativeIntTest : RandomValueHolder {
         result.value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toNonZeroInt_should_throw_an_error_with_a_value_that_equals_zero() {
         val x = NegativeInt(0)
         assertFailsWith<IllegalArgumentException>(x::toNonZeroInt)
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toNonZeroIntOrNull_should_pass_with_a_strictly_negative_value() {
         val x = NegativeInt(StrictlyNegativeInt.random.value)
@@ -159,6 +162,7 @@ class NegativeIntTest : RandomValueHolder {
         result.assertNotNull().value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toNonZeroIntOrNull_should_return_null_with_a_value_that_equals_zero() {
         val x = NegativeInt(0)
@@ -166,6 +170,7 @@ class NegativeIntTest : RandomValueHolder {
         result.assertNull()
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toPositiveInt_should_pass_with_a_value_that_equals_zero() {
         val x = NegativeInt(0)
@@ -173,12 +178,14 @@ class NegativeIntTest : RandomValueHolder {
         result.value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toPositiveInt_should_throw_an_error_with_a_strictly_negative_value() {
         val x = NegativeInt(StrictlyNegativeInt.random.value)
         assertFailsWith<IllegalArgumentException>(x::toPositiveInt)
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toPositiveIntOrNull_should_pass_with_a_value_that_equals_zero() {
         val x = NegativeInt(0)
@@ -186,6 +193,7 @@ class NegativeIntTest : RandomValueHolder {
         result?.value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toPositiveIntOrNull_should_return_null_with_a_strictly_negative_value() {
         val x = NegativeInt(StrictlyNegativeInt.random.value)
@@ -193,6 +201,7 @@ class NegativeIntTest : RandomValueHolder {
         result.assertNull()
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toStrictlyNegativeInt_should_pass_with_a_strictly_negative_value() {
         val x = NegativeInt(StrictlyNegativeInt.random.value)
@@ -200,12 +209,14 @@ class NegativeIntTest : RandomValueHolder {
         result.value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toStrictlyNegativeInt_should_throw_an_error_with_a_value_that_equals_zero() {
         val x = NegativeInt(0)
         assertFailsWith<IllegalArgumentException>(x::toStrictlyNegativeInt)
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toStrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_value() {
         val x = NegativeInt(StrictlyNegativeInt.random.value)
@@ -213,6 +224,7 @@ class NegativeIntTest : RandomValueHolder {
         result?.value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toStrictlyNegativeIntOrNull_should_return_null_with_a_value_that_equals_zero() {
         val x = NegativeInt(0)
