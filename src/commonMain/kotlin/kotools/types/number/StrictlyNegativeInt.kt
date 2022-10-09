@@ -14,32 +14,12 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
 
 /**
- * Returns this value as a [StrictlyNegativeInt].
- * Throws a [NumberFormatException] if this value is not a valid representation
- * of a number, or throws an [IllegalArgumentException] if it represents a
- * positive number.
- */
-@SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class, NumberFormatException::class)
-public fun String.toStrictlyNegativeInt(): StrictlyNegativeInt =
-    toInt().toStrictlyNegativeInt()
-
-/**
  * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
  * value is positive.
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     StrictlyNegativeInt orNull this
-
-/**
- * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
- * value is not a valid representation of a number or if it represents a
- * positive number.
- */
-@SinceKotoolsTypes("3.0")
-public fun String.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    toIntOrNull()?.toStrictlyNegativeIntOrNull()
 
 /**
  * Representation of strictly negative integers, excluding zero.
@@ -55,13 +35,6 @@ public value class StrictlyNegativeInt
 constructor(override val value: Int) : Comparable<StrictlyNegativeInt>,
     NegativeIntHolder,
     NonZeroIntHolder {
-    init {
-        require(value < 0) {
-            "StrictlyNegativeInt doesn't accept positive values (tried with " +
-                    "$value)."
-        }
-    }
-
     /**
      * Contains static declarations for creating or holding a
      * [StrictlyNegativeInt].
@@ -72,6 +45,13 @@ constructor(override val value: Int) : Comparable<StrictlyNegativeInt>,
         override val min: StrictlyNegativeInt = builder(range.first)
         override val max: StrictlyNegativeInt = builder(range.last)
         override val random: StrictlyNegativeInt get() = builder(range.random())
+    }
+
+    init {
+        require(value < 0) {
+            "StrictlyNegativeInt doesn't accept positive values (tried with " +
+                    "$value)."
+        }
     }
 
     // ---------- Unary operations ----------
