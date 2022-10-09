@@ -141,6 +141,7 @@ class StrictlyNegativeIntTest : RandomValueHolder {
 
     // ---------- Conversions ----------
 
+    @Suppress("DEPRECATION")
     @Test
     fun toNonZeroInt_should_pass() {
         val x: StrictlyNegativeInt = StrictlyNegativeInt.random
@@ -148,6 +149,7 @@ class StrictlyNegativeIntTest : RandomValueHolder {
         result.value assertEquals x.value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun toNegativeInt_should_pass() {
         val x: StrictlyNegativeInt = StrictlyNegativeInt.random
