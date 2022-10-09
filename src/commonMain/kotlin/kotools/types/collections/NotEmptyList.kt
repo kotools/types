@@ -89,16 +89,30 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E> internal constructor(
-    override val head: E,
-    tail: List<E>
-) : List<E> by listOf(head) + tail,
+public class NotEmptyList<out E> private constructor(
+    private val list: List<E>
+) : List<E> by list,
     NotEmptyCollection<E> {
-    private val delegate: List<E> = listOf(head) + tail
+    override val head: E get() = list.first()
+
+    internal constructor(head: E, tail: List<E>) : this(listOf(head) + tail)
+
+    /**
+     * Creates a [NotEmptyList] starting with a [head] and containing all the
+     * elements of the optional [tail].
+     */
+    @Deprecated(
+        "Use the notEmptyListOf function instead.",
+        ReplaceWith(
+            "notEmptyListOf<E>(head, *tail)",
+            "kotools.types.collections.notEmptyListOf"
+        )
+    )
+    public constructor(head: E, vararg tail: E) : this(head, tail.toList())
 
     // ---------- Conversions ----------
 
-    override fun toString(): String = delegate.toString()
+    override fun toString(): String = list.toString()
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :

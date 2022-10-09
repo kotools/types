@@ -72,6 +72,8 @@ The following types are now supported on JVM, JS and Native platforms:
 - Deprecate useless conversions of `NonZeroInt`, `PositiveInt`,
   `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt` for reducing
   the complexity of this library.
+- Deprecate the constructor of `NotEmptyList`. Prefer using the `notEmptyListOf`
+  function for creating a `NotEmptyList`.
 
 ## Version 2.0.0 - 2022/08/01
 
