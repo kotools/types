@@ -66,14 +66,18 @@ The following types are now supported on JVM, JS and Native platforms:
 
 #### Deprecated
 
-- Deprecate positional access operations of `NotEmptyCollection` that receive an
-  index of type `Int`. Use the operations that receives an index of type
-  `PositiveIntHolder` instead.
+- Positional access operations of `NotEmptyCollection` receiving an index of
+  type `Int`: map the index to a `PositiveIntHolder` before accessing its data
+  instead.
 - Deprecate useless conversions of `NonZeroInt`, `PositiveInt`,
   `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt` for reducing
   the complexity of this library.
-- Deprecate the constructor of `NotEmptyList`. Prefer using the `notEmptyListOf`
-  function for creating a `NotEmptyList`.
+- Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
+
+#### Removed
+
+- `NotEmptyMutableList` and `NotEmptyMutableSet`: mutable collections can be
+  empty by definition.
 
 ## Version 2.0.0 - 2022/08/01
 
