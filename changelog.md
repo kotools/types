@@ -66,13 +66,32 @@ The following types are now supported on JVM, JS and Native platforms:
 
 #### Deprecated
 
+- Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
 - Positional access operations of `NotEmptyCollection` receiving an index of
   type `Int`: map the index to a `PositiveIntHolder` before accessing its data
   instead.
-- Deprecate useless conversions of `NonZeroInt`, `PositiveInt`,
-  `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt` for reducing
-  the complexity of this library.
-- Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
+
+```kotlin
+val list: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+// Instead of doing the following
+val index: Int = 1
+val result: Int = list[index]
+// Do this
+val index = PositiveInt(1) // or StrictlyPositiveInt(1)
+val result: Int = list[index]
+```
+
+- Conversions of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`,
+  `NegativeInt` and `StrictlyNegativeInt`: map the type using an `Int` extension
+  function on its `value` property instead (see the example below).
+
+```kotlin
+val x = NonZeroInt(10)
+// Instead of doing the following
+val result: PositiveInt = x.toPositiveInt()
+// Do this
+val result: PositiveInt = x.value.toPositiveInt()
+```
 
 #### Removed
 
