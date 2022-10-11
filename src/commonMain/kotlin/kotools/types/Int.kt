@@ -75,7 +75,11 @@ public sealed interface IntHolder : Comparable<IntHolder> {
     public operator fun div(other: NonZeroInt): Int = value / other.value
 }
 
-private sealed class AbstractIntHolder : IntHolder {
+private sealed class AbstractIntHolder(isValid: () -> Boolean) : IntHolder {
+    init {
+        require(isValid())
+    }
+
     override fun equals(other: Any?): Boolean =
         other is IntHolder && value == other.value
 
@@ -119,12 +123,8 @@ public sealed interface NonZeroInt : IntHolder {
 }
 
 private class NonZeroIntImplementation(override val value: Int) :
-    AbstractIntHolder(),
-    NonZeroInt {
-    init {
-        require(value != 0)
-    }
-}
+    AbstractIntHolder({ value != 0 }),
+    NonZeroInt
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
@@ -165,12 +165,8 @@ public sealed interface PositiveInt : IntHolder {
 }
 
 private class PositiveIntImplementation(override val value: Int) :
-    AbstractIntHolder(),
-    PositiveInt {
-    init {
-        require(value >= 0)
-    }
-}
+    AbstractIntHolder({ value >= 0 }),
+    PositiveInt
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
@@ -198,12 +194,8 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 }
 
 private class StrictlyPositiveIntImplementation(override val value: Int) :
-    AbstractIntHolder(),
-    StrictlyPositiveInt {
-    init {
-        require(value > 0)
-    }
-}
+    AbstractIntHolder({ value > 0 }),
+    StrictlyPositiveInt
 
 /**
  * Returns the [value] as a [NegativeInt], or throws an
@@ -244,12 +236,8 @@ public sealed interface NegativeInt : IntHolder {
 }
 
 private class NegativeIntImplementation(override val value: Int) :
-    AbstractIntHolder(),
-    NegativeInt {
-    init {
-        require(value <= 0)
-    }
-}
+    AbstractIntHolder({ value <= 0 }),
+    NegativeInt
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
@@ -277,9 +265,5 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 }
 
 private class StrictlyNegativeIntImplementation(override val value: Int) :
-    AbstractIntHolder(),
-    StrictlyNegativeInt {
-    init {
-        require(value < 0)
-    }
-}
+    AbstractIntHolder({ value < 0 }),
+    StrictlyNegativeInt
