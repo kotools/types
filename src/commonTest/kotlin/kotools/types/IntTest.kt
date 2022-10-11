@@ -316,53 +316,58 @@ class StrictlyPositiveIntSerializerTest :
 @Suppress("TestFunctionName")
 class NegativeIntTest {
     @Test
-    fun NegativeInt_should_pass_with_a_negative_Int() {
-        val value: Int = randomNegativeInt().value
-        val result = NegativeInt(value)
-        result.value assertEquals value
-    }
+    fun NegativeInt_should_pass_with_a_negative_Int(): Unit =
+        randomNegativeInt()
+            .value
+            .pairBy(::NegativeInt)
+            .mapFirst(NegativeInt::value)
+            .assertEquals()
 
     @Test
-    fun NegativeInt_should_throw_an_error_with_a_strictly_positive_Int() {
-        val value: Int = randomStrictlyPositiveInt().value
-        assertFailsWith<IllegalArgumentException> { NegativeInt(value) }
-    }
+    fun NegativeInt_should_throw_an_error_with_a_strictly_positive_Int(): Unit =
+        randomStrictlyPositiveInt()
+            .runCatching { NegativeInt(value) }
+            .exceptionOrNull()
+            .assertNotNull()
+            .apply { message.assertNotNull() }
+            .let { it is NegativeInt.ConstructionError }
+            .assertTrue()
 
     @Test
-    fun NegativeIntOrNull_should_pass_with_a_negative_Int() {
-        val value: Int = randomNegativeInt().value
-        val result: NegativeInt? = NegativeIntOrNull(value)
-        result.assertNotNull().value assertEquals value
-    }
+    fun NegativeIntOrNull_should_pass_with_a_negative_Int(): Unit =
+        randomNegativeInt()
+            .value
+            .pairBy(::NegativeIntOrNull)
+            .assertFirstIsNotNull()
+            .mapFirst(NegativeInt::value)
+            .assertEquals()
 
     @Test
-    fun NegativeIntOrNull_should_return_null_with_a_strictly_positive_Int() {
-        val value: Int = randomStrictlyPositiveInt().value
-        val result: NegativeInt? = NegativeIntOrNull(value)
-        result.assertNull()
-    }
+    fun NegativeIntOrNull_should_return_null_with_a_strictly_positive_Int(): Unit =
+        randomStrictlyPositiveInt()
+            .value
+            .pairBy(::NegativeIntOrNull)
+            .assertFirstIsNull()
 
     @Test
-    fun unaryMinus_should_pass() {
-        val x: NegativeInt = randomNegativeInt()
-        val result: PositiveInt = -x
-        result.value assertEquals -x.value
-    }
+    fun unaryMinus_should_pass(): Unit = randomNegativeInt()
+        .pairBy { -it }
+        .runMap({ first.value }) { -second.value }
+        .assertEquals()
 
     @Test
-    fun div_should_pass_with_a_StrictlyPositiveInt() {
-        val x: NegativeInt = randomNegativeInt()
-        val y: StrictlyPositiveInt = randomStrictlyPositiveInt()
-        val result: NegativeInt = x / y
-        result.value assertEquals x.value / y.value
-    }
+    fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
+        (randomNegativeInt() to randomStrictlyPositiveInt())
+            .runMap({ first / second }) { first.value / second.value }
+            .mapFirst(NegativeInt::value)
+            .assertEquals()
 
     @Test
     fun div_should_pass_with_a_StrictlyNegativeInt() {
-        val x: NegativeInt = randomNegativeInt()
-        val y: StrictlyNegativeInt = randomStrictlyNegativeInt()
-        val result: PositiveInt = x / y
-        result.value assertEquals x.value / y.value
+        (randomNegativeInt() to randomStrictlyNegativeInt())
+            .runMap({ first / second }) { first.value / second.value }
+            .mapFirst(PositiveInt::value)
+            .assertEquals()
     }
 }
 
