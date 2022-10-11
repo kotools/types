@@ -165,15 +165,13 @@ sealed class IntHolderSerializerTest<T : IntHolder>(
 @Suppress("TestFunctionName")
 class NonZeroIntTest : RandomValueHolder {
     @Test
-    fun NonZeroInt_should_pass_with_a_non_zero_Int() {
-        val value: Int = randomNonZeroInt().value
-        val result = NonZeroInt(value)
-        result.value assertEquals value
-    }
+    fun NonZeroInt_should_pass_with_a_non_zero_Int(): Unit =
+        randomNonZeroInt().value.let { NonZeroInt(it).value assertEquals it }
 
     @Test
     fun NonZeroInt_should_throw_an_error_with_an_Int_that_equals_zero() {
-        assertFailsWith<IllegalArgumentException> { NonZeroInt(0) }
+        assertFailsWith<NonZeroInt.ConstructionError> { NonZeroInt(0) }
+            .message.assertNotNull()
     }
 
     @Test

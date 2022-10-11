@@ -8,6 +8,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
+import kotlin.jvm.JvmInline
 
 /**
  * Compares this value with the [other] value for order.
@@ -126,11 +127,12 @@ private sealed class AbstractIntHolder(isValid: () -> Boolean) : IntHolder {
 
 /**
  * Returns the [value] as a [NonZeroInt], or throws an
- * [IllegalArgumentException] if the [value] equals zero.
+ * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class)
-public fun NonZeroInt(value: Int): NonZeroInt = NonZeroIntImplementation(value)
+@Throws(NonZeroInt.ConstructionError::class)
+public fun NonZeroInt(value: Int): NonZeroInt = NonZeroIntOrNull(value)
+    ?: throw NonZeroInt.ConstructionError
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
@@ -138,8 +140,8 @@ public fun NonZeroInt(value: Int): NonZeroInt = NonZeroIntImplementation(value)
  */
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
-public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
-    tryOrNull { NonZeroInt(value) }
+public fun NonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
+    ?.let(::NonZeroIntImplementation)
 
 /**
  * Divides this value by the [other] value, truncating the result to an integer
@@ -158,12 +160,16 @@ public sealed interface NonZeroInt : IntHolder {
     public operator fun times(other: NonZeroInt): NonZeroInt =
         NonZeroInt(value * other.value)
 
+    /** Error thrown when creating a [NonZeroInt] fails. */
+    public object ConstructionError :
+        IllegalArgumentException("NonZeroInt doesn't accept 0.")
+
     /** Object responsible for serializing or deserializing a [NonZeroInt]. */
     public object Serializer : IntHolder.Serializer<NonZeroInt>(::NonZeroInt)
 }
 
-private class NonZeroIntImplementation(override val value: Int) :
-    AbstractIntHolder({ value != 0 }),
+@JvmInline
+private value class NonZeroIntImplementation(override val value: Int) :
     NonZeroInt
 
 /**
