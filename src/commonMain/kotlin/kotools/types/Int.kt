@@ -88,11 +88,24 @@ public sealed interface IntHolder : Comparable<IntHolder> {
         private val builder: (Int) -> T
     ) : KSerializer<T> {
         private val delegate: KSerializer<Int> = Int.serializer()
+
+        /**
+         * Describes the structure of the serializable representation of [T],
+         * produced by this serializer.
+         */
         override val descriptor: SerialDescriptor = delegate.descriptor
 
+        /**
+         * Serializes the [value] of type [T] using the format represented by
+         * the [encoder].
+         */
         override fun serialize(encoder: Encoder, value: T): Unit =
             delegate.serialize(encoder, value.value)
 
+        /**
+         * Deserializes the value of type [T] using the format represented by
+         * the [decoder].
+         */
         override fun deserialize(decoder: Decoder): T =
             delegate.deserialize(decoder).let(builder)
     }
