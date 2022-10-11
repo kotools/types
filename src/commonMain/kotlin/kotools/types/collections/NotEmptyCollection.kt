@@ -2,8 +2,8 @@ package kotools.types.collections
 
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
-import kotools.types.number.PositiveIntHolder
-import kotools.types.number.StrictlyPositiveInt
+import kotools.types.PositiveInt
+import kotools.types.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 
@@ -33,8 +33,8 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  */
 @SinceKotoolsTypes("3.0")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
-    index: PositiveIntHolder,
-    defaultValue: (PositiveIntHolder) -> E
+    index: PositiveInt,
+    defaultValue: (PositiveInt) -> E
 ): E = getOrNull(index) ?: defaultValue(index)
 
 /*
@@ -78,7 +78,7 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IndexOutOfBoundsException::class)
-    public operator fun get(index: PositiveIntHolder): E =
+    public operator fun get(index: PositiveInt): E =
         elementAt(index.value)
 
     /**
@@ -104,7 +104,7 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * returns `null` if the [index] is out of bounds.
      */
     @SinceKotoolsTypes("3.0")
-    public infix fun getOrNull(index: PositiveIntHolder): E? =
+    public infix fun getOrNull(index: PositiveInt): E? =
         tryOrNull { get(index) }
 
     // ---------- Conversions ----------

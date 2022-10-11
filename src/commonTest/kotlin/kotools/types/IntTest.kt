@@ -23,7 +23,7 @@ private fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
 private fun randomNegativeInt(): NegativeInt =
     Int.MIN_VALUE..0 random ::NegativeInt
 
-private fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
+fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
     Int.MIN_VALUE..-1 random ::StrictlyNegativeInt
 
 class IntHolderTest : RandomValueHolder {

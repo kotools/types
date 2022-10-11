@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.Holder
 import kotools.types.core.HolderCompanion
 import kotools.types.core.SinceKotoolsTypes
-import kotools.types.number.*
+import kotools.types.*
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -83,7 +83,7 @@ constructor(override val value: String) : Comparable<NotBlankString>,
      */
     @SinceKotoolsTypes("3.0")
     @Throws(IndexOutOfBoundsException::class)
-    public operator fun get(index: PositiveIntHolder): Char = value[index.value]
+    public operator fun get(index: PositiveInt): Char = value[index.value]
 
     // ---------- Binary operations ----------
 
