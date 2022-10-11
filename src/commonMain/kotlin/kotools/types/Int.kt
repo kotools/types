@@ -1,5 +1,11 @@
 package kotools.types
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
 import kotools.types.core.tryOrNull
 
@@ -73,6 +79,23 @@ public sealed interface IntHolder : Comparable<IntHolder> {
      * integer that is closer to zero.
      */
     public operator fun div(other: NonZeroInt): Int = value / other.value
+
+    /**
+     * Parent of classes responsible for serializing or deserializing an
+     * [IntHolder].
+     */
+    public sealed class Serializer<T : IntHolder>(
+        private val builder: (Int) -> T
+    ) : KSerializer<T> {
+        private val delegate: KSerializer<Int> = Int.serializer()
+        override val descriptor: SerialDescriptor = delegate.descriptor
+
+        override fun serialize(encoder: Encoder, value: T): Unit =
+            delegate.serialize(encoder, value.value)
+
+        override fun deserialize(decoder: Decoder): T =
+            delegate.deserialize(decoder).let(builder)
+    }
 }
 
 private sealed class AbstractIntHolder(isValid: () -> Boolean) : IntHolder {
@@ -113,6 +136,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
 /** Representation of integers other than zero. */
+@Serializable(NonZeroInt.Serializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface NonZeroInt : IntHolder {
     override fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
@@ -120,6 +144,9 @@ public sealed interface NonZeroInt : IntHolder {
     /** Multiplies this [value] by the [other] value. */
     public operator fun times(other: NonZeroInt): NonZeroInt =
         NonZeroInt(value * other.value)
+
+    /** Object responsible for serializing or deserializing a [NonZeroInt]. */
+    public object Serializer : IntHolder.Serializer<NonZeroInt>(::NonZeroInt)
 }
 
 private class NonZeroIntImplementation(override val value: Int) :
@@ -145,6 +172,7 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
     tryOrNull { PositiveInt(value) }
 
 /** Representation of positive integers, including zero. */
+@Serializable(PositiveInt.Serializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface PositiveInt : IntHolder {
     override fun unaryMinus(): NegativeInt = NegativeInt(-value)
@@ -162,6 +190,9 @@ public sealed interface PositiveInt : IntHolder {
      */
     public operator fun div(other: StrictlyNegativeInt): NegativeInt =
         NegativeInt(value / other.value)
+
+    /** Object responsible for serializing or deserializing a [PositiveInt]. */
+    public object Serializer : IntHolder.Serializer<PositiveInt>(::PositiveInt)
 }
 
 private class PositiveIntImplementation(override val value: Int) :
@@ -187,10 +218,18 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
     tryOrNull { StrictlyPositiveInt(value) }
 
 /** Representation of strictly positive integers, excluding zero. */
+@Serializable(StrictlyPositiveInt.Serializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface StrictlyPositiveInt : NonZeroInt,
     PositiveInt {
     override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt(-value)
+
+    /**
+     * Object responsible for serializing or deserializing a
+     * [StrictlyPositiveInt].
+     */
+    public object Serializer :
+        IntHolder.Serializer<StrictlyPositiveInt>(::StrictlyPositiveInt)
 }
 
 private class StrictlyPositiveIntImplementation(override val value: Int) :
@@ -216,6 +255,7 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
     tryOrNull { NegativeInt(value) }
 
 /** Representation of negative integers, including zero. */
+@Serializable(NegativeInt.Serializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface NegativeInt : IntHolder {
     override fun unaryMinus(): PositiveInt = PositiveInt(-value)
@@ -233,6 +273,9 @@ public sealed interface NegativeInt : IntHolder {
      */
     public operator fun div(other: StrictlyNegativeInt): PositiveInt =
         PositiveInt(value / other.value)
+
+    /** Object responsible for serializing or deserializing a [NegativeInt]. */
+    public object Serializer : IntHolder.Serializer<NegativeInt>(::NegativeInt)
 }
 
 private class NegativeIntImplementation(override val value: Int) :
@@ -258,10 +301,18 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
     tryOrNull { StrictlyNegativeInt(value) }
 
 /** Representation of strictly negative integers, excluding zero. */
+@Serializable(StrictlyNegativeInt.Serializer::class)
 @SinceKotoolsTypes("3.0")
 public sealed interface StrictlyNegativeInt : NonZeroInt,
     NegativeInt {
     override fun unaryMinus(): StrictlyPositiveInt = StrictlyPositiveInt(-value)
+
+    /**
+     * Object responsible for serializing or deserializing a
+     * [StrictlyNegativeInt].
+     */
+    public object Serializer :
+        IntHolder.Serializer<StrictlyNegativeInt>(::StrictlyNegativeInt)
 }
 
 private class StrictlyNegativeIntImplementation(override val value: Int) :

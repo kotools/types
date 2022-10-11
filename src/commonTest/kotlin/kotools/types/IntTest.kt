@@ -1,10 +1,13 @@
 package kotools.types
 
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.core.RandomValueHolder
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 private fun randomNonZeroInt(): NonZeroInt =
@@ -140,6 +143,25 @@ class IntHolderTest : RandomValueHolder {
     }
 }
 
+@Ignore // Because we test the implementations of the class IntHolderSerializer.
+sealed class IntHolderSerializerTest<T : IntHolder>(
+    private val serializer: IntHolder.Serializer<T>,
+    private val generator: () -> T
+) {
+    @Test
+    fun serialization_should_pass(): Unit = generator().let {
+        val result: String = Json.encodeToString(serializer, it)
+        result assertEquals Json.encodeToString(it.value)
+    }
+
+    @Test
+    fun deserialization_should_pass(): Unit = generator().let {
+        val encoded: String = Json.encodeToString(serializer, it)
+        val result: T = Json.decodeFromString(serializer, encoded)
+        result.value assertEquals it.value
+    }
+}
+
 @Suppress("TestFunctionName")
 class NonZeroIntTest : RandomValueHolder {
     @Test
@@ -190,6 +212,12 @@ class NonZeroIntTest : RandomValueHolder {
         result assertEquals x / y.value
     }
 }
+
+@Suppress("unused")
+class NonZeroIntSerializerTest : IntHolderSerializerTest<NonZeroInt>(
+    NonZeroInt.Serializer,
+    ::randomNonZeroInt
+)
 
 @Suppress("TestFunctionName")
 class PositiveIntTest {
@@ -244,6 +272,12 @@ class PositiveIntTest {
     }
 }
 
+@Suppress("unused")
+class PositiveIntSerializerTest : IntHolderSerializerTest<PositiveInt>(
+    PositiveInt.Serializer,
+    ::randomPositiveInt
+)
+
 @Suppress("TestFunctionName")
 class StrictlyPositiveIntTest {
     @Test
@@ -280,6 +314,13 @@ class StrictlyPositiveIntTest {
         result.value assertEquals -x.value
     }
 }
+
+@Suppress("unused")
+class StrictlyPositiveIntSerializerTest :
+    IntHolderSerializerTest<StrictlyPositiveInt>(
+        StrictlyPositiveInt.Serializer,
+        ::randomStrictlyPositiveInt
+    )
 
 @Suppress("TestFunctionName")
 class NegativeIntTest {
@@ -334,6 +375,12 @@ class NegativeIntTest {
     }
 }
 
+@Suppress("unused")
+class NegativeIntSerializerTest : IntHolderSerializerTest<NegativeInt>(
+    NegativeInt.Serializer,
+    ::randomNegativeInt
+)
+
 @Suppress("TestFunctionName")
 class StrictlyNegativeIntTest {
     @Test
@@ -370,3 +417,10 @@ class StrictlyNegativeIntTest {
         result.value assertEquals -x.value
     }
 }
+
+@Suppress("unused")
+class StrictlyNegativeIntSerializerTest :
+    IntHolderSerializerTest<StrictlyNegativeInt>(
+        StrictlyNegativeInt.Serializer,
+        ::randomStrictlyNegativeInt
+    )
