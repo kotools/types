@@ -19,18 +19,12 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Conversions from `String` and `NotBlankString` types to `NonZeroInt`,
-  `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt`
-  ([#64](https://github.com/kotools/types/issues/64)).
 - Serialization and deserialization with
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
   `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`,
   `NotEmptyMutableList`, `NotEmptySet` and
   `NotEmptyMutableSet` ([#65](https://github.com/kotools/types/issues/65)).
-- Random number retrieving from the ranges of `NonZeroInt`, `PositiveInt`,
-  `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
-  ([#79](https://github.com/kotools/types/issues/79)).
 - Support for JS and Native platforms
   ([#62](https://github.com/kotools/types/issues/62)).
 
@@ -41,25 +35,18 @@ All notable changes to this project will be documented in this file.
   ([#68](https://github.com/kotools/types/issues/68)).
 - Improve error messages ([#70](https://github.com/kotools/types/issues/70)).
 
-### Removed
-
-- The operation `unaryPlus` from the `kotools.types.number` package
-  ([#77](https://github.com/kotools/types/issues/77)).
-
-### Fixed
-
-- Binary operations with bad return types in `PositiveInt`,
-  `StrictlyPositiveInt`, `NegativeInt` and `StrictlyNegativeInt`
-  ([#69](https://github.com/kotools/types/issues/69)).
-
 ### All platforms
 
 #### Added
 
+- New type system for integers in the `kotools.types` package with `IntHolder`,
+  `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and
+  `StrictlyNegativeInt` types
+  ([#112](https://github.com/kotools/types/issues/112)). All types of this
+  system are serializable, except `IntHolder`.
+
 The following types are now supported on JVM, JS and Native platforms:
 
-- `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and
-  `StrictlyNegativeInt` ([#110](https://github.com/kotools/types/issues/110))
 - `NotBlankString` ([#89](https://github.com/kotools/types/issues/89))
 - `NotEmptyCollection` ([#91](https://github.com/kotools/types/issues/91))
 - `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
@@ -68,7 +55,7 @@ The following types are now supported on JVM, JS and Native platforms:
 
 - Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
 - Positional access operations of `NotEmptyCollection` receiving an index of
-  type `Int`: map the index to a `PositiveIntHolder` before accessing its data
+  type `Int`: map the index to a `PositiveInt` before accessing its data
   instead.
 
 ```kotlin
@@ -81,20 +68,11 @@ val index = PositiveInt(1) // or StrictlyPositiveInt(1)
 val result: Int = list[index]
 ```
 
-- Conversions of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`,
-  `NegativeInt` and `StrictlyNegativeInt`: map the type using an `Int` extension
-  function on its `value` property instead (see the example below).
-
-```kotlin
-val x = NonZeroInt(10)
-// Instead of doing the following
-val result: PositiveInt = x.toPositiveInt()
-// Do this
-val result: PositiveInt = x.value.toPositiveInt()
-```
-
 #### Removed
 
+- The old type system for integers from the `kotools.types.number` package. The
+  new one is available in the `kotools.types` package
+  ([#112](https://github.com/kotools/types/issues/112)).
 - `NotEmptyMutableList` and `NotEmptyMutableSet`: mutable collections can be
   empty by definition.
 
