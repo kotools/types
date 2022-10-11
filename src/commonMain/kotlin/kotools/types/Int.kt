@@ -227,12 +227,13 @@ private value class PositiveIntImplementation(override val value: Int) :
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
- * [IllegalArgumentException] if the [value] is negative.
+ * [StrictlyPositiveInt.ConstructionError] if the [value] is negative.
  */
 @SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class)
+@Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
-    StrictlyPositiveIntImplementation(value)
+    StrictlyPositiveIntOrNull(value)
+        ?: throw StrictlyPositiveInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
@@ -241,7 +242,8 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
-    tryOrNull { StrictlyPositiveInt(value) }
+    value.takeIf { it > 0 }
+        ?.let(::StrictlyPositiveIntImplementation)
 
 /** Representation of strictly positive integers, excluding zero. */
 @Serializable(StrictlyPositiveInt.Serializer::class)
@@ -249,6 +251,12 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
 public sealed interface StrictlyPositiveInt : NonZeroInt,
     PositiveInt {
     override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt(-value)
+
+    /** Error thrown when creating a [StrictlyPositiveInt] fails. */
+    public class ConstructionError(value: Int) : IllegalArgumentException(
+        "StrictlyPositiveInt doesn't accept negative values (tried with " +
+                "$value)."
+    )
 
     /**
      * Object responsible for serializing or deserializing a
@@ -258,8 +266,8 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
         IntHolder.Serializer<StrictlyPositiveInt>(::StrictlyPositiveInt)
 }
 
-private class StrictlyPositiveIntImplementation(override val value: Int) :
-    AbstractIntHolder({ value > 0 }),
+@JvmInline
+private value class StrictlyPositiveIntImplementation(override val value: Int) :
     StrictlyPositiveInt
 
 /**
