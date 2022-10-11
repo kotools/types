@@ -2,10 +2,7 @@ package kotools.types
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.assert.assertEquals
-import kotools.assert.assertFailsWith
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.core.RandomValueHolder
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -220,54 +217,50 @@ class NonZeroIntSerializerTest : IntHolderSerializerTest<NonZeroInt>(
 @Suppress("TestFunctionName")
 class PositiveIntTest {
     @Test
-    fun PositiveInt_should_pass_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        val result = PositiveInt(value)
-        result.value assertEquals value
-    }
+    fun PositiveInt_should_pass_with_a_positive_Int(): Unit =
+        randomPositiveInt()
+            .run { PositiveInt(value) to value }
+            .run { first.value assertEquals second }
 
     @Test
-    fun PositiveInt_should_throw_an_error_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        assertFailsWith<IllegalArgumentException> { PositiveInt(value) }
-    }
+    fun PositiveInt_should_throw_an_error_with_a_strictly_negative_Int(): Unit =
+        randomStrictlyNegativeInt()
+            .runCatching { PositiveInt(value) }
+            .exceptionOrNull()
+            .assertNotNull()
+            .apply { message.assertNotNull() }
+            .let { it is PositiveInt.ConstructionError }
+            .assertTrue()
 
     @Test
-    fun PositiveIntOrNull_should_pass_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        val result: PositiveInt? = PositiveIntOrNull(value)
-        result.assertNotNull().value assertEquals value
-    }
+    fun PositiveIntOrNull_should_pass_with_a_positive_Int(): Unit =
+        randomPositiveInt()
+            .run { PositiveIntOrNull(value) to value }
+            .run { first.assertNotNull() to second }
+            .run { first.value assertEquals second }
 
     @Test
-    fun PositiveIntOrNull_should_return_null_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        val result: PositiveInt? = PositiveIntOrNull(value)
-        result.assertNull()
-    }
+    fun PositiveIntOrNull_should_return_null_with_a_strictly_negative_Int(): Unit =
+        randomStrictlyNegativeInt()
+            .run { PositiveIntOrNull(value) }
+            .assertNull()
 
     @Test
-    fun unaryMinus_should_pass() {
-        val x: PositiveInt = randomPositiveInt()
-        val result: NegativeInt = -x
-        result.value assertEquals -x.value
-    }
+    fun unaryMinus_should_pass(): Unit = randomPositiveInt()
+        .let { -it to it }
+        .run { first.value assertEquals -second.value }
 
     @Test
-    fun div_should_pass_with_a_StrictlyPositiveInt() {
-        val x: PositiveInt = randomPositiveInt()
-        val y: StrictlyPositiveInt = randomStrictlyPositiveInt()
-        val result: PositiveInt = x / y
-        result.value assertEquals x.value / y.value
-    }
+    fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
+        (randomPositiveInt() to randomStrictlyPositiveInt())
+            .run { first / second to first.value / second.value }
+            .run { first.value assertEquals second }
 
     @Test
-    fun div_should_pass_with_a_StrictlyNegativeInt() {
-        val x: PositiveInt = randomPositiveInt()
-        val y: StrictlyNegativeInt = randomStrictlyNegativeInt()
-        val result: NegativeInt = x / y
-        result.value assertEquals x.value / y.value
-    }
+    fun div_should_pass_with_a_StrictlyNegativeInt(): Unit =
+        (randomPositiveInt() to randomStrictlyNegativeInt())
+            .run { first / second to first.value / second.value }
+            .run { first.value assertEquals second }
 }
 
 @Suppress("unused")

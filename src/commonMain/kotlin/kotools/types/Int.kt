@@ -174,12 +174,12 @@ private value class NonZeroIntImplementation(override val value: Int) :
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
- * [IllegalArgumentException] if the [value] is strictly negative.
+ * [PositiveInt.ConstructionError] if the [value] is strictly negative.
  */
 @SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class)
-public fun PositiveInt(value: Int): PositiveInt =
-    PositiveIntImplementation(value)
+@Throws(PositiveInt.ConstructionError::class)
+public fun PositiveInt(value: Int): PositiveInt = PositiveIntOrNull(value)
+    ?: throw PositiveInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
@@ -188,7 +188,8 @@ public fun PositiveInt(value: Int): PositiveInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
-    tryOrNull { PositiveInt(value) }
+    value.takeIf { it >= 0 }
+        ?.let(::PositiveIntImplementation)
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveInt.Serializer::class)
@@ -210,12 +211,18 @@ public sealed interface PositiveInt : IntHolder {
     public operator fun div(other: StrictlyNegativeInt): NegativeInt =
         NegativeInt(value / other.value)
 
+    /** Error thrown when creating a [PositiveInt] fails. */
+    public class ConstructionError(value: Int) : IllegalArgumentException(
+        "PositiveInt doesn't accept strictly negative values (tried with " +
+                "$value)."
+    )
+
     /** Object responsible for serializing or deserializing a [PositiveInt]. */
     public object Serializer : IntHolder.Serializer<PositiveInt>(::PositiveInt)
 }
 
-private class PositiveIntImplementation(override val value: Int) :
-    AbstractIntHolder({ value >= 0 }),
+@JvmInline
+private value class PositiveIntImplementation(override val value: Int) :
     PositiveInt
 
 /**
