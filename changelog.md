@@ -42,8 +42,17 @@ All notable changes to this project will be documented in this file.
 - New type system for integers in the `kotools.types` package with `IntHolder`,
   `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and
   `StrictlyNegativeInt` types
-  ([#112](https://github.com/kotools/types/issues/112)). All types of this
-  system are serializable, except `IntHolder`.
+  ([#112](https://github.com/kotools/types/issues/112)).
+  All types of this system are serializable, except `IntHolder`.
+- **Experimental** DSL for building numbers according to the given context.
+  Here's an example with the `nonZero` context:
+
+```kotlin
+val a = nonZero int 1 // NonZeroInt(value = 1)
+val b = nonZero int 0 // throws an exception
+val c = nonZero intOrNull -1 // NonZeroInt(value = -1)
+val d = nonZero intOrNull 0 // null
+```
 
 The following types are now supported on JVM, JS and Native platforms:
 
