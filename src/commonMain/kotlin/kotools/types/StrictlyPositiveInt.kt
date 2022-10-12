@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
  * [StrictlyPositiveInt.ConstructionError] if the [value] is negative.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
     value.toStrictlyPositiveInt()
@@ -16,7 +16,7 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
  * [value] is negative.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Suppress("FunctionName")
 public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
     value.toStrictlyPositiveIntOrNull()
@@ -25,7 +25,7 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
  * Returns this value as a [StrictlyPositiveInt], or throws an
  * [StrictlyPositiveInt.ConstructionError] if this value is negative.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     toStrictlyPositiveIntOrNull()
@@ -35,14 +35,14 @@ public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
  * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
  * value is negative.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     takeIf { it > 0 }
         ?.let(::StrictlyPositiveIntImplementation)
 
 /** Representation of strictly positive integers, excluding zero. */
 @Serializable(StrictlyPositiveInt.Serializer::class)
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public sealed interface StrictlyPositiveInt : NonZeroInt,
     PositiveInt {
     override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt(-value)

@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NonZeroInt], or throws an
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Throws(NonZeroInt.ConstructionError::class)
 public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
 
@@ -15,7 +15,7 @@ public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Suppress("FunctionName")
 public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
     value.toNonZeroIntOrNull()
@@ -24,7 +24,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
  * Returns this value as a [NonZeroInt], or throws an
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Throws(NonZeroInt.ConstructionError::class)
 public fun Int.toNonZeroInt(): NonZeroInt = toNonZeroIntOrNull()
     ?: throw NonZeroInt.ConstructionError
@@ -33,7 +33,7 @@ public fun Int.toNonZeroInt(): NonZeroInt = toNonZeroIntOrNull()
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
@@ -41,12 +41,12 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = takeIf { it != 0 }
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to zero.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
 /** Representation of integers other than zero. */
 @Serializable(NonZeroInt.Serializer::class)
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public sealed interface NonZeroInt : IntHolder {
     override fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
 

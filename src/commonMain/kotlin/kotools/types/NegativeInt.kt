@@ -7,7 +7,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NegativeInt], or throws an
  * [NegativeInt.ConstructionError] if the [value] is strictly positive.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Throws(NegativeInt.ConstructionError::class)
 public fun NegativeInt(value: Int): NegativeInt = value.toNegativeInt()
 
@@ -15,7 +15,7 @@ public fun NegativeInt(value: Int): NegativeInt = value.toNegativeInt()
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
  * strictly positive.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
     value.toNegativeIntOrNull()
@@ -24,7 +24,7 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
  * Returns this value as a [NegativeInt], or throws an
  * [NegativeInt.ConstructionError] if this value is strictly positive.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 @Throws(NegativeInt.ConstructionError::class)
 public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
     ?: throw NegativeInt.ConstructionError(this)
@@ -33,13 +33,13 @@ public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
  * Returns this value as a [NegativeInt], or returns `null` if this value is
  * strictly positive.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public fun Int.toNegativeIntOrNull(): NegativeInt? = takeIf { it <= 0 }
     ?.let(::NegativeIntImplementation)
 
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeInt.Serializer::class)
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public sealed interface NegativeInt : IntHolder {
     override fun unaryMinus(): PositiveInt = PositiveInt(-value)
 
