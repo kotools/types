@@ -287,7 +287,7 @@ public fun NegativeInt(value: Int): NegativeInt = NegativeIntOrNull(value)
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
     value.takeIf { it <= 0 }
-        ?.let(::NegativeIntImplementation2)
+        ?.let(::NegativeIntImplementation)
 
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeInt.Serializer::class)
@@ -320,7 +320,7 @@ public sealed interface NegativeInt : IntHolder {
 }
 
 @JvmInline
-private value class NegativeIntImplementation2(override val value: Int) :
+private value class NegativeIntImplementation(override val value: Int) :
     NegativeInt
 
 /**
