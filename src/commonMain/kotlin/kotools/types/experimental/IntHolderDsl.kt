@@ -1,6 +1,20 @@
-package kotools.types
+package kotools.types.experimental
 
+import kotools.types.ExperimentalKotoolsTypesApi
+import kotools.types.IntHolder
+import kotools.types.NegativeInt
+import kotools.types.NonZeroInt
+import kotools.types.PositiveInt
+import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
+import kotools.types.StrictlyNegativeInt
+import kotools.types.StrictlyPositiveInt
 import kotools.types.core.tryOrNull
+import kotools.types.toNegativeInt
+import kotools.types.toNonZeroInt
+import kotools.types.toPositiveInt
+import kotools.types.toStrictlyNegativeInt
+import kotools.types.toStrictlyPositiveInt
 
 @ExperimentalKotoolsTypesApi
 internal sealed interface IntHolderDsl<out T : IntHolder> {

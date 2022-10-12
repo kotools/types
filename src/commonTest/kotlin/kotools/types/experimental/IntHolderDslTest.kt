@@ -1,8 +1,15 @@
-package kotools.types
+package kotools.types.experimental
 
 import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotools.types.ExperimentalKotoolsTypesApi
+import kotools.types.IntHolder
+import kotools.types.randomNegativeInt
+import kotools.types.randomNonZeroInt
+import kotools.types.randomPositiveInt
+import kotools.types.randomStrictlyNegativeInt
+import kotools.types.randomStrictlyPositiveInt
 import kotlin.test.Test
 
 @ExperimentalKotoolsTypesApi

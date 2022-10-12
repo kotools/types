@@ -11,6 +11,10 @@ manipulating collections.
 
 Core functions and types available for all platforms.
 
+# Package kotools.types.experimental
+
+Experimental APIs, subject to change in future versions of this library.
+
 # Package kotools.types.number
 
 Useful functions and explicit types such as `NonZeroInt` or `PositiveInt` for
