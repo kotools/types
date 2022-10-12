@@ -1,7 +1,6 @@
 package kotools.types
 
 import kotlinx.serialization.Serializable
-import kotools.types.core.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 /**

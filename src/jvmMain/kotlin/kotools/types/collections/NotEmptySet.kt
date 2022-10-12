@@ -7,7 +7,8 @@ import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.core.SinceKotoolsTypes
+import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 
 // ---------- Conversions ----------
 
@@ -15,7 +16,7 @@ import kotools.types.core.SinceKotoolsTypes
  * Returns a not empty set containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
@@ -27,7 +28,7 @@ public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> {
  * Returns a not empty set containing all the elements of this array, or throws
  * an [IllegalArgumentException] if this array is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
     toSet().toNotEmptySet()
@@ -36,7 +37,7 @@ public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
  * Returns a not empty set containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? = try {
     toNotEmptySet()
 } catch (_: IllegalArgumentException) {
@@ -47,7 +48,7 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? = try {
  * Returns a not empty set containing all the elements of this array, or returns
  * `null` if this array is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
     toSet().toNotEmptySetOrNull()
 
@@ -56,7 +57,7 @@ public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
  * returns the result of calling the [defaultValue] function if this collection
  * is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
     defaultValue: (Collection<E>) -> NotEmptySet<E>
 ): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
@@ -65,7 +66,7 @@ public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
  * Returns a not empty set containing all the elements of this array, or returns
  * the result of calling the [defaultValue] function if this array is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
     defaultValue: (Array<E>) -> NotEmptySet<E>
 ): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
@@ -79,7 +80,7 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
  * all the elements of the optional [tail].
  */
 @Serializable(NotEmptySet.Serializer::class)
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 public class NotEmptySet<out E> internal constructor(
     override val head: E,
     private val tail: Set<E>
@@ -89,7 +90,7 @@ public class NotEmptySet<out E> internal constructor(
         tail.filterNot { it == head }.toSet()
     )
 
-    @SinceKotoolsTypes("3.0")
+    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
     internal constructor(set: Set<E>) : this(
         set.first(),
         set.filterNot { it == set.first() }.toSet()
@@ -106,10 +107,17 @@ public class NotEmptySet<out E> internal constructor(
 
     // ---------- Positional access operations ----------
 
+    @Deprecated(
+        "The index should be a PositiveInt or a StrictlyPositiveInt.",
+        replaceWith = ReplaceWith(
+            "get(PositiveInt(index))",
+            "kotools.types.number.PositiveInt"
+        )
+    )
     override fun get(index: Int): E = if (index == 0) head
     else tail.elementAt(index - 1)
 
-    @SinceKotoolsTypes("3.0")
+    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
     internal class Serializer<E>(elementSerializer: KSerializer<E>) :
         SealedNotEmptySetSerializer<E, NotEmptySet<E>>(
             elementSerializer,
@@ -117,7 +125,7 @@ public class NotEmptySet<out E> internal constructor(
         )
 }
 
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 internal sealed class SealedNotEmptySetSerializer<E, C : Set<E>>(
     elementSerializer: KSerializer<E>,
     private val builder: (Set<E>) -> C

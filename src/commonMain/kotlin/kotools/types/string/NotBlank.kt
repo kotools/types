@@ -6,10 +6,9 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.*
 import kotools.types.core.Holder
 import kotools.types.core.HolderCompanion
-import kotools.types.core.SinceKotoolsTypes
-import kotools.types.*
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -18,7 +17,7 @@ import kotlin.jvm.JvmInline
  * Returns this value as a [NotBlankString], or throws an
  * [IllegalArgumentException] if this value is blank.
  */
-@SinceKotoolsTypes("1.2")
+@SinceKotoolsTypes("1.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
 
@@ -26,7 +25,7 @@ public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
  * Returns this value as a [NotBlankString], or returns `null` if this value is
  * blank.
  */
-@SinceKotoolsTypes("1.2")
+@SinceKotoolsTypes("1.2", StabilityLevel.Alpha)
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
     NotBlankString orNull this
 
@@ -38,7 +37,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * this value is less than the [other] value, or a positive number if this value
  * is greater than the [other] value.
  */
-@SinceKotoolsTypes("2.0")
+@SinceKotoolsTypes("2.0", StabilityLevel.Alpha)
 public infix operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.value)
 
@@ -51,7 +50,7 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
  */
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
-@SinceKotoolsTypes("1.2")
+@SinceKotoolsTypes("1.2", StabilityLevel.Alpha)
 public value class NotBlankString
 @Throws(IllegalArgumentException::class)
 constructor(override val value: String) : Comparable<NotBlankString>,
@@ -81,7 +80,7 @@ constructor(override val value: String) : Comparable<NotBlankString>,
      * Throws an [IndexOutOfBoundsException] if the [index] is out of bounds,
      * except in Kotlin/JS where the behavior is unspecified.
      */
-    @SinceKotoolsTypes("3.0")
+    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
     @Throws(IndexOutOfBoundsException::class)
     public operator fun get(index: PositiveInt): Char = value[index.value]
 
@@ -93,7 +92,7 @@ constructor(override val value: String) : Comparable<NotBlankString>,
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    @SinceKotoolsTypes("2.0")
+    @SinceKotoolsTypes("2.0", StabilityLevel.Alpha)
     public operator fun compareTo(other: String): Int = value.compareTo(other)
 
     /**

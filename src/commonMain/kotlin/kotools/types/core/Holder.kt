@@ -1,5 +1,8 @@
 package kotools.types.core
 
+import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
+
 // ---------- Holder ----------
 
 /**
@@ -7,7 +10,7 @@ package kotools.types.core
  *
  * @param T The type of values to hold.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public interface Holder<out T : Any> {
     /** The value to hold. */
     public val value: T
@@ -37,7 +40,7 @@ public interface Holder<out T : Any> {
  * @param T The type of values to hold.
  * @param R The type of [Holder] to return.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public abstract class HolderCompanion<T : Any, out R : Holder<T>>(
     protected val builder: (T) -> R
 ) {

@@ -1,9 +1,10 @@
 package kotools.types.collections
 
-import kotools.types.core.SinceKotoolsTypes
-import kotools.types.core.tryOrNull
 import kotools.types.PositiveInt
+import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotools.types.StrictlyPositiveInt
+import kotools.types.core.tryOrNull
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 
@@ -19,7 +20,7 @@ import kotools.types.string.toNotBlankString
         "kotools.types.number.PositiveInt"
     )
 )
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 @Suppress("DEPRECATION")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: Int,
@@ -31,7 +32,7 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  * the result of calling the [defaultValue] function if the [index] is out of
  * bounds.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: PositiveInt,
     defaultValue: (PositiveInt) -> E
@@ -46,7 +47,7 @@ TODO: Make the NotEmptyCollection sealed when migrating collections for all
  *
  * @param E The type of elements contained in this collection.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
 public interface NotEmptyCollection<out E> : Collection<E> {
     /** First element of this collection. */
     public val head: E
@@ -76,7 +77,7 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
-    @SinceKotoolsTypes("3.0")
+    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
     @Throws(IndexOutOfBoundsException::class)
     public operator fun get(index: PositiveInt): E =
         elementAt(index.value)
@@ -103,7 +104,7 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * returns `null` if the [index] is out of bounds.
      */
-    @SinceKotoolsTypes("3.0")
+    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
     public infix fun getOrNull(index: PositiveInt): E? =
         tryOrNull { get(index) }
 
