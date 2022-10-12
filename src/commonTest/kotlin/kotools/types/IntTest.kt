@@ -380,38 +380,44 @@ class NegativeIntSerializerTest : IntHolderSerializerTest<NegativeInt>(
 @Suppress("TestFunctionName")
 class StrictlyNegativeIntTest {
     @Test
-    fun StrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        val result = StrictlyNegativeInt(value)
-        result.value assertEquals value
-    }
+    fun StrictlyNegativeInt_should_pass_with_a_strictly_negative_Int(): Unit =
+        randomStrictlyNegativeInt()
+            .value
+            .pairBy(::StrictlyNegativeInt)
+            .mapFirst(StrictlyNegativeInt::value)
+            .assertEquals()
 
     @Test
-    fun StrictlyNegativeInt_should_throw_an_error_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        assertFailsWith<IllegalArgumentException> { StrictlyNegativeInt(value) }
-    }
+    fun StrictlyNegativeInt_should_throw_an_error_with_a_positive_Int(): Unit =
+        randomPositiveInt()
+            .runCatching { StrictlyNegativeInt(value) }
+            .exceptionOrNull()
+            .assertNotNull()
+            .apply { message.assertNotNull() }
+            .let { it is StrictlyNegativeInt.ConstructionError }
+            .assertTrue()
 
     @Test
-    fun StrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        val result: StrictlyNegativeInt? = StrictlyNegativeIntOrNull(value)
-        result.assertNotNull().value assertEquals value
-    }
+    fun StrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int(): Unit =
+        randomStrictlyNegativeInt()
+            .value
+            .pairBy(::StrictlyNegativeIntOrNull)
+            .assertFirstIsNotNull()
+            .mapFirst(StrictlyNegativeInt::value)
+            .assertEquals()
 
     @Test
-    fun StrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        val result: StrictlyNegativeInt? = StrictlyNegativeIntOrNull(value)
-        result.assertNull()
-    }
+    fun StrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int(): Unit =
+        randomPositiveInt()
+            .value
+            .let(::StrictlyNegativeIntOrNull)
+            .assertNull()
 
     @Test
-    fun unaryMinus_should_pass() {
-        val x: StrictlyNegativeInt = randomStrictlyNegativeInt()
-        val result: StrictlyPositiveInt = -x
-        result.value assertEquals -x.value
-    }
+    fun unaryMinus_should_pass(): Unit = randomStrictlyNegativeInt()
+        .pairBy { -it }
+        .runMap({ first.value }) { -second.value }
+        .assertEquals()
 }
 
 @Suppress("unused")

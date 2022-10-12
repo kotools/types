@@ -7,7 +7,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.core.SinceKotoolsTypes
-import kotools.types.core.tryOrNull
 import kotlin.jvm.JvmInline
 
 /**
@@ -110,19 +109,6 @@ public sealed interface IntHolder : Comparable<IntHolder> {
         override fun deserialize(decoder: Decoder): T =
             delegate.deserialize(decoder).let(builder)
     }
-}
-
-private sealed class AbstractIntHolder(isValid: () -> Boolean) : IntHolder {
-    init {
-        require(isValid())
-    }
-
-    override fun equals(other: Any?): Boolean =
-        other is IntHolder && value == other.value
-
-    override fun hashCode(): Int = 31 * value.hashCode()
-
-    override fun toString(): String = value.toString()
 }
 
 /**
@@ -325,12 +311,13 @@ private value class NegativeIntImplementation(override val value: Int) :
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
- * [IllegalArgumentException] if the [value] is positive.
+ * [StrictlyNegativeInt.ConstructionError] if the [value] is positive.
  */
 @SinceKotoolsTypes("3.0")
-@Throws(IllegalArgumentException::class)
+@Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
-    StrictlyNegativeIntImplementation(value)
+    StrictlyNegativeIntOrNull(value)
+        ?: throw StrictlyNegativeInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
@@ -339,7 +326,8 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
-    tryOrNull { StrictlyNegativeInt(value) }
+    value.takeIf { it < 0 }
+        ?.let(::StrictlyNegativeIntImplementation)
 
 /** Representation of strictly negative integers, excluding zero. */
 @Serializable(StrictlyNegativeInt.Serializer::class)
@@ -347,6 +335,12 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
 public sealed interface StrictlyNegativeInt : NonZeroInt,
     NegativeInt {
     override fun unaryMinus(): StrictlyPositiveInt = StrictlyPositiveInt(-value)
+
+    /** Error thrown when creating a [StrictlyNegativeInt] fails. */
+    public class ConstructionError(value: Int) : IllegalArgumentException(
+        "StrictlyNegativeInt doesn't accept positive values (tried with " +
+                "$value)."
+    )
 
     /**
      * Object responsible for serializing or deserializing a
@@ -356,6 +350,6 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
         IntHolder.Serializer<StrictlyNegativeInt>(::StrictlyNegativeInt)
 }
 
-private class StrictlyNegativeIntImplementation(override val value: Int) :
-    AbstractIntHolder({ value < 0 }),
+@JvmInline
+private value class StrictlyNegativeIntImplementation(override val value: Int) :
     StrictlyNegativeInt
