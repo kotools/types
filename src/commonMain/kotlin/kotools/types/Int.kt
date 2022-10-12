@@ -117,8 +117,7 @@ public sealed interface IntHolder : Comparable<IntHolder> {
  */
 @SinceKotoolsTypes("3.0")
 @Throws(NonZeroInt.ConstructionError::class)
-public fun NonZeroInt(value: Int): NonZeroInt = NonZeroIntOrNull(value)
-    ?: throw NonZeroInt.ConstructionError
+public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
@@ -126,7 +125,24 @@ public fun NonZeroInt(value: Int): NonZeroInt = NonZeroIntOrNull(value)
  */
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
-public fun NonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
+public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
+    value.toNonZeroIntOrNull()
+
+/**
+ * Returns this value as a [NonZeroInt], or throws an
+ * [NonZeroInt.ConstructionError] if this value equals zero.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(NonZeroInt.ConstructionError::class)
+public fun Int.toNonZeroInt(): NonZeroInt = toNonZeroIntOrNull()
+    ?: throw NonZeroInt.ConstructionError
+
+/**
+ * Returns this value as a [NonZeroInt], or returns `null` if this value equals
+ * zero.
+ */
+@SinceKotoolsTypes("3.0")
+public fun Int.toNonZeroIntOrNull(): NonZeroInt? = takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
 /**
@@ -164,8 +180,7 @@ private value class NonZeroIntImplementation(override val value: Int) :
  */
 @SinceKotoolsTypes("3.0")
 @Throws(PositiveInt.ConstructionError::class)
-public fun PositiveInt(value: Int): PositiveInt = PositiveIntOrNull(value)
-    ?: throw PositiveInt.ConstructionError(value)
+public fun PositiveInt(value: Int): PositiveInt = value.toPositiveInt()
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
@@ -174,8 +189,24 @@ public fun PositiveInt(value: Int): PositiveInt = PositiveIntOrNull(value)
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
-    value.takeIf { it >= 0 }
-        ?.let(::PositiveIntImplementation)
+    value.toPositiveIntOrNull()
+
+/**
+ * Returns this value as a [PositiveInt], or throws an
+ * [PositiveInt.ConstructionError] if this value is strictly negative.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(PositiveInt.ConstructionError::class)
+public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
+    ?: throw PositiveInt.ConstructionError(this)
+
+/**
+ * Returns this value as a [PositiveInt], or returns `null` if this value is
+ * strictly negative.
+ */
+@SinceKotoolsTypes("3.0")
+public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
+    ?.let(::PositiveIntImplementation)
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveInt.Serializer::class)
@@ -218,8 +249,7 @@ private value class PositiveIntImplementation(override val value: Int) :
 @SinceKotoolsTypes("3.0")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
-    StrictlyPositiveIntOrNull(value)
-        ?: throw StrictlyPositiveInt.ConstructionError(value)
+    value.toStrictlyPositiveInt()
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
@@ -228,7 +258,25 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
-    value.takeIf { it > 0 }
+    value.toStrictlyPositiveIntOrNull()
+
+/**
+ * Returns this value as a [StrictlyPositiveInt], or throws an
+ * [StrictlyPositiveInt.ConstructionError] if this value is negative.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(StrictlyPositiveInt.ConstructionError::class)
+public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
+    toStrictlyPositiveIntOrNull()
+        ?: throw StrictlyPositiveInt.ConstructionError(this)
+
+/**
+ * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
+ * value is negative.
+ */
+@SinceKotoolsTypes("3.0")
+public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+    takeIf { it > 0 }
         ?.let(::StrictlyPositiveIntImplementation)
 
 /** Representation of strictly positive integers, excluding zero. */
@@ -262,8 +310,7 @@ private value class StrictlyPositiveIntImplementation(override val value: Int) :
  */
 @SinceKotoolsTypes("3.0")
 @Throws(NegativeInt.ConstructionError::class)
-public fun NegativeInt(value: Int): NegativeInt = NegativeIntOrNull(value)
-    ?: throw NegativeInt.ConstructionError(value)
+public fun NegativeInt(value: Int): NegativeInt = value.toNegativeInt()
 
 /**
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
@@ -272,8 +319,24 @@ public fun NegativeInt(value: Int): NegativeInt = NegativeIntOrNull(value)
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
-    value.takeIf { it <= 0 }
-        ?.let(::NegativeIntImplementation)
+    value.toNegativeIntOrNull()
+
+/**
+ * Returns this value as a [NegativeInt], or throws an
+ * [NegativeInt.ConstructionError] if this value is strictly positive.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(NegativeInt.ConstructionError::class)
+public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
+    ?: throw NegativeInt.ConstructionError(this)
+
+/**
+ * Returns this value as a [NegativeInt], or returns `null` if this value is
+ * strictly positive.
+ */
+@SinceKotoolsTypes("3.0")
+public fun Int.toNegativeIntOrNull(): NegativeInt? = takeIf { it <= 0 }
+    ?.let(::NegativeIntImplementation)
 
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeInt.Serializer::class)
@@ -316,8 +379,7 @@ private value class NegativeIntImplementation(override val value: Int) :
 @SinceKotoolsTypes("3.0")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
-    StrictlyNegativeIntOrNull(value)
-        ?: throw StrictlyNegativeInt.ConstructionError(value)
+    value.toStrictlyNegativeInt()
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
@@ -326,7 +388,25 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
-    value.takeIf { it < 0 }
+    value.toStrictlyNegativeIntOrNull()
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or throws an
+ * [StrictlyNegativeInt.ConstructionError] if this value is positive.
+ */
+@SinceKotoolsTypes("3.0")
+@Throws(StrictlyNegativeInt.ConstructionError::class)
+public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
+    toStrictlyNegativeIntOrNull()
+        ?: throw StrictlyNegativeInt.ConstructionError(this)
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
+ * value is positive.
+ */
+@SinceKotoolsTypes("3.0")
+public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    takeIf { it < 0 }
         ?.let(::StrictlyNegativeIntImplementation)
 
 /** Representation of strictly negative integers, excluding zero. */
