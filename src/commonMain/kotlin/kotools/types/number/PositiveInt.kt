@@ -1,13 +1,14 @@
-package kotools.types
+package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
  * [PositiveInt.ConstructionError] if the [value] is strictly negative.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 @Throws(PositiveInt.ConstructionError::class)
 public fun PositiveInt(value: Int): PositiveInt = value.toPositiveInt()
 
@@ -15,7 +16,7 @@ public fun PositiveInt(value: Int): PositiveInt = value.toPositiveInt()
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
  * strictly negative.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
     value.toPositiveIntOrNull()
@@ -24,7 +25,7 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
  * Returns this value as a [PositiveInt], or throws an
  * [PositiveInt.ConstructionError] if this value is strictly negative.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 @Throws(PositiveInt.ConstructionError::class)
 public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
     ?: throw PositiveInt.ConstructionError(this)
@@ -33,13 +34,13 @@ public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
  * Returns this value as a [PositiveInt], or returns `null` if this value is
  * strictly negative.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
     ?.let(::PositiveIntImplementation)
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveInt.Serializer::class)
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 public sealed interface PositiveInt : IntHolder {
     override fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
@@ -57,13 +58,32 @@ public sealed interface PositiveInt : IntHolder {
     public operator fun div(other: StrictlyNegativeInt): NegativeInt =
         NegativeInt(value / other.value)
 
+    /** Contains declarations for holding or building a [PositiveInt]. */
+    public companion object {
+        /**
+         * Returns the [value] as a [PositiveInt], or returns `null` if the
+         * [value] equals 0.
+         */
+        @Deprecated(
+            "Use the PositiveIntOrNull function instead.",
+            ReplaceWith(
+                "PositiveIntOrNull(value)",
+                "kotools.types.number.PositiveIntOrNull"
+            )
+        )
+        public infix fun orNull(value: Int): PositiveInt? =
+            value.toPositiveIntOrNull()
+    }
+
     /** Error thrown when creating a [PositiveInt] fails. */
+    @SinceKotoolsTypes("3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "PositiveInt doesn't accept strictly negative values (tried with " +
                 "$value)."
     )
 
     /** Object responsible for serializing or deserializing a [PositiveInt]. */
+    @SinceKotoolsTypes("3.0")
     public object Serializer : IntHolder.Serializer<PositiveInt>(::PositiveInt)
 }
 

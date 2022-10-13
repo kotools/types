@@ -1,8 +1,13 @@
-package kotools.types
+package kotools.types.number
 
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.assert.assertTrue
+import kotools.types.assertEquals
+import kotools.types.assertFirstIsNotNull
+import kotools.types.mapFirst
+import kotools.types.pairBy
+import kotools.types.runMap
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")

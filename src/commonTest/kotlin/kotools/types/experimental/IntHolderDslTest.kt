@@ -4,12 +4,12 @@ import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.ExperimentalKotoolsTypesApi
-import kotools.types.IntHolder
-import kotools.types.randomNegativeInt
-import kotools.types.randomNonZeroInt
-import kotools.types.randomPositiveInt
-import kotools.types.randomStrictlyNegativeInt
-import kotools.types.randomStrictlyPositiveInt
+import kotools.types.number.IntHolder
+import kotools.types.number.randomNegativeInt
+import kotools.types.number.randomNonZeroInt
+import kotools.types.number.randomPositiveInt
+import kotools.types.number.randomStrictlyNegativeInt
+import kotools.types.number.randomStrictlyPositiveInt
 import kotlin.test.Test
 
 @ExperimentalKotoolsTypesApi

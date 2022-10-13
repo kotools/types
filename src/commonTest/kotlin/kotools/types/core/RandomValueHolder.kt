@@ -1,7 +1,7 @@
 package kotools.types.core
 
-import kotools.types.StrictlyPositiveInt
-import kotools.types.StrictlyPositiveIntOrNull
+import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.StrictlyPositiveIntOrNull
 import kotlin.random.Random
 
 interface RandomValueHolder {

@@ -1,4 +1,4 @@
-package kotools.types
+package kotools.types.number
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

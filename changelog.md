@@ -19,12 +19,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Serialization and deserialization with
-  [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
-  of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
-  `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`,
-  `NotEmptyMutableList`, `NotEmptySet` and
-  `NotEmptyMutableSet` ([#65](https://github.com/kotools/types/issues/65)).
 - Support for JS and Native platforms
   ([#62](https://github.com/kotools/types/issues/62)).
 
@@ -39,11 +33,11 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- New type system for integers in the `kotools.types` package with `IntHolder`,
-  `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt` and
-  `StrictlyNegativeInt` types
-  ([#112](https://github.com/kotools/types/issues/112)).
-  All types of this system are serializable, except `IntHolder`.
+- Serialization and deserialization with
+  [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
+  of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
+  `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`, `NotEmptySet`
+  ([#65](https://github.com/kotools/types/issues/65)).
 - **Experimental** DSL for building numbers according to the given context.
   Here's an example with the `nonZero` context:
 
@@ -60,8 +54,15 @@ The following types are now supported on JVM, JS and Native platforms:
 - `NotEmptyCollection` ([#91](https://github.com/kotools/types/issues/91))
 - `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
 
+### Changed
+
+- Update type system for integers in the `kotools.types.number` package with a
+  new `IntHolder` type ([#112](https://github.com/kotools/types/issues/112)).
+
 #### Deprecated
 
+- `orNull` functions for building the `IntHolder`'s subtypes
+  ([#112](https://github.com/kotools/types/issues/112)).
 - Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
 - Positional access operations of `NotEmptyCollection` receiving an index of
   type `Int`: map the index to a `PositiveInt` before accessing its data
@@ -70,7 +71,7 @@ The following types are now supported on JVM, JS and Native platforms:
 ```kotlin
 val list: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
 // Instead of doing the following
-val index: Int = 1
+val index = 1
 val result: Int = list[index]
 // Do this
 val index = PositiveInt(1) // or StrictlyPositiveInt(1)
@@ -79,9 +80,6 @@ val result: Int = list[index]
 
 #### Removed
 
-- The old type system for integers from the `kotools.types.number` package. The
-  new one is available in the `kotools.types` package
-  ([#112](https://github.com/kotools/types/issues/112)).
 - `NotEmptyMutableList` and `NotEmptyMutableSet`: mutable collections can be
   empty by definition.
 

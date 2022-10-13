@@ -1,10 +1,10 @@
 package kotools.types.collections
 
-import kotools.types.PositiveInt
 import kotools.types.SinceKotoolsTypes
 import kotools.types.StabilityLevel
-import kotools.types.StrictlyPositiveInt
 import kotools.types.core.tryOrNull
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 

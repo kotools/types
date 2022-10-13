@@ -4,8 +4,8 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
-import kotools.types.PositiveInt
-import kotools.types.StrictlyPositiveInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyPositiveInt
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 

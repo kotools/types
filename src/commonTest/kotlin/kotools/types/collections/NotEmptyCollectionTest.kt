@@ -1,9 +1,13 @@
 package kotools.types.collections
 
-import kotools.assert.*
-import kotools.types.PositiveInt
+import kotools.assert.assertEquals
+import kotools.assert.assertFailsWith
+import kotools.assert.assertNotEquals
+import kotools.assert.assertNotNull
+import kotools.assert.assertNull
 import kotools.types.core.RandomValueHolder
-import kotools.types.randomStrictlyNegativeInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.randomStrictlyNegativeInt
 import kotools.types.string.NotBlankString
 import kotlin.random.Random
 import kotlin.test.Test

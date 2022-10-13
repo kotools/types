@@ -1,13 +1,14 @@
-package kotools.types
+package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
  * [StrictlyNegativeInt.ConstructionError] if the [value] is positive.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
     value.toStrictlyNegativeInt()
@@ -16,7 +17,7 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
  * [value] is positive.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
     value.toStrictlyNegativeIntOrNull()
@@ -25,7 +26,7 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
  * Returns this value as a [StrictlyNegativeInt], or throws an
  * [StrictlyNegativeInt.ConstructionError] if this value is positive.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     toStrictlyNegativeIntOrNull()
@@ -35,19 +36,39 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
  * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
  * value is positive.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     takeIf { it < 0 }
         ?.let(::StrictlyNegativeIntImplementation)
 
 /** Representation of strictly negative integers, excluding zero. */
 @Serializable(StrictlyNegativeInt.Serializer::class)
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.1")
 public sealed interface StrictlyNegativeInt : NonZeroInt,
     NegativeInt {
     override fun unaryMinus(): StrictlyPositiveInt = StrictlyPositiveInt(-value)
 
+    /**
+     * Contains declarations for holding or building a [StrictlyPositiveInt].
+     */
+    public companion object {
+        /**
+         * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
+         * [value] equals 0.
+         */
+        @Deprecated(
+            "Use the StrictlyNegativeIntOrNull function instead.",
+            ReplaceWith(
+                "StrictlyNegativeIntOrNull(value)",
+                "kotools.types.number.StrictlyNegativeIntOrNull"
+            )
+        )
+        public infix fun orNull(value: Int): StrictlyPositiveInt? =
+            value.toStrictlyPositiveIntOrNull()
+    }
+
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */
+    @SinceKotoolsTypes("3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "StrictlyNegativeInt doesn't accept positive values (tried with " +
                 "$value)."
@@ -57,6 +78,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
      * Object responsible for serializing or deserializing a
      * [StrictlyNegativeInt].
      */
+    @SinceKotoolsTypes("3.0")
     public object Serializer :
         IntHolder.Serializer<StrictlyNegativeInt>(::StrictlyNegativeInt)
 }

@@ -1,4 +1,4 @@
-package kotools.types
+package kotools.types.number
 
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith

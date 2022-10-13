@@ -7,8 +7,8 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
-import kotools.types.PositiveInt
 import kotools.types.core.RandomValueHolder
+import kotools.types.number.PositiveInt
 import kotlin.random.Random
 import kotlin.test.Test
 
