@@ -4,12 +4,28 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotools.assert.assertTrue
 import kotools.types.*
 import kotools.types.core.RandomValueHolder
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class NonZeroIntTest : RandomValueHolder {
+    // ---------- Companion ----------
+
+    @Test
+    fun ranges_should_not_contain_zero(): Unit = NonZeroInt.ranges
+        .all { 0 !in it }
+        .assertTrue()
+
+    @Test
+    fun min_should_be_the_minimum_of_Int(): Unit =
+        NonZeroInt.min.value assertEquals Int.MIN_VALUE
+
+    @Test
+    fun max_should_be_the_maximum_of_Int(): Unit =
+        NonZeroInt.max.value assertEquals Int.MAX_VALUE
+
     // ---------- Builders ----------
 
     @Test

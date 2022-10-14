@@ -56,6 +56,8 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
      * Contains declarations for holding or building a [StrictlyPositiveInt].
      */
     public companion object {
+        internal val range: IntRange = Int.MIN_VALUE..-1
+
         /**
          * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
          * [value] equals 0.

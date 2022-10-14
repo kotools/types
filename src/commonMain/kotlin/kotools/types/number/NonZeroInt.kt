@@ -65,6 +65,16 @@ public sealed interface NonZeroInt : IntHolder {
 
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
+        private val negativeRange: IntRange = StrictlyNegativeInt.range
+        private val positiveRange: IntRange = StrictlyPositiveInt.range
+        internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
+
+        /** The minimum value of a [NonZeroInt]. */
+        public val min: NonZeroInt = NonZeroInt(negativeRange.first)
+
+        /** The maximum value of a [NonZeroInt]. */
+        public val max: NonZeroInt = NonZeroInt(positiveRange.last)
+
         /**
          * Returns the [value] as a [NonZeroInt], or returns `null` if the
          * [value] equals 0.

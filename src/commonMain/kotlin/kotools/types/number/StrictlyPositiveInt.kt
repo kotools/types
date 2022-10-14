@@ -56,6 +56,8 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
      * Contains declarations for holding or building a [StrictlyPositiveInt].
      */
     public companion object {
+        internal val range: IntRange = 1..Int.MAX_VALUE
+
         /**
          * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if
          * the [value] equals 0.
