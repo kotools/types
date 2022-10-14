@@ -2,16 +2,13 @@ package kotools.types.number
 
 import kotools.assert.assertNotNull
 import kotools.assert.assertTrue
-import kotools.types.assertEquals
-import kotools.types.assertFirstIsNotNull
-import kotools.types.assertFirstIsNull
-import kotools.types.mapFirst
-import kotools.types.pairBy
-import kotools.types.runMap
+import kotools.types.*
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class NegativeIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun NegativeInt_should_pass_with_a_negative_Int(): Unit =
         randomNegativeInt()
@@ -46,11 +43,15 @@ class NegativeIntTest {
             .pairBy(::NegativeIntOrNull)
             .assertFirstIsNull()
 
+    // ---------- Unary operations ----------
+
     @Test
     fun unaryMinus_should_pass(): Unit = randomNegativeInt()
         .pairBy { -it }
         .runMap({ first.value }) { -second.value }
         .assertEquals()
+
+    // ---------- Binary operations ----------
 
     @Test
     fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
@@ -66,10 +67,18 @@ class NegativeIntTest {
             .mapFirst(PositiveInt::value)
             .assertEquals()
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_pass(): Unit = randomNegativeInt()
+        .pairBy(NegativeInt::toString)
+        .runMapSecond { value.toString() }
+        .assertEquals()
 }
 
 @Suppress("unused")
 class NegativeIntSerializerTest : IntHolderSerializerTest<NegativeInt>(
-    NegativeInt.Serializer,
+    NegativeIntSerializer,
     ::randomNegativeInt
 )

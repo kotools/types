@@ -4,11 +4,14 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotools.types.*
 import kotools.types.core.RandomValueHolder
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class NonZeroIntTest : RandomValueHolder {
+    // ---------- Builders ----------
+
     @Test
     fun NonZeroInt_should_pass_with_a_non_zero_Int(): Unit =
         randomNonZeroInt().value.let { NonZeroInt(it).value assertEquals it }
@@ -32,12 +35,16 @@ class NonZeroIntTest : RandomValueHolder {
         result.assertNull()
     }
 
+    // ---------- Unary operations ----------
+
     @Test
     fun unaryMinus_should_pass() {
         val x: NonZeroInt = randomNonZeroInt()
         val result: NonZeroInt = -x
         result.value assertEquals -x.value
     }
+
+    // ---------- Binary operations ----------
 
     @Test
     fun times_should_pass_with_a_NonZeroInt() {
@@ -54,10 +61,18 @@ class NonZeroIntTest : RandomValueHolder {
         val result: Int = x / y
         result assertEquals x / y.value
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_pass(): Unit = randomNonZeroInt()
+        .pairBy(NonZeroInt::toString)
+        .runMapSecond { value.toString() }
+        .assertEquals()
 }
 
 @Suppress("unused")
 class NonZeroIntSerializerTest : IntHolderSerializerTest<NonZeroInt>(
-    NonZeroInt.Serializer,
+    NonZeroIntSerializer,
     ::randomNonZeroInt
 )

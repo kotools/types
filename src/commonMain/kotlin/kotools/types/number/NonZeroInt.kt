@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
+// ---------- Builders ----------
+
 /**
  * Returns the [value] as a [NonZeroInt], or throws an
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
@@ -38,6 +40,8 @@ public fun Int.toNonZeroInt(): NonZeroInt = toNonZeroIntOrNull()
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
+// ---------- Binary operations ----------
+
 /**
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to zero.
@@ -46,10 +50,14 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = takeIf { it != 0 }
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
 /** Representation of integers other than zero. */
-@Serializable(NonZeroInt.Serializer::class)
+@Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface NonZeroInt : IntHolder {
+    // ---------- Unary operations ----------
+
     override fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
+
+    // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
     public operator fun times(other: NonZeroInt): NonZeroInt =
@@ -76,12 +84,13 @@ public sealed interface NonZeroInt : IntHolder {
     @SinceKotoolsTypes("3.0")
     public object ConstructionError :
         IllegalArgumentException("NonZeroInt doesn't accept 0.")
-
-    /** Object responsible for serializing or deserializing a [NonZeroInt]. */
-    @SinceKotoolsTypes("3.0")
-    public object Serializer : IntHolder.Serializer<NonZeroInt>(::NonZeroInt)
 }
+
+internal object NonZeroIntSerializer :
+    IntHolder.Serializer<NonZeroInt>(::NonZeroInt)
 
 @JvmInline
 private value class NonZeroIntImplementation(override val value: Int) :
-    NonZeroInt
+    NonZeroInt {
+    override fun toString(): String = value.toString()
+}

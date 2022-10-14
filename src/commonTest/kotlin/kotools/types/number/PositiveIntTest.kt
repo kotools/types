@@ -4,10 +4,15 @@ import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.assert.assertTrue
+import kotools.types.assertEquals
+import kotools.types.pairBy
+import kotools.types.runMapSecond
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class PositiveIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun PositiveInt_should_pass_with_a_positive_Int(): Unit =
         randomPositiveInt()
@@ -37,10 +42,14 @@ class PositiveIntTest {
             .run { PositiveIntOrNull(value) }
             .assertNull()
 
+    // ---------- Unary operations ----------
+
     @Test
     fun unaryMinus_should_pass(): Unit = randomPositiveInt()
         .let { -it to it }
         .run { first.value assertEquals -second.value }
+
+    // ---------- Binary operations ----------
 
     @Test
     fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
@@ -53,10 +62,18 @@ class PositiveIntTest {
         (randomPositiveInt() to randomStrictlyNegativeInt())
             .run { first / second to first.value / second.value }
             .run { first.value assertEquals second }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_pass(): Unit = randomPositiveInt()
+        .pairBy(PositiveInt::toString)
+        .runMapSecond { value.toString() }
+        .assertEquals()
 }
 
 @Suppress("unused")
 class PositiveIntSerializerTest : IntHolderSerializerTest<PositiveInt>(
-    PositiveInt.Serializer,
+    PositiveIntSerializer,
     ::randomPositiveInt
 )

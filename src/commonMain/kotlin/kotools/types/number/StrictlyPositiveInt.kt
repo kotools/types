@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
+// ---------- Builders ----------
+
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
  * [StrictlyPositiveInt.ConstructionError] if the [value] is negative.
@@ -42,10 +44,12 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
         ?.let(::StrictlyPositiveIntImplementation)
 
 /** Representation of strictly positive integers, excluding zero. */
-@Serializable(StrictlyPositiveInt.Serializer::class)
+@Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface StrictlyPositiveInt : NonZeroInt,
     PositiveInt {
+    // ---------- Unary operations ----------
+
     override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt(-value)
 
     /**
@@ -73,16 +77,13 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
         "StrictlyPositiveInt doesn't accept negative values (tried with " +
                 "$value)."
     )
-
-    /**
-     * Object responsible for serializing or deserializing a
-     * [StrictlyPositiveInt].
-     */
-    @SinceKotoolsTypes("3.0")
-    public object Serializer :
-        IntHolder.Serializer<StrictlyPositiveInt>(::StrictlyPositiveInt)
 }
+
+internal object StrictlyPositiveIntSerializer :
+    IntHolder.Serializer<StrictlyPositiveInt>(::StrictlyPositiveInt)
 
 @JvmInline
 private value class StrictlyPositiveIntImplementation(override val value: Int) :
-    StrictlyPositiveInt
+    StrictlyPositiveInt {
+    override fun toString(): String = value.toString()
+}

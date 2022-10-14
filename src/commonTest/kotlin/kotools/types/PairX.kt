@@ -31,3 +31,9 @@ inline fun <A, B, C, D> Pair<A, B>.runMap(
 
 inline fun <A, B, C> Pair<A, B>.mapFirst(block: (A) -> C): Pair<C, B> =
     block(first) to second
+
+inline fun <A, B, C> Pair<A, B>.mapSecond(block: (B) -> C): Pair<A, C> =
+    first to block(second)
+
+inline fun <A, B, C> Pair<A, B>.runMapSecond(block: B.() -> C): Pair<A, C> =
+    mapSecond(block)

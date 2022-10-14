@@ -4,10 +4,15 @@ import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.assert.assertTrue
+import kotools.types.assertEquals
+import kotools.types.pairBy
+import kotools.types.runMapSecond
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class StrictlyPositiveIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun StrictlyPositiveInt_should_pass_with_a_strictly_positive_Int(): Unit =
         randomStrictlyPositiveInt()
@@ -37,15 +42,25 @@ class StrictlyPositiveIntTest {
             .run { StrictlyPositiveIntOrNull(value) }
             .assertNull()
 
+    // ---------- Unary operations ----------
+
     @Test
     fun unaryMinus_should_pass(): Unit = randomStrictlyPositiveInt()
         .let { -it to it }
         .run { first.value assertEquals -second.value }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_pass(): Unit = randomStrictlyPositiveInt()
+        .pairBy(StrictlyPositiveInt::toString)
+        .runMapSecond { value.toString() }
+        .assertEquals()
 }
 
 @Suppress("unused")
 class StrictlyPositiveIntSerializerTest :
     IntHolderSerializerTest<StrictlyPositiveInt>(
-        StrictlyPositiveInt.Serializer,
+        StrictlyPositiveIntSerializer,
         ::randomStrictlyPositiveInt
     )

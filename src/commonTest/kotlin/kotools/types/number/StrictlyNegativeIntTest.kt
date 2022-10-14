@@ -3,15 +3,13 @@ package kotools.types.number
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.assert.assertTrue
-import kotools.types.assertEquals
-import kotools.types.assertFirstIsNotNull
-import kotools.types.mapFirst
-import kotools.types.pairBy
-import kotools.types.runMap
+import kotools.types.*
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class StrictlyNegativeIntTest {
+    // ---------- Builders ----------
+
     @Test
     fun StrictlyNegativeInt_should_pass_with_a_strictly_negative_Int(): Unit =
         randomStrictlyNegativeInt()
@@ -46,16 +44,26 @@ class StrictlyNegativeIntTest {
             .let(::StrictlyNegativeIntOrNull)
             .assertNull()
 
+    // ---------- Unary operations ----------
+
     @Test
     fun unaryMinus_should_pass(): Unit = randomStrictlyNegativeInt()
         .pairBy { -it }
         .runMap({ first.value }) { -second.value }
+        .assertEquals()
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_pass(): Unit = randomStrictlyNegativeInt()
+        .pairBy(StrictlyNegativeInt::toString)
+        .runMapSecond { value.toString() }
         .assertEquals()
 }
 
 @Suppress("unused")
 class StrictlyNegativeIntSerializerTest :
     IntHolderSerializerTest<StrictlyNegativeInt>(
-        StrictlyNegativeInt.Serializer,
+        StrictlyNegativeIntSerializer,
         ::randomStrictlyNegativeInt
     )
