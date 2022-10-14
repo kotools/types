@@ -38,6 +38,16 @@ All notable changes to this project will be documented in this file.
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
   `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`, `NotEmptySet`
   ([#65](https://github.com/kotools/types/issues/65)).
+- **Beta** API for getting an instance of `IntHolder` with a random value.
+
+```kotlin
+val nonZeroInt = NonZeroInt.random()
+val positiveInt = PositiveInt.random()
+val strictlyPositiveInt = StrictlyPositiveInt.random()
+val negativeInt = NegativeInt.random()
+val strictlyNegativeInt = StrictlyNegativeInt.random()
+```
+
 - **Experimental** DSL for building numbers according to the given context.
   Here's an example with the `nonZero` context:
 

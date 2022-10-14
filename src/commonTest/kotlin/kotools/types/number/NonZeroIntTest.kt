@@ -1,10 +1,6 @@
 package kotools.types.number
 
-import kotools.assert.assertEquals
-import kotools.assert.assertFailsWith
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
-import kotools.assert.assertTrue
+import kotools.assert.*
 import kotools.types.*
 import kotools.types.core.RandomValueHolder
 import kotlin.test.Test
@@ -25,6 +21,10 @@ class NonZeroIntTest : RandomValueHolder {
     @Test
     fun max_should_be_the_maximum_of_Int(): Unit =
         NonZeroInt.max.value assertEquals Int.MAX_VALUE
+
+    @Test
+    fun random_should_return_different_values(): Unit =
+        NonZeroInt.random().value assertNotEquals NonZeroInt.random().value
 
     // ---------- Builders ----------
 

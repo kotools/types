@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -56,7 +57,17 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
      * Contains declarations for holding or building a [StrictlyPositiveInt].
      */
     public companion object {
-        internal val range: IntRange = Int.MIN_VALUE..-1
+        internal val range: IntRange by lazy { Int.MIN_VALUE..-1 }
+
+        /** The minimum value of a [StrictlyNegativeInt]. */
+        public val min: StrictlyNegativeInt by lazy {
+            StrictlyNegativeInt(range.first)
+        }
+
+        /** The maximum value of a [StrictlyNegativeInt]. */
+        public val max: StrictlyNegativeInt by lazy {
+            StrictlyNegativeInt(range.last)
+        }
 
         /**
          * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
@@ -71,6 +82,11 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
         )
         public infix fun orNull(value: Int): StrictlyPositiveInt? =
             value.toStrictlyPositiveIntOrNull()
+
+        /** Returns a random [StrictlyNegativeInt]. */
+        @SinceKotoolsTypes("3.0", StabilityLevel.Beta)
+        public fun random(): StrictlyNegativeInt = range.random()
+            .toStrictlyNegativeInt()
     }
 
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */

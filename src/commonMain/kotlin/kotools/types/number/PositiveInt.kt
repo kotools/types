@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -66,6 +67,14 @@ public sealed interface PositiveInt : IntHolder {
 
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
+        private val range: IntRange by lazy { 0..Int.MAX_VALUE }
+
+        /** The minimum value of a [PositiveInt]. */
+        public val min: PositiveInt by lazy { PositiveInt(range.first) }
+
+        /** The maximum value of a [PositiveInt]. */
+        public val max: PositiveInt by lazy { PositiveInt(range.last) }
+
         /**
          * Returns the [value] as a [PositiveInt], or returns `null` if the
          * [value] equals 0.
@@ -79,6 +88,11 @@ public sealed interface PositiveInt : IntHolder {
         )
         public infix fun orNull(value: Int): PositiveInt? =
             value.toPositiveIntOrNull()
+
+        /** Returns a random [PositiveInt]. */
+        @SinceKotoolsTypes("3.0", StabilityLevel.Beta)
+        public fun random(): PositiveInt = range.random()
+            .toPositiveInt()
     }
 
     /** Error thrown when creating a [PositiveInt] fails. */

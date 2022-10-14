@@ -1,13 +1,26 @@
 package kotools.types.number
 
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
-import kotools.assert.assertTrue
+import kotools.assert.*
 import kotools.types.*
 import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class StrictlyNegativeIntTest {
+    // ---------- Companion ----------
+
+    @Test
+    fun min_should_be_the_minimum_of_Int(): Unit =
+        StrictlyNegativeInt.min.value assertEquals Int.MIN_VALUE
+
+    @Test
+    fun max_should_be_minus1(): Unit =
+        StrictlyNegativeInt.max.value assertEquals -1
+
+    @Test
+    fun random_should_return_different_values(): Unit = StrictlyNegativeInt
+        .random()
+        .value assertNotEquals StrictlyNegativeInt.random().value
+
     // ---------- Builders ----------
 
     @Test

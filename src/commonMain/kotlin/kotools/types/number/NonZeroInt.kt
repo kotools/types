@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -65,15 +66,21 @@ public sealed interface NonZeroInt : IntHolder {
 
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
-        private val negativeRange: IntRange = StrictlyNegativeInt.range
-        private val positiveRange: IntRange = StrictlyPositiveInt.range
-        internal val ranges: Set<IntRange> = setOf(negativeRange, positiveRange)
+        private val negativeRange: IntRange by lazy(
+            StrictlyNegativeInt.Companion::range
+        )
+        private val positiveRange: IntRange by lazy(
+            StrictlyPositiveInt.Companion::range
+        )
+        internal val ranges: Set<IntRange> by lazy {
+            setOf(negativeRange, positiveRange)
+        }
 
         /** The minimum value of a [NonZeroInt]. */
-        public val min: NonZeroInt = NonZeroInt(negativeRange.first)
+        public val min: NonZeroInt by lazy { NonZeroInt(negativeRange.first) }
 
         /** The maximum value of a [NonZeroInt]. */
-        public val max: NonZeroInt = NonZeroInt(positiveRange.last)
+        public val max: NonZeroInt by lazy { NonZeroInt(positiveRange.last) }
 
         /**
          * Returns the [value] as a [NonZeroInt], or returns `null` if the
@@ -88,6 +95,12 @@ public sealed interface NonZeroInt : IntHolder {
         )
         public infix fun orNull(value: Int): NonZeroInt? =
             value.toNonZeroIntOrNull()
+
+        /** Returns a random [NonZeroInt]. */
+        @SinceKotoolsTypes("3.0", StabilityLevel.Beta)
+        public fun random(): NonZeroInt = ranges.random()
+            .random()
+            .toNonZeroInt()
     }
 
     /** Error thrown when creating a [NonZeroInt] fails. */

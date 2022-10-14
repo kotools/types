@@ -1,9 +1,6 @@
 package kotools.types.number
 
-import kotools.assert.assertEquals
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
-import kotools.assert.assertTrue
+import kotools.assert.*
 import kotools.types.assertEquals
 import kotools.types.pairBy
 import kotools.types.runMapSecond
@@ -11,6 +8,19 @@ import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class PositiveIntTest {
+    // ---------- Companion ----------
+
+    @Test
+    fun min_should_be_zero(): Unit = PositiveInt.min.value assertEquals 0
+
+    @Test
+    fun max_should_be_the_maximum_of_Int(): Unit =
+        PositiveInt.max.value assertEquals Int.MAX_VALUE
+
+    @Test
+    fun random_should_return_different_values(): Unit =
+        PositiveInt.random().value assertNotEquals PositiveInt.random().value
+
     // ---------- Builders ----------
 
     @Test

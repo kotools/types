@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -66,6 +67,14 @@ public sealed interface NegativeInt : IntHolder {
 
     /** Contains declarations for holding or building a [NegativeInt]. */
     public companion object {
+        private val range: IntRange by lazy { Int.MIN_VALUE..0 }
+
+        /** The minimum value of a [NegativeInt]. */
+        public val min: NegativeInt by lazy { NegativeInt(range.first) }
+
+        /** The maximum value of a [NegativeInt]. */
+        public val max: NegativeInt by lazy { NegativeInt(range.last) }
+
         /**
          * Returns the [value] as a [NegativeInt], or returns `null` if the
          * [value] equals 0.
@@ -79,6 +88,11 @@ public sealed interface NegativeInt : IntHolder {
         )
         public infix fun orNull(value: Int): NegativeInt? =
             value.toNegativeIntOrNull()
+
+        /** Returns a random [NegativeInt]. */
+        @SinceKotoolsTypes("3.0", StabilityLevel.Beta)
+        public fun random(): NegativeInt = range.random()
+            .toNegativeInt()
     }
 
     /** Error thrown when creating a [NegativeInt] fails. */

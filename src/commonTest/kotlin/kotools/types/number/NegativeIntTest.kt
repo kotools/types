@@ -1,5 +1,7 @@
 package kotools.types.number
 
+import kotools.assert.assertEquals
+import kotools.assert.assertNotEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertTrue
 import kotools.types.*
@@ -7,6 +9,19 @@ import kotlin.test.Test
 
 @Suppress("TestFunctionName")
 class NegativeIntTest {
+    // ---------- Companion ----------
+
+    @Test
+    fun min_should_be_the_minimum_of_Int(): Unit =
+        NegativeInt.min.value assertEquals Int.MIN_VALUE
+
+    @Test
+    fun max_should_be_zero(): Unit = NegativeInt.max.value assertEquals 0
+
+    @Test
+    fun random_should_return_different_values(): Unit =
+        NegativeInt.random().value assertNotEquals NegativeInt.random().value
+
     // ---------- Builders ----------
 
     @Test
