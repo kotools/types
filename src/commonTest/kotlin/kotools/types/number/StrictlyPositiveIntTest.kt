@@ -26,13 +26,13 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun StrictlyPositiveInt_should_pass_with_a_strictly_positive_Int(): Unit =
-        randomStrictlyPositiveInt()
+        StrictlyPositiveInt.random()
             .run { StrictlyPositiveInt(value) to value }
             .run { first.value assertEquals second }
 
     @Test
     fun StrictlyPositiveInt_should_throw_an_error_with_a_negative_Int(): Unit =
-        randomNegativeInt()
+        NegativeInt.random()
             .runCatching { StrictlyPositiveInt(value) }
             .exceptionOrNull()
             .assertNotNull()
@@ -42,28 +42,28 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun StrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_Int(): Unit =
-        randomStrictlyPositiveInt()
+        StrictlyPositiveInt.random()
             .run { StrictlyPositiveIntOrNull(value) to value }
             .run { first.assertNotNull() to second }
             .run { first.value assertEquals second }
 
     @Test
     fun StrictlyPositiveIntOrNull_should_return_null_with_a_negative_Int(): Unit =
-        randomNegativeInt()
+        NegativeInt.random()
             .run { StrictlyPositiveIntOrNull(value) }
             .assertNull()
 
     // ---------- Unary operations ----------
 
     @Test
-    fun unaryMinus_should_pass(): Unit = randomStrictlyPositiveInt()
+    fun unaryMinus_should_pass(): Unit = StrictlyPositiveInt.random()
         .let { -it to it }
         .run { first.value assertEquals -second.value }
 
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = randomStrictlyPositiveInt()
+    fun toString_should_pass(): Unit = StrictlyPositiveInt.random()
         .pairBy(StrictlyPositiveInt::toString)
         .runMapSecond { value.toString() }
         .assertEquals()
@@ -73,5 +73,5 @@ class StrictlyPositiveIntTest {
 class StrictlyPositiveIntSerializerTest :
     IntHolderSerializerTest<StrictlyPositiveInt>(
         StrictlyPositiveIntSerializer,
-        ::randomStrictlyPositiveInt
+        StrictlyPositiveInt.Companion::random
     )

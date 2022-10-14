@@ -25,13 +25,13 @@ class PositiveIntTest {
 
     @Test
     fun PositiveInt_should_pass_with_a_positive_Int(): Unit =
-        randomPositiveInt()
+        PositiveInt.random()
             .run { PositiveInt(value) to value }
             .run { first.value assertEquals second }
 
     @Test
     fun PositiveInt_should_throw_an_error_with_a_strictly_negative_Int(): Unit =
-        randomStrictlyNegativeInt()
+        StrictlyNegativeInt.random()
             .runCatching { PositiveInt(value) }
             .exceptionOrNull()
             .assertNotNull()
@@ -41,21 +41,21 @@ class PositiveIntTest {
 
     @Test
     fun PositiveIntOrNull_should_pass_with_a_positive_Int(): Unit =
-        randomPositiveInt()
+        PositiveInt.random()
             .run { PositiveIntOrNull(value) to value }
             .run { first.assertNotNull() to second }
             .run { first.value assertEquals second }
 
     @Test
     fun PositiveIntOrNull_should_return_null_with_a_strictly_negative_Int(): Unit =
-        randomStrictlyNegativeInt()
+        StrictlyNegativeInt.random()
             .run { PositiveIntOrNull(value) }
             .assertNull()
 
     // ---------- Unary operations ----------
 
     @Test
-    fun unaryMinus_should_pass(): Unit = randomPositiveInt()
+    fun unaryMinus_should_pass(): Unit = PositiveInt.random()
         .let { -it to it }
         .run { first.value assertEquals -second.value }
 
@@ -63,20 +63,20 @@ class PositiveIntTest {
 
     @Test
     fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
-        (randomPositiveInt() to randomStrictlyPositiveInt())
+        (PositiveInt.random() to StrictlyPositiveInt.random())
             .run { first / second to first.value / second.value }
             .run { first.value assertEquals second }
 
     @Test
     fun div_should_pass_with_a_StrictlyNegativeInt(): Unit =
-        (randomPositiveInt() to randomStrictlyNegativeInt())
+        (PositiveInt.random() to StrictlyNegativeInt.random())
             .run { first / second to first.value / second.value }
             .run { first.value assertEquals second }
 
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = randomPositiveInt()
+    fun toString_should_pass(): Unit = PositiveInt.random()
         .pairBy(PositiveInt::toString)
         .runMapSecond { value.toString() }
         .assertEquals()
@@ -85,5 +85,5 @@ class PositiveIntTest {
 @Suppress("unused")
 class PositiveIntSerializerTest : IntHolderSerializerTest<PositiveInt>(
     PositiveIntSerializer,
-    ::randomPositiveInt
+    PositiveInt.Companion::random
 )

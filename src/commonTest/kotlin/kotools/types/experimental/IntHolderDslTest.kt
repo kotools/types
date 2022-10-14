@@ -4,30 +4,25 @@ import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.ExperimentalKotoolsTypesApi
-import kotools.types.number.IntHolder
-import kotools.types.number.randomNegativeInt
-import kotools.types.number.randomNonZeroInt
-import kotools.types.number.randomPositiveInt
-import kotools.types.number.randomStrictlyNegativeInt
-import kotools.types.number.randomStrictlyPositiveInt
+import kotools.types.number.*
 import kotlin.test.Test
 
 @ExperimentalKotoolsTypesApi
 class IntHolderDslTest {
     private val validEntries: Map<IntHolderDsl<IntHolder>, Int> = mapOf(
-        nonZero to randomNonZeroInt().value,
-        positive to randomPositiveInt().value,
-        strictlyPositive to randomPositiveInt().value,
-        negative to randomNegativeInt().value,
-        strictlyNegative to randomStrictlyNegativeInt().value
+        nonZero to NonZeroInt.random().value,
+        positive to PositiveInt.random().value,
+        strictlyPositive to PositiveInt.random().value,
+        negative to NegativeInt.random().value,
+        strictlyNegative to StrictlyNegativeInt.random().value
     )
 
     private val invalidEntries: Map<IntHolderDsl<IntHolder>, Int> = mapOf(
         nonZero to 0,
-        positive to randomStrictlyNegativeInt().value,
-        strictlyPositive to randomNegativeInt().value,
-        negative to randomStrictlyPositiveInt().value,
-        strictlyNegative to randomPositiveInt().value
+        positive to StrictlyNegativeInt.random().value,
+        strictlyPositive to NegativeInt.random().value,
+        negative to StrictlyPositiveInt.random().value,
+        strictlyNegative to PositiveInt.random().value
     )
 
     @Test

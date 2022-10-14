@@ -7,32 +7,13 @@ import kotools.types.core.RandomValueHolder
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-private inline infix fun <T : IntHolder> IntRange.random(
-    builder: (Int) -> T
-): T = random().let(builder)
-
-fun randomNonZeroInt(): NonZeroInt =
-    setOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE).random() random ::NonZeroInt
-
-fun randomPositiveInt(): PositiveInt =
-    0..Int.MAX_VALUE random ::PositiveInt
-
-fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
-    1..Int.MAX_VALUE random ::StrictlyPositiveInt
-
-fun randomNegativeInt(): NegativeInt =
-    Int.MIN_VALUE..0 random ::NegativeInt
-
-fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
-    Int.MIN_VALUE..-1 random ::StrictlyNegativeInt
-
 class IntHolderTest : RandomValueHolder {
     private val randomHolders: Set<IntHolder> = setOf(
-        randomNonZeroInt(),
-        randomPositiveInt(),
-        randomStrictlyPositiveInt(),
-        randomNegativeInt(),
-        randomStrictlyNegativeInt()
+        NonZeroInt.random(),
+        PositiveInt.random(),
+        StrictlyPositiveInt.random(),
+        NegativeInt.random(),
+        StrictlyNegativeInt.random()
     )
 
     @Test
@@ -134,7 +115,7 @@ class IntHolderTest : RandomValueHolder {
     @Test
     fun div_should_pass_with_a_NonZeroInt() {
         val x: IntHolder = randomHolders.random()
-        val y: NonZeroInt = randomNonZeroInt()
+        val y: NonZeroInt = NonZeroInt.random()
         val result: Int = x / y
         result assertEquals x.value / y.value
     }

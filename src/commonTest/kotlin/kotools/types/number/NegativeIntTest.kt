@@ -26,7 +26,7 @@ class NegativeIntTest {
 
     @Test
     fun NegativeInt_should_pass_with_a_negative_Int(): Unit =
-        randomNegativeInt()
+        NegativeInt.random()
             .value
             .pairBy(::NegativeInt)
             .mapFirst(NegativeInt::value)
@@ -34,7 +34,7 @@ class NegativeIntTest {
 
     @Test
     fun NegativeInt_should_throw_an_error_with_a_strictly_positive_Int(): Unit =
-        randomStrictlyPositiveInt()
+        StrictlyPositiveInt.random()
             .runCatching { NegativeInt(value) }
             .exceptionOrNull()
             .assertNotNull()
@@ -44,7 +44,7 @@ class NegativeIntTest {
 
     @Test
     fun NegativeIntOrNull_should_pass_with_a_negative_Int(): Unit =
-        randomNegativeInt()
+        NegativeInt.random()
             .value
             .pairBy(::NegativeIntOrNull)
             .assertFirstIsNotNull()
@@ -53,7 +53,7 @@ class NegativeIntTest {
 
     @Test
     fun NegativeIntOrNull_should_return_null_with_a_strictly_positive_Int(): Unit =
-        randomStrictlyPositiveInt()
+        StrictlyPositiveInt.random()
             .value
             .pairBy(::NegativeIntOrNull)
             .assertFirstIsNull()
@@ -61,7 +61,7 @@ class NegativeIntTest {
     // ---------- Unary operations ----------
 
     @Test
-    fun unaryMinus_should_pass(): Unit = randomNegativeInt()
+    fun unaryMinus_should_pass(): Unit = NegativeInt.random()
         .pairBy { -it }
         .runMap({ first.value }) { -second.value }
         .assertEquals()
@@ -70,14 +70,14 @@ class NegativeIntTest {
 
     @Test
     fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
-        (randomNegativeInt() to randomStrictlyPositiveInt())
+        (NegativeInt.random() to StrictlyPositiveInt.random())
             .runMap({ first / second }) { first.value / second.value }
             .mapFirst(NegativeInt::value)
             .assertEquals()
 
     @Test
     fun div_should_pass_with_a_StrictlyNegativeInt() {
-        (randomNegativeInt() to randomStrictlyNegativeInt())
+        (NegativeInt.random() to StrictlyNegativeInt.random())
             .runMap({ first / second }) { first.value / second.value }
             .mapFirst(PositiveInt::value)
             .assertEquals()
@@ -86,7 +86,7 @@ class NegativeIntTest {
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = randomNegativeInt()
+    fun toString_should_pass(): Unit = NegativeInt.random()
         .pairBy(NegativeInt::toString)
         .runMapSecond { value.toString() }
         .assertEquals()
@@ -95,5 +95,5 @@ class NegativeIntTest {
 @Suppress("unused")
 class NegativeIntSerializerTest : IntHolderSerializerTest<NegativeInt>(
     NegativeIntSerializer,
-    ::randomNegativeInt
+    NegativeInt.Companion::random
 )

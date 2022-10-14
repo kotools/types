@@ -1,13 +1,9 @@
 package kotools.types.collections
 
-import kotools.assert.assertEquals
-import kotools.assert.assertFailsWith
-import kotools.assert.assertNotEquals
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.core.RandomValueHolder
 import kotools.types.number.PositiveInt
-import kotools.types.number.randomStrictlyNegativeInt
+import kotools.types.number.StrictlyNegativeInt
 import kotools.types.string.NotBlankString
 import kotlin.random.Random
 import kotlin.test.Test
@@ -79,7 +75,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
         val collection: NotEmptyCollection<Int> =
             notEmptyListOf(randomInt, randomInt, randomInt)
         val index: Int = Random.nextInt(from = 0, until = collection.size)
-        val defaultValue: Int = randomStrictlyNegativeInt().value
+        val defaultValue: Int = StrictlyNegativeInt.random().value
         val result: Int = collection.getOrElse(index) { defaultValue }
         result assertEquals collection.elementAt(index)
         result assertNotEquals defaultValue
@@ -91,7 +87,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
         val collection: NotEmptyCollection<Int> =
             notEmptyListOf(randomInt, randomInt, randomInt)
         val index: Int = collection.size
-        val defaultValue: Int = randomStrictlyNegativeInt().value
+        val defaultValue: Int = StrictlyNegativeInt.random().value
         val result: Int = collection.getOrElse(index) { defaultValue }
         result assertEquals defaultValue
     }
@@ -104,7 +100,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
             from = 0,
             until = collection.size
         ).let(::PositiveInt)
-        val defaultValue: Int = randomStrictlyNegativeInt().value
+        val defaultValue: Int = StrictlyNegativeInt.random().value
         val result: Int = collection.getOrElse(index) { defaultValue }
         result assertEquals collection.elementAt(index.value)
         result assertNotEquals defaultValue
@@ -115,7 +111,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
         val collection: NotEmptyCollection<Int> =
             notEmptyListOf(randomInt, randomInt, randomInt)
         val index: PositiveInt = collection.typedSize
-        val defaultValue: Int = randomStrictlyNegativeInt().value
+        val defaultValue: Int = StrictlyNegativeInt.random().value
         val result: Int = collection.getOrElse(index) { defaultValue }
         result assertEquals defaultValue
     }

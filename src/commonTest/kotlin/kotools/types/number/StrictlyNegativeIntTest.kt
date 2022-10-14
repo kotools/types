@@ -25,7 +25,7 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun StrictlyNegativeInt_should_pass_with_a_strictly_negative_Int(): Unit =
-        randomStrictlyNegativeInt()
+        StrictlyNegativeInt.random()
             .value
             .pairBy(::StrictlyNegativeInt)
             .mapFirst(StrictlyNegativeInt::value)
@@ -33,7 +33,7 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun StrictlyNegativeInt_should_throw_an_error_with_a_positive_Int(): Unit =
-        randomPositiveInt()
+        PositiveInt.random()
             .runCatching { StrictlyNegativeInt(value) }
             .exceptionOrNull()
             .assertNotNull()
@@ -43,7 +43,7 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun StrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int(): Unit =
-        randomStrictlyNegativeInt()
+        StrictlyNegativeInt.random()
             .value
             .pairBy(::StrictlyNegativeIntOrNull)
             .assertFirstIsNotNull()
@@ -52,7 +52,7 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun StrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int(): Unit =
-        randomPositiveInt()
+        PositiveInt.random()
             .value
             .let(::StrictlyNegativeIntOrNull)
             .assertNull()
@@ -60,7 +60,7 @@ class StrictlyNegativeIntTest {
     // ---------- Unary operations ----------
 
     @Test
-    fun unaryMinus_should_pass(): Unit = randomStrictlyNegativeInt()
+    fun unaryMinus_should_pass(): Unit = StrictlyNegativeInt.random()
         .pairBy { -it }
         .runMap({ first.value }) { -second.value }
         .assertEquals()
@@ -68,7 +68,7 @@ class StrictlyNegativeIntTest {
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = randomStrictlyNegativeInt()
+    fun toString_should_pass(): Unit = StrictlyNegativeInt.random()
         .pairBy(StrictlyNegativeInt::toString)
         .runMapSecond { value.toString() }
         .assertEquals()
@@ -78,5 +78,5 @@ class StrictlyNegativeIntTest {
 class StrictlyNegativeIntSerializerTest :
     IntHolderSerializerTest<StrictlyNegativeInt>(
         StrictlyNegativeIntSerializer,
-        ::randomStrictlyNegativeInt
+        StrictlyNegativeInt.Companion::random
     )

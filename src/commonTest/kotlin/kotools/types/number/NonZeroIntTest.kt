@@ -30,7 +30,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun NonZeroInt_should_pass_with_a_non_zero_Int(): Unit =
-        randomNonZeroInt().value.let { NonZeroInt(it).value assertEquals it }
+        NonZeroInt.random().value.let { NonZeroInt(it).value assertEquals it }
 
     @Test
     fun NonZeroInt_should_throw_an_error_with_an_Int_that_equals_zero() {
@@ -40,7 +40,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun NonZeroIntOrNull_should_pass_with_a_non_zero_Int() {
-        val value: Int = randomNonZeroInt().value
+        val value: Int = NonZeroInt.random().value
         val result: NonZeroInt? = NonZeroIntOrNull(value)
         result.assertNotNull().value assertEquals value
     }
@@ -55,7 +55,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun unaryMinus_should_pass() {
-        val x: NonZeroInt = randomNonZeroInt()
+        val x: NonZeroInt = NonZeroInt.random()
         val result: NonZeroInt = -x
         result.value assertEquals -x.value
     }
@@ -64,8 +64,8 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun times_should_pass_with_a_NonZeroInt() {
-        val x: NonZeroInt = randomNonZeroInt()
-        val y: NonZeroInt = randomNonZeroInt()
+        val x: NonZeroInt = NonZeroInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
         val result: NonZeroInt = x * y
         result.value assertEquals x.value * y.value
     }
@@ -73,7 +73,7 @@ class NonZeroIntTest : RandomValueHolder {
     @Test
     fun div_should_pass_when_dividing_an_Int_by_a_NonZeroInt() {
         val x: Int = randomInt
-        val y: NonZeroInt = randomNonZeroInt()
+        val y: NonZeroInt = NonZeroInt.random()
         val result: Int = x / y
         result assertEquals x / y.value
     }
@@ -81,7 +81,7 @@ class NonZeroIntTest : RandomValueHolder {
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = randomNonZeroInt()
+    fun toString_should_pass(): Unit = NonZeroInt.random()
         .pairBy(NonZeroInt::toString)
         .runMapSecond { value.toString() }
         .assertEquals()
@@ -90,5 +90,5 @@ class NonZeroIntTest : RandomValueHolder {
 @Suppress("unused")
 class NonZeroIntSerializerTest : IntHolderSerializerTest<NonZeroInt>(
     NonZeroIntSerializer,
-    ::randomNonZeroInt
+    NonZeroInt.Companion::random
 )
