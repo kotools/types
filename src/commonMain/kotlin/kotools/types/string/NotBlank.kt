@@ -7,7 +7,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
-import kotools.types.core.tryOrNull
+import kotools.types.tryOrNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotlin.jvm.JvmInline

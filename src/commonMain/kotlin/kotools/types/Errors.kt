@@ -1,4 +1,4 @@
-package kotools.types.core
+package kotools.types
 
 /**
  * Returns the result of calling the [block] function, or returns `null` if the

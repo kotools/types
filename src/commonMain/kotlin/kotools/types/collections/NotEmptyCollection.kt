@@ -2,7 +2,7 @@ package kotools.types.collections
 
 import kotools.types.SinceKotoolsTypes
 import kotools.types.StabilityLevel
-import kotools.types.core.tryOrNull
+import kotools.types.tryOrNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString

@@ -3,7 +3,7 @@ package kotools.types.experimental
 import kotools.types.ExperimentalKotoolsTypesApi
 import kotools.types.SinceKotoolsTypes
 import kotools.types.StabilityLevel
-import kotools.types.core.tryOrNull
+import kotools.types.tryOrNull
 import kotools.types.number.IntHolder
 import kotools.types.number.NegativeInt
 import kotools.types.number.NonZeroInt

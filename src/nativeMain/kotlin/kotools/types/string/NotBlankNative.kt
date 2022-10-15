@@ -1,6 +1,6 @@
 package kotools.types.string
 
-import kotools.types.core.tryOrNull
+import kotools.types.tryOrNull
 import kotools.types.number.PositiveInt
 
 /**

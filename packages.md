@@ -7,10 +7,6 @@ Multiplatform library providing useful types and top-level declarations.
 Functions and explicit types such as `NotEmptyList` or `NotEmptyMutableSet` for
 manipulating collections.
 
-# Package kotools.types.core
-
-Core functions and types available for all platforms.
-
 # Package kotools.types.experimental
 
 Experimental APIs, subject to change in future versions of this library.
