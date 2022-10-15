@@ -17,23 +17,14 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
-### Added
-
-- Support for JS and Native platforms
-  ([#62](https://github.com/kotools/types/issues/62)).
-
-### Changed
-
-- Builders of `NotEmptyList`, `NotEmptyMutableList`, `NotEmptySet` and
-  `NotEmptyMutableSet` now work without reifying type
-  ([#68](https://github.com/kotools/types/issues/68)).
-- Improve error messages ([#70](https://github.com/kotools/types/issues/70)).
+## Version 3.0.0 - 2022/10/15
 
 ### All platforms
 
 #### Added
 
-- Support of all types on the JVM, JS and Native platforms.
+- Support for the JVM, JS and Native platforms using Kotlin Multiplatform
+  ([#62](https://github.com/kotools/types/issues/62)).
 - Serialization and deserialization with
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
@@ -42,54 +33,74 @@ All notable changes to this project will be documented in this file.
 - **Beta** API for getting an instance of `IntHolder` with a random value.
 
 ```kotlin
-val nonZeroInt = NonZeroInt.random()
-val positiveInt = PositiveInt.random()
-val strictlyPositiveInt = StrictlyPositiveInt.random()
-val negativeInt = NegativeInt.random()
-val strictlyNegativeInt = StrictlyNegativeInt.random()
+val x = PositiveInt.random()
+val y = PositiveInt.random()
+x.value == y.value // false
 ```
 
 - **Experimental** DSL for building numbers according to the given context.
   Here's an example with the `nonZero` context:
 
 ```kotlin
-val a = nonZero int 1 // NonZeroInt(value = 1)
-val b = nonZero int 0 // throws an exception
-val c = nonZero intOrNull -1 // NonZeroInt(value = -1)
-val d = nonZero intOrNull 0 // null
+nonZero int 1 // NonZeroInt(value = 1)
+nonZero int 0 // throws an exception
+nonZero intOrNull -1 // NonZeroInt(value = -1)
+nonZero intOrNull 0 // null
 ```
 
 ### Changed
 
-- Update type system for integers in the `kotools.types.number` package with a
-  new `IntHolder` type ([#112](https://github.com/kotools/types/issues/112)).
+- Update type system for integers with a new `IntHolder` type
+  ([#112](https://github.com/kotools/types/issues/112)).
+
+![Type system of integers v3](docs/int-type-system-v3.png)
+
+- Builders of `NotEmptyList` and `NotEmptySet` now work without reifying types
+  ([#68](https://github.com/kotools/types/issues/68)).
+- Improve error management ([#70](https://github.com/kotools/types/issues/70)).
 
 #### Deprecated
 
-- `orNull` functions for building the `IntHolder`'s subtypes
+- `orNull` functions for building a subtype of `IntHolder`
   ([#112](https://github.com/kotools/types/issues/112)) and the `NotBlankString`
   type ([#113](https://github.com/kotools/types/issues/113)).
-- Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
-- Constructor of `NotEmptySet`: use the `notEmptySetOf` function instead.
-- Positional access operations of `NotEmptyCollection` receiving an index of
-  type `Int`: map the index to a `PositiveInt` before accessing its data
-  instead.
 
 ```kotlin
-val list: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
-// Instead of doing the following
-val index = 1
-val result: Int = list[index]
-// Do this
-val index = PositiveInt(1) // or StrictlyPositiveInt(1)
-val result: Int = list[index]
+// Instead of doing...
+NonZeroInt orNull 1
+NotBlankString orNull "hello world"
+// do this
+NonZeroIntOrNull(1)
+NotBlankStringOrNull("hello world")
+```
+
+- Constructor of `NotEmptyList` and `NotEmptySet`.
+
+```kotlin
+// Instead of doing...
+NotEmptyList<Int>(1, 2, 3)
+NotEmptySet<Int>(4, 5, 6)
+// do this
+notEmptyListOf<Int>(1, 2, 3)
+notEmptySetOf<Int>(4, 5, 6)
+```
+
+- Positional access operations of `NotEmptyCollection` receiving an index of
+  type `Int`.
+
+```kotlin
+val list = notEmptyListOf(1, 2, 3)
+// Instead of doing...
+list[1]
+// do this
+list[PositiveInt(1)] // or list[StrictlyPositiveInt(1)] 
 ```
 
 #### Removed
 
 - `NotEmptyMutableList` and `NotEmptyMutableSet`: mutable collections can be
   empty by definition.
-- Conversions from subtype of `IntHolder`.
+- Conversions from subtypes of `IntHolder`.
 
 ## Version 2.0.0 - 2022/08/01
 
