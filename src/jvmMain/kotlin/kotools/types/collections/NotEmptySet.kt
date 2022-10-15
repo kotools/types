@@ -108,9 +108,9 @@ public class NotEmptySet<out E> internal constructor(
     // ---------- Positional access operations ----------
 
     @Deprecated(
-        "The index should be a PositiveInt or a StrictlyPositiveInt.",
+        "The index should be a PositiveInt.",
         replaceWith = ReplaceWith(
-            "get(PositiveInt(index))",
+            "this[PositiveInt(index)]",
             "kotools.types.number.PositiveInt"
         )
     )

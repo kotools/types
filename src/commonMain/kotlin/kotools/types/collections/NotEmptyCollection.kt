@@ -1,12 +1,11 @@
 package kotools.types.collections
 
 import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
-import kotools.types.tryOrNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
+import kotools.types.tryOrNull
 
 /**
  * Returns the element at the specified [index] in this collection, or returns
@@ -20,7 +19,7 @@ import kotools.types.string.toNotBlankString
         "kotools.types.number.PositiveInt"
     )
 )
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 @Suppress("DEPRECATION")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: Int,
@@ -32,7 +31,7 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  * the result of calling the [defaultValue] function if the [index] is out of
  * bounds.
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: PositiveInt,
     defaultValue: (PositiveInt) -> E
@@ -47,7 +46,7 @@ TODO: Make the NotEmptyCollection sealed when migrating collections for all
  *
  * @param E The type of elements contained in this collection.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public interface NotEmptyCollection<out E> : Collection<E> {
     /** First element of this collection. */
     public val head: E
@@ -64,9 +63,9 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
     @Deprecated(
-        "The index should be a PositiveInt or a StrictlyPositiveInt.",
+        "The index should be a PositiveInt.",
         ReplaceWith(
-            "get(PositiveInt(index))",
+            "this[PositiveInt(index)]",
             "kotools.types.number.PositiveInt"
         )
     )
@@ -77,10 +76,9 @@ public interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
-    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+    @SinceKotoolsTypes("1.3")
     @Throws(IndexOutOfBoundsException::class)
-    public operator fun get(index: PositiveInt): E =
-        elementAt(index.value)
+    public operator fun get(index: PositiveInt): E = elementAt(index.value)
 
     /**
      * Returns the element at the specified [index] in this collection, or
@@ -94,17 +92,13 @@ public interface NotEmptyCollection<out E> : Collection<E> {
         )
     )
     @Suppress("DEPRECATION")
-    public infix fun getOrNull(index: Int): E? = try {
-        get(index)
-    } catch (_: IndexOutOfBoundsException) {
-        null
-    }
+    public infix fun getOrNull(index: Int): E? = tryOrNull { get(index) }
 
     /**
      * Returns the element at the specified [index] in this collection, or
      * returns `null` if the [index] is out of bounds.
      */
-    @SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+    @SinceKotoolsTypes("1.3")
     public infix fun getOrNull(index: PositiveInt): E? =
         tryOrNull { get(index) }
 

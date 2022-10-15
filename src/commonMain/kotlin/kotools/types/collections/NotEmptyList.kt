@@ -7,7 +7,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
 
 // ---------- Builders ----------
 
@@ -15,7 +14,7 @@ import kotools.types.StabilityLevel
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("3.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val list: List<E> = tail.toList()
     return NotEmptyList(head, list)
@@ -25,7 +24,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * Returns a [NotEmptyList] containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     require(isNotEmpty()) { "Given collection shouldn't be empty." }
@@ -39,7 +38,7 @@ public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
  * Returns a [NotEmptyList] containing all the elements of this array, or throws
  * an [IllegalArgumentException] if this array is empty.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
 public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
     toList().toNotEmptyList()
@@ -48,7 +47,7 @@ public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
  * Returns a [NotEmptyList] containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = try {
     toNotEmptyList()
 } catch (_: IllegalArgumentException) {
@@ -59,7 +58,7 @@ public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = try {
  * Returns a [NotEmptyList] containing all the elements of this array, or
  * returns `null` if this array is empty.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
     toList().toNotEmptyListOrNull()
 
@@ -68,7 +67,7 @@ public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
  * returns the result of calling the [defaultValue] function if this collection
  * is empty.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public inline infix fun <E> Collection<E>.toNotEmptyListOrElse(
     defaultValue: (Collection<E>) -> NotEmptyList<E>
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
@@ -78,7 +77,7 @@ public inline infix fun <E> Collection<E>.toNotEmptyListOrElse(
  * returns the result of calling the [defaultValue] function if this array is
  * empty.
  */
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
     defaultValue: (Array<E>) -> NotEmptyList<E>
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
@@ -89,7 +88,7 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  * @param E The type of elements contained in this list.
  */
 @Serializable(NotEmptyListSerializer::class)
-@SinceKotoolsTypes("1.3", StabilityLevel.Alpha)
+@SinceKotoolsTypes("1.3")
 public class NotEmptyList<out E> private constructor(
     private val list: List<E>
 ) : List<E> by list,
