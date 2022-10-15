@@ -11,6 +11,14 @@ import kotools.types.SinceKotoolsTypes
 // ---------- Builders ----------
 
 /**
+ * Creates a [NotEmptySet] starting with a [head] and containing all the
+ * elements of the optional [tail].
+ */
+@SinceKotoolsTypes("3.0")
+public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
+    NotEmptySet(head, tail.toSet())
+
+/**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
@@ -90,6 +98,13 @@ public class NotEmptySet<out E> private constructor(private val set: Set<E>) :
      * Creates a [NotEmptySet] starting with a [head] and containing all the
      * elements of the optional [tail].
      */
+    @Deprecated(
+        "Use the notEmptySetOf function instead.",
+        ReplaceWith(
+            "notEmptySetOf<E>(head, *tail)",
+            "kotools.types.collections.notEmptySetOf"
+        )
+    )
     public constructor(head: E, vararg tail: E) : this(
         head,
         tail.filterNot { it == head }.toSet()

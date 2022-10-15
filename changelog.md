@@ -70,6 +70,7 @@ val d = nonZero intOrNull 0 // null
   ([#112](https://github.com/kotools/types/issues/112)) and the `NotBlankString`
   type ([#113](https://github.com/kotools/types/issues/113)).
 - Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
+- Constructor of `NotEmptySet`: use the `notEmptySetOf` function instead.
 - Positional access operations of `NotEmptyCollection` receiving an index of
   type `Int`: map the index to a `PositiveInt` before accessing its data
   instead.
