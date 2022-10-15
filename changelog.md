@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
+- Support of all types on the JVM, JS and Native platforms.
 - Serialization and deserialization with
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
@@ -57,12 +58,6 @@ val b = nonZero int 0 // throws an exception
 val c = nonZero intOrNull -1 // NonZeroInt(value = -1)
 val d = nonZero intOrNull 0 // null
 ```
-
-The following types are now supported on JVM, JS and Native platforms:
-
-- `NotBlankString` ([#89](https://github.com/kotools/types/issues/89))
-- `NotEmptyCollection` ([#91](https://github.com/kotools/types/issues/91))
-- `NotEmptyList` ([#92](https://github.com/kotools/types/issues/92)).
 
 ### Changed
 
