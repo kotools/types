@@ -47,6 +47,22 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
 public sealed interface PositiveInt : IntHolder {
     // ---------- Unary operations ----------
 
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the [maximum][PositiveInt.max], it returns the
+     * [minimum][PositiveInt.min] value instead.
+     */
+    public operator fun inc(): PositiveInt = if (value == max.value) min
+    else PositiveInt(value + 1)
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] is the [minimum][PositiveInt.min], it returns the
+     * [maximum][PositiveInt.max] value instead.
+     */
+    public operator fun dec(): PositiveInt = if (value == min.value) max
+    else PositiveInt(value - 1)
+
     override fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
     // ---------- Binary operations ----------

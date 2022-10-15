@@ -60,6 +60,40 @@ class StrictlyNegativeIntTest {
     // ---------- Unary operations ----------
 
     @Test
+    fun inc_should_return_the_minimum_value_with_maximum_value() {
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.max
+        x++
+        x assertEquals StrictlyNegativeInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_by_one_with_an_initial_value_other_than_the_maximum() {
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        while (x.value == StrictlyNegativeInt.max.value)
+            x = StrictlyNegativeInt.random()
+        val initialValue: Int = x.value
+        x++
+        x.value assertEquals initialValue + 1
+    }
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum_value() {
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.min
+        x--
+        x assertEquals StrictlyNegativeInt.max
+    }
+
+    @Test
+    fun dec_should_decrement_the_value_by_one_with_an_initial_value_other_than_the_minimum() {
+        var x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        while (x.value == StrictlyNegativeInt.min.value)
+            x = StrictlyNegativeInt.random()
+        val initialValue: Int = x.value
+        x--
+        x.value assertEquals initialValue - 1
+    }
+
+    @Test
     fun unaryMinus_should_pass(): Unit = StrictlyNegativeInt.random()
         .pairBy { -it }
         .runMap({ first.value }) { -second.value }
