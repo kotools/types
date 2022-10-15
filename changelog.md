@@ -72,7 +72,8 @@ The following types are now supported on JVM, JS and Native platforms:
 #### Deprecated
 
 - `orNull` functions for building the `IntHolder`'s subtypes
-  ([#112](https://github.com/kotools/types/issues/112)).
+  ([#112](https://github.com/kotools/types/issues/112)) and the `NotBlankString`
+  type ([#113](https://github.com/kotools/types/issues/113)).
 - Constructor of `NotEmptyList`: use the `notEmptyListOf` function instead.
 - Positional access operations of `NotEmptyCollection` receiving an index of
   type `Int`: map the index to a `PositiveInt` before accessing its data

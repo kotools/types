@@ -33,16 +33,18 @@ class NotBlankStringTest : RandomValueHolder {
         }
     }
 
+    @Suppress("TestFunctionName")
     @Test
-    fun companion_orNull_should_pass_with_a_not_blank_String() {
+    fun NotBlankStringOrNull_should_pass_with_a_not_blank_String() {
         val value: String = randomString
-        val result: NotBlankString? = NotBlankString orNull value
+        val result: NotBlankString? = NotBlankStringOrNull(value)
         result.assertNotNull().value assertEquals value
     }
 
+    @Suppress("TestFunctionName")
     @Test
-    fun companion_orNull_should_return_null_with_a_blank_String() {
-        val result: NotBlankString? = NotBlankString orNull BLANK_STRING
+    fun NotBlankStringOrNull_should_return_null_with_a_blank_String() {
+        val result: NotBlankString? = NotBlankStringOrNull(BLANK_STRING)
         result.assertNull()
     }
 
