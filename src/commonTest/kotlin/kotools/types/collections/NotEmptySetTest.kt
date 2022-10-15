@@ -3,6 +3,7 @@ package kotools.types.collections
 import kotools.assert.*
 import kotools.types.*
 import kotools.types.core.RandomValueHolder
+import kotlin.test.Test
 
 class NotEmptySetTest : RandomValueHolder {
     // ---------- Builders ----------
