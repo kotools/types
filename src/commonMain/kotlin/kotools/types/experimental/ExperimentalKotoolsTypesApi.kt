@@ -1,7 +1,6 @@
 package kotools.types.experimental
 
 import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
 
 /**
  * A component marked with this API level should be used only in toy projects.
@@ -11,7 +10,7 @@ import kotools.types.StabilityLevel
 @MustBeDocumented
 @Retention(AnnotationRetention.BINARY)
 @RequiresOptIn
-@SinceKotoolsTypes("3.0", StabilityLevel.Alpha)
+@SinceKotoolsTypes("3.0")
 @Suppress("OPT_IN_IS_NOT_ENABLED")
 @Target(
     AnnotationTarget.CLASS,
