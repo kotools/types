@@ -7,6 +7,7 @@ import kotools.assert.assertNull
 // ---------- Builders ----------
 
 inline fun <A, B> A.pairBy(block: (A) -> B): Pair<B, A> = block(this) to this
+inline fun <A, B> A.runPairBy(block: A.() -> B): Pair<B, A> = pairBy(block)
 
 // ---------- Assertions ----------
 
@@ -31,6 +32,9 @@ inline fun <A, B, C, D> Pair<A, B>.runMap(
 
 inline fun <A, B, C> Pair<A, B>.mapFirst(block: (A) -> C): Pair<C, B> =
     block(first) to second
+
+inline fun <A, B, C> Pair<A, B>.runMapFirst(block: A.() -> C): Pair<C, B> =
+    mapFirst(block)
 
 inline fun <A, B, C> Pair<A, B>.mapSecond(block: (B) -> C): Pair<A, C> =
     first to block(second)
