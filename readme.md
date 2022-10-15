@@ -8,16 +8,12 @@ Kotools Types is a lightweight library that provides commonly used types for
 
 ```kotlin
 NonZeroInt(1)
-NonZeroIntOrNull(-1)
-
 PositiveInt(0)
-PositiveIntOrNull(1)
-
+StrictlyPositiveInt(1)
+NegativeInt(0)
 StrictlyNegativeInt(-1)
-StrictlyNegativeIntOrNull(-2)
 
 NotBlankString("hello")
-NotBlankStringOrNull("world")
 
 notEmptyListOf(1, 2, 3)
 notEmptySetOf(4, 5, 6)
