@@ -32,13 +32,13 @@ notEmptySetOf(4, 5, 6)
 #### Kotlin DSL
 
 ```kotlin
-implementation("io.github.kotools:types:3.0.0")
+implementation("io.github.kotools:types:$kotoolsTypesVersion")
 ```
 
 #### Groovy DSL
 
 ```groovy
-implementation 'io.github.kotools:types:3.0.0'
+implementation "io.github.kotools:types:$kotools_types_version"
 ```
 
 ### Maven
@@ -47,7 +47,7 @@ implementation 'io.github.kotools:types:3.0.0'
 <dependency>
     <groupId>io.github.kotools</groupId>
     <artifactId>types</artifactId>
-    <version>3.0.0</version>
+    <version>${kotools.types.version}</version>
 </dependency>
 ```
 
