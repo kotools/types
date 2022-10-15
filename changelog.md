@@ -92,6 +92,7 @@ val result: Int = list[index]
 
 - `NotEmptyMutableList` and `NotEmptyMutableSet`: mutable collections can be
   empty by definition.
+- Conversions from subtype of `IntHolder`.
 
 ## Version 2.0.0 - 2022/08/01
 
