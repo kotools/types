@@ -47,20 +47,10 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = takeIf { it <= 0 }
 public sealed interface NegativeInt : IntHolder {
     // ---------- Unary operations ----------
 
-    /**
-     * Returns this [value] incremented by one.
-     * If this [value] is the [maximum][NegativeInt.max], it returns the
-     * [minimum][NegativeInt.min] value instead.
-     */
-    public operator fun inc(): NegativeInt = if (value == max.value) min
+    override fun inc(): NegativeInt = if (value == max.value) min
     else NegativeInt(value + 1)
 
-    /**
-     * Returns this [value] decremented by one.
-     * If this [value] is the [minimum][NegativeInt.min], it returns the
-     * [maximum][NegativeInt.max] value instead.
-     */
-    public operator fun dec(): NegativeInt = if (value == min.value) max
+    override fun dec(): NegativeInt = if (value == min.value) max
     else NegativeInt(value - 1)
 
     override fun unaryMinus(): PositiveInt = PositiveInt(-value)

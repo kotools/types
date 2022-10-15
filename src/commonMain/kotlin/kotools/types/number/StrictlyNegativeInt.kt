@@ -51,19 +51,9 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
     NegativeInt {
     // ---------- Unary operations ----------
 
-    /**
-     * Returns this [value] incremented by one.
-     * If this [value] is the [maximum][StrictlyNegativeInt.max], it returns
-     * the [minimum][StrictlyNegativeInt.min] value instead.
-     */
     override fun inc(): StrictlyNegativeInt = if (value == max.value) min
     else StrictlyNegativeInt(value + 1)
 
-    /**
-     * Returns this [value] decremented by one.
-     * If this [value] is the [minimum][StrictlyNegativeInt.min], it returns
-     * the [maximum][StrictlyNegativeInt.max] value instead.
-     */
     override fun dec(): StrictlyNegativeInt = if (value == min.value) max
     else StrictlyNegativeInt(value - 1)
 

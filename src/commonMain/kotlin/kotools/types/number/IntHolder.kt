@@ -7,6 +7,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
 
+// ---------- Binary operations ----------
+
 /**
  * Compares this value with the [other] value for order.
  * Returns zero if this value equals the [other] value, a negative number if
@@ -35,8 +37,24 @@ public sealed interface IntHolder : Comparable<IntHolder> {
     /** The value to hold. */
     public val value: Int
 
+    // ---------- Unary operations ----------
+
+    /**
+     * Returns this [value] incremented by one.
+     * If this [value] is the maximum, it returns the minimum value instead.
+     */
+    public operator fun inc(): IntHolder
+
+    /**
+     * Returns this [value] decremented by one.
+     * If this [value] is the minimum, it returns the maximum value instead.
+     */
+    public operator fun dec(): IntHolder
+
     /** Returns the negative of this [value]. */
     public operator fun unaryMinus(): IntHolder
+
+    // ---------- Binary operations ----------
 
     /**
      * Compares this [value] with the [other] value for order.

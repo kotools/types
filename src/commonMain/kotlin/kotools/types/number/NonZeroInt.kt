@@ -59,10 +59,9 @@ public sealed interface NonZeroInt : IntHolder {
     /**
      * Returns this [value] incremented by one.
      * If this [value] equals `-1`, it returns `1` instead.
-     * If this [value] is the [maximum][NonZeroInt.max], it returns the
-     * [minimum][NonZeroInt.min] value instead.
+     * If this [value] is the maximum, it returns the minimum value instead.
      */
-    public operator fun inc(): NonZeroInt = when (value) {
+    override fun inc(): NonZeroInt = when (value) {
         -1 -> NonZeroInt(1)
         max.value -> min
         else -> NonZeroInt(value + 1)
@@ -74,7 +73,7 @@ public sealed interface NonZeroInt : IntHolder {
      * If this [value] is the [minimum][NonZeroInt.min], it returns the
      * [maximum][NonZeroInt.max] value instead.
      */
-    public operator fun dec(): NonZeroInt = when (value) {
+    override fun dec(): NonZeroInt = when (value) {
         1 -> NonZeroInt(-1)
         min.value -> max
         else -> NonZeroInt(value - 1)
