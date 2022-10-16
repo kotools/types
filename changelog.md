@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file.
 - Serialization and deserialization with
   [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
   of `NonZeroInt`, `PositiveInt`, `StrictlyPositiveInt`, `NegativeInt`,
-  `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList`, `NotEmptySet`
+  `StrictlyNegativeInt`, `NotBlankString`, `NotEmptyList` and `NotEmptySet`
   ([#65](https://github.com/kotools/types/issues/65)).
 - **Beta** API for getting an instance of `IntHolder` with a random value.
 
