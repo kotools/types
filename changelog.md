@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
-## Version 3.0.0 - 2022/10/15
+## Version 3.0.0 - 2022/10/16
 
 ### All platforms
 
