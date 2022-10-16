@@ -48,7 +48,7 @@ nonZero intOrNull -1 // NonZeroInt(value = -1)
 nonZero intOrNull 0 // null
 ```
 
-### Changed
+#### Changed
 
 - Update type system for integers with a new `IntHolder` type
   ([#112](https://github.com/kotools/types/issues/112)).
