@@ -17,6 +17,13 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### All platforms
+
+#### Changed
+
+- Seal the `NotEmptyCollection` hierarchy
+  ([#121](https://github.com/kotools/types/issues/121)).
+
 ## Version 3.0.0 - 2022/10/16
 
 ### All platforms
