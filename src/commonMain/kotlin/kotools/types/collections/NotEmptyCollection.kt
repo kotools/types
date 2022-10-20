@@ -37,17 +37,13 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
     defaultValue: (PositiveInt) -> E
 ): E = getOrNull(index) ?: defaultValue(index)
 
-/*
-TODO: Make the NotEmptyCollection sealed when migrating collections for all
-  platforms is done. This is a breaking change!
- */
 /**
  * Parent of classes representing collections that contain at least one element.
  *
  * @param E The type of elements contained in this collection.
  */
 @SinceKotoolsTypes("1.3")
-public interface NotEmptyCollection<out E> : Collection<E> {
+public sealed interface NotEmptyCollection<out E> : Collection<E> {
     /** First element of this collection. */
     public val head: E
 
