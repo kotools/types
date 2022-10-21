@@ -142,28 +142,6 @@ list[PositiveInt(1)] // or list[StrictlyPositiveInt(1)]
 - Fix the documentation of comparisons in `kotools.types.number` and of
   `NotEmptyCollection` ([#49](https://github.com/kotools/types/issues/49)).
 
-## Version 1.2.1 - 2022/08/01
-
-### Added
-
-Add missing versioning annotations for version 1.2
-([#56](https://github.com/kotools/types/issues/56)).
-
-### Fixed
-
-Fix the documentation of declarations in `kotools.types.string` and of
-`toNotBlankString` functions in `kotools.types.number`
-([#52](https://github.com/kotools/types/issues/52)).
-
-## Version 1.1.1 - 2022/08/01
-
-### Fixed
-
-- Fix the documentation of version 1.1
-  ([#51](https://github.com/kotools/types/issues/51)).
-- Fix usages of `@Throws` annotation
-  ([#57](https://github.com/kotools/types/issues/57)).
-
 ## Version 1.3.0 - 2022/07/27
 
 ### Added
@@ -193,6 +171,19 @@ Refactor binary operations of the following types in `kotools.types.number`:
 - `NegativeInt` ([#36](https://github.com/kotools/types/issues/36))
 - `StrictlyNegativeInt` ([#37](https://github.com/kotools/types/issues/37)).
 
+## Version 1.2.1 - 2022/08/01
+
+### Added
+
+Add missing versioning annotations for version 1.2
+([#56](https://github.com/kotools/types/issues/56)).
+
+### Fixed
+
+Fix the documentation of declarations in `kotools.types.string` and of
+`toNotBlankString` functions in `kotools.types.number`
+([#52](https://github.com/kotools/types/issues/52)).
+
 ## Version 1.2.0 - 2022/07/11
 
 ### Added
@@ -208,6 +199,15 @@ Upgrade Gradle to `7.4.2` ([#29](https://github.com/kotools/types/issues/29)).
 
 Deprecate the old `io.github.kotools.types.string.NotBlankString` type and its
 builders ([#28](https://github.com/kotools/types/issues/28)).
+
+## Version 1.1.1 - 2022/08/01
+
+### Fixed
+
+- Fix the documentation of version 1.1
+  ([#51](https://github.com/kotools/types/issues/51)).
+- Fix usages of `@Throws` annotation
+  ([#57](https://github.com/kotools/types/issues/57)).
 
 ## Version 1.1.0 - 2022/07/09
 
