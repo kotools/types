@@ -120,4 +120,13 @@ class NotEmptySetTest : RandomValueHolder {
                     element assertEquals second.second.elementAt(index)
                 }
             }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_behave_like_a_Set() {
+        val set: Set<Int> = setOf(randomInt, randomInt)
+        set.toNotEmptySet()
+            .toString() assertEquals set.toString()
+    }
 }

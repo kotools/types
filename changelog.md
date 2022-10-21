@@ -23,8 +23,9 @@ All notable changes to this project will be documented in this file.
 
 - Seal the `NotEmptyCollection` hierarchy
   ([#121](https://github.com/kotools/types/issues/121)).
-- Override the `NotBlankString.toString` function
-  ([#117](https://github.com/kotools/types/issues/117)).
+- Override the `toString` function of `NotBlankString`
+  ([#117](https://github.com/kotools/types/issues/117)) and `NotEmptySet`
+  ([#123](https://github.com/kotools/types/issues/123)).
 
 ## Version 3.0.0 - 2022/10/16
 

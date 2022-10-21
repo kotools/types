@@ -120,6 +120,10 @@ public class NotEmptySet<out E> private constructor(private val set: Set<E>) :
         )
     )
     override fun get(index: Int): E = elementAt(index)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = set.toString()
 }
 
 internal open class NotEmptySetSerializer<E>(
