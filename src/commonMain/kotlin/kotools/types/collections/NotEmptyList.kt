@@ -31,7 +31,7 @@ public fun <E> NotEmptyList(head: E, vararg tail: E): NotEmptyList<E> {
 @Suppress("FunctionName")
 private fun <E> NotEmptyList(head: E, tail: List<E>): NotEmptyList<E> {
     val list: List<E> = listOf(head) + tail
-    return NotEmptyList(list)
+    return NotEmptyListImplementation(list)
 }
 
 /**
@@ -113,10 +113,11 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E> internal constructor(
-    private val list: List<E>
-) : List<E> by list,
-    NotEmptyCollection<E> {
+public sealed interface NotEmptyList<out E> : NotEmptyCollection<E>, List<E>
+
+private class NotEmptyListImplementation<out E>(private val list: List<E>) :
+    NotEmptyList<E>,
+    List<E> by list {
     override val head: E get() = list.first()
 
     // ---------- Conversions ----------

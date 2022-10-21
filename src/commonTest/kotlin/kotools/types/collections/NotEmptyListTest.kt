@@ -1,10 +1,11 @@
 package kotools.types.collections
 
-import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
 import kotools.types.core.RandomValueHolder
+import kotools.types.number.toPositiveInt
 import kotlin.test.Test
 
 class NotEmptyListTest : RandomValueHolder {
@@ -60,7 +61,9 @@ class NotEmptyListTest : RandomValueHolder {
             collection toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
             element assertEquals collection.elementAt(index)
-            element assertNotEquals defaultValue[index]
+            index.toPositiveInt()
+                .let(defaultValue::get)
+                .assertNotEquals(element)
         }
     }
 
@@ -71,7 +74,9 @@ class NotEmptyListTest : RandomValueHolder {
         val result: NotEmptyList<Int> =
             collection toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
-            element assertEquals defaultValue[index]
+            index.toPositiveInt()
+                .let(defaultValue::get)
+                .assertEquals(element)
         }
     }
 
@@ -83,7 +88,9 @@ class NotEmptyListTest : RandomValueHolder {
             array toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
             element assertEquals array.elementAt(index)
-            element assertNotEquals defaultValue[index]
+            index.toPositiveInt()
+                .let(defaultValue::get)
+                .assertNotEquals(element)
         }
     }
 
@@ -94,28 +101,9 @@ class NotEmptyListTest : RandomValueHolder {
         val result: NotEmptyList<Int> =
             array toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
-            element assertEquals defaultValue[index]
-        }
-    }
-
-    // ---------- Serialization ----------
-
-    @Test
-    fun serialization_should_behave_like_a_List() {
-        val numbers: NotEmptyList<Int> = notEmptyListOf(randomInt, randomInt)
-        val result: String = Json.encodeToString(numbers)
-        val list: List<Int> = numbers.toList()
-        result assertEquals Json.encodeToString(list)
-    }
-
-    @Test
-    fun deserialization_should_pass() {
-        val list: List<Int> = notEmptyListOf(randomInt, randomInt)
-        val encoded: String = Json.encodeToString(list)
-        val result: NotEmptyList<Int> = Json.decodeFromString(encoded)
-        result.size assertEquals list.size
-        result.forEachIndexed { index: Int, number: Int ->
-            number assertEquals list[index]
+            index.toPositiveInt()
+                .let(defaultValue::get)
+                .assertEquals(element)
         }
     }
 
@@ -126,5 +114,31 @@ class NotEmptyListTest : RandomValueHolder {
         val numbers: NotEmptyList<Int> = notEmptyListOf(randomInt, randomInt)
         val result: String = numbers.toString()
         result assertEquals numbers.toList().toString()
+    }
+}
+
+class NotEmptyListSerializerTest : RandomValueHolder {
+    @Test
+    fun serialization_should_behave_like_a_List() {
+        val serializer: NotEmptyListSerializer<Int> = Int.serializer()
+            .let(::NotEmptyListSerializer)
+        val numbers: NotEmptyList<Int> = notEmptyListOf(randomInt, randomInt)
+        val result: String = Json.encodeToString(serializer, numbers)
+        val list: List<Int> = numbers.toList()
+        result assertEquals Json.encodeToString(list)
+    }
+
+    @Test
+    fun deserialization_should_pass() {
+        val list: List<Int> = notEmptyListOf(randomInt, randomInt)
+        val encoded: String = Json.encodeToString(list)
+        val serializer: NotEmptyListSerializer<Int> = Int.serializer()
+            .let(::NotEmptyListSerializer)
+        val result: NotEmptyList<Int> =
+            Json.decodeFromString(serializer, encoded)
+        result.size assertEquals list.size
+        result.forEachIndexed { index: Int, number: Int ->
+            number assertEquals list[index]
+        }
     }
 }
