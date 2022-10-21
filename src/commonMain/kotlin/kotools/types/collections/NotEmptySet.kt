@@ -14,6 +14,30 @@ import kotools.types.SinceKotoolsTypes
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
+@Deprecated(
+    "Use the notEmptySetOf function instead.",
+    ReplaceWith(
+        "notEmptySetOf<E>(head, *tail)",
+        "kotools.types.collections.notEmptySetOf"
+    )
+)
+@SinceKotoolsTypes("1.3")
+@Suppress("FunctionName")
+public fun <E> NotEmptySet(head: E, vararg tail: E): NotEmptySet<E> {
+    val set: Set<E> = tail.toSet()
+    return NotEmptySet(head, set)
+}
+
+@Suppress("FunctionName")
+private fun <E> NotEmptySet(head: E, tail: Set<E>): NotEmptySet<E> {
+    val set: Set<E> = setOf(head) + tail
+    return NotEmptySet(set)
+}
+
+/**
+ * Creates a [NotEmptySet] starting with a [head] and containing all the
+ * elements of the optional [tail].
+ */
 @SinceKotoolsTypes("3.0")
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
     NotEmptySet(head, tail.toSet())
@@ -87,28 +111,10 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
  */
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E> private constructor(private val set: Set<E>) :
+public class NotEmptySet<out E> internal constructor(private val set: Set<E>) :
     Set<E> by set,
     NotEmptyCollection<E> {
     override val head: E get() = set.first()
-
-    internal constructor(head: E, tail: Set<E>) : this(setOf(head) + tail)
-
-    /**
-     * Creates a [NotEmptySet] starting with a [head] and containing all the
-     * elements of the optional [tail].
-     */
-    @Deprecated(
-        "Use the notEmptySetOf function instead.",
-        ReplaceWith(
-            "notEmptySetOf<E>(head, *tail)",
-            "kotools.types.collections.notEmptySetOf"
-        )
-    )
-    public constructor(head: E, vararg tail: E) : this(
-        head,
-        tail.filterNot { it == head }.toSet()
-    )
 
     // ---------- Positional access operations ----------
 
