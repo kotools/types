@@ -121,6 +121,15 @@ class NotBlankStringTest : RandomValueHolder {
         result.value assertEquals x.value + y
     }
 
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_behave_like_a_String() {
+        val value: String = randomString
+        val notBlankString = NotBlankString(value)
+        notBlankString.toString() assertEquals value
+    }
+
     // ---------- Serialization ----------
 
     @Test
