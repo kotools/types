@@ -14,6 +14,30 @@ import kotools.types.SinceKotoolsTypes
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
+@Deprecated(
+    "Use the notEmptyListOf function instead.",
+    ReplaceWith(
+        "notEmptyListOf<E>(head, *tail)",
+        "kotools.types.collections.notEmptyListOf"
+    )
+)
+@SinceKotoolsTypes("1.3")
+@Suppress("FunctionName")
+public fun <E> NotEmptyList(head: E, vararg tail: E): NotEmptyList<E> {
+    val list: List<E> = tail.toList()
+    return NotEmptyList(head, list)
+}
+
+@Suppress("FunctionName")
+private fun <E> NotEmptyList(head: E, tail: List<E>): NotEmptyList<E> {
+    val list: List<E> = listOf(head) + tail
+    return NotEmptyList(list)
+}
+
+/**
+ * Creates a [NotEmptyList] starting with a [head] and containing all the
+ * elements of the optional [tail].
+ */
 @SinceKotoolsTypes("3.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val list: List<E> = tail.toList()
@@ -89,26 +113,11 @@ public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptyList<out E> private constructor(
+public class NotEmptyList<out E> internal constructor(
     private val list: List<E>
 ) : List<E> by list,
     NotEmptyCollection<E> {
     override val head: E get() = list.first()
-
-    internal constructor(head: E, tail: List<E>) : this(listOf(head) + tail)
-
-    /**
-     * Creates a [NotEmptyList] starting with a [head] and containing all the
-     * elements of the optional [tail].
-     */
-    @Deprecated(
-        "Use the notEmptyListOf function instead.",
-        ReplaceWith(
-            "notEmptyListOf<E>(head, *tail)",
-            "kotools.types.collections.notEmptyListOf"
-        )
-    )
-    public constructor(head: E, vararg tail: E) : this(head, tail.toList())
 
     // ---------- Conversions ----------
 
