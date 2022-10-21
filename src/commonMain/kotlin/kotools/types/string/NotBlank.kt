@@ -7,9 +7,9 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
-import kotools.types.tryOrNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.tryOrNull
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -113,6 +113,10 @@ public value class NotBlankString constructor(
      */
     public operator fun plus(other: Any?): NotBlankString =
         NotBlankString(value + other)
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value
 
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
