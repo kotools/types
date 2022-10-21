@@ -27,6 +27,8 @@ All notable changes to this project will be documented in this file.
     - `NotEmptySet` ([#126](https://github.com/kotools/types/issues/126)).
 - Promote all deprecations of version 3.0
   ([#119](https://github.com/kotools/types/issues/119)).
+- **Stabilize** the random API for getting an instance of `IntHolder` with a
+  random value ([#118](https://github.com/kotools/types/issues/118)).
 
 ## Version 3.0.1 - 2022/10/21
 

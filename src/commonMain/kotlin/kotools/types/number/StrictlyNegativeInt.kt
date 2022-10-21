@@ -2,7 +2,6 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -91,7 +90,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
             value.toStrictlyPositiveIntOrNull()
 
         /** Returns a random [StrictlyNegativeInt]. */
-        @SinceKotoolsTypes("3.0", StabilityLevel.Beta)
+        @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyNegativeInt = range.random()
             .toStrictlyNegativeInt()
     }

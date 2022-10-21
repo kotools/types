@@ -2,7 +2,6 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -121,7 +120,7 @@ public sealed interface NonZeroInt : IntHolder {
             value.toNonZeroIntOrNull()
 
         /** Returns a random [NonZeroInt]. */
-        @SinceKotoolsTypes("3.0", StabilityLevel.Beta)
+        @SinceKotoolsTypes("3.0")
         public fun random(): NonZeroInt = ranges.random()
             .random()
             .toNonZeroInt()
