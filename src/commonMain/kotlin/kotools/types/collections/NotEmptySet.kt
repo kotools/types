@@ -31,7 +31,7 @@ public fun <E> NotEmptySet(head: E, vararg tail: E): NotEmptySet<E> {
 @Suppress("FunctionName")
 private fun <E> NotEmptySet(head: E, tail: Set<E>): NotEmptySet<E> {
     val set: Set<E> = setOf(head) + tail
-    return NotEmptySet(set)
+    return NotEmptySetImplementation(set)
 }
 
 /**
@@ -111,21 +111,23 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
  */
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("1.3")
-public class NotEmptySet<out E> internal constructor(private val set: Set<E>) :
-    Set<E> by set,
-    NotEmptyCollection<E> {
-    override val head: E get() = set.first()
-
+public sealed interface NotEmptySet<out E> : NotEmptyCollection<E>, Set<E> {
     // ---------- Positional access operations ----------
 
     @Deprecated(
         "The index should be a PositiveInt.",
-        replaceWith = ReplaceWith(
+        ReplaceWith(
             "this[PositiveInt(index)]",
             "kotools.types.number.PositiveInt"
         )
     )
     override fun get(index: Int): E = elementAt(index)
+}
+
+private class NotEmptySetImplementation<out E>(private val set: Set<E>) :
+    NotEmptySet<E>,
+    Set<E> by set {
+    override val head: E get() = set.first()
 
     // ---------- Conversions ----------
 

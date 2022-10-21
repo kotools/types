@@ -23,7 +23,8 @@ All notable changes to this project will be documented in this file.
 
 - Convert the following types from a class to a sealed interface:
     - `NotBlankString` ([#124](https://github.com/kotools/types/issues/124))
-    - `NotEmptyList` ([#125](https://github.com/kotools/types/issues/125)).
+    - `NotEmptyList` ([#125](https://github.com/kotools/types/issues/125))
+    - `NotEmptySet` ([#126](https://github.com/kotools/types/issues/126)).
 
 ## Version 3.0.1 - 2022/10/21
 
