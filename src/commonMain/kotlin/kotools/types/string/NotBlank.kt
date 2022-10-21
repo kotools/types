@@ -9,10 +9,18 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.tryOrNull
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
+
+/**
+ * Returns the [value] as a [NotBlankString], or throws an
+ * [NotBlankString.ConstructionError] if the [value] is blank.
+ */
+@SinceKotoolsTypes("1.2")
+@Throws(NotBlankString.ConstructionError::class)
+public fun NotBlankString(value: String): NotBlankString =
+    value.toNotBlankString()
 
 /**
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
@@ -29,7 +37,8 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
  */
 @SinceKotoolsTypes("1.2")
 @Throws(NotBlankString.ConstructionError::class)
-public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
+public fun String.toNotBlankString(): NotBlankString =
+    toNotBlankStringOrNull() ?: throw NotBlankString.ConstructionError()
 
 /**
  * Returns this value as a [NotBlankString], or returns `null` if this value is
@@ -37,7 +46,8 @@ public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
  */
 @SinceKotoolsTypes("1.2")
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    tryOrNull { NotBlankString(this) }
+    takeIf(String::isNotBlank)
+        ?.let(::NotBlankStringImplementation)
 
 // ---------- Binary operations ----------
 
@@ -52,22 +62,14 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.value)
 
 /**
- * Parent of classes responsible for holding strings that have at least one
- * character, excluding whitespaces.
- *
- * @constructor Returns the [value] as a [NotBlankString], or throws an
- * [NotBlankString.ConstructionError] if the [value] is blank.
+ * Representation of strings that have at least one character, excluding
+ * whitespaces.
  */
-@JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("1.2")
-public value class NotBlankString constructor(
+public sealed interface NotBlankString : Comparable<NotBlankString> {
     /** The value to hold. */
     public val value: String
-) : Comparable<NotBlankString> {
-    init {
-        value.takeIf(String::isNotBlank) ?: throw ConstructionError()
-    }
 
     // ---------- Query operations ----------
 
@@ -114,10 +116,6 @@ public value class NotBlankString constructor(
     public operator fun plus(other: Any?): NotBlankString =
         NotBlankString(value + other)
 
-    // ---------- Conversions ----------
-
-    override fun toString(): String = value
-
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
         /**
@@ -140,6 +138,15 @@ public value class NotBlankString constructor(
     public class ConstructionError : IllegalArgumentException(
         "NotBlankString doesn't accept blank strings."
     )
+}
+
+@JvmInline
+private value class NotBlankStringImplementation(
+    override val value: String
+) : NotBlankString {
+    // ---------- Conversions ----------
+
+    override fun toString(): String = value
 }
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {

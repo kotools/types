@@ -26,6 +26,8 @@ All notable changes to this project will be documented in this file.
 - Override the `toString` function of `NotBlankString`
   ([#117](https://github.com/kotools/types/issues/117)) and `NotEmptySet`
   ([#123](https://github.com/kotools/types/issues/123)).
+- Convert the `NotBlankString` type from a class to a sealed interface
+  ([#124](https://github.com/kotools/types/issues/124)).
 
 ## Version 3.0.0 - 2022/10/16
 

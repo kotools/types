@@ -1,6 +1,5 @@
 package kotools.types.string
 
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
@@ -129,13 +128,15 @@ class NotBlankStringTest : RandomValueHolder {
         val notBlankString = NotBlankString(value)
         notBlankString.toString() assertEquals value
     }
+}
 
-    // ---------- Serialization ----------
+private typealias Serializer = NotBlankStringSerializer
 
+class NotBlankStringSerializerTest : RandomValueHolder {
     @Test
     fun serialization_should_behave_like_a_String() {
         val string = NotBlankString(randomString)
-        val result: String = Json.encodeToString(string)
+        val result: String = Json.encodeToString(Serializer, string)
         result assertEquals Json.encodeToString(string.value)
     }
 
@@ -143,7 +144,7 @@ class NotBlankStringTest : RandomValueHolder {
     fun deserialization_should_pass() {
         val value: String = randomString
         val encoded: String = Json.encodeToString(value)
-        val result: NotBlankString = Json.decodeFromString(encoded)
+        val result: NotBlankString = Json.decodeFromString(Serializer, encoded)
         result.value assertEquals value
     }
 }
