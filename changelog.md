@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
     - `NotBlankString` ([#124](https://github.com/kotools/types/issues/124))
     - `NotEmptyList` ([#125](https://github.com/kotools/types/issues/125))
     - `NotEmptySet` ([#126](https://github.com/kotools/types/issues/126)).
+- Promote all deprecations of version 3.0
+  ([#119](https://github.com/kotools/types/issues/119)).
 
 ## Version 3.0.1 - 2022/10/21
 

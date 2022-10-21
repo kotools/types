@@ -90,7 +90,8 @@ public sealed interface NegativeInt : IntHolder {
             ReplaceWith(
                 "NegativeIntOrNull(value)",
                 "kotools.types.number.NegativeIntOrNull"
-            )
+            ),
+            DeprecationLevel.ERROR
         )
         public infix fun orNull(value: Int): NegativeInt? =
             value.toNegativeIntOrNull()

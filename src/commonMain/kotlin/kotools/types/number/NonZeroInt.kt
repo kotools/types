@@ -114,7 +114,8 @@ public sealed interface NonZeroInt : IntHolder {
             ReplaceWith(
                 "NonZeroIntOrNull(value)",
                 "kotools.types.number.NonZeroIntOrNull"
-            )
+            ),
+            DeprecationLevel.ERROR
         )
         public infix fun orNull(value: Int): NonZeroInt? =
             value.toNonZeroIntOrNull()
