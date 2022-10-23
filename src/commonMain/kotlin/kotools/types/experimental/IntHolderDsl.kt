@@ -20,26 +20,6 @@ public sealed interface IntHolderDsl<out T : IntHolder> {
     public infix fun intOrNull(value: Int): T? = tryOrNull { int(value) }
 }
 
-/** Context responsible for building a [NonZeroInt]. */
-@ExperimentalKotoolsTypesApi
-@SinceKotoolsTypes("3.0", StabilityLevel.Experimental)
-public val nonZero: IntHolderDsl<NonZeroInt> = NonZeroHolderDsl
-
-@ExperimentalKotoolsTypesApi
-private object NonZeroHolderDsl : IntHolderDsl<NonZeroInt> {
-    override fun int(value: Int): NonZeroInt = value.toNonZeroInt()
-}
-
-/** Context responsible for building a [PositiveInt]. */
-@ExperimentalKotoolsTypesApi
-@SinceKotoolsTypes("3.0", StabilityLevel.Experimental)
-public val positive: IntHolderDsl<PositiveInt> = PositiveHolderDsl
-
-@ExperimentalKotoolsTypesApi
-private object PositiveHolderDsl : IntHolderDsl<PositiveInt> {
-    override fun int(value: Int): PositiveInt = value.toPositiveInt()
-}
-
 /** Context responsible for building a [StrictlyPositiveInt]. */
 @ExperimentalKotoolsTypesApi
 @SinceKotoolsTypes("3.0", StabilityLevel.Experimental)
