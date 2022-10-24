@@ -23,8 +23,8 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- `NotEmptyMap` type representing maps that contain at least one entry
-  ([#120](https://github.com/kotools/types/issues/120)).
+`NotEmptyMap` type representing maps that contain at least one entry
+([#120](https://github.com/kotools/types/issues/120)).
 
 #### Changed
 
