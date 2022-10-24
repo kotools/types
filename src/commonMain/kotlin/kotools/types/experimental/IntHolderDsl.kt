@@ -20,16 +20,6 @@ public sealed interface IntHolderDsl<out T : IntHolder> {
     public infix fun intOrNull(value: Int): T? = tryOrNull { int(value) }
 }
 
-/** Context responsible for building a [NegativeInt]. */
-@ExperimentalKotoolsTypesApi
-@SinceKotoolsTypes("3.0", StabilityLevel.Experimental)
-public val negative: IntHolderDsl<NegativeInt> = NegativeHolderDsl
-
-@ExperimentalKotoolsTypesApi
-private object NegativeHolderDsl : IntHolderDsl<NegativeInt> {
-    override fun int(value: Int): NegativeInt = value.toNegativeInt()
-}
-
 /** Context responsible for building a [StrictlyNegativeInt]. */
 @ExperimentalKotoolsTypesApi
 @SinceKotoolsTypes("3.0", StabilityLevel.Experimental)

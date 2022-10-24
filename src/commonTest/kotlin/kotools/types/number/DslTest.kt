@@ -1,99 +1,31 @@
 package kotools.types.number
 
+import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
-import kotools.assert.assertTrue
-import kotools.types.assertEquals
-import kotools.types.mapSecond
-import kotools.types.pairWith
-import kotools.types.runMapSecond
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
 
-class NonZeroHolderDslTest {
+class IntHolderDslTest {
     @Test
-    fun int_should_pass_with_a_non_zero_Int(): Unit = NonZeroInt.random()
-        .value
-        .pairWith(nonZero::int)
-        .mapSecond(NonZeroInt::value)
-        .assertEquals()
-
-    @Test
-    fun int_should_throw_an_error_with_zero() {
-        assertFailsWith<IllegalArgumentException> { nonZero int 0 }
+    fun intOrNull_should_pass_with_a_valid_value(): Unit = mapOf(
+        nonZero to NonZeroInt.random().value,
+        positive to PositiveInt.random().value,
+        strictlyPositive to StrictlyPositiveInt.random().value,
+        negative to NegativeInt.random().value
+    ).forEach {
+        it.key.intOrNull(it.value)
+            .assertNotNull()
+            .value assertEquals it.value
     }
 
     @Test
-    fun intOrNull_should_pass_with_a_non_zero_Int(): Unit = NonZeroInt.random()
-        .value
-        .pairWith(nonZero::intOrNull)
-        .runMapSecond { assertNotNull().value }
-        .assertEquals()
-
-    @Test
-    fun intOrNull_should_return_null_with_zero(): Unit = nonZero.intOrNull(0)
-        .assertNull()
-}
-
-class PositiveHolderDslTest {
-    @Test
-    fun int_should_pass_with_a_positive_Int(): Unit = PositiveInt.random()
-        .value
-        .pairWith(positive::int)
-        .mapSecond(PositiveInt::value)
-        .assertEquals()
-
-    @Test
-    fun int_should_throw_an_error_with_a_strictly_negative_Int(): Unit =
-        StrictlyNegativeInt.random().run {
-            assertFailsWith<IllegalArgumentException> { positive int value }
-        }
-
-    @Test
-    fun intOrNull_should_pass_with_a_positive_Int(): Unit = PositiveInt.random()
-        .value
-        .pairWith(positive::intOrNull)
-        .runMapSecond { assertNotNull().value }
-        .assertEquals()
-
-    @Test
-    fun intOrNull_should_return_null_with_a_strictly_negative_Int(): Unit =
-        StrictlyNegativeInt.random()
-            .value
-            .let(positive::intOrNull)
+    fun intOrNull_should_return_null_with_an_invalid_value(): Unit = mapOf(
+        nonZero to 0,
+        positive to StrictlyNegativeInt.random().value,
+        strictlyPositive to NegativeInt.random().value,
+        negative to StrictlyPositiveInt.random().value
+    ).forEach {
+        it.key.intOrNull(it.value)
             .assertNull()
-}
-
-class StrictlyPositiveHolderDslTest {
-    @Test
-    fun int_should_pass_with_a_strictly_positive_Int(): Unit =
-        StrictlyPositiveInt.random()
-            .value
-            .pairWith(strictlyPositive::int)
-            .mapSecond(StrictlyPositiveInt::value)
-            .assertEquals()
-
-    @Test
-    fun int_should_throw_an_error_with_a_negative_Int(): Unit = NegativeInt
-        .random()
-        .runCatching { strictlyPositive int value }
-        .exceptionOrNull()
-        .assertNotNull()
-        .let { it is IllegalArgumentException }
-        .assertTrue()
-
-    @Test
-    fun intOrNull_should_pass_with_a_strictly_positive_Int(): Unit =
-        StrictlyPositiveInt.random()
-            .value
-            .pairWith(strictlyPositive::intOrNull)
-            .runMapSecond { assertNotNull().value }
-            .assertEquals()
-
-    @Test
-    fun intOrNull_should_return_null_with_a_negative_Int(): Unit = NegativeInt
-        .random()
-        .value
-        .let(strictlyPositive::intOrNull)
-        .assertNull()
+    }
 }
