@@ -52,7 +52,7 @@ public sealed interface PositiveInt : IntHolder {
     override fun dec(): PositiveInt = if (value == min.value) max
     else positive int value - 1
 
-    override fun unaryMinus(): NegativeInt = NegativeInt(-value)
+    override fun unaryMinus(): NegativeInt = negative int -value
 
     // ---------- Binary operations ----------
 
@@ -68,7 +68,7 @@ public sealed interface PositiveInt : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyNegativeInt): NegativeInt =
-        NegativeInt(value / other.value)
+        negative int value / other.value
 
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {

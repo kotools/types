@@ -12,7 +12,7 @@ import kotlin.jvm.JvmInline
  */
 @SinceKotoolsTypes("1.1")
 @Throws(NegativeInt.ConstructionError::class)
-public fun NegativeInt(value: Int): NegativeInt = value.toNegativeInt()
+public fun NegativeInt(value: Int): NegativeInt = negative int value
 
 /**
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
@@ -21,7 +21,7 @@ public fun NegativeInt(value: Int): NegativeInt = value.toNegativeInt()
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
-    value.toNegativeIntOrNull()
+    negative intOrNull value
 
 /**
  * Returns this value as a [NegativeInt], or throws an
@@ -47,10 +47,10 @@ public sealed interface NegativeInt : IntHolder {
     // ---------- Unary operations ----------
 
     override fun inc(): NegativeInt = if (value == max.value) min
-    else NegativeInt(value + 1)
+    else negative int value + 1
 
     override fun dec(): NegativeInt = if (value == min.value) max
-    else NegativeInt(value - 1)
+    else negative int value - 1
 
     override fun unaryMinus(): PositiveInt = positive int -value
 
@@ -61,7 +61,7 @@ public sealed interface NegativeInt : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyPositiveInt): NegativeInt =
-        NegativeInt(value / other.value)
+        negative int value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -75,10 +75,10 @@ public sealed interface NegativeInt : IntHolder {
         private val range: IntRange by lazy { Int.MIN_VALUE..0 }
 
         /** The minimum value of a [NegativeInt]. */
-        public val min: NegativeInt by lazy { NegativeInt(range.first) }
+        public val min: NegativeInt by lazy { negative int range.first }
 
         /** The maximum value of a [NegativeInt]. */
-        public val max: NegativeInt by lazy { NegativeInt(range.last) }
+        public val max: NegativeInt by lazy { negative int range.last }
 
         /**
          * Returns the [value] as a [NegativeInt], or returns `null` if the
@@ -93,12 +93,11 @@ public sealed interface NegativeInt : IntHolder {
             DeprecationLevel.ERROR
         )
         public infix fun orNull(value: Int): NegativeInt? =
-            value.toNegativeIntOrNull()
+            negative intOrNull value
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): NegativeInt = range.random()
-            .toNegativeInt()
+        public fun random(): NegativeInt = negative int range.random()
     }
 
     /** Error thrown when creating a [NegativeInt] fails. */
@@ -110,7 +109,7 @@ public sealed interface NegativeInt : IntHolder {
 }
 
 internal object NegativeIntSerializer :
-    IntHolder.Serializer<NegativeInt>(::NegativeInt)
+    IntHolder.Serializer<NegativeInt>(negative::int)
 
 @JvmInline
 private value class NegativeIntImplementation(override val value: Int) :
