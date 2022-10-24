@@ -35,3 +35,13 @@ public val positive: IntHolderDsl<PositiveInt> = PositiveHolderDsl
 private object PositiveHolderDsl : IntHolderDsl<PositiveInt> {
     override fun int(value: Int): PositiveInt = value.toPositiveInt()
 }
+
+/** Context responsible for building a [StrictlyPositiveInt]. */
+@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+public val strictlyPositive: IntHolderDsl<StrictlyPositiveInt> =
+    StrictlyPositiveHolderDsl
+
+private object StrictlyPositiveHolderDsl : IntHolderDsl<StrictlyPositiveInt> {
+    override fun int(value: Int): StrictlyPositiveInt =
+        value.toStrictlyPositiveInt()
+}

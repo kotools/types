@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
+import kotools.assert.assertTrue
 import kotools.types.assertEquals
 import kotools.types.mapSecond
 import kotools.types.pairWith
@@ -61,4 +62,38 @@ class PositiveHolderDslTest {
             .value
             .let(positive::intOrNull)
             .assertNull()
+}
+
+class StrictlyPositiveHolderDslTest {
+    @Test
+    fun int_should_pass_with_a_strictly_positive_Int(): Unit =
+        StrictlyPositiveInt.random()
+            .value
+            .pairWith(strictlyPositive::int)
+            .mapSecond(StrictlyPositiveInt::value)
+            .assertEquals()
+
+    @Test
+    fun int_should_throw_an_error_with_a_negative_Int(): Unit = NegativeInt
+        .random()
+        .runCatching { strictlyPositive int value }
+        .exceptionOrNull()
+        .assertNotNull()
+        .let { it is IllegalArgumentException }
+        .assertTrue()
+
+    @Test
+    fun intOrNull_should_pass_with_a_strictly_positive_Int(): Unit =
+        StrictlyPositiveInt.random()
+            .value
+            .pairWith(strictlyPositive::intOrNull)
+            .runMapSecond { assertNotNull().value }
+            .assertEquals()
+
+    @Test
+    fun intOrNull_should_return_null_with_a_negative_Int(): Unit = NegativeInt
+        .random()
+        .value
+        .let(strictlyPositive::intOrNull)
+        .assertNull()
 }

@@ -3,23 +3,17 @@ package kotools.types.experimental
 import kotools.assert.assertEquals
 import kotools.assert.assertNotNull
 import kotools.assert.assertNull
-import kotools.types.number.IntHolder
-import kotools.types.number.NegativeInt
-import kotools.types.number.PositiveInt
-import kotools.types.number.StrictlyNegativeInt
-import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.*
 import kotlin.test.Test
 
 @ExperimentalKotoolsTypesApi
 class IntHolderDslTest {
     private val validEntries: Map<IntHolderDsl<IntHolder>, Int> = mapOf(
-        strictlyPositive to PositiveInt.random().value,
         negative to NegativeInt.random().value,
         strictlyNegative to StrictlyNegativeInt.random().value
     )
 
     private val invalidEntries: Map<IntHolderDsl<IntHolder>, Int> = mapOf(
-        strictlyPositive to NegativeInt.random().value,
         negative to StrictlyPositiveInt.random().value,
         strictlyNegative to PositiveInt.random().value
     )
