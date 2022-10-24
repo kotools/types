@@ -65,9 +65,13 @@ public sealed interface NotEmptyMap<K, out V> : Map<K, V> {
         IllegalArgumentException("NotEmptyMap can't be empty.")
 }
 
-private class NotEmptyMapImplementation<K, out V>(map: Map<K, V>) :
+private class NotEmptyMapImplementation<K, out V>(private val map: Map<K, V>) :
     NotEmptyMap<K, V>,
     Map<K, V> by map {
     override val head: Pair<K, V> = map.entries.first()
         .toPair()
+
+    // ---------- Conversions ----------
+
+    override fun toString(): String = map.toString()
 }

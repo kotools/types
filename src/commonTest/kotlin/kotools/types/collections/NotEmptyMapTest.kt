@@ -49,4 +49,17 @@ class NotEmptyMapTest : RandomValueHolder {
         // WHEN & THEN
         assertFailsWith<NotEmptyMap.ConstructionError>(map::toNotEmptyMap)
     }
+
+    // ---------- Conversions ----------
+
+    @Test
+    fun toString_should_behave_like_a_Map() {
+        // GIVEN
+        val head: Pair<Int, String> = randomInt to randomString
+        val map: NotEmptyMap<Int, String> = notEmptyMapOf(head)
+        // WHEN
+        val result: String = map.toString()
+        // THEN
+        result assertEquals mapOf(head).toString()
+    }
 }
