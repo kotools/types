@@ -6,6 +6,7 @@ import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.toPositiveInt
 import kotlin.random.Random
 import kotlin.test.Test
 
@@ -21,7 +22,7 @@ class NotBlankStringNativeTest {
     fun getOrNull_should_pass_with_an_index_in_bounds() {
         val value = "hello world"
         val index: PositiveInt = Random.nextInt(from = 0, until = value.length)
-            .let(::PositiveInt)
+            .toPositiveInt()
         val string = NotBlankString(value)
         val result: Char? = string getOrNull index
         result.assertNotNull() assertEquals value[index.value]

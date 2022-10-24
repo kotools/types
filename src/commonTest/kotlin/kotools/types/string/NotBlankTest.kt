@@ -8,6 +8,7 @@ import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.core.RandomValueHolder
 import kotools.types.number.PositiveInt
+import kotools.types.number.toPositiveInt
 import kotlin.random.Random
 import kotlin.test.Test
 
@@ -80,7 +81,7 @@ class NotBlankStringTest : RandomValueHolder {
     fun get_should_pass_with_an_index_in_bounds() {
         val value: String = randomString
         val index: PositiveInt = Random.nextInt(from = 0, until = value.length)
-            .let(::PositiveInt)
+            .toPositiveInt()
         val string = NotBlankString(value)
         val result: Char = string[index]
         result assertEquals value[index.value]

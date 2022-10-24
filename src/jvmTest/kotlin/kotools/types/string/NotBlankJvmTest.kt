@@ -6,6 +6,7 @@ import kotools.assert.assertNotNull
 import kotools.assert.assertNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.toPositiveInt
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
@@ -20,8 +21,8 @@ class NotBlankStringJvmTest {
     @Test
     fun getOrNull_should_pass_with_an_index_in_bounds() {
         val value = "hello world"
-        val index: PositiveInt = Random.nextInt(from = 0, until = value.length)
-            .let(::PositiveInt)
+        val index: PositiveInt = Random.nextInt(0, value.length)
+            .toPositiveInt()
         val string = NotBlankString(value)
         val result: Char? = string getOrNull index
         result.assertNotNull() assertEquals value[index.value]

@@ -6,7 +6,6 @@ import kotools.types.pairBy
 import kotools.types.runMapSecond
 import kotlin.test.Test
 
-@Suppress("TestFunctionName")
 class PositiveIntTest {
     // ---------- Companion ----------
 
@@ -20,37 +19,6 @@ class PositiveIntTest {
     @Test
     fun random_should_return_different_values(): Unit =
         PositiveInt.random().value assertNotEquals PositiveInt.random().value
-
-    // ---------- Builders ----------
-
-    @Test
-    fun PositiveInt_should_pass_with_a_positive_Int(): Unit =
-        PositiveInt.random()
-            .run { PositiveInt(value) to value }
-            .run { first.value assertEquals second }
-
-    @Test
-    fun PositiveInt_should_throw_an_error_with_a_strictly_negative_Int(): Unit =
-        StrictlyNegativeInt.random()
-            .runCatching { PositiveInt(value) }
-            .exceptionOrNull()
-            .assertNotNull()
-            .apply { message.assertNotNull() }
-            .let { it is PositiveInt.ConstructionError }
-            .assertTrue()
-
-    @Test
-    fun PositiveIntOrNull_should_pass_with_a_positive_Int(): Unit =
-        PositiveInt.random()
-            .run { PositiveIntOrNull(value) to value }
-            .run { first.assertNotNull() to second }
-            .run { first.value assertEquals second }
-
-    @Test
-    fun PositiveIntOrNull_should_return_null_with_a_strictly_negative_Int(): Unit =
-        StrictlyNegativeInt.random()
-            .run { PositiveIntOrNull(value) }
-            .assertNull()
 
     // ---------- Unary operations ----------
 

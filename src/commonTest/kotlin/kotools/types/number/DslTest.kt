@@ -14,9 +14,8 @@ class IntHolderDslTest {
         negative to NegativeInt.random().value,
         strictlyNegative to StrictlyNegativeInt.random().value
     ).forEach {
-        it.key.intOrNull(it.value)
-            .assertNotNull()
-            .value assertEquals it.value
+        val result: IntHolder? = it.key intOrNull it.value
+        result.assertNotNull().value assertEquals it.value
     }
 
     @Test
@@ -27,7 +26,7 @@ class IntHolderDslTest {
         negative to StrictlyPositiveInt.random().value,
         strictlyNegative to PositiveInt.random().value
     ).forEach {
-        it.key.intOrNull(it.value)
-            .assertNull()
+        val result: IntHolder? = it.key intOrNull it.value
+        result.assertNull()
     }
 }

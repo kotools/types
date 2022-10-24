@@ -8,6 +8,7 @@ import kotools.assert.assertNull
 import kotools.types.core.RandomValueHolder
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyNegativeInt
+import kotools.types.number.toPositiveInt
 import kotools.types.string.NotBlankString
 import kotlin.random.Random
 import kotlin.test.Test
@@ -22,7 +23,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
         val index: PositiveInt = Random.nextInt(
             from = 0,
             until = collection.size
-        ).let(::PositiveInt)
+        ).toPositiveInt()
         val result: Int = collection[index]
         result assertEquals collection.elementAt(index.value)
     }
@@ -41,7 +42,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
         val index: PositiveInt = Random.nextInt(
             from = 0,
             until = collection.size
-        ).let(::PositiveInt)
+        ).toPositiveInt()
         val result: Int? = collection getOrNull index
         result.assertNotNull() assertEquals collection.elementAt(index.value)
     }
@@ -61,7 +62,7 @@ class NotEmptyCollectionTest : RandomValueHolder {
         val index: PositiveInt = Random.nextInt(
             from = 0,
             until = collection.size
-        ).let(::PositiveInt)
+        ).toPositiveInt()
         val defaultValue: Int = StrictlyNegativeInt.random().value
         val result: Int = collection.getOrElse(index) { defaultValue }
         result assertEquals collection.elementAt(index.value)

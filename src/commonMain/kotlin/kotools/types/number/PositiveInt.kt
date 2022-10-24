@@ -12,7 +12,7 @@ import kotlin.jvm.JvmInline
  */
 @SinceKotoolsTypes("1.1")
 @Throws(PositiveInt.ConstructionError::class)
-public fun PositiveInt(value: Int): PositiveInt = value.toPositiveInt()
+public fun PositiveInt(value: Int): PositiveInt = positive int value
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
@@ -21,7 +21,7 @@ public fun PositiveInt(value: Int): PositiveInt = value.toPositiveInt()
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
-    value.toPositiveIntOrNull()
+    positive intOrNull value
 
 /**
  * Returns this value as a [PositiveInt], or throws an
@@ -47,10 +47,10 @@ public sealed interface PositiveInt : IntHolder {
     // ---------- Unary operations ----------
 
     override fun inc(): PositiveInt = if (value == max.value) min
-    else PositiveInt(value + 1)
+    else positive int value + 1
 
     override fun dec(): PositiveInt = if (value == min.value) max
-    else PositiveInt(value - 1)
+    else positive int value - 1
 
     override fun unaryMinus(): NegativeInt = NegativeInt(-value)
 
@@ -61,7 +61,7 @@ public sealed interface PositiveInt : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        PositiveInt(value / other.value)
+        positive int value / other.value
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -75,10 +75,10 @@ public sealed interface PositiveInt : IntHolder {
         private val range: IntRange by lazy { 0..Int.MAX_VALUE }
 
         /** The minimum value of a [PositiveInt]. */
-        public val min: PositiveInt by lazy { PositiveInt(range.first) }
+        public val min: PositiveInt by lazy { positive int range.first }
 
         /** The maximum value of a [PositiveInt]. */
-        public val max: PositiveInt by lazy { PositiveInt(range.last) }
+        public val max: PositiveInt by lazy { positive int range.last }
 
         /**
          * Returns the [value] as a [PositiveInt], or returns `null` if the
@@ -110,7 +110,7 @@ public sealed interface PositiveInt : IntHolder {
 }
 
 internal object PositiveIntSerializer :
-    IntHolder.Serializer<PositiveInt>(::PositiveInt)
+    IntHolder.Serializer<PositiveInt>(positive::int)
 
 @JvmInline
 private value class PositiveIntImplementation(override val value: Int) :
