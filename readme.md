@@ -17,6 +17,7 @@ NotBlankString("hello")
 
 notEmptyListOf(1, 2, 3)
 notEmptySetOf(4, 5, 6)
+notEmptyMapOf("a" to 1, "b" to 2, "c" to 3)
 ```
 
 [kotlin]: https://kotlinlang.org
