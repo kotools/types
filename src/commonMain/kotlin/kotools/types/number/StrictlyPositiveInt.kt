@@ -13,7 +13,7 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("1.1")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
-    value.toStrictlyPositiveInt()
+    strictlyPositive int value
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
@@ -22,7 +22,7 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
-    value.toStrictlyPositiveIntOrNull()
+    strictlyPositive intOrNull value
 
 /**
  * Returns this value as a [StrictlyPositiveInt], or throws an
@@ -51,10 +51,10 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
     // ---------- Unary operations ----------
 
     override fun inc(): StrictlyPositiveInt = if (value == max.value) min
-    else StrictlyPositiveInt(value + 1)
+    else strictlyPositive int value + 1
 
     override fun dec(): StrictlyPositiveInt = if (value == min.value) max
-    else StrictlyPositiveInt(value - 1)
+    else strictlyPositive int value - 1
 
     override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt(-value)
 
@@ -66,12 +66,12 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 
         /** The minimum value of a [StrictlyPositiveInt]. */
         public val min: StrictlyPositiveInt by lazy {
-            StrictlyPositiveInt(range.first)
+            strictlyPositive int range.first
         }
 
         /** The maximum value of a [StrictlyPositiveInt]. */
         public val max: StrictlyPositiveInt by lazy {
-            StrictlyPositiveInt(range.last)
+            strictlyPositive int range.last
         }
 
         /**
@@ -104,7 +104,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 }
 
 internal object StrictlyPositiveIntSerializer :
-    IntHolder.Serializer<StrictlyPositiveInt>(::StrictlyPositiveInt)
+    IntHolder.Serializer<StrictlyPositiveInt>(strictlyPositive::int)
 
 @JvmInline
 private value class StrictlyPositiveIntImplementation(override val value: Int) :

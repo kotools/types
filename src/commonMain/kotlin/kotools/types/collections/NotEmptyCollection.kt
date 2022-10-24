@@ -3,6 +3,7 @@ package kotools.types.collections
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.strictlyPositive
 import kotools.types.number.toPositiveIntOrNull
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
@@ -53,7 +54,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
     // ---------- Query operations ----------
 
     /** Returns the [size] of this collection as a [StrictlyPositiveInt]. */
-    public val typedSize: StrictlyPositiveInt get() = StrictlyPositiveInt(size)
+    public val typedSize: StrictlyPositiveInt get() = strictlyPositive int size
 
     // ---------- Positional access operations ----------
 

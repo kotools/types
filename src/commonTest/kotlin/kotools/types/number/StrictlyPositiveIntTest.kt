@@ -6,7 +6,6 @@ import kotools.types.pairBy
 import kotools.types.runMapSecond
 import kotlin.test.Test
 
-@Suppress("TestFunctionName")
 class StrictlyPositiveIntTest {
     // ---------- Companion ----------
 
@@ -21,37 +20,6 @@ class StrictlyPositiveIntTest {
     fun random_should_return_different_values(): Unit = StrictlyPositiveInt
         .random()
         .value assertNotEquals StrictlyPositiveInt.random().value
-
-    // ---------- Builders ----------
-
-    @Test
-    fun StrictlyPositiveInt_should_pass_with_a_strictly_positive_Int(): Unit =
-        StrictlyPositiveInt.random()
-            .run { StrictlyPositiveInt(value) to value }
-            .run { first.value assertEquals second }
-
-    @Test
-    fun StrictlyPositiveInt_should_throw_an_error_with_a_negative_Int(): Unit =
-        NegativeInt.random()
-            .runCatching { StrictlyPositiveInt(value) }
-            .exceptionOrNull()
-            .assertNotNull()
-            .apply { message.assertNotNull() }
-            .let { it is StrictlyPositiveInt.ConstructionError }
-            .assertTrue()
-
-    @Test
-    fun StrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_Int(): Unit =
-        StrictlyPositiveInt.random()
-            .run { StrictlyPositiveIntOrNull(value) to value }
-            .run { first.assertNotNull() to second }
-            .run { first.value assertEquals second }
-
-    @Test
-    fun StrictlyPositiveIntOrNull_should_return_null_with_a_negative_Int(): Unit =
-        NegativeInt.random()
-            .run { StrictlyPositiveIntOrNull(value) }
-            .assertNull()
 
     // ---------- Unary operations ----------
 

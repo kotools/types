@@ -9,6 +9,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.strictlyPositive
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -75,7 +76,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
 
     /** Returns the length of this [value]. */
     public val length: StrictlyPositiveInt
-        get() = StrictlyPositiveInt(value.length)
+        get() = strictlyPositive int value.length
 
     // ---------- Positional access operations ----------
 
