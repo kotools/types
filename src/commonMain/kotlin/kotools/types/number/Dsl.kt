@@ -53,3 +53,14 @@ public val negative: IntHolderDsl<NegativeInt> = NegativeHolderDsl
 private object NegativeHolderDsl : IntHolderDsl<NegativeInt> {
     override fun int(value: Int): NegativeInt = value.toNegativeInt()
 }
+
+
+/** Context responsible for building a [StrictlyNegativeInt]. */
+@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+public val strictlyNegative: IntHolderDsl<StrictlyNegativeInt> =
+    StrictlyNegativeHolderDsl
+
+private object StrictlyNegativeHolderDsl : IntHolderDsl<StrictlyNegativeInt> {
+    override fun int(value: Int): StrictlyNegativeInt =
+        value.toStrictlyNegativeInt()
+}

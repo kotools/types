@@ -11,7 +11,8 @@ class IntHolderDslTest {
         nonZero to NonZeroInt.random().value,
         positive to PositiveInt.random().value,
         strictlyPositive to StrictlyPositiveInt.random().value,
-        negative to NegativeInt.random().value
+        negative to NegativeInt.random().value,
+        strictlyNegative to StrictlyNegativeInt.random().value
     ).forEach {
         it.key.intOrNull(it.value)
             .assertNotNull()
@@ -23,7 +24,8 @@ class IntHolderDslTest {
         nonZero to 0,
         positive to StrictlyNegativeInt.random().value,
         strictlyPositive to NegativeInt.random().value,
-        negative to StrictlyPositiveInt.random().value
+        negative to StrictlyPositiveInt.random().value,
+        strictlyNegative to PositiveInt.random().value
     ).forEach {
         it.key.intOrNull(it.value)
             .assertNull()
