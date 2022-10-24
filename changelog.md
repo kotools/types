@@ -29,6 +29,9 @@ All notable changes to this project will be documented in this file.
   ([#119](https://github.com/kotools/types/issues/119)).
 - **Stabilize** the random API for getting an instance of `IntHolder` with a
   random value ([#118](https://github.com/kotools/types/issues/118)).
+- The DSL for building numbers is now available in **alpha** stage in the
+  `kotools.types.number` package
+  ([#130](https://github.com/kotools/types/issues/130)).
 
 ## Version 3.0.1 - 2022/10/21
 
