@@ -4,7 +4,6 @@ import kotools.assert.*
 import kotools.types.*
 import kotlin.test.Test
 
-@Suppress("TestFunctionName")
 class StrictlyNegativeIntTest {
     // ---------- Companion ----------
 
@@ -20,42 +19,6 @@ class StrictlyNegativeIntTest {
     fun random_should_return_different_values(): Unit = StrictlyNegativeInt
         .random()
         .value assertNotEquals StrictlyNegativeInt.random().value
-
-    // ---------- Builders ----------
-
-    @Test
-    fun StrictlyNegativeInt_should_pass_with_a_strictly_negative_Int(): Unit =
-        StrictlyNegativeInt.random()
-            .value
-            .pairBy(::StrictlyNegativeInt)
-            .mapFirst(StrictlyNegativeInt::value)
-            .assertEquals()
-
-    @Test
-    fun StrictlyNegativeInt_should_throw_an_error_with_a_positive_Int(): Unit =
-        PositiveInt.random()
-            .runCatching { StrictlyNegativeInt(value) }
-            .exceptionOrNull()
-            .assertNotNull()
-            .apply { message.assertNotNull() }
-            .let { it is StrictlyNegativeInt.ConstructionError }
-            .assertTrue()
-
-    @Test
-    fun StrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int(): Unit =
-        StrictlyNegativeInt.random()
-            .value
-            .pairBy(::StrictlyNegativeIntOrNull)
-            .assertFirstIsNotNull()
-            .mapFirst(StrictlyNegativeInt::value)
-            .assertEquals()
-
-    @Test
-    fun StrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int(): Unit =
-        PositiveInt.random()
-            .value
-            .let(::StrictlyNegativeIntOrNull)
-            .assertNull()
 
     // ---------- Unary operations ----------
 

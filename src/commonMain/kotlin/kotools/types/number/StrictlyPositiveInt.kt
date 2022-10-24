@@ -56,7 +56,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
     override fun dec(): StrictlyPositiveInt = if (value == min.value) max
     else strictlyPositive int value - 1
 
-    override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt(-value)
+    override fun unaryMinus(): StrictlyNegativeInt = strictlyNegative int -value
 
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].

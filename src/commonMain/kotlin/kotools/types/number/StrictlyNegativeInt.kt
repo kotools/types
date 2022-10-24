@@ -13,7 +13,7 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("1.1")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
-    value.toStrictlyNegativeInt()
+    strictlyNegative int value
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
@@ -22,7 +22,7 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
-    value.toStrictlyNegativeIntOrNull()
+    strictlyNegative intOrNull value
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or throws an
@@ -51,10 +51,10 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
     // ---------- Unary operations ----------
 
     override fun inc(): StrictlyNegativeInt = if (value == max.value) min
-    else StrictlyNegativeInt(value + 1)
+    else strictlyNegative int value + 1
 
     override fun dec(): StrictlyNegativeInt = if (value == min.value) max
-    else StrictlyNegativeInt(value - 1)
+    else strictlyNegative int value - 1
 
     override fun unaryMinus(): StrictlyPositiveInt = strictlyPositive int -value
 
@@ -66,12 +66,12 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 
         /** The minimum value of a [StrictlyNegativeInt]. */
         public val min: StrictlyNegativeInt by lazy {
-            StrictlyNegativeInt(range.first)
+            strictlyNegative int range.first
         }
 
         /** The maximum value of a [StrictlyNegativeInt]. */
         public val max: StrictlyNegativeInt by lazy {
-            StrictlyNegativeInt(range.last)
+            strictlyNegative int range.last
         }
 
         /**
@@ -91,8 +91,8 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): StrictlyNegativeInt = range.random()
-            .toStrictlyNegativeInt()
+        public fun random(): StrictlyNegativeInt =
+            strictlyNegative int range.random()
     }
 
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */
@@ -104,7 +104,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 }
 
 internal object StrictlyNegativeIntSerializer :
-    IntHolder.Serializer<StrictlyNegativeInt>(::StrictlyNegativeInt)
+    IntHolder.Serializer<StrictlyNegativeInt>(strictlyNegative::int)
 
 @JvmInline
 private value class StrictlyNegativeIntImplementation(override val value: Int) :
