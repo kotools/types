@@ -19,6 +19,11 @@ All notable changes to this project will be documented in this file.
 
 ### All platforms
 
+#### Added
+
+- `NotEmptyMap` type representing maps that contain at least one entry
+  ([#120](https://github.com/kotools/types/issues/120)).
+
 #### Changed
 
 - Convert the following types from a class to a sealed interface:
