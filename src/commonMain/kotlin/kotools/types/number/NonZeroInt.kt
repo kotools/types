@@ -12,7 +12,7 @@ import kotlin.jvm.JvmInline
  */
 @SinceKotoolsTypes("1.1")
 @Throws(NonZeroInt.ConstructionError::class)
-public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
+public fun NonZeroInt(value: Int): NonZeroInt = nonZero int value
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
@@ -20,8 +20,7 @@ public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
  */
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
-public fun NonZeroIntOrNull(value: Int): NonZeroInt? =
-    value.toNonZeroIntOrNull()
+public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZero intOrNull value
 
 /**
  * Returns this value as a [NonZeroInt], or throws an
@@ -61,9 +60,9 @@ public sealed interface NonZeroInt : IntHolder {
      * If this [value] is the maximum, it returns the minimum value instead.
      */
     override fun inc(): NonZeroInt = when (value) {
-        -1 -> NonZeroInt(1)
+        -1 -> nonZero int 1
         max.value -> min
-        else -> NonZeroInt(value + 1)
+        else -> nonZero int value + 1
     }
 
     /**
@@ -73,18 +72,18 @@ public sealed interface NonZeroInt : IntHolder {
      * [maximum][NonZeroInt.max] value instead.
      */
     override fun dec(): NonZeroInt = when (value) {
-        1 -> NonZeroInt(-1)
+        1 -> nonZero int -1
         min.value -> max
-        else -> NonZeroInt(value - 1)
+        else -> nonZero int value - 1
     }
 
-    override fun unaryMinus(): NonZeroInt = NonZeroInt(-value)
+    override fun unaryMinus(): NonZeroInt = nonZero int -value
 
     // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
     public operator fun times(other: NonZeroInt): NonZeroInt =
-        NonZeroInt(value * other.value)
+        nonZero int value * other.value
 
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
@@ -99,10 +98,10 @@ public sealed interface NonZeroInt : IntHolder {
         }
 
         /** The minimum value of a [NonZeroInt]. */
-        public val min: NonZeroInt by lazy { NonZeroInt(negativeRange.first) }
+        public val min: NonZeroInt by lazy { nonZero int negativeRange.first }
 
         /** The maximum value of a [NonZeroInt]. */
-        public val max: NonZeroInt by lazy { NonZeroInt(positiveRange.last) }
+        public val max: NonZeroInt by lazy { nonZero int positiveRange.last }
 
         /**
          * Returns the [value] as a [NonZeroInt], or returns `null` if the
@@ -117,7 +116,7 @@ public sealed interface NonZeroInt : IntHolder {
             DeprecationLevel.ERROR
         )
         public infix fun orNull(value: Int): NonZeroInt? =
-            value.toNonZeroIntOrNull()
+            nonZero intOrNull value
 
         /** Returns a random [NonZeroInt]. */
         @SinceKotoolsTypes("3.0")
@@ -133,7 +132,7 @@ public sealed interface NonZeroInt : IntHolder {
 }
 
 internal object NonZeroIntSerializer :
-    IntHolder.Serializer<NonZeroInt>(::NonZeroInt)
+    IntHolder.Serializer<NonZeroInt>(nonZero::int)
 
 @JvmInline
 private value class NonZeroIntImplementation(override val value: Int) :

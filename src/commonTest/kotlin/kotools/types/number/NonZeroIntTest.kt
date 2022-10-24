@@ -5,7 +5,6 @@ import kotools.types.*
 import kotools.types.core.RandomValueHolder
 import kotlin.test.Test
 
-@Suppress("TestFunctionName")
 class NonZeroIntTest : RandomValueHolder {
     // ---------- Companion ----------
 
@@ -26,36 +25,11 @@ class NonZeroIntTest : RandomValueHolder {
     fun random_should_return_different_values(): Unit =
         NonZeroInt.random().value assertNotEquals NonZeroInt.random().value
 
-    // ---------- Builders ----------
-
-    @Test
-    fun NonZeroInt_should_pass_with_a_non_zero_Int(): Unit =
-        NonZeroInt.random().value.let { NonZeroInt(it).value assertEquals it }
-
-    @Test
-    fun NonZeroInt_should_throw_an_error_with_an_Int_that_equals_zero() {
-        assertFailsWith<NonZeroInt.ConstructionError> { NonZeroInt(0) }
-            .message.assertNotNull()
-    }
-
-    @Test
-    fun NonZeroIntOrNull_should_pass_with_a_non_zero_Int() {
-        val value: Int = NonZeroInt.random().value
-        val result: NonZeroInt? = NonZeroIntOrNull(value)
-        result.assertNotNull().value assertEquals value
-    }
-
-    @Test
-    fun NonZeroIntOrNull_should_return_null_with_an_Int_that_equals_zero() {
-        val result: NonZeroInt? = NonZeroIntOrNull(0)
-        result.assertNull()
-    }
-
     // ---------- Unary operations ----------
 
     @Test
     fun inc_should_return_1_with_minus_1() {
-        var x = NonZeroInt(-1)
+        var x = nonZero int -1
         x++
         x.value assertEquals 1
     }
@@ -79,7 +53,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun dec_should_return_minus1_with_1() {
-        var x = NonZeroInt(1)
+        var x = nonZero int 1
         x--
         x.value assertEquals -1
     }
