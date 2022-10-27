@@ -1,0 +1,95 @@
+name: Deployment
+on:
+  release:
+    types: [ released ]
+  workflow_dispatch:
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+jobs:
+  # ---------- Stage 1 ----------
+  validate-wrapper:
+    name: Validate Gradle wrapper
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+  # ---------- Stage 2 ----------
+  deploy-docs:
+    name: Deploy documentation to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: validate-wrapper
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Generate documentation with Dokka
+        run: ./gradlew dokkaHtml --no-daemon
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: docs
+          folder: build/dokka
+          git-config-email: ${{ secrets.GIT_EMAIL }}
+          git-config-name: ${{ secrets.GIT_USER }}
+  deploy-kmp:
+    name: Deploy to GitHub Packages (Multiplatform)
+    runs-on: ubuntu-latest
+    needs: validate-wrapper
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deliver package
+        run: ./gradlew publishKotlinMultiplatformPublicationToGitHubRepository --no-daemon
+  deploy-jvm:
+    name: Deploy to GitHub Packages (JVM)
+    runs-on: ubuntu-latest
+    needs: validate-wrapper
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deliver package
+        run: ./gradlew publishJvmPublicationToGitHubRepository --no-daemon
+  deploy-js:
+    name: Deploy to GitHub Packages (JS)
+    runs-on: ubuntu-latest
+    needs: validate-wrapper
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deliver package
+        run: ./gradlew publishJsPublicationToGitHubRepository --no-daemon
+  deploy-linux:
+    name: Deploy to GitHub Packages (Linux)
+    runs-on: ubuntu-latest
+    needs: validate-wrapper
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deliver package
+        run: ./gradlew publishLinuxX64PublicationToGitHubRepository --no-daemon
+  deploy-macos:
+    name: Deploy to GitHub Packages (macOS)
+    runs-on: macos-latest
+    needs: validate-wrapper
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deliver package
+        run: ./gradlew publishMacosX64PublicationToGitHubRepository --no-daemon
+  deploy-windows:
+    name: Deploy to GitHub Packages (Windows)
+    runs-on: windows-latest
+    needs: validate-wrapper
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deliver package
+        run: ./gradlew publishMingwX64PublicationToGitHubRepository --no-daemon
