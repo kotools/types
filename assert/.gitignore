@@ -1,12 +1,11 @@
 # ---------- Gradle ----------
 
 # Directories
-build/
-.gradle/
+**/build/
+.gradle
 
 # Files
 !gradle-wrapper.jar
-gradle.properties
 
 # ---------- Java & Kotlin ----------
 
