@@ -1,8 +1,8 @@
 # ---------- Gradle ----------
 
 # Directories
-**/build/
-.gradle
+build/
+.gradle/
 
 # Files
 !gradle-wrapper.jar
