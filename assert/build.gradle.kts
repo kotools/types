@@ -4,16 +4,13 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
-    kotlin("multiplatform") version embeddedKotlinVersion
-    id("org.jetbrains.dokka") version embeddedKotlinVersion
+    kotlin("multiplatform")
+    id("org.jetbrains.dokka")
     `maven-publish`
     signing
 }
 
-group = "io.github.kotools"
 version = "3.0.3-SNAPSHOT"
-
-repositories(RepositoryHandler::mavenCentral)
 
 val isSnapshot: Boolean by lazy { version.toString().endsWith("SNAPSHOT") }
 
