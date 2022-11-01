@@ -1,12 +1,12 @@
-name: Integration & Delivery
+name: Assert Integration & Delivery
 on:
   push:
     branches: [ main ]
     paths:
-      - '*.kts'
-      - '*gradle*'
-      - .github/workflows/integration-delivery.yml
-      - src/**
+      - ./*gradle*
+      - .github/workflows/assert-integration-delivery.yml
+      - assert/**/*gradle*
+      - assert/src/**
   workflow_dispatch:
 permissions: read-all
 jobs:
@@ -31,7 +31,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Check the application
-        run: ./gradlew check
+        run: ./gradlew assert:check
       - name: Deliver package to OSSRH
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
@@ -41,4 +41,4 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           OS: ${{ matrix.os }}
-        run: ./gradlew publishAllPublicationsToOSSRHRepository
+        run: ./gradlew assert:publishAllPublicationsToOSSRHRepository
