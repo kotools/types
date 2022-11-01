@@ -1,13 +1,12 @@
-name: Integration & Delivery
+name: Types Integration & Delivery
 on:
   push:
     branches: [ main ]
     paths:
-      - '*.kts'
-      - '*gradle*'
-      - .github/workflows/integration-delivery.yml
-      - buildSrc/**
-      - src/**
+      - ./*gradle*
+      - .github/workflows/types-integration-delivery.yml
+      - buildSrc/**/*.kt*
+      - types/**/*.kt*
   workflow_dispatch:
 permissions: read-all
 env:
@@ -36,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: ./gradlew jvmTest --no-daemon
+        run: ./gradlew types:jvmTest --no-daemon
   integrate-js:
     name: Integrate changes (JS)
     runs-on: ubuntu-latest
@@ -45,7 +44,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: ./gradlew jsTest --no-daemon
+        run: ./gradlew types:jsTest --no-daemon
   integrate-linux:
     name: Integrate changes (Linux)
     runs-on: ubuntu-latest
@@ -54,7 +53,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: ./gradlew linuxX64Test --no-daemon
+        run: ./gradlew types:linuxX64Test --no-daemon
   integrate-macos:
     name: Integrate changes (macOS)
     runs-on: macos-latest
@@ -63,7 +62,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: ./gradlew macosX64Test --no-daemon
+        run: ./gradlew types:macosX64Test --no-daemon
   integrate-windows:
     name: Integrate changes (Windows)
     runs-on: windows-latest
@@ -72,7 +71,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: ./gradlew mingwX64Test --no-daemon
+        run: ./gradlew types:mingwX64Test --no-daemon
   # ---------- Stage 3 ----------
   deliver-kmp:
     name: Deliver package to OSSRH (Multiplatform)
@@ -87,7 +86,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deliver package
-        run: ./gradlew publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew types:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
   deliver-jvm:
     name: Deliver package to OSSRH (JVM)
     runs-on: ubuntu-latest
@@ -96,7 +95,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deliver package
-        run: ./gradlew publishJvmPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
   deliver-js:
     name: Deliver package to OSSRH (JS)
     runs-on: ubuntu-latest
@@ -105,7 +104,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deliver package
-        run: ./gradlew publishJsPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
   deliver-linux:
     name: Deliver package to OSSRH (Linux)
     runs-on: ubuntu-latest
@@ -114,7 +113,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deliver package
-        run: ./gradlew publishLinuxX64PublicationToOSSRHRepository --no-daemon
+        run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
   deliver-macos:
     name: Deliver package to OSSRH (macOS)
     runs-on: macos-latest
@@ -123,7 +122,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deliver package
-        run: ./gradlew publishMacosX64PublicationToOSSRHRepository --no-daemon
+        run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
   deliver-windows:
     name: Deliver package to OSSRH (Windows)
     runs-on: windows-latest
@@ -132,4 +131,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Deliver package
-        run: ./gradlew publishMingwX64PublicationToOSSRHRepository --no-daemon
+        run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
