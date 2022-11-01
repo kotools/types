@@ -5,8 +5,8 @@ on:
     paths:
       - ./*gradle*
       - .github/workflows/assert-integration-delivery.yml
-      - assert/**/*gradle*
-      - assert/src/**
+      - assert/**/*.kt*
+      - buildSrc/**/*.kt*
   workflow_dispatch:
 permissions: read-all
 jobs:
