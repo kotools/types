@@ -17,6 +17,7 @@ target/
 *.class
 *.ctxt
 *.ear
+*.hprof
 *.log
 *.nar
 *.rar

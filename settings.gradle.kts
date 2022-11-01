@@ -1,2 +1,2 @@
 rootProject.name = "kotools"
-include("assert", "csv")
+include("assert", "csv", "types")

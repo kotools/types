@@ -1,4 +1,4 @@
-package kotools.types
+package kotools.gradle
 
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty

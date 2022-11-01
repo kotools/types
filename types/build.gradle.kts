@@ -1,7 +1,7 @@
-import kotools.types.Git
-import kotools.types.GitHub
-import kotools.types.Gpg
-import kotools.types.Maven
+import kotools.gradle.Git
+import kotools.gradle.GitHub
+import kotools.gradle.Gpg
+import kotools.gradle.Maven
 import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.gradle.GradleDokkaSourceSetBuilder
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
@@ -9,17 +9,14 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
-    kotlin("multiplatform") version embeddedKotlinVersion
-    kotlin("plugin.serialization") version embeddedKotlinVersion
-    id("org.jetbrains.dokka") version embeddedKotlinVersion
+    kotlin("multiplatform")
+    kotlin("plugin.serialization")
+    id("org.jetbrains.dokka")
     `maven-publish`
     signing
 }
 
-group = "io.github.kotools"
 version = "3.1.0"
-
-repositories(RepositoryHandler::mavenCentral)
 
 lateinit var commonSourceSet: KotlinSourceSet
 lateinit var jvmSourceSet: KotlinSourceSet
