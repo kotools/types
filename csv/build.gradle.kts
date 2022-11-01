@@ -2,17 +2,14 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
-    kotlin("jvm") version embeddedKotlinVersion
+    kotlin("jvm")
     `java-library`
-    id("org.jetbrains.dokka") version embeddedKotlinVersion
+    id("org.jetbrains.dokka")
     `maven-publish`
     signing
 }
 
-group = "io.github.kotools"
 version = "2.2.0"
-
-repositories(RepositoryHandler::mavenCentral)
 
 dependencies {
     // Kotlin
