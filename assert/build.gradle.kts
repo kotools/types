@@ -53,9 +53,7 @@ kotlin {
             }
         }
         val jvmMain: KotlinSourceSet by getting {
-            dependencies {
-                implementation("org.junit.jupiter:junit-jupiter-api:[5.6,5.7[")
-            }
+            dependencies { implementation(junit.jupiter.api) }
         }
         LibrarySourceSets.run { add(COMMON to commonMain, JVM to jvmMain) }
     }

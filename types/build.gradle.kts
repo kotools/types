@@ -43,15 +43,13 @@ kotlin {
         val commonMain: KotlinSourceSet by getting {
             dependencies {
                 implementation(project.dependencies.platform(kotlin("bom")))
-                implementation(
-                    "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1"
-                )
+                implementation(kotlinx.serialization.json)
             }
         }
         val commonTest: KotlinSourceSet by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("io.github.kotools:assert:[3.0,3.1[")
+                implementation(project(":assert"))
             }
         }
         commonSourceSet = commonMain

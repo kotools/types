@@ -15,7 +15,7 @@ dependencies {
     // Kotlin
     implementation(platform(kotlin("bom")))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation(kotlinx.coroutines.core)
     testImplementation(kotlin("test"))
 
     // Kotools
@@ -25,8 +25,8 @@ dependencies {
     testImplementation(kotools("assert", "[1.1,1.2["))
 
     // CSV
-    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:[1.2,1.3[")
-    testRuntimeOnly("org.slf4j:slf4j-simple:[1.7,1.8[")
+    implementation(doyaaaaaken.kotlin.csv)
+    testRuntimeOnly(slf4j.simple)
 }
 
 kotlin.explicitApi = ExplicitApiMode.Strict
