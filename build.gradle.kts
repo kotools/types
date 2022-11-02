@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version kotlinVersion apply false
     kotlin("multiplatform") version kotlinVersion apply false
     kotlin("plugin.serialization") version kotlinVersion apply false
-    id("org.jetbrains.dokka") version kotlinVersion apply false
+    id("org.jetbrains.dokka") version kotlinVersion
 }
 
 allprojects { repositories(RepositoryHandler::mavenCentral) }
