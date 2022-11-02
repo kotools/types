@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - ./*gradle*
+      - './*gradle*'
       - .github/workflows/types-integration-delivery.yml
       - buildSrc/**/*.kt*
       - types/**/*.kt*

@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - ./*gradle*
+      - './*gradle*'
       - .github/workflows/assert-integration-delivery.yml
       - assert/**/*.kt*
       - buildSrc/**/*.kt*
