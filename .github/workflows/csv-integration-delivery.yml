@@ -21,7 +21,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
   # ---------- Stage 2 ----------
   test:
-    name: Test on macOS, Ubuntu and Windows
+    name: Test
     strategy:
       matrix:
         os: [ macos-latest, ubuntu-latest, windows-latest ]
