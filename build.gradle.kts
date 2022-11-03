@@ -9,3 +9,11 @@ plugins {
 allprojects { repositories(RepositoryHandler::mavenCentral) }
 
 subprojects { group = "io.github.kotools" }
+
+// ---------- Documentation generation ----------
+
+tasks {
+    val dokkaDirectory: File = buildDir.resolve("dokka")
+    dokkaHtmlMultiModule { outputDirectory.set(dokkaDirectory) }
+    register<Delete>("cleanDokkaHtmlMultiModule") { delete(dokkaDirectory) }
+}
