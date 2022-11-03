@@ -19,8 +19,8 @@ internal infix fun <T : Any> KClass<T>.processReader(
         .let(reader::read)
         .map(Map<String, String>::withoutBlankKeys)
         .map(dataType::createType)
-        .let { reader.pagination?.let(it::getPage) ?: it }
         .let { reader.filter?.let(it::filter) ?: it }
+        .let { reader.pagination?.let(it::getPage) ?: it }
 }
 
 internal infix fun <T : Any> KClass<T>.processReaderOrNull(

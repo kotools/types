@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Fixed
+
+Fix pagination and filter ordering in the reader: the filter is now applied
+**before** the pagination ([#8](https://github.com/kotools/libraries/issues/8)).
+
 ## Version 2.2.0 - 2022/03/23
 
 ### Added
