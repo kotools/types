@@ -17,11 +17,6 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
-### Fixed
-
-Add missing `csvWriterAsync` function 
-([#6](https://github.com/kotools/libraries/issues/6)).
-
 ## Version 2.2.0 - 2022/03/23
 
 ### Added
@@ -43,6 +38,13 @@ Fix pagination and filter ordering in the reader.
   ([#13](https://github.com/kotools/csv/issues/13)).
 - Filtered CSV file's reading as a given type
   ([#35](https://github.com/kotools/csv/issues/35)).
+
+## Version 2.0.2 - 2022/11/03
+
+### Fixed
+
+Add missing `csvWriterAsync` function
+([#6](https://github.com/kotools/libraries/issues/6)).
 
 ## Version 2.0.1 - 2022/02/01
 
