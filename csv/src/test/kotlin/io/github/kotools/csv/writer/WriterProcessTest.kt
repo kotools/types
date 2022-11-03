@@ -1,10 +1,10 @@
 package io.github.kotools.csv.writer
 
-import io.github.kotools.assert.assertFails
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
 import io.github.kotools.csv.test.ClassTypeExample
 import io.github.kotools.csv.test.TypeExample
+import kotools.assert.assertFails
+import kotools.assert.assertNotNull
+import kotools.assert.assertNull
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -31,24 +31,30 @@ class WriterProcessTest {
         }
 
         @Test
-        fun `should fail with non data class type`(): Unit = assertFails {
-            ClassTypeExample::class processWriter {
-                file = "test"
-                records { +ClassTypeExample() }
+        fun `should fail with non data class type`() {
+            assertFails {
+                ClassTypeExample::class processWriter {
+                    file = "test"
+                    records { +ClassTypeExample() }
+                }
             }
         }
 
         @Test
-        fun `should fail with private type`(): Unit = assertFails {
-            PrivateTypeExample::class processWriter {
-                file = "test"
-                records { +PrivateTypeExample("") }
+        fun `should fail with private type`() {
+            assertFails {
+                PrivateTypeExample::class processWriter {
+                    file = "test"
+                    records { +PrivateTypeExample("") }
+                }
             }
         }
 
         @Test
-        fun `should fail without records`(): Unit = assertFails {
-            TypeExample::class processWriter { file = "test" }
+        fun `should fail without records`() {
+            assertFails {
+                TypeExample::class processWriter { file = "test" }
+            }
         }
     }
 

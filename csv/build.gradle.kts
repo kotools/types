@@ -22,7 +22,7 @@ dependencies {
     fun kotools(module: String, version: String): String =
         "io.github.kotools:$module:$version"
     implementation(kotools("types", "[1.0,1.1["))
-    testImplementation(kotools("assert", "[1.1,1.2["))
+    testImplementation(kotools.assert)
 
     // CSV
     implementation(doyaaaaaken.kotlin.csv)

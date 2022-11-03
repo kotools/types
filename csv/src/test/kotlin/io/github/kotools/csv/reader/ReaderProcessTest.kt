@@ -1,11 +1,11 @@
 package io.github.kotools.csv.reader
 
-import io.github.kotools.assert.assertFails
-import io.github.kotools.assert.assertNotEquals
-import io.github.kotools.assert.assertNotNull
-import io.github.kotools.assert.assertNull
 import io.github.kotools.csv.test.ClassTypeExample
 import io.github.kotools.csv.test.TypeExample
+import kotools.assert.assertFails
+import kotools.assert.assertNotEquals
+import kotools.assert.assertNotNull
+import kotools.assert.assertNull
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
@@ -64,24 +64,31 @@ class ReaderProcessTest {
         }
 
         @Test
-        fun `should fail with invalid header in CSV file`(): Unit =
+        fun `should fail with invalid header in CSV file`() {
             assertFails {
                 TypeExample::class.processReader(invalidHeaderConfiguration)
             }
-
-        @Test
-        fun `should fail with blank file`(): Unit = assertFails {
-            TypeExample::class processReader {}
         }
 
         @Test
-        fun `should fail with non data class type`(): Unit = assertFails {
-            ClassTypeExample::class processReader testConfiguration
+        fun `should fail with blank file`() {
+            assertFails {
+                TypeExample::class processReader {}
+            }
         }
 
         @Test
-        fun `should fail with private type`(): Unit = assertFails {
-            PrivateTypeExample::class processReader testConfiguration
+        fun `should fail with non data class type`() {
+            assertFails {
+                ClassTypeExample::class processReader testConfiguration
+            }
+        }
+
+        @Test
+        fun `should fail with private type`() {
+            assertFails {
+                PrivateTypeExample::class processReader testConfiguration
+            }
         }
     }
 
