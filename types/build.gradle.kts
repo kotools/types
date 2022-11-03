@@ -49,7 +49,7 @@ kotlin {
         val commonTest: KotlinSourceSet by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(project(":assert"))
+                implementation(kotools.assert)
             }
         }
         commonSourceSet = commonMain
