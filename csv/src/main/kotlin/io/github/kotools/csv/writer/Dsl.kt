@@ -52,6 +52,16 @@ public suspend fun <T : Any> csvWriterOrNull(
 
 /**
  * Writes records as a given type [T] in a CSV file **asynchronously** according
+ * to the given [configuration] or throws an [IllegalStateException] when:
+ * - the type [T] is not a public or internal data class
+ * - the [configuration] is invalid.
+ */
+public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsync(
+    noinline configuration: Writer<T>.() -> Unit
+): Deferred<Unit> = async { csvWriter(configuration) }
+
+/**
+ * Writes records as a given type [T] in a CSV file **asynchronously** according
  * to the given [configuration] or returns `null` when:
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid.
