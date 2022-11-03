@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="JVM tests and documentation generation" type="CompoundRunConfigurationType">
-    <toRun name="Documentation generation" type="GradleRunConfiguration" />
-    <toRun name="JVM tests" type="GradleRunConfiguration" />
-    <method v="2" />
-  </configuration>
-</component>

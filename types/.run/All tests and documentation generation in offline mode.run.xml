@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="All tests and documentation generation in offline mode" type="CompoundRunConfigurationType">
-    <toRun name="All tests in offline mode" type="GradleRunConfiguration" />
-    <toRun name="Documentation generation in offline mode" type="GradleRunConfiguration" />
-    <method v="2" />
-  </configuration>
-</component>
