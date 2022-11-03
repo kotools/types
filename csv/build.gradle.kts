@@ -9,7 +9,7 @@ plugins {
     signing
 }
 
-version = "2.0.2"
+version = "2.3.0-SNAPSHOT"
 
 dependencies {
     // Kotlin
