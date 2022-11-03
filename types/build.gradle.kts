@@ -180,7 +180,7 @@ publishing {
             it.pom {
                 name.set("Kotools Types")
                 description.set("Commonly used types for Kotlin.")
-                val gitRepository = "https://github.com/kotools/types"
+                val gitRepository = "https://github.com/kotools/libraries"
                 url.set(gitRepository)
                 licenses {
                     license {

@@ -131,7 +131,7 @@ publishing {
         it.pom {
             name.set("Kotools Assert")
             description.set("Lightweight and elegant assertions library.")
-            val gitRepository = "https://github.com/kotools/assert"
+            val gitRepository = "https://github.com/kotools/libraries"
             url.set(gitRepository)
             licenses {
                 license {

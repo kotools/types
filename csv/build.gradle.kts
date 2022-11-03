@@ -69,7 +69,7 @@ publishing {
             pom {
                 name.set("Kotools CSV")
                 description.set("Elegant CSV file's manager for Kotlin.")
-                val gitRepository = "https://github.com/kotools/csv"
+                val gitRepository = "https://github.com/kotools/libraries"
                 url.set(gitRepository)
                 licenses {
                     license {
