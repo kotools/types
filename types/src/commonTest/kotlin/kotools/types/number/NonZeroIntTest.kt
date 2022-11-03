@@ -25,6 +25,15 @@ class NonZeroIntTest : RandomValueHolder {
     fun random_should_return_different_values(): Unit =
         NonZeroInt.random().value assertNotEquals NonZeroInt.random().value
 
+    // ---------- Builders ----------
+
+    @Test
+    fun randomNonZeroInt_should_return_different_values() {
+        val x: NonZeroInt = randomNonZeroInt()
+        val y: NonZeroInt = randomNonZeroInt()
+        x.value assertNotEquals y.value
+    }
+
     // ---------- Unary operations ----------
 
     @Test
@@ -43,9 +52,9 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun inc_should_increment_the_value_with_a_value_other_than_minus1_and_the_maximum() {
-        var x: NonZeroInt = NonZeroInt.random()
+        var x: NonZeroInt = randomNonZeroInt()
         while (x.value == -1 || x.value == NonZeroInt.max.value)
-            x = NonZeroInt.random()
+            x = randomNonZeroInt()
         val initialValue: Int = x.value
         x++
         x.value assertEquals initialValue + 1
@@ -67,9 +76,9 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun dec_should_decrement_the_value_with_a_value_other_than_1_and_the_minimum() {
-        var x: NonZeroInt = NonZeroInt.random()
+        var x: NonZeroInt = randomNonZeroInt()
         while (x.value == 1 || x.value == NonZeroInt.min.value)
-            x = NonZeroInt.random()
+            x = randomNonZeroInt()
         val initialValue: Int = x.value
         x--
         x.value assertEquals initialValue - 1
@@ -77,7 +86,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun unaryMinus_should_pass() {
-        val x: NonZeroInt = NonZeroInt.random()
+        val x: NonZeroInt = randomNonZeroInt()
         val result: NonZeroInt = -x
         result.value assertEquals -x.value
     }
@@ -86,8 +95,8 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun times_should_pass_with_a_NonZeroInt() {
-        val x: NonZeroInt = NonZeroInt.random()
-        val y: NonZeroInt = NonZeroInt.random()
+        val x: NonZeroInt = randomNonZeroInt()
+        val y: NonZeroInt = randomNonZeroInt()
         val result: NonZeroInt = x * y
         result.value assertEquals x.value * y.value
     }
@@ -95,7 +104,7 @@ class NonZeroIntTest : RandomValueHolder {
     @Test
     fun div_should_pass_when_dividing_an_Int_by_a_NonZeroInt() {
         val x: Int = randomInt
-        val y: NonZeroInt = NonZeroInt.random()
+        val y: NonZeroInt = randomNonZeroInt()
         val result: Int = x / y
         result assertEquals x / y.value
     }
@@ -103,14 +112,15 @@ class NonZeroIntTest : RandomValueHolder {
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = NonZeroInt.random()
-        .pairBy(NonZeroInt::toString)
-        .runMapSecond { value.toString() }
-        .assertEquals()
+    fun toString_should_pass() {
+        val x: NonZeroInt = randomNonZeroInt()
+        val result: String = x.toString()
+        result assertEquals x.value.toString()
+    }
 }
 
 @Suppress("unused")
 class NonZeroIntSerializerTest : IntHolderSerializerTest<NonZeroInt>(
     NonZeroIntSerializer,
-    NonZeroInt.Companion::random
+    ::randomNonZeroInt
 )

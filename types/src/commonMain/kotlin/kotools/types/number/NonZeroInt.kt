@@ -39,6 +39,12 @@ public fun Int.toNonZeroInt(): NonZeroInt = toNonZeroIntOrNull()
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
+/** Returns a random [NonZeroInt]. */
+@SinceKotoolsTypes("3.2")
+public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
+    .random()
+    .toNonZeroInt()
+
 // ---------- Binary operations ----------
 
 /**
@@ -119,6 +125,13 @@ public sealed interface NonZeroInt : IntHolder {
             nonZero intOrNull value
 
         /** Returns a random [NonZeroInt]. */
+        @Deprecated(
+            "Use the randomNonZeroInt function instead.",
+            ReplaceWith(
+                "randomNonZeroInt()",
+                "kotools.types.number.randomNonZeroInt"
+            )
+        )
         @SinceKotoolsTypes("3.0")
         public fun random(): NonZeroInt = ranges.random()
             .random()

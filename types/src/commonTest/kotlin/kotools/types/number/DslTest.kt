@@ -8,7 +8,7 @@ import kotlin.test.Test
 class IntHolderDslTest {
     @Test
     fun intOrNull_should_pass_with_a_valid_value(): Unit = mapOf(
-        nonZero to NonZeroInt.random().value,
+        nonZero to randomNonZeroInt().value,
         positive to PositiveInt.random().value,
         strictlyPositive to StrictlyPositiveInt.random().value,
         negative to NegativeInt.random().value,

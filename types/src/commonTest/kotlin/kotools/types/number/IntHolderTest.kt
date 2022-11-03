@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 class IntHolderTest : RandomValueHolder {
     private val randomHolders: Set<IntHolder> = setOf(
-        NonZeroInt.random(),
+        randomNonZeroInt(),
         PositiveInt.random(),
         StrictlyPositiveInt.random(),
         NegativeInt.random(),
@@ -115,7 +115,7 @@ class IntHolderTest : RandomValueHolder {
     @Test
     fun div_should_pass_with_a_NonZeroInt() {
         val x: IntHolder = randomHolders.random()
-        val y: NonZeroInt = NonZeroInt.random()
+        val y: NonZeroInt = randomNonZeroInt()
         val result: Int = x / y
         result assertEquals x.value / y.value
     }
