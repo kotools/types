@@ -10,7 +10,7 @@ import kotlin.test.Test
 class IntHolderTest : RandomValueHolder {
     private val randomHolders: Set<IntHolder> = setOf(
         randomNonZeroInt(),
-        PositiveInt.random(),
+        randomPositiveInt(),
         StrictlyPositiveInt.random(),
         NegativeInt.random(),
         StrictlyNegativeInt.random()

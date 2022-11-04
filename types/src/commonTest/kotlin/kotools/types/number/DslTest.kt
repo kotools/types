@@ -9,7 +9,7 @@ class IntHolderDslTest {
     @Test
     fun intOrNull_should_pass_with_a_valid_value(): Unit = mapOf(
         nonZero to randomNonZeroInt().value,
-        positive to PositiveInt.random().value,
+        positive to randomPositiveInt().value,
         strictlyPositive to StrictlyPositiveInt.random().value,
         negative to NegativeInt.random().value,
         strictlyNegative to StrictlyNegativeInt.random().value
@@ -24,7 +24,7 @@ class IntHolderDslTest {
         positive to StrictlyNegativeInt.random().value,
         strictlyPositive to NegativeInt.random().value,
         negative to StrictlyPositiveInt.random().value,
-        strictlyNegative to PositiveInt.random().value
+        strictlyNegative to randomPositiveInt().value
     ).forEach {
         val result: IntHolder? = it.key intOrNull it.value
         result.assertNull()

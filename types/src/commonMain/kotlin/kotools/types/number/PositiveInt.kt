@@ -40,6 +40,11 @@ public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
 public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
     ?.let(::PositiveIntImplementation)
 
+/** Returns a random [PositiveInt]. */
+@SinceKotoolsTypes("3.2")
+public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
+    .toPositiveInt()
+
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -72,7 +77,7 @@ public sealed interface PositiveInt : IntHolder {
 
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
-        private val range: IntRange by lazy { 0..Int.MAX_VALUE }
+        internal val range: IntRange by lazy { 0..Int.MAX_VALUE }
 
         /** The minimum value of a [PositiveInt]. */
         public val min: PositiveInt by lazy { positive int range.first }
@@ -96,6 +101,13 @@ public sealed interface PositiveInt : IntHolder {
             value.toPositiveIntOrNull()
 
         /** Returns a random [PositiveInt]. */
+        @Deprecated(
+            "Use the randomPositiveInt function instead.",
+            ReplaceWith(
+                "randomPositiveInt()",
+                "kotools.types.number.randomPositiveInt"
+            )
+        )
         @SinceKotoolsTypes("3.0")
         public fun random(): PositiveInt = range.random()
             .toPositiveInt()

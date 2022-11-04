@@ -21,6 +21,7 @@ class NonZeroIntTest : RandomValueHolder {
     fun max_should_be_the_maximum_of_Int(): Unit =
         NonZeroInt.max.value assertEquals Int.MAX_VALUE
 
+    @Suppress("DEPRECATION")
     @Test
     fun random_should_return_different_values(): Unit =
         NonZeroInt.random().value assertNotEquals NonZeroInt.random().value
