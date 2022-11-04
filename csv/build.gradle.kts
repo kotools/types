@@ -19,9 +19,7 @@ dependencies {
     testImplementation(kotlin("test"))
 
     // Kotools
-    fun kotools(module: String, version: String): String =
-        "io.github.kotools:$module:$version"
-    implementation(kotools("types", "[1.0,1.1["))
+    implementation(kotools.types)
     testImplementation(kotools.assert)
 
     // CSV

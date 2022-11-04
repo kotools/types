@@ -1,9 +1,10 @@
 package io.github.kotools.csv.common
 
-import io.github.kotools.types.string.NotBlankString
-import io.github.kotools.types.string.notBlank
+import kotools.types.string.NotBlankString
+import kotools.types.string.toNotBlankString
 
-internal val Manager.filePath: NotBlankString get() = "$folder$file".notBlank
+internal val Manager.filePath: NotBlankString
+    get() = "$folder$file".toNotBlankString()
 
 /** Scope for manipulating CSV files. */
 public interface Manager {

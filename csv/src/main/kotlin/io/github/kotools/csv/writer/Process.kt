@@ -4,7 +4,7 @@ import com.github.doyaaaaaken.kotlincsv.client.CsvWriter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import io.github.kotools.csv.common.*
 import io.github.kotools.csv.common.Target
-import io.github.kotools.types.string.NotBlankString
+import kotools.types.string.NotBlankString
 import java.io.File
 import kotlin.reflect.KClass
 

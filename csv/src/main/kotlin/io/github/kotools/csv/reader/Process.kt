@@ -4,8 +4,8 @@ import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import io.github.kotools.csv.common.*
 import io.github.kotools.csv.common.Target
-import io.github.kotools.types.string.NotBlankString
-import io.github.kotools.types.string.notBlankOrNull
+import kotools.types.string.NotBlankString
+import kotools.types.string.toNotBlankStringOrNull
 import kotlin.reflect.KClass
 
 internal infix fun <T : Any> KClass<T>.processReader(
@@ -37,7 +37,7 @@ private infix fun <T : Any> List<T>.getPage(pagination: Reader.Pagination):
 
 private fun <V : Any> Map<String, V>.withoutBlankKeys():
         Map<NotBlankString, V> = mapKeys {
-    it.key.notBlankOrNull
+    it.key.toNotBlankStringOrNull()
         ?: error("CSV file's header shouldn't contain an empty string")
 }
 

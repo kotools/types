@@ -1,7 +1,7 @@
 package io.github.kotools.csv.common
 
 import io.github.kotools.csv.writer.Writer
-import io.github.kotools.types.string.NotBlankString
+import kotools.types.string.NotBlankString
 import java.io.File
 import java.io.InputStream
 import java.nio.file.Path
