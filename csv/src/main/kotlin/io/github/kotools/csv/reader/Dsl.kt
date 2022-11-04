@@ -6,6 +6,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import kotools.csv.SinceKotoolsCsv
 import kotlin.reflect.KClass
 
 /**
@@ -16,6 +17,7 @@ import kotlin.reflect.KClass
  * - the targeted file doesn't exist
  * - the targeted file's header line contains an empty string.
  */
+@SinceKotoolsCsv("2.0")
 public suspend inline fun <reified T : Any> csvReader(
     noinline configuration: Reader<T>.() -> Unit
 ): List<T> = csvReader(T::class, configuration)
@@ -28,6 +30,7 @@ public suspend inline fun <reified T : Any> csvReader(
  * - the targeted file doesn't exist
  * - the targeted file's header line contains an empty string.
  */
+@SinceKotoolsCsv("2.0")
 public suspend fun <T : Any> csvReader(
     type: KClass<T>,
     configuration: Reader<T>.() -> Unit
@@ -41,6 +44,7 @@ public suspend fun <T : Any> csvReader(
  * - the targeted file doesn't exist
  * - the targeted file's header line contains an empty string.
  */
+@SinceKotoolsCsv("2.0")
 public suspend inline fun <reified T : Any> csvReaderOrNull(
     noinline configuration: Reader<T>.() -> Unit
 ): List<T>? = csvReaderOrNull(T::class, configuration)
@@ -53,6 +57,7 @@ public suspend inline fun <reified T : Any> csvReaderOrNull(
  * - the targeted file doesn't exist
  * - the targeted file's header line contains an empty string.
  */
+@SinceKotoolsCsv("2.0")
 public suspend fun <T : Any> csvReaderOrNull(
     type: KClass<T>,
     configuration: Reader<T>.() -> Unit
@@ -66,6 +71,7 @@ public suspend fun <T : Any> csvReaderOrNull(
  * - the targeted file doesn't exist
  * - the targeted file's header line contains an empty string.
  */
+@SinceKotoolsCsv("2.0")
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
     noinline configuration: Reader<T>.() -> Unit
 ): Deferred<List<T>> = async { csvReader(configuration) }
@@ -78,11 +84,13 @@ public inline infix fun <reified T : Any> CoroutineScope.csvReaderAsync(
  * - the targeted file doesn't exist
  * - the targeted file's header line contains an empty string.
  */
+@SinceKotoolsCsv("2.0")
 public inline infix fun <reified T : Any> CoroutineScope.csvReaderOrNullAsync(
     noinline configuration: Reader<T>.() -> Unit
 ): Deferred<List<T>?> = async { csvReaderOrNull(configuration) }
 
 /** Scope for reading a CSV file. */
+@SinceKotoolsCsv("2.0")
 public sealed interface Reader<T : Any> : Manager {
     /**
      * **Optional** function for filtering records according to the given
@@ -94,6 +102,7 @@ public sealed interface Reader<T : Any> : Manager {
     public fun pagination(configuration: Pagination.() -> Unit)
 
     /** Configurable object responsible for defining records pagination. */
+    @SinceKotoolsCsv("2.1")
     public sealed interface Pagination {
         /**
          * **Required** property for setting the page number to return.

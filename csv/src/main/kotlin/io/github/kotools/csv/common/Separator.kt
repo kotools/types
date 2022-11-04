@@ -1,6 +1,9 @@
 package io.github.kotools.csv.common
 
+import kotools.csv.SinceKotoolsCsv
+
 /** Representation of the character that separates values in a CSV file. */
+@SinceKotoolsCsv("2.0")
 public sealed class Separator
 private constructor(internal val value: Char) {
     private class Comma : Separator(',')

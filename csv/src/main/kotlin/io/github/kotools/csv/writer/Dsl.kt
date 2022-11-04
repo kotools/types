@@ -6,6 +6,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import kotools.csv.SinceKotoolsCsv
 import kotlin.reflect.KClass
 
 /**
@@ -14,6 +15,7 @@ import kotlin.reflect.KClass
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid.
  */
+@SinceKotoolsCsv("2.0")
 public suspend inline fun <reified T : Any> csvWriter(
     noinline configuration: Writer<T>.() -> Unit
 ): Unit = csvWriter(T::class, configuration)
@@ -24,6 +26,7 @@ public suspend inline fun <reified T : Any> csvWriter(
  * - the [type] is not a public or internal data class
  * - the [configuration] is invalid.
  */
+@SinceKotoolsCsv("2.0")
 public suspend fun <T : Any> csvWriter(
     type: KClass<T>,
     configuration: Writer<T>.() -> Unit
@@ -35,6 +38,7 @@ public suspend fun <T : Any> csvWriter(
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid.
  */
+@SinceKotoolsCsv("2.0")
 public suspend inline fun <reified T : Any> csvWriterOrNull(
     noinline configuration: Writer<T>.() -> Unit
 ): Unit? = csvWriterOrNull(T::class, configuration)
@@ -45,6 +49,7 @@ public suspend inline fun <reified T : Any> csvWriterOrNull(
  * - the [type] is not a public or internal data class
  * - the [configuration] is invalid.
  */
+@SinceKotoolsCsv("2.0")
 public suspend fun <T : Any> csvWriterOrNull(
     type: KClass<T>,
     configuration: Writer<T>.() -> Unit
@@ -56,6 +61,7 @@ public suspend fun <T : Any> csvWriterOrNull(
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid.
  */
+@SinceKotoolsCsv("2.0.2")
 public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsync(
     noinline configuration: Writer<T>.() -> Unit
 ): Deferred<Unit> = async { csvWriter(configuration) }
@@ -66,11 +72,13 @@ public inline infix fun <reified T : Any> CoroutineScope.csvWriterAsync(
  * - the type [T] is not a public or internal data class
  * - the [configuration] is invalid.
  */
+@SinceKotoolsCsv("2.0")
 public inline infix fun <reified T : Any> CoroutineScope.csvWriterOrNullAsync(
     noinline configuration: Writer<T>.() -> Unit
 ): Deferred<Unit?> = async { csvWriterOrNull(configuration) }
 
 /** Scope for writing records with a given type [T] in a CSV file. */
+@SinceKotoolsCsv("2.0")
 public sealed interface Writer<in T : Any> : Manager {
     /**
      * **Optional** flag for overwriting the [file]'s content.
