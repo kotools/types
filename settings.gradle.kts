@@ -24,5 +24,5 @@ dependencyResolutionManagement.versionCatalogs {
         library("csv", kotools("csv", "[2.2,2.3["))
         library("types", kotools("types", "[3.1,3.2["))
     }
-    create("slf4j") { library("simple", "org.slf4j:slf4j-simple:[1.7,1.8[") }
+    create("slf4j") { library("simple", "org.slf4j:slf4j-simple:[2.0,2.1[") }
 }
