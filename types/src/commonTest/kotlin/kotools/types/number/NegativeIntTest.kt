@@ -62,11 +62,12 @@ class NegativeIntTest {
     // ---------- Binary operations ----------
 
     @Test
-    fun div_should_pass_with_a_StrictlyPositiveInt(): Unit =
-        (NegativeInt.random() to StrictlyPositiveInt.random())
-            .runMap({ first / second }) { first.value / second.value }
-            .mapFirst(NegativeInt::value)
-            .assertEquals()
+    fun div_should_pass_with_a_StrictlyPositiveInt() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: StrictlyPositiveInt = randomStrictlyPositiveInt()
+        val result: NegativeInt = x / y
+        result.value assertEquals x.value / y.value
+    }
 
     @Test
     fun div_should_pass_with_a_StrictlyNegativeInt() {

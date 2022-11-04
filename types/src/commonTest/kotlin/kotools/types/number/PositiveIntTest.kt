@@ -73,7 +73,7 @@ class PositiveIntTest {
     @Test
     fun div_should_pass_with_a_StrictlyPositiveInt() {
         val x: PositiveInt = randomPositiveInt()
-        val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val y: StrictlyPositiveInt = randomStrictlyPositiveInt()
         val result: PositiveInt = x / y
         result.value assertEquals x.value / y.value
     }

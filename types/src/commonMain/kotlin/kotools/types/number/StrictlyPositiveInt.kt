@@ -43,6 +43,12 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     takeIf { it > 0 }
         ?.let(::StrictlyPositiveIntImplementation)
 
+/** Returns a random [StrictlyPositiveInt]. */
+@SinceKotoolsTypes("3.2")
+public fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
+    StrictlyPositiveInt.range.random()
+        .toStrictlyPositiveInt()
+
 /** Representation of strictly positive integers, excluding zero. */
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -90,6 +96,13 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
             value.toStrictlyPositiveIntOrNull()
 
         /** Returns a random [StrictlyPositiveInt]. */
+        @Deprecated(
+            "Use the randomStrictlyPositiveInt function instead.",
+            ReplaceWith(
+                "randomStrictlyPositiveInt()",
+                "kotools.types.number.randomStrictlyPositiveInt"
+            )
+        )
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyPositiveInt = range.random()
             .toStrictlyPositiveInt()

@@ -11,7 +11,7 @@ class IntHolderTest : RandomValueHolder {
     private val randomHolders: Set<IntHolder> = setOf(
         randomNonZeroInt(),
         randomPositiveInt(),
-        StrictlyPositiveInt.random(),
+        randomStrictlyPositiveInt(),
         NegativeInt.random(),
         StrictlyNegativeInt.random()
     )
