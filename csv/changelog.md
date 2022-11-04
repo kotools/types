@@ -17,17 +17,19 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
-### Fixed
-
-Fix pagination and filter ordering in the reader: the filter is now applied
-**before** the pagination ([#8](https://github.com/kotools/libraries/issues/8)).
-
 ## Version 2.2.0 - 2022/03/23
 
 ### Added
 
 Integrate [Kotools Types](https://github.com/kotools/types) library
 ([#42](https://github.com/kotools/csv/issues/42)).
+
+## Version 2.1.2 - 2022/11/04
+
+### Fixed
+
+Fix pagination and filter ordering in the reader: the filter is now applied
+**before** the pagination ([#8](https://github.com/kotools/libraries/issues/8)).
 
 ## Version 2.1.1 - 2022/02/10
 
