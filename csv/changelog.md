@@ -17,6 +17,10 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 2.2.1 - 2022/11/04
+
+> This version contains every changes included in `v2.0.2` and `v2.1.2`.
+
 ## Version 2.2.0 - 2022/03/23
 
 ### Added
