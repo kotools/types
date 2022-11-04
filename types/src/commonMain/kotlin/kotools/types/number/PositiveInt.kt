@@ -102,7 +102,8 @@ public sealed interface PositiveInt : IntHolder {
 
         /** Returns a random [PositiveInt]. */
         @Deprecated(
-            "Use the randomPositiveInt function instead.",
+            "Use the randomPositiveInt function instead. " +
+                    "Will be an error in v3.3.",
             ReplaceWith(
                 "randomPositiveInt()",
                 "kotools.types.number.randomPositiveInt"

@@ -126,7 +126,8 @@ public sealed interface NonZeroInt : IntHolder {
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
-            "Use the randomNonZeroInt function instead.",
+            "Use the randomNonZeroInt function instead. " +
+                    "Will be an error in v3.3.",
             ReplaceWith(
                 "randomNonZeroInt()",
                 "kotools.types.number.randomNonZeroInt"
