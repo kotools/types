@@ -6,13 +6,6 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
-/** Error returned or thrown when creating a non-zero number fails. */
-@SinceKotoolsTypes("3.2")
-public sealed class NonZeroBuilderError :
-    IllegalArgumentException("NonZeroInt doesn't accept 0.")
-
-private object NonZeroBuilderErrorObject : NonZeroBuilderError()
-
 // ---------- Builders ----------
 
 /*
@@ -21,11 +14,11 @@ when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
 Also, because of the signature of this function, make sure to export the API of
 Arrow Core with this library within the Gradle build script.
  */
-private fun nonZeroInt(value: Int): Either<NonZeroBuilderError, NonZeroInt> =
+private fun nonZeroInt(value: Int): Either<NonZeroDslError, NonZeroInt> =
     value.takeIf { it != 0 }
         ?.let(::NonZeroIntImplementation)
         ?.right()
-        ?: NonZeroBuilderErrorObject.left()
+        ?: NonZeroDslErrorImplementation.left()
 
 // This function will be available publicly with the nonZeroInt(Int) function.
 private inline fun nonZeroIntOrElse(
@@ -42,11 +35,11 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? =
     nonZeroInt(value).orNull()
 
 /**
- * Returns the [value] as a [NonZeroInt], or throws an [NonZeroBuilderError] if
- * the [value] equals zero.
+ * Returns the [value] as a [NonZeroInt], or throws an [NonZeroDslError] if the
+ * [value] equals zero.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(NonZeroBuilderError::class)
+@Throws(NonZeroDslError::class)
 public fun nonZeroIntOrThrow(value: Int): NonZeroInt =
     nonZeroInt(value).getOrHandle { throw it }
 
@@ -103,11 +96,11 @@ public fun Int.toNonZeroInt(): NonZeroInt =
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
 /**
- * Returns this value as a [NonZeroInt], or throws a [NonZeroBuilderError] if
- * this value equals zero.
+ * Returns this value as a [NonZeroInt], or throws a [NonZeroDslError] if this
+ * value equals zero.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(NonZeroBuilderError::class)
+@Throws(NonZeroDslError::class)
 public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
@@ -203,7 +196,7 @@ public sealed interface NonZeroInt : IntHolder {
         )
     )
     @SinceKotoolsTypes("3.0")
-    public object ConstructionError : NonZeroBuilderError()
+    public object ConstructionError : NonZeroDslError()
 }
 
 internal object NonZeroIntSerializer :
