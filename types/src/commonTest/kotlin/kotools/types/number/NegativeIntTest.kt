@@ -15,9 +15,22 @@ class NegativeIntTest {
     @Test
     fun max_should_be_zero(): Unit = NegativeInt.max.value assertEquals 0
 
+    @Suppress("DEPRECATION")
     @Test
-    fun random_should_return_different_values(): Unit =
-        NegativeInt.random().value assertNotEquals NegativeInt.random().value
+    fun random_should_return_different_values() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: NegativeInt = NegativeInt.random()
+        x.value assertNotEquals y.value
+    }
+
+    // ---------- Builders ----------
+
+    @Test
+    fun randomNegativeInt_should_return_different_values() {
+        val x: NegativeInt = randomNegativeInt()
+        val y: NegativeInt = randomNegativeInt()
+        x.value assertNotEquals y.value
+    }
 
     // ---------- Unary operations ----------
 
@@ -30,8 +43,8 @@ class NegativeIntTest {
 
     @Test
     fun inc_should_increment_the_value_by_one_with_an_initial_value_other_than_the_maximum() {
-        var x: NegativeInt = NegativeInt.random()
-        while (x.value == NegativeInt.max.value) x = NegativeInt.random()
+        var x: NegativeInt = randomNegativeInt()
+        while (x.value == NegativeInt.max.value) x = randomNegativeInt()
         val initialValue: Int = x.value
         x++
         x.value assertEquals initialValue + 1
@@ -46,24 +59,25 @@ class NegativeIntTest {
 
     @Test
     fun dec_should_decrement_the_value_by_one_with_an_initial_value_other_than_the_minimum() {
-        var x: NegativeInt = NegativeInt.random()
-        while (x.value == NegativeInt.min.value) x = NegativeInt.random()
+        var x: NegativeInt = randomNegativeInt()
+        while (x.value == NegativeInt.min.value) x = randomNegativeInt()
         val initialValue: Int = x.value
         x--
         x.value assertEquals initialValue - 1
     }
 
     @Test
-    fun unaryMinus_should_pass(): Unit = NegativeInt.random()
-        .pairBy { -it }
-        .runMap({ first.value }) { -second.value }
-        .assertEquals()
+    fun unaryMinus_should_pass() {
+        val x: NegativeInt = randomNegativeInt()
+        val result: PositiveInt = -x
+        result.value assertEquals -x.value
+    }
 
     // ---------- Binary operations ----------
 
     @Test
     fun div_should_pass_with_a_StrictlyPositiveInt() {
-        val x: NegativeInt = NegativeInt.random()
+        val x: NegativeInt = randomNegativeInt()
         val y: StrictlyPositiveInt = randomStrictlyPositiveInt()
         val result: NegativeInt = x / y
         result.value assertEquals x.value / y.value
@@ -71,23 +85,24 @@ class NegativeIntTest {
 
     @Test
     fun div_should_pass_with_a_StrictlyNegativeInt() {
-        (NegativeInt.random() to StrictlyNegativeInt.random())
-            .runMap({ first / second }) { first.value / second.value }
-            .mapFirst(PositiveInt::value)
-            .assertEquals()
+        val x: NegativeInt = randomNegativeInt()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val result: PositiveInt = x / y
+        result.value assertEquals x.value / y.value
     }
 
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = NegativeInt.random()
-        .pairBy(NegativeInt::toString)
-        .runMapSecond { value.toString() }
-        .assertEquals()
+    fun toString_should_pass() {
+        val x: NegativeInt = randomNegativeInt()
+        val result: String = x.toString()
+        result assertEquals x.value.toString()
+    }
 }
 
 @Suppress("unused")
 class NegativeIntSerializerTest : IntHolderSerializerTest<NegativeInt>(
     NegativeIntSerializer,
-    NegativeInt.Companion::random
+    ::randomNegativeInt
 )

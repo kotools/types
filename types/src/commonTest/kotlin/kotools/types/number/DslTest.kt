@@ -11,7 +11,7 @@ class IntHolderDslTest {
         nonZero to randomNonZeroInt().value,
         positive to randomPositiveInt().value,
         strictlyPositive to randomStrictlyPositiveInt().value,
-        negative to NegativeInt.random().value,
+        negative to randomNegativeInt().value,
         strictlyNegative to StrictlyNegativeInt.random().value
     ).forEach {
         val result: IntHolder? = it.key intOrNull it.value
@@ -22,7 +22,7 @@ class IntHolderDslTest {
     fun intOrNull_should_return_null_with_an_invalid_value(): Unit = mapOf(
         nonZero to 0,
         positive to StrictlyNegativeInt.random().value,
-        strictlyPositive to NegativeInt.random().value,
+        strictlyPositive to randomNegativeInt().value,
         negative to randomStrictlyPositiveInt().value,
         strictlyNegative to randomPositiveInt().value
     ).forEach {

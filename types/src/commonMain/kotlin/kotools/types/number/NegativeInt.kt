@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -40,6 +41,11 @@ public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
 public fun Int.toNegativeIntOrNull(): NegativeInt? = takeIf { it <= 0 }
     ?.let(::NegativeIntImplementation)
 
+/** Returns a random [NegativeInt]. */
+@SinceKotoolsTypes("3.2")
+public fun randomNegativeInt(): NegativeInt =
+    negative int NegativeInt.range.random()
+
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -72,7 +78,7 @@ public sealed interface NegativeInt : IntHolder {
 
     /** Contains declarations for holding or building a [NegativeInt]. */
     public companion object {
-        private val range: IntRange by lazy { Int.MIN_VALUE..0 }
+        internal val range: IntRange by lazy { Int.MIN_VALUE..0 }
 
         /** The minimum value of a [NegativeInt]. */
         public val min: NegativeInt by lazy { negative int range.first }
@@ -81,6 +87,13 @@ public sealed interface NegativeInt : IntHolder {
         public val max: NegativeInt by lazy { negative int range.last }
 
         /** Returns a random [NegativeInt]. */
+        @Deprecated(
+            "Use the randomNegativeInt function instead.",
+            ReplaceWith(
+                "randomNegativeInt()",
+                "${Package.number}.randomNegativeInt"
+            )
+        )
         @SinceKotoolsTypes("3.0")
         public fun random(): NegativeInt = negative int range.random()
     }

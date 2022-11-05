@@ -12,7 +12,7 @@ class IntHolderTest : RandomValueHolder {
         randomNonZeroInt(),
         randomPositiveInt(),
         randomStrictlyPositiveInt(),
-        NegativeInt.random(),
+        randomNegativeInt(),
         StrictlyNegativeInt.random()
     )
 
