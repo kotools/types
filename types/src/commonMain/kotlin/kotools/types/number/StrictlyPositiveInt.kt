@@ -81,21 +81,6 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
             strictlyPositive int range.last
         }
 
-        /**
-         * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if
-         * the [value] equals 0.
-         */
-        @Deprecated(
-            "Use the StrictlyPositiveIntOrNull function instead.",
-            ReplaceWith(
-                "StrictlyPositiveIntOrNull(value)",
-                "${Package.number}.StrictlyPositiveIntOrNull"
-            ),
-            DeprecationLevel.ERROR
-        )
-        public infix fun orNull(value: Int): StrictlyPositiveInt? =
-            value.toStrictlyPositiveIntOrNull()
-
         /** Returns a random [StrictlyPositiveInt]. */
         @Deprecated(
             "Use the randomStrictlyPositiveInt function instead. " +

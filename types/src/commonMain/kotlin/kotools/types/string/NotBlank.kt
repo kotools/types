@@ -6,7 +6,6 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
@@ -117,24 +116,6 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
      */
     public operator fun plus(other: Any?): NotBlankString =
         NotBlankString(value + other)
-
-    /** Contains declarations for holding or building a [PositiveInt]. */
-    public companion object {
-        /**
-         * Returns the [value] as a [NotBlankString], or returns `null` if the
-         * [value] is blank.
-         */
-        @Deprecated(
-            "Use the NotBlankStringOrNull function instead.",
-            ReplaceWith(
-                "NotBlankStringOrNull(value)",
-                "${Package.string}.NotBlankStringOrNull"
-            ),
-            DeprecationLevel.ERROR
-        )
-        public infix fun orNull(value: String): NotBlankString? =
-            value.toNotBlankStringOrNull()
-    }
 
     /** Error thrown when creating a [NotBlankString] fails. */
     @SinceKotoolsTypes("3.0")

@@ -1,7 +1,6 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -80,21 +79,6 @@ public sealed interface NegativeInt : IntHolder {
 
         /** The maximum value of a [NegativeInt]. */
         public val max: NegativeInt by lazy { negative int range.last }
-
-        /**
-         * Returns the [value] as a [NegativeInt], or returns `null` if the
-         * [value] equals 0.
-         */
-        @Deprecated(
-            "Use the NegativeIntOrNull function instead.",
-            ReplaceWith(
-                "NegativeIntOrNull(value)",
-                "${Package.number}.NegativeIntOrNull"
-            ),
-            DeprecationLevel.ERROR
-        )
-        public infix fun orNull(value: Int): NegativeInt? =
-            negative intOrNull value
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")

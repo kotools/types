@@ -6,29 +6,9 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 
 // ---------- Builders ----------
-
-/**
- * Creates a [NotEmptyList] starting with a [head] and containing all the
- * elements of the optional [tail].
- */
-@Deprecated(
-    "Use the notEmptyListOf function instead.",
-    ReplaceWith(
-        "notEmptyListOf<E>(head, *tail)",
-        "${Package.collections}.notEmptyListOf"
-    ),
-    DeprecationLevel.ERROR
-)
-@SinceKotoolsTypes("1.3")
-@Suppress("FunctionName")
-public fun <E> NotEmptyList(head: E, vararg tail: E): NotEmptyList<E> {
-    val list: List<E> = tail.toList()
-    return NotEmptyList(head, list)
-}
 
 @Suppress("FunctionName")
 private fun <E> NotEmptyList(head: E, tail: List<E>): NotEmptyList<E> {

@@ -17,6 +17,13 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### All platforms
+
+#### Removed
+
+Deprecated declarations with error level from v3.1
+([#21](https://github.com/kotools/libraries/issues/21)).
+
 ## Version 3.1.0 - 2022/10/24
 
 ### All platforms
