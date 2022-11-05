@@ -47,8 +47,7 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
 /** Returns a random [StrictlyPositiveInt]. */
 @SinceKotoolsTypes("3.2")
 public fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
-    StrictlyPositiveInt.range.random()
-        .toStrictlyPositiveInt()
+    strictlyPositive int StrictlyPositiveInt.range.random()
 
 /** Representation of strictly positive integers, excluding zero. */
 @Serializable(StrictlyPositiveIntSerializer::class)
