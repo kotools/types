@@ -19,6 +19,23 @@ All notable changes to this project will be documented in this file.
 
 ### All platforms
 
+#### Changed
+
+Update random API for getting a random `IntHolder`
+([#17](https://github.com/kotools/libraries/issues/17)).
+
+#### Deprecated
+
+The `random` function in the companion object of subtypes `IntHolder`
+([#17](https://github.com/kotools/libraries/issues/17)):
+
+```kotlin
+// Instead of doing...
+NonZeroInt.random()
+// do this
+randomNonZeroInt()
+```
+
 #### Removed
 
 Deprecated declarations with error level from v3.1
