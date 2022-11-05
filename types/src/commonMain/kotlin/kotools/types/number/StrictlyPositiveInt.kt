@@ -83,8 +83,10 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 
         /** Returns a random [StrictlyPositiveInt]. */
         @Deprecated(
-            "Use the randomStrictlyPositiveInt function instead. " +
-                    "Will be an error in v3.3.",
+            """
+                Use the randomStrictlyPositiveInt function instead.
+                Will be an error in v3.3.
+            """,
             ReplaceWith(
                 "randomStrictlyPositiveInt()",
                 "${Package.number}.randomStrictlyPositiveInt"

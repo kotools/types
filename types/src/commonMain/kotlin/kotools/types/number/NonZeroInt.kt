@@ -14,11 +14,11 @@ when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
 Also, because of the signature of this function, make sure to export the API of
 Arrow Core with this library within the Gradle build script.
  */
-private fun nonZeroInt(value: Int): Either<NonZeroDslError, NonZeroInt> =
+private fun nonZeroInt(value: Int): Either<NonZeroNumberDslError, NonZeroInt> =
     value.takeIf { it != 0 }
         ?.let(::NonZeroIntImplementation)
         ?.right()
-        ?: NonZeroDslErrorImplementation.left()
+        ?: NonZeroNumberDslErrorImplementation.left()
 
 // This function will be available publicly with the nonZeroInt(Int) function.
 private inline fun nonZeroIntOrElse(
@@ -35,11 +35,11 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? =
     nonZeroInt(value).orNull()
 
 /**
- * Returns the [value] as a [NonZeroInt], or throws an [NonZeroDslError] if the
- * [value] equals zero.
+ * Returns the [value] as a [NonZeroInt], or throws an [NonZeroNumberDslError]
+ * if the [value] equals zero.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(NonZeroDslError::class)
+@Throws(NonZeroNumberDslError::class)
 public fun nonZeroIntOrThrow(value: Int): NonZeroInt =
     nonZeroInt(value).getOrHandle { throw it }
 
@@ -48,7 +48,10 @@ public fun nonZeroIntOrThrow(value: Int): NonZeroInt =
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrThrow(Int) function instead. Will be an error in v3.3.",
+    """
+        Use the nonZeroIntOrThrow(Int) function instead.
+        Will be an error in v3.3.
+    """,
     ReplaceWith(
         "nonZeroIntOrThrow(value)",
         "${Package.number}.nonZeroIntOrThrow"
@@ -76,7 +79,10 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
 @Deprecated(
-    "Use the Int.toNonZeroIntOrThrow function instead. Will be an error in v3.3.",
+    """
+        Use the Int.toNonZeroIntOrThrow function instead.
+        Will be an error in v3.3.
+    """,
     ReplaceWith(
         "this.toNonZeroIntOrThrow()",
         "${Package.number}.toNonZeroIntOrThrow"
@@ -96,11 +102,11 @@ public fun Int.toNonZeroInt(): NonZeroInt =
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
 /**
- * Returns this value as a [NonZeroInt], or throws a [NonZeroDslError] if this
- * value equals zero.
+ * Returns this value as a [NonZeroInt], or throws a [NonZeroNumberDslError]
+ * if this value equals zero.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(NonZeroDslError::class)
+@Throws(NonZeroNumberDslError::class)
 public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
@@ -175,8 +181,10 @@ public sealed interface NonZeroInt : IntHolder {
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
-            "Use the randomNonZeroInt function instead. " +
-                    "Will be an error in v3.3.",
+            """
+                Use the randomNonZeroInt function instead.
+                Will be an error in v3.3.
+            """,
             ReplaceWith(
                 "randomNonZeroInt()",
                 "${Package.number}.randomNonZeroInt"
@@ -197,7 +205,7 @@ public sealed interface NonZeroInt : IntHolder {
         )
     )
     @SinceKotoolsTypes("3.0")
-    public object ConstructionError : NonZeroDslError()
+    public object ConstructionError : NonZeroNumberDslError()
 }
 
 internal object NonZeroIntSerializer :

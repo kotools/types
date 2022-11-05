@@ -1,5 +1,9 @@
 package kotools.types.number
 
+import arrow.core.Either
+import arrow.core.getOrHandle
+import arrow.core.left
+import arrow.core.right
 import kotlinx.serialization.Serializable
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
@@ -7,11 +11,44 @@ import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
+/*
+For API compatibility purpose, this function will be available publicly only
+when the PositiveInt(Int) function is going to be removed (maybe in v3.4).
+Also, because of the signature of this function, make sure to export the API of
+Arrow Core with this library within the Gradle build script.
+ */
+private fun positiveInt(
+    value: Int
+): Either<PositiveNumberDslError, PositiveInt> = value.takeIf { it >= 0 }
+    ?.let(::PositiveIntImplementation)
+    ?.right()
+    ?: PositiveNumberDslErrorImplementation(value).left()
+
+/**
+ * Returns the [value] as a [PositiveInt], or throws an [PositiveNumberDslError]
+ * if the [value] is strictly negative.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(PositiveNumberDslError::class)
+public fun positiveIntOrThrow(value: Int): PositiveInt =
+    positiveInt(value).getOrHandle { throw it }
+
 /**
  * Returns the [value] as a [PositiveInt], or throws an
  * [PositiveInt.ConstructionError] if the [value] is strictly negative.
  */
+@Deprecated(
+    """
+        Use the positiveIntOrThrow(Int) function instead.
+        Will be an error in v3.3.
+    """,
+    ReplaceWith(
+        "positiveIntOrThrow(value)",
+        "${Package.number}.positiveIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
 public fun PositiveInt(value: Int): PositiveInt = positive int value
 
@@ -29,6 +66,7 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
  * [PositiveInt.ConstructionError] if this value is strictly negative.
  */
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
 public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
     ?: throw PositiveInt.ConstructionError(this)
@@ -88,8 +126,10 @@ public sealed interface PositiveInt : IntHolder {
 
         /** Returns a random [PositiveInt]. */
         @Deprecated(
-            "Use the randomPositiveInt function instead. " +
-                    "Will be an error in v3.3.",
+            """
+                Use the randomPositiveInt function instead.
+                Will be an error in v3.3.
+            """,
             ReplaceWith(
                 "randomPositiveInt()",
                 "${Package.number}.randomPositiveInt"
@@ -101,11 +141,18 @@ public sealed interface PositiveInt : IntHolder {
     }
 
     /** Error thrown when creating a [PositiveInt] fails. */
-    @SinceKotoolsTypes("3.0")
-    public class ConstructionError(value: Int) : IllegalArgumentException(
-        "PositiveInt doesn't accept strictly negative values (tried with " +
-                "$value)."
+    @Deprecated(
+        """
+            Use the PositiveNumberDslError type instead.
+            Will be an error in v3.3.
+        """,
+        ReplaceWith(
+            "PositiveNumberDslError",
+            "${Package.number}.PositiveNumberDslError"
+        )
     )
+    @SinceKotoolsTypes("3.0")
+    public class ConstructionError(value: Int) : PositiveNumberDslError(value)
 }
 
 internal object PositiveIntSerializer :

@@ -51,7 +51,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun nonZeroIntOrThrow_should_throw_an_error_with_zero() {
-        assertFailsWith<NonZeroDslError> { nonZeroIntOrThrow(0) }
+        assertFailsWith<NonZeroNumberDslError> { nonZeroIntOrThrow(0) }
             .message
             ?.toNotBlankStringOrNull()
             .assertNotNull()
@@ -79,7 +79,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun int_toNonZeroIntOrThrow_should_throw_an_error_with_zero() {
-        assertFailsWith<NonZeroDslError>(0::toNonZeroIntOrThrow)
+        assertFailsWith<NonZeroNumberDslError>(0::toNonZeroIntOrThrow)
             .message
             ?.toNotBlankStringOrNull()
             .assertNotNull()
