@@ -25,6 +25,14 @@ private fun positiveInt(
     ?: PositiveNumberDslErrorImplementation(value).left()
 
 /**
+ * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
+ * strictly negative.
+ */
+@SinceKotoolsTypes("3.2")
+public fun positiveIntOrNull(value: Int): PositiveInt? =
+    positiveInt(value).orNull()
+
+/**
  * Returns the [value] as a [PositiveInt], or throws an [PositiveNumberDslError]
  * if the [value] is strictly negative.
  */
@@ -38,10 +46,7 @@ public fun positiveIntOrThrow(value: Int): PositiveInt =
  * [PositiveInt.ConstructionError] if the [value] is strictly negative.
  */
 @Deprecated(
-    """
-        Use the positiveIntOrThrow(Int) function instead.
-        Will be an error in v3.3.
-    """,
+    "Use the positiveIntOrThrow function instead. Will be an error in v3.3.",
     ReplaceWith(
         "positiveIntOrThrow(value)",
         "${Package.number}.positiveIntOrThrow"
@@ -56,6 +61,13 @@ public fun PositiveInt(value: Int): PositiveInt = positive int value
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
  * strictly negative.
  */
+@Deprecated(
+    "Use the positiveIntOrNull function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "positiveIntOrNull(value)",
+        "${Package.number}.positiveIntOrNull"
+    )
+)
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
