@@ -15,10 +15,22 @@ class StrictlyNegativeIntTest {
     fun max_should_be_minus1(): Unit =
         StrictlyNegativeInt.max.value assertEquals -1
 
+    @Suppress("DEPRECATION")
     @Test
-    fun random_should_return_different_values(): Unit = StrictlyNegativeInt
-        .random()
-        .value assertNotEquals StrictlyNegativeInt.random().value
+    fun random_should_return_different_values() {
+        val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        x.value assertNotEquals y.value
+    }
+
+    // ---------- Builders ----------
+
+    @Test
+    fun randomStrictlyNegativeInt_should_return_different_values() {
+        val x: StrictlyNegativeInt = randomStrictlyNegativeInt()
+        val y: StrictlyNegativeInt = randomStrictlyNegativeInt()
+        x.value assertNotEquals y.value
+    }
 
     // ---------- Unary operations ----------
 
@@ -31,9 +43,9 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun inc_should_increment_the_value_by_one_with_an_initial_value_other_than_the_maximum() {
-        var x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        var x: StrictlyNegativeInt = randomStrictlyNegativeInt()
         while (x.value == StrictlyNegativeInt.max.value)
-            x = StrictlyNegativeInt.random()
+            x = randomStrictlyNegativeInt()
         val initialValue: Int = x.value
         x++
         x.value assertEquals initialValue + 1
@@ -48,32 +60,34 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun dec_should_decrement_the_value_by_one_with_an_initial_value_other_than_the_minimum() {
-        var x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        var x: StrictlyNegativeInt = randomStrictlyNegativeInt()
         while (x.value == StrictlyNegativeInt.min.value)
-            x = StrictlyNegativeInt.random()
+            x = randomStrictlyNegativeInt()
         val initialValue: Int = x.value
         x--
         x.value assertEquals initialValue - 1
     }
 
     @Test
-    fun unaryMinus_should_pass(): Unit = StrictlyNegativeInt.random()
-        .pairBy { -it }
-        .runMap({ first.value }) { -second.value }
-        .assertEquals()
+    fun unaryMinus_should_pass() {
+        val x: StrictlyNegativeInt = randomStrictlyNegativeInt()
+        val result: StrictlyPositiveInt = -x
+        result.value assertEquals -x.value
+    }
 
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_pass(): Unit = StrictlyNegativeInt.random()
-        .pairBy(StrictlyNegativeInt::toString)
-        .runMapSecond { value.toString() }
-        .assertEquals()
+    fun toString_should_pass() {
+        val x: StrictlyNegativeInt = randomStrictlyNegativeInt()
+        val result: String = x.toString()
+        result assertEquals x.value.toString()
+    }
 }
 
 @Suppress("unused")
 class StrictlyNegativeIntSerializerTest :
     IntHolderSerializerTest<StrictlyNegativeInt>(
         StrictlyNegativeIntSerializer,
-        StrictlyNegativeInt.Companion::random
+        ::randomStrictlyNegativeInt
     )

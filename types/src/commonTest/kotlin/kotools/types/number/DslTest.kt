@@ -12,7 +12,7 @@ class IntHolderDslTest {
         positive to randomPositiveInt().value,
         strictlyPositive to randomStrictlyPositiveInt().value,
         negative to randomNegativeInt().value,
-        strictlyNegative to StrictlyNegativeInt.random().value
+        strictlyNegative to randomStrictlyNegativeInt().value
     ).forEach {
         val result: IntHolder? = it.key intOrNull it.value
         result.assertNotNull().value assertEquals it.value
@@ -21,7 +21,7 @@ class IntHolderDslTest {
     @Test
     fun intOrNull_should_return_null_with_an_invalid_value(): Unit = mapOf(
         nonZero to 0,
-        positive to StrictlyNegativeInt.random().value,
+        positive to randomStrictlyNegativeInt().value,
         strictlyPositive to randomNegativeInt().value,
         negative to randomStrictlyPositiveInt().value,
         strictlyNegative to randomPositiveInt().value

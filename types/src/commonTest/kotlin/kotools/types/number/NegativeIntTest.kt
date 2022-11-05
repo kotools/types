@@ -86,7 +86,7 @@ class NegativeIntTest {
     @Test
     fun div_should_pass_with_a_StrictlyNegativeInt() {
         val x: NegativeInt = randomNegativeInt()
-        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val y: StrictlyNegativeInt = randomStrictlyNegativeInt()
         val result: PositiveInt = x / y
         result.value assertEquals x.value / y.value
     }

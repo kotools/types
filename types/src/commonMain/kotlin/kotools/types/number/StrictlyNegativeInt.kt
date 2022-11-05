@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -43,6 +44,11 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     takeIf { it < 0 }
         ?.let(::StrictlyNegativeIntImplementation)
 
+/** Returns a random [StrictlyNegativeInt]. */
+@SinceKotoolsTypes("3.2")
+public fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
+    strictlyNegative int StrictlyNegativeInt.range.random()
+
 /** Representation of strictly negative integers, excluding zero. */
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -75,6 +81,13 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
         }
 
         /** Returns a random [StrictlyNegativeInt]. */
+        @Deprecated(
+            "Use the randomStrictlyNegativeInt function instead.",
+            ReplaceWith(
+                "randomStrictlyNegativeInt()",
+                "${Package.number}.randomStrictlyNegativeInt"
+            )
+        )
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyNegativeInt =
             strictlyNegative int range.random()
