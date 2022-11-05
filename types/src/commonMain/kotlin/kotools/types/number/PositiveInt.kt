@@ -43,8 +43,8 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
 
 /** Returns a random [PositiveInt]. */
 @SinceKotoolsTypes("3.2")
-public fun randomPositiveInt(): PositiveInt =
-    positive int PositiveInt.range.random()
+public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
+    .toPositiveInt()
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveIntSerializer::class)
