@@ -107,7 +107,7 @@ public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 @SinceKotoolsTypes("3.2")
 public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
     .random()
-    .let(::NonZeroIntImplementation)
+    .toNonZeroIntOrThrow()
 
 // ---------- Binary operations ----------
 

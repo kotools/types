@@ -43,8 +43,8 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = takeIf { it <= 0 }
 
 /** Returns a random [NegativeInt]. */
 @SinceKotoolsTypes("3.2")
-public fun randomNegativeInt(): NegativeInt =
-    negative int NegativeInt.range.random()
+public fun randomNegativeInt(): NegativeInt = NegativeInt.range.random()
+    .toNegativeInt()
 
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeIntSerializer::class)

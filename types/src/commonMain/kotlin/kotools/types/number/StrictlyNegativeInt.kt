@@ -47,7 +47,8 @@ public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 /** Returns a random [StrictlyNegativeInt]. */
 @SinceKotoolsTypes("3.2")
 public fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
-    strictlyNegative int StrictlyNegativeInt.range.random()
+    StrictlyNegativeInt.range.random()
+        .toStrictlyNegativeInt()
 
 /** Representation of strictly negative integers, excluding zero. */
 @Serializable(StrictlyNegativeIntSerializer::class)
