@@ -1,8 +1,6 @@
 package kotools.types
 
 import kotools.assert.assertEquals
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
 import kotools.types.number.PositiveInt
 import kotools.types.number.positive
 
@@ -17,11 +15,6 @@ inline fun <A, B> A.runPairWith(block: A.() -> B): Pair<A, B> = pairWith(block)
 // ---------- Assertions ----------
 
 fun <A> Pair<A, A>.assertEquals(): Unit = first assertEquals second
-
-fun <A, B> Pair<A?, B>.assertFirstIsNull(): Unit = first.assertNull()
-
-fun <A, B> Pair<A?, B>.assertFirstIsNotNull(): Pair<A, B> =
-    mapFirst { it.assertNotNull() }
 
 // ---------- Mappers ----------
 

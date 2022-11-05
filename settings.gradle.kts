@@ -3,6 +3,7 @@ include("assert", "csv", "types")
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement.versionCatalogs {
+    create("arrow") { library("core", "io.arrow-kt:arrow-core:1.0.1") }
     create("doyaaaaaken") {
         library("kotlin.csv", "com.github.doyaaaaaken:kotlin-csv:[1.2,1.3[")
     }

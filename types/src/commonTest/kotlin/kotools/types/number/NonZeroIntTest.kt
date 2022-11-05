@@ -3,6 +3,7 @@ package kotools.types.number
 import kotools.assert.*
 import kotools.types.*
 import kotools.types.core.RandomValueHolder
+import kotools.types.string.toNotBlankStringOrNull
 import kotlin.test.Test
 
 class NonZeroIntTest : RandomValueHolder {
@@ -27,6 +28,62 @@ class NonZeroIntTest : RandomValueHolder {
         NonZeroInt.random().value assertNotEquals NonZeroInt.random().value
 
     // ---------- Builders ----------
+
+    @Test
+    fun nonZeroIntOrNull_should_pass_with_a_non_zero_Int() {
+        val value: Int = randomNonZeroInt().value
+        val result: NonZeroInt? = nonZeroIntOrNull(value)
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun nonZeroIntOrNull_should_return_null_with_zero() {
+        val result: NonZeroInt? = nonZeroIntOrNull(0)
+        result.assertNull()
+    }
+
+    @Test
+    fun nonZeroIntOrThrow_should_pass_with_a_non_zero_Int() {
+        val value: Int = randomNonZeroInt().value
+        val result: NonZeroInt = nonZeroIntOrThrow(value)
+        result.value assertEquals value
+    }
+
+    @Test
+    fun nonZeroIntOrThrow_should_throw_an_error_with_zero() {
+        assertFailsWith<NonZeroBuilderError> { nonZeroIntOrThrow(0) }
+            .message
+            ?.toNotBlankStringOrNull()
+            .assertNotNull()
+    }
+
+    @Test
+    fun int_toNonZeroIntOrNull_should_pass_with_a_non_zero_Int() {
+        val value: Int = randomNonZeroInt().value
+        val result: NonZeroInt? = value.toNonZeroIntOrNull()
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun int_toNonZeroIntOrNull_should_return_null_with_zero() {
+        val result: NonZeroInt? = 0.toNonZeroIntOrNull()
+        result.assertNull()
+    }
+
+    @Test
+    fun int_toNonZeroIntOrThrow_should_pass_with_a_non_zero_Int() {
+        val value: Int = randomNonZeroInt().value
+        val result: NonZeroInt = value.toNonZeroIntOrThrow()
+        result.value assertEquals value
+    }
+
+    @Test
+    fun int_toNonZeroIntOrThrow_should_throw_an_error_with_zero() {
+        assertFailsWith<NonZeroBuilderError>(0::toNonZeroIntOrThrow)
+            .message
+            ?.toNotBlankStringOrNull()
+            .assertNotNull()
+    }
 
     @Test
     fun randomNonZeroInt_should_return_different_values() {

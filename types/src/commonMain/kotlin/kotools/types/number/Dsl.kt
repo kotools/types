@@ -25,7 +25,7 @@ public sealed interface IntHolderDsl<out T : IntHolder> {
 public val nonZero: IntHolderDsl<NonZeroInt> = NonZeroHolderDsl
 
 private object NonZeroHolderDsl : IntHolderDsl<NonZeroInt> {
-    override fun int(value: Int): NonZeroInt = value.toNonZeroInt()
+    override fun int(value: Int): NonZeroInt = value.toNonZeroIntOrThrow()
 }
 
 /** Context responsible for building a [PositiveInt]. */
