@@ -1,5 +1,6 @@
 package kotools.types.collections
 
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
@@ -18,7 +19,7 @@ import kotools.types.tryOrNull
     "The index should be a PositiveInt or a StrictlyPositiveInt.",
     ReplaceWith(
         "this.getOrElse(PositiveInt(index), defaultValue)",
-        "kotools.types.number.PositiveInt"
+        "${Package.number}.PositiveInt"
     ),
     DeprecationLevel.ERROR
 )
@@ -66,7 +67,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
         "The index should be a PositiveInt.",
         ReplaceWith(
             "this[PositiveInt(index)]",
-            "kotools.types.number.PositiveInt"
+            "${Package.number}.PositiveInt"
         ),
         DeprecationLevel.ERROR
     )
@@ -89,7 +90,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
         "The index should be a PositiveInt or a StrictlyPositiveInt.",
         ReplaceWith(
             "getOrNull(PositiveInt(index))",
-            "kotools.types.number.PositiveInt"
+            "${Package.number}.PositiveInt"
         ),
         DeprecationLevel.ERROR
     )

@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -117,7 +118,7 @@ public sealed interface NonZeroInt : IntHolder {
             "Use the NonZeroIntOrNull function instead.",
             ReplaceWith(
                 "NonZeroIntOrNull(value)",
-                "kotools.types.number.NonZeroIntOrNull"
+                "${Package.number}.NonZeroIntOrNull"
             ),
             DeprecationLevel.ERROR
         )
@@ -130,7 +131,7 @@ public sealed interface NonZeroInt : IntHolder {
                     "Will be an error in v3.3.",
             ReplaceWith(
                 "randomNonZeroInt()",
-                "kotools.types.number.randomNonZeroInt"
+                "${Package.number}.randomNonZeroInt"
             )
         )
         @SinceKotoolsTypes("3.0")

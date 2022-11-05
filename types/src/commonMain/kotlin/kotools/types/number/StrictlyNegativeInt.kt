@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -82,7 +83,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
             "Use the StrictlyNegativeIntOrNull function instead.",
             ReplaceWith(
                 "StrictlyNegativeIntOrNull(value)",
-                "kotools.types.number.StrictlyNegativeIntOrNull"
+                "${Package.number}.StrictlyNegativeIntOrNull"
             ),
             DeprecationLevel.ERROR
         )

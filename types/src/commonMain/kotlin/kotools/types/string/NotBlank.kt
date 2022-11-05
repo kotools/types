@@ -6,6 +6,7 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
@@ -127,7 +128,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
             "Use the NotBlankStringOrNull function instead.",
             ReplaceWith(
                 "NotBlankStringOrNull(value)",
-                "kotools.types.string.NotBlankStringOrNull"
+                "${Package.string}.NotBlankStringOrNull"
             ),
             DeprecationLevel.ERROR
         )

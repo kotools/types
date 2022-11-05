@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -93,7 +94,7 @@ public sealed interface PositiveInt : IntHolder {
             "Use the PositiveIntOrNull function instead.",
             ReplaceWith(
                 "PositiveIntOrNull(value)",
-                "kotools.types.number.PositiveIntOrNull"
+                "${Package.number}.PositiveIntOrNull"
             ),
             DeprecationLevel.ERROR
         )
@@ -106,7 +107,7 @@ public sealed interface PositiveInt : IntHolder {
                     "Will be an error in v3.3.",
             ReplaceWith(
                 "randomPositiveInt()",
-                "kotools.types.number.randomPositiveInt"
+                "${Package.number}.randomPositiveInt"
             )
         )
         @SinceKotoolsTypes("3.0")

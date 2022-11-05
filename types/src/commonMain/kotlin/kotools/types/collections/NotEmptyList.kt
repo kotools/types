@@ -6,6 +6,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 
 // ---------- Builders ----------
@@ -18,7 +19,7 @@ import kotools.types.SinceKotoolsTypes
     "Use the notEmptyListOf function instead.",
     ReplaceWith(
         "notEmptyListOf<E>(head, *tail)",
-        "kotools.types.collections.notEmptyListOf"
+        "${Package.collections}.notEmptyListOf"
     ),
     DeprecationLevel.ERROR
 )

@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
@@ -88,7 +89,7 @@ public sealed interface NegativeInt : IntHolder {
             "Use the NegativeIntOrNull function instead.",
             ReplaceWith(
                 "NegativeIntOrNull(value)",
-                "kotools.types.number.NegativeIntOrNull"
+                "${Package.number}.NegativeIntOrNull"
             ),
             DeprecationLevel.ERROR
         )
