@@ -88,7 +88,8 @@ public sealed interface NegativeInt : IntHolder {
 
         /** Returns a random [NegativeInt]. */
         @Deprecated(
-            "Use the randomNegativeInt function instead.",
+            "Use the randomNegativeInt function instead. " +
+                    "Will be an error in v3.3.",
             ReplaceWith(
                 "randomNegativeInt()",
                 "${Package.number}.randomNegativeInt"
