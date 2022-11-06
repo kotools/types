@@ -77,6 +77,16 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
  * Returns this value as a [PositiveInt], or throws an
  * [PositiveInt.ConstructionError] if this value is strictly negative.
  */
+@Deprecated(
+    """
+        Use the Int.toPositiveIntOrThrow function instead.
+        Will be an error in v3.3.
+    """,
+    ReplaceWith(
+        "this.toPositiveIntOrThrow()",
+        "${Package.number}.toPositiveIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
@@ -91,10 +101,18 @@ public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
 public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
     ?.let(::PositiveIntImplementation)
 
+/**
+ * Returns this value as a [PositiveInt], or throws an [PositiveNumberDslError]
+ * if this value is strictly negative.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(PositiveNumberDslError::class)
+public fun Int.toPositiveIntOrThrow(): PositiveInt = positiveIntOrThrow(this)
+
 /** Returns a random [PositiveInt]. */
 @SinceKotoolsTypes("3.2")
 public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
-    .toPositiveInt()
+    .toPositiveIntOrThrow()
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveIntSerializer::class)
@@ -149,7 +167,7 @@ public sealed interface PositiveInt : IntHolder {
         )
         @SinceKotoolsTypes("3.0")
         public fun random(): PositiveInt = range.random()
-            .toPositiveInt()
+            .toPositiveIntOrThrow()
     }
 
     /** Error thrown when creating a [PositiveInt] fails. */

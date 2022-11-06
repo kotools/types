@@ -48,6 +48,19 @@ class PositiveIntTest {
     }
 
     @Test
+    fun int_toPositiveIntOrThrow_should_pass_with_a_positive_Int() {
+        val value: Int = randomPositiveInt().value
+        val result: PositiveInt = value.toPositiveIntOrThrow()
+        result.value assertEquals value
+    }
+
+    @Test
+    fun int_toPositiveIntOrThrow_should_throw_an_error_with_a_strictly_negative_Int() {
+        val value: Int = randomStrictlyNegativeInt().value
+        assertFailsWith<PositiveNumberDslError>(value::toPositiveIntOrThrow)
+    }
+
+    @Test
     fun randomPositiveInt_should_return_different_values() {
         val x: PositiveInt = randomPositiveInt()
         val y: PositiveInt = randomPositiveInt()
