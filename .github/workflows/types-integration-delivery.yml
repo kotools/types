@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
   # ---------- Stage 2 ----------
@@ -33,7 +33,7 @@ jobs:
     needs: validate-wrapper
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run tests
         run: ./gradlew types:jvmTest --no-daemon
   integrate-js:
@@ -42,7 +42,7 @@ jobs:
     needs: validate-wrapper
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run tests
         run: ./gradlew types:jsTest --no-daemon
   integrate-linux:
@@ -51,7 +51,7 @@ jobs:
     needs: validate-wrapper
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run tests
         run: ./gradlew types:linuxX64Test --no-daemon
   integrate-macos:
@@ -60,7 +60,7 @@ jobs:
     needs: validate-wrapper
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run tests
         run: ./gradlew types:macosX64Test --no-daemon
   integrate-windows:
@@ -69,7 +69,7 @@ jobs:
     needs: validate-wrapper
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run tests
         run: ./gradlew types:mingwX64Test --no-daemon
   # ---------- Stage 3 ----------
@@ -84,7 +84,7 @@ jobs:
       - integrate-windows
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Deliver package
         run: ./gradlew types:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
   deliver-jvm:
@@ -93,7 +93,7 @@ jobs:
     needs: integrate-jvm
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Deliver package
         run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
   deliver-js:
@@ -102,7 +102,7 @@ jobs:
     needs: integrate-js
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Deliver package
         run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
   deliver-linux:
@@ -111,7 +111,7 @@ jobs:
     needs: integrate-linux
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Deliver package
         run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
   deliver-macos:
@@ -120,7 +120,7 @@ jobs:
     needs: integrate-macos
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Deliver package
         run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
   deliver-windows:
@@ -129,6 +129,6 @@ jobs:
     needs: integrate-windows
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Deliver package
         run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
