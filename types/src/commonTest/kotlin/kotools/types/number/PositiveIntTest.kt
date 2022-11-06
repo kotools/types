@@ -48,6 +48,20 @@ class PositiveIntTest {
     }
 
     @Test
+    fun int_toPositiveIntOrNull_should_pass_with_a_positive_Int() {
+        val value: Int = randomPositiveInt().value
+        val result: PositiveInt? = value.toPositiveIntOrNull()
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun int_toPositiveIntOrNull_should_return_null_with_a_strictly_negative_Int() {
+        val value: Int = randomStrictlyNegativeInt().value
+        val result: PositiveInt? = value.toPositiveIntOrNull()
+        result.assertNull()
+    }
+
+    @Test
     fun int_toPositiveIntOrThrow_should_pass_with_a_positive_Int() {
         val value: Int = randomPositiveInt().value
         val result: PositiveInt = value.toPositiveIntOrThrow()

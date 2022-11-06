@@ -98,8 +98,7 @@ public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
  * strictly negative.
  */
 @SinceKotoolsTypes("1.1")
-public fun Int.toPositiveIntOrNull(): PositiveInt? = takeIf { it >= 0 }
-    ?.let(::PositiveIntImplementation)
+public fun Int.toPositiveIntOrNull(): PositiveInt? = positiveIntOrNull(this)
 
 /**
  * Returns this value as a [PositiveInt], or throws an [PositiveNumberDslError]
