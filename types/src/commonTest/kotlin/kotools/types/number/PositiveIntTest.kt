@@ -44,7 +44,7 @@ class PositiveIntTest {
     @Test
     fun positiveIntOrThrow_should_throw_an_error_with_a_strictly_negative_Int() {
         val value: Int = randomStrictlyNegativeInt().value
-        assertFailsWith<PositiveNumberDslError> { positiveIntOrThrow(value) }
+        assertFailsWith<IllegalArgumentException> { positiveIntOrThrow(value) }
     }
 
     @Test
@@ -71,7 +71,7 @@ class PositiveIntTest {
     @Test
     fun int_toPositiveIntOrThrow_should_throw_an_error_with_a_strictly_negative_Int() {
         val value: Int = randomStrictlyNegativeInt().value
-        assertFailsWith<PositiveNumberDslError>(value::toPositiveIntOrThrow)
+        assertFailsWith<IllegalArgumentException>(value::toPositiveIntOrThrow)
     }
 
     @Test

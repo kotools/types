@@ -1,12 +1,11 @@
 package kotools.types.number
 
-import arrow.core.Either
-import arrow.core.getOrHandle
-import arrow.core.left
-import arrow.core.right
 import kotlinx.serialization.Serializable
+import kotools.types.KotoolsTypeBuilderResult
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.onError
+import kotools.types.string.NotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -14,32 +13,31 @@ import kotlin.jvm.JvmInline
 /*
 For API compatibility purpose, this function will be available publicly only
 when the PositiveInt(Int) function is going to be removed (maybe in v3.4).
-Also, because of the signature of this function, make sure to export the API of
-Arrow Core with this library within the Gradle build script.
  */
-private fun positiveInt(
-    value: Int
-): Either<PositiveNumberDslError, PositiveInt> = value.takeIf { it >= 0 }
-    ?.let(::PositiveIntImplementation)
-    ?.right()
-    ?: PositiveNumberDslErrorImplementation(value).left()
+private fun positiveInt(value: Int): KotoolsTypeBuilderResult<PositiveInt> =
+    value.takeIf { it >= 0 }
+        ?.let(::PositiveIntImplementation)
+        ?.let { KotoolsTypeBuilderResult.Success(it) }
+        ?: KotoolsTypeBuilderResult.Error(
+            NotBlankString("Given value should be positive (tried with $value).")
+        )
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
  * strictly negative.
  */
 @SinceKotoolsTypes("3.2")
-public fun positiveIntOrNull(value: Int): PositiveInt? =
-    positiveInt(value).orNull()
+public fun positiveIntOrNull(value: Int): PositiveInt? = positiveInt(value)
+    .onError { return null }
 
 /**
- * Returns the [value] as a [PositiveInt], or throws an [PositiveNumberDslError]
- * if the [value] is strictly negative.
+ * Returns the [value] as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if the [value] is strictly negative.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(PositiveNumberDslError::class)
-public fun positiveIntOrThrow(value: Int): PositiveInt =
-    positiveInt(value).getOrHandle { throw it }
+@Throws(IllegalArgumentException::class)
+public fun positiveIntOrThrow(value: Int): PositiveInt = positiveInt(value)
+    .onError { throw it }
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
@@ -101,11 +99,11 @@ public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
 public fun Int.toPositiveIntOrNull(): PositiveInt? = positiveIntOrNull(this)
 
 /**
- * Returns this value as a [PositiveInt], or throws an [PositiveNumberDslError]
- * if this value is strictly negative.
+ * Returns this value as a [PositiveInt], or throws an
+ * [IllegalArgumentException] if this value is strictly negative.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(PositiveNumberDslError::class)
+@Throws(IllegalArgumentException::class)
 public fun Int.toPositiveIntOrThrow(): PositiveInt = positiveIntOrThrow(this)
 
 /** Returns a random [PositiveInt]. */
@@ -172,16 +170,15 @@ public sealed interface PositiveInt : IntHolder {
     /** Error thrown when creating a [PositiveInt] fails. */
     @Deprecated(
         """
-            Use the PositiveNumberDslError type instead.
+            Use the IllegalArgumentException type instead.
             Will be an error in v3.3.
         """,
-        ReplaceWith(
-            "PositiveNumberDslError",
-            "${Package.number}.PositiveNumberDslError"
-        )
+        ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")
-    public class ConstructionError(value: Int) : PositiveNumberDslError(value)
+    public class ConstructionError(value: Int) : IllegalArgumentException(
+        "Given value should be positive (tried with $value)."
+    )
 }
 
 internal object PositiveIntSerializer :

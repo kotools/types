@@ -1,9 +1,11 @@
 package kotools.types.number
 
-import arrow.core.*
 import kotlinx.serialization.Serializable
+import kotools.types.KotoolsTypeBuilderResult
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.onError
+import kotools.types.string.NotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -11,37 +13,37 @@ import kotlin.jvm.JvmInline
 /*
 For API compatibility purpose, this function will be available publicly only
 when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
-Also, because of the signature of this function, make sure to export the API of
-Arrow Core with this library within the Gradle build script.
  */
-private fun nonZeroInt(value: Int): Either<NonZeroNumberDslError, NonZeroInt> =
+private fun nonZeroInt(value: Int): KotoolsTypeBuilderResult<NonZeroInt> =
     value.takeIf { it != 0 }
         ?.let(::NonZeroIntImplementation)
-        ?.right()
-        ?: NonZeroNumberDslErrorImplementation.left()
+        ?.let { KotoolsTypeBuilderResult.Success(it) }
+        ?: KotoolsTypeBuilderResult.Error(
+            NotBlankString("Given value shouldn't equal 0.")
+        )
 
 // This function will be available publicly with the nonZeroInt(Int) function.
 private inline fun nonZeroIntOrElse(
     value: Int,
     defaultValue: () -> NonZeroInt
-): NonZeroInt = nonZeroInt(value).getOrElse(defaultValue)
+): NonZeroInt = nonZeroInt(value).onError { defaultValue() }
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
 @SinceKotoolsTypes("3.2")
-public fun nonZeroIntOrNull(value: Int): NonZeroInt? =
-    nonZeroInt(value).orNull()
+public fun nonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroInt(value)
+    .onError { return null }
 
 /**
- * Returns the [value] as a [NonZeroInt], or throws an [NonZeroNumberDslError]
- * if the [value] equals zero.
+ * Returns the [value] as a [NonZeroInt], or throws an
+ * [IllegalArgumentException] if the [value] equals zero.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(NonZeroNumberDslError::class)
-public fun nonZeroIntOrThrow(value: Int): NonZeroInt =
-    nonZeroInt(value).getOrHandle { throw it }
+@Throws(IllegalArgumentException::class)
+public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroInt(value)
+    .onError { throw it }
 
 /**
  * Returns the [value] as a [NonZeroInt], or throws an
@@ -102,11 +104,11 @@ public fun Int.toNonZeroInt(): NonZeroInt =
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
 /**
- * Returns this value as a [NonZeroInt], or throws a [NonZeroNumberDslError]
+ * Returns this value as a [NonZeroInt], or throws a [IllegalArgumentException]
  * if this value equals zero.
  */
 @SinceKotoolsTypes("3.2")
-@Throws(NonZeroNumberDslError::class)
+@Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
@@ -198,14 +200,12 @@ public sealed interface NonZeroInt : IntHolder {
 
     /** Error thrown when creating a [NonZeroInt] fails. */
     @Deprecated(
-        "Use the NonZeroBuilderError instead. Will be an error in v3.3.",
-        ReplaceWith(
-            "NonZeroBuilderError()",
-            "${Package.number}.NonZeroBuilderError"
-        )
+        "Use the IllegalArgumentException instead. Will be an error in v3.3.",
+        ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")
-    public object ConstructionError : NonZeroNumberDslError()
+    public object ConstructionError :
+        IllegalArgumentException("Given value shouldn't equal 0.")
 }
 
 internal object NonZeroIntSerializer :

@@ -43,7 +43,6 @@ kotlin {
         val commonMain: KotlinSourceSet by getting {
             dependencies {
                 implementation(project.dependencies.platform(kotlin("bom")))
-                implementation(arrow.core)
                 implementation(kotlinx.serialization.json)
             }
         }
