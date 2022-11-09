@@ -1,7 +1,9 @@
 package kotools.types.number
 
 import kotools.assert.assertEquals
+import kotools.assert.assertFailsWith
 import kotools.assert.assertNotEquals
+import kotools.assert.assertNotNull
 import kotools.types.*
 import kotlin.test.Test
 
@@ -33,6 +35,21 @@ class NegativeIntTest {
     }
 
     // ---------- Unary operations ----------
+
+    @Test
+    fun negativeIntOrThrow_should_pass_with_a_negative_Int() {
+        val value: Int = randomNegativeInt().value
+        val result: NegativeInt = negativeIntOrThrow(value)
+        result.value assertEquals value
+    }
+
+    @Test
+    fun negativeIntOrThrow_should_throw_an_error_with_a_strictly_positive_Int() {
+        val value: Int = randomStrictlyPositiveInt().value
+        val result: IllegalArgumentException =
+            assertFailsWith { negativeIntOrThrow(value) }
+        result.message.assertNotNull()
+    }
 
     @Test
     fun inc_should_return_the_minimum_value_with_the_maximum_value() {

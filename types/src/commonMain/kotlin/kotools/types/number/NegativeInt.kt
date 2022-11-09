@@ -1,16 +1,37 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
+import kotools.types.*
+import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
+
+private fun negativeInt(value: Int): KotoolsTypesBuilderResult<NegativeInt> =
+    value.takeIf { it <= 0 }
+        ?.toSuccessfulResult(::NegativeIntImplementation)
+        ?: value.shouldBe("negative"::toNotBlankString)
+
+/**
+ * Returns the [value] as a [NegativeInt], or throws an
+ * [IllegalArgumentException] if the [value] is strictly positive.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun negativeIntOrThrow(value: Int): NegativeInt = negativeInt(value)
+    .onError { throw it }
 
 /**
  * Returns the [value] as a [NegativeInt], or throws an
  * [NegativeInt.ConstructionError] if the [value] is strictly positive.
  */
+@Deprecated(
+    "Use the negativeIntOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "negativeIntOrThrow(value)",
+        "${Package.number}.negativeIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Throws(NegativeInt.ConstructionError::class)
 public fun NegativeInt(value: Int): NegativeInt = negative int value
