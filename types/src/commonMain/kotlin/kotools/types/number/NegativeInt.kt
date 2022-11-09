@@ -64,6 +64,13 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
  * Returns this value as a [NegativeInt], or throws an
  * [NegativeInt.ConstructionError] if this value is strictly positive.
  */
+@Deprecated(
+    "Use the Int.toNegativeIntOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "this.toNegativeIntOrThrow()",
+        "${Package.number}.toNegativeIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Throws(NegativeInt.ConstructionError::class)
 public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
@@ -76,10 +83,18 @@ public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
 @SinceKotoolsTypes("1.1")
 public fun Int.toNegativeIntOrNull(): NegativeInt? = negativeIntOrNull(this)
 
+/**
+ * Returns this value as a [NegativeInt], or throws an
+ * [IllegalArgumentException] if this value is strictly positive.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun Int.toNegativeIntOrThrow(): NegativeInt = negativeIntOrThrow(this)
+
 /** Returns a random [NegativeInt]. */
 @SinceKotoolsTypes("3.2")
 public fun randomNegativeInt(): NegativeInt = NegativeInt.range.random()
-    .toNegativeInt()
+    .toNegativeIntOrThrow()
 
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeIntSerializer::class)
