@@ -74,6 +74,16 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
  * Returns this value as a [StrictlyPositiveInt], or throws an
  * [StrictlyPositiveInt.ConstructionError] if this value is negative.
  */
+@Deprecated(
+    """
+        Use the Int.toStrictlyPositiveIntOrThrow function instead.
+        Will be an error in v3.3.
+    """,
+    ReplaceWith(
+        "this.toStrictlyPositiveIntOrThrow()",
+        "${Package.number}.toStrictlyPositiveIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
@@ -89,11 +99,20 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     takeIf { it > 0 }
         ?.let(::StrictlyPositiveIntImplementation)
 
+/**
+ * Returns this value as a [StrictlyPositiveInt], or throws an
+ * [IllegalArgumentException] if this value is negative.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
+    strictlyPositiveIntOrThrow(this)
+
 /** Returns a random [StrictlyPositiveInt]. */
 @SinceKotoolsTypes("3.2")
 public fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt.range.random()
-        .toStrictlyPositiveInt()
+        .toStrictlyPositiveIntOrThrow()
 
 /** Representation of strictly positive integers, excluding zero. */
 @Serializable(StrictlyPositiveIntSerializer::class)
@@ -142,6 +161,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
             .toStrictlyPositiveInt()
     }
 
+    // TODO: Deprecate this class.
     /** Error thrown when creating a [StrictlyPositiveInt] fails. */
     @SinceKotoolsTypes("3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(

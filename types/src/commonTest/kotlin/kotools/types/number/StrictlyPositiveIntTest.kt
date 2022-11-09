@@ -53,6 +53,21 @@ class StrictlyPositiveIntTest {
     }
 
     @Test
+    fun int_toStrictlyPositiveIntOrThrow_should_pass_with_a_strictly_positive_Int() {
+        val value: Int = randomStrictlyPositiveInt().value
+        val result: StrictlyPositiveInt = value.toStrictlyPositiveIntOrThrow()
+        result.value assertEquals value
+    }
+
+    @Test
+    fun int_toStrictlyPositiveIntOrThrow_should_throw_an_error_with_a_negative_Int() {
+        val value: Int = randomNegativeInt().value
+        assertFailsWith<IllegalArgumentException>(
+            value::toStrictlyPositiveIntOrThrow
+        )
+    }
+
+    @Test
     fun randomStrictlyPositiveInt_should_return_different_values() {
         val x: StrictlyPositiveInt = randomStrictlyPositiveInt()
         val y: StrictlyPositiveInt = randomStrictlyPositiveInt()
