@@ -41,6 +41,7 @@ public fun negativeIntOrThrow(value: Int): NegativeInt = negativeInt(value)
     )
 )
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(NegativeInt.ConstructionError::class)
 public fun NegativeInt(value: Int): NegativeInt = negative int value
 
@@ -72,6 +73,7 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
     )
 )
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(NegativeInt.ConstructionError::class)
 public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
     ?: throw NegativeInt.ConstructionError(this)
@@ -149,6 +151,10 @@ public sealed interface NegativeInt : IntHolder {
     }
 
     /** Error thrown when creating a [NegativeInt] fails. */
+    @Deprecated(
+        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        ReplaceWith("IllegalArgumentException")
+    )
     @SinceKotoolsTypes("3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "NegativeInt doesn't accept strictly positive values (tried with " +
