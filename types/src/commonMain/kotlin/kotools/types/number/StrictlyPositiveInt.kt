@@ -47,6 +47,7 @@ public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
     )
 )
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
     strictlyPositive int value
@@ -75,16 +76,14 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
  * [StrictlyPositiveInt.ConstructionError] if this value is negative.
  */
 @Deprecated(
-    """
-        Use the Int.toStrictlyPositiveIntOrThrow function instead.
-        Will be an error in v3.3.
-    """,
+    "Use the Int.toStrictlyPositiveIntOrThrow function instead. Will be an error in v3.3.",
     ReplaceWith(
         "this.toStrictlyPositiveIntOrThrow()",
         "${Package.number}.toStrictlyPositiveIntOrThrow"
     )
 )
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
     toStrictlyPositiveIntOrNull()
@@ -160,8 +159,14 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
             .toStrictlyPositiveInt()
     }
 
-    // TODO: Deprecate this class.
     /** Error thrown when creating a [StrictlyPositiveInt] fails. */
+    @Deprecated(
+        """
+            Use the IllegalArgumentException type instead.
+            Will be an error in v3.3.
+        """,
+        ReplaceWith("IllegalArgumentException")
+    )
     @SinceKotoolsTypes("3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "StrictlyPositiveInt doesn't accept negative values (tried with " +
