@@ -96,8 +96,7 @@ public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-    takeIf { it > 0 }
-        ?.let(::StrictlyPositiveIntImplementation)
+    strictlyPositiveIntOrNull(this)
 
 /**
  * Returns this value as a [StrictlyPositiveInt], or throws an
