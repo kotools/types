@@ -1,9 +1,6 @@
 package kotools.types.number
 
-import kotools.assert.assertEquals
-import kotools.assert.assertFailsWith
-import kotools.assert.assertNotEquals
-import kotools.assert.assertNotNull
+import kotools.assert.*
 import kotools.types.*
 import kotlin.test.Test
 
@@ -35,6 +32,20 @@ class NegativeIntTest {
     }
 
     // ---------- Unary operations ----------
+
+    @Test
+    fun negativeIntOrNull_should_pass_with_a_negative_Int() {
+        val value: Int = randomNegativeInt().value
+        val result: NegativeInt? = negativeIntOrNull(value)
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun negativeIntOrNull_should_return_null_with_a_strictly_positive_Int() {
+        val value: Int = randomStrictlyPositiveInt().value
+        val result: NegativeInt? = negativeIntOrNull(value)
+        result.assertNull()
+    }
 
     @Test
     fun negativeIntOrThrow_should_pass_with_a_negative_Int() {

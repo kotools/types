@@ -13,6 +13,14 @@ private fun negativeInt(value: Int): KotoolsTypesBuilderResult<NegativeInt> =
         ?: value.shouldBe("negative"::toNotBlankString)
 
 /**
+ * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
+ * strictly positive.
+ */
+@SinceKotoolsTypes("3.2")
+public fun negativeIntOrNull(value: Int): NegativeInt? = negativeInt(value)
+    .onError { return null }
+
+/**
  * Returns the [value] as a [NegativeInt], or throws an
  * [IllegalArgumentException] if the [value] is strictly positive.
  */
@@ -40,6 +48,13 @@ public fun NegativeInt(value: Int): NegativeInt = negative int value
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
  * strictly positive.
  */
+@Deprecated(
+    "Use the negativeIntOrNull function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "negativeIntOrNull(value)",
+        "${Package.number}.negativeIntOrNull"
+    )
+)
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
