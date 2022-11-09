@@ -54,6 +54,20 @@ class NegativeIntTest {
     }
 
     @Test
+    fun int_toNegativeIntOrNull_should_pass_with_a_negative_Int() {
+        val value: Int = randomNegativeInt().value
+        val result: NegativeInt? = value.toNegativeIntOrNull()
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun int_toNegativeIntOrNull_should_return_null_with_a_strictly_positive_Int() {
+        val value: Int = randomStrictlyPositiveInt().value
+        val result: NegativeInt? = value.toNegativeIntOrNull()
+        result.assertNull()
+    }
+
+    @Test
     fun randomNegativeInt_should_return_different_values() {
         val x: NegativeInt = randomNegativeInt()
         val y: NegativeInt = randomNegativeInt()

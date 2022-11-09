@@ -74,8 +74,7 @@ public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
  * strictly positive.
  */
 @SinceKotoolsTypes("1.1")
-public fun Int.toNegativeIntOrNull(): NegativeInt? = takeIf { it <= 0 }
-    ?.let(::NegativeIntImplementation)
+public fun Int.toNegativeIntOrNull(): NegativeInt? = negativeIntOrNull(this)
 
 /** Returns a random [NegativeInt]. */
 @SinceKotoolsTypes("3.2")
