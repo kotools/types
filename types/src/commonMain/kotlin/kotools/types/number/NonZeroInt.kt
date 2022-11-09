@@ -1,11 +1,8 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.KotoolsTypeBuilderResult
-import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.onError
-import kotools.types.string.NotBlankString
+import kotools.types.*
+import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -14,13 +11,10 @@ import kotlin.jvm.JvmInline
 For API compatibility purpose, this function will be available publicly only
 when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
  */
-private fun nonZeroInt(value: Int): KotoolsTypeBuilderResult<NonZeroInt> =
+private fun nonZeroInt(value: Int): KotoolsTypesBuilderResult<NonZeroInt> =
     value.takeIf { it != 0 }
-        ?.let(::NonZeroIntImplementation)
-        ?.let { KotoolsTypeBuilderResult.Success(it) }
-        ?: KotoolsTypeBuilderResult.Error(
-            NotBlankString("Given value shouldn't equal 0.")
-        )
+        ?.toSuccessfulResult(::NonZeroIntImplementation)
+        ?: builderError("Given value shouldn't equal 0."::toNotBlankString)
 
 // This function will be available publicly with the nonZeroInt(Int) function.
 private inline fun nonZeroIntOrElse(
@@ -50,10 +44,7 @@ public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroInt(value)
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @Deprecated(
-    """
-        Use the nonZeroIntOrThrow(Int) function instead.
-        Will be an error in v3.3.
-    """,
+    "Use the nonZeroIntOrThrow function instead. Will be an error in v3.3.",
     ReplaceWith(
         "nonZeroIntOrThrow(value)",
         "${Package.number}.nonZeroIntOrThrow"
@@ -69,7 +60,7 @@ public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
  * equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrNull(Int) function instead. Will be an error in v3.3.",
+    "Use the nonZeroIntOrNull function instead. Will be an error in v3.3.",
     ReplaceWith("nonZeroIntOrNull(value)", "${Package.number}.nonZeroIntOrNull")
 )
 @SinceKotoolsTypes("3.0")

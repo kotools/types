@@ -1,16 +1,42 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
+import kotools.types.*
+import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
+
+private fun strictlyPositiveInt(
+    value: Int
+): KotoolsTypesBuilderResult<StrictlyPositiveInt> = value.takeIf { it > 0 }
+    ?.toSuccessfulResult(::StrictlyPositiveIntImplementation)
+    ?: value.shouldBe("strictly positive"::toNotBlankString)
+
+/**
+ * Returns the [value] as a [StrictlyPositiveInt], or throws an
+ * [IllegalArgumentException] if the [value] is negative.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
+    strictlyPositiveInt(value)
+        .onError { throw it }
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
  * [StrictlyPositiveInt.ConstructionError] if the [value] is negative.
  */
+@Deprecated(
+    """
+        Use the strictlyPositiveIntOrThrow function instead.
+        Will be an error in v3.3.
+    """,
+    ReplaceWith(
+        "strictlyPositiveIntOrThrow(value)",
+        "${Package.number}.strictlyPositiveIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =

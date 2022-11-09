@@ -1,11 +1,8 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.KotoolsTypeBuilderResult
-import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.onError
-import kotools.types.string.NotBlankString
+import kotools.types.*
+import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -14,13 +11,10 @@ import kotlin.jvm.JvmInline
 For API compatibility purpose, this function will be available publicly only
 when the PositiveInt(Int) function is going to be removed (maybe in v3.4).
  */
-private fun positiveInt(value: Int): KotoolsTypeBuilderResult<PositiveInt> =
+private fun positiveInt(value: Int): KotoolsTypesBuilderResult<PositiveInt> =
     value.takeIf { it >= 0 }
-        ?.let(::PositiveIntImplementation)
-        ?.let { KotoolsTypeBuilderResult.Success(it) }
-        ?: KotoolsTypeBuilderResult.Error(
-            NotBlankString("Given value should be positive (tried with $value).")
-        )
+        ?.toSuccessfulResult(::PositiveIntImplementation)
+        ?: value.shouldBe("positive"::toNotBlankString)
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
