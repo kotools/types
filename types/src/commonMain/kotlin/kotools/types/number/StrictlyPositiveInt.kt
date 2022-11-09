@@ -37,10 +37,7 @@ public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
  * [StrictlyPositiveInt.ConstructionError] if the [value] is negative.
  */
 @Deprecated(
-    """
-        Use the strictlyPositiveIntOrThrow function instead.
-        Will be an error in v3.3.
-    """,
+    "Use the strictlyPositiveIntOrThrow function instead. Will be an error in v3.3.",
     ReplaceWith(
         "strictlyPositiveIntOrThrow(value)",
         "${Package.number}.strictlyPositiveIntOrThrow"
@@ -57,10 +54,7 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
  * [value] is negative.
  */
 @Deprecated(
-    """
-        Use the strictlyPositiveIntOrNull function instead.
-        Will be an error in v3.3.
-    """,
+    "Use the strictlyPositiveIntOrNull function instead. Will be an error in v3.3.",
     ReplaceWith(
         "strictlyPositiveIntOrNull(value)",
         "${Package.number}.strictlyPositiveIntOrNull"
@@ -145,10 +139,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 
         /** Returns a random [StrictlyPositiveInt]. */
         @Deprecated(
-            """
-                Use the randomStrictlyPositiveInt function instead.
-                Will be an error in v3.3.
-            """,
+            "Use the randomStrictlyPositiveInt function instead. Will be an error in v3.3.",
             ReplaceWith(
                 "randomStrictlyPositiveInt()",
                 "${Package.number}.randomStrictlyPositiveInt"
@@ -161,10 +152,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 
     /** Error thrown when creating a [StrictlyPositiveInt] fails. */
     @Deprecated(
-        """
-            Use the IllegalArgumentException type instead.
-            Will be an error in v3.3.
-        """,
+        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
         ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")

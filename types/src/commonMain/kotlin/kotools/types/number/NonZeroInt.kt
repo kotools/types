@@ -72,10 +72,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
 @Deprecated(
-    """
-        Use the Int.toNonZeroIntOrThrow function instead.
-        Will be an error in v3.3.
-    """,
+    "Use the Int.toNonZeroIntOrThrow function instead. Will be an error in v3.3.",
     ReplaceWith(
         "this.toNonZeroIntOrThrow()",
         "${Package.number}.toNonZeroIntOrThrow"
@@ -174,10 +171,7 @@ public sealed interface NonZeroInt : IntHolder {
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
-            """
-                Use the randomNonZeroInt function instead.
-                Will be an error in v3.3.
-            """,
+            "Use the randomNonZeroInt function instead. Will be an error in v3.3.",
             ReplaceWith(
                 "randomNonZeroInt()",
                 "${Package.number}.randomNonZeroInt"
