@@ -25,15 +25,6 @@ class NegativeIntTest {
     // ---------- Builders ----------
 
     @Test
-    fun randomNegativeInt_should_return_different_values() {
-        val x: NegativeInt = randomNegativeInt()
-        val y: NegativeInt = randomNegativeInt()
-        x.value assertNotEquals y.value
-    }
-
-    // ---------- Unary operations ----------
-
-    @Test
     fun negativeIntOrNull_should_pass_with_a_negative_Int() {
         val value: Int = randomNegativeInt().value
         val result: NegativeInt? = negativeIntOrNull(value)
@@ -61,6 +52,15 @@ class NegativeIntTest {
             assertFailsWith { negativeIntOrThrow(value) }
         result.message.assertNotNull()
     }
+
+    @Test
+    fun randomNegativeInt_should_return_different_values() {
+        val x: NegativeInt = randomNegativeInt()
+        val y: NegativeInt = randomNegativeInt()
+        x.value assertNotEquals y.value
+    }
+
+    // ---------- Unary operations ----------
 
     @Test
     fun inc_should_return_the_minimum_value_with_the_maximum_value() {
