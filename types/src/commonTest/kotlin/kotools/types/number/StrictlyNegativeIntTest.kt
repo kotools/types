@@ -26,6 +26,21 @@ class StrictlyNegativeIntTest {
     // ---------- Builders ----------
 
     @Test
+    fun strictlyNegativeIntOrThrow_should_pass_with_a_strictly_negative_Int() {
+        val value: Int = randomStrictlyNegativeInt().value
+        val result: StrictlyNegativeInt = strictlyNegativeIntOrThrow(value)
+        result.value assertEquals value
+    }
+
+    @Test
+    fun strictlyNegativeIntOrThrow_should_throw_an_error_with_a_positive_Int() {
+        val value: Int = randomPositiveInt().value
+        val result: IllegalArgumentException =
+            assertFailsWith { strictlyNegativeIntOrThrow(value) }
+        result.message.assertNotNull()
+    }
+
+    @Test
     fun randomStrictlyNegativeInt_should_return_different_values() {
         val x: StrictlyNegativeInt = randomStrictlyNegativeInt()
         val y: StrictlyNegativeInt = randomStrictlyNegativeInt()

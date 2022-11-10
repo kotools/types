@@ -1,16 +1,39 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
+import kotools.types.*
+import kotools.types.string.toNotBlankString
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
+
+private fun strictlyNegativeInt(
+    value: Int
+): KotoolsTypesBuilderResult<StrictlyNegativeInt> = value.takeIf { it < 0 }
+    ?.toSuccessfulResult(::StrictlyNegativeIntImplementation)
+    ?: value.shouldBe("strictly negative"::toNotBlankString)
+
+/**
+ * Returns the [value] as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if the [value] is positive.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun strictlyNegativeIntOrThrow(value: Int): StrictlyNegativeInt =
+    strictlyNegativeInt(value)
+        .onError { throw it }
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
  * [StrictlyNegativeInt.ConstructionError] if the [value] is positive.
  */
+@Deprecated(
+    "Use the strictlyNegativeIntOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "strictlyNegativeIntOrThrow(value)",
+        "${Package.number}.strictlyNegativeIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
