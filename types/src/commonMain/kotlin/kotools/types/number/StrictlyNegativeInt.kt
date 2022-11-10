@@ -12,6 +12,7 @@ import kotlin.jvm.JvmInline
  * [StrictlyNegativeInt.ConstructionError] if the [value] is positive.
  */
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
     strictlyNegative int value
@@ -30,6 +31,7 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
  * [StrictlyNegativeInt.ConstructionError] if this value is positive.
  */
 @SinceKotoolsTypes("1.1")
+@Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
     toStrictlyNegativeIntOrNull()
@@ -95,6 +97,10 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
     }
 
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */
+    @Deprecated(
+        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        ReplaceWith("IllegalArgumentException")
+    )
     @SinceKotoolsTypes("3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "StrictlyNegativeInt doesn't accept positive values (tried with " +
