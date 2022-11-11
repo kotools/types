@@ -16,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v1.0.5
   # ---------- Stage 2 ----------
   test:
     name: Test
@@ -29,7 +29,7 @@ jobs:
     needs: validate-wrapper
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
       - name: Run tests
         run: ./gradlew csv:test --no-daemon
   # ---------- Stage 3 ----------
@@ -39,7 +39,7 @@ jobs:
     needs: test
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
       - name: Deliver package to OSSRH
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
