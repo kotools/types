@@ -20,8 +20,8 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1.0.5
   # ---------- Stage 2 ----------
-  check-and-deliver:
-    name: Check and deliver to OSSRH
+  deliver:
+    name: Deliver to OSSRH
     strategy:
       matrix:
         os: [ macos-latest, ubuntu-latest, windows-latest ]
@@ -30,8 +30,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
-      - name: Check the application
-        run: ./gradlew assert:check
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: adopt
+          java-version: 8
+          cache: gradle
       - name: Deliver package to OSSRH
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
