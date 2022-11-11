@@ -25,28 +25,28 @@ jobs:
   deliver-js:
     name: Deliver JS package
     needs: validate-wrapper
-    uses: .github/workflows/package-delivery.yml
+    uses: ./.github/workflows/package-delivery.yml
     with:
       module: ${{ env.MODULE }}
       platform: Js
   deliver-jvm:
     name: Deliver JVM package
     needs: validate-wrapper
-    uses: .github/workflows/package-delivery.yml
+    uses: ./.github/workflows/package-delivery.yml
     with:
       module: ${{ env.MODULE }}
       platform: Jvm
   deliver-linux:
     name: Deliver Linux package
     needs: validate-wrapper
-    uses: .github/workflows/package-delivery.yml
+    uses: ./.github/workflows/package-delivery.yml
     with:
       module: ${{ env.MODULE }}
       platform: LinuxX64
   deliver-macos:
     name: Deliver macOS package
     needs: validate-wrapper
-    uses: .github/workflows/package-delivery.yml
+    uses: ./.github/workflows/package-delivery.yml
     with:
       module: ${{ env.MODULE }}
       os: macos
@@ -54,7 +54,7 @@ jobs:
   deliver-windows:
     name: Deliver Windows package
     needs: validate-wrapper
-    uses: .github/workflows/package-delivery.yml
+    uses: ./.github/workflows/package-delivery.yml
     with:
       module: ${{ env.MODULE }}
       os: windows
@@ -68,7 +68,7 @@ jobs:
       - deliver-linux
       - deliver-macos
       - deliver-windows
-    uses: .github/workflows/package-delivery.yml
+    uses: ./.github/workflows/package-delivery.yml
     with:
       module: ${{ env.MODULE }}
       platform: KotlinMultiplatform
