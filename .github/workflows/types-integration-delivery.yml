@@ -10,10 +10,13 @@ on:
   workflow_dispatch:
 permissions: read-all
 env:
+  CACHING: gradle
   GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
   GIT_USER: ${{ secrets.GIT_USER }}
   GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+  JAVA_DISTRIBUTION: adopt
+  JAVA_VERSION: 8
   MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
   MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 jobs:
@@ -34,6 +37,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:jvmTest --no-daemon
   integrate-js:
@@ -43,6 +52,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:jsTest --no-daemon
   integrate-linux:
@@ -52,6 +67,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:linuxX64Test --no-daemon
   integrate-macos:
@@ -61,6 +82,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:macosX64Test --no-daemon
   integrate-windows:
@@ -70,6 +97,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:mingwX64Test --no-daemon
   # ---------- Stage 3 ----------
@@ -85,6 +118,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
   deliver-jvm:
@@ -94,6 +133,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
   deliver-js:
@@ -103,6 +148,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
   deliver-linux:
@@ -112,6 +163,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
   deliver-macos:
@@ -121,6 +178,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
   deliver-windows:
@@ -130,5 +193,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
