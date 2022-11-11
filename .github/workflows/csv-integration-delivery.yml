@@ -8,6 +8,10 @@ on:
       - buildSrc/**/*.kt*
       - csv/**/*.kt*
   workflow_dispatch:
+env:
+  CACHING: gradle
+  JAVA_DISTRIBUTION: adopt
+  JAVA_VERSION: 8
 permissions: read-all
 jobs:
   # ---------- Stage 1 ----------
@@ -20,26 +24,65 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1.0.5
   # ---------- Stage 2 ----------
-  test:
-    name: Test
-    strategy:
-      matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
-    runs-on: ${{ matrix.os }}
+  test-macos:
+    name: Test on macOS
     needs: validate-wrapper
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Run tests
+        run: ./gradlew csv:test --no-daemon
+  test-ubuntu:
+    name: Test on Ubuntu
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Run tests
+        run: ./gradlew csv:test --no-daemon
+  test-windows:
+    name: Test on Windows
+    needs: validate-wrapper
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew csv:test --no-daemon
   # ---------- Stage 3 ----------
   deliver:
     name: Deliver to OSSRH
+    needs: [ test-macos, test-ubuntu, test-windows ]
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
@@ -48,4 +91,4 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-        run: ./gradlew csv:publishAllPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew csv:publishAllPublicationsToOSSRHRepository --no-daemon
