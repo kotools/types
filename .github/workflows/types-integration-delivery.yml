@@ -30,25 +30,10 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1.0.5
   # ---------- Stage 2 ----------
-  integrate-jvm:
-    name: Integrate changes (JVM)
-    runs-on: ubuntu-latest
+  test-deliver-js:
+    name: Test & deliver JS package
     needs: validate-wrapper
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.1.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Run tests
-        run: ./gradlew types:jvmTest --no-daemon
-  integrate-js:
-    name: Integrate changes (JS)
     runs-on: ubuntu-latest
-    needs: validate-wrapper
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
@@ -60,10 +45,29 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:jsTest --no-daemon
-  integrate-linux:
-    name: Integrate changes (Linux)
-    runs-on: ubuntu-latest
+      - name: Deliver package
+        run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
+  test-deliver-jvm:
+    name: Test & deliver JVM package
     needs: validate-wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Run tests
+        run: ./gradlew types:jvmTest --no-daemon
+      - name: Deliver package
+        run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
+  test-deliver-linux:
+    name: Test & deliver Linux package
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
@@ -75,10 +79,12 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:linuxX64Test --no-daemon
-  integrate-macos:
-    name: Integrate changes (macOS)
-    runs-on: macos-latest
+      - name: Deliver package
+        run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
+  test-deliver-macos:
+    name: Test & deliver macOS package
     needs: validate-wrapper
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
@@ -90,10 +96,12 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:macosX64Test --no-daemon
-  integrate-windows:
-    name: Integrate changes (Windows)
-    runs-on: windows-latest
+      - name: Deliver package
+        run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
+  test-deliver-windows:
+    name: Test & deliver Windows package
     needs: validate-wrapper
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
@@ -105,16 +113,18 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Run tests
         run: ./gradlew types:mingwX64Test --no-daemon
+      - name: Deliver package
+        run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
   # ---------- Stage 3 ----------
-  deliver-kmp:
-    name: Deliver package to OSSRH (Multiplatform)
-    runs-on: ubuntu-latest
+  deliver-multiplatform:
+    name: Deliver multiplatform package
     needs:
-      - integrate-jvm
-      - integrate-js
-      - integrate-linux
-      - integrate-macos
-      - integrate-windows
+      - test-deliver-js
+      - test-deliver-jvm
+      - test-deliver-linux
+      - test-deliver-macos
+      - test-deliver-windows
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
@@ -126,78 +136,3 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Deliver package
         run: ./gradlew types:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
-  deliver-jvm:
-    name: Deliver package to OSSRH (JVM)
-    runs-on: ubuntu-latest
-    needs: integrate-jvm
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.1.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Deliver package
-        run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
-  deliver-js:
-    name: Deliver package to OSSRH (JS)
-    runs-on: ubuntu-latest
-    needs: integrate-js
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.1.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Deliver package
-        run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
-  deliver-linux:
-    name: Deliver package to OSSRH (Linux)
-    runs-on: ubuntu-latest
-    needs: integrate-linux
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.1.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Deliver package
-        run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
-  deliver-macos:
-    name: Deliver package to OSSRH (macOS)
-    runs-on: macos-latest
-    needs: integrate-macos
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.1.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Deliver package
-        run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
-  deliver-windows:
-    name: Deliver package to OSSRH (Windows)
-    runs-on: windows-latest
-    needs: integrate-windows
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.1.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Deliver package
-        run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
