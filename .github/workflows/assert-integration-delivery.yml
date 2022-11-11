@@ -107,7 +107,7 @@ jobs:
         run: ./gradlew assert:publishMingwX64PublicationToOSSRHRepository
   # ---------- Stage 3 ----------
   deliver-multiplatform:
-    name: Deliver Kotlin multiplatform package
+    name: Deliver multiplatform package
     runs-on: ubuntu-latest
     needs:
       - deliver-js
