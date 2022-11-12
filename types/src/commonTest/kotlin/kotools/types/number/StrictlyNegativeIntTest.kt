@@ -57,6 +57,21 @@ class StrictlyNegativeIntTest {
     }
 
     @Test
+    fun int_toStrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int(): Unit =
+        randomStrictlyNegativeInt()
+            .value
+            .pairWith(Int::toStrictlyNegativeIntOrNull)
+            .runMapSecond { assertNotNull().value }
+            .assertEquals()
+
+    @Test
+    fun int_toStrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int(): Unit =
+        randomPositiveInt()
+            .value
+            .toStrictlyNegativeIntOrNull()
+            .assertNull()
+
+    @Test
     fun int_toStrictlyNegativeIntOrThrow_should_pass_with_a_strictly_negative_Int() {
         val value: Int = randomStrictlyNegativeInt().value
         val result: StrictlyNegativeInt = value.toStrictlyNegativeIntOrThrow()

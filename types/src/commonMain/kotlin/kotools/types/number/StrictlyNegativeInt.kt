@@ -89,8 +89,7 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    takeIf { it < 0 }
-        ?.let(::StrictlyNegativeIntImplementation)
+    strictlyNegativeIntOrNull(this)
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or throws an
