@@ -69,6 +69,13 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
  * Returns this value as a [StrictlyNegativeInt], or throws an
  * [StrictlyNegativeInt.ConstructionError] if this value is positive.
  */
+@Deprecated(
+    "Use the Int.toStrictlyNegativeIntOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "this.toStrictlyNegativeIntOrThrow()",
+        "${Package.number}.toStrictlyNegativeIntOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
@@ -84,6 +91,15 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     takeIf { it < 0 }
         ?.let(::StrictlyNegativeIntImplementation)
+
+/**
+ * Returns this value as a [StrictlyNegativeInt], or throws an
+ * [IllegalArgumentException] if this value is positive.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
+    strictlyNegativeIntOrThrow(this)
 
 /** Returns a random [StrictlyNegativeInt]. */
 @SinceKotoolsTypes("3.2")

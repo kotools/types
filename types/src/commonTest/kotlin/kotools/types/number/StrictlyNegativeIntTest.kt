@@ -52,6 +52,25 @@ class StrictlyNegativeIntTest {
         val result: IllegalArgumentException =
             assertFailsWith { strictlyNegativeIntOrThrow(value) }
         result.message.assertNotNull()
+            .isNotBlank()
+            .assertTrue()
+    }
+
+    @Test
+    fun int_toStrictlyNegativeIntOrThrow_should_pass_with_a_strictly_negative_Int() {
+        val value: Int = randomStrictlyNegativeInt().value
+        val result: StrictlyNegativeInt = value.toStrictlyNegativeIntOrThrow()
+        result.value assertEquals value
+    }
+
+    @Test
+    fun int_toStrictlyNegativeIntOrThrow_should_throw_an_error_with_a_positive_Int() {
+        val value: Int = randomPositiveInt().value
+        val result: IllegalArgumentException =
+            assertFailsWith(value::toStrictlyNegativeIntOrThrow)
+        result.message.assertNotNull()
+            .isNotBlank()
+            .assertTrue()
     }
 
     @Test
