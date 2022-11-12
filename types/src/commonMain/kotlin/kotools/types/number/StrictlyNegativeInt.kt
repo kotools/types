@@ -14,6 +14,15 @@ private fun strictlyNegativeInt(
     ?: value.shouldBe("strictly negative"::toNotBlankString)
 
 /**
+ * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
+ * [value] is positive.
+ */
+@SinceKotoolsTypes("3.2")
+public fun strictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
+    strictlyNegativeInt(value)
+        .onError { return null }
+
+/**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
  * [IllegalArgumentException] if the [value] is positive.
  */
@@ -44,6 +53,13 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
  * [value] is positive.
  */
+@Deprecated(
+    "Use the strictlyNegativeIntOrNull function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "strictlyNegativeIntOrNull(value)",
+        "${Package.number}.strictlyNegativeIntOrNull"
+    )
+)
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
