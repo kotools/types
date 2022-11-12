@@ -104,7 +104,7 @@ public fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
 @SinceKotoolsTypes("3.2")
 public fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt.range.random()
-        .toStrictlyNegativeInt()
+        .toStrictlyNegativeIntOrThrow()
 
 /** Representation of strictly negative integers, excluding zero. */
 @Serializable(StrictlyNegativeIntSerializer::class)
