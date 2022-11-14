@@ -12,6 +12,7 @@ import kotlin.test.Test
 
 class NotEmptyListTest : RandomValueHolder {
     // ---------- Builders ----------
+
     @Test
     fun notEmptyListOf_should_pass(): Unit = randomInt
         .pairWith { arrayOf(randomInt) }
@@ -32,20 +33,6 @@ class NotEmptyListTest : RandomValueHolder {
         val collection: Collection<Int> = emptyList()
         assertFailsWith<IllegalArgumentException>(collection::toNotEmptyList)
     }
-
-    @Test
-    fun collection_toNotEmptyListOrNull_should_pass_with_a_not_empty_Collection() =
-        setOf(randomString, randomString, randomString)
-            .pairWith(Collection<String>::toNotEmptyListOrNull)
-            .mapSecond(NotEmptyList<String>?::assertNotNull)
-            .toPairs()
-            .forEach(Pair<String?, String?>::assertEquals)
-
-    @Test
-    fun collection_toNotEmptyListOrNull_should_return_null_with_an_empty_Collection() =
-        emptyList<String>()
-            .toNotEmptyListOrNull()
-            .assertNull()
 
     @Test
     fun collection_toNotEmptyListOrElse_should_pass_with_a_not_empty_Collection() =
@@ -102,6 +89,20 @@ class NotEmptyListTest : RandomValueHolder {
                 .assertEquals(element)
         }
     }
+
+    @Test
+    fun collection_toNotEmptyListOrNull_should_pass_with_a_not_empty_Collection() =
+        setOf(randomString, randomString, randomString)
+            .pairWith(Collection<String>::toNotEmptyListOrNull)
+            .mapSecond(NotEmptyList<String>?::assertNotNull)
+            .toPairs()
+            .forEach(Pair<String?, String?>::assertEquals)
+
+    @Test
+    fun collection_toNotEmptyListOrNull_should_return_null_with_an_empty_Collection() =
+        emptyList<String>()
+            .toNotEmptyListOrNull()
+            .assertNull()
 
     // ---------- Conversions ----------
 

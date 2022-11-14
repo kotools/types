@@ -51,22 +51,6 @@ public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
- * returns `null` if this collection is empty.
- */
-@SinceKotoolsTypes("1.3")
-public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    tryOrNull(::toNotEmptyList)
-
-/**
- * Returns a [NotEmptyList] containing all the elements of this array, or
- * returns `null` if this array is empty.
- */
-@SinceKotoolsTypes("1.3")
-public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    toList().toNotEmptyListOrNull()
-
-/**
- * Returns a [NotEmptyList] containing all the elements of this collection, or
  * returns the result of calling the [defaultValue] function if this collection
  * is empty.
  */
@@ -84,6 +68,22 @@ public inline infix fun <E> Collection<E>.toNotEmptyListOrElse(
 public inline infix fun <E> Array<E>.toNotEmptyListOrElse(
     defaultValue: (Array<E>) -> NotEmptyList<E>
 ): NotEmptyList<E> = toNotEmptyListOrNull() ?: defaultValue(this)
+
+/**
+ * Returns a [NotEmptyList] containing all the elements of this collection, or
+ * returns `null` if this collection is empty.
+ */
+@SinceKotoolsTypes("1.3")
+public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    tryOrNull(::toNotEmptyList)
+
+/**
+ * Returns a [NotEmptyList] containing all the elements of this array, or
+ * returns `null` if this array is empty.
+ */
+@SinceKotoolsTypes("1.3")
+public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    toList().toNotEmptyListOrNull()
 
 /**
  * Representation of lists that contain at least one element.
