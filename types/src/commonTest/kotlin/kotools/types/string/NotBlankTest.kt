@@ -2,10 +2,7 @@ package kotools.types.string
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.assert.assertEquals
-import kotools.assert.assertFailsWith
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
+import kotools.assert.*
 import kotools.types.core.RandomValueHolder
 import kotools.types.number.PositiveInt
 import kotools.types.number.toPositiveIntOrThrow
@@ -19,6 +16,7 @@ class NotBlankStringTest : RandomValueHolder {
 
     // ---------- Builders ----------
 
+    @Suppress("DEPRECATION")
     @Test
     fun constructor_should_pass_with_a_not_blank_String() {
         val value: String = randomString
@@ -26,11 +24,28 @@ class NotBlankStringTest : RandomValueHolder {
         result.value assertEquals value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun constructor_should_throw_an_error_with_a_blank_String() {
         assertFailsWith<IllegalArgumentException> {
             NotBlankString(BLANK_STRING)
         }
+    }
+
+    @Test
+    fun notBlankStringOrThrow_should_pass_with_a_not_blank_String() {
+        val value: String = randomString
+        val result: NotBlankString = notBlankStringOrThrow(value)
+        result.value assertEquals value
+    }
+
+    @Test
+    fun notBlankStringOrThrow_should_throw_an_error_with_a_blank_String() {
+        val result: IllegalArgumentException =
+            assertFailsWith { notBlankStringOrThrow(BLANK_STRING) }
+        result.message.assertNotNull()
+            .isNotBlank()
+            .assertTrue()
     }
 
     @Suppress("TestFunctionName")
@@ -82,7 +97,7 @@ class NotBlankStringTest : RandomValueHolder {
         val value: String = randomString
         val index: PositiveInt = Random.nextInt(from = 0, until = value.length)
             .toPositiveIntOrThrow()
-        val string = NotBlankString(value)
+        val string: NotBlankString = notBlankStringOrThrow(value)
         val result: Char = string[index]
         result assertEquals value[index.value]
     }
@@ -92,14 +107,14 @@ class NotBlankStringTest : RandomValueHolder {
     @Test
     fun compareTo_should_pass_when_comparing_a_String_with_a_NotBlankString() {
         val x: String = randomString
-        val y = NotBlankString(randomString)
+        val y: NotBlankString = notBlankStringOrThrow(randomString)
         val result: Int = x.compareTo(y)
         result assertEquals x.compareTo(y.value)
     }
 
     @Test
     fun compareTo_should_pass_with_a_String() {
-        val x = NotBlankString(randomString)
+        val x: NotBlankString = notBlankStringOrThrow(randomString)
         val y: String = randomString
         val result: Int = x.compareTo(y)
         result assertEquals x.value.compareTo(y)
@@ -107,15 +122,15 @@ class NotBlankStringTest : RandomValueHolder {
 
     @Test
     fun compareTo_should_pass_with_another_NotBlankString() {
-        val x = NotBlankString(randomString)
-        val y = NotBlankString(randomString)
+        val x: NotBlankString = notBlankStringOrThrow(randomString)
+        val y: NotBlankString = notBlankStringOrThrow(randomString)
         val result: Int = x.compareTo(y)
         result assertEquals x.value.compareTo(y.value)
     }
 
     @Test
     fun plus_should_pass() {
-        val x = NotBlankString(randomString)
+        val x: NotBlankString = notBlankStringOrThrow(randomString)
         val y: String = randomString
         val result: NotBlankString = x + y
         result.value assertEquals x.value + y
@@ -126,7 +141,7 @@ class NotBlankStringTest : RandomValueHolder {
     @Test
     fun toString_should_behave_like_a_String() {
         val value: String = randomString
-        val notBlankString = NotBlankString(value)
+        val notBlankString: NotBlankString = notBlankStringOrThrow(value)
         notBlankString.toString() assertEquals value
     }
 }
@@ -136,7 +151,7 @@ private typealias Serializer = NotBlankStringSerializer
 class NotBlankStringSerializerTest : RandomValueHolder {
     @Test
     fun serialization_should_behave_like_a_String() {
-        val string = NotBlankString(randomString)
+        val string: NotBlankString = notBlankStringOrThrow(randomString)
         val result: String = Json.encodeToString(Serializer, string)
         result assertEquals Json.encodeToString(string.value)
     }

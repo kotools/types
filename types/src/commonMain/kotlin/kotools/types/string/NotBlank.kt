@@ -6,7 +6,7 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.SinceKotoolsTypes
+import kotools.types.*
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
@@ -14,10 +14,33 @@ import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
+private fun notBlankString(
+    value: String
+): KotoolsTypesBuilderResult<NotBlankString> = value.takeIf(String::isNotBlank)
+    ?.toSuccessfulResult(::NotBlankStringImplementation)
+    ?: value.shouldBe("not blank"::toNotBlankString)
+
+/**
+ * Returns the [value] as a [NotBlankString], or throws an
+ * [IllegalArgumentException] if the [value] is blank.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun notBlankStringOrThrow(value: String): NotBlankString =
+    notBlankString(value)
+        .onError { throw it }
+
 /**
  * Returns the [value] as a [NotBlankString], or throws an
  * [NotBlankString.ConstructionError] if the [value] is blank.
  */
+@Deprecated(
+    "Use the notBlankStringOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "notBlankStringOrThrow(value)",
+        "${Package.string}.notBlankStringOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.2")
 @Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
@@ -117,7 +140,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
      * of the [other] object.
      */
     public operator fun plus(other: Any?): NotBlankString =
-        NotBlankString(value + other)
+        notBlankStringOrThrow(value + other)
 
     /** Error thrown when creating a [NotBlankString] fails. */
     @Deprecated(

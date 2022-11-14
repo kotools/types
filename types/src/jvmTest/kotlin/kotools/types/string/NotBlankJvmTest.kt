@@ -13,7 +13,7 @@ import kotlin.random.Random
 class NotBlankStringJvmTest {
     @Test
     fun get_should_throw_an_error_with_an_index_that_is_out_of_bounds() {
-        val string = NotBlankString("oops")
+        val string: NotBlankString = notBlankStringOrThrow("oops")
         val index: StrictlyPositiveInt = string.length
         assertFailsWith<IndexOutOfBoundsException> { string[index] }
     }
@@ -23,14 +23,14 @@ class NotBlankStringJvmTest {
         val value = "hello world"
         val index: PositiveInt = Random.nextInt(0, value.length)
             .toPositiveIntOrThrow()
-        val string = NotBlankString(value)
+        val string: NotBlankString = notBlankStringOrThrow(value)
         val result: Char? = string getOrNull index
         result.assertNotNull() assertEquals value[index.value]
     }
 
     @Test
     fun getOrNull_should_return_null_with_an_index_that_is_out_of_bounds() {
-        val string = NotBlankString("oops")
+        val string: NotBlankString = notBlankStringOrThrow("oops")
         val index: StrictlyPositiveInt = string.length
         val result: Char? = string getOrNull index
         result.assertNull()
