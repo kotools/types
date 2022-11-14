@@ -7,14 +7,9 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
+import kotools.types.tryOrNull
 
 // ---------- Builders ----------
-
-@Suppress("FunctionName")
-private fun <E> NotEmptyList(head: E, tail: List<E>): NotEmptyList<E> {
-    val list: List<E> = listOf(head) + tail
-    return NotEmptyListImplementation(list)
-}
 
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
@@ -23,7 +18,12 @@ private fun <E> NotEmptyList(head: E, tail: List<E>): NotEmptyList<E> {
 @SinceKotoolsTypes("3.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val list: List<E> = tail.toList()
-    return NotEmptyList(head, list)
+    return notEmptyListOf(head, list)
+}
+
+private fun <E> notEmptyListOf(head: E, tail: List<E>): NotEmptyList<E> {
+    val list: List<E> = listOf(head) + tail
+    return NotEmptyListImplementation(list)
 }
 
 /**
@@ -37,7 +37,7 @@ public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
     val list: List<E> = toList()
     val head: E = list.first()
     val tail: List<E> = list.subList(1, list.size)
-    return NotEmptyList(head, tail)
+    return notEmptyListOf(head, tail)
 }
 
 /**
@@ -54,11 +54,8 @@ public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
  * returns `null` if this collection is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = try {
-    toNotEmptyList()
-} catch (_: IllegalArgumentException) {
-    null
-}
+public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    tryOrNull(::toNotEmptyList)
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this array, or
