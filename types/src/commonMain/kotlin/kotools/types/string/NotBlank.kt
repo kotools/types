@@ -19,6 +19,7 @@ import kotlin.jvm.JvmInline
  * [NotBlankString.ConstructionError] if the [value] is blank.
  */
 @SinceKotoolsTypes("1.2")
+@Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
 public fun NotBlankString(value: String): NotBlankString =
     value.toNotBlankString()
@@ -37,6 +38,7 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
  * [NotBlankString.ConstructionError] if this value is blank.
  */
 @SinceKotoolsTypes("1.2")
+@Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
 public fun String.toNotBlankString(): NotBlankString =
     toNotBlankStringOrNull() ?: throw NotBlankString.ConstructionError()
@@ -118,6 +120,10 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
         NotBlankString(value + other)
 
     /** Error thrown when creating a [NotBlankString] fails. */
+    @Deprecated(
+        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        ReplaceWith("IllegalArgumentException")
+    )
     @SinceKotoolsTypes("3.0")
     public class ConstructionError : IllegalArgumentException(
         "NotBlankString doesn't accept blank strings."
