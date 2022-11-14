@@ -16,22 +16,6 @@ class NotBlankStringTest : RandomValueHolder {
 
     // ---------- Builders ----------
 
-    @Suppress("DEPRECATION")
-    @Test
-    fun constructor_should_pass_with_a_not_blank_String() {
-        val value: String = randomString
-        val result = NotBlankString(value)
-        result.value assertEquals value
-    }
-
-    @Suppress("DEPRECATION")
-    @Test
-    fun constructor_should_throw_an_error_with_a_blank_String() {
-        assertFailsWith<IllegalArgumentException> {
-            NotBlankString(BLANK_STRING)
-        }
-    }
-
     @Test
     fun notBlankStringOrThrow_should_pass_with_a_not_blank_String() {
         val value: String = randomString
@@ -48,7 +32,35 @@ class NotBlankStringTest : RandomValueHolder {
             .assertTrue()
     }
 
-    @Suppress("TestFunctionName")
+    @Test
+    fun notBlankStringOrNull_should_pass_with_a_not_blank_String() {
+        val value: String = randomString
+        val result: NotBlankString? = notBlankStringOrNull(value)
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun notBlankStringOrNull_should_return_null_with_a_blank_String() =
+        notBlankStringOrNull(BLANK_STRING)
+            .assertNull()
+
+    @Suppress("DEPRECATION")
+    @Test
+    fun constructor_should_pass_with_a_not_blank_String() {
+        val value: String = randomString
+        val result = NotBlankString(value)
+        result.value assertEquals value
+    }
+
+    @Suppress("DEPRECATION")
+    @Test
+    fun constructor_should_throw_an_error_with_a_blank_String() {
+        assertFailsWith<IllegalArgumentException> {
+            NotBlankString(BLANK_STRING)
+        }
+    }
+
+    @Suppress("DEPRECATION", "TestFunctionName")
     @Test
     fun NotBlankStringOrNull_should_pass_with_a_not_blank_String() {
         val value: String = randomString
@@ -56,7 +68,7 @@ class NotBlankStringTest : RandomValueHolder {
         result.assertNotNull().value assertEquals value
     }
 
-    @Suppress("TestFunctionName")
+    @Suppress("DEPRECATION", "TestFunctionName")
     @Test
     fun NotBlankStringOrNull_should_return_null_with_a_blank_String() {
         val result: NotBlankString? = NotBlankStringOrNull(BLANK_STRING)

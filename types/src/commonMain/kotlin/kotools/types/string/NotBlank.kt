@@ -21,6 +21,15 @@ private fun notBlankString(
     ?: value.shouldBe("not blank"::toNotBlankString)
 
 /**
+ * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
+ * is blank.
+ */
+@SinceKotoolsTypes("3.2")
+public fun notBlankStringOrNull(value: String): NotBlankString? =
+    notBlankString(value)
+        .onError { return null }
+
+/**
  * Returns the [value] as a [NotBlankString], or throws an
  * [IllegalArgumentException] if the [value] is blank.
  */
@@ -51,6 +60,13 @@ public fun NotBlankString(value: String): NotBlankString =
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
  * is blank.
  */
+@Deprecated(
+    "Use the notBlankStringOrNull function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "notBlankStringOrNull(value)",
+        "${Package.string}.notBlankStringOrNull"
+    )
+)
 @Suppress("FunctionName")
 @SinceKotoolsTypes("3.0")
 public fun NotBlankStringOrNull(value: String): NotBlankString? =
