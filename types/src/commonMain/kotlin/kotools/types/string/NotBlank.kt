@@ -88,8 +88,7 @@ public fun String.toNotBlankString(): NotBlankString =
  */
 @SinceKotoolsTypes("1.2")
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    takeIf(String::isNotBlank)
-        ?.let(::NotBlankStringImplementation)
+    notBlankStringOrNull(this)
 
 // ---------- Binary operations ----------
 
