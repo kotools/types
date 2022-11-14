@@ -5,14 +5,27 @@ import kotools.types.string.toNotBlankString
 
 // ---------- Result ----------
 
-internal inline fun <T> KotoolsTypesBuilderResult<T>.onError(
+/**
+ * Returns the [value][KotoolsTypesBuilderSuccess.value] of type [T] if this
+ * result is a [success][KotoolsTypesBuilderSuccess], or returns the result of
+ * calling the [action] function if this result is an
+ * [error][KotoolsTypesBuilderError].
+ */
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+public inline fun <T> KotoolsTypesBuilderResult<T>.onError(
     action: (KotoolsTypesBuilderError) -> T
 ): T = when (this) {
     is KotoolsTypesBuilderError -> action(this)
     is KotoolsTypesBuilderSuccess -> value
 }
 
-internal sealed interface KotoolsTypesBuilderResult<out A>
+/**
+ * Representation of builders result in Kotools Types.
+ *
+ * @param T The type of the successful result.
+ */
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+public sealed interface KotoolsTypesBuilderResult<out T>
 
 // ---------- Error ----------
 
@@ -30,7 +43,10 @@ internal inline fun <A> A.shouldBe(
     "Given value should be $expectedType (tried with $this).".toNotBlankString()
 }
 
-internal class KotoolsTypesBuilderError(message: NotBlankString) :
+/** Error returned when the value for building a type is invalid. */
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+public class KotoolsTypesBuilderError
+internal constructor(message: NotBlankString) :
     IllegalArgumentException(message.value),
     KotoolsTypesBuilderResult<Nothing>
 
@@ -43,5 +59,7 @@ internal inline fun <A, B> A.toSuccessfulResult(
     return KotoolsTypesBuilderSuccess(value)
 }
 
-internal data class KotoolsTypesBuilderSuccess<out T>(val value: T) :
-    KotoolsTypesBuilderResult<T>
+/** Object returned when building a type is successful. */
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+public data class KotoolsTypesBuilderSuccess<out T>
+internal constructor(val value: T) : KotoolsTypesBuilderResult<T>
