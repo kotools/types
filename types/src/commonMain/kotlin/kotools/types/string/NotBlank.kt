@@ -18,7 +18,7 @@ private fun notBlankString(
     value: String
 ): KotoolsTypesBuilderResult<NotBlankString> = value.takeIf(String::isNotBlank)
     ?.toSuccessfulResult(::NotBlankStringImplementation)
-    ?: value.shouldBe("not blank"::toNotBlankString)
+    ?: value.shouldBe("not blank"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
@@ -76,6 +76,13 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
  * Returns this value as a [NotBlankString], or throws an
  * [NotBlankString.ConstructionError] if this value is blank.
  */
+@Deprecated(
+    "Use the String.toNotBlankStringOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "this.toNotBlankStringOrThrow()",
+        "${Package.string}.toNotBlankStringOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.2")
 @Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
@@ -89,6 +96,15 @@ public fun String.toNotBlankString(): NotBlankString =
 @SinceKotoolsTypes("1.2")
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
     notBlankStringOrNull(this)
+
+/**
+ * Returns this value as a [NotBlankString], or throws an
+ * [IllegalArgumentException] if this value is blank.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun String.toNotBlankStringOrThrow(): NotBlankString =
+    notBlankStringOrThrow(this)
 
 // ---------- Binary operations ----------
 
@@ -184,6 +200,7 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
         delegate.serialize(encoder, value.value)
 
-    override fun deserialize(decoder: Decoder): NotBlankString =
-        delegate.deserialize(decoder).toNotBlankString()
+    override fun deserialize(decoder: Decoder): NotBlankString = delegate
+        .deserialize(decoder)
+        .toNotBlankStringOrThrow()
 }

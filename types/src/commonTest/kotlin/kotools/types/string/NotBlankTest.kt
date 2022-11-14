@@ -3,9 +3,12 @@ package kotools.types.string
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.assert.*
+import kotools.types.assertEquals
 import kotools.types.core.RandomValueHolder
+import kotools.types.mapSecond
 import kotools.types.number.PositiveInt
 import kotools.types.number.toPositiveIntOrThrow
+import kotools.types.pairWith
 import kotlin.random.Random
 import kotlin.test.Test
 
@@ -75,6 +78,7 @@ class NotBlankStringTest : RandomValueHolder {
         result.assertNull()
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val value: String = randomString
@@ -82,6 +86,7 @@ class NotBlankStringTest : RandomValueHolder {
         result.value assertEquals value
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun string_toNotBlankString_should_throw_an_error_with_a_blank_String() {
         assertFailsWith<IllegalArgumentException>(
@@ -101,6 +106,20 @@ class NotBlankStringTest : RandomValueHolder {
         val result: NotBlankString? = BLANK_STRING.toNotBlankStringOrNull()
         result.assertNull()
     }
+
+    @Test
+    fun string_toNotBlankStringOrThrow_should_pass_with_a_not_blank_String(): Unit =
+        randomString.pairWith(String::toNotBlankStringOrThrow)
+            .mapSecond(NotBlankString::value)
+            .assertEquals()
+
+    @Test
+    fun string_toNotBlankStringOrThrow_should_throw_an_error_with_a_blank_String(): Unit =
+        assertFailsWith<IllegalArgumentException>(
+            BLANK_STRING::toNotBlankStringOrThrow
+        ).message.assertNotNull()
+            .isNotBlank()
+            .assertTrue()
 
     // ---------- Positional access operations ----------
 

@@ -2,7 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.*
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -14,7 +14,9 @@ when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
 internal fun nonZeroInt(value: Int): KotoolsTypesBuilderResult<NonZeroInt> =
     value.takeIf { it != 0 }
         ?.toSuccessfulResult(::NonZeroIntImplementation)
-        ?: builderError("Given value shouldn't equal 0."::toNotBlankString)
+        ?: builderError(
+            "Given value shouldn't equal 0."::toNotBlankStringOrThrow
+        )
 
 // This function will be available publicly with the nonZeroInt(Int) function.
 private inline fun nonZeroIntOrElse(

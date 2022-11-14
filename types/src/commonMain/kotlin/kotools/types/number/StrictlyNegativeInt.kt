@@ -2,16 +2,21 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.*
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
+/*
+For API compatibility purpose, this function will be available publicly only
+when the StrictlyNegativeInt(Int) function is going to be removed (maybe in
+v3.4).
+ */
 private fun strictlyNegativeInt(
     value: Int
 ): KotoolsTypesBuilderResult<StrictlyNegativeInt> = value.takeIf { it < 0 }
     ?.toSuccessfulResult(::StrictlyNegativeIntImplementation)
-    ?: value.shouldBe("strictly negative"::toNotBlankString)
+    ?: value.shouldBe("strictly negative"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the

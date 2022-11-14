@@ -2,7 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.*
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -14,7 +14,7 @@ when the PositiveInt(Int) function is going to be removed (maybe in v3.4).
 private fun positiveInt(value: Int): KotoolsTypesBuilderResult<PositiveInt> =
     value.takeIf { it >= 0 }
         ?.toSuccessfulResult(::PositiveIntImplementation)
-        ?: value.shouldBe("positive"::toNotBlankString)
+        ?: value.shouldBe("positive"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is

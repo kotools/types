@@ -1,7 +1,7 @@
 package kotools.types
 
 import kotools.types.string.NotBlankString
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 
 // ---------- Result ----------
 
@@ -39,8 +39,8 @@ internal inline fun builderError(
 internal inline fun <A> A.shouldBe(
     description: () -> NotBlankString
 ): KotoolsTypesBuilderError = builderError {
-    val expectedType: NotBlankString = description()
-    "Given value should be $expectedType (tried with $this).".toNotBlankString()
+    "Given value should be ${description()} (tried with $this)."
+        .toNotBlankStringOrThrow()
 }
 
 /** Error returned when the value for building a type is invalid. */

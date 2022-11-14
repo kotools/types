@@ -2,16 +2,21 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.*
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
+/*
+For API compatibility purpose, this function will be available publicly only
+when the StrictlyPositiveInt(Int) function is going to be removed (maybe in
+v3.4).
+ */
 private fun strictlyPositiveInt(
     value: Int
 ): KotoolsTypesBuilderResult<StrictlyPositiveInt> = value.takeIf { it > 0 }
     ?.toSuccessfulResult(::StrictlyPositiveIntImplementation)
-    ?: value.shouldBe("strictly positive"::toNotBlankString)
+    ?: value.shouldBe("strictly positive"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the

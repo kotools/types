@@ -5,7 +5,7 @@ import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
 import kotools.types.string.NotBlankString
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 import kotools.types.tryOrNull
 
 /**
@@ -58,6 +58,6 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the string representation of this collection as a
      * [NotBlankString].
      */
-    public fun toNotBlankString(): NotBlankString =
-        toString().toNotBlankString()
+    public fun toNotBlankString(): NotBlankString = toString()
+        .toNotBlankStringOrThrow()
 }

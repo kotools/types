@@ -2,15 +2,19 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotools.types.*
-import kotools.types.string.toNotBlankString
+import kotools.types.string.toNotBlankStringOrThrow
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
+/*
+For API compatibility purpose, this function will be available publicly only
+when the NegativeInt(Int) function is going to be removed (maybe in v3.4).
+ */
 private fun negativeInt(value: Int): KotoolsTypesBuilderResult<NegativeInt> =
     value.takeIf { it <= 0 }
         ?.toSuccessfulResult(::NegativeIntImplementation)
-        ?: value.shouldBe("negative"::toNotBlankString)
+        ?: value.shouldBe("negative"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
