@@ -1,0 +1,38 @@
+name: Integration - Assert
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - './*gradle*'
+      - .github/workflows/integration-assert.yml
+      - assert/**/*.kt*
+      - buildSrc/**/*.kt*
+  push:
+    branches: [ main ]
+    paths:
+      - './*gradle*'
+      - .github/workflows/integration-assert.yml
+      - assert/**/*.kt*
+      - buildSrc/**/*.kt*
+  workflow_dispatch:
+jobs:
+  test:
+    strategy:
+      max-parallel: 3
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    name: Run tests
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.5
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: adopt
+          java-version: 8
+          cache: gradle
+      - name: Run tests
+        run: ./gradlew assert:allTests --no-daemon
