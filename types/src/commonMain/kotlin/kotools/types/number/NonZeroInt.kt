@@ -11,7 +11,7 @@ import kotlin.jvm.JvmInline
 For API compatibility purpose, this function will be available publicly only
 when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
  */
-internal fun nonZeroInt(value: Int): KotoolsTypesBuilderResult<NonZeroInt> =
+private fun nonZeroInt(value: Int): KotoolsTypesBuilderResult<NonZeroInt> =
     value.takeIf { it != 0 }
         ?.toSuccessfulResult(::NonZeroIntImplementation)
         ?: builderError(
