@@ -1,0 +1,19 @@
+name: Code quality
+on:
+  pull_request:
+    branches: [ main ]
+    paths: [ '*.kt', .github/workflows/code-quality.yml ]
+  push:
+    branches: [ main ]
+    paths: [ '*.kt', .github/workflows/code-quality.yml ]
+  workflow_dispatch:
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+      - name: Scan code with Qodana
+        uses: JetBrains/qodana-action@v2022.2.3
