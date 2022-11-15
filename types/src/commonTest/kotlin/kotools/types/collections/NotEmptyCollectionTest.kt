@@ -80,7 +80,8 @@ class NotEmptyCollectionTest : RandomValueHolder {
     @Test
     fun toNotBlankString_should_pass() {
         val expectedList: List<Int> = listOf(randomInt, randomInt, randomInt)
-        val collection: NotEmptyCollection<Int> = expectedList.toNotEmptyList()
+        val collection: NotEmptyCollection<Int> =
+            expectedList.toNotEmptyListOrThrow()
         val result: NotBlankString = collection.toNotBlankString()
         result.value assertEquals expectedList.toString()
     }

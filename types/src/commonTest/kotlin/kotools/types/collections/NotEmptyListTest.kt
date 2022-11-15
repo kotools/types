@@ -21,6 +21,7 @@ class NotEmptyListTest : RandomValueHolder {
         .toPairs()
         .forEach(Pair<Int?, Int?>::assertEquals)
 
+    @Suppress("DEPRECATION")
     @Test
     fun collection_toNotEmptyList_should_pass_with_a_not_empty_Collection() =
         setOf(randomInt, randomInt, randomInt)
@@ -28,6 +29,7 @@ class NotEmptyListTest : RandomValueHolder {
             .toPairs()
             .forEach(Pair<Int?, Int?>::assertEquals)
 
+    @Suppress("DEPRECATION")
     @Test
     fun collection_toNotEmptyList_should_throw_an_error_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
@@ -38,7 +40,7 @@ class NotEmptyListTest : RandomValueHolder {
     fun collection_toNotEmptyListOrElse_should_pass_with_a_not_empty_Collection() =
         setOf(randomInt, randomInt, randomInt)
             .runPairWith { map(Int::unaryMinus) }
-            .mapSecond(List<Int>::toNotEmptyList)
+            .mapSecond(List<Int>::toNotEmptyListOrThrow)
             .runPairWith {
                 first toNotEmptyListOrElse { second }
             }
@@ -103,6 +105,22 @@ class NotEmptyListTest : RandomValueHolder {
         emptyList<String>()
             .toNotEmptyListOrNull()
             .assertNull()
+
+    @Test
+    fun collection_toNotEmptyListOrThrow_should_pass_with_a_not_empty_collection(): Unit =
+        setOf(randomInt, randomInt, randomInt)
+            .zip(Collection<Int>::toNotEmptyListOrThrow)
+            .forEach(Pair<Int, Int>::assertEquals)
+
+    @Test
+    fun collection_toNotEmptyListOrThrow_should_throw_an_error_with_an_empty_Collection(): Unit =
+        assertFailsWith<IllegalArgumentException>(
+            emptyList<Int>()::toNotEmptyListOrThrow
+        )
+            .message
+            .assertNotNull()
+            .isNotBlank()
+            .assertTrue()
 
     // ---------- Conversions ----------
 
