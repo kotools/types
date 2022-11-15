@@ -34,20 +34,20 @@ class NotEmptyMapTest : RandomValueHolder {
     }
 
     @Test
-    fun map_toNotEmptyMap_should_pass_with_a_not_empty_Map() {
+    fun map_toNotEmptyMapOrThrow_should_pass_with_a_not_empty_Map() {
         // GIVEN
         val map: Map<Int, String> = mapOf(randomInt to randomString)
         // WHEN
-        val result: NotEmptyMap<Int, String> = map.toNotEmptyMap()
+        val result: NotEmptyMap<Int, String> = map.toNotEmptyMapOrThrow()
         // THEN
         result.size assertEquals map.size
         result.head assertEquals map.entries.first().toPair()
     }
 
     @Test
-    fun map_toNotEmptyMap_should_throw_an_error_with_an_empty_Map(): Unit =
+    fun map_toNotEmptyMapOrThrow_should_throw_an_error_with_an_empty_Map(): Unit =
         assertFailsWith<IllegalArgumentException>(
-            emptyMap<Int, String>()::toNotEmptyMap
+            emptyMap<Int, String>()::toNotEmptyMapOrThrow
         )
             .message
             .assertNotNull()

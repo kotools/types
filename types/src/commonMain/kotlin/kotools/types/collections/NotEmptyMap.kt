@@ -1,5 +1,6 @@
 package kotools.types.collections
 
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
@@ -21,6 +22,13 @@ public fun <K, V> notEmptyMapOf(
  * Returns a [NotEmptyMap] containing all the entries of this map, or throws
  * a [NotEmptyMap.ConstructionError] if this map is empty.
  */
+@Deprecated(
+    "Use the Map.toNotEmptyMapOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "this.toNotEmptyMapOrThrow()",
+        "${Package.collections}.toNotEmptyMapOrThrow"
+    )
+)
 @SinceKotoolsTypes("3.1")
 @Suppress("DEPRECATION")
 @Throws(NotEmptyMap.ConstructionError::class)
@@ -44,6 +52,17 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
 public inline fun <K, V> Map<K, V>.toNotEmptyMapOrElse(
     defaultValue: (Map<K, V>) -> NotEmptyMap<K, V>
 ): NotEmptyMap<K, V> = toNotEmptyMapOrNull() ?: defaultValue(this)
+
+/**
+ * Returns a [NotEmptyMap] containing all the entries of this map, or throws
+ * an [IllegalArgumentException] if this map is empty.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
+    toNotEmptyMapOrElse {
+        throw IllegalArgumentException("Given map shouldn't be empty.")
+    }
 
 /**
  * Representation of maps that contain at least one entry.
