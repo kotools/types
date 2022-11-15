@@ -17,12 +17,13 @@ on:
   workflow_dispatch:
 jobs:
   test:
+    name: Test
     strategy:
       max-parallel: 3
       matrix:
         os: [ macos-latest, ubuntu-latest, windows-latest ]
-    name: Run tests
     runs-on: ${{ matrix.os }}
+    permissions: read-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
@@ -34,5 +35,5 @@ jobs:
           distribution: adopt
           java-version: 8
           cache: gradle
-      - name: Run tests
+      - name: Test all platforms
         run: ./gradlew assert:allTests --no-daemon
