@@ -23,7 +23,7 @@ public fun <K, V> notEmptyMapOf(
  * a [NotEmptyMap.ConstructionError] if this map is empty.
  */
 @Deprecated(
-    "Use the Map.toNotEmptyMapOrThrow function instead. Will be an error in v3.3.",
+    "Use the Map.toNotEmptyMapOrThrow function instead.",
     ReplaceWith(
         "this.toNotEmptyMapOrThrow()",
         "${Package.collections}.toNotEmptyMapOrThrow"
@@ -81,7 +81,7 @@ public sealed interface NotEmptyMap<K, out V> : Map<K, V> {
 
     /** Error thrown when creating a [NotEmptyMap] fails. */
     @Deprecated(
-        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
     public object ConstructionError :

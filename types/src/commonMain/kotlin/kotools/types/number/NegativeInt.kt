@@ -30,7 +30,7 @@ public fun negativeIntOrThrow(value: Int): NegativeInt =
  * [NegativeInt.ConstructionError] if the [value] is strictly positive.
  */
 @Deprecated(
-    "Use the negativeIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the negativeIntOrThrow function instead.",
     ReplaceWith(
         "negativeIntOrThrow(value)",
         "${Package.number}.negativeIntOrThrow"
@@ -47,7 +47,7 @@ public fun NegativeInt(value: Int): NegativeInt = negativeIntOrNull(value)
  * strictly positive.
  */
 @Deprecated(
-    "Use the negativeIntOrNull function instead. Will be an error in v3.3.",
+    "Use the negativeIntOrNull function instead.",
     ReplaceWith(
         "negativeIntOrNull(value)",
         "${Package.number}.negativeIntOrNull"
@@ -63,7 +63,7 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
  * [NegativeInt.ConstructionError] if this value is strictly positive.
  */
 @Deprecated(
-    "Use the Int.toNegativeIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the Int.toNegativeIntOrThrow function instead.",
     ReplaceWith(
         "this.toNegativeIntOrThrow()",
         "${Package.number}.toNegativeIntOrThrow"
@@ -136,7 +136,7 @@ public sealed interface NegativeInt : IntHolder {
 
         /** Returns a random [NegativeInt]. */
         @Deprecated(
-            "Use the randomNegativeInt function instead. Will be an error in v3.3.",
+            "Use the randomNegativeInt function instead.",
             ReplaceWith(
                 "randomNegativeInt()",
                 "${Package.number}.randomNegativeInt"
@@ -148,7 +148,7 @@ public sealed interface NegativeInt : IntHolder {
 
     /** Error thrown when creating a [NegativeInt] fails. */
     @Deprecated(
-        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")

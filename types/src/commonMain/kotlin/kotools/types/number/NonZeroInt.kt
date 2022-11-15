@@ -29,7 +29,7 @@ public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the nonZeroIntOrThrow function instead.",
     ReplaceWith(
         "nonZeroIntOrThrow(value)",
         "${Package.number}.nonZeroIntOrThrow"
@@ -46,7 +46,7 @@ public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
  * equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrNull function instead. Will be an error in v3.3.",
+    "Use the nonZeroIntOrNull function instead.",
     ReplaceWith("nonZeroIntOrNull(value)", "${Package.number}.nonZeroIntOrNull")
 )
 @SinceKotoolsTypes("3.0")
@@ -58,7 +58,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
 @Deprecated(
-    "Use the Int.toNonZeroIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the Int.toNonZeroIntOrThrow function instead.",
     ReplaceWith(
         "this.toNonZeroIntOrThrow()",
         "${Package.number}.toNonZeroIntOrThrow"
@@ -156,7 +156,7 @@ public sealed interface NonZeroInt : IntHolder {
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
-            "Use the randomNonZeroInt function instead. Will be an error in v3.3.",
+            "Use the randomNonZeroInt function instead.",
             ReplaceWith(
                 "randomNonZeroInt()",
                 "${Package.number}.randomNonZeroInt"
@@ -170,7 +170,7 @@ public sealed interface NonZeroInt : IntHolder {
 
     /** Error thrown when creating a [NonZeroInt] fails. */
     @Deprecated(
-        "Use the IllegalArgumentException instead. Will be an error in v3.3.",
+        "Use the IllegalArgumentException instead.",
         ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")

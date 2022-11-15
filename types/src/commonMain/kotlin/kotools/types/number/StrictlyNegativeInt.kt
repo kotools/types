@@ -31,7 +31,7 @@ public fun strictlyNegativeIntOrThrow(value: Int): StrictlyNegativeInt =
  * [StrictlyNegativeInt.ConstructionError] if the [value] is positive.
  */
 @Deprecated(
-    "Use the strictlyNegativeIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the strictlyNegativeIntOrThrow function instead.",
     ReplaceWith(
         "strictlyNegativeIntOrThrow(value)",
         "${Package.number}.strictlyNegativeIntOrThrow"
@@ -49,7 +49,7 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
  * [value] is positive.
  */
 @Deprecated(
-    "Use the strictlyNegativeIntOrNull function instead. Will be an error in v3.3.",
+    "Use the strictlyNegativeIntOrNull function instead.",
     ReplaceWith(
         "strictlyNegativeIntOrNull(value)",
         "${Package.number}.strictlyNegativeIntOrNull"
@@ -65,7 +65,7 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
  * [StrictlyNegativeInt.ConstructionError] if this value is positive.
  */
 @Deprecated(
-    "Use the Int.toStrictlyNegativeIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the Int.toStrictlyNegativeIntOrThrow function instead.",
     ReplaceWith(
         "this.toStrictlyNegativeIntOrThrow()",
         "${Package.number}.toStrictlyNegativeIntOrThrow"
@@ -133,7 +133,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 
         /** Returns a random [StrictlyNegativeInt]. */
         @Deprecated(
-            "Use the randomStrictlyNegativeInt function instead. Will be an error in v3.3.",
+            "Use the randomStrictlyNegativeInt function instead.",
             ReplaceWith(
                 "randomStrictlyNegativeInt()",
                 "${Package.number}.randomStrictlyNegativeInt"
@@ -146,7 +146,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */
     @Deprecated(
-        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")

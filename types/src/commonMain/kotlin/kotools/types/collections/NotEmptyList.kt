@@ -31,7 +31,7 @@ private fun <E> notEmptyListOf(head: E, tail: List<E>): NotEmptyList<E> {
  * an [IllegalArgumentException] if this array is empty.
  */
 @Deprecated(
-    "Use the Array.toNotEmptyListOrThrow function instead. Will be an error in v3.3.",
+    "Use the Array.toNotEmptyListOrThrow function instead.",
     ReplaceWith(
         "this.toNotEmptyListOrThrow()",
         "${Package.collections}.toNotEmptyListOrThrow"
@@ -47,7 +47,7 @@ public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
  * throws an [IllegalArgumentException] if this collection is empty.
  */
 @Deprecated(
-    "Use the Collection.toNotEmptyListOrThrow function instead. Will be an error in v3.3.",
+    "Use the Collection.toNotEmptyListOrThrow function instead.",
     ReplaceWith(
         "this.toNotEmptyListOrThrow()",
         "${Package.collections}.toNotEmptyListOrThrow"

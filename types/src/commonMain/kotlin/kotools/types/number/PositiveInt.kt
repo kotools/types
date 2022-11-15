@@ -30,7 +30,7 @@ public fun positiveIntOrThrow(value: Int): PositiveInt =
  * [PositiveInt.ConstructionError] if the [value] is strictly negative.
  */
 @Deprecated(
-    "Use the positiveIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the positiveIntOrThrow function instead.",
     ReplaceWith(
         "positiveIntOrThrow(value)",
         "${Package.number}.positiveIntOrThrow"
@@ -47,7 +47,7 @@ public fun PositiveInt(value: Int): PositiveInt = positiveIntOrNull(value)
  * strictly negative.
  */
 @Deprecated(
-    "Use the positiveIntOrNull function instead. Will be an error in v3.3.",
+    "Use the positiveIntOrNull function instead.",
     ReplaceWith(
         "positiveIntOrNull(value)",
         "${Package.number}.positiveIntOrNull"
@@ -63,7 +63,7 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
  * [PositiveInt.ConstructionError] if this value is strictly negative.
  */
 @Deprecated(
-    "Use the Int.toPositiveIntOrThrow function instead. Will be an error in v3.3.",
+    "Use the Int.toPositiveIntOrThrow function instead.",
     ReplaceWith(
         "this.toPositiveIntOrThrow()",
         "${Package.number}.toPositiveIntOrThrow"
@@ -136,7 +136,7 @@ public sealed interface PositiveInt : IntHolder {
 
         /** Returns a random [PositiveInt]. */
         @Deprecated(
-            "Use the randomPositiveInt function instead. Will be an error in v3.3.",
+            "Use the randomPositiveInt function instead.",
             ReplaceWith(
                 "randomPositiveInt()",
                 "${Package.number}.randomPositiveInt"
@@ -149,7 +149,7 @@ public sealed interface PositiveInt : IntHolder {
 
     /** Error thrown when creating a [PositiveInt] fails. */
     @Deprecated(
-        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")

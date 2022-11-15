@@ -39,7 +39,7 @@ public fun notBlankStringOrThrow(value: String): NotBlankString =
  * [NotBlankString.ConstructionError] if the [value] is blank.
  */
 @Deprecated(
-    "Use the notBlankStringOrThrow function instead. Will be an error in v3.3.",
+    "Use the notBlankStringOrThrow function instead.",
     ReplaceWith(
         "notBlankStringOrThrow(value)",
         "${Package.string}.notBlankStringOrThrow"
@@ -56,7 +56,7 @@ public fun NotBlankString(value: String): NotBlankString =
  * is blank.
  */
 @Deprecated(
-    "Use the notBlankStringOrNull function instead. Will be an error in v3.3.",
+    "Use the notBlankStringOrNull function instead.",
     ReplaceWith(
         "notBlankStringOrNull(value)",
         "${Package.string}.notBlankStringOrNull"
@@ -72,7 +72,7 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
  * [NotBlankString.ConstructionError] if this value is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankStringOrThrow function instead. Will be an error in v3.3.",
+    "Use the String.toNotBlankStringOrThrow function instead.",
     ReplaceWith(
         "this.toNotBlankStringOrThrow()",
         "${Package.string}.toNotBlankStringOrThrow"
@@ -169,7 +169,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
 
     /** Error thrown when creating a [NotBlankString] fails. */
     @Deprecated(
-        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
     @SinceKotoolsTypes("3.0")

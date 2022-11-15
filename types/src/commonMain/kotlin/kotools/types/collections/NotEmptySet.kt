@@ -31,7 +31,7 @@ private fun <E> notEmptySetOf(head: E, tail: Set<E>): NotEmptySet<E> {
  * an [IllegalArgumentException] if this array is empty.
  */
 @Deprecated(
-    "Use the Array.toNotEmptySetOrThrow function instead. Will be an error in v3.3.",
+    "Use the Array.toNotEmptySetOrThrow function instead.",
     ReplaceWith(
         "this.toNotEmptySetOrThrow()",
         "${Package.collections}.toNotEmptySetOrThrow"
@@ -46,7 +46,7 @@ public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> = toNotEmptySetOrThrow()
  * throws an [IllegalArgumentException] if this collection is empty.
  */
 @Deprecated(
-    "Use the Collection.toNotEmptySetOrThrow function instead. Will be an error in v3.3.",
+    "Use the Collection.toNotEmptySetOrThrow function instead.",
     ReplaceWith(
         "this.toNotEmptySetOrThrow()",
         "${Package.collections}.toNotEmptySetOrThrow"
