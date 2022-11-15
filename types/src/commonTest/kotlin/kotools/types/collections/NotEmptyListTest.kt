@@ -18,7 +18,7 @@ class NotEmptyListTest : RandomValueHolder {
         .pairWith { arrayOf(randomInt) }
         .runPairWith { notEmptyListOf(first, *second) }
         .runMapFirst { listOf(first) + second }
-        .toPairs()
+        .run { first.zip(second) }
         .forEach(Pair<Int?, Int?>::assertEquals)
 
     @Suppress("DEPRECATION")
@@ -34,6 +34,33 @@ class NotEmptyListTest : RandomValueHolder {
     fun collection_toNotEmptyList_should_throw_an_error_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
         assertFailsWith<IllegalArgumentException>(collection::toNotEmptyList)
+    }
+
+    @Test
+    fun array_toNotEmptyListOrElse_should_pass_with_a_not_empty_Array() {
+        val array: Array<Int> = arrayOf(1, 2, 3)
+        val defaultValue: NotEmptyList<Int> = notEmptyListOf(-1, -2, -3)
+        val result: NotEmptyList<Int> =
+            array toNotEmptyListOrElse { defaultValue }
+        result.forEachIndexed { index: Int, element: Int ->
+            element assertEquals array.elementAt(index)
+            index.toPositiveIntOrThrow()
+                .let(defaultValue::get)
+                .assertNotEquals(element)
+        }
+    }
+
+    @Test
+    fun array_toNotEmptyListOrElse_should_return_the_default_value_with_an_empty_Array() {
+        val array: Array<Int> = emptyArray()
+        val defaultValue: NotEmptyList<Int> = notEmptyListOf(-1, -2, -3)
+        val result: NotEmptyList<Int> =
+            array toNotEmptyListOrElse { defaultValue }
+        result.forEachIndexed { index: Int, element: Int ->
+            index.toPositiveIntOrThrow()
+                .let(defaultValue::get)
+                .assertEquals(element)
+        }
     }
 
     @Test
@@ -66,33 +93,6 @@ class NotEmptyListTest : RandomValueHolder {
     }
 
     @Test
-    fun array_toNotEmptyListOrElse_should_pass_with_a_not_empty_Array() {
-        val array: Array<Int> = arrayOf(1, 2, 3)
-        val defaultValue: NotEmptyList<Int> = notEmptyListOf(-1, -2, -3)
-        val result: NotEmptyList<Int> =
-            array toNotEmptyListOrElse { defaultValue }
-        result.forEachIndexed { index: Int, element: Int ->
-            element assertEquals array.elementAt(index)
-            index.toPositiveIntOrThrow()
-                .let(defaultValue::get)
-                .assertNotEquals(element)
-        }
-    }
-
-    @Test
-    fun array_toNotEmptyListOrElse_should_return_the_default_value_with_an_empty_Array() {
-        val array: Array<Int> = emptyArray()
-        val defaultValue: NotEmptyList<Int> = notEmptyListOf(-1, -2, -3)
-        val result: NotEmptyList<Int> =
-            array toNotEmptyListOrElse { defaultValue }
-        result.forEachIndexed { index: Int, element: Int ->
-            index.toPositiveIntOrThrow()
-                .let(defaultValue::get)
-                .assertEquals(element)
-        }
-    }
-
-    @Test
     fun collection_toNotEmptyListOrNull_should_pass_with_a_not_empty_Collection() =
         setOf(randomString, randomString, randomString)
             .pairWith(Collection<String>::toNotEmptyListOrNull)
@@ -107,22 +107,6 @@ class NotEmptyListTest : RandomValueHolder {
             .assertNull()
 
     @Test
-    fun collection_toNotEmptyListOrThrow_should_pass_with_a_not_empty_collection(): Unit =
-        setOf(randomInt, randomInt, randomInt)
-            .zip(Collection<Int>::toNotEmptyListOrThrow)
-            .forEach(Pair<Int, Int>::assertEquals)
-
-    @Test
-    fun collection_toNotEmptyListOrThrow_should_throw_an_error_with_an_empty_Collection(): Unit =
-        assertFailsWith<IllegalArgumentException>(
-            emptyList<Int>()::toNotEmptyListOrThrow
-        )
-            .message
-            .assertNotNull()
-            .isNotBlank()
-            .assertTrue()
-
-    @Test
     fun array_toNotEmptyListOrThrow_should_pass_with_a_not_empty_Array(): Unit =
         arrayOf(randomInt, randomInt, randomInt)
             .zip(Array<Int>::toNotEmptyListOrThrow)
@@ -132,6 +116,22 @@ class NotEmptyListTest : RandomValueHolder {
     fun array_toNotEmptyListOrThrow_should_throw_an_error_with_an_empty_Array(): Unit =
         assertFailsWith<IllegalArgumentException>(
             emptyArray<Int>()::toNotEmptyListOrThrow
+        )
+            .message
+            .assertNotNull()
+            .isNotBlank()
+            .assertTrue()
+
+    @Test
+    fun collection_toNotEmptyListOrThrow_should_pass_with_a_not_empty_collection(): Unit =
+        setOf(randomInt, randomInt, randomInt)
+            .zip(Collection<Int>::toNotEmptyListOrThrow)
+            .forEach(Pair<Int, Int>::assertEquals)
+
+    @Test
+    fun collection_toNotEmptyListOrThrow_should_throw_an_error_with_an_empty_Collection(): Unit =
+        assertFailsWith<IllegalArgumentException>(
+            emptyList<Int>()::toNotEmptyListOrThrow
         )
             .message
             .assertNotNull()
