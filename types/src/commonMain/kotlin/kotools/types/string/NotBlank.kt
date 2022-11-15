@@ -6,7 +6,8 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.*
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
@@ -14,20 +15,14 @@ import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
-private fun notBlankString(
-    value: String
-): KotoolsTypesBuilderResult<NotBlankString> = value.takeIf(String::isNotBlank)
-    ?.toSuccessfulResult(::NotBlankStringImplementation)
-    ?: value.shouldBe("not blank"::toNotBlankStringOrThrow)
-
 /**
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
  * is blank.
  */
 @SinceKotoolsTypes("3.2")
-public fun notBlankStringOrNull(value: String): NotBlankString? =
-    notBlankString(value)
-        .onError { return null }
+public fun notBlankStringOrNull(value: String): NotBlankString? = value
+    .takeIf(String::isNotBlank)
+    ?.let(::NotBlankStringImplementation)
 
 /**
  * Returns the [value] as a [NotBlankString], or throws an
@@ -36,8 +31,8 @@ public fun notBlankStringOrNull(value: String): NotBlankString? =
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
 public fun notBlankStringOrThrow(value: String): NotBlankString =
-    notBlankString(value)
-        .onError { throw it }
+    notBlankStringOrNull(value)
+        ?: throw IllegalArgumentException("Given string shouldn't be blank.")
 
 /**
  * Returns the [value] as a [NotBlankString], or throws an
@@ -54,7 +49,7 @@ public fun notBlankStringOrThrow(value: String): NotBlankString =
 @Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
 public fun NotBlankString(value: String): NotBlankString =
-    value.toNotBlankString()
+    notBlankStringOrNull(value) ?: throw NotBlankString.ConstructionError()
 
 /**
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
@@ -70,7 +65,7 @@ public fun NotBlankString(value: String): NotBlankString =
 @Suppress("FunctionName")
 @SinceKotoolsTypes("3.0")
 public fun NotBlankStringOrNull(value: String): NotBlankString? =
-    value.toNotBlankStringOrNull()
+    notBlankStringOrNull(value)
 
 /**
  * Returns this value as a [NotBlankString], or throws an
@@ -86,8 +81,7 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
 @SinceKotoolsTypes("1.2")
 @Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
-public fun String.toNotBlankString(): NotBlankString =
-    toNotBlankStringOrNull() ?: throw NotBlankString.ConstructionError()
+public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
 
 /**
  * Returns this value as a [NotBlankString], or returns `null` if this value is
