@@ -1,17 +1,17 @@
-name: Integration - Assert
+name: Assert - Integration
 on:
   pull_request:
     branches: [ main ]
     paths:
       - './*gradle*'
-      - .github/workflows/integration-assert.yml
+      - .github/workflows/assert-integration.yml
       - assert/**/*.kt*
       - buildSrc/**/*.kt*
   push:
     branches: [ main ]
     paths:
       - './*gradle*'
-      - .github/workflows/integration-assert.yml
+      - .github/workflows/assert-integration.yml
       - assert/**/*.kt*
       - buildSrc/**/*.kt*
   workflow_dispatch:
