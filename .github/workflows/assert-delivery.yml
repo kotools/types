@@ -1,10 +1,10 @@
-name: Assert Integration & Delivery
+name: Assert - Delivery
 on:
   push:
-    branches: [ main ]
+    branches: [ release/assert-v* ]
     paths:
       - './*gradle*'
-      - .github/workflows/assert-integration-delivery.yml
+      - .github/workflows/assert-delivery.yml
       - assert/**/*.kt*
       - buildSrc/**/*.kt*
   workflow_dispatch:
