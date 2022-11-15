@@ -19,6 +19,11 @@ All notable changes to this project will be documented in this file.
 
 ### All platforms
 
+#### Added
+
+Add explicit builders for all types
+([#22](https://github.com/kotools/libraries/issues/22)).
+
 #### Changed
 
 Update random API for getting a random `IntHolder`
@@ -26,15 +31,14 @@ Update random API for getting a random `IntHolder`
 
 #### Deprecated
 
-The `random` function in the companion object of subtypes `IntHolder`
-([#17](https://github.com/kotools/libraries/issues/17)):
-
-```kotlin
-// Instead of doing...
-NonZeroInt.random()
-// do this
-randomNonZeroInt()
-```
+- The `random` function in the companion object of subtypes `IntHolder`
+  ([#17](https://github.com/kotools/libraries/issues/17)).
+- Builders throwing an exception without having the `OrThrow` suffix in their
+  name ([#22](https://github.com/kotools/libraries/issues/22)).
+- Builders having an invalid name, like `PositiveIntOrNull`
+  ([#22](https://github.com/kotools/libraries/issues/22)).
+- `ConstructionError` objects
+  ([#22](https://github.com/kotools/libraries/issues/22)).
 
 #### Removed
 
