@@ -62,6 +62,13 @@ public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
  * Returns a [NotEmptyList] containing all the elements of this array, or throws
  * an [IllegalArgumentException] if this array is empty.
  */
+@Deprecated(
+    "Use the Array.toNotEmptyListOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "this.toNotEmptyListOrThrow()",
+        "${Package.collections}.toNotEmptyListOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
 public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> = toList()
@@ -112,6 +119,15 @@ public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = toList()
 public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> =
     toNotEmptyListImplementation()
         .onError { throw it }
+
+/**
+ * Returns a [NotEmptyList] containing all the elements of this array, or throws
+ * an [IllegalArgumentException] if this array is empty.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun <E> Array<E>.toNotEmptyListOrThrow(): NotEmptyList<E> = toList()
+    .toNotEmptyListOrThrow()
 
 /**
  * Representation of lists that contain at least one element.

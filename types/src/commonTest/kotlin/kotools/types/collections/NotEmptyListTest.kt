@@ -122,6 +122,22 @@ class NotEmptyListTest : RandomValueHolder {
             .isNotBlank()
             .assertTrue()
 
+    @Test
+    fun array_toNotEmptyListOrThrow_should_pass_with_a_not_empty_Array(): Unit =
+        arrayOf(randomInt, randomInt, randomInt)
+            .zip(Array<Int>::toNotEmptyListOrThrow)
+            .forEach(Pair<Int, Int>::assertEquals)
+
+    @Test
+    fun array_toNotEmptyListOrThrow_should_throw_an_error_with_an_empty_Array(): Unit =
+        assertFailsWith<IllegalArgumentException>(
+            emptyArray<Int>()::toNotEmptyListOrThrow
+        )
+            .message
+            .assertNotNull()
+            .isNotBlank()
+            .assertTrue()
+
     // ---------- Conversions ----------
 
     @Test
