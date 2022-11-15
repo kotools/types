@@ -152,7 +152,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
         )
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyPositiveInt = range.random()
-            .toStrictlyPositiveInt()
+            .toStrictlyPositiveIntOrThrow()
     }
 
     /** Error thrown when creating a [StrictlyPositiveInt] fails. */

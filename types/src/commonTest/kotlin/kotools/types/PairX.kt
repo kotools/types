@@ -18,16 +18,6 @@ fun <A> Pair<A, A>.assertEquals(): Unit = first assertEquals second
 
 // ---------- Mappers ----------
 
-inline fun <A, B, C, D> Pair<A, B>.map(
-    first: (Pair<A, B>) -> C,
-    second: (Pair<A, B>) -> D
-): Pair<C, D> = first(this) to second(this)
-
-inline fun <A, B, C, D> Pair<A, B>.runMap(
-    first: Pair<A, B>.() -> C,
-    second: Pair<A, B>.() -> D
-): Pair<C, D> = map(first, second)
-
 inline fun <A, B, C> Pair<A, B>.mapFirst(block: (A) -> C): Pair<C, B> =
     block(first) to second
 

@@ -32,27 +32,6 @@ class NotEmptySetTest : RandomValueHolder {
         }
 
     @Test
-    fun array_toNotEmptySet_should_pass(): Unit =
-        arrayOf(randomInt, randomInt, randomInt)
-            .pairBy(Array<Int>::toNotEmptySet)
-            .run {
-                first.size assertEquals second.size
-                first.forEachIndexed { index: Int, element: Int ->
-                    element assertEquals second.elementAt(index)
-                }
-            }
-
-    @Test
-    fun array_toNotEmptySet_should_throw_an_error_with_an_empty_array(): Unit =
-        emptyArray<Int>()
-            .runCatching { toNotEmptySet() }
-            .exceptionOrNull()
-            .assertNotNull()
-            .apply { message.assertNotNull() }
-            .let { it is IllegalArgumentException }
-            .assertTrue()
-
-    @Test
     fun array_toNotEmptySetOrElse_should_pass_with_a_not_empty_array(): Unit =
         (arrayOf(randomInt, randomInt) to notEmptySetOf(randomInt))
             .runPairBy { first.toNotEmptySetOrElse { second } }
@@ -99,6 +78,27 @@ class NotEmptySetTest : RandomValueHolder {
                     element assertEquals second.second.elementAt(index)
                 }
             }
+
+    @Test
+    fun array_toNotEmptySetOrThrow_should_pass(): Unit =
+        arrayOf(randomInt, randomInt, randomInt)
+            .pairBy(Array<Int>::toNotEmptySetOrThrow)
+            .run {
+                first.size assertEquals second.size
+                first.forEachIndexed { index: Int, element: Int ->
+                    element assertEquals second.elementAt(index)
+                }
+            }
+
+    @Test
+    fun array_toNotEmptySetOrThrow_should_throw_an_error_with_an_empty_array(): Unit =
+        emptyArray<Int>()
+            .runCatching { toNotEmptySetOrThrow() }
+            .exceptionOrNull()
+            .assertNotNull()
+            .apply { message.assertNotNull() }
+            .let { it is IllegalArgumentException }
+            .assertTrue()
 
     @Test
     fun collection_toNotEmptySetOrThrow_should_pass_with_a_not_empty_collection(): Unit =
