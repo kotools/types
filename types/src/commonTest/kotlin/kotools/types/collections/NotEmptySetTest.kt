@@ -53,27 +53,6 @@ class NotEmptySetTest : RandomValueHolder {
             .assertTrue()
 
     @Test
-    fun collection_toNotEmptySet_should_pass_with_a_not_empty_collection(): Unit =
-        setOf(randomInt, randomInt, randomInt)
-            .pairBy(Set<Int>::toNotEmptySet)
-            .run {
-                first.size assertEquals second.size
-                first.forEachIndexed { index: Int, element: Int ->
-                    element assertEquals second.elementAt(index)
-                }
-            }
-
-    @Test
-    fun collection_toNotEmptySet_should_throw_an_error_with_an_empty_collection(): Unit =
-        emptySet<Int>()
-            .runCatching { toNotEmptySet() }
-            .exceptionOrNull()
-            .assertNotNull()
-            .apply { message.assertNotNull() }
-            .let { it is IllegalArgumentException }
-            .assertTrue()
-
-    @Test
     fun array_toNotEmptySetOrElse_should_pass_with_a_not_empty_array(): Unit =
         (arrayOf(randomInt, randomInt) to notEmptySetOf(randomInt))
             .runPairBy { first.toNotEmptySetOrElse { second } }
@@ -121,12 +100,33 @@ class NotEmptySetTest : RandomValueHolder {
                 }
             }
 
+    @Test
+    fun collection_toNotEmptySetOrThrow_should_pass_with_a_not_empty_collection(): Unit =
+        setOf(randomInt, randomInt, randomInt)
+            .pairBy(Set<Int>::toNotEmptySetOrThrow)
+            .run {
+                first.size assertEquals second.size
+                first.forEachIndexed { index: Int, element: Int ->
+                    element assertEquals second.elementAt(index)
+                }
+            }
+
+    @Test
+    fun collection_toNotEmptySetOrThrow_should_throw_an_error_with_an_empty_collection(): Unit =
+        emptySet<Int>()
+            .runCatching { toNotEmptySetOrThrow() }
+            .exceptionOrNull()
+            .assertNotNull()
+            .apply { message.assertNotNull() }
+            .let { it is IllegalArgumentException }
+            .assertTrue()
+
     // ---------- Conversions ----------
 
     @Test
-    fun toString_should_behave_like_a_Set() {
-        val set: Set<Int> = setOf(randomInt, randomInt)
-        set.toNotEmptySet()
-            .toString() assertEquals set.toString()
-    }
+    fun toString_should_behave_like_a_Set(): Unit = setOf(randomInt, randomInt)
+        .pairWith(Set<Int>::toNotEmptySetOrThrow)
+        .mapSecond(NotEmptySet<Int>::toString)
+        .mapFirst(Set<Int>::toString)
+        .assertEquals()
 }

@@ -6,6 +6,7 @@ import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 
 // ---------- Builders ----------
@@ -31,19 +32,24 @@ private fun <E> notEmptySetOf(head: E, tail: Set<E>): NotEmptySet<E> {
  */
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
-    toSet().toNotEmptySet()
+public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> = toSet()
+    .toNotEmptySetOrThrow()
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
+@Deprecated(
+    "Use the Collection.toNotEmptySetOrThrow function instead. Will be an error in v3.3.",
+    ReplaceWith(
+        "this.toNotEmptySetOrThrow()",
+        "${Package.collections}.toNotEmptySetOrThrow"
+    )
+)
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> =
-    toNotEmptySetOrNull() ?: throw IllegalArgumentException(
-        "Given collection shouldn't be empty."
-    )
+    toNotEmptySetOrThrow()
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this array, or returns
@@ -88,6 +94,17 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
         }
 
 /**
+ * Returns a [NotEmptySet] containing all the elements of this collection, or
+ * throws an [IllegalArgumentException] if this collection is empty.
+ */
+@SinceKotoolsTypes("3.2")
+@Throws(IllegalArgumentException::class)
+public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
+    toNotEmptySetOrNull() ?: throw IllegalArgumentException(
+        "Given collection shouldn't be empty."
+    )
+
+/**
  * Representation of sets that contain at least one element.
  *
  * @param E The type of elements contained in this set.
@@ -115,7 +132,7 @@ internal open class NotEmptySetSerializer<E>(
     override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
         delegate.serialize(encoder, value)
 
-    override fun deserialize(decoder: Decoder): NotEmptySet<E> =
-        delegate.deserialize(decoder)
-            .toNotEmptySet()
+    override fun deserialize(decoder: Decoder): NotEmptySet<E> = delegate
+        .deserialize(decoder)
+        .toNotEmptySetOrThrow()
 }
