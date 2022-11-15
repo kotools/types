@@ -10,19 +10,29 @@ import kotools.types.SinceKotoolsTypes
 
 // ---------- Builders ----------
 
-@Suppress("FunctionName")
-private fun <E> NotEmptySet(head: E, tail: Set<E>): NotEmptySet<E> {
-    val set: Set<E> = setOf(head) + tail
-    return NotEmptySetImplementation(set)
-}
-
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
 @SinceKotoolsTypes("3.0")
-public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
-    NotEmptySet(head, tail.toSet())
+public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
+    val set: Set<E> = tail.toSet()
+    return notEmptySetOf(head, set)
+}
+
+private fun <E> notEmptySetOf(head: E, tail: Set<E>): NotEmptySet<E> {
+    val set: Set<E> = setOf(head) + tail
+    return NotEmptySetImplementation(set)
+}
+
+/**
+ * Returns a [NotEmptySet] containing all the elements of this array, or throws
+ * an [IllegalArgumentException] if this array is empty.
+ */
+@SinceKotoolsTypes("1.3")
+@Throws(IllegalArgumentException::class)
+public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
+    toSet().toNotEmptySet()
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
@@ -36,36 +46,13 @@ public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> =
     )
 
 /**
- * Returns a [NotEmptySet] containing all the elements of this array, or throws
- * an [IllegalArgumentException] if this array is empty.
- */
-@SinceKotoolsTypes("1.3")
-@Throws(IllegalArgumentException::class)
-public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> =
-    toSet().toNotEmptySet()
-
-/**
- * Returns a [NotEmptySet] containing all the elements of this collection, or
- * returns `null` if this collection is empty.
- */
-@SinceKotoolsTypes("1.3")
-public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    takeIf { isNotEmpty() }
-        ?.run {
-            val head: E = first()
-            val tail: Set<E> = toList()
-                .subList(1, size)
-                .toSet()
-            NotEmptySet(head, tail)
-        }
-
-/**
  * Returns a [NotEmptySet] containing all the elements of this array, or returns
- * `null` if this array is empty.
+ * the result of calling the [defaultValue] function if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    toSet().toNotEmptySetOrNull()
+public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
+    defaultValue: (Array<E>) -> NotEmptySet<E>
+): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
@@ -79,12 +66,26 @@ public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this array, or returns
- * the result of calling the [defaultValue] function if this array is empty.
+ * `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
-    defaultValue: (Array<E>) -> NotEmptySet<E>
-): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
+public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
+    toSet().toNotEmptySetOrNull()
+
+/**
+ * Returns a [NotEmptySet] containing all the elements of this collection, or
+ * returns `null` if this collection is empty.
+ */
+@SinceKotoolsTypes("1.3")
+public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
+    takeIf { isNotEmpty() }
+        ?.run {
+            val head: E = first()
+            val tail: Set<E> = toList()
+                .subList(1, size)
+                .toSet()
+            notEmptySetOf(head, tail)
+        }
 
 /**
  * Representation of sets that contain at least one element.
