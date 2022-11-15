@@ -21,7 +21,7 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
     runs-on: ${{ matrix.os }}
     permissions: read-all
     steps:
