@@ -1,36 +1,19 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.*
-import kotools.types.string.toNotBlankStringOrThrow
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/*
-For API compatibility purpose, this function will be available publicly only
-when the NonZeroInt(Int) function is going to be removed (maybe in v3.4).
- */
-private fun nonZeroInt(value: Int): KotoolsTypesBuilderResult<NonZeroInt> =
-    value.takeIf { it != 0 }
-        ?.toSuccessfulResult(::NonZeroIntImplementation)
-        ?: builderError(
-            "Given value shouldn't equal 0."::toNotBlankStringOrThrow
-        )
-
-// This function will be available publicly with the nonZeroInt(Int) function.
-private inline fun nonZeroIntOrElse(
-    value: Int,
-    defaultValue: () -> NonZeroInt
-): NonZeroInt = nonZeroInt(value).onError { defaultValue() }
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
 @SinceKotoolsTypes("3.2")
-public fun nonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroInt(value)
-    .onError { return null }
+public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
+    ?.let(::NonZeroIntImplementation)
 
 /**
  * Returns the [value] as a [NonZeroInt], or throws an
@@ -38,8 +21,8 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroInt(value)
  */
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
-public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroInt(value)
-    .onError { throw it }
+public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
+    ?: throw value shouldBe otherThanZero
 
 /**
  * Returns the [value] as a [NonZeroInt], or throws an
@@ -55,7 +38,8 @@ public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroInt(value)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(NonZeroInt.ConstructionError::class)
-public fun NonZeroInt(value: Int): NonZeroInt = value.toNonZeroInt()
+public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
+    ?: throw NonZeroInt.ConstructionError
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
@@ -83,8 +67,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(NonZeroInt.ConstructionError::class)
-public fun Int.toNonZeroInt(): NonZeroInt =
-    nonZeroIntOrElse(this) { throw NonZeroInt.ConstructionError }
+public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
 
 /**
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals

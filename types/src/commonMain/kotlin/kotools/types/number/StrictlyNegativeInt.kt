@@ -1,31 +1,20 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.*
-import kotools.types.string.toNotBlankStringOrThrow
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/*
-For API compatibility purpose, this function will be available publicly only
-when the StrictlyNegativeInt(Int) function is going to be removed (maybe in
-v3.4).
- */
-private fun strictlyNegativeInt(
-    value: Int
-): KotoolsTypesBuilderResult<StrictlyNegativeInt> = value.takeIf { it < 0 }
-    ?.toSuccessfulResult(::StrictlyNegativeIntImplementation)
-    ?: value.shouldBe("strictly negative"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
  * [value] is positive.
  */
 @SinceKotoolsTypes("3.2")
-public fun strictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
-    strictlyNegativeInt(value)
-        .onError { return null }
+public fun strictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? = value
+    .takeIf { it < 0 }
+    ?.let(::StrictlyNegativeIntImplementation)
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
@@ -34,8 +23,8 @@ public fun strictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
 public fun strictlyNegativeIntOrThrow(value: Int): StrictlyNegativeInt =
-    strictlyNegativeInt(value)
-        .onError { throw it }
+    strictlyNegativeIntOrNull(value)
+        ?: throw value shouldBe aStrictlyNegativeNumber
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
@@ -52,7 +41,8 @@ public fun strictlyNegativeIntOrThrow(value: Int): StrictlyNegativeInt =
 @Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
-    strictlyNegative int value
+    strictlyNegativeIntOrNull(value)
+        ?: throw StrictlyNegativeInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
@@ -68,7 +58,7 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
-    strictlyNegative intOrNull value
+    strictlyNegativeIntOrNull(value)
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or throws an
@@ -85,8 +75,7 @@ public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
 @Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
-    toStrictlyNegativeIntOrNull()
-        ?: throw StrictlyNegativeInt.ConstructionError(this)
+    StrictlyNegativeInt(this)
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or returns `null` if this

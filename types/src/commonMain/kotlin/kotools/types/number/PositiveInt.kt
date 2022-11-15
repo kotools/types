@@ -1,28 +1,20 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.*
-import kotools.types.string.toNotBlankStringOrThrow
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/*
-For API compatibility purpose, this function will be available publicly only
-when the PositiveInt(Int) function is going to be removed (maybe in v3.4).
- */
-private fun positiveInt(value: Int): KotoolsTypesBuilderResult<PositiveInt> =
-    value.takeIf { it >= 0 }
-        ?.toSuccessfulResult(::PositiveIntImplementation)
-        ?: value.shouldBe("positive"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
  * strictly negative.
  */
 @SinceKotoolsTypes("3.2")
-public fun positiveIntOrNull(value: Int): PositiveInt? = positiveInt(value)
-    .onError { return null }
+public fun positiveIntOrNull(value: Int): PositiveInt? = value
+    .takeIf { it >= 0 }
+    ?.let(::PositiveIntImplementation)
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
@@ -30,8 +22,8 @@ public fun positiveIntOrNull(value: Int): PositiveInt? = positiveInt(value)
  */
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
-public fun positiveIntOrThrow(value: Int): PositiveInt = positiveInt(value)
-    .onError { throw it }
+public fun positiveIntOrThrow(value: Int): PositiveInt =
+    positiveIntOrNull(value) ?: throw value shouldBe aPositiveNumber
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
@@ -47,7 +39,8 @@ public fun positiveIntOrThrow(value: Int): PositiveInt = positiveInt(value)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
-public fun PositiveInt(value: Int): PositiveInt = positive int value
+public fun PositiveInt(value: Int): PositiveInt = positiveIntOrNull(value)
+    ?: throw PositiveInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
@@ -63,7 +56,7 @@ public fun PositiveInt(value: Int): PositiveInt = positive int value
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
-    positive intOrNull value
+    positiveIntOrNull(value)
 
 /**
  * Returns this value as a [PositiveInt], or throws an
@@ -79,8 +72,7 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
-public fun Int.toPositiveInt(): PositiveInt = toPositiveIntOrNull()
-    ?: throw PositiveInt.ConstructionError(this)
+public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
 
 /**
  * Returns this value as a [PositiveInt], or returns `null` if this value is

@@ -1,28 +1,20 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.*
-import kotools.types.string.toNotBlankStringOrThrow
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/*
-For API compatibility purpose, this function will be available publicly only
-when the NegativeInt(Int) function is going to be removed (maybe in v3.4).
- */
-private fun negativeInt(value: Int): KotoolsTypesBuilderResult<NegativeInt> =
-    value.takeIf { it <= 0 }
-        ?.toSuccessfulResult(::NegativeIntImplementation)
-        ?: value.shouldBe("negative"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
  * strictly positive.
  */
 @SinceKotoolsTypes("3.2")
-public fun negativeIntOrNull(value: Int): NegativeInt? = negativeInt(value)
-    .onError { return null }
+public fun negativeIntOrNull(value: Int): NegativeInt? = value
+    .takeIf { it <= 0 }
+    ?.let(::NegativeIntImplementation)
 
 /**
  * Returns the [value] as a [NegativeInt], or throws an
@@ -30,8 +22,8 @@ public fun negativeIntOrNull(value: Int): NegativeInt? = negativeInt(value)
  */
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
-public fun negativeIntOrThrow(value: Int): NegativeInt = negativeInt(value)
-    .onError { throw it }
+public fun negativeIntOrThrow(value: Int): NegativeInt =
+    negativeIntOrNull(value) ?: throw value shouldBe aNegativeNumber
 
 /**
  * Returns the [value] as a [NegativeInt], or throws an
@@ -47,7 +39,8 @@ public fun negativeIntOrThrow(value: Int): NegativeInt = negativeInt(value)
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(NegativeInt.ConstructionError::class)
-public fun NegativeInt(value: Int): NegativeInt = negative int value
+public fun NegativeInt(value: Int): NegativeInt = negativeIntOrNull(value)
+    ?: throw NegativeInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
@@ -63,7 +56,7 @@ public fun NegativeInt(value: Int): NegativeInt = negative int value
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
-    negative intOrNull value
+    negativeIntOrNull(value)
 
 /**
  * Returns this value as a [NegativeInt], or throws an
@@ -79,8 +72,7 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
 @SinceKotoolsTypes("1.1")
 @Suppress("DEPRECATION")
 @Throws(NegativeInt.ConstructionError::class)
-public fun Int.toNegativeInt(): NegativeInt = toNegativeIntOrNull()
-    ?: throw NegativeInt.ConstructionError(this)
+public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
 
 /**
  * Returns this value as a [NegativeInt], or returns `null` if this value is

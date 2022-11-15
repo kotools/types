@@ -1,31 +1,20 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
-import kotools.types.*
-import kotools.types.string.toNotBlankStringOrThrow
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/*
-For API compatibility purpose, this function will be available publicly only
-when the StrictlyPositiveInt(Int) function is going to be removed (maybe in
-v3.4).
- */
-private fun strictlyPositiveInt(
-    value: Int
-): KotoolsTypesBuilderResult<StrictlyPositiveInt> = value.takeIf { it > 0 }
-    ?.toSuccessfulResult(::StrictlyPositiveIntImplementation)
-    ?: value.shouldBe("strictly positive"::toNotBlankStringOrThrow)
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
  * [value] is negative.
  */
 @SinceKotoolsTypes("3.2")
-public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
-    strictlyPositiveInt(value)
-        .onError { return null }
+public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? = value
+    .takeIf { it > 0 }
+    ?.let(::StrictlyPositiveIntImplementation)
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
@@ -34,8 +23,8 @@ public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
 public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
-    strictlyPositiveInt(value)
-        .onError { throw it }
+    strictlyPositiveIntOrNull(value)
+        ?: throw value shouldBe aStrictlyPositiveNumber
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
@@ -52,7 +41,8 @@ public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
 @Suppress("DEPRECATION")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
-    strictlyPositive int value
+    strictlyPositiveIntOrNull(value)
+        ?: throw StrictlyPositiveInt.ConstructionError(value)
 
 /**
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
@@ -68,7 +58,7 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
 @SinceKotoolsTypes("3.0")
 @Suppress("FunctionName")
 public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
-    strictlyPositive intOrNull value
+    strictlyPositiveIntOrNull(value)
 
 /**
  * Returns this value as a [StrictlyPositiveInt], or throws an
@@ -85,8 +75,7 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
 @Suppress("DEPRECATION")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
-    toStrictlyPositiveIntOrNull()
-        ?: throw StrictlyPositiveInt.ConstructionError(this)
+    StrictlyPositiveInt(this)
 
 /**
  * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
