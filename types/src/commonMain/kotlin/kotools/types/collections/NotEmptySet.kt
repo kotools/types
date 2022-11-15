@@ -81,8 +81,8 @@ public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
  * `null` if this array is empty.
  */
 @SinceKotoolsTypes("1.3")
-public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    toSet().toNotEmptySetOrNull()
+public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? = toSet()
+    .toNotEmptySetOrNull()
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
@@ -90,14 +90,13 @@ public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
  */
 @SinceKotoolsTypes("1.3")
 public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    takeIf { isNotEmpty() }
-        ?.run {
-            val head: E = first()
-            val tail: Set<E> = toList()
-                .subList(1, size)
-                .toSet()
-            notEmptySetOf(head, tail)
-        }
+    takeIf(Collection<E>::isNotEmpty)?.run {
+        val head: E = first()
+        val tail: Set<E> = toList()
+            .subList(1, size)
+            .toSet()
+        notEmptySetOf(head, tail)
+    }
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this array, or throws

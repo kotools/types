@@ -33,7 +33,7 @@ public fun <K, V> notEmptyMapOf(
 @Suppress("DEPRECATION")
 @Throws(NotEmptyMap.ConstructionError::class)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): NotEmptyMap<K, V> =
-    toNotEmptyMapOrElse { throw NotEmptyMap.ConstructionError }
+    toNotEmptyMapOrNull() ?: throw NotEmptyMap.ConstructionError
 
 /**
  * Returns a [NotEmptyMap] containing all the entries of this map, or returns
@@ -60,9 +60,8 @@ public inline fun <K, V> Map<K, V>.toNotEmptyMapOrElse(
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
 public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
-    toNotEmptyMapOrElse {
-        throw IllegalArgumentException("Given map shouldn't be empty.")
-    }
+    toNotEmptyMapOrNull()
+        ?: throw IllegalArgumentException("Given map shouldn't be empty.")
 
 /**
  * Representation of maps that contain at least one entry.

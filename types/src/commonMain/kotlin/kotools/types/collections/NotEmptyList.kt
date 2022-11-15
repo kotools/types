@@ -6,8 +6,8 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.*
-import kotools.types.string.toNotBlankStringOrThrow
+import kotools.types.Package
+import kotools.types.SinceKotoolsTypes
 
 // ---------- Builders ----------
 
@@ -39,8 +39,8 @@ private fun <E> notEmptyListOf(head: E, tail: List<E>): NotEmptyList<E> {
 )
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> = toList()
-    .toNotEmptyListOrThrow()
+public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> =
+    toNotEmptyListOrThrow()
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -55,24 +55,8 @@ public fun <E> Array<E>.toNotEmptyList(): NotEmptyList<E> = toList()
 )
 @SinceKotoolsTypes("1.3")
 @Throws(IllegalArgumentException::class)
-public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> {
-    require(isNotEmpty()) { "Given collection shouldn't be empty." }
-    val list: List<E> = toList()
-    val head: E = list.first()
-    val tail: List<E> = list.subList(1, list.size)
-    return notEmptyListOf(head, tail)
-}
-
-// Will replace the Collection.toNotEmptyList function in v3.4.
-private fun <E> Collection<E>.toNotEmptyListImplementation():
-        KotoolsTypesBuilderResult<NotEmptyList<E>> =
-    takeIf(Collection<E>::isNotEmpty)
-        ?.toList()
-        ?.run { first() to subList(1, size) }
-        ?.toSuccessfulResult { notEmptyListOf(it.first, it.second) }
-        ?: builderError(
-            "Given collection shouldn't be empty."::toNotBlankStringOrThrow
-        )
+public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> =
+    toNotEmptyListOrThrow()
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this array, or
@@ -108,7 +92,10 @@ public fun <E> Array<E>.toNotEmptyListOrNull(): NotEmptyList<E>? = toList()
  */
 @SinceKotoolsTypes("1.3")
 public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    tryOrNull(::toNotEmptyListOrThrow)
+    takeIf(Collection<E>::isNotEmpty)
+        ?.toList()
+        ?.run { first() to subList(1, size) }
+        ?.run { notEmptyListOf(first, second) }
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this array, or throws
@@ -116,8 +103,9 @@ public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
  */
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
-public fun <E> Array<E>.toNotEmptyListOrThrow(): NotEmptyList<E> = toList()
-    .toNotEmptyListOrThrow()
+public fun <E> Array<E>.toNotEmptyListOrThrow(): NotEmptyList<E> =
+    toNotEmptyListOrNull()
+        ?: throw IllegalArgumentException("Given array shouldn't be empty.")
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -126,8 +114,9 @@ public fun <E> Array<E>.toNotEmptyListOrThrow(): NotEmptyList<E> = toList()
 @SinceKotoolsTypes("3.2")
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> =
-    toNotEmptyListImplementation()
-        .onError { throw it }
+    toNotEmptyListOrNull() ?: throw IllegalArgumentException(
+        "Given collection shouldn't be empty."
+    )
 
 /**
  * Representation of lists that contain at least one element.
