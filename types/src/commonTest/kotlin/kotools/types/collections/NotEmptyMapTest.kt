@@ -2,6 +2,8 @@ package kotools.types.collections
 
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
+import kotools.assert.assertNotNull
+import kotools.assert.assertTrue
 import kotools.types.core.RandomValueHolder
 import kotlin.test.Test
 
@@ -43,12 +45,14 @@ class NotEmptyMapTest : RandomValueHolder {
     }
 
     @Test
-    fun map_toNotEmptyMap_should_throw_an_error_with_an_empty_Map() {
-        // GIVEN
-        val map: Map<Int, String> = emptyMap()
-        // WHEN & THEN
-        assertFailsWith<NotEmptyMap.ConstructionError>(map::toNotEmptyMap)
-    }
+    fun map_toNotEmptyMap_should_throw_an_error_with_an_empty_Map(): Unit =
+        assertFailsWith<IllegalArgumentException>(
+            emptyMap<Int, String>()::toNotEmptyMap
+        )
+            .message
+            .assertNotNull()
+            .isNotBlank()
+            .assertTrue()
 
     // ---------- Conversions ----------
 

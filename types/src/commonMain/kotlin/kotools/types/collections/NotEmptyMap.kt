@@ -22,6 +22,7 @@ public fun <K, V> notEmptyMapOf(
  * a [NotEmptyMap.ConstructionError] if this map is empty.
  */
 @SinceKotoolsTypes("3.1")
+@Suppress("DEPRECATION")
 @Throws(NotEmptyMap.ConstructionError::class)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): NotEmptyMap<K, V> =
     toNotEmptyMapOrElse { throw NotEmptyMap.ConstructionError }
@@ -61,6 +62,10 @@ public sealed interface NotEmptyMap<K, out V> : Map<K, V> {
     public val typedSize: StrictlyPositiveInt get() = strictlyPositive int size
 
     /** Error thrown when creating a [NotEmptyMap] fails. */
+    @Deprecated(
+        "Use the IllegalArgumentException type instead. Will be an error in v3.3.",
+        ReplaceWith("IllegalArgumentException")
+    )
     public object ConstructionError :
         IllegalArgumentException("NotEmptyMap can't be empty.")
 }
