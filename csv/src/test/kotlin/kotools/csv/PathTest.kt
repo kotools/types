@@ -15,6 +15,8 @@ private inline fun CsvPathResult.onException(
 }
 
 class CsvPathTest {
+    // ---------- NotBlankString.csv() ----------
+
     @Test
     fun csv_should_pass_with_a_NotBlankString_not_suffixed_by_the_CSV_extension() {
         // GIVEN
@@ -49,4 +51,48 @@ class CsvPathTest {
             else -> fail()
         }
     }
+
+    // ---------- String.csv() ----------
+
+    @Test
+    fun csv_should_pass_with_a_not_blank_String_not_suffixed_by_the_CSV_extension() {
+        // GIVEN
+        val fileName = "file"
+        // WHEN & THEN
+        fileName.csv()
+            .onException { fail(it.message, it) }
+            .path.value assertEquals "$fileName$CSV_EXTENSION"
+    }
+
+    @Test
+    fun csv_should_pass_with_a_not_blank_String_suffixed_by_the_CSV_extension() {
+        // GIVEN
+        val fileName = "file.csv"
+        // WHEN & THEN
+        fileName.csv()
+            .onException { fail(it.message, it) }
+            .path.value assertEquals fileName
+    }
+
+    @Test
+    fun csv_should_fail_with_a_blank_String(): Unit =
+        when (val result: CsvPathResult.FromString = " ".csv()) {
+            is CsvPathResult.Exception.BlankString -> result.message
+                .assertNotNull()
+                .isNotBlank()
+                .assertTrue()
+            is CsvPathResult.Exception -> fail(result.message, result)
+            is CsvPathResult.Success -> fail()
+        }
+
+    @Test
+    fun csv_should_fail_with_a_not_blank_String_that_equals_the_CSV_extension(): Unit =
+        when (val result: CsvPathResult.FromString = CSV_EXTENSION.csv()) {
+            is CsvPathResult.Exception.CsvExtensionAsPath -> result.message
+                .assertNotNull()
+                .isNotBlank()
+                .assertTrue()
+            is CsvPathResult.Exception -> fail(result.message, result)
+            is CsvPathResult.Success -> fail()
+        }
 }
