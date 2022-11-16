@@ -1,0 +1,39 @@
+name: CSV - Integration
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - './*gradle*'
+      - .github/workflows/csv-integration.yml
+      - buildSrc/**/*.kt*
+      - csv/**/*.kt*
+  push:
+    branches: [ main ]
+    paths:
+      - './*gradle*'
+      - .github/workflows/csv-integration.yml
+      - buildSrc/**/*.kt*
+      - csv/**/*.kt*
+  workflow_dispatch:
+jobs:
+  test:
+    name: Test
+    strategy:
+      max-parallel: 3
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.5
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: adopt
+          java-version: 8
+          cache: gradle
+      - name: Test
+        run: ./gradlew csv:test --no-daemon
