@@ -16,12 +16,12 @@ class CsvPathTest {
         val fileName = NotBlankString("file")
         fileName.csv()
             .onException { fail(it.message, it) }
-            .path.value assertEquals "$fileName$CSV_EXTENSION"
+            .path.value assertEquals "$fileName$csvExtension"
     }
 
     @Test
     fun csv_should_pass_with_a_NotBlankString_suffixed_by_the_CSV_extension() {
-        val fileName = NotBlankString("file$CSV_EXTENSION")
+        val fileName = NotBlankString("file$csvExtension")
         fileName.csv()
             .onException { fail(it.message, it) }
             .path.value assertEquals fileName.value
@@ -29,7 +29,7 @@ class CsvPathTest {
 
     @Test
     fun csv_should_fail_with_a_NotBlankString_that_equals_the_CSV_extension() {
-        val fileName = NotBlankString(CSV_EXTENSION)
+        val fileName: NotBlankString = csvExtension.toNotBlankString()
         when (val result: CsvPathResult.FromNotBlankString = fileName.csv()) {
             is CsvPathResult.Exception.CsvExtensionAsPath -> result.message
                 .assertNotNull()
@@ -47,7 +47,7 @@ class CsvPathTest {
         val fileName = "file"
         fileName.csv()
             .onException { fail(it.message, it) }
-            .path.value assertEquals "$fileName$CSV_EXTENSION"
+            .path.value assertEquals "$fileName$csvExtension"
     }
 
     @Test
@@ -70,8 +70,9 @@ class CsvPathTest {
         }
 
     @Test
-    fun csv_should_fail_with_a_not_blank_String_that_equals_the_CSV_extension(): Unit =
-        when (val result: CsvPathResult.FromString = CSV_EXTENSION.csv()) {
+    fun csv_should_fail_with_a_not_blank_String_that_equals_the_CSV_extension() {
+        val file: String = csvExtension.toString()
+        when (val result: CsvPathResult.FromString = file.csv()) {
             is CsvPathResult.Exception.CsvExtensionAsPath -> result.message
                 .assertNotNull()
                 .isNotBlank()
@@ -79,6 +80,7 @@ class CsvPathTest {
             is CsvPathResult.Exception -> fail(result.message, result)
             is CsvPathResult.Success -> fail()
         }
+    }
 
     // ---------- NotBlankString.csvOrNull() ----------
 
@@ -87,12 +89,12 @@ class CsvPathTest {
         val file = NotBlankString("file")
         file.csvOrNull()
             .assertNotNull()
-            .path.value assertEquals "${file.value}$CSV_EXTENSION"
+            .path.value assertEquals "${file.value}$csvExtension"
     }
 
     @Test
     fun csvOrNull_should_pass_with_a_NotBlankString_suffixed_by_the_CSV_extension() {
-        val file = NotBlankString("file$CSV_EXTENSION")
+        val file = NotBlankString("file$csvExtension")
         file.csvOrNull()
             .assertNotNull()
             .path.value assertEquals file.value
@@ -100,7 +102,7 @@ class CsvPathTest {
 
     @Test
     fun csvOrNull_should_fail_with_a_NotBlankString_that_equals_the_CSV_extension(): Unit =
-        NotBlankString(CSV_EXTENSION)
+        csvExtension.toNotBlankString()
             .csvOrNull()
             .assertNull()
 }

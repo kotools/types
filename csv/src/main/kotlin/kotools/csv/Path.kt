@@ -4,8 +4,6 @@ import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 import kotools.types.string.toNotBlankStringOrNull
 
-internal const val CSV_EXTENSION: String = ".csv"
-
 /**
  * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
  * `.csv` extension, or returns a [CsvPathResult.Exception.CsvExtensionAsPath]
@@ -28,12 +26,9 @@ public fun String.csv(): CsvPathResult.FromString = toNotBlankStringOrNull()
     ?: CsvPathResult.Exception.BlankString
 
 private fun NotBlankString.csvImplementation(): CsvPathResult =
-    if (value == CSV_EXTENSION) CsvPathResult.Exception.CsvExtensionAsPath
-    else {
-        val path: NotBlankString = takeIf { it.value.endsWith(CSV_EXTENSION) }
-            ?: "$this$CSV_EXTENSION".toNotBlankString()
-        CsvPathResult.Success(path)
-    }
+    if (value == csvExtension.toString())
+        CsvPathResult.Exception.CsvExtensionAsPath
+    else CsvPathResult.Success(this suffixWith csvExtension)
 
 /**
  * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
@@ -90,7 +85,7 @@ public sealed interface CsvPathResult {
          */
         public object CsvExtensionAsPath :
             Exception(
-                "equal the \"$CSV_EXTENSION\" extension".toNotBlankString()
+                "equal the \"$csvExtension\" extension".toNotBlankString()
             ),
             FromNotBlankString,
             FromString
