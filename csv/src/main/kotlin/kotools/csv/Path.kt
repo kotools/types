@@ -59,14 +59,14 @@ public sealed interface CsvPathResult {
         FromString
 
     /** Object returned when building a [CSV path][Success] fails. */
-    public sealed class Exception(reason: String) :
+    public sealed class Exception(reason: NotBlankString) :
         IllegalArgumentException("CSV path shouldn't $reason."),
         CsvPathResult {
         /**
          * Exception returned when trying to build a [CSV path][Success] from a
          * blank string.
          */
-        public object BlankString : Exception("be blank"),
+        public object BlankString : Exception("be blank".toNotBlankString()),
             FromString
 
         /**
@@ -74,7 +74,9 @@ public sealed interface CsvPathResult {
          * string that equals the `.csv` extension.
          */
         public object CsvExtensionAsPath :
-            Exception("equal the \"$CSV_EXTENSION\" extension"),
+            Exception(
+                "equal the \"$CSV_EXTENSION\" extension".toNotBlankString()
+            ),
             FromNotBlankString,
             FromString
     }
