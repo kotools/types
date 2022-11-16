@@ -30,11 +30,26 @@ public fun String.csv(): CsvPathResult.FromString = toNotBlankStringOrNull()
 private fun NotBlankString.csvImplementation(): CsvPathResult =
     if (value == CSV_EXTENSION) CsvPathResult.Exception.CsvExtensionAsPath
     else {
-        val path: NotBlankString =
-            takeIf { it.value.endsWith(CSV_EXTENSION) }
-                ?: "$this$CSV_EXTENSION".toNotBlankString()
+        val path: NotBlankString = takeIf { it.value.endsWith(CSV_EXTENSION) }
+            ?: "$this$CSV_EXTENSION".toNotBlankString()
         CsvPathResult.Success(path)
     }
+
+/**
+ * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
+ * `.csv` extension, or returns `null` if this string equals the `.csv`
+ * extension.
+ */
+@SinceKotoolsCsv("2.3")
+public fun NotBlankString.csvOrNull(): CsvPathResult.Success? = csv()
+    .onException { return null }
+
+internal inline fun CsvPathResult.onException(
+    action: (CsvPathResult.Exception) -> CsvPathResult.Success
+): CsvPathResult.Success = when (this) {
+    is CsvPathResult.Success -> this
+    is CsvPathResult.Exception -> action(this)
+}
 
 /** Object returned when trying to build a [CSV path][CsvPathResult.Success]. */
 @SinceKotoolsCsv("2.3")
