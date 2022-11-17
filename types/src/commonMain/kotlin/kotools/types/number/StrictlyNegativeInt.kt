@@ -3,8 +3,8 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 import kotools.shared.StabilityLevel
+import kotools.types.Package
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -110,12 +110,13 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
     // ---------- Unary operations ----------
 
     override fun inc(): StrictlyNegativeInt = if (value == max.value) min
-    else strictlyNegative int value + 1
+    else strictlyNegativeIntOrThrow(value + 1)
 
     override fun dec(): StrictlyNegativeInt = if (value == min.value) max
-    else strictlyNegative int value - 1
+    else strictlyNegativeIntOrThrow(value - 1)
 
-    override fun unaryMinus(): StrictlyPositiveInt = strictlyPositive int -value
+    override fun unaryMinus(): StrictlyPositiveInt =
+        strictlyPositiveIntOrThrow(-value)
 
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].
@@ -125,12 +126,12 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 
         /** The minimum value of a [StrictlyNegativeInt]. */
         public val min: StrictlyNegativeInt by lazy {
-            strictlyNegative int range.first
+            strictlyNegativeIntOrThrow(range.first)
         }
 
         /** The maximum value of a [StrictlyNegativeInt]. */
         public val max: StrictlyNegativeInt by lazy {
-            strictlyNegative int range.last
+            strictlyNegativeIntOrThrow(range.last)
         }
 
         /** Returns a random [StrictlyNegativeInt]. */
@@ -142,8 +143,8 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
             )
         )
         @SinceKotools(Types, "3.0")
-        public fun random(): StrictlyNegativeInt =
-            strictlyNegative int range.random()
+        public fun random(): StrictlyNegativeInt = range.random()
+            .toStrictlyNegativeIntOrThrow()
     }
 
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */
@@ -159,7 +160,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 }
 
 internal object StrictlyNegativeIntSerializer :
-    IntHolder.Serializer<StrictlyNegativeInt>(strictlyNegative::int)
+    IntHolder.Serializer<StrictlyNegativeInt>(::strictlyNegativeIntOrThrow)
 
 @JvmInline
 private value class StrictlyNegativeIntImplementation(override val value: Int) :

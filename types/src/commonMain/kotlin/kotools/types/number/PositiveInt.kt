@@ -3,8 +3,8 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 import kotools.shared.StabilityLevel
+import kotools.types.Package
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -103,12 +103,12 @@ public sealed interface PositiveInt : IntHolder {
     // ---------- Unary operations ----------
 
     override fun inc(): PositiveInt = if (value == max.value) min
-    else positive int value + 1
+    else positiveIntOrThrow(value + 1)
 
     override fun dec(): PositiveInt = if (value == min.value) max
-    else positive int value - 1
+    else positiveIntOrThrow(value - 1)
 
-    override fun unaryMinus(): NegativeInt = negative int -value
+    override fun unaryMinus(): NegativeInt = negativeIntOrThrow(-value)
 
     // ---------- Binary operations ----------
 
@@ -117,24 +117,24 @@ public sealed interface PositiveInt : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        positive int value / other.value
+        positiveIntOrThrow(value / other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyNegativeInt): NegativeInt =
-        negative int value / other.value
+        negativeIntOrThrow(value / other.value)
 
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
         internal val range: IntRange by lazy { 0..Int.MAX_VALUE }
 
         /** The minimum value of a [PositiveInt]. */
-        public val min: PositiveInt by lazy { positive int range.first }
+        public val min: PositiveInt by lazy { positiveIntOrThrow(range.first) }
 
         /** The maximum value of a [PositiveInt]. */
-        public val max: PositiveInt by lazy { positive int range.last }
+        public val max: PositiveInt by lazy { positiveIntOrThrow(range.last) }
 
         /** Returns a random [PositiveInt]. */
         @Deprecated(
@@ -161,7 +161,7 @@ public sealed interface PositiveInt : IntHolder {
 }
 
 internal object PositiveIntSerializer :
-    IntHolder.Serializer<PositiveInt>(positive::int)
+    IntHolder.Serializer<PositiveInt>(::positiveIntOrThrow)
 
 @JvmInline
 private value class PositiveIntImplementation(override val value: Int) :

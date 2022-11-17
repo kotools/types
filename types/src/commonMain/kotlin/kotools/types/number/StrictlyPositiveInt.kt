@@ -3,8 +3,8 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 import kotools.shared.StabilityLevel
+import kotools.types.Package
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -110,12 +110,13 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
     // ---------- Unary operations ----------
 
     override fun inc(): StrictlyPositiveInt = if (value == max.value) min
-    else strictlyPositive int value + 1
+    else strictlyPositiveIntOrThrow(value + 1)
 
     override fun dec(): StrictlyPositiveInt = if (value == min.value) max
-    else strictlyPositive int value - 1
+    else strictlyPositiveIntOrThrow(value - 1)
 
-    override fun unaryMinus(): StrictlyNegativeInt = strictlyNegative int -value
+    override fun unaryMinus(): StrictlyNegativeInt =
+        strictlyNegativeIntOrThrow(-value)
 
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].
@@ -125,12 +126,12 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 
         /** The minimum value of a [StrictlyPositiveInt]. */
         public val min: StrictlyPositiveInt by lazy {
-            strictlyPositive int range.first
+            strictlyPositiveIntOrThrow(range.first)
         }
 
         /** The maximum value of a [StrictlyPositiveInt]. */
         public val max: StrictlyPositiveInt by lazy {
-            strictlyPositive int range.last
+            strictlyPositiveIntOrThrow(range.last)
         }
 
         /** Returns a random [StrictlyPositiveInt]. */
@@ -159,7 +160,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
 }
 
 internal object StrictlyPositiveIntSerializer :
-    IntHolder.Serializer<StrictlyPositiveInt>(strictlyPositive::int)
+    IntHolder.Serializer<StrictlyPositiveInt>(::strictlyPositiveIntOrThrow)
 
 @JvmInline
 private value class StrictlyPositiveIntImplementation(override val value: Int) :

@@ -3,8 +3,8 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 import kotools.shared.StabilityLevel
+import kotools.types.Package
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -103,12 +103,12 @@ public sealed interface NegativeInt : IntHolder {
     // ---------- Unary operations ----------
 
     override fun inc(): NegativeInt = if (value == max.value) min
-    else negative int value + 1
+    else negativeIntOrThrow(value + 1)
 
     override fun dec(): NegativeInt = if (value == min.value) max
-    else negative int value - 1
+    else negativeIntOrThrow(value - 1)
 
-    override fun unaryMinus(): PositiveInt = positive int -value
+    override fun unaryMinus(): PositiveInt = positiveIntOrThrow(-value)
 
     // ---------- Binary operations ----------
 
@@ -117,24 +117,24 @@ public sealed interface NegativeInt : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyPositiveInt): NegativeInt =
-        negative int value / other.value
+        negativeIntOrThrow(value / other.value)
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyNegativeInt): PositiveInt =
-        positive int value / other.value
+        positiveIntOrThrow(value / other.value)
 
     /** Contains declarations for holding or building a [NegativeInt]. */
     public companion object {
         internal val range: IntRange by lazy { Int.MIN_VALUE..0 }
 
         /** The minimum value of a [NegativeInt]. */
-        public val min: NegativeInt by lazy { negative int range.first }
+        public val min: NegativeInt by lazy { negativeIntOrThrow(range.first) }
 
         /** The maximum value of a [NegativeInt]. */
-        public val max: NegativeInt by lazy { negative int range.last }
+        public val max: NegativeInt by lazy { negativeIntOrThrow(range.last) }
 
         /** Returns a random [NegativeInt]. */
         @Deprecated(
@@ -145,7 +145,8 @@ public sealed interface NegativeInt : IntHolder {
             )
         )
         @SinceKotools(Types, "3.0")
-        public fun random(): NegativeInt = negative int range.random()
+        public fun random(): NegativeInt = range.random()
+            .toNegativeIntOrThrow()
     }
 
     /** Error thrown when creating a [NegativeInt] fails. */
@@ -161,7 +162,7 @@ public sealed interface NegativeInt : IntHolder {
 }
 
 internal object NegativeIntSerializer :
-    IntHolder.Serializer<NegativeInt>(negative::int)
+    IntHolder.Serializer<NegativeInt>(::negativeIntOrThrow)
 
 @JvmInline
 private value class NegativeIntImplementation(override val value: Int) :

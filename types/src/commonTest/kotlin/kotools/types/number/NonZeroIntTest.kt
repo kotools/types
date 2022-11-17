@@ -96,7 +96,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun inc_should_return_1_with_minus_1() {
-        var x = nonZero int -1
+        var x: NonZeroInt = nonZeroIntOrThrow(-1)
         x++
         x.value assertEquals 1
     }
@@ -120,7 +120,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun dec_should_return_minus1_with_1() {
-        var x = nonZero int 1
+        var x: NonZeroInt = nonZeroIntOrThrow(1)
         x--
         x.value assertEquals -1
     }

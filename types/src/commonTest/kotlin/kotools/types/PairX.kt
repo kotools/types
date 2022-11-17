@@ -2,7 +2,7 @@ package kotools.types
 
 import kotools.assert.assertEquals
 import kotools.types.number.PositiveInt
-import kotools.types.number.positive
+import kotools.types.number.positiveIntOrThrow
 
 // ---------- Builders ----------
 
@@ -55,5 +55,6 @@ fun <A, B> Pair<Collection<A>, Collection<B>>.toPairs(): List<Pair<A?, B?>> {
 inline fun <A, B, C : Collection<B>> Pair<A, C>.forEachSecondIndexed(
     action: (PositiveInt, B, A) -> Unit
 ): Unit = second.forEachIndexed { index: Int, element: B ->
-    action(positive int index, element, first)
+    val positiveIndex: PositiveInt = positiveIntOrThrow(index)
+    action(positiveIndex, element, first)
 }

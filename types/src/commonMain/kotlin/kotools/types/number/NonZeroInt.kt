@@ -3,8 +3,8 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 import kotools.shared.StabilityLevel
+import kotools.types.Package
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -113,9 +113,9 @@ public sealed interface NonZeroInt : IntHolder {
      * If this [value] is the maximum, it returns the minimum value instead.
      */
     override fun inc(): NonZeroInt = when (value) {
-        -1 -> nonZero int 1
+        -1 -> nonZeroIntOrThrow(1)
         max.value -> min
-        else -> nonZero int value + 1
+        else -> nonZeroIntOrThrow(value + 1)
     }
 
     /**
@@ -125,18 +125,18 @@ public sealed interface NonZeroInt : IntHolder {
      * [maximum][NonZeroInt.max] value instead.
      */
     override fun dec(): NonZeroInt = when (value) {
-        1 -> nonZero int -1
+        1 -> nonZeroIntOrThrow(-1)
         min.value -> max
-        else -> nonZero int value - 1
+        else -> nonZeroIntOrThrow(value - 1)
     }
 
-    override fun unaryMinus(): NonZeroInt = nonZero int -value
+    override fun unaryMinus(): NonZeroInt = nonZeroIntOrThrow(-value)
 
     // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
     public operator fun times(other: NonZeroInt): NonZeroInt =
-        nonZero int value * other.value
+        nonZeroIntOrThrow(value * other.value)
 
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
@@ -151,10 +151,14 @@ public sealed interface NonZeroInt : IntHolder {
         }
 
         /** The minimum value of a [NonZeroInt]. */
-        public val min: NonZeroInt by lazy { nonZero int negativeRange.first }
+        public val min: NonZeroInt by lazy {
+            nonZeroIntOrThrow(negativeRange.first)
+        }
 
         /** The maximum value of a [NonZeroInt]. */
-        public val max: NonZeroInt by lazy { nonZero int positiveRange.last }
+        public val max: NonZeroInt by lazy {
+            nonZeroIntOrThrow(positiveRange.last)
+        }
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
@@ -167,7 +171,7 @@ public sealed interface NonZeroInt : IntHolder {
         @SinceKotools(Types, "3.0")
         public fun random(): NonZeroInt = ranges.random()
             .random()
-            .let(::NonZeroIntImplementation)
+            .toNonZeroIntOrThrow()
     }
 
     /** Error thrown when creating a [NonZeroInt] fails. */
@@ -181,7 +185,7 @@ public sealed interface NonZeroInt : IntHolder {
 }
 
 internal object NonZeroIntSerializer :
-    IntHolder.Serializer<NonZeroInt>(nonZero::int)
+    IntHolder.Serializer<NonZeroInt>(::nonZeroIntOrThrow)
 
 @JvmInline
 private value class NonZeroIntImplementation(override val value: Int) :
