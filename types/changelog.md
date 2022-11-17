@@ -41,6 +41,8 @@ Add explicit builders for all types
   ([#22](https://github.com/kotools/libraries/issues/22)).
 - `ConstructionError` objects
   ([#22](https://github.com/kotools/libraries/issues/22)).
+- The DSL for building numbers
+  ([#33](https://github.com/kotools/libraries/issues/33)).
 
 #### Removed
 
