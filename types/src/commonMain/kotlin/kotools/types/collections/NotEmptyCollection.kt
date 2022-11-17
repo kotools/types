@@ -1,6 +1,7 @@
 package kotools.types.collections
 
-import kotools.types.SinceKotoolsTypes
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
@@ -13,7 +14,7 @@ import kotools.types.tryOrNull
  * the result of calling the [defaultValue] function if the [index] is out of
  * bounds.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: PositiveInt,
     defaultValue: (PositiveInt) -> E
@@ -24,7 +25,7 @@ public inline fun <E> NotEmptyCollection<E>.getOrElse(
  *
  * @param E The type of elements contained in this collection.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public sealed interface NotEmptyCollection<out E> : Collection<E> {
     /** First element of this collection. */
     public val head: E
@@ -40,7 +41,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * throws an [IndexOutOfBoundsException] if the [index] is out of bounds.
      */
-    @SinceKotoolsTypes("1.3")
+    @SinceKotools(Types, "1.3")
     @Throws(IndexOutOfBoundsException::class)
     public operator fun get(index: PositiveInt): E = elementAt(index.value)
 
@@ -48,7 +49,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
      * Returns the element at the specified [index] in this collection, or
      * returns `null` if the [index] is out of bounds.
      */
-    @SinceKotoolsTypes("1.3")
+    @SinceKotools(Types, "1.3")
     public infix fun getOrNull(index: PositiveInt): E? =
         tryOrNull { get(index) }
 

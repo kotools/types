@@ -1,9 +1,10 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -12,7 +13,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
  * strictly negative.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun positiveIntOrNull(value: Int): PositiveInt? = value
     .takeIf { it >= 0 }
     ?.let(::PositiveIntImplementation)
@@ -21,7 +22,7 @@ public fun positiveIntOrNull(value: Int): PositiveInt? = value
  * Returns the [value] as a [PositiveInt], or throws an
  * [IllegalArgumentException] if the [value] is strictly negative.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun positiveIntOrThrow(value: Int): PositiveInt =
     positiveIntOrNull(value) ?: throw value shouldBe aPositiveNumber
@@ -37,7 +38,7 @@ public fun positiveIntOrThrow(value: Int): PositiveInt =
         "${Package.number}.positiveIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
 public fun PositiveInt(value: Int): PositiveInt = positiveIntOrNull(value)
@@ -54,7 +55,7 @@ public fun PositiveInt(value: Int): PositiveInt = positiveIntOrNull(value)
         "${Package.number}.positiveIntOrNull"
     )
 )
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
     positiveIntOrNull(value)
@@ -70,7 +71,7 @@ public fun PositiveIntOrNull(value: Int): PositiveInt? =
         "${Package.number}.toPositiveIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
 public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
@@ -79,25 +80,25 @@ public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
  * Returns this value as a [PositiveInt], or returns `null` if this value is
  * strictly negative.
  */
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public fun Int.toPositiveIntOrNull(): PositiveInt? = positiveIntOrNull(this)
 
 /**
  * Returns this value as a [PositiveInt], or throws an
  * [IllegalArgumentException] if this value is strictly negative.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toPositiveIntOrThrow(): PositiveInt = positiveIntOrThrow(this)
 
 /** Returns a random [PositiveInt]. */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
     .toPositiveIntOrThrow()
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveIntSerializer::class)
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public sealed interface PositiveInt : IntHolder {
     // ---------- Unary operations ----------
 
@@ -143,7 +144,7 @@ public sealed interface PositiveInt : IntHolder {
                 "${Package.number}.randomPositiveInt"
             )
         )
-        @SinceKotoolsTypes("3.0")
+        @SinceKotools(Types, "3.0")
         public fun random(): PositiveInt = range.random()
             .toPositiveIntOrThrow()
     }
@@ -153,7 +154,7 @@ public sealed interface PositiveInt : IntHolder {
         "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
-    @SinceKotoolsTypes("3.0")
+    @SinceKotools(Types, "3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "Given value should be positive (tried with $value)."
     )

@@ -6,9 +6,10 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
@@ -20,7 +21,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
  * is blank.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun notBlankStringOrNull(value: String): NotBlankString? = value
     .takeIf(String::isNotBlank)
     ?.let(::NotBlankStringImplementation)
@@ -29,7 +30,7 @@ public fun notBlankStringOrNull(value: String): NotBlankString? = value
  * Returns the [value] as a [NotBlankString], or throws an
  * [IllegalArgumentException] if the [value] is blank.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun notBlankStringOrThrow(value: String): NotBlankString =
     notBlankStringOrNull(value)
@@ -46,7 +47,7 @@ public fun notBlankStringOrThrow(value: String): NotBlankString =
         "${Package.string}.notBlankStringOrThrow"
     )
 )
-@SinceKotoolsTypes("1.2")
+@SinceKotools(Types, "1.2")
 @Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
 public fun NotBlankString(value: String): NotBlankString =
@@ -64,7 +65,7 @@ public fun NotBlankString(value: String): NotBlankString =
     )
 )
 @Suppress("FunctionName")
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public fun NotBlankStringOrNull(value: String): NotBlankString? =
     notBlankStringOrNull(value)
 
@@ -79,7 +80,7 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
         "${Package.string}.toNotBlankStringOrThrow"
     )
 )
-@SinceKotoolsTypes("1.2")
+@SinceKotools(Types, "1.2")
 @Suppress("DEPRECATION")
 @Throws(NotBlankString.ConstructionError::class)
 public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
@@ -88,7 +89,7 @@ public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
  * Returns this value as a [NotBlankString], or returns `null` if this value is
  * blank.
  */
-@SinceKotoolsTypes("1.2")
+@SinceKotools(Types, "1.2")
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
     notBlankStringOrNull(this)
 
@@ -96,7 +97,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * Returns this value as a [NotBlankString], or throws an
  * [IllegalArgumentException] if this value is blank.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun String.toNotBlankStringOrThrow(): NotBlankString =
     notBlankStringOrThrow(this)
@@ -109,7 +110,7 @@ public fun String.toNotBlankStringOrThrow(): NotBlankString =
  * this value is less than the [other] value, or a positive number if this value
  * is greater than the [other] value.
  */
-@SinceKotoolsTypes("2.0")
+@SinceKotools(Types, "2.0")
 public infix operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.value)
 
@@ -118,7 +119,7 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
  * whitespaces.
  */
 @Serializable(NotBlankStringSerializer::class)
-@SinceKotoolsTypes("1.2")
+@SinceKotools(Types, "1.2")
 public sealed interface NotBlankString : Comparable<NotBlankString> {
     /** The value to hold. */
     public val value: String
@@ -150,7 +151,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    @SinceKotoolsTypes("2.0")
+    @SinceKotools(Types, "2.0")
     public operator fun compareTo(other: String): Int = value.compareTo(other)
 
     /**
@@ -173,7 +174,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
         "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
-    @SinceKotoolsTypes("3.0")
+    @SinceKotools(Types, "3.0")
     public class ConstructionError : IllegalArgumentException(
         "NotBlankString doesn't accept blank strings."
     )

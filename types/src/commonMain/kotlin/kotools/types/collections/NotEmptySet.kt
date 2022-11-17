@@ -6,9 +6,10 @@ import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 
 // ---------- Builders ----------
 
@@ -16,7 +17,7 @@ import kotools.types.StabilityLevel
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val set: Set<E> = tail.toSet()
     return notEmptySetOf(head, set)
@@ -38,7 +39,7 @@ private fun <E> notEmptySetOf(head: E, tail: Set<E>): NotEmptySet<E> {
         "${Package.collections}.toNotEmptySetOrThrow"
     )
 )
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 @Throws(IllegalArgumentException::class)
 public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> = toNotEmptySetOrThrow()
 
@@ -53,7 +54,7 @@ public fun <E> Array<E>.toNotEmptySet(): NotEmptySet<E> = toNotEmptySetOrThrow()
         "${Package.collections}.toNotEmptySetOrThrow"
     )
 )
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> =
     toNotEmptySetOrThrow()
@@ -62,7 +63,7 @@ public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> =
  * Returns a [NotEmptySet] containing all the elements of this array, or returns
  * the result of calling the [defaultValue] function if this array is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
     defaultValue: (Array<E>) -> NotEmptySet<E>
 ): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
@@ -72,7 +73,7 @@ public inline infix fun <E> Array<E>.toNotEmptySetOrElse(
  * returns the result of calling the [defaultValue] function if this collection
  * is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
     defaultValue: (Collection<E>) -> NotEmptySet<E>
 ): NotEmptySet<E> = toNotEmptySetOrNull() ?: defaultValue(this)
@@ -81,7 +82,7 @@ public inline infix fun <E> Collection<E>.toNotEmptySetOrElse(
  * Returns a [NotEmptySet] containing all the elements of this array, or returns
  * `null` if this array is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? = toSet()
     .toNotEmptySetOrNull()
 
@@ -89,7 +90,7 @@ public fun <E> Array<E>.toNotEmptySetOrNull(): NotEmptySet<E>? = toSet()
  * Returns a [NotEmptySet] containing all the elements of this collection, or
  * returns `null` if this collection is empty.
  */
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
     takeIf(Collection<E>::isNotEmpty)?.run {
         val head: E = first()
@@ -103,7 +104,7 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
  * Returns a [NotEmptySet] containing all the elements of this array, or throws
  * an [IllegalArgumentException] if this array is empty.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <E> Array<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
     toNotEmptySetOrNull()
@@ -113,7 +114,7 @@ public fun <E> Array<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
  * Returns a [NotEmptySet] containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
     toNotEmptySetOrNull() ?: throw IllegalArgumentException(
@@ -126,7 +127,7 @@ public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
  * @param E The type of elements contained in this set.
  */
 @Serializable(NotEmptySetSerializer::class)
-@SinceKotoolsTypes("1.3")
+@SinceKotools(Types, "1.3")
 public sealed interface NotEmptySet<out E> : NotEmptyCollection<E>, Set<E>
 
 private class NotEmptySetImplementation<out E>(private val set: Set<E>) :

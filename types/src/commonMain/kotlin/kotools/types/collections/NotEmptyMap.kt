@@ -1,8 +1,9 @@
 package kotools.types.collections
 
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
 
@@ -12,7 +13,7 @@ import kotools.types.number.strictlyPositive
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  */
-@SinceKotoolsTypes("3.1")
+@SinceKotools(Types, "3.1")
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
@@ -30,7 +31,7 @@ public fun <K, V> notEmptyMapOf(
         "${Package.collections}.toNotEmptyMapOrThrow"
     )
 )
-@SinceKotoolsTypes("3.1")
+@SinceKotools(Types, "3.1")
 @Suppress("DEPRECATION")
 @Throws(NotEmptyMap.ConstructionError::class)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): NotEmptyMap<K, V> =
@@ -40,7 +41,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): NotEmptyMap<K, V> =
  * Returns a [NotEmptyMap] containing all the entries of this map, or returns
  * `null` if this map is empty.
  */
-@SinceKotoolsTypes("3.1")
+@SinceKotools(Types, "3.1")
 public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
     takeIf(Map<K, V>::isNotEmpty)
         ?.let(::NotEmptyMapImplementation)
@@ -49,7 +50,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
  * Returns a [NotEmptyMap] containing all the entries of this map, or returns
  * the result of calling the [defaultValue] function if this map is empty.
  */
-@SinceKotoolsTypes("3.1")
+@SinceKotools(Types, "3.1")
 public inline fun <K, V> Map<K, V>.toNotEmptyMapOrElse(
     defaultValue: (Map<K, V>) -> NotEmptyMap<K, V>
 ): NotEmptyMap<K, V> = toNotEmptyMapOrNull() ?: defaultValue(this)
@@ -58,7 +59,7 @@ public inline fun <K, V> Map<K, V>.toNotEmptyMapOrElse(
  * Returns a [NotEmptyMap] containing all the entries of this map, or throws
  * an [IllegalArgumentException] if this map is empty.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
     toNotEmptyMapOrNull()
@@ -70,7 +71,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
  * @param K The type of map keys.
  * @param V The type of map values.
  */
-@SinceKotoolsTypes("3.1")
+@SinceKotools(Types, "3.1")
 public sealed interface NotEmptyMap<K, out V> : Map<K, V> {
     /** First entry of this map. */
     public val head: Pair<K, V>

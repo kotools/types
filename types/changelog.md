@@ -26,8 +26,10 @@ Add explicit builders for all types
 
 #### Changed
 
-Update random API for getting a random `IntHolder`
-([#17](https://github.com/kotools/libraries/issues/17)).
+- Update random API for getting a random `IntHolder`
+  ([#17](https://github.com/kotools/libraries/issues/17)).
+- Replace the `SinceKotoolsTypes` annotation by the `SinceKotools` shared
+  annotation ([#54](https://github.com/kotools/libraries/issues/54)).
 
 #### Deprecated
 

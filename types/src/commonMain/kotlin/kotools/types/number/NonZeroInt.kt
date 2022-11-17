@@ -1,9 +1,10 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -12,7 +13,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
@@ -20,7 +21,7 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
  * Returns the [value] as a [NonZeroInt], or throws an
  * [IllegalArgumentException] if the [value] equals zero.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
     ?: throw value shouldBe otherThanZero
@@ -36,7 +37,7 @@ public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
         "${Package.number}.nonZeroIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(NonZeroInt.ConstructionError::class)
 public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
@@ -50,7 +51,7 @@ public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
     "Use the nonZeroIntOrNull function instead.",
     ReplaceWith("nonZeroIntOrNull(value)", "${Package.number}.nonZeroIntOrNull")
 )
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
 public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
 
@@ -65,7 +66,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
         "${Package.number}.toNonZeroIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(NonZeroInt.ConstructionError::class)
 public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
@@ -74,19 +75,19 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
 /**
  * Returns this value as a [NonZeroInt], or throws a [IllegalArgumentException]
  * if this value equals zero.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
     .random()
     .toNonZeroIntOrThrow()
@@ -97,12 +98,12 @@ public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to zero.
  */
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
 /** Representation of integers other than zero. */
 @Serializable(NonZeroIntSerializer::class)
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public sealed interface NonZeroInt : IntHolder {
     // ---------- Unary operations ----------
 
@@ -163,7 +164,7 @@ public sealed interface NonZeroInt : IntHolder {
                 "${Package.number}.randomNonZeroInt"
             )
         )
-        @SinceKotoolsTypes("3.0")
+        @SinceKotools(Types, "3.0")
         public fun random(): NonZeroInt = ranges.random()
             .random()
             .let(::NonZeroIntImplementation)
@@ -174,7 +175,7 @@ public sealed interface NonZeroInt : IntHolder {
         "Use the IllegalArgumentException instead.",
         ReplaceWith("IllegalArgumentException")
     )
-    @SinceKotoolsTypes("3.0")
+    @SinceKotools(Types, "3.0")
     public object ConstructionError :
         IllegalArgumentException("Given value shouldn't equal 0.")
 }

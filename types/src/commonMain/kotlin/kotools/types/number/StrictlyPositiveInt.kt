@@ -1,9 +1,10 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -12,7 +13,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
  * [value] is negative.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? = value
     .takeIf { it > 0 }
     ?.let(::StrictlyPositiveIntImplementation)
@@ -21,7 +22,7 @@ public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? = value
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
  * [IllegalArgumentException] if the [value] is negative.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
     strictlyPositiveIntOrNull(value)
@@ -38,7 +39,7 @@ public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
         "${Package.number}.strictlyPositiveIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
@@ -56,7 +57,7 @@ public fun StrictlyPositiveInt(value: Int): StrictlyPositiveInt =
         "${Package.number}.strictlyPositiveIntOrNull"
     )
 )
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
 public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
     strictlyPositiveIntOrNull(value)
@@ -72,7 +73,7 @@ public fun StrictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? =
         "${Package.number}.toStrictlyPositiveIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(StrictlyPositiveInt.ConstructionError::class)
 public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
@@ -82,7 +83,7 @@ public fun Int.toStrictlyPositiveInt(): StrictlyPositiveInt =
  * Returns this value as a [StrictlyPositiveInt], or returns `null` if this
  * value is negative.
  */
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
     strictlyPositiveIntOrNull(this)
 
@@ -90,20 +91,20 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
  * Returns this value as a [StrictlyPositiveInt], or throws an
  * [IllegalArgumentException] if this value is negative.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
     strictlyPositiveIntOrThrow(this)
 
 /** Returns a random [StrictlyPositiveInt]. */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
     StrictlyPositiveInt.range.random()
         .toStrictlyPositiveIntOrThrow()
 
 /** Representation of strictly positive integers, excluding zero. */
 @Serializable(StrictlyPositiveIntSerializer::class)
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public sealed interface StrictlyPositiveInt : NonZeroInt,
     PositiveInt {
     // ---------- Unary operations ----------
@@ -140,7 +141,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
                 "${Package.number}.randomStrictlyPositiveInt"
             )
         )
-        @SinceKotoolsTypes("3.0")
+        @SinceKotools(Types, "3.0")
         public fun random(): StrictlyPositiveInt = range.random()
             .toStrictlyPositiveIntOrThrow()
     }
@@ -150,7 +151,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
         "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
-    @SinceKotoolsTypes("3.0")
+    @SinceKotools(Types, "3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "StrictlyPositiveInt doesn't accept negative values (tried with " +
                 "$value)."

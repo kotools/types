@@ -1,9 +1,10 @@
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -12,7 +13,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NegativeInt], or returns `null` if the [value] is
  * strictly positive.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun negativeIntOrNull(value: Int): NegativeInt? = value
     .takeIf { it <= 0 }
     ?.let(::NegativeIntImplementation)
@@ -21,7 +22,7 @@ public fun negativeIntOrNull(value: Int): NegativeInt? = value
  * Returns the [value] as a [NegativeInt], or throws an
  * [IllegalArgumentException] if the [value] is strictly positive.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun negativeIntOrThrow(value: Int): NegativeInt =
     negativeIntOrNull(value) ?: throw value shouldBe aNegativeNumber
@@ -37,7 +38,7 @@ public fun negativeIntOrThrow(value: Int): NegativeInt =
         "${Package.number}.negativeIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(NegativeInt.ConstructionError::class)
 public fun NegativeInt(value: Int): NegativeInt = negativeIntOrNull(value)
@@ -54,7 +55,7 @@ public fun NegativeInt(value: Int): NegativeInt = negativeIntOrNull(value)
         "${Package.number}.negativeIntOrNull"
     )
 )
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
 public fun NegativeIntOrNull(value: Int): NegativeInt? =
     negativeIntOrNull(value)
@@ -70,7 +71,7 @@ public fun NegativeIntOrNull(value: Int): NegativeInt? =
         "${Package.number}.toNegativeIntOrThrow"
     )
 )
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(NegativeInt.ConstructionError::class)
 public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
@@ -79,25 +80,25 @@ public fun Int.toNegativeInt(): NegativeInt = NegativeInt(this)
  * Returns this value as a [NegativeInt], or returns `null` if this value is
  * strictly positive.
  */
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public fun Int.toNegativeIntOrNull(): NegativeInt? = negativeIntOrNull(this)
 
 /**
  * Returns this value as a [NegativeInt], or throws an
  * [IllegalArgumentException] if this value is strictly positive.
  */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toNegativeIntOrThrow(): NegativeInt = negativeIntOrThrow(this)
 
 /** Returns a random [NegativeInt]. */
-@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomNegativeInt(): NegativeInt = NegativeInt.range.random()
     .toNegativeIntOrThrow()
 
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeIntSerializer::class)
-@SinceKotoolsTypes("1.1")
+@SinceKotools(Types, "1.1")
 public sealed interface NegativeInt : IntHolder {
     // ---------- Unary operations ----------
 
@@ -143,7 +144,7 @@ public sealed interface NegativeInt : IntHolder {
                 "${Package.number}.randomNegativeInt"
             )
         )
-        @SinceKotoolsTypes("3.0")
+        @SinceKotools(Types, "3.0")
         public fun random(): NegativeInt = negative int range.random()
     }
 
@@ -152,7 +153,7 @@ public sealed interface NegativeInt : IntHolder {
         "Use the IllegalArgumentException type instead.",
         ReplaceWith("IllegalArgumentException")
     )
-    @SinceKotoolsTypes("3.0")
+    @SinceKotools(Types, "3.0")
     public class ConstructionError(value: Int) : IllegalArgumentException(
         "NegativeInt doesn't accept strictly positive values (tried with " +
                 "$value)."

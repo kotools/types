@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
-import kotools.types.SinceKotoolsTypes
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 
 /**
  * A component marked with this API level should be used only in toy projects.
@@ -10,7 +11,7 @@ import kotools.types.SinceKotoolsTypes
 @MustBeDocumented
 @Retention(AnnotationRetention.BINARY)
 @RequiresOptIn
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 @Suppress("OPT_IN_IS_NOT_ENABLED")
 @Target(
     AnnotationTarget.CLASS,

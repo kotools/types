@@ -5,7 +5,8 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.SinceKotoolsTypes
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
 
 // ---------- Binary operations ----------
 
@@ -15,24 +16,24 @@ import kotools.types.SinceKotoolsTypes
  * this value is less than the [other] value, or a positive number if this value
  * is greater than the [other] value.
  */
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public operator fun Int.compareTo(other: IntHolder): Int =
     compareTo(other.value)
 
 /** Adds the [other] value to this value. */
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public operator fun Int.plus(other: IntHolder): Int = plus(other.value)
 
 /** Subtracts the [other] value from this value. */
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public operator fun Int.minus(other: IntHolder): Int = minus(other.value)
 
 /** Multiplies this value by the [other] value. */
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public operator fun Int.times(other: IntHolder): Int = times(other.value)
 
 /** Parent of classes responsible for holding integers. */
-@SinceKotoolsTypes("3.0")
+@SinceKotools(Types, "3.0")
 public sealed interface IntHolder : Comparable<IntHolder> {
     /** The value to hold. */
     public val value: Int

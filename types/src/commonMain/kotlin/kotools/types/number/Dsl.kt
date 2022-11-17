@@ -1,11 +1,12 @@
 package kotools.types.number
 
-import kotools.types.SinceKotoolsTypes
-import kotools.types.StabilityLevel
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
+import kotools.shared.StabilityLevel
 import kotools.types.tryOrNull
 
 /** Context responsible for building an [IntHolder]. */
-@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public sealed interface IntHolderDsl<out T : IntHolder> {
     /**
      * Returns the [value] as a type [T], or throws an
@@ -21,7 +22,7 @@ public sealed interface IntHolderDsl<out T : IntHolder> {
 /**
  * Context responsible for building a [NonZeroInt].
  */
-@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val nonZero: IntHolderDsl<NonZeroInt> = NonZeroHolderDsl
 
 private object NonZeroHolderDsl : IntHolderDsl<NonZeroInt> {
@@ -29,7 +30,7 @@ private object NonZeroHolderDsl : IntHolderDsl<NonZeroInt> {
 }
 
 /** Context responsible for building a [PositiveInt]. */
-@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val positive: IntHolderDsl<PositiveInt> = PositiveHolderDsl
 
 private object PositiveHolderDsl : IntHolderDsl<PositiveInt> {
@@ -37,7 +38,7 @@ private object PositiveHolderDsl : IntHolderDsl<PositiveInt> {
 }
 
 /** Context responsible for building a [StrictlyPositiveInt]. */
-@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val strictlyPositive: IntHolderDsl<StrictlyPositiveInt> =
     StrictlyPositiveHolderDsl
 
@@ -47,7 +48,7 @@ private object StrictlyPositiveHolderDsl : IntHolderDsl<StrictlyPositiveInt> {
 }
 
 /** Context responsible for building a [NegativeInt]. */
-@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val negative: IntHolderDsl<NegativeInt> = NegativeHolderDsl
 
 private object NegativeHolderDsl : IntHolderDsl<NegativeInt> {
@@ -56,7 +57,7 @@ private object NegativeHolderDsl : IntHolderDsl<NegativeInt> {
 
 
 /** Context responsible for building a [StrictlyNegativeInt]. */
-@SinceKotoolsTypes("3.1", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val strictlyNegative: IntHolderDsl<StrictlyNegativeInt> =
     StrictlyNegativeHolderDsl
 
