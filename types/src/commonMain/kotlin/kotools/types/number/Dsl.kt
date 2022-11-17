@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.number
 
 import kotools.shared.Project.Types
@@ -6,6 +8,7 @@ import kotools.shared.StabilityLevel
 import kotools.types.tryOrNull
 
 /** Context responsible for building an [IntHolder]. */
+@Deprecated("Use the regular builders instead.")
 @SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public sealed interface IntHolderDsl<out T : IntHolder> {
     /**
@@ -22,6 +25,7 @@ public sealed interface IntHolderDsl<out T : IntHolder> {
 /**
  * Context responsible for building a [NonZeroInt].
  */
+@Deprecated("Use the regular builders instead.")
 @SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val nonZero: IntHolderDsl<NonZeroInt> = NonZeroHolderDsl
 
@@ -30,6 +34,7 @@ private object NonZeroHolderDsl : IntHolderDsl<NonZeroInt> {
 }
 
 /** Context responsible for building a [PositiveInt]. */
+@Deprecated("Use the regular builders instead.")
 @SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val positive: IntHolderDsl<PositiveInt> = PositiveHolderDsl
 
@@ -38,6 +43,7 @@ private object PositiveHolderDsl : IntHolderDsl<PositiveInt> {
 }
 
 /** Context responsible for building a [StrictlyPositiveInt]. */
+@Deprecated("Use the regular builders instead.")
 @SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val strictlyPositive: IntHolderDsl<StrictlyPositiveInt> =
     StrictlyPositiveHolderDsl
@@ -48,6 +54,7 @@ private object StrictlyPositiveHolderDsl : IntHolderDsl<StrictlyPositiveInt> {
 }
 
 /** Context responsible for building a [NegativeInt]. */
+@Deprecated("Use the regular builders instead.")
 @SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val negative: IntHolderDsl<NegativeInt> = NegativeHolderDsl
 
@@ -57,6 +64,7 @@ private object NegativeHolderDsl : IntHolderDsl<NegativeInt> {
 
 
 /** Context responsible for building a [StrictlyNegativeInt]. */
+@Deprecated("Use the regular builders instead.")
 @SinceKotools(Types, "3.1", StabilityLevel.Alpha)
 public val strictlyNegative: IntHolderDsl<StrictlyNegativeInt> =
     StrictlyNegativeHolderDsl
