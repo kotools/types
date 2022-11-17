@@ -1,6 +1,7 @@
 package io.github.kotools.csv.common
 
-import kotools.csv.SinceKotoolsCsv
+import kotools.shared.Project.Csv
+import kotools.shared.SinceKotools
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
 
@@ -8,7 +9,7 @@ internal val Manager.filePath: NotBlankString
     get() = "$folder$file".toNotBlankString()
 
 /** Scope for manipulating CSV files. */
-@SinceKotoolsCsv("2.0")
+@SinceKotools(Csv, "2.0")
 public interface Manager {
     /**
      * **Required** property for targeting a file.

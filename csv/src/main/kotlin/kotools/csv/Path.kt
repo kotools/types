@@ -1,5 +1,7 @@
 package kotools.csv
 
+import kotools.shared.Project.Csv
+import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankString
@@ -10,7 +12,7 @@ import kotools.types.string.toNotBlankStringOrNull
  * `.csv` extension, or returns a [CsvPathResult.Exception.CsvExtensionAsPath]
  * if this string equals the `.csv` extension.
  */
-@SinceKotoolsCsv("2.3", StabilityLevel.Alpha)
+@SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
 public fun NotBlankString.csv(): CsvPathResult.FromNotBlankString =
     csvImplementation() as CsvPathResult.FromNotBlankString
 
@@ -21,7 +23,7 @@ public fun NotBlankString.csv(): CsvPathResult.FromNotBlankString =
  * [CsvPathResult.Exception.CsvExtensionAsPath] when this string equals the
  * `.csv` extension.
  */
-@SinceKotoolsCsv("2.3", StabilityLevel.Alpha)
+@SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
 public fun String.csv(): CsvPathResult.FromString = toNotBlankStringOrNull()
     ?.run { csvImplementation() as CsvPathResult.FromString }
     ?: CsvPathResult.Exception.BlankString
@@ -36,7 +38,7 @@ private fun NotBlankString.csvImplementation(): CsvPathResult =
  * `.csv` extension, or returns `null` if this string equals the `.csv`
  * extension.
  */
-@SinceKotoolsCsv("2.3", StabilityLevel.Alpha)
+@SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
 public fun NotBlankString.csvOrNull(): CsvPathResult.Success? = csv()
     .onException { return null }
 
@@ -48,7 +50,7 @@ internal inline fun CsvPathResult.onException(
 }
 
 /** Object returned when trying to build a [CSV path][CsvPathResult.Success]. */
-@SinceKotoolsCsv("2.3", StabilityLevel.Alpha)
+@SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
 public sealed interface CsvPathResult {
     /**
      * Object returned when trying to build a [CSV path][Success] from a
