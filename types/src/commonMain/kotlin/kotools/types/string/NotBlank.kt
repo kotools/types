@@ -8,6 +8,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
@@ -19,7 +20,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
  * is blank.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 public fun notBlankStringOrNull(value: String): NotBlankString? = value
     .takeIf(String::isNotBlank)
     ?.let(::NotBlankStringImplementation)
@@ -28,7 +29,7 @@ public fun notBlankStringOrNull(value: String): NotBlankString? = value
  * Returns the [value] as a [NotBlankString], or throws an
  * [IllegalArgumentException] if the [value] is blank.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun notBlankStringOrThrow(value: String): NotBlankString =
     notBlankStringOrNull(value)
@@ -95,7 +96,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * Returns this value as a [NotBlankString], or throws an
  * [IllegalArgumentException] if this value is blank.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun String.toNotBlankStringOrThrow(): NotBlankString =
     notBlankStringOrThrow(this)

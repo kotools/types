@@ -12,7 +12,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
@@ -20,7 +20,7 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
  * Returns the [value] as a [NonZeroInt], or throws an
  * [IllegalArgumentException] if the [value] equals zero.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
     ?: throw value shouldBe otherThanZero
@@ -81,7 +81,7 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
  * Returns this value as a [NonZeroInt], or throws a [IllegalArgumentException]
  * if this value equals zero.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 

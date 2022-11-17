@@ -2,6 +2,7 @@ package kotools.types.collections
 
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.strictlyPositive
 
@@ -57,7 +58,7 @@ public inline fun <K, V> Map<K, V>.toNotEmptyMapOrElse(
  * Returns a [NotEmptyMap] containing all the entries of this map, or throws
  * an [IllegalArgumentException] if this map is empty.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
     toNotEmptyMapOrNull()

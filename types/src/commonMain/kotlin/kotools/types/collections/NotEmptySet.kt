@@ -8,6 +8,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 
 // ---------- Builders ----------
 
@@ -102,7 +103,7 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
  * Returns a [NotEmptySet] containing all the elements of this array, or throws
  * an [IllegalArgumentException] if this array is empty.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <E> Array<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
     toNotEmptySetOrNull()
@@ -112,7 +113,7 @@ public fun <E> Array<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
  * Returns a [NotEmptySet] containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is empty.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
     toNotEmptySetOrNull() ?: throw IllegalArgumentException(

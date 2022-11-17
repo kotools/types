@@ -12,7 +12,7 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
  * [value] is negative.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? = value
     .takeIf { it > 0 }
     ?.let(::StrictlyPositiveIntImplementation)
@@ -21,7 +21,7 @@ public fun strictlyPositiveIntOrNull(value: Int): StrictlyPositiveInt? = value
  * Returns the [value] as a [StrictlyPositiveInt], or throws an
  * [IllegalArgumentException] if the [value] is negative.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun strictlyPositiveIntOrThrow(value: Int): StrictlyPositiveInt =
     strictlyPositiveIntOrNull(value)
@@ -90,7 +90,7 @@ public fun Int.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
  * Returns this value as a [StrictlyPositiveInt], or throws an
  * [IllegalArgumentException] if this value is negative.
  */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
     strictlyPositiveIntOrThrow(this)
