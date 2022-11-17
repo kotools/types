@@ -4,8 +4,9 @@ import kotools.shared.Project.Csv
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.string.NotBlankString
-import kotools.types.string.toNotBlankString
+import kotools.types.string.notBlankStringOrThrow
 import kotools.types.string.toNotBlankStringOrNull
+import kotools.types.string.toNotBlankStringOrThrow
 
 /**
  * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
@@ -79,7 +80,8 @@ public sealed interface CsvPathResult {
          * Exception returned when trying to build a [CSV path][Success] from a
          * blank string.
          */
-        public object BlankString : Exception("be blank".toNotBlankString()),
+        public object BlankString :
+            Exception("be blank".toNotBlankStringOrThrow()),
             FromString
 
         /**
@@ -88,7 +90,7 @@ public sealed interface CsvPathResult {
          */
         public object CsvExtensionAsPath :
             Exception(
-                "equal the \"$csvExtension\" extension".toNotBlankString()
+                notBlankStringOrThrow("equal the \"$csvExtension\" extension")
             ),
             FromNotBlankString,
             FromString

@@ -1,20 +1,21 @@
 package kotools.csv
 
 import kotools.types.string.NotBlankString
-import kotools.types.string.toNotBlankString
+import kotools.types.string.notBlankStringOrThrow
+import kotools.types.string.toNotBlankStringOrThrow
 
 internal val csvExtension: FileExtension.Csv = FileExtension.Csv
 
 internal infix fun NotBlankString.suffixWith(
     extension: FileExtension
 ): NotBlankString = takeIf { it.value.endsWith(extension.toString()) }
-    ?: "$this$extension".toNotBlankString()
+    ?: notBlankStringOrThrow("$this$extension")
 
-internal sealed class FileExtension(private val value: NotBlankString) {
-    fun toNotBlankString(): NotBlankString = toString()
-        .toNotBlankString()
+internal sealed class FileExtension(value: NotBlankString) {
+    private val extension: NotBlankString = notBlankStringOrThrow(".$value")
 
-    override fun toString(): String = ".$value"
+    override fun toString(): String = extension.value
+    fun toNotBlankString(): NotBlankString = extension
 
-    object Csv : FileExtension("csv".toNotBlankString())
+    object Csv : FileExtension("csv".toNotBlankStringOrThrow())
 }

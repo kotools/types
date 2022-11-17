@@ -3,10 +3,10 @@ package io.github.kotools.csv.common
 import kotools.shared.Project.Csv
 import kotools.shared.SinceKotools
 import kotools.types.string.NotBlankString
-import kotools.types.string.toNotBlankString
+import kotools.types.string.notBlankStringOrThrow
 
 internal val Manager.filePath: NotBlankString
-    get() = "$folder$file".toNotBlankString()
+    get() = notBlankStringOrThrow("$folder$file")
 
 /** Scope for manipulating CSV files. */
 @SinceKotools(Csv, "2.0")
