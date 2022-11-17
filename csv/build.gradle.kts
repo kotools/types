@@ -19,6 +19,7 @@ dependencies {
     testImplementation(kotlin("test"))
 
     // Kotools
+    implementation(project(":shared"))
     implementation(kotools.types)
     testImplementation(kotools.assert)
 

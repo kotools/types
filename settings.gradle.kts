@@ -1,5 +1,5 @@
 rootProject.name = "kotools"
-include("assert", "csv", "types")
+include("assert", "csv", "shared", "types")
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement.versionCatalogs {

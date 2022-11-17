@@ -50,6 +50,7 @@ kotlin {
             dependencies {
                 implementation(project.dependencies.platform(kotlin("bom")))
                 implementation(kotlin("test"))
+                implementation(project(":shared"))
             }
         }
         val jvmMain: KotlinSourceSet by getting {

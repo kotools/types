@@ -44,6 +44,7 @@ kotlin {
             dependencies {
                 implementation(project.dependencies.platform(kotlin("bom")))
                 implementation(kotlinx.serialization.json)
+                implementation(project(":shared"))
             }
         }
         val commonTest: KotlinSourceSet by getting {
