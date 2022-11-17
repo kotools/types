@@ -43,6 +43,16 @@ private fun NotBlankString.csvImplementation(): CsvPathResult =
 public fun NotBlankString.csvOrNull(): CsvPathResult.Success? = csv()
     .onException { return null }
 
+/**
+ * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
+ * `.csv` extension, or throws a [CsvPathResult.Exception.CsvExtensionAsPath] if
+ * this string equals the `.csv` extension.
+ */
+@SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
+@Throws(CsvPathResult.Exception.CsvExtensionAsPath::class)
+public fun NotBlankString.csvOrThrow(): CsvPathResult.Success = csv()
+    .onException { throw it }
+
 internal inline fun CsvPathResult.onException(
     action: (CsvPathResult.Exception) -> CsvPathResult.Success
 ): CsvPathResult.Success = when (this) {

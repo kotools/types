@@ -1,9 +1,6 @@
 package kotools.csv
 
-import kotools.assert.assertEquals
-import kotools.assert.assertNotNull
-import kotools.assert.assertNull
-import kotools.assert.assertTrue
+import kotools.assert.*
 import kotools.types.string.NotBlankString
 import kotools.types.string.notBlankStringOrThrow
 import kotlin.test.Test
@@ -107,4 +104,28 @@ class CsvPathTest {
         csvExtension.toNotBlankString()
             .csvOrNull()
             .assertNull()
+
+    // ---------- NotBlankString.csvOrThrow() ----------
+
+    @Test
+    fun csvOrThrow_should_pass_with_a_NotBlankString_not_suffixed_by_the_CSV_extension() {
+        val file: NotBlankString = notBlankStringOrThrow("file")
+        file.csvOrThrow().path.value assertEquals "$file$csvExtension"
+    }
+
+    @Test
+    fun csvOrThrow_should_pass_with_a_NotBlankString_suffixed_by_the_CSV_extension() {
+        val file: NotBlankString = notBlankStringOrThrow("file$csvExtension")
+        file.csvOrThrow().path.value assertEquals file.value
+    }
+
+    @Test
+    fun csvOrThrow_should_fail_with_a_NotBlankString_that_equals_the_CSV_extension() {
+        val file: NotBlankString = csvExtension.toNotBlankString()
+        val result: CsvPathResult.Exception.CsvExtensionAsPath =
+            assertFailsWith(file::csvOrThrow)
+        result.message.assertNotNull()
+            .isNotBlank()
+            .assertTrue()
+    }
 }
