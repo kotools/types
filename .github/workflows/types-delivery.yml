@@ -1,14 +1,13 @@
-name: Types Integration & Delivery
+name: Types - Delivery
 on:
   push:
-    branches: [ main ]
+    branches: [ release/types-v* ]
     paths:
       - './*gradle*'
-      - .github/workflows/types-integration-delivery.yml
+      - .github/workflows/types-delivery.yml
       - buildSrc/**/*.kt*
       - types/**/*.kt*
   workflow_dispatch:
-permissions: read-all
 env:
   CACHING: gradle
   GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
@@ -19,6 +18,7 @@ env:
   JAVA_VERSION: 8
   MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
   MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+permissions: read-all
 jobs:
   # ---------- Stage 1 ----------
   validate-wrapper:
@@ -30,8 +30,8 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1.0.5
   # ---------- Stage 2 ----------
-  test-deliver-js:
-    name: Test & deliver JS package
+  deliver-js:
+    name: Deliver JS package
     needs: validate-wrapper
     runs-on: ubuntu-latest
     steps:
@@ -43,12 +43,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Run tests
-        run: ./gradlew types:jsTest --no-daemon
-      - name: Deliver package
+      - name: Deliver package to OSSRH
         run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
-  test-deliver-jvm:
-    name: Test & deliver JVM package
+  deliver-jvm:
+    name: Deliver JVM package
     needs: validate-wrapper
     runs-on: ubuntu-latest
     steps:
@@ -60,12 +58,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Run tests
-        run: ./gradlew types:jvmTest --no-daemon
-      - name: Deliver package
+      - name: Deliver package to OSSRH
         run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
-  test-deliver-linux:
-    name: Test & deliver Linux package
+  deliver-linux:
+    name: Deliver Linux package
     needs: validate-wrapper
     runs-on: ubuntu-latest
     steps:
@@ -77,12 +73,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Run tests
-        run: ./gradlew types:linuxX64Test --no-daemon
-      - name: Deliver package
+      - name: Deliver package to OSSRH
         run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
-  test-deliver-macos:
-    name: Test & deliver macOS package
+  deliver-macos:
+    name: Deliver macOS package
     needs: validate-wrapper
     runs-on: macos-latest
     steps:
@@ -94,12 +88,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Run tests
-        run: ./gradlew types:macosX64Test --no-daemon
-      - name: Deliver package
+      - name: Deliver package to OSSRH
         run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
-  test-deliver-windows:
-    name: Test & deliver Windows package
+  deliver-windows:
+    name: Deliver Windows package
     needs: validate-wrapper
     runs-on: windows-latest
     steps:
@@ -111,19 +103,17 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Run tests
-        run: ./gradlew types:mingwX64Test --no-daemon
-      - name: Deliver package
+      - name: Deliver package to OSSRH
         run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
   # ---------- Stage 3 ----------
   deliver-multiplatform:
     name: Deliver multiplatform package
     needs:
-      - test-deliver-js
-      - test-deliver-jvm
-      - test-deliver-linux
-      - test-deliver-macos
-      - test-deliver-windows
+      - deliver-js
+      - deliver-jvm
+      - deliver-linux
+      - deliver-macos
+      - deliver-windows
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
