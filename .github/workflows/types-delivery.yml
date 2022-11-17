@@ -1,0 +1,128 @@
+name: Types - Delivery
+on:
+  push:
+    branches: [ release/types-v* ]
+    paths:
+      - './*gradle*'
+      - .github/workflows/types-delivery.yml
+      - buildSrc/**/*.kt*
+      - types/**/*.kt*
+  workflow_dispatch:
+env:
+  CACHING: gradle
+  GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+  GIT_USER: ${{ secrets.GIT_USER }}
+  GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+  JAVA_DISTRIBUTION: adopt
+  JAVA_VERSION: 8
+  MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+  MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+permissions: read-all
+jobs:
+  # ---------- Stage 1 ----------
+  validate-wrapper:
+    name: Validate Gradle wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.5
+  # ---------- Stage 2 ----------
+  deliver-js:
+    name: Deliver JS package
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Deliver package to OSSRH
+        run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
+  deliver-jvm:
+    name: Deliver JVM package
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Deliver package to OSSRH
+        run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
+  deliver-linux:
+    name: Deliver Linux package
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Deliver package to OSSRH
+        run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
+  deliver-macos:
+    name: Deliver macOS package
+    needs: validate-wrapper
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Deliver package to OSSRH
+        run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
+  deliver-windows:
+    name: Deliver Windows package
+    needs: validate-wrapper
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Deliver package to OSSRH
+        run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
+  # ---------- Stage 3 ----------
+  deliver-multiplatform:
+    name: Deliver multiplatform package
+    needs:
+      - deliver-js
+      - deliver-jvm
+      - deliver-linux
+      - deliver-macos
+      - deliver-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Deliver package
+        run: ./gradlew types:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
