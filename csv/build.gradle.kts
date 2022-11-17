@@ -20,7 +20,7 @@ dependencies {
 
     // Kotools
     implementation(project(":shared"))
-    implementation(kotools.types)
+    implementation(kotools.types.next)
     testImplementation(kotools.assert)
 
     // CSV
