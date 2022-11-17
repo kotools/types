@@ -1,12 +1,17 @@
 package kotools.csv
 
+import kotools.shared.StabilityLevel
+
 /**
  * Specifies the first [version] of Kotools CSV where a declaration has
- * appeared.
+ * appeared with the optional [stability] level.
  *
  * The [version] should be in the following formats: `<major>.<minor>` or
- * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are
- * non-negative integers without leading zeros.
+ * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are positive
+ * integers without leading zeros.
+ *
+ * The component marked with this annotation is considered as
+ * [StabilityLevel.Stable] if no [stability] was provided explicitly.
  */
 @MustBeDocumented
 @Retention(AnnotationRetention.BINARY)
@@ -20,4 +25,7 @@ package kotools.csv
     AnnotationTarget.PROPERTY_SETTER,
     AnnotationTarget.TYPEALIAS
 )
-internal annotation class SinceKotoolsCsv(val version: String)
+internal annotation class SinceKotoolsCsv(
+    val version: String,
+    val stability: StabilityLevel = StabilityLevel.Stable
+)
