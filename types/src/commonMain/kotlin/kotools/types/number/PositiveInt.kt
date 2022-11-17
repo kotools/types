@@ -136,6 +136,21 @@ public sealed interface PositiveInt : IntHolder {
         /** The maximum value of a [PositiveInt]. */
         public val max: PositiveInt by lazy { positiveIntOrThrow(range.last) }
 
+        /**
+         * Returns the [value] as a [PositiveInt], or returns `null` if the
+         * [value] equals 0.
+         */
+        @Deprecated(
+            "Use the PositiveIntOrNull function instead.",
+            ReplaceWith(
+                "PositiveIntOrNull(value)",
+                "${Package.number}.PositiveIntOrNull"
+            ),
+            DeprecationLevel.ERROR
+        )
+        public infix fun orNull(value: Int): PositiveInt? =
+            value.toPositiveIntOrNull()
+
         /** Returns a random [PositiveInt]. */
         @Deprecated(
             "Use the randomPositiveInt function instead.",

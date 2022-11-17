@@ -134,6 +134,21 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
             strictlyNegativeIntOrThrow(range.last)
         }
 
+        /**
+         * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
+         * [value] equals 0.
+         */
+        @Deprecated(
+            "Use the StrictlyNegativeIntOrNull function instead.",
+            ReplaceWith(
+                "StrictlyNegativeIntOrNull(value)",
+                "${Package.number}.StrictlyNegativeIntOrNull"
+            ),
+            DeprecationLevel.ERROR
+        )
+        public infix fun orNull(value: Int): StrictlyPositiveInt? =
+            value.toStrictlyPositiveIntOrNull()
+
         /** Returns a random [StrictlyNegativeInt]. */
         @Deprecated(
             "Use the randomStrictlyNegativeInt function instead.",

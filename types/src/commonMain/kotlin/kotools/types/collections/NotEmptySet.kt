@@ -8,10 +8,35 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 import kotools.shared.StabilityLevel
+import kotools.types.Package
 
 // ---------- Builders ----------
+
+/**
+ * Creates a [NotEmptySet] starting with a [head] and containing all the
+ * elements of the optional [tail].
+ */
+@Deprecated(
+    "Use the notEmptySetOf function instead.",
+    ReplaceWith(
+        "notEmptySetOf<E>(head, *tail)",
+        "${Package.collections}.notEmptySetOf"
+    ),
+    DeprecationLevel.ERROR
+)
+@SinceKotools(Types, "1.3")
+@Suppress("FunctionName")
+public fun <E> NotEmptySet(head: E, vararg tail: E): NotEmptySet<E> {
+    val set: Set<E> = tail.toSet()
+    return NotEmptySet(head, set)
+}
+
+@Suppress("FunctionName")
+private fun <E> NotEmptySet(head: E, tail: Set<E>): NotEmptySet<E> {
+    val set: Set<E> = setOf(head) + tail
+    return NotEmptySetImplementation(set)
+}
 
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
@@ -128,7 +153,19 @@ public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
  */
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotools(Types, "1.3")
-public sealed interface NotEmptySet<out E> : NotEmptyCollection<E>, Set<E>
+public sealed interface NotEmptySet<out E> : NotEmptyCollection<E>, Set<E> {
+    // ---------- Positional access operations ----------
+
+    @Deprecated(
+        "The index should be a PositiveInt.",
+        ReplaceWith(
+            "this[PositiveInt(index)]",
+            "${Package.number}.PositiveInt"
+        ),
+        DeprecationLevel.ERROR
+    )
+    override fun get(index: Int): E = elementAt(index)
+}
 
 private class NotEmptySetImplementation<out E>(private val set: Set<E>) :
     NotEmptySet<E>,

@@ -44,11 +44,6 @@ Add explicit builders for all types
 - The DSL for building numbers
   ([#33](https://github.com/kotools/libraries/issues/33)).
 
-#### Removed
-
-Deprecated declarations with error level from v3.1
-([#21](https://github.com/kotools/libraries/issues/21)).
-
 ## Version 3.1.0 - 2022/10/24
 
 ### All platforms

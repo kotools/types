@@ -160,6 +160,21 @@ public sealed interface NonZeroInt : IntHolder {
             nonZeroIntOrThrow(positiveRange.last)
         }
 
+        /**
+         * Returns the [value] as a [NonZeroInt], or returns `null` if the
+         * [value] equals 0.
+         */
+        @Deprecated(
+            "Use the NonZeroIntOrNull function instead.",
+            ReplaceWith(
+                "NonZeroIntOrNull(value)",
+                "${Package.number}.NonZeroIntOrNull"
+            ),
+            DeprecationLevel.ERROR
+        )
+        public infix fun orNull(value: Int): NonZeroInt? =
+            nonZeroIntOrNull(value)
+
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
             "Use the randomNonZeroInt function instead.",

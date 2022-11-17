@@ -169,6 +169,24 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
     public operator fun plus(other: Any?): NotBlankString =
         notBlankStringOrThrow(value + other)
 
+    /** Contains declarations for holding or building a [PositiveInt]. */
+    public companion object {
+        /**
+         * Returns the [value] as a [NotBlankString], or returns `null` if the
+         * [value] is blank.
+         */
+        @Deprecated(
+            "Use the NotBlankStringOrNull function instead.",
+            ReplaceWith(
+                "NotBlankStringOrNull(value)",
+                "${Package.string}.NotBlankStringOrNull"
+            ),
+            DeprecationLevel.ERROR
+        )
+        public infix fun orNull(value: String): NotBlankString? =
+            notBlankStringOrNull(value)
+    }
+
     /** Error thrown when creating a [NotBlankString] fails. */
     @Deprecated(
         "Use the IllegalArgumentException type instead.",
