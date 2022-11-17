@@ -3,6 +3,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -90,7 +91,7 @@ public fun Int.toNegativeIntOrNull(): NegativeInt? = negativeIntOrNull(this)
 public fun Int.toNegativeIntOrThrow(): NegativeInt = negativeIntOrThrow(this)
 
 /** Returns a random [NegativeInt]. */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 public fun randomNegativeInt(): NegativeInt = NegativeInt.range.random()
     .toNegativeIntOrThrow()
 

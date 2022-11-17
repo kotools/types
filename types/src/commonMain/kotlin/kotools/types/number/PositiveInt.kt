@@ -3,6 +3,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.StabilityLevel
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -90,7 +91,7 @@ public fun Int.toPositiveIntOrNull(): PositiveInt? = positiveIntOrNull(this)
 public fun Int.toPositiveIntOrThrow(): PositiveInt = positiveIntOrThrow(this)
 
 /** Returns a random [PositiveInt]. */
-@SinceKotoolsTypes("3.2")
+@SinceKotoolsTypes("3.2", StabilityLevel.Alpha)
 public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
     .toPositiveIntOrThrow()
 
