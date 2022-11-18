@@ -3,10 +3,9 @@ on:
   push:
     branches: [ release/types-v* ]
     paths:
+      - './*.kt*'
       - './*gradle*'
       - .github/workflows/types-delivery.yml
-      - buildSrc/**/*.kt*
-      - types/**/*.kt*
   workflow_dispatch:
 env:
   CACHING: gradle
@@ -44,7 +43,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew types:publishJsPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew publishJsPublicationToOSSRHRepository --no-daemon
   deliver-jvm:
     name: Deliver JVM package
     needs: validate-wrapper
@@ -59,7 +58,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew types:publishJvmPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew publishJvmPublicationToOSSRHRepository --no-daemon
   deliver-linux:
     name: Deliver Linux package
     needs: validate-wrapper
@@ -74,7 +73,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew types:publishLinuxX64PublicationToOSSRHRepository --no-daemon
+        run: ./gradlew publishLinuxX64PublicationToOSSRHRepository --no-daemon
   deliver-macos:
     name: Deliver macOS package
     needs: validate-wrapper
@@ -89,7 +88,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew types:publishMacosX64PublicationToOSSRHRepository --no-daemon
+        run: ./gradlew publishMacosX64PublicationToOSSRHRepository --no-daemon
   deliver-windows:
     name: Deliver Windows package
     needs: validate-wrapper
@@ -104,7 +103,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew types:publishMingwX64PublicationToOSSRHRepository --no-daemon
+        run: ./gradlew publishMingwX64PublicationToOSSRHRepository --no-daemon
   # ---------- Stage 3 ----------
   deliver-multiplatform:
     name: Deliver multiplatform package
@@ -125,4 +124,4 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package
-        run: ./gradlew types:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
