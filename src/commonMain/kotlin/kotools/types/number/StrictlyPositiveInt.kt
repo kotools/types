@@ -83,8 +83,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
             ReplaceWith(
                 "StrictlyPositiveIntOrNull(value)",
                 "kotools.types.number.StrictlyPositiveIntOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: Int): StrictlyPositiveInt? =
             value.toStrictlyPositiveIntOrNull()

@@ -128,8 +128,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
             ReplaceWith(
                 "NotBlankStringOrNull(value)",
                 "kotools.types.string.NotBlankStringOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: String): NotBlankString? =
             value.toNotBlankStringOrNull()

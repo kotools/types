@@ -19,8 +19,7 @@ import kotools.types.tryOrNull
     ReplaceWith(
         "this.getOrElse(PositiveInt(index), defaultValue)",
         "kotools.types.number.PositiveInt"
-    ),
-    DeprecationLevel.ERROR
+    )
 )
 @SinceKotoolsTypes("1.3")
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
@@ -67,8 +66,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
         ReplaceWith(
             "this[PositiveInt(index)]",
             "kotools.types.number.PositiveInt"
-        ),
-        DeprecationLevel.ERROR
+        )
     )
     @Throws(IndexOutOfBoundsException::class)
     public infix operator fun get(index: Int): E
@@ -90,8 +88,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
         ReplaceWith(
             "getOrNull(PositiveInt(index))",
             "kotools.types.number.PositiveInt"
-        ),
-        DeprecationLevel.ERROR
+        )
     )
     public infix fun getOrNull(index: Int): E? = index.toPositiveIntOrNull()
         ?.let(::getOrNull)

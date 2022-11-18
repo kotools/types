@@ -19,8 +19,7 @@ import kotools.types.SinceKotoolsTypes
     ReplaceWith(
         "notEmptyListOf<E>(head, *tail)",
         "kotools.types.collections.notEmptyListOf"
-    ),
-    DeprecationLevel.ERROR
+    )
 )
 @SinceKotoolsTypes("1.3")
 @Suppress("FunctionName")
