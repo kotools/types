@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+### Added
+
+Add extension functions for building a CSV path from a `String` or a 
+`NotBlankString` ([#47](https://github.com/kotools/libraries/issues/47)).
+
 ## Version 2.2.1 - 2022/11/04
 
 > This version contains every changes included in `v2.0.2` and `v2.1.2`.
