@@ -145,8 +145,7 @@ public sealed interface NegativeInt : IntHolder {
             ReplaceWith(
                 "NegativeIntOrNull(value)",
                 "${Package.number}.NegativeIntOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: Int): NegativeInt? =
             negativeIntOrNull(value)

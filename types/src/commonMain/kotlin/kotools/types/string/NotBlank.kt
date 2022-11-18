@@ -180,8 +180,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
             ReplaceWith(
                 "NotBlankStringOrNull(value)",
                 "${Package.string}.NotBlankStringOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: String): NotBlankString? =
             notBlankStringOrNull(value)

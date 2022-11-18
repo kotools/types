@@ -169,8 +169,7 @@ public sealed interface NonZeroInt : IntHolder {
             ReplaceWith(
                 "NonZeroIntOrNull(value)",
                 "${Package.number}.NonZeroIntOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: Int): NonZeroInt? =
             nonZeroIntOrNull(value)

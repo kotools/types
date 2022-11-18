@@ -22,8 +22,7 @@ import kotools.types.Package
     ReplaceWith(
         "notEmptySetOf<E>(head, *tail)",
         "${Package.collections}.notEmptySetOf"
-    ),
-    DeprecationLevel.ERROR
+    )
 )
 @SinceKotools(Types, "1.3")
 @Suppress("FunctionName")
@@ -161,8 +160,7 @@ public sealed interface NotEmptySet<out E> : NotEmptyCollection<E>, Set<E> {
         ReplaceWith(
             "this[PositiveInt(index)]",
             "${Package.number}.PositiveInt"
-        ),
-        DeprecationLevel.ERROR
+        )
     )
     override fun get(index: Int): E = elementAt(index)
 }

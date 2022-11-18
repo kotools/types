@@ -145,8 +145,7 @@ public sealed interface PositiveInt : IntHolder {
             ReplaceWith(
                 "PositiveIntOrNull(value)",
                 "${Package.number}.PositiveIntOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: Int): PositiveInt? =
             value.toPositiveIntOrNull()

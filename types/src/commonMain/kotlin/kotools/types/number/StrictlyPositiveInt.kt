@@ -143,8 +143,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
             ReplaceWith(
                 "StrictlyPositiveIntOrNull(value)",
                 "${Package.number}.StrictlyPositiveIntOrNull"
-            ),
-            DeprecationLevel.ERROR
+            )
         )
         public infix fun orNull(value: Int): StrictlyPositiveInt? =
             value.toStrictlyPositiveIntOrNull()

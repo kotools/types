@@ -30,6 +30,8 @@ Add explicit builders for all types
   ([#17](https://github.com/kotools/libraries/issues/17)).
 - Replace the `SinceKotoolsTypes` annotation by the `SinceKotools` shared
   annotation ([#54](https://github.com/kotools/libraries/issues/54)).
+- Remove error promotions of deprecated declarations from v3.1
+  ([#55](https://github.com/kotools/libraries/issues/55)).
 
 #### Deprecated
 
@@ -43,6 +45,8 @@ Add explicit builders for all types
   ([#22](https://github.com/kotools/libraries/issues/22)).
 - The DSL for building numbers
   ([#33](https://github.com/kotools/libraries/issues/33)).
+
+#### Fixed
 
 ## Version 3.1.0 - 2022/10/24
 
