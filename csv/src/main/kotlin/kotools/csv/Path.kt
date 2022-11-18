@@ -45,6 +45,15 @@ public fun NotBlankString.csvOrNull(): CsvPathResult.Success? = csv()
 
 /**
  * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
+ * `.csv` extension, or returns `null` when this string is blank or equals the
+ * `.csv` extension.
+ */
+@SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
+public fun String.csvOrNull(): CsvPathResult.Success? = csv()
+    .onException { return null }
+
+/**
+ * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
  * `.csv` extension, or throws a [CsvPathResult.Exception.CsvExtensionAsPath] if
  * this string equals the `.csv` extension.
  */

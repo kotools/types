@@ -105,6 +105,34 @@ class CsvPathTest {
             .csvOrNull()
             .assertNull()
 
+    // ---------- String.csvOrNull() ----------
+
+    @Test
+    fun csvOrNull_should_pass_with_a_not_blank_String_not_suffixed_by_the_CSV_extension() {
+        val file = "file"
+        file.csvOrNull()
+            .assertNotNull()
+            .path.value assertEquals "$file$csvExtension"
+    }
+
+    @Test
+    fun csvOrNull_should_pass_with_a_not_blank_String_suffixed_by_the_CSV_extension() {
+        val file = "file$csvExtension"
+        file.csvOrNull()
+            .assertNotNull()
+            .path.value assertEquals file
+    }
+
+    @Test
+    fun csvOrNull_should_fail_with_a_blank_String(): Unit = " ".csvOrNull()
+        .assertNull()
+
+    @Test
+    fun csvOrNull_should_fail_with_a_not_blank_String_that_equals_the_CSV_extension(): Unit =
+        csvExtension.toString()
+            .csvOrNull()
+            .assertNull()
+
     // ---------- NotBlankString.csvOrThrow() ----------
 
     @Test
