@@ -28,7 +28,7 @@ import java.net.URL
 internal suspend fun CsvPathResult.Success.read(): CsvReaderResult =
     withContext(CoroutineName("CsvReader") + Dispatchers.IO) {
         val url: URL = ClassLoader.getSystemResource(path.value)
-            ?: return@withContext csvFileNotFoundException(path)
+            ?: return@withContext csvFileNotFoundException()
         val file = File(url.path)
         val csv: CsvReader = csvReader {
             delimiter = ','
@@ -37,40 +37,31 @@ internal suspend fun CsvPathResult.Success.read(): CsvReaderResult =
         val records: NotEmptyList<Record> = csv.readAllWithHeader(file)
             .map { record: Map<String, String> ->
                 val fields: NotEmptyMap<NotBlankString, NotBlankString?> =
-                    record.map {
-                        val key: NotBlankString = it.key
-                            .toNotBlankStringOrNull()
-                            ?: return@withContext csvFileHeaderWithBlankField(
-                                path
-                            )
-                        val value: NotBlankString? =
-                            it.value.toNotBlankStringOrNull()
-                        key to value
+                    record.mapKeys {
+                        it.key.toNotBlankStringOrNull()
+                            ?: return@withContext csvFileHeaderWithBlankField()
                     }
-                        .toMap()
+                        .mapValues { it.value.toNotBlankStringOrNull() }
                         .toNotEmptyMapOrThrow()
                 Record(fields)
             }
             .toNotEmptyListOrNull()
-            ?: return@withContext csvFileWithoutRecord(path)
+            ?: return@withContext csvFileWithoutRecord()
         CsvReaderResult.Success(records)
     }
 
 // ---------- CsvReaderResult ----------
 
-private fun csvFileNotFoundException(
-    path: NotBlankString
-): CsvReaderResult.Exception.FileNotFound =
+private fun CsvPathResult.Success.csvFileNotFoundException():
+        CsvReaderResult.Exception.FileNotFound =
     CsvReaderResult.Exception.FileNotFound(path)
 
-private fun csvFileHeaderWithBlankField(
-    path: NotBlankString
-): CsvReaderResult.Exception.FileHeaderWithBlankField =
+private fun CsvPathResult.Success.csvFileHeaderWithBlankField():
+        CsvReaderResult.Exception.FileHeaderWithBlankField =
     CsvReaderResult.Exception.FileHeaderWithBlankField(path)
 
-private fun csvFileWithoutRecord(
-    path: NotBlankString
-): CsvReaderResult.Exception.FileWithoutRecord =
+private fun CsvPathResult.Success.csvFileWithoutRecord():
+        CsvReaderResult.Exception.FileWithoutRecord =
     CsvReaderResult.Exception.FileWithoutRecord(path)
 
 internal inline fun CsvReaderResult.onException(
