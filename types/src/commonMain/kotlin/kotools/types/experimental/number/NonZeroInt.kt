@@ -58,8 +58,8 @@ public val NonZeroInt.Companion.max: NonZeroInt by lazy {
 }
 
 /**
- * Returns this integer as a [NonZeroInt], or returns a
- * [NonZeroNumber.Exception] if this integer equals zero.
+ * Returns this value as a [NonZeroInt], or a [NonZeroNumber.Exception] if this
+ * value equals zero.
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
@@ -73,9 +73,8 @@ public fun NonZeroInt.Companion.random(): NonZeroInt = ranges.random()
     .nonZero.getOrThrow()
 
 /**
- * Increment this integer by one, or returns `1` when this integer equals `-1`,
- * or returns [NonZeroInt.Companion.min] value when this integer equals
- * [NonZeroInt.Companion.max].
+ * Returns this value incremented by one, or `1` if this integer equals `-1`, or
+ * [NonZeroInt.Companion.min] if this value equals [NonZeroInt.Companion.max].
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "1.1", Experimental)
@@ -86,9 +85,8 @@ public operator fun NonZeroInt.inc(): NonZeroInt = when (value) {
 }
 
 /**
- * Decrement this integer by one, or returns `-1` when this integer equals `1`,
- * or returns [NonZeroInt.Companion.max] value when this integer equals
- * [NonZeroInt.Companion.min].
+ * Returns this value decremented by one, or `-1` if this integer equals `1`, or
+ * [NonZeroInt.Companion.max] if this value equals [NonZeroInt.Companion.min].
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "1.1", Experimental)
@@ -98,7 +96,7 @@ public operator fun NonZeroInt.dec(): NonZeroInt = when (value) {
     else -> (value - 1).nonZero.getOrThrow()
 }
 
-/** Returns the negative of this integer. */
+/** Returns the negative of this value. */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "1.1", Experimental)
 public operator fun NonZeroInt.unaryMinus(): NonZeroInt =
