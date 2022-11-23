@@ -84,3 +84,16 @@ public operator fun NonZeroInt.inc(): NonZeroInt = when (value) {
     NonZeroInt.max.value -> NonZeroInt.min
     else -> (value + 1).nonZero.getOrThrow()
 }
+
+/**
+ * Decrement this integer by one, or returns `-1` when this integer equals `1`,
+ * or returns [NonZeroInt.Companion.max] value when this integer equals
+ * [NonZeroInt.Companion.min].
+ */
+@ExperimentalKotoolsTypesApi
+@SinceKotools(Types, "1.1", Experimental)
+public operator fun NonZeroInt.dec(): NonZeroInt = when (value) {
+    1 -> (-1).nonZero.getOrThrow()
+    NonZeroInt.min.value -> NonZeroInt.max
+    else -> (value - 1).nonZero.getOrThrow()
+}
