@@ -27,6 +27,33 @@ class NonZeroIntTest {
             .isNotBlank()
             .assertTrue()
     }
+
+    // ---------- NonZeroInt.inc() ----------
+
+    @Test
+    fun inc_should_return_1_with_an_Int_that_equals_minus1() {
+        var x: NonZeroInt = (-1).nonZero.getOrThrow()
+        x++
+        x.value assertEquals 1
+    }
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+        var x: NonZeroInt = NonZeroInt.max
+        x++
+        x assertEquals NonZeroInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_value_with_a_value_other_than_minus1_and_the_maximum_value() {
+        var x: NonZeroInt
+        do {
+            x = NonZeroInt.random()
+        } while (x.value == -1 || x == NonZeroInt.min)
+        val initialValue: Int = x.value
+        x++
+        x.value assertEquals initialValue + 1
+    }
 }
 
 @ExperimentalKotoolsTypesApi
