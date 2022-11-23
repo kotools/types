@@ -37,17 +37,13 @@ internal suspend fun CsvPathResult.Success.read(): CsvReaderResult =
         val records: NotEmptyList<Record> = csv.readAllWithHeader(file)
             .map { record: Map<String, String> ->
                 val fields: NotEmptyMap<NotBlankString, NotBlankString?> =
-                    record.map {
-                        val key: NotBlankString = it.key
-                            .toNotBlankStringOrNull()
+                    record.mapKeys {
+                        it.key.toNotBlankStringOrNull()
                             ?: return@withContext csvFileHeaderWithBlankField(
                                 path
                             )
-                        val value: NotBlankString? =
-                            it.value.toNotBlankStringOrNull()
-                        key to value
                     }
-                        .toMap()
+                        .mapValues { it.value.toNotBlankStringOrNull() }
                         .toNotEmptyMapOrThrow()
                 Record(fields)
             }
