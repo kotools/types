@@ -1,7 +1,7 @@
 package kotools.csv
 
 import kotools.csv.path.csvExtension
-import kotools.csv.path.suffixWith
+import kotools.csv.path.suffix
 import kotools.shared.Project.Csv
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
@@ -27,6 +27,10 @@ public fun String.csv(): CsvPathResult.FromString = toNotBlankStringOrNull()
  * `.csv` extension, or returns a [CsvPathResult.Exception.CsvExtensionAsPath]
  * if this string equals the `.csv` extension.
  */
+@Deprecated(
+    "Use the property returning a Result<CsvPath> instead.",
+    ReplaceWith("this.csv", "kotools.csv.path.csv")
+)
 @SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
 public fun NotBlankString.csv(): CsvPathResult.FromNotBlankString =
     csvImplementation() as CsvPathResult.FromNotBlankString
@@ -34,7 +38,7 @@ public fun NotBlankString.csv(): CsvPathResult.FromNotBlankString =
 private fun NotBlankString.csvImplementation(): CsvPathResult =
     if (value == csvExtension.toString())
         CsvPathResult.Exception.CsvExtensionAsPath
-    else CsvPathResult.Success(this suffixWith csvExtension)
+    else CsvPathResult.Success(this suffix csvExtension)
 
 /**
  * Returns this string as a [CSV path][CsvPathResult.Success] suffixed with the
@@ -51,6 +55,7 @@ public fun String.csvOrNull(): CsvPathResult.Success? = csv()
  * extension.
  */
 @SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
+@Suppress("DEPRECATION")
 public fun NotBlankString.csvOrNull(): CsvPathResult.Success? = csv()
     .onException { return null }
 
@@ -71,6 +76,7 @@ public fun String.csvOrThrow(): CsvPathResult.Success = csv()
  * this string equals the `.csv` extension.
  */
 @SinceKotools(Csv, "2.3", StabilityLevel.Alpha)
+@Suppress("DEPRECATION")
 @Throws(CsvPathResult.Exception.CsvExtensionAsPath::class)
 public fun NotBlankString.csvOrThrow(): CsvPathResult.Success = csv()
     .onException { throw it }

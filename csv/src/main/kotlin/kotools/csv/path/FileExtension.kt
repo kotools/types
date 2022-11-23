@@ -5,7 +5,7 @@ import kotools.types.string.notBlankStringOrThrow
 
 internal val csvExtension: FileExtension.Csv = FileExtension.Csv
 
-internal infix fun NotBlankString.suffixWith(
+internal infix fun NotBlankString.suffix(
     extension: FileExtension
 ): NotBlankString = takeIf { it.value.endsWith(extension.toString()) }
     ?: notBlankStringOrThrow("$this$extension")
