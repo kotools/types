@@ -9,7 +9,7 @@ import kotools.types.string.notBlankStringOrThrow
 import kotlin.test.Test
 
 class CsvPathTest {
-    // ---------- NotBlankString.csv() ----------
+    // ---------- NotBlankString.csv ----------
 
     @Test
     fun csv_should_pass_with_a_NotBlankString_not_suffixed_by_the_CSV_extension() {
