@@ -1,6 +1,7 @@
 package kotools.csv
 
 import kotools.assert.*
+import kotools.csv.path.csvExtension
 import kotools.types.string.NotBlankString
 import kotools.types.string.notBlankStringOrThrow
 import kotlin.test.Test

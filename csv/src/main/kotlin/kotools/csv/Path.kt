@@ -1,5 +1,7 @@
 package kotools.csv
 
+import kotools.csv.path.csvExtension
+import kotools.csv.path.suffixWith
 import kotools.shared.Project.Csv
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
