@@ -97,3 +97,9 @@ public operator fun NonZeroInt.dec(): NonZeroInt = when (value) {
     NonZeroInt.min.value -> NonZeroInt.max
     else -> (value - 1).nonZero.getOrThrow()
 }
+
+/** Returns the negative of this integer. */
+@ExperimentalKotoolsTypesApi
+@SinceKotools(Types, "1.1", Experimental)
+public operator fun NonZeroInt.unaryMinus(): NonZeroInt =
+    (-value).nonZero.getOrThrow()

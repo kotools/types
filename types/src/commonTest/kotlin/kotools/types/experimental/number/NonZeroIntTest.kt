@@ -89,6 +89,12 @@ class NonZeroIntTest {
         x--
         x.value assertEquals initialValue - 1
     }
+
+    // ---------- NonZeroInt.unaryMinus() ----------
+
+    @Test
+    fun unaryMinus_should_pass(): Unit = NonZeroInt.random()
+        .let { (-it).value assertEquals -it.value }
 }
 
 @ExperimentalKotoolsTypesApi
