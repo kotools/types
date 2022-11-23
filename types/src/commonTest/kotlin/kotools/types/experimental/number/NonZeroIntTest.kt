@@ -10,6 +10,14 @@ import kotlin.test.Test
 
 @ExperimentalKotoolsTypesApi
 class NonZeroIntTest {
+    // ---------- NonZeroInt.toString() ----------
+
+    @Test
+    fun toString_should_behave_like_an_Int() {
+        val x: NonZeroInt = NonZeroInt.random()
+        x.toString() assertEquals x.value.toString()
+    }
+
     // ---------- Int.nonZero ----------
 
     @Test
@@ -31,21 +39,21 @@ class NonZeroIntTest {
     // ---------- NonZeroInt.inc() ----------
 
     @Test
-    fun inc_should_return_1_with_an_Int_that_equals_minus1() {
+    fun inc_should_return_1_with_minus1() {
         var x: NonZeroInt = (-1).nonZero.getOrThrow()
         x++
         x.value assertEquals 1
     }
 
     @Test
-    fun inc_should_return_the_minimum_value_with_the_maximum_value() {
+    fun inc_should_return_the_minimum_with_the_maximum() {
         var x: NonZeroInt = NonZeroInt.max
         x++
         x assertEquals NonZeroInt.min
     }
 
     @Test
-    fun inc_should_increment_the_value_with_a_value_other_than_minus1_and_the_maximum_value() {
+    fun inc_should_increment_the_value_with_a_value_other_than_minus1_and_than_the_maximum() {
         var x: NonZeroInt
         do {
             x = NonZeroInt.random()
@@ -53,14 +61,6 @@ class NonZeroIntTest {
         val initialValue: Int = x.value
         x++
         x.value assertEquals initialValue + 1
-    }
-
-    // ---------- NonZeroInt.toString() ----------
-
-    @Test
-    fun toString_should_behave_like_an_Int() {
-        val x: NonZeroInt = NonZeroInt.random()
-        x.toString() assertEquals x.value.toString()
     }
 }
 
