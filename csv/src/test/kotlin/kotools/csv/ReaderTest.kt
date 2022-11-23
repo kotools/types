@@ -26,8 +26,7 @@ class CsvReaderTest {
             .read()
         when (result) {
             is CsvReaderResult.Success -> fail()
-            is CsvReaderResult.Exception.FileNotFound -> result.message
-                .assertNotNull()
+            is CsvFileNotFoundException -> result.message.assertNotNull()
                 .isNotBlank()
                 .assertTrue()
             is CsvReaderResult.Exception -> fail(result.message, result)
@@ -42,8 +41,8 @@ class CsvReaderTest {
                 .read()
             when (result) {
                 is CsvReaderResult.Success -> fail()
-                is CsvReaderResult.Exception.FileHeaderWithBlankField -> result
-                    .message.assertNotNull()
+                is CsvFileHeaderWithBlankFieldException -> result.message
+                    .assertNotNull()
                     .isNotBlank()
                     .assertTrue()
                 is CsvReaderResult.Exception -> fail(result.message, result)
@@ -57,7 +56,7 @@ class CsvReaderTest {
                 .read()
             when (result) {
                 is CsvReaderResult.Success -> fail()
-                is CsvReaderResult.Exception.FileWithoutRecord -> result.message
+                is CsvFileWithoutRecordException -> result.message
                     .assertNotNull()
                     .isNotBlank()
                     .assertTrue()
