@@ -54,6 +54,14 @@ class NonZeroIntTest {
         x++
         x.value assertEquals initialValue + 1
     }
+
+    // ---------- NonZeroInt.toString() ----------
+
+    @Test
+    fun toString_should_behave_like_an_Int() {
+        val x: NonZeroInt = NonZeroInt.random()
+        x.toString() assertEquals x.value.toString()
+    }
 }
 
 @ExperimentalKotoolsTypesApi

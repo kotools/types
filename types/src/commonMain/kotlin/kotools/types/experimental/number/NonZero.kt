@@ -47,6 +47,9 @@ public operator fun NonZeroInt.inc(): NonZeroInt = when (value) {
 @SinceKotools(Types, "1.1", Experimental)
 public value class NonZeroInt private constructor(override val value: Int) :
     NonZeroNumber<Int> {
+    /** Returns a string representation of this [value]. */
+    override fun toString(): String = value.toString()
+
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
         private val negativeRange: IntRange by lazy { Int.MIN_VALUE..-1 }
