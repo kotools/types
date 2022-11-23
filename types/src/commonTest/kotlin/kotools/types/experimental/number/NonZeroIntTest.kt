@@ -10,14 +10,23 @@ import kotlin.test.Test
 
 @ExperimentalKotoolsTypesApi
 class NonZeroIntTest {
-    // ---------- NonZeroInt.toString() ----------
+    @Test
+    fun compareTo_should_pass_with_a_NonZeroInt() {
+        val x: NonZeroInt = NonZeroInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: Int = x.compareTo(y)
+        result assertEquals x.value.compareTo(y.value)
+    }
 
     @Test
     fun toString_should_behave_like_an_Int() {
         val x: NonZeroInt = NonZeroInt.random()
         x.toString() assertEquals x.value.toString()
     }
+}
 
+@ExperimentalKotoolsTypesApi
+class NonZeroIntXTest {
     // ---------- Int.nonZero ----------
 
     @Test
