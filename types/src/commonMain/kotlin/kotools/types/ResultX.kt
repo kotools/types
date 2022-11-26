@@ -9,5 +9,9 @@ internal inline fun <A, B> A.toSuccessfulResult(builder: (A) -> B): Result<B> {
 
 // ---------- Failure ----------
 
-internal fun <A : Throwable> A.toFailure(): Result<Nothing> =
-    Result.failure(this)
+internal inline fun <A : Throwable> failureOf(
+    builder: () -> A
+): Result<Nothing> {
+    val exception: A = builder()
+    return Result.failure(exception)
+}
