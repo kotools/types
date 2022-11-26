@@ -59,7 +59,7 @@ private object StrictlyPositiveHolderDsl : IntHolderDsl<StrictlyPositiveInt> {
 public val negative: IntHolderDsl<NegativeInt> = NegativeHolderDsl
 
 private object NegativeHolderDsl : IntHolderDsl<NegativeInt> {
-    override fun int(value: Int): NegativeInt = value.toNegativeIntOrThrow()
+    override fun int(value: Int): NegativeInt = value.negative.getOrThrow()
 }
 
 
