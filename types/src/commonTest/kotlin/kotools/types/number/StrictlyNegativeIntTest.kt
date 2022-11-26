@@ -26,36 +26,23 @@ class StrictlyNegativeIntTest {
     // ---------- Builders ----------
 
     @Test
-    fun strictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        val result: StrictlyNegativeInt? = strictlyNegativeIntOrNull(value)
-        result.assertNotNull().value assertEquals value
-    }
+    fun int_strictlyNegative_should_pass_with_a_strictly_negative_Int(): Unit =
+        randomStrictlyNegativeInt()
+            .value
+            .let { it.strictlyNegative.getOrThrow().value assertEquals it }
 
     @Test
-    fun strictlyNegativeIntOrNull_should_return_null_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        val result: StrictlyNegativeInt? = strictlyNegativeIntOrNull(value)
-        result.assertNull()
-    }
-
-    @Test
-    fun strictlyNegativeIntOrThrow_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        val result: StrictlyNegativeInt = strictlyNegativeIntOrThrow(value)
-        result.value assertEquals value
-    }
-
-    @Test
-    fun strictlyNegativeIntOrThrow_should_throw_an_error_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        val result: IllegalArgumentException =
-            assertFailsWith { strictlyNegativeIntOrThrow(value) }
-        result.message.assertNotNull()
+    fun int_strictlyNegative_should_fail_with_a_positive_Int(): Unit =
+        randomPositiveInt()
+            .value
+            .strictlyNegative
+            .let { assertFailsWith<IllegalArgumentException>(it::getOrThrow) }
+            .message
+            .assertNotNull()
             .isNotBlank()
             .assertTrue()
-    }
 
+    @Suppress("DEPRECATION")
     @Test
     fun int_toStrictlyNegativeIntOrNull_should_pass_with_a_strictly_negative_Int(): Unit =
         randomStrictlyNegativeInt()
@@ -64,29 +51,13 @@ class StrictlyNegativeIntTest {
             .runMapSecond { assertNotNull().value }
             .assertEquals()
 
+    @Suppress("DEPRECATION")
     @Test
     fun int_toStrictlyNegativeIntOrNull_should_return_null_with_a_positive_Int(): Unit =
         randomPositiveInt()
             .value
             .toStrictlyNegativeIntOrNull()
             .assertNull()
-
-    @Test
-    fun int_toStrictlyNegativeIntOrThrow_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = randomStrictlyNegativeInt().value
-        val result: StrictlyNegativeInt = value.toStrictlyNegativeIntOrThrow()
-        result.value assertEquals value
-    }
-
-    @Test
-    fun int_toStrictlyNegativeIntOrThrow_should_throw_an_error_with_a_positive_Int() {
-        val value: Int = randomPositiveInt().value
-        val result: IllegalArgumentException =
-            assertFailsWith(value::toStrictlyNegativeIntOrThrow)
-        result.message.assertNotNull()
-            .isNotBlank()
-            .assertTrue()
-    }
 
     @Test
     fun randomStrictlyNegativeInt_should_return_different_values() {
