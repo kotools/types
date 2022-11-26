@@ -3,10 +3,7 @@ package kotools.types.collections
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.types.Package
-import kotools.types.number.PositiveInt
-import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.strictlyPositiveIntOrThrow
-import kotools.types.number.toPositiveIntOrNull
+import kotools.types.number.*
 import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankStringOrThrow
 import kotools.types.tryOrNull
@@ -27,7 +24,7 @@ import kotools.types.tryOrNull
 public inline fun <E> NotEmptyCollection<E>.getOrElse(
     index: Int,
     defaultValue: (Int) -> E
-): E = index.toPositiveIntOrNull()
+): E = index.positive.getOrNull()
     ?.let(::getOrNull)
     ?: defaultValue(index)
 
@@ -56,7 +53,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
 
     /** Returns the [size] of this collection as a [StrictlyPositiveInt]. */
     public val typedSize: StrictlyPositiveInt
-        get() = strictlyPositiveIntOrThrow(size)
+        get() = size.strictlyPositive.getOrThrow()
 
     // ---------- Positional access operations ----------
 
@@ -93,7 +90,7 @@ public sealed interface NotEmptyCollection<out E> : Collection<E> {
             "${Package.number}.PositiveInt"
         )
     )
-    public infix fun getOrNull(index: Int): E? = index.toPositiveIntOrNull()
+    public infix fun getOrNull(index: Int): E? = index.positive.getOrNull()
         ?.let(::getOrNull)
 
     /**

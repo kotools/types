@@ -5,7 +5,7 @@ import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.Package
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.strictlyPositiveIntOrThrow
+import kotools.types.number.strictlyPositive
 
 // ---------- Builders ----------
 
@@ -80,7 +80,7 @@ public sealed interface NotEmptyMap<K, out V> : Map<K, V> {
 
     /** Returns the [size] of this map as a [StrictlyPositiveInt]. */
     public val typedSize: StrictlyPositiveInt
-        get() = strictlyPositiveIntOrThrow(size)
+        get() = size.strictlyPositive.getOrThrow()
 
     /** Error thrown when creating a [NotEmptyMap] fails. */
     @Deprecated(

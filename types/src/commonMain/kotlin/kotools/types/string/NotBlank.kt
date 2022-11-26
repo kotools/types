@@ -12,7 +12,7 @@ import kotools.shared.StabilityLevel
 import kotools.types.Package
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.strictlyPositiveIntOrThrow
+import kotools.types.number.strictlyPositive
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
@@ -128,7 +128,7 @@ public sealed interface NotBlankString : Comparable<NotBlankString> {
 
     /** Returns the length of this [value]. */
     public val length: StrictlyPositiveInt
-        get() = strictlyPositiveIntOrThrow(value.length)
+        get() = value.length.strictlyPositive.getOrThrow()
 
     // ---------- Positional access operations ----------
 

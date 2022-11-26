@@ -116,7 +116,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
     else strictlyNegativeIntOrThrow(value - 1)
 
     override fun unaryMinus(): StrictlyPositiveInt =
-        strictlyPositiveIntOrThrow(-value)
+        (-value).strictlyPositive.getOrThrow()
 
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].
@@ -146,7 +146,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
             )
         )
         public infix fun orNull(value: Int): StrictlyPositiveInt? =
-            value.toStrictlyPositiveIntOrNull()
+            value.strictlyPositive.getOrNull()
 
         /** Returns a random [StrictlyNegativeInt]. */
         @Deprecated(
