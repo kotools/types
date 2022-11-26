@@ -5,14 +5,31 @@ import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.Package
+import kotools.types.failureOf
+import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
 /**
+ * Returns this value as a [PositiveInt], or an [IllegalArgumentException] if
+ * this value is strictly negative.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public val Int.positive: Result<PositiveInt>
+    get() = takeIf { it >= 0 }
+        ?.toSuccessfulResult(::PositiveIntImplementation)
+        ?: failureOf { this shouldBe aPositiveNumber }
+
+/**
  * Returns the [value] as a [PositiveInt], or returns `null` if the [value] is
  * strictly negative.
  */
+@Deprecated(
+    "Use the Int.positive property instead.",
+    ReplaceWith("value.positive.getOrNull()", "${Package.number}.positive"),
+    DeprecationLevel.ERROR
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun positiveIntOrNull(value: Int): PositiveInt? = value
     .takeIf { it >= 0 }
@@ -22,26 +39,28 @@ public fun positiveIntOrNull(value: Int): PositiveInt? = value
  * Returns the [value] as a [PositiveInt], or throws an
  * [IllegalArgumentException] if the [value] is strictly negative.
  */
+@Deprecated(
+    "Use the Int.positive property instead.",
+    ReplaceWith("value.positive.getOrThrow()", "${Package.number}.positive"),
+    DeprecationLevel.ERROR
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun positiveIntOrThrow(value: Int): PositiveInt =
-    positiveIntOrNull(value) ?: throw value shouldBe aPositiveNumber
+    value.positive.getOrNull() ?: throw value shouldBe aPositiveNumber
 
 /**
  * Returns the [value] as a [PositiveInt], or throws an
  * [PositiveInt.ConstructionError] if the [value] is strictly negative.
  */
 @Deprecated(
-    "Use the positiveIntOrThrow function instead.",
-    ReplaceWith(
-        "positiveIntOrThrow(value)",
-        "${Package.number}.positiveIntOrThrow"
-    )
+    "Use the Int.positive property instead.",
+    ReplaceWith("value.positive.getOrThrow()", "${Package.number}.positive")
 )
 @SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(PositiveInt.ConstructionError::class)
-public fun PositiveInt(value: Int): PositiveInt = positiveIntOrNull(value)
+public fun PositiveInt(value: Int): PositiveInt = value.positive.getOrNull()
     ?: throw PositiveInt.ConstructionError(value)
 
 /**
@@ -49,27 +68,21 @@ public fun PositiveInt(value: Int): PositiveInt = positiveIntOrNull(value)
  * strictly negative.
  */
 @Deprecated(
-    "Use the positiveIntOrNull function instead.",
-    ReplaceWith(
-        "positiveIntOrNull(value)",
-        "${Package.number}.positiveIntOrNull"
-    )
+    "Use the Int.positive property instead.",
+    ReplaceWith("value.positive.getOrNull()", "${Package.number}.positive")
 )
 @SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
 public fun PositiveIntOrNull(value: Int): PositiveInt? =
-    positiveIntOrNull(value)
+    value.positive.getOrNull()
 
 /**
  * Returns this value as a [PositiveInt], or throws an
  * [PositiveInt.ConstructionError] if this value is strictly negative.
  */
 @Deprecated(
-    "Use the Int.toPositiveIntOrThrow function instead.",
-    ReplaceWith(
-        "this.toPositiveIntOrThrow()",
-        "${Package.number}.toPositiveIntOrThrow"
-    )
+    "Use the Int.positive property instead.",
+    ReplaceWith("this.positive.getOrThrow()", "${Package.number}.positive")
 )
 @SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
@@ -80,21 +93,31 @@ public fun Int.toPositiveInt(): PositiveInt = PositiveInt(this)
  * Returns this value as a [PositiveInt], or returns `null` if this value is
  * strictly negative.
  */
+@Deprecated(
+    "Use the Int.positive property instead.",
+    ReplaceWith("this.positive.getOrNull()", "${Package.number}.positive")
+)
 @SinceKotools(Types, "1.1")
-public fun Int.toPositiveIntOrNull(): PositiveInt? = positiveIntOrNull(this)
+public fun Int.toPositiveIntOrNull(): PositiveInt? = positive.getOrNull()
 
 /**
  * Returns this value as a [PositiveInt], or throws an
  * [IllegalArgumentException] if this value is strictly negative.
  */
+@Deprecated(
+    "Use the Int.positive property instead.",
+    ReplaceWith("this.positive.getOrThrow()", "${Package.number}.positive"),
+    DeprecationLevel.ERROR
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
-public fun Int.toPositiveIntOrThrow(): PositiveInt = positiveIntOrThrow(this)
+public fun Int.toPositiveIntOrThrow(): PositiveInt = positive.getOrThrow()
 
 /** Returns a random [PositiveInt]. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
-    .toPositiveIntOrThrow()
+    .positive
+    .getOrThrow()
 
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveIntSerializer::class)
@@ -103,10 +126,10 @@ public sealed interface PositiveInt : IntHolder {
     // ---------- Unary operations ----------
 
     override fun inc(): PositiveInt = if (value == max.value) min
-    else positiveIntOrThrow(value + 1)
+    else (value + 1).positive.getOrThrow()
 
     override fun dec(): PositiveInt = if (value == min.value) max
-    else positiveIntOrThrow(value - 1)
+    else (value - 1).positive.getOrThrow()
 
     override fun unaryMinus(): NegativeInt = negativeIntOrThrow(-value)
 
@@ -117,7 +140,7 @@ public sealed interface PositiveInt : IntHolder {
      * integer that is closer to zero.
      */
     public operator fun div(other: StrictlyPositiveInt): PositiveInt =
-        positiveIntOrThrow(value / other.value)
+        (value / other.value).positive.getOrThrow()
 
     /**
      * Divides this [value] by the [other] value, truncating the result to an
@@ -131,10 +154,10 @@ public sealed interface PositiveInt : IntHolder {
         internal val range: IntRange by lazy { 0..Int.MAX_VALUE }
 
         /** The minimum value of a [PositiveInt]. */
-        public val min: PositiveInt by lazy { positiveIntOrThrow(range.first) }
+        public val min: PositiveInt by lazy(range.first.positive::getOrThrow)
 
         /** The maximum value of a [PositiveInt]. */
-        public val max: PositiveInt by lazy { positiveIntOrThrow(range.last) }
+        public val max: PositiveInt by lazy(range.last.positive::getOrThrow)
 
         /**
          * Returns the [value] as a [PositiveInt], or returns `null` if the
@@ -148,7 +171,7 @@ public sealed interface PositiveInt : IntHolder {
             )
         )
         public infix fun orNull(value: Int): PositiveInt? =
-            value.toPositiveIntOrNull()
+            value.positive.getOrNull()
 
         /** Returns a random [PositiveInt]. */
         @Deprecated(
@@ -160,7 +183,8 @@ public sealed interface PositiveInt : IntHolder {
         )
         @SinceKotools(Types, "3.0")
         public fun random(): PositiveInt = range.random()
-            .toPositiveIntOrThrow()
+            .positive
+            .getOrThrow()
     }
 
     /** Error thrown when creating a [PositiveInt] fails. */
@@ -175,7 +199,7 @@ public sealed interface PositiveInt : IntHolder {
 }
 
 internal object PositiveIntSerializer :
-    IntHolder.Serializer<PositiveInt>(::positiveIntOrThrow)
+    IntHolder.Serializer<PositiveInt>({ it.positive.getOrThrow() })
 
 @JvmInline
 private value class PositiveIntImplementation(override val value: Int) :

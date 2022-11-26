@@ -7,7 +7,7 @@ import kotools.types.assertEquals
 import kotools.types.core.RandomValueHolder
 import kotools.types.mapSecond
 import kotools.types.number.PositiveInt
-import kotools.types.number.toPositiveIntOrThrow
+import kotools.types.number.positive
 import kotools.types.pairWith
 import kotlin.random.Random
 import kotlin.test.Test
@@ -127,7 +127,7 @@ class NotBlankStringTest : RandomValueHolder {
     fun get_should_pass_with_an_index_in_bounds() {
         val value: String = randomString
         val index: PositiveInt = Random.nextInt(from = 0, until = value.length)
-            .toPositiveIntOrThrow()
+            .positive.getOrThrow()
         val string: NotBlankString = notBlankStringOrThrow(value)
         val result: Char = string[index]
         result assertEquals value[index.value]
