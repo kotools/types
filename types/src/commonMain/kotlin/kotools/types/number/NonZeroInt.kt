@@ -68,7 +68,7 @@ public fun NonZeroInt(value: Int): NonZeroInt = value.nonZero.getOrNull()
  */
 @Deprecated(
     "Use the Int.nonZero property instead.",
-    ReplaceWith("value.nonZero.getOrNull()", "${Package.number}.nonZero")
+    ReplaceWith("value.nonZero.getOrNull()", "${Package.number}.nonZero"),
 )
 @SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
@@ -80,7 +80,7 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = value.nonZero.getOrNull()
  */
 @Deprecated(
     "Use the Int.nonZero property instead.",
-    ReplaceWith("this.nonZero.getOrThrow()", "${Package.number}.nonZero")
+    ReplaceWith("this.nonZero.getOrThrow()", "${Package.number}.nonZero"),
 )
 @SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
