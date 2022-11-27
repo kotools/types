@@ -14,24 +14,10 @@ import kotools.types.toSuccessfulResult
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public val Byte.nonZero: Result<NonZeroNumber<Byte>>
-    get() = toNonZeroNumberIf { it != 0.toByte() }
-
-/**
- * Returns this number as a [NonZeroNumber], or an [IllegalArgumentException] if
- * this number equals zero.
- */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
-public val Short.nonZero: Result<NonZeroNumber<Short>>
-    get() = toNonZeroNumberIf { it != 0.toShort() }
-
-@ExperimentalKotoolsTypesApi
-private inline fun <N : Number> N.toNonZeroNumberIf(
-    predicate: (N) -> Boolean
-): Result<NonZeroNumber<N>> = takeIf(predicate)
-    ?.toSuccessfulResult(::NonZeroNumberImplementation)
-    ?: failureOf { this shouldBe otherThanZero }
+public fun <N : Number> N.toNonZeroNumber(): Result<NonZeroNumber<N>> =
+    takeIf { it.toDouble() != 0.0 }
+        ?.toSuccessfulResult(::NonZeroNumberImplementation)
+        ?: failureOf { this shouldBe otherThanZero }
 
 /**
  * Representation of numbers other than zero.
