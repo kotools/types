@@ -7,7 +7,7 @@ import kotools.assert.*
 import kotools.types.*
 import kotools.types.core.RandomValueHolder
 import kotools.types.number.PositiveInt
-import kotools.types.number.positive
+import kotools.types.number.toPositiveIntOrThrow
 import kotlin.test.Test
 
 class NotEmptyListTest : RandomValueHolder {
@@ -44,7 +44,7 @@ class NotEmptyListTest : RandomValueHolder {
             array toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
             element assertEquals array.elementAt(index)
-            index.positive.getOrThrow()
+            index.toPositiveIntOrThrow()
                 .let(defaultValue::get)
                 .assertNotEquals(element)
         }
@@ -57,7 +57,7 @@ class NotEmptyListTest : RandomValueHolder {
         val result: NotEmptyList<Int> =
             array toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
-            index.positive.getOrThrow()
+            index.toPositiveIntOrThrow()
                 .let(defaultValue::get)
                 .assertEquals(element)
         }
@@ -86,7 +86,7 @@ class NotEmptyListTest : RandomValueHolder {
         val result: NotEmptyList<Int> =
             collection toNotEmptyListOrElse { defaultValue }
         result.forEachIndexed { index: Int, element: Int ->
-            index.positive.getOrThrow()
+            index.toPositiveIntOrThrow()
                 .let(defaultValue::get)
                 .assertEquals(element)
         }

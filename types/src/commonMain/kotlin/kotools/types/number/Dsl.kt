@@ -39,7 +39,7 @@ private object NonZeroHolderDsl : IntHolderDsl<NonZeroInt> {
 public val positive: IntHolderDsl<PositiveInt> = PositiveHolderDsl
 
 private object PositiveHolderDsl : IntHolderDsl<PositiveInt> {
-    override fun int(value: Int): PositiveInt = value.positive.getOrThrow()
+    override fun int(value: Int): PositiveInt = value.toPositiveIntOrThrow()
 }
 
 /** Context responsible for building a [StrictlyPositiveInt]. */
