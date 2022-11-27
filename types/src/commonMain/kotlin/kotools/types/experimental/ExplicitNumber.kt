@@ -11,7 +11,7 @@ import kotools.shared.StabilityLevel.Experimental
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public sealed interface ExplicitNumber<out N : Number> {
+public interface ExplicitNumber<out N : Number> {
     /** The value to hold. */
     public val value: N
 }
@@ -23,7 +23,7 @@ public sealed interface ExplicitNumber<out N : Number> {
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public sealed interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
+public interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
 
 /**
  * Representation of positive numbers (including zero).
@@ -32,7 +32,7 @@ public sealed interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public sealed interface PositiveNumber<out N : Number> : ExplicitNumber<N>
+public interface PositiveNumber<out N : Number> : ExplicitNumber<N>
 
 /**
  * Representation of negative numbers (including zero).
@@ -41,7 +41,7 @@ public sealed interface PositiveNumber<out N : Number> : ExplicitNumber<N>
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public sealed interface NegativeNumber<out N : Number> : ExplicitNumber<N>
+public interface NegativeNumber<out N : Number> : ExplicitNumber<N>
 
 /**
  * Representation of strictly positive numbers (excluding zero).
@@ -50,8 +50,7 @@ public sealed interface NegativeNumber<out N : Number> : ExplicitNumber<N>
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public sealed interface StrictlyPositiveNumber<out N : Number> :
-    NonZeroNumber<N>,
+public interface StrictlyPositiveNumber<out N : Number> : NonZeroNumber<N>,
     PositiveNumber<N>
 
 /**
@@ -61,6 +60,5 @@ public sealed interface StrictlyPositiveNumber<out N : Number> :
  */
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
-public sealed interface StrictlyNegativeNumber<out N : Number> :
-    NonZeroNumber<N>,
+public interface StrictlyNegativeNumber<out N : Number> : NonZeroNumber<N>,
     NegativeNumber<N>
