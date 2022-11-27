@@ -5,22 +5,9 @@ import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.Package
-import kotools.types.toFailure
-import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
-
-/**
- * Returns this value as a [NonZeroInt], or an [IllegalArgumentException] if
- * this value equals zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public val Int.nonZero: Result<NonZeroInt>
-    get() = takeIf { it != 0 }
-        ?.toSuccessfulResult(::NonZeroIntImplementation)
-        ?: IllegalArgumentException("Given value should be other than zero.")
-            .toFailure()
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
