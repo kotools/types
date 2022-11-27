@@ -50,7 +50,7 @@ public val strictlyPositive: IntHolderDsl<StrictlyPositiveInt> =
 
 private object StrictlyPositiveHolderDsl : IntHolderDsl<StrictlyPositiveInt> {
     override fun int(value: Int): StrictlyPositiveInt =
-        value.strictlyPositive.getOrThrow()
+        value.toStrictlyPositiveIntOrThrow()
 }
 
 /** Context responsible for building a [NegativeInt]. */
