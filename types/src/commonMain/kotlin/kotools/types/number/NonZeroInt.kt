@@ -5,7 +5,7 @@ import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.Package
-import kotools.types.failureOf
+import kotools.types.toFailure
 import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
@@ -19,17 +19,13 @@ import kotlin.jvm.JvmInline
 public val Int.nonZero: Result<NonZeroInt>
     get() = takeIf { it != 0 }
         ?.toSuccessfulResult(::NonZeroIntImplementation)
-        ?: failureOf { this shouldBe otherThanZero }
+        ?: IllegalArgumentException("Given value should be other than zero.")
+            .toFailure()
 
 /**
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
-@Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("value.nonZero.getOrNull()", "${Package.number}.nonZero"),
-    DeprecationLevel.ERROR
-)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
@@ -38,28 +34,26 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
  * Returns the [value] as a [NonZeroInt], or throws an
  * [IllegalArgumentException] if the [value] equals zero.
  */
-@Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("value.nonZero.getOrThrow()", "${Package.number}.nonZero"),
-    DeprecationLevel.ERROR
-)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
-public fun nonZeroIntOrThrow(value: Int): NonZeroInt =
-    value.nonZero.getOrThrow()
+public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
+    ?: throw value shouldBe otherThanZero
 
 /**
  * Returns the [value] as a [NonZeroInt], or throws an
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("value.nonZero.getOrThrow()", "${Package.number}.nonZero")
+    "Use the nonZeroIntOrThrow function instead.",
+    ReplaceWith(
+        "nonZeroIntOrThrow(value)",
+        "${Package.number}.nonZeroIntOrThrow"
+    )
 )
 @SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(NonZeroInt.ConstructionError::class)
-public fun NonZeroInt(value: Int): NonZeroInt = value.nonZero.getOrNull()
+public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
     ?: throw NonZeroInt.ConstructionError
 
 /**
@@ -67,20 +61,23 @@ public fun NonZeroInt(value: Int): NonZeroInt = value.nonZero.getOrNull()
  * equals zero.
  */
 @Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("value.nonZero.getOrNull()", "${Package.number}.nonZero"),
+    "Use the nonZeroIntOrNull function instead.",
+    ReplaceWith("nonZeroIntOrNull(value)", "${Package.number}.nonZeroIntOrNull")
 )
 @SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
-public fun NonZeroIntOrNull(value: Int): NonZeroInt? = value.nonZero.getOrNull()
+public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
 
 /**
  * Returns this value as a [NonZeroInt], or throws an
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
 @Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("this.nonZero.getOrThrow()", "${Package.number}.nonZero"),
+    "Use the Int.toNonZeroIntOrThrow function instead.",
+    ReplaceWith(
+        "this.toNonZeroIntOrThrow()",
+        "${Package.number}.toNonZeroIntOrThrow"
+    )
 )
 @SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
@@ -91,31 +88,22 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
-@Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("this.nonZero.getOrNull()", "${Package.number}.nonZero")
-)
 @SinceKotools(Types, "1.1")
-public fun Int.toNonZeroIntOrNull(): NonZeroInt? = this.nonZero.getOrNull()
+public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
 /**
  * Returns this value as a [NonZeroInt], or throws a [IllegalArgumentException]
  * if this value equals zero.
  */
-@Deprecated(
-    "Use the Int.nonZero property instead.",
-    ReplaceWith("this.nonZero.getOrThrow()", "${Package.number}.nonZero"),
-    DeprecationLevel.ERROR
-)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
-public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZero.getOrThrow()
+public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
     .random()
-    .nonZero.getOrThrow()
+    .toNonZeroIntOrThrow()
 
 // ---------- Binary operations ----------
 
@@ -138,9 +126,9 @@ public sealed interface NonZeroInt : IntHolder {
      * If this [value] is the maximum, it returns the minimum value instead.
      */
     override fun inc(): NonZeroInt = when (value) {
-        -1 -> 1.nonZero.getOrThrow()
+        -1 -> nonZeroIntOrThrow(1)
         max.value -> min
-        else -> (value + 1).nonZero.getOrThrow()
+        else -> nonZeroIntOrThrow(value + 1)
     }
 
     /**
@@ -150,18 +138,18 @@ public sealed interface NonZeroInt : IntHolder {
      * [maximum][NonZeroInt.max] value instead.
      */
     override fun dec(): NonZeroInt = when (value) {
-        1 -> (-1).nonZero.getOrThrow()
+        1 -> nonZeroIntOrThrow(-1)
         min.value -> max
-        else -> (value - 1).nonZero.getOrThrow()
+        else -> nonZeroIntOrThrow(value - 1)
     }
 
-    override fun unaryMinus(): NonZeroInt = (-value).nonZero.getOrThrow()
+    override fun unaryMinus(): NonZeroInt = nonZeroIntOrThrow(-value)
 
     // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
     public operator fun times(other: NonZeroInt): NonZeroInt =
-        (value * other.value).nonZero.getOrThrow()
+        nonZeroIntOrThrow(value * other.value)
 
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
@@ -176,14 +164,14 @@ public sealed interface NonZeroInt : IntHolder {
         }
 
         /** The minimum value of a [NonZeroInt]. */
-        public val min: NonZeroInt by lazy(
-            negativeRange.first.nonZero::getOrThrow
-        )
+        public val min: NonZeroInt by lazy {
+            nonZeroIntOrThrow(negativeRange.first)
+        }
 
         /** The maximum value of a [NonZeroInt]. */
-        public val max: NonZeroInt by lazy(
-            positiveRange.last.nonZero::getOrThrow
-        )
+        public val max: NonZeroInt by lazy {
+            nonZeroIntOrThrow(positiveRange.last)
+        }
 
         /**
          * Returns the [value] as a [NonZeroInt], or returns `null` if the
@@ -197,7 +185,7 @@ public sealed interface NonZeroInt : IntHolder {
             )
         )
         public infix fun orNull(value: Int): NonZeroInt? =
-            value.nonZero.getOrNull()
+            nonZeroIntOrNull(value)
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
@@ -210,7 +198,7 @@ public sealed interface NonZeroInt : IntHolder {
         @SinceKotools(Types, "3.0")
         public fun random(): NonZeroInt = ranges.random()
             .random()
-            .nonZero.getOrThrow()
+            .toNonZeroIntOrThrow()
     }
 
     /** Error thrown when creating a [NonZeroInt] fails. */
@@ -224,7 +212,7 @@ public sealed interface NonZeroInt : IntHolder {
 }
 
 internal object NonZeroIntSerializer :
-    IntHolder.Serializer<NonZeroInt>({ it.nonZero.getOrThrow() })
+    IntHolder.Serializer<NonZeroInt>(::nonZeroIntOrThrow)
 
 @JvmInline
 private value class NonZeroIntImplementation(override val value: Int) :
