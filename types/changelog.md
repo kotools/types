@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 
 - Add explicit builders for all types
   ([#22](https://github.com/kotools/libraries/issues/22)).
-- **Experimental** hierarchy of explicit numbers
+- **Alpha** hierarchy of explicit numbers
   ([#67](https://github.com/kotools/libraries/issues/67)).
 
 #### Changed
