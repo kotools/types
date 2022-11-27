@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
 
 #### Deprecated
 
-- The `random` function in the companion object of subtypes `IntHolder`
+- The `random` function in the companion object of `IntHolder`'s subtypes
   ([#17](https://github.com/kotools/libraries/issues/17)).
 - Builders throwing an exception without having the `OrThrow` suffix in their
   name ([#22](https://github.com/kotools/libraries/issues/22)).
@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file.
   ([#22](https://github.com/kotools/libraries/issues/22)).
 - `ConstructionError` objects
   ([#22](https://github.com/kotools/libraries/issues/22)).
-- The DSL for building numbers
+- The DSL in **alpha** stage for building numbers
   ([#33](https://github.com/kotools/libraries/issues/33)).
 
 ## Version 3.1.1 - 2022/11/18
