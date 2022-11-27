@@ -29,8 +29,7 @@ public fun <N : Number> N.toNonZeroNumber(): Result<NonZeroNumber<N>> =
 public sealed interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
 
 @ExperimentalKotoolsTypesApi
-private data class NonZeroNumberImplementation<out N : Number>(
+private class NonZeroNumberImplementation<out N : Number>(
     override val value: N
-) : NonZeroNumber<N> {
-    override fun toString(): String = "$value"
-}
+) : ExplicitNumberImplementation<N>(),
+    NonZeroNumber<N>

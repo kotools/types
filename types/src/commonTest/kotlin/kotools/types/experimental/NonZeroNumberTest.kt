@@ -28,13 +28,4 @@ class NonZeroNumberTest {
             .isNotBlank()
             .assertTrue()
     }
-
-    // ---------- NonZeroNumber.toString() ----------
-
-    @Test
-    fun toString_should_behave_like_its_value(): Unit = randomNonZeroInt()
-        .value
-        .toNonZeroNumber()
-        .getOrThrow()
-        .run { toString() assertEquals value.toString() }
 }
