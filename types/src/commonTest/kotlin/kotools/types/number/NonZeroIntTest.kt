@@ -30,8 +30,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun int_nonZero_should_pass_with_an_Int_other_than_zero(): Unit =
-        randomNonZeroInt()
-            .value.let { it.nonZero.getOrThrow().value assertEquals it }
+        randomInt.let { it.nonZero.getOrThrow().value assertEquals it }
 
     @Test
     fun int_nonZero_should_fail_with_an_Int_that_equals_zero(): Unit =
