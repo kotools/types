@@ -1,16 +1,15 @@
-package kotools.types.experimental
+package kotools.types.number
 
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.shared.StabilityLevel.Experimental
+import kotools.shared.StabilityLevel.Alpha
 
 /**
  * Representation of explicit numbers.
  *
  * @param N The type of [Number] to hold.
  */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
+@SinceKotools(Types, "3.2", Alpha)
 public interface ExplicitNumber<out N : Number> {
     /** The value to hold. */
     public val value: N
@@ -21,8 +20,7 @@ public interface ExplicitNumber<out N : Number> {
  *
  * @param N The type of [Number] to hold.
  */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
+@SinceKotools(Types, "3.2", Alpha)
 public interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
 
 /**
@@ -30,8 +28,7 @@ public interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
  *
  * @param N The type of [Number] to hold.
  */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
+@SinceKotools(Types, "3.2", Alpha)
 public interface PositiveNumber<out N : Number> : ExplicitNumber<N>
 
 /**
@@ -39,8 +36,7 @@ public interface PositiveNumber<out N : Number> : ExplicitNumber<N>
  *
  * @param N The type of [Number] to hold.
  */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
+@SinceKotools(Types, "3.2", Alpha)
 public interface NegativeNumber<out N : Number> : ExplicitNumber<N>
 
 /**
@@ -48,8 +44,7 @@ public interface NegativeNumber<out N : Number> : ExplicitNumber<N>
  *
  * @param N The type of [Number] to hold.
  */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
+@SinceKotools(Types, "3.2", Alpha)
 public interface StrictlyPositiveNumber<out N : Number> : NonZeroNumber<N>,
     PositiveNumber<N>
 
@@ -58,7 +53,6 @@ public interface StrictlyPositiveNumber<out N : Number> : NonZeroNumber<N>,
  *
  * @param N The type of [Number] to hold.
  */
-@ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
+@SinceKotools(Types, "3.2", Alpha)
 public interface StrictlyNegativeNumber<out N : Number> : NonZeroNumber<N>,
     NegativeNumber<N>

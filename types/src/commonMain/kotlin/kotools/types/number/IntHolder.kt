@@ -34,10 +34,8 @@ public operator fun Int.times(other: IntHolder): Int = times(other.value)
 
 /** Parent of classes responsible for holding integers. */
 @SinceKotools(Types, "3.0")
-public sealed interface IntHolder : Comparable<IntHolder> {
-    /** The value to hold. */
-    public val value: Int
-
+public sealed interface IntHolder : Comparable<IntHolder>,
+    ExplicitNumber<Int> {
     // ---------- Unary operations ----------
 
     /**

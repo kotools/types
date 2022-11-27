@@ -99,7 +99,8 @@ public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
 /** Representation of positive integers, including zero. */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotools(Types, "1.1")
-public sealed interface PositiveInt : IntHolder {
+public sealed interface PositiveInt : IntHolder,
+    PositiveNumber<Int> {
     // ---------- Unary operations ----------
 
     override fun inc(): PositiveInt = if (value == max.value) min
