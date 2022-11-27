@@ -4,17 +4,9 @@ import kotools.types.string.NotBlankString
 import kotools.types.string.toNotBlankStringOrNull
 
 internal val otherThanZero = NumberErrorDescription.NonZero
-
-// Could be renamed "positive" starting from v3.4.
 internal val aPositiveNumber = NumberErrorDescription.Positive
-
-// Could be renamed "strictlyPositive" starting from v3.4.
 internal val aStrictlyPositiveNumber = NumberErrorDescription.StrictlyPositive
-
-// Could be renamed "negative" starting from v3.4.
 internal val aNegativeNumber = NumberErrorDescription.Negative
-
-// Could be renamed "strictlyNegative" starting from v3.4.
 internal val aStrictlyNegativeNumber = NumberErrorDescription.StrictlyNegative
 
 /**
