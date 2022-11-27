@@ -30,21 +30,6 @@ class NonZeroIntTest : RandomValueHolder {
     // ---------- Builders ----------
 
     @Test
-    fun nonZeroIntOrThrow_should_pass_with_a_non_zero_Int() {
-        val value: Int = randomNonZeroInt().value
-        val result: NonZeroInt = nonZeroIntOrThrow(value)
-        result.value assertEquals value
-    }
-
-    @Test
-    fun nonZeroIntOrThrow_should_throw_an_error_with_zero() {
-        assertFailsWith<IllegalArgumentException> { nonZeroIntOrThrow(0) }
-            .message
-            ?.toNotBlankStringOrNull()
-            .assertNotNull()
-    }
-
-    @Test
     fun int_toNonZeroIntOrNull_should_pass_with_a_non_zero_Int() {
         val value: Int = randomNonZeroInt().value
         val result: NonZeroInt? = value.toNonZeroIntOrNull()
@@ -83,7 +68,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun inc_should_return_1_with_minus_1() {
-        var x: NonZeroInt = nonZeroIntOrThrow(-1)
+        var x: NonZeroInt = (-1).toNonZeroIntOrThrow()
         x++
         x.value assertEquals 1
     }
@@ -107,7 +92,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun dec_should_return_minus1_with_1() {
-        var x: NonZeroInt = nonZeroIntOrThrow(1)
+        var x: NonZeroInt = 1.toNonZeroIntOrThrow()
         x--
         x.value assertEquals -1
     }

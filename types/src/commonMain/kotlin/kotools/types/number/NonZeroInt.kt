@@ -12,13 +12,7 @@ import kotlin.jvm.JvmInline
 private fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
-/**
- * Returns the [value] as a [NonZeroInt], or throws an
- * [IllegalArgumentException] if the [value] equals zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-@Throws(IllegalArgumentException::class)
-public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
+private fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
     ?: throw value shouldBe otherThanZero
 
 /**
