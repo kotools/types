@@ -159,7 +159,7 @@ public sealed interface StrictlyPositiveInt : NonZeroInt,
     else (value - 1).strictlyPositive.getOrThrow()
 
     override fun unaryMinus(): StrictlyNegativeInt =
-        (-value).strictlyNegative.getOrThrow()
+        strictlyNegativeIntOrThrow(-value)
 
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].

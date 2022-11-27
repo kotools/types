@@ -5,34 +5,14 @@ import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
 import kotools.types.Package
-import kotools.types.failureOf
-import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
 /**
- * Returns this value as a [StrictlyNegativeInt], or an
- * [IllegalArgumentException] if this value is positive.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public val Int.strictlyNegative: Result<StrictlyNegativeInt>
-    get() = takeIf { it < 0 }
-        ?.toSuccessfulResult(::StrictlyNegativeIntImplementation)
-        ?: failureOf { this shouldBe aStrictlyNegativeNumber }
-
-/**
  * Returns the [value] as a [StrictlyNegativeInt], or returns `null` if the
  * [value] is positive.
  */
-@Deprecated(
-    "Use the Int.strictlyNegative property instead.",
-    ReplaceWith(
-        "value.strictlyNegative.getOrNull()",
-        "${Package.number}.strictlyNegative"
-    ),
-    DeprecationLevel.ERROR
-)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun strictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? = value
     .takeIf { it < 0 }
@@ -42,35 +22,28 @@ public fun strictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? = value
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
  * [IllegalArgumentException] if the [value] is positive.
  */
-@Deprecated(
-    "Use the Int.strictlyNegative property instead.",
-    ReplaceWith(
-        "value.strictlyNegative.getOrThrow()",
-        "${Package.number}.strictlyNegative"
-    ),
-    DeprecationLevel.ERROR
-)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun strictlyNegativeIntOrThrow(value: Int): StrictlyNegativeInt =
-    value.strictlyNegative.getOrThrow()
+    strictlyNegativeIntOrNull(value)
+        ?: throw value shouldBe aStrictlyNegativeNumber
 
 /**
  * Returns the [value] as a [StrictlyNegativeInt], or throws an
  * [StrictlyNegativeInt.ConstructionError] if the [value] is positive.
  */
 @Deprecated(
-    "Use the Int.strictlyNegative property instead.",
+    "Use the strictlyNegativeIntOrThrow function instead.",
     ReplaceWith(
-        "value.strictlyNegative.getOrThrow()",
-        "${Package.number}.strictlyNegative"
+        "strictlyNegativeIntOrThrow(value)",
+        "${Package.number}.strictlyNegativeIntOrThrow"
     )
 )
 @SinceKotools(Types, "1.1")
 @Suppress("DEPRECATION")
 @Throws(StrictlyNegativeInt.ConstructionError::class)
 public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
-    value.strictlyNegative.getOrNull()
+    strictlyNegativeIntOrNull(value)
         ?: throw StrictlyNegativeInt.ConstructionError(value)
 
 /**
@@ -78,26 +51,26 @@ public fun StrictlyNegativeInt(value: Int): StrictlyNegativeInt =
  * [value] is positive.
  */
 @Deprecated(
-    "Use the Int.strictlyNegative property instead.",
+    "Use the strictlyNegativeIntOrNull function instead.",
     ReplaceWith(
-        "value.strictlyNegative.getOrNull()",
-        "${Package.number}.strictlyNegative"
+        "strictlyNegativeIntOrNull(value)",
+        "${Package.number}.strictlyNegativeIntOrNull"
     )
 )
 @SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
 public fun StrictlyNegativeIntOrNull(value: Int): StrictlyNegativeInt? =
-    value.strictlyNegative.getOrNull()
+    strictlyNegativeIntOrNull(value)
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or throws an
  * [StrictlyNegativeInt.ConstructionError] if this value is positive.
  */
 @Deprecated(
-    "Use the Int.strictlyNegative property instead.",
+    "Use the Int.toStrictlyNegativeIntOrThrow function instead.",
     ReplaceWith(
-        "this.strictlyNegative.getOrThrow()",
-        "${Package.number}.strictlyNegative"
+        "this.toStrictlyNegativeIntOrThrow()",
+        "${Package.number}.toStrictlyNegativeIntOrThrow"
     )
 )
 @SinceKotools(Types, "1.1")
@@ -110,40 +83,24 @@ public fun Int.toStrictlyNegativeInt(): StrictlyNegativeInt =
  * Returns this value as a [StrictlyNegativeInt], or returns `null` if this
  * value is positive.
  */
-@Deprecated(
-    "Use the Int.strictlyNegative property instead.",
-    ReplaceWith(
-        "this.strictlyNegative.getOrNull()",
-        "${Package.number}.strictlyNegative"
-    )
-)
 @SinceKotools(Types, "1.1")
 public fun Int.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    strictlyNegative.getOrNull()
+    strictlyNegativeIntOrNull(this)
 
 /**
  * Returns this value as a [StrictlyNegativeInt], or throws an
  * [IllegalArgumentException] if this value is positive.
  */
-@Deprecated(
-    "Use the Int.strictlyNegative property instead.",
-    ReplaceWith(
-        "this.strictlyNegative.getOrThrow()",
-        "${Package.number}.strictlyNegative"
-    ),
-    DeprecationLevel.ERROR
-)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
-    strictlyNegative.getOrThrow()
+    strictlyNegativeIntOrThrow(this)
 
 /** Returns a random [StrictlyNegativeInt]. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomStrictlyNegativeInt(): StrictlyNegativeInt =
     StrictlyNegativeInt.range.random()
-        .strictlyNegative
-        .getOrThrow()
+        .toStrictlyNegativeIntOrThrow()
 
 /** Representation of strictly negative integers, excluding zero. */
 @Serializable(StrictlyNegativeIntSerializer::class)
@@ -153,10 +110,10 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
     // ---------- Unary operations ----------
 
     override fun inc(): StrictlyNegativeInt = if (value == max.value) min
-    else (value + 1).strictlyNegative.getOrThrow()
+    else strictlyNegativeIntOrThrow(value + 1)
 
     override fun dec(): StrictlyNegativeInt = if (value == min.value) max
-    else (value - 1).strictlyNegative.getOrThrow()
+    else strictlyNegativeIntOrThrow(value - 1)
 
     override fun unaryMinus(): StrictlyPositiveInt =
         (-value).strictlyPositive.getOrThrow()
@@ -168,14 +125,14 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
         internal val range: IntRange by lazy { Int.MIN_VALUE..-1 }
 
         /** The minimum value of a [StrictlyNegativeInt]. */
-        public val min: StrictlyNegativeInt by lazy(
-            range.first.strictlyNegative::getOrThrow
-        )
+        public val min: StrictlyNegativeInt by lazy {
+            strictlyNegativeIntOrThrow(range.first)
+        }
 
         /** The maximum value of a [StrictlyNegativeInt]. */
-        public val max: StrictlyNegativeInt by lazy(
-            range.last.strictlyNegative::getOrThrow
-        )
+        public val max: StrictlyNegativeInt by lazy {
+            strictlyNegativeIntOrThrow(range.last)
+        }
 
         /**
          * Returns the [value] as a [StrictlyPositiveInt], or returns `null` if the
@@ -201,8 +158,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
         )
         @SinceKotools(Types, "3.0")
         public fun random(): StrictlyNegativeInt = range.random()
-            .strictlyNegative
-            .getOrThrow()
+            .toStrictlyNegativeIntOrThrow()
     }
 
     /** Error thrown when creating a [StrictlyNegativeInt] fails. */
@@ -218,9 +174,7 @@ public sealed interface StrictlyNegativeInt : NonZeroInt,
 }
 
 internal object StrictlyNegativeIntSerializer :
-    IntHolder.Serializer<StrictlyNegativeInt>({
-        it.strictlyNegative.getOrThrow()
-    })
+    IntHolder.Serializer<StrictlyNegativeInt>(::strictlyNegativeIntOrThrow)
 
 @JvmInline
 private value class StrictlyNegativeIntImplementation(override val value: Int) :
