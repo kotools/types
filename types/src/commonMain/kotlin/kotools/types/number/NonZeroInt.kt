@@ -37,8 +37,11 @@ public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
  * equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrNull function instead.",
-    ReplaceWith("nonZeroIntOrNull(value)", "${Package.number}.nonZeroIntOrNull")
+    "Use the toNonZeroNumber function instead.",
+    ReplaceWith(
+        "value.toNonZeroNumber().getOrNull()",
+        "${Package.number}.toNonZeroNumber"
+    )
 )
 @SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
@@ -49,10 +52,10 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
 @Deprecated(
-    "Use the Int.toNonZeroIntOrThrow function instead.",
+    "Use the toNonZeroNumber function instead.",
     ReplaceWith(
-        "this.toNonZeroIntOrThrow()",
-        "${Package.number}.toNonZeroIntOrThrow"
+        "this.toNonZeroNumber().getOrThrow()",
+        "${Package.number}.toNonZeroNumber"
     )
 )
 @SinceKotools(Types, "1.1")
@@ -64,16 +67,14 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
+@Deprecated(
+    "Use the toNonZeroNumber function instead.",
+    ReplaceWith("this.toNonZeroNumber().getOrNull()")
+)
 @SinceKotools(Types, "1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
-/**
- * Returns this value as a [NonZeroInt], or throws a [IllegalArgumentException]
- * if this value equals zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-@Throws(IllegalArgumentException::class)
-public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
+private fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)

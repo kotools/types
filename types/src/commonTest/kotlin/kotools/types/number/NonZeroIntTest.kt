@@ -3,7 +3,6 @@ package kotools.types.number
 import kotools.assert.*
 import kotools.types.*
 import kotools.types.core.RandomValueHolder
-import kotools.types.string.toNotBlankStringOrNull
 import kotlin.test.Test
 
 class NonZeroIntTest : RandomValueHolder {
@@ -43,21 +42,6 @@ class NonZeroIntTest : RandomValueHolder {
     }
 
     @Test
-    fun int_toNonZeroIntOrThrow_should_pass_with_a_non_zero_Int() {
-        val value: Int = randomNonZeroInt().value
-        val result: NonZeroInt = value.toNonZeroIntOrThrow()
-        result.value assertEquals value
-    }
-
-    @Test
-    fun int_toNonZeroIntOrThrow_should_throw_an_error_with_zero() {
-        assertFailsWith<IllegalArgumentException>(0::toNonZeroIntOrThrow)
-            .message
-            ?.toNotBlankStringOrNull()
-            .assertNotNull()
-    }
-
-    @Test
     fun randomNonZeroInt_should_return_different_values() {
         val x: NonZeroInt = randomNonZeroInt()
         val y: NonZeroInt = randomNonZeroInt()
@@ -68,7 +52,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun inc_should_return_1_with_minus_1() {
-        var x: NonZeroInt = (-1).toNonZeroIntOrThrow()
+        var x: NonZeroInt = (-1).toNonZeroInt()
         x++
         x.value assertEquals 1
     }
@@ -92,7 +76,7 @@ class NonZeroIntTest : RandomValueHolder {
 
     @Test
     fun dec_should_return_minus1_with_1() {
-        var x: NonZeroInt = 1.toNonZeroIntOrThrow()
+        var x: NonZeroInt = 1.toNonZeroInt()
         x--
         x.value assertEquals -1
     }
