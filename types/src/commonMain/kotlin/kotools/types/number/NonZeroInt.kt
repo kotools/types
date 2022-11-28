@@ -88,6 +88,13 @@ public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to zero.
  */
+@Deprecated(
+    "Use the Int.div(NonZeroNumber<Int>) function instead.",
+    ReplaceWith(
+        "this / other.value.toNonZeroNumber().getOrThrow()",
+        "${Package.number}.div"
+    )
+)
 @SinceKotools(Types, "1.1")
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
