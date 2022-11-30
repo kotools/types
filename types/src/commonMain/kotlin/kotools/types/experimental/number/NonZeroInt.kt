@@ -22,7 +22,8 @@ public value class NonZeroInt private constructor(override val value: Int) :
      * if this [value] is less than the [other] value, or a positive number if
      * this [value] is greater than the [other] value.
      */
-    override fun compareTo(other: NonZeroInt): Int = compareTo(other.value)
+    override fun compareTo(other: NonZeroInt): Int =
+        value.compareTo(other.value)
 
     /** Returns a string representation of this [value]. */
     override fun toString(): String = value.toString()
