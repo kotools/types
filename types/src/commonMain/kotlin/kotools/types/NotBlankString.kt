@@ -37,12 +37,29 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
      * this string is less than the [other] one, or a positive number if this
      * string is greater than the [other] one.
      */
-    override fun compareTo(other: NotBlankString): Int =
-        value.compareTo(other.value)
+    override fun compareTo(other: NotBlankString): Int = compareTo(other.value)
+
+    /**
+     * Compares this string lexicographically with the [other] one for order.
+     * Returns zero if this string equals the [other] one, a negative number if
+     * this string is less than the [other] one, or a positive number if this
+     * string is greater than the [other] one.
+     */
+    public operator fun compareTo(other: String): Int = value.compareTo(other)
 
     /** Returns this value as a [String]. */
     override fun toString(): String = value
 }
+
+/**
+ * Compares this string lexicographically with the [other] one for order.
+ * Returns zero if this string equals the [other] one, a negative number if
+ * this string is less than the [other] one, or a positive number if this
+ * string is greater than the [other] one.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun String.compareTo(other: NotBlankString): Int =
+    compareTo(other.toString())
 
 /**
  * Returns this string as a [NotBlankString], or an [IllegalArgumentException]
