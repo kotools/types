@@ -16,14 +16,16 @@ public sealed interface ExplicitNumber<out N : Number> {
     public val value: N
 }
 
-/**
- * Representation of numbers other than zero.
- *
- * @param N The type of [Number] to hold.
- */
 @ExperimentalKotoolsTypesApi
-@SinceKotools(Types, "3.2", Experimental)
-public sealed interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
+internal sealed class ExplicitNumberImplementation<out N : Number> :
+    ExplicitNumber<N> {
+    override fun equals(other: Any?): Boolean =
+        other is ExplicitNumber<*> && value == other.value
+
+    override fun hashCode(): Int = value.hashCode()
+
+    override fun toString(): String = "$value"
+}
 
 /**
  * Representation of positive numbers (including zero).
