@@ -55,17 +55,17 @@ public value class NonZeroInt private constructor(override val value: Int) :
 }
 
 @ExperimentalKotoolsTypesApi
-private val NonZeroInt.Companion.negativeRange: IntRange by lazy(
+internal val NonZeroInt.Companion.negativeRange: IntRange by lazy(
     StrictlyNegativeInt.Companion::range
 )
 
 @ExperimentalKotoolsTypesApi
-private val NonZeroInt.Companion.positiveRange: IntRange by lazy {
+internal val NonZeroInt.Companion.positiveRange: IntRange by lazy {
     1..Int.MAX_VALUE
 }
 
 @ExperimentalKotoolsTypesApi
-private val NonZeroInt.Companion.ranges: NotEmptySet<IntRange> by lazy {
+internal val NonZeroInt.Companion.ranges: NotEmptySet<IntRange> by lazy {
     notEmptySetOf(NonZeroInt.negativeRange, NonZeroInt.positiveRange)
 }
 
