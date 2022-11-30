@@ -3,6 +3,8 @@ package kotools.types
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
+import kotools.types.number.aPositiveNumber
+import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
 
 /** Representation of positive integers, including zero. */
@@ -15,11 +17,7 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
         infix fun of(value: Int): Result<PositiveInt> = value.takeIf { it >= 0 }
             ?.let(::PositiveInt)
             ?.let(Result.Companion::success)
-            ?: Result.failure(
-                IllegalArgumentException(
-                    "Given integer shouldn't be strictly negative."
-                )
-            )
+            ?: Result.failure(value shouldBe aPositiveNumber)
     }
 
     /**
