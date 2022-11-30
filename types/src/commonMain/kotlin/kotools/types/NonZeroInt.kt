@@ -38,3 +38,17 @@ public value class NonZeroInt private constructor(private val value: Int) :
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun ExplicitInt.div(other: NonZeroInt): Int = toInt() / other
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
