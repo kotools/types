@@ -56,4 +56,5 @@ public interface NonZeroNumber<out N : Number> : ExplicitNumber<N>
 
 private class NonZeroNumberImplementation<out N : Number>(
     override val value: N
-) : NonZeroNumber<N>
+) : ExplicitNumberImplementation<N>(),
+    NonZeroNumber<N>

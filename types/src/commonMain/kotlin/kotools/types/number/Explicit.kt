@@ -15,6 +15,11 @@ public interface ExplicitNumber<out N : Number> {
     public val value: N
 }
 
+internal sealed class ExplicitNumberImplementation<out N : Number> :
+    ExplicitNumber<N> {
+    override fun toString(): String = "$value"
+}
+
 /**
  * Representation of positive numbers (including zero).
  *
