@@ -4,9 +4,6 @@ import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel.Alpha
 import kotools.types.toSuccessfulResult
-import kotlin.random.Random
-
-// ---------- Builders ----------
 
 /**
  * Returns this number as a [NonZeroNumber], or an [IllegalArgumentException] if
@@ -18,17 +15,6 @@ public fun <N : Number> N.toNonZeroNumber(): Result<NonZeroNumber<N>> =
         ?.let(::NonZeroNumberImplementation)
         ?.toSuccessfulResult()
         ?: Result.failure(this shouldBe otherThanZero)
-
-/** Returns a random [NonZeroNumber] of [Int]. */
-@SinceKotools(Types, "3.2", Alpha)
-public fun Random.nonZeroInt(): NonZeroNumber<Int> {
-    var value = 0
-    while (value == 0) value = nextInt()
-    return value.toNonZeroNumber()
-        .getOrThrow()
-}
-
-// ---------- Binary operations ----------
 
 /** Multiplies this number by the [other] one. */
 @SinceKotools(Types, "3.2", Alpha)

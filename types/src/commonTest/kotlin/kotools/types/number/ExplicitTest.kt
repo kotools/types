@@ -7,7 +7,7 @@ import kotlin.test.Test
 class ExplicitNumberToStringTest {
     @Test
     fun should_behave_like_its_value() {
-        val x: ExplicitNumber<Int> = Random.nonZeroInt()
+        val x: ExplicitNumber<Int> = Random.nonZeroNumberOfInt()
         x.toString() assertEquals x.value.toString()
     }
 }

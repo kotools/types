@@ -1,13 +1,26 @@
 package kotools.types.number
 
-import kotools.assert.*
+import kotools.assert.assertEquals
+import kotools.assert.assertFailsWith
+import kotools.assert.assertNotNull
+import kotools.assert.assertTrue
 import kotlin.random.Random
 import kotlin.test.Test
+
+private fun Random.nonZeroInt(): Int {
+    var value: Int = nextInt()
+    while (value == 0) value = nextInt()
+    return value
+}
+
+internal fun Random.nonZeroNumberOfInt(): NonZeroNumber<Int> = nonZeroInt()
+    .toNonZeroNumber()
+    .getOrThrow()
 
 class NumberToNonZeroNumberTest {
     @Test
     fun should_pass_with_a_Number_other_than_zero() {
-        val value: Int = Random.nonZeroInt().value
+        val value: Int = Random.nonZeroInt()
         value.toNonZeroNumber()
             .getOrThrow()
             .value assertEquals value
@@ -24,17 +37,11 @@ class NumberToNonZeroNumberTest {
     }
 }
 
-class RandomNonZeroIntTest {
-    @Test
-    fun should_pass(): Unit =
-        Random.nonZeroInt().value assertNotEquals Random.nonZeroInt().value
-}
-
 class NonZeroNumberOfIntTimesNonZeroNumberOfIntTest {
     @Test
     fun should_pass() {
-        val x: NonZeroNumber<Int> = Random.nonZeroInt()
-        val y: NonZeroNumber<Int> = Random.nonZeroInt()
+        val x: NonZeroNumber<Int> = Random.nonZeroNumberOfInt()
+        val y: NonZeroNumber<Int> = Random.nonZeroNumberOfInt()
         val result: NonZeroNumber<Int> = x * y
         result.value assertEquals x.value * y.value
     }
@@ -44,7 +51,7 @@ class IntDivNonZeroNumberOfIntTest {
     @Test
     fun should_pass() {
         val x: Int = Random.nextInt()
-        val y: NonZeroNumber<Int> = Random.nonZeroInt()
+        val y: NonZeroNumber<Int> = Random.nonZeroNumberOfInt()
         x / y assertEquals x / y.value
     }
 }
