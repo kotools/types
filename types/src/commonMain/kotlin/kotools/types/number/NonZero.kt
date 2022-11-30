@@ -16,14 +16,6 @@ public fun <N : Number> N.toNonZeroNumber(): Result<NonZeroNumber<N>> =
         ?.toSuccessfulResult()
         ?: Result.failure(this shouldBe otherThanZero)
 
-/** Multiplies this number by the [other] one. */
-@SinceKotools(Types, "3.2", Alpha)
-public operator fun NonZeroNumber<Int>.times(
-    other: NonZeroNumber<Int>
-): NonZeroNumber<Int> = (value * other.value)
-    .toNonZeroNumber()
-    .getOrThrow()
-
 // (Byte | Short | Int).div(NonZeroNumber<Byte | Short | Int>): Int
 
 /**

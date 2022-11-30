@@ -133,14 +133,6 @@ public sealed interface NonZeroInt : IntHolder,
     // ---------- Binary operations ----------
 
     /** Multiplies this [value] by the [other] value. */
-    @Deprecated(
-        "Use the NonZeroNumber<Int>.times(NonZeroNumber<Int>) function instead.",
-        ReplaceWith(
-            "this.value.toNonZeroNumber().getOrThrow() * " +
-                    "other.value.toNonZeroNumber().getOrThrow()",
-            "${Package.number}.times"
-        )
-    )
     public operator fun times(other: NonZeroInt): NonZeroInt =
         nonZeroIntOrThrow(value * other.value)
 
