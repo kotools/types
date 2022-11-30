@@ -9,7 +9,8 @@ import kotlin.jvm.JvmInline
 @JvmInline
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public value class StrictlyPositiveInt
-private constructor(private val value: Int) : Comparable<StrictlyPositiveInt> {
+private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
+    ExplicitInt {
     internal companion object {
         infix fun of(value: Int): Result<StrictlyPositiveInt> = value
             .takeIf { it > 0 }
@@ -29,8 +30,7 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt> {
     override fun compareTo(other: StrictlyPositiveInt): Int =
         value.compareTo(other.value)
 
-    /** Returns this value as an [Int]. */
-    public fun toInt(): Int = value
+    override fun toInt(): Int = value
 }
 
 /**
