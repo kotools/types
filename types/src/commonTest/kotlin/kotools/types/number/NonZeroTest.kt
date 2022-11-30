@@ -13,7 +13,7 @@ private fun Random.nonZeroInt(): Int {
     return value
 }
 
-internal fun Random.nonZeroNumberOfInt(): NonZeroNumber<Int> = nonZeroInt()
+private fun Random.nonZeroNumberOfInt(): NonZeroNumber<Int> = nonZeroInt()
     .toNonZeroNumber()
     .getOrThrow()
 
