@@ -16,17 +16,6 @@ public sealed interface ExplicitNumber<out N : Number> {
     public val value: N
 }
 
-@ExperimentalKotoolsTypesApi
-internal sealed class ExplicitNumberImplementation<out N : Number> :
-    ExplicitNumber<N> {
-    override fun equals(other: Any?): Boolean =
-        other is ExplicitNumber<*> && value == other.value
-
-    override fun hashCode(): Int = value.hashCode()
-
-    override fun toString(): String = "$value"
-}
-
 /**
  * Representation of positive numbers (including zero).
  *
