@@ -19,20 +19,6 @@ public fun <N : Number> N.toNonZeroNumber(): Result<NonZeroNumber<N>> =
         ?.toSuccessfulResult(::NonZeroNumberImplementation)
         ?: failureOf { this shouldBe otherThanZero }
 
-// (Byte | Short | Int).div(NonZeroNumber<Byte | Short | Int>): Int
-// (Byte | Short | Int).div(NonZeroNumber<Long>): Long
-// (Byte | Short | Int).div(NonZeroNumber<Float>): Float
-// (Byte | Short | Int).div(NonZeroNumber<Double>): Double
-
-// Long.div(NonZeroNumber<Byte | Short | Int | Long>): Long
-// Long.div(NonZeroNumber<Float>): Float
-// Long.div(NonZeroNumber<Double>): Double
-
-// Float.div(NonZeroNumber<Byte | Short | Int | Long | Float>): Float
-// Float.div(NonZeroNumber<Double>): Double
-
-// <N : Number> Double.div(NonZeroNumber<N>): Double
-
 /**
  * Representation of numbers other than zero.
  *
