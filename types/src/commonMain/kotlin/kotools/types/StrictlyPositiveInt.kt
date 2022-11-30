@@ -65,7 +65,23 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     override fun compareTo(other: StrictlyPositiveInt): Int =
         value.compareTo(other.value)
 
+    /** Multiplies this integer by the [other] one. */
+    public operator fun times(other: StrictlyPositiveInt): NonZeroInt =
+        this * other.toNonZeroInt()
+
+    /** Multiplies this integer by the [other] one. */
+    public operator fun times(other: StrictlyNegativeInt): NonZeroInt =
+        this * other.toNonZeroInt()
+
+    /** Multiplies this integer by the [other] one. */
+    public operator fun times(other: NonZeroInt): NonZeroInt = NonZeroInt
+        .of(value * other)
+        .getOrThrow()
+
     internal fun toPositiveInt(): PositiveInt = value.toPositiveInt()
+        .getOrThrow()
+
+    private fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
         .getOrThrow()
 
     override fun toInt(): Int = value
