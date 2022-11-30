@@ -13,7 +13,8 @@ class StrictlyPositiveIntTest {
 
     @Test
     fun of_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = Random.nextInt(1..Int.MAX_VALUE)
+        val value: Int = StrictlyPositiveInt.random()
+            .toInt()
         StrictlyPositiveInt.of(value)
             .getOrThrow()
             .toInt() assertEquals value
