@@ -19,17 +19,16 @@ import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
+private const val NEW_BUILDER: String = "${Package.root}.toNotBlankString"
+
 /**
  * Returns the [value] as a [NotBlankString], or returns `null` if the [value]
  * is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "value.toNotBlankString().getOrNull()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("value.toNotBlankString().getOrNull()", NEW_BUILDER)
 )
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun notBlankStringOrNull(value: String): NotBlankString? = value
@@ -41,12 +40,9 @@ public fun notBlankStringOrNull(value: String): NotBlankString? = value
  * [IllegalArgumentException] if the [value] is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "value.toNotBlankString().getOrThrow()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("value.toNotBlankString().getOrThrow()", NEW_BUILDER)
 )
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
@@ -59,12 +55,9 @@ public fun notBlankStringOrThrow(value: String): NotBlankString =
  * [NotBlankString.ConstructionError] if the [value] is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "value.toNotBlankString().getOrThrow()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("value.toNotBlankString().getOrThrow()", NEW_BUILDER)
 )
 @SinceKotools(Types, "1.2")
 @Suppress("DEPRECATION")
@@ -77,12 +70,9 @@ public fun NotBlankString(value: String): NotBlankString =
  * is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "value.toNotBlankString().getOrNull()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("value.toNotBlankString().getOrNull()", NEW_BUILDER)
 )
 @Suppress("FunctionName")
 @SinceKotools(Types, "3.0")
@@ -94,12 +84,9 @@ public fun NotBlankStringOrNull(value: String): NotBlankString? =
  * [NotBlankString.ConstructionError] if this value is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "this.toNotBlankString().getOrThrow()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("this.toNotBlankString().getOrThrow()", NEW_BUILDER)
 )
 @SinceKotools(Types, "1.2")
 @Suppress("DEPRECATION")
@@ -111,12 +98,9 @@ public fun String.toNotBlankString(): NotBlankString = NotBlankString(this)
  * blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "this.toNotBlankString().getOrNull()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("this.toNotBlankString().getOrNull()", NEW_BUILDER)
 )
 @SinceKotools(Types, "1.2")
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
@@ -127,12 +111,9 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * [IllegalArgumentException] if this value is blank.
  */
 @Deprecated(
-    "Use the String.toNotBlankString function from the kotools.types package " +
-            "instead.",
-    ReplaceWith(
-        "this.toNotBlankString().getOrThrow()",
-        "kotools.types.toNotBlankString"
-    )
+    "Use the String.toNotBlankString function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("this.toNotBlankString().getOrThrow()", NEW_BUILDER)
 )
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
@@ -150,7 +131,11 @@ public fun String.toNotBlankStringOrThrow(): NotBlankString =
 @Deprecated(
     "Use the String.compareTo(NotBlankString) function from the " +
             "kotools.types package instead.",
-    ReplaceWith("this.compareTo(other)", "kotools.types.compareTo")
+    ReplaceWith(
+        "this.compareTo(other.value.toNotBlankString().getOrThrow())",
+        "${Package.root}.compareTo",
+        "${Package.root}.toNotBlankString"
+    )
 )
 @SinceKotools(Types, "2.0")
 public infix operator fun String.compareTo(other: NotBlankString): Int =
@@ -162,7 +147,7 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
  */
 @Deprecated(
     "Use the kotools.types.NotBlankString type instead.",
-    ReplaceWith("NotBlankString", "kotools.types.NotBlankString")
+    ReplaceWith("NotBlankString", "${Package.root}.NotBlankString")
 )
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotools(Types, "1.2")
