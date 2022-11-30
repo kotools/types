@@ -37,4 +37,25 @@ class NotBlankStringTest {
             .length
             .toInt() assertEquals value.length
     }
+
+    // ---------- NotBlankString.plus(String) ----------
+
+    @Test
+    fun plus_should_pass_with_a_String() {
+        val xValue = "hello "
+        val x: NotBlankString = xValue.toNotBlankString().getOrThrow()
+        val y = "world"
+        val result: NotBlankString = x + y
+        result.toString() assertEquals xValue + y
+    }
+
+    // ---------- Char.plus(NotBlankString) ----------
+
+    @Test
+    fun plus_on_a_Char_should_pass_with_a_NotBlankString() {
+        val x = 'd'
+        val y: NotBlankString = "o".toNotBlankString().getOrThrow()
+        val result: NotBlankString = x + y
+        result.toString() assertEquals x + y.toString()
+    }
 }
