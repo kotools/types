@@ -10,3 +10,33 @@ public sealed interface ExplicitInt {
     /** Returns this value as an [Int]. */
     public fun toInt(): Int
 }
+
+/**
+ * Compares this integer with the [other] one for order.
+ * Returns zero if this integer equals the [other] one, a negative number if
+ * this integer is less than the [other] one, or a positive number if
+ * this integer is greater than the [other] one.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun ExplicitInt.compareTo(other: ExplicitInt): Int =
+    compareTo(other.toInt())
+
+/**
+ * Compares this integer with the [other] one for order.
+ * Returns zero if this integer equals the [other] one, a negative number if
+ * this integer is less than the [other] one, or a positive number if
+ * this integer is greater than the [other] one.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun ExplicitInt.compareTo(other: Int): Int = toInt()
+    .compareTo(other)
+
+/**
+ * Compares this integer with the [other] one for order.
+ * Returns zero if this integer equals the [other] one, a negative number if
+ * this integer is less than the [other] one, or a positive number if
+ * this integer is greater than the [other] one.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun Int.compareTo(other: ExplicitInt): Int =
+    compareTo(other.toInt())
