@@ -20,10 +20,10 @@ private fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @Deprecated(
-    "Use the toNonZeroNumber function instead.",
+    "Use the nonZeroIntOrThrow function instead.",
     ReplaceWith(
-        "value.toNonZeroNumber().getOrThrow()",
-        "${Package.number}.toNonZeroNumber"
+        "nonZeroIntOrThrow(value)",
+        "${Package.number}.nonZeroIntOrThrow"
     )
 )
 @SinceKotools(Types, "1.1")
