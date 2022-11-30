@@ -26,4 +26,15 @@ class NotBlankStringTest {
             .isNotBlank()
             .assertTrue()
     }
+
+    // ---------- NotBlankString.length ----------
+
+    @Test
+    fun length_should_pass() {
+        val value = "hello world"
+        value.toNotBlankString()
+            .getOrThrow()
+            .length
+            .toInt() assertEquals value.length
+    }
 }
