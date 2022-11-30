@@ -28,16 +28,3 @@ class NumberToNonZeroNumberTest {
             .assertTrue()
     }
 }
-
-class IntDivNonZeroNumberOfIntTest {
-    @Test
-    fun should_pass() {
-        val x: Int = Random.nextInt()
-        val value: Int = (Random.nextInt()
-            .takeIf { it != 0 }
-            ?: Random.nextInt())
-        val y: NonZeroNumber<Int> = value.toNonZeroNumber()
-            .getOrThrow()
-        x / y assertEquals x / y.value
-    }
-}
