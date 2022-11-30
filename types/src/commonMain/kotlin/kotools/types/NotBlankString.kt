@@ -32,6 +32,22 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
             .getOrThrow()
 
     /**
+     * Returns the character of this string at the specified [index], or an
+     * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
+     * Kotlin/JS where the behavior is unspecified.
+     */
+    public operator fun get(index: StrictlyPositiveInt): Result<Char> =
+        get(index.toPositiveInt())
+
+    /**
+     * Returns the character of this string at the specified [index], or an
+     * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
+     * Kotlin/JS where the behavior is unspecified.
+     */
+    public operator fun get(index: PositiveInt): Result<Char> =
+        runCatching { value[index.toInt()] }
+
+    /**
      * Compares this string lexicographically with the [other] one for order.
      * Returns zero if this string equals the [other] one, a negative number if
      * this string is less than the [other] one, or a positive number if this
