@@ -3,6 +3,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
+import kotools.shared.StabilityLevel
 import kotools.types.Package
 import kotlin.jvm.JvmInline
 
@@ -78,7 +79,9 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
 private fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
-internal fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
+/** Returns a random [NonZeroInt]. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
     .random()
     .toNonZeroIntOrThrow()
 
