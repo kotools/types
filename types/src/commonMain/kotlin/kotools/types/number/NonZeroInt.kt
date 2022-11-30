@@ -9,7 +9,12 @@ import kotlin.jvm.JvmInline
 
 // ---------- Builders ----------
 
-private fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
+/**
+ * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
+ * equals zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
 
 /**

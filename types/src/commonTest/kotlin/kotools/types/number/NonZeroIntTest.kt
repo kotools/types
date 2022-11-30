@@ -30,6 +30,19 @@ class NonZeroIntTest : RandomValueHolder {
     // ---------- Builders ----------
 
     @Test
+    fun nonZeroIntOrNull_should_pass_with_a_non_zero_Int() {
+        val value: Int = randomNonZeroInt().value
+        val result: NonZeroInt? = nonZeroIntOrNull(value)
+        result.assertNotNull().value assertEquals value
+    }
+
+    @Test
+    fun nonZeroIntOrNull_should_return_null_with_zero() {
+        val result: NonZeroInt? = nonZeroIntOrNull(0)
+        result.assertNull()
+    }
+
+    @Test
     fun nonZeroIntOrThrow_should_pass_with_a_non_zero_Int() {
         val value: Int = randomNonZeroInt().value
         val result: NonZeroInt = nonZeroIntOrThrow(value)
