@@ -104,8 +104,7 @@ public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 /** Representation of integers other than zero. */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotools(Types, "1.1")
-public sealed interface NonZeroInt : IntHolder,
-    NonZeroNumber<Int> {
+public sealed interface NonZeroInt : IntHolder {
     // ---------- Unary operations ----------
 
     /**

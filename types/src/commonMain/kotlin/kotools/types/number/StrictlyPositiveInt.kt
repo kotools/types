@@ -106,8 +106,7 @@ public fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotools(Types, "1.1")
 public sealed interface StrictlyPositiveInt : NonZeroInt,
-    PositiveInt,
-    StrictlyPositiveNumber<Int> {
+    PositiveInt {
     // ---------- Unary operations ----------
 
     override fun inc(): StrictlyPositiveInt = if (value == max.value) min

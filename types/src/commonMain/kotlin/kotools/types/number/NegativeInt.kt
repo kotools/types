@@ -99,8 +99,7 @@ public fun randomNegativeInt(): NegativeInt = NegativeInt.range.random()
 /** Representation of negative integers, including zero. */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotools(Types, "1.1")
-public sealed interface NegativeInt : IntHolder,
-    NegativeNumber<Int> {
+public sealed interface NegativeInt : IntHolder {
     // ---------- Unary operations ----------
 
     override fun inc(): NegativeInt = if (value == max.value) min
