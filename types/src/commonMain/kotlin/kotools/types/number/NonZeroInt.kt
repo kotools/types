@@ -69,10 +69,7 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  */
 @Deprecated(
     "Use the toNonZeroNumber function instead.",
-    ReplaceWith(
-        "this.toNonZeroNumber().getOrNull()",
-        "${Package.number}.toNonZeroNumber"
-    )
+    ReplaceWith("this.toNonZeroNumber().getOrNull()")
 )
 @SinceKotools(Types, "1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
