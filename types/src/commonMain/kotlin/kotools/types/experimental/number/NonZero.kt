@@ -13,7 +13,6 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 @ExperimentalKotoolsTypesApi
 @SinceKotools(Types, "3.2", Experimental)
 public interface NonZeroNumber<out N : Number> : ExplicitNumber<N> {
-    /** Exception returned when building a [NonZeroNumber] fails. */
     public object Exception :
         IllegalArgumentException("Given value shouldn't equal zero.")
 }

@@ -38,9 +38,9 @@ public value class NonZeroInt private constructor(override val value: Int) :
 }
 
 @ExperimentalKotoolsTypesApi
-internal val NonZeroInt.Companion.negativeRange: IntRange by lazy(
-    StrictlyNegativeInt.Companion::range
-)
+internal val NonZeroInt.Companion.negativeRange: IntRange by lazy {
+    Int.MIN_VALUE..-1
+}
 
 @ExperimentalKotoolsTypesApi
 internal val NonZeroInt.Companion.positiveRange: IntRange by lazy {
