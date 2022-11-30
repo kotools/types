@@ -36,6 +36,27 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     }
 
     /**
+     * Returns this integer incremented by one, or [StrictlyPositiveInt.min] if
+     * this integer equals [StrictlyPositiveInt.max].
+     */
+    public operator fun inc(): StrictlyPositiveInt =
+        if (value == max.value) min
+        else of(value + 1).getOrThrow()
+
+    /**
+     * Returns this integer decremented by one, or [StrictlyPositiveInt.max] if
+     * this integer equals [StrictlyPositiveInt.min].
+     */
+    public operator fun dec(): StrictlyPositiveInt =
+        if (value == min.value) max
+        else of(value - 1).getOrThrow()
+
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt
+        .of(-value)
+        .getOrThrow()
+
+    /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * this integer is less than the [other] one, or a positive number if
