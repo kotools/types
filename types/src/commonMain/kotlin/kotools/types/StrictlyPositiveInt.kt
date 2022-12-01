@@ -14,7 +14,7 @@ public value class StrictlyPositiveInt
 private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     ExplicitInt {
     public companion object {
-        private val range: IntRange by lazy { 1..Int.MAX_VALUE }
+        internal val range: IntRange by lazy { 1..Int.MAX_VALUE }
 
         /** The minimum value a [StrictlyPositiveInt] can have. */
         public val min: StrictlyPositiveInt by lazy(of(range.first)::getOrThrow)
