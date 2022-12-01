@@ -46,6 +46,40 @@ public value class NonZeroInt private constructor(private val value: Int) :
     override fun compareTo(other: NonZeroInt): Int = compareTo(other.value)
 
     override fun toInt(): Int = value
+
+    /**
+     * Returns this integer as a [PositiveInt], or an [IllegalArgumentException]
+     * if this integer is strictly negative.
+     */
+    public fun toPositiveInt(): Result<PositiveInt> = value.toPositiveInt()
+
+    /**
+     * Returns this integer as a [NegativeInt], or an [IllegalArgumentException]
+     * if this integer is strictly positive.
+     */
+    public fun toNegativeInt(): Result<NegativeInt> = value.toNegativeInt()
+
+    /**
+     * Returns this integer as a [StrictlyPositiveInt], or an
+     * [IllegalArgumentException] if this integer is strictly negative.
+     */
+    public fun toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
+        value.toStrictlyPositiveInt()
+
+    /**
+     * Returns this integer as a [StrictlyNegativeInt], or an
+     * [IllegalArgumentException] if this integer is strictly positive.
+     */
+    public fun toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
+        value.toStrictlyNegativeInt()
+
+    /** Returns this integer as a [String]. */
+    override fun toString(): String = "$value"
+
+    /** Returns this integer as a [NotBlankString]. */
+    public fun toNotBlankString(): NotBlankString = toString()
+        .toNotBlankString()
+        .getOrThrow()
 }
 
 /**
