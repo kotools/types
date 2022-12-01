@@ -13,7 +13,8 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun of_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = Random.nextInt(Int.MIN_VALUE..-1)
+        val value: Int = StrictlyNegativeInt.random()
+            .toInt()
         StrictlyNegativeInt.of(value)
             .getOrThrow()
             .toInt() assertEquals value
