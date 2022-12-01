@@ -60,6 +60,26 @@ public sealed interface ExplicitInt {
      */
     public operator fun div(other: StrictlyNegativeInt): Int = toInt() / other
 
+    /**
+     * Returns the remainder of truncating division of this integer by the
+     * [other] one.
+     */
+    public operator fun rem(other: NonZeroInt): Int = toInt() % other.toInt()
+
+    /**
+     * Returns the remainder of truncating division of this integer by the
+     * [other] one.
+     */
+    public operator fun rem(other: StrictlyPositiveInt): Int =
+        toInt() % other.toInt()
+
+    /**
+     * Returns the remainder of truncating division of this integer by the
+     * [other] one.
+     */
+    public operator fun rem(other: StrictlyNegativeInt): Int =
+        toInt() % other.toInt()
+
     /** Returns this value as an [Int]. */
     public fun toInt(): Int
 }
