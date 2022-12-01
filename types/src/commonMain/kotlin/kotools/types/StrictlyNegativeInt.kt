@@ -44,15 +44,6 @@ private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
 public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     StrictlyNegativeInt of this
 
-
-/**
- * Divides this integer by the [other] one, truncating the result to an integer
- * that is closer to zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun ExplicitInt.div(other: StrictlyNegativeInt): Int =
-    toInt() / other
-
 /**
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to zero.
