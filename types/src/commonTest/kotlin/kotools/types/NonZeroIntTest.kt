@@ -27,6 +27,67 @@ class NonZeroIntTest {
             .assertTrue()
     }
 
+    // ---------- NonZeroInt.inc() ----------
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum() {
+        var x: NonZeroInt = NonZeroInt.max
+        x++
+        x assertEquals NonZeroInt.min
+    }
+
+    @Test
+    fun inc_should_return_1_with_minus1() {
+        var x: NonZeroInt = NonZeroInt.of(-1).getOrThrow()
+        x++
+        x.toInt() assertEquals 1
+    }
+
+    @Test
+    fun inc_should_increment_the_given_value_that_is_other_than_the_maximum_and_minus1() {
+        var x: NonZeroInt = NonZeroInt.random()
+        val excludedValues: List<Int> = listOf(NonZeroInt.max.toInt(), -1)
+        while (x.toInt() in excludedValues) x = NonZeroInt.random()
+        val initialValue: Int = x.toInt()
+        x++
+        x.toInt() assertEquals initialValue + 1
+    }
+
+    // ---------- NonZeroInt.dec() ----------
+
+    @Test
+    fun dec_should_return_the_maximum_value_with_the_minimum() {
+        var x: NonZeroInt = NonZeroInt.min
+        x--
+        x assertEquals NonZeroInt.max
+    }
+
+    @Test
+    fun dec_should_return_minus1_with_1() {
+        var x: NonZeroInt = 1.toNonZeroInt().getOrThrow()
+        x--
+        x.toInt() assertEquals -1
+    }
+
+    @Test
+    fun dec_should_decrement_the_given_value_that_is_other_than_the_minimum_and_1() {
+        var x: NonZeroInt = NonZeroInt.random()
+        val excludedValues: List<Int> = listOf(NonZeroInt.min.toInt(), 1)
+        while (x.toInt() in excludedValues) x = NonZeroInt.random()
+        val initialValue: Int = x.toInt()
+        x--
+        x.toInt() assertEquals initialValue - 1
+    }
+
+    // ---------- NonZeroInt.unaryMinus() ----------
+
+    @Test
+    fun unaryMinus_should_pass() {
+        val x: NonZeroInt = NonZeroInt.random()
+        val result: NonZeroInt = -x
+        result.toInt() assertEquals -x.toInt()
+    }
+
     // ---------- NonZeroInt.toNotBlankString() ----------
 
     @Test
