@@ -88,6 +88,36 @@ class NonZeroIntTest {
         result.toInt() assertEquals -x.toInt()
     }
 
+    // ---------- NonZeroInt.times(NonZeroInt) ----------
+
+    @Test
+    fun times_should_pass_with_a_NonZeroInt() {
+        val x: NonZeroInt = NonZeroInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: NonZeroInt = x * y
+        result.toInt() assertEquals x.toInt() * y.toInt()
+    }
+
+    // ---------- NonZeroInt.times(StrictlyPositiveInt) ----------
+
+    @Test
+    fun times_should_pass_with_a_StrictlyPositiveInt() {
+        val x: NonZeroInt = NonZeroInt.random()
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val result: NonZeroInt = x * y
+        result.toInt() assertEquals x.toInt() * y.toInt()
+    }
+
+    // ---------- NonZeroInt.times(StrictlyNegativeInt) ----------
+
+    @Test
+    fun times_should_pass_with_a_StrictlyNegativeInt() {
+        val x: NonZeroInt = NonZeroInt.random()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val result: NonZeroInt = x * y
+        result.toInt() assertEquals x.toInt() * y.toInt()
+    }
+
     // ---------- NonZeroInt.toNotBlankString() ----------
 
     @Test
