@@ -44,6 +44,25 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
 
     override fun toInt(): Int = value
 
+    /**
+     * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException]
+     * if this integer equals zero.
+     */
+    public fun toNonZeroInt(): Result<NonZeroInt> = value.toNonZeroInt()
+
+    /**
+     * Returns this integer as a [NegativeInt], or an [IllegalArgumentException]
+     * if this integer is strictly positive.
+     */
+    public fun toNegativeInt(): Result<NegativeInt> = value.toNegativeInt()
+
+    /**
+     * Returns this integer as a [StrictlyPositiveInt], or an
+     * [IllegalArgumentException] if this integer equals zero.
+     */
+    public fun toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
+        value.toStrictlyPositiveInt()
+
     override fun toString(): String = "$value"
 }
 
