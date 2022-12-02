@@ -28,4 +28,13 @@ class NegativeIntTest {
             .isNotBlank()
             .assertTrue()
     }
+
+    // ---------- NegativeInt.unaryMinus() ----------
+
+    @Test
+    fun unaryMinus_should_pass() {
+        val x: NegativeInt = NegativeInt.random()
+        val result: PositiveInt = -x
+        result.toInt() assertEquals -x.toInt()
+    }
 }

@@ -31,4 +31,13 @@ class StrictlyNegativeIntTest {
             .isNotBlank()
             .assertTrue()
     }
+
+    // ---------- StrictlyNegativeInt.unaryMinus() ----------
+
+    @Test
+    fun unaryMinus_should_pass() {
+        val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val result: StrictlyPositiveInt = -x
+        result.toInt() assertEquals -x.toInt()
+    }
 }
