@@ -34,7 +34,8 @@ private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
             .getOrThrow()
     }
 
-    override fun unaryMinus(): StrictlyPositiveInt = StrictlyPositiveInt
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): StrictlyPositiveInt = StrictlyPositiveInt
         .of(-value)
         .getOrThrow()
 

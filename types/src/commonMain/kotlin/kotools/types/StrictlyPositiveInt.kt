@@ -49,7 +49,8 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     public operator fun dec(): StrictlyPositiveInt = if (value == min.value) max
     else of(value - 1).getOrThrow()
 
-    override fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt
         .of(-value)
         .getOrThrow()
 

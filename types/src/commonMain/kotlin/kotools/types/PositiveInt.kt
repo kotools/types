@@ -50,7 +50,9 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
     public operator fun dec(): PositiveInt = if (value == min.value) max
     else of(value - 1).getOrThrow()
 
-    override fun unaryMinus(): NegativeInt = NegativeInt.of(-value).getOrThrow()
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): NegativeInt = NegativeInt.of(-value)
+        .getOrThrow()
 
     /**
      * Compares this integer with the [other] one for order.
