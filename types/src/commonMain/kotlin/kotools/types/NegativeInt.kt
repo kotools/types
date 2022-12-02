@@ -43,6 +43,9 @@ public value class NegativeInt private constructor(private val value: Int) :
     override fun compareTo(other: NegativeInt): Int = compareTo(other.value)
 
     override fun toInt(): Int = value
+
+    /** Returns this integer as a [String]. */
+    override fun toString(): String = "$value"
 }
 
 /**
