@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
@@ -13,6 +15,14 @@ import kotlin.jvm.JvmInline
  * Returns the [value] as a [NonZeroInt], or returns `null` if the [value]
  * equals zero.
  */
+@Deprecated(
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
+    ReplaceWith(
+        "value.toNonZeroInt().getOrNull()",
+        "${Package.root}.toNonZeroInt"
+    )
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
     ?.let(::NonZeroIntImplementation)
@@ -21,6 +31,14 @@ public fun nonZeroIntOrNull(value: Int): NonZeroInt? = value.takeIf { it != 0 }
  * Returns the [value] as a [NonZeroInt], or throws an
  * [IllegalArgumentException] if the [value] equals zero.
  */
+@Deprecated(
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
+    ReplaceWith(
+        "value.toNonZeroInt().getOrThrow()",
+        "${Package.root}.toNonZeroInt"
+    )
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
@@ -31,10 +49,11 @@ public fun nonZeroIntOrThrow(value: Int): NonZeroInt = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if the [value] equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrThrow function instead.",
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
     ReplaceWith(
-        "nonZeroIntOrThrow(value)",
-        "${Package.number}.nonZeroIntOrThrow"
+        "value.toNonZeroInt().getOrThrow()",
+        "${Package.root}.toNonZeroInt"
     )
 )
 @SinceKotools(Types, "1.1")
@@ -48,8 +67,12 @@ public fun NonZeroInt(value: Int): NonZeroInt = nonZeroIntOrNull(value)
  * equals zero.
  */
 @Deprecated(
-    "Use the nonZeroIntOrNull function instead.",
-    ReplaceWith("nonZeroIntOrNull(value)", "${Package.number}.nonZeroIntOrNull")
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
+    ReplaceWith(
+        "value.toNonZeroInt().getOrNull()",
+        "${Package.root}.toNonZeroInt"
+    )
 )
 @SinceKotools(Types, "3.0")
 @Suppress("FunctionName")
@@ -60,10 +83,11 @@ public fun NonZeroIntOrNull(value: Int): NonZeroInt? = nonZeroIntOrNull(value)
  * [NonZeroInt.ConstructionError] if this value equals zero.
  */
 @Deprecated(
-    "Use the Int.toNonZeroIntOrThrow function instead.",
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
     ReplaceWith(
-        "this.toNonZeroIntOrThrow()",
-        "${Package.number}.toNonZeroIntOrThrow"
+        "this.toNonZeroInt().getOrThrow()",
+        "${Package.root}.toNonZeroInt"
     )
 )
 @SinceKotools(Types, "1.1")
@@ -75,6 +99,14 @@ public fun Int.toNonZeroInt(): NonZeroInt = NonZeroInt(this)
  * Returns this value as a [NonZeroInt], or returns `null` if this value equals
  * zero.
  */
+@Deprecated(
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
+    ReplaceWith(
+        "this.toNonZeroInt().getOrNull()",
+        "${Package.root}.toNonZeroInt"
+    )
+)
 @SinceKotools(Types, "1.1")
 public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
 
@@ -82,11 +114,24 @@ public fun Int.toNonZeroIntOrNull(): NonZeroInt? = nonZeroIntOrNull(this)
  * Returns this value as a [NonZeroInt], or throws a [IllegalArgumentException]
  * if this value equals zero.
  */
+@Deprecated(
+    "Use the Int.toNonZeroInt function from the ${Package.root} package " +
+            "instead.",
+    ReplaceWith(
+        "value.toNonZeroInt().getOrThrow()",
+        "${Package.root}.toNonZeroInt"
+    )
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 @Throws(IllegalArgumentException::class)
 public fun Int.toNonZeroIntOrThrow(): NonZeroInt = nonZeroIntOrThrow(this)
 
 /** Returns a random [NonZeroInt]. */
+@Deprecated(
+    "Use the NonZeroInt.Companion.random function from the ${Package.root} " +
+            "package instead.",
+    ReplaceWith("NonZeroInt.random()", "${Package.root}.NonZeroInt")
+)
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
     .random()
@@ -98,10 +143,23 @@ public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
  * Divides this value by the [other] value, truncating the result to an integer
  * that is closer to zero.
  */
+@Deprecated(
+    "Use the Int.div(NonZeroInt) function from the ${Package.root} package " +
+            "instead.",
+    ReplaceWith(
+        "this / other.value.toNonZeroInt().getOrThrow()",
+        "${Package.root}.div",
+        "${Package.root}.toNonZeroInt"
+    )
+)
 @SinceKotools(Types, "1.1")
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
 /** Representation of integers other than zero. */
+@Deprecated(
+    "Use the ${Package.root}.NonZeroInt type instead.",
+    ReplaceWith("NonZeroInt", "${Package.root}.NonZeroInt")
+)
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotools(Types, "1.1")
 public sealed interface NonZeroInt : IntHolder {
@@ -165,10 +223,11 @@ public sealed interface NonZeroInt : IntHolder {
          * [value] equals 0.
          */
         @Deprecated(
-            "Use the NonZeroIntOrNull function instead.",
+            "Use the Int.toNonZeroInt function from the ${Package.root} " +
+                    "package instead.",
             ReplaceWith(
-                "NonZeroIntOrNull(value)",
-                "${Package.number}.NonZeroIntOrNull"
+                "value.toNonZeroInt().getOrNull()",
+                "${Package.root}.toNonZeroInt"
             )
         )
         public infix fun orNull(value: Int): NonZeroInt? =
@@ -176,11 +235,9 @@ public sealed interface NonZeroInt : IntHolder {
 
         /** Returns a random [NonZeroInt]. */
         @Deprecated(
-            "Use the randomNonZeroInt function instead.",
-            ReplaceWith(
-                "randomNonZeroInt()",
-                "${Package.number}.randomNonZeroInt"
-            )
+            "Use the NonZeroInt.Companion.random function from the " +
+                    "${Package.root} package instead.",
+            ReplaceWith("NonZeroInt.random()", "${Package.root}.NonZeroInt")
         )
         @SinceKotools(Types, "3.0")
         public fun random(): NonZeroInt = ranges.random()
