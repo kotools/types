@@ -117,12 +117,4 @@ class NonZeroIntTest {
         val result: NonZeroInt = x * y
         result.toInt() assertEquals x.toInt() * y.toInt()
     }
-
-    // ---------- NonZeroInt.toNotBlankString() ----------
-
-    @Test
-    fun toNotBlankString_should_pass() {
-        val x: NonZeroInt = NonZeroInt.random()
-        x.toNotBlankString().toString() assertEquals x.toInt().toString()
-    }
 }

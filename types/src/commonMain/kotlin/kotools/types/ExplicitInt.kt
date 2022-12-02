@@ -82,6 +82,14 @@ public sealed interface ExplicitInt {
 
     /** Returns this value as an [Int]. */
     public fun toInt(): Int
+
+    /** Returns this integer as a [String]. */
+    override fun toString(): String
+
+    /** Returns this integer as a [NotBlankString]. */
+    public fun toNotBlankString(): NotBlankString = toString()
+        .toNotBlankString()
+        .getOrThrow()
 }
 
 /**
