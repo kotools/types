@@ -37,6 +37,13 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
     }
 
     /**
+     * Returns this integer incremented by one, or [PositiveInt.min] if this
+     * integer equals [PositiveInt.max].
+     */
+    public operator fun inc(): PositiveInt = if (value == max.value) min
+    else of(value + 1).getOrThrow()
+
+    /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * this integer is less than the [other] one, or a positive number if

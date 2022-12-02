@@ -28,4 +28,22 @@ class PositiveIntTest {
             .isNotBlank()
             .assertTrue()
     }
+
+    // ---------- PositiveInt.inc() ----------
+
+    @Test
+    fun inc_should_return_the_minimum_value_with_the_maximum() {
+        var x: PositiveInt = PositiveInt.max
+        x++
+        x assertEquals PositiveInt.min
+    }
+
+    @Test
+    fun inc_should_increment_the_given_value_that_is_other_than_the_maximum() {
+        var x: PositiveInt = PositiveInt.random()
+        while (x.toInt() == PositiveInt.max.toInt()) x = PositiveInt.random()
+        val initialValue: Int = x.toInt()
+        x++
+        x.toInt() assertEquals initialValue + 1
+    }
 }
