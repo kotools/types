@@ -13,11 +13,25 @@ import kotlin.jvm.JvmInline
 public value class NegativeInt private constructor(private val value: Int) :
     Comparable<NegativeInt>,
     ExplicitInt {
-    internal companion object {
-        infix fun of(value: Int): Result<NegativeInt> = value.takeIf { it <= 0 }
+    public companion object {
+        private val range: IntRange by lazy { Int.MIN_VALUE..0 }
+
+        /** The minimum value a [NegativeInt] can have. */
+        public val min: NegativeInt by lazy(of(range.first)::getOrThrow)
+
+        /** The maximum value a [NegativeInt] can have. */
+        public val max: NegativeInt by lazy(of(range.last)::getOrThrow)
+
+        internal infix fun of(value: Int): Result<NegativeInt> = value
+            .takeIf { it <= 0 }
             ?.let(::NegativeInt)
             ?.let(Result.Companion::success)
             ?: Result.failure(value shouldBe aNegativeNumber)
+
+        /** Returns a random [NegativeInt]. */
+        public fun random(): NegativeInt = range.random()
+            .toNegativeInt()
+            .getOrThrow()
     }
 
     /**
