@@ -62,8 +62,6 @@ public value class NonZeroInt private constructor(private val value: Int) :
     override fun toString(): String = "$value"
 }
 
-// ---------- Unary operations ----------
-
 /**
  * Returns this integer incremented by one, or [NonZeroInt.Companion.min] if
  * this integer equals [NonZeroInt.Companion.max], or `1` if this integer equals
@@ -95,8 +93,6 @@ public operator fun NonZeroInt.dec(): NonZeroInt =
 public operator fun NonZeroInt.unaryMinus(): NonZeroInt = (-toInt())
     .toNonZeroInt()
     .getOrThrow()
-
-// ---------- Binary operations ----------
 
 /** Multiplies this integer by the [other] one. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
@@ -136,8 +132,6 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
-
-// ---------- Conversions ----------
 
 /**
  * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException] if
