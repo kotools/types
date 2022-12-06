@@ -23,30 +23,6 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
             )
     }
 
-    /** The first character of this string. */
-    public val first: Char get() = value[0]
-
-    /** The length of this string. */
-    public val length: StrictlyPositiveInt
-        get() = value.length.toStrictlyPositiveInt()
-            .getOrThrow()
-
-    /**
-     * Returns the character of this string at the specified [index], or an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
-     * Kotlin/JS where the behavior is unspecified.
-     */
-    public operator fun get(index: StrictlyPositiveInt): Result<Char> =
-        get(index.toPositiveInt())
-
-    /**
-     * Returns the character of this string at the specified [index], or an
-     * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
-     * Kotlin/JS where the behavior is unspecified.
-     */
-    public operator fun get(index: PositiveInt): Result<Char> =
-        runCatching { value[index.toInt()] }
-
     /**
      * Compares this string lexicographically with the [other] one for order.
      * Returns zero if this string equals the [other] one, a negative number if
@@ -55,30 +31,40 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
      */
     override fun compareTo(other: NotBlankString): Int = compareTo(other.value)
 
-    /**
-     * Compares this string lexicographically with the [other] one for order.
-     * Returns zero if this string equals the [other] one, a negative number if
-     * this string is less than the [other] one, or a positive number if this
-     * string is greater than the [other] one.
-     */
-    public operator fun compareTo(other: String): Int = value.compareTo(other)
-
-    /** Concatenates this string with the [other] character. */
-    public operator fun plus(other: Char): NotBlankString =
-        plus(other.toString())
-
-    /** Concatenates this string with the [other] one. */
-    public operator fun plus(other: NotBlankString): NotBlankString =
-        plus(other.value)
-
-    /** Concatenates this string with the [other] one. */
-    public operator fun plus(other: String): NotBlankString = (value + other)
-        .toNotBlankString()
-        .getOrThrow()
-
     /** Returns this value as a [String]. */
     override fun toString(): String = value
 }
+
+/** The first character of this string. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public val NotBlankString.first: Char get() = toString()[0]
+
+/** The length of this string. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public val NotBlankString.length: StrictlyPositiveInt
+    get() = toString()
+        .length
+        .toStrictlyPositiveInt()
+        .getOrThrow()
+
+/**
+ * Returns the character of this string at the specified [index], or an
+ * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
+ * Kotlin/JS where the behavior is unspecified.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NotBlankString.get(index: PositiveInt): Result<Char> =
+    runCatching { toString()[index.toInt()] }
+
+/**
+ * Returns the character of this string at the specified [index], or an
+ * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
+ * Kotlin/JS where the behavior is unspecified.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NotBlankString.get(
+    index: StrictlyPositiveInt
+): Result<Char> = get(index.toPositiveInt())
 
 /**
  * Compares this string lexicographically with the [other] one for order.
@@ -90,12 +76,40 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
 public operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.toString())
 
+/**
+ * Compares this string lexicographically with the [other] one for order.
+ * Returns zero if this string equals the [other] one, a negative number if
+ * this string is less than the [other] one, or a positive number if this
+ * string is greater than the [other] one.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NotBlankString.compareTo(other: String): Int = toString()
+    .compareTo(other)
+
+/** Concatenates this string with the [other] one. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NotBlankString.plus(other: String): NotBlankString {
+    val result: String = toString() + other
+    return result.toNotBlankString().getOrThrow()
+}
+
+/** Concatenates this string with the [other] one. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NotBlankString.plus(
+    other: NotBlankString
+): NotBlankString = this + other.toString()
+
+/** Concatenates this string with the [other] character. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NotBlankString.plus(other: Char): NotBlankString =
+    this + other.toString()
+
 /** Concatenates this character with the [other] string. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Char.plus(other: NotBlankString): NotBlankString =
-    plus(other.toString())
-        .toNotBlankString()
-        .getOrThrow()
+public operator fun Char.plus(other: NotBlankString): NotBlankString {
+    val result: String = this + other.toString()
+    return result.toNotBlankString().getOrThrow()
+}
 
 /**
  * Returns this string as a [NotBlankString], or an [IllegalArgumentException]
