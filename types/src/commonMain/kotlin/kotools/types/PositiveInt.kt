@@ -37,24 +37,6 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
     }
 
     /**
-     * Returns this integer incremented by one, or [PositiveInt.min] if this
-     * integer equals [PositiveInt.max].
-     */
-    public operator fun inc(): PositiveInt = if (value == max.value) min
-    else of(value + 1).getOrThrow()
-
-    /**
-     * Returns this integer decremented by one, or [PositiveInt.max] if this
-     * integer equals [PositiveInt.min].
-     */
-    public operator fun dec(): PositiveInt = if (value == min.value) max
-    else of(value - 1).getOrThrow()
-
-    /** Returns the negative of this integer. */
-    public operator fun unaryMinus(): NegativeInt = NegativeInt.of(-value)
-        .getOrThrow()
-
-    /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * this integer is less than the [other] one, or a positive number if
@@ -64,27 +46,40 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
 
     override fun toInt(): Int = value
 
-    /**
-     * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException]
-     * if this integer equals zero.
-     */
-    public fun toNonZeroInt(): Result<NonZeroInt> = value.toNonZeroInt()
-
-    /**
-     * Returns this integer as a [NegativeInt], or an [IllegalArgumentException]
-     * if this integer is strictly positive.
-     */
-    public fun toNegativeInt(): Result<NegativeInt> = value.toNegativeInt()
-
-    /**
-     * Returns this integer as a [StrictlyPositiveInt], or an
-     * [IllegalArgumentException] if this integer equals zero.
-     */
-    public fun toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-        value.toStrictlyPositiveInt()
-
     override fun toString(): String = "$value"
 }
+
+/**
+ * Returns this integer incremented by one, or [PositiveInt.min] if this integer
+ * equals [PositiveInt.max].
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun PositiveInt.inc(): PositiveInt =
+    if (toInt() == PositiveInt.max.toInt()) PositiveInt.min
+    else (this + 1).toPositiveInt().getOrThrow()
+
+/**
+ * Returns this integer decremented by one, or [PositiveInt.max] if this integer
+ * equals [PositiveInt.min].
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun PositiveInt.dec(): PositiveInt =
+    if (toInt() == PositiveInt.min.toInt()) PositiveInt.max
+    else (this - 1).toPositiveInt().getOrThrow()
+
+/** Returns the negative of this integer. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun PositiveInt.unaryMinus(): NegativeInt = (-toInt())
+    .toNegativeInt()
+    .getOrThrow()
+
+/**
+ * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException] if
+ * this integer equals zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun PositiveInt.toNonZeroInt(): Result<NonZeroInt> = toInt()
+    .toNonZeroInt()
 
 /**
  * Returns this integer as a [PositiveInt], or an [IllegalArgumentException] if
@@ -92,3 +87,19 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toPositiveInt(): Result<PositiveInt> = PositiveInt of this
+
+/**
+ * Returns this integer as a [NegativeInt], or an [IllegalArgumentException] if
+ * this integer is strictly positive.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun PositiveInt.toNegativeInt(): Result<NegativeInt> = toInt()
+    .toNegativeInt()
+
+/**
+ * Returns this integer as a [StrictlyPositiveInt], or an
+ * [IllegalArgumentException] if this integer equals zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun PositiveInt.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
+    toInt().toStrictlyPositiveInt()
