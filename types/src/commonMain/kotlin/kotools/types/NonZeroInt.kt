@@ -3,7 +3,6 @@ package kotools.types
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.shared.StabilityLevel
 import kotools.types.number.otherThanZero
 import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
@@ -11,7 +10,7 @@ import kotlin.jvm.JvmInline
 /** Representation of integers other than zero. */
 @JvmInline
 @Serializable
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public value class NonZeroInt private constructor(private val value: Int) :
     Comparable<NonZeroInt>,
     ExplicitInt {
@@ -67,7 +66,7 @@ public value class NonZeroInt private constructor(private val value: Int) :
  * this integer equals [NonZeroInt.Companion.max], or `1` if this integer equals
  * `-1`.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NonZeroInt.inc(): NonZeroInt =
     when (val value: Int = toInt()) {
         NonZeroInt.max.toInt() -> NonZeroInt.min
@@ -80,7 +79,7 @@ public operator fun NonZeroInt.inc(): NonZeroInt =
  * this integer equals [NonZeroInt.Companion.min], or `-1` if this integer
  * equals `1`.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NonZeroInt.dec(): NonZeroInt =
     when (val value: Int = toInt()) {
         NonZeroInt.min.toInt() -> NonZeroInt.max
@@ -89,20 +88,20 @@ public operator fun NonZeroInt.dec(): NonZeroInt =
     }
 
 /** Returns the negative of this integer. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NonZeroInt.unaryMinus(): NonZeroInt = (-toInt())
     .toNonZeroInt()
     .getOrThrow()
 
 /** Multiplies this integer by the [other] one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NonZeroInt.times(other: NonZeroInt): NonZeroInt {
     val result: Int = toInt() * other
     return result.toNonZeroInt().getOrThrow()
 }
 
 /** Multiplies this integer by the [other] one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NonZeroInt.times(
     other: StrictlyPositiveInt
 ): NonZeroInt {
@@ -111,7 +110,7 @@ public operator fun NonZeroInt.times(
 }
 
 /** Multiplies this integer by the [other] one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NonZeroInt.times(
     other: StrictlyNegativeInt
 ): NonZeroInt {
@@ -123,19 +122,19 @@ public operator fun NonZeroInt.times(
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to zero.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
 /**
  * Returns the remainder of truncating division of this integer by the [other]
  * one.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
 /**
  * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException] if
  * this integer equals zero.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
