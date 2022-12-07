@@ -2,7 +2,6 @@ package kotools.types
 
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.shared.StabilityLevel
 import kotlin.jvm.JvmInline
 
 /**
@@ -10,7 +9,7 @@ import kotlin.jvm.JvmInline
  * whitespaces.
  */
 @JvmInline
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public value class NotBlankString
 private constructor(private val value: String) : Comparable<NotBlankString> {
     internal companion object {
@@ -36,11 +35,11 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
 }
 
 /** The first character of this string. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public val NotBlankString.first: Char get() = toString()[0]
 
 /** The length of this string. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public val NotBlankString.length: StrictlyPositiveInt
     get() = toString()
         .length
@@ -52,7 +51,7 @@ public val NotBlankString.length: StrictlyPositiveInt
  * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
  * Kotlin/JS where the behavior is unspecified.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NotBlankString.get(index: PositiveInt): Result<Char> =
     runCatching { toString()[index.toInt()] }
 
@@ -61,7 +60,7 @@ public operator fun NotBlankString.get(index: PositiveInt): Result<Char> =
  * [IndexOutOfBoundsException] if the [index] is out of bounds, except in
  * Kotlin/JS where the behavior is unspecified.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NotBlankString.get(
     index: StrictlyPositiveInt
 ): Result<Char> = get(index.toPositiveInt())
@@ -72,7 +71,7 @@ public operator fun NotBlankString.get(
  * this string is less than the [other] one, or a positive number if this
  * string is greater than the [other] one.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.toString())
 
@@ -82,30 +81,30 @@ public operator fun String.compareTo(other: NotBlankString): Int =
  * this string is less than the [other] one, or a positive number if this
  * string is greater than the [other] one.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NotBlankString.compareTo(other: String): Int = toString()
     .compareTo(other)
 
 /** Concatenates this string with the [other] one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NotBlankString.plus(other: String): NotBlankString {
     val result: String = toString() + other
     return result.toNotBlankString().getOrThrow()
 }
 
 /** Concatenates this string with the [other] one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NotBlankString.plus(
     other: NotBlankString
 ): NotBlankString = this + other.toString()
 
 /** Concatenates this string with the [other] character. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun NotBlankString.plus(other: Char): NotBlankString =
     this + other.toString()
 
 /** Concatenates this character with the [other] string. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public operator fun Char.plus(other: NotBlankString): NotBlankString {
     val result: String = this + other.toString()
     return result.toNotBlankString().getOrThrow()
@@ -115,6 +114,6 @@ public operator fun Char.plus(other: NotBlankString): NotBlankString {
  * Returns this string as a [NotBlankString], or an [IllegalArgumentException]
  * if this string is blank.
  */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+@SinceKotools(Types, "3.2")
 public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
