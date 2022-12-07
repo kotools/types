@@ -34,10 +34,6 @@ public value class NegativeInt private constructor(private val value: Int) :
             .getOrThrow()
     }
 
-    /** Returns the negative of this integer. */
-    public operator fun unaryMinus(): PositiveInt = PositiveInt.of(-value)
-        .getOrThrow()
-
     /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
@@ -50,6 +46,12 @@ public value class NegativeInt private constructor(private val value: Int) :
 
     override fun toString(): String = "$value"
 }
+
+/** Returns the negative of this integer. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun NegativeInt.unaryMinus(): PositiveInt = (-toInt())
+    .toPositiveInt()
+    .getOrThrow()
 
 /**
  * Returns this integer as a [NegativeInt], or an [IllegalArgumentException] if
