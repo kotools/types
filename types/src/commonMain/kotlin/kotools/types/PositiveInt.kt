@@ -74,32 +74,8 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt = (-toInt())
     .getOrThrow()
 
 /**
- * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException] if
- * this integer equals zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public fun PositiveInt.toNonZeroInt(): Result<NonZeroInt> = toInt()
-    .toNonZeroInt()
-
-/**
  * Returns this integer as a [PositiveInt], or an [IllegalArgumentException] if
  * this integer is strictly negative.
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toPositiveInt(): Result<PositiveInt> = PositiveInt of this
-
-/**
- * Returns this integer as a [NegativeInt], or an [IllegalArgumentException] if
- * this integer is strictly positive.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public fun PositiveInt.toNegativeInt(): Result<NegativeInt> = toInt()
-    .toNegativeInt()
-
-/**
- * Returns this integer as a [StrictlyPositiveInt], or an
- * [IllegalArgumentException] if this integer equals zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public fun PositiveInt.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    toInt().toStrictlyPositiveInt()
