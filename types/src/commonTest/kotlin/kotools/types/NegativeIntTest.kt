@@ -1,8 +1,5 @@
 package kotools.types
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
@@ -39,22 +36,5 @@ class NegativeIntTest {
         val x: NegativeInt = NegativeInt.random()
         val result: PositiveInt = -x
         result.toInt() assertEquals -x.toInt()
-    }
-}
-
-class NegativeIntSerializationTest {
-    @Test
-    fun serialization_should_behave_like_an_Int() {
-        val x: NegativeInt = NegativeInt.random()
-        val result: String = Json.encodeToString(x)
-        result assertEquals Json.encodeToString(x.toInt())
-    }
-
-    @Test
-    fun deserialization_should_pass() {
-        val x: NegativeInt = NegativeInt.random()
-        val encoded: String = Json.encodeToString(x)
-        val result: NegativeInt = Json.decodeFromString(encoded)
-        result.toInt() assertEquals x.toInt()
     }
 }
