@@ -23,23 +23,19 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
             )
     }
 
+    // ---------- Binary operations ----------
+
     /**
-     * Compares this string lexicographically with the [other] one for order.
-     * Returns zero if this string equals the [other] one, a negative number if
-     * this string is less than the [other] one, or a positive number if this
-     * string is greater than the [other] one.
+     * Compares this value lexicographically with the [other] value for order.
+     * Returns zero if this value equals the [other] value, a negative number if
+     * this value is less than the [other] value, or a positive number if this
+     * value is greater than the [other] value.
      */
     override fun compareTo(other: NotBlankString): Int =
         value.compareTo(other.value)
 
+    // ---------- Conversions ----------
+
     /** Returns this value as a [String]. */
     override fun toString(): String = value
 }
-
-/**
- * Returns this string as a [NotBlankString], or an [IllegalArgumentException]
- * if this string [is blank][String.isBlank].
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public fun String.toNotBlankString(): Result<NotBlankString> =
-    NotBlankString of this
