@@ -24,7 +24,8 @@ public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class NonZeroInt
-private constructor(private val value: Int) : Comparable<NonZeroInt> {
+private constructor(private val value: Int) : ExplicitInt,
+    Comparable<NonZeroInt> {
     /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
@@ -34,8 +35,7 @@ private constructor(private val value: Int) : Comparable<NonZeroInt> {
     override fun compareTo(other: NonZeroInt): Int =
         value.compareTo(other.value)
 
-    /** Returns this value as an [Int]. */
-    public fun toInt(): Int = value
+    override fun toInt(): Int = value
 
     /** Returns this value as a [String]. */
     override fun toString(): String = "$value"
