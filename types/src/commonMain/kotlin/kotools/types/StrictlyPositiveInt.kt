@@ -88,17 +88,17 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
 }
 
 /**
- * Divides this integer by the [other] one, truncating the result to an integer
- * that is closer to zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Int.div(other: StrictlyPositiveInt): Int =
-    this / other.toInt()
-
-/**
  * Returns this integer as a [StrictlyPositiveInt], or an
  * [IllegalArgumentException] if this integer is negative.
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     StrictlyPositiveInt of this
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun Int.div(other: StrictlyPositiveInt): Int =
+    this / other.toInt()
