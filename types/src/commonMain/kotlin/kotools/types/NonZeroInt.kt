@@ -18,6 +18,9 @@ public value class NonZeroInt private constructor(private val value: Int) {
 
     /** Returns this value as an [Int]. */
     public fun toInt(): Int = value
+
+    /** Returns this value as a [String]. */
+    override fun toString(): String = "$value"
 }
 
 /**
