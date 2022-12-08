@@ -43,13 +43,10 @@ private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
     override fun compareTo(other: StrictlyNegativeInt): Int =
         value.compareTo(other.value)
 
-    override fun toInt(): Int = value
-
     internal fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
         .getOrThrow()
 
-    /** Returns this integer as a [String]. */
-    override fun toString(): String = "$value"
+    override fun toInt(): Int = value
 }
 
 /**
