@@ -9,7 +9,7 @@ import kotlin.random.nextInt
 import kotlin.test.Test
 
 class StrictlyPositiveIntTest {
-    // ---------- StrictlyPositiveInt.Companion.of(Int) ----------
+    // ---------- StrictlyPositiveInt.of(Int) ----------
 
     @Test
     fun of_should_pass_with_a_strictly_positive_Int() {
@@ -29,52 +29,5 @@ class StrictlyPositiveIntTest {
             .assertNotNull()
             .isNotBlank()
             .assertTrue()
-    }
-
-    // ---------- StrictlyPositiveInt.inc() ----------
-
-    @Test
-    fun inc_should_return_the_minimum_value_with_the_maximum() {
-        var x: StrictlyPositiveInt = StrictlyPositiveInt.max
-        x++
-        x assertEquals StrictlyPositiveInt.min
-    }
-
-    @Test
-    fun inc_should_increment_its_value_with_a_value_other_than_the_maximum() {
-        var x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        while (x.toInt() == StrictlyPositiveInt.max.toInt())
-            x = StrictlyPositiveInt.random()
-        val initialValue: Int = x.toInt()
-        x++
-        x.toInt() assertEquals initialValue + 1
-    }
-
-    // ---------- StrictlyPositiveInt.dec() ----------
-
-    @Test
-    fun dec_should_return_the_minimum_value_with_the_maximum() {
-        var x: StrictlyPositiveInt = StrictlyPositiveInt.min
-        x--
-        x assertEquals StrictlyPositiveInt.max
-    }
-
-    @Test
-    fun dec_should_decrement_its_value_with_a_value_other_than_the_minimum() {
-        var x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        while (x.toInt() == StrictlyPositiveInt.min.toInt())
-            x = StrictlyPositiveInt.random()
-        val initialValue: Int = x.toInt()
-        x--
-        x.toInt() assertEquals initialValue - 1
-    }
-
-    // ---------- StrictlyPositiveInt.unaryMinus() ----------
-
-    @Test
-    fun unaryMinus_should_pass() {
-        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        val result: StrictlyNegativeInt = -x
-        result.toInt() assertEquals -x.toInt()
     }
 }
