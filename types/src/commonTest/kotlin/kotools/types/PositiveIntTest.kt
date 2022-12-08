@@ -8,11 +8,14 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
 
-@Throws(IllegalArgumentException::class)
-private fun Int.toPositiveIntOrThrow(): PositiveInt = toPositiveInt()
-    .getOrThrow()
-
 class PositiveIntTest {
+    @Test
+    fun toString_should_behave_like_an_Int() {
+        val value: Int = Random.nextInt(0..Int.MAX_VALUE)
+        value.toPositiveIntOrThrow()
+            .toString() assertEquals "$value"
+    }
+
     @Test
     fun int_toPositiveInt_should_pass_with_a_positive_Int() {
         val value: Int = Random.nextInt(0..Int.MAX_VALUE)
@@ -31,11 +34,8 @@ class PositiveIntTest {
             .isNotBlank()
             .assertTrue()
     }
-
-    @Test
-    fun toString_should_behave_like_an_Int() {
-        val value: Int = Random.nextInt(0..Int.MAX_VALUE)
-        value.toPositiveIntOrThrow()
-            .toString() assertEquals "$value"
-    }
 }
+
+@Throws(IllegalArgumentException::class)
+private fun Int.toPositiveIntOrThrow(): PositiveInt = toPositiveInt()
+    .getOrThrow()
