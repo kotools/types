@@ -1,6 +1,5 @@
 package kotools.types
 
-import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
@@ -10,7 +9,6 @@ import kotlin.jvm.JvmInline
 
 /** Representation of integers other than zero. */
 @JvmInline
-@Serializable
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public value class NonZeroInt private constructor(private val value: Int) :
     Comparable<NonZeroInt>,
