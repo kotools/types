@@ -64,13 +64,4 @@ class PositiveIntTest {
         x--
         x.toInt() assertEquals initialValue - 1
     }
-
-    // ---------- PositiveInt.unaryMinus() ----------
-
-    @Test
-    fun unaryMinus_should_pass() {
-        val x: PositiveInt = PositiveInt.random()
-        val result: NegativeInt = -x
-        result.toInt() assertEquals -x.toInt()
-    }
 }
