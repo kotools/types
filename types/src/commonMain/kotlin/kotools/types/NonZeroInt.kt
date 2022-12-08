@@ -139,3 +139,35 @@ public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
+
+/**
+ * Returns this integer as a [PositiveInt], or an [IllegalArgumentException]
+ * if this integer is strictly negative.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun NonZeroInt.toPositiveInt(): Result<PositiveInt> = toInt()
+    .toPositiveInt()
+
+/**
+ * Returns this integer as a [NegativeInt], or an [IllegalArgumentException]
+ * if this integer is strictly positive.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun NonZeroInt.toNegativeInt(): Result<NegativeInt> = toInt()
+    .toNegativeInt()
+
+/**
+ * Returns this integer as a [StrictlyPositiveInt], or an
+ * [IllegalArgumentException] if this integer is strictly negative.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun NonZeroInt.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
+    toInt().toStrictlyPositiveInt()
+
+/**
+ * Returns this integer as a [StrictlyNegativeInt], or an
+ * [IllegalArgumentException] if this integer is strictly positive.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun NonZeroInt.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
+    toInt().toStrictlyNegativeInt()
