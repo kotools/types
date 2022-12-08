@@ -27,7 +27,8 @@ All notable changes to this project will be documented in this file.
     - `NotBlankString` ([#81](https://github.com/kotools/libraries/issues/81))
     - `ExplicitInt` ([#86](https://github.com/kotools/libraries/issues/86))
     - `NonZeroInt` ([#80](https://github.com/kotools/libraries/issues/80))
-    - `PositiveInt` ([#82](https://github.com/kotools/libraries/issues/82)).
+    - `PositiveInt` ([#82](https://github.com/kotools/libraries/issues/82))
+    - `NegativeInt` ([#84](https://github.com/kotools/libraries/issues/84)).
 
 #### Changed
 
