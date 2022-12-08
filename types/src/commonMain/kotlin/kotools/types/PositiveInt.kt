@@ -43,9 +43,6 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
     override fun compareTo(other: PositiveInt): Int = compareTo(other.value)
 
     override fun toInt(): Int = value
-
-    /** Returns this integer as a [String]. */
-    override fun toString(): String = "$value"
 }
 
 /**
