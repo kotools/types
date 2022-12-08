@@ -23,7 +23,17 @@ public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
 @JvmInline
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotools(Types, "3.2")
-public value class NonZeroInt private constructor(private val value: Int) {
+public value class NonZeroInt
+private constructor(private val value: Int) : Comparable<NonZeroInt> {
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    override fun compareTo(other: NonZeroInt): Int =
+        value.compareTo(other.value)
+
     /** Returns this value as an [Int]. */
     public fun toInt(): Int = value
 

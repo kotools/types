@@ -31,6 +31,20 @@ class NonZeroIntTest {
     }
 
     @Test
+    fun compareTo_should_pass() {
+        var value: Int = Random.nextInt()
+        while (value == 0) value = Random.nextInt()
+        val x: NonZeroInt = value.toNonZeroIntOrThrow()
+        value = Random.nextInt()
+        while (value == 0) value = Random.nextInt()
+        val y: NonZeroInt = value.toNonZeroIntOrThrow()
+        val result: Int = x.compareTo(y)
+        val expectedResult: Int = x.toInt()
+            .compareTo(y.toInt())
+        result assertEquals expectedResult
+    }
+
+    @Test
     fun toString_should_behave_like_an_Int() {
         var value: Int = Random.nextInt()
         while (value == 0) value = Random.nextInt()
