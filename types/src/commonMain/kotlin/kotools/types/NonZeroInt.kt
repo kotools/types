@@ -38,29 +38,6 @@ public value class NonZeroInt private constructor(private val value: Int) :
     }
 
     /**
-     * Returns this integer incremented by one, or [NonZeroInt.min] if this
-     * integer equals [NonZeroInt.max], or `1` if this integer equals `-1`.
-     */
-    public operator fun inc(): NonZeroInt = when (value) {
-        max.value -> min
-        -1 -> of(1).getOrThrow()
-        else -> of(value + 1).getOrThrow()
-    }
-
-    /**
-     * Returns this integer decremented by one, or [NonZeroInt.max] if this
-     * integer equals [NonZeroInt.min], or `-1` if this integer equals `1`.
-     */
-    public operator fun dec(): NonZeroInt = when (value) {
-        min.value -> max
-        1 -> of(-1).getOrThrow()
-        else -> of(value - 1).getOrThrow()
-    }
-
-    /** Returns the negative of this integer. */
-    public operator fun unaryMinus(): NonZeroInt = of(-value).getOrThrow()
-
-    /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * this integer is less than the [other] one, or a positive number if
