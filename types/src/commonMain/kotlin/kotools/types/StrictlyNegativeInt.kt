@@ -2,13 +2,14 @@ package kotools.types
 
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
+import kotools.shared.StabilityLevel
 import kotools.types.number.aStrictlyNegativeNumber
 import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
 
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public value class StrictlyNegativeInt
 private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
     ExplicitInt {
@@ -59,7 +60,7 @@ private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to zero.
  */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun Int.div(other: StrictlyNegativeInt): Int =
     this / other.toInt()
 
@@ -67,6 +68,6 @@ public operator fun Int.div(other: StrictlyNegativeInt): Int =
  * Returns this integer as a [StrictlyNegativeInt], or an
  * [IllegalArgumentException] if this integer is positive.
  */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     StrictlyNegativeInt of this
