@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.string
 
 import kotlinx.serialization.KSerializer
@@ -118,6 +120,10 @@ public infix operator fun String.compareTo(other: NotBlankString): Int =
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  */
+@Deprecated(
+    "Use the kotools.types.NotBlankString type instead.",
+    ReplaceWith("NotBlankString", "${Package.root}.NotBlankString")
+)
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotools(Types, "1.2")
 public sealed interface NotBlankString : Comparable<NotBlankString> {
