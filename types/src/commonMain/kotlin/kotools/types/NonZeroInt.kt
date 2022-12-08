@@ -17,36 +17,11 @@ public value class NonZeroInt private constructor(private val value: Int) :
     ExplicitInt {
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
-        private val negativeRange: IntRange by lazy(
-            StrictlyNegativeInt.Companion::range
-        )
-        private val positiveRange: IntRange by lazy(
-            StrictlyPositiveInt.Companion::range
-        )
-
-        /** The minimum value a [NonZeroInt] can have. */
-        public val min: NonZeroInt by lazy(
-            negativeRange.first.toNonZeroInt()::getOrThrow
-        )
-
-        /** The maximum value a [NonZeroInt] can have. */
-        public val max: NonZeroInt by lazy(
-            positiveRange.last.toNonZeroInt()::getOrThrow
-        )
-
         internal infix fun of(value: Int): Result<NonZeroInt> = value
             .takeIf { it != 0 }
             ?.let(::NonZeroInt)
             ?.let(Result.Companion::success)
             ?: Result.failure(value shouldBe otherThanZero)
-
-        /** Returns a random [NonZeroInt]. */
-        public fun random(): NonZeroInt =
-            listOf(negativeRange, positiveRange)
-                .random()
-                .random()
-                .toNonZeroInt()
-                .getOrThrow()
     }
 
     /**
@@ -61,6 +36,32 @@ public value class NonZeroInt private constructor(private val value: Int) :
 
     override fun toString(): String = "$value"
 }
+
+// ---------- Companion ----------
+
+private val negativeRange: IntRange = StrictlyNegativeInt.range
+private val positiveRange: IntRange = StrictlyPositiveInt.range
+
+/** The minimum value a [NonZeroInt] can have. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public val NonZeroInt.Companion.min: NonZeroInt by lazy(
+    negativeRange.first.toNonZeroInt()::getOrThrow
+)
+
+/** The maximum value a [NonZeroInt] can have. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public val NonZeroInt.Companion.max: NonZeroInt by lazy(
+    positiveRange.last.toNonZeroInt()::getOrThrow
+)
+
+/** Returns a random [NonZeroInt]. */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public fun NonZeroInt.Companion.random(): NonZeroInt =
+    listOf(negativeRange, positiveRange)
+        .random()
+        .random()
+        .toNonZeroInt()
+        .getOrThrow()
 
 // ---------- Unary operations ----------
 
