@@ -12,13 +12,6 @@ import kotools.types.number.otherThanZero
 import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
 
-/**
- * Returns this integer as a [NonZeroInt], or [IllegalArgumentException] if this
- * integer equals zero.
- */
-@SinceKotools(Types, "3.2")
-public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
-
 /** Representation of integers other than zero. */
 @JvmInline
 @Serializable(NonZeroIntSerializer::class)
@@ -26,6 +19,12 @@ public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
 public value class NonZeroInt
 private constructor(private val value: Int) : ExplicitInt,
     Comparable<NonZeroInt> {
+    internal companion object {
+        infix fun of(value: Int): Result<NonZeroInt> = value.takeIf { it != 0 }
+            ?.toSuccessfulResult(::NonZeroInt)
+            ?: Result.failure(value shouldBe otherThanZero)
+    }
+
     /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
@@ -38,12 +37,6 @@ private constructor(private val value: Int) : ExplicitInt,
     override fun toInt(): Int = value
 
     override fun toString(): String = "$value"
-
-    internal companion object {
-        infix fun of(value: Int): Result<NonZeroInt> = value.takeIf { it != 0 }
-            ?.toSuccessfulResult(::NonZeroInt)
-            ?: Result.failure(value shouldBe otherThanZero)
-    }
 }
 
 internal object NonZeroIntSerializer : KSerializer<NonZeroInt> {
@@ -60,3 +53,10 @@ internal object NonZeroIntSerializer : KSerializer<NonZeroInt> {
         .toNonZeroInt()
         .getOrThrow()
 }
+
+/**
+ * Returns this integer as a [NonZeroInt], or [IllegalArgumentException] if this
+ * integer equals zero.
+ */
+@SinceKotools(Types, "3.2")
+public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
