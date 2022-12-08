@@ -8,40 +8,16 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
 
-class StrictlyPositiveIntTest {
-    // ---------- StrictlyPositiveInt.Companion.of(Int) ----------
-
+class StrictlyPositiveIntIncTest {
     @Test
-    fun of_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = StrictlyPositiveInt.random()
-            .toInt()
-        StrictlyPositiveInt.of(value)
-            .getOrThrow()
-            .toInt() assertEquals value
-    }
-
-    @Test
-    fun of_should_fail_with_a_negative_Int() {
-        val value: Int = Random.nextInt(Int.MIN_VALUE..0)
-        val result: Result<StrictlyPositiveInt> = StrictlyPositiveInt of value
-        assertFailsWith<IllegalArgumentException>(result::getOrThrow)
-            .message
-            .assertNotNull()
-            .isNotBlank()
-            .assertTrue()
-    }
-
-    // ---------- StrictlyPositiveInt.inc() ----------
-
-    @Test
-    fun inc_should_return_the_minimum_value_with_the_maximum() {
+    fun should_return_the_minimum_value_with_the_maximum() {
         var x: StrictlyPositiveInt = StrictlyPositiveInt.max
         x++
         x assertEquals StrictlyPositiveInt.min
     }
 
     @Test
-    fun inc_should_increment_its_value_with_a_value_other_than_the_maximum() {
+    fun should_increment_its_value_with_a_value_other_than_the_maximum() {
         var x: StrictlyPositiveInt = StrictlyPositiveInt.random()
         while (x.toInt() == StrictlyPositiveInt.max.toInt())
             x = StrictlyPositiveInt.random()
@@ -49,9 +25,9 @@ class StrictlyPositiveIntTest {
         x++
         x.toInt() assertEquals initialValue + 1
     }
+}
 
-    // ---------- StrictlyPositiveInt.dec() ----------
-
+class StrictlyPositiveIntDecTest {
     @Test
     fun dec_should_return_the_minimum_value_with_the_maximum() {
         var x: StrictlyPositiveInt = StrictlyPositiveInt.min
@@ -68,27 +44,68 @@ class StrictlyPositiveIntTest {
         x--
         x.toInt() assertEquals initialValue - 1
     }
+}
 
-    // ---------- StrictlyPositiveInt.unaryMinus() ----------
-
+class StrictlyPositiveIntUnaryMinusTest {
     @Test
-    fun unaryMinus_should_pass() {
+    fun should_pass() {
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
         val result: StrictlyNegativeInt = -x
         result.toInt() assertEquals -x.toInt()
     }
+}
 
-    // ---------- StrictlyPositiveInt.times(NonZeroInt) ----------
-
+class StrictlyPositiveIntTimesTest {
     @Test
-    fun times_should_pass_with_a_NonZeroInt() {
+    fun should_return_a_NonZeroInt_with_a_NonZeroInt() {
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        val y: NonZeroInt = listOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
-            .random()
-            .random()
-            .toNonZeroInt()
-            .getOrThrow()
+        val y: NonZeroInt = NonZeroInt.random()
         val result: NonZeroInt = x * y
         result.toInt() assertEquals x.toInt() * y.toInt()
     }
+
+    @Test
+    fun should_return_a_NonZeroInt_with_a_StrictlyPositiveInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val result: NonZeroInt = x * y
+        result.toInt() assertEquals x.toInt() * y.toInt()
+    }
+
+    @Test
+    fun should_return_a_NonZeroInt_with_a_StrictlyNegativeInt() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val result: NonZeroInt = x * y
+        result.toInt() assertEquals x.toInt() * y.toInt()
+    }
+}
+
+class IntDivStrictlyPositiveIntTest {
+    @Test
+    fun should_pass() {
+        val x: Int = Random.nextInt()
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        x / y assertEquals x / y.toInt()
+    }
+}
+
+class IntToStrictlyPositiveIntTest {
+    @Test
+    fun should_pass_with_a_strictly_positive_Int() {
+        val value: Int = Random.nextInt(StrictlyPositiveInt.range)
+        value.toStrictlyPositiveInt()
+            .getOrThrow()
+            .toInt() assertEquals value
+    }
+
+    @Test
+    fun should_fail_with_a_negative_Int(): Unit = Random
+        .nextInt(NegativeInt.range)
+        .toStrictlyPositiveInt()
+        .let { assertFailsWith<IllegalArgumentException>(it::getOrThrow) }
+        .message
+        .assertNotNull()
+        .isNotBlank()
+        .assertTrue()
 }
