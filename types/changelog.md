@@ -25,7 +25,8 @@ All notable changes to this project will be documented in this file.
   ([#22](https://github.com/kotools/libraries/issues/22)).
 - Types in the `kotools.types` package:
     - `NotBlankString` ([#103](https://github.com/kotools/libraries/issues/103))
-    - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104)).
+    - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104))
+    - `PositiveInt` ([#105](https://github.com/kotools/libraries/issues/105)).
 
 #### Changed
 
@@ -48,8 +49,9 @@ All notable changes to this project will be documented in this file.
   ([#33](https://github.com/kotools/libraries/issues/33)).
 - The `NotBlankString` type from the `kotools.types.string` package
   ([#103](https://github.com/kotools/libraries/issues/103)).
-- The `NonZeroInt` type from the `kotools.types.number` package
-  ([#104](https://github.com/kotools/libraries/issues/104)).
+- The following types from the `kotools.types.number` package:
+    - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104))
+    - `PositiveInt` ([#105](https://github.com/kotools/libraries/issues/105)).
 
 ## Version 3.1.1 - 2022/11/18
 
