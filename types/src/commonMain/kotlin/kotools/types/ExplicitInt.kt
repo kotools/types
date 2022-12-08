@@ -53,16 +53,3 @@ public operator fun ExplicitInt.plus(other: Int): Int = toInt() + other
 /** Adds the [other] integer to this one. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun Int.plus(other: ExplicitInt): Int = this + other.toInt()
-
-/** Subtracts the [other] integer from this one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun ExplicitInt.minus(other: ExplicitInt): Int =
-    this - other.toInt()
-
-/** Subtracts the [other] integer from this one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun ExplicitInt.minus(other: Int): Int = toInt() - other
-
-/** Subtracts the [other] integer from this one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Int.minus(other: ExplicitInt): Int = this - other.toInt()
