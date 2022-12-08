@@ -21,10 +21,11 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- Add explicit builders for all types
+- Explicit builders for all types
   ([#22](https://github.com/kotools/libraries/issues/22)).
-- New `NotBlankString` type in the `kotools.types` package
-  ([#103](https://github.com/kotools/libraries/issues/103)).
+- Types in the `kotools.types` package:
+    - `NotBlankString` ([#103](https://github.com/kotools/libraries/issues/103))
+    - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104)).
 
 #### Changed
 
@@ -47,6 +48,8 @@ All notable changes to this project will be documented in this file.
   ([#33](https://github.com/kotools/libraries/issues/33)).
 - The `NotBlankString` type from the `kotools.types.string` package
   ([#103](https://github.com/kotools/libraries/issues/103)).
+- The `NonZeroInt` type from the `kotools.types.number` package
+  ([#104](https://github.com/kotools/libraries/issues/104)).
 
 ## Version 3.1.1 - 2022/11/18
 
