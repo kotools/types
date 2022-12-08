@@ -48,6 +48,7 @@ private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
     internal fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
         .getOrThrow()
 
+    /** Returns this integer as a [String]. */
     override fun toString(): String = "$value"
 }
 

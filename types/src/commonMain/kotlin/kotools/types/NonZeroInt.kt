@@ -110,7 +110,13 @@ public value class NonZeroInt private constructor(private val value: Int) :
     public fun toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
         value.toStrictlyNegativeInt()
 
+    /** Returns this integer as a [String]. */
     override fun toString(): String = "$value"
+
+    /** Returns this integer as a [NotBlankString]. */
+    public fun toNotBlankString(): NotBlankString = toString()
+        .toNotBlankString()
+        .getOrThrow()
 }
 
 /**
