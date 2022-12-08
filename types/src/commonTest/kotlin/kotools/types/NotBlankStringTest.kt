@@ -6,6 +6,11 @@ import kotlinx.serialization.json.Json
 import kotools.assert.*
 import kotlin.test.Test
 
+@Throws(IllegalArgumentException::class)
+private fun String.toNotBlankStringOrThrow(): NotBlankString =
+    toNotBlankString()
+        .getOrThrow()
+
 class NotBlankStringTest {
     @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
@@ -61,8 +66,3 @@ class NotBlankStringTest {
             .assertTrue()
     }
 }
-
-@Throws(IllegalArgumentException::class)
-private fun String.toNotBlankStringOrThrow(): NotBlankString =
-    toNotBlankString()
-        .getOrThrow()
