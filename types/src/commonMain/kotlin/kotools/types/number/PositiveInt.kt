@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
@@ -97,6 +99,10 @@ public fun randomPositiveInt(): PositiveInt = PositiveInt.range.random()
     .toPositiveIntOrThrow()
 
 /** Representation of positive integers, including zero. */
+@Deprecated(
+    "Use the ${Package.root}.PositiveInt type instead.",
+    ReplaceWith("PositiveInt", "${Package.root}.PositiveInt")
+)
 @Serializable(PositiveIntSerializer::class)
 @SinceKotools(Types, "1.1")
 public sealed interface PositiveInt : IntHolder {
