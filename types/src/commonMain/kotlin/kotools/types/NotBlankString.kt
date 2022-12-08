@@ -11,14 +11,6 @@ import kotools.shared.SinceKotools
 import kotlin.jvm.JvmInline
 
 /**
- * Returns this string as a [NotBlankString], or [IllegalArgumentException] if
- * this string is blank.
- */
-@SinceKotools(Types, "3.2")
-public fun String.toNotBlankString(): Result<NotBlankString> =
-    NotBlankString of this
-
-/**
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  */
@@ -27,6 +19,15 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
 @SinceKotools(Types, "3.2")
 public value class NotBlankString
 private constructor(private val value: String) : Comparable<NotBlankString> {
+    internal companion object {
+        infix fun of(value: String): Result<NotBlankString> = value
+            .takeIf(String::isNotBlank)
+            ?.toSuccessfulResult(::NotBlankString)
+            ?: Result.failure(
+                IllegalArgumentException("Given string shouldn't be blank.")
+            )
+    }
+
     /**
      * Compares this string lexicographically with the [other] one for order.
      * Returns zero if this string equals the [other] one, a negative number if
@@ -38,15 +39,6 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
 
     /** Returns this value as a [String]. */
     override fun toString(): String = value
-
-    internal companion object {
-        infix fun of(value: String): Result<NotBlankString> = value
-            .takeIf(String::isNotBlank)
-            ?.toSuccessfulResult(::NotBlankString)
-            ?: Result.failure(
-                IllegalArgumentException("Given string shouldn't be blank.")
-            )
-    }
 }
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
@@ -63,3 +55,11 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
         .toNotBlankString()
         .getOrThrow()
 }
+
+/**
+ * Returns this string as a [NotBlankString], or [IllegalArgumentException] if
+ * this string is blank.
+ */
+@SinceKotools(Types, "3.2")
+public fun String.toNotBlankString(): Result<NotBlankString> =
+    NotBlankString of this
