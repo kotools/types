@@ -26,8 +26,7 @@ All notable changes to this project will be documented in this file.
 - New types in the `kotools.types` package:
     - `NotBlankString` ([#81](https://github.com/kotools/libraries/issues/81))
     - `ExplicitInt` ([#86](https://github.com/kotools/libraries/issues/86))
-    - `NonZeroInt` ([#80](https://github.com/kotools/libraries/issues/80))
-    - `PositiveInt` ([#82](https://github.com/kotools/libraries/issues/82)).
+    - `NonZeroInt` ([#80](https://github.com/kotools/libraries/issues/80)).
 
 #### Changed
 
