@@ -34,9 +34,7 @@ public value class NegativeInt private constructor(private val value: Int) :
             .getOrThrow()
     }
 
-    /** Returns the negative of this integer. */
-    public operator fun unaryMinus(): PositiveInt = PositiveInt.of(-value)
-        .getOrThrow()
+    override fun unaryMinus(): PositiveInt = PositiveInt.of(-value).getOrThrow()
 
     /**
      * Compares this integer with the [other] one for order.
