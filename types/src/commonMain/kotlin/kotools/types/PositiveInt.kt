@@ -44,13 +44,6 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
     else of(value + 1).getOrThrow()
 
     /**
-     * Returns this integer decremented by one, or [PositiveInt.max] if this
-     * integer equals [PositiveInt.min].
-     */
-    public operator fun dec(): PositiveInt = if (value == min.value) max
-    else of(value - 1).getOrThrow()
-
-    /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * this integer is less than the [other] one, or a positive number if

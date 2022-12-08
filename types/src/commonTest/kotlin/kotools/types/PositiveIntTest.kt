@@ -46,22 +46,4 @@ class PositiveIntTest {
         x++
         x.toInt() assertEquals initialValue + 1
     }
-
-    // ---------- PositiveInt.dec() ----------
-
-    @Test
-    fun dec_should_return_the_maximum_value_with_the_minimum() {
-        var x: PositiveInt = PositiveInt.min
-        x--
-        x assertEquals PositiveInt.max
-    }
-
-    @Test
-    fun dec_should_decrement_the_given_value_that_is_other_than_the_minimum() {
-        var x: PositiveInt = PositiveInt.random()
-        while (x.toInt() == PositiveInt.min.toInt()) x = PositiveInt.random()
-        val initialValue: Int = x.toInt()
-        x--
-        x.toInt() assertEquals initialValue - 1
-    }
 }
