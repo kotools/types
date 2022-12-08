@@ -21,9 +21,8 @@ class PositiveIntTest {
 
     @Test
     fun of_should_fail_with_a_strictly_negative_Int() {
-        val result: Result<PositiveInt> = PositiveInt of StrictlyNegativeInt
-            .random()
-            .toInt()
+        val value: Int = Random.nextInt(Int.MIN_VALUE..-1)
+        val result: Result<PositiveInt> = PositiveInt of value
         assertFailsWith<IllegalArgumentException>(result::getOrThrow)
             .message
             .assertNotNull()

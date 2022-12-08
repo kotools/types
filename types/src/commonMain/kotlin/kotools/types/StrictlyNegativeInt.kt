@@ -13,25 +13,12 @@ import kotlin.jvm.JvmInline
 public value class StrictlyNegativeInt
 private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
     ExplicitInt {
-    public companion object {
-        private val range: IntRange = Int.MIN_VALUE..-1
-
-        /** The minimum value a [StrictlyNegativeInt] can have. */
-        public val min: StrictlyNegativeInt by lazy(of(range.first)::getOrThrow)
-
-        /** The maximum value a [StrictlyNegativeInt] can have. */
-        public val max: StrictlyNegativeInt by lazy(of(range.last)::getOrThrow)
-
-        internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
+    internal companion object {
+        infix fun of(value: Int): Result<StrictlyNegativeInt> = value
             .takeIf { it < 0 }
             ?.let(::StrictlyNegativeInt)
             ?.let(Result.Companion::success)
             ?: Result.failure(value shouldBe aStrictlyNegativeNumber)
-
-        /** Returns a random [StrictlyNegativeInt]. */
-        public fun random(): StrictlyNegativeInt = range.random()
-            .toStrictlyNegativeInt()
-            .getOrThrow()
     }
 
     /**
