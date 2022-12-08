@@ -26,11 +26,6 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
     /** The first character of this string. */
     public val first: Char get() = value[0]
 
-    /** The length of this string. */
-    public val length: StrictlyPositiveInt
-        get() = value.length.toStrictlyPositiveInt()
-            .getOrThrow()
-
     /**
      * Compares this string lexicographically with the [other] one for order.
      * Returns zero if this string equals the [other] one, a negative number if
