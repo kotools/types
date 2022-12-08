@@ -13,16 +13,8 @@ import kotlin.jvm.JvmInline
 public value class StrictlyPositiveInt
 private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     ExplicitInt {
-    public companion object {
-        private val range: IntRange by lazy { 1..Int.MAX_VALUE }
-
-        /** The minimum value a [StrictlyPositiveInt] can have. */
-        public val min: StrictlyPositiveInt by lazy(of(range.first)::getOrThrow)
-
-        /** The maximum value a [StrictlyPositiveInt] can have. */
-        public val max: StrictlyPositiveInt by lazy(of(range.last)::getOrThrow)
-
-        internal infix fun of(value: Int): Result<StrictlyPositiveInt> = value
+    internal companion object {
+        infix fun of(value: Int): Result<StrictlyPositiveInt> = value
             .takeIf { it > 0 }
             ?.let(::StrictlyPositiveInt)
             ?.let(Result.Companion::success)
