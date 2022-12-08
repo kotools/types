@@ -11,8 +11,9 @@ class NonZeroIntTest {
 
     @Test
     fun of_should_pass_with_an_Int_other_than_zero() {
-        val value: Int = NonZeroInt.random()
-            .toInt()
+        val value: Int = listOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
+            .random()
+            .random()
         NonZeroInt.of(value)
             .getOrThrow()
             .toInt() assertEquals value
