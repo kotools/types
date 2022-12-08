@@ -1,5 +1,6 @@
 package kotools.types
 
+import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.types.number.aStrictlyPositiveNumber
@@ -8,6 +9,7 @@ import kotlin.jvm.JvmInline
 
 /** Representation of strictly positive integers, excluding zero. */
 @JvmInline
+@Serializable
 @SinceKotools(Types, "3.2")
 public value class StrictlyPositiveInt
 private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
