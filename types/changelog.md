@@ -21,10 +21,8 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- Explicit builders for all types
-  ([#22](https://github.com/kotools/libraries/issues/22)).
-- New `kotools.types.NotBlankString` type
-  ([#81](https://github.com/kotools/libraries/issues/81)).
+Add explicit builders for all types
+([#22](https://github.com/kotools/libraries/issues/22)).
 
 #### Changed
 
@@ -45,8 +43,6 @@ All notable changes to this project will be documented in this file.
   ([#22](https://github.com/kotools/libraries/issues/22)).
 - The DSL in **alpha** stage for building numbers
   ([#33](https://github.com/kotools/libraries/issues/33)).
-- The `kotools.types.string.NotBlankString` type and its operations
-  ([#81](https://github.com/kotools/libraries/issues/81)).
 
 ## Version 3.1.1 - 2022/11/18
 
