@@ -11,7 +11,8 @@ class NonZeroIntTest {
 
     @Test
     fun of_should_pass_with_an_Int_other_than_zero() {
-        val value: Int = NonZeroInt.random().toInt()
+        val value: Int = NonZeroInt.random()
+            .toInt()
         NonZeroInt.of(value)
             .getOrThrow()
             .toInt() assertEquals value
@@ -25,13 +26,5 @@ class NonZeroIntTest {
             .assertNotNull()
             .isNotBlank()
             .assertTrue()
-    }
-
-    // ---------- NonZeroInt.toNotBlankString() ----------
-
-    @Test
-    fun toNotBlankString_should_pass() {
-        val x: NonZeroInt = NonZeroInt.random()
-        x.toNotBlankString().toString() assertEquals x.toInt().toString()
     }
 }
