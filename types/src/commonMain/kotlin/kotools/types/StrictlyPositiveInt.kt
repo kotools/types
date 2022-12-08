@@ -85,9 +85,6 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
         .getOrThrow()
 
     override fun toInt(): Int = value
-
-    /** Returns this integer as a [String]. */
-    override fun toString(): String = "$value"
 }
 
 /**
