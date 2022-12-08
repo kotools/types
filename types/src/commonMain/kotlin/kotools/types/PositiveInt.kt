@@ -13,25 +13,11 @@ import kotlin.jvm.JvmInline
 public value class PositiveInt
 private constructor(private val value: Int) : Comparable<PositiveInt>,
     ExplicitInt {
-    public companion object {
-        private val range: IntRange by lazy { 0..Int.MAX_VALUE }
-
-        /** The minimum value a [PositiveInt] can have. */
-        public val min: PositiveInt by lazy(of(range.first)::getOrThrow)
-
-        /** The maximum value a [PositiveInt] can have. */
-        public val max: PositiveInt by lazy(of(range.last)::getOrThrow)
-
-        internal infix fun of(value: Int): Result<PositiveInt> = value
-            .takeIf { it >= 0 }
+    internal companion object {
+        infix fun of(value: Int): Result<PositiveInt> = value.takeIf { it >= 0 }
             ?.let(::PositiveInt)
             ?.let(Result.Companion::success)
             ?: Result.failure(value shouldBe aPositiveNumber)
-
-        /** Returns a random [PositiveInt]. */
-        public fun random(): PositiveInt = range.random()
-            .toPositiveInt()
-            .getOrThrow()
     }
 
     /**
