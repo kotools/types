@@ -41,7 +41,7 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
 
 /**
  * Returns this string as a [NotBlankString], or an [IllegalArgumentException]
- * if this string is blank.
+ * if this string [is blank][String.isBlank].
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun String.toNotBlankString(): Result<NotBlankString> =
