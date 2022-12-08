@@ -47,19 +47,6 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
      */
     public operator fun compareTo(other: String): Int = value.compareTo(other)
 
-    /** Concatenates this string with the [other] character. */
-    public operator fun plus(other: Char): NotBlankString =
-        plus(other.toString())
-
-    /** Concatenates this string with the [other] one. */
-    public operator fun plus(other: NotBlankString): NotBlankString =
-        plus(other.value)
-
-    /** Concatenates this string with the [other] one. */
-    public operator fun plus(other: String): NotBlankString = (value + other)
-        .toNotBlankString()
-        .getOrThrow()
-
     /** Returns this value as a [String]. */
     override fun toString(): String = value
 }
@@ -73,13 +60,6 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun String.compareTo(other: NotBlankString): Int =
     compareTo(other.toString())
-
-/** Concatenates this character with the [other] string. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Char.plus(other: NotBlankString): NotBlankString =
-    plus(other.toString())
-        .toNotBlankString()
-        .getOrThrow()
 
 /**
  * Returns this string as a [NotBlankString], or an [IllegalArgumentException]
