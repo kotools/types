@@ -68,18 +68,6 @@ public value class NonZeroInt private constructor(private val value: Int) :
      */
     override fun compareTo(other: NonZeroInt): Int = compareTo(other.value)
 
-    /** Multiplies this integer by the [other] one. */
-    public operator fun times(other: NonZeroInt): NonZeroInt =
-        of(value * other.value).getOrThrow()
-
-    /** Multiplies this integer by the [other] one. */
-    public operator fun times(other: StrictlyPositiveInt): NonZeroInt =
-        of(value * other.toInt()).getOrThrow()
-
-    /** Multiplies this integer by the [other] one. */
-    public operator fun times(other: StrictlyNegativeInt): NonZeroInt =
-        of(value * other.toInt()).getOrThrow()
-
     override fun toInt(): Int = value
 
     /**
