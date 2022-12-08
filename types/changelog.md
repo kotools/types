@@ -25,8 +25,7 @@ All notable changes to this project will be documented in this file.
   ([#22](https://github.com/kotools/libraries/issues/22)).
 - New types in the `kotools.types` package:
     - `NotBlankString` ([#81](https://github.com/kotools/libraries/issues/81))
-    - `ExplicitInt` ([#86](https://github.com/kotools/libraries/issues/86))
-    - `NonZeroInt` ([#80](https://github.com/kotools/libraries/issues/80)).
+    - `ExplicitInt` ([#86](https://github.com/kotools/libraries/issues/86)).
 
 #### Changed
 
@@ -51,8 +50,6 @@ All notable changes to this project will be documented in this file.
   ([#81](https://github.com/kotools/libraries/issues/81)).
 - The `IntHolder` type and its operations
   ([#86](https://github.com/kotools/libraries/issues/86)).
-- The `kotools.types.number.NonZeroInt` type and its operations
-  ([#80](https://github.com/kotools/libraries/issues/80)).
 
 ## Version 3.1.1 - 2022/11/18
 
