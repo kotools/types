@@ -17,8 +17,7 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
             .takeIf(String::isNotBlank)
-            ?.let(::NotBlankString)
-            ?.let(Result.Companion::success)
+            ?.toSuccessfulResult(::NotBlankString)
             ?: Result.failure(
                 IllegalArgumentException("Given string shouldn't be blank.")
             )
