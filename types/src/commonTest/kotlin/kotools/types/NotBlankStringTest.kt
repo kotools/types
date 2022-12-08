@@ -39,8 +39,7 @@ class NotBlankStringTest {
 
     @Test
     fun serialization_should_behave_like_a_String() {
-        val value: NotBlankString = "hello world".toNotBlankString()
-            .getOrThrow()
+        val value: NotBlankString = "hello world".toNotBlankStringOrThrow()
         val result: String = Json.encodeToString(value)
         val expectedResult: String = Json.encodeToString("$value")
         result assertEquals expectedResult
@@ -54,3 +53,8 @@ class NotBlankStringTest {
         "$result" assertEquals value
     }
 }
+
+@Throws(IllegalArgumentException::class)
+private fun String.toNotBlankStringOrThrow(): NotBlankString =
+    toNotBlankString()
+        .getOrThrow()

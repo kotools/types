@@ -44,8 +44,3 @@ private constructor(private val value: String) : Comparable<NotBlankString> {
 @SinceKotools(Types, "3.2")
 public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
-
-@Throws(IllegalArgumentException::class)
-internal fun String.toNotBlankStringOrThrow(): NotBlankString =
-    toNotBlankString()
-        .getOrThrow()
