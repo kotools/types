@@ -11,6 +11,15 @@ import kotlin.test.Test
 
 class NotBlankStringTest {
     @Test
+    fun compareTo_should_pass() {
+        val x: NotBlankString = "hello".toNotBlankStringOrThrow()
+        val y: NotBlankString = "world".toNotBlankStringOrThrow()
+        val result: Int = x.compareTo(y)
+        val expectedResult: Int = "$x".compareTo("$y")
+        result assertEquals expectedResult
+    }
+
+    @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val value = "hello world"
         value.toNotBlankString()
@@ -42,6 +51,6 @@ class NotBlankStringTest {
         val value = "hello world"
         val encoded: String = Json.encodeToString(value)
         val result: NotBlankString = Json.decodeFromString(encoded)
-        result.toString() assertEquals value
+        "$result" assertEquals value
     }
 }

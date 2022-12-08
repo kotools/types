@@ -13,7 +13,7 @@ import kotlin.jvm.JvmInline
 @Serializable
 @SinceKotools(Types, "3.2")
 public value class NotBlankString
-private constructor(private val value: String) {
+private constructor(private val value: String) : Comparable<NotBlankString> {
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
             .takeIf(String::isNotBlank)
@@ -23,6 +23,15 @@ private constructor(private val value: String) {
                 IllegalArgumentException("Given string shouldn't be blank.")
             )
     }
+
+    /**
+     * Compares this string lexicographically with the [other] one for order.
+     * Returns zero if this string equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    override fun compareTo(other: NotBlankString): Int =
+        value.compareTo(other.value)
 
     /** Returns this value as a [String]. */
     override fun toString(): String = value
@@ -35,3 +44,8 @@ private constructor(private val value: String) {
 @SinceKotools(Types, "3.2")
 public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
+
+@Throws(IllegalArgumentException::class)
+internal fun String.toNotBlankStringOrThrow(): NotBlankString =
+    toNotBlankString()
+        .getOrThrow()
