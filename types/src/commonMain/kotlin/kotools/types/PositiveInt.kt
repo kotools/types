@@ -3,6 +3,7 @@ package kotools.types
 import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
+import kotools.shared.StabilityLevel
 import kotools.types.number.aPositiveNumber
 import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
@@ -10,7 +11,7 @@ import kotlin.jvm.JvmInline
 /** Representation of positive integers, including zero. */
 @JvmInline
 @Serializable
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public value class PositiveInt
 private constructor(private val value: Int) : Comparable<PositiveInt>,
     ExplicitInt {
@@ -52,7 +53,7 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
  * Returns this integer incremented by one, or [PositiveInt.min] if this integer
  * equals [PositiveInt.max].
  */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun PositiveInt.inc(): PositiveInt =
     if (toInt() == PositiveInt.max.toInt()) PositiveInt.min
     else (this + 1).toPositiveInt().getOrThrow()
@@ -61,13 +62,13 @@ public operator fun PositiveInt.inc(): PositiveInt =
  * Returns this integer decremented by one, or [PositiveInt.max] if this integer
  * equals [PositiveInt.min].
  */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun PositiveInt.dec(): PositiveInt =
     if (toInt() == PositiveInt.min.toInt()) PositiveInt.max
     else (this - 1).toPositiveInt().getOrThrow()
 
 /** Returns the negative of this integer. */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun PositiveInt.unaryMinus(): NegativeInt = (-toInt())
     .toNegativeInt()
     .getOrThrow()
@@ -76,5 +77,5 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt = (-toInt())
  * Returns this integer as a [PositiveInt], or an [IllegalArgumentException] if
  * this integer is strictly negative.
  */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toPositiveInt(): Result<PositiveInt> = PositiveInt of this
