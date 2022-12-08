@@ -125,13 +125,6 @@ public value class NonZeroInt private constructor(private val value: Int) :
 public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
 /**
- * Returns the remainder of truncating division of this integer by the [other]
- * one.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
-
-/**
  * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException] if
  * this integer equals zero.
  */
