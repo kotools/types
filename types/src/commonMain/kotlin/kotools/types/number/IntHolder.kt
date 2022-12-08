@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package kotools.types.number
 
 import kotlinx.serialization.KSerializer
@@ -9,7 +7,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
-import kotools.types.Package
 
 // ---------- Binary operations ----------
 
@@ -19,59 +16,23 @@ import kotools.types.Package
  * this value is less than the [other] value, or a positive number if this value
  * is greater than the [other] value.
  */
-@Deprecated(
-    "Use the Int.compareTo(ExplicitInt) function instead.",
-    ReplaceWith(
-        "this.compareTo(other.value.toNonZeroInt().getOrThrow())",
-        "${Package.root}.compareTo",
-        "${Package.root}.toNonZeroInt"
-    )
-)
 @SinceKotools(Types, "3.0")
 public operator fun Int.compareTo(other: IntHolder): Int =
     compareTo(other.value)
 
 /** Adds the [other] value to this value. */
-@Deprecated(
-    "Use the Int.plus(ExplicitInt) function instead.",
-    ReplaceWith(
-        "this + other.value.toNonZeroInt().getOrThrow()",
-        "${Package.root}.plus",
-        "${Package.root}.toNonZeroInt"
-    )
-)
 @SinceKotools(Types, "3.0")
 public operator fun Int.plus(other: IntHolder): Int = plus(other.value)
 
 /** Subtracts the [other] value from this value. */
-@Deprecated(
-    "Use the Int.minus(ExplicitInt) function instead.",
-    ReplaceWith(
-        "this - other.value.toNonZeroInt().getOrThrow()",
-        "${Package.root}.minus",
-        "${Package.root}.toNonZeroInt"
-    )
-)
 @SinceKotools(Types, "3.0")
 public operator fun Int.minus(other: IntHolder): Int = minus(other.value)
 
 /** Multiplies this value by the [other] value. */
-@Deprecated(
-    "Use the Int.times(ExplicitInt) function instead.",
-    ReplaceWith(
-        "this * other.value.toNonZeroInt().getOrThrow()",
-        "${Package.root}.times",
-        "${Package.root}.toNonZeroInt"
-    )
-)
 @SinceKotools(Types, "3.0")
 public operator fun Int.times(other: IntHolder): Int = times(other.value)
 
 /** Parent of classes responsible for holding integers. */
-@Deprecated(
-    "Use the ExplicitInt type instead.",
-    ReplaceWith("ExplicitInt", "${Package.root}.ExplicitInt")
-)
 @SinceKotools(Types, "3.0")
 public sealed interface IntHolder : Comparable<IntHolder> {
     /** The value to hold. */
