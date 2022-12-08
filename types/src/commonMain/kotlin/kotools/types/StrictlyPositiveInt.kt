@@ -27,12 +27,6 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
             ?.let(::StrictlyPositiveInt)
             ?.let(Result.Companion::success)
             ?: Result.failure(value shouldBe aStrictlyPositiveNumber)
-
-        /** Returns a random [StrictlyPositiveInt]. */
-        public fun random(): StrictlyPositiveInt = range.random()
-            .toStrictlyPositiveInt()
-            .getOrThrow()
-
     }
 
     /**
