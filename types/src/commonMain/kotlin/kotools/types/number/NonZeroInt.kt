@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
@@ -102,6 +104,10 @@ public fun randomNonZeroInt(): NonZeroInt = NonZeroInt.ranges.random()
 public operator fun Int.div(other: NonZeroInt): Int = div(other.value)
 
 /** Representation of integers other than zero. */
+@Deprecated(
+    "Use the ${Package.root}.NonZeroInt type instead.",
+    ReplaceWith("NonZeroInt", "${Package.root}.NonZeroInt")
+)
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotools(Types, "1.1")
 public sealed interface NonZeroInt : IntHolder {
