@@ -28,6 +28,14 @@ private constructor(private val value: Int) : Comparable<PositiveInt>,
      */
     override fun compareTo(other: PositiveInt): Int = compareTo(other.value)
 
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * this integer is less than the [other] one, or a positive number if
+     * this integer is greater than the [other] one.
+     */
+    public operator fun compareTo(other: Int): Int = value.compareTo(other)
+
     override fun toInt(): Int = value
 }
 

@@ -100,5 +100,13 @@ public fun Int.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  * that is closer to zero.
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun ExplicitInt.div(other: StrictlyPositiveInt): Int =
+    toInt() / other
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun Int.div(other: StrictlyPositiveInt): Int =
     this / other.toInt()
