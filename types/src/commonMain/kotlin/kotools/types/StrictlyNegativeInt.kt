@@ -30,9 +30,6 @@ private constructor(private val value: Int) : Comparable<StrictlyNegativeInt>,
     override fun compareTo(other: StrictlyNegativeInt): Int =
         value.compareTo(other.value)
 
-    internal fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
-        .getOrThrow()
-
     override fun toInt(): Int = value
 }
 

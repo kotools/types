@@ -77,18 +77,4 @@ class StrictlyPositiveIntTest {
         val result: StrictlyNegativeInt = -x
         result.toInt() assertEquals -x.toInt()
     }
-
-    // ---------- StrictlyPositiveInt.times(NonZeroInt) ----------
-
-    @Test
-    fun times_should_pass_with_a_NonZeroInt() {
-        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        val y: NonZeroInt = listOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
-            .random()
-            .random()
-            .toNonZeroInt()
-            .getOrThrow()
-        val result: NonZeroInt = x * y
-        result.toInt() assertEquals x.toInt() * y.toInt()
-    }
 }
