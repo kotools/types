@@ -2,13 +2,14 @@ package kotools.types
 
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
+import kotools.shared.StabilityLevel
 import kotools.types.number.aNegativeNumber
 import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
 
 /** Representation of negative integers, including zero. */
 @JvmInline
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public value class NegativeInt private constructor(private val value: Int) :
     Comparable<NegativeInt>,
     ExplicitInt {
@@ -47,7 +48,7 @@ public value class NegativeInt private constructor(private val value: Int) :
 }
 
 /** Returns the negative of this integer. */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun NegativeInt.unaryMinus(): PositiveInt = (-toInt())
     .toPositiveInt()
     .getOrThrow()
@@ -56,5 +57,5 @@ public operator fun NegativeInt.unaryMinus(): PositiveInt = (-toInt())
  * Returns this integer as a [NegativeInt], or an [IllegalArgumentException] if
  * this integer is strictly positive.
  */
-@SinceKotools(Types, "3.2")
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toNegativeInt(): Result<NegativeInt> = NegativeInt of this
