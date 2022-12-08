@@ -3,8 +3,6 @@ package kotools.types
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.shared.StabilityLevel
-import kotools.types.number.otherThanZero
-import kotools.types.number.shouldBe
 import kotlin.jvm.JvmInline
 
 /** Representation of integers other than zero. */
@@ -17,7 +15,9 @@ public value class NonZeroInt private constructor(private val value: Int) :
         infix fun of(value: Int): Result<NonZeroInt> = value.takeIf { it != 0 }
             ?.let(::NonZeroInt)
             ?.let(Result.Companion::success)
-            ?: Result.failure(value shouldBe otherThanZero)
+            ?: Result.failure(
+                IllegalArgumentException("Given integer shouldn't equal 0.")
+            )
     }
 
     /**
