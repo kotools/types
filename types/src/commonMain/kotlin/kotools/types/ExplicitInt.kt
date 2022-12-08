@@ -8,4 +8,7 @@ import kotools.shared.SinceKotools
 public sealed interface ExplicitInt {
     /** Returns this value as an [Int]. */
     public fun toInt(): Int
+
+    /** Returns this value as a [String]. */
+    override fun toString(): String
 }

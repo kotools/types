@@ -37,7 +37,6 @@ private constructor(private val value: Int) : ExplicitInt,
 
     override fun toInt(): Int = value
 
-    /** Returns this value as a [String]. */
     override fun toString(): String = "$value"
 
     internal companion object {

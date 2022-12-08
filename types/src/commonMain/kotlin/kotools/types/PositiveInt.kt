@@ -20,6 +20,8 @@ public value class PositiveInt
 private constructor(private val value: Int) : ExplicitInt {
     override fun toInt(): Int = value
 
+    override fun toString(): String = "$value"
+
     internal companion object {
         infix fun of(value: Int): Result<PositiveInt> = value.takeIf { it >= 0 }
             ?.toSuccessfulResult(::PositiveInt)
