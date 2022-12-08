@@ -1,11 +1,6 @@
 package kotools.types
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.types.number.otherThanZero
@@ -39,20 +34,8 @@ private constructor(private val value: Int) : ExplicitInt,
     override fun toString(): String = "$value"
 }
 
-internal object NonZeroIntSerializer : KSerializer<NonZeroInt> {
-    private val delegate: KSerializer<Int> = Int.serializer()
-    override val descriptor: SerialDescriptor = delegate.descriptor
-
-    override fun serialize(encoder: Encoder, value: NonZeroInt) {
-        val intValue: Int = value.toInt()
-        delegate.serialize(encoder, intValue)
-    }
-
-    override fun deserialize(decoder: Decoder): NonZeroInt = delegate
-        .deserialize(decoder)
-        .toNonZeroInt()
-        .getOrThrow()
-}
+internal object NonZeroIntSerializer :
+    ExplicitIntSerializer<NonZeroInt>(Int::toNonZeroInt)
 
 /**
  * Returns this integer as a [NonZeroInt], or [IllegalArgumentException] if this

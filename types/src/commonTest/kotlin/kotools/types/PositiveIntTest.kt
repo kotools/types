@@ -1,5 +1,8 @@
 package kotools.types
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
@@ -14,6 +17,33 @@ class PositiveIntTest {
         val value: Int = Random.nextInt(0..Int.MAX_VALUE)
         value.toPositiveIntOrThrow()
             .toString() assertEquals "$value"
+    }
+
+    @Test
+    fun serialization_should_behave_like_an_Int() {
+        val value: Int = Random.nextInt(0..Int.MAX_VALUE)
+        val x: PositiveInt = value.toPositiveIntOrThrow()
+        val result: String = Json.encodeToString(x)
+        result assertEquals Json.encodeToString(value)
+    }
+
+    @Test
+    fun deserialization_should_pass_with_a_positive_Int() {
+        val value: Int = Random.nextInt(0..Int.MAX_VALUE)
+        val encoded: String = Json.encodeToString(value)
+        val result: PositiveInt = Json.decodeFromString(encoded)
+        result.toInt() assertEquals value
+    }
+
+    @Test
+    fun deserialization_should_fail_with_a_strictly_negative_Int() {
+        val value: Int = Random.nextInt(Int.MIN_VALUE..-1)
+        val encoded: String = Json.encodeToString(value)
+        val exception: IllegalArgumentException =
+            assertFailsWith { Json.decodeFromString<PositiveInt>(encoded) }
+        exception.message.assertNotNull()
+            .isNotBlank()
+            .assertTrue()
     }
 
     @Test
