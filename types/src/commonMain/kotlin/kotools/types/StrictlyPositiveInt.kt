@@ -35,6 +35,25 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     }
 
     /**
+     * Returns this integer incremented by one, or [StrictlyPositiveInt.min] if
+     * this integer equals [StrictlyPositiveInt.max].
+     */
+    public operator fun inc(): StrictlyPositiveInt = if (value == max.value) min
+    else of(value + 1).getOrThrow()
+
+    /**
+     * Returns this integer decremented by one, or [StrictlyPositiveInt.max] if
+     * this integer equals [StrictlyPositiveInt.min].
+     */
+    public operator fun dec(): StrictlyPositiveInt = if (value == min.value) max
+    else of(value - 1).getOrThrow()
+
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): StrictlyNegativeInt = StrictlyNegativeInt
+        .of(-value)
+        .getOrThrow()
+
+    /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * this integer is less than the [other] one, or a positive number if
@@ -43,58 +62,29 @@ private constructor(private val value: Int) : Comparable<StrictlyPositiveInt>,
     override fun compareTo(other: StrictlyPositiveInt): Int =
         value.compareTo(other.value)
 
+    /** Multiplies this integer by the [other] one. */
+    public operator fun times(other: StrictlyPositiveInt): NonZeroInt =
+        this * other.toNonZeroInt()
+
+    /** Multiplies this integer by the [other] one. */
+    public operator fun times(other: StrictlyNegativeInt): NonZeroInt =
+        this * other.toNonZeroInt()
+
+    /** Multiplies this integer by the [other] one. */
+    public operator fun times(other: NonZeroInt): NonZeroInt = NonZeroInt
+        .of(value * other)
+        .getOrThrow()
+
+    internal fun toPositiveInt(): PositiveInt = value.toPositiveInt()
+        .getOrThrow()
+
+    private fun toNonZeroInt(): NonZeroInt = value.toNonZeroInt()
+        .getOrThrow()
+
     override fun toInt(): Int = value
 
     override fun toString(): String = "$value"
 }
-
-/**
- * Returns this integer incremented by one, or [StrictlyPositiveInt.min] if this
- * integer equals [StrictlyPositiveInt.max].
- */
-@SinceKotools(Types, "3.2")
-public operator fun StrictlyPositiveInt.inc(): StrictlyPositiveInt =
-    if (toInt() == StrictlyPositiveInt.max.toInt()) StrictlyPositiveInt.min
-    else (this + 1)
-        .toStrictlyPositiveInt()
-        .getOrThrow()
-
-/**
- * Returns this integer decremented by one, or [StrictlyPositiveInt.max] if this
- * integer equals [StrictlyPositiveInt.min].
- */
-@SinceKotools(Types, "3.2")
-public operator fun StrictlyPositiveInt.dec(): StrictlyPositiveInt =
-    if (toInt() == StrictlyPositiveInt.min.toInt()) StrictlyPositiveInt.max
-    else (this - 1)
-        .toStrictlyPositiveInt()
-        .getOrThrow()
-
-/** Returns the negative of this integer. */
-@SinceKotools(Types, "3.2")
-public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt =
-    (-toInt())
-        .toStrictlyNegativeInt()
-        .getOrThrow()
-
-/** Multiplies this integer by the [other] one. */
-@SinceKotools(Types, "3.2")
-public operator fun StrictlyPositiveInt.times(other: NonZeroInt): NonZeroInt =
-    (toInt() * other)
-        .toNonZeroInt()
-        .getOrThrow()
-
-/** Multiplies this integer by the [other] one. */
-@SinceKotools(Types, "3.2")
-public operator fun StrictlyPositiveInt.times(
-    other: StrictlyPositiveInt
-): NonZeroInt = this * other.toNonZeroInt()
-
-/** Multiplies this integer by the [other] one. */
-@SinceKotools(Types, "3.2")
-public operator fun StrictlyPositiveInt.times(
-    other: StrictlyNegativeInt
-): NonZeroInt = this * other.toNonZeroInt()
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer
@@ -103,14 +93,6 @@ public operator fun StrictlyPositiveInt.times(
 @SinceKotools(Types, "3.2")
 public operator fun Int.div(other: StrictlyPositiveInt): Int =
     this / other.toInt()
-
-internal fun StrictlyPositiveInt.toNonZeroInt(): NonZeroInt = toInt()
-    .toNonZeroInt()
-    .getOrThrow()
-
-internal fun StrictlyPositiveInt.toPositiveInt(): PositiveInt = toInt()
-    .toPositiveInt()
-    .getOrThrow()
 
 /**
  * Returns this integer as a [StrictlyPositiveInt], or an
