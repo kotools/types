@@ -1,5 +1,6 @@
 package kotools.types
 
+import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotlin.jvm.JvmInline
@@ -9,6 +10,7 @@ import kotlin.jvm.JvmInline
  * whitespaces.
  */
 @JvmInline
+@Serializable
 @SinceKotools(Types, "3.2")
 public value class NotBlankString
 private constructor(private val value: String) {
