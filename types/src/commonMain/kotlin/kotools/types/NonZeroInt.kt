@@ -59,7 +59,8 @@ public value class NonZeroInt private constructor(private val value: Int) :
         else -> of(value - 1).getOrThrow()
     }
 
-    override fun unaryMinus(): NonZeroInt = of(-value).getOrThrow()
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): NonZeroInt = of(-value).getOrThrow()
 
     /**
      * Compares this integer with the [other] one for order.

@@ -7,9 +7,6 @@ import kotools.shared.StabilityLevel
 /** Representation of explicit integers. */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public sealed interface ExplicitInt {
-    /** Returns the negative of this integer. */
-    public operator fun unaryMinus(): ExplicitInt
-
     /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
