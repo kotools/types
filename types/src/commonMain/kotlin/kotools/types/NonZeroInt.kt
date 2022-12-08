@@ -1,5 +1,11 @@
 package kotools.types
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.types.number.otherThanZero
@@ -15,6 +21,7 @@ public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
 
 /** Representation of integers other than zero. */
 @JvmInline
+@Serializable(NonZeroIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class NonZeroInt private constructor(private val value: Int) {
     /** Returns this value as an [Int]. */
@@ -28,4 +35,19 @@ public value class NonZeroInt private constructor(private val value: Int) {
             ?.toSuccessfulResult(::NonZeroInt)
             ?: Result.failure(value shouldBe otherThanZero)
     }
+}
+
+internal object NonZeroIntSerializer : KSerializer<NonZeroInt> {
+    private val delegate: KSerializer<Int> = Int.serializer()
+    override val descriptor: SerialDescriptor = delegate.descriptor
+
+    override fun serialize(encoder: Encoder, value: NonZeroInt) {
+        val intValue: Int = value.toInt()
+        delegate.serialize(encoder, intValue)
+    }
+
+    override fun deserialize(decoder: Decoder): NonZeroInt = delegate
+        .deserialize(decoder)
+        .toNonZeroInt()
+        .getOrThrow()
 }
