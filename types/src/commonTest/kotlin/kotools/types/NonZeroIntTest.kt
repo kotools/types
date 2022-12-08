@@ -10,6 +10,10 @@ import kotools.assert.assertTrue
 import kotlin.random.Random
 import kotlin.test.Test
 
+@Throws(IllegalArgumentException::class)
+private fun Int.toNonZeroIntOrThrow(): NonZeroInt = toNonZeroInt()
+    .getOrThrow()
+
 class NonZeroIntTest {
     @Test
     fun int_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
@@ -81,7 +85,3 @@ class NonZeroIntTest {
             .assertTrue()
     }
 }
-
-@Throws(IllegalArgumentException::class)
-private fun Int.toNonZeroIntOrThrow(): NonZeroInt = toNonZeroInt()
-    .getOrThrow()
