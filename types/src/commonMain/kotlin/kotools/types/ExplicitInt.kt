@@ -40,16 +40,3 @@ public operator fun ExplicitInt.compareTo(other: Int): Int = toInt()
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public operator fun Int.compareTo(other: ExplicitInt): Int =
     compareTo(other.toInt())
-
-/** Adds the [other] integer to this one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun ExplicitInt.plus(other: ExplicitInt): Int =
-    this + other.toInt()
-
-/** Adds the [other] integer to this one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun ExplicitInt.plus(other: Int): Int = toInt() + other
-
-/** Adds the [other] integer to this one. */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Int.plus(other: ExplicitInt): Int = this + other.toInt()
