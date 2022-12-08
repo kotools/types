@@ -26,17 +26,11 @@ public value class NonZeroInt private constructor(private val value: Int) :
      * this integer is less than the [other] one, or a positive number if
      * this integer is greater than the [other] one.
      */
-    override fun compareTo(other: NonZeroInt): Int = compareTo(other.value)
+    override fun compareTo(other: NonZeroInt): Int =
+        value.compareTo(other.value)
 
     override fun toInt(): Int = value
 }
-
-/**
- * Divides this integer by the [other] one, truncating the result to an integer
- * that is closer to zero.
- */
-@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
-public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
 /**
  * Returns this integer as a [NonZeroInt], or an [IllegalArgumentException] if
@@ -44,3 +38,10 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
  */
 @SinceKotools(Types, "3.2", StabilityLevel.Alpha)
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = NonZeroInt of this
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to zero.
+ */
+@SinceKotools(Types, "3.2", StabilityLevel.Alpha)
+public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
