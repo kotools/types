@@ -17,17 +17,16 @@ class PositiveIntTest {
         val x: PositiveInt = PositiveInt.random()
         val y: PositiveInt = PositiveInt.random()
         val result: Int = x.compareTo(y)
-        val expectedResult: Int = x.toInt()
-            .compareTo(y.toInt())
-        result assertEquals expectedResult
+        val xValue: Int = x.toInt()
+        val yValue: Int = y.toInt()
+        result assertEquals xValue.compareTo(yValue)
     }
 
     @Test
     fun toString_should_behave_like_an_Int() {
         val x: PositiveInt = PositiveInt.random()
-        val expectedResult: String = x.toInt()
-            .toString()
-        "$x" assertEquals expectedResult
+        val value: Int = x.toInt()
+        "$x" assertEquals "$value"
     }
 
     @Test
@@ -40,8 +39,7 @@ class PositiveIntTest {
 
     @Test
     fun deserialization_should_pass_with_a_positive_Int() {
-        val value: Int = PositiveInt.random()
-            .toInt()
+        val value: Int = PositiveInt.range.random()
         val encoded: String = Json.encodeToString(value)
         val result: PositiveInt = Json.decodeFromString(encoded)
         result.toInt() assertEquals value
@@ -60,7 +58,7 @@ class PositiveIntTest {
 
     @Test
     fun int_toPositiveInt_should_pass_with_a_positive_Int() {
-        val value: Int = Random.nextInt(PositiveInt.range)
+        val value: Int = PositiveInt.range.random()
         value.toPositiveInt()
             .getOrThrow()
             .toInt() assertEquals value
@@ -77,12 +75,3 @@ class PositiveIntTest {
             .assertTrue()
     }
 }
-
-private val PositiveInt.Companion.range: IntRange by lazy { 0..Int.MAX_VALUE }
-
-private fun PositiveInt.Companion.random(): PositiveInt = Random.nextInt(range)
-    .toPositiveIntOrThrow()
-
-@Throws(IllegalArgumentException::class)
-private fun Int.toPositiveIntOrThrow(): PositiveInt = toPositiveInt()
-    .getOrThrow()

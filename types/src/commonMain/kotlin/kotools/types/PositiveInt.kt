@@ -15,9 +15,15 @@ public value class PositiveInt
 private constructor(private val value: Int) : ExplicitInt,
     Comparable<PositiveInt> {
     internal companion object {
+        val range: IntRange by lazy { 0..Int.MAX_VALUE }
+
         infix fun of(value: Int): Result<PositiveInt> = value.takeIf { it >= 0 }
             ?.toSuccessfulResult(::PositiveInt)
             ?: Result.failure(value shouldBe aPositiveNumber)
+
+        fun random(): PositiveInt = range.random()
+            .toPositiveInt()
+            .getOrThrow()
     }
 
     /**
