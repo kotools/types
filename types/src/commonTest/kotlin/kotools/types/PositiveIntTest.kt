@@ -7,8 +7,6 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertTrue
-import kotlin.random.Random
-import kotlin.random.nextInt
 import kotlin.test.Test
 
 class PositiveIntTest {
@@ -47,7 +45,7 @@ class PositiveIntTest {
 
     @Test
     fun deserialization_should_fail_with_a_strictly_negative_Int() {
-        val value: Int = Random.nextInt(Int.MIN_VALUE..-1)
+        val value: Int = StrictlyNegativeInt.range.random()
         val encoded: String = Json.encodeToString(value)
         val exception: IllegalArgumentException =
             assertFailsWith { Json.decodeFromString<PositiveInt>(encoded) }
@@ -66,7 +64,7 @@ class PositiveIntTest {
 
     @Test
     fun int_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
-        val result: Result<PositiveInt> = Random.nextInt(Int.MIN_VALUE..-1)
+        val result: Result<PositiveInt> = StrictlyNegativeInt.range.random()
             .toPositiveInt()
         assertFailsWith<IllegalArgumentException>(result::getOrThrow)
             .message

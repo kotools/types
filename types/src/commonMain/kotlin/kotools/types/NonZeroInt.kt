@@ -16,7 +16,7 @@ private constructor(private val value: Int) : ExplicitInt,
     Comparable<NonZeroInt> {
     internal companion object {
         val ranges: Set<IntRange> by lazy {
-            setOf(StrictlyPositiveInt.range, Int.MIN_VALUE..-1)
+            setOf(StrictlyPositiveInt.range, StrictlyNegativeInt.range)
         }
 
         infix fun of(value: Int): Result<NonZeroInt> = value.takeIf { it != 0 }
