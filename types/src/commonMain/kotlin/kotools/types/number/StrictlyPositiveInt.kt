@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.number
 
 import kotlinx.serialization.Serializable
@@ -103,6 +105,10 @@ public fun randomStrictlyPositiveInt(): StrictlyPositiveInt =
         .toStrictlyPositiveIntOrThrow()
 
 /** Representation of strictly positive integers, excluding zero. */
+@Deprecated(
+    "Use the ${Package.root}.StrictlyPositiveInt type instead.",
+    ReplaceWith("StrictlyPositiveInt", "${Package.root}.StrictlyPositiveInt")
+)
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotools(Types, "1.1")
 public sealed interface StrictlyPositiveInt : NonZeroInt,
