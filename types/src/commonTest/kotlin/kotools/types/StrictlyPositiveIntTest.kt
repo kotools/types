@@ -11,6 +11,16 @@ import kotlin.test.Test
 
 class StrictlyPositiveIntTest {
     @Test
+    fun compareTo_should_pass() {
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val result: Int = x.compareTo(y)
+        val xValue: Int = x.toInt()
+        val yValue: Int = y.toInt()
+        result assertEquals xValue.compareTo(yValue)
+    }
+
+    @Test
     fun toString_should_behave_like_an_Int() {
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
         "$x" assertEquals x.toInt()

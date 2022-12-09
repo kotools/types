@@ -12,7 +12,8 @@ import kotlin.jvm.JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class StrictlyPositiveInt
-private constructor(private val value: Int) : ExplicitInt {
+private constructor(private val value: Int) : ExplicitInt,
+    Comparable<StrictlyPositiveInt> {
     internal companion object {
         val range: IntRange by lazy { 1..Int.MAX_VALUE }
 
@@ -25,6 +26,15 @@ private constructor(private val value: Int) : ExplicitInt {
             .toStrictlyPositiveInt()
             .getOrThrow()
     }
+
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    override fun compareTo(other: StrictlyPositiveInt): Int =
+        value.compareTo(other.value)
 
     override fun toInt(): Int = value
     override fun toString(): String = "$value"
