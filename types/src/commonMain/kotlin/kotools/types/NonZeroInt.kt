@@ -15,9 +15,18 @@ public value class NonZeroInt
 private constructor(private val value: Int) : ExplicitInt,
     Comparable<NonZeroInt> {
     internal companion object {
+        val ranges: Set<IntRange> by lazy {
+            setOf(StrictlyPositiveInt.range, Int.MIN_VALUE..-1)
+        }
+
         infix fun of(value: Int): Result<NonZeroInt> = value.takeIf { it != 0 }
             ?.toSuccessfulResult(::NonZeroInt)
             ?: Result.failure(value shouldBe otherThanZero)
+
+        fun random(): NonZeroInt = ranges.random()
+            .random()
+            .toNonZeroInt()
+            .getOrThrow()
     }
 
     /**
