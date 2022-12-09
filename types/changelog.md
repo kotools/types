@@ -29,7 +29,9 @@ All notable changes to this project will be documented in this file.
     - `PositiveInt` ([#105](https://github.com/kotools/libraries/issues/105))
     - `NegativeInt` ([#106](https://github.com/kotools/libraries/issues/106))
     - `StrictlyPositiveInt`
-      ([#107](https://github.com/kotools/libraries/issues/107)).
+      ([#107](https://github.com/kotools/libraries/issues/107))
+    - `StrictlyNegativeInt`
+      ([#108](https://github.com/kotools/libraries/issues/108)).
 
 #### Changed
 
@@ -55,9 +57,11 @@ All notable changes to this project will be documented in this file.
 - The following types from the `kotools.types.number` package:
     - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104))
     - `PositiveInt` ([#105](https://github.com/kotools/libraries/issues/105))
-    - `NegativeInt` ([#106](https://github.com/kotools/libraries/issues/106)).
+    - `NegativeInt` ([#106](https://github.com/kotools/libraries/issues/106))
     - `StrictlyPositiveInt`
-      ([#107](https://github.com/kotools/libraries/issues/107)).
+      ([#107](https://github.com/kotools/libraries/issues/107))
+    - `StrictlyNegativeInt`
+      ([#108](https://github.com/kotools/libraries/issues/108)).
 
 ## Version 3.1.1 - 2022/11/18
 
