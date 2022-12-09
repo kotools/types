@@ -20,6 +20,10 @@ private constructor(private val value: Int) : ExplicitInt,
         infix fun of(value: Int): Result<NegativeInt> = value.takeIf { it <= 0 }
             ?.toSuccessfulResult(::NegativeInt)
             ?: Result.failure(value shouldBe aNegativeNumber)
+
+        fun random(): NegativeInt = range.random()
+            .toNegativeInt()
+            .getOrThrow()
     }
 
     /**

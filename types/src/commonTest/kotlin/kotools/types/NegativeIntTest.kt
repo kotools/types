@@ -7,8 +7,6 @@ import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertTrue
-import kotlin.random.Random
-import kotlin.random.nextInt
 import kotlin.test.Test
 
 class NegativeIntTest {
@@ -16,23 +14,21 @@ class NegativeIntTest {
     fun compareTo_should_pass() {
         val x: NegativeInt = NegativeInt.random()
         val y: NegativeInt = NegativeInt.random()
-        val result: Int = x.compareTo(y)
-        val expectedResult: Int = x.toInt()
-            .compareTo(y.toInt())
-        result assertEquals expectedResult
+        val xValue: Int = x.toInt()
+        val yValue: Int = y.toInt()
+        x.compareTo(y) assertEquals xValue.compareTo(yValue)
     }
 
     @Test
     fun toString_should_pass() {
-        val value: Int = Random.nextInt(NegativeInt.range)
-        value.toNegativeInt()
-            .getOrThrow()
-            .toString() assertEquals "$value"
+        val x: NegativeInt = NegativeInt.random()
+        val value: Int = x.toInt()
+        "$x" assertEquals "$value"
     }
 
     @Test
     fun int_toNegativeInt_should_pass_with_a_negative_Int() {
-        val value: Int = Random.nextInt(NegativeInt.range)
+        val value: Int = NegativeInt.range.random()
         value.toNegativeInt()
             .getOrThrow()
             .toInt() assertEquals value
@@ -58,7 +54,7 @@ class NegativeIntTest {
 
     @Test
     fun deserialization_should_pass_with_a_negative_Int() {
-        val value: Int = Random.nextInt(NegativeInt.range)
+        val value: Int = NegativeInt.range.random()
         val encoded: String = Json.encodeToString(value)
         val result: NegativeInt = Json.decodeFromString(encoded)
         result.toInt() assertEquals value
@@ -66,7 +62,7 @@ class NegativeIntTest {
 
     @Test
     fun deserialization_should_fail_with_a_strictly_positive_Int() {
-        val value: Int = Random.nextInt(StrictlyPositiveInt.range)
+        val value: Int = StrictlyPositiveInt.range.random()
         val encoded: String = Json.encodeToString(value)
         val exception: IllegalArgumentException =
             assertFailsWith { Json.decodeFromString<NegativeInt>(encoded) }
@@ -75,7 +71,3 @@ class NegativeIntTest {
             .assertTrue()
     }
 }
-
-private fun NegativeInt.Companion.random(): NegativeInt = Random.nextInt(range)
-    .toNegativeInt()
-    .getOrThrow()
