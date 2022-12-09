@@ -1,5 +1,6 @@
 package kotools.types
 
+import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.types.number.aNegativeNumber
@@ -8,6 +9,7 @@ import kotlin.jvm.JvmInline
 
 /** Representation of negative integers, including zero. */
 @JvmInline
+@Serializable(NegativeIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class NegativeInt
 private constructor(private val value: Int) : ExplicitInt {
@@ -20,6 +22,9 @@ private constructor(private val value: Int) : ExplicitInt {
     override fun toInt(): Int = value
     override fun toString(): String = "$value"
 }
+
+internal object NegativeIntSerializer :
+    ExplicitIntSerializer<NegativeInt>(Int::toNegativeInt)
 
 /**
  * Returns this integer as a [NegativeInt], or [IllegalArgumentException] if
