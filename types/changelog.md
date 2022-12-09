@@ -27,7 +27,9 @@ All notable changes to this project will be documented in this file.
     - `NotBlankString` ([#103](https://github.com/kotools/libraries/issues/103))
     - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104))
     - `PositiveInt` ([#105](https://github.com/kotools/libraries/issues/105))
-    - `NegativeInt` ([#106](https://github.com/kotools/libraries/issues/106)).
+    - `NegativeInt` ([#106](https://github.com/kotools/libraries/issues/106))
+    - `StrictlyPositiveInt`
+      ([#107](https://github.com/kotools/libraries/issues/107)).
 
 #### Changed
 
@@ -54,6 +56,8 @@ All notable changes to this project will be documented in this file.
     - `NonZeroInt` ([#104](https://github.com/kotools/libraries/issues/104))
     - `PositiveInt` ([#105](https://github.com/kotools/libraries/issues/105))
     - `NegativeInt` ([#106](https://github.com/kotools/libraries/issues/106)).
+    - `StrictlyPositiveInt`
+      ([#107](https://github.com/kotools/libraries/issues/107)).
 
 ## Version 3.1.1 - 2022/11/18
 
