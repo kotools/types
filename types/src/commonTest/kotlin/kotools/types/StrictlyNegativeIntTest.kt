@@ -11,6 +11,23 @@ import kotlin.test.Test
 
 class StrictlyNegativeIntTest {
     @Test
+    fun compareTo_should_pass() {
+        val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val result: Int = x.compareTo(y)
+        val xValue: Int = x.toInt()
+        val yValue: Int = y.toInt()
+        result assertEquals xValue.compareTo(yValue)
+    }
+
+    @Test
+    fun toString_should_behave_like_an_Int() {
+        val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val value: Int = x.toInt()
+        "$x" assertEquals "$value"
+    }
+
+    @Test
     fun int_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
         val value: Int = StrictlyNegativeInt.range.random()
         value.toStrictlyNegativeInt()

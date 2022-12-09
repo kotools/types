@@ -12,7 +12,8 @@ import kotlin.jvm.JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class StrictlyNegativeInt
-private constructor(private val value: Int) : ExplicitInt {
+private constructor(private val value: Int) : ExplicitInt,
+    Comparable<StrictlyNegativeInt> {
     internal companion object {
         val range: IntRange by lazy { Int.MIN_VALUE..-1 }
 
@@ -25,6 +26,15 @@ private constructor(private val value: Int) : ExplicitInt {
             .toStrictlyNegativeInt()
             .getOrThrow()
     }
+
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    override fun compareTo(other: StrictlyNegativeInt): Int =
+        value.compareTo(other.value)
 
     override fun toInt(): Int = value
     override fun toString(): String = "$value"
