@@ -12,12 +12,22 @@ import kotlin.jvm.JvmInline
 @Serializable(NegativeIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class NegativeInt
-private constructor(private val value: Int) : ExplicitInt {
+private constructor(private val value: Int) : ExplicitInt,
+    Comparable<NegativeInt> {
     internal companion object {
         infix fun of(value: Int): Result<NegativeInt> = value.takeIf { it <= 0 }
             ?.toSuccessfulResult(::NegativeInt)
             ?: Result.failure(value shouldBe aNegativeNumber)
     }
+
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    override fun compareTo(other: NegativeInt): Int =
+        value.compareTo(other.value)
 
     override fun toInt(): Int = value
     override fun toString(): String = "$value"

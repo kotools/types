@@ -13,6 +13,16 @@ import kotlin.test.Test
 
 class NegativeIntTest {
     @Test
+    fun compareTo_should_pass() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: NegativeInt = NegativeInt.random()
+        val result: Int = x.compareTo(y)
+        val expectedResult: Int = x.toInt()
+            .compareTo(y.toInt())
+        result assertEquals expectedResult
+    }
+
+    @Test
     fun toString_should_pass() {
         val value: Int = Random.nextInt(NegativeInt.range)
         value.toNegativeInt()
