@@ -15,6 +15,8 @@ public value class NegativeInt
 private constructor(private val value: Int) : ExplicitInt,
     Comparable<NegativeInt> {
     internal companion object {
+        val range: IntRange by lazy { Int.MIN_VALUE..0 }
+
         infix fun of(value: Int): Result<NegativeInt> = value.takeIf { it <= 0 }
             ?.toSuccessfulResult(::NegativeInt)
             ?: Result.failure(value shouldBe aNegativeNumber)

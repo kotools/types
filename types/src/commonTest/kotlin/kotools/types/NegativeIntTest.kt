@@ -40,7 +40,7 @@ class NegativeIntTest {
 
     @Test
     fun int_toNegativeInt_should_fail_with_a_strictly_positive_Int() {
-        val result: Result<NegativeInt> = Random.nextInt(1..Int.MAX_VALUE)
+        val result: Result<NegativeInt> = StrictlyPositiveInt.range.random()
             .toNegativeInt()
         assertFailsWith<IllegalArgumentException>(result::getOrThrow)
             .message
@@ -66,7 +66,7 @@ class NegativeIntTest {
 
     @Test
     fun deserialization_should_fail_with_a_strictly_positive_Int() {
-        val value: Int = Random.nextInt(1..Int.MAX_VALUE)
+        val value: Int = Random.nextInt(StrictlyPositiveInt.range)
         val encoded: String = Json.encodeToString(value)
         val exception: IllegalArgumentException =
             assertFailsWith { Json.decodeFromString<NegativeInt>(encoded) }
@@ -75,8 +75,6 @@ class NegativeIntTest {
             .assertTrue()
     }
 }
-
-private val NegativeInt.Companion.range: IntRange by lazy { Int.MIN_VALUE..0 }
 
 private fun NegativeInt.Companion.random(): NegativeInt = Random.nextInt(range)
     .toNegativeInt()
