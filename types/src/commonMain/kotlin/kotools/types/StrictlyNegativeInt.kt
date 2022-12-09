@@ -1,5 +1,6 @@
 package kotools.types
 
+import kotlinx.serialization.Serializable
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 import kotools.types.number.aStrictlyNegativeNumber
@@ -8,6 +9,7 @@ import kotlin.jvm.JvmInline
 
 /** Representation of strictly negative integers, excluding zero. */
 @JvmInline
+@Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotools(Types, "3.2")
 public value class StrictlyNegativeInt
 private constructor(private val value: Int) : ExplicitInt {
@@ -18,11 +20,18 @@ private constructor(private val value: Int) : ExplicitInt {
             .takeIf { it < 0 }
             ?.toSuccessfulResult(::StrictlyNegativeInt)
             ?: Result.failure(value shouldBe aStrictlyNegativeNumber)
+
+        fun random(): StrictlyNegativeInt = range.random()
+            .toStrictlyNegativeInt()
+            .getOrThrow()
     }
 
     override fun toInt(): Int = value
     override fun toString(): String = "$value"
 }
+
+internal object StrictlyNegativeIntSerializer :
+    ExplicitIntSerializer<StrictlyNegativeInt>(Int::toStrictlyNegativeInt)
 
 /**
  * Returns this integer as a [StrictlyNegativeInt], or
