@@ -1,5 +1,8 @@
 package kotools.types
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
@@ -50,6 +53,40 @@ class NotEmptyListTest {
         assertFailsWith<IllegalArgumentException>(result::getOrThrow)
             .message
             .assertNotNull()
+            .isNotBlank()
+            .assertTrue()
+    }
+
+    @Test
+    fun serialization_should_behave_like_a_List() {
+        val list: List<Int> = List(3) { NonZeroInt.random() }
+            .map(NonZeroInt::toInt)
+        val notEmptyList: NotEmptyList<Int> = list.toNotEmptyList()
+            .getOrThrow()
+        val result: String = Json.encodeToString(notEmptyList)
+        result assertEquals Json.encodeToString(list)
+    }
+
+    @Test
+    fun deserialization_should_pass_with_a_not_empty_Collection() {
+        val list: List<Int> = List(3) { NonZeroInt.random() }
+            .map(NonZeroInt::toInt)
+        val encoded: String = Json.encodeToString(list)
+        val result: NotEmptyList<Int> = Json.decodeFromString(encoded)
+        result.size assertEquals list.size
+        result.forEachIndexed { index: Int, element: Int ->
+            element assertEquals list[index]
+        }
+    }
+
+    @Test
+    fun deserialization_should_fail_with_an_empty_Collection() {
+        val list: List<Int> = emptyList()
+        val encoded: String = Json.encodeToString(list)
+        val exception: IllegalArgumentException = assertFailsWith {
+            Json.decodeFromString<NotEmptyList<Int>>(encoded)
+        }
+        exception.message.assertNotNull()
             .isNotBlank()
             .assertTrue()
     }
