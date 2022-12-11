@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.collections
 
 import kotlinx.serialization.KSerializer
@@ -25,13 +27,11 @@ import kotools.types.Package
     )
 )
 @SinceKotools(Types, "1.3")
-@Suppress("FunctionName")
 public fun <E> NotEmptyList(head: E, vararg tail: E): NotEmptyList<E> {
     val list: List<E> = tail.toList()
     return NotEmptyList(head, list)
 }
 
-@Suppress("FunctionName")
 private fun <E> NotEmptyList(head: E, tail: List<E>): NotEmptyList<E> {
     val list: List<E> = listOf(head) + tail
     return NotEmptyListImplementation(list)
@@ -149,6 +149,10 @@ public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> =
  *
  * @param E The type of elements contained in this list.
  */
+@Deprecated(
+    "Use the ${Package.root}.NotEmptyList type instead.",
+    ReplaceWith("NotEmptyList", "${Package.root}.NotEmptyList")
+)
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotools(Types, "1.3")
 public sealed interface NotEmptyList<out E> : NotEmptyCollection<E>, List<E>
