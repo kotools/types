@@ -32,7 +32,8 @@ All notable changes to this project will be documented in this file.
       ([#107](https://github.com/kotools/libraries/issues/107))
     - `StrictlyNegativeInt`
       ([#108](https://github.com/kotools/libraries/issues/108))
-    - `NotEmptyList` ([#109](https://github.com/kotools/libraries/issues/109)).
+    - `NotEmptyList` ([#109](https://github.com/kotools/libraries/issues/109))
+    - `NotEmptySet` ([#110](https://github.com/kotools/libraries/issues/110)).
 
 #### Changed
 
@@ -63,8 +64,9 @@ All notable changes to this project will be documented in this file.
       ([#107](https://github.com/kotools/libraries/issues/107))
     - `StrictlyNegativeInt`
       ([#108](https://github.com/kotools/libraries/issues/108)).
-- The `NotEmptyList` type from the `kotools.types.collections` package
-  ([#109](https://github.com/kotools/libraries/issues/109)).
+- The following types from the `kotools.types.collections` package:
+    - `NotEmptyList` ([#109](https://github.com/kotools/libraries/issues/109))
+    - `NotEmptySet` ([#110](https://github.com/kotools/libraries/issues/110)).
 
 ## Version 3.1.1 - 2022/11/18
 
