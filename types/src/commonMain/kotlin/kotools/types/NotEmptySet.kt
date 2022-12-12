@@ -1,0 +1,42 @@
+package kotools.types
+
+import kotools.shared.Project.Types
+import kotools.shared.SinceKotools
+
+/**
+ * Representation of sets that contain at least one element.
+ *
+ * @param E The type of elements contained in this set.
+ */
+@SinceKotools(Types, "3.2")
+public class NotEmptySet<out E>
+private constructor(private val elements: Set<E>) : Set<E> by elements {
+    internal companion object {
+        infix fun <E> of(elements: Collection<E>): Result<NotEmptySet<E>> =
+            elements.takeIf(Collection<E>::isNotEmpty)
+                ?.toSet()
+                ?.toSuccessfulResult(::NotEmptySet)
+                ?: Result.failure(EmptyCollectionError)
+    }
+
+    override fun toString(): String = "$elements"
+}
+
+/**
+ * Creates a [NotEmptySet] starting with a [head] and containing all the
+ * elements of the optional [tail].
+ */
+@SinceKotools(Types, "3.2")
+public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
+    val result: List<E> = listOf(head) + tail
+    return result.toNotEmptySet()
+        .getOrThrow()
+}
+
+/**
+ * Returns a [NotEmptySet] containing all the elements of this collection, or
+ * an [IllegalArgumentException] if this collection is empty.
+ */
+@SinceKotools(Types, "3.2")
+public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
+    NotEmptySet of this

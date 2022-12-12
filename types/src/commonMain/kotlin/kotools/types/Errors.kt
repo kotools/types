@@ -1,9 +1,9 @@
 package kotools.types
 
-/**
- * Returns the result of calling the [block] function, or returns `null` if the
- * [block] function throws a [RuntimeException].
- */
+internal object EmptyCollectionError : IllegalArgumentException(
+    "Given collection shouldn't be empty."
+)
+
 internal inline fun <T> tryOrNull(block: () -> T): T? = try {
     block()
 } catch (_: RuntimeException) {

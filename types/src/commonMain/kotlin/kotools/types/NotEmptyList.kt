@@ -23,11 +23,7 @@ private constructor(private val elements: List<E>) : List<E> by elements {
             elements.takeIf(Collection<E>::isNotEmpty)
                 ?.toList()
                 ?.toSuccessfulResult(::NotEmptyList)
-                ?: Result.failure(
-                    IllegalArgumentException(
-                        "Given collection shouldn't be empty."
-                    )
-                )
+                ?: Result.failure(EmptyCollectionError)
     }
 
     override fun toString(): String = "$elements"
