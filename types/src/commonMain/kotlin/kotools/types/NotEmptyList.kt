@@ -56,7 +56,7 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
 @SinceKotools(Types, "3.2")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
-    return NotEmptyList.of(elements)
+    return elements.toNotEmptyList()
         .getOrThrow()
 }
 

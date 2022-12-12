@@ -8,6 +8,7 @@ import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
 import kotools.assert.assertTrue
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 
 class NotEmptyListTest {
     @Test
@@ -28,10 +29,7 @@ class NotEmptyListTest {
             .toTypedArray()
         val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
         val expected: List<Int> = listOf(head) + tail
-        result.size assertEquals expected.size
-        result.forEachIndexed { index: Int, element: Int ->
-            element assertEquals expected[index]
-        }
+        assertContentEquals(expected, result)
     }
 
     @Test
@@ -40,10 +38,7 @@ class NotEmptyListTest {
             .map(NonZeroInt::toInt)
         val result: NotEmptyList<Int> = collection.toNotEmptyList()
             .getOrThrow()
-        result.size assertEquals collection.size
-        result.forEachIndexed { index: Int, element: Int ->
-            element assertEquals collection.elementAt(index)
-        }
+        assertContentEquals(collection, result)
     }
 
     @Test
@@ -73,10 +68,7 @@ class NotEmptyListTest {
             .map(NonZeroInt::toInt)
         val encoded: String = Json.encodeToString(list)
         val result: NotEmptyList<Int> = Json.decodeFromString(encoded)
-        result.size assertEquals list.size
-        result.forEachIndexed { index: Int, element: Int ->
-            element assertEquals list[index]
-        }
+        assertContentEquals(list, result)
     }
 
     @Test
