@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.collections
 
 import kotlinx.serialization.KSerializer
@@ -25,13 +27,11 @@ import kotools.types.Package
     )
 )
 @SinceKotools(Types, "1.3")
-@Suppress("FunctionName")
 public fun <E> NotEmptySet(head: E, vararg tail: E): NotEmptySet<E> {
     val set: Set<E> = tail.toSet()
     return NotEmptySet(head, set)
 }
 
-@Suppress("FunctionName")
 private fun <E> NotEmptySet(head: E, tail: Set<E>): NotEmptySet<E> {
     val set: Set<E> = setOf(head) + tail
     return NotEmptySetImplementation(set)
@@ -150,6 +150,10 @@ public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
  *
  * @param E The type of elements contained in this set.
  */
+@Deprecated(
+    "Use the ${Package.root}.NotEmptySet type instead.",
+    ReplaceWith("NotEmptySet", "${Package.root}.NotEmptySet")
+)
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotools(Types, "1.3")
 public sealed interface NotEmptySet<out E> : NotEmptyCollection<E>, Set<E> {
