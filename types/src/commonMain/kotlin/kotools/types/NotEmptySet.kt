@@ -1,5 +1,11 @@
 package kotools.types
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.SetSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 
@@ -8,6 +14,7 @@ import kotools.shared.SinceKotools
  *
  * @param E The type of elements contained in this set.
  */
+@Serializable(NotEmptySetSerializer::class)
 @SinceKotools(Types, "3.2")
 public class NotEmptySet<out E>
 private constructor(private val elements: Set<E>) : Set<E> by elements {
@@ -20,6 +27,21 @@ private constructor(private val elements: Set<E>) : Set<E> by elements {
     }
 
     override fun toString(): String = "$elements"
+}
+
+internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
+    KSerializer<NotEmptySet<E>> {
+    private val delegate: KSerializer<Set<E>> = SetSerializer(elementSerializer)
+
+    override val descriptor: SerialDescriptor = delegate.descriptor
+
+    override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
+        delegate.serialize(encoder, value)
+
+    override fun deserialize(decoder: Decoder): NotEmptySet<E> = delegate
+        .deserialize(decoder)
+        .toNotEmptySet()
+        .getOrThrow()
 }
 
 /**
