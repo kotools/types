@@ -16,7 +16,9 @@ private constructor(private val map: Map<K, V>) : Map<K, V> by map {
         infix fun <K, V> of(map: Map<K, V>): Result<NotEmptyMap<K, V>> = map
             .takeIf(Map<K, V>::isNotEmpty)
             ?.toSuccessfulResult(::NotEmptyMap)
-            ?: Result.failure(EmptyMapError)
+            ?: Result.failure(
+                IllegalArgumentException("Given map shouldn't be empty.")
+            )
     }
 
     override fun toString(): String = "$map"
