@@ -1,5 +1,8 @@
 package kotools.types
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.assert.assertEquals
 import kotools.assert.assertFailsWith
 import kotools.assert.assertNotNull
@@ -41,10 +44,34 @@ class NotEmptyMapTest {
         val result: Result<NotEmptyMap<String, Int>> = emptyMap<String, Int>()
             .toNotEmptyMap()
         assertFailsWith<IllegalArgumentException>(result::getOrThrow)
-            .message
-            .assertNotNull()
-            .isNotBlank()
-            .assertTrue()
+            .shouldHaveAMessage()
+    }
+
+    @Test
+    fun serialization_should_behave_like_a_Map() {
+        val map: Map<String, Int> = mapOf("a" to Random.nextInt())
+        val notEmptyMap: NotEmptyMap<String, Int> = map.toNotEmptyMap()
+            .getOrThrow()
+        val result: String = Json.encodeToString(notEmptyMap)
+        result assertEquals Json.encodeToString(map)
+    }
+
+    @Test
+    fun deserialization_should_pass_with_a_not_empty_Map() {
+        val map: Map<String, Int> = mapOf("a" to Random.nextInt())
+        val encoded: String = Json.encodeToString(map)
+        val result: NotEmptyMap<String, Int> = Json.decodeFromString(encoded)
+        result shouldEqual map
+    }
+
+    @Test
+    fun deserialization_should_fail_with_an_empty_Map() {
+        val map: Map<String, Int> = emptyMap()
+        val encoded: String = Json.encodeToString(map)
+        val exception: IllegalArgumentException = assertFailsWith {
+            Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
+        }
+        exception.shouldHaveAMessage()
     }
 }
 
@@ -55,3 +82,7 @@ private infix fun <K, V> Map<K, V>.shouldEqual(other: Map<K, V>) {
         it.value assertEquals other[it.key]
     }
 }
+
+private fun Throwable.shouldHaveAMessage(): Unit = message.assertNotNull()
+    .isNotBlank()
+    .assertTrue()

@@ -1,5 +1,11 @@
 package kotools.types
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 
@@ -9,6 +15,7 @@ import kotools.shared.SinceKotools
  * @param K The type of map keys.
  * @param V The type of map values.
  */
+@Serializable(NotEmptyMapSerializer::class)
 @SinceKotools(Types, "3.2")
 public class NotEmptyMap<K, out V>
 private constructor(private val map: Map<K, V>) : Map<K, V> by map {
@@ -22,6 +29,24 @@ private constructor(private val map: Map<K, V>) : Map<K, V> by map {
     }
 
     override fun toString(): String = "$map"
+}
+
+internal class NotEmptyMapSerializer<K, V>(
+    keySerializer: KSerializer<K>,
+    valueSerializer: KSerializer<V>
+) : KSerializer<NotEmptyMap<K, V>> {
+    private val delegate: KSerializer<Map<K, V>> =
+        MapSerializer(keySerializer, valueSerializer)
+
+    override val descriptor: SerialDescriptor = delegate.descriptor
+
+    override fun serialize(encoder: Encoder, value: NotEmptyMap<K, V>): Unit =
+        delegate.serialize(encoder, value)
+
+    override fun deserialize(decoder: Decoder): NotEmptyMap<K, V> = delegate
+        .deserialize(decoder)
+        .toNotEmptyMap()
+        .getOrThrow()
 }
 
 /**
