@@ -3,9 +3,6 @@ package kotools.types
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.shared.Project.Types
 import kotools.shared.SinceKotools
 
@@ -30,20 +27,11 @@ private constructor(private val elements: List<E>) : List<E> by elements {
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
-    KSerializer<NotEmptyList<E>> {
-    private val delegate: KSerializer<List<E>> =
-        ListSerializer(elementSerializer)
-
-    override val descriptor: SerialDescriptor = delegate.descriptor
-
-    override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
-        delegate.serialize(encoder, value)
-
-    override fun deserialize(decoder: Decoder): NotEmptyList<E> = delegate
-        .deserialize(decoder)
-        .toNotEmptyList()
-        .getOrThrow()
-}
+    Serializer<NotEmptyList<E>, List<E>>(
+        delegate = ListSerializer(elementSerializer),
+        toDelegatedType = { it },
+        toType = List<E>::toNotEmptyList
+    )
 
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
