@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.collections
 
 import kotools.shared.Project.Types
@@ -71,6 +73,10 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
  * @param K The type of map keys.
  * @param V The type of map values.
  */
+@Deprecated(
+    "Use the ${Package.root}.NotEmptyMap type instead.",
+    ReplaceWith("NotEmptyMap", "${Package.root}.NotEmptyMap")
+)
 @SinceKotools(Types, "3.1")
 public sealed interface NotEmptyMap<K, out V> : Map<K, V> {
     /** First entry of this map. */
