@@ -37,5 +37,7 @@ The `AnyInt` hierarchy representing integers
 
 ### Removed
 
-Deprecated declarations from version 3
-([#37](https://github.com/kotools/libraries/issues/37)).
+- Deprecated declarations from version 3
+  ([#37](https://github.com/kotools/libraries/issues/37)).
+- Inheritance between the `NotEmptyList` and the `List` types
+  ([#8](https://github.com/kotools/types/issues/8)).
