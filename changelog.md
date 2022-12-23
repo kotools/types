@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
+## Version 4.0.0 - 2023/01/02
+
 ### Added
 
 The `AnyInt` hierarchy representing integers
