@@ -9,7 +9,7 @@ import kotools.types.text.toNotBlankString
 
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("1.1")
 public sealed interface PositiveInt : AnyInt
 
 /**
@@ -17,7 +17,7 @@ public sealed interface PositiveInt : AnyInt
  * [IllegalArgumentException] if this integer is
  * [strictly negative][StrictlyNegativeInt].
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("1.1")
 public fun Int.toPositiveInt(): Result<PositiveInt> = when {
     this == ZeroInt.value -> Result.success(ZeroInt)
     this > ZeroInt.value -> toStrictlyPositiveInt()

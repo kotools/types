@@ -9,7 +9,7 @@ import kotools.types.text.toNotBlankString
 
 /** Representation of the zero integer. */
 @Serializable(ZeroIntSerializer::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public object ZeroInt : PositiveInt, NegativeInt {
     override val value: Int = 0
 

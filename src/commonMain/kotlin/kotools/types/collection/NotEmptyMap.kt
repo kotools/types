@@ -16,7 +16,7 @@ import kotools.types.toSuccessfulResult
  * @param V The type of map values.
  */
 @Serializable(NotEmptyMapSerializer::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public class NotEmptyMap<K, out V>
 private constructor(private val map: Map<K, V>) : Map<K, V> by map {
     internal companion object {
@@ -33,7 +33,7 @@ private constructor(private val map: Map<K, V>) : Map<K, V> by map {
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
@@ -45,7 +45,7 @@ public fun <K, V> notEmptyMapOf(
  * Returns a [NotEmptyMap] containing all the entries of this map, or returns an
  * [IllegalArgumentException] if this map is empty.
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     NotEmptyMap of this
 

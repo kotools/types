@@ -15,7 +15,7 @@ import kotools.types.toSuccessfulResult
  * @param E The type of elements contained in this set.
  */
 @Serializable(NotEmptySetSerializer::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public class NotEmptySet<out E>
 private constructor(private val elements: Set<E>) : Set<E> by elements {
     internal companion object {
@@ -33,7 +33,7 @@ private constructor(private val elements: Set<E>) : Set<E> by elements {
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val result: List<E> = listOf(head) + tail
     return result.toNotEmptySet()
@@ -44,7 +44,7 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  * Returns a [NotEmptySet] containing all the elements of this collection, or
  * returns an [IllegalArgumentException] if this collection is empty.
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     NotEmptySet of this
 

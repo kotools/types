@@ -15,7 +15,7 @@ import kotools.types.toSuccessfulResult
  * @param E The type of elements contained in this list.
  */
 @Serializable(NotEmptyListSerializer::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public class NotEmptyList<out E>
 private constructor(private val elements: List<E>) : List<E> by elements {
     internal companion object {
@@ -33,7 +33,7 @@ private constructor(private val elements: List<E>) : List<E> by elements {
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
     return elements.toNotEmptyList()
@@ -44,7 +44,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * Returns a [NotEmptyList] containing all the elements of this collection, or
  * returns an [IllegalArgumentException] if this collection is empty.
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     NotEmptyList of this
 
