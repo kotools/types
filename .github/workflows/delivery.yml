@@ -1,4 +1,4 @@
-name: Types - Delivery
+name: Delivery
 on:
   push:
     branches: [ release/* ]
