@@ -14,7 +14,7 @@ import kotools.types.text.toNotBlankString
 
 /** Representation of all integers. */
 @Serializable(AnyIntSerializerImplementation::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public sealed interface AnyInt : Comparable<AnyInt> {
     /** The value to hold. */
     public val value: Int

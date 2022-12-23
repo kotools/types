@@ -21,7 +21,7 @@ import kotlin.jvm.JvmInline
  */
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public value class NotBlankString private constructor(
     /** The string to hold. */
     public val value: String
@@ -55,7 +55,7 @@ public value class NotBlankString private constructor(
  * Returns this string as a [NotBlankString], or returns an
  * [IllegalArgumentException] if this string is blank.
  */
-@SinceKotoolsTypes("0.1")
+@SinceKotoolsTypes("4.0")
 public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
 
