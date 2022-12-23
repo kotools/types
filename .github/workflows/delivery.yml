@@ -4,8 +4,8 @@ on:
     branches: [ release/* ]
     paths:
       - './*gradle*'
-      - './**/*.kt*'
-      - .github/workflows/integration.yml
+      - .github/workflows/delivery.yml
+      - src/**/*.kt*
   workflow_dispatch:
 env:
   CACHING: gradle
