@@ -20,20 +20,22 @@ All notable changes to this project will be documented in this file.
 
 ## Work in progress
 
-### Added
+### All platforms
 
-- The `NotBlankString` type representing strings that contains at least one
-  character, excluding whitespaces.
-- The `AnyInt` hierarchy with the following types:
-    - `NonZeroInt` representing integers other than zero.
-    - `ZeroInt` representing the zero integer.
-    - `PositiveInt` representing positive integers, including zero.
-    - `NegativeInt` representing negative integers, including zero.
-    - `StrictlyPositiveInt` representing strictly positive integers, excluding
-      zero.
-    - `StrictlyNegativeInt` representing strictly negative integers, excluding
-      zero.
-- The `NotEmptyList` type representing lists that contains at least one element.
-- The `NotEmptySet` type representing sets that contains at least one element.
-- The `NotEmptyMap` type representing maps that contains at least one pair of
-  elements.
+#### Added
+
+Hierarchy of `AnyInt` representing integers
+([#132](https://github.com/kotools/libraries/issues/132)).
+
+#### Changed
+
+- Move the `NotBlankString` type to the `kotools.types.text` package
+  ([#133](https://github.com/kotools/libraries/issues/133)).
+- Move the following types to the `kotools.types.collection` package:
+  `NotEmptyList`, `NotEmptySet` and `NotEmpty`
+  ([#138](https://github.com/kotools/libraries/issues/138)).
+
+#### Removed
+
+Deprecated declarations from version 3
+([#37](https://github.com/kotools/libraries/issues/37)).
