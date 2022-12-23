@@ -10,7 +10,7 @@ plugins {
     signing
 }
 
-group = "kotools"
+group = "io.github.kotools"
 version = "4.0.0-SNAPSHOT"
 
 repositories(RepositoryHandler::mavenCentral)
