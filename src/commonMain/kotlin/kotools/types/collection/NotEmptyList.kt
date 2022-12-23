@@ -1,12 +1,17 @@
 package kotools.types.collection
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.toStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /**
@@ -17,16 +22,21 @@ import kotools.types.toSuccessfulResult
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
-public class NotEmptyList<out E>
-private constructor(private val elements: List<E>) : List<E> by elements {
-    internal companion object {
-        infix fun <E> of(elements: Collection<E>): Result<NotEmptyList<E>> =
-            elements.takeIf(Collection<E>::isNotEmpty)
-                ?.toList()
-                ?.toSuccessfulResult(::NotEmptyList)
-                ?: Result.failure(EmptyCollectionException)
-    }
+public class NotEmptyList<out E> internal constructor(
+    /** The first element of this list. */
+    public val head: E,
+    /** All elements of this list except the first one. */
+    public val tail: List<E>
+) {
+    /** All elements of this list. */
+    public val elements: List<E> get() = listOf(head) + tail
 
+    /** The size of this list. */
+    public val size: StrictlyPositiveInt
+        get() = elements.size.toStrictlyPositiveInt()
+            .getOrThrow()
+
+    /** Returns the string representation of this list. */
     override fun toString(): String = "$elements"
 }
 
@@ -35,11 +45,8 @@ private constructor(private val elements: List<E>) : List<E> by elements {
  * elements of the optional [tail].
  */
 @SinceKotoolsTypes("4.0")
-public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
-    val elements: List<E> = listOf(head) + tail
-    return elements.toNotEmptyList()
-        .getOrThrow()
-}
+public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> =
+    NotEmptyList(head, tail.toList())
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -47,22 +54,27 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
-    NotEmptyList of this
+    takeIf(Collection<E>::isNotEmpty)
+        ?.toSuccessfulResult { NotEmptyList(it.first(), it.drop(1)) }
+        ?: Result.failure(EmptyCollectionException)
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
-    DelegatedSerializer<List<E>, NotEmptyList<E>> {
-    override val delegate: KSerializer<List<E>> by lazy {
+    KSerializer<NotEmptyList<E>> {
+    private val delegate: KSerializer<List<E>> =
         ListSerializer(elementSerializer)
-    }
 
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.collection}.NotEmptyList"::toNotBlankString
+    @ExperimentalSerializationApi
+    override val descriptor: SerialDescriptor = SerialDescriptor(
+        "${Package.collection}.NotEmptyList",
+        delegate.descriptor
     )
 
-    override val deserializationException: IllegalArgumentException by lazy {
-        EmptyCollectionException
-    }
+    override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
+        encoder.encodeSerializableValue(delegate, value.elements)
 
-    override fun List<E>.toResultOfB(): Result<NotEmptyList<E>> =
-        toNotEmptyList()
+    override fun deserialize(decoder: Decoder): NotEmptyList<E> = decoder
+        .decodeSerializableValue(delegate)
+        .toNotEmptyList()
+        .getOrNull()
+        ?: throw SerializationException(EmptyCollectionException)
 }

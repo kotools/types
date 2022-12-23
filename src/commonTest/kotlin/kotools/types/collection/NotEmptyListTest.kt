@@ -8,6 +8,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.assertHasAMessage
+import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
@@ -15,6 +16,33 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class NotEmptyListTest {
+    @Test
+    fun head_should_return_the_first_element_of_this_list() {
+        val elements: List<Int> = List(3) { Random.nextInt() }
+        val result: Int = elements.toNotEmptyList()
+            .getOrThrow()
+            .head
+        assertEquals(actual = result, expected = elements.first())
+    }
+
+    @Test
+    fun tail_should_return_all_elements_except_the_first_one() {
+        val elements: List<Int> = List(3) { Random.nextInt() }
+        val result: List<Int> = elements.toNotEmptyList()
+            .getOrThrow()
+            .tail
+        assertEquals(actual = result, expected = elements.drop(1))
+    }
+
+    @Test
+    fun size_should_return_the_size_of_this_list_as_a_StrictlyPositiveInt() {
+        val elements: List<Int> = List(3) { Random.nextInt() }
+        val result: StrictlyPositiveInt = elements.toNotEmptyList()
+            .getOrThrow()
+            .size
+        assertEquals(actual = result.value, expected = elements.size)
+    }
+
     @Test
     fun toString_should_behave_like_a_Collection() {
         val collection: Collection<Int> = List(3) { Random.nextInt() }
@@ -31,7 +59,7 @@ class NotEmptyListTest {
             .toTypedArray()
         val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
         val expected: List<Int> = listOf(head) + tail
-        assertContentEquals(expected, result)
+        assertContentEquals(actual = result.elements, expected = expected)
     }
 
     @Test
@@ -39,7 +67,7 @@ class NotEmptyListTest {
         val collection: Collection<Int> = List(3) { Random.nextInt() }
         val result: NotEmptyList<Int> = collection.toNotEmptyList()
             .getOrThrow()
-        assertContentEquals(collection, result)
+        assertContentEquals(actual = result.elements, expected = collection)
     }
 
     @Test
@@ -76,7 +104,7 @@ class NotEmptyListSerializerTest {
         val list: List<Int> = List(3) { Random.nextInt() }
         val encoded: String = Json.encodeToString(list)
         val result: NotEmptyList<Int> = Json.decodeFromString(encoded)
-        assertContentEquals(list, result)
+        assertContentEquals(actual = result.elements, expected = list)
     }
 
     @Test
