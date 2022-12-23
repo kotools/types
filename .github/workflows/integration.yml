@@ -4,14 +4,14 @@ on:
     branches: [ main ]
     paths:
       - './*gradle*'
+      - './**/*.kt*'
       - .github/workflows/integration.yml
-      - src/**/*.kt*
   push:
     branches: [ main ]
     paths:
       - './*gradle*'
+      - './**/*.kt*'
       - .github/workflows/integration.yml
-      - src/**/*.kt*
   workflow_dispatch:
 jobs:
   test:
