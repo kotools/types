@@ -1,0 +1,32 @@
+name: Deployment
+on:
+  release:
+    types: [ released ]
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.5
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.6.0
+        with:
+          distribution: adopt
+          java-version: 8
+          cache: gradle
+      - name: Generate documentation with Dokka
+        run: ./gradlew dokkaHtml --no-daemon
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: docs
+          folder: build/dokka
+          git-config-email: ${{ secrets.GIT_EMAIL }}
+          git-config-name: ${{ secrets.GIT_USER }}
