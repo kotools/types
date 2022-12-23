@@ -50,6 +50,7 @@ tasks.dokkaHtml {
     outputDirectory.set(dokkaDirectory)
     dokkaSourceSets {
         configureEach {
+            includes.from += "packages.md"
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
         }
