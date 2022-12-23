@@ -24,10 +24,8 @@ All notable changes to this project will be documented in this file.
 
 #### Added
 
-- Hierarchy of `AnyInt` representing integers
-  ([#132](https://github.com/kotools/libraries/issues/132)).
-- The `length` property to the `NotBlankString` type
-  ([#143](https://github.com/kotools/libraries/issues/143)).
+Hierarchy of `AnyInt` representing integers
+([#132](https://github.com/kotools/libraries/issues/132)).
 
 #### Changed
 
