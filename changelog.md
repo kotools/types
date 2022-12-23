@@ -6,9 +6,6 @@ All notable changes to this project will be documented in this file.
 > and this project adheres to
 > [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> The changelog of Kotools Types 1, 2 and 3 is available
-> [here](https://github.com/kotools/libraries/blob/types-v3.2.0/types/changelog.md).
-
 ## Types of changes
 
 - `Added` for new features.
