@@ -29,12 +29,12 @@ public data class NotEmptyList<out E> internal constructor(
     public val tail: List<E>
 ) {
     /** All elements of this list. */
-    public val elements: List<E> get() = listOf(head) + tail
+    public val elements: List<E> by lazy { listOf(head) + tail }
 
     /** The size of this list. */
-    public val size: StrictlyPositiveInt
-        get() = elements.size.toStrictlyPositiveInt()
-            .getOrThrow()
+    public val size: StrictlyPositiveInt by lazy(
+        elements.size.toStrictlyPositiveInt()::getOrThrow
+    )
 
     /** Returns the string representation of this list. */
     override fun toString(): String = "$elements"
