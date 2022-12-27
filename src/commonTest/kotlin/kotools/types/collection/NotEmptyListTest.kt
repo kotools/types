@@ -10,10 +10,7 @@ import kotools.types.Package
 import kotools.types.assertHasAMessage
 import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
-import kotlin.test.Test
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
+import kotlin.test.*
 
 class NotEmptyListTest {
     @Test
@@ -28,10 +25,19 @@ class NotEmptyListTest {
     @Test
     fun tail_should_return_all_elements_except_the_first_one() {
         val elements: List<Int> = List(3) { Random.nextInt() }
-        val result: List<Int> = elements.toNotEmptyList()
+        val result: NotEmptyList<Int>? = elements.toNotEmptyList()
             .getOrThrow()
             .tail
-        assertEquals(actual = result, expected = elements.drop(1))
+        assertEquals(
+            actual = assertNotNull(result).asList,
+            expected = elements.drop(1)
+        )
+    }
+
+    @Test
+    fun tail_should_return_null_with_a_singleton_list() {
+        val result: NotEmptyList<Int>? = notEmptyListOf(Random.nextInt()).tail
+        assertNull(result)
     }
 
     @Test
@@ -59,7 +65,7 @@ class NotEmptyListTest {
             .toTypedArray()
         val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
         val expected: List<Int> = listOf(head) + tail
-        assertContentEquals(actual = result.elements, expected = expected)
+        assertContentEquals(actual = result.asList, expected = expected)
     }
 
     @Test
@@ -67,7 +73,7 @@ class NotEmptyListTest {
         val collection: Collection<Int> = List(3) { Random.nextInt() }
         val result: NotEmptyList<Int> = collection.toNotEmptyList()
             .getOrThrow()
-        assertContentEquals(actual = result.elements, expected = collection)
+        assertContentEquals(actual = result.asList, expected = collection)
     }
 
     @Test
@@ -104,7 +110,7 @@ class NotEmptyListSerializerTest {
         val list: List<Int> = List(3) { Random.nextInt() }
         val encoded: String = Json.encodeToString(list)
         val result: NotEmptyList<Int> = Json.decodeFromString(encoded)
-        assertContentEquals(actual = result.elements, expected = list)
+        assertContentEquals(actual = result.asList, expected = list)
     }
 
     @Test
