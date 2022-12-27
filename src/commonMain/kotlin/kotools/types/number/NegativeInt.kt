@@ -7,7 +7,11 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/** Representation of negative integers including [zero][ZeroInt]. */
+/**
+ * Representation of negative integers including [zero][ZeroInt].
+ *
+ * See the [toNegativeInt] function for building a [NegativeInt].
+ */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface NegativeInt : AnyInt

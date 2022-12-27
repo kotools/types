@@ -7,7 +7,11 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/** Representation of integers other than [zero][ZeroInt]. */
+/**
+ * Representation of integers other than [zero][ZeroInt].
+ *
+ * See the [toNonZeroInt] function for building a [NonZeroInt].
+ */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface NonZeroInt : AnyInt

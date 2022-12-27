@@ -9,7 +9,12 @@ import kotools.types.text.toNotBlankString
 import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
-/** Representation of positive integers excluding [zero][ZeroInt]. */
+/**
+ * Representation of positive integers excluding [zero][ZeroInt].
+ *
+ * See the [toStrictlyPositiveInt] function for building a
+ * [StrictlyPositiveInt].
+ */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
