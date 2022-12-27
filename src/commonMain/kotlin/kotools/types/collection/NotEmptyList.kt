@@ -25,19 +25,22 @@ import kotools.types.toSuccessfulResult
 public data class NotEmptyList<out E> internal constructor(
     /** The first element of this list. */
     public val head: E,
-    /** All elements of this list except the first one. */
-    public val tail: List<E>
+    /** All elements of this list except [the first one][head]. */
+    public val tail: NotEmptyList<E>? = null
 ) {
-    /** All elements of this list. */
-    public val elements: List<E> by lazy { listOf(head) + tail }
+    /** Returns all elements of this list as a [List] of type [E]. */
+    public val asList: List<E> by lazy {
+        val firstElement: List<E> = listOf(head)
+        tail?.let { firstElement + it.asList } ?: firstElement
+    }
 
     /** The size of this list. */
     public val size: StrictlyPositiveInt by lazy(
-        elements.size.toStrictlyPositiveInt()::getOrThrow
+        asList.size.toStrictlyPositiveInt()::getOrThrow
     )
 
     /** Returns the string representation of this list. */
-    override fun toString(): String = "$elements"
+    override fun toString(): String = "$asList"
 }
 
 /**
@@ -45,8 +48,12 @@ public data class NotEmptyList<out E> internal constructor(
  * elements of the optional [tail].
  */
 @SinceKotoolsTypes("4.0")
-public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> =
-    NotEmptyList(head, tail.toList())
+public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
+    .takeIf(Array<out E>::isNotEmpty)
+    ?.toList()
+    ?.toNotEmptyList()
+    ?.getOrNull()
+    .let { NotEmptyList(head, it) }
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -54,9 +61,14 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> =
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
-    takeIf(Collection<E>::isNotEmpty)
-        ?.toSuccessfulResult { NotEmptyList(it.first(), it.drop(1)) }
-        ?: Result.failure(EmptyCollectionException)
+    if (isEmpty()) Result.failure(EmptyCollectionException)
+    else toSuccessfulResult {
+        val head: E = first()
+        val tail: NotEmptyList<E>? = drop(1)
+            .toNotEmptyList()
+            .getOrNull()
+        NotEmptyList(head, tail)
+    }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptyList<E>> {
@@ -70,7 +82,7 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     )
 
     override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
-        encoder.encodeSerializableValue(delegate, value.elements)
+        encoder.encodeSerializableValue(delegate, value.asList)
 
     override fun deserialize(decoder: Decoder): NotEmptyList<E> = decoder
         .decodeSerializableValue(delegate)
