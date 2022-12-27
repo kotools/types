@@ -51,11 +51,7 @@ public data class NotEmptyList<out E> internal constructor(
 public val <E> Collection<E>.asNotEmptyList: Result<NotEmptyList<E>>
     get() = if (isEmpty()) Result.failure(EmptyCollectionException)
     else toSuccessfulResult {
-        val head: E = first()
-        val tail: NotEmptyList<E>? = drop(1)
-            .asNotEmptyList
-            .getOrNull()
-        NotEmptyList(head, tail)
+        NotEmptyList(head = first(), tail = drop(1).asNotEmptyList.getOrNull())
     }
 
 /**
