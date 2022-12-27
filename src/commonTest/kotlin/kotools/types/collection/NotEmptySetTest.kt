@@ -20,9 +20,7 @@ class NotEmptySetTest {
     fun head_should_return_the_first_element_of_this_set() {
         val elements: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: Int = elements.toNotEmptySet()
-            .getOrThrow()
-            .head
+        val result: Int = elements.asNotEmptySet.getOrThrow().head
         assertEquals(actual = result, expected = elements.first())
     }
 
@@ -30,9 +28,7 @@ class NotEmptySetTest {
     fun tail_should_return_all_elements_of_this_set_except_the_first_one() {
         val elements: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: Set<Int> = elements.toNotEmptySet()
-            .getOrThrow()
-            .tail
+        val result: Set<Int> = elements.asNotEmptySet.getOrThrow().tail
         assertEquals(actual = result, expected = elements.drop(1).toSet())
     }
 
@@ -40,9 +36,8 @@ class NotEmptySetTest {
     fun size_should_return_the_size_of_this_set_as_a_StrictlyPositiveInt() {
         val elements: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: StrictlyPositiveInt = elements.toNotEmptySet()
-            .getOrThrow()
-            .size
+        val result: StrictlyPositiveInt =
+            elements.asNotEmptySet.getOrThrow().size
         assertEquals(actual = result.value, expected = elements.size)
     }
 
@@ -50,8 +45,7 @@ class NotEmptySetTest {
     fun toString_should_behave_like_a_Set() {
         val elements: Set<Int> = List(8) { Random.nextInt() }
             .toSet()
-        val result: String = elements.toNotEmptySet()
-            .getOrThrow()
+        val result: String = elements.asNotEmptySet.getOrThrow()
             .toString()
         assertEquals("$elements", result)
     }
@@ -71,15 +65,13 @@ class NotEmptySetTest {
     @Test
     fun collection_toNotEmptySet_should_pass_with_a_not_empty_Collection() {
         val elements: List<Int> = List(8) { Random.nextInt() }
-        val result: NotEmptySet<Int> = elements.toNotEmptySet()
-            .getOrThrow()
+        val result: NotEmptySet<Int> = elements.asNotEmptySet.getOrThrow()
         assertContentEquals(actual = result.elements, expected = elements)
     }
 
     @Test
     fun collection_toNotEmptySet_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptySet<Int>> = emptySet<Int>()
-            .toNotEmptySet()
+        val result: Result<NotEmptySet<Int>> = emptySet<Int>().asNotEmptySet
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -99,8 +91,7 @@ class NotEmptySetSerializerTest {
     fun serialization_should_behave_like_a_Set() {
         val elements: Set<Int> = List(8) { Random.nextInt() }
             .toSet()
-        val notEmptyList: NotEmptySet<Int> = elements.toNotEmptySet()
-            .getOrThrow()
+        val notEmptyList: NotEmptySet<Int> = elements.asNotEmptySet.getOrThrow()
         val result: String = Json.encodeToString(notEmptyList)
         val expected: String = Json.encodeToString(elements)
         assertEquals(expected, result)

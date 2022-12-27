@@ -17,7 +17,7 @@ import kotools.types.toSuccessfulResult
 /**
  * Representation of sets that contain at least one element of type [E].
  *
- * See the [notEmptySetOf] or [toNotEmptySet] functions for building a
+ * See the [notEmptySetOf] or [asNotEmptySet] functions for building a
  * [NotEmptySet].
  */
 @Serializable(NotEmptySetSerializer::class)
@@ -41,6 +41,16 @@ public data class NotEmptySet<out E> internal constructor(
 }
 
 /**
+ * Returns a [NotEmptySet] containing all the elements of this collection, or
+ * returns an [IllegalArgumentException] if this collection is empty.
+ */
+@SinceKotoolsTypes("4.0")
+public val <E> Collection<E>.asNotEmptySet: Result<NotEmptySet<E>>
+    get() = takeIf(Collection<E>::isNotEmpty)
+        ?.toSuccessfulResult { NotEmptySet(first(), drop(1).toSet()) }
+        ?: Result.failure(EmptyCollectionException)
+
+/**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
@@ -49,16 +59,6 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val elements: Set<E> = setOf(head, *tail)
     return NotEmptySet(head = elements.first(), tail = elements.drop(1).toSet())
 }
-
-/**
- * Returns a [NotEmptySet] containing all the elements of this collection, or
- * returns an [IllegalArgumentException] if this collection is empty.
- */
-@SinceKotoolsTypes("4.0")
-public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
-    takeIf(Collection<E>::isNotEmpty)
-        ?.toSuccessfulResult { NotEmptySet(first(), drop(1).toSet()) }
-        ?: Result.failure(EmptyCollectionException)
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptySet<E>> {
@@ -75,7 +75,7 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
 
     override fun deserialize(decoder: Decoder): NotEmptySet<E> = decoder
         .decodeSerializableValue(delegate)
-        .toNotEmptySet()
+        .asNotEmptySet
         .getOrNull()
         ?: throw SerializationException(EmptyCollectionException)
 }
