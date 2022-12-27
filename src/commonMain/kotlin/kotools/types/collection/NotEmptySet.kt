@@ -29,12 +29,12 @@ public data class NotEmptySet<out E> internal constructor(
     public val tail: Set<E>
 ) {
     /** All elements of this set. */
-    public val elements: Set<E> get() = setOf(head) + tail
+    public val elements: Set<E> by lazy { setOf(head) + tail }
 
     /** The size of this set. */
-    public val size: StrictlyPositiveInt
-        get() = elements.size.toStrictlyPositiveInt()
-            .getOrThrow()
+    public val size: StrictlyPositiveInt by lazy(
+        elements.size.toStrictlyPositiveInt()::getOrThrow
+    )
 
     /** Returns the string representation of this set. */
     override fun toString(): String = "$elements"
