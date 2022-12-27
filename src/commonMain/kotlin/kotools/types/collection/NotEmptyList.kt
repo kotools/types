@@ -22,7 +22,7 @@ import kotools.types.toSuccessfulResult
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
-public class NotEmptyList<out E> internal constructor(
+public data class NotEmptyList<out E> internal constructor(
     /** The first element of this list. */
     public val head: E,
     /** All elements of this list except the first one. */
