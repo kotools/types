@@ -10,10 +10,11 @@ import kotools.types.text.toNotBlankString
 import kotools.types.toSuccessfulResult
 
 /**
- * Representation of maps that contain at least one entry.
+ * Representation of maps that contain at least one entry with a key of type
+ * [K] and a value of type [V].
  *
- * @param K The type of map keys.
- * @param V The type of map values.
+ * See the [notEmptyMapOf] or [toNotEmptyMap] functions for building a
+ * [NotEmptyMap].
  */
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")

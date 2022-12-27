@@ -10,9 +10,10 @@ import kotools.types.text.toNotBlankString
 import kotools.types.toSuccessfulResult
 
 /**
- * Representation of sets that contain at least one element.
+ * Representation of sets that contain at least one element of type [E].
  *
- * @param E The type of elements contained in this set.
+ * See the [notEmptySetOf] or [toNotEmptySet] functions for building a
+ * [NotEmptySet].
  */
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("4.0")

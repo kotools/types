@@ -7,7 +7,11 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/** Representation of positive integers including [zero][ZeroInt]. */
+/**
+ * Representation of positive integers including [zero][ZeroInt].
+ *
+ * See the [toPositiveInt] for building a [PositiveInt].
+ */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface PositiveInt : AnyInt

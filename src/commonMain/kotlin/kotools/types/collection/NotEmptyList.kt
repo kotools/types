@@ -10,9 +10,10 @@ import kotools.types.text.toNotBlankString
 import kotools.types.toSuccessfulResult
 
 /**
- * Representation of lists that contain at least one element.
+ * Representation of lists that contain at least one element of type [E].
  *
- * @param E The type of elements contained in this list.
+ * See the [notEmptyListOf] or [toNotEmptyList] functions for building a
+ * [NotEmptyList].
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
