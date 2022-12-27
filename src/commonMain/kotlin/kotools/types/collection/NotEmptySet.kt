@@ -1,12 +1,17 @@
 package kotools.types.collection
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.SetSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.toStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /**
@@ -17,16 +22,21 @@ import kotools.types.toSuccessfulResult
  */
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("4.0")
-public class NotEmptySet<out E>
-private constructor(private val elements: Set<E>) : Set<E> by elements {
-    internal companion object {
-        infix fun <E> of(elements: Collection<E>): Result<NotEmptySet<E>> =
-            elements.takeIf(Collection<E>::isNotEmpty)
-                ?.toSet()
-                ?.toSuccessfulResult(::NotEmptySet)
-                ?: Result.failure(EmptyCollectionException)
-    }
+public data class NotEmptySet<out E> internal constructor(
+    /** The first element of this set. */
+    public val head: E,
+    /** All elements of this set except the first one. */
+    public val tail: Set<E>
+) {
+    /** All elements of this set. */
+    public val elements: Set<E> get() = setOf(head) + tail
 
+    /** The size of this set. */
+    public val size: StrictlyPositiveInt
+        get() = elements.size.toStrictlyPositiveInt()
+            .getOrThrow()
+
+    /** Returns the string representation of this set. */
     override fun toString(): String = "$elements"
 }
 
@@ -36,9 +46,8 @@ private constructor(private val elements: Set<E>) : Set<E> by elements {
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
-    val result: List<E> = listOf(head) + tail
-    return result.toNotEmptySet()
-        .getOrThrow()
+    val elements: Set<E> = setOf(head, *tail)
+    return NotEmptySet(head = elements.first(), tail = elements.drop(1).toSet())
 }
 
 /**
@@ -47,21 +56,26 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
-    NotEmptySet of this
+    takeIf(Collection<E>::isNotEmpty)
+        ?.toSuccessfulResult { NotEmptySet(first(), drop(1).toSet()) }
+        ?: Result.failure(EmptyCollectionException)
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
-    DelegatedSerializer<Set<E>, NotEmptySet<E>> {
-    override val delegate: KSerializer<Set<E>> by lazy {
-        SetSerializer(elementSerializer)
-    }
+    KSerializer<NotEmptySet<E>> {
+    private val delegate: KSerializer<Set<E>> = SetSerializer(elementSerializer)
 
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.collection}.NotEmptySet"::toNotBlankString
+    @ExperimentalSerializationApi
+    override val descriptor: SerialDescriptor = SerialDescriptor(
+        "${Package.collection}.NotEmptySet",
+        delegate.descriptor
     )
 
-    override val deserializationException: IllegalArgumentException by lazy {
-        EmptyCollectionException
-    }
+    override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
+        encoder.encodeSerializableValue(delegate, value.elements)
 
-    override fun Set<E>.toResultOfB(): Result<NotEmptySet<E>> = toNotEmptySet()
+    override fun deserialize(decoder: Decoder): NotEmptySet<E> = decoder
+        .decodeSerializableValue(delegate)
+        .toNotEmptySet()
+        .getOrNull()
+        ?: throw SerializationException(EmptyCollectionException)
 }

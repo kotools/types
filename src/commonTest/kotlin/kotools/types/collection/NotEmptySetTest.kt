@@ -8,6 +8,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.assertHasAMessage
+import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
@@ -15,6 +16,36 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class NotEmptySetTest {
+    @Test
+    fun head_should_return_the_first_element_of_this_set() {
+        val elements: Set<Int> = List(3) { Random.nextInt() }
+            .toSet()
+        val result: Int = elements.toNotEmptySet()
+            .getOrThrow()
+            .head
+        assertEquals(actual = result, expected = elements.first())
+    }
+
+    @Test
+    fun tail_should_return_all_elements_of_this_set_except_the_first_one() {
+        val elements: Set<Int> = List(3) { Random.nextInt() }
+            .toSet()
+        val result: Set<Int> = elements.toNotEmptySet()
+            .getOrThrow()
+            .tail
+        assertEquals(actual = result, expected = elements.drop(1).toSet())
+    }
+
+    @Test
+    fun size_should_return_the_size_of_this_set_as_a_StrictlyPositiveInt() {
+        val elements: Set<Int> = List(3) { Random.nextInt() }
+            .toSet()
+        val result: StrictlyPositiveInt = elements.toNotEmptySet()
+            .getOrThrow()
+            .size
+        assertEquals(actual = result.value, expected = elements.size)
+    }
+
     @Test
     fun toString_should_behave_like_a_Set() {
         val elements: Set<Int> = List(8) { Random.nextInt() }
@@ -31,8 +62,10 @@ class NotEmptySetTest {
         val tail: Array<Int> = List(7) { Random.nextInt() }
             .toTypedArray()
         val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
-        val expected: List<Int> = listOf(head) + tail
-        assertContentEquals(expected, result)
+        assertContentEquals(
+            actual = result.elements,
+            expected = listOf(head) + tail
+        )
     }
 
     @Test
@@ -40,7 +73,7 @@ class NotEmptySetTest {
         val elements: List<Int> = List(8) { Random.nextInt() }
         val result: NotEmptySet<Int> = elements.toNotEmptySet()
             .getOrThrow()
-        assertContentEquals(elements, result)
+        assertContentEquals(actual = result.elements, expected = elements)
     }
 
     @Test
@@ -75,10 +108,10 @@ class NotEmptySetSerializerTest {
 
     @Test
     fun deserialization_should_pass_with_a_not_empty_Collection() {
-        val collection: Collection<Int> = List(8) { Random.nextInt() }
-        val encoded: String = Json.encodeToString(collection)
+        val elements: Collection<Int> = List(8) { Random.nextInt() }
+        val encoded: String = Json.encodeToString(elements)
         val result: NotEmptySet<Int> = Json.decodeFromString(encoded)
-        assertContentEquals(collection, result)
+        assertContentEquals(actual = result.elements, expected = elements)
     }
 
     @Test
