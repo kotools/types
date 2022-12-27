@@ -26,18 +26,21 @@ public data class NotEmptySet<out E> internal constructor(
     /** The first element of this set. */
     public val head: E,
     /** All elements of this set except the first one. */
-    public val tail: Set<E>
+    public val tail: NotEmptySet<E>? = null
 ) {
-    /** All elements of this set. */
-    public val elements: Set<E> by lazy { setOf(head) + tail }
+    /** Returns all elements of this set as a [Set] of type [E]. */
+    public val asSet: Set<E> by lazy {
+        val elements: Set<E> = setOf(head)
+        tail?.let { elements + it.asSet } ?: elements
+    }
 
     /** The size of this set. */
     public val size: StrictlyPositiveInt by lazy(
-        elements.size.toStrictlyPositiveInt()::getOrThrow
+        asSet.size.toStrictlyPositiveInt()::getOrThrow
     )
 
     /** Returns the string representation of this set. */
-    override fun toString(): String = "$elements"
+    override fun toString(): String = "$asSet"
 }
 
 /**
@@ -46,19 +49,18 @@ public data class NotEmptySet<out E> internal constructor(
  */
 @SinceKotoolsTypes("4.0")
 public val <E> Collection<E>.asNotEmptySet: Result<NotEmptySet<E>>
-    get() = takeIf(Collection<E>::isNotEmpty)
-        ?.toSuccessfulResult { NotEmptySet(first(), drop(1).toSet()) }
-        ?: Result.failure(EmptyCollectionException)
+    get() = if (isEmpty()) Result.failure(EmptyCollectionException)
+    else toSuccessfulResult {
+        NotEmptySet(head = first(), tail = drop(1).asNotEmptySet.getOrNull())
+    }
 
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
 @SinceKotoolsTypes("4.0")
-public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
-    val elements: Set<E> = setOf(head, *tail)
-    return NotEmptySet(head = elements.first(), tail = elements.drop(1).toSet())
-}
+public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
+    setOf(head, *tail).asNotEmptySet.getOrThrow()
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptySet<E>> {
@@ -71,7 +73,7 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     )
 
     override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
-        encoder.encodeSerializableValue(delegate, value.elements)
+        encoder.encodeSerializableValue(delegate, value.asSet)
 
     override fun deserialize(decoder: Decoder): NotEmptySet<E> = decoder
         .decodeSerializableValue(delegate)

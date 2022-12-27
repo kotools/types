@@ -10,10 +10,7 @@ import kotools.types.Package
 import kotools.types.assertHasAMessage
 import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
-import kotlin.test.Test
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
+import kotlin.test.*
 
 class NotEmptySetTest {
     @Test
@@ -28,8 +25,17 @@ class NotEmptySetTest {
     fun tail_should_return_all_elements_of_this_set_except_the_first_one() {
         val elements: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: Set<Int> = elements.asNotEmptySet.getOrThrow().tail
-        assertEquals(actual = result, expected = elements.drop(1).toSet())
+        val result: NotEmptySet<Int>? = elements.asNotEmptySet.getOrThrow().tail
+        assertEquals(
+            actual = assertNotNull(result).asSet,
+            expected = elements.drop(1).toSet()
+        )
+    }
+
+    @Test
+    fun tail_should_return_null_with_a_singleton_set() {
+        val result: NotEmptySet<Int>? = notEmptySetOf(Random.nextInt()).tail
+        assertNull(result)
     }
 
     @Test
@@ -57,7 +63,7 @@ class NotEmptySetTest {
             .toTypedArray()
         val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
         assertContentEquals(
-            actual = result.elements,
+            actual = result.asSet,
             expected = listOf(head) + tail
         )
     }
@@ -66,7 +72,7 @@ class NotEmptySetTest {
     fun collection_toNotEmptySet_should_pass_with_a_not_empty_Collection() {
         val elements: List<Int> = List(8) { Random.nextInt() }
         val result: NotEmptySet<Int> = elements.asNotEmptySet.getOrThrow()
-        assertContentEquals(actual = result.elements, expected = elements)
+        assertContentEquals(actual = result.asSet, expected = elements)
     }
 
     @Test
@@ -102,7 +108,7 @@ class NotEmptySetSerializerTest {
         val elements: Collection<Int> = List(8) { Random.nextInt() }
         val encoded: String = Json.encodeToString(elements)
         val result: NotEmptySet<Int> = Json.decodeFromString(encoded)
-        assertContentEquals(actual = result.elements, expected = elements)
+        assertContentEquals(actual = result.asSet, expected = elements)
     }
 
     @Test
