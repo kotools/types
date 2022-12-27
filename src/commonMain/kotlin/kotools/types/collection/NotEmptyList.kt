@@ -17,7 +17,7 @@ import kotools.types.toSuccessfulResult
 /**
  * Representation of lists that contain at least one element of type [E].
  *
- * See the [notEmptyListOf] or [toNotEmptyList] functions for building a
+ * See the [notEmptyListOf] or [asNotEmptyList] functions for building a
  * [NotEmptyList].
  */
 @Serializable(NotEmptyListSerializer::class)
@@ -44,6 +44,21 @@ public data class NotEmptyList<out E> internal constructor(
 }
 
 /**
+ * Returns a [NotEmptyList] containing all the elements of this collection, or
+ * returns an [IllegalArgumentException] if this collection is empty.
+ */
+@SinceKotoolsTypes("4.0")
+public val <E> Collection<E>.asNotEmptyList: Result<NotEmptyList<E>>
+    get() = if (isEmpty()) Result.failure(EmptyCollectionException)
+    else toSuccessfulResult {
+        val head: E = first()
+        val tail: NotEmptyList<E>? = drop(1)
+            .asNotEmptyList
+            .getOrNull()
+        NotEmptyList(head, tail)
+    }
+
+/**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
  */
@@ -51,24 +66,9 @@ public data class NotEmptyList<out E> internal constructor(
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
     .takeIf(Array<out E>::isNotEmpty)
     ?.toList()
-    ?.toNotEmptyList()
+    ?.asNotEmptyList
     ?.getOrNull()
     .let { NotEmptyList(head, it) }
-
-/**
- * Returns a [NotEmptyList] containing all the elements of this collection, or
- * returns an [IllegalArgumentException] if this collection is empty.
- */
-@SinceKotoolsTypes("4.0")
-public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
-    if (isEmpty()) Result.failure(EmptyCollectionException)
-    else toSuccessfulResult {
-        val head: E = first()
-        val tail: NotEmptyList<E>? = drop(1)
-            .toNotEmptyList()
-            .getOrNull()
-        NotEmptyList(head, tail)
-    }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptyList<E>> {
@@ -86,7 +86,7 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
 
     override fun deserialize(decoder: Decoder): NotEmptyList<E> = decoder
         .decodeSerializableValue(delegate)
-        .toNotEmptyList()
+        .asNotEmptyList
         .getOrNull()
         ?: throw SerializationException(EmptyCollectionException)
 }
