@@ -6,6 +6,7 @@ on:
       - '*gradle*'
       - '*.kt*'
       - .github/workflows/delivery.yml
+      - src/**/*.kt*
   workflow_dispatch:
 env:
   CACHING: gradle
