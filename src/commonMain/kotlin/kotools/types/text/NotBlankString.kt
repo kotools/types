@@ -25,7 +25,7 @@ import kotlin.jvm.JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("4.0")
 public value class NotBlankString private constructor(
-    private val value: String
+    private val asString: String
 ) : Comparable<NotBlankString> {
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
@@ -34,21 +34,22 @@ public value class NotBlankString private constructor(
             ?: Result.failure(NotBlankStringException)
     }
 
-    /** Returns the length of this [value]. */
+    /** Returns the length of this not blank string. */
     public val length: StrictlyPositiveInt
-        get() = value.length.asStrictlyPositiveInt.getOrThrow()
+        get() = asString.length.asStrictlyPositiveInt.getOrThrow()
 
     /**
-     * Compares this [value] lexicographically with the [other] value for order.
-     * Returns zero if this [value] equals the [other] value, a negative number
-     * if it's less than the [other] value, or a positive number if it's greater
-     * than the [other] value.
+     * Compares this not blank string lexicographically with the [other] one for
+     * order.
+     * Returns zero if this not blank string equals the [other] one, a negative
+     * number if it's less than the [other] one, or a positive number if it's
+     * greater than the [other] one.
      */
     override fun compareTo(other: NotBlankString): Int =
-        value.compareTo(other.value)
+        asString.compareTo(other.asString)
 
-    /** Returns this [value]. */
-    override fun toString(): String = value
+    /** Returns this not blank string as a [String]. */
+    override fun toString(): String = asString
 }
 
 /**
@@ -60,10 +61,10 @@ public val String.asNotBlankString: Result<NotBlankString>
     get() = NotBlankString of this
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
-    override val descriptor: SerialDescriptor = "${Package.text}.NotBlankString"
-        .asNotBlankString
-        .map { PrimitiveSerialDescriptor("$it", PrimitiveKind.STRING) }
-        .getOrThrow()
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = "${Package.text}.NotBlankString",
+        PrimitiveKind.STRING
+    )
 
     override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
         encoder.encodeString("$value")
