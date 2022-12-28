@@ -10,7 +10,7 @@ import kotools.types.text.asNotBlankString
 /**
  * Representation of integers other than [zero][ZeroInt].
  *
- * See the [asNonZeroInt] function for building a [NonZeroInt].
+ * See the [asNonZeroInt] property for building a [NonZeroInt].
  */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")

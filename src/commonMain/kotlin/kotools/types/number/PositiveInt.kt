@@ -10,7 +10,7 @@ import kotools.types.text.asNotBlankString
 /**
  * Representation of positive integers including [zero][ZeroInt].
  *
- * See the [asPositiveInt] for building a [PositiveInt].
+ * See the [asPositiveInt] property for building a [PositiveInt].
  */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
