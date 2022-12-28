@@ -17,7 +17,7 @@ class StrictlyPositiveIntTest {
     @Test
     fun toString_should_behave_like_an_Int(): Unit = strictlyPositiveIntRange
         .random()
-        .toStrictlyPositiveInt()
+        .asStrictlyPositiveInt
         .getOrThrow()
         .run { assertEquals(actual = toString(), expected = "$asInt") }
 
@@ -25,9 +25,7 @@ class StrictlyPositiveIntTest {
     fun int_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Int() {
         val value: Int = strictlyPositiveIntRange.random()
         assertEquals(
-            actual = value.toStrictlyPositiveInt()
-                .getOrThrow()
-                .asInt,
+            actual = value.asStrictlyPositiveInt.getOrThrow().asInt,
             expected = value
         )
     }
@@ -35,7 +33,7 @@ class StrictlyPositiveIntTest {
     @Test
     fun int_toStrictlyPositiveInt_should_fail_with_a_negative_Int() {
         val result: Result<StrictlyPositiveInt> = negativeIntRange.random()
-            .toStrictlyPositiveInt()
+            .asStrictlyPositiveInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -53,7 +51,7 @@ class StrictlyPositiveIntSerializerTest {
     @Test
     fun serialization_should_behave_like_an_Int() {
         val x: StrictlyPositiveInt = strictlyPositiveIntRange.random()
-            .toStrictlyPositiveInt()
+            .asStrictlyPositiveInt
             .getOrThrow()
         assertEquals(
             actual = Json.encodeToString(x),

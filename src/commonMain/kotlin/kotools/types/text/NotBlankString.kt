@@ -11,7 +11,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.toStrictlyPositiveInt
+import kotools.types.number.asStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
@@ -36,8 +36,7 @@ public value class NotBlankString private constructor(
 
     /** Returns the length of this [value]. */
     public val length: StrictlyPositiveInt
-        get() = value.length.toStrictlyPositiveInt()
-            .getOrThrow()
+        get() = value.length.asStrictlyPositiveInt.getOrThrow()
 
     /**
      * Compares this [value] lexicographically with the [other] value for order.
