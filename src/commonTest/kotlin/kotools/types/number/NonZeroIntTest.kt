@@ -20,15 +20,13 @@ class NonZeroIntTest {
     fun int_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
         val value: Int = ranges.random()
             .random()
-        val result: Int = value.toNonZeroInt()
-            .getOrThrow()
-            .asInt
+        val result: Int = value.asNonZeroInt.getOrThrow().asInt
         assertEquals(value, result)
     }
 
     @Test
     fun int_toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
-        val result: Result<NonZeroInt> = ZeroInt.asInt.toNonZeroInt()
+        val result: Result<NonZeroInt> = ZeroInt.asInt.asNonZeroInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -48,7 +46,7 @@ class NonZeroIntSerializerTest {
     fun serialization_should_behave_like_an_Int() {
         val x: NonZeroInt = NonZeroIntTest.ranges.random()
             .random()
-            .toNonZeroInt()
+            .asNonZeroInt
             .getOrThrow()
         val result: String = Json.encodeToString(NonZeroIntSerializer, x)
         val expected: String = Json.encodeToString(x.asInt)
