@@ -1,34 +1,86 @@
 package kotools.types.collection
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.toStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /**
  * Representation of maps that contain at least one entry with a key of type
  * [K] and a value of type [V].
  *
- * See the [notEmptyMapOf] or [toNotEmptyMap] functions for building a
+ * See the [notEmptyMapOf] or [asNotEmptyMap] functions for building a
  * [NotEmptyMap].
  */
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")
-public class NotEmptyMap<K, out V>
-private constructor(private val map: Map<K, V>) : Map<K, V> by map {
-    internal companion object {
-        infix fun <K, V> of(map: Map<K, V>): Result<NotEmptyMap<K, V>> = map
-            .takeIf(Map<K, V>::isNotEmpty)
-            ?.toSuccessfulResult(::NotEmptyMap)
-            ?: Result.failure(EmptyMapException)
+public data class NotEmptyMap<K, out V> internal constructor(
+    /** The first entry of this map. */
+    public val head: Pair<K, V>,
+    /** All entries of this map except [the first one][head]. */
+    public val tail: NotEmptyMap<K, V>? = null
+) {
+    /**
+     * Returns all entries of this map as a [Map] with keys of type [K] and
+     * values of type [V].
+     */
+    public val asMap: Map<K, V> by lazy {
+        tail?.let {
+            val tail: Array<Pair<K, V>> = it.entries.asSet
+                .map(Map.Entry<K, V>::toPair)
+                .toTypedArray()
+            mapOf(head, *tail)
+        } ?: mapOf(head)
     }
 
-    override fun toString(): String = "$map"
+    /** Returns all entries of this map. */
+    public val entries: NotEmptySet<Map.Entry<K, V>> by lazy(
+        asMap.entries.asNotEmptySet::getOrThrow
+    )
+
+    /** Returns all keys of this map. */
+    public val keys: NotEmptySet<K> by lazy(
+        asMap.keys.asNotEmptySet::getOrThrow
+    )
+
+    /** Returns all values of this map. */
+    public val values: NotEmptyList<V> by lazy(
+        asMap.values.asNotEmptyList::getOrThrow
+    )
+
+    /** The size of this map. */
+    public val size: StrictlyPositiveInt by lazy(
+        asMap.size.toStrictlyPositiveInt()::getOrThrow
+    )
+
+    /** Returns the string representation of this map. */
+    override fun toString(): String = "$asMap"
 }
+
+/**
+ * Returns a [NotEmptyMap] containing all the entries of this map, or returns an
+ * [IllegalArgumentException] if this map is empty.
+ */
+@SinceKotoolsTypes("4.0")
+public val <K, V> Map<K, V>.asNotEmptyMap: Result<NotEmptyMap<K, V>>
+    get() = if (isEmpty()) Result.failure(EmptyMapException)
+    else entries.map(Map.Entry<K, V>::toPair).toSuccessfulResult {
+        val head: Pair<K, V> = it.first()
+        val tail: NotEmptyMap<K, V>? = it.drop(1)
+            .toMap()
+            .asNotEmptyMap
+            .getOrNull()
+        NotEmptyMap(head, tail)
+    }
 
 /**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
@@ -39,35 +91,33 @@ public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
 ): NotEmptyMap<K, V> = mapOf(head, *tail)
-    .toNotEmptyMap()
+    .asNotEmptyMap
     .getOrThrow()
-
-/**
- * Returns a [NotEmptyMap] containing all the entries of this map, or returns an
- * [IllegalArgumentException] if this map is empty.
- */
-@SinceKotoolsTypes("4.0")
-public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
-    NotEmptyMap of this
 
 internal class NotEmptyMapSerializer<K, V>(
     keySerializer: KSerializer<K>,
     valueSerializer: KSerializer<V>
-) : DelegatedSerializer<Map<K, V>, NotEmptyMap<K, V>> {
-    override val delegate: KSerializer<Map<K, V>> by lazy {
+) : KSerializer<NotEmptyMap<K, V>> {
+    private val delegate: KSerializer<Map<K, V>> by lazy {
         MapSerializer(keySerializer, valueSerializer)
     }
 
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.collection}.NotEmptyMap"::toNotBlankString
-    )
-
-    override val deserializationException: IllegalArgumentException by lazy {
-        EmptyMapException
+    @ExperimentalSerializationApi
+    override val descriptor: SerialDescriptor by lazy {
+        SerialDescriptor(
+            "${Package.collection}.NotEmptyMap",
+            delegate.descriptor
+        )
     }
 
-    override fun Map<K, V>.toResultOfB(): Result<NotEmptyMap<K, V>> =
-        toNotEmptyMap()
+    override fun serialize(encoder: Encoder, value: NotEmptyMap<K, V>): Unit =
+        encoder.encodeSerializableValue(delegate, value.asMap)
+
+    override fun deserialize(decoder: Decoder): NotEmptyMap<K, V> = decoder
+        .decodeSerializableValue(delegate)
+        .asNotEmptyMap
+        .getOrNull()
+        ?: throw SerializationException(EmptyMapException)
 }
 
 private object EmptyMapException :

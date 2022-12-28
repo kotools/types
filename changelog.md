@@ -43,3 +43,5 @@ The `AnyInt` hierarchy representing integers
   ([#8](https://github.com/kotools/types/issues/8)).
 - Inheritance between the `NotEmptySet` and the `Set` types
   ([#9](https://github.com/kotools/types/issues/9)).
+- Inheritance between the `NotEmptyMap` and the `Map` types
+  ([#10](https://github.com/kotools/types/issues/10)).
