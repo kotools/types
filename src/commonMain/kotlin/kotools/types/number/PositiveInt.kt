@@ -25,7 +25,7 @@ public sealed interface PositiveInt : AnyInt
 public val Int.asPositiveInt: Result<PositiveInt>
     get() = when {
         this == ZeroInt.asInt -> Result.success(ZeroInt)
-        this > ZeroInt.asInt -> toStrictlyPositiveInt()
+        this > ZeroInt.asInt -> asStrictlyPositiveInt
         else -> Result.failure(this shouldBe aPositiveNumber)
     }
 

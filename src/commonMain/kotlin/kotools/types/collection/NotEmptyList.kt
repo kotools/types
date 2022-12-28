@@ -11,7 +11,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.toStrictlyPositiveInt
+import kotools.types.number.asStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /**
@@ -36,7 +36,7 @@ public data class NotEmptyList<out E> internal constructor(
 
     /** The size of this list. */
     public val size: StrictlyPositiveInt by lazy(
-        asList.size.toStrictlyPositiveInt()::getOrThrow
+        asList.size.asStrictlyPositiveInt::getOrThrow
     )
 
     /** Returns the string representation of this list. */

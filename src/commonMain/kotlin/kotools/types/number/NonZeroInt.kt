@@ -23,7 +23,7 @@ public sealed interface NonZeroInt : AnyInt
 @SinceKotoolsTypes("4.0")
 public val Int.asNonZeroInt: Result<NonZeroInt>
     get() = when {
-        this > ZeroInt.asInt -> toStrictlyPositiveInt()
+        this > ZeroInt.asInt -> asStrictlyPositiveInt
         this < ZeroInt.asInt -> toStrictlyNegativeInt()
         else -> Result.failure(this shouldBe otherThanZero)
     }
