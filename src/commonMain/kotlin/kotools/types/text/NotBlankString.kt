@@ -19,7 +19,7 @@ import kotlin.jvm.JvmInline
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  *
- * See the [asNotBlankString] function for building a [NotBlankString].
+ * See the [asNotBlankString] property for building a [NotBlankString].
  */
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
