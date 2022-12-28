@@ -10,7 +10,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-internal val positiveIntRange: IntRange = ZeroInt.value..Int.MAX_VALUE
+internal val positiveIntRange: IntRange = ZeroInt.asInt..Int.MAX_VALUE
 
 class PositiveIntTest {
     @Test
@@ -18,7 +18,7 @@ class PositiveIntTest {
         val expected: Int = positiveIntRange.random()
         val actual: Int = expected.toPositiveInt()
             .getOrThrow()
-            .value
+            .asInt
         assertEquals(expected, actual)
     }
 
@@ -46,7 +46,7 @@ class PositiveIntSerializerTest {
             .toPositiveInt()
             .getOrThrow()
         assertEquals(
-            expected = Json.encodeToString(x.value),
+            expected = Json.encodeToString(x.asInt),
             actual = Json.encodeToString(PositiveIntSerializer, x)
         )
     }
@@ -57,7 +57,7 @@ class PositiveIntSerializerTest {
         val encoded: String = Json.encodeToString(expected)
         val result: PositiveInt =
             Json.decodeFromString(PositiveIntSerializer, encoded)
-        assertEquals(expected, actual = result.value)
+        assertEquals(expected, actual = result.asInt)
     }
 
     @Test

@@ -16,18 +16,18 @@ import kotools.types.text.asNotBlankString
 @Serializable(AnyIntSerializerImplementation::class)
 @SinceKotoolsTypes("4.0")
 public sealed interface AnyInt : Comparable<AnyInt> {
-    /** The value to hold. */
-    public val value: Int
+    /** Returns this integer as an [Int]. */
+    public val asInt: Int
 
     /**
-     * Compares this [value] with the [other] value for order.
-     * Returns zero if this [value] equals the [other] value, a negative number
-     * if it's less than the [other] value, or a positive number if it's greater
-     * than the [other] value.
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
      */
-    override fun compareTo(other: AnyInt): Int = value.compareTo(other.value)
+    override fun compareTo(other: AnyInt): Int = asInt.compareTo(other.asInt)
 
-    /** Returns this [value] as a [String]. */
+    /** Returns the string representation of this integer. */
     override fun toString(): String
 }
 
@@ -40,7 +40,7 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
             .getOrThrow()
 
     override fun serialize(encoder: Encoder, value: I): Unit =
-        encoder.encodeInt(value.value)
+        encoder.encodeInt(value.asInt)
 
     fun deserialize(value: Int): I
 
@@ -55,8 +55,8 @@ internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
     )
 
     override fun deserialize(value: Int): AnyInt = when {
-        value == ZeroInt.value -> Result.success(ZeroInt)
-        value > ZeroInt.value -> value.toStrictlyPositiveInt()
+        value == ZeroInt.asInt -> Result.success(ZeroInt)
+        value > ZeroInt.asInt -> value.toStrictlyPositiveInt()
         else -> value.toStrictlyNegativeInt()
     }.getOrThrow()
 }

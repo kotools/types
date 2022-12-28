@@ -22,13 +22,13 @@ class NonZeroIntTest {
             .random()
         val result: Int = value.toNonZeroInt()
             .getOrThrow()
-            .value
+            .asInt
         assertEquals(value, result)
     }
 
     @Test
     fun int_toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
-        val result: Result<NonZeroInt> = ZeroInt.value.toNonZeroInt()
+        val result: Result<NonZeroInt> = ZeroInt.asInt.toNonZeroInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -51,7 +51,7 @@ class NonZeroIntSerializerTest {
             .toNonZeroInt()
             .getOrThrow()
         val result: String = Json.encodeToString(NonZeroIntSerializer, x)
-        val expected: String = Json.encodeToString(x.value)
+        val expected: String = Json.encodeToString(x.asInt)
         assertEquals(expected, result)
     }
 
@@ -62,12 +62,12 @@ class NonZeroIntSerializerTest {
         val encoded: String = Json.encodeToString(value)
         val result: NonZeroInt =
             Json.decodeFromString(NonZeroIntSerializer, encoded)
-        assertEquals(value, result.value)
+        assertEquals(value, result.asInt)
     }
 
     @Test
     fun deserialization_should_fail_with_an_Int_that_equals_zero() {
-        val encoded: String = Json.encodeToString(ZeroInt.value)
+        val encoded: String = Json.encodeToString(ZeroInt.asInt)
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString(NonZeroIntSerializer, encoded)
         }

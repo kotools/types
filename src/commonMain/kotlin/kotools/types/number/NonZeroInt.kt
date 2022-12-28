@@ -22,8 +22,8 @@ public sealed interface NonZeroInt : AnyInt
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = when {
-    this > ZeroInt.value -> toStrictlyPositiveInt()
-    this < ZeroInt.value -> toStrictlyNegativeInt()
+    this > ZeroInt.asInt -> toStrictlyPositiveInt()
+    this < ZeroInt.asInt -> toStrictlyNegativeInt()
     else -> Result.failure(this shouldBe otherThanZero)
 }
 

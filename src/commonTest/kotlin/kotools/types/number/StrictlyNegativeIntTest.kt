@@ -31,7 +31,7 @@ class StrictlyNegativeIntTest {
         assertEquals(
             actual = value.toStrictlyNegativeInt()
                 .getOrThrow()
-                .value,
+                .asInt,
             expected = value
         )
     }
@@ -61,7 +61,7 @@ class StrictlyNegativeIntSerializerTest {
             .getOrThrow()
         assertEquals(
             actual = Json.encodeToString(x),
-            expected = Json.encodeToString(x.value)
+            expected = Json.encodeToString(x.asInt)
         )
     }
 
@@ -70,7 +70,7 @@ class StrictlyNegativeIntSerializerTest {
         val value: Int = strictlyNegativeIntRange.random()
         val encoded: String = Json.encodeToString(value)
         val result: StrictlyNegativeInt = Json.decodeFromString(encoded)
-        assertEquals(actual = result.value, expected = value)
+        assertEquals(actual = result.asInt, expected = value)
     }
 
     @Test

@@ -42,7 +42,7 @@ class NotEmptyListTest {
         val elements: List<Int> = List(3) { Random.nextInt() }
         val result: StrictlyPositiveInt =
             elements.asNotEmptyList.getOrThrow().size
-        assertEquals(actual = result.value, expected = elements.size)
+        assertEquals(actual = result.asInt, expected = elements.size)
     }
 
     @Test
