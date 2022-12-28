@@ -44,7 +44,7 @@ class NotEmptySetTest {
             .toSet()
         val result: StrictlyPositiveInt =
             elements.asNotEmptySet.getOrThrow().size
-        assertEquals(actual = result.value, expected = elements.size)
+        assertEquals(actual = result.asInt, expected = elements.size)
     }
 
     @Test

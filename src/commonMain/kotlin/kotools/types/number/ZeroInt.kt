@@ -11,17 +11,17 @@ import kotools.types.text.asNotBlankString
 @Serializable(ZeroIntSerializer::class)
 @SinceKotoolsTypes("4.0")
 public object ZeroInt : PositiveInt, NegativeInt {
-    override val value: Int = 0
+    override val asInt: Int = 0
 
     /**
      * Returns `true` if the [other] value is a [ZeroInt] or `false` otherwise.
      */
     override fun equals(other: Any?): Boolean = other is ZeroInt
 
-    /** Returns the hash code of this [value]. */
-    override fun hashCode(): Int = value.hashCode()
+    /** Returns the hash code of this integer. */
+    override fun hashCode(): Int = asInt.hashCode()
 
-    override fun toString(): String = "$value"
+    override fun toString(): String = "$asInt"
 }
 
 internal object ZeroIntSerializer : AnyIntSerializer<ZeroInt> {

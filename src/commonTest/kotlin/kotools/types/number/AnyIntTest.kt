@@ -59,7 +59,7 @@ class AnyIntSerializerTest {
             .toStrictlyPositiveInt()
             .getOrThrow()
         val result: String = Json.encodeToString(serializer, x)
-        val expected: String = Json.encodeToString(x.value)
+        val expected: String = Json.encodeToString(x.asInt)
         assertEquals(expected, result)
     }
 
@@ -68,6 +68,6 @@ class AnyIntSerializerTest {
         val value: Int = Random.nextInt()
         val encoded: String = Json.encodeToString(value)
         val result: AnyInt = Json.decodeFromString(serializer, encoded)
-        assertEquals(value, result.value)
+        assertEquals(value, result.asInt)
     }
 }

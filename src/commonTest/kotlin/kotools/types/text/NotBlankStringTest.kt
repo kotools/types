@@ -16,7 +16,7 @@ class NotBlankStringTest {
     fun length_should_pass() {
         val string = "hello world"
         assertEquals(
-            actual = string.asNotBlankString.getOrThrow().length.value,
+            actual = string.asNotBlankString.getOrThrow().length.asInt,
             expected = string.length
         )
     }

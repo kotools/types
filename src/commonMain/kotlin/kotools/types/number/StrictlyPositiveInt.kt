@@ -19,15 +19,15 @@ import kotlin.jvm.JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt
-private constructor(override val value: Int) : NonZeroInt, PositiveInt {
+private constructor(override val asInt: Int) : NonZeroInt, PositiveInt {
     internal companion object {
         infix fun of(value: Int): Result<StrictlyPositiveInt> = value
-            .takeIf { it > ZeroInt.value }
+            .takeIf { it > ZeroInt.asInt }
             ?.toSuccessfulResult(::StrictlyPositiveInt)
             ?: Result.failure(value shouldBe aStrictlyPositiveNumber)
     }
 
-    override fun toString(): String = "$value"
+    override fun toString(): String = "$asInt"
 }
 
 /**

@@ -23,8 +23,8 @@ public sealed interface PositiveInt : AnyInt
  */
 @SinceKotoolsTypes("1.1")
 public fun Int.toPositiveInt(): Result<PositiveInt> = when {
-    this == ZeroInt.value -> Result.success(ZeroInt)
-    this > ZeroInt.value -> toStrictlyPositiveInt()
+    this == ZeroInt.asInt -> Result.success(ZeroInt)
+    this > ZeroInt.asInt -> toStrictlyPositiveInt()
     else -> Result.failure(this shouldBe aPositiveNumber)
 }
 

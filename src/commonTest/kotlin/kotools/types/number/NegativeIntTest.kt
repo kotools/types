@@ -10,7 +10,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-internal val negativeIntRange: IntRange = Int.MIN_VALUE..ZeroInt.value
+internal val negativeIntRange: IntRange = Int.MIN_VALUE..ZeroInt.asInt
 
 class NegativeIntTest {
     @Test
@@ -18,7 +18,7 @@ class NegativeIntTest {
         val value: Int = negativeIntRange.random()
         val result: Int = value.toNegativeInt()
             .getOrThrow()
-            .value
+            .asInt
         assertEquals(value, result)
     }
 
@@ -45,7 +45,7 @@ class NegativeIntSerializerTest {
             .toNegativeInt()
             .getOrThrow()
         val result: String = Json.encodeToString(NegativeIntSerializer, x)
-        val expected: String = Json.encodeToString(x.value)
+        val expected: String = Json.encodeToString(x.asInt)
         assertEquals(expected, result)
     }
 
@@ -55,7 +55,7 @@ class NegativeIntSerializerTest {
         val encoded: String = Json.encodeToString(value)
         val result: NegativeInt =
             Json.decodeFromString(NegativeIntSerializer, encoded)
-        assertEquals(value, result.value)
+        assertEquals(value, result.asInt)
     }
 
     @Test

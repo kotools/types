@@ -43,7 +43,7 @@ class ZeroIntSerializerTest {
     @Test
     fun serialize_should_behave_like_the_zero_integer(): Unit = assertEquals(
         actual = Json.encodeToString(ZeroInt),
-        expected = Json.encodeToString(ZeroInt.value)
+        expected = Json.encodeToString(ZeroInt.asInt)
     )
 
     @Test

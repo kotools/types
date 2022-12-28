@@ -19,7 +19,7 @@ class StrictlyPositiveIntTest {
         .random()
         .toStrictlyPositiveInt()
         .getOrThrow()
-        .run { assertEquals(actual = toString(), expected = "$value") }
+        .run { assertEquals(actual = toString(), expected = "$asInt") }
 
     @Test
     fun int_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Int() {
@@ -27,7 +27,7 @@ class StrictlyPositiveIntTest {
         assertEquals(
             actual = value.toStrictlyPositiveInt()
                 .getOrThrow()
-                .value,
+                .asInt,
             expected = value
         )
     }
@@ -57,7 +57,7 @@ class StrictlyPositiveIntSerializerTest {
             .getOrThrow()
         assertEquals(
             actual = Json.encodeToString(x),
-            expected = Json.encodeToString(x.value)
+            expected = Json.encodeToString(x.asInt)
         )
     }
 
@@ -66,7 +66,7 @@ class StrictlyPositiveIntSerializerTest {
         val value: Int = strictlyPositiveIntRange.random()
         val encoded: String = Json.encodeToString(value)
         val result: StrictlyPositiveInt = Json.decodeFromString(encoded)
-        assertEquals(actual = result.value, expected = value)
+        assertEquals(actual = result.asInt, expected = value)
     }
 
     @Test
