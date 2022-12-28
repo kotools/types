@@ -5,7 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.text.asNotBlankString
 import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
@@ -41,7 +41,7 @@ public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {
     override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.StrictlyNegativeInt"::toNotBlankString
+        "${Package.number}.StrictlyNegativeInt"::asNotBlankString
     )
 
     override fun deserialize(value: Int): StrictlyNegativeInt = value

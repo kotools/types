@@ -16,20 +16,15 @@ class NotBlankStringTest {
     fun length_should_pass() {
         val string = "hello world"
         assertEquals(
-            actual = string.toNotBlankString()
-                .getOrThrow()
-                .length
-                .value,
+            actual = string.asNotBlankString.getOrThrow().length.value,
             expected = string.length
         )
     }
 
     @Test
     fun compareTo_should_pass() {
-        val x: NotBlankString = "hello".toNotBlankString()
-            .getOrThrow()
-        val y: NotBlankString = "world".toNotBlankString()
-            .getOrThrow()
+        val x: NotBlankString = "hello".asNotBlankString.getOrThrow()
+        val y: NotBlankString = "world".asNotBlankString.getOrThrow()
         assertEquals(
             actual = x.compareTo(y),
             expected = "$x".compareTo("$y")
@@ -40,16 +35,15 @@ class NotBlankStringTest {
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val value = "hello world"
         assertEquals(
-            actual = value.toNotBlankString()
-                .getOrThrow()
-                .value,
+            actual = value.asNotBlankString.getOrThrow()
+                .toString(),
             expected = value
         )
     }
 
     @Test
     fun string_toNotBlankString_should_fail_with_a_blank_String() {
-        val result: Result<NotBlankString> = "   ".toNotBlankString()
+        val result: Result<NotBlankString> = "   ".asNotBlankString
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -66,8 +60,7 @@ class NotBlankStringSerializerTest {
 
     @Test
     fun serialization_should_behave_like_a_String() {
-        val value: NotBlankString = "hello world".toNotBlankString()
-            .getOrThrow()
+        val value: NotBlankString = "hello world".asNotBlankString.getOrThrow()
         assertEquals(
             actual = Json.encodeToString(value),
             expected = Json.encodeToString("$value")
@@ -79,7 +72,7 @@ class NotBlankStringSerializerTest {
         val value = "hello world"
         val encoded: String = Json.encodeToString(value)
         val result: NotBlankString = Json.decodeFromString(encoded)
-        assertEquals(actual = result.value, expected = value)
+        assertEquals(actual = "$result", expected = value)
     }
 
     @Test

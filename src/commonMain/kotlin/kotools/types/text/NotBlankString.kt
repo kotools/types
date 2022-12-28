@@ -19,14 +19,13 @@ import kotlin.jvm.JvmInline
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  *
- * See the [toNotBlankString] function for building a [NotBlankString].
+ * See the [asNotBlankString] function for building a [NotBlankString].
  */
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("4.0")
 public value class NotBlankString private constructor(
-    /** The string to hold. */
-    public val value: String
+    private val value: String
 ) : Comparable<NotBlankString> {
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
@@ -58,13 +57,13 @@ public value class NotBlankString private constructor(
  * [IllegalArgumentException] if this string is blank.
  */
 @SinceKotoolsTypes("4.0")
-public fun String.toNotBlankString(): Result<NotBlankString> =
-    NotBlankString of this
+public val String.asNotBlankString: Result<NotBlankString>
+    get() = NotBlankString of this
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor = "${Package.text}.NotBlankString"
-        .toNotBlankString()
-        .map { PrimitiveSerialDescriptor(it.value, PrimitiveKind.STRING) }
+        .asNotBlankString
+        .map { PrimitiveSerialDescriptor("$it", PrimitiveKind.STRING) }
         .getOrThrow()
 
     override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
@@ -72,7 +71,7 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
 
     override fun deserialize(decoder: Decoder): NotBlankString = decoder
         .decodeString()
-        .toNotBlankString()
+        .asNotBlankString
         .getOrNull()
         ?: throw SerializationException(NotBlankStringException)
 }

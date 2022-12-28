@@ -5,7 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.text.asNotBlankString
 
 /**
  * Representation of integers other than [zero][ZeroInt].
@@ -29,7 +29,7 @@ public fun Int.toNonZeroInt(): Result<NonZeroInt> = when {
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.NonZeroInt"::toNotBlankString
+        "${Package.number}.NonZeroInt"::asNotBlankString
     )
 
     override fun deserialize(value: Int): NonZeroInt = value.toNonZeroInt()
