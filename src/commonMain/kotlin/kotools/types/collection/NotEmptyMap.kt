@@ -18,8 +18,8 @@ import kotools.types.toSuccessfulResult
  * Representation of maps that contain at least one entry with a key of type
  * [K] and a value of type [V].
  *
- * See the [notEmptyMapOf] or [asNotEmptyMap] functions for building a
- * [NotEmptyMap].
+ * See the [notEmptyMapOf] function or the [asNotEmptyMap] property for building
+ * a [NotEmptyMap].
  */
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")
