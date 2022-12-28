@@ -10,7 +10,7 @@ import kotools.types.text.asNotBlankString
 /**
  * Representation of positive integers including [zero][ZeroInt].
  *
- * See the [toPositiveInt] for building a [PositiveInt].
+ * See the [asPositiveInt] for building a [PositiveInt].
  */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -21,19 +21,20 @@ public sealed interface PositiveInt : AnyInt
  * [IllegalArgumentException] if this integer is
  * [strictly negative][StrictlyNegativeInt].
  */
-@SinceKotoolsTypes("1.1")
-public fun Int.toPositiveInt(): Result<PositiveInt> = when {
-    this == ZeroInt.asInt -> Result.success(ZeroInt)
-    this > ZeroInt.asInt -> toStrictlyPositiveInt()
-    else -> Result.failure(this shouldBe aPositiveNumber)
-}
+@SinceKotoolsTypes("4.0")
+public val Int.asPositiveInt: Result<PositiveInt>
+    get() = when {
+        this == ZeroInt.asInt -> Result.success(ZeroInt)
+        this > ZeroInt.asInt -> toStrictlyPositiveInt()
+        else -> Result.failure(this shouldBe aPositiveNumber)
+    }
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
     override val serialName: Result<NotBlankString> by lazy(
         "${Package.number}.PositiveInt"::asNotBlankString
     )
 
-    override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()
+    override fun deserialize(value: Int): PositiveInt = value.asPositiveInt
         .getOrNull()
         ?: throw SerializationException(value shouldBe aPositiveNumber)
 }

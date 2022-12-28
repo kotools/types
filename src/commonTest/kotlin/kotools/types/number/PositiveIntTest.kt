@@ -16,16 +16,14 @@ class PositiveIntTest {
     @Test
     fun int_toPositiveInt_should_pass_with_a_positive_Int() {
         val expected: Int = positiveIntRange.random()
-        val actual: Int = expected.toPositiveInt()
-            .getOrThrow()
-            .asInt
+        val actual: Int = expected.asPositiveInt.getOrThrow().asInt
         assertEquals(expected, actual)
     }
 
     @Test
     fun int_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
         val result: Result<PositiveInt> = strictlyNegativeIntRange.random()
-            .toPositiveInt()
+            .asPositiveInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -43,7 +41,7 @@ class PositiveIntSerializerTest {
     @Test
     fun serialization_should_behave_like_an_Int() {
         val x: PositiveInt = positiveIntRange.random()
-            .toPositiveInt()
+            .asPositiveInt
             .getOrThrow()
         assertEquals(
             expected = Json.encodeToString(x.asInt),
