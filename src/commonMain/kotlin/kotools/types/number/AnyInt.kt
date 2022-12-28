@@ -57,6 +57,6 @@ internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
     override fun deserialize(value: Int): AnyInt = when {
         value == ZeroInt.asInt -> Result.success(ZeroInt)
         value > ZeroInt.asInt -> value.asStrictlyPositiveInt
-        else -> value.toStrictlyNegativeInt()
+        else -> value.asStrictlyNegativeInt
     }.getOrThrow()
 }

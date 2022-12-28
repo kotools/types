@@ -12,7 +12,7 @@ import kotlin.jvm.JvmInline
 /**
  * Representation of negative integers excluding [zero][ZeroInt].
  *
- * See the [toStrictlyNegativeInt] function for building a
+ * See the [asStrictlyNegativeInt] property for building a
  * [StrictlyNegativeInt].
  */
 @JvmInline
@@ -34,9 +34,9 @@ private constructor(override val asInt: Int) : NonZeroInt, NegativeInt {
  * Returns this integer as a [StrictlyNegativeInt], or returns an
  * [IllegalArgumentException] if this integer is [positive][PositiveInt].
  */
-@SinceKotoolsTypes("1.1")
-public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    StrictlyNegativeInt of this
+@SinceKotoolsTypes("4.0")
+public val Int.asStrictlyNegativeInt: Result<StrictlyNegativeInt>
+    get() = StrictlyNegativeInt of this
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {
@@ -45,7 +45,7 @@ internal object StrictlyNegativeIntSerializer :
     )
 
     override fun deserialize(value: Int): StrictlyNegativeInt = value
-        .toStrictlyNegativeInt()
+        .asStrictlyNegativeInt
         .getOrNull()
         ?: throw SerializationException(value shouldBe aStrictlyNegativeNumber)
 }
