@@ -17,8 +17,8 @@ import kotools.types.toSuccessfulResult
 /**
  * Representation of sets that contain at least one element of type [E].
  *
- * See the [notEmptySetOf] or [asNotEmptySet] functions for building a
- * [NotEmptySet].
+ * See the [notEmptySetOf] function or the [asNotEmptySet] property for building
+ * a [NotEmptySet].
  */
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("4.0")
