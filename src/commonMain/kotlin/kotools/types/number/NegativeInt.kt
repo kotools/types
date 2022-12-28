@@ -25,7 +25,7 @@ public sealed interface NegativeInt : AnyInt
 public val Int.asNegativeInt: Result<NegativeInt>
     get() = when {
         this == ZeroInt.asInt -> Result.success(ZeroInt)
-        this < ZeroInt.asInt -> toStrictlyNegativeInt()
+        this < ZeroInt.asInt -> asStrictlyNegativeInt
         else -> Result.failure(this shouldBe aNegativeNumber)
     }
 

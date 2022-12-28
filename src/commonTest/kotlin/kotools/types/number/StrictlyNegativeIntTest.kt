@@ -18,8 +18,7 @@ class StrictlyNegativeIntTest {
     fun toString_should_behave_like_an_Int() {
         val value: Int = strictlyNegativeIntRange.random()
         assertEquals(
-            actual = value.toStrictlyNegativeInt()
-                .getOrThrow()
+            actual = value.asStrictlyNegativeInt.getOrThrow()
                 .toString(),
             expected = "$value"
         )
@@ -29,9 +28,7 @@ class StrictlyNegativeIntTest {
     fun int_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
         val value: Int = strictlyNegativeIntRange.random()
         assertEquals(
-            actual = value.toStrictlyNegativeInt()
-                .getOrThrow()
-                .asInt,
+            actual = value.asStrictlyNegativeInt.getOrThrow().asInt,
             expected = value
         )
     }
@@ -39,7 +36,7 @@ class StrictlyNegativeIntTest {
     @Test
     fun int_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
         val result: Result<StrictlyNegativeInt> = positiveIntRange.random()
-            .toStrictlyNegativeInt()
+            .asStrictlyNegativeInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -57,7 +54,7 @@ class StrictlyNegativeIntSerializerTest {
     @Test
     fun serialization_should_behave_like_an_Int() {
         val x: StrictlyNegativeInt = strictlyNegativeIntRange.random()
-            .toStrictlyNegativeInt()
+            .asStrictlyNegativeInt
             .getOrThrow()
         assertEquals(
             actual = Json.encodeToString(x),

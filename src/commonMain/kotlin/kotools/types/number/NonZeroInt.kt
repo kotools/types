@@ -24,7 +24,7 @@ public sealed interface NonZeroInt : AnyInt
 public val Int.asNonZeroInt: Result<NonZeroInt>
     get() = when {
         this > ZeroInt.asInt -> asStrictlyPositiveInt
-        this < ZeroInt.asInt -> toStrictlyNegativeInt()
+        this < ZeroInt.asInt -> asStrictlyNegativeInt
         else -> Result.failure(this shouldBe otherThanZero)
     }
 
