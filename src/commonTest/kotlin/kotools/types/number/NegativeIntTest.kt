@@ -16,16 +16,14 @@ class NegativeIntTest {
     @Test
     fun int_toNegativeInt_should_pass_with_a_negative_Int() {
         val value: Int = negativeIntRange.random()
-        val result: Int = value.toNegativeInt()
-            .getOrThrow()
-            .asInt
+        val result: Int = value.asNegativeInt.getOrThrow().asInt
         assertEquals(value, result)
     }
 
     @Test
     fun int_toNegativeInt_should_fail_with_a_strictly_positive_Int() {
         val result: Result<NegativeInt> = strictlyPositiveIntRange.random()
-            .toNegativeInt()
+            .asNegativeInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -42,7 +40,7 @@ class NegativeIntSerializerTest {
     @Test
     fun serialization_should_behave_like_an_Int() {
         val x: NegativeInt = negativeIntRange.random()
-            .toNegativeInt()
+            .asNegativeInt
             .getOrThrow()
         val result: String = Json.encodeToString(NegativeIntSerializer, x)
         val expected: String = Json.encodeToString(x.asInt)
