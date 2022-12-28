@@ -25,7 +25,7 @@ import kotools.types.toSuccessfulResult
 public data class NotEmptySet<out E> internal constructor(
     /** The first element of this set. */
     public val head: E,
-    /** All elements of this set except the first one. */
+    /** All elements of this set except [the first one][head]. */
     public val tail: NotEmptySet<E>? = null
 ) {
     /** Returns all elements of this set as a [Set] of type [E]. */
