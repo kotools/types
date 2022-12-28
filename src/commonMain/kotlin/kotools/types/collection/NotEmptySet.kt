@@ -64,13 +64,17 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptySet<E>> {
-    private val delegate: KSerializer<Set<E>> = SetSerializer(elementSerializer)
+    private val delegate: KSerializer<Set<E>> by lazy {
+        SetSerializer(elementSerializer)
+    }
 
     @ExperimentalSerializationApi
-    override val descriptor: SerialDescriptor = SerialDescriptor(
-        "${Package.collection}.NotEmptySet",
-        delegate.descriptor
-    )
+    override val descriptor: SerialDescriptor by lazy {
+        SerialDescriptor(
+            "${Package.collection}.NotEmptySet",
+            delegate.descriptor
+        )
+    }
 
     override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
         encoder.encodeSerializableValue(delegate, value.asSet)
