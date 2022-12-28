@@ -1,27 +1,74 @@
 package kotools.types.collection
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerializationException
+import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.assertHasAMessage
 import kotlin.random.Random
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class NotEmptyMapTest {
     @Test
+    fun entries_should_return_all_entries_of_this_map_as_a_NotEmptySet() {
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertEquals(
+            actual = notEmptyMap.entries.asSet,
+            expected = notEmptyMap.asMap.entries
+        )
+    }
+
+    @Test
+    fun keys_should_return_all_keys_of_this_map_as_a_NotEmptySet() {
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertEquals(
+            actual = notEmptyMap.keys.asSet,
+            expected = notEmptyMap.asMap.keys
+        )
+    }
+
+    @Test
+    fun values_should_return_all_values_of_this_map_as_a_NotEmptyList() {
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertContentEquals(
+            actual = notEmptyMap.values.asList,
+            expected = notEmptyMap.asMap.values
+        )
+    }
+
+    @Test
+    fun size_should_return_the_size_of_this_map_as_a_StrictlyPositiveInt() {
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertEquals(
+            actual = notEmptyMap.size.value,
+            expected = notEmptyMap.asMap.size
+        )
+    }
+
+    @Test
     fun toString_should_behave_like_a_Map() {
-        val map: Map<String, Int> = mapOf("a" to Random.nextInt())
-        val result: String = map.toNotEmptyMap()
-            .getOrThrow()
-            .toString()
-        assertEquals("$map", result)
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertEquals(actual = "$notEmptyMap", expected = "${notEmptyMap.asMap}")
     }
 
     @Test
@@ -31,23 +78,29 @@ class NotEmptyMapTest {
             "b" to Random.nextInt(),
             "c" to Random.nextInt()
         )
-        val result: NotEmptyMap<String, Int> = notEmptyMapOf(head, *tail)
-        val expected: Map<String, Int> = mapOf(head, *tail)
-        result shouldEqual expected
+        assertEquals(
+            actual = notEmptyMapOf(head, *tail).asMap,
+            expected = mapOf(head, *tail)
+        )
     }
 
     @Test
     fun map_toNotEmptyMap_should_pass_with_a_not_empty_Map() {
-        val map: Map<String, Int> = mapOf("a" to Random.nextInt())
-        val result: NotEmptyMap<String, Int> = map.toNotEmptyMap()
-            .getOrThrow()
-        result shouldEqual map
+        val map: Map<String, Int> = mapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertEquals(
+            actual = map.asNotEmptyMap.getOrThrow().asMap,
+            expected = map
+        )
     }
 
     @Test
     fun map_toNotEmptyMap_should_fail_with_an_empty_Map() {
         val result: Result<NotEmptyMap<String, Int>> = emptyMap<String, Int>()
-            .toNotEmptyMap()
+            .asNotEmptyMap
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -57,46 +110,60 @@ class NotEmptyMapSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NotEmptyMap_as_serial_name() {
+        val keySerializer: KSerializer<String> = String.serializer()
+        val valueSerializer: KSerializer<Int> = Int.serializer()
         val result: String = NotEmptyMap
-            .serializer(String.serializer(), Int.serializer())
+            .serializer(keySerializer, valueSerializer)
             .descriptor
             .serialName
-        assertEquals("${Package.collection}.NotEmptyMap", result)
+        assertEquals(
+            actual = result,
+            expected = "${Package.collection}.NotEmptyMap"
+        )
     }
 
     @Test
     fun serialization_should_behave_like_a_Map() {
-        val map: Map<String, Int> = mapOf("a" to Random.nextInt())
-        val notEmptyMap: NotEmptyMap<String, Int> = map.toNotEmptyMap()
-            .getOrThrow()
-        val result: String = Json.encodeToString(notEmptyMap)
-        val expected: String = Json.encodeToString(map)
-        assertEquals(expected, result)
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        assertEquals(
+            actual = Json.encodeToString(notEmptyMap),
+            expected = Json.encodeToString(notEmptyMap.asMap)
+        )
     }
 
     @Test
     fun deserialization_should_pass_with_a_not_empty_Map() {
-        val map: Map<String, Int> = mapOf("a" to Random.nextInt())
-        val encoded: String = Json.encodeToString(map)
-        val result: NotEmptyMap<String, Int> = Json.decodeFromString(encoded)
-        result shouldEqual map
+        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        val encoded: String = Json.encodeToString(notEmptyMap)
+        assertEquals(
+            actual = Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
+                .asMap,
+            expected = notEmptyMap.asMap
+        )
     }
 
     @Test
     fun deserialization_should_fail_with_an_empty_Map() {
         val map: Map<String, Int> = emptyMap()
         val encoded: String = Json.encodeToString(map)
-        val exception: SerializationException = assertFailsWith {
+        assertFailsWith<SerializationException> {
             Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
-        }
-        exception.assertHasAMessage()
+        }.assertHasAMessage()
     }
 }
 
-private infix fun <K, V> Map<K, V>.shouldEqual(other: Map<K, V>) {
-    assertEquals(size, other.size)
-    forEach {
-        assertTrue { other.containsKey(it.key) }
-        assertEquals(it.value, other[it.key])
+private fun <K, V> assertEquals(actual: Map<K, V>, expected: Map<K, V>) {
+    assertEquals(actual = actual.size, expected = expected.size)
+    actual.forEach {
+        assertTrue { expected.containsKey(it.key) }
+        assertEquals(actual = it.value, expected = expected[it.key])
     }
 }
