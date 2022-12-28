@@ -42,17 +42,17 @@ public data class NotEmptyMap<K, out V> internal constructor(
         } ?: mapOf(head)
     }
 
-    /** Returns all entries of this map. */
+    /** All entries of this map. */
     public val entries: NotEmptySet<Map.Entry<K, V>> by lazy(
         asMap.entries.asNotEmptySet::getOrThrow
     )
 
-    /** Returns all keys of this map. */
+    /** All keys of this map. */
     public val keys: NotEmptySet<K> by lazy(
         asMap.keys.asNotEmptySet::getOrThrow
     )
 
-    /** Returns all values of this map. */
+    /** All values of this map. */
     public val values: NotEmptyList<V> by lazy(
         asMap.values.asNotEmptyList::getOrThrow
     )
