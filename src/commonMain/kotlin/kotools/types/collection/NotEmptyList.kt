@@ -68,14 +68,17 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptyList<E>> {
-    private val delegate: KSerializer<List<E>> =
+    private val delegate: KSerializer<List<E>> by lazy {
         ListSerializer(elementSerializer)
+    }
 
     @ExperimentalSerializationApi
-    override val descriptor: SerialDescriptor = SerialDescriptor(
-        "${Package.collection}.NotEmptyList",
-        delegate.descriptor
-    )
+    override val descriptor: SerialDescriptor by lazy {
+        SerialDescriptor(
+            "${Package.collection}.NotEmptyList",
+            delegate.descriptor
+        )
+    }
 
     override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
         encoder.encodeSerializableValue(delegate, value.asList)
