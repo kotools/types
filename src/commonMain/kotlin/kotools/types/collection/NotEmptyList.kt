@@ -17,8 +17,8 @@ import kotools.types.toSuccessfulResult
 /**
  * Representation of lists that contain at least one element of type [E].
  *
- * See the [notEmptyListOf] or [asNotEmptyList] functions for building a
- * [NotEmptyList].
+ * See the [notEmptyListOf] function or the [asNotEmptyList] property for
+ * building a [NotEmptyList].
  */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
