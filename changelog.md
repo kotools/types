@@ -18,30 +18,68 @@ All notable changes to this project will be documented in this file.
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-## Work in progress
+## [Unreleased]
 
-## Version 4.0.0 - 2023/01/02
+## [4.0.0] - 2023/01/02
 
 ### Added
 
-The `AnyInt` hierarchy representing integers
-([#132](https://github.com/kotools/libraries/issues/132)).
+Introduce a new `AnyInt` hierarchy representing integers (issue
+[#132](https://github.com/kotools/libraries/issues/132)).
+
+```kotlin
+interface AnyInt : Comparable<AnyInt>
+interface NonZeroInt : AnyInt
+interface PositiveInt : AnyInt
+interface NegativeInt : AnyInt
+class StrictlyPositiveInt : NonZeroInt, PositiveInt
+class StrictlyNegativeInt : NonZeroInt, NegativeInt
+object ZeroInt : PositiveInt, NegativeInt
+```
 
 ### Changed
 
-- Move the `NotBlankString` type to the `kotools.types.text` package
-  ([#133](https://github.com/kotools/libraries/issues/133)).
-- Move the following types to the `kotools.types.collection` package:
-  `NotEmptyList`, `NotEmptySet` and `NotEmpty`
-  ([#138](https://github.com/kotools/libraries/issues/138)).
+- Move the `NotBlankString` type from the `kotools.types` package to the
+  `kotools.types.text` package with a new API (issue
+  [#133](https://github.com/kotools/libraries/issues/133)).
+
+```kotlin
+"Hello world".toNotBlankString() // before
+"Hello world".asNotBlankString // before
+```
+
+- Move the following types from the `kotools.types` package to the
+  `kotools.types.collection` package with a new API: `NotEmptyList`,
+  `NotEmptySet` and `NotEmpty` (issue
+  [#138](https://github.com/kotools/libraries/issues/138)).
+  Examples are available in the `Removed` section below.
 
 ### Removed
 
-- Deprecated declarations from version 3
-  ([#37](https://github.com/kotools/libraries/issues/37)).
-- Inheritance between the `NotEmptyList` and the `List` types
-  ([#8](https://github.com/kotools/types/issues/8)).
-- Inheritance between the `NotEmptySet` and the `Set` types
-  ([#9](https://github.com/kotools/types/issues/9)).
-- Inheritance between the `NotEmptyMap` and the `Map` types
-  ([#10](https://github.com/kotools/types/issues/10)).
+- Remove inheritance between the `NotEmptyList` and the `List` types (issue
+  [#8](https://github.com/kotools/types/issues/8)).
+
+```kotlin
+notEmptyListOf(1, 2, 3) as List<Int> // before
+notEmptyListOf(1, 2, 3).asList // after
+```
+
+- Remove inheritance between the `NotEmptySet` and the `Set` types (issue
+  [#9](https://github.com/kotools/types/issues/9)).
+
+```kotlin
+notEmptySetOf(1, 2, 3) as Set<Int> // before
+notEmptySetOf(1, 2, 3).asSet // after
+```
+
+- Remove inheritance between the `NotEmptyMap` and the `Map` types (issue
+  [#10](https://github.com/kotools/types/issues/10)).
+
+```kotlin
+notEmptyMapOf("a" to 1, "b" to 2, "c" to 3) as Map<String, Int> // before
+notEmptyMapOf("a" to 1, "b" to 2, "c" to 3).asMap // after
+```
+
+- Remove all declarations from previous API while keeping the essentials: the
+  types and their builder (issue
+  [#37](https://github.com/kotools/libraries/issues/37) in kotools/libraries).
