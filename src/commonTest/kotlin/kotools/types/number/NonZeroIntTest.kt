@@ -14,7 +14,7 @@ class NonZeroIntTest {
     companion object {
         val ranges: Set<IntRange> = setOf(
             StrictlyPositiveInt.min.asInt..StrictlyPositiveInt.max.asInt,
-            strictlyNegativeIntRange
+            StrictlyNegativeInt.min.asInt..StrictlyNegativeInt.max.asInt
         )
     }
 

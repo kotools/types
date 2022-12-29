@@ -55,9 +55,9 @@ class ZeroIntSerializerTest {
     @Test
     fun deserialize_should_fail_with_an_Int_other_than_zero() {
         val value: Int = setOf(
-            StrictlyPositiveInt.random().asInt,
-            strictlyNegativeIntRange.random()
-        ).random()
+            StrictlyPositiveInt.random(),
+            StrictlyNegativeInt.random()
+        ).random().asInt
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException =
             assertFailsWith { Json.decodeFromString<ZeroInt>(encoded) }

@@ -20,11 +20,31 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt
 private constructor(override val asInt: Int) : NonZeroInt, NegativeInt {
-    internal companion object {
-        infix fun of(value: Int): Result<StrictlyNegativeInt> = value
+    /**
+     * Contains declarations for holding or building a [StrictlyNegativeInt].
+     */
+    public companion object {
+        /** The minimum value a [StrictlyNegativeInt] can have. */
+        public val min: StrictlyNegativeInt by lazy(
+            Int.MIN_VALUE.asStrictlyNegativeInt::getOrThrow
+        )
+
+        /** The maximum value a [StrictlyNegativeInt] can have. */
+        public val max: StrictlyNegativeInt by lazy(
+            (-1).asStrictlyNegativeInt::getOrThrow
+        )
+
+        internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
             .takeIf { it < ZeroInt.asInt }
             ?.toSuccessfulResult(::StrictlyNegativeInt)
             ?: Result.failure(value shouldBe aStrictlyNegativeNumber)
+
+        /** Returns a random [StrictlyNegativeInt]. */
+        @SinceKotoolsTypes("3.0")
+        public fun random(): StrictlyNegativeInt = (min.asInt..max.asInt)
+            .random()
+            .asStrictlyNegativeInt
+            .getOrThrow()
     }
 
     override fun toString(): String = "$asInt"

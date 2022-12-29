@@ -19,9 +19,7 @@ class AnyIntTest {
 
     @Test
     fun compareTo_should_return_a_negative_Int_with_another_AnyInt_having_a_greater_value() {
-        val x: AnyInt = strictlyNegativeIntRange.random()
-            .asStrictlyNegativeInt
-            .getOrThrow()
+        val x: AnyInt = StrictlyNegativeInt.random()
         val y: AnyInt = StrictlyPositiveInt.random()
         val result: Int = x.compareTo(y)
         assertTrue { result < ZeroInt.asInt }
@@ -30,9 +28,7 @@ class AnyIntTest {
     @Test
     fun compareTo_should_return_a_positive_Int_with_another_AnyInt_having_a_lower_value() {
         val x: AnyInt = StrictlyPositiveInt.random()
-        val y: AnyInt = strictlyNegativeIntRange.random()
-            .asStrictlyNegativeInt
-            .getOrThrow()
+        val y: AnyInt = StrictlyNegativeInt.random()
         val result: Int = x.compareTo(y)
         assertTrue { result > ZeroInt.asInt }
     }
