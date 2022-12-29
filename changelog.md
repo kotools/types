@@ -1,4 +1,4 @@
-# Kotools Types - Changelog
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -18,9 +18,9 @@ All notable changes to this project will be documented in this file.
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-## Unreleased <a name="unreleased"></a>
+## Unreleased
 
-## 4.0.0 - 2023/01/02 <a name="4.0.0"></a>
+## 4.0.0
 
 ### Added
 
