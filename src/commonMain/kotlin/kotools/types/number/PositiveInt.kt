@@ -14,7 +14,24 @@ import kotools.types.text.asNotBlankString
  */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public sealed interface PositiveInt : AnyInt
+public sealed interface PositiveInt : AnyInt {
+    /** Contains declarations for holding or building a [PositiveInt]. */
+    public companion object {
+        /** The minimum value a [PositiveInt] can have. */
+        public val min: ZeroInt = ZeroInt
+
+        /** The maximum value a [PositiveInt] can have. */
+        public val max: StrictlyPositiveInt by lazy(
+            Int.MAX_VALUE.asStrictlyPositiveInt::getOrThrow
+        )
+
+        /** Returns a random [PositiveInt]. */
+        @SinceKotoolsTypes("3.0")
+        public fun random(): PositiveInt = (min.asInt..max.asInt).random()
+            .asPositiveInt
+            .getOrThrow()
+    }
+}
 
 /**
  * Returns this integer as a [PositiveInt], or returns an
