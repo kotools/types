@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 Introduce a new `AnyInt` hierarchy representing integers (issue
-[#132](https://github.com/kotools/libraries/issues/132)).
+[#132](https://github.com/kotools/libraries/issues/132) in [kotools/libraries]).
 
 ```kotlin
 interface AnyInt : Comparable<AnyInt>
@@ -41,7 +41,8 @@ object ZeroInt : PositiveInt, NegativeInt
 
 - Move the `NotBlankString` type from the `kotools.types` package to the
   `kotools.types.text` package with a new API (issue
-  [#133](https://github.com/kotools/libraries/issues/133)).
+  [#133](https://github.com/kotools/libraries/issues/133) in
+  [kotools/libraries]).
 
 ```kotlin
 "Hello world".toNotBlankString() // before
@@ -51,7 +52,8 @@ object ZeroInt : PositiveInt, NegativeInt
 - Move the following types from the `kotools.types` package to the
   `kotools.types.collection` package with a new API: `NotEmptyList`,
   `NotEmptySet` and `NotEmpty` (issue
-  [#138](https://github.com/kotools/libraries/issues/138)).
+  [#138](https://github.com/kotools/libraries/issues/138) in
+  [kotools/libraries]).
   Examples are available in the `Removed` section below.
 
 ### Removed
@@ -82,4 +84,6 @@ notEmptyMapOf("a" to 1, "b" to 2, "c" to 3).asMap // after
 
 - Remove all declarations from previous API while keeping the essentials: the
   types and their builder (issue
-  [#37](https://github.com/kotools/libraries/issues/37) in kotools/libraries).
+  [#37](https://github.com/kotools/libraries/issues/37) in [kotools/libraries]).
+
+[kotools/libraries]: https://github.com/kotools/libraries
