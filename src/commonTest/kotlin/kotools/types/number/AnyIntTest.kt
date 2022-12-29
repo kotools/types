@@ -5,16 +5,16 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class AnyIntTest {
     @Test
     fun compareTo_should_return_zero_with_another_AnyInt_having_the_same_value() {
         val result: Int = ZeroInt.compareTo(ZeroInt)
-        assertEquals(0, result)
+        result shouldEqual ZeroInt.asInt
     }
 
     @Test
@@ -26,7 +26,7 @@ class AnyIntTest {
             .asStrictlyPositiveInt
             .getOrThrow()
         val result: Int = x.compareTo(y)
-        assertTrue { result < 0 }
+        assertTrue { result < ZeroInt.asInt }
     }
 
     @Test
@@ -38,7 +38,7 @@ class AnyIntTest {
             .asStrictlyNegativeInt
             .getOrThrow()
         val result: Int = x.compareTo(y)
-        assertTrue { result > 0 }
+        assertTrue { result > ZeroInt.asInt }
     }
 }
 
@@ -48,10 +48,7 @@ class AnyIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_AnyInt_as_serial_name(): Unit =
-        assertEquals(
-            "${Package.number}.AnyInt",
-            serializer.descriptor.serialName
-        )
+        serializer.descriptor.serialName shouldEqual "${Package.number}.AnyInt"
 
     @Test
     fun serialize_should_behave_like_an_Int() {
@@ -59,8 +56,7 @@ class AnyIntSerializerTest {
             .asStrictlyPositiveInt
             .getOrThrow()
         val result: String = Json.encodeToString(serializer, x)
-        val expected: String = Json.encodeToString(x.asInt)
-        assertEquals(expected, result)
+        result shouldEqual Json.encodeToString(x.asInt)
     }
 
     @Test
@@ -68,6 +64,6 @@ class AnyIntSerializerTest {
         val value: Int = Random.nextInt()
         val encoded: String = Json.encodeToString(value)
         val result: AnyInt = Json.decodeFromString(serializer, encoded)
-        assertEquals(value, result.asInt)
+        result.asInt shouldEqual value
     }
 }

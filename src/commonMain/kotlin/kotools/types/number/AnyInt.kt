@@ -44,9 +44,8 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
 
     fun deserialize(value: Int): I
 
-    override fun deserialize(decoder: Decoder): I = deserialize(
-        decoder.decodeInt()
-    )
+    override fun deserialize(decoder: Decoder): I = decoder.decodeInt()
+        .let(::deserialize)
 }
 
 internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
