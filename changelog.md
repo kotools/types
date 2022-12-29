@@ -51,7 +51,7 @@ object ZeroInt : PositiveInt, NegativeInt
 
 - Move the following types from the `kotools.types` package to the
   `kotools.types.collection` package with a new API: `NotEmptyList`,
-  `NotEmptySet` and `NotEmpty` (issue
+  `NotEmptySet` and `NotEmptyMap` (issue
   [#138](https://github.com/kotools/libraries/issues/138) in
   [kotools/libraries]).
   Examples are available in the `Removed` section below.
