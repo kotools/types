@@ -14,7 +14,24 @@ import kotools.types.text.asNotBlankString
  */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public sealed interface NegativeInt : AnyInt
+public sealed interface NegativeInt : AnyInt {
+    /** Contains declarations for holding or building a [NegativeInt]. */
+    public companion object {
+        /** The minimum value a [NegativeInt] can have. */
+        public val min: StrictlyNegativeInt by lazy(
+            Int.MIN_VALUE.asStrictlyNegativeInt::getOrThrow
+        )
+
+        /** The maximum value a [NegativeInt] can have. */
+        public val max: ZeroInt = ZeroInt
+
+        /** Returns a random [NegativeInt]. */
+        @SinceKotoolsTypes("3.0")
+        public fun random(): NegativeInt = (min.asInt..max.asInt).random()
+            .asNegativeInt
+            .getOrThrow()
+    }
+}
 
 /**
  * Returns this integer as a [NegativeInt], or returns an
