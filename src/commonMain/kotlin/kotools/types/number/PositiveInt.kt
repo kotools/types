@@ -22,7 +22,7 @@ public sealed interface PositiveInt : AnyInt {
 
         /** The maximum value a [PositiveInt] can have. */
         public val max: StrictlyPositiveInt by lazy(
-            Int.MAX_VALUE.asStrictlyPositiveInt::getOrThrow
+            StrictlyPositiveInt.Companion::max
         )
 
         /** Returns a random [PositiveInt]. */
