@@ -12,8 +12,10 @@ import kotlin.test.assertFailsWith
 
 class NonZeroIntTest {
     companion object {
-        val ranges: Set<IntRange> =
-            setOf(strictlyPositiveIntRange, strictlyNegativeIntRange)
+        val ranges: Set<IntRange> = setOf(
+            StrictlyPositiveInt.min.asInt..StrictlyPositiveInt.max.asInt,
+            strictlyNegativeIntRange
+        )
     }
 
     @Test

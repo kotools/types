@@ -22,18 +22,14 @@ class AnyIntTest {
         val x: AnyInt = strictlyNegativeIntRange.random()
             .asStrictlyNegativeInt
             .getOrThrow()
-        val y: AnyInt = strictlyPositiveIntRange.random()
-            .asStrictlyPositiveInt
-            .getOrThrow()
+        val y: AnyInt = StrictlyPositiveInt.random()
         val result: Int = x.compareTo(y)
         assertTrue { result < ZeroInt.asInt }
     }
 
     @Test
     fun compareTo_should_return_a_positive_Int_with_another_AnyInt_having_a_lower_value() {
-        val x: AnyInt = strictlyPositiveIntRange.random()
-            .asStrictlyPositiveInt
-            .getOrThrow()
+        val x: AnyInt = StrictlyPositiveInt.random()
         val y: AnyInt = strictlyNegativeIntRange.random()
             .asStrictlyNegativeInt
             .getOrThrow()
@@ -52,9 +48,7 @@ class AnyIntSerializerTest {
 
     @Test
     fun serialize_should_behave_like_an_Int() {
-        val x: AnyInt = strictlyPositiveIntRange.random()
-            .asStrictlyPositiveInt
-            .getOrThrow()
+        val x: AnyInt = StrictlyPositiveInt.random()
         val result: String = Json.encodeToString(serializer, x)
         result shouldEqual Json.encodeToString(x.asInt)
     }
