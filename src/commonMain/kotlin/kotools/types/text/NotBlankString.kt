@@ -34,21 +34,20 @@ public value class NotBlankString private constructor(
             ?: Result.failure(NotBlankStringException)
     }
 
-    /** Returns the length of this not blank string. */
+    /** Returns the length of this string. */
     public val length: StrictlyPositiveInt
         get() = asString.length.asStrictlyPositiveInt.getOrThrow()
 
     /**
-     * Compares this not blank string lexicographically with the [other] one for
-     * order.
-     * Returns zero if this not blank string equals the [other] one, a negative
-     * number if it's less than the [other] one, or a positive number if it's
-     * greater than the [other] one.
+     * Compares this string lexicographically with the [other] one for order.
+     * Returns zero if this string equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
      */
     override fun compareTo(other: NotBlankString): Int =
         asString.compareTo(other.asString)
 
-    /** Returns this not blank string as a [String]. */
+    /** Returns this string as a [String]. */
     override fun toString(): String = asString
 }
 
