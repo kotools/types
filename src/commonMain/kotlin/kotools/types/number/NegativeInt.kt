@@ -19,7 +19,7 @@ public sealed interface NegativeInt : AnyInt {
     public companion object {
         /** The minimum value a [NegativeInt] can have. */
         public val min: StrictlyNegativeInt by lazy(
-            Int.MIN_VALUE.asStrictlyNegativeInt::getOrThrow
+            StrictlyNegativeInt.Companion::min
         )
 
         /** The maximum value a [NegativeInt] can have. */

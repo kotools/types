@@ -42,8 +42,8 @@ class PositiveIntTest {
 
     @Test
     fun int_asPositiveInt_should_fail_with_a_strictly_negative_Int() {
-        val result: Result<PositiveInt> = strictlyNegativeIntRange.random()
-            .asPositiveInt
+        val result: Result<PositiveInt> =
+            StrictlyNegativeInt.random().asInt.asPositiveInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
     }
@@ -76,7 +76,7 @@ class PositiveIntSerializerTest {
 
     @Test
     fun deserialization_should_fail_with_a_strictly_negative_Int() {
-        val value: Int = strictlyNegativeIntRange.random()
+        val value: Int = StrictlyNegativeInt.random().asInt
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString(PositiveIntSerializer, encoded)
