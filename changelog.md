@@ -18,9 +18,9 @@ All notable changes to this project will be documented in this file.
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-## [Unreleased]
+## Unreleased <a name="unreleased"></a>
 
-## [4.0.0] - 2023/01/02
+## 4.0.0 - 2023/01/02 <a name="4.0.0"></a>
 
 ### Added
 
