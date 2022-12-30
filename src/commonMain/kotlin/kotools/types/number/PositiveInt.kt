@@ -27,8 +27,9 @@ public sealed interface PositiveInt : AnyInt {
 
         /** Returns a random [PositiveInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): PositiveInt =
-            setOf(ZeroInt, StrictlyPositiveInt.random()).random()
+        public fun random(): PositiveInt = (min.asInt..max.asInt).random()
+            .asPositiveInt
+            .getOrThrow()
     }
 }
 
