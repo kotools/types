@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.collection.NotEmptySet
+import kotools.types.collection.notEmptySetOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.asNotBlankString
 
@@ -14,7 +16,33 @@ import kotools.types.text.asNotBlankString
  */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
-public sealed interface NonZeroInt : AnyInt
+public sealed interface NonZeroInt : AnyInt {
+    /** Contains declarations for holding or building a [NonZeroInt]. */
+    public companion object {
+        /** The minimum value a [NonZeroInt] can have. */
+        public val min: StrictlyNegativeInt by lazy(
+            StrictlyNegativeInt.Companion::min
+        )
+
+        /** The maximum value a [NonZeroInt] can have. */
+        public val max: StrictlyPositiveInt by lazy(
+            StrictlyPositiveInt.Companion::max
+        )
+
+        /** Returns a random [NonZeroInt]. */
+        @SinceKotoolsTypes("3.0")
+        public fun random(): NonZeroInt {
+            val ranges: NotEmptySet<IntRange> = notEmptySetOf(
+                min.asInt..StrictlyNegativeInt.max.asInt,
+                StrictlyPositiveInt.min.asInt..max.asInt
+            )
+            return ranges.asSet.random()
+                .random()
+                .asNonZeroInt
+                .getOrThrow()
+        }
+    }
+}
 
 /**
  * Returns this integer as a [NonZeroInt], or returns an
