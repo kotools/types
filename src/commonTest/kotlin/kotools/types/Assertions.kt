@@ -1,11 +1,11 @@
 package kotools.types
 
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 infix fun <T> T.shouldEqual(expected: T): Unit = assertEquals(expected, this)
+
+infix fun <T> List<T>.contentShouldEqual(expected: List<T>): Unit =
+    assertContentEquals(expected, this)
 
 infix fun <T> T.shouldNotEqual(illegal: T): Unit =
     assertNotEquals(illegal, this)
