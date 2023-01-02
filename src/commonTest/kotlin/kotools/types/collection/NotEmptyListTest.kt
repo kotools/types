@@ -8,6 +8,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.assertHasAMessage
+import kotools.types.contentShouldEqual
 import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
 import kotlin.test.*
@@ -38,6 +39,13 @@ class NotEmptyListTest {
     }
 
     @Test
+    fun asList_should_return_all_elements_as_a_List() {
+        val elements: List<Int> = List(3) { Random.nextInt() }
+        val result: List<Int> = elements.asNotEmptyList.getOrThrow().asList
+        result contentShouldEqual elements
+    }
+
+    @Test
     fun size_should_return_the_size_of_this_list_as_a_StrictlyPositiveInt() {
         val elements: List<Int> = List(3) { Random.nextInt() }
         val result: StrictlyPositiveInt =
@@ -54,16 +62,6 @@ class NotEmptyListTest {
     }
 
     @Test
-    fun notEmptyListOf_should_pass() {
-        val head: Int = Random.nextInt()
-        val tail: Array<Int> = List(2) { Random.nextInt() }
-            .toTypedArray()
-        val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
-        val expected: List<Int> = listOf(head) + tail
-        assertContentEquals(actual = result.asList, expected = expected)
-    }
-
-    @Test
     fun collection_asNotEmptyList_should_pass_with_a_not_empty_Collection() {
         val collection: Collection<Int> = List(3) { Random.nextInt() }
         val result: NotEmptyList<Int> = collection.asNotEmptyList.getOrThrow()
@@ -75,6 +73,16 @@ class NotEmptyListTest {
         val result: Result<NotEmptyList<Int>> = emptyList<Int>().asNotEmptyList
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .assertHasAMessage()
+    }
+
+    @Test
+    fun notEmptyListOf_should_pass() {
+        val head: Int = Random.nextInt()
+        val tail: Array<Int> = List(2) { Random.nextInt() }
+            .toTypedArray()
+        val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
+        val expected: List<Int> = listOf(head) + tail
+        assertContentEquals(actual = result.asList, expected = expected)
     }
 }
 
