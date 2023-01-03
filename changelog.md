@@ -41,12 +41,6 @@ object ZeroInt : PositiveInt, NegativeInt
   `kotools.types.text` package with a new API (issue
   [#133](https://github.com/kotools/libraries/issues/133) in
   [kotools/libraries]).
-
-```kotlin
-"Hello world".toNotBlankString() // before
-"Hello world".asNotBlankString // before
-```
-
 - Move the following types from the `kotools.types` package to the
   `kotools.types.collection` package with a new API: `NotEmptyList`,
   `NotEmptySet` and `NotEmptyMap` (issue

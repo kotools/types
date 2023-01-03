@@ -19,13 +19,13 @@ import kotlin.jvm.JvmInline
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  *
- * See the [asNotBlankString] property for building a [NotBlankString].
+ * See the [toNotBlankString] property for building a [NotBlankString].
  */
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("4.0")
 public value class NotBlankString private constructor(
-    private val asString: String
+    private val value: String
 ) : Comparable<NotBlankString> {
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
@@ -36,7 +36,7 @@ public value class NotBlankString private constructor(
 
     /** Returns the length of this string. */
     public val length: StrictlyPositiveInt
-        get() = asString.length.asStrictlyPositiveInt.getOrThrow()
+        get() = value.length.asStrictlyPositiveInt.getOrThrow()
 
     /**
      * Compares this string lexicographically with the [other] one for order.
@@ -45,10 +45,10 @@ public value class NotBlankString private constructor(
      * the [other] one.
      */
     override fun compareTo(other: NotBlankString): Int =
-        asString.compareTo(other.asString)
+        value.compareTo(other.value)
 
     /** Returns this string as a [String]. */
-    override fun toString(): String = asString
+    override fun toString(): String = value
 }
 
 /**
@@ -56,8 +56,8 @@ public value class NotBlankString private constructor(
  * [IllegalArgumentException] if this string is blank.
  */
 @SinceKotoolsTypes("4.0")
-public val String.asNotBlankString: Result<NotBlankString>
-    get() = NotBlankString of this
+public fun String.toNotBlankString(): Result<NotBlankString> =
+    NotBlankString of this
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
@@ -70,7 +70,7 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
 
     override fun deserialize(decoder: Decoder): NotBlankString = decoder
         .decodeString()
-        .asNotBlankString
+        .toNotBlankString()
         .getOrNull()
         ?: throw SerializationException(NotBlankStringException)
 }
