@@ -8,31 +8,6 @@ import kotools.types.Package
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertTrue
-
-class AnyIntTest {
-    @Test
-    fun compareTo_should_return_zero_with_another_AnyInt_having_the_same_value() {
-        val result: Int = ZeroInt.compareTo(ZeroInt)
-        result shouldEqual ZeroInt.toInt()
-    }
-
-    @Test
-    fun compareTo_should_return_a_negative_Int_with_another_AnyInt_having_a_greater_value() {
-        val x: AnyInt = StrictlyNegativeInt.random()
-        val y: AnyInt = StrictlyPositiveInt.random()
-        val result: Int = x.compareTo(y)
-        assertTrue { result < ZeroInt.toInt() }
-    }
-
-    @Test
-    fun compareTo_should_return_a_positive_Int_with_another_AnyInt_having_a_lower_value() {
-        val x: AnyInt = StrictlyPositiveInt.random()
-        val y: AnyInt = StrictlyNegativeInt.random()
-        val result: Int = x.compareTo(y)
-        assertTrue { result > ZeroInt.toInt() }
-    }
-}
 
 class AnyIntSerializerTest {
     private val serializer: KSerializer<AnyInt> = AnyIntSerializerImplementation

@@ -26,7 +26,7 @@ Introduce a new `AnyInt` hierarchy representing integers (issue
 [#132](https://github.com/kotools/libraries/issues/132) in [kotools/libraries]).
 
 ```kotlin
-interface AnyInt : Comparable<AnyInt>
+interface AnyInt
 interface NonZeroInt : AnyInt
 interface PositiveInt : AnyInt
 interface NegativeInt : AnyInt
