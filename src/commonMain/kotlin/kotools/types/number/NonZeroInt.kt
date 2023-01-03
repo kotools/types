@@ -9,11 +9,7 @@ import kotools.types.collection.notEmptySetOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/**
- * Representation of integers other than [zero][ZeroInt].
- *
- * See the [asNonZeroInt] property for building a [NonZeroInt].
- */
+/** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface NonZeroInt : AnyInt {
@@ -38,7 +34,7 @@ public sealed interface NonZeroInt : AnyInt {
             )
             return ranges.asSet.random()
                 .random()
-                .asNonZeroInt
+                .toNonZeroInt()
                 .getOrThrow()
         }
     }
@@ -49,19 +45,18 @@ public sealed interface NonZeroInt : AnyInt {
  * [IllegalArgumentException] if this integer equals [zero][ZeroInt].
  */
 @SinceKotoolsTypes("4.0")
-public val Int.asNonZeroInt: Result<NonZeroInt>
-    get() = when {
-        this > ZeroInt.toInt() -> asStrictlyPositiveInt
-        this < ZeroInt.toInt() -> asStrictlyNegativeInt
-        else -> Result.failure(this shouldBe otherThanZero)
-    }
+public fun Int.toNonZeroInt(): Result<NonZeroInt> = when {
+    this > ZeroInt.toInt() -> toStrictlyPositiveInt()
+    this < ZeroInt.toInt() -> toStrictlyNegativeInt()
+    else -> Result.failure(this shouldBe otherThanZero)
+}
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy(
         "${Package.number}.NonZeroInt"::toNotBlankString
     )
 
-    override fun deserialize(value: Int): NonZeroInt = value.asNonZeroInt
+    override fun deserialize(value: Int): NonZeroInt = value.toNonZeroInt()
         .getOrNull()
         ?: throw SerializationException(value shouldBe otherThanZero)
 }

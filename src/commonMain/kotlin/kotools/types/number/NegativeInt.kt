@@ -7,11 +7,7 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/**
- * Representation of negative integers including [zero][ZeroInt].
- *
- * See the [asNegativeInt] property for building a [NegativeInt].
- */
+/** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface NegativeInt : AnyInt {
@@ -30,7 +26,7 @@ public sealed interface NegativeInt : AnyInt {
         public fun random(): NegativeInt {
             val range: IntRange = min.toInt()..max.toInt()
             return range.random()
-                .asNegativeInt
+                .toNegativeInt()
                 .getOrThrow()
         }
     }
@@ -42,19 +38,18 @@ public sealed interface NegativeInt : AnyInt {
  * [strictly positive][StrictlyPositiveInt].
  */
 @SinceKotoolsTypes("4.0")
-public val Int.asNegativeInt: Result<NegativeInt>
-    get() = when {
-        this == ZeroInt.toInt() -> Result.success(ZeroInt)
-        this < ZeroInt.toInt() -> asStrictlyNegativeInt
-        else -> Result.failure(this shouldBe aNegativeNumber)
-    }
+public fun Int.toNegativeInt(): Result<NegativeInt> = when {
+    this == ZeroInt.toInt() -> Result.success(ZeroInt)
+    this < ZeroInt.toInt() -> toStrictlyNegativeInt()
+    else -> Result.failure(this shouldBe aNegativeNumber)
+}
 
 internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
     override val serialName: Result<NotBlankString> by lazy(
         "${Package.number}.NegativeInt"::toNotBlankString
     )
 
-    override fun deserialize(value: Int): NegativeInt = value.asNegativeInt
+    override fun deserialize(value: Int): NegativeInt = value.toNegativeInt()
         .getOrNull()
         ?: throw SerializationException(value shouldBe aNegativeNumber)
 }

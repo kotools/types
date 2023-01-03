@@ -7,11 +7,7 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/**
- * Representation of positive integers including [zero][ZeroInt].
- *
- * See the [asPositiveInt] property for building a [PositiveInt].
- */
+/** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public sealed interface PositiveInt : AnyInt {
@@ -28,7 +24,7 @@ public sealed interface PositiveInt : AnyInt {
         /** Returns a random [PositiveInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): PositiveInt = (min.toInt()..max.toInt()).random()
-            .asPositiveInt
+            .toPositiveInt()
             .getOrThrow()
     }
 }
@@ -39,19 +35,18 @@ public sealed interface PositiveInt : AnyInt {
  * [strictly negative][StrictlyNegativeInt].
  */
 @SinceKotoolsTypes("4.0")
-public val Int.asPositiveInt: Result<PositiveInt>
-    get() = when {
-        this == ZeroInt.toInt() -> Result.success(ZeroInt)
-        this > ZeroInt.toInt() -> asStrictlyPositiveInt
-        else -> Result.failure(this shouldBe aPositiveNumber)
-    }
+public fun Int.toPositiveInt(): Result<PositiveInt> = when {
+    this == ZeroInt.toInt() -> Result.success(ZeroInt)
+    this > ZeroInt.toInt() -> toStrictlyPositiveInt()
+    else -> Result.failure(this shouldBe aPositiveNumber)
+}
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
     override val serialName: Result<NotBlankString> by lazy(
         "${Package.number}.PositiveInt"::toNotBlankString
     )
 
-    override fun deserialize(value: Int): PositiveInt = value.asPositiveInt
+    override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()
         .getOrNull()
         ?: throw SerializationException(value shouldBe aPositiveNumber)
 }

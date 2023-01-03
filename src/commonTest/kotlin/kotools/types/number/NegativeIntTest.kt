@@ -33,18 +33,19 @@ class NegativeIntCompanionTest {
 
 class NegativeIntTest {
     @Test
-    fun int_asNegativeInt_should_pass_with_a_negative_Int() {
+    fun int_toNegativeInt_should_pass_with_a_negative_Int() {
         val value: Int = NegativeInt.random().toInt()
-        val result: Int = value.asNegativeInt.getOrThrow()
+        val result: Int = value.toNegativeInt()
+            .getOrThrow()
             .toInt()
         result shouldEqual value
     }
 
     @Test
-    fun int_asNegativeInt_should_fail_with_a_strictly_positive_Int() {
+    fun int_toNegativeInt_should_fail_with_a_strictly_positive_Int() {
         val result: Result<NegativeInt> = StrictlyPositiveInt.random()
             .toInt()
-            .asNegativeInt
+            .toNegativeInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
