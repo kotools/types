@@ -18,7 +18,7 @@ class NotEmptyMapTest {
         )
         assertEquals(
             actual = notEmptyMap.entries.toSet(),
-            expected = notEmptyMap.asMap.entries
+            expected = notEmptyMap.toMap().entries
         )
     }
 
@@ -31,7 +31,7 @@ class NotEmptyMapTest {
         )
         assertEquals(
             actual = notEmptyMap.keys.toSet(),
-            expected = notEmptyMap.asMap.keys
+            expected = notEmptyMap.toMap().keys
         )
     }
 
@@ -44,7 +44,7 @@ class NotEmptyMapTest {
         )
         assertContentEquals(
             actual = notEmptyMap.values.toList(),
-            expected = notEmptyMap.asMap.values
+            expected = notEmptyMap.toMap().values
         )
     }
 
@@ -57,7 +57,7 @@ class NotEmptyMapTest {
         )
         assertEquals(
             actual = notEmptyMap.size.toInt(),
-            expected = notEmptyMap.asMap.size
+            expected = notEmptyMap.toMap().size
         )
     }
 
@@ -68,7 +68,10 @@ class NotEmptyMapTest {
             "b" to Random.nextInt(),
             "c" to Random.nextInt()
         )
-        assertEquals(actual = "$notEmptyMap", expected = "${notEmptyMap.asMap}")
+        assertEquals(
+            actual = "$notEmptyMap",
+            expected = "${notEmptyMap.toMap()}"
+        )
     }
 
     @Test
@@ -79,7 +82,7 @@ class NotEmptyMapTest {
             "c" to Random.nextInt()
         )
         assertEquals(
-            actual = notEmptyMapOf(head, *tail).asMap,
+            actual = notEmptyMapOf(head, *tail).toMap(),
             expected = mapOf(head, *tail)
         )
     }
@@ -92,7 +95,7 @@ class NotEmptyMapTest {
             "c" to Random.nextInt()
         )
         assertEquals(
-            actual = map.asNotEmptyMap.getOrThrow().asMap,
+            actual = map.asNotEmptyMap.getOrThrow().toMap(),
             expected = map
         )
     }
@@ -131,7 +134,7 @@ class NotEmptyMapSerializerTest {
         )
         assertEquals(
             actual = Json.encodeToString(notEmptyMap),
-            expected = Json.encodeToString(notEmptyMap.asMap)
+            expected = Json.encodeToString(notEmptyMap.toMap())
         )
     }
 
@@ -145,8 +148,8 @@ class NotEmptyMapSerializerTest {
         val encoded: String = Json.encodeToString(notEmptyMap)
         assertEquals(
             actual = Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
-                .asMap,
-            expected = notEmptyMap.asMap
+                .toMap(),
+            expected = notEmptyMap.toMap()
         )
     }
 

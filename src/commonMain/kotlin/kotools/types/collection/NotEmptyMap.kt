@@ -29,41 +29,39 @@ public data class NotEmptyMap<K, out V> internal constructor(
     /** All entries of this map except [the first one][head]. */
     public val tail: NotEmptyMap<K, V>? = null
 ) {
-    /**
-     * Returns all entries of this map as a [Map] with keys of type [K] and
-     * values of type [V].
-     */
-    public val asMap: Map<K, V> by lazy {
-        tail?.let {
-            val tail: Array<Pair<K, V>> = it.entries.toSet()
-                .map(Map.Entry<K, V>::toPair)
-                .toTypedArray()
-            mapOf(head, *tail)
-        } ?: mapOf(head)
-    }
-
     /** All entries of this map. */
     public val entries: NotEmptySet<Map.Entry<K, V>> by lazy(
-        asMap.entries.toNotEmptySet()::getOrThrow
+        toMap().entries.toNotEmptySet()::getOrThrow
     )
 
     /** All keys of this map. */
     public val keys: NotEmptySet<K> by lazy(
-        asMap.keys.toNotEmptySet()::getOrThrow
+        toMap().keys.toNotEmptySet()::getOrThrow
     )
 
     /** All values of this map. */
     public val values: NotEmptyList<V> by lazy(
-        asMap.values.toNotEmptyList()::getOrThrow
+        toMap().values.toNotEmptyList()::getOrThrow
     )
 
     /** The size of this map. */
     public val size: StrictlyPositiveInt by lazy(
-        asMap.size.toStrictlyPositiveInt()::getOrThrow
+        toMap().size.toStrictlyPositiveInt()::getOrThrow
     )
 
+    /**
+     * Returns all entries of this map as a [Map] with keys of type [K] and
+     * values of type [V].
+     */
+    public fun toMap(): Map<K, V> = tail?.let {
+        val tail: Array<Pair<K, V>> = it.entries.toSet()
+            .map(Map.Entry<K, V>::toPair)
+            .toTypedArray()
+        mapOf(head, *tail)
+    } ?: mapOf(head)
+
     /** Returns the string representation of this map. */
-    override fun toString(): String = "$asMap"
+    override fun toString(): String = "${toMap()}"
 }
 
 /**
@@ -111,7 +109,7 @@ internal class NotEmptyMapSerializer<K, V>(
     }
 
     override fun serialize(encoder: Encoder, value: NotEmptyMap<K, V>): Unit =
-        encoder.encodeSerializableValue(delegate, value.asMap)
+        encoder.encodeSerializableValue(delegate, value.toMap())
 
     override fun deserialize(decoder: Decoder): NotEmptyMap<K, V> = decoder
         .decodeSerializableValue(delegate)
