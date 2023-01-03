@@ -11,7 +11,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.asStrictlyPositiveInt
+import kotools.types.number.toStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /**
@@ -59,7 +59,7 @@ public data class NotEmptyMap<K, out V> internal constructor(
 
     /** The size of this map. */
     public val size: StrictlyPositiveInt by lazy(
-        asMap.size.asStrictlyPositiveInt::getOrThrow
+        asMap.size.toStrictlyPositiveInt()::getOrThrow
     )
 
     /** Returns the string representation of this map. */

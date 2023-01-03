@@ -6,8 +6,8 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.shouldHaveAMessage
 import kotools.types.shouldEqual
+import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
@@ -40,16 +40,17 @@ class StrictlyNegativeIntTest {
     }
 
     @Test
-    fun int_asStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
+    fun int_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
         val value: Int = StrictlyNegativeInt.random().toInt()
-        val result: Result<StrictlyNegativeInt> = value.asStrictlyNegativeInt
+        val result: Result<StrictlyNegativeInt> = value.toStrictlyNegativeInt()
         result.getOrThrow().toInt() shouldEqual value
     }
 
     @Test
-    fun int_asStrictlyNegativeInt_should_fail_with_a_positive_Int() {
-        val result: Result<StrictlyNegativeInt> =
-            PositiveInt.random().toInt().asStrictlyNegativeInt
+    fun int_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
+        val result: Result<StrictlyNegativeInt> = PositiveInt.random()
+            .toInt()
+            .toStrictlyNegativeInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }

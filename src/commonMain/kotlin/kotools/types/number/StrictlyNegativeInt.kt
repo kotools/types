@@ -9,12 +9,7 @@ import kotools.types.text.toNotBlankString
 import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
-/**
- * Representation of negative integers excluding [zero][ZeroInt].
- *
- * See the [asStrictlyNegativeInt] property for building a
- * [StrictlyNegativeInt].
- */
+/** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -26,12 +21,12 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
     public companion object {
         /** The minimum value a [StrictlyNegativeInt] can have. */
         public val min: StrictlyNegativeInt by lazy(
-            Int.MIN_VALUE.asStrictlyNegativeInt::getOrThrow
+            Int.MIN_VALUE.toStrictlyNegativeInt()::getOrThrow
         )
 
         /** The maximum value a [StrictlyNegativeInt] can have. */
         public val max: StrictlyNegativeInt by lazy(
-            (-1).asStrictlyNegativeInt::getOrThrow
+            (-1).toStrictlyNegativeInt()::getOrThrow
         )
 
         internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
@@ -43,7 +38,7 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyNegativeInt = (min.value..max.value)
             .random()
-            .asStrictlyNegativeInt
+            .toStrictlyNegativeInt()
             .getOrThrow()
     }
 
@@ -56,8 +51,8 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
  * [IllegalArgumentException] if this integer is [positive][PositiveInt].
  */
 @SinceKotoolsTypes("4.0")
-public val Int.asStrictlyNegativeInt: Result<StrictlyNegativeInt>
-    get() = StrictlyNegativeInt of this
+public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
+    StrictlyNegativeInt of this
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {
@@ -66,7 +61,7 @@ internal object StrictlyNegativeIntSerializer :
     )
 
     override fun deserialize(value: Int): StrictlyNegativeInt = value
-        .asStrictlyNegativeInt
+        .toStrictlyNegativeInt()
         .getOrNull()
         ?: throw SerializationException(value shouldBe aStrictlyNegativeNumber)
 }

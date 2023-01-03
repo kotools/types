@@ -6,8 +6,8 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.shouldHaveAMessage
 import kotools.types.shouldEqual
+import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
@@ -34,16 +34,19 @@ class PositiveIntCompanionTest {
 
 class PositiveIntTest {
     @Test
-    fun int_asPositiveInt_should_pass_with_a_positive_Int() {
+    fun int_toPositiveInt_should_pass_with_a_positive_Int() {
         val expected: Int = PositiveInt.random().toInt()
-        val result: Int = expected.asPositiveInt.getOrThrow().toInt()
+        val result: Int = expected.toPositiveInt()
+            .getOrThrow()
+            .toInt()
         result shouldEqual expected
     }
 
     @Test
-    fun int_asPositiveInt_should_fail_with_a_strictly_negative_Int() {
-        val result: Result<PositiveInt> =
-            StrictlyNegativeInt.random().toInt().asPositiveInt
+    fun int_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
+        val result: Result<PositiveInt> = StrictlyNegativeInt.random()
+            .toInt()
+            .toPositiveInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }

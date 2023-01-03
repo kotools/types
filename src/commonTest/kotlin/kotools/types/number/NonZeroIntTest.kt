@@ -34,17 +34,18 @@ class NonZeroIntCompanionTest {
 
 class NonZeroIntTest {
     @Test
-    fun int_asNonZeroInt_should_pass_with_an_Int_other_than_zero() {
+    fun int_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
         val value: Int = NonZeroInt.random()
             .toInt()
-        val result: Result<NonZeroInt> = value.asNonZeroInt
+        val result: Result<NonZeroInt> = value.toNonZeroInt()
         result.getOrThrow()
             .toInt() shouldEqual value
     }
 
     @Test
-    fun int_asNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
-        val result: Result<NonZeroInt> = ZeroInt.toInt().asNonZeroInt
+    fun int_toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
+        val result: Result<NonZeroInt> = ZeroInt.toInt()
+            .toNonZeroInt()
         val exception: IllegalArgumentException =
             assertFailsWith(block = result::getOrThrow)
         exception.shouldHaveAMessage()
