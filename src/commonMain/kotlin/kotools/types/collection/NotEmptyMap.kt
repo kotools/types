@@ -17,9 +17,6 @@ import kotools.types.toSuccessfulResult
 /**
  * Representation of maps that contain at least one entry with a key of type
  * [K] and a value of type [V].
- *
- * See the [notEmptyMapOf] function or the [asNotEmptyMap] property for building
- * a [NotEmptyMap].
  */
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")
@@ -65,22 +62,6 @@ public data class NotEmptyMap<K, out V> internal constructor(
 }
 
 /**
- * Returns a [NotEmptyMap] containing all the entries of this map, or returns an
- * [IllegalArgumentException] if this map is empty.
- */
-@SinceKotoolsTypes("4.0")
-public val <K, V> Map<K, V>.asNotEmptyMap: Result<NotEmptyMap<K, V>>
-    get() = if (isEmpty()) Result.failure(EmptyMapException)
-    else entries.map(Map.Entry<K, V>::toPair).toSuccessfulResult {
-        val head: Pair<K, V> = it.first()
-        val tail: NotEmptyMap<K, V>? = it.drop(1)
-            .toMap()
-            .asNotEmptyMap
-            .getOrNull()
-        NotEmptyMap(head, tail)
-    }
-
-/**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  */
@@ -89,8 +70,27 @@ public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
 ): NotEmptyMap<K, V> = mapOf(head, *tail)
-    .asNotEmptyMap
+    .toNotEmptyMap()
     .getOrThrow()
+
+/**
+ * Returns a [NotEmptyMap] containing all the entries of this map, or returns an
+ * [IllegalArgumentException] if this map is empty.
+ */
+@SinceKotoolsTypes("4.0")
+public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
+    takeIf(Map<K, V>::isNotEmpty)
+        ?.entries
+        ?.map(Map.Entry<K, V>::toPair)
+        ?.toSuccessfulResult {
+            val head: Pair<K, V> = it.first()
+            val tail: NotEmptyMap<K, V>? = it.drop(1)
+                .toMap()
+                .toNotEmptyMap()
+                .getOrNull()
+            NotEmptyMap(head, tail)
+        }
+        ?: Result.failure(EmptyMapException)
 
 internal class NotEmptyMapSerializer<K, V>(
     keySerializer: KSerializer<K>,
@@ -113,7 +113,7 @@ internal class NotEmptyMapSerializer<K, V>(
 
     override fun deserialize(decoder: Decoder): NotEmptyMap<K, V> = decoder
         .decodeSerializableValue(delegate)
-        .asNotEmptyMap
+        .toNotEmptyMap()
         .getOrNull()
         ?: throw SerializationException(EmptyMapException)
 }

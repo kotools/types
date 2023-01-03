@@ -4,6 +4,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.contentShouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.*
@@ -94,16 +95,16 @@ class NotEmptyMapTest {
             "b" to Random.nextInt(),
             "c" to Random.nextInt()
         )
-        assertEquals(
-            actual = map.asNotEmptyMap.getOrThrow().toMap(),
-            expected = map
-        )
+        val result: Result<NotEmptyMap<String, Int>> = map.toNotEmptyMap()
+        result.getOrThrow()
+            .toMap()
+            .entries contentShouldEqual map.entries
     }
 
     @Test
     fun map_toNotEmptyMap_should_fail_with_an_empty_Map() {
         val result: Result<NotEmptyMap<String, Int>> = emptyMap<String, Int>()
-            .asNotEmptyMap
+            .toNotEmptyMap()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
