@@ -14,7 +14,7 @@ class AnyIntTest {
     @Test
     fun compareTo_should_return_zero_with_another_AnyInt_having_the_same_value() {
         val result: Int = ZeroInt.compareTo(ZeroInt)
-        result shouldEqual ZeroInt.asInt
+        result shouldEqual ZeroInt.toInt()
     }
 
     @Test
@@ -22,7 +22,7 @@ class AnyIntTest {
         val x: AnyInt = StrictlyNegativeInt.random()
         val y: AnyInt = StrictlyPositiveInt.random()
         val result: Int = x.compareTo(y)
-        assertTrue { result < ZeroInt.asInt }
+        assertTrue { result < ZeroInt.toInt() }
     }
 
     @Test
@@ -30,7 +30,7 @@ class AnyIntTest {
         val x: AnyInt = StrictlyPositiveInt.random()
         val y: AnyInt = StrictlyNegativeInt.random()
         val result: Int = x.compareTo(y)
-        assertTrue { result > ZeroInt.asInt }
+        assertTrue { result > ZeroInt.toInt() }
     }
 }
 
@@ -46,7 +46,7 @@ class AnyIntSerializerTest {
     fun serialize_should_behave_like_an_Int() {
         val x: AnyInt = StrictlyPositiveInt.random()
         val result: String = Json.encodeToString(serializer, x)
-        result shouldEqual Json.encodeToString(x.asInt)
+        result shouldEqual Json.encodeToString(x.toInt())
     }
 
     @Test
@@ -54,6 +54,6 @@ class AnyIntSerializerTest {
         val value: Int = Random.nextInt()
         val encoded: String = Json.encodeToString(value)
         val result: AnyInt = Json.decodeFromString(serializer, encoded)
-        result.asInt shouldEqual value
+        result.toInt() shouldEqual value
     }
 }

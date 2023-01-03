@@ -52,7 +52,7 @@ class NotEmptySetTest {
             .asNotEmptySet
             .getOrThrow()
         val result: StrictlyPositiveInt = elements.size
-        result.asInt shouldEqual elements.asSet.size
+        result.toInt() shouldEqual elements.asSet.size
     }
 
     @Test

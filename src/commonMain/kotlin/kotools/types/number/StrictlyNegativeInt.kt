@@ -19,7 +19,7 @@ import kotlin.jvm.JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt
-private constructor(override val asInt: Int) : NonZeroInt, NegativeInt {
+private constructor(private val value: Int) : NonZeroInt, NegativeInt {
     /**
      * Contains declarations for holding or building a [StrictlyNegativeInt].
      */
@@ -35,19 +35,20 @@ private constructor(override val asInt: Int) : NonZeroInt, NegativeInt {
         )
 
         internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
-            .takeIf { it < ZeroInt.asInt }
+            .takeIf { it < ZeroInt.toInt() }
             ?.toSuccessfulResult(::StrictlyNegativeInt)
             ?: Result.failure(value shouldBe aStrictlyNegativeNumber)
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): StrictlyNegativeInt = (min.asInt..max.asInt)
+        public fun random(): StrictlyNegativeInt = (min.value..max.value)
             .random()
             .asStrictlyNegativeInt
             .getOrThrow()
     }
 
-    override fun toString(): String = "$asInt"
+    override fun toInt(): Int = value
+    override fun toString(): String = "$value"
 }
 
 /**

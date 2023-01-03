@@ -22,28 +22,28 @@ class PositiveIntCompanionTest {
     @Test
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = PositiveInt.max
-        result.asInt shouldEqual Int.MAX_VALUE
+        result.toInt() shouldEqual Int.MAX_VALUE
     }
 
     @Test
     fun random_should_return_different_values() {
         val result: PositiveInt = PositiveInt.random()
-        result.asInt shouldNotEqual PositiveInt.random().asInt
+        result.toInt() shouldNotEqual PositiveInt.random().toInt()
     }
 }
 
 class PositiveIntTest {
     @Test
     fun int_asPositiveInt_should_pass_with_a_positive_Int() {
-        val expected: Int = PositiveInt.random().asInt
-        val result: Int = expected.asPositiveInt.getOrThrow().asInt
+        val expected: Int = PositiveInt.random().toInt()
+        val result: Int = expected.asPositiveInt.getOrThrow().toInt()
         result shouldEqual expected
     }
 
     @Test
     fun int_asPositiveInt_should_fail_with_a_strictly_negative_Int() {
         val result: Result<PositiveInt> =
-            StrictlyNegativeInt.random().asInt.asPositiveInt
+            StrictlyNegativeInt.random().toInt().asPositiveInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
@@ -62,21 +62,21 @@ class PositiveIntSerializerTest {
     fun serialization_should_behave_like_an_Int() {
         val x: PositiveInt = PositiveInt.random()
         val result: String = Json.encodeToString(serializer, x)
-        result shouldEqual Json.encodeToString(x.asInt)
+        result shouldEqual Json.encodeToString(x.toInt())
     }
 
     @Test
     fun deserialization_should_pass_with_a_positive_Int() {
-        val expected: Int = PositiveInt.random().asInt
+        val expected: Int = PositiveInt.random().toInt()
         val encoded: String = Json.encodeToString(expected)
         val result: PositiveInt =
             Json.decodeFromString(PositiveIntSerializer, encoded)
-        result.asInt shouldEqual expected
+        result.toInt() shouldEqual expected
     }
 
     @Test
     fun deserialization_should_fail_with_a_strictly_negative_Int() {
-        val value: Int = StrictlyNegativeInt.random().asInt
+        val value: Int = StrictlyNegativeInt.random().toInt()
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString(PositiveIntSerializer, encoded)

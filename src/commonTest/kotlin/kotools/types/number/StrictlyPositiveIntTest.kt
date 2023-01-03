@@ -16,19 +16,19 @@ class StrictlyPositiveIntCompanionTest {
     @Test
     fun min_should_equal_one() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.min
-        result.asInt shouldEqual 1
+        result.toInt() shouldEqual 1
     }
 
     @Test
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.max
-        result.asInt shouldEqual Int.MAX_VALUE
+        result.toInt() shouldEqual Int.MAX_VALUE
     }
 
     @Test
     fun random_should_return_different_values() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        result.asInt shouldNotEqual StrictlyPositiveInt.random().asInt
+        result.toInt() shouldNotEqual StrictlyPositiveInt.random().toInt()
     }
 }
 
@@ -36,19 +36,19 @@ class StrictlyPositiveIntTest {
     @Test
     fun toString_should_behave_like_an_Int(): Unit = StrictlyPositiveInt
         .random()
-        .run { "$this" shouldEqual "$asInt" }
+        .run { "$this" shouldEqual "${toInt()}" }
 
     @Test
     fun int_asStrictlyPositiveInt_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = StrictlyPositiveInt.random().asInt
+        val value: Int = StrictlyPositiveInt.random().toInt()
         val result: Result<StrictlyPositiveInt> = value.asStrictlyPositiveInt
-        result.getOrThrow().asInt shouldEqual value
+        result.getOrThrow().toInt() shouldEqual value
     }
 
     @Test
     fun int_asStrictlyPositiveInt_should_fail_with_a_negative_Int() {
         val result: Result<StrictlyPositiveInt> =
-            NegativeInt.random().asInt.asStrictlyPositiveInt
+            NegativeInt.random().toInt().asStrictlyPositiveInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
@@ -66,20 +66,20 @@ class StrictlyPositiveIntSerializerTest {
     fun serialization_should_behave_like_an_Int() {
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
         val result: String = Json.encodeToString(x)
-        result shouldEqual Json.encodeToString(x.asInt)
+        result shouldEqual Json.encodeToString(x.toInt())
     }
 
     @Test
     fun deserialization_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = StrictlyPositiveInt.random().asInt
+        val value: Int = StrictlyPositiveInt.random().toInt()
         val encoded: String = Json.encodeToString(value)
         val result: StrictlyPositiveInt = Json.decodeFromString(encoded)
-        result.asInt shouldEqual value
+        result.toInt() shouldEqual value
     }
 
     @Test
     fun deserialization_should_fail_with_a_negative_Int() {
-        val value: Int = NegativeInt.random().asInt
+        val value: Int = NegativeInt.random().toInt()
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<StrictlyPositiveInt>(encoded)

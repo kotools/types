@@ -43,7 +43,7 @@ class ZeroIntSerializerTest {
     @Test
     fun serialize_should_behave_like_the_zero_integer(): Unit = assertEquals(
         actual = Json.encodeToString(ZeroInt),
-        expected = Json.encodeToString(ZeroInt.asInt)
+        expected = Json.encodeToString(ZeroInt.toInt())
     )
 
     @Test
@@ -57,7 +57,7 @@ class ZeroIntSerializerTest {
         val value: Int = setOf(
             StrictlyPositiveInt.random(),
             StrictlyNegativeInt.random()
-        ).random().asInt
+        ).random().toInt()
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException =
             assertFailsWith { Json.decodeFromString<ZeroInt>(encoded) }

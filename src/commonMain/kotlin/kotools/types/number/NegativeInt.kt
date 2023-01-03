@@ -27,9 +27,12 @@ public sealed interface NegativeInt : AnyInt {
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): NegativeInt = (min.asInt..max.asInt).random()
-            .asNegativeInt
-            .getOrThrow()
+        public fun random(): NegativeInt {
+            val range: IntRange = min.toInt()..max.toInt()
+            return range.random()
+                .asNegativeInt
+                .getOrThrow()
+        }
     }
 }
 
@@ -41,8 +44,8 @@ public sealed interface NegativeInt : AnyInt {
 @SinceKotoolsTypes("4.0")
 public val Int.asNegativeInt: Result<NegativeInt>
     get() = when {
-        this == ZeroInt.asInt -> Result.success(ZeroInt)
-        this < ZeroInt.asInt -> asStrictlyNegativeInt
+        this == ZeroInt.toInt() -> Result.success(ZeroInt)
+        this < ZeroInt.toInt() -> asStrictlyNegativeInt
         else -> Result.failure(this shouldBe aNegativeNumber)
     }
 

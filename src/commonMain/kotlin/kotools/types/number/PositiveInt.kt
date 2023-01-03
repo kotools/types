@@ -27,7 +27,7 @@ public sealed interface PositiveInt : AnyInt {
 
         /** Returns a random [PositiveInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): PositiveInt = (min.asInt..max.asInt).random()
+        public fun random(): PositiveInt = (min.toInt()..max.toInt()).random()
             .asPositiveInt
             .getOrThrow()
     }
@@ -41,8 +41,8 @@ public sealed interface PositiveInt : AnyInt {
 @SinceKotoolsTypes("4.0")
 public val Int.asPositiveInt: Result<PositiveInt>
     get() = when {
-        this == ZeroInt.asInt -> Result.success(ZeroInt)
-        this > ZeroInt.asInt -> asStrictlyPositiveInt
+        this == ZeroInt.toInt() -> Result.success(ZeroInt)
+        this > ZeroInt.toInt() -> asStrictlyPositiveInt
         else -> Result.failure(this shouldBe aPositiveNumber)
     }
 
