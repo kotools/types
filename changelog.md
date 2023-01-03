@@ -63,8 +63,9 @@ text as Comparable<NotBlankString> // before
   [#8](https://github.com/kotools/types/issues/8)).
 
 ```kotlin
-notEmptyListOf(1, 2, 3) as List<Int> // before
-notEmptyListOf(1, 2, 3).toList() // after
+val elements: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+elements as List<Int> // before
+elements.toList() // after
 ```
 
 - Remove inheritance between the `NotEmptySet` and the `Set` types (issue
