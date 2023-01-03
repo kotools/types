@@ -81,8 +81,9 @@ elements.toSet() // after
   [#10](https://github.com/kotools/types/issues/10)).
 
 ```kotlin
-notEmptyMapOf("a" to 1, "b" to 2, "c" to 3) as Map<String, Int> // before
-notEmptyMapOf("a" to 1, "b" to 2, "c" to 3).toMap() // after
+val entries: NotEmptyMap<String, Int> = notEmptyMapOf("a" to 1, "b" to 2)
+entries as Map<String, Int> // before
+entries.toMap() // after
 ```
 
 - Remove all declarations from previous API while keeping the essentials: the
