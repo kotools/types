@@ -54,7 +54,7 @@ public data class NotEmptyMap<K, out V> internal constructor(
 
     /** All values of this map. */
     public val values: NotEmptyList<V> by lazy(
-        asMap.values.asNotEmptyList::getOrThrow
+        asMap.values.toNotEmptyList()::getOrThrow
     )
 
     /** The size of this map. */

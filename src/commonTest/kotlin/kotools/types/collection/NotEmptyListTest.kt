@@ -17,7 +17,7 @@ class NotEmptyListTest {
     @Test
     fun head_should_return_the_first_element_of_this_list() {
         val elements: NotEmptyList<Int> = List(3) { Random.nextInt() }
-            .asNotEmptyList
+            .toNotEmptyList()
             .getOrThrow()
         val result: Int = elements.head
         result shouldEqual elements.toList().first()
@@ -26,7 +26,7 @@ class NotEmptyListTest {
     @Test
     fun tail_should_return_all_elements_except_the_first_one() {
         val elements: NotEmptyList<Int> = List(3) { Random.nextInt() }
-            .asNotEmptyList
+            .toNotEmptyList()
             .getOrThrow()
         val result: NotEmptyList<Int>? = elements.tail
         result.shouldBeNotNull()
@@ -42,7 +42,7 @@ class NotEmptyListTest {
     @Test
     fun size_should_return_the_size_of_this_list_as_a_StrictlyPositiveInt() {
         val elements: NotEmptyList<Int> = List(3) { Random.nextInt() }
-            .asNotEmptyList
+            .toNotEmptyList()
             .getOrThrow()
         val result: StrictlyPositiveInt = elements.size
         result.toInt() shouldEqual elements.toList().size
@@ -51,7 +51,8 @@ class NotEmptyListTest {
     @Test
     fun toList_should_return_all_elements_as_a_List() {
         val elements: List<Int> = List(3) { Random.nextInt() }
-        val result: List<Int> = elements.asNotEmptyList.getOrThrow()
+        val result: List<Int> = elements.toNotEmptyList()
+            .getOrThrow()
             .toList()
         result contentShouldEqual elements
     }
@@ -59,24 +60,9 @@ class NotEmptyListTest {
     @Test
     fun toString_should_behave_like_a_List() {
         val elements: NotEmptyList<Int> = List(3) { Random.nextInt() }
-            .asNotEmptyList
+            .toNotEmptyList()
             .getOrThrow()
         "$elements" shouldEqual "${elements.toList()}"
-    }
-
-    @Test
-    fun collection_asNotEmptyList_should_pass_with_a_not_empty_Collection() {
-        val collection: Collection<Int> = List(3) { Random.nextInt() }
-        val result: Result<NotEmptyList<Int>> = collection.asNotEmptyList
-        result.getOrThrow().toList() contentShouldEqual collection
-    }
-
-    @Test
-    fun collection_asNotEmptyList_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptyList<Int>> = emptyList<Int>().asNotEmptyList
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
     }
 
     @Test
@@ -86,6 +72,22 @@ class NotEmptyListTest {
             .toTypedArray()
         val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
         result.toList() contentShouldEqual listOf(head) + tail
+    }
+
+    @Test
+    fun collection_toNotEmptyList_should_pass_with_a_not_empty_Collection() {
+        val collection: Collection<Int> = List(3) { Random.nextInt() }
+        val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
+        result.getOrThrow().toList() contentShouldEqual collection
+    }
+
+    @Test
+    fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
+        val result: Result<NotEmptyList<Int>> = emptyList<Int>()
+            .toNotEmptyList()
+        val exception: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        exception.shouldHaveAMessage()
     }
 }
 
@@ -102,7 +104,7 @@ class NotEmptyListSerializerTest {
     @Test
     fun serialization_should_behave_like_a_List() {
         val elements: NotEmptyList<Int> = List(3) { Random.nextInt() }
-            .asNotEmptyList
+            .toNotEmptyList()
             .getOrThrow()
         val result: String = Json.encodeToString(elements)
         result shouldEqual Json.encodeToString(elements.toList())
