@@ -43,7 +43,7 @@ class NotEmptyMapTest {
             "c" to Random.nextInt()
         )
         assertContentEquals(
-            actual = notEmptyMap.values.asList,
+            actual = notEmptyMap.values.toList(),
             expected = notEmptyMap.asMap.values
         )
     }
