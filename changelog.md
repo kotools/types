@@ -72,8 +72,9 @@ elements.toList() // after
   [#9](https://github.com/kotools/types/issues/9)).
 
 ```kotlin
-notEmptySetOf(1, 2, 3) as Set<Int> // before
-notEmptySetOf(1, 2, 3).toSet() // after
+val elements: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
+elements as Set<Int> // before
+elements.toSet() // after
 ```
 
 - Remove inheritance between the `NotEmptyMap` and the `Map` types (issue
