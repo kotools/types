@@ -63,7 +63,7 @@ notEmptyListOf(1, 2, 3).toList() // after
 
 ```kotlin
 notEmptySetOf(1, 2, 3) as Set<Int> // before
-notEmptySetOf(1, 2, 3).asSet // after
+notEmptySetOf(1, 2, 3).toSet() // after
 ```
 
 - Remove inheritance between the `NotEmptyMap` and the `Map` types (issue
