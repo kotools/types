@@ -55,7 +55,7 @@ object ZeroInt : PositiveInt, NegativeInt
 
 ```kotlin
 notEmptyListOf(1, 2, 3) as List<Int> // before
-notEmptyListOf(1, 2, 3).asList // after
+notEmptyListOf(1, 2, 3).toList() // after
 ```
 
 - Remove inheritance between the `NotEmptySet` and the `Set` types (issue

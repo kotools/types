@@ -28,19 +28,19 @@ public data class NotEmptyList<out E> internal constructor(
     /** All elements of this list except [the first one][head]. */
     public val tail: NotEmptyList<E>? = null
 ) {
-    /** Returns all elements of this list as a [List] of type [E]. */
-    public val asList: List<E> by lazy {
-        val firstElement: List<E> = listOf(head)
-        tail?.let { firstElement + it.asList } ?: firstElement
-    }
-
     /** The size of this list. */
     public val size: StrictlyPositiveInt by lazy(
-        asList.size.toStrictlyPositiveInt()::getOrThrow
+        toList().size.toStrictlyPositiveInt()::getOrThrow
     )
 
+    /** Returns all elements of this list as a [List] of type [E]. */
+    public fun toList(): List<E> {
+        val firstElement: List<E> = listOf(head)
+        return tail?.let { firstElement + it.toList() } ?: firstElement
+    }
+
     /** Returns the string representation of this list. */
-    override fun toString(): String = "$asList"
+    override fun toString(): String = "${toList()}"
 }
 
 /**
@@ -86,7 +86,7 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     }
 
     override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
-        encoder.encodeSerializableValue(delegate, value.asList)
+        encoder.encodeSerializableValue(delegate, value.toList())
 
     override fun deserialize(decoder: Decoder): NotEmptyList<E> = decoder
         .decodeSerializableValue(delegate)
