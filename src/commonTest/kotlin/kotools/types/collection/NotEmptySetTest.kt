@@ -6,30 +6,30 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
-import kotools.types.shouldHaveAMessage
+import kotools.types.*
 import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
 
 class NotEmptySetTest {
     @Test
     fun head_should_return_the_first_element_of_this_set() {
-        val elements: Set<Int> = List(3) { Random.nextInt() }
-            .toSet()
-        val result: Int = elements.asNotEmptySet.getOrThrow().head
-        assertEquals(actual = result, expected = elements.first())
+        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+            .asNotEmptySet
+            .getOrThrow()
+        val result: Int = elements.head
+        result shouldEqual elements.asSet.first()
     }
 
     @Test
     fun tail_should_return_all_elements_of_this_set_except_the_first_one() {
-        val elements: Set<Int> = List(3) { Random.nextInt() }
-            .toSet()
-        val result: NotEmptySet<Int>? = elements.asNotEmptySet.getOrThrow().tail
-        assertEquals(
-            actual = assertNotNull(result).asSet,
-            expected = elements.drop(1).toSet()
-        )
+        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+            .asNotEmptySet
+            .getOrThrow()
+        val result: NotEmptySet<Int>? = elements.tail
+        result.shouldBeNotNull().asSet contentShouldEqual elements.asSet.drop(1)
     }
 
     @Test
@@ -39,47 +39,52 @@ class NotEmptySetTest {
     }
 
     @Test
-    fun size_should_return_the_size_of_this_set_as_a_StrictlyPositiveInt() {
+    fun asSet_should_return_all_elements_as_a_Set() {
         val elements: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: StrictlyPositiveInt =
-            elements.asNotEmptySet.getOrThrow().size
-        assertEquals(actual = result.asInt, expected = elements.size)
+        val result: Set<Int> = elements.asNotEmptySet.getOrThrow().asSet
+        result contentShouldEqual elements
+    }
+
+    @Test
+    fun size_should_return_the_size_of_this_set_as_a_StrictlyPositiveInt() {
+        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+            .asNotEmptySet
+            .getOrThrow()
+        val result: StrictlyPositiveInt = elements.size
+        result.asInt shouldEqual elements.asSet.size
     }
 
     @Test
     fun toString_should_behave_like_a_Set() {
-        val elements: Set<Int> = List(8) { Random.nextInt() }
-            .toSet()
-        val result: String = elements.asNotEmptySet.getOrThrow()
-            .toString()
-        assertEquals("$elements", result)
+        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+            .asNotEmptySet
+            .getOrThrow()
+        "$elements" shouldEqual "${elements.asSet}"
+    }
+
+    @Test
+    fun collection_asNotEmptySet_should_pass_with_a_not_empty_Collection() {
+        val elements: List<Int> = List(3) { Random.nextInt() }
+        val result: Result<NotEmptySet<Int>> = elements.asNotEmptySet
+        result.getOrThrow().asSet contentShouldEqual elements
+    }
+
+    @Test
+    fun collection_asNotEmptySet_should_fail_with_an_empty_Collection() {
+        val result: Result<NotEmptySet<Int>> = emptySet<Int>().asNotEmptySet
+        val exception: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        exception.shouldHaveAMessage()
     }
 
     @Test
     fun notEmptySetOf_should_pass() {
         val head: Int = Random.nextInt()
-        val tail: Array<Int> = List(7) { Random.nextInt() }
+        val tail: Array<Int> = List(2) { Random.nextInt() }
             .toTypedArray()
         val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
-        assertContentEquals(
-            actual = result.asSet,
-            expected = listOf(head) + tail
-        )
-    }
-
-    @Test
-    fun collection_toNotEmptySet_should_pass_with_a_not_empty_Collection() {
-        val elements: List<Int> = List(8) { Random.nextInt() }
-        val result: NotEmptySet<Int> = elements.asNotEmptySet.getOrThrow()
-        assertContentEquals(actual = result.asSet, expected = elements)
-    }
-
-    @Test
-    fun collection_toNotEmptySet_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptySet<Int>> = emptySet<Int>().asNotEmptySet
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
+        result.asSet contentShouldEqual listOf(head) + tail
     }
 }
 
@@ -90,25 +95,24 @@ class NotEmptySetSerializerTest {
         val result: String = NotEmptySet.serializer(Int.serializer())
             .descriptor
             .serialName
-        assertEquals("${Package.collection}.NotEmptySet", result)
+        result shouldEqual "${Package.collection}.NotEmptySet"
     }
 
     @Test
     fun serialization_should_behave_like_a_Set() {
-        val elements: Set<Int> = List(8) { Random.nextInt() }
-            .toSet()
-        val notEmptyList: NotEmptySet<Int> = elements.asNotEmptySet.getOrThrow()
-        val result: String = Json.encodeToString(notEmptyList)
-        val expected: String = Json.encodeToString(elements)
-        assertEquals(expected, result)
+        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+            .asNotEmptySet
+            .getOrThrow()
+        val result: String = Json.encodeToString(elements)
+        result shouldEqual Json.encodeToString(elements.asSet)
     }
 
     @Test
     fun deserialization_should_pass_with_a_not_empty_Collection() {
-        val elements: Collection<Int> = List(8) { Random.nextInt() }
-        val encoded: String = Json.encodeToString(elements)
+        val collection: Collection<Int> = List(3) { Random.nextInt() }
+        val encoded: String = Json.encodeToString(collection)
         val result: NotEmptySet<Int> = Json.decodeFromString(encoded)
-        assertContentEquals(actual = result.asSet, expected = elements)
+        result.asSet contentShouldEqual collection
     }
 
     @Test
