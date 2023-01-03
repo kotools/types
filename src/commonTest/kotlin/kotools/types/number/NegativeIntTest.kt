@@ -5,7 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.assertHasAMessage
+import kotools.types.shouldHaveAMessage
 import kotools.types.shouldEqual
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
@@ -44,7 +44,7 @@ class NegativeIntTest {
         val result: Result<NegativeInt> =
             StrictlyPositiveInt.random().asInt.asNegativeInt
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .assertHasAMessage()
+            .shouldHaveAMessage()
     }
 }
 
@@ -79,6 +79,6 @@ class NegativeIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString(NegativeIntSerializer, encoded)
         }
-        exception.assertHasAMessage()
+        exception.shouldHaveAMessage()
     }
 }

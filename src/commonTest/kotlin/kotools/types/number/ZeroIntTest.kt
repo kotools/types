@@ -6,7 +6,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.assertHasAMessage
+import kotools.types.shouldHaveAMessage
 import kotlin.test.*
 
 class ZeroIntTest {
@@ -61,6 +61,6 @@ class ZeroIntSerializerTest {
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException =
             assertFailsWith { Json.decodeFromString<ZeroInt>(encoded) }
-        exception.assertHasAMessage()
+        exception.shouldHaveAMessage()
     }
 }

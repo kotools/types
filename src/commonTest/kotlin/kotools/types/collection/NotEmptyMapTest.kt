@@ -4,7 +4,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.assertHasAMessage
+import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.*
 
@@ -102,7 +102,7 @@ class NotEmptyMapTest {
         val result: Result<NotEmptyMap<String, Int>> = emptyMap<String, Int>()
             .asNotEmptyMap
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .assertHasAMessage()
+            .shouldHaveAMessage()
     }
 }
 
@@ -156,7 +156,7 @@ class NotEmptyMapSerializerTest {
         val encoded: String = Json.encodeToString(map)
         assertFailsWith<SerializationException> {
             Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
-        }.assertHasAMessage()
+        }.shouldHaveAMessage()
     }
 }
 

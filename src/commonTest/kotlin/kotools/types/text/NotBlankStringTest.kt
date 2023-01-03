@@ -6,7 +6,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.assertHasAMessage
+import kotools.types.shouldHaveAMessage
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
@@ -67,7 +67,7 @@ class NotBlankStringTest {
         val result: Result<NotBlankString> =
             StringExample.BLANK.asNotBlankString
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .assertHasAMessage()
+            .shouldHaveAMessage()
     }
 }
 
@@ -99,6 +99,6 @@ class NotBlankStringSerializerTest {
         val encoded: String = Json.encodeToString(StringExample.BLANK)
         val exception: SerializationException =
             assertFailsWith { Json.decodeFromString<NotBlankString>(encoded) }
-        exception.assertHasAMessage()
+        exception.shouldHaveAMessage()
     }
 }
