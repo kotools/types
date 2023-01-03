@@ -7,7 +7,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.assertHasAMessage
+import kotools.types.shouldHaveAMessage
 import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
 import kotlin.test.*
@@ -79,7 +79,7 @@ class NotEmptySetTest {
     fun collection_toNotEmptySet_should_fail_with_an_empty_Collection() {
         val result: Result<NotEmptySet<Int>> = emptySet<Int>().asNotEmptySet
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .assertHasAMessage()
+            .shouldHaveAMessage()
     }
 }
 
@@ -118,6 +118,6 @@ class NotEmptySetSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<NotEmptySet<Int>>(encoded)
         }
-        exception.assertHasAMessage()
+        exception.shouldHaveAMessage()
     }
 }

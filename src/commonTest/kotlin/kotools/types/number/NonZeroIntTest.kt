@@ -6,7 +6,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.assertHasAMessage
+import kotools.types.shouldHaveAMessage
 import kotools.types.shouldEqual
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
@@ -45,7 +45,7 @@ class NonZeroIntTest {
         val result: Result<NonZeroInt> = ZeroInt.asInt.asNonZeroInt
         val exception: IllegalArgumentException =
             assertFailsWith(block = result::getOrThrow)
-        exception.assertHasAMessage()
+        exception.shouldHaveAMessage()
     }
 }
 
@@ -79,6 +79,6 @@ class NonZeroIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString(NonZeroIntSerializer, encoded)
         }
-        exception.assertHasAMessage()
+        exception.shouldHaveAMessage()
     }
 }

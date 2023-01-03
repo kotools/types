@@ -49,10 +49,15 @@ public data class NotEmptyList<out E> internal constructor(
  */
 @SinceKotoolsTypes("4.0")
 public val <E> Collection<E>.asNotEmptyList: Result<NotEmptyList<E>>
-    get() = if (isEmpty()) Result.failure(EmptyCollectionException)
-    else toSuccessfulResult {
-        NotEmptyList(head = first(), tail = drop(1).asNotEmptyList.getOrNull())
-    }
+    get() = takeIf(Collection<E>::isNotEmpty)
+        ?.toSuccessfulResult {
+            val head: E = it.first()
+            val tail: NotEmptyList<E>? = it.drop(1)
+                .asNotEmptyList
+                .getOrNull()
+            NotEmptyList(head, tail)
+        }
+        ?: Result.failure(EmptyCollectionException)
 
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
