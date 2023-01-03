@@ -35,7 +35,7 @@ public data class NotEmptyMap<K, out V> internal constructor(
      */
     public val asMap: Map<K, V> by lazy {
         tail?.let {
-            val tail: Array<Pair<K, V>> = it.entries.asSet
+            val tail: Array<Pair<K, V>> = it.entries.toSet()
                 .map(Map.Entry<K, V>::toPair)
                 .toTypedArray()
             mapOf(head, *tail)

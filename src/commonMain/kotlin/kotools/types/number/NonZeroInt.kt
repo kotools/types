@@ -32,7 +32,8 @@ public sealed interface NonZeroInt : AnyInt {
                 min.toInt()..StrictlyNegativeInt.max.toInt(),
                 StrictlyPositiveInt.min.toInt()..max.toInt()
             )
-            return ranges.asSet.random()
+            return ranges.toSet()
+                .random()
                 .random()
                 .toNonZeroInt()
                 .getOrThrow()

@@ -17,7 +17,7 @@ class NotEmptyMapTest {
             "c" to Random.nextInt()
         )
         assertEquals(
-            actual = notEmptyMap.entries.asSet,
+            actual = notEmptyMap.entries.toSet(),
             expected = notEmptyMap.asMap.entries
         )
     }
@@ -30,7 +30,7 @@ class NotEmptyMapTest {
             "c" to Random.nextInt()
         )
         assertEquals(
-            actual = notEmptyMap.keys.asSet,
+            actual = notEmptyMap.keys.toSet(),
             expected = notEmptyMap.asMap.keys
         )
     }

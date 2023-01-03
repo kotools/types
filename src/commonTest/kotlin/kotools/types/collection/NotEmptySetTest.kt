@@ -20,7 +20,7 @@ class NotEmptySetTest {
             .asNotEmptySet
             .getOrThrow()
         val result: Int = elements.head
-        result shouldEqual elements.asSet.first()
+        result shouldEqual elements.toSet().first()
     }
 
     @Test
@@ -29,7 +29,8 @@ class NotEmptySetTest {
             .asNotEmptySet
             .getOrThrow()
         val result: NotEmptySet<Int>? = elements.tail
-        result.shouldBeNotNull().asSet contentShouldEqual elements.asSet.drop(1)
+        val expected: List<Int> = elements.toSet().drop(1)
+        result.shouldBeNotNull().toSet() contentShouldEqual expected
     }
 
     @Test
@@ -42,7 +43,7 @@ class NotEmptySetTest {
     fun asSet_should_return_all_elements_as_a_Set() {
         val elements: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: Set<Int> = elements.asNotEmptySet.getOrThrow().asSet
+        val result: Set<Int> = elements.asNotEmptySet.getOrThrow().toSet()
         result contentShouldEqual elements
     }
 
@@ -52,7 +53,7 @@ class NotEmptySetTest {
             .asNotEmptySet
             .getOrThrow()
         val result: StrictlyPositiveInt = elements.size
-        result.toInt() shouldEqual elements.asSet.size
+        result.toInt() shouldEqual elements.toSet().size
     }
 
     @Test
@@ -60,14 +61,14 @@ class NotEmptySetTest {
         val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
             .asNotEmptySet
             .getOrThrow()
-        "$elements" shouldEqual "${elements.asSet}"
+        "$elements" shouldEqual "${elements.toSet()}"
     }
 
     @Test
     fun collection_asNotEmptySet_should_pass_with_a_not_empty_Collection() {
         val elements: List<Int> = List(3) { Random.nextInt() }
         val result: Result<NotEmptySet<Int>> = elements.asNotEmptySet
-        result.getOrThrow().asSet contentShouldEqual elements
+        result.getOrThrow().toSet() contentShouldEqual elements
     }
 
     @Test
@@ -84,7 +85,7 @@ class NotEmptySetTest {
         val tail: Array<Int> = List(2) { Random.nextInt() }
             .toTypedArray()
         val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
-        result.asSet contentShouldEqual listOf(head) + tail
+        result.toSet() contentShouldEqual listOf(head) + tail
     }
 }
 
@@ -104,7 +105,7 @@ class NotEmptySetSerializerTest {
             .asNotEmptySet
             .getOrThrow()
         val result: String = Json.encodeToString(elements)
-        result shouldEqual Json.encodeToString(elements.asSet)
+        result shouldEqual Json.encodeToString(elements.toSet())
     }
 
     @Test
@@ -112,7 +113,7 @@ class NotEmptySetSerializerTest {
         val collection: Collection<Int> = List(3) { Random.nextInt() }
         val encoded: String = Json.encodeToString(collection)
         val result: NotEmptySet<Int> = Json.decodeFromString(encoded)
-        result.asSet contentShouldEqual collection
+        result.toSet() contentShouldEqual collection
     }
 
     @Test
