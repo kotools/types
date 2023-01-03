@@ -52,7 +52,7 @@ class NotEmptyListTest {
             .asNotEmptyList
             .getOrThrow()
         val result: StrictlyPositiveInt = elements.size
-        result.asInt shouldEqual elements.asList.size
+        result.toInt() shouldEqual elements.asList.size
     }
 
     @Test

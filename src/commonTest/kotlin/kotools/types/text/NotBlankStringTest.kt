@@ -26,7 +26,7 @@ class NotBlankStringTest {
             .toNotBlankString()
             .map(NotBlankString::length)
             .getOrThrow()
-        result.asInt shouldEqual StringExample.NOT_BLANK.length
+        result.toInt() shouldEqual StringExample.NOT_BLANK.length
     }
 
     @Test
@@ -36,7 +36,7 @@ class NotBlankStringTest {
         val y: NotBlankString = StringExample.NOT_BLANK.toNotBlankString()
             .getOrThrow()
         val result: Int = x.compareTo(y)
-        result shouldEqual ZeroInt.asInt
+        result shouldEqual ZeroInt.toInt()
     }
 
     @Test
@@ -46,7 +46,7 @@ class NotBlankStringTest {
         val y: NotBlankString = "a".toNotBlankString()
             .getOrThrow()
         val result: Int = x.compareTo(y)
-        assertTrue { result > ZeroInt.asInt }
+        assertTrue { result > ZeroInt.toInt() }
     }
 
     @Test
@@ -56,7 +56,7 @@ class NotBlankStringTest {
         val y: NotBlankString = "b".toNotBlankString()
             .getOrThrow()
         val result: Int = x.compareTo(y)
-        assertTrue { result < ZeroInt.asInt }
+        assertTrue { result < ZeroInt.toInt() }
     }
 
     @Test

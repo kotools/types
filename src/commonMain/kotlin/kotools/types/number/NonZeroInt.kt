@@ -33,8 +33,8 @@ public sealed interface NonZeroInt : AnyInt {
         @SinceKotoolsTypes("3.0")
         public fun random(): NonZeroInt {
             val ranges: NotEmptySet<IntRange> = notEmptySetOf(
-                min.asInt..StrictlyNegativeInt.max.asInt,
-                StrictlyPositiveInt.min.asInt..max.asInt
+                min.toInt()..StrictlyNegativeInt.max.toInt(),
+                StrictlyPositiveInt.min.toInt()..max.toInt()
             )
             return ranges.asSet.random()
                 .random()
@@ -51,8 +51,8 @@ public sealed interface NonZeroInt : AnyInt {
 @SinceKotoolsTypes("4.0")
 public val Int.asNonZeroInt: Result<NonZeroInt>
     get() = when {
-        this > ZeroInt.asInt -> asStrictlyPositiveInt
-        this < ZeroInt.asInt -> asStrictlyNegativeInt
+        this > ZeroInt.toInt() -> asStrictlyPositiveInt
+        this < ZeroInt.toInt() -> asStrictlyNegativeInt
         else -> Result.failure(this shouldBe otherThanZero)
     }
 

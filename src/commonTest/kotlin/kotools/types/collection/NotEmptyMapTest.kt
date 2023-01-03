@@ -56,7 +56,7 @@ class NotEmptyMapTest {
             "c" to Random.nextInt()
         )
         assertEquals(
-            actual = notEmptyMap.size.asInt,
+            actual = notEmptyMap.size.toInt(),
             expected = notEmptyMap.asMap.size
         )
     }
