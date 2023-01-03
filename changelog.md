@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.0.0
+
 ### Added
 
 Introduce a new `AnyInt` hierarchy representing integers (issue
