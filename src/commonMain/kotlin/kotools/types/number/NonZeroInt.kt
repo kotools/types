@@ -7,7 +7,7 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
 import kotools.types.text.NotBlankString
-import kotools.types.text.asNotBlankString
+import kotools.types.text.toNotBlankString
 
 /**
  * Representation of integers other than [zero][ZeroInt].
@@ -58,7 +58,7 @@ public val Int.asNonZeroInt: Result<NonZeroInt>
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.NonZeroInt"::asNotBlankString
+        "${Package.number}.NonZeroInt"::toNotBlankString
     )
 
     override fun deserialize(value: Int): NonZeroInt = value.asNonZeroInt

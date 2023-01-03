@@ -10,7 +10,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
-import kotools.types.text.asNotBlankString
+import kotools.types.text.toNotBlankString
 
 /** Representation of all integers. */
 @Serializable(AnyIntSerializerImplementation::class)
@@ -50,7 +50,7 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
 
 internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
     override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.AnyInt"::asNotBlankString
+        "${Package.number}.AnyInt"::toNotBlankString
     )
 
     override fun deserialize(value: Int): AnyInt = when {

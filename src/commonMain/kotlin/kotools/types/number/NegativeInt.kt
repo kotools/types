@@ -5,7 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
-import kotools.types.text.asNotBlankString
+import kotools.types.text.toNotBlankString
 
 /**
  * Representation of negative integers including [zero][ZeroInt].
@@ -48,7 +48,7 @@ public val Int.asNegativeInt: Result<NegativeInt>
 
 internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
     override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.NegativeInt"::asNotBlankString
+        "${Package.number}.NegativeInt"::toNotBlankString
     )
 
     override fun deserialize(value: Int): NegativeInt = value.asNegativeInt
