@@ -11,14 +11,6 @@ import kotools.types.text.toNotBlankString
 @Serializable(ZeroIntSerializer::class)
 @SinceKotoolsTypes("4.0")
 public object ZeroInt : PositiveInt, NegativeInt {
-    /**
-     * Returns `true` if the [other] value is a [ZeroInt] or `false` otherwise.
-     */
-    override fun equals(other: Any?): Boolean = other is ZeroInt
-
-    /** Returns the hash code of this integer. */
-    override fun hashCode(): Int = toInt().hashCode()
-
     override fun toInt(): Int = 0
     override fun toString(): String = "${toInt()}"
 }
