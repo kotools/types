@@ -44,12 +44,12 @@ public data class NotEmptyMap<K, out V> internal constructor(
 
     /** All entries of this map. */
     public val entries: NotEmptySet<Map.Entry<K, V>> by lazy(
-        asMap.entries.asNotEmptySet::getOrThrow
+        asMap.entries.toNotEmptySet()::getOrThrow
     )
 
     /** All keys of this map. */
     public val keys: NotEmptySet<K> by lazy(
-        asMap.keys.asNotEmptySet::getOrThrow
+        asMap.keys.toNotEmptySet()::getOrThrow
     )
 
     /** All values of this map. */
