@@ -28,19 +28,19 @@ public data class NotEmptySet<out E> internal constructor(
     /** All elements of this set except [the first one][head]. */
     public val tail: NotEmptySet<E>? = null
 ) {
-    /** Returns all elements of this set as a [Set] of type [E]. */
-    public val asSet: Set<E> by lazy {
-        val elements: Set<E> = setOf(head)
-        tail?.let { elements + it.asSet } ?: elements
-    }
-
     /** The size of this set. */
     public val size: StrictlyPositiveInt by lazy(
-        asSet.size.toStrictlyPositiveInt()::getOrThrow
+        toSet().size.toStrictlyPositiveInt()::getOrThrow
     )
 
+    /** Returns all elements of this set as a [Set] of type [E]. */
+    public fun toSet(): Set<E> {
+        val elements: Set<E> = setOf(head)
+        return tail?.let { elements + it.toSet() } ?: elements
+    }
+
     /** Returns the string representation of this set. */
-    override fun toString(): String = "$asSet"
+    override fun toString(): String = "${toSet()}"
 }
 
 /**
@@ -77,7 +77,7 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     }
 
     override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
-        encoder.encodeSerializableValue(delegate, value.asSet)
+        encoder.encodeSerializableValue(delegate, value.toSet())
 
     override fun deserialize(decoder: Decoder): NotEmptySet<E> = decoder
         .decodeSerializableValue(delegate)
