@@ -24,7 +24,7 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("4.0")
 public value class NotBlankString private constructor(
     private val value: String
-) : Comparable<NotBlankString> {
+) {
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
             .takeIf(String::isNotBlank)
@@ -36,15 +36,6 @@ public value class NotBlankString private constructor(
     public val length: StrictlyPositiveInt
         get() = value.length.toStrictlyPositiveInt()
             .getOrThrow()
-
-    /**
-     * Compares this string lexicographically with the [other] one for order.
-     * Returns zero if this string equals the [other] one, a negative number if
-     * it's less than the [other] one, or a positive number if it's greater than
-     * the [other] one.
-     */
-    override fun compareTo(other: NotBlankString): Int =
-        value.compareTo(other.value)
 
     /** Returns this string as a [String]. */
     override fun toString(): String = value
