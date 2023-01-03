@@ -71,7 +71,7 @@ notEmptySetOf(1, 2, 3).toSet() // after
 
 ```kotlin
 notEmptyMapOf("a" to 1, "b" to 2, "c" to 3) as Map<String, Int> // before
-notEmptyMapOf("a" to 1, "b" to 2, "c" to 3).asMap // after
+notEmptyMapOf("a" to 1, "b" to 2, "c" to 3).toMap() // after
 ```
 
 - Remove all declarations from previous API while keeping the essentials: the
