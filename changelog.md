@@ -20,6 +20,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+Support for
+[Kotlin 1.5.32](https://github.com/JetBrains/kotlin/releases/tag/v1.5.32) (issue
+[#6](https://github.com/kotools/types/issues/6)).
+
 ## 4.0.0
 
 ### Added
