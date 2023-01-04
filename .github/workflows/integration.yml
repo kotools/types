@@ -6,6 +6,7 @@ on:
       - '*gradle*'
       - '*.kt*'
       - .github/workflows/integration.yml
+      - gradle/wrapper/gradle-wrapper*
       - src/**/*.kt*
   push:
     branches: [ main ]
@@ -13,6 +14,7 @@ on:
       - '*gradle*'
       - '*.kt*'
       - .github/workflows/integration.yml
+      - gradle/wrapper/gradle-wrapper*
       - src/**/*.kt*
   workflow_dispatch:
 jobs:
