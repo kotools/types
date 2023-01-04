@@ -2,10 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
-    val kotlinVersion = "1.5.31"
+    val kotlinVersion = "1.5.32"
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.dokka") version kotlinVersion
+    id("org.jetbrains.dokka") version "1.5.31"
     `maven-publish`
     signing
 }
