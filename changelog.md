@@ -20,6 +20,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+Update documentation of declarations returning the
+[`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html)
+type (issue [#20](https://github.com/kotools/types/issues/20)).
+
 ## 4.0.0
 
 _Release date: 2023-01-03._

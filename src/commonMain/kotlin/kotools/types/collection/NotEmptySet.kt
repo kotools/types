@@ -49,8 +49,9 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
         .getOrThrow()
 
 /**
- * Returns a [NotEmptySet] containing all the elements of this collection, or
- * returns an [IllegalArgumentException] if this collection is empty.
+ * Returns an encapsulated [NotEmptySet] containing all the elements of this
+ * collection, or returns an encapsulated [IllegalArgumentException] if this
+ * collection is [empty][Collection.isEmpty].
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =

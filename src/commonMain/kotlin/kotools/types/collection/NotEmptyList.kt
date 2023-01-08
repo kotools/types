@@ -51,8 +51,9 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
     .let { NotEmptyList(head, it) }
 
 /**
- * Returns a [NotEmptyList] containing all the elements of this collection, or
- * returns an [IllegalArgumentException] if this collection is empty.
+ * Returns an encapsulated [NotEmptyList] containing all the elements of this
+ * collection, or returns an encapsulated [IllegalArgumentException] if this
+ * collection is [empty][Collection.isEmpty].
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
