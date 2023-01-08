@@ -43,7 +43,8 @@ public value class NotBlankString private constructor(
 
 /**
  * Returns this string as an encapsulated [NotBlankString], or returns an
- * encapsulated [IllegalArgumentException] if this string is blank.
+ * encapsulated [IllegalArgumentException] if this string is
+ * [blank][String.isBlank].
  */
 @SinceKotoolsTypes("4.0")
 public fun String.toNotBlankString(): Result<NotBlankString> =
