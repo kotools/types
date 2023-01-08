@@ -47,8 +47,9 @@ private constructor(private val value: Int) : NonZeroInt, PositiveInt {
 }
 
 /**
- * Returns this integer as a [StrictlyPositiveInt], or returns an
- * [IllegalArgumentException] if this integer is [negative][NegativeInt].
+ * Returns this integer as an encapsulated [StrictlyPositiveInt], or returns an
+ * encapsulated [IllegalArgumentException] if this integer is
+ * [negative][NegativeInt].
  */
 @SinceKotoolsTypes("4.0")
 public fun Int.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
