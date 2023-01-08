@@ -30,8 +30,8 @@ public sealed interface PositiveInt : AnyInt {
 }
 
 /**
- * Returns this integer as a [PositiveInt], or returns an
- * [IllegalArgumentException] if this integer is
+ * Returns this integer as an encapsulated [PositiveInt], or returns an
+ * encapsulated [IllegalArgumentException] if this integer is
  * [strictly negative][StrictlyNegativeInt].
  */
 @SinceKotoolsTypes("4.0")

@@ -42,8 +42,9 @@ public sealed interface NonZeroInt : AnyInt {
 }
 
 /**
- * Returns this integer as a [NonZeroInt], or returns an
- * [IllegalArgumentException] if this integer equals [zero][ZeroInt].
+ * Returns this integer as an encapsulated [NonZeroInt], or returns an
+ * encapsulated [IllegalArgumentException] if this integer equals
+ * [zero][ZeroInt].
  */
 @SinceKotoolsTypes("4.0")
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = when {

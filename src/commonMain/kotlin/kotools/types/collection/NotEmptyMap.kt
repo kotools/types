@@ -74,8 +74,9 @@ public fun <K, V> notEmptyMapOf(
     .getOrThrow()
 
 /**
- * Returns a [NotEmptyMap] containing all the entries of this map, or returns an
- * [IllegalArgumentException] if this map is empty.
+ * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
+ * or returns an encapsulated [IllegalArgumentException] if this map is
+ * [empty][Map.isEmpty].
  */
 @SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
