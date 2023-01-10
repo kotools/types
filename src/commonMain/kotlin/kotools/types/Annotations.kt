@@ -5,8 +5,8 @@ package kotools.types
  * appeared.
  *
  * The [version] should be in the following formats: `<major>.<minor>` or
- * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are
- * non-negative integers without leading zeros.
+ * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are positive
+ * integers without leading zeros.
  */
 @MustBeDocumented
 @Retention(AnnotationRetention.BINARY)
