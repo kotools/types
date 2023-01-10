@@ -7,7 +7,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.*
-import kotools.types.number.StrictlyPositiveInt
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
@@ -37,15 +36,6 @@ class NotEmptySetTest {
     fun tail_should_return_null_with_a_singleton_set() {
         val result: NotEmptySet<Int>? = notEmptySetOf(Random.nextInt()).tail
         assertNull(result)
-    }
-
-    @Test
-    fun size_should_return_the_size_of_this_set_as_a_StrictlyPositiveInt() {
-        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
-            .toNotEmptySet()
-            .getOrThrow()
-        val result: StrictlyPositiveInt = elements.size
-        result.toInt() shouldEqual elements.toSet().size
     }
 
     @Test
