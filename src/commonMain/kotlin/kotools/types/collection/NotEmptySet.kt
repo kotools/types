@@ -10,8 +10,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.toStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /** Representation of sets that contain at least one element of type [E]. */
@@ -19,15 +17,10 @@ import kotools.types.toSuccessfulResult
 @SinceKotoolsTypes("4.0")
 public data class NotEmptySet<out E> internal constructor(
     /** The first element of this set. */
-    public val head: E,
+    override val head: E,
     /** All elements of this set except [the first one][head]. */
-    public val tail: NotEmptySet<E>? = null
-) {
-    /** The size of this set. */
-    public val size: StrictlyPositiveInt by lazy(
-        toSet().size.toStrictlyPositiveInt()::getOrThrow
-    )
-
+    override val tail: NotEmptySet<E>? = null
+) : NotEmptyCollection<E> {
     /** Returns all elements of this set as a [Set] of type [E]. */
     public fun toSet(): Set<E> {
         val elements: Set<E> = setOf(head)

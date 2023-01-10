@@ -10,31 +10,21 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.toStrictlyPositiveInt
 import kotools.types.toSuccessfulResult
 
 /** Representation of lists that contain at least one element of type [E]. */
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
 public data class NotEmptyList<out E> internal constructor(
-    /** The first element of this list. */
-    public val head: E,
-    /** All elements of this list except [the first one][head]. */
-    public val tail: NotEmptyList<E>? = null
-) {
-    /** The size of this list. */
-    public val size: StrictlyPositiveInt by lazy(
-        toList().size.toStrictlyPositiveInt()::getOrThrow
-    )
-
+    override val head: E,
+    override val tail: NotEmptyList<E>? = null
+) : NotEmptyCollection<E> {
     /** Returns all elements of this list as a [List] of type [E]. */
     public fun toList(): List<E> {
         val firstElement: List<E> = listOf(head)
         return tail?.let { firstElement + it.toList() } ?: firstElement
     }
 
-    /** Returns the string representation of this list. */
     override fun toString(): String = "${toList()}"
 }
 

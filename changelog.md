@@ -20,6 +20,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+Introduce a new `NotEmptyCollection` hierarchy representing collections that
+contain at least one element (issue
+[#14](https://github.com/kotools/types/issues/14)).
+
+```kotlin
+interface NotEmptyCollection<out E>
+class NotEmptyList<out E> : NotEmptyCollection<E>
+class NotEmptySet<out E> : NotEmptyCollection<E>
+```
+
 ### Changed
 
 Support for
