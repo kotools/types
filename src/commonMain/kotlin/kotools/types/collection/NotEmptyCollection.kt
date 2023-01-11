@@ -18,12 +18,10 @@ public sealed interface NotEmptyCollection<out E> {
     /** The size of this collection. */
     public val size: StrictlyPositiveInt
         get() {
-            val result: Result<StrictlyPositiveInt> = tail?.size
-                ?.toInt()
-                ?.plus(1)
-                ?.toStrictlyPositiveInt()
-                ?: 1.toStrictlyPositiveInt()
-            return result.getOrThrow()
+            val result: Int = tail?.run { size.toInt() + 1 }
+                ?: 1
+            return result.toStrictlyPositiveInt()
+                .getOrThrow()
         }
 
     /** Returns the string representation of this collection. */
