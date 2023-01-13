@@ -26,6 +26,11 @@ Update documentation of declarations returning the
 [`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html)
 type (issue [#20](https://github.com/kotools/types/issues/20)).
 
+### Fixed
+
+Fix versioning annotation of declarations in the `kotools.types.number` package
+(issue [#23](https://github.com/kotools/types/issues/23)).
+
 ## 4.0.0
 
 _Release date: 2023-01-03._

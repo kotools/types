@@ -42,7 +42,10 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
             .getOrThrow()
     }
 
+    @SinceKotoolsTypes("4.0")
     override fun toInt(): Int = value
+
+    @SinceKotoolsTypes("4.0")
     override fun toString(): String = "$value"
 }
 
@@ -51,7 +54,7 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
  * encapsulated [IllegalArgumentException] if this integer is
  * [positive][PositiveInt].
  */
-@SinceKotoolsTypes("4.0")
+@SinceKotoolsTypes("1.1")
 public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     StrictlyNegativeInt of this
 
