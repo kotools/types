@@ -39,6 +39,12 @@ public sealed interface NonZeroInt : AnyInt {
                 .getOrThrow()
         }
     }
+
+    @SinceKotoolsTypes("4.0")
+    override fun toInt(): Int
+
+    @SinceKotoolsTypes("4.0")
+    override fun toString(): String
 }
 
 /**
@@ -46,7 +52,7 @@ public sealed interface NonZeroInt : AnyInt {
  * encapsulated [IllegalArgumentException] if this integer equals
  * [zero][ZeroInt].
  */
-@SinceKotoolsTypes("4.0")
+@SinceKotoolsTypes("1.1")
 public fun Int.toNonZeroInt(): Result<NonZeroInt> = when {
     this > ZeroInt.toInt() -> toStrictlyPositiveInt()
     this < ZeroInt.toInt() -> toStrictlyNegativeInt()

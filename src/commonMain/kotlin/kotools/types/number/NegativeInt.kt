@@ -30,6 +30,12 @@ public sealed interface NegativeInt : AnyInt {
                 .getOrThrow()
         }
     }
+
+    @SinceKotoolsTypes("4.0")
+    override fun toInt(): Int
+
+    @SinceKotoolsTypes("4.0")
+    override fun toString(): String
 }
 
 /**
@@ -37,7 +43,7 @@ public sealed interface NegativeInt : AnyInt {
  * encapsulated [IllegalArgumentException] if this integer is
  * [strictly positive][StrictlyPositiveInt].
  */
-@SinceKotoolsTypes("4.0")
+@SinceKotoolsTypes("1.1")
 public fun Int.toNegativeInt(): Result<NegativeInt> = when {
     this == ZeroInt.toInt() -> Result.success(ZeroInt)
     this < ZeroInt.toInt() -> toStrictlyNegativeInt()
