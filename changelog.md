@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 
 ## 4.0.0
 
+_Release date: 2023-01-03._
+
 ### Added
 
 Introduce a new `AnyInt` hierarchy representing integers (issue
