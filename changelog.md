@@ -43,6 +43,8 @@ class NotEmptySet<out E> : NotEmptyCollection<E>
 
 ## 4.0.0
 
+_Release date: 2023-01-03._
+
 ### Added
 
 Introduce a new `AnyInt` hierarchy representing integers (issue
