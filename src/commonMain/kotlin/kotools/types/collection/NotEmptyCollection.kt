@@ -1,8 +1,7 @@
 package kotools.types.collection
 
 import kotools.types.SinceKotoolsTypes
-import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.toStrictlyPositiveInt
+import kotools.types.number.*
 
 /**
  * Representation of collections containing at least one element of type [E].
@@ -17,16 +16,20 @@ public sealed interface NotEmptyCollection<out E> {
 
     /** The size of this collection. */
     public val size: StrictlyPositiveInt
-        get() {
-            val result: Int = tail?.run { size.toInt() + 1 }
-                ?: 1
-            return result.toStrictlyPositiveInt()
-                .getOrThrow()
-        }
+        get() = tail.sizeOrZero.plus(1)
+            .toStrictlyPositiveInt()
+            .getOrThrow()
 
     /** Returns the string representation of this collection. */
     override fun toString(): String
 }
+
+/**
+ * Returns the size of this collection, or returns [ZeroInt] if this collection
+ * is `null`.
+ */
+private val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
+    get() = this?.size ?: ZeroInt
 
 internal object EmptyCollectionException :
     IllegalArgumentException("Given collection shouldn't be empty.")
