@@ -23,6 +23,26 @@ public sealed interface AnyInt {
     override fun toString(): String
 }
 
+/** Adds the [other] integer to this one. */
+internal operator fun AnyInt.plus(other: Int): AnyInt = (toInt() + other)
+    .toAnyInt()
+
+/** Returns this integer as an [AnyInt]. */
+private fun Int.toAnyInt(): AnyInt = when {
+    this == ZeroInt.toInt() -> Result.success(ZeroInt)
+    this > ZeroInt.toInt() -> toStrictlyPositiveInt()
+    else -> toStrictlyNegativeInt()
+}.getOrThrow()
+
+/**
+ * Returns this integer as an encapsulated [StrictlyPositiveInt], or returns an
+ * encapsulated [IllegalArgumentException] if this integer is
+ * [negative][NegativeInt].
+ */
+internal fun AnyInt.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
+    toInt()
+        .toStrictlyPositiveInt()
+
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
 
@@ -45,9 +65,5 @@ internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
         "${Package.number}.AnyInt"::toNotBlankString
     )
 
-    override fun deserialize(value: Int): AnyInt = when {
-        value == ZeroInt.toInt() -> Result.success(ZeroInt)
-        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
-        else -> value.toStrictlyNegativeInt()
-    }.getOrThrow()
+    override fun deserialize(value: Int): AnyInt = value.toAnyInt()
 }
