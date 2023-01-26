@@ -28,7 +28,8 @@ public sealed interface NotEmptyCollection<out E> {
  * Returns the size of this collection, or returns [ZeroInt] if this collection
  * is `null`.
  */
-private val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
+@SinceKotoolsTypes("4.1")
+public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt
 
 internal object EmptyCollectionException :

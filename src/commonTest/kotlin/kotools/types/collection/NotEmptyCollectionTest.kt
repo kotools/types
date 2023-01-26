@@ -1,6 +1,8 @@
 package kotools.types.collection
 
+import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
@@ -31,5 +33,19 @@ class NotEmptyCollectionTest {
             is NotEmptySet -> collection.toSet()
         }
         result.toInt() shouldEqual expectedCollection.size
+    }
+
+    @Test
+    fun sizeOrZero_should_pass_with_a_collection_other_than_null() {
+        val collection: NotEmptyCollection<Int> = notEmptyCollectionOfRandomInts
+        val result: PositiveInt = collection.sizeOrZero
+        result.toInt() shouldEqual collection.size.toInt()
+    }
+
+    @Test
+    fun sizeOrZero_should_fail_with_a_collection_that_equals_null() {
+        val collection: NotEmptyCollection<Int>? = null
+        val result: PositiveInt = collection.sizeOrZero
+        result shouldEqual ZeroInt
     }
 }
