@@ -16,7 +16,8 @@ public sealed interface NotEmptyCollection<out E> {
 
     /** The size of this collection. */
     public val size: StrictlyPositiveInt
-        get() = tail.sizeOrZero.plus(1)
+        get() = tail.sizeOrZero.toInt()
+            .plus(1)
             .toStrictlyPositiveInt()
             .getOrThrow()
 
