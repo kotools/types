@@ -20,6 +20,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.0.1
+
+_Release date: 2023-02-06._
+
 ### Changed
 
 Update documentation of declarations returning the
