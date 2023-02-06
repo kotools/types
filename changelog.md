@@ -34,12 +34,19 @@ class NotEmptySet<out E> : NotEmptyCollection<E>
 
 ### Changed
 
-- Support for
-  [Kotlin 1.5.32](https://github.com/JetBrains/kotlin/releases/tag/v1.5.32)
-  (issue [#6](https://github.com/kotools/types/issues/6)).
-- Update documentation of declarations returning the
-  [`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html)
-  type (issue [#20](https://github.com/kotools/types/issues/20)).
+Support for
+[Kotlin 1.5.32](https://github.com/JetBrains/kotlin/releases/tag/v1.5.32) (issue
+[#6](https://github.com/kotools/types/issues/6)).
+
+## 4.0.1
+
+_Release date: 2023-02-06._
+
+### Changed
+
+Update documentation of declarations returning the
+[`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html)
+type (issue [#20](https://github.com/kotools/types/issues/20)).
 
 ### Fixed
 
