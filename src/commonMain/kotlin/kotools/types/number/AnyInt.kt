@@ -35,6 +35,18 @@ public operator fun AnyInt.plus(other: Int): Int = toInt() + other
 @SinceKotoolsTypes("4.1")
 public operator fun AnyInt.plus(other: AnyInt): Int = toInt() + other
 
+/** Subtracts the [other] integer from this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.minus(other: AnyInt): Int = this - other.toInt()
+
+/** Subtracts the [other] integer from this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.minus(other: Int): Int = toInt() - other
+
+/** Subtracts the [other] integer from this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.minus(other: AnyInt): Int = toInt() - other
+
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
 
