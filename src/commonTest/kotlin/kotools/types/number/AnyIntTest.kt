@@ -57,6 +57,30 @@ class AnyIntTest {
         val result: Int = x - y
         result shouldEqual x.toInt() - y.toInt()
     }
+
+    @Test
+    fun int_times_should_pass_with_an_AnyInt() {
+        val x: Int = Random.nextInt()
+        val y: AnyInt = NonZeroInt.random()
+        val result: Int = x * y
+        result shouldEqual x * y.toInt()
+    }
+
+    @Test
+    fun times_should_pass_with_an_Int() {
+        val x: AnyInt = PositiveInt.random()
+        val y: Int = Random.nextInt()
+        val result: Int = x * y
+        result shouldEqual x.toInt() * y
+    }
+
+    @Test
+    fun times_should_pass_with_an_AnyInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: AnyInt = NegativeInt.random()
+        val result: Int = x * y
+        result shouldEqual x.toInt() * y.toInt()
+    }
 }
 
 class AnyIntSerializerTest {
