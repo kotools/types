@@ -11,7 +11,7 @@ import kotlin.test.Test
 
 class AnyIntTest {
     @Test
-    fun int_plus_should_pass() {
+    fun int_plus_should_pass_with_an_AnyInt() {
         val x: Int = Random.nextInt()
         val y: AnyInt = NonZeroInt.random()
         val result: Int = x + y
@@ -35,7 +35,7 @@ class AnyIntTest {
     }
 
     @Test
-    fun int_minus_should_pass() {
+    fun int_minus_should_pass_with_an_AnyInt() {
         val x: Int = Random.nextInt()
         val y: AnyInt = NonZeroInt.random()
         val result: Int = x - y
