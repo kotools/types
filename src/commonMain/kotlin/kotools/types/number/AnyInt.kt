@@ -59,6 +59,13 @@ public operator fun AnyInt.times(other: Int): Int = toInt() * other
 @SinceKotoolsTypes("4.1")
 public operator fun AnyInt.times(other: AnyInt): Int = toInt() * other
 
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to [zero][ZeroInt].
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
+
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
 

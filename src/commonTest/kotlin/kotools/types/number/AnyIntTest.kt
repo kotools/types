@@ -81,6 +81,14 @@ class AnyIntTest {
         val result: Int = x * y
         result shouldEqual x.toInt() * y.toInt()
     }
+
+    @Test
+    fun div_should_pass_with_a_NonZeroInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: Int = x / y
+        result shouldEqual x.toInt() / y.toInt()
+    }
 }
 
 class AnyIntSerializerTest {
