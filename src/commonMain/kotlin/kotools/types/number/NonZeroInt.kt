@@ -48,6 +48,20 @@ public sealed interface NonZeroInt : AnyInt {
 }
 
 /**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to [zero][ZeroInt].
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
+
+/**
+ * Calculates the remainder of truncating division of this integer by the
+ * [other] one.
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
+
+/**
  * Returns this number as an encapsulated [NonZeroInt], which may involve
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number equals [zero][ZeroInt].

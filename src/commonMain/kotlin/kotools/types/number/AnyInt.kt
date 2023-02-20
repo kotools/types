@@ -23,6 +23,56 @@ public sealed interface AnyInt {
     override fun toString(): String
 }
 
+/** Adds the [other] integer to this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.plus(other: AnyInt): Int = this + other.toInt()
+
+/** Adds the [other] integer to this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.plus(other: Int): Int = toInt() + other
+
+/** Adds the [other] integer to this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.plus(other: AnyInt): Int = toInt() + other
+
+/** Subtracts the [other] integer from this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.minus(other: AnyInt): Int = this - other.toInt()
+
+/** Subtracts the [other] integer from this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.minus(other: Int): Int = toInt() - other
+
+/** Subtracts the [other] integer from this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.minus(other: AnyInt): Int = toInt() - other
+
+/** Multiplies this integer by the [other] one. */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.times(other: AnyInt): Int = this * other.toInt()
+
+/** Multiplies this integer by the [other] one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.times(other: Int): Int = toInt() * other
+
+/** Multiplies this integer by the [other] one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.times(other: AnyInt): Int = toInt() * other
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to [zero][ZeroInt].
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
+
+/**
+ * Calculates the remainder of truncating division of this integer by the
+ * [other] one.
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
+
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
 

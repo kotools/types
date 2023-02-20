@@ -9,6 +9,96 @@ import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
 
+class AnyIntTest {
+    @Test
+    fun int_plus_should_pass_with_an_AnyInt() {
+        val x: Int = Random.nextInt()
+        val y: AnyInt = NonZeroInt.random()
+        val result: Int = x + y
+        result shouldEqual x + y.toInt()
+    }
+
+    @Test
+    fun plus_should_pass_with_an_Int() {
+        val x: AnyInt = PositiveInt.random()
+        val y: Int = Random.nextInt()
+        val result: Int = x + y
+        result shouldEqual x.toInt() + y
+    }
+
+    @Test
+    fun plus_should_pass_with_an_AnyInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: AnyInt = NegativeInt.random()
+        val result: Int = x + y
+        result shouldEqual x.toInt() + y.toInt()
+    }
+
+    @Test
+    fun int_minus_should_pass_with_an_AnyInt() {
+        val x: Int = Random.nextInt()
+        val y: AnyInt = NonZeroInt.random()
+        val result: Int = x - y
+        result shouldEqual x - y.toInt()
+    }
+
+    @Test
+    fun minus_should_pass_with_an_Int() {
+        val x: AnyInt = PositiveInt.random()
+        val y: Int = Random.nextInt()
+        val result: Int = x - y
+        result shouldEqual x.toInt() - y
+    }
+
+    @Test
+    fun minus_should_pass_with_an_AnyInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: AnyInt = NegativeInt.random()
+        val result: Int = x - y
+        result shouldEqual x.toInt() - y.toInt()
+    }
+
+    @Test
+    fun int_times_should_pass_with_an_AnyInt() {
+        val x: Int = Random.nextInt()
+        val y: AnyInt = NonZeroInt.random()
+        val result: Int = x * y
+        result shouldEqual x * y.toInt()
+    }
+
+    @Test
+    fun times_should_pass_with_an_Int() {
+        val x: AnyInt = PositiveInt.random()
+        val y: Int = Random.nextInt()
+        val result: Int = x * y
+        result shouldEqual x.toInt() * y
+    }
+
+    @Test
+    fun times_should_pass_with_an_AnyInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: AnyInt = NegativeInt.random()
+        val result: Int = x * y
+        result shouldEqual x.toInt() * y.toInt()
+    }
+
+    @Test
+    fun div_should_pass_with_a_NonZeroInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: Int = x / y
+        result shouldEqual x.toInt() / y.toInt()
+    }
+
+    @Test
+    fun rem_should_pass_with_a_NonZeroInt() {
+        val x: AnyInt = PositiveInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: Int = x % y
+        result shouldEqual x.toInt() % y.toInt()
+    }
+}
+
 class AnyIntSerializerTest {
     private val serializer: KSerializer<AnyInt> = AnyIntSerializerImplementation
 

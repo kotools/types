@@ -39,6 +39,39 @@ public sealed interface NegativeInt : AnyInt {
 }
 
 /**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to [zero][ZeroInt].
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun NegativeInt.div(other: StrictlyPositiveInt): NegativeInt {
+    val result: Int = toInt() / other
+    return result.toNegativeInt()
+        .getOrThrow()
+}
+
+/**
+ * Divides this integer by the [other] one, truncating the result to an integer
+ * that is closer to [zero][ZeroInt].
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun NegativeInt.div(other: StrictlyNegativeInt): PositiveInt {
+    val result: Int = toInt() / other
+    return result.toPositiveInt()
+        .getOrThrow()
+}
+
+/**
+ * Calculates the remainder of truncating division of this integer by the
+ * [other] one.
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
+    val result: Int = toInt() % other
+    return result.toNegativeInt()
+        .getOrThrow()
+}
+
+/**
  * Returns this number as an encapsulated [NegativeInt], which may involve
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number is [strictly positive][StrictlyPositiveInt].

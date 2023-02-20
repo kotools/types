@@ -33,6 +33,30 @@ class NegativeIntCompanionTest {
 
 class NegativeIntTest {
     @Test
+    fun div_should_return_a_NegativeInt_with_a_StrictlyPositiveInt() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        val result: NegativeInt = x / y
+        result.toInt() shouldEqual x.toInt() / y.toInt()
+    }
+
+    @Test
+    fun div_should_return_a_PositiveInt_with_a_StrictlyNegativeInt() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
+        val result: PositiveInt = x / y
+        result.toInt() shouldEqual x.toInt() / y.toInt()
+    }
+
+    @Test
+    fun rem_should_return_a_NegativeInt_with_a_NonZeroInt() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: NegativeInt = x % y
+        result.toInt() shouldEqual x.toInt() % y.toInt()
+    }
+
+    @Test
     fun number_toNegativeInt_should_pass_with_a_negative_Int() {
         val value: Number = NegativeInt.random()
             .toInt()
