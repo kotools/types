@@ -32,8 +32,8 @@ class NotEmptyList<out E> : NotEmptyCollection<E>
 class NotEmptySet<out E> : NotEmptyCollection<E>
 ```
 
-- Binary operations (`plus`, `minus`, `times`) for the `AnyInt` hierarchy (issue
-  [#31](https://github.com/kotools/types/issues/31)).
+- Binary operations (`plus`, `minus`, `times`, `div`) for the `AnyInt` hierarchy
+  (issue [#31](https://github.com/kotools/types/issues/31)).
 
 ```kotlin
 val x: AnyInt = NonZeroInt.random()
