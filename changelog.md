@@ -22,14 +22,31 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-Introduce a new `NotEmptyCollection` hierarchy representing collections that
-contain at least one element (issue
-[#14](https://github.com/kotools/types/issues/14)).
+- Introduce a new `NotEmptyCollection` hierarchy representing collections that
+  contain at least one element (issue
+  [#14](https://github.com/kotools/types/issues/14)).
 
 ```kotlin
 interface NotEmptyCollection<out E>
 class NotEmptyList<out E> : NotEmptyCollection<E>
 class NotEmptySet<out E> : NotEmptyCollection<E>
+```
+
+- Binary operations (`plus`) for the `AnyInt` hierarchy (issue
+  [#31](https://github.com/kotools/types/issues/31)).
+
+```kotlin
+val x: AnyInt = NonZeroInt.random()
+val y: AnyInt = PositiveInt.random()
+var result: Int
+// before
+result = 1 + x.toInt()
+result = x.toInt() + 1
+result = x.toInt() + y.toInt()
+// after
+result = 1 + x
+result = x + 1
+result = x + y
 ```
 
 ### Changed

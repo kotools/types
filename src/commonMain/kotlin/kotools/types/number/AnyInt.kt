@@ -23,6 +23,18 @@ public sealed interface AnyInt {
     override fun toString(): String
 }
 
+/** Adds the [other] integer to this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun Int.plus(other: AnyInt): Int = this + other.toInt()
+
+/** Adds the [other] integer to this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.plus(other: Int): Int = toInt() + other
+
+/** Adds the [other] integer to this one. */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.plus(other: AnyInt): Int = toInt() + other
+
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
 
