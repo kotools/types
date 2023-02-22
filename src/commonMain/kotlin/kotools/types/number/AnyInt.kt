@@ -66,6 +66,13 @@ public operator fun AnyInt.times(other: AnyInt): Int = toInt() * other
 @SinceKotoolsTypes("4.1")
 public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
 
+/**
+ * Calculates the remainder of truncating division of this integer by the
+ * [other] one.
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
+
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
 
