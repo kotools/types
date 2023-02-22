@@ -58,6 +58,17 @@ public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
 }
 
 /**
+ * Calculates the remainder of truncating division of this integer by the
+ * [other] one.
+ */
+@SinceKotoolsTypes("4.1")
+public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
+    val result: Int = toInt() % other
+    return result.toPositiveInt()
+        .getOrThrow()
+}
+
+/**
  * Returns this number as an encapsulated [PositiveInt], which may involve
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number is [strictly negative][StrictlyNegativeInt].

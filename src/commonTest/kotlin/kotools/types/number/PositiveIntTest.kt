@@ -50,6 +50,14 @@ class PositiveIntTest {
     }
 
     @Test
+    fun rem_should_return_a_PositiveInt_with_a_NonZeroInt() {
+        val x: PositiveInt = PositiveInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: PositiveInt = x % y
+        result.toInt() shouldEqual x.toInt() % y.toInt()
+    }
+
+    @Test
     fun number_toPositiveInt_should_pass_with_a_positive_Int() {
         val expected: Number = PositiveInt.random().toInt()
         val result: Result<PositiveInt> = expected.toPositiveInt()

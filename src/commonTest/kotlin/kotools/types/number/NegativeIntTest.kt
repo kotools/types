@@ -49,6 +49,14 @@ class NegativeIntTest {
     }
 
     @Test
+    fun rem_should_return_a_NegativeInt_with_a_NonZeroInt() {
+        val x: NegativeInt = NegativeInt.random()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: NegativeInt = x % y
+        result.toInt() shouldEqual x.toInt() % y.toInt()
+    }
+
+    @Test
     fun number_toNegativeInt_should_pass_with_a_negative_Int() {
         val value: Number = NegativeInt.random()
             .toInt()

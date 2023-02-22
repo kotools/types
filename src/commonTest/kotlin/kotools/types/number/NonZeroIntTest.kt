@@ -43,6 +43,14 @@ class NonZeroIntTest {
     }
 
     @Test
+    fun int_rem_should_return_an_Int_with_a_NonZeroInt() {
+        val x: Int = Random.nextInt()
+        val y: NonZeroInt = NonZeroInt.random()
+        val result: Int = x % y
+        result shouldEqual x % y.toInt()
+    }
+
+    @Test
     fun number_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
         val value: Number = NonZeroInt.random()
             .toInt()
