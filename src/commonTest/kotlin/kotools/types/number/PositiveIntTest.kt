@@ -34,19 +34,16 @@ class PositiveIntCompanionTest {
 
 class PositiveIntTest {
     @Test
-    fun int_toPositiveInt_should_pass_with_a_positive_Int() {
-        val expected: Int = PositiveInt.random().toInt()
-        val result: Int = expected.toPositiveInt()
-            .getOrThrow()
-            .toInt()
-        result shouldEqual expected
+    fun number_toPositiveInt_should_pass_with_a_positive_Int() {
+        val expected: Number = PositiveInt.random().toInt()
+        val result: Result<PositiveInt> = expected.toPositiveInt()
+        result.getOrThrow().toInt() shouldEqual expected
     }
 
     @Test
-    fun int_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
-        val result: Result<PositiveInt> = StrictlyNegativeInt.random()
-            .toInt()
-            .toPositiveInt()
+    fun number_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
+        val number: Number = StrictlyNegativeInt.random().toInt()
+        val result: Result<PositiveInt> = number.toPositiveInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
