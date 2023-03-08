@@ -39,17 +39,16 @@ class StrictlyPositiveIntTest {
         .run { "$this" shouldEqual "${toInt()}" }
 
     @Test
-    fun int_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Int() {
-        val value: Int = StrictlyPositiveInt.random().toInt()
-        val result: Result<StrictlyPositiveInt> = value.toStrictlyPositiveInt()
-        result.getOrThrow().toInt() shouldEqual value
+    fun number_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
+        val number: Number = StrictlyPositiveInt.random().toInt()
+        val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
+        result.getOrThrow().toInt() shouldEqual number
     }
 
     @Test
-    fun int_toStrictlyPositiveInt_should_fail_with_a_negative_Int() {
-        val result: Result<StrictlyPositiveInt> = NegativeInt.random()
-            .toInt()
-            .toStrictlyPositiveInt()
+    fun number_toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
+        val number: Number = NegativeInt.random().toInt()
+        val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
