@@ -36,15 +36,18 @@ public sealed interface PositiveInt : AnyInt {
 }
 
 /**
- * Returns this integer as an encapsulated [PositiveInt], or returns an
- * encapsulated [IllegalArgumentException] if this integer is
- * [strictly negative][StrictlyNegativeInt].
+ * Returns this number as an encapsulated [PositiveInt], which may involve
+ * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
+ * if this number is [strictly negative][StrictlyNegativeInt].
  */
-@SinceKotoolsTypes("1.1")
-public fun Int.toPositiveInt(): Result<PositiveInt> = when {
-    this == ZeroInt.toInt() -> Result.success(ZeroInt)
-    this > ZeroInt.toInt() -> toStrictlyPositiveInt()
-    else -> Result.failure(this shouldBe aPositiveNumber)
+@SinceKotoolsTypes("4.1")
+public fun Number.toPositiveInt(): Result<PositiveInt> {
+    val value: Int = toInt()
+    return when {
+        value == ZeroInt.toInt() -> Result.success(ZeroInt)
+        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
+        else -> Result.failure(value shouldBe aPositiveNumber)
+    }
 }
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {

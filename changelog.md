@@ -38,7 +38,8 @@ class NotEmptySet<out E> : NotEmptyCollection<E>
   [Kotlin 1.5.32](https://github.com/JetBrains/kotlin/releases/tag/v1.5.32)
   (issue [#6](https://github.com/kotools/types/issues/6)).
 - The following builders now works on the `Number` type instead of the `Int`
-  type only: `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
+  type only: `toPositiveInt`, `toStrictlyPositiveInt` and
+`toStrictlyNegativeInt` (issue
   [#43](https://github.com/kotools/types/issues/43)).
 
 ## 4.0.1
