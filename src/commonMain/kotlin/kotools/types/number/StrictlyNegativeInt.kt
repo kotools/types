@@ -50,13 +50,13 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
 }
 
 /**
- * Returns this integer as an encapsulated [StrictlyNegativeInt], or returns an
- * encapsulated [IllegalArgumentException] if this integer is
- * [positive][PositiveInt].
+ * Returns this number as an encapsulated [StrictlyNegativeInt], which may
+ * involve rounding or truncation, or returns an encapsulated
+ * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
-@SinceKotoolsTypes("1.1")
-public fun Int.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    StrictlyNegativeInt of this
+@SinceKotoolsTypes("4.1")
+public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
+    StrictlyNegativeInt of toInt()
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {

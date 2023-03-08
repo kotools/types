@@ -40,17 +40,16 @@ class StrictlyNegativeIntTest {
     }
 
     @Test
-    fun int_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
-        val value: Int = StrictlyNegativeInt.random().toInt()
+    fun number_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
+        val value: Number = StrictlyNegativeInt.random().toInt()
         val result: Result<StrictlyNegativeInt> = value.toStrictlyNegativeInt()
         result.getOrThrow().toInt() shouldEqual value
     }
 
     @Test
-    fun int_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
-        val result: Result<StrictlyNegativeInt> = PositiveInt.random()
-            .toInt()
-            .toStrictlyNegativeInt()
+    fun number_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
+        val number: Number = PositiveInt.random().toInt()
+        val result: Result<StrictlyNegativeInt> = number.toStrictlyNegativeInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
