@@ -48,15 +48,18 @@ public sealed interface NonZeroInt : AnyInt {
 }
 
 /**
- * Returns this integer as an encapsulated [NonZeroInt], or returns an
- * encapsulated [IllegalArgumentException] if this integer equals
- * [zero][ZeroInt].
+ * Returns this number as an encapsulated [NonZeroInt], which may involve
+ * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
+ * if this number equals [zero][ZeroInt].
  */
-@SinceKotoolsTypes("1.1")
-public fun Int.toNonZeroInt(): Result<NonZeroInt> = when {
-    this > ZeroInt.toInt() -> toStrictlyPositiveInt()
-    this < ZeroInt.toInt() -> toStrictlyNegativeInt()
-    else -> Result.failure(this shouldBe otherThanZero)
+@SinceKotoolsTypes("4.1")
+public fun Number.toNonZeroInt(): Result<NonZeroInt> {
+    val value: Int = toInt()
+    return when {
+        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
+        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
+        else -> Result.failure(value shouldBe otherThanZero)
+    }
 }
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
