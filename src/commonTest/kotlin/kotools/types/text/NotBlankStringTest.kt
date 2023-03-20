@@ -7,10 +7,12 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 private object StringExample {
     const val BLANK: String = "  "
@@ -25,6 +27,36 @@ class NotBlankStringTest {
             .map(NotBlankString::length)
             .getOrThrow()
         result.toInt() shouldEqual StringExample.NOT_BLANK.length
+    }
+
+    @Test
+    fun compareTo_should_return_zero_with_the_same_NotBlankString() {
+        val x: NotBlankString = StringExample.NOT_BLANK.toNotBlankString()
+            .getOrThrow()
+        val y: NotBlankString = "$x".toNotBlankString()
+            .getOrThrow()
+        val result: Int = x compareTo y
+        result shouldEqual ZeroInt.toInt()
+    }
+
+    @Test
+    fun compareTo_should_return_a_negative_number_with_a_greater_NotBlankString() {
+        val x: NotBlankString = "a".toNotBlankString()
+            .getOrThrow()
+        val y: NotBlankString = "b".toNotBlankString()
+            .getOrThrow()
+        val result: Int = x compareTo y
+        assertTrue { result < ZeroInt.toInt() }
+    }
+
+    @Test
+    fun compareTo_should_return_a_positive_number_with_a_less_NotBlankString() {
+        val x: NotBlankString = "c".toNotBlankString()
+            .getOrThrow()
+        val y: NotBlankString = "b".toNotBlankString()
+            .getOrThrow()
+        val result: Int = x compareTo y
+        assertTrue { result > ZeroInt.toInt() }
     }
 
     @Test

@@ -8,8 +8,35 @@ import kotools.types.Package
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertTrue
 
 class AnyIntTest {
+    @Test
+    fun compareTo_should_return_zero_with_the_same_AnyInt() {
+        val x: AnyInt = NonZeroInt.random()
+        val y: AnyInt = x.toInt()
+            .toNonZeroInt()
+            .getOrThrow()
+        val result: Int = x compareTo y
+        result shouldEqual ZeroInt.toInt()
+    }
+
+    @Test
+    fun compareTo_should_return_a_negative_number_with_a_greater_AnyInt() {
+        val x: AnyInt = StrictlyNegativeInt.random()
+        val y: AnyInt = StrictlyPositiveInt.random()
+        val result: Int = x compareTo y
+        assertTrue { result < ZeroInt.toInt() }
+    }
+
+    @Test
+    fun compareTo_should_return_a_positive_number_with_a_less_AnyInt() {
+        val x: AnyInt = StrictlyPositiveInt.random()
+        val y: AnyInt = StrictlyNegativeInt.random()
+        val result: Int = x compareTo y
+        assertTrue { result > ZeroInt.toInt() }
+    }
+
     @Test
     fun int_plus_should_pass_with_an_AnyInt() {
         val x: Int = Random.nextInt()

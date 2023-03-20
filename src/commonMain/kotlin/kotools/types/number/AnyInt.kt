@@ -15,7 +15,20 @@ import kotools.types.text.toNotBlankString
 /** Representation of all integers. */
 @Serializable(AnyIntSerializerImplementation::class)
 @SinceKotoolsTypes("4.0")
-public sealed interface AnyInt {
+public sealed interface AnyInt : Comparable<AnyInt> {
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns zero if this integer equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    @SinceKotoolsTypes("4.1")
+    override infix fun compareTo(other: AnyInt): Int {
+        val x: Int = toInt()
+        val y: Int = other.toInt()
+        return x.compareTo(y)
+    }
+
     /** Returns this integer as an [Int]. */
     public fun toInt(): Int
 

@@ -61,6 +61,25 @@ result = x + y
   type only: `toNonZeroInt`, `toPositiveInt`, `toNegativeInt`,
   `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
   [#43](https://github.com/kotools/types/issues/43)).
+- The `AnyInt` and the `NotBlankString` types are now inheriting from
+  [`Comparable`][kotlin.comparable] (issue
+  [#45](https://github.com/kotools/types/issues/45)).
+
+```kotlin
+val firstInt: AnyInt = StrictlyPositiveInt.random()
+val secondInt: AnyInt = StrictlyNegativeInt.random()
+val firstString: NotBlankString = "hello".toNotBlankString()
+    .getOrThrow()
+val secondString: NotBlankString = "world".toNotBlankString()
+    .getOrThrow()
+var result: Boolean
+// before
+result = firstInt.toInt() > secondInt.toInt()
+result = "$firstString" < "$secondString"
+// after
+result = firstInt > secondInt
+result = firstString < secondString
+```
 
 ```kotlin
 val x: Double = 0.1
@@ -120,8 +139,9 @@ object ZeroInt : PositiveInt, NegativeInt
 
 ### Removed
 
-- Remove inheritance between the `NotBlankString` and the `Comparable` types
-  (issue [#16](https://github.com/kotools/types/issues/8)).
+- Remove inheritance between the `NotBlankString` and the
+  [`Comparable`][kotlin.comparable] types (issue
+  [#16](https://github.com/kotools/types/issues/8)).
 
 ```kotlin
 val text: NotBlankString = "hello world".toNotBlankString().getOrThrow()
@@ -161,3 +181,5 @@ entries.toMap() // after
   [#37](https://github.com/kotools/libraries/issues/37) in [kotools/libraries]).
 
 [kotools/libraries]: https://github.com/kotools/libraries
+
+[kotlin.comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
