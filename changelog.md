@@ -61,17 +61,24 @@ result = x + y
   type only: `toNonZeroInt`, `toPositiveInt`, `toNegativeInt`,
   `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
   [#43](https://github.com/kotools/types/issues/43)).
-- The `AnyInt` type is now inheriting from [`Comparable`][kotlin.comparable]
-  (issue [#45](https://github.com/kotools/types/issues/45)).
+- The `AnyInt` and the `NotBlankString` types now inherits from
+  [`Comparable`][kotlin.comparable] (issue
+  [#45](https://github.com/kotools/types/issues/45)).
 
 ```kotlin
-val x: AnyInt = StrictlyPositiveInt.random()
-val y: AnyInt = StrictlyNegativeInt.random()
+val firstInt: AnyInt = StrictlyPositiveInt.random()
+val secondInt: AnyInt = StrictlyNegativeInt.random()
+val firstString: NotBlankString = "hello".toNotBlankString()
+    .getOrThrow()
+val secondString: NotBlankString = "world".toNotBlankString()
+    .getOrThrow()
 var result: Boolean
 // before
-result = x.toInt() > y.toInt()
+result = firstInt.toInt() > secondInt.toInt()
+result = "$firstString" < "$secondString"
 // after
-result = x > y
+result = firstInt > secondInt
+result = firstString < secondString
 ```
 
 ## 4.0.1
