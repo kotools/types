@@ -61,7 +61,7 @@ result = x + y
   type only: `toNonZeroInt`, `toPositiveInt`, `toNegativeInt`,
   `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
   [#43](https://github.com/kotools/types/issues/43)).
-- The `AnyInt` and the `NotBlankString` types now inherits from
+- The `AnyInt` and the `NotBlankString` types are now inheriting from
   [`Comparable`][kotlin.comparable] (issue
   [#45](https://github.com/kotools/types/issues/45)).
 
