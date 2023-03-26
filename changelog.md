@@ -48,6 +48,10 @@ result = x + 1
 result = x + y
 ```
 
+- `resultOf` function for encapsulating computations of functions returning the
+  [`Result`][kotlin.result] type (issue
+  [#37](https://github.com/kotools/types/issues/37)).
+
 ### Changed
 
 - Support for
@@ -86,8 +90,7 @@ _Release date: 2023-02-06._
 
 ### Changed
 
-Update documentation of declarations returning the
-[`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html)
+Update documentation of declarations returning the [`Result`][kotlin.result]
 type (issue [#20](https://github.com/kotools/types/issues/20)).
 
 ### Fixed
@@ -173,3 +176,5 @@ entries.toMap() // after
 [kotools/libraries]: https://github.com/kotools/libraries
 
 [kotlin.comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
+
+[kotlin.result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html
