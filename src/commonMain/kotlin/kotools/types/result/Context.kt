@@ -16,24 +16,20 @@ public sealed interface ResultContext {
      * equals [zero][ZeroInt].
      */
     @Throws(IllegalArgumentException::class)
-    public fun Number.toNonZeroInt(): NonZeroInt
+    public fun Number.toNonZeroInt(): NonZeroInt = delegateToNonZeroInt()
+        .getOrThrow()
 
     /**
      * Returns this string as a [NotBlankString], or throws an
      * [IllegalArgumentException] if this string is [blank][String.isBlank].
      */
     @Throws(IllegalArgumentException::class)
-    public fun String.toNotBlankString(): NotBlankString
-}
-
-private object ResultContextImplementation : ResultContext {
-    override fun Number.toNonZeroInt(): NonZeroInt = delegateToNonZeroInt()
-        .getOrThrow()
-
-    override fun String.toNotBlankString(): NotBlankString =
+    public fun String.toNotBlankString(): NotBlankString =
         delegateToNotBlankString()
             .getOrThrow()
 }
+
+private object ResultContextImplementation : ResultContext
 
 /**
  * Returns an encapsulated result of calling the [block] function in the
