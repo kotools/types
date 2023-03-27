@@ -1,5 +1,7 @@
 package kotools.types.result
 
+import kotools.types.collection.NotEmptyList
+import kotools.types.contentShouldEqual
 import kotools.types.number.*
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -115,6 +117,27 @@ class ResultContextTest {
         val result: Result<NotBlankString> = resultOf { "".toNotBlankString() }
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
+    }
+
+    @Test
+    fun collection_toNotEmptyList_should_pass_with_a_not_empty_Collection() {
+        val collection: Collection<Int> = List(3) { Random.nextInt() }
+        val result: Result<NotEmptyList<Int>> = resultOf {
+            collection.toNotEmptyList()
+        }
+        result.getOrThrow()
+            .toList() contentShouldEqual collection
+    }
+
+    @Test
+    fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptyList()
+        val result: Result<NotEmptyList<Int>> = resultOf {
+            collection.toNotEmptyList()
+        }
+        val exception: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        exception.shouldHaveAMessage()
     }
 
     @Test

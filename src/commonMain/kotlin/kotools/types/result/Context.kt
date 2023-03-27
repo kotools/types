@@ -1,8 +1,10 @@
 package kotools.types.result
 
 import kotools.types.SinceKotoolsTypes
+import kotools.types.collection.NotEmptyList
 import kotools.types.number.*
 import kotools.types.text.NotBlankString
+import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
 import kotools.types.number.toNegativeInt as delegateToNegativeInt
 import kotools.types.number.toNonZeroInt as delegateToNonZeroInt
 import kotools.types.number.toPositiveInt as delegateToPositiveInt
@@ -67,6 +69,16 @@ public sealed interface ResultContext {
     @Throws(IllegalArgumentException::class)
     public fun String.toNotBlankString(): NotBlankString =
         delegateToNotBlankString()
+            .getOrThrow()
+
+    /**
+     * Returns a [NotEmptyList] containing all the elements of this collection,
+     * or throws an [IllegalArgumentException] if this collection is
+     * [empty][Collection.isEmpty].
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun <E> Collection<E>.toNotEmptyList(): NotEmptyList<E> =
+        delegateToNotEmptyList()
             .getOrThrow()
 }
 
