@@ -2,10 +2,12 @@ package kotools.types.result
 
 import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptyList
+import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
 import kotools.types.number.*
 import kotools.types.text.NotBlankString
 import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
+import kotools.types.collection.toNotEmptyMap as delegateToNotEmptyMap
 import kotools.types.collection.toNotEmptySet as delegateToNotEmptySet
 import kotools.types.number.toNegativeInt as delegateToNegativeInt
 import kotools.types.number.toNonZeroInt as delegateToNonZeroInt
@@ -91,6 +93,15 @@ public sealed interface ResultContext {
     @Throws(IllegalArgumentException::class)
     public fun <E> Collection<E>.toNotEmptySet(): NotEmptySet<E> =
         delegateToNotEmptySet()
+            .getOrThrow()
+
+    /**
+     * Returns a [NotEmptyMap] containing all the entries of this map, or throws
+     * an [IllegalArgumentException] if this map is [empty][Map.isEmpty].
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun <K, V> Map<K, V>.toNotEmptyMap(): NotEmptyMap<K, V> =
+        delegateToNotEmptyMap()
             .getOrThrow()
 }
 

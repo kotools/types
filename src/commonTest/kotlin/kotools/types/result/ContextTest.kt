@@ -1,6 +1,7 @@
 package kotools.types.result
 
 import kotools.types.collection.NotEmptyList
+import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
 import kotools.types.contentShouldEqual
 import kotools.types.number.*
@@ -151,6 +152,29 @@ class ResultContextTest {
         val exception: IllegalArgumentException =
             assertFailsWith(block = result::getOrThrow)
         exception.shouldHaveAMessage()
+    }
+
+    @Test
+    fun map_toNotEmptyMap_should_pass_with_a_not_empty_Map() {
+        val map: Map<String, Int> = mapOf(
+            "a" to Random.nextInt(),
+            "b" to Random.nextInt(),
+            "c" to Random.nextInt()
+        )
+        val result: Result<NotEmptyMap<String, Int>> =
+            resultOf { map.toNotEmptyMap() }
+        result.getOrThrow()
+            .toMap()
+            .entries contentShouldEqual map.entries
+    }
+
+    @Test
+    fun map_toNotEmptyMap_should_fail_with_an_empty_Map() {
+        val map: Map<String, Int> = emptyMap()
+        val result: Result<NotEmptyMap<String, Int>> =
+            resultOf { map.toNotEmptyMap() }
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
     }
 
     @Test
