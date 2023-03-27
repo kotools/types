@@ -66,9 +66,8 @@ class ResultContextTest {
     @Test
     fun number_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
         val number: Number = StrictlyPositiveInt.random().toInt()
-        val result: Result<StrictlyPositiveInt> = resultOf {
-            number.toStrictlyPositiveInt()
-        }
+        val result: Result<StrictlyPositiveInt> =
+            resultOf { number.toStrictlyPositiveInt() }
         result.getOrThrow()
             .toInt() shouldEqual number
     }
@@ -76,9 +75,8 @@ class ResultContextTest {
     @Test
     fun number_toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
         val number: Number = NegativeInt.random().toInt()
-        val result: Result<StrictlyPositiveInt> = resultOf {
-            number.toStrictlyPositiveInt()
-        }
+        val result: Result<StrictlyPositiveInt> =
+            resultOf { number.toStrictlyPositiveInt() }
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
@@ -86,9 +84,8 @@ class ResultContextTest {
     @Test
     fun number_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
         val value: Number = StrictlyNegativeInt.random().toInt()
-        val result: Result<StrictlyNegativeInt> = resultOf {
-            value.toStrictlyNegativeInt()
-        }
+        val result: Result<StrictlyNegativeInt> =
+            resultOf { value.toStrictlyNegativeInt() }
         result.getOrThrow()
             .toInt() shouldEqual value
     }
@@ -96,9 +93,8 @@ class ResultContextTest {
     @Test
     fun number_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
         val number: Number = PositiveInt.random().toInt()
-        val result: Result<StrictlyNegativeInt> = resultOf {
-            number.toStrictlyNegativeInt()
-        }
+        val result: Result<StrictlyNegativeInt> =
+            resultOf { number.toStrictlyNegativeInt() }
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }
@@ -106,9 +102,8 @@ class ResultContextTest {
     @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val string = "hello world"
-        val result: Result<NotBlankString> = resultOf {
-            string.toNotBlankString()
-        }
+        val result: Result<NotBlankString> =
+            resultOf { string.toNotBlankString() }
         "${result.getOrThrow()}" shouldEqual string
     }
 
@@ -122,9 +117,8 @@ class ResultContextTest {
     @Test
     fun collection_toNotEmptyList_should_pass_with_a_not_empty_Collection() {
         val collection: Collection<Int> = List(3) { Random.nextInt() }
-        val result: Result<NotEmptyList<Int>> = resultOf {
-            collection.toNotEmptyList()
-        }
+        val result: Result<NotEmptyList<Int>> =
+            resultOf { collection.toNotEmptyList() }
         result.getOrThrow()
             .toList() contentShouldEqual collection
     }
@@ -132,9 +126,8 @@ class ResultContextTest {
     @Test
     fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
-        val result: Result<NotEmptyList<Int>> = resultOf {
-            collection.toNotEmptyList()
-        }
+        val result: Result<NotEmptyList<Int>> =
+            resultOf { collection.toNotEmptyList() }
         val exception: IllegalArgumentException =
             assertFailsWith(block = result::getOrThrow)
         exception.shouldHaveAMessage()
