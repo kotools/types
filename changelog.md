@@ -52,6 +52,24 @@ result = x + y
   [`Result`][kotlin.result] type (issue
   [#37](https://github.com/kotools/types/issues/37)).
 
+```kotlin
+data class Person(val name: NotBlankString, val age: StrictlyPositiveInt)
+
+var somebody: Person
+// before
+somebody = Person(
+    name = "John Doe".toNotBlankString().getOrThrow(),
+    age = 42.toStrictlyPositiveInt().getOrThrow()
+)
+// after
+somebody = resultOf {
+    Person(
+        name = "John Doe".toNotBlankString(),
+        age = 42.toStrictlyPositiveInt()
+    )
+}
+```
+
 ### Changed
 
 - Support for
