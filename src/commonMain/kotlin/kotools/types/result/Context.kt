@@ -1,11 +1,9 @@
 package kotools.types.result
 
 import kotools.types.SinceKotoolsTypes
-import kotools.types.number.NonZeroInt
-import kotools.types.number.PositiveInt
-import kotools.types.number.StrictlyNegativeInt
-import kotools.types.number.ZeroInt
+import kotools.types.number.*
 import kotools.types.text.NotBlankString
+import kotools.types.number.toNegativeInt as delegateToNegativeInt
 import kotools.types.number.toNonZeroInt as delegateToNonZeroInt
 import kotools.types.number.toPositiveInt as delegateToPositiveInt
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
@@ -29,6 +27,15 @@ public sealed interface ResultContext {
      */
     @Throws(IllegalArgumentException::class)
     public fun Number.toPositiveInt(): PositiveInt = delegateToPositiveInt()
+        .getOrThrow()
+
+    /**
+     * Returns this number as a [NegativeInt], which may involve rounding or
+     * truncation, or throws an [IllegalArgumentException] if this number is
+     * [strictly positive][StrictlyPositiveInt].
+     */
+    @Throws(IllegalArgumentException::class)
+    public fun Number.toNegativeInt(): NegativeInt = delegateToNegativeInt()
         .getOrThrow()
 
     /**
