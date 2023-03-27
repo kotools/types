@@ -1,6 +1,8 @@
 package kotools.types.result
 
 import kotools.types.number.NonZeroInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -26,6 +28,22 @@ class ResultContextTest {
         val exception: IllegalArgumentException =
             assertFailsWith(block = result::getOrThrow)
         exception.shouldHaveAMessage()
+    }
+
+    @Test
+    fun number_toPositiveInt_should_pass_with_a_positive_Int() {
+        val expected: Number = PositiveInt.random().toInt()
+        val result: Result<PositiveInt> = resultOf { expected.toPositiveInt() }
+        result.getOrThrow()
+            .toInt() shouldEqual expected
+    }
+
+    @Test
+    fun number_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
+        val number: Number = StrictlyNegativeInt.random().toInt()
+        val result: Result<PositiveInt> = resultOf { number.toPositiveInt() }
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
     }
 
     @Test
