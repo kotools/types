@@ -82,6 +82,16 @@ somebody = resultOf {
   type only: `toNonZeroInt`, `toPositiveInt`, `toNegativeInt`,
   `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
   [#43](https://github.com/kotools/types/issues/43)).
+
+```kotlin
+val x: Double = 0.1
+var result: Result<StrictlyPositiveInt>
+// before
+result = x.toInt().toStrictlyPositiveInt()
+// after
+result = x.toStrictlyPositiveInt()
+```
+
 - The `AnyInt` and the `NotBlankString` types are now inheriting from
   [`Comparable`][kotlin.comparable] (issue
   [#45](https://github.com/kotools/types/issues/45)).
