@@ -82,6 +82,26 @@ class ResultContextTest {
     }
 
     @Test
+    fun number_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
+        val value: Number = StrictlyNegativeInt.random().toInt()
+        val result: Result<StrictlyNegativeInt> = resultOf {
+            value.toStrictlyNegativeInt()
+        }
+        result.getOrThrow()
+            .toInt() shouldEqual value
+    }
+
+    @Test
+    fun number_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
+        val number: Number = PositiveInt.random().toInt()
+        val result: Result<StrictlyNegativeInt> = resultOf {
+            number.toStrictlyNegativeInt()
+        }
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
+    }
+
+    @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val string = "hello world"
         val result: Result<NotBlankString> = resultOf {
