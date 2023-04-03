@@ -20,6 +20,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.1.0
+
+_Release date: 2023-04-03._
+
 ### Added
 
 - `NotEmptyCollection` hierarchy representing collections that contain at least
