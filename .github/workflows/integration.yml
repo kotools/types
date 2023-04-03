@@ -3,19 +3,15 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - '*gradle*'
-      - '*.kt*'
+      - './**/*gradle*'
+      - './**/*.kt*'
       - .github/workflows/integration.yml
-      - gradle/wrapper/gradle-wrapper*
-      - src/**/*.kt*
   push:
     branches: [ main ]
     paths:
-      - '*gradle*'
-      - '*.kt*'
+      - './**/*gradle*'
+      - './**/*.kt*'
       - .github/workflows/integration.yml
-      - gradle/wrapper/gradle-wrapper*
-      - src/**/*.kt*
   workflow_dispatch:
 jobs:
   test:

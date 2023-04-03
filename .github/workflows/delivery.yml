@@ -1,5 +1,11 @@
 name: Delivery
 on:
+  push:
+    branches: [ release/* ]
+    paths:
+      - './**/*gradle*'
+      - './**/*.kt*'
+      - .github/workflows/integration.yml
   workflow_dispatch:
 env:
   CACHING: gradle
