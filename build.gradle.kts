@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.kotools"
-version = "4.1.0-SNAPSHOT"
+version = "4.1.0"
 
 repositories(RepositoryHandler::mavenCentral)
 
