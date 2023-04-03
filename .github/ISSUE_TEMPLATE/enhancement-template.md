@@ -12,4 +12,4 @@ labels: enhancement
 - [ ] Implement.
 - [ ] Test.
 - [ ] Refactor.
-- [ ] Update `Work in progress` section in changelog.
+- [ ] Update the `Unreleased` section in changelog.
