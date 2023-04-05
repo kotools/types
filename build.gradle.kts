@@ -2,10 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
-    val kotlinVersion = "1.5.32"
+    val kotlinVersion = "1.6.10"
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.dokka") version "1.5.31"
+    id("org.jetbrains.dokka") version kotlinVersion
     `maven-publish`
     signing
 }
@@ -22,7 +22,7 @@ dependencies {
 
     // Serialization
     fun serialization(module: String): String =
-        "org.jetbrains.kotlinx:kotlinx-serialization-$module:1.3.1"
+        "org.jetbrains.kotlinx:kotlinx-serialization-$module:1.3.3"
     commonMainImplementation(serialization("core"))
     commonTestImplementation(serialization("json"))
 }
@@ -37,6 +37,11 @@ kotlin {
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
+    sourceSets.all {
+        languageSettings.optIn(
+            "kotlinx.serialization.ExperimentalSerializationApi"
+        )
+    }
 }
 
 tasks.withType<Jar> {
