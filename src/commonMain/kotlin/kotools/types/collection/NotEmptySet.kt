@@ -1,6 +1,5 @@
 package kotools.types.collection
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -64,7 +63,6 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
         SetSerializer(elementSerializer)
     }
 
-    @ExperimentalSerializationApi
     override val descriptor: SerialDescriptor by lazy {
         SerialDescriptor(
             "${Package.collection}.NotEmptySet",
