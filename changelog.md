@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Support for
-  [Kotlin 1.6.10](https://github.com/JetBrains/kotlin/releases/tag/v1.6.10) and
+  [Kotlin 1.6.21](https://github.com/JetBrains/kotlin/releases/tag/v1.6.21) and
   [kotlinx.serialization 1.3.3](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3)
   (issue [#51](https://github.com/kotools/types/issues/516)).
 
