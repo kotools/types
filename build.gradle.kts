@@ -60,6 +60,20 @@ tasks.dokkaHtml {
             skipEmptyPackages.set(true)
         }
     }
+    moduleName.set("Kotools Types")
+    doLast {
+        val images = "images"
+        val logo = "logo-icon.svg"
+        val dokkaImages: File = dokkaDirectory.resolve(images)
+        val kotlinLogo: File = dokkaImages.resolve(logo)
+        delete(kotlinLogo)
+        copy {
+            val kotoolsLogo: File = rootDir.resolve(images)
+                .resolve(logo)
+            from(kotoolsLogo)
+            into(dokkaImages)
+        }
+    }
 }
 val cleanDokkaHtml: TaskProvider<Delete> =
     tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }
