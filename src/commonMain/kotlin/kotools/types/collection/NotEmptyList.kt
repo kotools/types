@@ -9,7 +9,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.toSuccessfulResult
 
 /** Representation of lists that contain at least one element of type [E]. */
 @Serializable(NotEmptyListSerializer::class)
@@ -47,9 +46,9 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     takeIf(Collection<E>::isNotEmpty)
-        ?.toSuccessfulResult {
-            val head: E = it.first()
-            val tail: NotEmptyList<E>? = it.drop(1)
+        ?.runCatching {
+            val head: E = first()
+            val tail: NotEmptyList<E>? = drop(1)
                 .toNotEmptyList()
                 .getOrNull()
             NotEmptyList(head, tail)

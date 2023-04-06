@@ -6,7 +6,6 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
-import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
 /** Representation of negative integers excluding [zero][ZeroInt]. */
@@ -31,7 +30,7 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
 
         internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
             .takeIf { it < ZeroInt.toInt() }
-            ?.toSuccessfulResult(::StrictlyNegativeInt)
+            ?.runCatching { StrictlyNegativeInt(this) }
             ?: Result.failure(value shouldBe aStrictlyNegativeNumber)
 
         /** Returns a random [StrictlyNegativeInt]. */

@@ -9,7 +9,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.toSuccessfulResult
 
 /** Representation of sets that contain at least one element of type [E]. */
 @Serializable(NotEmptySetSerializer::class)
@@ -48,9 +47,9 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     takeIf(Collection<E>::isNotEmpty)
-        ?.toSuccessfulResult {
-            val head: E = it.first()
-            val tail: NotEmptySet<E>? = it.drop(1)
+        ?.runCatching {
+            val head: E = first()
+            val tail: NotEmptySet<E>? = drop(1)
                 .toNotEmptySet()
                 .getOrNull()
             NotEmptySet(head, tail)

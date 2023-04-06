@@ -12,7 +12,6 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import kotools.types.toSuccessfulResult
 import kotlin.jvm.JvmInline
 
 /**
@@ -28,7 +27,7 @@ public value class NotBlankString private constructor(
     internal companion object {
         infix fun of(value: String): Result<NotBlankString> = value
             .takeIf(String::isNotBlank)
-            ?.toSuccessfulResult(::NotBlankString)
+            ?.runCatching { NotBlankString(this) }
             ?: Result.failure(NotBlankStringException)
     }
 

@@ -11,7 +11,6 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import kotools.types.toSuccessfulResult
 
 /**
  * Representation of maps that contain at least one entry with a key of type
@@ -82,9 +81,9 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     takeIf(Map<K, V>::isNotEmpty)
         ?.entries
         ?.map(Map.Entry<K, V>::toPair)
-        ?.toSuccessfulResult {
-            val head: Pair<K, V> = it.first()
-            val tail: NotEmptyMap<K, V>? = it.drop(1)
+        ?.runCatching {
+            val head: Pair<K, V> = first()
+            val tail: NotEmptyMap<K, V>? = drop(1)
                 .toMap()
                 .toNotEmptyMap()
                 .getOrNull()
