@@ -50,6 +50,30 @@ public value class NotBlankString private constructor(
     override fun toString(): String = value
 }
 
+/** Concatenates this string with the [other] one. */
+@SinceKotoolsTypes("4.2")
+public operator fun NotBlankString.plus(other: String): NotBlankString = "$this"
+    .plus(other)
+    .toNotBlankString()
+    .getOrThrow()
+
+/** Concatenates this string with the [other] one. */
+@SinceKotoolsTypes("4.2")
+public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
+    plus("$other")
+
+/** Concatenates this string with the [other] character. */
+@SinceKotoolsTypes("4.2")
+public operator fun NotBlankString.plus(other: Char): NotBlankString =
+    plus("$other")
+
+/** Concatenates this character with the [other] string. */
+@SinceKotoolsTypes("4.2")
+public operator fun Char.plus(other: NotBlankString): NotBlankString =
+    plus("$other")
+        .toNotBlankString()
+        .getOrThrow()
+
 /**
  * Returns this string as an encapsulated [NotBlankString], or returns an
  * encapsulated [IllegalArgumentException] if this string is
