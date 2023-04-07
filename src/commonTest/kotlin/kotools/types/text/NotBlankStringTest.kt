@@ -60,6 +60,43 @@ class NotBlankStringTest {
     }
 
     @Test
+    fun plus_should_pass_with_a_String() {
+        val first: NotBlankString = "hell".toNotBlankString()
+            .getOrThrow()
+        val second = "o"
+        val result: NotBlankString = first + second
+        "$result" shouldEqual "$first$second"
+    }
+
+    @Test
+    fun plus_should_pass_with_a_NotBlankString() {
+        val first: NotBlankString = "hell".toNotBlankString()
+            .getOrThrow()
+        val second: NotBlankString = "o".toNotBlankString()
+            .getOrThrow()
+        val result: NotBlankString = first + second
+        "$result" shouldEqual "$first$second"
+    }
+
+    @Test
+    fun plus_should_pass_with_a_Char() {
+        val first: NotBlankString = "hell".toNotBlankString()
+            .getOrThrow()
+        val second = 'o'
+        val result: NotBlankString = first + second
+        "$result" shouldEqual "$first$second"
+    }
+
+    @Test
+    fun char_plus_should_pass_with_a_NotBlankString() {
+        val first = 'a'
+        val second: NotBlankString = "b".toNotBlankString()
+            .getOrThrow()
+        val result: NotBlankString = first + second
+        "$result" shouldEqual "$first$second"
+    }
+
+    @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val result: Result<NotBlankString> =
             StringExample.NOT_BLANK.toNotBlankString()

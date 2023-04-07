@@ -20,12 +20,33 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+The `plus` operations for concatenating a `NotBlankString` with a `String` or a
+`Char` (issue [#53](https://github.com/kotools/types/issues/53)).
+
+```kotlin
+resultOf {
+    val firstString: NotBlankString = "hello".toNotBlankString()
+    val secondString: NotBlankString = "world".toNotBlankString()
+    var result: NotBlankString
+    // before
+    result = ("$firstString" + 'a').toNotBlankString()
+    result = ("$firstString" + "everyone").toNotBlankString()
+    result = ("$firstString" + "$secondString").toNotBlankString()
+    // after
+    result = firstString + 'a'
+    result = firstString + "everyone"
+    result = firstString + secondString
+}
+```
+
 ### Changed
 
-- Support for
-  [Kotlin 1.6.21](https://github.com/JetBrains/kotlin/releases/tag/v1.6.21) and
-  [kotlinx.serialization 1.3.3](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3)
-  (issue [#51](https://github.com/kotools/types/issues/516)).
+Support for
+[Kotlin 1.6.21](https://github.com/JetBrains/kotlin/releases/tag/v1.6.21) and
+[kotlinx.serialization 1.3.3](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3)
+(issue [#51](https://github.com/kotools/types/issues/51)).
 
 ## 4.1.0
 
