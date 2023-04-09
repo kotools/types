@@ -47,7 +47,7 @@ class NotEmptyRangeTest {
             .getOrThrow()
             .toInclusiveBound()
         val end: InclusiveBound<PositiveInt> =
-            PositiveInt.max.toInclusiveBound()
+            PositiveInt.range.end.value.toInclusiveBound()
         val range: NotEmptyRange<PositiveInt> = start..end
         val value: PositiveInt = ZeroInt
         assertTrue { value !in range }
@@ -56,11 +56,11 @@ class NotEmptyRangeTest {
     @Test
     fun contains_should_fail_with_a_value_that_is_not_in_exclusive_bounds() {
         val start: ExclusiveBound<PositiveInt> =
-            PositiveInt.min.toExclusiveBound()
+            PositiveInt.range.start.value.toExclusiveBound()
         val end: ExclusiveBound<PositiveInt> =
-            PositiveInt.max.toExclusiveBound()
+            PositiveInt.range.end.value.toExclusiveBound()
         val range: NotEmptyRange<PositiveInt> = start..end
-        val value: PositiveInt = PositiveInt.min
+        val value: PositiveInt = PositiveInt.range.start.value
         assertTrue { value !in range }
     }
 
