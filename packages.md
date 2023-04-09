@@ -10,6 +10,11 @@ Contains types such as `NotEmptyList` for manipulating collections.
 
 Contains types such as `NonZeroInt` for manipulating numbers.
 
+# Package kotools.types.range
+
+Contains types such as `NotEmptyRange` for manipulating ranges of comparable
+values.
+
 # Package kotools.types.result
 
 Contains declarations for manipulating the

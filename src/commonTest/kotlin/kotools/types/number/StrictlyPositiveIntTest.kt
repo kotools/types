@@ -6,23 +6,44 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.range.InclusiveBound
+import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
+    @Suppress("DEPRECATION")
     @Test
     fun min_should_equal_one() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.min
         result.toInt() shouldEqual 1
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.max
         result.toInt() shouldEqual Int.MAX_VALUE
+    }
+
+    @Test
+    fun range_should_start_with_an_inclusive_bound_that_equals_1() {
+        val range: NotEmptyRange<StrictlyPositiveInt> =
+            StrictlyPositiveInt.range
+        assertTrue { range.start is InclusiveBound }
+        range.start.value.toInt() shouldEqual 1
+    }
+
+    @Test
+    fun range_should_end_with_an_inclusive_bound_that_equals_the_maximum_value_of_Int() {
+        val range: NotEmptyRange<StrictlyPositiveInt> =
+            StrictlyPositiveInt.range
+        assertTrue { range.end is InclusiveBound }
+        range.end.value.toInt() shouldEqual Int.MAX_VALUE
     }
 
     @Test

@@ -4,6 +4,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.range.InclusiveBound
+import kotools.types.range.NotEmptyRange
+import kotools.types.range.rangeTo
+import kotools.types.range.toInclusiveBound
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
@@ -14,16 +18,34 @@ public sealed interface PositiveInt : AnyInt {
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
         /** The minimum value a [PositiveInt] can have. */
+        @Deprecated(
+            "Use the range property instead.",
+            ReplaceWith("PositiveInt.range.start.value")
+        )
         public val min: ZeroInt = ZeroInt
 
         /** The maximum value a [PositiveInt] can have. */
-        public val max: StrictlyPositiveInt by lazy(
-            StrictlyPositiveInt.Companion::max
+        @Deprecated(
+            "Use the range property instead.",
+            ReplaceWith("PositiveInt.range.end.value")
         )
+        public val max: StrictlyPositiveInt by lazy(
+            StrictlyPositiveInt.range.end::value
+        )
+
+        /** The range of values a [PositiveInt] can have. */
+        @SinceKotoolsTypes("4.2")
+        public val range: NotEmptyRange<PositiveInt> by lazy {
+            val start: InclusiveBound<PositiveInt> = ZeroInt.toInclusiveBound()
+            val end: InclusiveBound<PositiveInt> =
+                StrictlyPositiveInt.range.end.value.toInclusiveBound()
+            start..end
+        }
 
         /** Returns a random [PositiveInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): PositiveInt = (min.toInt()..max.toInt()).random()
+        public fun random(): PositiveInt = range.toIntRange()
+            .random()
             .toPositiveInt()
             .getOrThrow()
     }
