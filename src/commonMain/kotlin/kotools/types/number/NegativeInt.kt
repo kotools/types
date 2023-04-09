@@ -4,6 +4,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.range.InclusiveBound
+import kotools.types.range.NotEmptyRange
+import kotools.types.range.rangeTo
+import kotools.types.range.toInclusiveBound
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
@@ -14,21 +18,36 @@ public sealed interface NegativeInt : AnyInt {
     /** Contains declarations for holding or building a [NegativeInt]. */
     public companion object {
         /** The minimum value a [NegativeInt] can have. */
+        @Deprecated(
+            "Use the range property instead.",
+            ReplaceWith("NegativeInt.range.start.value")
+        )
         public val min: StrictlyNegativeInt by lazy(
             StrictlyNegativeInt.range.start::value
         )
 
         /** The maximum value a [NegativeInt] can have. */
+        @Deprecated(
+            "Use the range property instead.",
+            ReplaceWith("NegativeInt.range.end.value")
+        )
         public val max: ZeroInt = ZeroInt
+
+        /** The range of values a [NegativeInt] can have. */
+        @SinceKotoolsTypes("4.2")
+        public val range: NotEmptyRange<NegativeInt> by lazy {
+            val start: InclusiveBound<NegativeInt> =
+                StrictlyNegativeInt.range.start.value.toInclusiveBound()
+            val end: InclusiveBound<NegativeInt> = ZeroInt.toInclusiveBound()
+            start..end
+        }
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): NegativeInt {
-            val range: IntRange = min.toInt()..max.toInt()
-            return range.random()
-                .toNegativeInt()
-                .getOrThrow()
-        }
+        public fun random(): NegativeInt = range.toIntRange()
+            .random()
+            .toNegativeInt()
+            .getOrThrow()
     }
 
     @SinceKotoolsTypes("4.0")

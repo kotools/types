@@ -72,7 +72,7 @@ implementation("org.kotools:types:$version")
 ### Deprecated
 
 The `min` and the `max` companion's properties of the `StrictlyPositiveInt`, the
-`StrictlyNegativeInt` and the `PositiveInt` types (issue
+`StrictlyNegativeInt`, the `PositiveInt` and the `NegativeInt` types (issue
 [#56](https://github.com/kotools/types/issues/56)).
 
 ```kotlin
