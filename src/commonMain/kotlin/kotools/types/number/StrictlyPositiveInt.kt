@@ -4,6 +4,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.range.InclusiveBound
+import kotools.types.range.NotEmptyRange
+import kotools.types.range.rangeTo
+import kotools.types.range.toInclusiveBound
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
@@ -19,14 +23,36 @@ private constructor(private val value: Int) : NonZeroInt, PositiveInt {
      */
     public companion object {
         /** The minimum value a [StrictlyPositiveInt] can have. */
+        @Deprecated(
+            "Use the range property instead.",
+            ReplaceWith("StrictlyPositiveInt.range.start.value")
+        )
         public val min: StrictlyPositiveInt by lazy(
             1.toStrictlyPositiveInt()::getOrThrow
         )
 
         /** The maximum value a [StrictlyPositiveInt] can have. */
+        @Deprecated(
+            "Use the range property instead.",
+            ReplaceWith("StrictlyPositiveInt.range.end.value")
+        )
         public val max: StrictlyPositiveInt by lazy(
             Int.MAX_VALUE.toStrictlyPositiveInt()::getOrThrow
         )
+
+        /** The range of values a [StrictlyPositiveInt] can have. */
+        @SinceKotoolsTypes("4.2")
+        public val range: NotEmptyRange<StrictlyPositiveInt> by lazy {
+            val start: InclusiveBound<StrictlyPositiveInt> = 1
+                .toStrictlyPositiveInt()
+                .getOrThrow()
+                .toInclusiveBound()
+            val end: InclusiveBound<StrictlyPositiveInt> = Int.MAX_VALUE
+                .toStrictlyPositiveInt()
+                .getOrThrow()
+                .toInclusiveBound()
+            start..end
+        }
 
         internal infix fun of(value: Int): Result<StrictlyPositiveInt> = value
             .takeIf { it > ZeroInt.toInt() }
@@ -35,7 +61,7 @@ private constructor(private val value: Int) : NonZeroInt, PositiveInt {
 
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): StrictlyPositiveInt = (min.value..max.value)
+        public fun random(): StrictlyPositiveInt = range.toIntRange()
             .random()
             .toStrictlyPositiveInt()
             .getOrThrow()

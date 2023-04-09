@@ -18,7 +18,7 @@ public sealed interface PositiveInt : AnyInt {
 
         /** The maximum value a [PositiveInt] can have. */
         public val max: StrictlyPositiveInt by lazy(
-            StrictlyPositiveInt.Companion::max
+            StrictlyPositiveInt.range.end::value
         )
 
         /** Returns a random [PositiveInt]. */

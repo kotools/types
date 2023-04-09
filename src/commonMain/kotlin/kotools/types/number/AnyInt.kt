@@ -9,6 +9,9 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.range.ExclusiveBound
+import kotools.types.range.InclusiveBound
+import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
@@ -85,6 +88,18 @@ public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
  */
 @SinceKotoolsTypes("4.1")
 public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
+
+internal fun <T : AnyInt> NotEmptyRange<T>.toIntRange(): IntRange {
+    val start: Int = when (start) {
+        is InclusiveBound -> start.value.toInt()
+        is ExclusiveBound -> start.value + 1
+    }
+    val end: Int = when (end) {
+        is InclusiveBound -> end.value.toInt()
+        is ExclusiveBound -> end.value - 1
+    }
+    return start..end
+}
 
 internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
     val serialName: Result<NotBlankString>
