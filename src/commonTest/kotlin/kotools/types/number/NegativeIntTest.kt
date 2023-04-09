@@ -5,23 +5,42 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.range.InclusiveBound
+import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class NegativeIntCompanionTest {
+    @Suppress("DEPRECATION")
     @Test
     fun min_should_equal_the_minimum_value_of_Int() {
         val result: StrictlyNegativeInt = NegativeInt.min
         result.toInt() shouldEqual Int.MIN_VALUE
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun max_should_equal_zero() {
         val result: ZeroInt = NegativeInt.max
         result shouldEqual ZeroInt
+    }
+
+    @Test
+    fun range_should_start_with_an_InclusiveBound_that_equals_the_minimum_value_of_Int() {
+        val range: NotEmptyRange<NegativeInt> = NegativeInt.range
+        assertTrue { range.start is InclusiveBound }
+        range.start.value.toInt() shouldEqual Int.MIN_VALUE
+    }
+
+    @Test
+    fun range_should_end_with_an_InclusiveBound_that_equals_zero() {
+        val range: NotEmptyRange<NegativeInt> = NegativeInt.range
+        assertTrue { range.end is InclusiveBound }
+        range.end.value shouldEqual ZeroInt
     }
 
     @Test
