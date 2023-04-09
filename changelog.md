@@ -69,6 +69,21 @@ implementation("io.github.kotools:types:$version")
 implementation("org.kotools:types:$version")
 ```
 
+### Deprecated
+
+The `min` and the `max` companion's properties of the `StrictlyPositiveInt` type
+(issue [#56](https://github.com/kotools/types/issues/56)).
+
+```kotlin
+var result: StrictlyPositiveInt
+// before
+result = StrictlyPositiveInt.min
+result = StrictlyPositiveInt.max
+// after
+result = StrictlyPositiveInt.range.start.value
+result = StrictlyPositiveInt.range.end.value
+```
+
 ## 4.1.0
 
 _Release date: 2023-04-03._

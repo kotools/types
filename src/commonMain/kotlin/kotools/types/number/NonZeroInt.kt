@@ -22,7 +22,7 @@ public sealed interface NonZeroInt : AnyInt {
 
         /** The maximum value a [NonZeroInt] can have. */
         public val max: StrictlyPositiveInt by lazy(
-            StrictlyPositiveInt.Companion::max
+            StrictlyPositiveInt.range.end::value
         )
 
         /** Returns a random [NonZeroInt]. */
@@ -30,7 +30,7 @@ public sealed interface NonZeroInt : AnyInt {
         public fun random(): NonZeroInt {
             val ranges: NotEmptySet<IntRange> = notEmptySetOf(
                 min.toInt()..StrictlyNegativeInt.max.toInt(),
-                StrictlyPositiveInt.min.toInt()..max.toInt()
+                StrictlyPositiveInt.range.start.value.toInt()..max.toInt()
             )
             return ranges.toSet()
                 .random()
