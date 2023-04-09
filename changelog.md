@@ -22,8 +22,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-The `plus` operations for concatenating a `NotBlankString` with a `String` or a
-`Char` (issue [#53](https://github.com/kotools/types/issues/53)).
+- The `plus` operations for concatenating a `NotBlankString` with a `String` or
+  a `Char` (issue [#53](https://github.com/kotools/types/issues/53)).
 
 ```kotlin
 resultOf {
@@ -39,6 +39,17 @@ resultOf {
     result = firstString + "everyone"
     result = firstString + secondString
 }
+```
+
+- The `NotEmptyRange` and the `Bound` types representing a range of comparable
+  values that contain at least one value (issue
+  [#56](https://github.com/kotools/types/issues/56)).
+
+```kotlin
+val start: InclusiveBound<Int> = 1.toInclusiveBound()
+val end: ExclusiveBound<Int> = 42.toExclusiveBound()
+val range: NotEmptyRange<Int> = start..end
+println(range) // [1;42[
 ```
 
 ### Changed
