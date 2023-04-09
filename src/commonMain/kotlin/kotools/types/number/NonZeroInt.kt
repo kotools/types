@@ -17,7 +17,7 @@ public sealed interface NonZeroInt : AnyInt {
     public companion object {
         /** The minimum value a [NonZeroInt] can have. */
         public val min: StrictlyNegativeInt by lazy(
-            StrictlyNegativeInt.Companion::min
+            StrictlyNegativeInt.range.start::value
         )
 
         /** The maximum value a [NonZeroInt] can have. */
@@ -29,7 +29,7 @@ public sealed interface NonZeroInt : AnyInt {
         @SinceKotoolsTypes("3.0")
         public fun random(): NonZeroInt {
             val ranges: NotEmptySet<IntRange> = notEmptySetOf(
-                min.toInt()..StrictlyNegativeInt.max.toInt(),
+                min.toInt()..StrictlyNegativeInt.range.end.value.toInt(),
                 StrictlyPositiveInt.range.start.value.toInt()..max.toInt()
             )
             return ranges.toSet()
