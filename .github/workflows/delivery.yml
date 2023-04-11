@@ -13,8 +13,8 @@ env:
   GIT_USER: ${{ secrets.GIT_USER }}
   GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-  JAVA_DISTRIBUTION: adopt
-  JAVA_VERSION: 8
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
   MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
   MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 permissions: read-all
@@ -25,9 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1.0.5
+        uses: gradle/wrapper-validation-action@v1.0.6
   # ---------- Stage 2 ----------
   deliver-js:
     name: Deliver JS package
@@ -35,9 +35,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -50,9 +50,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -65,9 +65,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -80,9 +80,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -95,9 +95,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -116,9 +116,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
