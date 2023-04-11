@@ -27,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1.0.5
+        uses: gradle/wrapper-validation-action@v1.0.6
   # ---------- Stage 2 ----------
   deliver-js:
     name: Deliver JS package
