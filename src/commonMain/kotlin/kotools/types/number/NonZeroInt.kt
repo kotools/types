@@ -6,6 +6,7 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
+import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
@@ -16,21 +17,41 @@ public sealed interface NonZeroInt : AnyInt {
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
         /** The minimum value a [NonZeroInt] can have. */
+        @Deprecated(
+            "Use the negativeRange property instead.",
+            ReplaceWith("NonZeroInt.negativeRange.start.value")
+        )
         public val min: StrictlyNegativeInt by lazy(
             StrictlyNegativeInt.range.start::value
         )
 
         /** The maximum value a [NonZeroInt] can have. */
+        @Deprecated(
+            "Use the positiveRange property instead.",
+            ReplaceWith("NonZeroInt.positiveRange.end.value")
+        )
         public val max: StrictlyPositiveInt by lazy(
             StrictlyPositiveInt.range.end::value
+        )
+
+        /** The negative range of values a [NonZeroInt] can have. */
+        @SinceKotoolsTypes("4.2")
+        public val negativeRange: NotEmptyRange<StrictlyNegativeInt> by lazy(
+            StrictlyNegativeInt.Companion::range
+        )
+
+        /** The positive range of values a [NonZeroInt] can have. */
+        @SinceKotoolsTypes("4.2")
+        public val positiveRange: NotEmptyRange<StrictlyPositiveInt> by lazy(
+            StrictlyPositiveInt.Companion::range
         )
 
         /** Returns a random [NonZeroInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): NonZeroInt {
             val ranges: NotEmptySet<IntRange> = notEmptySetOf(
-                min.toInt()..StrictlyNegativeInt.range.end.value.toInt(),
-                StrictlyPositiveInt.range.start.value.toInt()..max.toInt()
+                negativeRange.toIntRange(),
+                positiveRange.toIntRange()
             )
             return ranges.toSet()
                 .random()

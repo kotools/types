@@ -6,6 +6,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -14,16 +15,30 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
 class NonZeroIntCompanionTest {
+    @Suppress("DEPRECATION")
     @Test
     fun min_should_equal_the_minimum_value_of_Int() {
         val result: StrictlyNegativeInt = NonZeroInt.min
         result.toInt() shouldEqual Int.MIN_VALUE
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = NonZeroInt.max
         result.toInt() shouldEqual Int.MAX_VALUE
+    }
+
+    @Test
+    fun negativeRange_should_be_the_range_of_StrictlyNegativeInt() {
+        val range: NotEmptyRange<StrictlyNegativeInt> = NonZeroInt.negativeRange
+        range shouldEqual StrictlyNegativeInt.range
+    }
+
+    @Test
+    fun positiveRange_should_be_the_range_of_StrictlyPositiveInt() {
+        val range: NotEmptyRange<StrictlyPositiveInt> = NonZeroInt.positiveRange
+        range shouldEqual StrictlyPositiveInt.range
     }
 
     @Test
