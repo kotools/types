@@ -74,6 +74,68 @@ class NotEmptyRangeTest {
     }
 
     @Test
+    fun equals_should_pass_with_another_NotEmptyRange_having_the_same_bounds() {
+        val start: InclusiveBound<AnyInt> = NegativeInt.random()
+            .toInclusiveBound()
+        val end: InclusiveBound<AnyInt> = PositiveInt.random()
+            .toInclusiveBound()
+        val firstRange: NotEmptyRange<AnyInt> = start..end
+        val secondRange: NotEmptyRange<AnyInt> = start..end
+        assertTrue { firstRange == secondRange }
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyRange_starting_with_another_type_of_bound_but_with_the_same_value() {
+        val start: InclusiveBound<NonZeroInt> = StrictlyNegativeInt.random()
+            .toInclusiveBound()
+        val end: InclusiveBound<NonZeroInt> = StrictlyPositiveInt.random()
+            .toInclusiveBound()
+        val firstRange: NotEmptyRange<NonZeroInt> = start..end
+        val secondRange: NotEmptyRange<NonZeroInt> =
+            start.value.toExclusiveBound()..end
+        assertTrue { firstRange != secondRange }
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyRange_starting_with_the_same_type_of_bound_but_with_another_value() {
+        val start: InclusiveBound<NonZeroInt> = StrictlyNegativeInt.random()
+            .toInclusiveBound()
+        val end: InclusiveBound<NonZeroInt> = StrictlyPositiveInt.random()
+            .toInclusiveBound()
+        val firstRange: NotEmptyRange<NonZeroInt> = start..end
+        val secondRange: NotEmptyRange<NonZeroInt> = StrictlyNegativeInt
+            .random()
+            .toInclusiveBound<NonZeroInt>()
+            .rangeTo(end)
+        assertTrue { firstRange != secondRange }
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyRange_ending_with_another_type_of_bound_but_with_the_same_value() {
+        val start: InclusiveBound<NonZeroInt> = StrictlyNegativeInt.random()
+            .toInclusiveBound()
+        val end: InclusiveBound<NonZeroInt> = StrictlyPositiveInt.random()
+            .toInclusiveBound()
+        val firstRange: NotEmptyRange<NonZeroInt> = start..end
+        val secondRange: NotEmptyRange<NonZeroInt> =
+            start..end.value.toExclusiveBound()
+        assertTrue { firstRange != secondRange }
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyRange_ending_with_the_same_type_of_bound_but_with_another_value() {
+        val start: InclusiveBound<NonZeroInt> = StrictlyNegativeInt.random()
+            .toInclusiveBound()
+        val end: InclusiveBound<NonZeroInt> = StrictlyPositiveInt.random()
+            .toInclusiveBound()
+        val firstRange: NotEmptyRange<NonZeroInt> = start..end
+        val secondRange: NotEmptyRange<NonZeroInt> = start..StrictlyPositiveInt
+            .random()
+            .toInclusiveBound()
+        assertTrue { firstRange != secondRange }
+    }
+
+    @Test
     fun toString_should_pass_with_2_InclusiveBounds() {
         val start: InclusiveBound<NonZeroInt> = StrictlyNegativeInt.random()
             .toInclusiveBound()
