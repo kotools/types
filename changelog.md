@@ -62,8 +62,8 @@ Support for
 ### Deprecated
 
 The `min` and the `max` companion's properties of the `StrictlyPositiveInt`, the
-`StrictlyNegativeInt`, the `PositiveInt` and the `NegativeInt` types (issue
-[#56](https://github.com/kotools/types/issues/56)).
+`StrictlyNegativeInt`, the `PositiveInt`, the `NegativeInt` and the `NonZeroInt`
+types (issue [#56](https://github.com/kotools/types/issues/56)).
 
 ```kotlin
 var result: StrictlyPositiveInt
