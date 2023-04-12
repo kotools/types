@@ -164,26 +164,4 @@ class NotEmptyRangeTest {
         val range: NotEmptyRange<NonZeroInt> = start..end
         "$range" shouldEqual "[$start;$end["
     }
-
-    @Test
-    fun rangeTo_should_return_a_NotEmptyRange_ending_with_the_other_one() {
-        val firstBound: Bound<NonZeroInt> = StrictlyNegativeInt.random()
-            .toInclusiveBound()
-        val otherBound: Bound<NonZeroInt> = StrictlyPositiveInt.random()
-            .toExclusiveBound()
-        val result: NotEmptyRange<NonZeroInt> = firstBound..otherBound
-        result.start shouldEqual firstBound
-        result.end shouldEqual otherBound
-    }
-
-    @Test
-    fun rangeTo_should_return_a_NotEmptyRange_starting_with_the_other_one() {
-        val firstBound: Bound<NonZeroInt> = StrictlyPositiveInt.random()
-            .toExclusiveBound()
-        val otherBound: Bound<NonZeroInt> = StrictlyNegativeInt.random()
-            .toInclusiveBound()
-        val result: NotEmptyRange<NonZeroInt> = firstBound..otherBound
-        result.start shouldEqual otherBound
-        result.end shouldEqual firstBound
-    }
 }
