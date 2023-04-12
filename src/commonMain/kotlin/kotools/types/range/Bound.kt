@@ -8,6 +8,15 @@ public sealed interface Bound<T : Comparable<T>> {
     /** The value of this bound. */
     public val value: T
 
+    /**
+     * Creates a [NotEmptyRange] using this bound and the [other] one.
+     * If the [other] bound is lower than this bound, the resulting range will
+     * [start][NotEmptyRange.start] with the [other] bound.
+     */
+    public infix operator fun rangeTo(other: Bound<T>): NotEmptyRange<T> =
+        if (value <= other.value) NotEmptyRange(start = this, end = other)
+        else NotEmptyRange(start = other, end = this)
+
     /** Returns the string representation of this bound's [value]. */
     override fun toString(): String
 }
