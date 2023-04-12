@@ -4,8 +4,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.collection.NotEmptySet
-import kotools.types.collection.notEmptySetOf
 import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
@@ -48,17 +46,12 @@ public sealed interface NonZeroInt : AnyInt {
 
         /** Returns a random [NonZeroInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): NonZeroInt {
-            val ranges: NotEmptySet<IntRange> = notEmptySetOf(
-                negativeRange.toIntRange(),
-                positiveRange.toIntRange()
-            )
-            return ranges.toSet()
-                .random()
-                .random()
-                .toNonZeroInt()
-                .getOrThrow()
-        }
+        public fun random(): NonZeroInt = setOf(negativeRange, positiveRange)
+            .random()
+            .toIntRange()
+            .random()
+            .toNonZeroInt()
+            .getOrThrow()
     }
 
     @SinceKotoolsTypes("4.0")
