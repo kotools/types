@@ -6,6 +6,7 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
+import kotools.types.range.rangeTo
 import kotools.types.range.toInclusiveBound
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
