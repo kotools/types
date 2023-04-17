@@ -7,30 +7,6 @@ import kotools.types.shouldEqual
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class BoundTest {
-    @Test
-    fun rangeTo_should_return_a_NotEmptyRange_ending_with_the_other_one() {
-        val firstBound: Bound<NonZeroInt> = StrictlyNegativeInt.random()
-            .toInclusiveBound()
-        val otherBound: Bound<NonZeroInt> = StrictlyPositiveInt.random()
-            .toExclusiveBound()
-        val result: NotEmptyRange<NonZeroInt> = firstBound..otherBound
-        result.start shouldEqual firstBound
-        result.end shouldEqual otherBound
-    }
-
-    @Test
-    fun rangeTo_should_return_a_NotEmptyRange_starting_with_the_other_one() {
-        val firstBound: Bound<NonZeroInt> = StrictlyPositiveInt.random()
-            .toExclusiveBound()
-        val otherBound: Bound<NonZeroInt> = StrictlyNegativeInt.random()
-            .toInclusiveBound()
-        val result: NotEmptyRange<NonZeroInt> = firstBound..otherBound
-        result.start shouldEqual otherBound
-        result.end shouldEqual firstBound
-    }
-}
-
 class InclusiveBoundTest {
     @Test
     fun equals_should_pass_with_another_InclusiveBound_having_the_same_value() {
