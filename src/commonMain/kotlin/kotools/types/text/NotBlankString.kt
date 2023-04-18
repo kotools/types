@@ -46,24 +46,26 @@ public value class NotBlankString private constructor(
     override infix fun compareTo(other: NotBlankString): Int =
         "$this".compareTo("$other")
 
-    /** Concatenates this string with the [other] one. */
-    @SinceKotoolsTypes("4.2")
-    public operator fun plus(other: String): NotBlankString = "$value$other"
-        .toNotBlankString()
-        .getOrThrow()
-
-    /** Concatenates this string with the [other] one. */
-    @SinceKotoolsTypes("4.2")
-    public operator fun plus(other: NotBlankString): NotBlankString =
-        plus("$other")
-
-    /** Concatenates this string with the [other] character. */
-    @SinceKotoolsTypes("4.2")
-    public operator fun plus(other: Char): NotBlankString = plus("$other")
-
     /** Returns this string as a [String]. */
     override fun toString(): String = value
 }
+
+/** Concatenates this string with the [other] one. */
+@SinceKotoolsTypes("4.2")
+public operator fun NotBlankString.plus(other: String): NotBlankString = "$this"
+    .plus(other)
+    .toNotBlankString()
+    .getOrThrow()
+
+/** Concatenates this string with the [other] one. */
+@SinceKotoolsTypes("4.2")
+public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
+    plus("$other")
+
+/** Concatenates this string with the [other] character. */
+@SinceKotoolsTypes("4.2")
+public operator fun NotBlankString.plus(other: Char): NotBlankString =
+    plus("$other")
 
 /** Concatenates this character with the [other] string. */
 @SinceKotoolsTypes("4.2")
