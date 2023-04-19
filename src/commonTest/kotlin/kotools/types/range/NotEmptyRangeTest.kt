@@ -7,73 +7,6 @@ import kotlin.test.assertTrue
 
 class NotEmptyRangeTest {
     @Test
-    fun contains_should_pass_with_a_value_in_inclusive_bounds() {
-        val range: NotEmptyRange<PositiveInt> = PositiveInt.range
-        val value: PositiveInt = PositiveInt.random()
-        assertTrue { value in range }
-    }
-
-    @Test
-    fun contains_should_pass_with_a_value_in_exclusive_bounds() {
-        val start: ExclusiveBound<NonZeroInt> =
-            NonZeroInt.negativeRange.start.value.toExclusiveBound()
-        val end: ExclusiveBound<NonZeroInt> = 2.toStrictlyPositiveInt()
-            .getOrThrow()
-            .toExclusiveBound()
-        val range: NotEmptyRange<NonZeroInt> = start..end
-        val value: NonZeroInt = 1.toStrictlyPositiveInt()
-            .getOrThrow()
-        assertTrue { value in range }
-    }
-
-    @Test
-    fun contains_should_pass_with_a_value_in_inclusive_and_exclusive_bounds() {
-        val start: InclusiveBound<NonZeroInt> =
-            NonZeroInt.negativeRange.start.value.toInclusiveBound()
-        val end: ExclusiveBound<NonZeroInt> =
-            NonZeroInt.positiveRange.end.value.toExclusiveBound()
-        val range: NotEmptyRange<NonZeroInt> = start..end
-        val value: NonZeroInt = NonZeroInt.random()
-            .takeIf { it != NonZeroInt.positiveRange.end.value }
-            ?: NonZeroInt.negativeRange.start.value
-        assertTrue { value in range }
-    }
-
-    @Test
-    fun contains_should_fail_with_a_value_that_is_not_in_inclusive_bounds() {
-        val start: InclusiveBound<PositiveInt> = 1.toStrictlyPositiveInt()
-            .getOrThrow()
-            .toInclusiveBound()
-        val end: InclusiveBound<PositiveInt> =
-            PositiveInt.range.end.value.toInclusiveBound()
-        val range: NotEmptyRange<PositiveInt> = start..end
-        val value: PositiveInt = ZeroInt
-        assertTrue { value !in range }
-    }
-
-    @Test
-    fun contains_should_fail_with_a_value_that_is_not_in_exclusive_bounds() {
-        val start: ExclusiveBound<PositiveInt> =
-            PositiveInt.range.start.value.toExclusiveBound()
-        val end: ExclusiveBound<PositiveInt> =
-            PositiveInt.range.end.value.toExclusiveBound()
-        val range: NotEmptyRange<PositiveInt> = start..end
-        val value: PositiveInt = PositiveInt.range.start.value
-        assertTrue { value !in range }
-    }
-
-    @Test
-    fun contains_should_fail_with_a_value_that_is_not_in_inclusive_and_exclusive_bounds() {
-        val start: InclusiveBound<NonZeroInt> =
-            NonZeroInt.positiveRange.end.value.toInclusiveBound()
-        val end: ExclusiveBound<NonZeroInt> =
-            NonZeroInt.negativeRange.start.value.toExclusiveBound()
-        val range: NotEmptyRange<NonZeroInt> = start..end
-        val value: NonZeroInt = NonZeroInt.negativeRange.start.value
-        assertTrue { value !in range }
-    }
-
-    @Test
     fun equals_should_pass_with_another_NotEmptyRange_having_the_same_bounds() {
         val start: InclusiveBound<AnyInt> = NegativeInt.random()
             .toInclusiveBound()
@@ -163,6 +96,73 @@ class NotEmptyRangeTest {
             .toExclusiveBound()
         val range: NotEmptyRange<NonZeroInt> = start..end
         "$range" shouldEqual "[$start;$end["
+    }
+
+    @Test
+    fun contains_should_pass_with_a_value_in_inclusive_bounds() {
+        val range: NotEmptyRange<PositiveInt> = PositiveInt.range
+        val value: PositiveInt = PositiveInt.random()
+        assertTrue { value in range }
+    }
+
+    @Test
+    fun contains_should_pass_with_a_value_in_exclusive_bounds() {
+        val start: ExclusiveBound<NonZeroInt> =
+            NonZeroInt.negativeRange.start.value.toExclusiveBound()
+        val end: ExclusiveBound<NonZeroInt> = 2.toStrictlyPositiveInt()
+            .getOrThrow()
+            .toExclusiveBound()
+        val range: NotEmptyRange<NonZeroInt> = start..end
+        val value: NonZeroInt = 1.toStrictlyPositiveInt()
+            .getOrThrow()
+        assertTrue { value in range }
+    }
+
+    @Test
+    fun contains_should_pass_with_a_value_in_inclusive_and_exclusive_bounds() {
+        val start: InclusiveBound<NonZeroInt> =
+            NonZeroInt.negativeRange.start.value.toInclusiveBound()
+        val end: ExclusiveBound<NonZeroInt> =
+            NonZeroInt.positiveRange.end.value.toExclusiveBound()
+        val range: NotEmptyRange<NonZeroInt> = start..end
+        val value: NonZeroInt = NonZeroInt.random()
+            .takeIf { it != NonZeroInt.positiveRange.end.value }
+            ?: NonZeroInt.negativeRange.start.value
+        assertTrue { value in range }
+    }
+
+    @Test
+    fun contains_should_fail_with_a_value_that_is_not_in_inclusive_bounds() {
+        val start: InclusiveBound<PositiveInt> = 1.toStrictlyPositiveInt()
+            .getOrThrow()
+            .toInclusiveBound()
+        val end: InclusiveBound<PositiveInt> =
+            PositiveInt.range.end.value.toInclusiveBound()
+        val range: NotEmptyRange<PositiveInt> = start..end
+        val value: PositiveInt = ZeroInt
+        assertTrue { value !in range }
+    }
+
+    @Test
+    fun contains_should_fail_with_a_value_that_is_not_in_exclusive_bounds() {
+        val start: ExclusiveBound<PositiveInt> =
+            PositiveInt.range.start.value.toExclusiveBound()
+        val end: ExclusiveBound<PositiveInt> =
+            PositiveInt.range.end.value.toExclusiveBound()
+        val range: NotEmptyRange<PositiveInt> = start..end
+        val value: PositiveInt = PositiveInt.range.start.value
+        assertTrue { value !in range }
+    }
+
+    @Test
+    fun contains_should_fail_with_a_value_that_is_not_in_inclusive_and_exclusive_bounds() {
+        val start: InclusiveBound<NonZeroInt> =
+            NonZeroInt.positiveRange.end.value.toInclusiveBound()
+        val end: ExclusiveBound<NonZeroInt> =
+            NonZeroInt.negativeRange.start.value.toExclusiveBound()
+        val range: NotEmptyRange<NonZeroInt> = start..end
+        val value: NonZeroInt = NonZeroInt.negativeRange.start.value
+        assertTrue { value !in range }
     }
 
     @Test
