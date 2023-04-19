@@ -7,13 +7,21 @@ import kotools.types.SinceKotoolsTypes
  * value.
  */
 @SinceKotoolsTypes("4.2")
-public data class NotEmptyRange<T : Comparable<T>> internal constructor(
+public sealed interface NotEmptyRange<T : Comparable<T>> {
     /** The start of this range. */
-    public val start: Bound<T>,
+    public val start: Bound<T>
+
     /** The end of this range. */
     public val end: Bound<T>
-) {
+
     /** Returns the string representation of this range. */
+    override fun toString(): String
+}
+
+private data class NotEmptyRangeImplementation<T : Comparable<T>>(
+    override val start: Bound<T>,
+    override val end: Bound<T>
+) : NotEmptyRange<T> {
     override fun toString(): String {
         val prefix: Char = when (start) {
             is InclusiveBound -> '['
@@ -55,5 +63,8 @@ public infix operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
 public infix operator fun <T : Comparable<T>> Bound<T>.rangeTo(
     other: Bound<T>
 ): NotEmptyRange<T> =
-    if (value <= other.value) NotEmptyRange(start = this, end = other)
-    else NotEmptyRange(start = other, end = this)
+    if (value <= other.value) NotEmptyRangeImplementation(
+        start = this,
+        end = other
+    )
+    else NotEmptyRangeImplementation(start = other, end = this)
