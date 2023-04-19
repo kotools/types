@@ -29,12 +29,15 @@ public fun <T : Comparable<T>> T.toInclusiveBound(): InclusiveBound<T> =
 
 /** Representation of an exclusive bound in a [range][NotEmptyRange]. */
 @SinceKotoolsTypes("4.2")
-public data class ExclusiveBound<T : Comparable<T>>
-internal constructor(override val value: T) : Bound<T> {
+public sealed interface ExclusiveBound<T : Comparable<T>> : Bound<T>
+
+private data class ExclusiveBoundImplementation<T : Comparable<T>>(
+    override val value: T
+) : ExclusiveBound<T> {
     override fun toString(): String = "$value"
 }
 
 /** Returns this comparable value as an [ExclusiveBound]. */
 @SinceKotoolsTypes("4.2")
 public fun <T : Comparable<T>> T.toExclusiveBound(): ExclusiveBound<T> =
-    ExclusiveBound(this)
+    ExclusiveBoundImplementation(this)
