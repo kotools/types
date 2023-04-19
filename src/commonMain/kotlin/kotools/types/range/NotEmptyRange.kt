@@ -40,7 +40,7 @@ private data class NotEmptyRangeImplementation<T : Comparable<T>>(
  * otherwise.
  */
 @SinceKotoolsTypes("4.2")
-public infix operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
+public operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
     value: T
 ): Boolean {
     val valueIsGreaterThanStart: Boolean = when (start) {
@@ -60,11 +60,9 @@ public infix operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
  * [start][NotEmptyRange.start] with the [other] bound.
  */
 @SinceKotoolsTypes("4.2")
-public infix operator fun <T : Comparable<T>> Bound<T>.rangeTo(
+public operator fun <T : Comparable<T>> Bound<T>.rangeTo(
     other: Bound<T>
-): NotEmptyRange<T> =
-    if (value <= other.value) NotEmptyRangeImplementation(
-        start = this,
-        end = other
-    )
-    else NotEmptyRangeImplementation(start = other, end = this)
+): NotEmptyRange<T> = if (value <= other.value) NotEmptyRangeImplementation(
+    start = this,
+    end = other
+) else NotEmptyRangeImplementation(start = other, end = this)
