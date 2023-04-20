@@ -52,6 +52,19 @@ val range: NotEmptyRange<Int> = start..end
 println(range) // [1;42[
 ```
 
+- The `Result.flatMap` operation for transforming its encapsulated value (issue
+  [#47](https://github.com/kotools/types/issues/47)).
+
+```kotlin
+var result: Result<StrictlyPositiveInt>
+// before
+result = 3.toNonZeroInt()
+    .mapCatching { (it * 2).toStrictlyPositiveInt().getOrThrow() }
+// after
+result = 3.toNonZeroInt()
+    .flatMap { (it * 2).toStrictlyPositiveInt() }
+```
+
 ### Changed
 
 - Support for
