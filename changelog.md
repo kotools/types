@@ -43,10 +43,20 @@ resultOf {
 
 ### Changed
 
-Support for
-[Kotlin 1.6.21](https://github.com/JetBrains/kotlin/releases/tag/v1.6.21) and
-[kotlinx.serialization 1.3.3](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3)
-(issue [#51](https://github.com/kotools/types/issues/51)).
+- Support for
+  [Kotlin 1.6.21](https://github.com/JetBrains/kotlin/releases/tag/v1.6.21) and
+  [kotlinx.serialization 1.3.3](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3)
+  (issue [#51](https://github.com/kotools/types/issues/51)).
+- Relocate the library from `io.github.kotools` to `org.kotools` (issue
+  [#63](https://github.com/kotools/types/issues/63)). Here's an example using
+  the Kotlin DSL in Gradle:
+
+```kotlin
+// before
+implementation("io.github.kotools:types:$version")
+// after
+implementation("org.kotools:types:$version")
+```
 
 ## 4.1.0
 
