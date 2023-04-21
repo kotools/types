@@ -10,8 +10,9 @@ plugins {
     signing
 }
 
-group = "io.github.kotools"
+group = "org.kotools"
 version = "4.2.0-SNAPSHOT"
+val projectName = "Kotools Types"
 
 repositories(RepositoryHandler::mavenCentral)
 
@@ -60,7 +61,7 @@ tasks.dokkaHtml {
             skipEmptyPackages.set(true)
         }
     }
-    moduleName.set("Kotools Types")
+    moduleName.set(projectName)
     doLast {
         val images = "images"
         val logo = "logo-icon.svg"
@@ -99,15 +100,15 @@ publishing {
     }
     publications {
         getByName("kotlinMultiplatform", MavenPublication::class) {
-            groupId = project.group.toString()
+            groupId = "${project.group}"
             artifactId = project.name
-            version = project.version.toString()
+            version = "${project.version}"
         }
         forEach {
             if (it !is MavenPublication) return@forEach
             it.artifact(javadocJar)
             it.pom {
-                name.set("Kotools Types")
+                name.set(projectName)
                 description.set(
                     "Multiplatform library providing explicit types for Kotlin."
                 )
