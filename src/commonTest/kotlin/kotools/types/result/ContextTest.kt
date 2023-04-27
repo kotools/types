@@ -102,6 +102,27 @@ class ResultContextTest {
     }
 
     @Test
+    fun number_toStrictlyPositiveDouble_should_pass_with_a_strictly_positive_Number() {
+        val value: Number =
+            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
+        val result: Result<StrictlyPositiveDouble> =
+            resultOf { value.toStrictlyPositiveDouble() }
+        result.getOrThrow()
+            .toDouble()
+            .shouldEqual(value)
+    }
+
+    @Test
+    fun number_toStrictlyPositiveDouble_should_fail_with_a_negative_Number() {
+        val value: Number =
+            -Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
+        val result: Result<StrictlyPositiveDouble> =
+            resultOf { value.toStrictlyPositiveDouble() }
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
+    }
+
+    @Test
     fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
         val string = "hello world"
         val result: Result<NotBlankString> =

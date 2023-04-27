@@ -13,6 +13,7 @@ import kotools.types.number.toNegativeInt as delegateToNegativeInt
 import kotools.types.number.toNonZeroInt as delegateToNonZeroInt
 import kotools.types.number.toPositiveInt as delegateToPositiveInt
 import kotools.types.number.toStrictlyNegativeInt as delegateToStrictlyNegativeInt
+import kotools.types.number.toStrictlyPositiveDouble as delegateToStrictlyPositiveDouble
 import kotools.types.number.toStrictlyPositiveInt as delegateToStrictlyPositiveInt
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
 
@@ -64,6 +65,17 @@ public sealed interface ResultContext {
     @Throws(IllegalArgumentException::class)
     public fun Number.toStrictlyNegativeInt(): StrictlyNegativeInt =
         delegateToStrictlyNegativeInt()
+            .getOrThrow()
+
+    /**
+     * Returns this number as a [StrictlyPositiveDouble], which may involve
+     * rounding or truncation, or throws an [IllegalArgumentException] if this
+     * number is negative.
+     */
+    @SinceKotoolsTypes("4.2")
+    @Throws(IllegalArgumentException::class)
+    public fun Number.toStrictlyPositiveDouble(): StrictlyPositiveDouble =
+        delegateToStrictlyPositiveDouble()
             .getOrThrow()
 
     /**
