@@ -19,5 +19,5 @@ internal val aStrictlyNegativeNumber = NumberErrorDescription.StrictlyNegative
 internal infix fun <N : Number> N.shouldBe(
     description: NumberErrorDescription
 ): IllegalArgumentException = IllegalArgumentException(
-    "Given number should be $description (tried with $this)."
+    "Number should be $description (tried with $this)."
 )

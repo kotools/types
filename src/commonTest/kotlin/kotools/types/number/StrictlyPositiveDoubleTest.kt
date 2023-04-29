@@ -1,10 +1,16 @@
 package kotools.types.number
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class StrictlyPositiveDoubleTest {
@@ -75,4 +81,47 @@ class StrictlyPositiveDoubleTest {
                 assertFailsWith<IllegalArgumentException>(block = ::getOrThrow)
             }
             .shouldHaveAMessage()
+}
+
+class StrictlyPositiveDoubleSerializerTest {
+    private val serializer: KSerializer<StrictlyPositiveDouble> =
+        StrictlyPositiveDoubleSerializer
+
+    @Test
+    fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveDouble() {
+        val result: String = serializer.descriptor.serialName
+        val expected: String? = StrictlyPositiveDouble::class.qualifiedName
+        result shouldEqual assertNotNull(expected)
+    }
+
+    @Test
+    fun descriptor_kind_should_be_a_PrimitiveKind_Double(): Unit =
+        serializer.descriptor.kind shouldEqual PrimitiveKind.DOUBLE
+
+    @Test
+    fun serialize_should_behave_like_a_Double() {
+        val value: Double =
+            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
+        val result: String = value.toStrictlyPositiveDouble()
+            .getOrThrow()
+            .let { Json.encodeToString(serializer, it) }
+        result shouldEqual Json.encodeToString(value)
+    }
+
+    @Test
+    fun deserialize_should_pass_with_a_strictly_positive_Double() {
+        val value: Double =
+            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
+        Json.decodeFromString(serializer, "$value")
+            .toDouble()
+            .shouldEqual(value)
+    }
+
+    @Test
+    fun deserialize_should_pass_with_a_negative_Double() {
+        val value: Double = -Random.nextDouble()
+        assertFailsWith<SerializationException> {
+            Json.decodeFromString(serializer, "$value")
+        }.shouldHaveAMessage()
+    }
 }
