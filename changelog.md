@@ -113,6 +113,10 @@ result = StrictlyPositiveInt.range.end.value
 
 _Release date: 2023-04-03._
 
+_See the
+[full changelog](https://github.com/kotools/types/compare/4.0.1...4.1.0) from
+version [`4.0.1`](https://github.com/kotools/types/releases/tag/4.0.1)._
+
 ### Added
 
 - `NotEmptyCollection` hierarchy representing collections that contain at least
@@ -207,6 +211,10 @@ result = x.toStrictlyPositiveInt()
 ## 4.0.1
 
 _Release date: 2023-02-06._
+
+_See the
+[full changelog](https://github.com/kotools/types/compare/4.0.0...4.0.1) from
+version [`4.0.0`](https://github.com/kotools/types/releases/tag/4.0.0)._
 
 ### Changed
 
