@@ -5,12 +5,12 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotools.types.Package
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class StrictlyPositiveDoubleTest {
@@ -88,11 +88,9 @@ class StrictlyPositiveDoubleSerializerTest {
         StrictlyPositiveDoubleSerializer
 
     @Test
-    fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveDouble() {
-        val result: String = serializer.descriptor.serialName
-        val expected: String? = StrictlyPositiveDouble::class.qualifiedName
-        result shouldEqual assertNotNull(expected)
-    }
+    fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveDouble(): Unit =
+        serializer.descriptor.serialName
+            .shouldEqual("${Package.number}.StrictlyPositiveDouble")
 
     @Test
     fun descriptor_kind_should_be_a_PrimitiveKind_Double(): Unit =
