@@ -33,6 +33,16 @@ val range: NotEmptyRange<Int> = start..end // or end..start
 println(range) // [1;42[
 ```
 
+- The `StrictlyPositiveDouble` type representing strictly positive
+  floating-point numbers represented by the `Double` type (issue
+  [#66](https://github.com/kotools/types/issues/66)).
+
+```kotlin
+val x: StrictlyPositiveDouble = 0.5.toStrictlyPositiveDouble()
+    .getOrThrow()
+println(x) // 0.5
+```
+
 - The `plus` operations for concatenating a `NotBlankString` with a `String` or
   a `Char` (issue [#53](https://github.com/kotools/types/issues/53)).
 
