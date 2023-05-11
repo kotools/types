@@ -4,10 +4,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.range.InclusiveBound
+import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
-import kotools.types.range.rangeTo
-import kotools.types.range.toInclusiveBound
+import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
@@ -23,35 +22,25 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
      */
     public companion object {
         /** The minimum value a [StrictlyNegativeInt] can have. */
-        @Deprecated(
-            "Use the range property instead.",
-            ReplaceWith("StrictlyNegativeInt.range.start.value")
-        )
         public val min: StrictlyNegativeInt by lazy(
             Int.MIN_VALUE.toStrictlyNegativeInt()::getOrThrow
         )
 
         /** The maximum value a [StrictlyNegativeInt] can have. */
-        @Deprecated(
-            "Use the range property instead.",
-            ReplaceWith("StrictlyNegativeInt.range.end.value")
-        )
         public val max: StrictlyNegativeInt by lazy(
             (-1).toStrictlyNegativeInt()::getOrThrow
         )
 
         /** The range of values a [StrictlyNegativeInt] can have. */
+        @ExperimentalRangeApi
         @SinceKotoolsTypes("4.2")
         public val range: NotEmptyRange<StrictlyNegativeInt> by lazy {
-            val start: InclusiveBound<StrictlyNegativeInt> = Int.MIN_VALUE
+            val start: StrictlyNegativeInt = Int.MIN_VALUE
                 .toStrictlyNegativeInt()
                 .getOrThrow()
-                .toInclusiveBound()
-            val end: InclusiveBound<StrictlyNegativeInt> = (-1)
-                .toStrictlyNegativeInt()
+            val end: StrictlyNegativeInt = (-1).toStrictlyNegativeInt()
                 .getOrThrow()
-                .toInclusiveBound()
-            start..end
+            notEmptyRangeOf { start.inclusive to end.inclusive }
         }
 
         internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
@@ -61,7 +50,7 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): StrictlyNegativeInt = range.toIntRange()
+        public fun random(): StrictlyNegativeInt = (min.value..max.value)
             .random()
             .toStrictlyNegativeInt()
             .getOrThrow()

@@ -4,10 +4,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
-import kotools.types.range.InclusiveBound
+import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
-import kotools.types.range.rangeTo
-import kotools.types.range.toInclusiveBound
+import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
@@ -18,34 +17,25 @@ public sealed interface NegativeInt : AnyInt {
     /** Contains declarations for holding or building a [NegativeInt]. */
     public companion object {
         /** The minimum value a [NegativeInt] can have. */
-        @Deprecated(
-            "Use the range property instead.",
-            ReplaceWith("NegativeInt.range.start.value")
-        )
         public val min: StrictlyNegativeInt by lazy(
-            StrictlyNegativeInt.range.start::value
+            StrictlyNegativeInt.Companion::min
         )
 
         /** The maximum value a [NegativeInt] can have. */
-        @Deprecated(
-            "Use the range property instead.",
-            ReplaceWith("NegativeInt.range.end.value")
-        )
         public val max: ZeroInt = ZeroInt
 
         /** The range of values a [NegativeInt] can have. */
+        @ExperimentalRangeApi
         @SinceKotoolsTypes("4.2")
         public val range: NotEmptyRange<NegativeInt> by lazy {
-            val start: InclusiveBound<NegativeInt> =
-                StrictlyNegativeInt.range.start.value.toInclusiveBound()
-            val end: InclusiveBound<NegativeInt> = ZeroInt.toInclusiveBound()
-            start..end
+            val start: StrictlyNegativeInt =
+                StrictlyNegativeInt.range.start.value
+            notEmptyRangeOf { start.inclusive to ZeroInt.inclusive }
         }
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): NegativeInt = range.toIntRange()
-            .random()
+        public fun random(): NegativeInt = (min.toInt()..max.toInt()).random()
             .toNegativeInt()
             .getOrThrow()
     }

@@ -22,15 +22,15 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- The `NotEmptyRange` and the `Bound` types representing a range of comparable
-  values that contain at least one value (issue
+- The `NotEmptyRange` and the `Bound` **experimental** types representing a
+  range of comparable values that contain at least one value (issue
   [#56](https://github.com/kotools/types/issues/56)).
 
 ```kotlin
-val start: InclusiveBound<Int> = 1.toInclusiveBound()
-val end: ExclusiveBound<Int> = 42.toExclusiveBound()
-val range: NotEmptyRange<Int> = start..end // or end..start
+val range = notEmptyRangeOf<Int> { 1.inclusive to 42.exclusive }
 println(range) // [1;42[
+println(3 in range) // true
+println(42 in range) // false
 ```
 
 - The `StrictlyPositiveDouble` **experimental** type representing strictly
@@ -89,22 +89,6 @@ result = 3.toNonZeroInt()
 implementation("io.github.kotools:types:$version")
 // after
 implementation("org.kotools:types:$version")
-```
-
-### Deprecated
-
-The `min` and the `max` companion's properties of the `StrictlyPositiveInt`, the
-`StrictlyNegativeInt`, the `PositiveInt`, the `NegativeInt` and the `NonZeroInt`
-types (issue [#56](https://github.com/kotools/types/issues/56)).
-
-```kotlin
-var result: StrictlyPositiveInt
-// before
-result = StrictlyPositiveInt.min
-result = StrictlyPositiveInt.max
-// after
-result = StrictlyPositiveInt.range.start.value
-result = StrictlyPositiveInt.range.end.value
 ```
 
 ## 4.1.0

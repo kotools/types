@@ -94,6 +94,9 @@ public final class kotools/types/collection/NotEmptySetKt {
 public abstract interface annotation class kotools/types/experimental/ExperimentalNumberApi : java/lang/annotation/Annotation {
 }
 
+public abstract interface annotation class kotools/types/experimental/ExperimentalRangeApi : java/lang/annotation/Annotation {
+}
+
 public abstract interface annotation class kotools/types/experimental/ExperimentalResultApi : java/lang/annotation/Annotation {
 }
 
@@ -303,26 +306,30 @@ public abstract interface class kotools/types/range/Bound {
 	public abstract fun toString ()Ljava/lang/String;
 }
 
-public final class kotools/types/range/BoundKt {
-	public static final fun toExclusiveBound (Ljava/lang/Comparable;)Lkotools/types/range/ExclusiveBound;
-	public static final fun toInclusiveBound (Ljava/lang/Comparable;)Lkotools/types/range/InclusiveBound;
+public final class kotools/types/range/ExclusiveBound : kotools/types/range/Bound {
+	public fun getValue ()Ljava/lang/Comparable;
+	public fun toString ()Ljava/lang/String;
 }
 
-public abstract interface class kotools/types/range/ExclusiveBound : kotools/types/range/Bound {
+public final class kotools/types/range/InclusiveBound : kotools/types/range/Bound {
+	public fun getValue ()Ljava/lang/Comparable;
+	public fun toString ()Ljava/lang/String;
 }
 
-public abstract interface class kotools/types/range/InclusiveBound : kotools/types/range/Bound {
+public final class kotools/types/range/NotEmptyRange {
+	public final fun getEnd ()Lkotools/types/range/Bound;
+	public final fun getStart ()Lkotools/types/range/Bound;
+	public fun toString ()Ljava/lang/String;
 }
 
-public abstract interface class kotools/types/range/NotEmptyRange {
-	public abstract fun getEnd ()Lkotools/types/range/Bound;
-	public abstract fun getStart ()Lkotools/types/range/Bound;
-	public abstract fun toString ()Ljava/lang/String;
+public final class kotools/types/range/NotEmptyRange$BuilderScope {
+	public final fun getExclusive (Ljava/lang/Comparable;)Lkotools/types/range/ExclusiveBound;
+	public final fun getInclusive (Ljava/lang/Comparable;)Lkotools/types/range/InclusiveBound;
 }
 
 public final class kotools/types/range/NotEmptyRangeKt {
 	public static final fun contains (Lkotools/types/range/NotEmptyRange;Ljava/lang/Comparable;)Z
-	public static final fun rangeTo (Lkotools/types/range/Bound;Lkotools/types/range/Bound;)Lkotools/types/range/NotEmptyRange;
+	public static final fun notEmptyRangeOf (Lkotlin/jvm/functions/Function1;)Lkotools/types/range/NotEmptyRange;
 }
 
 public final class kotools/types/result/ContextKt {

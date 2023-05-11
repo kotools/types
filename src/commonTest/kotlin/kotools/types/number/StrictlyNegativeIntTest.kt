@@ -6,6 +6,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
@@ -16,20 +17,19 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class StrictlyNegativeIntCompanionTest {
-    @Suppress("DEPRECATION")
     @Test
     fun min_should_equal_the_minimum_value_of_Int() {
         val result: StrictlyNegativeInt = StrictlyNegativeInt.min
         result.toInt() shouldEqual Int.MIN_VALUE
     }
 
-    @Suppress("DEPRECATION")
     @Test
     fun max_should_equal_minus_one() {
         val result: StrictlyNegativeInt = StrictlyNegativeInt.max
         result.toInt() shouldEqual -1
     }
 
+    @ExperimentalRangeApi
     @Test
     fun range_should_start_with_an_InclusiveBound_that_equals_the_minimum_value_of_Int() {
         val range: NotEmptyRange<StrictlyNegativeInt> =
@@ -38,6 +38,7 @@ class StrictlyNegativeIntCompanionTest {
         range.start.value.toInt() shouldEqual Int.MIN_VALUE
     }
 
+    @ExperimentalRangeApi
     @Test
     fun range_should_end_with_an_InclusiveBound_that_equals_minus_one() {
         val range: NotEmptyRange<StrictlyNegativeInt> =
