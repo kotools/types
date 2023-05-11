@@ -1,10 +1,15 @@
 package kotools.types.range
 
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalRangeApi
 
-/** Representation of a bound in a [range][NotEmptyRange]. */
+/**
+ * Represents a bound in a [range][NotEmptyRange].
+ * @param T the **covariant** type of this bound's value.
+ */
+@ExperimentalRangeApi
 @SinceKotoolsTypes("4.2")
-public sealed interface Bound<T : Comparable<T>> {
+public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
     /** The value of this bound. */
     public val value: T
 
@@ -12,32 +17,24 @@ public sealed interface Bound<T : Comparable<T>> {
     override fun toString(): String
 }
 
-/** Representation of an inclusive bound in a [range][NotEmptyRange]. */
+/**
+ * Represents an inclusive bound in a [range][NotEmptyRange].
+ * @param T the **covariant** type of this bound's value.
+ */
+@ExperimentalRangeApi
 @SinceKotoolsTypes("4.2")
-public sealed interface InclusiveBound<T : Comparable<T>> : Bound<T>
-
-private data class InclusiveBoundImplementation<T : Comparable<T>>(
-    override val value: T
-) : InclusiveBound<T> {
+public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
+internal constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
 }
 
-/** Returns this comparable value as an [InclusiveBound]. */
+/**
+ * Represents an exclusive bound in a [range][NotEmptyRange].
+ * @param T the **covariant** type of this bound's value.
+ */
+@ExperimentalRangeApi
 @SinceKotoolsTypes("4.2")
-public fun <T : Comparable<T>> T.toInclusiveBound(): InclusiveBound<T> =
-    InclusiveBoundImplementation(this)
-
-/** Representation of an exclusive bound in a [range][NotEmptyRange]. */
-@SinceKotoolsTypes("4.2")
-public sealed interface ExclusiveBound<T : Comparable<T>> : Bound<T>
-
-private data class ExclusiveBoundImplementation<T : Comparable<T>>(
-    override val value: T
-) : ExclusiveBound<T> {
+public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
+internal constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
 }
-
-/** Returns this comparable value as an [ExclusiveBound]. */
-@SinceKotoolsTypes("4.2")
-public fun <T : Comparable<T>> T.toExclusiveBound(): ExclusiveBound<T> =
-    ExclusiveBoundImplementation(this)
