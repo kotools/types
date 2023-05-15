@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     id("org.jetbrains.dokka") version kotlinVersion
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.1"
     `maven-publish`
     signing
 }
