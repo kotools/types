@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
@@ -30,7 +29,7 @@ dependencies {
 }
 
 kotlin {
-    explicitApi = ExplicitApiMode.Strict
+    explicitApi()
     js(IR, KotlinJsTargetDsl::browser)
     jvm {
         compilations.all { kotlinOptions.jvmTarget = "1.8" }
