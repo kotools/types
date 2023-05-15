@@ -13,9 +13,40 @@ on:
       - '**/*.kt*'
       - .github/workflows/integration.yml
   workflow_dispatch:
+env:
+  CACHING: gradle
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
 jobs:
+  # ---------- Stage 1 ----------
+  validate-wrapper:
+    name: Validate Gradle wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1.0.6
+  # ---------- Stage 2 ----------
+  check-api-binaries:
+    name: Check API binaries
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Check API binaries
+        run: ./gradlew apiCheck --no-daemon
   test:
     name: Test
+    needs: validate-wrapper
     strategy:
       max-parallel: 3
       matrix:
@@ -25,13 +56,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1.0.6
       - name: Setup Java & Gradle
         uses: actions/setup-java@v3.11.0
         with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
       - name: Test all platforms
         run: ./gradlew allTests --no-daemon
