@@ -10,13 +10,34 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalNumberApi
 import kotlin.jvm.JvmInline
 
-/** Represents strictly positive floating-point numbers represented by the [Double] type. */
+/**
+ * Returns this number as an encapsulated [StrictlyPositiveDouble],
+ * which may involve rounding or truncation, or returns an encapsulated
+ * [IllegalArgumentException] if this number is negative.
+ */
+@ExperimentalNumberApi
+@SinceKotoolsTypes("4.2")
+public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
+    runCatching {
+        val value: Double = toDouble()
+        require(value > 0.0) { value shouldBe aStrictlyPositiveNumber }
+        StrictlyPositiveDouble(value)
+    }
+
+/**
+ * Represents strictly positive floating-point numbers represented by the
+ * [Double] type.
+ */
+@ExperimentalNumberApi
+@JvmInline
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 @SinceKotoolsTypes("4.2")
-public sealed interface StrictlyPositiveDouble :
-    Comparable<StrictlyPositiveDouble> {
+public value class StrictlyPositiveDouble internal constructor(
+    private val value: Double
+) : Comparable<StrictlyPositiveDouble> {
     /**
      * Compares this floating-point number with the other one for order.
      * Returns zero if this floating-point number equals the other one,
@@ -30,32 +51,13 @@ public sealed interface StrictlyPositiveDouble :
     }
 
     /** Returns this floating-point number as a [Double]. */
-    public fun toDouble(): Double
+    public fun toDouble(): Double = value
 
     /** Returns the string representation of this floating-point number. */
-    override fun toString(): String
-}
-
-@JvmInline
-private value class StrictlyPositiveDoubleImplementation(
-    private val value: Double
-) : StrictlyPositiveDouble {
-    override fun toDouble(): Double = value
     override fun toString(): String = "$value"
 }
 
-/**
- * Returns this number as an encapsulated [StrictlyPositiveDouble], which may involve rounding or truncation,
- * or returns an encapsulated [IllegalArgumentException] if this number is negative.
- */
-@SinceKotoolsTypes("4.2")
-public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
-    runCatching {
-        val value: Double = toDouble()
-        require(value > 0.0) { value shouldBe aStrictlyPositiveNumber }
-        StrictlyPositiveDoubleImplementation(value)
-    }
-
+@ExperimentalNumberApi
 internal object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
