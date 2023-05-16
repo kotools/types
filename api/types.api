@@ -228,19 +228,25 @@ public final class kotools/types/number/StrictlyNegativeIntKt {
 	public static final fun toStrictlyNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
 }
 
-public abstract interface class kotools/types/number/StrictlyPositiveDouble : java/lang/Comparable {
+public final class kotools/types/number/StrictlyPositiveDouble : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/StrictlyPositiveDouble$Companion;
-	public abstract fun compareTo (Lkotools/types/number/StrictlyPositiveDouble;)I
-	public abstract fun toDouble ()D
-	public abstract fun toString ()Ljava/lang/String;
+	public static final synthetic fun box-impl (D)Lkotools/types/number/StrictlyPositiveDouble;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-dhNCs2s (D)I
+	public static fun compareTo-dhNCs2s (DD)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static final fun toDouble-impl (D)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()D
 }
 
 public final class kotools/types/number/StrictlyPositiveDouble$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class kotools/types/number/StrictlyPositiveDouble$DefaultImpls {
-	public static fun compareTo (Lkotools/types/number/StrictlyPositiveDouble;Lkotools/types/number/StrictlyPositiveDouble;)I
 }
 
 public final class kotools/types/number/StrictlyPositiveDoubleKt {
@@ -330,7 +336,7 @@ public abstract interface class kotools/types/result/ResultContext {
 	public abstract fun toNotEmptySet (Ljava/util/Collection;)Lkotools/types/collection/NotEmptySet;
 	public abstract fun toPositiveInt (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public abstract fun toStrictlyNegativeInt-C9D9PS4 (Ljava/lang/Number;)I
-	public abstract fun toStrictlyPositiveDouble (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveDouble;
+	public abstract fun toStrictlyPositiveDouble-7dDooEQ (Ljava/lang/Number;)D
 	public abstract fun toStrictlyPositiveInt-4PgMdn8 (Ljava/lang/Number;)I
 }
 
@@ -343,7 +349,7 @@ public final class kotools/types/result/ResultContext$DefaultImpls {
 	public static fun toNotEmptySet (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Lkotools/types/collection/NotEmptySet;
 	public static fun toPositiveInt (Lkotools/types/result/ResultContext;Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public static fun toStrictlyNegativeInt-C9D9PS4 (Lkotools/types/result/ResultContext;Ljava/lang/Number;)I
-	public static fun toStrictlyPositiveDouble (Lkotools/types/result/ResultContext;Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveDouble;
+	public static fun toStrictlyPositiveDouble-7dDooEQ (Lkotools/types/result/ResultContext;Ljava/lang/Number;)D
 	public static fun toStrictlyPositiveInt-4PgMdn8 (Lkotools/types/result/ResultContext;Ljava/lang/Number;)I
 }
 
