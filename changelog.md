@@ -33,8 +33,8 @@ val range: NotEmptyRange<Int> = start..end // or end..start
 println(range) // [1;42[
 ```
 
-- The `StrictlyPositiveDouble` type representing strictly positive
-  floating-point numbers represented by the `Double` type (issue
+- The `StrictlyPositiveDouble` **experimental** type representing strictly
+  positive floating-point numbers represented by the `Double` type (issue
   [#66](https://github.com/kotools/types/issues/66)).
 
 ```kotlin

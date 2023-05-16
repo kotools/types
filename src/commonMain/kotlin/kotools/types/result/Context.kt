@@ -4,6 +4,7 @@ import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.number.*
 import kotools.types.text.NotBlankString
 import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
@@ -72,6 +73,7 @@ public sealed interface ResultContext {
      * rounding or truncation, or throws an [IllegalArgumentException] if this
      * number is negative.
      */
+    @ExperimentalNumberApi
     @SinceKotoolsTypes("4.2")
     @Throws(IllegalArgumentException::class)
     public fun Number.toStrictlyPositiveDouble(): StrictlyPositiveDouble =

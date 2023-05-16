@@ -42,6 +42,7 @@ kotlin {
         languageSettings.optIn(
             "kotlinx.serialization.ExperimentalSerializationApi"
         )
+        languageSettings.optIn("kotlin.RequiresOptIn")
     }
 }
 

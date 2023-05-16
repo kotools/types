@@ -4,6 +4,7 @@ import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
 import kotools.types.contentShouldEqual
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.number.*
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -101,6 +102,7 @@ class ResultContextTest {
             .shouldHaveAMessage()
     }
 
+    @ExperimentalNumberApi
     @Test
     fun number_toStrictlyPositiveDouble_should_pass_with_a_strictly_positive_Number() {
         val value: Number =
@@ -112,6 +114,7 @@ class ResultContextTest {
             .shouldEqual(value)
     }
 
+    @ExperimentalNumberApi
     @Test
     fun number_toStrictlyPositiveDouble_should_fail_with_a_negative_Number() {
         val value: Number =

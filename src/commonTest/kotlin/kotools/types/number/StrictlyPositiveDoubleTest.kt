@@ -6,6 +6,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
@@ -13,6 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
+@ExperimentalNumberApi
 class StrictlyPositiveDoubleTest {
     @Test
     fun compareTo_should_return_zero_with_the_same_StrictlyPositiveDouble() {
@@ -83,6 +85,7 @@ class StrictlyPositiveDoubleTest {
             .shouldHaveAMessage()
 }
 
+@ExperimentalNumberApi
 class StrictlyPositiveDoubleSerializerTest {
     private val serializer: KSerializer<StrictlyPositiveDouble> =
         StrictlyPositiveDoubleSerializer
