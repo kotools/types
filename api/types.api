@@ -91,6 +91,9 @@ public final class kotools/types/collection/NotEmptySetKt {
 	public static final fun toNotEmptySet (Ljava/util/Collection;)Ljava/lang/Object;
 }
 
+public abstract interface annotation class kotools/types/experimental/ExperimentalNumberApi : java/lang/annotation/Annotation {
+}
+
 public abstract interface class kotools/types/number/AnyInt : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/AnyInt$Companion;
 	public abstract fun compareTo (Lkotools/types/number/AnyInt;)I
