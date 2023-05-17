@@ -6,6 +6,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
@@ -59,6 +60,7 @@ class NotBlankStringTest {
         assertTrue { result > ZeroInt.toInt() }
     }
 
+    @ExperimentalTextApi
     @Test
     fun plus_should_pass_with_a_String() {
         val first: NotBlankString = "hell".toNotBlankString()
@@ -68,6 +70,7 @@ class NotBlankStringTest {
         "$result" shouldEqual "$first$second"
     }
 
+    @ExperimentalTextApi
     @Test
     fun plus_should_pass_with_a_NotBlankString() {
         val first: NotBlankString = "hell".toNotBlankString()
@@ -78,6 +81,7 @@ class NotBlankStringTest {
         "$result" shouldEqual "$first$second"
     }
 
+    @ExperimentalTextApi
     @Test
     fun plus_should_pass_with_a_Char() {
         val first: NotBlankString = "hell".toNotBlankString()
@@ -87,6 +91,7 @@ class NotBlankStringTest {
         "$result" shouldEqual "$first$second"
     }
 
+    @ExperimentalTextApi
     @Test
     fun char_plus_should_pass_with_a_NotBlankString() {
         val first = 'a'
