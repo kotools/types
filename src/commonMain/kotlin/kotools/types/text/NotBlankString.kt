@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -51,6 +52,7 @@ public value class NotBlankString private constructor(
 }
 
 /** Concatenates this string with the [other] one. */
+@ExperimentalTextApi
 @SinceKotoolsTypes("4.2")
 public operator fun NotBlankString.plus(other: String): NotBlankString = "$this"
     .plus(other)
@@ -58,16 +60,19 @@ public operator fun NotBlankString.plus(other: String): NotBlankString = "$this"
     .getOrThrow()
 
 /** Concatenates this string with the [other] one. */
+@ExperimentalTextApi
 @SinceKotoolsTypes("4.2")
 public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
     plus("$other")
 
 /** Concatenates this string with the [other] character. */
+@ExperimentalTextApi
 @SinceKotoolsTypes("4.2")
 public operator fun NotBlankString.plus(other: Char): NotBlankString =
     plus("$other")
 
 /** Concatenates this character with the [other] string. */
+@ExperimentalTextApi
 @SinceKotoolsTypes("4.2")
 public operator fun Char.plus(other: NotBlankString): NotBlankString =
     plus("$other")

@@ -43,23 +43,22 @@ val x: StrictlyPositiveDouble = 0.5.toStrictlyPositiveDouble()
 println(x) // 0.5
 ```
 
-- The `plus` operations for concatenating a `NotBlankString` with a `String` or
-  a `Char` (issue [#53](https://github.com/kotools/types/issues/53)).
+- The `plus` **experimental** operations for concatenating a `NotBlankString`
+  with a `String` or a `Char` (issue
+  [#53](https://github.com/kotools/types/issues/53)).
 
 ```kotlin
-resultOf {
-    val firstString: NotBlankString = "hello".toNotBlankString()
-    val secondString: NotBlankString = "world".toNotBlankString()
-    var result: NotBlankString
-    // before
-    result = ("$firstString" + 'a').toNotBlankString()
-    result = ("$firstString" + "everyone").toNotBlankString()
-    result = ("$firstString" + "$secondString").toNotBlankString()
-    // after
-    result = firstString + 'a'
-    result = firstString + "everyone"
-    result = firstString + secondString
-}
+val firstString: NotBlankString = "hello".toNotBlankString().getOrThrow()
+val secondString: NotBlankString = "world".toNotBlankString().getOrThrow()
+var result: NotBlankString
+// before
+result = ('a' + "$firstString" + 'b').toNotBlankString().getOrThrow()
+result = ("$firstString" + "everyone").toNotBlankString().getOrThrow()
+result = ("$firstString" + "$secondString").toNotBlankString().getOrThrow()
+// after
+result = 'a' + "$firstString" + 'b'
+result = firstString + "everyone"
+result = firstString + secondString
 ```
 
 - The `Result.flatMap` operation for transforming its encapsulated value (issue
