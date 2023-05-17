@@ -12,6 +12,14 @@ import kotlin.annotation.AnnotationTarget.*
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalNumberApi
 
+/** Marks declarations that are still **experimental** in the result API. */
+@MustBeDocumented
+@RequiresOptIn
+@Retention(BINARY)
+@SinceKotoolsTypes("4.2")
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
+public annotation class ExperimentalResultApi
+
 /** Marks declarations that are still **experimental** in the text API. */
 @MustBeDocumented
 @RequiresOptIn

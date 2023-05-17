@@ -1,6 +1,7 @@
 package kotools.types.result
 
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalResultApi
 
 /**
  * Transforms the encapsulated value from [T] to [R] if this result is a
@@ -8,6 +9,7 @@ import kotools.types.SinceKotoolsTypes
  * or the one returned by the [transform] function is a
  * [failure][Result.isFailure].
  */
+@ExperimentalResultApi
 @SinceKotoolsTypes("4.2")
 public inline fun <T, R> Result<T>.flatMap(
     transform: (T) -> Result<R>

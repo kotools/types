@@ -61,8 +61,8 @@ result = firstString + "everyone"
 result = firstString + secondString
 ```
 
-- The `Result.flatMap` operation for transforming its encapsulated value (issue
-  [#47](https://github.com/kotools/types/issues/47)).
+- The `Result.flatMap` **experimental** operation for transforming its
+  encapsulated value (issue [#47](https://github.com/kotools/types/issues/47)).
 
 ```kotlin
 var result: Result<StrictlyPositiveInt>
