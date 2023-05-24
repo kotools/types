@@ -27,7 +27,10 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
         StrictlyPositiveDouble(value)
     }
 
-/** Represents strictly positive floating-point numbers represented by the [Double] type. */
+/**
+ * Represents strictly positive floating-point numbers represented by the
+ * [Double] type.
+ */
 @ExperimentalNumberApi
 @JvmInline
 @Serializable(StrictlyPositiveDoubleSerializer::class)
