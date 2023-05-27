@@ -12,4 +12,6 @@ labels: enhancement
 - [ ] Implement.
 - [ ] Test.
 - [ ] Refactor.
+- [ ] Check the generated documentation.
+- [ ] Check and update the public API binaries.
 - [ ] Update the `Unreleased` section in changelog.
