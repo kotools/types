@@ -1,6 +1,6 @@
 package kotools.types.result
 
-import kotools.types.SinceKotoolsTypes
+import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.experimental.ExperimentalResultApi
 
 /**
@@ -10,7 +10,7 @@ import kotools.types.experimental.ExperimentalResultApi
  * [failure][Result.isFailure].
  */
 @ExperimentalResultApi
-@SinceKotoolsTypes("4.2")
+@ExperimentalSinceKotoolsTypes("4.2")
 public inline fun <T, R> Result<T>.flatMap(
     transform: (T) -> Result<R>
 ): Result<R> = exceptionOrNull()

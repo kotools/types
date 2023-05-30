@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptySet
@@ -29,14 +30,14 @@ public sealed interface NonZeroInt : AnyInt {
 
         /** The negative range of values a [NonZeroInt] can have. */
         @ExperimentalRangeApi
-        @SinceKotoolsTypes("4.2")
+        @ExperimentalSinceKotoolsTypes("4.2")
         public val negativeRange: NotEmptyRange<StrictlyNegativeInt> by lazy(
             StrictlyNegativeInt.Companion::range
         )
 
         /** The positive range of values a [NonZeroInt] can have. */
         @ExperimentalRangeApi
-        @SinceKotoolsTypes("4.2")
+        @ExperimentalSinceKotoolsTypes("4.2")
         public val positiveRange: NotEmptyRange<StrictlyPositiveInt> by lazy(
             StrictlyPositiveInt.Companion::range
         )

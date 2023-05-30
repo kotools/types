@@ -2,6 +2,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalRangeApi
@@ -26,7 +27,7 @@ public sealed interface NegativeInt : AnyInt {
 
         /** The range of values a [NegativeInt] can have. */
         @ExperimentalRangeApi
-        @SinceKotoolsTypes("4.2")
+        @ExperimentalSinceKotoolsTypes("4.2")
         public val range: NotEmptyRange<NegativeInt> by lazy {
             val start: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.start.value

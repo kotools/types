@@ -1,5 +1,6 @@
 package kotools.types.result
 
+import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
@@ -74,7 +75,7 @@ public sealed interface ResultContext {
      * number is negative.
      */
     @ExperimentalNumberApi
-    @SinceKotoolsTypes("4.2")
+    @ExperimentalSinceKotoolsTypes("4.2")
     @Throws(IllegalArgumentException::class)
     public fun Number.toStrictlyPositiveDouble(): StrictlyPositiveDouble =
         delegateToStrictlyPositiveDouble()
