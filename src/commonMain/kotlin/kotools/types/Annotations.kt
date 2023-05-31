@@ -26,14 +26,5 @@ internal annotation class ExperimentalSinceKotoolsTypes(val version: String)
  */
 @MustBeDocumented
 @Retention(BINARY)
-@Target(
-    CLASS,
-    CONSTRUCTOR,
-    FIELD,
-    FUNCTION,
-    PROPERTY,
-    PROPERTY_GETTER,
-    PROPERTY_SETTER,
-    TYPEALIAS
-)
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 internal annotation class SinceKotoolsTypes(val version: String)
