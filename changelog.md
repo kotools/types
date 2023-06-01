@@ -91,6 +91,11 @@ implementation("io.github.kotools:types:$version")
 implementation("org.kotools:types:$version")
 ```
 
+### Security
+
+Sign all commits with an SSH key to attest the identity (issue
+[#82](https://github.com/kotools/types/issues/82)).
+
 ## 4.1.0
 
 _Release date: 2023-04-03._
