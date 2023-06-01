@@ -38,12 +38,7 @@ kotlin {
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
-    sourceSets.all {
-        languageSettings.optIn(
-            "kotlinx.serialization.ExperimentalSerializationApi"
-        )
-        languageSettings.optIn("kotlin.RequiresOptIn")
-    }
+    sourceSets.all { languageSettings.optIn("kotlin.RequiresOptIn") }
 }
 
 tasks.withType<Jar> {
