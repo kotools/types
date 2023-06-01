@@ -1,9 +1,9 @@
 package kotools.types.collection
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
-import kotools.types.Package
 import kotools.types.contentShouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
@@ -114,16 +114,18 @@ class NotEmptyMapSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NotEmptyMap_as_serial_name() {
+        // GIVEN
         val keySerializer: KSerializer<String> = String.serializer()
         val valueSerializer: KSerializer<Int> = Int.serializer()
-        val result: String = NotEmptyMap
-            .serializer(keySerializer, valueSerializer)
+        val serializer: KSerializer<NotEmptyMap<String, Int>> =
+            NotEmptyMap.serializer(keySerializer, valueSerializer)
+        // WHEN
+        val actual: String = serializer.descriptor.serialName
+        // THEN
+        val expected: String = MapSerializer(keySerializer, valueSerializer)
             .descriptor
             .serialName
-        assertEquals(
-            actual = result,
-            expected = "${Package.collection}.NotEmptyMap"
-        )
+        assertEquals(expected, actual)
     }
 
     @Test

@@ -7,7 +7,6 @@ import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 
 /** Representation of sets that contain at least one element of type [E]. */
@@ -62,12 +61,7 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
         SetSerializer(elementSerializer)
     }
 
-    override val descriptor: SerialDescriptor by lazy {
-        SerialDescriptor(
-            "${Package.collection}.NotEmptySet",
-            delegate.descriptor
-        )
-    }
+    override val descriptor: SerialDescriptor by lazy(delegate::descriptor)
 
     override fun serialize(encoder: Encoder, value: NotEmptySet<E>): Unit =
         encoder.encodeSerializableValue(delegate, value.toSet())

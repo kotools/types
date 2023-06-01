@@ -7,7 +7,6 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 
 /** Representation of lists that contain at least one element of type [E]. */
@@ -61,12 +60,7 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
         ListSerializer(elementSerializer)
     }
 
-    override val descriptor: SerialDescriptor by lazy {
-        SerialDescriptor(
-            "${Package.collection}.NotEmptyList",
-            delegate.descriptor
-        )
-    }
+    override val descriptor: SerialDescriptor by lazy(delegate::descriptor)
 
     override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
         encoder.encodeSerializableValue(delegate, value.toList())

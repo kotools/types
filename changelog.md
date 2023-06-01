@@ -93,8 +93,38 @@ implementation("org.kotools:types:$version")
 
 ### Security
 
-Sign all commits with an SSH key to attest the identity (issue
-[#82](https://github.com/kotools/types/issues/82)).
+- Sign all commits with an SSH key to attest the identity (issue [#82]).
+
+[#82]: https://github.com/kotools/types/issues/82
+
+- Remove internal usages of the
+  [`SerialDescriptor`][kotlinx.serialization.SerialDescriptor] function from the
+  [kotlinx.serialization]'s experimental API for the following types:
+  `NotEmptyList`, `NotEmptySet` and `NotEmptyMap` (issue [#77]). Here's an
+  example for the `NotEmptyList` type:
+
+```kotlin
+val elementSerializer: KSerializer<Int> = Int.serializer()
+// before
+val notEmptyListSerialName: String = NotEmptyList.serializer(elementSerializer)
+    .descriptor
+    .serialName
+println(notEmptyListSerialName == "kotools.types.NotEmptyList") // true
+// after
+val notEmptyListSerialName: String = NotEmptyList.serializer(elementSerializer)
+    .descriptor
+    .serialName
+val expectedSerialName: String = ListSerializer(elementSerializer)
+    .descriptor
+    .serialName
+println(notEmptyListSerialName == expectedSerialName) // true
+```
+
+[kotlinx.serialization.SerialDescriptor]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.descriptors/-serial-descriptor.html
+
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
+
+[#77]: https://github.com/kotools/types/issues/77
 
 ## 4.1.0
 

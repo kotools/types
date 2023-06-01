@@ -1,14 +1,16 @@
 package kotools.types.collection
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerializationException
+import kotlinx.serialization.*
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.*
+import kotools.types.contentShouldEqual
+import kotools.types.shouldBeNotNull
+import kotools.types.shouldEqual
+import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
@@ -85,10 +87,17 @@ class NotEmptyListSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NotEmptyList_as_serial_name() {
-        val result: String = NotEmptyList.serializer(Int.serializer())
+        // GIVEN
+        val elementSerializer: KSerializer<Int> = Int.serializer()
+        val serializer: KSerializer<NotEmptyList<Int>> =
+            NotEmptyList.serializer(elementSerializer)
+        // WHEN
+        val actual: String = serializer.descriptor.serialName
+        // THEN
+        val expected: String = ListSerializer(elementSerializer)
             .descriptor
             .serialName
-        result shouldEqual "${Package.collection}.NotEmptyList"
+        assertEquals(expected, actual)
     }
 
     @Test

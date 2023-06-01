@@ -7,7 +7,6 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
@@ -99,12 +98,7 @@ internal class NotEmptyMapSerializer<K, V>(
         MapSerializer(keySerializer, valueSerializer)
     }
 
-    override val descriptor: SerialDescriptor by lazy {
-        SerialDescriptor(
-            "${Package.collection}.NotEmptyMap",
-            delegate.descriptor
-        )
-    }
+    override val descriptor: SerialDescriptor by lazy(delegate::descriptor)
 
     override fun serialize(encoder: Encoder, value: NotEmptyMap<K, V>): Unit =
         encoder.encodeSerializableValue(delegate, value.toMap())
