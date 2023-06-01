@@ -1,8 +1,10 @@
 package kotools.types.number
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
@@ -11,6 +13,7 @@ import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -90,14 +93,30 @@ class StrictlyPositiveDoubleSerializerTest {
     private val serializer: KSerializer<StrictlyPositiveDouble> =
         StrictlyPositiveDoubleSerializer
 
+    @ExperimentalSerializationApi
     @Test
-    fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveDouble(): Unit =
-        serializer.descriptor.serialName
-            .shouldEqual("${Package.number}.StrictlyPositiveDouble")
+    fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveDouble() {
+        // GIVEN
+        val serializer: KSerializer<StrictlyPositiveDouble> =
+            StrictlyPositiveDouble.serializer()
+        // WHEN
+        val actual: String = serializer.descriptor.serialName
+        // THEN
+        val expected = "${Package.number}.StrictlyPositiveDouble"
+        assertEquals(expected, actual)
+    }
 
+    @ExperimentalSerializationApi
     @Test
-    fun descriptor_kind_should_be_a_PrimitiveKind_Double(): Unit =
-        serializer.descriptor.kind shouldEqual PrimitiveKind.DOUBLE
+    fun descriptor_kind_should_be_a_PrimitiveKind_Double() {
+        // GIVEN
+        val serializer: KSerializer<StrictlyPositiveDouble> =
+            StrictlyPositiveDouble.serializer()
+        // WHEN
+        val actual: SerialKind = serializer.descriptor.kind
+        // THEN
+        assertEquals(expected = PrimitiveKind.DOUBLE, actual)
+    }
 
     @Test
     fun serialize_should_behave_like_a_Double() {
