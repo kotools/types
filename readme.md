@@ -1,54 +1,81 @@
 # Kotools Types
 
-[![Kotools Types](https://img.shields.io/static/v1?label=version&message=4.1.0&color=blue)](https://github.com/kotools/types)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.6.21-blue?logo=kotlin)](https://kotlinlang.org)
-[![kotlinx.serialization](https://img.shields.io/badge/kotlinx.serialization-1.3.3-blue)](https://github.com/Kotlin/kotlinx.serialization)
+[![Kotools Types][kotools-types-badge]][kotools-types-project]
+[![Kotlin][kotlin-badge]][kotlin]
+[![kotlinx.serialization][kotlinx.serialization-badge]][kotlinx.serialization]
 
-This multiplatform library provides explicit types like `NonZeroInt` or
-`NotBlankString`.
+Type safety is a must-have nowadays and reducing runtime errors to compile-time
+errors feels like magic!
+But even with the [Kotlin] type system, we still have runtime issues that can
+fail our logic or break our software, like dividing a number by zero or
+receiving a negative index...
+
+How can we solve that? Defining more explicit types!
+Luckily for you, this is basically what this library does: providing types for
+improving the preciseness of your code.
+Here's an example dividing an integer by an integer other than zero, for
+avoiding an [`ArithmeticException`][kotlin.ArithmeticException] to be thrown:
 
 ```kotlin
-data class Person(val name: NotBlankString, val age: StrictlyPositiveInt)
+import kotools.types.number.NonZeroInt
+import kotools.types.number.div
+import kotools.types.number.toStrictlyPositiveInt
 
-fun main() {
-    val name: NotBlankString = "Somebody".toNotBlankString().getOrThrow()
-    val age: StrictlyPositiveInt = 42.toStrictlyPositiveInt().getOrThrow()
-    val somebody = Person(name, age)
-    println(somebody) // Person(name=Somebody, age=42)
-}
+val x = 42
+val y: NonZeroInt = 6.toNonZeroInt().getOrThrow()
+println(x / y) // 7
 ```
+
+Using explicit types in your code is perfect for:
+
+- ensuring that your data is valid through all your application
+- striving for [total functions][total-functions] by reducing the possible
+  inputs or outputs (like the `div` function used in the example above)
+- testing your code using the compiler effectively without writing tests (this
+  is how we reduce runtime checks to compile-time ones).
+
+Cherry on top: Kotools Types is a multiplatform library, so you can use it in
+all your [Kotlin] projects!
+
+[kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.1.0&color=blue
+[kotools-types-project]: https://github.com/kotools/types
+[kotlin]: https://kotlinlang.org
+[kotlin-badge]: https://img.shields.io/badge/kotlin-1.6.21-blue?logo=kotlin
+[kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
+[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.3.3-blue
+[total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
 
 ## Design goals
 
 ### Less is more
 
 Kotools Types focus primarily on what is essential for building explicit and
-safer APIs: the types and their builder.
+safer APIs: the types and their builders.
+Other declarations could be added if suggested by the community.
 By having this minimalist approach, we engage to provide what users really need.
-But as a user of this library, feel free to contribute to its evolution through
-issues and pull requests (see the [contributing](#contributing) section below).
 
 ### Avoid useless dependencies
 
-Kotools Types is very light and just ship with one dependency:
-[Kotlin/kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)
-for serializing or deserializing the provided types.
+This project is very light and just ship with one direct dependency:
+[kotlinx.serialization] for serializing or deserializing the provided types.
 Knowing that these types could be used in any type of API, this feature is
 essential for this library.
 
 ### Error handling agnostic
 
 Users should be responsible for deciding how to handle errors, not this library.
-Externalizing this responsibility to users implies that Kotools Types should
+Externalizing this responsibility to consumers implies that Kotools Types should
 provide an explicit API by definition.
-This is why we are using the
-[`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) type
-from Kotlin for returning a result that can be a success or a failure.
+This is why we are using the [`Result`][kotlin.Result] type from Kotlin for
+representing a result that can be a success or a failure.
+
+[kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
 
 ## Installation
 
-> The value of the `$version` or the `${kotools.types.version}` variables is in
-> the version badge [here](#kotools-types).
+> The value of the `$version` or the `${kotools.types.version}` variables is
+> available in the [version badge](#kotools-types).
 
 ### Gradle
 
@@ -78,24 +105,32 @@ implementation "org.kotools:types:$version"
 
 ## Contributing
 
-Feel free to contribute to this project with
-[issues](https://github.com/kotools/types/issues) and
-[pull requests](https://github.com/kotools/types/pulls).
+Contributions are welcomed!
+Please check the [contribution guidelines] for doing so.
 
-This project follows the [Conventional Commits][conventional-commits] guidelines
-for committing with Git.
-Please read [the specifications][conventional-commits] before committing to this
-project.
+You can also join us on [GitHub Discussions]!
+We use this place for communicating [ideas] or [announcements] to our community.
+Here's where you can [get started].
 
-Also, feel free to join our community on
-[GitHub Discussions](https://github.com/kotools/types/discussions).
-We use this place for communicating ideas or announcements to our community.
-Here's where you can
-[get started](https://github.com/kotools/types/discussions/24).
+[announcements]: https://github.com/kotools/types/discussions/categories/announcements
+[contribution guidelines]: https://github.com/kotools/types/blob/main/contributing.md
+[get started]: https://github.com/kotools/types/discussions/24
+[GitHub Discussions]: https://github.com/kotools/types/discussions
+[ideas]: https://github.com/kotools/types/discussions/categories/ideas
 
-[conventional-commits]: https://www.conventionalcommits.org/en/v1.0.0
+## Acknowledgements
+
+Thanks to [Loïc Lamarque] for creating and sharing this project with the open
+source community.
+
+Thanks to [all the people that ever contributed] through code or other means such
+as bug reports, feature suggestions and so on.
+
+[all the people that ever contributed]: https://github.com/kotools/types/graphs/contributors
+[Loïc Lamarque]: https://github.com/LVMVRQUXL
 
 ## License
 
-This project is licensed under the
-[MIT License](https://choosealicense.com/licenses/mit).
+This project is licensed under the [MIT License].
+
+[MIT License]: https://choosealicense.com/licenses/mit
