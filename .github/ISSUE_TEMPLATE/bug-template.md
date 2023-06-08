@@ -7,7 +7,11 @@ labels: bug
 
 ## Description
 
+> Bug encountered in version `version`.
+
+[//]: # (Describe the bug right here.)
+
 ## Checklist
 
 - [ ] Fix.
-- [ ] Update `Work in progress` section in changelog.
+- [ ] Update the `Unreleased` section in the changelog.
