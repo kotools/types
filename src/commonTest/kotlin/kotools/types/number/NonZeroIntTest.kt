@@ -6,6 +6,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
@@ -50,6 +51,18 @@ class NonZeroIntCompanionTest {
 }
 
 class NonZeroIntTest {
+
+    @ExperimentalNumberApi
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: NonZeroInt = NonZeroInt.random()
+        // WHEN
+        val result: Int = -x
+        // THEN
+        result shouldEqual -x.toInt()
+    }
+
     @Test
     fun int_div_should_pass_with_a_NonZeroInt() {
         val x: Int = Random.nextInt()

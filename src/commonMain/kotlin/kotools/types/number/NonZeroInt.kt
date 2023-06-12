@@ -7,6 +7,7 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
@@ -63,6 +64,11 @@ public sealed interface NonZeroInt : AnyInt {
     @SinceKotoolsTypes("4.0")
     override fun toString(): String
 }
+
+/** Returns the negative of this integer. */
+@ExperimentalNumberApi
+@SinceKotoolsTypes("4.2")
+public operator fun NonZeroInt.unaryMinus(): Int = -this.toInt()
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer
