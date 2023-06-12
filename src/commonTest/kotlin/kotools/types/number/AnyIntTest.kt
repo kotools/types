@@ -5,6 +5,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
@@ -35,6 +36,17 @@ class AnyIntTest {
         val y: AnyInt = StrictlyNegativeInt.random()
         val result: Int = x compareTo y
         assertTrue { result > ZeroInt.toInt() }
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: AnyInt = StrictlyPositiveInt.random()
+        // WHEN
+        val result: Int = -x
+        // THEN
+        result shouldEqual -x.toInt()
     }
 
     @Test
