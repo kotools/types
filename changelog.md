@@ -74,6 +74,19 @@ result = 3.toNonZeroInt()
     .flatMap { (it * 2).toStrictlyPositiveInt() }
 ```
 
+### Deprecated
+
+The collections declared as [data classes] will be converted to [classes] (or
+[inline classes] when possible) in version [4.3.0], which means that their
+`copy` function is deprecated and will be unavailable after their conversion
+(issue [#97]).
+
+[4.3.0]: https://github.com/kotools/types/milestone/4
+[#97]: https://github.com/kotools/types/issues/97
+[classes]: https://kotlinlang.org/docs/classes.html
+[data classes]: https://kotlinlang.org/docs/data-classes.html
+[inline classes]: https://kotlinlang.org/docs/inline-classes.html
+
 ### Changed
 
 - Support for
