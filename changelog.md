@@ -79,7 +79,20 @@ result = 3.toNonZeroInt()
 The collections declared as [data classes] will be converted to [classes] (or
 [inline classes] when possible) in version [4.3.0], which means that their
 `copy` function is deprecated and will be unavailable after their conversion
-(issue [#97]).
+(issue [#97]). Here's an example for the `NotEmptyList` type:
+
+```kotlin
+val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+var y: NotEmptyList<Int>
+// before
+y = x.copy()
+println(x == y) // true
+// after
+y = x.toList()
+    .toNotEmptyList()
+    .getOrThrow()
+println(x == z) // true
+```
 
 [4.3.0]: https://github.com/kotools/types/milestone/4
 [#97]: https://github.com/kotools/types/issues/97
