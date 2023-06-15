@@ -5,6 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
@@ -47,6 +48,14 @@ public sealed interface PositiveInt : AnyInt {
     @SinceKotoolsTypes("4.0")
     override fun toString(): String
 }
+
+/** Returns the negative of this integer. */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.2")
+public operator fun PositiveInt.unaryMinus(): NegativeInt = toInt()
+    .unaryMinus()
+    .toNegativeInt()
+    .getOrThrow()
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer

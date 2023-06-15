@@ -5,13 +5,13 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotools.types.*
+import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
-import kotools.types.shouldEqual
-import kotools.types.shouldHaveAMessage
-import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
@@ -53,6 +53,18 @@ class PositiveIntCompanionTest {
 }
 
 class PositiveIntTest {
+
+    @ExperimentalNumberApi
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: PositiveInt = PositiveInt.random()
+        // WHEN
+        val result: NegativeInt = -x
+        // THEN
+        result.toInt() shouldEqual -x.toInt()
+    }
+
     @Test
     fun div_should_return_a_PositiveInt_with_a_StrictlyPositiveInt() {
         val x: PositiveInt = PositiveInt.random()
