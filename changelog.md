@@ -23,8 +23,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - The `NotEmptyRange` and the `Bound` **experimental** types representing a
-  range of comparable values that contain at least one value (issue
-  [#56](https://github.com/kotools/types/issues/56)).
+  range of comparable values that contain at least one value (issue [#56]).
+
+[#56]: https://github.com/kotools/types/issues/56
 
 ```kotlin
 val range = notEmptyRangeOf<Int> { 1.inclusive to 42.exclusive }
@@ -35,7 +36,9 @@ println(42 in range) // false
 
 - The `StrictlyPositiveDouble` **experimental** type representing strictly
   positive floating-point numbers represented by the `Double` type (issue
-  [#66](https://github.com/kotools/types/issues/66)).
+  [#66]).
+
+[#66]: https://github.com/kotools/types/issues/66
 
 ```kotlin
 val x: StrictlyPositiveDouble = 0.5.toStrictlyPositiveDouble()
@@ -44,8 +47,9 @@ println(x) // 0.5
 ```
 
 - The `plus` **experimental** operations for concatenating a `NotBlankString`
-  with a `String` or a `Char` (issue
-  [#53](https://github.com/kotools/types/issues/53)).
+  with a `String` or a `Char` (issue [#53]).
+
+[#53]: https://github.com/kotools/types/issues/53
 
 ```kotlin
 val firstString: NotBlankString = "hello".toNotBlankString().getOrThrow()
@@ -62,7 +66,9 @@ result = firstString + secondString
 ```
 
 - The `Result.flatMap` **experimental** operation for transforming its
-  encapsulated value (issue [#47](https://github.com/kotools/types/issues/47)).
+  encapsulated value (issue [#47]).
+
+[#47]: https://github.com/kotools/types/issues/47
 
 ```kotlin
 var result: Result<StrictlyPositiveInt>
@@ -81,6 +87,12 @@ The collections declared as [data classes] will be converted to [classes] (or
 `copy` function is deprecated and will be unavailable after their conversion
 (issue [#97]). Here's an example for the `NotEmptyList` type:
 
+[4.3.0]: https://github.com/kotools/types/milestone/4
+[#97]: https://github.com/kotools/types/issues/97
+[classes]: https://kotlinlang.org/docs/classes.html
+[data classes]: https://kotlinlang.org/docs/data-classes.html
+[inline classes]: https://kotlinlang.org/docs/inline-classes.html
+
 ```kotlin
 val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
 var y: NotEmptyList<Int>
@@ -94,21 +106,18 @@ y = x.toList()
 println(x == z) // true
 ```
 
-[4.3.0]: https://github.com/kotools/types/milestone/4
-[#97]: https://github.com/kotools/types/issues/97
-[classes]: https://kotlinlang.org/docs/classes.html
-[data classes]: https://kotlinlang.org/docs/data-classes.html
-[inline classes]: https://kotlinlang.org/docs/inline-classes.html
-
 ### Changed
 
-- Support for
-  [Kotlin 1.6.21](https://github.com/JetBrains/kotlin/releases/tag/v1.6.21) and
-  [kotlinx.serialization 1.3.3](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3)
-  (issue [#51](https://github.com/kotools/types/issues/51)).
-- Relocate the library from `io.github.kotools` to `org.kotools` (issue
-  [#63](https://github.com/kotools/types/issues/63)). Here's an example using
-  the Kotlin DSL in Gradle:
+- Support for [Kotlin 1.6.21] and [kotlinx.serialization 1.3.3] (issue [#51]).
+
+[#51]: https://github.com/kotools/types/issues/51
+[kotlin 1.6.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.6.21
+[kotlinx.serialization 1.3.3]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
+
+- Relocate the library from `io.github.kotools` to `org.kotools` (issue [#63]).
+  Here's an example using the Kotlin DSL in Gradle:
+
+[#63]: https://github.com/kotools/types/issues/63
 
 ```kotlin
 // before
@@ -129,6 +138,10 @@ implementation("org.kotools:types:$version")
   `NotEmptyList`, `NotEmptySet` and `NotEmptyMap` (issue [#77]). Here's an
   example for the `NotEmptyList` type:
 
+[kotlinx.serialization.SerialDescriptor]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.descriptors/-serial-descriptor.html
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
+[#77]: https://github.com/kotools/types/issues/77
+
 ```kotlin
 val elementSerializer: KSerializer<Int> = Int.serializer()
 // before
@@ -145,12 +158,6 @@ val expectedSerialName: String = ListSerializer(elementSerializer)
     .serialName
 println(notEmptyListSerialName == expectedSerialName) // true
 ```
-
-[kotlinx.serialization.SerialDescriptor]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.descriptors/-serial-descriptor.html
-
-[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-
-[#77]: https://github.com/kotools/types/issues/77
 
 ## 4.1.0
 
