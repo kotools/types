@@ -5,6 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
@@ -52,6 +53,18 @@ class NegativeIntCompanionTest {
 }
 
 class NegativeIntTest {
+
+    @ExperimentalNumberApi
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: NegativeInt = NegativeInt.random()
+        // WHEN
+        val result: PositiveInt = -x
+        // THEN
+        result.toInt() shouldEqual -x.toInt()
+    }
+
     @Test
     fun div_should_return_a_NegativeInt_with_a_StrictlyPositiveInt() {
         val x: NegativeInt = NegativeInt.random()
