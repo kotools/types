@@ -6,6 +6,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
@@ -17,6 +18,18 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
+
+    @ExperimentalNumberApi
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        // WHEN
+        val result: StrictlyNegativeInt = -x
+        // THEN
+        result.toInt() shouldEqual -x.toInt()
+    }
+
     @Test
     fun min_should_equal_one() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.min
