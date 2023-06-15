@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 >
 > See [the changelog in kotools/libraries] for versions `1`, `2` and `3`.
 
-[Keep a Changelog]: https://keepachangelog.com/en/1.1.0
+[keep a changelog]: https://keepachangelog.com/en/1.1.0
 [the changelog in kotools/libraries]: https://github.com/kotools/libraries/blob/types-v3.2.0/types/changelog.md
 
 ## Types of changes
