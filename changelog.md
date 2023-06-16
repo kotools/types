@@ -54,8 +54,11 @@ object ZeroInt : PositiveInt, NegativeInt
 
 ### Removed
 
-- Remove inheritance between the `NotBlankString` and the `Comparable` types
-  (issue [#16](https://github.com/kotools/types/issues/8)).
+- Remove inheritance between the `NotBlankString` and the
+  [`Comparable`][kotlin.Comparable] types (issue
+  [#16](https://github.com/kotools/types/issues/16)).
+
+[kotlin.Comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
 
 ```kotlin
 val text: NotBlankString = "hello world".toNotBlankString().getOrThrow()
