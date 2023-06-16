@@ -300,7 +300,9 @@ _Release date: 2023-01-03._
 ### Added
 
 Introduce a new `AnyInt` hierarchy representing integers (issue
-[#132](https://github.com/kotools/libraries/issues/132) in [kotools/libraries]).
+[#132 in kotools/libraries][kotools/libraries#132]).
+
+[kotools/libraries#132]: https://github.com/kotools/libraries/issues/132
 
 ```kotlin
 interface AnyInt
@@ -316,21 +318,24 @@ object ZeroInt : PositiveInt, NegativeInt
 
 - Move the `NotBlankString` type from the `kotools.types` package to the
   `kotools.types.text` package with a new API (issue
-  [#133](https://github.com/kotools/libraries/issues/133) in
-  [kotools/libraries]).
+  [#133 in kotools/libraries][kotools/libraries#133]).
+
+[kotools/libraries#133]: https://github.com/kotools/libraries/issues/133
+
 - Move the following types from the `kotools.types` package to the
   `kotools.types.collection` package with a new API: `NotEmptyList`,
   `NotEmptySet` and `NotEmptyMap` (issue
-  [#138](https://github.com/kotools/libraries/issues/138) in
-  [kotools/libraries]).
+  [#138 in kotools/libraries][kotools/libraries#138]).
   Examples are available in the `Removed` section below.
+
+[kotools/libraries#138]: https://github.com/kotools/libraries/issues/138
 
 ### Removed
 
 - Remove inheritance between the `NotBlankString` and the
-  [`Comparable`][kotlin.Comparable] types (issue
-  [#16](https://github.com/kotools/types/issues/16)).
+  [`Comparable`][kotlin.Comparable] types (issue [#16]).
 
+[#16]: https://github.com/kotools/types/issues/16
 [kotlin.Comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
 
 ```kotlin
@@ -339,8 +344,11 @@ text as Comparable<NotBlankString> // before
 "$text" as Comparable<String> // after
 ```
 
-- Remove inheritance between the `NotEmptyList` and the `List` types (issue
-  [#8](https://github.com/kotools/types/issues/8)).
+- Remove inheritance between the `NotEmptyList` and the
+  [`List`][kotlin.collections.List] types (issue [#8]).
+
+[#8]: https://github.com/kotools/types/issues/8
+[kotlin.collections.List]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/#kotlin.collections.List
 
 ```kotlin
 val elements: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
@@ -348,8 +356,11 @@ elements as List<Int> // before
 elements.toList() // after
 ```
 
-- Remove inheritance between the `NotEmptySet` and the `Set` types (issue
-  [#9](https://github.com/kotools/types/issues/9)).
+- Remove inheritance between the `NotEmptySet` and the
+  [`Set`][kotlin.collections.Set] types (issue [#9]).
+
+[#9]: https://github.com/kotools/types/issues/9
+[kotlin.collections.Set]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/#kotlin.collections.Set
 
 ```kotlin
 val elements: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
@@ -357,8 +368,11 @@ elements as Set<Int> // before
 elements.toSet() // after
 ```
 
-- Remove inheritance between the `NotEmptyMap` and the `Map` types (issue
-  [#10](https://github.com/kotools/types/issues/10)).
+- Remove inheritance between the `NotEmptyMap` and the
+  [`Map`][kotlin.collections.Map] types (issue [#10]).
+
+[#10]: https://github.com/kotools/types/issues/10
+[kotlin.collections.Map]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/#kotlin.collections.Map
 
 ```kotlin
 val entries: NotEmptyMap<String, Int> = notEmptyMapOf("a" to 1, "b" to 2)
@@ -368,6 +382,6 @@ entries.toMap() // after
 
 - Remove all declarations from previous API while keeping the essentials: the
   types and their builder (issue
-  [#37](https://github.com/kotools/libraries/issues/37) in [kotools/libraries]).
+  [#37 in kotools/libraries][kotools/libraries#37]).
 
-[kotools/libraries]: https://github.com/kotools/libraries
+[kotools/libraries#37]: https://github.com/kotools/libraries/issues/37
