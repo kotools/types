@@ -5,6 +5,7 @@ import kotlinx.serialization.SerializationException
 import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
@@ -63,6 +64,14 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
     @SinceKotoolsTypes("4.0")
     override fun toString(): String = "$value"
 }
+
+/** Returns the negative of this integer. */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.2")
+public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt = toInt()
+    .unaryMinus()
+    .toStrictlyPositiveInt()
+    .getOrThrow()
 
 /**
  * Returns this number as an encapsulated [StrictlyNegativeInt], which may
