@@ -163,14 +163,17 @@ println(notEmptyListSerialName == expectedSerialName) // true
 
 _Release date: 2023-04-03._
 
-_See the
-[full changelog](https://github.com/kotools/types/compare/4.0.1...4.1.0) from
-version [`4.0.1`](https://github.com/kotools/types/releases/tag/4.0.1)._
+_See the [full changelog][4.0.1-4.1.0] from version [`4.0.1`][tag/4.0.1]._
+
+[4.0.1-4.1.0]: https://github.com/kotools/types/compare/4.0.1...4.1.0
+[tag/4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
 
 ### Added
 
 - `NotEmptyCollection` hierarchy representing collections that contain at least
-  one element (issue [#14](https://github.com/kotools/types/issues/14)).
+  one element (issue [#14]).
+
+[#14]: https://github.com/kotools/types/issues/14
 
 ```kotlin
 interface NotEmptyCollection<out E>
@@ -179,7 +182,9 @@ class NotEmptySet<out E> : NotEmptyCollection<E>
 ```
 
 - Binary operations (`plus`, `minus`, `times`, `div` and `rem`) for the `AnyInt`
-  hierarchy (issue [#31](https://github.com/kotools/types/issues/31)).
+  hierarchy (issue [#31]).
+
+[#31]: https://github.com/kotools/types/issues/31
 
 ```kotlin
 val x: AnyInt = NonZeroInt.random()
@@ -196,8 +201,9 @@ result = x + y
 ```
 
 - `resultOf` function for encapsulating computations of functions returning the
-  [`Result`][kotlin.result] type (issue
-  [#37](https://github.com/kotools/types/issues/37)).
+  [`Result`][kotlin.result] type (issue [#37]).
+
+[#37]: https://github.com/kotools/types/issues/37
 
 ```kotlin
 data class Person(val name: NotBlankString, val age: StrictlyPositiveInt)
@@ -219,16 +225,19 @@ somebody = resultOf {
 
 ### Changed
 
-- Support for
-  [Kotlin 1.5.32](https://github.com/JetBrains/kotlin/releases/tag/v1.5.32)
-  (issue [#6](https://github.com/kotools/types/issues/6)).
-- The following builders now works on the
-  [`Number`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html)
-  type instead of the
-  [`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
-  type only: `toNonZeroInt`, `toPositiveInt`, `toNegativeInt`,
-  `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
-  [#43](https://github.com/kotools/types/issues/43)).
+- Support for [Kotlin 1.5.32][kotlin-1.5.32] (issue [#6]).
+
+[#6]: https://github.com/kotools/types/issues/6
+[kotlin-1.5.32]: https://github.com/JetBrains/kotlin/releases/tag/v1.5.32
+
+- The following builders now works on the [`Number`][kotlin.Number] type instead
+  of the [`Int`][kotlin.Int] type only: `toNonZeroInt`, `toPositiveInt`,
+  `toNegativeInt`, `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
+  [#43]).
+
+[#43]: https://github.com/kotools/types/issues/43
+[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html
+[kotlin.Number]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html
 
 ```kotlin
 val x: Double = 0.1
@@ -240,8 +249,9 @@ result = x.toStrictlyPositiveInt()
 ```
 
 - The `AnyInt` and the `NotBlankString` types are now inheriting from
-  [`Comparable`][kotlin.comparable] (issue
-  [#45](https://github.com/kotools/types/issues/45)).
+  [`Comparable`][kotlin.comparable] (issue [#45]).
+
+[#45]: https://github.com/kotools/types/issues/45
 
 ```kotlin
 val firstInt: AnyInt = StrictlyPositiveInt.random()
