@@ -201,7 +201,7 @@ result = x + y
 ```
 
 - `resultOf` function for encapsulating computations of functions returning the
-  [`Result`][kotlin.result] type (issue [#37]).
+  [`Result`][kotlin.Result] type (issue [#37]).
 
 [#37]: https://github.com/kotools/types/issues/37
 
@@ -279,8 +279,10 @@ version [`4.0.0`](https://github.com/kotools/types/releases/tag/4.0.0)._
 
 ### Changed
 
-Update documentation of declarations returning the [`Result`][kotlin.result]
+Update documentation of declarations returning the [`Result`][kotlin.Result]
 type (issue [#20](https://github.com/kotools/types/issues/20)).
+
+[kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html
 
 ### Fixed
 
@@ -365,5 +367,3 @@ entries.toMap() // after
   [#37](https://github.com/kotools/libraries/issues/37) in [kotools/libraries]).
 
 [kotools/libraries]: https://github.com/kotools/libraries
-
-[kotlin.result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html
