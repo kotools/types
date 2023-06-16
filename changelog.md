@@ -273,21 +273,25 @@ result = firstString < secondString
 
 _Release date: 2023-02-06._
 
-_See the
-[full changelog](https://github.com/kotools/types/compare/4.0.0...4.0.1) from
-version [`4.0.0`](https://github.com/kotools/types/releases/tag/4.0.0)._
+_See the [full changelog][4.0.0-4.0.1] from version [`4.0.0`][tag/4.0.0]._
+
+[4.0.0-4.0.1]: https://github.com/kotools/types/compare/4.0.0...4.0.1
+[tag/4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
 
 ### Changed
 
 Update documentation of declarations returning the [`Result`][kotlin.Result]
-type (issue [#20](https://github.com/kotools/types/issues/20)).
+type (issue [#20]).
 
+[#20]: https://github.com/kotools/types/issues/20
 [kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html
 
 ### Fixed
 
 Fix versioning annotation of declarations in the `kotools.types.number` package
-(issue [#23](https://github.com/kotools/types/issues/23)).
+(issue [#23]).
+
+[#23]: https://github.com/kotools/types/issues/23
 
 ## 4.0.0
 
