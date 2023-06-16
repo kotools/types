@@ -249,7 +249,7 @@ result = x.toStrictlyPositiveInt()
 ```
 
 - The `AnyInt` and the `NotBlankString` types are now inheriting from
-  [`Comparable`][kotlin.comparable] (issue [#45]).
+  [`Comparable`][kotlin.Comparable] (issue [#45]).
 
 [#45]: https://github.com/kotools/types/issues/45
 
@@ -322,8 +322,10 @@ object ZeroInt : PositiveInt, NegativeInt
 ### Removed
 
 - Remove inheritance between the `NotBlankString` and the
-  [`Comparable`][kotlin.comparable] types (issue
+  [`Comparable`][kotlin.Comparable] types (issue
   [#16](https://github.com/kotools/types/issues/8)).
+
+[kotlin.Comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
 
 ```kotlin
 val text: NotBlankString = "hello world".toNotBlankString().getOrThrow()
@@ -363,7 +365,5 @@ entries.toMap() // after
   [#37](https://github.com/kotools/libraries/issues/37) in [kotools/libraries]).
 
 [kotools/libraries]: https://github.com/kotools/libraries
-
-[kotlin.comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
 
 [kotlin.result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html
