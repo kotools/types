@@ -329,7 +329,7 @@ object ZeroInt : PositiveInt, NegativeInt
 
 - Remove inheritance between the `NotBlankString` and the
   [`Comparable`][kotlin.Comparable] types (issue
-  [#16](https://github.com/kotools/types/issues/8)).
+  [#16](https://github.com/kotools/types/issues/16)).
 
 [kotlin.Comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
 
