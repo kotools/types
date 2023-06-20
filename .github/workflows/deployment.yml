@@ -4,6 +4,16 @@ on:
     types: [ released ]
   workflow_dispatch:
 jobs:
+  dependencies:
+    name: Submit dependencies to GitHub
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Submit dependencies to GitHub
+        uses: mikepenz/gradle-dependency-submission@v0.8.6
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
