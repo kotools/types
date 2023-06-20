@@ -51,16 +51,15 @@ class NonZeroIntCompanionTest {
 }
 
 class NonZeroIntTest {
-
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
         // GIVEN
         val x: NonZeroInt = NonZeroInt.random()
         // WHEN
-        val result: Int = -x
+        val result: NonZeroInt = -x
         // THEN
-        result shouldEqual -x.toInt()
+        result.toInt() shouldEqual -x.toInt()
     }
 
     @Test

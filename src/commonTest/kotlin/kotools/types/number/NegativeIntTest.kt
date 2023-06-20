@@ -53,7 +53,6 @@ class NegativeIntCompanionTest {
 }
 
 class NegativeIntTest {
-
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {

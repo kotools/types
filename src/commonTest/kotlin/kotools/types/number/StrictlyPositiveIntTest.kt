@@ -18,7 +18,6 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
-
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {

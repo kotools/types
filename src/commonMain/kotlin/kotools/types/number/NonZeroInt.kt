@@ -67,8 +67,11 @@ public sealed interface NonZeroInt : AnyInt {
 
 /** Returns the negative of this integer. */
 @ExperimentalNumberApi
-@SinceKotoolsTypes("4.2")
-public operator fun NonZeroInt.unaryMinus(): Int = -this.toInt()
+@ExperimentalSinceKotoolsTypes("4.2")
+public operator fun NonZeroInt.unaryMinus(): NonZeroInt = toInt()
+    .unaryMinus()
+    .toNonZeroInt()
+    .getOrThrow()
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer
