@@ -44,6 +44,21 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Check API binaries
         run: ./gradlew apiCheck --no-daemon
+  dependencies:
+    name: Submit dependencies to GitHub
+    needs: validate-wrapper
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Submit dependencies to GitHub
+        uses: mikepenz/gradle-dependency-submission@v0.8.6
+        with:
+          gradle-build-configuration: allSourceSetsRuntimeDependenciesMetadata
+          fail-on-error: true
   test:
     name: Test
     needs: validate-wrapper
