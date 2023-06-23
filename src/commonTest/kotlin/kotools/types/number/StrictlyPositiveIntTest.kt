@@ -18,17 +18,6 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
-    @ExperimentalNumberApi
-    @Test
-    fun unaryMinus_should_pass() {
-        // GIVEN
-        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        // WHEN
-        val result: StrictlyNegativeInt = -x
-        // THEN
-        result.toInt() shouldEqual -x.toInt()
-    }
-
     @Test
     fun min_should_equal_one() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.min
@@ -67,6 +56,17 @@ class StrictlyPositiveIntCompanionTest {
 }
 
 class StrictlyPositiveIntTest {
+    @ExperimentalNumberApi
+    @Test
+    fun unaryMinus_should_pass() {
+        // GIVEN
+        val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
+        // WHEN
+        val result: StrictlyNegativeInt = -x
+        // THEN
+        result.toInt() shouldEqual -x.toInt()
+    }
+
     @Test
     fun toString_should_behave_like_an_Int(): Unit = StrictlyPositiveInt
         .random()

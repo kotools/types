@@ -69,10 +69,11 @@ private constructor(private val value: Int) : NonZeroInt, PositiveInt {
 /** Returns the negative of this integer. */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.2")
-public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt = toInt()
-    .unaryMinus()
-    .toStrictlyNegativeInt()
-    .getOrThrow()
+public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt =
+    toInt()
+        .unaryMinus()
+        .toStrictlyNegativeInt()
+        .getOrThrow()
 
 /**
  * Returns this number as an encapsulated [StrictlyPositiveInt], which may
