@@ -130,6 +130,7 @@ public final class kotools/types/number/AnyIntKt {
 	public static final fun times (ILkotools/types/number/AnyInt;)I
 	public static final fun times (Lkotools/types/number/AnyInt;I)I
 	public static final fun times (Lkotools/types/number/AnyInt;Lkotools/types/number/AnyInt;)I
+	public static final fun unaryMinus (Lkotools/types/number/AnyInt;)I
 }
 
 public abstract interface class kotools/types/number/NegativeInt : kotools/types/number/AnyInt {
@@ -155,6 +156,7 @@ public final class kotools/types/number/NegativeIntKt {
 	public static final fun div-Vo0Sc0k (Lkotools/types/number/NegativeInt;I)Lkotools/types/number/NegativeInt;
 	public static final fun rem (Lkotools/types/number/NegativeInt;Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NegativeInt;
 	public static final fun toNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
 }
 
 public abstract interface class kotools/types/number/NonZeroInt : kotools/types/number/AnyInt {
@@ -180,6 +182,7 @@ public final class kotools/types/number/NonZeroIntKt {
 	public static final fun div (ILkotools/types/number/NonZeroInt;)I
 	public static final fun rem (ILkotools/types/number/NonZeroInt;)I
 	public static final fun toNonZeroInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun unaryMinus (Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NonZeroInt;
 }
 
 public abstract interface class kotools/types/number/PositiveInt : kotools/types/number/AnyInt {
@@ -205,6 +208,7 @@ public final class kotools/types/number/PositiveIntKt {
 	public static final fun div-Vo0Sc0k (Lkotools/types/number/PositiveInt;I)Lkotools/types/number/PositiveInt;
 	public static final fun rem (Lkotools/types/number/PositiveInt;Lkotools/types/number/NonZeroInt;)Lkotools/types/number/PositiveInt;
 	public static final fun toPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
 }
 
 public final class kotools/types/number/StrictlyNegativeInt : kotools/types/number/NegativeInt, kotools/types/number/NonZeroInt {
@@ -235,6 +239,7 @@ public final class kotools/types/number/StrictlyNegativeInt$Companion {
 
 public final class kotools/types/number/StrictlyNegativeIntKt {
 	public static final fun toStrictlyNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun unaryMinus-I890jeU (I)I
 }
 
 public final class kotools/types/number/StrictlyPositiveDouble : java/lang/Comparable {
@@ -290,6 +295,7 @@ public final class kotools/types/number/StrictlyPositiveInt$Companion {
 
 public final class kotools/types/number/StrictlyPositiveIntKt {
 	public static final fun toStrictlyPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun unaryMinus-UPGVeGw (I)I
 }
 
 public final class kotools/types/number/ZeroInt : kotools/types/number/NegativeInt, kotools/types/number/PositiveInt {
