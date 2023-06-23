@@ -80,6 +80,24 @@ result = 3.toNonZeroInt()
     .flatMap { (it * 2).toStrictlyPositiveInt() }
 ```
 
+- The `unaryMinus` **experimental** operations for returning the negative of an
+  `AnyInt` (issue [#54] implemented by [@MichaelStH]).
+
+[#54]: https://github.com/kotools/types/issues/54
+[@MichaelStH]: https://github.com/MichaelStH
+
+```kotlin
+val x: NonZeroInt = 1.toNonZeroInt().getOrThrow()
+// before
+x.toInt()
+    .unaryMinus()
+    .toNonZeroInt()
+    .getOrThrow()
+    .let(::println) // -1
+// after
+println(-x) // -1
+```
+
 ### Deprecated
 
 The collections declared as [data classes] will be converted to [classes] (or
