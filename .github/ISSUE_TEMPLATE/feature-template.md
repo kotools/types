@@ -1,8 +1,8 @@
 ---
-name: Enhancement Template
+name: Feature Template
 about: New feature or request
-title: Enhancement
-labels: enhancement
+title: Feature
+labels: feature
 ---
 
 ## Description
