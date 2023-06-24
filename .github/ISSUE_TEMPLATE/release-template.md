@@ -13,6 +13,7 @@ Issues of this new version should be done before resolving this issue.
 
 - [ ] Upgrade the application's version.
 - [ ] Add a new version in changelog.
-- [ ] Release on the Maven central.
 - [ ] Update version in readme.
+- [ ] Release on the Maven central.
 - [ ] Create a release on the repository.
+- [ ] Update the related discussion.
