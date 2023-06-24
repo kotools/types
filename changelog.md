@@ -20,6 +20,15 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.2.0
+
+_Release date: 2023-06-24._
+
+_See the [full changelog][4.1.0-4.2.0] from version [`4.1.0`][tag/4.1.0]._
+
+[4.1.0-4.2.0]: https://github.com/kotools/types/compare/4.1.0...4.2.0
+[tag/4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
+
 ### Added
 
 - The `NotEmptyRange` and the `Bound` **experimental** types representing a
