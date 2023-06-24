@@ -34,8 +34,6 @@ _See the [full changelog][4.1.0-4.2.0] from version [`4.1.0`][tag/4.1.0]._
 - The `NotEmptyRange` and the `Bound` **experimental** types representing a
   range of comparable values that contain at least one value (issue [#56]).
 
-[#56]: https://github.com/kotools/types/issues/56
-
 ```kotlin
 val range = notEmptyRangeOf<Int> { 1.inclusive to 42.exclusive }
 println(range) // [1;42[
@@ -43,11 +41,11 @@ println(3 in range) // true
 println(42 in range) // false
 ```
 
+[#56]: https://github.com/kotools/types/issues/56
+
 - The `StrictlyPositiveDouble` **experimental** type representing strictly
   positive floating-point numbers represented by the `Double` type (issue
   [#66]).
-
-[#66]: https://github.com/kotools/types/issues/66
 
 ```kotlin
 val x: StrictlyPositiveDouble = 0.5.toStrictlyPositiveDouble()
@@ -55,10 +53,10 @@ val x: StrictlyPositiveDouble = 0.5.toStrictlyPositiveDouble()
 println(x) // 0.5
 ```
 
+[#66]: https://github.com/kotools/types/issues/66
+
 - The `plus` **experimental** operations for concatenating a `NotBlankString`
   with a `String` or a `Char` (issue [#53]).
-
-[#53]: https://github.com/kotools/types/issues/53
 
 ```kotlin
 val firstString: NotBlankString = "hello".toNotBlankString().getOrThrow()
@@ -74,10 +72,10 @@ result = firstString + "everyone"
 result = firstString + secondString
 ```
 
+[#53]: https://github.com/kotools/types/issues/53
+
 - The `Result.flatMap` **experimental** operation for transforming its
   encapsulated value (issue [#47]).
-
-[#47]: https://github.com/kotools/types/issues/47
 
 ```kotlin
 var result: Result<StrictlyPositiveInt>
@@ -89,11 +87,10 @@ result = 3.toNonZeroInt()
     .flatMap { (it * 2).toStrictlyPositiveInt() }
 ```
 
+[#47]: https://github.com/kotools/types/issues/47
+
 - The `unaryMinus` **experimental** operations for returning the negative of an
   `AnyInt` (issue [#54] implemented by [@MichaelStH]).
-
-[#54]: https://github.com/kotools/types/issues/54
-[@MichaelStH]: https://github.com/MichaelStH
 
 ```kotlin
 val x: NonZeroInt = 1.toNonZeroInt().getOrThrow()
@@ -107,18 +104,15 @@ x.toInt()
 println(-x) // -1
 ```
 
+[#54]: https://github.com/kotools/types/issues/54
+[@MichaelStH]: https://github.com/MichaelStH
+
 ### Deprecated
 
 The collections declared as [data classes] will be converted to [classes] (or
 [inline classes] when possible) in version [4.3.0], which means that their
 `copy` function is deprecated and will be unavailable after their conversion
 (issue [#97]). Here's an example for the `NotEmptyList` type:
-
-[4.3.0]: https://github.com/kotools/types/milestone/4
-[#97]: https://github.com/kotools/types/issues/97
-[classes]: https://kotlinlang.org/docs/classes.html
-[data classes]: https://kotlinlang.org/docs/data-classes.html
-[inline classes]: https://kotlinlang.org/docs/inline-classes.html
 
 ```kotlin
 val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
@@ -133,6 +127,12 @@ y = x.toList()
 println(x == z) // true
 ```
 
+[4.3.0]: https://github.com/kotools/types/milestone/4
+[#97]: https://github.com/kotools/types/issues/97
+[classes]: https://kotlinlang.org/docs/classes.html
+[data classes]: https://kotlinlang.org/docs/data-classes.html
+[inline classes]: https://kotlinlang.org/docs/inline-classes.html
+
 ### Changed
 
 - Support for [Kotlin 1.6.21] and [kotlinx.serialization 1.3.3] (issue [#51]).
@@ -144,14 +144,14 @@ println(x == z) // true
 - Relocate the library from `io.github.kotools` to `org.kotools` (issue [#63]).
   Here's an example using the Kotlin DSL in Gradle:
 
-[#63]: https://github.com/kotools/types/issues/63
-
 ```kotlin
 // before
 implementation("io.github.kotools:types:$version")
 // after
 implementation("org.kotools:types:$version")
 ```
+
+[#63]: https://github.com/kotools/types/issues/63
 
 ### Security
 
@@ -164,10 +164,6 @@ implementation("org.kotools:types:$version")
   [kotlinx.serialization]'s experimental API for the following types:
   `NotEmptyList`, `NotEmptySet` and `NotEmptyMap` (issue [#77]). Here's an
   example for the `NotEmptyList` type:
-
-[kotlinx.serialization.SerialDescriptor]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.descriptors/-serial-descriptor.html
-[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-[#77]: https://github.com/kotools/types/issues/77
 
 ```kotlin
 val elementSerializer: KSerializer<Int> = Int.serializer()
@@ -186,6 +182,10 @@ val expectedSerialName: String = ListSerializer(elementSerializer)
 println(notEmptyListSerialName == expectedSerialName) // true
 ```
 
+[kotlinx.serialization.SerialDescriptor]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.descriptors/-serial-descriptor.html
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
+[#77]: https://github.com/kotools/types/issues/77
+
 ## 4.1.0
 
 _Release date: 2023-04-03._
@@ -200,18 +200,16 @@ _See the [full changelog][4.0.1-4.1.0] from version [`4.0.1`][tag/4.0.1]._
 - `NotEmptyCollection` hierarchy representing collections that contain at least
   one element (issue [#14]).
 
-[#14]: https://github.com/kotools/types/issues/14
-
 ```kotlin
 interface NotEmptyCollection<out E>
 class NotEmptyList<out E> : NotEmptyCollection<E>
 class NotEmptySet<out E> : NotEmptyCollection<E>
 ```
 
+[#14]: https://github.com/kotools/types/issues/14
+
 - Binary operations (`plus`, `minus`, `times`, `div` and `rem`) for the `AnyInt`
   hierarchy (issue [#31]).
-
-[#31]: https://github.com/kotools/types/issues/31
 
 ```kotlin
 val x: AnyInt = NonZeroInt.random()
@@ -227,10 +225,10 @@ result = x + 1
 result = x + y
 ```
 
+[#31]: https://github.com/kotools/types/issues/31
+
 - `resultOf` function for encapsulating computations of functions returning the
   [`Result`][kotlin.Result] type (issue [#37]).
-
-[#37]: https://github.com/kotools/types/issues/37
 
 ```kotlin
 data class Person(val name: NotBlankString, val age: StrictlyPositiveInt)
@@ -250,6 +248,8 @@ somebody = resultOf {
 }
 ```
 
+[#37]: https://github.com/kotools/types/issues/37
+
 ### Changed
 
 - Support for [Kotlin 1.5.32][kotlin-1.5.32] (issue [#6]).
@@ -262,10 +262,6 @@ somebody = resultOf {
   `toNegativeInt`, `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
   [#43]).
 
-[#43]: https://github.com/kotools/types/issues/43
-[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html
-[kotlin.Number]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html
-
 ```kotlin
 val x: Double = 0.1
 var result: Result<StrictlyPositiveInt>
@@ -275,10 +271,12 @@ result = x.toInt().toStrictlyPositiveInt()
 result = x.toStrictlyPositiveInt()
 ```
 
+[#43]: https://github.com/kotools/types/issues/43
+[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html
+[kotlin.Number]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html
+
 - The `AnyInt` and the `NotBlankString` types are now inheriting from
   [`Comparable`][kotlin.Comparable] (issue [#45]).
-
-[#45]: https://github.com/kotools/types/issues/45
 
 ```kotlin
 val firstInt: AnyInt = StrictlyPositiveInt.random()
@@ -295,6 +293,8 @@ result = "$firstString" < "$secondString"
 result = firstInt > secondInt
 result = firstString < secondString
 ```
+
+[#45]: https://github.com/kotools/types/issues/45
 
 ## 4.0.1
 
@@ -329,8 +329,6 @@ _Release date: 2023-01-03._
 Introduce a new `AnyInt` hierarchy representing integers (issue
 [#132 in kotools/libraries][kotools/libraries#132]).
 
-[kotools/libraries#132]: https://github.com/kotools/libraries/issues/132
-
 ```kotlin
 interface AnyInt
 interface NonZeroInt : AnyInt
@@ -340,6 +338,8 @@ class StrictlyPositiveInt : NonZeroInt, PositiveInt
 class StrictlyNegativeInt : NonZeroInt, NegativeInt
 object ZeroInt : PositiveInt, NegativeInt
 ```
+
+[kotools/libraries#132]: https://github.com/kotools/libraries/issues/132
 
 ### Changed
 
@@ -362,20 +362,17 @@ object ZeroInt : PositiveInt, NegativeInt
 - Remove inheritance between the `NotBlankString` and the
   [`Comparable`][kotlin.Comparable] types (issue [#16]).
 
-[#16]: https://github.com/kotools/types/issues/16
-[kotlin.Comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
-
 ```kotlin
 val text: NotBlankString = "hello world".toNotBlankString().getOrThrow()
 text as Comparable<NotBlankString> // before
 "$text" as Comparable<String> // after
 ```
 
+[#16]: https://github.com/kotools/types/issues/16
+[kotlin.Comparable]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable
+
 - Remove inheritance between the `NotEmptyList` and the
   [`List`][kotlin.collections.List] types (issue [#8]).
-
-[#8]: https://github.com/kotools/types/issues/8
-[kotlin.collections.List]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/#kotlin.collections.List
 
 ```kotlin
 val elements: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
@@ -383,11 +380,11 @@ elements as List<Int> // before
 elements.toList() // after
 ```
 
+[#8]: https://github.com/kotools/types/issues/8
+[kotlin.collections.List]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/#kotlin.collections.List
+
 - Remove inheritance between the `NotEmptySet` and the
   [`Set`][kotlin.collections.Set] types (issue [#9]).
-
-[#9]: https://github.com/kotools/types/issues/9
-[kotlin.collections.Set]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/#kotlin.collections.Set
 
 ```kotlin
 val elements: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
@@ -395,17 +392,20 @@ elements as Set<Int> // before
 elements.toSet() // after
 ```
 
+[#9]: https://github.com/kotools/types/issues/9
+[kotlin.collections.Set]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/#kotlin.collections.Set
+
 - Remove inheritance between the `NotEmptyMap` and the
   [`Map`][kotlin.collections.Map] types (issue [#10]).
-
-[#10]: https://github.com/kotools/types/issues/10
-[kotlin.collections.Map]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/#kotlin.collections.Map
 
 ```kotlin
 val entries: NotEmptyMap<String, Int> = notEmptyMapOf("a" to 1, "b" to 2)
 entries as Map<String, Int> // before
 entries.toMap() // after
 ```
+
+[#10]: https://github.com/kotools/types/issues/10
+[kotlin.collections.Map]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/#kotlin.collections.Map
 
 - Remove all declarations from previous API while keeping the essentials: the
   types and their builder (issue
