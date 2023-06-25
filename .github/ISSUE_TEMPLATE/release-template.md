@@ -17,3 +17,5 @@ Issues of this new version should be done before resolving this issue.
 - [ ] Release on the Maven central.
 - [ ] Create a release on the repository.
 - [ ] Update the related discussion.
+- [ ] Announce the release on [Twitter](https://twitter.com/KotoolsContact).
+- [ ] Plan tweets about features introduced by this version.
