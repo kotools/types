@@ -2,7 +2,10 @@ package kotools.types.range
 
 import kotools.types.experimental.ExperimentalRangeApi
 import kotlin.random.Random
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 @ExperimentalRangeApi
 class NotEmptyRangeTest {
@@ -12,7 +15,9 @@ class NotEmptyRangeTest {
         val first: Int = (Int.MIN_VALUE..0).random()
         val second: Int = (1..Int.MAX_VALUE).random()
         // WHEN
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.exclusive
+        }
         // THEN
         range.start.run {
             assertTrue("The range's start should be inclusive.") {
@@ -34,7 +39,9 @@ class NotEmptyRangeTest {
         val first: Int = (1..Int.MAX_VALUE).random()
         val second: Int = (Int.MIN_VALUE..0).random()
         // WHEN
-        val range = notEmptyRangeOf<Int> { first.exclusive to second.inclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.exclusive to second.inclusive
+        }
         // THEN
         range.start.run {
             assertTrue("The range's start should be inclusive.") {
@@ -55,7 +62,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = (Int.MIN_VALUE..0).random()
         val second: Int = (1..Int.MAX_VALUE).random()
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.inclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.inclusive
+        }
         // WHEN
         val result = "$range"
         // THEN
@@ -67,7 +76,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = (Int.MIN_VALUE..0).random()
         val second: Int = (1..Int.MAX_VALUE).random()
-        val range = notEmptyRangeOf<Int> { first.exclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.exclusive to second.exclusive
+        }
         // WHEN
         val result = "$range"
         // THEN
@@ -79,7 +90,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = (Int.MIN_VALUE..0).random()
         val second: Int = (1..Int.MAX_VALUE).random()
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.exclusive
+        }
         // WHEN
         val result = "$range"
         // THEN
@@ -91,7 +104,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = Random.nextInt()
         val second: Int = Random.nextInt()
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.inclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.inclusive
+        }
         val value: Int = (range.start.value..range.end.value).random()
         // WHEN & THEN
         assertTrue("The value should be included in the range.") {
@@ -104,7 +119,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = Random.nextInt()
         val second: Int = Random.nextInt()
-        val range = notEmptyRangeOf<Int> { first.exclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.exclusive to second.exclusive
+        }
         val value: Int = ((range.start.value + 1) until range.end.value)
             .random()
         // WHEN & THEN
@@ -118,7 +135,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = Random.nextInt()
         val second: Int = Random.nextInt()
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.exclusive
+        }
         val value: Int = (range.start.value until range.end.value).random()
         // WHEN & THEN
         assertTrue("The value should be included in the range.") {
@@ -131,7 +150,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = Random.nextInt()
         val second: Int = Random.nextInt()
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.inclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.inclusive
+        }
         val value: Int = range.end.value + 1
         // WHEN & THEN
         assertFalse("The value shouldn't be included in the range.") {
@@ -144,7 +165,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = Random.nextInt()
         val second: Int = Random.nextInt()
-        val range = notEmptyRangeOf<Int> { first.exclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.exclusive to second.exclusive
+        }
         val value: Int = range.end.value
         // WHEN & THEN
         assertFalse("The value shouldn't be included in the range.") {
@@ -157,7 +180,9 @@ class NotEmptyRangeTest {
         // GIVEN
         val first: Int = Random.nextInt()
         val second: Int = Random.nextInt()
-        val range = notEmptyRangeOf<Int> { first.inclusive to second.exclusive }
+        val range: NotEmptyRange<Int> = notEmptyRangeOf {
+            first.inclusive to second.exclusive
+        }
         val value: Int = range.end.let {
             if (it is InclusiveBound) it.value + 1 else it.value
         }

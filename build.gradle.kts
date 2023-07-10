@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
-    val kotlinVersion = "1.6.21"
+    val kotlinVersion = "1.7.10"
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     id("org.jetbrains.dokka") version kotlinVersion
@@ -38,7 +38,6 @@ kotlin {
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
-    sourceSets.all { languageSettings.optIn("kotlin.RequiresOptIn") }
 }
 
 tasks.withType<Jar> {
