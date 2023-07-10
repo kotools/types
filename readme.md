@@ -43,7 +43,7 @@ all your [Kotlin] projects!
 [kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.10-blue?logo=kotlin
 [kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.3.3-blue
+[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.4.0-blue
 [total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
 
 ## Design goals

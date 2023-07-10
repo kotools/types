@@ -21,11 +21,15 @@ dependencies {
     commonMainImplementation(platform(kotlin("bom")))
     commonTestImplementation(kotlin("test"))
 
-    // Serialization
-    fun serialization(module: String): String =
-        "org.jetbrains.kotlinx:kotlinx-serialization-$module:1.3.3"
-    commonMainImplementation(serialization("core"))
-    commonTestImplementation(serialization("json"))
+    // Kotlinx Serialization
+    fun kotlinxSerialization(module: String): String {
+        val group = "org.jetbrains.kotlinx"
+        val artifact = "kotlinx-serialization-$module"
+        val version = "1.4.0"
+        return "$group:$artifact:$version"
+    }
+    commonMainImplementation(kotlinxSerialization("core"))
+    commonTestImplementation(kotlinxSerialization("json"))
 }
 
 kotlin {
