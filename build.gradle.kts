@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
-    val kotlinVersion = "1.7.10"
+    val kotlinVersion = "1.7.21"
     kotlin("multiplatform") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.dokka") version kotlinVersion
+    id("org.jetbrains.dokka") version "1.7.20"
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.1"
     `maven-publish`
     signing
@@ -36,7 +36,7 @@ kotlin {
     explicitApi()
     js(IR, KotlinJsTargetDsl::browser)
     jvm {
-        compilations.all { kotlinOptions.jvmTarget = "1.8" }
+        compilations.all { kotlinOptions.jvmTarget = "17" }
         testRuns["test"].executionTask { useJUnitPlatform() }
     }
     linuxX64("linux")

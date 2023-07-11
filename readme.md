@@ -40,7 +40,7 @@ all your [Kotlin] projects!
 [kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.2.0&color=blue
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
-[kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.10-blue?logo=kotlin
+[kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.21-blue?logo=kotlin
 [kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.4.0-blue
