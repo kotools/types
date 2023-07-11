@@ -25,7 +25,7 @@ dependencies {
     fun kotlinxSerialization(module: String): String {
         val group = "org.jetbrains.kotlinx"
         val artifact = "kotlinx-serialization-$module"
-        val version = "1.4.0"
+        val version = "1.4.1"
         return "$group:$artifact:$version"
     }
     commonMainImplementation(kotlinxSerialization("core"))

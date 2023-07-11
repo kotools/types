@@ -22,11 +22,11 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-Support for [Kotlin 1.7.21] and [kotlinx.serialization 1.4.0] (issue [#142]).
+Support for [Kotlin 1.7.21] and [kotlinx.serialization 1.4.1] (issue [#142]).
 
 [#142]: https://github.com/kotools/types/issues/142
 [Kotlin 1.7.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.7.21
-[kotlinx.serialization 1.4.0]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.4.0
+[kotlinx.serialization 1.4.1]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.4.1
 
 ## 4.2.0
 
