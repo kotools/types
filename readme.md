@@ -118,6 +118,12 @@ Here's where you can [get started].
 [GitHub Discussions]: https://github.com/kotools/types/discussions
 [ideas]: https://github.com/kotools/types/discussions/categories/ideas
 
+## Show Your Support
+
+If you find this project useful, and you'd like to support our work, please
+consider giving it a ⭐️ on GitHub!
+Your support means a lot to us and helps us continue improving the library.
+
 ## Acknowledgements
 
 Thanks to [Loïc Lamarque] for creating and sharing this project with the open
