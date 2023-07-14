@@ -107,6 +107,18 @@ class NotEmptyListTest {
     }
 
     @Test
+    fun hashCode_should_return_a_unique_code() {
+        // GIVEN
+        val integers: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        // WHEN
+        val result: Int = integers.hashCode()
+        // THEN
+        val expected: Int = integers.toList()
+            .sumOf { it.hashCode() * 31 }
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun toList_should_return_all_elements_as_a_List() {
         val elements: List<Int> = List(3) { Random.nextInt() }
         val result: List<Int> = elements.toNotEmptyList()
