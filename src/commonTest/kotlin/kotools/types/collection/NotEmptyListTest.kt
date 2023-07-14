@@ -1,8 +1,12 @@
 package kotools.types.collection
 
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.shouldBeNotNull
@@ -15,6 +19,31 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class NotEmptyListTest {
+    @Test
+    fun notEmptyListOf_should_pass() {
+        val head: Int = Random.nextInt()
+        val tail: Array<Int> = List(2) { Random.nextInt() }
+            .toTypedArray()
+        val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
+        result.toList() contentShouldEqual listOf(head) + tail
+    }
+
+    @Test
+    fun collection_toNotEmptyList_should_pass_with_a_not_empty_Collection() {
+        val collection: Collection<Int> = List(3) { Random.nextInt() }
+        val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
+        result.getOrThrow().toList() contentShouldEqual collection
+    }
+
+    @Test
+    fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
+        val result: Result<NotEmptyList<Int>> = emptyList<Int>()
+            .toNotEmptyList()
+        val exception: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        exception.shouldHaveAMessage()
+    }
+
     @Test
     fun head_should_return_the_first_element_of_this_list() {
         val elements: NotEmptyList<Int> = List(3) { Random.nextInt() }
@@ -55,31 +84,6 @@ class NotEmptyListTest {
             .toNotEmptyList()
             .getOrThrow()
         "$elements" shouldEqual "${elements.toList()}"
-    }
-
-    @Test
-    fun notEmptyListOf_should_pass() {
-        val head: Int = Random.nextInt()
-        val tail: Array<Int> = List(2) { Random.nextInt() }
-            .toTypedArray()
-        val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
-        result.toList() contentShouldEqual listOf(head) + tail
-    }
-
-    @Test
-    fun collection_toNotEmptyList_should_pass_with_a_not_empty_Collection() {
-        val collection: Collection<Int> = List(3) { Random.nextInt() }
-        val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
-        result.getOrThrow().toList() contentShouldEqual collection
-    }
-
-    @Test
-    fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptyList<Int>> = emptyList<Int>()
-            .toNotEmptyList()
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
     }
 }
 

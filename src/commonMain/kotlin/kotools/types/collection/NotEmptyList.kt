@@ -9,22 +9,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
 
-/** Representation of lists that contain at least one element of type [E]. */
-@Serializable(NotEmptyListSerializer::class)
-@SinceKotoolsTypes("4.0")
-public data class NotEmptyList<out E> internal constructor(
-    override val head: E,
-    override val tail: NotEmptyList<E>? = null
-) : NotEmptyCollection<E> {
-    /** Returns all elements of this list as a [List] of type [E]. */
-    public fun toList(): List<E> {
-        val firstElement: List<E> = listOf(head)
-        return tail?.let { firstElement + it.toList() } ?: firstElement
-    }
-
-    override fun toString(): String = "${toList()}"
-}
-
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
@@ -53,6 +37,22 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
             NotEmptyList(head, tail)
         }
         ?: Result.failure(EmptyCollectionException)
+
+/** Representation of lists that contain at least one element of type [E]. */
+@Serializable(NotEmptyListSerializer::class)
+@SinceKotoolsTypes("4.0")
+public data class NotEmptyList<out E> internal constructor(
+    override val head: E,
+    override val tail: NotEmptyList<E>? = null
+) : NotEmptyCollection<E> {
+    /** Returns all elements of this list as a [List] of type [E]. */
+    public fun toList(): List<E> {
+        val firstElement: List<E> = listOf(head)
+        return tail?.let { firstElement + it.toList() } ?: firstElement
+    }
+
+    override fun toString(): String = "${toList()}"
+}
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptyList<E>> {
