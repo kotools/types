@@ -16,6 +16,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 
 class NotEmptyListTest {
@@ -67,6 +68,42 @@ class NotEmptyListTest {
     fun tail_should_return_null_with_a_singleton_list() {
         val result: NotEmptyList<Int>? = notEmptyListOf(Random.nextInt()).tail
         assertNull(result)
+    }
+
+    @Test
+    fun equals_should_pass_with_the_same_NotEmptyList() {
+        // GIVEN
+        val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        val y: NotEmptyList<Int> = x
+        // WHEN & THEN
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_pass_with_another_NotEmptyList_having_the_same_values() {
+        // GIVEN
+        val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        val y: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        // WHEN & THEN
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyList_having_another_head() {
+        // GIVEN
+        val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        val y: NotEmptyList<Int> = notEmptyListOf(-1, 2, 3)
+        // WHEN & THEN
+        assertNotEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyList_having_another_tail() {
+        // GIVEN
+        val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        val y: NotEmptyList<Int> = notEmptyListOf(1, -2, -3)
+        // WHEN & THEN
+        assertNotEquals(x, y)
     }
 
     @Test
