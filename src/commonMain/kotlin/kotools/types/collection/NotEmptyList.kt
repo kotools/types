@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
+import kotlin.jvm.JvmInline
 
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
@@ -39,12 +40,23 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
         ?: Result.failure(EmptyCollectionException)
 
 /** Representation of lists that contain at least one element of type [E]. */
+@JvmInline
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
-public data class NotEmptyList<out E> internal constructor(
-    override val head: E,
-    override val tail: NotEmptyList<E>? = null
+public value class NotEmptyList<out E> private constructor(
+    private val elements: List<E>
 ) : NotEmptyCollection<E> {
+    override val head: E get() = elements.first()
+    override val tail: NotEmptyList<E>?
+        get() = elements.drop(1)
+            .toNotEmptyList()
+            .getOrNull()
+
+    internal constructor(head: E, tail: NotEmptyList<E>? = null) : this(
+        tail?.run { listOf(head) + elements }
+            ?: listOf(head)
+    )
+
     /** Returns all elements of this list as a [List] of type [E]. */
     public fun toList(): List<E> {
         val firstElement: List<E> = listOf(head)
