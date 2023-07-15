@@ -58,12 +58,9 @@ public value class NotEmptyList<out E> private constructor(
     )
 
     /** Returns all elements of this list as a [List] of type [E]. */
-    public fun toList(): List<E> {
-        val firstElement: List<E> = listOf(head)
-        return tail?.let { firstElement + it.toList() } ?: firstElement
-    }
+    public fun toList(): List<E> = elements
 
-    override fun toString(): String = "${toList()}"
+    override fun toString(): String = "$elements"
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
