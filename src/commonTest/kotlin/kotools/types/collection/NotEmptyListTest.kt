@@ -38,11 +38,10 @@ class NotEmptyListTest {
 
     @Test
     fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptyList<Int>> = emptyList<Int>()
-            .toNotEmptyList()
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
+        val collection: Collection<Int> = emptyList()
+        val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
     }
 
     @Test
