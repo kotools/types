@@ -13,6 +13,14 @@ import kotlin.jvm.JvmInline
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
+ *
+ * ```kotlin
+ * import kotools.types.collection.NotEmptyList
+ * import kotools.types.collection.notEmptyListOf
+ *
+ * val integers: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+ * println(integers) // [1, 2, 3]
+ * ```
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
@@ -26,6 +34,19 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
  * Returns an encapsulated [NotEmptyList] containing all the elements of this
  * collection, or returns an encapsulated [IllegalArgumentException] if this
  * collection is [empty][Collection.isEmpty].
+ *
+ * ```kotlin
+ * import kotools.types.collection.NotEmptyList
+ * import kotools.types.collection.toNotEmptyList
+ *
+ * var collection: Collection<Int> = listOf(1, 2, 3)
+ * var result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
+ * println(result) // Success([1, 2, 3])
+ *
+ * collection = emptyList()
+ * result = collection.toNotEmptyList()
+ * println(result) // Failure(IllegalArgumentException)
+ * ```
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
@@ -39,7 +60,12 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
         }
         ?: Result.failure(EmptyCollectionException)
 
-/** Representation of lists that contain at least one element of type [E]. */
+/**
+ * Represents a list with at least one element of type [E].
+ *
+ * You can use the [notEmptyListOf] or the [toNotEmptyList] functions for
+ * building this type.
+ */
 @JvmInline
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
