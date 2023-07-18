@@ -83,7 +83,18 @@ public value class NotEmptyList<out E> private constructor(
             ?: listOf(head)
     )
 
-    /** Returns all elements of this list as a [List] of type [E]. */
+    /**
+     * Returns all elements of this list as a [List] of type [E].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyList
+     * import kotools.types.collection.notEmptyListOf
+     *
+     * val notEmptyList: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+     * val list: List<Int> = notEmptyList.toList()
+     * println(list) // [1, 2, 3]
+     * ```
+     */
     public fun toList(): List<E> = elements
 
     override fun toString(): String = "$elements"
