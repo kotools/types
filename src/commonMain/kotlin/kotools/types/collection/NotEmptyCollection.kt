@@ -47,7 +47,23 @@ public sealed interface NotEmptyCollection<out E> {
             .toStrictlyPositiveInt()
             .getOrThrow()
 
-    /** Returns the string representation of this collection. */
+    /**
+     * Returns the string representation of this collection.
+     *
+     * Implementations of this function should behave like calling the
+     * [Any.toString] function on an [Iterable].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyCollection
+     * import kotools.types.collection.notEmptyListOf
+     *
+     * val collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
+     * println(collection) // [1, 2, 3]
+     *
+     * val list: Iterable<Int> = listOf(1, 2, 3)
+     * println("$collection" == "$list") // true
+     * ```
+     */
     override fun toString(): String
 }
 
