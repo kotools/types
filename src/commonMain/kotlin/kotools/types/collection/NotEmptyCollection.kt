@@ -25,7 +25,20 @@ public sealed interface NotEmptyCollection<out E> {
      */
     public val head: E
 
-    /** All elements of this collection except the [first one][head]. */
+    /**
+     * All elements of this collection except the [first one][head].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyCollection
+     * import kotools.types.collection.notEmptyListOf
+     *
+     * var collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
+     * println(collection.tail) // [2, 3]
+     *
+     * collection = notEmptyListOf(-1)
+     * println(collection.tail) // null
+     * ```
+     */
     public val tail: NotEmptyCollection<E>? get() = null
 
     /** The size of this collection. */
