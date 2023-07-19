@@ -113,7 +113,7 @@ If you are looking to contribute, have questions, or want to keep up-to-date
 about what's happening, please follow us here and say hi!
 
 - [GitHub Discussions]
-- [#kotools-types on Kotlin Slack](https://kotlinlang.slack.com/archives/C05H0L1LD25)
+- [#kotools-types on Kotlin Slack]
 
 See the [contribution guidelines] for more details.
 
