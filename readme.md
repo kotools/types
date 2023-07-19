@@ -103,20 +103,23 @@ implementation "org.kotools:types:$version"
 </dependencies>
 ```
 
-## Contributing
+## Community
 
-Contributions are welcomed!
-Please check the [contribution guidelines] for doing so.
+As an Open-Source project, Kotools Types is in need of new contributors!
+We have issues suited for all levels, from entry to advanced.
+All are welcome in this project.
 
-You can also join us on [GitHub Discussions]!
-We use this place for communicating [ideas] or [announcements] to our community.
-Here's where you can [get started].
+If you are looking to contribute, have questions, or want to keep up-to-date
+about what's happening, please follow us here and say hi!
 
-[announcements]: https://github.com/kotools/types/discussions/categories/announcements
+- [GitHub Discussions]
+- [#kotools-types on Kotlin Slack](https://kotlinlang.slack.com/archives/C05H0L1LD25)
+
+See the [contribution guidelines] for more details.
+
+[#kotools-types on Kotlin Slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
 [contribution guidelines]: https://github.com/kotools/types/blob/main/contributing.md
-[get started]: https://github.com/kotools/types/discussions/24
 [GitHub Discussions]: https://github.com/kotools/types/discussions
-[ideas]: https://github.com/kotools/types/discussions/categories/ideas
 
 ## Show Your Support
 
