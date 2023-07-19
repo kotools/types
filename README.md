@@ -118,7 +118,7 @@ about what's happening, please follow us here and say hi!
 See the [contribution guidelines] for more details.
 
 [#kotools-types on Kotlin Slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
-[contribution guidelines]: https://github.com/kotools/types/blob/main/contributing.md
+[contribution guidelines]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md
 [GitHub Discussions]: https://github.com/kotools/types/discussions
 
 ## Show Your Support
