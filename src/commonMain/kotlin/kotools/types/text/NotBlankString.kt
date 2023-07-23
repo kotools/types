@@ -17,6 +17,15 @@ import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
 
 /**
+ * Returns this string as an encapsulated [NotBlankString], or returns an
+ * encapsulated [IllegalArgumentException] if this string is
+ * [blank][String.isBlank].
+ */
+@SinceKotoolsTypes("4.0")
+public fun String.toNotBlankString(): Result<NotBlankString> =
+    NotBlankString of this
+
+/**
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  */
@@ -79,15 +88,6 @@ public operator fun Char.plus(other: NotBlankString): NotBlankString =
     plus("$other")
         .toNotBlankString()
         .getOrThrow()
-
-/**
- * Returns this string as an encapsulated [NotBlankString], or returns an
- * encapsulated [IllegalArgumentException] if this string is
- * [blank][String.isBlank].
- */
-@SinceKotoolsTypes("4.0")
-public fun String.toNotBlankString(): Result<NotBlankString> =
-    NotBlankString of this
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(

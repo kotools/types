@@ -22,6 +22,21 @@ private object StringExample {
 
 class NotBlankStringTest {
     @Test
+    fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
+        val result: Result<NotBlankString> =
+            StringExample.NOT_BLANK.toNotBlankString()
+        "${result.getOrThrow()}" shouldEqual StringExample.NOT_BLANK
+    }
+
+    @Test
+    fun string_toNotBlankString_should_fail_with_a_blank_String() {
+        val result: Result<NotBlankString> =
+            StringExample.BLANK.toNotBlankString()
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
+    }
+
+    @Test
     fun length_should_return_a_StrictlyPositiveInt() {
         val result: StrictlyPositiveInt = StringExample.NOT_BLANK
             .toNotBlankString()
@@ -99,21 +114,6 @@ class NotBlankStringTest {
             .getOrThrow()
         val result: NotBlankString = first + second
         "$result" shouldEqual "$first$second"
-    }
-
-    @Test
-    fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
-        val result: Result<NotBlankString> =
-            StringExample.NOT_BLANK.toNotBlankString()
-        "${result.getOrThrow()}" shouldEqual StringExample.NOT_BLANK
-    }
-
-    @Test
-    fun string_toNotBlankString_should_fail_with_a_blank_String() {
-        val result: Result<NotBlankString> =
-            StringExample.BLANK.toNotBlankString()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
     }
 }
 
