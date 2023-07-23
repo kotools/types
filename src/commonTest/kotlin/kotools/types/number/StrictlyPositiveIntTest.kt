@@ -56,6 +56,21 @@ class StrictlyPositiveIntCompanionTest {
 }
 
 class StrictlyPositiveIntTest {
+    @Test
+    fun number_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
+        val number: Number = StrictlyPositiveInt.random().toInt()
+        val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
+        result.getOrThrow().toInt() shouldEqual number
+    }
+
+    @Test
+    fun number_toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
+        val number: Number = NegativeInt.random().toInt()
+        val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
+    }
+
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
@@ -71,21 +86,6 @@ class StrictlyPositiveIntTest {
     fun toString_should_behave_like_an_Int(): Unit = StrictlyPositiveInt
         .random()
         .run { "$this" shouldEqual "${toInt()}" }
-
-    @Test
-    fun number_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
-        val number: Number = StrictlyPositiveInt.random().toInt()
-        val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
-        result.getOrThrow().toInt() shouldEqual number
-    }
-
-    @Test
-    fun number_toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
-        val number: Number = NegativeInt.random().toInt()
-        val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
-    }
 }
 
 class StrictlyPositiveIntSerializerTest {
