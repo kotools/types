@@ -9,25 +9,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
 
-/** Representation of sets that contain at least one element of type [E]. */
-@Serializable(NotEmptySetSerializer::class)
-@SinceKotoolsTypes("4.0")
-public data class NotEmptySet<out E> internal constructor(
-    /** The first element of this set. */
-    override val head: E,
-    /** All elements of this set except [the first one][head]. */
-    override val tail: NotEmptySet<E>? = null
-) : NotEmptyCollection<E> {
-    /** Returns all elements of this set as a [Set] of type [E]. */
-    public fun toSet(): Set<E> {
-        val elements: Set<E> = setOf(head)
-        return tail?.let { elements + it.toSet() } ?: elements
-    }
-
-    /** Returns the string representation of this set. */
-    override fun toString(): String = "${toSet()}"
-}
-
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
@@ -54,6 +35,25 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
             NotEmptySet(head, tail)
         }
         ?: Result.failure(EmptyCollectionException)
+
+/** Representation of sets that contain at least one element of type [E]. */
+@Serializable(NotEmptySetSerializer::class)
+@SinceKotoolsTypes("4.0")
+public data class NotEmptySet<out E> internal constructor(
+    /** The first element of this set. */
+    override val head: E,
+    /** All elements of this set except [the first one][head]. */
+    override val tail: NotEmptySet<E>? = null
+) : NotEmptyCollection<E> {
+    /** Returns all elements of this set as a [Set] of type [E]. */
+    public fun toSet(): Set<E> {
+        val elements: Set<E> = setOf(head)
+        return tail?.let { elements + it.toSet() } ?: elements
+    }
+
+    /** Returns the string representation of this set. */
+    override fun toString(): String = "${toSet()}"
+}
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptySet<E>> {

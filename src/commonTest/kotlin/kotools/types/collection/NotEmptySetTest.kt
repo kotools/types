@@ -1,8 +1,12 @@
 package kotools.types.collection
 
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.shouldBeNotNull
@@ -15,6 +19,31 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class NotEmptySetTest {
+    @Test
+    fun notEmptySetOf_should_pass() {
+        val head: Int = Random.nextInt()
+        val tail: Array<Int> = List(2) { Random.nextInt() }
+            .toTypedArray()
+        val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
+        result.toSet() contentShouldEqual listOf(head) + tail
+    }
+
+    @Test
+    fun collection_toNotEmptySet_should_pass_with_a_not_empty_Collection() {
+        val elements: List<Int> = List(3) { Random.nextInt() }
+        val result: Result<NotEmptySet<Int>> = elements.toNotEmptySet()
+        result.getOrThrow().toSet() contentShouldEqual elements
+    }
+
+    @Test
+    fun collection_toNotEmptySet_should_fail_with_an_empty_Collection() {
+        val result: Result<NotEmptySet<Int>> = emptySet<Int>()
+            .toNotEmptySet()
+        val exception: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        exception.shouldHaveAMessage()
+    }
+
     @Test
     fun head_should_return_the_first_element_of_this_set() {
         val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
@@ -54,31 +83,6 @@ class NotEmptySetTest {
             .toNotEmptySet()
             .getOrThrow()
         "$elements" shouldEqual "${elements.toSet()}"
-    }
-
-    @Test
-    fun notEmptySetOf_should_pass() {
-        val head: Int = Random.nextInt()
-        val tail: Array<Int> = List(2) { Random.nextInt() }
-            .toTypedArray()
-        val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
-        result.toSet() contentShouldEqual listOf(head) + tail
-    }
-
-    @Test
-    fun collection_toNotEmptySet_should_pass_with_a_not_empty_Collection() {
-        val elements: List<Int> = List(3) { Random.nextInt() }
-        val result: Result<NotEmptySet<Int>> = elements.toNotEmptySet()
-        result.getOrThrow().toSet() contentShouldEqual elements
-    }
-
-    @Test
-    fun collection_toNotEmptySet_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptySet<Int>> = emptySet<Int>()
-            .toNotEmptySet()
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
     }
 }
 
