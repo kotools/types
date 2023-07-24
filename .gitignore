@@ -27,6 +27,7 @@ target/
 
 # Files
 hs_err_pid*
+Playground.kt
 
 # ---------- Jetbrains IDEs ----------
 
