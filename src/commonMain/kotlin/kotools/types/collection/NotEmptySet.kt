@@ -98,7 +98,6 @@ public value class NotEmptySet<out E> private constructor(
         return tail?.let { elements + it.toSet() } ?: elements
     }
 
-    /** Returns the string representation of this set. */
     override fun toString(): String = "${toSet()}"
 }
 
