@@ -16,6 +16,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 
 class NotEmptySetTest {
@@ -67,6 +68,34 @@ class NotEmptySetTest {
     fun tail_should_return_null_with_a_singleton_set() {
         val result: NotEmptySet<Int>? = notEmptySetOf(Random.nextInt()).tail
         assertNull(result)
+    }
+
+    @Test
+    fun equals_should_pass_with_the_same_NotEmptySet() {
+        val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
+        val y: NotEmptySet<Int> = x
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_pass_with_another_NotEmptySet_having_the_same_values() {
+        val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
+        val y: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptySet_having_another_head() {
+        val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
+        val y: NotEmptySet<Int> = notEmptySetOf(-1, 2, 3)
+        assertNotEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptySet_having_another_tail() {
+        val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
+        val y: NotEmptySet<Int> = notEmptySetOf(1, -2, -3)
+        assertNotEquals(x, y)
     }
 
     @Test
