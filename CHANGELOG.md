@@ -28,9 +28,11 @@ All notable changes to this project will be documented in this file.
 [Kotlin 1.7.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.7.21
 [kotlinx.serialization 1.4.1]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.4.1
 
-- Convert to inline classes the `NotEmptyList` type (issue [#136]).
+- Convert the `NotEmptyList` (issue [#136]) and the `NotEmptySet` (issue [#137])
+  types to inline classes.
 
 [#136]: https://github.com/kotools/types/issues/136
+[#137]: https://github.com/kotools/types/issues/137
 
 ## 4.2.0
 
