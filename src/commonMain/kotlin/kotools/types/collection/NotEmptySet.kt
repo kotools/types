@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
+import kotlin.jvm.JvmInline
 
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
@@ -37,14 +38,23 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
         ?: Result.failure(EmptyCollectionException)
 
 /** Representation of sets that contain at least one element of type [E]. */
+@JvmInline
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("4.0")
-public data class NotEmptySet<out E> internal constructor(
-    /** The first element of this set. */
-    override val head: E,
-    /** All elements of this set except [the first one][head]. */
-    override val tail: NotEmptySet<E>? = null
+public value class NotEmptySet<out E> private constructor(
+    private val elements: Set<E>
 ) : NotEmptyCollection<E> {
+    override val head: E get() = elements.first()
+    override val tail: NotEmptySet<E>?
+        get() = elements.drop(1)
+            .toNotEmptySet()
+            .getOrNull()
+
+    internal constructor(head: E, tail: NotEmptySet<E>? = null) : this(
+        tail?.run { setOf(head) + elements }
+            ?: setOf(head)
+    )
+
     /** Returns all elements of this set as a [Set] of type [E]. */
     public fun toSet(): Set<E> {
         val elements: Set<E> = setOf(head)
