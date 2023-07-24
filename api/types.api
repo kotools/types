@@ -52,9 +52,9 @@ public final class kotools/types/collection/NotEmptyMap {
 	public final fun copy (Lkotlin/Pair;Lkotools/types/collection/NotEmptyMap;)Lkotools/types/collection/NotEmptyMap;
 	public static synthetic fun copy$default (Lkotools/types/collection/NotEmptyMap;Lkotlin/Pair;Lkotools/types/collection/NotEmptyMap;ILjava/lang/Object;)Lkotools/types/collection/NotEmptyMap;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getEntries ()Lkotools/types/collection/NotEmptySet;
+	public final fun getEntries-ACUmxPA ()Ljava/util/Set;
 	public final fun getHead ()Lkotlin/Pair;
-	public final fun getKeys ()Lkotools/types/collection/NotEmptySet;
+	public final fun getKeys-ACUmxPA ()Ljava/util/Set;
 	public final fun getSize-qaD5h0E ()I
 	public final fun getTail ()Lkotools/types/collection/NotEmptyMap;
 	public final fun getValues-HJvt-YE ()Ljava/util/List;
@@ -74,18 +74,24 @@ public final class kotools/types/collection/NotEmptyMapKt {
 
 public final class kotools/types/collection/NotEmptySet : kotools/types/collection/NotEmptyCollection {
 	public static final field Companion Lkotools/types/collection/NotEmptySet$Companion;
-	public final fun component1 ()Ljava/lang/Object;
-	public final fun component2 ()Lkotools/types/collection/NotEmptySet;
-	public final fun copy (Ljava/lang/Object;Lkotools/types/collection/NotEmptySet;)Lkotools/types/collection/NotEmptySet;
-	public static synthetic fun copy$default (Lkotools/types/collection/NotEmptySet;Ljava/lang/Object;Lkotools/types/collection/NotEmptySet;ILjava/lang/Object;)Lkotools/types/collection/NotEmptySet;
+	public static final synthetic fun box-impl (Ljava/util/Set;)Lkotools/types/collection/NotEmptySet;
+	public static synthetic fun constructor-impl$default (Ljava/lang/Object;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)Ljava/util/Set;
 	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/util/Set;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/util/Set;Ljava/util/Set;)Z
 	public fun getHead ()Ljava/lang/Object;
+	public static fun getHead-impl (Ljava/util/Set;)Ljava/lang/Object;
 	public fun getSize-qaD5h0E ()I
+	public static fun getSize-qaD5h0E (Ljava/util/Set;)I
 	public synthetic fun getTail ()Lkotools/types/collection/NotEmptyCollection;
-	public fun getTail ()Lkotools/types/collection/NotEmptySet;
+	public fun getTail-vmmmIIs ()Ljava/util/Set;
+	public static fun getTail-vmmmIIs (Ljava/util/Set;)Ljava/util/Set;
 	public fun hashCode ()I
-	public final fun toSet ()Ljava/util/Set;
+	public static fun hashCode-impl (Ljava/util/Set;)I
+	public static final fun toSet-impl (Ljava/util/Set;)Ljava/util/Set;
 	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/util/Set;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/util/Set;
 }
 
 public final class kotools/types/collection/NotEmptySet$Companion {
@@ -93,7 +99,7 @@ public final class kotools/types/collection/NotEmptySet$Companion {
 }
 
 public final class kotools/types/collection/NotEmptySetKt {
-	public static final fun notEmptySetOf (Ljava/lang/Object;[Ljava/lang/Object;)Lkotools/types/collection/NotEmptySet;
+	public static final fun notEmptySetOf (Ljava/lang/Object;[Ljava/lang/Object;)Ljava/util/Set;
 	public static final fun toNotEmptySet (Ljava/util/Collection;)Ljava/lang/Object;
 }
 
@@ -358,7 +364,7 @@ public abstract interface class kotools/types/result/ResultContext {
 	public abstract fun toNotBlankString-ORnXyy4 (Ljava/lang/String;)Ljava/lang/String;
 	public abstract fun toNotEmptyList-e92u5Zk (Ljava/util/Collection;)Ljava/util/List;
 	public abstract fun toNotEmptyMap (Ljava/util/Map;)Lkotools/types/collection/NotEmptyMap;
-	public abstract fun toNotEmptySet (Ljava/util/Collection;)Lkotools/types/collection/NotEmptySet;
+	public abstract fun toNotEmptySet-Ljx6-Bk (Ljava/util/Collection;)Ljava/util/Set;
 	public abstract fun toPositiveInt (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public abstract fun toStrictlyNegativeInt-C9D9PS4 (Ljava/lang/Number;)I
 	public abstract fun toStrictlyPositiveDouble-7dDooEQ (Ljava/lang/Number;)D
@@ -371,7 +377,7 @@ public final class kotools/types/result/ResultContext$DefaultImpls {
 	public static fun toNotBlankString-ORnXyy4 (Lkotools/types/result/ResultContext;Ljava/lang/String;)Ljava/lang/String;
 	public static fun toNotEmptyList-e92u5Zk (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Ljava/util/List;
 	public static fun toNotEmptyMap (Lkotools/types/result/ResultContext;Ljava/util/Map;)Lkotools/types/collection/NotEmptyMap;
-	public static fun toNotEmptySet (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Lkotools/types/collection/NotEmptySet;
+	public static fun toNotEmptySet-Ljx6-Bk (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Ljava/util/Set;
 	public static fun toPositiveInt (Lkotools/types/result/ResultContext;Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public static fun toStrictlyNegativeInt-C9D9PS4 (Lkotools/types/result/ResultContext;Ljava/lang/Number;)I
 	public static fun toStrictlyPositiveDouble-7dDooEQ (Lkotools/types/result/ResultContext;Ljava/lang/Number;)D
