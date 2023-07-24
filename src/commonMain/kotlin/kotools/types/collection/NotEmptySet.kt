@@ -81,7 +81,18 @@ public value class NotEmptySet<out E> private constructor(
             ?: setOf(head)
     )
 
-    /** Returns all elements of this set as a [Set] of type [E]. */
+    /**
+     * Returns all elements of this set as a [Set] of type [E].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptySet
+     * import kotools.types.collection.notEmptySetOf
+     *
+     * val notEmptySet: NotEmptySet<Int> = notEmptySetOf(1, 2, 3, 1)
+     * val set: Set<Int> = notEmptySet.toSet()
+     * println(set) // [1, 2, 3]
+     * ```
+     */
     public fun toSet(): Set<E> {
         val elements: Set<E> = setOf(head)
         return tail?.let { elements + it.toSet() } ?: elements
