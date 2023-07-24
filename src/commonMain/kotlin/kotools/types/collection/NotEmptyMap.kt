@@ -12,6 +12,38 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 
 /**
+ * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
+ * of the optional [tail].
+ */
+@SinceKotoolsTypes("4.0")
+public fun <K, V> notEmptyMapOf(
+    head: Pair<K, V>,
+    vararg tail: Pair<K, V>
+): NotEmptyMap<K, V> = mapOf(head, *tail)
+    .toNotEmptyMap()
+    .getOrThrow()
+
+/**
+ * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
+ * or returns an encapsulated [IllegalArgumentException] if this map is
+ * [empty][Map.isEmpty].
+ */
+@SinceKotoolsTypes("4.0")
+public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
+    takeIf(Map<K, V>::isNotEmpty)
+        ?.entries
+        ?.map(Map.Entry<K, V>::toPair)
+        ?.runCatching {
+            val head: Pair<K, V> = first()
+            val tail: NotEmptyMap<K, V>? = drop(1)
+                .toMap()
+                .toNotEmptyMap()
+                .getOrNull()
+            NotEmptyMap(head, tail)
+        }
+        ?: Result.failure(EmptyMapException)
+
+/**
  * Representation of maps that contain at least one entry with a key of type
  * [K] and a value of type [V].
  */
@@ -57,38 +89,6 @@ public data class NotEmptyMap<K, out V> internal constructor(
     /** Returns the string representation of this map. */
     override fun toString(): String = "${toMap()}"
 }
-
-/**
- * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
- * of the optional [tail].
- */
-@SinceKotoolsTypes("4.0")
-public fun <K, V> notEmptyMapOf(
-    head: Pair<K, V>,
-    vararg tail: Pair<K, V>
-): NotEmptyMap<K, V> = mapOf(head, *tail)
-    .toNotEmptyMap()
-    .getOrThrow()
-
-/**
- * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
- * or returns an encapsulated [IllegalArgumentException] if this map is
- * [empty][Map.isEmpty].
- */
-@SinceKotoolsTypes("4.0")
-public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
-    takeIf(Map<K, V>::isNotEmpty)
-        ?.entries
-        ?.map(Map.Entry<K, V>::toPair)
-        ?.runCatching {
-            val head: Pair<K, V> = first()
-            val tail: NotEmptyMap<K, V>? = drop(1)
-                .toMap()
-                .toNotEmptyMap()
-                .getOrNull()
-            NotEmptyMap(head, tail)
-        }
-        ?: Result.failure(EmptyMapException)
 
 internal class NotEmptyMapSerializer<K, V>(
     keySerializer: KSerializer<K>,
