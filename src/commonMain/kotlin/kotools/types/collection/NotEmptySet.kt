@@ -13,6 +13,14 @@ import kotlin.jvm.JvmInline
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
+ *
+ * ```kotlin
+ * import kotools.types.collection.NotEmptySet
+ * import kotools.types.collection.notEmptySetOf
+ *
+ * val integers: NotEmptySet<Int> = notEmptySetOf(1, 2, 3, 1)
+ * println(integers) // [1, 2, 3]
+ * ```
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
