@@ -32,6 +32,19 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
  * Returns an encapsulated [NotEmptySet] containing all the elements of this
  * collection, or returns an encapsulated [IllegalArgumentException] if this
  * collection is [empty][Collection.isEmpty].
+ *
+ * ```kotlin
+ * import kotools.types.collection.NotEmptySet
+ * import kotools.types.collection.toNotEmptySet
+ *
+ * var collection: Collection<Int> = setOf(1, 2, 3, 1)
+ * var result: Result<NotEmptySet<Int>> = collection.toNotEmptySet()
+ * println(result) // Success([1, 2, 3])
+ *
+ * collection = emptySet()
+ * result = collection.toNotEmptySet()
+ * println(result) // Failure(IllegalArgumentException)
+ * ```
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
