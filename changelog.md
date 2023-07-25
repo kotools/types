@@ -107,6 +107,26 @@ x.toInt()
 println(-x) // -1
 ```
 
+### Changed
+
+- Support for [Kotlin 1.6.21] and [kotlinx.serialization 1.3.3] (issue [#51]).
+
+[#51]: https://github.com/kotools/types/issues/51
+[kotlin 1.6.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.6.21
+[kotlinx.serialization 1.3.3]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
+
+- Relocate the library from `io.github.kotools` to `org.kotools` (issue [#63]).
+  Here's an example using the Kotlin DSL in Gradle:
+
+[#63]: https://github.com/kotools/types/issues/63
+
+```kotlin
+// before
+implementation("io.github.kotools:types:$version")
+// after
+implementation("org.kotools:types:$version")
+```
+
 ### Deprecated
 
 The collections declared as [data classes] will be converted to [classes] (or
@@ -131,26 +151,6 @@ y = x.toList()
     .toNotEmptyList()
     .getOrThrow()
 println(x == z) // true
-```
-
-### Changed
-
-- Support for [Kotlin 1.6.21] and [kotlinx.serialization 1.3.3] (issue [#51]).
-
-[#51]: https://github.com/kotools/types/issues/51
-[kotlin 1.6.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.6.21
-[kotlinx.serialization 1.3.3]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
-
-- Relocate the library from `io.github.kotools` to `org.kotools` (issue [#63]).
-  Here's an example using the Kotlin DSL in Gradle:
-
-[#63]: https://github.com/kotools/types/issues/63
-
-```kotlin
-// before
-implementation("io.github.kotools:types:$version")
-// after
-implementation("org.kotools:types:$version")
 ```
 
 ### Security
@@ -185,6 +185,10 @@ val expectedSerialName: String = ListSerializer(elementSerializer)
     .serialName
 println(notEmptyListSerialName == expectedSerialName) // true
 ```
+
+[kotlinx.serialization.SerialDescriptor]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.descriptors/-serial-descriptor.html
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
+[#77]: https://github.com/kotools/types/issues/77
 
 ## 4.1.0
 
