@@ -119,6 +119,26 @@ println(-x) // -1
 [#54]: https://github.com/kotools/types/issues/54
 [@MichaelStH]: https://github.com/MichaelStH
 
+### Changed
+
+- Support for [Kotlin 1.6.21] and [kotlinx.serialization 1.3.3] (issue [#51]).
+
+[#51]: https://github.com/kotools/types/issues/51
+[kotlin 1.6.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.6.21
+[kotlinx.serialization 1.3.3]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
+
+- Relocate the library from `io.github.kotools` to `org.kotools` (issue [#63]).
+  Here's an example using the Kotlin DSL in Gradle:
+
+```kotlin
+// before
+implementation("io.github.kotools:types:$version")
+// after
+implementation("org.kotools:types:$version")
+```
+
+[#63]: https://github.com/kotools/types/issues/63
+
 ### Deprecated
 
 The collections declared as [data classes] will be converted to [classes] (or
@@ -144,26 +164,6 @@ println(x == z) // true
 [classes]: https://kotlinlang.org/docs/classes.html
 [data classes]: https://kotlinlang.org/docs/data-classes.html
 [inline classes]: https://kotlinlang.org/docs/inline-classes.html
-
-### Changed
-
-- Support for [Kotlin 1.6.21] and [kotlinx.serialization 1.3.3] (issue [#51]).
-
-[#51]: https://github.com/kotools/types/issues/51
-[kotlin 1.6.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.6.21
-[kotlinx.serialization 1.3.3]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
-
-- Relocate the library from `io.github.kotools` to `org.kotools` (issue [#63]).
-  Here's an example using the Kotlin DSL in Gradle:
-
-```kotlin
-// before
-implementation("io.github.kotools:types:$version")
-// after
-implementation("org.kotools:types:$version")
-```
-
-[#63]: https://github.com/kotools/types/issues/63
 
 ### Security
 
