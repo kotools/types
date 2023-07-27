@@ -78,7 +78,17 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
 public value class NotEmptyMap<K, out V> private constructor(
     private val map: Map<K, V>
 ) {
-    /** The first entry of this map. */
+    /**
+     * The first entry of this map.
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyMap
+     * import kotools.types.collection.notEmptyMapOf
+     *
+     * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+     * println(map.head) // (a, 1)
+     * ```
+     */
     public val head: Pair<K, V>
         get() = map.entries.first()
             .toPair()
