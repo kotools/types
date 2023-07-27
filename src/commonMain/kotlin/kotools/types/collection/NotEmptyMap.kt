@@ -86,7 +86,8 @@ public value class NotEmptyMap<K, out V> private constructor(
      * import kotools.types.collection.notEmptyMapOf
      *
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
-     * println(map.head) // (a, 1)
+     * val head: Pair<Char, Int> = map.head
+     * println(head) // (a, 1)
      * ```
      */
     public val head: Pair<K, V>
