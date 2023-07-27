@@ -165,7 +165,19 @@ public value class NotEmptyMap<K, out V> private constructor(
         get() = map.values.toNotEmptyList()
             .getOrThrow()
 
-    /** The size of this map. */
+    /**
+     * The size of this map.
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyMap
+     * import kotools.types.collection.notEmptyMapOf
+     * import kotools.types.number.StrictlyPositiveInt
+     *
+     * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+     * val size: StrictlyPositiveInt = map.size
+     * println(size) // 2
+     * ```
+     */
     public val size: StrictlyPositiveInt
         get() = map.size.toStrictlyPositiveInt()
             .getOrThrow()
