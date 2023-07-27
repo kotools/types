@@ -16,10 +16,9 @@ import kotlin.jvm.JvmInline
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  *
- * ```kotlin
- * import kotools.types.collection.NotEmptyMap
- * import kotools.types.collection.notEmptyMapOf
+ * #### Samples
  *
+ * ```kotlin
  * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
  * println(map) // {a=1, b=2}
  * ```
@@ -28,9 +27,12 @@ import kotlin.jvm.JvmInline
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
-): NotEmptyMap<K, V> = mapOf(head, *tail)
-    .toNotEmptyMap()
-    .getOrThrow()
+): NotEmptyMap<K, V> {
+    val t: NotEmptyMap<K, V>? = tail.toMap()
+        .toNotEmptyMap()
+        .getOrNull()
+    return NotEmptyMap(head, tail = t)
+}
 
 /**
  * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
