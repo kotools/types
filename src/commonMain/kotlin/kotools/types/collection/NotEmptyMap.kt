@@ -103,7 +103,8 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * val map: NotEmptyMap<Char, Int> =
      *     notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
-     * println(map.tail) // {b=2, c=3}
+     * val tail: NotEmptyMap<Char, Int>? = map.tail
+     * println(tail) // {b=2, c=3}
      * ```
      */
     public val tail: NotEmptyMap<K, V>?
