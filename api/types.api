@@ -47,20 +47,23 @@ public final class kotools/types/collection/NotEmptyListKt {
 
 public final class kotools/types/collection/NotEmptyMap {
 	public static final field Companion Lkotools/types/collection/NotEmptyMap$Companion;
-	public final fun component1 ()Lkotlin/Pair;
-	public final fun component2 ()Lkotools/types/collection/NotEmptyMap;
-	public final fun copy (Lkotlin/Pair;Lkotools/types/collection/NotEmptyMap;)Lkotools/types/collection/NotEmptyMap;
-	public static synthetic fun copy$default (Lkotools/types/collection/NotEmptyMap;Lkotlin/Pair;Lkotools/types/collection/NotEmptyMap;ILjava/lang/Object;)Lkotools/types/collection/NotEmptyMap;
+	public static final synthetic fun box-impl (Ljava/util/Map;)Lkotools/types/collection/NotEmptyMap;
+	public static synthetic fun constructor-impl$default (Lkotlin/Pair;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)Ljava/util/Map;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getEntries-ACUmxPA ()Ljava/util/Set;
-	public final fun getHead ()Lkotlin/Pair;
-	public final fun getKeys-ACUmxPA ()Ljava/util/Set;
-	public final fun getSize-qaD5h0E ()I
-	public final fun getTail ()Lkotools/types/collection/NotEmptyMap;
-	public final fun getValues-HJvt-YE ()Ljava/util/List;
+	public static fun equals-impl (Ljava/util/Map;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/util/Map;Ljava/util/Map;)Z
+	public static final fun getEntries-ACUmxPA (Ljava/util/Map;)Ljava/util/Set;
+	public static final fun getHead-impl (Ljava/util/Map;)Lkotlin/Pair;
+	public static final fun getKeys-ACUmxPA (Ljava/util/Map;)Ljava/util/Set;
+	public static final fun getSize-qaD5h0E (Ljava/util/Map;)I
+	public static final fun getTail-mQT3pko (Ljava/util/Map;)Ljava/util/Map;
+	public static final fun getValues-HJvt-YE (Ljava/util/Map;)Ljava/util/List;
 	public fun hashCode ()I
-	public final fun toMap ()Ljava/util/Map;
+	public static fun hashCode-impl (Ljava/util/Map;)I
+	public static final fun toMap-impl (Ljava/util/Map;)Ljava/util/Map;
 	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/util/Map;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/util/Map;
 }
 
 public final class kotools/types/collection/NotEmptyMap$Companion {
@@ -68,7 +71,7 @@ public final class kotools/types/collection/NotEmptyMap$Companion {
 }
 
 public final class kotools/types/collection/NotEmptyMapKt {
-	public static final fun notEmptyMapOf (Lkotlin/Pair;[Lkotlin/Pair;)Lkotools/types/collection/NotEmptyMap;
+	public static final fun notEmptyMapOf (Lkotlin/Pair;[Lkotlin/Pair;)Ljava/util/Map;
 	public static final fun toNotEmptyMap (Ljava/util/Map;)Ljava/lang/Object;
 }
 
@@ -363,7 +366,7 @@ public abstract interface class kotools/types/result/ResultContext {
 	public abstract fun toNonZeroInt (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public abstract fun toNotBlankString-ORnXyy4 (Ljava/lang/String;)Ljava/lang/String;
 	public abstract fun toNotEmptyList-e92u5Zk (Ljava/util/Collection;)Ljava/util/List;
-	public abstract fun toNotEmptyMap (Ljava/util/Map;)Lkotools/types/collection/NotEmptyMap;
+	public abstract fun toNotEmptyMap-3-tQUDg (Ljava/util/Map;)Ljava/util/Map;
 	public abstract fun toNotEmptySet-Ljx6-Bk (Ljava/util/Collection;)Ljava/util/Set;
 	public abstract fun toPositiveInt (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public abstract fun toStrictlyNegativeInt-C9D9PS4 (Ljava/lang/Number;)I
@@ -376,7 +379,7 @@ public final class kotools/types/result/ResultContext$DefaultImpls {
 	public static fun toNonZeroInt (Lkotools/types/result/ResultContext;Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public static fun toNotBlankString-ORnXyy4 (Lkotools/types/result/ResultContext;Ljava/lang/String;)Ljava/lang/String;
 	public static fun toNotEmptyList-e92u5Zk (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Ljava/util/List;
-	public static fun toNotEmptyMap (Lkotools/types/result/ResultContext;Ljava/util/Map;)Lkotools/types/collection/NotEmptyMap;
+	public static fun toNotEmptyMap-3-tQUDg (Lkotools/types/result/ResultContext;Ljava/util/Map;)Ljava/util/Map;
 	public static fun toNotEmptySet-Ljx6-Bk (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Ljava/util/Set;
 	public static fun toPositiveInt (Lkotools/types/result/ResultContext;Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public static fun toStrictlyNegativeInt-C9D9PS4 (Lkotools/types/result/ResultContext;Ljava/lang/Number;)I
