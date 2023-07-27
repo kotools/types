@@ -101,6 +101,34 @@ class NotEmptyMapTest {
     }
 
     @Test
+    fun equals_should_pass_with_the_same_NotEmptyMap() {
+        val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val y: NotEmptyMap<Char, Int> = x
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_pass_with_another_NotEmptyMap_having_the_same_values() {
+        val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val y: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyMap_having_another_head() {
+        val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val y: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to -1, 'b' to 2)
+        assertNotEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_NotEmptyMap_having_another_tail() {
+        val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val y: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to -2)
+        assertNotEquals(x, y)
+    }
+
+    @Test
     fun toString_should_behave_like_a_Map() {
         val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
             "a" to Random.nextInt(),
