@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.SinceKotoolsTypes
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
+import kotlin.jvm.JvmInline
 
 /**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
@@ -47,32 +48,51 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  * Representation of maps that contain at least one entry with a key of type
  * [K] and a value of type [V].
  */
+@JvmInline
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")
-public data class NotEmptyMap<K, out V> internal constructor(
-    /** The first entry of this map. */
-    public val head: Pair<K, V>,
-    /** All entries of this map except [the first one][head]. */
-    public val tail: NotEmptyMap<K, V>? = null
+public value class NotEmptyMap<K, out V> private constructor(
+    private val map: Map<K, V>
 ) {
+    /** The first entry of this map. */
+    public val head: Pair<K, V>
+        get() = map.entries.first()
+            .toPair()
+
+    /** All entries of this map except [the first one][head]. */
+    public val tail: NotEmptyMap<K, V>?
+        get() = map.entries.drop(1)
+            .takeIf { it.isNotEmpty() }
+            ?.associate { it.toPair() }
+            ?.toNotEmptyMap()
+            ?.getOrNull()
+
     /** All entries of this map. */
-    public val entries: NotEmptySet<Map.Entry<K, V>> by lazy(
-        toMap().entries.toNotEmptySet()::getOrThrow
-    )
+    public val entries: NotEmptySet<Map.Entry<K, V>>
+        get() = map.entries.toNotEmptySet()
+            .getOrThrow()
 
     /** All keys of this map. */
-    public val keys: NotEmptySet<K> by lazy(
-        toMap().keys.toNotEmptySet()::getOrThrow
-    )
+    public val keys: NotEmptySet<K>
+        get() = map.keys.toNotEmptySet()
+            .getOrThrow()
 
     /** All values of this map. */
-    public val values: NotEmptyList<V> by lazy(
-        toMap().values.toNotEmptyList()::getOrThrow
-    )
+    public val values: NotEmptyList<V>
+        get() = map.values.toNotEmptyList()
+            .getOrThrow()
 
     /** The size of this map. */
-    public val size: StrictlyPositiveInt by lazy(
-        toMap().size.toStrictlyPositiveInt()::getOrThrow
+    public val size: StrictlyPositiveInt
+        get() = map.size.toStrictlyPositiveInt()
+            .getOrThrow()
+
+    internal constructor(
+        head: Pair<K, V>,
+        tail: NotEmptyMap<K, V>? = null
+    ) : this(
+        tail?.run { mapOf(head) + map }
+            ?: mapOf(head)
     )
 
     /**

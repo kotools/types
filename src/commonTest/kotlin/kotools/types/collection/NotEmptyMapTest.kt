@@ -49,6 +49,33 @@ class NotEmptyMapTest {
     }
 
     @Test
+    fun head_should_return_its_first_entry() {
+        val expected: Pair<Char, Int> = 'a' to 1
+        val entries: NotEmptyMap<Char, Int> = notEmptyMapOf(expected, 'b' to 2)
+        val head: Pair<Char, Int> = entries.head
+        assertEquals(expected, actual = head)
+    }
+
+    @Test
+    fun tail_should_return_all_its_entries_except_the_first_one() {
+        val expected: NotEmptyMap<Char, Int> = notEmptyMapOf('b' to 2)
+        val entries: NotEmptyMap<Char, Int> = expected.entries.toSet()
+            .map { it.toPair() }
+            .toTypedArray()
+            .let { notEmptyMapOf('a' to 1, *it) }
+        val tail: NotEmptyMap<Char, Int>? = entries.tail
+        val actual: NotEmptyMap<Char, Int> = assertNotNull(tail)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun tail_should_return_null_with_a_singleton_map() {
+        val entries: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1)
+        val tail: NotEmptyMap<Char, Int>? = entries.tail
+        assertNull(tail)
+    }
+
+    @Test
     fun entries_should_return_all_entries_of_this_map_as_a_NotEmptySet() {
         val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
             "a" to Random.nextInt(),
