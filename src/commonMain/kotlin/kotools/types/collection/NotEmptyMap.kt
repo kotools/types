@@ -148,7 +148,19 @@ public value class NotEmptyMap<K, out V> private constructor(
         get() = map.keys.toNotEmptySet()
             .getOrThrow()
 
-    /** All values of this map. */
+    /**
+     * All values of this map.
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyList
+     * import kotools.types.collection.NotEmptyMap
+     * import kotools.types.collection.notEmptyMapOf
+     *
+     * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+     * val values: NotEmptyList<Int> = map.values
+     * println(values) // [1, 2]
+     * ```
+     */
     public val values: NotEmptyList<V>
         get() = map.values.toNotEmptyList()
             .getOrThrow()
