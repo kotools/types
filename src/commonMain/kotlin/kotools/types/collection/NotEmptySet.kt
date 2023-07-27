@@ -96,7 +96,7 @@ public value class NotEmptySet<out E> private constructor(
      */
     public fun toSet(): Set<E> = elements
 
-    override fun toString(): String = "${toSet()}"
+    override fun toString(): String = "$elements"
 }
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
