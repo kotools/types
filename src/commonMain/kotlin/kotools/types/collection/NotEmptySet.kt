@@ -71,6 +71,7 @@ public value class NotEmptySet<out E> private constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
+
     override val tail: NotEmptySet<E>?
         get() = elements.drop(1)
             .toNotEmptySet()
@@ -93,10 +94,7 @@ public value class NotEmptySet<out E> private constructor(
      * println(set) // [1, 2, 3]
      * ```
      */
-    public fun toSet(): Set<E> {
-        val elements: Set<E> = setOf(head)
-        return tail?.let { elements + it.toSet() } ?: elements
-    }
+    public fun toSet(): Set<E> = elements
 
     override fun toString(): String = "${toSet()}"
 }
