@@ -193,13 +193,21 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyMap
+     * import kotools.types.collection.notEmptyMapOf
+     *
+     * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
+     *     'a' to 1,
+     *     'b' to 2,
+     *     'c' to 3
+     * )
+     * val map: Map<Char, Int> = notEmptyMap.toMap()
+     * println(map) // {a=1, b=2, c=3}
+     * ```
      */
-    public fun toMap(): Map<K, V> = tail?.let {
-        val tail: Array<Pair<K, V>> = it.entries.toSet()
-            .map(Map.Entry<K, V>::toPair)
-            .toTypedArray()
-        mapOf(head, *tail)
-    } ?: mapOf(head)
+    public fun toMap(): Map<K, V> = map
 
     /** Returns the string representation of this map. */
     override fun toString(): String = "${toMap()}"
