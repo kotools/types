@@ -209,8 +209,28 @@ public value class NotEmptyMap<K, out V> private constructor(
      */
     public fun toMap(): Map<K, V> = map
 
-    /** Returns the string representation of this map. */
-    override fun toString(): String = "${toMap()}"
+    /**
+     * Returns the string representation of this map.
+     *
+     * This function should behave like calling the [Any.toString] function on
+     * a [Map] with keys of type [K] and values of type [V].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyMap
+     * import kotools.types.collection.notEmptyMapOf
+     *
+     * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
+     *     'a' to 1,
+     *     'b' to 2,
+     *     'c' to 3
+     * )
+     * println(notEmptyMap) // {a=1, b=2, c=3}
+     *
+     * val map: Map<Char, Int> = notEmptyMap.toMap()
+     * println("$notEmptyMap" == "$map") // true
+     * ```
+     */
+    override fun toString(): String = "$map"
 }
 
 internal class NotEmptyMapSerializer<K, V>(
