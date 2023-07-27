@@ -93,7 +93,18 @@ public value class NotEmptyMap<K, out V> private constructor(
         get() = map.entries.first()
             .toPair()
 
-    /** All entries of this map except [the first one][head]. */
+    /**
+     * All entries of this map except [the first one][head].
+     *
+     * ```kotlin
+     * import kotools.types.collection.NotEmptyMap
+     * import kotools.types.collection.notEmptyMapOf
+     *
+     * val map: NotEmptyMap<Char, Int> =
+     *     notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
+     * println(map.tail) // {b=2, c=3}
+     * ```
+     */
     public val tail: NotEmptyMap<K, V>?
         get() = map.entries.drop(1)
             .takeIf { it.isNotEmpty() }
