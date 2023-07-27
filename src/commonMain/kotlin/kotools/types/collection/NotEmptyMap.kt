@@ -15,6 +15,14 @@ import kotlin.jvm.JvmInline
 /**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
+ *
+ * ```kotlin
+ * import kotools.types.collection.NotEmptyMap
+ * import kotools.types.collection.notEmptyMapOf
+ *
+ * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+ * println(map) // {a=1, b=2}
+ * ```
  */
 @SinceKotoolsTypes("4.0")
 public fun <K, V> notEmptyMapOf(
@@ -28,6 +36,19 @@ public fun <K, V> notEmptyMapOf(
  * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
  * or returns an encapsulated [IllegalArgumentException] if this map is
  * [empty][Map.isEmpty].
+ *
+ * ```kotlin
+ * import kotools.types.collection.NotEmptyMap
+ * import kotools.types.collection.toNotEmptyMap
+ *
+ * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
+ * var result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
+ * println(result) // Success({a=1, b=2})
+ *
+ * map = emptyMap()
+ * result = map.toNotEmptyMap()
+ * println(result) // Failure(IllegalArgumentException)
+ * ```
  */
 @SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
@@ -45,8 +66,11 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
         ?: Result.failure(EmptyMapException)
 
 /**
- * Representation of maps that contain at least one entry with a key of type
- * [K] and a value of type [V].
+ * Represents a map with at least one entry with a key of type [K] and a value
+ * of type [V].
+ *
+ * You can use the [notEmptyMapOf] or the [toNotEmptyMap] functions for building
+ * this type.
  */
 @JvmInline
 @Serializable(NotEmptyMapSerializer::class)
