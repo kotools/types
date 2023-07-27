@@ -77,5 +77,5 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Test all platforms
+      - name: Test code
         run: ./gradlew allTests --no-daemon
