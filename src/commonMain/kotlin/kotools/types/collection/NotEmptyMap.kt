@@ -16,7 +16,7 @@ import kotlin.jvm.JvmInline
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  *
- * #### Samples
+ * Here's a simple usage example:
  *
  * ```kotlin
  * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
@@ -39,6 +39,7 @@ public fun <K, V> notEmptyMapOf(
  * [empty][Map.isEmpty].
  *
  * Here's a simple usage example:
+ *
  * ```kotlin
  * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
  * var result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
@@ -84,7 +85,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The first entry of this map.
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
@@ -99,7 +100,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All entries of this map except [the first one][head].
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val map: NotEmptyMap<Char, Int> =
@@ -118,7 +119,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All entries of this map.
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
@@ -133,7 +134,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All keys of this map.
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
@@ -148,7 +149,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All values of this map.
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
@@ -163,7 +164,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The size of this map.
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
@@ -187,7 +188,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
@@ -207,7 +208,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * This function should behave like calling the [Any.toString] function on
      * a [Map] with keys of type [K] and values of type [V].
      *
-     * #### Samples
+     * Here's a simple usage example:
      *
      * ```kotlin
      * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
