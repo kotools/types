@@ -27,22 +27,19 @@ import kotlin.jvm.JvmInline
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
-): NotEmptyMap<K, V> {
-    val t: NotEmptyMap<K, V>? = tail.toMap()
-        .toNotEmptyMap()
-        .getOrNull()
-    return NotEmptyMap(head, tail = t)
-}
+): NotEmptyMap<K, V> = listOf(head)
+    .plus(tail)
+    .toMap()
+    .let { NotEmptyMap(it) }
 
 /**
  * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
  * or returns an encapsulated [IllegalArgumentException] if this map is
  * [empty][Map.isEmpty].
  *
- * ```kotlin
- * import kotools.types.collection.NotEmptyMap
- * import kotools.types.collection.toNotEmptyMap
+ * #### Samples
  *
+ * ```kotlin
  * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
  * var result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
  * println(result) // Success({a=1, b=2})
@@ -54,18 +51,7 @@ public fun <K, V> notEmptyMapOf(
  */
 @SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
-    takeIf(Map<K, V>::isNotEmpty)
-        ?.entries
-        ?.map(Map.Entry<K, V>::toPair)
-        ?.runCatching {
-            val head: Pair<K, V> = first()
-            val tail: NotEmptyMap<K, V>? = drop(1)
-                .toMap()
-                .toNotEmptyMap()
-                .getOrNull()
-            NotEmptyMap(head, tail)
-        }
-        ?: Result.failure(EmptyMapException)
+    runCatching { NotEmptyMap(this) }
 
 /**
  * Represents a map with at least one entry with a key of type [K] and a value
@@ -77,8 +63,8 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
 @JvmInline
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotEmptyMap<K, out V> private constructor(
-    private val map: Map<K, V>
+public value class NotEmptyMap<K, out V> internal constructor(
+    private val delegate: Map<K, V>
 ) {
     /**
      * The first entry of this map.
@@ -93,7 +79,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val head: Pair<K, V>
-        get() = map.entries.first()
+        get() = delegate.entries.first()
             .toPair()
 
     /**
@@ -110,7 +96,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val tail: NotEmptyMap<K, V>?
-        get() = map.entries.drop(1)
+        get() = delegate.entries.drop(1)
             .takeIf { it.isNotEmpty() }
             ?.associate { it.toPair() }
             ?.toNotEmptyMap()
@@ -130,7 +116,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val entries: NotEmptySet<Map.Entry<K, V>>
-        get() = map.entries.toNotEmptySet()
+        get() = delegate.entries.toNotEmptySet()
             .getOrThrow()
 
     /**
@@ -147,7 +133,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val keys: NotEmptySet<K>
-        get() = map.keys.toNotEmptySet()
+        get() = delegate.keys.toNotEmptySet()
             .getOrThrow()
 
     /**
@@ -164,7 +150,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val values: NotEmptyList<V>
-        get() = map.values.toNotEmptyList()
+        get() = delegate.values.toNotEmptyList()
             .getOrThrow()
 
     /**
@@ -181,16 +167,12 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val size: StrictlyPositiveInt
-        get() = map.size.toStrictlyPositiveInt()
+        get() = delegate.size.toStrictlyPositiveInt()
             .getOrThrow()
 
-    internal constructor(
-        head: Pair<K, V>,
-        tail: NotEmptyMap<K, V>? = null
-    ) : this(
-        tail?.run { mapOf(head) + map }
-            ?: mapOf(head)
-    )
+    init {
+        require(delegate.isNotEmpty()) { EmptyMapException.message }
+    }
 
     /**
      * Returns all entries of this map as a [Map] with keys of type [K] and
@@ -209,7 +191,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * println(map) // {a=1, b=2, c=3}
      * ```
      */
-    public fun toMap(): Map<K, V> = map
+    public fun toMap(): Map<K, V> = delegate
 
     /**
      * Returns the string representation of this map.
@@ -232,7 +214,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      * println("$notEmptyMap" == "$map") // true
      * ```
      */
-    override fun toString(): String = "$map"
+    override fun toString(): String = "$delegate"
 }
 
 internal class NotEmptyMapSerializer<K, V>(
@@ -255,5 +237,6 @@ internal class NotEmptyMapSerializer<K, V>(
         ?: throw SerializationException(EmptyMapException)
 }
 
-private object EmptyMapException :
-    IllegalArgumentException("Given map shouldn't be empty.")
+private object EmptyMapException : IllegalArgumentException() {
+    override val message: String = "Given map shouldn't be empty."
+}

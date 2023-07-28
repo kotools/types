@@ -29,12 +29,8 @@ class NotEmptyMapTest {
 
     @Test
     fun map_toNotEmptyMap_should_pass_with_a_not_empty_Map() {
-        val map: Map<String, Int> = mapOf(
-            "a" to Random.nextInt(),
-            "b" to Random.nextInt(),
-            "c" to Random.nextInt()
-        )
-        val result: Result<NotEmptyMap<String, Int>> = map.toNotEmptyMap()
+        val map: Map<Char, Int> = mapOf('a' to Random.nextInt())
+        val result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
         result.getOrThrow()
             .toMap()
             .entries contentShouldEqual map.entries
@@ -42,10 +38,11 @@ class NotEmptyMapTest {
 
     @Test
     fun map_toNotEmptyMap_should_fail_with_an_empty_Map() {
-        val result: Result<NotEmptyMap<String, Int>> = emptyMap<String, Int>()
-            .toNotEmptyMap()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
+        val map: Map<Char, Int> = emptyMap()
+        val result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
+        val error: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        error.shouldHaveAMessage()
     }
 
     @Test
