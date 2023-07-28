@@ -30,7 +30,8 @@ public fun <K, V> notEmptyMapOf(
 ): NotEmptyMap<K, V> = listOf(head)
     .plus(tail)
     .toMap()
-    .let { NotEmptyMap(it) }
+    .toNotEmptyMap()
+    .getOrThrow()
 
 /**
  * Returns an encapsulated [NotEmptyMap] containing all the entries of this map,
@@ -51,7 +52,7 @@ public fun <K, V> notEmptyMapOf(
  */
 @SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
-    runCatching { NotEmptyMap(this) }
+    runCatching { NotEmptyMap(entries) }
 
 /**
  * Represents a map with at least one entry with a key of type [K] and a value
@@ -63,7 +64,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
 @JvmInline
 @Serializable(NotEmptyMapSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotEmptyMap<K, out V> internal constructor(
+public value class NotEmptyMap<K, out V> private constructor(
     private val delegate: Map<K, V>
 ) {
     /**
@@ -163,6 +164,10 @@ public value class NotEmptyMap<K, out V> internal constructor(
     init {
         require(delegate.isNotEmpty()) { EmptyMapException.message }
     }
+
+    internal constructor(entries: Set<Map.Entry<K, V>>) : this(
+        entries.associate { it.toPair() }
+    )
 
     /**
      * Returns all entries of this map as a [Map] with keys of type [K] and

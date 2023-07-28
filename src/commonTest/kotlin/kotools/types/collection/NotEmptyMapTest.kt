@@ -167,6 +167,19 @@ class NotEmptyMapTest {
 
 }
 
+class NotEmptyMapIntegrationTest {
+    @Test
+    fun updating_the_original_MutableMap_should_not_impact_the_NotEmptyMap() {
+        val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
+        val notEmptyMap: NotEmptyMap<Char, Int> = original.toNotEmptyMap()
+            .getOrThrow()
+        assertEquals("$original", "$notEmptyMap")
+
+        original.clear()
+        assertNotEquals("$original", "$notEmptyMap")
+    }
+}
+
 class NotEmptyMapSerializerTest {
     @ExperimentalSerializationApi
     @Test
