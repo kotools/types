@@ -69,10 +69,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
     /**
      * The first entry of this map.
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
      * val head: Pair<Char, Int> = map.head
      * println(head) // (a, 1)
@@ -85,10 +84,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
     /**
      * All entries of this map except [the first one][head].
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val map: NotEmptyMap<Char, Int> =
      *     notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
      * val tail: NotEmptyMap<Char, Int>? = map.tail
@@ -105,11 +103,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
     /**
      * All entries of this map.
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.NotEmptySet
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
      * val entries: NotEmptySet<Map.Entry<Char, Int>> = map.entries
      * println(entries) // [a=1, b=2]
@@ -122,11 +118,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
     /**
      * All keys of this map.
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.NotEmptySet
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
      * val keys: NotEmptySet<Char> = map.keys
      * println(keys) // [a, b]
@@ -139,11 +133,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
     /**
      * All values of this map.
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyList
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
      * val values: NotEmptyList<Int> = map.values
      * println(values) // [1, 2]
@@ -156,11 +148,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
     /**
      * The size of this map.
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.notEmptyMapOf
-     * import kotools.types.number.StrictlyPositiveInt
+     * #### Samples
      *
+     * ```kotlin
      * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
      * val size: StrictlyPositiveInt = map.size
      * println(size) // 2
@@ -178,10 +168,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
      *     'a' to 1,
      *     'b' to 2,
@@ -199,10 +188,9 @@ public value class NotEmptyMap<K, out V> internal constructor(
      * This function should behave like calling the [Any.toString] function on
      * a [Map] with keys of type [K] and values of type [V].
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyMap
-     * import kotools.types.collection.notEmptyMapOf
+     * #### Samples
      *
+     * ```kotlin
      * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
      *     'a' to 1,
      *     'b' to 2,
