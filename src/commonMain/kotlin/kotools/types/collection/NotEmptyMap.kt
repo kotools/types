@@ -38,8 +38,7 @@ public fun <K, V> notEmptyMapOf(
  * or returns an encapsulated [IllegalArgumentException] if this map is
  * [empty][Map.isEmpty].
  *
- * #### Samples
- *
+ * Here's a simple usage example:
  * ```kotlin
  * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
  * var result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
@@ -48,6 +47,21 @@ public fun <K, V> notEmptyMapOf(
  * map = emptyMap()
  * result = map.toNotEmptyMap()
  * println(result) // Failure(IllegalArgumentException)
+ * ```
+ *
+ * Please note that changes made to the original map will not be reflected on
+ * the resulting [NotEmptyMap].
+ *
+ * ```kotlin
+ * val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
+ * val notEmptyMap: NotEmptyMap<Char, Int> = original.toNotEmptyMap()
+ *     .getOrThrow()
+ * println(original) // {a=1, b=2}
+ * println(notEmptyMap) // {a=1, b=2}
+ *
+ * original.clear()
+ * println(original) // {}
+ * println(notEmptyMap) // {a=1, b=2}
  * ```
  */
 @SinceKotoolsTypes("4.0")
