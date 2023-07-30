@@ -75,5 +75,6 @@ public sealed interface NotEmptyCollection<out E> {
 public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt
 
-internal object EmptyCollectionException :
-    IllegalArgumentException("Given collection shouldn't be empty.")
+internal object EmptyCollectionException : IllegalArgumentException() {
+    override val message: String = "Given collection shouldn't be empty."
+}

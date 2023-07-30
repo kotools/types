@@ -11,6 +11,7 @@ import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
+import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.Test
@@ -26,7 +27,8 @@ class NotEmptyListTest {
         val tail: Array<Int> = List(2) { Random.nextInt() }
             .toTypedArray()
         val result: NotEmptyList<Int> = notEmptyListOf(head, *tail)
-        result.toList() contentShouldEqual listOf(head) + tail
+        val expected: List<Int> = listOf(head) + tail
+        result.toList() contentShouldEqual expected
     }
 
     @Test
@@ -40,7 +42,7 @@ class NotEmptyListTest {
     fun collection_toNotEmptyList_should_fail_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
         val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+        result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .shouldHaveAMessage()
     }
 

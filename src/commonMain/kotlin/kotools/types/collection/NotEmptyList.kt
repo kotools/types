@@ -23,12 +23,10 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @SinceKotoolsTypes("4.0")
-public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
-    .takeIf(Array<out E>::isNotEmpty)
-    ?.toList()
-    ?.toNotEmptyList()
-    ?.getOrNull()
-    .let { NotEmptyList(head, it) }
+public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
+    val elements: List<E> = listOf(head) + tail
+    return NotEmptyList(elements)
+}
 
 /**
  * Returns an encapsulated [NotEmptyList] containing all the elements of this
@@ -50,15 +48,10 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> = tail
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
-    takeIf(Collection<E>::isNotEmpty)
-        ?.runCatching {
-            val head: E = first()
-            val tail: NotEmptyList<E>? = drop(1)
-                .toNotEmptyList()
-                .getOrNull()
-            NotEmptyList(head, tail)
-        }
-        ?: Result.failure(EmptyCollectionException)
+    runCatching {
+        val elements: List<E> = toList()
+        NotEmptyList(elements)
+    }
 
 /**
  * Represents a list with at least one element of type [E].
@@ -69,19 +62,19 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
 @JvmInline
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotEmptyList<out E> private constructor(
+public value class NotEmptyList<out E> internal constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
+
     override val tail: NotEmptyList<E>?
         get() = elements.drop(1)
             .toNotEmptyList()
             .getOrNull()
 
-    internal constructor(head: E, tail: NotEmptyList<E>? = null) : this(
-        tail?.run { listOf(head) + elements }
-            ?: listOf(head)
-    )
+    init {
+        require(elements.isNotEmpty()) { EmptyCollectionException.message }
+    }
 
     /**
      * Returns all elements of this list as a [List] of type [E].
