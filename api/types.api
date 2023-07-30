@@ -76,7 +76,6 @@ public final class kotools/types/collection/NotEmptyMapKt {
 public final class kotools/types/collection/NotEmptySet : kotools/types/collection/NotEmptyCollection {
 	public static final field Companion Lkotools/types/collection/NotEmptySet$Companion;
 	public static final synthetic fun box-impl (Ljava/util/Set;)Lkotools/types/collection/NotEmptySet;
-	public static synthetic fun constructor-impl$default (Ljava/lang/Object;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)Ljava/util/Set;
 	public fun equals (Ljava/lang/Object;)Z
 	public static fun equals-impl (Ljava/util/Set;Ljava/lang/Object;)Z
 	public static final fun equals-impl0 (Ljava/util/Set;Ljava/util/Set;)Z

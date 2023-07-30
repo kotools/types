@@ -23,10 +23,10 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @SinceKotoolsTypes("4.0")
-public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
-    setOf(head, *tail)
-        .toNotEmptySet()
-        .getOrThrow()
+public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
+    val elements: Set<E> = setOf(head) + tail
+    return NotEmptySet(elements)
+}
 
 /**
  * Returns an encapsulated [NotEmptySet] containing all the elements of this
@@ -48,15 +48,10 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> =
  */
 @SinceKotoolsTypes("4.0")
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
-    takeIf(Collection<E>::isNotEmpty)
-        ?.runCatching {
-            val head: E = first()
-            val tail: NotEmptySet<E>? = drop(1)
-                .toNotEmptySet()
-                .getOrNull()
-            NotEmptySet(head, tail)
-        }
-        ?: Result.failure(EmptyCollectionException)
+    runCatching {
+        val elements: Set<E> = toSet()
+        NotEmptySet(elements)
+    }
 
 /**
  * Represents a set with at least one element of type [E].
@@ -67,7 +62,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
 @JvmInline
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotEmptySet<out E> private constructor(
+public value class NotEmptySet<out E> internal constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
@@ -77,10 +72,9 @@ public value class NotEmptySet<out E> private constructor(
             .toNotEmptySet()
             .getOrNull()
 
-    internal constructor(head: E, tail: NotEmptySet<E>? = null) : this(
-        tail?.run { setOf(head) + elements }
-            ?: setOf(head)
-    )
+    init {
+        require(elements.isNotEmpty()) { EmptyCollectionException.message }
+    }
 
     /**
      * Returns all elements of this set as a [Set] of type [E].
