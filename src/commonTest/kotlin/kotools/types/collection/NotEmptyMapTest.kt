@@ -170,10 +170,9 @@ class NotEmptyMapIntegrationTest {
         val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
         val notEmptyMap: NotEmptyMap<Char, Int> = original.toNotEmptyMap()
             .getOrThrow()
-        assertEquals("$original", "$notEmptyMap")
-
+        "$notEmptyMap" shouldEqual "$original"
         original.clear()
-        assertNotEquals("$original", "$notEmptyMap")
+        "$notEmptyMap" shouldNotEqual "$original"
     }
 }
 
