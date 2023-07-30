@@ -54,10 +54,9 @@ public sealed interface NotEmptyCollection<out E> {
      * Implementations of this function should behave like calling the
      * [Any.toString] function on an [Iterable].
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyCollection
-     * import kotools.types.collection.notEmptyListOf
+     * Here's a simple usage example:
      *
+     * ```kotlin
      * val collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
      * println(collection) // [1, 2, 3]
      *
