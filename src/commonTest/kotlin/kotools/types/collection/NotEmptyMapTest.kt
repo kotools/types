@@ -153,15 +153,13 @@ class NotEmptyMapTest {
 
     @Test
     fun toString_should_behave_like_a_Map() {
-        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
-            "a" to Random.nextInt(),
-            "b" to Random.nextInt(),
-            "c" to Random.nextInt()
+        val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
+            'a' to Random.nextInt(),
+            'b' to Random.nextInt(),
+            'c' to Random.nextInt()
         )
-        assertEquals(
-            actual = "$notEmptyMap",
-            expected = "${notEmptyMap.toMap()}"
-        )
+        val expected: Map<Char, Int> = notEmptyMap.toMap()
+        "$notEmptyMap" shouldEqual "$expected"
     }
 
 }
