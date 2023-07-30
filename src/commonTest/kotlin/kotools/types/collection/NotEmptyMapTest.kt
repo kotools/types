@@ -16,15 +16,14 @@ import kotlin.test.*
 class NotEmptyMapTest {
     @Test
     fun notEmptyMapOf_should_pass() {
-        val head: Pair<String, Int> = "a" to Random.nextInt()
-        val tail: Array<Pair<String, Int>> = arrayOf(
-            "b" to Random.nextInt(),
-            "c" to Random.nextInt()
+        val head: Pair<Char, Int> = 'a' to Random.nextInt()
+        val tail: Array<Pair<Char, Int>> = arrayOf(
+            'b' to Random.nextInt(),
+            'c' to Random.nextInt()
         )
-        assertEquals(
-            actual = notEmptyMapOf(head, *tail).toMap(),
-            expected = mapOf(head, *tail)
-        )
+        val result: NotEmptyMap<Char, Int> = notEmptyMapOf(head, *tail)
+        val expected: Map<Char, Int> = mapOf(head, *tail)
+        result.entries.toSet() contentShouldEqual expected.entries
     }
 
     @Test
