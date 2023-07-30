@@ -9,6 +9,8 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
@@ -56,20 +58,19 @@ class NotEmptyMapTest {
     @Test
     fun tail_should_return_all_its_entries_except_the_first_one() {
         val expected: NotEmptyMap<Char, Int> = notEmptyMapOf('b' to 2)
-        val entries: NotEmptyMap<Char, Int> = expected.entries.toSet()
+        val map: NotEmptyMap<Char, Int> = expected.entries.toSet()
             .map { it.toPair() }
             .toTypedArray()
             .let { notEmptyMapOf('a' to 1, *it) }
-        val tail: NotEmptyMap<Char, Int>? = entries.tail
-        val actual: NotEmptyMap<Char, Int> = assertNotNull(tail)
-        assertEquals(expected, actual)
+        val result: NotEmptyMap<Char, Int>? = map.tail
+        result.shouldBeNotNull() shouldEqual expected
     }
 
     @Test
     fun tail_should_return_null_with_a_singleton_map() {
-        val entries: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1)
-        val tail: NotEmptyMap<Char, Int>? = entries.tail
-        assertNull(tail)
+        val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1)
+        val result: NotEmptyMap<Char, Int>? = map.tail
+        result.shouldBeNull()
     }
 
     @Test
