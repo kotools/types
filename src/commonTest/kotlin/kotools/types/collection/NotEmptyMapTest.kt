@@ -2,7 +2,6 @@ package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
@@ -14,10 +13,11 @@ import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
+import kotools.types.shouldFailWithSerializationException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
-import kotlin.test.*
+import kotlin.test.Test
 
 class NotEmptyMapTest {
     @Test
@@ -180,18 +180,15 @@ class NotEmptyMapSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NotEmptyMap_as_serial_name() {
-        // GIVEN
         val keySerializer: KSerializer<String> = String.serializer()
         val valueSerializer: KSerializer<Int> = Int.serializer()
         val serializer: KSerializer<NotEmptyMap<String, Int>> =
             NotEmptyMap.serializer(keySerializer, valueSerializer)
-        // WHEN
-        val actual: String = serializer.descriptor.serialName
-        // THEN
+        val result: String = serializer.descriptor.serialName
         val expected: String = MapSerializer(keySerializer, valueSerializer)
             .descriptor
             .serialName
-        assertEquals(expected, actual)
+        result shouldEqual expected
     }
 
     @Test
@@ -201,41 +198,29 @@ class NotEmptyMapSerializerTest {
             "b" to Random.nextInt(),
             "c" to Random.nextInt()
         )
-        assertEquals(
-            actual = Json.encodeToString(notEmptyMap),
-            expected = Json.encodeToString(notEmptyMap.toMap())
-        )
+        val result: String = Json.encodeToString(notEmptyMap)
+        val expected: String = Json.encodeToString(notEmptyMap.toMap())
+        result shouldEqual expected
     }
 
     @Test
     fun deserialization_should_pass_with_a_not_empty_Map() {
-        val notEmptyMap: NotEmptyMap<String, Int> = notEmptyMapOf(
-            "a" to Random.nextInt(),
-            "b" to Random.nextInt(),
-            "c" to Random.nextInt()
+        val expected: Map<Char, Int> = mapOf(
+            'a' to Random.nextInt(),
+            'b' to Random.nextInt(),
+            'c' to Random.nextInt()
         )
-        val encoded: String = Json.encodeToString(notEmptyMap)
-        assertEquals(
-            actual = Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
-                .toMap(),
-            expected = notEmptyMap.toMap()
-        )
+        val encoded: String = Json.encodeToString(expected)
+        val result: NotEmptyMap<Char, Int> = Json.decodeFromString(encoded)
+        result.entries.toSet() shouldEqual expected.entries
     }
 
     @Test
     fun deserialization_should_fail_with_an_empty_Map() {
-        val map: Map<String, Int> = emptyMap()
+        val map: Map<Char, Int> = emptyMap()
         val encoded: String = Json.encodeToString(map)
-        assertFailsWith<SerializationException> {
-            Json.decodeFromString<NotEmptyMap<String, Int>>(encoded)
+        Json.shouldFailWithSerializationException {
+            decodeFromString<NotEmptyMap<Char, Int>>(encoded)
         }.shouldHaveAMessage()
-    }
-}
-
-private fun <K, V> assertEquals(actual: Map<K, V>, expected: Map<K, V>) {
-    assertEquals(actual = actual.size, expected = expected.size)
-    actual.forEach {
-        assertTrue { expected.containsKey(it.key) }
-        assertEquals(actual = it.value, expected = expected[it.key])
     }
 }

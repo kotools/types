@@ -1,5 +1,6 @@
 package kotools.types
 
+import kotlinx.serialization.SerializationException
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -20,9 +21,13 @@ fun <T : Any> T?.shouldBeNotNull(): T = assertNotNull(this)
 
 fun Any?.shouldBeNull(): Unit = assertNull(this)
 
-fun Throwable.shouldHaveAMessage(): Unit =
-    assertTrue(block = assertNotNull(message)::isNotBlank)
-
-internal inline fun <T> T.shouldFailWithIllegalArgumentException(
+inline fun <T> T.shouldFailWithIllegalArgumentException(
     block: T.() -> Unit
 ): IllegalArgumentException = assertFailsWith { block() }
+
+inline fun <T> T.shouldFailWithSerializationException(
+    block: T.() -> Unit
+): SerializationException = assertFailsWith { block() }
+
+fun Throwable.shouldHaveAMessage(): Unit =
+    assertTrue(block = assertNotNull(message)::isNotBlank)
