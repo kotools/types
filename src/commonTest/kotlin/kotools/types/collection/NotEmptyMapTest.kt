@@ -9,6 +9,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
 import kotlin.test.*
@@ -39,9 +40,8 @@ class NotEmptyMapTest {
     fun map_toNotEmptyMap_should_fail_with_an_empty_Map() {
         val map: Map<Char, Int> = emptyMap()
         val result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
-        val error: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        error.shouldHaveAMessage()
+        result.shouldFailWithIllegalArgumentException { getOrThrow() }
+            .shouldHaveAMessage()
     }
 
     @Test

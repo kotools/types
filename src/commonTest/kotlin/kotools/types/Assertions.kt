@@ -2,6 +2,7 @@ package kotools.types
 
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -21,3 +22,7 @@ fun Any?.shouldBeNull(): Unit = assertNull(this)
 
 fun Throwable.shouldHaveAMessage(): Unit =
     assertTrue(block = assertNotNull(message)::isNotBlank)
+
+internal inline fun <T> T.shouldFailWithIllegalArgumentException(
+    block: T.() -> Unit
+): IllegalArgumentException = assertFailsWith { block() }
