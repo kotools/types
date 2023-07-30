@@ -2,7 +2,6 @@ package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
@@ -10,15 +9,14 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
+import kotools.types.shouldFailWithIllegalArgumentException
+import kotools.types.shouldFailWithSerializationException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNotEquals
-import kotlin.test.assertNull
 
 class NotEmptySetTest {
     @Test
@@ -27,84 +25,91 @@ class NotEmptySetTest {
         val tail: Array<Int> = List(2) { Random.nextInt() }
             .toTypedArray()
         val result: NotEmptySet<Int> = notEmptySetOf(head, *tail)
-        result.toSet() contentShouldEqual listOf(head) + tail
+        val expected: Set<Int> = setOf(head) + tail
+        result.toSet() contentShouldEqual expected
     }
 
     @Test
     fun collection_toNotEmptySet_should_pass_with_a_not_empty_Collection() {
-        val elements: List<Int> = List(3) { Random.nextInt() }
-        val result: Result<NotEmptySet<Int>> = elements.toNotEmptySet()
-        result.getOrThrow().toSet() contentShouldEqual elements
+        val collection: Collection<Int> = List(3) { Random.nextInt() }
+        val result: Result<NotEmptySet<Int>> = collection.toNotEmptySet()
+        result.getOrThrow()
+            .toSet() contentShouldEqual collection
     }
 
     @Test
     fun collection_toNotEmptySet_should_fail_with_an_empty_Collection() {
-        val result: Result<NotEmptySet<Int>> = emptySet<Int>()
-            .toNotEmptySet()
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
+        val collection: Collection<Int> = emptySet()
+        val result: Result<NotEmptySet<Int>> = collection.toNotEmptySet()
+        result.shouldFailWithIllegalArgumentException { getOrThrow() }
+            .shouldHaveAMessage()
     }
 
     @Test
     fun head_should_return_the_first_element_of_this_set() {
-        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+        val set: NotEmptySet<Int> = List(3) { Random.nextInt() }
             .toNotEmptySet()
             .getOrThrow()
-        val result: Int = elements.head
-        result shouldEqual elements.toSet().first()
+        val result: Int = set.head
+        val expected: Int = set.toSet()
+            .first()
+        result shouldEqual expected
     }
 
     @Test
     fun tail_should_return_all_elements_of_this_set_except_the_first_one() {
-        val elements: NotEmptySet<Int> = List(3) { Random.nextInt() }
+        val set: NotEmptySet<Int> = List(3) { Random.nextInt() }
             .toNotEmptySet()
             .getOrThrow()
-        val result: NotEmptySet<Int>? = elements.tail
-        val expected: List<Int> = elements.toSet().drop(1)
-        result.shouldBeNotNull().toSet() contentShouldEqual expected
+        val result: NotEmptySet<Int>? = set.tail
+        val expected: List<Int> = set.toSet().drop(1)
+        result.shouldBeNotNull()
+            .toSet() contentShouldEqual expected
     }
 
     @Test
     fun tail_should_return_null_with_a_singleton_set() {
-        val result: NotEmptySet<Int>? = notEmptySetOf(Random.nextInt()).tail
-        assertNull(result)
+        val set: NotEmptySet<Int> = notEmptySetOf(Random.nextInt())
+        val result: NotEmptySet<Int>? = set.tail
+        result.shouldBeNull()
     }
 
     @Test
     fun equals_should_pass_with_the_same_NotEmptySet() {
         val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
         val y: NotEmptySet<Int> = x
-        assertEquals(x, y)
+        x shouldEqual y
     }
 
     @Test
     fun equals_should_pass_with_another_NotEmptySet_having_the_same_values() {
         val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
         val y: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
-        assertEquals(x, y)
+        x shouldEqual y
     }
 
     @Test
     fun equals_should_fail_with_another_NotEmptySet_having_another_head() {
         val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
         val y: NotEmptySet<Int> = notEmptySetOf(-1, 2, 3)
-        assertNotEquals(x, y)
+        x shouldNotEqual y
     }
 
     @Test
     fun equals_should_fail_with_another_NotEmptySet_having_another_tail() {
         val x: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
         val y: NotEmptySet<Int> = notEmptySetOf(1, -2, -3)
-        assertNotEquals(x, y)
+        x shouldNotEqual y
     }
 
     @Test
     fun toSet_should_return_all_elements_as_a_Set() {
-        val elements: Set<Int> = List(3) { Random.nextInt() }
+        val expected: Set<Int> = List(3) { Random.nextInt() }
             .toSet()
-        val result: Set<Int> = elements.toNotEmptySet().getOrThrow().toSet()
-        result contentShouldEqual elements
+        val set: NotEmptySet<Int> = expected.toNotEmptySet()
+            .getOrThrow()
+        val result: Set<Int> = set.toSet()
+        result contentShouldEqual expected
     }
 
     @Test
@@ -132,17 +137,14 @@ class NotEmptySetSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NotEmptySet_as_serial_name() {
-        // GIVEN
         val elementSerializer: KSerializer<Int> = Int.serializer()
         val serializer: KSerializer<NotEmptySet<Int>> =
             NotEmptySet.serializer(elementSerializer)
-        // WHEN
-        val actual: String = serializer.descriptor.serialName
-        // THEN
+        val result: String = serializer.descriptor.serialName
         val expected: String = SetSerializer(elementSerializer)
             .descriptor
             .serialName
-        assertEquals(expected, actual)
+        result shouldEqual expected
     }
 
     @Test
@@ -151,7 +153,8 @@ class NotEmptySetSerializerTest {
             .toNotEmptySet()
             .getOrThrow()
         val result: String = Json.encodeToString(elements)
-        result shouldEqual Json.encodeToString(elements.toSet())
+        val expected: String = Json.encodeToString(elements.toSet())
+        result shouldEqual expected
     }
 
     @Test
@@ -166,9 +169,8 @@ class NotEmptySetSerializerTest {
     fun deserialization_should_fail_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
         val encoded: String = Json.encodeToString(collection)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<NotEmptySet<Int>>(encoded)
-        }
-        exception.shouldHaveAMessage()
+        Json.shouldFailWithSerializationException {
+            decodeFromString<NotEmptySet<Int>>(encoded)
+        }.shouldHaveAMessage()
     }
 }
