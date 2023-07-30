@@ -9,6 +9,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
@@ -47,9 +48,9 @@ class NotEmptyMapTest {
     @Test
     fun head_should_return_its_first_entry() {
         val expected: Pair<Char, Int> = 'a' to 1
-        val entries: NotEmptyMap<Char, Int> = notEmptyMapOf(expected, 'b' to 2)
-        val head: Pair<Char, Int> = entries.head
-        assertEquals(expected, actual = head)
+        val map: NotEmptyMap<Char, Int> = notEmptyMapOf(expected, 'b' to 2)
+        val result: Pair<Char, Int> = map.head
+        result shouldEqual expected
     }
 
     @Test
