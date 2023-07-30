@@ -15,6 +15,7 @@ import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
+import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.*
 
@@ -126,28 +127,28 @@ class NotEmptyMapTest {
     fun equals_should_pass_with_the_same_NotEmptyMap() {
         val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
         val y: NotEmptyMap<Char, Int> = x
-        assertEquals(x, y)
+        x shouldEqual y
     }
 
     @Test
     fun equals_should_pass_with_another_NotEmptyMap_having_the_same_values() {
         val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
         val y: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
-        assertEquals(x, y)
+        x shouldEqual y
     }
 
     @Test
     fun equals_should_fail_with_another_NotEmptyMap_having_another_head() {
         val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
         val y: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to -1, 'b' to 2)
-        assertNotEquals(x, y)
+        x shouldNotEqual y
     }
 
     @Test
     fun equals_should_fail_with_another_NotEmptyMap_having_another_tail() {
         val x: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
         val y: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to -2)
-        assertNotEquals(x, y)
+        x shouldNotEqual y
     }
 
     @Test
