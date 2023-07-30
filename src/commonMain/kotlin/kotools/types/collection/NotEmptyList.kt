@@ -92,10 +92,9 @@ public value class NotEmptyList<out E> internal constructor(
     /**
      * Returns all elements of this list as a [List] of type [E].
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyList
-     * import kotools.types.collection.notEmptyListOf
+     * Here's a simple usage example:
      *
+     * ```kotlin
      * val notEmptyList: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
      * val list: List<Int> = notEmptyList.toList()
      * println(list) // [1, 2, 3]
