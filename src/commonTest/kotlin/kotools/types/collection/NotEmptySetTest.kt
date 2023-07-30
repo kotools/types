@@ -12,6 +12,7 @@ import kotools.types.contentShouldEqual
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
+import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -112,6 +113,18 @@ class NotEmptySetTest {
             .toNotEmptySet()
             .getOrThrow()
         "$elements" shouldEqual "${elements.toSet()}"
+    }
+}
+
+class NotEmptySetIntegrationTest {
+    @Test
+    fun updating_the_original_MutableCollection_should_not_impact_the_NotEmptySet() {
+        val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
+        val notEmptySet: NotEmptySet<Int> = original.toNotEmptySet()
+            .getOrThrow()
+        "$original" shouldEqual "$notEmptySet"
+        original.clear()
+        "$original" shouldNotEqual "$notEmptySet"
     }
 }
 
