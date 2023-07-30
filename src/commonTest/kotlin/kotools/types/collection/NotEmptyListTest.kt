@@ -2,7 +2,6 @@ package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
@@ -10,16 +9,14 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
+import kotools.types.shouldFailWithSerializationException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNotEquals
-import kotlin.test.assertNull
 
 class NotEmptyListTest {
     @Test
@@ -69,35 +66,35 @@ class NotEmptyListTest {
     @Test
     fun tail_should_return_null_with_a_singleton_list() {
         val result: NotEmptyList<Int>? = notEmptyListOf(Random.nextInt()).tail
-        assertNull(result)
+        result.shouldBeNull()
     }
 
     @Test
     fun equals_should_pass_with_the_same_NotEmptyList() {
         val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
         val y: NotEmptyList<Int> = x
-        assertEquals(x, y)
+        x shouldEqual y
     }
 
     @Test
     fun equals_should_pass_with_another_NotEmptyList_having_the_same_values() {
         val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
         val y: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
-        assertEquals(x, y)
+        x shouldEqual y
     }
 
     @Test
     fun equals_should_fail_with_another_NotEmptyList_having_another_head() {
         val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
         val y: NotEmptyList<Int> = notEmptyListOf(-1, 2, 3)
-        assertNotEquals(x, y)
+        x shouldNotEqual y
     }
 
     @Test
     fun equals_should_fail_with_another_NotEmptyList_having_another_tail() {
         val x: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
         val y: NotEmptyList<Int> = notEmptyListOf(1, -2, -3)
-        assertNotEquals(x, y)
+        x shouldNotEqual y
     }
 
     @Test
@@ -134,17 +131,14 @@ class NotEmptyListSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NotEmptyList_as_serial_name() {
-        // GIVEN
         val elementSerializer: KSerializer<Int> = Int.serializer()
         val serializer: KSerializer<NotEmptyList<Int>> =
             NotEmptyList.serializer(elementSerializer)
-        // WHEN
-        val actual: String = serializer.descriptor.serialName
-        // THEN
+        val result: String = serializer.descriptor.serialName
         val expected: String = ListSerializer(elementSerializer)
             .descriptor
             .serialName
-        assertEquals(expected, actual)
+        result shouldEqual expected
     }
 
     @Test
@@ -153,7 +147,8 @@ class NotEmptyListSerializerTest {
             .toNotEmptyList()
             .getOrThrow()
         val result: String = Json.encodeToString(elements)
-        result shouldEqual Json.encodeToString(elements.toList())
+        val expected: String = Json.encodeToString(elements.toList())
+        result shouldEqual expected
     }
 
     @Test
@@ -168,9 +163,8 @@ class NotEmptyListSerializerTest {
     fun deserialization_should_fail_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
         val encoded: String = Json.encodeToString(collection)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<NotEmptyList<Int>>(encoded)
-        }
-        exception.shouldHaveAMessage()
+        Json.shouldFailWithSerializationException {
+            decodeFromString<NotEmptyList<Int>>(encoded)
+        }.shouldHaveAMessage()
     }
 }
