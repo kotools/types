@@ -13,6 +13,7 @@ import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
+import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -114,6 +115,18 @@ class NotEmptyListTest {
             .toNotEmptyList()
             .getOrThrow()
         "$elements" shouldEqual "${elements.toList()}"
+    }
+}
+
+class NotEmptyListIntegrationTest {
+    @Test
+    fun updating_the_original_MutableCollection_should_not_impact_the_NotEmptyList() {
+        val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+        val notEmptyList: NotEmptyList<Int> = original.toNotEmptyList()
+            .getOrThrow()
+        "$original" shouldEqual "$notEmptyList"
+        original.clear()
+        "$original" shouldNotEqual "$notEmptyList"
     }
 }
 

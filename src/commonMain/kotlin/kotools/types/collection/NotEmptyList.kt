@@ -32,10 +32,9 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * collection, or returns an encapsulated [IllegalArgumentException] if this
  * collection is [empty][Collection.isEmpty].
  *
- * ```kotlin
- * import kotools.types.collection.NotEmptyList
- * import kotools.types.collection.toNotEmptyList
+ * Here's a simple usage example:
  *
+ * ```kotlin
  * var collection: Collection<Int> = listOf(1, 2, 3)
  * var result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
  * println(result) // Success([1, 2, 3])
@@ -43,6 +42,21 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * collection = emptyList()
  * result = collection.toNotEmptyList()
  * println(result) // Failure(IllegalArgumentException)
+ * ```
+ *
+ * Please note that changes made to the original collection will not be
+ * reflected on the resulting [NotEmptyList].
+ *
+ * ```kotlin
+ * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+ * val notEmptyList: NotEmptyList<Int> = original.toNotEmptyList()
+ *     .getOrThrow()
+ * println(original) // [1, 2, 3]
+ * println(notEmptyList) // [1, 2, 3]
+ *
+ * original.clear()
+ * println(original) // []
+ * println(notEmptyList) // [1, 2, 3]
  * ```
  */
 @SinceKotoolsTypes("4.0")
