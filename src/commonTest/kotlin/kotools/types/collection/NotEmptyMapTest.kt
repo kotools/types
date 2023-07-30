@@ -92,10 +92,9 @@ class NotEmptyMapTest {
             "b" to Random.nextInt(),
             "c" to Random.nextInt()
         )
-        assertEquals(
-            actual = notEmptyMap.keys.toSet(),
-            expected = notEmptyMap.toMap().keys
-        )
+        val result: NotEmptySet<String> = notEmptyMap.keys
+        val expected: Set<String> = notEmptyMap.toMap().keys
+        result.toSet() contentShouldEqual expected
     }
 
     @Test
