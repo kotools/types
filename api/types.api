@@ -17,7 +17,6 @@ public final class kotools/types/collection/NotEmptyCollectionKt {
 public final class kotools/types/collection/NotEmptyList : kotools/types/collection/NotEmptyCollection {
 	public static final field Companion Lkotools/types/collection/NotEmptyList$Companion;
 	public static final synthetic fun box-impl (Ljava/util/List;)Lkotools/types/collection/NotEmptyList;
-	public static synthetic fun constructor-impl$default (Ljava/lang/Object;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)Ljava/util/List;
 	public fun equals (Ljava/lang/Object;)Z
 	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
 	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
