@@ -15,12 +15,12 @@ public sealed interface NotEmptyCollection<out E> {
     /**
      * The first element of this collection.
      *
-     * ```kotlin
-     * import kotools.types.collection.NotEmptyCollection
-     * import kotools.types.collection.notEmptyListOf
+     * Here's a simple usage example:
      *
+     * ```kotlin
      * val collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
-     * println(collection.head) // 1
+     * val result: Int = collection.head
+     * println(result) // 1
      * ```
      */
     public val head: E
