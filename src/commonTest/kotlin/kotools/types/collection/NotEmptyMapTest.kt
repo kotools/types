@@ -9,6 +9,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
@@ -116,10 +117,9 @@ class NotEmptyMapTest {
             "b" to Random.nextInt(),
             "c" to Random.nextInt()
         )
-        assertEquals(
-            actual = notEmptyMap.size.toInt(),
-            expected = notEmptyMap.toMap().size
-        )
+        val result: StrictlyPositiveInt = notEmptyMap.size
+        val expected: Int = notEmptyMap.toMap().size
+        result.toInt() shouldEqual expected
     }
 
     @Test
