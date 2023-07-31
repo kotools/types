@@ -12,6 +12,21 @@ import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
+/**
+ * Returns this number as an encapsulated [NegativeInt], which may involve
+ * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
+ * if this number is [strictly positive][StrictlyPositiveInt].
+ */
+@SinceKotoolsTypes("4.1")
+public fun Number.toNegativeInt(): Result<NegativeInt> {
+    val value: Int = toInt()
+    return when {
+        value == ZeroInt.toInt() -> Result.success(ZeroInt)
+        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
+        else -> Result.failure(value shouldBe aNegativeNumber)
+    }
+}
+
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -88,21 +103,6 @@ public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
     val result: Int = toInt() % other
     return result.toNegativeInt()
         .getOrThrow()
-}
-
-/**
- * Returns this number as an encapsulated [NegativeInt], which may involve
- * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
- * if this number is [strictly positive][StrictlyPositiveInt].
- */
-@SinceKotoolsTypes("4.1")
-public fun Number.toNegativeInt(): Result<NegativeInt> {
-    val value: Int = toInt()
-    return when {
-        value == ZeroInt.toInt() -> Result.success(ZeroInt)
-        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
-        else -> Result.failure(value shouldBe aNegativeNumber)
-    }
 }
 
 internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {

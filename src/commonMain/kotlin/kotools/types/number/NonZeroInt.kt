@@ -13,6 +13,21 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
+/**
+ * Returns this number as an encapsulated [NonZeroInt], which may involve
+ * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
+ * if this number equals [zero][ZeroInt].
+ */
+@SinceKotoolsTypes("4.1")
+public fun Number.toNonZeroInt(): Result<NonZeroInt> {
+    val value: Int = toInt()
+    return when {
+        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
+        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
+        else -> Result.failure(value shouldBe otherThanZero)
+    }
+}
+
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -86,21 +101,6 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
  */
 @SinceKotoolsTypes("4.1")
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
-
-/**
- * Returns this number as an encapsulated [NonZeroInt], which may involve
- * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
- * if this number equals [zero][ZeroInt].
- */
-@SinceKotoolsTypes("4.1")
-public fun Number.toNonZeroInt(): Result<NonZeroInt> {
-    val value: Int = toInt()
-    return when {
-        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
-        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
-        else -> Result.failure(value shouldBe otherThanZero)
-    }
-}
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy(

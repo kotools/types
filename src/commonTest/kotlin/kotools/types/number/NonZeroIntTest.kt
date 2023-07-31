@@ -51,6 +51,24 @@ class NonZeroIntCompanionTest {
 }
 
 class NonZeroIntTest {
+    @Test
+    fun number_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
+        val value: Number = NonZeroInt.random()
+            .toInt()
+        val result: Result<NonZeroInt> = value.toNonZeroInt()
+        result.getOrThrow()
+            .toInt() shouldEqual value
+    }
+
+    @Test
+    fun number_toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
+        val value: Number = ZeroInt.toInt()
+        val result: Result<NonZeroInt> = value.toNonZeroInt()
+        val exception: IllegalArgumentException =
+            assertFailsWith(block = result::getOrThrow)
+        exception.shouldHaveAMessage()
+    }
+
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
@@ -76,24 +94,6 @@ class NonZeroIntTest {
         val y: NonZeroInt = NonZeroInt.random()
         val result: Int = x % y
         result shouldEqual x % y.toInt()
-    }
-
-    @Test
-    fun number_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
-        val value: Number = NonZeroInt.random()
-            .toInt()
-        val result: Result<NonZeroInt> = value.toNonZeroInt()
-        result.getOrThrow()
-            .toInt() shouldEqual value
-    }
-
-    @Test
-    fun number_toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
-        val value: Number = ZeroInt.toInt()
-        val result: Result<NonZeroInt> = value.toNonZeroInt()
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
     }
 }
 

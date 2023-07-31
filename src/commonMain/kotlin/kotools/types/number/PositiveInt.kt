@@ -12,6 +12,21 @@ import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
+/**
+ * Returns this number as an encapsulated [PositiveInt], which may involve
+ * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
+ * if this number is [strictly negative][StrictlyNegativeInt].
+ */
+@SinceKotoolsTypes("4.1")
+public fun Number.toPositiveInt(): Result<PositiveInt> {
+    val value: Int = toInt()
+    return when {
+        value == ZeroInt.toInt() -> Result.success(ZeroInt)
+        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
+        else -> Result.failure(value shouldBe aPositiveNumber)
+    }
+}
+
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
@@ -88,21 +103,6 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
     val result: Int = toInt() % other
     return result.toPositiveInt()
         .getOrThrow()
-}
-
-/**
- * Returns this number as an encapsulated [PositiveInt], which may involve
- * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
- * if this number is [strictly negative][StrictlyNegativeInt].
- */
-@SinceKotoolsTypes("4.1")
-public fun Number.toPositiveInt(): Result<PositiveInt> {
-    val value: Int = toInt()
-    return when {
-        value == ZeroInt.toInt() -> Result.success(ZeroInt)
-        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
-        else -> Result.failure(value shouldBe aPositiveNumber)
-    }
 }
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {

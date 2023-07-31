@@ -13,6 +13,15 @@ import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
 
+/**
+ * Returns this number as an encapsulated [StrictlyNegativeInt], which may
+ * involve rounding or truncation, or returns an encapsulated
+ * [IllegalArgumentException] if this number is [positive][PositiveInt].
+ */
+@SinceKotoolsTypes("4.1")
+public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
+    StrictlyNegativeInt of toInt()
+
 /** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
@@ -73,15 +82,6 @@ public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt =
         .unaryMinus()
         .toStrictlyPositiveInt()
         .getOrThrow()
-
-/**
- * Returns this number as an encapsulated [StrictlyNegativeInt], which may
- * involve rounding or truncation, or returns an encapsulated
- * [IllegalArgumentException] if this number is [positive][PositiveInt].
- */
-@SinceKotoolsTypes("4.1")
-public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    StrictlyNegativeInt of toInt()
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {

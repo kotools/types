@@ -54,6 +54,21 @@ class PositiveIntCompanionTest {
 }
 
 class PositiveIntTest {
+    @Test
+    fun number_toPositiveInt_should_pass_with_a_positive_Int() {
+        val expected: Number = PositiveInt.random().toInt()
+        val result: Result<PositiveInt> = expected.toPositiveInt()
+        result.getOrThrow().toInt() shouldEqual expected
+    }
+
+    @Test
+    fun number_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
+        val number: Number = StrictlyNegativeInt.random().toInt()
+        val result: Result<PositiveInt> = number.toPositiveInt()
+        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
+            .shouldHaveAMessage()
+    }
+
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
@@ -87,21 +102,6 @@ class PositiveIntTest {
         val y: NonZeroInt = NonZeroInt.random()
         val result: PositiveInt = x % y
         result.toInt() shouldEqual x.toInt() % y.toInt()
-    }
-
-    @Test
-    fun number_toPositiveInt_should_pass_with_a_positive_Int() {
-        val expected: Number = PositiveInt.random().toInt()
-        val result: Result<PositiveInt> = expected.toPositiveInt()
-        result.getOrThrow().toInt() shouldEqual expected
-    }
-
-    @Test
-    fun number_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
-        val number: Number = StrictlyNegativeInt.random().toInt()
-        val result: Result<PositiveInt> = number.toPositiveInt()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
     }
 }
 
