@@ -36,6 +36,7 @@ kotlin {
     explicitApi()
     js(IR, KotlinJsTargetDsl::browser)
     jvm {
+        withJava()
         compilations.all { kotlinOptions.jvmTarget = "17" }
         testRuns["test"].executionTask { useJUnitPlatform() }
     }
