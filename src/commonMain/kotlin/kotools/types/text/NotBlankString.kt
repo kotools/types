@@ -15,6 +15,7 @@ import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmName
 
 /**
  * Returns this string as an encapsulated [NotBlankString], or returns an
@@ -22,6 +23,7 @@ import kotlin.jvm.JvmInline
  * [blank][String.isBlank].
  */
 @SinceKotoolsTypes("4.0")
+@JvmName("of")
 public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
 

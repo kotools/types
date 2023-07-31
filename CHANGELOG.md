@@ -20,6 +20,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+The following functions using a `NotBlankString` can now be called from Java 
+code (issue [#154]):
+- `String.toNotBlankString` -> `NotBlankStringKt.of(String)` on the JVM.
+
+[#154]: https://github.com/kotools/types/issues/154
+
 ### Changed
 
 - Support for [Kotlin 1.7.21] and [kotlinx.serialization 1.4.1] (issue [#142]).
