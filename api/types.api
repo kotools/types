@@ -309,6 +309,9 @@ public final class kotools/types/number/StrictlyPositiveInt$Companion {
 
 public final class kotools/types/number/StrictlyPositiveIntKt {
 	public static final fun toStrictlyPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun toStrictlyPositiveIntOrElse (Ljava/lang/Number;Lkotlin/jvm/functions/Function1;)I
+	public static final fun toStrictlyPositiveIntOrNull (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveInt;
+	public static final fun toStrictlyPositiveIntOrThrow (Ljava/lang/Number;)I
 	public static final fun unaryMinus-UPGVeGw (I)I
 }
 

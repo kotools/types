@@ -22,8 +22,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-**Experimental** builders suffixed by `OrNull` and `OrThrow` for the 
-`StrictlyNegativeInt` type (issue [#149] implemented by [@o-korpi]).
+- **Experimental** builders suffixed by `OrNull` and `OrThrow` for the
+  `StrictlyNegativeInt` type (issue [#149] implemented by [@o-korpi]).
 
 [#149]: https://github.com/kotools/types/issues/149
 [@o-korpi]: https://github.com/o-korpi
@@ -35,6 +35,25 @@ All notable changes to this project will be documented in this file.
 // after
 (-2).toStrictlyNegativeIntOrNull()
 (-3).toStrictlyNegativeIntOrThrow()
+```
+
+- **Experimental** builders suffixed by `OrElse`, `OrNull` and `OrThrow` for the
+  `StrictlyPositiveInt` type (issue [#141]).
+
+[#141]: https://github.com/kotools/types/issues/141
+
+```kotlin
+// before
+1.toStrictlyPositiveInt()
+    .getOrElse { throw it }
+2.toStrictlyPositiveInt()
+    .getOrNull()
+3.toStrictlyPositiveInt()
+    .getOrThrow()
+// after
+1.toStrictlyPositiveIntOrElse { throw it }
+2.toStrictlyPositiveIntOrNull()
+3.toStrictlyPositiveIntOrThrow()
 ```
 
 ## 4.3.0

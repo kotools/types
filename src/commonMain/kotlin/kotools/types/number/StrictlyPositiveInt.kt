@@ -22,6 +22,86 @@ import kotlin.jvm.JvmInline
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     StrictlyPositiveInt of toInt()
 
+/**
+ * Returns this number as a [StrictlyPositiveInt], which may involve rounding
+ * or truncation, or returns the result of calling the [onFailure] function if
+ * this number is negative.
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * var result: StrictlyPositiveInt = 1.toStrictlyPositiveIntOrElse { throw it }
+ * println(result) // 1
+ *
+ * 0.toStrictlyPositiveIntOrElse { throw it } // IllegalArgumentException
+ *
+ * result = (-1).toStrictlyPositiveIntOrElse {
+ *     3.toStrictlyPositiveIntOrThrow()
+ * }
+ * println(result) // 3
+ * ```
+ *
+ * Instead of returning the result of calling the [onFailure] function when this
+ * number is negative, you can use the [toStrictlyPositiveIntOrNull] for
+ * returning `null`, or the [toStrictlyPositiveIntOrThrow] for throwing an
+ * [IllegalArgumentException].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3")
+public inline fun Number.toStrictlyPositiveIntOrElse(
+    onFailure: (IllegalArgumentException) -> StrictlyPositiveInt
+): StrictlyPositiveInt = TODO()
+
+/**
+ * Returns this number as a [StrictlyPositiveInt], which may involve rounding
+ * or truncation, or returns `null` if this number is negative.
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * var result: StrictlyPositiveInt? = 1.toStrictlyPositiveIntOrNull()
+ * println(result) // 1
+ *
+ * result = 0.toStrictlyPositiveIntOrNull()
+ * println(result) // null
+ *
+ * result = (-1).toStrictlyPositiveIntOrNull()
+ * println(result) // null
+ * ```
+ *
+ * Instead of returning `null` when this number is negative, you can use the
+ * [toStrictlyPositiveIntOrElse] for returning the result of calling the
+ * specified callback, or the [toStrictlyPositiveIntOrThrow] for throwing an
+ * [IllegalArgumentException].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3")
+public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = TODO()
+
+/**
+ * Returns this number as a [StrictlyPositiveInt], which may involve rounding
+ * or truncation, or throws [IllegalArgumentException] if this number is
+ * negative.
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * val result: StrictlyPositiveInt = 1.toStrictlyPositiveIntOrThrow()
+ * println(result) // 1
+ *
+ * 0.toStrictlyPositiveIntOrThrow() // IllegalArgumentException
+ * (-1).toStrictlyPositiveIntOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * Instead of throwing an [IllegalArgumentException] when this number is
+ * negative, you can use the [toStrictlyPositiveIntOrElse] for returning the
+ * result of calling the specified callback, or the
+ * [toStrictlyPositiveIntOrNull] for returning `null`.
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3")
+public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = TODO()
+
 /** Representation of positive integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
