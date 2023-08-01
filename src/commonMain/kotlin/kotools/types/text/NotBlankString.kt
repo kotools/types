@@ -21,9 +21,34 @@ import kotlin.jvm.JvmName
  * Returns this string as an encapsulated [NotBlankString], or returns an
  * encapsulated [IllegalArgumentException] if this string is
  * [blank][String.isBlank].
+ *
+ * Here's a simple usage example:
+ *
+ * ```kotlin
+ * var result: Result<NotBlankString> = "hello world".toNotBlankString()
+ * val string: NotBlankString = result.getOrThrow()
+ * println(string) // hello world
+ *
+ * result = " ".toNotBlankString()
+ * result.getOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * For calling this function from Java code, you can use the
+ * `NotBlankStringKt.of(String)` function and directly cast its result to a
+ * [NotBlankString].
+ * This will throw a [java.lang.ClassCastException](https://docs.oracle.com/javase/8/docs/api/java/lang/ClassCastException.html)
+ * if this string is blank.
+ *
+ * ```java
+ * NotBlankString string = (NotBlankString) NotBlankStringKt.of("abc");
+ * System.out.println(string); // abc
+ *
+ * string = (NotBlankString) NotBlankStringKt.of(" "); // ClassCastException
+ * System.out.println(string);
+ * ```
  */
-@SinceKotoolsTypes("4.0")
 @JvmName("of")
+@SinceKotoolsTypes("4.0")
 public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
 
