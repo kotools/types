@@ -53,7 +53,12 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
 @ExperimentalSinceKotoolsTypes("4.3")
 public inline fun Number.toStrictlyPositiveIntOrElse(
     onFailure: (IllegalArgumentException) -> StrictlyPositiveInt
-): StrictlyPositiveInt = TODO()
+): StrictlyPositiveInt = toStrictlyPositiveIntOrNull() ?: let {
+    val error = IllegalArgumentException(
+        "Number should be strictly positive (tried with $it)."
+    )
+    onFailure(error)
+}
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding

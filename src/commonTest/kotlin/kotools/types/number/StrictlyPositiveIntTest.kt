@@ -21,6 +21,7 @@ import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
+import kotlin.test.fail
 
 class StrictlyPositiveIntCompanionTest {
     @Test
@@ -74,6 +75,33 @@ class StrictlyPositiveIntTest {
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toStrictlyPositiveIntOrElse_should_pass_with_a_strictly_positive_Number() {
+        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
+        val onFailure: (IllegalArgumentException) -> StrictlyPositiveInt = {
+            fail("We shouldn't call the 'onFailure' function.")
+        }
+        val result: StrictlyPositiveInt =
+            number.toStrictlyPositiveIntOrElse(onFailure)
+        result.toInt() shouldEqual number
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toStrictlyPositiveIntOrElse_should_fail_with_a_negative_Number() {
+        val number: Number = Random.nextInt(Int.MIN_VALUE..0)
+        val defaultValue: StrictlyPositiveInt = Random.nextInt(1..Int.MAX_VALUE)
+            .toStrictlyPositiveIntOrThrow()
+        val onFailure: (IllegalArgumentException) -> StrictlyPositiveInt = {
+            defaultValue
+        }
+        val result: StrictlyPositiveInt =
+            number.toStrictlyPositiveIntOrElse(onFailure)
+        result.toInt() shouldNotEqual number
+        result shouldEqual defaultValue
     }
 
     @ExperimentalNumberApi
