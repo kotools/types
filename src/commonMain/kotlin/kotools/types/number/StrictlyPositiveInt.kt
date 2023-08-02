@@ -20,7 +20,10 @@ import kotlin.jvm.JvmInline
  */
 @SinceKotoolsTypes("4.1")
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    StrictlyPositiveInt of toInt()
+    runCatching {
+        val value: Int = toInt()
+        StrictlyPositiveInt(value)
+    }
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding
@@ -107,7 +110,19 @@ public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = TODO()
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt
-private constructor(private val value: Int) : NonZeroInt, PositiveInt {
+internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
+    init {
+        require(value > 0) {
+            "Number should be strictly positive (tried with $this)."
+        }
+    }
+
+    @SinceKotoolsTypes("4.0")
+    override fun toInt(): Int = value
+
+    @SinceKotoolsTypes("4.0")
+    override fun toString(): String = "$value"
+
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].
      */
@@ -135,11 +150,6 @@ private constructor(private val value: Int) : NonZeroInt, PositiveInt {
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
 
-        internal infix fun of(value: Int): Result<StrictlyPositiveInt> = value
-            .takeIf { it > ZeroInt.toInt() }
-            ?.runCatching { StrictlyPositiveInt(this) }
-            ?: Result.failure(value shouldBe aStrictlyPositiveNumber)
-
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyPositiveInt = (min.value..max.value)
@@ -147,12 +157,6 @@ private constructor(private val value: Int) : NonZeroInt, PositiveInt {
             .toStrictlyPositiveInt()
             .getOrThrow()
     }
-
-    @SinceKotoolsTypes("4.0")
-    override fun toInt(): Int = value
-
-    @SinceKotoolsTypes("4.0")
-    override fun toString(): String = "$value"
 }
 
 /** Returns the negative of this integer. */
