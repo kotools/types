@@ -79,7 +79,10 @@ public inline fun Number.toStrictlyPositiveIntOrElse(
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3")
-public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = TODO()
+public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? {
+    val value: Int = toInt()
+    return if (value <= 0) null else StrictlyPositiveInt(value)
+}
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding

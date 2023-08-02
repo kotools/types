@@ -10,6 +10,8 @@ import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
+import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
@@ -60,14 +62,14 @@ class StrictlyPositiveIntCompanionTest {
 
 class StrictlyPositiveIntTest {
     @Test
-    fun number_toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
+    fun toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
         val number: Number = StrictlyPositiveInt.random().toInt()
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         result.getOrThrow().toInt() shouldEqual number
     }
 
     @Test
-    fun number_toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
+    fun toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
         val number: Number = NegativeInt.random().toInt()
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
@@ -76,7 +78,24 @@ class StrictlyPositiveIntTest {
 
     @ExperimentalNumberApi
     @Test
-    fun number_toStrictlyPositiveIntOrThrow_should_pass_with_a_strictly_positive_Number() {
+    fun toStrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_Number() {
+        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
+        val result: StrictlyPositiveInt? = number.toStrictlyPositiveIntOrNull()
+        result.shouldBeNotNull()
+            .toInt() shouldEqual number
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toStrictlyPositiveIntOrNull_should_fail_with_a_negative_Number() {
+        val number: Number = Random.nextInt(Int.MIN_VALUE..0)
+        val result: StrictlyPositiveInt? = number.toStrictlyPositiveIntOrNull()
+        result.shouldBeNull()
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toStrictlyPositiveIntOrThrow_should_pass_with_a_strictly_positive_Number() {
         val number: Number = Random.nextInt(1..Int.MAX_VALUE)
         val result: StrictlyPositiveInt = number.toStrictlyPositiveIntOrThrow()
         result.toInt() shouldEqual number
@@ -84,7 +103,7 @@ class StrictlyPositiveIntTest {
 
     @ExperimentalNumberApi
     @Test
-    fun number_toStrictlyPositiveIntOrThrow_should_fail_with_a_negative_Number() {
+    fun toStrictlyPositiveIntOrThrow_should_fail_with_a_negative_Number() {
         val number: Number = Random.nextInt(Int.MIN_VALUE..0)
         val error: IllegalArgumentException =
             number.shouldFailWithIllegalArgumentException {
