@@ -11,8 +11,11 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
+import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
+import kotlin.random.Random
+import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
@@ -69,6 +72,25 @@ class StrictlyPositiveIntTest {
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun number_toStrictlyPositiveIntOrThrow_should_pass_with_a_strictly_positive_Number() {
+        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
+        val result: StrictlyPositiveInt = number.toStrictlyPositiveIntOrThrow()
+        result.toInt() shouldEqual number
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun number_toStrictlyPositiveIntOrThrow_should_fail_with_a_negative_Number() {
+        val number: Number = Random.nextInt(Int.MIN_VALUE..0)
+        val error: IllegalArgumentException =
+            number.shouldFailWithIllegalArgumentException {
+                toStrictlyPositiveIntOrThrow()
+            }
+        error.shouldHaveAMessage()
     }
 
     @ExperimentalNumberApi

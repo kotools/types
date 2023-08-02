@@ -103,7 +103,10 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = TODO()
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3")
-public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = TODO()
+public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt {
+    val value: Int = toInt()
+    return StrictlyPositiveInt(value)
+}
 
 /** Representation of positive integers excluding [zero][ZeroInt]. */
 @JvmInline
