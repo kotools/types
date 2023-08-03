@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
 
 ## 4.3.0
 
-_Release date: 2023-08-03._
+_Release date: 2023-08-14._
 
 _See the [full changelog][4.2.0-4.3.0] from version [`4.2.0`][tag/4.2.0]._
 
