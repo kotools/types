@@ -77,21 +77,24 @@ representing a result that can be a success or a failure.
 > The value of the `$version` or the `${kotools.types.version}` variables is
 > available in the [version badge](#kotools-types).
 
-### Gradle
-
-#### Kotlin DSL
+<details open>
+<summary>Gradle - Kotlin DSL</summary>
 
 ```kotlin
 implementation("org.kotools:types:$version")
 ```
+</details>
 
-#### Groovy DSL
+<details>
+<summary>Gradle - Groovy DSL</summary>
 
 ```groovy
 implementation "org.kotools:types:$version"
 ```
+</details>
 
-### Maven
+<details>
+<summary>Maven</summary>
 
 ```xml
 <dependencies>
@@ -102,6 +105,7 @@ implementation "org.kotools:types:$version"
     </dependency>
 </dependencies>
 ```
+</details>
 
 ## Community
 
