@@ -69,7 +69,8 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3")
-public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = TODO()
+public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
+    toStrictlyNegativeInt().getOrThrow()
 
 /** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
