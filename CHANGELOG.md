@@ -20,6 +20,23 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+**Experimental** builders suffixed by `OrNull` and `OrThrow` for the 
+`StrictlyNegativeInt` type (issue [#149] implemented by [@o-korpi]).
+
+[#149]: https://github.com/kotools/types/issues/149
+[@o-korpi]: https://github.com/o-korpi
+
+```kotlin
+// before
+(-2).toStrictlyNegativeInt().getOrNull()
+(-3).toStrictlyNegativeInt().getOrThrow()
+// after
+(-2).toStrictlyNegativeIntOrNull()
+(-3).toStrictlyNegativeIntOrThrow()
+```
+
 ## 4.3.0
 
 _Release date: 2023-08-14._

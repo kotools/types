@@ -251,6 +251,7 @@ public final class kotools/types/number/StrictlyNegativeInt$Companion {
 
 public final class kotools/types/number/StrictlyNegativeIntKt {
 	public static final fun toStrictlyNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun toStrictlyNegativeIntOrNull (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeInt;
 	public static final fun unaryMinus-I890jeU (I)I
 }
 

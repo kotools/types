@@ -22,6 +22,54 @@ import kotlin.jvm.JvmInline
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     StrictlyNegativeInt of toInt()
 
+/**
+ * Returns this number as a [StrictlyNegativeInt], which may involve rounding
+ * or truncation, or returns `null` if this number is positive.
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * var result: StrictlyNegativeInt? = (-1).toStrictlyNegativeIntOrNull()
+ * println(result) // -1
+ *
+ * result = 0.toStrictlyNegativeIntOrNull()
+ * println(result) // null
+ *
+ * result = 1.toStrictlyNegativeIntOrNull()
+ * println(result) // null
+ * ```
+ *
+ * You can use the [toStrictlyNegativeIntOrThrow] function for throwing an
+ * [IllegalArgumentException] instead of returning `null` when this number is
+ * positive.
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3")
+public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = TODO()
+
+/**
+ * Returns this number as a [StrictlyNegativeInt], which may involve rounding
+ * or truncation, or throws [IllegalArgumentException] if this number is
+ * negative.
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * val result: StrictlyNegativeInt = (-1).toStrictlyNegativeIntOrThrow()
+ * println(result) // 1
+ *
+ * 0.toStrictlyNegativeIntOrThrow() // IllegalArgumentException
+ * 1.toStrictlyNegativeIntOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * You can use the [toStrictlyNegativeIntOrNull] function for returning `null`
+ * instead of throwing an [IllegalArgumentException] when this number is
+ * positive.
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3")
+public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = TODO()
+
 /** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
