@@ -20,6 +20,15 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.3.0
+
+_Release date: 2023-08-03._
+
+_See the [full changelog][4.2.0-4.3.0] from version [`4.2.0`][tag/4.2.0]._
+
+[4.2.0-4.3.0]: https://github.com/kotools/types/compare/4.2.0...4.3.0
+[tag/4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
+
 ### Changed
 
 - Support for [Kotlin 1.7.21] and [kotlinx.serialization 1.4.1] (issue [#142]).
