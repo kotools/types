@@ -15,6 +15,7 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class StrictlyNegativeIntCompanionTest {
@@ -69,6 +70,22 @@ class StrictlyNegativeIntTest {
         val result: Result<StrictlyNegativeInt> = number.toStrictlyNegativeInt()
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun number_toStrictlyNegativeIntOrNull_should_not_be_null_with_a_strictly_negative_Int() {
+        val number: Number = StrictlyNegativeInt.random().toInt()
+        val result: StrictlyNegativeInt? = number.toStrictlyNegativeIntOrNull()
+        result?.toInt() shouldEqual number
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun number_toStrictlyNegativeIntOrNull_should_be_null_with_a_positive_Int() {
+        val number: Number = PositiveInt.random().toInt()
+        val result: StrictlyNegativeInt? = number.toStrictlyNegativeIntOrNull()
+        assertNull(result)
     }
 
     @ExperimentalNumberApi

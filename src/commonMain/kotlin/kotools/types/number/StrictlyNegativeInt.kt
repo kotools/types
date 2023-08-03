@@ -45,7 +45,8 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3")
-public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = TODO()
+public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    toStrictlyNegativeInt().getOrNull()
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding
