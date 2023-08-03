@@ -1,1 +1,1 @@
-Close #issue.
+> Close #issue.
