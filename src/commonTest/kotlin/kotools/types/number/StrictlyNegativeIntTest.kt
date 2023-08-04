@@ -5,14 +5,12 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotools.types.*
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
-import kotools.types.shouldEqual
-import kotools.types.shouldHaveAMessage
-import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
@@ -77,7 +75,7 @@ class StrictlyNegativeIntTest {
     fun number_toStrictlyNegativeIntOrNull_should_not_be_null_with_a_strictly_negative_Int() {
         val number: Number = StrictlyNegativeInt.random().toInt()
         val result: StrictlyNegativeInt? = number.toStrictlyNegativeIntOrNull()
-        result?.toInt() shouldEqual number
+        result.shouldBeNotNull().toInt() shouldEqual number
     }
 
     @ExperimentalNumberApi
@@ -85,7 +83,7 @@ class StrictlyNegativeIntTest {
     fun number_toStrictlyNegativeIntOrNull_should_be_null_with_a_positive_Int() {
         val number: Number = PositiveInt.random().toInt()
         val result: StrictlyNegativeInt? = number.toStrictlyNegativeIntOrNull()
-        assertNull(result)
+        result.shouldBeNull()
     }
 
     @ExperimentalNumberApi
