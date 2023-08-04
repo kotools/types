@@ -13,7 +13,6 @@ import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class StrictlyNegativeIntCompanionTest {
@@ -90,17 +89,17 @@ class StrictlyNegativeIntTest {
     @Test
     fun number_toStrictlyNegativeIntOrThrow_should_pass_with_a_negative_Int() {
         val number: Number = StrictlyNegativeInt.random().toInt()
-        number.toStrictlyNegativeIntOrThrow().toInt() shouldEqual number
+        val result: StrictlyNegativeInt = number.toStrictlyNegativeIntOrThrow()
+        result.toInt() shouldEqual number
     }
 
     @ExperimentalNumberApi
     @Test
     fun number_toStrictlyNegativeIntOrThrow_should_throw_with_a_positive_Int() {
         val number: Number = PositiveInt.random().toInt()
-        val exception: IllegalArgumentException = assertFailsWith<IllegalArgumentException> {
-            number.toStrictlyNegativeIntOrThrow()
-        }
-        exception.shouldHaveAMessage()
+        number.shouldFailWithIllegalArgumentException {
+            toStrictlyNegativeIntOrThrow()
+        }.shouldHaveAMessage()
     }
 
     @ExperimentalNumberApi
