@@ -50,7 +50,7 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding
- * or truncation, or throws [IllegalArgumentException] if this number is
+ * or truncation, or throws an [IllegalArgumentException] if this number is
  * negative.
  *
  * Here's some usage examples:
