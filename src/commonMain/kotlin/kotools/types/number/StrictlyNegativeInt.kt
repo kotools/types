@@ -44,7 +44,7 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  * positive.
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3")
+@ExperimentalSinceKotoolsTypes("4.4")
 public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     toStrictlyNegativeInt().getOrNull()
 
