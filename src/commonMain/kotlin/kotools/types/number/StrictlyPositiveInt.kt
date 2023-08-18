@@ -18,12 +18,10 @@ import kotlin.jvm.JvmInline
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [negative][NegativeInt].
  */
+@OptIn(ExperimentalNumberApi::class)
 @SinceKotoolsTypes("4.1")
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    runCatching {
-        val value: Int = toInt()
-        StrictlyPositiveInt(value)
-    }
+    runCatching { toStrictlyPositiveIntOrThrow() }
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding
@@ -48,10 +46,11 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
-public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? {
-    val value: Int = toInt()
-    return if (value <= 0) null else StrictlyPositiveInt(value)
-}
+public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
+    .takeIf { it.isStrictlyPositive() }
+    ?.toStrictlyPositiveIntOrThrow()
+
+private fun Int.isStrictlyPositive(): Boolean = this > 0
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding
@@ -74,10 +73,11 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
-public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt {
-    val value: Int = toInt()
-    return StrictlyPositiveInt(value)
-}
+public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = toInt()
+    .toStrictlyPositiveIntOrThrow()
+
+private fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
+    StrictlyPositiveInt(this)
 
 /** Representation of positive integers excluding [zero][ZeroInt]. */
 @JvmInline
@@ -86,8 +86,8 @@ public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt {
 public value class StrictlyPositiveInt
 internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
     init {
-        require(value > 0) {
-            "Number should be strictly positive (tried with $this)."
+        require(value.isStrictlyPositive()) {
+            "Integer should be strictly positive (tried with $value)."
         }
     }
 
