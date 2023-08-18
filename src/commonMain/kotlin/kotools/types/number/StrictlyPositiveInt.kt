@@ -13,6 +13,8 @@ import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
 
+private fun Int.isStrictlyPositive(): Boolean = this > 0
+
 /**
  * Returns this number as an encapsulated [StrictlyPositiveInt], which may
  * involve rounding or truncation, or returns an encapsulated
@@ -49,8 +51,6 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
 public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
     .takeIf { it.isStrictlyPositive() }
     ?.toStrictlyPositiveIntOrThrow()
-
-private fun Int.isStrictlyPositive(): Boolean = this > 0
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding
