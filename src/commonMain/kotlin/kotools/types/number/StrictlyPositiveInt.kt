@@ -47,7 +47,7 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  * negative.
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3")
+@ExperimentalSinceKotoolsTypes("4.4")
 public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? {
     val value: Int = toInt()
     return if (value <= 0) null else StrictlyPositiveInt(value)
@@ -73,7 +73,7 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? {
  * negative.
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3")
+@ExperimentalSinceKotoolsTypes("4.4")
 public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt {
     val value: Int = toInt()
     return StrictlyPositiveInt(value)
