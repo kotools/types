@@ -74,8 +74,10 @@ representing a result that can be a success or a failure.
 
 ## Installation
 
-> The value of the `$version` or the `${kotools.types.version}` variables is
-> available in the [version badge](#kotools-types).
+You can add Kotools Types to your project by using Gradle or Maven.
+Just replace the `$version` or the `${kotools.types.version}` variables by the
+[latest version](#kotools-types) or by another one available in the
+[changelog](CHANGELOG.md).
 
 <details open>
 <summary>Gradle - Kotlin DSL</summary>
@@ -106,6 +108,9 @@ implementation "org.kotools:types:$version"
 </dependencies>
 ```
 </details>
+
+See the [API reference](https://types.kotools.org) for more information about
+using this library.
 
 ## Community
 
