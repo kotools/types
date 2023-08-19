@@ -86,9 +86,7 @@ private fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
 public value class StrictlyPositiveInt
 internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
     init {
-        require(value.isStrictlyPositive()) {
-            "Integer should be strictly positive (tried with $value)."
-        }
+        require(value.isStrictlyPositive()) { errorMessageFor(value) }
     }
 
     @SinceKotoolsTypes("4.0")
@@ -124,6 +122,11 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
 
+        internal infix fun errorMessageFor(number: Number): NotBlankString =
+            "Number should be strictly positive (tried with $number)."
+                .toNotBlankString()
+                .getOrThrow()
+
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyPositiveInt = (min.value..max.value)
@@ -151,5 +154,7 @@ internal object StrictlyPositiveIntSerializer :
     override fun deserialize(value: Int): StrictlyPositiveInt = value
         .toStrictlyPositiveInt()
         .getOrNull()
-        ?: throw SerializationException(value shouldBe aStrictlyPositiveNumber)
+        ?: throw SerializationException(
+            "${StrictlyPositiveInt errorMessageFor value}"
+        )
 }

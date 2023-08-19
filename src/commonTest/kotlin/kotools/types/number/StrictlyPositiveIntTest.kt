@@ -14,12 +14,12 @@ import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
-import kotools.types.shouldHaveAMessage
+import kotools.types.shouldFailWithSerializationException
 import kotools.types.shouldNotEqual
+import kotools.types.text.toNotBlankString
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
@@ -72,8 +72,12 @@ class StrictlyPositiveIntTest {
     fun toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
         val number: Number = NegativeInt.random().toInt()
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
+        result.shouldFailWithIllegalArgumentException { getOrThrow() }
+            .message
+            .shouldBeNotNull()
+            .toNotBlankString()
+            .getOrThrow()
+            .shouldEqual(StrictlyPositiveInt errorMessageFor number)
     }
 
     @ExperimentalNumberApi
@@ -81,8 +85,7 @@ class StrictlyPositiveIntTest {
     fun toStrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_Number() {
         val number: Number = Random.nextInt(1..Int.MAX_VALUE)
         val result: StrictlyPositiveInt? = number.toStrictlyPositiveIntOrNull()
-        result.shouldBeNotNull()
-            .toInt() shouldEqual number
+        result.shouldBeNotNull().toInt() shouldEqual number
     }
 
     @ExperimentalNumberApi
@@ -109,17 +112,17 @@ class StrictlyPositiveIntTest {
             number.shouldFailWithIllegalArgumentException {
                 toStrictlyPositiveIntOrThrow()
             }
-        error.shouldHaveAMessage()
+        error.message.shouldBeNotNull()
+            .toNotBlankString()
+            .getOrThrow()
+            .shouldEqual(StrictlyPositiveInt errorMessageFor number)
     }
 
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
-        // GIVEN
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        // WHEN
         val result: StrictlyNegativeInt = -x
-        // THEN
         result.toInt() shouldEqual -x.toInt()
     }
 
@@ -156,9 +159,13 @@ class StrictlyPositiveIntSerializerTest {
     fun deserialization_should_fail_with_a_negative_Int() {
         val value: Int = NegativeInt.random().toInt()
         val encoded: String = Json.encodeToString(value)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<StrictlyPositiveInt>(encoded)
-        }
-        exception.shouldHaveAMessage()
+        val error: SerializationException =
+            Json.shouldFailWithSerializationException {
+                decodeFromString<StrictlyPositiveInt>(encoded)
+            }
+        error.message.shouldBeNotNull()
+            .toNotBlankString()
+            .getOrThrow()
+            .shouldEqual(StrictlyPositiveInt errorMessageFor value)
     }
 }
