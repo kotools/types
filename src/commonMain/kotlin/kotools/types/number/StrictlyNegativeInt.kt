@@ -24,7 +24,7 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding
- * or truncation, or returns `null` if this number is positive.
+ * or truncation, or returns `null` if this number is [positive][PositiveInt].
  *
  * Here's some usage examples:
  *
@@ -41,7 +41,7 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  *
  * You can use the [toStrictlyNegativeIntOrThrow] function for throwing an
  * [IllegalArgumentException] instead of returning `null` when this number is
- * positive.
+ * [positive][PositiveInt].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
@@ -51,7 +51,7 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding
  * or truncation, or throws an [IllegalArgumentException] if this number is
- * negative.
+ * [positive][PositiveInt].
  *
  * Here's some usage examples:
  *
@@ -65,7 +65,7 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  *
  * You can use the [toStrictlyNegativeIntOrNull] function for returning `null`
  * instead of throwing an [IllegalArgumentException] when this number is
- * positive.
+ * [positive][PositiveInt].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
