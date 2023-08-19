@@ -27,7 +27,7 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding
- * or truncation, or returns `null` if this number is negative.
+ * or truncation, or returns `null` if this number is [negative][NegativeInt].
  *
  * Here's some usage examples:
  *
@@ -44,7 +44,7 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  *
  * You can use the [toStrictlyPositiveIntOrThrow] function for throwing an
  * [IllegalArgumentException] instead of returning `null` when this number is
- * negative.
+ * [negative][NegativeInt].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
@@ -55,7 +55,7 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding
  * or truncation, or throws [IllegalArgumentException] if this number is
- * negative.
+ * [negative][NegativeInt].
  *
  * Here's some usage examples:
  *
@@ -69,7 +69,7 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
  *
  * You can use the [toStrictlyPositiveIntOrNull] function for returning `null`
  * instead of throwing an [IllegalArgumentException] when this number is
- * negative.
+ * [negative][NegativeInt].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
