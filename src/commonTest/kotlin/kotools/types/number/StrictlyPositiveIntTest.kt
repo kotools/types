@@ -63,14 +63,14 @@ class StrictlyPositiveIntCompanionTest {
 class StrictlyPositiveIntTest {
     @Test
     fun toStrictlyPositiveInt_should_pass_with_a_strictly_positive_Number() {
-        val number: Number = StrictlyPositiveInt.random().toInt()
+        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         result.getOrThrow().toInt() shouldEqual number
     }
 
     @Test
     fun toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
-        val number: Number = NegativeInt.random().toInt()
+        val number: Number = Random.nextInt(Int.MIN_VALUE..0)
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
         result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .message
