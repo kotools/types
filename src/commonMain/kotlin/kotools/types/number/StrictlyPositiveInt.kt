@@ -26,8 +26,8 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     runCatching { toStrictlyPositiveIntOrThrow() }
 
 /**
- * Returns this number as a [StrictlyPositiveInt], which may involve rounding
- * or truncation, or returns `null` if this number is [negative][NegativeInt].
+ * Returns this number as a [StrictlyPositiveInt], which may involve rounding or
+ * truncation, or returns `null` if this number is [negative][NegativeInt].
  *
  * Here's some usage examples:
  *
@@ -53,8 +53,8 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
     ?.toStrictlyPositiveIntOrThrow()
 
 /**
- * Returns this number as a [StrictlyPositiveInt], which may involve rounding
- * or truncation, or throws [IllegalArgumentException] if this number is
+ * Returns this number as a [StrictlyPositiveInt], which may involve rounding or
+ * truncation, or throws [IllegalArgumentException] if this number is
  * [negative][NegativeInt].
  *
  * Here's some usage examples:
