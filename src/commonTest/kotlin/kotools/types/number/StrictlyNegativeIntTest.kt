@@ -5,17 +5,17 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.shouldEqual
-import kotools.types.shouldNotEqual
-import kotools.types.shouldBeNull
-import kotools.types.shouldBeNotNull
-import kotools.types.shouldHaveAMessage
-import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
+import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
+import kotools.types.shouldEqual
+import kotools.types.shouldFailWithIllegalArgumentException
+import kotools.types.shouldNotEqual
+import kotools.types.text.toNotBlankString
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
@@ -70,8 +70,12 @@ class StrictlyNegativeIntTest {
     fun number_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
         val number: Number = PositiveInt.random().toInt()
         val result: Result<StrictlyNegativeInt> = number.toStrictlyNegativeInt()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
+        result.shouldFailWithIllegalArgumentException { getOrThrow() }
+            .message
+            .shouldBeNotNull()
+            .toNotBlankString()
+            .getOrThrow()
+            .shouldEqual(StrictlyNegativeInt errorMessageFor number)
     }
 
     @ExperimentalNumberApi
@@ -102,19 +106,21 @@ class StrictlyNegativeIntTest {
     @Test
     fun number_toStrictlyNegativeIntOrThrow_should_throw_with_a_positive_Int() {
         val number: Number = PositiveInt.random().toInt()
-        number.shouldFailWithIllegalArgumentException {
-            toStrictlyNegativeIntOrThrow()
-        }.shouldHaveAMessage()
+        val error: IllegalArgumentException =
+            number.shouldFailWithIllegalArgumentException {
+                toStrictlyNegativeIntOrThrow()
+            }
+        error.message.shouldBeNotNull()
+            .toNotBlankString()
+            .getOrThrow()
+            .shouldEqual(StrictlyNegativeInt errorMessageFor number)
     }
 
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
-        // GIVEN
         val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
-        // WHEN
         val result: StrictlyPositiveInt = -x
-        // THEN
         result.toInt() shouldEqual -x.toInt()
     }
 
@@ -155,6 +161,9 @@ class StrictlyNegativeIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<StrictlyNegativeInt>(encoded)
         }
-        exception.shouldHaveAMessage()
+        exception.message.shouldBeNotNull()
+            .toNotBlankString()
+            .getOrThrow()
+            .shouldEqual(StrictlyNegativeInt errorMessageFor value)
     }
 }

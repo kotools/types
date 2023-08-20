@@ -13,14 +13,17 @@ import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
 
+private fun Int.isStrictlyNegative(): Boolean = this < 0
+
 /**
  * Returns this number as an encapsulated [StrictlyNegativeInt], which may
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
+@OptIn(ExperimentalNumberApi::class)
 @SinceKotoolsTypes("4.1")
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    StrictlyNegativeInt of toInt()
+    runCatching { toStrictlyNegativeIntOrThrow() }
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
@@ -45,8 +48,9 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
-public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    toStrictlyNegativeInt().getOrNull()
+public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
+    .takeIf { it.isStrictlyNegative() }
+    ?.toStrictlyNegativeIntOrThrow()
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
@@ -69,15 +73,28 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.4")
-public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
-    toStrictlyNegativeInt().getOrThrow()
+public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = toInt()
+    .toStrictlyNegativeIntOrThrow()
+
+private fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
+    StrictlyNegativeInt(this)
 
 /** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt
-private constructor(private val value: Int) : NonZeroInt, NegativeInt {
+internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
+    init {
+        require(value.isStrictlyNegative()) { errorMessageFor(value) }
+    }
+
+    @SinceKotoolsTypes("4.0")
+    override fun toInt(): Int = value
+
+    @SinceKotoolsTypes("4.0")
+    override fun toString(): String = "$value"
+
     /**
      * Contains declarations for holding or building a [StrictlyNegativeInt].
      */
@@ -104,10 +121,10 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
 
-        internal infix fun of(value: Int): Result<StrictlyNegativeInt> = value
-            .takeIf { it < ZeroInt.toInt() }
-            ?.runCatching { StrictlyNegativeInt(this) }
-            ?: Result.failure(value shouldBe aStrictlyNegativeNumber)
+        internal infix fun errorMessageFor(number: Number): NotBlankString =
+            "Number should be strictly negative (tried with $number)."
+                .toNotBlankString()
+                .getOrThrow()
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")
@@ -116,12 +133,6 @@ private constructor(private val value: Int) : NonZeroInt, NegativeInt {
             .toStrictlyNegativeInt()
             .getOrThrow()
     }
-
-    @SinceKotoolsTypes("4.0")
-    override fun toInt(): Int = value
-
-    @SinceKotoolsTypes("4.0")
-    override fun toString(): String = "$value"
 }
 
 /** Returns the negative of this integer. */
@@ -142,5 +153,7 @@ internal object StrictlyNegativeIntSerializer :
     override fun deserialize(value: Int): StrictlyNegativeInt = value
         .toStrictlyNegativeInt()
         .getOrNull()
-        ?: throw SerializationException(value shouldBe aStrictlyNegativeNumber)
+        ?: throw SerializationException(
+            "${StrictlyNegativeInt errorMessageFor value}"
+        )
 }
