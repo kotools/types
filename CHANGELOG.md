@@ -22,9 +22,11 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-**Experimental** builders suffixed by `OrNull` and `OrThrow` for the
-`StrictlyPositiveInt` (issue [#141]) and the `StrictlyNegativeInt` types (issue
-[#149] implemented by [@o-korpi]).
+**Experimental** builders suffixed by `OrNull` and `OrThrow` for the following
+types:
+- `StrictlyPositiveInt` (issue [#141])
+- `StrictlyNegativeInt` (issue [#149] implemented by [@o-korpi]).
+
 Here's an example for the `StrictlyPositiveInt` type:
 
 [#141]: https://github.com/kotools/types/issues/141
