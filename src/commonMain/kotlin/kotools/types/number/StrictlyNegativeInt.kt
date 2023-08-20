@@ -23,8 +23,8 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     StrictlyNegativeInt of toInt()
 
 /**
- * Returns this number as a [StrictlyNegativeInt], which may involve rounding
- * or truncation, or returns `null` if this number is [positive][PositiveInt].
+ * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
+ * truncation, or returns `null` if this number is [positive][PositiveInt].
  *
  * Here's some usage examples:
  *
@@ -49,8 +49,8 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
     toStrictlyNegativeInt().getOrNull()
 
 /**
- * Returns this number as a [StrictlyNegativeInt], which may involve rounding
- * or truncation, or throws an [IllegalArgumentException] if this number is
+ * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
+ * truncation, or throws an [IllegalArgumentException] if this number is
  * [positive][PositiveInt].
  *
  * Here's some usage examples:
