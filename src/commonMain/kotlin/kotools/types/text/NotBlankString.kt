@@ -23,7 +23,7 @@ import kotlin.jvm.JvmInline
  */
 @SinceKotoolsTypes("4.0")
 public fun String.toNotBlankString(): Result<NotBlankString> =
-    NotBlankString of this
+    runCatching { NotBlankString(this) }
 
 /**
  * Returns this string as a [NotBlankString], or returns `null` if this string
@@ -68,9 +68,8 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? {
  */
 @ExperimentalTextApi
 @ExperimentalSinceKotoolsTypes("4.4")
-public fun String.toNotBlankStringOrThrow(): NotBlankString {
-    TODO()
-}
+public fun String.toNotBlankStringOrThrow(): NotBlankString =
+    NotBlankString(this)
 
 /**
  * Representation of strings that have at least one character, excluding
@@ -79,20 +78,17 @@ public fun String.toNotBlankStringOrThrow(): NotBlankString {
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotBlankString private constructor(
+public value class NotBlankString internal constructor(
     private val value: String
 ) : Comparable<NotBlankString> {
-    internal companion object {
-        infix fun of(value: String): Result<NotBlankString> = value
-            .takeIf(String::isNotBlank)
-            ?.runCatching { NotBlankString(this) }
-            ?: Result.failure(NotBlankStringException)
-    }
-
     /** Returns the length of this string. */
     public val length: StrictlyPositiveInt
         get() = value.length.toStrictlyPositiveInt()
             .getOrThrow()
+
+    init {
+        require(value.isNotBlank()) { NotBlankStringException.message }
+    }
 
     /**
      * Compares this string alphabetically with the [other] one for order.
@@ -152,5 +148,6 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
         ?: throw SerializationException(NotBlankStringException)
 }
 
-private object NotBlankStringException :
-    IllegalArgumentException("Given string shouldn't be blank.")
+internal object NotBlankStringException : IllegalArgumentException() {
+    override val message: String = "Given string shouldn't be blank."
+}

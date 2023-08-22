@@ -9,7 +9,9 @@ import kotools.types.Package
 import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
+import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
+import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
@@ -22,18 +24,40 @@ private object StringExample {
 
 class NotBlankStringTest {
     @Test
-    fun string_toNotBlankString_should_pass_with_a_not_blank_String() {
+    fun toNotBlankString_should_pass_with_a_not_blank_String() {
         val result: Result<NotBlankString> =
             StringExample.NOT_BLANK.toNotBlankString()
         "${result.getOrThrow()}" shouldEqual StringExample.NOT_BLANK
     }
 
     @Test
-    fun string_toNotBlankString_should_fail_with_a_blank_String() {
+    fun toNotBlankString_should_fail_with_a_blank_String() {
         val result: Result<NotBlankString> =
             StringExample.BLANK.toNotBlankString()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
+        result.shouldFailWithIllegalArgumentException { getOrThrow() }
+            .message
+            .shouldBeNotNull()
+            .shouldEqual(NotBlankStringException.message)
+    }
+
+    @ExperimentalTextApi
+    @Test
+    fun toNotBlankStringOrThrow_should_pass_with_a_not_blank_String() {
+        val string: String = StringExample.NOT_BLANK
+        val result: NotBlankString = string.toNotBlankStringOrThrow()
+        "$result" shouldEqual string
+    }
+
+    @ExperimentalTextApi
+    @Test
+    fun toNotBlankStringOrThrow_should_fail_with_a_blank_String() {
+        val string: String = StringExample.BLANK
+        val error: IllegalArgumentException =
+            string.shouldFailWithIllegalArgumentException {
+                toNotBlankStringOrThrow()
+            }
+        error.message.shouldBeNotNull()
+            .shouldEqual(NotBlankStringException.message)
     }
 
     @Test
