@@ -26,6 +26,53 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
     NotBlankString of this
 
 /**
+ * Returns this string as a [NotBlankString], or returns `null` if this string
+ * is [blank][String.isBlank].
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * var result: NotBlankString? = "hello world".toNotBlankStringOrNull()
+ * println(result) // hello world
+ *
+ * result = "  ".toNotBlankStringOrNull()
+ * println(null) // null
+ * ```
+ *
+ * You can use the [toNotBlankStringOrThrow] function for throwing an
+ * [IllegalArgumentException] instead of returning `null` when this string is
+ * [blank][String.isBlank].
+ */
+@ExperimentalTextApi
+@ExperimentalSinceKotoolsTypes("4.4")
+public fun String.toNotBlankStringOrNull(): NotBlankString? {
+    TODO()
+}
+
+/**
+ * Returns this string as a [NotBlankString], or throws an
+ * [IllegalArgumentException] if this string is [blank][String.isBlank].
+ *
+ * Here's some usage examples:
+ *
+ * ```kotlin
+ * var result: NotBlankString = "hello world".toNotBlankStringOrThrow()
+ * println(result) // hello world
+ *
+ * "  ".toNotBlankStringOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * You can use the [toNotBlankStringOrNull] function for returning `null`
+ * instead of throwing an [IllegalArgumentException] when this string is
+ * [blank][String.isBlank].
+ */
+@ExperimentalTextApi
+@ExperimentalSinceKotoolsTypes("4.4")
+public fun String.toNotBlankStringOrThrow(): NotBlankString {
+    TODO()
+}
+
+/**
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  */

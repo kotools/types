@@ -25,10 +25,12 @@ All notable changes to this project will be documented in this file.
 **Experimental** builders suffixed by `OrNull` and `OrThrow` for the following
 types:
 - `StrictlyPositiveInt` (issue [#141])
-- `StrictlyNegativeInt` (issue [#149] implemented by [@o-korpi]).
+- `StrictlyNegativeInt` (issue [#149] implemented by [@o-korpi])
+- `NotBlankString` (issue [#174]).
 
 [#141]: https://github.com/kotools/types/issues/141
 [#149]: https://github.com/kotools/types/issues/149
+[#174]: https://github.com/kotools/types/issues/174
 [@o-korpi]: https://github.com/o-korpi
 
 Here's an example for the `StrictlyPositiveInt` type:
