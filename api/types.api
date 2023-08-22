@@ -389,6 +389,7 @@ public final class kotools/types/result/ResultContext$DefaultImpls {
 }
 
 public final class kotools/types/text/NotBlankString : java/lang/Comparable {
+	public static final field Companion Lkotools/types/text/NotBlankString$Companion;
 	public static final synthetic fun box-impl (Ljava/lang/String;)Lkotools/types/text/NotBlankString;
 	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public fun compareTo-Adxdz-0 (Ljava/lang/String;)I
@@ -402,6 +403,10 @@ public final class kotools/types/text/NotBlankString : java/lang/Comparable {
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class kotools/types/text/NotBlankString$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class kotools/types/text/NotBlankStringKt {
