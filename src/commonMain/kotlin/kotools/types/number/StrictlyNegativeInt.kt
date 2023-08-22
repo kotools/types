@@ -20,10 +20,9 @@ private fun Int.isStrictlyNegative(): Boolean = this < 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
-@OptIn(ExperimentalNumberApi::class)
 @SinceKotoolsTypes("4.1")
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    runCatching { toStrictlyNegativeIntOrThrow() }
+    runCatching { StrictlyNegativeInt(toInt()) }
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
