@@ -45,9 +45,9 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
  */
 @ExperimentalTextApi
 @ExperimentalSinceKotoolsTypes("4.4")
-public fun String.toNotBlankStringOrNull(): NotBlankString? {
-    TODO()
-}
+public fun String.toNotBlankStringOrNull(): NotBlankString? =
+    takeIf { it.isNotBlank() }
+        ?.toNotBlankStringOrThrow()
 
 /**
  * Returns this string as a [NotBlankString], or throws an

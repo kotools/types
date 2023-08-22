@@ -10,6 +10,7 @@ import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
@@ -38,6 +39,22 @@ class NotBlankStringTest {
             .message
             .shouldBeNotNull()
             .shouldEqual(NotBlankStringException.message)
+    }
+
+    @ExperimentalTextApi
+    @Test
+    fun toNotBlankStringOrNull_should_pass_with_a_not_blank_String() {
+        val string: String = StringExample.NOT_BLANK
+        val result: NotBlankString? = string.toNotBlankStringOrNull()
+        "${result.shouldBeNotNull()}" shouldEqual string
+    }
+
+    @ExperimentalTextApi
+    @Test
+    fun toNotBlankStringOrNull_should_fail_with_a_blank_String() {
+        val string: String = StringExample.BLANK
+        val result: NotBlankString? = string.toNotBlankStringOrNull()
+        result.shouldBeNull()
     }
 
     @ExperimentalTextApi
