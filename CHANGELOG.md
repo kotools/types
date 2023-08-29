@@ -22,16 +22,13 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-#### Experimental builders suffixed by `OrNull` and `OrThrow`
+#### Builders suffixed by `OrNull` and `OrThrow`
 
 For aligning with Kotlin standards incrementally, like discussed in the idea
 [#104], we've added **experimental** builders that, in case of a failure,
-should:
-
-- return `null` if the builder is suffixed by `OrNull`
-- throw an exception if the builder is suffixed by `OrThrow`.
-
-These were introduced for the following types:
+should return `null` if the builder is suffixed by `OrNull` or throw an
+exception if it's suffixed by `OrThrow`.
+This change applies for the following types:
 
 - `StrictlyPositiveInt` (issue [#141])
 - `StrictlyNegativeInt` (issue [#149] implemented by [@o-korpi])
