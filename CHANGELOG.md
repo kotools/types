@@ -22,16 +22,20 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-**Experimental** builders suffixed by `OrNull` and `OrThrow` for the following
-types:
+#### Experimental builders suffixed by `OrNull` and `OrThrow`
+
+For aligning with Kotlin standards incrementally, like discussed in the idea
+[#104], we've added **experimental** builders that, in case of a failure,
+should:
+
+- return `null` if the builder is suffixed by `OrNull`
+- throw an exception if the builder is suffixed by `OrThrow`.
+
+These were introduced for the following types:
+
 - `StrictlyPositiveInt` (issue [#141])
 - `StrictlyNegativeInt` (issue [#149] implemented by [@o-korpi])
 - `NotBlankString` (issue [#174]).
-
-[#141]: https://github.com/kotools/types/issues/141
-[#149]: https://github.com/kotools/types/issues/149
-[#174]: https://github.com/kotools/types/issues/174
-[@o-korpi]: https://github.com/o-korpi
 
 Here's an example for the `StrictlyPositiveInt` type:
 
@@ -43,6 +47,12 @@ Here's an example for the `StrictlyPositiveInt` type:
 1.toStrictlyPositiveIntOrNull()
 2.toStrictlyPositiveIntOrThrow()
 ```
+
+[#104]: https://github.com/kotools/types/discussions/104
+[#141]: https://github.com/kotools/types/issues/141
+[#149]: https://github.com/kotools/types/issues/149
+[#174]: https://github.com/kotools/types/issues/174
+[@o-korpi]: https://github.com/o-korpi
 
 ## 4.3.0
 
