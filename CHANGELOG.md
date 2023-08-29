@@ -22,6 +22,14 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+#### Experimental annotation for collections
+
+This version introduces an `ExperimentalCollectionApi` annotation in the
+`kotools.types.experimental` package for marking experimental declarations
+of the `kotools.types.collection` package (issue [#177]).
+
+[#177]: https://github.com/kotools/types/issues/177
+
 #### Builders suffixed by `OrNull` and `OrThrow`
 
 For aligning with Kotlin standards incrementally, like discussed in the idea

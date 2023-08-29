@@ -103,6 +103,9 @@ public final class kotools/types/collection/NotEmptySetKt {
 	public static final fun toNotEmptySet (Ljava/util/Collection;)Ljava/lang/Object;
 }
 
+public abstract interface annotation class kotools/types/experimental/ExperimentalCollectionApi : java/lang/annotation/Annotation {
+}
+
 public abstract interface annotation class kotools/types/experimental/ExperimentalNumberApi : java/lang/annotation/Annotation {
 }
 
