@@ -43,8 +43,8 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
  * [IllegalArgumentException] instead of returning `null` when this string is
  * [blank][String.isBlank].
  */
-@ExperimentalTextApi
 @ExperimentalSinceKotoolsTypes("4.4")
+@ExperimentalTextApi
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
     takeIf { it.isNotBlank() }
         ?.toNotBlankStringOrThrow()
@@ -66,8 +66,8 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  * instead of throwing an [IllegalArgumentException] when this string is
  * [blank][String.isBlank].
  */
-@ExperimentalTextApi
 @ExperimentalSinceKotoolsTypes("4.4")
+@ExperimentalTextApi
 public fun String.toNotBlankStringOrThrow(): NotBlankString =
     NotBlankString(this)
 
