@@ -33,8 +33,8 @@ dependencies {
 kotlin {
     explicitApi()
     js(IR) { browser() }
+    jvmToolchain(17)
     jvm {
-        compilations.all { kotlinOptions.jvmTarget = "17" }
         testRuns["test"].executionTask { useJUnitPlatform() }
     }
     linuxX64("linux")
