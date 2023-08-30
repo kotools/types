@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
-
 plugins {
     val kotlinVersion = "1.7.21"
     kotlin("multiplatform") version kotlinVersion
@@ -14,7 +12,7 @@ group = "org.kotools"
 version = "4.4.0-SNAPSHOT"
 val projectName = "Kotools Types"
 
-repositories(RepositoryHandler::mavenCentral)
+repositories { mavenCentral() }
 
 dependencies {
     // Kotlin
@@ -34,7 +32,7 @@ dependencies {
 
 kotlin {
     explicitApi()
-    js(IR, KotlinJsTargetDsl::browser)
+    js(IR) { browser() }
     jvm {
         compilations.all { kotlinOptions.jvmTarget = "17" }
         testRuns["test"].executionTask { useJUnitPlatform() }
@@ -98,7 +96,7 @@ publishing {
         }
     }
     publications {
-        getByName("kotlinMultiplatform", MavenPublication::class) {
+        getByName<MavenPublication>("kotlinMultiplatform") {
             groupId = "${project.group}"
             artifactId = project.name
             version = "${project.version}"
