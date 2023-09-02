@@ -42,7 +42,7 @@ This change applies for the following types:
 - `StrictlyPositiveInt` (issue [#141] fixed by PR [#164])
 - `StrictlyNegativeInt` (issue [#149] fixed by PR [#181] and by [@o-korpi] in PR
   [#167])
-- `NotBlankString` (issue [#174]).
+- `NotBlankString` (issue [#174] fixed by PR [#182]).
 
 Here's an example for the `StrictlyPositiveInt` type:
 
@@ -62,6 +62,7 @@ Here's an example for the `StrictlyPositiveInt` type:
 [#167]: https://github.com/kotools/types/pull/167
 [#174]: https://github.com/kotools/types/issues/174
 [#181]: https://github.com/kotools/types/pull/181
+[#182]: https://github.com/kotools/types/pull/182
 [@o-korpi]: https://github.com/o-korpi
 
 ## 4.3.0
