@@ -89,6 +89,7 @@ tasks.dokkaHtml {
                 from(dokkaDirectory)
                 into(rootDir.resolve("docs"))
             }
+            delete(apiReferencesDir.resolve(currentVersion).resolve("older"))
         }
     }
 }
