@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.versioning.VersioningConfiguration
+import org.jetbrains.dokka.versioning.VersioningPlugin
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsTargetDsl
 
 plugins {
@@ -8,6 +10,10 @@ plugins {
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.1"
     `maven-publish`
     signing
+}
+
+buildscript {
+    dependencies { classpath("org.jetbrains.dokka:versioning-plugin:1.7.20") }
 }
 
 group = "org.kotools"
@@ -30,6 +36,9 @@ dependencies {
     }
     commonMainImplementation(kotlinxSerialization("core"))
     commonTestImplementation(kotlinxSerialization("json"))
+
+    // Dokka
+    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:1.7.20")
 }
 
 kotlin {
@@ -61,6 +70,12 @@ tasks.dokkaHtml {
         }
     }
     moduleName.set(projectName)
+    val currentVersion = "${project.version}"
+    val apiReferencesDir: File = rootDir.resolve("api/references")
+    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+        version = currentVersion
+        olderVersionsDir = apiReferencesDir
+    }
     doLast {
         val images = "images"
         val logo = "logo-icon.svg"
@@ -72,6 +87,16 @@ tasks.dokkaHtml {
                 .resolve(logo)
             from(kotoolsLogo)
             into(dokkaImages)
+        }
+        if ("SNAPSHOT" !in currentVersion) {
+            copy {
+                from(dokkaDirectory)
+                into(apiReferencesDir.resolve(currentVersion))
+            }
+            copy {
+                from(dokkaDirectory)
+                into(rootDir.resolve("docs"))
+            }
         }
     }
 }
