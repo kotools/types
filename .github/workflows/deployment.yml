@@ -23,10 +23,3 @@ jobs:
           cache: gradle
       - name: Generate documentation with Dokka
         run: ./gradlew dokkaHtml --no-daemon
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
-        with:
-          branch: docs
-          folder: build/dokka
-          git-config-email: ${{ secrets.GIT_EMAIL }}
-          git-config-name: ${{ secrets.GIT_USER }}
