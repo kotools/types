@@ -1,9 +1,8 @@
 plugins {
-    val kotlinVersion = "1.7.21"
-    kotlin("multiplatform") version kotlinVersion
-    kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.dokka") version "1.7.20"
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.1"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlinx.binary.compatibility.validator)
     `maven-publish`
     signing
 }
@@ -20,14 +19,8 @@ dependencies {
     commonTestImplementation(kotlin("test"))
 
     // Kotlinx Serialization
-    fun kotlinxSerialization(module: String): String {
-        val group = "org.jetbrains.kotlinx"
-        val artifact = "kotlinx-serialization-$module"
-        val version = "1.4.1"
-        return "$group:$artifact:$version"
-    }
-    commonMainImplementation(kotlinxSerialization("core"))
-    commonTestImplementation(kotlinxSerialization("json"))
+    commonMainImplementation(libs.kotlinx.serialization.core)
+    commonTestImplementation(libs.kotlinx.serialization.json)
 }
 
 kotlin {

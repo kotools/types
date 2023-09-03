@@ -1,0 +1,35 @@
+[versions]
+dokka = "1.7.20"
+kotlin = "1.7.21"
+kotlinx-binary-compatibility-validator = "0.12.1"
+kotlinx-serialization = "1.4.1"
+
+# Plugins
+
+[plugins.dokka]
+id = "org.jetbrains.dokka"
+version.ref = "dokka"
+
+[plugins.kotlin-multiplatform]
+id = "org.jetbrains.kotlin.multiplatform"
+version.ref = "kotlin"
+
+[plugins.kotlinx-binary-compatibility-validator]
+id = "org.jetbrains.kotlinx.binary-compatibility-validator"
+version.ref = "kotlinx-binary-compatibility-validator"
+
+[plugins.kotlinx-serialization]
+id = "org.jetbrains.kotlin.plugin.serialization"
+version.ref = "kotlin"
+
+# Libraries
+
+[libraries.kotlinx-serialization-core]
+group = "org.jetbrains.kotlinx"
+name = "kotlinx-serialization-core"
+version.ref = "kotlinx-serialization"
+
+[libraries.kotlinx-serialization-json]
+group = "org.jetbrains.kotlinx"
+name = "kotlinx-serialization-json"
+version.ref = "kotlinx-serialization"
