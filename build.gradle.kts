@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
+    alias(libs.plugins.kotlinx.serialization)
     `maven-publish`
     signing
 }
