@@ -65,6 +65,23 @@ Here's an example for the `StrictlyPositiveInt` type:
 [#182]: https://github.com/kotools/types/pull/182
 [@o-korpi]: https://github.com/o-korpi
 
+### Changed
+
+#### Centralizing Gradle plugins and dependencies
+
+For reducing the overall complexity of the
+[Gradle build script](build.gradle.kts), we've centralized the plugins and the
+dependencies in a [version catalog](gradle/libs.versions.toml) instead of
+defining them in the build script (PR [#199]).
+
+Read the _[TOML + Gradle + project accessors]_ article by [@FunkyMuse] for
+more information about how to set up a version catalog with a [TOML] file.
+
+[#199]: https://github.com/kotools/types/pull/199
+[@FunkyMuse]: https://github.com/FunkyMuse
+[TOML + Gradle + project accessors]: https://funkymuse.dev/posts/toml-gradle
+[TOML]: https://toml.io
+
 ## 4.3.0
 
 _Release date: 2023-08-14._
