@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.kotools"
-version = "4.4.0-SNAPSHOT"
+version = "4.3.1-SNAPSHOT"
 val projectName = "Kotools Types"
 
 repositories { mavenCentral() }
