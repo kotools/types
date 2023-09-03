@@ -62,6 +62,9 @@ This project is very light and just ship with one direct dependency:
 Knowing that these types could be used in any type of API, this feature is
 essential for this library.
 
+See the [version catalog](gradle/libs.versions.toml) for more details about the
+tools used for building Kotools Types.
+
 ### Error handling agnostic
 
 Users should be responsible for deciding how to handle errors, not this library.
@@ -124,10 +127,9 @@ about what's happening, please follow us here and say hi!
 - [GitHub Discussions]
 - [#kotools-types on Kotlin Slack]
 
-See the [contributing guidelines] for more details.
+See the [contributing guidelines](CONTRIBUTING.md) for more details.
 
 [#kotools-types on Kotlin Slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
-[contributing guidelines]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md
 [GitHub Discussions]: https://github.com/kotools/types/discussions
 
 ## Show Your Support
@@ -149,6 +151,4 @@ as bug reports, feature suggestions and so on.
 
 ## License
 
-This project is licensed under the [MIT License].
-
-[MIT License]: https://choosealicense.com/licenses/mit
+This project is licensed under the [MIT License](LICENSE.txt).
