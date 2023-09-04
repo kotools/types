@@ -26,10 +26,12 @@ All notable changes to this project will be documented in this file.
 
 This version introduces an `ExperimentalCollectionApi` annotation in the
 `kotools.types.experimental` package for marking experimental declarations
-of the `kotools.types.collection` package (issue [#177] fixed by PR [#183]).
+of the `kotools.types.collection` package (issue [#177] fixed by PRs [#183] and
+[#201]).
 
 [#177]: https://github.com/kotools/types/issues/177
 [#183]: https://github.com/kotools/types/pull/183
+[#201]: https://github.com/kotools/types/pull/201
 
 #### Builders suffixed by `OrNull` and `OrThrow`
 
