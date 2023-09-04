@@ -11,7 +11,7 @@ import kotlin.annotation.AnnotationTarget.TYPEALIAS
 @MustBeDocumented
 @RequiresOptIn
 @Retention(BINARY)
-@SinceKotoolsTypes("4.4")
+@SinceKotoolsTypes("4.3.1")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalCollectionApi
 
