@@ -11,7 +11,7 @@ plugins {
 }
 
 buildscript {
-    dependencies { classpath("org.jetbrains.dokka:versioning-plugin:1.7.20") }
+    dependencies { classpath(libs.dokka.versioning) }
 }
 
 group = "org.kotools"
@@ -30,7 +30,7 @@ dependencies {
     commonTestImplementation(libs.kotlinx.serialization.json)
 
     // Dokka
-    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:1.7.20")
+    dokkaHtmlPlugin(libs.dokka.versioning)
 }
 
 kotlin {

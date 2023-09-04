@@ -24,6 +24,11 @@ version.ref = "kotlin"
 
 # Libraries
 
+[libraries.dokka-versioning]
+group = "org.jetbrains.dokka"
+name = "versioning-plugin"
+version.ref = "dokka"
+
 [libraries.kotlinx-serialization-core]
 group = "org.jetbrains.kotlinx"
 name = "kotlinx-serialization-core"
