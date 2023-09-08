@@ -42,8 +42,8 @@ exception if it's suffixed by `OrThrow`.
 This change applies for the following types:
 
 - `StrictlyPositiveInt` (issue [#141] fixed by PRs [#164] and [#202])
-- `StrictlyNegativeInt` (issue [#149] fixed by PR [#181] and by [@o-korpi] in PR
-  [#167])
+- `StrictlyNegativeInt` (issue [#149] fixed by PRs [#181] and [#203], and by
+  [@o-korpi] in PR [#167])
 - `NotBlankString` (issue [#174] fixed by PR [#182]).
 
 Here's an example for the `StrictlyPositiveInt` type:
@@ -66,6 +66,7 @@ Here's an example for the `StrictlyPositiveInt` type:
 [#181]: https://github.com/kotools/types/pull/181
 [#182]: https://github.com/kotools/types/pull/182
 [#202]: https://github.com/kotools/types/pull/202
+[#203]: https://github.com/kotools/types/pull/203
 [@o-korpi]: https://github.com/o-korpi
 
 ### Changed
