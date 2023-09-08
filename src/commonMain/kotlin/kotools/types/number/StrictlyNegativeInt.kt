@@ -46,7 +46,7 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  * [positive][PositiveInt].
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.4")
+@ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
     .takeIf { it.isStrictlyNegative() }
     ?.toStrictlyNegativeIntOrThrow()
@@ -71,7 +71,7 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
  * [positive][PositiveInt].
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.4")
+@ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = toInt()
     .toStrictlyNegativeIntOrThrow()
 
