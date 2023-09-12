@@ -20,9 +20,9 @@ jobs:
       - name: Setup Java & Gradle
         uses: actions/setup-java@v3.11.0
         with:
+          cache: gradle
           distribution: temurin
           java-version: 17
-          cache: gradle
       - name: Get archived API references
         run: |
           git checkout origin/api-reference -- versions && \
@@ -34,18 +34,18 @@ jobs:
       - name: Archive latest API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          folder: api/references
           branch: api-reference
-          git-config-name: ${{ secrets.GIT_USER }}
+          folder: api/references
           git-config-email: ${{ secrets.GIT_EMAIL }}
+          git-config-name: ${{ secrets.GIT_USER }}
           target-folder: versions
       - name: Deploy latest API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          folder: build/dokka
           branch: api-reference
-          git-config-name: ${{ secrets.GIT_USER }}
+          folder: build/dokka
           git-config-email: ${{ secrets.GIT_EMAIL }}
+          git-config-name: ${{ secrets.GIT_USER }}
           target-folder: docs
       - name: Remove archived API references
         run: git rm -rf api/references/
