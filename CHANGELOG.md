@@ -75,11 +75,14 @@ Here's an example for the `StrictlyPositiveInt` type:
 #### Multiple versions in API reference
 
 The configuration of the [API reference] was improved for supporting multiple
-versions, starting from version [4.2.0][tag/4.2.0] (PR [#198]).
+versions, starting from version [4.2.0][tag/4.2.0] (PR [#198] and issue [#205]
+fixed by [#206]).
 We recommend you to only use the versions documented in the API reference for a
 better experience while working with Kotools Types.
 
 [#198]: https://github.com/kotools/types/pull/198
+[#205]: https://github.com/kotools/types/issues/205
+[#206]: https://github.com/kotools/types/pull/206
 [API reference]: https://types.kotools.org
 
 #### Centralizing Gradle plugins and dependencies
