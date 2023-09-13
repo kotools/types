@@ -25,10 +25,9 @@ jobs:
           cache: gradle
           distribution: temurin
           java-version: 17
-      - name: Set Git user and email
-        uses: fregante/setup-git-user@v2.0.1
       - name: Get project version
         run: |
+          ./gradlew projectVersion -q --dry-run
           echo "project_version=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
       - name: Get archived API references
         run: |
@@ -38,6 +37,8 @@ jobs:
           rm -r versions/
       - name: Generate latest API reference
         run: ./gradlew dokkaHtml -q
+      - name: Set Git user and email
+        uses: fregante/setup-git-user@v2.0.1
       - name: Archive API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
