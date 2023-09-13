@@ -29,7 +29,7 @@ jobs:
         uses: fregante/setup-git-user@v2.0.1
       - name: Get project version
         run: |
-          echo "PROJECT_VERSION=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
+          echo "project_version=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
       - name: Get archived API references
         run: |
           git checkout "origin/$BRANCH_TARGET" -- versions && \
@@ -38,19 +38,19 @@ jobs:
           rm -r versions/
       - name: Generate latest API reference
         run: ./gradlew dokkaHtml -q
-      - name: Archive API reference of v${{ env.PROJECT_VERSION }}
+      - name: Archive API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
-          commit-message: Archive API reference of v${{ env.PROJECT_VERSION }}
+          commit-message: Archive API reference of v$project_version
           folder: api/references
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
-      - name: Deploy API reference of v${{ env.PROJECT_VERSION }}
+      - name: Deploy API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
-          commit-message: Deploy API reference of v${{ env.PROJECT_VERSION }}
+          commit-message: Deploy API reference of v$project_version
           folder: build/dokka
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: docs
