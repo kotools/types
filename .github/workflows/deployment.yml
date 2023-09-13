@@ -8,7 +8,7 @@ jobs:
     name: Deploy API reference
     runs-on: ubuntu-latest
     env:
-      BRANCH_TARGET: api-reference
+      BRANCH_TARGET: deploy-test
       DEPLOY_ACTION: JamesIves/github-pages-deploy-action@v4.4.1
     permissions:
       contents: write
