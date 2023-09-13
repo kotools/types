@@ -25,6 +25,11 @@ jobs:
           cache: gradle
           distribution: temurin
           java-version: 17
+      - name: Set Git user and email
+        uses: fregante/setup-git-user@v2.0.1
+      - name: Get project version
+        run: |
+          echo "PROJECT_VERSION=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
       - name: Get archived API references
         run: |
           git checkout "origin/$BRANCH_TARGET" -- versions && \
@@ -32,20 +37,20 @@ jobs:
           git mv -f versions/* api/references/ && \
           rm -r versions/
       - name: Generate latest API reference
-        run: ./gradlew dokkaHtml -q --no-daemon
-      - name: Set Git user and email
-        uses: fregante/setup-git-user@v2.0.1
-      - name: Archive latest API reference
+        run: ./gradlew dokkaHtml -q
+      - name: Archive API reference of v${{ env.PROJECT_VERSION }}
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
+          commit-message: Archive API reference of v${{ env.PROJECT_VERSION }}
           folder: api/references
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
-      - name: Deploy latest API reference
+      - name: Deploy API reference of v${{ env.PROJECT_VERSION }}
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
+          commit-message: Deploy API reference of v${{ env.PROJECT_VERSION }}
           folder: build/dokka
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: docs

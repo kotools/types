@@ -18,6 +18,11 @@ group = "org.kotools"
 version = "4.3.1-SNAPSHOT"
 val projectName = "Kotools Types"
 
+tasks.register("projectVersion") {
+    this.description = "Shows the version of this project."
+    doLast { println(version) }
+}
+
 repositories { mavenCentral() }
 
 dependencies {
