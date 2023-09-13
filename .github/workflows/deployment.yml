@@ -32,7 +32,7 @@ jobs:
           git mv -f versions/* api/references/ && \
           rm -r versions/
       - name: Generate latest API reference
-        run: ./gradlew dokkaHtml --no-daemon
+        run: ./gradlew dokkaHtml -q --no-daemon
       - name: Set Git user and email
         uses: fregante/setup-git-user@v2.0.1
       - name: Archive latest API reference
