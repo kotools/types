@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BRANCH_TARGET: deploy-test
-      DEPLOY_ACTION: JamesIves/github-pages-deploy-action@v4.4.1
     permissions:
       contents: write
       pages: write
@@ -35,14 +34,14 @@ jobs:
       - name: Generate latest API reference
         run: ./gradlew dokkaHtml --no-daemon
       - name: Archive latest API reference
-        uses: ${{ env.DEPLOY_ACTION }}
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
           folder: api/references
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
       - name: Deploy latest API reference
-        uses: ${{ env.DEPLOY_ACTION }}
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
           folder: build/dokka
