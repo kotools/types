@@ -7,6 +7,9 @@ jobs:
   deploy:
     name: Deploy API reference
     runs-on: ubuntu-latest
+    env:
+      BRANCH_TARGET: api-reference
+      DEPLOY_ACTION: JamesIves/github-pages-deploy-action@v4.4.1
     permissions:
       contents: write
       pages: write
@@ -25,24 +28,24 @@ jobs:
           java-version: 17
       - name: Get archived API references
         run: |
-          git checkout origin/api-reference -- versions && \
+          git checkout "origin/$BRANCH_TARGET" -- versions && \
           mkdir api/references && \
           git mv -f versions/* api/references/ && \
           rm -r versions/
       - name: Generate latest API reference
         run: ./gradlew dokkaHtml --no-daemon
       - name: Archive latest API reference
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: ${{ env.DEPLOY_ACTION }}
         with:
-          branch: api-reference
+          branch: ${{ env.BRANCH_TARGET }}
           folder: api/references
           git-config-email: ${{ secrets.GIT_EMAIL }}
           git-config-name: ${{ secrets.GIT_USER }}
           target-folder: versions
       - name: Deploy latest API reference
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: ${{ env.DEPLOY_ACTION }}
         with:
-          branch: api-reference
+          branch: ${{ env.BRANCH_TARGET }}
           folder: build/dokka
           git-config-email: ${{ secrets.GIT_EMAIL }}
           git-config-name: ${{ secrets.GIT_USER }}
