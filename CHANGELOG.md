@@ -76,7 +76,7 @@ Here's an example for the `StrictlyPositiveInt` type:
 
 The configuration of the [API reference] was improved for supporting multiple
 versions, starting from version [4.2.0][tag/4.2.0] (PR [#198] and issue [#205]
-fixed by [#206]).
+fixed by PR [#206]).
 We recommend you to only use the versions documented in the API reference for a
 better experience while working with Kotools Types.
 
