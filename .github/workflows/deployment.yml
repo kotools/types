@@ -39,16 +39,14 @@ jobs:
         with:
           branch: ${{ env.BRANCH_TARGET }}
           folder: api/references
-          git-config-email: ${{ secrets.GIT_EMAIL }}
-          git-config-name: ${{ secrets.GIT_USER }}
+          ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
       - name: Deploy latest API reference
         uses: ${{ env.DEPLOY_ACTION }}
         with:
           branch: ${{ env.BRANCH_TARGET }}
           folder: build/dokka
-          git-config-email: ${{ secrets.GIT_EMAIL }}
-          git-config-name: ${{ secrets.GIT_USER }}
+          ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: docs
       - name: Remove archived API references
         run: git rm -rf api/references/
