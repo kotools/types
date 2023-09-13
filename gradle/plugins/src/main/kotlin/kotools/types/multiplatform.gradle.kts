@@ -3,6 +3,7 @@ package kotools.types
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("kotools.types.base")
@@ -24,6 +25,13 @@ kotlin {
 
 rootProject.plugins.withType<YarnPlugin>().configureEach {
     rootProject.the<YarnRootExtension>().lockFileDirectory = projectDir
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        languageVersion = "1.5"
+    }
 }
 
 tasks.withType<Jar>().configureEach {
