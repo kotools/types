@@ -8,7 +8,7 @@ jobs:
     name: Deploy API reference
     runs-on: ubuntu-latest
     env:
-      BRANCH_TARGET: deploy-test
+      BRANCH_TARGET: api-reference
     permissions:
       contents: write
       pages: write
