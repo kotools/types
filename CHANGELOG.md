@@ -80,10 +80,16 @@ fixed by PR [#206]).
 We recommend you to only use the versions documented in the API reference for a
 better experience while working with Kotools Types.
 
+The [API reference] is also securely deployed using an [SSH deploy key] when a
+release is published (issue [#207] fixed by PR [#208]).
+
 [#198]: https://github.com/kotools/types/pull/198
 [#205]: https://github.com/kotools/types/issues/205
 [#206]: https://github.com/kotools/types/pull/206
+[#207]: https://github.com/kotools/types/issues/207
+[#208]: https://github.com/kotools/types/pull/208
 [API reference]: https://types.kotools.org
+[SSH deploy key]: https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
 
 #### Centralizing Gradle plugins and dependencies
 
