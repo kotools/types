@@ -43,7 +43,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
-          commit-message: Archive API reference of v$project_version
+          commit-message: "Archive API reference of v${{ env.project_version }}"
           folder: api/references
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
@@ -51,7 +51,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
-          commit-message: Deploy API reference of v$project_version
+          commit-message: "Deploy API reference of v${{ env.project_version }}"
           folder: build/dokka
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: docs
