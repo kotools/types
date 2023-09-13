@@ -28,7 +28,7 @@ jobs:
       - name: Get project version
         run: |
           ./gradlew projectVersion -q --dry-run
-          echo "project_version=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
+          echo "PROJECT_VERSION=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
       - name: Get archived API references
         run: |
           git checkout "origin/$BRANCH_TARGET" -- versions && \
@@ -43,7 +43,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
-          commit-message: "Archive API reference of v${{ env.project_version }}"
+          commit-message: "Archive API reference of v${{ env.PROJECT_VERSION }}"
           folder: api/references
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
@@ -51,7 +51,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
-          commit-message: "Deploy API reference of v${{ env.project_version }}"
+          commit-message: "Deploy API reference of v${{ env.PROJECT_VERSION }}"
           folder: build/dokka
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: docs
