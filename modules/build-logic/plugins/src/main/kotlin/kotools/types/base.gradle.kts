@@ -1,0 +1,18 @@
+package kotools.types
+
+plugins { base }
+
+group = "org.kotools"
+version = "4.3.1-SNAPSHOT"
+
+tasks {
+    named<TaskReportTask>("tasks") {
+        displayGroups = TaskGroup.all.map { "$it" }
+    }
+    build { description = "Assembles and checks this project." }
+    register("coordinates") {
+        group = "${TaskGroup.INFORMATION}"
+        description = "Shows the coordinates of this project."
+        doLast { println("${project.group}:types:${project.version}") }
+    }
+}
