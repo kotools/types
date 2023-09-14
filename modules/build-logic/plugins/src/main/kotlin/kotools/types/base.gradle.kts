@@ -3,7 +3,6 @@ package kotools.types
 plugins { base }
 
 group = "org.kotools"
-version = "4.3.1-SNAPSHOT"
 
 tasks {
     named<TaskReportTask>("tasks") {
