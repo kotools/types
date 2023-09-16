@@ -24,3 +24,14 @@ kotlin {
 rootProject.plugins.withType<YarnPlugin> {
     rootProject.the<YarnRootExtension>().lockFileDirectory = projectDir
 }
+
+tasks {
+    val test: TaskProvider<Task> = register("test") {
+        group(TaskGroup.LIFECYCLE)
+        description = "Tests this project on the JVM platform."
+        val jvmTest: Task = findByName("jvmTest")
+            ?: error("Can't find the 'jvmTest' task.")
+        dependsOn(jvmTest)
+    }
+    check { dependsOn += test }
+}
