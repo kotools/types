@@ -1,4 +1,7 @@
-plugins { id("kotools.types.multiplatform") }
+plugins {
+    id("kotools.types.multiplatform")
+    id("kotools.types.documentation")
+}
 
 version = "4.3.1-SNAPSHOT"
 
