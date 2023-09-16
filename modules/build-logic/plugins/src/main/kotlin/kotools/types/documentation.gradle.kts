@@ -7,8 +7,9 @@ plugins { id("org.jetbrains.dokka") }
 
 dependencies { dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:1.7.20") }
 
+val dokkaDir: File = project.buildDir.resolve("dokka")
 tasks.dokkaHtml {
-    outputDirectory.set(project.buildDir.resolve("dokka"))
+    outputDirectory.set(dokkaDir)
     dokkaSourceSets.configureEach {
         includes.from += projectDir.resolve("docs/packages.md")
         reportUndocumented.set(true)
@@ -21,16 +22,9 @@ tasks.dokkaHtml {
         olderVersionsDir = oldVersionsDir
     }
     doLast {
-        val imagesDir: File = outputDirectory.get().resolve("images")
-        val logoFileName = "logo-icon.svg"
-        delete { imagesDir.resolve(logoFileName) }
-        copy {
-            from(projectDir.resolve("docs/$logoFileName"))
-            into(imagesDir)
-        }
         if ("SNAPSHOT" !in "${project.version}") {
             copy {
-                from(outputDirectory)
+                from(dokkaDir)
                 into(oldVersionsDir)
             }
             delete {
@@ -39,9 +33,21 @@ tasks.dokkaHtml {
         }
     }
 }
-
+val dokkaImagesDir: File = dokkaDir.resolve("images")
+val logoFileName = "logo-icon.svg"
+val deleteApiDocsLogo = tasks.register<Delete>("deleteApiDocsLogo") {
+    description = "Deletes the logo of the API docs."
+    dependsOn(tasks.dokkaHtml)
+    delete(dokkaImagesDir.resolve(logoFileName))
+}
+val copyApiDocsLogo = tasks.register<Copy>("copyApiDocsLogo") {
+    description = "Copies the Kotools logo to the API docs."
+    dependsOn(deleteApiDocsLogo)
+    from(projectDir.resolve("docs/$logoFileName"))
+    into(dokkaImagesDir)
+}
 tasks.register("apiDocs") {
     group(TaskGroup.LIFECYCLE)
     description = "Generates the API docs in HTML."
-    dependsOn(tasks.dokkaHtml)
+    dependsOn(tasks.dokkaHtml, copyApiDocsLogo)
 }
