@@ -1,4 +1,4 @@
-rootProject.name = "kotools-types"
+rootProject.name = "types"
 
 pluginManagement { includeBuild(rootDir.resolve("modules/build-logic")) }
 
