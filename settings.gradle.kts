@@ -1,9 +1,6 @@
 rootProject.name = "types"
 
-val buildLogicDir: File = rootDir.resolve("modules/build-logic")
-includeBuild(buildLogicDir)
+val gradlePluginsDir: File = rootDir.resolve("gradle/plugins")
+includeBuild(gradlePluginsDir)
 
-"library".let {
-    include(it)
-    project(":$it").projectDir = rootDir.resolve("modules/$it")
-}
+include("library")
