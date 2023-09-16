@@ -4,7 +4,7 @@ import org.gradle.api.Task
 import org.gradle.api.tasks.diagnostics.TaskReportTask
 
 internal enum class TaskGroup {
-    INFORMATION, RECOMMENDED;
+    DOCUMENTATION, INFORMATION, RECOMMENDED;
 
     override fun toString(): String = name.toLowerCase()
 }
