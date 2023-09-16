@@ -50,7 +50,7 @@ val copyApiDocsLogo = tasks.register<Copy>("copyApiDocsLogo") {
     into(dokkaImagesDir)
 }
 val apiDocs = tasks.register<Task>("apiDocs") {
-    group(TaskGroup.LIFECYCLE)
+    group(TaskGroup.RECOMMENDED)
     description = "Generates the API docs in HTML."
     dependsOn(tasks.dokkaHtml, copyApiDocsLogo)
 }
