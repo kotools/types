@@ -1,5 +1,9 @@
 plugins { `kotlin-dsl` }
 
-repositories.gradlePluginPortal()
+repositories.mavenCentral()
 
-dependencies { implementation(kotlin("gradle-plugin", embeddedKotlinVersion)) }
+dependencies {
+    val kotlinVersion = "1.7.21"
+    implementation(kotlin("gradle-plugin", kotlinVersion))
+    implementation(kotlin("serialization", kotlinVersion))
+}

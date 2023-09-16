@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 plugins {
     id("kotools.types.base")
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -23,5 +24,3 @@ kotlin {
 rootProject.plugins.withType<YarnPlugin> {
     rootProject.the<YarnRootExtension>().lockFileDirectory = projectDir
 }
-
-dependencies { commonMainImplementation(platform(kotlin("bom"))) }
