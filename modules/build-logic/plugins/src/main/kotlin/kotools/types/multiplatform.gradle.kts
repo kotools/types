@@ -1,5 +1,8 @@
 package kotools.types
 
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+
 plugins {
     id("kotools.types.base")
     kotlin("multiplatform")
@@ -15,6 +18,10 @@ kotlin {
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
+}
+
+rootProject.plugins.withType<YarnPlugin> {
+    rootProject.the<YarnRootExtension>().lockFileDirectory = projectDir
 }
 
 dependencies { commonMainImplementation(platform(kotlin("bom"))) }
