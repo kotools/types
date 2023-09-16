@@ -9,14 +9,14 @@ tasks {
         displayGroups = TaskGroup.all.map { "$it" }
     }
     build { description = "Assembles and checks this project." }
-    register("coordinates") {
-        group(TaskGroup.INFORMATION)
+    TaskGroup.LIFECYCLE += listOf(assemble, build, check)
+    val coordinates: TaskProvider<Task> = register("coordinates") {
         description = "Shows the coordinates 'group:module:version'."
         doLast { println("${project.group}:types:${project.version}") }
     }
-    register("version") {
-        group(TaskGroup.INFORMATION)
+    val version: TaskProvider<Task> = register("version") {
         description = "Shows this project's version."
         doLast { println(project.version) }
     }
+    TaskGroup.INFORMATION += listOf(coordinates, version)
 }
