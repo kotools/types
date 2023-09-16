@@ -39,3 +39,9 @@ tasks.dokkaHtml {
         }
     }
 }
+
+tasks.register("apiDocs") {
+    group(TaskGroup.LIFECYCLE)
+    description = "Generates the API docs in HTML."
+    dependsOn(tasks.dokkaHtml)
+}
