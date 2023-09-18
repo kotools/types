@@ -24,25 +24,10 @@ version.ref = "kotlin"
 
 # Libraries
 
-[libraries.dokka-gradle]
-group = "org.jetbrains.dokka"
-name = "org.jetbrains.dokka.gradle.plugin"
-version.ref = "dokka"
-
 [libraries.dokka-versioning]
 group = "org.jetbrains.dokka"
 name = "versioning-plugin"
 version.ref = "dokka"
-
-[libraries.kotlin-gradle]
-group = "org.jetbrains.kotlin"
-name = "kotlin-gradle-plugin"
-version.ref = "kotlin"
-
-[libraries.kotlin-serialization]
-group = "org.jetbrains.kotlin"
-name = "kotlin-serialization"
-version.ref = "kotlin"
 
 [libraries.kotlinx-serialization-core]
 group = "org.jetbrains.kotlinx"
