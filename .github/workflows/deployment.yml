@@ -35,8 +35,8 @@ jobs:
           git checkout "origin/$BRANCH_TARGET" -- versions && \
           git mv -f versions/* "$OLD_DOCS_DIR/" && \
           rm -r versions/
-      - name: Generate latest API reference
-        run: ./gradlew :library:apiDocs -q
+      - name: Assemble API docs
+        run: ./gradlew :library:assembleApiDocs -q
       - name: Archive API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
