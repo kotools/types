@@ -1,7 +1,8 @@
 rootProject.name = "types"
 
-val buildLogicDir: File = rootDir.resolve("modules/build-logic")
-includeBuild(buildLogicDir)
+pluginManagement { includeBuild(rootDir.resolve("modules/build-logic")) }
+
+dependencyResolutionManagement.repositories.mavenCentral()
 
 "library".let {
     include(it)

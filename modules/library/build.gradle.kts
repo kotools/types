@@ -5,8 +5,6 @@ plugins {
 
 version = "4.3.1-SNAPSHOT"
 
-repositories.mavenCentral()
-
 dependencies {
     // Kotlin
     commonMainImplementation(platform(kotlin("bom")))
