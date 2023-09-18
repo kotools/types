@@ -12,9 +12,7 @@ tasks {
     TaskGroup.LIFECYCLE += listOf(assemble, build, check)
     val coordinates: TaskProvider<Task> = register("coordinates") {
         description = "Shows the coordinates 'group:module:version'."
-        doLast {
-            println("${project.group}:${rootProject.name}:${project.version}")
-        }
+        doLast { println("${project.group}:types:${project.version}") }
     }
     val version: TaskProvider<Task> = register("version") {
         description = "Shows this project's version."
