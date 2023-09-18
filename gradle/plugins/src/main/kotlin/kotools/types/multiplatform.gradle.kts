@@ -30,7 +30,8 @@ rootProject.plugins.withType<YarnPlugin>().configureEach {
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-        languageVersion = "1.5"
+        languageVersion = providers.gradleProperty("kotlin.language.version")
+            .get()
     }
 }
 
