@@ -2,18 +2,18 @@ import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+// ---------- Plugins ----------
+
+buildscript { dependencies.classpath(libs.dokka.versioning) }
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.dokka)
     `maven-publish`
     signing
-}
-
-buildscript {
-    dependencies { classpath(libs.dokka.versioning) }
 }
 
 group = "org.kotools"
