@@ -1,6 +1,7 @@
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.multiplatform)
