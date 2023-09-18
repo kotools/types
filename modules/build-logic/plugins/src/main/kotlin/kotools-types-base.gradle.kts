@@ -3,7 +3,6 @@ plugins { base }
 tasks {
     val taskGroup = "Kotools Types"
     named<TaskReportTask>("tasks") { displayGroup = taskGroup }
-    assemble { group = taskGroup }
     check {
         group = taskGroup
         description = "Runs all checks of this project."
