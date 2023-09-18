@@ -72,6 +72,17 @@ Here's an example for the `StrictlyPositiveInt` type:
 
 ### Changed
 
+#### Source compatibility with Kotlin
+
+In this new version, we've improved the source compatibility with Kotlin by
+supporting its versions 1.5 through 1.7 (PR [#210]).
+
+Please note that since [Kotools Types 4.3.0], this project is compiled with
+[Kotlin 1.7.21] by default.
+
+[#210]: https://github.com/kotools/types/pull/210
+[Kotools Types 4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
+
 #### Multiple versions in API reference
 
 The configuration of the [API reference] was improved for supporting multiple

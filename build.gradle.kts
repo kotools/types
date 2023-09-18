@@ -1,5 +1,6 @@
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -49,6 +50,13 @@ kotlin {
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        languageVersion = "1.5"
+    }
 }
 
 tasks.withType<Jar> {
