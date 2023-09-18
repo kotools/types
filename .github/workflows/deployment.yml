@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BRANCH_TARGET: api-reference
+      OLD_DOCS_DIR: library/docs/versions
     permissions:
       contents: write
       pages: write
@@ -27,22 +28,21 @@ jobs:
           java-version: 17
       - name: Get project version
         run: |
-          ./gradlew projectVersion -q --dry-run
-          echo "PROJECT_VERSION=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
+          ./gradlew :library:version -q --dry-run
+          echo "PROJECT_VERSION=$(./gradlew :library:version -q)" >> "$GITHUB_ENV"
       - name: Get archived API references
         run: |
           git checkout "origin/$BRANCH_TARGET" -- versions && \
-          mkdir api/references && \
-          git mv -f versions/* api/references/ && \
+          git mv -f versions/* "$OLD_DOCS_DIR/" && \
           rm -r versions/
       - name: Generate latest API reference
-        run: ./gradlew dokkaHtml -q
+        run: ./gradlew :library:apiDocs -q
       - name: Archive API reference
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: ${{ env.BRANCH_TARGET }}
           commit-message: "Archive API reference of v${{ env.PROJECT_VERSION }}"
-          folder: api/references
+          folder: ${{ env.OLD_DOCS_DIR }}
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: versions
       - name: Deploy API reference
@@ -54,4 +54,4 @@ jobs:
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
           target-folder: docs
       - name: Remove archived API references
-        run: git rm -rf api/references/
+        run: git rm -rf "$OLD_DOCS_DIR/"
