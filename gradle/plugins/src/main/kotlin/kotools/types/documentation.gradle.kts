@@ -10,18 +10,16 @@ plugins {
 
 dependencies { dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:1.7.20") }
 
-val dokkaDir: File = buildDir.resolve("dokka")
-val docsDir: File = projectDir.resolve("docs")
-
+val dokkaDir: File = project.buildDir.resolve("dokka")
 tasks.dokkaHtml {
     outputDirectory.set(dokkaDir)
     dokkaSourceSets.configureEach {
-        includes.from += docsDir.resolve("packages.md")
+        includes.from += projectDir.resolve("docs/packages.md")
         reportUndocumented.set(true)
         skipEmptyPackages.set(true)
     }
     moduleName.set("Kotools Types")
-    val oldVersionsDir: File = docsDir.resolve("versions")
+    val oldVersionsDir: File = rootDir.resolve("api/references")
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
         version = "${project.version}"
         olderVersionsDir = oldVersionsDir
@@ -38,39 +36,27 @@ tasks.dokkaHtml {
         }
     }
 }
-
 val dokkaImagesDir: File = dokkaDir.resolve("images")
 val logoFileName = "logo-icon.svg"
-
 val deleteApiDocsLogo = tasks.register<Delete>("deleteApiDocsLogo") {
-    group(TaskGroup.DOCUMENTATION)
-    description("Deletes the logo of the API docs.")
+    description = "Deletes the logo of the API docs."
     dependsOn += tasks.dokkaHtml
-    val target: File = dokkaImagesDir.resolve(logoFileName)
-    delete(target)
+    delete(dokkaImagesDir.resolve(logoFileName))
 }
-
 val copyApiDocsLogo = tasks.register<Copy>("copyApiDocsLogo") {
-    group(TaskGroup.DOCUMENTATION)
-    description("Copies the Kotools logo to the API docs.")
+    description = "Copies the Kotools logo to the API docs."
     dependsOn += deleteApiDocsLogo
-    val sourceTarget: File = docsDir.resolve(logoFileName)
-    from(sourceTarget)
+    from(projectDir.resolve("docs/$logoFileName"))
     into(dokkaImagesDir)
 }
-
 val apiDocs = tasks.register<Task>("apiDocs") {
     group(TaskGroup.RECOMMENDED)
-    description("Generates the API docs in HTML.")
+    description = "Generates the API docs in HTML."
     dependsOn(tasks.dokkaHtml, copyApiDocsLogo)
 }
-
 val javadocJar = tasks.register<Jar>("javadocJar") {
-    group(TaskGroup.DOCUMENTATION)
-    description("Archives the API docs in a JAR file.")
     dependsOn += apiDocs
     from(tasks.dokkaHtml)
     archiveClassifier.set("javadoc")
 }
-
 tasks.assemble { dependsOn += javadocJar }
