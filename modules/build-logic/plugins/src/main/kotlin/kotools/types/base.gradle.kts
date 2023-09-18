@@ -10,13 +10,8 @@ tasks {
     }
     build { description = "Assembles and checks this project." }
     register("coordinates") {
-        group(TaskGroup.INFORMATION)
+        group = "${TaskGroup.INFORMATION}"
         description = "Shows the coordinates 'group:module:version'."
         doLast { println("${project.group}:types:${project.version}") }
-    }
-    register("version") {
-        group(TaskGroup.INFORMATION)
-        description = "Shows this project's version."
-        doLast { println(project.version) }
     }
 }
