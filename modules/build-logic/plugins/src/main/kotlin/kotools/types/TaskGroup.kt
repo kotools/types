@@ -3,14 +3,12 @@ package kotools.types
 import org.gradle.api.Task
 
 internal enum class TaskGroup {
-    BUILD, INFORMATION, OTHER, VERIFICATION;
+    BUILD, INFORMATION, VERIFICATION;
 
     override fun toString(): String = name.toLowerCase()
 
     companion object {
-        val all: List<TaskGroup> by lazy {
-            values().filterNot { it == OTHER }
-        }
+        val all: List<TaskGroup> by lazy { values().toList() }
     }
 }
 
