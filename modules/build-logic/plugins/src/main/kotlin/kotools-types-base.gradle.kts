@@ -14,6 +14,8 @@ tasks {
     register("coordinates") {
         group = taskGroup
         description = "Shows the coordinates of this project."
-        doLast { println("${project.group}:types:${project.version}") }
+        doLast {
+            println("${project.group}:${project.name}:${project.version}")
+        }
     }
 }
