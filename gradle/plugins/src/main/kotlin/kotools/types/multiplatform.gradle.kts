@@ -34,7 +34,7 @@ tasks.withType<Jar> {
 }
 
 val test = tasks.register<Task>("test") {
-    group(TaskGroup.RECOMMENDED)
+    group(TaskGroup.LIFECYCLE)
     description = "Tests this project on the JVM platform."
     dependsOn += tasks.named<KotlinJvmTest>("jvmTest")
 }

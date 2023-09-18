@@ -4,23 +4,21 @@ plugins { base }
 
 group = "org.kotools"
 
-tasks.named<TaskReportTask>("tasks").configure {
-    display(TaskGroup.RECOMMENDED)
-}
-
-tasks.register("coordinates").configure {
-    group(TaskGroup.INFORMATION)
-    description("Prints this project's coordinates ('group:artifact:version').")
-    doLast {
-        val group = "${project.group}"
-        val artifact: String = rootProject.name
-        val version = "${project.version}"
-        println("$group:$artifact:$version")
+tasks {
+    named<TaskReportTask>("tasks") {
+        displayGroups = TaskGroup.all.map { "$it" }
     }
-}
-
-tasks.register<Task>("version").configure {
-    group(TaskGroup.INFORMATION)
-    description("Prints this project's version.")
-    doLast { println(project.version) }
+    build { description = "Assembles and checks this project." }
+    TaskGroup.LIFECYCLE += listOf(assemble, build, check)
+    val coordinates: TaskProvider<Task> = register("coordinates") {
+        description = "Shows the coordinates 'group:module:version'."
+        doLast {
+            println("${project.group}:${rootProject.name}:${project.version}")
+        }
+    }
+    val version: TaskProvider<Task> = register("version") {
+        description = "Shows this project's version."
+        doLast { println(project.version) }
+    }
+    TaskGroup.INFORMATION += listOf(coordinates, version)
 }
