@@ -15,7 +15,11 @@ kotlin {
     explicitApi()
     js(IR) { browser() }
     jvm {
-        compilations.configureEach { kotlinOptions.jvmTarget = "17" }
+        compilations.configureEach {
+            kotlinOptions.jvmTarget = providers
+                .gradleProperty("kotlin.jvm.target")
+                .get()
+        }
         testRuns["test"].executionTask.configure { useJUnitPlatform() }
     }
     linuxX64("linux")
