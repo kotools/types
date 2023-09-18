@@ -1,13 +1,8 @@
 rootProject.name = "kotools-types"
 
-pluginManagement { includeBuild(rootDir.resolve("modules/build-logic")) }
-
-dependencyResolutionManagement {
-    repositories.mavenCentral()
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-}
-
+val modulesDir: File = rootDir.resolve("modules")
+includeBuild(modulesDir.resolve("build-logic"))
 "library".let {
     include(it)
-    project(":$it").projectDir = rootDir.resolve("modules/$it")
+    project(":$it").projectDir = modulesDir.resolve(it)
 }
