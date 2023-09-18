@@ -2,8 +2,6 @@ plugins {
     id("kotools.types.multiplatform")
     id("kotools.types.documentation")
     id("kotools.types.publication")
-    @Suppress("DSL_SCOPE_VIOLATION")
-    alias(libs.plugins.kotlinx.binary.compatibility.validator)
 }
 
 version = "4.3.1-SNAPSHOT"
@@ -57,14 +55,4 @@ dependencies {
     // Kotlinx Serialization
     commonMainImplementation(libs.kotlinx.serialization.core)
     commonTestImplementation(libs.kotlinx.serialization.json)
-}
-
-tasks.apiCheck.configure {
-    group = "recommended"
-    description = "Checks the binaries of this project's API."
-}
-
-tasks.apiDump.configure {
-    group = "recommended"
-    description = "Updates the binaries of this project's API."
 }
