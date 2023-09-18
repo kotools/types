@@ -21,7 +21,3 @@ internal operator fun <T : Task> TaskGroup.plusAssign(
         it.configure { group = groupName }
     }
 }
-
-internal fun Task.group(value: TaskGroup) {
-    group = "$value"
-}
