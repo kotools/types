@@ -16,14 +16,26 @@ plugins {
     signing
 }
 
+// ---------- Project Details ----------
+
 group = "org.kotools"
 version = "4.3.1-SNAPSHOT"
-val projectName = "Kotools Types"
 
-tasks.register("projectVersion") {
-    this.description = "Shows the version of this project."
-    doLast { println(version) }
+// ---------- Extensions ----------
+
+kotlin {
+    explicitApi()
+    js(IR) { browser() }
+    jvmToolchain(17)
+    jvm {
+        testRuns["test"].executionTask { useJUnitPlatform() }
+    }
+    linuxX64("linux")
+    macosX64("macos")
+    mingwX64("windows")
 }
+
+// ---------- Dependencies ----------
 
 repositories { mavenCentral() }
 
@@ -40,16 +52,11 @@ dependencies {
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
 
-kotlin {
-    explicitApi()
-    js(IR) { browser() }
-    jvmToolchain(17)
-    jvm {
-        testRuns["test"].executionTask { useJUnitPlatform() }
-    }
-    linuxX64("linux")
-    macosX64("macos")
-    mingwX64("windows")
+// ---------- Tasks ----------
+
+tasks.register("projectVersion") {
+    this.description = "Shows the version of this project."
+    doLast { println(version) }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
@@ -65,7 +72,9 @@ tasks.withType<Jar> {
     val version: Pair<String, Any> = key("Version") to project.version
     manifest.attributes(name, version)
 }
+
 val dokkaDirectory: File = buildDir.resolve("dokka")
+val projectName = "Kotools Types"
 tasks.dokkaHtml {
     outputDirectory.set(dokkaDirectory)
     dokkaSourceSets {
