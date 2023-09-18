@@ -43,7 +43,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Check API binaries
-        run: ./gradlew :library:apiCheck --no-daemon
+        run: ./gradlew apiCheck --no-daemon
   dependencies:
     name: Submit dependencies to GitHub
     needs: validate-wrapper
@@ -78,4 +78,4 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test code
-        run: ./gradlew :library:allTests --no-daemon
+        run: ./gradlew allTests --no-daemon
