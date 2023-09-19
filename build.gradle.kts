@@ -51,7 +51,7 @@ dependencies {
 // ---------- Tasks ----------
 
 enum class TaskGroup {
-    HELP;
+    DOCUMENTATION, HELP;
 
     override fun toString(): String = name.toLowerCase()
 }
@@ -96,7 +96,11 @@ tasks.withType<Jar>().configureEach {
 }
 
 val projectName = "Kotools Types"
-val dokkaDirectory: Provider<Directory> = layout.buildDirectory.dir("dokka")
+val apiReferencesDir: Directory = layout.projectDirectory.dir("api/references")
+val setApiReferenceLogoTask: TaskProvider<Copy> =
+    tasks.register<Copy>("setApiReferenceLogo")
+val archiveApiReferenceTask: TaskProvider<Copy> =
+    tasks.register<Copy>("archiveApiReference")
 
 tasks.dokkaHtml.configure {
     moduleName.set(projectName)
@@ -106,30 +110,41 @@ tasks.dokkaHtml.configure {
         skipEmptyPackages.set(true)
     }
     val currentVersion = "${project.version}"
-    val apiReferencesDirectory: Directory =
-        layout.projectDirectory.dir("api/references")
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
         version = currentVersion
-        olderVersionsDir = apiReferencesDirectory.asFile
+        olderVersionsDir = apiReferencesDir.asFile
     }
-    outputDirectory.set(dokkaDirectory.map { it.asFile })
-    doLast {
-        copy {
-            val images = "images"
-            from(layout.projectDirectory.file("$images/logo-icon.svg"))
-            into(dokkaDirectory.map { it.dir(images) })
-        }
-        if ("SNAPSHOT" in currentVersion) return@doLast
-        copy {
-            from(dokkaDirectory)
-            into(apiReferencesDirectory.dir(currentVersion))
-        }
-        delete(apiReferencesDirectory.dir("$currentVersion/older"))
-    }
+    outputDirectory.set(layout.buildDirectory.dir("dokka").map { it.asFile })
+    finalizedBy(setApiReferenceLogoTask, archiveApiReferenceTask)
+}
+
+setApiReferenceLogoTask.configure {
+    group(TaskGroup.DOCUMENTATION)
+    description("Sets the Kotools logo into the API reference.")
+    val images = "images"
+    val source: RegularFile =
+        layout.projectDirectory.file("$images/logo-icon.svg")
+    from(source)
+    val destination: Provider<File> = tasks.dokkaHtml.get()
+        .outputDirectory
+        .map { it.resolve(images) }
+    into(destination)
+}
+
+archiveApiReferenceTask.configure {
+    group(TaskGroup.DOCUMENTATION)
+    description("Archives the API reference.")
+    onlyIf { "SNAPSHOT" !in "${project.version}" }
+    from(tasks.dokkaHtml)
+    val destination: Directory = apiReferencesDir.dir("${project.version}")
+    into(destination)
+    doLast { delete(apiReferencesDir.dir("${project.version}/older")) }
 }
 
 val cleanDokkaHtml: TaskProvider<Delete> =
-    tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }
+    tasks.register<Delete>("cleanDokkaHtml") {
+        tasks.dokkaHtml.map { setDelete(it.outputDirectory) }
+    }
 val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
     dependsOn(cleanDokkaHtml, tasks.dokkaHtml)
     archiveClassifier.set("javadoc")
