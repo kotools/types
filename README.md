@@ -79,6 +79,13 @@ representing a result that can be a success or a failure.
 
 This section presents a non-exhaustive list of types provided by this library.
 
+### Number
+
+- [`StrictlyPositiveInt`][kotools.types.number.StrictlyPositiveInt] representing
+  positive integers excluding zero.
+
+[kotools.types.number.StrictlyPositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-int/index.html
+
 ## Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
