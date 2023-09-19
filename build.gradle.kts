@@ -1,5 +1,6 @@
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // ---------- Plugins ----------
@@ -26,10 +27,8 @@ version = "4.3.1-SNAPSHOT"
 kotlin {
     explicitApi()
     js(IR) { browser() }
+    jvm()
     jvmToolchain(17)
-    jvm {
-        testRuns["test"].executionTask { useJUnitPlatform() }
-    }
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
@@ -65,6 +64,8 @@ tasks.withType<KotlinCompile>().configureEach {
         languageVersion = "1.5"
     }
 }
+
+tasks.withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
 
 tasks.withType<Jar> {
     fun key(suffix: String): String = "Implementation-$suffix"
