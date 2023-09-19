@@ -114,8 +114,11 @@ This section presents a non-exhaustive list of types provided by this library.
 
 - [`NotEmptyList`][kotools.types.collection.NotEmptyList] representing lists
   with at least one element.
+- [`NotEmptySet`][kotools.types.collection.NotEmptySet] representing sets with
+  at least one element.
 
 [kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
+[kotools.types.collection.NotEmptySet]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-set/index.html
 
 ## Installation
 
