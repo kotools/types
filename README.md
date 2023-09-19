@@ -103,6 +103,13 @@ This section presents a non-exhaustive list of types provided by this library.
 [kotools.types.number.StrictlyPositiveDouble]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-double/index.html
 [kotools.types.number.StrictlyPositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-int/index.html
 
+### Text
+
+- [`NotBlankString`][kotools.types.text.NotBlankString] representing strings
+  that have at least one character, excluding whitespaces.
+
+[kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
+
 ## Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
