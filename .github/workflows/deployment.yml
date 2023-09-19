@@ -27,8 +27,8 @@ jobs:
           java-version: 17
       - name: Get project version
         run: |
-          ./gradlew projectVersion -q --dry-run
-          echo "PROJECT_VERSION=$(./gradlew projectVersion -q)" >> "$GITHUB_ENV"
+          ./gradlew -q :version --dry-run && \
+          echo "PROJECT_VERSION=$(./gradlew -q :version )" >> "$GITHUB_ENV"
       - name: Get archived API references
         run: |
           git checkout "origin/$BRANCH_TARGET" -- versions && \

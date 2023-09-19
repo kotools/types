@@ -50,8 +50,11 @@ dependencies {
 
 // ---------- Tasks ----------
 
-tasks.register("projectVersion") {
-    this.description = "Shows the version of this project."
+// Help tasks
+
+tasks.register("version").configure {
+    group = "help"
+    description = "Displays this project's version."
     doLast { println(version) }
 }
 
