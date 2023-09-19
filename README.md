@@ -85,9 +85,12 @@ This section presents a non-exhaustive list of types provided by this library.
   than zero.
 - [`PositiveInt`][kotools.types.number.PositiveInt] representing positive
   integers including zero.
+- [`NegativeInt`][kotools.types.number.NegativeInt] representing negative
+  integers including zero.
 - [`StrictlyPositiveInt`][kotools.types.number.StrictlyPositiveInt] representing
   positive integers excluding zero.
 
+[kotools.types.number.NegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-negative-int/index.html
 [kotools.types.number.NonZeroInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-non-zero-int/index.html
 [kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
 [kotools.types.number.StrictlyPositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-int/index.html
