@@ -116,8 +116,11 @@ This section presents a non-exhaustive list of types provided by this library.
   with at least one element.
 - [`NotEmptySet`][kotools.types.collection.NotEmptySet] representing sets with
   at least one element.
+- [`NotEmptyMap`][kotools.types.collection.NotEmptyMap] representing maps with
+  at least one entry.
 
 [kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
+[kotools.types.collection.NotEmptyMap]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-map/index.html
 [kotools.types.collection.NotEmptySet]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-set/index.html
 
 ## Installation
