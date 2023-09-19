@@ -46,35 +46,6 @@ all your [Kotlin] projects!
 [kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.4.1-blue
 [total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
 
-## Design goals
-
-### Less is more
-
-Kotools Types focus primarily on what is essential for building explicit and
-safer APIs: the types and their builders.
-Other declarations could be added if suggested by the community.
-By having this minimalist approach, we engage to provide what users really need.
-
-### Avoid useless dependencies
-
-This project is very light and just ship with one direct dependency:
-[kotlinx.serialization] for serializing or deserializing the provided types.
-Knowing that these types could be used in any type of API, this feature is
-essential for this library.
-
-See the [version catalog](gradle/libs.versions.toml) for more details about the
-tools used for building Kotools Types.
-
-### Error handling agnostic
-
-Users should be responsible for deciding how to handle errors, not this library.
-Externalizing this responsibility to consumers implies that Kotools Types should
-provide an explicit API by definition.
-This is why we are using the [`Result`][kotlin.Result] type from Kotlin for
-representing a result that can be a success or a failure.
-
-[kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
-
 ## Provided types
 
 This section presents a non-exhaustive list of types provided by this library.
@@ -135,6 +106,35 @@ This section presents a non-exhaustive list of types provided by this library.
 [kotools.types.range.ExclusiveBound]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-exclusive-bound/index.html
 [kotools.types.range.InclusiveBound]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-inclusive-bound/index.html
 [kotools.types.range.NotEmptyRange]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-not-empty-range/index.html
+
+## Design goals
+
+### Less is more
+
+Kotools Types focus primarily on what is essential for building explicit and
+safer APIs: the types and their builders.
+Other declarations could be added if suggested by the community.
+By having this minimalist approach, we engage to provide what users really need.
+
+### Avoid useless dependencies
+
+This project is very light and just ship with one direct dependency:
+[kotlinx.serialization] for serializing or deserializing the provided types.
+Knowing that these types could be used in any type of API, this feature is
+essential for this library.
+
+See the [version catalog](gradle/libs.versions.toml) for more details about the
+tools used for building Kotools Types.
+
+### Error handling agnostic
+
+Users should be responsible for deciding how to handle errors, not this library.
+Externalizing this responsibility to consumers implies that Kotools Types should
+provide an explicit API by definition.
+This is why we are using the [`Result`][kotlin.Result] type from Kotlin for
+representing a result that can be a success or a failure.
+
+[kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
 
 ## Installation
 
