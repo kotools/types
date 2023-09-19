@@ -89,11 +89,14 @@ This section presents a non-exhaustive list of types provided by this library.
   integers including zero.
 - [`StrictlyPositiveInt`][kotools.types.number.StrictlyPositiveInt] representing
   positive integers excluding zero.
+- [`StrictlyNegativeInt`][kotools.types.number.StrictlyNegativeInt] representing
+  negative integers excluding zero.
 
-[kotools.types.number.NegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-negative-int/index.html
 [kotools.types.number.NonZeroInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-non-zero-int/index.html
 [kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
+[kotools.types.number.NegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-negative-int/index.html
 [kotools.types.number.StrictlyPositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-int/index.html
+[kotools.types.number.StrictlyNegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-negative-int/index.html
 
 ## Installation
 
