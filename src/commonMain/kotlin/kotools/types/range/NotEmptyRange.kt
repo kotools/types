@@ -5,7 +5,7 @@ import kotools.types.experimental.ExperimentalRangeApi
 
 /**
  * Returns a not empty range with the given pair of [bounds].
- * The resulting range will [start][NotEmptyRange.start] with the lower value
+ * The resulting range will [start][NotEmptyRange.start] with the lowest value
  * between the given [bounds].
  */
 @ExperimentalRangeApi
