@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -141,12 +142,13 @@ archiveApiReferenceTask.configure {
     doLast { delete(apiReferencesDir.dir("${project.version}/older")) }
 }
 
-val cleanDokkaHtml: TaskProvider<Delete> =
-    tasks.register<Delete>("cleanDokkaHtml") {
-        tasks.dokkaHtml.map { setDelete(it.outputDirectory) }
-    }
+tasks.register<Delete>("cleanDokkaHtml").configure {
+    val task: DokkaTask = tasks.dokkaHtml.get()
+    this.setDelete(task.outputDirectory)
+}
+
 val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
-    dependsOn(cleanDokkaHtml, tasks.dokkaHtml)
+    dependsOn(tasks.dokkaHtml)
     archiveClassifier.set("javadoc")
     from(tasks.dokkaHtml)
 }
