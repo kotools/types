@@ -123,6 +123,13 @@ This section presents a non-exhaustive list of types provided by this library.
 [kotools.types.collection.NotEmptyMap]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-map/index.html
 [kotools.types.collection.NotEmptySet]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-set/index.html
 
+### Range
+
+- [`NotEmptyRange`][kotools.types.range.NotEmptyRange] representing ranges of
+  comparable values that contain at least one value. **[EXPERIMENTAL]**
+
+[kotools.types.range.NotEmptyRange]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-not-empty-range/index.html
+
 ## Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
