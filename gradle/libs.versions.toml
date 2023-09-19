@@ -29,6 +29,16 @@ group = "org.jetbrains.dokka"
 name = "versioning-plugin"
 version.ref = "dokka"
 
+[libraries.kotlin-bom]
+group = "org.jetbrains.kotlin"
+name = "kotlin-bom"
+version.ref = "kotlin"
+
+[libraries.kotlin-test]
+group = "org.jetbrains.kotlin"
+name = "kotlin-test"
+version.ref = "kotlin"
+
 [libraries.kotlinx-serialization-core]
 group = "org.jetbrains.kotlinx"
 name = "kotlinx-serialization-core"

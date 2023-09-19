@@ -36,19 +36,16 @@ kotlin {
 
 // ---------- Dependencies ----------
 
-repositories { mavenCentral() }
+repositories.mavenCentral()
 
 dependencies {
-    // Kotlin
-    commonMainImplementation(platform(kotlin("bom")))
-    commonTestImplementation(kotlin("test"))
-
-    // Kotlinx Serialization
-    commonMainImplementation(libs.kotlinx.serialization.core)
-    commonTestImplementation(libs.kotlinx.serialization.json)
-
-    // Dokka
     dokkaHtmlPlugin(libs.dokka.versioning)
+
+    commonMainImplementation(platform(libs.kotlin.bom))
+    commonMainImplementation(libs.kotlinx.serialization.core)
+
+    commonTestImplementation(libs.kotlin.test)
+    commonTestImplementation(libs.kotlinx.serialization.json)
 }
 
 // ---------- Tasks ----------
