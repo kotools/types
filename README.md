@@ -110,6 +110,13 @@ This section presents a non-exhaustive list of types provided by this library.
 
 [kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
 
+### Collection
+
+- [`NotEmptyList`][kotools.types.collection.NotEmptyList] representing lists
+  with at least one element.
+
+[kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
+
 ## Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
