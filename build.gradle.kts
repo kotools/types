@@ -119,6 +119,13 @@ tasks.dokkaHtml.configure {
     finalizedBy(setApiReferenceLogoTask, archiveApiReferenceTask)
 }
 
+val cleanDokkaHtmlTask: TaskProvider<Delete> =
+    tasks.register<Delete>("cleanDokkaHtml") {
+        val task: DokkaTask = tasks.dokkaHtml.get()
+        this.setDelete(task.outputDirectory)
+    }
+tasks.clean.configure { dependsOn += cleanDokkaHtmlTask }
+
 setApiReferenceLogoTask.configure {
     group(TaskGroup.DOCUMENTATION)
     description("Sets the Kotools logo into the API reference.")
@@ -140,11 +147,6 @@ archiveApiReferenceTask.configure {
     val destination: Directory = apiReferencesDir.dir("${project.version}")
     into(destination)
     doLast { delete(apiReferencesDir.dir("${project.version}/older")) }
-}
-
-tasks.register<Delete>("cleanDokkaHtml").configure {
-    val task: DokkaTask = tasks.dokkaHtml.get()
-    this.setDelete(task.outputDirectory)
 }
 
 val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
