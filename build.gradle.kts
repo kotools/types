@@ -67,8 +67,6 @@ fun Task.description(value: String) {
     description = value
 }
 
-// Help tasks
-
 tasks.register<DependencyReportTask>("runtimeDependencies").configure {
     group(TaskGroup.HELP)
     description("Displays the runtime dependencies for all source sets.")
@@ -90,52 +88,46 @@ tasks.withType<KotlinCompile>().configureEach {
 
 tasks.withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
 
-tasks.withType<Jar> {
+tasks.withType<Jar>().configureEach {
     fun key(suffix: String): String = "Implementation-$suffix"
     val name: Pair<String, String> = key("Title") to project.name
     val version: Pair<String, Any> = key("Version") to project.version
     manifest.attributes(name, version)
 }
 
-val dokkaDirectory: File = buildDir.resolve("dokka")
 val projectName = "Kotools Types"
-tasks.dokkaHtml {
-    outputDirectory.set(dokkaDirectory)
-    dokkaSourceSets {
-        configureEach {
-            includes.from += "packages.md"
-            reportUndocumented.set(true)
-            skipEmptyPackages.set(true)
-        }
-    }
+val dokkaDirectory: Provider<Directory> = layout.buildDirectory.dir("dokka")
+
+tasks.dokkaHtml.configure {
     moduleName.set(projectName)
+    dokkaSourceSets.configureEach {
+        includes.from += layout.projectDirectory.file("packages.md")
+        reportUndocumented.set(true)
+        skipEmptyPackages.set(true)
+    }
     val currentVersion = "${project.version}"
-    val apiReferencesDir: File = rootDir.resolve("api/references")
+    val apiReferencesDirectory: Directory =
+        layout.projectDirectory.dir("api/references")
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
         version = currentVersion
-        olderVersionsDir = apiReferencesDir
+        olderVersionsDir = apiReferencesDirectory.asFile
     }
+    outputDirectory.set(dokkaDirectory.map { it.asFile })
     doLast {
-        val images = "images"
-        val logo = "logo-icon.svg"
-        val dokkaImages: File = dokkaDirectory.resolve(images)
-        val kotlinLogo: File = dokkaImages.resolve(logo)
-        delete(kotlinLogo)
         copy {
-            val kotoolsLogo: File = rootDir.resolve(images)
-                .resolve(logo)
-            from(kotoolsLogo)
-            into(dokkaImages)
+            val images = "images"
+            from(layout.projectDirectory.file("$images/logo-icon.svg"))
+            into(dokkaDirectory.map { it.dir(images) })
         }
-        if ("SNAPSHOT" !in currentVersion) {
-            copy {
-                from(dokkaDirectory)
-                into(apiReferencesDir.resolve(currentVersion))
-            }
-            delete(apiReferencesDir.resolve(currentVersion).resolve("older"))
+        if ("SNAPSHOT" in currentVersion) return@doLast
+        copy {
+            from(dokkaDirectory)
+            into(apiReferencesDirectory.dir(currentVersion))
         }
+        delete(apiReferencesDirectory.dir("$currentVersion/older"))
     }
 }
+
 val cleanDokkaHtml: TaskProvider<Delete> =
     tasks.register<Delete>("cleanDokkaHtml") { delete(dokkaDirectory) }
 val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
