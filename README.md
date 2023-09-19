@@ -75,6 +75,10 @@ representing a result that can be a success or a failure.
 
 [kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
 
+## Provided types
+
+This section presents a non-exhaustive list of types provided by this library.
+
 ## Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
