@@ -50,11 +50,34 @@ dependencies {
 
 // ---------- Tasks ----------
 
+enum class TaskGroup {
+    HELP;
+
+    override fun toString(): String = name.toLowerCase()
+}
+
+fun Task.group(value: TaskGroup) {
+    group = "$value"
+}
+
+fun Task.description(value: String) {
+    require(value.isNotBlank()) {
+        "The task '$path' shouldn't have a blank description."
+    }
+    description = value
+}
+
 // Help tasks
 
+tasks.register<DependencyReportTask>("runtimeDependencies").configure {
+    group(TaskGroup.HELP)
+    description("Displays the runtime dependencies for all source sets.")
+    setConfiguration("allSourceSetsRuntimeDependenciesMetadata")
+}
+
 tasks.register("version").configure {
-    group = "help"
-    description = "Displays this project's version."
+    group(TaskGroup.HELP)
+    description("Displays this project's version.")
     doLast { println(version) }
 }
 
