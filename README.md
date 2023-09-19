@@ -127,9 +127,12 @@ This section presents a non-exhaustive list of types provided by this library.
 
 - [`InclusiveBound`][kotools.types.range.InclusiveBound] representing an
   inclusive bound in a range.
+- [`ExclusiveBound`][kotools.types.range.ExclusiveBound] representing an
+  exclusive bound in a range.
 - [`NotEmptyRange`][kotools.types.range.NotEmptyRange] representing ranges of
   comparable values that contain at least one value. **[EXPERIMENTAL]**
 
+[kotools.types.range.ExclusiveBound]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-exclusive-bound/index.html
 [kotools.types.range.InclusiveBound]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-inclusive-bound/index.html
 [kotools.types.range.NotEmptyRange]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-not-empty-range/index.html
 
