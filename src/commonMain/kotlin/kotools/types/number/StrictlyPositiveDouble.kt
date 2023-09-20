@@ -84,7 +84,9 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
-    TODO("Not implemented yet")
+    val value: Double = toDouble()
+    require(value > 0.0) { value shouldBe aStrictlyPositiveNumber }
+    return StrictlyPositiveDouble(value)
 }
 
 /**
