@@ -28,6 +28,65 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     }
 
 /**
+ * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
+ * or truncation, or returns `null` if this number is negative.
+ *
+ * ```kotlin
+ * val value = 1.0
+ * var result: StrictlyPositiveDouble? = value.toStrictlyPositiveDoubleOrNull()
+ * assertEquals(value, result?.toDouble())
+ *
+ * result = 0.toStrictlyPositiveDoubleOrNull()
+ * assertNull(result)
+ *
+ * result = (-1).toStrictlyPositiveDoubleOrNull()
+ * assertNull(result)
+ * ```
+ *
+ * You can use the [toStrictlyPositiveDoubleOrThrow] function for throwing an
+ * [IllegalArgumentException] instead of returning `null`.
+ *
+ * See the [StrictlyPositiveDouble.toDouble] function for more details on
+ * converting a [StrictlyPositiveDouble] to a [Double].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
+    TODO("Not implemented yet")
+}
+
+/**
+ * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
+ * or truncation, or throws [IllegalArgumentException] if this number is
+ * negative.
+ *
+ * ```kotlin
+ * val value = 1.0
+ * val result: StrictlyPositiveDouble = value.toStrictlyPositiveDoubleOrThrow()
+ * assertEquals(value, result.toDouble())
+ *
+ * assertFailsWith<IllegalArgumentException> {
+ *     0.toStrictlyPositiveDoubleOrThrow()
+ * }
+ * assertFailsWith<IllegalArgumentException> {
+ *     (-1).toStrictlyPositiveDoubleOrThrow()
+ * }
+ * ```
+ *
+ * You can use the [toStrictlyPositiveDoubleOrNull] function for returning
+ * `null` instead of throwing an [IllegalArgumentException] when this number is
+ * negative.
+ *
+ * See the [StrictlyPositiveDouble.toDouble] function for more details on
+ * converting a [StrictlyPositiveDouble] to a [Double].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
+    TODO("Not implemented yet")
+}
+
+/**
  * Represents strictly positive floating-point numbers represented by the
  * [Double] type.
  */
