@@ -20,6 +20,26 @@ import kotlin.test.assertTrue
 @ExperimentalNumberApi
 class StrictlyPositiveDoubleTest {
     @Test
+    fun toStrictlyPositiveDouble_should_pass_with_a_strictly_positive_Number() {
+        val value: Number =
+            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
+        val result: Result<StrictlyPositiveDouble> =
+            value.toStrictlyPositiveDouble()
+        result.getOrThrow().toDouble() shouldEqual value
+    }
+
+    @Test
+    fun toStrictlyPositiveDouble_should_fail_with_a_negative_Number() {
+        val value: Number = Random
+            .nextDouble(from = 0.1, until = Double.MAX_VALUE)
+            .unaryMinus()
+        val result: Result<StrictlyPositiveDouble> =
+            value.toStrictlyPositiveDouble()
+        assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            .shouldHaveAMessage()
+    }
+
+    @Test
     fun compareTo_should_return_zero_with_the_same_StrictlyPositiveDouble() {
         val x: StrictlyPositiveDouble = Random.nextDouble()
             .toStrictlyPositiveDouble()
@@ -65,27 +85,6 @@ class StrictlyPositiveDoubleTest {
             .toString()
             .shouldEqual("$value")
     }
-
-    @Test
-    fun number_toStrictlyPositiveDouble_should_pass_with_a_strictly_positive_Number() {
-        val value: Number =
-            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-        val result: Result<StrictlyPositiveDouble> =
-            value.toStrictlyPositiveDouble()
-        result.getOrThrow()
-            .toDouble()
-            .shouldEqual(value)
-    }
-
-    @Test
-    fun number_toStrictlyPositiveDouble_should_fail_with_a_negative_Number(): Unit =
-        Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-            .unaryMinus()
-            .toStrictlyPositiveDouble()
-            .run {
-                assertFailsWith<IllegalArgumentException>(block = ::getOrThrow)
-            }
-            .shouldHaveAMessage()
 }
 
 @ExperimentalNumberApi
