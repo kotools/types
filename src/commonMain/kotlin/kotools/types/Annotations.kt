@@ -54,6 +54,7 @@ internal annotation class SinceKotoolsTypes(val version: String)
  */
 @MustBeDocumented
 @Retention(SOURCE)
+@Suppress("unused")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 internal annotation class DeprecatedSinceKotoolsTypes(
     val warningSince: String,
