@@ -117,6 +117,15 @@ more information about how to set up a version catalog with a [TOML] file.
 [TOML + Gradle + project accessors]: https://funkymuse.dev/posts/toml-gradle
 [TOML]: https://toml.io
 
+### Fixed
+
+#### Documentation typo
+
+We've fixed a little typo in the documentation of the `notEmptyRangeOf`
+function (PR [#222]).
+
+[#222]: https://github.com/kotools/types/pull/222
+
 ## 4.3.0
 
 _Release date: 2023-08-14._
