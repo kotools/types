@@ -52,7 +52,8 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
-    TODO("Not implemented yet")
+    val value: Double = toDouble()
+    return if (value > 0.0) StrictlyPositiveDouble(value) else null
 }
 
 /**
