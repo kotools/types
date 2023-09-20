@@ -142,8 +142,8 @@ internal object StrictlyPositiveDoubleSerializer :
 
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
-        return value.toStrictlyPositiveDoubleOrNull() ?: value.let {
-            val error = IllegalStrictlyPositiveNumberError(it)
+        return value.toStrictlyPositiveDoubleOrNull() ?: Unit.let {
+            val error = IllegalStrictlyPositiveNumberError(value)
             throw SerializationException("${error.message}")
         }
     }
