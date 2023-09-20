@@ -72,9 +72,13 @@ class StrictlyPositiveDoubleTest {
         val value: Number = Random
             .nextDouble(from = 0.1, until = Double.MAX_VALUE)
             .unaryMinus()
-        assertFailsWith<IllegalArgumentException> {
+        val exception: IllegalArgumentException = assertFailsWith {
             value.toStrictlyPositiveDoubleOrThrow()
-        }.shouldHaveAMessage()
+        }
+        val expectedMessage: String = IllegalStrictlyPositiveNumberError(value)
+            .message
+            .toString()
+        exception.message shouldEqual expectedMessage
     }
 
     @Test

@@ -13,6 +13,8 @@ import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotlin.jvm.JvmInline
 
+private fun Double.isStrictlyPositive(): Boolean = this > 0.0
+
 /**
  * Returns this number as an encapsulated [StrictlyPositiveDouble],
  * which may involve rounding or truncation, or returns an encapsulated
@@ -23,7 +25,6 @@ import kotlin.jvm.JvmInline
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
-        require(value > 0.0) { value shouldBe aStrictlyPositiveNumber }
         StrictlyPositiveDouble(value)
     }
 
@@ -53,7 +54,8 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
     val value: Double = toDouble()
-    return if (value > 0.0) StrictlyPositiveDouble(value) else null
+    val isValid: Boolean = value.isStrictlyPositive()
+    return if (isValid) StrictlyPositiveDouble(value) else null
 }
 
 /**
@@ -85,7 +87,6 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
     val value: Double = toDouble()
-    require(value > 0.0) { value shouldBe aStrictlyPositiveNumber }
     return StrictlyPositiveDouble(value)
 }
 
@@ -100,6 +101,11 @@ public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
 public value class StrictlyPositiveDouble internal constructor(
     private val value: Double
 ) : Comparable<StrictlyPositiveDouble> {
+    init {
+        val isValid: Boolean = value.isStrictlyPositive()
+        require(isValid) { IllegalStrictlyPositiveNumberError(value).message }
+    }
+
     /**
      * Compares this floating-point number with the other one for order.
      * Returns zero if this floating-point number equals the other one,
@@ -129,18 +135,16 @@ internal object StrictlyPositiveDoubleSerializer :
         )
     }
 
-    override fun serialize(
-        encoder: Encoder,
-        value: StrictlyPositiveDouble
-    ): Unit = value.toDouble()
-        .let(encoder::encodeDouble)
+    override fun serialize(encoder: Encoder, value: StrictlyPositiveDouble) {
+        val x: Double = value.toDouble()
+        encoder.encodeDouble(x)
+    }
 
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
-        return value.toStrictlyPositiveDouble()
-            .getOrNull()
-            ?: throw SerializationException(
-                value shouldBe aStrictlyPositiveNumber
-            )
+        return value.toStrictlyPositiveDoubleOrNull() ?: value.let {
+            val error = IllegalStrictlyPositiveNumberError(it)
+            throw SerializationException("${error.message}")
+        }
     }
 }
