@@ -21,9 +21,12 @@ import kotools.types.text.toNotBlankString
 public fun Number.toNegativeInt(): Result<NegativeInt> {
     val value: Int = toInt()
     return when {
-        value == ZeroInt.toInt() -> Result.success(ZeroInt)
-        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
-        else -> Result.failure(value shouldBe aNegativeNumber)
+        value == 0 -> Result.success(ZeroInt)
+        value < 0 -> value.toStrictlyNegativeInt()
+        else -> {
+            val exception = NegativeIntConstructionException(value)
+            Result.failure(exception)
+        }
     }
 }
 
@@ -80,7 +83,7 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toNegativeIntOrThrow(): NegativeInt =
-    toNegativeIntOrNull() ?: throw shouldBe(aNegativeNumber)
+    toNegativeIntOrNull() ?: throw NegativeIntConstructionException(this)
 
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
@@ -167,5 +170,19 @@ internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
 
     override fun deserialize(value: Int): NegativeInt = value.toNegativeInt()
         .getOrNull()
-        ?: throw SerializationException(value shouldBe aNegativeNumber)
+        ?: throw NegativeIntSerializationException(value)
+}
+
+internal class NegativeIntConstructionException(number: Number) :
+    IllegalArgumentException() {
+    override val message: String by lazy {
+        "Number should be negative (tried with $number)."
+    }
+}
+
+private class NegativeIntSerializationException(number: Number) :
+    SerializationException() {
+    override val message: String by lazy {
+        "Number should be negative (tried with $number)."
+    }
 }

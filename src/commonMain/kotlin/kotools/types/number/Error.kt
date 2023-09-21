@@ -8,12 +8,10 @@ internal sealed class NumberErrorDescription(private val value: String) {
 
     object NonZero : NumberErrorDescription("other than zero")
     object Positive : NumberErrorDescription("positive")
-    object Negative : NumberErrorDescription("negative")
 }
 
 internal val otherThanZero = NumberErrorDescription.NonZero
 internal val aPositiveNumber = NumberErrorDescription.Positive
-internal val aNegativeNumber = NumberErrorDescription.Negative
 
 internal infix fun <N : Number> N.shouldBe(
     description: NumberErrorDescription

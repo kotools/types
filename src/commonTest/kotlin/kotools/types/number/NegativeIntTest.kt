@@ -74,7 +74,8 @@ class NegativeIntTest {
             result.getOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String? = number.shouldBe(aNegativeNumber).message
+        val expectedMessage: String = NegativeIntConstructionException(number)
+            .message
         assertEquals(expectedMessage, actualMessage)
     }
 
@@ -113,7 +114,8 @@ class NegativeIntTest {
             number.toNegativeIntOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String? = number.shouldBe(aNegativeNumber).message
+        val expectedMessage: String = NegativeIntConstructionException(number)
+            .message
         assertEquals(expectedMessage, actualMessage)
     }
 
