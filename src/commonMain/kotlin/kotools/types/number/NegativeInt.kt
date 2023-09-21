@@ -50,7 +50,12 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toNegativeIntOrNull(): NegativeInt? {
-    TODO()
+    val value: Int = toInt()
+    return when {
+        value == 0 -> ZeroInt
+        value < 0 -> StrictlyNegativeInt(value)
+        else -> null
+    }
 }
 
 /**
