@@ -14,7 +14,9 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 
 class NonZeroIntCompanionTest {
     @Test
@@ -52,21 +54,24 @@ class NonZeroIntCompanionTest {
 
 class NonZeroIntTest {
     @Test
-    fun number_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
-        val value: Number = NonZeroInt.random()
+    fun toNonZeroInt_should_pass_with_an_Int_other_than_zero() {
+        val expected: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
+        val result: Result<NonZeroInt> = expected.toNonZeroInt()
+        val actual: Int = result.getOrThrow()
             .toInt()
-        val result: Result<NonZeroInt> = value.toNonZeroInt()
-        result.getOrThrow()
-            .toInt() shouldEqual value
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun number_toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
-        val value: Number = ZeroInt.toInt()
-        val result: Result<NonZeroInt> = value.toNonZeroInt()
-        val exception: IllegalArgumentException =
-            assertFailsWith(block = result::getOrThrow)
-        exception.shouldHaveAMessage()
+    fun toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
+        val number: Number = 0
+        val result: Result<NonZeroInt> = number.toNonZeroInt()
+        val exception: IllegalArgumentException = assertFailsWith {
+            result.getOrThrow()
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String? = number.shouldBe(otherThanZero).message
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @ExperimentalNumberApi
