@@ -28,6 +28,50 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     }
 }
 
+/**
+ * Returns this number as a [NonZeroInt], which may involve rounding or
+ * truncation, or returns `null` if this number equals [zero][ZeroInt].
+ *
+ * ```kotlin
+ * var result: NonZeroInt? = 1.toNonZeroIntOrNull()
+ * println(result) // 1
+ *
+ * result = 0.toNonZeroIntOrNull()
+ * println(null) // 0
+ * ```
+ *
+ * You can use the [toNonZeroIntOrThrow] function for throwing an
+ * [IllegalArgumentException] instead of returning `null` when this number
+ * equals [zero][ZeroInt].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
+    TODO()
+}
+
+/**
+ * Returns this number as a [NonZeroInt], which may involve rounding or
+ * truncation, or throws [IllegalArgumentException] if this number equals
+ * [zero][ZeroInt].
+ *
+ * ```kotlin
+ * var result: NonZeroInt = 1.toNonZeroIntOrThrow()
+ * println(result) // 1
+ *
+ * 0.toNonZeroIntOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * You can use the [toNonZeroIntOrNull] function for returning `null` instead
+ * of throwing an [IllegalArgumentException] when this number equals
+ * [zero][ZeroInt].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun Number.toNonZeroIntOrThrow(): NonZeroInt {
+    TODO()
+}
+
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")

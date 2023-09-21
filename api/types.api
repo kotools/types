@@ -199,6 +199,8 @@ public final class kotools/types/number/NonZeroIntKt {
 	public static final fun div (ILkotools/types/number/NonZeroInt;)I
 	public static final fun rem (ILkotools/types/number/NonZeroInt;)I
 	public static final fun toNonZeroInt (Ljava/lang/Number;)Ljava/lang/Object;
+	public static final fun toNonZeroIntOrNull (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
+	public static final fun toNonZeroIntOrThrow (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public static final fun unaryMinus (Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NonZeroInt;
 }
 
