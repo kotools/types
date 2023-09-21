@@ -27,6 +27,57 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
     }
 }
 
+/**
+ * Returns this number as a [PositiveInt], which may involve rounding or
+ * truncation, or returns `null` if this number is
+ * [strictly negative][StrictlyNegativeInt].
+ *
+ * ```kotlin
+ * var result: PositiveInt? = 1.toPositiveIntOrNull()
+ * println(result) // 1
+ *
+ * result = 0.toPositiveIntOrNull()
+ * println(result) // 0
+ *
+ * result = (-1).toPositiveIntOrNull()
+ * println(result) // null
+ * ```
+ *
+ * You can use the [toPositiveIntOrThrow] function for throwing an
+ * [IllegalArgumentException] instead of returning `null` when this number is
+ * [strictly negative][StrictlyNegativeInt].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun Number.toPositiveIntOrNull(): PositiveInt? {
+    TODO()
+}
+
+/**
+ * Returns this number as a [PositiveInt], which may involve rounding or
+ * truncation, or throws [IllegalArgumentException] if this number is
+ * [strictly negative][StrictlyNegativeInt].
+ *
+ * ```kotlin
+ * var result: PositiveInt = 1.toPositiveIntOrThrow()
+ * println(result) // 1
+ *
+ * result = 0.toPositiveIntOrThrow()
+ * println(result) // 0
+ *
+ * (-1).toPositiveIntOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * You can use the [toPositiveIntOrNull] function for returning `null` instead
+ * of throwing an [IllegalArgumentException] when this number is
+ * [strictly negative][StrictlyNegativeInt].
+ */
+@ExperimentalNumberApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun Number.toPositiveIntOrThrow(): PositiveInt {
+    TODO()
+}
+
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
