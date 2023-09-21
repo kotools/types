@@ -71,7 +71,7 @@ class NonZeroIntTest {
             result.getOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String? = number.shouldBe(otherThanZero).message
+        val expectedMessage: String = NonZeroIntConstructionException.message
         assertEquals(expectedMessage, actualMessage)
     }
 
@@ -110,7 +110,7 @@ class NonZeroIntTest {
             number.toNonZeroIntOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String? = number.shouldBe(otherThanZero).message
+        val expectedMessage: String = NonZeroIntConstructionException.message
         assertEquals(expectedMessage, actualMessage)
     }
 

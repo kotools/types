@@ -24,7 +24,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     return when {
         value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
         value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
-        else -> Result.failure(value shouldBe otherThanZero)
+        else -> Result.failure(NonZeroIntConstructionException)
     }
 }
 
@@ -74,7 +74,7 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toNonZeroIntOrThrow(): NonZeroInt =
-    toNonZeroIntOrNull() ?: throw shouldBe(otherThanZero)
+    toNonZeroIntOrNull() ?: throw NonZeroIntConstructionException
 
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
@@ -151,11 +151,19 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.NonZeroInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "${Package.number}.NonZeroInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): NonZeroInt = value.toNonZeroInt()
         .getOrNull()
-        ?: throw SerializationException(value shouldBe otherThanZero)
+        ?: throw NonZeroIntSerializationException
+}
+
+internal object NonZeroIntConstructionException : IllegalArgumentException() {
+    override val message: String by lazy { "Number should be other than zero" }
+}
+
+private object NonZeroIntSerializationException : SerializationException() {
+    override val message: String by lazy { "Number should be other than zero" }
 }
