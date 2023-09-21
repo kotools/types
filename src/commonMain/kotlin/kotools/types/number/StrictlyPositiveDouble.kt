@@ -33,22 +33,18 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * or truncation, or returns `null` if this number is negative.
  *
  * ```kotlin
- * val value = 1.0
- * var result: StrictlyPositiveDouble? = value.toStrictlyPositiveDoubleOrNull()
- * assertEquals(value, result?.toDouble())
+ * var result: StrictlyPositiveDouble? = 1.toStrictlyPositiveDoubleOrNull()
+ * println(result) // 1.0
  *
  * result = 0.toStrictlyPositiveDoubleOrNull()
- * assertNull(result)
+ * println(result) // null
  *
  * result = (-1).toStrictlyPositiveDoubleOrNull()
- * assertNull(result)
+ * println(result) // null
  * ```
  *
  * You can use the [toStrictlyPositiveDoubleOrThrow] function for throwing an
  * [IllegalArgumentException] instead of returning `null`.
- *
- * See the [StrictlyPositiveDouble.toDouble] function for more details on
- * converting a [StrictlyPositiveDouble] to a [Double].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
