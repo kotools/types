@@ -98,9 +98,7 @@ public sealed interface PositiveInt : AnyInt {
         public val min: ZeroInt = ZeroInt
 
         /** The maximum value a [PositiveInt] can have. */
-        public val max: StrictlyPositiveInt by lazy(
-            StrictlyPositiveInt.Companion::max
-        )
+        public val max: StrictlyPositiveInt by lazy { StrictlyPositiveInt.max }
 
         /** The range of values a [PositiveInt] can have. */
         @ExperimentalRangeApi
