@@ -50,7 +50,8 @@ This change applies for the following types:
 - `StrictlyPositiveDouble` (issue [#132] fixed by PRs [#233] and [#235])
 - `NotBlankString` (issue [#174] fixed by PRs [#182] and [#204])
 - `NotEmptyList` (issue [#176])
-- `NotEmptySet` (issue [#178]).
+- `NotEmptySet` (issue [#178])
+- `NotEmptyMap` (issue [#179]).
 
 Here's an example for the `StrictlyPositiveInt` type:
 
@@ -75,6 +76,7 @@ Here's an example for the `StrictlyPositiveInt` type:
 [#174]: https://github.com/kotools/types/issues/174
 [#176]: https://github.com/kotools/types/issues/176
 [#178]: https://github.com/kotools/types/issues/178
+[#179]: https://github.com/kotools/types/issues/179
 [#181]: https://github.com/kotools/types/pull/181
 [#182]: https://github.com/kotools/types/pull/182
 [#202]: https://github.com/kotools/types/pull/202
