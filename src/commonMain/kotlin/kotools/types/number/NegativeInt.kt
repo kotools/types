@@ -22,7 +22,7 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
     val value: Int = toInt()
     return when {
         value == 0 -> Result.success(ZeroInt)
-        value < 0 -> value.toStrictlyNegativeInt()
+        value.isStrictlyNegative() -> value.toStrictlyNegativeInt()
         else -> {
             val exception = NegativeIntConstructionException(value)
             Result.failure(exception)
