@@ -79,9 +79,8 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toPositiveIntOrThrow(): PositiveInt {
-    TODO()
-}
+public fun Number.toPositiveIntOrThrow(): PositiveInt =
+    toStrictlyPositiveIntOrNull() ?: throw shouldBe(aPositiveNumber)
 
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
