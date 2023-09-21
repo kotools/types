@@ -41,6 +41,7 @@ should return `null` if the builder is suffixed by `OrNull` or throw an
 exception if it's suffixed by `OrThrow`.
 This change applies for the following types:
 
+- `NegativeInt` (issue [#171])
 - `StrictlyPositiveInt` (issue [#141] fixed by PRs [#164] and [#202])
 - `StrictlyNegativeInt` (issue [#149] fixed by PRs [#181] and [#203], and by
   [@o-korpi] in PR [#167])
@@ -64,6 +65,7 @@ Here's an example for the `StrictlyPositiveInt` type:
 [#149]: https://github.com/kotools/types/issues/149
 [#164]: https://github.com/kotools/types/pull/164
 [#167]: https://github.com/kotools/types/pull/167
+[#171]: https://github.com/kotools/types/issues/171
 [#174]: https://github.com/kotools/types/issues/174
 [#181]: https://github.com/kotools/types/pull/181
 [#182]: https://github.com/kotools/types/pull/182
