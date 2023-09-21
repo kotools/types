@@ -56,7 +56,7 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? {
     val value: Int = toInt()
     return when {
         value == 0 -> ZeroInt
-        value < 0 -> StrictlyNegativeInt(value)
+        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
         else -> null
     }
 }
