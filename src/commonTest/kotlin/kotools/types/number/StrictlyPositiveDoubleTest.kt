@@ -75,9 +75,8 @@ class StrictlyPositiveDoubleTest {
         val exception: IllegalArgumentException = assertFailsWith {
             value.toStrictlyPositiveDoubleOrThrow()
         }
-        val expectedMessage: String = IllegalStrictlyPositiveNumberError(value)
+        val expectedMessage: String = StrictlyPositiveDoubleException(value)
             .message
-            .toString()
         exception.message shouldEqual expectedMessage
     }
 
