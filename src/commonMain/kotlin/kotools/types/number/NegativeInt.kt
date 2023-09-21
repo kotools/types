@@ -108,7 +108,8 @@ public sealed interface NegativeInt : AnyInt {
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")
-        public fun random(): NegativeInt = (min.toInt()..max.toInt()).random()
+        public fun random(): NegativeInt = (min.toInt()..max.toInt())
+            .random()
             .toNegativeInt()
             .getOrThrow()
     }
