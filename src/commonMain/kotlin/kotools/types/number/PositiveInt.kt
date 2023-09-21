@@ -56,7 +56,7 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
     val value: Int = toInt()
     return when {
         value == 0 -> ZeroInt
-        value > 0 -> StrictlyPositiveInt(value)
+        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
         else -> null
     }
 }
