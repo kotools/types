@@ -82,9 +82,11 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toPositiveIntOrThrow(): PositiveInt =
-    toStrictlyPositiveIntOrNull()
-        ?: throw PositiveIntConstructionException(this)
+public fun Number.toPositiveIntOrThrow(): PositiveInt {
+    val value: Int = toInt()
+    require(value >= 0) { PositiveIntConstructionException(value).message }
+    return if (value == 0) ZeroInt else StrictlyPositiveInt(value)
+}
 
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
