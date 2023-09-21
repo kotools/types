@@ -47,7 +47,12 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
-    TODO()
+    val value: Int = toInt()
+    return when {
+        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
+        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
+        else -> null
+    }
 }
 
 /**

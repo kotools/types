@@ -17,6 +17,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class NonZeroIntCompanionTest {
     @Test
@@ -72,6 +73,24 @@ class NonZeroIntTest {
         val actualMessage: String = assertNotNull(exception.message)
         val expectedMessage: String? = number.shouldBe(otherThanZero).message
         assertEquals(expectedMessage, actualMessage)
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toNonZeroIntOrNull_should_pass_with_an_Int_other_than_zero() {
+        val expected: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
+        val result: NonZeroInt? = expected.toNonZeroIntOrNull()
+        val x: NonZeroInt = assertNotNull(result)
+        val actual: Int = x.toInt()
+        assertEquals(expected, actual)
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toNonZeroIntOrNull_should_fail_with_an_Int_that_equals_zero() {
+        val number: Number = 0
+        val result: NonZeroInt? = number.toNonZeroIntOrNull()
+        assertNull(result)
     }
 
     @ExperimentalNumberApi
