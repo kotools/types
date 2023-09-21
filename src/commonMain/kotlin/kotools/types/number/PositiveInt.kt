@@ -21,8 +21,8 @@ import kotools.types.text.toNotBlankString
 public fun Number.toPositiveInt(): Result<PositiveInt> {
     val value: Int = toInt()
     return when {
-        value == ZeroInt.toInt() -> Result.success(ZeroInt)
-        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
+        value == 0 -> Result.success(ZeroInt)
+        value.isStrictlyPositive() -> value.toStrictlyPositiveInt()
         else -> {
             val exception = PositiveIntConstructionException(value)
             Result.failure(exception)

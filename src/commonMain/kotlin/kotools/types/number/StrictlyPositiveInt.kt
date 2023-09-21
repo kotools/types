@@ -12,8 +12,10 @@ import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
-private fun Int.isStrictlyPositive(): Boolean = this > 0
+@JvmSynthetic
+internal fun Int.isStrictlyPositive(): Boolean = this > 0
 
 /**
  * Returns this number as an encapsulated [StrictlyPositiveInt], which may
