@@ -50,7 +50,12 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toPositiveIntOrNull(): PositiveInt? {
-    TODO()
+    val value: Int = toInt()
+    return when {
+        value == 0 -> ZeroInt
+        value > 0 -> StrictlyPositiveInt(value)
+        else -> null
+    }
 }
 
 /**
