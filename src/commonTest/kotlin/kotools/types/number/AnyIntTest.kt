@@ -4,7 +4,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.shouldEqual
 import kotlin.random.Random
@@ -144,7 +144,7 @@ class AnyIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_AnyInt_as_serial_name(): Unit =
-        serializer.descriptor.serialName shouldEqual "${Package.number}.AnyInt"
+        serializer.descriptor.serialName shouldEqual "$NUMBER_PACKAGE.AnyInt"
 
     @Test
     fun serialize_should_behave_like_an_Int() {

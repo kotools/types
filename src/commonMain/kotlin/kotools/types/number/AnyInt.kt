@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.ExperimentalSinceKotoolsTypes
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.text.NotBlankString
@@ -111,9 +111,9 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
 }
 
 internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.AnyInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "$NUMBER_PACKAGE.AnyInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): AnyInt = when {
         value == ZeroInt.toInt() -> Result.success(ZeroInt)

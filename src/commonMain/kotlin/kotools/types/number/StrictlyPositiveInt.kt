@@ -3,7 +3,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.ExperimentalSinceKotoolsTypes
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
@@ -147,9 +147,9 @@ public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt =
 
 internal object StrictlyPositiveIntSerializer :
     AnyIntSerializer<StrictlyPositiveInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.StrictlyPositiveInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "$NUMBER_PACKAGE.StrictlyPositiveInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): StrictlyPositiveInt = value
         .toStrictlyPositiveInt()

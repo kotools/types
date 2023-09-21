@@ -9,7 +9,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.ExperimentalSinceKotoolsTypes
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.experimental.ExperimentalNumberApi
 import kotlin.jvm.JvmInline
 
@@ -118,7 +118,7 @@ internal object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
         PrimitiveSerialDescriptor(
-            serialName = "${Package.number}.StrictlyPositiveDouble",
+            serialName = "$NUMBER_PACKAGE.StrictlyPositiveDouble",
             kind = PrimitiveKind.DOUBLE
         )
     }

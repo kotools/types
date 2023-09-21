@@ -3,7 +3,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.ExperimentalSinceKotoolsTypes
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
@@ -163,7 +163,7 @@ public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
 
 internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.number}.NegativeInt".toNotBlankString()
+        "$NUMBER_PACKAGE.NegativeInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): NegativeInt = value.toNegativeInt()

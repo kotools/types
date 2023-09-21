@@ -1,9 +1,11 @@
 package kotools.types
 
-internal object Package {
-    private const val root: String = "kotools.types"
-    const val collection: String = "$root.collection"
-    const val experimental: String = "$root.experimental"
-    const val number: String = "$root.number"
-    const val text: String = "$root.text"
-}
+import kotlin.jvm.JvmSynthetic
+
+private const val ROOT_PACKAGE: String = "kotools.types"
+
+@JvmSynthetic
+internal const val NUMBER_PACKAGE: String = "$ROOT_PACKAGE.number"
+
+@JvmSynthetic
+internal const val TEXT_PACKAGE: String = "$ROOT_PACKAGE.text"

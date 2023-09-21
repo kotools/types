@@ -4,7 +4,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
@@ -160,7 +160,7 @@ class NegativeIntSerializerTest {
     @Test
     fun descriptor_should_have_the_qualified_name_of_NegativeInt_as_serial_name() {
         val result: String = NegativeIntSerializer.descriptor.serialName
-        result shouldEqual "${Package.number}.NegativeInt"
+        result shouldEqual "$NUMBER_PACKAGE.NegativeInt"
     }
 
     @Test

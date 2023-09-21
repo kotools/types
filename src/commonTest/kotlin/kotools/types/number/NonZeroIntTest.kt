@@ -5,7 +5,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
+import kotools.types.NUMBER_PACKAGE
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
@@ -149,7 +149,7 @@ class NonZeroIntSerializerTest {
     @Test
     fun descriptor_should_have_the_qualified_name_of_NonZeroInt_as_serial_name(): Unit =
         serializer.descriptor
-            .serialName shouldEqual "${Package.number}.NonZeroInt"
+            .serialName shouldEqual "$NUMBER_PACKAGE.NonZeroInt"
 
     @Test
     fun serialization_should_behave_like_an_Int() {
