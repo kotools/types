@@ -98,6 +98,27 @@ class NegativeIntTest {
 
     @ExperimentalNumberApi
     @Test
+    fun toNegativeIntOrThrow_should_pass_with_a_negative_Int() {
+        val expected: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        val result: NegativeInt = expected.toNegativeIntOrThrow()
+        val actual: Int = result.toInt()
+        assertEquals(expected, actual)
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toNegativeIntOrThrow_should_fail_with_a_strictly_positive_Int() {
+        val number: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
+        val exception: IllegalArgumentException = assertFailsWith {
+            number.toNegativeIntOrThrow()
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String? = number.shouldBe(aNegativeNumber).message
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @ExperimentalNumberApi
+    @Test
     fun unaryMinus_should_pass() {
         // GIVEN
         val x: NegativeInt = NegativeInt.random()

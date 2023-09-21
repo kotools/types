@@ -79,9 +79,8 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrThrow(): NegativeInt {
-    TODO()
-}
+public fun Number.toNegativeIntOrThrow(): NegativeInt =
+    toNegativeIntOrNull() ?: throw shouldBe(aNegativeNumber)
 
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
