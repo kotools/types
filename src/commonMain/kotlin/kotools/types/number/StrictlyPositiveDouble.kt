@@ -60,24 +60,16 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
  * negative.
  *
  * ```kotlin
- * val value = 1.0
- * val result: StrictlyPositiveDouble = value.toStrictlyPositiveDoubleOrThrow()
- * assertEquals(value, result.toDouble())
+ * val result: StrictlyPositiveDouble = 1.toStrictlyPositiveDoubleOrThrow()
+ * println(result) // 1.0
  *
- * assertFailsWith<IllegalArgumentException> {
- *     0.toStrictlyPositiveDoubleOrThrow()
- * }
- * assertFailsWith<IllegalArgumentException> {
- *     (-1).toStrictlyPositiveDoubleOrThrow()
- * }
+ * 0.toStrictlyPositiveDoubleOrThrow() // IllegalArgumentException
+ * (-1).toStrictlyPositiveDoubleOrThrow() // IllegalArgumentException
  * ```
  *
  * You can use the [toStrictlyPositiveDoubleOrNull] function for returning
  * `null` instead of throwing an [IllegalArgumentException] when this number is
  * negative.
- *
- * See the [StrictlyPositiveDouble.toDouble] function for more details on
- * converting a [StrictlyPositiveDouble] to a [Double].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
