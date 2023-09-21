@@ -92,9 +92,7 @@ public sealed interface NegativeInt : AnyInt {
     /** Contains declarations for holding or building a [NegativeInt]. */
     public companion object {
         /** The minimum value a [NegativeInt] can have. */
-        public val min: StrictlyNegativeInt by lazy(
-            StrictlyNegativeInt.Companion::min
-        )
+        public val min: StrictlyNegativeInt by lazy { StrictlyNegativeInt.min }
 
         /** The maximum value a [NegativeInt] can have. */
         public val max: ZeroInt = ZeroInt
