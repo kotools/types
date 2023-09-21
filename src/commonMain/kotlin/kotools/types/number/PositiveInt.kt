@@ -23,7 +23,10 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
     return when {
         value == ZeroInt.toInt() -> Result.success(ZeroInt)
         value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
-        else -> Result.failure(value shouldBe aPositiveNumber)
+        else -> {
+            val exception = PositiveIntConstructionException(value)
+            Result.failure(exception)
+        }
     }
 }
 
@@ -80,7 +83,8 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toPositiveIntOrThrow(): PositiveInt =
-    toStrictlyPositiveIntOrNull() ?: throw shouldBe(aPositiveNumber)
+    toStrictlyPositiveIntOrNull()
+        ?: throw PositiveIntConstructionException(this)
 
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
@@ -161,11 +165,25 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
 }
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.PositiveInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "${Package.number}.PositiveInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()
         .getOrNull()
-        ?: throw SerializationException(value shouldBe aPositiveNumber)
+        ?: throw PositiveIntSerializationException(value)
+}
+
+internal class PositiveIntConstructionException(number: Number) :
+    IllegalArgumentException() {
+    override val message: String by lazy {
+        "Number should be positive (tried with $number)."
+    }
+}
+
+private class PositiveIntSerializationException(number: Number) :
+    SerializationException() {
+    override val message: String by lazy {
+        "Number should be positive (tried with $number)."
+    }
 }

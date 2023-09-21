@@ -7,11 +7,9 @@ internal sealed class NumberErrorDescription(private val value: String) {
     override fun toString(): String = value
 
     object NonZero : NumberErrorDescription("other than zero")
-    object Positive : NumberErrorDescription("positive")
 }
 
 internal val otherThanZero = NumberErrorDescription.NonZero
-internal val aPositiveNumber = NumberErrorDescription.Positive
 
 internal infix fun <N : Number> N.shouldBe(
     description: NumberErrorDescription
