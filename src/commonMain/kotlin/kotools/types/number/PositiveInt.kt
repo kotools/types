@@ -128,8 +128,7 @@ public sealed interface PositiveInt : AnyInt {
 @ExperimentalSinceKotoolsTypes("4.2")
 public operator fun PositiveInt.unaryMinus(): NegativeInt = toInt()
     .unaryMinus()
-    .toNegativeInt()
-    .getOrThrow()
+    .toNegativeIntOrThrow()
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer

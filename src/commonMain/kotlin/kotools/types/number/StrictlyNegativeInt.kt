@@ -142,8 +142,7 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
 public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt =
     toInt()
         .unaryMinus()
-        .toStrictlyPositiveInt()
-        .getOrThrow()
+        .toStrictlyPositiveIntOrThrow()
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {
