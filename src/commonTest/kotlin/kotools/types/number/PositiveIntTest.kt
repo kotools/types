@@ -13,8 +13,11 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
+import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class PositiveIntCompanionTest {
@@ -55,18 +58,24 @@ class PositiveIntCompanionTest {
 
 class PositiveIntTest {
     @Test
-    fun number_toPositiveInt_should_pass_with_a_positive_Int() {
-        val expected: Number = PositiveInt.random().toInt()
+    fun toPositiveInt_should_pass_with_a_positive_Int() {
+        val expected: Number = Random.nextInt(from = 0, until = Int.MAX_VALUE)
         val result: Result<PositiveInt> = expected.toPositiveInt()
-        result.getOrThrow().toInt() shouldEqual expected
+        val actual: Int = result.getOrThrow()
+            .toInt()
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun number_toPositiveInt_should_fail_with_a_strictly_negative_Int() {
-        val number: Number = StrictlyNegativeInt.random().toInt()
+    fun toPositiveInt_should_fail_with_a_strictly_negative_Int() {
+        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
         val result: Result<PositiveInt> = number.toPositiveInt()
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
+        val exception: IllegalArgumentException = assertFailsWith {
+            result.getOrThrow()
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage = "Number should be positive (tried with $number)."
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @ExperimentalNumberApi
