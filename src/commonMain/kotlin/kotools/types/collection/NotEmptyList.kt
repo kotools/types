@@ -7,7 +7,9 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.SinceKotoolsTypes
+import kotools.types.experimental.ExperimentalCollectionApi
 import kotlin.jvm.JvmInline
 
 /**
@@ -65,6 +67,85 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
         val elements: List<E> = toList()
         NotEmptyList(elements)
     }
+
+/**
+ * Returns a [NotEmptyList] containing all the elements of this collection, or
+ * returns `null` if this collection is [empty][Collection.isEmpty].
+ *
+ * ```kotlin
+ * var collection: Collection<Int> = listOf(1, 2, 3)
+ * var result: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
+ * println(result) // [1, 2, 3]
+ *
+ * collection = emptyList()
+ * result = collection.toNotEmptyListOrNull()
+ * println(result) // null
+ * ```
+ *
+ * Please note that changes made to the original collection will not be
+ * reflected on the resulting [NotEmptyList].
+ *
+ * ```kotlin
+ * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+ * val notEmptyList: NotEmptyList<Int>? = original.toNotEmptyListOrNull()
+ * println(original) // [1, 2, 3]
+ * println(notEmptyList) // [1, 2, 3]
+ *
+ * original.clear()
+ * println(original) // []
+ * println(notEmptyList) // [1, 2, 3]
+ * ```
+ *
+ * You can use the [toNotEmptyListOrThrow] function for throwing an
+ * [IllegalArgumentException] instead of returning `null` when this collection
+ * is [empty][Collection.isEmpty].
+ */
+@ExperimentalCollectionApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? {
+    if (isEmpty()) return null
+    val elements: List<E> = toList()
+    return NotEmptyList(elements)
+}
+
+/**
+ * Returns a [NotEmptyList] containing all the elements of this collection, or
+ * throws an [IllegalArgumentException] if this collection is
+ * [empty][Collection.isEmpty].
+ *
+ * ```kotlin
+ * var collection: Collection<Int> = listOf(1, 2, 3)
+ * var result: NotEmptyList<Int> = collection.toNotEmptyListOrThrow()
+ * println(result) // [1, 2, 3]
+ *
+ * collection = emptyList()
+ * collection.toNotEmptyListOrThrow() // IllegalArgumentException
+ * ```
+ *
+ * Please note that changes made to the original collection will not be
+ * reflected on the resulting [NotEmptyList].
+ *
+ * ```kotlin
+ * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+ * val notEmptyList: NotEmptyList<Int> = original.toNotEmptyListOrThrow()
+ * println(original) // [1, 2, 3]
+ * println(notEmptyList) // [1, 2, 3]
+ *
+ * original.clear()
+ * println(original) // []
+ * println(notEmptyList) // [1, 2, 3]
+ * ```
+ *
+ * You can use the [toNotEmptyListOrNull] function for returning `null` instead
+ * of throwing an [IllegalArgumentException] when this collection is
+ * [empty][Collection.isEmpty].
+ */
+@ExperimentalCollectionApi
+@ExperimentalSinceKotoolsTypes("4.3.1")
+public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> {
+    val elements: List<E> = toList()
+    return NotEmptyList(elements)
+}
 
 /**
  * Represents a list with at least one element of type [E].
