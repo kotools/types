@@ -8,6 +8,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.experimental.ExperimentalCollectionApi
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
@@ -17,6 +18,11 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class NotEmptySetTest {
     @Test
@@ -43,6 +49,45 @@ class NotEmptySetTest {
         val result: Result<NotEmptySet<Int>> = collection.toNotEmptySet()
         result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .shouldHaveAMessage()
+    }
+
+    @ExperimentalCollectionApi
+    @Test
+    fun toNotEmptySetOrNull_should_pass_with_a_not_empty_Collection() {
+        val expected: Collection<Int> = List(3) { Random.nextInt() }
+        val result: NotEmptySet<Int>? = expected.toNotEmptySetOrNull()
+        val elements: NotEmptySet<Int> = assertNotNull(result)
+        val actual: Set<Int> = elements.toSet()
+        assertContentEquals(expected, actual)
+    }
+
+    @ExperimentalCollectionApi
+    @Test
+    fun toNotEmptySetOrNull_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptySet()
+        val result: NotEmptySet<Int>? = collection.toNotEmptySetOrNull()
+        assertNull(result)
+    }
+
+    @ExperimentalCollectionApi
+    @Test
+    fun toNotEmptySetOrThrow_should_pass_with_a_not_empty_Collection() {
+        val expected: Collection<Int> = List(3) { Random.nextInt() }
+        val result: NotEmptySet<Int> = expected.toNotEmptySetOrThrow()
+        val actual: Set<Int> = result.toSet()
+        assertContentEquals(expected, actual)
+    }
+
+    @ExperimentalCollectionApi
+    @Test
+    fun toNotEmptySetOrThrow_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptySet()
+        val exception: IllegalArgumentException = assertFailsWith {
+            collection.toNotEmptySetOrThrow()
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String = EmptyCollectionException.message
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @Test
