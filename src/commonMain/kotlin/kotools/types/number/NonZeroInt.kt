@@ -22,8 +22,8 @@ import kotools.types.text.toNotBlankString
 public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     val value: Int = toInt()
     return when {
-        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
-        value < ZeroInt.toInt() -> value.toStrictlyNegativeInt()
+        value.isStrictlyPositive() -> value.toStrictlyPositiveInt()
+        value.isStrictlyNegative() -> value.toStrictlyNegativeInt()
         else -> Result.failure(NonZeroIntConstructionException)
     }
 }
