@@ -73,9 +73,8 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrThrow(): NonZeroInt {
-    TODO()
-}
+public fun Number.toNonZeroIntOrThrow(): NonZeroInt =
+    toNonZeroIntOrNull() ?: throw shouldBe(otherThanZero)
 
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)

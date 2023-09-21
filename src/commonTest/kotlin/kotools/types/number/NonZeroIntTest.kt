@@ -95,6 +95,27 @@ class NonZeroIntTest {
 
     @ExperimentalNumberApi
     @Test
+    fun toNonZeroIntOrThrow_should_pass_with_an_Int_other_than_zero() {
+        val expected: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
+        val result: NonZeroInt = expected.toNonZeroIntOrThrow()
+        val actual: Int = result.toInt()
+        assertEquals(expected, actual)
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun toNonZeroIntOrThrow_should_fail_with_an_Int_that_equals_zero() {
+        val number: Number = 0
+        val exception: IllegalArgumentException = assertFailsWith {
+            number.toNonZeroIntOrThrow()
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String? = number.shouldBe(otherThanZero).message
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @ExperimentalNumberApi
+    @Test
     fun unaryMinus_should_pass() {
         // GIVEN
         val x: NonZeroInt = NonZeroInt.random()
