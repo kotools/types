@@ -185,11 +185,12 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     public val tail: NotEmptyMap<K, V>?
-        get() = delegate.entries.drop(1)
-            .takeIf { it.isNotEmpty() }
-            ?.associate { it.toPair() }
-            ?.toNotEmptyMap()
-            ?.getOrNull()
+        get() {
+            val tail: List<Map.Entry<K, V>> = delegate.entries.drop(1)
+            if (tail.isEmpty()) return null
+            val map: Map<K, V> = tail.associate { it.toPair() }
+            return NotEmptyMap(map)
+        }
 
     /**
      * All entries of this map.
