@@ -167,7 +167,8 @@ public value class NotEmptyList<out E> internal constructor(
             .getOrNull()
 
     init {
-        require(elements.isNotEmpty()) { EmptyCollectionException.message }
+        val isValid: Boolean = elements.isNotEmpty()
+        require(isValid) { EmptyCollectionException.message }
     }
 
     /**
@@ -192,10 +193,12 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
         ListSerializer(elementSerializer)
     }
 
-    override val descriptor: SerialDescriptor by lazy(delegate::descriptor)
+    override val descriptor: SerialDescriptor by lazy { delegate.descriptor }
 
-    override fun serialize(encoder: Encoder, value: NotEmptyList<E>): Unit =
-        encoder.encodeSerializableValue(delegate, value.toList())
+    override fun serialize(encoder: Encoder, value: NotEmptyList<E>) {
+        val elements: List<E> = value.toList()
+        encoder.encodeSerializableValue(delegate, elements)
+    }
 
     override fun deserialize(decoder: Decoder): NotEmptyList<E> = decoder
         .decodeSerializableValue(delegate)
