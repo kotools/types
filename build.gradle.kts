@@ -35,6 +35,63 @@ kotlin {
     mingwX64("windows")
 }
 
+publishing.repositories.maven {
+    name = "OSSRH"
+    url = uri(
+        "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+    )
+    credentials {
+        username = System.getenv("MAVEN_USERNAME")
+        password = System.getenv("MAVEN_PASSWORD")
+    }
+}
+
+publishing.publications.getByName<MavenPublication>("kotlinMultiplatform") {
+    groupId = "${project.group}"
+    artifactId = project.name
+    version = "${project.version}"
+}
+
+signing {
+    val secretKey: String? = System.getenv("GPG_PRIVATE_KEY")
+    val password: String? = System.getenv("GPG_PASSWORD")
+    useInMemoryPgpKeys(secretKey, password)
+}
+
+publishing.publications.withType<MavenPublication>().configureEach {
+    signing.sign(this)
+    pom {
+        name.set(projectName)
+        description.set(
+            "Multiplatform library providing explicit types for Kotlin."
+        )
+        val gitRepository = "https://github.com/kotools/types"
+        url.set(gitRepository)
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+        issueManagement {
+            system.set("GitHub")
+            url.set("$gitRepository/issues")
+        }
+        scm {
+            connection.set("$gitRepository.git")
+            url.set(gitRepository)
+        }
+        developers {
+            developer {
+                val nameValue: String? = System.getenv("GIT_USER")
+                name.set(nameValue)
+                val emailValue: String? = System.getenv("GIT_EMAIL")
+                email.set(emailValue)
+            }
+        }
+    }
+}
+
 // ---------- Dependencies ----------
 
 repositories.mavenCentral()
@@ -170,63 +227,6 @@ val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
     archiveClassifier.set("javadoc")
 }
 tasks.assemble { dependsOn(javadocJar) }
-
-publishing {
-    repositories {
-        maven {
-            name = "OSSRH"
-            url = uri(
-                "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            )
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
-    }
-    publications {
-        getByName<MavenPublication>("kotlinMultiplatform") {
-            groupId = "${project.group}"
-            artifactId = project.name
-            version = "${project.version}"
-        }
-        forEach {
-            if (it !is MavenPublication) return@forEach
-            it.artifact(javadocJar)
-            it.pom {
-                name.set(projectName)
-                description.set(
-                    "Multiplatform library providing explicit types for Kotlin."
-                )
-                val gitRepository = "https://github.com/kotools/types"
-                url.set(gitRepository)
-                licenses {
-                    license {
-                        name.set("MIT")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                issueManagement {
-                    system.set("GitHub")
-                    url.set("$gitRepository/issues")
-                }
-                scm {
-                    connection.set("$gitRepository.git")
-                    url.set(gitRepository)
-                }
-                developers {
-                    developer {
-                        name.set(System.getenv("GIT_USER"))
-                        email.set(System.getenv("GIT_EMAIL"))
-                    }
-                }
-            }
-            signing {
-                val secretKey: String? = System.getenv("GPG_PRIVATE_KEY")
-                val password: String? = System.getenv("GPG_PASSWORD")
-                useInMemoryPgpKeys(secretKey, password)
-                sign(it)
-            }
-        }
-    }
+publishing.publications.withType<MavenPublication>().configureEach {
+    artifact(javadocJar)
 }
