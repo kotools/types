@@ -48,7 +48,7 @@ publishing.repositories.maven {
 
 publishing.publications.getByName<MavenPublication>("kotlinMultiplatform") {
     groupId = "${project.group}"
-    artifactId = project.name
+    artifactId = rootProject.name
     version = "${project.version}"
 }
 
@@ -146,13 +146,6 @@ tasks.withType<KotlinCompile>().configureEach {
 
 tasks.withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
 
-tasks.withType<Jar>().configureEach {
-    fun key(suffix: String): String = "Implementation-$suffix"
-    val name: Pair<String, String> = key("Title") to project.name
-    val version: Pair<String, Any> = key("Version") to project.version
-    manifest.attributes(name, version)
-}
-
 val projectName = "Kotools Types"
 val apiReferencesDir: Directory = layout.projectDirectory.dir("api/references")
 val setApiReferenceLogoTask: TaskProvider<Copy> =
@@ -220,13 +213,23 @@ deleteOlderDirInArchivedApiReference.configure {
     setDelete(target)
 }
 
-val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
-    group(TaskGroup.DOCUMENTATION)
-    description("Archives the API reference in a JAR file.")
-    from(tasks.dokkaHtml)
-    archiveClassifier.set("javadoc")
-}
-tasks.assemble { dependsOn(javadocJar) }
+val apiReferenceJar: TaskProvider<Jar> =
+    tasks.register<Jar>("apiReferenceJar") {
+        group(TaskGroup.DOCUMENTATION)
+        description("Archives the API reference in a JAR file.")
+        dependsOn(setApiReferenceLogoTask, archiveApiReferenceTask)
+        from(tasks.dokkaHtml)
+        archiveClassifier.set("javadoc")
+    }
+tasks.assemble { dependsOn(apiReferenceJar) }
 publishing.publications.withType<MavenPublication>().configureEach {
-    artifact(javadocJar)
+    artifact(apiReferenceJar)
+}
+
+tasks.withType<Jar>().configureEach {
+    fun key(suffix: String): String = "Implementation-$suffix"
+    val name: Pair<String, String> = key("Title") to rootProject.name
+    val version: Pair<String, Any> = key("Version") to project.version
+    manifest.attributes(name, version)
+    archiveBaseName.set(rootProject.name)
 }
