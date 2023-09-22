@@ -141,6 +141,9 @@ setApiReferenceLogoTask.configure {
     into(destination)
 }
 
+val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
+    tasks.register<Delete>("deleteOlderDirInArchivedApiReference")
+
 archiveApiReferenceTask.configure {
     group(TaskGroup.DOCUMENTATION)
     description("Archives the API reference.")
@@ -148,7 +151,16 @@ archiveApiReferenceTask.configure {
     from(tasks.dokkaHtml)
     val destination: Directory = apiReferencesDir.dir("${project.version}")
     into(destination)
-    doLast { delete(apiReferencesDir.dir("${project.version}/older")) }
+    finalizedBy(deleteOlderDirInArchivedApiReference)
+}
+
+deleteOlderDirInArchivedApiReference.configure {
+    group(TaskGroup.DOCUMENTATION)
+    description("Deletes the 'older' directory in the archived API reference.")
+    val target: File = archiveApiReferenceTask.get()
+        .destinationDir
+        .resolve("older")
+    setDelete(target)
 }
 
 val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
