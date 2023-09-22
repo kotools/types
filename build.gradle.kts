@@ -124,7 +124,7 @@ tasks.dokkaHtml.configure {
 val cleanDokkaHtmlTask: TaskProvider<Delete> =
     tasks.register<Delete>("cleanDokkaHtml") {
         val task: DokkaTask = tasks.dokkaHtml.get()
-        this.setDelete(task.outputDirectory)
+        setDelete(task.outputDirectory)
     }
 tasks.clean.configure { dependsOn += cleanDokkaHtmlTask }
 
