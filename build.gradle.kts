@@ -115,7 +115,9 @@ tasks.dokkaHtml.configure {
         version = currentVersion
         olderVersionsDir = apiReferencesDir.asFile
     }
-    outputDirectory.set(layout.buildDirectory.dir("dokka").map { it.asFile })
+    val outputDir: Provider<File> = layout.buildDirectory.dir("dokka")
+        .map { it.asFile }
+    outputDirectory.set(outputDir)
     finalizedBy(setApiReferenceLogoTask, archiveApiReferenceTask)
 }
 
