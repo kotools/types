@@ -164,9 +164,10 @@ deleteOlderDirInArchivedApiReference.configure {
 }
 
 val javadocJar: TaskProvider<Jar> = tasks.register<Jar>("javadocJar") {
-    dependsOn(tasks.dokkaHtml)
-    archiveClassifier.set("javadoc")
+    group(TaskGroup.DOCUMENTATION)
+    description("Archives the API reference in a JAR file.")
     from(tasks.dokkaHtml)
+    archiveClassifier.set("javadoc")
 }
 tasks.assemble { dependsOn(javadocJar) }
 
