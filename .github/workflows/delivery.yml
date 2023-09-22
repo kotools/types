@@ -43,7 +43,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew publishJsPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew -q :library:publishJsPublicationToOSSRHRepository --no-daemon
   deliver-jvm:
     name: Deliver JVM package
     needs: validate-wrapper
@@ -58,7 +58,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew publishJvmPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew -q :library:publishJvmPublicationToOSSRHRepository --no-daemon
   deliver-linux:
     name: Deliver Linux package
     needs: validate-wrapper
@@ -73,7 +73,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew publishLinuxPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew -q :library:publishLinuxPublicationToOSSRHRepository --no-daemon
   deliver-macos:
     name: Deliver macOS package
     needs: validate-wrapper
@@ -88,7 +88,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew publishMacosPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew -q :library:publishMacosPublicationToOSSRHRepository --no-daemon
   deliver-windows:
     name: Deliver Windows package
     needs: validate-wrapper
@@ -103,7 +103,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package to OSSRH
-        run: ./gradlew publishWindowsPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew :library:publishWindowsPublicationToOSSRHRepository --no-daemon
   # ---------- Stage 3 ----------
   deliver-multiplatform:
     name: Deliver multiplatform package
@@ -124,4 +124,4 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Deliver package
-        run: ./gradlew publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
+        run: ./gradlew :library:publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
