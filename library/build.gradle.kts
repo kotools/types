@@ -1,6 +1,8 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -33,6 +35,11 @@ kotlin {
     linuxX64("linux")
     macosX64("macos")
     mingwX64("windows")
+}
+
+rootProject.plugins.withType<YarnPlugin>().configureEach {
+    val yarn: YarnRootExtension = rootProject.extensions.getByType()
+    yarn.lockFileDirectory = projectDir
 }
 
 publishing.repositories.maven {
