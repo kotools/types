@@ -40,13 +40,13 @@ kotlin {
 repositories.mavenCentral()
 
 dependencies {
-    dokkaHtmlPlugin(libs.dokka.versioning)
-
     commonMainImplementation(platform(libs.kotlin.bom))
     commonMainImplementation(libs.kotlinx.serialization.core)
 
     commonTestImplementation(libs.kotlin.test)
     commonTestImplementation(libs.kotlinx.serialization.json)
+
+    dokkaHtmlPlugin(libs.dokka.versioning)
 }
 
 // ---------- Tasks ----------
