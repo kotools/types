@@ -3,14 +3,14 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - './**/*gradle*'
-      - './**/*.kt*'
+      - '**gradle*'
+      - '**.kt*'
       - .github/workflows/integration.yml
   push:
     branches: [ main ]
     paths:
-      - './**/*gradle*'
-      - './**/*.kt*'
+      - '**gradle*'
+      - '**.kt*'
       - .github/workflows/integration.yml
   workflow_dispatch:
 env:
