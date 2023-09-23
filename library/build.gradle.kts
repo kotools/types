@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript { dependencies.classpath(libs.dokka.versioning) }
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -117,7 +118,7 @@ dependencies {
 enum class TaskGroup {
     DOCUMENTATION, HELP;
 
-    override fun toString(): String = name.lowercase()
+    override fun toString(): String = name.toLowerCase()
 }
 
 fun Task.group(value: TaskGroup) {
