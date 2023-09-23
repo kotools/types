@@ -1,10 +1,6 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
-import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // ---------- Plugins ----------
 
@@ -18,6 +14,7 @@ plugins {
     `maven-publish`
     signing
     id("kotools.types.base")
+    id("kotools.types.multiplatform")
 }
 
 // ---------- Project Details ----------
@@ -26,21 +23,6 @@ group = "org.kotools"
 version = "4.3.1-SNAPSHOT"
 
 // ---------- Extensions ----------
-
-kotlin {
-    explicitApi()
-    js(IR) { browser() }
-    jvm()
-    jvmToolchain(17)
-    linuxX64("linux")
-    macosX64("macos")
-    mingwX64("windows")
-}
-
-rootProject.plugins.withType<YarnPlugin>().configureEach {
-    val yarn: YarnRootExtension = rootProject.extensions.getByType()
-    yarn.lockFileDirectory = projectDir
-}
 
 publishing.repositories.maven {
     name = "OSSRH"
@@ -51,12 +33,6 @@ publishing.repositories.maven {
         username = System.getenv("MAVEN_USERNAME")
         password = System.getenv("MAVEN_PASSWORD")
     }
-}
-
-publishing.publications.getByName<MavenPublication>("kotlinMultiplatform") {
-    groupId = "${project.group}"
-    artifactId = rootProject.name
-    version = "${project.version}"
 }
 
 signing {
@@ -138,15 +114,6 @@ tasks.register<DependencyReportTask>("runtimeDependencies").configure {
     setConfiguration("allSourceSetsRuntimeDependenciesMetadata")
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-        languageVersion = "1.5"
-    }
-}
-
-tasks.withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
-
 val projectName = "Kotools Types"
 val apiReferencesDir: Directory = layout.projectDirectory.dir("api/references")
 val setApiReferenceLogoTask: TaskProvider<Copy> =
@@ -225,12 +192,4 @@ val apiReferenceJar: TaskProvider<Jar> =
 tasks.assemble { dependsOn(apiReferenceJar) }
 publishing.publications.withType<MavenPublication>().configureEach {
     artifact(apiReferenceJar)
-}
-
-tasks.withType<Jar>().configureEach {
-    fun key(suffix: String): String = "Implementation-$suffix"
-    val name: Pair<String, String> = key("Title") to rootProject.name
-    val version: Pair<String, Any> = key("Version") to project.version
-    manifest.attributes(name, version)
-    archiveBaseName.set(rootProject.name)
 }
