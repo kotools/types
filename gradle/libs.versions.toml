@@ -34,6 +34,11 @@ group = "org.jetbrains.kotlin"
 name = "kotlin-bom"
 version.ref = "kotlin"
 
+[libraries.kotlin-gradle-plugin]
+group = "org.jetbrains.kotlin"
+name = "kotlin-gradle-plugin"
+version.ref = "kotlin"
+
 [libraries.kotlin-test]
 group = "org.jetbrains.kotlin"
 name = "kotlin-test"
