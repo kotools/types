@@ -25,9 +25,3 @@ dependencies {
 
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
-
-tasks.register<DependencyReportTask>("runtimeDependencies").configure {
-    group = "help"
-    description = "Displays the runtime dependencies for all source sets."
-    setConfiguration("allSourceSetsRuntimeDependenciesMetadata")
-}
