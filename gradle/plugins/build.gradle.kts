@@ -38,3 +38,8 @@ fun PluginDeclaration.kotoolsTypesId(value: String) {
 fun PluginDeclaration.kotoolsTypesImplementationClass(name: String) {
     implementationClass = "kotools.types.plugins.$name"
 }
+
+tasks.withType<ValidatePlugins>().configureEach {
+    failOnWarning.set(true)
+    enableStricterValidation.set(true)
+}
