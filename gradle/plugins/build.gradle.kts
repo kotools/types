@@ -19,6 +19,7 @@ gradlePlugin {
         registerKotoolsTypesPlugin("Base")
         registerKotoolsTypesPlugin("Documentation")
         registerKotoolsTypesPlugin("Multiplatform")
+        registerKotoolsTypesPlugin("Publication")
     }
 }
 
