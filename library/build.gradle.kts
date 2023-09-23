@@ -1,5 +1,3 @@
-// ---------- Plugins ----------
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -13,12 +11,8 @@ plugins {
     id("kotools.types.publication")
 }
 
-// ---------- Project Details ----------
-
 group = "org.kotools"
 version = "4.3.1-SNAPSHOT"
-
-// ---------- Dependencies ----------
 
 repositories.mavenCentral()
 
@@ -31,8 +25,6 @@ dependencies {
 
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
-
-// ---------- Tasks ----------
 
 tasks.register<DependencyReportTask>("runtimeDependencies").configure {
     group = "help"
