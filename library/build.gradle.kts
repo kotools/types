@@ -118,7 +118,7 @@ dependencies {
 enum class TaskGroup {
     DOCUMENTATION, HELP;
 
-    override fun toString(): String = name.toLowerCase()
+    override fun toString(): String = name.lowercase()
 }
 
 fun Task.group(value: TaskGroup) {
