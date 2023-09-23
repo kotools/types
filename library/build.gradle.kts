@@ -17,6 +17,7 @@ plugins {
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
+    id("kotools.types.base")
 }
 
 // ---------- Project Details ----------
@@ -115,7 +116,7 @@ dependencies {
 // ---------- Tasks ----------
 
 enum class TaskGroup {
-    DOCUMENTATION, HELP;
+    DOCUMENTATION;
 
     override fun toString(): String = name.lowercase()
 }
@@ -132,15 +133,9 @@ fun Task.description(value: String) {
 }
 
 tasks.register<DependencyReportTask>("runtimeDependencies").configure {
-    group(TaskGroup.HELP)
-    description("Displays the runtime dependencies for all source sets.")
+    group = "help"
+    description = "Displays the runtime dependencies for all source sets."
     setConfiguration("allSourceSetsRuntimeDependenciesMetadata")
-}
-
-tasks.register("version").configure {
-    group(TaskGroup.HELP)
-    description("Displays this project's version.")
-    doLast { println(version) }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
