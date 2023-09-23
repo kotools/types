@@ -1,10 +1,4 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.dokka.versioning.VersioningConfiguration
-import org.jetbrains.dokka.versioning.VersioningPlugin
-
 // ---------- Plugins ----------
-
-buildscript { dependencies.classpath(libs.dokka.versioning) }
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -15,6 +9,7 @@ plugins {
     signing
     id("kotools.types.base")
     id("kotools.types.multiplatform")
+    id("kotools.types.documentation")
 }
 
 // ---------- Project Details ----------
@@ -44,7 +39,7 @@ signing {
 publishing.publications.withType<MavenPublication>().configureEach {
     signing.sign(this)
     pom {
-        name.set(projectName)
+        name.set("Kotools Types")
         description.set(
             "Multiplatform library providing explicit types for Kotlin."
         )
@@ -91,105 +86,8 @@ dependencies {
 
 // ---------- Tasks ----------
 
-enum class TaskGroup {
-    DOCUMENTATION;
-
-    override fun toString(): String = name.lowercase()
-}
-
-fun Task.group(value: TaskGroup) {
-    group = "$value"
-}
-
-fun Task.description(value: String) {
-    require(value.isNotBlank()) {
-        "The task '$path' shouldn't have a blank description."
-    }
-    description = value
-}
-
 tasks.register<DependencyReportTask>("runtimeDependencies").configure {
     group = "help"
     description = "Displays the runtime dependencies for all source sets."
     setConfiguration("allSourceSetsRuntimeDependenciesMetadata")
-}
-
-val projectName = "Kotools Types"
-val apiReferencesDir: Directory = layout.projectDirectory.dir("api/references")
-val setApiReferenceLogoTask: TaskProvider<Copy> =
-    tasks.register<Copy>("setApiReferenceLogo")
-val archiveApiReferenceTask: TaskProvider<Copy> =
-    tasks.register<Copy>("archiveApiReference")
-
-tasks.dokkaHtml.configure {
-    moduleName.set(projectName)
-    dokkaSourceSets.configureEach {
-        includes.from += layout.projectDirectory.file("packages.md")
-        reportUndocumented.set(true)
-        skipEmptyPackages.set(true)
-    }
-    val currentVersion = "${project.version}"
-    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-        version = currentVersion
-        olderVersionsDir = apiReferencesDir.asFile
-    }
-    val outputDir: Provider<File> = layout.buildDirectory.dir("dokka")
-        .map { it.asFile }
-    outputDirectory.set(outputDir)
-    finalizedBy(setApiReferenceLogoTask, archiveApiReferenceTask)
-}
-
-val cleanDokkaHtmlTask: TaskProvider<Delete> =
-    tasks.register<Delete>("cleanDokkaHtml") {
-        val task: DokkaTask = tasks.dokkaHtml.get()
-        setDelete(task.outputDirectory)
-    }
-tasks.clean.configure { dependsOn += cleanDokkaHtmlTask }
-
-setApiReferenceLogoTask.configure {
-    group(TaskGroup.DOCUMENTATION)
-    description("Sets the Kotools logo into the API reference.")
-    val images = "images"
-    val source: RegularFile =
-        layout.projectDirectory.file("$images/logo-icon.svg")
-    from(source)
-    val destination: Provider<File> = tasks.dokkaHtml.get()
-        .outputDirectory
-        .map { it.resolve(images) }
-    into(destination)
-}
-
-val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
-    tasks.register<Delete>("deleteOlderDirInArchivedApiReference")
-
-archiveApiReferenceTask.configure {
-    group(TaskGroup.DOCUMENTATION)
-    description("Archives the API reference.")
-    onlyIf { "SNAPSHOT" !in "${project.version}" }
-    from(tasks.dokkaHtml)
-    val destination: Directory = apiReferencesDir.dir("${project.version}")
-    into(destination)
-    finalizedBy(deleteOlderDirInArchivedApiReference)
-}
-
-deleteOlderDirInArchivedApiReference.configure {
-    group(TaskGroup.DOCUMENTATION)
-    description("Deletes the 'older' directory in the archived API reference.")
-    val target: File = archiveApiReferenceTask.get()
-        .destinationDir
-        .resolve("older")
-    setDelete(target)
-}
-
-val apiReferenceJar: TaskProvider<Jar> =
-    tasks.register<Jar>("apiReferenceJar") {
-        group(TaskGroup.DOCUMENTATION)
-        description("Archives the API reference in a JAR file.")
-        dependsOn(setApiReferenceLogoTask, archiveApiReferenceTask)
-        from(tasks.dokkaHtml)
-        archiveClassifier.set("javadoc")
-    }
-tasks.assemble { dependsOn(apiReferenceJar) }
-publishing.publications.withType<MavenPublication>().configureEach {
-    artifact(apiReferenceJar)
 }

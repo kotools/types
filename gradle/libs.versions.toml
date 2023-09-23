@@ -24,6 +24,11 @@ version.ref = "kotlin"
 
 # Libraries
 
+[libraries.dokka-gradle-plugin]
+group = "org.jetbrains.dokka"
+name = "org.jetbrains.dokka.gradle.plugin"
+version.ref = "dokka"
+
 [libraries.dokka-versioning]
 group = "org.jetbrains.dokka"
 name = "versioning-plugin"

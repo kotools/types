@@ -1,20 +1,39 @@
 plugins { `kotlin-dsl` }
 
+buildscript {
+    dependencies { classpath(libs.dokka.versioning) }
+}
+
 repositories.mavenCentral()
 
 kotlin.explicitApi()
 
-dependencies { implementation(libs.kotlin.gradle.plugin) }
+dependencies {
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.dokka.gradle.plugin)
+    implementation(libs.dokka.versioning)
+}
 
 gradlePlugin {
     plugins {
-        register("KotoolsTypesBasePlugin").configure {
-            id = "kotools.types.base"
-            implementationClass = "kotools.types.plugins.BasePlugin"
-        }
-        register("KotoolsTypesMultiplatformPlugin").configure {
-            id = "kotools.types.multiplatform"
-            implementationClass = "kotools.types.plugins.MultiplatformPlugin"
-        }
+        registerKotoolsTypesPlugin("Base")
+        registerKotoolsTypesPlugin("Documentation")
+        registerKotoolsTypesPlugin("Multiplatform")
     }
+}
+
+fun NamedDomainObjectContainer<PluginDeclaration>.registerKotoolsTypesPlugin(
+    name: String
+): Unit = register("KotoolsTypes${name}Plugin").configure {
+    val idSuffix: String = name.lowercase()
+    kotoolsTypesId(idSuffix)
+    kotoolsTypesImplementationClass("${name}Plugin")
+}
+
+fun PluginDeclaration.kotoolsTypesId(value: String) {
+    id = "kotools.types.$value"
+}
+
+fun PluginDeclaration.kotoolsTypesImplementationClass(name: String) {
+    implementationClass = "kotools.types.plugins.$name"
 }
