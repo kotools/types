@@ -25,6 +25,19 @@ public class PublicationPlugin : Plugin<Project> {
     }
 }
 
+private fun RepositoryHandler.ossrh(project: Project) {
+    maven {
+        name = "OSSRH"
+        url = project.uri(
+            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+        )
+        credentials {
+            username = Env.mavenUsername
+            password = Env.mavenPassword
+        }
+    }
+}
+
 private fun MavenPublication.configurePom(): Unit = pom {
     name.set("Kotools Types")
     description.set(
@@ -50,19 +63,6 @@ private fun MavenPublication.configurePom(): Unit = pom {
         developer {
             name.set(Env.gitUser)
             email.set(Env.gitEmail)
-        }
-    }
-}
-
-private fun RepositoryHandler.ossrh(project: Project) {
-    maven {
-        name = "OSSRH"
-        url = project.uri(
-            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-        )
-        credentials {
-            username = Env.mavenUsername
-            password = Env.mavenPassword
         }
     }
 }
