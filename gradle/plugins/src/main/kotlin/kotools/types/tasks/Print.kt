@@ -14,5 +14,5 @@ public abstract class PrintTask : DefaultTask() {
     public abstract val message: Property<Any?>
 
     @TaskAction
-    internal fun print(): Unit = println(message)
+    internal fun print(): Unit = println(message.orNull)
 }
