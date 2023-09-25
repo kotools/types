@@ -31,8 +31,8 @@ echo "${BLUE}> Archive latest API reference${NO_COLOR}"
 git checkout -q $BRANCH_TARGET
 git rm -qr $SOURCE_FOLDER
 mkdir $SOURCE_FOLDER
-git mv $OLD_VERSIONS_DIR/* $SOURCE_FOLDER
-rm -r $OLD_VERSIONS_DIR
+mv $OLD_VERSIONS_DIR/* $SOURCE_FOLDER
+git rm -qr $OLD_VERSIONS_DIR
 git add $SOURCE_FOLDER
 git diff-index --quiet HEAD || \
 git commit -qS -m "docs: archive API reference of v$PROJECT_VERSION"
