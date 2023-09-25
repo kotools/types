@@ -26,10 +26,7 @@ All notable changes to this project will be documented in this file.
 
 Because the Kotlin compiler transforms the `internal` keyword to `public` for 
 the JVM platform, we've hidden some internal declarations from Java by marking 
-them with the [JvmSynthetic] annotation.
-Currently, only internal packages constants were updated with this issue in 
-mind: the [JvmSynthetic] annotation can be used on very specific targets, like
-functions or properties (PR [#246]).
+them with the [JvmSynthetic] annotation (PR [#246]).
 
 [#246]: https://github.com/kotools/types/pull/246
 [JvmSynthetic]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-synthetic
