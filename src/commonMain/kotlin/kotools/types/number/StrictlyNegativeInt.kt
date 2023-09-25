@@ -122,6 +122,7 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
 
+        @JvmSynthetic
         internal infix fun errorMessageFor(number: Number): NotBlankString =
             "Number should be strictly negative (tried with $number)."
                 .toNotBlankString()
