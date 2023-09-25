@@ -77,6 +77,7 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
         group(TaskGroup.DOCUMENTATION)
         description("Archives the API reference.")
         onlyIf { "SNAPSHOT" !in "${project.version}" }
+        dependsOn += setApiReferenceLogoTask
         from(dokkaHtml)
         val destination: Directory = apiReferencesDir.dir("${project.version}")
         into(destination)
