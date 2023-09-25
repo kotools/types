@@ -11,6 +11,7 @@ import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalCollectionApi
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
@@ -26,7 +27,7 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("4.0")
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val elements: Set<E> = setOf(head) + tail
-    return NotEmptySet(elements)
+    return NotEmptySet.of(elements)
 }
 
 /**
@@ -65,7 +66,7 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     runCatching {
         val elements: Set<E> = toSet()
-        NotEmptySet(elements)
+        NotEmptySet.of(elements)
     }
 
 /**
@@ -105,7 +106,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
 public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
     if (isEmpty()) return null
     val elements: Set<E> = toSet()
-    return NotEmptySet(elements)
+    return NotEmptySet.of(elements)
 }
 
 /**
@@ -144,7 +145,7 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> {
     val elements: Set<E> = toSet()
-    return NotEmptySet(elements)
+    return NotEmptySet.of(elements)
 }
 
 /**
@@ -156,7 +157,7 @@ public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> {
 @JvmInline
 @Serializable(NotEmptySetSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotEmptySet<out E> internal constructor(
+public value class NotEmptySet<out E> private constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
@@ -185,6 +186,14 @@ public value class NotEmptySet<out E> internal constructor(
     public fun toSet(): Set<E> = elements
 
     override fun toString(): String = "$elements"
+
+    /** Contains static declarations for the [NotEmptyList] type. */
+    @SinceKotoolsTypes("4.3.2")
+    public companion object {
+        @JvmSynthetic
+        internal fun <E> of(elements: Set<E>): NotEmptySet<E> =
+            NotEmptySet(elements)
+    }
 }
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
