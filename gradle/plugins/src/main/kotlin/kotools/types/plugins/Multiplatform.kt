@@ -2,6 +2,7 @@ package kotools.types.plugins
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.plugins.PluginContainer
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.bundling.Jar
@@ -19,24 +20,9 @@ public class MultiplatformPlugin : Plugin<Project> {
     /** Applies this plugin to the given [project]. */
     override fun apply(project: Project) {
         project.rootProject.plugins.configureYarn(project)
-        project.extensions.getByType<KotlinMultiplatformExtension>()
-            .configure()
-        project.tasks.run {
-            configureKotlinCompile()
-            configureKotlinJvmTest()
-            configureJar(project)
-        }
+        project.extensions.configure()
+        project.tasks.configure(project)
     }
-}
-
-private fun KotlinMultiplatformExtension.configure() {
-    explicitApi()
-    js(IR) { browser() }
-    jvm()
-    jvmToolchain(17)
-    linuxX64("linux")
-    macosX64("macos")
-    mingwX64("windows")
 }
 
 private fun PluginContainer.configureYarn(project: Project): Unit =
@@ -45,23 +31,32 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
         yarn.lockFileDirectory = project.projectDir
     }
 
-private fun TaskContainer.configureJar(project: Project): Unit = withType<Jar>()
-    .configureEach {
-        fun key(suffix: String): String = "Implementation-$suffix"
-        val name: Pair<String, String> =
-            key("Title") to project.rootProject.name
-        val version: Pair<String, Any> = key("Version") to project.version
-        manifest.attributes(name, version)
-        archiveBaseName.set(project.rootProject.name)
+private fun ExtensionContainer.configure() {
+    val kotlin: KotlinMultiplatformExtension = getByType()
+    kotlin.run {
+        explicitApi()
+        js(IR) { browser() }
+        jvm()
+        jvmToolchain(17)
+        linuxX64("linux")
+        macosX64("macos")
+        mingwX64("windows")
     }
+}
 
-private fun TaskContainer.configureKotlinCompile(): Unit =
+private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
         kotlinOptions {
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             languageVersion = "1.5"
         }
     }
-
-private fun TaskContainer.configureKotlinJvmTest(): Unit =
     withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
+    withType<Jar>().configureEach {
+        fun key(suffix: String): String = "Implementation-$suffix"
+        val name: Pair<String, String> = key("Title") to project.name
+        val version: Pair<String, Any> = key("Version") to project.version
+        manifest.attributes(name, version)
+        archiveBaseName.set(project.rootProject.name)
+    }
+}
