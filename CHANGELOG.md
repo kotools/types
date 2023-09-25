@@ -20,6 +20,15 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.3.1
+
+_Release date: 2023-09-25._
+
+_See the [full changelog][4.3.0-4.3.1] from version [4.3.0][tag/4.3.0]._
+
+[4.3.0-4.3.1]: https://github.com/kotools/types/compare/4.3.0...4.3.1
+[tag/4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
+
 ### Added
 
 #### Experimental annotation for collections
@@ -108,7 +117,7 @@ fixed by PR [#206]).
 We recommend you to only use the versions documented in the API reference for a
 better experience while working with Kotools Types.
 
-The [API reference] is also securely deployed using an [SSH deploy key] when a
+The [API reference] is also securely deployed using a [SSH deploy key] when a
 release is published (issue [#207] fixed by PR [#208]).
 
 [#198]: https://github.com/kotools/types/pull/198
@@ -122,17 +131,11 @@ release is published (issue [#207] fixed by PR [#208]).
 #### Centralizing Gradle plugins and dependencies
 
 For reducing the overall complexity of the
-[Gradle build script](build.gradle.kts), we've centralized the plugins and the
-dependencies in a [version catalog](gradle/libs.versions.toml) instead of
-defining them in the build script (PR [#199]).
-
-Read the _[TOML + Gradle + project accessors]_ article by [@FunkyMuse] for
-more information about how to set up a version catalog with a [TOML] file.
+[Gradle build script](library/build.gradle.kts), we've centralized the plugins
+and the dependencies in a [version catalog](gradle/libs.versions.toml) instead
+of defining them in the build script (PR [#199]).
 
 [#199]: https://github.com/kotools/types/pull/199
-[@FunkyMuse]: https://github.com/FunkyMuse
-[TOML + Gradle + project accessors]: https://funkymuse.dev/posts/toml-gradle
-[TOML]: https://toml.io
 
 ### Fixed
 
@@ -147,7 +150,7 @@ function (PR [#222]).
 
 _Release date: 2023-08-14._
 
-_See the [full changelog][4.2.0-4.3.0] from version [`4.2.0`][tag/4.2.0]._
+_See the [full changelog][4.2.0-4.3.0] from version [4.2.0][tag/4.2.0]._
 
 [4.2.0-4.3.0]: https://github.com/kotools/types/compare/4.2.0...4.3.0
 [tag/4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
@@ -171,7 +174,7 @@ _See the [full changelog][4.2.0-4.3.0] from version [`4.2.0`][tag/4.2.0]._
 
 _Release date: 2023-06-24._
 
-_See the [full changelog][4.1.0-4.2.0] from version [`4.1.0`][tag/4.1.0]._
+_See the [full changelog][4.1.0-4.2.0] from version [4.1.0][tag/4.1.0]._
 
 [4.1.0-4.2.0]: https://github.com/kotools/types/compare/4.1.0...4.2.0
 [tag/4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
@@ -337,7 +340,7 @@ println(notEmptyListSerialName == expectedSerialName) // true
 
 _Release date: 2023-04-03._
 
-_See the [full changelog][4.0.1-4.1.0] from version [`4.0.1`][tag/4.0.1]._
+_See the [full changelog][4.0.1-4.1.0] from version [4.0.1][tag/4.0.1]._
 
 [4.0.1-4.1.0]: https://github.com/kotools/types/compare/4.0.1...4.1.0
 [tag/4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -447,7 +450,7 @@ result = firstString < secondString
 
 _Release date: 2023-02-06._
 
-_See the [full changelog][4.0.0-4.0.1] from version [`4.0.0`][tag/4.0.0]._
+_See the [full changelog][4.0.0-4.0.1] from version [4.0.0][tag/4.0.0]._
 
 [4.0.0-4.0.1]: https://github.com/kotools/types/compare/4.0.0...4.0.1
 [tag/4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0

@@ -37,7 +37,7 @@ Using explicit types in your code is perfect for:
 Cherry on top: Kotools Types is a multiplatform library, so you can use it in
 all your [Kotlin] projects!
 
-[kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.3.0&color=blue
+[kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.3.1&color=blue
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
 [kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.21-blue?logo=kotlin
