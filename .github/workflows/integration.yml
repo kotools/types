@@ -43,7 +43,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Check API binaries
-        run: ./gradlew -q :library:apiCheck --no-daemon
+        run: ./gradlew :apiCheck --no-daemon --quiet
   dependencies:
     name: Submit dependencies to GitHub
     needs: validate-wrapper
@@ -58,7 +58,6 @@ jobs:
         uses: mikepenz/gradle-dependency-submission@v0.8.6
         with:
           gradle-build-configuration: allSourceSetsRuntimeDependenciesMetadata
-          gradle-build-module: ":library"
           fail-on-error: true
   test:
     name: Test
@@ -79,4 +78,4 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test code
-        run: ./gradlew -q :library:allTests --no-daemon
+        run: ./gradlew :allTests --no-daemon --quiet

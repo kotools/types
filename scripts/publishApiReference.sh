@@ -10,7 +10,7 @@ NO_COLOR='\033[0m'
 echo "${BLUE}> Synchronize Gradle${NO_COLOR}"
 ./gradlew -q :projects --dry-run
 
-PROJECT_VERSION=$(./gradlew -q :library:version)
+PROJECT_VERSION=$(./gradlew -q :version)
 echo "${BLUE}> Project version:${NO_COLOR} $PROJECT_VERSION"
 
 echo "${BLUE}> Get archived versions of API reference${NO_COLOR}"
@@ -19,13 +19,13 @@ SOURCE_FOLDER="versions"
 git checkout -q $BRANCH_TARGET -- $SOURCE_FOLDER
 
 echo "${BLUE}> Prepare generation of latest API reference${NO_COLOR}"
-OLD_VERSIONS_DIR="library/api/references"
+OLD_VERSIONS_DIR="api/references"
 mkdir $OLD_VERSIONS_DIR
 git mv $SOURCE_FOLDER/* $OLD_VERSIONS_DIR
 rm -rf $SOURCE_FOLDER
 
 echo "${BLUE}> Generate latest API reference${NO_COLOR}"
-./gradlew -q :library:dokkaHtml
+./gradlew -q :dokkaHtml
 
 echo "${BLUE}> Archive latest API reference${NO_COLOR}"
 git checkout -q $BRANCH_TARGET
@@ -42,7 +42,7 @@ mkdir docs-backup
 mv docs/CNAME docs-backup
 git rm -qr docs
 mkdir docs
-cp -a library/build/dokka/. docs
+cp -a build/dokka/. docs
 mv docs-backup/CNAME docs
 rm -r docs-backup
 git add docs/
