@@ -19,6 +19,7 @@ Issues of this new version should be done before resolving this issue.
 - [ ] Release packages on the Maven central.
 - [ ] Run the [library/publishApiReference.sh] script locally.
 - [ ] Push the API reference to GitHub Pages.
+- [ ] Integrate changes of the release branch to the `main` branch.
 - [ ] Create a release on the repository.
 - [ ] Update the related discussion.
 - [ ] Announce the release on [Twitter] and on the [#kotools-types channel on Kotlin Slack][slack].
