@@ -11,6 +11,7 @@ import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalCollectionApi
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
@@ -26,7 +27,7 @@ import kotlin.jvm.JvmInline
 @SinceKotoolsTypes("4.0")
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
-    return NotEmptyList(elements)
+    return NotEmptyList.of(elements)
 }
 
 /**
@@ -65,7 +66,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     runCatching {
         val elements: List<E> = toList()
-        NotEmptyList(elements)
+        NotEmptyList.of(elements)
     }
 
 /**
@@ -105,7 +106,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
 public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? {
     if (isEmpty()) return null
     val elements: List<E> = toList()
-    return NotEmptyList(elements)
+    return NotEmptyList.of(elements)
 }
 
 /**
@@ -144,7 +145,7 @@ public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? {
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> {
     val elements: List<E> = toList()
-    return NotEmptyList(elements)
+    return NotEmptyList.of(elements)
 }
 
 /**
@@ -156,7 +157,7 @@ public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> {
 @JvmInline
 @Serializable(NotEmptyListSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotEmptyList<out E> internal constructor(
+public value class NotEmptyList<out E> private constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
@@ -185,6 +186,14 @@ public value class NotEmptyList<out E> internal constructor(
     public fun toList(): List<E> = elements
 
     override fun toString(): String = "$elements"
+
+    /** Contains static declarations for the [NotEmptyList] type. */
+    @SinceKotoolsTypes("4.3.2")
+    public companion object {
+        @JvmSynthetic
+        internal fun <E> of(elements: List<E>): NotEmptyList<E> =
+            NotEmptyList(elements)
+    }
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
