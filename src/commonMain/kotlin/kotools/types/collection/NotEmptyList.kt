@@ -169,7 +169,7 @@ public value class NotEmptyList<out E> private constructor(
 
     init {
         val isValid: Boolean = elements.isNotEmpty()
-        require(isValid) { EmptyCollectionException.message }
+        require(isValid) { EMPTY_COLLECTION_ERROR_MESSAGE }
     }
 
     /**
@@ -213,5 +213,5 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
         .decodeSerializableValue(delegate)
         .toNotEmptyList()
         .getOrNull()
-        ?: throw SerializationException(EmptyCollectionException)
+        ?: throw SerializationException(EMPTY_COLLECTION_ERROR_MESSAGE)
 }

@@ -85,7 +85,7 @@ class NotEmptyListTest {
             collection.toNotEmptyListOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = EmptyCollectionException.message
+        val expectedMessage: String = EMPTY_COLLECTION_ERROR_MESSAGE
         assertEquals(expectedMessage, actualMessage)
     }
 

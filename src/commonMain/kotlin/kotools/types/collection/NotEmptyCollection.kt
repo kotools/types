@@ -6,6 +6,11 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.number.plus
 import kotools.types.number.toStrictlyPositiveInt
+import kotlin.jvm.JvmSynthetic
+
+@JvmSynthetic
+internal const val EMPTY_COLLECTION_ERROR_MESSAGE: String =
+    "Given collection shouldn't be empty."
 
 /**
  * Representation of collections containing at least one element of type [E].
@@ -74,7 +79,3 @@ public sealed interface NotEmptyCollection<out E> {
 @SinceKotoolsTypes("4.1")
 public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt
-
-internal object EmptyCollectionException : IllegalArgumentException() {
-    override val message: String = "Given collection shouldn't be empty."
-}
