@@ -13,6 +13,7 @@ import kotools.types.experimental.ExperimentalCollectionApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
@@ -69,7 +70,7 @@ public fun <K, V> notEmptyMapOf(
  */
 @SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
-    runCatching { NotEmptyMap(entries) }
+    runCatching { NotEmptyMap.of(entries) }
 
 /**
  * Returns a [NotEmptyMap] containing all the entries of this map, or returns
@@ -105,8 +106,10 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
-    if (isEmpty()) null else NotEmptyMap(entries)
+public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? {
+    val isValid: Boolean = isNotEmpty()
+    return if (isValid) NotEmptyMap.of(entries) else null
+}
 
 /**
  * Returns a [NotEmptyMap] containing all the entries of this map, or throws an
@@ -142,7 +145,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
-    NotEmptyMap(entries)
+    NotEmptyMap.of(entries)
 
 /**
  * Represents a map with at least one entry with a key of type [K] and a value
@@ -257,10 +260,6 @@ public value class NotEmptyMap<K, out V> private constructor(
         require(isValid) { EmptyMapException.message }
     }
 
-    internal constructor(entries: Set<Map.Entry<K, V>>) : this(
-        entries.associate { it.toPair() }
-    )
-
     /**
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
@@ -300,6 +299,18 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     override fun toString(): String = "$delegate"
+
+    /** Contains static declarations for the [NotEmptyMap] type. */
+    @SinceKotoolsTypes("4.3.2")
+    public companion object {
+        @JvmSynthetic
+        internal fun <K, V> of(
+            entries: Set<Map.Entry<K, V>>
+        ): NotEmptyMap<K, V> {
+            val map: Map<K, V> = entries.associate { it.toPair() }
+            return NotEmptyMap(map)
+        }
+    }
 }
 
 internal class NotEmptyMapSerializer<K, V>(
