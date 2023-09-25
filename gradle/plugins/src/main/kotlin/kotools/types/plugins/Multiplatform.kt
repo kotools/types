@@ -3,14 +3,10 @@ package kotools.types.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.PluginContainer
-import org.gradle.api.publish.PublicationContainer
-import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.attributes
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
@@ -23,12 +19,8 @@ public class MultiplatformPlugin : Plugin<Project> {
     /** Applies this plugin to the given [project]. */
     override fun apply(project: Project) {
         project.rootProject.plugins.configureYarn(project)
-        project.extensions.run {
-            val kotlin: KotlinMultiplatformExtension = getByType()
-            kotlin.configure()
-            val publishing: PublishingExtension = getByType()
-            publishing.publications.configureKotlinMultiplatform(project)
-        }
+        project.extensions.getByType<KotlinMultiplatformExtension>()
+            .configure()
         project.tasks.run {
             configureKotlinCompile()
             configureKotlinJvmTest()
@@ -52,14 +44,6 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
         val yarn: YarnRootExtension = project.rootProject.extensions.getByType()
         yarn.lockFileDirectory = project.projectDir
     }
-
-private fun PublicationContainer.configureKotlinMultiplatform(
-    project: Project
-) = named<MavenPublication>("kotlinMultiplatform").configure {
-    groupId = "${project.group}"
-    artifactId = project.rootProject.name
-    version = "${project.version}"
-}
 
 private fun TaskContainer.configureJar(project: Project): Unit = withType<Jar>()
     .configureEach {

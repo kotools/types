@@ -16,6 +16,13 @@ version = "4.3.1"
 
 repositories.mavenCentral()
 
+publishing.publications.named<MavenPublication>("kotlinMultiplatform")
+    .configure {
+        groupId = "${project.group}"
+        artifactId = rootProject.name
+        version = "${project.version}"
+    }
+
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
     commonMainImplementation(libs.kotlinx.serialization.core)
