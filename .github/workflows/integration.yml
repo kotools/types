@@ -59,14 +59,10 @@ jobs:
         with:
           gradle-build-configuration: allSourceSetsRuntimeDependenciesMetadata
           fail-on-error: true
-  test:
-    name: Test
+  js-test:
+    name: JS tests
     needs: validate-wrapper
-    strategy:
-      max-parallel: 3
-      matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     permissions: read-all
     steps:
       - name: Checkout code
@@ -78,4 +74,68 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test code
-        run: ./gradlew :allTests --no-daemon --quiet
+        run: ./gradlew :jsTest --no-daemon --quiet
+  jvm-test:
+    name: JVM tests
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :jvmTest --no-daemon --quiet
+  linux-test:
+    name: Linux tests
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :linuxTest --no-daemon --quiet
+  macos-test:
+    name: macOS tests
+    needs: validate-wrapper
+    runs-on: macos-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :macosTest --no-daemon --quiet
+  windows-test:
+    name: Windows tests
+    needs: validate-wrapper
+    runs-on: windows-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :windowsTest --no-daemon --quiet
