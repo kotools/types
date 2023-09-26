@@ -24,7 +24,10 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  */
 @SinceKotoolsTypes("4.1")
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    runCatching { StrictlyNegativeInt(toInt()) }
+    runCatching {
+        val value: Int = toInt()
+        StrictlyNegativeInt.of(value)
+    }
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
@@ -78,16 +81,17 @@ public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = toInt()
     .toStrictlyNegativeIntOrThrow()
 
 private fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
-    StrictlyNegativeInt(this)
+    StrictlyNegativeInt.of(this)
 
 /** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyNegativeInt
-internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
+private constructor(private val value: Int) : NonZeroInt, NegativeInt {
     init {
-        require(value.isStrictlyNegative()) { errorMessageFor(value) }
+        val isValid: Boolean = value.isStrictlyNegative()
+        require(isValid) { value.shouldBeStrictlyNegativeMessage() }
     }
 
     @SinceKotoolsTypes("4.0")
@@ -123,10 +127,8 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
         }
 
         @JvmSynthetic
-        internal infix fun errorMessageFor(number: Number): NotBlankString =
-            "Number should be strictly negative (tried with $number)."
-                .toNotBlankString()
-                .getOrThrow()
+        internal fun of(value: Int): StrictlyNegativeInt =
+            StrictlyNegativeInt(value)
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")
@@ -154,7 +156,12 @@ internal object StrictlyNegativeIntSerializer :
     override fun deserialize(value: Int): StrictlyNegativeInt = value
         .toStrictlyNegativeInt()
         .getOrNull()
-        ?: throw SerializationException(
-            "${StrictlyNegativeInt errorMessageFor value}"
-        )
+        ?: value.let {
+            val message: String = value.shouldBeStrictlyNegativeMessage()
+            throw SerializationException(message)
+        }
 }
+
+@JvmSynthetic
+internal fun Number.shouldBeStrictlyNegativeMessage(): String =
+    "Number should be strictly negative (tried with $this)."

@@ -50,7 +50,7 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? {
     val value: Int = toInt()
     return when {
         value == 0 -> ZeroInt
-        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
+        value.isStrictlyNegative() -> StrictlyNegativeInt.of(value)
         else -> null
     }
 }
