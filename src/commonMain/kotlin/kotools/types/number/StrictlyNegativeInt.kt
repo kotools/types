@@ -161,7 +161,3 @@ internal object StrictlyNegativeIntSerializer :
             throw SerializationException(message)
         }
 }
-
-@JvmSynthetic
-internal fun Number.shouldBeStrictlyNegativeMessage(): String =
-    "Number should be strictly negative (tried with $this)."

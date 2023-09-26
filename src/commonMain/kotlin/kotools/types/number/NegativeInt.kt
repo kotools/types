@@ -11,7 +11,6 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [NegativeInt], which may involve
@@ -169,7 +168,3 @@ internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
             throw SerializationException(message)
         }
 }
-
-@JvmSynthetic
-internal fun Number.shouldBeNegativeMessage(): String =
-    "Number should be negative (tried with $this)."

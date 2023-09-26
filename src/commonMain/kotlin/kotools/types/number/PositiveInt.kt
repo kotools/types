@@ -11,7 +11,6 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [PositiveInt], which may involve
@@ -169,7 +168,3 @@ internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
             throw SerializationException(message)
         }
 }
-
-@JvmSynthetic
-internal fun Number.shouldBePositiveMessage(): String =
-    "Number should be positive (tried with $this)."

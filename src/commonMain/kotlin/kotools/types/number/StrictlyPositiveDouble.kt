@@ -93,7 +93,7 @@ public value class StrictlyPositiveDouble private constructor(
 ) : Comparable<StrictlyPositiveDouble> {
     init {
         val isValid: Boolean = value.isStrictlyPositive()
-        require(isValid) { StrictlyPositiveDoubleException(value).message }
+        require(isValid) { value.shouldBeStrictlyPositiveMessage() }
     }
 
     /**
@@ -140,21 +140,9 @@ internal object StrictlyPositiveDoubleSerializer :
 
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
-        return value.toStrictlyPositiveDoubleOrNull()
-            ?: throw StrictlyPositiveDoubleSerializationException(value)
-    }
-}
-
-internal class StrictlyPositiveDoubleException(number: Number) :
-    IllegalArgumentException() {
-    override val message: String by lazy {
-        "Number should be strictly positive (tried with $number)."
-    }
-}
-
-private class StrictlyPositiveDoubleSerializationException(number: Number) :
-    SerializationException() {
-    override val message: String by lazy {
-        "Number should be strictly positive (tried with $number)."
+        return value.toStrictlyPositiveDoubleOrNull() ?: value.let {
+            val message: String = it.shouldBeStrictlyPositiveMessage()
+            throw SerializationException(message)
+        }
     }
 }

@@ -12,7 +12,6 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [NonZeroInt], which may involve
@@ -158,7 +157,3 @@ internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
         .getOrNull()
         ?: throw SerializationException(ZERO_ERROR_MESSAGE)
 }
-
-@JvmSynthetic
-internal const val ZERO_ERROR_MESSAGE: String =
-    "Number should be other than zero."
