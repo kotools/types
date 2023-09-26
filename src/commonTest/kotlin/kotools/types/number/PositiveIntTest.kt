@@ -75,8 +75,7 @@ class PositiveIntTest {
             result.getOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = PositiveIntConstructionException(number)
-            .message
+        val expectedMessage: String = number.shouldBePositiveMessage()
         assertEquals(expectedMessage, actualMessage)
     }
 
@@ -115,8 +114,7 @@ class PositiveIntTest {
             number.toPositiveIntOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = PositiveIntConstructionException(number)
-            .message
+        val expectedMessage: String = number.shouldBePositiveMessage()
         assertEquals(expectedMessage, actualMessage)
     }
 

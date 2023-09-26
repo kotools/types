@@ -11,6 +11,7 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [PositiveInt], which may involve
@@ -18,16 +19,9 @@ import kotools.types.text.toNotBlankString
  * if this number is [strictly negative][StrictlyNegativeInt].
  */
 @SinceKotoolsTypes("4.1")
-public fun Number.toPositiveInt(): Result<PositiveInt> {
-    val value: Int = toInt()
-    return when {
-        value == 0 -> Result.success(ZeroInt)
-        value.isStrictlyPositive() -> value.toStrictlyPositiveInt()
-        else -> {
-            val exception = PositiveIntConstructionException(value)
-            Result.failure(exception)
-        }
-    }
+public fun Number.toPositiveInt(): Result<PositiveInt> = toInt().runCatching {
+    require(this >= 0) { shouldBePositiveMessage() }
+    if (this == 0) ZeroInt else toStrictlyPositiveInt().getOrThrow()
 }
 
 /**
@@ -84,8 +78,8 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toPositiveIntOrThrow(): PositiveInt {
     val value: Int = toInt()
-    require(value >= 0) { PositiveIntConstructionException(value).message }
-    return if (value == 0) ZeroInt else StrictlyPositiveInt(value)
+    require(value >= 0) { value.shouldBePositiveMessage() }
+    return if (value == 0) ZeroInt else value.toStrictlyPositiveIntOrThrow()
 }
 
 /** Representation of positive integers including [zero][ZeroInt]. */
@@ -170,19 +164,12 @@ internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
 
     override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()
         .getOrNull()
-        ?: throw PositiveIntSerializationException(value)
+        ?: value.let {
+            val message: String = it.shouldBePositiveMessage()
+            throw SerializationException(message)
+        }
 }
 
-internal class PositiveIntConstructionException(number: Number) :
-    IllegalArgumentException() {
-    override val message: String by lazy {
-        "Number should be positive (tried with $number)."
-    }
-}
-
-private class PositiveIntSerializationException(number: Number) :
-    SerializationException() {
-    override val message: String by lazy {
-        "Number should be positive (tried with $number)."
-    }
-}
+@JvmSynthetic
+internal fun Number.shouldBePositiveMessage(): String =
+    "Number should be positive (tried with $this)."
