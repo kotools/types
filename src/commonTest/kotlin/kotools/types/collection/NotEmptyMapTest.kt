@@ -92,7 +92,7 @@ class NotEmptyMapTest {
             map.toNotEmptyMapOrThrow()
         }
         val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = EmptyMapException.message
+        val expectedMessage: String = EMPTY_MAP_ERROR_MESSAGE
         assertEquals(expectedMessage, actualMessage)
     }
 

@@ -15,6 +15,10 @@ import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
+@JvmSynthetic
+internal const val EMPTY_MAP_ERROR_MESSAGE: String =
+    "Given map shouldn't be empty."
+
 /**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
@@ -257,7 +261,7 @@ public value class NotEmptyMap<K, out V> private constructor(
 
     init {
         val isValid: Boolean = delegate.isNotEmpty()
-        require(isValid) { EmptyMapException.message }
+        require(isValid) { EMPTY_MAP_ERROR_MESSAGE }
     }
 
     /**
@@ -332,9 +336,5 @@ internal class NotEmptyMapSerializer<K, V>(
         .decodeSerializableValue(delegate)
         .toNotEmptyMap()
         .getOrNull()
-        ?: throw SerializationException(EmptyMapException)
-}
-
-internal object EmptyMapException : IllegalArgumentException() {
-    override val message: String = "Given map shouldn't be empty."
+        ?: throw SerializationException(EMPTY_MAP_ERROR_MESSAGE)
 }
