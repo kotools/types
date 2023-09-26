@@ -24,7 +24,10 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
  */
 @SinceKotoolsTypes("4.1")
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    runCatching { StrictlyPositiveInt(toInt()) }
+    runCatching {
+        val value: Int = toInt()
+        StrictlyPositiveInt.of(value)
+    }
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding or
@@ -78,14 +81,14 @@ public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = toInt()
     .toStrictlyPositiveIntOrThrow()
 
 private fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
-    StrictlyPositiveInt(this)
+    StrictlyPositiveInt.of(this)
 
 /** Representation of positive integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
 public value class StrictlyPositiveInt
-internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
+private constructor(private val value: Int) : NonZeroInt, PositiveInt {
     init {
         val isValid: Boolean = value.isStrictlyPositive()
         require(isValid) { value.shouldBeStrictlyPositiveMessage() }
@@ -123,6 +126,10 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
                 .getOrThrow()
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
+
+        @JvmSynthetic
+        internal fun of(value: Int): StrictlyPositiveInt =
+            StrictlyPositiveInt(value)
 
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")

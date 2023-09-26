@@ -49,7 +49,7 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
     val value: Int = toInt()
     return when {
         value == 0 -> ZeroInt
-        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
+        value.isStrictlyPositive() -> StrictlyPositiveInt.of(value)
         else -> null
     }
 }

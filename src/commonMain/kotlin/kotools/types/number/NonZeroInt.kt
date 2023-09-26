@@ -45,7 +45,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> = toInt().runCatching {
 public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
     val value: Int = toInt()
     return when {
-        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
+        value.isStrictlyPositive() -> StrictlyPositiveInt.of(value)
         value.isStrictlyNegative() -> StrictlyNegativeInt.of(value)
         else -> null
     }
