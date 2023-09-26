@@ -11,6 +11,7 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [NegativeInt], which may involve
@@ -18,16 +19,9 @@ import kotools.types.text.toNotBlankString
  * if this number is [strictly positive][StrictlyPositiveInt].
  */
 @SinceKotoolsTypes("4.1")
-public fun Number.toNegativeInt(): Result<NegativeInt> {
-    val value: Int = toInt()
-    return when {
-        value == 0 -> Result.success(ZeroInt)
-        value.isStrictlyNegative() -> value.toStrictlyNegativeInt()
-        else -> {
-            val exception = NegativeIntConstructionException(value)
-            Result.failure(exception)
-        }
-    }
+public fun Number.toNegativeInt(): Result<NegativeInt> = toInt().runCatching {
+    require(this <= 0) { shouldBeNegativeMessage() }
+    if (this == 0) ZeroInt else toStrictlyNegativeInt().getOrThrow()
 }
 
 /**
@@ -82,8 +76,10 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrThrow(): NegativeInt =
-    toNegativeIntOrNull() ?: throw NegativeIntConstructionException(this)
+public fun Number.toNegativeIntOrThrow(): NegativeInt {
+    val value: NegativeInt? = toNegativeIntOrNull()
+    return requireNotNull(value) { shouldBeNegativeMessage() }
+}
 
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
@@ -168,19 +164,12 @@ internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
 
     override fun deserialize(value: Int): NegativeInt = value.toNegativeInt()
         .getOrNull()
-        ?: throw NegativeIntSerializationException(value)
+        ?: value.let {
+            val message: String = it.shouldBeNegativeMessage()
+            throw SerializationException(message)
+        }
 }
 
-internal class NegativeIntConstructionException(number: Number) :
-    IllegalArgumentException() {
-    override val message: String by lazy {
-        "Number should be negative (tried with $number)."
-    }
-}
-
-private class NegativeIntSerializationException(number: Number) :
-    SerializationException() {
-    override val message: String by lazy {
-        "Number should be negative (tried with $number)."
-    }
-}
+@JvmSynthetic
+internal fun Number.shouldBeNegativeMessage(): String =
+    "Number should be negative (tried with $this)."
