@@ -26,7 +26,7 @@ class ZeroIntSerializerTest {
     @Test
     fun descriptor_should_have_the_qualified_name_of_ZeroInt_as_serial_name() {
         val actual: String = ZeroInt.serializer().descriptor.serialName
-        val expected: String = assertNotNull(ZeroInt::class.qualifiedName)
+        val expected: String = ZeroInt.QUALIFIED_NAME
         assertEquals(expected, actual)
     }
 
