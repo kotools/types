@@ -12,6 +12,7 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [NonZeroInt], which may involve
@@ -19,13 +20,9 @@ import kotools.types.text.toNotBlankString
  * if this number equals [zero][ZeroInt].
  */
 @SinceKotoolsTypes("4.1")
-public fun Number.toNonZeroInt(): Result<NonZeroInt> {
-    val value: Int = toInt()
-    return when {
-        value.isStrictlyPositive() -> value.toStrictlyPositiveInt()
-        value.isStrictlyNegative() -> value.toStrictlyNegativeInt()
-        else -> Result.failure(NonZeroIntConstructionException)
-    }
+public fun Number.toNonZeroInt(): Result<NonZeroInt> = toInt().runCatching {
+    require(this != 0) { ZERO_ERROR_MESSAGE }
+    toStrictlyPositiveInt().getOrNull() ?: toStrictlyNegativeInt().getOrThrow()
 }
 
 /**
@@ -73,8 +70,10 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrThrow(): NonZeroInt =
-    toNonZeroIntOrNull() ?: throw NonZeroIntConstructionException
+public fun Number.toNonZeroIntOrThrow(): NonZeroInt {
+    val value: NonZeroInt? = toNonZeroIntOrNull()
+    return requireNotNull(value) { ZERO_ERROR_MESSAGE }
+}
 
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
@@ -157,13 +156,9 @@ internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
 
     override fun deserialize(value: Int): NonZeroInt = value.toNonZeroInt()
         .getOrNull()
-        ?: throw NonZeroIntSerializationException
+        ?: throw SerializationException(ZERO_ERROR_MESSAGE)
 }
 
-internal object NonZeroIntConstructionException : IllegalArgumentException() {
-    override val message: String by lazy { "Number should be other than zero" }
-}
-
-private object NonZeroIntSerializationException : SerializationException() {
-    override val message: String by lazy { "Number should be other than zero" }
-}
+@JvmSynthetic
+internal const val ZERO_ERROR_MESSAGE: String =
+    "Number should be other than zero."
