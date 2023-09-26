@@ -10,8 +10,10 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.NUMBER_PACKAGE
+import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 private fun Double.isStrictlyPositive(): Boolean = this > 0.0
 
@@ -25,7 +27,7 @@ private fun Double.isStrictlyPositive(): Boolean = this > 0.0
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
-        StrictlyPositiveDouble(value)
+        StrictlyPositiveDouble.of(value)
     }
 
 /**
@@ -51,7 +53,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
 public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
     val value: Double = toDouble()
     val isValid: Boolean = value.isStrictlyPositive()
-    return if (isValid) StrictlyPositiveDouble(value) else null
+    return if (isValid) StrictlyPositiveDouble.of(value) else null
 }
 
 /**
@@ -75,7 +77,7 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
     val value: Double = toDouble()
-    return StrictlyPositiveDouble(value)
+    return StrictlyPositiveDouble.of(value)
 }
 
 /**
@@ -86,7 +88,7 @@ public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
 @ExperimentalSinceKotoolsTypes("4.2")
 @JvmInline
 @Serializable(StrictlyPositiveDoubleSerializer::class)
-public value class StrictlyPositiveDouble internal constructor(
+public value class StrictlyPositiveDouble private constructor(
     private val value: Double
 ) : Comparable<StrictlyPositiveDouble> {
     init {
@@ -111,6 +113,14 @@ public value class StrictlyPositiveDouble internal constructor(
 
     /** Returns the string representation of this floating-point number. */
     override fun toString(): String = "$value"
+
+    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
+    @SinceKotoolsTypes("4.3.2")
+    public companion object {
+        @JvmSynthetic
+        internal fun of(value: Double): StrictlyPositiveDouble =
+            StrictlyPositiveDouble(value)
+    }
 }
 
 @ExperimentalNumberApi
