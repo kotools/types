@@ -358,6 +358,7 @@ public final class kotools/types/range/InclusiveBound : kotools/types/range/Boun
 }
 
 public final class kotools/types/range/NotEmptyRange {
+	public synthetic fun <init> (Lkotools/types/range/Bound;Lkotools/types/range/Bound;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getEnd ()Lkotools/types/range/Bound;
 	public final fun getStart ()Lkotools/types/range/Bound;
 	public fun toString ()Ljava/lang/String;
