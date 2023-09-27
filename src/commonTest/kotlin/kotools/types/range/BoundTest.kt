@@ -13,10 +13,9 @@ class InclusiveBoundTest {
     @Ignore
     @Test
     fun equals_should_pass_with_an_inclusive_bound_having_the_same_value() {
-        // GIVEN
-        val x: InclusiveBound<Int> = InclusiveBound(Random.nextInt())
-        val y: InclusiveBound<Int> = InclusiveBound(x.value)
-        // WHEN & THEN
+        val x: InclusiveBound<Int> = Random.nextInt()
+            .let { InclusiveBound.of(it) }
+        val y: InclusiveBound<Int> = InclusiveBound.of(x.value)
         "The equals operation should be reflexive.".let {
             assertEquals(expected = x, actual = x, message = it)
             assertEquals(expected = y, actual = y, message = it)
@@ -26,7 +25,7 @@ class InclusiveBoundTest {
             assertEquals(expected = y, actual = x, message = it)
         }
         "The equals operation should be transitive.".let {
-            val z: InclusiveBound<Int> = InclusiveBound(y.value)
+            val z: InclusiveBound<Int> = InclusiveBound.of(y.value)
             assertEquals(expected = x, actual = y, message = it)
             assertEquals(expected = y, actual = z, message = it)
             assertEquals(expected = x, actual = z, message = it)
@@ -41,22 +40,18 @@ class InclusiveBoundTest {
     @Ignore
     @Test
     fun equals_should_fail_with_an_inclusive_bound_having_another_value() {
-        // GIVEN
-        val x: InclusiveBound<Int> = InclusiveBound(Random.nextInt())
-        val y: InclusiveBound<Int> = InclusiveBound(Random.nextInt())
-        // WHEN & THEN
+        val x: InclusiveBound<Int> = Random.nextInt()
+            .let { InclusiveBound.of(it) }
+        val y: InclusiveBound<Int> = Random.nextInt()
+            .let { InclusiveBound.of(it) }
         assertNotEquals(illegal = x, actual = y)
     }
 
     @Test
     fun toString_should_return_the_string_representation_of_its_value() {
-        // GIVEN
         val value: Int = Random.nextInt()
-        val bound: InclusiveBound<Int> = InclusiveBound(value)
-        // WHEN
-        val result = "$bound"
-        // THEN
-        assertEquals(expected = "$value", actual = result)
+        val bound: InclusiveBound<Int> = InclusiveBound.of(value)
+        assertEquals(expected = "$value", actual = "$bound")
     }
 }
 

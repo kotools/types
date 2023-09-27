@@ -351,6 +351,7 @@ public final class kotools/types/range/ExclusiveBound : kotools/types/range/Boun
 }
 
 public final class kotools/types/range/InclusiveBound : kotools/types/range/Bound {
+	public synthetic fun <init> (Ljava/lang/Comparable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getValue ()Ljava/lang/Comparable;
 	public fun toString ()Ljava/lang/String;
 }

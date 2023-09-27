@@ -51,7 +51,8 @@ internal constructor(
     /** Class responsible for configuring an instance of [NotEmptyRange]. */
     public class BuilderScope<T : Comparable<T>> internal constructor() {
         /** Returns this value as an inclusive bound. */
-        public val T.inclusive: InclusiveBound<T> get() = InclusiveBound(this)
+        public val T.inclusive: InclusiveBound<T>
+            get() = InclusiveBound.of(this)
 
         /** Returns this value as an exclusive bound. */
         public val T.exclusive: ExclusiveBound<T> get() = ExclusiveBound(this)
