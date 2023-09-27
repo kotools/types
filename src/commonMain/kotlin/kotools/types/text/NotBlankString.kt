@@ -15,6 +15,7 @@ import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this string as an encapsulated [NotBlankString], or returns an
@@ -23,7 +24,7 @@ import kotlin.jvm.JvmInline
  */
 @SinceKotoolsTypes("4.0")
 public fun String.toNotBlankString(): Result<NotBlankString> =
-    runCatching { NotBlankString(this) }
+    runCatching { NotBlankString.of(this) }
 
 /**
  * Returns this string as a [NotBlankString], or returns `null` if this string
@@ -69,7 +70,7 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
 @ExperimentalSinceKotoolsTypes("4.3.1")
 @ExperimentalTextApi
 public fun String.toNotBlankStringOrThrow(): NotBlankString =
-    NotBlankString(this)
+    NotBlankString.of(this)
 
 /**
  * Representation of strings that have at least one character, excluding
@@ -78,7 +79,7 @@ public fun String.toNotBlankStringOrThrow(): NotBlankString =
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @SinceKotoolsTypes("4.0")
-public value class NotBlankString internal constructor(
+public value class NotBlankString private constructor(
     private val value: String
 ) : Comparable<NotBlankString> {
     /** Returns the length of this string. */
@@ -102,6 +103,13 @@ public value class NotBlankString internal constructor(
 
     /** Returns this string as a [String]. */
     override fun toString(): String = value
+
+    /** Contains static declarations for the [NotBlankString] type. */
+    @SinceKotoolsTypes("4.3.2")
+    public companion object {
+        @JvmSynthetic
+        internal fun of(value: String): NotBlankString = NotBlankString(value)
+    }
 }
 
 /** Concatenates this string with the [other] one. */
