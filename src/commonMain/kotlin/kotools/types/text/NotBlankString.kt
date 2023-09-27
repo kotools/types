@@ -88,7 +88,8 @@ public value class NotBlankString private constructor(
             .getOrThrow()
 
     init {
-        require(value.isNotBlank()) { NotBlankStringException.message }
+        val isValid: Boolean = value.isNotBlank()
+        require(isValid) { stringShouldNotBeBlankMessage() }
     }
 
     /**
@@ -155,9 +156,12 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
         .decodeString()
         .toNotBlankString()
         .getOrNull()
-        ?: throw SerializationException(NotBlankStringException)
+        ?: Unit.let {
+            val message: String = stringShouldNotBeBlankMessage()
+            throw SerializationException(message)
+        }
 }
 
-internal object NotBlankStringException : IllegalArgumentException() {
-    override val message: String = "Given string shouldn't be blank."
-}
+@JvmSynthetic
+internal fun stringShouldNotBeBlankMessage(): String =
+    "Given string shouldn't be blank."

@@ -12,10 +12,11 @@ import kotools.types.number.ZeroInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
-import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 private object StringExample {
@@ -35,10 +36,11 @@ class NotBlankStringTest {
     fun toNotBlankString_should_fail_with_a_blank_String() {
         val result: Result<NotBlankString> =
             StringExample.BLANK.toNotBlankString()
-        result.shouldFailWithIllegalArgumentException { getOrThrow() }
-            .message
-            .shouldBeNotNull()
-            .shouldEqual(NotBlankStringException.message)
+        val exception: IllegalArgumentException =
+            assertFailsWith { result.getOrThrow() }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String = stringShouldNotBeBlankMessage()
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @ExperimentalTextApi
@@ -68,13 +70,11 @@ class NotBlankStringTest {
     @ExperimentalTextApi
     @Test
     fun toNotBlankStringOrThrow_should_fail_with_a_blank_String() {
-        val string: String = StringExample.BLANK
-        val error: IllegalArgumentException =
-            string.shouldFailWithIllegalArgumentException {
-                toNotBlankStringOrThrow()
-            }
-        error.message.shouldBeNotNull()
-            .shouldEqual(NotBlankStringException.message)
+        val exception: IllegalArgumentException =
+            assertFailsWith { StringExample.BLANK.toNotBlankStringOrThrow() }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String = stringShouldNotBeBlankMessage()
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @Test
