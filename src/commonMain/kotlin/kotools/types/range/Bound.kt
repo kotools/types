@@ -42,6 +42,12 @@ private constructor(override val value: T) : Bound<T> {
 @ExperimentalRangeApi
 @ExperimentalSinceKotoolsTypes("4.2")
 public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
-internal constructor(override val value: T) : Bound<T> {
+private constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
+
+    internal companion object {
+        @JvmSynthetic
+        internal fun <T : Comparable<T>> of(value: T): ExclusiveBound<T> =
+            ExclusiveBound(value)
+    }
 }

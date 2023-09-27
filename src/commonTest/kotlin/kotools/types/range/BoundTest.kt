@@ -61,10 +61,9 @@ class ExclusiveBoundTest {
     @Ignore
     @Test
     fun equals_should_pass_with_an_exclusive_bound_having_the_same_value() {
-        // GIVEN
-        val x: ExclusiveBound<Int> = ExclusiveBound(Random.nextInt())
-        val y: ExclusiveBound<Int> = ExclusiveBound(x.value)
-        // WHEN & THEN
+        val x: ExclusiveBound<Int> = Random.nextInt()
+            .let { ExclusiveBound.of(it) }
+        val y: ExclusiveBound<Int> = ExclusiveBound.of(x.value)
         "The equals operation should be reflexive.".let {
             assertEquals(expected = x, actual = x, message = it)
             assertEquals(expected = y, actual = y, message = it)
@@ -74,7 +73,7 @@ class ExclusiveBoundTest {
             assertEquals(expected = y, actual = x, message = it)
         }
         "The equals operation should be transitive.".let {
-            val z: ExclusiveBound<Int> = ExclusiveBound(y.value)
+            val z: ExclusiveBound<Int> = ExclusiveBound.of(y.value)
             assertEquals(expected = x, actual = y, message = it)
             assertEquals(expected = y, actual = z, message = it)
             assertEquals(expected = x, actual = z, message = it)
@@ -89,21 +88,17 @@ class ExclusiveBoundTest {
     @Ignore
     @Test
     fun equals_should_fail_with_an_exclusive_bound_having_another_value() {
-        // GIVEN
-        val x: ExclusiveBound<Int> = ExclusiveBound(Random.nextInt())
-        val y: ExclusiveBound<Int> = ExclusiveBound(Random.nextInt())
-        // WHEN & THEN
+        val x: ExclusiveBound<Int> = Random.nextInt()
+            .let { ExclusiveBound.of(it) }
+        val y: ExclusiveBound<Int> = Random.nextInt()
+            .let { ExclusiveBound.of(it) }
         assertNotEquals(illegal = x, actual = y)
     }
 
     @Test
     fun toString_should_return_the_string_representation_of_its_value() {
-        // GIVEN
         val value: Int = Random.nextInt()
-        val bound: ExclusiveBound<Int> = ExclusiveBound(value)
-        // WHEN
-        val result = "$bound"
-        // THEN
-        assertEquals(expected = "$value", actual = result)
+        val bound: ExclusiveBound<Int> = ExclusiveBound.of(value)
+        assertEquals(expected = "$value", actual = "$bound")
     }
 }

@@ -346,6 +346,7 @@ public abstract interface class kotools/types/range/Bound {
 }
 
 public final class kotools/types/range/ExclusiveBound : kotools/types/range/Bound {
+	public synthetic fun <init> (Ljava/lang/Comparable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getValue ()Ljava/lang/Comparable;
 	public fun toString ()Ljava/lang/String;
 }
