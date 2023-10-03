@@ -11,6 +11,11 @@ import kotlin.test.assertTrue
 
 infix fun <T> T.shouldEqual(expected: T): Unit = assertEquals(expected, this)
 
+inline fun <T> T.shouldEqual(expected: () -> T) {
+    val expectedValue: T = expected()
+    assertEquals(expectedValue, this)
+}
+
 infix fun <T> T.shouldNotEqual(illegal: T): Unit =
     assertNotEquals(illegal, this)
 

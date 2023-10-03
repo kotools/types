@@ -14,6 +14,7 @@ import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldNotEqual
+import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -22,21 +23,22 @@ import kotlin.test.assertTrue
 
 class StrictlyNegativeIntTest {
     @Test
-    fun number_toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Int() {
-        val value: Number = StrictlyNegativeInt.random().toInt()
-        val result: Result<StrictlyNegativeInt> = value.toStrictlyNegativeInt()
-        result.getOrThrow().toInt() shouldEqual value
+    fun toStrictlyNegativeInt_should_pass_with_a_strictly_negative_Number() {
+        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        val result: Result<StrictlyNegativeInt> = number.toStrictlyNegativeInt()
+        result.getOrThrow()
+            .toInt()
+            .shouldEqual(number)
     }
 
     @Test
-    fun number_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
-        val number: Number = PositiveInt.random().toInt()
+    fun toStrictlyNegativeInt_should_fail_with_a_positive_Number() {
+        val number: Number = Random.nextInt(from = 0, until = Int.MAX_VALUE)
         val result: Result<StrictlyNegativeInt> = number.toStrictlyNegativeInt()
-        val exception: IllegalArgumentException =
-            assertFailsWith { result.getOrThrow() }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = number.shouldBeStrictlyNegativeMessage()
-        assertEquals(expectedMessage, actualMessage)
+        assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            .message
+            .shouldBeNotNull()
+            .shouldEqual { number.shouldBeStrictlyNegativeMessage() }
     }
 
     @ExperimentalNumberApi
