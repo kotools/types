@@ -26,7 +26,7 @@ gradlePlugin {
 fun NamedDomainObjectContainer<PluginDeclaration>.registerKotoolsTypesPlugin(
     name: String
 ): Unit = register("KotoolsTypes${name}Plugin").configure {
-    val idSuffix: String = name.lowercase()
+    val idSuffix: String = name.toLowerCase()
     kotoolsTypesId(idSuffix)
     kotoolsTypesImplementationClass("${name}Plugin")
 }
