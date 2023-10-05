@@ -66,7 +66,8 @@ class StrictlyPositiveIntCompanionTest {
     @ExperimentalNumberApi
     @Test
     fun of_should_fail_with_a_negative_Number() {
-        val number: Number = (Int.MIN_VALUE..0).random()
+        val range: IntRange = Int.MIN_VALUE..ZeroInt.toInt()
+        val number: Number = range.random()
         val result: StrictlyPositiveInt? = StrictlyPositiveInt.of(number)
         result.shouldBeNull()
     }
