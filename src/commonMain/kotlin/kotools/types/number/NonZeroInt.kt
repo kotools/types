@@ -106,6 +106,32 @@ public sealed interface NonZeroInt : AnyInt {
             StrictlyPositiveInt.Companion::range
         )
 
+        /**
+         * Converts the given [number] to a [NonZeroInt], which may involve
+         * rounding or truncation, or returns `null` if the [number] equals
+         * [zero][ZeroInt].
+         *
+         * ```kotlin
+         * var result: NonZeroInt? = NonZeroInt.of(1)
+         * println(result) // 1
+         *
+         * result = NonZeroInt.of(0)
+         * println(result) // null
+         *
+         * result = NonZeroInt.of(-1)
+         * println(result) // -1
+         * ```
+         */
+        @ExperimentalNumberApi
+        @ExperimentalSinceKotoolsTypes("4.3.2")
+        public fun of(number: Number): NonZeroInt? = number.toInt()
+            .takeIf { it != ZeroInt.toInt() }
+            ?.let {
+                StrictlyPositiveInt.of(it)
+                    ?: StrictlyNegativeInt.of(it)
+                    ?: error("Unexpected error")
+            }
+
         /** Returns a random [NonZeroInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): NonZeroInt {

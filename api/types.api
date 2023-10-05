@@ -193,6 +193,7 @@ public final class kotools/types/number/NonZeroInt$Companion {
 	public final fun getMin-r6XGqFM ()I
 	public final fun getNegativeRange ()Lkotools/types/range/NotEmptyRange;
 	public final fun getPositiveRange ()Lkotools/types/range/NotEmptyRange;
+	public final fun of (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public final fun random ()Lkotools/types/number/NonZeroInt;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
