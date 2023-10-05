@@ -24,7 +24,10 @@ All notable changes to this project will be documented in this file.
 
 #### Documentation
 
-We've fixed the usage examples of the `toStrictlyNegativeIntOrThrow` function.
+We've fixed the usage examples of the `toStrictlyNegativeIntOrThrow` function 
+(PR [#252]).
+
+[#252]: https://github.com/kotools/types/pull/252
 
 ## 4.3.1
 
