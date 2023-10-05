@@ -53,6 +53,24 @@ class StrictlyPositiveIntCompanionTest {
         range.end.value.toInt() shouldEqual Int.MAX_VALUE
     }
 
+    @ExperimentalNumberApi
+    @Test
+    fun of_should_pass_with_a_strictly_positive_Number() {
+        val number: Number = (1..Int.MAX_VALUE).random()
+        val result: StrictlyPositiveInt? = StrictlyPositiveInt.of(number)
+        result.shouldBeNotNull()
+            .toInt()
+            .shouldEqual(number)
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun of_should_fail_with_a_negative_Number() {
+        val number: Number = (Int.MIN_VALUE..0).random()
+        val result: StrictlyPositiveInt? = StrictlyPositiveInt.of(number)
+        result.shouldBeNull()
+    }
+
     @Test
     fun random_should_return_different_values() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.random()

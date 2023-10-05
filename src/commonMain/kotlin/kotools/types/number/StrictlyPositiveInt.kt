@@ -128,6 +128,28 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
                 .toNotBlankString()
                 .getOrThrow()
 
+        /**
+         * Converts the given [number] to a [StrictlyPositiveInt], which may
+         * involve rounding or truncation, or returns `null` if the [number] is
+         * [negative][NegativeInt].
+         *
+         * ```kotlin
+         * var result: StrictlyPositiveInt? = StrictlyPositiveInt.of(1)
+         * println(result) // 1
+         *
+         * result = StrictlyPositiveInt.of(0)
+         * println(result) // null
+         *
+         * result = StrictlyPositiveInt.of(-1)
+         * println(result) // null
+         * ```
+         */
+        @ExperimentalNumberApi
+        @ExperimentalSinceKotoolsTypes("4.3.2")
+        public fun of(number: Number): StrictlyPositiveInt? = number.toInt()
+            .takeIf { it > 0 }
+            ?.let { StrictlyPositiveInt(it) }
+
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): StrictlyPositiveInt = (min.value..max.value)

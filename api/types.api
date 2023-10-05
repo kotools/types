@@ -320,6 +320,7 @@ public final class kotools/types/number/StrictlyPositiveInt$Companion {
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin-qaD5h0E ()I
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
+	public final fun of-t2HtXUs (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveInt;
 	public final fun random-qaD5h0E ()I
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
