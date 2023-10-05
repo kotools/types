@@ -9,6 +9,8 @@ import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
+import kotools.types.shouldBeNotNull
+import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -47,6 +49,26 @@ class NegativeIntCompanionTest {
         val range: NotEmptyRange<NegativeInt> = NegativeInt.range
         assertTrue { range.end is InclusiveBound }
         range.end.value shouldEqual ZeroInt
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun of_should_pass_with_a_negative_Number() {
+        val number: Number = ZeroInt.toInt()
+            .let { Int.MIN_VALUE..it }
+            .random()
+        val result: NegativeInt? = NegativeInt.of(number)
+        result.shouldBeNotNull()
+            .toInt()
+            .shouldEqual(number)
+    }
+
+    @ExperimentalNumberApi
+    @Test
+    fun of_should_fail_with_a_strictly_positive_Number() {
+        val number: Number = (1..Int.MAX_VALUE).random()
+        val result: NegativeInt? = NegativeInt.of(number)
+        result.shouldBeNull()
     }
 
     @Test
