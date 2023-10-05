@@ -20,6 +20,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+#### Documentation
+
+We've fixed the usage examples of the `toStrictlyNegativeIntOrThrow` function.
+
 ## 4.3.1
 
 _Release date: 2023-09-25._

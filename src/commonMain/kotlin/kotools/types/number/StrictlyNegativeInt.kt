@@ -62,7 +62,7 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
  *
  * ```kotlin
  * val result: StrictlyNegativeInt = (-1).toStrictlyNegativeIntOrThrow()
- * println(result) // 1
+ * println(result) // -1
  *
  * 0.toStrictlyNegativeIntOrThrow() // IllegalArgumentException
  * 1.toStrictlyNegativeIntOrThrow() // IllegalArgumentException
