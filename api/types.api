@@ -260,6 +260,7 @@ public final class kotools/types/number/StrictlyNegativeInt$Companion {
 	public final fun getMax-r6XGqFM ()I
 	public final fun getMin-r6XGqFM ()I
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
+	public final fun of-1FaSkl4 (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeInt;
 	public final fun random-r6XGqFM ()I
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
