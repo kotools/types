@@ -293,6 +293,7 @@ public final class kotools/types/number/StrictlyPositiveDouble : java/lang/Compa
 }
 
 public final class kotools/types/number/StrictlyPositiveDouble$Companion {
+	public final fun of-UyRxpnU (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveDouble;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 

@@ -111,6 +111,32 @@ public value class StrictlyPositiveDouble internal constructor(
 
     /** Returns the string representation of this floating-point number. */
     override fun toString(): String = "$value"
+
+    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
+    public companion object {
+        /**
+         * Converts the given [number] to a [StrictlyPositiveDouble], which may
+         * involve rounding or truncation, or returns `null` if the [number] is
+         * negative.
+         *
+         * ```kotlin
+         * var result: StrictlyPositiveDouble? = StrictlyPositiveDouble.of(1)
+         * println(result) // 1.0
+         *
+         * result = StrictlyPositiveDouble.of(0)
+         * println(result) // null
+         *
+         * result = StrictlyPositiveDouble.of(-1)
+         * println(result) // null
+         * ```
+         */
+        @ExperimentalNumberApi
+        @ExperimentalSinceKotoolsTypes("4.3.2")
+        public fun of(number: Number): StrictlyPositiveDouble? = number
+            .toDouble()
+            .takeIf { it > 0.0 }
+            ?.let { StrictlyPositiveDouble(it) }
+    }
 }
 
 @ExperimentalNumberApi
