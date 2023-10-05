@@ -221,6 +221,7 @@ public final class kotools/types/number/PositiveInt$Companion {
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin ()Lkotools/types/number/ZeroInt;
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
+	public final fun of (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public final fun random ()Lkotools/types/number/PositiveInt;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }

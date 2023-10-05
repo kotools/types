@@ -108,6 +108,28 @@ public sealed interface PositiveInt : AnyInt {
             notEmptyRangeOf { ZeroInt.inclusive to end.inclusive }
         }
 
+        /**
+         * Converts the given [number] to a [PositiveInt], which may involve
+         * rounding or truncation, or returns `null` if the [number] is
+         * [strictly negative][StrictlyNegativeInt].
+         *
+         * ```kotlin
+         * var result: PositiveInt? = PositiveInt.of(1)
+         * println(result) // 1
+         *
+         * result = PositiveInt.of(0)
+         * println(result) // 0
+         *
+         * result = PositiveInt.of(-1)
+         * println(result) // null
+         * ```
+         */
+        @ExperimentalNumberApi
+        @ExperimentalSinceKotoolsTypes("4.3.2")
+        public fun of(number: Number): PositiveInt? = number.toInt()
+            .takeIf { it >= ZeroInt.toInt() }
+            ?.let { StrictlyPositiveInt.of(it) ?: ZeroInt }
+
         /** Returns a random [PositiveInt]. */
         @SinceKotoolsTypes("3.0")
         public fun random(): PositiveInt = (min.toInt()..max.toInt())
