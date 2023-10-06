@@ -429,6 +429,7 @@ public final class kotools/types/text/NotBlankString : java/lang/Comparable {
 }
 
 public final class kotools/types/text/NotBlankString$Companion {
+	public final fun of-AlFjtQg (Ljava/lang/String;)Ljava/lang/String;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 

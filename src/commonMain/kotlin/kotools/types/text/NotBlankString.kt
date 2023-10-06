@@ -104,7 +104,25 @@ public value class NotBlankString internal constructor(
     override fun toString(): String = value
 
     /** Contains static declarations for the [NotBlankString] type. */
-    public companion object
+    public companion object {
+        /**
+         * Converts the given [string] as a [NotBlankString], or returns `null`
+         * if the [string] is [blank][CharSequence.isBlank].
+         *
+         * ```kotlin
+         * var result: NotBlankString? = NotBlankString.of("hello world")
+         * println(result) // hello world
+         *
+         * result = NotBlankString.of(" ")
+         * println(result) // null
+         * ```
+         */
+        @ExperimentalSinceKotoolsTypes("4.3.2")
+        @ExperimentalTextApi
+        public fun of(string: String): NotBlankString? = string
+            .takeIf { it.isNotBlank() }
+            ?.let { NotBlankString(it) }
+    }
 }
 
 /** Concatenates this string with the [other] one. */
