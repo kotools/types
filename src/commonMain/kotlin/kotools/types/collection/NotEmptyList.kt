@@ -185,6 +185,9 @@ public value class NotEmptyList<out E> internal constructor(
     public fun toList(): List<E> = elements
 
     override fun toString(): String = "$elements"
+
+    /** Contains static declarations for the [NotEmptyList] type. */
+    public companion object
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
