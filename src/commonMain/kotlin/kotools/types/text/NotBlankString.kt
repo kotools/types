@@ -106,7 +106,7 @@ public value class NotBlankString internal constructor(
     /** Contains static declarations for the [NotBlankString] type. */
     public companion object {
         /**
-         * Converts the given [string] as a [NotBlankString], or returns `null`
+         * Returns the given [string] as a [NotBlankString], or returns `null`
          * if the [string] is [blank][CharSequence.isBlank].
          *
          * ```kotlin

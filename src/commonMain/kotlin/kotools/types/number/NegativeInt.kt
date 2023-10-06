@@ -107,7 +107,7 @@ public sealed interface NegativeInt : AnyInt {
         }
 
         /**
-         * Converts the given [number] to a [NegativeInt], which may involve
+         * Returns the given [number] as a [NegativeInt], which may involve
          * rounding or truncation, or returns `null` if the [number] is
          * [strictly positive][StrictlyPositiveInt].
          *

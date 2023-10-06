@@ -107,7 +107,7 @@ public sealed interface NonZeroInt : AnyInt {
         )
 
         /**
-         * Converts the given [number] to a [NonZeroInt], which may involve
+         * Returns the given [number] as a [NonZeroInt], which may involve
          * rounding or truncation, or returns `null` if the [number] equals
          * [zero][ZeroInt].
          *

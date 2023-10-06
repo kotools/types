@@ -128,7 +128,7 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
                 .getOrThrow()
 
         /**
-         * Converts the given [number] to a [StrictlyNegativeInt], which may
+         * Returns the given [number] as a [StrictlyNegativeInt], which may
          * involve rounding or truncation, or returns `null` if the [number] is
          * [positive][PositiveInt].
          *

@@ -115,7 +115,7 @@ public value class StrictlyPositiveDouble internal constructor(
     /** Contains static declarations for the [StrictlyPositiveDouble] type. */
     public companion object {
         /**
-         * Converts the given [number] to a [StrictlyPositiveDouble], which may
+         * Returns the given [number] as a [StrictlyPositiveDouble], which may
          * involve rounding or truncation, or returns `null` if the [number] is
          * negative.
          *
