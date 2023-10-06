@@ -300,6 +300,9 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     override fun toString(): String = "$delegate"
+
+    /** Contains static declarations for the [NotEmptyMap] type. */
+    public companion object
 }
 
 internal class NotEmptyMapSerializer<K, V>(
