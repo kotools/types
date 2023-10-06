@@ -185,6 +185,9 @@ public value class NotEmptySet<out E> internal constructor(
     public fun toSet(): Set<E> = elements
 
     override fun toString(): String = "$elements"
+
+    /** Contains static declarations for the [NotEmptySet] type. */
+    public companion object
 }
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
