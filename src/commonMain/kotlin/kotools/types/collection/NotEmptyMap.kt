@@ -302,7 +302,42 @@ public value class NotEmptyMap<K, out V> private constructor(
     override fun toString(): String = "$delegate"
 
     /** Contains static declarations for the [NotEmptyMap] type. */
-    public companion object
+    public companion object {
+        /**
+         * Returns a [NotEmptyMap] containing all the entries of the given
+         * [map], or returns `null` if the [map] is [empty][Map.isEmpty].
+         *
+         * ```kotlin
+         * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
+         * var result: NotEmptyMap<Char, Int>? = NotEmptyMap.of(map)
+         * println(result) // {a=1, b=2}
+         *
+         * map = emptyMap()
+         * result = NotEmptyMap.of(map)
+         * println(result) // null
+         * ```
+         *
+         * Please note that changes made to the original [map] will not be
+         * reflected on the resulting [NotEmptyMap].
+         *
+         * ```kotlin
+         * val original: MutableMap<Char, Int> =
+         *     mutableMapOf('a' to 1, 'b' to 2)
+         * val notEmptyMap: NotEmptyMap<Char, Int>? = NotEmptyMap.of(original)
+         * println(original) // {a=1, b=2}
+         * println(notEmptyMap) // {a=1, b=2}
+         *
+         * original.clear()
+         * println(original) // {}
+         * println(notEmptyMap) // {a=1, b=2}
+         * ```
+         */
+        @ExperimentalCollectionApi
+        @ExperimentalSinceKotoolsTypes("4.3.2")
+        public fun <K, V> of(map: Map<K, V>): NotEmptyMap<K, V>? = map
+            .takeIf { it.isNotEmpty() }
+            ?.let { NotEmptyMap(it.entries) }
+    }
 }
 
 internal class NotEmptyMapSerializer<K, V>(
