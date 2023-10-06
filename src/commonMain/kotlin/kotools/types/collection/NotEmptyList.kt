@@ -102,11 +102,8 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? {
-    if (isEmpty()) return null
-    val elements: List<E> = toList()
-    return NotEmptyList(elements)
-}
+public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
+    NotEmptyList.of(this)
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -142,10 +139,8 @@ public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? {
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> {
-    val elements: List<E> = toList()
-    return NotEmptyList(elements)
-}
+public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> =
+    NotEmptyList.of(this) ?: throw EmptyCollectionException
 
 /**
  * Represents a list with at least one element of type [E].
