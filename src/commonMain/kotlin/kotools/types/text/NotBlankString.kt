@@ -102,6 +102,9 @@ public value class NotBlankString internal constructor(
 
     /** Returns this string as a [String]. */
     override fun toString(): String = value
+
+    /** Contains static declarations for the [NotBlankString] type. */
+    public companion object
 }
 
 /** Concatenates this string with the [other] one. */
