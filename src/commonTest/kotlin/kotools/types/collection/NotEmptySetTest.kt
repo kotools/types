@@ -166,6 +166,27 @@ class NotEmptySetTest {
     }
 }
 
+class NotEmptySetCompanionTest {
+    @ExperimentalCollectionApi
+    @Test
+    fun of_should_pass_with_a_not_empty_Collection() {
+        val collection: Collection<Int> = List(3) { Random.nextInt() }
+            .toSet()
+        val result: NotEmptySet<Int>? = NotEmptySet.of(collection)
+        result.shouldBeNotNull()
+            .toSet()
+            .contentShouldEqual(collection)
+    }
+
+    @ExperimentalCollectionApi
+    @Test
+    fun of_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptySet()
+        val result: NotEmptySet<Int>? = NotEmptySet.of(collection)
+        result.shouldBeNull()
+    }
+}
+
 class NotEmptySetIntegrationTest {
     @Test
     fun updating_the_original_MutableCollection_should_not_impact_the_NotEmptySet() {
