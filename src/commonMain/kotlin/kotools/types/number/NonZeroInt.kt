@@ -119,13 +119,13 @@ public sealed interface NonZeroInt : AnyInt {
          */
         @ExperimentalNumberApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): NonZeroInt? = number.toInt()
-            .takeIf { it != ZeroInt.toInt() }
-            ?.let {
-                StrictlyPositiveInt.of(it)
-                    ?: StrictlyNegativeInt.of(it)
-                    ?: error("Unexpected error")
-            }
+        public fun of(number: Number): NonZeroInt? {
+            val value: Int = number.toInt()
+            return if (value == ZeroInt.toInt()) null
+            else StrictlyPositiveInt.of(value)
+                ?: StrictlyNegativeInt.of(value)
+                ?: error("Unable to return '$number' as a 'NonZeroInt'")
+        }
 
         /** Returns a random [NonZeroInt]. */
         @SinceKotoolsTypes("3.0")
