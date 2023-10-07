@@ -52,6 +52,16 @@ println(result) // null
 
 [#242]: https://github.com/kotools/types/issues/242
 
+#### Security policy
+
+We've documented the security policy of Kotools Types indicating which versions
+are supported with security updates and how to report a security vulnerability
+(issue [#250]).
+For now, only versions [4.3.0][tag/4.3.0] and [4.2.0][tag/4.2.0] are supported
+for security updates.
+
+[#250]: https://github.com/kotools/types/issues/250
+
 ### Fixed
 
 #### Documentation
