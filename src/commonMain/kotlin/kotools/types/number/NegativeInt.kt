@@ -52,14 +52,7 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrNull(): NegativeInt? {
-    val value: Int = toInt()
-    return when {
-        value == 0 -> ZeroInt
-        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
-        else -> null
-    }
-}
+public fun Number.toNegativeIntOrNull(): NegativeInt? = NegativeInt.of(this)
 
 /**
  * Returns this number as a [NegativeInt], which may involve rounding or
@@ -82,8 +75,10 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrThrow(): NegativeInt =
-    toNegativeIntOrNull() ?: throw NegativeIntConstructionException(this)
+public fun Number.toNegativeIntOrThrow(): NegativeInt {
+    val x: NegativeInt? = NegativeInt.of(this)
+    return requireNotNull(x) { NegativeIntConstructionException(this).message }
+}
 
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
