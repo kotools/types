@@ -145,9 +145,10 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
          */
         @ExperimentalNumberApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): StrictlyNegativeInt? = number.toInt()
-            .takeIf { it < ZeroInt.toInt() }
-            ?.let { StrictlyNegativeInt(it) }
+        public fun of(number: Number): StrictlyNegativeInt? {
+            val value: Int = number.toInt()
+            return if (value >= ZeroInt) null else StrictlyNegativeInt(value)
+        }
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")
