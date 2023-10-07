@@ -126,9 +126,11 @@ public sealed interface PositiveInt : AnyInt {
          */
         @ExperimentalNumberApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): PositiveInt? = number.toInt()
-            .takeIf { it >= ZeroInt.toInt() }
-            ?.let { StrictlyPositiveInt.of(it) ?: ZeroInt }
+        public fun of(number: Number): PositiveInt? {
+            val value: Int = number.toInt()
+            return if (value < ZeroInt) null
+            else StrictlyPositiveInt.of(value) ?: ZeroInt
+        }
 
         /** Returns a random [PositiveInt]. */
         @SinceKotoolsTypes("3.0")
