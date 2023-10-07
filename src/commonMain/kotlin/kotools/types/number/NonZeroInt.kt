@@ -46,14 +46,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
-    val value: Int = toInt()
-    return when {
-        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
-        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
-        else -> null
-    }
-}
+public fun Number.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt.of(this)
 
 /**
  * Returns this number as a [NonZeroInt], which may involve rounding or
@@ -73,8 +66,10 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrThrow(): NonZeroInt =
-    toNonZeroIntOrNull() ?: throw NonZeroIntConstructionException
+public fun Number.toNonZeroIntOrThrow(): NonZeroInt {
+    val x: NonZeroInt? = NonZeroInt.of(this)
+    return requireNotNull(x) { NonZeroIntConstructionException.message }
+}
 
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
