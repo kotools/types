@@ -119,9 +119,8 @@ public value class NotBlankString internal constructor(
          */
         @ExperimentalSinceKotoolsTypes("4.3.2")
         @ExperimentalTextApi
-        public fun of(string: String): NotBlankString? = string
-            .takeIf { it.isNotBlank() }
-            ?.let { NotBlankString(it) }
+        public fun of(string: String): NotBlankString? =
+            if (string.isBlank()) null else NotBlankString(string)
     }
 }
 
