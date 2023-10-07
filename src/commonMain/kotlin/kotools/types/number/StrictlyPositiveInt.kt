@@ -146,9 +146,10 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
          */
         @ExperimentalNumberApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): StrictlyPositiveInt? = number.toInt()
-            .takeIf { it > ZeroInt.toInt() }
-            ?.let { StrictlyPositiveInt(it) }
+        public fun of(number: Number): StrictlyPositiveInt? {
+            val value: Int = number.toInt()
+            return if (value <= ZeroInt) null else StrictlyPositiveInt(value)
+        }
 
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")
