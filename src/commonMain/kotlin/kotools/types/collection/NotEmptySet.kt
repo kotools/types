@@ -102,11 +102,8 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
-    if (isEmpty()) return null
-    val elements: Set<E> = toSet()
-    return NotEmptySet(elements)
-}
+public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
+    NotEmptySet.of(this)
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
@@ -142,10 +139,8 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> {
-    val elements: Set<E> = toSet()
-    return NotEmptySet(elements)
-}
+public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
+    NotEmptySet.of(this) ?: throw EmptyCollectionException
 
 /**
  * Represents a set with at least one element of type [E].
