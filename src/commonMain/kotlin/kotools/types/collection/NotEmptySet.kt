@@ -216,10 +216,11 @@ public value class NotEmptySet<out E> internal constructor(
          */
         @ExperimentalCollectionApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun <E> of(collection: Collection<E>): NotEmptySet<E>? =
-            collection.takeIf { it.isNotEmpty() }
-                ?.toSet()
-                ?.let { NotEmptySet(it) }
+        public fun <E> of(collection: Collection<E>): NotEmptySet<E>? {
+            if (collection.isEmpty()) return null
+            val elements: Set<E> = collection.toSet()
+            return NotEmptySet(elements)
+        }
     }
 }
 
