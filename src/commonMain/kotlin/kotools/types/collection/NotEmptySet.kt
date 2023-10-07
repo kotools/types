@@ -139,8 +139,10 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> =
-    NotEmptySet.of(this) ?: throw EmptyCollectionException
+public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> {
+    val elements: NotEmptySet<E>? = NotEmptySet.of(this)
+    return requireNotNull(elements) { EmptyCollectionException.message }
+}
 
 /**
  * Represents a set with at least one element of type [E].
