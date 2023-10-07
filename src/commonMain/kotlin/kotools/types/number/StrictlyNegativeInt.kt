@@ -49,9 +49,8 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
-    .takeIf { it.isStrictlyNegative() }
-    ?.toStrictlyNegativeIntOrThrow()
+public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
+    StrictlyNegativeInt.of(this)
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
@@ -74,8 +73,10 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = toInt()
-    .toStrictlyNegativeIntOrThrow()
+public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt {
+    val value: StrictlyNegativeInt? = StrictlyNegativeInt.of(this)
+    return requireNotNull(value) { StrictlyNegativeInt.errorMessageFor(this) }
+}
 
 private fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
