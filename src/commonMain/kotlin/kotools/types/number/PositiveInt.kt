@@ -52,14 +52,7 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toPositiveIntOrNull(): PositiveInt? {
-    val value: Int = toInt()
-    return when {
-        value == 0 -> ZeroInt
-        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
-        else -> null
-    }
-}
+public fun Number.toPositiveIntOrNull(): PositiveInt? = PositiveInt.of(this)
 
 /**
  * Returns this number as a [PositiveInt], which may involve rounding or
@@ -83,9 +76,10 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toPositiveIntOrThrow(): PositiveInt {
-    val value: Int = toInt()
-    require(value >= 0) { PositiveIntConstructionException(value).message }
-    return if (value == 0) ZeroInt else StrictlyPositiveInt(value)
+    val value: PositiveInt? = PositiveInt.of(this)
+    return requireNotNull(value) {
+        PositiveIntConstructionException(this).message
+    }
 }
 
 /** Representation of positive integers including [zero][ZeroInt]. */
