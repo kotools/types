@@ -106,7 +106,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
-    if (isEmpty()) null else NotEmptyMap(entries)
+    NotEmptyMap.of(this)
 
 /**
  * Returns a [NotEmptyMap] containing all the entries of this map, or throws an
@@ -142,7 +142,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
-    NotEmptyMap(entries)
+    NotEmptyMap.of(this) ?: throw EmptyMapException
 
 /**
  * Represents a map with at least one entry with a key of type [K] and a value
