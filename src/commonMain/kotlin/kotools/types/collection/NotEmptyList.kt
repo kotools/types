@@ -139,8 +139,10 @@ public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> =
-    NotEmptyList.of(this) ?: throw EmptyCollectionException
+public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> {
+    val elements: NotEmptyList<E>? = NotEmptyList.of(this)
+    return requireNotNull(elements) { EmptyCollectionException.message }
+}
 
 /**
  * Represents a list with at least one element of type [E].
