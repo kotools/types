@@ -67,8 +67,8 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt.of(this)
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toNonZeroIntOrThrow(): NonZeroInt {
-    val x: NonZeroInt? = NonZeroInt.of(this)
-    return requireNotNull(x) { NonZeroIntConstructionException.message }
+    val value: NonZeroInt? = NonZeroInt.of(this)
+    return requireNotNull(value) { NonZeroIntConstructionException.message }
 }
 
 /** Representation of integers other than [zero][ZeroInt]. */
