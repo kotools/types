@@ -121,7 +121,8 @@ public sealed interface NonZeroInt : AnyInt {
         @ExperimentalSinceKotoolsTypes("4.3.2")
         public fun of(number: Number): NonZeroInt? {
             val value: Int = number.toInt()
-            return if (value == ZeroInt.toInt()) null
+            val zero: Int = ZeroInt.toInt()
+            return if (value == zero) null
             else StrictlyPositiveInt.of(value)
                 ?: StrictlyNegativeInt.of(value)
                 ?: error("Unable to return '$number' as a 'NonZeroInt'")
