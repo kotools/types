@@ -49,9 +49,8 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
-    .takeIf { it.isStrictlyPositive() }
-    ?.toStrictlyPositiveIntOrThrow()
+public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
+    StrictlyPositiveInt.of(this)
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding or
@@ -74,8 +73,10 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = toInt()
-    .toStrictlyPositiveIntOrThrow()
+public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt {
+    val value: StrictlyPositiveInt? = StrictlyPositiveInt.of(this)
+    return requireNotNull(value) { StrictlyPositiveInt.errorMessageFor(this) }
+}
 
 private fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
