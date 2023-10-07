@@ -46,8 +46,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
 @ExperimentalSinceKotoolsTypes("4.3.1")
 @ExperimentalTextApi
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    takeIf { it.isNotBlank() }
-        ?.toNotBlankStringOrThrow()
+    NotBlankString.of(this)
 
 /**
  * Returns this string as a [NotBlankString], or throws an
@@ -68,8 +67,10 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  */
 @ExperimentalSinceKotoolsTypes("4.3.1")
 @ExperimentalTextApi
-public fun String.toNotBlankStringOrThrow(): NotBlankString =
-    NotBlankString(this)
+public fun String.toNotBlankStringOrThrow(): NotBlankString {
+    val value: NotBlankString? = NotBlankString.of(this)
+    return requireNotNull(value) { NotBlankStringException.message }
+}
 
 /**
  * Representation of strings that have at least one character, excluding
