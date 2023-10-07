@@ -336,9 +336,8 @@ public value class NotEmptyMap<K, out V> private constructor(
          */
         @ExperimentalCollectionApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun <K, V> of(map: Map<K, V>): NotEmptyMap<K, V>? = map
-            .takeIf { it.isNotEmpty() }
-            ?.let { NotEmptyMap(it.entries) }
+        public fun <K, V> of(map: Map<K, V>): NotEmptyMap<K, V>? =
+            if (map.isEmpty()) null else NotEmptyMap(map.entries)
     }
 }
 
