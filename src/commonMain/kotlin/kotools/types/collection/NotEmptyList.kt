@@ -216,10 +216,11 @@ public value class NotEmptyList<out E> internal constructor(
          */
         @ExperimentalCollectionApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun <E> of(collection: Collection<E>): NotEmptyList<E>? =
-            collection.takeIf { it.isNotEmpty() }
-                ?.toList()
-                ?.let { NotEmptyList(it) }
+        public fun <E> of(collection: Collection<E>): NotEmptyList<E>? {
+            if (collection.isEmpty()) return null
+            val elements: List<E> = collection.toList()
+            return NotEmptyList(elements)
+        }
     }
 }
 
