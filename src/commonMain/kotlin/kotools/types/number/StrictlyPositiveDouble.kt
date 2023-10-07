@@ -133,8 +133,7 @@ public value class StrictlyPositiveDouble internal constructor(
         @ExperimentalSinceKotoolsTypes("4.3.2")
         public fun of(number: Number): StrictlyPositiveDouble? {
             val value: Double = number.toDouble()
-            return if (value <= 0.0) null
-            else StrictlyPositiveDouble(value)
+            return if (value <= 0.0) null else StrictlyPositiveDouble(value)
         }
     }
 }
