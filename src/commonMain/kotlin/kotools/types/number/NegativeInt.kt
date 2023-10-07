@@ -119,9 +119,11 @@ public sealed interface NegativeInt : AnyInt {
          */
         @ExperimentalNumberApi
         @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): NegativeInt? = number.toInt()
-            .takeIf { it <= ZeroInt.toInt() }
-            ?.let { StrictlyNegativeInt.of(it) ?: ZeroInt }
+        public fun of(number: Number): NegativeInt? {
+            val value: Int = number.toInt()
+            return if (value > ZeroInt) null
+            else StrictlyNegativeInt.of(value) ?: ZeroInt
+        }
 
         /** Returns a random [NegativeInt]. */
         @SinceKotoolsTypes("3.0")
