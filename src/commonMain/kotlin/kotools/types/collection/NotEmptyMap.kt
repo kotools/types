@@ -141,8 +141,10 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
-    NotEmptyMap.of(this) ?: throw EmptyMapException
+public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> {
+    val entries: NotEmptyMap<K, V>? = NotEmptyMap.of(this)
+    return requireNotNull(entries) { EmptyMapException.message }
+}
 
 /**
  * Represents a map with at least one entry with a key of type [K] and a value
