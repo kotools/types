@@ -48,11 +48,8 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
-    val value: Double = toDouble()
-    val isValid: Boolean = value.isStrictlyPositive()
-    return if (isValid) StrictlyPositiveDouble(value) else null
-}
+public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? =
+    StrictlyPositiveDouble.of(this)
 
 /**
  * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
@@ -74,8 +71,10 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
-    val value: Double = toDouble()
-    return StrictlyPositiveDouble(value)
+    val value: StrictlyPositiveDouble? = StrictlyPositiveDouble.of(this)
+    return requireNotNull(value) {
+        StrictlyPositiveDoubleException(this).message
+    }
 }
 
 /**
