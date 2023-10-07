@@ -76,8 +76,10 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? = NegativeInt.of(this)
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toNegativeIntOrThrow(): NegativeInt {
-    val x: NegativeInt? = NegativeInt.of(this)
-    return requireNotNull(x) { NegativeIntConstructionException(this).message }
+    val value: NegativeInt? = NegativeInt.of(this)
+    return requireNotNull(value) {
+        NegativeIntConstructionException(this).message
+    }
 }
 
 /** Representation of negative integers including [zero][ZeroInt]. */
