@@ -1,3 +1,6 @@
+[//]: # (Copyright 2022-2023 Loïc Lamarque.)
+[//]: # (Use of this source code is governed by the MIT license.)
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

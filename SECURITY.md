@@ -1,3 +1,6 @@
+[//]: # (Copyright 2023 Loïc Lamarque.)
+[//]: # (Use of this source code is governed by the MIT license.)
+
 # Security Policy
 
 ## Supported Versions

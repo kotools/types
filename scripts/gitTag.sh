@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Copyright 2023 Loïc Lamarque.
+# Use of this source code is governed by the MIT license.
+
 # This scripts tags a stable release of Kotools Types.
 
 TAG_NAME=$1

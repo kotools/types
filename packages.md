@@ -1,3 +1,6 @@
+[//]: # (Copyright 2022-2023 Loïc Lamarque.)
+[//]: # (Use of this source code is governed by the MIT license.)
+
 # Module types
 
 Multiplatform library providing explicit types for Kotlin.
