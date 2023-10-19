@@ -56,25 +56,6 @@ class StrictlyNegativeIntCompanionTest {
         range.end.value.toInt() shouldEqual -1
     }
 
-    @ExperimentalNumberApi
-    @Test
-    fun of_should_pass_with_a_strictly_negative_Number() {
-        val number: Number = (Int.MIN_VALUE..-1).random()
-        val result: StrictlyNegativeInt? = StrictlyNegativeInt.of(number)
-        result.shouldBeNotNull()
-            .toInt()
-            .shouldEqual(number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun of_should_fail_with_a_positive_Number() {
-        val range: IntRange = ZeroInt.toInt()..Int.MAX_VALUE
-        val number: Number = range.random()
-        val result: StrictlyNegativeInt? = StrictlyNegativeInt.of(number)
-        result.shouldBeNull()
-    }
-
     @Test
     fun random_should_return_different_values() {
         val result: StrictlyNegativeInt = StrictlyNegativeInt.random()

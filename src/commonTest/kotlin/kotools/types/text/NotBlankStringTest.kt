@@ -163,26 +163,6 @@ class NotBlankStringTest {
     }
 }
 
-class NotBlankStringCompanionTest {
-    @ExperimentalTextApi
-    @Test
-    fun of_should_pass_with_a_not_blank_String() {
-        val string = "hello world"
-        val result: NotBlankString? = NotBlankString.of(string)
-        result.shouldBeNotNull()
-            .toString()
-            .shouldEqual(string)
-    }
-
-    @ExperimentalTextApi
-    @Test
-    fun of_should_fail_with_a_blank_String() {
-        val string = "   "
-        val result: NotBlankString? = NotBlankString.of(string)
-        result.shouldBeNull()
-    }
-}
-
 class NotBlankStringSerializerTest {
     @ExperimentalSerializationApi
     @Test

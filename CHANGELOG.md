@@ -25,36 +25,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-#### Static builders named `of`
-
-For aligning with
-[our design goals on error handling](README.md#error-handling-agnostic), we've
-introduced **experimental** static builders named `of` responsible for creating
-the corresponding type (issue [#242]).
-
-This change applies for the following types: `NonZeroInt`, `PositiveInt`, 
-`NegativeInt`, `StrictlyPositiveInt`, `StrictlyNegativeInt`, 
-`StrictlyPositiveDouble`, `NotBlankString`, `NotEmptyList`, `NotEmptySet` and
-`NotEmptyMap`.
-
-Here's an example for the `PositiveInt` type:
-
-```kotlin
-// before
-var result: PositiveInt? = 1.toPositiveInt().getOrNull()
-println(result) // 1
-result = (-1).toPositiveInt().getOrNull()
-println(result) // null
-
-// after
-result = PositiveInt.of(1)
-println(result) // 1
-result = PositiveInt.of(-1)
-println(result) // null
-```
-
-[#242]: https://github.com/kotools/types/issues/242
-
 #### Security policy
 
 We've documented the [security policy](SECURITY.md) of Kotools Types indicating

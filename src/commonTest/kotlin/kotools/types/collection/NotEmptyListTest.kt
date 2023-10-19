@@ -165,26 +165,6 @@ class NotEmptyListTest {
     }
 }
 
-class NotEmptyListCompanionTest {
-    @ExperimentalCollectionApi
-    @Test
-    fun of_should_pass_with_a_not_empty_Collection() {
-        val collection: Collection<Int> = List(3) { Random.nextInt() }
-        val result: NotEmptyList<Int>? = NotEmptyList.of(collection)
-        result.shouldBeNotNull()
-            .toList()
-            .contentShouldEqual(collection)
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun of_should_fail_with_an_empty_Collection() {
-        val collection: Collection<Int> = emptyList()
-        val result: NotEmptyList<Int>? = NotEmptyList.of(collection)
-        result.shouldBeNull()
-    }
-}
-
 class NotEmptyListIntegrationTest {
     @Test
     fun updating_the_original_MutableCollection_should_not_impact_the_NotEmptyList() {

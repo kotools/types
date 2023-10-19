@@ -53,8 +53,11 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? =
-    StrictlyPositiveDouble.of(this)
+public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
+    val value: Double = toDouble()
+    val isValid: Boolean = value.isStrictlyPositive()
+    return if (isValid) StrictlyPositiveDouble(value) else null
+}
 
 /**
  * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
@@ -76,10 +79,8 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? =
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
-    val value: StrictlyPositiveDouble? = StrictlyPositiveDouble.of(this)
-    return requireNotNull(value) {
-        StrictlyPositiveDoubleException(this).message
-    }
+    val value: Double = toDouble()
+    return StrictlyPositiveDouble(value)
 }
 
 /**
@@ -115,32 +116,6 @@ public value class StrictlyPositiveDouble internal constructor(
 
     /** Returns the string representation of this floating-point number. */
     override fun toString(): String = "$value"
-
-    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
-    public companion object {
-        /**
-         * Returns the given [number] as a [StrictlyPositiveDouble], which may
-         * involve rounding or truncation, or returns `null` if the [number] is
-         * negative.
-         *
-         * ```kotlin
-         * var result: StrictlyPositiveDouble? = StrictlyPositiveDouble.of(1)
-         * println(result) // 1.0
-         *
-         * result = StrictlyPositiveDouble.of(0)
-         * println(result) // null
-         *
-         * result = StrictlyPositiveDouble.of(-1)
-         * println(result) // null
-         * ```
-         */
-        @ExperimentalNumberApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): StrictlyPositiveDouble? {
-            val value: Double = number.toDouble()
-            return if (value <= 0.0) null else StrictlyPositiveDouble(value)
-        }
-    }
 }
 
 @ExperimentalNumberApi

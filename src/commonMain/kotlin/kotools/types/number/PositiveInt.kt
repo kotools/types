@@ -57,7 +57,14 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toPositiveIntOrNull(): PositiveInt? = PositiveInt.of(this)
+public fun Number.toPositiveIntOrNull(): PositiveInt? {
+    val value: Int = toInt()
+    return when {
+        value == 0 -> ZeroInt
+        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
+        else -> null
+    }
+}
 
 /**
  * Returns this number as a [PositiveInt], which may involve rounding or
@@ -81,10 +88,9 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? = PositiveInt.of(this)
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun Number.toPositiveIntOrThrow(): PositiveInt {
-    val value: PositiveInt? = PositiveInt.of(this)
-    return requireNotNull(value) {
-        PositiveIntConstructionException(this).message
-    }
+    val value: Int = toInt()
+    require(value >= 0) { PositiveIntConstructionException(value).message }
+    return if (value == 0) ZeroInt else StrictlyPositiveInt(value)
 }
 
 /** Representation of positive integers including [zero][ZeroInt]. */
@@ -105,30 +111,6 @@ public sealed interface PositiveInt : AnyInt {
         public val range: NotEmptyRange<PositiveInt> by lazy {
             val end: StrictlyPositiveInt = StrictlyPositiveInt.range.end.value
             notEmptyRangeOf { ZeroInt.inclusive to end.inclusive }
-        }
-
-        /**
-         * Returns the given [number] as a [PositiveInt], which may involve
-         * rounding or truncation, or returns `null` if the [number] is
-         * [strictly negative][StrictlyNegativeInt].
-         *
-         * ```kotlin
-         * var result: PositiveInt? = PositiveInt.of(1)
-         * println(result) // 1
-         *
-         * result = PositiveInt.of(0)
-         * println(result) // 0
-         *
-         * result = PositiveInt.of(-1)
-         * println(result) // null
-         * ```
-         */
-        @ExperimentalNumberApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): PositiveInt? {
-            val value: Int = number.toInt()
-            return if (value < ZeroInt) null
-            else StrictlyPositiveInt.of(value) ?: ZeroInt
         }
 
         /** Returns a random [PositiveInt]. */

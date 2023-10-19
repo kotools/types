@@ -51,7 +51,14 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt.of(this)
+public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
+    val value: Int = toInt()
+    return when {
+        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
+        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
+        else -> null
+    }
+}
 
 /**
  * Returns this number as a [NonZeroInt], which may involve rounding or
@@ -71,10 +78,8 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? = NonZeroInt.of(this)
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrThrow(): NonZeroInt {
-    val value: NonZeroInt? = NonZeroInt.of(this)
-    return requireNotNull(value) { NonZeroIntConstructionException.message }
-}
+public fun Number.toNonZeroIntOrThrow(): NonZeroInt =
+    toNonZeroIntOrNull() ?: throw NonZeroIntConstructionException
 
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
@@ -105,33 +110,6 @@ public sealed interface NonZeroInt : AnyInt {
         public val positiveRange: NotEmptyRange<StrictlyPositiveInt> by lazy(
             StrictlyPositiveInt.Companion::range
         )
-
-        /**
-         * Returns the given [number] as a [NonZeroInt], which may involve
-         * rounding or truncation, or returns `null` if the [number] equals
-         * [zero][ZeroInt].
-         *
-         * ```kotlin
-         * var result: NonZeroInt? = NonZeroInt.of(1)
-         * println(result) // 1
-         *
-         * result = NonZeroInt.of(0)
-         * println(result) // null
-         *
-         * result = NonZeroInt.of(-1)
-         * println(result) // -1
-         * ```
-         */
-        @ExperimentalNumberApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): NonZeroInt? {
-            val value: Int = number.toInt()
-            val zero: Int = ZeroInt.toInt()
-            return if (value == zero) null
-            else StrictlyPositiveInt.of(value)
-                ?: StrictlyNegativeInt.of(value)
-                ?: error("Unable to return '$number' as a 'NonZeroInt'")
-        }
 
         /** Returns a random [NonZeroInt]. */
         @SinceKotoolsTypes("3.0")

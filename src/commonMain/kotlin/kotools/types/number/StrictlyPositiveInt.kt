@@ -54,8 +54,9 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
-    StrictlyPositiveInt.of(this)
+public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? = toInt()
+    .takeIf { it.isStrictlyPositive() }
+    ?.toStrictlyPositiveIntOrThrow()
 
 /**
  * Returns this number as a [StrictlyPositiveInt], which may involve rounding or
@@ -78,10 +79,8 @@ public fun Number.toStrictlyPositiveIntOrNull(): StrictlyPositiveInt? =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt {
-    val value: StrictlyPositiveInt? = StrictlyPositiveInt.of(this)
-    return requireNotNull(value) { StrictlyPositiveInt.errorMessageFor(this) }
-}
+public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = toInt()
+    .toStrictlyPositiveIntOrThrow()
 
 private fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
     StrictlyPositiveInt(this)
@@ -133,29 +132,6 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
             "Number should be strictly positive (tried with $number)."
                 .toNotBlankString()
                 .getOrThrow()
-
-        /**
-         * Returns the given [number] as a [StrictlyPositiveInt], which may
-         * involve rounding or truncation, or returns `null` if the [number] is
-         * [negative][NegativeInt].
-         *
-         * ```kotlin
-         * var result: StrictlyPositiveInt? = StrictlyPositiveInt.of(1)
-         * println(result) // 1
-         *
-         * result = StrictlyPositiveInt.of(0)
-         * println(result) // null
-         *
-         * result = StrictlyPositiveInt.of(-1)
-         * println(result) // null
-         * ```
-         */
-        @ExperimentalNumberApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): StrictlyPositiveInt? {
-            val value: Int = number.toInt()
-            return if (value <= ZeroInt) null else StrictlyPositiveInt(value)
-        }
 
         /** Returns a random [StrictlyPositiveInt]. */
         @SinceKotoolsTypes("3.0")

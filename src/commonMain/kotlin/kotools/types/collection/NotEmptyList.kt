@@ -107,8 +107,11 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
-    NotEmptyList.of(this)
+public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? {
+    if (isEmpty()) return null
+    val elements: List<E> = toList()
+    return NotEmptyList(elements)
+}
 
 /**
  * Returns a [NotEmptyList] containing all the elements of this collection, or
@@ -145,8 +148,8 @@ public fun <E> Collection<E>.toNotEmptyListOrNull(): NotEmptyList<E>? =
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <E> Collection<E>.toNotEmptyListOrThrow(): NotEmptyList<E> {
-    val elements: NotEmptyList<E>? = NotEmptyList.of(this)
-    return requireNotNull(elements) { EmptyCollectionException.message }
+    val elements: List<E> = toList()
+    return NotEmptyList(elements)
 }
 
 /**
@@ -187,46 +190,6 @@ public value class NotEmptyList<out E> internal constructor(
     public fun toList(): List<E> = elements
 
     override fun toString(): String = "$elements"
-
-    /** Contains static declarations for the [NotEmptyList] type. */
-    public companion object {
-        /**
-         * Returns a [NotEmptyList] containing all the elements of the given
-         * [collection], or returns `null` if the [collection] is
-         * [empty][Collection.isEmpty].
-         *
-         * ```kotlin
-         * var collection: Collection<Int> = listOf(1, 2, 3)
-         * var result: NotEmptyList<Int>? = NotEmptyList.of(collection)
-         * println(result) // [1, 2, 3]
-         *
-         * collection = emptyList()
-         * result = NotEmptyList.of(collection)
-         * println(result) // null
-         * ```
-         *
-         * Please note that changes made to the original [collection] will not
-         * be reflected on the resulting [NotEmptyList].
-         *
-         * ```kotlin
-         * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
-         * val notEmptyList: NotEmptyList<Int>? = NotEmptyList.of(original)
-         * println(original) // [1, 2, 3]
-         * println(notEmptyList) // [1, 2, 3]
-         *
-         * original.clear()
-         * println(original) // []
-         * println(notEmptyList) // [1, 2, 3]
-         * ```
-         */
-        @ExperimentalCollectionApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun <E> of(collection: Collection<E>): NotEmptyList<E>? {
-            if (collection.isEmpty()) return null
-            val elements: List<E> = collection.toList()
-            return NotEmptyList(elements)
-        }
-    }
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :

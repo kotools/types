@@ -20,11 +20,6 @@ public object ZeroInt : PositiveInt, NegativeInt {
     override fun toString(): String = "${toInt()}"
 }
 
-internal operator fun Int.compareTo(other: ZeroInt): Int {
-    val value: Int = other.toInt()
-    return compareTo(value)
-}
-
 internal object ZeroIntSerializer : AnyIntSerializer<ZeroInt> {
     override val serialName: Result<NotBlankString> by lazy(
         "${Package.number}.ZeroInt"::toNotBlankString

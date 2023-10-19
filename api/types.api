@@ -36,7 +36,6 @@ public final class kotools/types/collection/NotEmptyList : kotools/types/collect
 }
 
 public final class kotools/types/collection/NotEmptyList$Companion {
-	public final fun of-HcebRes (Ljava/util/Collection;)Ljava/util/List;
 	public final fun serializer (Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
@@ -68,7 +67,6 @@ public final class kotools/types/collection/NotEmptyMap {
 }
 
 public final class kotools/types/collection/NotEmptyMap$Companion {
-	public final fun of-5NFL4K8 (Ljava/util/Map;)Ljava/util/Map;
 	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
@@ -101,7 +99,6 @@ public final class kotools/types/collection/NotEmptySet : kotools/types/collecti
 }
 
 public final class kotools/types/collection/NotEmptySet$Companion {
-	public final fun of-K89ylr4 (Ljava/util/Collection;)Ljava/util/Set;
 	public final fun serializer (Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
@@ -167,7 +164,6 @@ public final class kotools/types/number/NegativeInt$Companion {
 	public final fun getMax ()Lkotools/types/number/ZeroInt;
 	public final fun getMin-r6XGqFM ()I
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
-	public final fun of (Ljava/lang/Number;)Lkotools/types/number/NegativeInt;
 	public final fun random ()Lkotools/types/number/NegativeInt;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -197,7 +193,6 @@ public final class kotools/types/number/NonZeroInt$Companion {
 	public final fun getMin-r6XGqFM ()I
 	public final fun getNegativeRange ()Lkotools/types/range/NotEmptyRange;
 	public final fun getPositiveRange ()Lkotools/types/range/NotEmptyRange;
-	public final fun of (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public final fun random ()Lkotools/types/number/NonZeroInt;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -225,7 +220,6 @@ public final class kotools/types/number/PositiveInt$Companion {
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin ()Lkotools/types/number/ZeroInt;
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
-	public final fun of (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public final fun random ()Lkotools/types/number/PositiveInt;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -266,7 +260,6 @@ public final class kotools/types/number/StrictlyNegativeInt$Companion {
 	public final fun getMax-r6XGqFM ()I
 	public final fun getMin-r6XGqFM ()I
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
-	public final fun of-1FaSkl4 (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeInt;
 	public final fun random-r6XGqFM ()I
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -296,7 +289,6 @@ public final class kotools/types/number/StrictlyPositiveDouble : java/lang/Compa
 }
 
 public final class kotools/types/number/StrictlyPositiveDouble$Companion {
-	public final fun of-UyRxpnU (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveDouble;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -328,7 +320,6 @@ public final class kotools/types/number/StrictlyPositiveInt$Companion {
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin-qaD5h0E ()I
 	public final fun getRange ()Lkotools/types/range/NotEmptyRange;
-	public final fun of-t2HtXUs (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveInt;
 	public final fun random-qaD5h0E ()I
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -432,7 +423,6 @@ public final class kotools/types/text/NotBlankString : java/lang/Comparable {
 }
 
 public final class kotools/types/text/NotBlankString$Companion {
-	public final fun of-AlFjtQg (Ljava/lang/String;)Ljava/lang/String;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 

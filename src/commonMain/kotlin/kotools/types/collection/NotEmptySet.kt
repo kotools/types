@@ -107,8 +107,11 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
-    NotEmptySet.of(this)
+public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
+    if (isEmpty()) return null
+    val elements: Set<E> = toSet()
+    return NotEmptySet(elements)
+}
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
@@ -145,8 +148,8 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? =
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
 public fun <E> Collection<E>.toNotEmptySetOrThrow(): NotEmptySet<E> {
-    val elements: NotEmptySet<E>? = NotEmptySet.of(this)
-    return requireNotNull(elements) { EmptyCollectionException.message }
+    val elements: Set<E> = toSet()
+    return NotEmptySet(elements)
 }
 
 /**
@@ -187,46 +190,6 @@ public value class NotEmptySet<out E> internal constructor(
     public fun toSet(): Set<E> = elements
 
     override fun toString(): String = "$elements"
-
-    /** Contains static declarations for the [NotEmptySet] type. */
-    public companion object {
-        /**
-         * Returns a [NotEmptySet] containing all the elements of the given
-         * [collection], or returns `null` if the [collection] is
-         * [empty][Collection.isEmpty].
-         *
-         * ```kotlin
-         * var collection: Collection<Int> = setOf(1, 2, 3, 1)
-         * var result: NotEmptySet<Int>? = NotEmptySet.of(collection)
-         * println(result) // [1, 2, 3]
-         *
-         * collection = emptySet()
-         * result = NotEmptySet.of(collection)
-         * println(result) // null
-         * ```
-         *
-         * Please note that changes made to the original [collection] will not
-         * be reflected on the resulting [NotEmptySet].
-         *
-         * ```kotlin
-         * val original: MutableCollection<Int> = mutableSetOf(1, 2, 3, 1)
-         * val notEmptySet: NotEmptySet<Int>? = NotEmptySet.of(original)
-         * println(original) // [1, 2, 3]
-         * println(notEmptySet) // [1, 2, 3]
-         *
-         * original.clear()
-         * println(original) // []
-         * println(notEmptySet) // [1, 2, 3]
-         * ```
-         */
-        @ExperimentalCollectionApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun <E> of(collection: Collection<E>): NotEmptySet<E>? {
-            if (collection.isEmpty()) return null
-            val elements: Set<E> = collection.toSet()
-            return NotEmptySet(elements)
-        }
-    }
 }
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :

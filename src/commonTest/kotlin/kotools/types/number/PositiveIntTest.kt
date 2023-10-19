@@ -15,8 +15,6 @@ import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
-import kotools.types.shouldBeNotNull
-import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -55,27 +53,6 @@ class PositiveIntCompanionTest {
         val range: NotEmptyRange<PositiveInt> = PositiveInt.range
         assertTrue { range.end is InclusiveBound }
         range.end.value.toInt() shouldEqual Int.MAX_VALUE
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun of_should_pass_with_a_positive_Number() {
-        val number: Number = ZeroInt.toInt()
-            .rangeTo(Int.MAX_VALUE)
-            .random()
-        val result: PositiveInt? = PositiveInt.of(number)
-        result.shouldBeNotNull()
-            .toInt()
-            .shouldEqual(number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun of_should_fail_with_a_strictly_negative_Number() {
-        val number: Number = Int.MIN_VALUE.rangeTo(-1)
-            .random()
-        val result: PositiveInt? = PositiveInt.of(number)
-        result.shouldBeNull()
     }
 
     @Test

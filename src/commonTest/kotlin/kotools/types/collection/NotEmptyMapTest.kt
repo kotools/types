@@ -216,27 +216,6 @@ class NotEmptyMapTest {
 
 }
 
-class NotEmptyMapCompanionTest {
-    @ExperimentalCollectionApi
-    @Test
-    fun of_should_pass_with_a_not_empty_Map() {
-        val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
-        val result: NotEmptyMap<Char, Int>? = NotEmptyMap.of(map)
-        result.shouldBeNotNull()
-            .entries
-            .toSet()
-            .shouldEqual(map.entries)
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun of_should_fail_with_an_empty_Map() {
-        val map: Map<Char, Int> = emptyMap()
-        val result: NotEmptyMap<Char, Int>? = NotEmptyMap.of(map)
-        result.shouldBeNull()
-    }
-}
-
 class NotEmptyMapIntegrationTest {
     @Test
     fun updating_the_original_MutableMap_should_not_impact_the_NotEmptyMap() {

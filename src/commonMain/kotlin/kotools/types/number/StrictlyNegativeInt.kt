@@ -54,8 +54,9 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
-    StrictlyNegativeInt.of(this)
+public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? = toInt()
+    .takeIf { it.isStrictlyNegative() }
+    ?.toStrictlyNegativeIntOrThrow()
 
 /**
  * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
@@ -78,10 +79,8 @@ public fun Number.toStrictlyNegativeIntOrNull(): StrictlyNegativeInt? =
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt {
-    val value: StrictlyNegativeInt? = StrictlyNegativeInt.of(this)
-    return requireNotNull(value) { StrictlyNegativeInt.errorMessageFor(this) }
-}
+public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = toInt()
+    .toStrictlyNegativeIntOrThrow()
 
 private fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
     StrictlyNegativeInt(this)
@@ -132,29 +131,6 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
             "Number should be strictly negative (tried with $number)."
                 .toNotBlankString()
                 .getOrThrow()
-
-        /**
-         * Returns the given [number] as a [StrictlyNegativeInt], which may
-         * involve rounding or truncation, or returns `null` if the [number] is
-         * [positive][PositiveInt].
-         *
-         * ```kotlin
-         * var result: StrictlyNegativeInt? = StrictlyNegativeInt.of(-1)
-         * println(result) // -1
-         *
-         * result = StrictlyNegativeInt.of(0)
-         * println(result) // null
-         *
-         * result = StrictlyNegativeInt.of(1)
-         * println(result) // null
-         * ```
-         */
-        @ExperimentalNumberApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): StrictlyNegativeInt? {
-            val value: Int = number.toInt()
-            return if (value >= ZeroInt) null else StrictlyNegativeInt(value)
-        }
 
         /** Returns a random [StrictlyNegativeInt]. */
         @SinceKotoolsTypes("3.0")

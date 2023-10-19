@@ -134,29 +134,6 @@ class StrictlyPositiveDoubleTest {
 }
 
 @ExperimentalNumberApi
-class StrictlyPositiveDoubleCompanionTest {
-    @Test
-    fun of_should_pass_with_a_strictly_positive_Number() {
-        val number: Number = (1..Int.MAX_VALUE)
-            .random()
-            .toDouble()
-        val result: StrictlyPositiveDouble? = StrictlyPositiveDouble.of(number)
-        result.shouldBeNotNull()
-            .toDouble()
-            .shouldEqual(number)
-    }
-
-    @Test
-    fun of_should_fail_with_a_negative_Number() {
-        val number: Number = ZeroInt.toInt()
-            .let { Int.MIN_VALUE..it }
-            .random()
-        val result: StrictlyPositiveDouble? = StrictlyPositiveDouble.of(number)
-        result.shouldBeNull()
-    }
-}
-
-@ExperimentalNumberApi
 class StrictlyPositiveDoubleSerializerTest {
     private val serializer: KSerializer<StrictlyPositiveDouble> =
         StrictlyPositiveDoubleSerializer

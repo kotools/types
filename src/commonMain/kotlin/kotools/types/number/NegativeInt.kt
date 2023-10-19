@@ -57,7 +57,14 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrNull(): NegativeInt? = NegativeInt.of(this)
+public fun Number.toNegativeIntOrNull(): NegativeInt? {
+    val value: Int = toInt()
+    return when {
+        value == 0 -> ZeroInt
+        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
+        else -> null
+    }
+}
 
 /**
  * Returns this number as a [NegativeInt], which may involve rounding or
@@ -80,12 +87,8 @@ public fun Number.toNegativeIntOrNull(): NegativeInt? = NegativeInt.of(this)
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrThrow(): NegativeInt {
-    val value: NegativeInt? = NegativeInt.of(this)
-    return requireNotNull(value) {
-        NegativeIntConstructionException(this).message
-    }
-}
+public fun Number.toNegativeIntOrThrow(): NegativeInt =
+    toNegativeIntOrNull() ?: throw NegativeIntConstructionException(this)
 
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
@@ -106,30 +109,6 @@ public sealed interface NegativeInt : AnyInt {
             val start: StrictlyNegativeInt =
                 StrictlyNegativeInt.range.start.value
             notEmptyRangeOf { start.inclusive to ZeroInt.inclusive }
-        }
-
-        /**
-         * Returns the given [number] as a [NegativeInt], which may involve
-         * rounding or truncation, or returns `null` if the [number] is
-         * [strictly positive][StrictlyPositiveInt].
-         *
-         * ```kotlin
-         * var result: NegativeInt? = NegativeInt.of(-1)
-         * println(result) // -1
-         *
-         * result = NegativeInt.of(0)
-         * println(result) // 0
-         *
-         * result = NegativeInt.of(1)
-         * println(result) // null
-         * ```
-         */
-        @ExperimentalNumberApi
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        public fun of(number: Number): NegativeInt? {
-            val value: Int = number.toInt()
-            return if (value > ZeroInt) null
-            else StrictlyNegativeInt.of(value) ?: ZeroInt
         }
 
         /** Returns a random [NegativeInt]. */

@@ -51,7 +51,8 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
 @ExperimentalSinceKotoolsTypes("4.3.1")
 @ExperimentalTextApi
 public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    NotBlankString.of(this)
+    takeIf { it.isNotBlank() }
+        ?.toNotBlankStringOrThrow()
 
 /**
  * Returns this string as a [NotBlankString], or throws an
@@ -72,10 +73,8 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  */
 @ExperimentalSinceKotoolsTypes("4.3.1")
 @ExperimentalTextApi
-public fun String.toNotBlankStringOrThrow(): NotBlankString {
-    val value: NotBlankString? = NotBlankString.of(this)
-    return requireNotNull(value) { NotBlankStringException.message }
-}
+public fun String.toNotBlankStringOrThrow(): NotBlankString =
+    NotBlankString(this)
 
 /**
  * Representation of strings that have at least one character, excluding
@@ -108,26 +107,6 @@ public value class NotBlankString internal constructor(
 
     /** Returns this string as a [String]. */
     override fun toString(): String = value
-
-    /** Contains static declarations for the [NotBlankString] type. */
-    public companion object {
-        /**
-         * Returns the given [string] as a [NotBlankString], or returns `null`
-         * if the [string] is [blank][CharSequence.isBlank].
-         *
-         * ```kotlin
-         * var result: NotBlankString? = NotBlankString.of("hello world")
-         * println(result) // hello world
-         *
-         * result = NotBlankString.of(" ")
-         * println(result) // null
-         * ```
-         */
-        @ExperimentalSinceKotoolsTypes("4.3.2")
-        @ExperimentalTextApi
-        public fun of(string: String): NotBlankString? =
-            if (string.isBlank()) null else NotBlankString(string)
-    }
 }
 
 /** Concatenates this string with the [other] one. */

@@ -14,8 +14,6 @@ import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.NotEmptyRange
-import kotools.types.shouldBeNotNull
-import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -51,26 +49,6 @@ class NonZeroIntCompanionTest {
     fun positiveRange_should_be_the_range_of_StrictlyPositiveInt() {
         val range: NotEmptyRange<StrictlyPositiveInt> = NonZeroInt.positiveRange
         range shouldEqual StrictlyPositiveInt.range
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun of_should_pass_with_a_Number_other_than_zero() {
-        val number: Number = setOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
-            .random()
-            .random()
-        val result: NonZeroInt? = NonZeroInt.of(number)
-        result.shouldBeNotNull()
-            .toInt()
-            .shouldEqual(number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun of_should_fail_with_zero() {
-        val number: Number = ZeroInt.toInt()
-        val result: NonZeroInt? = NonZeroInt.of(number)
-        result.shouldBeNull()
     }
 
     @Test
