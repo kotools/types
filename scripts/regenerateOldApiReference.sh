@@ -12,17 +12,15 @@ BLUE='\033[0;36m'
 GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
-echo "${BLUE}> Synchronize Gradle${NO_COLOR}"
-./gradlew -q :unit
-
-echo "${BLUE}> Get source code of version $PROJECT_VERSION${NO_COLOR}"
+echo "${BLUE}> Get source code of v$PROJECT_VERSION.${NO_COLOR}"
+rm -r src
 git checkout "$PROJECT_VERSION" -- src
 
-echo "${BLUE}> Generate latest API reference${NO_COLOR}"
+echo "${BLUE}> Generate API reference.${NO_COLOR}"
 ./gradlew -Pversion="$PROJECT_VERSION" -q :clean :dokkaHtml
 git reset --hard -q
 
-echo "${BLUE}> Archive API reference of version $PROJECT_VERSION${NO_COLOR}"
+echo "${BLUE}> Archive API reference.${NO_COLOR}"
 git checkout -q api-reference
 cp -a "api/references/$PROJECT_VERSION" versions
 git add "versions/$PROJECT_VERSION"
@@ -30,7 +28,7 @@ git diff-index --quiet HEAD || \
 git commit -qS -m "docs: archive API reference of v$PROJECT_VERSION"
 git checkout -q -
 
-echo "${BLUE}> Clean project${NO_COLOR}"
+echo "${BLUE}> Clean project.${NO_COLOR}"
 rm -r "api/references/$PROJECT_VERSION"
 
 echo "${GREEN}> SUCCESS${NO_COLOR}"
