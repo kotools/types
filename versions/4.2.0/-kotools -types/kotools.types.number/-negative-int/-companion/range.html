@@ -6,10 +6,18 @@
     <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../../";</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../../styles/style.css" rel="Stylesheet">
 <link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -21,6 +29,7 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 <link href="../../../../styles/multimodule.css" rel="Stylesheet">
 </head>
 <body>
@@ -44,16 +53,17 @@ if(savedDarkMode === true){
     </div>
     <div id="main">
 <div class="main-content" id="content" pageIds="Kotools Types::kotools.types.number/NegativeInt.Companion/range/#/PointingToDeclaration//788909594">
-  <div class="breadcrumbs"><a href="../../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../../index.html">kotools.types.number</a><span class="delimiter">/</span><a href="../index.html">NegativeInt</a><span class="delimiter">/</span><a href="index.html">Companion</a><span class="delimiter">/</span><a href="range.html">range</a></div>
+  <div class="breadcrumbs"><a href="../../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../../index.html">kotools.types.number</a><span class="delimiter">/</span><a href="../index.html">NegativeInt</a><span class="delimiter">/</span><a href="index.html">Companion</a><span class="delimiter">/</span><span class="current">range</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>range</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><a href="../../../kotools.types.experimental/-experimental-range-api/index.html"><span class="token annotation">ExperimentalRangeApi</span></a></div><div class="block"><span class="token annotation">@</span><span data-unresolved-link="kotools.types/ExperimentalSinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation">ExperimentalSinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">&quot;4.2&quot;</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">val </span><a href="range.html">range</a><span class="token operator">: </span><a href="../../../kotools.types.range/-not-empty-range/index.html">NotEmptyRange</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../index.html">NegativeInt</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">The range of values a <a href="../index.html">NegativeInt</a> can have.</p></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="../../../kotools.types.experimental/-experimental-range-api/index.html"><span class="token annotation builtin">ExperimentalRangeApi</span></a></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotools.types/ExperimentalSinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation builtin">ExperimentalSinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">&quot;4.2&quot;</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">val </span><a href="range.html">range</a><span class="token operator">: </span><a href="../../../kotools.types.range/-not-empty-range/index.html">NotEmptyRange</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../index.html">NegativeInt</a><span class="token operator">&gt;</span></div><p class="paragraph">The range of values a <a href="../index.html">NegativeInt</a> can have.</p></div></div>
 </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-        </div>
+      </div>
     </div>
 </div>
 </body>

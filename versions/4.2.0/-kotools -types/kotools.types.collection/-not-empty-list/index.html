@@ -6,10 +6,18 @@
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -21,6 +29,7 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 <link href="../../../styles/multimodule.css" rel="Stylesheet">
 </head>
 <body>
@@ -44,13 +53,13 @@ if(savedDarkMode === true){
     </div>
     <div id="main">
 <div class="main-content" id="content" pageIds="Kotools Types::kotools.types.collection/NotEmptyList///PointingToDeclaration//788909594">
-  <div class="breadcrumbs"><a href="../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../index.html">kotools.types.collection</a><span class="delimiter">/</span><a href="index.html">NotEmptyList</a></div>
+  <div class="breadcrumbs"><a href="../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../index.html">kotools.types.collection</a><span class="delimiter">/</span><span class="current">NotEmptyList</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Not</span><wbr></wbr><span>Empty</span><wbr></wbr><span><span>List</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><span data-unresolved-link="kotools.types/SinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation">SinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">&quot;4.0&quot;</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">NotEmptyList</a><span class="token operator">&lt;</span><span class="token keyword">out </span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="../-not-empty-collection/index.html">NotEmptyCollection</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Representation of lists that contain at least one element of type <a href="index.html">E</a>.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><span data-unresolved-link="kotools.types.collection/NotEmptyListSerializer///PointingToDeclaration/">NotEmptyListSerializer::class</span></span><wbr></wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotools.types/SinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation builtin">SinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">&quot;4.0&quot;</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">NotEmptyList</a><span class="token operator">&lt;</span><span class="token keyword">out </span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="../-not-empty-collection/index.html">NotEmptyCollection</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt; </span></div><p class="paragraph">Representation of lists that contain at least one element of type <a href="index.html">E</a>.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Extensions">Extensions</button></div>
     <div class="tabs-section-body">
       <h2 class="">Functions</h2>
       <div class="table" data-togglable="Functions"><a data-name="-49412910%2FFunctions%2F788909594" anchor-label="toList" id="-49412910%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
@@ -63,7 +72,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="to-list.html"><span class="token function">toList</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns all elements of this list as a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a> of type <a href="index.html">E</a>.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="to-list.html"><span class="token function">toList</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns all elements of this list as a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a> of type <a href="index.html">E</a>.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -78,7 +87,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns the string representation of this collection.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the string representation of this collection.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -89,13 +98,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="head.html">head</a></div>
+                <div><a href="head.html"><span><span>head</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-335236597%2FProperties%2F788909594"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-335236597%2FProperties%2F788909594" anchor-label="head" id="-335236597%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="head.html">head</a><span class="token operator">: </span><a href="index.html">E</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-335236597%2FProperties%2F788909594" anchor-label="head" id="-335236597%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The first element of this collection.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-335236597%2FProperties%2F788909594" anchor-label="head" id="-335236597%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="head.html">head</a><span class="token operator">: </span><a href="index.html">E</a></div><div class="brief "><a data-name="-335236597%2FProperties%2F788909594" anchor-label="head" id="-335236597%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The first element of this collection.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -104,13 +113,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="../-not-empty-collection/size.html">size</a></div>
+                <div><a href="../-not-empty-collection/size.html"><span><span>size</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1201664458%2FProperties%2F788909594"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="1201664458%2FProperties%2F788909594" anchor-label="size" id="1201664458%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-not-empty-collection/size.html">size</a><span class="token operator">: </span><a href="../../kotools.types.number/-strictly-positive-int/index.html">StrictlyPositiveInt</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1201664458%2FProperties%2F788909594" anchor-label="size" id="1201664458%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The size of this collection.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="1201664458%2FProperties%2F788909594" anchor-label="size" id="1201664458%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-not-empty-collection/size.html">size</a><span class="token operator">: </span><a href="../../kotools.types.number/-strictly-positive-int/index.html">StrictlyPositiveInt</a></div><div class="brief "><a data-name="1201664458%2FProperties%2F788909594" anchor-label="size" id="1201664458%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The size of this collection.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -119,13 +128,30 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="tail.html">tail</a></div>
+                <div><a href="tail.html"><span><span>tail</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-237868645%2FProperties%2F788909594"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-237868645%2FProperties%2F788909594" anchor-label="tail" id="-237868645%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="tail.html">tail</a><span class="token operator">: </span><a href="index.html">NotEmptyList</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-237868645%2FProperties%2F788909594" anchor-label="tail" id="-237868645%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">All elements of this collection except the <a href="head.html">first one</a>.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-237868645%2FProperties%2F788909594" anchor-label="tail" id="-237868645%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="tail.html">tail</a><span class="token operator">: </span><a href="index.html">NotEmptyList</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-237868645%2FProperties%2F788909594" anchor-label="tail" id="-237868645%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">All elements of this collection except the <a href="head.html">first one</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="tabbedcontent">Extensions</h2>
+      <div class="table" data-togglable="Extensions"><a data-name="-1872653342%2FExtensions%2F788909594" anchor-label="sizeOrZero" id="-1872653342%2FExtensions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../size-or-zero.html"><span>size</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Zero</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1872653342%2FExtensions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotools.types/SinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation builtin">SinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">&quot;4.1&quot;</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">val </span><a href="../-not-empty-collection/index.html">NotEmptyCollection</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">.</span><a href="../size-or-zero.html">sizeOrZero</a><span class="token operator">: </span><a href="../../kotools.types.number/-positive-int/index.html">PositiveInt</a></div><div class="brief "><p class="paragraph">Returns the size of this collection, or returns <a href="../../kotools.types.number/-zero-int/index.html">ZeroInt</a> if this collection is <code class="lang-kotlin">null</code>.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -134,10 +160,11 @@ if(savedDarkMode === true){
     </div>
   </div>
 </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-        </div>
+      </div>
     </div>
 </div>
 </body>
