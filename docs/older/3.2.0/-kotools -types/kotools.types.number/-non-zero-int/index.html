@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>NonZeroInt</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
+<link href="../../../styles/multimodule.css" rel="Stylesheet">
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>Kotools Types</span>
+            </a>
+    </div>
+    <div>
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;-kotools -types/kotools.types.number/-non-zero-int/index.html&quot;}"><div class="versions-dropdown">
+  <div class="versions-dropdown-button">3.2.0</div>
+  <div class="versions-dropdown-data"><a href="../../../../../-kotools -types/kotools.types.number/-non-zero-int/index.html">4.3.1</a><a href="../../../../4.3.0/-kotools -types/kotools.types.number/-non-zero-int/index.html">4.3.0</a><a href="../../../../4.2.0/-kotools -types/kotools.types.number/-non-zero-int/index.html">4.2.0</a><a href="../../../../4.1.0/-kotools -types/kotools.types.number/-non-zero-int/index.html">4.1.0</a><a href="../../../../4.0.1/-kotools -types/kotools.types.number/-non-zero-int/index.html">4.0.1</a><a href="../../../../4.0.0/-kotools -types/kotools.types.number/-non-zero-int/index.html">4.0.0</a><a href="index.html">3.2.0</a></div>
+</div>
+</dokka-template-command>    </div>
+    <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":dokkaHtml/commonMain">common</button>
+        </div>
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="Kotools Types::kotools.types.number/NonZeroInt///PointingToDeclaration//788909594">
+  <div class="breadcrumbs"><a href="../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../index.html">kotools.types.number</a><span class="delimiter">/</span><span class="current">NonZeroInt</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Non</span><wbr><span>Zero</span><wbr><span><span>Int</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><span data-unresolved-link="kotools.types.number/NonZeroIntSerializer///PointingToDeclaration/">NonZeroIntSerializer::class</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="index.html"><strike>NonZeroInt</strike></a> : <a href="../-int-holder/index.html">IntHolder</a></div><div class="deprecation-content"><h3 class="">Deprecated</h3><p class="paragraph">Use the kotools.types.NonZeroInt type instead.</p><h4 class="">Replace with</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">import kotools.types.NonZeroInt<br></code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">NonZeroInt</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><p class="paragraph">Representation of integers other than zero.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="1977981407%2FClasslikes%2F788909594" anchor-label="Companion" id="1977981407%2FClasslikes%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1977981407%2FClasslikes%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div><div class="brief "><p class="paragraph">Contains declarations for holding or building a <a href="index.html">NonZeroInt</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1752333716%2FClasslikes%2F788909594" anchor-label="ConstructionError" id="1752333716%2FClasslikes%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-construction-error/index.html"><span>Construction</span><wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1752333716%2FClasslikes%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-construction-error/index.html"><strike>ConstructionError</strike></a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></div><div class="brief "><p class="paragraph">Error thrown when creating a <a href="index.html">NonZeroInt</a> fails.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-324061716%2FFunctions%2F788909594" anchor-label="compareTo" id="-324061716%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-int-holder/compare-to.html"><span>compare</span><wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-324061716%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/compare-to.html"><span class="token function">compareTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-int-holder/compare-to.html"><span class="token function">compareTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int-holder/index.html">IntHolder</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Compares this <a href="../-int-holder/value.html">value</a> with the <a href="../-int-holder/compare-to.html">other</a> value for order. Returns zero if this <a href="../-int-holder/value.html">value</a> equals the <a href="../-int-holder/compare-to.html">other</a> value, a negative number if this <a href="../-int-holder/value.html">value</a> is less than the <a href="../-int-holder/compare-to.html">other</a> value, or a positive number if this <a href="../-int-holder/value.html">value</a> is greater than the <a href="../-int-holder/compare-to.html">other</a> value.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1935807722%2FFunctions%2F788909594" anchor-label="dec" id="-1935807722%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="dec.html"><span><span>dec</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1935807722%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="dec.html"><span class="token function">dec</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">NonZeroInt</a></div><div class="brief "><p class="paragraph">Returns this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> decremented by one. If this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> equals <code class="lang-kotlin">1</code>, it returns <code class="lang-kotlin">-1</code> instead. If this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> is the <a href="-companion/min.html">minimum</a>, it returns the <a href="-companion/max.html">maximum</a> value instead.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1561176693%2FFunctions%2F788909594" anchor-label="div" id="1561176693%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-int-holder/div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1561176693%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">NonZeroInt</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Divides this <a href="../-int-holder/value.html">value</a> by the <a href="../-int-holder/div.html">other</a> value, truncating the result to an integer that is closer to zero.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1150068410%2FFunctions%2F788909594" anchor-label="inc" id="1150068410%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="inc.html"><span><span>inc</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1150068410%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="inc.html"><span class="token function">inc</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">NonZeroInt</a></div><div class="brief "><p class="paragraph">Returns this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> incremented by one. If this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> equals <code class="lang-kotlin">-1</code>, it returns <code class="lang-kotlin">1</code> instead. If this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> is the maximum, it returns the minimum value instead.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1606367596%2FFunctions%2F788909594" anchor-label="minus" id="1606367596%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-int-holder/minus.html"><span><span>minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1606367596%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int-holder/index.html">IntHolder</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Subtracts the <a href="../-int-holder/minus.html">other</a> value from this <a href="../-int-holder/value.html">value</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-503964262%2FFunctions%2F788909594" anchor-label="plus" id="-503964262%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-int-holder/plus.html"><span><span>plus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-503964262%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int-holder/index.html">IntHolder</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Adds the <a href="../-int-holder/plus.html">other</a> value to this <a href="../-int-holder/value.html">value</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2090216035%2FFunctions%2F788909594" anchor-label="times" id="-2090216035%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-int-holder/times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2090216035%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-int-holder/times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int-holder/index.html">IntHolder</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Multiplies this <a href="../-int-holder/value.html">value</a> by the <a href="../-int-holder/times.html">other</a> value.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">NonZeroInt</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">NonZeroInt</a></div><div class="brief "><p class="paragraph">Multiplies this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span> by the <a href="times.html">other</a> value.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1771362529%2FFunctions%2F788909594" anchor-label="unaryMinus" id="1771362529%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="unary-minus.html"><span>unary</span><wbr><span><span>Minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1771362529%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="unary-minus.html"><span class="token function">unaryMinus</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">NonZeroInt</a></div><div class="brief "><p class="paragraph">Returns the negative of this <span data-unresolved-link="kotools.types.number/NonZeroInt/value/#/PointingToDeclaration/">value</span>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="-937140614%2FProperties%2F788909594" anchor-label="value" id="-937140614%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-int-holder/value.html"><span><span>value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-937140614%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-937140614%2FProperties%2F788909594" anchor-label="value" id="-937140614%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-int-holder/value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><a data-name="-937140614%2FProperties%2F788909594" anchor-label="value" id="-937140614%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The value to hold.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Inheritors</h2>
+      <div class="table" data-togglable="Inheritors"><a data-name="874136359%2FInheritors%2F788909594" anchor-label="StrictlyNegativeInt" id="874136359%2FInheritors%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-strictly-negative-int/index.html">StrictlyNegativeInt</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="874136359%2FInheritors%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-313834773%2FInheritors%2F788909594" anchor-label="StrictlyPositiveInt" id="-313834773%2FInheritors%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-strictly-positive-int/index.html">StrictlyPositiveInt</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-313834773%2FInheritors%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+
+</body></html>
+

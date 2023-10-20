@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>NotEmptyMap</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
+<link href="../../../styles/multimodule.css" rel="Stylesheet">
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>Kotools Types</span>
+            </a>
+    </div>
+    <div>
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;-kotools -types/kotools.types.collection/-not-empty-map/index.html&quot;}"><div class="versions-dropdown">
+  <div class="versions-dropdown-button">4.0.0</div>
+  <div class="versions-dropdown-data"><a href="../../../../../-kotools -types/kotools.types.collection/-not-empty-map/index.html">4.3.1</a><a href="../../../../4.3.0/-kotools -types/kotools.types.collection/-not-empty-map/index.html">4.3.0</a><a href="../../../../4.2.0/-kotools -types/kotools.types.collection/-not-empty-map/index.html">4.2.0</a><a href="../../../../4.1.0/-kotools -types/kotools.types.collection/-not-empty-map/index.html">4.1.0</a><a href="../../../../4.0.1/-kotools -types/kotools.types.collection/-not-empty-map/index.html">4.0.1</a><a href="index.html">4.0.0</a><a href="../../../../../not-found-version.html?v=3.2.0">3.2.0</a></div>
+</div>
+</dokka-template-command>    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="Kotools Types::kotools.types.collection/NotEmptyMap///PointingToDeclaration//788909594">
+  <div class="breadcrumbs"><a href="../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../index.html">kotools.types.collection</a><span class="delimiter">/</span><span class="current">NotEmptyMap</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Not</span><wbr><span>Empty</span><wbr><span><span>Map</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><span data-unresolved-link="kotools.types.collection/NotEmptyMapSerializer///PointingToDeclaration/">NotEmptyMapSerializer::class</span></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotools.types/SinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation builtin">SinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"4.0"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">NotEmptyMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">K</a><span class="token punctuation">, </span><span class="token keyword">out </span><a href="index.html">V</a><span class="token operator">&gt;</span></div><p class="paragraph">Representation of maps that contain at least one entry with a key of type <a href="index.html">K</a> and a value of type <a href="index.html">V</a>.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-781675794%2FFunctions%2F788909594" anchor-label="toMap" id="-781675794%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-map.html"><span>to</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-781675794%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="to-map.html"><span class="token function">toMap</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">K</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">V</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns all entries of this map as a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a> with keys of type <a href="index.html">K</a> and values of type <a href="index.html">V</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1995013279%2FFunctions%2F788909594" anchor-label="toString" id="1995013279%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1995013279%2FFunctions%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the string representation of this map.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="-710011489%2FProperties%2F788909594" anchor-label="entries" id="-710011489%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="entries.html"><span><span>entries</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-710011489%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-710011489%2FProperties%2F788909594" anchor-label="entries" id="-710011489%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="../-not-empty-set/index.html">NotEmptySet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/-entry/index.html">Map.Entry</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">K</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">V</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><a data-name="-710011489%2FProperties%2F788909594" anchor-label="entries" id="-710011489%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">All entries of this map.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="43655851%2FProperties%2F788909594" anchor-label="head" id="43655851%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="head.html"><span><span>head</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="43655851%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="43655851%2FProperties%2F788909594" anchor-label="head" id="43655851%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="head.html">head</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">K</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">V</a><span class="token operator">&gt;</span></div><div class="brief "><a data-name="43655851%2FProperties%2F788909594" anchor-label="head" id="43655851%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The first entry of this map.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-102809321%2FProperties%2F788909594" anchor-label="keys" id="-102809321%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="keys.html"><span><span>keys</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-102809321%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-102809321%2FProperties%2F788909594" anchor-label="keys" id="-102809321%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="keys.html">keys</a><span class="token operator">: </span><a href="../-not-empty-set/index.html">NotEmptySet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">K</a><span class="token operator">&gt;</span></div><div class="brief "><a data-name="-102809321%2FProperties%2F788909594" anchor-label="keys" id="-102809321%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">All keys of this map.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="655427498%2FProperties%2F788909594" anchor-label="size" id="655427498%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="size.html"><span><span>size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="655427498%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="655427498%2FProperties%2F788909594" anchor-label="size" id="655427498%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="size.html">size</a><span class="token operator">: </span><a href="../../kotools.types.number/-strictly-positive-int/index.html">StrictlyPositiveInt</a></div><div class="brief "><a data-name="655427498%2FProperties%2F788909594" anchor-label="size" id="655427498%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The size of this map.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="141023803%2FProperties%2F788909594" anchor-label="tail" id="141023803%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="tail.html"><span><span>tail</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="141023803%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="141023803%2FProperties%2F788909594" anchor-label="tail" id="141023803%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="tail.html">tail</a><span class="token operator">: </span><a href="index.html">NotEmptyMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">K</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">V</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="141023803%2FProperties%2F788909594" anchor-label="tail" id="141023803%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">All entries of this map except <a href="head.html">the first one</a>.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="871015977%2FProperties%2F788909594" anchor-label="values" id="871015977%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="values.html"><span><span>values</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="871015977%2FProperties%2F788909594"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="871015977%2FProperties%2F788909594" anchor-label="values" id="871015977%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="values.html">values</a><span class="token operator">: </span><a href="../-not-empty-list/index.html">NotEmptyList</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">V</a><span class="token operator">&gt;</span></div><div class="brief "><a data-name="871015977%2FProperties%2F788909594" anchor-label="values" id="871015977%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">All values of this map.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+
+</body></html>
+

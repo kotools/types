@@ -6,10 +6,18 @@
     <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../../";</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../../styles/style.css" rel="Stylesheet">
 <link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -21,6 +29,7 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
 <link href="../../../../styles/multimodule.css" rel="Stylesheet">
 </head>
 <body>
@@ -34,7 +43,7 @@ if(savedDarkMode === true){
     <div>
 <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html&quot;}"><div class="versions-dropdown">
   <div class="versions-dropdown-button">4.2.0</div>
-  <div class="versions-dropdown-data"><a href="../../../../../../-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.3.1</a><a href="../../../../../4.3.0/-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.3.0</a><a href="index.html">4.2.0</a></div>
+  <div class="versions-dropdown-data"><a href="../../../../../../-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.3.1</a><a href="../../../../../4.3.0/-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.3.0</a><a href="index.html">4.2.0</a><a href="../../../../../4.1.0/-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.1.0</a><a href="../../../../../4.0.1/-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.0.1</a><a href="../../../../../4.0.0/-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">4.0.0</a><a href="../../../../../3.2.0/-kotools -types/kotools.types.number/-strictly-positive-int/-companion/index.html">3.2.0</a></div>
 </div>
 </dokka-template-command>    </div>
     <div class="pull-right d-flex">
@@ -48,10 +57,10 @@ if(savedDarkMode === true){
     </div>
     <div id="main">
 <div class="main-content" id="content" pageids="Kotools Types::kotools.types.number/StrictlyPositiveInt.Companion///PointingToDeclaration//788909594">
-  <div class="breadcrumbs"><a href="../../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../../index.html">kotools.types.number</a><span class="delimiter">/</span><a href="../index.html">StrictlyPositiveInt</a><span class="delimiter">/</span><a href="index.html">Companion</a></div>
+  <div class="breadcrumbs"><a href="../../../../index.html">Kotools Types</a><span class="delimiter">/</span><a href="../../index.html">kotools.types.number</a><span class="delimiter">/</span><a href="../index.html">StrictlyPositiveInt</a><span class="delimiter">/</span><span class="current">Companion</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Companion</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Companion</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Contains declarations for holding or building a <a href="../index.html">StrictlyPositiveInt</a>.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Companion</a></div><p class="paragraph">Contains declarations for holding or building a <a href="../index.html">StrictlyPositiveInt</a>.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
@@ -67,7 +76,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><span data-unresolved-link="kotools.types/SinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation">SinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"3.0"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="random.html"><span class="token function">random</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../index.html">StrictlyPositiveInt</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Returns a random <a href="../index.html">StrictlyPositiveInt</a>.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotools.types/SinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation builtin">SinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"3.0"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="random.html"><span class="token function">random</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../index.html">StrictlyPositiveInt</a></div><div class="brief "><p class="paragraph">Returns a random <a href="../index.html">StrictlyPositiveInt</a>.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -78,13 +87,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="max.html">max</a></div>
+                <div><a href="max.html"><span><span>max</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="97389572%2FProperties%2F788909594"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="97389572%2FProperties%2F788909594" anchor-label="max" id="97389572%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="max.html">max</a><span class="token operator">: </span><a href="../index.html">StrictlyPositiveInt</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="97389572%2FProperties%2F788909594" anchor-label="max" id="97389572%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The maximum value a <a href="../index.html">StrictlyPositiveInt</a> can have.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="97389572%2FProperties%2F788909594" anchor-label="max" id="97389572%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="max.html">max</a><span class="token operator">: </span><a href="../index.html">StrictlyPositiveInt</a></div><div class="brief "><a data-name="97389572%2FProperties%2F788909594" anchor-label="max" id="97389572%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The maximum value a <a href="../index.html">StrictlyPositiveInt</a> can have.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -93,13 +102,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="min.html">min</a></div>
+                <div><a href="min.html"><span><span>min</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1109830954%2FProperties%2F788909594"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-1109830954%2FProperties%2F788909594" anchor-label="min" id="-1109830954%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="min.html">min</a><span class="token operator">: </span><a href="../index.html">StrictlyPositiveInt</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1109830954%2FProperties%2F788909594" anchor-label="min" id="-1109830954%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The minimum value a <a href="../index.html">StrictlyPositiveInt</a> can have.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-1109830954%2FProperties%2F788909594" anchor-label="min" id="-1109830954%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="min.html">min</a><span class="token operator">: </span><a href="../index.html">StrictlyPositiveInt</a></div><div class="brief "><a data-name="-1109830954%2FProperties%2F788909594" anchor-label="min" id="-1109830954%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The minimum value a <a href="../index.html">StrictlyPositiveInt</a> can have.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -108,13 +117,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="range.html">range</a></div>
+                <div><a href="range.html"><span><span>range</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1197846411%2FProperties%2F788909594"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="1197846411%2FProperties%2F788909594" anchor-label="range" id="1197846411%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><a href="../../../kotools.types.experimental/-experimental-range-api/index.html"><span class="token annotation">ExperimentalRangeApi</span></a></div><div class="block"><span class="token annotation">@</span><span data-unresolved-link="kotools.types/ExperimentalSinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation">ExperimentalSinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"4.2"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">val </span><a href="range.html">range</a><span class="token operator">: </span><a href="../../../kotools.types.range/-not-empty-range/index.html">NotEmptyRange</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../index.html">StrictlyPositiveInt</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1197846411%2FProperties%2F788909594" anchor-label="range" id="1197846411%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The range of values a <a href="../index.html">StrictlyPositiveInt</a> can have.</p></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="1197846411%2FProperties%2F788909594" anchor-label="range" id="1197846411%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="../../../kotools.types.experimental/-experimental-range-api/index.html"><span class="token annotation builtin">ExperimentalRangeApi</span></a></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotools.types/ExperimentalSinceKotoolsTypes///PointingToDeclaration/"><span class="token annotation builtin">ExperimentalSinceKotoolsTypes</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"4.2"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">val </span><a href="range.html">range</a><span class="token operator">: </span><a href="../../../kotools.types.range/-not-empty-range/index.html">NotEmptyRange</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../index.html">StrictlyPositiveInt</a><span class="token operator">&gt;</span></div><div class="brief "><a data-name="1197846411%2FProperties%2F788909594" anchor-label="range" id="1197846411%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><p class="paragraph">The range of values a <a href="../index.html">StrictlyPositiveInt</a> can have.</p></div></div></div>
               </div>
             </div>
           </div>
@@ -123,8 +132,9 @@ if(savedDarkMode === true){
     </div>
   </div>
 </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-        </div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
     </div>
 </div>
 
