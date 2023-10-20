@@ -17,8 +17,8 @@ rm -r src
 git checkout "$PROJECT_VERSION" -- src
 mkdir src/jvmMain
 cp -a src/main/. src/jvmMain
-rm -r src/main
-rm -r src/test
+rm -r src/main src/test packages.md
+touch packages.md
 
 echo "${BLUE}> Generate API reference.${NO_COLOR}"
 ./gradlew -Pversion="$PROJECT_VERSION" -q :clean :dokkaHtml
