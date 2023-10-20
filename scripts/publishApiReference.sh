@@ -11,7 +11,7 @@ GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
 echo "${BLUE}> Synchronize Gradle${NO_COLOR}"
-./gradlew -q :projects --dry-run
+./gradlew -q :unit
 
 PROJECT_VERSION=$(./gradlew -q :version)
 echo "${BLUE}> Project version:${NO_COLOR} $PROJECT_VERSION"

@@ -37,3 +37,5 @@ dependencies {
 
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
+
+tasks.register("unit")
