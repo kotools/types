@@ -25,20 +25,15 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-#### Security policy
-
-We've documented the [security policy](SECURITY.md) of Kotools Types indicating
-which versions are supported with security updates and how to report a security
-vulnerability (issue [#250]).
+- [Security policy](SECURITY.md) indicating which versions are supported with
+  security updates and how to report a security vulnerability (issue [#250]).
 
 [#250]: https://github.com/kotools/types/issues/250
 
 ### Fixed
 
-#### Documentation
-
-We've fixed the usage examples of the `toStrictlyNegativeIntOrThrow` function 
-(PR [#252]).
+- The usage examples in the documentation of the `toStrictlyNegativeIntOrThrow`
+  function (PR [#252]).
 
 [#252]: https://github.com/kotools/types/pull/252
 
