@@ -67,127 +67,64 @@ All notable changes to this project will be documented in this file.
 
 ## 4.3.1
 
-_Release date: 2023-09-25._
+_Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
 
-_See the [full changelog][4.3.0-4.3.1] from version [4.3.0][tag/4.3.0]._
-
-[4.3.0-4.3.1]: https://github.com/kotools/types/compare/4.3.0...4.3.1
-[tag/4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
+[4.3.0...4.3.1]: https://github.com/kotools/types/compare/4.3.0...4.3.1
 
 ### Added
 
-#### Experimental annotation for collections
+- `ExperimentalCollectionApi` annotation for marking experimental declarations
+  of the `kotools.types.collection` package (issue [#177]).
+- Experimental type converters suffixed by `OrNull` and `OrThrow` for the
+  following types:
+    - `NonZeroInt` (issue [#173])
+    - `PositiveInt` (issue [#155])
+    - `NegativeInt` (issue [#171])
+    - `StrictlyPositiveInt` (issue [#141])
+    - `StrictlyNegativeInt` (issue [#149], [@o-korpi] contributed in PR [#167])
+    - `StrictlyPositiveDouble` (issue [#132])
+    - `NotBlankString` (issue [#174])
+    - `NotEmptyList` (issue [#176])
+    - `NotEmptySet` (issue [#178])
+    - `NotEmptyMap` (issue [#179]).
 
-This version introduces an `ExperimentalCollectionApi` annotation in the
-`kotools.types.experimental` package for marking experimental declarations
-of the `kotools.types.collection` package (issue [#177] fixed by PRs [#183] and
-[#201]).
-
-[#177]: https://github.com/kotools/types/issues/177
-[#183]: https://github.com/kotools/types/pull/183
-[#201]: https://github.com/kotools/types/pull/201
-
-#### Builders suffixed by `OrNull` and `OrThrow`
-
-For aligning with Kotlin standards incrementally, like discussed in the idea
-[#104], we've added **experimental** builders that, in case of a failure,
-should return `null` if the builder is suffixed by `OrNull` or throw an
-exception if it's suffixed by `OrThrow`.
-This change applies for the following types:
-
-- `NonZeroInt` (issue [#173])
-- `PositiveInt` (issue [#155] fixed by PR [#236])
-- `NegativeInt` (issue [#171])
-- `StrictlyPositiveInt` (issue [#141] fixed by PRs [#164] and [#202])
-- `StrictlyNegativeInt` (issue [#149] fixed by PRs [#181] and [#203], and by
-  [@o-korpi] in PR [#167])
-- `StrictlyPositiveDouble` (issue [#132] fixed by PRs [#233] and [#235])
-- `NotBlankString` (issue [#174] fixed by PRs [#182] and [#204])
-- `NotEmptyList` (issue [#176])
-- `NotEmptySet` (issue [#178])
-- `NotEmptyMap` (issue [#179]).
-
-Here's an example for the `StrictlyPositiveInt` type:
-
-```kotlin
-// before
-1.toStrictlyPositiveInt().getOrNull()
-2.toStrictlyPositiveInt().getOrThrow()
-// after
-1.toStrictlyPositiveIntOrNull()
-2.toStrictlyPositiveIntOrThrow()
-```
-
+[@o-korpi]: https://github.com/o-korpi
 [#104]: https://github.com/kotools/types/discussions/104
 [#132]: https://github.com/kotools/types/issues/132
 [#141]: https://github.com/kotools/types/issues/141
 [#149]: https://github.com/kotools/types/issues/149
 [#155]: https://github.com/kotools/types/issues/155
-[#164]: https://github.com/kotools/types/pull/164
 [#167]: https://github.com/kotools/types/pull/167
 [#171]: https://github.com/kotools/types/issues/171
 [#173]: https://github.com/kotools/types/issues/173
 [#174]: https://github.com/kotools/types/issues/174
 [#176]: https://github.com/kotools/types/issues/176
+[#177]: https://github.com/kotools/types/issues/177
 [#178]: https://github.com/kotools/types/issues/178
 [#179]: https://github.com/kotools/types/issues/179
-[#181]: https://github.com/kotools/types/pull/181
-[#182]: https://github.com/kotools/types/pull/182
-[#202]: https://github.com/kotools/types/pull/202
-[#203]: https://github.com/kotools/types/pull/203
-[#204]: https://github.com/kotools/types/pull/204
-[#233]: https://github.com/kotools/types/pull/233
-[#235]: https://github.com/kotools/types/pull/235
-[#236]: https://github.com/kotools/types/pull/236
-[@o-korpi]: https://github.com/o-korpi
 
 ### Changed
 
-#### Source compatibility with Kotlin
-
-In this new version, we've improved the source compatibility with Kotlin by
-supporting its versions 1.5 through 1.7 (PR [#213]).
-
-Please note that since [Kotools Types 4.3.0], this project is compiled with
-[Kotlin 1.7.21] by default.
-
-[#213]: https://github.com/kotools/types/pull/213
-[Kotools Types 4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
-
-#### Multiple versions in API reference
-
-The configuration of the [API reference] was improved for supporting multiple
-versions, starting from version [4.2.0][tag/4.2.0] (PR [#198] and issue [#205]
-fixed by PR [#206]).
-We recommend you to only use the versions documented in the API reference for a
-better experience while working with Kotools Types.
-
-The [API reference] is also securely deployed using a [SSH deploy key] when a
-release is published (issue [#207] fixed by PR [#208]).
+- Source compatibility with Kotlin improved by supporting its versions 1.5
+  through 1.7 (PR [#213]).
+- Support multiple versions in the [API reference] starting from version 4.2.0
+  (PR [#198] and issue [#205]).
+- Secure deployments of the [API reference] by using an [SSH deploy key] (issue
+  [#207]).
+- Centralize Gradle plugins and dependencies declarations in a version catalog
+  for reducing the overall complexity of the build script (PR [#199]).
 
 [#198]: https://github.com/kotools/types/pull/198
+[#199]: https://github.com/kotools/types/pull/199
 [#205]: https://github.com/kotools/types/issues/205
-[#206]: https://github.com/kotools/types/pull/206
 [#207]: https://github.com/kotools/types/issues/207
-[#208]: https://github.com/kotools/types/pull/208
+[#213]: https://github.com/kotools/types/pull/213
 [API reference]: https://types.kotools.org
 [SSH deploy key]: https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
 
-#### Centralizing Gradle plugins and dependencies
-
-For reducing the overall complexity of the
-[Gradle build script](library/build.gradle.kts), we've centralized the plugins
-and the dependencies in a [version catalog](gradle/libs.versions.toml) instead
-of defining them in the build script (PR [#199]).
-
-[#199]: https://github.com/kotools/types/pull/199
-
 ### Fixed
 
-#### Documentation typo
-
-We've fixed a little typo in the documentation of the `notEmptyRangeOf`
-function (PR [#222]).
+- Typo in the documentation of the `notEmptyRangeOf` function (PR [#222]).
 
 [#222]: https://github.com/kotools/types/pull/222
 
