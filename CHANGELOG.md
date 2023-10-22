@@ -27,7 +27,15 @@ All notable changes to this project will be documented in this file.
 
 - [Security policy](SECURITY.md) indicating which versions are supported with
   security updates and how to report a security vulnerability (issue [#250]).
+- Versions [4.1.0], [4.0.1], [4.0.0], [3.2.0], [2.0.0] and [1.3.1] in
+  [API reference] (issue [#261]).
 
+[4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
+[4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
+[4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
+[3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
+[2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
+[1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
 [#250]: https://github.com/kotools/types/issues/250
 
 ### Changed
@@ -36,8 +44,12 @@ All notable changes to this project will be documented in this file.
   the `DeprecatedSinceKotoolsTypes` annotations from
   [BINARY][kotlin.AnnotationRetention.BINARY] to
   [SOURCE][kotlin.AnnotationRetention.SOURCE] (PR [#214]).
+- Align styles of version [4.2.0] with the latest ones in [API reference] (issue
+  [#261]).
 
+[4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#214]: https://github.com/kotools/types/pull/214
+[#261]: https://github.com/kotools/types/issues/261
 [kotlin.AnnotationRetention.BINARY]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-b-i-n-a-r-y.html
 [kotlin.AnnotationRetention.SOURCE]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-s-o-u-r-c-e.html
 
