@@ -30,6 +30,17 @@ All notable changes to this project will be documented in this file.
 
 [#250]: https://github.com/kotools/types/issues/250
 
+### Changed
+
+- Retention of the `ExperimentalSinceKotoolsTypes`, the `SinceKotoolsTypes` and
+  the `DeprecatedSinceKotoolsTypes` annotations from
+  [BINARY][kotlin.AnnotationRetention.BINARY] to
+  [SOURCE][kotlin.AnnotationRetention.SOURCE] (PR [#214]).
+
+[#214]: https://github.com/kotools/types/pull/214
+[kotlin.AnnotationRetention.BINARY]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-b-i-n-a-r-y.html
+[kotlin.AnnotationRetention.SOURCE]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-s-o-u-r-c-e.html
+
 ### Fixed
 
 - The usage examples in the documentation of the `toStrictlyNegativeIntOrThrow`
@@ -125,16 +136,6 @@ Please note that since [Kotools Types 4.3.0], this project is compiled with
 
 [#213]: https://github.com/kotools/types/pull/213
 [Kotools Types 4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
-
-#### Binary output optimization
-
-For avoiding unnecessary declarations in the binary output, we've removed the
-`ExperimentalSinceKotoolsTypes`, the `SinceKotoolsTypes` and the
-`DeprecatedSinceKotoolsTypes` annotations from it by setting their retention to
-[`SOURCE`][kotlin.AnnotationRetention.SOURCE] (PR [#214]).
-
-[#214]: https://github.com/kotools/types/pull/214
-[kotlin.AnnotationRetention.SOURCE]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-s-o-u-r-c-e.html
 
 #### Multiple versions in API reference
 
