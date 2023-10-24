@@ -5,7 +5,7 @@
 
 ## Supported Versions
 
-Here's the versions of Kotools Types that currently supported with security
+Here's the versions of Kotools Types that are currently supported with security
 updates:
 
 | Version | Supported          |
