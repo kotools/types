@@ -41,14 +41,12 @@ approved.
 
 If you would like to implement an issue, please do the following:
 
-1. Notify the maintainers by commenting in the issue that you would like to work
-   on it.
-2. [Fork Kotools Types].
-3. Create a branch from `main` with a name that follows the pattern below.
+1. [Fork Kotools Types].
+2. Create a branch from `main` with a name that follows the pattern below.
 
 ```text
 <type>/<issue-id>
-where <type> = feature | bug | documentation | security
+where <type> = automation | bug | documentation | feature | security
 and <issue-id> = the issue's identifier
 ```
 
