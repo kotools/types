@@ -42,10 +42,18 @@ Using explicit types in your code is perfect for:
 Cherry on top: Kotools Types is a multiplatform library, so you can use it in
 all your [Kotlin] projects!
 
+This project supports the following platforms:
+- [Kotlin/JVM]
+- [Kotlin/JS]
+- [Kotlin Native][kotlin-native] for Linux x64, macOS x64 and MinGW x64 systems.
+
 [kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.3.1&color=blue
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
 [kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.21-blue?logo=kotlin
+[kotlin-native]: https://kotlinlang.org/docs/native-overview.html
+[kotlin/js]: https://kotlinlang.org/docs/js-overview.html
+[kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
 [kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.4.1-blue
