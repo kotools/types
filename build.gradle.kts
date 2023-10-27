@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 /*
  * Copyright 2022-2023 Loïc Lamarque.
  * Use of this source code is governed by the MIT license.
@@ -41,7 +39,3 @@ dependencies {
 }
 
 tasks.register("unit")
-
-tasks.withType<KotlinCompile>().configureEach {
-    javaPackagePrefix = "kotools.types"
-}

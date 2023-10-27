@@ -51,6 +51,7 @@ private fun ExtensionContainer.configure() {
 
 private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
+        javaPackagePrefix = "kotools.types"
         kotlinOptions {
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             languageVersion = "1.5"
