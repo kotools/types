@@ -5,7 +5,7 @@
 
 package kotools.types
 
-import kotlin.annotation.AnnotationRetention.BINARY
+import kotlin.annotation.AnnotationRetention.SOURCE
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationTarget.PROPERTY
@@ -20,7 +20,7 @@ import kotlin.annotation.AnnotationTarget.TYPEALIAS
  * integers without leading zeros.
  */
 @MustBeDocumented
-@Retention(BINARY)
+@Retention(SOURCE)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 internal annotation class ExperimentalSinceKotoolsTypes(val version: String)
 
@@ -33,7 +33,7 @@ internal annotation class ExperimentalSinceKotoolsTypes(val version: String)
  * integers without leading zeros.
  */
 @MustBeDocumented
-@Retention(BINARY)
+@Retention(SOURCE)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 internal annotation class SinceKotoolsTypes(val version: String)
 
@@ -53,7 +53,7 @@ internal annotation class SinceKotoolsTypes(val version: String)
  * integers without leading zeros.
  */
 @MustBeDocumented
-@Retention(BINARY)
+@Retention(SOURCE)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 internal annotation class DeprecatedSinceKotoolsTypes(
     val warningSince: String,
