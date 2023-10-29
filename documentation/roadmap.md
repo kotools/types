@@ -67,6 +67,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 - Stabilization of concatenations for the `NotBlankString` type.
 - Converting collections to normal classes (because value classes are only
   useful for holding primitives).
+- Stabilization of the `Bound` and the `NotEmptyRange` types.
 
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
