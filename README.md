@@ -186,8 +186,14 @@ implementation "org.kotools:types:$version"
 ```
 </details>
 
-See the [API reference](https://types.kotools.org) for more information about
-using this library.
+## Documentation
+
+Here's useful links to additional documentation for learning more about this
+project:
+
+- [API reference][api-reference]
+- [Roadmap](documentation/roadmap.md)
+- [Security Policy](SECURITY.md)
 
 ## Community
 
@@ -226,3 +232,5 @@ as bug reports, feature suggestions and so on.
 ## License
 
 This project is licensed under the [MIT License](LICENSE.txt).
+
+[api-reference]: https://types.kotools.org
