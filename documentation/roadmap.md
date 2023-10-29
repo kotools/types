@@ -1,7 +1,7 @@
-# Kotools Types roadmap
+# Roadmap
 
 The goal of this roadmap is to give you a big picture about what is coming for
-this project.
+Kotools Types.
 
 Here’s a list of the most important things we focus on delivering:
 
