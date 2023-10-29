@@ -47,16 +47,16 @@ All notable changes to this project will be documented in this file.
 - Retention of the `ExperimentalSinceKotoolsTypes`, the `SinceKotoolsTypes` and
   the `DeprecatedSinceKotoolsTypes` annotations from
   [BINARY][kotlin.AnnotationRetention.BINARY] to
-  [SOURCE][kotlin.AnnotationRetention.SOURCE] (PR [#214]).
+  [SOURCE][kotlin.AnnotationRetention.SOURCE] (PR [#310]).
 - Flatten source code directory structure like
   [recommended by Kotlin][directory-structure-convention] (issue [#260]).
 - Align styles of version [4.2.0] with the latest ones in [API reference] (issue
   [#261]).
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
-[#214]: https://github.com/kotools/types/pull/214
 [#260]: https://github.com/kotools/types/issues/260
 [#261]: https://github.com/kotools/types/issues/261
+[#310]: https://github.com/kotools/types/pull/310
 [directory-structure-convention]: https://kotlinlang.org/docs/coding-conventions.html#directory-structure
 [kotlin.AnnotationRetention.BINARY]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-b-i-n-a-r-y.html
 [kotlin.AnnotationRetention.SOURCE]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-retention/-s-o-u-r-c-e.html
