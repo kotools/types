@@ -16,7 +16,6 @@ Here’s a list of the most important things we focus on delivering:
 
 ## Version 4.3.2 <a id="v4.3.2"></a>
 
-- Hiding internals from Java.
 - Improving documentation on the repository and on the
   [API reference][api-reference].
 - Adhering to [Semantic Versioning][semantic-versioning].
@@ -47,6 +46,7 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 ## Version 5.0.0 <a id="v5.0.0"></a>
 
 - Support [Kotlin 1.8.10][kotlin-1.8.10].
+- Hiding internals from Java (see issue [#303]).
 - New flattened type system of integer numbers.
 - Deletions:
     - Deprecated type converters using [Result][kotlin.result].
@@ -69,6 +69,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
   useful for holding primitives).
 - Stabilization of the `Bound` and the `NotEmptyRange` types.
 
+[#303]: https://github.com/kotools/types/issues/303
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
