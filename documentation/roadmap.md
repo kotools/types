@@ -27,10 +27,10 @@ Here’s a list of the most important things we focus on delivering:
 
 ### Experimental API <a id="v4.3.2-experimental-api"></a>
 
-- Moving experimental declarations to the `kotools.types.experimental` package.
 - New `ExperimentalKotoolsTypesApi` annotation.
-- Deprecation of all annotations in the `kotools.types.experimental` package
-  for using the `ExperimentalKotoolsTypesApi` annotation instead.
+- Deletion of deprecated annotations in the `kotools.types.experimental`
+  package, except the `ExperimentalKotoolsTypesApi` annotation.
+- Moving experimental declarations to the `kotools.types.experimental` package.
 - New factory functions named `of` or `from` for all types (issue [#316]).
 - Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
   types.
@@ -48,6 +48,7 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 ### Experimental API <a id="v4.4.0-experimental-api"></a>
 
+- New equality operations to bounds and ranges.
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
   [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
   [Double][kotlin.double].
@@ -63,14 +64,8 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 
 ### Stable API <a id="v5.0.0-stable-api"></a>
 
-- Removing factory functions using [Result][kotlin.result] (issue [#267]).
-- The deprecated `ResultContext` type.
-
-### Experimental API <a id="v5.0.0-experimental-api"></a>
-
-- New equality operations to bounds and ranges.
-- Deletion of deprecated annotations in the `kotools.types.experimental`
-  package, except the `ExperimentalKotoolsTypesApi` annotation.
+- Deletion of factory functions using [Result][kotlin.result] (issue [#267]).
+- Deletion of the `ResultContext` type and its declarations (issue [#270]).
 
 See the [corresponding milestone][milestone-5.0.0] for more details.
 
@@ -90,6 +85,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
 [#267]: https://github.com/kotools/types/issues/267
+[#270]: https://github.com/kotools/types/issues/270
 [#287]: https://github.com/kotools/types/discussions/287
 [#303]: https://github.com/kotools/types/issues/303
 [#312]: https://github.com/kotools/types/issues/312
