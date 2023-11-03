@@ -45,11 +45,10 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 
 ## Version 5.0.0 <a id="v5.0.0"></a>
 
-- Support [Kotlin 1.8.10][kotlin-1.8.10].
+- Support [Kotlin 1.8.10][kotlin-1.8.10] (see issue [#172]).
 - Hiding internals from Java (see issue [#303]).
-- New flattened type system of integer numbers.
 - Deletions:
-    - Deprecated type converters using [Result][kotlin.result].
+    - Factory functions using [Result][kotlin.result] (see issue [#267]).
     - Deprecated type converters suffixed by `OrThow`.
     - The deprecated `ResultContext` type.
 - Experimental API:
@@ -68,11 +67,14 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 - Converting collections to normal classes (because value classes are only
   useful for holding primitives).
 - Stabilization of the `Bound` and the `NotEmptyRange` types.
+- New flattened type system of integer numbers.
 
+[#172]: https://github.com/kotools/types/issues/172
 [#215]: https://github.com/kotools/types/issues/215
 [#262]: https://github.com/kotools/types/issues/262
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
+[#267]: https://github.com/kotools/types/issues/267
 [#287]: https://github.com/kotools/types/discussions/287
 [#303]: https://github.com/kotools/types/issues/303
 [#312]: https://github.com/kotools/types/issues/312
