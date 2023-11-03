@@ -16,16 +16,16 @@ Here’s a list of the most important things we focus on delivering:
 
 ## Version 4.3.2 <a id="v4.3.2"></a>
 
-### General
+### General <a id="v4.3.2-general"></a>
 
 - Improving documentation on the repository and on the
   [API reference][api-reference] (issue [#317]).
 
-### Stable API
+### Stable API <a id="v4.3.2-stable-api"></a>
 
 - Adhering to [Semantic Versioning][semantic-versioning] (issue [#215]).
 
-### Experimental API
+### Experimental API <a id="v4.3.2-experimental-api"></a>
 
 - Moving experimental declarations to the `kotools.types.experimental` package.
 - New `ExperimentalKotoolsTypesApi` annotation.
@@ -39,14 +39,14 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 ## Version 4.4.0 <a id="v4.4.0"></a>
 
-### Stable API
+### Stable API <a id="v4.4.0-stable-api"></a>
 
 - Stabilization of factory functions named `of` or `from`.
 - Deprecation of factory functions using [Result][kotlin.result] (issue
   [#263]).
 - Deprecation of the `ResultContext` type and its declarations (issue [#264]).
 
-### Experimental API
+### Experimental API <a id="v4.4.0-experimental-api"></a>
 
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
   [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
@@ -56,17 +56,17 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 
 ## Version 5.0.0 <a id="v5.0.0"></a>
 
-### General
+### General <a id="v5.0.0-general"></a>
 
 - Support [Kotlin 1.8.10][kotlin-1.8.10] (issue [#172]).
 - Hiding internals from Java (issue [#303]).
 
-### Stable API
+### Stable API <a id="v5.0.0-stable-api"></a>
 
 - Removing factory functions using [Result][kotlin.result] (issue [#267]).
 - The deprecated `ResultContext` type.
 
-### Experimental API
+### Experimental API <a id="v5.0.0-experimental-api"></a>
 
 - New equality operations to bounds and ranges.
 - Deletion of deprecated annotations in the `kotools.types.experimental`
