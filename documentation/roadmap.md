@@ -16,9 +16,24 @@ Here’s a list of the most important things we focus on delivering:
 
 ## Version 4.3.2 <a id="v4.3.2"></a>
 
-- Adhering to [Semantic Versioning][semantic-versioning] (see issue [#215]).
+### General
+
 - Improving documentation on the repository and on the
-  [API reference][api-reference] (see issue [#317]).
+  [API reference][api-reference] (issue [#317]).
+
+### Stable API
+
+- Adhering to [Semantic Versioning][semantic-versioning] (issue [#215]).
+
+### Experimental API
+
+- Moving experimental declarations in the `kotools.types.experimental` package.
+- New `ExperimentalKotoolsTypesApi` annotation.
+- Deprecating all annotations in the `kotools.types.experimental` package for
+  using the `ExperimentalKotoolsTypesApi` annotation instead.
+- New factory functions named `of` or `from` for all types (issue [#316]).
+- Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
+  types.
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
 
@@ -31,12 +46,6 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
     - Type converters suffixed by `OrThow` (see issue [#312]).
     - The `ResultContext` type and its declarations (see issue [#264]).
 - Experimental API:
-    - New `ExperimentalKotoolsTypesApi` annotation in the
-      `kotools.types.experimental` package.
-    - New `StrictlyPositiveDouble` type in the `kotools.types.experimental`
-      package and deprecate the same type in the `kotools.types.number` package.
-    - New `Bound` and `NotEmptyRange` types in the `kotools.types.experimental`
-      package and deprecate the same types in the `kotools.types.range` package.
     - New type converters on `ConvertibleToInt` to [Byte][kotlin.byte],
       [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
       [Double][kotlin.double].
@@ -49,7 +58,6 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 - Hiding internals from Java (see issue [#303]).
 - Deletions:
     - Factory functions using [Result][kotlin.result] (see issue [#267]).
-    - Deprecated type converters suffixed by `OrThow`.
     - The deprecated `ResultContext` type.
 - Experimental API:
     - New equality operations to bounds and ranges.
@@ -71,7 +79,6 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 
 [#172]: https://github.com/kotools/types/issues/172
 [#215]: https://github.com/kotools/types/issues/215
-[#262]: https://github.com/kotools/types/issues/262
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
 [#267]: https://github.com/kotools/types/issues/267
@@ -79,6 +86,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#303]: https://github.com/kotools/types/issues/303
 [#312]: https://github.com/kotools/types/issues/312
 [#315]: https://github.com/kotools/types/discussions/315
+[#316]: https://github.com/kotools/types/issues/316
 [#317]: https://github.com/kotools/types/issues/317
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
