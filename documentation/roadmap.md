@@ -29,8 +29,8 @@ Here’s a list of the most important things we focus on delivering:
 
 - Moving experimental declarations to the `kotools.types.experimental` package.
 - New `ExperimentalKotoolsTypesApi` annotation.
-- Deprecating all annotations in the `kotools.types.experimental` package for
-  using the `ExperimentalKotoolsTypesApi` annotation instead.
+- Deprecation of all annotations in the `kotools.types.experimental` package
+  for using the `ExperimentalKotoolsTypesApi` annotation instead.
 - New factory functions named `of` or `from` for all types (issue [#316]).
 - Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
   types.
@@ -39,35 +39,42 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 ## Version 4.4.0 <a id="v4.4.0"></a>
 
-- New `ConvertibleToInt` stable type.
-- Stabilization of type converters suffixed by `OrNull` (see issue [#262]).
-- Deprecations:
-    - Type converters using [Result][kotlin.result] (see issue [#263]).
-    - Type converters suffixed by `OrThow` (see issue [#312]).
-    - The `ResultContext` type and its declarations (see issue [#264]).
-- Experimental API:
-    - New type converters on `ConvertibleToInt` to [Byte][kotlin.byte],
-      [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
-      [Double][kotlin.double].
+### Stable API
+
+- Stabilization of factory functions named `of` or `from`.
+- Deprecation of factory functions using [Result][kotlin.result] (issue
+  [#263]).
+- Deprecation of the `ResultContext` type and its declarations (issue [#264]).
+
+### Experimental API
+
+- New type converters on `AnyInt` to [Byte][kotlin.byte],
+  [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
+  [Double][kotlin.double].
 
 See the [corresponding milestone][milestone-4.4.0] for more details.
 
 ## Version 5.0.0 <a id="v5.0.0"></a>
 
-- Support [Kotlin 1.8.10][kotlin-1.8.10] (see issue [#172]).
-- Hiding internals from Java (see issue [#303]).
-- Deletions:
-    - Factory functions using [Result][kotlin.result] (see issue [#267]).
-    - The deprecated `ResultContext` type.
-- Experimental API:
-    - New equality operations to bounds and ranges.
-    - Removing experimental declarations from the stable API.
-    - Removing annotations from the `kotools.types.experimental` package, except
-      the `ExperimentalKotoolsTypesApi` annotation.
+### General
+
+- Support [Kotlin 1.8.10][kotlin-1.8.10] (issue [#172]).
+- Hiding internals from Java (issue [#303]).
+
+### Stable API
+
+- Removing factory functions using [Result][kotlin.result] (issue [#267]).
+- The deprecated `ResultContext` type.
+
+### Experimental API
+
+- New equality operations to bounds and ranges.
+- Deletion of deprecated annotations in the `kotools.types.experimental`
+  package, except the `ExperimentalKotoolsTypesApi` annotation.
 
 See the [corresponding milestone][milestone-5.0.0] for more details.
 
-## Unplanned
+## Discussing
 
 - Support [Kotlin 1.8.22][kotlin-1.8.22].
 - Support [Kotlin 1.9.10][kotlin-1.9.10].
@@ -76,6 +83,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
   useful for holding primitives).
 - Stabilization of the `Bound` and the `NotEmptyRange` types.
 - New flattened type system of integer numbers.
+- Converting extension functions to member functions.
 
 [#172]: https://github.com/kotools/types/issues/172
 [#215]: https://github.com/kotools/types/issues/215
