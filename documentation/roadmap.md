@@ -1,3 +1,8 @@
+<!--
+    Copyright 2023 Loïc Lamarque.
+    Use of this source code is governed by the MIT license.
+-->
+
 # Roadmap
 
 The goal of this roadmap is to give you a big picture about what is coming for
