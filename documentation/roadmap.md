@@ -16,9 +16,9 @@ Here’s a list of the most important things we focus on delivering:
 
 ## Version 4.3.2 <a id="v4.3.2"></a>
 
+- Adhering to [Semantic Versioning][semantic-versioning] (see issue [#215]).
 - Improving documentation on the repository and on the
-  [API reference][api-reference].
-- Adhering to [Semantic Versioning][semantic-versioning].
+  [API reference][api-reference] (see issue [#317]).
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
 
@@ -69,6 +69,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
   useful for holding primitives).
 - Stabilization of the `Bound` and the `NotEmptyRange` types.
 
+[#215]: https://github.com/kotools/types/issues/215
 [#262]: https://github.com/kotools/types/issues/262
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
@@ -76,6 +77,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#303]: https://github.com/kotools/types/issues/303
 [#312]: https://github.com/kotools/types/issues/312
 [#315]: https://github.com/kotools/types/discussions/315
+[#317]: https://github.com/kotools/types/issues/317
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
