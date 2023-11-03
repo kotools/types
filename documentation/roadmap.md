@@ -5,12 +5,12 @@ Kotools Types.
 
 Here’s a list of the most important things we focus on delivering:
 
-- **Aligning type converters with our design goals on error handling** by
-  suffixing them with `OrNull` if they can fail, or by not suffixing them if
-  they shouldn't fail, for being agnostic about how users handle errors.
-- **Clearing separation of the experimental API from the stable API** by
+- **Aligning factory functions with Java & Kotlin standards** by representing
+  possible failures with the `null` expression and by conventioning their name
+  (see discussion [#315]).
+- **Clearing separation between the experimental API and the stable API** by
   centralizing experimental declarations in the `kotools.types.experimental`
-  package.
+  package (see discussion [#287]).
 - **Adhering back to [Semantic Versioning][semantic-versioning]** for
   communicating clearly what's changed in the stable API.
 
@@ -72,8 +72,10 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#262]: https://github.com/kotools/types/issues/262
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
+[#287]: https://github.com/kotools/types/discussions/287
 [#303]: https://github.com/kotools/types/issues/303
 [#312]: https://github.com/kotools/types/issues/312
+[#315]: https://github.com/kotools/types/discussions/315
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
