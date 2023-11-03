@@ -18,12 +18,8 @@ Here’s a list of the most important things we focus on delivering:
 
 ### General <a id="v4.3.2-general"></a>
 
-- Improving documentation on the repository and on the
-  [API reference][api-reference] (issue [#317]).
-
-### Stable API <a id="v4.3.2-stable-api"></a>
-
-- Adhering to [Semantic Versioning][semantic-versioning] (issue [#215]).
+- Documentation of this project's versioning strategy (issue [#215]).
+- Documentation of this project's declarations lifecycle (issue [#307]).
 
 ### Experimental API <a id="v4.3.2-experimental-api"></a>
 
@@ -95,10 +91,10 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#270]: https://github.com/kotools/types/issues/270
 [#287]: https://github.com/kotools/types/discussions/287
 [#303]: https://github.com/kotools/types/issues/303
+[#307]: https://github.com/kotools/types/issues/307
 [#312]: https://github.com/kotools/types/issues/312
 [#315]: https://github.com/kotools/types/discussions/315
 [#316]: https://github.com/kotools/types/issues/316
-[#317]: https://github.com/kotools/types/issues/317
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
