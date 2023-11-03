@@ -7,10 +7,10 @@ Here’s a list of the most important things we focus on delivering:
 
 - **Aligning factory functions with Java & Kotlin standards** by representing
   possible failures with the `null` expression and by conventioning their name
-  (see discussion [#315]).
+  (discussion [#315]).
 - **Clearing separation between the experimental API and the stable API** by
   centralizing experimental declarations in the `kotools.types.experimental`
-  package (see discussion [#287]).
+  package (discussion [#287]).
 - **Adhering back to [Semantic Versioning][semantic-versioning]** for
   communicating clearly what's changed in the stable API.
 
