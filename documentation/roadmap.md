@@ -31,11 +31,19 @@ Here’s a list of the most important things we focus on delivering:
 - Deletion of deprecated annotations in the `kotools.types.experimental`
   package, except the `ExperimentalKotoolsTypesApi` annotation.
 - Moving experimental declarations to the `kotools.types.experimental` package.
+
+See the [corresponding milestone][milestone-4.3.2] for more details.
+
+## Version 4.3.3 <a id="v4.3.3"></a>
+
+### Experimental API <a id="v4.3.3-experimental-api"></a>
+
 - New factory functions named `of` or `from` for all types (issue [#316]).
 - Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
   types.
+- New equality operations to bounds and ranges.
 
-See the [corresponding milestone][milestone-4.3.2] for more details.
+See the [corresponding milestone][milestone-4.3.3] for more details.
 
 ## Version 4.4.0 <a id="v4.4.0"></a>
 
@@ -48,7 +56,6 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 ### Experimental API <a id="v4.4.0-experimental-api"></a>
 
-- New equality operations to bounds and ranges.
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
   [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
   [Double][kotlin.double].
@@ -103,6 +110,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [kotlin.result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
 [kotlin.short]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short
 [milestone-4.3.2]: https://github.com/kotools/types/milestone/22
+[milestone-4.3.3]: https://github.com/kotools/types/milestone/29
 [milestone-4.4.0]: https://github.com/kotools/types/milestone/7
 [milestone-5.0.0]: https://github.com/kotools/types/milestone/27
 [semantic-versioning]: https://semver.org
