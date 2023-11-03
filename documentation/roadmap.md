@@ -27,7 +27,7 @@ Here’s a list of the most important things we focus on delivering:
 
 ### Experimental API
 
-- Moving experimental declarations in the `kotools.types.experimental` package.
+- Moving experimental declarations to the `kotools.types.experimental` package.
 - New `ExperimentalKotoolsTypesApi` annotation.
 - Deprecating all annotations in the `kotools.types.experimental` package for
   using the `ExperimentalKotoolsTypesApi` annotation instead.
