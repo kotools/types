@@ -188,8 +188,7 @@ implementation "org.kotools:types:$version"
 
 ## Documentation
 
-Here's useful links to additional documentation for learning more about this
-project:
+Here's additional documentation for learning more about this project:
 
 - [API reference][api-reference]
 - [Roadmap](documentation/roadmap.md)
