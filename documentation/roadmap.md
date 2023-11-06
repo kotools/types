@@ -43,7 +43,11 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 - New factory functions named `of` or `from` for all types (issue [#316]).
 - Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
   types (issue [#258]).
-- New equality operations to bounds and ranges.
+- New equality operations for the `Bound` type.
+- New equality operations for the `NotEmptyRange` type.
+- New type converters on `AnyInt` to [Byte][kotlin.byte],
+  [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
+  [Double][kotlin.double].
 
 See the [corresponding milestone][milestone-4.3.3] for more details.
 
@@ -55,12 +59,6 @@ See the [corresponding milestone][milestone-4.3.3] for more details.
 - Deprecation of factory functions using [Result][kotlin.result] (issue
   [#263]).
 - Deprecation of the `ResultContext` type and its declarations (issue [#264]).
-
-### Experimental API <a id="v4.4.0-experimental-api"></a>
-
-- New type converters on `AnyInt` to [Byte][kotlin.byte],
-  [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
-  [Double][kotlin.double].
 
 See the [corresponding milestone][milestone-4.4.0] for more details.
 
