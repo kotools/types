@@ -1,5 +1,5 @@
 <!--
-    Copyright 2023 Loïc Lamarque.
+    Copyright 2023 Kotools.
     Use of this source code is governed by the MIT license.
 -->
 
