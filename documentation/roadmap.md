@@ -42,7 +42,7 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 - New factory functions named `of` or `from` for all types (issue [#316]).
 - Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
-  types.
+  types (issue [#258]).
 - New equality operations to bounds and ranges.
 
 See the [corresponding milestone][milestone-4.3.3] for more details.
@@ -96,6 +96,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#172]: https://github.com/kotools/types/issues/172
 [#191]: https://github.com/kotools/types/issues/191
 [#215]: https://github.com/kotools/types/issues/215
+[#258]: https://github.com/kotools/types/issues/258
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
 [#267]: https://github.com/kotools/types/issues/267
