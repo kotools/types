@@ -15,7 +15,7 @@ Here’s a list of the most important things we focus on delivering:
   (discussion [#315]).
 - **Clearing separation between the experimental API and the stable API** by
   centralizing experimental declarations in the `kotools.types.experimental`
-  package (discussion [#287]).
+  package (issue [#319]).
 - **Adhering back to [Semantic Versioning][semantic-versioning]** for
   communicating clearly what's changed in the stable API (issue [#215]).
 
@@ -101,7 +101,6 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#264]: https://github.com/kotools/types/issues/264
 [#267]: https://github.com/kotools/types/issues/267
 [#270]: https://github.com/kotools/types/issues/270
-[#287]: https://github.com/kotools/types/discussions/287
 [#303]: https://github.com/kotools/types/issues/303
 [#307]: https://github.com/kotools/types/issues/307
 [#312]: https://github.com/kotools/types/issues/312
