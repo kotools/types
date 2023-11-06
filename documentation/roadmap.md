@@ -47,7 +47,7 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 - New equality operations for the `NotEmptyRange` type (issue [#225]).
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
   [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
-  [Double][kotlin.double].
+  [Double][kotlin.double] (issue [#320]).
 
 See the [corresponding milestone][milestone-4.3.3] for more details.
 
@@ -109,6 +109,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#316]: https://github.com/kotools/types/issues/316
 [#318]: https://github.com/kotools/types/issues/318
 [#319]: https://github.com/kotools/types/issues/319
+[#320]: https://github.com/kotools/types/issues/320
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
