@@ -78,10 +78,6 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 - Deletion of factory functions using [Result][kotlin.result] (issue [#267]).
 - Deletion of the `ResultContext` type and its declarations (issue [#270]).
 
-### Experimental API <a id="v5.0.0-experimental-api"></a>
-
-- Remove deprecated annotations in the `kotools.types.experimental` package.
-
 See the [corresponding milestone][milestone-5.0.0] for more details.
 
 ## Discussing
