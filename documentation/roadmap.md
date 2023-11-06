@@ -30,7 +30,7 @@ Here’s a list of the most important things we focus on delivering:
 
 - New `ExperimentalKotoolsTypesApi` annotation (issue [#191]).
 - Deprecate annotations in the `kotools.types.experimental` package for using
-  the `ExperimentalKotoolsTypesApi` annotation.
+  the `ExperimentalKotoolsTypesApi` annotation (issue [#318]).
 - Moving experimental declarations to the `kotools.types.experimental` package.
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
@@ -105,6 +105,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#312]: https://github.com/kotools/types/issues/312
 [#315]: https://github.com/kotools/types/discussions/315
 [#316]: https://github.com/kotools/types/issues/316
+[#318]: https://github.com/kotools/types/issues/318
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
