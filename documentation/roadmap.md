@@ -23,14 +23,14 @@ Here’s a list of the most important things we focus on delivering:
 
 ### General <a id="v4.3.2-general"></a>
 
-- Documentation of this project's versioning strategy (issue [#215]).
-- Documentation of this project's declarations lifecycle (issue [#307]).
+- Documentation of the versioning strategy (issue [#215]).
+- Documentation of the declarations lifecycle (issue [#307]).
 
 ### Experimental API <a id="v4.3.2-experimental-api"></a>
 
-- New `ExperimentalKotoolsTypesApi` annotation.
-- Deletion of deprecated annotations in the `kotools.types.experimental`
-  package, except the `ExperimentalKotoolsTypesApi` annotation.
+- New `ExperimentalKotoolsTypesApi` annotation (issue [#191]).
+- Deprecate annotations in the `kotools.types.experimental` package for using
+  the `ExperimentalKotoolsTypesApi` annotation.
 - Moving experimental declarations to the `kotools.types.experimental` package.
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
@@ -75,6 +75,10 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 - Deletion of factory functions using [Result][kotlin.result] (issue [#267]).
 - Deletion of the `ResultContext` type and its declarations (issue [#270]).
 
+### Experimental API <a id="v5.0.0-experimental-api"></a>
+
+- Remove deprecated annotations in the `kotools.types.experimental` package.
+
 See the [corresponding milestone][milestone-5.0.0] for more details.
 
 ## Discussing
@@ -89,6 +93,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 - Converting extension functions to member functions.
 
 [#172]: https://github.com/kotools/types/issues/172
+[#191]: https://github.com/kotools/types/issues/191
 [#215]: https://github.com/kotools/types/issues/215
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
