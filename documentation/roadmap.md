@@ -60,6 +60,10 @@ See the [corresponding milestone][milestone-4.3.3] for more details.
   [#263]).
 - Deprecation of the `ResultContext` type and its declarations (issue [#264]).
 
+### Experimental API <a id="v4.4.0-experimental-api"></a>
+
+- Deletion of `Result.flatMap` function (issue [#125]).
+
 See the [corresponding milestone][milestone-4.4.0] for more details.
 
 ## Version 5.0.0 <a id="v5.0.0"></a>
@@ -91,6 +95,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 - New flattened type system of integer numbers.
 - Converting extension functions to member functions.
 
+[#125]: https://github.com/kotools/types/issues/125
 [#172]: https://github.com/kotools/types/issues/172
 [#191]: https://github.com/kotools/types/issues/191
 [#215]: https://github.com/kotools/types/issues/215
