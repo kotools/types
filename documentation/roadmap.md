@@ -43,7 +43,7 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 - New factory functions named `of` or `from` for all types (issue [#316]).
 - Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
   types (issue [#258]).
-- New equality operations for the `Bound` type.
+- New equality operations for the `Bound` type (issue [#223]).
 - New equality operations for the `NotEmptyRange` type.
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
   [Short][kotlin.short], [Long][kotlin.long], [Float][kotlin.float] and
@@ -94,6 +94,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#172]: https://github.com/kotools/types/issues/172
 [#191]: https://github.com/kotools/types/issues/191
 [#215]: https://github.com/kotools/types/issues/215
+[#223]: https://github.com/kotools/types/issues/223
 [#258]: https://github.com/kotools/types/issues/258
 [#263]: https://github.com/kotools/types/issues/263
 [#264]: https://github.com/kotools/types/issues/264
