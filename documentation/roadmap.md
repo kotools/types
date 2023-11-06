@@ -29,9 +29,9 @@ Here’s a list of the most important things we focus on delivering:
 ### Experimental API <a id="v4.3.2-experimental-api"></a>
 
 - New `ExperimentalKotoolsTypesApi` annotation (issue [#191]).
-- Deprecate annotations in the `kotools.types.experimental` package for using
-  the `ExperimentalKotoolsTypesApi` annotation (issue [#318]).
 - Moving experimental declarations to the `kotools.types.experimental` package.
+- Deletion of annotations in the `kotools.types.experimental` package, except
+  the `ExperimentalKotoolsTypesApi` annotation (issue [#318]).
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
 
