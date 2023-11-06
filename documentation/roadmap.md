@@ -55,7 +55,7 @@ See the [corresponding milestone][milestone-4.3.3] for more details.
 
 ### Stable API <a id="v4.4.0-stable-api"></a>
 
-- Stabilization of factory functions named `of` or `from`.
+- Stabilization of factory functions named `of` or `from` (issue [#321]).
 - Deprecation of factory functions using [Result][kotlin.result] (issue
   [#263]).
 - Deprecation of the `ResultContext` type and its declarations (issue [#264]).
@@ -109,6 +109,7 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 [#318]: https://github.com/kotools/types/issues/318
 [#319]: https://github.com/kotools/types/issues/319
 [#320]: https://github.com/kotools/types/issues/320
+[#321]: https://github.com/kotools/types/issues/321
 [api-reference]: https://types.kotools.org
 [kotlin-1.8.10]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.10
 [kotlin-1.8.22]: https://github.com/JetBrains/kotlin/releases/tag/v1.8.22
