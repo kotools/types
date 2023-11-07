@@ -82,14 +82,15 @@ See the [corresponding milestone][milestone-5.0.0] for more details.
 
 ## Discussing
 
-- Support [Kotlin 1.8.22][kotlin-1.8.22].
-- Support [Kotlin 1.9.10][kotlin-1.9.10].
 - Stabilization of concatenations for the `NotBlankString` type.
+- Stabilization of the `Bound` and the `NotEmptyRange` types.
+- New `ZeroDouble`, `StrictlyNegativeDouble`, `PositiveDouble`, `NonZeroDouble`,
+  `NegativeDouble` and `AnyDouble` types.
 - Converting collections to normal classes (because value classes are only
   useful for holding primitives).
-- Stabilization of the `Bound` and the `NotEmptyRange` types.
-- New flattened type system of integer numbers.
 - Converting extension functions to member functions.
+- Support [Kotlin 1.8.22][kotlin-1.8.22].
+- Support [Kotlin 1.9.10][kotlin-1.9.10].
 
 [#125]: https://github.com/kotools/types/issues/125
 [#172]: https://github.com/kotools/types/issues/172
