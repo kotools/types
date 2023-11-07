@@ -34,6 +34,8 @@ All notable changes to this project will be documented in this file.
 - Copyright notice at the top of each relevant file (issue [#257]).
 - Versioning strategy documentation (issue [#215]).
 - Template for release notes (issue [#283]).
+- The `ExperimentalKotoolsTypesApi` annotation for marking experimental
+  declarations of this project (issue [#191]).
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -42,6 +44,7 @@ All notable changes to this project will be documented in this file.
 [2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
 [1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
 [#215]: https://github.com/kotools/types/issues/215
+[#191]: https://github.com/kotools/types/issues/191
 [#250]: https://github.com/kotools/types/issues/250
 [#257]: https://github.com/kotools/types/issues/257
 [#283]: https://github.com/kotools/types/issues/283

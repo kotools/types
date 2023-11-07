@@ -112,6 +112,9 @@ public final class kotools/types/collection/NotEmptySetKt {
 public abstract interface annotation class kotools/types/experimental/ExperimentalCollectionApi : java/lang/annotation/Annotation {
 }
 
+public abstract interface annotation class kotools/types/experimental/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
+}
+
 public abstract interface annotation class kotools/types/experimental/ExperimentalNumberApi : java/lang/annotation/Annotation {
 }
 
