@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 - Versions [4.1.0], [4.0.1], [4.0.0], [3.2.0], [2.0.0] and [1.3.1] in
   [API reference] (issue [#261]).
 - Copyright notice at the top of each relevant file (issue [#257]).
+- Versioning strategy documentation (issue [#215]).
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -39,6 +40,7 @@ All notable changes to this project will be documented in this file.
 [3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
 [2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
 [1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
+[#215]: https://github.com/kotools/types/issues/215
 [#250]: https://github.com/kotools/types/issues/250
 [#257]: https://github.com/kotools/types/issues/257
 

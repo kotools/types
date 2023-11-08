@@ -193,6 +193,7 @@ Here's additional documentation for learning more about this project:
 - [API reference][api-reference]
 - [Roadmap](documentation/roadmap.md)
 - [Security Policy](SECURITY.md)
+- [Versioning strategy](documentation/versioning-strategy.md)
 
 ## Community
 
