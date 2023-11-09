@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
   [API reference] (issue [#261]).
 - Copyright notice at the top of each relevant file (issue [#257]).
 - Versioning strategy documentation (issue [#215]).
+- Template for release notes (issue [#283]).
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -43,6 +44,7 @@ All notable changes to this project will be documented in this file.
 [#215]: https://github.com/kotools/types/issues/215
 [#250]: https://github.com/kotools/types/issues/250
 [#257]: https://github.com/kotools/types/issues/257
+[#283]: https://github.com/kotools/types/issues/283
 
 ### Changed
 
