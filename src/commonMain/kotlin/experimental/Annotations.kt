@@ -12,9 +12,12 @@ import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationTarget.PROPERTY
 import kotlin.annotation.AnnotationTarget.TYPEALIAS
 
+private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
+        " and can be incompatibly changed in the future."
+
 /** Marks declarations that are still **experimental** in the collection API. */
 @MustBeDocumented
-@RequiresOptIn
+@RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @SinceKotoolsTypes("4.3.1")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -22,7 +25,7 @@ public annotation class ExperimentalCollectionApi
 
 /** Marks declarations that are still **experimental** in the number API. */
 @MustBeDocumented
-@RequiresOptIn
+@RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @SinceKotoolsTypes("4.2")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -30,7 +33,7 @@ public annotation class ExperimentalNumberApi
 
 /** Marks declarations that are still **experimental** in the range API. */
 @MustBeDocumented
-@RequiresOptIn
+@RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @SinceKotoolsTypes("4.2")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -38,7 +41,7 @@ public annotation class ExperimentalRangeApi
 
 /** Marks declarations that are still **experimental** in the result API. */
 @MustBeDocumented
-@RequiresOptIn
+@RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @SinceKotoolsTypes("4.2")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -46,7 +49,7 @@ public annotation class ExperimentalResultApi
 
 /** Marks declarations that are still **experimental** in the text API. */
 @MustBeDocumented
-@RequiresOptIn
+@RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @SinceKotoolsTypes("4.2")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
