@@ -9,7 +9,7 @@ import kotlin.annotation.AnnotationTarget.TYPEALIAS
 
 /** Marks declarations that are still **experimental** in the API. */
 @MustBeDocumented
-@RequiresOptIn
+@RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @SinceKotoolsTypes("4.3.2")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)

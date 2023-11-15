@@ -11,8 +11,10 @@ import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationTarget.PROPERTY
 import kotlin.annotation.AnnotationTarget.TYPEALIAS
+import kotlin.jvm.JvmSynthetic
 
-private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
+@JvmSynthetic
+internal const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
         " and can be incompatibly changed in the future."
 
 /** Marks declarations that are still **experimental** in the collection API. */
