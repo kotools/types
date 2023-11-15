@@ -31,8 +31,8 @@ Here’s a list of the most important things we focus on delivering:
 - New `ExperimentalKotoolsTypesApi` annotation (issue [#191]).
 - Moving experimental declarations to the `kotools.types.experimental` package
   (issue [#319]).
-- Deletion of annotations in the `kotools.types.experimental` package, except
-  the `ExperimentalKotoolsTypesApi` annotation (issue [#318]).
+- Deprecation of annotations in the `kotools.types.experimental` package, except
+  the `ExperimentalKotoolsTypesApi` annotation.
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
 
@@ -77,6 +77,11 @@ See the [corresponding milestone][milestone-4.4.0] for more details.
 
 - Deletion of factory functions using [Result][kotlin.result] (issue [#267]).
 - Deletion of the `ResultContext` type and its declarations (issue [#270]).
+
+### Experimental API <a id="v5.0.0-experimental-api"></a>
+
+- Deletion of deprecated annotations in the `kotools.types.experimental`
+  package (issue [#318]).
 
 See the [corresponding milestone][milestone-5.0.0] for more details.
 
