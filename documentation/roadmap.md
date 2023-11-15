@@ -31,8 +31,6 @@ Here’s a list of the most important things we focus on delivering:
 - New `ExperimentalKotoolsTypesApi` annotation (issue [#191]).
 - Moving experimental declarations to the `kotools.types.experimental` package
   (issue [#319]).
-- Deprecation of annotations in the `kotools.types.experimental` package, except
-  the `ExperimentalKotoolsTypesApi` annotation (issue [#327]).
 
 See the [corresponding milestone][milestone-4.3.2] for more details.
 
@@ -62,6 +60,8 @@ See the [corresponding milestone][milestone-4.3.3] for more details.
 
 ### Experimental API <a id="v4.4.0-experimental-api"></a>
 
+- Deprecation of annotations in the `kotools.types.experimental` package, except
+  the `ExperimentalKotoolsTypesApi` annotation (issue [#327]).
 - Deletion of `Result.flatMap` function (issue [#125]).
 
 See the [corresponding milestone][milestone-4.4.0] for more details.
