@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 - Template for release notes (issue [#283]).
 - The `ExperimentalKotoolsTypesApi` annotation for marking experimental
   declarations of this project (issue [#191]).
+- Declarations lifecycle documentation (issue [#307]).
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -48,6 +49,7 @@ All notable changes to this project will be documented in this file.
 [#250]: https://github.com/kotools/types/issues/250
 [#257]: https://github.com/kotools/types/issues/257
 [#283]: https://github.com/kotools/types/issues/283
+[#307]: https://github.com/kotools/types/issues/307
 
 ### Changed
 
