@@ -33,24 +33,6 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     }
 }
 
-/**
- * Returns this number as a [NonZeroInt], which may involve rounding or
- * truncation, or throws [IllegalArgumentException] if this number equals
- * [zero][ZeroInt].
- *
- * ```kotlin
- * var result: NonZeroInt = 1.toNonZeroIntOrThrow()
- * println(result) // 1
- *
- * 0.toNonZeroIntOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrThrow(): NonZeroInt = toNonZeroInt()
-    .getOrNull()
-    ?: throw NonZeroIntConstructionException
-
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
 @SinceKotoolsTypes("1.1")
