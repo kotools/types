@@ -29,6 +29,8 @@ Here’s a list of the most important things we focus on delivering:
 ### Experimental API <a id="v4.3.2-experimental-api"></a>
 
 - New `ExperimentalKotoolsTypesApi` annotation (issue [#191]).
+- Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
+  types (issue [#258]).
 - Moving experimental declarations to the `kotools.types.experimental` package
   (issue [#319]).
 
@@ -39,8 +41,6 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 ### Experimental API <a id="v4.3.3-experimental-api"></a>
 
 - New factory functions named `of` or `from` for all types (issue [#316]).
-- Deletion of factory functions suffixed by `OrNull` and `OrThrow` for all
-  types (issue [#258]).
 - New equality operations for the `Bound` type (issue [#223]).
 - New equality operations for the `NotEmptyRange` type (issue [#225]).
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
