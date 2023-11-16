@@ -65,6 +65,13 @@ All notable changes to this project will be documented in this file.
 [#328]: https://github.com/kotools/types/pull/328
 [directory-structure-convention]: https://kotlinlang.org/docs/coding-conventions.html#directory-structure
 
+### Removed
+
+- The **experimental** factory function named `toNonZeroIntOrNull` (issue
+  [#258]).
+
+[#258]: https://github.com/kotools/types/issues/258
+
 ### Fixed
 
 - The usage examples in the documentation of the `toStrictlyNegativeIntOrThrow`

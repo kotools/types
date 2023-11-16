@@ -35,33 +35,6 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
 
 /**
  * Returns this number as a [NonZeroInt], which may involve rounding or
- * truncation, or returns `null` if this number equals [zero][ZeroInt].
- *
- * ```kotlin
- * var result: NonZeroInt? = 1.toNonZeroIntOrNull()
- * println(result) // 1
- *
- * result = 0.toNonZeroIntOrNull()
- * println(null) // 0
- * ```
- *
- * You can use the [toNonZeroIntOrThrow] function for throwing an
- * [IllegalArgumentException] instead of returning `null` when this number
- * equals [zero][ZeroInt].
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
-    val value: Int = toInt()
-    return when {
-        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
-        value.isStrictlyNegative() -> StrictlyNegativeInt(value)
-        else -> null
-    }
-}
-
-/**
- * Returns this number as a [NonZeroInt], which may involve rounding or
  * truncation, or throws [IllegalArgumentException] if this number equals
  * [zero][ZeroInt].
  *
@@ -71,15 +44,12 @@ public fun Number.toNonZeroIntOrNull(): NonZeroInt? {
  *
  * 0.toNonZeroIntOrThrow() // IllegalArgumentException
  * ```
- *
- * You can use the [toNonZeroIntOrNull] function for returning `null` instead
- * of throwing an [IllegalArgumentException] when this number equals
- * [zero][ZeroInt].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNonZeroIntOrThrow(): NonZeroInt =
-    toNonZeroIntOrNull() ?: throw NonZeroIntConstructionException
+public fun Number.toNonZeroIntOrThrow(): NonZeroInt = toNonZeroInt()
+    .getOrNull()
+    ?: throw NonZeroIntConstructionException
 
 /** Representation of integers other than [zero][ZeroInt]. */
 @Serializable(NonZeroIntSerializer::class)
