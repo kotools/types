@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -82,28 +83,30 @@ class NonZeroIntTest {
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
-        // GIVEN
-        val x: NonZeroInt = NonZeroInt.random()
-        // WHEN
-        val result: NonZeroInt = -x
-        // THEN
-        result.toInt() shouldEqual -x.toInt()
+        val number: NonZeroInt = NonZeroInt.random()
+        val actual: NonZeroInt = -number
+        val expected: NonZeroInt = number.toInt()
+            .unaryMinus()
+            .toNonZeroIntOrFailure()
+        assertEquals(expected, actual)
     }
 
     @Test
     fun int_div_should_pass_with_a_NonZeroInt() {
         val x: Int = Random.nextInt()
         val y: NonZeroInt = NonZeroInt.random()
-        val result: Int = x / y
-        result shouldEqual x / y.toInt()
+        val actual: Int = x / y
+        val expected: Int = x / y.toInt()
+        assertEquals(expected, actual)
     }
 
     @Test
     fun int_rem_should_return_an_Int_with_a_NonZeroInt() {
         val x: Int = Random.nextInt()
         val y: NonZeroInt = NonZeroInt.random()
-        val result: Int = x % y
-        result shouldEqual x % y.toInt()
+        val actual: Int = x % y
+        val expected: Int = x % y.toInt()
+        assertEquals(expected, actual)
     }
 }
 
@@ -140,3 +143,7 @@ class NonZeroIntSerializerTest {
         exception.shouldHaveAMessage()
     }
 }
+
+private fun Number.toNonZeroIntOrFailure(): NonZeroInt = toNonZeroInt()
+    .getOrNull()
+    ?: unexpectedCreationFailure<NonZeroInt>(value = this)
