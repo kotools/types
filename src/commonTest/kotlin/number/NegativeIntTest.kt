@@ -127,12 +127,13 @@ class NegativeIntTest {
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
-        // GIVEN
-        val x: NegativeInt = NegativeInt.random()
-        // WHEN
-        val result: PositiveInt = -x
-        // THEN
-        result.toInt() shouldEqual -x.toInt()
+        val number: NegativeInt = NegativeInt.random()
+        val actual: PositiveInt = -number
+        val expected: PositiveInt = number.toInt()
+            .unaryMinus()
+            .toPositiveInt()
+            .getOrThrow()
+        assertEquals(expected, actual)
     }
 
     @Test
