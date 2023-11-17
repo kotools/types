@@ -36,26 +36,6 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
     }
 }
 
-/**
- * Returns this number as a [NegativeInt], which may involve rounding or
- * truncation, or throws [IllegalArgumentException] if this number is
- * [strictly positive][StrictlyPositiveInt].
- *
- * ```kotlin
- * var result: NegativeInt = (-1).toNegativeIntOrThrow()
- * println(result) // -1
- *
- * result = 0.toNegativeIntOrThrow()
- * println(result) // 0
- *
- * 1.toNegativeIntOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toNegativeIntOrThrow(): NegativeInt = toNegativeInt()
-    .getOrThrow()
-
 /** Representation of negative integers including [zero][ZeroInt]. */
 @Serializable(NegativeIntSerializer::class)
 @SinceKotoolsTypes("1.1")

@@ -87,12 +87,12 @@ class PositiveIntTest {
     @ExperimentalNumberApi
     @Test
     fun unaryMinus_should_pass() {
-        // GIVEN
-        val x: PositiveInt = PositiveInt.random()
-        // WHEN
-        val result: NegativeInt = -x
-        // THEN
-        result.toInt() shouldEqual -x.toInt()
+        val number: PositiveInt = PositiveInt.random()
+        val actual: NegativeInt = -number
+        val expected: NegativeInt = number.toInt()
+            .unaryMinus()
+            .toNegativeIntOrFailure()
+        assertEquals(expected, actual)
     }
 
     @Test
