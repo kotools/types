@@ -86,28 +86,6 @@ class PositiveIntTest {
 
     @ExperimentalNumberApi
     @Test
-    fun toPositiveIntOrThrow_should_pass_with_a_positive_Int() {
-        val expected: Number = Random.nextInt(from = 0, until = Int.MAX_VALUE)
-        val result: PositiveInt = expected.toPositiveIntOrThrow()
-        val actual: Int = result.toInt()
-        assertEquals(expected, actual)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun toPositiveIntOrThrow_should_fail_with_a_strictly_negative_Int() {
-        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        val exception: IllegalArgumentException = assertFailsWith {
-            number.toPositiveIntOrThrow()
-        }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = PositiveIntConstructionException(number)
-            .message
-        assertEquals(expectedMessage, actualMessage)
-    }
-
-    @ExperimentalNumberApi
-    @Test
     fun unaryMinus_should_pass() {
         // GIVEN
         val x: PositiveInt = PositiveInt.random()

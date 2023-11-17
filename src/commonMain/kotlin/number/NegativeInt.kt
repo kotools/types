@@ -12,6 +12,7 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.unexpectedCreationError
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
@@ -129,9 +130,12 @@ public sealed interface NegativeInt : AnyInt {
 /** Returns the negative of this integer. */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.2")
-public operator fun NegativeInt.unaryMinus(): PositiveInt = toInt()
-    .unaryMinus()
-    .toPositiveIntOrThrow()
+public operator fun NegativeInt.unaryMinus(): PositiveInt {
+    val value: Int = -toInt()
+    return value.toPositiveInt()
+        .getOrNull()
+        ?: unexpectedCreationError<PositiveInt>(value)
+}
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer

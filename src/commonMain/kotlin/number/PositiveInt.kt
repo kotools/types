@@ -35,29 +35,6 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
     }
 }
 
-/**
- * Returns this number as a [PositiveInt], which may involve rounding or
- * truncation, or throws [IllegalArgumentException] if this number is
- * [strictly negative][StrictlyNegativeInt].
- *
- * ```kotlin
- * var result: PositiveInt = 1.toPositiveIntOrThrow()
- * println(result) // 1
- *
- * result = 0.toPositiveIntOrThrow()
- * println(result) // 0
- *
- * (-1).toPositiveIntOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toPositiveIntOrThrow(): PositiveInt {
-    val value: Int = toInt()
-    require(value >= 0) { PositiveIntConstructionException(value).message }
-    return if (value == 0) ZeroInt else StrictlyPositiveInt(value)
-}
-
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
 @SinceKotoolsTypes("1.1")
