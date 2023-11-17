@@ -234,7 +234,6 @@ public final class kotools/types/number/PositiveIntKt {
 	public static final fun div-Vo0Sc0k (Lkotools/types/number/PositiveInt;I)Lkotools/types/number/PositiveInt;
 	public static final fun rem (Lkotools/types/number/PositiveInt;Lkotools/types/number/NonZeroInt;)Lkotools/types/number/PositiveInt;
 	public static final fun toPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
-	public static final fun toPositiveIntOrNull (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public static final fun toPositiveIntOrThrow (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public static final fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
 }

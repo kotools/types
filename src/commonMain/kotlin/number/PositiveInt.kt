@@ -37,37 +37,6 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
 
 /**
  * Returns this number as a [PositiveInt], which may involve rounding or
- * truncation, or returns `null` if this number is
- * [strictly negative][StrictlyNegativeInt].
- *
- * ```kotlin
- * var result: PositiveInt? = 1.toPositiveIntOrNull()
- * println(result) // 1
- *
- * result = 0.toPositiveIntOrNull()
- * println(result) // 0
- *
- * result = (-1).toPositiveIntOrNull()
- * println(result) // null
- * ```
- *
- * You can use the [toPositiveIntOrThrow] function for throwing an
- * [IllegalArgumentException] instead of returning `null` when this number is
- * [strictly negative][StrictlyNegativeInt].
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toPositiveIntOrNull(): PositiveInt? {
-    val value: Int = toInt()
-    return when {
-        value == 0 -> ZeroInt
-        value.isStrictlyPositive() -> StrictlyPositiveInt(value)
-        else -> null
-    }
-}
-
-/**
- * Returns this number as a [PositiveInt], which may involve rounding or
  * truncation, or throws [IllegalArgumentException] if this number is
  * [strictly negative][StrictlyNegativeInt].
  *
@@ -80,10 +49,6 @@ public fun Number.toPositiveIntOrNull(): PositiveInt? {
  *
  * (-1).toPositiveIntOrThrow() // IllegalArgumentException
  * ```
- *
- * You can use the [toPositiveIntOrNull] function for returning `null` instead
- * of throwing an [IllegalArgumentException] when this number is
- * [strictly negative][StrictlyNegativeInt].
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")

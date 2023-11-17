@@ -23,7 +23,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class PositiveIntCompanionTest {
@@ -83,24 +82,6 @@ class PositiveIntTest {
         val expectedMessage: String = PositiveIntConstructionException(number)
             .message
         assertEquals(expectedMessage, actualMessage)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun toPositiveIntOrNull_should_pass_with_a_positive_Int() {
-        val expected: Number = Random.nextInt(from = 0, until = Int.MAX_VALUE)
-        val result: PositiveInt? = expected.toPositiveIntOrNull()
-        val x: PositiveInt = assertNotNull(result)
-        val actual: Int = x.toInt()
-        assertEquals(expected, actual)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun toPositiveIntOrNull_should_fail_with_a_strictly_negative_Int() {
-        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        val result: PositiveInt? = number.toPositiveIntOrNull()
-        assertNull(result)
     }
 
     @ExperimentalNumberApi

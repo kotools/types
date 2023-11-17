@@ -68,8 +68,8 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 - The following **experimental** factory functions (issue [#258]):
-  - `toNonZeroIntOrNull`
-  - `toNonZeroIntOrThrow`
+  - `toNonZeroIntOrNull` and `toNonZeroIntOrThrow`
+  - `toPositiveIntOrNull`
 
 [#258]: https://github.com/kotools/types/issues/258
 
