@@ -180,7 +180,6 @@ public final class kotools/types/number/NegativeIntKt {
 	public static final fun div-Vo0Sc0k (Lkotools/types/number/NegativeInt;I)Lkotools/types/number/NegativeInt;
 	public static final fun rem (Lkotools/types/number/NegativeInt;Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NegativeInt;
 	public static final fun toNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
-	public static final fun toNegativeIntOrNull (Ljava/lang/Number;)Lkotools/types/number/NegativeInt;
 	public static final fun toNegativeIntOrThrow (Ljava/lang/Number;)Lkotools/types/number/NegativeInt;
 	public static final fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
 }
