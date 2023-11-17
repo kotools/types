@@ -91,8 +91,7 @@ class NegativeIntTest {
         val actual: PositiveInt = -number
         val expected: PositiveInt = number.toInt()
             .unaryMinus()
-            .toPositiveInt()
-            .getOrThrow()
+            .toPositiveIntOrFailure()
         assertEquals(expected, actual)
     }
 
@@ -100,24 +99,30 @@ class NegativeIntTest {
     fun div_should_return_a_NegativeInt_with_a_StrictlyPositiveInt() {
         val x: NegativeInt = NegativeInt.random()
         val y: StrictlyPositiveInt = StrictlyPositiveInt.random()
-        val result: NegativeInt = x / y
-        result.toInt() shouldEqual x.toInt() / y.toInt()
+        val actual: NegativeInt = x / y
+        val expected: NegativeInt = (x.toInt() / y.toInt())
+            .toNegativeIntOrFailure()
+        assertEquals(expected, actual)
     }
 
     @Test
     fun div_should_return_a_PositiveInt_with_a_StrictlyNegativeInt() {
         val x: NegativeInt = NegativeInt.random()
         val y: StrictlyNegativeInt = StrictlyNegativeInt.random()
-        val result: PositiveInt = x / y
-        result.toInt() shouldEqual x.toInt() / y.toInt()
+        val actual: PositiveInt = x / y
+        val expected: PositiveInt = (x.toInt() / y.toInt())
+            .toPositiveIntOrFailure()
+        assertEquals(expected, actual)
     }
 
     @Test
     fun rem_should_return_a_NegativeInt_with_a_NonZeroInt() {
         val x: NegativeInt = NegativeInt.random()
         val y: NonZeroInt = NonZeroInt.random()
-        val result: NegativeInt = x % y
-        result.toInt() shouldEqual x.toInt() % y.toInt()
+        val actual: NegativeInt = x % y
+        val expected: NegativeInt = (x.toInt() % y.toInt())
+            .toNegativeIntOrFailure()
+        assertEquals(expected, actual)
     }
 }
 

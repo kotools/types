@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
@@ -155,3 +156,7 @@ class PositiveIntSerializerTest {
         exception.shouldHaveAMessage()
     }
 }
+
+internal fun Number.toPositiveIntOrFailure(): PositiveInt = toPositiveInt()
+    .getOrNull()
+    ?: unexpectedCreationFailure<PositiveInt>(value = this)
