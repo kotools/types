@@ -1,0 +1,18 @@
+# Copyright 2023 Kotools S.A.S.U.
+# Use of this source code is governed by the MIT license.
+
+name: Static code analysis
+on:
+  push:
+    branches: [ automation/331 ]
+    paths: [ .github/workflows/static-code-analysis.yml ]
+jobs:
+  qodana:
+    name: Scan code with Qodana
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@v2023.2.8
