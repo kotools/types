@@ -6,6 +6,7 @@ on:
   push:
     branches: [ automation/331 ]
     paths: [ .github/workflows/static-code-analysis.yml ]
+  workflow_dispatch: { }
 jobs:
   qodana:
     name: Scan code with Qodana
