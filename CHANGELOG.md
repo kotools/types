@@ -58,11 +58,13 @@ All notable changes to this project will be documented in this file.
 - Align styles of version [4.2.0] with the latest ones in [API reference] (issue
   [#261]).
 - Opt-in message of experimental annotations (PR [#328]).
+- Kotlin compiler's treatment of warnings as errors (issue [#330]).
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#260]: https://github.com/kotools/types/issues/260
 [#261]: https://github.com/kotools/types/issues/261
 [#328]: https://github.com/kotools/types/pull/328
+[#330]: https://github.com/kotools/types/pull/330
 [directory-structure-convention]: https://kotlinlang.org/docs/coding-conventions.html#directory-structure
 
 ### Removed

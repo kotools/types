@@ -53,6 +53,7 @@ private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
         javaPackagePrefix = "kotools.types"
         kotlinOptions {
+            allWarningsAsErrors = true
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             languageVersion = "1.5"
         }
