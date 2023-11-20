@@ -5,7 +5,7 @@ name: Static code analysis
 on:
   push:
     branches: [ automation/331 ]
-    paths: [ .github/workflows/static-code-analysis.yml ]
+    paths: [ .github/workflows/static-code-analysis.yml, qodana.yaml ]
   workflow_dispatch: { }
 jobs:
   qodana:
