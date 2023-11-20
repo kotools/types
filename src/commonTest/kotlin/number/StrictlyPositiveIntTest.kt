@@ -16,7 +16,6 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldBeNotNull
-import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldFailWithSerializationException
@@ -83,22 +82,6 @@ class StrictlyPositiveIntTest {
             .toNotBlankString()
             .getOrThrow()
             .shouldEqual(StrictlyPositiveInt errorMessageFor number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun toStrictlyPositiveIntOrNull_should_pass_with_a_strictly_positive_Number() {
-        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
-        val result: StrictlyPositiveInt? = number.toStrictlyPositiveIntOrNull()
-        result.shouldBeNotNull().toInt() shouldEqual number
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun toStrictlyPositiveIntOrNull_should_fail_with_a_negative_Number() {
-        val number: Number = Random.nextInt(Int.MIN_VALUE..0)
-        val result: StrictlyPositiveInt? = number.toStrictlyPositiveIntOrNull()
-        result.shouldBeNull()
     }
 
     @ExperimentalNumberApi
