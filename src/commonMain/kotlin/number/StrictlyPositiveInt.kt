@@ -31,29 +31,6 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     runCatching { StrictlyPositiveInt(toInt()) }
 
-/**
- * Returns this number as a [StrictlyPositiveInt], which may involve rounding or
- * truncation, or throws [IllegalArgumentException] if this number is
- * [negative][NegativeInt].
- *
- * Here's some usage examples:
- *
- * ```kotlin
- * val result: StrictlyPositiveInt = 1.toStrictlyPositiveIntOrThrow()
- * println(result) // 1
- *
- * 0.toStrictlyPositiveIntOrThrow() // IllegalArgumentException
- * (-1).toStrictlyPositiveIntOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt = toInt()
-    .toStrictlyPositiveIntOrThrow()
-
-private fun Int.toStrictlyPositiveIntOrThrow(): StrictlyPositiveInt =
-    StrictlyPositiveInt(this)
-
 /** Representation of positive integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)

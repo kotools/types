@@ -86,28 +86,6 @@ class StrictlyPositiveIntTest {
 
     @ExperimentalNumberApi
     @Test
-    fun toStrictlyPositiveIntOrThrow_should_pass_with_a_strictly_positive_Number() {
-        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
-        val result: StrictlyPositiveInt = number.toStrictlyPositiveIntOrThrow()
-        result.toInt() shouldEqual number
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun toStrictlyPositiveIntOrThrow_should_fail_with_a_negative_Number() {
-        val number: Number = Random.nextInt(Int.MIN_VALUE..0)
-        val error: IllegalArgumentException =
-            number.shouldFailWithIllegalArgumentException {
-                toStrictlyPositiveIntOrThrow()
-            }
-        error.message.shouldBeNotNull()
-            .toNotBlankString()
-            .getOrThrow()
-            .shouldEqual(StrictlyPositiveInt errorMessageFor number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
     fun unaryMinus_should_pass() {
         val x: StrictlyPositiveInt = StrictlyPositiveInt.random()
         val result: StrictlyNegativeInt = -x

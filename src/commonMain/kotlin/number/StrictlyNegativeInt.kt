@@ -12,6 +12,7 @@ import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.unexpectedCreationError
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
@@ -144,10 +145,12 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
 /** Returns the negative of this integer. */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.2")
-public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt =
-    toInt()
-        .unaryMinus()
-        .toStrictlyPositiveIntOrThrow()
+public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt {
+    val value: Int = -toInt()
+    return value.toStrictlyPositiveInt()
+        .getOrNull()
+        ?: unexpectedCreationError<StrictlyPositiveInt>(value)
+}
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {
