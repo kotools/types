@@ -16,7 +16,6 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldBeNotNull
-import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldNotEqual
@@ -81,22 +80,6 @@ class StrictlyNegativeIntTest {
             .toNotBlankString()
             .getOrThrow()
             .shouldEqual(StrictlyNegativeInt errorMessageFor number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun number_toStrictlyNegativeIntOrNull_should_not_be_null_with_a_strictly_negative_Int() {
-        val number: Number = StrictlyNegativeInt.random().toInt()
-        val result: StrictlyNegativeInt? = number.toStrictlyNegativeIntOrNull()
-        result.shouldBeNotNull().toInt() shouldEqual number
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun number_toStrictlyNegativeIntOrNull_should_be_null_with_a_positive_Int() {
-        val number: Number = PositiveInt.random().toInt()
-        val result: StrictlyNegativeInt? = number.toStrictlyNegativeIntOrNull()
-        result.shouldBeNull()
     }
 
     @ExperimentalNumberApi
