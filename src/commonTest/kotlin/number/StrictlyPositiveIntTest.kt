@@ -32,18 +32,16 @@ class StrictlyPositiveIntCompanionTest {
     @Test
     fun min_should_equal_one() {
         val actual: StrictlyPositiveInt = StrictlyPositiveInt.min
-        val expectedValue = 1
-        val expected: StrictlyPositiveInt = expectedValue
-            .toStrictlyPositiveInt()
-            .getOrNull()
-            ?: unexpectedCreationFailure<StrictlyPositiveInt>(expectedValue)
+        val expected: StrictlyPositiveInt = 1.toStrictlyPositiveIntOrFailure()
         assertEquals(expected, actual)
     }
 
     @Test
     fun max_should_equal_the_maximum_value_of_Int() {
-        val result: StrictlyPositiveInt = StrictlyPositiveInt.max
-        result.toInt() shouldEqual Int.MAX_VALUE
+        val actual: StrictlyPositiveInt = StrictlyPositiveInt.max
+        val expected: StrictlyPositiveInt = Int.MAX_VALUE
+            .toStrictlyPositiveIntOrFailure()
+        assertEquals(expected, actual)
     }
 
     @ExperimentalRangeApi
@@ -142,3 +140,8 @@ class StrictlyPositiveIntSerializerTest {
             .shouldEqual(StrictlyPositiveInt errorMessageFor value)
     }
 }
+
+private fun Number.toStrictlyPositiveIntOrFailure(): StrictlyPositiveInt =
+    toStrictlyPositiveInt()
+        .getOrNull()
+        ?: unexpectedCreationFailure<StrictlyPositiveInt>(value = this)
