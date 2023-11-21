@@ -34,26 +34,6 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     }
 
 /**
- * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
- * or truncation, or throws [IllegalArgumentException] if this number is
- * negative.
- *
- * ```kotlin
- * val result: StrictlyPositiveDouble = 1.toStrictlyPositiveDoubleOrThrow()
- * println(result) // 1.0
- *
- * 0.toStrictlyPositiveDoubleOrThrow() // IllegalArgumentException
- * (-1).toStrictlyPositiveDoubleOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveDoubleOrThrow(): StrictlyPositiveDouble {
-    val value: Double = toDouble()
-    return StrictlyPositiveDouble(value)
-}
-
-/**
  * Represents strictly positive floating-point numbers represented by the
  * [Double] type.
  */

@@ -45,28 +45,6 @@ class StrictlyPositiveDoubleTest {
     }
 
     @Test
-    fun toStrictlyPositiveDoubleOrThrow_should_pass_with_a_strictly_positive_Double() {
-        val value: Number =
-            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-        value.toStrictlyPositiveDoubleOrThrow()
-            .toDouble()
-            .shouldEqual(value)
-    }
-
-    @Test
-    fun toStrictlyPositiveDoubleOrThrow_should_fail_with_a_negative_Double() {
-        val value: Number = Random
-            .nextDouble(from = 0.1, until = Double.MAX_VALUE)
-            .unaryMinus()
-        val exception: IllegalArgumentException = assertFailsWith {
-            value.toStrictlyPositiveDoubleOrThrow()
-        }
-        val expectedMessage: String = StrictlyPositiveDoubleException(value)
-            .message
-        exception.message shouldEqual expectedMessage
-    }
-
-    @Test
     fun compareTo_should_return_zero_with_the_same_StrictlyPositiveDouble() {
         val x: StrictlyPositiveDouble = Random.nextDouble()
             .toStrictlyPositiveDouble()
