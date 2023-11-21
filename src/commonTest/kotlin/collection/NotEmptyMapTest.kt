@@ -13,7 +13,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
-import kotools.types.experimental.ExperimentalCollectionApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
@@ -24,10 +23,6 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
 
 class NotEmptyMapTest {
     @Test
@@ -57,28 +52,6 @@ class NotEmptyMapTest {
         val result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
         result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .shouldHaveAMessage()
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyMapOrThrow_should_pass_with_a_not_empty_Map() {
-        val map: Map<Char, Int> = mapOf('a' to Random.nextInt())
-        val result: NotEmptyMap<Char, Int> = map.toNotEmptyMapOrThrow()
-        val actual: Set<Map.Entry<Char, Int>> = result.toMap().entries
-        val expected: Iterable<Map.Entry<Char, Int>> = map.entries.asIterable()
-        assertContentEquals(expected, actual)
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyMapOrThrow_should_fail_with_an_empty_Map() {
-        val map: Map<Char, Int> = emptyMap()
-        val exception: IllegalArgumentException = assertFailsWith {
-            map.toNotEmptyMapOrThrow()
-        }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = EmptyMapException.message
-        assertEquals(expectedMessage, actualMessage)
     }
 
     @Test

@@ -79,7 +79,7 @@ All notable changes to this project will be documented in this file.
   - `toNotBlankStringOrNull` and `toNotBlankStringOrThrow`
   - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
   - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
-  - `toNotEmptyMapOrNull`.
+  - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
 
 [#258]: https://github.com/kotools/types/issues/258
 

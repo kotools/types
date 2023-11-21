@@ -12,9 +12,7 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.SinceKotoolsTypes
-import kotools.types.experimental.ExperimentalCollectionApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -75,38 +73,6 @@ public fun <K, V> notEmptyMapOf(
 @SinceKotoolsTypes("4.0")
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap(entries) }
-
-/**
- * Returns a [NotEmptyMap] containing all the entries of this map, or throws an
- * [IllegalArgumentException] if this map is [empty][Map.isEmpty].
- *
- * ```kotlin
- * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
- * var result: NotEmptyMap<Char, Int> = map.toNotEmptyMapOrThrow()
- * println(result) // {a=1, b=2}
- *
- * map = emptyMap()
- * map.toNotEmptyMapOrThrow() // IllegalArgumentException
- * ```
- *
- * Please note that changes made to the original map will not be reflected on
- * the resulting [NotEmptyMap].
- *
- * ```kotlin
- * val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
- * val notEmptyMap: NotEmptyMap<Char, Int> = original.toNotEmptyMapOrThrow()
- * println(original) // {a=1, b=2}
- * println(notEmptyMap) // {a=1, b=2}
- *
- * original.clear()
- * println(original) // {}
- * println(notEmptyMap) // {a=1, b=2}
- * ```
- */
-@ExperimentalCollectionApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <K, V> Map<K, V>.toNotEmptyMapOrThrow(): NotEmptyMap<K, V> =
-    NotEmptyMap(entries)
 
 /**
  * Represents a map with at least one entry with a key of type [K] and a value
