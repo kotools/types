@@ -289,7 +289,6 @@ public final class kotools/types/number/StrictlyPositiveDouble$Companion {
 
 public final class kotools/types/number/StrictlyPositiveDoubleKt {
 	public static final fun toStrictlyPositiveDouble (Ljava/lang/Number;)Ljava/lang/Object;
-	public static final fun toStrictlyPositiveDoubleOrNull (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveDouble;
 	public static final fun toStrictlyPositiveDoubleOrThrow (Ljava/lang/Number;)D
 }
 

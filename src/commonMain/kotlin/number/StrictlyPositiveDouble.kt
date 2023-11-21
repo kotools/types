@@ -35,32 +35,6 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
 
 /**
  * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
- * or truncation, or returns `null` if this number is negative.
- *
- * ```kotlin
- * var result: StrictlyPositiveDouble? = 1.toStrictlyPositiveDoubleOrNull()
- * println(result) // 1.0
- *
- * result = 0.toStrictlyPositiveDoubleOrNull()
- * println(result) // null
- *
- * result = (-1).toStrictlyPositiveDoubleOrNull()
- * println(result) // null
- * ```
- *
- * You can use the [toStrictlyPositiveDoubleOrThrow] function for throwing an
- * [IllegalArgumentException] instead of returning `null`.
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
-    val value: Double = toDouble()
-    val isValid: Boolean = value.isStrictlyPositive()
-    return if (isValid) StrictlyPositiveDouble(value) else null
-}
-
-/**
- * Returns this number as a [StrictlyPositiveDouble], which may involve rounding
  * or truncation, or throws [IllegalArgumentException] if this number is
  * negative.
  *
@@ -71,10 +45,6 @@ public fun Number.toStrictlyPositiveDoubleOrNull(): StrictlyPositiveDouble? {
  * 0.toStrictlyPositiveDoubleOrThrow() // IllegalArgumentException
  * (-1).toStrictlyPositiveDoubleOrThrow() // IllegalArgumentException
  * ```
- *
- * You can use the [toStrictlyPositiveDoubleOrNull] function for returning
- * `null` instead of throwing an [IllegalArgumentException] when this number is
- * negative.
  */
 @ExperimentalNumberApi
 @ExperimentalSinceKotoolsTypes("4.3.1")
@@ -135,7 +105,8 @@ internal object StrictlyPositiveDoubleSerializer :
 
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
-        return value.toStrictlyPositiveDoubleOrNull()
+        return value.toStrictlyPositiveDouble()
+            .getOrNull()
             ?: throw StrictlyPositiveDoubleSerializationException(value)
     }
 }

@@ -14,8 +14,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
-import kotools.types.shouldBeNotNull
-import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
@@ -45,23 +43,6 @@ class StrictlyPositiveDoubleTest {
         assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
             .shouldHaveAMessage()
     }
-
-    @Test
-    fun toStrictlyPositiveDoubleOrNull_should_pass_with_a_strictly_positive_Double() {
-        val value: Number =
-            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-        value.toStrictlyPositiveDoubleOrNull()
-            .shouldBeNotNull()
-            .toDouble()
-            .shouldEqual(value)
-    }
-
-    @Test
-    fun toStrictlyPositiveDoubleOrNull_should_fail_with_a_negative_Double(): Unit =
-        Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-            .unaryMinus()
-            .toStrictlyPositiveDoubleOrNull()
-            .shouldBeNull()
 
     @Test
     fun toStrictlyPositiveDoubleOrThrow_should_pass_with_a_strictly_positive_Double() {
