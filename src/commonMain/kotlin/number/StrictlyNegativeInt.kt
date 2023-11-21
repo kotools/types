@@ -32,29 +32,6 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching { StrictlyNegativeInt(toInt()) }
 
-/**
- * Returns this number as a [StrictlyNegativeInt], which may involve rounding or
- * truncation, or throws an [IllegalArgumentException] if this number is
- * [positive][PositiveInt].
- *
- * Here's some usage examples:
- *
- * ```kotlin
- * val result: StrictlyNegativeInt = (-1).toStrictlyNegativeIntOrThrow()
- * println(result) // -1
- *
- * 0.toStrictlyNegativeIntOrThrow() // IllegalArgumentException
- * 1.toStrictlyNegativeIntOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun Number.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt = toInt()
-    .toStrictlyNegativeIntOrThrow()
-
-private fun Int.toStrictlyNegativeIntOrThrow(): StrictlyNegativeInt =
-    StrictlyNegativeInt(this)
-
 /** Representation of negative integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)

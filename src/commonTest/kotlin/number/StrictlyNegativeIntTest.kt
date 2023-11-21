@@ -84,28 +84,6 @@ class StrictlyNegativeIntTest {
 
     @ExperimentalNumberApi
     @Test
-    fun number_toStrictlyNegativeIntOrThrow_should_pass_with_a_negative_Int() {
-        val number: Number = StrictlyNegativeInt.random().toInt()
-        val result: StrictlyNegativeInt = number.toStrictlyNegativeIntOrThrow()
-        result.toInt() shouldEqual number
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun number_toStrictlyNegativeIntOrThrow_should_throw_with_a_positive_Int() {
-        val number: Number = PositiveInt.random().toInt()
-        val error: IllegalArgumentException =
-            number.shouldFailWithIllegalArgumentException {
-                toStrictlyNegativeIntOrThrow()
-            }
-        error.message.shouldBeNotNull()
-            .toNotBlankString()
-            .getOrThrow()
-            .shouldEqual(StrictlyNegativeInt errorMessageFor number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
     fun unaryMinus_should_pass() {
         val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
         val result: StrictlyPositiveInt = -x
