@@ -75,46 +75,6 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
 
 /**
  * Returns a [NotEmptySet] containing all the elements of this collection, or
- * returns `null` if this collection is [empty][Collection.isEmpty].
- *
- * ```kotlin
- * var collection: Collection<Int> = setOf(1, 2, 3, 1)
- * var result: NotEmptySet<Int>? = collection.toNotEmptySetOrNull()
- * println(result) // [1, 2, 3]
- *
- * collection = emptySet()
- * result = collection.toNotEmptySetOrNull()
- * println(result) // null
- * ```
- *
- * Please note that changes made to the original collection will not be
- * reflected on the resulting [NotEmptySet].
- *
- * ```kotlin
- * val original: MutableCollection<Int> = mutableSetOf(1, 2, 3, 1)
- * val notEmptySet: NotEmptySet<Int>? = original.toNotEmptySetOrNull()
- * println(original) // [1, 2, 3]
- * println(notEmptySet) // [1, 2, 3]
- *
- * original.clear()
- * println(original) // []
- * println(notEmptySet) // [1, 2, 3]
- * ```
- *
- * You can use the [toNotEmptySetOrThrow] function for throwing an
- * [IllegalArgumentException] instead of returning `null` when this collection
- * is [empty][Collection.isEmpty].
- */
-@ExperimentalCollectionApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
-    if (isEmpty()) return null
-    val elements: Set<E> = toSet()
-    return NotEmptySet(elements)
-}
-
-/**
- * Returns a [NotEmptySet] containing all the elements of this collection, or
  * throws an [IllegalArgumentException] if this collection is
  * [empty][Collection.isEmpty].
  *
@@ -140,10 +100,6 @@ public fun <E> Collection<E>.toNotEmptySetOrNull(): NotEmptySet<E>? {
  * println(original) // []
  * println(notEmptySet) // [1, 2, 3]
  * ```
- *
- * You can use the [toNotEmptySetOrNull] function for returning `null` instead
- * of throwing an [IllegalArgumentException] when this collection is
- * [empty][Collection.isEmpty].
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")

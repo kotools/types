@@ -77,7 +77,8 @@ All notable changes to this project will be documented in this file.
   - `toStrictlyNegativeIntOrNull` and `toStrictlyNegativeIntOrThrow`
   - `toStrictlyPositiveDoubleOrNull` and `toStrictlyPositiveDoubleOrThrow`
   - `toNotBlankStringOrNull` and `toNotBlankStringOrThrow`
-  - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`.
+  - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
+  - `toNotEmptySetOrNull`.
 
 [#258]: https://github.com/kotools/types/issues/258
 
