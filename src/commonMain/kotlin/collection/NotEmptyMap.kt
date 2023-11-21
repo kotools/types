@@ -77,43 +77,6 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap(entries) }
 
 /**
- * Returns a [NotEmptyMap] containing all the entries of this map, or returns
- * `null` if this map is [empty][Map.isEmpty].
- *
- * ```kotlin
- * var map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
- * var result: NotEmptyMap<Char, Int>? = map.toNotEmptyMapOrNull()
- * println(result) // {a=1, b=2}
- *
- * map = emptyMap()
- * result = map.toNotEmptyMapOrNull()
- * println(result) // null
- * ```
- *
- * Please note that changes made to the original map will not be reflected on
- * the resulting [NotEmptyMap].
- *
- * ```kotlin
- * val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
- * val notEmptyMap: NotEmptyMap<Char, Int>? = original.toNotEmptyMapOrNull()
- * println(original) // {a=1, b=2}
- * println(notEmptyMap) // {a=1, b=2}
- *
- * original.clear()
- * println(original) // {}
- * println(notEmptyMap) // {a=1, b=2}
- * ```
- *
- * You can use the [toNotEmptyMapOrThrow] function for throwing an
- * [IllegalArgumentException] instead of returning `null` when this map is
- * [empty][Map.isEmpty].
- */
-@ExperimentalCollectionApi
-@ExperimentalSinceKotoolsTypes("4.3.1")
-public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
-    if (isEmpty()) null else NotEmptyMap(entries)
-
-/**
  * Returns a [NotEmptyMap] containing all the entries of this map, or throws an
  * [IllegalArgumentException] if this map is [empty][Map.isEmpty].
  *
@@ -139,10 +102,6 @@ public fun <K, V> Map<K, V>.toNotEmptyMapOrNull(): NotEmptyMap<K, V>? =
  * println(original) // {}
  * println(notEmptyMap) // {a=1, b=2}
  * ```
- *
- * You can use the [toNotEmptyMapOrNull] function for returning `null` instead
- * of throwing an [IllegalArgumentException] when this map is
- * [empty][Map.isEmpty].
  */
 @ExperimentalCollectionApi
 @ExperimentalSinceKotoolsTypes("4.3.1")

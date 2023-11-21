@@ -28,7 +28,6 @@ import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 class NotEmptyMapTest {
     @Test
@@ -58,25 +57,6 @@ class NotEmptyMapTest {
         val result: Result<NotEmptyMap<Char, Int>> = map.toNotEmptyMap()
         result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .shouldHaveAMessage()
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyMapOrNull_should_pass_with_a_not_empty_Map() {
-        val map: Map<Char, Int> = mapOf('a' to Random.nextInt())
-        val result: NotEmptyMap<Char, Int>? = map.toNotEmptyMapOrNull()
-        val notEmptyMap: NotEmptyMap<Char, Int> = assertNotNull(result)
-        val actual: Set<Map.Entry<Char, Int>> = notEmptyMap.toMap().entries
-        val expected: Iterable<Map.Entry<Char, Int>> = map.entries.asIterable()
-        assertContentEquals(expected, actual)
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyMapOrNull_should_fail_with_an_empty_Map() {
-        val map: Map<Char, Int> = emptyMap()
-        val result: NotEmptyMap<Char, Int>? = map.toNotEmptyMapOrNull()
-        assertNull(result)
     }
 
     @ExperimentalCollectionApi
