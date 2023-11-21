@@ -31,24 +31,6 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
     runCatching { NotBlankString(this) }
 
 /**
- * Returns this string as a [NotBlankString], or throws an
- * [IllegalArgumentException] if this string is [blank][String.isBlank].
- *
- * Here's some usage examples:
- *
- * ```kotlin
- * var result: NotBlankString = "hello world".toNotBlankStringOrThrow()
- * println(result) // hello world
- *
- * "  ".toNotBlankStringOrThrow() // IllegalArgumentException
- * ```
- */
-@ExperimentalSinceKotoolsTypes("4.3.1")
-@ExperimentalTextApi
-public fun String.toNotBlankStringOrThrow(): NotBlankString =
-    NotBlankString(this)
-
-/**
  * Representation of strings that have at least one character, excluding
  * whitespaces.
  */

@@ -45,26 +45,6 @@ class NotBlankStringTest {
             .shouldEqual(NotBlankStringException.message)
     }
 
-    @ExperimentalTextApi
-    @Test
-    fun toNotBlankStringOrThrow_should_pass_with_a_not_blank_String() {
-        val string: String = StringExample.NOT_BLANK
-        val result: NotBlankString = string.toNotBlankStringOrThrow()
-        "$result" shouldEqual string
-    }
-
-    @ExperimentalTextApi
-    @Test
-    fun toNotBlankStringOrThrow_should_fail_with_a_blank_String() {
-        val string: String = StringExample.BLANK
-        val error: IllegalArgumentException =
-            string.shouldFailWithIllegalArgumentException {
-                toNotBlankStringOrThrow()
-            }
-        error.message.shouldBeNotNull()
-            .shouldEqual(NotBlankStringException.message)
-    }
-
     @Test
     fun length_should_return_a_StrictlyPositiveInt() {
         val result: StrictlyPositiveInt = StringExample.NOT_BLANK
