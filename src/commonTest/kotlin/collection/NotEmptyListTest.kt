@@ -13,7 +13,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
-import kotools.types.experimental.ExperimentalCollectionApi
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
@@ -23,10 +22,6 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
 
 class NotEmptyListTest {
     @Test
@@ -52,27 +47,6 @@ class NotEmptyListTest {
         val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
         result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .shouldHaveAMessage()
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyListOrThrow_should_pass_with_a_not_empty_Collection() {
-        val expected: Collection<Int> = List(3) { Random.nextInt() }
-        val result: NotEmptyList<Int> = expected.toNotEmptyListOrThrow()
-        val actual: List<Int> = result.toList()
-        assertContentEquals(expected, actual)
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyListOrThrow_should_fail_with_an_empty_Collection() {
-        val collection: Collection<Int> = emptyList()
-        val exception: IllegalArgumentException = assertFailsWith {
-            collection.toNotEmptyListOrThrow()
-        }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = EmptyCollectionException.message
-        assertEquals(expectedMessage, actualMessage)
     }
 
     @Test

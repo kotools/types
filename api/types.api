@@ -42,7 +42,6 @@ public final class kotools/types/collection/NotEmptyList$Companion {
 public final class kotools/types/collection/NotEmptyListKt {
 	public static final fun notEmptyListOf (Ljava/lang/Object;[Ljava/lang/Object;)Ljava/util/List;
 	public static final fun toNotEmptyList (Ljava/util/Collection;)Ljava/lang/Object;
-	public static final fun toNotEmptyListOrThrow (Ljava/util/Collection;)Ljava/util/List;
 }
 
 public final class kotools/types/collection/NotEmptyMap {
