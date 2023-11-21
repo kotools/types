@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldBeNotNull
@@ -24,13 +25,19 @@ import kotools.types.text.toNotBlankString
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
     @Test
     fun min_should_equal_one() {
-        val result: StrictlyPositiveInt = StrictlyPositiveInt.min
-        result.toInt() shouldEqual 1
+        val actual: StrictlyPositiveInt = StrictlyPositiveInt.min
+        val expectedValue = 1
+        val expected: StrictlyPositiveInt = expectedValue
+            .toStrictlyPositiveInt()
+            .getOrNull()
+            ?: unexpectedCreationFailure<StrictlyPositiveInt>(expectedValue)
+        assertEquals(expected, actual)
     }
 
     @Test
