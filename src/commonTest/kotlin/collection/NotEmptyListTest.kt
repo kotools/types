@@ -27,7 +27,6 @@ import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 class NotEmptyListTest {
     @Test
@@ -53,24 +52,6 @@ class NotEmptyListTest {
         val result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
         result.shouldFailWithIllegalArgumentException { getOrThrow() }
             .shouldHaveAMessage()
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyListOrNull_should_pass_with_a_not_empty_Collection() {
-        val expected: Collection<Int> = List(3) { Random.nextInt() }
-        val result: NotEmptyList<Int>? = expected.toNotEmptyListOrNull()
-        val elements: NotEmptyList<Int> = assertNotNull(result)
-        val actual: List<Int> = elements.toList()
-        assertContentEquals(expected, actual)
-    }
-
-    @ExperimentalCollectionApi
-    @Test
-    fun toNotEmptyListOrNull_should_fail_with_an_empty_Collection() {
-        val collection: Collection<Int> = emptyList()
-        val result: NotEmptyList<Int>? = collection.toNotEmptyListOrNull()
-        assertNull(result)
     }
 
     @ExperimentalCollectionApi
