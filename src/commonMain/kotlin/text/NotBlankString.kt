@@ -31,30 +31,6 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
     runCatching { NotBlankString(this) }
 
 /**
- * Returns this string as a [NotBlankString], or returns `null` if this string
- * is [blank][String.isBlank].
- *
- * Here's some usage examples:
- *
- * ```kotlin
- * var result: NotBlankString? = "hello world".toNotBlankStringOrNull()
- * println(result) // hello world
- *
- * result = "  ".toNotBlankStringOrNull()
- * println(null) // null
- * ```
- *
- * You can use the [toNotBlankStringOrThrow] function for throwing an
- * [IllegalArgumentException] instead of returning `null` when this string is
- * [blank][String.isBlank].
- */
-@ExperimentalSinceKotoolsTypes("4.3.1")
-@ExperimentalTextApi
-public fun String.toNotBlankStringOrNull(): NotBlankString? =
-    takeIf { it.isNotBlank() }
-        ?.toNotBlankStringOrThrow()
-
-/**
  * Returns this string as a [NotBlankString], or throws an
  * [IllegalArgumentException] if this string is [blank][String.isBlank].
  *
@@ -66,10 +42,6 @@ public fun String.toNotBlankStringOrNull(): NotBlankString? =
  *
  * "  ".toNotBlankStringOrThrow() // IllegalArgumentException
  * ```
- *
- * You can use the [toNotBlankStringOrNull] function for returning `null`
- * instead of throwing an [IllegalArgumentException] when this string is
- * [blank][String.isBlank].
  */
 @ExperimentalSinceKotoolsTypes("4.3.1")
 @ExperimentalTextApi

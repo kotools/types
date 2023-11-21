@@ -423,7 +423,6 @@ public final class kotools/types/text/NotBlankStringKt {
 	public static final fun plus-_fD6_zU (Ljava/lang/String;C)Ljava/lang/String;
 	public static final fun plus-_fD6_zU (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 	public static final fun toNotBlankString (Ljava/lang/String;)Ljava/lang/Object;
-	public static final fun toNotBlankStringOrNull (Ljava/lang/String;)Ljava/lang/String;
 	public static final fun toNotBlankStringOrThrow (Ljava/lang/String;)Ljava/lang/String;
 }
 
