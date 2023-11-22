@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -36,27 +36,3 @@ internal annotation class ExperimentalSinceKotoolsTypes(val version: String)
 @Retention(BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 internal annotation class SinceKotoolsTypes(val version: String)
-
-/**
- * Specifies the first versions of Kotools Types where a declaration has
- * appeared as a **deprecated** feature.
- *
- * The specified [warningSince] should match the version where the declaration
- * was deprecated with a [warning][DeprecationLevel.WARNING] level.
- * The specified [errorSince] should match the version where it was deprecated
- * with an [error][DeprecationLevel.ERROR] level.
- * The specified [hiddenSince] should match the version where the declaration
- * was deprecated with a [hidden][DeprecationLevel.HIDDEN] level.
- *
- * The versions should be in the following formats: `<major>.<minor>` or
- * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are positive
- * integers without leading zeros.
- */
-@MustBeDocumented
-@Retention(BINARY)
-@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
-internal annotation class DeprecatedSinceKotoolsTypes(
-    val warningSince: String,
-    val errorSince: String = "",
-    val hiddenSince: String = ""
-)
