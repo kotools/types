@@ -14,7 +14,6 @@ jobs:
     name: Scan code with Qodana
     runs-on: ubuntu-latest
     permissions:
-      checks: write
       security-events: write
     steps:
       - name: Checkout code
