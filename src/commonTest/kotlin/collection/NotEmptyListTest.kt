@@ -7,6 +7,7 @@ package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
@@ -17,11 +18,11 @@ import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
-import kotools.types.shouldFailWithSerializationException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 
 class NotEmptyListTest {
     @Test
@@ -168,8 +169,9 @@ class NotEmptyListSerializerTest {
     fun deserialization_should_fail_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
         val encoded: String = Json.encodeToString(collection)
-        Json.shouldFailWithSerializationException {
-            decodeFromString<NotEmptyList<Int>>(encoded)
-        }.shouldHaveAMessage()
+        val exception: SerializationException = assertFailsWith {
+            Json.decodeFromString<NotEmptyList<Int>>(encoded)
+        }
+        exception.shouldHaveAMessage()
     }
 }

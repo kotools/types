@@ -19,13 +19,13 @@ import kotools.types.range.NotEmptyRange
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
-import kotools.types.shouldFailWithSerializationException
 import kotools.types.shouldNotEqual
 import kotools.types.text.toNotBlankString
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
@@ -130,11 +130,10 @@ class StrictlyPositiveIntSerializerTest {
     fun deserialization_should_fail_with_a_negative_Int() {
         val value: Int = NegativeInt.random().toInt()
         val encoded: String = Json.encodeToString(value)
-        val error: SerializationException =
-            Json.shouldFailWithSerializationException {
-                decodeFromString<StrictlyPositiveInt>(encoded)
-            }
-        error.message.shouldBeNotNull()
+        val exception: SerializationException = assertFailsWith {
+            Json.decodeFromString<StrictlyPositiveInt>(encoded)
+        }
+        exception.message.shouldBeNotNull()
             .toNotBlankString()
             .getOrThrow()
             .shouldEqual(StrictlyPositiveInt errorMessageFor value)

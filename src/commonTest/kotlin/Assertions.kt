@@ -1,11 +1,10 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types
 
-import kotlinx.serialization.SerializationException
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -29,10 +28,6 @@ fun Any?.shouldBeNull(): Unit = assertNull(this)
 inline fun <T> T.shouldFailWithIllegalArgumentException(
     block: T.() -> Unit
 ): IllegalArgumentException = assertFailsWith { block() }
-
-inline fun <T> T.shouldFailWithSerializationException(
-    block: T.() -> Unit
-): SerializationException = assertFailsWith { block() }
 
 fun Throwable.shouldHaveAMessage(): Unit =
     assertTrue(block = assertNotNull(message)::isNotBlank)
