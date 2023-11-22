@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -116,9 +116,9 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
 }
 
 internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.AnyInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "${Package.NUMBER}.AnyInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): AnyInt = when {
         value == ZeroInt.toInt() -> Result.success(ZeroInt)

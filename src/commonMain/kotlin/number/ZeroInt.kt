@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -21,9 +21,9 @@ public object ZeroInt : PositiveInt, NegativeInt {
 }
 
 internal object ZeroIntSerializer : AnyIntSerializer<ZeroInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.ZeroInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "${Package.NUMBER}.ZeroInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): ZeroInt = if (value == 0) ZeroInt
     else throw SerializationException(

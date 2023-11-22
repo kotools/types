@@ -100,9 +100,9 @@ public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt {
 
 internal object StrictlyNegativeIntSerializer :
     AnyIntSerializer<StrictlyNegativeInt> {
-    override val serialName: Result<NotBlankString> by lazy(
-        "${Package.number}.StrictlyNegativeInt"::toNotBlankString
-    )
+    override val serialName: Result<NotBlankString> by lazy {
+        "${Package.NUMBER}.StrictlyNegativeInt".toNotBlankString()
+    }
 
     override fun deserialize(value: Int): StrictlyNegativeInt = value
         .toStrictlyNegativeInt()

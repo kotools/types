@@ -132,9 +132,11 @@ class PositiveIntSerializerTest {
 
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_PositiveInt_as_serial_name(): Unit =
-        serializer.descriptor
-            .serialName shouldEqual "${Package.number}.PositiveInt"
+    fun descriptor_should_have_the_qualified_name_of_PositiveInt_as_serial_name() {
+        val actual: String = serializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.PositiveInt"
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun serialization_should_behave_like_an_Int() {

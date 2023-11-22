@@ -130,8 +130,9 @@ class NegativeIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_NegativeInt_as_serial_name() {
-        val result: String = NegativeIntSerializer.descriptor.serialName
-        result shouldEqual "${Package.number}.NegativeInt"
+        val actual: String = NegativeIntSerializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.NegativeInt"
+        assertEquals(expected, actual)
     }
 
     @Test

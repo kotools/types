@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -14,6 +14,7 @@ import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class AnyIntTest {
@@ -148,8 +149,11 @@ class AnyIntSerializerTest {
 
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_AnyInt_as_serial_name(): Unit =
-        serializer.descriptor.serialName shouldEqual "${Package.number}.AnyInt"
+    fun descriptor_should_have_the_qualified_name_of_AnyInt_as_serial_name() {
+        val actual: String = serializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.AnyInt"
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun serialize_should_behave_like_an_Int() {

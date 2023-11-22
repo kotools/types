@@ -19,6 +19,7 @@ import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -130,8 +131,9 @@ class NotBlankStringSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_be_named_with_the_qualified_name_of_NotBlankString() {
-        val result: String = NotBlankStringSerializer.descriptor.serialName
-        result shouldEqual "${Package.text}.NotBlankString"
+        val actual: String = NotBlankStringSerializer.descriptor.serialName
+        val expected = "${Package.TEXT}.NotBlankString"
+        assertEquals(expected, actual)
     }
 
     @Test

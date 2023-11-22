@@ -73,8 +73,8 @@ internal object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
         PrimitiveSerialDescriptor(
-            serialName = "${Package.number}.StrictlyPositiveDouble",
-            kind = PrimitiveKind.DOUBLE
+            serialName = "${Package.NUMBER}.StrictlyPositiveDouble",
+            PrimitiveKind.DOUBLE
         )
     }
 

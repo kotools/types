@@ -116,7 +116,7 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.number}.PositiveInt".toNotBlankString()
+        "${Package.NUMBER}.PositiveInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()

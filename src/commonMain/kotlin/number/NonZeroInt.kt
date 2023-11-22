@@ -109,7 +109,7 @@ public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.number}.NonZeroInt".toNotBlankString()
+        "${Package.NUMBER}.NonZeroInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): NonZeroInt = value.toNonZeroInt()

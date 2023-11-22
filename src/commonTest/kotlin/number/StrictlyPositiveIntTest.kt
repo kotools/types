@@ -6,6 +6,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -106,10 +107,13 @@ class StrictlyPositiveIntTest {
 class StrictlyPositiveIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_StrictlyPositiveInt_as_serial_name(): Unit =
-        StrictlyPositiveInt.serializer()
-            .descriptor
-            .serialName shouldEqual "${Package.number}.StrictlyPositiveInt"
+    fun descriptor_should_have_the_qualified_name_of_StrictlyPositiveInt_as_serial_name() {
+        val serializer: KSerializer<StrictlyPositiveInt> =
+            StrictlyPositiveInt.serializer()
+        val actual: String = serializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.StrictlyPositiveInt"
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun serialization_should_behave_like_an_Int() {

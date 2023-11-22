@@ -1,14 +1,12 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types
 
 internal object Package {
-    private const val root: String = "kotools.types"
-    const val collection: String = "$root.collection"
-    const val experimental: String = "$root.experimental"
-    const val number: String = "$root.number"
-    const val text: String = "$root.text"
+    private const val ROOT: String = "kotools.types"
+    const val NUMBER: String = "$ROOT.number"
+    const val TEXT: String = "$ROOT.text"
 }

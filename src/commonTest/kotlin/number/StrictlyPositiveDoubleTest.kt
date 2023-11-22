@@ -100,13 +100,10 @@ class StrictlyPositiveDoubleSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveDouble() {
-        // GIVEN
         val serializer: KSerializer<StrictlyPositiveDouble> =
             StrictlyPositiveDouble.serializer()
-        // WHEN
         val actual: String = serializer.descriptor.serialName
-        // THEN
-        val expected = "${Package.number}.StrictlyPositiveDouble"
+        val expected = "${Package.NUMBER}.StrictlyPositiveDouble"
         assertEquals(expected, actual)
     }
 

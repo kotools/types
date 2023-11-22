@@ -1,11 +1,12 @@
 /*
- * Copyright 2022-2023 Loïc Lamarque.
+ * Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -14,6 +15,7 @@ import kotools.types.Package
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class ZeroIntTest {
@@ -30,8 +32,10 @@ class ZeroIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
     fun descriptor_should_have_the_qualified_name_of_ZeroInt_as_serial_name() {
-        val result: String = ZeroInt.serializer().descriptor.serialName
-        result shouldEqual "${Package.number}.ZeroInt"
+        val serializer: KSerializer<ZeroInt> = ZeroInt.serializer()
+        val actual: String = serializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.ZeroInt"
+        assertEquals(expected, actual)
     }
 
     @Test

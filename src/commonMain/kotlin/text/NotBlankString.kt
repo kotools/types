@@ -93,7 +93,7 @@ public operator fun Char.plus(other: NotBlankString): NotBlankString =
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "${Package.text}.NotBlankString",
+        serialName = "${Package.TEXT}.NotBlankString",
         PrimitiveKind.STRING
     )
 

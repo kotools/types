@@ -6,6 +6,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -21,6 +22,7 @@ import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldNotEqual
 import kotools.types.text.toNotBlankString
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -100,10 +102,13 @@ class StrictlyNegativeIntTest {
 class StrictlyNegativeIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_StrictlyNegativeInt_as_serial_name(): Unit =
-        StrictlyNegativeInt.serializer()
-            .descriptor
-            .serialName shouldEqual "${Package.number}.StrictlyNegativeInt"
+    fun descriptor_should_have_the_qualified_name_of_StrictlyNegativeInt_as_serial_name() {
+        val serializer: KSerializer<StrictlyNegativeInt> =
+            StrictlyNegativeInt.serializer()
+        val actual: String = serializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.StrictlyNegativeInt"
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun serialization_should_behave_like_an_Int() {

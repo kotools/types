@@ -115,9 +115,11 @@ class NonZeroIntSerializerTest {
 
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_NonZeroInt_as_serial_name(): Unit =
-        serializer.descriptor
-            .serialName shouldEqual "${Package.number}.NonZeroInt"
+    fun descriptor_should_have_the_qualified_name_of_NonZeroInt_as_serial_name() {
+        val actual: String = serializer.descriptor.serialName
+        val expected = "${Package.NUMBER}.NonZeroInt"
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun serialization_should_behave_like_an_Int() {

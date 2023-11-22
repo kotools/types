@@ -117,7 +117,7 @@ public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
 
 internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.number}.NegativeInt".toNotBlankString()
+        "${Package.NUMBER}.NegativeInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): NegativeInt = value.toNegativeInt()
