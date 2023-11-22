@@ -1,4 +1,4 @@
-# Copyright 2022-2023 Loïc Lamarque.
+# Copyright 2022-2023 Loïc Lamarque, Kotools S.A.S.U.
 # Use of this source code is governed by the MIT license.
 
 name: Integration
@@ -9,12 +9,16 @@ on:
       - '**gradle*'
       - '**.kt*'
       - .github/workflows/integration.yml
+      - .github/workflows/static-code-analysis.yml
+      - qodana.yaml
   push:
     branches: [ main ]
     paths:
       - '**gradle*'
       - '**.kt*'
       - .github/workflows/integration.yml
+      - .github/workflows/static-code-analysis.yml
+      - qodana.yaml
   workflow_dispatch:
 env:
   CACHING: gradle
@@ -126,6 +130,19 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Test code
         run: ./gradlew :macosTest --no-daemon --quiet
+  static-code-analysis:
+    name: Static code analysis
+    needs: validate-wrapper
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Scan code
+        uses: JetBrains/qodana-action@v2023.2.8
+        with:
+          args: --fail-threshold,0
+          pr-mode: false
   windows-test:
     name: Windows tests
     needs: validate-wrapper
