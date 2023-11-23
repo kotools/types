@@ -9,6 +9,7 @@ on:
       - '**gradle*'
       - '**.kt*'
       - .github/workflows/integration.yml
+      - api/types.api
       - qodana.yaml
   push:
     branches: [ main ]
@@ -16,6 +17,7 @@ on:
       - '**gradle*'
       - '**.kt*'
       - .github/workflows/integration.yml
+      - api/types.api
       - qodana.yaml
   workflow_dispatch:
 env:
