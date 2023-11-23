@@ -37,6 +37,8 @@ All notable changes to this project will be documented in this file.
 - The `ExperimentalKotoolsTypesApi` annotation for marking experimental
   declarations of this project (issue [#191]).
 - Declarations lifecycle documentation (issue [#307]).
+- A static code analysis step using [Qodana] in the integration GitHub workflow
+  (issue [#331]).
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -50,6 +52,8 @@ All notable changes to this project will be documented in this file.
 [#257]: https://github.com/kotools/types/issues/257
 [#283]: https://github.com/kotools/types/issues/283
 [#307]: https://github.com/kotools/types/issues/307
+[#331]: https://github.com/kotools/types/issues/331
+[qodana]: https://www.jetbrains.com/qodana
 
 ### Changed
 
@@ -88,6 +92,8 @@ All notable changes to this project will be documented in this file.
 - The usage examples in the documentation of the `toStrictlyNegativeIntOrThrow`
   function (PR [#252]).
 - The copyright notice in the license (issue [#257]).
+- Internal problems reported by the static code analysis step in the integration
+  GitHub workflow (issue [#331]).
 
 [#252]: https://github.com/kotools/types/pull/252
 
