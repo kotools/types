@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 class AnyIntTest {
     @ExperimentalKotoolsTypesApi
     @Test
-    fun unaryMinus_should_return_the_negative_of_this_integer_number() {
+    fun unaryMinus_should_pass() {
         val number: AnyInt = AnyInt.random()
         val actual: AnyInt = -number
         val expected: AnyInt = number.toInt()
