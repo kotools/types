@@ -13,6 +13,15 @@ import kotlin.test.assertEquals
 class AnyIntTest {
     @ExperimentalKotoolsTypesApi
     @Test
+    fun constructor_like_function_should_pass_with_Int() {
+        val value: Int = Random.nextInt()
+        val actual = AnyInt(value)
+        val expected: AnyInt = value.toAnyIntOrFailure()
+        assertEquals(expected, actual)
+    }
+
+    @ExperimentalKotoolsTypesApi
+    @Test
     fun unaryMinus_should_pass() {
         val number: AnyInt = AnyInt.random()
         val actual: AnyInt = -number
