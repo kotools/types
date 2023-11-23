@@ -105,7 +105,7 @@ public final class kotools/types/collection/NotEmptySetKt {
 
 public final class kotools/types/experimental/AnyIntKt {
 	public static final synthetic fun AnyInt (I)Lkotools/types/number/AnyInt;
-	public static final fun unaryMinus (Lkotools/types/number/AnyInt;)Lkotools/types/number/AnyInt;
+	public static final synthetic fun unaryMinus (Lkotools/types/number/AnyInt;)Lkotools/types/number/AnyInt;
 }
 
 public abstract interface annotation class kotools/types/experimental/ExperimentalCollectionApi : java/lang/annotation/Annotation {
