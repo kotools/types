@@ -41,7 +41,6 @@ All notable changes to this project will be documented in this file.
   (issue [#331]).
 - The `AnyInt(Int)` **experimental** function for creating an instance of
   `AnyInt` with the specified `value`.
-  This function is not available for Java users.
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1

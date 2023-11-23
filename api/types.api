@@ -103,8 +103,11 @@ public final class kotools/types/collection/NotEmptySetKt {
 	public static final fun toNotEmptySet (Ljava/util/Collection;)Ljava/lang/Object;
 }
 
+public final class kotools/types/experimental/AnyIntFactory {
+	public static final fun create (I)Lkotools/types/number/AnyInt;
+}
+
 public final class kotools/types/experimental/AnyIntKt {
-	public static final synthetic fun AnyInt (I)Lkotools/types/number/AnyInt;
 	public static final synthetic fun unaryMinus (Lkotools/types/number/AnyInt;)Lkotools/types/number/AnyInt;
 }
 

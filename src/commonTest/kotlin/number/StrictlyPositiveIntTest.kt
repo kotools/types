@@ -144,7 +144,7 @@ class StrictlyPositiveIntSerializerTest {
     }
 }
 
-internal fun Number.toStrictlyPositiveIntOrFailure(): StrictlyPositiveInt =
+private fun Number.toStrictlyPositiveIntOrFailure(): StrictlyPositiveInt =
     toStrictlyPositiveInt()
         .getOrNull()
         ?: unexpectedCreationFailure<StrictlyPositiveInt>(value = this)

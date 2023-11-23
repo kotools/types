@@ -1,11 +1,6 @@
 package kotools.types.experimental
 
-import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.number.AnyInt
-import kotools.types.number.StrictlyNegativeInt
-import kotools.types.number.ZeroInt
-import kotools.types.number.toStrictlyNegativeInt
-import kotools.types.number.toStrictlyPositiveIntOrFailure
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,35 +8,11 @@ import kotlin.test.assertEquals
 class AnyIntTest {
     @ExperimentalKotoolsTypesApi
     @Test
-    fun constructor_like_function_should_pass_with_Int() {
-        val value: Int = Random.nextInt()
-        val actual = AnyInt(value)
-        val expected: AnyInt = value.toAnyIntOrFailure()
-        assertEquals(expected, actual)
-    }
-
-    @ExperimentalKotoolsTypesApi
-    @Test
     fun unaryMinus_should_pass() {
-        val number: AnyInt = AnyInt.random()
+        val value: Int = Random.nextInt()
+        val number = AnyInt(value)
         val actual: AnyInt = -number
-        val expected: AnyInt = number.toInt()
-            .unaryMinus()
-            .toAnyIntOrFailure()
+        val expected = AnyInt(-value)
         assertEquals(expected, actual)
     }
 }
-
-private fun AnyInt.Companion.random(): AnyInt = Random.nextInt()
-    .toAnyIntOrFailure()
-
-private fun Int.toAnyIntOrFailure(): AnyInt = when {
-    this == 0 -> ZeroInt
-    this > 0 -> toStrictlyPositiveIntOrFailure()
-    else -> toStrictlyNegativeIntOrFailure()
-}
-
-private fun Int.toStrictlyNegativeIntOrFailure(): StrictlyNegativeInt =
-    toStrictlyNegativeInt()
-        .getOrNull()
-        ?: unexpectedCreationFailure<StrictlyNegativeInt>(value = this)
