@@ -37,6 +37,11 @@ group = "org.jetbrains.dokka"
 name = "versioning-plugin"
 version.ref = "dokka"
 
+[libraries.junit-jupiter]
+group = "org.junit.jupiter"
+name = "junit-jupiter"
+version = "5.8.2"
+
 [libraries.kotlin-bom]
 group = "org.jetbrains.kotlin"
 name = "kotlin-bom"
