@@ -46,7 +46,15 @@ public fun AnyInt(value: Int): AnyInt = when {
     else -> ZeroInt
 }
 
-/** Returns the negative of this integer number. */
+/**
+ * Returns the negative of this integer number.
+ *
+ * ```kotlin
+ * val number = AnyInt(1)
+ * val result: AnyInt = -number // or number.unaryMinus()
+ * println(result) // -1
+ * ```
+ */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSinceKotoolsTypes("4.3.2")
 public operator fun AnyInt.unaryMinus(): AnyInt {
