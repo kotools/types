@@ -7,6 +7,7 @@ on:
     branches: [ main ]
     paths:
       - '**gradle*'
+      - '**.java'
       - '**.kt*'
       - .github/workflows/integration.yml
       - api/types.api
@@ -15,6 +16,7 @@ on:
     branches: [ main ]
     paths:
       - '**gradle*'
+      - '**.java'
       - '**.kt*'
       - .github/workflows/integration.yml
       - api/types.api
@@ -63,6 +65,21 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Check API binaries
         run: ./gradlew :apiCheck --no-daemon
+  java-compatibility-test:
+    name: Java compatibility tests
+    needs: gradle-wrapper-validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :java-compatibility:test --no-daemon
   js-test:
     name: Kotlin/JS tests
     needs: gradle-wrapper-validation
@@ -143,6 +160,7 @@ jobs:
     name: Submit dependencies to GitHub
     needs:
       - api-binary-check
+      - java-compatibility-test
       - js-test
       - jvm-test
       - linux-test
