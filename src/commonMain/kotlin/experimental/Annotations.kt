@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -11,10 +11,8 @@ import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationTarget.PROPERTY
 import kotlin.annotation.AnnotationTarget.TYPEALIAS
-import kotlin.jvm.JvmSynthetic
 
-@JvmSynthetic
-internal const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
+private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
         " and can be incompatibly changed in the future."
 
 /** Marks declarations that are still **experimental** in the collection API. */
@@ -24,6 +22,14 @@ internal const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 @SinceKotoolsTypes("4.3.1")
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalCollectionApi
+
+/** Marks declarations that are still **experimental** in the API. */
+@MustBeDocumented
+@RequiresOptIn(OPT_IN_MESSAGE)
+@Retention(BINARY)
+@SinceKotoolsTypes("4.3.2")
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
+public annotation class ExperimentalKotoolsTypesApi
 
 /** Marks declarations that are still **experimental** in the number API. */
 @MustBeDocumented
