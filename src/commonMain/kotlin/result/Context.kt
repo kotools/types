@@ -5,13 +5,13 @@
 
 package kotools.types.result
 
-import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotools.types.number.NegativeInt
 import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
@@ -32,7 +32,7 @@ import kotools.types.number.toStrictlyPositiveInt as delegateToStrictlyPositiveI
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
 
 /** Context available when calling the [resultOf] function. */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public sealed interface ResultContext {
     /**
      * Returns this number as a [NonZeroInt], which may involve rounding or
@@ -139,6 +139,6 @@ private object ResultContextImplementation : ResultContext
  * [ResultContext], or returns an encapsulated [Throwable] if calling the
  * [block] function throws an exception.
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public inline fun <T> resultOf(block: ResultContext.() -> T): Result<T> =
     ResultContextImplementation.runCatching(block)

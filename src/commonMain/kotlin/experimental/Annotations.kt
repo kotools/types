@@ -5,7 +5,8 @@
 
 package kotools.types.experimental
 
-import kotools.types.SinceKotoolsTypes
+import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
@@ -19,7 +20,7 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@SinceKotoolsTypes("4.3.1")
+@Since(KotoolsTypesVersion.V4_3_1)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalCollectionApi
 
@@ -27,7 +28,7 @@ public annotation class ExperimentalCollectionApi
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@SinceKotoolsTypes("4.3.2")
+@Since(KotoolsTypesVersion.V4_3_2)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalKotoolsTypesApi
 
@@ -35,7 +36,7 @@ public annotation class ExperimentalKotoolsTypesApi
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@SinceKotoolsTypes("4.2")
+@Since(KotoolsTypesVersion.V4_2_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalNumberApi
 
@@ -43,7 +44,7 @@ public annotation class ExperimentalNumberApi
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@SinceKotoolsTypes("4.2")
+@Since(KotoolsTypesVersion.V4_2_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalRangeApi
 
@@ -51,7 +52,7 @@ public annotation class ExperimentalRangeApi
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@SinceKotoolsTypes("4.2")
+@Since(KotoolsTypesVersion.V4_2_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalResultApi
 
@@ -59,6 +60,6 @@ public annotation class ExperimentalResultApi
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@SinceKotoolsTypes("4.2")
+@Since(KotoolsTypesVersion.V4_2_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalTextApi

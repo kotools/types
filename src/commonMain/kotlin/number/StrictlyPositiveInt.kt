@@ -8,11 +8,11 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
@@ -29,24 +29,24 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [negative][NegativeInt].
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     runCatching { StrictlyPositiveInt(toInt()) }
 
 /** Representation of positive integers excluding [zero][ZeroInt]. */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
-@SinceKotoolsTypes("1.1")
+@Since(KotoolsTypesVersion.V1_1_0)
 public value class StrictlyPositiveInt
 internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
     init {
         require(value.isStrictlyPositive()) { errorMessageFor(value) }
     }
 
-    @SinceKotoolsTypes("4.0")
+    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int = value
 
-    @SinceKotoolsTypes("4.0")
+    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String = "$value"
 
     /**
@@ -82,7 +82,7 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
                 .getOrThrow()
 
         /** Returns a random [StrictlyPositiveInt]. */
-        @SinceKotoolsTypes("3.0")
+        @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): StrictlyPositiveInt = (min.value..max.value)
             .random()
             .toStrictlyPositiveInt()

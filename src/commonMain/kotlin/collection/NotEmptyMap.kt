@@ -12,7 +12,8 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.SinceKotoolsTypes
+import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -28,7 +29,7 @@ import kotlin.jvm.JvmInline
  * println(map) // {a=1, b=2}
  * ```
  */
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
@@ -70,7 +71,7 @@ public fun <K, V> notEmptyMapOf(
  * println(notEmptyMap) // {a=1, b=2}
  * ```
  */
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap(entries) }
 
@@ -83,7 +84,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  */
 @JvmInline
 @Serializable(NotEmptyMapSerializer::class)
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyMap<K, out V> private constructor(
     private val delegate: Map<K, V>
 ) {

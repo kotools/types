@@ -8,13 +8,14 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
+import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
 /** Representation of the zero integer. */
 @Serializable(ZeroIntSerializer::class)
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public object ZeroInt : PositiveInt, NegativeInt {
     override fun toInt(): Int = 0
     override fun toString(): String = "${toInt()}"

@@ -1,11 +1,12 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.collection
 
-import kotools.types.SinceKotoolsTypes
+import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
@@ -15,7 +16,7 @@ import kotools.types.number.toStrictlyPositiveInt
 /**
  * Representation of collections containing at least one element of type [E].
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public sealed interface NotEmptyCollection<out E> {
     /**
      * The first element of this collection.
@@ -76,7 +77,7 @@ public sealed interface NotEmptyCollection<out E> {
  * Returns the size of this collection, or returns [ZeroInt] if this collection
  * is `null`.
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt
 

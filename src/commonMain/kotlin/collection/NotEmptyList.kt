@@ -12,7 +12,8 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.SinceKotoolsTypes
+import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 
 /**
@@ -26,7 +27,7 @@ import kotlin.jvm.JvmInline
  * println(integers) // [1, 2, 3]
  * ```
  */
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
     return NotEmptyList(elements)
@@ -64,7 +65,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * println(notEmptyList) // [1, 2, 3]
  * ```
  */
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     runCatching {
         val elements: List<E> = toList()
@@ -79,7 +80,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  */
 @JvmInline
 @Serializable(NotEmptyListSerializer::class)
-@SinceKotoolsTypes("4.0")
+@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyList<out E> internal constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {

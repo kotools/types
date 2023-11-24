@@ -8,11 +8,11 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
-import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.Since
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
@@ -24,7 +24,7 @@ import kotools.types.text.toNotBlankString
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number is [strictly negative][StrictlyNegativeInt].
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toPositiveInt(): Result<PositiveInt> {
     val value: Int = toInt()
     return when {
@@ -39,7 +39,7 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
 
 /** Representation of positive integers including [zero][ZeroInt]. */
 @Serializable(PositiveIntSerializer::class)
-@SinceKotoolsTypes("1.1")
+@Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface PositiveInt : AnyInt {
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
@@ -58,17 +58,17 @@ public sealed interface PositiveInt : AnyInt {
         }
 
         /** Returns a random [PositiveInt]. */
-        @SinceKotoolsTypes("3.0")
+        @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): PositiveInt = (min.toInt()..max.toInt())
             .random()
             .toPositiveInt()
             .getOrThrow()
     }
 
-    @SinceKotoolsTypes("4.0")
+    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int
 
-    @SinceKotoolsTypes("4.0")
+    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String
 }
 
@@ -86,7 +86,7 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.div(other: StrictlyPositiveInt): PositiveInt {
     val result: Int = toInt() / other
     return result.toPositiveInt()
@@ -97,7 +97,7 @@ public operator fun PositiveInt.div(other: StrictlyPositiveInt): PositiveInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
     val result: Int = toInt() / other
     return result.toNegativeInt()
@@ -108,7 +108,7 @@ public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
-@SinceKotoolsTypes("4.1")
+@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
     val result: Int = toInt() % other
     return result.toPositiveInt()
