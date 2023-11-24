@@ -194,7 +194,6 @@ Here's additional documentation for learning more about this project:
 - [Versioning strategy](documentation/versioning-strategy.md)
 - [Declarations lifecycle](documentation/declarations-lifecycle.md)
 - [Security Policy](SECURITY.md)
-- [Roadmap](documentation/roadmap.md)
 
 ## Community
 
