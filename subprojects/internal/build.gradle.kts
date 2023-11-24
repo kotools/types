@@ -14,7 +14,10 @@ plugins {
 
 repositories.mavenCentral()
 
-dependencies { commonMainImplementation(platform(libs.kotlin.bom)) }
+dependencies {
+    commonMainImplementation(platform(libs.kotlin.bom))
+    commonTestImplementation(libs.kotlin.test)
+}
 
 tasks.withType<KotlinCompile>().configureEach {
     javaPackagePrefix = "kotools.types.internal"
