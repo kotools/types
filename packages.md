@@ -9,10 +9,6 @@ Contains types such as `NotEmptyList` for manipulating collections.
 # Package kotools.types.experimental
 
 Experimental APIs, subject to change in future versions.
-This is the only package that doesn't follow the
-[Semantic Versioning][semantic-versioning] specifications.
-
-[semantic-versioning]: https://semver.org/
 
 # Package kotools.types.number
 
