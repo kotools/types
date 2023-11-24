@@ -21,9 +21,6 @@ This project provides different type of declarations:
 
 ## Evolution principles
 
-The evolution of declarations provided by this project should respect the
-following principles:
-
 ### Experimental declarations
 
 A new declaration should be introduced in **experimental** stage for collecting
@@ -34,9 +31,6 @@ implementation uses another **experimental** declaration.
 
 An **experimental** declaration can be promoted to **stable** by removing the
 experimental annotation marking it that requires an explicit [opt-in].
-
-An **experimental** declaration can be updated or removed freely in any type of
-releases.
 
 ### Stable declarations
 
