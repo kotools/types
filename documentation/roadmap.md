@@ -40,7 +40,7 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 ### Experimental API <a id="v4.3.3-experimental-api"></a>
 
-- New factory functions named `of` or `from` for all types (issue [#316]).
+- New factory functions named `create*` for all types (issue [#316]).
 - New equality operations for the `Bound` type (issue [#223]).
 - New equality operations for the `NotEmptyRange` type (issue [#225]).
 - New type converters on `AnyInt` to [Byte][kotlin.byte],
@@ -53,7 +53,7 @@ See the [corresponding milestone][milestone-4.3.3] for more details.
 
 ### Stable API <a id="v4.4.0-stable-api"></a>
 
-- Stabilization of factory functions named `of` or `from` (issue [#321]).
+- Stabilization of factory functions named `create*` (issue [#321]).
 - Deprecation of factory functions using [Result][kotlin.result] (issue
   [#263]).
 - Deprecation of the `ResultContext` type and its declarations (issue [#264]).
