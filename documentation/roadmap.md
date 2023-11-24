@@ -40,6 +40,7 @@ See the [corresponding milestone][milestone-4.3.2] for more details.
 
 ### Experimental API <a id="v4.3.3-experimental-api"></a>
 
+- Deletion of `Result.flatMap` function (issue [#125]).
 - New factory functions named `create*` for all types (issue [#316]).
 - New equality operations for the `Bound` type (issue [#223]).
 - New equality operations for the `NotEmptyRange` type (issue [#225]).
@@ -62,7 +63,6 @@ See the [corresponding milestone][milestone-4.3.3] for more details.
 
 - Deprecation of annotations in the `kotools.types.experimental` package, except
   the `ExperimentalKotoolsTypesApi` annotation (issue [#327]).
-- Deletion of `Result.flatMap` function (issue [#125]).
 
 See the [corresponding milestone][milestone-4.4.0] for more details.
 
