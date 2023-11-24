@@ -1,17 +1,24 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.result
 
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.SinceKotoolsTypes
 import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
 import kotools.types.experimental.ExperimentalNumberApi
-import kotools.types.number.*
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.number.NegativeInt
+import kotools.types.number.NonZeroInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyNegativeInt
+import kotools.types.number.StrictlyPositiveDouble
+import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.ZeroInt
 import kotools.types.text.NotBlankString
 import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
 import kotools.types.collection.toNotEmptyMap as delegateToNotEmptyMap
@@ -80,7 +87,7 @@ public sealed interface ResultContext {
      * number is negative.
      */
     @ExperimentalNumberApi
-    @ExperimentalSinceKotoolsTypes("4.2")
+    @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
     @Throws(IllegalArgumentException::class)
     public fun Number.toStrictlyPositiveDouble(): StrictlyPositiveDouble =
         delegateToStrictlyPositiveDouble()

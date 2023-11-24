@@ -1,12 +1,13 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.result
 
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.experimental.ExperimentalResultApi
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 
 /**
  * Transforms the encapsulated value from [T] to [R] if this result is a
@@ -15,7 +16,7 @@ import kotools.types.experimental.ExperimentalResultApi
  * [failure][Result.isFailure].
  */
 @ExperimentalResultApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public inline fun <T, R> Result<T>.flatMap(
     transform: (T) -> Result<R>
 ): Result<R> = exceptionOrNull()

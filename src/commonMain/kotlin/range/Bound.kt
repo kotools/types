@@ -1,19 +1,20 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.range
 
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 
 /**
  * Represents a bound in a [range][NotEmptyRange].
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalRangeApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
     /** The value of this bound. */
     public val value: T
@@ -27,7 +28,7 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalRangeApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
 internal constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
@@ -38,7 +39,7 @@ internal constructor(override val value: T) : Bound<T> {
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalRangeApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
 internal constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"

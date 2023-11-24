@@ -13,9 +13,10 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalNumberApi
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 
 private fun Double.isStrictlyPositive(): Boolean = this > 0.0
@@ -26,7 +27,7 @@ private fun Double.isStrictlyPositive(): Boolean = this > 0.0
  * [IllegalArgumentException] if this number is negative.
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
@@ -38,7 +39,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * [Double] type.
  */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 @JvmInline
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 public value class StrictlyPositiveDouble internal constructor(

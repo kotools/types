@@ -13,10 +13,11 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalTextApi
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -64,7 +65,7 @@ public value class NotBlankString internal constructor(
 }
 
 /** Concatenates this string with the [other] one. */
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 @ExperimentalTextApi
 public operator fun NotBlankString.plus(other: String): NotBlankString = "$this"
     .plus(other)
@@ -72,19 +73,19 @@ public operator fun NotBlankString.plus(other: String): NotBlankString = "$this"
     .getOrThrow()
 
 /** Concatenates this string with the [other] one. */
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 @ExperimentalTextApi
 public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
     plus("$other")
 
 /** Concatenates this string with the [other] character. */
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 @ExperimentalTextApi
 public operator fun NotBlankString.plus(other: Char): NotBlankString =
     plus("$other")
 
 /** Concatenates this character with the [other] string. */
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 @ExperimentalTextApi
 public operator fun Char.plus(other: NotBlankString): NotBlankString =
     plus("$other")

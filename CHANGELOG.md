@@ -90,6 +90,7 @@ All notable changes to this project will be documented in this file.
   - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
   - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
   - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
+- The `ExperimentalSinceKotoolsTypes` annotation from the API reference.
 
 [#258]: https://github.com/kotools/types/issues/258
 

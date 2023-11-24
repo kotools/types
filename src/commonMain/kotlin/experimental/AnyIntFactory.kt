@@ -7,7 +7,8 @@
 
 package kotools.types.experimental
 
-import kotools.types.ExperimentalSinceKotoolsTypes
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.AnyInt
 import kotools.types.number.StrictlyNegativeInt
@@ -36,7 +37,7 @@ import kotlin.jvm.JvmName
  * ```
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSinceKotoolsTypes("4.3.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 @JvmName("create")
 public fun AnyInt(value: Int): AnyInt = when {
     value > 0 -> value.toStrictlyPositiveInt()

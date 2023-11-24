@@ -1,12 +1,13 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.range
 
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 
 /**
  * Returns a not empty range with the given pair of [bounds].
@@ -14,7 +15,7 @@ import kotools.types.experimental.ExperimentalRangeApi
  * between the given [bounds].
  */
 @ExperimentalRangeApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public fun <T : Comparable<T>> notEmptyRangeOf(
     bounds: NotEmptyRange.BuilderScope<T>.() -> Pair<Bound<T>, Bound<T>>
 ): NotEmptyRange<T> = NotEmptyRange.BuilderScope<T>()
@@ -32,7 +33,7 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
  * @param T the **covariant** type of values in this range.
  */
 @ExperimentalRangeApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class NotEmptyRange<out T : Comparable<@UnsafeVariance T>>
 internal constructor(
     /** The start of this range. */
@@ -68,7 +69,7 @@ internal constructor(
  * otherwise.
  */
 @ExperimentalRangeApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
     value: T
 ): Boolean {

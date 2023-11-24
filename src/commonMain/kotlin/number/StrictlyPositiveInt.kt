@@ -7,11 +7,12 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
-import kotools.types.ExperimentalSinceKotoolsTypes
 import kotools.types.Package
 import kotools.types.SinceKotoolsTypes
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
@@ -64,7 +65,7 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
 
         /** The range of values a [StrictlyPositiveInt] can have. */
         @ExperimentalRangeApi
-        @ExperimentalSinceKotoolsTypes("4.2")
+        @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
         public val range: NotEmptyRange<StrictlyPositiveInt> by lazy {
             val start: StrictlyPositiveInt = 1
                 .toStrictlyPositiveInt()
@@ -91,7 +92,7 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
 
 /** Returns the negative of this integer. */
 @ExperimentalNumberApi
-@ExperimentalSinceKotoolsTypes("4.2")
+@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt {
     val value: Int = -toInt()
     return value.toStrictlyNegativeInt()
