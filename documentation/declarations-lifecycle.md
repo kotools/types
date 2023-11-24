@@ -1,3 +1,8 @@
+<!--
+    Copyright 2023 Kotools S.A.S.U.
+    Use of this source code is governed by the MIT license.
+-->
+
 # Declarations lifecycle
 
 ## Stability stages
