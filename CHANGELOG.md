@@ -67,8 +67,8 @@ All notable changes to this project will be documented in this file.
 - Kotlin compiler's treatment of warnings as errors (issue [#330]).
 - Move the following **experimental** operation to the
   `kotools.types.experimental` package with a new signature (issue [#319]):
-  - `AnyInt.unaryMinus`
-  - `NegativeInt.unaryMinus`
+    - `AnyInt.unaryMinus`
+    - `NegativeInt.unaryMinus`
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#260]: https://github.com/kotools/types/issues/260
