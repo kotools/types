@@ -105,6 +105,14 @@ All notable changes to this project will be documented in this file.
 
 [#252]: https://github.com/kotools/types/pull/252
 
+### Security
+
+- Upgrade to [Webpack 5.76.3][webpack-5.76.3] for avoiding cross-realm object
+  access (issue [#313]).
+
+[#313]: https://github.com/kotools/types/issues/313
+[webpack-5.76.3]: https://github.com/webpack/webpack/releases/tag/v5.76.3
+
 ## 4.3.1
 
 _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._

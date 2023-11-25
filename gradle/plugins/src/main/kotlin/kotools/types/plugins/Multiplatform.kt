@@ -34,6 +34,8 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
     withType<YarnPlugin>().configureEach {
         val yarn: YarnRootExtension = project.rootProject.extensions.getByType()
         yarn.lockFileDirectory = project.projectDir
+        project.property("webpack.version")
+            ?.let { yarn.resolution("webpack", "$it") }
     }
 
 private fun ExtensionContainer.configure() {
