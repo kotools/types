@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="All runtime dependencies" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="Internal JVM tests" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value="runtimeDependencies" />
+          <option value=":internal:jvmTest" />
         </list>
       </option>
       <option name="vmOptions" />
