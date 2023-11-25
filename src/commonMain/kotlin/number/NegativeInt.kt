@@ -8,12 +8,10 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
-import kotools.types.internal.unexpectedCreationError
 import kotools.types.range.NotEmptyRange
 import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
@@ -71,16 +69,6 @@ public sealed interface NegativeInt : AnyInt {
 
     @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String
-}
-
-/** Returns the negative of this integer. */
-@ExperimentalNumberApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-public operator fun NegativeInt.unaryMinus(): PositiveInt {
-    val value: Int = -toInt()
-    return value.toPositiveInt()
-        .getOrNull()
-        ?: unexpectedCreationError<PositiveInt>(value)
 }
 
 /**

@@ -129,6 +129,10 @@ public abstract interface annotation class kotools/types/experimental/Experiment
 public abstract interface annotation class kotools/types/experimental/ExperimentalTextApi : java/lang/annotation/Annotation {
 }
 
+public final class kotools/types/experimental/NegativeIntKt {
+	public static final synthetic fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
+}
+
 public abstract interface class kotools/types/number/AnyInt : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/AnyInt$Companion;
 	public abstract fun compareTo (Lkotools/types/number/AnyInt;)I
@@ -181,7 +185,6 @@ public final class kotools/types/number/NegativeIntKt {
 	public static final fun div-Vo0Sc0k (Lkotools/types/number/NegativeInt;I)Lkotools/types/number/NegativeInt;
 	public static final fun rem (Lkotools/types/number/NegativeInt;Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NegativeInt;
 	public static final fun toNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
-	public static final fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
 }
 
 public abstract interface class kotools/types/number/NonZeroInt : kotools/types/number/AnyInt {

@@ -65,9 +65,10 @@ All notable changes to this project will be documented in this file.
   [#261]).
 - Opt-in message of experimental annotations (PR [#328]).
 - Kotlin compiler's treatment of warnings as errors (issue [#330]).
-- Move the `AnyInt.unaryMinus` **experimental** operation to the
-  `kotools.types.experimental` package with a new signature (issue [#319]).
-  Please note that this operation is currently not available for Java users.
+- Move the following **experimental** operation to the
+  `kotools.types.experimental` package with a new signature (issue [#319]):
+  - `AnyInt.unaryMinus`
+  - `NegativeInt.unaryMinus`
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#260]: https://github.com/kotools/types/issues/260

@@ -10,7 +10,6 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.range.InclusiveBound
@@ -82,17 +81,6 @@ class NegativeIntTest {
         val expectedMessage: String = NegativeIntConstructionException(number)
             .message
         assertEquals(expectedMessage, actualMessage)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun unaryMinus_should_pass() {
-        val number: NegativeInt = NegativeInt.random()
-        val actual: PositiveInt = -number
-        val expected: PositiveInt = number.toInt()
-            .unaryMinus()
-            .toPositiveIntOrFailure()
-        assertEquals(expected, actual)
     }
 
     @Test
