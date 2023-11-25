@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class AnyIntFactoryTest {
     @Test
-    public void createShouldPassWithInt() {
+    public void create_should_pass_with_int() {
         final int expected = new Random()
                 .nextInt();
         final AnyInt number = AnyIntFactory.create(expected);
