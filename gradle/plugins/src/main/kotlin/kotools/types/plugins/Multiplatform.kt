@@ -62,7 +62,8 @@ private fun TaskContainer.configure(project: Project) {
         kotlinOptions {
             allWarningsAsErrors = true
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-            languageVersion = "1.5"
+            project.property("kotlin.language.version")
+                ?.let { languageVersion = "$it" }
         }
     }
     withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
