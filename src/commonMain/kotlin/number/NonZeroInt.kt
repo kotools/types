@@ -10,7 +10,6 @@ import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
@@ -85,14 +84,6 @@ public sealed interface NonZeroInt : AnyInt {
     @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String
 }
-
-/** Returns the negative of this integer. */
-@ExperimentalNumberApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-public operator fun NonZeroInt.unaryMinus(): NonZeroInt = toInt()
-    .unaryMinus()
-    .toNonZeroInt()
-    .getOrThrow()
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer

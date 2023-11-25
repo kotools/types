@@ -11,9 +11,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -80,17 +78,6 @@ class NonZeroIntTest {
         assertEquals(expectedMessage, actualMessage)
     }
 
-    @ExperimentalNumberApi
-    @Test
-    fun unaryMinus_should_pass() {
-        val number: NonZeroInt = NonZeroInt.random()
-        val actual: NonZeroInt = -number
-        val expected: NonZeroInt = number.toInt()
-            .unaryMinus()
-            .toNonZeroIntOrFailure()
-        assertEquals(expected, actual)
-    }
-
     @Test
     fun int_div_should_pass_with_a_NonZeroInt() {
         val x: Int = Random.nextInt()
@@ -145,7 +132,3 @@ class NonZeroIntSerializerTest {
         exception.shouldHaveAMessage()
     }
 }
-
-private fun Number.toNonZeroIntOrFailure(): NonZeroInt = toNonZeroInt()
-    .getOrNull()
-    ?: unexpectedCreationFailure<NonZeroInt>(value = this)
