@@ -33,7 +33,7 @@ public class MultiplatformPlugin : Plugin<Project> {
 private fun PluginContainer.configureYarn(project: Project): Unit =
     withType<YarnPlugin>().configureEach {
         val yarn: YarnRootExtension = project.rootProject.extensions.getByType()
-        yarn.lockFileDirectory = project.projectDir
+        yarn.lockFileDirectory = project.rootDir
         project.property("webpack.version")
             ?.let { yarn.resolution("webpack", "$it") }
     }
