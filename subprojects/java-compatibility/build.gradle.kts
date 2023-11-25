@@ -7,7 +7,11 @@ plugins { java }
 
 repositories.mavenCentral()
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+property("java.version")
+    ?.toString()
+    ?.let(JavaLanguageVersion::of)
+    ?.let(java.toolchain.languageVersion::set)
+    ?: error("The 'java.version' property wasn't found.")
 
 dependencies {
     testImplementation(rootProject)

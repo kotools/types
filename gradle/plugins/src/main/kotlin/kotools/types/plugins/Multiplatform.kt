@@ -25,7 +25,7 @@ public class MultiplatformPlugin : Plugin<Project> {
     /** Applies this plugin to the given [project]. */
     override fun apply(project: Project) {
         project.rootProject.plugins.configureYarn(project)
-        project.extensions.configure()
+        project.extensions.configure(project)
         project.tasks.configure(project)
     }
 }
@@ -36,15 +36,20 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
         yarn.lockFileDirectory = project.rootDir
         project.property("webpack.version")
             ?.let { yarn.resolution("webpack", "$it") }
+            ?: error("The 'webpack.version' property wasn't found.")
     }
 
-private fun ExtensionContainer.configure() {
+private fun ExtensionContainer.configure(project: Project) {
     val kotlin: KotlinMultiplatformExtension = getByType()
     kotlin.run {
         explicitApi()
         js(IR) { browser() }
         jvm()
-        jvmToolchain(17)
+        project.property("java.version")
+            ?.toString()
+            ?.toIntOrNull()
+            ?.let(::jvmToolchain)
+            ?: error("The 'java.version' property wasn't found.")
         linuxX64("linux")
         macosX64("macos")
         mingwX64("windows")
