@@ -373,10 +373,6 @@ public final class kotools/types/result/ContextKt {
 	public static final fun resultOf (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
 }
 
-public final class kotools/types/result/OperationsKt {
-	public static final fun flatMap (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
-}
-
 public abstract interface class kotools/types/result/ResultContext {
 	public abstract fun toNegativeInt (Ljava/lang/Number;)Lkotools/types/number/NegativeInt;
 	public abstract fun toNonZeroInt (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;

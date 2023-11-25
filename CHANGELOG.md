@@ -91,7 +91,9 @@ All notable changes to this project will be documented in this file.
   - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
   - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
 - The `ExperimentalSinceKotoolsTypes` and the `SinceKotoolsTypes` annotations.
+- The `Result.flatMap` **experimental** function (issue [#125]).
 
+[#125]: https://github.com/kotools/types/issues/125
 [#258]: https://github.com/kotools/types/issues/258
 
 ### Fixed
