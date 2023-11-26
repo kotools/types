@@ -24,7 +24,7 @@ import kotlin.jvm.JvmSynthetic
  * Please note that this function is currently not available for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
 @JvmSynthetic
 public operator fun AnyInt.unaryMinus(): AnyInt {
     val value: Int = -toInt()
