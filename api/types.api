@@ -137,6 +137,10 @@ public final class kotools/types/experimental/NonZeroIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NonZeroInt;
 }
 
+public final class kotools/types/experimental/PositiveIntKt {
+	public static final synthetic fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
+}
+
 public abstract interface class kotools/types/number/AnyInt : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/AnyInt$Companion;
 	public abstract fun compareTo (Lkotools/types/number/AnyInt;)I
@@ -239,7 +243,6 @@ public final class kotools/types/number/PositiveIntKt {
 	public static final fun div-Vo0Sc0k (Lkotools/types/number/PositiveInt;I)Lkotools/types/number/PositiveInt;
 	public static final fun rem (Lkotools/types/number/PositiveInt;Lkotools/types/number/NonZeroInt;)Lkotools/types/number/PositiveInt;
 	public static final fun toPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
-	public static final fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
 }
 
 public final class kotools/types/number/StrictlyNegativeInt : kotools/types/number/NegativeInt, kotools/types/number/NonZeroInt {
