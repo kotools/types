@@ -15,6 +15,7 @@ property("java.version")
 
 dependencies {
     testImplementation(rootProject)
+    testImplementation(project(":internal"))
     testImplementation(libs.junit.jupiter)
 }
 

@@ -16,7 +16,25 @@ public enum class KotoolsTypesVersion {
     V4_3_2,
     V4_3_3;
 
-    /** Returns the string representation of this version. */
+    /**
+     * Returns the string representation of this version.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val version: KotoolsTypesVersion = KotoolsTypesVersion.V4_0_0
+     * val message = "$version" // or version.toString()
+     * println(message) // 4.0.0
+     * ```
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * KotoolsTypesVersion version = KotoolsTypesVersion.V4_0_0;
+     * String message = version.toString();
+     * System.out.println(message); // 4.0.0
+     * ```
+     */
     override fun toString(): String = name.drop(1)
         .replace('_', '.')
 }
