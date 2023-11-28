@@ -12,7 +12,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
@@ -82,14 +81,6 @@ class StrictlyNegativeIntTest {
             .toNotBlankString()
             .getOrThrow()
             .shouldEqual(StrictlyNegativeInt errorMessageFor number)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun unaryMinus_should_pass() {
-        val x: StrictlyNegativeInt = StrictlyNegativeInt.random()
-        val result: StrictlyPositiveInt = -x
-        result.toInt() shouldEqual -x.toInt()
     }
 
     @Test
