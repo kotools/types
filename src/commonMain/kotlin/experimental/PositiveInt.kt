@@ -31,7 +31,8 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalSince(KotoolsTypesVersion.V4_3_3)
 @JvmSynthetic
 public operator fun PositiveInt.unaryMinus(): NegativeInt {
-    val value: Int = -toInt()
+    val value: Int = toInt()
+        .unaryMinus()
     return value.toNegativeInt()
         .getOrNull()
         ?: unexpectedCreationError<NegativeInt>(value)
