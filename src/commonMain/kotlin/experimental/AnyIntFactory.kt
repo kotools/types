@@ -11,8 +11,6 @@ import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.AnyInt
-import kotools.types.number.StrictlyNegativeInt
-import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.number.toStrictlyNegativeInt
 import kotools.types.number.toStrictlyPositiveInt
@@ -39,12 +37,10 @@ import kotlin.jvm.JvmName
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_3_3)
 @JvmName("create")
-public fun AnyInt(value: Int): AnyInt = when {
-    value > 0 -> value.toStrictlyPositiveInt()
-        .getOrNull()
-        ?: unexpectedCreationError<StrictlyPositiveInt>(value)
-    value < 0 -> value.toStrictlyNegativeInt()
-        .getOrNull()
-        ?: unexpectedCreationError<StrictlyNegativeInt>(value)
-    else -> ZeroInt
+public fun AnyInt(value: Int): AnyInt {
+    if (value == 0) return ZeroInt
+    val result: Result<AnyInt> =
+        if (value > 0) value.toStrictlyPositiveInt()
+        else value.toStrictlyNegativeInt()
+    return result.getOrNull() ?: unexpectedCreationError<AnyInt>(value)
 }
