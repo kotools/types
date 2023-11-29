@@ -15,6 +15,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
+import kotools.types.internal.unexpectedCreationError
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
@@ -114,9 +115,11 @@ internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
         "${Package.NUMBER}.AnyInt".toNotBlankString()
     }
 
-    override fun deserialize(value: Int): AnyInt = when {
-        value == ZeroInt.toInt() -> Result.success(ZeroInt)
-        value > ZeroInt.toInt() -> value.toStrictlyPositiveInt()
-        else -> value.toStrictlyNegativeInt()
-    }.getOrThrow()
+    override fun deserialize(value: Int): AnyInt {
+        if (value == 0) return ZeroInt
+        val result: Result<AnyInt> =
+            if (value > 0) value.toStrictlyPositiveInt()
+            else value.toStrictlyNegativeInt()
+        return result.getOrNull() ?: unexpectedCreationError<AnyInt>(value)
+    }
 }
