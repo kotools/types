@@ -145,6 +145,10 @@ public final class kotools/types/experimental/StrictlyNegativeIntKt {
 	public static final synthetic fun unaryMinus-I890jeU (I)I
 }
 
+public final class kotools/types/experimental/StrictlyPositiveIntKt {
+	public static final synthetic fun unaryMinus-UPGVeGw (I)I
+}
+
 public abstract interface class kotools/types/number/AnyInt : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/AnyInt$Companion;
 	public abstract fun compareTo (Lkotools/types/number/AnyInt;)I
@@ -332,7 +336,6 @@ public final class kotools/types/number/StrictlyPositiveInt$Companion {
 
 public final class kotools/types/number/StrictlyPositiveIntKt {
 	public static final fun toStrictlyPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
-	public static final fun unaryMinus-UPGVeGw (I)I
 }
 
 public final class kotools/types/number/ZeroInt : kotools/types/number/NegativeInt, kotools/types/number/PositiveInt {
