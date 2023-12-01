@@ -91,11 +91,16 @@ All notable changes to this project will be documented in this file.
   - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
   - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
   - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
-- The `ExperimentalSinceKotoolsTypes` and the `SinceKotoolsTypes` annotations.
+- The `ExperimentalSinceKotoolsTypes` **internal** annotation (commit
+  [9052e77d]).
+- The `SinceKotoolsTypes` **internal** annotation (commit [557350b5]).
 - The `Result.flatMap` **experimental** function (issue [#125]).
 - The `Number.toStrictlyPositiveDouble` **experimental** function in
-  `ResultContext`.
+  `ResultContext` (commit [5ef8aa05]).
 
+[5ef8aa05]: https://github.com/kotools/types/commit/5ef8aa05
+[557350b5]: https://github.com/kotools/types/commit/557350b5
+[9052e77d]: https://github.com/kotools/types/commit/9052e77d
 [#125]: https://github.com/kotools/types/issues/125
 [#258]: https://github.com/kotools/types/issues/258
 
