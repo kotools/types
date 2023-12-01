@@ -391,7 +391,6 @@ public abstract interface class kotools/types/result/ResultContext {
 	public abstract fun toNotEmptySet-Ljx6-Bk (Ljava/util/Collection;)Ljava/util/Set;
 	public abstract fun toPositiveInt (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public abstract fun toStrictlyNegativeInt-C9D9PS4 (Ljava/lang/Number;)I
-	public abstract fun toStrictlyPositiveDouble-7dDooEQ (Ljava/lang/Number;)D
 	public abstract fun toStrictlyPositiveInt-4PgMdn8 (Ljava/lang/Number;)I
 }
 
@@ -404,7 +403,6 @@ public final class kotools/types/result/ResultContext$DefaultImpls {
 	public static fun toNotEmptySet-Ljx6-Bk (Lkotools/types/result/ResultContext;Ljava/util/Collection;)Ljava/util/Set;
 	public static fun toPositiveInt (Lkotools/types/result/ResultContext;Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public static fun toStrictlyNegativeInt-C9D9PS4 (Lkotools/types/result/ResultContext;Ljava/lang/Number;)I
-	public static fun toStrictlyPositiveDouble-7dDooEQ (Lkotools/types/result/ResultContext;Ljava/lang/Number;)D
 	public static fun toStrictlyPositiveInt-4PgMdn8 (Lkotools/types/result/ResultContext;Ljava/lang/Number;)I
 }
 

@@ -9,8 +9,12 @@ import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
 import kotools.types.contentShouldEqual
-import kotools.types.experimental.ExperimentalNumberApi
-import kotools.types.number.*
+import kotools.types.number.NegativeInt
+import kotools.types.number.NonZeroInt
+import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyNegativeInt
+import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.text.NotBlankString
@@ -103,29 +107,6 @@ class ResultContextTest {
         val number: Number = PositiveInt.random().toInt()
         val result: Result<StrictlyNegativeInt> =
             resultOf { number.toStrictlyNegativeInt() }
-        assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
-            .shouldHaveAMessage()
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun number_toStrictlyPositiveDouble_should_pass_with_a_strictly_positive_Number() {
-        val value: Number =
-            Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-        val result: Result<StrictlyPositiveDouble> =
-            resultOf { value.toStrictlyPositiveDouble() }
-        result.getOrThrow()
-            .toDouble()
-            .shouldEqual(value)
-    }
-
-    @ExperimentalNumberApi
-    @Test
-    fun number_toStrictlyPositiveDouble_should_fail_with_a_negative_Number() {
-        val value: Number =
-            -Random.nextDouble(from = 0.1, until = Double.MAX_VALUE)
-        val result: Result<StrictlyPositiveDouble> =
-            resultOf { value.toStrictlyPositiveDouble() }
         assertFailsWith<IllegalArgumentException>(block = result::getOrThrow)
             .shouldHaveAMessage()
     }

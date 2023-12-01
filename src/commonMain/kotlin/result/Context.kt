@@ -8,15 +8,12 @@ package kotools.types.result
 import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
-import kotools.types.experimental.ExperimentalNumberApi
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.number.NegativeInt
 import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyNegativeInt
-import kotools.types.number.StrictlyPositiveDouble
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.text.NotBlankString
@@ -27,7 +24,6 @@ import kotools.types.number.toNegativeInt as delegateToNegativeInt
 import kotools.types.number.toNonZeroInt as delegateToNonZeroInt
 import kotools.types.number.toPositiveInt as delegateToPositiveInt
 import kotools.types.number.toStrictlyNegativeInt as delegateToStrictlyNegativeInt
-import kotools.types.number.toStrictlyPositiveDouble as delegateToStrictlyPositiveDouble
 import kotools.types.number.toStrictlyPositiveInt as delegateToStrictlyPositiveInt
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
 
@@ -79,18 +75,6 @@ public sealed interface ResultContext {
     @Throws(IllegalArgumentException::class)
     public fun Number.toStrictlyNegativeInt(): StrictlyNegativeInt =
         delegateToStrictlyNegativeInt()
-            .getOrThrow()
-
-    /**
-     * Returns this number as a [StrictlyPositiveDouble], which may involve
-     * rounding or truncation, or throws an [IllegalArgumentException] if this
-     * number is negative.
-     */
-    @ExperimentalNumberApi
-    @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-    @Throws(IllegalArgumentException::class)
-    public fun Number.toStrictlyPositiveDouble(): StrictlyPositiveDouble =
-        delegateToStrictlyPositiveDouble()
             .getOrThrow()
 
     /**

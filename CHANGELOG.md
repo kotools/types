@@ -93,6 +93,8 @@ All notable changes to this project will be documented in this file.
   - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
 - The `ExperimentalSinceKotoolsTypes` and the `SinceKotoolsTypes` annotations.
 - The `Result.flatMap` **experimental** function (issue [#125]).
+- The `Number.toStrictlyPositiveDouble` **experimental** function in
+  `ResultContext`.
 
 [#125]: https://github.com/kotools/types/issues/125
 [#258]: https://github.com/kotools/types/issues/258
