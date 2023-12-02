@@ -137,6 +137,10 @@ public final class kotools/types/experimental/NonZeroIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NonZeroInt;
 }
 
+public final class kotools/types/experimental/NotBlankStringKt {
+	public static final synthetic fun plus-_fD6_zU (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
 public final class kotools/types/experimental/PositiveIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
 }
@@ -431,7 +435,6 @@ public final class kotools/types/text/NotBlankStringKt {
 	public static final fun plus-HjNBwFg (CLjava/lang/String;)Ljava/lang/String;
 	public static final fun plus-RF23ayQ (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 	public static final fun plus-_fD6_zU (Ljava/lang/String;C)Ljava/lang/String;
-	public static final fun plus-_fD6_zU (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 	public static final fun toNotBlankString (Ljava/lang/String;)Ljava/lang/Object;
 }
 
