@@ -65,10 +65,11 @@ All notable changes to this project will be documented in this file.
   [#261]).
 - Opt-in message of experimental annotations (PR [#328]).
 - Kotlin compiler's treatment of warnings as errors (issue [#330]).
-- Move the `unaryMinus` **experimental** operation on `AnyInt`, `NonZeroInt`,
-  `PositiveInt`, `NegativeInt`, `StrictlyPositiveInt`, `StrictlyNegativeInt`,
-  and the `NotBlankString.plus(String)` operation to the
-  `kotools.types.experimental` package with a new signature (issue [#319]).
+- Move the following **experimental** operations to the
+  `kotools.types.experimental` package with a new signature (issue [#319]):
+  - `unaryMinus` on `AnyInt`, `NonZeroInt`, `PositiveInt`, `NegativeInt` and
+    `StrictlyPositiveInt`, `StrictlyNegativeInt`
+  - `plus(String)` and `plus(NotBlankString)` on `NotBlankString`.
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#260]: https://github.com/kotools/types/issues/260

@@ -36,3 +36,25 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
         .getOrNull()
         ?: unexpectedCreationError<NotBlankString>(value)
 }
+
+/**
+ * Concatenates this string with the [other] one.
+ *
+ * Here's an example for calling this function from Kotlin code:
+ *
+ * ```kotlin
+ * val first: NotBlankString = "hello".toNotBlankString()
+ *     .getOrThrow()
+ * val second: NotBlankString = " world".toNotBlankString()
+ *     .getOrThrow()
+ * val result: NotBlankString = first + second
+ * println(result) // hello world
+ * ```
+ *
+ * Please note that this function is currently not available for Java users.
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@JvmSynthetic
+public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
+    plus("$other")

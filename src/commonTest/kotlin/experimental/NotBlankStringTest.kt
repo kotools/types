@@ -22,4 +22,17 @@ class NotBlankStringTest {
             .getOrThrow()
         assertEquals(expected, actual)
     }
+
+    @ExperimentalKotoolsTypesApi
+    @Test
+    fun plus_should_pass_with_a_NotBlankString() {
+        val first: NotBlankString = "hello".toNotBlankString()
+            .getOrThrow()
+        val second: NotBlankString = " world".toNotBlankString()
+            .getOrThrow()
+        val actual: NotBlankString = first + second
+        val expected: NotBlankString = "$first$second".toNotBlankString()
+            .getOrThrow()
+        assertEquals(expected, actual)
+    }
 }

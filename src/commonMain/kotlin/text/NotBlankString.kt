@@ -66,13 +66,6 @@ public value class NotBlankString internal constructor(
     override fun toString(): String = value
 }
 
-/** Concatenates this string with the [other] one. */
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-@ExperimentalTextApi
-@OptIn(ExperimentalKotoolsTypesApi::class)
-public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
-    plus("$other")
-
 /** Concatenates this string with the [other] character. */
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 @ExperimentalTextApi
