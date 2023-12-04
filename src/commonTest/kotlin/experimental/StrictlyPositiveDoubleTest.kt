@@ -3,7 +3,7 @@
  * Use of this source code is governed by the MIT license.
  */
 
-package kotools.types.number
+package kotools.types.experimental
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -13,7 +13,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.random.Random
@@ -22,7 +21,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-@ExperimentalNumberApi
+@ExperimentalKotoolsTypesApi
 class StrictlyPositiveDoubleTest {
     @Test
     fun toStrictlyPositiveDouble_should_pass_with_a_strictly_positive_Number() {
@@ -92,7 +91,7 @@ class StrictlyPositiveDoubleTest {
     }
 }
 
-@ExperimentalNumberApi
+@ExperimentalKotoolsTypesApi
 class StrictlyPositiveDoubleSerializerTest {
     private val serializer: KSerializer<StrictlyPositiveDouble> =
         StrictlyPositiveDoubleSerializer

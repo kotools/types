@@ -150,6 +150,31 @@ public final class kotools/types/experimental/StrictlyNegativeIntKt {
 	public static final synthetic fun unaryMinus-I890jeU (I)I
 }
 
+public final class kotools/types/experimental/StrictlyPositiveDouble : java/lang/Comparable {
+	public static final field Companion Lkotools/types/experimental/StrictlyPositiveDouble$Companion;
+	public static final synthetic fun box-impl (D)Lkotools/types/experimental/StrictlyPositiveDouble;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-qrNdxJ0 (D)I
+	public static fun compareTo-qrNdxJ0 (DD)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (DLjava/lang/Object;)Z
+	public static final fun equals-impl0 (DD)Z
+	public fun hashCode ()I
+	public static fun hashCode-impl (D)I
+	public static final fun toDouble-impl (D)D
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (D)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()D
+}
+
+public final class kotools/types/experimental/StrictlyPositiveDouble$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class kotools/types/experimental/StrictlyPositiveDoubleKt {
+	public static final fun toStrictlyPositiveDouble (Ljava/lang/Number;)Ljava/lang/Object;
+}
+
 public final class kotools/types/experimental/StrictlyPositiveIntKt {
 	public static final synthetic fun unaryMinus-UPGVeGw (I)I
 }
@@ -286,31 +311,6 @@ public final class kotools/types/number/StrictlyNegativeInt$Companion {
 
 public final class kotools/types/number/StrictlyNegativeIntKt {
 	public static final fun toStrictlyNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
-}
-
-public final class kotools/types/number/StrictlyPositiveDouble : java/lang/Comparable {
-	public static final field Companion Lkotools/types/number/StrictlyPositiveDouble$Companion;
-	public static final synthetic fun box-impl (D)Lkotools/types/number/StrictlyPositiveDouble;
-	public synthetic fun compareTo (Ljava/lang/Object;)I
-	public fun compareTo-dhNCs2s (D)I
-	public static fun compareTo-dhNCs2s (DD)I
-	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (DLjava/lang/Object;)Z
-	public static final fun equals-impl0 (DD)Z
-	public fun hashCode ()I
-	public static fun hashCode-impl (D)I
-	public static final fun toDouble-impl (D)D
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (D)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()D
-}
-
-public final class kotools/types/number/StrictlyPositiveDouble$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class kotools/types/number/StrictlyPositiveDoubleKt {
-	public static final fun toStrictlyPositiveDouble (Ljava/lang/Number;)Ljava/lang/Object;
 }
 
 public final class kotools/types/number/StrictlyPositiveInt : kotools/types/number/NonZeroInt, kotools/types/number/PositiveInt {

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the MIT license.
  */
 
-package kotools.types.number
+package kotools.types.experimental
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -14,7 +14,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
@@ -26,8 +25,8 @@ private fun Double.isStrictlyPositive(): Boolean = this > 0.0
  * which may involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is negative.
  */
-@ExperimentalNumberApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
@@ -38,8 +37,8 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * Represents strictly positive floating-point numbers represented by the
  * [Double] type.
  */
-@ExperimentalNumberApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
 @JvmInline
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 public value class StrictlyPositiveDouble internal constructor(
@@ -69,7 +68,7 @@ public value class StrictlyPositiveDouble internal constructor(
     override fun toString(): String = "$value"
 }
 
-@ExperimentalNumberApi
+@ExperimentalKotoolsTypesApi
 internal object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
