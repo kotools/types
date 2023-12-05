@@ -17,6 +17,7 @@ import kotools.types.Package
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 private fun Double.isStrictlyPositive(): Boolean = this > 0.0
 
@@ -66,10 +67,17 @@ public value class StrictlyPositiveDouble internal constructor(
 
     /** Returns the string representation of this floating-point number. */
     override fun toString(): String = "$value"
+
+    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun creationErrorMessageWith(number: Number): String =
+            "Number should be strictly positive (tried with $number)."
+    }
 }
 
 @ExperimentalKotoolsTypesApi
-internal object StrictlyPositiveDoubleSerializer :
+private object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
         PrimitiveSerialDescriptor(
@@ -91,16 +99,18 @@ internal object StrictlyPositiveDoubleSerializer :
     }
 }
 
-internal class StrictlyPositiveDoubleException(number: Number) :
+private class StrictlyPositiveDoubleException(number: Number) :
     IllegalArgumentException() {
+    @ExperimentalKotoolsTypesApi
     override val message: String by lazy {
-        "Number should be strictly positive (tried with $number)."
+        StrictlyPositiveDouble.creationErrorMessageWith(number)
     }
 }
 
 private class StrictlyPositiveDoubleSerializationException(number: Number) :
     SerializationException() {
+    @ExperimentalKotoolsTypesApi
     override val message: String by lazy {
-        "Number should be strictly positive (tried with $number)."
+        StrictlyPositiveDouble.creationErrorMessageWith(number)
     }
 }
