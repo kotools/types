@@ -152,19 +152,12 @@ public final class kotools/types/experimental/StrictlyNegativeIntKt {
 
 public final class kotools/types/experimental/StrictlyPositiveDouble : java/lang/Comparable {
 	public static final field Companion Lkotools/types/experimental/StrictlyPositiveDouble$Companion;
-	public static final synthetic fun box-impl (D)Lkotools/types/experimental/StrictlyPositiveDouble;
 	public synthetic fun compareTo (Ljava/lang/Object;)I
-	public fun compareTo-qrNdxJ0 (D)I
-	public static fun compareTo-qrNdxJ0 (DD)I
+	public fun compareTo (Lkotools/types/experimental/StrictlyPositiveDouble;)I
 	public fun equals (Ljava/lang/Object;)Z
-	public static fun equals-impl (DLjava/lang/Object;)Z
-	public static final fun equals-impl0 (DD)Z
 	public fun hashCode ()I
-	public static fun hashCode-impl (D)I
-	public static final fun toDouble-impl (D)D
+	public final fun toDouble ()D
 	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (D)Ljava/lang/String;
-	public final synthetic fun unbox-impl ()D
 }
 
 public final class kotools/types/experimental/StrictlyPositiveDouble$Companion {

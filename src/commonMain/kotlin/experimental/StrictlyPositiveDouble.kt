@@ -16,7 +16,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
-import kotlin.jvm.JvmInline
+import kotools.types.internal.hashCodeOf
 import kotlin.jvm.JvmSynthetic
 
 private fun Double.isStrictlyPositive(): Boolean = this > 0.0
@@ -40,15 +40,27 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_3_3)
-@JvmInline
 @Serializable(StrictlyPositiveDoubleSerializer::class)
-public value class StrictlyPositiveDouble internal constructor(
+public class StrictlyPositiveDouble internal constructor(
     private val value: Double
 ) : Comparable<StrictlyPositiveDouble> {
-    init {
-        val isValid: Boolean = value.isStrictlyPositive()
-        require(isValid) { StrictlyPositiveDoubleException(value).message }
-    }
+    // ---------- Overrides from AnyInt ----------
+
+    /**
+     * Returns `true` if the [other] object is an instance of
+     * [StrictlyPositiveDouble] with a value that equals this instance's value,
+     * or returns `false` otherwise.
+     */
+    override fun equals(other: Any?): Boolean =
+        other is StrictlyPositiveDouble && other.value == value
+
+    /** Returns a hash code value for this floating-point number. */
+    override fun hashCode(): Int = hashCodeOf(value)
+
+    /** Returns the string representation of this floating-point number. */
+    override fun toString(): String = "$value"
+
+    // ---------- Overrides from Comparable ----------
 
     /**
      * Compares this floating-point number with the other one for order.
@@ -62,11 +74,15 @@ public value class StrictlyPositiveDouble internal constructor(
         return x.compareTo(y)
     }
 
+    // ---------- Type-specific declarations ----------
+
+    init {
+        val isValid: Boolean = value.isStrictlyPositive()
+        require(isValid) { StrictlyPositiveDoubleException(value).message }
+    }
+
     /** Returns this floating-point number as a [Double]. */
     public fun toDouble(): Double = value
-
-    /** Returns the string representation of this floating-point number. */
-    override fun toString(): String = "$value"
 
     /** Contains static declarations for the [StrictlyPositiveDouble] type. */
     public companion object {
