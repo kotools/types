@@ -3,17 +3,17 @@
  * Use of this source code is governed by the MIT license.
  */
 
-package kotools.types.range
+package kotools.types.experimental
 
-import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 
 /**
- * Represents a bound in a [range][NotEmptyRange].
+ * Represents a bound in a [range][kotools.types.range.NotEmptyRange].
+ *
  * @param T the **covariant** type of this bound's value.
  */
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
     /** The value of this bound. */
@@ -24,10 +24,12 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
 }
 
 /**
- * Represents an inclusive bound in a [range][NotEmptyRange].
+ * Represents an inclusive bound in a
+ * [range][kotools.types.range.NotEmptyRange].
+ *
  * @param T the **covariant** type of this bound's value.
  */
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
 internal constructor(override val value: T) : Bound<T> {
@@ -35,10 +37,12 @@ internal constructor(override val value: T) : Bound<T> {
 }
 
 /**
- * Represents an exclusive bound in a [range][NotEmptyRange].
+ * Represents an exclusive bound in a
+ * [range][kotools.types.range.NotEmptyRange].
+ *
  * @param T the **covariant** type of this bound's value.
  */
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
 internal constructor(override val value: T) : Bound<T> {

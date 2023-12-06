@@ -1,11 +1,14 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
 package kotools.types.range
 
+import kotools.types.experimental.ExclusiveBound
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.experimental.InclusiveBound
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,6 +16,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 @ExperimentalRangeApi
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class NotEmptyRangeTest {
     @Test
     fun notEmptyRangeOf_should_return_a_range_starting_with_the_first_bound() {

@@ -8,6 +8,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
@@ -64,6 +65,7 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
         /** The range of values a [StrictlyPositiveInt] can have. */
         @ExperimentalRangeApi
         @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+        @OptIn(ExperimentalKotoolsTypesApi::class)
         public val range: NotEmptyRange<StrictlyPositiveInt> by lazy {
             val start: StrictlyPositiveInt = 1
                 .toStrictlyPositiveInt()

@@ -8,6 +8,7 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
@@ -50,6 +51,7 @@ public sealed interface PositiveInt : AnyInt {
         /** The range of values a [PositiveInt] can have. */
         @ExperimentalRangeApi
         @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+        @OptIn(ExperimentalKotoolsTypesApi::class)
         public val range: NotEmptyRange<PositiveInt> by lazy {
             val end: StrictlyPositiveInt = StrictlyPositiveInt.range.end.value
             notEmptyRangeOf { ZeroInt.inclusive to end.inclusive }

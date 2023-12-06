@@ -12,9 +12,10 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.experimental.InclusiveBound
 import kotools.types.internal.unexpectedCreationFailure
-import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
@@ -45,6 +46,7 @@ class StrictlyPositiveIntCompanionTest {
     }
 
     @ExperimentalRangeApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun range_should_start_with_an_inclusive_bound_that_equals_1() {
         val range: NotEmptyRange<StrictlyPositiveInt> =
@@ -54,6 +56,7 @@ class StrictlyPositiveIntCompanionTest {
     }
 
     @ExperimentalRangeApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun range_should_end_with_an_inclusive_bound_that_equals_the_maximum_value_of_Int() {
         val range: NotEmptyRange<StrictlyPositiveInt> =

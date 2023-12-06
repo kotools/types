@@ -5,7 +5,11 @@
 
 package kotools.types.range
 
+import kotools.types.experimental.Bound
+import kotools.types.experimental.ExclusiveBound
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.experimental.InclusiveBound
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 
@@ -16,6 +20,7 @@ import kotools.types.internal.KotoolsTypesVersion
  */
 @ExperimentalRangeApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@OptIn(ExperimentalKotoolsTypesApi::class)
 public fun <T : Comparable<T>> notEmptyRangeOf(
     bounds: NotEmptyRange.BuilderScope<T>.() -> Pair<Bound<T>, Bound<T>>
 ): NotEmptyRange<T> = NotEmptyRange.BuilderScope<T>()
@@ -34,6 +39,7 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
  */
 @ExperimentalRangeApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@OptIn(ExperimentalKotoolsTypesApi::class)
 public class NotEmptyRange<out T : Comparable<@UnsafeVariance T>>
 internal constructor(
     /** The start of this range. */
@@ -70,6 +76,7 @@ internal constructor(
  */
 @ExperimentalRangeApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@OptIn(ExperimentalKotoolsTypesApi::class)
 public operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
     value: T
 ): Boolean {

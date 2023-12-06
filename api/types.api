@@ -111,6 +111,16 @@ public final class kotools/types/experimental/AnyIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/AnyInt;)Lkotools/types/number/AnyInt;
 }
 
+public abstract interface class kotools/types/experimental/Bound {
+	public abstract fun getValue ()Ljava/lang/Comparable;
+	public abstract fun toString ()Ljava/lang/String;
+}
+
+public final class kotools/types/experimental/ExclusiveBound : kotools/types/experimental/Bound {
+	public fun getValue ()Ljava/lang/Comparable;
+	public fun toString ()Ljava/lang/String;
+}
+
 public abstract interface annotation class kotools/types/experimental/ExperimentalCollectionApi : java/lang/annotation/Annotation {
 }
 
@@ -127,6 +137,11 @@ public abstract interface annotation class kotools/types/experimental/Experiment
 }
 
 public abstract interface annotation class kotools/types/experimental/ExperimentalTextApi : java/lang/annotation/Annotation {
+}
+
+public final class kotools/types/experimental/InclusiveBound : kotools/types/experimental/Bound {
+	public fun getValue ()Ljava/lang/Comparable;
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class kotools/types/experimental/NegativeIntKt {
@@ -345,30 +360,15 @@ public final class kotools/types/number/ZeroInt : kotools/types/number/NegativeI
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract interface class kotools/types/range/Bound {
-	public abstract fun getValue ()Ljava/lang/Comparable;
-	public abstract fun toString ()Ljava/lang/String;
-}
-
-public final class kotools/types/range/ExclusiveBound : kotools/types/range/Bound {
-	public fun getValue ()Ljava/lang/Comparable;
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class kotools/types/range/InclusiveBound : kotools/types/range/Bound {
-	public fun getValue ()Ljava/lang/Comparable;
-	public fun toString ()Ljava/lang/String;
-}
-
 public final class kotools/types/range/NotEmptyRange {
-	public final fun getEnd ()Lkotools/types/range/Bound;
-	public final fun getStart ()Lkotools/types/range/Bound;
+	public final fun getEnd ()Lkotools/types/experimental/Bound;
+	public final fun getStart ()Lkotools/types/experimental/Bound;
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class kotools/types/range/NotEmptyRange$BuilderScope {
-	public final fun getExclusive (Ljava/lang/Comparable;)Lkotools/types/range/ExclusiveBound;
-	public final fun getInclusive (Ljava/lang/Comparable;)Lkotools/types/range/InclusiveBound;
+	public final fun getExclusive (Ljava/lang/Comparable;)Lkotools/types/experimental/ExclusiveBound;
+	public final fun getInclusive (Ljava/lang/Comparable;)Lkotools/types/experimental/InclusiveBound;
 }
 
 public final class kotools/types/range/NotEmptyRangeKt {

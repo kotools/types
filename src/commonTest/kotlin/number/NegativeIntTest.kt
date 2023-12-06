@@ -10,9 +10,10 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.experimental.InclusiveBound
 import kotools.types.internal.unexpectedCreationFailure
-import kotools.types.range.InclusiveBound
 import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -38,6 +39,7 @@ class NegativeIntCompanionTest {
     }
 
     @ExperimentalRangeApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun range_should_start_with_an_InclusiveBound_that_equals_the_minimum_value_of_Int() {
         val range: NotEmptyRange<NegativeInt> = NegativeInt.range
@@ -46,6 +48,7 @@ class NegativeIntCompanionTest {
     }
 
     @ExperimentalRangeApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun range_should_end_with_an_InclusiveBound_that_equals_zero() {
         val range: NotEmptyRange<NegativeInt> = NegativeInt.range

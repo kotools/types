@@ -1,18 +1,17 @@
 /*
- * Copyright 2023 Loïc Lamarque.
+ * Copyright 2023 Loïc Lamarque and Kotools S.A.S.U.
  * Use of this source code is governed by the MIT license.
  */
 
-package kotools.types.range
+package kotools.types.experimental
 
-import kotools.types.experimental.ExperimentalRangeApi
 import kotlin.random.Random
 import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 class InclusiveBoundTest {
     // Implementing the equals function introduces a KotlinFrontEndException.
     @Ignore
@@ -65,7 +64,7 @@ class InclusiveBoundTest {
     }
 }
 
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 class ExclusiveBoundTest {
     // Implementing the equals function introduces a KotlinFrontEndException.
     @Ignore
