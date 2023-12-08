@@ -1,14 +1,8 @@
-# Copyright 2022-2023 Loïc Lamarque.
+# Copyright 2022-2023 Loïc Lamarque and Kotools S.A.S.U.
 # Use of this source code is governed by the MIT license.
 
 name: Delivery
 on:
-  push:
-    branches: [ release/* ]
-    paths:
-      - '**gradle*'
-      - '**.kt*'
-      - .github/workflows/delivery.yml
   workflow_dispatch:
 env:
   CACHING: gradle
