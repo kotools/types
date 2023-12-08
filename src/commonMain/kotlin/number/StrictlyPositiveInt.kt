@@ -10,11 +10,11 @@ import kotlinx.serialization.SerializationException
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.experimental.NotEmptyRange
+import kotools.types.experimental.notEmptyRangeOf
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
-import kotools.types.range.NotEmptyRange
-import kotools.types.range.notEmptyRangeOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline

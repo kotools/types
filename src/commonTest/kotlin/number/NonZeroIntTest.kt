@@ -11,8 +11,9 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.range.NotEmptyRange
+import kotools.types.experimental.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -36,6 +37,7 @@ class NonZeroIntCompanionTest {
     }
 
     @ExperimentalRangeApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun negativeRange_should_be_the_range_of_StrictlyNegativeInt() {
         val range: NotEmptyRange<StrictlyNegativeInt> = NonZeroInt.negativeRange
@@ -43,6 +45,7 @@ class NonZeroIntCompanionTest {
     }
 
     @ExperimentalRangeApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun positiveRange_should_be_the_range_of_StrictlyPositiveInt() {
         val range: NotEmptyRange<StrictlyPositiveInt> = NonZeroInt.positiveRange

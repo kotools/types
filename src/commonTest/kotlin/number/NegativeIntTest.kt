@@ -13,8 +13,8 @@ import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
+import kotools.types.experimental.NotEmptyRange
 import kotools.types.internal.unexpectedCreationFailure
-import kotools.types.range.NotEmptyRange
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual

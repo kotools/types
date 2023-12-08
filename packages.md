@@ -14,11 +14,6 @@ Experimental APIs, subject to change in future versions.
 
 Contains types such as `NonZeroInt` for manipulating numbers.
 
-# Package kotools.types.range
-
-Contains types such as `NotEmptyRange` for manipulating ranges of comparable
-values.
-
 # Package kotools.types.result
 
 Contains declarations for manipulating the [Result][kotlin.Result] type.

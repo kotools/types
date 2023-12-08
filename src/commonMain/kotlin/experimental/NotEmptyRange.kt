@@ -3,13 +3,8 @@
  * Use of this source code is governed by the MIT license.
  */
 
-package kotools.types.range
+package kotools.types.experimental
 
-import kotools.types.experimental.Bound
-import kotools.types.experimental.ExclusiveBound
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.InclusiveBound
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 
@@ -18,9 +13,8 @@ import kotools.types.internal.KotoolsTypesVersion
  * The resulting range will [start][NotEmptyRange.start] with the lowest value
  * between the given [bounds].
  */
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-@OptIn(ExperimentalKotoolsTypesApi::class)
 public fun <T : Comparable<T>> notEmptyRangeOf(
     bounds: NotEmptyRange.BuilderScope<T>.() -> Pair<Bound<T>, Bound<T>>
 ): NotEmptyRange<T> = NotEmptyRange.BuilderScope<T>()
@@ -37,9 +31,8 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
  * Represents a range of comparable values that contain at least one value.
  * @param T the **covariant** type of values in this range.
  */
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-@OptIn(ExperimentalKotoolsTypesApi::class)
 public class NotEmptyRange<out T : Comparable<@UnsafeVariance T>>
 internal constructor(
     /** The start of this range. */
@@ -74,9 +67,8 @@ internal constructor(
  * Returns `true` if this range contains the given [value], or returns `false`
  * otherwise.
  */
-@ExperimentalRangeApi
+@ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-@OptIn(ExperimentalKotoolsTypesApi::class)
 public operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
     value: T
 ): Boolean {

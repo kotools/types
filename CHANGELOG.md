@@ -71,6 +71,7 @@ All notable changes to this project will be documented in this file.
   - `unaryMinus` operation on `AnyInt`, `NonZeroInt`, `PositiveInt`,
     `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   - `Bound`, `InclusiveBound` and `ExclusiveBound` types with their declarations
+  - `NotEmptyRange` type with its declarations
   - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`.
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
