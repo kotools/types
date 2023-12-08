@@ -27,7 +27,7 @@ private fun Double.isStrictlyPositive(): Boolean = this > 0.0
  * [IllegalArgumentException] if this number is negative.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
@@ -39,7 +39,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * zero.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 public class StrictlyPositiveDouble internal constructor(
     private val value: Double

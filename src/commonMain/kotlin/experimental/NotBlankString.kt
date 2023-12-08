@@ -28,7 +28,7 @@ import kotlin.jvm.JvmSynthetic
  * Please note that this function is currently not available for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 @JvmSynthetic
 public operator fun NotBlankString.plus(other: String): NotBlankString {
     val value: String = toString() + other
@@ -54,7 +54,7 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
  * Please note that this function is currently not available for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 @JvmSynthetic
 public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
     plus("$other")

@@ -14,7 +14,7 @@ import kotools.types.internal.KotoolsTypesVersion
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
     /** The value of this bound. */
     public val value: T
@@ -29,7 +29,7 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
 internal constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
@@ -41,7 +41,7 @@ internal constructor(override val value: T) : Bound<T> {
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_3)
+@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
 public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
 internal constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
