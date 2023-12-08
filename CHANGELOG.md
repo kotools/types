@@ -27,63 +27,47 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- The `ExperimentalKotoolsTypesApi` annotation for marking experimental
+  declarations of this project (issue [#191]).
+- The `AnyInt(Int)` **experimental** function for creating an instance of
+  `AnyInt` with the specified `value` (commit [571428bc]).
 - [Security policy](SECURITY.md) indicating which versions are supported with
   security updates and how to report a security vulnerability (issue [#250]).
 - Versions [4.1.0], [4.0.1], [4.0.0], [3.2.0], [2.0.0] and [1.3.1] in
   [API reference] (issue [#261]).
-- Copyright notice at the top of each relevant file (issue [#257]).
 - Versioning strategy documentation (issue [#215]).
-- Template for release notes (issue [#283]).
-- The `ExperimentalKotoolsTypesApi` annotation for marking experimental
-  declarations of this project (issue [#191]).
 - Declarations lifecycle documentation (issue [#307]).
-- A static code analysis step using [Qodana] in the integration GitHub workflow
-  (issue [#331]).
-- The `AnyInt(Int)` **experimental** function for creating an instance of
-  `AnyInt` with the specified `value`.
-- The `internal` Gradle subproject for centralizing internal declarations (issue
-  [#299]).
 
-[4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
-[4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
-[4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
-[3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
-[2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
 [1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
+[2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
+[3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
+[4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
+[4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
+[4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
+[571428bc]: https://github.com/kotools/types/commit/571428bc
 [#215]: https://github.com/kotools/types/issues/215
 [#191]: https://github.com/kotools/types/issues/191
 [#250]: https://github.com/kotools/types/issues/250
-[#257]: https://github.com/kotools/types/issues/257
-[#283]: https://github.com/kotools/types/issues/283
-[#299]: https://github.com/kotools/types/issues/299
 [#307]: https://github.com/kotools/types/issues/307
-[#331]: https://github.com/kotools/types/issues/331
-[qodana]: https://www.jetbrains.com/qodana
 
 ### Changed
 
-- Flatten source code directory structure like
-  [recommended by Kotlin][directory-structure-convention] (issue [#260]).
-- Align styles of version [4.2.0] with the latest ones in [API reference] (issue
-  [#261]).
-- Opt-in message of experimental annotations (PR [#328]).
-- Kotlin compiler's treatment of warnings as errors (issue [#330]).
 - Move the following **experimental** declarations to the
   `kotools.types.experimental` package with a new signature (issue [#319]):
   - `StrictlyPositiveDouble` type
   - `unaryMinus` operation on `AnyInt`, `NonZeroInt`, `PositiveInt`,
-    `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
+  `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   - `Bound`, `InclusiveBound` and `ExclusiveBound` types with their declarations
   - `NotEmptyRange` type with its declarations
   - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`.
+- Opt-in message of experimental annotations (PR [#328]).
+- Align styles of version [4.2.0] with the latest ones in [API reference] (issue
+  [#261]).
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
-[#260]: https://github.com/kotools/types/issues/260
 [#261]: https://github.com/kotools/types/issues/261
 [#319]: https://github.com/kotools/types/issues/319
 [#328]: https://github.com/kotools/types/pull/328
-[#330]: https://github.com/kotools/types/pull/330
-[directory-structure-convention]: https://kotlinlang.org/docs/coding-conventions.html#directory-structure
 
 ### Removed
 
@@ -113,13 +97,12 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- The copyright notice in the license (issue [#257]).
 - The usage examples in the documentation of the `toStrictlyNegativeIntOrThrow`
   function (PR [#252]).
-- The copyright notice in the license (issue [#257]).
-- Internal problems reported by the static code analysis step in the integration
-  GitHub workflow (issue [#331]).
 
 [#252]: https://github.com/kotools/types/pull/252
+[#257]: https://github.com/kotools/types/issues/257
 
 ### Security
 
