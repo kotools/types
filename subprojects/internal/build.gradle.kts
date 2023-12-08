@@ -3,7 +3,7 @@
  * Use of this source code is governed by the MIT license.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kotools.types.KotoolsTypesPackage
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -14,11 +14,9 @@ plugins {
 
 repositories.mavenCentral()
 
+kotlinCompile.javaPackagePrefix.set(KotoolsTypesPackage.Internal)
+
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
     commonTestImplementation(libs.kotlin.test)
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    javaPackagePrefix = "kotools.types.internal"
 }
