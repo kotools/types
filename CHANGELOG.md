@@ -41,6 +41,8 @@ All notable changes to this project will be documented in this file.
   (issue [#331]).
 - The `AnyInt(Int)` **experimental** function for creating an instance of
   `AnyInt` with the specified `value`.
+- The `internal` Gradle subproject for centralizing internal declarations (issue
+  [#299]).
 
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
@@ -53,6 +55,7 @@ All notable changes to this project will be documented in this file.
 [#250]: https://github.com/kotools/types/issues/250
 [#257]: https://github.com/kotools/types/issues/257
 [#283]: https://github.com/kotools/types/issues/283
+[#299]: https://github.com/kotools/types/issues/299
 [#307]: https://github.com/kotools/types/issues/307
 [#331]: https://github.com/kotools/types/issues/331
 [qodana]: https://www.jetbrains.com/qodana
