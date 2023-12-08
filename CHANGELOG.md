@@ -45,8 +45,8 @@ All notable changes to this project will be documented in this file.
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [571428bc]: https://github.com/kotools/types/commit/571428bc
-[#215]: https://github.com/kotools/types/issues/215
 [#191]: https://github.com/kotools/types/issues/191
+[#215]: https://github.com/kotools/types/issues/215
 [#250]: https://github.com/kotools/types/issues/250
 [#307]: https://github.com/kotools/types/issues/307
 
