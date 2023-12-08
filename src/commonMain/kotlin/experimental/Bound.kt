@@ -9,7 +9,7 @@ import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 
 /**
- * Represents a bound in a [range][kotools.types.range.NotEmptyRange].
+ * Represents a bound in a [range][NotEmptyRange].
  *
  * @param T the **covariant** type of this bound's value.
  */
@@ -24,8 +24,7 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
 }
 
 /**
- * Represents an inclusive bound in a
- * [range][kotools.types.range.NotEmptyRange].
+ * Represents an inclusive bound in a [range][NotEmptyRange].
  *
  * @param T the **covariant** type of this bound's value.
  */
@@ -37,8 +36,7 @@ internal constructor(override val value: T) : Bound<T> {
 }
 
 /**
- * Represents an exclusive bound in a
- * [range][kotools.types.range.NotEmptyRange].
+ * Represents an exclusive bound in a [range][NotEmptyRange].
  *
  * @param T the **covariant** type of this bound's value.
  */
