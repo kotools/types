@@ -1,7 +1,7 @@
 # Copyright 2022-2023 Loïc Lamarque.
 # Use of this source code is governed by the MIT license.
 
-# ---------- Gradle ----------
+#################################### Gradle ####################################
 
 # Directories
 build/
@@ -10,7 +10,7 @@ build/
 # Files
 !gradle-wrapper.jar
 
-# ---------- Java & Kotlin ----------
+################################ Java & Kotlin #################################
 
 # Directories
 .mtj.tmp/
@@ -32,7 +32,7 @@ target/
 hs_err_pid*
 Playground.kt
 
-# ---------- Jetbrains IDEs ----------
+################################ Jetbrains IDEs ################################
 
 # Directories
 .idea*/
@@ -50,7 +50,7 @@ com_crashlytics_export_strings.xml
 crashlytics*.properties
 fabric.properties
 
-# ---------- macOS ----------
+#################################### macOS #####################################
 
 # Directories
 .apdisk/
@@ -73,7 +73,7 @@ Temporary Items/
 .Trashes
 .VolumeIcon.icns
 
-# ---------- Windows ----------
+################################### Windows ####################################
 
 # Directories
 $RECYCLE.BIN/
