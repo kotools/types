@@ -5,11 +5,21 @@
 
 package kotools.types.number
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalNumberApi
+import kotools.types.internal.deserializationErrorMessage
 import kotools.types.internal.hashCodeOf
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
@@ -144,6 +154,63 @@ class StrictlyPositiveDoubleCompanionTest {
         val actual: StrictlyPositiveDouble? =
             StrictlyPositiveDouble.orNull(value)
         assertNull(actual)
+    }
+}
+
+@ExperimentalNumberApi
+class StrictlyPositiveDoubleSerializerCommonTest {
+    @ExperimentalSerializationApi
+    @Test
+    fun descriptor_kind_should_be_PrimitiveKind_DOUBLE() {
+        val actual: SerialKind = serializer<StrictlyPositiveDouble>()
+            .descriptor
+            .kind
+        assertEquals(expected = PrimitiveKind.DOUBLE, actual)
+    }
+
+    @Test
+    fun serialization_should_behave_like_for_Double() {
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
+        val number = StrictlyPositiveDouble(value)
+        val actual: String = Json.encodeToString(number)
+        val expected: String = Json.encodeToString(value)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun deserialization_should_pass_with_a_Double_that_is_greater_than_zero() {
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
+        val encodedValue: String = Json.encodeToString(value)
+        val actual: StrictlyPositiveDouble = Json.decodeFromString(encodedValue)
+        val expected = StrictlyPositiveDouble(value)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun deserialization_should_fail_with_a_Double_that_equals_zero() {
+        val value = 0.0
+        val encodedValue: String = Json.encodeToString(value)
+        val exception: SerializationException = assertFailsWith {
+            Json.decodeFromString<StrictlyPositiveDouble>(encodedValue)
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String =
+            deserializationErrorMessage<StrictlyPositiveDouble>(value)
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun deserialization_should_fail_with_a_Double_that_is_less_than_zero() {
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
+            .unaryMinus()
+        val encodedValue: String = Json.encodeToString(value)
+        val exception: SerializationException = assertFailsWith {
+            Json.decodeFromString<StrictlyPositiveDouble>(encodedValue)
+        }
+        val actualMessage: String = assertNotNull(exception.message)
+        val expectedMessage: String =
+            deserializationErrorMessage<StrictlyPositiveDouble>(value)
+        assertEquals(expectedMessage, actualMessage)
     }
 }
 
