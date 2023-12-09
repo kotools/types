@@ -107,6 +107,7 @@ public class StrictlyPositiveDouble(private val value: Double) {
          * [value], or returns `null` if the [value] is less than or equals
          * zero.
          */
+        @ExperimentalSince(KotoolsTypesVersion.V4_3_2)
         public fun orNull(value: Double): StrictlyPositiveDouble? =
             if (value <= 0) null
             else StrictlyPositiveDouble(value)
