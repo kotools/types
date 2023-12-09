@@ -9,21 +9,20 @@ import java.util.Objects;
 import java.util.Random;
 
 public class StrictlyPositiveDoubleTest {
+    private static final double RANGE_ORIGIN = 1.0;
+    private static final double RANGE_BOUND = Double.MAX_VALUE;
+
     @Test
     public void constructor_should_pass() {
         final Random random = new Random();
-        final double origin = 0.0,
-                bound = Double.MAX_VALUE,
-                value = random.nextDouble(origin, bound);
+        final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
         new StrictlyPositiveDouble(value);
     }
 
     @Test
     public void equals_should_pass() {
         final Random random = new Random();
-        final double origin = 0.0,
-                bound = Double.MAX_VALUE,
-                value = random.nextDouble(origin, bound);
+        final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
         final StrictlyPositiveDouble first = new StrictlyPositiveDouble(value),
                 second = new StrictlyPositiveDouble(value);
         Assertions.assertEquals(first, second);
@@ -32,9 +31,7 @@ public class StrictlyPositiveDoubleTest {
     @Test
     public void hashCode_should_pass() {
         final Random random = new Random();
-        final double origin = 0.0,
-                bound = Double.MAX_VALUE,
-                value = random.nextDouble(origin, bound);
+        final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
         final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
         final int actual = number.hashCode(),
                 expected = Objects.hash(value);
@@ -44,9 +41,7 @@ public class StrictlyPositiveDoubleTest {
     @Test
     public void toDouble_should_pass() {
         final Random random = new Random();
-        final double origin = 0.0,
-                bound = Double.MAX_VALUE,
-                value = random.nextDouble(origin, bound);
+        final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
         final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
         final double actual = number.toDouble();
         Assertions.assertEquals(value, actual);
@@ -55,9 +50,7 @@ public class StrictlyPositiveDoubleTest {
     @Test
     public void toString_should_pass() {
         final Random random = new Random();
-        final double origin = 0.0,
-                bound = Double.MAX_VALUE,
-                value = random.nextDouble(origin, bound);
+        final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
         final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
         final String actual = number.toString(),
                 expected = Double.toString(value);
@@ -69,9 +62,7 @@ public class StrictlyPositiveDoubleTest {
         @Test
         public void orNull_should_pass() {
             final Random random = new Random();
-            final double origin = 1.0,
-                    bound = Double.MAX_VALUE,
-                    value = random.nextDouble(origin, bound);
+            final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
             @Nullable final StrictlyPositiveDouble actual =
                     StrictlyPositiveDouble.Companion.orNull(value);
             Assertions.assertNotNull(actual);
