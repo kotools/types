@@ -17,10 +17,20 @@ public class StrictlyPositiveDoubleTest {
         final Random random = new Random();
         final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
         final StrictlyPositiveDouble first = StrictlyPositiveDouble(value);
-        final StrictlyPositiveDouble second =
-                StrictlyPositiveDouble.Companion.orNull(value);
-        Assertions.assertNotNull(second);
+        final StrictlyPositiveDouble second = StrictlyPositiveDouble(value);
         Assertions.assertEquals(first, second);
+    }
+
+    @Test
+    public void compareTo_should_pass() {
+        final Random random = new Random();
+        final double firstValue = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND),
+                secondValue = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
+        final StrictlyPositiveDouble first = StrictlyPositiveDouble(firstValue),
+                second = StrictlyPositiveDouble(secondValue);
+        final int actual = first.compareTo(second),
+                expected = Double.compare(firstValue, secondValue);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

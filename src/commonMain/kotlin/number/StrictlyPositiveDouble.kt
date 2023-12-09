@@ -21,7 +21,7 @@ import kotools.types.internal.hashCodeOf
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class StrictlyPositiveDouble private constructor(
     private val value: Double
-) {
+) : Comparable<StrictlyPositiveDouble> {
     init {
         require(value > 0) {
             "Number should be greater than zero (tried with $value)"
@@ -39,6 +39,15 @@ public class StrictlyPositiveDouble private constructor(
     override fun equals(other: Any?): Boolean =
         if (this === other) true
         else other is StrictlyPositiveDouble && this.value == other.value
+
+    /**
+     * Compares this floating-point number with the [other] one for order.
+     * Returns zero if this floating-point number equals the [other] one, a
+     * strictly negative number if it's less than the [other] one, or a strictly
+     * positive number if it's greater than the [other] one.
+     */
+    override fun compareTo(other: StrictlyPositiveDouble): Int =
+        value.compareTo(other.value)
 
     /** Returns a hash code for this floating-point number. */
     @ExperimentalSince(KotoolsTypesVersion.V4_3_2)

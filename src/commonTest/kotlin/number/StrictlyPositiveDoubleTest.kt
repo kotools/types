@@ -15,6 +15,7 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 import kotlin.test.fail
 
 private const val RANGE_FROM: Double = 1.0
@@ -63,6 +64,36 @@ class StrictlyPositiveDoubleTest {
         val yValue: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val y = StrictlyPositiveDouble(yValue)
         assertNotEquals(x, y)
+    }
+
+    @Test
+    fun compareTo_should_return_zero_with_another_StrictlyPositiveDouble_having_the_same_value() {
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
+        val x = StrictlyPositiveDouble(value)
+        val y = StrictlyPositiveDouble(value)
+        val actual: Int = x.compareTo(y)
+        assertEquals(expected = 0, actual)
+    }
+
+    @Test
+    fun compareTo_should_return_a_strictly_negative_number_with_another_StrictlyPositiveDouble_having_a_greater_value() {
+        val xValue: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
+        val x = StrictlyPositiveDouble(xValue)
+        val yValue: Double = Random.nextDouble(from = xValue, RANGE_UNTIL)
+            .inc()
+        val y = StrictlyPositiveDouble(yValue)
+        val actual: Int = x.compareTo(y)
+        assertTrue(actual < 0)
+    }
+
+    @Test
+    fun compareTo_should_return_a_strictly_positive_number_with_another_StrictlyPositiveDouble_having_a_lesser_value() {
+        val xValue: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
+        val x = StrictlyPositiveDouble(xValue)
+        val yValue: Double = Random.nextDouble(RANGE_FROM, until = xValue)
+        val y = StrictlyPositiveDouble(yValue)
+        val actual: Int = x.compareTo(y)
+        assertTrue(actual > 0)
     }
 
     @Test

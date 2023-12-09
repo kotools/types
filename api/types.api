@@ -319,9 +319,11 @@ public final class kotools/types/number/StrictlyNegativeIntKt {
 	public static final fun toStrictlyNegativeInt (Ljava/lang/Number;)Ljava/lang/Object;
 }
 
-public final class kotools/types/number/StrictlyPositiveDouble {
+public final class kotools/types/number/StrictlyPositiveDouble : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/StrictlyPositiveDouble$Companion;
 	public synthetic fun <init> (DLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo (Lkotools/types/number/StrictlyPositiveDouble;)I
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
 	public final fun toDouble ()D
