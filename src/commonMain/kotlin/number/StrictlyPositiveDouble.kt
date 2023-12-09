@@ -8,6 +8,8 @@ package kotools.types.number
 import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.hashCodeOf
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a floating-point number of type [Double] that is greater than
@@ -25,6 +27,52 @@ public class StrictlyPositiveDouble(private val value: Double) {
             "Number should be greater than zero (tried with $value)"
         }
     }
+
+    /**
+     * Returns `true` if the [other] object points to the same reference as this
+     * floating-point number, or if the [other] object is an instance of
+     * [StrictlyPositiveDouble] having the same value as this floating-point
+     * number.
+     * Returns `false` otherwise.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val value = 1.0
+     * val first = StrictlyPositiveDouble(value)
+     * val second = StrictlyPositiveDouble(value)
+     * val equals: Boolean = first == second // or first.equals(second)
+     * println(equals) // true
+     * ```
+     *
+     * It is recommended to use the overloaded operator `==` instead of calling
+     * directly this function for better type-safety.
+     *
+     * ```kotlin
+     * val first = StrictlyPositiveDouble(value)
+     * val second = "hello world"
+     * first == second // produces a compilation error
+     * first.equals(second) // compiles and returns `false`
+     * ```
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final double value = 1.0;
+     * final StrictlyPositiveDouble first = new StrictlyPositiveDouble(value),
+     *         second = new StrictlyPositiveDouble(value);
+     * final boolean equals = first.equals(second);
+     * System.out.println(equals); // true
+     * ```
+     */
+    override fun equals(other: Any?): Boolean = if (this === other) true
+    else other is StrictlyPositiveDouble && this.value == other.value
+
+    /** Returns a hash code for this floating-point number. */
+    override fun hashCode(): Int = hashCodeOf(value)
+
+    @JvmSynthetic
+    internal fun toDouble(): Double = value
 
     /**
      * Returns this floating-point number as [String].

@@ -6,10 +6,14 @@
 package kotools.types.number
 
 import kotools.types.experimental.ExperimentalNumberApi
+import kotools.types.internal.hashCodeOf
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
+import kotlin.test.assertSame
 
 @ExperimentalNumberApi
 class StrictlyPositiveDoubleTest {
@@ -42,6 +46,65 @@ class StrictlyPositiveDoubleTest {
             expected = "Number should be greater than zero (tried with $value)",
             actual = exception.message
         )
+    }
+
+    @Test
+    fun equals_should_pass_with_the_same_instance() {
+        val value: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val x = StrictlyPositiveDouble(value)
+        val y: StrictlyPositiveDouble = x
+        assertSame(x, y)
+    }
+
+    @Test
+    fun equals_should_pass_with_another_StrictlyPositiveDouble_having_the_same_value() {
+        val xValue: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val x = StrictlyPositiveDouble(xValue)
+        val yValue: Double = x.toDouble()
+        val y = StrictlyPositiveDouble(yValue)
+        assertEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_null() {
+        val value: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val x = StrictlyPositiveDouble(value)
+        val y: Any? = null
+        assertNotEquals(x, y)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_object_of_type_other_than_StrictlyPositiveDouble() {
+        val value: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val x = StrictlyPositiveDouble(value)
+        val y = "null"
+        val actual: Boolean = x.equals(y)
+        assertFalse(actual)
+    }
+
+    @Test
+    fun equals_should_fail_with_another_StrictlyPositiveDouble_having_a_different_value() {
+        val xValue: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val x = StrictlyPositiveDouble(xValue)
+        val yValue: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val y = StrictlyPositiveDouble(yValue)
+        assertNotEquals(x, y)
+    }
+
+    @Test
+    fun hashCode_should_return_a_unique_hash_code_based_on_its_value() {
+        val value: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val number = StrictlyPositiveDouble(value)
+        val actual: Int = number.hashCode()
+        val expected: Int = hashCodeOf(value)
+        assertEquals(expected, actual)
     }
 
     @Test
