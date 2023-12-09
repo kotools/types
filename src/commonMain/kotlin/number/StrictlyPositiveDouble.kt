@@ -68,8 +68,9 @@ public class StrictlyPositiveDouble(private val value: Double) {
      * ```
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_3_2)
-    override fun equals(other: Any?): Boolean = if (this === other) true
-    else other is StrictlyPositiveDouble && this.value == other.value
+    override fun equals(other: Any?): Boolean =
+        if (this === other) true
+        else other is StrictlyPositiveDouble && this.value == other.value
 
     /** Returns a hash code for this floating-point number. */
     @ExperimentalSince(KotoolsTypesVersion.V4_3_2)
