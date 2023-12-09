@@ -339,6 +339,7 @@ public final class kotools/types/number/StrictlyNegativeIntKt {
 
 public final class kotools/types/number/StrictlyPositiveDouble {
 	public fun <init> (D)V
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class kotools/types/number/StrictlyPositiveInt : kotools/types/number/NonZeroInt, kotools/types/number/PositiveInt {
