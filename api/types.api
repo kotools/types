@@ -323,6 +323,7 @@ public final class kotools/types/number/StrictlyPositiveDouble {
 	public fun <init> (D)V
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
+	public final fun toDouble ()D
 	public fun toString ()Ljava/lang/String;
 }
 

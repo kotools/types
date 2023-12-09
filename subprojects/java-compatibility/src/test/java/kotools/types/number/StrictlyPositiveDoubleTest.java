@@ -40,6 +40,17 @@ public class StrictlyPositiveDoubleTest {
     }
 
     @Test
+    public void toDouble_should_pass() {
+        final Random random = new Random();
+        final double origin = 0.0,
+                bound = Double.MAX_VALUE,
+                value = random.nextDouble(origin, bound);
+        final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
+        final double actual = number.toDouble();
+        Assertions.assertEquals(value, actual);
+    }
+
+    @Test
     public void toString_should_pass() {
         final Random random = new Random();
         final double origin = 0.0,

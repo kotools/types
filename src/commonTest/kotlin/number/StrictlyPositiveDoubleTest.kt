@@ -108,6 +108,15 @@ class StrictlyPositiveDoubleTest {
     }
 
     @Test
+    fun toDouble_should_return_its_value() {
+        val value: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val number = StrictlyPositiveDouble(value)
+        val actual: Double = number.toDouble()
+        assertEquals(expected = value, actual)
+    }
+
+    @Test
     fun toString_should_return_its_value_as_String() {
         val value: Double =
             Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)

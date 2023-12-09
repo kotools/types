@@ -9,7 +9,6 @@ import kotools.types.experimental.ExperimentalNumberApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.hashCodeOf
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a floating-point number of type [Double] that is greater than
@@ -71,8 +70,8 @@ public class StrictlyPositiveDouble(private val value: Double) {
     /** Returns a hash code for this floating-point number. */
     override fun hashCode(): Int = hashCodeOf(value)
 
-    @JvmSynthetic
-    internal fun toDouble(): Double = value
+    /** Returns this floating-point number as [Double]. */
+    public fun toDouble(): Double = value
 
     /**
      * Returns this floating-point number as [String].
