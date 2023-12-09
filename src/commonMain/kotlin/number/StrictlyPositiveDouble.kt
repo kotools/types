@@ -14,6 +14,9 @@ import kotools.types.internal.hashCodeOf
  * Represents a floating-point number of type [Double] that is greater than
  * zero.
  *
+ * You can use the [StrictlyPositiveDouble.Companion.orNull] function for
+ * creating an instance of this type.
+ *
  * @constructor Creates an instance of [StrictlyPositiveDouble] with the
  * specified [value], or throws an [IllegalArgumentException] if the [value] is
  * less than or equals zero.
@@ -95,4 +98,16 @@ public class StrictlyPositiveDouble(private val value: Double) {
      * ```
      */
     override fun toString(): String = "$value"
+
+    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
+    public companion object {
+        /**
+         * Creates an instance of [StrictlyPositiveDouble] with the specified
+         * [value], or returns `null` if the [value] is less than or equals
+         * zero.
+         */
+        public fun orNull(value: Double): StrictlyPositiveDouble? =
+            if (value <= 0) null
+            else StrictlyPositiveDouble(value)
+    }
 }

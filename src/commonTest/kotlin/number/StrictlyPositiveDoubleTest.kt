@@ -13,6 +13,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertSame
 
 @ExperimentalNumberApi
@@ -122,5 +124,33 @@ class StrictlyPositiveDoubleTest {
             Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
         val number = StrictlyPositiveDouble(value)
         assertEquals(expected = "$value", actual = "$number")
+    }
+}
+
+@ExperimentalNumberApi
+class StrictlyPositiveDoubleCompanionTest {
+    @Test
+    fun orNull_should_pass_with_a_Double_that_is_greater_than_zero() {
+        val value: Double =
+            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val actual: StrictlyPositiveDouble? =
+            StrictlyPositiveDouble.orNull(value)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNull_should_fail_with_a_Double_that_equals_zero() {
+        val actual: StrictlyPositiveDouble? = StrictlyPositiveDouble.orNull(0.0)
+        assertNull(actual)
+    }
+
+    @Test
+    fun orNull_should_fail_with_a_Double_that_is_less_than_zero() {
+        val value: Double = Random
+            .nextDouble(from = 1.0, until = Double.MAX_VALUE)
+            .unaryMinus()
+        val actual: StrictlyPositiveDouble? =
+            StrictlyPositiveDouble.orNull(value)
+        assertNull(actual)
     }
 }

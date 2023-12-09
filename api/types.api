@@ -320,11 +320,16 @@ public final class kotools/types/number/StrictlyNegativeIntKt {
 }
 
 public final class kotools/types/number/StrictlyPositiveDouble {
+	public static final field Companion Lkotools/types/number/StrictlyPositiveDouble$Companion;
 	public fun <init> (D)V
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
 	public final fun toDouble ()D
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class kotools/types/number/StrictlyPositiveDouble$Companion {
+	public final fun orNull (D)Lkotools/types/number/StrictlyPositiveDouble;
 }
 
 public final class kotools/types/number/StrictlyPositiveInt : kotools/types/number/NonZeroInt, kotools/types/number/PositiveInt {

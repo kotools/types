@@ -1,6 +1,8 @@
 package kotools.types.number;
 
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -60,5 +62,19 @@ public class StrictlyPositiveDoubleTest {
         final String actual = number.toString(),
                 expected = Double.toString(value);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Nested
+    public class Companion {
+        @Test
+        public void orNull_should_pass() {
+            final Random random = new Random();
+            final double origin = 1.0,
+                    bound = Double.MAX_VALUE,
+                    value = random.nextDouble(origin, bound);
+            @Nullable final StrictlyPositiveDouble actual =
+                    StrictlyPositiveDouble.Companion.orNull(value);
+            Assertions.assertNotNull(actual);
+        }
     }
 }
