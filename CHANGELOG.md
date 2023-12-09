@@ -54,7 +54,6 @@ All notable changes to this project will be documented in this file.
 
 - Move the following **experimental** declarations to the
   `kotools.types.experimental` package with a new signature (issue [#319]):
-  - `StrictlyPositiveDouble` type
   - `unaryMinus` operation on `AnyInt`, `NonZeroInt`, `PositiveInt`,
   `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   - `Bound`, `InclusiveBound` and `ExclusiveBound` types with their declarations
