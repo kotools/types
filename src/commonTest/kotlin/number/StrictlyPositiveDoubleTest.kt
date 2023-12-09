@@ -17,12 +17,14 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertSame
 
+private const val RANGE_FROM: Double = 1.0
+private const val RANGE_UNTIL: Double = Double.MAX_VALUE
+
 @ExperimentalNumberApi
 class StrictlyPositiveDoubleTest {
     @Test
     fun constructor_should_pass_with_a_Double_that_is_greater_than_zero() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         StrictlyPositiveDouble(value)
     }
 
@@ -39,8 +41,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun constructor_should_fail_with_a_Double_that_is_less_than_zero() {
-        val value: Double = Random
-            .nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
             .unaryMinus()
         val exception: IllegalArgumentException =
             assertFailsWith { StrictlyPositiveDouble(value) }
@@ -52,8 +53,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun equals_should_pass_with_the_same_instance() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val x = StrictlyPositiveDouble(value)
         val y: StrictlyPositiveDouble = x
         assertSame(x, y)
@@ -61,8 +61,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun equals_should_pass_with_another_StrictlyPositiveDouble_having_the_same_value() {
-        val xValue: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val xValue: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val x = StrictlyPositiveDouble(xValue)
         val yValue: Double = x.toDouble()
         val y = StrictlyPositiveDouble(yValue)
@@ -71,8 +70,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun equals_should_fail_with_null() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val x = StrictlyPositiveDouble(value)
         val y: Any? = null
         assertNotEquals(x, y)
@@ -80,8 +78,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun equals_should_fail_with_another_object_of_type_other_than_StrictlyPositiveDouble() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val x = StrictlyPositiveDouble(value)
         val y = "null"
         val actual: Boolean = x.equals(y)
@@ -90,19 +87,16 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun equals_should_fail_with_another_StrictlyPositiveDouble_having_a_different_value() {
-        val xValue: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val xValue: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val x = StrictlyPositiveDouble(xValue)
-        val yValue: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val yValue: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val y = StrictlyPositiveDouble(yValue)
         assertNotEquals(x, y)
     }
 
     @Test
     fun hashCode_should_return_a_unique_hash_code_based_on_its_value() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val number = StrictlyPositiveDouble(value)
         val actual: Int = number.hashCode()
         val expected: Int = hashCodeOf(value)
@@ -111,8 +105,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun toDouble_should_return_its_value() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val number = StrictlyPositiveDouble(value)
         val actual: Double = number.toDouble()
         assertEquals(expected = value, actual)
@@ -120,8 +113,7 @@ class StrictlyPositiveDoubleTest {
 
     @Test
     fun toString_should_return_its_value_as_String() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val number = StrictlyPositiveDouble(value)
         assertEquals(expected = "$value", actual = "$number")
     }
@@ -131,8 +123,7 @@ class StrictlyPositiveDoubleTest {
 class StrictlyPositiveDoubleCompanionTest {
     @Test
     fun orNull_should_pass_with_a_Double_that_is_greater_than_zero() {
-        val value: Double =
-            Random.nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
         val actual: StrictlyPositiveDouble? =
             StrictlyPositiveDouble.orNull(value)
         assertNotNull(actual)
@@ -146,8 +137,7 @@ class StrictlyPositiveDoubleCompanionTest {
 
     @Test
     fun orNull_should_fail_with_a_Double_that_is_less_than_zero() {
-        val value: Double = Random
-            .nextDouble(from = 1.0, until = Double.MAX_VALUE)
+        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
             .unaryMinus()
         val actual: StrictlyPositiveDouble? =
             StrictlyPositiveDouble.orNull(value)
