@@ -4,6 +4,7 @@
  */
 
 import kotools.types.KotoolsTypesPackage
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -22,6 +23,16 @@ plugins {
 group = "org.kotools"
 
 repositories.mavenCentral()
+
+kotlin.sourceSets {
+    val nativeTest: KotlinSourceSet by creating {
+        val commonTest: KotlinSourceSet = commonTest.get()
+        dependsOn(commonTest)
+    }
+    linuxTest.get().dependsOn(nativeTest)
+    macosTest.get().dependsOn(nativeTest)
+    windowsTest.get().dependsOn(nativeTest)
+}
 
 kotlinCompile.javaPackagePrefix.set(KotoolsTypesPackage.Root)
 
