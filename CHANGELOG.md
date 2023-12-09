@@ -62,11 +62,14 @@ All notable changes to this project will be documented in this file.
 - Opt-in message of experimental annotations (PR [#328]).
 - Align styles of version [4.2.0] with the latest ones in [API reference] (issue
   [#261]).
+- Rewrite implementation of `StrictlyPositiveDouble` as a class instead of an
+  inline value class (commit [5106793b]).
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#261]: https://github.com/kotools/types/issues/261
 [#319]: https://github.com/kotools/types/issues/319
 [#328]: https://github.com/kotools/types/pull/328
+[5106793b]: https://github.com/kotools/types/commit/5106793b
 
 ### Removed
 
