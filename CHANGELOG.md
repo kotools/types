@@ -31,6 +31,8 @@ All notable changes to this project will be documented in this file.
   declarations of this project (issue [#191]).
 - The `AnyInt(Int)` **experimental** function for creating an instance of
   `AnyInt` with the specified `value` (commit [571428bc]).
+- The `StrictlyPositiveDouble.Companion.orNull(Double)` **experimental**
+  function (commit [2fcf71da]).
 - [Security policy](SECURITY.md) indicating which versions are supported with
   security updates and how to report a security vulnerability (issue [#250]).
 - Versions [4.1.0], [4.0.1], [4.0.0], [3.2.0], [2.0.0] and [1.3.1] in
@@ -44,6 +46,7 @@ All notable changes to this project will be documented in this file.
 [4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
+[2fcf71da]: https://github.com/kotools/types/commit/2fcf71da
 [571428bc]: https://github.com/kotools/types/commit/571428bc
 [#191]: https://github.com/kotools/types/issues/191
 [#215]: https://github.com/kotools/types/issues/215
@@ -52,6 +55,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Convert `StrictlyPositiveDouble` from inline value class to class (commit
+  [5106793b]).
 - Move the following **experimental** declarations to the
   `kotools.types.experimental` package with a new signature (issue [#319]):
   - `unaryMinus` operation on `AnyInt`, `NonZeroInt`, `PositiveInt`,
@@ -62,8 +67,6 @@ All notable changes to this project will be documented in this file.
 - Opt-in message of experimental annotations (PR [#328]).
 - Align styles of version [4.2.0] with the latest ones in [API reference] (issue
   [#261]).
-- Rewrite implementation of `StrictlyPositiveDouble` as a class instead of an
-  inline value class (commit [5106793b]).
 
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [#261]: https://github.com/kotools/types/issues/261
