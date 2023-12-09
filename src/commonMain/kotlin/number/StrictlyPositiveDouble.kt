@@ -16,14 +16,12 @@ import kotools.types.internal.hashCodeOf
  *
  * You can use the [StrictlyPositiveDouble.Companion.orNull] function for
  * creating an instance of this type.
- *
- * @constructor Creates an instance of [StrictlyPositiveDouble] with the
- * specified [value], or throws an [IllegalArgumentException] if the [value] is
- * less than or equals zero.
  */
 @ExperimentalNumberApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-public class StrictlyPositiveDouble(private val value: Double) {
+public class StrictlyPositiveDouble private constructor(
+    private val value: Double
+) {
     init {
         require(value > 0) {
             "Number should be greater than zero (tried with $value)"
@@ -36,36 +34,6 @@ public class StrictlyPositiveDouble(private val value: Double) {
      * [StrictlyPositiveDouble] having the same value as this floating-point
      * number.
      * Returns `false` otherwise.
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val value = 1.0
-     * val first = StrictlyPositiveDouble(value)
-     * val second = StrictlyPositiveDouble(value)
-     * val equals: Boolean = first == second // or first.equals(second)
-     * println(equals) // true
-     * ```
-     *
-     * It is recommended to use the overloaded operator `==` instead of calling
-     * directly this function for better type-safety.
-     *
-     * ```kotlin
-     * val first = StrictlyPositiveDouble(value)
-     * val second = "hello world"
-     * first == second // produces a compilation error
-     * first.equals(second) // compiles and returns `false`
-     * ```
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * ```java
-     * final double value = 1.0;
-     * final StrictlyPositiveDouble first = new StrictlyPositiveDouble(value),
-     *         second = new StrictlyPositiveDouble(value);
-     * final boolean equals = first.equals(second);
-     * System.out.println(equals); // true
-     * ```
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_3_2)
     override fun equals(other: Any?): Boolean =
@@ -79,25 +47,7 @@ public class StrictlyPositiveDouble(private val value: Double) {
     /** Returns this floating-point number as [Double]. */
     public fun toDouble(): Double = value
 
-    /**
-     * Returns this floating-point number as [String].
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val number = StrictlyPositiveDouble(2.0)
-     * val message = "$number" // or number.toString()
-     * println(message) // 2.0
-     * ```
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * ```kotlin
-     * final StrictlyPositiveDouble number = new StrictlyPositiveDouble(2.0);
-     * final String message = number.toString();
-     * System.out.println(message); // 2.0
-     * ```
-     */
+    /** Returns this floating-point number as [String]. */
     override fun toString(): String = "$value"
 
     /** Contains static declarations for the [StrictlyPositiveDouble] type. */

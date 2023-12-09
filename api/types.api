@@ -321,7 +321,7 @@ public final class kotools/types/number/StrictlyNegativeIntKt {
 
 public final class kotools/types/number/StrictlyPositiveDouble {
 	public static final field Companion Lkotools/types/number/StrictlyPositiveDouble$Companion;
-	public fun <init> (D)V
+	public synthetic fun <init> (DLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
 	public final fun toDouble ()D

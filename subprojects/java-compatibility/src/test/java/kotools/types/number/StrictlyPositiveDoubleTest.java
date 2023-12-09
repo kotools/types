@@ -1,6 +1,6 @@
 package kotools.types.number;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -13,18 +13,13 @@ public class StrictlyPositiveDoubleTest {
     private static final double RANGE_BOUND = Double.MAX_VALUE;
 
     @Test
-    public void constructor_should_pass() {
-        final Random random = new Random();
-        final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
-        new StrictlyPositiveDouble(value);
-    }
-
-    @Test
     public void equals_should_pass() {
         final Random random = new Random();
         final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
-        final StrictlyPositiveDouble first = new StrictlyPositiveDouble(value),
-                second = new StrictlyPositiveDouble(value);
+        final StrictlyPositiveDouble first = StrictlyPositiveDouble(value);
+        final StrictlyPositiveDouble second =
+                StrictlyPositiveDouble.Companion.orNull(value);
+        Assertions.assertNotNull(second);
         Assertions.assertEquals(first, second);
     }
 
@@ -32,7 +27,7 @@ public class StrictlyPositiveDoubleTest {
     public void hashCode_should_pass() {
         final Random random = new Random();
         final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
-        final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
+        final StrictlyPositiveDouble number = StrictlyPositiveDouble(value);
         final int actual = number.hashCode(),
                 expected = Objects.hash(value);
         Assertions.assertEquals(expected, actual);
@@ -42,7 +37,7 @@ public class StrictlyPositiveDoubleTest {
     public void toDouble_should_pass() {
         final Random random = new Random();
         final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
-        final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
+        final StrictlyPositiveDouble number = StrictlyPositiveDouble(value);
         final double actual = number.toDouble();
         Assertions.assertEquals(value, actual);
     }
@@ -51,10 +46,21 @@ public class StrictlyPositiveDoubleTest {
     public void toString_should_pass() {
         final Random random = new Random();
         final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
-        final StrictlyPositiveDouble number = new StrictlyPositiveDouble(value);
+        final StrictlyPositiveDouble number = StrictlyPositiveDouble(value);
         final String actual = number.toString(),
                 expected = Double.toString(value);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @NotNull
+    private StrictlyPositiveDouble StrictlyPositiveDouble(final double value) {
+        final StrictlyPositiveDouble number =
+                StrictlyPositiveDouble.Companion.orNull(value);
+        if (number == null) Assertions.fail(
+                "Number should be greater than zero (tried with " + value + ')'
+        );
+        Assertions.assertNotNull(number);
+        return number;
     }
 
     @Nested
@@ -63,7 +69,7 @@ public class StrictlyPositiveDoubleTest {
         public void orNull_should_pass() {
             final Random random = new Random();
             final double value = random.nextDouble(RANGE_ORIGIN, RANGE_BOUND);
-            @Nullable final StrictlyPositiveDouble actual =
+            final StrictlyPositiveDouble actual =
                     StrictlyPositiveDouble.Companion.orNull(value);
             Assertions.assertNotNull(actual);
         }

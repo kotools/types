@@ -10,47 +10,18 @@ import kotools.types.internal.hashCodeOf
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertSame
+import kotlin.test.fail
 
 private const val RANGE_FROM: Double = 1.0
 private const val RANGE_UNTIL: Double = Double.MAX_VALUE
 
 @ExperimentalNumberApi
 class StrictlyPositiveDoubleTest {
-    @Test
-    fun constructor_should_pass_with_a_Double_that_is_greater_than_zero() {
-        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
-        StrictlyPositiveDouble(value)
-    }
-
-    @Test
-    fun constructor_should_fail_with_a_Double_that_equals_zero() {
-        val value = 0.0
-        val exception: IllegalArgumentException =
-            assertFailsWith { StrictlyPositiveDouble(value) }
-        assertEquals(
-            expected = "Number should be greater than zero (tried with $value)",
-            actual = exception.message
-        )
-    }
-
-    @Test
-    fun constructor_should_fail_with_a_Double_that_is_less_than_zero() {
-        val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
-            .unaryMinus()
-        val exception: IllegalArgumentException =
-            assertFailsWith { StrictlyPositiveDouble(value) }
-        assertEquals(
-            expected = "Number should be greater than zero (tried with $value)",
-            actual = exception.message
-        )
-    }
-
     @Test
     fun equals_should_pass_with_the_same_instance() {
         val value: Double = Random.nextDouble(RANGE_FROM, RANGE_UNTIL)
@@ -144,3 +115,9 @@ class StrictlyPositiveDoubleCompanionTest {
         assertNull(actual)
     }
 }
+
+@Suppress("TestFunctionName")
+@ExperimentalNumberApi
+private fun StrictlyPositiveDouble(value: Double): StrictlyPositiveDouble =
+    StrictlyPositiveDouble.orNull(value)
+        ?: fail("Number should be greater than zero (tried with $value)")
