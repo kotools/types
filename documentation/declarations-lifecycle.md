@@ -29,24 +29,26 @@ This project provides different type of declarations:
 ### Experimental declarations
 
 A new declaration should be introduced in **experimental** stage for collecting
-user feedbacks.
+user feedbacks. This change can be included in a **patch release**.
 
 An **experimental** declaration shouldn't be promoted to **stable** if its
 implementation uses another **experimental** declaration.
 
 An **experimental** declaration can be promoted to **stable** by removing the
-experimental annotation marking it that requires an explicit [opt-in].
+experimental annotation marking it that requires an explicit [opt-in]. This
+change can be included in a **minor release**.
 
 ### Stable declarations
 
-A **stable** declaration introduced in the version `X.Y.Z` should be removed by:
-- deprecating it with a [warning level][kotlin.DeprecationLevel.WARNING] in the
-  version `X.(Y + 1).0`
-- deprecating it with an [error level][kotlin.DeprecationLevel.ERROR] in the
-  version `X.(Y + 2).0`
-- deprecating it with a [hidden level][kotlin.DeprecationLevel.HIDDEN] in the
-  version `X.(Y + 3).0`
-- removing it in the version `(X + 1).0.0`.
+A **stable** declaration introduced should be removed by:
+
+- Deprecating it with a [warning level][kotlin.DeprecationLevel.WARNING] in a
+  **patch release**.
+- Deprecating it with an [error level][kotlin.DeprecationLevel.ERROR] in a
+  **minor release**.
+- Deprecating it with a [hidden level][kotlin.DeprecationLevel.HIDDEN] in a
+  **patch release**.
+- Removing it in a **major release**.
 
 [kotlin.DeprecationLevel.ERROR]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-e-r-r-o-r.html
 [kotlin.DeprecationLevel.HIDDEN]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-h-i-d-d-e-n.html
