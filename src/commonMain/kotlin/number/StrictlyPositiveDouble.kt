@@ -64,10 +64,12 @@ public class StrictlyPositiveDouble(private val value: Double) {
      * System.out.println(equals); // true
      * ```
      */
+    @ExperimentalSince(KotoolsTypesVersion.V4_3_2)
     override fun equals(other: Any?): Boolean = if (this === other) true
     else other is StrictlyPositiveDouble && this.value == other.value
 
     /** Returns a hash code for this floating-point number. */
+    @ExperimentalSince(KotoolsTypesVersion.V4_3_2)
     override fun hashCode(): Int = hashCodeOf(value)
 
     /** Returns this floating-point number as [Double]. */
