@@ -8,11 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.NotEmptyRange
-import kotools.types.experimental.notEmptyRangeOf
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.text.NotBlankString
@@ -61,20 +56,6 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
         public val max: StrictlyPositiveInt by lazy(
             Int.MAX_VALUE.toStrictlyPositiveInt()::getOrThrow
         )
-
-        /** The range of values a [StrictlyPositiveInt] can have. */
-        @ExperimentalRangeApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val range: NotEmptyRange<StrictlyPositiveInt> by lazy {
-            val start: StrictlyPositiveInt = 1
-                .toStrictlyPositiveInt()
-                .getOrThrow()
-            val end: StrictlyPositiveInt = Int.MAX_VALUE
-                .toStrictlyPositiveInt()
-                .getOrThrow()
-            notEmptyRangeOf { start.inclusive to end.inclusive }
-        }
 
         internal infix fun errorMessageFor(number: Number): NotBlankString =
             "Number should be strictly positive (tried with $number)."

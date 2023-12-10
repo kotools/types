@@ -59,7 +59,8 @@ All notable changes to this project will be documented in this file.
   `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   - `Bound`, `InclusiveBound` and `ExclusiveBound` types with their declarations
   - `NotEmptyRange` type with its declarations
-  - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`.
+  - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`
+  - `StrictlyPositiveInt.Companion.range` property.
 - Opt-in message of experimental annotations (PR [#328]).
 - Align styles of version [4.2.0] with the latest ones in [API reference] (issue
   [#261]).

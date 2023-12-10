@@ -13,7 +13,9 @@ import kotlinx.serialization.json.Json
 import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
+import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.experimental.range
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -22,6 +24,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class NonZeroIntCompanionTest {
     @Test
@@ -48,8 +51,14 @@ class NonZeroIntCompanionTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun positiveRange_should_be_the_range_of_StrictlyPositiveInt() {
-        val range: NotEmptyRange<StrictlyPositiveInt> = NonZeroInt.positiveRange
-        range shouldEqual StrictlyPositiveInt.range
+        val actual: NotEmptyRange<StrictlyPositiveInt> =
+            NonZeroInt.positiveRange
+        val expected: NotEmptyRange<StrictlyPositiveInt> =
+            StrictlyPositiveInt.range
+        assertTrue(actual.start is InclusiveBound)
+        assertEquals(expected.start.value, actual.start.value)
+        assertTrue(actual.end is InclusiveBound)
+        assertEquals(expected.end.value, actual.end.value)
     }
 
     @Test

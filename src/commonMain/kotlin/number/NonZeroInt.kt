@@ -13,6 +13,7 @@ import kotools.types.collection.notEmptySetOf
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.experimental.range
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -62,9 +63,9 @@ public sealed interface NonZeroInt : AnyInt {
         @ExperimentalRangeApi
         @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
         @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val positiveRange: NotEmptyRange<StrictlyPositiveInt> by lazy(
-            StrictlyPositiveInt.Companion::range
-        )
+        public val positiveRange: NotEmptyRange<StrictlyPositiveInt> by lazy {
+            StrictlyPositiveInt.range
+        }
 
         /** Returns a random [NonZeroInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)

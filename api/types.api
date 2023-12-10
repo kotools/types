@@ -200,6 +200,7 @@ public final class kotools/types/experimental/StrictlyPositiveDoubleKt {
 }
 
 public final class kotools/types/experimental/StrictlyPositiveIntKt {
+	public static final synthetic fun getRange (Lkotools/types/number/StrictlyPositiveInt$Companion;)Lkotools/types/experimental/NotEmptyRange;
 	public static final synthetic fun unaryMinus-UPGVeGw (I)I
 }
 
@@ -358,7 +359,6 @@ public final class kotools/types/number/StrictlyPositiveInt : kotools/types/numb
 public final class kotools/types/number/StrictlyPositiveInt$Companion {
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin-qaD5h0E ()I
-	public final fun getRange ()Lkotools/types/experimental/NotEmptyRange;
 	public final fun random-qaD5h0E ()I
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }

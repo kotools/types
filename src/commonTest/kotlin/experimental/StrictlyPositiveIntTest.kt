@@ -1,3 +1,8 @@
+/*
+ * Copyright 2023 Kotools S.A.S.U.
+ * Use of this source code is governed by the MIT license.
+ */
+
 package kotools.types.experimental
 
 import kotools.types.number.StrictlyNegativeInt
@@ -5,6 +10,7 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyNegativeInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class StrictlyPositiveIntTest {
     @ExperimentalKotoolsTypesApi
@@ -17,5 +23,20 @@ class StrictlyPositiveIntTest {
             .toStrictlyNegativeInt()
             .getOrThrow()
         assertEquals(expected, actual)
+    }
+}
+
+class StrictlyPositiveIntCompanionTest {
+    @ExperimentalKotoolsTypesApi
+    @Test
+    fun range_should_go_from_1_included_to_Int_MAX_VALUE_included() {
+        val actual: NotEmptyRange<StrictlyPositiveInt> =
+            StrictlyPositiveInt.range
+        assertTrue(actual.start is InclusiveBound)
+        val expectedStartValue = StrictlyPositiveInt(1)
+        assertEquals(expectedStartValue, actual.start.value)
+        assertTrue(actual.end is InclusiveBound)
+        val expectedEndValue = StrictlyPositiveInt(Int.MAX_VALUE)
+        assertEquals(expectedEndValue, actual.end.value)
     }
 }

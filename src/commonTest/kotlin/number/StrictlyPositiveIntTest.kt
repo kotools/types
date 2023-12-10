@@ -12,10 +12,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.Package
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.InclusiveBound
-import kotools.types.experimental.NotEmptyRange
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
@@ -27,7 +23,6 @@ import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class StrictlyPositiveIntCompanionTest {
     @Test
@@ -43,26 +38,6 @@ class StrictlyPositiveIntCompanionTest {
         val expected: StrictlyPositiveInt = Int.MAX_VALUE
             .toStrictlyPositiveIntOrFailure()
         assertEquals(expected, actual)
-    }
-
-    @ExperimentalRangeApi
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun range_should_start_with_an_inclusive_bound_that_equals_1() {
-        val range: NotEmptyRange<StrictlyPositiveInt> =
-            StrictlyPositiveInt.range
-        assertTrue { range.start is InclusiveBound }
-        range.start.value.toInt() shouldEqual 1
-    }
-
-    @ExperimentalRangeApi
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun range_should_end_with_an_inclusive_bound_that_equals_the_maximum_value_of_Int() {
-        val range: NotEmptyRange<StrictlyPositiveInt> =
-            StrictlyPositiveInt.range
-        assertTrue { range.end is InclusiveBound }
-        range.end.value.toInt() shouldEqual Int.MAX_VALUE
     }
 
     @Test
