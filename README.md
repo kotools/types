@@ -47,7 +47,7 @@ This project supports the following platforms:
 - [Kotlin/JS]
 - [Kotlin Native][kotlin-native] for Linux x64, macOS x64 and MinGW x64 systems.
 
-[kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.3.2-RC1&color=orange
+[kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.3.1&color=blue
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
 [kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.21-blue?logo=kotlin
