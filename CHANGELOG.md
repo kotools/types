@@ -70,7 +70,7 @@ All notable changes to this project will be documented in this file.
 
 ## 4.3.2-RC1
 
-_Release date: 2023-12-12 | Commits: [4.3.1...4.3.2-RC1]._
+_Release date: 2023-12-18 | Commits: [4.3.1...4.3.2-RC1]._
 
 [4.3.1...4.3.2-RC1]: https://github.com/kotools/types/compare/4.3.1...4.3.2-RC1
 
