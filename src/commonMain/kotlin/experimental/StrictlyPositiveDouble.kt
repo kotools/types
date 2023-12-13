@@ -14,10 +14,11 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.hashCodeOf
-import kotlin.jvm.JvmSynthetic
+import kotools.types.internal.shouldBeGreaterThanZero
 
 private fun Double.isStrictlyPositive(): Boolean = this > 0.0
 
@@ -46,7 +47,7 @@ public class StrictlyPositiveDouble internal constructor(
 ) : Comparable<StrictlyPositiveDouble> {
     init {
         val isValid: Boolean = value.isStrictlyPositive()
-        require(isValid) { creationErrorMessageWith(value) }
+        require(isValid) { value.shouldBeGreaterThanZero() }
     }
 
     /**
@@ -77,13 +78,6 @@ public class StrictlyPositiveDouble internal constructor(
 
     /** Returns the string representation of this floating-point number. */
     override fun toString(): String = "$value"
-
-    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
-    public companion object {
-        @JvmSynthetic
-        internal fun creationErrorMessageWith(number: Number): String =
-            "Number should be greater than zero (tried with $number)."
-    }
 }
 
 @ExperimentalKotoolsTypesApi
@@ -104,9 +98,8 @@ private object StrictlyPositiveDoubleSerializer :
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
         val onFailure: (Double) -> Nothing = {
-            val message: String =
-                StrictlyPositiveDouble.creationErrorMessageWith(it)
-            throw SerializationException(message)
+            val message: ErrorMessage = it.shouldBeGreaterThanZero()
+            throw SerializationException("$message")
         }
         return value.toStrictlyPositiveDouble()
             .getOrNull()
