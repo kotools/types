@@ -3,6 +3,11 @@
     Use of this source code is governed by the MIT license.
 -->
 
+<!--suppress HtmlDeprecatedAttribute -->
+<div align="center">
+  <img src="images/logo.png" alt="">
+</div>
+
 # Kotools Types
 
 [![Kotools Types][kotools-types-badge]][kotools-types-project]
