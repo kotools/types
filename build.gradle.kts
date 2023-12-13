@@ -44,8 +44,3 @@ dependencies {
 }
 
 tasks.register("unit")
-tasks.register("devCheck").configure {
-    description = "Run development checks, including JVM tests, documentation" +
-            " generation and API checks."
-    dependsOn(tasks.jvmTest, tasks.dokkaHtml, tasks.apiCheck)
-}
