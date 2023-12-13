@@ -44,7 +44,10 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
 public class StrictlyPositiveDouble internal constructor(
     private val value: Double
 ) : Comparable<StrictlyPositiveDouble> {
-    // ---------- Overrides from AnyInt ----------
+    init {
+        val isValid: Boolean = value.isStrictlyPositive()
+        require(isValid) { StrictlyPositiveDoubleException(value).message }
+    }
 
     /**
      * Returns `true` if the [other] object is an instance of
@@ -53,14 +56,6 @@ public class StrictlyPositiveDouble internal constructor(
      */
     override fun equals(other: Any?): Boolean =
         other is StrictlyPositiveDouble && other.value == value
-
-    /** Returns a hash code value for this floating-point number. */
-    override fun hashCode(): Int = hashCodeOf(value)
-
-    /** Returns the string representation of this floating-point number. */
-    override fun toString(): String = "$value"
-
-    // ---------- Overrides from Comparable ----------
 
     /**
      * Compares this floating-point number with the other one for order.
@@ -74,15 +69,14 @@ public class StrictlyPositiveDouble internal constructor(
         return x.compareTo(y)
     }
 
-    // ---------- Type-specific declarations ----------
-
-    init {
-        val isValid: Boolean = value.isStrictlyPositive()
-        require(isValid) { StrictlyPositiveDoubleException(value).message }
-    }
+    /** Returns a hash code value for this floating-point number. */
+    override fun hashCode(): Int = hashCodeOf(value)
 
     /** Returns this floating-point number as a [Double]. */
     public fun toDouble(): Double = value
+
+    /** Returns the string representation of this floating-point number. */
+    override fun toString(): String = "$value"
 
     /** Contains static declarations for the [StrictlyPositiveDouble] type. */
     public companion object {
