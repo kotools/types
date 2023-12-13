@@ -6,6 +6,17 @@
 package kotools.types.internal
 
 /**
+ * Creates an error message from the message of the specified [throwable], or
+ * throws an [IllegalArgumentException] if the [throwable] doesn't have a
+ * message or have a blank one.
+ */
+public fun ErrorMessage(throwable: Throwable): ErrorMessage {
+    val text: String =
+        requireNotNull(throwable.message) { "Throwable should have a message." }
+    return ErrorMessage(text)
+}
+
+/**
  * Returns an error message indicating that this number should be greater than
  * zero.
  */

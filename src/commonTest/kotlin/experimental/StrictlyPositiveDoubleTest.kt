@@ -14,6 +14,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.Package
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.shouldBeGreaterThanZero
 import kotlin.random.Random
@@ -21,7 +22,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @ExperimentalKotoolsTypesApi
@@ -46,10 +46,9 @@ class StrictlyPositiveDoubleTest {
             value.toStrictlyPositiveDouble()
         val exception: IllegalArgumentException =
             assertFailsWith { result.getOrThrow() }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = value.shouldBeGreaterThanZero()
-            .toString()
-        assertEquals(expectedMessage, actualMessage)
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = value.shouldBeGreaterThanZero()
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -224,9 +223,8 @@ class StrictlyPositiveDoubleSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<StrictlyPositiveDouble>("$value")
         }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = value.shouldBeGreaterThanZero()
-            .toString()
-        assertEquals(expectedMessage, actualMessage)
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = value.shouldBeGreaterThanZero()
+        assertEquals(expected, actual)
     }
 }
