@@ -15,8 +15,3 @@ plugins {
 repositories.mavenCentral()
 
 kotlinCompile.javaPackagePrefix.set(KotoolsTypesPackage.Internal)
-
-dependencies {
-    commonMainImplementation(platform(libs.kotlin.bom))
-    commonTestImplementation(libs.kotlin.test)
-}
