@@ -43,17 +43,4 @@ dependencies {
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
 
-tasks.register("allJvmTests").configure {
-    group = "verification"
-    description = "Runs Kotlin/JVM tests on all projects."
-    dependsOn += tasks.jvmTest
-    subprojects.forEach { subproject: Project ->
-        subproject.tasks.findByName("jvmTest")
-            ?.let { dependsOn += it }
-    }
-    allprojects.find { it.name == "java-compatibility" }
-        ?.tasks
-        ?.findByName("test")
-        ?.let { dependsOn += it }
-}
 tasks.register("unit")

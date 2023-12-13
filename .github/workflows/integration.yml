@@ -78,6 +78,21 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Test code
         run: ./gradlew :internal:jsTest --no-daemon
+  internal-jvm-test:
+    name: Internal Kotlin/JVM tests
+    needs: gradle-wrapper-validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :internal:jvmTest --no-daemon
   internal-linux-test:
     name: Internal Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -123,6 +138,21 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Test code
         run: ./gradlew :internal:windowsTest --no-daemon
+  java-compatibility-test:
+    name: Java compatibility tests
+    needs: gradle-wrapper-validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.0
+      - name: Setup Java & Gradle
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: ${{ env.CACHING }}
+      - name: Test code
+        run: ./gradlew :java-compatibility:test --no-daemon
   js-test:
     name: Kotlin/JS tests
     needs: gradle-wrapper-validation
@@ -152,7 +182,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test code
-        run: ./gradlew :allJvmTests --no-daemon
+        run: ./gradlew :jvmTest --no-daemon
   linux-test:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -204,9 +234,11 @@ jobs:
     needs:
       - api-binary-check
       - internal-js-test
+      - internal-jvm-test
       - internal-linux-test
       - internal-macos-test
       - internal-windows-test
+      - java-compatibility-test
       - js-test
       - jvm-test
       - linux-test
