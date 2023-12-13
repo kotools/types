@@ -5,8 +5,14 @@
 
 package kotools.types.internal
 
+import kotlinx.serialization.SerializationException
 import kotlin.jvm.JvmSynthetic
 import kotlin.reflect.KClass
+
+/** Throws a [SerializationException] with the specified [message]. */
+@JvmSynthetic
+internal fun serializationError(message: ErrorMessage): Nothing =
+    throw SerializationException("$message")
 
 @JvmSynthetic
 internal inline fun <reified T : Any> unexpectedCreationError(

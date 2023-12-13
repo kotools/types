@@ -7,17 +7,16 @@ package kotools.types.experimental
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.Package
-import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.hashCodeOf
+import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeGreaterThanZero
 
 private fun Double.isStrictlyPositive(): Boolean = this > 0.0
@@ -97,12 +96,8 @@ private object StrictlyPositiveDoubleSerializer :
 
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
-        val onFailure: (Double) -> Nothing = {
-            val message: ErrorMessage = it.shouldBeGreaterThanZero()
-            throw SerializationException("$message")
-        }
         return value.toStrictlyPositiveDouble()
             .getOrNull()
-            ?: onFailure(value)
+            ?: serializationError(value.shouldBeGreaterThanZero())
     }
 }
