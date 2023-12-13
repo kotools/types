@@ -14,6 +14,10 @@ import kotlin.reflect.KClass
 internal fun serializationError(message: ErrorMessage): Nothing =
     throw SerializationException("$message")
 
+/**
+ * Throws an [IllegalStateException] indicating that creating an instance of
+ * type [T] with the specified [value] shouldn't fail.
+ */
 @JvmSynthetic
 internal inline fun <reified T : Any> unexpectedCreationError(
     value: Any
@@ -21,5 +25,5 @@ internal inline fun <reified T : Any> unexpectedCreationError(
     val kClass: KClass<T> = T::class
     val typeName: String = kClass.simpleName
         ?: error("Getting simple name of '$kClass' shouldn't return 'null'.")
-    error("Creating an instance of $typeName from '$value' shouldn't fail.")
+    error("Creating an instance of $typeName with '$value' shouldn't fail.")
 }
