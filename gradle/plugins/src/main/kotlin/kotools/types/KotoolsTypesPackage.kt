@@ -9,8 +9,7 @@ private val regex: Regex by lazy { Regex("^[a-z]+(\\.[a-z]+)*\$") }
 
 /** Enumerates packages of Kotools Types. */
 public enum class KotoolsTypesPackage(private val value: String) {
-    Root("kotools.types"),
-    Internal("$Root.internal");
+    Root("kotools.types");
 
     init {
         require(value matches regex) {

@@ -3,8 +3,6 @@
  * Use of this source code is governed by the MIT license.
  */
 
-import kotools.types.KotoolsTypesPackage
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -13,5 +11,3 @@ plugins {
 }
 
 repositories.mavenCentral()
-
-kotlinCompile.javaPackagePrefix.set(KotoolsTypesPackage.Internal)
