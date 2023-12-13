@@ -80,16 +80,11 @@ This section presents a non-exhaustive list of types provided by this library.
   positive integers excluding zero.
 - [`StrictlyNegativeInt`][kotools.types.number.StrictlyNegativeInt] representing
   negative integers excluding zero.
-- [`StrictlyPositiveDouble`][kotools.types.number.StrictlyPositiveDouble]
-  representing positive floating-point numbers excluding zero represented by the
-  [`Double`][kotlin.Double] type. **[EXPERIMENTAL]**
 
-[kotlin.Double]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html
 [kotools.types.number.NegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-negative-int/index.html
 [kotools.types.number.NonZeroInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-non-zero-int/index.html
 [kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
 [kotools.types.number.StrictlyNegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-negative-int/index.html
-[kotools.types.number.StrictlyPositiveDouble]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-double/index.html
 [kotools.types.number.StrictlyPositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-int/index.html
 
 ### Text
@@ -111,19 +106,6 @@ This section presents a non-exhaustive list of types provided by this library.
 [kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
 [kotools.types.collection.NotEmptyMap]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-map/index.html
 [kotools.types.collection.NotEmptySet]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-set/index.html
-
-### Range
-
-- [`InclusiveBound`][kotools.types.range.InclusiveBound] representing inclusive
-  bounds in a range. **[EXPERIMENTAL]**
-- [`ExclusiveBound`][kotools.types.range.ExclusiveBound] representing exclusive
-  bounds in a range. **[EXPERIMENTAL]**
-- [`NotEmptyRange`][kotools.types.range.NotEmptyRange] representing ranges of
-  comparable values that contain at least one value. **[EXPERIMENTAL]**
-
-[kotools.types.range.ExclusiveBound]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-exclusive-bound/index.html
-[kotools.types.range.InclusiveBound]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-inclusive-bound/index.html
-[kotools.types.range.NotEmptyRange]: https://types.kotools.org/-kotools%20-types/kotools.types.range/-not-empty-range/index.html
 
 ## Design goals
 
