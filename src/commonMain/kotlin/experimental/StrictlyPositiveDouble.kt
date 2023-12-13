@@ -46,7 +46,7 @@ public class StrictlyPositiveDouble internal constructor(
 ) : Comparable<StrictlyPositiveDouble> {
     init {
         val isValid: Boolean = value.isStrictlyPositive()
-        require(isValid) { StrictlyPositiveDoubleException(value).message }
+        require(isValid) { creationErrorMessageWith(value) }
     }
 
     /**
@@ -82,7 +82,7 @@ public class StrictlyPositiveDouble internal constructor(
     public companion object {
         @JvmSynthetic
         internal fun creationErrorMessageWith(number: Number): String =
-            "Number should be strictly positive (tried with $number)."
+            "Number should be greater than zero (tried with $number)."
     }
 }
 
@@ -103,24 +103,13 @@ private object StrictlyPositiveDoubleSerializer :
 
     override fun deserialize(decoder: Decoder): StrictlyPositiveDouble {
         val value: Double = decoder.decodeDouble()
+        val onFailure: (Double) -> Nothing = {
+            val message: String =
+                StrictlyPositiveDouble.creationErrorMessageWith(it)
+            throw SerializationException(message)
+        }
         return value.toStrictlyPositiveDouble()
             .getOrNull()
-            ?: throw StrictlyPositiveDoubleSerializationException(value)
-    }
-}
-
-private class StrictlyPositiveDoubleException(number: Number) :
-    IllegalArgumentException() {
-    @ExperimentalKotoolsTypesApi
-    override val message: String by lazy {
-        StrictlyPositiveDouble.creationErrorMessageWith(number)
-    }
-}
-
-private class StrictlyPositiveDoubleSerializationException(number: Number) :
-    SerializationException() {
-    @ExperimentalKotoolsTypesApi
-    override val message: String by lazy {
-        StrictlyPositiveDouble.creationErrorMessageWith(number)
+            ?: onFailure(value)
     }
 }
