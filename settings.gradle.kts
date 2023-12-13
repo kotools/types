@@ -8,6 +8,7 @@ rootProject.name = "types"
 val gradlePluginsDir: File = rootDir.resolve("gradle/plugins")
 includeBuild(gradlePluginsDir)
 
+include(KotoolsTypesSubproject.Core)
 include(KotoolsTypesSubproject.Internal)
 include(KotoolsTypesSubproject.JavaCompatibility)
 
@@ -18,6 +19,7 @@ fun include(subproject: KotoolsTypesSubproject) {
 }
 
 enum class KotoolsTypesSubproject(private val value: String) {
+    Core("core"),
     Internal("internal"),
     JavaCompatibility("java-compatibility");
 
