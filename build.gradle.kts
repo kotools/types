@@ -45,15 +45,15 @@ dependencies {
 
 tasks.register("allJvmTests").configure {
     group = "verification"
-    description = "Runs Kotlin/JVM tests in all projects."
+    description = "Runs Kotlin/JVM tests on all projects."
     dependsOn += tasks.jvmTest
     subprojects.forEach { subproject: Project ->
         subproject.tasks.findByName("jvmTest")
             ?.let { dependsOn += it }
     }
-    project(":java-compatibility")
-        .tasks
-        .findByName("test")
+    allprojects.find { it.name == "java-compatibility" }
+        ?.tasks
+        ?.findByName("test")
         ?.let { dependsOn += it }
 }
 tasks.register("unit")
