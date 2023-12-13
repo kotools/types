@@ -27,7 +27,7 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     runCatching { StrictlyPositiveInt(toInt()) }
 
-/** Representation of positive integers excluding [zero][ZeroInt]. */
+/** Represents an integer number of type [Int] that is greater than zero. */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)

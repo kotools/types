@@ -70,17 +70,18 @@ This section presents a non-exhaustive list of types provided by this library.
 
 ### Number
 
-- [`NonZeroInt`][kotools.types.number.NonZeroInt] representing integers other
-  than zero.
-- [`PositiveInt`][kotools.types.number.PositiveInt] representing positive
-  integers including zero.
-- [`NegativeInt`][kotools.types.number.NegativeInt] representing negative
-  integers including zero.
-- [`StrictlyPositiveInt`][kotools.types.number.StrictlyPositiveInt] representing
-  positive integers excluding zero.
-- [`StrictlyNegativeInt`][kotools.types.number.StrictlyNegativeInt] representing
-  negative integers excluding zero.
+- [NonZeroInt][kotools.types.number.NonZeroInt] representing an integer number
+  of type [Int][kotlin.Int] that is other than zero.
+- [PositiveInt][kotools.types.number.PositiveInt] representing an integer number
+  of type [Int][kotlin.Int] that is greater than or equals zero.
+- [NegativeInt][kotools.types.number.NegativeInt] representing an integer number
+  of type [Int][kotlin.Int] that is less than or equals zero.
+- [StrictlyPositiveInt][kotools.types.number.StrictlyPositiveInt] representing
+  an integer number of type [Int][kotlin.Int] that is greater than zero.
+- [StrictlyNegativeInt][kotools.types.number.StrictlyNegativeInt] representing
+  an integer number of type [Int][kotlin.Int] that is less than zero.
 
+[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int
 [kotools.types.number.NegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-negative-int/index.html
 [kotools.types.number.NonZeroInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-non-zero-int/index.html
 [kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
@@ -89,19 +90,19 @@ This section presents a non-exhaustive list of types provided by this library.
 
 ### Text
 
-- [`NotBlankString`][kotools.types.text.NotBlankString] representing strings
-  that have at least one character, excluding whitespaces.
+- [NotBlankString][kotools.types.text.NotBlankString] representing a string that
+  has at least one character excluding whitespaces.
 
 [kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
 
 ### Collection
 
-- [`NotEmptyList`][kotools.types.collection.NotEmptyList] representing lists
-  with at least one element.
-- [`NotEmptySet`][kotools.types.collection.NotEmptySet] representing sets with
+- [NotEmptyList][kotools.types.collection.NotEmptyList] representing a list with
   at least one element.
-- [`NotEmptyMap`][kotools.types.collection.NotEmptyMap] representing maps with
-  at least one entry.
+- [NotEmptySet][kotools.types.collection.NotEmptySet] representing a set with at
+  least one element.
+- [NotEmptyMap][kotools.types.collection.NotEmptyMap] representing a map with at
+  least one entry.
 
 [kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
 [kotools.types.collection.NotEmptyMap]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-map/index.html

@@ -37,7 +37,10 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
     }
 }
 
-/** Representation of positive integers including [zero][ZeroInt]. */
+/**
+ * Represents an integer number of type [Int] that is greater than or equals
+ * zero.
+ */
 @Serializable(PositiveIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface PositiveInt : AnyInt {

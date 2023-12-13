@@ -36,7 +36,9 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
     }
 }
 
-/** Representation of negative integers including [zero][ZeroInt]. */
+/**
+ * Represents an integer number of type [Int] that is less than or equals zero.
+ */
 @Serializable(NegativeIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface NegativeInt : AnyInt {

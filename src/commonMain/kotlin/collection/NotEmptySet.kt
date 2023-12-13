@@ -73,7 +73,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     }
 
 /**
- * Represents a set with at least one element of type [E].
+ * Represents a set that has at least one element of type [E].
  *
  * You can use the [notEmptySetOf] or the [toNotEmptySet] functions for building
  * this type.

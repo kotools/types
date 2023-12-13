@@ -76,8 +76,8 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap(entries) }
 
 /**
- * Represents a map with at least one entry with a key of type [K] and a value
- * of type [V].
+ * Represents a map that has at least one entry, with a key of type [K] and a
+ * value of type [V].
  *
  * You can use the [notEmptyMapOf] or the [toNotEmptyMap] functions for building
  * this type.

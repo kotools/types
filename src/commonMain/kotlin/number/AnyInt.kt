@@ -19,7 +19,7 @@ import kotools.types.internal.unexpectedCreationError
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/** Representation of all integers. */
+/** Represents an integer number of type [Int]. */
 @Serializable(AnyIntSerializerImplementation::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public sealed interface AnyInt : Comparable<AnyInt> {

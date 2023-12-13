@@ -35,7 +35,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     }
 }
 
-/** Representation of integers other than [zero][ZeroInt]. */
+/** Represents an integer number of type [Int] that is other than zero. */
 @Serializable(NonZeroIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface NonZeroInt : AnyInt {

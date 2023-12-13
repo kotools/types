@@ -34,8 +34,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
     runCatching { NotBlankString(this) }
 
 /**
- * Representation of strings that have at least one character, excluding
- * whitespaces.
+ * Represents a string that has at least one character excluding whitespaces.
  */
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)

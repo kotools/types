@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file.
   - `NotEmptyRange` type with its declarations
   - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`
   - `StrictlyPositiveInt.Companion.range` property.
+- Documentation of types in API reference and in README.
 
 [#319]: https://github.com/kotools/types/issues/319
 

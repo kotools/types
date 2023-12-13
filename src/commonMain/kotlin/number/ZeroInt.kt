@@ -13,7 +13,7 @@ import kotools.types.internal.Since
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 
-/** Representation of the zero integer. */
+/** Represents an integer number of type [Int] that equals zero. */
 @Serializable(ZeroIntSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public object ZeroInt : PositiveInt, NegativeInt {

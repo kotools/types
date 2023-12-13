@@ -32,7 +32,7 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching { StrictlyNegativeInt(toInt()) }
 
-/** Representation of negative integers excluding [zero][ZeroInt]. */
+/** Represents an integer number of type [Int] that is less than zero. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)

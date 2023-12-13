@@ -13,9 +13,7 @@ import kotools.types.number.ZeroInt
 import kotools.types.number.plus
 import kotools.types.number.toStrictlyPositiveInt
 
-/**
- * Representation of collections containing at least one element of type [E].
- */
+/** Represents a collection that has at least one element of type [E]. */
 @Since(KotoolsTypesVersion.V4_1_0)
 public sealed interface NotEmptyCollection<out E> {
     /**
