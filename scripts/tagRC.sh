@@ -24,9 +24,5 @@ git tag "$TAG_NAME" -s \
   -m "$RC_DESCRIPTION of Kotools Types $VERSION." && \
 echo "> Successfully created tag $TAG_NAME." && \
 
-# The following commands are useful for pushing the new tag and viewing tags in
-# the browser.
-# But the URL should be provided from the command 'git remote get-url origin'.
-
-# git push --quiet origin "$TAG_NAME" && \
-# open https://github.com/kotools/types/tags
+git push --quiet origin "$TAG_NAME" && \
+open https://github.com/kotools/types/tags
