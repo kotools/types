@@ -53,9 +53,8 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
         }
-        val currentVersion = "${project.version}"
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-            version = currentVersion
+            version = project.version.toString()
             olderVersionsDir = apiReferencesDir.asFile
         }
         val outputDir: Provider<File> = project.layout.buildDirectory
