@@ -12,14 +12,11 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeGreaterThanZero
-
-private fun Double.isStrictlyPositive(): Boolean = this > 0.0
 
 /**
  * Returns this number as an encapsulated [StrictlyPositiveDouble],
@@ -45,23 +42,22 @@ public class StrictlyPositiveDouble internal constructor(
     private val value: Double
 ) : Comparable<StrictlyPositiveDouble> {
     init {
-        val isValid: Boolean = value.isStrictlyPositive()
-        require(isValid) { value.shouldBeGreaterThanZero() }
+        require(value > 0) { value.shouldBeGreaterThanZero() }
     }
 
     /**
-     * Returns `true` if the [other] object is an instance of
-     * [StrictlyPositiveDouble] with a value that equals this instance's value,
-     * or returns `false` otherwise.
+     * Returns `true` if the [other] object is a [StrictlyPositiveDouble] having
+     * the same value as this floating-point number, or returns `false`
+     * otherwise.
      */
     override fun equals(other: Any?): Boolean =
         other is StrictlyPositiveDouble && other.value == value
 
     /**
-     * Compares this floating-point number with the other one for order.
-     * Returns zero if this floating-point number equals the other one,
-     * a negative number if it's less than the other one,
-     * or a positive number if it's greater than the other one.
+     * Compares this floating-point number with the [other] one for order.
+     * Returns zero if this floating-point number equals the [other] one, a
+     * negative number if it's less than the [other] one, or a positive number
+     * if it's greater than the [other] one.
      */
     override fun compareTo(other: StrictlyPositiveDouble): Int {
         val x: Double = toDouble()
@@ -75,7 +71,7 @@ public class StrictlyPositiveDouble internal constructor(
     /** Returns this floating-point number as a [Double]. */
     public fun toDouble(): Double = value
 
-    /** Returns the string representation of this floating-point number. */
+    /** Returns this floating-point number as [String]. */
     override fun toString(): String = "$value"
 }
 
@@ -84,7 +80,7 @@ private object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
         PrimitiveSerialDescriptor(
-            serialName = "${Package.NUMBER}.StrictlyPositiveDouble",
+            serialName = "kotools.types.experimental.StrictlyPositiveDouble",
             PrimitiveKind.DOUBLE
         )
     }

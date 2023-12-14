@@ -13,7 +13,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import kotools.types.Package
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.shouldBeGreaterThanZero
@@ -180,7 +179,7 @@ class StrictlyPositiveDoubleSerializerTest {
         val actual: String = serializer<StrictlyPositiveDouble>()
             .descriptor
             .serialName
-        val expected = "${Package.NUMBER}.StrictlyPositiveDouble"
+        val expected = "kotools.types.experimental.StrictlyPositiveDouble"
         assertEquals(expected, actual)
     }
 
