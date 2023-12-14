@@ -53,4 +53,7 @@ git diff-index --quiet HEAD || \
 git commit -qS -m "docs: publish API reference of v$PROJECT_VERSION"
 git checkout -q -
 
+echo "${BLUE}> Clean temporary files${NO_COLOR}"
+rm $OLD_VERSIONS_DIR
+
 echo "${GREEN}> SUCCESS${NO_COLOR}"
