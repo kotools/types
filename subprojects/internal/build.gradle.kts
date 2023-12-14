@@ -11,3 +11,5 @@ plugins {
 }
 
 repositories.mavenCentral()
+
+dependencies { commonMainImplementation(libs.kotlinx.serialization.core) }

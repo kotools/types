@@ -6,20 +6,17 @@
 package kotools.types.internal
 
 import kotlinx.serialization.SerializationException
-import kotlin.jvm.JvmSynthetic
 import kotlin.reflect.KClass
 
 /** Throws a [SerializationException] with the specified [message]. */
-@JvmSynthetic
-internal fun serializationError(message: ErrorMessage): Nothing =
+public fun serializationError(message: ErrorMessage): Nothing =
     throw SerializationException("$message")
 
 /**
  * Throws an [IllegalStateException] indicating that creating an instance of
  * type [T] with the specified [value] shouldn't fail.
  */
-@JvmSynthetic
-internal inline fun <reified T : Any> unexpectedCreationError(
+public inline fun <reified T : Any> unexpectedCreationError(
     value: Any
 ): Nothing {
     val kClass: KClass<T> = T::class
