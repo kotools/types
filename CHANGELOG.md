@@ -27,13 +27,32 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- The `ExperimentalKotoolsTypesApi` annotation for marking experimental
+  declarations of this project (issue [#191]).
+- [Security policy](SECURITY.md) indicating which versions are supported with
+  security updates and how to report a security vulnerability (issue [#250]).
+- Versions [4.1.0][tag/4.1.0], [4.0.1][tag/4.0.1], [4.0.0][tag/4.0.0],
+  [3.2.0][tag/3.2.0], [2.0.0][tag/2.0.0] and [1.3.1][tag/1.3.1] in
+  [API reference] (issue [#261]).
+- Versioning strategy documentation (issue [#215]).
+- Declarations lifecycle documentation (issue [#307]).
 - The `AnyInt(Int)` **experimental** function for creating an instance of
   `AnyInt` with the specified `value` (commit [571428bc]).
 
+[tag/1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
+[tag/2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
+[tag/3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
 [571428bc]: https://github.com/kotools/types/commit/571428bc
+[#191]: https://github.com/kotools/types/issues/191
+[#215]: https://github.com/kotools/types/issues/215
+[#250]: https://github.com/kotools/types/issues/250
+[#307]: https://github.com/kotools/types/issues/307
 
 ### Changed
 
+- Opt-in message of experimental annotations (PR [#328]).
+- Align styles of version [4.2.0][tag/4.2.0] with the latest ones in
+  [API reference] (issue [#261]).
 - Move the following **experimental** declarations to the
   `kotools.types.experimental` package with a new signature (issue [#319]):
   - `StrictlyPositiveDouble` type
@@ -46,10 +65,23 @@ All notable changes to this project will be documented in this file.
 - Documentation of types in API reference and in README (commit [ed9322d1]).
 
 [ed9322d1]: https://github.com/kotools/types/commit/ed9322d1
+[#261]: https://github.com/kotools/types/issues/261
 [#319]: https://github.com/kotools/types/issues/319
+[#328]: https://github.com/kotools/types/pull/328
 
 ### Removed
 
+- The following **experimental** factory functions (issue [#258]):
+  - `toNonZeroIntOrNull` and `toNonZeroIntOrThrow`
+  - `toPositiveIntOrNull` and `toPositiveIntOrThrow`
+  - `toNegativeIntOrNull` and `toNegativeIntOrThrow`
+  - `toStrictlyPositiveIntOrNull` and `toStrictlyPositiveIntOrThrow`
+  - `toStrictlyNegativeIntOrNull` and `toStrictlyNegativeIntOrThrow`
+  - `toStrictlyPositiveDoubleOrNull` and `toStrictlyPositiveDoubleOrThrow`
+  - `toNotBlankStringOrNull` and `toNotBlankStringOrThrow`
+  - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
+  - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
+  - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
 - The `ExperimentalSinceKotoolsTypes` **internal** annotation (commit
   [9052e77d]).
 - The `SinceKotoolsTypes` **internal** annotation (commit [557350b5]).
@@ -61,65 +93,6 @@ All notable changes to this project will be documented in this file.
 [557350b5]: https://github.com/kotools/types/commit/557350b5
 [9052e77d]: https://github.com/kotools/types/commit/9052e77d
 [#125]: https://github.com/kotools/types/issues/125
-
-### Security
-
-- Upgrade to [Webpack 5.76.3][webpack-5.76.3] for avoiding cross-realm object
-  access (issue [#313]).
-
-[#313]: https://github.com/kotools/types/issues/313
-[webpack-5.76.3]: https://github.com/webpack/webpack/releases/tag/v5.76.3
-
-## 4.3.2-RC1
-
-_Release date: 2023-12-18 | Commits: [4.3.1...4.3.2-RC1]._
-
-[4.3.1...4.3.2-RC1]: https://github.com/kotools/types/compare/4.3.1...4.3.2-RC1
-
-### Added
-
-- The `ExperimentalKotoolsTypesApi` annotation for marking experimental
-  declarations of this project (issue [#191]).
-- [Security policy](SECURITY.md) indicating which versions are supported with
-  security updates and how to report a security vulnerability (issue [#250]).
-- Versions [4.1.0][tag/4.1.0], [4.0.1][tag/4.0.1], [4.0.0][tag/4.0.0],
-  [3.2.0][tag/3.2.0], [2.0.0][tag/2.0.0] and [1.3.1][tag/1.3.1] in
-  [API reference] (issue [#261]).
-- Versioning strategy documentation (issue [#215]).
-- Declarations lifecycle documentation (issue [#307]).
-
-[tag/1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
-[tag/2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
-[tag/3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
-[#191]: https://github.com/kotools/types/issues/191
-[#215]: https://github.com/kotools/types/issues/215
-[#250]: https://github.com/kotools/types/issues/250
-[#307]: https://github.com/kotools/types/issues/307
-
-### Changed
-
-- Opt-in message of experimental annotations (PR [#328]).
-- Align styles of version [4.2.0][tag/4.2.0] with the latest ones in
-  [API reference] (issue [#261]).
-
-[#261]: https://github.com/kotools/types/issues/261
-[#328]: https://github.com/kotools/types/pull/328
-
-### Removed
-
-The following **experimental** factory functions (issue [#258]):
-
-- `toNonZeroIntOrNull` and `toNonZeroIntOrThrow`
-- `toPositiveIntOrNull` and `toPositiveIntOrThrow`
-- `toNegativeIntOrNull` and `toNegativeIntOrThrow`
-- `toStrictlyPositiveIntOrNull` and `toStrictlyPositiveIntOrThrow`
-- `toStrictlyNegativeIntOrNull` and `toStrictlyNegativeIntOrThrow`
-- `toStrictlyPositiveDoubleOrNull` and `toStrictlyPositiveDoubleOrThrow`
-- `toNotBlankStringOrNull` and `toNotBlankStringOrThrow`
-- `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
-- `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
-- `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
-
 [#258]: https://github.com/kotools/types/issues/258
 
 ### Fixed
@@ -130,6 +103,14 @@ The following **experimental** factory functions (issue [#258]):
 
 [#252]: https://github.com/kotools/types/pull/252
 [#257]: https://github.com/kotools/types/issues/257
+
+### Security
+
+- Upgrade to [Webpack 5.76.3][webpack-5.76.3] for avoiding cross-realm object
+  access (issue [#313]).
+
+[#313]: https://github.com/kotools/types/issues/313
+[webpack-5.76.3]: https://github.com/webpack/webpack/releases/tag/v5.76.3
 
 ## 4.3.1
 
