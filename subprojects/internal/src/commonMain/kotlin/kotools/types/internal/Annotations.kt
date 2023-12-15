@@ -30,6 +30,7 @@ public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
  * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are positive
  * integers without leading zeros.
  */
+@MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
