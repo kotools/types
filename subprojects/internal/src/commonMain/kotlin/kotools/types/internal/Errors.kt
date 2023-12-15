@@ -8,7 +8,7 @@ package kotools.types.internal
 import kotlinx.serialization.SerializationException
 import kotlin.reflect.KClass
 
-/** Throws a [SerializationException] with the specified [message]. */
+/** Throws a `SerializationException` with the specified [message]. */
 public fun serializationError(message: ErrorMessage): Nothing =
     throw SerializationException("$message")
 
