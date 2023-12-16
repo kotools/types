@@ -24,7 +24,7 @@ import kotools.types.internal.shouldBeGreaterThanZero
  * [IllegalArgumentException] if this number is negative.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
@@ -36,7 +36,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * zero.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 public class StrictlyPositiveDouble internal constructor(
     private val value: Double

@@ -28,7 +28,7 @@ import kotlin.jvm.JvmSynthetic
  * Please note that this function is currently not available for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @JvmSynthetic
 public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt {
     val value: Int = toInt()
@@ -50,7 +50,7 @@ public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt {
  * Please note that this property is currently not available for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @get:JvmSynthetic
 public val StrictlyPositiveInt.Companion.range:
         NotEmptyRange<StrictlyPositiveInt>

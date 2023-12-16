@@ -35,7 +35,7 @@ import kotlin.jvm.JvmName
  * ```
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_3_2)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @JvmName("create")
 public fun AnyInt(value: Int): AnyInt {
     if (value == 0) return ZeroInt

@@ -28,7 +28,7 @@ public annotation class ExperimentalCollectionApi
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@Since(KotoolsTypesVersion.V4_3_2)
+@Since(KotoolsTypesVersion.Unreleased)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalKotoolsTypesApi
 
