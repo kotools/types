@@ -14,10 +14,6 @@ import kotlin.annotation.AnnotationTarget.TYPEALIAS
 /**
  * Specifies the first [version] of Kotools Types where a declaration has
  * appeared as an **experimental** feature.
- *
- * The [version] should be in the following formats: `<major>.<minor>` or
- * `<major>.<minor>.<patch>`, where _major_, _minor_ and _patch_ are positive
- * integers without leading zeros.
  */
 @MustBeDocumented
 @Retention(SOURCE)
