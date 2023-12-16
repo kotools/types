@@ -5,6 +5,12 @@
 
 package kotools.types.internal
 
+import kotlin.annotation.AnnotationRetention.SOURCE
+import kotlin.annotation.AnnotationTarget.CLASS
+import kotlin.annotation.AnnotationTarget.FUNCTION
+import kotlin.annotation.AnnotationTarget.PROPERTY
+import kotlin.annotation.AnnotationTarget.TYPEALIAS
+
 /**
  * Specifies the first [version] of Kotools Types where a declaration has
  * appeared as an **experimental** feature.
@@ -14,13 +20,8 @@ package kotools.types.internal
  * integers without leading zeros.
  */
 @MustBeDocumented
-@Retention(AnnotationRetention.SOURCE)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.TYPEALIAS
-)
+@Retention(SOURCE)
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
 
 /**
@@ -32,13 +33,8 @@ public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
  * integers without leading zeros.
  */
 @MustBeDocumented
-@Retention(AnnotationRetention.SOURCE)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.TYPEALIAS
-)
+@Retention(SOURCE)
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class Since(val version: KotoolsTypesVersion)
 
 /**
@@ -57,13 +53,8 @@ public annotation class Since(val version: KotoolsTypesVersion)
  * integers without leading zeros.
  */
 @MustBeDocumented
-@Retention(AnnotationRetention.SOURCE)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.TYPEALIAS
-)
+@Retention(SOURCE)
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class DeprecatedSinceKotoolsTypes(
     val warningSince: KotoolsTypesVersion,
     val errorSince: KotoolsTypesVersion = KotoolsTypesVersion.Unreleased,
