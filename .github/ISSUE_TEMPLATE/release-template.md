@@ -11,17 +11,14 @@ Issues of this new version should be done before resolving this issue.
 
 ## Checklist
 
-- [ ] Upgrade the application's version.
-- [ ] Add a new version in changelog.
-- [ ] Update version in readme.
+- [ ] Set Gradle project's version, version of unreleased declarations, badge version in README, add this version in changelog and commit local changes.
 - [ ] Deliver packages to the Maven central by running the [delivery workflow].
 - [ ] Close packages on the Maven central.
 - [ ] Release packages on the Maven central.
+- [ ] Create a release on the repository and update the related discussion.
 - [ ] Run the [library/publishApiReference.sh] script locally.
 - [ ] Push the API reference to GitHub Pages.
-- [ ] Integrate changes of the release branch to the `main` branch.
-- [ ] Create a release on the repository.
-- [ ] Update the related discussion.
+- [ ] Add this version in the security policy.
 - [ ] Announce the release on [Twitter] and on the [#kotools-types channel on Kotlin Slack][slack].
 - [ ] Plan tweets about features introduced by this version.
 
