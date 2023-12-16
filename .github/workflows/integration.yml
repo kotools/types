@@ -155,7 +155,7 @@ jobs:
         run: ./gradlew :windowsTest --no-daemon
   # ---------- Stage 3 ----------
   dependencies:
-    name: Submit dependencies to GitHub
+    name: Dependency graph
     needs:
       - api-binary-check
       - java-compatibility-test
