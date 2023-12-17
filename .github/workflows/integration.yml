@@ -48,21 +48,6 @@ jobs:
           args: --fail-threshold,0
           pr-mode: false
   # ---------- Stage 2 ----------
-  api-binary-check:
-    name: API binary check
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.5.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Check API binaries
-        run: ./gradlew :apiCheck --no-daemon
   js-test:
     name: Kotlin/JS tests
     needs: gradle-wrapper-validation
@@ -80,8 +65,8 @@ jobs:
         run: ./gradlew :internal:jsTest
       - name: Test root project
         run: ./gradlew :jsTest
-  jvm-test:
-    name: Kotlin/JVM tests
+  jvm-checks:
+    name: Kotlin/JVM checks
     needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
     steps:
@@ -97,8 +82,8 @@ jobs:
         run: ./gradlew :internal:jvmTest
       - name: Test 'java-compatibility' subproject
         run: ./gradlew :java-compatibility:test
-      - name: Test root project
-        run: ./gradlew :jvmTest
+      - name: Check root project
+        run: ./gradlew :jvmTest :jvmApiCheck
   linux-test:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -154,9 +139,8 @@ jobs:
   dependencies:
     name: Dependency graph
     needs:
-      - api-binary-check
       - js-test
-      - jvm-test
+      - jvm-checks
       - linux-test
       - macos-test
       - static-code-analysis
