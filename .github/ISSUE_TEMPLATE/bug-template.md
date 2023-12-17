@@ -9,7 +9,7 @@ labels: bug
 
 > Bug encountered in version `version`.
 
-[//]: # (Describe the bug right here.)
+<!-- Describe the bug right here. -->
 
 ## Checklist
 
