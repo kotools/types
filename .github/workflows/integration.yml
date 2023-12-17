@@ -63,21 +63,6 @@ jobs:
           cache: ${{ env.CACHING }}
       - name: Check API binaries
         run: ./gradlew :apiCheck --no-daemon
-  java-compatibility-test:
-    name: Java compatibility tests
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.5.0
-      - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: ${{ env.CACHING }}
-      - name: Test code
-        run: ./gradlew :java-compatibility:test --no-daemon
   js-test:
     name: Kotlin/JS tests
     needs: gradle-wrapper-validation
@@ -91,8 +76,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Test code
-        run: ./gradlew :jsTest --no-daemon
+      - name: Test 'internal' subproject
+        run: ./gradlew :internal:jsTest
+      - name: Test root project
+        run: ./gradlew :jsTest
   jvm-test:
     name: Kotlin/JVM tests
     needs: gradle-wrapper-validation
@@ -106,8 +93,12 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Test code
-        run: ./gradlew :jvmTest --no-daemon
+      - name: Test 'internal' subproject
+        run: ./gradlew :internal:jvmTest
+      - name: Test 'java-compatibility' subproject
+        run: ./gradlew :java-compatibility:test
+      - name: Test root project
+        run: ./gradlew :jvmTest
   linux-test:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -121,8 +112,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Test code
-        run: ./gradlew :linuxTest --no-daemon
+      - name: Test 'internal' subproject
+        run: ./gradlew :internal:linuxTest
+      - name: Test root project
+        run: ./gradlew :linuxTest
   macos-test:
     name: Kotlin Native tests for macOS
     needs: gradle-wrapper-validation
@@ -136,8 +129,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Test code
-        run: ./gradlew :macosTest --no-daemon
+      - name: Test 'internal' subproject
+        run: ./gradlew :internal:macosTest
+      - name: Test root project
+        run: ./gradlew :macosTest
   windows-test:
     name: Kotlin Native tests for Windows
     needs: gradle-wrapper-validation
@@ -151,14 +146,15 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Test code
-        run: ./gradlew :windowsTest --no-daemon
+      - name: Test 'internal' subproject
+        run: ./gradlew :internal:windowsTest
+      - name: Test root project
+        run: ./gradlew :windowsTest
   # ---------- Stage 3 ----------
   dependencies:
     name: Dependency graph
     needs:
       - api-binary-check
-      - java-compatibility-test
       - js-test
       - jvm-test
       - linux-test
