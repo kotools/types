@@ -13,11 +13,11 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.experimental.plus
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.number.StrictlyPositiveInt
@@ -82,7 +82,7 @@ public operator fun Char.plus(other: NotBlankString): NotBlankString =
 
 internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "${Package.TEXT}.NotBlankString",
+        serialName = "${KotoolsTypesPackage.Text}.NotBlankString",
         PrimitiveKind.STRING
     )
 

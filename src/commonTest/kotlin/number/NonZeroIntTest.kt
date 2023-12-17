@@ -10,12 +10,12 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.range
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -116,7 +116,7 @@ class NonZeroIntSerializerTest {
     @Test
     fun descriptor_should_have_the_qualified_name_of_NonZeroInt_as_serial_name() {
         val actual: String = serializer.descriptor.serialName
-        val expected = "${Package.NUMBER}.NonZeroInt"
+        val expected = "${KotoolsTypesPackage.Number}.NonZeroInt"
         assertEquals(expected, actual)
     }
 

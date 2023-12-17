@@ -9,7 +9,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
@@ -139,7 +139,7 @@ class AnyIntSerializerTest {
     @Test
     fun descriptor_should_have_the_qualified_name_of_AnyInt_as_serial_name() {
         val actual: String = serializer.descriptor.serialName
-        val expected = "${Package.NUMBER}.AnyInt"
+        val expected = "${KotoolsTypesPackage.Number}.AnyInt"
         assertEquals(expected, actual)
     }
 

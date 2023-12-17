@@ -12,7 +12,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.Package
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.unexpectedCreationError
@@ -112,7 +112,7 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
 
 internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.NUMBER}.AnyInt".toNotBlankString()
+        "${KotoolsTypesPackage.Number}.AnyInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): AnyInt {

@@ -11,7 +11,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
@@ -80,7 +80,7 @@ class StrictlyPositiveIntSerializerTest {
         val serializer: KSerializer<StrictlyPositiveInt> =
             StrictlyPositiveInt.serializer()
         val actual: String = serializer.descriptor.serialName
-        val expected = "${Package.NUMBER}.StrictlyPositiveInt"
+        val expected = "${KotoolsTypesPackage.Number}.StrictlyPositiveInt"
         assertEquals(expected, actual)
     }
 

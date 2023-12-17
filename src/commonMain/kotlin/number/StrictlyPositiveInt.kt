@@ -7,7 +7,7 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
-import kotools.types.Package
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.text.NotBlankString
@@ -74,7 +74,7 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
 internal object StrictlyPositiveIntSerializer :
     AnyIntSerializer<StrictlyPositiveInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.NUMBER}.StrictlyPositiveInt".toNotBlankString()
+        "${KotoolsTypesPackage.Number}.StrictlyPositiveInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): StrictlyPositiveInt = value

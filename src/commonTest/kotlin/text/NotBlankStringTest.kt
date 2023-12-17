@@ -10,8 +10,8 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
 import kotools.types.experimental.ExperimentalTextApi
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.shouldBeNotNull
@@ -111,7 +111,7 @@ class NotBlankStringSerializerTest {
     @Test
     fun descriptor_should_be_named_with_the_qualified_name_of_NotBlankString() {
         val actual: String = NotBlankStringSerializer.descriptor.serialName
-        val expected = "${Package.TEXT}.NotBlankString"
+        val expected = "${KotoolsTypesPackage.Text}.NotBlankString"
         assertEquals(expected, actual)
     }
 

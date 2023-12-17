@@ -7,7 +7,6 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
-import kotools.types.Package
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
@@ -15,6 +14,7 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.range
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.text.NotBlankString
@@ -105,7 +105,7 @@ public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
 internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.NUMBER}.NonZeroInt".toNotBlankString()
+        "${KotoolsTypesPackage.Number}.NonZeroInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): NonZeroInt = value.toNonZeroInt()

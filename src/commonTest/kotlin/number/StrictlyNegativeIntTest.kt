@@ -11,11 +11,11 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
@@ -100,7 +100,7 @@ class StrictlyNegativeIntSerializerTest {
         val serializer: KSerializer<StrictlyNegativeInt> =
             StrictlyNegativeInt.serializer()
         val actual: String = serializer.descriptor.serialName
-        val expected = "${Package.NUMBER}.StrictlyNegativeInt"
+        val expected = "${KotoolsTypesPackage.Number}.StrictlyNegativeInt"
         assertEquals(expected, actual)
     }
 

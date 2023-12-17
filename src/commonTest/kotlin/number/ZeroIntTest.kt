@@ -11,7 +11,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
@@ -34,7 +34,7 @@ class ZeroIntSerializerTest {
     fun descriptor_should_have_the_qualified_name_of_ZeroInt_as_serial_name() {
         val serializer: KSerializer<ZeroInt> = ZeroInt.serializer()
         val actual: String = serializer.descriptor.serialName
-        val expected = "${Package.NUMBER}.ZeroInt"
+        val expected = "${KotoolsTypesPackage.Number}.ZeroInt"
         assertEquals(expected, actual)
     }
 

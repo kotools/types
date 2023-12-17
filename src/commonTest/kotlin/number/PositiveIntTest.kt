@@ -10,11 +10,11 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -125,7 +125,7 @@ class PositiveIntSerializerTest {
     @Test
     fun descriptor_should_have_the_qualified_name_of_PositiveInt_as_serial_name() {
         val actual: String = serializer.descriptor.serialName
-        val expected = "${Package.NUMBER}.PositiveInt"
+        val expected = "${KotoolsTypesPackage.Number}.PositiveInt"
         assertEquals(expected, actual)
     }
 

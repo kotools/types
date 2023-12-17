@@ -7,13 +7,13 @@ package kotools.types.number
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
-import kotools.types.Package
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.notEmptyRangeOf
 import kotools.types.experimental.range
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.text.NotBlankString
@@ -111,7 +111,7 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
 
 internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
     override val serialName: Result<NotBlankString> by lazy {
-        "${Package.NUMBER}.PositiveInt".toNotBlankString()
+        "${KotoolsTypesPackage.Number}.PositiveInt".toNotBlankString()
     }
 
     override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()
