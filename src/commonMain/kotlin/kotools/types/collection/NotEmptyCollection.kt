@@ -78,7 +78,3 @@ public sealed interface NotEmptyCollection<out E> {
 @Since(KotoolsTypesVersion.V4_1_0)
 public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt
-
-internal object EmptyCollectionException : IllegalArgumentException() {
-    override val message: String = "Given collection shouldn't be empty."
-}

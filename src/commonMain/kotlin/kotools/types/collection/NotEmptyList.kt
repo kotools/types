@@ -12,6 +12,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotlin.jvm.JvmInline
@@ -93,7 +94,7 @@ public value class NotEmptyList<out E> internal constructor(
 
     init {
         val isValid: Boolean = elements.isNotEmpty()
-        require(isValid) { EmptyCollectionException.message }
+        require(isValid) { ErrorMessage.emptyCollection }
     }
 
     /**
@@ -129,5 +130,5 @@ internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
         .decodeSerializableValue(delegate)
         .toNotEmptyList()
         .getOrNull()
-        ?: throw SerializationException(EmptyCollectionException)
+        ?: throw SerializationException("${ErrorMessage.emptyCollection}")
 }

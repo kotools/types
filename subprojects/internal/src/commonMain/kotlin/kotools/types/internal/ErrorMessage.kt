@@ -17,13 +17,6 @@ public fun ErrorMessage(throwable: Throwable): ErrorMessage {
 }
 
 /**
- * Returns an error message indicating that this number should be greater than
- * zero.
- */
-public fun Number.shouldBeGreaterThanZero(): ErrorMessage =
-    ErrorMessage("Number should be greater than zero (tried with $this)")
-
-/**
  * Represents an error message.
  *
  * @constructor Creates an error message with the specified [text], or throws
@@ -47,4 +40,22 @@ public class ErrorMessage(private val text: String) {
 
     /** Returns this error message as [String]. */
     override fun toString(): String = text
+
+    /** Contains static declarations for the [ErrorMessage] type. */
+    public companion object {
+        /**
+         * An error message indicating that the specified collection shouldn't
+         * be empty.
+         */
+        public val emptyCollection: ErrorMessage by lazy {
+            ErrorMessage("Given collection shouldn't be empty.")
+        }
+    }
 }
+
+/**
+ * Returns an error message indicating that this number should be greater than
+ * zero.
+ */
+public fun Number.shouldBeGreaterThanZero(): ErrorMessage =
+    ErrorMessage("Number should be greater than zero (tried with $this)")
