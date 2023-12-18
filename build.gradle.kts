@@ -3,8 +3,6 @@
  * Use of this source code is governed by the MIT license.
  */
 
-import kotools.types.KotoolsTypesPackage
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -22,8 +20,6 @@ plugins {
 group = "org.kotools"
 
 repositories.mavenCentral()
-
-kotlinCompile.javaPackagePrefix.set(KotoolsTypesPackage.Root)
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {

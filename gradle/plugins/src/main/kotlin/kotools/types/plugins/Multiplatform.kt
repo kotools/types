@@ -5,16 +5,13 @@
 
 package kotools.types.plugins
 
-import kotools.types.KotoolsTypesPackage
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.plugins.PluginContainer
-import org.gradle.api.provider.Property
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.attributes
-import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -29,9 +26,7 @@ public class MultiplatformPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.rootProject.plugins.configureYarn(project)
         project.extensions.configure(project)
-        val kotlinCompile: KotlinCompileExtension =
-            project.extensions.create("kotlinCompile")
-        project.tasks.configure(project, kotlinCompile)
+        project.tasks.configure(project)
     }
 }
 
@@ -61,20 +56,8 @@ private fun ExtensionContainer.configure(project: Project) {
     }
 }
 
-/** Extension for configuring the [KotlinCompile] task from a build script. */
-public interface KotlinCompileExtension {
-    /** Property for configuring [KotlinCompile.javaPackagePrefix]. */
-    public val javaPackagePrefix: Property<KotoolsTypesPackage>
-}
-
-private fun TaskContainer.configure(
-    project: Project,
-    kotlinCompileExtension: KotlinCompileExtension
-) {
+private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
-        kotlinCompileExtension.javaPackagePrefix.orNull?.let {
-            javaPackagePrefix = "$it"
-        }
         kotlinOptions {
             allWarningsAsErrors = true
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
