@@ -3,7 +3,11 @@
  * Use of this source code is governed by the MIT license.
  */
 
+@file:JvmName("AnyExtensions")
+
 package kotools.types.internal
+
+import kotlin.jvm.JvmName
 
 /** Returns a unique hash code value for the specified objects. */
 public fun hashCodeOf(first: Any, vararg others: Any): Int {
