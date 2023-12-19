@@ -7,7 +7,6 @@ package kotools.types.collection
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
@@ -15,6 +14,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
+import kotools.types.internal.serializationError
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -121,7 +121,7 @@ public value class NotEmptySet<out E> private constructor(
     }
 }
 
-internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
+private class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptySet<E>> {
     private val delegate: KSerializer<Set<E>> by lazy {
         SetSerializer(elementSerializer)
@@ -138,5 +138,5 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
         .decodeSerializableValue(delegate)
         .toNotEmptySet()
         .getOrNull()
-        ?: throw SerializationException("${ErrorMessage.emptyCollection}")
+        ?: serializationError(ErrorMessage.emptyCollection)
 }
