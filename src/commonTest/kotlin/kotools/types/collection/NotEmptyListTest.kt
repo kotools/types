@@ -14,6 +14,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.internal.ErrorMessage
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
@@ -22,6 +23,7 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class NotEmptyListTest {
@@ -172,6 +174,8 @@ class NotEmptyListSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<NotEmptyList<Int>>(encoded)
         }
-        exception.shouldHaveAMessage()
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = ErrorMessage.emptyCollection
+        assertEquals(expectedMessage, actualMessage)
     }
 }
