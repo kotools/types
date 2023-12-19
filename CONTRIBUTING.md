@@ -91,6 +91,9 @@ Here's the list of available configurations for running tests:
 - `macOS tests` for running them on the Native platform for macOS.
 - `Windows tests` for running them on the Native platform for Windows.
 
+> You can run the `JVM checks` for executing the different checks on the JVM,
+> including JVM tests, Java compatibility tests and API binary check.
+
 ### Serving the documentation
 
 You can also generate the documentation by running the `Documentation`
