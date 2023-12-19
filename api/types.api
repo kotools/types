@@ -202,6 +202,7 @@ public final class kotools/types/experimental/StrictlyNegativeIntKt {
 
 public final class kotools/types/experimental/StrictlyPositiveDouble : java/lang/Comparable {
 	public static final field Companion Lkotools/types/experimental/StrictlyPositiveDouble$Companion;
+	public synthetic fun <init> (DLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public fun compareTo (Lkotools/types/experimental/StrictlyPositiveDouble;)I
 	public fun equals (Ljava/lang/Object;)Z

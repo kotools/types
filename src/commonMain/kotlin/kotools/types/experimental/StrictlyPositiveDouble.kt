@@ -17,6 +17,7 @@ import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeGreaterThanZero
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this number as an encapsulated [StrictlyPositiveDouble],
@@ -28,7 +29,7 @@ import kotools.types.internal.shouldBeGreaterThanZero
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
-        StrictlyPositiveDouble(value)
+        StrictlyPositiveDouble.orThrow(value)
     }
 
 /**
@@ -38,7 +39,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @Serializable(StrictlyPositiveDoubleSerializer::class)
-public class StrictlyPositiveDouble internal constructor(
+public class StrictlyPositiveDouble private constructor(
     private val value: Double
 ) : Comparable<StrictlyPositiveDouble> {
     init {
@@ -73,6 +74,13 @@ public class StrictlyPositiveDouble internal constructor(
 
     /** Returns this floating-point number as [String]. */
     override fun toString(): String = "$value"
+
+    /** Contains static declarations for the [StrictlyPositiveDouble] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun orThrow(value: Double): StrictlyPositiveDouble =
+            StrictlyPositiveDouble(value)
+    }
 }
 
 @ExperimentalKotoolsTypesApi
