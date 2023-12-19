@@ -42,9 +42,11 @@ All notable changes to this project will be documented in this file.
   declarations for the `InclusiveBound` type (commit
   [a8aedb49][commit/a8aedb49]).
 - The `ExclusiveBound.Companion` **experimental** object for containing static
-  declarations for the `ExclusiveBound` type.
+  declarations for the `ExclusiveBound` type (commit
+  [76ba0637][commit/76ba0637]).
 
 [commit/a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
+[commit/76ba0637]: https://github.com/kotools/types/commit/76ba0637
 [tag/1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
 [tag/2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
 [tag/3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
