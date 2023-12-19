@@ -121,7 +121,7 @@ public value class NotEmptyList<out E> private constructor(
     }
 }
 
-internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
+private class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptyList<E>> {
     private val delegate: KSerializer<List<E>> by lazy {
         ListSerializer(elementSerializer)
