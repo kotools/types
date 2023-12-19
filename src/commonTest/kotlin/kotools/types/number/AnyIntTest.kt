@@ -6,10 +6,16 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
+import kotools.types.experimental.AnyInt
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import kotlin.random.Random
 import kotlin.test.Test
@@ -133,28 +139,37 @@ class AnyIntTest {
 }
 
 class AnyIntSerializerTest {
-    private val serializer: KSerializer<AnyInt> = AnyIntSerializerImplementation
+    @ExperimentalSerializationApi
+    @Test
+    fun descriptor_serial_name_should_be_the_qualified_name_of_AnyInt() {
+        val actual: String = serializer<AnyInt>().descriptor.serialName
+        val expected = "${KotoolsTypesPackage.Number}." + simpleNameOf<AnyInt>()
+        assertEquals(expected, actual)
+    }
 
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_AnyInt_as_serial_name() {
-        val actual: String = serializer.descriptor.serialName
-        val expected = "${KotoolsTypesPackage.Number}.AnyInt"
-        assertEquals(expected, actual)
+    fun descriptor_kind_should_be_PrimitiveKind_INT() {
+        val actual: SerialKind = serializer<AnyInt>().descriptor.kind
+        assertEquals(expected = PrimitiveKind.INT, actual)
     }
 
     @Test
     fun serialize_should_behave_like_an_Int() {
-        val x: AnyInt = StrictlyPositiveInt.random()
-        val result: String = Json.encodeToString(serializer, x)
-        result shouldEqual Json.encodeToString(x.toInt())
+        val number: AnyInt = StrictlyPositiveInt.random()
+        val actual: String = Json.encodeToString(number)
+        val value: Int = number.toInt()
+        val expected: String = Json.encodeToString(value)
+        assertEquals(expected, actual)
     }
 
+    @ExperimentalKotoolsTypesApi
     @Test
     fun deserialize_should_pass_with_an_Int() {
         val value: Int = Random.nextInt()
         val encoded: String = Json.encodeToString(value)
-        val result: AnyInt = Json.decodeFromString(serializer, encoded)
-        result.toInt() shouldEqual value
+        val actual: AnyInt = Json.decodeFromString(encoded)
+        val expected = AnyInt(value)
+        assertEquals(expected, actual)
     }
 }

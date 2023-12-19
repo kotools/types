@@ -72,7 +72,7 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
 }
 
 internal object StrictlyPositiveIntSerializer :
-    AnyIntSerializer<StrictlyPositiveInt> {
+    AnyIntSerializerDeprecated<StrictlyPositiveInt> {
     override val serialName: Result<NotBlankString> by lazy {
         "${KotoolsTypesPackage.Number}.StrictlyPositiveInt".toNotBlankString()
     }

@@ -21,7 +21,7 @@ public object ZeroInt : PositiveInt, NegativeInt {
     override fun toString(): String = "${toInt()}"
 }
 
-internal object ZeroIntSerializer : AnyIntSerializer<ZeroInt> {
+internal object ZeroIntSerializer : AnyIntSerializerDeprecated<ZeroInt> {
     override val serialName: Result<NotBlankString> by lazy {
         "${KotoolsTypesPackage.Number}.ZeroInt".toNotBlankString()
     }

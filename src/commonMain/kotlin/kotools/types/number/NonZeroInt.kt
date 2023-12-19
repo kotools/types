@@ -103,7 +103,7 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
-internal object NonZeroIntSerializer : AnyIntSerializer<NonZeroInt> {
+internal object NonZeroIntSerializer : AnyIntSerializerDeprecated<NonZeroInt> {
     override val serialName: Result<NotBlankString> by lazy {
         "${KotoolsTypesPackage.Number}.NonZeroInt".toNotBlankString()
     }

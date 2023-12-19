@@ -109,7 +109,8 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
         .getOrThrow()
 }
 
-internal object PositiveIntSerializer : AnyIntSerializer<PositiveInt> {
+internal object PositiveIntSerializer :
+    AnyIntSerializerDeprecated<PositiveInt> {
     override val serialName: Result<NotBlankString> by lazy {
         "${KotoolsTypesPackage.Number}.PositiveInt".toNotBlankString()
     }

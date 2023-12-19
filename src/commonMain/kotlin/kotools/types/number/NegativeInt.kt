@@ -108,7 +108,8 @@ public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
         .getOrThrow()
 }
 
-internal object NegativeIntSerializer : AnyIntSerializer<NegativeInt> {
+internal object NegativeIntSerializer :
+    AnyIntSerializerDeprecated<NegativeInt> {
     override val serialName: Result<NotBlankString> by lazy {
         "${KotoolsTypesPackage.Number}.NegativeInt".toNotBlankString()
     }

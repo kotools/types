@@ -5,6 +5,7 @@
 
 package kotools.types.number
 
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -15,12 +16,13 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
+import kotools.types.internal.intSerializer
+import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
 
 /** Represents an integer number of type [Int]. */
-@Serializable(AnyIntSerializerImplementation::class)
+@Serializable(AnyIntSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public sealed interface AnyInt : Comparable<AnyInt> {
     /**
@@ -93,7 +95,30 @@ public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
 
-internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
+private object AnyIntSerializer : KSerializer<AnyInt> by intSerializer(
+    AnyIntDeserializationStrategy,
+    intConverter = { it.toInt() }
+)
+
+private object AnyIntDeserializationStrategy : DeserializationStrategy<AnyInt> {
+    override val descriptor: SerialDescriptor by lazy {
+        val simpleName: String = simpleNameOf<AnyInt>()
+        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
+    }
+
+    override fun deserialize(decoder: Decoder): AnyInt {
+        val value: Int = decoder.decodeInt()
+        if (value == 0) return ZeroInt
+        val result: Result<AnyInt> =
+            if (value > 0) value.toStrictlyPositiveInt()
+            else value.toStrictlyNegativeInt()
+        return result.getOrNull() ?: unexpectedCreationError<AnyInt>(value)
+    }
+}
+
+internal sealed interface AnyIntSerializerDeprecated<I : AnyInt> :
+    KSerializer<I> {
     val serialName: Result<NotBlankString>
 
     override val descriptor: SerialDescriptor
@@ -108,18 +133,4 @@ internal sealed interface AnyIntSerializer<I : AnyInt> : KSerializer<I> {
 
     override fun deserialize(decoder: Decoder): I = decoder.decodeInt()
         .let(::deserialize)
-}
-
-internal object AnyIntSerializerImplementation : AnyIntSerializer<AnyInt> {
-    override val serialName: Result<NotBlankString> by lazy {
-        "${KotoolsTypesPackage.Number}.AnyInt".toNotBlankString()
-    }
-
-    override fun deserialize(value: Int): AnyInt {
-        if (value == 0) return ZeroInt
-        val result: Result<AnyInt> =
-            if (value > 0) value.toStrictlyPositiveInt()
-            else value.toStrictlyNegativeInt()
-        return result.getOrNull() ?: unexpectedCreationError<AnyInt>(value)
-    }
 }
