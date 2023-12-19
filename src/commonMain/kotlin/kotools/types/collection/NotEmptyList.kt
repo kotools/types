@@ -16,6 +16,7 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates a [NotEmptyList] starting with a [head] and containing all the
@@ -31,7 +32,7 @@ import kotlin.jvm.JvmInline
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
-    return NotEmptyList(elements)
+    return NotEmptyList.orThrow(elements)
 }
 
 /**
@@ -70,7 +71,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     runCatching {
         val elements: List<E> = toList()
-        NotEmptyList(elements)
+        NotEmptyList.orThrow(elements)
     }
 
 /**
@@ -82,7 +83,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
 @JvmInline
 @Serializable(NotEmptyListSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
-public value class NotEmptyList<out E> internal constructor(
+public value class NotEmptyList<out E> private constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
@@ -111,6 +112,13 @@ public value class NotEmptyList<out E> internal constructor(
     public fun toList(): List<E> = elements
 
     override fun toString(): String = "$elements"
+
+    /** Contains static declarations for the [NotEmptyList] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun <E> orThrow(elements: List<E>): NotEmptyList<E> =
+            NotEmptyList(elements)
+    }
 }
 
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
