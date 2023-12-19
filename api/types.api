@@ -140,8 +140,13 @@ public abstract interface annotation class kotools/types/experimental/Experiment
 }
 
 public final class kotools/types/experimental/InclusiveBound : kotools/types/experimental/Bound {
+	public static final field Companion Lkotools/types/experimental/InclusiveBound$Companion;
+	public synthetic fun <init> (Ljava/lang/Comparable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getValue ()Ljava/lang/Comparable;
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class kotools/types/experimental/InclusiveBound$Companion {
 }
 
 public final class kotools/types/experimental/NegativeIntKt {

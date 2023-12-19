@@ -38,6 +38,8 @@ All notable changes to this project will be documented in this file.
 - Declarations lifecycle documentation (issue [#307]).
 - The `AnyInt(Int)` **experimental** function for creating an instance of
   `AnyInt` with the specified `value` (commit [571428bc]).
+- The `InclusiveBound.Companion` **experimental** object for containing static
+  declarations for the `InclusiveBound` type.
 
 [tag/1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
 [tag/2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0

@@ -7,6 +7,7 @@ package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a bound in a [range][NotEmptyRange].
@@ -31,8 +32,15 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
-internal constructor(override val value: T) : Bound<T> {
+private constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
+
+    /** Contains static declarations for the [InclusiveBound] type. */
+    public companion object {
+        @JvmSynthetic
+        internal infix fun <T : Comparable<T>> of(value: T): InclusiveBound<T> =
+            InclusiveBound(value)
+    }
 }
 
 /**
