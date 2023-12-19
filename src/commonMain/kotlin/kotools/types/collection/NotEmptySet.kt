@@ -16,6 +16,7 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates a [NotEmptySet] starting with a [head] and containing all the
@@ -31,7 +32,7 @@ import kotlin.jvm.JvmInline
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val elements: Set<E> = setOf(head) + tail
-    return NotEmptySet(elements)
+    return NotEmptySet.orThrow(elements)
 }
 
 /**
@@ -70,7 +71,7 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     runCatching {
         val elements: Set<E> = toSet()
-        NotEmptySet(elements)
+        NotEmptySet.orThrow(elements)
     }
 
 /**
@@ -82,7 +83,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
 @JvmInline
 @Serializable(NotEmptySetSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
-public value class NotEmptySet<out E> internal constructor(
+public value class NotEmptySet<out E> private constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {
     override val head: E get() = elements.first()
@@ -111,6 +112,13 @@ public value class NotEmptySet<out E> internal constructor(
     public fun toSet(): Set<E> = elements
 
     override fun toString(): String = "$elements"
+
+    /** Contains static declarations for the [NotEmptySet] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun <E> orThrow(elements: Set<E>): NotEmptySet<E> =
+            NotEmptySet(elements)
+    }
 }
 
 internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
