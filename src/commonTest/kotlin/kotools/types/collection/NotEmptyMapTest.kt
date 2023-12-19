@@ -14,6 +14,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.internal.ErrorMessage
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
@@ -23,6 +24,7 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class NotEmptyMapTest {
@@ -228,6 +230,8 @@ class NotEmptyMapSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<NotEmptyMap<Char, Int>>(encoded)
         }
-        exception.shouldHaveAMessage()
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = ErrorMessage.emptyMap
+        assertEquals(expectedMessage, actualMessage)
     }
 }

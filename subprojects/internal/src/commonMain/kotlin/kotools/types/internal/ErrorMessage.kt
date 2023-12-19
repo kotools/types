@@ -50,6 +50,14 @@ public class ErrorMessage(private val text: String) {
         public val emptyCollection: ErrorMessage by lazy {
             ErrorMessage("Given collection shouldn't be empty.")
         }
+
+        /**
+         * An error message indicating that the specified map shouldn't be
+         * empty.
+         */
+        public val emptyMap: ErrorMessage by lazy {
+            ErrorMessage("Given map shouldn't be empty.")
+        }
     }
 }
 

@@ -7,13 +7,14 @@ package kotools.types.collection
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
+import kotools.types.internal.serializationError
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -186,7 +187,7 @@ public value class NotEmptyMap<K, out V> private constructor(
 
     init {
         val isValid: Boolean = delegate.isNotEmpty()
-        require(isValid) { EmptyMapException.message }
+        require(isValid) { ErrorMessage.emptyMap }
     }
 
     /**
@@ -260,9 +261,5 @@ private class NotEmptyMapSerializer<K, V>(
         .decodeSerializableValue(delegate)
         .toNotEmptyMap()
         .getOrNull()
-        ?: throw SerializationException(EmptyMapException)
-}
-
-internal object EmptyMapException : IllegalArgumentException() {
-    override val message: String = "Given map shouldn't be empty."
+        ?: serializationError(ErrorMessage.emptyMap)
 }
