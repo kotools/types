@@ -71,8 +71,8 @@ class ExclusiveBoundTest {
     @Test
     fun equals_should_pass_with_an_exclusive_bound_having_the_same_value() {
         // GIVEN
-        val x: ExclusiveBound<Int> = ExclusiveBound(Random.nextInt())
-        val y: ExclusiveBound<Int> = ExclusiveBound(x.value)
+        val x: ExclusiveBound<Int> = ExclusiveBound of Random.nextInt()
+        val y: ExclusiveBound<Int> = ExclusiveBound of x.value
         // WHEN & THEN
         "The equals operation should be reflexive.".let {
             assertEquals(expected = x, actual = x, message = it)
@@ -83,7 +83,7 @@ class ExclusiveBoundTest {
             assertEquals(expected = y, actual = x, message = it)
         }
         "The equals operation should be transitive.".let {
-            val z: ExclusiveBound<Int> = ExclusiveBound(y.value)
+            val z: ExclusiveBound<Int> = ExclusiveBound of y.value
             assertEquals(expected = x, actual = y, message = it)
             assertEquals(expected = y, actual = z, message = it)
             assertEquals(expected = x, actual = z, message = it)
@@ -99,8 +99,8 @@ class ExclusiveBoundTest {
     @Test
     fun equals_should_fail_with_an_exclusive_bound_having_another_value() {
         // GIVEN
-        val x: ExclusiveBound<Int> = ExclusiveBound(Random.nextInt())
-        val y: ExclusiveBound<Int> = ExclusiveBound(Random.nextInt())
+        val x: ExclusiveBound<Int> = ExclusiveBound of Random.nextInt()
+        val y: ExclusiveBound<Int> = ExclusiveBound of Random.nextInt()
         // WHEN & THEN
         assertNotEquals(illegal = x, actual = y)
     }
@@ -109,7 +109,7 @@ class ExclusiveBoundTest {
     fun toString_should_return_the_string_representation_of_its_value() {
         // GIVEN
         val value: Int = Random.nextInt()
-        val bound: ExclusiveBound<Int> = ExclusiveBound(value)
+        val bound: ExclusiveBound<Int> = ExclusiveBound of value
         // WHEN
         val result = "$bound"
         // THEN

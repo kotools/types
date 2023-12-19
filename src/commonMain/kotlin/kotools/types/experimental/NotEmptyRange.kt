@@ -59,7 +59,7 @@ internal constructor(
         public val T.inclusive: InclusiveBound<T> get() = InclusiveBound of this
 
         /** Returns this value as an exclusive bound. */
-        public val T.exclusive: ExclusiveBound<T> get() = ExclusiveBound(this)
+        public val T.exclusive: ExclusiveBound<T> get() = ExclusiveBound of this
     }
 }
 
