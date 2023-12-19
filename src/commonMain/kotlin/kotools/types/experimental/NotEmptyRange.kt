@@ -7,6 +7,7 @@ package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns a not empty range with the given pair of [bounds].
@@ -20,11 +21,11 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
 ): NotEmptyRange<T> = NotEmptyRange.BuilderScope<T>()
     .bounds()
     .run {
-        if (first.value < second.value) NotEmptyRange(
+        if (first.value < second.value) NotEmptyRange.of(
             start = first,
             end = second
         )
-        else NotEmptyRange(start = second, end = first)
+        else NotEmptyRange.of(start = second, end = first)
     }
 
 /**
@@ -34,7 +35,7 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public class NotEmptyRange<out T : Comparable<@UnsafeVariance T>>
-internal constructor(
+private constructor(
     /** The start of this range. */
     public val start: Bound<T>,
     /** The end of this range. */
@@ -51,6 +52,15 @@ internal constructor(
             is ExclusiveBound -> '['
         }
         return "$prefix$start;$end$suffix"
+    }
+
+    /** Contains static declarations for the [NotEmptyRange] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun <T : Comparable<T>> of(
+            start: Bound<T>,
+            end: Bound<T>
+        ): NotEmptyRange<T> = NotEmptyRange(start, end)
     }
 
     /** Class responsible for configuring an instance of [NotEmptyRange]. */

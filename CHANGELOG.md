@@ -44,6 +44,8 @@ All notable changes to this project will be documented in this file.
 - The `ExclusiveBound.Companion` **experimental** object for containing static
   declarations for the `ExclusiveBound` type (commit
   [76ba0637][commit/76ba0637]).
+- The `NotEmptyRange.Companion` **experimental** object for containing static
+  declarations for the `NotEmptyRange` type.
 
 [commit/a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
 [commit/76ba0637]: https://github.com/kotools/types/commit/76ba0637
