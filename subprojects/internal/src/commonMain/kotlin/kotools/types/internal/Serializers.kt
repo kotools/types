@@ -19,8 +19,9 @@ public fun <T> intSerializer(
     deserializationStrategy: DeserializationStrategy<T>,
     intConverter: (T) -> Int
 ): KSerializer<T> = object : KSerializer<T> {
-    override val descriptor: SerialDescriptor =
+    override val descriptor: SerialDescriptor by lazy {
         deserializationStrategy.descriptor
+    }
 
     override fun serialize(encoder: Encoder, value: T) {
         val intValue: Int = intConverter(value)
