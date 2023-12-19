@@ -5,8 +5,14 @@
 
 package kotools.types.number
 
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
@@ -15,8 +21,8 @@ import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.internal.intSerializer
+import kotools.types.internal.simpleNameOf
 
 /**
  * Returns this number as an encapsulated [NegativeInt], which may involve
@@ -108,15 +114,26 @@ public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
         .getOrThrow()
 }
 
-internal object NegativeIntSerializer :
-    AnyIntSerializerDeprecated<NegativeInt> {
-    override val serialName: Result<NotBlankString> by lazy {
-        "${KotoolsTypesPackage.Number}.NegativeInt".toNotBlankString()
+private object NegativeIntSerializer :
+    KSerializer<NegativeInt> by intSerializer(
+        NegativeIntDeserializationStrategy,
+        intConverter = { it.toInt() }
+    )
+
+private object NegativeIntDeserializationStrategy :
+    DeserializationStrategy<NegativeInt> {
+    override val descriptor: SerialDescriptor by lazy {
+        val simpleName: String = simpleNameOf<NegativeInt>()
+        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
-    override fun deserialize(value: Int): NegativeInt = value.toNegativeInt()
-        .getOrNull()
-        ?: throw NegativeIntSerializationException(value)
+    override fun deserialize(decoder: Decoder): NegativeInt {
+        val value: Int = decoder.decodeInt()
+        return value.toNegativeInt()
+            .getOrNull()
+            ?: throw NegativeIntSerializationException(value)
+    }
 }
 
 internal class NegativeIntConstructionException(number: Number) :

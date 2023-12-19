@@ -7,13 +7,18 @@ package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
@@ -120,17 +125,27 @@ class NegativeIntTest {
 class NegativeIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_NegativeInt_as_serial_name() {
-        val actual: String = NegativeIntSerializer.descriptor.serialName
-        val expected = "${KotoolsTypesPackage.Number}.NegativeInt"
+    fun descriptor_serial_name_should_be_the_qualified_name_of_NegativeInt() {
+        val actual: String = serializer<NegativeInt>().descriptor.serialName
+        val simpleName: String = simpleNameOf<NegativeInt>()
+        val expected = "${KotoolsTypesPackage.Number}.$simpleName"
         assertEquals(expected, actual)
+    }
+
+    @ExperimentalSerializationApi
+    @Test
+    fun descriptor_kind_should_be_PrimitiveKind_INT() {
+        val actual: SerialKind = serializer<NegativeInt>().descriptor.kind
+        assertEquals(expected = PrimitiveKind.INT, actual)
     }
 
     @Test
     fun serialization_should_behave_like_an_Int() {
-        val x: NegativeInt = NegativeInt.random()
-        val result: String = Json.encodeToString(NegativeIntSerializer, x)
-        result shouldEqual Json.encodeToString(x.toInt())
+        val number: NegativeInt = NegativeInt.random()
+        val actual: String = Json.encodeToString(number)
+        val value: Int = number.toInt()
+        val expected: String = Json.encodeToString(value)
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -138,9 +153,10 @@ class NegativeIntSerializerTest {
         val value: Int = NegativeInt.random()
             .toInt()
         val encoded: String = Json.encodeToString(value)
-        val result: NegativeInt =
-            Json.decodeFromString(NegativeIntSerializer, encoded)
-        result.toInt() shouldEqual value
+        val actual: NegativeInt = Json.decodeFromString(encoded)
+        val expected: NegativeInt = value.toNegativeInt()
+            .getOrThrow()
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -149,7 +165,7 @@ class NegativeIntSerializerTest {
             .toInt()
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString(NegativeIntSerializer, encoded)
+            Json.decodeFromString<NegativeInt>(encoded)
         }
         exception.shouldHaveAMessage()
     }
