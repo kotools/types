@@ -17,6 +17,7 @@ import kotools.types.internal.Since
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
@@ -73,7 +74,7 @@ public fun <K, V> notEmptyMapOf(
  */
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
-    runCatching { NotEmptyMap(entries) }
+    runCatching { NotEmptyMap.orThrow(entries) }
 
 /**
  * Represents a map that has at least one entry, with a key of type [K] and a
@@ -188,10 +189,6 @@ public value class NotEmptyMap<K, out V> private constructor(
         require(isValid) { EmptyMapException.message }
     }
 
-    internal constructor(entries: Set<Map.Entry<K, V>>) : this(
-        entries.associate { it.toPair() }
-    )
-
     /**
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
@@ -231,6 +228,17 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     override fun toString(): String = "$delegate"
+
+    /** Contains static declarations for the [NotEmptyMap] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun <K, V> orThrow(
+            entries: Set<Map.Entry<K, V>>
+        ): NotEmptyMap<K, V> {
+            val map: Map<K, V> = entries.associate { it.toPair() }
+            return NotEmptyMap(map)
+        }
+    }
 }
 
 internal class NotEmptyMapSerializer<K, V>(
