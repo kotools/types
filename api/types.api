@@ -176,8 +176,12 @@ public final class kotools/types/experimental/NotEmptyRange {
 }
 
 public final class kotools/types/experimental/NotEmptyRange$BuilderScope {
+	public static final field Companion Lkotools/types/experimental/NotEmptyRange$BuilderScope$Companion;
 	public final fun getExclusive (Ljava/lang/Comparable;)Lkotools/types/experimental/ExclusiveBound;
 	public final fun getInclusive (Ljava/lang/Comparable;)Lkotools/types/experimental/InclusiveBound;
+}
+
+public final class kotools/types/experimental/NotEmptyRange$BuilderScope$Companion {
 }
 
 public final class kotools/types/experimental/NotEmptyRange$Companion {

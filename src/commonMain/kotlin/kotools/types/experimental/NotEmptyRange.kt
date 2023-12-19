@@ -18,7 +18,7 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
 public fun <T : Comparable<T>> notEmptyRangeOf(
     bounds: NotEmptyRange.BuilderScope<T>.() -> Pair<Bound<T>, Bound<T>>
-): NotEmptyRange<T> = NotEmptyRange.BuilderScope<T>()
+): NotEmptyRange<T> = NotEmptyRange.BuilderScope.create<T>()
     .bounds()
     .run {
         if (first.value < second.value) NotEmptyRange.of(
@@ -64,12 +64,19 @@ private constructor(
     }
 
     /** Class responsible for configuring an instance of [NotEmptyRange]. */
-    public class BuilderScope<T : Comparable<T>> internal constructor() {
+    public class BuilderScope<T : Comparable<T>> private constructor() {
         /** Returns this value as an inclusive bound. */
         public val T.inclusive: InclusiveBound<T> get() = InclusiveBound of this
 
         /** Returns this value as an exclusive bound. */
         public val T.exclusive: ExclusiveBound<T> get() = ExclusiveBound of this
+
+        /** Contains static declarations for the [BuilderScope] type. */
+        public companion object {
+            @JvmSynthetic
+            internal fun <T : Comparable<T>> create(): BuilderScope<T> =
+                BuilderScope()
+        }
     }
 }
 

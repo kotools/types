@@ -47,6 +47,8 @@ All notable changes to this project will be documented in this file.
 - The `NotEmptyRange.Companion` **experimental** object for containing static
   declarations for the `NotEmptyRange` type (commit
   [a4399cce][commit/a4399cce]).
+- The `NotEmptyRange.BuilderScope.Companion` **experimental** object for
+  containing static declarations for the `NotEmptyRange.BuilderScope` type.
 
 [commit/a4399cce]: https://github.com/kotools/types/commit/a4399cce
 [commit/a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
