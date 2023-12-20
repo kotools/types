@@ -58,6 +58,14 @@ public class ErrorMessage(private val text: String) {
         public val emptyMap: ErrorMessage by lazy {
             ErrorMessage("Given map shouldn't be empty.")
         }
+
+        /**
+         * An error message indicating that the specified number should be other
+         * than zero.
+         */
+        public val zeroNumber: ErrorMessage by lazy {
+            ErrorMessage("Number should be other than zero")
+        }
     }
 }
 

@@ -18,6 +18,7 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.range
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
@@ -27,7 +28,6 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class NonZeroIntCompanionTest {
@@ -89,8 +89,8 @@ class NonZeroIntTest {
         val exception: IllegalArgumentException = assertFailsWith {
             result.getOrThrow()
         }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = NonZeroIntConstructionException.message
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = ErrorMessage.zeroNumber
         assertEquals(expectedMessage, actualMessage)
     }
 

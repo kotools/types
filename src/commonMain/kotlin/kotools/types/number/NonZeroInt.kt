@@ -19,6 +19,7 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.range
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -37,7 +38,11 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     return when {
         value.isStrictlyPositive() -> value.toStrictlyPositiveInt()
         value.isStrictlyNegative() -> value.toStrictlyNegativeInt()
-        else -> Result.failure(NonZeroIntConstructionException)
+        else -> {
+            val message: ErrorMessage = ErrorMessage.zeroNumber
+            val exception = IllegalArgumentException("$message")
+            Result.failure(exception)
+        }
     }
 }
 
@@ -128,10 +133,6 @@ private object NonZeroIntDeserializationStrategy :
             .getOrNull()
             ?: throw NonZeroIntSerializationException
     }
-}
-
-internal object NonZeroIntConstructionException : IllegalArgumentException() {
-    override val message: String by lazy { "Number should be other than zero" }
 }
 
 private object NonZeroIntSerializationException : SerializationException() {
