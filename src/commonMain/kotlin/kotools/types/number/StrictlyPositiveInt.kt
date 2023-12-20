@@ -5,11 +5,19 @@
 
 package kotools.types.number
 
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
+import kotools.types.internal.intSerializer
+import kotools.types.internal.simpleNameOf
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
@@ -71,16 +79,26 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
     }
 }
 
-internal object StrictlyPositiveIntSerializer :
-    AnyIntSerializerDeprecated<StrictlyPositiveInt> {
-    override val serialName: Result<NotBlankString> by lazy {
-        "${KotoolsTypesPackage.Number}.StrictlyPositiveInt".toNotBlankString()
+private object StrictlyPositiveIntSerializer :
+    KSerializer<StrictlyPositiveInt> by intSerializer(
+        StrictlyPositiveIntDeserializationStrategy,
+        intConverter = { it.toInt() }
+    )
+
+private object StrictlyPositiveIntDeserializationStrategy :
+    DeserializationStrategy<StrictlyPositiveInt> {
+    override val descriptor: SerialDescriptor by lazy {
+        val simpleName: String = simpleNameOf<StrictlyPositiveInt>()
+        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
-    override fun deserialize(value: Int): StrictlyPositiveInt = value
-        .toStrictlyPositiveInt()
-        .getOrNull()
-        ?: throw SerializationException(
-            "${StrictlyPositiveInt errorMessageFor value}"
-        )
+    override fun deserialize(decoder: Decoder): StrictlyPositiveInt {
+        val value: Int = decoder.decodeInt()
+        return value.toStrictlyPositiveInt()
+            .getOrNull()
+            ?: throw SerializationException(
+                "${StrictlyPositiveInt errorMessageFor value}"
+            )
+    }
 }
