@@ -109,54 +109,19 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
-/**
- * Represents a serializer of [NonZeroInt] that is responsible for serializing
- * it as [Int] and for deserializing it from an [Int].
- *
- * The serialization process is delegated to the serializer returned by the
- * [intSerializer] function.
- *
- * See the [NonZeroIntDeserializationStrategy] type for more details on this
- * serializer's descriptor and the deserialization process of [NonZeroInt]
- * regarding this serializer.
- */
 private object NonZeroIntSerializer : KSerializer<NonZeroInt> by intSerializer(
     NonZeroIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )
 
-/**
- * Represents a deserialization strategy for deserializing a [NonZeroInt] from
- * an [Int].
- *
- * See the [NonZeroIntDeserializationStrategy.descriptor] property for more
- * details on the structure of the serializable representation of [NonZeroInt].
- *
- * See the [NonZeroIntDeserializationStrategy.deserialize] function for more
- * details on the deserialization process.
- */
 private object NonZeroIntDeserializationStrategy :
     DeserializationStrategy<NonZeroInt> {
-    /**
-     * Describes the structure of the serializable representation of
-     * [NonZeroInt].
-     *
-     * More precisely, this is a primitive serial descriptor of kind
-     * [PrimitiveKind.INT] having a [serial name][SerialDescriptor.serialName]
-     * that matches the [qualified name][kotlin.reflect.KClass.qualifiedName]
-     * of [NonZeroInt].
-     */
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<NonZeroInt>()
         val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
-    /**
-     * Deserializes the [NonZeroInt] value from an [Int], using the format
-     * represented by the specified [decoder], or throws a
-     * [NonZeroIntSerializationException] if the decoded [Int] equals zero.
-     */
     override fun deserialize(decoder: Decoder): NonZeroInt {
         val value: Int = decoder.decodeInt()
         return value.toNonZeroInt()
