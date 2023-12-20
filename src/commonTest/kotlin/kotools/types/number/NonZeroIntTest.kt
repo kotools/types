@@ -6,16 +6,20 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.range
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
@@ -110,36 +114,48 @@ class NonZeroIntTest {
 }
 
 class NonZeroIntSerializerTest {
-    private val serializer: KSerializer<NonZeroInt> = NonZeroIntSerializer
+    @ExperimentalSerializationApi
+    @Test
+    fun descriptor_serial_name_should_be_the_qualified_name_of_NonZeroInt() {
+        val actual: String = serializer<NonZeroInt>().descriptor.serialName
+        val simpleName: String = simpleNameOf<NonZeroInt>()
+        val expected = "${KotoolsTypesPackage.Number}.$simpleName"
+        assertEquals(expected, actual)
+    }
 
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_NonZeroInt_as_serial_name() {
-        val actual: String = serializer.descriptor.serialName
-        val expected = "${KotoolsTypesPackage.Number}.NonZeroInt"
+    fun descriptor_kind_should_be_PrimitiveKind_INT() {
+        val actual: SerialKind = serializer<NonZeroInt>().descriptor.kind
+        val expected: SerialKind = PrimitiveKind.INT
         assertEquals(expected, actual)
     }
 
     @Test
     fun serialization_should_behave_like_an_Int() {
-        val x: NonZeroInt = NonZeroInt.random()
-        val result: String = Json.encodeToString(serializer, x)
-        result shouldEqual Json.encodeToString(x.toInt())
+        val number: NonZeroInt = NonZeroInt.random()
+        val actual: String = Json.encodeToString(number)
+        val intNumber: Int = number.toInt()
+        val expected: String = Json.encodeToString(intNumber)
+        assertEquals(expected, actual)
     }
 
     @Test
     fun deserialization_should_pass_with_an_Int_other_than_zero() {
-        val value: Int = NonZeroInt.random().toInt()
+        val value: Int = NonZeroInt.random()
+            .toInt()
         val encoded: String = Json.encodeToString(value)
-        val result: NonZeroInt = Json.decodeFromString(serializer, encoded)
-        result.toInt() shouldEqual value
+        val actual: NonZeroInt = Json.decodeFromString(encoded)
+        val expected: NonZeroInt = value.toNonZeroInt()
+            .getOrThrow()
+        assertEquals(expected, actual)
     }
 
     @Test
     fun deserialization_should_fail_with_an_Int_that_equals_zero() {
-        val encoded: String = Json.encodeToString(ZeroInt.toInt())
+        val encoded: String = Json.encodeToString(0)
         val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString(NonZeroIntSerializer, encoded)
+            Json.decodeFromString<NonZeroInt>(encoded)
         }
         exception.shouldHaveAMessage()
     }
