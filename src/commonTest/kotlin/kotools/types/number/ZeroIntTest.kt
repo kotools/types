@@ -6,12 +6,15 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import kotools.types.shouldHaveAMessage
 import kotlin.test.Test
@@ -31,23 +34,32 @@ class ZeroIntTest {
 class ZeroIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_ZeroInt_as_serial_name() {
-        val serializer: KSerializer<ZeroInt> = ZeroInt.serializer()
-        val actual: String = serializer.descriptor.serialName
-        val expected = "${KotoolsTypesPackage.Number}.ZeroInt"
+    fun descriptor_serial_name_should_be_the_qualified_name_of_ZeroInt() {
+        val actual: String = serializer<ZeroInt>().descriptor.serialName
+        val simpleName: String = simpleNameOf<ZeroInt>()
+        val expected = "${KotoolsTypesPackage.Number}.$simpleName"
+        assertEquals(expected, actual)
+    }
+
+    @ExperimentalSerializationApi
+    @Test
+    fun descriptor_kind_should_be_PrimitiveKind_INT() {
+        val actual: SerialKind = serializer<ZeroInt>().descriptor.kind
+        val expected: SerialKind = PrimitiveKind.INT
         assertEquals(expected, actual)
     }
 
     @Test
     fun serialize_should_behave_like_the_zero_integer() {
-        val result: String = Json.encodeToString(ZeroInt)
-        result shouldEqual Json.encodeToString(0)
+        val actual: String = Json.encodeToString(ZeroInt)
+        val expected: String = Json.encodeToString(0)
+        assertEquals(expected, actual)
     }
 
     @Test
     fun deserialize_should_pass_with_the_zero_integer() {
-        val result: ZeroInt = Json.decodeFromString("0")
-        result shouldEqual ZeroInt
+        val actual: ZeroInt = Json.decodeFromString("0")
+        assertEquals(expected = ZeroInt, actual)
     }
 
     @Test

@@ -5,13 +5,19 @@
 
 package kotools.types.number
 
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.internal.intSerializer
+import kotools.types.internal.simpleNameOf
 
 /** Represents an integer number of type [Int] that equals zero. */
 @Serializable(ZeroIntSerializer::class)
@@ -21,13 +27,23 @@ public object ZeroInt : PositiveInt, NegativeInt {
     override fun toString(): String = "${toInt()}"
 }
 
-internal object ZeroIntSerializer : AnyIntSerializerDeprecated<ZeroInt> {
-    override val serialName: Result<NotBlankString> by lazy {
-        "${KotoolsTypesPackage.Number}.ZeroInt".toNotBlankString()
+private object ZeroIntSerializer : KSerializer<ZeroInt> by intSerializer(
+    ZeroIntDeserializationStrategy,
+    intConverter = { it.toInt() }
+)
+
+private object ZeroIntDeserializationStrategy :
+    DeserializationStrategy<ZeroInt> {
+    override val descriptor: SerialDescriptor by lazy {
+        val simpleName: String = simpleNameOf<ZeroInt>()
+        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
-    override fun deserialize(value: Int): ZeroInt = if (value == 0) ZeroInt
-    else throw SerializationException(
-        "Unable to deserialize $value to ZeroInt."
-    )
+    override fun deserialize(decoder: Decoder): ZeroInt {
+        val value: Int = decoder.decodeInt()
+        return if (value == 0) ZeroInt else throw SerializationException(
+            "Unable to deserialize $value to ZeroInt."
+        )
+    }
 }

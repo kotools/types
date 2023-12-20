@@ -12,14 +12,12 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
-import kotools.types.text.NotBlankString
 
 /** Represents an integer number of type [Int]. */
 @Serializable(AnyIntSerializer::class)
@@ -115,22 +113,4 @@ private object AnyIntDeserializationStrategy : DeserializationStrategy<AnyInt> {
             else value.toStrictlyNegativeInt()
         return result.getOrNull() ?: unexpectedCreationError<AnyInt>(value)
     }
-}
-
-internal sealed interface AnyIntSerializerDeprecated<I : AnyInt> :
-    KSerializer<I> {
-    val serialName: Result<NotBlankString>
-
-    override val descriptor: SerialDescriptor
-        get() = serialName
-            .map { PrimitiveSerialDescriptor("$it", PrimitiveKind.INT) }
-            .getOrThrow()
-
-    override fun serialize(encoder: Encoder, value: I): Unit =
-        encoder.encodeInt(value.toInt())
-
-    fun deserialize(value: Int): I
-
-    override fun deserialize(decoder: Decoder): I = decoder.decodeInt()
-        .let(::deserialize)
 }
