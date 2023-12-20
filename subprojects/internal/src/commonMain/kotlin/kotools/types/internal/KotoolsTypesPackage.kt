@@ -18,22 +18,6 @@ public enum class KotoolsTypesPackage(private val value: String) {
         }
     }
 
-    /**
-     * Returns the string representation of this package.
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val result: String = KotoolsTypesPackage.Number.toString()
-     * println(result) // kotools.types.number
-     * ```
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * ```java
-     * final String result = KotoolsTypesPackage.Number.toString();
-     * System.out.println(result); // kotools.types.number
-     * ```
-     */
+    /** Returns the string representation of this package. */
     override fun toString(): String = value
 }
