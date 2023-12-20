@@ -5,8 +5,14 @@
 
 package kotools.types.number
 
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
@@ -16,8 +22,8 @@ import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
+import kotools.types.internal.intSerializer
+import kotools.types.internal.simpleNameOf
 
 /**
  * Returns this number as an encapsulated [PositiveInt], which may involve
@@ -109,15 +115,26 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
         .getOrThrow()
 }
 
-internal object PositiveIntSerializer :
-    AnyIntSerializerDeprecated<PositiveInt> {
-    override val serialName: Result<NotBlankString> by lazy {
-        "${KotoolsTypesPackage.Number}.PositiveInt".toNotBlankString()
+private object PositiveIntSerializer :
+    KSerializer<PositiveInt> by intSerializer(
+        PositiveIntDeserializationStrategy,
+        intConverter = { it.toInt() }
+    )
+
+private object PositiveIntDeserializationStrategy :
+    DeserializationStrategy<PositiveInt> {
+    override val descriptor: SerialDescriptor by lazy {
+        val simpleName: String = simpleNameOf<PositiveInt>()
+        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
-    override fun deserialize(value: Int): PositiveInt = value.toPositiveInt()
-        .getOrNull()
-        ?: throw PositiveIntSerializationException(value)
+    override fun deserialize(decoder: Decoder): PositiveInt {
+        val value: Int = decoder.decodeInt()
+        return value.toPositiveInt()
+            .getOrNull()
+            ?: throw PositiveIntSerializationException(value)
+    }
 }
 
 internal class PositiveIntConstructionException(number: Number) :
