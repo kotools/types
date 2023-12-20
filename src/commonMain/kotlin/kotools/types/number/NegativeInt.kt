@@ -17,11 +17,13 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.notEmptyRangeOf
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
 
 /**
@@ -36,7 +38,8 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
         value == 0 -> Result.success(ZeroInt)
         value.isStrictlyNegative() -> value.toStrictlyNegativeInt()
         else -> {
-            val exception = NegativeIntConstructionException(value)
+            val message: ErrorMessage = value.shouldBeNegative()
+            val exception = IllegalArgumentException("$message")
             Result.failure(exception)
         }
     }
@@ -133,13 +136,6 @@ private object NegativeIntDeserializationStrategy :
         return value.toNegativeInt()
             .getOrNull()
             ?: throw NegativeIntSerializationException(value)
-    }
-}
-
-internal class NegativeIntConstructionException(number: Number) :
-    IllegalArgumentException() {
-    override val message: String by lazy {
-        "Number should be negative (tried with $number)."
     }
 }
 

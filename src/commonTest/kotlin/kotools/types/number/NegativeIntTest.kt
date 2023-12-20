@@ -17,7 +17,9 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldEqual
@@ -27,7 +29,6 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class NegativeIntCompanionTest {
@@ -85,9 +86,8 @@ class NegativeIntTest {
         val exception: IllegalArgumentException = assertFailsWith {
             result.getOrThrow()
         }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = NegativeIntConstructionException(number)
-            .message
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = number.shouldBeNegative()
         assertEquals(expectedMessage, actualMessage)
     }
 

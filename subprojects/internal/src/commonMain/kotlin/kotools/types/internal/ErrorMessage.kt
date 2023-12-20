@@ -67,3 +67,7 @@ public class ErrorMessage(private val text: String) {
  */
 public fun Number.shouldBeGreaterThanZero(): ErrorMessage =
     ErrorMessage("Number should be greater than zero (tried with $this)")
+
+/** Returns an error message indicating that this number should be negative. */
+public fun Number.shouldBeNegative(): ErrorMessage =
+    ErrorMessage("Number should be negative (tried with $this).")
