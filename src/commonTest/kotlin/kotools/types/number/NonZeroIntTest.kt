@@ -22,7 +22,6 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
-import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
@@ -157,6 +156,8 @@ class NonZeroIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<NonZeroInt>(encoded)
         }
-        exception.shouldHaveAMessage()
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = ErrorMessage.zeroNumber
+        assertEquals(expectedMessage, actualMessage)
     }
 }

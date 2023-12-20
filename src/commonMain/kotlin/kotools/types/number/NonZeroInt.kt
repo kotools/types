@@ -8,7 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -25,6 +24,7 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 
 /**
@@ -131,10 +131,6 @@ private object NonZeroIntDeserializationStrategy :
         val value: Int = decoder.decodeInt()
         return value.toNonZeroInt()
             .getOrNull()
-            ?: throw NonZeroIntSerializationException
+            ?: serializationError(ErrorMessage.zeroNumber)
     }
-}
-
-private object NonZeroIntSerializationException : SerializationException() {
-    override val message: String by lazy { "Number should be other than zero" }
 }
