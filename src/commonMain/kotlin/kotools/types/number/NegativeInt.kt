@@ -8,7 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -23,6 +22,7 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
 
@@ -135,13 +135,6 @@ private object NegativeIntDeserializationStrategy :
         val value: Int = decoder.decodeInt()
         return value.toNegativeInt()
             .getOrNull()
-            ?: throw NegativeIntSerializationException(value)
-    }
-}
-
-private class NegativeIntSerializationException(number: Number) :
-    SerializationException() {
-    override val message: String by lazy {
-        "Number should be negative (tried with $number)."
+            ?: serializationError(value.shouldBeNegative())
     }
 }
