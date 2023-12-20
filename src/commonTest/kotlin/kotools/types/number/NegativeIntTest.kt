@@ -23,7 +23,6 @@ import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldEqual
-import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
@@ -160,14 +159,16 @@ class NegativeIntSerializerTest {
     }
 
     @Test
-    fun deserialization_should_fail_with_a_strictly_positive_Int() {
+    fun deserialization_should_fail_with_an_Int_that_is_greater_than_zero() {
         val value: Int = StrictlyPositiveInt.random()
             .toInt()
         val encoded: String = Json.encodeToString(value)
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<NegativeInt>(encoded)
         }
-        exception.shouldHaveAMessage()
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = value.shouldBeNegative()
+        assertEquals(expectedMessage, actualMessage)
     }
 }
 
