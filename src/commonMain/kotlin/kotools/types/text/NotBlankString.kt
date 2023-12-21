@@ -23,6 +23,7 @@ import kotools.types.internal.Since
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns this string as an encapsulated [NotBlankString], or returns an
@@ -30,8 +31,9 @@ import kotlin.jvm.JvmInline
  * [blank][String.isBlank].
  */
 @Since(KotoolsTypesVersion.V4_0_0)
-public fun String.toNotBlankString(): Result<NotBlankString> =
-    runCatching { NotBlankString(this) }
+public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
+    requireNotNull(NotBlankString of this) { NotBlankStringException.message }
+}
 
 /**
  * Represents a string that has at least one character excluding whitespaces.
@@ -39,17 +41,13 @@ public fun String.toNotBlankString(): Result<NotBlankString> =
 @JvmInline
 @Serializable(NotBlankStringSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
-public value class NotBlankString internal constructor(
+public value class NotBlankString private constructor(
     private val value: String
 ) : Comparable<NotBlankString> {
     /** Returns the length of this string. */
     public val length: StrictlyPositiveInt
         get() = value.length.toStrictlyPositiveInt()
             .getOrThrow()
-
-    init {
-        require(value.isNotBlank()) { NotBlankStringException.message }
-    }
 
     /**
      * Compares this string alphabetically with the [other] one for order.
@@ -63,6 +61,14 @@ public value class NotBlankString internal constructor(
 
     /** Returns this string as a [String]. */
     override fun toString(): String = value
+
+    /** Contains static declarations for the [NotBlankString] type. */
+    public companion object {
+        @JvmSynthetic
+        internal infix fun of(value: String): NotBlankString? =
+            if (value.isBlank()) null
+            else NotBlankString(value)
+    }
 }
 
 /** Concatenates this string with the [other] character. */
