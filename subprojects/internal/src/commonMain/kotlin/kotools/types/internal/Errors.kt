@@ -13,6 +13,16 @@ public fun serializationError(message: ErrorMessage): Nothing =
     throw SerializationException("$message")
 
 /**
+ * Throws a `SerializationException` with the specified [message], or throws an
+ * [IllegalArgumentException] if the [message] is [blank][String.isBlank].
+ */
+public fun serializationError(message: String): Nothing {
+    val isValid: Boolean = message.isNotBlank()
+    require(isValid) { "Message shouldn't be blank" }
+    throw SerializationException(message)
+}
+
+/**
  * Throws an [IllegalStateException] indicating that creating an instance of
  * type [T] with the specified [value] shouldn't fail.
  */

@@ -8,7 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -17,6 +16,7 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 
 /** Represents an integer number of type [Int] that equals zero. */
@@ -42,8 +42,7 @@ private object ZeroIntDeserializationStrategy :
 
     override fun deserialize(decoder: Decoder): ZeroInt {
         val value: Int = decoder.decodeInt()
-        return if (value == 0) ZeroInt else throw SerializationException(
-            "Unable to deserialize $value to ZeroInt."
-        )
+        return if (value == 0) ZeroInt
+        else serializationError("Unable to deserialize $value to ZeroInt.")
     }
 }
