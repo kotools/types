@@ -90,3 +90,10 @@ public fun Number.shouldBePositive(): ErrorMessage =
  */
 public fun Number.shouldBeStrictlyNegative(): ErrorMessage =
     ErrorMessage("Number should be strictly negative (tried with $this).")
+
+/**
+ * Returns an error message indicating that this number should be strictly
+ * positive.
+ */
+public fun Number.shouldBeStrictlyPositive(): ErrorMessage =
+    ErrorMessage("Number should be strictly positive (tried with $this).")

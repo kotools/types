@@ -13,14 +13,13 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.shouldBeStrictlyPositive
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationFailure
-import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
-import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldNotEqual
-import kotools.types.text.toNotBlankString
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
@@ -62,12 +61,11 @@ class StrictlyPositiveIntTest {
     fun toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
         val number: Number = Random.nextInt(Int.MIN_VALUE..0)
         val result: Result<StrictlyPositiveInt> = number.toStrictlyPositiveInt()
-        result.shouldFailWithIllegalArgumentException { getOrThrow() }
-            .message
-            .shouldBeNotNull()
-            .toNotBlankString()
-            .getOrThrow()
-            .shouldEqual(StrictlyPositiveInt errorMessageFor number)
+        val exception: IllegalArgumentException =
+            assertFailsWith { result.getOrThrow() }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = number.shouldBeStrictlyPositive()
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @Test
@@ -124,10 +122,9 @@ class StrictlyPositiveIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<StrictlyPositiveInt>(encoded)
         }
-        exception.message.shouldBeNotNull()
-            .toNotBlankString()
-            .getOrThrow()
-            .shouldEqual(StrictlyPositiveInt errorMessageFor value)
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = value.shouldBeStrictlyPositive()
+        assertEquals(expectedMessage, actualMessage)
     }
 }
 

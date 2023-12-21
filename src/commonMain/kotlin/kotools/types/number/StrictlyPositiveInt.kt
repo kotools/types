@@ -8,7 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -17,9 +16,9 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.serializationError
+import kotools.types.internal.shouldBeStrictlyPositive
 import kotools.types.internal.simpleNameOf
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -47,7 +46,7 @@ public value class StrictlyPositiveInt private constructor(
     private val value: Int
 ) : NonZeroInt, PositiveInt {
     init {
-        require(value.isStrictlyPositive()) { errorMessageFor(value) }
+        require(value.isStrictlyPositive()) { value.shouldBeStrictlyPositive() }
     }
 
     @Since(KotoolsTypesVersion.V4_0_0)
@@ -73,11 +72,6 @@ public value class StrictlyPositiveInt private constructor(
         @JvmSynthetic
         internal infix fun orFail(value: Int): StrictlyPositiveInt =
             StrictlyPositiveInt(value)
-
-        internal infix fun errorMessageFor(number: Number): NotBlankString =
-            "Number should be strictly positive (tried with $number)."
-                .toNotBlankString()
-                .getOrThrow()
 
         /** Returns a random [StrictlyPositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
@@ -106,8 +100,6 @@ private object StrictlyPositiveIntDeserializationStrategy :
         val value: Int = decoder.decodeInt()
         return value.toStrictlyPositiveInt()
             .getOrNull()
-            ?: throw SerializationException(
-                "${StrictlyPositiveInt errorMessageFor value}"
-            )
+            ?: serializationError(value.shouldBeStrictlyPositive())
     }
 }
