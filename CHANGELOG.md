@@ -79,9 +79,12 @@ All notable changes to this project will be documented in this file.
   - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`
   - `StrictlyPositiveInt.Companion.range` property.
 - Documentation of types in API reference and in README (commit [ed9322d1]).
+- Source compatibility with Kotlin updated by supporting its versions 1.6
+  through 1.7 (issue [#294]).
 
 [ed9322d1]: https://github.com/kotools/types/commit/ed9322d1
 [#261]: https://github.com/kotools/types/issues/261
+[#294]: https://github.com/kotools/types/issues/294
 [#319]: https://github.com/kotools/types/issues/319
 [#328]: https://github.com/kotools/types/pull/328
 
