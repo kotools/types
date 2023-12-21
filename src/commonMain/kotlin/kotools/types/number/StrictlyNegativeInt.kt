@@ -37,14 +37,15 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  */
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    runCatching { StrictlyNegativeInt(toInt()) }
+    runCatching { StrictlyNegativeInt orFail this.toInt() }
 
 /** Represents an integer number of type [Int] that is less than zero. */
 @JvmInline
 @Serializable(StrictlyNegativeIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
-public value class StrictlyNegativeInt
-internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
+public value class StrictlyNegativeInt private constructor(
+    private val value: Int
+) : NonZeroInt, NegativeInt {
     init {
         require(value.isStrictlyNegative()) { value.shouldBeStrictlyNegative() }
     }
@@ -81,6 +82,10 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
                 .getOrThrow()
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
+
+        @JvmSynthetic
+        internal infix fun orFail(value: Int): StrictlyNegativeInt =
+            StrictlyNegativeInt(value)
 
         /** Returns a random [StrictlyNegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
