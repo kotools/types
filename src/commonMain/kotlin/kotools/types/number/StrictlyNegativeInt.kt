@@ -8,7 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -22,9 +21,9 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.serializationError
+import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -47,7 +46,7 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 public value class StrictlyNegativeInt
 internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
     init {
-        require(value.isStrictlyNegative()) { errorMessageFor(value) }
+        require(value.isStrictlyNegative()) { value.shouldBeStrictlyNegative() }
     }
 
     @Since(KotoolsTypesVersion.V4_0_0)
@@ -83,11 +82,6 @@ internal constructor(private val value: Int) : NonZeroInt, NegativeInt {
             notEmptyRangeOf { start.inclusive to end.inclusive }
         }
 
-        internal infix fun errorMessageFor(number: Number): NotBlankString =
-            "Number should be strictly negative (tried with $number)."
-                .toNotBlankString()
-                .getOrThrow()
-
         /** Returns a random [StrictlyNegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): StrictlyNegativeInt = (min.value..max.value)
@@ -115,8 +109,6 @@ private object StrictlyNegativeIntDeserializationStrategy :
         val decodeValue: Int = decoder.decodeInt()
         return decodeValue.toStrictlyNegativeInt()
             .getOrNull()
-            ?: throw SerializationException(
-                "${StrictlyNegativeInt errorMessageFor decodeValue}"
-            )
+            ?: serializationError(decodeValue.shouldBeStrictlyNegative())
     }
 }

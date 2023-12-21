@@ -83,3 +83,10 @@ public fun Number.shouldBeNegative(): ErrorMessage =
 /** Returns an error message indicating that this number should be positive. */
 public fun Number.shouldBePositive(): ErrorMessage =
     ErrorMessage("Number should be positive (tried with $this).")
+
+/**
+ * Returns an error message indicating that this number should be strictly
+ * negative.
+ */
+public fun Number.shouldBeStrictlyNegative(): ErrorMessage =
+    ErrorMessage("Number should be strictly negative (tried with $this).")

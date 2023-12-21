@@ -17,13 +17,12 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
-import kotools.types.shouldBeNotNull
 import kotools.types.shouldEqual
-import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldNotEqual
-import kotools.types.text.toNotBlankString
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -79,14 +78,14 @@ class StrictlyNegativeIntTest {
 
     @Test
     fun number_toStrictlyNegativeInt_should_fail_with_a_positive_Int() {
-        val number: Number = PositiveInt.random().toInt()
+        val number: Number = PositiveInt.random()
+            .toInt()
         val result: Result<StrictlyNegativeInt> = number.toStrictlyNegativeInt()
-        result.shouldFailWithIllegalArgumentException { getOrThrow() }
-            .message
-            .shouldBeNotNull()
-            .toNotBlankString()
-            .getOrThrow()
-            .shouldEqual(StrictlyNegativeInt errorMessageFor number)
+        val exception: IllegalArgumentException =
+            assertFailsWith { result.getOrThrow() }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = number.shouldBeStrictlyNegative()
+        assertEquals(expectedMessage, actualMessage)
     }
 
     @Test
@@ -144,9 +143,8 @@ class StrictlyNegativeIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<StrictlyNegativeInt>(encoded)
         }
-        exception.message.shouldBeNotNull()
-            .toNotBlankString()
-            .getOrThrow()
-            .shouldEqual(StrictlyNegativeInt errorMessageFor value)
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = value.shouldBeStrictlyNegative()
+        assertEquals(expectedMessage, actualMessage)
     }
 }
