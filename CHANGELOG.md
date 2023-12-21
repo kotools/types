@@ -124,7 +124,9 @@ All notable changes to this project will be documented in this file.
 
 - Upgrade to [Webpack 5.76.3][webpack-5.76.3] for avoiding cross-realm object
   access (issue [#313]).
+- Hide all internals from Java (issue [#303]).
 
+[#303]: https://github.com/kotools/types/issues/303
 [#313]: https://github.com/kotools/types/issues/313
 [webpack-5.76.3]: https://github.com/webpack/webpack/releases/tag/v5.76.3
 
