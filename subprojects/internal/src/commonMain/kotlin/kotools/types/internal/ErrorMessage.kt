@@ -79,3 +79,7 @@ public fun Number.shouldBeGreaterThanZero(): ErrorMessage =
 /** Returns an error message indicating that this number should be negative. */
 public fun Number.shouldBeNegative(): ErrorMessage =
     ErrorMessage("Number should be negative (tried with $this).")
+
+/** Returns an error message indicating that this number should be positive. */
+public fun Number.shouldBePositive(): ErrorMessage =
+    ErrorMessage("Number should be positive (tried with $this).")

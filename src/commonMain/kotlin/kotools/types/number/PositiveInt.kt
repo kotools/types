@@ -8,7 +8,6 @@ package kotools.types.number
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -18,11 +17,14 @@ import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.notEmptyRangeOf
 import kotools.types.experimental.range
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
+import kotools.types.internal.serializationError
+import kotools.types.internal.shouldBePositive
 import kotools.types.internal.simpleNameOf
 
 /**
@@ -37,7 +39,8 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
         value == 0 -> Result.success(ZeroInt)
         value.isStrictlyPositive() -> value.toStrictlyPositiveInt()
         else -> {
-            val exception = PositiveIntConstructionException(value)
+            val message: ErrorMessage = value.shouldBePositive()
+            val exception = IllegalArgumentException("$message")
             Result.failure(exception)
         }
     }
@@ -133,20 +136,6 @@ private object PositiveIntDeserializationStrategy :
         val value: Int = decoder.decodeInt()
         return value.toPositiveInt()
             .getOrNull()
-            ?: throw PositiveIntSerializationException(value)
-    }
-}
-
-internal class PositiveIntConstructionException(number: Number) :
-    IllegalArgumentException() {
-    override val message: String by lazy {
-        "Number should be positive (tried with $number)."
-    }
-}
-
-private class PositiveIntSerializationException(number: Number) :
-    SerializationException() {
-    override val message: String by lazy {
-        "Number should be positive (tried with $number)."
+            ?: serializationError(message = value.shouldBePositive())
     }
 }

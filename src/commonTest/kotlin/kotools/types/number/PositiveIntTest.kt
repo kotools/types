@@ -17,17 +17,17 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
 import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.shouldBePositive
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldEqual
-import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class PositiveIntCompanionTest {
@@ -85,9 +85,8 @@ class PositiveIntTest {
         val exception: IllegalArgumentException = assertFailsWith {
             result.getOrThrow()
         }
-        val actualMessage: String = assertNotNull(exception.message)
-        val expectedMessage: String = PositiveIntConstructionException(number)
-            .message
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = number.shouldBePositive()
         assertEquals(expectedMessage, actualMessage)
     }
 
@@ -125,7 +124,7 @@ class PositiveIntTest {
 class PositiveIntSerializerTest {
     @ExperimentalSerializationApi
     @Test
-    fun descriptor_should_have_the_qualified_name_of_PositiveInt_as_serial_name() {
+    fun descriptor_serial_name_should_be_the_qualified_name_of_PositiveInt() {
         val actual: String = serializer<PositiveInt>().descriptor.serialName
         val simpleName: String = simpleNameOf<PositiveInt>()
         val expected = "${KotoolsTypesPackage.Number}.$simpleName"
@@ -166,7 +165,9 @@ class PositiveIntSerializerTest {
         val exception: SerializationException = assertFailsWith {
             Json.decodeFromString<PositiveInt>(encoded)
         }
-        exception.shouldHaveAMessage()
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = value.shouldBePositive()
+        assertEquals(expectedMessage, actualMessage)
     }
 }
 
