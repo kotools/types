@@ -44,6 +44,14 @@ public class ErrorMessage(private val text: String) {
     /** Contains static declarations for the [ErrorMessage] type. */
     public companion object {
         /**
+         * An error message indicating that the specified string shouldn't be
+         * blank.
+         */
+        public val blankString: ErrorMessage by lazy {
+            ErrorMessage("Given string shouldn't be blank.")
+        }
+
+        /**
          * An error message indicating that the specified collection shouldn't
          * be empty.
          */

@@ -7,7 +7,6 @@ package kotools.types.text
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -16,10 +15,13 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.experimental.plus
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
+import kotools.types.internal.serializationError
+import kotools.types.internal.simpleNameOf
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -32,7 +34,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
-    requireNotNull(NotBlankString of this) { NotBlankStringException.message }
+    requireNotNull(NotBlankString of this) { ErrorMessage.blankString }
 }
 
 /**
@@ -86,11 +88,12 @@ public operator fun Char.plus(other: NotBlankString): NotBlankString =
         .toNotBlankString()
         .getOrThrow()
 
-internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "${KotoolsTypesPackage.Text}.NotBlankString",
-        PrimitiveKind.STRING
-    )
+private object NotBlankStringSerializer : KSerializer<NotBlankString> {
+    override val descriptor: SerialDescriptor by lazy {
+        val simpleName: String = simpleNameOf<NotBlankString>()
+        val serialName = "${KotoolsTypesPackage.Text}.$simpleName"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+    }
 
     override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
         encoder.encodeString("$value")
@@ -99,9 +102,5 @@ internal object NotBlankStringSerializer : KSerializer<NotBlankString> {
         .decodeString()
         .toNotBlankString()
         .getOrNull()
-        ?: throw SerializationException(NotBlankStringException)
-}
-
-internal object NotBlankStringException : IllegalArgumentException() {
-    override val message: String = "Given string shouldn't be blank."
+        ?: serializationError(ErrorMessage.blankString)
 }
