@@ -26,6 +26,10 @@ import kotlin.jvm.JvmSynthetic
 @JvmSynthetic
 internal fun Int.isStrictlyPositive(): Boolean = this > 0
 
+@JvmSynthetic
+internal fun StrictlyPositiveInt(number: Number): StrictlyPositiveInt =
+    StrictlyPositiveInt orFail number.toInt()
+
 /**
  * Returns this number as an encapsulated [StrictlyPositiveInt], which may
  * involve rounding or truncation, or returns an encapsulated
@@ -33,14 +37,15 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
  */
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    runCatching { StrictlyPositiveInt(toInt()) }
+    runCatching { StrictlyPositiveInt(this) }
 
 /** Represents an integer number of type [Int] that is greater than zero. */
 @JvmInline
 @Serializable(StrictlyPositiveIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
-public value class StrictlyPositiveInt
-internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
+public value class StrictlyPositiveInt private constructor(
+    private val value: Int
+) : NonZeroInt, PositiveInt {
     init {
         require(value.isStrictlyPositive()) { errorMessageFor(value) }
     }
@@ -64,6 +69,10 @@ internal constructor(private val value: Int) : NonZeroInt, PositiveInt {
         public val max: StrictlyPositiveInt by lazy(
             Int.MAX_VALUE.toStrictlyPositiveInt()::getOrThrow
         )
+
+        @JvmSynthetic
+        internal infix fun orFail(value: Int): StrictlyPositiveInt =
+            StrictlyPositiveInt(value)
 
         internal infix fun errorMessageFor(number: Number): NotBlankString =
             "Number should be strictly positive (tried with $number)."
