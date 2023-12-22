@@ -8,8 +8,6 @@ package kotools.types.experimental
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.text.SpecialChar
-import kotools.types.text.NotBlankString
-import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -20,10 +18,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class EmailAddress private constructor(
-    private val localPart: NotBlankString,
-    private val domain: NotBlankString
-) {
+public class EmailAddress private constructor(private val value: String) {
     /**
      * Returns the string representation of this email address.
      *
@@ -42,8 +37,7 @@ public class EmailAddress private constructor(
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String =
-        "$localPart${SpecialChar.AtSign}$domain"
+    final override fun toString(): String = value
 
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {
@@ -92,18 +86,8 @@ public class EmailAddress private constructor(
          * available yet for Java users.
          */
         @JvmSynthetic
-        public fun from(text: String): EmailAddress? {
-            val isValid: Boolean = text matches this.regex
-            if (!isValid) return null
-            val delimiter: Char = SpecialChar.AtSign.toChar()
-            val parts: List<String> = text.split(delimiter)
-            val localPart: NotBlankString = parts.first()
-                .toNotBlankString()
-                .getOrThrow()
-            val domain: NotBlankString = parts.last()
-                .toNotBlankString()
-                .getOrThrow()
-            return EmailAddress(localPart, domain)
-        }
+        public fun from(text: String): EmailAddress? =
+            if (text matches this.regex) EmailAddress(value = text)
+            else null
     }
 }
