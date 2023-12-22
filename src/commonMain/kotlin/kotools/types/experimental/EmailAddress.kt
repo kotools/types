@@ -89,7 +89,7 @@ public class EmailAddress private constructor(private val value: String) {
          */
         @JvmSynthetic
         public fun createOrNull(text: String): EmailAddress? =
-            if (text matches this.regex) EmailAddress(value = text)
+            if (text matches regex) EmailAddress(value = text)
             else null
     }
 }
