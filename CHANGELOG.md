@@ -50,11 +50,16 @@ All notable changes to this project will be documented in this file.
 - The `NotEmptyRange.BuilderScope.Companion` **experimental** object for
   containing static declarations for the `NotEmptyRange.BuilderScope` type
   (commit [79e093ce][commit/79e093ce]).
+- The **experimental** type `EmailAddress` suggested by [@MichaelStH] in
+  [#55][discussion/#55] for representing an email address (issue
+  [#339][issue/#339]).
 
 [commit/a4399cce]: https://github.com/kotools/types/commit/a4399cce
 [commit/a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
 [commit/76ba0637]: https://github.com/kotools/types/commit/76ba0637
 [commit/79e093ce]: https://github.com/kotools/types/commit/79e093ce
+[discussion/#55]: https://github.com/kotools/types/discussions/55
+[issue/#339]: https://github.com/kotools/types/issues/339
 [tag/1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
 [tag/2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
 [tag/3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0

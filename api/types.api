@@ -116,6 +116,17 @@ public abstract interface class kotools/types/experimental/Bound {
 	public abstract fun toString ()Ljava/lang/String;
 }
 
+public final class kotools/types/experimental/EmailAddress {
+	public static final field Companion Lkotools/types/experimental/EmailAddress$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final synthetic fun toString ()Ljava/lang/String;
+}
+
+public final class kotools/types/experimental/EmailAddress$Companion {
+	public final synthetic fun from (Ljava/lang/String;)Lkotools/types/experimental/EmailAddress;
+	public final synthetic fun getRegex ()Lkotlin/text/Regex;
+}
+
 public final class kotools/types/experimental/ExclusiveBound : kotools/types/experimental/Bound {
 	public static final field Companion Lkotools/types/experimental/ExclusiveBound$Companion;
 	public synthetic fun <init> (Ljava/lang/Comparable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
