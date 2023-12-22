@@ -13,8 +13,8 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
- * You can use the [EmailAddress.Companion.from] function for creating an
- * instance of this type.
+ * You can use the [EmailAddress.Companion.createOrNull] function for creating
+ * an instance of this type.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -26,7 +26,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * ```kotlin
      * val text = "contact@kotools.org"
-     * val address: EmailAddress = EmailAddress.from(text)
+     * val address: EmailAddress = EmailAddress.createOrNull(text)
      *     ?: error("'$text' is a valid email address")
      * val message = "$address" // or address.toString()
      * println(message) // contact@kotools.org
@@ -72,13 +72,15 @@ public class EmailAddress private constructor(private val value: String) {
             Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
 
         /**
-         * Creates an [EmailAddress] from the specified [text], or returns
-         * `null` if the [text] doesn't match [EmailAddress.Companion.regex].
+         * Creates an email address from the specified [text], or returns `null`
+         * if the [text] doesn't match the
+         * [corresponding regular expression][regex].
          *
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * val address: EmailAddress? = EmailAddress.from("contact@kotools.org")
+         * val address: EmailAddress? =
+         *     EmailAddress.createOrNull("contact@kotools.org")
          * println(address) // contact@kotools.org
          * ```
          *
@@ -86,7 +88,7 @@ public class EmailAddress private constructor(private val value: String) {
          * available yet for Java users.
          */
         @JvmSynthetic
-        public fun from(text: String): EmailAddress? =
+        public fun createOrNull(text: String): EmailAddress? =
             if (text matches this.regex) EmailAddress(value = text)
             else null
     }

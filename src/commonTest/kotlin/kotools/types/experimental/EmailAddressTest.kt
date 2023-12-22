@@ -16,7 +16,7 @@ class EmailAddressTest {
     @Test
     fun toString_should_pass() {
         val text = "contact@kotools.org"
-        val emailAddress: EmailAddress = EmailAddress.from(text)
+        val emailAddress: EmailAddress = EmailAddress.createOrNull(text)
             ?: unexpectedCreationFailure<EmailAddress>(value = text)
         assertEquals(expected = text, actual = "$emailAddress")
     }
@@ -32,32 +32,37 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun from_should_pass_with_valid_String() {
-        val actual: EmailAddress? = EmailAddress.from("contact@kotools.org")
+    fun createOrNull_should_pass_with_valid_String() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull("contact@kotools.org")
         assertNotNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_having_an_invalid_local_part() {
-        val actual: EmailAddress? = EmailAddress.from(" contact@kotools.org")
+    fun createOrNull_should_fail_with_a_String_having_an_invalid_local_part() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull(" contact@kotools.org")
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_that_does_not_have_an_at_sign() {
-        val actual: EmailAddress? = EmailAddress.from("contact-kotools.org")
+    fun createOrNull_should_fail_with_a_String_that_does_not_have_an_at_sign() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull("contact-kotools.org")
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_having_an_invalid_domain() {
-        val actual: EmailAddress? = EmailAddress.from("contact@ko tools. org")
+    fun createOrNull_should_fail_with_a_String_having_an_invalid_domain() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull("contact@ko tools. org")
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_that_does_not_have_a_dot() {
-        val actual: EmailAddress? = EmailAddress.from("contact@kotools_org")
+    fun createOrNull_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull("contact@kotools_org")
         assertNull(actual)
     }
 }
