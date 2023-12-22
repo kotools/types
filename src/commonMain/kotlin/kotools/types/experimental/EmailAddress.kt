@@ -72,13 +72,14 @@ public class EmailAddress private constructor(private val value: String) {
             Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
 
         /**
-         * Creates an [EmailAddress] from the specified [text], or returns
-         * `null` if the [text] doesn't match [EmailAddress.Companion.regex].
+         * Creates an email address from the specified [text], or returns `null`
+         * if the [text] doesn't match the corresponding
+         * [regular expression][EmailAddress.Companion.regex].
          *
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * val address: EmailAddress? = EmailAddress.from("contact@kotools.org")
+         * val address: EmailAddress? = EmailAddress from "contact@kotools.org"
          * println(address) // contact@kotools.org
          * ```
          *
@@ -86,7 +87,7 @@ public class EmailAddress private constructor(private val value: String) {
          * available yet for Java users.
          */
         @JvmSynthetic
-        public fun from(text: String): EmailAddress? =
+        public infix fun from(text: String): EmailAddress? =
             if (text matches this.regex) EmailAddress(value = text)
             else null
     }
