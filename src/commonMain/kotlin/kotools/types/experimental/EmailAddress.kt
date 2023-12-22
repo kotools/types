@@ -7,6 +7,7 @@ package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.text.SpecialChar
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmSynthetic
@@ -41,7 +42,8 @@ public class EmailAddress private constructor(
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = "$localPart@$domain"
+    final override fun toString(): String =
+        "$localPart${SpecialChar.AtSign}$domain"
 
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {
@@ -72,7 +74,8 @@ public class EmailAddress private constructor(
          * available yet for Java users.
          */
         @get:JvmSynthetic
-        public val regex: Regex = Regex("^\\S+@\\S+\\.\\S+\$")
+        public val regex: Regex =
+            Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
 
         /**
          * Creates an [EmailAddress] from the specified [text], or returns
@@ -92,7 +95,8 @@ public class EmailAddress private constructor(
         public fun from(text: String): EmailAddress? {
             val isValid: Boolean = text matches this.regex
             if (!isValid) return null
-            val parts: List<String> = text.split('@')
+            val delimiter: Char = SpecialChar.AtSign.toChar()
+            val parts: List<String> = text.split(delimiter)
             val localPart: NotBlankString = parts.first()
                 .toNotBlankString()
                 .getOrThrow()
