@@ -25,9 +25,8 @@ public class EmailAddress private constructor(private val value: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val text = "contact@kotools.org"
-     * val address: EmailAddress = EmailAddress.from(text)
-     *     ?: error("'$text' is a valid email address")
+     * val address: EmailAddress =
+     *     checkNotNull(EmailAddress from "contact@kotools.org")
      * val message = "$address" // or address.toString()
      * println(message) // contact@kotools.org
      * ```

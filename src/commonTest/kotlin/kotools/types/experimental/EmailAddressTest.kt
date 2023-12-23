@@ -5,7 +5,6 @@
 
 package kotools.types.experimental
 
-import kotools.types.internal.unexpectedCreationFailure
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -16,8 +15,7 @@ class EmailAddressTest {
     @Test
     fun toString_should_pass() {
         val text = "contact@kotools.org"
-        val emailAddress: EmailAddress = EmailAddress.from(text)
-            ?: unexpectedCreationFailure<EmailAddress>(value = text)
+        val emailAddress: EmailAddress = checkNotNull(EmailAddress from text)
         assertEquals(expected = text, actual = "$emailAddress")
     }
 }
