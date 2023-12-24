@@ -1,5 +1,5 @@
 <!--
-    Copyright $YEAR Kotools S.A.S.U.
+    Copyright $YEAR Kotools S.A.S.
     Use of this source code is governed by the MIT license.
 -->
 
