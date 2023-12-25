@@ -119,6 +119,8 @@ public abstract interface class kotools/types/experimental/Bound {
 public final class kotools/types/experimental/EmailAddress {
 	public static final field Companion Lkotools/types/experimental/EmailAddress$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final synthetic fun equals (Ljava/lang/Object;)Z
+	public final synthetic fun hashCode ()I
 	public final synthetic fun toString ()Ljava/lang/String;
 }
 

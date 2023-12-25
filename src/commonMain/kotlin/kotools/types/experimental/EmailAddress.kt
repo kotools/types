@@ -7,6 +7,7 @@ package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.hashCodeOf
 import kotools.types.internal.text.SpecialChar
 import kotlin.jvm.JvmSynthetic
 
@@ -19,6 +20,56 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class EmailAddress private constructor(private val value: String) {
+    // -------------------------- Structural equality --------------------------
+
+    /**
+     * Returns `true` if the [other] object is an [EmailAddress] having the same
+     * string representation as this email address, or returns `false`
+     * otherwise.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val first: EmailAddress =
+     *     checkNotNull(EmailAddress from "contact@kotools.org")
+     * val second: EmailAddress = checkNotNull(EmailAddress from "$first")
+     * val result: Boolean = first == second // or first.equals(second)
+     * println(result) // true
+     * ```
+     *
+     * Please note that being **experimental**, this function is not available
+     * yet for Java users.
+     */
+    @JvmSynthetic
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean = when {
+        this === other -> true
+        other == null -> false
+        else -> other is EmailAddress && this.value == other.value
+    }
+
+    /**
+     * Returns a hash code value for this email address.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val first: EmailAddress =
+     *     checkNotNull(EmailAddress from "contact@kotools.org")
+     * val second: EmailAddress = checkNotNull(EmailAddress from "$first")
+     * val result: Boolean = first.hashCode() == second.hashCode()
+     * println(result) // true
+     * ```
+     *
+     * Please note that being **experimental**, this function is not available
+     * yet for Java users.
+     */
+    @JvmSynthetic
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = hashCodeOf(this.value)
+
+    // ------------------------------ Converters -------------------------------
+
     /**
      * Returns the string representation of this email address.
      *
