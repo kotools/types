@@ -10,16 +10,9 @@ import kotlin.test.assertEquals
 
 class KotoolsTypesPackageTest {
     @Test
-    fun toString_should_pass_on_Number() {
-        val actual: String = KotoolsTypesPackage.Number.toString()
-        val expected = "kotools.types.number"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun toString_should_pass_on_Text() {
-        val actual: String = KotoolsTypesPackage.Text.toString()
-        val expected = "kotools.types.text"
-        assertEquals(expected, actual)
-    }
+    fun toString_should_pass_on_each_values(): Unit = KotoolsTypesPackage
+        .values()
+        .asSequence()
+        .map { "kotools.types.${it.name.lowercase()}" to "$it" }
+        .forEach { assertEquals(expected = it.first, actual = it.second) }
 }
