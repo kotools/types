@@ -125,7 +125,7 @@ public final class kotools/types/experimental/EmailAddress {
 }
 
 public final class kotools/types/experimental/EmailAddress$Companion {
-	public final synthetic fun from (Ljava/lang/CharSequence;)Lkotools/types/experimental/EmailAddress;
+	public final synthetic fun from (Ljava/lang/String;)Lkotools/types/experimental/EmailAddress;
 	public final synthetic fun getRegex ()Lkotlin/text/Regex;
 }
 

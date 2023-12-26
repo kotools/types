@@ -68,8 +68,8 @@ public class EmailAddress private constructor(private val value: String) {
          * available yet for Java users.
          */
         @JvmSynthetic
-        public infix fun from(text: CharSequence): EmailAddress? =
-            if (text matches regex) EmailAddress("$text")
+        public infix fun from(text: String): EmailAddress? =
+            if (text matches regex) EmailAddress(text)
             else null
     }
 
