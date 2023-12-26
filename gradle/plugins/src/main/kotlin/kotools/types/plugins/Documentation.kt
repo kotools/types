@@ -49,7 +49,8 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
     val dokkaHtml: TaskProvider<DokkaTask> = named<DokkaTask>("dokkaHtml") {
         moduleName.set("Kotools Types")
         dokkaSourceSets.configureEach {
-            includes.from += project.layout.projectDirectory.file("packages.md")
+            includes.from +=
+                project.layout.projectDirectory.file("src/packages.md")
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
         }
