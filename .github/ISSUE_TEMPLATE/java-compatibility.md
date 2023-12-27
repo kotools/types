@@ -23,7 +23,7 @@ This issue is blocked by the following ones:
 - [ ] [Create an issue][new-issue] for stabilizing this declaration in the next [minor release][versioning-strategy].
 
 [api binaries]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-api-binaries
-[unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
 [new-issue]: https://github.com/kotools/types/issues/new/choose
 [test]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#running-tests
+[unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
 [versioning-strategy]: https://github.com/kotools/types/blob/main/documentation/versioning-strategy.md
