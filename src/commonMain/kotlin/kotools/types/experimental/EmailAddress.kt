@@ -5,9 +5,19 @@
 
 package kotools.types.experimental
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
+import kotools.types.internal.simpleNameOf
 import kotools.types.internal.text.SpecialChar
 import kotlin.jvm.JvmSynthetic
 
@@ -16,9 +26,23 @@ import kotlin.jvm.JvmSynthetic
  *
  * You can use the [EmailAddress.Companion.from] function for creating an
  * instance of this type.
+ *
+ * The serialization of this type is similar to the serialization of [String].
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val address: EmailAddress =
+ *     checkNotNull(EmailAddress from "contact@kotools.org")
+ * val encoded: String = Json.encodeToString(address)
+ * println(encoded) // "contact@kotools.org"
+ * val decoded: EmailAddress = Json.decodeFromString(encoded)
+ * println(decoded == address) // true
+ * ```
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@Serializable(EmailAddressSerializer::class)
 public class EmailAddress private constructor(private val value: String) {
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {
@@ -141,4 +165,22 @@ public class EmailAddress private constructor(private val value: String) {
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = value
+}
+
+@ExperimentalKotoolsTypesApi
+private object EmailAddressSerializer : KSerializer<EmailAddress> {
+    override val descriptor: SerialDescriptor by lazy {
+        val type: String = simpleNameOf<EmailAddress>()
+        val serialName = "${KotoolsTypesPackage.Experimental}.$type"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+    }
+
+    override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): EmailAddress {
+        val text: String = decoder.decodeString()
+        return EmailAddress.from(text)
+            ?: deserializationError<EmailAddress>(text)
+    }
 }

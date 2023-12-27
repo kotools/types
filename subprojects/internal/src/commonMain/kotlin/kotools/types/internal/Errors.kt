@@ -23,6 +23,15 @@ public fun serializationError(message: String): Nothing {
 }
 
 /**
+ * Throws a `SerializationException` indicating that it was unable to
+ * deserialize the type [T] from the specified [value].
+ */
+public inline fun <reified T : Any> deserializationError(value: Any): Nothing {
+    val message: ErrorMessage = deserializationErrorMessage<T>(value)
+    serializationError(message)
+}
+
+/**
  * Throws an [IllegalStateException] indicating that creating an instance of
  * type [T] with the specified [value] shouldn't fail.
  */

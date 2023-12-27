@@ -78,6 +78,17 @@ public class ErrorMessage(private val text: String) {
 }
 
 /**
+ * Returns an error message indicating that it was unable to deserialize the
+ * type [T] from the specified [value].
+ */
+public inline fun <reified T : Any> deserializationErrorMessage(
+    value: Any
+): ErrorMessage {
+    val type: String = simpleNameOf<T>()
+    return ErrorMessage("Unable to deserialize $type from '$value'")
+}
+
+/**
  * Returns an error message indicating that this number should be greater than
  * zero.
  */
