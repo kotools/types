@@ -1,6 +1,6 @@
 ---
-name: Experimental Feature Template
-about: New request for introducing an experimental feature.
+name: Experimental Declaration
+about: New request for introducing an experimental declaration.
 title: New $DECLARATION
 labels: feature
 ---
