@@ -122,10 +122,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - The copyright notice in the license (issue [#257]).
-- The usage examples in the documentation of the `toStrictlyNegativeIntOrThrow`
-  function (PR [#252]).
 
-[#252]: https://github.com/kotools/types/pull/252
 [#257]: https://github.com/kotools/types/issues/257
 
 ### Security
