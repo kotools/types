@@ -13,7 +13,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
@@ -86,16 +85,6 @@ class NotBlankStringTest {
             .getOrThrow()
         val result: Int = x compareTo y
         assertTrue { result > ZeroInt.toInt() }
-    }
-
-    @ExperimentalTextApi
-    @Test
-    fun char_plus_should_pass_with_a_NotBlankString() {
-        val first = 'a'
-        val second: NotBlankString = "b".toNotBlankString()
-            .getOrThrow()
-        val result: NotBlankString = first + second
-        "$result" shouldEqual "$first$second"
     }
 }
 

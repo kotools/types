@@ -12,9 +12,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.experimental.ExperimentalTextApi
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -70,14 +68,6 @@ public value class NotBlankString private constructor(
             else NotBlankString(value)
     }
 }
-
-/** Concatenates this character with the [other] string. */
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-@ExperimentalTextApi
-public operator fun Char.plus(other: NotBlankString): NotBlankString =
-    plus("$other")
-        .toNotBlankString()
-        .getOrThrow()
 
 private object NotBlankStringSerializer : KSerializer<NotBlankString> {
     override val descriptor: SerialDescriptor by lazy {

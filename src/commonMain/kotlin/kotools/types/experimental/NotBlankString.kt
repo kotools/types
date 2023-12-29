@@ -78,3 +78,26 @@ public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
 @JvmSynthetic
 public operator fun NotBlankString.plus(other: Char): NotBlankString =
     plus("$other")
+
+/**
+ * Concatenates this character with the [other] string.
+ *
+ * Here's an example of calling this function from Kotlin code:
+ *
+ * ```kotlin
+ * val first = 'a'
+ * val second: NotBlankString = " book".toNotBlankString()
+ *     .getOrThrow()
+ * val result: NotBlankString = first + second
+ * println(result) // a book
+ * ```
+ *
+ * Please note that this function is currently not available for Java users.
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@JvmSynthetic
+public operator fun Char.plus(other: NotBlankString): NotBlankString =
+    plus("$other")
+        .toNotBlankString()
+        .getOrThrow()

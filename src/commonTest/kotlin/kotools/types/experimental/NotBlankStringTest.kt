@@ -45,4 +45,15 @@ class NotBlankStringTest {
             .getOrThrow()
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun char_plus_should_pass_with_a_NotBlankString() {
+        val first = 'a'
+        val second: NotBlankString = " book".toNotBlankString()
+            .getOrThrow()
+        val actual: NotBlankString = first + second
+        val expected: NotBlankString = "$first$second".toNotBlankString()
+            .getOrThrow()
+        assertEquals(expected, actual)
+    }
 }
