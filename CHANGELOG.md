@@ -71,7 +71,7 @@ All notable changes to this project will be documented in this file.
   - `Char.plus(NotBlankString)` operation
   - `range` property for companion object of `PositiveInt`, `NegativeInt`,
     `StrictlyPositiveInt` and `StrictlyNegativeInt`
-  - `NonZeroInt.Companion.positiveRange` property.
+  - `positiveRange` and `negativeRange` properties on `NonZeroInt.Companion`.
 - Opt-in message of experimental annotations (pull request
   [#328](https://github.com/kotools/types/pull/328)).
 - Documentation of types in API reference and in README (commit

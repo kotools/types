@@ -13,10 +13,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.NotEmptyRange
-import kotools.types.experimental.range
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
@@ -38,14 +34,6 @@ class NonZeroIntCompanionTest {
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = NonZeroInt.max
         result.toInt() shouldEqual Int.MAX_VALUE
-    }
-
-    @ExperimentalRangeApi
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun negativeRange_should_be_the_range_of_StrictlyNegativeInt() {
-        val range: NotEmptyRange<StrictlyNegativeInt> = NonZeroInt.negativeRange
-        range shouldEqual StrictlyNegativeInt.range
     }
 
     @Test

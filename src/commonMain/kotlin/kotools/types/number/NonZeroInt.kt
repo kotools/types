@@ -14,12 +14,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.NotEmptyRange
-import kotools.types.experimental.range
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -60,14 +55,6 @@ public sealed interface NonZeroInt : AnyInt {
         /** The maximum value a [NonZeroInt] can have. */
         public val max: StrictlyPositiveInt by lazy(
             StrictlyPositiveInt.Companion::max
-        )
-
-        /** The negative range of values a [NonZeroInt] can have. */
-        @ExperimentalRangeApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val negativeRange: NotEmptyRange<StrictlyNegativeInt> by lazy(
-            StrictlyNegativeInt.Companion::range
         )
 
         /** Returns a random [NonZeroInt]. */
