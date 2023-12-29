@@ -15,7 +15,7 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Concatenates this string with the [other] one.
  *
- * Here's an example for calling this function from Kotlin code:
+ * Here's an example of calling this function from Kotlin code:
  *
  * ```kotlin
  * val first: NotBlankString = "hello".toNotBlankString()
@@ -40,7 +40,7 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
 /**
  * Concatenates this string with the [other] one.
  *
- * Here's an example for calling this function from Kotlin code:
+ * Here's an example of calling this function from Kotlin code:
  *
  * ```kotlin
  * val first: NotBlankString = "hello".toNotBlankString()
@@ -62,7 +62,7 @@ public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
 /**
  * Concatenates this string with the [other] character.
  *
- * Here's an example for calling this function from Kotlin code:
+ * Here's an example of calling this function from Kotlin code:
  *
  * ```kotlin
  * val first: NotBlankString = "hell".toNotBlankString()
