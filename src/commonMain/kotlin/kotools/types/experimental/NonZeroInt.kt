@@ -9,6 +9,7 @@ import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NonZeroInt
+import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toNonZeroInt
 import kotlin.jvm.JvmSynthetic
 
@@ -35,4 +36,27 @@ public operator fun NonZeroInt.unaryMinus(): NonZeroInt {
     return value.toNonZeroInt()
         .getOrNull()
         ?: unexpectedCreationError<NonZeroInt>(value)
+}
+
+/**
+ * The range of positive values a [NonZeroInt] can have.
+ *
+ * Here's an example of calling this property from Kotlin code:
+ *
+ * ```kotlin
+ * println(NonZeroInt.positiveRange) // [1;2147483647]
+ * ```
+ *
+ * Please note that this function is currently not available for Java users.
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@get:JvmSynthetic
+public val NonZeroInt.Companion.positiveRange:
+        NotEmptyRange<StrictlyPositiveInt>
+    get() = rangeValue
+
+@ExperimentalKotoolsTypesApi
+private val rangeValue: NotEmptyRange<StrictlyPositiveInt> by lazy {
+    StrictlyPositiveInt.range
 }

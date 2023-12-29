@@ -48,17 +48,6 @@ class NonZeroIntCompanionTest {
         range shouldEqual StrictlyNegativeInt.range
     }
 
-    @ExperimentalRangeApi
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun positiveRange_should_be_the_range_of_StrictlyPositiveInt() {
-        val actual: NotEmptyRange<StrictlyPositiveInt> =
-            NonZeroInt.positiveRange
-        val expected: NotEmptyRange<StrictlyPositiveInt> =
-            StrictlyPositiveInt.range
-        assertEquals(expected, actual)
-    }
-
     @Test
     fun random_should_return_different_values() {
         val x: NonZeroInt = NonZeroInt.random()

@@ -70,14 +70,6 @@ public sealed interface NonZeroInt : AnyInt {
             StrictlyNegativeInt.Companion::range
         )
 
-        /** The positive range of values a [NonZeroInt] can have. */
-        @ExperimentalRangeApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val positiveRange: NotEmptyRange<StrictlyPositiveInt> by lazy {
-            StrictlyPositiveInt.range
-        }
-
         /** Returns a random [NonZeroInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): NonZeroInt {
