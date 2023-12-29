@@ -43,7 +43,7 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt {
 /**
  * The range of values a [PositiveInt] can have.
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of calling this property from Kotlin code:
  *
  * ```kotlin
  * println(PositiveInt.range) // [0;2147483647]
