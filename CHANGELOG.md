@@ -69,7 +69,7 @@ All notable changes to this project will be documented in this file.
   - `plus(String)`, `plus(NotBlankString)` and `plus(Char)` operations on
     `NotBlankString`
   - `Char.plus(NotBlankString)` operation
-  - `range` property for companion object of `PositiveInt`,
+  - `range` property for companion object of `PositiveInt`, `NegativeInt`,
     `StrictlyPositiveInt` and `StrictlyNegativeInt`.
 - Opt-in message of experimental annotations (pull request
   [#328](https://github.com/kotools/types/pull/328)).

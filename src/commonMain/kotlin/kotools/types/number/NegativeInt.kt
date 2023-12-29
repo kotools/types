@@ -12,13 +12,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.NotEmptyRange
-import kotools.types.experimental.notEmptyRangeOf
-import kotools.types.experimental.range
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -59,16 +53,6 @@ public sealed interface NegativeInt : AnyInt {
 
         /** The maximum value a [NegativeInt] can have. */
         public val max: ZeroInt = ZeroInt
-
-        /** The range of values a [NegativeInt] can have. */
-        @ExperimentalRangeApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val range: NotEmptyRange<NegativeInt> by lazy {
-            val start: StrictlyNegativeInt =
-                StrictlyNegativeInt.range.start.value
-            notEmptyRangeOf { start.inclusive to ZeroInt.inclusive }
-        }
 
         /** Returns a random [NegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)

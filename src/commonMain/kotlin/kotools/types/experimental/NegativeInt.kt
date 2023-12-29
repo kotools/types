@@ -10,6 +10,8 @@ import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NegativeInt
 import kotools.types.number.PositiveInt
+import kotools.types.number.StrictlyNegativeInt
+import kotools.types.number.ZeroInt
 import kotools.types.number.toPositiveInt
 import kotlin.jvm.JvmSynthetic
 
@@ -36,4 +38,28 @@ public operator fun NegativeInt.unaryMinus(): PositiveInt {
     return value.toPositiveInt()
         .getOrNull()
         ?: unexpectedCreationError<PositiveInt>(value)
+}
+
+/**
+ * The range of values a [NegativeInt] can have.
+ *
+ * Here's an example of calling this property from Kotlin code:
+ *
+ * ```kotlin
+ * println(NegativeInt.range) // [-2147483648;0]
+ * ```
+ *
+ * Please note that this function is currently not available for Java users.
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@get:JvmSynthetic
+public val NegativeInt.Companion.range: NotEmptyRange<NegativeInt>
+    get() = rangeValue
+
+@ExperimentalKotoolsTypesApi
+private val rangeValue: NotEmptyRange<NegativeInt> by lazy {
+    val start: StrictlyNegativeInt =
+        StrictlyNegativeInt.range.start.value
+    notEmptyRangeOf { start.inclusive to ZeroInt.inclusive }
 }
