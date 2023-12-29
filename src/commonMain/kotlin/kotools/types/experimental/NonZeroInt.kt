@@ -54,9 +54,4 @@ public operator fun NonZeroInt.unaryMinus(): NonZeroInt {
 @get:JvmSynthetic
 public val NonZeroInt.Companion.positiveRange:
         NotEmptyRange<StrictlyPositiveInt>
-    get() = positiveRangeValue
-
-@ExperimentalKotoolsTypesApi
-private val positiveRangeValue: NotEmptyRange<StrictlyPositiveInt> by lazy {
-    StrictlyPositiveInt.range
-}
+    get() = StrictlyPositiveInt.range

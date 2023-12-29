@@ -7,10 +7,11 @@ package kotools.types.experimental
 
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.number.NonZeroInt
+import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toNonZeroInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertSame
 
 @ExperimentalKotoolsTypesApi
 class NonZeroIntTest {
@@ -25,15 +26,10 @@ class NonZeroIntTest {
     }
 
     @Test
-    fun positiveRange_should_go_from_1_included_to_Int_MAX_VALUE_included() {
+    fun positiveRange_should_be_StrictlyPositiveInt_range() {
         val actual: NotEmptyRange<NonZeroInt> = NonZeroInt.positiveRange
-        assertTrue { actual.start is InclusiveBound }
-        val expectedStartValue: NonZeroInt = 1.toNonZeroIntOrFailure()
-        assertEquals(expectedStartValue, actual.start.value)
-        assertTrue { actual.end is InclusiveBound }
-        val expectedEndValue: NonZeroInt = Int.MAX_VALUE.toNonZeroIntOrFailure()
-        assertEquals(expectedEndValue, actual.end.value)
-        assertEquals(expected = "[1;2147483647]", "$actual")
+        val expected: NotEmptyRange<NonZeroInt> = StrictlyPositiveInt.range
+        assertSame(expected, actual)
     }
 }
 
