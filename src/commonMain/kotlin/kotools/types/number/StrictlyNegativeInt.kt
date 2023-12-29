@@ -12,11 +12,6 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.NotEmptyRange
-import kotools.types.experimental.notEmptyRangeOf
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -69,19 +64,6 @@ public value class StrictlyNegativeInt private constructor(
         public val max: StrictlyNegativeInt by lazy(
             (-1).toStrictlyNegativeInt()::getOrThrow
         )
-
-        /** The range of values a [StrictlyNegativeInt] can have. */
-        @ExperimentalRangeApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val range: NotEmptyRange<StrictlyNegativeInt> by lazy {
-            val start: StrictlyNegativeInt = Int.MIN_VALUE
-                .toStrictlyNegativeInt()
-                .getOrThrow()
-            val end: StrictlyNegativeInt = (-1).toStrictlyNegativeInt()
-                .getOrThrow()
-            notEmptyRangeOf { start.inclusive to end.inclusive }
-        }
 
         @JvmSynthetic
         internal infix fun orFail(value: Int): StrictlyNegativeInt =

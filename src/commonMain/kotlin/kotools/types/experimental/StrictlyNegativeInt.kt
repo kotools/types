@@ -10,6 +10,7 @@ import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.StrictlyPositiveInt
+import kotools.types.number.toStrictlyNegativeInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmSynthetic
 
@@ -36,4 +37,32 @@ public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt {
     return value.toStrictlyPositiveInt()
         .getOrNull()
         ?: unexpectedCreationError<StrictlyPositiveInt>(value)
+}
+
+/**
+ * The range of values a [StrictlyNegativeInt] can have.
+ *
+ * Here's an example of calling this property from Kotlin code:
+ *
+ * ```kotlin
+ * println(StrictlyNegativeInt.range) // [-2147483648;-1]
+ * ```
+ *
+ * Please note that this function is currently not available for Java users.
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@get:JvmSynthetic
+public val StrictlyNegativeInt.Companion.range:
+        NotEmptyRange<StrictlyNegativeInt>
+    get() = rangeValue
+
+@ExperimentalKotoolsTypesApi
+private val rangeValue: NotEmptyRange<StrictlyNegativeInt> by lazy {
+    val start: StrictlyNegativeInt = Int.MIN_VALUE
+        .toStrictlyNegativeInt()
+        .getOrThrow()
+    val end: StrictlyNegativeInt = (-1).toStrictlyNegativeInt()
+        .getOrThrow()
+    notEmptyRangeOf { start.inclusive to end.inclusive }
 }

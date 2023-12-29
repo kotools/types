@@ -213,6 +213,7 @@ public final class kotools/types/experimental/PositiveIntKt {
 }
 
 public final class kotools/types/experimental/StrictlyNegativeIntKt {
+	public static final synthetic fun getRange (Lkotools/types/number/StrictlyNegativeInt$Companion;)Lkotools/types/experimental/NotEmptyRange;
 	public static final synthetic fun unaryMinus-I890jeU (I)I
 }
 
@@ -365,7 +366,6 @@ public final class kotools/types/number/StrictlyNegativeInt : kotools/types/numb
 public final class kotools/types/number/StrictlyNegativeInt$Companion {
 	public final fun getMax-r6XGqFM ()I
 	public final fun getMin-r6XGqFM ()I
-	public final fun getRange ()Lkotools/types/experimental/NotEmptyRange;
 	public final fun random-r6XGqFM ()I
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }

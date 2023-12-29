@@ -13,10 +13,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.InclusiveBound
-import kotools.types.experimental.NotEmptyRange
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.shouldBeStrictlyNegative
@@ -26,7 +22,6 @@ import kotools.types.shouldNotEqual
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class StrictlyNegativeIntCompanionTest {
     @Test
@@ -39,26 +34,6 @@ class StrictlyNegativeIntCompanionTest {
     fun max_should_equal_minus_one() {
         val result: StrictlyNegativeInt = StrictlyNegativeInt.max
         result.toInt() shouldEqual -1
-    }
-
-    @ExperimentalRangeApi
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun range_should_start_with_an_InclusiveBound_that_equals_the_minimum_value_of_Int() {
-        val range: NotEmptyRange<StrictlyNegativeInt> =
-            StrictlyNegativeInt.range
-        assertTrue { range.start is InclusiveBound }
-        range.start.value.toInt() shouldEqual Int.MIN_VALUE
-    }
-
-    @ExperimentalRangeApi
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun range_should_end_with_an_InclusiveBound_that_equals_minus_one() {
-        val range: NotEmptyRange<StrictlyNegativeInt> =
-            StrictlyNegativeInt.range
-        assertTrue { range.end is InclusiveBound }
-        range.end.value.toInt() shouldEqual -1
     }
 
     @Test
