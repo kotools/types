@@ -209,6 +209,7 @@ public final class kotools/types/experimental/NotEmptyRangeKt {
 }
 
 public final class kotools/types/experimental/PositiveIntKt {
+	public static final synthetic fun getRange (Lkotools/types/number/PositiveInt$Companion;)Lkotools/types/experimental/NotEmptyRange;
 	public static final synthetic fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
 }
 
@@ -329,7 +330,6 @@ public abstract interface class kotools/types/number/PositiveInt : kotools/types
 public final class kotools/types/number/PositiveInt$Companion {
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin ()Lkotools/types/number/ZeroInt;
-	public final fun getRange ()Lkotools/types/experimental/NotEmptyRange;
 	public final fun random ()Lkotools/types/number/PositiveInt;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
