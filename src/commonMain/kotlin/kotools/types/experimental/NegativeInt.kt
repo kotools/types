@@ -27,7 +27,7 @@ import kotlin.jvm.JvmSynthetic
  * println(result) // 1
  * ```
  *
- * Please note that this function is currently not available for Java users.
+ * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -49,7 +49,7 @@ public operator fun NegativeInt.unaryMinus(): PositiveInt {
  * println(NegativeInt.range) // [-2147483648;0]
  * ```
  *
- * Please note that this function is currently not available for Java users.
+ * Please note that this property is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)

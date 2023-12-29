@@ -25,7 +25,7 @@ import kotlin.jvm.JvmSynthetic
  * println(result) // hello world
  * ```
  *
- * Please note that this function is currently not available for Java users.
+ * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -51,7 +51,7 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
  * println(result) // hello world
  * ```
  *
- * Please note that this function is currently not available for Java users.
+ * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -71,7 +71,7 @@ public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
  * println(result) // hello
  * ```
  *
- * Please note that this function is currently not available for Java users.
+ * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -92,7 +92,7 @@ public operator fun NotBlankString.plus(other: Char): NotBlankString =
  * println(result) // a book
  * ```
  *
- * Please note that this function is currently not available for Java users.
+ * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
