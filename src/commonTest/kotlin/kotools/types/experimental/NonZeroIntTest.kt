@@ -33,13 +33,7 @@ class NonZeroIntTest {
         assertTrue { actual.end is InclusiveBound }
         val expectedEndValue: NonZeroInt = Int.MAX_VALUE.toNonZeroIntOrFailure()
         assertEquals(expectedEndValue, actual.end.value)
-    }
-
-    @Test
-    fun positiveRange_documentation_should_be_valid() {
-        val actual: String = NonZeroInt.positiveRange.toString()
-        val expected = "[1;2147483647]"
-        assertEquals(expected, actual)
+        assertEquals(expected = "[1;2147483647]", "$actual")
     }
 }
 
