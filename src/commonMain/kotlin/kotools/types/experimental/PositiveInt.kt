@@ -46,7 +46,7 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt {
  * Here's an example of calling this function from Kotlin code:
  *
  * ```kotlin
- * println(StrictlyPositiveInt.range) // [0;2147483647]
+ * println(PositiveInt.range) // [0;2147483647]
  * ```
  *
  * Please note that this function is currently not available for Java users.
