@@ -69,8 +69,7 @@ public class EmailAddress private constructor(private val value: String) {
          * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
          * ```
          *
-         * Please note that being **experimental**, this property is not
-         * available yet for Java users.
+         * Please note that this property is not available yet for Java users.
          */
         @get:JvmSynthetic
         public val regex: Regex =
@@ -88,8 +87,7 @@ public class EmailAddress private constructor(private val value: String) {
          * println(address) // contact@kotools.org
          * ```
          *
-         * Please note that being **experimental**, this function is not
-         * available yet for Java users.
+         * Please note that this function is not available yet for Java users.
          */
         @JvmSynthetic
         public infix fun from(text: String): EmailAddress? =
@@ -114,8 +112,7 @@ public class EmailAddress private constructor(private val value: String) {
      * println(result) // true
      * ```
      *
-     * Please note that being **experimental**, this function is not available
-     * yet for Java users.
+     * Please note that this function is not available yet for Java users.
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
@@ -138,8 +135,7 @@ public class EmailAddress private constructor(private val value: String) {
      * println(result) // true
      * ```
      *
-     * Please note that being **experimental**, this function is not available
-     * yet for Java users.
+     * Please note that this function is not available yet for Java users.
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
@@ -159,8 +155,7 @@ public class EmailAddress private constructor(private val value: String) {
      * println(message) // contact@kotools.org
      * ```
      *
-     * Please note that being **experimental**, this function is not available
-     * yet for Java users.
+     * Please note that this function is not available yet for Java users.
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
