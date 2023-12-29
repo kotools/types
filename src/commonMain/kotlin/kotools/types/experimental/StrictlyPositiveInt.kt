@@ -54,8 +54,11 @@ public operator fun StrictlyPositiveInt.unaryMinus(): StrictlyNegativeInt {
 @get:JvmSynthetic
 public val StrictlyPositiveInt.Companion.range:
         NotEmptyRange<StrictlyPositiveInt>
-    get() {
-        val start = StrictlyPositiveInt(1)
-        val end = StrictlyPositiveInt(Int.MAX_VALUE)
-        return notEmptyRangeOf { start.inclusive to end.inclusive }
-    }
+    get() = rangeValue
+
+@ExperimentalKotoolsTypesApi
+private val rangeValue: NotEmptyRange<StrictlyPositiveInt> by lazy {
+    val start = StrictlyPositiveInt(1)
+    val end = StrictlyPositiveInt(Int.MAX_VALUE)
+    notEmptyRangeOf { start.inclusive to end.inclusive }
+}

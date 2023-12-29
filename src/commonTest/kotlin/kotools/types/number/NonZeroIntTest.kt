@@ -15,7 +15,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalRangeApi
-import kotools.types.experimental.InclusiveBound
 import kotools.types.experimental.NotEmptyRange
 import kotools.types.experimental.range
 import kotools.types.internal.ErrorMessage
@@ -27,7 +26,6 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class NonZeroIntCompanionTest {
     @Test
@@ -58,10 +56,7 @@ class NonZeroIntCompanionTest {
             NonZeroInt.positiveRange
         val expected: NotEmptyRange<StrictlyPositiveInt> =
             StrictlyPositiveInt.range
-        assertTrue(actual.start is InclusiveBound)
-        assertEquals(expected.start.value, actual.start.value)
-        assertTrue(actual.end is InclusiveBound)
-        assertEquals(expected.end.value, actual.end.value)
+        assertEquals(expected, actual)
     }
 
     @Test
