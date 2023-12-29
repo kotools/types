@@ -24,7 +24,10 @@ class NonZeroIntTest {
             .toNonZeroIntOrFailure()
         assertEquals(expected, actual)
     }
+}
 
+@ExperimentalKotoolsTypesApi
+class NonZeroIntCompanionTest {
     @Test
     fun positiveRange_should_be_StrictlyPositiveInt_range() {
         val actual: NotEmptyRange<NonZeroInt> = NonZeroInt.positiveRange
