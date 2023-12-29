@@ -90,16 +90,6 @@ class NotBlankStringTest {
 
     @ExperimentalTextApi
     @Test
-    fun plus_should_pass_with_a_Char() {
-        val first: NotBlankString = "hell".toNotBlankString()
-            .getOrThrow()
-        val second = 'o'
-        val result: NotBlankString = first + second
-        "$result" shouldEqual "$first$second"
-    }
-
-    @ExperimentalTextApi
-    @Test
     fun char_plus_should_pass_with_a_NotBlankString() {
         val first = 'a'
         val second: NotBlankString = "b".toNotBlankString()

@@ -12,9 +12,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.experimental.ExperimentalTextApi
-import kotools.types.experimental.plus
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
@@ -72,13 +70,6 @@ public value class NotBlankString private constructor(
             else NotBlankString(value)
     }
 }
-
-/** Concatenates this string with the [other] character. */
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
-@ExperimentalTextApi
-@OptIn(ExperimentalKotoolsTypesApi::class)
-public operator fun NotBlankString.plus(other: Char): NotBlankString =
-    plus("$other")
 
 /** Concatenates this character with the [other] string. */
 @ExperimentalSince(KotoolsTypesVersion.V4_2_0)

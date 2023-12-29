@@ -66,7 +66,8 @@ All notable changes to this project will be documented in this file.
   `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
   - `Bound`, `InclusiveBound` and `ExclusiveBound` types with their declarations
   - `NotEmptyRange` type with its declarations
-  - `plus(String)` and `plus(NotBlankString)` operations on `NotBlankString`
+  - `plus(String)`, `plus(NotBlankString)` and `plus(Char)` operations on
+    `NotBlankString`
   - `StrictlyPositiveInt.Companion.range` property.
 - Opt-in message of experimental annotations (pull request
   [#328](https://github.com/kotools/types/pull/328)).
