@@ -17,12 +17,26 @@ import kotlin.annotation.AnnotationTarget.TYPEALIAS
 private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
         " and can be incompatibly changed in the future."
 
+/** Marks declarations that are still **experimental** in the API. */
+@MustBeDocumented
+@RequiresOptIn(OPT_IN_MESSAGE)
+@Retention(BINARY)
+@Since(KotoolsTypesVersion.Unreleased)
+@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
+public annotation class ExperimentalKotoolsTypesApi
+
+// -------------------------- Deprecated annotations ---------------------------
+
+private const val RECOMMENDED_ANNOTATION: String = "ExperimentalKotoolsTypesApi"
+private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
+    "kotools.types.experimental"
+
 /** Marks declarations that are still **experimental** in the collection API. */
 @Deprecated(
-    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    "Use the $RECOMMENDED_ANNOTATION annotation instead.",
     ReplaceWith(
-        "ExperimentalKotoolsTypesApi",
-        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+        RECOMMENDED_ANNOTATION,
+        "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
 @DeprecatedSince(KotoolsTypesVersion.Unreleased)
@@ -32,20 +46,12 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalCollectionApi
 
-/** Marks declarations that are still **experimental** in the API. */
-@MustBeDocumented
-@RequiresOptIn(OPT_IN_MESSAGE)
-@Retention(BINARY)
-@Since(KotoolsTypesVersion.Unreleased)
-@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
-public annotation class ExperimentalKotoolsTypesApi
-
 /** Marks declarations that are still **experimental** in the number API. */
 @Deprecated(
-    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    "Use the $RECOMMENDED_ANNOTATION annotation instead.",
     ReplaceWith(
-        "ExperimentalKotoolsTypesApi",
-        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+        RECOMMENDED_ANNOTATION,
+        "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
 @DeprecatedSince(KotoolsTypesVersion.Unreleased)
@@ -57,10 +63,10 @@ public annotation class ExperimentalNumberApi
 
 /** Marks declarations that are still **experimental** in the range API. */
 @Deprecated(
-    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    "Use the $RECOMMENDED_ANNOTATION annotation instead.",
     ReplaceWith(
-        "ExperimentalKotoolsTypesApi",
-        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+        RECOMMENDED_ANNOTATION,
+        "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
 @DeprecatedSince(KotoolsTypesVersion.Unreleased)
@@ -72,10 +78,10 @@ public annotation class ExperimentalRangeApi
 
 /** Marks declarations that are still **experimental** in the result API. */
 @Deprecated(
-    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    "Use the $RECOMMENDED_ANNOTATION annotation instead.",
     ReplaceWith(
-        "ExperimentalKotoolsTypesApi",
-        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+        RECOMMENDED_ANNOTATION,
+        "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
 @DeprecatedSince(KotoolsTypesVersion.Unreleased)
@@ -87,10 +93,10 @@ public annotation class ExperimentalResultApi
 
 /** Marks declarations that are still **experimental** in the text API. */
 @Deprecated(
-    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    "Use the $RECOMMENDED_ANNOTATION annotation instead.",
     ReplaceWith(
-        "ExperimentalKotoolsTypesApi",
-        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+        RECOMMENDED_ANNOTATION,
+        "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
 @DeprecatedSince(KotoolsTypesVersion.Unreleased)
