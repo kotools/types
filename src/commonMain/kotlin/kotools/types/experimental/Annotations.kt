@@ -5,6 +5,7 @@
 
 package kotools.types.experimental
 
+import kotools.types.internal.DeprecatedSince
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
@@ -17,10 +18,17 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
         " and can be incompatibly changed in the future."
 
 /** Marks declarations that are still **experimental** in the collection API. */
+@Deprecated(
+    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    ReplaceWith(
+        "ExperimentalKotoolsTypesApi",
+        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+    )
+)
+@DeprecatedSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@Since(KotoolsTypesVersion.V4_3_1)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalCollectionApi
 

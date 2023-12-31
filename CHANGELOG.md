@@ -79,6 +79,11 @@ All notable changes to this project will be documented in this file.
 - Align styles of version [4.2.0][tag-4.2.0] with the latest ones in
   [API reference][api-reference] (issue [#261][issue-261]).
 
+### Deprecated
+
+- `ExperimentalCollectionApi` annotation (issue
+  [#327](https://github.com/kotools/types/issues/327)).
+
 ### Removed
 
 - The following **experimental** factory functions (issue
