@@ -41,10 +41,17 @@ public annotation class ExperimentalCollectionApi
 public annotation class ExperimentalKotoolsTypesApi
 
 /** Marks declarations that are still **experimental** in the number API. */
+@Deprecated(
+    "Use the ExperimentalKotoolsTypesApi annotation instead.",
+    ReplaceWith(
+        "ExperimentalKotoolsTypesApi",
+        "kotools.types.experimental.ExperimentalKotoolsTypesApi"
+    )
+)
+@DeprecatedSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@Since(KotoolsTypesVersion.V4_2_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalNumberApi
 

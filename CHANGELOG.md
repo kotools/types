@@ -81,7 +81,7 @@ All notable changes to this project will be documented in this file.
 
 ### Deprecated
 
-- `ExperimentalCollectionApi` annotation (issue
+- `ExperimentalCollectionApi` and `ExperimentalNumberApi` annotations (issue
   [#327](https://github.com/kotools/types/issues/327)).
 
 ### Removed
