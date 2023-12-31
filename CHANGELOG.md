@@ -81,8 +81,8 @@ All notable changes to this project will be documented in this file.
 
 ### Deprecated
 
-`ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi` and
-`ExperimentalResultApi` annotations (issue
+`ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
+`ExperimentalResultApi` and `ExperimentalTextApi` annotations (issue
 [#327](https://github.com/kotools/types/issues/327)).
 
 ### Removed
