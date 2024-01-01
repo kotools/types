@@ -25,6 +25,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.4.0
+
+_Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
+
+[4.3.1...4.4.0]: https://github.com/kotools/types/compare/4.3.1...4.4.0
+
 ### Added
 
 - `EmailAddress` **experimental** type, suggested by

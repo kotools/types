@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Loïc Lamarque and Kotools S.A.S.
+ * Copyright 2023-2024 Loïc Lamarque and Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -25,7 +25,7 @@ import kotlin.jvm.JvmSynthetic
  * [IllegalArgumentException] if this number is negative.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
@@ -37,7 +37,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * zero.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 public class StrictlyPositiveDouble private constructor(
     private val value: Double

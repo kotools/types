@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Kotools S.A.S.
+ * Copyright 2023-2024 Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -41,7 +41,7 @@ import kotlin.jvm.JvmSynthetic
  * ```
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @Serializable(EmailAddressSerializer::class)
 public class EmailAddress private constructor(private val value: String) {
     /** Contains static declarations for the [EmailAddress] type. */

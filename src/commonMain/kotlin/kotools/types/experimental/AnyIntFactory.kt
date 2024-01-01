@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Kotools S.A.S.
+ * Copyright 2023-2024 Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -35,7 +35,7 @@ import kotlin.jvm.JvmName
  * ```
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmName("create")
 public fun AnyInt(value: Int): AnyInt {
     if (value == 0) return ZeroInt

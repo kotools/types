@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Loïc Lamarque and Kotools S.A.S.
+ * Copyright 2023-2024 Loïc Lamarque and Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -15,7 +15,7 @@ import kotlin.jvm.JvmSynthetic
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
     /** The value of this bound. */
     public val value: T
@@ -30,7 +30,7 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
 private constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
@@ -49,7 +49,7 @@ private constructor(override val value: T) : Bound<T> {
  * @param T the **covariant** type of this bound's value.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
 private constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Kotools S.A.S.
+ * Copyright 2023-2024 Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -8,6 +8,7 @@ package kotools.types.internal
 /** Represents a version of Kotools Types. */
 public enum class KotoolsTypesVersion {
     Unreleased,
+    V4_4_0,
     V4_3_1,
     V4_2_0,
     V4_1_0,

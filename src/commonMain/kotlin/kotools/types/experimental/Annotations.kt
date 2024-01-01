@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Loïc Lamarque and Kotools S.A.S.
+ * Copyright 2023-2024 Loïc Lamarque and Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -21,7 +21,7 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@Since(KotoolsTypesVersion.Unreleased)
+@Since(KotoolsTypesVersion.V4_4_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalKotoolsTypesApi
 
@@ -39,7 +39,7 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
-@DeprecatedSince(KotoolsTypesVersion.Unreleased)
+@DeprecatedSince(KotoolsTypesVersion.V4_4_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -54,7 +54,7 @@ public annotation class ExperimentalCollectionApi
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
-@DeprecatedSince(KotoolsTypesVersion.Unreleased)
+@DeprecatedSince(KotoolsTypesVersion.V4_4_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -69,7 +69,7 @@ public annotation class ExperimentalNumberApi
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
-@DeprecatedSince(KotoolsTypesVersion.Unreleased)
+@DeprecatedSince(KotoolsTypesVersion.V4_4_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -84,7 +84,7 @@ public annotation class ExperimentalRangeApi
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
-@DeprecatedSince(KotoolsTypesVersion.Unreleased)
+@DeprecatedSince(KotoolsTypesVersion.V4_4_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -99,7 +99,7 @@ public annotation class ExperimentalResultApi
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     )
 )
-@DeprecatedSince(KotoolsTypesVersion.Unreleased)
+@DeprecatedSince(KotoolsTypesVersion.V4_4_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)

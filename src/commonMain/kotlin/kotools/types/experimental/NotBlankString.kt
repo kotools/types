@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Kotools S.A.S.
+ * Copyright 2023-2024 Kotools S.A.S.
  * Use of this source code is governed by the MIT license.
  */
 
@@ -28,7 +28,7 @@ import kotlin.jvm.JvmSynthetic
  * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
 public operator fun NotBlankString.plus(other: String): NotBlankString {
     val value: String = toString() + other
@@ -54,7 +54,7 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
  * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
 public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
     plus("$other")
@@ -74,7 +74,7 @@ public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
  * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
 public operator fun NotBlankString.plus(other: Char): NotBlankString =
     plus("$other")
@@ -95,7 +95,7 @@ public operator fun NotBlankString.plus(other: Char): NotBlankString =
  * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
 public operator fun Char.plus(other: NotBlankString): NotBlankString =
     plus("$other")
