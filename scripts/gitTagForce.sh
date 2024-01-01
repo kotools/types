@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2023-2024 Loïc Lamarque.
+# Copyright 2024 Kotools S.A.S.
 # Use of this source code is governed by the MIT license.
 
 # This script tags a stable release of Kotools Types.
