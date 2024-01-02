@@ -17,9 +17,9 @@ PROJECT_VERSION=$(./gradlew -q :version)
 echo "${BLUE}> Project version:${NO_COLOR} $PROJECT_VERSION"
 
 echo "${BLUE}> Get archived versions of API reference${NO_COLOR}"
-BRANCH_TARGET="api-reference"
+API_REFERENCE_BRANCH="api-reference"
 SOURCE_FOLDER="versions"
-git checkout -q $BRANCH_TARGET -- $SOURCE_FOLDER
+git checkout -q $API_REFERENCE_BRANCH -- $SOURCE_FOLDER
 
 echo "${BLUE}> Prepare generation of latest API reference${NO_COLOR}"
 OLD_VERSIONS_DIR="api/references"
@@ -31,7 +31,8 @@ echo "${BLUE}> Generate latest API reference${NO_COLOR}"
 ./gradlew -q :dokkaHtml
 
 echo "${BLUE}> Archive latest API reference${NO_COLOR}"
-git checkout -q $BRANCH_TARGET
+git branch -q "$API_REFERENCE_BRANCH-$PROJECT_VERSION" $API_REFERENCE_BRANCH
+git checkout -q "$API_REFERENCE_BRANCH-$PROJECT_VERSION"
 git rm -qr $SOURCE_FOLDER
 mkdir $SOURCE_FOLDER
 mv $OLD_VERSIONS_DIR/* $SOURCE_FOLDER
