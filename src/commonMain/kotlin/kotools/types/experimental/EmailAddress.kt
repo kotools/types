@@ -22,7 +22,15 @@ import kotlin.jvm.JvmSynthetic
  * You can use the [EmailAddress.Companion.from] function for creating an
  * instance of this type.
  *
- * The serialization of this type is similar to the serialization of [String].
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type behave like for the [String] type.
+ *
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
@@ -34,6 +42,7 @@ import kotlin.jvm.JvmSynthetic
  * val decoded: EmailAddress = Json.decodeFromString(encoded)
  * println(decoded == address) // true
  * ```
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
