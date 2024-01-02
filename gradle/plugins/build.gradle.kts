@@ -1,9 +1,5 @@
 plugins { `kotlin-dsl` }
 
-buildscript {
-    dependencies { classpath(libs.dokka.versioning) }
-}
-
 repositories.mavenCentral()
 
 kotlin.explicitApi()
