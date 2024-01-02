@@ -7,7 +7,6 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
-import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -43,6 +42,7 @@ private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
     withType<DokkaTask>().configureEach {
         project.logger.lifecycle("> Configuring task ${this.path}")
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            customAssets = listOf(project.logoIcon)
             footerMessage = project.copyright
         }
     }
@@ -52,13 +52,14 @@ private val Project.copyright: String
         lines.first { it.startsWith("Copyright (c)") }
     }
 
+private val Project.logoIcon: File
+    get() = rootDir.resolve("images/logo-icon.svg")
+
 // -----------------------------------------------------------------------------
 
 private fun TaskContainer.configureDokkaHtml(project: Project) {
     val apiReferencesDir: Directory =
         project.layout.projectDirectory.dir("api/references")
-    val setApiReferenceLogoTask: TaskProvider<Copy> =
-        register<Copy>("setApiReferenceLogo")
     val archiveApiReferenceTask: TaskProvider<Copy> =
         register<Copy>("archiveApiReference")
     val dokkaHtml: TaskProvider<DokkaTask> = named<DokkaTask>("dokkaHtml") {
@@ -77,19 +78,7 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
             .dir("dokka")
             .map { it.asFile }
         outputDirectory.set(outputDir)
-        finalizedBy(setApiReferenceLogoTask, archiveApiReferenceTask)
-    }
-    setApiReferenceLogoTask.configure {
-        group(TaskGroup.DOCUMENTATION)
-        description("Sets the Kotools logo into the API reference.")
-        val images = "images"
-        val source: RegularFile =
-            project.layout.projectDirectory.file("$images/logo-icon.svg")
-        from(source)
-        val destination: Provider<File> = dokkaHtml.get()
-            .outputDirectory
-            .map { it.resolve(images) }
-        into(destination)
+        finalizedBy(archiveApiReferenceTask)
     }
     val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
         register<Delete>("deleteOlderDirInArchivedApiReference")
@@ -97,7 +86,6 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
         group(TaskGroup.DOCUMENTATION)
         description("Archives the API reference.")
         onlyIf { "SNAPSHOT" !in "${project.version}" }
-        dependsOn += setApiReferenceLogoTask
         from(dokkaHtml)
         val destination: Directory = apiReferencesDir.dir("${project.version}")
         into(destination)
@@ -116,7 +104,7 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
     val apiReferenceJar: TaskProvider<Jar> = register<Jar>("apiReferenceJar") {
         group(TaskGroup.DOCUMENTATION)
         description("Archives the API reference in a JAR file.")
-        dependsOn(setApiReferenceLogoTask, archiveApiReferenceTask)
+        dependsOn(archiveApiReferenceTask)
         from(dokkaHtml)
         archiveClassifier.set("javadoc")
     }
