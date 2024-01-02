@@ -4,7 +4,7 @@ kotlin = "1.7.21"
 kotlinx-binary-compatibility-validator = "0.12.1"
 kotlinx-serialization = "1.4.1"
 
-# Plugins
+# ---------------------------------- Plugins -----------------------------------
 
 [plugins.dokka]
 id = "org.jetbrains.dokka"
@@ -22,7 +22,12 @@ version.ref = "kotlinx-binary-compatibility-validator"
 id = "org.jetbrains.kotlin.plugin.serialization"
 version.ref = "kotlin"
 
-# Libraries
+# --------------------------------- Libraries ----------------------------------
+
+[libraries.dokka-base]
+group = "org.jetbrains.dokka"
+name = "dokka-base"
+version.ref = "dokka"
 
 [libraries.dokka-gradle-plugin]
 group = "org.jetbrains.dokka"

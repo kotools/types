@@ -6,6 +6,7 @@ kotlin.explicitApi()
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.dokka.base)
     implementation(libs.dokka.gradle.plugin)
     implementation(libs.dokka.versioning)
 }
