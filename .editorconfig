@@ -1,6 +1,3 @@
-# Copyright 2023 Loïc Lamarque.
-# Use of this source code is governed by the MIT license.
-
 [*]
 charset = utf-8
 end_of_line = lf

@@ -1,6 +1,3 @@
-# Copyright 2023 Kotools S.A.S.
-# Use of this source code is governed by the MIT license.
-
 version: "1.0"
 profile:
   name: qodana.starter

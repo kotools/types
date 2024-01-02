@@ -1,8 +1,3 @@
-/*
- * Copyright 2023-2024 Kotools S.A.S.
- * Use of this source code is governed by the MIT license.
- */
-
 @file:JvmName("AnyIntFactory")
 
 package kotools.types.experimental

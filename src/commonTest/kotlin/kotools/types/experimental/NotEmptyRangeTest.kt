@@ -1,8 +1,3 @@
-/*
- * Copyright 2023 Loïc Lamarque and Kotools S.A.S.
- * Use of this source code is governed by the MIT license.
- */
-
 package kotools.types.experimental
 
 import kotlin.random.Random

@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Copyright 2023 Loïc Lamarque.
-# Use of this source code is governed by the MIT license.
-
 # This script regenerates the API reference of an old version and archives it.
 # It should be called from the root project!
 

@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Copyright 2023 Loïc Lamarque.
-# Use of this source code is governed by the MIT license.
-
 # This script republishes the API reference of Kotools Types corresponding to
 # the specified version.
 # It should be called from the root project!
