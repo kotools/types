@@ -20,6 +20,8 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
@@ -28,11 +30,29 @@ import java.io.File
 /** Plugin configuring the API reference of Kotools Types. */
 public class DocumentationPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
-    override fun apply(project: Project) {
-        project.tasks.configureDokkaHtml(project)
-        project.tasks.registerCleanDokkaHtml()
+    override fun apply(project: Project): Unit = project.tasks.run {
+        configureDokkaHtml(project)
+        registerCleanDokkaHtml()
+        configureEachDokkaTask(project)
     }
 }
+
+// ------------------------ Configuration of DokkaTask -------------------------
+
+private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
+    withType<DokkaTask>().configureEach {
+        project.logger.lifecycle("> Configuring task ${this.path}")
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            footerMessage = project.copyright
+        }
+    }
+
+private val Project.copyright: String
+    get() = rootDir.resolve("LICENSE.txt").useLines { lines: Sequence<String> ->
+        lines.first { it.startsWith("Copyright (c)") }
+    }
+
+// -----------------------------------------------------------------------------
 
 private fun TaskContainer.configureDokkaHtml(project: Project) {
     val apiReferencesDir: Directory =
