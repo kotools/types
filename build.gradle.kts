@@ -25,7 +25,7 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
 
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
-    commonMainImplementation(project(":internal"))
+    commonMainImplementation(projects.internal)
     commonMainImplementation(libs.kotlinx.serialization.core)
 
     commonTestImplementation(libs.kotlin.test)
