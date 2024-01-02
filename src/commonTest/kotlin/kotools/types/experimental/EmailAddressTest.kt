@@ -20,10 +20,10 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 private object Texts {
-    const val VALID: String = "contact@kotools.org"
-    const val INVALID_LOCAL_PART: String = " contact@kotools.org"
-    const val WITHOUT_AT_SIGN: String = "contact-kotools.org"
     const val INVALID_DOMAIN: String = "contact@ko tools. org"
+    const val INVALID_LOCAL_PART: String = " contact@kotools.org"
+    const val VALID: String = "contact@kotools.org"
+    const val WITHOUT_AT_SIGN: String = "contact-kotools.org"
     const val WITHOUT_DOT: String = "contact@kotools_org"
 }
 
@@ -43,26 +43,26 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun from_should_fail_with_a_CharSequence_having_an_invalid_local_part() {
-        val actual: EmailAddress? = EmailAddress from Texts.INVALID_LOCAL_PART
-        assertNull(actual)
-    }
-
-    @Test
-    fun from_should_fail_with_a_CharSequence_that_does_not_have_an_at_sign() {
+    fun from_should_fail_with_a_String_that_does_not_have_an_at_sign() {
         val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_AT_SIGN
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_CharSequence_having_an_invalid_domain() {
-        val actual: EmailAddress? = EmailAddress from Texts.INVALID_DOMAIN
+    fun from_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_DOT
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_CharSequence_that_does_not_have_a_dot() {
-        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_DOT
+    fun from_should_fail_with_a_String_having_an_invalid_local_part() {
+        val actual: EmailAddress? = EmailAddress from Texts.INVALID_LOCAL_PART
+        assertNull(actual)
+    }
+
+    @Test
+    fun from_should_fail_with_a_String_having_an_invalid_domain() {
+        val actual: EmailAddress? = EmailAddress from Texts.INVALID_DOMAIN
         assertNull(actual)
     }
 }
@@ -157,19 +157,6 @@ class EmailAddressSerializerTest {
     }
 
     @Test
-    fun deserialization_should_fail_from_a_String_having_an_invalid_local_part() {
-        val text: String = Texts.INVALID_LOCAL_PART
-        val exception: SerializationException = assertFailsWith {
-            val encoded: String = Json.encodeToString(text)
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage =
-            deserializationErrorMessage<EmailAddress>(text)
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun deserialization_should_fail_from_a_String_that_does_not_have_an_at_sign() {
         val text: String = Texts.WITHOUT_AT_SIGN
         val exception: SerializationException = assertFailsWith {
@@ -183,8 +170,8 @@ class EmailAddressSerializerTest {
     }
 
     @Test
-    fun deserialization_should_fail_from_a_String_having_an_invalid_domain() {
-        val text: String = Texts.INVALID_DOMAIN
+    fun deserialization_should_fail_from_a_String_that_does_not_have_a_dot() {
+        val text: String = Texts.WITHOUT_DOT
         val exception: SerializationException = assertFailsWith {
             val encoded: String = Json.encodeToString(text)
             Json.decodeFromString<EmailAddress>(encoded)
@@ -196,8 +183,21 @@ class EmailAddressSerializerTest {
     }
 
     @Test
-    fun deserialization_should_fail_from_a_String_that_does_not_have_a_dot() {
-        val text: String = Texts.WITHOUT_DOT
+    fun deserialization_should_fail_from_a_String_having_an_invalid_local_part() {
+        val text: String = Texts.INVALID_LOCAL_PART
+        val exception: SerializationException = assertFailsWith {
+            val encoded: String = Json.encodeToString(text)
+            Json.decodeFromString<EmailAddress>(encoded)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage =
+            deserializationErrorMessage<EmailAddress>(text)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun deserialization_should_fail_from_a_String_having_an_invalid_domain() {
+        val text: String = Texts.INVALID_DOMAIN
         val exception: SerializationException = assertFailsWith {
             val encoded: String = Json.encodeToString(text)
             Json.decodeFromString<EmailAddress>(encoded)
