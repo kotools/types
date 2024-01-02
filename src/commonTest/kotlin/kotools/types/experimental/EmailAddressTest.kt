@@ -28,46 +28,6 @@ private object Texts {
 }
 
 @ExperimentalKotoolsTypesApi
-class EmailAddressCompanionTest {
-    @Test
-    fun regex_should_pass() {
-        val actual: Regex = EmailAddress.regex
-        val expected = Regex("^\\S+@\\S+\\.\\S+\$")
-        assertEquals(expected.pattern, actual.pattern)
-    }
-
-    @Test
-    fun from_should_pass_with_a_valid_String() {
-        val actual: EmailAddress? = EmailAddress from Texts.VALID
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun from_should_fail_with_a_String_that_does_not_have_an_at_sign() {
-        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_AT_SIGN
-        assertNull(actual)
-    }
-
-    @Test
-    fun from_should_fail_with_a_String_that_does_not_have_a_dot() {
-        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_DOT
-        assertNull(actual)
-    }
-
-    @Test
-    fun from_should_fail_with_a_String_having_an_invalid_local_part() {
-        val actual: EmailAddress? = EmailAddress from Texts.INVALID_LOCAL_PART
-        assertNull(actual)
-    }
-
-    @Test
-    fun from_should_fail_with_a_String_having_an_invalid_domain() {
-        val actual: EmailAddress? = EmailAddress from Texts.INVALID_DOMAIN
-        assertNull(actual)
-    }
-}
-
-@ExperimentalKotoolsTypesApi
 class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_the_same_object() {
@@ -116,6 +76,46 @@ class EmailAddressTest {
         val text: String = Texts.VALID
         val emailAddress: EmailAddress = checkNotNull(EmailAddress from text)
         assertEquals(expected = text, actual = "$emailAddress")
+    }
+}
+
+@ExperimentalKotoolsTypesApi
+class EmailAddressCompanionTest {
+    @Test
+    fun regex_should_pass() {
+        val actual: Regex = EmailAddress.regex
+        val expected = Regex("^\\S+@\\S+\\.\\S+\$")
+        assertEquals(expected.pattern, actual.pattern)
+    }
+
+    @Test
+    fun from_should_pass_with_a_valid_String() {
+        val actual: EmailAddress? = EmailAddress from Texts.VALID
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun from_should_fail_with_a_String_that_does_not_have_an_at_sign() {
+        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_AT_SIGN
+        assertNull(actual)
+    }
+
+    @Test
+    fun from_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_DOT
+        assertNull(actual)
+    }
+
+    @Test
+    fun from_should_fail_with_a_String_having_an_invalid_local_part() {
+        val actual: EmailAddress? = EmailAddress from Texts.INVALID_LOCAL_PART
+        assertNull(actual)
+    }
+
+    @Test
+    fun from_should_fail_with_a_String_having_an_invalid_domain() {
+        val actual: EmailAddress? = EmailAddress from Texts.INVALID_DOMAIN
+        assertNull(actual)
     }
 }
 
