@@ -15,7 +15,7 @@ import kotlin.jvm.JvmSynthetic
  * between the given [bounds].
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public fun <T : Comparable<T>> notEmptyRangeOf(
     bounds: NotEmptyRange.BuilderScope<T>.() -> Pair<Bound<T>, Bound<T>>
 ): NotEmptyRange<T> = NotEmptyRange.BuilderScope.create<T>()
@@ -33,7 +33,7 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
  * @param T the **covariant** type of values in this range.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public class NotEmptyRange<out T : Comparable<@UnsafeVariance T>>
 private constructor(
     /** The start of this range. */
@@ -85,7 +85,7 @@ private constructor(
  * otherwise.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_2_0)
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
     value: T
 ): Boolean {
