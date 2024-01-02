@@ -1,8 +1,3 @@
-<!--
-    Copyright 2022-2023 Loïc Lamarque and Kotools S.A.S.
-    Use of this source code is governed by the MIT license.
--->
-
 <!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
   <img src="images/logo.png" alt="">

@@ -1,8 +1,3 @@
-/*
- * Copyright 2023 Kotools S.A.S.
- * Use of this source code is governed by the MIT license.
- */
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)

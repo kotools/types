@@ -1,8 +1,3 @@
-/*
- * Copyright 2023 Loïc Lamarque.
- * Use of this source code is governed by the MIT license.
- */
-
 package kotools.types.collection
 
 import kotools.types.number.PositiveInt
