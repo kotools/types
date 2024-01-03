@@ -76,7 +76,7 @@ class EmailAddressTest {
 
     @Test
     fun structural_equality_should_pass_with_the_same_object() {
-        val first: EmailAddress = checkNotNull(EmailAddress from Texts.VALID)
+        val first = EmailAddress(Texts.VALID)
         val second: EmailAddress = first
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
@@ -85,15 +85,15 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
         val text: String = Texts.VALID
-        val first: EmailAddress = checkNotNull(EmailAddress from text)
-        val second: EmailAddress = checkNotNull(EmailAddress from text)
+        val first = EmailAddress(text)
+        val second = EmailAddress(text)
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
     }
 
     @Test
     fun structural_equality_should_fail_with_null() {
-        val first: EmailAddress = checkNotNull(EmailAddress from Texts.VALID)
+        val first = EmailAddress(Texts.VALID)
         val second: Any? = null
         assertNotEquals(first, second)
     }
@@ -101,7 +101,7 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_another_object_that_is_not_an_EmailAddress() {
         val text: String = Texts.VALID
-        val first: EmailAddress = checkNotNull(EmailAddress from text)
+        val first = EmailAddress(text)
         val second: Any = text
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
@@ -110,8 +110,8 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
         val text: String = Texts.VALID
-        val first: EmailAddress = checkNotNull(EmailAddress from text)
-        val second: EmailAddress = checkNotNull(EmailAddress from "${text}x")
+        val first = EmailAddress(text)
+        val second = EmailAddress("${text}x")
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
     }
@@ -119,7 +119,7 @@ class EmailAddressTest {
     @Test
     fun toString_should_pass() {
         val text: String = Texts.VALID
-        val emailAddress: EmailAddress = checkNotNull(EmailAddress from text)
+        val emailAddress = EmailAddress(text)
         assertEquals(expected = text, actual = "$emailAddress")
     }
 }
@@ -186,7 +186,7 @@ class EmailAddressSerializerTest {
     @Test
     fun serialization_should_behave_like_a_String() {
         val text: String = Texts.VALID
-        val address: EmailAddress = checkNotNull(EmailAddress from text)
+        val address = EmailAddress(text)
         val actual: String = Json.encodeToString(address)
         val expected: String = Json.encodeToString(text)
         assertEquals(expected, actual)
@@ -197,7 +197,7 @@ class EmailAddressSerializerTest {
         val text: String = Texts.VALID
         val encoded: String = Json.encodeToString(text)
         val actual: EmailAddress = Json.decodeFromString(encoded)
-        val expected: EmailAddress = checkNotNull(EmailAddress from text)
+        val expected = EmailAddress(text)
         assertEquals(expected, actual)
     }
 
