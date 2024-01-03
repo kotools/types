@@ -33,8 +33,7 @@ import kotlin.jvm.JvmSynthetic
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
  * ```kotlin
- * val address: EmailAddress =
- *     checkNotNull(EmailAddress from "contact@kotools.org")
+ * val address = EmailAddress("contact@kotools.org")
  * val encoded: String = Json.encodeToString(address)
  * println(encoded) // "contact@kotools.org"
  * val decoded: EmailAddress = Json.decodeFromString(encoded)
@@ -81,9 +80,8 @@ public class EmailAddress(private val text: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val first: EmailAddress =
-     *     checkNotNull(EmailAddress from "contact@kotools.org")
-     * val second: EmailAddress = checkNotNull(EmailAddress from "$first")
+     * val first = EmailAddress("contact@kotools.org")
+     * val second = EmailAddress("$first")
      * val result: Boolean = first == second // or first.equals(second)
      * println(result) // true
      * ```
@@ -104,9 +102,8 @@ public class EmailAddress(private val text: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val first: EmailAddress =
-     *     checkNotNull(EmailAddress from "contact@kotools.org")
-     * val second: EmailAddress = checkNotNull(EmailAddress from "$first")
+     * val first = EmailAddress("contact@kotools.org")
+     * val second = EmailAddress("$first")
      * val result: Boolean = first.hashCode() == second.hashCode()
      * println(result) // true
      * ```
@@ -125,8 +122,7 @@ public class EmailAddress(private val text: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val address: EmailAddress =
-     *     checkNotNull(EmailAddress from "contact@kotools.org")
+     * val address = EmailAddress("contact@kotools.org")
      * val message = "$address" // or address.toString()
      * println(message) // contact@kotools.org
      * ```
