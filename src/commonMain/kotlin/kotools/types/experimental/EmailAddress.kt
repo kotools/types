@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -18,9 +19,6 @@ import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
- *
- * You can use the [EmailAddress.Companion.from] function for creating an
- * instance of this type.
  *
  * <br>
  * <details>
@@ -43,11 +41,36 @@ import kotlin.jvm.JvmSynthetic
  * println(decoded == address) // true
  * ```
  * </details>
+ *
+ * @constructor Creates an email address from the specified [text], or throws an
+ * [IllegalArgumentException] if the [text] doesn't match the corresponding
+ * [regular expression][EmailAddress.Companion.regex].
+ *
+ * Here's an example of calling this constructor from Kotlin code:
+ *
+ * ```kotlin
+ * val address = EmailAddress("contact@kotools.org")
+ * println(address) // contact@kotools.org
+ * ```
+ *
+ * Here's an example of calling this constructor from Java code:
+ *
+ * ```java
+ * final EmailAddress address = EmailAddress("contact@kotools.org");
+ * System.out.println(address); // contact@kotools.org
+ * ```
+ *
+ * You can use the [EmailAddress.Companion.from] function for returning `null`
+ * instead of throwing an exception in case of invalid [text].
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @Serializable(EmailAddressSerializer::class)
-public class EmailAddress private constructor(private val value: String) {
+public class EmailAddress(private val text: String) {
+    init {
+        require(text matches regex) { creationErrorMessage }
+    }
+
     // -------------------------- Structural equality --------------------------
 
     /**
@@ -72,7 +95,7 @@ public class EmailAddress private constructor(private val value: String) {
     final override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other == null -> false
-        else -> other is EmailAddress && this.value == other.value
+        else -> other is EmailAddress && this.text == other.text
     }
 
     /**
@@ -92,7 +115,7 @@ public class EmailAddress private constructor(private val value: String) {
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
-    final override fun hashCode(): Int = hashCodeOf(this.value)
+    final override fun hashCode(): Int = hashCodeOf(text)
 
     // ------------------------------ Converters -------------------------------
 
@@ -112,7 +135,7 @@ public class EmailAddress private constructor(private val value: String) {
      */
     @JvmSynthetic
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = value
+    final override fun toString(): String = text
 
     // -------------------------------------------------------------------------
 
@@ -147,6 +170,10 @@ public class EmailAddress private constructor(private val value: String) {
         public val regex: Regex =
             Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
 
+        @get:JvmSynthetic
+        internal val creationErrorMessage: ErrorMessage
+            get() = ErrorMessage("Email address should match $regex")
+
         /**
          * Creates an email address from the specified [text], or returns `null`
          * if the [text] doesn't match the corresponding
@@ -160,6 +187,9 @@ public class EmailAddress private constructor(private val value: String) {
          * ```
          *
          * Please note that this function is not available yet for Java users.
+         *
+         * You can use the `EmailAddress(String)` constructor for throwing an
+         * exception instead of returning `null` in case of invalid [text].
          */
         @JvmSynthetic
         public infix fun from(text: String): EmailAddress? =
