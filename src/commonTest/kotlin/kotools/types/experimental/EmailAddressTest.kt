@@ -30,6 +30,51 @@ private object Texts {
 @ExperimentalKotoolsTypesApi
 class EmailAddressTest {
     @Test
+    fun constructor_should_pass_with_a_valid_String() {
+        EmailAddress(Texts.VALID)
+    }
+
+    @Test
+    fun constructor_should_fail_with_a_String_that_does_not_have_an_at_sign() {
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress(Texts.WITHOUT_AT_SIGN)
+        }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = EmailAddress.creationErrorMessage
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun constructor_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress(Texts.WITHOUT_DOT)
+        }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = EmailAddress.creationErrorMessage
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun constructor_should_fail_with_a_String_having_an_invalid_local_part() {
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress(Texts.INVALID_LOCAL_PART)
+        }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = EmailAddress.creationErrorMessage
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun constructor_should_fail_with_a_String_having_an_invalid_domain() {
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress(Texts.INVALID_DOMAIN)
+        }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage = EmailAddress.creationErrorMessage
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
     fun structural_equality_should_pass_with_the_same_object() {
         val first: EmailAddress = checkNotNull(EmailAddress from Texts.VALID)
         val second: EmailAddress = first
