@@ -1,10 +1,7 @@
 # Module Kotools Types
 
-Library providing explicit types for the following platforms:
-- [Kotlin/JVM](https://kotlinlang.org/docs/jvm-get-started.html)
-- [Kotlin/JS](https://kotlinlang.org/docs/js-overview.html)
-- [Kotlin Native](https://kotlinlang.org/docs/native-overview.html) for Linux
-  x64, macOS x64 and MinGW x64 systems.
+Explicit types for
+[Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform).
 
 # Package kotools.types.collection
 
