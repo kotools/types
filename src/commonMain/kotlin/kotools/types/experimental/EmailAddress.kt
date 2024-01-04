@@ -165,6 +165,12 @@ public class EmailAddress(private val text: String) {
     /**
      * Returns the string representation of this email address.
      *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
@@ -172,10 +178,23 @@ public class EmailAddress(private val text: String) {
      * val message = "$address" // or address.toString()
      * println(message) // contact@kotools.org
      * ```
+     * </details>
      *
-     * Please note that this function is not available yet for Java users.
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final EmailAddress address = new EmailAddress("contact@kotools.org");
+     * final String message = address.toString();
+     * System.out.println(message); // contact@kotools.org
+     * ```
+     * </details>
      */
-    @JvmSynthetic
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = text
 

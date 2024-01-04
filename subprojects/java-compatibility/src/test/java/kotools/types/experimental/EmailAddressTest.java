@@ -28,4 +28,12 @@ public class EmailAddressTest {
                 .hashCode();
         Assertions.assertEquals(first, second);
     }
+
+    @Test
+    public void toString_should_pass() {
+        final String expected = "contact@kotools.org";
+        final EmailAddress address = new EmailAddress(expected);
+        final String actual = address.toString();
+        Assertions.assertEquals(expected, actual);
+    }
 }
