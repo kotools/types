@@ -18,4 +18,14 @@ public class EmailAddressTest {
         final EmailAddress second = new EmailAddress(text);
         Assertions.assertEquals(first, second);
     }
+
+    @Test
+    public void hashCode_should_pass() {
+        final String text = "contact@kotools.org";
+        final int first = new EmailAddress(text)
+                .hashCode();
+        final int second = new EmailAddress(text)
+                .hashCode();
+        Assertions.assertEquals(first, second);
+    }
 }

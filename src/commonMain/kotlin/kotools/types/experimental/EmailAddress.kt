@@ -106,18 +106,43 @@ public class EmailAddress(private val text: String) {
     /**
      * Returns a hash code value for this email address.
      *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val first = EmailAddress("contact@kotools.org")
-     * val second = EmailAddress("$first")
-     * val result: Boolean = first.hashCode() == second.hashCode()
+     * val text = "contact@kotools.org"
+     * val first: Int = EmailAddress(text)
+     *     .hashCode()
+     * val second: Int = EmailAddress("$first")
+     *     .hashCode()
+     * val result: Boolean = first == second
      * println(result) // true
      * ```
+     * </details>
      *
-     * Please note that this function is not available yet for Java users.
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final String text = "contact@kotools.org";
+     * final int first = new EmailAddress(text)
+     *         .hashCode();
+     * final int second = new EmailAddress(text)
+     *         .hashCode();
+     * final boolean result = first == second;
+     * System.out.println(result); // true
+     * ```
      */
-    @JvmSynthetic
     @Suppress("RedundantModalityModifier")
     final override fun hashCode(): Int = hashCodeOf(text)
 
