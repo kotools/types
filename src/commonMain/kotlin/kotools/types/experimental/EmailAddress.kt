@@ -77,6 +77,12 @@ public class EmailAddress(private val text: String) {
      * string representation as this email address, or returns `false`
      * otherwise.
      *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
@@ -85,6 +91,13 @@ public class EmailAddress(private val text: String) {
      * val result: Boolean = first == second // or first.equals(second)
      * println(result) // true
      * ```
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
      *
      * Here's an example of calling this function from Java code:
      *
@@ -95,6 +108,7 @@ public class EmailAddress(private val text: String) {
      * final boolean result = first.equals(second);
      * System.out.println(result); // true
      * ```
+     * </details>
      */
     @Suppress("RedundantModalityModifier")
     final override fun equals(other: Any?): Boolean = when {
