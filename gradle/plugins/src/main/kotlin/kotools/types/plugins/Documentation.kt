@@ -7,7 +7,6 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
-import org.gradle.api.provider.Provider
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.Copy
@@ -41,9 +40,23 @@ public class DocumentationPlugin : Plugin<Project> {
 private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
     withType<DokkaTask>().configureEach {
         project.logger.lifecycle("> Configuring task ${this.path}")
-        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            customAssets = listOf(project.logoIcon)
-            footerMessage = project.copyright
+        this.moduleName.set("Kotools Types")
+        this.outputDirectory.let {
+            val dokkaDirectory: File = project.buildDir.resolve("dokka")
+            it.set(dokkaDirectory)
+        }
+        this.dokkaSourceSets.configureEach {
+            this.includes.from += project.file("src/packages.md")
+            this.reportUndocumented.set(true)
+            this.skipEmptyPackages.set(true)
+        }
+        this.pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            this.customAssets = listOf(project.logoIcon)
+            this.footerMessage = project.copyright
+        }
+        this.pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+            this.version = project.version.toString()
+            this.olderVersionsDir = project.file("api/references")
         }
     }
 
@@ -63,21 +76,6 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
     val archiveApiReferenceTask: TaskProvider<Copy> =
         register<Copy>("archiveApiReference")
     val dokkaHtml: TaskProvider<DokkaTask> = named<DokkaTask>("dokkaHtml") {
-        moduleName.set("Kotools Types")
-        dokkaSourceSets.configureEach {
-            includes.from +=
-                project.layout.projectDirectory.file("src/packages.md")
-            reportUndocumented.set(true)
-            skipEmptyPackages.set(true)
-        }
-        pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-            version = project.version.toString()
-            olderVersionsDir = apiReferencesDir.asFile
-        }
-        val outputDir: Provider<File> = project.layout.buildDirectory
-            .dir("dokka")
-            .map { it.asFile }
-        outputDirectory.set(outputDir)
         finalizedBy(archiveApiReferenceTask)
     }
     val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
