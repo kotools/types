@@ -9,30 +9,30 @@ public class EmailAddressTest {
     private static final String TEXT_SAMPLE = "contact@kotools.org";
 
     @Test
-    public void constructor_should_pass() {
-        Assertions.assertDoesNotThrow(() -> new EmailAddress(TEXT_SAMPLE));
-    }
-
-    @Test
     public void equals_should_pass() {
-        final EmailAddress first = new EmailAddress(TEXT_SAMPLE);
-        final EmailAddress second = new EmailAddress(TEXT_SAMPLE);
+        final EmailAddress first = EmailAddress.Companion.from(TEXT_SAMPLE);
+        Assertions.assertNotNull(first);
+        final EmailAddress second = EmailAddress.Companion.from(TEXT_SAMPLE);
+        Assertions.assertNotNull(second);
         Assertions.assertEquals(first, second);
     }
 
     @Test
     public void hashCode_should_pass() {
-        final int first = new EmailAddress(TEXT_SAMPLE)
-                .hashCode();
-        final int second = new EmailAddress(TEXT_SAMPLE)
-                .hashCode();
-        Assertions.assertEquals(first, second);
+        final EmailAddress first = EmailAddress.Companion.from(TEXT_SAMPLE);
+        Assertions.assertNotNull(first);
+        final EmailAddress second = EmailAddress.Companion.from(TEXT_SAMPLE);
+        Assertions.assertNotNull(second);
+        final int firstHashCode = first.hashCode();
+        final int secondHashCode = second.hashCode();
+        Assertions.assertEquals(firstHashCode, secondHashCode);
     }
 
     @Test
     public void toString_should_pass() {
         final String expected = TEXT_SAMPLE;
-        final EmailAddress address = new EmailAddress(expected);
+        final EmailAddress address = EmailAddress.Companion.from(expected);
+        Assertions.assertNotNull(address);
         final String actual = address.toString();
         Assertions.assertEquals(expected, actual);
     }

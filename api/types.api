@@ -119,7 +119,7 @@ public abstract interface class kotools/types/experimental/Bound {
 public final class kotools/types/experimental/EmailAddress {
 	public static final field Companion Lkotools/types/experimental/EmailAddress$Companion;
 	public static final field regex Lkotlin/text/Regex;
-	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun equals (Ljava/lang/Object;)Z
 	public final fun hashCode ()I
 	public final fun toString ()Ljava/lang/String;
