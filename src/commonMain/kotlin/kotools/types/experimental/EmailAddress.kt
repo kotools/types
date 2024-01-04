@@ -86,9 +86,16 @@ public class EmailAddress(private val text: String) {
      * println(result) // true
      * ```
      *
-     * Please note that this function is not available yet for Java users.
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final String text = "contact@kotools.org";
+     * final EmailAddress first = new EmailAddress(text);
+     * final EmailAddress second = new EmailAddress(text);
+     * final boolean result = first.equals(second);
+     * System.out.println(result); // true
+     * ```
      */
-    @JvmSynthetic
     @Suppress("RedundantModalityModifier")
     final override fun equals(other: Any?): Boolean = when {
         this === other -> true
