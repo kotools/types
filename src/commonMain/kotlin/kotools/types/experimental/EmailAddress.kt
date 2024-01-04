@@ -15,6 +15,7 @@ import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.text.SpecialChar
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -234,15 +235,33 @@ public class EmailAddress(private val text: String) {
          * - `$` **End.** Matches the end of the string, or the end of a line if
          * the multiline flag (m) is enabled.
          *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this property from Kotlin code:
          *
          * ```kotlin
          * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
          * ```
+         * </details>
          *
-         * Please note that this property is not available yet for Java users.
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Java code:
+         *
+         * ```java
+         * System.out.println(EmailAddress.regex); // ^\S+@\S+\.\S+$
+         * ```
+         * </details>
          */
-        @get:JvmSynthetic
+        @JvmField
         public val regex: Regex =
             Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
 
