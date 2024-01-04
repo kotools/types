@@ -41,6 +41,7 @@ private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
     withType<DokkaTask>().configureEach {
         project.logger.lifecycle("> Configuring task ${this.path}")
         this.moduleName.set("Kotools Types")
+        this.failOnWarning.set(true)
         this.outputDirectory.let {
             val dokkaDirectory: File = project.buildDir.resolve("dokka")
             it.set(dokkaDirectory)
@@ -71,8 +72,6 @@ private val Project.logoIcon: File
 // -----------------------------------------------------------------------------
 
 private fun TaskContainer.configureDokkaHtml(project: Project) {
-    val apiReferencesDir: Directory =
-        project.layout.projectDirectory.dir("api/references")
     val archiveApiReferenceTask: TaskProvider<Copy> =
         register<Copy>("archiveApiReference")
     val dokkaHtml: TaskProvider<DokkaTask> = named<DokkaTask>("dokkaHtml") {
@@ -85,7 +84,8 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
         description("Archives the API reference.")
         onlyIf { "SNAPSHOT" !in "${project.version}" }
         from(dokkaHtml)
-        val destination: Directory = apiReferencesDir.dir("${project.version}")
+        val destination: Directory = project.layout.projectDirectory
+            .dir("api/references/${project.version}")
         into(destination)
         finalizedBy(deleteOlderDirInArchivedApiReference)
     }
