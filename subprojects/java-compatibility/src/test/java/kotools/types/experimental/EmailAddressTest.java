@@ -48,9 +48,9 @@ public class EmailAddressTest {
         }
 
         @Test
-        public void orNull_should_pass() {
+        public void from_should_pass() {
             final EmailAddress actual =
-                    EmailAddress.Companion.orNull(TEXT_SAMPLE);
+                    EmailAddress.Companion.from(TEXT_SAMPLE);
             Assertions.assertNotNull(actual);
         }
     }
