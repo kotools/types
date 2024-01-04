@@ -10,7 +10,7 @@ on:
       - api/types.api
       - qodana.yaml
   push:
-    branches: [ main ]
+    branches: [ main, release/* ]
     paths:
       - '**gradle*'
       - '**.java'
