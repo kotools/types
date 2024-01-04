@@ -75,7 +75,7 @@ import kotlin.jvm.JvmSynthetic
  * </details>
  * <br>
  *
- * You can use the [EmailAddress.Companion.orNull] function for returning `null`
+ * You can use the [EmailAddress.Companion.from] function for returning `null`
  * instead of throwing an exception in case of invalid [text].
  */
 @ExperimentalKotoolsTypesApi
@@ -283,8 +283,7 @@ public class EmailAddress(private val text: String) {
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * val address: EmailAddress? =
-         *     EmailAddress orNull "contact@kotools.org"
+         * val address: EmailAddress? = EmailAddress from "contact@kotools.org"
          * println(address) // contact@kotools.org
          * ```
          * </details>
@@ -299,7 +298,7 @@ public class EmailAddress(private val text: String) {
          *
          * ```java
          * final EmailAddress address =
-         *         EmailAddress.Companion.orNull("contact@kotools.org");
+         *         EmailAddress.Companion.from("contact@kotools.org");
          * System.out.println(address); // contact@kotools.org
          * ```
          * </details>
@@ -308,7 +307,7 @@ public class EmailAddress(private val text: String) {
          * You can use the `EmailAddress(String)` constructor for throwing an
          * exception instead of returning `null` in case of invalid [text].
          */
-        public infix fun orNull(text: String): EmailAddress? =
+        public infix fun from(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)
             else null
     }
@@ -327,7 +326,7 @@ private object EmailAddressSerializer : KSerializer<EmailAddress> {
 
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
-        return EmailAddress.orNull(text)
+        return EmailAddress.from(text)
             ?: deserializationError<EmailAddress>(text)
     }
 }

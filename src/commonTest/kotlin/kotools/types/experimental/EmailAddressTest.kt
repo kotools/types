@@ -134,32 +134,32 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun orNull_should_pass_with_a_valid_String() {
-        val actual: EmailAddress? = EmailAddress orNull Texts.VALID
+    fun from_should_pass_with_a_valid_String() {
+        val actual: EmailAddress? = EmailAddress from Texts.VALID
         assertNotNull(actual)
     }
 
     @Test
-    fun orNull_should_fail_with_a_String_that_does_not_have_an_at_sign() {
-        val actual: EmailAddress? = EmailAddress orNull Texts.WITHOUT_AT_SIGN
+    fun from_should_fail_with_a_String_that_does_not_have_an_at_sign() {
+        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_AT_SIGN
         assertNull(actual)
     }
 
     @Test
-    fun orNull_should_fail_with_a_String_that_does_not_have_a_dot() {
-        val actual: EmailAddress? = EmailAddress orNull Texts.WITHOUT_DOT
+    fun from_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_DOT
         assertNull(actual)
     }
 
     @Test
-    fun orNull_should_fail_with_a_String_having_an_invalid_local_part() {
-        val actual: EmailAddress? = EmailAddress orNull Texts.INVALID_LOCAL_PART
+    fun from_should_fail_with_a_String_having_an_invalid_local_part() {
+        val actual: EmailAddress? = EmailAddress from Texts.INVALID_LOCAL_PART
         assertNull(actual)
     }
 
     @Test
-    fun orNull_should_fail_with_a_String_having_an_invalid_domain() {
-        val actual: EmailAddress? = EmailAddress orNull Texts.INVALID_DOMAIN
+    fun from_should_fail_with_a_String_having_an_invalid_domain() {
+        val actual: EmailAddress? = EmailAddress from Texts.INVALID_DOMAIN
         assertNull(actual)
     }
 }
