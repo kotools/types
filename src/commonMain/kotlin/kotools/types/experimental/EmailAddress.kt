@@ -255,6 +255,12 @@ public class EmailAddress(private val text: String) {
          * if the [text] doesn't match the corresponding
          * [regular expression][EmailAddress.Companion.regex].
          *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
@@ -262,13 +268,27 @@ public class EmailAddress(private val text: String) {
          *     EmailAddress orNull "contact@kotools.org"
          * println(address) // contact@kotools.org
          * ```
+         * </details>
          *
-         * Please note that this function is not available yet for Java users.
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * ```java
+         * final EmailAddress address =
+         *         EmailAddress.Companion.orNull("contact@kotools.org");
+         * System.out.println(address); // contact@kotools.org
+         * ```
+         * </details>
+         * <br>
          *
          * You can use the `EmailAddress(String)` constructor for throwing an
          * exception instead of returning `null` in case of invalid [text].
          */
-        @JvmSynthetic
         public infix fun orNull(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)
             else null

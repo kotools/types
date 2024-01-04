@@ -126,7 +126,7 @@ public final class kotools/types/experimental/EmailAddress {
 
 public final class kotools/types/experimental/EmailAddress$Companion {
 	public final synthetic fun getRegex ()Lkotlin/text/Regex;
-	public final synthetic fun orNull (Ljava/lang/String;)Lkotools/types/experimental/EmailAddress;
+	public final fun orNull (Ljava/lang/String;)Lkotools/types/experimental/EmailAddress;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
