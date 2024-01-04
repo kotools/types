@@ -8,6 +8,24 @@ import org.junit.jupiter.api.Test;
 public class EmailAddressTest {
     private static final String TEXT_SAMPLE = "contact@kotools.org";
 
+    @Nested
+    public class Companion {
+        @Test
+        public void regex_should_pass() {
+            final Regex regex = EmailAddress.regex;
+            final String actualPattern = regex.getPattern();
+            final String expectedPattern = "^\\S+@\\S+\\.\\S+$";
+            Assertions.assertEquals(expectedPattern, actualPattern);
+        }
+
+        @Test
+        public void from_should_pass() {
+            final EmailAddress actual =
+                    EmailAddress.Companion.from(TEXT_SAMPLE);
+            Assertions.assertNotNull(actual);
+        }
+    }
+
     @Test
     public void equals_should_pass() {
         final EmailAddress first = EmailAddress.Companion.from(TEXT_SAMPLE);
@@ -35,23 +53,5 @@ public class EmailAddressTest {
         Assertions.assertNotNull(address);
         final String actual = address.toString();
         Assertions.assertEquals(expected, actual);
-    }
-
-    @Nested
-    public class Companion {
-        @Test
-        public void regex_should_pass() {
-            final Regex regex = EmailAddress.regex;
-            final String actualPattern = regex.getPattern();
-            final String expectedPattern = "^\\S+@\\S+\\.\\S+$";
-            Assertions.assertEquals(expectedPattern, actualPattern);
-        }
-
-        @Test
-        public void from_should_pass() {
-            final EmailAddress actual =
-                    EmailAddress.Companion.from(TEXT_SAMPLE);
-            Assertions.assertNotNull(actual);
-        }
     }
 }

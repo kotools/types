@@ -48,6 +48,94 @@ import kotlin.jvm.JvmField
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @Serializable(EmailAddressSerializer::class)
 public class EmailAddress private constructor(private val text: String) {
+    /** Contains static declarations for the [EmailAddress] type. */
+    public companion object {
+        /**
+         * The regular expression that an [EmailAddress] should match.
+         *
+         * The underlying pattern is `^\S+@\S+\.\S+$`.
+         *
+         * Here's the explanation associated to each symbol used in this regular
+         * expression:
+         * - `^` **Beginning.** Matches the beginning of the string, or the
+         * beginning of a line if the multiline flag (m) is enabled.
+         * - `\S` **Not whitespace.** Matches any character that is not a
+         * whitespace character (spaces, tabs, line breaks).
+         * - `+` **Quantifier.** Match 1 or more of the preceding token.
+         * - `@` **Character.** Matches a "@" character (char code 64).
+         * - `\.` **Escaped character.** Matches a "." character (char code 46).
+         * - `$` **End.** Matches the end of the string, or the end of a line if
+         * the multiline flag (m) is enabled.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Kotlin code:
+         *
+         * ```kotlin
+         * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
+         * ```
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Java code:
+         *
+         * ```java
+         * System.out.println(EmailAddress.regex); // ^\S+@\S+\.\S+$
+         * ```
+         * </details>
+         */
+        @JvmField
+        public val regex: Regex =
+            Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
+
+        /**
+         * Creates an email address from the specified [text], or returns `null`
+         * if the [text] doesn't match the corresponding
+         * [regular expression][EmailAddress.Companion.regex].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val address: EmailAddress? = EmailAddress from "contact@kotools.org"
+         * println(address) // contact@kotools.org
+         * ```
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * ```java
+         * final EmailAddress address =
+         *         EmailAddress.Companion.from("contact@kotools.org");
+         * System.out.println(address); // contact@kotools.org
+         * ```
+         * </details>
+         */
+        public infix fun from(text: String): EmailAddress? =
+            if (text matches regex) EmailAddress(text)
+            else null
+    }
+
     // -------------------------- Structural equality --------------------------
 
     /**
@@ -183,96 +271,6 @@ public class EmailAddress private constructor(private val text: String) {
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = text
-
-    // -------------------------------------------------------------------------
-
-    /** Contains static declarations for the [EmailAddress] type. */
-    public companion object {
-        /**
-         * The regular expression that an [EmailAddress] should match.
-         *
-         * The underlying pattern is `^\S+@\S+\.\S+$`.
-         *
-         * Here's the explanation associated to each symbol used in this regular
-         * expression:
-         * - `^` **Beginning.** Matches the beginning of the string, or the
-         * beginning of a line if the multiline flag (m) is enabled.
-         * - `\S` **Not whitespace.** Matches any character that is not a
-         * whitespace character (spaces, tabs, line breaks).
-         * - `+` **Quantifier.** Match 1 or more of the preceding token.
-         * - `@` **Character.** Matches a "@" character (char code 64).
-         * - `\.` **Escaped character.** Matches a "." character (char code 46).
-         * - `$` **End.** Matches the end of the string, or the end of a line if
-         * the multiline flag (m) is enabled.
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Kotlin code:
-         *
-         * ```kotlin
-         * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
-         * ```
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Java code:
-         *
-         * ```java
-         * System.out.println(EmailAddress.regex); // ^\S+@\S+\.\S+$
-         * ```
-         * </details>
-         */
-        @JvmField
-        public val regex: Regex =
-            Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
-
-        /**
-         * Creates an email address from the specified [text], or returns `null`
-         * if the [text] doesn't match the corresponding
-         * [regular expression][EmailAddress.Companion.regex].
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * ```kotlin
-         * val address: EmailAddress? = EmailAddress from "contact@kotools.org"
-         * println(address) // contact@kotools.org
-         * ```
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * ```java
-         * final EmailAddress address =
-         *         EmailAddress.Companion.from("contact@kotools.org");
-         * System.out.println(address); // contact@kotools.org
-         * ```
-         * </details>
-         */
-        public infix fun from(text: String): EmailAddress? =
-            if (text matches regex) EmailAddress(text)
-            else null
-    }
 }
 
 @ExperimentalKotoolsTypesApi
