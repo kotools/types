@@ -45,12 +45,25 @@ import kotlin.jvm.JvmSynthetic
  * [IllegalArgumentException] if the [text] doesn't match the corresponding
  * [regular expression][EmailAddress.Companion.regex].
  *
+ * <br>
+ * <details open>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this constructor from Kotlin code:
  *
  * ```kotlin
  * val address = EmailAddress("contact@kotools.org")
  * println(address) // contact@kotools.org
  * ```
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Java</b>
+ * </summary>
  *
  * Here's an example of calling this constructor from Java code:
  *
@@ -58,6 +71,8 @@ import kotlin.jvm.JvmSynthetic
  * final EmailAddress address = EmailAddress("contact@kotools.org");
  * System.out.println(address); // contact@kotools.org
  * ```
+ * </details>
+ * <br>
  *
  * You can use the [EmailAddress.Companion.orNull] function for returning `null`
  * instead of throwing an exception in case of invalid [text].
