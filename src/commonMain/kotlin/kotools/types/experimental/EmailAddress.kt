@@ -15,7 +15,6 @@ import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.text.SpecialChar
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -91,13 +90,14 @@ public class EmailAddress private constructor(private val text: String) {
          * Here's an example of calling this property from Java code:
          *
          * ```java
-         * System.out.println(EmailAddress.regex); // ^\S+@\S+\.\S+$
+         * final Regex regex = EmailAddress.Companion.getRegex();
+         * System.out.println(regex); // ^\S+@\S+\.\S+$
          * ```
          * </details>
          */
-        @JvmField
-        public val regex: Regex =
+        public val regex: Regex by lazy {
             Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
+        }
 
         /**
          * Creates an email address from the specified [text], or throws an
