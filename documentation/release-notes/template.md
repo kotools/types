@@ -47,20 +47,6 @@ provided by this library.
 
 ## Features and improvements
 
-## Resolved issues and requests
-
-$X issues and $X requests have been resolved in Kotools Types $VERSION.
-
-<details>
-<summary>Issues</summary>
-
-</details>
-
-<details>
-<summary>Requests</summary>
-
-</details>
-
 ## External contributions
 
 As an Open-Source project, we love getting contributions from our community!
