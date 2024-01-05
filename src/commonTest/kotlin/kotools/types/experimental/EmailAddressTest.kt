@@ -37,32 +37,35 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun from_should_pass_with_a_valid_String() {
-        val actual: EmailAddress? = EmailAddress from Texts.VALID
+    fun createOrNull_should_pass_with_a_valid_String() {
+        val actual: EmailAddress? = EmailAddress.createOrNull(Texts.VALID)
         assertNotNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_that_does_not_have_an_at_sign() {
-        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_AT_SIGN
+    fun createOrNull_should_fail_with_a_String_that_does_not_have_an_at_sign() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull(Texts.WITHOUT_AT_SIGN)
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_that_does_not_have_a_dot() {
-        val actual: EmailAddress? = EmailAddress from Texts.WITHOUT_DOT
+    fun createOrNull_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val actual: EmailAddress? = EmailAddress.createOrNull(Texts.WITHOUT_DOT)
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_having_an_invalid_local_part() {
-        val actual: EmailAddress? = EmailAddress from Texts.INVALID_LOCAL_PART
+    fun createOrNull_should_fail_with_a_String_having_an_invalid_local_part() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull(Texts.INVALID_LOCAL_PART)
         assertNull(actual)
     }
 
     @Test
-    fun from_should_fail_with_a_String_having_an_invalid_domain() {
-        val actual: EmailAddress? = EmailAddress from Texts.INVALID_DOMAIN
+    fun createOrNull_should_fail_with_a_String_having_an_invalid_domain() {
+        val actual: EmailAddress? =
+            EmailAddress.createOrNull(Texts.INVALID_DOMAIN)
         assertNull(actual)
     }
 }
@@ -71,7 +74,8 @@ class EmailAddressCompanionTest {
 class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_the_same_object() {
-        val first: EmailAddress = requireNotNull(EmailAddress from Texts.VALID)
+        val first: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(Texts.VALID))
         val second: EmailAddress = first
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
@@ -80,15 +84,18 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
         val text: String = Texts.VALID
-        val first: EmailAddress = requireNotNull(EmailAddress from text)
-        val second: EmailAddress = requireNotNull(EmailAddress from text)
+        val first: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
+        val second: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
     }
 
     @Test
     fun structural_equality_should_fail_with_null() {
-        val first: EmailAddress = requireNotNull(EmailAddress from Texts.VALID)
+        val first: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(Texts.VALID))
         val second: Any? = null
         assertNotEquals(first, second)
     }
@@ -96,7 +103,8 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_another_object_that_is_not_an_EmailAddress() {
         val text: String = Texts.VALID
-        val first: EmailAddress = requireNotNull(EmailAddress from text)
+        val first: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
         val second: Any = text
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
@@ -105,8 +113,10 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
         val text: String = Texts.VALID
-        val first: EmailAddress = requireNotNull(EmailAddress from text)
-        val second: EmailAddress = requireNotNull(EmailAddress from "${text}x")
+        val first: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
+        val second: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull("${text}x"))
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
     }
@@ -114,7 +124,8 @@ class EmailAddressTest {
     @Test
     fun toString_should_pass() {
         val text: String = Texts.VALID
-        val address: EmailAddress = requireNotNull(EmailAddress from text)
+        val address: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
         val actual: String = address.toString()
         assertEquals(expected = text, actual)
     }
@@ -142,7 +153,8 @@ class EmailAddressSerializerTest {
     @Test
     fun serialization_should_behave_like_a_String() {
         val text: String = Texts.VALID
-        val address: EmailAddress = requireNotNull(EmailAddress from text)
+        val address: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
         val actual: String = Json.encodeToString(address)
         val expected: String = Json.encodeToString(text)
         assertEquals(expected, actual)
@@ -153,7 +165,8 @@ class EmailAddressSerializerTest {
         val text: String = Texts.VALID
         val encoded: String = Json.encodeToString(text)
         val actual: EmailAddress = Json.decodeFromString(encoded)
-        val expected: EmailAddress = requireNotNull(EmailAddress from text)
+        val expected: EmailAddress =
+            requireNotNull(EmailAddress.createOrNull(text))
         assertEquals(expected, actual)
     }
 
