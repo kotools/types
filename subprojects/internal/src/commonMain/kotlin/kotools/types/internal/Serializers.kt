@@ -26,3 +26,21 @@ public fun <T : Any> intSerializer(
     override fun deserialize(decoder: Decoder): T =
         deserializationStrategy.deserialize(decoder)
 }
+
+/**
+ * Creates a serializer with the specified [deserializationStrategy] for
+ * serializing the type [T] as [String].
+ */
+public fun <T : Any> stringSerializer(
+    deserializationStrategy: DeserializationStrategy<T>
+): KSerializer<T> = object : KSerializer<T> {
+    override val descriptor: SerialDescriptor by lazy {
+        deserializationStrategy.descriptor
+    }
+
+    override fun serialize(encoder: Encoder, value: T): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): T =
+        deserializationStrategy.deserialize(decoder)
+}
