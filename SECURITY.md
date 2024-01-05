@@ -7,6 +7,7 @@ updates:
 
 | Version | Supported          |
 |---------|--------------------|
+| 4.4.x   | :white_check_mark: |
 | 4.3.x   | :white_check_mark: |
 | 4.2.x   | :white_check_mark: |
 | < 4.2.0 | :x:                |
