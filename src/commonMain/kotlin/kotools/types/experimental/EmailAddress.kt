@@ -19,8 +19,8 @@ import kotlin.jvm.JvmField
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
- * You can use the [EmailAddress.Companion.from] function for creating an
- * instance of this type.
+ * You can use the [EmailAddress.Companion.createOrNull] function for creating
+ * an instance of this type.
  *
  * <br>
  * <details>
@@ -36,7 +36,7 @@ import kotlin.jvm.JvmField
  *
  * ```kotlin
  * val address: EmailAddress =
- *     requireNotNull(EmailAddress from "contact@kotools.org")
+ *     requireNotNull(EmailAddress.createOrNull("contact@kotools.org"))
  * val encoded: String = Json.encodeToString(address)
  * println(encoded) // "contact@kotools.org"
  * val decoded: EmailAddress = Json.decodeFromString(encoded)
@@ -111,7 +111,8 @@ public class EmailAddress private constructor(private val text: String) {
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * val address: EmailAddress? = EmailAddress from "contact@kotools.org"
+         * val address: EmailAddress? =
+         *     EmailAddress.createOrNull("contact@kotools.org")
          * println(address) // contact@kotools.org
          * ```
          * </details>
@@ -126,12 +127,12 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * ```java
          * final EmailAddress address =
-         *         EmailAddress.Companion.from("contact@kotools.org");
+         *         EmailAddress.Companion.createOrNull("contact@kotools.org");
          * System.out.println(address); // contact@kotools.org
          * ```
          * </details>
          */
-        public infix fun from(text: String): EmailAddress? =
+        public fun createOrNull(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)
             else null
     }
@@ -153,8 +154,9 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * ```kotlin
      * val first: EmailAddress =
-     *     requireNotNull(EmailAddress from "contact@kotools.org")
-     * val second: EmailAddress = requireNotNull(EmailAddress from "$first")
+     *     requireNotNull(EmailAddress.createOrNull("contact@kotools.org"))
+     * val second: EmailAddress =
+     *     requireNotNull(EmailAddress.createOrNull("$first"))
      * val result: Boolean = first == second // or first.equals(second)
      * println(result) // true
      * ```
@@ -170,8 +172,8 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * ```java
      * final String text = "contact@kotools.org";
-     * final EmailAddress first = EmailAddress.Companion.from(text);
-     * final EmailAddress second = EmailAddress.Companion.from(text);
+     * final EmailAddress first = EmailAddress.Companion.createOrNull(text);
+     * final EmailAddress second = EmailAddress.Companion.createOrNull(text);
      * if (first == null || second == null)
      *     throw new IllegalArgumentException();
      * final boolean result = first.equals(second);
@@ -199,9 +201,9 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * ```kotlin
      * val text = "contact@kotools.org"
-     * val first: Int = requireNotNull(EmailAddress from text)
+     * val first: Int = requireNotNull(EmailAddress.createOrNull(text))
      *     .hashCode()
-     * val second: Int = requireNotNull(EmailAddress from "$first")
+     * val second: Int = requireNotNull(EmailAddress.createOrNull("$first"))
      *     .hashCode()
      * val result: Boolean = first == second
      * println(result) // true
@@ -218,8 +220,8 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * ```java
      * final String text = "contact@kotools.org";
-     * final EmailAddress first = EmailAddress.Companion.from(text);
-     * final EmailAddress second = EmailAddress.Companion.from(text);
+     * final EmailAddress first = EmailAddress.Companion.createOrNull(text);
+     * final EmailAddress second = EmailAddress.Companion.createOrNull(text);
      * if (first == null || second == null)
      *     throw new IllegalArgumentException();
      * final int firstHashCode = first.hashCode();
@@ -246,7 +248,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * ```kotlin
      * val address: EmailAddress =
-     *     requireNotNull(EmailAddress from "contact@kotools.org")
+     *     requireNotNull(EmailAddress.createOrNull("contact@kotools.org"))
      * val message = "$address" // or address.toString()
      * println(message) // contact@kotools.org
      * ```
@@ -262,7 +264,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * ```java
      * final EmailAddress address =
-     *         EmailAddress.Companion.from("contact@kotools.org");
+     *         EmailAddress.Companion.createOrNull("contact@kotools.org");
      * if (address == null) throw new IllegalArgumentException();
      * final String message = address.toString();
      * System.out.println(message); // contact@kotools.org
@@ -286,7 +288,7 @@ private object EmailAddressSerializer : KSerializer<EmailAddress> {
 
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
-        return EmailAddress.from(text)
+        return EmailAddress.createOrNull(text)
             ?: deserializationError<EmailAddress>(text)
     }
 }

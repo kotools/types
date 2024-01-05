@@ -21,25 +21,29 @@ public class EmailAddressTest {
         @Test
         public void from_should_pass() {
             final EmailAddress actual =
-                    EmailAddress.Companion.from(TEXT_SAMPLE);
+                    EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
             Assertions.assertNotNull(actual);
         }
     }
 
     @Test
     public void equals_should_pass() {
-        final EmailAddress first = EmailAddress.Companion.from(TEXT_SAMPLE);
+        final EmailAddress first =
+                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
         Assertions.assertNotNull(first);
-        final EmailAddress second = EmailAddress.Companion.from(TEXT_SAMPLE);
+        final EmailAddress second =
+                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
         Assertions.assertNotNull(second);
         Assertions.assertEquals(first, second);
     }
 
     @Test
     public void hashCode_should_pass() {
-        final EmailAddress first = EmailAddress.Companion.from(TEXT_SAMPLE);
+        final EmailAddress first =
+                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
         Assertions.assertNotNull(first);
-        final EmailAddress second = EmailAddress.Companion.from(TEXT_SAMPLE);
+        final EmailAddress second =
+                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
         Assertions.assertNotNull(second);
         final int firstHashCode = first.hashCode();
         final int secondHashCode = second.hashCode();
@@ -49,7 +53,8 @@ public class EmailAddressTest {
     @Test
     public void toString_should_pass() {
         final String expected = TEXT_SAMPLE;
-        final EmailAddress address = EmailAddress.Companion.from(expected);
+        final EmailAddress address =
+                EmailAddress.Companion.createOrNull(expected);
         Assertions.assertNotNull(address);
         final String actual = address.toString();
         Assertions.assertEquals(expected, actual);

@@ -126,7 +126,7 @@ public final class kotools/types/experimental/EmailAddress {
 }
 
 public final class kotools/types/experimental/EmailAddress$Companion {
-	public final fun from (Ljava/lang/String;)Lkotools/types/experimental/EmailAddress;
+	public final fun createOrNull (Ljava/lang/String;)Lkotools/types/experimental/EmailAddress;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
