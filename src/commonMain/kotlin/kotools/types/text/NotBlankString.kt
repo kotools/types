@@ -1,18 +1,19 @@
 package kotools.types.text
 
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
+import kotools.types.internal.stringSerializer
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import kotlin.jvm.JvmInline
@@ -64,15 +65,18 @@ public value class NotBlankString private constructor(
     }
 }
 
-private object NotBlankStringSerializer : KSerializer<NotBlankString> {
+private object NotBlankStringSerializer :
+    KSerializer<NotBlankString> by stringSerializer(
+        NotBlankStringDeserializationStrategy
+    )
+
+private object NotBlankStringDeserializationStrategy :
+    DeserializationStrategy<NotBlankString> {
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<NotBlankString>()
         val serialName = "${KotoolsTypesPackage.Text}.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
     }
-
-    override fun serialize(encoder: Encoder, value: NotBlankString): Unit =
-        encoder.encodeString("$value")
 
     override fun deserialize(decoder: Decoder): NotBlankString = decoder
         .decodeString()
