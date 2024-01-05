@@ -11,9 +11,9 @@
       <option name="taskNames">
         <list>
           <option value=":internal:jvmTest" />
-          <option value=":java-compatibility:test" />
           <option value=":jvmTest" />
           <option value=":jvmApiCheck" />
+          <option value=":java-compatibility:test" />
         </list>
       </option>
       <option name="vmOptions" />
