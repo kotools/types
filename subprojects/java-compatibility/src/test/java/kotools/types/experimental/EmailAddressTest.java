@@ -19,7 +19,7 @@ public class EmailAddressTest {
         }
 
         @Test
-        public void from_should_pass() {
+        public void createOrNull_should_pass() {
             final EmailAddress actual =
                     EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
             Assertions.assertNotNull(actual);
