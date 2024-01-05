@@ -12,7 +12,7 @@ public class EmailAddressTest {
     public class Companion {
         @Test
         public void regex_should_pass() {
-            final Regex regex = EmailAddress.regex;
+            final Regex regex = EmailAddress.Companion.getRegex();
             final String actualPattern = regex.getPattern();
             final String expectedPattern = "^\\S+@\\S+\\.\\S+$";
             Assertions.assertEquals(expectedPattern, actualPattern);
