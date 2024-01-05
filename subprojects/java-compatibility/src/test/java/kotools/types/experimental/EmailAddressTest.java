@@ -19,6 +19,11 @@ public class EmailAddressTest {
         }
 
         @Test
+        public void create_should_pass() {
+            EmailAddress.Companion.create(TEXT_SAMPLE);
+        }
+
+        @Test
         public void createOrNull_should_pass() {
             final EmailAddress actual =
                     EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
