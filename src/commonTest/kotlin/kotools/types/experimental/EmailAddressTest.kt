@@ -37,6 +37,55 @@ class EmailAddressCompanionTest {
     }
 
     @Test
+    fun create_should_pass_with_a_valid_String() {
+        EmailAddress.create(Texts.VALID)
+    }
+
+    @Test
+    fun create_should_fail_with_a_String_that_does_not_have_an_at_sign() {
+        val text: String = Texts.WITHOUT_AT_SIGN
+        val exception: IllegalArgumentException =
+            assertFailsWith { EmailAddress.create(text) }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage =
+            EmailAddress.creationErrorMessage(text)
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun create_should_fail_with_a_String_that_does_not_have_a_dot() {
+        val text: String = Texts.WITHOUT_DOT
+        val exception: IllegalArgumentException =
+            assertFailsWith { EmailAddress.create(text) }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage =
+            EmailAddress.creationErrorMessage(text)
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun create_should_fail_with_a_String_having_an_invalid_local_part() {
+        val text: String = Texts.INVALID_LOCAL_PART
+        val exception: IllegalArgumentException =
+            assertFailsWith { EmailAddress.create(text) }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage =
+            EmailAddress.creationErrorMessage(text)
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun create_should_fail_with_a_String_having_an_invalid_domain() {
+        val text: String = Texts.INVALID_DOMAIN
+        val exception: IllegalArgumentException =
+            assertFailsWith { EmailAddress.create(text) }
+        val actualMessage = ErrorMessage(exception)
+        val expectedMessage: ErrorMessage =
+            EmailAddress.creationErrorMessage(text)
+        assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
     fun createOrNull_should_pass_with_a_valid_String() {
         val actual: EmailAddress? = EmailAddress.createOrNull(Texts.VALID)
         assertNotNull(actual)
