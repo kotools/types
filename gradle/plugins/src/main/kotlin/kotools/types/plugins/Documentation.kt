@@ -39,15 +39,13 @@ public class DocumentationPlugin : Plugin<Project> {
 
 private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
     withType<DokkaTask>().configureEach {
-        project.logger.lifecycle("> Configuring task ${this.path}")
         this.moduleName.set("Kotools Types")
         this.failOnWarning.set(true)
-        this.outputDirectory.let {
-            val dokkaDirectory: File = project.buildDir.resolve("dokka")
-            it.set(dokkaDirectory)
-        }
+        project.layout.buildDirectory.dir("dokka")
+            .map { it.asFile }
+            .let { this.outputDirectory.set(it) }
         this.dokkaSourceSets.configureEach {
-            this.includes.from += project.file("src/packages.md")
+            this.includes.setFrom("src/packages.md")
             this.reportUndocumented.set(true)
             this.skipEmptyPackages.set(true)
         }
