@@ -38,7 +38,7 @@ public class DocumentationPlugin : Plugin<Project> {
 // ------------------------ Configuration of DokkaTask -------------------------
 
 private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
-    withType<DokkaTask>().configureEach {
+    this.withType<DokkaTask>().configureEach {
         this.moduleName.set("Kotools Types")
         this.failOnWarning.set(true)
         project.layout.buildDirectory.dir("dokka")
