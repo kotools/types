@@ -67,7 +67,7 @@ private val Project.copyright: String
     }
 
 private val Project.logoIcon: File
-    get() = rootDir.resolve("images/logo-icon.svg")
+    get() = rootDir.resolve("assets/logo-icon.svg")
 
 // -----------------------------------------------------------------------------
 

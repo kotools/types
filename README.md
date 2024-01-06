@@ -1,6 +1,6 @@
 <!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
-  <img src="images/logo.png" alt="">
+  <img src="assets/logo.png" alt="">
 </div>
 
 # Kotools Types
