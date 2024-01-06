@@ -6,7 +6,6 @@ import kotools.types.tasks.group
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.file.Directory
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.Copy
@@ -70,29 +69,24 @@ private val Project.logoIcon: File
 // -----------------------------------------------------------------------------
 
 private fun TaskContainer.configureDokkaHtml(project: Project) {
-    val archiveApiReferenceTask: TaskProvider<Copy> =
-        register<Copy>("archiveApiReference")
-    val dokkaHtml: TaskProvider<DokkaTask> = named<DokkaTask>("dokkaHtml") {
-        finalizedBy(archiveApiReferenceTask)
-    }
+    val dokkaHtml: TaskProvider<DokkaTask> = this.named<DokkaTask>("dokkaHtml")
     val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
         register<Delete>("deleteOlderDirInArchivedApiReference")
-    archiveApiReferenceTask.configure {
-        group(TaskGroup.DOCUMENTATION)
-        description("Archives the API reference.")
-        onlyIf { "SNAPSHOT" !in "${project.version}" }
-        from(dokkaHtml)
-        val destination: Directory = project.layout.projectDirectory
-            .dir("api/references/${project.version}")
-        into(destination)
-        finalizedBy(deleteOlderDirInArchivedApiReference)
-    }
+    val archiveApiReference: TaskProvider<Copy> =
+        this.register<Copy>("archiveApiReference") {
+            this.group(TaskGroup.DOCUMENTATION)
+            this.description("Archives the API reference.")
+            this.onlyIf { "SNAPSHOT" !in "${project.version}" }
+            this.from(dokkaHtml)
+            this.into("api/references/${project.version}")
+            this.finalizedBy(deleteOlderDirInArchivedApiReference)
+        }
     deleteOlderDirInArchivedApiReference.configure {
         group(TaskGroup.DOCUMENTATION)
         description(
             "Deletes the 'older' directory in the archived API reference."
         )
-        val target: File = archiveApiReferenceTask.get()
+        val target: File = archiveApiReference.get()
             .destinationDir
             .resolve("older")
         setDelete(target)
@@ -100,7 +94,7 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
     val apiReferenceJar: TaskProvider<Jar> = register<Jar>("apiReferenceJar") {
         group(TaskGroup.DOCUMENTATION)
         description("Archives the API reference in a JAR file.")
-        dependsOn(archiveApiReferenceTask)
+        this.dependsOn(archiveApiReference)
         from(dokkaHtml)
         archiveClassifier.set("javadoc")
     }
