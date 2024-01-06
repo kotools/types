@@ -94,7 +94,6 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
     val apiReferenceJar: TaskProvider<Jar> = register<Jar>("apiReferenceJar") {
         group(TaskGroup.DOCUMENTATION)
         description("Archives the API reference in a JAR file.")
-        this.dependsOn(archiveApiReference)
         from(dokkaHtml)
         archiveClassifier.set("javadoc")
     }
