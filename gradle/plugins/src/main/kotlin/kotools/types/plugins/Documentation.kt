@@ -3,7 +3,6 @@ package kotools.types.plugins
 import kotools.types.tasks.TaskGroup
 import kotools.types.tasks.description
 import kotools.types.tasks.group
-import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -70,6 +69,20 @@ private val Project.logoIcon: File
 
 private fun TaskContainer.configureDokkaHtml(project: Project) {
     val dokkaHtml: TaskProvider<DokkaTask> = this.named<DokkaTask>("dokkaHtml")
+    // ------------------- Publication on the Maven central --------------------
+    val apiReferenceJar: TaskProvider<Jar> =
+        this.register<Jar>("apiReferenceJar") {
+            this.group(TaskGroup.DOCUMENTATION)
+            this.description("Archives the API reference in a JAR file.")
+            this.from(dokkaHtml)
+            this.archiveClassifier.set("javadoc")
+        }
+    this.named("assemble").configure { this.dependsOn += apiReferenceJar }
+    project.extensions.getByType<PublishingExtension>()
+        .publications
+        .withType<MavenPublication>()
+        .configureEach { this.artifact(apiReferenceJar) }
+    // --------------- Publication on https://types.kotools.org ----------------
     val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
         register<Delete>("deleteOlderDirInArchivedApiReference")
     val archiveApiReference: TaskProvider<Copy> =
@@ -91,17 +104,6 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
             .resolve("older")
         setDelete(target)
     }
-    val apiReferenceJar: TaskProvider<Jar> = register<Jar>("apiReferenceJar") {
-        group(TaskGroup.DOCUMENTATION)
-        description("Archives the API reference in a JAR file.")
-        from(dokkaHtml)
-        archiveClassifier.set("javadoc")
-    }
-    named<DefaultTask>("assemble").configure { dependsOn += apiReferenceJar }
-    project.extensions.getByType<PublishingExtension>()
-        .publications
-        .withType<MavenPublication>()
-        .configureEach { artifact(apiReferenceJar) }
 }
 
 private fun TaskContainer.registerCleanDokkaHtml() {
