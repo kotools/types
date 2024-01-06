@@ -83,26 +83,18 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
         .withType<MavenPublication>()
         .configureEach { this.artifact(apiReferenceJar) }
     // --------------- Publication on https://types.kotools.org ----------------
-    val deleteOlderDirInArchivedApiReference: TaskProvider<Delete> =
-        register<Delete>("deleteOlderDirInArchivedApiReference")
-    val archiveApiReference: TaskProvider<Copy> =
-        this.register<Copy>("archiveApiReference") {
+    val saveApiReference: TaskProvider<Copy> =
+        this.register<Copy>("saveApiReference") {
             this.group(TaskGroup.DOCUMENTATION)
             this.description("Archives the API reference.")
-            this.onlyIf { "SNAPSHOT" !in "${project.version}" }
             this.from(dokkaHtml)
+            this.exclude("older/**")
             this.into("api/references/${project.version}")
-            this.finalizedBy(deleteOlderDirInArchivedApiReference)
         }
-    deleteOlderDirInArchivedApiReference.configure {
-        group(TaskGroup.DOCUMENTATION)
-        description(
-            "Deletes the 'older' directory in the archived API reference."
-        )
-        val target: File = archiveApiReference.get()
-            .destinationDir
-            .resolve("older")
-        setDelete(target)
+    this.register("assembleApiReferenceForWebsite").configure {
+        this.group(TaskGroup.DOCUMENTATION)
+        this.description("Assembles the API reference for our website.")
+        this.dependsOn += saveApiReference
     }
 }
 

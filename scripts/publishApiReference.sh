@@ -25,7 +25,7 @@ git mv $SOURCE_FOLDER/* $OLD_VERSIONS_DIR
 rm -rf $SOURCE_FOLDER
 
 echo "${BLUE}> Generate latest API reference${NO_COLOR}"
-./gradlew -q :dokkaHtml
+./gradlew -q :assembleApiReferenceForWebsite
 
 echo "${BLUE}> Archive latest API reference${NO_COLOR}"
 git checkout -q $BRANCH_TARGET
