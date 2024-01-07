@@ -5,6 +5,7 @@ import kotools.types.tasks.description
 import kotools.types.tasks.group
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.Copy
@@ -27,15 +28,14 @@ import java.io.File
 public class DocumentationPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project): Unit = project.tasks.run {
-        configureDokkaHtml(project)
-        registerCleanDokkaHtml()
-        configureEachDokkaTask(project)
+        dokkaTasks(project)
+        apiReferenceJar(project)
+        saveApiReference()
+        cleanDokkaHtml()
     }
 }
 
-// ------------------------ Configuration of DokkaTask -------------------------
-
-private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
+private fun TaskContainer.dokkaTasks(project: Project): Unit =
     this.withType<DokkaTask>().configureEach {
         this.moduleName.set("Kotools Types")
         this.failOnWarning.set(true)
@@ -49,7 +49,7 @@ private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
         }
         this.pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
             this.customAssets = listOf(project.logoIcon)
-            this.footerMessage = project.copyright
+            this.footerMessage = project.copyrightNotice
         }
         this.pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             this.version = project.version.toString()
@@ -57,32 +57,38 @@ private fun TaskContainer.configureEachDokkaTask(project: Project): Unit =
         }
     }
 
-private val Project.copyright: String
-    get() = rootDir.resolve("LICENSE.txt").useLines { lines: Sequence<String> ->
-        lines.first { it.startsWith("Copyright (c)") }
-    }
+private val Project.copyrightNotice: String
+    get() = this.rootDir.resolve("LICENSE.txt")
+        .useLines { lines: Sequence<String> ->
+            lines.first { it.startsWith("Copyright (c)") }
+        }
 
 private val Project.logoIcon: File
-    get() = rootDir.resolve("assets/logo-icon.svg")
+    get() = this.rootDir.resolve("assets/logo-icon.svg")
 
-// -----------------------------------------------------------------------------
-
-private fun TaskContainer.configureDokkaHtml(project: Project) {
-    val dokkaHtml: TaskProvider<DokkaTask> = this.named<DokkaTask>("dokkaHtml")
-    // ------------------- Publication on the Maven central --------------------
+private fun TaskContainer.apiReferenceJar(project: Project) {
     val apiReferenceJar: TaskProvider<Jar> =
         this.register<Jar>("apiReferenceJar") {
-            this.group(TaskGroup.DOCUMENTATION)
+            this.group(TaskGroup.BUILD)
             this.description("Archives the API reference in a JAR file.")
             this.from(dokkaHtml)
             this.archiveClassifier.set("javadoc")
         }
     this.named("assemble").configure { this.dependsOn += apiReferenceJar }
-    project.extensions.getByType<PublishingExtension>()
-        .publications
-        .withType<MavenPublication>()
-        .configureEach { this.artifact(apiReferenceJar) }
-    // --------------- Publication on https://types.kotools.org ----------------
+    project.includeInPublication(apiReferenceJar)
+}
+
+private val TaskContainer.dokkaHtml: TaskProvider<DokkaTask>
+    get() = this.named<DokkaTask>("dokkaHtml")
+
+private fun Project.includeInPublication(jar: TaskProvider<Jar>): Unit = this
+    .extensions
+    .getByType<PublishingExtension>()
+    .publications
+    .withType<MavenPublication>()
+    .configureEach { this.artifact(jar) }
+
+private fun TaskContainer.saveApiReference() {
     val saveApiReference: TaskProvider<Copy> =
         this.register<Copy>("saveApiReference") {
             this.group(TaskGroup.DOCUMENTATION)
@@ -91,17 +97,27 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
             this.exclude("older/**")
             this.into("api/references/${project.version}")
         }
-    this.register("assembleApiReferenceForWebsite").configure {
-        this.group(TaskGroup.DOCUMENTATION)
-        this.description("Assembles the API reference for our website.")
-        this.dependsOn += saveApiReference
-    }
+    this.assembleApiReferenceForWebsite(saveApiReference)
 }
 
-private fun TaskContainer.registerCleanDokkaHtml() {
-    val task: TaskProvider<Delete> = register<Delete>("cleanDokkaHtml") {
-        val task: DokkaTask = named<DokkaTask>("dokkaHtml").get()
-        setDelete(task.outputDirectory)
-    }
-    named<Delete>("clean").configure { dependsOn += task }
+private fun TaskContainer.assembleApiReferenceForWebsite(
+    saveApiReference: TaskProvider<Copy>
+): Unit = this.register("assembleApiReferenceForWebsite").configure {
+    this.group(TaskGroup.BUILD)
+    this.description("Assembles the API reference for our website.")
+    this.dependsOn += saveApiReference
+}
+
+private fun TaskContainer.cleanDokkaHtml() {
+    val dokkaHtml: TaskProvider<DokkaTask> = this.dokkaHtml
+    val cleanDokkaHtml: TaskProvider<Delete> =
+        this.register<Delete>("cleanDokkaHtml") {
+            this.group(TaskGroup.BUILD)
+            this.description(
+                "Deletes the output directory of the '${dokkaHtml.name}' task."
+            )
+            val target: Property<File> = dokkaHtml.get().outputDirectory
+            this.setDelete(target)
+        }
+    this.named<Delete>("clean").configure { this.dependsOn += cleanDokkaHtml }
 }
