@@ -14,8 +14,8 @@ public class BasePlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.tasks
         .register<PrintTask>("version")
         .configure {
-            group(TaskGroup.HELP)
-            description("Displays the project's version.")
-            message.set(project.version)
+            this.group(TaskGroup.HELP)
+            this.description("Displays the project's version.")
+            this.message.set(project.version)
         }
 }
