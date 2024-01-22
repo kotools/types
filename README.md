@@ -119,8 +119,8 @@ This project is very light and just ship with one direct dependency:
 Knowing that these types could be used in any type of API, this feature is
 essential for this library.
 
-See the [version catalog](gradle/libs.versions.toml) for more details about the
-tools used for building Kotools Types.
+See the [dependency compatibility](documentation/dependencies.md) documentation
+for more details about the compatibility of Kotools Types with its dependencies.
 
 ### Error handling agnostic
 

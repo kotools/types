@@ -20,6 +20,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+Documentation of dependency compatibility (issue [#288]).
+
+[#288]: https://github.com/kotools/types/issues/288
+
 ## 4.4.0 <a id="4.4.0"></a>
 
 _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
