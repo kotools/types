@@ -142,7 +142,10 @@ jobs:
       - macos-test
       - static-code-analysis
       - windows-test
-    if: github.event_name == 'push'
+    if: |
+      github.event_name == 'push' &&
+      github.ref_type == 'branch' &&
+      github.ref_name == 'main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
