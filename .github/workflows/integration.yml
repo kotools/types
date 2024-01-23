@@ -53,7 +53,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4.0.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -70,7 +70,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4.0.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -89,7 +89,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4.0.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -106,7 +106,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4.0.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
@@ -123,7 +123,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.0
       - name: Setup Java & Gradle
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4.0.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
