@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1.0.6
   static-code-analysis:
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Scan code
         uses: JetBrains/qodana-action@v2023.2.8
         with:
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Setup Java & Gradle
         uses: actions/setup-java@v4.0.0
         with:
@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Setup Java & Gradle
         uses: actions/setup-java@v4.0.0
         with:
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Setup Java & Gradle
         uses: actions/setup-java@v4.0.0
         with:
@@ -104,7 +104,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Setup Java & Gradle
         uses: actions/setup-java@v4.0.0
         with:
@@ -121,7 +121,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Setup Java & Gradle
         uses: actions/setup-java@v4.0.0
         with:
@@ -151,7 +151,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v4.0.0
       - name: Submit dependencies to GitHub
         uses: mikepenz/gradle-dependency-submission@v0.8.6
         with:
