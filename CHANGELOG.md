@@ -57,8 +57,6 @@ _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
 
 ### Changed
 
-- Source compatibility with Kotlin updated by supporting its versions 1.6
-  through 1.7 (issue [#294](https://github.com/kotools/types/issues/294)).
 - Move the following **experimental** declarations to the
   `kotools.types.experimental` package with a new signature (issue
   [#319](https://github.com/kotools/types/issues/319)):
