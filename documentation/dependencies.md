@@ -9,7 +9,7 @@ Here's the compatibility of this project with [Kotlin]:
 
 | Kotools Types version | Embedded Kotlin version | Kotlin Language version |
 |-----------------------|-------------------------|-------------------------|
-| 4.4.0                 | 1.7.21                  | 1.6                     |
+| 4.4.0                 | 1.7.21                  | 1.5                     |
 | 4.3.1                 | 1.7.21                  | 1.5                     |
 | 4.3.0                 | 1.7.21                  | 1.7                     |
 | 4.2                   | 1.6.21                  | 1.6                     |
