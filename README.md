@@ -6,7 +6,8 @@
 # Kotools Types
 
 [![Kotools Types][kotools-types-badge]][kotools-types-project]
-[![Kotlin][kotlin-badge]][kotlin]
+[![Kotlin][kotlin-embedded-badge]][kotlin]
+[![Kotlin language][kotlin-language-badge]][kotlin]
 [![kotlinx.serialization][kotlinx.serialization-badge]][kotlinx.serialization]
 
 Type safety is a must-have nowadays and reducing runtime errors to compile-time
@@ -50,7 +51,8 @@ This project supports the following platforms:
 [kotools-types-badge]: https://img.shields.io/static/v1?label=version&message=4.3.1&color=blue
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
-[kotlin-badge]: https://img.shields.io/badge/kotlin-1.7.21-blue?logo=kotlin
+[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.7.21-blue?logo=kotlin
+[kotlin-language-badge]: https://img.shields.io/badge/Kotlin_language-1.5-blue?logo=kotlin
 [kotlin-native]: https://kotlinlang.org/docs/native-overview.html
 [kotlin/js]: https://kotlinlang.org/docs/js-overview.html
 [kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
