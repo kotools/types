@@ -10,6 +10,12 @@
 [![Kotlin language][kotlin-language-badge]][kotlin]
 [![kotlinx.serialization][kotlinx.serialization-badge]][kotlinx.serialization]
 
+[![JVM Platform][jvm-platform-badge]][kotlin/jvm]
+[![JS Platform][js-platform-badge]][kotlin/js]
+[![Linux x64 Platform][linux-x64-platform-badge]][kotlin-native]
+[![macOS x64 Platform][macos-x64-platform-badge]][kotlin-native]
+[![MinGW x64 Platform][mingw-x64-platform-badge]][kotlin-native]
+
 Type safety is a must-have nowadays and reducing runtime errors to compile-time
 errors feels like magic!
 But even with the [Kotlin] type system, we still have runtime issues that can
@@ -43,11 +49,11 @@ Using explicit types in your code is perfect for:
 Cherry on top: Kotools Types is a multiplatform library, so you can use it in
 all your [Kotlin] projects!
 
-This project supports the following platforms:
-- [Kotlin/JVM]
-- [Kotlin/JS]
-- [Kotlin Native][kotlin-native] for Linux x64, macOS x64 and MinGW x64 systems.
+Supported platforms are available in
+[badges at the top of this file](#kotools-types).
 
+[js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00
+[jvm-platform-badge]: https://img.shields.io/badge/Platform-JVM-6bac25
 [kotools-types-badge]: https://img.shields.io/badge/Version-4.3.1-blue
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
@@ -59,6 +65,9 @@ This project supports the following platforms:
 [kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.4.1-blue
+[linux-x64-platform-badge]: https://img.shields.io/badge/Platform-Linux_x64-4b4bff
+[macos-x64-platform-badge]: https://img.shields.io/badge/Platform-macOS_x64-4b4bff
+[mingw-x64-platform-badge]: https://img.shields.io/badge/Platform-MinGW_x64-4b4bff
 [total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
 
 ## Provided types
