@@ -52,7 +52,7 @@ all your [Kotlin] projects!
 Supported platforms are available in
 [badges at the top of this file](#kotools-types).
 
-[js-platform-badge]: https://img.shields.io/badge/Platform-JS-orange
+[js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00
 [jvm-platform-badge]: https://img.shields.io/badge/Platform-JVM-6bac25
 [kotools-types-badge]: https://img.shields.io/badge/Version-4.3.1-blue
 [kotools-types-project]: https://github.com/kotools/types
