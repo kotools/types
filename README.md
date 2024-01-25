@@ -1,8 +1,3 @@
-<!--suppress HtmlDeprecatedAttribute -->
-<div align="center">
-  <img src="assets/logo.png" alt="">
-</div>
-
 # Kotools Types
 
 [![Kotools Types][kotools-types-badge]][kotools-types-project]
