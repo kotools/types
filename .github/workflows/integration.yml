@@ -23,8 +23,8 @@ env:
   GRADLE_DEPENDENCY_GRAPH: |
     ${{
       github.event_name == 'push' && github.ref_name == 'main'
-          ? 'generate-and-submit'
-          : 'disabled'
+          && 'generate-and-submit'
+          || 'disabled'
     }}
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
