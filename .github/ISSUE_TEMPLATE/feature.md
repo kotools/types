@@ -12,7 +12,7 @@ labels: feature
 ## Dependencies
 
 This issue is blocked by the following ones:
-- [ ] $ITEM
+- [ ] #ITEM
 -->
 
 ## Checklist
