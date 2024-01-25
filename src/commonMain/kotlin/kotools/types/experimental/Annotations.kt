@@ -32,9 +32,13 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
     ReplaceWith(
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
-    )
+    ),
+    DeprecationLevel.ERROR
 )
-@DeprecatedSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedSince(
+    warningSince = KotoolsTypesVersion.V4_4_0,
+    errorSince = KotoolsTypesVersion.Unreleased
+)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)

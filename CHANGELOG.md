@@ -26,6 +26,11 @@ Documentation of dependency compatibility (issue [#288]).
 
 [#288]: https://github.com/kotools/types/issues/288
 
+### Deprecated
+
+Deprecation promotion of the `ExperimentalCollectionApi` annotation to error
+(issue [#333](https://github.com/kotools/types/issues/333)).
+
 ### Security
 
 Upgrade [follow-redirects](https://github.com/follow-redirects/follow-redirects)
