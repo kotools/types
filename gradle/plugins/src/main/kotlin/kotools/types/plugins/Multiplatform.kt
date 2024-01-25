@@ -53,7 +53,7 @@ private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
         kotlinOptions {
             allWarningsAsErrors = true
-            jvmTarget = "1.8"
+            jvmTarget = "17"
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             project.property("kotlin.language.version")
                 ?.let { languageVersion = "$it" }
