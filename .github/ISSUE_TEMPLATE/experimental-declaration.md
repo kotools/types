@@ -14,7 +14,7 @@ This declaration shouldn't be available yet for Java users.
 ## Dependencies
 
 This issue is blocked by the following ones:
-- [ ] $ITEM
+- [ ] #ITEM
 -->
 
 ## Checklist
