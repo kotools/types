@@ -20,7 +20,7 @@ public class MultiplatformPlugin : Plugin<Project> {
     /** Applies this plugin to the given [project]. */
     override fun apply(project: Project) {
         project.rootProject.plugins.configureYarn(project)
-        project.extensions.configure(project)
+        project.extensions.configure()
         project.tasks.configure(project)
     }
 }
@@ -37,17 +37,12 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
             ?: error("The 'webpack.version' property wasn't found.")
     }
 
-private fun ExtensionContainer.configure(project: Project) {
+private fun ExtensionContainer.configure() {
     val kotlin: KotlinMultiplatformExtension = getByType()
     kotlin.run {
         explicitApi()
         js(IR) { browser() }
         jvm()
-        project.property("java.version")
-            ?.toString()
-            ?.toIntOrNull()
-            ?.let(::jvmToolchain)
-            ?: error("The 'java.version' property wasn't found.")
         linuxX64("linux")
         macosX64("macos")
         mingwX64("windows")
@@ -58,6 +53,7 @@ private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
         kotlinOptions {
             allWarningsAsErrors = true
+            jvmTarget = "1.8"
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
             project.property("kotlin.language.version")
                 ?.let { languageVersion = "$it" }
