@@ -2,11 +2,10 @@ plugins { java }
 
 repositories.mavenCentral()
 
-property("java.version")
-    ?.toString()
-    ?.let(JavaLanguageVersion::of)
-    ?.let(java.toolchain.languageVersion::set)
-    ?: error("The 'java.version' property wasn't found.")
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8 // Java language
+    targetCompatibility = JavaVersion.VERSION_1_8 // JVM bytecode
+}
 
 dependencies {
     testImplementation(rootProject)
