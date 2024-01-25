@@ -3,8 +3,8 @@ plugins { java }
 repositories.mavenCentral()
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8 // Java language
-    targetCompatibility = JavaVersion.VERSION_1_8 // JVM bytecode
+    sourceCompatibility = JavaVersion.VERSION_17 // Java language
+    targetCompatibility = JavaVersion.VERSION_17 // JVM bytecode
 }
 
 dependencies {
