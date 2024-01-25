@@ -20,12 +20,6 @@ on:
       - qodana.yaml
   workflow_dispatch:
 env:
-  GRADLE_DEPENDENCY_GRAPH: |
-    ${{
-      github.event_name == 'push' && github.ref_name == 'main'
-          && 'generate-and-submit'
-          || 'disabled'
-    }}
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
 jobs:
@@ -54,8 +48,6 @@ jobs:
     name: Kotlin/JS tests
     needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.0.0
@@ -66,8 +58,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
-        with:
-          dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
         run: ./gradlew :internal:jsTest
       - name: Test root project
@@ -76,8 +66,6 @@ jobs:
     name: Kotlin/JVM checks
     needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.0.0
@@ -88,8 +76,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
-        with:
-          dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
         run: ./gradlew :internal:jvmTest
       - name: Test 'java-compatibility' subproject
@@ -100,8 +86,6 @@ jobs:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.0.0
@@ -112,8 +96,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
-        with:
-          dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
         run: ./gradlew :internal:linuxTest
       - name: Test root project
@@ -122,8 +104,6 @@ jobs:
     name: Kotlin Native tests for macOS
     needs: gradle-wrapper-validation
     runs-on: macos-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.0.0
@@ -134,8 +114,6 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
-        with:
-          dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
         run: ./gradlew :internal:macosTest
       - name: Test root project
@@ -144,6 +122,32 @@ jobs:
     name: Kotlin Native tests for Windows
     needs: gradle-wrapper-validation
     runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.0.0
+      - name: Setup Java
+        uses: actions/setup-java@v4.0.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.12.0
+      - name: Test 'internal' subproject
+        run: ./gradlew :internal:windowsTest
+      - name: Test root project
+        run: ./gradlew :windowsTest
+  # ---------- Stage 3 ----------
+  dependencies:
+    name: Dependency graph
+    needs:
+      - js-test
+      - jvm-checks
+      - linux-test
+      - macos-test
+      - static-code-analysis
+      - windows-test
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -157,8 +161,10 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
         with:
-          dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
-      - name: Test 'internal' subproject
-        run: ./gradlew :internal:windowsTest
-      - name: Test root project
-        run: ./gradlew :windowsTest
+          dependency-graph: generate-and-submit
+          dependency-graph-continue-on-failure: false
+      - name: Submit dependencies to GitHub
+        run: ./gradlew :jvmTest --no-daemon
+        env:
+          DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: |
+            allSourceSetsRuntimeDependenciesMetadata
