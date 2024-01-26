@@ -8,6 +8,7 @@ on:
       - '**.kt*'
       - .github/workflows/integration.yml
       - api/types.api
+      - gradle/libs.versions.toml
       - qodana.yaml
       - yarn.lock
   push:
@@ -18,6 +19,7 @@ on:
       - '**.kt*'
       - .github/workflows/integration.yml
       - api/types.api
+      - gradle/libs.versions.toml
       - qodana.yaml
       - yarn.lock
   workflow_dispatch:
