@@ -18,6 +18,6 @@ This issue is blocked by the following ones:
 ## Checklist
 
 - [ ] Implement the feature, test it, refactor it and update the [unreleased changelog].
-- [ ] Close this issue as resolved and update tracking ones if present.
+- [ ] Close this issue as completed and update tracking ones if present.
 
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
