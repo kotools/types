@@ -9,7 +9,9 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.attributes
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -51,12 +53,11 @@ private fun ExtensionContainer.configure() {
 
 private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            allWarningsAsErrors = true
-            jvmTarget = "17"
-            freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-            project.property("kotlin.language.version")
-                ?.let { languageVersion = "$it" }
+        compilerOptions {
+            allWarningsAsErrors.set(true)
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+            languageVersion.set(KotlinVersion.KOTLIN_1_5)
         }
     }
     withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
