@@ -28,9 +28,11 @@ Documentation of dependency compatibility (issue [#288]).
 
 ### Deprecated
 
-Deprecation promotion of the `ExperimentalCollectionApi` and the
-`ExperimentalNumberApi` annotations to error (issue
-[#333](https://github.com/kotools/types/issues/333)).
+Deprecation promotion of the following annotations to error (issue
+[#333](https://github.com/kotools/types/issues/333)):
+- `ExperimentalCollectionApi`
+- `ExperimentalNumberApi`
+- `ExperimentalRangeApi`.
 
 ### Security
 
