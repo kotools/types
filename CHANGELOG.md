@@ -34,6 +34,7 @@ Deprecation promotion of the following annotations to error (issue
 - `ExperimentalNumberApi`
 - `ExperimentalRangeApi`
 - `ExperimentalResultApi`
+- `ExperimentalTextApi`
 
 ### Security
 
