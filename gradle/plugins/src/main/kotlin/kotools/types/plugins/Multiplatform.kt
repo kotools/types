@@ -31,12 +31,8 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
     withType<YarnPlugin>().configureEach {
         val yarn: YarnRootExtension = project.rootProject.extensions.getByType()
         yarn.lockFileDirectory = project.rootDir
-        project.property("follow-redirects.version")
-            ?.let { yarn.resolution("follow-redirects", "$it") }
-            ?: error("The 'follow-redirects.version' property wasn't found.")
-        project.property("webpack.version")
-            ?.let { yarn.resolution("webpack", "$it") }
-            ?: error("The 'webpack.version' property wasn't found.")
+        yarn.resolution("follow-redirects", "1.15.4")
+        yarn.resolution("webpack", "5.76.3")
     }
 
 private fun ExtensionContainer.configure() {
