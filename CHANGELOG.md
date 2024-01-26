@@ -26,6 +26,12 @@ Documentation of dependency compatibility (issue [#288]).
 
 [#288]: https://github.com/kotools/types/issues/288
 
+### Changed
+
+Move the `EmailAddress` **experimental** type from the
+`kotools.types.experimental` package to a new `org.kotools.types.web` one (issue
+[#377](https://github.com/kotools/types/issues/377)).
+
 ### Deprecated
 
 Deprecation promotion of the following annotations to error (issue
