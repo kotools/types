@@ -23,3 +23,7 @@ Contains declarations for manipulating the
 # Package kotools.types.text
 
 Contains types such as [NotBlankString] for manipulating text.
+
+# Package org.kotools.types.web
+
+Web related declarations, such as [EmailAddress].
