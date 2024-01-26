@@ -28,9 +28,11 @@ Documentation of dependency compatibility (issue [#288]).
 
 ### Changed
 
-Move the `EmailAddress` **experimental** type from the
-`kotools.types.experimental` package to a new `org.kotools.types.web` one (issue
-[#377](https://github.com/kotools/types/issues/377)).
+- Upgrade embedded Kotlin to 1.8.10 (issue
+  [#172](https://github.com/kotools/types/issues/172)).
+- Move the `EmailAddress` **experimental** type from the
+  `kotools.types.experimental` package to a new `org.kotools.types.web` one
+  (issue [#377](https://github.com/kotools/types/issues/377)).
 
 ### Deprecated
 
