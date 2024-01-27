@@ -24,10 +24,6 @@ Here's an example dividing an integer by an integer other than zero, for
 avoiding an [`ArithmeticException`][kotlin.ArithmeticException] to be thrown:
 
 ```kotlin
-import kotools.types.number.NonZeroInt
-import kotools.types.number.div
-import kotools.types.number.toStrictlyPositiveInt
-
 val x = 42
 val y: NonZeroInt = 6.toNonZeroInt().getOrThrow()
 println(x / y) // 7
