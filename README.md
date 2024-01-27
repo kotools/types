@@ -74,35 +74,6 @@ See the [API reference][api-reference] for more types!
 [mingw-x64-platform-badge]: https://img.shields.io/badge/Platform-MinGW_x64-4b4bff
 [total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
 
-## Design goals
-
-### Less is more
-
-Kotools Types focus primarily on what is essential for building explicit and
-safer APIs: the types and their builders.
-Other declarations could be added if suggested by the community.
-By having this minimalist approach, we engage to provide what users really need.
-
-### Avoid useless dependencies
-
-This project is very light and just ship with one direct dependency:
-[kotlinx.serialization] for serializing or deserializing the provided types.
-Knowing that these types could be used in any type of API, this feature is
-essential for this library.
-
-See the [dependency compatibility](documentation/dependencies.md) documentation
-for more details about the compatibility of Kotools Types with its dependencies.
-
-### Error handling agnostic
-
-Users should be responsible for deciding how to handle errors, not this library.
-Externalizing this responsibility to consumers implies that Kotools Types should
-provide an explicit API by definition.
-This is why we are using the [Result][kotlin.Result] type from Kotlin for
-representing a result that can be a success or a failure.
-
-[kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
-
 ## Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
@@ -145,6 +116,8 @@ implementation "org.kotools:types:$version"
 Here's additional documentation for learning more about this project:
 
 - [API reference][api-reference]
+- [Design goals](documentation/design-goals.md)
+- [Dependency compatibility](documentation/dependencies.md)
 - [Versioning strategy](documentation/versioning-strategy.md)
 - [Declarations lifecycle](documentation/declarations-lifecycle.md)
 - [Security Policy](SECURITY.md)
