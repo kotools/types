@@ -22,7 +22,6 @@ Issues of the milestone corresponding to this version should be done before reso
 - [ ] Prepare a release notes for this version, then apply the corresponding commit to the release branch.
 - [ ] Release packages on the [Maven central].
 - [ ] Run the `publishApiReference.sh` script locally from the release branch and update the API reference.
-- [ ] Update the badge version in [README].
 - [ ] Create a release on the GitHub repository.
 - [ ] Announce this release on [Slack] and on [Twitter].
 
@@ -30,7 +29,6 @@ Issues of the milestone corresponding to this version should be done before reso
 [dependency compatibility]: https://github.com/kotools/types/blob/main/documentation/dependencies.md
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
 [maven central]: https://s01.oss.sonatype.org
-[readme]: https://github.com/kotools/types/blob/main/README.md
 [security policy]: https://github.com/kotools/types/blob/main/SECURITY.md
 [slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
 [twitter]: https://twitter.com/KotoolsContact
