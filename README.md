@@ -125,9 +125,6 @@ This project is very light and just ship with one direct dependency:
 Knowing that these types could be used in any type of API, this feature is
 essential for this library.
 
-See the [dependency compatibility](documentation/dependencies.md) documentation
-for more details about the compatibility of Kotools Types with its dependencies.
-
 ### Error handling agnostic
 
 Users should be responsible for deciding how to handle errors, not this library.
