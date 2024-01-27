@@ -43,9 +43,18 @@ Using explicit types in your code is perfect for:
 
 Cherry on top: Kotools Types is a multiplatform library, so you can use it in
 all your [Kotlin] projects!
-
 Supported platforms are available in
 [badges at the top of this file](#kotools-types).
+
+Here's a non-exhaustive list of types provided by this library:
+- [NotBlankString][kotools.types.text.NotBlankString] representing a string that
+  has at least one character excluding whitespaces.
+- [PositiveInt][kotools.types.number.PositiveInt] representing an integer number
+  of type [Int][kotlin.Int] that is greater than or equals zero.
+- [NotEmptyList][kotools.types.collection.NotEmptyList] representing a list with
+  at least one element.
+
+See the [API reference][api-reference] for more types!
 
 [js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00
 [jvm-platform-badge]: https://img.shields.io/badge/Platform-JVM-6bac25
@@ -58,56 +67,16 @@ Supported platforms are available in
 [kotlin/js]: https://kotlinlang.org/docs/js-overview.html
 [kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
 [kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
+[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.4.1-blue
+[kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
+[kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
+[kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
 [linux-x64-platform-badge]: https://img.shields.io/badge/Platform-Linux_x64-4b4bff
 [macos-x64-platform-badge]: https://img.shields.io/badge/Platform-macOS_x64-4b4bff
 [mingw-x64-platform-badge]: https://img.shields.io/badge/Platform-MinGW_x64-4b4bff
 [total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
-
-## Provided types
-
-This section presents a non-exhaustive list of types provided by this library.
-
-### Number
-
-- [NonZeroInt][kotools.types.number.NonZeroInt] representing an integer number
-  of type [Int][kotlin.Int] that is other than zero.
-- [PositiveInt][kotools.types.number.PositiveInt] representing an integer number
-  of type [Int][kotlin.Int] that is greater than or equals zero.
-- [NegativeInt][kotools.types.number.NegativeInt] representing an integer number
-  of type [Int][kotlin.Int] that is less than or equals zero.
-- [StrictlyPositiveInt][kotools.types.number.StrictlyPositiveInt] representing
-  an integer number of type [Int][kotlin.Int] that is greater than zero.
-- [StrictlyNegativeInt][kotools.types.number.StrictlyNegativeInt] representing
-  an integer number of type [Int][kotlin.Int] that is less than zero.
-
-[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int
-[kotools.types.number.NegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-negative-int/index.html
-[kotools.types.number.NonZeroInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-non-zero-int/index.html
-[kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
-[kotools.types.number.StrictlyNegativeInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-negative-int/index.html
-[kotools.types.number.StrictlyPositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-strictly-positive-int/index.html
-
-### Text
-
-- [NotBlankString][kotools.types.text.NotBlankString] representing a string that
-  has at least one character excluding whitespaces.
-
-[kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
-
-### Collection
-
-- [NotEmptyList][kotools.types.collection.NotEmptyList] representing a list with
-  at least one element.
-- [NotEmptySet][kotools.types.collection.NotEmptySet] representing a set with at
-  least one element.
-- [NotEmptyMap][kotools.types.collection.NotEmptyMap] representing a map with at
-  least one entry.
-
-[kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
-[kotools.types.collection.NotEmptyMap]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-map/index.html
-[kotools.types.collection.NotEmptySet]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-set/index.html
 
 ## Design goals
 
