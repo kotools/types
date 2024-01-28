@@ -30,6 +30,8 @@ Documentation of dependency compatibility (issue [#288]).
 
 - Upgrade embedded Kotlin to 1.8.10 (issue
   [#172](https://github.com/kotools/types/issues/172)).
+- Upgrade kotlinx.serialization to 1.5.0 (issue
+  [#378](https://github.com/kotools/types/issues/378)).
 - Move the `EmailAddress` **experimental** type from the
   `kotools.types.experimental` package to a new `org.kotools.types.web` one
   (issue [#377](https://github.com/kotools/types/issues/377)).
