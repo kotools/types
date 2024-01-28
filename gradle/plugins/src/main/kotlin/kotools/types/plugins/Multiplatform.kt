@@ -31,7 +31,6 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
     withType<YarnPlugin>().configureEach {
         val yarn: YarnRootExtension = project.rootProject.extensions.getByType()
         yarn.lockFileDirectory = project.rootDir
-        yarn.resolution("follow-redirects", "1.15.4")
         yarn.resolution("webpack", "5.76.3")
     }
 
