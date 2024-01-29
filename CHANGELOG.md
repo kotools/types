@@ -22,8 +22,11 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-Documentation of dependency compatibility (issue
-[#288](https://github.com/kotools/types/issues/288)).
+- `DomainName` **experimental** type, in the `org.kotools.types.web` package,
+  for representing a domain name in the Internet (issue
+  [#340](https://github.com/kotools/types/issues/340)).
+- Documentation of dependency compatibility (issue
+  [#288](https://github.com/kotools/types/issues/288)).
 
 ### Changed
 
