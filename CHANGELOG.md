@@ -22,9 +22,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-Documentation of dependency compatibility (issue [#288]).
-
-[#288]: https://github.com/kotools/types/issues/288
+Documentation of dependency compatibility (issue
+[#288](https://github.com/kotools/types/issues/288)).
 
 ### Changed
 
