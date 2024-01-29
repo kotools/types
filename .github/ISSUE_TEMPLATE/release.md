@@ -18,7 +18,6 @@ Issues of the milestone corresponding to this version should be done before reso
 - [ ] Deliver packages to the [Maven central] by running the [delivery workflow].
 - [ ] Close valid packages and drop invalid ones on the [Maven central].
 - [ ] Add this version in the [security policy] documentation, then apply the corresponding commit to the release branch.
-- [ ] Add this version in the [dependency compatibility] documentation, then apply the corresponding commit to the release branch.
 - [ ] Prepare a release notes for this version, then apply the corresponding commit to the release branch.
 - [ ] Release packages on the [Maven central].
 - [ ] Run the `publishApiReference.sh` script locally from the release branch and update the API reference.
@@ -27,7 +26,6 @@ Issues of the milestone corresponding to this version should be done before reso
 - [ ] Close this issue and the corresponding milestone as completed.
 
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
-[dependency compatibility]: https://github.com/kotools/types/blob/main/documentation/dependencies.md
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
 [maven central]: https://s01.oss.sonatype.org
 [security policy]: https://github.com/kotools/types/blob/main/SECURITY.md
