@@ -24,6 +24,7 @@ Issues of the milestone corresponding to this version should be done before reso
 - [ ] Run the `publishApiReference.sh` script locally from the release branch and update the API reference.
 - [ ] Create a release on the GitHub repository.
 - [ ] Announce this release on [Slack] and on [Twitter].
+- [ ] Close this issue and the corresponding milestone as completed.
 
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
 [dependency compatibility]: https://github.com/kotools/types/blob/main/documentation/dependencies.md
