@@ -18,8 +18,7 @@ This issue is blocked by the following ones:
 
 ## Checklist
 
-- [ ] Remove its experimental annotation, update its versioning annotation, update its tests, update the public [API binaries] and the [unreleased changelog].
+- [ ] Remove its experimental annotation, update its versioning annotation, update its tests and the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
 
-[api binaries]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-api-binaries
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
