@@ -34,6 +34,10 @@ Documentation of dependency compatibility (issue
 - Move the `EmailAddress` **experimental** type from the
   `kotools.types.experimental` package to the new `kotools.types.web` one (issue
   [#377](https://github.com/kotools/types/issues/377)).
+- Make the `regex` property of the `EmailAddress` **experimental** type
+  inaccessible for Java sources, due to the unavailability of the
+  `kotlin.text.Regex` type for this language (commit
+  [8d0d098ad](https://github.com/kotools/types/commit/8d0d098ad)).
 
 ### Deprecated
 
