@@ -1,6 +1,5 @@
 package kotools.types.web;
 
-import kotlin.text.Regex;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,14 +9,6 @@ public class EmailAddressTest {
 
     @Nested
     public class Companion {
-        @Test
-        public void regex_should_pass() {
-            final Regex regex = EmailAddress.Companion.getRegex();
-            final String actualPattern = regex.getPattern();
-            final String expectedPattern = "^\\S+@\\S+\\.\\S+$";
-            Assertions.assertEquals(expectedPattern, actualPattern);
-        }
-
         @Test
         public void create_should_pass() {
             EmailAddress.Companion.create(TEXT_SAMPLE);

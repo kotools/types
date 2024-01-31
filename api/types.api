@@ -462,7 +462,7 @@ public final class kotools/types/web/EmailAddress {
 public final class kotools/types/web/EmailAddress$Companion {
 	public final fun create (Ljava/lang/String;)Lkotools/types/web/EmailAddress;
 	public final fun createOrNull (Ljava/lang/String;)Lkotools/types/web/EmailAddress;
-	public final fun getRegex ()Lkotlin/text/Regex;
+	public final synthetic fun getRegex ()Lkotlin/text/Regex;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 

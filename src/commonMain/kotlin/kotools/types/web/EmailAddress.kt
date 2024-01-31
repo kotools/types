@@ -82,24 +82,14 @@ public class EmailAddress private constructor(private val text: String) {
          * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
          * ```
          * </details>
-         *
          * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
          *
-         * Here's an example of calling this property from Java code:
-         *
-         * ```java
-         * final Regex regex = EmailAddress.Companion.getRegex();
-         * System.out.println(regex); // ^\S+@\S+\.\S+$
-         * ```
-         * </details>
+         * The [Regex] type being unavailable on Java, this property is not
+         * available for this language.
          */
-        public val regex: Regex by lazy {
+        @get:JvmSynthetic
+        public val regex: Regex =
             Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
-        }
 
         /**
          * Creates an email address from the specified [text], or throws an
