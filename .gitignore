@@ -4,7 +4,7 @@
 build/
 .gradle/
 
-# Files
+# Specific files
 !gradle-wrapper.jar
 
 ################################ Java & Kotlin #################################
@@ -25,7 +25,7 @@ target/
 *.war
 *.zip
 
-# Files
+# Specific files
 hs_err_pid*
 Playground.kt
 PlaygroundTest.java
@@ -42,7 +42,7 @@ out/
 *.ipr
 *.iws
 
-# Files
+# Specific files
 atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics*.properties
@@ -59,7 +59,7 @@ Temporary Items/
 # File extensions
 ._*
 
-# Files
+# Specific files
 .AppleDouble
 .com.apple.timemachine.donotpresent
 .DocumentRevisions-V100
@@ -86,6 +86,6 @@ $RECYCLE.BIN/
 *.msp
 *.stackdump
 
-# Files
+# Specific files
 ehthumbs*.db
 Thumbs.db*
