@@ -43,7 +43,7 @@ private fun TaskContainer.dokkaTasks(project: Project): Unit =
             .map { it.asFile }
             .let { this.outputDirectory.set(it) }
         this.dokkaSourceSets.configureEach {
-            this.includes.setFrom("src/packages.md")
+            this.includes.setFrom("dokka/packages.md")
             this.reportUndocumented.set(true)
             this.skipEmptyPackages.set(true)
         }
@@ -64,7 +64,7 @@ private val Project.copyrightNotice: String
         }
 
 private val Project.logoIcon: File
-    get() = this.rootDir.resolve("assets/logo-icon.svg")
+    get() = this.rootDir.resolve("dokka/logo-icon.svg")
 
 private fun TaskContainer.apiReferenceJar(project: Project) {
     val apiReferenceJar: TaskProvider<Jar> =
