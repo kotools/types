@@ -1,4 +1,4 @@
-package org.kotools.types.web
+package kotools.types.web
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException

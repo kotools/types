@@ -1,4 +1,4 @@
-package org.kotools.types.web
+package kotools.types.web
 
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer

@@ -24,6 +24,6 @@ Contains declarations for manipulating the
 
 Contains types such as [NotBlankString] for manipulating text.
 
-# Package org.kotools.types.web
+# Package kotools.types.web
 
 Web related declarations, such as [EmailAddress].
