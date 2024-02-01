@@ -22,8 +22,10 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-Documentation of dependency compatibility (issue
-[#288](https://github.com/kotools/types/issues/288)).
+- `NotBlankString.Companion.create(Any?)` **experimental** factory function
+  (issue [#341](https://github.com/kotools/types/issues/341)).
+- Documentation of dependency compatibility (issue
+  [#288](https://github.com/kotools/types/issues/288)).
 
 ### Changed
 

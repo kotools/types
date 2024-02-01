@@ -7,7 +7,9 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -40,6 +42,37 @@ public value class NotBlankString private constructor(
 ) : Comparable<NotBlankString> {
     /** Contains static declarations for the [NotBlankString] type. */
     public companion object {
+        /**
+         * Creates a [NotBlankString] from the string representation of the
+         * specified [value], or throws an [IllegalArgumentException] if its
+         * string representation is [blank][String.isBlank].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * var text: NotBlankString = NotBlankString.create("Kotools Types")
+         * println(text) // Kotools Types
+         *
+         * text = NotBlankString.create(null)
+         * println(text) // null
+         *
+         * text = NotBlankString.create(42)
+         * println(text) // 42
+         * ```
+         *
+         * The [NotBlankString] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun create(value: Any?): NotBlankString {
+            val text: String = value.toString()
+            require(text.isNotBlank()) { ErrorMessage.blankString }
+            return NotBlankString(text)
+        }
+
         @JvmSynthetic
         internal infix fun of(value: String): NotBlankString? =
             if (value.isBlank()) null

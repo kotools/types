@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
@@ -22,6 +23,31 @@ import kotlin.test.assertTrue
 private object StringExample {
     const val BLANK: String = "  "
     const val NOT_BLANK: String = "hello world"
+}
+
+@ExperimentalKotoolsTypesApi
+class NotBlankStringCompanionTest {
+    @Test
+    fun create_should_pass_with_null() {
+        NotBlankString.create(null)
+    }
+
+    @Test
+    fun create_should_pass_with_an_object_having_a_not_blank_string_representation() {
+        val value: Any = StringExample.NOT_BLANK
+        NotBlankString.create(value)
+    }
+
+    @Test
+    fun create_should_fail_with_an_object_having_a_blank_string_representation() {
+        val value: Any = StringExample.BLANK
+        val exception: IllegalArgumentException = assertFailsWith {
+            NotBlankString.create(value)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = ErrorMessage.blankString
+        assertEquals(expected, actual)
+    }
 }
 
 class NotBlankStringTest {
