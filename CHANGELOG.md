@@ -22,8 +22,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `NotBlankString.Companion.create(Any?)` **experimental** factory function
-  (issue [#341](https://github.com/kotools/types/issues/341)).
+- `create(Any?)` and `createOrNull(Any?)` **experimental** factory functions in
+  `NotBlankString.Companion` (issue
+  [#341](https://github.com/kotools/types/issues/341)).
 - Documentation of dependency compatibility (issue
   [#288](https://github.com/kotools/types/issues/288)).
 

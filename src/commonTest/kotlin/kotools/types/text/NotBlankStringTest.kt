@@ -18,6 +18,8 @@ import kotools.types.shouldEqual
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 private object StringExample {
@@ -47,6 +49,26 @@ class NotBlankStringCompanionTest {
         val actual = ErrorMessage(exception)
         val expected: ErrorMessage = ErrorMessage.blankString
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun createOrNull_should_pass_with_null() {
+        val actual: NotBlankString? = NotBlankString.createOrNull(null)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun createOrNull_should_pass_with_an_object_having_a_not_blank_string_representation() {
+        val value: Any = StringExample.NOT_BLANK
+        val actual: NotBlankString? = NotBlankString.createOrNull(value)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun createOrNull_should_fail_with_an_object_having_a_blank_string_representation() {
+        val value: Any = StringExample.BLANK
+        val actual: NotBlankString? = NotBlankString.createOrNull(value)
+        assertNull(actual)
     }
 }
 

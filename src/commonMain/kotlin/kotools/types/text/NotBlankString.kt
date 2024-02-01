@@ -73,6 +73,32 @@ public value class NotBlankString private constructor(
             return NotBlankString(text)
         }
 
+        /**
+         * Creates a [NotBlankString] from the string representation of the
+         * specified [value], or returns `null` if its string representation is
+         * [blank][String.isBlank].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * var text: NotBlankString? =
+         *     NotBlankString.createOrNull("Kotools Types")
+         * println(text) // Kotools Types
+         * ```
+         *
+         * The [NotBlankString] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun createOrNull(value: Any?): NotBlankString? {
+            val text: String = value.toString()
+            return if (text.isNotBlank()) NotBlankString(text)
+            else null
+        }
+
         @JvmSynthetic
         internal infix fun of(value: String): NotBlankString? =
             if (value.isBlank()) null
