@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -35,3 +37,8 @@ dependencies {
 }
 
 tasks.register("unit")
+tasks.withType<KotlinCompile>().configureEach {
+    compilerOptions.freeCompilerArgs.add(
+        "-opt-in=kotools.types.internal.InternalKotoolsTypesApi"
+    )
+}

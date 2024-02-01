@@ -1,8 +1,10 @@
 package kotools.types.internal.text
 
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@InternalKotoolsTypesApi
 class SpecialCharTest {
     @Test
     fun toChar_should_pass_on_AtSign() {

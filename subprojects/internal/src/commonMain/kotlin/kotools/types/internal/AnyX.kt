@@ -5,6 +5,7 @@ package kotools.types.internal
 import kotlin.jvm.JvmName
 
 /** Returns a unique hash code value for the specified objects. */
+@InternalKotoolsTypesApi
 public fun hashCodeOf(first: Any, vararg others: Any): Int {
     val prime = 31
     var result: Int = prime + first.hashCode()
