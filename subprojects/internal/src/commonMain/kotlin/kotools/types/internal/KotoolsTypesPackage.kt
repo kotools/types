@@ -1,6 +1,7 @@
 package kotools.types.internal
 
 /** Represents a package of Kotools Types. */
+@InternalKotoolsTypesApi
 public enum class KotoolsTypesPackage {
     Experimental, Number, Text;
 

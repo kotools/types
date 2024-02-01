@@ -5,6 +5,7 @@ package kotools.types.internal
  * throws an [IllegalArgumentException] if the [throwable] doesn't have a
  * message or have a blank one.
  */
+@InternalKotoolsTypesApi
 public fun ErrorMessage(throwable: Throwable): ErrorMessage {
     val text: String =
         requireNotNull(throwable.message) { "Throwable should have a message." }
@@ -17,6 +18,7 @@ public fun ErrorMessage(throwable: Throwable): ErrorMessage {
  * @constructor Creates an error message with the specified [text], or throws
  * an [IllegalArgumentException] if the [text] is [blank][CharSequence.isBlank].
  */
+@InternalKotoolsTypesApi
 public class ErrorMessage(private val text: String) {
     init {
         val isValid: Boolean = text.isNotBlank()
@@ -76,6 +78,7 @@ public class ErrorMessage(private val text: String) {
  * Returns an error message indicating that it was unable to deserialize the
  * type [T] from the specified [value].
  */
+@InternalKotoolsTypesApi
 public inline fun <reified T : Any> deserializationErrorMessage(
     value: Any
 ): ErrorMessage {
@@ -87,14 +90,17 @@ public inline fun <reified T : Any> deserializationErrorMessage(
  * Returns an error message indicating that this number should be greater than
  * zero.
  */
+@InternalKotoolsTypesApi
 public fun Number.shouldBeGreaterThanZero(): ErrorMessage =
     ErrorMessage("Number should be greater than zero (tried with $this)")
 
 /** Returns an error message indicating that this number should be negative. */
+@InternalKotoolsTypesApi
 public fun Number.shouldBeNegative(): ErrorMessage =
     ErrorMessage("Number should be negative (tried with $this).")
 
 /** Returns an error message indicating that this number should be positive. */
+@InternalKotoolsTypesApi
 public fun Number.shouldBePositive(): ErrorMessage =
     ErrorMessage("Number should be positive (tried with $this).")
 
@@ -102,6 +108,7 @@ public fun Number.shouldBePositive(): ErrorMessage =
  * Returns an error message indicating that this number should be strictly
  * negative.
  */
+@InternalKotoolsTypesApi
 public fun Number.shouldBeStrictlyNegative(): ErrorMessage =
     ErrorMessage("Number should be strictly negative (tried with $this).")
 
@@ -109,5 +116,6 @@ public fun Number.shouldBeStrictlyNegative(): ErrorMessage =
  * Returns an error message indicating that this number should be strictly
  * positive.
  */
+@InternalKotoolsTypesApi
 public fun Number.shouldBeStrictlyPositive(): ErrorMessage =
     ErrorMessage("Number should be strictly positive (tried with $this).")

@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Encoder
  * Creates a serializer with the specified [deserializationStrategy] and
  * [intConverter] for serializing the type [T] as [Int].
  */
+@InternalKotoolsTypesApi
 public fun <T : Any> intSerializer(
     deserializationStrategy: DeserializationStrategy<T>,
     intConverter: (T) -> Int
@@ -31,6 +32,7 @@ public fun <T : Any> intSerializer(
  * Creates a serializer with the specified [deserializationStrategy] for
  * serializing the type [T] as [String].
  */
+@InternalKotoolsTypesApi
 public fun <T : Any> stringSerializer(
     deserializationStrategy: DeserializationStrategy<T>
 ): KSerializer<T> = object : KSerializer<T> {

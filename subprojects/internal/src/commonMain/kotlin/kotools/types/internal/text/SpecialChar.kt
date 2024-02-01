@@ -1,6 +1,9 @@
 package kotools.types.internal.text
 
+import kotools.types.internal.InternalKotoolsTypesApi
+
 /** Represents a special character. */
+@InternalKotoolsTypesApi
 public enum class SpecialChar(private val value: Char) {
     AtSign('@');
 
