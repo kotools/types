@@ -20,10 +20,8 @@ This issue is blocked by the following ones:
 ## Checklist
 
 - [ ] Make $DECLARATION available for Java users, [test] its compatibility, update the public [API binaries] and update the [unreleased changelog].
-- [ ] [Create an issue][new-issue] for stabilizing this declaration in the next [minor release][versioning-strategy].
+- [ ] Close this issue as completed and update tracking ones if present.
 
 [api binaries]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-api-binaries
-[new-issue]: https://github.com/kotools/types/issues/new/choose
 [test]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#running-tests
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
-[versioning-strategy]: https://github.com/kotools/types/blob/main/documentation/versioning-strategy.md
