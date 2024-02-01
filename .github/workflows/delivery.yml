@@ -36,8 +36,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Deliver package to OSSRH
-        run: ./gradlew :publishJsPublicationToOSSRHRepository --no-daemon
+      - name: Deliver 'internal' subproject to OSSRH
+        run: ./gradlew :internal:publishJsPublicationToOSSRHRepository
+      - name: Deliver root project to OSSRH
+        run: ./gradlew :publishJsPublicationToOSSRHRepository
   deliver-jvm:
     name: Deliver JVM package
     needs: validate-wrapper
@@ -51,8 +53,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Deliver package to OSSRH
-        run: ./gradlew :publishJvmPublicationToOSSRHRepository --no-daemon
+      - name: Deliver 'internal' subproject to OSSRH
+        run: ./gradlew :internal:publishJvmPublicationToOSSRHRepository
+      - name: Deliver root project to OSSRH
+        run: ./gradlew :publishJvmPublicationToOSSRHRepository
   deliver-linux:
     name: Deliver Linux package
     needs: validate-wrapper
@@ -66,8 +70,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Deliver package to OSSRH
-        run: ./gradlew :publishLinuxPublicationToOSSRHRepository --no-daemon
+      - name: Deliver 'internal' subproject to OSSRH
+        run: ./gradlew :internal:publishLinuxPublicationToOSSRHRepository
+      - name: Deliver root project to OSSRH
+        run: ./gradlew :publishLinuxPublicationToOSSRHRepository
   deliver-macos:
     name: Deliver macOS package
     needs: validate-wrapper
@@ -81,8 +87,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Deliver package to OSSRH
-        run: ./gradlew :publishMacosPublicationToOSSRHRepository --no-daemon
+      - name: Deliver 'internal' subproject to OSSRH
+        run: ./gradlew :internal:publishMacosPublicationToOSSRHRepository
+      - name: Deliver root project to OSSRH
+        run: ./gradlew :publishMacosPublicationToOSSRHRepository
   deliver-windows:
     name: Deliver Windows package
     needs: validate-wrapper
@@ -96,8 +104,10 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Deliver package to OSSRH
-        run: ./gradlew :publishWindowsPublicationToOSSRHRepository --no-daemon
+      - name: Deliver 'internal' subproject to OSSRH
+        run: ./gradlew :internal:publishWindowsPublicationToOSSRHRepository
+      - name: Deliver root project to OSSRH
+        run: ./gradlew :publishWindowsPublicationToOSSRHRepository
   # ---------- Stage 3 ----------
   deliver-multiplatform:
     name: Deliver multiplatform package
@@ -117,5 +127,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
-      - name: Deliver package
-        run: ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository --no-daemon
+      - name: Deliver 'internal' subproject to OSSRH
+        run: ./gradlew :internal:publishKotlinMultiplatformPublicationToOSSRHRepository
+      - name: Deliver root project to OSSRH
+        run: ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository
