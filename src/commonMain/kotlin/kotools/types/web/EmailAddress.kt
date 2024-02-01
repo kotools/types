@@ -70,19 +70,11 @@ public class EmailAddress private constructor(private val text: String) {
          * - `$` **End.** Matches the end of the string, or the end of a line if
          * the multiline flag (m) is enabled.
          *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
          * Here's an example of calling this property from Kotlin code:
          *
          * ```kotlin
          * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
          * ```
-         * </details>
-         * <br>
          *
          * The [Regex] type being unavailable on Java, this property is not
          * available for this language.
