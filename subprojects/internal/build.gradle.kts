@@ -8,12 +8,14 @@ plugins {
     id("kotools.types.publication")
 }
 
+group = "org.kotools"
+
 repositories.mavenCentral()
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
-        artifactId = project.name
+        artifactId = "${rootProject.name}-${project.name}"
         version = "${project.version}"
     }
 
