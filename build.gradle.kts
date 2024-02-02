@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -41,6 +42,9 @@ dependencies {
 tasks.register("unit")
 
 val optInInternals = "-opt-in=kotools.types.internal.InternalKotoolsTypesApi"
+tasks.withType<KotlinCompileCommon>().configureEach { // Common platform
+    kotlinOptions.freeCompilerArgs += optInInternals
+}
 tasks.withType<Kotlin2JsCompile>().configureEach {// Kotlin/JS
     compilerOptions.freeCompilerArgs.add(optInInternals)
 }
