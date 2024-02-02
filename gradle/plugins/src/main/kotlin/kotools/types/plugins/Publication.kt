@@ -28,18 +28,15 @@ public class PublicationPlugin : Plugin<Project> {
 private fun RepositoryHandler.ossrh(project: Project) {
     maven {
         name = "OSSRH"
-        val uriSuffix: String =
-            if (project.isSnapshot) "content/repositories/snapshots/"
-            else "service/local/staging/deploy/maven2/"
-        url = project.uri("https://s01.oss.sonatype.org/$uriSuffix")
+        url = project.uri(
+            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+        )
         credentials {
             username = Env.mavenUsername
             password = Env.mavenPassword
         }
     }
 }
-
-private val Project.isSnapshot: Boolean get() = "$version".endsWith("SNAPSHOT")
 
 private fun MavenPublication.configurePom(): Unit = pom {
     name.set("Kotools Types")
