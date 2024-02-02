@@ -37,14 +37,10 @@ public class DocumentationPlugin : Plugin<Project> {
 
 private fun TaskContainer.dokkaTasks(project: Project): Unit =
     this.withType<DokkaTask>().configureEach {
-        this.moduleName.set("Kotools Types")
-        this.failOnWarning.set(true)
         project.layout.buildDirectory.dir("dokka")
             .map { it.asFile }
             .let { this.outputDirectory.set(it) }
         this.dokkaSourceSets.configureEach {
-            this.includes.setFrom("dokka/packages.md")
-            this.reportUndocumented.set(true)
             this.skipEmptyPackages.set(true)
         }
         this.pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {

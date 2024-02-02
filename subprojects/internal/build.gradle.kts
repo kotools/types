@@ -1,10 +1,12 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.dokka)
     `maven-publish`
     signing
     id("kotools.types.base")
     id("kotools.types.multiplatform")
+    id("kotools.types.documentation")
     id("kotools.types.publication")
 }
 
