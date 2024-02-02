@@ -73,7 +73,7 @@ jobs:
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:jsTest
+        run: ./gradlew :types-internal:jsTest
       - name: Test root project
         run: ./gradlew :jsTest
   jvm-checks:
@@ -95,7 +95,7 @@ jobs:
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:jvmTest
+        run: ./gradlew :types-internal:jvmTest
       - name: Test 'java-compatibility' subproject
         run: ./gradlew :java-compatibility:test
       - name: Check root project
@@ -119,7 +119,7 @@ jobs:
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:linuxTest
+        run: ./gradlew :types-internal:linuxTest
       - name: Test root project
         run: ./gradlew :linuxTest
   macos-test:
@@ -141,7 +141,7 @@ jobs:
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:macosTest
+        run: ./gradlew :types-internal:macosTest
       - name: Test root project
         run: ./gradlew :macosTest
   windows-test:
@@ -163,6 +163,6 @@ jobs:
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:windowsTest
+        run: ./gradlew :types-internal:windowsTest
       - name: Test root project
         run: ./gradlew :windowsTest

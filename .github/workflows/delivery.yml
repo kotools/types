@@ -37,7 +37,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :internal:publishJsPublicationToOSSRHRepository
+        run: ./gradlew :types-internal:publishJsPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishJsPublicationToOSSRHRepository
   deliver-jvm:
@@ -55,7 +55,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :internal:publishJvmPublicationToOSSRHRepository
+        run: ./gradlew :types-internal:publishJvmPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishJvmPublicationToOSSRHRepository
   deliver-linux:
@@ -73,7 +73,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :internal:publishLinuxPublicationToOSSRHRepository
+        run: ./gradlew :types-internal:publishLinuxPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishLinuxPublicationToOSSRHRepository
   deliver-macos:
@@ -91,7 +91,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :internal:publishMacosPublicationToOSSRHRepository
+        run: ./gradlew :types-internal:publishMacosPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishMacosPublicationToOSSRHRepository
   deliver-windows:
@@ -109,7 +109,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :internal:publishWindowsPublicationToOSSRHRepository
+        run: ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishWindowsPublicationToOSSRHRepository
   # ---------- Stage 3 ----------
@@ -133,6 +133,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.12.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :internal:publishKotlinMultiplatformPublicationToOSSRHRepository
+        run: ./gradlew :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository

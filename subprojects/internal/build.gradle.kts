@@ -15,7 +15,7 @@ repositories.mavenCentral()
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
-        artifactId = "${rootProject.name}-${project.name}"
+        artifactId = project.name
         version = "${project.version}"
     }
 
