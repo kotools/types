@@ -59,7 +59,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:jsTest
+        run: ./gradlew :types-internal:jsTest
       - name: Test root project
         run: ./gradlew :jsTest
   jvm-checks:
@@ -76,7 +76,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:jvmTest
+        run: ./gradlew :types-internal:jvmTest
       - name: Test 'java-compatibility' subproject
         run: ./gradlew :java-compatibility:test
       - name: Check root project
@@ -95,7 +95,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:linuxTest
+        run: ./gradlew :types-internal:linuxTest
       - name: Test root project
         run: ./gradlew :linuxTest
   macos-test:
@@ -112,7 +112,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:macosTest
+        run: ./gradlew :types-internal:macosTest
       - name: Test root project
         run: ./gradlew :macosTest
   windows-test:
@@ -129,7 +129,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           cache: ${{ env.CACHING }}
       - name: Test 'internal' subproject
-        run: ./gradlew :internal:windowsTest
+        run: ./gradlew :types-internal:windowsTest
       - name: Test root project
         run: ./gradlew :windowsTest
   # ---------- Stage 3 ----------
