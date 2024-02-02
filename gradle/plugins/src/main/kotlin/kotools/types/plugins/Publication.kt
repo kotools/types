@@ -29,8 +29,8 @@ private fun RepositoryHandler.ossrh(project: Project) {
     maven {
         name = "OSSRH"
         val uriSuffix: String =
-            if (project.isSnapshot) "content/repositories/snapshots"
-            else "service/local/staging/deploy/maven2"
+            if (project.isSnapshot) "content/repositories/snapshots/"
+            else "service/local/staging/deploy/maven2/"
         url = project.uri("https://s01.oss.sonatype.org/$uriSuffix")
         credentials {
             username = Env.mavenUsername
