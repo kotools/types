@@ -41,10 +41,15 @@ private fun ExtensionContainer.configure() {
         explicitApi()
         js(IR) { browser() }
         jvm()
-        linuxX64("linux")
-        macosX64("macos")
-        mingwX64("windows")
+        nativeTargets()
     }
+}
+
+private fun KotlinMultiplatformExtension.nativeTargets() {
+    // According to https://kotlinlang.org/docs/native-target-support.html
+    macosX64("macos") // Tier 1
+    linuxX64("linux") // Tier 2
+    mingwX64("windows") // Tier 3
 }
 
 private fun TaskContainer.configure(project: Project) {
