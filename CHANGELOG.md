@@ -20,6 +20,22 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 4.4.1 <a id="4.4.1"></a>
+
+_Release date: 2024-02-02 | Commits: [4.4.0...4.4.1]._
+
+[4.4.0...4.4.1]: https://github.com/kotools/types/compare/4.4.0...4.4.1
+
+### Fixed
+
+This release fixes the publication of the previous one, in which the
+`types-internal` project was missing in the Gradle dependency tree.
+
+So it is recommended to bypass version 4.4.0 and directly upgrade to 4.4.1.
+
+Thanks to [@robertfmurdock](https://github.com/robertfmurdock) for reporting
+this error (issue [#406](https://github.com/kotools/types/issues/406)).
+
 ## 4.4.0
 
 _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
@@ -122,7 +138,7 @@ The copyright notice in the license (issue
   avoiding cross-realm object access (issue
   [#313](https://github.com/kotools/types/issues/313)).
 
-## 4.3.1
+## 4.3.1 <a id="4.3.1"></a>
 
 _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
 
@@ -184,7 +200,7 @@ _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
 
 [#222]: https://github.com/kotools/types/pull/222
 
-## 4.3.0
+## 4.3.0 <a id="4.3.0"></a>
 
 _Release date: 2023-08-14._
 
@@ -207,7 +223,7 @@ _See the [full changelog][4.2.0-4.3.0] from version [4.2.0][tag-4.2.0]._
 [#137]: https://github.com/kotools/types/issues/137
 [#138]: https://github.com/kotools/types/issues/138
 
-## 4.2.0
+## 4.2.0 <a id="4.2.0"></a>
 
 _Release date: 2023-06-24._
 
@@ -371,7 +387,7 @@ println(notEmptyListSerialName == expectedSerialName) // true
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [#77]: https://github.com/kotools/types/issues/77
 
-## 4.1.0
+## 4.1.0 <a id="4.1.0"></a>
 
 _Release date: 2023-04-03._
 
@@ -480,7 +496,7 @@ result = firstString < secondString
 
 [#45]: https://github.com/kotools/types/issues/45
 
-## 4.0.1
+## 4.0.1 <a id="4.0.1"></a>
 
 _Release date: 2023-02-06._
 
@@ -503,7 +519,7 @@ Fix versioning annotation of declarations in the `kotools.types.number` package
 
 [#23]: https://github.com/kotools/types/issues/23
 
-## 4.0.0
+## 4.0.0 <a id="4.0.0"></a>
 
 _Release date: 2023-01-03._
 
