@@ -43,9 +43,9 @@ tasks.register("unit")
 
 val optInInternals = "-opt-in=kotools.types.internal.InternalKotoolsTypesApi"
 tasks.withType<KotlinCompileCommon>().configureEach { // Common platform
-    kotlinOptions.freeCompilerArgs += optInInternals
+    compilerOptions.freeCompilerArgs.add(optInInternals)
 }
-tasks.withType<Kotlin2JsCompile>().configureEach {// Kotlin/JS
+tasks.withType<Kotlin2JsCompile>().configureEach { // Kotlin/JS
     compilerOptions.freeCompilerArgs.add(optInInternals)
 }
 tasks.withType<KotlinCompile>().configureEach { // Kotlin/JVM
