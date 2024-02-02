@@ -1,6 +1,7 @@
 ---
 name: Kotlin Native target
 about: New request for supporting a Kotlin Native target.
+title: Support `TARGET` Kotlin Native target
 labels: automation, feature, native
 ---
 
