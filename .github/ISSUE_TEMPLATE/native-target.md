@@ -2,7 +2,7 @@
 name: Kotlin Native target
 about: New request for supporting a Kotlin Native target.
 title: Support `TARGET` Kotlin Native target
-labels: automation, feature, native
+labels: feature, native
 ---
 
 ## Description
@@ -22,7 +22,7 @@ This issue is blocked by the following ones:
 
 ## Checklist
 
-- [ ] Add the target in our Multiplatform Gradle plugin and update the [unreleased changelog].
+- [ ] Add the target in our Multiplatform Gradle plugin, add badge in README and update the [unreleased changelog].
 - [ ] Add the target in the [integration workflow].
 - [ ] Add the target in the [delivery workflow].
 - [ ] Close this issue as completed and update tracking ones if present.
