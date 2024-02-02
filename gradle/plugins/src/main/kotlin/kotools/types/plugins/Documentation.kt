@@ -63,13 +63,7 @@ private fun TaskContainer.configureDokkaHtml(project: Project) {
     val archiveApiReferenceTask: TaskProvider<Copy> =
         register<Copy>("archiveApiReference")
     val dokkaHtml: TaskProvider<DokkaTask> = named<DokkaTask>("dokkaHtml") {
-        moduleName.set("Kotools Types")
-        dokkaSourceSets.configureEach {
-            includes.from +=
-                project.layout.projectDirectory.file("src/packages.md")
-            reportUndocumented.set(true)
-            skipEmptyPackages.set(true)
-        }
+        dokkaSourceSets.configureEach { skipEmptyPackages.set(true) }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
             olderVersionsDir = apiReferencesDir.asFile

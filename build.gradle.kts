@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
@@ -53,4 +54,13 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 tasks.withType<KotlinNativeCompile>().configureEach {
     kotlinOptions.freeCompilerArgs += optInInternals
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    moduleName.set("Kotools Types")
+    failOnWarning.set(true)
+    dokkaSourceSets.configureEach {
+        includes.setFrom("src/packages.md")
+        reportUndocumented.set(true)
+    }
 }
