@@ -9,6 +9,7 @@
 [![JS Platform][js-platform-badge]][kotlin/js]
 [![Linux x64 Platform][linux-x64-platform-badge]][kotlin-native]
 [![macOS x64 Platform][macos-x64-platform-badge]][kotlin-native]
+[![macOS arm64 Platform][macos-arm64-platform-badge]][kotlin-native]
 [![MinGW x64 Platform][mingw-x64-platform-badge]][kotlin-native]
 
 Type safety is a must-have nowadays and reducing runtime errors to compile-time
@@ -71,6 +72,7 @@ See the [API reference][api-reference] for more types!
 [kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
 [linux-x64-platform-badge]: https://img.shields.io/badge/Platform-Linux_x64-4b4bff
 [macos-x64-platform-badge]: https://img.shields.io/badge/Platform-macOS_x64-4b4bff
+[macos-arm64-platform-badge]: https://img.shields.io/badge/Platform-macOS_arm64-4b4bff
 [mingw-x64-platform-badge]: https://img.shields.io/badge/Platform-MinGW_x64-4b4bff
 [total-functions]: https://xlinux.nist.gov/dads/HTML/totalfunc.html
 

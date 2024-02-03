@@ -47,9 +47,13 @@ private fun ExtensionContainer.configure() {
 
 private fun KotlinMultiplatformExtension.nativeTargets() {
     // According to https://kotlinlang.org/docs/native-target-support.html
-    macosX64("macos") // Tier 1
-    linuxX64("linux") // Tier 2
-    mingwX64("windows") // Tier 3
+    // Tier 1
+    macosX64("macos")
+    macosArm64()
+    // Tier 2
+    linuxX64("linux")
+    // Tier 3
+    mingwX64("windows")
 }
 
 private fun TaskContainer.configure(project: Project) {

@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Support the macOS arm64 platform with Kotlin Native (issue
+  [#414](https://github.com/kotools/types/issues/414)).
 - `create(Any?)` and `createOrNull(Any?)` **experimental** factory functions in
   `NotBlankString.Companion` (issue
   [#341](https://github.com/kotools/types/issues/341)).
