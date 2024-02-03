@@ -50,19 +50,17 @@ public value class NotBlankString private constructor(
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * var text: NotBlankString = NotBlankString.create("Kotools Types")
+         * val text: NotBlankString = NotBlankString.create("Kotools Types")
          * println(text) // Kotools Types
-         *
-         * text = NotBlankString.create(null)
-         * println(text) // null
-         *
-         * text = NotBlankString.create(42)
-         * println(text) // 42
          * ```
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
          * this function is not available yet for Java users.
+         *
+         * You can use the [NotBlankString.Companion.createOrNull] function for
+         * returning `null` instead of throwing an exception in case of invalid
+         * [value].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -81,7 +79,7 @@ public value class NotBlankString private constructor(
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * var text: NotBlankString? =
+         * val text: NotBlankString? =
          *     NotBlankString.createOrNull("Kotools Types")
          * println(text) // Kotools Types
          * ```
@@ -89,6 +87,10 @@ public value class NotBlankString private constructor(
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
          * this function is not available yet for Java users.
+         *
+         * You can use the [NotBlankString.Companion.create] function for
+         * throwing an exception instead of returning `null` in case of invalid
+         * [value].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
