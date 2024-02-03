@@ -54,10 +54,9 @@ Deprecation promotion of the following annotations to error (issue
 
 ### Security
 
-Upgrade [follow-redirects](https://github.com/follow-redirects/follow-redirects)
-to 1.15.4 on Kotlin/JS platform because prior versions are vulnerable to
-Improper Input Validation due to the improper handling of URLs by the
-`url.parse()` function (issue
+Upgrade follow-redirects to 1.15.4 on Kotlin/JS platform because prior versions
+are vulnerable to Improper Input Validation due to the improper handling of URLs
+by the `url.parse()` function (issue
 [#375](https://github.com/kotools/types/issues/375)).
 See the [security report](https://github.com/advisories/GHSA-jchw-25xp-jwwc) for
 more details on this vulnerability.
