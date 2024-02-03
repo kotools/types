@@ -22,11 +22,9 @@ This issue is blocked by the following ones:
 
 ## Checklist
 
-- [ ] Add the target in our Multiplatform Gradle plugin, add badge in README and update the [unreleased changelog].
-- [ ] Add the target in the [integration workflow].
-- [ ] Add the target in the [delivery workflow].
+- [ ] Add the target in our Multiplatform Gradle plugin, add the target in the [integration] and the [delivery] workflows, add badge in README and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
 
-[delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
-[integration workflow]: https://github.com/kotools/types/actions/workflows/integration.yml
+[delivery]: https://github.com/kotools/types/actions/workflows/delivery.yml
+[integration]: https://github.com/kotools/types/actions/workflows/integration.yml
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
