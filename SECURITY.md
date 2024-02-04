@@ -1,24 +1,17 @@
 # Security Policy
 
-## Supported Versions
+We do our best to make sure Kotools Types is free of security vulnerabilities.
+To reduce the risk of introducing a vulnerability, we recommend you to always
+use the [latest release] available.
 
-Here's the versions of Kotools Types that are currently supported with security
-updates:
+We are very grateful to hear about any security issues you find.
+To report a security vulnerability discovered in this project, please do the
+following:
+1. [Check] if this vulnerability was reported by another contributor.
+2. If this the case, react on and follow the corresponding issue for being
+   noticed when it will be fixed.
+3. If not, [report] your security vulnerability.
 
-| Version | Supported          |
-|---------|--------------------|
-| 4.4.x   | :white_check_mark: |
-| 4.3.x   | :white_check_mark: |
-| 4.2.x   | :white_check_mark: |
-| < 4.2.0 | :x:                |
-
-## Reporting a Vulnerability
-
-If you've noticed a security vulnerability, you can [check the open issues] if
-this vulnerability was already reported by another contributor.
-If this is the case, please add a comment in the corresponding issue for being
-noticed when it will be solved.
-If not, please report it by [creating an issue].
-
-[check the open issues]: https://github.com/kotools/types/issues?q=is%3Aopen+is%3Aissue+label%3Asecurity
-[creating an issue]: https://github.com/kotools/types/issues/new?template=security-template.md
+[check]: https://github.com/kotools/types/issues?q=is%3Aopen+is%3Aissue+label%3Asecurity
+[latest release]: https://github.com/kotools/types/releases
+[report]: https://github.com/kotools/types/issues/new?template=security-template.md
