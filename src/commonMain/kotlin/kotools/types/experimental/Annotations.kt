@@ -37,7 +37,7 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
 )
 @DeprecatedSince(
     warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.Unreleased
+    errorSince = KotoolsTypesVersion.V4_5_0
 )
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
@@ -56,7 +56,7 @@ public annotation class ExperimentalCollectionApi
 )
 @DeprecatedSince(
     warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.Unreleased
+    errorSince = KotoolsTypesVersion.V4_5_0
 )
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
@@ -75,7 +75,7 @@ public annotation class ExperimentalNumberApi
 )
 @DeprecatedSince(
     warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.Unreleased
+    errorSince = KotoolsTypesVersion.V4_5_0
 )
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
@@ -94,7 +94,7 @@ public annotation class ExperimentalRangeApi
 )
 @DeprecatedSince(
     warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.Unreleased
+    errorSince = KotoolsTypesVersion.V4_5_0
 )
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
@@ -113,7 +113,7 @@ public annotation class ExperimentalResultApi
 )
 @DeprecatedSince(
     warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.Unreleased
+    errorSince = KotoolsTypesVersion.V4_5_0
 )
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
