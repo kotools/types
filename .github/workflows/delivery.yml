@@ -138,6 +138,7 @@ jobs:
       - jvm-delivery
       - linux-delivery
       - macosX64-delivery
+      - macosArm64-delivery
       - windows-delivery
     runs-on: ubuntu-latest
     steps:
