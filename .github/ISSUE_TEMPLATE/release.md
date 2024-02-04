@@ -17,7 +17,6 @@ Issues of the milestone corresponding to this version should be done before reso
 - [ ] Check the copyright notice in the [license] documentation, then apply the corresponding commit to the release branch if updated.
 - [ ] Deliver packages to the [Maven central] by running the [delivery workflow].
 - [ ] Close valid packages and drop invalid ones on the [Maven central].
-- [ ] Add this version in the [security policy] documentation, then apply the corresponding commit to the release branch.
 - [ ] Prepare a release notes for this version, then apply the corresponding commit to the release branch.
 - [ ] Release packages on the [Maven central].
 - [ ] Run the `publishApiReference.sh` script locally from the release branch and update the API reference.
@@ -28,6 +27,5 @@ Issues of the milestone corresponding to this version should be done before reso
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
 [maven central]: https://s01.oss.sonatype.org
-[security policy]: https://github.com/kotools/types/blob/main/SECURITY.md
 [slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
 [twitter]: https://twitter.com/KotoolsContact
