@@ -122,8 +122,8 @@ jobs:
         run: ./gradlew :types-internal:linuxTest
       - name: Test root project
         run: ./gradlew :linuxTest
-  macosX64-test:
-    name: Kotlin Native tests for macOS x64
+  macos-test:
+    name: Kotlin Native tests for macOS
     needs: gradle-wrapper-validation
     runs-on: macos-latest
     permissions:
@@ -140,31 +140,13 @@ jobs:
         uses: gradle/gradle-build-action@v2.12.0
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
-      - name: Test 'internal' subproject
+      - name: Test 'internal' subproject on macOS x64
         run: ./gradlew :types-internal:macosTest
-      - name: Test root project
-        run: ./gradlew :macosTest
-  macosArm64-test:
-    name: Kotlin Native tests for macOS arm64
-    needs: gradle-wrapper-validation
-    runs-on: macos-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.0.0
-      - name: Setup Java
-        uses: actions/setup-java@v4.0.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
-        with:
-          dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
-      - name: Test 'internal' subproject
+      - name: Test 'internal' subproject on macOS arm64
         run: ./gradlew :types-internal:macosArm64Test
-      - name: Test root project
+      - name: Test root project on macOS x64
+        run: ./gradlew :macosTest
+      - name: Test root project on macOS arm64
         run: ./gradlew :macosArm64Test
   windows-test:
     name: Kotlin Native tests for Windows
