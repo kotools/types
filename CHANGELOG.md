@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
 
 ## 4.5.0 <a id="4.5.0"></a>
 
-_Release date: 2024-02-26 | Commits: [4.4.1...4.5.0]._
+_Release date: 2024-03-25 | Commits: [4.4.1...4.5.0]._
 
 [4.4.1...4.5.0]: https://github.com/kotools/types/compare/4.4.1...4.5.0
 
