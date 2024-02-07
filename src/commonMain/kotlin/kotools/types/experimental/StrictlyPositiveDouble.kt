@@ -79,7 +79,7 @@ public class StrictlyPositiveDouble private constructor(
 }
 
 @ExperimentalKotoolsTypesApi
-private object StrictlyPositiveDoubleSerializer :
+internal object StrictlyPositiveDoubleSerializer :
     KSerializer<StrictlyPositiveDouble> {
     override val descriptor: SerialDescriptor by lazy {
         PrimitiveSerialDescriptor(

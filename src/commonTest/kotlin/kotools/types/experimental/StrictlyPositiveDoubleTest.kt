@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -220,5 +221,20 @@ class StrictlyPositiveDoubleSerializerTest {
         val actual = ErrorMessage(exception)
         val expected: ErrorMessage = value.shouldBeGreaterThanZero()
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun serialization_processes_of_wrapped_StrictlyPositiveDouble_should_pass() {
+        @Serializable
+        data class Wrapper(val value: StrictlyPositiveDouble)
+
+        val wrapper: Wrapper = Random
+            .nextDouble(from = 0.1, until = Double.MAX_VALUE)
+            .toStrictlyPositiveDouble()
+            .map { Wrapper(it) }
+            .getOrThrow()
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.value, decoded.value)
     }
 }
