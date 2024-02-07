@@ -4,7 +4,6 @@ package kotools.types.internal
 @InternalKotoolsTypesApi
 public enum class KotoolsTypesVersion {
     Unreleased,
-    V4_5_0,
     V4_4_0,
     V4_3_1,
     V4_2_0,

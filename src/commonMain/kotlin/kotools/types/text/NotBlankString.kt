@@ -63,7 +63,7 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun create(value: Any?): NotBlankString {
             val text: String = value.toString()
@@ -93,7 +93,7 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun createOrNull(value: Any?): NotBlankString? {
             val text: String = value.toString()
