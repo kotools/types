@@ -2,6 +2,7 @@ package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
@@ -228,5 +229,19 @@ class NotEmptyMapSerializerTest {
         val actualMessage = ErrorMessage(exception)
         val expectedMessage: ErrorMessage = ErrorMessage.emptyMap
         assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun serialization_processes_of_wrapped_NotEmptyMap_should_pass() {
+        @Serializable
+        data class Wrapper(val values: NotEmptyMap<Char, Int>)
+
+        val wrapper: Wrapper = mapOf('a' to Random.nextInt())
+            .toNotEmptyMap()
+            .map { Wrapper(it) }
+            .getOrThrow()
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.values, decoded.values)
     }
 }
