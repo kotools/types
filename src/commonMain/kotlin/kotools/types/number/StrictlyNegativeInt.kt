@@ -73,7 +73,7 @@ public value class StrictlyNegativeInt private constructor(
     }
 }
 
-private object StrictlyNegativeIntSerializer :
+internal object StrictlyNegativeIntSerializer :
     KSerializer<StrictlyNegativeInt> by intSerializer(
         StrictlyNegativeIntDeserializationStrategy,
         intConverter = { it.toInt() }
