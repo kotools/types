@@ -237,7 +237,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     }
 }
 
-private class NotEmptyMapSerializer<K, V>(
+internal class NotEmptyMapSerializer<K, V>(
     keySerializer: KSerializer<K>,
     valueSerializer: KSerializer<V>
 ) : KSerializer<NotEmptyMap<K, V>> {
