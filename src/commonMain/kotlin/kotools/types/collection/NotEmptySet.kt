@@ -116,7 +116,7 @@ public value class NotEmptySet<out E> private constructor(
     }
 }
 
-private class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
+internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptySet<E>> {
     private val delegate: KSerializer<Set<E>> by lazy {
         SetSerializer(elementSerializer)
