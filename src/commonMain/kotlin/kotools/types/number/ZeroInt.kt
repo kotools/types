@@ -22,7 +22,7 @@ public object ZeroInt : PositiveInt, NegativeInt {
     override fun toString(): String = "${toInt()}"
 }
 
-private object ZeroIntSerializer : KSerializer<ZeroInt> by intSerializer(
+internal object ZeroIntSerializer : KSerializer<ZeroInt> by intSerializer(
     ZeroIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )
