@@ -56,6 +56,8 @@ tasks.withType<KotlinNativeCompile>().configureEach {
     kotlinOptions.freeCompilerArgs += optInInternals
 }
 
+tasks.jsBrowserTest.configure { useMocha() }
+
 tasks.withType<DokkaTask>().configureEach {
     moduleName.set("Kotools Types")
     failOnWarning.set(true)

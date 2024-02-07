@@ -88,7 +88,7 @@ public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
 
-private object AnyIntSerializer : KSerializer<AnyInt> by intSerializer(
+internal object AnyIntSerializer : KSerializer<AnyInt> by intSerializer(
     AnyIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )

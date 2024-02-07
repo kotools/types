@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialKind
@@ -166,5 +167,16 @@ class AnyIntSerializerTest {
         val actual: AnyInt = Json.decodeFromString(encoded)
         val expected = AnyInt(value)
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun serialization_processes_of_wrapped_AnyInt_should_pass() {
+        @Serializable
+        data class Wrapper(val value: AnyInt)
+
+        val wrapper = Wrapper(PositiveInt.random())
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.value, decoded.value)
     }
 }
