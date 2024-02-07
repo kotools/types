@@ -326,7 +326,7 @@ public class EmailAddress private constructor(private val text: String) {
 }
 
 @ExperimentalKotoolsTypesApi
-private object EmailAddressSerializer :
+internal object EmailAddressSerializer :
     KSerializer<EmailAddress> by stringSerializer(
         EmailAddressDeserializationStrategy
     )

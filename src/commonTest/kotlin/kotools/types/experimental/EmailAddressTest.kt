@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -269,5 +270,17 @@ class EmailAddressSerializerTest {
         val expected: ErrorMessage =
             deserializationErrorMessage<EmailAddress>(text)
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun serialization_processes_with_wrapped_EmailAddress_should_pass() {
+        @Serializable
+        data class Wrapper(val value: EmailAddress)
+
+        val address: EmailAddress = EmailAddress.create("contact@kotools.org")
+        val wrapper = Wrapper(address)
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.value, decoded.value)
     }
 }
