@@ -126,7 +126,7 @@ public value class NotBlankString private constructor(
     override fun toString(): String = value
 }
 
-private object NotBlankStringSerializer :
+internal object NotBlankStringSerializer :
     KSerializer<NotBlankString> by stringSerializer(
         NotBlankStringDeserializationStrategy
     )

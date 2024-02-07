@@ -1,6 +1,7 @@
 package kotools.types.text
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -176,5 +177,18 @@ class NotBlankStringSerializerTest {
         val actualMessage = ErrorMessage(exception)
         val expectedMessage: ErrorMessage = ErrorMessage.blankString
         assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun serialization_processes_with_wrapped_NotBlankString_should_pass() {
+        @Serializable
+        data class Wrapper(val value: NotBlankString)
+
+        val wrapper: Wrapper = StringExample.NOT_BLANK.toNotBlankString()
+            .map { Wrapper(it) }
+            .getOrThrow()
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.value, decoded.value)
     }
 }
