@@ -20,6 +20,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+Serialization problems using the Kotlin/JS IR compiler for all serializable
+types (bug [#431] reported by [@robertfmurdock]).
+
+[#431]: https://github.com/kotools/types/issues/431
+
 ## 4.4.1 <a id="4.4.1"></a>
 
 _Release date: 2024-02-02 | Commits: [4.4.0...4.4.1]._
@@ -33,10 +40,11 @@ This release fixes the publication of the previous one, in which the
 
 So it is recommended to bypass version 4.4.0 and directly upgrade to 4.4.1.
 
-Thanks to [@robertfmurdock](https://github.com/robertfmurdock) for reporting
-this error (issue [#406](https://github.com/kotools/types/issues/406)).
+Thanks to [@robertfmurdock] for reporting this error (issue [#406]).
 
-## 4.4.0
+[#406]: https://github.com/kotools/types/issues/406
+
+## 4.4.0 <a id="4.4.0"></a>
 
 _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
 
@@ -614,6 +622,7 @@ entries.toMap() // after
 
 <!------------------------------- Shared links -------------------------------->
 
+[@robertfmurdock]: https://github.com/robertfmurdock
 [api-reference]: https://types.kotools.org
 [github-MichaelStH]: https://github.com/MichaelStH
 [issue-261]: https://github.com/kotools/types/issues/261
