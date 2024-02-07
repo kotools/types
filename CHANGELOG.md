@@ -54,13 +54,6 @@ Deprecation promotion of the following annotations to error (issue
 - `ExperimentalResultApi`
 - `ExperimentalTextApi`
 
-### Fixed
-
-Serialization problems using the Kotlin/JS IR compiler for all serializable
-types (bug [#431] reported by [@robertfmurdock]).
-
-[#431]: https://github.com/kotools/types/issues/431
-
 ### Security
 
 Upgrade follow-redirects to 1.15.4 on Kotlin/JS platform because prior versions
@@ -69,6 +62,19 @@ by the `url.parse()` function (issue
 [#375](https://github.com/kotools/types/issues/375)).
 See the [security report](https://github.com/advisories/GHSA-jchw-25xp-jwwc) for
 more details on this vulnerability.
+
+## 4.4.2 <a id="4.4.2"></a>
+
+_Release date: 2024-02-07 | Commits: [4.4.1...4.4.2]._
+
+[4.4.1...4.4.2]: https://github.com/kotools/types/compare/4.4.1...4.4.2
+
+### Fixed
+
+Serialization problems using the Kotlin/JS IR compiler for all serializable
+types (bug [#431] reported by [@robertfmurdock]).
+
+[#431]: https://github.com/kotools/types/issues/431
 
 ## 4.4.1 <a id="4.4.1"></a>
 
