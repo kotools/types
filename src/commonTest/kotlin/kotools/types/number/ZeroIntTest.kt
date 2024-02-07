@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -65,5 +66,16 @@ class ZeroIntSerializerTest {
         val exception: SerializationException =
             assertFailsWith { Json.decodeFromString<ZeroInt>(encoded) }
         exception.shouldHaveAMessage()
+    }
+
+    @Test
+    fun serialization_processes_of_wrapped_ZeroInt_should_pass() {
+        @Serializable
+        data class Wrapper(val value: ZeroInt = ZeroInt)
+
+        val wrapper = Wrapper()
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.value, decoded.value)
     }
 }
