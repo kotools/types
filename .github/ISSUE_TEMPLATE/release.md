@@ -12,12 +12,12 @@ Issues of the milestone corresponding to this version should be done before reso
 ## Checklist
 
 - [ ] Set Gradle project's version, version of unreleased declarations and add this version in changelog.
+- [ ] Prepare release notes for this version.
 - [ ] Create a release branch for this new version.
 - [ ] Set Gradle project's version with the next version, suffixed by `SNAPSHOT`.
 - [ ] Check the copyright notice in the [license] documentation, then apply the corresponding commit to the release branch if updated.
 - [ ] Deliver packages to the [Maven central] by running the [delivery workflow].
 - [ ] Close valid packages and drop invalid ones on the [Maven central].
-- [ ] Prepare a release notes for this version, then apply the corresponding commit to the release branch.
 - [ ] Release packages on the [Maven central].
 - [ ] Run the `publishApiReference.sh` script locally from the release branch and update the API reference.
 - [ ] Create a release on the GitHub repository.
