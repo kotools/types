@@ -54,6 +54,13 @@ Deprecation promotion of the following annotations to error (issue
 - `ExperimentalResultApi`
 - `ExperimentalTextApi`
 
+### Fixed
+
+Serialization problems using the Kotlin/JS IR compiler for all serializable
+types (bug [#431] reported by [@robertfmurdock]).
+
+[#431]: https://github.com/kotools/types/issues/431
+
 ### Security
 
 Upgrade follow-redirects to 1.15.4 on Kotlin/JS platform because prior versions
@@ -76,8 +83,9 @@ This release fixes the publication of the previous one, in which the
 
 So it is recommended to bypass version 4.4.0 and directly upgrade to 4.4.1.
 
-Thanks to [@robertfmurdock](https://github.com/robertfmurdock) for reporting
-this error (issue [#406](https://github.com/kotools/types/issues/406)).
+Thanks to [@robertfmurdock] for reporting this error (issue [#406]).
+
+[#406]: https://github.com/kotools/types/issues/406
 
 ## 4.4.0 <a id="4.4.0"></a>
 
@@ -657,6 +665,7 @@ entries.toMap() // after
 
 <!------------------------------- Shared links -------------------------------->
 
+[@robertfmurdock]: https://github.com/robertfmurdock
 [api-reference]: https://types.kotools.org
 [github-MichaelStH]: https://github.com/MichaelStH
 [issue-261]: https://github.com/kotools/types/issues/261
