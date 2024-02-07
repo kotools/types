@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 > The format of this document is based on [Keep a Changelog].
->
+
 > See [the changelog in kotools/libraries] for versions `1`, `2` and `3`.
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0
@@ -19,6 +19,12 @@ All notable changes to this project will be documented in this file.
 - `Security` in case of vulnerabilities.
 
 ## Unreleased
+
+## 4.4.2 <a id="4.4.2"></a>
+
+_Release date: 2024-02-07 | Commits: [4.4.1...4.4.2]._
+
+[4.4.1...4.4.2]: https://github.com/kotools/types/compare/4.4.1...4.4.2
 
 ### Fixed
 
