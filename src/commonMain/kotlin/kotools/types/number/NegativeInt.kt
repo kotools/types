@@ -97,7 +97,7 @@ public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
         .getOrThrow()
 }
 
-private object NegativeIntSerializer :
+internal object NegativeIntSerializer :
     KSerializer<NegativeInt> by intSerializer(
         NegativeIntDeserializationStrategy,
         intConverter = { it.toInt() }

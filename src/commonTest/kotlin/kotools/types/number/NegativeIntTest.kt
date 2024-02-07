@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -141,6 +142,17 @@ class NegativeIntSerializerTest {
         val actualMessage = ErrorMessage(exception)
         val expectedMessage: ErrorMessage = value.shouldBeNegative()
         assertEquals(expectedMessage, actualMessage)
+    }
+
+    @Test
+    fun serialization_processes_of_wrapped_NegativeInt_should_pass() {
+        @Serializable
+        data class Wrapper(val value: NegativeInt = NegativeInt.random())
+
+        val wrapper = Wrapper()
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(wrapper.value, decoded.value)
     }
 }
 
