@@ -98,7 +98,7 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
         .getOrThrow()
 }
 
-private object PositiveIntSerializer :
+internal object PositiveIntSerializer :
     KSerializer<PositiveInt> by intSerializer(
         PositiveIntDeserializationStrategy,
         intConverter = { it.toInt() }
