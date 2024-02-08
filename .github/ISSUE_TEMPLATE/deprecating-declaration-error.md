@@ -1,7 +1,7 @@
 ---
 name: Promotion of a deprecated declaration to error level
 about: New request for promoting a deprecated declaration to error level.
-title: Deprecation promotion of $DECLARATION with to error level
+title: Deprecation promotion of $DECLARATION to error level
 labels: feature
 ---
 
