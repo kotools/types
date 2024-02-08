@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -21,6 +22,7 @@ import kotools.types.internal.simpleNameOf
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number is [strictly negative][StrictlyNegativeInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toPositiveInt(): Result<PositiveInt> {
     val value: Int = toInt()
@@ -39,6 +41,7 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  * Represents an integer number of type [Int] that is greater than or equals
  * zero.
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(PositiveIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface PositiveInt : AnyInt {
@@ -69,6 +72,7 @@ public sealed interface PositiveInt : AnyInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.div(other: StrictlyPositiveInt): PositiveInt {
     val result: Int = toInt() / other
@@ -80,6 +84,7 @@ public operator fun PositiveInt.div(other: StrictlyPositiveInt): PositiveInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
     val result: Int = toInt() / other
@@ -91,6 +96,7 @@ public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
     val result: Int = toInt() % other
@@ -98,12 +104,14 @@ public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
         .getOrThrow()
 }
 
+@InternalKotoolsTypesApi
 internal object PositiveIntSerializer :
     KSerializer<PositiveInt> by intSerializer(
         PositiveIntDeserializationStrategy,
         intConverter = { it.toInt() }
     )
 
+@InternalKotoolsTypesApi
 private object PositiveIntDeserializationStrategy :
     DeserializationStrategy<PositiveInt> {
     override val descriptor: SerialDescriptor by lazy {

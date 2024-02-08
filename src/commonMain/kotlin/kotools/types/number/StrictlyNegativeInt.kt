@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -25,12 +26,14 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching { StrictlyNegativeInt orFail this.toInt() }
 
 /** Represents an integer number of type [Int] that is less than zero. */
 @JvmInline
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyNegativeIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
 public value class StrictlyNegativeInt private constructor(
@@ -73,12 +76,14 @@ public value class StrictlyNegativeInt private constructor(
     }
 }
 
+@InternalKotoolsTypesApi
 internal object StrictlyNegativeIntSerializer :
     KSerializer<StrictlyNegativeInt> by intSerializer(
         StrictlyNegativeIntDeserializationStrategy,
         intConverter = { it.toInt() }
     )
 
+@InternalKotoolsTypesApi
 private object StrictlyNegativeIntDeserializationStrategy :
     DeserializationStrategy<StrictlyNegativeInt> {
     override val descriptor: SerialDescriptor by lazy {

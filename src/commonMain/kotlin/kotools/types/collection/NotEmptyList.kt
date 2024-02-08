@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.serializationError
@@ -24,6 +25,7 @@ import kotlin.jvm.JvmSynthetic
  * println(integers) // [1, 2, 3]
  * ```
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
@@ -62,6 +64,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * println(notEmptyList) // [1, 2, 3]
  * ```
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     runCatching {
@@ -76,6 +79,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  * building this type.
  */
 @JvmInline
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptyListSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyList<out E> private constructor(
@@ -116,6 +120,7 @@ public value class NotEmptyList<out E> private constructor(
     }
 }
 
+@InternalKotoolsTypesApi
 internal class NotEmptyListSerializer<E>(elementSerializer: KSerializer<E>) :
     KSerializer<NotEmptyList<E>> {
     private val delegate: KSerializer<List<E>> by lazy {

@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.text.NotBlankString
@@ -25,6 +26,7 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun NotBlankString.plus(other: String): NotBlankString {
     val value: String = toString() + other
     return value.toNotBlankString()
@@ -51,6 +53,7 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
     plus("$other")
 
@@ -71,6 +74,7 @@ public operator fun NotBlankString.plus(other: NotBlankString): NotBlankString =
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun NotBlankString.plus(other: Char): NotBlankString =
     plus("$other")
 
@@ -92,6 +96,7 @@ public operator fun NotBlankString.plus(other: Char): NotBlankString =
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun Char.plus(other: NotBlankString): NotBlankString =
     plus("$other")
         .toNotBlankString()

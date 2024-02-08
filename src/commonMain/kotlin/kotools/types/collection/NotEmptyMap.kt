@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotools.types.internal.serializationError
@@ -26,6 +27,7 @@ import kotlin.jvm.JvmSynthetic
  * println(map) // {a=1, b=2}
  * ```
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
@@ -68,6 +70,7 @@ public fun <K, V> notEmptyMapOf(
  * println(notEmptyMap) // {a=1, b=2}
  * ```
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap.orThrow(entries) }
@@ -80,6 +83,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  * this type.
  */
 @JvmInline
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptyMapSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyMap<K, out V> private constructor(
@@ -237,6 +241,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     }
 }
 
+@InternalKotoolsTypesApi
 internal class NotEmptyMapSerializer<K, V>(
     keySerializer: KSerializer<K>,
     valueSerializer: KSerializer<V>

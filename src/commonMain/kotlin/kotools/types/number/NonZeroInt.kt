@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -22,6 +23,7 @@ import kotools.types.internal.simpleNameOf
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number equals [zero][ZeroInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     val value: Int = toInt()
@@ -37,6 +39,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
 }
 
 /** Represents an integer number of type [Int] that is other than zero. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NonZeroIntSerializer::class)
 @Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface NonZeroInt : AnyInt {
@@ -78,6 +81,7 @@ public sealed interface NonZeroInt : AnyInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
@@ -85,14 +89,17 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
+@InternalKotoolsTypesApi
 private object NonZeroIntSerializer : KSerializer<NonZeroInt> by intSerializer(
     NonZeroIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )
 
+@InternalKotoolsTypesApi
 private object NonZeroIntDeserializationStrategy :
     DeserializationStrategy<NonZeroInt> {
     override val descriptor: SerialDescriptor by lazy {

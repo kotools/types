@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
@@ -11,6 +12,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 public fun <T : Comparable<T>> notEmptyRangeOf(
     bounds: NotEmptyRange.BuilderScope<T>.() -> Pair<Bound<T>, Bound<T>>
 ): NotEmptyRange<T> = NotEmptyRange.BuilderScope.create<T>()
@@ -29,6 +31,7 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 public class NotEmptyRange<out T : Comparable<@UnsafeVariance T>>
 private constructor(
     /** The start of this range. */
@@ -81,6 +84,7 @@ private constructor(
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun <T : Comparable<T>> NotEmptyRange<T>.contains(
     value: T
 ): Boolean {

@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -15,6 +16,7 @@ import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 
 /** Represents an integer number of type [Int] that equals zero. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(ZeroIntSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public object ZeroInt : PositiveInt, NegativeInt {
@@ -22,11 +24,13 @@ public object ZeroInt : PositiveInt, NegativeInt {
     override fun toString(): String = "${toInt()}"
 }
 
+@InternalKotoolsTypesApi
 internal object ZeroIntSerializer : KSerializer<ZeroInt> by intSerializer(
     ZeroIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )
 
+@InternalKotoolsTypesApi
 private object ZeroIntDeserializationStrategy :
     DeserializationStrategy<ZeroInt> {
     override val descriptor: SerialDescriptor by lazy {

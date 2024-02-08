@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -26,6 +27,7 @@ import kotlin.jvm.JvmSynthetic
  * encapsulated [IllegalArgumentException] if this string is
  * [blank][String.isBlank].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
     requireNotNull(NotBlankString of this) { ErrorMessage.blankString }
@@ -35,6 +37,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
  * Represents a string that has at least one character excluding whitespaces.
  */
 @JvmInline
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotBlankStringSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public value class NotBlankString private constructor(
@@ -126,11 +129,13 @@ public value class NotBlankString private constructor(
     override fun toString(): String = value
 }
 
+@InternalKotoolsTypesApi
 internal object NotBlankStringSerializer :
     KSerializer<NotBlankString> by stringSerializer(
         NotBlankStringDeserializationStrategy
     )
 
+@InternalKotoolsTypesApi
 private object NotBlankStringDeserializationStrategy :
     DeserializationStrategy<NotBlankString> {
     override val descriptor: SerialDescriptor by lazy {

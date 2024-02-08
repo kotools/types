@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
@@ -11,6 +12,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
     /** The value of this bound. */
     public val value: T
@@ -26,6 +28,7 @@ public sealed interface Bound<out T : Comparable<@UnsafeVariance T>> {
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 public class InclusiveBound<out T : Comparable<@UnsafeVariance T>>
 private constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"
@@ -45,6 +48,7 @@ private constructor(override val value: T) : Bound<T> {
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 public class ExclusiveBound<out T : Comparable<@UnsafeVariance T>>
 private constructor(override val value: T) : Bound<T> {
     override fun toString(): String = "$value"

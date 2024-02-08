@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.DeprecatedSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
@@ -14,6 +15,7 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 
 /** Marks declarations that are still **experimental** in the API. */
 @MustBeDocumented
+@OptIn(InternalKotoolsTypesApi::class)
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @Since(KotoolsTypesVersion.V4_4_0)
@@ -40,6 +42,7 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
     errorSince = KotoolsTypesVersion.Unreleased
 )
 @MustBeDocumented
+@OptIn(InternalKotoolsTypesApi::class)
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -59,6 +62,7 @@ public annotation class ExperimentalCollectionApi
     errorSince = KotoolsTypesVersion.Unreleased
 )
 @MustBeDocumented
+@OptIn(InternalKotoolsTypesApi::class)
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -78,6 +82,7 @@ public annotation class ExperimentalNumberApi
     errorSince = KotoolsTypesVersion.Unreleased
 )
 @MustBeDocumented
+@OptIn(InternalKotoolsTypesApi::class)
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -97,6 +102,7 @@ public annotation class ExperimentalRangeApi
     errorSince = KotoolsTypesVersion.Unreleased
 )
 @MustBeDocumented
+@OptIn(InternalKotoolsTypesApi::class)
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
@@ -116,6 +122,7 @@ public annotation class ExperimentalResultApi
     errorSince = KotoolsTypesVersion.Unreleased
 )
 @MustBeDocumented
+@OptIn(InternalKotoolsTypesApi::class)
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)

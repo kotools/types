@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.deserializationError
@@ -49,6 +50,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(EmailAddressSerializer::class)
 public class EmailAddress private constructor(private val text: String) {
     /** Contains static declarations for the [EmailAddress] type. */
@@ -309,12 +311,14 @@ public class EmailAddress private constructor(private val text: String) {
 }
 
 @ExperimentalKotoolsTypesApi
+@InternalKotoolsTypesApi
 internal object EmailAddressSerializer :
     KSerializer<EmailAddress> by stringSerializer(
         EmailAddressDeserializationStrategy
     )
 
 @ExperimentalKotoolsTypesApi
+@InternalKotoolsTypesApi
 private object EmailAddressDeserializationStrategy :
     DeserializationStrategy<EmailAddress> {
     override val descriptor: SerialDescriptor by lazy {
