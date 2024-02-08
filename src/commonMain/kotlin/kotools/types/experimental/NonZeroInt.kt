@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NonZeroInt
@@ -26,6 +27,7 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun NonZeroInt.unaryMinus(): NonZeroInt {
     val value: Int = toInt()
         .unaryMinus()
@@ -47,6 +49,7 @@ public operator fun NonZeroInt.unaryMinus(): NonZeroInt {
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 @get:JvmSynthetic
 public val NonZeroInt.Companion.negativeRange:
         NotEmptyRange<StrictlyNegativeInt>
@@ -65,6 +68,7 @@ public val NonZeroInt.Companion.negativeRange:
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 @get:JvmSynthetic
 public val NonZeroInt.Companion.positiveRange:
         NotEmptyRange<StrictlyPositiveInt>

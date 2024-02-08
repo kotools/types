@@ -1,6 +1,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NegativeInt
@@ -27,6 +28,7 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
 public operator fun NegativeInt.unaryMinus(): PositiveInt {
     val value: Int = toInt()
         .unaryMinus()
@@ -48,6 +50,7 @@ public operator fun NegativeInt.unaryMinus(): PositiveInt {
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
+@OptIn(InternalKotoolsTypesApi::class)
 @get:JvmSynthetic
 public val NegativeInt.Companion.range: NotEmptyRange<NegativeInt>
     get() = rangeValue

@@ -1,8 +1,4 @@
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
-import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -41,20 +37,6 @@ dependencies {
 }
 
 tasks.register("unit")
-
-val optInInternals = "-opt-in=kotools.types.internal.InternalKotoolsTypesApi"
-tasks.withType<KotlinCompileCommon>().configureEach {
-    compilerOptions.freeCompilerArgs.add(optInInternals)
-}
-tasks.withType<Kotlin2JsCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.add(optInInternals)
-}
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.add(optInInternals)
-}
-tasks.withType<KotlinNativeCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.add(optInInternals)
-}
 
 tasks.jsBrowserTest.configure { useMocha() }
 

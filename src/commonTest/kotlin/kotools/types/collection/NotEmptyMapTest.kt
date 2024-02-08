@@ -1,3 +1,5 @@
+@file:OptIn(InternalKotoolsTypesApi::class)
+
 package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -11,6 +13,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull

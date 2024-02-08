@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -15,6 +16,7 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
 
 /** Represents an integer number of type [Int]. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Serializable(AnyIntSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public sealed interface AnyInt : Comparable<AnyInt> {
@@ -39,38 +41,47 @@ public sealed interface AnyInt : Comparable<AnyInt> {
 }
 
 /** Adds the [other] integer to this one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.plus(other: AnyInt): Int = this + other.toInt()
 
 /** Adds the [other] integer to this one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.plus(other: Int): Int = toInt() + other
 
 /** Adds the [other] integer to this one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.plus(other: AnyInt): Int = toInt() + other
 
 /** Subtracts the [other] integer from this one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.minus(other: AnyInt): Int = this - other.toInt()
 
 /** Subtracts the [other] integer from this one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.minus(other: Int): Int = toInt() - other
 
 /** Subtracts the [other] integer from this one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.minus(other: AnyInt): Int = toInt() - other
 
 /** Multiplies this integer by the [other] one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.times(other: AnyInt): Int = this * other.toInt()
 
 /** Multiplies this integer by the [other] one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.times(other: Int): Int = toInt() * other
 
 /** Multiplies this integer by the [other] one. */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.times(other: AnyInt): Int = toInt() * other
 
@@ -78,6 +89,7 @@ public operator fun AnyInt.times(other: AnyInt): Int = toInt() * other
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
 
@@ -85,14 +97,17 @@ public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
+@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
 
+@InternalKotoolsTypesApi
 internal object AnyIntSerializer : KSerializer<AnyInt> by intSerializer(
     AnyIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )
 
+@InternalKotoolsTypesApi
 private object AnyIntDeserializationStrategy : DeserializationStrategy<AnyInt> {
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<AnyInt>()

@@ -1,3 +1,5 @@
+@file:OptIn(InternalKotoolsTypesApi::class)
+
 package kotools.types.experimental
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -10,6 +12,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.shouldBeGreaterThanZero
 import kotlin.random.Random

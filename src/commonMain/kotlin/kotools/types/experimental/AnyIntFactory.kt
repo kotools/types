@@ -3,6 +3,7 @@
 package kotools.types.experimental
 
 import kotools.types.internal.ExperimentalSince
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.AnyInt
@@ -32,6 +33,7 @@ import kotlin.jvm.JvmName
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmName("create")
+@OptIn(InternalKotoolsTypesApi::class)
 public fun AnyInt(value: Int): AnyInt {
     if (value == 0) return ZeroInt
     val result: Result<AnyInt> =
