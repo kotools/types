@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.web
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -25,14 +23,16 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 private object Texts {
-    const val INVALID_DOMAIN: String = "contact@ko tools. org"
-    const val INVALID_LOCAL_PART: String = " contact@kotools.org"
+    const val DOMAIN_WITH_WHITESPACES: String = "contact@ko tools. org"
+    const val LOCAL_PART_STARTING_WITH_WHITESPACES: String =
+        "  contact@kotools.org"
     const val VALID: String = "contact@kotools.org"
     const val WITHOUT_AT_SIGN: String = "contact-kotools.org"
     const val WITHOUT_DOT: String = "contact@kotools_org"
 }
 
 @ExperimentalKotoolsTypesApi
+@OptIn(InternalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
     @Test
     fun regex_should_pass() {
@@ -69,8 +69,8 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun create_should_fail_with_a_String_having_an_invalid_local_part() {
-        val text: String = Texts.INVALID_LOCAL_PART
+    fun create_should_fail_with_a_String_starting_with_whitespaces() {
+        val text: String = Texts.LOCAL_PART_STARTING_WITH_WHITESPACES
         val exception: IllegalArgumentException =
             assertFailsWith { EmailAddress.create(text) }
         val actualMessage = ErrorMessage(exception)
@@ -80,8 +80,8 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun create_should_fail_with_a_String_having_an_invalid_domain() {
-        val text: String = Texts.INVALID_DOMAIN
+    fun create_should_fail_with_a_String_having_whitespaces_in_domain() {
+        val text: String = Texts.DOMAIN_WITH_WHITESPACES
         val exception: IllegalArgumentException =
             assertFailsWith { EmailAddress.create(text) }
         val actualMessage = ErrorMessage(exception)
@@ -110,16 +110,17 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun createOrNull_should_fail_with_a_String_having_an_invalid_local_part() {
-        val actual: EmailAddress? =
-            EmailAddress.createOrNull(Texts.INVALID_LOCAL_PART)
+    fun createOrNull_should_fail_with_a_String_starting_with_whitespaces() {
+        val actual: EmailAddress? = EmailAddress.createOrNull(
+            Texts.LOCAL_PART_STARTING_WITH_WHITESPACES
+        )
         assertNull(actual)
     }
 
     @Test
-    fun createOrNull_should_fail_with_a_String_having_an_invalid_domain() {
+    fun createOrNull_should_fail_with_a_String_having_whitespaces_in_domain() {
         val actual: EmailAddress? =
-            EmailAddress.createOrNull(Texts.INVALID_DOMAIN)
+            EmailAddress.createOrNull(Texts.DOMAIN_WITH_WHITESPACES)
         assertNull(actual)
     }
 }
@@ -186,6 +187,7 @@ class EmailAddressTest {
 }
 
 @ExperimentalKotoolsTypesApi
+@OptIn(InternalKotoolsTypesApi::class)
 class EmailAddressSerializerTest {
     @ExperimentalSerializationApi
     @Test
@@ -251,8 +253,8 @@ class EmailAddressSerializerTest {
     }
 
     @Test
-    fun deserialization_should_fail_from_a_String_having_an_invalid_local_part() {
-        val text: String = Texts.INVALID_LOCAL_PART
+    fun deserialization_should_fail_from_a_String_starting_with_whitespaces() {
+        val text: String = Texts.LOCAL_PART_STARTING_WITH_WHITESPACES
         val exception: SerializationException = assertFailsWith {
             val encoded: String = Json.encodeToString(text)
             Json.decodeFromString<EmailAddress>(encoded)
@@ -264,8 +266,8 @@ class EmailAddressSerializerTest {
     }
 
     @Test
-    fun deserialization_should_fail_from_a_String_having_an_invalid_domain() {
-        val text: String = Texts.INVALID_DOMAIN
+    fun deserialization_should_fail_from_a_String_having_whitespaces_in_domain() {
+        val text: String = Texts.DOMAIN_WITH_WHITESPACES
         val exception: SerializationException = assertFailsWith {
             val encoded: String = Json.encodeToString(text)
             Json.decodeFromString<EmailAddress>(encoded)
