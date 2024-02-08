@@ -1,7 +1,7 @@
 ---
 name: Promotion of a deprecated declaration to hidden level
 about: New request for promoting a deprecated declaration to hidden level.
-title: Deprecation promotion of $DECLARATION with to hidden level
+title: Deprecation promotion of $DECLARATION to hidden level
 labels: feature
 ---
 
