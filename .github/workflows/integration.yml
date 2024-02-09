@@ -72,6 +72,7 @@ jobs:
         uses: gradle/gradle-build-action@v3.0.0
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
+          dependency-graph-continue-on-failure: false
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:jsTest
       - name: Test root project
@@ -94,6 +95,7 @@ jobs:
         uses: gradle/gradle-build-action@v3.0.0
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
+          dependency-graph-continue-on-failure: false
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:jvmTest
       - name: Test 'java-compatibility' subproject
@@ -118,6 +120,7 @@ jobs:
         uses: gradle/gradle-build-action@v3.0.0
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
+          dependency-graph-continue-on-failure: false
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:linuxTest
       - name: Test root project
@@ -140,6 +143,7 @@ jobs:
         uses: gradle/gradle-build-action@v3.0.0
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
+          dependency-graph-continue-on-failure: false
       - name: Test 'internal' subproject on macOS x64
         run: ./gradlew :types-internal:macosTest
       - name: Test 'internal' subproject on macOS arm64
@@ -166,6 +170,7 @@ jobs:
         uses: gradle/gradle-build-action@v3.0.0
         with:
           dependency-graph: ${{ env.GRADLE_DEPENDENCY_GRAPH }}
+          dependency-graph-continue-on-failure: false
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:windowsTest
       - name: Test root project
