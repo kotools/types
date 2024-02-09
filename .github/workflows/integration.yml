@@ -7,9 +7,9 @@ on:
       - '**.java'
       - '**.kt*'
       - .github/workflows/integration.yml
-      - api/types.api
       - gradle/libs.versions.toml
       - qodana.yaml
+      - src/api/types.api
       - yarn.lock
   push:
     branches: [ main, release/* ]
@@ -18,9 +18,9 @@ on:
       - '**.java'
       - '**.kt*'
       - .github/workflows/integration.yml
-      - api/types.api
       - gradle/libs.versions.toml
       - qodana.yaml
+      - src/api/types.api
       - yarn.lock
   workflow_dispatch:
 env:
