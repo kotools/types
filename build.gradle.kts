@@ -18,6 +18,8 @@ group = "org.kotools"
 
 repositories.mavenCentral()
 
+apiValidation.apiDumpDirectory = "src/api"
+
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
