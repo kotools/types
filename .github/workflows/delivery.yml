@@ -35,7 +35,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+        uses: gradle/gradle-build-action@v3.0.0
       - name: Deliver 'internal' subproject to OSSRH
         run: ./gradlew :types-internal:publishJsPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
@@ -53,7 +53,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+        uses: gradle/gradle-build-action@v3.0.0
       - name: Deliver 'internal' subproject to OSSRH
         run: ./gradlew :types-internal:publishJvmPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
@@ -71,7 +71,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+        uses: gradle/gradle-build-action@v3.0.0
       - name: Deliver 'internal' subproject to OSSRH
         run: ./gradlew :types-internal:publishLinuxPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
@@ -89,7 +89,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+        uses: gradle/gradle-build-action@v3.0.0
       - name: Deliver 'internal' subproject to OSSRH for macOS x64
         run: ./gradlew :types-internal:publishMacosPublicationToOSSRHRepository
       - name: Deliver 'internal' subproject to OSSRH for macOS arm64
@@ -111,7 +111,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+        uses: gradle/gradle-build-action@v3.0.0
       - name: Deliver 'internal' subproject to OSSRH
         run: ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
@@ -135,7 +135,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+        uses: gradle/gradle-build-action@v3.0.0
       - name: Deliver 'internal' subproject to OSSRH
         run: ./gradlew :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
