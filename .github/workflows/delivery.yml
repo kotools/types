@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.1
   # ---------- Stage 2 ----------
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.0.0
         with:
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.0.0
         with:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.0.0
         with:
@@ -82,7 +82,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.0.0
         with:
@@ -104,7 +104,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.0.0
         with:
@@ -128,7 +128,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.0.0
         with:
