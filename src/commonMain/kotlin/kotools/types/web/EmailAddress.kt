@@ -58,32 +58,52 @@ public class EmailAddress private constructor(private val text: String) {
         /**
          * The regular expression that an [EmailAddress] should match.
          *
-         * The underlying pattern is `^\S+@\S+\.\S+$`.
+         * Based on
+         * [RFC-5322](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1),
+         * the underlying pattern is
+         * `^[A-Za-z]+(?:\.[A-Za-z]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$`.
          *
          * Here's the explanation associated to each symbol used in this regular
          * expression:
          * - `^` **Beginning.** Matches the beginning of the string, or the
          * beginning of a line if the multiline flag (m) is enabled.
-         * - `\S` **Not whitespace.** Matches any character that is not a
-         * whitespace character (spaces, tabs, line breaks).
+         * - `[]` **Character set.** Match any character in the set.
+         * - `A-Z` **Range.** Matches a character in the range "A" to "Z" (char
+         * code 65 to 90). Case-sensitive.
+         * - `a-z` **Range.** Matches a character in the range "a" to "z" (char
+         * code 97 to 122). Case-sensitive.
          * - `+` **Quantifier.** Match 1 or more of the preceding token.
-         * - `@` **Character.** Matches a "@" character (char code 64).
+         * - `(?:)` **Non-capturing group.** Groups multiple tokens together
+         * without creating a capture group.
          * - `\.` **Escaped character.** Matches a "." character (char code 46).
+         * - `*` **Quantifier.** Match 0 or more of the preceding token.
+         * - `@` **Character.** Match a "@" character (char code 64).
+         * - `\d` **Digit.** Matches any digit character (0-9).
+         * - `-` **Character.** Matches a "-" character (char code 45).
+         * - `{0,61}` **Quantifier.** Match between 0 and 61 of the preceding
+         * token.
          * - `$` **End.** Matches the end of the string, or the end of a line if
          * the multiline flag (m) is enabled.
          *
          * Here's an example of calling this property from Kotlin code:
          *
          * ```kotlin
-         * println(EmailAddress.regex) // ^\S+@\S+\.\S+$
+         * println(EmailAddress.regex) // ^[A-Za-z]+(?:\.[A-Za-z]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$
          * ```
          *
          * The [Regex] type being unavailable on Java, this property is not
          * available for this language.
          */
         @get:JvmSynthetic
-        public val regex: Regex =
-            Regex("^\\S+${SpecialChar.AtSign}\\S+\\.\\S+\$")
+        public val regex: Regex = run {
+            val localPart = Regex("[A-Za-z]+(?:\\.[A-Za-z]+)*")
+            val domainLabel = Regex("[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]")
+            val domain =
+                Regex("(?:${domainLabel.pattern}\\.)*${domainLabel.pattern}")
+            Regex(
+                "^${localPart.pattern}${SpecialChar.AtSign}${domain.pattern}\$"
+            )
+        }
 
         /**
          * Creates an email address from the specified [text], or throws an

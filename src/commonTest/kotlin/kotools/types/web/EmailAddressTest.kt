@@ -23,12 +23,18 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 private object Texts {
-    const val DOMAIN_WITH_WHITESPACES: String = "contact@ko tools. org"
-    const val LOCAL_PART_STARTING_WITH_WHITESPACES: String =
-        "  contact@kotools.org"
-    const val VALID: String = "contact@kotools.org"
-    const val WITHOUT_AT_SIGN: String = "contact-kotools.org"
-    const val WITHOUT_DOT: String = "contact@kotools_org"
+    val valid: Set<String> by lazy {
+        setOf("contact@kotools.org", "cont.act@kotools.org")
+    }
+    val invalid: Set<String> by lazy {
+        setOf(
+            " contact@kotools.org",
+            "cont-act@kotools.org",
+            "contact-kotools.org",
+            "contact@ko tools. org",
+            "contact@kotools_org"
+        )
+    }
 }
 
 @ExperimentalKotoolsTypesApi
@@ -37,100 +43,48 @@ class EmailAddressCompanionTest {
     @Test
     fun regex_should_pass() {
         val actual: Regex = EmailAddress.regex
-        val expected = Regex("^\\S+@\\S+\\.\\S+\$")
+        val expected = Regex(
+            "^[A-Za-z]+(?:\\.[A-Za-z]+)*@(?:[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]\\.)*[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]\$"
+        )
         assertEquals(expected.pattern, actual.pattern)
     }
 
     @Test
-    fun create_should_pass_with_a_valid_String() {
-        EmailAddress.create(Texts.VALID)
-    }
+    fun create_should_pass_with_a_valid_String(): Unit =
+        Texts.valid.forEach { EmailAddress.create(it) }
 
     @Test
-    fun create_should_fail_with_a_String_that_does_not_have_an_at_sign() {
-        val text: String = Texts.WITHOUT_AT_SIGN
-        val exception: IllegalArgumentException =
-            assertFailsWith { EmailAddress.create(text) }
-        val actualMessage = ErrorMessage(exception)
-        val expectedMessage: ErrorMessage =
-            EmailAddress.creationErrorMessage(text)
-        assertEquals(expectedMessage, actualMessage)
-    }
+    fun create_should_fail_with_an_invalid_String(): Unit =
+        Texts.invalid.forEach {
+            val exception: IllegalArgumentException =
+                assertFailsWith { EmailAddress.create(it) }
+            val actualMessage = ErrorMessage(exception)
+            val expectedMessage: ErrorMessage =
+                EmailAddress.creationErrorMessage(it)
+            assertEquals(expectedMessage, actualMessage)
+        }
 
     @Test
-    fun create_should_fail_with_a_String_that_does_not_have_a_dot() {
-        val text: String = Texts.WITHOUT_DOT
-        val exception: IllegalArgumentException =
-            assertFailsWith { EmailAddress.create(text) }
-        val actualMessage = ErrorMessage(exception)
-        val expectedMessage: ErrorMessage =
-            EmailAddress.creationErrorMessage(text)
-        assertEquals(expectedMessage, actualMessage)
-    }
+    fun createOrNull_should_pass_with_a_valid_String(): Unit =
+        Texts.valid.forEach {
+            val actual: EmailAddress? = EmailAddress.createOrNull(it)
+            assertNotNull(actual)
+        }
 
     @Test
-    fun create_should_fail_with_a_String_starting_with_whitespaces() {
-        val text: String = Texts.LOCAL_PART_STARTING_WITH_WHITESPACES
-        val exception: IllegalArgumentException =
-            assertFailsWith { EmailAddress.create(text) }
-        val actualMessage = ErrorMessage(exception)
-        val expectedMessage: ErrorMessage =
-            EmailAddress.creationErrorMessage(text)
-        assertEquals(expectedMessage, actualMessage)
-    }
-
-    @Test
-    fun create_should_fail_with_a_String_having_whitespaces_in_domain() {
-        val text: String = Texts.DOMAIN_WITH_WHITESPACES
-        val exception: IllegalArgumentException =
-            assertFailsWith { EmailAddress.create(text) }
-        val actualMessage = ErrorMessage(exception)
-        val expectedMessage: ErrorMessage =
-            EmailAddress.creationErrorMessage(text)
-        assertEquals(expectedMessage, actualMessage)
-    }
-
-    @Test
-    fun createOrNull_should_pass_with_a_valid_String() {
-        val actual: EmailAddress? = EmailAddress.createOrNull(Texts.VALID)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun createOrNull_should_fail_with_a_String_that_does_not_have_an_at_sign() {
-        val actual: EmailAddress? =
-            EmailAddress.createOrNull(Texts.WITHOUT_AT_SIGN)
-        assertNull(actual)
-    }
-
-    @Test
-    fun createOrNull_should_fail_with_a_String_that_does_not_have_a_dot() {
-        val actual: EmailAddress? = EmailAddress.createOrNull(Texts.WITHOUT_DOT)
-        assertNull(actual)
-    }
-
-    @Test
-    fun createOrNull_should_fail_with_a_String_starting_with_whitespaces() {
-        val actual: EmailAddress? = EmailAddress.createOrNull(
-            Texts.LOCAL_PART_STARTING_WITH_WHITESPACES
-        )
-        assertNull(actual)
-    }
-
-    @Test
-    fun createOrNull_should_fail_with_a_String_having_whitespaces_in_domain() {
-        val actual: EmailAddress? =
-            EmailAddress.createOrNull(Texts.DOMAIN_WITH_WHITESPACES)
-        assertNull(actual)
-    }
+    fun createOrNull_should_fail_with_an_invalid_String(): Unit =
+        Texts.invalid.forEach {
+            val actual: EmailAddress? = EmailAddress.createOrNull(it)
+            assertNull(actual)
+        }
 }
 
 @ExperimentalKotoolsTypesApi
 class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_the_same_object() {
-        val first: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(Texts.VALID))
+        val text: String = Texts.valid.random()
+        val first: EmailAddress = EmailAddress.create(text)
         val second: EmailAddress = first
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
@@ -138,28 +92,25 @@ class EmailAddressTest {
 
     @Test
     fun structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
-        val text: String = Texts.VALID
-        val first: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
-        val second: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
+        val text: String = Texts.valid.random()
+        val first: EmailAddress = EmailAddress.create(text)
+        val second: EmailAddress = EmailAddress.create(text)
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
     }
 
     @Test
     fun structural_equality_should_fail_with_null() {
-        val first: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(Texts.VALID))
+        val text: String = Texts.valid.random()
+        val first: EmailAddress = EmailAddress.create(text)
         val second: Any? = null
         assertNotEquals(first, second)
     }
 
     @Test
     fun structural_equality_should_fail_with_another_object_that_is_not_an_EmailAddress() {
-        val text: String = Texts.VALID
-        val first: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
+        val text: String = Texts.valid.random()
+        val first: EmailAddress = EmailAddress.create(text)
         val second: Any = text
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
@@ -167,20 +118,17 @@ class EmailAddressTest {
 
     @Test
     fun structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
-        val text: String = Texts.VALID
-        val first: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
-        val second: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull("${text}x"))
+        val text: String = Texts.valid.random()
+        val first: EmailAddress = EmailAddress.create(text)
+        val second: EmailAddress = EmailAddress.create("${text}x")
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
     }
 
     @Test
     fun toString_should_pass() {
-        val text: String = Texts.VALID
-        val address: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
+        val text: String = Texts.valid.random()
+        val address: EmailAddress = EmailAddress.create(text)
         val actual: String = address.toString()
         assertEquals(expected = text, actual)
     }
@@ -208,75 +156,34 @@ class EmailAddressSerializerTest {
 
     @Test
     fun serialization_should_behave_like_a_String() {
-        val text: String = Texts.VALID
-        val address: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
+        val text: String = Texts.valid.random()
+        val address: EmailAddress = EmailAddress.create(text)
         val actual: String = Json.encodeToString(address)
         val expected: String = Json.encodeToString(text)
         assertEquals(expected, actual)
     }
 
     @Test
-    fun deserialization_should_pass_from_a_valid_String() {
-        val text: String = Texts.VALID
-        val encoded: String = Json.encodeToString(text)
-        val actual: EmailAddress = Json.decodeFromString(encoded)
-        val expected: EmailAddress =
-            requireNotNull(EmailAddress.createOrNull(text))
-        assertEquals(expected, actual)
-    }
+    fun deserialization_should_pass_from_a_valid_String(): Unit =
+        Texts.valid.forEach {
+            val encoded: String = Json.encodeToString(it)
+            val actual: EmailAddress = Json.decodeFromString(encoded)
+            val expected: EmailAddress = EmailAddress.create(it)
+            assertEquals(expected, actual)
+        }
 
     @Test
-    fun deserialization_should_fail_from_a_String_that_does_not_have_an_at_sign() {
-        val text: String = Texts.WITHOUT_AT_SIGN
-        val exception: SerializationException = assertFailsWith {
-            val encoded: String = Json.encodeToString(text)
-            Json.decodeFromString<EmailAddress>(encoded)
+    fun deserialization_should_fail_from_an_invalid_String(): Unit =
+        Texts.invalid.forEach {
+            val exception: SerializationException = assertFailsWith {
+                val encoded: String = Json.encodeToString(it)
+                Json.decodeFromString<EmailAddress>(encoded)
+            }
+            val actual = ErrorMessage(exception)
+            val expected: ErrorMessage =
+                deserializationErrorMessage<EmailAddress>(it)
+            assertEquals(expected, actual)
         }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage =
-            deserializationErrorMessage<EmailAddress>(text)
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_that_does_not_have_a_dot() {
-        val text: String = Texts.WITHOUT_DOT
-        val exception: SerializationException = assertFailsWith {
-            val encoded: String = Json.encodeToString(text)
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage =
-            deserializationErrorMessage<EmailAddress>(text)
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_starting_with_whitespaces() {
-        val text: String = Texts.LOCAL_PART_STARTING_WITH_WHITESPACES
-        val exception: SerializationException = assertFailsWith {
-            val encoded: String = Json.encodeToString(text)
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage =
-            deserializationErrorMessage<EmailAddress>(text)
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_having_whitespaces_in_domain() {
-        val text: String = Texts.DOMAIN_WITH_WHITESPACES
-        val exception: SerializationException = assertFailsWith {
-            val encoded: String = Json.encodeToString(text)
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage =
-            deserializationErrorMessage<EmailAddress>(text)
-        assertEquals(expected, actual)
-    }
 
     @Test
     fun serialization_processes_with_wrapped_EmailAddress_should_pass() {

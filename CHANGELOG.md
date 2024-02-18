@@ -43,6 +43,10 @@ All notable changes to this project will be documented in this file.
   inaccessible for Java sources, due to the unavailability of the
   `kotlin.text.Regex` type for this language (commit
   [8d0d098ad](https://github.com/kotools/types/commit/8d0d098ad)).
+- Update the regular expression of the `EmailAddress` **experimental** type for
+  following the
+  [RFC-5322](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)
+  (issue [#394](https://github.com/kotools/types/issues/394)).
 
 ### Deprecated
 
