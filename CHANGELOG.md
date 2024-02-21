@@ -24,14 +24,17 @@ All notable changes to this project will be documented in this file.
 
 - Support the macOS arm64 platform with Kotlin Native (issue
   [#414](https://github.com/kotools/types/issues/414)).
-- `create(Any?)` and `createOrNull(Any?)` **experimental** factory functions in
-  `NotBlankString.Companion` (issue
-  [#341](https://github.com/kotools/types/issues/341)).
+- The following **experimental** factory functions:
+  - `create(Any?)` and `createOrNull(Any?)` in `NotBlankString.Companion` (issue
+    [#341](https://github.com/kotools/types/issues/341))
+  - `create(Number)` and `createOrNull(Number)` in
+    `StrictlyPositiveInt.Companion` (issue
+    [#342](https://github.com/kotools/types/issues/342))
+  - `create(Number)` and `createOrNull(Number)` in
+    `StrictlyNegativeInt.Companion` (issue
+    [#347](https://github.com/kotools/types/issues/347))
 - Documentation of dependency compatibility (issue
   [#288](https://github.com/kotools/types/issues/288)).
-- `create(Number)` and `createOrNull(Number)` **experimental** factory functions
-  in `StrictlyPositiveInt.Companion` type (issue
-  [#342](https://github.com/kotools/types/issues/342)).
 
 ### Changed
 
