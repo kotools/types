@@ -106,10 +106,11 @@ public value class StrictlyNegativeInt private constructor(
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
-        public fun createOrNull(number: Number): StrictlyNegativeInt? = number
-            .toInt()
-            .takeIf(Int::isStrictlyNegative)
-            ?.let(::StrictlyNegativeInt)
+        public fun createOrNull(number: Number): StrictlyNegativeInt? {
+            val value: Int = number.toInt()
+            val isValid: Boolean = value.isStrictlyNegative()
+            return if (isValid) StrictlyNegativeInt(value) else null
+        }
 
         /** Returns a random [StrictlyNegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
