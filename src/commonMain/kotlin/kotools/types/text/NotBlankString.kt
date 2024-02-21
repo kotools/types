@@ -70,7 +70,8 @@ public value class NotBlankString private constructor(
         @JvmSynthetic
         public fun create(value: Any?): NotBlankString {
             val text: String = value.toString()
-            require(text.isNotBlank()) { ErrorMessage.blankString }
+            val isValid: Boolean = text.isNotBlank()
+            require(isValid) { ErrorMessage.blankString }
             return NotBlankString(text)
         }
 
