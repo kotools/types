@@ -20,6 +20,7 @@ import kotools.types.internal.simpleNameOf
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
+@InternalKotoolsTypesApi
 @JvmSynthetic
 internal fun Int.isStrictlyPositive(): Boolean = this > 0
 
@@ -139,15 +140,16 @@ internal object StrictlyPositiveIntSerializer :
         intConverter = { it.toInt() }
     )
 
-@InternalKotoolsTypesApi
 private object StrictlyPositiveIntDeserializationStrategy :
     DeserializationStrategy<StrictlyPositiveInt> {
+    @OptIn(InternalKotoolsTypesApi::class)
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<StrictlyPositiveInt>()
         val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): StrictlyPositiveInt {
         val value: Int = decoder.decodeInt()
         return value.toStrictlyPositiveInt()
