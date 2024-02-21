@@ -76,6 +76,10 @@ public value class StrictlyPositiveInt private constructor(
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
          * this function is not available yet for Java users.
+         *
+         * You can use the [StrictlyPositiveInt.Companion.createOrNull] function
+         * for returning `null` instead of throwing an exception in case of
+         * invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -86,6 +90,34 @@ public value class StrictlyPositiveInt private constructor(
             require(isValid) { value.shouldBeStrictlyPositive() }
             return StrictlyPositiveInt(value)
         }
+
+        /**
+         * Creates a [StrictlyPositiveInt] from the specified [number], or
+         * returns `null` if the [number] is less than or equals zero.
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: StrictlyPositiveInt? =
+         *     StrictlyPositiveInt.createOrNull(42)
+         * println(number) // 42
+         * ```
+         *
+         * The [StrictlyPositiveInt] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         *
+         * You can use the [StrictlyPositiveInt.Companion.create] function for
+         * throwing an exception instead of returning `null` in case of invalid
+         * [number].
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun createOrNull(number: Number): StrictlyPositiveInt? = number
+            .toInt()
+            .takeIf(Int::isStrictlyPositive)
+            ?.let(::StrictlyPositiveInt)
 
         /** Returns a random [StrictlyPositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)

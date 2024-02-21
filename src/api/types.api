@@ -380,6 +380,7 @@ public final class kotools/types/number/StrictlyPositiveInt : kotools/types/numb
 
 public final class kotools/types/number/StrictlyPositiveInt$Companion {
 	public final synthetic fun create-4PgMdn8 (Ljava/lang/Number;)I
+	public final synthetic fun createOrNull-t2HtXUs (Ljava/lang/Number;)Lkotools/types/number/StrictlyPositiveInt;
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin-qaD5h0E ()I
 	public final fun random-qaD5h0E ()I

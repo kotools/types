@@ -23,6 +23,8 @@ import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class StrictlyPositiveIntCompanionTest {
     @Test
@@ -71,6 +73,32 @@ class StrictlyPositiveIntCompanionTest {
         val actual = ErrorMessage(exception)
         val expected: ErrorMessage = number.shouldBeStrictlyPositive()
         assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_Number_that_is_greater_than_zero() {
+        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
+        val actual: StrictlyPositiveInt? =
+            StrictlyPositiveInt.createOrNull(number)
+        assertNotNull(actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_fail_with_a_Number_that_equals_zero() {
+        val actual: StrictlyPositiveInt? =
+            StrictlyPositiveInt.createOrNull(0)
+        assertNull(actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_fail_with_a_Number_that_is_less_than_zero() {
+        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        val actual: StrictlyPositiveInt? =
+            StrictlyPositiveInt.createOrNull(number)
+        assertNull(actual)
     }
 
     @Test
