@@ -29,6 +29,9 @@ All notable changes to this project will be documented in this file.
   [#341](https://github.com/kotools/types/issues/341)).
 - Documentation of dependency compatibility (issue
   [#288](https://github.com/kotools/types/issues/288)).
+- `create(Number)` and `createOrNull(Number)` **experimental** factory functions
+  in `StrictlyPositiveInt.Companion` type (issue
+  [#342](https://github.com/kotools/types/issues/342)).
 
 ### Changed
 
