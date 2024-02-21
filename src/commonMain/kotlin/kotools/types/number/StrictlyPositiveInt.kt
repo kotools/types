@@ -21,6 +21,7 @@ import kotlin.jvm.JvmSynthetic
 @JvmSynthetic
 internal fun Int.isStrictlyPositive(): Boolean = this > 0
 
+@InternalKotoolsTypesApi
 @JvmSynthetic
 internal fun StrictlyPositiveInt(number: Number): StrictlyPositiveInt =
     StrictlyPositiveInt orFail number.toInt()
@@ -43,16 +44,6 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
 public value class StrictlyPositiveInt private constructor(
     private val value: Int
 ) : NonZeroInt, PositiveInt {
-    init {
-        require(value.isStrictlyPositive()) { value.shouldBeStrictlyPositive() }
-    }
-
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toInt(): Int = value
-
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toString(): String = "$value"
-
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].
      */
@@ -67,6 +58,7 @@ public value class StrictlyPositiveInt private constructor(
             Int.MAX_VALUE.toStrictlyPositiveInt()::getOrThrow
         )
 
+        @InternalKotoolsTypesApi
         @JvmSynthetic
         internal infix fun orFail(value: Int): StrictlyPositiveInt =
             StrictlyPositiveInt(value)
@@ -78,6 +70,16 @@ public value class StrictlyPositiveInt private constructor(
             .toStrictlyPositiveInt()
             .getOrThrow()
     }
+
+    init {
+        require(value.isStrictlyPositive()) { value.shouldBeStrictlyPositive() }
+    }
+
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toInt(): Int = value
+
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toString(): String = "$value"
 }
 
 @InternalKotoolsTypesApi

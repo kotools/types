@@ -55,6 +55,7 @@ public val StrictlyPositiveInt.Companion.range:
     get() = rangeValue
 
 @ExperimentalKotoolsTypesApi
+@OptIn(InternalKotoolsTypesApi::class)
 private val rangeValue: NotEmptyRange<StrictlyPositiveInt> by lazy {
     val start = StrictlyPositiveInt(1)
     val end = StrictlyPositiveInt(Int.MAX_VALUE)
