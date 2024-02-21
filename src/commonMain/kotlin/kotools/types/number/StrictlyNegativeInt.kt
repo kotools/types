@@ -52,9 +52,8 @@ public value class StrictlyNegativeInt private constructor(
         public val min: StrictlyNegativeInt by lazy { create(Int.MIN_VALUE) }
 
         /** The maximum value a [StrictlyNegativeInt] can have. */
-        public val max: StrictlyNegativeInt by lazy(
-            (-1).toStrictlyNegativeInt()::getOrThrow
-        )
+        @OptIn(ExperimentalKotoolsTypesApi::class)
+        public val max: StrictlyNegativeInt by lazy { create(-1) }
 
         /**
          * Creates a [StrictlyNegativeInt] from the specified [number], or
