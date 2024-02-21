@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
@@ -152,8 +153,9 @@ private object StrictlyPositiveIntDeserializationStrategy :
     @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): StrictlyPositiveInt {
         val value: Int = decoder.decodeInt()
-        return value.toStrictlyPositiveInt()
-            .getOrNull()
-            ?: serializationError(value.shouldBeStrictlyPositive())
+        return value.toStrictlyPositiveInt().getOrElse {
+            val message: ErrorMessage = value.shouldBeStrictlyPositive()
+            serializationError(message)
+        }
     }
 }
