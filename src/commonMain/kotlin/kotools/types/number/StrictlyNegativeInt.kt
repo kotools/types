@@ -18,6 +18,7 @@ import kotools.types.internal.simpleNameOf
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
+@InternalKotoolsTypesApi
 @JvmSynthetic
 internal fun Int.isStrictlyNegative(): Boolean = this < 0
 
@@ -39,16 +40,6 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 public value class StrictlyNegativeInt private constructor(
     private val value: Int
 ) : NonZeroInt, NegativeInt {
-    init {
-        require(value.isStrictlyNegative()) { value.shouldBeStrictlyNegative() }
-    }
-
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toInt(): Int = value
-
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toString(): String = "$value"
-
     /**
      * Contains declarations for holding or building a [StrictlyNegativeInt].
      */
@@ -63,9 +54,13 @@ public value class StrictlyNegativeInt private constructor(
             (-1).toStrictlyNegativeInt()::getOrThrow
         )
 
+        @InternalKotoolsTypesApi
         @JvmSynthetic
-        internal infix fun orFail(value: Int): StrictlyNegativeInt =
-            StrictlyNegativeInt(value)
+        internal infix fun orFail(value: Int): StrictlyNegativeInt {
+            val isValid: Boolean = value.isStrictlyNegative()
+            require(isValid) { value.shouldBeStrictlyNegative() }
+            return StrictlyNegativeInt(value)
+        }
 
         /** Returns a random [StrictlyNegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
@@ -74,6 +69,12 @@ public value class StrictlyNegativeInt private constructor(
             .toStrictlyNegativeInt()
             .getOrThrow()
     }
+
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toInt(): Int = value
+
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toString(): String = "$value"
 }
 
 @InternalKotoolsTypesApi
@@ -83,15 +84,16 @@ internal object StrictlyNegativeIntSerializer :
         intConverter = { it.toInt() }
     )
 
-@InternalKotoolsTypesApi
 private object StrictlyNegativeIntDeserializationStrategy :
     DeserializationStrategy<StrictlyNegativeInt> {
+    @OptIn(InternalKotoolsTypesApi::class)
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<StrictlyNegativeInt>()
         val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): StrictlyNegativeInt {
         val decodeValue: Int = decoder.decodeInt()
         return decodeValue.toStrictlyNegativeInt()
