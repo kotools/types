@@ -52,9 +52,8 @@ public value class StrictlyPositiveInt private constructor(
         public val min: StrictlyPositiveInt by lazy { create(1) }
 
         /** The maximum value a [StrictlyPositiveInt] can have. */
-        public val max: StrictlyPositiveInt by lazy(
-            Int.MAX_VALUE.toStrictlyPositiveInt()::getOrThrow
-        )
+        @OptIn(ExperimentalKotoolsTypesApi::class)
+        public val max: StrictlyPositiveInt by lazy { create(Int.MAX_VALUE) }
 
         /**
          * Creates a [StrictlyPositiveInt] from the specified [number], or
