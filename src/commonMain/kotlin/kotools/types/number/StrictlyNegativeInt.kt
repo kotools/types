@@ -58,6 +58,34 @@ public value class StrictlyNegativeInt private constructor(
 
         /**
          * Creates a [StrictlyNegativeInt] from the specified [number], or
+         * throws an [IllegalArgumentException] if the [number] is greater than
+         * or equals zero.
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: StrictlyNegativeInt = StrictlyNegativeInt.create(-7)
+         * println(number) // -7
+         * ```
+         *
+         * The [StrictlyNegativeInt] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         *
+         * You can use the [StrictlyNegativeInt.Companion.createOrNull] function
+         * for returning `null` instead of throwing an exception in case of
+         * invalid [number].
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun create(number: Number): StrictlyNegativeInt {
+            val result: StrictlyNegativeInt? = this.createOrNull(number)
+            return requireNotNull(result) { number.shouldBeStrictlyNegative() }
+        }
+
+        /**
+         * Creates a [StrictlyNegativeInt] from the specified [number], or
          * returns `null` if the [number] is greater than or equals zero.
          *
          * Here's an example of calling this function from Kotlin code:
@@ -71,6 +99,10 @@ public value class StrictlyNegativeInt private constructor(
          * The [StrictlyNegativeInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
          * this function is not available yet for Java users.
+         *
+         * You can use the [StrictlyNegativeInt.Companion.create] function for
+         * throwing an exception instead of returning `null` in case of invalid
+         * [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
