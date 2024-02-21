@@ -111,19 +111,21 @@ internal object PositiveIntSerializer :
         intConverter = { it.toInt() }
     )
 
-@InternalKotoolsTypesApi
 private object PositiveIntDeserializationStrategy :
     DeserializationStrategy<PositiveInt> {
+    @OptIn(InternalKotoolsTypesApi::class)
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<PositiveInt>()
         val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): PositiveInt {
         val value: Int = decoder.decodeInt()
-        return value.toPositiveInt()
-            .getOrNull()
-            ?: serializationError(message = value.shouldBePositive())
+        return value.toPositiveInt().getOrElse {
+            val message: ErrorMessage = value.shouldBePositive()
+            serializationError(message)
+        }
     }
 }
