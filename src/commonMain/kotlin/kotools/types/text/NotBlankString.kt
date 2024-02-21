@@ -101,7 +101,8 @@ public value class NotBlankString private constructor(
         @JvmSynthetic
         public fun createOrNull(value: Any?): NotBlankString? {
             val text: String = value.toString()
-            return if (text.isNotBlank()) NotBlankString(text)
+            val isValid: Boolean = text.isNotBlank()
+            return if (isValid) NotBlankString(text)
             else null
         }
 
