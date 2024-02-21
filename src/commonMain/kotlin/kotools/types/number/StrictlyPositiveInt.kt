@@ -48,9 +48,8 @@ public value class StrictlyPositiveInt private constructor(
      */
     public companion object {
         /** The minimum value a [StrictlyPositiveInt] can have. */
-        public val min: StrictlyPositiveInt by lazy(
-            1.toStrictlyPositiveInt()::getOrThrow
-        )
+        @OptIn(ExperimentalKotoolsTypesApi::class)
+        public val min: StrictlyPositiveInt by lazy { create(1) }
 
         /** The maximum value a [StrictlyPositiveInt] can have. */
         public val max: StrictlyPositiveInt by lazy(
