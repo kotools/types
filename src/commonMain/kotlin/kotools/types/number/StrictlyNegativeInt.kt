@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
@@ -153,9 +154,10 @@ private object StrictlyNegativeIntDeserializationStrategy :
 
     @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): StrictlyNegativeInt {
-        val decodeValue: Int = decoder.decodeInt()
-        return decodeValue.toStrictlyNegativeInt()
-            .getOrNull()
-            ?: serializationError(decodeValue.shouldBeStrictlyNegative())
+        val value: Int = decoder.decodeInt()
+        return value.toStrictlyNegativeInt().getOrElse {
+            val message: ErrorMessage = value.shouldBeStrictlyNegative()
+            serializationError(message)
+        }
     }
 }
