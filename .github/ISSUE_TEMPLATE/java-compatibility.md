@@ -14,7 +14,7 @@ This means that its compatibility should be tested and its documentation should 
 ## Dependencies
 
 This issue is blocked by the following ones:
-- [ ] $ITEM
+- [ ] #ITEM
 -->
 
 ## Checklist
