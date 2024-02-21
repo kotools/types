@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -11,6 +9,7 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
@@ -41,6 +40,39 @@ class StrictlyPositiveIntCompanionTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_Number_that_is_greater_than_zero() {
+        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
+        val result: StrictlyPositiveInt = StrictlyPositiveInt.create(number)
+        val actual: Int = result.toInt()
+        assertEquals(expected = number, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_a_Number_that_equals_zero() {
+        val number: Number = 0
+        val exception: IllegalArgumentException = assertFailsWith {
+            StrictlyPositiveInt.create(number)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = number.shouldBeStrictlyPositive()
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_a_Number_that_is_less_than_zero() {
+        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        val exception: IllegalArgumentException = assertFailsWith {
+            StrictlyPositiveInt.create(number)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = number.shouldBeStrictlyPositive()
+        assertEquals(expected, actual)
+    }
+
     @Test
     fun random_should_return_different_values() {
         val result: StrictlyPositiveInt = StrictlyPositiveInt.random()
@@ -56,6 +88,7 @@ class StrictlyPositiveIntTest {
         result.getOrThrow().toInt() shouldEqual number
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun toStrictlyPositiveInt_should_fail_with_a_negative_Number() {
         val number: Number = Random.nextInt(Int.MIN_VALUE..0)
@@ -75,6 +108,7 @@ class StrictlyPositiveIntTest {
 
 class StrictlyPositiveIntSerializerTest {
     @ExperimentalSerializationApi
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyPositiveInt() {
         val actual: String = serializer<StrictlyPositiveInt>()
@@ -113,6 +147,7 @@ class StrictlyPositiveIntSerializerTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_fail_with_a_negative_Int() {
         val value: Int = NegativeInt.random()

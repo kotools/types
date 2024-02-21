@@ -7,6 +7,8 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -23,8 +25,9 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
 
 @InternalKotoolsTypesApi
 @JvmSynthetic
+@OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun StrictlyPositiveInt(number: Number): StrictlyPositiveInt =
-    StrictlyPositiveInt orFail number.toInt()
+    StrictlyPositiveInt.create(number)
 
 /**
  * Returns this number as an encapsulated [StrictlyPositiveInt], which may
@@ -58,10 +61,31 @@ public value class StrictlyPositiveInt private constructor(
             Int.MAX_VALUE.toStrictlyPositiveInt()::getOrThrow
         )
 
-        @InternalKotoolsTypesApi
+        /**
+         * Creates a [StrictlyPositiveInt] from the specified [number], or
+         * throws an [IllegalArgumentException] if the [number] is less than or
+         * equals zero.
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: StrictlyPositiveInt = StrictlyPositiveInt.create(42)
+         * println(number) // 42
+         * ```
+         *
+         * The [StrictlyPositiveInt] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
-        internal infix fun orFail(value: Int): StrictlyPositiveInt =
-            StrictlyPositiveInt(value)
+        public fun create(number: Number): StrictlyPositiveInt {
+            val value: Int = number.toInt()
+            val isValid: Boolean = value.isStrictlyPositive()
+            require(isValid) { value.shouldBeStrictlyPositive() }
+            return StrictlyPositiveInt(value)
+        }
 
         /** Returns a random [StrictlyPositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
@@ -69,10 +93,6 @@ public value class StrictlyPositiveInt private constructor(
             .random()
             .toStrictlyPositiveInt()
             .getOrThrow()
-    }
-
-    init {
-        require(value.isStrictlyPositive()) { value.shouldBeStrictlyPositive() }
     }
 
     @Since(KotoolsTypesVersion.V4_0_0)
