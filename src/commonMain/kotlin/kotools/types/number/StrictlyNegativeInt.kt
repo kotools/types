@@ -48,9 +48,8 @@ public value class StrictlyNegativeInt private constructor(
      */
     public companion object {
         /** The minimum value a [StrictlyNegativeInt] can have. */
-        public val min: StrictlyNegativeInt by lazy(
-            Int.MIN_VALUE.toStrictlyNegativeInt()::getOrThrow
-        )
+        @OptIn(ExperimentalKotoolsTypesApi::class)
+        public val min: StrictlyNegativeInt by lazy { create(Int.MIN_VALUE) }
 
         /** The maximum value a [StrictlyNegativeInt] can have. */
         public val max: StrictlyNegativeInt by lazy(
