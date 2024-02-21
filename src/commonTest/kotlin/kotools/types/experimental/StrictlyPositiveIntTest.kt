@@ -1,6 +1,5 @@
 package kotools.types.experimental
 
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyNegativeInt
@@ -24,16 +23,17 @@ class StrictlyPositiveIntTest {
 
 class StrictlyPositiveIntCompanionTest {
     @ExperimentalKotoolsTypesApi
-    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun range_should_go_from_1_included_to_Int_MAX_VALUE_included() {
         val actual: NotEmptyRange<StrictlyPositiveInt> =
             StrictlyPositiveInt.range
         assertTrue(actual.start is InclusiveBound)
-        val expectedStartValue = StrictlyPositiveInt(1)
+        val expectedStartValue: StrictlyPositiveInt =
+            StrictlyPositiveInt.create(1)
         assertEquals(expectedStartValue, actual.start.value)
         assertTrue(actual.end is InclusiveBound)
-        val expectedEndValue = StrictlyPositiveInt(Int.MAX_VALUE)
+        val expectedEndValue: StrictlyPositiveInt =
+            StrictlyPositiveInt.create(Int.MAX_VALUE)
         assertEquals(expectedEndValue, actual.end.value)
     }
 }

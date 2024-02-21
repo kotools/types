@@ -25,21 +25,15 @@ import kotlin.jvm.JvmSynthetic
 @JvmSynthetic
 internal fun Int.isStrictlyPositive(): Boolean = this > 0
 
-@InternalKotoolsTypesApi
-@JvmSynthetic
-@OptIn(ExperimentalKotoolsTypesApi::class)
-internal fun StrictlyPositiveInt(number: Number): StrictlyPositiveInt =
-    StrictlyPositiveInt.create(number)
-
 /**
  * Returns this number as an encapsulated [StrictlyPositiveInt], which may
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [negative][NegativeInt].
  */
-@OptIn(InternalKotoolsTypesApi::class)
+@OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    runCatching { StrictlyPositiveInt(this) }
+    runCatching(StrictlyPositiveInt.Companion::create)
 
 /** Represents an integer number of type [Int] that is greater than zero. */
 @JvmInline
@@ -88,7 +82,7 @@ public value class StrictlyPositiveInt private constructor(
         @JvmSynthetic
         public fun create(number: Number): StrictlyPositiveInt {
             val result: StrictlyPositiveInt? = createOrNull(number)
-            return requireNotNull(result) { number.shouldBeStrictlyPositive() }
+            return requireNotNull(result, number::shouldBeStrictlyPositive)
         }
 
         /**
@@ -114,10 +108,11 @@ public value class StrictlyPositiveInt private constructor(
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
-        public fun createOrNull(number: Number): StrictlyPositiveInt? = number
-            .toInt()
-            .takeIf(Int::isStrictlyPositive)
-            ?.let(::StrictlyPositiveInt)
+        public fun createOrNull(number: Number): StrictlyPositiveInt? {
+            val value: Int = number.toInt()
+            val isValid: Boolean = value.isStrictlyPositive()
+            return if (isValid) StrictlyPositiveInt(value) else null
+        }
 
         /** Returns a random [StrictlyPositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
