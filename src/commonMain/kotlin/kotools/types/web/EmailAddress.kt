@@ -150,6 +150,7 @@ public class EmailAddress private constructor(private val text: String) {
             return EmailAddress(text)
         }
 
+        @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun creationErrorMessage(value: String): ErrorMessage =
             ErrorMessage(
@@ -338,15 +339,16 @@ internal object EmailAddressSerializer :
     )
 
 @ExperimentalKotoolsTypesApi
-@InternalKotoolsTypesApi
 private object EmailAddressDeserializationStrategy :
     DeserializationStrategy<EmailAddress> {
+    @OptIn(InternalKotoolsTypesApi::class)
     override val descriptor: SerialDescriptor by lazy {
         val type: String = simpleNameOf<EmailAddress>()
         val serialName = "${KotoolsTypesPackage.Experimental}.$type"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
         return EmailAddress.createOrNull(text)
