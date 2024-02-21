@@ -79,7 +79,7 @@ public value class StrictlyNegativeInt private constructor(
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun create(number: Number): StrictlyNegativeInt {
-            val result: StrictlyNegativeInt? = this.createOrNull(number)
+            val result: StrictlyNegativeInt? = createOrNull(number)
             return requireNotNull(result) { number.shouldBeStrictlyNegative() }
         }
 
