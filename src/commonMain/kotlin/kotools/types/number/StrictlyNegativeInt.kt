@@ -80,7 +80,7 @@ public value class StrictlyNegativeInt private constructor(
         @JvmSynthetic
         public fun create(number: Number): StrictlyNegativeInt {
             val result: StrictlyNegativeInt? = createOrNull(number)
-            return requireNotNull(result) { number.shouldBeStrictlyNegative() }
+            return requireNotNull(result, number::shouldBeStrictlyNegative)
         }
 
         /**
