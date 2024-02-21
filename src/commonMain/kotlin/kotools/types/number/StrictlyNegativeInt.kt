@@ -7,6 +7,8 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -53,6 +55,30 @@ public value class StrictlyNegativeInt private constructor(
         public val max: StrictlyNegativeInt by lazy(
             (-1).toStrictlyNegativeInt()::getOrThrow
         )
+
+        /**
+         * Creates a [StrictlyNegativeInt] from the specified [number], or
+         * returns `null` if the [number] is greater than or equals zero.
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: StrictlyNegativeInt? =
+         *     StrictlyNegativeInt.createOrNull(-7)
+         * println(number) // -7
+         * ```
+         *
+         * The [StrictlyNegativeInt] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun createOrNull(number: Number): StrictlyNegativeInt? = number
+            .toInt()
+            .takeIf(Int::isStrictlyNegative)
+            ?.let(::StrictlyNegativeInt)
 
         @InternalKotoolsTypesApi
         @JvmSynthetic
