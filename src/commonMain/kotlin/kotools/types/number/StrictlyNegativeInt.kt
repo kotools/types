@@ -30,10 +30,11 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
-@OptIn(InternalKotoolsTypesApi::class)
+@OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
-public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    runCatching { StrictlyNegativeInt orFail this.toInt() }
+public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> = this
+    .toInt()
+    .runCatching(StrictlyNegativeInt.Companion::create)
 
 /** Represents an integer number of type [Int] that is less than zero. */
 @JvmInline
@@ -82,7 +83,7 @@ public value class StrictlyNegativeInt private constructor(
         @JvmSynthetic
         public fun create(number: Number): StrictlyNegativeInt {
             val result: StrictlyNegativeInt? = this.createOrNull(number)
-            return requireNotNull(result) { number.shouldBeStrictlyNegative() }
+            return requireNotNull(result, number::shouldBeStrictlyNegative)
         }
 
         /**
@@ -113,17 +114,9 @@ public value class StrictlyNegativeInt private constructor(
             .takeIf(Int::isStrictlyNegative)
             ?.let(::StrictlyNegativeInt)
 
-        @InternalKotoolsTypesApi
-        @JvmSynthetic
-        internal infix fun orFail(value: Int): StrictlyNegativeInt {
-            val isValid: Boolean = value.isStrictlyNegative()
-            require(isValid) { value.shouldBeStrictlyNegative() }
-            return StrictlyNegativeInt(value)
-        }
-
         /** Returns a random [StrictlyNegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
-        public fun random(): StrictlyNegativeInt = (min.value..max.value)
+        public fun random(): StrictlyNegativeInt = min.value.rangeTo(max.value)
             .random()
             .toStrictlyNegativeInt()
             .getOrThrow()
@@ -140,7 +133,7 @@ public value class StrictlyNegativeInt private constructor(
 internal object StrictlyNegativeIntSerializer :
     KSerializer<StrictlyNegativeInt> by intSerializer(
         StrictlyNegativeIntDeserializationStrategy,
-        intConverter = { it.toInt() }
+        intConverter = StrictlyNegativeInt::toInt
     )
 
 private object StrictlyNegativeIntDeserializationStrategy :
