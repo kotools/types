@@ -85,10 +85,8 @@ public value class StrictlyPositiveInt private constructor(
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun create(number: Number): StrictlyPositiveInt {
-            val value: Int = number.toInt()
-            val isValid: Boolean = value.isStrictlyPositive()
-            require(isValid) { value.shouldBeStrictlyPositive() }
-            return StrictlyPositiveInt(value)
+            val result: StrictlyPositiveInt? = createOrNull(number)
+            return requireNotNull(result) { number.shouldBeStrictlyPositive() }
         }
 
         /**
