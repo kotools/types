@@ -30,10 +30,10 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
-@OptIn(InternalKotoolsTypesApi::class)
+@OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
-    runCatching { StrictlyNegativeInt orFail this.toInt() }
+    runCatching(StrictlyNegativeInt.Companion::create)
 
 /** Represents an integer number of type [Int] that is less than zero. */
 @JvmInline
@@ -112,14 +112,6 @@ public value class StrictlyNegativeInt private constructor(
             .toInt()
             .takeIf(Int::isStrictlyNegative)
             ?.let(::StrictlyNegativeInt)
-
-        @InternalKotoolsTypesApi
-        @JvmSynthetic
-        internal infix fun orFail(value: Int): StrictlyNegativeInt {
-            val isValid: Boolean = value.isStrictlyNegative()
-            require(isValid) { value.shouldBeStrictlyNegative() }
-            return StrictlyNegativeInt(value)
-        }
 
         /** Returns a random [StrictlyNegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
