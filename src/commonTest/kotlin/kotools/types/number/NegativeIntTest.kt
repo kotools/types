@@ -11,6 +11,7 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
@@ -23,6 +24,8 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class NegativeIntCompanionTest {
     @Test
@@ -35,6 +38,29 @@ class NegativeIntCompanionTest {
     fun max_should_equal_zero() {
         val result: ZeroInt = NegativeInt.max
         result shouldEqual ZeroInt
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_Number_that_is_less_than_zero() {
+        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        val actual: NegativeInt? = NegativeInt.createOrNull(number)
+        assertNotNull(actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_Number_that_equals_zero() {
+        val actual: NegativeInt? = NegativeInt.createOrNull(0)
+        assertNotNull(actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_fail_with_a_Number_that_is_greater_than_zero() {
+        val number: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
+        val actual: NegativeInt? = NegativeInt.createOrNull(number)
+        assertNull(actual)
     }
 
     @Test

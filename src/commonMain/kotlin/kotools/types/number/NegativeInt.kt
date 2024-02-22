@@ -7,7 +7,9 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -51,6 +53,49 @@ public sealed interface NegativeInt : AnyInt {
 
         /** The maximum value a [NegativeInt] can have. */
         public val max: ZeroInt = ZeroInt
+
+        /**
+         * Creates a [NegativeInt] from the specified [number], or returns
+         * `null` if the [number] is greater than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: NegativeInt? = NegativeInt.createOrNull(-7)
+         * println(number) // -7
+         * ```
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * ```java
+         * final NegativeInt number = NegativeInt.Companion.createOrNull(-7);
+         * System.out.println(number); // -7
+         * ```
+         * </details>
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        public fun createOrNull(number: Number): NegativeInt? {
+            val value: Int = number.toInt()
+            return when {
+                value == 0 -> ZeroInt
+                value < 0 -> StrictlyNegativeInt.create(value)
+                else -> null
+            }
+        }
 
         /** Returns a random [NegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
