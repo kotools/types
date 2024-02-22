@@ -37,6 +37,29 @@ class NonZeroIntCompanionTest {
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
+    fun create_should_pass_with_a_Number_other_than_zero() {
+        val number: Number = setOf(
+            Random.nextInt(from = 1, until = Int.MAX_VALUE),
+            Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        ).random()
+        val result: NonZeroInt = NonZeroInt.create(number)
+        val actual: Number = result.toInt()
+        assertEquals(expected = number, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_a_Number_that_equals_zero() {
+        val number: Number = 0
+        val exception: IllegalArgumentException =
+            assertFailsWith { NonZeroInt.create(number) }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = ErrorMessage.zeroNumber
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNull_should_pass_with_a_Number_other_than_zero() {
         val number: Number = setOf(
             Random.nextInt(from = 1, until = Int.MAX_VALUE),
