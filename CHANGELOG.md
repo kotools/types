@@ -35,6 +35,8 @@ All notable changes to this project will be documented in this file.
     [#347](https://github.com/kotools/types/issues/347))
   - `create(Number)` and `createOrNull(Number)` in `PositiveInt.Companion`
     (issue [#349](https://github.com/kotools/types/issues/349))
+  - `create(Number)` and `createOrNull(Number)` in `NegativeInt.Companion`
+    (issue [#350](https://github.com/kotools/types/issues/350))
 - Documentation of dependency compatibility (issue
   [#288](https://github.com/kotools/types/issues/288)).
 
