@@ -9,7 +9,9 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -54,6 +56,49 @@ public sealed interface NonZeroInt : AnyInt {
         public val max: StrictlyPositiveInt by lazy(
             StrictlyPositiveInt.Companion::max
         )
+
+        /**
+         * Creates a [NonZeroInt] from the specified [number], or returns `null`
+         * if the [number] equals zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: NonZeroInt? = NonZeroInt.createOrNull(23)
+         * println(number) // 23
+         * ```
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * ```java
+         * final NonZeroInt number = NonZeroInt.Companion.createOrNull(23);
+         * System.out.println(number); // 23
+         * ```
+         * </details>
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        public fun createOrNull(number: Number): NonZeroInt? {
+            val value: Int = number.toInt()
+            return when {
+                value.isStrictlyPositive() -> StrictlyPositiveInt.create(value)
+                value.isStrictlyNegative() -> StrictlyNegativeInt.create(value)
+                else -> null
+            }
+        }
 
         /** Returns a random [NonZeroInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
