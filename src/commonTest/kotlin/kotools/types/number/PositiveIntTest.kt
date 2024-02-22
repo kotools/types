@@ -40,6 +40,35 @@ class PositiveIntCompanionTest {
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
+    fun create_should_pass_with_a_Number_that_is_greater_than_zero() {
+        val number: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
+        val result: PositiveInt = PositiveInt.create(number)
+        val actual: Int = result.toInt()
+        assertEquals(expected = number, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_Number_that_equals_zero() {
+        val number: Number = 0
+        val result: PositiveInt = PositiveInt.create(number)
+        val actual: Int = result.toInt()
+        assertEquals(expected = number, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_a_Number_that_is_less_than_zero() {
+        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
+        val exception: IllegalArgumentException =
+            assertFailsWith { PositiveInt.create(number) }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = number.shouldBePositive()
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNull_should_pass_with_a_Number_that_is_greater_than_zero() {
         val number: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
         val actual: PositiveInt? = PositiveInt.createOrNull(number)
