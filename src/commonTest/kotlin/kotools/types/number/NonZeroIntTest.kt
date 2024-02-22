@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -72,6 +70,7 @@ class NonZeroIntTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun toNonZeroInt_should_fail_with_an_Int_that_equals_zero() {
         val number: Number = 0
@@ -105,6 +104,7 @@ class NonZeroIntTest {
 
 class NonZeroIntSerializerTest {
     @ExperimentalSerializationApi
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_NonZeroInt() {
         val actual: String = serializer<NonZeroInt>().descriptor.serialName
@@ -141,6 +141,7 @@ class NonZeroIntSerializerTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_fail_with_an_Int_that_equals_zero() {
         val encoded: String = Json.encodeToString(0)
