@@ -55,6 +55,50 @@ public sealed interface NegativeInt : AnyInt {
         public val max: ZeroInt = ZeroInt
 
         /**
+         * Creates a [NegativeInt] from the specified [number], or throws an
+         * [IllegalArgumentException] if the [number] is greater than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: NegativeInt = NegativeInt.create(-7)
+         * println(number) // -7
+         * ```
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * ```java
+         * final NegativeInt number = NegativeInt.Companion.create(-7);
+         * System.out.println(number); // -7
+         * ```
+         * </details>
+         * <br>
+         *
+         * You can use the [NegativeInt.Companion.createOrNull] function for
+         * returning `null` instead of throwing an exception in case of invalid
+         * [number].
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        public fun create(number: Number): NegativeInt {
+            val result: NegativeInt? = createOrNull(number)
+            return requireNotNull(result, number::shouldBeNegative)
+        }
+
+        /**
          * Creates a [NegativeInt] from the specified [number], or returns
          * `null` if the [number] is greater than zero.
          *
@@ -85,6 +129,10 @@ public sealed interface NegativeInt : AnyInt {
          * System.out.println(number); // -7
          * ```
          * </details>
+         * <br>
+         *
+         * You can use the [NegativeInt.Companion.create] function for throwing
+         * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)

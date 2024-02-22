@@ -267,6 +267,7 @@ public abstract interface class kotools/types/number/NegativeInt : kotools/types
 }
 
 public final class kotools/types/number/NegativeInt$Companion {
+	public final fun create (Ljava/lang/Number;)Lkotools/types/number/NegativeInt;
 	public final fun createOrNull (Ljava/lang/Number;)Lkotools/types/number/NegativeInt;
 	public final fun getMax ()Lkotools/types/number/ZeroInt;
 	public final fun getMin-r6XGqFM ()I
