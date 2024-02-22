@@ -314,6 +314,7 @@ public abstract interface class kotools/types/number/PositiveInt : kotools/types
 }
 
 public final class kotools/types/number/PositiveInt$Companion {
+	public final fun createOrNull (Ljava/lang/Number;)Lkotools/types/number/PositiveInt;
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin ()Lkotools/types/number/ZeroInt;
 	public final fun random ()Lkotools/types/number/PositiveInt;

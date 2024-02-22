@@ -7,7 +7,9 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
@@ -52,6 +54,49 @@ public sealed interface PositiveInt : AnyInt {
 
         /** The maximum value a [PositiveInt] can have. */
         public val max: StrictlyPositiveInt by lazy { StrictlyPositiveInt.max }
+
+        /**
+         * Creates a [PositiveInt] from the specified [number], or returns
+         * `null` if the [number] is less than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val number: PositiveInt? = PositiveInt.createOrNull(23)
+         * println(number) // 23
+         * ```
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * ```java
+         * final PositiveInt number = PositiveInt.Companion.createOrNull(23);
+         * System.out.println(number); // 23
+         * ```
+         * </details>
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        public fun createOrNull(number: Number): PositiveInt? {
+            val value: Int = number.toInt()
+            return when {
+                value == 0 -> ZeroInt
+                value.isStrictlyPositive() -> StrictlyPositiveInt.create(value)
+                else -> null
+            }
+        }
 
         /** Returns a random [PositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
