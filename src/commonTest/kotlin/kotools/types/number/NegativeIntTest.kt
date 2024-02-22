@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -80,6 +78,7 @@ class NegativeIntTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun toNegativeInt_should_fail_with_a_strictly_positive_Int() {
         val number: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
@@ -125,6 +124,7 @@ class NegativeIntTest {
 
 class NegativeIntSerializerTest {
     @ExperimentalSerializationApi
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_NegativeInt() {
         val actual: String = serializer<NegativeInt>().descriptor.serialName
@@ -160,6 +160,7 @@ class NegativeIntSerializerTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_fail_with_an_Int_that_is_greater_than_zero() {
         val value: Int = StrictlyPositiveInt.random()
