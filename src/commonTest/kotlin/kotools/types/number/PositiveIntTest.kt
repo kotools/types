@@ -84,7 +84,7 @@ class PositiveIntCompanionTest {
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun createOrNull_should_pass_with_a_Number_that_is_less_than_zero() {
+    fun createOrNull_should_fail_with_a_Number_that_is_less_than_zero() {
         val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
         val actual: PositiveInt? = PositiveInt.createOrNull(number)
         assertNull(actual)
