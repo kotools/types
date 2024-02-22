@@ -140,7 +140,7 @@ public sealed interface NegativeInt : AnyInt {
             val value: Int = number.toInt()
             return when {
                 value == 0 -> ZeroInt
-                value < 0 -> StrictlyNegativeInt.create(value)
+                value.isStrictlyNegative() -> StrictlyNegativeInt.create(value)
                 else -> null
             }
         }
