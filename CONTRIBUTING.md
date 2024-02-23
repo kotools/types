@@ -128,11 +128,27 @@ You can do this by running the `Dump API binaries` configuration.
 
 ### Committing changes
 
-This project follows the [Conventional Commits] guidelines for committing with
-Git.
-Please read the specifications for aligning with the project standards.
+In this project, Git commit messages have the following structure:
 
-[Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0
+```text
+<intention> <message> (<identifier>)
+```
+
+- `intention`: An emoji from [Gitmoji](https://gitmoji.dev).
+- `message`: A brief explanation of the change.
+- `identifier`: A reference to an item (issue, discussion, pull request) on this
+  repository.
+
+Here's an example of commit message:
+
+```text
+⬆️ Bump binary-compatibility-validator to 0.14.0 (#380)
+```
+
+> You may also be interested to configure the
+> [Gitmoji CLI](https://github.com/carloscuesta/gitmoji-cli) locally for using
+> the [Gitmoji](https://github.com/carloscuesta/gitmoji) convention on multiple
+> projects.
 
 ### Creating a Pull Request
 
