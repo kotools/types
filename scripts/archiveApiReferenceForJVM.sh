@@ -27,7 +27,7 @@ git checkout -q api-reference
 cp -a "api/references/$PROJECT_VERSION" versions
 git add "versions/$PROJECT_VERSION"
 git diff-index --quiet HEAD || \
-git commit -qS -m "docs: archive API reference of v$PROJECT_VERSION"
+git commit -qS -m "📝 Archive API reference of v$PROJECT_VERSION"
 git checkout -q -
 
 echo "${BLUE}> Clean project.${NO_COLOR}"

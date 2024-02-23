@@ -37,7 +37,7 @@ mv docs-backup/CNAME docs
 rm -r docs-backup
 git add docs/
 git diff-index --quiet HEAD || \
-git commit -qS -m "docs: update API reference of v$PROJECT_VERSION"
+git commit -qS -m "📝 Update API reference of v$PROJECT_VERSION"
 git checkout -q -
 
 echo "${GREEN}> SUCCESS${NO_COLOR}"

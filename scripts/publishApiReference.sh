@@ -35,7 +35,7 @@ mv $OLD_VERSIONS_DIR/* $SOURCE_FOLDER
 git rm -qr $OLD_VERSIONS_DIR
 git add $SOURCE_FOLDER
 git diff-index --quiet HEAD || \
-git commit -qS -m "docs: archive API reference of v$PROJECT_VERSION"
+git commit -qS -m "📝 Archive API reference of v$PROJECT_VERSION"
 
 echo "${BLUE}> Publish latest API reference${NO_COLOR}"
 mkdir docs-backup
@@ -47,7 +47,7 @@ mv docs-backup/CNAME docs
 rm -r docs-backup
 git add docs/
 git diff-index --quiet HEAD || \
-git commit -qS -m "docs: publish API reference of v$PROJECT_VERSION"
+git commit -qS -m "🚀 Publish API reference of v$PROJECT_VERSION"
 git checkout -q -
 
 echo "${BLUE}> Clean temporary files${NO_COLOR}"
