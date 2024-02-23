@@ -85,17 +85,23 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
 public value class NotEmptyList<out E> private constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {
+    /** Contains static declarations for the [NotEmptyList] type. */
+    public companion object {
+        @InternalKotoolsTypesApi
+        @JvmSynthetic
+        internal fun <E> orThrow(elements: List<E>): NotEmptyList<E> {
+            val isValid: Boolean = elements.isNotEmpty()
+            require(isValid, ErrorMessage.Companion::emptyCollection)
+            return NotEmptyList(elements)
+        }
+    }
+
     override val head: E get() = elements.first()
 
     override val tail: NotEmptyList<E>?
         get() = elements.drop(1)
             .toNotEmptyList()
             .getOrNull()
-
-    init {
-        val isValid: Boolean = elements.isNotEmpty()
-        require(isValid) { ErrorMessage.emptyCollection }
-    }
 
     /**
      * Returns all elements of this list as a [List] of type [E].
@@ -111,13 +117,6 @@ public value class NotEmptyList<out E> private constructor(
     public fun toList(): List<E> = elements
 
     override fun toString(): String = "$elements"
-
-    /** Contains static declarations for the [NotEmptyList] type. */
-    public companion object {
-        @JvmSynthetic
-        internal fun <E> orThrow(elements: List<E>): NotEmptyList<E> =
-            NotEmptyList(elements)
-    }
 }
 
 @InternalKotoolsTypesApi
