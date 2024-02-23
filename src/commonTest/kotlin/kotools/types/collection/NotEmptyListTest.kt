@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -166,6 +164,7 @@ class NotEmptyListSerializerTest {
         result.toList() contentShouldEqual collection
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_fail_with_an_empty_Collection() {
         val collection: Collection<Int> = emptyList()
