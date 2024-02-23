@@ -31,6 +31,36 @@ import kotlin.test.assertNull
 class NotEmptyListCompanionTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
+    fun create_should_pass_with_a_not_empty_Collection() {
+        val collection: Collection<Int> = listOf(1, 2, 3)
+        val elements: NotEmptyList<Int> = NotEmptyList.create(collection)
+        val actual: Collection<Int> = elements.toList()
+        assertContentEquals(expected = collection, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_not_empty_MutableCollection() {
+        val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+        val elements: NotEmptyList<Int> = NotEmptyList.create(original)
+        assertEquals(expected = "$original", actual = "$elements")
+        original.clear()
+        assertNotEquals(illegal = "$original", actual = "$elements")
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptyList()
+        val exception: IllegalArgumentException = assertFailsWith {
+            NotEmptyList.create(collection)
+        }
+        val actual = ErrorMessage(exception)
+        assertEquals(expected = ErrorMessage.emptyCollection, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNull_should_pass_with_a_not_empty_Collection() {
         val collection: Collection<Int> = listOf(1, 2, 3)
         val elements: NotEmptyList<Int>? = NotEmptyList.createOrNull(collection)

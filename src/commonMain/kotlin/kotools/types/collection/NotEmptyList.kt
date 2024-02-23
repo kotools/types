@@ -91,6 +91,49 @@ public value class NotEmptyList<out E> private constructor(
     public companion object {
         /**
          * Creates a [NotEmptyList] containing all the elements of the specified
+         * [collection], or throws an [IllegalArgumentException] if the
+         * [collection] is [empty][Collection.isEmpty].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val collection: Collection<Int> = listOf(1, 2, 3)
+         * val elements: NotEmptyList<Int> = NotEmptyList.create(collection)
+         * println(elements) // [1, 2, 3]
+         * ```
+         *
+         * The [NotEmptyList] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         *
+         * Please note that changes made to the original collection will not be
+         * reflected on the resulting [NotEmptyList].
+         *
+         * ```kotlin
+         * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+         * val notEmptyList: NotEmptyList<Int> = NotEmptyList.create(original)
+         * println(original) // [1, 2, 3]
+         * println(notEmptyList) // [1, 2, 3]
+         *
+         * original.clear()
+         * println(original) // []
+         * println(notEmptyList) // [1, 2, 3]
+         * ```
+         *
+         * You can use the [NotEmptyList.Companion.createOrNull] function for
+         * returning `null` instead of throwing an exception in case of invalid
+         * [collection].
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <E> create(collection: Collection<E>): NotEmptyList<E> {
+            val result: NotEmptyList<E>? = createOrNull(collection)
+            return requireNotNull(result) { ErrorMessage.emptyCollection }
+        }
+
+        /**
+         * Creates a [NotEmptyList] containing all the elements of the specified
          * [collection], or returns `null` if the [collection] is
          * [empty][Collection.isEmpty].
          *
@@ -121,6 +164,10 @@ public value class NotEmptyList<out E> private constructor(
          * println(original) // []
          * println(notEmptyList) // [1, 2, 3]
          * ```
+         *
+         * You can use the [NotEmptyList.Companion.create] function for throwing
+         * an exception instead of returning `null` in case of invalid
+         * [collection].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
