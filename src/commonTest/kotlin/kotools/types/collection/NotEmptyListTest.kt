@@ -10,6 +10,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.shouldBeNotNull
@@ -20,8 +21,43 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+
+class NotEmptyListCompanionTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_not_empty_Collection() {
+        val collection: Collection<Int> = listOf(1, 2, 3)
+        val elements: NotEmptyList<Int>? = NotEmptyList.createOrNull(collection)
+        assertNotNull(elements, "$collection to NotEmptyList shouldn't fail")
+        val actual: Collection<Int> = elements.toList()
+        assertContentEquals(expected = collection, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_not_empty_MutableCollection() {
+        val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+        val elements: NotEmptyList<Int>? = NotEmptyList.createOrNull(original)
+        assertNotNull(elements, "$original to NotEmptyList shouldn't fail")
+        assertEquals(expected = "$original", actual = "$elements")
+        original.clear()
+        assertNotEquals(illegal = "$original", actual = "$elements")
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptyList()
+        val elements: NotEmptyList<Int>? = NotEmptyList.createOrNull(collection)
+        assertNull(elements, "$collection to NotEmptyList should fail")
+    }
+}
 
 class NotEmptyListTest {
     @Test

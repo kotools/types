@@ -6,7 +6,9 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -87,6 +89,50 @@ public value class NotEmptyList<out E> private constructor(
 ) : NotEmptyCollection<E> {
     /** Contains static declarations for the [NotEmptyList] type. */
     public companion object {
+        /**
+         * Creates a [NotEmptyList] containing all the elements of the specified
+         * [collection], or returns `null` if the [collection] is
+         * [empty][Collection.isEmpty].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val collection: Collection<Int> = listOf(1, 2, 3)
+         * val elements: NotEmptyList<Int>? =
+         *     NotEmptyList.createOrNull(collection)
+         * println(elements) // [1, 2, 3]
+         * ```
+         *
+         * The [NotEmptyList] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         *
+         * Please note that changes made to the original collection will not be
+         * reflected on the resulting [NotEmptyList].
+         *
+         * ```kotlin
+         * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+         * val notEmptyList: NotEmptyList<Int>? =
+         *     NotEmptyList.createOrNull(original)
+         * println(original) // [1, 2, 3]
+         * println(notEmptyList) // [1, 2, 3]
+         *
+         * original.clear()
+         * println(original) // []
+         * println(notEmptyList) // [1, 2, 3]
+         * ```
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <E> createOrNull(
+            collection: Collection<E>
+        ): NotEmptyList<E>? {
+            if (collection.isEmpty()) return null
+            val elements: List<E> = collection.toList()
+            return NotEmptyList(elements)
+        }
+
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <E> orThrow(elements: List<E>): NotEmptyList<E> {
