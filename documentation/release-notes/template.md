@@ -1,4 +1,4 @@
-# $VERSION
+# $VERSION 🚑️/✨/🔥
 
 _Release date: YYYY-MM-DD | [Full changelog][changelog]._
 
