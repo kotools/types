@@ -1,11 +1,11 @@
 ---
-name: Kotlin Native target
-about: New request for supporting a Kotlin Native target.
-title: Support `TARGET` Kotlin Native target
+name: ✨ Kotlin Native target
+about: Support a Kotlin Native target.
+title: ✨ Support `TARGET` Kotlin Native target
 labels: feature, native
 ---
 
-## Description
+## 📝 Description
 
 We would like to support the `TARGET` Kotlin Native target.
 
@@ -14,13 +14,13 @@ See the [targets supported] by Kotlin Native for more details about it.
 [targets supported]: https://kotlinlang.org/docs/native-target-support.html
 
 <!-- Uncomment this section if your issue depends on another one.
-## Dependencies
+## 🔗 Dependencies
 
 This issue is blocked by the following ones:
 - [ ] #ITEM
 -->
 
-## Checklist
+## ✅ Checklist
 
 - [ ] Add the target in our Multiplatform Gradle plugin, add the target in the [integration] and the [delivery] workflows, add badge in README and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
