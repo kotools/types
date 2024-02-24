@@ -59,6 +59,9 @@ All notable changes to this project will be documented in this file.
   following the
   [RFC-5322](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)
   (issue [#394](https://github.com/kotools/types/issues/394)).
+- Update our Git commit messages convention using
+  [Gitmoji](https://github.com/carloscuesta/gitmoji) in the contributing
+  guidelines (issue [#490](https://github.com/kotools/types/issues/490)).
 
 ### Deprecated
 
