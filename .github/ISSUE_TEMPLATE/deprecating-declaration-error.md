@@ -1,5 +1,5 @@
 ---
-name: 🗑️ Declaration's deprecation to error level
+name: 🗑️ Declaration's deprecation with error level
 about: Promoting the deprecation of a declaration to error level.
 title: 🗑️ Deprecation promotion of $DECLARATION to error level
 labels: feature
