@@ -7,6 +7,9 @@ jobs:
   gradle-wrapper-upgrade:
     name: Bump Gradle Wrapper
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
