@@ -1,22 +1,22 @@
 ---
-name: Experimental Declaration
-about: New request for introducing an experimental declaration.
-title: New $DECLARATION
+name: ✨ Experimental Declaration
+about: Introduce an experimental declaration.
+title: ✨ New $DECLARATION
 labels: feature
 ---
 
-## Description
+## 📝 Description
 
 We would like to introduce an **experimental** $DECLARATION for $REASON.
 
 <!-- Uncomment this section if your issue depends on another one.
-## Dependencies
+## 🔗 Dependencies
 
 This issue is blocked by the following ones:
 - [ ] #ITEM
 -->
 
-## Checklist
+## ✅ Checklist
 
 - [ ] Add this declaration, [test] its behavior with Kotlin and its compatibility with Java, update the public [API binaries] and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
