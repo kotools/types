@@ -1,4 +1,4 @@
-# Changelog
+# 🔄 Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 [keep a changelog]: https://keepachangelog.com/en/1.1.0
 [the changelog in kotools/libraries]: https://github.com/kotools/libraries/blob/types-v3.2.0/types/changelog.md
 
-## Types of changes
+## 🤔 Types of changes
 
 - `Added` for new features.
 - `Changed` for changes in existing functionality.
@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-## Unreleased
+## 🚧 Unreleased
 
 ### Added
 
@@ -79,7 +79,7 @@ by the `url.parse()` function (issue
 See the [security report](https://github.com/advisories/GHSA-jchw-25xp-jwwc) for
 more details on this vulnerability.
 
-## 4.4.2 <a id="4.4.2"></a>
+## 🚑️ 4.4.2 <a id="4.4.2"></a>
 
 _Release date: 2024-02-07 | Commits: [4.4.1...4.4.2]._
 
@@ -92,7 +92,7 @@ types (bug [#431] reported by [@robertfmurdock]).
 
 [#431]: https://github.com/kotools/types/issues/431
 
-## 4.4.1 <a id="4.4.1"></a>
+## 🚑️ 4.4.1 <a id="4.4.1"></a>
 
 _Release date: 2024-02-02 | Commits: [4.4.0...4.4.1]._
 
@@ -109,7 +109,7 @@ Thanks to [@robertfmurdock] for reporting this error (issue [#406]).
 
 [#406]: https://github.com/kotools/types/issues/406
 
-## 4.4.0 <a id="4.4.0"></a>
+## ✨ 4.4.0 <a id="4.4.0"></a>
 
 _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
 
@@ -211,7 +211,7 @@ The copyright notice in the license (issue
   avoiding cross-realm object access (issue
   [#313](https://github.com/kotools/types/issues/313)).
 
-## 4.3.1 <a id="4.3.1"></a>
+## 🚑️ 4.3.1 <a id="4.3.1"></a>
 
 _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
 
@@ -273,7 +273,7 @@ _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
 
 [#222]: https://github.com/kotools/types/pull/222
 
-## 4.3.0 <a id="4.3.0"></a>
+## ✨ 4.3.0 <a id="4.3.0"></a>
 
 _Release date: 2023-08-14._
 
@@ -296,7 +296,7 @@ _See the [full changelog][4.2.0-4.3.0] from version [4.2.0][tag-4.2.0]._
 [#137]: https://github.com/kotools/types/issues/137
 [#138]: https://github.com/kotools/types/issues/138
 
-## 4.2.0 <a id="4.2.0"></a>
+## ✨ 4.2.0 <a id="4.2.0"></a>
 
 _Release date: 2023-06-24._
 
@@ -460,7 +460,7 @@ println(notEmptyListSerialName == expectedSerialName) // true
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [#77]: https://github.com/kotools/types/issues/77
 
-## 4.1.0 <a id="4.1.0"></a>
+## ✨ 4.1.0 <a id="4.1.0"></a>
 
 _Release date: 2023-04-03._
 
@@ -569,7 +569,7 @@ result = firstString < secondString
 
 [#45]: https://github.com/kotools/types/issues/45
 
-## 4.0.1 <a id="4.0.1"></a>
+## 🚑️ 4.0.1 <a id="4.0.1"></a>
 
 _Release date: 2023-02-06._
 
@@ -592,7 +592,7 @@ Fix versioning annotation of declarations in the `kotools.types.number` package
 
 [#23]: https://github.com/kotools/types/issues/23
 
-## 4.0.0 <a id="4.0.0"></a>
+## 🔥 4.0.0 <a id="4.0.0"></a>
 
 _Release date: 2023-01-03._
 
