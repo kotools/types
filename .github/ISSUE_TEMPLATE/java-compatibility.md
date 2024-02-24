@@ -1,23 +1,23 @@
 ---
-name: Java Compatibility
-about: New request for making a declaration available for Java users.
-title: Making $DECLARATION available on Java
-labels: feature,jvm
+name: ✨ Java Compatibility
+about: Make a declaration available for Java users.
+title: ✨ Making $DECLARATION available on Java
+labels: feature, jvm
 ---
 
-## Description
+## 📝 Description
 
 We would like to make $DECLARATION available for Java users.
 This means that its compatibility should be tested and its documentation should indicate their usage from Java code.
 
 <!-- Uncomment this section if your issue depends on another one.
-## Dependencies
+## 🔗 Dependencies
 
 This issue is blocked by the following ones:
 - [ ] #ITEM
 -->
 
-## Checklist
+## ✅ Checklist
 
 - [ ] Make $DECLARATION available for Java users, [test] its compatibility, update the public [API binaries] and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
