@@ -1,21 +1,21 @@
 ---
-name: Feature
-about: New request for introducing a feature.
+name: ✨ Feature
+about: Introduce a feature.
 labels: feature
 ---
 
-## Description
+## 📝 Description
 
 <!-- Describe the feature here. -->
 
 <!-- Uncomment this section if your issue depends on another one.
-## Dependencies
+## 🔗 Dependencies
 
 This issue is blocked by the following ones:
 - [ ] #ITEM
 -->
 
-## Checklist
+## ✅ Checklist
 
 - [ ] Implement the feature, test it, refactor it and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
