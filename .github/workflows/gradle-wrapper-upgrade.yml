@@ -1,4 +1,4 @@
-name: Gradle Wrapper upgrade
+name: Gradle wrapper update
 on:
   push:
     branches: [ main ]
