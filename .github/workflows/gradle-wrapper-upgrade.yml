@@ -1,0 +1,19 @@
+name: Gradle Wrapper upgrade
+on:
+  schedule:
+    - cron: "0 12 1 * *" # At 12:00 on day-of-month 1.
+  workflow_dispatch:
+jobs:
+  gradle-wrapper-upgrade:
+    name: Bump Gradle Wrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v2.1.1
+      - name: Update Gradle Wrapper
+        uses: gradle-update/update-gradle-wrapper-action@v1.0.20
+        with:
+          labels: dependencies, feature
+          reviewers: LVMVRQUXL
