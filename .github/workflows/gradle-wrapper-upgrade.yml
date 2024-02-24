@@ -1,8 +1,10 @@
 name: Gradle Wrapper upgrade
 on:
+  push:
+    branches: [ main ]
+    paths: [ .github/workflows/gradle-wrapper-upgrade.yml ]
   schedule:
     - cron: "0 12 1 * *" # At 12:00 on day-of-month 1.
-  workflow_dispatch:
 jobs:
   gradle-wrapper-upgrade:
     name: Bump Gradle Wrapper
@@ -15,6 +17,13 @@ jobs:
         uses: actions/checkout@v4.1.1
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.1
+      - name: Setup Java
+        uses: actions/setup-java@v4.0.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.0.0
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@v1.0.20
         with:
