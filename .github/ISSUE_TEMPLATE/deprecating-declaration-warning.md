@@ -1,6 +1,6 @@
 ---
 name: 🗑️ Declaration's deprecation with warning level
-about: Deprecating a declaration with a warning level.
+about: Deprecate a declaration with a warning level.
 title: 🗑️ Deprecation of $DECLARATION with warning level
 labels: feature
 ---

@@ -1,6 +1,6 @@
 ---
 name: 🗑️ Declaration's deprecation with hidden level
-about: Promoting the deprecation of a declaration to hidden level.
+about: Promote the deprecation of a declaration to hidden level.
 title: 🗑️ Deprecation promotion of $DECLARATION to hidden level
 labels: feature
 ---
