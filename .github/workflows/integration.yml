@@ -6,6 +6,7 @@ on:
       - '**gradle*'
       - '**.java'
       - '**.kt*'
+      - '!.github/workflows/gradle-wrapper-upgrade.yml'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - qodana.yaml
@@ -17,6 +18,7 @@ on:
       - '**gradle*'
       - '**.java'
       - '**.kt*'
+      - '!.github/workflows/gradle-wrapper-upgrade.yml'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - qodana.yaml
