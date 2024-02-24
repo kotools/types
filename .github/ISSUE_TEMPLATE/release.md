@@ -1,15 +1,15 @@
 ---
-name: Release
-about: Publishing a new version.
-title: Release version $VERSION
+name: 🔖 Release
+about: Publish a new version.
+title: 🔖 Release version $VERSION
 labels: release
 ---
 
-## Dependencies
+## 🔗 Dependencies
 
 Issues of the milestone corresponding to this version should be done before resolving this issue.
 
-## Checklist
+## ✅ Checklist
 
 - [ ] Set Gradle project's version, version of unreleased declarations and add this version in changelog.
 - [ ] Prepare release notes for this version.
