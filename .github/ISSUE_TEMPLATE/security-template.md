@@ -1,17 +1,19 @@
 ---
-name: Security vulnerability
-about: Report a security vulnerability
-title: Security vulnerability
+name: 🔒️ Security vulnerability
+about: Report a security vulnerability.
+title: 🔒️ Security vulnerability
 labels: security
 ---
 
-## Description
+## 📝 Description
 
 > Security vulnerability encountered in version `version`.
 
-[//]: # (Describe the bug right here.)
+<!-- Describe the vulnerability right here. -->
 
-## Checklist
+## ✅ Checklist
 
 - [ ] Fix the security vulnerability.
-- [ ] Update the `Unreleased` section in the changelog.
+- [ ] Add entry in the [unreleased changelog].
+
+[unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
