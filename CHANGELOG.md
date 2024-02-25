@@ -39,6 +39,9 @@ All notable changes to this project will be documented in this file.
     (issue [#350](https://github.com/kotools/types/issues/350))
   - `create(Number)` and `createOrNull(Number)` in `NonZeroInt.Companion`
     (issue [#351](https://github.com/kotools/types/issues/351))
+  - `create(Collection<E>)`, `createOrNull(Collection<E>)` and `of(E, vararg E)`
+    in `NotEmptyList.Companion` (issue
+    [#352](https://github.com/kotools/types/issues/352)).
 - Documentation of dependency compatibility (issue
   [#288](https://github.com/kotools/types/issues/288)).
 
