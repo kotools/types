@@ -87,9 +87,13 @@ public value class NotEmptySet<out E> private constructor(
 ) : NotEmptyCollection<E> {
     /** Contains static declarations for the [NotEmptySet] type. */
     public companion object {
+        @InternalKotoolsTypesApi
         @JvmSynthetic
-        internal fun <E> orThrow(elements: Set<E>): NotEmptySet<E> =
-            NotEmptySet(elements)
+        internal fun <E> orThrow(elements: Set<E>): NotEmptySet<E> {
+            val isValid: Boolean = elements.isNotEmpty()
+            require(isValid) { ErrorMessage.emptyCollection }
+            return NotEmptySet(elements)
+        }
     }
 
     override val head: E get() = elements.first()
@@ -98,11 +102,6 @@ public value class NotEmptySet<out E> private constructor(
         get() = elements.drop(1)
             .toNotEmptySet()
             .getOrNull()
-
-    init {
-        val isValid: Boolean = elements.isNotEmpty()
-        require(isValid) { ErrorMessage.emptyCollection }
-    }
 
     /**
      * Returns all elements of this set as a [Set] of type [E].
