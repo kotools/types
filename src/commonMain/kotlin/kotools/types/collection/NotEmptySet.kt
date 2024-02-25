@@ -85,6 +85,13 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
 public value class NotEmptySet<out E> private constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {
+    /** Contains static declarations for the [NotEmptySet] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun <E> orThrow(elements: Set<E>): NotEmptySet<E> =
+            NotEmptySet(elements)
+    }
+
     override val head: E get() = elements.first()
 
     override val tail: NotEmptySet<E>?
@@ -111,13 +118,6 @@ public value class NotEmptySet<out E> private constructor(
     public fun toSet(): Set<E> = elements
 
     override fun toString(): String = "$elements"
-
-    /** Contains static declarations for the [NotEmptySet] type. */
-    public companion object {
-        @JvmSynthetic
-        internal fun <E> orThrow(elements: Set<E>): NotEmptySet<E> =
-            NotEmptySet(elements)
-    }
 }
 
 @InternalKotoolsTypesApi
