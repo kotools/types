@@ -1,3 +1,5 @@
+import java.util.Locale
+
 plugins { `kotlin-dsl` }
 
 repositories.mavenCentral()
@@ -23,7 +25,8 @@ gradlePlugin {
 fun NamedDomainObjectContainer<PluginDeclaration>.registerKotoolsTypesPlugin(
     name: String
 ): Unit = register("KotoolsTypes${name}Plugin").configure {
-    val idSuffix: String = name.toLowerCase()
+    val locale: Locale = Locale.getDefault()
+    val idSuffix: String = name.lowercase(locale)
     kotoolsTypesId(idSuffix)
     kotoolsTypesImplementationClass("${name}Plugin")
 }
