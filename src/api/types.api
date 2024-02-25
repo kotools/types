@@ -98,6 +98,7 @@ public final class kotools/types/collection/NotEmptySet : kotools/types/collecti
 }
 
 public final class kotools/types/collection/NotEmptySet$Companion {
+	public final synthetic fun createOrNull-K89ylr4 (Ljava/util/Collection;)Ljava/util/Set;
 	public final fun serializer (Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
