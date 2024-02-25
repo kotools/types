@@ -180,6 +180,29 @@ public value class NotEmptyList<out E> private constructor(
             return NotEmptyList(elements)
         }
 
+        /**
+         * Creates a [NotEmptyList] starting with the [head] and containing all
+         * the elements of the optional [tail].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val integers: NotEmptyList<Int> = NotEmptyList.of(1, 2, 3)
+         * println(integers) // [1, 2, 3]
+         * ```
+         *
+         * The [NotEmptyList] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <E> of(head: E, vararg tail: E): NotEmptyList<E> {
+            val elements: List<E> = listOf(head) + tail
+            return create(elements)
+        }
+
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <E> orThrow(elements: List<E>): NotEmptyList<E> {
