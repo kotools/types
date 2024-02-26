@@ -6,7 +6,9 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
+import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.Since
@@ -91,6 +93,43 @@ public value class NotEmptyMap<K, out V> private constructor(
 ) {
     /** Contains static declarations for the [NotEmptyMap] type. */
     public companion object {
+        /**
+         * Creates a [NotEmptyMap] containing all the entries of the specified
+         * [map], or returns `null` if the [map] is [empty][Map.isEmpty].
+         *
+         * Here's an example for calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
+         * val result: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
+         * println(result) // Success({a=1, b=2})
+         * ```
+         *
+         * Please note that changes made to the original map will not be
+         * reflected on the resulting [NotEmptyMap].
+         *
+         * ```kotlin
+         * val original: MutableMap<Char, Int> =
+         *     mutableMapOf('a' to 1, 'b' to 2)
+         * val notEmptyMap: NotEmptyMap<Char, Int>? =
+         *     NotEmptyMap.createOrNull(original)
+         * println(original) // {a=1, b=2}
+         * println(notEmptyMap) // {a=1, b=2}
+         *
+         * original.clear()
+         * println(original) // {}
+         * println(notEmptyMap) // {a=1, b=2}
+         * ```
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? = map
+            .takeIf(Map<K, V>::isNotEmpty)
+            ?.entries
+            ?.associate(Map.Entry<K, V>::toPair)
+            ?.let(::NotEmptyMap)
+
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <K, V> orThrow(

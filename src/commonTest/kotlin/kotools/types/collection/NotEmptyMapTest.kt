@@ -10,8 +10,10 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
+import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
+import kotools.types.internal.simpleNameOf
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
@@ -21,8 +23,48 @@ import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
 import kotlin.random.Random
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+
+class NotEmptyMapCompanionTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_not_empty_Map() {
+        val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2, 'c' to 3)
+        val actual: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
+        val typeName: String = simpleNameOf<NotEmptyMap<Char, Int>>()
+        assertNotNull(actual, "$map to $typeName should pass")
+        val actualEntries: List<Map.Entry<Char, Int>> = actual.toMap()
+            .entries
+            .toList()
+        assertContentEquals(expected = map.entries, actualEntries)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_pass_with_a_not_empty_MutableMap() {
+        val map: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
+        val actual: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
+        val typeName: String = simpleNameOf<NotEmptyMap<Char, Int>>()
+        assertNotNull(actual, "$map to $typeName should pass")
+        assertEquals(expected = "$map", "$actual")
+        map.clear()
+        assertNotEquals(illegal = "$map", "$actual")
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun createOrNull_should_fail_with_an_empty_Map() {
+        val map: Map<Char, Int> = emptyMap()
+        val actual: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
+        val typeName: String = simpleNameOf<NotEmptyMap<Char, Int>>()
+        assertNull(actual, "$map to $typeName should fail")
+    }
+}
 
 class NotEmptyMapTest {
     @Test
