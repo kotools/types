@@ -91,6 +91,52 @@ public value class NotEmptySet<out E> private constructor(
     public companion object {
         /**
          * Creates a [NotEmptySet] containing all the elements of the specified
+         * [collection], or throws an [IllegalArgumentException] if the
+         * [collection] is [empty][Collection.isEmpty].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val collection: Collection<Int> = setOf(1, 2, 3)
+         * val elements: NotEmptySet<Int> = NotEmptySet.create(collection)
+         * println(elements) // [1, 2, 3]
+         * ```
+         *
+         * The [NotEmptySet] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         *
+         * Please note that changes made to the original collection will not be
+         * reflected on the resulting [NotEmptySet].
+         *
+         * ```kotlin
+         * val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
+         * val integers: NotEmptySet<Int> = NotEmptySet.create(original)
+         * println(original) // [1, 2, 3]
+         * println(integers) // [1, 2, 3]
+         *
+         * original.clear()
+         * println(original) // []
+         * println(integers) // [1, 2, 3]
+         * ```
+         *
+         * You can use the [NotEmptySet.Companion.createOrNull] function for
+         * returning `null` instead of throwing an exception in case of invalid
+         * [collection].
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <E> create(collection: Collection<E>): NotEmptySet<E> {
+            val result: NotEmptySet<E>? = createOrNull(collection)
+            return requireNotNull(
+                result,
+                ErrorMessage.Companion::emptyCollection
+            )
+        }
+
+        /**
+         * Creates a [NotEmptySet] containing all the elements of the specified
          * [collection], or returns `null` if the [collection] is
          * [empty][Collection.isEmpty].
          *

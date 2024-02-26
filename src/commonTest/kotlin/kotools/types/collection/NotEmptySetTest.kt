@@ -30,6 +30,39 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 class NotEmptySetCompanionTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_not_empty_Collection() {
+        val size = 5
+        val collection: Collection<Int> = List(size) { Random.nextInt() }
+            .toSet()
+        val integers: NotEmptySet<Int> = NotEmptySet.create(collection)
+        assertContentEquals(expected = collection, actual = integers.toSet())
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_not_empty_MutableCollection() {
+        val size = 5
+        val original: MutableCollection<Int> =
+            MutableList(size) { Random.nextInt() }
+        val actual: NotEmptySet<Int> = NotEmptySet.create(original)
+        assertContentEquals(expected = original, actual.toSet())
+        original.clear()
+        assertNotEquals(illegal = "$original", "$actual")
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_an_empty_Collection() {
+        val collection: Collection<Int> = emptySet()
+        val exception: IllegalArgumentException = assertFailsWith {
+            NotEmptySet.create(collection)
+        }
+        val actual = ErrorMessage(exception)
+        assertEquals(expected = ErrorMessage.emptyCollection, actual)
+    }
+
     @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun createOrNull_should_pass_with_a_not_empty_Collection() {
