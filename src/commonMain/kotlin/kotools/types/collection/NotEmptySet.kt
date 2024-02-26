@@ -182,6 +182,29 @@ public value class NotEmptySet<out E> private constructor(
             return NotEmptySet(elements)
         }
 
+        /**
+         * Creates a [NotEmptySet] starting with a [head] and containing all the
+         * elements of the optional [tail].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val integers: NotEmptySet<Int> = NotEmptySet.of(1, 2, 3, 1)
+         * println(integers) // [1, 2, 3]
+         * ```
+         *
+         * The [NotEmptySet] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <E> of(head: E, vararg tail: E): NotEmptySet<E> {
+            val elements: Set<E> = setOf(head) + tail
+            return NotEmptySet(elements)
+        }
+
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <E> orThrow(elements: Set<E>): NotEmptySet<E> {

@@ -14,6 +14,7 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
+import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
@@ -96,6 +97,32 @@ class NotEmptySetCompanionTest {
         val actual: NotEmptySet<Int>? = NotEmptySet.createOrNull(collection)
         val typeName: String = simpleNameOf<NotEmptySet<Int>>()
         assertNull(actual, "$collection to $typeName should fail")
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun of_should_pass_with_a_head() {
+        val head: Int = Random.nextInt()
+        val actual: NotEmptySet<Int> = NotEmptySet.of(head)
+        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.create(1)
+        assertEquals(expectedSize, actual.size)
+        assertEquals(expected = head, actual.head)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun of_should_pass_with_a_head_and_a_tail() {
+        val head: Int = Random.nextInt()
+        val tail: Array<Int> = Array(2) { Random.nextInt() }
+        val actual: NotEmptySet<Int> = NotEmptySet.of(head, *tail)
+        val expectedSize: StrictlyPositiveInt =
+            StrictlyPositiveInt.create(1 + tail.size)
+        assertEquals(expectedSize, actual.size)
+        assertEquals(expected = head, actual.head)
+        val actualTail: Array<Int> = assertNotNull(actual.tail)
+            .toSet()
+            .toTypedArray()
+        assertContentEquals(expected = tail, actualTail)
     }
 }
 
