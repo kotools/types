@@ -89,6 +89,20 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
 public value class NotEmptyMap<K, out V> private constructor(
     private val delegate: Map<K, V>
 ) {
+    /** Contains static declarations for the [NotEmptyMap] type. */
+    public companion object {
+        @InternalKotoolsTypesApi
+        @JvmSynthetic
+        internal fun <K, V> orThrow(
+            entries: Set<Map.Entry<K, V>>
+        ): NotEmptyMap<K, V> {
+            val map: Map<K, V> = entries.associate(Map.Entry<K, V>::toPair)
+            val isValid: Boolean = map.isNotEmpty()
+            require(isValid, ErrorMessage.Companion::emptyMap)
+            return NotEmptyMap(map)
+        }
+    }
+
     /**
      * The first entry of this map.
      *
@@ -120,8 +134,8 @@ public value class NotEmptyMap<K, out V> private constructor(
         get() {
             val tail: List<Map.Entry<K, V>> = delegate.entries.drop(1)
             if (tail.isEmpty()) return null
-            val map: Map<K, V> = tail.associate { it.toPair() }
-            return NotEmptyMap(map)
+            val entries: Set<Map.Entry<K, V>> = tail.toSet()
+            return orThrow(entries)
         }
 
     /**
@@ -184,11 +198,6 @@ public value class NotEmptyMap<K, out V> private constructor(
         get() = delegate.size.toStrictlyPositiveInt()
             .getOrThrow()
 
-    init {
-        val isValid: Boolean = delegate.isNotEmpty()
-        require(isValid) { ErrorMessage.emptyMap }
-    }
-
     /**
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
@@ -228,17 +237,6 @@ public value class NotEmptyMap<K, out V> private constructor(
      * ```
      */
     override fun toString(): String = "$delegate"
-
-    /** Contains static declarations for the [NotEmptyMap] type. */
-    public companion object {
-        @JvmSynthetic
-        internal fun <K, V> orThrow(
-            entries: Set<Map.Entry<K, V>>
-        ): NotEmptyMap<K, V> {
-            val map: Map<K, V> = entries.associate { it.toPair() }
-            return NotEmptyMap(map)
-        }
-    }
 }
 
 @InternalKotoolsTypesApi
