@@ -12,6 +12,8 @@ ij_visual_guides = 80, 90
 ij_wrap_on_typing = false
 
 [*.{kt,kts}]
+ij_kotlin_name_count_to_use_star_import = 999999
+ij_kotlin_name_count_to_use_star_import_for_members = 999999
 indent_size = 4
 indent_style = space
 tab_width = 4
