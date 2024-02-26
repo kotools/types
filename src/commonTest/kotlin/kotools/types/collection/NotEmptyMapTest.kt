@@ -31,6 +31,38 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 class NotEmptyMapCompanionTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_not_empty_Map() {
+        val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2, 'c' to 3)
+        val actual: NotEmptyMap<Char, Int> = NotEmptyMap.create(map)
+        val actualEntries: List<Map.Entry<Char, Int>> = actual.toMap()
+            .entries
+            .toList()
+        assertContentEquals(expected = map.entries, actualEntries)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun create_should_pass_with_a_not_empty_MutableMap() {
+        val map: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
+        val actual: NotEmptyMap<Char, Int> = NotEmptyMap.create(map)
+        assertEquals(expected = "$map", "$actual")
+        map.clear()
+        assertNotEquals(illegal = "$map", "$actual")
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun create_should_fail_with_a_not_empty_Map() {
+        val map: Map<Char, Int> = emptyMap()
+        val exception: IllegalArgumentException = assertFailsWith {
+            NotEmptyMap.create(map)
+        }
+        val actual = ErrorMessage(exception)
+        assertEquals(expected = ErrorMessage.emptyMap, actual)
+    }
+
     @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun createOrNull_should_pass_with_a_not_empty_Map() {
