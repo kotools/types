@@ -150,6 +150,10 @@ public value class NotEmptyMap<K, out V> private constructor(
          * println(result) // Success({a=1, b=2})
          * ```
          *
+         * The [NotEmptyMap] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         *
          * Please note that changes made to the original map will not be
          * reflected on the resulting [NotEmptyMap].
          *
