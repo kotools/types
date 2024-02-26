@@ -166,6 +166,10 @@ public value class NotEmptySet<out E> private constructor(
          * println(original) // []
          * println(integers) // [1, 2, 3]
          * ```
+         *
+         * You can use the [NotEmptySet.Companion.create] function for throwing
+         * an exception instead of returning `null` in case of invalid
+         * [collection].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
