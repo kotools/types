@@ -168,11 +168,12 @@ public value class NotEmptyMap<K, out V> private constructor(
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
-        public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? = map
-            .takeIf(Map<K, V>::isNotEmpty)
-            ?.entries
-            ?.associate(Map.Entry<K, V>::toPair)
-            ?.let(::NotEmptyMap)
+        public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? {
+            if (map.isEmpty()) return null
+            val copiedMap: Map<K, V> =
+                map.entries.associate(Map.Entry<K, V>::toPair)
+            return NotEmptyMap(copiedMap)
+        }
 
         @InternalKotoolsTypesApi
         @JvmSynthetic
