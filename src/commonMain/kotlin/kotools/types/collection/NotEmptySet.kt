@@ -171,7 +171,7 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
         SetSerializer(elementSerializer)
     }
 
-    override val descriptor: SerialDescriptor by lazy { delegate.descriptor }
+    override val descriptor: SerialDescriptor by lazy(delegate::descriptor)
 
     override fun serialize(encoder: Encoder, value: NotEmptySet<E>) {
         val elements: Set<E> = value.toSet()
@@ -181,6 +181,5 @@ internal class NotEmptySetSerializer<E>(elementSerializer: KSerializer<E>) :
     override fun deserialize(decoder: Decoder): NotEmptySet<E> = decoder
         .decodeSerializableValue(delegate)
         .toNotEmptySet()
-        .getOrNull()
-        ?: serializationError(ErrorMessage.emptyCollection)
+        .getOrElse { serializationError(ErrorMessage.emptyCollection) }
 }
