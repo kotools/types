@@ -181,7 +181,7 @@ public value class NotEmptyList<out E> private constructor(
         }
 
         /**
-         * Creates a [NotEmptyList] starting with the [head] and containing all
+         * Creates a [NotEmptyList] starting with a [head] and containing all
          * the elements of the optional [tail].
          *
          * Here's an example of calling this function from Kotlin code:
