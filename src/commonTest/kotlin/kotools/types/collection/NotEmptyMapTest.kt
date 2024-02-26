@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.collection
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -222,6 +220,7 @@ class NotEmptyMapSerializerTest {
         result.entries.toSet() shouldEqual expected.entries
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_fail_with_an_empty_Map() {
         val map: Map<Char, Int> = emptyMap()

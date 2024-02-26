@@ -248,7 +248,7 @@ internal class NotEmptyMapSerializer<K, V>(
         MapSerializer(keySerializer, valueSerializer)
     }
 
-    override val descriptor: SerialDescriptor by lazy { delegate.descriptor }
+    override val descriptor: SerialDescriptor by lazy(delegate::descriptor)
 
     override fun serialize(encoder: Encoder, value: NotEmptyMap<K, V>) {
         val map: Map<K, V> = value.toMap()
@@ -258,6 +258,5 @@ internal class NotEmptyMapSerializer<K, V>(
     override fun deserialize(decoder: Decoder): NotEmptyMap<K, V> = decoder
         .decodeSerializableValue(delegate)
         .toNotEmptyMap()
-        .getOrNull()
-        ?: serializationError(ErrorMessage.emptyMap)
+        .getOrElse { serializationError(ErrorMessage.emptyMap) }
 }
