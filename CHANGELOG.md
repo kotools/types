@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
     `PositiveInt.Companion` (issue
     [#349](https://github.com/kotools/types/issues/349)), in
     `NegativeInt.Companion` (issue
-    [#350](https://github.com/kotools/types/issues/350)), in
+    [#350](https://github.com/kotools/types/issues/350)), and in
     `NonZeroInt.Companion` (issue
     [#351](https://github.com/kotools/types/issues/351))
   - `create(Collection<E>)`, `createOrNull(Collection<E>)` and `of(E, vararg E)`
