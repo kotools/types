@@ -43,7 +43,10 @@ All notable changes to this project will be documented in this file.
     in `NotEmptyList.Companion` (issue
     [#352](https://github.com/kotools/types/issues/352)) and in
     `NotEmptySet.Companion` (issue
-    [#353](https://github.com/kotools/types/issues/353)).
+    [#353](https://github.com/kotools/types/issues/353))
+  - `create(Map<K, V>)`, `createOrNull(Map<K, V>)` and
+    `of(Pair<K, V>, vararg Pair<K, V>)` in `NotEmptyMap.Companion` (issue
+    [#354](https://github.com/kotools/types/issues/354)).
 - Documentation of dependency compatibility (issue
   [#288](https://github.com/kotools/types/issues/288)).
 
