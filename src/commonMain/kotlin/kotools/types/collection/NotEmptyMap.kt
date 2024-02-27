@@ -183,6 +183,32 @@ public value class NotEmptyMap<K, out V> private constructor(
             return NotEmptyMap(copiedMap)
         }
 
+        /**
+         * Creates a [NotEmptyMap] starting with the [head] and containing all
+         * the entries of the optional [tail].
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * ```kotlin
+         * val map: NotEmptyMap<Char, Int> = NotEmptyMap.of('a' to 1, 'b' to 2)
+         * println(map) // {a=1, b=2}
+         * ```
+         *
+         * The [NotEmptyMap] type being an
+         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+         * this function is not available yet for Java users.
+         */
+        @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun <K, V> of(
+            head: Pair<K, V>,
+            vararg tail: Pair<K, V>
+        ): NotEmptyMap<K, V> = listOf(head)
+            .plus(tail)
+            .toMap()
+            .let(::NotEmptyMap)
+
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <K, V> orThrow(
