@@ -29,16 +29,15 @@ All notable changes to this project will be documented in this file.
     [#341](https://github.com/kotools/types/issues/341))
   - `create(Number)` and `createOrNull(Number)` in
     `StrictlyPositiveInt.Companion` (issue
-    [#342](https://github.com/kotools/types/issues/342))
-  - `create(Number)` and `createOrNull(Number)` in
+    [#342](https://github.com/kotools/types/issues/342)), in
     `StrictlyNegativeInt.Companion` (issue
-    [#347](https://github.com/kotools/types/issues/347))
-  - `create(Number)` and `createOrNull(Number)` in `PositiveInt.Companion`
-    (issue [#349](https://github.com/kotools/types/issues/349))
-  - `create(Number)` and `createOrNull(Number)` in `NegativeInt.Companion`
-    (issue [#350](https://github.com/kotools/types/issues/350))
-  - `create(Number)` and `createOrNull(Number)` in `NonZeroInt.Companion`
-    (issue [#351](https://github.com/kotools/types/issues/351))
+    [#347](https://github.com/kotools/types/issues/347)), in
+    `PositiveInt.Companion` (issue
+    [#349](https://github.com/kotools/types/issues/349)), in
+    `NegativeInt.Companion` (issue
+    [#350](https://github.com/kotools/types/issues/350)), in
+    `NonZeroInt.Companion` (issue
+    [#351](https://github.com/kotools/types/issues/351))
   - `create(Collection<E>)`, `createOrNull(Collection<E>)` and `of(E, vararg E)`
     in `NotEmptyList.Companion` (issue
     [#352](https://github.com/kotools/types/issues/352)) and in
