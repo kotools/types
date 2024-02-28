@@ -24,7 +24,7 @@ serializing or deserializing the provided types:
 
 | Kotools Types version | kotlinx.serialization version |
 |-----------------------|-------------------------------|
-| 4.5                   | 1.5.0                         |
+| 4.5                   | 1.5.1                         |
 | <= 4.4                | 1.4.1                         |
 | 4.2                   | 1.3.3                         |
 | <= 4.1                | 1.3.1                         |

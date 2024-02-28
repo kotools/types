@@ -54,8 +54,9 @@ All notable changes to this project will be documented in this file.
 - Bump embedded Kotlin from 1.7.21 to 1.8.22 (issues
   [#172](https://github.com/kotools/types/issues/172) and
   [#196](https://github.com/kotools/types/issues/196)).
-- Bump kotlinx.serialization from 1.4.0 to 1.5.0 (issue
-  [#378](https://github.com/kotools/types/issues/378)).
+- Bump kotlinx.serialization from 1.4.0 to 1.5.1 (issues
+  [#378](https://github.com/kotools/types/issues/378) and
+  [#381](https://github.com/kotools/types/issues/381)).
 - Move the `EmailAddress` **experimental** type from the
   `kotools.types.experimental` package to the new `kotools.types.web` one (issue
   [#377](https://github.com/kotools/types/issues/377)).

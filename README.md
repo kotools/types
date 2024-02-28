@@ -66,7 +66,7 @@ See the [API reference][api-reference] for more types!
 [kotlin.ArithmeticException]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-arithmetic-exception
 [kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.5.0-blue
+[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.5.1-blue
 [kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
 [kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
 [kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
