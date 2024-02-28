@@ -602,7 +602,7 @@ Fix versioning annotation of declarations in the `kotools.types.number` package
 
 [#23]: https://github.com/kotools/types/issues/23
 
-## 🔥 4.0.0 <a id="4.0.0"></a>
+## 💥 4.0.0 <a id="4.0.0"></a>
 
 _Release date: 2023-01-03._
 
