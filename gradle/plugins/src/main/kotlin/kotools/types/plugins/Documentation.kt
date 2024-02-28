@@ -5,7 +5,7 @@ import kotools.types.tasks.description
 import kotools.types.tasks.group
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.provider.Property
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.Copy
@@ -38,7 +38,6 @@ public class DocumentationPlugin : Plugin<Project> {
 private fun TaskContainer.dokkaTasks(project: Project): Unit =
     this.withType<DokkaTask>().configureEach {
         project.layout.buildDirectory.dir("dokka")
-            .map { it.asFile }
             .let { this.outputDirectory.set(it) }
         this.dokkaSourceSets.configureEach {
             this.skipEmptyPackages.set(true)
@@ -112,7 +111,7 @@ private fun TaskContainer.cleanDokkaHtml() {
             this.description(
                 "Deletes the output directory of the '${dokkaHtml.name}' task."
             )
-            val target: Property<File> = dokkaHtml.get().outputDirectory
+            val target: DirectoryProperty = dokkaHtml.get().outputDirectory
             this.setDelete(target)
         }
     this.named<Delete>("clean").configure { this.dependsOn += cleanDokkaHtml }
