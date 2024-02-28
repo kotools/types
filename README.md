@@ -58,7 +58,7 @@ See the [API reference][api-reference] for more types!
 [kotools-types-badge]: https://img.shields.io/maven-central/v/org.kotools/types?label=Latest
 [kotools-types-project]: https://github.com/kotools/types
 [kotlin]: https://kotlinlang.org
-[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.8.10-blue?logo=kotlin
+[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.8.22-blue?logo=kotlin
 [kotlin-language-badge]: https://img.shields.io/badge/Kotlin_language-1.5-blue?logo=kotlin
 [kotlin-native]: https://kotlinlang.org/docs/native-overview.html
 [kotlin/js]: https://kotlinlang.org/docs/js-overview.html
