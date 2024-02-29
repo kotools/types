@@ -79,15 +79,16 @@ Now that you have opened your fork in [IntelliJ IDEA], you can run the
 
 Here's the list of available configurations for running tests:
 
-- `All tests` for running them on all platforms.
-- `JS tests` for running them on the JS platform.
-- `JVM tests` for running them on the JVM platform.
-- `Linux tests` for running them on the Native platform for Linux.
-- `macOS tests` for running them on the Native platform for macOS.
-- `Windows tests` for running them on the Native platform for Windows.
+- `All tests` for testing the API on all platforms.
+- `JS tests` for testing the API on Kotlin/JS.
+- `JVM tests` for testing the API on Kotlin/JVM.
+- `Java compatibility tests` for testing the compatibility of the API with Java.
+- `Linux tests` for testing the API on Linux using Kotlin Native.
+- `macOS tests` for testing the API on macOS using Kotlin Native.
+- `Windows tests` for testing the API on Windows using Kotlin Native.
 
 > You can run the `JVM checks` for executing the different checks on the JVM,
-> including JVM tests, Java compatibility tests and API binary check.
+> including JVM tests, Java compatibility tests and API binary checks.
 
 ### Serving the documentation
 
