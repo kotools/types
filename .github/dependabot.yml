@@ -4,7 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    labels: [ "dependencies", "github-actions" ]
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "monthly"
+    labels: [ "dependencies", "gradle" ]
