@@ -3,12 +3,12 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     labels: [ "dependencies", "github-actions" ]
-    reviewers: [ "LVMVRQUXL" ]
+    assignees: [ "LVMVRQUXL" ]
     schedule:
       interval: "monthly"
   - package-ecosystem: "gradle"
     directory: "/"
     labels: [ "dependencies", "gradle" ]
-    reviewers: [ "LVMVRQUXL" ]
+    assignees: [ "LVMVRQUXL" ]
     schedule:
       interval: "monthly"
