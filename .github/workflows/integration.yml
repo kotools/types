@@ -63,7 +63,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.0.0
+        uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:jsTest
       - name: Test root project
@@ -81,7 +81,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.0.0
+        uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:jvmTest
       - name: Test 'java-compatibility' subproject
@@ -101,7 +101,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.0.0
+        uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:linuxTest
       - name: Test root project
@@ -119,7 +119,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.0.0
+        uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject on macOS x64
         run: ./gradlew :types-internal:macosTest
       - name: Test 'internal' subproject on macOS arm64
@@ -141,7 +141,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.0.0
+        uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:windowsTest
       - name: Test root project
@@ -164,4 +164,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v3.0.0
+        uses: gradle/actions/dependency-submission@v3.1.0
