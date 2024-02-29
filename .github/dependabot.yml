@@ -2,13 +2,13 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    labels: [ "dependencies", "github-actions" ]
-    assignees: [ "LVMVRQUXL" ]
     schedule:
       interval: "monthly"
+    assignees: [ "LVMVRQUXL" ]
+    labels: [ "dependencies", "github-actions" ]
   - package-ecosystem: "gradle"
     directory: "/"
-    labels: [ "dependencies", "gradle" ]
-    assignees: [ "LVMVRQUXL" ]
     schedule:
       interval: "monthly"
+    assignees: [ "LVMVRQUXL" ]
+    labels: [ "dependencies", "gradle" ]
