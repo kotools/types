@@ -117,8 +117,6 @@ So it is recommended to bypass version 4.4.0 and directly upgrade to 4.4.1.
 
 Thanks to [@robertfmurdock] for reporting this error (issue [#406]).
 
-[#406]: https://github.com/kotools/types/issues/406
-
 ## ✨ 4.4.0 <a id="4.4.0"></a>
 
 _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
@@ -696,6 +694,7 @@ entries.toMap() // after
 [#327]: https://github.com/kotools/types/issues/327
 [#328]: https://github.com/kotools/types/pull/328
 [#339]: https://github.com/kotools/types/issues/339
+[#406]: https://github.com/kotools/types/issues/406
 [#431]: https://github.com/kotools/types/issues/431
 [commit-a4399cce]: https://github.com/kotools/types/commit/a4399cce
 [commit-a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
