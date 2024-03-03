@@ -4,4 +4,5 @@ profile:
 linter: jetbrains/qodana-jvm-community:latest
 include:
   - name: ConstPropertyName
+  - name: KotlinUnusedImport
   - name: UnusedSymbol
