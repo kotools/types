@@ -91,14 +91,13 @@ by the `url.parse()` function (issue
 See the [security report](https://github.com/advisories/GHSA-jchw-25xp-jwwc) for
 more details on this vulnerability.
 
-## 🚑️ 4.4.2 <a id="4.4.2"></a>
+## 🔖 Releases
 
-_Release date: 2024-02-07._
+- [4.4.2] - 2024-02-07
 
-### Fixed
+[4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 
-Serialization problems using the Kotlin/JS IR compiler for all serializable
-types (bug [#431] reported by [@robertfmurdock]).
+---
 
 ## 🚑️ 4.4.1 <a id="4.4.1"></a>
 
