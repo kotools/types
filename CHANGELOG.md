@@ -103,6 +103,7 @@ more details on this vulnerability.
 - [4.0.1] - 2023-02-06
 - [4.0.0] - 2023-01-03
 - [3.2.0] - 2022-12-13
+- [3.1.1] - 2022-11-18
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
@@ -114,3 +115,4 @@ more details on this vulnerability.
 [4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
 [4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
 [3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
+[3.1.1]: https://github.com/kotools/libraries/releases/tag/types-v3.1.1
