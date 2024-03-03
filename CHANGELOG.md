@@ -115,6 +115,7 @@ more details on this vulnerability.
 - [1.1.1] - 2022-08-01
 - [1.1.0] - 2022-07-09
 - [1.0.1] - 2022-03-21
+- [1.0.0] - 2022-02-28
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
@@ -138,3 +139,4 @@ more details on this vulnerability.
 [1.1.1]: https://github.com/kotools/types-legacy/releases/tag/v1.1.1
 [1.1.0]: https://github.com/kotools/types-legacy/releases/tag/v1.1.0
 [1.0.1]: https://github.com/kotools/types-legacy/releases/tag/v1.0.1
+[1.0.0]: https://github.com/kotools/types-legacy/releases/tag/v1.0.0
