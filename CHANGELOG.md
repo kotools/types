@@ -223,21 +223,6 @@ _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
     - `NotEmptySet` (issue [#178])
     - `NotEmptyMap` (issue [#179]).
 
-[@o-korpi]: https://github.com/o-korpi
-[#104]: https://github.com/kotools/types/discussions/104
-[#132]: https://github.com/kotools/types/issues/132
-[#141]: https://github.com/kotools/types/issues/141
-[#149]: https://github.com/kotools/types/issues/149
-[#155]: https://github.com/kotools/types/issues/155
-[#167]: https://github.com/kotools/types/pull/167
-[#171]: https://github.com/kotools/types/issues/171
-[#173]: https://github.com/kotools/types/issues/173
-[#174]: https://github.com/kotools/types/issues/174
-[#176]: https://github.com/kotools/types/issues/176
-[#177]: https://github.com/kotools/types/issues/177
-[#178]: https://github.com/kotools/types/issues/178
-[#179]: https://github.com/kotools/types/issues/179
-
 ### Changed
 
 - Source compatibility with Kotlin improved by supporting its versions 1.5
@@ -245,22 +230,13 @@ _Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
 - Support multiple versions in the [API reference][api-reference] starting from
   version 4.2.0 (PR [#198] and issue [#205]).
 - Secure deployments of the [API reference][api-reference] by using an
-  [SSH deploy key] (issue [#207]).
+  [SSH deploy key][ssh-deploy-key] (issue [#207]).
 - Centralize Gradle plugins and dependencies declarations in a version catalog
   for reducing the overall complexity of the build script (PR [#199]).
 
-[#198]: https://github.com/kotools/types/pull/198
-[#199]: https://github.com/kotools/types/pull/199
-[#205]: https://github.com/kotools/types/issues/205
-[#207]: https://github.com/kotools/types/issues/207
-[#213]: https://github.com/kotools/types/pull/213
-[SSH deploy key]: https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
-
 ### Fixed
 
-- Typo in the documentation of the `notEmptyRangeOf` function (PR [#222]).
-
-[#222]: https://github.com/kotools/types/pull/222
+Typo in the documentation of the `notEmptyRangeOf` function (PR [#222]).
 
 ## ✨ 4.3.0 <a id="4.3.0"></a>
 
@@ -677,12 +653,33 @@ entries.toMap() // after
 <!------------------------------- Shared links -------------------------------->
 
 [@MichaelStH]: https://github.com/MichaelStH
+[@o-korpi]: https://github.com/o-korpi
 [@robertfmurdock]: https://github.com/robertfmurdock
 [api-reference]: https://types.kotools.org
+[ssh-deploy-key]: https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
 [#55]: https://github.com/kotools/types/discussions/55
+[#104]: https://github.com/kotools/types/discussions/104
 [#125]: https://github.com/kotools/types/issues/125
+[#132]: https://github.com/kotools/types/issues/132
+[#141]: https://github.com/kotools/types/issues/141
+[#149]: https://github.com/kotools/types/issues/149
+[#155]: https://github.com/kotools/types/issues/155
+[#167]: https://github.com/kotools/types/pull/167
+[#171]: https://github.com/kotools/types/issues/171
+[#173]: https://github.com/kotools/types/issues/173
+[#174]: https://github.com/kotools/types/issues/174
+[#176]: https://github.com/kotools/types/issues/176
+[#177]: https://github.com/kotools/types/issues/177
+[#178]: https://github.com/kotools/types/issues/178
+[#179]: https://github.com/kotools/types/issues/179
 [#191]: https://github.com/kotools/types/issues/191
+[#198]: https://github.com/kotools/types/pull/198
+[#199]: https://github.com/kotools/types/pull/199
+[#205]: https://github.com/kotools/types/issues/205
+[#207]: https://github.com/kotools/types/issues/207
+[#213]: https://github.com/kotools/types/pull/213
 [#215]: https://github.com/kotools/types/issues/215
+[#222]: https://github.com/kotools/types/pull/222
 [#250]: https://github.com/kotools/types/issues/250
 [#257]: https://github.com/kotools/types/issues/257
 [#258]: https://github.com/kotools/types/issues/258
