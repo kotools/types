@@ -129,38 +129,29 @@ _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
 
 ### Added
 
-- `EmailAddress` **experimental** type, suggested by
-  [@MichaelStH][github-MichaelStH] in
-  [#55](https://github.com/kotools/types/discussions/55), for representing an
-  email address (issue [#339](https://github.com/kotools/types/issues/339)).
+- `EmailAddress` **experimental** type, suggested by [@MichaelStH] in [#55], for
+  representing an email address (issue [#339]).
 - `AnyInt(Int)` **experimental** factory function (commit
-  [571428bc](https://github.com/kotools/types/commit/571428bc)).
-- `Companion` object for the following **experimental** types: `InclusiveBound`
-  (commit [a8aedb49](https://github.com/kotools/types/commit/a8aedb49)),
-  `ExclusiveBound` (commit
-  [76ba0637](https://github.com/kotools/types/commit/76ba0637)), `NotEmptyRange`
-  (commit [a4399cce](https://github.com/kotools/types/commit/a4399cce)) and
-  `NotEmptyRange.BuilderScope` (commit
-  [79e093ce](https://github.com/kotools/types/commit/79e093ce)).
-- `ExperimentalKotoolsTypesApi` annotation for marking experimental
-  declarations (issue [#191](https://github.com/kotools/types/issues/191)).
+  [571428bc][commit-571428bc]).
+- `Companion` object for the following **experimental** types:
+  - `InclusiveBound` (commit [a8aedb49][commit-a8aedb49])
+  - `ExclusiveBound` (commit [76ba0637][commit-76ba0637])
+  - `NotEmptyRange` (commit [a4399cce][commit-a4399cce])
+  - `NotEmptyRange.BuilderScope` (commit [79e093ce][commit-79e093ce]).
+- `ExperimentalKotoolsTypesApi` annotation for marking experimental declarations
+  (issue [#191]).
 - [Security policy](SECURITY.md) indicating which versions are supported with
-  security updates and how to report a security vulnerability (issue
-  [#250](https://github.com/kotools/types/issues/250)).
-- Documentation of versioning strategy (issue
-  [#215](https://github.com/kotools/types/issues/215)) and declarations
-  lifecycle (issue [#307](https://github.com/kotools/types/issues/307)).
+  security updates and how to report a security vulnerability (issue [#250]).
+- Documentation of versioning strategy (issue [#215]) and declarations lifecycle
+  (issue [#307]).
 - Versions [4.1.0][tag-4.1.0], [4.0.1][tag-4.0.1], [4.0.0][tag-4.0.0],
-  [3.2.0](https://github.com/kotools/libraries/releases/tag/types-v3.2.0),
-  [2.0.0](https://github.com/kotools/types-legacy/releases/tag/v2.0.0) and
-  [1.3.1](https://github.com/kotools/types-legacy/releases/tag/v1.3.1) in
-  [API reference][api-reference] (issue [#261][issue-261]).
+  [3.2.0][tag-3.2.0], [2.0.0][tag-2.0.0] and [1.3.1][tag-1.3.1] in
+  [API reference][api-reference] (issue [#261]).
 
 ### Changed
 
 - Move the following **experimental** declarations to the
-  `kotools.types.experimental` package with a new signature (issue
-  [#319](https://github.com/kotools/types/issues/319)):
+  `kotools.types.experimental` package with a new signature (issue [#319]):
   - `StrictlyPositiveDouble` type
   - `unaryMinus` operation on `AnyInt`, `NonZeroInt`, `PositiveInt`,
   `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
@@ -172,23 +163,20 @@ _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
   - `range` property for companion object of `PositiveInt`, `NegativeInt`,
     `StrictlyPositiveInt` and `StrictlyNegativeInt`
   - `positiveRange` and `negativeRange` properties on `NonZeroInt.Companion`.
-- Opt-in message of experimental annotations (pull request
-  [#328](https://github.com/kotools/types/pull/328)).
+- Opt-in message of experimental annotations (pull request [#328]).
 - Documentation of types in API reference and in README (commit
-  [ed9322d1](https://github.com/kotools/types/commit/ed9322d1)).
+  [ed9322d1][commit-ed9322d1]).
 - Align styles of version [4.2.0][tag-4.2.0] with the latest ones in
-  [API reference][api-reference] (issue [#261][issue-261]).
+  [API reference][api-reference] (issue [#261]).
 
 ### Deprecated
 
 `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
-`ExperimentalResultApi` and `ExperimentalTextApi` annotations (issue
-[#327](https://github.com/kotools/types/issues/327)).
+`ExperimentalResultApi` and `ExperimentalTextApi` annotations (issue [#327]).
 
 ### Removed
 
-- The following **experimental** factory functions (issue
-  [#258](https://github.com/kotools/types/issues/258)):
+- The following **experimental** factory functions (issue [#258]):
   - `toNonZeroIntOrNull` and `toNonZeroIntOrThrow`
   - `toPositiveIntOrNull` and `toPositiveIntOrThrow`
   - `toNegativeIntOrNull` and `toNegativeIntOrThrow`
@@ -199,29 +187,22 @@ _Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
   - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
   - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
   - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
-- The `Result.flatMap` **experimental** function (issue
-  [#125](https://github.com/kotools/types/issues/125)).
+- The `Result.flatMap` **experimental** function (issue [#125]).
 - The `Number.toStrictlyPositiveDouble` **experimental** function in
-  `ResultContext` (commit
-  [5ef8aa05](https://github.com/kotools/types/commit/5ef8aa05)).
-- The following **internal** annotations: `ExperimentalSinceKotoolsTypes`
-  (commit [9052e77d](https://github.com/kotools/types/commit/9052e77d)) and
-  `SinceKotoolsTypes` (commit
-  [557350b5](https://github.com/kotools/types/commit/557350b5)).
+  `ResultContext` (commit [5ef8aa05][commit-5ef8aa05]).
+- The `ExperimentalSinceKotoolsTypes` (commit [9052e77d][commit-9052e77d]) and
+  the `SinceKotoolsTypes` (commit [557350b5][commit-557350b5]) **internal**
+  annotations.
 
 ### Fixed
 
-The copyright notice in the license (issue
-[#257](https://github.com/kotools/types/issues/257)).
+The copyright notice in the license (issue [#257]).
 
 ### Security
 
-- Hide all internals from Java users (issue
-  [#303](https://github.com/kotools/types/issues/303)).
-- Upgrade to
-  [Webpack 5.76.3](https://github.com/webpack/webpack/releases/tag/v5.76.3) for
-  avoiding cross-realm object access (issue
-  [#313](https://github.com/kotools/types/issues/313)).
+- Hide all internals from Java users (issue [#303]).
+- Upgrade to [Webpack 5.76.3][webpack@v5.76.3] for avoiding cross-realm object
+  access (issue [#313]).
 
 ## 🚑️ 4.3.1 <a id="4.3.1"></a>
 
@@ -377,7 +358,7 @@ result = 3.toNonZeroInt()
 [#47]: https://github.com/kotools/types/issues/47
 
 - The `unaryMinus` **experimental** operations for returning the negative of an
-  `AnyInt` (issue [#54] implemented by [@MichaelStH][github-MichaelStH]).
+  `AnyInt` (issue [#54] implemented by [@MichaelStH]).
 
 ```kotlin
 val x: NonZeroInt = 1.toNonZeroInt().getOrThrow()
@@ -699,11 +680,38 @@ entries.toMap() // after
 
 <!------------------------------- Shared links -------------------------------->
 
+[@MichaelStH]: https://github.com/MichaelStH
 [@robertfmurdock]: https://github.com/robertfmurdock
 [api-reference]: https://types.kotools.org
-[github-MichaelStH]: https://github.com/MichaelStH
-[issue-261]: https://github.com/kotools/types/issues/261
+[#55]: https://github.com/kotools/types/discussions/55
+[#125]: https://github.com/kotools/types/issues/125
+[#191]: https://github.com/kotools/types/issues/191
+[#215]: https://github.com/kotools/types/issues/215
+[#250]: https://github.com/kotools/types/issues/250
+[#257]: https://github.com/kotools/types/issues/257
+[#258]: https://github.com/kotools/types/issues/258
+[#261]: https://github.com/kotools/types/issues/261
+[#303]: https://github.com/kotools/types/issues/303
+[#307]: https://github.com/kotools/types/issues/307
+[#313]: https://github.com/kotools/types/issues/313
+[#319]: https://github.com/kotools/types/issues/319
+[#327]: https://github.com/kotools/types/issues/327
+[#328]: https://github.com/kotools/types/pull/328
+[#339]: https://github.com/kotools/types/issues/339
+[commit-a4399cce]: https://github.com/kotools/types/commit/a4399cce
+[commit-a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
+[commit-ed9322d1]: https://github.com/kotools/types/commit/ed9322d1
+[commit-557350b5]: https://github.com/kotools/types/commit/557350b5
+[commit-571428bc]: https://github.com/kotools/types/commit/571428bc
+[commit-5ef8aa05]: https://github.com/kotools/types/commit/5ef8aa05
+[commit-76ba0637]: https://github.com/kotools/types/commit/76ba0637
+[commit-79e093ce]: https://github.com/kotools/types/commit/79e093ce
+[commit-9052e77d]: https://github.com/kotools/types/commit/9052e77d
+[tag-1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
+[tag-2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
+[tag-3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
 [tag-4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
 [tag-4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
 [tag-4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 [tag-4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
+[webpack@v5.76.3]: https://github.com/webpack/webpack/releases/tag/v5.76.3
