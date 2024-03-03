@@ -94,23 +94,12 @@ more details on this vulnerability.
 ## 🔖 Releases
 
 - [4.4.2] - 2024-02-07
+- [4.4.1] - 2024-02-02
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
+[4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
 
 ---
-
-## 🚑️ 4.4.1 <a id="4.4.1"></a>
-
-_Release date: 2024-02-02._
-
-### Fixed
-
-This release fixes the publication of the previous one, in which the
-`types-internal` project was missing in the Gradle dependency tree.
-
-So it is recommended to bypass version 4.4.0 and directly upgrade to 4.4.1.
-
-Thanks to [@robertfmurdock] for reporting this error (issue [#406]).
 
 ## ✨ 4.4.0 <a id="4.4.0"></a>
 
