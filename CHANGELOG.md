@@ -99,6 +99,7 @@ more details on this vulnerability.
 - [4.3.1] - 2023-09-25
 - [4.3.0] - 2023-08-14
 - [4.2.0] - 2023-06-24
+- [4.1.0] - 2023-04-03
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
@@ -106,113 +107,9 @@ more details on this vulnerability.
 [4.3.1]: https://github.com/kotools/types/releases/tag/4.3.1
 [4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
+[4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
 
 ---
-
-## ✨ 4.1.0 <a id="4.1.0"></a>
-
-_Release date: 2023-04-03._
-
-### Added
-
-- `NotEmptyCollection` hierarchy representing collections that contain at least
-  one element (issue [#14]).
-
-```kotlin
-interface NotEmptyCollection<out E>
-class NotEmptyList<out E> : NotEmptyCollection<E>
-class NotEmptySet<out E> : NotEmptyCollection<E>
-```
-
-[#14]: https://github.com/kotools/types/issues/14
-
-- Binary operations (`plus`, `minus`, `times`, `div` and `rem`) for the `AnyInt`
-  hierarchy (issue [#31]).
-
-```kotlin
-val x: AnyInt = NonZeroInt.random()
-val y: AnyInt = PositiveInt.random()
-var result: Int
-// before
-result = 1 + x.toInt()
-result = x.toInt() + 1
-result = x.toInt() + y.toInt()
-// after
-result = 1 + x
-result = x + 1
-result = x + y
-```
-
-[#31]: https://github.com/kotools/types/issues/31
-
-- `resultOf` function for encapsulating computations of functions returning the
-  [`Result`][kotlin.Result] type (issue [#37]).
-
-```kotlin
-data class Person(val name: NotBlankString, val age: StrictlyPositiveInt)
-
-var somebody: Person
-// before
-somebody = Person(
-    name = "John Doe".toNotBlankString().getOrThrow(),
-    age = 42.toStrictlyPositiveInt().getOrThrow()
-)
-// after
-somebody = resultOf {
-    Person(
-        name = "John Doe".toNotBlankString(),
-        age = 42.toStrictlyPositiveInt()
-    )
-}
-```
-
-[#37]: https://github.com/kotools/types/issues/37
-
-### Changed
-
-- Support for [Kotlin 1.5.32][kotlin-1.5.32] (issue [#6]).
-
-[#6]: https://github.com/kotools/types/issues/6
-[kotlin-1.5.32]: https://github.com/JetBrains/kotlin/releases/tag/v1.5.32
-
-- The following builders now works on the [`Number`][kotlin.Number] type instead
-  of the [`Int`][kotlin.Int] type only: `toNonZeroInt`, `toPositiveInt`,
-  `toNegativeInt`, `toStrictlyPositiveInt` and `toStrictlyNegativeInt` (issue
-  [#43]).
-
-```kotlin
-val x: Double = 0.1
-var result: Result<StrictlyPositiveInt>
-// before
-result = x.toInt().toStrictlyPositiveInt()
-// after
-result = x.toStrictlyPositiveInt()
-```
-
-[#43]: https://github.com/kotools/types/issues/43
-[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html
-[kotlin.Number]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html
-
-- The `AnyInt` and the `NotBlankString` types are now inheriting from
-  [`Comparable`][kotlin.Comparable] (issue [#45]).
-
-```kotlin
-val firstInt: AnyInt = StrictlyPositiveInt.random()
-val secondInt: AnyInt = StrictlyNegativeInt.random()
-val firstString: NotBlankString = "hello".toNotBlankString()
-    .getOrThrow()
-val secondString: NotBlankString = "world".toNotBlankString()
-    .getOrThrow()
-var result: Boolean
-// before
-result = firstInt.toInt() > secondInt.toInt()
-result = "$firstString" < "$secondString"
-// after
-result = firstInt > secondInt
-result = firstString < secondString
-```
-
-[#45]: https://github.com/kotools/types/issues/45
 
 ## 🚑️ 4.0.1 <a id="4.0.1"></a>
 
