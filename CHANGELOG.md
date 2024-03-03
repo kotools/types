@@ -96,48 +96,14 @@ more details on this vulnerability.
 - [4.4.2] - 2024-02-07
 - [4.4.1] - 2024-02-02
 - [4.4.0] - 2024-01-29
+- [4.3.1] - 2023-09-25
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
 [4.4.0]: https://github.com/kotools/types/releases/tag/4.4.0
+[4.3.1]: https://github.com/kotools/types/releases/tag/4.3.1
 
 ---
-
-## 🚑️ 4.3.1 <a id="4.3.1"></a>
-
-_Release date: 2023-09-25._
-
-### Added
-
-- `ExperimentalCollectionApi` annotation for marking experimental declarations
-  of the `kotools.types.collection` package (issue [#177]).
-- Experimental type converters suffixed by `OrNull` and `OrThrow` for the
-  following types:
-    - `NonZeroInt` (issue [#173])
-    - `PositiveInt` (issue [#155])
-    - `NegativeInt` (issue [#171])
-    - `StrictlyPositiveInt` (issue [#141])
-    - `StrictlyNegativeInt` (issue [#149], [@o-korpi] contributed in PR [#167])
-    - `StrictlyPositiveDouble` (issue [#132])
-    - `NotBlankString` (issue [#174])
-    - `NotEmptyList` (issue [#176])
-    - `NotEmptySet` (issue [#178])
-    - `NotEmptyMap` (issue [#179]).
-
-### Changed
-
-- Source compatibility with Kotlin improved by supporting its versions 1.5
-  through 1.7 (PR [#213]).
-- Support multiple versions in the [API reference][api-reference] starting from
-  version 4.2.0 (PR [#198] and issue [#205]).
-- Secure deployments of the [API reference][api-reference] by using an
-  [SSH deploy key][ssh-deploy-key] (issue [#207]).
-- Centralize Gradle plugins and dependencies declarations in a version catalog
-  for reducing the overall complexity of the build script (PR [#199]).
-
-### Fixed
-
-Typo in the documentation of the `notEmptyRangeOf` function (PR [#222]).
 
 ## ✨ 4.3.0 <a id="4.3.0"></a>
 
