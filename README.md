@@ -121,6 +121,7 @@ Here's additional documentation for learning more about this project:
 - [Design goals](documentation/design-goals.md)
 - [Dependency compatibility](documentation/dependencies.md)
 - [Versioning strategy](documentation/versioning-strategy.md)
+- [Changelog](CHANGELOG.md)
 - [Declarations lifecycle](documentation/declarations-lifecycle.md)
 - [Security Policy](SECURITY.md)
 
