@@ -97,32 +97,15 @@ more details on this vulnerability.
 - [4.4.1] - 2024-02-02
 - [4.4.0] - 2024-01-29
 - [4.3.1] - 2023-09-25
+- [4.3.0] - 2023-08-14
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
 [4.4.0]: https://github.com/kotools/types/releases/tag/4.4.0
 [4.3.1]: https://github.com/kotools/types/releases/tag/4.3.1
+[4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
 
 ---
-
-## ✨ 4.3.0 <a id="4.3.0"></a>
-
-_Release date: 2023-08-14._
-
-### Changed
-
-- Support for [Kotlin 1.7.21] and [kotlinx.serialization 1.4.1] (issue [#142]).
-
-[#142]: https://github.com/kotools/types/issues/142
-[Kotlin 1.7.21]: https://github.com/JetBrains/kotlin/releases/tag/v1.7.21
-[kotlinx.serialization 1.4.1]: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.4.1
-
-- Convert the `NotEmptyList` (issue [#136]), the `NotEmptySet` (issue [#137])
-  and the `NotEmptyMap` (issue [#138]) types to inline classes.
-
-[#136]: https://github.com/kotools/types/issues/136
-[#137]: https://github.com/kotools/types/issues/137
-[#138]: https://github.com/kotools/types/issues/138
 
 ## ✨ 4.2.0 <a id="4.2.0"></a>
 
