@@ -100,6 +100,7 @@ more details on this vulnerability.
 - [4.3.0] - 2023-08-14
 - [4.2.0] - 2023-06-24
 - [4.1.0] - 2023-04-03
+- [4.0.1] - 2023-02-06
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
@@ -108,27 +109,9 @@ more details on this vulnerability.
 [4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
 [4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
 [4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
+[4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
 
 ---
-
-## 🚑️ 4.0.1 <a id="4.0.1"></a>
-
-_Release date: 2023-02-06._
-
-### Changed
-
-Update documentation of declarations returning the [`Result`][kotlin.Result]
-type (issue [#20]).
-
-[#20]: https://github.com/kotools/types/issues/20
-[kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html
-
-### Fixed
-
-Fix versioning annotation of declarations in the `kotools.types.number` package
-(issue [#23]).
-
-[#23]: https://github.com/kotools/types/issues/23
 
 ## 💥 4.0.0 <a id="4.0.0"></a>
 
