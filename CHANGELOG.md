@@ -102,8 +102,6 @@ _Release date: 2024-02-07 | Commits: [4.4.1...4.4.2]._
 Serialization problems using the Kotlin/JS IR compiler for all serializable
 types (bug [#431] reported by [@robertfmurdock]).
 
-[#431]: https://github.com/kotools/types/issues/431
-
 ## 🚑️ 4.4.1 <a id="4.4.1"></a>
 
 _Release date: 2024-02-02 | Commits: [4.4.0...4.4.1]._
@@ -698,6 +696,7 @@ entries.toMap() // after
 [#327]: https://github.com/kotools/types/issues/327
 [#328]: https://github.com/kotools/types/pull/328
 [#339]: https://github.com/kotools/types/issues/339
+[#431]: https://github.com/kotools/types/issues/431
 [commit-a4399cce]: https://github.com/kotools/types/commit/a4399cce
 [commit-a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
 [commit-ed9322d1]: https://github.com/kotools/types/commit/ed9322d1
