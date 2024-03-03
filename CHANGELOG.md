@@ -93,9 +93,7 @@ more details on this vulnerability.
 
 ## 🚑️ 4.4.2 <a id="4.4.2"></a>
 
-_Release date: 2024-02-07 | Commits: [4.4.1...4.4.2]._
-
-[4.4.1...4.4.2]: https://github.com/kotools/types/compare/4.4.1...4.4.2
+_Release date: 2024-02-07._
 
 ### Fixed
 
@@ -104,9 +102,7 @@ types (bug [#431] reported by [@robertfmurdock]).
 
 ## 🚑️ 4.4.1 <a id="4.4.1"></a>
 
-_Release date: 2024-02-02 | Commits: [4.4.0...4.4.1]._
-
-[4.4.0...4.4.1]: https://github.com/kotools/types/compare/4.4.0...4.4.1
+_Release date: 2024-02-02._
 
 ### Fixed
 
@@ -119,9 +115,7 @@ Thanks to [@robertfmurdock] for reporting this error (issue [#406]).
 
 ## ✨ 4.4.0 <a id="4.4.0"></a>
 
-_Release date: 2024-01-29 | Commits: [4.3.1...4.4.0]._
-
-[4.3.1...4.4.0]: https://github.com/kotools/types/compare/4.3.1...4.4.0
+_Release date: 2024-01-29._
 
 ### Added
 
@@ -202,9 +196,7 @@ The copyright notice in the license (issue [#257]).
 
 ## 🚑️ 4.3.1 <a id="4.3.1"></a>
 
-_Release date: 2023-09-25 | Commits: [4.3.0...4.3.1]._
-
-[4.3.0...4.3.1]: https://github.com/kotools/types/compare/4.3.0...4.3.1
+_Release date: 2023-09-25._
 
 ### Added
 
@@ -242,10 +234,6 @@ Typo in the documentation of the `notEmptyRangeOf` function (PR [#222]).
 
 _Release date: 2023-08-14._
 
-_See the [full changelog][4.2.0-4.3.0] from version [4.2.0][tag-4.2.0]._
-
-[4.2.0-4.3.0]: https://github.com/kotools/types/compare/4.2.0...4.3.0
-
 ### Changed
 
 - Support for [Kotlin 1.7.21] and [kotlinx.serialization 1.4.1] (issue [#142]).
@@ -264,10 +252,6 @@ _See the [full changelog][4.2.0-4.3.0] from version [4.2.0][tag-4.2.0]._
 ## ✨ 4.2.0 <a id="4.2.0"></a>
 
 _Release date: 2023-06-24._
-
-_See the [full changelog][4.1.0-4.2.0] from version [4.1.0][tag-4.1.0]._
-
-[4.1.0-4.2.0]: https://github.com/kotools/types/compare/4.1.0...4.2.0
 
 ### Added
 
@@ -429,10 +413,6 @@ println(notEmptyListSerialName == expectedSerialName) // true
 
 _Release date: 2023-04-03._
 
-_See the [full changelog][4.0.1-4.1.0] from version [4.0.1][tag-4.0.1]._
-
-[4.0.1-4.1.0]: https://github.com/kotools/types/compare/4.0.1...4.1.0
-
 ### Added
 
 - `NotEmptyCollection` hierarchy representing collections that contain at least
@@ -537,10 +517,6 @@ result = firstString < secondString
 ## 🚑️ 4.0.1 <a id="4.0.1"></a>
 
 _Release date: 2023-02-06._
-
-_See the [full changelog][4.0.0-4.0.1] from version [4.0.0][tag-4.0.0]._
-
-[4.0.0-4.0.1]: https://github.com/kotools/types/compare/4.0.0...4.0.1
 
 ### Changed
 
