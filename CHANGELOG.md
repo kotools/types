@@ -95,92 +95,13 @@ more details on this vulnerability.
 
 - [4.4.2] - 2024-02-07
 - [4.4.1] - 2024-02-02
+- [4.4.0] - 2024-01-29
 
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
+[4.4.0]: https://github.com/kotools/types/releases/tag/4.4.0
 
 ---
-
-## ✨ 4.4.0 <a id="4.4.0"></a>
-
-_Release date: 2024-01-29._
-
-### Added
-
-- `EmailAddress` **experimental** type, suggested by [@MichaelStH] in [#55], for
-  representing an email address (issue [#339]).
-- `AnyInt(Int)` **experimental** factory function (commit
-  [571428bc][commit-571428bc]).
-- `Companion` object for the following **experimental** types:
-  - `InclusiveBound` (commit [a8aedb49][commit-a8aedb49])
-  - `ExclusiveBound` (commit [76ba0637][commit-76ba0637])
-  - `NotEmptyRange` (commit [a4399cce][commit-a4399cce])
-  - `NotEmptyRange.BuilderScope` (commit [79e093ce][commit-79e093ce]).
-- `ExperimentalKotoolsTypesApi` annotation for marking experimental declarations
-  (issue [#191]).
-- [Security policy](SECURITY.md) indicating which versions are supported with
-  security updates and how to report a security vulnerability (issue [#250]).
-- Documentation of versioning strategy (issue [#215]) and declarations lifecycle
-  (issue [#307]).
-- Versions [4.1.0][tag-4.1.0], [4.0.1][tag-4.0.1], [4.0.0][tag-4.0.0],
-  [3.2.0][tag-3.2.0], [2.0.0][tag-2.0.0] and [1.3.1][tag-1.3.1] in
-  [API reference][api-reference] (issue [#261]).
-
-### Changed
-
-- Move the following **experimental** declarations to the
-  `kotools.types.experimental` package with a new signature (issue [#319]):
-  - `StrictlyPositiveDouble` type
-  - `unaryMinus` operation on `AnyInt`, `NonZeroInt`, `PositiveInt`,
-  `NegativeInt`, `StrictlyPositiveInt` and `StrictlyNegativeInt`
-  - `Bound`, `InclusiveBound` and `ExclusiveBound` types with their declarations
-  - `NotEmptyRange` type with its declarations
-  - `plus(String)`, `plus(NotBlankString)` and `plus(Char)` operations on
-    `NotBlankString`
-  - `Char.plus(NotBlankString)` operation
-  - `range` property for companion object of `PositiveInt`, `NegativeInt`,
-    `StrictlyPositiveInt` and `StrictlyNegativeInt`
-  - `positiveRange` and `negativeRange` properties on `NonZeroInt.Companion`.
-- Opt-in message of experimental annotations (pull request [#328]).
-- Documentation of types in API reference and in README (commit
-  [ed9322d1][commit-ed9322d1]).
-- Align styles of version [4.2.0][tag-4.2.0] with the latest ones in
-  [API reference][api-reference] (issue [#261]).
-
-### Deprecated
-
-`ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
-`ExperimentalResultApi` and `ExperimentalTextApi` annotations (issue [#327]).
-
-### Removed
-
-- The following **experimental** factory functions (issue [#258]):
-  - `toNonZeroIntOrNull` and `toNonZeroIntOrThrow`
-  - `toPositiveIntOrNull` and `toPositiveIntOrThrow`
-  - `toNegativeIntOrNull` and `toNegativeIntOrThrow`
-  - `toStrictlyPositiveIntOrNull` and `toStrictlyPositiveIntOrThrow`
-  - `toStrictlyNegativeIntOrNull` and `toStrictlyNegativeIntOrThrow`
-  - `toStrictlyPositiveDoubleOrNull` and `toStrictlyPositiveDoubleOrThrow`
-  - `toNotBlankStringOrNull` and `toNotBlankStringOrThrow`
-  - `toNotEmptyListOrNull` and `toNotEmptyListOrThrow`
-  - `toNotEmptySetOrNull` and `toNotEmptySetOrThrow`
-  - `toNotEmptyMapOrNull` and `toNotEmptyMapOrThrow`.
-- The `Result.flatMap` **experimental** function (issue [#125]).
-- The `Number.toStrictlyPositiveDouble` **experimental** function in
-  `ResultContext` (commit [5ef8aa05][commit-5ef8aa05]).
-- The `ExperimentalSinceKotoolsTypes` (commit [9052e77d][commit-9052e77d]) and
-  the `SinceKotoolsTypes` (commit [557350b5][commit-557350b5]) **internal**
-  annotations.
-
-### Fixed
-
-The copyright notice in the license (issue [#257]).
-
-### Security
-
-- Hide all internals from Java users (issue [#303]).
-- Upgrade to [Webpack 5.76.3][webpack@v5.76.3] for avoiding cross-realm object
-  access (issue [#313]).
 
 ## 🚑️ 4.3.1 <a id="4.3.1"></a>
 
