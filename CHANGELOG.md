@@ -652,11 +652,7 @@ entries.toMap() // after
 
 <!------------------------------- Shared links -------------------------------->
 
-[@MichaelStH]: https://github.com/MichaelStH
-[@o-korpi]: https://github.com/o-korpi
-[@robertfmurdock]: https://github.com/robertfmurdock
-[api-reference]: https://types.kotools.org
-[ssh-deploy-key]: https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
+<!-- Starting with '#' character (code 35) -->
 [#55]: https://github.com/kotools/types/discussions/55
 [#104]: https://github.com/kotools/types/discussions/104
 [#125]: https://github.com/kotools/types/issues/125
@@ -693,6 +689,14 @@ entries.toMap() // after
 [#339]: https://github.com/kotools/types/issues/339
 [#406]: https://github.com/kotools/types/issues/406
 [#431]: https://github.com/kotools/types/issues/431
+
+<!-- Starting with '@' character (code 64) -->
+[@MichaelStH]: https://github.com/MichaelStH
+[@o-korpi]: https://github.com/o-korpi
+[@robertfmurdock]: https://github.com/robertfmurdock
+
+<!-- Starting with lowercase letter (code in [97;122]) -->
+[api-reference]: https://types.kotools.org
 [commit-a4399cce]: https://github.com/kotools/types/commit/a4399cce
 [commit-a8aedb49]: https://github.com/kotools/types/commit/a8aedb49
 [commit-ed9322d1]: https://github.com/kotools/types/commit/ed9322d1
@@ -702,6 +706,7 @@ entries.toMap() // after
 [commit-76ba0637]: https://github.com/kotools/types/commit/76ba0637
 [commit-79e093ce]: https://github.com/kotools/types/commit/79e093ce
 [commit-9052e77d]: https://github.com/kotools/types/commit/9052e77d
+[ssh-deploy-key]: https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys
 [tag-1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
 [tag-2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
 [tag-3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
