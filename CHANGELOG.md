@@ -2,12 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-> The format of this document is based on [Keep a Changelog].
-
-> See [the changelog in kotools/libraries] for versions `1`, `2` and `3`.
-
-[keep a changelog]: https://keepachangelog.com/en/1.1.0
-[the changelog in kotools/libraries]: https://github.com/kotools/libraries/blob/types-v3.2.0/types/changelog.md
+> The format of this document is based on
+> [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
 
 ## 🤔 Types of changes
 
