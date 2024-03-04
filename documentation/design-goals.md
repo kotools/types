@@ -16,7 +16,7 @@ See the [contributing guidelines](/CONTRIBUTING.md) for more details about it.
 ## Avoid useless dependencies
 
 This project is very light and just ship with one direct dependency (excluding
-the Kotlin language): the [kotlinx.serialization] library for serializing or
+the [Kotlin] language): the [kotlinx.serialization] library for serializing or
 deserializing the provided types.
 
 Like stated above, these mechanisms are essential for Kotools Types because its
@@ -45,5 +45,6 @@ val nullableNumber: StrictlyPositiveInt? = failure.getOrNull()
 println(nullableNumber) // null
 ```
 
+[kotlin]: https://kotlinlang.org
 [kotlin.Result]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
