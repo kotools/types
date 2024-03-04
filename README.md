@@ -117,11 +117,9 @@ implementation "org.kotools:types:$version"
 
 Here's additional documentation for learning more about this project:
 
-- [API reference][api-reference]
 - [Design goals](documentation/design-goals.md)
-- [Dependency compatibility](documentation/dependencies.md)
 - [Versioning strategy](documentation/versioning-strategy.md)
-- [Changelog](CHANGELOG.md)
+- [Dependency compatibility](documentation/dependencies.md)
 - [Declarations lifecycle](documentation/declarations-lifecycle.md)
 - [Security Policy](SECURITY.md)
 
