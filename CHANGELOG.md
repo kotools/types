@@ -7,16 +7,16 @@ All notable changes to this project will be documented in this file.
 
 ## 🤔 Types of changes
 
-- `Added` for new features.
-- `Changed` for changes in existing functionality.
-- `Deprecated` for soon-to-be removed features.
-- `Removed` for now removed features.
-- `Fixed` for any bug fixes.
-- `Security` in case of vulnerabilities.
+- `✨ Added` for new features.
+- `♻️ Changed` for changes in existing functionality.
+- `🗑️ Deprecated` for soon-to-be removed features.
+- `🔥 Removed` for now removed features.
+- `🐛 Fixed` for any bug fixes.
+- `🔒 Security` in case of vulnerabilities.
 
 ## 🚧 Unreleased
 
-### Added
+### ✨ Added
 
 - Support the macOS arm64 platform with Kotlin Native (by @LVMVRQUXL in #414).
 - The `create(Any?)` and the `createOrNull(Any?)` **experimental** factory
@@ -38,7 +38,7 @@ All notable changes to this project will be documented in this file.
   `NotEmptyMap.Companion` (by @LVMVRQUXL in #354).
 - Documentation of dependency compatibility (by @LVMVRQUXL in #288).
 
-### Changed
+### ♻️ Changed
 
 - Bump embedded Kotlin from 1.7.21 to 1.8.22 (by @LVMVRQUXL in #172 and #196).
 - Bump kotlinx.serialization from 1.4.0 to 1.5.1 (by @LVMVRQUXL in #378 and
@@ -57,7 +57,7 @@ All notable changes to this project will be documented in this file.
   [Gitmoji](https://github.com/carloscuesta/gitmoji) in the contributing
   guidelines (by @LVMVRQUXL in #490).
 
-### Deprecated
+### 🗑️ Deprecated
 
 Deprecation promotion of the following annotations to error (by @LVMVRQUXL in
 #333):
@@ -68,7 +68,7 @@ Deprecation promotion of the following annotations to error (by @LVMVRQUXL in
 - `ExperimentalResultApi`
 - `ExperimentalTextApi`
 
-### Security
+### 🔒 Security
 
 Upgrade follow-redirects to 1.15.4 on Kotlin/JS platform because prior versions
 are vulnerable to Improper Input Validation due to the improper handling of URLs
