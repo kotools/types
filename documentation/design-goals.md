@@ -5,17 +5,22 @@ and improving Kotools Types.
 
 ## Less is more
 
-Kotools Types focus primarily on what is essential for building explicit and
-safer APIs: the types and their factory functions.
-Other declarations could be added if suggested by the community.
+Kotools Types focuses primarily on what is essential for building an explicit
+and safe API: the types, their factory functions and their serializer.
+
 By having this minimalist approach, we engage to provide what users really need.
+
+Note that we may add other declarations if suggested by the community.
+See the [contributing guidelines](/CONTRIBUTING.md) for more details about it.
 
 ## Avoid useless dependencies
 
-This project is very light and just ship with one direct dependency:
-[kotlinx.serialization] for serializing or deserializing the provided types.
-Knowing that these types could be used in any type of API, this feature is
-essential for this library.
+This project is very light and just ship with one direct dependency (excluding
+the Kotlin language): the [kotlinx.serialization] library for serializing or
+deserializing the provided types.
+
+Like stated above, these mechanisms are essential for Kotools Types because its
+type-system should be usable in any type of application.
 
 See the [dependency compatibility](dependencies.md) documentation for more
 details about the compatibility of Kotools Types with its dependencies.
