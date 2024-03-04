@@ -28,12 +28,11 @@ details about the compatibility of Kotools Types with its dependencies.
 ## Error handling agnostic
 
 Users should be responsible for deciding how to handle errors, not this library.
-
 Externalizing this responsibility to consumers implies that Kotools Types should
 provide an explicit API by definition.
-
 This is why we are using the [Result][kotlin.Result] type from Kotlin for
 representing a result that can be a success or a failure.
+
 Here's an example of creating a `StrictlyPositiveInt` from Kotlin code:
 
 ```kotlin
