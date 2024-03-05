@@ -8,10 +8,16 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout code
+      - name: Checkout `api-reference` branch
         uses: actions/checkout@v4.1.1
         with:
-          fetch-depth: 0
+          ref: api-reference
+      - name: Checkout `api-reference-561` branch
+        uses: actions/checkout@v4.1.1
+        with:
+          ref: api-reference-561
+      - name: Checkout default branch
+        uses: actions/checkout@v4.1.1
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.1
       - name: Setup Java
