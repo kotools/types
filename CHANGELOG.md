@@ -37,6 +37,9 @@ All notable changes to this project will be documented in this file.
   the `of(Pair<K, V>, vararg Pair<K, V>)` **experimental** factory functions in
   `NotEmptyMap.Companion` (by @LVMVRQUXL in #354).
 - Documentation of dependency compatibility (by @LVMVRQUXL in #288).
+- The documentation of the serialization and the deserialization processes in
+  the [API reference](https://types.kotools.org) for the `AnyInt` type (by
+  @LVMVRQUXL in #256). 
 
 ### ♻️ Changed
 

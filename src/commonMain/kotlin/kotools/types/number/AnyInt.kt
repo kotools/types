@@ -15,7 +15,31 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
 
-/** Represents an integer number of type [Int]. */
+/**
+ * Represents an integer number of type [Int].
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type behave like for the [Int] type.
+ *
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val number: AnyInt = 123.toNonZeroInt()
+ *     .getOrThrow()
+ * val encoded: String = Json.encodeToString(number)
+ * println(encoded) // 123
+ * val decoded: AnyInt = Json.decodeFromString(encoded)
+ * println(decoded == number) // true
+ * ```
+ * </details>
+ */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(AnyIntSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
