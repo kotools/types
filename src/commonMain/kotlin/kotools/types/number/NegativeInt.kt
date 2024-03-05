@@ -42,6 +42,9 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
 /**
  * Represents an integer number of type [Int] that is less than or equals zero.
  *
+ * You can use the [toNegativeInt] function for creating an instance of this
+ * type.
+ *
  * <br>
  * <details>
  * <summary>

@@ -78,7 +78,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  * Represents a list that has at least one element of type [E].
  *
  * You can use the [notEmptyListOf] or the [toNotEmptyList] functions for
- * building this type.
+ * creating an instance of this type.
  *
  * <br>
  * <details>

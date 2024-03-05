@@ -38,6 +38,9 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 /**
  * Represents an integer number of type [Int] that is less than zero.
  *
+ * You can use the [toStrictlyNegativeInt] function for creating an instance of
+ * this type.
+ *
  * <br>
  * <details>
  * <summary>

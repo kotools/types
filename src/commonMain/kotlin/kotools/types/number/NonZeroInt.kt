@@ -43,6 +43,9 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
 /**
  * Represents an integer number of type [Int] that is other than zero.
  *
+ * You can use the [toNonZeroInt] function for creating an instance of this
+ * type.
+ *
  * <br>
  * <details>
  * <summary>

@@ -38,6 +38,9 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
 /**
  * Represents an integer number of type [Int] that is greater than zero.
  *
+ * You can use the [toStrictlyPositiveInt] function for creating an instance of
+ * this type.
+ *
  * <br>
  * <details>
  * <summary>

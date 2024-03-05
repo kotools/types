@@ -36,6 +36,9 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
 /**
  * Represents a string that has at least one character excluding whitespaces.
  *
+ * You can use the [toNotBlankString] function for creating an instance of this
+ * type.
+ *
  * <br>
  * <details>
  * <summary>

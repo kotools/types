@@ -27,6 +27,10 @@ public fun <T : Comparable<T>> notEmptyRangeOf(
 
 /**
  * Represents a range of comparable values that contain at least one value.
+ *
+ * You can use the [notEmptyRangeOf] function for creating an instance of this
+ * type.
+ *
  * @param T the **covariant** type of values in this range.
  */
 @ExperimentalKotoolsTypesApi

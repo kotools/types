@@ -43,6 +43,9 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  * Represents an integer number of type [Int] that is greater than or equals
  * zero.
  *
+ * You can use the [toPositiveInt] function for creating an instance of this
+ * type.
+ *
  * <br>
  * <details>
  * <summary>
