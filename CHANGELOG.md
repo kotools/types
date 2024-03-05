@@ -38,10 +38,12 @@ All notable changes to this project will be documented in this file.
   `NotEmptyMap.Companion` (by @LVMVRQUXL in #354).
 - Documentation of dependency compatibility (by @LVMVRQUXL in #288).
 - The documentation of the serialization and the deserialization processes in
-  the [API reference](https://types.kotools.org) for the following types:
-  `AnyInt`, `NonZeroInt`, `PositiveInt`, `NegativeInt`, `StrictlyPositiveInt`,
-  `StrictlyNegativeInt`, `ZeroInt`, `NotBlankString`, `NotEmptyList`,
-  `NotEmptySet` and `NotEmptyMap` (by @LVMVRQUXL in #256).
+  the [API reference] for the following types: `AnyInt`, `NonZeroInt`,
+  `PositiveInt`, `NegativeInt`, `StrictlyPositiveInt`, `StrictlyNegativeInt`,
+  `ZeroInt`, `NotBlankString`, `NotEmptyList`, `NotEmptySet` and `NotEmptyMap`
+  (by @LVMVRQUXL in #256).
+- References to the corresponding factory functions for eligible types in the
+  [API reference] (by @LVMVRQUXL in cfc99b213).
 
 ### ♻️ Changed
 
@@ -80,6 +82,8 @@ are vulnerable to Improper Input Validation due to the improper handling of URLs
 by the `url.parse()` function (by @LVMVRQUXL in #375).
 See the [security report](https://github.com/advisories/GHSA-jchw-25xp-jwwc) for
 more details on this vulnerability.
+
+[api reference]: https://types.kotools.org
 
 ## 🔖 Releases
 
