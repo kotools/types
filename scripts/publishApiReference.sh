@@ -10,9 +10,6 @@ BLUE='\033[0;36m'
 GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
-BRANCH_TARGET=$([ -n "$1" ] && echo "$1" || echo "api-reference")
-echo "$BLUE> Branch target:$NO_COLOR $BRANCH_TARGET"
-
 echo "${BLUE}> Synchronize Gradle${NO_COLOR}"
 ./gradlew -q :unit
 
@@ -20,8 +17,9 @@ PROJECT_VERSION=$(./gradlew -q :version)
 echo "${BLUE}> Project version:${NO_COLOR} $PROJECT_VERSION"
 
 echo "${BLUE}> Get archived versions of API reference${NO_COLOR}"
+BRANCH_TARGET=api-reference
 SOURCE_FOLDER="versions"
-git checkout -q api-reference -- $SOURCE_FOLDER || exit 1
+git checkout -q $BRANCH_TARGET -- $SOURCE_FOLDER || exit 1
 
 echo "${BLUE}> Prepare generation of latest API reference${NO_COLOR}"
 OLD_VERSIONS_DIR="build/api-references"
