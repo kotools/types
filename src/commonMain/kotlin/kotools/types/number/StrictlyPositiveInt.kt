@@ -35,7 +35,31 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
     runCatching(StrictlyPositiveInt.Companion::create)
 
-/** Represents an integer number of type [Int] that is greater than zero. */
+/**
+ * Represents an integer number of type [Int] that is greater than zero.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type behave like for the [Int] type.
+ *
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val number: StrictlyPositiveInt = 123.toStrictlyPositiveInt()
+ *     .getOrThrow()
+ * val encoded: String = Json.encodeToString(number)
+ * println(encoded) // 123
+ * val decoded: StrictlyPositiveInt = Json.decodeFromString(encoded)
+ * println(decoded == number) // true
+ * ```
+ * </details>
+ */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyPositiveIntSerializer::class)
