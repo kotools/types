@@ -21,7 +21,7 @@ echo "${BLUE}> Project version:${NO_COLOR} $PROJECT_VERSION"
 
 echo "${BLUE}> Get archived versions of API reference${NO_COLOR}"
 SOURCE_FOLDER="versions"
-git checkout -q api-reference -- $SOURCE_FOLDER
+git checkout -q api-reference -- $SOURCE_FOLDER || exit 1
 
 echo "${BLUE}> Prepare generation of latest API reference${NO_COLOR}"
 OLD_VERSIONS_DIR="build/api-references"
