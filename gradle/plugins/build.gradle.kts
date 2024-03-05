@@ -1,5 +1,3 @@
-import java.util.Locale
-
 plugins { `kotlin-dsl` }
 
 repositories.mavenCentral()
@@ -15,28 +13,18 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        registerKotoolsTypesPlugin("Base")
-        registerKotoolsTypesPlugin("Documentation")
-        registerKotoolsTypesPlugin("Multiplatform")
-        registerKotoolsTypesPlugin("Publication")
+        kotoolsTypesPlugin("Base")
+        kotoolsTypesPlugin("Documentation")
+        kotoolsTypesPlugin("Multiplatform")
+        kotoolsTypesPlugin("Publication")
     }
 }
 
-fun NamedDomainObjectContainer<PluginDeclaration>.registerKotoolsTypesPlugin(
+private fun NamedDomainObjectContainer<PluginDeclaration>.kotoolsTypesPlugin(
     name: String
 ): Unit = register("KotoolsTypes${name}Plugin").configure {
-    val locale: Locale = Locale.getDefault()
-    val idSuffix: String = name.lowercase(locale)
-    kotoolsTypesId(idSuffix)
-    kotoolsTypesImplementationClass("${name}Plugin")
-}
-
-fun PluginDeclaration.kotoolsTypesId(value: String) {
-    id = "kotools.types.$value"
-}
-
-fun PluginDeclaration.kotoolsTypesImplementationClass(name: String) {
-    implementationClass = "kotools.types.plugins.$name"
+    id = "kotools.types.${name.lowercase()}"
+    implementationClass = "kotools.types.plugins.${name}Plugin"
 }
 
 tasks.withType<ValidatePlugins>().configureEach {
