@@ -1,11 +1,11 @@
 ---
-name: 🤔 Issue
+name: 📝 Issue
 about: Basic template for creating an issue.
 ---
 
 ## 📝 Description
 
-<!-- Describe the feature here. -->
+<!-- Describe the intent here. -->
 
 <!-- Uncomment this section if your issue depends on another one.
 ## 🔗 Dependencies
