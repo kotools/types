@@ -39,8 +39,8 @@ All notable changes to this project will be documented in this file.
 - Documentation of dependency compatibility (by @LVMVRQUXL in #288).
 - The documentation of the serialization and the deserialization processes in
   the [API reference](https://types.kotools.org) for the following types:
-  `AnyInt`, `NonZeroInt`, `PositiveInt`, `NegativeInt`, `StrictlyPositiveInt`
-  and `StrictlyNegativeInt` (by @LVMVRQUXL in #256).
+  `AnyInt`, `NonZeroInt`, `PositiveInt`, `NegativeInt`, `StrictlyPositiveInt`,
+  `StrictlyNegativeInt` and `ZeroInt` (by @LVMVRQUXL in #256).
 
 ### ♻️ Changed
 

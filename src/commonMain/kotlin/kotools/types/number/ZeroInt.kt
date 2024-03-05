@@ -15,7 +15,29 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 
-/** Represents an integer number of type [Int] that equals zero. */
+/**
+ * Represents an integer number of type [Int] that equals zero.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type behave like for the [Int] type.
+ *
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val encoded: String = Json.encodeToString(ZeroInt)
+ * println(encoded) // 0
+ * val decoded: ZeroInt = Json.decodeFromString(encoded)
+ * println(decoded === ZeroInt) // true
+ * ```
+ * </details>
+ */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(ZeroIntSerializer::class)
 @Since(KotoolsTypesVersion.V4_0_0)
