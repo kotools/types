@@ -1,29 +1,15 @@
 name: Deployment
 on:
   workflow_dispatch:
-    inputs:
-      apiReferenceBranch:
-        description: API reference's branch
-        required: false
-        default: api-reference
 jobs:
-  # --------------------------------- Stage 1 ----------------------------------
-  gradle-wrapper-validation:
-    name: Gradle wrapper validation
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.1
-  # --------------------------------- Stage 2 ----------------------------------
-  api-reference:
-    name: API reference
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.1.0
         with:
@@ -32,6 +18,4 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Publish API reference
-        run: ./scripts/publishApiReference.sh $API_REFERENCE_BRANCH
-        env:
-          API_REFERENCE_BRANCH: ${{ inputs.apiReferenceBranch }}
+        run: ./scripts/publishApiReference.sh api-reference-561
