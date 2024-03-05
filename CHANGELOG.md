@@ -40,7 +40,8 @@ All notable changes to this project will be documented in this file.
 - The documentation of the serialization and the deserialization processes in
   the [API reference](https://types.kotools.org) for the following types:
   `AnyInt`, `NonZeroInt`, `PositiveInt`, `NegativeInt`, `StrictlyPositiveInt`,
-  `StrictlyNegativeInt`, `ZeroInt` and `NotBlankString` (by @LVMVRQUXL in #256).
+  `StrictlyNegativeInt`, `ZeroInt`, `NotBlankString` and `NotEmptyList` (by
+  @LVMVRQUXL in #256).
 
 ### ♻️ Changed
 
