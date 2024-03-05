@@ -38,11 +38,11 @@ change can be included in a **minor release**.
 A **stable** declaration introduced should be removed by:
 
 - Deprecating it with a [warning level][kotlin.DeprecationLevel.WARNING] in a
-  **patch release**.
+  **minor release**.
 - Deprecating it with an [error level][kotlin.DeprecationLevel.ERROR] in a
   **minor release**.
 - Deprecating it with a [hidden level][kotlin.DeprecationLevel.HIDDEN] in a
-  **patch release**.
+  **minor release**.
 - Removing it in a **major release**.
 
 [kotlin.DeprecationLevel.ERROR]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-e-r-r-o-r.html
