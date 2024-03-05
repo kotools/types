@@ -32,7 +32,7 @@ public class DocumentationPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.tasks.run {
         dokkaTasks(project)
         apiReferenceJar(project)
-        saveApiReference()
+        saveApiReference(project)
         cleanDokkaHtml()
     }
 }
@@ -49,10 +49,7 @@ private fun TaskContainer.dokkaTasks(project: Project): Unit =
         }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
-            olderVersionsDir = project.layout.buildDirectory
-                .dir("api-references")
-                .map(Directory::getAsFile)
-                .get()
+            olderVersionsDir = project.archivedApiReferences
         }
     }
 
@@ -63,6 +60,11 @@ private val Project.copyrightNotice: String
 
 private val Project.logoIcon: File
     get() = rootDir.resolve("dokka/logo-icon.svg")
+
+private val Project.archivedApiReferences: File
+    get() = project.layout.buildDirectory.dir("api-references")
+        .map(Directory::getAsFile)
+        .get()
 
 private fun TaskContainer.apiReferenceJar(project: Project) {
     val apiReferenceJar: TaskProvider<Jar> = register<Jar>("apiReferenceJar") {
@@ -84,14 +86,14 @@ private fun Project.includeInPublication(jar: TaskProvider<Jar>): Unit =
         .withType<MavenPublication>()
         .configureEach { artifact(jar) }
 
-private fun TaskContainer.saveApiReference() {
+private fun TaskContainer.saveApiReference(project: Project) {
     val saveApiReference: TaskProvider<Copy> =
         register<Copy>("saveApiReference") {
             group(TaskGroup.DOCUMENTATION)
             description("Archives the API reference.")
             from(dokkaHtml)
             exclude("older/**")
-            into("api/references/${project.version}")
+            into("${project.archivedApiReferences}/${project.version}")
         }
     assembleApiReferenceForWebsite(saveApiReference)
 }
