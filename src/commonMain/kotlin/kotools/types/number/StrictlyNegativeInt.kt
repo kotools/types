@@ -35,7 +35,31 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching(StrictlyNegativeInt.Companion::create)
 
-/** Represents an integer number of type [Int] that is less than zero. */
+/**
+ * Represents an integer number of type [Int] that is less than zero.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type behave like for the [Int] type.
+ *
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val number: StrictlyNegativeInt = (-123).toStrictlyNegativeInt()
+ *     .getOrThrow()
+ * val encoded: String = Json.encodeToString(number)
+ * println(encoded) // -123
+ * val decoded: StrictlyNegativeInt = Json.decodeFromString(encoded)
+ * println(decoded == number) // true
+ * ```
+ * </details>
+ */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyNegativeIntSerializer::class)
