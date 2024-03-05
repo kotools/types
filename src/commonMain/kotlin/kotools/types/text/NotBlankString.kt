@@ -35,6 +35,28 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
 
 /**
  * Represents a string that has at least one character excluding whitespaces.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type behave like for the [String] type.
+ *
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val string: NotBlankString = "hello world".toNotBlankString()
+ *     .getOrThrow()
+ * val encoded: String = Json.encodeToString(string)
+ * println(encoded) // "hello world"
+ * val decoded: NotBlankString = Json.decodeFromString(encoded)
+ * println(decoded == string) // true
+ * ```
+ * </details>
  */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
