@@ -93,7 +93,8 @@ private fun TaskContainer.saveApiReference(project: Project) {
             description("Saves the API reference for archives.")
             from(dokkaHtml)
             exclude("older/**")
-            into("${project.archivedApiReferences}/${project.version}")
+            destinationDir =
+                project.archivedApiReferences.resolve("${project.version}")
         }
     assembleApiReferenceForWebsite(saveApiReference)
 }
