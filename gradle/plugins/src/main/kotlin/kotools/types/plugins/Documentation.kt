@@ -90,7 +90,7 @@ private fun TaskContainer.saveApiReference(project: Project) {
     val saveApiReference: TaskProvider<Copy> =
         register<Copy>("saveApiReference") {
             group(TaskGroup.DOCUMENTATION)
-            description("Archives the API reference.")
+            description("Saves the API reference for archives.")
             from(dokkaHtml)
             exclude("older/**")
             into("${project.archivedApiReferences}/${project.version}")
