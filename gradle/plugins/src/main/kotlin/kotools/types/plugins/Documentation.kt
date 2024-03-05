@@ -49,7 +49,10 @@ private fun TaskContainer.dokkaTasks(project: Project): Unit =
         }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
-            olderVersionsDir = project.file("api/references")
+            olderVersionsDir = project.layout.buildDirectory
+                .dir("api-references")
+                .map(Directory::getAsFile)
+                .get()
         }
     }
 

@@ -24,7 +24,7 @@ SOURCE_FOLDER="versions"
 git checkout -q api-reference -- $SOURCE_FOLDER
 
 echo "${BLUE}> Prepare generation of latest API reference${NO_COLOR}"
-OLD_VERSIONS_DIR="api/references"
+OLD_VERSIONS_DIR="build/api-references"
 mkdir $OLD_VERSIONS_DIR
 git mv $SOURCE_FOLDER/* $OLD_VERSIONS_DIR
 rm -rf $SOURCE_FOLDER
