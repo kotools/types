@@ -347,6 +347,11 @@ public final class kotools/types/number/PositiveIntKt {
 }
 
 public final class kotools/types/number/StrictlyNegativeDouble {
+	public static final field Companion Lkotools/types/number/StrictlyNegativeDouble$Companion;
+}
+
+public final class kotools/types/number/StrictlyNegativeDouble$Companion {
+	public final fun createOrNull (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeDouble;
 }
 
 public final class kotools/types/number/StrictlyNegativeInt : kotools/types/number/NegativeInt, kotools/types/number/NonZeroInt {
