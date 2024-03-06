@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- Support the macOS arm64 platform with Kotlin Native (by @LVMVRQUXL in #414).
+- Support macOS arm64 systems with Kotlin Native (by @LVMVRQUXL in #414).
 - The `StrictlyNegativeDouble` **experimental** type for representing a
   floating-point number of type [Double][kotlin.Double] that is less than zero
   (by @LVMVRQUXL in #555 for Kotlin and Java).
