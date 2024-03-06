@@ -80,9 +80,9 @@ public class StrictlyNegativeDouble private constructor() {
          *
          * ```kotlin
          * val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
-         * val actual: StrictlyNegativeDouble? =
+         * val result: StrictlyNegativeDouble? =
          *     StrictlyNegativeDouble.createOrNull(number)
-         * println(actual != null) // true
+         * println(result != null) // true
          * ```
          * </details>
          *
@@ -97,9 +97,9 @@ public class StrictlyNegativeDouble private constructor() {
          * ```java
          * final Random random = new Random();
          * final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-         * final StrictlyNegativeDouble actual =
+         * final StrictlyNegativeDouble result =
          *         StrictlyNegativeDouble.Companion.createOrNull(number);
-         * System.out.println(actual != null); // true
+         * System.out.println(result != null); // true
          * ```
          * </details>
          * <br/>
