@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 - Support the macOS arm64 platform with Kotlin Native (by @LVMVRQUXL in #414).
 - The `StrictlyNegativeDouble` **experimental** type for representing a
   floating-point number of type [Double][kotlin.Double] that is less than zero
-  (by @LVMVRQUXL in #555). Available for all Kotlin and Java platforms.
+  (by @LVMVRQUXL in #555 for Kotlin and Java).
 - The `create(Any?)` and the `createOrNull(Any?)` **experimental** factory
   functions in `NotBlankString.Companion` (by @LVMVRQUXL in #341).
 - The `create(Number)` and `createOrNull(Number)` **experimental** factory
