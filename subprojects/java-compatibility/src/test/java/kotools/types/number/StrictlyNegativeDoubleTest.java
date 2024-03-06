@@ -81,4 +81,16 @@ public class StrictlyNegativeDoubleTest {
             Assertions.assertNull(actual, message);
         }
     }
+
+    @Test
+    public void toString_should_pass() {
+        final Random random = new Random();
+        final Number value = random.nextInt(Integer.MIN_VALUE, 0);
+        final StrictlyNegativeDouble number =
+                StrictlyNegativeDouble.Companion.create(value);
+        final String actual = number.toString();
+        final double doubleValue = value.doubleValue();
+        final String expected = Double.toString(doubleValue);
+        Assertions.assertEquals(expected, actual);
+    }
 }

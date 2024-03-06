@@ -74,3 +74,17 @@ class StrictlyNegativeDoubleCompanionTest {
         assertNull(actual, "Converting $number to $typeName should fail")
     }
 }
+
+class StrictlyNegativeDoubleTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun toString_should_pass() {
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val number: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(value)
+        val actual: String = number.toString()
+        val expected: String = value.toDouble()
+            .toString()
+        assertEquals(expected, actual)
+    }
+}

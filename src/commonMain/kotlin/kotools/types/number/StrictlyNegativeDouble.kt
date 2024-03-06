@@ -17,7 +17,9 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @OptIn(InternalKotoolsTypesApi::class)
-public class StrictlyNegativeDouble private constructor() {
+public class StrictlyNegativeDouble private constructor(
+    private val value: Double
+) {
     /** Contains static declarations for the [StrictlyNegativeDouble] type. */
     public companion object {
         /**
@@ -110,11 +112,48 @@ public class StrictlyNegativeDouble private constructor() {
          */
         public fun createOrNull(number: Number): StrictlyNegativeDouble? {
             val value: Double = number.toDouble()
-            return if (value < 0) StrictlyNegativeDouble() else null
+            return if (value < 0) StrictlyNegativeDouble(value) else null
         }
 
         @JvmSynthetic
         internal fun invalid(number: Number): ErrorMessage =
             ErrorMessage("Number should be less than zero (tried with $number)")
     }
+
+    /**
+     * Returns the string representation of this floating-point number.
+     *
+     * <br/>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-23)
+     * val result = "$number" // or number.toString()
+     * println(result) // -23.0
+     * ```
+     * </details>
+     *
+     * <br/>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final StrictlyNegativeDouble number =
+     *         StrictlyNegativeDouble.Companion.create(-23);
+     * final String result = number.toString();
+     * System.out.println(result); // -23.0
+     * ```
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = "$value"
 }
