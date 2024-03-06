@@ -351,6 +351,7 @@ public final class kotools/types/number/StrictlyNegativeDouble {
 }
 
 public final class kotools/types/number/StrictlyNegativeDouble$Companion {
+	public final fun create (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeDouble;
 	public final fun createOrNull (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeDouble;
 }
 
