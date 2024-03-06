@@ -32,7 +32,6 @@ All notable changes to this project will be documented in this file.
   `of(E, vararg E)` **experimental** factory functions in
   `NotEmptyList.Companion` (by @LVMVRQUXL in #352) and in
   `NotEmptySet.Companion` (by @LVMVRQUXL in #353).
-- The following **experimental** factory functions:
 - The `create(Map<K, V>)`, the `createOrNull(Map<K, V>)` and
   the `of(Pair<K, V>, vararg Pair<K, V>)` **experimental** factory functions in
   `NotEmptyMap.Companion` (by @LVMVRQUXL in #354).
