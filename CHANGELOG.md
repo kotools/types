@@ -19,6 +19,8 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - Support the macOS arm64 platform with Kotlin Native (by @LVMVRQUXL in #414).
+- The `StrictlyNegativeDouble` type for representing a floating-point number of
+  type [Double][kotlin.Double] that is less than zero (by @LVMVRQUXL in #555).
 - The `create(Any?)` and the `createOrNull(Any?)` **experimental** factory
   functions in `NotBlankString.Companion` (by @LVMVRQUXL in #341).
 - The `create(Number)` and `createOrNull(Number)` **experimental** factory
@@ -83,6 +85,7 @@ See the [security report](https://github.com/advisories/GHSA-jchw-25xp-jwwc) for
 more details on this vulnerability.
 
 [api reference]: https://types.kotools.org
+[kotlin.Double]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html
 
 ## 🔖 Releases
 
