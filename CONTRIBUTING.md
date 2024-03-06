@@ -95,9 +95,6 @@ Here's the list of available configurations for running tests:
 You can also generate the documentation by running the `Documentation`
 configuration.
 
-> This configuration is continuous, which means that it will update
-> automatically the documentation on changes to Kotlin files.
-
 For serving the documentation locally, right-click on the
 `build/dokka/index.html` file and choose your favorite browser in the
 `Open In > Browser` menu.
