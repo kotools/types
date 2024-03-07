@@ -150,7 +150,6 @@ public class EmailAddress private constructor(private val text: String) {
             return EmailAddress(text)
         }
 
-        @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun creationErrorMessage(value: String): ErrorMessage =
             ErrorMessage(
@@ -291,7 +290,7 @@ public class EmailAddress private constructor(private val text: String) {
     @Suppress("RedundantModalityModifier")
     final override fun hashCode(): Int = hashCodeOf(text)
 
-    // ------------------------------ Converters -------------------------------
+    // ------------------------------ Conversions ------------------------------
 
     /**
      * Returns the string representation of this email address.
