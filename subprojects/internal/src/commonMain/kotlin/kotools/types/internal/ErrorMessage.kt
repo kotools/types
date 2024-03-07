@@ -71,6 +71,15 @@ public class ErrorMessage(private val text: String) {
         public val zeroNumber: ErrorMessage by lazy {
             ErrorMessage("Number should be other than zero")
         }
+
+        /**
+         * Returns an error message indicating that the specified [number]
+         * should be less than zero.
+         */
+        public fun shouldBeLessThanZero(number: Number): ErrorMessage =
+            ErrorMessage(
+                "Number should be less than zero (tried with $number)."
+            )
     }
 }
 

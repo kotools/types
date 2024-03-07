@@ -34,7 +34,7 @@ class StrictlyNegativeDoubleCompanionTest {
             StrictlyNegativeDouble.create(number)
         }
         val actual = ErrorMessage(exception)
-        val expected: ErrorMessage = StrictlyNegativeDouble.invalid(number)
+        val expected: ErrorMessage = ErrorMessage.shouldBeLessThanZero(number)
         assertEquals(expected, actual)
     }
 
@@ -46,7 +46,7 @@ class StrictlyNegativeDoubleCompanionTest {
             StrictlyNegativeDouble.create(number)
         }
         val actual = ErrorMessage(exception)
-        val expected: ErrorMessage = StrictlyNegativeDouble.invalid(number)
+        val expected: ErrorMessage = ErrorMessage.shouldBeLessThanZero(number)
         assertEquals(expected, actual)
     }
 

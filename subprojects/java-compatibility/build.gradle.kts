@@ -9,7 +9,8 @@ java {
 
 dependencies {
     testImplementation(rootProject)
+    testImplementation(projects.typesInternal)
     testImplementation(libs.junit.jupiter)
 }
 
-tasks.test.configure { useJUnitPlatform() }
+tasks.test.configure(Test::useJUnitPlatform)

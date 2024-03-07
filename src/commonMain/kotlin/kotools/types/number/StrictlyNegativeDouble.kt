@@ -5,7 +5,6 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a floating-point number of type [Double] that is less than zero.
@@ -71,7 +70,9 @@ public class StrictlyNegativeDouble private constructor(
          */
         public fun create(number: Number): StrictlyNegativeDouble {
             val result: StrictlyNegativeDouble? = createOrNull(number)
-            return requireNotNull(result) { invalid(number) }
+            return requireNotNull(result) {
+                ErrorMessage.shouldBeLessThanZero(number)
+            }
         }
 
         /**
@@ -121,11 +122,6 @@ public class StrictlyNegativeDouble private constructor(
             val value: Double = number.toDouble()
             return if (value < 0) StrictlyNegativeDouble(value) else null
         }
-
-        @JvmSynthetic
-        internal fun invalid(number: Number): ErrorMessage = ErrorMessage(
-            "Number should be less than zero (tried with $number)."
-        )
     }
 
     /**

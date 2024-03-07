@@ -1,5 +1,6 @@
 package kotools.types.number;
 
+import kotools.types.internal.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,9 @@ public class StrictlyNegativeDoubleTest {
                     () -> StrictlyNegativeDouble.Companion.create(number)
             );
             final String actual = exception.getMessage();
-            final String expected = shouldBeLessThanZero(number);
+            final String expected = ErrorMessage.Companion
+                    .shouldBeLessThanZero(number)
+                    .toString();
             Assertions.assertEquals(expected, actual);
         }
 
@@ -39,14 +42,10 @@ public class StrictlyNegativeDoubleTest {
                     () -> StrictlyNegativeDouble.Companion.create(number)
             );
             final String actual = exception.getMessage();
-            final String expected = shouldBeLessThanZero(number);
+            final String expected = ErrorMessage.Companion
+                    .shouldBeLessThanZero(number)
+                    .toString();
             Assertions.assertEquals(expected, actual);
-        }
-
-        private String shouldBeLessThanZero(final Number number) {
-            final String numberAsString = number.toString();
-            return "Number should be less than zero (tried with %s)."
-                    .formatted(numberAsString);
         }
 
         @Test
