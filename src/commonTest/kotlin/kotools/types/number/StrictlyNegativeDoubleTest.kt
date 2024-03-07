@@ -149,6 +149,17 @@ class StrictlyNegativeDoubleTest {
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
+    fun toDouble_should_pass() {
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val number: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(value)
+        val actual: Double = number.toDouble()
+        val expected: Double = value.toDouble()
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun toString_should_pass() {
         val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
         val number: StrictlyNegativeDouble =

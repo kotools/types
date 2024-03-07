@@ -351,6 +351,7 @@ public final class kotools/types/number/StrictlyNegativeDouble {
 	public synthetic fun <init> (DLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun equals (Ljava/lang/Object;)Z
 	public final fun hashCode ()I
+	public final fun toDouble ()D
 	public final fun toString ()Ljava/lang/String;
 }
 

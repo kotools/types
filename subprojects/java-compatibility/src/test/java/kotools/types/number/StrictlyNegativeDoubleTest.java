@@ -130,6 +130,17 @@ public class StrictlyNegativeDoubleTest {
     }
 
     @Test
+    public void toDouble_should_pass() {
+        final Random random = new Random();
+        final Number value = random.nextInt(Integer.MIN_VALUE, 0);
+        final StrictlyNegativeDouble number =
+                StrictlyNegativeDouble.Companion.create(value);
+        final double actual = number.toDouble();
+        final double expected = value.doubleValue();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void toString_should_pass() {
         final Random random = new Random();
         final Number value = random.nextInt(Integer.MIN_VALUE, 0);
