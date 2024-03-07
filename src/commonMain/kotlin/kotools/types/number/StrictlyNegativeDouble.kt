@@ -37,8 +37,10 @@ public class StrictlyNegativeDouble private constructor(
          * Here's an example of calling this function from Kotlin code:
          *
          * ```kotlin
-         * val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
-         * StrictlyNegativeDouble.create(number)
+         * val result: Result<StrictlyNegativeDouble> = runCatching {
+         *     StrictlyNegativeDouble.create(-23)
+         * }
+         * println(result.isSuccess) // true
          * ```
          * </details>
          *
@@ -51,9 +53,14 @@ public class StrictlyNegativeDouble private constructor(
          * Here's an example of calling this function from Java code:
          *
          * ```java
-         * final Random random = new Random();
-         * final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-         * StrictlyNegativeDouble.Companion.create(number);
+         * // The following code prints 'Success'.
+         * try {
+         *     StrictlyNegativeDouble.Companion.create(-23);
+         *     System.out.println("Success");
+         * } catch (IllegalArgumentException exception) {
+         *     final String reason = exception.getMessage();
+         *     System.out.println("Failure: " + reason);
+         * }
          * ```
          * </details>
          * <br/>
@@ -116,8 +123,9 @@ public class StrictlyNegativeDouble private constructor(
         }
 
         @JvmSynthetic
-        internal fun invalid(number: Number): ErrorMessage =
-            ErrorMessage("Number should be less than zero (tried with $number)")
+        internal fun invalid(number: Number): ErrorMessage = ErrorMessage(
+            "Number should be less than zero (tried with $number)."
+        )
     }
 
     /**

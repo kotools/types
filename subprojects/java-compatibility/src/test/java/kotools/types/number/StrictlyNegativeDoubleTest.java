@@ -13,7 +13,9 @@ public class StrictlyNegativeDoubleTest {
         public void create_should_pass_with_a_Number_that_is_less_than_zero() {
             final Random random = new Random();
             final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-            StrictlyNegativeDouble.Companion.create(number);
+            Assertions.assertDoesNotThrow(
+                    () -> StrictlyNegativeDouble.Companion.create(number)
+            );
         }
 
         @Test
@@ -24,8 +26,7 @@ public class StrictlyNegativeDoubleTest {
                     () -> StrictlyNegativeDouble.Companion.create(number)
             );
             final String actual = exception.getMessage();
-            final String expected = "Number should be less than zero (tried " +
-                    "with " + number + ')';
+            final String expected = shouldBeLessThanZero(number);
             Assertions.assertEquals(expected, actual);
         }
 
@@ -38,9 +39,14 @@ public class StrictlyNegativeDoubleTest {
                     () -> StrictlyNegativeDouble.Companion.create(number)
             );
             final String actual = exception.getMessage();
-            final String expected = "Number should be less than zero (tried " +
-                    "with " + number + ')';
+            final String expected = shouldBeLessThanZero(number);
             Assertions.assertEquals(expected, actual);
+        }
+
+        private String shouldBeLessThanZero(final Number number) {
+            final String numberAsString = number.toString();
+            return "Number should be less than zero (tried with %s)."
+                    .formatted(numberAsString);
         }
 
         @Test

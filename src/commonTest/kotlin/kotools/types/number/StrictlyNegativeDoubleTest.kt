@@ -11,13 +11,19 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class StrictlyNegativeDoubleCompanionTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun create_should_pass_with_a_Number_that_is_less_than_zero() {
         val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
-        StrictlyNegativeDouble.create(number)
+        val result: Result<StrictlyNegativeDouble> = kotlin.runCatching {
+            StrictlyNegativeDouble.create(number)
+        }
+        val actual: Boolean = result.isSuccess
+        val typeName: String = simpleNameOf<StrictlyNegativeDouble>()
+        assertTrue(actual, "Converting $number to $typeName should pass.")
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
