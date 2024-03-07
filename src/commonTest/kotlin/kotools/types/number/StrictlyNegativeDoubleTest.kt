@@ -9,6 +9,8 @@ import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -82,6 +84,69 @@ class StrictlyNegativeDoubleCompanionTest {
 }
 
 class StrictlyNegativeDoubleTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun structural_equality_should_pass_with_the_same_object() {
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val first: StrictlyNegativeDouble = StrictlyNegativeDouble.create(value)
+        val second: StrictlyNegativeDouble = first
+        assertTrue { first.equals(second) }
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertEquals(firstHashCode, secondHashCode)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun structural_equality_should_pass_with_another_StrictlyNegativeDouble_having_the_same_value() {
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val first: StrictlyNegativeDouble = StrictlyNegativeDouble.create(value)
+        val second: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(value)
+        assertTrue { first.equals(second) }
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertEquals(firstHashCode, secondHashCode)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun structural_equality_should_fail_with_null() {
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val first: StrictlyNegativeDouble = StrictlyNegativeDouble.create(value)
+        val second: StrictlyNegativeDouble? = null
+        assertFalse { first.equals(second) }
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertNotEquals(illegal = secondHashCode, actual = firstHashCode)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun structural_equality_should_fail_with_another_object_that_is_not_a_StrictlyNegativeDouble() {
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val first: StrictlyNegativeDouble = StrictlyNegativeDouble.create(value)
+        assertFalse { first.equals(value) }
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = value.hashCode()
+        assertNotEquals(illegal = secondHashCode, actual = firstHashCode)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun structural_equality_should_fail_with_another_StrictlyNegativeDouble_having_another_value() {
+        val firstValue: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val first: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(firstValue)
+        val secondValue: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val second: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(secondValue)
+        assertFalse { first.equals(second) }
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertNotEquals(illegal = secondHashCode, actual = firstHashCode)
+    }
+
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun toString_should_pass() {

@@ -88,6 +88,48 @@ public class StrictlyNegativeDoubleTest {
     }
 
     @Test
+    public void structural_equality_should_pass_with_another_StrictlyNegativeDouble_having_the_same_value() {
+        final Random random = new Random();
+        final Number number = random.nextInt(Integer.MIN_VALUE, 0);
+        final StrictlyNegativeDouble first =
+                StrictlyNegativeDouble.Companion.create(number);
+        final StrictlyNegativeDouble second =
+                StrictlyNegativeDouble.Companion.create(number);
+        Assertions.assertTrue(() -> first.equals(second));
+        final int firstHashCode = first.hashCode();
+        final int secondHashCode = second.hashCode();
+        Assertions.assertEquals(firstHashCode, secondHashCode);
+    }
+
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Test
+    public void structural_equality_should_fail_with_another_object_that_is_not_a_StrictlyNegativeDouble() {
+        final Random random = new Random();
+        final Number number = random.nextInt(Integer.MIN_VALUE, 0);
+        final StrictlyNegativeDouble first =
+                StrictlyNegativeDouble.Companion.create(number);
+        Assertions.assertFalse(() -> first.equals(number));
+        final int firstHashCode = first.hashCode();
+        final int secondHashCode = number.hashCode();
+        Assertions.assertNotEquals(firstHashCode, secondHashCode);
+    }
+
+    @Test
+    public void structural_equality_should_fail_with_another_StrictlyNegativeDouble_having_another_value() {
+        final Random random = new Random();
+        final Number firstValue = random.nextInt(Integer.MIN_VALUE, 0);
+        final StrictlyNegativeDouble first =
+                StrictlyNegativeDouble.Companion.create(firstValue);
+        final Number secondValue = random.nextInt(Integer.MIN_VALUE, 0);
+        final StrictlyNegativeDouble second =
+                StrictlyNegativeDouble.Companion.create(secondValue);
+        Assertions.assertFalse(() -> first.equals(second));
+        final int firstHashCode = first.hashCode();
+        final int secondHashCode = second.hashCode();
+        Assertions.assertNotEquals(firstHashCode, secondHashCode);
+    }
+
+    @Test
     public void toString_should_pass() {
         final Random random = new Random();
         final Number value = random.nextInt(Integer.MIN_VALUE, 0);
