@@ -9,11 +9,10 @@ import java.util.Random;
 public class NegativeIntTest {
     @Nested
     public class Companion {
-        private static final Random RANDOM = new Random();
-
         @Test
         public void create_should_pass_with_a_Number_that_is_less_than_zero() {
-            final int number = RANDOM.nextInt(Integer.MIN_VALUE, 0);
+            final int number = new Random()
+                    .nextInt(Integer.MIN_VALUE, 0);
             Assertions.assertDoesNotThrow(
                     () -> NegativeInt.Companion.create(number)
             );
@@ -37,11 +36,27 @@ public class NegativeIntTest {
         }
 
         @Test
-        public void createOrNull_should_pass() {
-            final int number = RANDOM.nextInt(Integer.MIN_VALUE, 0);
+        public void createOrNull_should_pass_with_a_Number_that_is_less_than_zero() {
+            final int number = new Random()
+                    .nextInt(Integer.MIN_VALUE, 0);
             final NegativeInt actual =
                     NegativeInt.Companion.createOrNull(number);
             Assertions.assertNotNull(actual);
+        }
+
+        @Test
+        public void createOrNull_should_pass_with_a_Number_that_equals_zero() {
+            final NegativeInt actual = NegativeInt.Companion.createOrNull(0);
+            Assertions.assertNotNull(actual);
+        }
+
+        @Test
+        public void createOrNull_should_fail_with_a_Number_that_is_greater_than_zero() {
+            final Number number = new Random()
+                    .nextInt(1, Integer.MAX_VALUE);
+            final NegativeInt actual =
+                    NegativeInt.Companion.createOrNull(number);
+            Assertions.assertNull(actual);
         }
     }
 }
