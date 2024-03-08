@@ -1,11 +1,21 @@
 package kotools.types.number
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
+import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.KotoolsTypesVersion
+import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
+import kotools.types.internal.simpleNameOf
 
 /**
  * Represents a floating-point number of type [Double] that is less than zero.
@@ -13,10 +23,32 @@ import kotools.types.internal.hashCodeOf
  * You can use the [StrictlyNegativeDouble.Companion.create] or the
  * [StrictlyNegativeDouble.Companion.createOrNull] functions for creating an
  * instance of this type.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Serialization and deserialization</b>
+ * </summary>
+ *
+ * The [serialization and the deserialization processes](https://kotlinlang.org/docs/serialization.html)
+ * of this type should behave like for the [Double] type.
+ *
+ * Here's an example of Kotlin code that encodes and decodes this type using the
+ * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
+ *
+ * ```kotlin
+ * val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-42)
+ * val encoded: String = Json.encodeToString(number)
+ * println(encoded) // -42.0
+ * val decoded: StrictlyNegativeDouble = Json.decodeFromString(encoded)
+ * println(decoded == number) // true
+ * ```
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @OptIn(InternalKotoolsTypesApi::class)
+@Serializable(StrictlyNegativeDoubleSerializer::class)
 public class StrictlyNegativeDouble private constructor(
     private val value: Double
 ) {
@@ -290,4 +322,26 @@ public class StrictlyNegativeDouble private constructor(
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = "$value"
+}
+
+@InternalKotoolsTypesApi
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal class StrictlyNegativeDoubleSerializer :
+    KSerializer<StrictlyNegativeDouble> {
+    override val descriptor: SerialDescriptor by lazy {
+        val type: String = simpleNameOf<StrictlyNegativeDouble>()
+        val serialName = "${KotoolsTypesPackage.Number}.$type"
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.DOUBLE)
+    }
+
+    override fun serialize(encoder: Encoder, value: StrictlyNegativeDouble) {
+        val valueAsDouble: Double = value.toDouble()
+        encoder.encodeDouble(valueAsDouble)
+    }
+
+    override fun deserialize(decoder: Decoder): StrictlyNegativeDouble {
+        val number: Double = decoder.decodeDouble()
+        return StrictlyNegativeDouble.createOrNull(number)
+            ?: deserializationError<StrictlyNegativeDouble>(number)
+    }
 }

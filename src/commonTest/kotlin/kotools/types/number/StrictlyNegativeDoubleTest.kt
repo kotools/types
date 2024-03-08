@@ -1,8 +1,18 @@
 package kotools.types.number
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.SerialKind
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
+import kotools.types.internal.KotoolsTypesPackage
+import kotools.types.internal.deserializationErrorMessage
 import kotools.types.internal.simpleNameOf
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -168,5 +178,97 @@ class StrictlyNegativeDoubleTest {
         val expected: String = value.toDouble()
             .toString()
         assertEquals(expected, actual)
+    }
+}
+
+class StrictlyNegativeDoubleSerializerTest {
+    @ExperimentalSerializationApi
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun descriptor_serialName_should_be_the_qualified_name_of_StrictlyNegativeDouble() {
+        val actual: String = serializer<StrictlyNegativeDouble>()
+            .descriptor
+            .serialName
+        val type: String = simpleNameOf<StrictlyNegativeDouble>()
+        val expected = "${KotoolsTypesPackage.Number}.$type"
+        assertEquals(expected, actual)
+    }
+
+    @ExperimentalSerializationApi
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun descriptor_kind_should_be_PrimitiveKind_DOUBLE() {
+        val actual: SerialKind = serializer<StrictlyNegativeDouble>()
+            .descriptor
+            .kind
+        val expected: SerialKind = PrimitiveKind.DOUBLE
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun serialization_should_behave_like_a_Double() {
+        val value: Double = Random.nextInt(Int.MIN_VALUE until 0)
+            .toDouble()
+        val number: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(value)
+        val actual: String = Json.encodeToString(number)
+        val expected: String = Json.encodeToString(value)
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun deserialization_should_pass_from_a_Double_that_is_less_than_zero() {
+        val value: Double = Random.nextInt(Int.MIN_VALUE until 0)
+            .toDouble()
+        val encoded: String = Json.encodeToString(value)
+        val number: StrictlyNegativeDouble = Json.decodeFromString(encoded)
+        val actual: Double = number.toDouble()
+        assertEquals(expected = value, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun deserialization_should_fail_from_a_Double_that_equals_zero() {
+        val value = 0.0
+        val encoded: String = Json.encodeToString(value)
+        val exception: SerializationException = assertFailsWith {
+            Json.decodeFromString<StrictlyNegativeDouble>(encoded)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage =
+            deserializationErrorMessage<StrictlyNegativeDouble>(value)
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @Test
+    fun deserialization_should_fail_from_a_Double_that_is_greater_than_zero() {
+        val value: Double = Random.nextInt(1..Int.MAX_VALUE)
+            .toDouble()
+        val encoded: String = Json.encodeToString(value)
+        val exception: SerializationException = assertFailsWith {
+            Json.decodeFromString<StrictlyNegativeDouble>(encoded)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage =
+            deserializationErrorMessage<StrictlyNegativeDouble>(value)
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun processes_should_pass_with_a_wrapped_StrictlyNegativeDouble() {
+        @Serializable
+        data class Wrapper(val number: StrictlyNegativeDouble)
+
+        val value: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val number: StrictlyNegativeDouble =
+            StrictlyNegativeDouble.create(value)
+        val wrapper = Wrapper(number)
+        val encoded: String = Json.encodeToString(wrapper)
+        val decoded: Wrapper = Json.decodeFromString(encoded)
+        assertEquals(expected = number, actual = decoded.number)
     }
 }
