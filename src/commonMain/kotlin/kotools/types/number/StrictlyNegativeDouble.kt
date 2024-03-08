@@ -326,7 +326,7 @@ public class StrictlyNegativeDouble private constructor(
 
 @InternalKotoolsTypesApi
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal class StrictlyNegativeDoubleSerializer :
+internal object StrictlyNegativeDoubleSerializer :
     KSerializer<StrictlyNegativeDouble> {
     override val descriptor: SerialDescriptor by lazy {
         val type: String = simpleNameOf<StrictlyNegativeDouble>()
