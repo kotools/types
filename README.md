@@ -50,8 +50,8 @@ flexibility across diverse Kotlin platforms.
   Native projects.
 - **Enhanced Type Safety:** Fortify your code with explicit types, catching
   errors at compile time to create robust and reliable applications.
-- **Automatic Serialization:** Seamlessly serialize or deserialize types using
-  kotlinx.serialization, making data interchange between platforms, APIs, 
+- **Automatic Serialization:** Seamlessly serialize and deserialize types using
+  [kotlinx.serialization], making data interchange between platforms, APIs, 
   databases and libraries a breeze.
 
 ## 🛠️ Installation
