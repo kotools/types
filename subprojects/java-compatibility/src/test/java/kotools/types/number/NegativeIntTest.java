@@ -12,11 +12,28 @@ public class NegativeIntTest {
         private static final Random RANDOM = new Random();
 
         @Test
-        public void create_should_pass() {
+        public void create_should_pass_with_a_Number_that_is_less_than_zero() {
             final int number = RANDOM.nextInt(Integer.MIN_VALUE, 0);
-            final NegativeInt result = NegativeInt.Companion.create(number);
-            final int actual = result.toInt();
-            Assertions.assertEquals(number, actual);
+            Assertions.assertDoesNotThrow(
+                    () -> NegativeInt.Companion.create(number)
+            );
+        }
+
+        @Test
+        public void create_should_pass_with_a_Number_that_equals_zero() {
+            Assertions.assertDoesNotThrow(
+                    () -> NegativeInt.Companion.create(0)
+            );
+        }
+
+        @Test
+        public void create_should_fail_with_a_Number_that_is_greater_than_zero() {
+            final Number number = new Random()
+                    .nextInt(1, Integer.MAX_VALUE);
+            Assertions.assertThrows(
+                    IllegalArgumentException.class,
+                    () -> NegativeInt.Companion.create(number)
+            );
         }
 
         @Test

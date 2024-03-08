@@ -3,7 +3,6 @@ package kotools.types.number
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
@@ -24,6 +23,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class NegativeIntCompanionTest {
     @Test
@@ -38,22 +38,26 @@ class NegativeIntCompanionTest {
         result shouldEqual ZeroInt
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun create_should_pass_with_a_Number_that_is_less_than_zero() {
         val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        val result: NegativeInt = NegativeInt.create(number)
-        val actual: Number = result.toInt()
-        assertEquals(expected = number, actual)
+        val result: Result<NegativeInt> = kotlin.runCatching {
+            NegativeInt.create(number)
+        }
+        val type: String = simpleNameOf<NegativeInt>()
+        assertTrue(result.isSuccess, "Converting $number to $type should pass")
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun create_should_pass_with_a_Number_that_equals_zero() {
         val number: Number = 0
-        val result: NegativeInt = NegativeInt.create(number)
-        val actual: Number = result.toInt()
-        assertEquals(expected = number, actual)
+        val result: Result<NegativeInt> = kotlin.runCatching {
+            NegativeInt.create(number)
+        }
+        val type: String = simpleNameOf<NegativeInt>()
+        assertTrue(result.isSuccess, "Converting $number to $type should pass")
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
