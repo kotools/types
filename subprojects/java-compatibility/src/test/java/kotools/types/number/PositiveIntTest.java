@@ -41,9 +41,27 @@ public class PositiveIntTest {
         }
 
         @Test
-        public void createOrNull_should_pass() {
-            final PositiveInt actual = PositiveInt.Companion.createOrNull(23);
+        public void createOrNull_should_pass_with_a_Number_that_is_greater_than_zero() {
+            final Number number = new Random()
+                    .nextInt(1, Integer.MAX_VALUE);
+            final PositiveInt actual =
+                    PositiveInt.Companion.createOrNull(number);
             Assertions.assertNotNull(actual);
+        }
+
+        @Test
+        public void createOrNull_should_pass_with_a_Number_that_equals_zero() {
+            final PositiveInt actual = PositiveInt.Companion.createOrNull(0);
+            Assertions.assertNotNull(actual);
+        }
+
+        @Test
+        public void createOrNull_should_fail_with_a_Number_that_is_less_than_zero() {
+            final Number number = new Random()
+                    .nextInt(Integer.MIN_VALUE, 0);
+            final PositiveInt actual =
+                    PositiveInt.Companion.createOrNull(number);
+            Assertions.assertNull(actual);
         }
     }
 }
