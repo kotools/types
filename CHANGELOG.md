@@ -83,8 +83,6 @@ Deprecation promotion of the following annotations to error (#333):
 
 Thanks to @LVMVRQUXL and @jmfayard for contributing to this new release. 🙏
 
-Happy coding with Kotools Types! 🎉
-
 ## 🔖 Releases
 
 | Version | Release date |
