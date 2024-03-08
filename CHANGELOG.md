@@ -46,6 +46,8 @@ All notable changes to this project will be documented in this file.
   (by @LVMVRQUXL in #256).
 - References to the corresponding factory functions for eligible types in the
   [API reference] (by @LVMVRQUXL in cfc99b213).
+- Tagline suggested by @jmfayard in the [README](README.md) documentation
+  (#338).
 
 ### ♻️ Changed
 
