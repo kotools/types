@@ -83,9 +83,10 @@ public value class StrictlyNegativeInt private constructor(
         public val max: StrictlyNegativeInt by lazy { create(-1) }
 
         /**
-         * Creates a [StrictlyNegativeInt] from the specified [number], or
-         * throws an [IllegalArgumentException] if the [number] is greater than
-         * or equals zero.
+         * Creates a [StrictlyNegativeInt] from the specified [number], which
+         * may involve rounding or truncation, or throws an
+         * [IllegalArgumentException] if the [number] is greater than or equals
+         * zero.
          *
          * Here's an example of calling this function from Kotlin code:
          *
@@ -111,8 +112,9 @@ public value class StrictlyNegativeInt private constructor(
         }
 
         /**
-         * Creates a [StrictlyNegativeInt] from the specified [number], or
-         * returns `null` if the [number] is greater than or equals zero.
+         * Creates a [StrictlyNegativeInt] from the specified [number], which
+         * may involve rounding or truncation, or returns `null` if the [number]
+         * is greater than or equals zero.
          *
          * Here's an example of calling this function from Kotlin code:
          *
