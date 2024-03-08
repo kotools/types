@@ -12,6 +12,9 @@
 [![macOS arm64 Platform][macos-arm64-platform-badge]][kotlin-native]
 [![MinGW x64 Platform][mingw-x64-platform-badge]][kotlin-native]
 
+> "Kool Types for Kotlin Multiplatform." -
+> [@jmfayard](https://github.com/jmfayard)
+
 Type safety is a must-have nowadays and reducing runtime errors to compile-time
 errors feels like magic!
 But even with the [Kotlin] type system, we still have runtime issues that can
