@@ -83,9 +83,10 @@ public value class StrictlyPositiveInt private constructor(
         public val max: StrictlyPositiveInt by lazy { create(Int.MAX_VALUE) }
 
         /**
-         * Creates a [StrictlyPositiveInt] from the specified [number], or
-         * throws an [IllegalArgumentException] if the [number] is less than or
-         * equals zero.
+         * Creates a [StrictlyPositiveInt] from the specified [number], which
+         * may involve rounding or truncation, or throws an
+         * [IllegalArgumentException] if the [number] is less than or equals
+         * zero.
          *
          * Here's an example of calling this function from Kotlin code:
          *
@@ -111,8 +112,9 @@ public value class StrictlyPositiveInt private constructor(
         }
 
         /**
-         * Creates a [StrictlyPositiveInt] from the specified [number], or
-         * returns `null` if the [number] is less than or equals zero.
+         * Creates a [StrictlyPositiveInt] from the specified [number], which
+         * may involve rounding or truncation, or returns `null` if the [number]
+         * is less than or equals zero.
          *
          * Here's an example of calling this function from Kotlin code:
          *
