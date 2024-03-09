@@ -85,8 +85,9 @@ public sealed interface NonZeroInt : AnyInt {
         )
 
         /**
-         * Creates a [NonZeroInt] from the specified [number], or throws an
-         * [IllegalArgumentException] if the [number] equals zero.
+         * Creates a [NonZeroInt] from the specified [number], which may involve
+         * rounding or truncation, or throws an [IllegalArgumentException] if
+         * the [number] equals zero.
          *
          * <br>
          * <details open>
