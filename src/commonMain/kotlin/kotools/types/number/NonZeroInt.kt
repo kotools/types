@@ -130,8 +130,9 @@ public sealed interface NonZeroInt : AnyInt {
         }
 
         /**
-         * Creates a [NonZeroInt] from the specified [number], or returns `null`
-         * if the [number] equals zero.
+         * Creates a [NonZeroInt] from the specified [number], which may involve
+         * rounding or truncation, or returns `null` if the [number] equals
+         * zero.
          *
          * <br>
          * <details open>
