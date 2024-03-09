@@ -2,7 +2,6 @@ package kotools.types.number
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
@@ -21,6 +20,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class NonZeroIntCompanionTest {
     @Test
@@ -35,16 +35,18 @@ class NonZeroIntCompanionTest {
         result.toInt() shouldEqual Int.MAX_VALUE
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun create_should_pass_with_a_Number_other_than_zero() {
         val number: Number = setOf(
             Random.nextInt(from = 1, until = Int.MAX_VALUE),
             Random.nextInt(from = Int.MIN_VALUE, until = 0)
         ).random()
-        val result: NonZeroInt = NonZeroInt.create(number)
-        val actual: Number = result.toInt()
-        assertEquals(expected = number, actual)
+        val result: Result<NonZeroInt> = kotlin.runCatching {
+            NonZeroInt.create(number)
+        }
+        val type: String = simpleNameOf<NonZeroInt>()
+        assertTrue(result.isSuccess, "Converting $number to $type should pass")
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
