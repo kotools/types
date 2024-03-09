@@ -1,5 +1,6 @@
 package kotools.types.number;
 
+import kotools.types.internal.ErrorMessage;
 import kotools.types.internal.ErrorMessageKt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
@@ -34,9 +35,9 @@ public class PositiveIntTest {
                     IllegalArgumentException.class,
                     () -> PositiveInt.Companion.create(number)
             );
-            final String actual = exception.getMessage();
-            final String expected = ErrorMessageKt.shouldBePositive(number)
-                    .toString();
+            final ErrorMessage actual = ErrorMessageKt.ErrorMessage(exception);
+            final ErrorMessage expected =
+                    ErrorMessageKt.shouldBePositive(number);
             Assertions.assertEquals(expected, actual);
         }
 
