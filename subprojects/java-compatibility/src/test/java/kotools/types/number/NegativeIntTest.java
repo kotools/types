@@ -1,5 +1,7 @@
 package kotools.types.number;
 
+import kotools.types.internal.ErrorMessage;
+import kotools.types.internal.ErrorMessageKt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -29,10 +31,14 @@ public class NegativeIntTest {
         public void create_should_fail_with_a_Number_that_is_greater_than_zero() {
             final Number number = new Random()
                     .nextInt(1, Integer.MAX_VALUE);
-            Assertions.assertThrows(
+            final IllegalArgumentException exception = Assertions.assertThrows(
                     IllegalArgumentException.class,
                     () -> NegativeInt.Companion.create(number)
             );
+            final ErrorMessage actual = ErrorMessageKt.ErrorMessage(exception);
+            final ErrorMessage expected =
+                    ErrorMessageKt.shouldBeNegative(number);
+            Assertions.assertEquals(expected, actual);
         }
 
         @Test
