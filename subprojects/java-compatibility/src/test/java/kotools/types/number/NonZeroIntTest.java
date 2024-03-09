@@ -37,9 +37,21 @@ public class NonZeroIntTest {
         }
 
         @Test
-        public void createOrNull_should_pass() {
-            final NonZeroInt actual = NonZeroInt.Companion.createOrNull(23);
+        public void createOrNull_should_pass_with_a_Number_other_than_zero() {
+            final Random random = new Random();
+            int value;
+            do {
+                value = random.nextInt();
+            } while (value == 0);
+            final Number number = value;
+            final NonZeroInt actual = NonZeroInt.Companion.createOrNull(number);
             Assertions.assertNotNull(actual);
+        }
+
+        @Test
+        public void createOrNull_should_fail_with_a_Number_that_equals_zero() {
+            final NonZeroInt actual = NonZeroInt.Companion.createOrNull(0);
+            Assertions.assertNull(actual);
         }
     }
 }
