@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
 import java.util.Set;
 
 public class EmailAddressTest {
@@ -63,27 +64,32 @@ public class EmailAddressTest {
     }
 
     @Test
-    public void equals_should_pass() {
-        final EmailAddress first =
-                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
-        Assertions.assertNotNull(first);
-        final EmailAddress second =
-                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
-        Assertions.assertNotNull(second);
+    public void structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
+        final Object[] validTexts = VALID_TEXTS.toArray();
+        final int index = new Random()
+                .nextInt(validTexts.length);
+        final String text = validTexts[index].toString();
+        final EmailAddress first = EmailAddress.Companion.create(text);
+        final EmailAddress second = EmailAddress.Companion.create(text);
         Assertions.assertEquals(first, second);
+        final int hashCode1 = first.hashCode();
+        final int hashCode2 = second.hashCode();
+        Assertions.assertEquals(hashCode1, hashCode2);
     }
 
     @Test
-    public void hashCode_should_pass() {
-        final EmailAddress first =
-                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
-        Assertions.assertNotNull(first);
-        final EmailAddress second =
-                EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
-        Assertions.assertNotNull(second);
-        final int firstHashCode = first.hashCode();
-        final int secondHashCode = second.hashCode();
-        Assertions.assertEquals(firstHashCode, secondHashCode);
+    public void structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
+        final Object[] validTexts = VALID_TEXTS.toArray();
+        final int index = new Random()
+                .nextInt(validTexts.length);
+        final String text1 = validTexts[index].toString();
+        final EmailAddress first = EmailAddress.Companion.create(text1);
+        final String text2 = "support.%s".formatted(text1);
+        final EmailAddress second = EmailAddress.Companion.create(text2);
+        Assertions.assertNotEquals(first, second);
+        final int hashCode1 = first.hashCode();
+        final int hashCode2 = second.hashCode();
+        Assertions.assertNotEquals(hashCode1, hashCode2);
     }
 
     @Test
