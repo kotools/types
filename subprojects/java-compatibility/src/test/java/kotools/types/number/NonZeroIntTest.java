@@ -19,9 +19,7 @@ public class NonZeroIntTest {
                 value = random.nextInt();
             } while (value == 0);
             final Number number = value;
-            Assertions.assertDoesNotThrow(
-                    () -> NonZeroInt.Companion.create(number)
-            );
+            NonZeroInt.Companion.create(number);
         }
 
         @Test

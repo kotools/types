@@ -14,9 +14,7 @@ public class StrictlyNegativeDoubleTest {
         public void create_should_pass_with_a_Number_that_is_less_than_zero() {
             final Random random = new Random();
             final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-            Assertions.assertDoesNotThrow(
-                    () -> StrictlyNegativeDouble.Companion.create(number)
-            );
+            StrictlyNegativeDouble.Companion.create(number);
         }
 
         @Test

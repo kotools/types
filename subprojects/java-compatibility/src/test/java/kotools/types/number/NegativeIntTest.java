@@ -15,16 +15,12 @@ public class NegativeIntTest {
         public void create_should_pass_with_a_Number_that_is_less_than_zero() {
             final int number = new Random()
                     .nextInt(Integer.MIN_VALUE, 0);
-            Assertions.assertDoesNotThrow(
-                    () -> NegativeInt.Companion.create(number)
-            );
+            NegativeInt.Companion.create(number);
         }
 
         @Test
         public void create_should_pass_with_a_Number_that_equals_zero() {
-            Assertions.assertDoesNotThrow(
-                    () -> NegativeInt.Companion.create(0)
-            );
+            NegativeInt.Companion.create(0);
         }
 
         @Test
