@@ -146,15 +146,11 @@ public class EmailAddress private constructor(private val text: String) {
          * [text].
          */
         public fun create(text: String): EmailAddress {
-            require(text matches regex) { creationErrorMessage(text) }
+            require(text matches regex) {
+                ErrorMessage.invalidEmailAddress(text)
+            }
             return EmailAddress(text)
         }
-
-        @JvmSynthetic
-        internal fun creationErrorMessage(value: String): ErrorMessage =
-            ErrorMessage(
-                "Email address should match $regex (tried with $value)"
-            )
 
         /**
          * Creates an email address from the specified [text], or returns `null`

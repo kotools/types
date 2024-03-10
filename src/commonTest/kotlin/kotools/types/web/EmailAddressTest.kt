@@ -57,10 +57,9 @@ class EmailAddressCompanionTest {
         Texts.invalid.forEach {
             val exception: IllegalArgumentException =
                 assertFailsWith { EmailAddress.create(it) }
-            val actualMessage = ErrorMessage(exception)
-            val expectedMessage: ErrorMessage =
-                EmailAddress.creationErrorMessage(it)
-            assertEquals(expectedMessage, actualMessage)
+            val actual = ErrorMessage(exception)
+            val expected: ErrorMessage = ErrorMessage.invalidEmailAddress(it)
+            assertEquals(expected, actual)
         }
 
     @Test
