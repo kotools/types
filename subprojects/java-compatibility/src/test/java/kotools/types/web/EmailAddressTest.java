@@ -44,10 +44,21 @@ public class EmailAddressTest {
         }
 
         @Test
-        public void createOrNull_should_pass() {
-            final EmailAddress actual =
-                    EmailAddress.Companion.createOrNull(TEXT_SAMPLE);
-            Assertions.assertNotNull(actual);
+        public void createOrNull_should_pass_with_a_valid_String() {
+            VALID_TEXTS.forEach(text -> {
+                final EmailAddress actual =
+                        EmailAddress.Companion.createOrNull(text);
+                Assertions.assertNotNull(actual);
+            });
+        }
+
+        @Test
+        public void createOrNull_should_fail_with_an_invalid_String() {
+            INVALID_TEXTS.forEach(text -> {
+                final EmailAddress actual =
+                        EmailAddress.Companion.createOrNull(text);
+                Assertions.assertNull(actual);
+            });
         }
     }
 
