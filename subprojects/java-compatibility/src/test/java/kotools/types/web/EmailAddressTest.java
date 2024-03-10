@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class EmailAddressTest {
-    private static final String TEXT_SAMPLE = "contact@kotools.org";
     private static final Set<String> VALID_TEXTS =
             Set.of("contact@kotools.org", "cont.act@kotools.org");
     private static final Set<String> INVALID_TEXTS = Set.of(
@@ -94,11 +93,14 @@ public class EmailAddressTest {
 
     @Test
     public void toString_should_pass() {
-        final String expected = TEXT_SAMPLE;
+        final Object[] validTexts = VALID_TEXTS.toArray();
+        final int index = new Random()
+                .nextInt(validTexts.length);
+        final String text = validTexts[index].toString();
         final EmailAddress address =
-                EmailAddress.Companion.createOrNull(expected);
+                EmailAddress.Companion.createOrNull(text);
         Assertions.assertNotNull(address);
         final String actual = address.toString();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(text, actual);
     }
 }
