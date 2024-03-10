@@ -4,7 +4,7 @@ import org.gradle.api.Task
 import java.util.Locale
 
 internal enum class TaskGroup {
-    BUILD, DOCUMENTATION, HELP;
+    BUILD, DOCUMENTATION;
 
     override fun toString(): String {
         val locale: Locale = Locale.getDefault()
