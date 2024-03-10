@@ -14,10 +14,6 @@ plugins {
     id("kotools.types.publication")
 }
 
-group = "org.kotools"
-
-repositories.mavenCentral()
-
 apiValidation.apiDumpDirectory = "src/api"
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
@@ -37,8 +33,6 @@ dependencies {
 
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
-
-tasks.register("unit")
 
 tasks.jsBrowserTest.configure { useMocha() }
 
