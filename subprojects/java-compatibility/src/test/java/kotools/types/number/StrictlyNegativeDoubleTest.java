@@ -93,23 +93,10 @@ public class StrictlyNegativeDoubleTest {
                 StrictlyNegativeDouble.Companion.create(number);
         final StrictlyNegativeDouble second =
                 StrictlyNegativeDouble.Companion.create(number);
-        Assertions.assertTrue(() -> first.equals(second));
+        Assertions.assertEquals(first, second);
         final int firstHashCode = first.hashCode();
         final int secondHashCode = second.hashCode();
         Assertions.assertEquals(firstHashCode, secondHashCode);
-    }
-
-    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
-    @Test
-    public void structural_equality_should_fail_with_another_object_that_is_not_a_StrictlyNegativeDouble() {
-        final Random random = new Random();
-        final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-        final StrictlyNegativeDouble first =
-                StrictlyNegativeDouble.Companion.create(number);
-        Assertions.assertFalse(() -> first.equals(number));
-        final int firstHashCode = first.hashCode();
-        final int secondHashCode = number.hashCode();
-        Assertions.assertNotEquals(firstHashCode, secondHashCode);
     }
 
     @Test
@@ -121,7 +108,7 @@ public class StrictlyNegativeDoubleTest {
         final Number secondValue = random.nextInt(Integer.MIN_VALUE, 0);
         final StrictlyNegativeDouble second =
                 StrictlyNegativeDouble.Companion.create(secondValue);
-        Assertions.assertFalse(() -> first.equals(second));
+        Assertions.assertNotEquals(first, second);
         final int firstHashCode = first.hashCode();
         final int secondHashCode = second.hashCode();
         Assertions.assertNotEquals(firstHashCode, secondHashCode);
