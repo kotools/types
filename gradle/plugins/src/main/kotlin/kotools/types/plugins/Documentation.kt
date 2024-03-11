@@ -53,13 +53,13 @@ private fun TaskContainer.dokkaTasks(project: Project): Unit =
         }
     }
 
+private val Project.logoIcon: File
+    get() = rootDir.resolve("dokka/logo-icon.svg")
+
 private val Project.copyrightNotice: String
     get() = rootDir.resolve("LICENSE.txt").useLines { lines: Sequence<String> ->
         lines.first { it.startsWith("Copyright (c)") }
     }
-
-private val Project.logoIcon: File
-    get() = rootDir.resolve("dokka/logo-icon.svg")
 
 private val Project.archivedApiReferences: File
     get() = project.layout.buildDirectory.dir("api-references")
