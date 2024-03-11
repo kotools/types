@@ -79,6 +79,10 @@ Deprecation promotion of the following annotations to error (#333):
 - `ExperimentalResultApi`
 - `ExperimentalTextApi`
 
+### 🔥 Removed
+
+The `NotBlankString.plus(NotBlankString)` **experimental** operation (#542).
+
 ---
 
 Thanks to @LVMVRQUXL and @jmfayard for contributing to this new release. 🙏
