@@ -1,6 +1,5 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
