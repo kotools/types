@@ -1,7 +1,6 @@
-plugins {
-    java
-    id("kotools.types.base")
-}
+plugins { java }
+
+repositories.mavenCentral()
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17 // Java language

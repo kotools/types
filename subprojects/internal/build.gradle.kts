@@ -9,6 +9,10 @@ plugins {
     id("kotools.types.publication")
 }
 
+group = "org.kotools"
+
+repositories.mavenCentral()
+
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
