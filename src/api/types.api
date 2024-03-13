@@ -174,10 +174,6 @@ public final class kotools/types/experimental/NonZeroIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/NonZeroInt;)Lkotools/types/number/NonZeroInt;
 }
 
-public final class kotools/types/experimental/NotBlankStringKt {
-	public static final synthetic fun plus-HjNBwFg (CLjava/lang/String;)Ljava/lang/String;
-}
-
 public final class kotools/types/experimental/NotEmptyRange {
 	public static final field Companion Lkotools/types/experimental/NotEmptyRange$Companion;
 	public synthetic fun <init> (Lkotools/types/experimental/Bound;Lkotools/types/experimental/Bound;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
