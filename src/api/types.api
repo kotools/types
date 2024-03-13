@@ -465,6 +465,7 @@ public final class kotools/types/text/NotBlankString : java/lang/Comparable {
 	public static final fun getLength-qaD5h0E (Ljava/lang/String;)I
 	public fun hashCode ()I
 	public static fun hashCode-impl (Ljava/lang/String;)I
+	public static final synthetic fun plus-ORnXyy4 (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()Ljava/lang/String;

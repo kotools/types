@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - The `create(Map<K, V>)`, the `createOrNull(Map<K, V>)` and
   the `of(Pair<K, V>, vararg Pair<K, V>)` **experimental** factory functions in
   `NotEmptyMap.Companion` (#354).
+- The `NotBlankString.plus(Any)` **experimental** operation (#543).
 - Documentation of dependency compatibility (#288).
 - The documentation of the serialization and the deserialization processes in
   the [API reference] for the following types: `AnyInt`, `NonZeroInt`,

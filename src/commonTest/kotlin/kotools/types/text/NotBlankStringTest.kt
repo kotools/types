@@ -5,7 +5,6 @@ package kotools.types.text
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
@@ -132,6 +131,18 @@ class NotBlankStringTest {
             .getOrThrow()
         val result: Int = x compareTo y
         assertTrue { result > ZeroInt.toInt() }
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun plus_should_pass() {
+        val first: NotBlankString = "hello".toNotBlankString()
+            .getOrThrow()
+        val second: Any = " world"
+        val actual: NotBlankString = first + second
+        val expected: NotBlankString = "$first$second".toNotBlankString()
+            .getOrThrow()
+        assertEquals(expected, actual)
     }
 }
 

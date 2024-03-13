@@ -152,6 +152,30 @@ public value class NotBlankString private constructor(
     override infix fun compareTo(other: NotBlankString): Int =
         "$this".compareTo("$other")
 
+    /**
+     * Concatenates this string with the string representation of the [other]
+     * object.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val text: NotBlankString = "hello".toNotBlankString()
+     *     .getOrThrow()
+     * val message: NotBlankString = text + " world"
+     * println(message) // hello world
+     * ```
+     *
+     * The [NotBlankString] type being an
+     * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+     * this function is not available yet for Java users.
+     */
+    @ExperimentalKotoolsTypesApi
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @JvmSynthetic
+    public operator fun plus(other: Any): NotBlankString = value.plus("$other")
+        .toNotBlankString()
+        .getOrThrow()
+
     /** Returns this string as a [String]. */
     override fun toString(): String = value
 }
