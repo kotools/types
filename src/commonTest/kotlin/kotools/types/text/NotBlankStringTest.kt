@@ -1,5 +1,3 @@
-@file:OptIn(InternalKotoolsTypesApi::class)
-
 package kotools.types.text
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -43,6 +41,7 @@ class NotBlankStringCompanionTest {
         NotBlankString.create(value)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun create_should_fail_with_an_object_having_a_blank_string_representation() {
         val value: Any = StringExample.BLANK
@@ -83,6 +82,7 @@ class NotBlankStringTest {
         "${result.getOrThrow()}" shouldEqual StringExample.NOT_BLANK
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun toNotBlankString_should_fail_with_a_blank_String() {
         val result: Result<NotBlankString> =
@@ -148,6 +148,7 @@ class NotBlankStringTest {
 
 class NotBlankStringSerializerTest {
     @ExperimentalSerializationApi
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_NotBlankString() {
         val actual: String = serializer<NotBlankString>().descriptor.serialName
@@ -183,6 +184,7 @@ class NotBlankStringSerializerTest {
         assertEquals(expected, actual)
     }
 
+    @OptIn(InternalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_fail_with_a_blank_String() {
         val encoded: String = Json.encodeToString(StringExample.BLANK)
