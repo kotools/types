@@ -35,27 +35,6 @@ public operator fun NotBlankString.plus(other: String): NotBlankString {
 }
 
 /**
- * Concatenates this string with the [other] character.
- *
- * Here's an example of calling this function from Kotlin code:
- *
- * ```kotlin
- * val first: NotBlankString = "hell".toNotBlankString()
- *     .getOrThrow()
- * val result: NotBlankString = first + 'o'
- * println(result) // hello
- * ```
- *
- * Please note that this function is not available yet for Java users.
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
-@JvmSynthetic
-@OptIn(InternalKotoolsTypesApi::class)
-public operator fun NotBlankString.plus(other: Char): NotBlankString =
-    plus("$other")
-
-/**
  * Concatenates this character with the [other] string.
  *
  * Here's an example of calling this function from Kotlin code:

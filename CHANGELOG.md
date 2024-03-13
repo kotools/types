@@ -81,7 +81,8 @@ Deprecation promotion of the following annotations to error (#333):
 
 ### 🔥 Removed
 
-The `NotBlankString.plus(NotBlankString)` **experimental** operation (#542).
+The `plus(NotBlankString)` and the `plus(Char)` **experimental** operations of
+`NotBlankString` (#542).
 
 ---
 
