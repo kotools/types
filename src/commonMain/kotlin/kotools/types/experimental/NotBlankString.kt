@@ -3,36 +3,9 @@ package kotools.types.experimental
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.unexpectedCreationError
 import kotools.types.text.NotBlankString
 import kotools.types.text.toNotBlankString
 import kotlin.jvm.JvmSynthetic
-
-/**
- * Concatenates this string with the [other] one.
- *
- * Here's an example of calling this function from Kotlin code:
- *
- * ```kotlin
- * val first: NotBlankString = "hello".toNotBlankString()
- *     .getOrThrow()
- * val second = " world"
- * val result: NotBlankString = first + second
- * println(result) // hello world
- * ```
- *
- * Please note that this function is not available yet for Java users.
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
-@JvmSynthetic
-@OptIn(InternalKotoolsTypesApi::class)
-public operator fun NotBlankString.plus(other: String): NotBlankString {
-    val value: String = toString() + other
-    return value.toNotBlankString()
-        .getOrNull()
-        ?: unexpectedCreationError<NotBlankString>(value)
-}
 
 /**
  * Concatenates this character with the [other] string.
