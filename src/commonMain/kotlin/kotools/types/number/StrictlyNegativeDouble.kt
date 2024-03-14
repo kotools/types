@@ -46,7 +46,7 @@ import kotools.types.internal.simpleNameOf
  * </details>
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_5_0)
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyNegativeDoubleSerializer::class)
 public class StrictlyNegativeDouble private constructor(

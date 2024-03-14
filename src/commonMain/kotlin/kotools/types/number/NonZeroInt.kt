@@ -123,7 +123,7 @@ public sealed interface NonZeroInt : AnyInt {
          * [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun create(number: Number): NonZeroInt {
             val result: NonZeroInt? = createOrNull(number)
             return requireNotNull(result, ErrorMessage.Companion::zeroNumber)
@@ -167,7 +167,7 @@ public sealed interface NonZeroInt : AnyInt {
          * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun createOrNull(number: Number): NonZeroInt? {
             val value: Int = number.toInt()
             return when {

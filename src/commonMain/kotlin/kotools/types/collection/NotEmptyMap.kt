@@ -152,7 +152,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * [map].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> create(map: Map<K, V>): NotEmptyMap<K, V> {
             val result: NotEmptyMap<K, V>? = createOrNull(map)
@@ -195,7 +195,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * an exception instead of returning `null` in case of invalid [map].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? = map
             .takeIf(Map<K, V>::isNotEmpty)
@@ -219,7 +219,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * this function is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> of(
             head: Pair<K, V>,

@@ -91,7 +91,7 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun create(value: Any?): NotBlankString {
             val text: String = value.toString()
@@ -122,7 +122,7 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun createOrNull(value: Any?): NotBlankString? {
             val text: String = value.toString()
@@ -170,7 +170,7 @@ public value class NotBlankString private constructor(
      * this function is not available yet for Java users.
      */
     @ExperimentalKotoolsTypesApi
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
     @JvmSynthetic
     public operator fun plus(other: Any): NotBlankString = value.plus("$other")
         .toNotBlankString()

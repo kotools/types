@@ -104,7 +104,7 @@ public value class StrictlyNegativeInt private constructor(
          * invalid [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun create(number: Number): StrictlyNegativeInt {
             val result: StrictlyNegativeInt? = createOrNull(number)
@@ -133,7 +133,7 @@ public value class StrictlyNegativeInt private constructor(
          * [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun createOrNull(number: Number): StrictlyNegativeInt? {
             val value: Int = number.toInt()

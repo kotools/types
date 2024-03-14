@@ -119,7 +119,7 @@ public sealed interface PositiveInt : AnyInt {
          * [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun create(number: Number): PositiveInt {
             val result: PositiveInt? = createOrNull(number)
             return requireNotNull(result, number::shouldBePositive)
@@ -163,7 +163,7 @@ public sealed interface PositiveInt : AnyInt {
          * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun createOrNull(number: Number): PositiveInt? {
             val value: Int = number.toInt()
             return when {

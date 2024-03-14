@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+## 4.5.0
+
 ### ✨ Added
 
 - Support macOS arm64 systems with Kotlin Native (#414).
