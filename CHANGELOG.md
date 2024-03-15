@@ -16,6 +16,15 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### 🗑️ Deprecated
+
+Deprecation promotion of the `ExperimentalCollectionApi` annotation to hidden
+(#334).
+
+---
+
+Thanks to @LVMVRQUXL for contributing to this new release. 🙏
+
 ## 🔖 Releases
 
 | Version | Release date |
