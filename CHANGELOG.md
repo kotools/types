@@ -18,8 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🗑️ Deprecated
 
-Deprecation promotion of the `ExperimentalCollectionApi` annotation to hidden
-(#334).
+Deprecation promotion of the `ExperimentalCollectionApi` and the
+`ExperimentalNumberApi` annotations to hidden (#334).
 
 ---
 
