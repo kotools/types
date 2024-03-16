@@ -119,11 +119,12 @@ public annotation class ExperimentalResultApi
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     ),
-    DeprecationLevel.ERROR
+    DeprecationLevel.HIDDEN
 )
 @DeprecatedSince(
     warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.V4_5_0
+    errorSince = KotoolsTypesVersion.V4_5_0,
+    hiddenSince = KotoolsTypesVersion.Unreleased
 )
 @MustBeDocumented
 @OptIn(InternalKotoolsTypesApi::class)

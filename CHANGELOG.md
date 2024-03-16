@@ -19,8 +19,8 @@ All notable changes to this project will be documented in this file.
 ### 🗑️ Deprecated
 
 Deprecation promotion of the following annotations to hidden (#334):
-`ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi` and
-`ExperimentalResultApi`.
+`ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
+`ExperimentalResultApi` and `ExperimentalTextApi`.
 
 ---
 
