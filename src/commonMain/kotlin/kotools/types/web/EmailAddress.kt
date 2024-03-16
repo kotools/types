@@ -98,11 +98,8 @@ public class EmailAddress private constructor(private val text: String) {
         public val regex: Regex = run {
             val localPart = Regex("[A-Za-z]+(?:\\.[A-Za-z]+)*")
             val domainLabel = Regex("[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]")
-            val domain =
-                Regex("(?:${domainLabel.pattern}\\.)*${domainLabel.pattern}")
-            Regex(
-                "^${localPart.pattern}${SpecialChar.AtSign}${domain.pattern}\$"
-            )
+            val domain = Regex("(?:$domainLabel\\.)*$domainLabel")
+            Regex("^$localPart${SpecialChar.AtSign}$domain\$")
         }
 
         /**
