@@ -1,6 +1,7 @@
 ---
 name: 💡 Topic
 about: Engage on a specific topic.
+assignees: LVMVRQUXL
 labels: topic
 ---
 
