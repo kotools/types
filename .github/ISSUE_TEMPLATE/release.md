@@ -2,6 +2,7 @@
 name: 🔖 Release
 about: Publish a new version.
 title: 🔖 Release version $VERSION
+assignees: LVMVRQUXL
 labels: release
 ---
 
