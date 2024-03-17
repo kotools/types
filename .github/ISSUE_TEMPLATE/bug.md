@@ -2,6 +2,7 @@
 name: 🐛 Bug
 about: Report a bug.
 title: 🐛 $TITLE
+assignees: LVMVRQUXL
 labels: bug
 ---
 
