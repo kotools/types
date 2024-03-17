@@ -53,6 +53,137 @@ import kotlin.jvm.JvmSynthetic
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(EmailAddressSerializer::class)
 public class EmailAddress private constructor(private val text: String) {
+    // -------------------------- Structural equality --------------------------
+
+    /**
+     * Returns `true` if the [other] object is an [EmailAddress] having the same
+     * string representation as this email address, or returns `false`
+     * otherwise.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val first: EmailAddress = EmailAddress.create("contact@kotools.org")
+     * val second: EmailAddress = EmailAddress.create("$first")
+     * val result: Boolean = first == second // or first.equals(second)
+     * println(result) // true
+     * ```
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final String text = "contact@kotools.org";
+     * final EmailAddress first = EmailAddress.Companion.create(text);
+     * final EmailAddress second = EmailAddress.Companion.create(text);
+     * final boolean result = first.equals(second);
+     * System.out.println(result); // true
+     * ```
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean = when {
+        this === other -> true
+        other == null -> false
+        else -> other is EmailAddress && this.text == other.text
+    }
+
+    /**
+     * Returns a hash code value for this email address.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val text = "contact@kotools.org"
+     * val first: Int = EmailAddress.create(text)
+     *     .hashCode()
+     * val second: Int = EmailAddress.create("$first")
+     *     .hashCode()
+     * val result: Boolean = first == second
+     * println(result) // true
+     * ```
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final String text = "contact@kotools.org";
+     * final EmailAddress first = EmailAddress.Companion.create(text);
+     * final EmailAddress second = EmailAddress.Companion.create(text);
+     * final int firstHashCode = first.hashCode();
+     * final int secondHashCode = second.hashCode();
+     * final boolean result = firstHashCode == secondHashCode;
+     * System.out.println(result); // true
+     * ```
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = hashCodeOf(text)
+
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this email address.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val address: EmailAddress = EmailAddress.create("contact@kotools.org")
+     * val message = "$address" // or address.toString()
+     * println(message) // contact@kotools.org
+     * ```
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * ```java
+     * final EmailAddress address =
+     *         EmailAddress.Companion.create("contact@kotools.org");
+     * final String message = address.toString();
+     * System.out.println(message); // contact@kotools.org
+     * ```
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = text
+
+    // -------------------------------------------------------------------------
+
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {
         /**
@@ -192,135 +323,6 @@ public class EmailAddress private constructor(private val text: String) {
             if (text matches regex) EmailAddress(text)
             else null
     }
-
-    // -------------------------- Structural equality --------------------------
-
-    /**
-     * Returns `true` if the [other] object is an [EmailAddress] having the same
-     * string representation as this email address, or returns `false`
-     * otherwise.
-     *
-     * <br>
-     * <details open>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val first: EmailAddress = EmailAddress.create("contact@kotools.org")
-     * val second: EmailAddress = EmailAddress.create("$first")
-     * val result: Boolean = first == second // or first.equals(second)
-     * println(result) // true
-     * ```
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * ```java
-     * final String text = "contact@kotools.org";
-     * final EmailAddress first = EmailAddress.Companion.create(text);
-     * final EmailAddress second = EmailAddress.Companion.create(text);
-     * final boolean result = first.equals(second);
-     * System.out.println(result); // true
-     * ```
-     * </details>
-     */
-    @Suppress("RedundantModalityModifier")
-    final override fun equals(other: Any?): Boolean = when {
-        this === other -> true
-        other == null -> false
-        else -> other is EmailAddress && this.text == other.text
-    }
-
-    /**
-     * Returns a hash code value for this email address.
-     *
-     * <br>
-     * <details open>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val text = "contact@kotools.org"
-     * val first: Int = EmailAddress.create(text)
-     *     .hashCode()
-     * val second: Int = EmailAddress.create("$first")
-     *     .hashCode()
-     * val result: Boolean = first == second
-     * println(result) // true
-     * ```
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * ```java
-     * final String text = "contact@kotools.org";
-     * final EmailAddress first = EmailAddress.Companion.create(text);
-     * final EmailAddress second = EmailAddress.Companion.create(text);
-     * final int firstHashCode = first.hashCode();
-     * final int secondHashCode = second.hashCode();
-     * final boolean result = firstHashCode == secondHashCode;
-     * System.out.println(result); // true
-     * ```
-     */
-    @Suppress("RedundantModalityModifier")
-    final override fun hashCode(): Int = hashCodeOf(text)
-
-    // ------------------------------ Conversions ------------------------------
-
-    /**
-     * Returns the string representation of this email address.
-     *
-     * <br>
-     * <details open>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val address: EmailAddress = EmailAddress.create("contact@kotools.org")
-     * val message = "$address" // or address.toString()
-     * println(message) // contact@kotools.org
-     * ```
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * ```java
-     * final EmailAddress address =
-     *         EmailAddress.Companion.create("contact@kotools.org");
-     * final String message = address.toString();
-     * System.out.println(message); // contact@kotools.org
-     * ```
-     * </details>
-     */
-    @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = text
 }
 
 @ExperimentalKotoolsTypesApi
