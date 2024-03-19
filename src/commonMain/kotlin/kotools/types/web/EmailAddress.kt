@@ -227,10 +227,11 @@ public class EmailAddress private constructor(private val text: String) {
          */
         @get:JvmSynthetic
         public val regex: Regex = run {
-            val localPart = "[A-Za-z]+(?:\\.[A-Za-z]+)*"
+            val localPart = "[A-Za-z\\d]+(?:\\.[A-Za-z\\d]+)*"
+            val atSign: SpecialChar = SpecialChar.AtSign
             val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
             val domain = "(?:$domainLabel\\.)*$domainLabel"
-            Regex("^$localPart${SpecialChar.AtSign}$domain\$")
+            Regex("^$localPart$atSign$domain\$")
         }
 
         /**

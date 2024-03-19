@@ -16,6 +16,10 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+Support digits in local-part of `EmailAddress` (#581).
+
 ### 🗑️ Deprecated
 
 Deprecation promotion of the following annotations to hidden (#334):

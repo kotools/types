@@ -14,6 +14,7 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationErrorMessage
 import kotools.types.internal.simpleNameOf
+import kotools.types.internal.text.SpecialChar
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -23,7 +24,14 @@ import kotlin.test.assertNull
 
 private object Texts {
     val valid: Set<String> by lazy {
-        setOf("contact@kotools.org", "cont.act@kotools.org")
+        setOf(
+            "contact@kotools.org",
+            "cont.act@kotools.org",
+            "contact.123@kotools.org",
+            "123contact@kotools.org",
+            "contact123@kotools.org",
+            "cont123act@kotools.org"
+        )
     }
     val invalid: Set<String> by lazy {
         setOf(
@@ -42,9 +50,13 @@ class EmailAddressCompanionTest {
     @Test
     fun regex_should_pass() {
         val actual: Regex = EmailAddress.regex
-        val expected = Regex(
-            "^[A-Za-z]+(?:\\.[A-Za-z]+)*@(?:[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]\\.)*[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]\$"
-        )
+        val expected = kotlin.run {
+            val localPart = "[A-Za-z\\d]+(?:\\.[A-Za-z\\d]+)*"
+            val atSign: SpecialChar = SpecialChar.AtSign
+            val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
+            val domain = "(?:$domainLabel\\.)*$domainLabel"
+            Regex("^$localPart$atSign$domain\$")
+        }
         assertEquals(expected.pattern, actual.pattern)
     }
 
