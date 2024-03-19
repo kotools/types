@@ -192,7 +192,7 @@ public class EmailAddress private constructor(private val text: String) {
          * Based on
          * [RFC-5322](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1),
          * the underlying pattern is
-         * `^[A-Za-z]+(?:\.[A-Za-z]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$`.
+         * `^[A-Za-z\d]+(?:\.[A-Za-z\d]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$`.
          *
          * Here's the explanation associated to each symbol used in this regular
          * expression:
@@ -203,13 +203,13 @@ public class EmailAddress private constructor(private val text: String) {
          * code 65 to 90). Case-sensitive.
          * - `a-z` **Range.** Matches a character in the range "a" to "z" (char
          * code 97 to 122). Case-sensitive.
+         * - `\d` **Digit.** Matches any digit character (0-9).
          * - `+` **Quantifier.** Match 1 or more of the preceding token.
          * - `(?:)` **Non-capturing group.** Groups multiple tokens together
          * without creating a capture group.
          * - `\.` **Escaped character.** Matches a "." character (char code 46).
          * - `*` **Quantifier.** Match 0 or more of the preceding token.
          * - `@` **Character.** Match a "@" character (char code 64).
-         * - `\d` **Digit.** Matches any digit character (0-9).
          * - `-` **Character.** Matches a "-" character (char code 45).
          * - `{0,61}` **Quantifier.** Match between 0 and 61 of the preceding
          * token.
@@ -219,7 +219,7 @@ public class EmailAddress private constructor(private val text: String) {
          * Here's an example of calling this property from Kotlin code:
          *
          * ```kotlin
-         * println(EmailAddress.regex) // ^[A-Za-z]+(?:\.[A-Za-z]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$
+         * println(EmailAddress.regex) // ^[A-Za-z\d]+(?:\.[A-Za-z\d]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$
          * ```
          *
          * The [Regex] type being unavailable on Java, this property is not
