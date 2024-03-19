@@ -1,6 +1,7 @@
 ---
 name: 💡 Topic
 about: Engage on a specific topic.
+title: 💡 Topic
 assignees: LVMVRQUXL
 labels: topic
 ---
