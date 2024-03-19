@@ -19,7 +19,7 @@ This issue is blocked by the following ones:
 
 ## ✅ Checklist
 
-- [ ] Make $DECLARATION available for Java users, [test] its compatibility, update the public [API binaries] and update the [unreleased changelog].
+- [ ] Make $DECLARATION available for Java users, [test] its compatibility, update its documentation, update the public [API binaries] and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
 
 [api binaries]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-api-binaries
