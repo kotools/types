@@ -31,7 +31,8 @@ Deprecation promotion of the following annotations to hidden (#334):
 
 Renames the serializer of the `EmailAddress` type, moved to the
 `kotools.types.web` package in #377, from
-`kotools.types.experimental.EmailAddress` as `kotools.types.web.EmailAddress`.
+`kotools.types.experimental.EmailAddress` as `kotools.types.web.EmailAddress`
+(f557f746e).
 
 ---
 
