@@ -10,14 +10,30 @@ import java.util.Random;
 import java.util.Set;
 
 public class EmailAddressTest {
-    private static final Set<String> VALID_TEXTS =
-            Set.of("contact@kotools.org", "cont.act@kotools.org");
+    private static final Set<String> VALID_TEXTS = Set.of(
+            "contact@kotools.org",
+            "cont.act@kotools.org",
+            "cont-act@kotools.org",
+            "cont_act@kotools.org",
+            "contact.123@kotools.org",
+            "123contact@kotools.org",
+            "contact123@kotools.org",
+            "cont123act@kotools.org"
+    );
     private static final Set<String> INVALID_TEXTS = Set.of(
             " contact@kotools.org",
-            "cont-act@kotools.org",
             "contact-kotools.org",
             "contact@ko tools. org",
-            "contact@kotools_org"
+            "contact@kotools_org",
+            "cont..act@kotools_org",
+            "cont.-act@kotools_org",
+            "cont._act@kotools_org",
+            "cont-.act@kotools_org",
+            "cont--act@kotools_org",
+            "cont-_act@kotools_org",
+            "cont_.act@kotools_org",
+            "cont_-act@kotools_org",
+            "cont__act@kotools_org"
     );
 
     @Nested
