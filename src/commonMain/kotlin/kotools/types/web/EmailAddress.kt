@@ -338,7 +338,7 @@ private object EmailAddressDeserializationStrategy :
     @OptIn(InternalKotoolsTypesApi::class)
     override val descriptor: SerialDescriptor by lazy {
         val type: String = simpleNameOf<EmailAddress>()
-        val serialName = "${KotoolsTypesPackage.Experimental}.$type"
+        val serialName = "${KotoolsTypesPackage.Web}.$type"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
     }
 
