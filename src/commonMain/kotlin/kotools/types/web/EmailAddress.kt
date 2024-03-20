@@ -17,7 +17,6 @@ import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
-import kotools.types.internal.text.SpecialChar
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -229,10 +228,9 @@ public class EmailAddress private constructor(private val text: String) {
         @get:JvmSynthetic
         public val regex: Regex = run {
             val localPart = "[A-Za-z\\d]+(?:[-._][A-Za-z\\d]+)*"
-            val atSign: SpecialChar = SpecialChar.AtSign
             val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
             val domain = "(?:$domainLabel\\.)*$domainLabel"
-            Regex("^$localPart$atSign$domain\$")
+            Regex("^$localPart@$domain\$")
         }
 
         /**

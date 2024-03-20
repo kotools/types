@@ -14,7 +14,6 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationErrorMessage
 import kotools.types.internal.simpleNameOf
-import kotools.types.internal.text.SpecialChar
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -62,10 +61,9 @@ class EmailAddressCompanionTest {
         val actual: Regex = EmailAddress.regex
         val expected = kotlin.run {
             val localPart = "[A-Za-z\\d]+(?:[-._][A-Za-z\\d]+)*"
-            val atSign: SpecialChar = SpecialChar.AtSign
             val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
             val domain = "(?:$domainLabel\\.)*$domainLabel"
-            Regex("^$localPart$atSign$domain\$")
+            Regex("^$localPart@$domain\$")
         }
         assertEquals(expected.pattern, actual.pattern)
     }
