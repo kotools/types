@@ -27,6 +27,8 @@ private object Texts {
         setOf(
             "contact@kotools.org",
             "cont.act@kotools.org",
+            "cont-act@kotools.org",
+            "cont_act@kotools.org",
             "contact.123@kotools.org",
             "123contact@kotools.org",
             "contact123@kotools.org",
@@ -36,10 +38,18 @@ private object Texts {
     val invalid: Set<String> by lazy {
         setOf(
             " contact@kotools.org",
-            "cont-act@kotools.org",
             "contact-kotools.org",
             "contact@ko tools. org",
-            "contact@kotools_org"
+            "contact@kotools_org",
+            "cont..act@kotools_org",
+            "cont.-act@kotools_org",
+            "cont._act@kotools_org",
+            "cont-.act@kotools_org",
+            "cont--act@kotools_org",
+            "cont-_act@kotools_org",
+            "cont_.act@kotools_org",
+            "cont_-act@kotools_org",
+            "cont__act@kotools_org"
         )
     }
 }
@@ -51,7 +61,7 @@ class EmailAddressCompanionTest {
     fun regex_should_pass() {
         val actual: Regex = EmailAddress.regex
         val expected = kotlin.run {
-            val localPart = "[A-Za-z\\d]+(?:\\.[A-Za-z\\d]+)*"
+            val localPart = "[A-Za-z\\d]+(?:(?:\\.|-|_)[A-Za-z\\d]+)*"
             val atSign: SpecialChar = SpecialChar.AtSign
             val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
             val domain = "(?:$domainLabel\\.)*$domainLabel"

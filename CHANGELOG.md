@@ -18,7 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-Support digits in local-part of `EmailAddress` (#581).
+Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
+`EmailAddress` type (#581 and #583).
 
 ### 🗑️ Deprecated
 
