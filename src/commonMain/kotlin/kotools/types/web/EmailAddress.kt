@@ -192,7 +192,7 @@ public class EmailAddress private constructor(private val text: String) {
          * Based on
          * [RFC-5322](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1),
          * the underlying pattern is
-         * `^[A-Za-z\d]+(?:(?:\.|-|_)[A-Za-z\d]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$`.
+         * `^[A-Za-z\d]+(?:[-._][A-Za-z\d]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$`.
          *
          * Here's the explanation associated to each symbol used in this regular
          * expression:
@@ -207,10 +207,8 @@ public class EmailAddress private constructor(private val text: String) {
          * - `+` **Quantifier.** Match 1 or more of the preceding token.
          * - `(?:)` **Non-capturing group.** Groups multiple tokens together
          * without creating a capture group.
-         * - `\.` **Escaped character.** Matches a "." character (char code 46).
-         * - `|` **Alternation.** Acts like a boolean OR. Matches the expression
-         * before or after the `|`.
          * - `-` **Character.** Matches a "-" character (char code 45).
+         * - `.` **Character.** Matches a "." character (char code 46).
          * - `_` **Character.** Matches a "_" character (char code 95).
          * - `*` **Quantifier.** Match 0 or more of the preceding token.
          * - `@` **Character.** Match a "@" character (char code 64).
@@ -224,7 +222,7 @@ public class EmailAddress private constructor(private val text: String) {
          */
         @get:JvmSynthetic
         public val regex: Regex = run {
-            val localPart = "[A-Za-z\\d]+(?:(?:\\.|-|_)[A-Za-z\\d]+)*"
+            val localPart = "[A-Za-z\\d]+(?:[-._][A-Za-z\\d]+)*"
             val atSign: SpecialChar = SpecialChar.AtSign
             val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
             val domain = "(?:$domainLabel\\.)*$domainLabel"
