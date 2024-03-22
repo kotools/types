@@ -29,10 +29,8 @@ Deprecation promotion of the following annotations to hidden (#334):
 
 ### 🐛 Fixed
 
-Renames the serializer of the `EmailAddress` type, moved to the
-`kotools.types.web` package in #377, from
-`kotools.types.experimental.EmailAddress` as `kotools.types.web.EmailAddress`
-(f557f746e).
+Renames the `EmailAddress` type's serializer as `kotools.types.web.EmailAddress`
+(#599).
 
 ---
 
