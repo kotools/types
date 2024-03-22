@@ -5,6 +5,9 @@ title: 🔥 Deletion of $DECLARATION
 labels: feature
 ---
 
+> [!IMPORTANT]
+> This is an **incompatible binary change** that should be published in a **major** release according to our [evolution principles](https://github.com/kotools/types/blob/main/documentation/declarations-lifecycle.md).
+
 ## 📝 Description
 
 We would like to remove $DECLARATION.
