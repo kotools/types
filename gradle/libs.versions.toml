@@ -2,7 +2,7 @@
 dokka = "1.8.20"
 kotlin = "1.8.22"
 kotlinx-binary-compatibility-validator = "0.14.0"
-kotlinx-serialization = "1.5.1"
+kotlinx-serialization = "1.6.3"
 system-lambda = "1.2.1"
 
 # ---------------------------------- Plugins -----------------------------------
