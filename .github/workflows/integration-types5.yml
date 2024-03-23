@@ -65,8 +65,8 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Test project
-        run: ./gradlew :types5:jsTest
+      - name: Test 'library' project
+        run: ./gradlew :types5:library:jsTest
   jvm-checks:
     name: Kotlin/JVM checks
     needs: gradle-wrapper-validation
@@ -83,10 +83,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test samples project
         run: ./gradlew :types5:samples:test
-      - name: Test main project
-        run: ./gradlew :types5:jvmTest
-      - name: Check API binaries of main project
-        run: ./gradlew :types5:apiCheck
+      - name: Test 'library' project
+        run: ./gradlew :types5:library:jvmTest
+      - name: Check API binaries of 'library' project
+        run: ./gradlew :types5:library:apiCheck
   linux-test:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -101,8 +101,8 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Test project
-        run: ./gradlew :types5:linuxTest
+      - name: Test 'library' project
+        run: ./gradlew :types5:library:linuxTest
   macos-test:
     name: Kotlin Native tests for macOS
     needs: gradle-wrapper-validation
@@ -117,10 +117,10 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Test project on macOS x64
-        run: ./gradlew :types5:macosTest
-      - name: Test project on macOS arm64
-        run: ./gradlew :types5:macosArm64Test
+      - name: Test 'library' project on macOS x64
+        run: ./gradlew :types5:library:macosTest
+      - name: Test 'library' project on macOS arm64
+        run: ./gradlew :types5:library:macosArm64Test
   windows-test:
     name: Kotlin Native tests for Windows
     needs: gradle-wrapper-validation
@@ -135,5 +135,5 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Test project
-        run: ./gradlew :types5:windowsTest
+      - name: Test 'library' project
+        run: ./gradlew :types5:library:windowsTest

@@ -1,46 +1,13 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
-
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    id("kotools.types.multiplatform")
-    alias(libs.plugins.dokka)
-    id("kotools.types.documentation")
-    alias(libs.plugins.kotlinx.binary.compatibility.validator)
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.kotlinx.binary.compatibility.validator) apply false
 }
 
-group = "org.kotools"
-version = "0.1.0-SNAPSHOT"
+allprojects { repositories.mavenCentral() }
 
-repositories.mavenCentral()
-
-// ----------------------------- Plugin extensions -----------------------------
-
-apiValidation.apiDumpDirectory = "src/api"
-
-documentation {
-    license = layout.projectDirectory.file("../LICENSE.txt").asFile
-    logo = layout.projectDirectory.file("../dokka/logo-icon.svg").asFile
-    moduleName = "Kotools Types 5"
-}
-
-// ------------------------------- Dependencies --------------------------------
-
-dependencies {
-    commonMainImplementation(platform(libs.kotlin.bom))
-    commonTestImplementation(libs.kotlin.test)
-}
-
-// ----------------------------------- Tasks -----------------------------------
-
-tasks.jsBrowserTest.configure(KotlinJsTest::useMocha)
-
-tasks.withType<DokkaTask>().configureEach {
-    failOnWarning.set(true)
-    dokkaSourceSets.configureEach {
-        val moduleDocumentation: RegularFile =
-            layout.projectDirectory.file("module.md")
-        includes.setFrom(moduleDocumentation)
-        reportUndocumented.set(true)
-    }
+subprojects {
+    group = "org.kotools"
+    version = "0.1.0-SNAPSHOT"
 }

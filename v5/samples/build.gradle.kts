@@ -1,16 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-plugins { kotlin("jvm") }
-
-group = "org.kotools"
-
-repositories.mavenCentral()
+plugins { alias(libs.plugins.kotlin.jvm) }
 
 kotlin.explicitApi()
 
 dependencies {
-    implementation(rootProject)
+    implementation(projects.library)
     implementation(libs.kotlin.bom)
 
     testImplementation(libs.kotlin.test)
@@ -24,5 +20,4 @@ tasks.withType<KotlinCompile>().configureEach {
         jvmTarget.set(JvmTarget.JVM_17)
     }
 }
-
 tasks.test.configure(Test::useJUnitPlatform)
