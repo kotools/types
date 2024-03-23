@@ -20,6 +20,7 @@ on:
       - '**.java'
       - '**.kt*'
       - '!.github/workflows/gradle-wrapper-upgrade.yml'
+      - '!v5/**'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - qodana.yaml
