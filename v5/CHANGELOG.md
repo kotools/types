@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-The `Zero` type for representing the [zero] number.
+The `Zero` type for representing the [zero] number (a9ddcbae4).
 
 ---
 
