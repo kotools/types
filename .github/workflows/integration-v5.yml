@@ -1,0 +1,137 @@
+name: Integration (v5)
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/integration-v5.yml
+      - gradle/libs.versions.toml
+      - qodana.yaml
+      - v5/**/*gradle*
+      - v5/**/*.java
+      - v5/**/*.kt*
+      - v5/src/**/*.api
+      - yarn.lock
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/integration-v5.yml
+      - gradle/libs.versions.toml
+      - qodana.yaml
+      - v5/**/*gradle*
+      - v5/**/*.java
+      - v5/**/*.kt*
+      - v5/src/**/*.api
+      - yarn.lock
+  workflow_dispatch:
+env:
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
+jobs:
+  # --------------------------------- Stage 1 ----------------------------------
+  gradle-wrapper-validation:
+    name: Gradle wrapper validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v2.1.1
+  static-code-analysis:
+    name: Static code analysis
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Scan code
+        uses: JetBrains/qodana-action@v2023.3.1
+        with:
+          args: --fail-threshold,0
+          pr-mode: false
+  # --------------------------------- Stage 2 ----------------------------------
+  js-test:
+    name: Kotlin/JS tests
+    needs: gradle-wrapper-validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Setup Java
+        uses: actions/setup-java@v4.1.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      - name: Test 'v5' project
+        run: ./gradlew :v5:jsTest
+  jvm-checks:
+    name: Kotlin/JVM checks
+    needs: gradle-wrapper-validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Setup Java
+        uses: actions/setup-java@v4.1.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      - name: Test 'v5' project
+        run: ./gradlew :v5:jvmTest
+      - name: Check API binaries of 'v5' project
+        run: ./gradlew :v5:apiCheck
+  linux-test:
+    name: Kotlin Native tests for Linux
+    needs: gradle-wrapper-validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Setup Java
+        uses: actions/setup-java@v4.1.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      - name: Test 'v5' project
+        run: ./gradlew :v5:linuxTest
+  macos-test:
+    name: Kotlin Native tests for macOS
+    needs: gradle-wrapper-validation
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Setup Java
+        uses: actions/setup-java@v4.1.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      - name: Test 'v5' project on macOS x64
+        run: ./gradlew :v5:macosTest
+      - name: Test 'v5' project on macOS arm64
+        run: ./gradlew :v5:macosArm64Test
+  windows-test:
+    name: Kotlin Native tests for Windows
+    needs: gradle-wrapper-validation
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Setup Java
+        uses: actions/setup-java@v4.1.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      - name: Test 'v5' project
+        run: ./gradlew :v5:windowsTest

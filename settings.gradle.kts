@@ -18,3 +18,7 @@ val javaCompatibility: String = "java-compatibility"
 include(javaCompatibility)
 project(":$javaCompatibility").projectDir =
     subprojects.resolve(javaCompatibility)
+
+// ------------------------------ Kotools Types 5 ------------------------------
+
+include("v5")
