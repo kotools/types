@@ -6,3 +6,7 @@ Explicit types for
 # Package org.kotools.types
 
 Core declarations.
+
+# Package org.kotools.types.number
+
+Declarations for manipulating numbers.
