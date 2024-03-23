@@ -7,6 +7,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -15,7 +16,9 @@ import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
@@ -27,38 +30,68 @@ import org.jetbrains.dokka.versioning.VersioningPlugin
 import java.io.File
 import kotlin.reflect.KClass
 
-/** Plugin configuring the API reference of Kotools Types. */
+/** The extension for configuring the [DocumentationPlugin]. */
+public interface DocumentationExtension {
+    /**
+     * The license to use for extracting the copyright notice displayed in the
+     * documentation's footer.
+     *
+     * The plugin will set the [DokkaBaseConfiguration.footerMessage] property
+     * with its value.
+     */
+    public val license: Property<File>
+
+    /**
+     * The logo to use in the documentation.
+     *
+     * The plugin will add it in the [DokkaBaseConfiguration.customAssets]
+     * property.
+     */
+    public val logo: Property<File>
+
+    /**
+     * The display name of the module.
+     *
+     * The plugin will set the [DokkaTask.moduleName] property with its value.
+     */
+    public val moduleName: Property<String>
+}
+
+/** Plugin configuring the documentation of Kotools Types. */
 public class DocumentationPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
-    override fun apply(project: Project): Unit = project.tasks.run {
-        dokkaTasks(project)
-        apiReferenceJar(project)
-        saveApiReference(project)
-        cleanDokkaHtml()
+    override fun apply(project: Project) {
+        project.extensions.create<DocumentationExtension>("documentation")
+        project.tasks.run {
+            dokkaTasks(project)
+            apiReferenceJar(project)
+            saveApiReference(project)
+            cleanDokkaHtml()
+        }
     }
 }
 
-private fun TaskContainer.dokkaTasks(project: Project): Unit =
+private fun TaskContainer.dokkaTasks(project: Project) {
+    val documentation: DocumentationExtension = project.extensions.getByType()
     withType<DokkaTask>().configureEach {
+        moduleName.set(documentation.moduleName)
         val dokkaDirectory: Provider<Directory> =
             project.layout.buildDirectory.dir("dokka")
         outputDirectory.set(dokkaDirectory)
         dokkaSourceSets.configureEach { skipEmptyPackages.set(true) }
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            customAssets = listOf(project.logoIcon)
-            footerMessage = project.copyrightNotice
+            documentation.logo.orNull?.let { customAssets = listOf(it) }
+            documentation.copyrightNotice?.let { footerMessage = it }
         }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
             olderVersionsDir = project.archivedApiReferences
         }
     }
+}
 
-private val Project.logoIcon: File
-    get() = rootDir.resolve("dokka/logo-icon.svg")
-
-private val Project.copyrightNotice: String
-    get() = rootDir.resolve("LICENSE.txt").useLines { lines: Sequence<String> ->
+private val DocumentationExtension.copyrightNotice: String?
+    get() = license.orNull?.useLines { lines: Sequence<String> ->
         lines.first { it.startsWith("Copyright (c)") }
     }
 

@@ -17,7 +17,15 @@ group = "org.kotools"
 
 repositories.mavenCentral()
 
+// ----------------------------- Plugin extensions -----------------------------
+
 apiValidation.apiDumpDirectory = "src/api"
+
+documentation {
+    license = layout.projectDirectory.file("LICENSE.txt").asFile
+    logo = layout.projectDirectory.file("dokka/logo-icon.svg").asFile
+    moduleName = "Kotools Types"
+}
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
@@ -25,6 +33,8 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
         artifactId = project.name
         version = "${project.version}"
     }
+
+// ------------------------------- Dependencies --------------------------------
 
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
@@ -37,12 +47,13 @@ dependencies {
     dokkaHtmlPlugin(libs.dokka.versioning)
 }
 
+// ----------------------------------- Tasks -----------------------------------
+
 tasks.register("unit")
 
 tasks.jsBrowserTest.configure { useMocha() }
 
 tasks.withType<DokkaTask>().configureEach {
-    moduleName.set("Kotools Types")
     failOnWarning.set(true)
     dokkaSourceSets.configureEach {
         includes.setFrom("dokka/packages.md")

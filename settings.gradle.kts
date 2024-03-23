@@ -21,11 +21,4 @@ project(":$javaCompatibility").projectDir =
 
 // ------------------------------ Kotools Types 5 ------------------------------
 
-private val types5 = "types5"
-include(types5)
-private val v5Directory: File = rootDir.resolve("v5")
-project(":$types5").projectDir = v5Directory
-
-private val types5Samples: String = "$types5-samples"
-include(types5Samples)
-project(":$types5Samples").projectDir = v5Directory.resolve("samples")
+includeBuild("v5") { this.name = "types5" }
