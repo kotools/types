@@ -15,7 +15,7 @@ import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.Jar
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
@@ -25,6 +25,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 import java.io.File
+import kotlin.reflect.KClass
 
 /** Plugin configuring the API reference of Kotools Types. */
 public class DocumentationPlugin : Plugin<Project> {
@@ -74,16 +75,19 @@ private fun TaskContainer.apiReferenceJar(project: Project) {
         archiveClassifier.set("javadoc")
     }
     named("assemble").configure { dependsOn += apiReferenceJar }
-    project.includeInPublication(apiReferenceJar)
+    val publishing: KClass<PublishingExtension> = PublishingExtension::class
+    project.extensions.findByType(publishing)
+        ?.include(apiReferenceJar)
+        ?: project.logger.info(
+            "Can't find extension of type '${publishing.simpleName}'."
+        )
 }
 
 private val TaskContainer.dokkaHtml: TaskProvider<DokkaTask>
     get() = named<DokkaTask>("dokkaHtml")
 
-private fun Project.includeInPublication(jar: TaskProvider<Jar>): Unit =
-    extensions.getByType<PublishingExtension>()
-        .publications
-        .withType<MavenPublication>()
+private fun PublishingExtension.include(jar: TaskProvider<Jar>): Unit =
+    publications.withType<MavenPublication>()
         .configureEach { artifact(jar) }
 
 private fun TaskContainer.saveApiReference(project: Project) {
