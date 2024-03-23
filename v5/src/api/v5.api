@@ -3,5 +3,6 @@ public abstract interface annotation class org/kotools/types/ExperimentalApi : j
 
 public final class org/kotools/types/number/Zero {
 	public static final field INSTANCE Lorg/kotools/types/number/Zero;
+	public final fun toString ()Ljava/lang/String;
 }
 

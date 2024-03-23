@@ -3,6 +3,7 @@ dokka = "1.8.20"
 kotlin = "1.8.22"
 kotlinx-binary-compatibility-validator = "0.14.0"
 kotlinx-serialization = "1.5.1"
+system-lambda = "1.2.1"
 
 # ---------------------------------- Plugins -----------------------------------
 
@@ -68,3 +69,8 @@ version.ref = "kotlinx-serialization"
 group = "org.jetbrains.kotlinx"
 name = "kotlinx-serialization-json"
 version.ref = "kotlinx-serialization"
+
+[libraries.system-lambda]
+group = "com.github.stefanbirkner"
+name = "system-lambda"
+version.ref = "system-lambda"
