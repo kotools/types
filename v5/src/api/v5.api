@@ -1,5 +1,0 @@
-public final class org/kotools/types/Temporary {
-	public static final field INSTANCE Lorg/kotools/types/Temporary;
-	public static final field VALUE Z
-}
-
