@@ -2,8 +2,8 @@ rootProject.name = "types"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-private val gradlePluginsDir: File = rootDir.resolve("gradle/plugins")
-includeBuild(gradlePluginsDir)
+private val gradlePluginsDirectory: File = rootDir.resolve("gradle/plugins")
+includeBuild(gradlePluginsDirectory)
 
 // -------------------------------- Subprojects --------------------------------
 
@@ -21,10 +21,11 @@ project(":$javaCompatibility").projectDir =
 
 // ------------------------------ Kotools Types 5 ------------------------------
 
-include("types5")
-project(":types5").projectDir = rootDir.resolve("v5")
+private val types5 = "types5"
+include(types5)
+private val v5Directory: File = rootDir.resolve("v5")
+project(":$types5").projectDir = v5Directory
 
-private val v5Samples: String = "v5-samples"
-include(v5Samples)
-project(":$v5Samples").projectDir = v5Samples.replace('-', '/')
-    .let(rootDir::resolve)
+private val types5Samples: String = "$types5-samples"
+include(types5Samples)
+project(":$types5Samples").projectDir = v5Directory.resolve("samples")
