@@ -1,5 +1,6 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
+import java.net.URL
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -24,11 +25,35 @@ dependencies {
 
 tasks.jsBrowserTest.configure(KotlinJsTest::useMocha)
 tasks.withType<DokkaTask>().configureEach {
-    failOnWarning.set(true)
+    failOnWarning = true
+    suppressObviousFunctions = false
+    suppressInheritedMembers = true
     dokkaSourceSets.configureEach {
         val moduleDocumentation: RegularFile =
             layout.projectDirectory.file("module.md")
         includes.setFrom(moduleDocumentation)
         reportUndocumented.set(true)
+        sourceLink {
+            localDirectory = layout.projectDirectory.dir("src").asFile
+            val branch: String = "${rootProject.name}-$version"
+                .takeIf { !it.endsWith("-SNAPSHOT") }
+                ?: "main"
+            remoteUrl = URL(
+                "https://github.com/kotools/types/tree/$branch/v5/library/src"
+            )
+        }
     }
+}
+tasks.register<Exec>("createGitTag").configure {
+    commandLine = listOf(
+        "git",
+        "tag",
+        "${rootProject.name}-$version",
+        "-s",
+        "-m",
+        "\uD83D\uDD16 Kotools Types 5 v$version"
+    )
+}
+tasks.register<Exec>("deleteGitTag").configure {
+    commandLine = listOf("git", "tag", "${rootProject.name}-$version", "-d")
 }

@@ -6,8 +6,3 @@ plugins {
 }
 
 allprojects { repositories.mavenCentral() }
-
-subprojects {
-    group = "org.kotools"
-    version = "0.1.0-SNAPSHOT"
-}
