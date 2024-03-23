@@ -10,7 +10,7 @@ public class ZeroJavaSampleTest {
         final ZeroJavaSample sample = new ZeroJavaSample();
         final String messagePrefix = "Java sample of 'Zero.toString()'";
         final String actual = Assertions.assertDoesNotThrow(
-                () -> SystemLambda.tapSystemOut(sample::toString_sample).trim(),
+                () -> SystemLambda.tapSystemOut(sample::toStringSample).trim(),
                 "%s shouldn't throw an exception.".formatted(messagePrefix)
         );
         final String expected = "0";
