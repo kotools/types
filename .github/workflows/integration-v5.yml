@@ -66,7 +66,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'v5' project
-        run: ./gradlew :v5:jsTest
+        run: ./gradlew :types5:jsTest
   jvm-checks:
     name: Kotlin/JVM checks
     needs: gradle-wrapper-validation
@@ -84,9 +84,9 @@ jobs:
       - name: Test 'v5-samples' project
         run: ./gradlew :v5-samples:test
       - name: Test 'v5' project
-        run: ./gradlew :v5:jvmTest
+        run: ./gradlew :types5:jvmTest
       - name: Check API binaries of 'v5' project
-        run: ./gradlew :v5:apiCheck
+        run: ./gradlew :types5:apiCheck
   linux-test:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -102,7 +102,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'v5' project
-        run: ./gradlew :v5:linuxTest
+        run: ./gradlew :types5:linuxTest
   macos-test:
     name: Kotlin Native tests for macOS
     needs: gradle-wrapper-validation
@@ -118,9 +118,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'v5' project on macOS x64
-        run: ./gradlew :v5:macosTest
+        run: ./gradlew :types5:macosTest
       - name: Test 'v5' project on macOS arm64
-        run: ./gradlew :v5:macosArm64Test
+        run: ./gradlew :types5:macosArm64Test
   windows-test:
     name: Kotlin Native tests for Windows
     needs: gradle-wrapper-validation
@@ -136,4 +136,4 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'v5' project
-        run: ./gradlew :v5:windowsTest
+        run: ./gradlew :types5:windowsTest

@@ -21,7 +21,8 @@ project(":$javaCompatibility").projectDir =
 
 // ------------------------------ Kotools Types 5 ------------------------------
 
-include("v5")
+include("types5")
+project(":types5").projectDir = rootDir.resolve("v5")
 
 private val v5Samples: String = "v5-samples"
 include(v5Samples)

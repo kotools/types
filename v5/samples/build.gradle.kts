@@ -10,7 +10,7 @@ repositories.mavenCentral()
 kotlin.explicitApi()
 
 dependencies {
-    implementation(projects.v5)
+    implementation(projects.types5)
     implementation(libs.kotlin.bom)
 
     testImplementation(libs.kotlin.test)
