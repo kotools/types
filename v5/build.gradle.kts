@@ -6,3 +6,7 @@ plugins {
 }
 
 allprojects { repositories.mavenCentral() }
+
+gradle.parent?.let {
+    gradle.startParameter.isDryRun = it.startParameter.isDryRun
+}
