@@ -1,4 +1,4 @@
 rootProject.name = "types"
 
-includeBuild("v4") { this.name = "types4" }
-includeBuild("v5") { this.name = "types5" }
+includeBuild("v4") { name = "types4" }
+includeBuild("v5") { name = "types5" }
