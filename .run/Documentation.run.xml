@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":dokkaHtml" />
+          <option value=":types4:dokkaHtml" />
         </list>
       </option>
       <option name="vmOptions" />
