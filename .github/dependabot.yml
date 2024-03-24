@@ -1,8 +1,0 @@
-version: 2
-updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    assignees: [ "LVMVRQUXL" ]
-    labels: [ "dependencies", "github-actions" ]
