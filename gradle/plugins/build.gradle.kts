@@ -17,10 +17,6 @@ gradlePlugin {
         kotoolsTypesPlugin("Documentation")
         kotoolsTypesPlugin("Multiplatform")
         kotoolsTypesPlugin("Publication")
-        register("KotoolsTypesBasePluginV2").configure {
-            id = "org.kotools.types.base"
-            implementationClass = "${id}.BasePlugin"
-        }
     }
 }
 

@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.dokka)
     id("kotools.types.documentation")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
-    id("org.kotools.types.git")
 }
 
 apiValidation.apiDumpDirectory = "src/api"
