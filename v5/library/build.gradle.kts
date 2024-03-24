@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.dokka)
     id("kotools.types.documentation")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
+    id("org.kotools.types.git")
 }
 
 apiValidation.apiDumpDirectory = "src/api"
@@ -43,17 +44,4 @@ tasks.withType<DokkaTask>().configureEach {
             )
         }
     }
-}
-tasks.register<Exec>("createGitTag").configure {
-    commandLine = listOf(
-        "git",
-        "tag",
-        "${rootProject.name}-$version",
-        "-s",
-        "-m",
-        "\uD83D\uDD16 Kotools Types 5 v$version"
-    )
-}
-tasks.register<Exec>("deleteGitTag").configure {
-    commandLine = listOf("git", "tag", "${rootProject.name}-$version", "-d")
 }
