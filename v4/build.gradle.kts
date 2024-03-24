@@ -22,7 +22,7 @@ repositories.mavenCentral()
 apiValidation.apiDumpDirectory = "src/api"
 
 documentation {
-    license = layout.projectDirectory.file("LICENSE.txt").asFile
+    license = layout.projectDirectory.file("../LICENSE.txt").asFile
     logo = layout.projectDirectory.file("dokka/logo-icon.svg").asFile
     moduleName = "Kotools Types"
 }
@@ -38,7 +38,7 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
 
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
-    commonMainImplementation(projects.typesInternal)
+    commonMainImplementation(project(":types-internal"))
     commonMainImplementation(libs.kotlinx.serialization.core)
 
     commonTestImplementation(libs.kotlin.test)
@@ -48,6 +48,10 @@ dependencies {
 }
 
 // ----------------------------------- Tasks -----------------------------------
+
+gradle.parent?.let {
+    gradle.startParameter.isDryRun = it.startParameter.isDryRun
+}
 
 tasks.register("unit")
 

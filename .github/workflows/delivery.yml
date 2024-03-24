@@ -1,4 +1,4 @@
-name: Delivery
+name: Delivery (types4)
 on:
   workflow_dispatch:
 env:
@@ -6,137 +6,28 @@ env:
   GIT_USER: ${{ secrets.GIT_USER }}
   GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-  JAVA_DISTRIBUTION: temurin
-  JAVA_VERSION: 17
   MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
   MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-permissions: read-all
 jobs:
-  # ---------- Stage 1 ----------
-  gradle-wrapper-validation:
-    name: Gradle wrapper validation
+  delivery:
+    name: Publication to OSSRH
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.1
-  # ---------- Stage 2 ----------
-  js-delivery:
-    name: Kotlin/JS delivery
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.1.0
         with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishJsPublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishJsPublicationToOSSRHRepository
-  jvm-delivery:
-    name: Kotlin/JVM delivery
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishJvmPublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishJvmPublicationToOSSRHRepository
-  linux-delivery:
-    name: Kotlin Native delivery for Linux
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishLinuxPublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishLinuxPublicationToOSSRHRepository
-  macos-delivery:
-    name: Kotlin Native delivery for macOS
-    needs: gradle-wrapper-validation
-    runs-on: macos-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH for macOS x64
-        run: ./gradlew :types-internal:publishMacosPublicationToOSSRHRepository
-      - name: Deliver 'internal' subproject to OSSRH for macOS arm64
-        run: ./gradlew :types-internal:publishMacosArm64PublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH for macOS x64
-        run: ./gradlew :publishMacosPublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH for macOS arm64
-        run: ./gradlew :publishMacosArm64PublicationToOSSRHRepository
-  windows-delivery:
-    name: Kotlin Native delivery for Windows
-    needs: gradle-wrapper-validation
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishWindowsPublicationToOSSRHRepository
-  # ---------- Stage 3 ----------
-  kmp-delivery:
-    name: Kotlin Multiplatform delivery
-    needs:
-      - js-delivery
-      - jvm-delivery
-      - linux-delivery
-      - macos-delivery
-      - windows-delivery
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository
+      - name: Publish 'internal' subproject
+        run: |
+          ./gradlew \
+          :types4:types-internal:publishAllPublicationsToOSSRHRepository
+      - name: Publish root project
+        run: |
+          ./gradlew :types4:publishAllPublicationsToOSSRHRepository
