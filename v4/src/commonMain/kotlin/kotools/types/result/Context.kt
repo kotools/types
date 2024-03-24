@@ -113,7 +113,7 @@ public sealed interface ResultContext {
             .getOrThrow()
 }
 
-private data object ResultContextImplementation : ResultContext
+private object ResultContextImplementation : ResultContext
 
 /**
  * Returns an encapsulated result of calling the [block] function in the
