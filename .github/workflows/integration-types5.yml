@@ -5,6 +5,7 @@ on:
     paths:
       - .github/workflows/integration-types5.yml
       - gradle/libs.versions.toml
+      - gradle/plugins/
       - qodana.yaml
       - v5/**/*gradle*
       - v5/**/*.java
@@ -16,6 +17,7 @@ on:
     paths:
       - .github/workflows/integration-types5.yml
       - gradle/libs.versions.toml
+      - gradle/plugins/
       - qodana.yaml
       - v5/**/*gradle*
       - v5/**/*.java
