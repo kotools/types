@@ -1,7 +1,0 @@
-version: "1.0"
-profile:
-  name: qodana.starter
-linter: jetbrains/qodana-jvm-community:latest
-include:
-  - name: ConstPropertyName
-  - name: UnusedSymbol
