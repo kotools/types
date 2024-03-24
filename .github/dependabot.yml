@@ -6,9 +6,3 @@ updates:
       interval: "monthly"
     assignees: [ "LVMVRQUXL" ]
     labels: [ "dependencies", "github-actions" ]
-  - package-ecosystem: "gradle"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    assignees: [ "LVMVRQUXL" ]
-    labels: [ "dependencies", "gradle" ]
