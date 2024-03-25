@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types:apiCheck" />
+          <option value=":apiCheck" />
         </list>
       </option>
       <option name="vmOptions" />

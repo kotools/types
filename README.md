@@ -59,7 +59,7 @@ flexibility across diverse Kotlin platforms.
 You can add Kotools Types to your project by using Gradle or Maven.
 Just replace the `$version` or the `${kotools.types.version}` variables by the
 [latest version](#kotools-types) or by another one available in the
-[changelog](v4/CHANGELOG.md).
+[changelog](CHANGELOG.md).
 
 <details open>
 <summary>Gradle - Kotlin DSL</summary>
@@ -113,10 +113,10 @@ See the [API reference](https://types.kotools.org) for more types!
 
 Here's additional documentation for learning more about this project:
 
-- [Design goals](v4/documentation/design-goals.md)
-- [Versioning strategy](v4/documentation/versioning-strategy.md)
-- [Dependency compatibility](v4/documentation/dependencies.md)
-- [Declarations lifecycle](v4/documentation/declarations-lifecycle.md)
+- [Design goals](documentation/design-goals.md)
+- [Versioning strategy](documentation/versioning-strategy.md)
+- [Dependency compatibility](documentation/dependencies.md)
+- [Declarations lifecycle](documentation/declarations-lifecycle.md)
 - [Security Policy](SECURITY.md)
 
 ## 🤝 Community

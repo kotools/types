@@ -10,10 +10,10 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types:types-internal:jvmTest" />
-          <option value=":types:jvmTest" />
-          <option value=":types:jvmApiCheck" />
-          <option value=":types:java-compatibility:test" />
+          <option value=":types-internal:jvmTest" />
+          <option value=":jvmTest" />
+          <option value=":jvmApiCheck" />
+          <option value=":java-compatibility:test" />
         </list>
       </option>
       <option name="vmOptions" />

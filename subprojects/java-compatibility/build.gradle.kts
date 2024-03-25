@@ -9,7 +9,7 @@ java {
 
 dependencies {
     testImplementation(rootProject)
-    testImplementation(project(":types-internal"))
+    testImplementation(projects.typesInternal)
     testImplementation(libs.junit.jupiter)
 }
 
