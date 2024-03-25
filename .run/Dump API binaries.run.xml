@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types4:apiDump" />
+          <option value=":types:apiDump" />
         </list>
       </option>
       <option name="vmOptions" />

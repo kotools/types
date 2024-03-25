@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types4:windowsTest" />
+          <option value=":types:windowsTest" />
         </list>
       </option>
       <option name="vmOptions" />

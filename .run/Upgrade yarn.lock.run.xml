@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types4:kotlinUpgradeYarnLock" />
+          <option value=":types:kotlinUpgradeYarnLock" />
         </list>
       </option>
       <option name="vmOptions" />

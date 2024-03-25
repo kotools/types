@@ -1,4 +1,4 @@
-name: Delivery (types4)
+name: Delivery (types)
 on:
   workflow_dispatch:
 env:
@@ -27,7 +27,7 @@ jobs:
       - name: Publish 'internal' subproject
         run: |
           ./gradlew \
-          :types4:types-internal:publishAllPublicationsToOSSRHRepository
+          :types:types-internal:publishAllPublicationsToOSSRHRepository
       - name: Publish root project
         run: |
-          ./gradlew :types4:publishAllPublicationsToOSSRHRepository
+          ./gradlew :types:publishAllPublicationsToOSSRHRepository

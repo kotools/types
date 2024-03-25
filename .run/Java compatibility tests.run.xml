@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types4:java-compatibility:test" />
+          <option value=":types:java-compatibility:test" />
         </list>
       </option>
       <option name="vmOptions" />
