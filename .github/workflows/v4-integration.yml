@@ -8,12 +8,12 @@ on:
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - v4/**/*gradle*
-      - v4/**/*.api
-      - v4/**/*.java
-      - v4/**/*.kt*
-      - v4/gradle/libs.versions.toml
-      - v4/yarn.lock
+      - v1/**/*gradle*
+      - v1/**/*.api
+      - v1/**/*.java
+      - v1/**/*.kt*
+      - v1/gradle/libs.versions.toml
+      - v1/yarn.lock
   push:
     branches: [ main ]
     paths:
@@ -22,12 +22,12 @@ on:
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - v4/**/*gradle*
-      - v4/**/*.api
-      - v4/**/*.java
-      - v4/**/*.kt*
-      - v4/gradle/libs.versions.toml
-      - v4/yarn.lock
+      - v1/**/*gradle*
+      - v1/**/*.api
+      - v1/**/*.java
+      - v1/**/*.kt*
+      - v1/gradle/libs.versions.toml
+      - v1/yarn.lock
   workflow_dispatch:
 env:
   JAVA_DISTRIBUTION: temurin
