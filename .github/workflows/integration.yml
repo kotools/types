@@ -4,6 +4,10 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration.yml
+      - gradle/wrapper/
+      - gradlew
+      - gradlew.bat
+      - settings.gradle.kts
       - v1/**/*gradle*
       - v1/**/*.api
       - v1/**/*.java
@@ -14,6 +18,10 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration.yml
+      - gradle/wrapper/
+      - gradlew
+      - gradlew.bat
+      - settings.gradle.kts
       - v1/**/*gradle*
       - v1/**/*.api
       - v1/**/*.java
@@ -24,9 +32,6 @@ on:
 env:
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
-defaults:
-  run:
-    working-directory: v1
 jobs:
   # --------------------------------- Stage 1 ----------------------------------
   gradle-wrapper-validation:
@@ -53,9 +58,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
-        run: ./gradlew :types-internal:jsTest
+        run: ./gradlew :types:types-internal:jsTest
       - name: Test root project
-        run: ./gradlew :jsTest
+        run: ./gradlew :types:jsTest
   jvm-checks:
     name: Kotlin/JVM checks
     needs: gradle-wrapper-validation
@@ -71,11 +76,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
-        run: ./gradlew :types-internal:jvmTest
+        run: ./gradlew :types:types-internal:jvmTest
       - name: Test 'java-compatibility' subproject
-        run: ./gradlew :java-compatibility:test
+        run: ./gradlew :types:java-compatibility:test
       - name: Check root project
-        run: ./gradlew :jvmTest :jvmApiCheck
+        run: ./gradlew :types:jvmTest :types:jvmApiCheck
   linux-test:
     name: Kotlin Native tests for Linux
     needs: gradle-wrapper-validation
@@ -91,9 +96,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
-        run: ./gradlew :types-internal:linuxTest
+        run: ./gradlew :types:types-internal:linuxTest
       - name: Test root project
-        run: ./gradlew :linuxTest
+        run: ./gradlew :types:linuxTest
   macos-test:
     name: Kotlin Native tests for macOS
     needs: gradle-wrapper-validation
@@ -109,13 +114,13 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject on macOS x64
-        run: ./gradlew :types-internal:macosTest
+        run: ./gradlew :types:types-internal:macosTest
       - name: Test 'internal' subproject on macOS arm64
-        run: ./gradlew :types-internal:macosArm64Test
+        run: ./gradlew :types:types-internal:macosArm64Test
       - name: Test root project on macOS x64
-        run: ./gradlew :macosTest
+        run: ./gradlew :types:macosTest
       - name: Test root project on macOS arm64
-        run: ./gradlew :macosArm64Test
+        run: ./gradlew :types:macosArm64Test
   windows-test:
     name: Kotlin Native tests for Windows
     needs: gradle-wrapper-validation
@@ -131,9 +136,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Test 'internal' subproject
-        run: ./gradlew :types-internal:windowsTest
+        run: ./gradlew :types:types-internal:windowsTest
       - name: Test root project
-        run: ./gradlew :windowsTest
+        run: ./gradlew :types:windowsTest
   # --------------------------------- Stage 3 ----------------------------------
   dependency-submission:
     name: Dependency submission

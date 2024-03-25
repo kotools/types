@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Upgrade yarn.lock (types)" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="JS tests" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
-      <option name="externalProjectPath" value="$PROJECT_DIR$/v1" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
       <option name="scriptParameters" value="" />
       <option name="taskDescriptions">
@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":kotlinUpgradeYarnLock" />
+          <option value=":types:jsTest" />
         </list>
       </option>
       <option name="vmOptions" />
