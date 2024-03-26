@@ -36,9 +36,9 @@ collecting feedbacks from users.
 This API includes all declarations marked with the `ExperimentalKotoolsTypesApi`
 annotation requiring an explicit [opt-in].
 
-Please note that the experimental API doesn't have the same compatibility policy
-as the stable one: experimental changes can break any type of compatibility in
-any type of releases listed above.
+Please note that this API doesn't have the same compatibility policy as the
+stable one: ***experimental changes can break any type of compatibility in
+any type of releases listed above***!
 
 [backward compatibility]: https://kotlinlang.org/docs/jvm-api-guidelines-backward-compatibility.html#definition-of-backward-compatibility
 [opt-in]: https://kotlinlang.org/docs/opt-in-requirements.html
