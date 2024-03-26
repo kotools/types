@@ -4,4 +4,4 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    labels: [ "dependencies" ]
+    labels: [ "dependencies", "github-actions" ]
