@@ -28,5 +28,5 @@ jobs:
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@v1.0.20
         with:
-          labels: dependency
+          labels: dependencies
           reviewers: LVMVRQUXL
