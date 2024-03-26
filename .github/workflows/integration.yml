@@ -6,6 +6,7 @@ on:
       - '**gradle*'
       - '**.java'
       - '**.kt*'
+      - '!.github/workflows/gradle-wrapper-upgrade.yml'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - src/api/types.api
@@ -16,6 +17,7 @@ on:
       - '**gradle*'
       - '**.java'
       - '**.kt*'
+      - '!.github/workflows/gradle-wrapper-upgrade.yml'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - src/api/types.api
