@@ -8,7 +8,7 @@ of [backward compatibility].
 We focus on three types of compatibility:
 
 - **Behavioral compatibility** ensures that new code doesn't change the behavior
-  of existing one, except for bug fixes.
+  of existing one.
 - **Source compatibility** ensures that client's code recompile correctly
   against a newer version of Kotools Types.
 - **Binary compatibility** ensures that a newer version of Kotools Types can
