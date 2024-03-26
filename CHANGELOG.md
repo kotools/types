@@ -21,6 +21,12 @@ All notable changes to this project will be documented in this file.
 Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
 `EmailAddress` type (#581 and #583).
 
+### ♻️ Changed
+
+Our [versioning strategy](documentation/versioning-strategy.md) is now based on
+backward compatibility, focusing on **behavioral**, **source** and **binary**
+compatibilities (5e2484b8b).
+
 ### 🗑️ Deprecated
 
 Deprecation promotion of the following annotations to hidden (#334):
