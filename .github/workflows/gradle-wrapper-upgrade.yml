@@ -29,3 +29,4 @@ jobs:
         uses: gradle-update/update-gradle-wrapper-action@v1.0.20
         with:
           labels: dependencies
+          reviewers: LVMVRQUXL
