@@ -21,6 +21,14 @@ All notable changes to this project will be documented in this file.
 Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
 `EmailAddress` type ([#581] and [#583]).
 
+```kotlin
+// Before
+EmailAddress.create("explicit-types_library@kotools.org") // exception
+
+// Now
+EmailAddress.create("explicit-types_library@kotools.org") // pass
+```
+
 ### ♻️ Changed
 
 - Our [versioning strategy](documentation/versioning-strategy.md) is now based
