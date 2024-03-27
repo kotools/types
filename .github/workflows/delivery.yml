@@ -1,9 +1,16 @@
 name: Delivery
 on:
   workflow_dispatch:
+    inputs:
+      gradleDryRun:
+        description: Run with all Gradle tasks actions disabled.
+        required: false
+        type: boolean
+        default: false
 env:
   GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
   GIT_USER: ${{ secrets.GIT_USER }}
+  GRADLE_DRY_RUN: ${{ inputs.gradleDryRun == true && '--dry-run' || '' }}
   GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
   JAVA_DISTRIBUTION: temurin
@@ -27,9 +34,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishJsPublicationToOSSRHRepository
+        run: |
+          ./gradlew \
+          :types-internal:publishJsPublicationToOSSRHRepository $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH
-        run: ./gradlew :publishJsPublicationToOSSRHRepository
+        run: ./gradlew :publishJsPublicationToOSSRHRepository $GRADLE_DRY_RUN
   jvm-delivery:
     name: Kotlin/JVM delivery
     runs-on: ubuntu-latest
@@ -44,9 +53,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishJvmPublicationToOSSRHRepository
+        run: |
+          ./gradlew \
+          :types-internal:publishJvmPublicationToOSSRHRepository $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH
-        run: ./gradlew :publishJvmPublicationToOSSRHRepository
+        run: ./gradlew :publishJvmPublicationToOSSRHRepository $GRADLE_DRY_RUN
   linux-delivery:
     name: Kotlin Native delivery for Linux
     runs-on: ubuntu-latest
@@ -61,9 +72,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishLinuxPublicationToOSSRHRepository
+        run: |
+          ./gradlew \
+          :types-internal:publishLinuxPublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH
-        run: ./gradlew :publishLinuxPublicationToOSSRHRepository
+        run: ./gradlew :publishLinuxPublicationToOSSRHRepository $GRADLE_DRY_RUN
   macos-delivery:
     name: Kotlin Native delivery for macOS
     runs-on: macos-latest
@@ -78,15 +92,21 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH for macOS x64
-        run: ./gradlew :types-internal:publishMacosPublicationToOSSRHRepository
+        run: |
+          ./gradlew \
+          :types-internal:publishMacosPublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
       - name: Deliver 'internal' subproject to OSSRH for macOS arm64
         run: |
           ./gradlew \
-          :types-internal:publishMacosArm64PublicationToOSSRHRepository
+          :types-internal:publishMacosArm64PublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH for macOS x64
-        run: ./gradlew :publishMacosPublicationToOSSRHRepository
+        run: ./gradlew :publishMacosPublicationToOSSRHRepository $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH for macOS arm64
-        run: ./gradlew :publishMacosArm64PublicationToOSSRHRepository
+        run: |
+          ./gradlew :publishMacosArm64PublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
   windows-delivery:
     name: Kotlin Native delivery for Windows
     runs-on: windows-latest
@@ -102,9 +122,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH
         run: |
-          ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
+          ./gradlew \
+          :types-internal:publishWindowsPublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH
-        run: ./gradlew :publishWindowsPublicationToOSSRHRepository
+        run: |
+          ./gradlew :publishWindowsPublicationToOSSRHRepository $GRADLE_DRY_RUN
   # --------------------------------- Stage 2 ----------------------------------
   kmp-delivery:
     name: Kotlin Multiplatform delivery
@@ -128,6 +151,9 @@ jobs:
       - name: Deliver 'internal' subproject to OSSRH
         run: |
           ./gradlew \
-          :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository
+          :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
       - name: Deliver root project to OSSRH
-        run: ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository
+        run: |
+          ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository \
+          $GRADLE_DRY_RUN
