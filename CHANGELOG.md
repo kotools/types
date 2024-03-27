@@ -68,8 +68,8 @@ EmailAddress("types-4_library@kotools.org") // pass
   `ExperimentalResultApi` and `ExperimentalTextApi`.
 - The `EmailAddress.Companion.create(String)` **experimental** function is
   deprecated for using the new constructor for the `EmailAddress` type ([#623]).
-  It is deprecated with an automatic replacement an error level for removal in
-  v4.7.
+  It is deprecated with an automatic replacement and an error level for removal
+  in v4.7.
 
 ### 🔥 Removed
 
