@@ -51,6 +51,16 @@ Deprecation promotion of the following annotations to hidden ([#334]):
 Renames the `EmailAddress` type's serializer as `kotools.types.web.EmailAddress`
 ([#599]).
 
+```kotlin
+// Before
+val serialName: String = serializer<EmailAddress>().descriptor.serialName
+println(serialName) // kotools.types.experimental.EmailAddress
+
+// Now
+val serialName: String = serializer<EmailAddress>().descriptor.serialName
+println(serialName) // kotools.types.web.EmailAddress
+```
+
 ---
 
 Thanks to [@LVMVRQUXL] and [@augustomtt] for contributing to this new release.
