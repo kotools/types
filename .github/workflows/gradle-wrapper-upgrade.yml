@@ -15,7 +15,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.2
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.2
       - name: Setup Java

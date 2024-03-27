@@ -21,7 +21,7 @@ jobs:
       MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.2
       - name: Setup Java
         uses: actions/setup-java@v4.1.0
         with:
