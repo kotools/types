@@ -54,6 +54,13 @@ Deprecation promotion of the following annotations to hidden ([#334]):
 `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
 `ExperimentalResultApi` and `ExperimentalTextApi`.
 
+### 🔥 Removed
+
+Due to an internal compilation error of Kotlin when comparing generics, the
+following types have been removed from the **experimental** API:
+`NotEmptyRange`, `Bound`, `InclusiveBound` and `ExclusiveBound` ([#627]).
+**Experimental** properties using these types were also removed.
+
 ### 🐛 Fixed
 
 Renames the `EmailAddress` **experimental** type's serializer as
@@ -81,6 +88,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [#583]: https://github.com/kotools/types/issues/583
 [#599]: https://github.com/kotools/types/issues/599
 [#626]: https://github.com/kotools/types/pull/626
+[#627]: https://github.com/kotools/types/pull/627
 [5e2484b8b]: https://github.com/kotools/types/commit/5e2484b8bf2756e41eb207d2e11acc9d5f5661d0
 
 ## 🔖 Releases
