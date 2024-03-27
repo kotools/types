@@ -79,6 +79,13 @@ public class EmailAddressTest {
     }
 
     @Test
+    public void constructor_should_be_compatible_with_Java() {
+        Assertions.assertDoesNotThrow(
+                () -> new EmailAddress("contact@kotools.org")
+        );
+    }
+
+    @Test
     public void structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
         final Object[] validTexts = VALID_TEXTS.toArray();
         final int index = new Random()

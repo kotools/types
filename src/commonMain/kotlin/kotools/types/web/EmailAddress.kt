@@ -46,12 +46,50 @@ import kotlin.jvm.JvmSynthetic
  * println(decoded == address) // true
  * ```
  * </details>
+ *
+ * @constructor Creates an email address from the specified [value], or throws
+ * an [IllegalArgumentException] if the [value] doesn't match the corresponding
+ * [regular expression][EmailAddress.Companion.regex].
+ *
+ * <br>
+ * <details open>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of calling this constructor from Kotlin code:
+ *
+ * ```kotlin
+ * val address = EmailAddress("contact@kotools.org")
+ * println(address) // contact@kotools.org
+ * ```
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Java</b>
+ * </summary>
+ *
+ * Here's an example of calling this constructor from Java code:
+ *
+ * ```java
+ * final EmailAddress address = new EmailAddress("contact@kotools.org");
+ * System.out.println(address); // contact@kotools.org
+ * ```
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(EmailAddressSerializer::class)
-public class EmailAddress private constructor(private val text: String) {
+public class EmailAddress
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+public constructor(private val value: String) {
+    init {
+        require(value matches regex) { ErrorMessage.invalidEmailAddress(value) }
+    }
+
     // -------------------------- Structural equality --------------------------
 
     /**
@@ -96,7 +134,7 @@ public class EmailAddress private constructor(private val text: String) {
     final override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other == null -> false
-        else -> other is EmailAddress && this.text == other.text
+        else -> other is EmailAddress && this.value == other.value
     }
 
     /**
@@ -140,7 +178,7 @@ public class EmailAddress private constructor(private val text: String) {
      * ```
      */
     @Suppress("RedundantModalityModifier")
-    final override fun hashCode(): Int = hashCodeOf(text)
+    final override fun hashCode(): Int = hashCodeOf(value)
 
     // ------------------------------ Conversions ------------------------------
 
@@ -179,7 +217,7 @@ public class EmailAddress private constructor(private val text: String) {
      * </details>
      */
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = text
+    final override fun toString(): String = value
 
     // -------------------------------------------------------------------------
 

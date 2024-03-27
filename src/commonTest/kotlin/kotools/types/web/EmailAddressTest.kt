@@ -95,6 +95,42 @@ class EmailAddressCompanionTest {
 @ExperimentalKotoolsTypesApi
 class EmailAddressTest {
     @Test
+    fun constructor_should_pass_with_a_valid_String() {
+        EmailAddress(value = "contact@kotools.org")
+    }
+
+    @OptIn(InternalKotoolsTypesApi::class)
+    private fun testConstructorFailure(value: String) {
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress(value)
+        }
+        val actual = ErrorMessage(exception)
+        val expected: ErrorMessage = ErrorMessage.invalidEmailAddress(value)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun constructor_should_fail_with_a_String_missing_an_at_sign(): Unit =
+        testConstructorFailure("contactKotools.org")
+
+    @Test
+    fun constructor_should_fail_with_a_String_missing_a_dot_domain(): Unit =
+        testConstructorFailure("contact@kotoolsOrg")
+
+    @Test
+    fun constructor_should_fail_with_a_String_having_a_whitespace_in_local_part(): Unit =
+        testConstructorFailure(" con  tact @kotools.org")
+
+    @Test
+    fun constructor_should_fail_with_a_String_having_a_whitespace_in_first_label_of_domain(): Unit =
+        testConstructorFailure("contact@ ko tools .org")
+
+    @Test
+    fun constructor_should_fail_with_a_String_having_a_whitespace_in_second_label_of_domain() {
+        testConstructorFailure("contact@kotools. or g ")
+    }
+
+    @Test
     fun structural_equality_should_pass_with_the_same_object() {
         val text: String = Texts.valid.random()
         val first: EmailAddress = EmailAddress.create(text)

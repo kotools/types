@@ -16,6 +16,19 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+The `EmailAddress` **experimental** type has a new constructor accepting a value
+of type `String` ([#623]).
+
+```kotlin
+// Before
+EmailAddress.create("contact@kotools.org")
+
+// Now
+EmailAddress("contact@kotools.org")
+```
+
 ### ♻️ Changed
 
 - Our [versioning strategy](documentation/versioning-strategy.md) is now based
@@ -45,7 +58,7 @@ NotBlankString.createOrNull(null) // compilation error
 EmailAddress.create("types-4_library@kotools.org") // exception
 
 // Now
-EmailAddress.create("types-4_library@kotools.org") // pass
+EmailAddress("types-4_library@kotools.org") // pass
 ```
 
 ### 🗑️ Deprecated
@@ -88,6 +101,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [#583]: https://github.com/kotools/types/issues/583
 [#599]: https://github.com/kotools/types/issues/599
 [#600]: https://github.com/kotools/types/issues/600
+[#623]: https://github.com/kotools/types/issues/623
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
 [5e2484b8b]: https://github.com/kotools/types/commit/5e2484b8bf2756e41eb207d2e11acc9d5f5661d0

@@ -3,6 +3,7 @@ package kotools.types.internal
 import kotlin.annotation.AnnotationRetention.BINARY
 import kotlin.annotation.AnnotationRetention.SOURCE
 import kotlin.annotation.AnnotationTarget.CLASS
+import kotlin.annotation.AnnotationTarget.CONSTRUCTOR
 import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.annotation.AnnotationTarget.PROPERTY
 import kotlin.annotation.AnnotationTarget.TYPEALIAS
@@ -25,7 +26,7 @@ public annotation class InternalKotoolsTypesApi
 @InternalKotoolsTypesApi
 @MustBeDocumented
 @Retention(SOURCE)
-@Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
+@Target(CLASS, CONSTRUCTOR, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
 
 /**
