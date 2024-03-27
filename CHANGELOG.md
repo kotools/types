@@ -27,7 +27,7 @@ Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
   on backward compatibility, focusing on **behavioral**, **source** and
   **binary** compatibilities ([5e2484b8b]).
 - The `create` and the `createOrNull` functions of the
-  `NotBlankString.Companion` type now accepts a value of type `Any` instead of
+  `NotBlankString.Companion` type now accept a value of type `Any` instead of
   `Any?` ([#626]).
 
 ```kotlin
