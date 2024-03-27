@@ -35,32 +35,3 @@ public operator fun StrictlyNegativeInt.unaryMinus(): StrictlyPositiveInt {
         .getOrNull()
         ?: unexpectedCreationError<StrictlyPositiveInt>(value)
 }
-
-/**
- * The range of values a [StrictlyNegativeInt] can have.
- *
- * Here's an example of calling this property from Kotlin code:
- *
- * ```kotlin
- * println(StrictlyNegativeInt.range) // [-2147483648;-1]
- * ```
- *
- * Please note that this property is not available yet for Java users.
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
-@OptIn(InternalKotoolsTypesApi::class)
-@get:JvmSynthetic
-public val StrictlyNegativeInt.Companion.range:
-        NotEmptyRange<StrictlyNegativeInt>
-    get() = rangeValue
-
-@ExperimentalKotoolsTypesApi
-private val rangeValue: NotEmptyRange<StrictlyNegativeInt> by lazy {
-    val start: StrictlyNegativeInt = Int.MIN_VALUE
-        .toStrictlyNegativeInt()
-        .getOrThrow()
-    val end: StrictlyNegativeInt = (-1).toStrictlyNegativeInt()
-        .getOrThrow()
-    notEmptyRangeOf { start.inclusive to end.inclusive }
-}

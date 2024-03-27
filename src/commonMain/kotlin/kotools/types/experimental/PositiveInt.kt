@@ -37,26 +37,3 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt {
         ?: unexpectedCreationError<NegativeInt>(value)
 }
 
-/**
- * The range of values a [PositiveInt] can have.
- *
- * Here's an example of calling this property from Kotlin code:
- *
- * ```kotlin
- * println(PositiveInt.range) // [0;2147483647]
- * ```
- *
- * Please note that this property is not available yet for Java users.
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
-@OptIn(InternalKotoolsTypesApi::class)
-@get:JvmSynthetic
-public val PositiveInt.Companion.range: NotEmptyRange<PositiveInt>
-    get() = rangeValue
-
-@ExperimentalKotoolsTypesApi
-private val rangeValue: NotEmptyRange<PositiveInt> by lazy {
-    val end: StrictlyPositiveInt = StrictlyPositiveInt.range.end.value
-    notEmptyRangeOf { ZeroInt.inclusive to end.inclusive }
-}
