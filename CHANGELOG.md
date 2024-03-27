@@ -71,7 +71,7 @@ println(serialName) // kotools.types.web.EmailAddress
 
 ---
 
-Thanks to [@LVMVRQUXL] and [@augustomtt] for contributing to this new release.
+Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 🙏
 
 [@augustomtt]: https://github.com/augustomtt
