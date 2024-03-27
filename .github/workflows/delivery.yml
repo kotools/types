@@ -12,19 +12,9 @@ env:
   MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 permissions: read-all
 jobs:
-  # ---------- Stage 1 ----------
-  gradle-wrapper-validation:
-    name: Gradle wrapper validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v2.1.1
-  # ---------- Stage 2 ----------
+  # --------------------------------- Stage 1 ----------------------------------
   js-delivery:
     name: Kotlin/JS delivery
-    needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -42,7 +32,6 @@ jobs:
         run: ./gradlew :publishJsPublicationToOSSRHRepository
   jvm-delivery:
     name: Kotlin/JVM delivery
-    needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -60,7 +49,6 @@ jobs:
         run: ./gradlew :publishJvmPublicationToOSSRHRepository
   linux-delivery:
     name: Kotlin Native delivery for Linux
-    needs: gradle-wrapper-validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -78,7 +66,6 @@ jobs:
         run: ./gradlew :publishLinuxPublicationToOSSRHRepository
   macos-delivery:
     name: Kotlin Native delivery for macOS
-    needs: gradle-wrapper-validation
     runs-on: macos-latest
     steps:
       - name: Checkout code
@@ -93,14 +80,15 @@ jobs:
       - name: Deliver 'internal' subproject to OSSRH for macOS x64
         run: ./gradlew :types-internal:publishMacosPublicationToOSSRHRepository
       - name: Deliver 'internal' subproject to OSSRH for macOS arm64
-        run: ./gradlew :types-internal:publishMacosArm64PublicationToOSSRHRepository
+        run: |
+          ./gradlew \
+          :types-internal:publishMacosArm64PublicationToOSSRHRepository
       - name: Deliver root project to OSSRH for macOS x64
         run: ./gradlew :publishMacosPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH for macOS arm64
         run: ./gradlew :publishMacosArm64PublicationToOSSRHRepository
   windows-delivery:
     name: Kotlin Native delivery for Windows
-    needs: gradle-wrapper-validation
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -113,10 +101,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
+        run: |
+          ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishWindowsPublicationToOSSRHRepository
-  # ---------- Stage 3 ----------
+  # --------------------------------- Stage 2 ----------------------------------
   kmp-delivery:
     name: Kotlin Multiplatform delivery
     needs:
@@ -137,6 +126,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Deliver 'internal' subproject to OSSRH
-        run: ./gradlew :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository
+        run: |
+          ./gradlew \
+          :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository
       - name: Deliver root project to OSSRH
         run: ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository
