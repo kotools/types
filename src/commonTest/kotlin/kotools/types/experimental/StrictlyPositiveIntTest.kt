@@ -5,7 +5,6 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyNegativeInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class StrictlyPositiveIntTest {
     @ExperimentalKotoolsTypesApi
@@ -20,4 +19,3 @@ class StrictlyPositiveIntTest {
         assertEquals(expected, actual)
     }
 }
-

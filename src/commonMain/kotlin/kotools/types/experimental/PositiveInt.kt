@@ -6,8 +6,6 @@ import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NegativeInt
 import kotools.types.number.PositiveInt
-import kotools.types.number.StrictlyPositiveInt
-import kotools.types.number.ZeroInt
 import kotools.types.number.toNegativeInt
 import kotlin.jvm.JvmSynthetic
 
@@ -36,4 +34,3 @@ public operator fun PositiveInt.unaryMinus(): NegativeInt {
         .getOrNull()
         ?: unexpectedCreationError<NegativeInt>(value)
 }
-

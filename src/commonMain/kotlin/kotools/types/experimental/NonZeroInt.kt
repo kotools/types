@@ -5,8 +5,6 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NonZeroInt
-import kotools.types.number.StrictlyNegativeInt
-import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toNonZeroInt
 import kotlin.jvm.JvmSynthetic
 
