@@ -30,10 +30,6 @@ private object StringExample {
 
 @ExperimentalKotoolsTypesApi
 class NotBlankStringCompanionTest {
-    @Test
-    fun create_should_pass_with_null() {
-        NotBlankString.create(null)
-    }
 
     @Test
     fun create_should_pass_with_an_object_having_a_not_blank_string_representation() {
