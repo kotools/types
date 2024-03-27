@@ -7,153 +7,31 @@ on:
         required: false
         type: boolean
         default: false
-env:
-  GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-  GIT_USER: ${{ secrets.GIT_USER }}
-  GRADLE_DRY_RUN: ${{ inputs.gradleDryRun == true && '--dry-run' || '' }}
-  GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-  JAVA_DISTRIBUTION: temurin
-  JAVA_VERSION: 17
-  MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-  MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-permissions: read-all
 jobs:
-  # --------------------------------- Stage 1 ----------------------------------
-  js-delivery:
-    name: Kotlin/JS delivery
+  delivery:
+    name: Publish to OSSRH
     runs-on: ubuntu-latest
+    env:
+      GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+      GIT_USER: ${{ secrets.GIT_USER }}
+      GRADLE_DRY_RUN: ${{ inputs.gradleDryRun == true && '--dry-run' || '' }}
+      GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+      MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
       - name: Setup Java
         uses: actions/setup-java@v4.1.0
         with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
+      - name: Publish 'internal' subproject
         run: |
-          ./gradlew \
-          :types-internal:publishJsPublicationToOSSRHRepository $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishJsPublicationToOSSRHRepository $GRADLE_DRY_RUN
-  jvm-delivery:
-    name: Kotlin/JVM delivery
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: |
-          ./gradlew \
-          :types-internal:publishJvmPublicationToOSSRHRepository $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishJvmPublicationToOSSRHRepository $GRADLE_DRY_RUN
-  linux-delivery:
-    name: Kotlin Native delivery for Linux
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: |
-          ./gradlew \
-          :types-internal:publishLinuxPublicationToOSSRHRepository \
+          ./gradlew :types-internal:publishAllPublicationsToOSSRHRepository \
           $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH
-        run: ./gradlew :publishLinuxPublicationToOSSRHRepository $GRADLE_DRY_RUN
-  macos-delivery:
-    name: Kotlin Native delivery for macOS
-    runs-on: macos-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH for macOS x64
-        run: |
-          ./gradlew \
-          :types-internal:publishMacosPublicationToOSSRHRepository \
-          $GRADLE_DRY_RUN
-      - name: Deliver 'internal' subproject to OSSRH for macOS arm64
-        run: |
-          ./gradlew \
-          :types-internal:publishMacosArm64PublicationToOSSRHRepository \
-          $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH for macOS x64
-        run: ./gradlew :publishMacosPublicationToOSSRHRepository $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH for macOS arm64
-        run: |
-          ./gradlew :publishMacosArm64PublicationToOSSRHRepository \
-          $GRADLE_DRY_RUN
-  windows-delivery:
-    name: Kotlin Native delivery for Windows
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: |
-          ./gradlew \
-          :types-internal:publishWindowsPublicationToOSSRHRepository \
-          $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH
-        run: |
-          ./gradlew :publishWindowsPublicationToOSSRHRepository $GRADLE_DRY_RUN
-  # --------------------------------- Stage 2 ----------------------------------
-  kmp-delivery:
-    name: Kotlin Multiplatform delivery
-    needs:
-      - js-delivery
-      - jvm-delivery
-      - linux-delivery
-      - macos-delivery
-      - windows-delivery
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
-      - name: Setup Java
-        uses: actions/setup-java@v4.1.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
-      - name: Deliver 'internal' subproject to OSSRH
-        run: |
-          ./gradlew \
-          :types-internal:publishKotlinMultiplatformPublicationToOSSRHRepository \
-          $GRADLE_DRY_RUN
-      - name: Deliver root project to OSSRH
-        run: |
-          ./gradlew :publishKotlinMultiplatformPublicationToOSSRHRepository \
-          $GRADLE_DRY_RUN
+      - name: Publish root project
+        run: ./gradlew :publishAllPublicationsToOSSRHRepository $GRADLE_DRY_RUN
