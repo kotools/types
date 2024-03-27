@@ -1,7 +1,5 @@
 rootProject.name = "types"
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 private val gradlePluginsDirectory: File = rootDir.resolve("gradle/plugins")
 includeBuild(gradlePluginsDirectory)
 
