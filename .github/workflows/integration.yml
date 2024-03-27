@@ -30,18 +30,20 @@ env:
   JAVA_VERSION: 17
 jobs:
   # --------------------------------- Stage 1 ----------------------------------
-  gradle-wrapper-validation:
-    name: Gradle wrapper validation
+  gradle-checks:
+    name: Gradle checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.1
+      - name: Validate Gradle plugins
+        run: ./gradlew :plugins:validatePlugins --no-daemon
   # --------------------------------- Stage 2 ----------------------------------
   js-test:
     name: Kotlin/JS tests
-    needs: gradle-wrapper-validation
+    needs: gradle-checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -59,7 +61,7 @@ jobs:
         run: ./gradlew :jsTest
   jvm-checks:
     name: Kotlin/JVM checks
-    needs: gradle-wrapper-validation
+    needs: gradle-checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -79,7 +81,7 @@ jobs:
         run: ./gradlew :jvmTest :jvmApiCheck
   linux-test:
     name: Kotlin Native tests for Linux
-    needs: gradle-wrapper-validation
+    needs: gradle-checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -97,7 +99,7 @@ jobs:
         run: ./gradlew :linuxTest
   macos-test:
     name: Kotlin Native tests for macOS
-    needs: gradle-wrapper-validation
+    needs: gradle-checks
     runs-on: macos-latest
     steps:
       - name: Checkout code
@@ -119,7 +121,7 @@ jobs:
         run: ./gradlew :macosArm64Test
   windows-test:
     name: Kotlin Native tests for Windows
-    needs: gradle-wrapper-validation
+    needs: gradle-checks
     runs-on: windows-latest
     steps:
       - name: Checkout code
