@@ -8,18 +8,6 @@ public class EmailAddressTest {
     @Nested
     public class Companion {
         @Test
-        public void create_should_be_compatible_with_Java() {
-            final String value = "contact@kotools.org";
-            final String type = EmailAddress.class.getSimpleName();
-            final String message = "Creating an '%s' from '%s' should pass."
-                    .formatted(type, value);
-            Assertions.assertDoesNotThrow(
-                    () -> EmailAddress.Companion.create(value),
-                    message
-            );
-        }
-
-        @Test
         public void createOrNull_should_be_compatible_with_Java() {
             final String value = "contact@kotools.org";
             final EmailAddress actual =
@@ -43,8 +31,8 @@ public class EmailAddressTest {
     @Test
     public void equals_should_be_compatible_with_Java() {
         final String value = "contact@kotools.org";
-        final EmailAddress first = EmailAddress.Companion.create(value);
-        final EmailAddress second = EmailAddress.Companion.create(value);
+        final EmailAddress first = new EmailAddress(value);
+        final EmailAddress second = new EmailAddress(value);
         final boolean actual = first.equals(second);
         final String message =
                 "Comparing 2 email addresses with the same value should pass.";
@@ -54,9 +42,9 @@ public class EmailAddressTest {
     @Test
     public void hashCode_should_be_compatible_with_Java() {
         final String value = "contact@kotools.org";
-        final int actual = EmailAddress.Companion.create(value)
+        final int actual = new EmailAddress(value)
                 .hashCode();
-        final int expected = EmailAddress.Companion.create(value)
+        final int expected = new EmailAddress(value)
                 .hashCode();
         final String message = "Comparing the hash code of 2 email addresses " +
                 "having the same value should pass.";
@@ -66,7 +54,7 @@ public class EmailAddressTest {
     @Test
     public void toString_should_be_compatible_with_Java() {
         final String expected = "contact@kotools.org";
-        final String actual = EmailAddress.Companion.create(expected)
+        final String actual = new EmailAddress(expected)
                 .toString();
         final String type = EmailAddress.class.getSimpleName();
         final String message = "'%s.toString()' should return '%s'."

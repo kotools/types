@@ -55,7 +55,7 @@ public annotation class Since(val version: KotoolsTypesVersion)
 @Retention(SOURCE)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class DeprecatedSince(
-    val warningSince: KotoolsTypesVersion,
+    val warningSince: KotoolsTypesVersion = KotoolsTypesVersion.Unreleased,
     val errorSince: KotoolsTypesVersion = KotoolsTypesVersion.Unreleased,
     val hiddenSince: KotoolsTypesVersion = KotoolsTypesVersion.Unreleased
 )

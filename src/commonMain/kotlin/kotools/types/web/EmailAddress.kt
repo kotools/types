@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.DeprecatedSince
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
@@ -22,9 +23,8 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
- * You can use the [EmailAddress.Companion.create] or the
- * [EmailAddress.Companion.createOrNull] functions for creating an instance of
- * this type.
+ * You can use the [EmailAddress.Companion.createOrNull] function for creating
+ * an instance of this type.
  *
  * <br>
  * <details>
@@ -39,7 +39,7 @@ import kotlin.jvm.JvmSynthetic
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
  * ```kotlin
- * val address: EmailAddress = EmailAddress.create("contact@kotools.org")
+ * val address = EmailAddress("contact@kotools.org")
  * val encoded: String = Json.encodeToString(address)
  * println(encoded) // "contact@kotools.org"
  * val decoded: EmailAddress = Json.decodeFromString(encoded)
@@ -106,8 +106,9 @@ public constructor(private val value: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val first: EmailAddress = EmailAddress.create("contact@kotools.org")
-     * val second: EmailAddress = EmailAddress.create("$first")
+     * val value = "contact@kotools.org"
+     * val first = EmailAddress(value)
+     * val second = EmailAddress(value)
      * val result: Boolean = first == second // or first.equals(second)
      * println(result) // true
      * ```
@@ -122,9 +123,9 @@ public constructor(private val value: String) {
      * Here's an example of calling this function from Java code:
      *
      * ```java
-     * final String text = "contact@kotools.org";
-     * final EmailAddress first = EmailAddress.Companion.create(text);
-     * final EmailAddress second = EmailAddress.Companion.create(text);
+     * final String value = "contact@kotools.org";
+     * final EmailAddress first = new EmailAddress(value);
+     * final EmailAddress second = new EmailAddress(value);
      * final boolean result = first.equals(second);
      * System.out.println(result); // true
      * ```
@@ -149,10 +150,10 @@ public constructor(private val value: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val text = "contact@kotools.org"
-     * val first: Int = EmailAddress.create(text)
+     * val value = "contact@kotools.org"
+     * val first: Int = EmailAddress(value)
      *     .hashCode()
-     * val second: Int = EmailAddress.create("$first")
+     * val second: Int = EmailAddress(value)
      *     .hashCode()
      * val result: Boolean = first == second
      * println(result) // true
@@ -168,9 +169,9 @@ public constructor(private val value: String) {
      * Here's an example of calling this function from Java code:
      *
      * ```java
-     * final String text = "contact@kotools.org";
-     * final EmailAddress first = EmailAddress.Companion.create(text);
-     * final EmailAddress second = EmailAddress.Companion.create(text);
+     * final String value = "contact@kotools.org";
+     * final EmailAddress first = new EmailAddress(value);
+     * final EmailAddress second = new EmailAddress(value);
      * final int firstHashCode = first.hashCode();
      * final int secondHashCode = second.hashCode();
      * final boolean result = firstHashCode == secondHashCode;
@@ -194,7 +195,7 @@ public constructor(private val value: String) {
      * Here's an example of calling this function from Kotlin code:
      *
      * ```kotlin
-     * val address: EmailAddress = EmailAddress.create("contact@kotools.org")
+     * val address = EmailAddress("contact@kotools.org")
      * val message = "$address" // or address.toString()
      * println(message) // contact@kotools.org
      * ```
@@ -209,8 +210,7 @@ public constructor(private val value: String) {
      * Here's an example of calling this function from Java code:
      *
      * ```java
-     * final EmailAddress address =
-     *         EmailAddress.Companion.create("contact@kotools.org");
+     * final EmailAddress address = new EmailAddress("contact@kotools.org");
      * final String message = address.toString();
      * System.out.println(message); // contact@kotools.org
      * ```
@@ -252,6 +252,10 @@ public constructor(private val value: String) {
         @get:JvmSynthetic
         public val regex: Regex = Regex("^\\S+@\\S+\\.\\S+\$")
 
+        private const val FACTORY_FUNCTION_DEPRECATION_MESSAGE: String =
+            "This function will be removed in v4.7. " +
+                    "Use the constructor of EmailAddress instead."
+
         /**
          * Creates an email address from the specified [text], or throws an
          * [IllegalArgumentException] if the [text] doesn't match the
@@ -292,6 +296,12 @@ public constructor(private val value: String) {
          * returning `null` instead of throwing an exception in case of invalid
          * [text].
          */
+        @Deprecated(
+            FACTORY_FUNCTION_DEPRECATION_MESSAGE,
+            ReplaceWith("EmailAddress(text)", "kotools.types.web.EmailAddress"),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedSince(errorSince = KotoolsTypesVersion.Unreleased)
         public fun create(text: String): EmailAddress {
             require(text matches regex) {
                 ErrorMessage.invalidEmailAddress(text)
@@ -333,10 +343,6 @@ public constructor(private val value: String) {
          * System.out.println(address); // contact@kotools.org
          * ```
          * </details>
-         * <br>
-         *
-         * You can use the [EmailAddress.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid [text].
          */
         public fun createOrNull(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)

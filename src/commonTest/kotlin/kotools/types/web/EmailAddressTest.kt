@@ -54,7 +54,6 @@ private object Texts {
 }
 
 @ExperimentalKotoolsTypesApi
-@OptIn(InternalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
     @Test
     fun regex_should_pass() {
@@ -62,20 +61,6 @@ class EmailAddressCompanionTest {
         val expected = Regex("^\\S+@\\S+\\.\\S+\$")
         assertEquals(expected.pattern, actual.pattern)
     }
-
-    @Test
-    fun create_should_pass_with_a_valid_String(): Unit =
-        Texts.valid.forEach { EmailAddress.create(it) }
-
-    @Test
-    fun create_should_fail_with_an_invalid_String(): Unit =
-        Texts.invalid.forEach {
-            val exception: IllegalArgumentException =
-                assertFailsWith { EmailAddress.create(it) }
-            val actual = ErrorMessage(exception)
-            val expected: ErrorMessage = ErrorMessage.invalidEmailAddress(it)
-            assertEquals(expected, actual)
-        }
 
     @Test
     fun createOrNull_should_pass_with_a_valid_String(): Unit =
@@ -133,7 +118,7 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_the_same_object() {
         val text: String = Texts.valid.random()
-        val first: EmailAddress = EmailAddress.create(text)
+        val first = EmailAddress(text)
         val second: EmailAddress = first
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
@@ -142,8 +127,8 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
         val text: String = Texts.valid.random()
-        val first: EmailAddress = EmailAddress.create(text)
-        val second: EmailAddress = EmailAddress.create(text)
+        val first = EmailAddress(text)
+        val second = EmailAddress(text)
         assertEquals(first, second)
         assertEquals(first.hashCode(), second.hashCode())
     }
@@ -151,7 +136,7 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_null() {
         val text: String = Texts.valid.random()
-        val first: EmailAddress = EmailAddress.create(text)
+        val first = EmailAddress(text)
         val second: Any? = null
         assertNotEquals(first, second)
     }
@@ -159,7 +144,7 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_another_object_that_is_not_an_EmailAddress() {
         val text: String = Texts.valid.random()
-        val first: EmailAddress = EmailAddress.create(text)
+        val first = EmailAddress(text)
         val second: Any = text
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
@@ -168,8 +153,8 @@ class EmailAddressTest {
     @Test
     fun structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
         val text: String = Texts.valid.random()
-        val first: EmailAddress = EmailAddress.create(text)
-        val second: EmailAddress = EmailAddress.create("${text}x")
+        val first = EmailAddress(text)
+        val second = EmailAddress("${text}x")
         assertNotEquals(first, second)
         assertNotEquals(first.hashCode(), second.hashCode())
     }
@@ -177,7 +162,7 @@ class EmailAddressTest {
     @Test
     fun toString_should_pass() {
         val text: String = Texts.valid.random()
-        val address: EmailAddress = EmailAddress.create(text)
+        val address = EmailAddress(text)
         val actual: String = address.toString()
         assertEquals(expected = text, actual)
     }
@@ -206,7 +191,7 @@ class EmailAddressSerializerTest {
     @Test
     fun serialization_should_behave_like_a_String() {
         val text: String = Texts.valid.random()
-        val address: EmailAddress = EmailAddress.create(text)
+        val address = EmailAddress(text)
         val actual: String = Json.encodeToString(address)
         val expected: String = Json.encodeToString(text)
         assertEquals(expected, actual)
@@ -217,7 +202,7 @@ class EmailAddressSerializerTest {
         Texts.valid.forEach {
             val encoded: String = Json.encodeToString(it)
             val actual: EmailAddress = Json.decodeFromString(encoded)
-            val expected: EmailAddress = EmailAddress.create(it)
+            val expected = EmailAddress(it)
             assertEquals(expected, actual)
         }
 
@@ -239,7 +224,7 @@ class EmailAddressSerializerTest {
         @Serializable
         data class Wrapper(val value: EmailAddress)
 
-        val address: EmailAddress = EmailAddress.create("contact@kotools.org")
+        val address = EmailAddress("contact@kotools.org")
         val wrapper = Wrapper(address)
         val encoded: String = Json.encodeToString(wrapper)
         val decoded: Wrapper = Json.decodeFromString(encoded)
