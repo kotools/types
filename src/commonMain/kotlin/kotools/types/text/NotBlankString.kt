@@ -124,7 +124,7 @@ public value class NotBlankString private constructor(
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
-        public fun createOrNull(value: Any?): NotBlankString? {
+        public fun createOrNull(value: Any): NotBlankString? {
             val text: String = value.toString()
             val isValid: Boolean = text.isNotBlank()
             return if (isValid) NotBlankString(text)
