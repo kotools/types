@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
-`EmailAddress` type ([#581] and [#583]).
+`EmailAddress` **experimental** type ([#581] and [#583]).
 
 ```kotlin
 // Before
@@ -34,7 +34,7 @@ EmailAddress.create("explicit-types_library@kotools.org") // pass
 - Our [versioning strategy](documentation/versioning-strategy.md) is now based
   on backward compatibility, focusing on **behavioral**, **source** and
   **binary** compatibilities ([5e2484b8b]).
-- The `create` and the `createOrNull` functions of the
+- The `create` and the `createOrNull` **experimental** functions of the
   `NotBlankString.Companion` type now accept a value of type `Any` instead of
   `Any?` ([#626]).
 
@@ -56,8 +56,8 @@ Deprecation promotion of the following annotations to hidden ([#334]):
 
 ### 🐛 Fixed
 
-Renames the `EmailAddress` type's serializer as `kotools.types.web.EmailAddress`
-([#599]).
+Renames the `EmailAddress` **experimental** type's serializer as
+`kotools.types.web.EmailAddress` ([#599]).
 
 ```kotlin
 // Before
