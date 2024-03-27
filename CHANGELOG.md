@@ -19,16 +19,16 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
-`EmailAddress` type (#581 and #583).
+`EmailAddress` type ([#581] and [#583]).
 
 ### ♻️ Changed
 
 - Our [versioning strategy](documentation/versioning-strategy.md) is now based
   on backward compatibility, focusing on **behavioral**, **source** and
-  **binary** compatibilities (5e2484b8b).
+  **binary** compatibilities ([5e2484b8b]).
 - The `create` and the `createOrNull` functions of the
   `NotBlankString.Companion` type now accepts a value of type `Any` instead of
-  `Any?` ([#626](https://github.com/kotools/types/pull/626)).
+  `Any?` ([#626]).
 
 ```kotlin
 // Before
@@ -42,19 +42,28 @@ NotBlankString.createOrNull(null) // compilation error
 
 ### 🗑️ Deprecated
 
-Deprecation promotion of the following annotations to hidden (#334):
+Deprecation promotion of the following annotations to hidden ([#334]):
 `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
 `ExperimentalResultApi` and `ExperimentalTextApi`.
 
 ### 🐛 Fixed
 
 Renames the `EmailAddress` type's serializer as `kotools.types.web.EmailAddress`
-(#599).
+([#599]).
 
 ---
 
-Thanks to @LVMVRQUXL and [@augustomtt](https://github.com/augustomtt) for
-contributing to this new release. 🙏
+Thanks to [@LVMVRQUXL] and [@augustomtt] for contributing to this new release.
+🙏
+
+[@augustomtt]: https://github.com/augustomtt
+[@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#334]: https://github.com/kotools/types/issues/334
+[#581]: https://github.com/kotools/types/issues/581
+[#583]: https://github.com/kotools/types/issues/583
+[#599]: https://github.com/kotools/types/issues/599
+[#626]: https://github.com/kotools/types/pull/626
+[5e2484b8b]: https://github.com/kotools/types/commit/5e2484b8bf2756e41eb207d2e11acc9d5f5661d0
 
 ## 🔖 Releases
 
