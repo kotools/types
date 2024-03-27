@@ -23,9 +23,22 @@ Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
 
 ### ♻️ Changed
 
-Our [versioning strategy](documentation/versioning-strategy.md) is now based on
-backward compatibility, focusing on **behavioral**, **source** and **binary**
-compatibilities (5e2484b8b).
+- Our [versioning strategy](documentation/versioning-strategy.md) is now based
+  on backward compatibility, focusing on **behavioral**, **source** and
+  **binary** compatibilities (5e2484b8b).
+- The `create` and the `createOrNull` functions of the
+  `NotBlankString.Companion` type now accepts a value of type `Any` instead of
+  `Any?` ([#626](https://github.com/kotools/types/pull/626)).
+
+```kotlin
+// Before
+NotBlankString.create(null) // pass
+NotBlankString.createOrNull(null) // pass
+
+// Now
+NotBlankString.create(null) // compilation error
+NotBlankString.createOrNull(null) // compilation error
+```
 
 ### 🗑️ Deprecated
 
@@ -40,7 +53,8 @@ Renames the `EmailAddress` type's serializer as `kotools.types.web.EmailAddress`
 
 ---
 
-Thanks to @LVMVRQUXL for contributing to this new release. 🙏
+Thanks to @LVMVRQUXL and [@augustomtt](https://github.com/augustomtt) for
+contributing to this new release. 🙏
 
 ## 🔖 Releases
 
