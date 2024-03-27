@@ -188,31 +188,17 @@ public class EmailAddress private constructor(private val text: String) {
         /**
          * The regular expression that an [EmailAddress] should match.
          *
-         * Based on
-         * [RFC-5322](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1),
-         * the underlying pattern is
-         * `^[A-Za-z\d]+(?:[-._][A-Za-z\d]+)*@(?:[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]\.)*[A-Za-z][A-Za-z\d-]{0,61}[A-Za-z\d]$`.
+         * The underlying pattern is `^\S+@\S+\.\S+$`.
          *
-         * Here's the explanation associated to each symbol used in this regular
-         * expression:
+         * Here's the explanation associated to each symbol used in this
+         * pattern:
          * - `^` **Beginning.** Matches the beginning of the string, or the
          * beginning of a line if the multiline flag (m) is enabled.
-         * - `[]` **Character set.** Match any character in the set.
-         * - `A-Z` **Range.** Matches a character in the range "A" to "Z" (char
-         * code 65 to 90). Case-sensitive.
-         * - `a-z` **Range.** Matches a character in the range "a" to "z" (char
-         * code 97 to 122). Case-sensitive.
-         * - `\d` **Digit.** Matches any digit character (0-9).
+         * - `\S` **Not whitespace.** Matches any character that is not a
+         * whitespace character (spaces, tabs, line breaks).
          * - `+` **Quantifier.** Match 1 or more of the preceding token.
-         * - `(?:)` **Non-capturing group.** Groups multiple tokens together
-         * without creating a capture group.
-         * - `-` **Character.** Matches a "-" character (char code 45).
-         * - `.` **Character.** Matches a "." character (char code 46).
-         * - `_` **Character.** Matches a "_" character (char code 95).
-         * - `*` **Quantifier.** Match 0 or more of the preceding token.
          * - `@` **Character.** Match a "@" character (char code 64).
-         * - `{0,61}` **Quantifier.** Match between 0 and 61 of the preceding
-         * token.
+         * - `\.` **Escaped character.** Matches a "." character (char code 46).
          * - `$` **End.** Matches the end of the string, or the end of a line if
          * the multiline flag (m) is enabled.
          *
@@ -226,12 +212,7 @@ public class EmailAddress private constructor(private val text: String) {
          * available for this language.
          */
         @get:JvmSynthetic
-        public val regex: Regex = run {
-            val localPart = "[A-Za-z\\d]+(?:[-._][A-Za-z\\d]+)*"
-            val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
-            val domain = "(?:$domainLabel\\.)*$domainLabel"
-            Regex("^$localPart@$domain\$")
-        }
+        public val regex: Regex = Regex("^\\S+@\\S+\\.\\S+\$")
 
         /**
          * Creates an email address from the specified [text], or throws an

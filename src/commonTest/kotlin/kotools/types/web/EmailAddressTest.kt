@@ -59,12 +59,7 @@ class EmailAddressCompanionTest {
     @Test
     fun regex_should_pass() {
         val actual: Regex = EmailAddress.regex
-        val expected = kotlin.run {
-            val localPart = "[A-Za-z\\d]+(?:[-._][A-Za-z\\d]+)*"
-            val domainLabel = "[A-Za-z][A-Za-z\\d-]{0,61}[A-Za-z\\d]"
-            val domain = "(?:$domainLabel\\.)*$domainLabel"
-            Regex("^$localPart@$domain\$")
-        }
+        val expected = Regex("^\\S+@\\S+\\.\\S+\$")
         assertEquals(expected.pattern, actual.pattern)
     }
 

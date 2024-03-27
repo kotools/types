@@ -16,19 +16,6 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-### ✨ Added
-
-Support digits, hyphens (`-`) and underscores (`_`) in the local-part of the
-`EmailAddress` **experimental** type ([#581] and [#583]).
-
-```kotlin
-// Before
-EmailAddress.create("explicit-types_library@kotools.org") // exception
-
-// Now
-EmailAddress.create("explicit-types_library@kotools.org") // pass
-```
-
 ### ♻️ Changed
 
 - Our [versioning strategy](documentation/versioning-strategy.md) is now based
@@ -46,6 +33,19 @@ NotBlankString.createOrNull(null) // pass
 // Now
 NotBlankString.create(null) // compilation error
 NotBlankString.createOrNull(null) // compilation error
+```
+
+- For simplicity purpose, the regular expression of the `EmailAddress`
+  **experimental** type is now `^\S+@\S+\.\S+$` ([#600]). This is a
+  **compatible behavioral** change that allows a wider range of values in email
+  addresses.
+
+```kotlin
+// Before
+EmailAddress.create("types-4_library@kotools.org") // exception
+
+// Now
+EmailAddress.create("types-4_library@kotools.org") // pass
 ```
 
 ### 🗑️ Deprecated
@@ -87,6 +87,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [#581]: https://github.com/kotools/types/issues/581
 [#583]: https://github.com/kotools/types/issues/583
 [#599]: https://github.com/kotools/types/issues/599
+[#600]: https://github.com/kotools/types/issues/600
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
 [5e2484b8b]: https://github.com/kotools/types/commit/5e2484b8bf2756e41eb207d2e11acc9d5f5661d0
