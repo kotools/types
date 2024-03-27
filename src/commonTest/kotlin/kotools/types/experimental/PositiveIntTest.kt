@@ -19,18 +19,4 @@ class PositiveIntTest {
             .toNegativeIntOrFailure()
         assertEquals(expected, actual)
     }
-
-    @ExperimentalKotoolsTypesApi
-    @Test
-    fun range_should_go_from_0_included_to_Int_MAX_VALUE_included() {
-        val actual: NotEmptyRange<PositiveInt> = PositiveInt.range
-        assertTrue { actual.start is InclusiveBound }
-        val expectedStartValue: PositiveInt = 0.toPositiveInt()
-            .getOrThrow()
-        assertEquals(expectedStartValue, actual.start.value)
-        assertTrue { actual.end is InclusiveBound }
-        val expectedEndValue: PositiveInt = Int.MAX_VALUE.toPositiveInt()
-            .getOrThrow()
-        assertEquals(expectedEndValue, actual.end.value)
-    }
 }

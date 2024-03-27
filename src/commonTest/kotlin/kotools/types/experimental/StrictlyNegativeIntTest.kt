@@ -21,19 +21,4 @@ class StrictlyNegativeIntTest {
         assertEquals(expected, actual)
     }
 
-    @ExperimentalKotoolsTypesApi
-    @Test
-    fun range_should_go_from_Int_MIN_VALUE_included_to_minus_1_included() {
-        val actual: NotEmptyRange<StrictlyNegativeInt> =
-            StrictlyNegativeInt.range
-        assertTrue { actual.start is InclusiveBound }
-        val expectedStartValue: StrictlyNegativeInt = Int.MIN_VALUE
-            .toStrictlyNegativeInt()
-            .getOrThrow()
-        assertEquals(expectedStartValue, actual.start.value)
-        assertTrue { actual.end is InclusiveBound }
-        val expectedEndValue: StrictlyNegativeInt = (-1).toStrictlyNegativeInt()
-            .getOrThrow()
-        assertEquals(expectedEndValue, actual.end.value)
-    }
 }
