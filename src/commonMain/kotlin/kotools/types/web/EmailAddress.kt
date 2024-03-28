@@ -23,9 +23,6 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
- * You can use the [EmailAddress.Companion.createOrNull] function for creating
- * an instance of this type.
- *
  * <br>
  * <details>
  * <summary>
@@ -252,6 +249,9 @@ public constructor(private val value: String) {
         @get:JvmSynthetic
         public val regex: Regex = Regex("^\\S+@\\S+\\.\\S+\$")
 
+        private const val QUALIFIED_NAME: String =
+            "kotools.types.web.EmailAddress"
+
         private const val FACTORY_FUNCTION_DEPRECATION_MESSAGE: String =
             "This function will be removed in v4.7. " +
                     "Use the constructor of EmailAddress instead."
@@ -290,15 +290,13 @@ public constructor(private val value: String) {
          * System.out.println(address); // contact@kotools.org
          * ```
          * </details>
-         * <br>
-         *
-         * You can use the [EmailAddress.Companion.createOrNull] function for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [text].
          */
         @Deprecated(
             FACTORY_FUNCTION_DEPRECATION_MESSAGE,
-            ReplaceWith("EmailAddress(text)", "kotools.types.web.EmailAddress"),
+            ReplaceWith(
+                expression = "EmailAddress(text)",
+                imports = [QUALIFIED_NAME]
+            ),
             DeprecationLevel.ERROR
         )
         @DeprecatedSince(errorSince = KotoolsTypesVersion.Unreleased)
@@ -344,6 +342,16 @@ public constructor(private val value: String) {
          * ```
          * </details>
          */
+        @Deprecated(
+            FACTORY_FUNCTION_DEPRECATION_MESSAGE,
+            ReplaceWith(
+                expression = "kotlin.runCatching { EmailAddress(text) }\n" +
+                        "    .getOrNull()",
+                imports = [QUALIFIED_NAME]
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedSince(errorSince = KotoolsTypesVersion.Unreleased)
         public fun createOrNull(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)
             else null
@@ -370,7 +378,8 @@ private object EmailAddressDeserializationStrategy :
     @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
-        return EmailAddress.createOrNull(text)
+        return kotlin.runCatching { EmailAddress(text) }
+            .getOrNull()
             ?: deserializationError<EmailAddress>(text)
     }
 }

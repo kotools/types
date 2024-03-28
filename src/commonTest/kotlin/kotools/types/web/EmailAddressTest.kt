@@ -18,8 +18,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 private object Texts {
     val valid: Set<String> by lazy {
@@ -61,20 +59,6 @@ class EmailAddressCompanionTest {
         val expected = Regex("^\\S+@\\S+\\.\\S+\$")
         assertEquals(expected.pattern, actual.pattern)
     }
-
-    @Test
-    fun createOrNull_should_pass_with_a_valid_String(): Unit =
-        Texts.valid.forEach {
-            val actual: EmailAddress? = EmailAddress.createOrNull(it)
-            assertNotNull(actual)
-        }
-
-    @Test
-    fun createOrNull_should_fail_with_an_invalid_String(): Unit =
-        Texts.invalid.forEach {
-            val actual: EmailAddress? = EmailAddress.createOrNull(it)
-            assertNull(actual)
-        }
 }
 
 @ExperimentalKotoolsTypesApi

@@ -1,24 +1,9 @@
 package kotools.types.web;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class EmailAddressTest {
-    @Nested
-    public class Companion {
-        @Test
-        public void createOrNull_should_be_compatible_with_Java() {
-            final String value = "contact@kotools.org";
-            final EmailAddress actual =
-                    EmailAddress.Companion.createOrNull(value);
-            final String type = EmailAddress.class.getSimpleName();
-            final String message = "Creating an '%s' from '%s' should pass."
-                    .formatted(type, value);
-            Assertions.assertNotNull(actual, message);
-        }
-    }
-
     @Test
     public void constructor_should_be_compatible_with_Java() {
         final String value = "contact@kotools.org";

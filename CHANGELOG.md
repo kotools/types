@@ -66,10 +66,11 @@ EmailAddress("types-4_library@kotools.org") // pass
 - Deprecation promotion of the following annotations to hidden ([#334]):
   `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
   `ExperimentalResultApi` and `ExperimentalTextApi`.
-- The `EmailAddress.Companion.create(String)` **experimental** function is
-  deprecated for using the new constructor for the `EmailAddress` type ([#623]).
-  It is deprecated with an automatic replacement and an error level for removal
-  in v4.7.
+- The `create(String)` and the `createOrNull(String)` **experimental** functions
+  from the `EmailAddress.Companion` type are deprecated for using the new
+  constructor for the `EmailAddress` type ([#623]).
+  They are deprecated with an automatic replacement and an error level for
+  removal in v4.7.
 
 ### 🔥 Removed
 
