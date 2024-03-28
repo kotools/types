@@ -360,6 +360,13 @@ public final class kotools/types/number/StrictlyPositiveIntKt {
 	public static final fun toStrictlyPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
 }
 
+public final class kotools/types/number/Zero {
+	public fun <init> ()V
+	public final fun equals (Ljava/lang/Object;)Z
+	public final fun hashCode ()I
+	public final fun toString ()Ljava/lang/String;
+}
+
 public final class kotools/types/number/ZeroInt : kotools/types/number/NegativeInt, kotools/types/number/PositiveInt {
 	public static final field INSTANCE Lkotools/types/number/ZeroInt;
 	public synthetic fun compareTo (Ljava/lang/Object;)I

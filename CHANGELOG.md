@@ -18,8 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-The `EmailAddress` **experimental** type has a new constructor accepting a value
-of type `String` ([#623]).
+- The `EmailAddress` **experimental** type has a new constructor accepting a
+  value of type `String` ([#623]).
 
 ```kotlin
 // Before
@@ -28,6 +28,11 @@ EmailAddress.create("contact@kotools.org")
 // Now
 EmailAddress("contact@kotools.org")
 ```
+
+- Introduced the `Zero` **experimental** type representing the real-world
+  concept of the zero number.
+  This type is stateless but was declared as a `class` for providing a better
+  control on its initialization.
 
 ### ♻️ Changed
 
