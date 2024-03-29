@@ -26,8 +26,10 @@ internal class TaskRecommendation(private val container: TaskContainer) {
      * ones.
      */
     operator fun plusAssign(names: List<String>): Unit = names
-        .mapNotNull(this.container::findByName)
-        .forEach { it.group = TASK_GROUP }
+        .mapNotNull(this.container::named)
+        .forEach {
+            it.configure { group = TASK_GROUP }
+        }
 
     private companion object {
         private const val TASK_GROUP: String = "Recommended"
