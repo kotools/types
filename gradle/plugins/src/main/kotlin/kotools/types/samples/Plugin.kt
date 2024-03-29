@@ -1,4 +1,4 @@
-package kotools.types.kdoc
+package kotools.types.samples
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -11,8 +11,8 @@ import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-/** Plugin responsible for applying configurations working on KDoc. */
-public class KDocPlugin : Plugin<Project> {
+/** Plugin responsible for extracting Kotlin and Java samples. */
+public class SamplesPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project): Unit =
         project.extractKotlinSamplesTask()

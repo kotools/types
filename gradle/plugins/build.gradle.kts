@@ -21,9 +21,9 @@ gradlePlugin {
             id = "kotools.types.base.v2"
             implementationClass = "kotools.types.base.BasePlugin"
         }
-        register("KotoolsTypesKDocPlugin").configure {
-            id = "kotools.types.kdoc"
-            implementationClass = "$id.KDocPlugin"
+        register("KotoolsTypesSamplesPlugin").configure {
+            id = "kotools.types.samples"
+            implementationClass = "$id.SamplesPlugin"
         }
     }
 }

@@ -1,4 +1,4 @@
-package kotools.types.kdoc
+package kotools.types.samples
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
