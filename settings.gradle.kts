@@ -16,3 +16,7 @@ private val javaCompatibility: String = "java-compatibility"
 include(javaCompatibility)
 project(":$javaCompatibility").projectDir =
     subprojects.resolve(javaCompatibility)
+
+private val samples: String = "samples"
+include(samples)
+project(":$samples").projectDir = subprojects.resolve(samples)
