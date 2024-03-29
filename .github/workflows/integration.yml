@@ -84,6 +84,8 @@ jobs:
         run: ./gradlew :types-internal:jvmTest
       - name: Test 'java-compatibility' subproject
         run: ./gradlew :java-compatibility:test
+      - name: Runs checks of 'samples' subproject
+        run: ./gradlew :samples:check
       - name: Check root project
         run: ./gradlew :jvmTest :jvmApiCheck
   linux-test:
