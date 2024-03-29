@@ -7,11 +7,18 @@ import org.gradle.api.file.FileTree
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 
 /** Task responsible for extracting samples from Kotlin code. */
+@DisableCachingByDefault(
+    because = "Extracting code from sources doesn't worth caching."
+)
 public abstract class KotlinSamplesExtractor : DefaultTask() {
     @get:InputFiles
+    @get:PathSensitive(PathSensitivity.NONE)
     public abstract val sources: Property<FileTree>
 
     @get:OutputDirectory
