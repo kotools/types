@@ -27,4 +27,6 @@ tasks.withType<KotlinCompile>().configureEach {
         jvmTarget.set(JvmTarget.JVM_17)
     }
 }
+tasks.apiCheck.configure { this.isEnabled = false }
+tasks.apiDump.configure { this.isEnabled = false }
 tasks.test.configure(Test::useJUnitPlatform)
