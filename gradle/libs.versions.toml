@@ -11,6 +11,10 @@ system-lambda = "1.2.1"
 id = "org.jetbrains.dokka"
 version.ref = "dokka"
 
+[plugins.kotlin-jvm]
+id = "org.jetbrains.kotlin.jvm"
+version.ref = "kotlin"
+
 [plugins.kotlin-multiplatform]
 id = "org.jetbrains.kotlin.multiplatform"
 version.ref = "kotlin"
