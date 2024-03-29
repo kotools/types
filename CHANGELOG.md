@@ -31,8 +31,6 @@ EmailAddress("contact@kotools.org")
 
 - Introduced the `Zero` **experimental** type representing the real-world
   concept of the zero number ([2df18e425]).
-  This type is stateless but was declared as a `class` for providing a better
-  control on its initialization.
 
 ### ♻️ Changed
 
