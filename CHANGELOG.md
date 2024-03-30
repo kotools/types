@@ -30,7 +30,7 @@ EmailAddress("contact@kotools.org")
 ```
 
 - Introduced the `Zero` **experimental** type representing the real-world
-  concept of the zero number ([2df18e425]).
+  concept of the zero number ([2df18e425] and [43ee104d]).
 
 ### ♻️ Changed
 
@@ -113,6 +113,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
 [2df18e425]: https://github.com/kotools/types/commit/2df18e425e3a889d0f0167708d02d9b887f4207c
+[43ee104d]: https://github.com/kotools/types/commit/43ee104d05d8ca1bf764c7e3bc38b18373fe2b47
 [5e2484b8b]: https://github.com/kotools/types/commit/5e2484b8bf2756e41eb207d2e11acc9d5f5661d0
 
 ## 🔖 Releases
