@@ -7,7 +7,6 @@ internal class KotlinSampleFile(
     private val function: KotlinFunction
 ) {
     init {
-        println("Kotlin sample file name regex: $nameRegex")
         require(name matches nameRegex) {
             "Kotlin sample file name should match '$nameRegex'."
         }

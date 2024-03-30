@@ -29,7 +29,7 @@ public abstract class KotlinSamplesExtractor : DefaultTask() {
         val directory: Directory = this.output.get()
         this.sources.get()
             .asSequence()
-            .map(KotlinFile.Companion::parse)
+            .map(KotlinFileParser::parse)
             .flatMap(KotlinFile::samples)
             .forEach { it.saveIn(directory) }
     }
