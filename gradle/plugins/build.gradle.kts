@@ -17,10 +17,6 @@ gradlePlugin {
         kotoolsTypesPlugin("Documentation")
         kotoolsTypesPlugin("Multiplatform")
         kotoolsTypesPlugin("Publication")
-        register("KotoolsTypesBasePluginV2").configure {
-            id = "kotools.types.base.v2"
-            implementationClass = "kotools.types.base.BasePlugin"
-        }
         register("KotoolsTypesSamplesPlugin").configure {
             id = "kotools.types.samples"
             implementationClass = "$id.SamplesPlugin"
