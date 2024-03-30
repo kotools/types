@@ -1,7 +1,9 @@
 package org.kotools.types
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.kotools.types.samples.ExtractKotlinSamples
+import org.kotools.types.samples.SamplesExtension
+
+private val samples: SamplesExtension = extensions.create("samples")
 
 private val samplesOutput: Provider<Directory> =
     layout.buildDirectory.dir("samples")
@@ -11,8 +13,8 @@ private val samplesOutput: Provider<Directory> =
 private val extractKotlinSamples by tasks
     .registering(ExtractKotlinSamples::class) {
         description = "Extract Kotlin code samples from sources."
-        tasks.named<KotlinCompile>("compileKotlin")
-            .map { it.sources.asFileTree }
+        samples.source.dir("kotlin")
+            .map { it.asFileTree }
             .let(this.sources::set)
         output.set(samplesOutput)
     }

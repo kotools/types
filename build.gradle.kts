@@ -10,6 +10,7 @@ plugins {
     id("kotools.types.multiplatform")
     id("kotools.types.documentation")
     id("kotools.types.publication")
+    id("org.kotools.types.samples")
 }
 
 group = "org.kotools"
@@ -32,6 +33,12 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
         artifactId = project.name
         version = "${project.version}"
     }
+
+project(":samples")
+    .layout
+    .projectDirectory
+    .dir("src/main")
+    .let(samples.source::set)
 
 // ------------------------------- Dependencies --------------------------------
 
