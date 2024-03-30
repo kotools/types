@@ -1,12 +1,17 @@
 package kotools.types.plugins
 
 import kotools.types.Env
+import kotools.types.tasks.PrintTask
+import kotools.types.tasks.TaskGroup
+import kotools.types.tasks.description
+import kotools.types.tasks.group
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 
@@ -21,6 +26,11 @@ public class PublicationPlugin : Plugin<Project> {
         publishing.publications.withType<MavenPublication>().configureEach {
             signing.sign(this)
             configurePom()
+        }
+        project.tasks.register<PrintTask>("version").configure {
+            group(TaskGroup.HELP)
+            description("Displays the project's version.")
+            message.set(project.version)
         }
     }
 }

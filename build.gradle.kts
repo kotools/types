@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
-    id("kotools.types.base")
     id("kotools.types.multiplatform")
     id("kotools.types.documentation")
     id("kotools.types.publication")
