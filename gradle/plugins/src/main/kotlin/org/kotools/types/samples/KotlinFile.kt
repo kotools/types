@@ -28,7 +28,7 @@ internal class KotlinFile(
         val name: String = this.name.substringBefore(FILE_EXTENSION)
             .plus('.')
             .plus(it.name)
-            .plus(FILE_EXTENSION)
+            .plus(KotlinSampleFile.FILE_EXTENSION)
         KotlinSampleFile(name, function = it)
     }
 

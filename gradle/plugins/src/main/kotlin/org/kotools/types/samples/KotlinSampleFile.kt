@@ -26,11 +26,19 @@ internal class KotlinSampleFile(
 
     // -------------------------------------------------------------------------
 
-    fun saveIn(directory: Directory): Unit = directory.file(name)
-        .asFile
-        .writeText(function.bodyText)
+    fun saveIn(directory: Directory) {
+        val text: String = buildString {
+            appendLine("```kotlin")
+            appendLine(function.bodyText)
+            append("```")
+        }
+        directory.file(name)
+            .asFile
+            .writeText(text)
+    }
 
-    private companion object {
-        private val nameRegex = Regex("^[A-Za-z][A-Za-z.]+[A-Za-z]\\.kt$")
+    companion object {
+        const val FILE_EXTENSION: String = ".md"
+        private val nameRegex = Regex("^[A-Za-z][A-Za-z.]+[A-Za-z]\\.md$")
     }
 }
