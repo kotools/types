@@ -4,10 +4,6 @@ import java.io.File
 
 internal object KotlinFileParser {
     fun parse(file: File): KotlinFile {
-        require(file.name.endsWith(KotlinFile.FILE_EXTENSION)) {
-            val parser: String? = this::class.simpleName
-            "'.${file.extension}' files are not supported by '$parser'."
-        }
         val functions: List<KotlinFunction> = file
             .useLines(block = Sequence<String>::getRawFunctions)
             .map(::KotlinFunction)

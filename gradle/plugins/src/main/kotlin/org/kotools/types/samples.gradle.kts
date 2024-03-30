@@ -1,7 +1,7 @@
 package org.kotools.types
 
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.kotools.types.samples.ExtractKotlinSamples
+import org.kotools.types.samples.ExtractCodeSamples
 import org.kotools.types.samples.InlineSamples
 import org.kotools.types.samples.SamplesExtension
 
@@ -12,13 +12,11 @@ private val samplesOutput: Provider<Directory> =
 
 // ------------------------- The `inlineSamples` task --------------------------
 
-private val extractKotlinSamples: TaskProvider<ExtractKotlinSamples> by tasks
-    .registering(ExtractKotlinSamples::class) {
+private val extractKotlinSamples: TaskProvider<ExtractCodeSamples> by tasks
+    .registering(ExtractCodeSamples::class) {
         description = "Extract Kotlin code samples from sources."
-        samples.source.dir("kotlin")
-            .map { it.asFileTree }
-            .let(this.sources::set)
-        output.set(samplesOutput)
+        sourceDirectory.set(samples.source.dir("kotlin"))
+        outputDirectory.set(samplesOutput)
     }
 
 private val backupMainSources: TaskProvider<Copy> by tasks
@@ -31,9 +29,11 @@ private val backupMainSources: TaskProvider<Copy> by tasks
 private val inlineSamples: TaskProvider<InlineSamples> by tasks
     .registering(InlineSamples::class) {
         description = "Inlines code samples in KDoc comments."
-        listOf(backupMainSources).let(this::setDependsOn)
+        setDependsOn(listOf(backupMainSources))
         sources.set(layout.projectDirectory.dir("src"))
-        samples.set(extractKotlinSamples.flatMap(ExtractKotlinSamples::output))
+        samples.set(
+            extractKotlinSamples.flatMap(ExtractCodeSamples::outputDirectory)
+        )
     }
 
 private val restoreMainSources: TaskProvider<Copy> by tasks

@@ -5,7 +5,7 @@ import org.gradle.api.file.Directory
 internal class KotlinSampleFile(
     private val name: String,
     private val function: KotlinFunction
-) {
+) : SampleFile {
     init {
         require(name matches nameRegex) {
             "Kotlin sample file name should match '$nameRegex'."
@@ -26,7 +26,7 @@ internal class KotlinSampleFile(
 
     // -------------------------------------------------------------------------
 
-    fun saveIn(directory: Directory) {
+    override fun saveIn(directory: Directory) {
         val text: String = buildString {
             appendLine("```kotlin")
             appendLine(function.bodyText)

@@ -3,7 +3,7 @@ package org.kotools.types.samples
 internal class KotlinFile(
     private val name: String,
     private val functions: List<KotlinFunction>
-) {
+) : ParsedFile {
     init {
         require(name.endsWith(FILE_EXTENSION)) {
             "Kotlin files should have the '$FILE_EXTENSION' extension."
@@ -24,7 +24,7 @@ internal class KotlinFile(
 
     // -------------------------------------------------------------------------
 
-    fun samples(): List<KotlinSampleFile> = functions.map {
+    override fun samples(): List<KotlinSampleFile> = functions.map {
         val name: String = this.name.substringBefore(FILE_EXTENSION)
             .plus('.')
             .plus(it.name)
