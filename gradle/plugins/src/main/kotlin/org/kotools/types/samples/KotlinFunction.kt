@@ -1,4 +1,4 @@
-package kotools.types.samples
+package org.kotools.types.samples
 
 internal class KotlinFunction(
     val name: String,

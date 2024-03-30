@@ -1,6 +1,6 @@
 package org.kotools.types
 
-import kotools.types.samples.KotlinSamplesExtractor
+import org.kotools.types.samples.KotlinSamplesExtractor
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 private val samplesOutput: Provider<Directory> =

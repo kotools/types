@@ -1,4 +1,4 @@
-package kotools.types.samples
+package org.kotools.types.samples
 
 import java.io.File
 

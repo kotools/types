@@ -1,4 +1,4 @@
-package kotools.types.samples
+package org.kotools.types.samples
 
 internal class KotlinFile(
     private val name: String,

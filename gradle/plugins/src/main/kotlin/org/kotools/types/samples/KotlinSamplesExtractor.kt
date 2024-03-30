@@ -1,4 +1,4 @@
-package kotools.types.samples
+package org.kotools.types.samples
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.Directory
