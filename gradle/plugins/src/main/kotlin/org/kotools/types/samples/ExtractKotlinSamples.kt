@@ -16,7 +16,7 @@ import org.gradle.work.DisableCachingByDefault
 @DisableCachingByDefault(
     because = "Extracting code from sources doesn't worth caching."
 )
-public abstract class KotlinSamplesExtractor : DefaultTask() {
+public abstract class ExtractKotlinSamples : DefaultTask() {
     @get:InputFiles
     @get:PathSensitive(PathSensitivity.NONE)
     public abstract val sources: Property<FileTree>
