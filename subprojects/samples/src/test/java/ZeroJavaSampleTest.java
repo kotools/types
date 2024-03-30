@@ -8,16 +8,10 @@ public class ZeroJavaSampleTest {
     @Test
     public void toStringSample_should_pass() {
         final ZeroJavaSample sample = new ZeroJavaSample();
-        final String messagePrefix = "Java sample of 'Zero.toString()'";
         final String actual = Assertions.assertDoesNotThrow(
-                () -> SystemLambda.tapSystemOut(sample::toStringSample).trim(),
-                "%s shouldn't throw an exception.".formatted(messagePrefix)
+                () -> SystemLambda.tapSystemOut(sample::toStringSample).trim()
         );
         final String expected = "0";
-        Assertions.assertEquals(
-                expected,
-                actual,
-                "%s should print '%s'.".formatted(messagePrefix, expected)
-        );
+        Assertions.assertEquals(expected, actual);
     }
 }

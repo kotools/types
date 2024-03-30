@@ -11,8 +11,6 @@ class ZeroKotlinSampleTest {
             .tapSystemOut(ZeroKotlinSample::toStringSample)
             .trim()
         val expected = "0"
-        val message =
-            "Kotlin sample of 'Zero.toString()' should print '$expected'."
-        assertEquals(expected, actual, message)
+        assertEquals(expected, actual)
     }
 }
