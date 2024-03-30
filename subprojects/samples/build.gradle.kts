@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.kotools.types.base")
     kotlin("jvm")
-    id("kotools.types.samples")
+    id("org.kotools.types.samples")
 }
 
 repositories.mavenCentral()
