@@ -1,4 +1,4 @@
-package kotools.types.number
+package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.test.Test

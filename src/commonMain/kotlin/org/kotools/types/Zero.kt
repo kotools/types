@@ -1,4 +1,4 @@
-package kotools.types.number
+package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ExperimentalSince
@@ -16,5 +16,5 @@ public object Zero {
 
     /** Returns the string representation of this number. */
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = this.VALUE.toString()
+    final override fun toString(): String = VALUE.toString()
 }

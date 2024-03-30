@@ -1,4 +1,4 @@
-package kotools.types.number;
+package org.kotools.types;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 import org.junit.jupiter.api.Assertions;

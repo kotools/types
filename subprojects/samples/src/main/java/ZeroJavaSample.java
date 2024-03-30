@@ -1,4 +1,4 @@
-package kotools.types.number;
+package org.kotools.types;
 
 class ZeroJavaSample {
     void toStringSample() {

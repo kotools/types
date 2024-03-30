@@ -360,11 +360,6 @@ public final class kotools/types/number/StrictlyPositiveIntKt {
 	public static final fun toStrictlyPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
 }
 
-public final class kotools/types/number/Zero {
-	public static final field INSTANCE Lkotools/types/number/Zero;
-	public final fun toString ()Ljava/lang/String;
-}
-
 public final class kotools/types/number/ZeroInt : kotools/types/number/NegativeInt, kotools/types/number/PositiveInt {
 	public static final field INSTANCE Lkotools/types/number/ZeroInt;
 	public synthetic fun compareTo (Ljava/lang/Object;)I
@@ -443,5 +438,10 @@ public final class kotools/types/web/EmailAddress$Companion {
 	public final fun createOrNull (Ljava/lang/String;)Lkotools/types/web/EmailAddress;
 	public final synthetic fun getRegex ()Lkotlin/text/Regex;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class org/kotools/types/Zero {
+	public static final field INSTANCE Lorg/kotools/types/Zero;
+	public final fun toString ()Ljava/lang/String;
 }
 
