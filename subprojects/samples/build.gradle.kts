@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("kotools.types.base.v2")
+    id("org.kotools.types.base")
     kotlin("jvm")
     id("kotools.types.samples")
 }
