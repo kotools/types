@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.kotools.types.samples.ExtractCodeSamples
 import org.kotools.types.samples.InlineSamples
 import org.kotools.types.samples.SamplesExtension
@@ -60,7 +61,17 @@ private val inlineSamples: TaskProvider<InlineSamples> by tasks
 
 // ----------------------- External tasks configuration ------------------------
 
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    setDependsOn(listOf(inlineSamples))
+    setFinalizedBy(listOf(restoreMainSources))
+}
+
 tasks.withType<DokkaTask>().configureEach {
+    setDependsOn(listOf(inlineSamples))
+    setFinalizedBy(listOf(restoreMainSources))
+}
+
+tasks.named("jvmSourcesJar").configure {
     setDependsOn(listOf(inlineSamples))
     setFinalizedBy(listOf(restoreMainSources))
 }

@@ -36,7 +36,7 @@ public abstract class InlineSamples : DefaultTask() {
     }.let { file.writeText("$it\n") }
 
     private fun sampleOrOriginal(line: String): String {
-        val keyword = "INLINE: "
+        val keyword = "SAMPLE: "
         return if (keyword in line) {
             val prefix: String = line.substringBefore(keyword)
             val identifier: String = line.substringAfter(keyword)
