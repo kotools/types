@@ -7,56 +7,60 @@ import org.kotools.types.samples.SamplesExtension
 
 private val samples: SamplesExtension = extensions.create("samples")
 
-private val samplesOutput: Provider<Directory> =
-    layout.buildDirectory.dir("samples")
+// ---------------------------- Samples extraction -----------------------------
 
-// ------------------------- The `inlineSamples` task --------------------------
+private val samplesDirectory: Provider<Directory> =
+    layout.buildDirectory.dir("samples")
 
 private val extractKotlinSamples: TaskProvider<ExtractCodeSamples> by tasks
     .registering(ExtractCodeSamples::class) {
         description = "Extract Kotlin code samples from sources."
         sourceDirectory.set(samples.source.dir("kotlin"))
-        outputDirectory.set(samplesOutput)
+        outputDirectory.set(samplesDirectory)
     }
+
+tasks.register<Delete>("cleanSamples").configure {
+    description = "Deletes extracted samples from the build directory."
+    setDelete(samplesDirectory)
+}
+
+// --------------------------- Main sources backup -----------------------------
+
+private val srcDirectory: Directory = layout.projectDirectory.dir("src")
+
+private val srcBackupDirectory: Provider<Directory> =
+    layout.buildDirectory.dir("srcBackup")
 
 private val backupMainSources: TaskProvider<Copy> by tasks
     .registering(Copy::class) {
         description = "Makes a copy of main sources in the build directory."
-        from(layout.projectDirectory.dir("src")) { exclude("api", "*Test") }
-        into(layout.buildDirectory.dir("srcBackup"))
-    }
-
-private val inlineSamples: TaskProvider<InlineSamples> by tasks
-    .registering(InlineSamples::class) {
-        description = "Inlines code samples in KDoc comments."
-        setDependsOn(listOf(backupMainSources))
-        sources.set(layout.projectDirectory.dir("src"))
-        samples.set(
-            extractKotlinSamples.flatMap(ExtractCodeSamples::outputDirectory)
-        )
+        from(srcDirectory) { exclude("api", "*Test") }
+        into(srcBackupDirectory)
     }
 
 private val restoreMainSources: TaskProvider<Copy> by tasks
     .registering(Copy::class) {
         description =
             "Restores the backup of main sources from the build directory."
-        from(layout.buildDirectory.dir("srcBackup"))
-        into(layout.projectDirectory.dir("src"))
+        from(srcBackupDirectory)
+        into(srcDirectory)
     }
+
+// ----------------------------- Samples inlining ------------------------------
+
+private val inlineSamples: TaskProvider<InlineSamples> by tasks
+    .registering(InlineSamples::class) {
+        description = "Inlines code samples in KDoc comments."
+        setDependsOn(listOf(backupMainSources))
+        sourcesDirectory.set(srcDirectory)
+        samplesDirectory.set(
+            extractKotlinSamples.flatMap(ExtractCodeSamples::outputDirectory)
+        )
+    }
+
+// ----------------------- External tasks configuration ------------------------
 
 tasks.withType<DokkaTask>().configureEach {
     setDependsOn(listOf(inlineSamples))
     setFinalizedBy(listOf(restoreMainSources))
-}
-
-// -------------------------- The `cleanSamples` task --------------------------
-
-private val cleanSamples by tasks.registering(Delete::class) {
-    description = "Deletes extracted samples from the build directory."
-    setDelete(samplesOutput)
-}
-
-tasks.named(LifecycleBasePlugin.CLEAN_TASK_NAME).configure {
-    listOf(cleanSamples)
-        .let(this::setDependsOn)
 }

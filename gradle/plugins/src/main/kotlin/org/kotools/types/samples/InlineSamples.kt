@@ -10,45 +10,46 @@ import org.gradle.work.DisableCachingByDefault
 import java.io.File
 
 /** Task responsible for inlining samples in KDoc comments. */
-@DisableCachingByDefault
+@DisableCachingByDefault(because = "Writes directly in files to read.")
 public abstract class InlineSamples : DefaultTask() {
     /** The directory containing the sources to work on. */
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.NONE)
-    public abstract val sources: DirectoryProperty
+    public abstract val sourcesDirectory: DirectoryProperty
 
-    /** The directory containing the samples. */
+    /** The directory containing the code samples. */
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.NONE)
-    public abstract val samples: DirectoryProperty
+    public abstract val samplesDirectory: DirectoryProperty
 
     @TaskAction
     private fun execute() {
         val mainSourceSetRegex = Regex("/[a-z]+Main/")
-        sources.asFileTree.asSequence()
+        this.sourcesDirectory.asFileTree.asSequence()
             .filter { it != null && mainSourceSetRegex in it.path }
-            .forEach(this::inlineSamplesIn)
+            .forEach(this::inlineSamples)
     }
 
-    private fun inlineSamplesIn(file: File) {
-        val text: String = file.useLines { lines: Sequence<String> ->
-            val keyword = "INLINE: "
-            lines.map { line: String ->
-                if (keyword !in line) line
-                else {
-                    val prefix: String = line.substringBefore(keyword)
-                    val identifier: String = line.substringAfter(keyword)
-                    samples.file(identifier)
-                        .get()
-                        .asFile
-                        .useLines { sampleLines: Sequence<String> ->
-                            sampleLines.joinToString(separator = "\n") {
-                                "$prefix$it"
-                            }
-                        }
-                }
-            }.joinToString("\n").plus("\n")
-        }
-        file.writeText(text)
+    private fun inlineSamples(file: File): Unit = file.useLines {
+        it.map(this::sampleOrOriginal)
+            .joinToString("\n")
+    }.let { file.writeText("$it\n") }
+
+    private fun sampleOrOriginal(line: String): String {
+        val keyword = "INLINE: "
+        return if (keyword in line) {
+            val prefix: String = line.substringBefore(keyword)
+            val identifier: String = line.substringAfter(keyword)
+            this.sampleText(prefix, identifier)
+        } else line
     }
+
+    private fun sampleText(prefix: String, identifier: String): String = this
+        .samplesDirectory
+        .file(identifier)
+        .get()
+        .asFile
+        .useLines { lines: Sequence<String> ->
+            lines.joinToString("\n") { "$prefix$it" }
+        }
 }
