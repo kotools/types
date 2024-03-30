@@ -61,17 +61,16 @@ private val inlineSamples: TaskProvider<InlineSamples> by tasks
 
 // ----------------------- External tasks configuration ------------------------
 
-tasks.withType<KotlinCompilationTask<*>>().configureEach {
-    setDependsOn(listOf(inlineSamples))
-    setFinalizedBy(listOf(restoreMainSources))
+listOf(KotlinCompilationTask::class, DokkaTask::class).forEach {
+    tasks.withType(it).configureEach {
+        setDependsOn(listOf(inlineSamples))
+        setFinalizedBy(listOf(restoreMainSources))
+    }
 }
 
-tasks.withType<DokkaTask>().configureEach {
-    setDependsOn(listOf(inlineSamples))
-    setFinalizedBy(listOf(restoreMainSources))
-}
-
-tasks.named("jvmSourcesJar").configure {
-    setDependsOn(listOf(inlineSamples))
-    setFinalizedBy(listOf(restoreMainSources))
+listOf("jvmSourcesJar", "jvmApiCheck", "apiCheck").forEach {
+    tasks.named(it).configure {
+        setDependsOn(listOf(inlineSamples))
+        setFinalizedBy(listOf(restoreMainSources))
+    }
 }
