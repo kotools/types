@@ -39,6 +39,6 @@ internal class JavaSampleFile(
 
     companion object {
         const val FILE_EXTENSION: String = ".md"
-        private val nameRegex = Regex("^[A-Za-z][A-Za-z.]+[A-Za-z]\\.md$")
+        private val nameRegex = Regex("^[A-Za-z][A-Za-z._]+[A-Za-z]\\.md$")
     }
 }

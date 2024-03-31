@@ -37,6 +37,6 @@ internal class KotlinFunction(
 
     companion object {
         const val KEYWORD: String = "fun"
-        val headerRegex = Regex("$KEYWORD [A-Za-z]+\\(")
+        val headerRegex = Regex("$KEYWORD [A-Za-z_]+\\(")
     }
 }

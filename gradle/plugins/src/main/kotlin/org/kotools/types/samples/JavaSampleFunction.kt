@@ -37,6 +37,6 @@ internal class JavaSampleFunction(
 
     companion object {
         const val KEYWORD: String = "void"
-        val headerRegex = Regex("$KEYWORD [A-Za-z]+\\(")
+        val headerRegex = Regex("$KEYWORD [A-Za-z_]+\\(")
     }
 }
