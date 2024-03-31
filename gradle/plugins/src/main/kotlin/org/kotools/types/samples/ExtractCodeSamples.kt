@@ -29,13 +29,12 @@ public abstract class ExtractCodeSamples : DefaultTask() {
     private fun execute() {
         val directory: Directory = this.outputDirectory.get()
         this.sourceDirectory.asFileTree.asSequence()
-            .map(File::parse)
+            .mapNotNull(File::parseOrNull)
             .flatMap(ParsedFile::samples)
             .forEach { it.saveIn(directory) }
     }
 }
 
-private fun File.parse(): ParsedFile =
-    if (name.endsWith(KotlinFile.FILE_EXTENSION))
-        KotlinFileParser.parse(this)
-    else error("No parser available for '.$extension' files.")
+private fun File.parseOrNull(): ParsedFile? =
+    if (name.endsWith(KotlinFile.FILE_EXTENSION)) KotlinFileParser.parse(this)
+    else null
