@@ -440,6 +440,9 @@ public final class kotools/types/web/EmailAddress$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class org/kotools/types/EmailAddress {
+}
+
 public final class org/kotools/types/Zero {
 	public static final field INSTANCE Lorg/kotools/types/Zero;
 	public final fun toString ()Ljava/lang/String;
