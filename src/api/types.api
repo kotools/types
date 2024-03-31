@@ -441,6 +441,11 @@ public final class kotools/types/web/EmailAddress$Companion {
 }
 
 public final class org/kotools/types/EmailAddress {
+	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
+	public static final field PATTERN Ljava/lang/String;
+}
+
+public final class org/kotools/types/EmailAddress$Companion {
 }
 
 public final class org/kotools/types/Zero {
