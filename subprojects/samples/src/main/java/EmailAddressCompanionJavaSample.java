@@ -17,7 +17,7 @@ class EmailAddressCompanionJavaSample {
         // Output: success
     } // END
 
-    void fromStringOrNullSample() {
+    void fromStringOrNull_Any() {
         final Object value = "contact@kotools.org";
         final EmailAddress address = EmailAddress.fromStringOrNull(value);
         System.out.println(address != null); // true

@@ -110,7 +110,7 @@ public class EmailAddress private constructor() {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNullSample.md
+         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNull_Any.md
          * </details>
          *
          * <br>
@@ -121,7 +121,7 @@ public class EmailAddress private constructor() {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNullSample.md
+         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNull_Any.md
          * </details>
          * <br>
          *
@@ -130,9 +130,9 @@ public class EmailAddress private constructor() {
          */
         @JvmStatic
         public fun fromStringOrNull(value: Any): EmailAddress? {
-            val string: String = value.toString()
+            val valueAsString: String = value.toString()
             val regex = Regex(PATTERN)
-            return if (string matches regex) EmailAddress() else null
+            return if (valueAsString matches regex) EmailAddress() else null
         }
 
         /**

@@ -28,11 +28,11 @@ class EmailAddressCompanionJavaSampleTest {
     }
 
     @Test
-    void fromStringOrNullSample_should_pass() {
+    void fromStringOrNull_Any_should_pass() {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();
         final String output = Assertions.assertDoesNotThrow(
-                () -> SystemLambda.tapSystemOut(sample::fromStringOrNullSample)
+                () -> SystemLambda.tapSystemOut(sample::fromStringOrNull_Any)
         ).trim();
         final boolean actual = Boolean.parseBoolean(output);
         Assertions.assertTrue(actual);
