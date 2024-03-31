@@ -20,10 +20,10 @@ class EmailAddressCompanionJavaSampleTest {
     void fromStringOrNullSample_should_pass() {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();
-        final String actual = Assertions.assertDoesNotThrow(
+        final String output = Assertions.assertDoesNotThrow(
                 () -> SystemLambda.tapSystemOut(sample::fromStringOrNullSample)
         ).trim();
-        final String expected = "true";
-        Assertions.assertEquals(expected, actual);
+        final boolean actual = Boolean.parseBoolean(output);
+        Assertions.assertTrue(actual);
     }
 }

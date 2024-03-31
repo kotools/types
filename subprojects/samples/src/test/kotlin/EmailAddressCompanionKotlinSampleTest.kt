@@ -3,6 +3,7 @@ package org.kotools.types
 import com.github.stefanbirkner.systemlambda.SystemLambda
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class EmailAddressCompanionKotlinSampleTest {
     @Test
@@ -16,10 +17,12 @@ class EmailAddressCompanionKotlinSampleTest {
 
     @Test
     fun fromStringOrNullSample_should_pass() {
-        val actual: String = SystemLambda.tapSystemOut(
-            EmailAddressCompanionKotlinSample::fromStringOrNullSample
-        ).trim()
-        val expected = "true"
-        assertEquals(expected, actual)
+        val actual: Boolean = SystemLambda
+            .tapSystemOut(
+                EmailAddressCompanionKotlinSample::fromStringOrNullSample
+            )
+            .trim()
+            .toBooleanStrict()
+        assertTrue(actual)
     }
 }
