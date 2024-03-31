@@ -68,7 +68,7 @@ EmailAddress("types-4_library@kotools.org") // pass
 
 ### 🗑️ Deprecated
 
-- Deprecation promotion of the following annotations to hidden ([#334]):
+- The following annotations are now hidden from sources ([#334]):
   `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
   `ExperimentalResultApi` and `ExperimentalTextApi`.
 - The `create(String)` and the `createOrNull(String)` **experimental** functions
