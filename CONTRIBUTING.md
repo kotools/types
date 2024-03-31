@@ -86,6 +86,7 @@ Here's the list of available configurations for running tests:
 - `Linux tests` for testing the API on Linux using Kotlin Native.
 - `macOS tests` for testing the API on macOS using Kotlin Native.
 - `Windows tests` for testing the API on Windows using Kotlin Native.
+- `Check samples` for checking code samples available in the API reference.
 
 ### Serving the documentation
 
