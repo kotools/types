@@ -87,9 +87,6 @@ Here's the list of available configurations for running tests:
 - `macOS tests` for testing the API on macOS using Kotlin Native.
 - `Windows tests` for testing the API on Windows using Kotlin Native.
 
-> You can run the `JVM checks` for executing the different checks on the JVM,
-> including JVM tests, Java compatibility tests and API binary checks.
-
 ### Serving the documentation
 
 You can also generate the documentation by running the `Documentation`
