@@ -13,5 +13,5 @@ internal object EmailAddressCompanionKotlinSample {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.fromStringOrNull(value)
         println(address != null) // true
-    }
+    } // END
 }

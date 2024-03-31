@@ -7,5 +7,5 @@ internal object ZeroKotlinSample {
     fun toStringSample() {
         val message: String = Zero.toString()
         println(message) // 0
-    }
+    } // END
 }

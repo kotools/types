@@ -23,11 +23,18 @@ private fun Sequence<String>.getRawFunctions(): Map<String, List<String>> {
             functions += functionName to mutableListOf()
             latestFunctionDetected = functionName
             read = true
-        } else if (it.endsWith('}')) {
+        } else if (it.endsWith("} // END")) {
             read = false
             latestFunctionDetected = null
         } else if (read) {
-            val line: String = it.trim()
+            val line: String = if (Regex("TABS: \\d$") in it) buildString {
+                val numberOfTabs: Int = it.substringAfter("TABS: ")
+                    .toInt()
+                repeat(numberOfTabs) { append("    ") }
+                val code: String = it.substringBefore("// TABS:")
+                    .trim()
+                append(code)
+            } else it.trim()
             functions[latestFunctionDetected]?.add(line)
         }
     }
