@@ -20,6 +20,13 @@ private val extractKotlinSamples: TaskProvider<ExtractCodeSamples> by tasks
         outputDirectory.set(samplesDirectory)
     }
 
+private val extractJavaSamples: TaskProvider<ExtractCodeSamples> by tasks
+    .registering(ExtractCodeSamples::class) {
+        description = "Extract Java code samples from sources."
+        sourceDirectory.set(samples.source.dir("java"))
+        outputDirectory.set(samplesDirectory)
+    }
+
 tasks.register<Delete>("cleanSamples").configure {
     description = "Deletes extracted samples from the build directory."
     setDelete(samplesDirectory)
@@ -52,7 +59,7 @@ private val restoreMainSources: TaskProvider<Copy> by tasks
 private val inlineSamples: TaskProvider<InlineSamples> by tasks
     .registering(InlineSamples::class) {
         description = "Inlines code samples in KDoc comments."
-        setDependsOn(listOf(backupMainSources))
+        setDependsOn(listOf(backupMainSources, extractJavaSamples))
         sourcesDirectory.set(srcDirectory)
         samplesDirectory.set(
             extractKotlinSamples.flatMap(ExtractCodeSamples::outputDirectory)

@@ -35,6 +35,8 @@ public abstract class ExtractCodeSamples : DefaultTask() {
     }
 }
 
-private fun File.parseOrNull(): ParsedFile? =
-    if (name.endsWith(KotlinFile.FILE_EXTENSION)) KotlinFileParser.parse(this)
-    else null
+private fun File.parseOrNull(): ParsedFile? = when {
+    name.endsWith(KotlinFile.FILE_EXTENSION) -> KotlinFileParser.parse(this)
+    name.endsWith(JavaFile.FILE_EXTENSION) -> JavaFileParser.parse(this)
+    else -> null
+}
