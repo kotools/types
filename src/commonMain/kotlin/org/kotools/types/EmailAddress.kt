@@ -137,9 +137,11 @@ public class EmailAddress private constructor() {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [value], or returns `null` if the [value] doesn't
-         * match the specified [pattern], or if the [pattern] doesn't match the
-         * [default one][PATTERN].
+         * of the specified [value].
+         * Returns `null` if the string representation of [value] doesn't match
+         * the string representation of the specified [pattern], or if the
+         * string representation of [pattern] doesn't match the
+         * [default pattern][PATTERN].
          *
          * <br>
          * <details open>
