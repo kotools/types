@@ -9,11 +9,11 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 
 /**
  * Represents an integer number of type [Int] that equals zero.

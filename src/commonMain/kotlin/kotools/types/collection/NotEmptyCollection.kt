@@ -1,16 +1,14 @@
 package kotools.types.collection
 
-import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.number.PositiveInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.number.plus
 import kotools.types.number.toStrictlyPositiveInt
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 
 /** Represents a collection that has at least one element of type [E]. */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public sealed interface NotEmptyCollection<out E> {
     /**
@@ -72,7 +70,6 @@ public sealed interface NotEmptyCollection<out E> {
  * Returns the size of this collection, or returns [ZeroInt] if this collection
  * is `null`.
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt

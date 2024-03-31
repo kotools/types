@@ -1,12 +1,12 @@
 package kotools.types.experimental
 
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyNegativeInt
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**

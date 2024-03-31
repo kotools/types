@@ -8,13 +8,13 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.internal.serializationError
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -29,7 +29,6 @@ import kotlin.jvm.JvmSynthetic
  * println(map) // {a=1, b=2}
  * ```
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,

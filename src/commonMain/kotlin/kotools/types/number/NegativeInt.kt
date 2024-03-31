@@ -9,15 +9,15 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 
 /**
  * Returns this number as an encapsulated [NegativeInt], which may involve
@@ -191,7 +191,6 @@ public sealed interface NegativeInt : AnyInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun NegativeInt.div(other: StrictlyPositiveInt): NegativeInt {
     val result: Int = toInt() / other
@@ -203,7 +202,6 @@ public operator fun NegativeInt.div(other: StrictlyPositiveInt): NegativeInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun NegativeInt.div(other: StrictlyNegativeInt): PositiveInt {
     val result: Int = toInt() / other
@@ -215,7 +213,6 @@ public operator fun NegativeInt.div(other: StrictlyNegativeInt): PositiveInt {
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun NegativeInt.rem(other: NonZeroInt): NegativeInt {
     val result: Int = toInt() % other

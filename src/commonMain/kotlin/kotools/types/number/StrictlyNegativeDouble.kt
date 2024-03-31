@@ -9,13 +9,13 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
-import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
 
 /**
  * Represents a floating-point number of type [Double] that is less than zero.

@@ -11,14 +11,14 @@ import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 
 /**
  * Returns this number as an encapsulated [NonZeroInt], which may involve
@@ -203,7 +203,6 @@ public sealed interface NonZeroInt : AnyInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
@@ -211,7 +210,6 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 

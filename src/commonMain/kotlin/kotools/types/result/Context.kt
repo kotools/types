@@ -3,9 +3,6 @@ package kotools.types.result
 import kotools.types.collection.NotEmptyList
 import kotools.types.collection.NotEmptyMap
 import kotools.types.collection.NotEmptySet
-import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.number.NegativeInt
 import kotools.types.number.NonZeroInt
 import kotools.types.number.PositiveInt
@@ -13,6 +10,8 @@ import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.text.NotBlankString
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
 import kotools.types.collection.toNotEmptyMap as delegateToNotEmptyMap
 import kotools.types.collection.toNotEmptySet as delegateToNotEmptySet
@@ -24,7 +23,6 @@ import kotools.types.number.toStrictlyPositiveInt as delegateToStrictlyPositiveI
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
 
 /** Context available when calling the [resultOf] function. */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public sealed interface ResultContext {
     /**
@@ -120,7 +118,6 @@ private object ResultContextImplementation : ResultContext
  * [ResultContext], or returns an encapsulated [Throwable] if calling the
  * [block] function throws an exception.
  */
-@OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public inline fun <T> resultOf(block: ResultContext.() -> T): Result<T> =
     ResultContextImplementation.runCatching(block)

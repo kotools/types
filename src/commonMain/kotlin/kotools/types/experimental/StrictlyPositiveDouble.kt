@@ -7,12 +7,12 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeGreaterThanZero
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -22,7 +22,6 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)
-@OptIn(InternalKotoolsTypesApi::class)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()

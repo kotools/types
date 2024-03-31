@@ -8,16 +8,16 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.DeprecatedSince
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
-import kotools.types.internal.KotoolsTypesVersion
 import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
+import org.kotools.types.DeprecatedSince
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**

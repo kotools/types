@@ -9,15 +9,15 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
-import kotools.types.internal.KotoolsTypesVersion
-import kotools.types.internal.Since
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.ExperimentalSince
+import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -30,7 +30,7 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
-@OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+@OptIn(ExperimentalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching(StrictlyNegativeInt.Companion::create)
