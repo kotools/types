@@ -18,9 +18,9 @@ This issue is blocked by the following ones:
 
 ## ✅ Checklist
 
-- [ ] Add this declaration, [test] its behavior with Kotlin and its compatibility with Java, update the public [API binaries] and update the [unreleased changelog].
+- [ ] Add this declaration, [test] its behavior with Kotlin and its compatibility with Java, dump the [Application Binary Interface (ABI)][abi] and update the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
 
-[api binaries]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-api-binaries
+[abi]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-application-binary-interface-abi
 [test]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#running-tests
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased

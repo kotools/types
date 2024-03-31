@@ -21,8 +21,8 @@ This issue is blocked by the following ones:
 
 ## ✅ Checklist
 
-- [ ] Remove the declaration, update the public [API binaries] and the [unreleased changelog].
+- [ ] Remove the declaration, dump the [Application Binary Interface (ABI)][abi] and the [unreleased changelog].
 - [ ] Close this issue as completed and update tracking ones if present.
 
-[api binaries]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-api-binaries
+[abi]: https://github.com/kotools/types/blob/main/CONTRIBUTING.md#checking-the-application-binary-interface-abi
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
