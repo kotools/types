@@ -118,10 +118,8 @@ In some cases, this configuration will fail and will request you to update the
 API binaries.
 You can do this by running the `Dump ABI` configuration.
 
-> You can see [what makes a binary incompatible change] to the public API in the
-> [Kotlin/binary-compatibility-validator] project.
+> See [what makes a binary incompatible change] to the ABI for more details.
 
-[Kotlin/binary-compatibility-validator]: https://github.com/Kotlin/binary-compatibility-validator
 [what makes a binary incompatible change]: https://github.com/Kotlin/binary-compatibility-validator#what-makes-an-incompatible-change-to-the-public-binary-api
 
 ### Committing changes
