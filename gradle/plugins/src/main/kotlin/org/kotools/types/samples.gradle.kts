@@ -68,9 +68,11 @@ listOf(KotlinCompilationTask::class, DokkaTask::class).forEach {
     }
 }
 
-listOf("jvmSourcesJar", "jvmApiCheck", "apiCheck").forEach {
-    tasks.named(it).configure {
-        setDependsOn(listOf(inlineSamples))
-        setFinalizedBy(listOf(restoreMainSources))
-    }
+tasks.named("jvmSourcesJar").configure {
+    setDependsOn(listOf(inlineSamples))
+    setFinalizedBy(listOf(restoreMainSources))
+}
+
+listOf("jvmApiCheck", "apiCheck").forEach {
+    tasks.named(it).configure { setFinalizedBy(listOf(restoreMainSources)) }
 }
