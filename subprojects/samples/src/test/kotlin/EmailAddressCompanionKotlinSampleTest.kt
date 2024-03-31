@@ -13,4 +13,13 @@ class EmailAddressCompanionKotlinSampleTest {
         val expected = "^\\S+@\\S+\\.\\S+\$"
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun fromStringOrNullSample_should_pass() {
+        val actual: String = SystemLambda.tapSystemOut(
+            EmailAddressCompanionKotlinSample::fromStringOrNullSample
+        ).trim()
+        val expected = "true"
+        assertEquals(expected, actual)
+    }
 }

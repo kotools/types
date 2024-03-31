@@ -4,9 +4,13 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ExperimentalSince
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmStatic
 
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
+ *
+ * You can use the [EmailAddress.Companion.fromStringOrNull] function for
+ * creating an instance of this type.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -54,5 +58,40 @@ public class EmailAddress private constructor() {
          * </details>
          */
         public const val PATTERN: String = "^\\S+@\\S+\\.\\S+\$"
+
+        /**
+         * Creates an instance of [EmailAddress] from the string representation
+         * of the specified [value], or returns `null` if the string
+         * representation of [value] doesn't match the
+         * [default pattern][PATTERN].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNullSample.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNullSample.md
+         * </details>
+         */
+        @JvmStatic
+        public fun fromStringOrNull(value: Any): EmailAddress? {
+            val string: String = value.toString()
+            val regex = Regex(PATTERN)
+            return if (string matches regex) EmailAddress() else null
+        }
     }
 }

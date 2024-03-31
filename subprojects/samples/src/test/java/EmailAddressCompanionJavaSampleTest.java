@@ -10,9 +10,20 @@ class EmailAddressCompanionJavaSampleTest {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();
         final String actual = Assertions.assertDoesNotThrow(
-                () -> SystemLambda.tapSystemOut(sample::patternSample).trim()
-        );
+                () -> SystemLambda.tapSystemOut(sample::patternSample)
+        ).trim();
         final String expected = "^\\S+@\\S+\\.\\S+$";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void fromStringOrNullSample_should_pass() {
+        final EmailAddressCompanionJavaSample sample =
+                new EmailAddressCompanionJavaSample();
+        final String actual = Assertions.assertDoesNotThrow(
+                () -> SystemLambda.tapSystemOut(sample::fromStringOrNullSample)
+        ).trim();
+        final String expected = "true";
         Assertions.assertEquals(expected, actual);
     }
 }
