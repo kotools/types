@@ -115,7 +115,7 @@ When introducing changes to the ABI, you can check its binaries by running the
 This ensures that we are maintaining the binary compatibility of this library.
 
 In some cases, this configuration will fail and will request you to update the
-API binaries.
+ABI.
 You can do this by running the `Dump ABI` configuration.
 
 > See [what makes a binary incompatible change] to the ABI for more details.
