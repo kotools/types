@@ -9,6 +9,14 @@ internal object EmailAddressCompanionKotlinSample {
         println(pattern) // ^\S+@\S+\.\S+$
     } // END
 
+    fun fromStringSample() {
+        val value: Any = "contact@kotools.org"
+        val result: Result<EmailAddress> = kotlin.runCatching {
+            EmailAddress.fromString(value) // TABS: 1
+        }
+        println(result.isSuccess) // true
+    } // END
+
     fun fromStringOrNullSample() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.fromStringOrNull(value)

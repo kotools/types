@@ -17,6 +17,17 @@ class EmailAddressCompanionJavaSampleTest {
     }
 
     @Test
+    void fromStringSample_should_pass() {
+        final EmailAddressCompanionJavaSample sample =
+                new EmailAddressCompanionJavaSample();
+        final String actual = Assertions.assertDoesNotThrow(
+                () -> SystemLambda.tapSystemOut(sample::fromStringSample)
+        ).trim();
+        final String expected = "success";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     void fromStringOrNullSample_should_pass() {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();

@@ -9,8 +9,9 @@ import kotlin.jvm.JvmStatic
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
- * You can use the [EmailAddress.Companion.fromStringOrNull] function for
- * creating an instance of this type.
+ * You can use the [EmailAddress.Companion.fromString] or the
+ * [EmailAddress.Companion.fromStringOrNull] functions for creating an instance
+ * of this type.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -61,6 +62,46 @@ public class EmailAddress private constructor() {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
+         * of the specified [value], or throws an [IllegalArgumentException] if
+         * the string representation of [value] doesn't match the
+         * [default pattern][PATTERN].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringSample.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: EmailAddressCompanionJavaSample.fromStringSample.md
+         * </details>
+         * <br>
+         *
+         * You can use the [fromStringOrNull] function for returning `null`
+         * instead of throwing an exception in case of invalid [value].
+         */
+        @JvmStatic
+        public fun fromString(value: Any): EmailAddress {
+            val address: EmailAddress? = fromStringOrNull(value)
+            return requireNotNull(address) {
+                InvalidEmailAddress(value).message
+            }
+        }
+
+        /**
+         * Creates an instance of [EmailAddress] from the string representation
          * of the specified [value], or returns `null` if the string
          * representation of [value] doesn't match the
          * [default pattern][PATTERN].
@@ -86,6 +127,10 @@ public class EmailAddress private constructor() {
          *
          * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNullSample.md
          * </details>
+         * <br>
+         *
+         * You can use the [fromString] function for throwing an exception
+         * instead of returning `null` in case of invalid [value].
          */
         @JvmStatic
         public fun fromStringOrNull(value: Any): EmailAddress? {
@@ -94,4 +139,8 @@ public class EmailAddress private constructor() {
             return if (string matches regex) EmailAddress() else null
         }
     }
+}
+
+internal class InvalidEmailAddress(value: Any) : IllegalArgumentException() {
+    override val message: String = "\"$value\" is an invalid email address."
 }
