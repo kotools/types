@@ -23,7 +23,7 @@ class EmailAddressCompanionJavaSample {
         System.out.println(address != null); // true
     } // END
 
-    void fromStringOrNull_Any_Any_Sample() {
+    void fromStringOrNull_Any_Any() {
         final Object value = "contact@kotools.org";
         final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
         final EmailAddress address =

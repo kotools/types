@@ -39,12 +39,12 @@ class EmailAddressCompanionJavaSampleTest {
     }
 
     @Test
-    void fromStringOrNull_Any_Any_Sample_should_pass() {
+    void fromStringOrNull_Any_Any_should_pass() {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();
         final String output = Assertions.assertDoesNotThrow(
                 () -> SystemLambda.tapSystemOut(
-                        sample::fromStringOrNull_Any_Any_Sample
+                        sample::fromStringOrNull_Any_Any
                 )
         ).trim();
         final boolean actual = Boolean.parseBoolean(output);

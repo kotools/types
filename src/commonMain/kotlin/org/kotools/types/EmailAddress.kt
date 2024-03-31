@@ -149,7 +149,7 @@ public class EmailAddress private constructor() {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNull_Any_Any_Sample.md
+         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNull_Any_Any.md
          * </details>
          *
          * <br>
@@ -160,7 +160,7 @@ public class EmailAddress private constructor() {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNull_Any_Any_Sample.md
+         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNull_Any_Any.md
          * </details>
          */
         @JvmStatic

@@ -25,7 +25,7 @@ internal object EmailAddressCompanionKotlinSample {
     } // END
 
     @Suppress("FunctionName")
-    fun fromStringOrNull_Any_Any_Sample() {
+    fun fromStringOrNull_Any_Any() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val address: EmailAddress? =
