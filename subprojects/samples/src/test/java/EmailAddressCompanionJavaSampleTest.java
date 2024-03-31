@@ -17,11 +17,11 @@ class EmailAddressCompanionJavaSampleTest {
     }
 
     @Test
-    void fromStringSample_should_pass() {
+    void fromString_Any_should_pass() {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();
         final String actual = Assertions.assertDoesNotThrow(
-                () -> SystemLambda.tapSystemOut(sample::fromStringSample)
+                () -> SystemLambda.tapSystemOut(sample::fromString_Any)
         ).trim();
         final String expected = "success";
         Assertions.assertEquals(expected, actual);

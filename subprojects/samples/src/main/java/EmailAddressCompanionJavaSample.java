@@ -6,7 +6,7 @@ class EmailAddressCompanionJavaSample {
         System.out.println(pattern); // ^\S+@\S+\.\S+$
     } // END
 
-    void fromStringSample() {
+    void fromString_Any() {
         final Object value = "contact@kotools.org";
         try {
             EmailAddress.fromString(value); // TABS: 1

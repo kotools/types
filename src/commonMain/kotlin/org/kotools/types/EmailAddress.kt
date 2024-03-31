@@ -70,7 +70,7 @@ public class EmailAddress private constructor() {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringSample.md
+         * SAMPLE: EmailAddressCompanionKotlinSample.fromString_Any.md
          * </details>
          *
          * <br>
@@ -81,7 +81,7 @@ public class EmailAddress private constructor() {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromStringSample.md
+         * SAMPLE: EmailAddressCompanionJavaSample.fromString_Any.md
          * </details>
          * <br>
          *
