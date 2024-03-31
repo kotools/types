@@ -108,15 +108,15 @@ But if needed, feel free to [ask for help]; everyone is a beginner at first.
 
 [ask for help]: https://github.com/kotools/types/discussions/new?category=q-a
 
-### Checking the API binaries
+### Checking the Application Binary Interface (ABI)
 
-When introducing changes to the API, you can check its binaries by running the
-`Check API binaries` configuration.
+When introducing changes to the ABI, you can check its binaries by running the
+`Check ABI` configuration.
 This ensures that we are maintaining the binary compatibility of this library.
 
 In some cases, this configuration will fail and will request you to update the
 API binaries.
-You can do this by running the `Dump API binaries` configuration.
+You can do this by running the `Dump ABI` configuration.
 
 > You can see [what makes a binary incompatible change] to the public API in the
 > [Kotlin/binary-compatibility-validator] project.
