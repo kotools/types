@@ -22,4 +22,13 @@ internal object EmailAddressCompanionKotlinSample {
         val address: EmailAddress? = EmailAddress.fromStringOrNull(value)
         println(address != null) // true
     } // END
+
+    @Suppress("FunctionName")
+    fun fromStringOrNull_Any_Any_Sample() {
+        val value: Any = "contact@kotools.org"
+        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val address: EmailAddress? =
+            EmailAddress.fromStringOrNull(value, pattern) // TABS: 1
+        println(address != null) // true
+    } // END
 }

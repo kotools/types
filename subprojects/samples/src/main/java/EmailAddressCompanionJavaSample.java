@@ -22,4 +22,12 @@ class EmailAddressCompanionJavaSample {
         final EmailAddress address = EmailAddress.fromStringOrNull(value);
         System.out.println(address != null); // true
     } // END
+
+    void fromStringOrNull_Any_Any_Sample() {
+        final Object value = "contact@kotools.org";
+        final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
+        final EmailAddress address =
+                EmailAddress.fromStringOrNull(value, pattern); // TABS: 1
+        System.out.println(address != null); // true
+    } // END
 }

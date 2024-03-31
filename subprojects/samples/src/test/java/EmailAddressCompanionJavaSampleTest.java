@@ -37,4 +37,17 @@ class EmailAddressCompanionJavaSampleTest {
         final boolean actual = Boolean.parseBoolean(output);
         Assertions.assertTrue(actual);
     }
+
+    @Test
+    void fromStringOrNull_Any_Any_Sample_should_pass() {
+        final EmailAddressCompanionJavaSample sample =
+                new EmailAddressCompanionJavaSample();
+        final String output = Assertions.assertDoesNotThrow(
+                () -> SystemLambda.tapSystemOut(
+                        sample::fromStringOrNull_Any_Any_Sample
+                )
+        ).trim();
+        final boolean actual = Boolean.parseBoolean(output);
+        Assertions.assertTrue(actual);
+    }
 }

@@ -122,4 +122,31 @@ class EmailAddressCompanionTest {
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
         assertNull(actual)
     }
+
+    @Test
+    fun fromStringOrNull_Any_Any_should_pass_with_valid_value_and_pattern() {
+        val value: Any = "contact@kotools.org"
+        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val actual: EmailAddress? =
+            EmailAddress.fromStringOrNull(value, pattern)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun fromStringOrNull_Any_Any_should_fail_with_invalid_value() {
+        val value: Any = "first-contact@kotools.org"
+        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val actual: EmailAddress? =
+            EmailAddress.fromStringOrNull(value, pattern)
+        assertNull(actual)
+    }
+
+    @Test
+    fun fromStringOrNull_Any_Any_should_fail_with_invalid_pattern() {
+        val value: Any = "contact@kotools.org"
+        val pattern: Any = "^[a-z]+\\.[a-z]+\$"
+        val actual: EmailAddress? =
+            EmailAddress.fromStringOrNull(value, pattern)
+        assertNull(actual)
+    }
 }

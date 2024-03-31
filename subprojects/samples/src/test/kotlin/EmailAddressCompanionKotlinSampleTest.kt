@@ -5,11 +5,12 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+private typealias Sample = EmailAddressCompanionKotlinSample
+
 class EmailAddressCompanionKotlinSampleTest {
     @Test
     fun patternSample_should_pass() {
-        val actual: String = SystemLambda
-            .tapSystemOut(EmailAddressCompanionKotlinSample::patternSample)
+        val actual: String = SystemLambda.tapSystemOut(Sample::patternSample)
             .trim()
         val expected = "^\\S+@\\S+\\.\\S+\$"
         assertEquals(expected, actual)
@@ -18,7 +19,7 @@ class EmailAddressCompanionKotlinSampleTest {
     @Test
     fun fromStringSample_should_pass() {
         val actual: Boolean = SystemLambda
-            .tapSystemOut(EmailAddressCompanionKotlinSample::fromStringSample)
+            .tapSystemOut(Sample::fromStringSample)
             .trim()
             .toBooleanStrict()
         assertTrue(actual)
@@ -27,9 +28,16 @@ class EmailAddressCompanionKotlinSampleTest {
     @Test
     fun fromStringOrNullSample_should_pass() {
         val actual: Boolean = SystemLambda
-            .tapSystemOut(
-                EmailAddressCompanionKotlinSample::fromStringOrNullSample
-            )
+            .tapSystemOut(Sample::fromStringOrNullSample)
+            .trim()
+            .toBooleanStrict()
+        assertTrue(actual)
+    }
+
+    @Test
+    fun `fromStringOrNull(Any, Any) sample should pass`() {
+        val actual: Boolean = SystemLambda
+            .tapSystemOut(Sample::fromStringOrNull_Any_Any_Sample)
             .trim()
             .toBooleanStrict()
         assertTrue(actual)
