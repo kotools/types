@@ -4,7 +4,7 @@ class EmailAddressCompanionJavaSample {
     void patternSample() {
         final String pattern = EmailAddress.PATTERN;
         System.out.println(pattern); // ^\S+@\S+\.\S+$
-    }
+    } // END
 
     void fromStringOrNullSample() {
         final Object value = "contact@kotools.org";
