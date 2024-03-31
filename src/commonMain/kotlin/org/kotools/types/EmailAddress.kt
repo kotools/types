@@ -22,7 +22,7 @@ public class EmailAddress private constructor() {
         /**
          * The pattern that an email address should match.
          *
-         * The underlying pattern is `^\S+@\S+\.\S+$`.
+         * The underlying value is `^\S+@\S+\.\S+$`.
          *
          * Here's the explanation associated to each symbol used in this
          * pattern:
