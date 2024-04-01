@@ -8,8 +8,6 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 public object Zero {
     private const val VALUE: Byte = 0
 
-    // ----------------------- Overrides from kotlin.Any -----------------------
-
     /**
      * Returns the string representation of this number.
      *
