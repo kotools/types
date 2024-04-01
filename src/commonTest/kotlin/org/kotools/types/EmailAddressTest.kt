@@ -9,6 +9,17 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
+class EmailAddressTest {
+    @Test
+    fun toString_should_pass() {
+        val value: Any = "contact@kotools.org"
+        val address: EmailAddress = EmailAddress.fromString(value)
+        val actual: String = address.toString()
+        assertEquals(expected = value, actual)
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
     @Test
     fun pattern_should_pass() {

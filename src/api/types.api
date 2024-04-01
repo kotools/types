@@ -443,10 +443,12 @@ public final class kotools/types/web/EmailAddress$Companion {
 public final class org/kotools/types/EmailAddress {
 	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
 	public static final field PATTERN Ljava/lang/String;
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public static final fun fromString (Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public static final fun fromString (Ljava/lang/Object;Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public static final fun fromStringOrNull (Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public static final fun fromStringOrNull (Ljava/lang/Object;Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
+	public final fun toString ()Ljava/lang/String;
 }
 
 public final class org/kotools/types/EmailAddress$Companion {

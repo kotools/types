@@ -12,7 +12,35 @@ import kotlin.jvm.JvmStatic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class EmailAddress private constructor() {
+public class EmailAddress private constructor(private val value: String) {
+    /**
+     * Returns the string representation of this email address.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: EmailAddressKotlinSample.toString_override.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: EmailAddressJavaSample.toString_override.md
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = value
+
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {
         /**
@@ -228,7 +256,8 @@ public class EmailAddress private constructor() {
         ): EmailAddress? {
             val valueAsString: String = value.toString()
             val regex = Regex(pattern)
-            return if (valueAsString matches regex) EmailAddress() else null
+            return if (valueAsString matches regex) EmailAddress(valueAsString)
+            else null
         }
     }
 }
