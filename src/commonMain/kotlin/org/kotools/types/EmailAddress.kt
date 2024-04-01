@@ -177,11 +177,8 @@ public class EmailAddress private constructor() {
          * instead of returning `null` in case of invalid [value].
          */
         @JvmStatic
-        public fun fromStringOrNull(value: Any): EmailAddress? {
-            val valueAsString: String = value.toString()
-            val regex = Regex(PATTERN)
-            return if (valueAsString matches regex) EmailAddress() else null
-        }
+        public fun fromStringOrNull(value: Any): EmailAddress? =
+            fromStringOrNull(value, PATTERN)
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
@@ -222,10 +219,16 @@ public class EmailAddress private constructor() {
             val patternAsString: String = pattern.toString()
             val defaultRegex = Regex(PATTERN)
             if (!patternAsString.matches(defaultRegex)) return null
+            return fromStringOrNull(value, patternAsString)
+        }
+
+        private fun fromStringOrNull(
+            value: Any,
+            pattern: String
+        ): EmailAddress? {
             val valueAsString: String = value.toString()
-            val customRegex = Regex(patternAsString)
-            return if (valueAsString matches customRegex) EmailAddress()
-            else null
+            val regex = Regex(pattern)
+            return if (valueAsString matches regex) EmailAddress() else null
         }
     }
 }
