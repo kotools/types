@@ -19,6 +19,16 @@ internal object EmailAddressCompanionKotlinSample {
     } // END
 
     @Suppress("FunctionName")
+    fun fromString_Any_Any() {
+        val value: Any = "contact@kotools.org"
+        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val result: Result<EmailAddress> = kotlin.runCatching {
+            EmailAddress.fromString(value, pattern) // TABS: 1
+        }
+        println(result.isSuccess) // true
+    } // END
+
+    @Suppress("FunctionName")
     fun fromStringOrNull_Any() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.fromStringOrNull(value)

@@ -82,6 +82,40 @@ class EmailAddressCompanionTest {
     }
 
     @Test
+    fun fromString_Any_Any_should_pass_with_valid_value_and_pattern() {
+        val value: Any = "contact@kotools.org"
+        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val result: Result<EmailAddress> = kotlin.runCatching {
+            EmailAddress.fromString(value, pattern)
+        }
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun fromString_Any_Any_should_fail_with_invalid_value() {
+        val value: Any = "first-contact@kotools.org"
+        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress.fromString(value, pattern)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidEmailAddress(value, pattern).message
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun fromString_Any_Any_should_fail_with_invalid_pattern() {
+        val value: Any = "contact@kotools.org"
+        val pattern: Any = "^[a-z]+\\.[a-z]+\$"
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress.fromString(value, pattern)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidEmailAddressPattern(pattern).message
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun fromStringOrNull_Any_should_pass_with_a_valid_value() {
         val value: Any = "contact@kotools.org"
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)

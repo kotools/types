@@ -25,6 +25,15 @@ class EmailAddressCompanionKotlinSampleTest {
     }
 
     @Test
+    fun `fromString(Any, Any) should pass`() {
+        val actual: Boolean = SystemLambda
+            .tapSystemOut(Sample::fromString_Any_Any)
+            .trim()
+            .toBooleanStrict()
+        assertTrue(actual)
+    }
+
+    @Test
     fun `fromStringOrNull(Any) should pass`() {
         val actual: Boolean = SystemLambda
             .tapSystemOut(Sample::fromStringOrNull_Any)

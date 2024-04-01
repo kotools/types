@@ -17,6 +17,18 @@ class EmailAddressCompanionJavaSample {
         // Output: success
     } // END
 
+    void fromString_Any_Any() {
+        final Object value = "contact@kotools.org";
+        final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
+        try {
+            EmailAddress.fromString(value, pattern); // TABS: 1
+            System.out.println("success"); // TABS: 1
+        } catch (final IllegalArgumentException exception) {
+            System.out.println("failure"); // TABS: 1
+        }
+        // Output: success
+    } // END
+
     void fromStringOrNull_Any() {
         final Object value = "contact@kotools.org";
         final EmailAddress address = EmailAddress.fromStringOrNull(value);
