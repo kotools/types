@@ -13,6 +13,69 @@ import kotlin.jvm.JvmStatic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class EmailAddress private constructor(private val value: String) {
+    // -------------------- Structural equality operations ---------------------
+
+    /**
+     * Returns `true` if the [other] object is an instance of [EmailAddress] and
+     * has the same string representation as this email address, or returns
+     * `false` otherwise.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: EmailAddressKotlinSample.equals_override.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: EmailAddressJavaSample.equals_override.md
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean =
+        other is EmailAddress && this.value == other.value
+
+    /**
+     * Returns a hash code value for this email address.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: EmailAddressKotlinSample.hashCode_override.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: EmailAddressJavaSample.hashCode_override.md
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = hashCodeOf(value)
+
+    // ------------------------------ Converters -------------------------------
+
     /**
      * Returns the string representation of this email address.
      *
@@ -40,6 +103,8 @@ public class EmailAddress private constructor(private val value: String) {
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = value
+
+    // -------------------------------------------------------------------------
 
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {

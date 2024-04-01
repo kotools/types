@@ -4,12 +4,71 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressTest {
+    @Test
+    fun structural_equality_should_pass_with_the_same_instance() {
+        val first: EmailAddress = EmailAddress.fromString("contact@kotools.org")
+        val second: Any = first
+        val equality: Boolean = first.equals(second)
+        assertTrue(equality)
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertEquals(firstHashCode, secondHashCode)
+    }
+
+    @Test
+    fun structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
+        val value: Any = "contact@kotools.org"
+        val first: EmailAddress = EmailAddress.fromString(value)
+        val second: Any = EmailAddress.fromString(value)
+        val equality: Boolean = first.equals(second)
+        assertTrue(equality)
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertEquals(firstHashCode, secondHashCode)
+    }
+
+    @Test
+    fun structural_equality_should_fail_with_null() {
+        val first: EmailAddress = EmailAddress.fromString("contact@kotools.org")
+        val second: Any? = null
+        val equality: Boolean = first.equals(second)
+        assertFalse(equality)
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertNotEquals(firstHashCode, secondHashCode)
+    }
+
+    @Test
+    fun structural_equality_should_fail_with_another_object_having_another_type_than_EmailAddress() {
+        val value: Any = "contact@kotools.org"
+        val first: EmailAddress = EmailAddress.fromString(value)
+        val second: Any = value
+        val equality: Boolean = first.equals(second)
+        assertFalse(equality)
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertNotEquals(firstHashCode, secondHashCode)
+    }
+
+    @Test
+    fun structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
+        val first: EmailAddress = EmailAddress.fromString("first@kotools.org")
+        val second: Any = EmailAddress.fromString("second@kotools.org")
+        val equality: Boolean = first.equals(second)
+        assertFalse(equality)
+        val firstHashCode: Int = first.hashCode()
+        val secondHashCode: Int = second.hashCode()
+        assertNotEquals(firstHashCode, secondHashCode)
+    }
+
     @Test
     fun toString_should_pass() {
         val value: Any = "contact@kotools.org"
