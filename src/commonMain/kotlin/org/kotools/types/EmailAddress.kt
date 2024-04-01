@@ -89,10 +89,8 @@ public class EmailAddress private constructor() {
          * instead of throwing an exception in case of invalid [value].
          */
         @JvmStatic
-        public fun fromString(value: Any): EmailAddress {
-            val address: EmailAddress? = fromStringOrNull(value)
-            return requireNotNull(address) { InvalidEmailAddress(value) }
-        }
+        public fun fromString(value: Any): EmailAddress =
+            fromString(value, PATTERN)
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
@@ -136,12 +134,14 @@ public class EmailAddress private constructor() {
             require(patternAsString matches defaultRegex) {
                 InvalidEmailAddressPattern(pattern)
             }
-            val valueAsString: String = value.toString()
-            val customRegex = Regex(patternAsString)
-            require(valueAsString matches customRegex) {
+            return fromString(value, patternAsString)
+        }
+
+        private fun fromString(value: Any, pattern: String): EmailAddress {
+            val address: EmailAddress? = fromStringOrNull(value, pattern)
+            return requireNotNull(address) {
                 InvalidEmailAddress(value, pattern)
             }
-            return EmailAddress()
         }
 
         /**
