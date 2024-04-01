@@ -444,10 +444,12 @@ public final class org/kotools/types/EmailAddress {
 	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
 	public static final field PATTERN Ljava/lang/String;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromString (Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public static final fun fromString (Ljava/lang/Object;Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public static final fun fromStringOrNull (Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public static final fun fromStringOrNull (Ljava/lang/Object;Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
+	public final fun hashCode ()I
 	public final fun toString ()Ljava/lang/String;
 }
 
