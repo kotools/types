@@ -3,6 +3,8 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.jvm.JvmStatic
 
+private const val FINAL_WARNING: String = "RedundantModalityModifier"
+
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
@@ -42,7 +44,7 @@ public class EmailAddress private constructor(private val value: String) {
      * SAMPLE: EmailAddressJavaSample.equals_override.md
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(FINAL_WARNING)
     final override fun equals(other: Any?): Boolean =
         other is EmailAddress && this.value == other.value
 
@@ -71,7 +73,7 @@ public class EmailAddress private constructor(private val value: String) {
      * SAMPLE: EmailAddressJavaSample.hashCode_override.md
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(FINAL_WARNING)
     final override fun hashCode(): Int = hashCodeOf(value)
 
     // ------------------------------ Converters -------------------------------
@@ -101,7 +103,7 @@ public class EmailAddress private constructor(private val value: String) {
      * SAMPLE: EmailAddressJavaSample.toString_override.md
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(FINAL_WARNING)
     final override fun toString(): String = value
 
     // -------------------------------------------------------------------------
