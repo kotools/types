@@ -15,6 +15,7 @@ kotlin.explicitApi()
 dependencies {
     implementation(rootProject)
     implementation(platform(libs.kotlin.bom))
+    implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.system.lambda)
