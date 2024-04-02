@@ -355,10 +355,10 @@ public class EmailAddress private constructor(private val value: String) {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "org.kotools.types.EmailAddress",
-        PrimitiveKind.STRING
-    )
+    override val descriptor: SerialDescriptor by lazy {
+        val serialName: String = qualifiedNameOf<EmailAddress>()
+        PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+    }
 
     override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
         encoder.encodeString("$value")

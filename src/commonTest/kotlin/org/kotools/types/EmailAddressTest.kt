@@ -279,7 +279,7 @@ class EmailAddressAsStringSerializerTest {
     @Test
     fun descriptor_should_be_valid() {
         val actual: SerialDescriptor = serializer<EmailAddress>().descriptor
-        val expectedSerialName = "org.kotools.types.EmailAddress"
+        val expectedSerialName: String = qualifiedNameOf<EmailAddress>()
         assertEquals(expectedSerialName, actual.serialName)
         assertEquals(expected = PrimitiveKind.STRING, actual.kind)
     }
