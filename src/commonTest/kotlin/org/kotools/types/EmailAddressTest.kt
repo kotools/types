@@ -121,7 +121,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -132,7 +132,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -143,7 +143,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -154,7 +154,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -165,7 +165,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -187,7 +187,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value, pattern).message
+        val expected = "${InvalidEmailAddress(value, pattern)}"
         assertEquals(expected, actual)
     }
 
@@ -199,7 +199,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressPattern(pattern).message
+        val expected = "${InvalidEmailAddressPattern(pattern)}"
         assertEquals(expected, actual)
     }
 
@@ -310,7 +310,7 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString<EmailAddress>(encoded)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -322,7 +322,7 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString<EmailAddress>(encoded)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -334,7 +334,7 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString<EmailAddress>(encoded)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -346,7 +346,7 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString<EmailAddress>(encoded)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 
@@ -358,7 +358,7 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString<EmailAddress>(encoded)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value).message
+        val expected = "${InvalidEmailAddress(value)}"
         assertEquals(expected, actual)
     }
 }

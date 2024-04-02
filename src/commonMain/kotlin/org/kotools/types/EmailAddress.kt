@@ -374,22 +374,17 @@ internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal class InvalidEmailAddress(
-    value: Any,
-    pattern: Any = EmailAddress.PATTERN
-) : IllegalArgumentException() {
-    override val message: String = "\"$value\" is an invalid email address." +
-            " It should match the following pattern: $pattern"
-
-    override fun toString(): String = message
+    private val value: Any,
+    private val pattern: Any = EmailAddress.PATTERN
+) {
+    override fun toString(): String =
+        "\"$value\" is an invalid email address. " +
+                "It should match the following pattern: $pattern"
 }
 
-internal class InvalidEmailAddressPattern(
-    pattern: Any
-) : IllegalArgumentException() {
+internal class InvalidEmailAddressPattern(private val pattern: Any) {
     @OptIn(ExperimentalKotoolsTypesApi::class)
-    override val message: String =
-        "$pattern is an invalid email address pattern." +
-                " It should match the following one: ${EmailAddress.PATTERN}"
-
-    override fun toString(): String = message
+    override fun toString(): String =
+        "$pattern is an invalid email address pattern. " +
+                "It should match the following one: ${EmailAddress.PATTERN}"
 }
