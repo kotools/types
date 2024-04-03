@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package kotools.types.web
 
 import kotlinx.serialization.ExperimentalSerializationApi
