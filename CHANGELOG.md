@@ -61,7 +61,7 @@ NotBlankString.createOrNull(null) // compilation error
 
 ### 🗑️ Deprecated
 
-- The following annotations are now hidden from sources ([#334]):
+- The following annotations are now **hidden** from sources ([#334]):
   `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
   `ExperimentalResultApi` and `ExperimentalTextApi`.
 - The `EmailAddress` **experimental** type from the `kotools.types.web` package
@@ -69,7 +69,7 @@ NotBlankString.createOrNull(null) // compilation error
   from the `org.kotools.types` package ([#635]).
   Its `create` and `createOrNull` factory functions are also deprecated with an
   **error level** for this reason.
-  This deprecated type will be removed in v4.7.
+  These deprecated declarations will be removed in v4.7.
 
 ### 🔥 Removed
 
