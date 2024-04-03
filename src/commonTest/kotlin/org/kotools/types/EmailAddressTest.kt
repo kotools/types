@@ -8,6 +8,8 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.InvalidEmailAddress
+import org.kotools.types.internal.InvalidEmailAddressPattern
 import org.kotools.types.internal.qualifiedNameOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
