@@ -16,9 +16,18 @@ import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
 import org.kotools.types.internal.DeprecatedSince
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
+
+private const val DEPRECATED_WARNING: String = "DEPRECATION"
+private const val FINAL_WARNING: String = "RedundantModalityModifier"
+
+private const val NEW_TYPE_QUALIFIED_NAME: String =
+    "org.kotools.types.EmailAddress"
+
+private const val TYPE_DEPRECATION_MESSAGE: String = "A better " +
+        "representation of email addresses exists in the `org.kotools.types` " +
+        "package. This one will be removed in v4.7."
 
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
@@ -76,13 +85,12 @@ import kotlin.jvm.JvmSynthetic
  * ```
  * </details>
  */
+@Deprecated(TYPE_DEPRECATION_MESSAGE)
+@DeprecatedSince(errorSince = KotoolsTypesVersion.Unreleased)
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(EmailAddressSerializer::class)
-public class EmailAddress
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public constructor(private val value: String) {
+public class EmailAddress internal constructor(private val value: String) {
     init {
         require(value matches regex) { ErrorMessage.invalidEmailAddress(value) }
     }
@@ -128,7 +136,7 @@ public constructor(private val value: String) {
      * ```
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(DEPRECATED_WARNING, FINAL_WARNING)
     final override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other == null -> false
@@ -175,7 +183,7 @@ public constructor(private val value: String) {
      * System.out.println(result); // true
      * ```
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(FINAL_WARNING)
     final override fun hashCode(): Int = hashCodeOf(value)
 
     // ------------------------------ Conversions ------------------------------
@@ -213,7 +221,7 @@ public constructor(private val value: String) {
      * ```
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(DEPRECATED_WARNING, FINAL_WARNING)
     final override fun toString(): String = value
 
     // -------------------------------------------------------------------------
@@ -248,13 +256,6 @@ public constructor(private val value: String) {
          */
         @get:JvmSynthetic
         public val regex: Regex = Regex("^\\S+@\\S+\\.\\S+\$")
-
-        private const val QUALIFIED_NAME: String =
-            "kotools.types.web.EmailAddress"
-
-        private const val FACTORY_FUNCTION_DEPRECATION_MESSAGE: String =
-            "This function will be removed in v4.7. " +
-                    "Use the constructor of EmailAddress instead."
 
         /**
          * Creates an email address from the specified [text], or throws an
@@ -292,14 +293,12 @@ public constructor(private val value: String) {
          * </details>
          */
         @Deprecated(
-            FACTORY_FUNCTION_DEPRECATION_MESSAGE,
-            ReplaceWith(
-                expression = "EmailAddress(text)",
-                imports = [QUALIFIED_NAME]
-            ),
+            TYPE_DEPRECATION_MESSAGE,
+            ReplaceWith("$NEW_TYPE_QUALIFIED_NAME.fromString(text)"),
             DeprecationLevel.ERROR
         )
         @DeprecatedSince(errorSince = KotoolsTypesVersion.Unreleased)
+        @Suppress(DEPRECATED_WARNING)
         public fun create(text: String): EmailAddress {
             require(text matches regex) {
                 ErrorMessage.invalidEmailAddress(text)
@@ -343,15 +342,12 @@ public constructor(private val value: String) {
          * </details>
          */
         @Deprecated(
-            FACTORY_FUNCTION_DEPRECATION_MESSAGE,
-            ReplaceWith(
-                expression = "kotlin.runCatching { EmailAddress(text) }\n" +
-                        "    .getOrNull()",
-                imports = [QUALIFIED_NAME]
-            ),
+            TYPE_DEPRECATION_MESSAGE,
+            ReplaceWith("$NEW_TYPE_QUALIFIED_NAME.fromStringOrNull(text)"),
             DeprecationLevel.ERROR
         )
         @DeprecatedSince(errorSince = KotoolsTypesVersion.Unreleased)
+        @Suppress(DEPRECATED_WARNING)
         public fun createOrNull(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)
             else null
@@ -360,12 +356,14 @@ public constructor(private val value: String) {
 
 @ExperimentalKotoolsTypesApi
 @InternalKotoolsTypesApi
+@Suppress(DEPRECATED_WARNING)
 internal object EmailAddressSerializer :
     KSerializer<EmailAddress> by stringSerializer(
         EmailAddressDeserializationStrategy
     )
 
 @ExperimentalKotoolsTypesApi
+@Suppress(DEPRECATED_WARNING)
 private object EmailAddressDeserializationStrategy :
     DeserializationStrategy<EmailAddress> {
     @OptIn(InternalKotoolsTypesApi::class)
