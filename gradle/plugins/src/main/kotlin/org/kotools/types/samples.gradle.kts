@@ -54,6 +54,11 @@ private val restoreMainSources: TaskProvider<Copy> by tasks
         into(srcDirectory)
     }
 
+tasks.register<Delete>("cleanMainSourcesBackup").configure {
+    description = "Deletes the backup of main sources from the build directory."
+    setDelete(srcBackupDirectory)
+}
+
 // ----------------------------- Samples inlining ------------------------------
 
 private val inlineSamples: TaskProvider<InlineSamples> by tasks
