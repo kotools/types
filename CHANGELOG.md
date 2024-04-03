@@ -78,21 +78,6 @@ following types have been removed from the **experimental** API:
 `NotEmptyRange`, `Bound`, `InclusiveBound` and `ExclusiveBound` ([#627]).
 **Experimental** properties using these types were also removed.
 
-### 🐛 Fixed
-
-Renames the `EmailAddress` **experimental** type's serializer as
-`kotools.types.web.EmailAddress` ([#599]).
-
-```kotlin
-// Before
-val serialName: String = serializer<EmailAddress>().descriptor.serialName
-println(serialName) // kotools.types.experimental.EmailAddress
-
-// Now
-val serialName: String = serializer<EmailAddress>().descriptor.serialName
-println(serialName) // kotools.types.web.EmailAddress
-```
-
 ---
 
 Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
@@ -101,7 +86,6 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [@augustomtt]: https://github.com/augustomtt
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#334]: https://github.com/kotools/types/issues/334
-[#599]: https://github.com/kotools/types/issues/599
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
 [#635]: https://github.com/kotools/types/issues/635
