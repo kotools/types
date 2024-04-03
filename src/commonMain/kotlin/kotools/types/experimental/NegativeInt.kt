@@ -5,8 +5,8 @@ import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.NegativeInt
 import kotools.types.number.PositiveInt
 import kotools.types.number.toPositiveInt
-import org.kotools.types.ExperimentalSince
-import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**

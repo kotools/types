@@ -11,8 +11,8 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeGreaterThanZero
-import org.kotools.types.ExperimentalSince
-import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**

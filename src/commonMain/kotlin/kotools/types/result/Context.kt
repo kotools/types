@@ -10,8 +10,8 @@ import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.text.NotBlankString
-import org.kotools.types.KotoolsTypesVersion
-import org.kotools.types.Since
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
 import kotools.types.collection.toNotEmptyMap as delegateToNotEmptyMap
 import kotools.types.collection.toNotEmptySet as delegateToNotEmptySet

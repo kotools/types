@@ -15,9 +15,9 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBePositive
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.ExperimentalSince
-import org.kotools.types.KotoolsTypesVersion
-import org.kotools.types.Since
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 
 /**
  * Returns this number as an encapsulated [PositiveInt], which may involve

@@ -14,8 +14,8 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.ExperimentalSince
-import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 
 /**
  * Represents a floating-point number of type [Double] that is less than zero.

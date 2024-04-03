@@ -15,9 +15,9 @@ import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
-import org.kotools.types.DeprecatedSince
-import org.kotools.types.ExperimentalSince
-import org.kotools.types.KotoolsTypesVersion
+import org.kotools.types.internal.DeprecatedSince
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**

@@ -1,4 +1,4 @@
-package org.kotools.types
+package org.kotools.types.internal
 
 import kotlin.jvm.JvmSynthetic
 import kotlin.reflect.KClass

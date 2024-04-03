@@ -16,9 +16,9 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import org.kotools.types.ExperimentalSince
-import org.kotools.types.KotoolsTypesVersion
-import org.kotools.types.Since
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 

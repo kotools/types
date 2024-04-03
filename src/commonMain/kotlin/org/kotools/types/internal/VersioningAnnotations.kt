@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package org.kotools.types
+package org.kotools.types.internal
 
 @MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
