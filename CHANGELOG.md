@@ -18,21 +18,28 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- The `EmailAddress` **experimental** type has a new constructor accepting a
-  value of type `String` ([#623]).
-
-```kotlin
-// Before
-EmailAddress.create("contact@kotools.org")
-
-// Now
-EmailAddress("contact@kotools.org")
-```
-
 - Introduced the `Zero` **experimental** type representing the zero number in
   the new `org.kotools.types` package.
   This package will contain reimplemented types and those from the
   `kotools.types.*` packages will be deprecated incrementally.
+- Introduced the `EmailAddress` **experimental** type representing email
+  addresses in the `org.kotools.types` package ([#635]).
+  This new implementation provides new `fromString` and `fromStringOrNull`
+  factory functions accepting a `value` argument of type `Any`.
+  For simplicity purpose, the default pattern used for validating email
+  addresses is `^\S+@\S+\.\S+$`.
+  This pattern allows a wider range of values, but it is also possible to
+  provide a `pattern` argument of type `Any` to these new factory functions for
+  customizing the validation.
+
+```kotlin
+val value: Any = "contact@kotools.org"
+val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+val result: Result<EmailAddress> = kotlin.runCatching {
+    EmailAddress.fromString(value, pattern)
+}
+println(result.isSuccess) // true
+```
 
 ### ♻️ Changed
 
@@ -53,29 +60,17 @@ NotBlankString.create(null) // compilation error
 NotBlankString.createOrNull(null) // compilation error
 ```
 
-- For simplicity purpose, the regular expression of the `EmailAddress`
-  **experimental** type is now `^\S+@\S+\.\S+$` ([#600]). This is a
-  **compatible behavioral** change that allows a wider range of values in email
-  addresses.
-
-```kotlin
-// Before
-EmailAddress.create("types-4_library@kotools.org") // exception
-
-// Now
-EmailAddress("types-4_library@kotools.org") // pass
-```
-
 ### 🗑️ Deprecated
 
 - The following annotations are now hidden from sources ([#334]):
   `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
   `ExperimentalResultApi` and `ExperimentalTextApi`.
-- The `create(String)` and the `createOrNull(String)` **experimental** functions
-  from the `EmailAddress.Companion` type are deprecated for using the new
-  constructor for the `EmailAddress` type ([#623]).
-  They are deprecated with an automatic replacement and an error level for
-  removal in v4.7.
+- The `EmailAddress` **experimental** type from the `kotools.types.web` package
+  is now deprecated with a **warning level** for using the corresponding type
+  from the `org.kotools.types` package ([#635]).
+  Its `create` and `createOrNull` factory functions are also deprecated with an
+  **error level** for this reason.
+  This deprecated type will be removed in v4.7.
 
 ### 🔥 Removed
 
@@ -107,13 +102,10 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [@augustomtt]: https://github.com/augustomtt
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#334]: https://github.com/kotools/types/issues/334
-[#581]: https://github.com/kotools/types/issues/581
-[#583]: https://github.com/kotools/types/issues/583
 [#599]: https://github.com/kotools/types/issues/599
-[#600]: https://github.com/kotools/types/issues/600
-[#623]: https://github.com/kotools/types/issues/623
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
+[#635]: https://github.com/kotools/types/issues/635
 
 ## 🔖 Releases
 
