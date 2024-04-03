@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
   This new implementation provides new `fromString` and `fromStringOrNull`
   factory functions accepting a `value` argument of type `Any`.
   For simplicity purpose, the default pattern used for validating email
-  addresses is `^\S+@\S+\.\S+$` allowing a wider range of values.
+  addresses is `^\S+@\S+\.\S+$`, which allows a wider range of values.
   But it is also possible to provide a `pattern` argument of type `Any` to these
   new factory functions for customizing the validation.
 
