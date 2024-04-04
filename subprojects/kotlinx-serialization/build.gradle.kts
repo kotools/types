@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
@@ -8,6 +9,8 @@ plugins {
     id("kotools.types.documentation")
     id("kotools.types.publication")
 }
+
+apiValidation.apiDumpDirectory = "src/api"
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
