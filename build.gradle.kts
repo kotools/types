@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -56,11 +54,3 @@ dependencies {
 // ----------------------------------- Tasks -----------------------------------
 
 tasks.register("unit")
-
-tasks.withType<DokkaTask>().configureEach {
-    failOnWarning.set(true)
-    dokkaSourceSets.configureEach {
-        includes.setFrom("dokka/packages.md")
-        reportUndocumented.set(true)
-    }
-}

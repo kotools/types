@@ -8,7 +8,6 @@ import org.gradle.api.Project
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.provider.Provider
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.Copy
@@ -75,10 +74,15 @@ private fun TaskContainer.dokkaTasks(project: Project) {
     val documentation: DocumentationExtension = project.extensions.getByType()
     withType<DokkaTask>().configureEach {
         moduleName.set(documentation.moduleName)
-        val dokkaDirectory: Provider<Directory> =
-            project.layout.buildDirectory.dir("dokka")
-        outputDirectory.set(dokkaDirectory)
-        dokkaSourceSets.configureEach { skipEmptyPackages.set(true) }
+        outputDirectory.set(project.layout.buildDirectory.dir("dokka"))
+        failOnWarning.set(true)
+        dokkaSourceSets.configureEach {
+            project.rootProject.layout.projectDirectory
+                .file("dokka/packages.md")
+                .let { includes.setFrom(it) }
+            reportUndocumented.set(true)
+            skipEmptyPackages.set(true)
+        }
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
             documentation.logo.orNull?.let { customAssets = listOf(it) }
             documentation.copyrightNotice?.let { footerMessage = it }
