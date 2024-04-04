@@ -142,8 +142,6 @@ jobs:
     name: Kotlin Native tests for Windows
     needs: gradle-checks
     runs-on: windows-latest
-    env:
-      GRADLE_BUILD_ACTION_CACHE_DEBUG_ENABLED: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.2
