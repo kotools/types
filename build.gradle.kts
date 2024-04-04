@@ -57,8 +57,6 @@ dependencies {
 
 tasks.register("unit")
 
-tasks.jsBrowserTest.configure { useMocha() }
-
 tasks.withType<DokkaTask>().configureEach {
     failOnWarning.set(true)
     dokkaSourceSets.configureEach {

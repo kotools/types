@@ -6,12 +6,14 @@ import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.plugins.PluginContainer
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.attributes
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -65,7 +67,10 @@ private fun TaskContainer.configure(project: Project) {
             languageVersion.set(KotlinVersion.KOTLIN_1_5)
         }
     }
-    withType<KotlinJvmTest>().configureEach { useJUnitPlatform() }
+    withType<KotlinJsTest>()
+        .configureEach(KotlinJsTest::useMocha)
+    withType<KotlinJvmTest>()
+        .configureEach(Test::useJUnitPlatform)
     withType<Jar>().configureEach {
         fun key(suffix: String): String = "Implementation-$suffix"
         val name: Pair<String, String> = key("Title") to project.name
