@@ -17,11 +17,11 @@ include(javaCompatibility)
 project(":$javaCompatibility").projectDir =
     subprojects.resolve(javaCompatibility)
 
-private val samples: String = "samples"
-include(samples)
-project(":$samples").projectDir = subprojects.resolve(samples)
-
 private val kotlinxSerialization: String = "kotlinx-serialization"
 include("${rootProject.name}-$kotlinxSerialization")
 project(":${rootProject.name}-$kotlinxSerialization").projectDir =
     subprojects.resolve(kotlinxSerialization)
+
+private val samples: String = "samples"
+include(samples)
+project(":$samples").projectDir = subprojects.resolve(samples)
