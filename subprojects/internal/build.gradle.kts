@@ -23,3 +23,6 @@ dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
     commonTestImplementation(libs.kotlin.test)
 }
+
+tasks.apiCheck.configure { this.isEnabled = false }
+tasks.apiDump.configure { this.isEnabled = false }
