@@ -29,6 +29,8 @@ jobs:
           java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: true
       - name: Publish 'internal' subproject
         run: |
           ./gradlew :types-internal:publishAllPublicationsToOSSRHRepository \
