@@ -6,15 +6,11 @@ plugins {
     kotlin("jvm")
 }
 
-repositories.mavenCentral()
-
-group = "org.kotools"
-
 kotlin.explicitApi()
 
 dependencies {
-    implementation(rootProject)
     implementation(platform(libs.kotlin.bom))
+    implementation(project(":types"))
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.kotlin.test)
@@ -28,6 +24,4 @@ tasks.withType<KotlinCompile>().configureEach {
         jvmTarget.set(JvmTarget.JVM_17)
     }
 }
-tasks.apiCheck.configure { this.isEnabled = false }
-tasks.apiDump.configure { this.isEnabled = false }
 tasks.test.configure(Test::useJUnitPlatform)

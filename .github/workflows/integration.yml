@@ -48,7 +48,7 @@ jobs:
       - name: Check internals
         run: ./gradlew :types-internal:check
       - name: Check library
-        run: ./gradlew :check
+        run: ./gradlew :types:check
       - name: Check Java compatibility
         run: ./gradlew :java-compatibility:test
       - name: Check samples

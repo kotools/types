@@ -8,10 +8,6 @@ plugins {
     id("kotools.types.publication")
 }
 
-group = "org.kotools"
-
-repositories.mavenCentral()
-
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
@@ -21,10 +17,6 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
 
 dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
+
     commonTestImplementation(libs.kotlin.test)
 }
-
-listOf(tasks.jvmApiBuild, tasks.jvmApiCheck, tasks.apiCheck, tasks.apiDump)
-    .forEach {
-        it.configure { this.isEnabled = false }
-    }

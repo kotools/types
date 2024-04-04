@@ -11,9 +11,9 @@ GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
 echo "${BLUE}> Synchronize Gradle${NO_COLOR}"
-./gradlew -q :unit
+./gradlew -q :types:unit
 
-PROJECT_VERSION=$(./gradlew -q :version)
+PROJECT_VERSION=$(./gradlew -q :types:version)
 echo "${BLUE}> Project version:${NO_COLOR} $PROJECT_VERSION"
 
 echo "${BLUE}> Get archived versions of API reference${NO_COLOR}"
@@ -22,13 +22,13 @@ SOURCE_FOLDER="versions"
 git checkout -q $BRANCH_TARGET -- $SOURCE_FOLDER || exit 1
 
 echo "${BLUE}> Prepare generation of latest API reference${NO_COLOR}"
-OLD_VERSIONS_DIR="build/api-references"
+OLD_VERSIONS_DIR="subprojects/library/build/api-references"
 mkdir $OLD_VERSIONS_DIR
 git mv $SOURCE_FOLDER/* $OLD_VERSIONS_DIR
 rm -rf $SOURCE_FOLDER
 
 echo "${BLUE}> Generate latest API reference${NO_COLOR}"
-./gradlew -q :cleanDokkaHtml :assembleApiReferenceForWebsite
+./gradlew -q :types:cleanDokkaHtml :types:assembleApiReferenceForWebsite
 
 echo "${BLUE}> Archive latest API reference${NO_COLOR}"
 git checkout -q "$BRANCH_TARGET"
