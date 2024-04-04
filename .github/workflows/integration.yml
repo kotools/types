@@ -55,6 +55,15 @@ jobs:
         run: ./gradlew :samples:check
       - name: Check integration with kotlinx.serialization
         run: ./gradlew :types-kotlinx-serialization:check
+  dependency-submission:
+    name: Dependency submission
+    needs: checks
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
       - name: Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@v3.1.0
-        if: github.event_name == 'push' && github.ref_name == 'main'
