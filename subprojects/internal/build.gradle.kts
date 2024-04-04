@@ -24,5 +24,7 @@ dependencies {
     commonTestImplementation(libs.kotlin.test)
 }
 
-tasks.apiCheck.configure { this.isEnabled = false }
-tasks.apiDump.configure { this.isEnabled = false }
+listOf(tasks.jvmApiBuild, tasks.jvmApiCheck, tasks.apiCheck, tasks.apiDump)
+    .forEach {
+        it.configure { this.isEnabled = false }
+    }
