@@ -68,6 +68,8 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:jsTest
+      - name: Test 'kotlinx-serialization' subproject
+        run: ./gradlew :types-kotlinx-serialization:jsTest
       - name: Test root project
         run: ./gradlew :jsTest
   jvm-checks:
@@ -92,6 +94,10 @@ jobs:
         run: ./gradlew :java-compatibility:test
       - name: Runs checks of 'samples' subproject
         run: ./gradlew :samples:check
+      - name: Test 'kotlinx-serialization' subproject
+        run: |
+          ./gradlew :types-kotlinx-serialization:jvmTest \
+          :types-kotlinx-serialization:jvmApiCheck
       - name: Check root project
         run: ./gradlew :jvmTest :jvmApiCheck
   linux-test:
@@ -112,6 +118,8 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:linuxTest
+      - name: Test 'kotlinx-serialization' subproject
+        run: ./gradlew :types-kotlinx-serialization:linuxTest
       - name: Test root project
         run: ./gradlew :linuxTest
   macos-test:
@@ -134,6 +142,10 @@ jobs:
         run: ./gradlew :types-internal:macosTest
       - name: Test 'internal' subproject on macOS arm64
         run: ./gradlew :types-internal:macosArm64Test
+      - name: Test 'kotlinx-serialization' subproject on macOS x64
+        run: ./gradlew :types-kotlinx-serialization:macosTest
+      - name: Test 'kotlinx-serialization' subproject on macOS arm64
+        run: ./gradlew :types-kotlinx-serialization:macosArm64Test
       - name: Test root project on macOS x64
         run: ./gradlew :macosTest
       - name: Test root project on macOS arm64
@@ -156,6 +168,8 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Test 'internal' subproject
         run: ./gradlew :types-internal:windowsTest
+      - name: Test 'kotlinx-serialization' subproject
+        run: ./gradlew :types-kotlinx-serialization:windowsTest
       - name: Test root project
         run: ./gradlew :windowsTest
   # --------------------------------- Stage 3 ----------------------------------

@@ -35,5 +35,10 @@ jobs:
         run: |
           ./gradlew :types-internal:publishAllPublicationsToOSSRHRepository \
           $GRADLE_DRY_RUN
+      - name: Publish 'kotlinx-serialization' subproject
+        run: |
+          ./gradlew \
+          :types-kotlinx-serialization:publishAllPublicationsToOSSRHRepository \
+          $GRADLE_DRY_RUN
       - name: Publish root project
         run: ./gradlew :publishAllPublicationsToOSSRHRepository $GRADLE_DRY_RUN
