@@ -13,6 +13,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
@@ -39,11 +40,18 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
 
 private fun ExtensionContainer.configure() {
     val kotlin: KotlinMultiplatformExtension = getByType()
-    kotlin.run {
-        explicitApi()
-        js(IR) { browser() }
-        jvm()
-        nativeTargets()
+    kotlin.explicitApi()
+    kotlin.js(KotlinJsCompilerType.IR) { browser() }
+    kotlin.jvm()
+    kotlin.nativeTargets()
+    kotlin.targets.configureEach {
+        compilations.configureEach {
+            compilerOptions.configure {
+                allWarningsAsErrors.set(true)
+                freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+                languageVersion.set(KotlinVersion.KOTLIN_1_5)
+            }
+        }
     }
 }
 
@@ -60,12 +68,7 @@ private fun KotlinMultiplatformExtension.nativeTargets() {
 
 private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
-        compilerOptions {
-            allWarningsAsErrors.set(true)
-            jvmTarget.set(JvmTarget.JVM_17)
-            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
-            languageVersion.set(KotlinVersion.KOTLIN_1_5)
-        }
+        compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
     }
     withType<KotlinJsTest>()
         .configureEach(KotlinJsTest::useMocha)
