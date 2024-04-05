@@ -15,8 +15,6 @@ import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
-import org.kotools.types.internal.DeprecatedAsWarningSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 private const val DEPRECATED_WARNING: String = "DEPRECATION"
@@ -86,7 +84,6 @@ private const val TYPE_DEPRECATION_MESSAGE: String = "A better " +
  * </details>
  */
 @Deprecated(TYPE_DEPRECATION_MESSAGE)
-@DeprecatedAsWarningSince(KotoolsTypesVersion.Unreleased)
 @ExperimentalKotoolsTypesApi
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(EmailAddressSerializer::class)
