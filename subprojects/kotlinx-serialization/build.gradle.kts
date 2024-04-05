@@ -12,10 +12,6 @@ plugins {
 
 apiValidation.apiDumpDirectory = "src/api"
 
-kotlin.sourceSets.all {
-    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
-}
-
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
