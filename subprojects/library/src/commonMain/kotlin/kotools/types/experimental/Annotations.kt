@@ -1,6 +1,5 @@
 package kotools.types.experimental
 
-import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.DeprecatedAsWarningSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -37,7 +36,6 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
     DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
-@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -54,7 +52,6 @@ public annotation class ExperimentalCollectionApi
     DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
-@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -71,7 +68,6 @@ public annotation class ExperimentalNumberApi
     DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
-@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -88,7 +84,6 @@ public annotation class ExperimentalRangeApi
     DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
-@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -105,7 +100,6 @@ public annotation class ExperimentalResultApi
     DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
-@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)

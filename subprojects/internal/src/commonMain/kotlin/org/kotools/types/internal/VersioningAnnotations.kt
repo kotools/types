@@ -47,18 +47,3 @@ public annotation class Since(val version: KotoolsTypesVersion)
 public annotation class DeprecatedAsWarningSince(
     val version: KotoolsTypesVersion
 )
-
-/**
- * Specifies the first [version] of Kotools Types where a declaration has
- * appeared as a **deprecated** feature with an [error][DeprecationLevel.ERROR]
- * level.
- */
-@InternalKotoolsTypesApi
-@Retention(AnnotationRetention.SOURCE)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.TYPEALIAS
-)
-public annotation class DeprecatedAsErrorSince(val version: KotoolsTypesVersion)
