@@ -7,7 +7,6 @@ import kotools.types.internal.InternalKotoolsTypesApi
  * appeared as an **experimental** feature.
  */
 @InternalKotoolsTypesApi
-@MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
@@ -23,7 +22,6 @@ public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
  * appeared as a **stable** feature.
  */
 @InternalKotoolsTypesApi
-@MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
@@ -39,7 +37,6 @@ public annotation class Since(val version: KotoolsTypesVersion)
  * [warning][DeprecationLevel.WARNING] level.
  */
 @InternalKotoolsTypesApi
-@MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
@@ -57,7 +54,6 @@ public annotation class DeprecatedAsWarningSince(
  * level.
  */
 @InternalKotoolsTypesApi
-@MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
@@ -72,7 +68,6 @@ public annotation class DeprecatedAsErrorSince(val version: KotoolsTypesVersion)
  * [hidden][DeprecationLevel.HIDDEN] from code.
  */
 @InternalKotoolsTypesApi
-@MustBeDocumented
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
