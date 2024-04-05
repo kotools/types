@@ -73,7 +73,7 @@ public class DocumentationPlugin : Plugin<Project> {
 private fun TaskContainer.dokkaTasks(project: Project) {
     val documentation: DocumentationExtension = project.extensions.getByType()
     withType<DokkaTask>().configureEach {
-        moduleName.set(documentation.moduleName)
+        moduleName.set(documentation.moduleName.orNull)
         outputDirectory.set(project.layout.buildDirectory.dir("dokka"))
         failOnWarning.set(true)
         dokkaSourceSets.configureEach {
