@@ -1,7 +1,5 @@
 package kotools.types.experimental
 
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
@@ -15,7 +13,6 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
-@Since(KotoolsTypesVersion.V4_4_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalKotoolsTypesApi
 

@@ -17,7 +17,6 @@ import kotools.types.internal.shouldBePositive
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 
 /**
  * Returns this number as an encapsulated [PositiveInt], which may involve
@@ -25,7 +24,6 @@ import org.kotools.types.internal.Since
  * if this number is [strictly negative][StrictlyNegativeInt].
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toPositiveInt(): Result<PositiveInt> {
     val value: Int = toInt()
     return when {
@@ -70,7 +68,6 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(PositiveIntSerializer::class)
-@Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface PositiveInt : AnyInt {
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
@@ -174,17 +171,14 @@ public sealed interface PositiveInt : AnyInt {
         }
 
         /** Returns a random [PositiveInt]. */
-        @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): PositiveInt = (min.toInt()..max.toInt())
             .random()
             .toPositiveInt()
             .getOrThrow()
     }
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String
 }
 
@@ -192,7 +186,6 @@ public sealed interface PositiveInt : AnyInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.div(other: StrictlyPositiveInt): PositiveInt {
     val result: Int = toInt() / other
     return result.toPositiveInt()
@@ -203,7 +196,6 @@ public operator fun PositiveInt.div(other: StrictlyPositiveInt): PositiveInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
     val result: Int = toInt() / other
     return result.toNegativeInt()
@@ -214,7 +206,6 @@ public operator fun PositiveInt.div(other: StrictlyNegativeInt): NegativeInt {
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun PositiveInt.rem(other: NonZeroInt): PositiveInt {
     val result: Int = toInt() % other
     return result.toPositiveInt()

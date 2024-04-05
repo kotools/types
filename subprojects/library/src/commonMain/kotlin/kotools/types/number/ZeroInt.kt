@@ -12,8 +12,6 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 
 /**
  * Represents an integer number of type [Int] that equals zero.
@@ -40,7 +38,6 @@ import org.kotools.types.internal.Since
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(ZeroIntSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public object ZeroInt : PositiveInt, NegativeInt {
     override fun toInt(): Int = 0
     override fun toString(): String = "${toInt()}"

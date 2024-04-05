@@ -17,7 +17,6 @@ import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -31,7 +30,6 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
  */
 @OptIn(ExperimentalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching(StrictlyNegativeInt.Companion::create)
 
@@ -66,7 +64,6 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyNegativeIntSerializer::class)
-@Since(KotoolsTypesVersion.V1_1_0)
 public value class StrictlyNegativeInt private constructor(
     private val value: Int
 ) : NonZeroInt, NegativeInt {
@@ -142,17 +139,14 @@ public value class StrictlyNegativeInt private constructor(
         }
 
         /** Returns a random [StrictlyNegativeInt]. */
-        @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): StrictlyNegativeInt = (min.value..max.value)
             .random()
             .toStrictlyNegativeInt()
             .getOrThrow()
     }
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int = value
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String = "$value"
 }
 

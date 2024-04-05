@@ -16,17 +16,3 @@ import kotools.types.internal.InternalKotoolsTypesApi
     AnnotationTarget.TYPEALIAS
 )
 public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
-
-/**
- * Specifies the first [version] of Kotools Types where a declaration has
- * appeared as a **stable** feature.
- */
-@InternalKotoolsTypesApi
-@Retention(AnnotationRetention.SOURCE)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.TYPEALIAS
-)
-public annotation class Since(val version: KotoolsTypesVersion)

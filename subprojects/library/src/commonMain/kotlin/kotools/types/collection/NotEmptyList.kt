@@ -12,7 +12,6 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -28,7 +27,6 @@ import kotlin.jvm.JvmSynthetic
  * ```
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
     return NotEmptyList.orThrow(elements)
@@ -67,7 +65,6 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * ```
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     runCatching {
         val elements: List<E> = toList()
@@ -104,7 +101,6 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptyListSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyList<out E> private constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {
