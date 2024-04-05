@@ -15,8 +15,6 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -101,7 +99,6 @@ public value class StrictlyNegativeInt private constructor(
          * invalid [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun create(number: Number): StrictlyNegativeInt {
             val result: StrictlyNegativeInt? = createOrNull(number)
@@ -130,7 +127,6 @@ public value class StrictlyNegativeInt private constructor(
          * [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun createOrNull(number: Number): StrictlyNegativeInt? {
             val value: Int = number.toInt()

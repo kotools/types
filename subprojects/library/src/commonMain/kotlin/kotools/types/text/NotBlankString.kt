@@ -16,8 +16,6 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -88,7 +86,6 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun create(value: Any): NotBlankString {
             val text: String = value.toString()
@@ -119,7 +116,6 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun createOrNull(value: Any): NotBlankString? {
             val text: String = value.toString()
@@ -166,7 +162,6 @@ public value class NotBlankString private constructor(
      * this function is not available yet for Java users.
      */
     @ExperimentalKotoolsTypesApi
-    @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
     @JvmSynthetic
     public operator fun plus(other: Any): NotBlankString = value.plus("$other")
         .toNotBlankString()

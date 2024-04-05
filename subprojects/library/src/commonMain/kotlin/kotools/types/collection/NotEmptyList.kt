@@ -10,8 +10,6 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -142,7 +140,6 @@ public value class NotEmptyList<out E> private constructor(
          * [collection].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <E> create(collection: Collection<E>): NotEmptyList<E> {
             val result: NotEmptyList<E>? = createOrNull(collection)
@@ -187,7 +184,6 @@ public value class NotEmptyList<out E> private constructor(
          * [collection].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <E> createOrNull(
             collection: Collection<E>
@@ -213,7 +209,6 @@ public value class NotEmptyList<out E> private constructor(
          * this function is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <E> of(head: E, vararg tail: E): NotEmptyList<E> {
             val elements: List<E> = listOf(head) + tail

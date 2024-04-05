@@ -15,8 +15,6 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 
 /**
  * Returns this number as an encapsulated [NegativeInt], which may involve
@@ -115,7 +113,6 @@ public sealed interface NegativeInt : AnyInt {
          * [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun create(number: Number): NegativeInt {
             val result: NegativeInt? = createOrNull(number)
             return requireNotNull(result, number::shouldBeNegative)
@@ -159,7 +156,6 @@ public sealed interface NegativeInt : AnyInt {
          * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun createOrNull(number: Number): NegativeInt? {
             val value: Int = number.toInt()
             return when {

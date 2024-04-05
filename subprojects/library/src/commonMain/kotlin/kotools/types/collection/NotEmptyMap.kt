@@ -12,8 +12,6 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -147,7 +145,6 @@ public value class NotEmptyMap<K, out V> private constructor(
          * [map].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> create(map: Map<K, V>): NotEmptyMap<K, V> {
             val result: NotEmptyMap<K, V>? = createOrNull(map)
@@ -190,7 +187,6 @@ public value class NotEmptyMap<K, out V> private constructor(
          * an exception instead of returning `null` in case of invalid [map].
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? = map
             .takeIf(Map<K, V>::isNotEmpty)
@@ -214,7 +210,6 @@ public value class NotEmptyMap<K, out V> private constructor(
          * this function is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> of(
             head: Pair<K, V>,
