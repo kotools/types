@@ -44,11 +44,13 @@ private fun ExtensionContainer.configure() {
     kotlin.js(KotlinJsCompilerType.IR) { browser() }
     kotlin.jvm()
     kotlin.nativeTargets()
+    kotlin.sourceSets.configureEach {
+        languageSettings.optIn("kotlin.RequiresOptIn")
+    }
     kotlin.targets.configureEach {
         compilations.configureEach {
             compilerOptions.configure {
                 allWarningsAsErrors.set(true)
-                freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
                 languageVersion.set(KotlinVersion.KOTLIN_1_5)
             }
         }
