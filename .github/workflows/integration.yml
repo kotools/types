@@ -50,7 +50,7 @@ jobs:
       - name: Check library
         run: ./gradlew :types:check
       - name: Check Java compatibility
-        run: ./gradlew :java-compatibility:test
+        run: ./gradlew :java-compatibility:check
       - name: Check samples
         run: ./gradlew :samples:check
       - name: Check integration with kotlinx.serialization
