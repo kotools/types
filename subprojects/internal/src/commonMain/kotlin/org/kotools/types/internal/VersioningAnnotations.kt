@@ -62,17 +62,3 @@ public annotation class DeprecatedAsWarningSince(
     AnnotationTarget.TYPEALIAS
 )
 public annotation class DeprecatedAsErrorSince(val version: KotoolsTypesVersion)
-
-/**
- * Specifies the first [version] of Kotools Types where a declaration has been
- * [hidden][DeprecationLevel.HIDDEN] from code.
- */
-@InternalKotoolsTypesApi
-@Retention(AnnotationRetention.SOURCE)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.TYPEALIAS
-)
-public annotation class HiddenSince(val version: KotoolsTypesVersion)
