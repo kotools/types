@@ -22,6 +22,10 @@ documentation {
     moduleName = "Kotools Types"
 }
 
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+}
+
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
