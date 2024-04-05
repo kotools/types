@@ -1,6 +1,8 @@
 package kotools.types.experimental
 
-import org.kotools.types.internal.DeprecatedSince
+import org.kotools.types.internal.DeprecatedAsErrorSince
+import org.kotools.types.internal.DeprecatedAsWarningSince
+import org.kotools.types.internal.HiddenSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
@@ -35,11 +37,9 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
     ),
     DeprecationLevel.HIDDEN
 )
-@DeprecatedSince(
-    warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.V4_5_0,
-    hiddenSince = KotoolsTypesVersion.Unreleased
-)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -55,11 +55,9 @@ public annotation class ExperimentalCollectionApi
     ),
     DeprecationLevel.HIDDEN
 )
-@DeprecatedSince(
-    warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.V4_5_0,
-    hiddenSince = KotoolsTypesVersion.Unreleased
-)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -75,11 +73,9 @@ public annotation class ExperimentalNumberApi
     ),
     DeprecationLevel.HIDDEN
 )
-@DeprecatedSince(
-    warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.V4_5_0,
-    hiddenSince = KotoolsTypesVersion.Unreleased
-)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -95,11 +91,9 @@ public annotation class ExperimentalRangeApi
     ),
     DeprecationLevel.HIDDEN
 )
-@DeprecatedSince(
-    warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.V4_5_0,
-    hiddenSince = KotoolsTypesVersion.Unreleased
-)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -115,11 +109,9 @@ public annotation class ExperimentalResultApi
     ),
     DeprecationLevel.HIDDEN
 )
-@DeprecatedSince(
-    warningSince = KotoolsTypesVersion.V4_4_0,
-    errorSince = KotoolsTypesVersion.V4_5_0,
-    hiddenSince = KotoolsTypesVersion.Unreleased
-)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
