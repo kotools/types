@@ -85,6 +85,6 @@ tasks.named("jvmSourcesJar").configure {
     setFinalizedBy(listOf(restoreMainSources))
 }
 
-listOf("jvmApiCheck", "apiCheck").forEach {
+listOf("jvmApiCheck", "apiCheck", "apiDump").forEach {
     tasks.named(it).configure { setFinalizedBy(listOf(restoreMainSources)) }
 }
