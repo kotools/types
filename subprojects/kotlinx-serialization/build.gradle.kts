@@ -8,6 +8,7 @@ plugins {
     id("kotools.types.multiplatform")
     id("kotools.types.documentation")
     id("kotools.types.publication")
+    id("org.kotools.types.samples")
 }
 
 apiValidation.apiDumpDirectory = "src/api"
@@ -18,6 +19,11 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
         artifactId = project.name
         version = "${project.version}"
     }
+
+samples.source = project(":samples")
+    .layout
+    .projectDirectory
+    .dir("src/main")
 
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
