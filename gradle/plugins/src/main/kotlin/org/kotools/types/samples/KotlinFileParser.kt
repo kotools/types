@@ -4,9 +4,9 @@ import java.io.File
 
 internal object KotlinFileParser {
     fun parse(file: File): KotlinFile {
-        val functions: List<KotlinFunction> = file
+        val functions: List<Function> = file
             .useLines(block = Sequence<String>::getRawFunctions)
-            .map(::KotlinFunction)
+            .map { Function(name = it.key, body = it.value) }
         return KotlinFile(file.name, functions)
     }
 }
@@ -15,10 +15,11 @@ private fun Sequence<String>.getRawFunctions(): Map<String, List<String>> {
     val functions: MutableMap<String, MutableList<String>> = mutableMapOf()
     var latestFunctionDetected: String? = null
     var read = false
+    val functionHeaderRegex = Regex("fun [A-Za-z_]+\\(")
     filter(String::isNotBlank).forEach {
-        if (KotlinFunction.headerRegex in it) {
+        if (functionHeaderRegex in it) {
             val functionName: String = it
-                .substringAfter("${KotlinFunction.KEYWORD} ")
+                .substringAfter("fun ")
                 .substringBefore('(')
             functions += functionName to mutableListOf()
             latestFunctionDetected = functionName

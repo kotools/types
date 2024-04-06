@@ -2,7 +2,7 @@ package org.kotools.types.samples
 
 internal class JavaFile(
     private val name: String,
-    private val functions: List<JavaSampleFunction>
+    private val functions: List<Function>
 ) : ParsedFile {
     init {
         require(name.endsWith(FILE_EXTENSION)) {

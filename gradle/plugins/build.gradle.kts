@@ -9,6 +9,8 @@ dependencies {
     implementation(libs.dokka.base)
     implementation(libs.dokka.gradle.plugin)
     implementation(libs.dokka.versioning)
+
+    testImplementation(libs.kotlin.test)
 }
 
 gradlePlugin {
@@ -26,6 +28,7 @@ private fun NamedDomainObjectContainer<PluginDeclaration>.kotoolsTypesPlugin(
     implementationClass = "kotools.types.plugins.${name}Plugin"
 }
 
+tasks.test.configure(Test::useJUnitPlatform)
 tasks.withType<ValidatePlugins>().configureEach {
     failOnWarning.set(true)
     enableStricterValidation.set(true)

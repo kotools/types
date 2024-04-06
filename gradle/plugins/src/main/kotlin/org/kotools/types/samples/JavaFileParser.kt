@@ -4,9 +4,9 @@ import java.io.File
 
 internal object JavaFileParser {
     fun parse(file: File): JavaFile {
-        val functions: List<JavaSampleFunction> = file
+        val functions: List<Function> = file
             .useLines(block = Sequence<String>::getRawFunctions)
-            .map(::JavaSampleFunction)
+            .map { Function(name = it.key, body = it.value) }
         return JavaFile(file.name, functions)
     }
 }
@@ -15,10 +15,11 @@ private fun Sequence<String>.getRawFunctions(): Map<String, List<String>> {
     val functions: MutableMap<String, MutableList<String>> = mutableMapOf()
     var latestFunctionDetected: String? = null
     var read = false
+    val functionHeaderRegex = Regex("void [A-Za-z_]+\\(")
     filter(String::isNotBlank).forEach {
-        if (JavaSampleFunction.headerRegex in it) {
+        if (functionHeaderRegex in it) {
             val functionName: String = it
-                .substringAfter("${JavaSampleFunction.KEYWORD} ")
+                .substringAfter("void ")
                 .substringBefore('(')
             functions += functionName to mutableListOf()
             latestFunctionDetected = functionName

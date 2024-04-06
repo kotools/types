@@ -2,7 +2,7 @@ package org.kotools.types.samples
 
 internal class KotlinFile(
     private val name: String,
-    private val functions: List<KotlinFunction>
+    private val functions: List<Function>
 ) : ParsedFile {
     init {
         require(name.endsWith(FILE_EXTENSION)) {

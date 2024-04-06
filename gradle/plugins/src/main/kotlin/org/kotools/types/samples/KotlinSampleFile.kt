@@ -4,7 +4,7 @@ import org.gradle.api.file.Directory
 
 internal class KotlinSampleFile(
     private val name: String,
-    private val function: KotlinFunction
+    private val function: Function
 ) : SampleFile {
     init {
         require(name matches nameRegex) {
