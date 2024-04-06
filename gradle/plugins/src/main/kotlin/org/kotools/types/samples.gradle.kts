@@ -16,14 +16,18 @@ private val samplesDirectory: Provider<Directory> =
 private val extractKotlinSamples: TaskProvider<ExtractCodeSamples> by tasks
     .registering(ExtractCodeSamples::class) {
         description = "Extract Kotlin code samples from sources."
-        sourceDirectory.set(samples.source.dir("kotlin"))
+        samples.project
+            .map { it.layout.projectDirectory.dir("src/main/kotlin") }
+            .let(this.sourceDirectory::set)
         outputDirectory.set(samplesDirectory)
     }
 
 private val extractJavaSamples: TaskProvider<ExtractCodeSamples> by tasks
     .registering(ExtractCodeSamples::class) {
         description = "Extract Java code samples from sources."
-        sourceDirectory.set(samples.source.dir("java"))
+        samples.project
+            .map { it.layout.projectDirectory.dir("src/main/java") }
+            .let(this.sourceDirectory::set)
         outputDirectory.set(samplesDirectory)
     }
 

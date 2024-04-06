@@ -33,10 +33,7 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
         version = "${project.version}"
     }
 
-samples.source = project(":samples")
-    .layout
-    .projectDirectory
-    .dir("src/main")
+samples.project = project(":samples")
 
 // ------------------------------- Dependencies --------------------------------
 
