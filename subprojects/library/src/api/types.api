@@ -462,6 +462,7 @@ public final class org/kotools/types/EmailAddress$Companion {
 
 public final class org/kotools/types/Zero {
 	public static final field INSTANCE Lorg/kotools/types/Zero;
+	public final fun toByte ()B
 	public final fun toString ()Ljava/lang/String;
 }
 
