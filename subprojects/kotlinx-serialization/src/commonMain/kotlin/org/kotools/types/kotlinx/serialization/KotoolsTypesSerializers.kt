@@ -1,6 +1,9 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.contextual
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.Zero
 import kotlin.reflect.KClass
 
 /**
@@ -9,6 +12,19 @@ import kotlin.reflect.KClass
  */
 @ExperimentalKotoolsTypesApi
 public object KotoolsTypesSerializers {
+    /**
+     * Returns the module for serializing the [Zero] type.
+     *
+     * Here's an example of calling this property from Kotlin code:
+     *
+     * SAMPLE: KotoolsTypesSerializersKotlinSample.zero.md
+     */
+    public val zero: SerializersModule by lazy {
+        SerializersModule {
+            this.contextual(ZeroAsByteSerializer)
+        }
+    }
+
     /**
      * Returns the string representation of this object.
      *
