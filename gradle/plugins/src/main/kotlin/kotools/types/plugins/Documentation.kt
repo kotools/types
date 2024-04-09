@@ -32,23 +32,6 @@ import kotlin.reflect.KClass
 /** The extension for configuring the [DocumentationPlugin]. */
 public interface DocumentationExtension {
     /**
-     * The license to use for extracting the copyright notice displayed in the
-     * documentation's footer.
-     *
-     * The plugin will set the [DokkaBaseConfiguration.footerMessage] property
-     * with its value.
-     */
-    public val license: Property<File>
-
-    /**
-     * The logo to use in the documentation.
-     *
-     * The plugin will add it in the [DokkaBaseConfiguration.customAssets]
-     * property.
-     */
-    public val logo: Property<File>
-
-    /**
      * The display name of the module.
      *
      * The plugin will set the [DokkaTask.moduleName] property with its value.
@@ -84,8 +67,16 @@ private fun TaskContainer.dokkaTasks(project: Project) {
             skipEmptyPackages.set(true)
         }
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            documentation.logo.orNull?.let { customAssets = listOf(it) }
-            documentation.copyrightNotice?.let { footerMessage = it }
+            project.rootProject.layout.projectDirectory
+                .file("dokka/logo-icon.svg")
+                .asFile
+                .let { this.customAssets = listOf(it) }
+            project.rootProject.layout.projectDirectory.file("LICENSE.txt")
+                .asFile
+                .useLines { lines: Sequence<String> ->
+                    lines.first { it.startsWith("Copyright (c)") }
+                }
+                .let { this.footerMessage = it }
         }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
@@ -93,11 +84,6 @@ private fun TaskContainer.dokkaTasks(project: Project) {
         }
     }
 }
-
-private val DocumentationExtension.copyrightNotice: String?
-    get() = license.orNull?.useLines { lines: Sequence<String> ->
-        lines.first { it.startsWith("Copyright (c)") }
-    }
 
 private val Project.archivedApiReferences: File
     get() = project.layout.buildDirectory.dir("api-references")

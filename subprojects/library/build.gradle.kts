@@ -15,12 +15,7 @@ plugins {
 
 apiValidation.apiDumpDirectory = "src/api"
 
-documentation {
-    license = rootProject.layout.projectDirectory.file("LICENSE.txt").asFile
-    logo =
-        rootProject.layout.projectDirectory.file("dokka/logo-icon.svg").asFile
-    moduleName = "Kotools Types"
-}
+documentation.moduleName = "Kotools Types"
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
