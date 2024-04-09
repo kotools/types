@@ -77,7 +77,7 @@ private val inlineSamples: TaskProvider<InlineSamples> by tasks
 
 // ----------------------- External tasks configuration ------------------------
 
-listOf(KotlinCompilationTask::class, DokkaTask::class).forEach {
+listOf(KotlinCompilationTask::class, DokkaTask::class, Jar::class).forEach {
     tasks.withType(it).configureEach {
         setDependsOn(listOf(inlineSamples))
         setFinalizedBy(listOf(restoreMainSources))
