@@ -19,11 +19,8 @@ public object KotoolsTypesSerializers {
      *
      * SAMPLE: KotoolsTypesSerializersKotlinSample.zero.md
      */
-    public val zero: SerializersModule by lazy {
-        SerializersModule {
-            this.contextual(ZeroAsByteSerializer)
-        }
-    }
+    public val zero: SerializersModule
+        get() = SerializersModule { contextual(ZeroAsByteSerializer) }
 
     /**
      * Returns the string representation of this object.
