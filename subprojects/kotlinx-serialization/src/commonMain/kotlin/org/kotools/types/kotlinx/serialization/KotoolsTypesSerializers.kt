@@ -13,6 +13,16 @@ import kotlin.reflect.KClass
 @ExperimentalKotoolsTypesApi
 public object KotoolsTypesSerializers {
     /**
+     * Returns the module for serializing all types.
+     *
+     * Here's an example of calling this property from Kotlin code:
+     *
+     * SAMPLE: KotoolsTypesSerializersKotlinSample.all.md
+     */
+    public val all: SerializersModule
+        get() = SerializersModule { include(zero) }
+
+    /**
      * Returns the module for serializing the [Zero] type.
      *
      * Here's an example of calling this property from Kotlin code:

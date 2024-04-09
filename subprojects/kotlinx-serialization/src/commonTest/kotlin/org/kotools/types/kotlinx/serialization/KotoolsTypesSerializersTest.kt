@@ -9,15 +9,20 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class KotoolsTypesSerializersTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun all_module_should_contain_all_serializers() {
+        val module: SerializersModule = KotoolsTypesSerializers.all
+        module.serializer<Zero>()
+    }
+
     @Test
     fun zero_module_should_contain_serializer_for_Zero_type() {
         val module: SerializersModule = KotoolsTypesSerializers.zero
         module.serializer<Zero>()
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun toString_should_return_its_simple_name() {
         val actual: String = KotoolsTypesSerializers.toString()

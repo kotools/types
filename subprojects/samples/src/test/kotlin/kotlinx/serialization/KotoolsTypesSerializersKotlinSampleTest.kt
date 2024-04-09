@@ -10,6 +10,16 @@ import kotlin.test.assertNotNull
 
 class KotoolsTypesSerializersKotlinSampleTest {
     @Test
+    fun `all should pass`() {
+        val actual: List<String> = SystemLambda
+            .tapSystemOut(KotoolsTypesSerializersKotlinSample::all)
+            .trim()
+            .lines()
+        val expected: List<String> = listOf("0", "true")
+        assertContentEquals(expected, actual)
+    }
+
+    @Test
     fun `zero should pass`() {
         val actual: List<String> = SystemLambda
             .tapSystemOut(KotoolsTypesSerializersKotlinSample::zero)
