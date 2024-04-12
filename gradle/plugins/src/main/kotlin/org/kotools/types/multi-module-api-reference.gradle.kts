@@ -4,7 +4,8 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 
-private val apiReferenceDirectory = layout.buildDirectory.dir("api-reference")
+private val apiReferenceDirectory: Provider<Directory> =
+    layout.buildDirectory.dir("api-reference")
 
 private val cleanApiReference: TaskProvider<Delete> by tasks
     .registering(Delete::class) {
