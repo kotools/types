@@ -14,9 +14,8 @@ dependencies.dokkaPlugin(libs.dokka.base)
 
 tasks.dokkaHtmlMultiModule.configure {
     // ------------------------ Specific configuration -------------------------
-    moduleName.set("Kotools Types")
-    layout.buildDirectory.dir("dokka")
-        .let(outputDirectory::set)
+    moduleName = "Kotools Types"
+    outputDirectory = layout.buildDirectory.dir("dokka")
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
         customAssets = layout.projectDirectory.file("dokka/logo-icon.svg")
             .asFile
