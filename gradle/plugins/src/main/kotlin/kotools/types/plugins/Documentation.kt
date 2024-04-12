@@ -23,7 +23,9 @@ import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
+import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 import java.io.File
@@ -56,9 +58,8 @@ public class DocumentationPlugin : Plugin<Project> {
 private fun TaskContainer.dokkaTasks(project: Project) {
     val documentation: DocumentationExtension = project.extensions.getByType()
     withType<DokkaTask>().configureEach {
+        commonConfiguration(project)
         moduleName.set(documentation.moduleName.orNull)
-        outputDirectory.set(project.layout.buildDirectory.dir("dokka"))
-        failOnWarning.set(true)
         dokkaSourceSets.configureEach {
             project.rootProject.layout.projectDirectory
                 .file("dokka/packages.md")
@@ -67,26 +68,43 @@ private fun TaskContainer.dokkaTasks(project: Project) {
             skipEmptyPackages.set(true)
         }
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            project.rootProject.layout.projectDirectory
+            customAssets = project.rootProject.layout.projectDirectory
                 .file("dokka/logo-icon.svg")
                 .asFile
-                .let { this.customAssets = listOf(it) }
-            project.rootProject.layout.projectDirectory.file("LICENSE.txt")
-                .asFile
-                .useLines { lines: Sequence<String> ->
-                    lines.first { it.startsWith("Copyright (c)") }
-                }
-                .let { this.footerMessage = it }
+                .let(::listOf)
         }
-        pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-            version = project.version.toString()
-            olderVersionsDir = project.archivedApiReferences
+    }
+    withType<DokkaTaskPartial>().configureEach {
+        commonConfiguration(project)
+        dokkaSourceSets.configureEach {
+            project.rootProject.layout.projectDirectory
+                .file("dokka/packages.md")
+                .let { includes.setFrom(it) }
+            reportUndocumented.set(true)
+            skipEmptyPackages.set(true)
         }
     }
 }
 
+private fun AbstractDokkaTask.commonConfiguration(project: Project) {
+    outputDirectory.set(project.layout.buildDirectory.dir("dokka"))
+    failOnWarning.set(true)
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        footerMessage = project.rootProject.layout.projectDirectory
+            .file("LICENSE.txt")
+            .asFile
+            .useLines { lines: Sequence<String> ->
+                lines.first { it.startsWith("Copyright (c)") }
+            }
+    }
+    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+        version = project.version.toString()
+        olderVersionsDir = project.archivedApiReferences
+    }
+}
+
 private val Project.archivedApiReferences: File
-    get() = project.layout.buildDirectory.dir("api-references")
+    get() = layout.buildDirectory.dir("api-references")
         .map(Directory::getAsFile)
         .get()
 
