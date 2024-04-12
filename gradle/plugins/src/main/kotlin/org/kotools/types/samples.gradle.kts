@@ -17,19 +17,19 @@ private val samplesDirectory: Provider<Directory> =
 private val extractKotlinSamples: TaskProvider<ExtractCodeSamples> by tasks
     .registering(ExtractCodeSamples::class) {
         description = "Extract Kotlin code samples from sources."
-        samples.project
-            .map { it.layout.projectDirectory.dir("src/main/kotlin") }
-            .let(this.sourceDirectory::set)
-        outputDirectory.set(samplesDirectory)
+        sourceDirectory = samples.project.map {
+            it.layout.projectDirectory.dir("src/main/kotlin")
+        }
+        outputDirectory = samplesDirectory
     }
 
 private val extractJavaSamples: TaskProvider<ExtractCodeSamples> by tasks
     .registering(ExtractCodeSamples::class) {
         description = "Extract Java code samples from sources."
-        samples.project
-            .map { it.layout.projectDirectory.dir("src/main/java") }
-            .let(this.sourceDirectory::set)
-        outputDirectory.set(samplesDirectory)
+        sourceDirectory = samples.project.map {
+            it.layout.projectDirectory.dir("src/main/java")
+        }
+        outputDirectory = samplesDirectory
     }
 
 tasks.register<Delete>("cleanSamples").configure {
@@ -70,10 +70,9 @@ private val inlineSamples: TaskProvider<InlineSamples> by tasks
     .registering(InlineSamples::class) {
         description = "Inlines code samples in KDoc comments."
         setDependsOn(listOf(backupMainSources, extractJavaSamples))
-        sourcesDirectory.set(srcDirectory)
-        samplesDirectory.set(
+        sourcesDirectory = srcDirectory
+        samplesDirectory =
             extractKotlinSamples.flatMap(ExtractCodeSamples::outputDirectory)
-        )
     }
 
 // ----------------------- External tasks configuration ------------------------
