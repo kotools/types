@@ -4,25 +4,25 @@ on:
     branches: [ main ]
     paths:
       - '**gradle*'
+      - '**.api'
       - '**.java'
       - '**.kt*'
       - '!.github/workflows/gradle-wrapper-upgrade.yml'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - gradle/wrapper/
-      - src/api/types.api
       - yarn.lock
   push:
     branches: [ main ]
     paths:
       - '**gradle*'
+      - '**.api'
       - '**.java'
       - '**.kt*'
       - '!.github/workflows/gradle-wrapper-upgrade.yml'
       - .github/workflows/integration.yml
       - gradle/libs.versions.toml
       - gradle/wrapper/
-      - src/api/types.api
       - yarn.lock
   workflow_dispatch:
 jobs:
