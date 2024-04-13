@@ -8,6 +8,7 @@ plugins {
     signing
     id("org.kotools.types.base")
     id("kotools.types.multiplatform")
+    id("kotools.types.documentation")
     id("kotools.types.publication")
     id("org.kotools.types.samples")
 }
