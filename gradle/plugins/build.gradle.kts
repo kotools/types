@@ -18,6 +18,11 @@ gradlePlugin {
         kotoolsTypesPlugin("Documentation")
         kotoolsTypesPlugin("Multiplatform")
         kotoolsTypesPlugin("Publication")
+        register("KotoolsTypesDocumentationPluginV2").configure {
+            val prefix = "org.kotools.types"
+            id = "${prefix}.documentation"
+            implementationClass = "${prefix}.plugins.DocumentationPlugin"
+        }
     }
 }
 
