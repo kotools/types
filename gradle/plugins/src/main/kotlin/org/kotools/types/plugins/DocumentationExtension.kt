@@ -9,13 +9,13 @@ import java.io.File
 internal fun DocumentationExtension(project: Project): DocumentationExtension {
     val documentation: DocumentationExtension =
         project.extensions.create("documentation")
-    project.layout.projectDirectory.file("LICENSE.txt")
+    project.rootProject.layout.projectDirectory.file("LICENSE.txt")
         .asFile
         .useLines { lines: Sequence<String> ->
             lines.first { it.startsWith("Copyright (c)") }
         }
         .let(documentation.copyrightNotice::convention)
-    project.layout.projectDirectory.file("dokka/logo-icon.svg")
+    project.rootProject.layout.projectDirectory.file("dokka/logo-icon.svg")
         .asFile
         .let(documentation.logoIcon::convention)
     project.layout.buildDirectory.dir("api-reference")
@@ -28,7 +28,7 @@ public interface DocumentationExtension {
     /**
      * The copyright notice to display in the documentation's footer.
      * By default, this property is set to the first copyright notice from the
-     * license file of the project.
+     * license file of the root project.
      */
     public val copyrightNotice: Property<String>
 
@@ -48,4 +48,7 @@ public interface DocumentationExtension {
      * build directory.
      */
     public val outputDirectory: DirectoryProperty
+
+    /** The file containing the documentation of packages. */
+    public val packages: Property<File>
 }
