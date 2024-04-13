@@ -9,3 +9,10 @@ allprojects {
     group = "org.kotools"
     repositories.mavenCentral()
 }
+
+tasks.register("cleanAll").configure {
+    description = "Deletes all build directories."
+    group = "recommended"
+    allprojects.map { it.tasks.named("clean") }
+        .let(this::setDependsOn)
+}
