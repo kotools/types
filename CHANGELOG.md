@@ -40,6 +40,11 @@ val result: Result<EmailAddress> = kotlin.runCatching {
 println(result.isSuccess) // true
 ```
 
+- New `types-kotlinx-serialization` module for supporting serialization of types
+  from the `org.kotools.types` package using the [kotlinx.serialization] library
+  ([#602]). See its [README](subprojects/kotlinx-serialization/README.md)
+  documentation for more details on how to use it.
+
 ### ♻️ Changed
 
 - Our [versioning strategy](documentation/versioning-strategy.md) is now based
@@ -86,9 +91,11 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [@augustomtt]: https://github.com/augustomtt
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#334]: https://github.com/kotools/types/issues/334
+[#602]: https://github.com/kotools/types/issues/602
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
 [#635]: https://github.com/kotools/types/issues/635
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 
 ## 🔖 Releases
 
