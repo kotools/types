@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -43,3 +45,9 @@ dependencies {
 // ----------------------------------- Tasks -----------------------------------
 
 tasks.register("unit")
+
+tasks.withType<DokkaTaskPartial>().configureEach {
+    dokkaSourceSets.configureEach {
+        includes.from += layout.projectDirectory.file("packages.md")
+    }
+}

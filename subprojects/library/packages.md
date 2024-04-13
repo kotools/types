@@ -1,8 +1,3 @@
-# Module Kotools Types
-
-Explicit types for
-[Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform).
-
 # Package kotools.types.collection
 
 Contains types such as [NotEmptyList] for manipulating collections.
