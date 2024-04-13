@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
@@ -96,4 +97,9 @@ tasks.named("jvmSourcesJar").configure {
 
 listOf("jvmApiCheck", "apiCheck", "apiDump").forEach {
     tasks.named(it).configure { setFinalizedBy(listOf(restoreMainSources)) }
+}
+
+restoreMainSources.configure {
+    rootProject.tasks.withType<DokkaMultiModuleTask>()
+        .let(this::setMustRunAfter)
 }
