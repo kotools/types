@@ -12,8 +12,6 @@ import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 
 internal class DocumentationTasks(project: Project) {
-    private val properties: DocumentationProperties =
-        DocumentationProperties(project)
     private val tasks: TaskContainer = project.tasks
 
     fun apiReferenceMultiModule(): TaskProvider<Task> =
@@ -23,13 +21,16 @@ internal class DocumentationTasks(project: Project) {
             group = "recommended"
         }
 
-    fun cleanApiReference(): TaskProvider<Delete> =
-        tasks.register<Delete>("cleanApiReference") {
-            description = "Deletes the API reference from the build directory."
-            setDelete(properties.apiReferenceDirectory)
-        }
+    fun cleanApiReference(
+        documentation: DocumentationExtension
+    ): TaskProvider<Delete> = tasks.register<Delete>("cleanApiReference") {
+        description = "Deletes the API reference from the build directory."
+        setDelete(documentation.outputDirectory)
+    }
 
-    fun dokkaHtmlMultiModule(): TaskProvider<DokkaMultiModuleTask> =
+    fun dokkaHtmlMultiModule(
+        documentation: DocumentationExtension
+    ): TaskProvider<DokkaMultiModuleTask> =
         tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
             // Common task configuration
             project.subprojects
@@ -37,11 +38,12 @@ internal class DocumentationTasks(project: Project) {
                 .takeIf(List<Task>::isNotEmpty)
                 ?.let(this::setFinalizedBy)
             // Specific task configuration
-            moduleName.set("Kotools Types")
-            outputDirectory.set(properties.apiReferenceDirectory)
+            moduleName.set(documentation.moduleName)
+            outputDirectory.set(documentation.outputDirectory)
             pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-                customAssets = listOf(properties.logoIcon.asFile)
-                footerMessage = properties.copyrightNotice
+                customAssets = documentation.logoIcon.orNull?.let(::listOf)
+                    ?: emptyList()
+                documentation.copyrightNotice.orNull?.let { footerMessage = it }
             }
         }
 }

@@ -5,14 +5,16 @@ plugins {
     id("org.kotools.types.documentation")
 }
 
-allprojects {
-    group = "org.kotools"
-    repositories.mavenCentral()
-}
+documentation.moduleName = "Kotools Types"
 
 tasks.register("cleanAll").configure {
     description = "Deletes all build directories."
     group = "recommended"
     allprojects.map { it.tasks.named("clean") }
         .let(this::setDependsOn)
+}
+
+allprojects {
+    group = "org.kotools"
+    repositories.mavenCentral()
 }

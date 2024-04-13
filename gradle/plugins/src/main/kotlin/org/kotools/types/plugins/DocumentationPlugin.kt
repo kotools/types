@@ -10,10 +10,12 @@ import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 public class DocumentationPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
+        val documentation = DocumentationExtension(project)
         val tasks = DocumentationTasks(project)
-        val cleanApiReference: TaskProvider<Delete> = tasks.cleanApiReference()
+        val cleanApiReference: TaskProvider<Delete> =
+            tasks.cleanApiReference(documentation)
         val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
-            tasks.dokkaHtmlMultiModule()
+            tasks.dokkaHtmlMultiModule(documentation)
         dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
         tasks.apiReferenceMultiModule()
             .configure { dependsOn += dokkaHtmlMultiModule }
