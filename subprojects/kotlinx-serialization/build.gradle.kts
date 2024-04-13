@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -10,6 +12,8 @@ plugins {
     id("org.kotools.types.samples")
 }
 
+// ----------------------------- Plugin extensions -----------------------------
+
 apiValidation.apiDumpDirectory = "src/api"
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
@@ -21,6 +25,8 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
 
 samples.project = project(":samples")
 
+// ------------------------------- Dependencies --------------------------------
+
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
     commonMainImplementation(project(":types"))
@@ -28,4 +34,12 @@ dependencies {
 
     commonTestImplementation(libs.kotlin.test)
     commonTestImplementation(libs.kotlinx.serialization.json)
+}
+
+// ----------------------------------- Tasks -----------------------------------
+
+tasks.withType<DokkaTaskPartial>().configureEach {
+    dokkaSourceSets.configureEach {
+        includes.from += layout.projectDirectory.file("packages.md")
+    }
 }
