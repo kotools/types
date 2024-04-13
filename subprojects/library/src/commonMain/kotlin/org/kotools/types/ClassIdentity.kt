@@ -1,6 +1,8 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 import kotlin.reflect.KClass
 
@@ -11,6 +13,7 @@ import kotlin.reflect.KClass
  * instance of this type.
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class ClassIdentity<T : Any> private constructor() {
     /** Contains static declarations for the [ClassIdentity] type. */
     public companion object {
