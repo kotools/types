@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":types-kotlinx-serialization:dokkaHtml" />
+          <option value=":types-kotlinx-serialization:apiReference" />
         </list>
       </option>
       <option name="vmOptions" />
