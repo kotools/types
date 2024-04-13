@@ -3,8 +3,10 @@ package org.kotools.types
 import kotlinx.serialization.Serializable
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.EmailAddressAsStringSerializer
+import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
+import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.hashCodeOf
 import kotlin.jvm.JvmStatic
 
@@ -33,6 +35,7 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
  * </details>
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 @Serializable(with = EmailAddressAsStringSerializer::class)
 public class EmailAddress private constructor(private val value: String) {
     // -------------------- Structural equality operations ---------------------

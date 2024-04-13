@@ -16,6 +16,9 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -25,6 +28,7 @@ import kotlin.jvm.JvmSynthetic
  * [blank][String.isBlank].
  */
 @OptIn(InternalKotoolsTypesApi::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
     requireNotNull(NotBlankString of this) { ErrorMessage.blankString }
 }
@@ -60,6 +64,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotBlankStringSerializer::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotBlankString private constructor(
     private val value: String
 ) : Comparable<NotBlankString> {
@@ -86,6 +91,7 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun create(value: Any): NotBlankString {
             val text: String = value.toString()
@@ -116,6 +122,7 @@ public value class NotBlankString private constructor(
          * [value].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun createOrNull(value: Any): NotBlankString? {
             val text: String = value.toString()
@@ -141,6 +148,7 @@ public value class NotBlankString private constructor(
      * it's less than the [other] one, or a positive number if it's greater than
      * the [other] one.
      */
+    @Since(KotoolsTypesVersion.V4_1_0)
     override infix fun compareTo(other: NotBlankString): Int =
         "$this".compareTo("$other")
 
@@ -162,6 +170,7 @@ public value class NotBlankString private constructor(
      * this function is not available yet for Java users.
      */
     @ExperimentalKotoolsTypesApi
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
     @JvmSynthetic
     public operator fun plus(other: Any): NotBlankString = value.plus("$other")
         .toNotBlankString()

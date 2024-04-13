@@ -10,6 +10,9 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -25,6 +28,7 @@ import kotlin.jvm.JvmSynthetic
  * ```
  */
 @OptIn(InternalKotoolsTypesApi::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val elements: Set<E> = setOf(head) + tail
     return NotEmptySet.orThrow(elements)
@@ -63,6 +67,7 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  * ```
  */
 @OptIn(InternalKotoolsTypesApi::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     runCatching {
         val elements: Set<E> = toSet()
@@ -99,6 +104,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptySetSerializer::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptySet<out E> private constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {
@@ -140,6 +146,7 @@ public value class NotEmptySet<out E> private constructor(
          * [collection].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <E> create(collection: Collection<E>): NotEmptySet<E> {
             val result: NotEmptySet<E>? = createOrNull(collection)
@@ -186,6 +193,7 @@ public value class NotEmptySet<out E> private constructor(
          * [collection].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <E> createOrNull(
             collection: Collection<E>
@@ -211,6 +219,7 @@ public value class NotEmptySet<out E> private constructor(
          * this function is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <E> of(head: E, vararg tail: E): NotEmptySet<E> {
             val elements: Set<E> = setOf(head) + tail

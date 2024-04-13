@@ -4,6 +4,8 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.reflect.KClass
 
 /**
@@ -11,6 +13,7 @@ import kotlin.reflect.KClass
  * the kotlinx.serialization library.
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public object KotoolsTypesSerializers {
     /**
      * Returns the module for serializing all types.

@@ -1,6 +1,8 @@
 package kotools.types.experimental
 
 import kotools.types.number.AnyInt
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -17,6 +19,7 @@ import kotlin.jvm.JvmSynthetic
  * Please note that this function is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmSynthetic
 public operator fun AnyInt.unaryMinus(): AnyInt {
     val value: Int = toInt()

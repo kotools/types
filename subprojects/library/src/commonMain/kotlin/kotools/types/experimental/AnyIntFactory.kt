@@ -8,6 +8,8 @@ import kotools.types.number.AnyInt
 import kotools.types.number.ZeroInt
 import kotools.types.number.toStrictlyNegativeInt
 import kotools.types.number.toStrictlyPositiveInt
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmName
 
 /**
@@ -29,6 +31,7 @@ import kotlin.jvm.JvmName
  * ```
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @JvmName("create")
 @OptIn(InternalKotoolsTypesApi::class)
 public fun AnyInt(value: Int): AnyInt {

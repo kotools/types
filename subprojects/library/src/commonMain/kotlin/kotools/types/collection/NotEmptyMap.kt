@@ -12,6 +12,9 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -26,6 +29,7 @@ import kotlin.jvm.JvmSynthetic
  * println(map) // {a=1, b=2}
  * ```
  */
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
@@ -68,6 +72,7 @@ public fun <K, V> notEmptyMapOf(
  * ```
  */
 @OptIn(InternalKotoolsTypesApi::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap.orThrow(entries) }
 
@@ -102,6 +107,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptyMapSerializer::class)
+@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyMap<K, out V> private constructor(
     private val delegate: Map<K, V>
 ) {
@@ -145,6 +151,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * [map].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> create(map: Map<K, V>): NotEmptyMap<K, V> {
             val result: NotEmptyMap<K, V>? = createOrNull(map)
@@ -187,6 +194,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * an exception instead of returning `null` in case of invalid [map].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? = map
             .takeIf(Map<K, V>::isNotEmpty)
@@ -210,6 +218,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * this function is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
         public fun <K, V> of(
             head: Pair<K, V>,

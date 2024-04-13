@@ -1,5 +1,10 @@
 package kotools.types.experimental
 
+import org.kotools.types.internal.DeprecatedAsErrorSince
+import org.kotools.types.internal.DeprecatedAsWarningSince
+import org.kotools.types.internal.HiddenSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
@@ -13,6 +18,7 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
+@Since(KotoolsTypesVersion.V4_4_0)
 @Target(CLASS, FUNCTION, PROPERTY, TYPEALIAS)
 public annotation class ExperimentalKotoolsTypesApi
 
@@ -31,6 +37,9 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
     ),
     DeprecationLevel.HIDDEN
 )
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -46,6 +55,9 @@ public annotation class ExperimentalCollectionApi
     ),
     DeprecationLevel.HIDDEN
 )
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -61,6 +73,9 @@ public annotation class ExperimentalNumberApi
     ),
     DeprecationLevel.HIDDEN
 )
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -76,6 +91,9 @@ public annotation class ExperimentalRangeApi
     ),
     DeprecationLevel.HIDDEN
 )
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -91,6 +109,9 @@ public annotation class ExperimentalResultApi
     ),
     DeprecationLevel.HIDDEN
 )
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)

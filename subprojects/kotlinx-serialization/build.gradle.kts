@@ -16,6 +16,10 @@ plugins {
 
 apiValidation.apiDumpDirectory = "src/api"
 
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+}
+
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
         groupId = "${project.group}"
@@ -30,6 +34,7 @@ samples.project = project(":samples")
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
     commonMainImplementation(project(":types"))
+    commonMainImplementation(project(":types-internal"))
     commonMainImplementation(libs.kotlinx.serialization.core)
 
     commonTestImplementation(libs.kotlin.test)

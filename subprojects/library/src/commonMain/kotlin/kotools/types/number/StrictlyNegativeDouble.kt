@@ -14,6 +14,8 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 
 /**
  * Represents a floating-point number of type [Double] that is less than zero.
@@ -44,6 +46,7 @@ import kotools.types.internal.simpleNameOf
  * </details>
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_5_0)
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyNegativeDoubleSerializer::class)
 public class StrictlyNegativeDouble private constructor(

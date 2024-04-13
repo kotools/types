@@ -11,6 +11,8 @@ import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeGreaterThanZero
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmSynthetic
 
 /**
@@ -19,6 +21,7 @@ import kotlin.jvm.JvmSynthetic
  * [IllegalArgumentException] if this number is negative.
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
     runCatching {
         val value: Double = toDouble()
@@ -33,6 +36,7 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * of this type.
  */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V4_4_0)
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyPositiveDoubleSerializer::class)
 public class StrictlyPositiveDouble private constructor(

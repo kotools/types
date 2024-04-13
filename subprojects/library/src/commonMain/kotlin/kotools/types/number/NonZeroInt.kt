@@ -16,6 +16,9 @@ import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Since
 
 /**
  * Returns this number as an encapsulated [NonZeroInt], which may involve
@@ -23,6 +26,7 @@ import kotools.types.internal.simpleNameOf
  * if this number equals [zero][ZeroInt].
  */
 @OptIn(InternalKotoolsTypesApi::class)
+@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     val value: Int = toInt()
     return when {
@@ -66,6 +70,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NonZeroIntSerializer::class)
+@Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface NonZeroInt : AnyInt {
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
@@ -118,6 +123,7 @@ public sealed interface NonZeroInt : AnyInt {
          * [number].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun create(number: Number): NonZeroInt {
             val result: NonZeroInt? = createOrNull(number)
             return requireNotNull(result, ErrorMessage.Companion::zeroNumber)
@@ -161,6 +167,7 @@ public sealed interface NonZeroInt : AnyInt {
          * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         public fun createOrNull(number: Number): NonZeroInt? {
             val value: Int = number.toInt()
             return when {
@@ -171,6 +178,7 @@ public sealed interface NonZeroInt : AnyInt {
         }
 
         /** Returns a random [NonZeroInt]. */
+        @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): NonZeroInt {
             val ranges: NotEmptySet<IntRange> = notEmptySetOf(
                 min.toInt()..StrictlyNegativeInt.max.toInt(),
@@ -184,8 +192,10 @@ public sealed interface NonZeroInt : AnyInt {
         }
     }
 
+    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int
 
+    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String
 }
 
@@ -193,12 +203,14 @@ public sealed interface NonZeroInt : AnyInt {
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
  */
+@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
 /**
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
  */
+@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
 @InternalKotoolsTypesApi

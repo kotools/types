@@ -1,9 +1,12 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
 
 /** Represents the [zero](https://en.wikipedia.org/wiki/0) number. */
 @ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public object Zero {
     private const val VALUE: Byte = 0
 
