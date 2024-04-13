@@ -35,16 +35,9 @@ public object KotoolsTypesSerializers {
     /**
      * Returns the string representation of this object.
      *
-     * <br>
-     * <details open>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: KotoolsTypesSerializersKotlinSample.toString_override.md
-     * </details>
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String {
