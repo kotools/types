@@ -91,6 +91,10 @@ implementation "org.kotools:types:$version"
 ```
 </details>
 
+> See [the dedicated documentation](subprojects/kotlinx-serialization/README.md)
+> for serializing types from the `org.kotools.types` package using the
+> [kotlinx.serialization] library. 
+
 ## 🎨 Included types
 
 Explore some of the types offered by this library:
