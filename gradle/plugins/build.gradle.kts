@@ -15,7 +15,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        kotoolsTypesPlugin("Documentation")
         kotoolsTypesPlugin("Multiplatform")
         kotoolsTypesPlugin("Publication")
     }
