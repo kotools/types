@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
     signing
     id("kotools.types.multiplatform")
-    id("kotools.types.documentation")
+    id("org.kotools.types.documentation")
     id("kotools.types.publication")
     id("org.kotools.types.samples")
 }
@@ -17,7 +17,10 @@ plugins {
 
 apiValidation.apiDumpDirectory = "src/api"
 
-documentation.moduleName = "Kotools Types"
+documentation {
+    moduleName = "Kotools Types"
+    packages = layout.projectDirectory.file("packages.md").asFile
+}
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
