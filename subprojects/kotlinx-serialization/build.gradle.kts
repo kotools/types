@@ -8,7 +8,7 @@ plugins {
     signing
     id("org.kotools.types.base")
     id("kotools.types.multiplatform")
-    id("kotools.types.documentation")
+    id("org.kotools.types.documentation")
     id("kotools.types.publication")
     id("org.kotools.types.samples")
 }
@@ -16,6 +16,8 @@ plugins {
 // ----------------------------- Plugin extensions -----------------------------
 
 apiValidation.apiDumpDirectory = "src/api"
+
+documentation.packages = layout.projectDirectory.file("packages.md").asFile
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
