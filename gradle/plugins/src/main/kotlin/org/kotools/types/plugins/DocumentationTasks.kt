@@ -10,6 +10,7 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.register
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
+import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
@@ -45,16 +46,11 @@ internal class DocumentationTasks(project: Project) {
         extension: DocumentationExtension
     ): DokkaTask.() -> Unit = {
         extension.moduleName.orNull?.let(moduleName::set)
-        outputDirectory.set(extension.outputDirectory)
         failOnWarning.set(true)
         dokkaSourceSets.configureEach {
             extension.packages.orNull?.let { includes.setFrom(it) }
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
-        }
-        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            extension.logoIcon.orNull?.let { customAssets = listOf(it) }
-            extension.copyrightNotice.orNull?.let { footerMessage = it }
         }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
@@ -63,16 +59,23 @@ internal class DocumentationTasks(project: Project) {
                 .map(Directory::getAsFile)
                 .get()
         }
+        commonConfiguration(extension)
     }
 
     fun dokkaMultiModuleTaskConfiguration(
         extension: DocumentationExtension
     ): DokkaMultiModuleTask.() -> Unit = {
         moduleName.set(extension.moduleName)
-        outputDirectory.set(extension.outputDirectory)
-        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            extension.logoIcon.orNull?.let { customAssets = listOf(it) }
-            extension.copyrightNotice.orNull?.let { footerMessage = it }
-        }
+        commonConfiguration(extension)
+    }
+}
+
+private fun AbstractDokkaTask.commonConfiguration(
+    extension: DocumentationExtension
+) {
+    outputDirectory.set(extension.outputDirectory)
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        extension.logoIcon.orNull?.let { customAssets = listOf(it) }
+        extension.copyrightNotice.orNull?.let { footerMessage = it }
     }
 }
