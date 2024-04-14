@@ -86,13 +86,13 @@ Here's the list of recommended configurations for running tests:
   `types-kotlinx-serialization` subproject on Kotlin/JVM.
 - `Check samples` for checking code samples available in the API reference.
 
-### Serving the documentation
+### Serving the API reference
 
-You can also generate the documentation by running the `Documentation`
+You can also generate the API reference by running the `API reference`
 configuration.
 
 For serving the documentation locally, right-click on the
-`build/dokka/index.html` file and choose your favorite browser in the
+`build/api-reference/index.html` file and choose your favorite browser in the
 `Open In > Browser` menu.
 
 ### Implementing the issue
