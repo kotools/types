@@ -7,20 +7,20 @@ import org.gradle.kotlin.dsl.create
 import java.io.File
 
 internal fun DocumentationExtension(project: Project): DocumentationExtension {
-    val documentation: DocumentationExtension =
+    val extension: DocumentationExtension =
         project.extensions.create("documentation")
     project.rootProject.layout.projectDirectory.file("LICENSE.txt")
         .asFile
         .useLines { lines: Sequence<String> ->
             lines.first { it.startsWith("Copyright (c)") }
         }
-        .let(documentation.copyrightNotice::convention)
+        .let(extension.copyrightNotice::convention)
     project.rootProject.layout.projectDirectory.file("dokka/logo-icon.svg")
         .asFile
-        .let(documentation.logoIcon::convention)
+        .let(extension.logoIcon::convention)
     project.layout.buildDirectory.dir("api-reference")
-        .let(documentation.outputDirectory::convention)
-    return documentation
+        .let(extension.outputDirectory::convention)
+    return extension
 }
 
 /** The extension responsible for configuring the [DocumentationPlugin]. */
