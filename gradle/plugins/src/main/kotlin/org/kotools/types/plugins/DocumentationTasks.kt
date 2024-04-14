@@ -2,7 +2,6 @@ package org.kotools.types.plugins
 
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.file.Directory
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskContainer
@@ -14,8 +13,6 @@ import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.dokka.versioning.VersioningConfiguration
-import org.jetbrains.dokka.versioning.VersioningPlugin
 
 internal class DocumentationTasks(project: Project) {
     private val tasks: TaskContainer = project.tasks
@@ -90,13 +87,6 @@ internal class DocumentationTasks(project: Project) {
             extension.packages.orNull?.let { includes.setFrom(it) }
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
-        }
-        pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-            version = project.version.toString()
-            olderVersionsDir = project.layout.buildDirectory
-                .dir("api-references")
-                .map(Directory::getAsFile)
-                .get()
         }
         commonConfiguration(extension)
     }
