@@ -15,10 +15,9 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        kotoolsTypesPlugin("Documentation")
         kotoolsTypesPlugin("Multiplatform")
         kotoolsTypesPlugin("Publication")
-        register("KotoolsTypesDocumentationPluginV2").configure {
+        register("KotoolsTypesDocumentationPlugin").configure {
             val prefix = "org.kotools.types"
             id = "${prefix}.documentation"
             implementationClass = "${prefix}.plugins.DocumentationPlugin"
