@@ -9,6 +9,7 @@ import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
@@ -18,30 +19,29 @@ import kotlin.reflect.KClass
 public class DocumentationPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        val documentation = DocumentationExtension(project)
+        val extension = DocumentationExtension(project)
         val tasks = DocumentationTasks(project)
-        val cleanApiReference: TaskProvider<Delete> =
-            tasks.cleanApiReference(documentation)
         val apiReference: TaskProvider<Task> = tasks.apiReference()
-        if (!tasks.dokkaHtmlMultiModuleExists()) {
-            val dokkaHtml: TaskProvider<DokkaTask> =
-                tasks.dokkaHtml(documentation)
-            apiReferenceJarTask(tasks, dokkaHtml, project)
-            return apiReference.configure { dependsOn += dokkaHtml }
+        if (project.tasks.findByName("dokkaHtmlMultiModule") != null) {
+            val cleanApiReference: TaskProvider<Delete> =
+                tasks.cleanApiReference(extension)
+            val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> = tasks
+                .dokkaMultiModuleTaskConfiguration(extension)
+                .let {
+                    project.tasks.named<DokkaMultiModuleTask>(
+                        "dokkaHtmlMultiModule",
+                        it
+                    )
+                }
+            dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
+            return apiReference.configure { dependsOn += dokkaHtmlMultiModule }
         }
-        val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
-            tasks.dokkaHtmlMultiModule(documentation)
-        dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
-        apiReference.configure { dependsOn += dokkaHtmlMultiModule }
-    }
-
-    private fun apiReferenceJarTask(
-        tasks: DocumentationTasks,
-        dokkaTask: TaskProvider<DokkaTask>,
-        project: Project
-    ) {
+        val dokkaHtml: TaskProvider<DokkaTask> = tasks
+            .dokkaTaskConfiguration(extension)
+            .let { project.tasks.named<DokkaTask>("dokkaHtml", it) }
+        apiReference.configure { dependsOn += dokkaHtml }
         val apiReferenceJar: TaskProvider<Jar> =
-            tasks.apiReferenceJar(dokkaTask)
+            tasks.apiReferenceJar(dokkaHtml)
         project.tasks.named("assemble")
             .configure { dependsOn += apiReferenceJar }
         val publishing: KClass<PublishingExtension> = PublishingExtension::class

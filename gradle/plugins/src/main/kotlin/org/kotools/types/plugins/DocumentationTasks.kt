@@ -7,7 +7,6 @@ import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.Jar
-import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.register
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
@@ -18,6 +17,8 @@ import org.jetbrains.dokka.versioning.VersioningPlugin
 
 internal class DocumentationTasks(project: Project) {
     private val tasks: TaskContainer = project.tasks
+
+    // ---------------------------- Internal tasks -----------------------------
 
     fun apiReference(): TaskProvider<Task> = tasks.register("apiReference") {
         description = "Generates the API reference for this project."
@@ -32,27 +33,28 @@ internal class DocumentationTasks(project: Project) {
         }
 
     fun cleanApiReference(
-        documentation: DocumentationExtension
+        extension: DocumentationExtension
     ): TaskProvider<Delete> = tasks.register<Delete>("cleanApiReference") {
         description = "Deletes the API reference from the build directory."
-        setDelete(documentation.outputDirectory)
+        setDelete(extension.outputDirectory)
     }
 
-    fun dokkaHtml(
-        documentation: DocumentationExtension
-    ): TaskProvider<DokkaTask> = tasks.named<DokkaTask>("dokkaHtml") {
-        documentation.moduleName.orNull?.let(moduleName::set)
-        outputDirectory.set(documentation.outputDirectory)
+    // --------------------- External task configurations ----------------------
+
+    fun dokkaTaskConfiguration(
+        extension: DocumentationExtension
+    ): DokkaTask.() -> Unit = {
+        extension.moduleName.orNull?.let(moduleName::set)
+        outputDirectory.set(extension.outputDirectory)
         failOnWarning.set(true)
         dokkaSourceSets.configureEach {
-            documentation.packages.orNull?.let { includes.setFrom(it) }
+            extension.packages.orNull?.let { includes.setFrom(it) }
             reportUndocumented.set(true)
             skipEmptyPackages.set(true)
         }
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            customAssets = documentation.logoIcon.orNull?.let(::listOf)
-                ?: emptyList()
-            documentation.copyrightNotice.orNull?.let { footerMessage = it }
+            extension.logoIcon.orNull?.let { customAssets = listOf(it) }
+            extension.copyrightNotice.orNull?.let { footerMessage = it }
         }
         pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
             version = project.version.toString()
@@ -63,19 +65,14 @@ internal class DocumentationTasks(project: Project) {
         }
     }
 
-    fun dokkaHtmlMultiModule(
-        documentation: DocumentationExtension
-    ): TaskProvider<DokkaMultiModuleTask> =
-        tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
-            moduleName.set(documentation.moduleName)
-            outputDirectory.set(documentation.outputDirectory)
-            pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-                customAssets = documentation.logoIcon.orNull?.let(::listOf)
-                    ?: emptyList()
-                documentation.copyrightNotice.orNull?.let { footerMessage = it }
-            }
+    fun dokkaMultiModuleTaskConfiguration(
+        extension: DocumentationExtension
+    ): DokkaMultiModuleTask.() -> Unit = {
+        moduleName.set(extension.moduleName)
+        outputDirectory.set(extension.outputDirectory)
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            extension.logoIcon.orNull?.let { customAssets = listOf(it) }
+            extension.copyrightNotice.orNull?.let { footerMessage = it }
         }
-
-    fun dokkaHtmlMultiModuleExists(): Boolean =
-        tasks.findByName("dokkaHtmlMultiModule") != null
+    }
 }
