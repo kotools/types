@@ -8,8 +8,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.Zero
-import kotlin.reflect.KClass
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroAsByteSerializer : KSerializer<Zero> {
@@ -32,10 +32,7 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
     }
 
     fun deserializationErrorMessage(decodedValue: Byte): String {
-        val typeClass: KClass<Zero> = Zero::class
-        val typeName: String = checkNotNull(typeClass.simpleName) {
-            "Getting simple name of '$typeClass' shouldn't return 'null'."
-        }
+        val typeName: String = simpleNameOf<Zero>()
         return "Unable to deserialize '$typeName' from ${decodedValue}."
     }
 }
