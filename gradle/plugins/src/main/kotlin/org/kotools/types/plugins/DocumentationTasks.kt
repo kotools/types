@@ -6,6 +6,7 @@ import org.gradle.api.file.Directory
 import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
+import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.register
 import org.jetbrains.dokka.base.DokkaBase
@@ -22,6 +23,13 @@ internal class DocumentationTasks(project: Project) {
         description = "Generates the API reference for this project."
         group = "recommended"
     }
+
+    fun apiReferenceJar(dokkaTask: TaskProvider<DokkaTask>): TaskProvider<Jar> =
+        tasks.register<Jar>("apiReferenceJar") {
+            description = "Archives the API reference in a JAR file."
+            from(dokkaTask)
+            archiveClassifier.set("javadoc")
+        }
 
     fun cleanApiReference(
         documentation: DocumentationExtension
