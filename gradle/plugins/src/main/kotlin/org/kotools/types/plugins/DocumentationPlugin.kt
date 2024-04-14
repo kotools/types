@@ -36,6 +36,7 @@ public class DocumentationPlugin : Plugin<Project> {
                 }
             dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
             apiReference.configure { dependsOn += dokkaHtmlMultiModule }
+            if (project.hasSnapshotVersion()) return
             val archiveApiReference: TaskProvider<Copy> =
                 tasks.archiveApiReference(extension)
             archiveApiReference.configure { dependsOn += dokkaHtmlMultiModule }
@@ -64,3 +65,6 @@ public class DocumentationPlugin : Plugin<Project> {
             ?.configureEach { artifact(apiReferenceJar) }
     }
 }
+
+private fun Project.hasSnapshotVersion(): Boolean =
+    "$version".endsWith("SNAPSHOT")

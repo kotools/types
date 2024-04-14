@@ -38,7 +38,6 @@ internal class DocumentationTasks(project: Project) {
         extension: DocumentationExtension
     ): TaskProvider<Copy> = tasks.register<Copy>("archiveApiReference") {
         description = "Archives the API reference in the project directory."
-        onlyIf { it.project.isNotSnapshot() }
         from(extension.outputDirectory) {
             exclude(
                 "older/**",
@@ -63,14 +62,12 @@ internal class DocumentationTasks(project: Project) {
             description =
                 "Publishes the API reference in the project directory."
             group = "recommended"
-            onlyIf { it.project.isNotSnapshot() }
         }
 
     fun setCurrentApiReference(
         extension: DocumentationExtension
     ): TaskProvider<Copy> = tasks.register<Copy>("setCurrentApiReference") {
         description = "Sets the current API reference in the project directory."
-        onlyIf { it.project.isNotSnapshot() }
         from(extension.outputDirectory) {
             exclude(
                 "${project.name}-internal",
@@ -121,5 +118,3 @@ private fun AbstractDokkaTask.commonConfiguration(
         extension.copyrightNotice.orNull?.let { footerMessage = it }
     }
 }
-
-private fun Project.isNotSnapshot(): Boolean = !"$version".endsWith("SNAPSHOT")
