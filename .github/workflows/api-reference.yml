@@ -1,7 +1,7 @@
 name: API reference
 on:
   push:
-    branches: [main]
+    branches: [ main ]
     paths:
       - .github/workflows/api-reference.yml
       - documentation/api-reference/current/
@@ -19,4 +19,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           folder: documentation/api-reference/current
+          git-config-name: ${{ secrets.GIT_USER }}
+          git-config-email: ${{ secrets.GIT_EMAIL }}
           ssh-key: ${{ secrets.ADMIN_DEPLOY_KEY }}
