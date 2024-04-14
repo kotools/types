@@ -106,13 +106,16 @@ But if needed, feel free to [ask for help]; everyone is a beginner at first.
 
 ### Checking the Application Binary Interface (ABI)
 
-When introducing changes to the ABI, you can check its binaries by running the
-`Check ABI` configuration.
-This ensures that we are maintaining the binary compatibility of this library.
+When introducing changes to the ABI, you can check this interface by running the
+`Check ABI (types)` configuration for the `types` subproject, or the
+`Check ABI (kotlinx-serialization)` configuration for the
+`types-kotlinx-serialization` subproject.
+This ensures that we are maintaining the binary compatibility of Kotools Types.
 
 In some cases, this configuration will fail and will request you to update the
 ABI.
-You can do this by running the `Dump ABI` configuration.
+You can do this by running the `Dump ABI (types)` or the
+`Dump ABI (kotlinx-serialization)` configurations.
 
 > See [what makes a binary incompatible change] to the ABI for more details.
 
