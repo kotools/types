@@ -13,10 +13,14 @@ import org.kotools.types.Zero
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroAsByteSerializer : KSerializer<Zero> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "org.kotools.types.Zero",
-        PrimitiveKind.BYTE
-    )
+    override val descriptor: SerialDescriptor
+        get() {
+            val className: String = simpleNameOf<Zero>()
+            return PrimitiveSerialDescriptor(
+                serialName = "org.kotools.types.$className",
+                kind = PrimitiveKind.BYTE
+            )
+        }
 
     override fun serialize(encoder: Encoder, value: Zero) {
         val valueAsByte: Byte = value.toByte()
