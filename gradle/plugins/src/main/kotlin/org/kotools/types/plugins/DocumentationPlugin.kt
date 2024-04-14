@@ -34,7 +34,8 @@ public class DocumentationPlugin : Plugin<Project> {
                     )
                 }
             dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
-            return apiReference.configure { dependsOn += dokkaHtmlMultiModule }
+            apiReference.configure { dependsOn += dokkaHtmlMultiModule }
+            return tasks.archiveApiReference(extension, dokkaHtmlMultiModule)
         }
         val dokkaHtml: TaskProvider<DokkaTask> = tasks
             .dokkaTaskConfiguration(extension)

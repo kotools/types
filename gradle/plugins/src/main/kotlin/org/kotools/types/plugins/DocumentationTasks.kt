@@ -3,6 +3,7 @@ package org.kotools.types.plugins
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.file.Directory
+import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
@@ -32,6 +33,25 @@ internal class DocumentationTasks(project: Project) {
             from(dokkaTask)
             archiveClassifier.set("javadoc")
         }
+
+    fun archiveApiReference(
+        extension: DocumentationExtension,
+        dokkaTask: TaskProvider<DokkaMultiModuleTask>
+    ): Unit = tasks.register<Copy>("archiveApiReference").configure {
+        description = "Archives the API reference in the project directory."
+        onlyIf { !"${project.version}".endsWith("SNAPSHOT") }
+        dependsOn += dokkaTask
+        from(extension.outputDirectory) {
+            exclude(
+                "older/**",
+                "${project.name}-internal",
+                "${project.name}*/**/scripts/"
+            )
+        }
+        project.layout.projectDirectory
+            .dir("documentation/api-reference/${project.version}")
+            .let(this::into)
+    }
 
     fun cleanApiReference(
         extension: DocumentationExtension
