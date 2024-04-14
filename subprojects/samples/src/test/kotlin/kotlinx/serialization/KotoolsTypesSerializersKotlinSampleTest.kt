@@ -2,11 +2,10 @@ package org.kotools.types.kotlinx.serialization
 
 import com.github.stefanbirkner.systemlambda.SystemLambda
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.assertPrints
-import kotlin.reflect.KClass
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
-import kotlin.test.assertNotNull
 
 class KotoolsTypesSerializersKotlinSampleTest {
     @Test
@@ -32,12 +31,7 @@ class KotoolsTypesSerializersKotlinSampleTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun `toString() should pass`() {
-        val type: KClass<KotoolsTypesSerializers> =
-            KotoolsTypesSerializers::class
-        val expected: String = assertNotNull(
-            actual = type.simpleName,
-            message = "Getting simple name of '$type' shouldn't return null."
-        )
+        val expected: String = simpleNameOf<KotoolsTypesSerializers>()
         assertPrints(
             expected,
             KotoolsTypesSerializersKotlinSample::toString_override

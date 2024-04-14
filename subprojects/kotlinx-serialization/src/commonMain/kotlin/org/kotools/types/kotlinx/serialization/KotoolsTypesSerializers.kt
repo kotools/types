@@ -3,10 +3,10 @@ package org.kotools.types.kotlinx.serialization
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
-import kotlin.reflect.KClass
 
 /**
  * Contains modules for serializing the types provided by Kotools Types using
@@ -43,10 +43,6 @@ public object KotoolsTypesSerializers {
      * SAMPLE: KotoolsTypesSerializersKotlinSample.toString_override.md
      */
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String {
-        val type: KClass<out KotoolsTypesSerializers> = this::class
-        return checkNotNull(type.simpleName) {
-            "Getting simple name of '$type' shouldn't return 'null'."
-        }
-    }
+    final override fun toString(): String =
+        simpleNameOf<KotoolsTypesSerializers>()
 }

@@ -3,11 +3,10 @@ package org.kotools.types.kotlinx.serialization
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.Zero
-import kotlin.reflect.KClass
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class KotoolsTypesSerializersTest {
@@ -26,12 +25,7 @@ class KotoolsTypesSerializersTest {
     @Test
     fun toString_should_return_its_simple_name() {
         val actual: String = KotoolsTypesSerializers.toString()
-        val type: KClass<KotoolsTypesSerializers> =
-            KotoolsTypesSerializers::class
-        val expected: String = assertNotNull(
-            actual = type.simpleName,
-            message = "Getting simple name of '$type' should pass."
-        )
+        val expected: String = simpleNameOf<KotoolsTypesSerializers>()
         assertEquals(expected, actual)
     }
 }
