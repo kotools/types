@@ -35,12 +35,10 @@ internal class DocumentationTasks(project: Project) {
         }
 
     fun archiveApiReference(
-        extension: DocumentationExtension,
-        dokkaTask: TaskProvider<DokkaMultiModuleTask>
-    ): Unit = tasks.register<Copy>("archiveApiReference").configure {
+        extension: DocumentationExtension
+    ): TaskProvider<Copy> = tasks.register<Copy>("archiveApiReference") {
         description = "Archives the API reference in the project directory."
-        onlyIf { !"${project.version}".endsWith("SNAPSHOT") }
-        dependsOn += dokkaTask
+        onlyIf { it.project.isNotSnapshot() }
         from(extension.outputDirectory) {
             exclude(
                 "older/**",
@@ -58,6 +56,30 @@ internal class DocumentationTasks(project: Project) {
     ): TaskProvider<Delete> = tasks.register<Delete>("cleanApiReference") {
         description = "Deletes the API reference from the build directory."
         setDelete(extension.outputDirectory)
+    }
+
+    fun publishApiReference(): TaskProvider<Task> =
+        tasks.register("publishApiReference") {
+            description =
+                "Publishes the API reference in the project directory."
+            group = "recommended"
+            onlyIf { it.project.isNotSnapshot() }
+        }
+
+    fun setCurrentApiReference(
+        extension: DocumentationExtension
+    ): TaskProvider<Copy> = tasks.register<Copy>("setCurrentApiReference") {
+        description = "Sets the current API reference in the project directory."
+        onlyIf { it.project.isNotSnapshot() }
+        from(extension.outputDirectory) {
+            exclude(
+                "${project.name}-internal",
+                "${project.name}*/**/scripts/"
+            )
+        }
+        project.layout.projectDirectory
+            .dir("documentation/api-reference/current")
+            .let(this::into)
     }
 
     // --------------------- External task configurations ----------------------
@@ -99,3 +121,5 @@ private fun AbstractDokkaTask.commonConfiguration(
         extension.copyrightNotice.orNull?.let { footerMessage = it }
     }
 }
+
+private fun Project.isNotSnapshot(): Boolean = !"$version".endsWith("SNAPSHOT")

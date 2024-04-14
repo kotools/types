@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.bundling.Jar
@@ -35,7 +36,18 @@ public class DocumentationPlugin : Plugin<Project> {
                 }
             dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
             apiReference.configure { dependsOn += dokkaHtmlMultiModule }
-            return tasks.archiveApiReference(extension, dokkaHtmlMultiModule)
+            val archiveApiReference: TaskProvider<Copy> =
+                tasks.archiveApiReference(extension)
+            archiveApiReference.configure { dependsOn += dokkaHtmlMultiModule }
+            val setCurrentApiReference: TaskProvider<Copy> =
+                tasks.setCurrentApiReference(extension)
+            setCurrentApiReference.configure {
+                dependsOn += dokkaHtmlMultiModule
+            }
+            return tasks.publishApiReference().configure {
+                listOf(archiveApiReference, setCurrentApiReference)
+                    .let(this::setDependsOn)
+            }
         }
         val dokkaHtml: TaskProvider<DokkaTask> = tasks
             .dokkaTaskConfiguration(extension)
