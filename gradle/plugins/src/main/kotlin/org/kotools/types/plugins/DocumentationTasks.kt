@@ -49,7 +49,7 @@ internal class DocumentationTasks(project: Project) {
             )
         }
         project.layout.projectDirectory
-            .dir("documentation/api-reference/${project.version}")
+            .dir("documentation/api-reference/archive/${project.version}")
             .let(this::into)
     }
 
