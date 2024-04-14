@@ -7,6 +7,8 @@ plugins {
 
 documentation.moduleName = "Kotools Types"
 
+dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
+
 tasks.register("cleanAll").configure {
     description = "Deletes all build directories."
     group = "recommended"

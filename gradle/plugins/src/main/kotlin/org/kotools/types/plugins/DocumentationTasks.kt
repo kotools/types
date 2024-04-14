@@ -14,6 +14,8 @@ import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
+import org.jetbrains.dokka.versioning.VersioningConfiguration
+import org.jetbrains.dokka.versioning.VersioningPlugin
 
 internal class DocumentationTasks(project: Project) {
     private val tasks: TaskContainer = project.tasks
@@ -36,13 +38,7 @@ internal class DocumentationTasks(project: Project) {
         extension: DocumentationExtension
     ): TaskProvider<Copy> = tasks.register<Copy>("archiveApiReference") {
         description = "Archives the API reference in the project directory."
-        from(extension.outputDirectory) {
-            exclude(
-                "older/**",
-                "${project.name}-internal",
-                "${project.name}*/**/scripts/"
-            )
-        }
+        from(extension.outputDirectory) { exclude("older/**") }
         extension.archiveParentDirectory.dir("archive/${project.version}")
             .let(this::into)
     }
@@ -65,12 +61,7 @@ internal class DocumentationTasks(project: Project) {
         extension: DocumentationExtension
     ): TaskProvider<Copy> = tasks.register<Copy>("setCurrentApiReference") {
         description = "Sets the current API reference in the project directory."
-        from(extension.outputDirectory) {
-            exclude(
-                "${project.name}-internal",
-                "${project.name}*/**/scripts/"
-            )
-        }
+        from(extension.outputDirectory)
         extension.archiveParentDirectory.dir("current")
             .let(this::into)
     }
@@ -103,6 +94,12 @@ internal class DocumentationTasks(project: Project) {
         extension: DocumentationExtension
     ): DokkaMultiModuleTask.() -> Unit = {
         moduleName.set(extension.moduleName)
+        pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+            version = project.version.toString()
+            olderVersionsDir = extension.archiveParentDirectory.dir("archive")
+                .get()
+                .asFile
+        }
         commonConfiguration(extension)
     }
 }

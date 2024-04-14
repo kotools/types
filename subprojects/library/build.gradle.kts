@@ -42,8 +42,6 @@ dependencies {
 
     commonTestImplementation(libs.kotlin.test)
     commonTestImplementation(libs.kotlinx.serialization.json)
-
-    dokkaHtmlPlugin(libs.dokka.versioning)
 }
 
 // ----------------------------------- Tasks -----------------------------------
