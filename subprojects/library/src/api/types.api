@@ -439,14 +439,6 @@ public final class kotools/types/web/EmailAddress$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/kotools/types/ClassIdentity {
-	public static final field Companion Lorg/kotools/types/ClassIdentity$Companion;
-}
-
-public final class org/kotools/types/ClassIdentity$Companion {
-	public final synthetic fun from (Lkotlin/reflect/KClass;)Lorg/kotools/types/ClassIdentity;
-}
-
 public final class org/kotools/types/EmailAddress {
 	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
 	public static final field PATTERN Ljava/lang/String;
