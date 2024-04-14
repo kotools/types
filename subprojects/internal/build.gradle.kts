@@ -6,7 +6,7 @@ plugins {
     `maven-publish`
     signing
     id("kotools.types.multiplatform")
-    id("kotools.types.documentation")
+    id("org.kotools.types.documentation")
     id("kotools.types.publication")
 }
 
