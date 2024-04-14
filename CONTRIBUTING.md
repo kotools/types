@@ -75,17 +75,15 @@ We recommend you to install the JDK 17 if this is not done yet.
 ### Running tests
 
 Now that you have opened your fork in [IntelliJ IDEA], you can run the
-`JVM tests` configuration for testing the library on the JVM platform.
+`JVM tests (types)` configuration for testing the library on the Kotlin/JVM
+platform.
 
-Here's the list of available configurations for running tests:
+Here's the list of recommended configurations for running tests:
 
-- `All tests` for testing the API on all platforms.
-- `JS tests` for testing the API on Kotlin/JS.
-- `JVM tests` for testing the API on Kotlin/JVM.
-- `Java compatibility tests` for testing the compatibility of the API with Java.
-- `Linux tests` for testing the API on Linux using Kotlin Native.
-- `macOS tests` for testing the API on macOS using Kotlin Native.
-- `Windows tests` for testing the API on Windows using Kotlin Native.
+- `JVM tests (types)` for testing the `types` subproject on the Kotlin/JVM
+  platform.
+- `JVM tests (kotlinx-serialization)` for testing the
+  `types-kotlinx-serialization` subproject on Kotlin/JVM.
 - `Check samples` for checking code samples available in the API reference.
 
 ### Serving the documentation
