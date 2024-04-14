@@ -99,6 +99,7 @@ internal class DocumentationTasks(project: Project) {
             olderVersionsDir = extension.archiveParentDirectory.dir("archive")
                 .get()
                 .asFile
+            renderVersionsNavigationOnAllPages = false
         }
         commonConfiguration(extension)
     }
