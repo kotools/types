@@ -6,7 +6,12 @@ plugins {
     kotlin("jvm")
 }
 
-kotlin.explicitApi()
+kotlin {
+    explicitApi()
+    sourceSets.test {
+        languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+    }
+}
 
 dependencies {
     implementation(platform(libs.kotlin.bom))
@@ -14,6 +19,7 @@ dependencies {
     implementation(project(":types-kotlinx-serialization"))
     implementation(libs.kotlinx.serialization.json)
 
+    testImplementation(project(":types-internal"))
     testImplementation(libs.kotlin.test)
     testImplementation(libs.system.lambda)
 }
