@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -42,12 +40,4 @@ dependencies {
 
     commonTestImplementation(libs.kotlin.test)
     commonTestImplementation(libs.kotlinx.serialization.json)
-}
-
-// ----------------------------------- Tasks -----------------------------------
-
-tasks.withType<DokkaTaskPartial>().configureEach {
-    dokkaSourceSets.configureEach {
-        includes.from += layout.projectDirectory.file("packages.md")
-    }
 }

@@ -17,6 +17,7 @@ internal fun DocumentationExtension(project: Project): DocumentationExtension {
             lines.first { it.startsWith("Copyright (c)") }
         }
         .let(extension.copyrightNotice::convention)
+    extension.excludeFromParentApiReference.convention(false)
     project.rootProject.layout.projectDirectory.file("dokka/logo-icon.svg")
         .asFile
         .let(extension.logoIcon::convention)
@@ -40,6 +41,13 @@ public interface DocumentationExtension {
      * license file of the root project.
      */
     public val copyrightNotice: Property<String>
+
+    /**
+     * Flag for excluding this subproject from the API reference of the parent
+     * project.
+     * Set to `false` by default.
+     */
+    public val excludeFromParentApiReference: Property<Boolean>
 
     /**
      * The logo to display in the documentation's header.

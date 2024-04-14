@@ -13,6 +13,7 @@ import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 internal class DocumentationTasks(project: Project) {
     private val tasks: TaskContainer = project.tasks
@@ -87,6 +88,15 @@ internal class DocumentationTasks(project: Project) {
             skipEmptyPackages.set(true)
         }
         commonConfiguration(extension)
+    }
+
+    fun dokkaTaskPartialConfiguration(
+        extension: DocumentationExtension
+    ): DokkaTaskPartial.() -> Unit = {
+        onlyIf { !extension.excludeFromParentApiReference.get() }
+        dokkaSourceSets.configureEach {
+            extension.packages.orNull?.let { includes.setFrom(it) }
+        }
     }
 
     fun dokkaMultiModuleTaskConfiguration(

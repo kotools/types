@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)
@@ -9,6 +7,8 @@ plugins {
     id("org.kotools.types.documentation")
     id("kotools.types.publication")
 }
+
+documentation.excludeFromParentApiReference = true
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
     .configure {
@@ -21,8 +21,4 @@ dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
 
     commonTestImplementation(libs.kotlin.test)
-}
-
-tasks.withType<DokkaTaskPartial>().configureEach {
-    enabled = false
 }

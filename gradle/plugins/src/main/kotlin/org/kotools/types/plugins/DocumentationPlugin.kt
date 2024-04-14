@@ -14,6 +14,7 @@ import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import kotlin.reflect.KClass
 
 /** Plugin configuring the documentation of Kotools Types. */
@@ -50,6 +51,8 @@ public class DocumentationPlugin : Plugin<Project> {
                     .let(this::setDependsOn)
             }
         }
+        project.tasks.withType<DokkaTaskPartial>()
+            .configureEach(tasks.dokkaTaskPartialConfiguration(extension))
         val dokkaHtml: TaskProvider<DokkaTask> = tasks
             .dokkaTaskConfiguration(extension)
             .let { project.tasks.named<DokkaTask>("dokkaHtml", it) }
