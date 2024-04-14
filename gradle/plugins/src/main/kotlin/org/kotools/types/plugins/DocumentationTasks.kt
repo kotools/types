@@ -42,8 +42,7 @@ internal class DocumentationTasks(project: Project) {
                 "${project.name}*/**/scripts/"
             )
         }
-        project.layout.projectDirectory
-            .dir("documentation/api-reference/archive/${project.version}")
+        extension.archiveParentDirectory.dir("archive/${project.version}")
             .let(this::into)
     }
 
@@ -71,8 +70,7 @@ internal class DocumentationTasks(project: Project) {
                 "${project.name}*/**/scripts/"
             )
         }
-        project.layout.projectDirectory
-            .dir("documentation/api-reference/current")
+        extension.archiveParentDirectory.dir("current")
             .let(this::into)
     }
 

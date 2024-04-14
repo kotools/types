@@ -9,6 +9,8 @@ import java.io.File
 internal fun DocumentationExtension(project: Project): DocumentationExtension {
     val extension: DocumentationExtension =
         project.extensions.create("documentation")
+    project.layout.projectDirectory.dir("documentation/api-reference")
+        .let(extension.archiveParentDirectory::convention)
     project.rootProject.layout.projectDirectory.file("LICENSE.txt")
         .asFile
         .useLines { lines: Sequence<String> ->
@@ -25,6 +27,13 @@ internal fun DocumentationExtension(project: Project): DocumentationExtension {
 
 /** The extension responsible for configuring the [DocumentationPlugin]. */
 public interface DocumentationExtension {
+    /**
+     * The parent directory of the API reference's archives.
+     * Set to the `documentation/api-reference` directory from the project
+     * directory by default.
+     */
+    public val archiveParentDirectory: DirectoryProperty
+
     /**
      * The copyright notice to display in the documentation's footer.
      * By default, this property is set to the first copyright notice from the
