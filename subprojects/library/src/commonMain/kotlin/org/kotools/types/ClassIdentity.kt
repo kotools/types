@@ -24,8 +24,8 @@ public class ClassIdentity<T : Any> private constructor() {
          *
          * SAMPLE: ClassIdentityCompanionKotlinSample.from.md
          *
-         * The [KClass] type being unavailable for Java, this function is also
-         * unavailable for this programming language.
+         * Like the [KClass] type, this function is inaccessible for Java
+         * sources.
          */
         @JvmSynthetic
         public fun <T : Any> from(
