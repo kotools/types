@@ -16,7 +16,10 @@ import kotools.types.internal.InternalKotoolsTypesApi
     AnnotationTarget.PROPERTY,
     AnnotationTarget.TYPEALIAS
 )
-public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
+public annotation class ExperimentalSince(
+    /** The version of Kotools Types where the declaration was introduced. */
+    val version: KotoolsTypesVersion
+)
 
 /**
  * Specifies the first [version] of Kotools Types where a declaration has
@@ -31,7 +34,12 @@ public annotation class ExperimentalSince(val version: KotoolsTypesVersion)
     AnnotationTarget.PROPERTY,
     AnnotationTarget.TYPEALIAS
 )
-public annotation class Since(val version: KotoolsTypesVersion)
+public annotation class Since(
+    /**
+     * The first version of Kotools Types where the declaration was stabilized.
+     */
+    val version: KotoolsTypesVersion
+)
 
 /**
  * Specifies the first [version] of Kotools Types where a declaration has
@@ -48,6 +56,10 @@ public annotation class Since(val version: KotoolsTypesVersion)
     AnnotationTarget.TYPEALIAS
 )
 public annotation class DeprecatedAsWarningSince(
+    /**
+     * The first version of Kotools Types where the declaration was deprecated
+     * with a warning level.
+     */
     val version: KotoolsTypesVersion
 )
 
@@ -65,7 +77,13 @@ public annotation class DeprecatedAsWarningSince(
     AnnotationTarget.PROPERTY,
     AnnotationTarget.TYPEALIAS
 )
-public annotation class DeprecatedAsErrorSince(val version: KotoolsTypesVersion)
+public annotation class DeprecatedAsErrorSince(
+    /**
+     * The first version of Kotools Types where the declaration was deprecated
+     * with an error level.
+     */
+    val version: KotoolsTypesVersion
+)
 
 /**
  * Specifies the first [version] of Kotools Types where a declaration has been
@@ -80,4 +98,10 @@ public annotation class DeprecatedAsErrorSince(val version: KotoolsTypesVersion)
     AnnotationTarget.PROPERTY,
     AnnotationTarget.TYPEALIAS
 )
-public annotation class HiddenSince(val version: KotoolsTypesVersion)
+public annotation class HiddenSince(
+    /**
+     * The first version of Kotools Types where the declaration was hidden from
+     * sources.
+     */
+    val version: KotoolsTypesVersion
+)
