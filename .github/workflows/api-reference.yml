@@ -1,0 +1,21 @@
+name: API reference
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/api-reference.yml
+      - documentation/api-reference/current/
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          folder: documentation/api-reference/current
