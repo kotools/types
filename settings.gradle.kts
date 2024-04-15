@@ -1,7 +1,9 @@
 rootProject.name = "types"
 
-private val gradlePluginsDirectory: File = rootDir.resolve("gradle/plugins")
-includeBuild(gradlePluginsDirectory)
+pluginManagement {
+    val gradlePlugins: File = rootDir.resolve("gradle/plugins")
+    includeBuild(gradlePlugins)
+}
 
 // -------------------------------- Subprojects --------------------------------
 
