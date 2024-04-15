@@ -14,7 +14,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
-import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -41,7 +40,10 @@ private fun PluginContainer.configureYarn(project: Project): Unit =
 private fun ExtensionContainer.configure() {
     val kotlin: KotlinMultiplatformExtension = getByType()
     kotlin.explicitApi()
-    kotlin.js(KotlinJsCompilerType.IR) { browser() }
+    kotlin.js(KotlinJsCompilerType.IR) {
+        nodejs()
+        binaries.library()
+    }
     kotlin.jvm()
     kotlin.nativeTargets()
     kotlin.sourceSets.configureEach {
@@ -72,8 +74,6 @@ private fun TaskContainer.configure(project: Project) {
     withType<KotlinCompile>().configureEach {
         compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
     }
-    withType<KotlinJsTest>()
-        .configureEach(KotlinJsTest::useMocha)
     withType<KotlinJvmTest>()
         .configureEach(Test::useJUnitPlatform)
     withType<Jar>().configureEach {
