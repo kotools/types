@@ -4,27 +4,27 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types-kotlinx-serialization.yml
+      - gradle/
+      - subprojects/kotlinx-serialization/build.gradle.kts
+      - subprojects/kotlinx-serialization/src/
+      - build.gradle.kts
       - gradle.properties
-      - gradle/libs.versions.toml
-      - gradle/wrapper/
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - subprojects/kotlinx-serialization/build.gradle.kts
-      - subprojects/kotlinx-serialization/src/
       - yarn.lock
   push:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types-kotlinx-serialization.yml
+      - gradle/
+      - subprojects/kotlinx-serialization/build.gradle.kts
+      - subprojects/kotlinx-serialization/src/
+      - build.gradle.kts
       - gradle.properties
-      - gradle/libs.versions.toml
-      - gradle/wrapper/
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - subprojects/kotlinx-serialization/build.gradle.kts
-      - subprojects/kotlinx-serialization/src/
       - yarn.lock
   workflow_dispatch:
 env:
