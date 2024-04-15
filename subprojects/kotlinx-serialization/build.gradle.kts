@@ -71,6 +71,6 @@ dependencies {
 
 // ----------------------------------- Tasks -----------------------------------
 
-tasks.compileTestKotlinJs.configure {
-    dependsOn += tasks.compileTestDevelopmentExecutableKotlinJs
+tasks.compileTestDevelopmentExecutableKotlinJs.configure {
+    dependsOn += tasks.compileTestKotlinJs
 }
