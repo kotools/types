@@ -5,11 +5,13 @@ on:
     paths:
       - .github/workflows/dependency-submission.yml
       - gradle/libs.versions.toml
+      - yarn.lock
   push:
     branches: [ main ]
     paths:
       - .github/workflows/dependency-submission.yml
       - gradle/libs.versions.toml
+      - yarn.lock
 jobs:
   submit:
     name: Submit to GitHub
