@@ -1,5 +1,6 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -8,18 +9,14 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.simpleNameOf
 import org.kotools.types.Zero
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroAsByteSerializer : KSerializer<Zero> {
     override val descriptor: SerialDescriptor
         get() {
-            val className: String = simpleNameOf<Zero>()
-            return PrimitiveSerialDescriptor(
-                serialName = "org.kotools.types.$className",
-                kind = PrimitiveKind.BYTE
-            )
+            val serialName: String = serialNameOf<Zero>()
+            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.BYTE)
         }
 
     override fun serialize(encoder: Encoder, value: Zero) {
@@ -35,8 +32,9 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
         throw SerializationException(message)
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     fun deserializationErrorMessage(decodedValue: Byte): String {
-        val typeName: String = simpleNameOf<Zero>()
-        return "Unable to deserialize '$typeName' from ${decodedValue}."
+        val serialName: String = this.descriptor.serialName
+        return "Unable to deserialize '$serialName' from ${decodedValue}."
     }
 }

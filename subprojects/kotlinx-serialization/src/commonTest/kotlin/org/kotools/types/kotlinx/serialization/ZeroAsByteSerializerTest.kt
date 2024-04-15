@@ -8,7 +8,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.simpleNameOf
 import org.kotools.types.Zero
 import kotlin.random.Random
 import kotlin.test.Test
@@ -23,8 +22,7 @@ class ZeroAsByteSerializerTest {
     fun descriptor_serialName_should_be_the_qualified_name_of_Zero() {
         val serializer: KSerializer<Zero> = ZeroAsByteSerializer
         val actual: String = serializer.descriptor.serialName
-        val className: String = simpleNameOf<Zero>()
-        val expected = "org.kotools.types.$className"
+        val expected: String = serialNameOf<Zero>()
         assertEquals(expected, actual)
     }
 

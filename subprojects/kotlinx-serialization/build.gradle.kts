@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -17,8 +19,20 @@ apiValidation.apiDumpDirectory = "src/api"
 
 documentation.packages = layout.projectDirectory.file("packages.md").asFile
 
-kotlin.sourceSets.all {
-    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+kotlin.sourceSets {
+    all {
+        languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+    }
+    val jvmAndNativeMain: KotlinSourceSet by creating {
+        commonMain.get()
+            .let(this::dependsOn)
+    }
+    jvmMain.get()
+        .dependsOn(jvmAndNativeMain)
+    val nativeMain: KotlinSourceSet by creating { dependsOn(jvmAndNativeMain) }
+    listOf(linuxMain, macosMain, macosArm64Main, windowsMain)
+        .map(NamedDomainObjectProvider<KotlinSourceSet>::get)
+        .forEach { it.dependsOn(nativeMain) }
 }
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
