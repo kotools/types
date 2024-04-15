@@ -4,27 +4,29 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-java-compatibility.yml
-      - gradle.properties
       - gradle/libs.versions.toml
       - gradle/wrapper/
+      - subprojects/java-compatibility/build.gradle.kts
+      - subprojects/java-compatibility/src/
+      - build.gradle.kts
+      - gradle.properties
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - subprojects/java-compatibility/build.gradle.kts
-      - subprojects/java-compatibility/src/
       - yarn.lock
   push:
     branches: [ main ]
     paths:
       - .github/workflows/integration-java-compatibility.yml
-      - gradle.properties
       - gradle/libs.versions.toml
       - gradle/wrapper/
+      - subprojects/java-compatibility/build.gradle.kts
+      - subprojects/java-compatibility/src/
+      - build.gradle.kts
+      - gradle.properties
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - subprojects/java-compatibility/build.gradle.kts
-      - subprojects/java-compatibility/src/
       - yarn.lock
   workflow_dispatch:
 jobs:
