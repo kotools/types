@@ -169,21 +169,3 @@ jobs:
         run: ./gradlew :types:windowsTest
       - name: Test support of kotlinx.serialization
         run: ./gradlew :types-kotlinx-serialization:windowsTest
-  # --------------------------------- Stage 3 ----------------------------------
-  dependency-submission:
-    name: Dependency submission
-    needs:
-      - js-tests
-      - jvm-checks
-      - linux-tests
-      - macosX64-tests
-      - windows-tests
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref_name == 'main'
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.2
-      - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v3.1.0
