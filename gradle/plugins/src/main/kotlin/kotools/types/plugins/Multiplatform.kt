@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -41,7 +42,7 @@ private fun ExtensionContainer.configure() {
     val kotlin: KotlinMultiplatformExtension = getByType()
     kotlin.explicitApi()
     kotlin.js(KotlinJsCompilerType.IR) {
-        nodejs()
+        nodejs { testTask(KotlinJsTest::useMocha) }
         binaries.library()
     }
     kotlin.jvm()
