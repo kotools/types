@@ -20,13 +20,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * ```kotlin
-     * val format = Json { serializersModule = KotoolsTypesSerializers.all }
-     * val encoded: String = format.encodeToString(Zero)
-     * println(encoded) // 0
-     * val decoded: Zero = format.decodeFromString(encoded)
-     * println(Zero === decoded) // true
-     * ```
+     * SAMPLE: KotoolsTypesSerializersKotlinSample.all.md
      */
     public val all: SerializersModule
         get() = SerializersModule { include(zero) }
@@ -36,13 +30,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * ```kotlin
-     * val format = Json { serializersModule = KotoolsTypesSerializers.zero }
-     * val encoded: String = format.encodeToString(Zero)
-     * println(encoded) // 0
-     * val decoded: Zero = format.decodeFromString(encoded)
-     * println(Zero === decoded) // true
-     * ```
+     * SAMPLE: KotoolsTypesSerializersKotlinSample.zero.md
      */
     public val zero: SerializersModule
         get() = SerializersModule { contextual(ZeroAsByteSerializer) }
@@ -52,10 +40,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val message: String = KotoolsTypesSerializers.toString()
-     * println(message) // KotoolsTypesSerializers
-     * ```
+     * SAMPLE: KotoolsTypesSerializersKotlinSample.toString_override.md
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String =
