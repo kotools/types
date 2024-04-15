@@ -31,7 +31,7 @@ release that we ship for the stable API of Kotools Types:
 
 ## 🧪 Experimental API
 
-We also ship an experimental API of Kotools Types for trying out an idea and
+We also ship an experimental API of Kotools Types for trying out ideas and
 collecting feedbacks from users.
 This API includes all declarations marked with the `ExperimentalKotoolsTypesApi`
 annotation requiring an explicit [opt-in].
