@@ -1,0 +1,49 @@
+name: Integration (java-compatibility)
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/integration-java-compatibility.yml
+      - gradle.properties
+      - gradle/libs.versions.toml
+      - gradle/wrapper/
+      - gradlew
+      - gradlew.bat
+      - settings.gradle.kts
+      - subprojects/java-compatibility/build.gradle.kts
+      - subprojects/java-compatibility/src/
+      - yarn.lock
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/integration-java-compatibility.yml
+      - gradle.properties
+      - gradle/libs.versions.toml
+      - gradle/wrapper/
+      - gradlew
+      - gradlew.bat
+      - settings.gradle.kts
+      - subprojects/java-compatibility/build.gradle.kts
+      - subprojects/java-compatibility/src/
+      - yarn.lock
+  workflow_dispatch:
+jobs:
+  ubuntu-checks:
+    name: Checks on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: true
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v2.1.2
+      - name: Test on Kotlin/JVM
+        run: ./gradlew :java-compatibility:test
