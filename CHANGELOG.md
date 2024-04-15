@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - Introduced the `Zero` **experimental** type representing the zero number in
-  the new `org.kotools.types` package.
+  the new `org.kotools.types` package ([#644]).
   This package will contain reimplemented types and those from the
   `kotools.types.*` packages will be deprecated incrementally.
 - Introduced the `EmailAddress` **experimental** type representing email
@@ -95,6 +95,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [#626]: https://github.com/kotools/types/pull/626
 [#627]: https://github.com/kotools/types/pull/627
 [#635]: https://github.com/kotools/types/issues/635
+[#644]: https://github.com/kotools/types/issues/644
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 
 ## 🔖 Releases
