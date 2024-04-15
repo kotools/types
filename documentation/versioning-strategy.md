@@ -1,7 +1,7 @@
 # 🔂 Versioning strategy
 
-For versioning Kotools Types, we have a pragmatic approach based on the concept
-of [backward compatibility].
+For versioning the Application Programming Interfaces (APIs) of Kotools Types,
+we have a pragmatic approach based on the concept of [backward compatibility].
 
 ## 🤔 Types of compatibility
 
