@@ -70,6 +70,11 @@ group = "org.jetbrains.kotlin"
 name = "kotlin-test-annotations-common"
 version.ref = "kotlin"
 
+[libraries.kotlin-test-js]
+group = "org.jetbrains.kotlin"
+name = "kotlin-test-js"
+version.ref = "kotlin"
+
 [libraries.kotlin-test-junit5]
 group = "org.jetbrains.kotlin"
 name = "kotlin-test-junit5"

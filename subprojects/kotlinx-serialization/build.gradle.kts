@@ -65,6 +65,8 @@ dependencies {
     commonTestImplementation(libs.kotlinx.serialization.json)
 
     jvmTestImplementation(libs.kotlin.test.junit5)
+
+    jsTestImplementation(libs.kotlin.test.js)
 }
 
 // ----------------------------------- Tasks -----------------------------------
