@@ -22,3 +22,7 @@ dependencies {
 
     commonTestImplementation(libs.kotlin.test)
 }
+
+tasks.compileTestDevelopmentExecutableKotlinJs.configure {
+    dependsOn += tasks.compileTestKotlinJs
+}
