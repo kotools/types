@@ -25,9 +25,14 @@ on:
       - gradle/wrapper/
       - yarn.lock
   workflow_dispatch:
+env:
+  GRADLE_HOME_CACHE_CLEANUP: true
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
 jobs:
-  checks:
-    name: Checks
+  # --------------------------------- Stage 1 ----------------------------------
+  gradle-checks:
+    name: Gradle checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -35,29 +40,167 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4.2.1
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
         with:
-          gradle-home-cache-cleanup: true
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.2
       - name: Check Gradle plugins
-        run: ./gradlew :plugins:check
-      - name: Check internals
-        run: ./gradlew :types-internal:check
-      - name: Check library
-        run: ./gradlew :types:check
-      - name: Check Java compatibility
-        run: ./gradlew :java-compatibility:check
-      - name: Check samples
-        run: ./gradlew :samples:check
-      - name: Check support of kotlinx.serialization
-        run: ./gradlew :types-kotlinx-serialization:check
+        run: ./gradlew :plugins:check --no-daemon
+  # --------------------------------- Stage 2 ----------------------------------
+  js-tests:
+    name: Kotlin/JS tests
+    needs: gradle-checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test internals
+        run: ./gradlew :types-internal:jsTest
+      - name: Test library
+        run: ./gradlew :types:jsTest
+      - name: Test support of kotlinx.serialization
+        run: ./gradlew :types-kotlinx-serialization:jsTest
+  jvm-checks:
+    name: Kotlin/JVM checks
+    needs: gradle-checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test internals
+        run: ./gradlew :types-internal:jvmTest
+      - name: Test library
+        run: ./gradlew :types:jvmTest
+      - name: Check Application Binary Interface (ABI) of library
+        run: ./gradlew :types:apiCheck
+      - name: Test Java compatibility
+        run: ./gradlew :java-compatibility:test
+      - name: Test API reference samples
+        run: ./gradlew :samples:test
+      - name: Test support of kotlinx.serialization
+        run: ./gradlew :types-kotlinx-serialization:jvmTest
+      - name: Check ABI of kotlinx.serialization's support
+        run: ./gradlew :types-kotlinx-serialization:apiCheck
+  linux-tests:
+    name: Kotlin/Native tests for Linux
+    needs: gradle-checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test internals
+        run: ./gradlew :types-internal:linuxTest
+      - name: Test library
+        run: ./gradlew :types:linuxTest
+      - name: Test support of kotlinx.serialization
+        run: ./gradlew :types-kotlinx-serialization:linuxTest
+  macosX64-tests:
+    name: Kotlin/Native tests for macOS x64
+    needs: gradle-checks
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test internals
+        run: ./gradlew :types-internal:macosTest
+      - name: Test library
+        run: ./gradlew :types:macosTest
+      - name: Test support of kotlinx.serialization
+        run: ./gradlew :types-kotlinx-serialization:macosTest
+  macosArm64-tests:
+    name: Kotlin/Native tests for macOS arm64
+    needs: gradle-checks
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test internals
+        run: ./gradlew :types-internal:macosArm64Test
+      - name: Test library
+        run: ./gradlew :types:macosArm64Test
+      - name: Test support of kotlinx.serialization
+        run: ./gradlew :types-kotlinx-serialization:macosArm64Test
+  windows-tests:
+    name: Kotlin/Native tests for Windows
+    needs: gradle-checks
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test internals
+        run: ./gradlew :types-internal:windowsTest
+      - name: Test library
+        run: ./gradlew :types:windowsTest
+      - name: Test support of kotlinx.serialization
+        run: ./gradlew :types-kotlinx-serialization:windowsTest
+  # --------------------------------- Stage 3 ----------------------------------
   dependency-submission:
     name: Dependency submission
-    needs: checks
+    needs:
+      - js-tests
+      - jvm-checks
+      - linux-tests
+      - macosX64-tests
+      - macosArm64-tests
+      - windows-tests
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref_name == 'main'
     permissions:
