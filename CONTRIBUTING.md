@@ -84,7 +84,7 @@ Here's the list of recommended configurations for running tests:
   platform.
 - `JVM tests (kotlinx-serialization)` for testing the
   `types-kotlinx-serialization` subproject on Kotlin/JVM.
-- `Check samples` for checking code samples available in the API reference.
+- `Samples tests` for testing code samples available in the API reference.
 
 ### Serving the API reference
 
