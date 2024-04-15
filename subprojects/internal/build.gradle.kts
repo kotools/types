@@ -20,7 +20,12 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
 dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonTestImplementation(libs.kotlin.test)
+    commonTestImplementation(libs.kotlin.test.common)
+    commonTestImplementation(libs.kotlin.test.common.annotations)
+
+    jvmTestImplementation(libs.kotlin.test.junit5)
+
+    jsTestImplementation(libs.kotlin.test.js)
 }
 
 tasks.compileTestDevelopmentExecutableKotlinJs.configure {

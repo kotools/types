@@ -55,11 +55,6 @@ group = "org.jetbrains.kotlin"
 name = "kotlin-gradle-plugin"
 version.ref = "kotlin"
 
-[libraries.kotlin-test]
-group = "org.jetbrains.kotlin"
-name = "kotlin-test"
-version.ref = "kotlin"
-
 [libraries.kotlin-test-common]
 group = "org.jetbrains.kotlin"
 name = "kotlin-test-common"

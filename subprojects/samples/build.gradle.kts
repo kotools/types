@@ -20,7 +20,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(project(":types-internal"))
-    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlin.test.junit5)
     testImplementation(libs.system.lambda)
 }
 

@@ -10,7 +10,7 @@ dependencies {
     implementation(libs.dokka.gradle.plugin)
     implementation(libs.dokka.versioning)
 
-    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlin.test.junit5)
 }
 
 gradlePlugin {
