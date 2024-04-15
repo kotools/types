@@ -45,5 +45,7 @@ jobs:
           gradle-home-cache-cleanup: true
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v2.1.2
+      - name: Check Gradle plugins
+        run: ./gradlew :plugins:check
       - name: Test on Kotlin/JVM
         run: ./gradlew :samples:test
