@@ -4,27 +4,27 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-samples.yml
+      - gradle/
       - gradle.properties
-      - gradle/libs.versions.toml
-      - gradle/wrapper/
+      - subprojects/samples/build.gradle.kts
+      - subprojects/samples/src/
+      - build.gradle.kts
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - subprojects/samples/build.gradle.kts
-      - subprojects/samples/src/
       - yarn.lock
   push:
     branches: [ main ]
     paths:
       - .github/workflows/integration-samples.yml
+      - gradle/
       - gradle.properties
-      - gradle/libs.versions.toml
-      - gradle/wrapper/
+      - subprojects/samples/build.gradle.kts
+      - subprojects/samples/src/
+      - build.gradle.kts
       - gradlew
       - gradlew.bat
       - settings.gradle.kts
-      - subprojects/samples/build.gradle.kts
-      - subprojects/samples/src/
       - yarn.lock
   workflow_dispatch:
 jobs:
