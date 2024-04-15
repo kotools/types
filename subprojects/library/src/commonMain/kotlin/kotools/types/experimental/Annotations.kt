@@ -2,6 +2,7 @@ package kotools.types.experimental
 
 import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.DeprecatedAsWarningSince
+import org.kotools.types.internal.HiddenSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
 import kotlin.annotation.AnnotationRetention.BINARY
@@ -34,10 +35,11 @@ private const val RECOMMENDED_ANNOTATION_PACKAGE: String =
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     ),
-    DeprecationLevel.ERROR
+    DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
 @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -51,10 +53,11 @@ public annotation class ExperimentalCollectionApi
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     ),
-    DeprecationLevel.ERROR
+    DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
 @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -68,10 +71,11 @@ public annotation class ExperimentalNumberApi
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     ),
-    DeprecationLevel.ERROR
+    DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
 @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -85,10 +89,11 @@ public annotation class ExperimentalRangeApi
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     ),
-    DeprecationLevel.ERROR
+    DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
 @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
@@ -102,10 +107,11 @@ public annotation class ExperimentalResultApi
         RECOMMENDED_ANNOTATION,
         "$RECOMMENDED_ANNOTATION_PACKAGE.$RECOMMENDED_ANNOTATION"
     ),
-    DeprecationLevel.ERROR
+    DeprecationLevel.HIDDEN
 )
 @DeprecatedAsWarningSince(KotoolsTypesVersion.V4_4_0)
 @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_0)
+@HiddenSince(KotoolsTypesVersion.Unreleased)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)
