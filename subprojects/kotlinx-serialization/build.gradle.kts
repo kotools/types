@@ -60,8 +60,11 @@ dependencies {
     commonMainImplementation(project(":types-internal"))
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonTestImplementation(libs.kotlin.test)
+    commonTestImplementation(libs.kotlin.test.common)
+    commonTestImplementation(libs.kotlin.test.common.annotations)
     commonTestImplementation(libs.kotlinx.serialization.json)
+
+    jvmTestImplementation(libs.kotlin.test.junit5)
 }
 
 // ----------------------------------- Tasks -----------------------------------

@@ -60,6 +60,21 @@ group = "org.jetbrains.kotlin"
 name = "kotlin-test"
 version.ref = "kotlin"
 
+[libraries.kotlin-test-common]
+group = "org.jetbrains.kotlin"
+name = "kotlin-test-common"
+version.ref = "kotlin"
+
+[libraries.kotlin-test-common-annotations]
+group = "org.jetbrains.kotlin"
+name = "kotlin-test-annotations-common"
+version.ref = "kotlin"
+
+[libraries.kotlin-test-junit5]
+group = "org.jetbrains.kotlin"
+name = "kotlin-test-junit5"
+version.ref = "kotlin"
+
 [libraries.kotlinx-serialization-core]
 group = "org.jetbrains.kotlinx"
 name = "kotlinx-serialization-core"
