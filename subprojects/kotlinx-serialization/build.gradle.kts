@@ -27,12 +27,22 @@ kotlin.sourceSets {
         commonMain.get()
             .let(this::dependsOn)
     }
+    val jvmAndNativeTest: KotlinSourceSet by creating {
+        commonTest.get()
+            .let(this::dependsOn)
+    }
     jvmMain.get()
         .dependsOn(jvmAndNativeMain)
+    jvmTest.get()
+        .dependsOn(jvmAndNativeTest)
     val nativeMain: KotlinSourceSet by creating { dependsOn(jvmAndNativeMain) }
+    val nativeTest: KotlinSourceSet by creating { dependsOn(jvmAndNativeTest) }
     listOf(linuxMain, macosMain, macosArm64Main, windowsMain)
         .map(NamedDomainObjectProvider<KotlinSourceSet>::get)
         .forEach { it.dependsOn(nativeMain) }
+    listOf(linuxTest, macosTest, macosArm64Test, windowsTest)
+        .map(NamedDomainObjectProvider<KotlinSourceSet>::get)
+        .forEach { it.dependsOn(nativeTest) }
 }
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
@@ -54,4 +64,10 @@ dependencies {
 
     commonTestImplementation(libs.kotlin.test)
     commonTestImplementation(libs.kotlinx.serialization.json)
+}
+
+// ----------------------------------- Tasks -----------------------------------
+
+tasks.compileTestKotlinJs.configure {
+    dependsOn += tasks.compileTestDevelopmentExecutableKotlinJs
 }
