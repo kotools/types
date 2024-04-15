@@ -32,9 +32,20 @@ env:
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
 jobs:
+  # --------------------------------- Stage 1 ----------------------------------
+  gradle-wrapper-validation:
+    name: Gradle checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v2.1.2
+  # --------------------------------- Stage 2 ----------------------------------
   ubuntu-checks:
     name: Checks on Ubuntu
     runs-on: ubuntu-latest
+    needs: gradle-wrapper-validation
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.2
@@ -47,8 +58,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v3.1.0
         with:
           gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v2.1.2
+      - name: Check Gradle plugins
+        run: ./gradlew :plugins:check
       - name: Test on Kotlin/JS
         run: ./gradlew :types-kotlinx-serialization:jsTest
       - name: Test on Kotlin/JVM
@@ -59,6 +70,7 @@ jobs:
         run: ./gradlew :types-kotlinx-serialization:linuxTest
   macos-checks:
     name: Checks on macOS
+    needs: gradle-wrapper-validation
     runs-on: macos-latest
     steps:
       - name: Checkout code
@@ -76,6 +88,7 @@ jobs:
         run: ./gradlew :types-kotlinx-serialization:macosTest
   windows-checks:
     name: Checks on Windows
+    needs: gradle-wrapper-validation
     runs-on: windows-latest
     steps:
       - name: Checkout code
