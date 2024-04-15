@@ -19,9 +19,9 @@ We focus on three types of compatibility:
 With these types of compatibility in mind, here are the different types of
 release that we ship for the stable API of Kotools Types:
 
-- **Patch releases (`X.Y.Z`)** that can break the **behavioral compatibility**
-  for fixing bugs, but the **source compatibility** and the
-  **binary compatibility** should be preserved.
+- **Incremental releases (`X.Y.Z`)** that can break the
+  **behavioral compatibility** for fixing bugs, but the **source compatibility**
+  and the **binary compatibility** should be preserved.
 - **Minor releases (`X.Y`)** that can break the **behavioral compatibility**
   for fixing bugs and the **source compatibility** for deprecating declarations,
   but the **binary compatibility** should be preserved.
