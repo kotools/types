@@ -4,9 +4,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types-internal.yml
-      - gradle/
+      - gradle/**
       - subprojects/internal/build.gradle.kts
-      - subprojects/internal/src/
+      - subprojects/internal/src/**
       - build.gradle.kts
       - gradle.properties
       - gradlew
@@ -17,9 +17,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types-internal.yml
-      - gradle/
+      - gradle/**
       - subprojects/internal/build.gradle.kts
-      - subprojects/internal/src/
+      - subprojects/internal/src/**
       - build.gradle.kts
       - gradle.properties
       - gradlew

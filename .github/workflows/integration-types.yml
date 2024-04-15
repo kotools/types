@@ -4,9 +4,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types.yml
-      - gradle/
+      - gradle/**
       - subprojects/library/build.gradle.kts
-      - subprojects/library/src/
+      - subprojects/library/src/**
       - build.gradle.kts
       - gradle.properties
       - gradlew
@@ -17,9 +17,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types.yml
-      - gradle/
+      - gradle/**
       - subprojects/library/build.gradle.kts
-      - subprojects/library/src/
+      - subprojects/library/src/**
       - build.gradle.kts
       - gradle.properties
       - gradlew

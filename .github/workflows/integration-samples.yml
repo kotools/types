@@ -4,10 +4,10 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-samples.yml
-      - gradle/
+      - gradle/**
       - gradle.properties
       - subprojects/samples/build.gradle.kts
-      - subprojects/samples/src/
+      - subprojects/samples/src/**
       - build.gradle.kts
       - gradlew
       - gradlew.bat
@@ -17,10 +17,10 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-samples.yml
-      - gradle/
+      - gradle/**
       - gradle.properties
       - subprojects/samples/build.gradle.kts
-      - subprojects/samples/src/
+      - subprojects/samples/src/**
       - build.gradle.kts
       - gradlew
       - gradlew.bat

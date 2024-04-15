@@ -4,9 +4,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types-kotlinx-serialization.yml
-      - gradle/
+      - gradle/**
       - subprojects/kotlinx-serialization/build.gradle.kts
-      - subprojects/kotlinx-serialization/src/
+      - subprojects/kotlinx-serialization/src/**
       - build.gradle.kts
       - gradle.properties
       - gradlew
@@ -17,9 +17,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/integration-types-kotlinx-serialization.yml
-      - gradle/
+      - gradle/**
       - subprojects/kotlinx-serialization/build.gradle.kts
-      - subprojects/kotlinx-serialization/src/
+      - subprojects/kotlinx-serialization/src/**
       - build.gradle.kts
       - gradle.properties
       - gradlew
