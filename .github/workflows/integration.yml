@@ -53,7 +53,7 @@ jobs:
         run: ./gradlew :java-compatibility:check
       - name: Check samples
         run: ./gradlew :samples:check
-      - name: Check integration with kotlinx.serialization
+      - name: Check support of kotlinx.serialization
         run: ./gradlew :types-kotlinx-serialization:check
   dependency-submission:
     name: Dependency submission
