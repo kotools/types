@@ -1,0 +1,93 @@
+name: Integration (types)
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/integration-types.yml
+      - gradle.properties
+      - gradle/libs.versions.toml
+      - gradle/wrapper/
+      - gradlew
+      - gradlew.bat
+      - settings.gradle.kts
+      - subprojects/library/build.gradle.kts
+      - subprojects/library/src/
+      - yarn.lock
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/integration-types.yml
+      - gradle.properties
+      - gradle/libs.versions.toml
+      - gradle/wrapper/
+      - gradlew
+      - gradlew.bat
+      - settings.gradle.kts
+      - subprojects/library/build.gradle.kts
+      - subprojects/library/src/
+      - yarn.lock
+  workflow_dispatch:
+env:
+  GRADLE_HOME_CACHE_CLEANUP: true
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
+jobs:
+  ubuntu-checks:
+    name: Checks on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v2.1.2
+      - name: Test on Kotlin/JS
+        run: ./gradlew :types:jsTest
+      - name: Test on Kotlin/JVM
+        run: ./gradlew :types:jvmTest
+      - name: Check Application Binary Interface on Kotlin/JVM
+        run: ./gradlew :types:apiCheck
+      - name: Test on Kotlin/Native
+        run: ./gradlew :types:linuxTest
+  macos-checks:
+    name: Checks on macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test on Kotlin/Native for macOS x64
+        run: ./gradlew :types:macosTest
+  windows-checks:
+    name: Checks on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Test on Kotlin/Native for Windows
+        run: ./gradlew :types:windowsTest
