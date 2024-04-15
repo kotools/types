@@ -18,7 +18,8 @@ internal fun DocumentationExtension(project: Project): DocumentationExtension {
         }
         .let(extension.copyrightNotice::convention)
     extension.excludeFromParentApiReference.convention(false)
-    project.rootProject.layout.projectDirectory.file("dokka/logo-icon.svg")
+    project.rootProject.layout.projectDirectory
+        .file("documentation/api-reference/logo-icon.svg")
         .asFile
         .let(extension.logoIcon::convention)
     project.layout.buildDirectory.dir("api-reference")
@@ -51,8 +52,9 @@ public interface DocumentationExtension {
 
     /**
      * The logo to display in the documentation's header.
-     * By default, this property is set to the `dokka/logo-icon.svg` file from
-     * the project directory.
+     * By default, this property is set to the
+     * `documentation/api-reference/logo-icon.svg` file from the root project
+     * directory.
      */
     public val logoIcon: Property<File>
 
