@@ -4,6 +4,10 @@ import kotlin.test.Test
 
 class ZeroKotlinSampleTest {
     @Test
+    fun `isEqualTo(Byte) should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::isEqualTo_Byte)
+
+    @Test
     fun `toByte() should pass`() {
         val expected = "0"
         assertPrints(expected, ZeroKotlinSample::toByte)

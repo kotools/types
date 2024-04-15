@@ -11,6 +11,33 @@ public object Zero {
     private const val VALUE: Byte = 0
 
     /**
+     * Returns `true` if the specified [number] equals zero.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.isEqualTo_Byte.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.isEqualTo_Byte.md
+     * </details>
+     */
+    public infix fun isEqualTo(number: Byte): Boolean = this.VALUE == number
+
+    /**
      * Returns this number as [Byte].
      *
      * <br>
