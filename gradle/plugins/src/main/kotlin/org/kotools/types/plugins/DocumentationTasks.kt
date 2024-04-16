@@ -88,6 +88,9 @@ internal class DocumentationTasks(project: Project) {
         dokkaSourceSets.configureEach {
             extension.packages.orNull?.let { includes.setFrom(it) }
         }
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            extension.copyrightNotice.orNull?.let { footerMessage = it }
+        }
     }
 
     fun dokkaMultiModuleTaskConfiguration(
