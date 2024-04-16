@@ -24,7 +24,7 @@ public abstract class InlineSamples : DefaultTask() {
 
     @TaskAction
     private fun execute() {
-        val mainSourceSetRegex = Regex("/[a-z]+Main/")
+        val mainSourceSetRegex = Regex("/[A-Za-z]+Main/")
         this.sourcesDirectory.asFileTree.asSequence()
             .filter { it != null && mainSourceSetRegex in it.path }
             .forEach(this::inlineSamples)
