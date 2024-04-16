@@ -50,7 +50,10 @@ publishing.publications.named<MavenPublication>("kotlinMultiplatform")
         version = "${project.version}"
     }
 
-samples.project = project(":samples")
+samples {
+    project = project(":samples")
+    sourcesWithoutInlinedSamples()
+}
 
 // ------------------------------- Dependencies --------------------------------
 

@@ -4,6 +4,7 @@ import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.kotools.types.samples.CheckKDoc
 import org.kotools.types.samples.ExtractCodeSamples
 import org.kotools.types.samples.InlineSamples
 import org.kotools.types.samples.SamplesExtension
@@ -37,10 +38,19 @@ tasks.registering(ExtractCodeSamples::class) {
     outputDirectory = samplesBuildDirectory.map { it.dir("extracted") }
 }
 
+private val checkMainSources: TaskProvider<CheckKDoc> by
+tasks.registering(CheckKDoc::class) {
+    description = "Checks that main sources don't have KDoc samples."
+    group = samplesTaskGroup
+    onlyIf { samples.failOnSamplesInKDoc }
+    sources = projectSources
+}
+
 private val backupMainSources: TaskProvider<Copy> by
 tasks.registering(Copy::class) {
     description = "Copies main sources into the build directory."
     group = samplesTaskGroup
+    dependsOn += checkMainSources
     from(projectSources) { exclude("api", "*Test") }
     into(sourcesBackupDirectory)
 }
@@ -62,6 +72,7 @@ tasks.registering(Copy::class) {
     from(sourcesBackupDirectory)
     into(projectSources)
 }
+checkMainSources.configure { solutionTaskPath = restoreMainSources.get().path }
 
 // ----------------------------- Dokka integration -----------------------------
 
@@ -85,6 +96,8 @@ kotlin.targets
         it.dependsOn += inlineSamples
         it.finalizedBy(restoreMainSources)
     }
+
 private val kotlinCompilationTasks: TaskCollection<KotlinCompilationTask<*>> =
     tasks.withType(KotlinCompilationTask::class)
+kotlinCompilationTasks.configureEach { dependsOn += checkMainSources }
 restoreMainSources.configure { mustRunAfter(kotlinCompilationTasks) }
