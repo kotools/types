@@ -80,12 +80,10 @@ private val kotlin: KotlinMultiplatformExtension = extensions.getByType()
 
 kotlin.targets
     .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
-    .map(tasks::named)
+    .mapNotNull(tasks::findByName)
     .forEach {
-        it.configure {
-            dependsOn += inlineSamples
-            finalizedBy(restoreMainSources)
-        }
+        it.dependsOn += inlineSamples
+        it.finalizedBy(restoreMainSources)
     }
 private val kotlinCompilationTasks: TaskCollection<KotlinCompilationTask<*>> =
     tasks.withType(KotlinCompilationTask::class)
