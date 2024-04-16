@@ -10,6 +10,8 @@ import org.kotools.types.samples.SamplesExtension
 
 private val samples: SamplesExtension = extensions.create("samples")
 
+private val samplesTaskGroup: String = "Samples"
+
 private val samplesBuildDirectory: Provider<Directory> =
     layout.buildDirectory.dir("samples")
 private val sourcesBackupDirectory: Provider<Directory> =
@@ -22,12 +24,14 @@ private val projectSources: Directory = layout.projectDirectory.dir("src")
 private val cleanSamples: TaskProvider<Delete> by
 tasks.registering(Delete::class) {
     description = "Deletes the 'samples' build directory."
+    group = samplesTaskGroup
     setDelete(samplesBuildDirectory)
 }
 
 private val extractSamples: TaskProvider<ExtractCodeSamples> by
 tasks.registering(ExtractCodeSamples::class) {
     description = "Extract code samples from sources."
+    group = samplesTaskGroup
     sourceDirectory =
         samples.project.map { it.layout.projectDirectory.dir("src/main") }
     outputDirectory = samplesBuildDirectory.map { it.dir("extracted") }
@@ -36,6 +40,7 @@ tasks.registering(ExtractCodeSamples::class) {
 private val backupMainSources: TaskProvider<Copy> by
 tasks.registering(Copy::class) {
     description = "Copies main sources into the build directory."
+    group = samplesTaskGroup
     from(projectSources) { exclude("api", "*Test") }
     into(sourcesBackupDirectory)
 }
@@ -43,6 +48,7 @@ tasks.registering(Copy::class) {
 private val inlineSamples: TaskProvider<InlineSamples> by
 tasks.registering(InlineSamples::class) {
     description = "Inlines KDoc samples in project sources."
+    group = samplesTaskGroup
     dependsOn += backupMainSources
     sourcesDirectory = projectSources
     samplesDirectory =
@@ -52,6 +58,7 @@ tasks.registering(InlineSamples::class) {
 private val restoreMainSources: TaskProvider<Copy> by
 tasks.registering(Copy::class) {
     description = "Restores main sources backup from the build directory."
+    group = samplesTaskGroup
     from(sourcesBackupDirectory)
     into(projectSources)
 }
