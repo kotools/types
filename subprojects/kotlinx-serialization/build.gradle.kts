@@ -25,23 +25,13 @@ kotlin.sourceSets {
         languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
     }
     val commonMain: KotlinSourceSet by getting
-    val commonTest: KotlinSourceSet by getting
-    val jsMain: KotlinSourceSet by getting { dependsOn(commonMain) }
-    val jsTest: KotlinSourceSet by getting { dependsOn(commonTest) }
     val jvmAndNativeMain: KotlinSourceSet by creating { dependsOn(commonMain) }
-    val jvmAndNativeTest: KotlinSourceSet by creating { dependsOn(commonTest) }
     val jvmMain: KotlinSourceSet by getting { dependsOn(jvmAndNativeMain) }
-    val jvmTest: KotlinSourceSet by getting { dependsOn(jvmAndNativeTest) }
     val nativeMain: KotlinSourceSet by creating { dependsOn(jvmAndNativeMain) }
-    val nativeTest: KotlinSourceSet by creating { dependsOn(jvmAndNativeTest) }
     val linuxMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val linuxTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
     val macosMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val macosTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
     val macosArm64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val macosArm64Test: KotlinSourceSet by getting { dependsOn(nativeTest) }
     val windowsMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val windowsTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
 }
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
