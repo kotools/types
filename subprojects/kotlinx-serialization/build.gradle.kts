@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
@@ -73,6 +74,13 @@ dependencies {
 }
 
 // ----------------------------------- Tasks -----------------------------------
+
+tasks.withType<AbstractDokkaLeafTask>().configureEach {
+    dokkaSourceSets.configureEach {
+        val url = "https://kotlinlang.org/api/kotlinx.serialization/"
+        externalDocumentationLink(url)
+    }
+}
 
 tasks.compileTestDevelopmentExecutableKotlinJs.configure {
     dependsOn += tasks.compileTestKotlinJs
