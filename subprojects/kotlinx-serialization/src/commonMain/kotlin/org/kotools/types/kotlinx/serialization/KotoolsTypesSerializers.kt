@@ -4,6 +4,7 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -24,6 +25,18 @@ public object KotoolsTypesSerializers {
      */
     public val all: SerializersModule
         get() = SerializersModule { include(zero) }
+
+    /**
+     * Returns the module for serializing the [EmailAddress] type.
+     *
+     * Here's an example of calling this property from Kotlin code:
+     *
+     * SAMPLE: KotoolsTypesSerializersKotlinSample.emailAddress.md
+     */
+    public val emailAddress: SerializersModule
+        get() = SerializersModule {
+            contextual(EmailAddressAsStringSerializer)
+        }
 
     /**
      * Returns the module for serializing the [Zero] type.

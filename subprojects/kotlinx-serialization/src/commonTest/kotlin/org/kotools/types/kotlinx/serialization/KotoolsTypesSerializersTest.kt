@@ -4,6 +4,7 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,6 +15,12 @@ class KotoolsTypesSerializersTest {
     fun all_module_should_contain_all_serializers() {
         val module: SerializersModule = KotoolsTypesSerializers.all
         module.serializer<Zero>()
+    }
+
+    @Test
+    fun emailAddress_should_contain_serializer_for_EmailAddress_type() {
+        val module: SerializersModule = KotoolsTypesSerializers.emailAddress
+        module.serializer<EmailAddress>()
     }
 
     @Test

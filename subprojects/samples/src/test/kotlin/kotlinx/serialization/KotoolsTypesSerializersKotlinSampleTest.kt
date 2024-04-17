@@ -19,6 +19,16 @@ class KotoolsTypesSerializersKotlinSampleTest {
     }
 
     @Test
+    fun `emailAddress should pass`() {
+        val actual: List<String> = SystemLambda
+            .tapSystemOut(KotoolsTypesSerializersKotlinSample::emailAddress)
+            .trim()
+            .lines()
+        val expected: List<String> = listOf("\"contact@kotools.org\"", "true")
+        assertContentEquals(expected, actual)
+    }
+
+    @Test
     fun `zero should pass`() {
         val actual: List<String> = SystemLambda
             .tapSystemOut(KotoolsTypesSerializersKotlinSample::zero)
