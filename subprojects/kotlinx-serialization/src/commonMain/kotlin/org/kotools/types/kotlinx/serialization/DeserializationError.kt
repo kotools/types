@@ -12,9 +12,11 @@ internal class DeserializationError(
     @OptIn(ExperimentalSerializationApi::class)
     override val message: String
         get() {
-            val serialName: String = this.deserializer.descriptor.serialName
-            val errorMessage = "Unable to deserialize \"$serialName\" from " +
-                    "\"${decodedValue}\"."
+            val formattedSerialName: String =
+                super.format(this.deserializer.descriptor.serialName)
+            val formattedDecodedValue: String = super.format(this.decodedValue)
+            val errorMessage = "Unable to deserialize $formattedSerialName " +
+                    "from $formattedDecodedValue."
             return this.reason?.let { "$errorMessage ${it.message}" }
                 ?: errorMessage
         }

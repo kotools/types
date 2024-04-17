@@ -7,6 +7,9 @@ import kotools.types.internal.InternalKotoolsTypesApi
 public interface Error {
     /** The message of this error. */
     public val message: String
+
+    /** Formats the string representation of the specified [value]. */
+    public fun format(value: Any): String = "\"$value\""
 }
 
 // ------------------------------- EmailAddress --------------------------------
@@ -21,8 +24,12 @@ public class InvalidEmailAddressError(
     private val pattern: Any
 ) : Error {
     override val message: String
-        get() = "\"$value\" is an invalid email address. " +
-                "It should match the following pattern: \"$pattern\"."
+        get() {
+            val formattedValue: String = super.format(this.value)
+            val formattedPattern: String = super.format(this.pattern)
+            return "$formattedValue is an invalid email address. It should " +
+                    "match the following pattern: $formattedPattern."
+        }
 }
 
 /**
@@ -35,6 +42,12 @@ public class InvalidEmailAddressPatternError(
     private val validationPattern: Any
 ) : Error {
     override val message: String
-        get() = "\"$pattern\" is invalid for validating email addresses. " +
-                "It should match the following pattern: \"$validationPattern\"."
+        get() {
+            val formattedPattern: String = super.format(this.pattern)
+            val formattedValidationPattern: String =
+                super.format(this.validationPattern)
+            return "$formattedPattern is invalid for validating email " +
+                    "addresses. It should match the following pattern: " +
+                    "$formattedValidationPattern."
+        }
 }
