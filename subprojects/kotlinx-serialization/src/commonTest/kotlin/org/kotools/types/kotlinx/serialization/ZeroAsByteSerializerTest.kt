@@ -66,7 +66,7 @@ class ZeroAsByteSerializerTest {
         }
         val actual: String? = exception.message
         val expected: String =
-            ZeroAsByteSerializer.deserializationErrorMessage(number)
+            DeserializationError(deserializer, decodedValue = number).message
         assertEquals(expected, actual)
     }
 }
