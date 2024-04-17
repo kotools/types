@@ -13,8 +13,9 @@ internal class DeserializationError(
     override val message: String
         get() {
             val serialName: String = this.deserializer.descriptor.serialName
-            val reasonMessage: String = this.reason?.message ?: ""
-            return "Unable to deserialize '$serialName' from ${decodedValue}." +
-                    reasonMessage
+            val errorMessage = "Unable to deserialize \"$serialName\" from " +
+                    "\"${decodedValue}\"."
+            return this.reason?.let { "$errorMessage ${it.message}" }
+                ?: errorMessage
         }
 }

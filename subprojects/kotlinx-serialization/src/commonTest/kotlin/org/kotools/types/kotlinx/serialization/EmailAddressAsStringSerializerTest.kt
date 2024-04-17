@@ -8,6 +8,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
+import org.kotools.types.internal.InvalidEmailAddressError
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -75,6 +76,7 @@ class EmailAddressAsStringSerializerTest {
     fun deserialization_should_fail_with_a_String_having_whitespaces_in_domain_second_label(): Unit =
         this.failingDeserialization(value = "contact@kotools. or g  ")
 
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     private fun failingDeserialization(value: String) {
         val encoded: String = Json.encodeToString(value)
         val deserializer = EmailAddressAsStringSerializer
@@ -82,8 +84,12 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString(deserializer, encoded)
         }
         val actual: String? = exception.message
-        val expected: String =
-            DeserializationError(deserializer, decodedValue = value).message
+        val reason = InvalidEmailAddressError(value, EmailAddress.PATTERN)
+        val expected: String = DeserializationError(
+            deserializer,
+            decodedValue = value,
+            reason
+        ).message
         assertEquals(expected, actual)
     }
 }
