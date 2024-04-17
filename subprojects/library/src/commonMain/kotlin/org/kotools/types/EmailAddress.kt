@@ -1,8 +1,6 @@
 package org.kotools.types
 
-import kotlinx.serialization.Serializable
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.EmailAddressAsStringSerializer
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
@@ -18,25 +16,9 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
  * You can use the [EmailAddress.Companion.fromString] or the
  * [EmailAddress.Companion.fromStringOrNull] functions for creating an instance
  * of this type.
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Serialization and deserialization</b>
- * </summary>
- *
- * The [serialization and deserialization processes](https://kotlinlang.org/docs/serialization.html)
- * of this type behave like for the [String] type.
- *
- * Here's an example of Kotlin code that encodes and decodes this type using the
- * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
- *
- * SAMPLE: EmailAddressKotlinSample.serialization.md
- * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-@Serializable(with = EmailAddressAsStringSerializer::class)
 public class EmailAddress private constructor(private val value: String) {
     // -------------------- Structural equality operations ---------------------
 

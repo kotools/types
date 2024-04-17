@@ -1,20 +1,9 @@
 package org.kotools.types
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object EmailAddressKotlinSample {
-    fun serialization() {
-        val address: EmailAddress =
-            EmailAddress.fromString("contact@kotools.org") // TABS: 1
-        val encoded: String = Json.encodeToString(address)
-        println(encoded) // "contact@kotools.org"
-        val decoded: EmailAddress = Json.decodeFromString(encoded)
-        println(decoded == address) // true
-    } // END
-
     @Suppress("FunctionName")
     fun equals_override() {
         val value: Any = "contact@kotools.org"

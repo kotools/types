@@ -1,33 +1,7 @@
 package org.kotools.types.internal
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
-
-@OptIn(ExperimentalKotoolsTypesApi::class)
-internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
-    override val descriptor: SerialDescriptor by lazy {
-        val serialName: String = qualifiedNameOf<EmailAddress>()
-        PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
-    }
-
-    override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
-        encoder.encodeString("$value")
-
-    override fun deserialize(decoder: Decoder): EmailAddress {
-        val value: String = decoder.decodeString()
-        val address: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        if (null != address) return address
-        val error = InvalidEmailAddress(value)
-        throw SerializationException("$error")
-    }
-}
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal class InvalidEmailAddress(

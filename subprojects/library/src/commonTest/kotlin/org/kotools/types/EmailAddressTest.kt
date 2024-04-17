@@ -1,16 +1,8 @@
 package org.kotools.types
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.serializer
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
-import org.kotools.types.internal.qualifiedNameOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -273,95 +265,5 @@ class EmailAddressCompanionTest {
         val actual: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
         assertNull(actual)
-    }
-}
-
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class EmailAddressAsStringSerializerTest {
-    @OptIn(ExperimentalSerializationApi::class)
-    @Test
-    fun descriptor_should_be_valid() {
-        val actual: SerialDescriptor = serializer<EmailAddress>().descriptor
-        val expectedSerialName: String = qualifiedNameOf<EmailAddress>()
-        assertEquals(expectedSerialName, actual.serialName)
-        assertEquals(expected = PrimitiveKind.STRING, actual.kind)
-    }
-
-    @Test
-    fun serialization_should_behave_like_for_the_String_type() {
-        val value: String = Values.VALID
-        val address: EmailAddress = EmailAddress.fromString(value)
-        val actual: String = Json.encodeToString(address)
-        val expected: String = Json.encodeToString(value)
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_pass_from_a_valid_String() {
-        val value: String = Values.VALID
-        val encoded: String = Json.encodeToString(value)
-        val actual: EmailAddress = Json.decodeFromString(encoded)
-        val expected: EmailAddress = EmailAddress.fromString(value)
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_missing_an_at_sign() {
-        val value: String = Values.MISSING_AT_SIGN
-        val encoded: String = Json.encodeToString(value)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_missing_a_dot_in_domain() {
-        val value: String = Values.MISSING_DOMAIN_DOT
-        val encoded: String = Json.encodeToString(value)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_having_whitespaces_in_local_part() {
-        val value: String = Values.WHITESPACES_IN_LOCAL_PART
-        val encoded: String = Json.encodeToString(value)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_having_whitespaces_in_domain_first_label() {
-        val value: String = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        val encoded: String = Json.encodeToString(value)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun deserialization_should_fail_from_a_String_having_whitespaces_in_domain_second_label() {
-        val value: String = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-        val encoded: String = Json.encodeToString(value)
-        val exception: SerializationException = assertFailsWith {
-            Json.decodeFromString<EmailAddress>(encoded)
-        }
-        val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
-        assertEquals(expected, actual)
     }
 }
