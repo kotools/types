@@ -10,7 +10,6 @@ import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import kotlin.random.Random
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -45,7 +44,6 @@ class ZeroAsByteSerializerTest {
         assertEquals(expected, actual)
     }
 
-    @Ignore // Needs `Zero.equals(Any?)` override to work.
     @Test
     fun deserialization_should_pass_with_the_zero_number() {
         val zeroAsByte: Byte = 0.toByte()
