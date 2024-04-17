@@ -1,8 +1,8 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.InvalidEmailAddress
-import org.kotools.types.internal.InvalidEmailAddressPattern
+import org.kotools.types.internal.InvalidEmailAddressError
+import org.kotools.types.internal.InvalidEmailAddressPatternError
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -116,7 +116,8 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
+        val expected: String =
+            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
         assertEquals(expected, actual)
     }
 
@@ -127,7 +128,8 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
+        val expected: String =
+            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
         assertEquals(expected, actual)
     }
 
@@ -138,7 +140,8 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
+        val expected: String =
+            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
         assertEquals(expected, actual)
     }
 
@@ -149,7 +152,8 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
+        val expected: String =
+            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
         assertEquals(expected, actual)
     }
 
@@ -160,7 +164,8 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value)}"
+        val expected: String =
+            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
         assertEquals(expected, actual)
     }
 
@@ -182,7 +187,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddress(value, pattern)}"
+        val expected: String = InvalidEmailAddressError(value, pattern).message
         assertEquals(expected, actual)
     }
 
@@ -194,7 +199,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected = "${InvalidEmailAddressPattern(pattern)}"
+        val expected: String = InvalidEmailAddressPatternError(
+            pattern,
+            validationPattern = EmailAddress.PATTERN
+        ).message
         assertEquals(expected, actual)
     }
 
