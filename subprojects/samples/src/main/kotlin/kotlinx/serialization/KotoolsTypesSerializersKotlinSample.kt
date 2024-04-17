@@ -13,7 +13,7 @@ internal object KotoolsTypesSerializersKotlinSample {
         val encoded: String = format.encodeToString(zero)
         println(encoded) // 0
         val decoded: Zero = format.decodeFromString(encoded)
-        println(zero.toByte() == decoded.toByte()) // true
+        println(zero == decoded) // true
     } // END
 
     fun zero() {
@@ -22,7 +22,7 @@ internal object KotoolsTypesSerializersKotlinSample {
         val encoded: String = format.encodeToString(zero)
         println(encoded) // 0
         val decoded: Zero = format.decodeFromString(encoded)
-        println(zero.toByte() == decoded.toByte()) // true
+        println(zero == decoded) // true
     } // END
 
     @Suppress("FunctionName")
