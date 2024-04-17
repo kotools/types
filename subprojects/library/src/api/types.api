@@ -462,6 +462,8 @@ public final class org/kotools/types/EmailAddress$Companion {
 
 public final class org/kotools/types/Zero {
 	public fun <init> ()V
+	public final fun equals (Ljava/lang/Object;)Z
+	public final fun hashCode ()I
 	public final fun toByte ()B
 	public final fun toString ()Ljava/lang/String;
 }

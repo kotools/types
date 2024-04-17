@@ -4,6 +4,20 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroKotlinSample {
+    fun equalsOverride() {
+        val first = Zero()
+        val second = Zero()
+        val result: Boolean = first == second // or first.equals(second)
+        println(result) // true
+    } // END
+
+    fun hashCodeOverride() {
+        val first = Zero()
+        val second = Zero()
+        val result: Boolean = first.hashCode() == second.hashCode()
+        println(result) // true
+    } // END
+
     fun toByte() {
         val number: Byte = Zero()
             .toByte() // TABS: 1

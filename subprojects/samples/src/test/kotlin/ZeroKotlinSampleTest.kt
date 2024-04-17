@@ -4,6 +4,14 @@ import kotlin.test.Test
 
 class ZeroKotlinSampleTest {
     @Test
+    fun `equals(nullable Any) should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::equalsOverride)
+
+    @Test
+    fun `hashCode() should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::hashCodeOverride)
+
+    @Test
     fun `toByte() should pass`() {
         val expected = "0"
         assertPrints(expected, ZeroKotlinSample::toByte)
