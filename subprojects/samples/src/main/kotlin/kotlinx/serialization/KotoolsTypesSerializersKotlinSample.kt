@@ -9,18 +9,20 @@ import org.kotools.types.Zero
 internal object KotoolsTypesSerializersKotlinSample {
     fun all() {
         val format = Json { serializersModule = KotoolsTypesSerializers.all }
-        val encoded: String = format.encodeToString(Zero)
+        val zero = Zero()
+        val encoded: String = format.encodeToString(zero)
         println(encoded) // 0
         val decoded: Zero = format.decodeFromString(encoded)
-        println(Zero === decoded) // true
+        println(zero.toByte() == decoded.toByte()) // true
     } // END
 
     fun zero() {
         val format = Json { serializersModule = KotoolsTypesSerializers.zero }
-        val encoded: String = format.encodeToString(Zero)
+        val zero = Zero()
+        val encoded: String = format.encodeToString(zero)
         println(encoded) // 0
         val decoded: Zero = format.decodeFromString(encoded)
-        println(Zero === decoded) // true
+        println(zero.toByte() == decoded.toByte()) // true
     } // END
 
     @Suppress("FunctionName")

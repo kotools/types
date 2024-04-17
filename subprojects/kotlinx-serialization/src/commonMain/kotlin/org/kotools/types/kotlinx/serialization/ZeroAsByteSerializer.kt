@@ -26,8 +26,9 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
 
     override fun deserialize(decoder: Decoder): Zero {
         val decodedValue: Byte = decoder.decodeByte()
-        val zeroAsByte: Byte = Zero.toByte()
-        if (decodedValue == zeroAsByte) return Zero
+        val zero = Zero()
+        val zeroAsByte: Byte = zero.toByte()
+        if (decodedValue == zeroAsByte) return zero
         val message: String = this.deserializationErrorMessage(decodedValue)
         throw SerializationException(message)
     }

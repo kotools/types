@@ -4,11 +4,15 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 
-/** Represents the [zero](https://en.wikipedia.org/wiki/0) number. */
+/**
+ * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
+ *
+ * @constructor Creates an instance of [Zero].
+ */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public object Zero {
-    private const val VALUE: Byte = 0
+public class Zero {
+    private val valueAsByte: Byte = 0
 
     /**
      * Returns this number as [Byte].
@@ -35,7 +39,7 @@ public object Zero {
      * SAMPLE: ZeroJavaSample.toByte.md
      * </details>
      */
-    public fun toByte(): Byte = this.VALUE
+    public fun toByte(): Byte = this.valueAsByte
 
     /**
      * Returns the string representation of this number.
@@ -63,5 +67,5 @@ public object Zero {
      * </details>
      */
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = VALUE.toString()
+    final override fun toString(): String = this.valueAsByte.toString()
 }
