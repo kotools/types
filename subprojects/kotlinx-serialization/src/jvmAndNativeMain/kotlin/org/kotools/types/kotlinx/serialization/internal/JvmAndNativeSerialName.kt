@@ -1,4 +1,4 @@
-package org.kotools.types.kotlinx.serialization
+package org.kotools.types.kotlinx.serialization.internal
 
 import kotlin.reflect.KClass
 

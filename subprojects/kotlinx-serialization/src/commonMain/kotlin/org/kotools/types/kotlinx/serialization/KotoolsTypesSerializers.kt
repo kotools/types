@@ -8,6 +8,8 @@ import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
 
 /**
  * Contains modules for serializing the types provided by Kotools Types using

@@ -7,6 +7,8 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
+import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertSame

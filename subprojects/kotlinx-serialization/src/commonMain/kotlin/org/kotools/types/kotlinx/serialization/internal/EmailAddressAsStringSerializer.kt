@@ -1,4 +1,4 @@
-package org.kotools.types.kotlinx.serialization
+package org.kotools.types.kotlinx.serialization.internal
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
