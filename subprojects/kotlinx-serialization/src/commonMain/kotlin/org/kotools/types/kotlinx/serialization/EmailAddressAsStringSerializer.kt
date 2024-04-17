@@ -1,6 +1,7 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -25,7 +26,7 @@ internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
         val decodedValue: String = decoder.decodeString()
         val address: EmailAddress? = EmailAddress.fromStringOrNull(decodedValue)
         if (address != null) return address
-        DeserializationError(deserializer = this, decodedValue)
-            .fail()
+        val error = DeserializationError(deserializer = this, decodedValue)
+        throw SerializationException(error.message)
     }
 }

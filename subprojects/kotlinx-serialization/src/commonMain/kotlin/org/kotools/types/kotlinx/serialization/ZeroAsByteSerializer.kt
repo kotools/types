@@ -1,6 +1,7 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -27,7 +28,7 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
         val zero = Zero()
         val zeroAsByte: Byte = zero.toByte()
         if (decodedValue == zeroAsByte) return zero
-        DeserializationError(deserializer = this, decodedValue)
-            .fail()
+        val error = DeserializationError(deserializer = this, decodedValue)
+        throw SerializationException(error.message)
     }
 }
