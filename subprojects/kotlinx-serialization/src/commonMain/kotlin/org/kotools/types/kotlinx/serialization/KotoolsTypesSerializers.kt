@@ -24,7 +24,10 @@ public object KotoolsTypesSerializers {
      * SAMPLE: KotoolsTypesSerializersKotlinSample.all.md
      */
     public val all: SerializersModule
-        get() = SerializersModule { include(zero) }
+        get() = SerializersModule {
+            include(this@KotoolsTypesSerializers.emailAddress)
+            include(this@KotoolsTypesSerializers.zero)
+        }
 
     /**
      * Returns the module for serializing the [EmailAddress] type.
