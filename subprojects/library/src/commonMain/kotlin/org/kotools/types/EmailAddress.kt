@@ -1,11 +1,11 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidEmailAddressError
 import org.kotools.types.internal.InvalidEmailAddressPatternError
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.hashCodeOf
 import kotlin.jvm.JvmStatic
 
 private const val FINAL_WARNING: String = "RedundantModalityModifier"
@@ -79,7 +79,7 @@ public class EmailAddress private constructor(private val value: String) {
      * </details>
      */
     @Suppress(FINAL_WARNING)
-    final override fun hashCode(): Int = hashCodeOf(value)
+    final override fun hashCode(): Int = hashCodeOf(this.value)
 
     // ------------------------------ Converters -------------------------------
 
