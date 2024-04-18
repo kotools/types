@@ -34,7 +34,7 @@ env:
 jobs:
   # --------------------------------- Stage 1 ----------------------------------
   gradle-wrapper-validation:
-    name: Gradle checks
+    name: Gradle wrapper validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
