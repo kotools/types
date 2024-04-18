@@ -1,6 +1,17 @@
 package org.kotools.types;
 
 class EmailAddressJavaSample {
+    void constructorString() {
+        boolean isSuccess;
+        try {
+            new EmailAddress("contact@kotools.org"); // TABS: 1
+            isSuccess = true; // TABS: 1
+        } catch (IllegalArgumentException exception) {
+            isSuccess = false; // TABS: 1
+        }
+        System.out.println(isSuccess); // true
+    } // END
+
     void equals_override() {
         final Object value = "contact@kotools.org";
         final EmailAddress first = EmailAddress.fromString(value);

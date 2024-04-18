@@ -16,10 +16,43 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
  * You can use the [EmailAddress.Companion.fromString] or the
  * [EmailAddress.Companion.fromStringOrNull] functions for creating an instance
  * of this type.
+ *
+ * @constructor Creates an instance of [EmailAddress] with the specified value,
+ * or throws an [IllegalArgumentException] if the value doesn't match the
+ * [default pattern][EmailAddress.Companion.PATTERN].
+ *
+ * <br>
+ * <details open>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of calling this constructor from Kotlin code:
+ *
+ * SAMPLE: EmailAddressKotlinSample.constructorString.md
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Java</b>
+ * </summary>
+ *
+ * Here's an example of calling this constructor from Java code:
+ *
+ * SAMPLE: EmailAddressJavaSample.constructorString.md
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class EmailAddress private constructor(private val value: String) {
+public class EmailAddress(private val value: String) {
+    init {
+        val regex = Regex(PATTERN)
+        require(this.value matches regex) {
+            InvalidEmailAddress(this.value, PATTERN)
+        }
+    }
+
     // -------------------- Structural equality operations ---------------------
 
     /**

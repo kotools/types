@@ -6,6 +6,11 @@ class EmailAddressJavaSampleTest {
     private final EmailAddressJavaSample sample = new EmailAddressJavaSample();
 
     @Test
+    void constructor_String_should_pass() {
+        Assert.printsTrue(sample::constructorString);
+    }
+
+    @Test
     void equals_override_should_pass() {
         Assert.printsTrue(sample::equals_override);
     }
