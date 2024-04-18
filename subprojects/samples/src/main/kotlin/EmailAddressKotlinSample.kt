@@ -4,16 +4,6 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object EmailAddressKotlinSample {
-    fun constructorString() {
-        val isSuccess: Boolean = try {
-            EmailAddress("contact@kotools.org") // TABS: 1
-            true // TABS: 1
-        } catch (exception: IllegalArgumentException) {
-            false // TABS: 1
-        }
-        println(isSuccess) // true
-    } // END
-
     @Suppress("FunctionName")
     fun equals_override() {
         val value: Any = "contact@kotools.org"

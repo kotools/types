@@ -4,11 +4,6 @@ import kotlin.test.Test
 
 class EmailAddressKotlinSampleTest {
     @Test
-    fun `constructor(String) should pass`() {
-        assertPrintsTrue(EmailAddressKotlinSample::constructorString)
-    }
-
-    @Test
     fun `equals(nullable Any) should pass`(): Unit =
         assertPrintsTrue(EmailAddressKotlinSample::equals_override)
 
