@@ -26,37 +26,37 @@ private object Values {
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressTest {
     @Test
-    fun constructor_should_pass_with_valid_value() {
+    fun constructor_String_should_pass_with_valid_value() {
         val value: String = Values.VALID
         EmailAddress(value)
     }
 
     @Test
-    fun constructor_should_fail_with_a_missing_at_sign_in_value() {
+    fun constructor_String_should_fail_with_a_missing_at_sign_in_value() {
         val value: String = Values.MISSING_AT_SIGN
         this.constructor_String_failingTest(value)
     }
 
     @Test
-    fun constructor_should_fail_with_a_missing_dot_in_domain_of_value() {
+    fun constructor_String_should_fail_with_a_missing_dot_in_domain_of_value() {
         val value: String = Values.MISSING_DOMAIN_DOT
         this.constructor_String_failingTest(value)
     }
 
     @Test
-    fun constructor_should_fail_with_whitespaces_in_local_part_of_value() {
+    fun constructor_String_should_fail_with_whitespaces_in_local_part_of_value() {
         val value: String = Values.WHITESPACES_IN_LOCAL_PART
         this.constructor_String_failingTest(value)
     }
 
     @Test
-    fun constructor_should_fail_with_whitespaces_in_domain_first_label_of_value() {
+    fun constructor_String_should_fail_with_whitespaces_in_domain_first_label_of_value() {
         val value: String = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
         this.constructor_String_failingTest(value)
     }
 
     @Test
-    fun constructor_should_fail_with_whitespaces_in_domain_second_label_of_value() {
+    fun constructor_String_should_fail_with_whitespaces_in_domain_second_label_of_value() {
         val value: String = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
         this.constructor_String_failingTest(value)
     }
