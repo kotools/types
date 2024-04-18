@@ -23,7 +23,7 @@ Just replace the `$version` or the `${kotools.types.version}` variables by the
 in the [changelog](../../CHANGELOG.md).
 
 > [!IMPORTANT]
-> Note that this module doesn't exist for versions prior Kotools Types 4.6.
+> Note that this module doesn't exist for versions prior Kotools Types 4.5.1.
 
 <details open>
 <summary>Gradle - Kotlin DSL</summary>
