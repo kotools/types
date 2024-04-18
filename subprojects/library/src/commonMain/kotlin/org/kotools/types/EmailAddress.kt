@@ -3,8 +3,8 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.InvalidEmailAddressErrorDeprecated
-import org.kotools.types.internal.InvalidEmailAddressPatternErrorDeprecated
+import org.kotools.types.internal.InvalidEmailAddress
+import org.kotools.types.internal.InvalidEmailAddressPattern
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmStatic
 
@@ -233,10 +233,7 @@ public class EmailAddress private constructor(private val value: String) {
             val validationPattern: String = PATTERN
             val regex = Regex(validationPattern)
             require(patternAsString matches regex) {
-                InvalidEmailAddressPatternErrorDeprecated(
-                    pattern,
-                    validationPattern
-                ).message
+                InvalidEmailAddressPattern(patternAsString, validationPattern)
             }
             return fromString(value, patternAsString)
         }
@@ -244,7 +241,7 @@ public class EmailAddress private constructor(private val value: String) {
         private fun fromString(value: Any, pattern: String): EmailAddress {
             val address: EmailAddress? = fromStringOrNull(value, pattern)
             return requireNotNull(address) {
-                InvalidEmailAddressErrorDeprecated(value, pattern).message
+                InvalidEmailAddress("$value", pattern)
             }
         }
 

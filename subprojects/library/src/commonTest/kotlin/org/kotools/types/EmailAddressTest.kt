@@ -1,8 +1,8 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.InvalidEmailAddressErrorDeprecated
-import org.kotools.types.internal.InvalidEmailAddressPatternErrorDeprecated
+import org.kotools.types.internal.InvalidEmailAddress
+import org.kotools.types.internal.InvalidEmailAddressPattern
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -111,71 +111,41 @@ class EmailAddressCompanionTest {
 
     @Test
     fun fromString_Any_should_fail_with_a_missing_at_sign_in_value() {
-        val value: Any = Values.MISSING_AT_SIGN
-        val exception: IllegalArgumentException = assertFailsWith {
-            EmailAddress.fromString(value)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressErrorDeprecated(
-            value,
-            EmailAddress.PATTERN
-        ).message
-        assertEquals(expected, actual)
+        val value: String = Values.MISSING_AT_SIGN
+        this.fromString_Any_failingTest(value)
     }
 
     @Test
     fun fromString_Any_should_fail_with_a_missing_dot_in_domain_of_value() {
-        val value: Any = Values.MISSING_DOMAIN_DOT
-        val exception: IllegalArgumentException = assertFailsWith {
-            EmailAddress.fromString(value)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressErrorDeprecated(
-            value,
-            EmailAddress.PATTERN
-        ).message
-        assertEquals(expected, actual)
+        val value: String = Values.MISSING_DOMAIN_DOT
+        this.fromString_Any_failingTest(value)
     }
 
     @Test
     fun fromString_Any_should_fail_with_whitespaces_in_local_part_of_value() {
-        val value: Any = Values.WHITESPACES_IN_LOCAL_PART
-        val exception: IllegalArgumentException = assertFailsWith {
-            EmailAddress.fromString(value)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressErrorDeprecated(
-            value,
-            EmailAddress.PATTERN
-        ).message
-        assertEquals(expected, actual)
+        val value: String = Values.WHITESPACES_IN_LOCAL_PART
+        this.fromString_Any_failingTest(value)
     }
 
     @Test
     fun fromString_Any_should_fail_with_whitespaces_in_domain_first_label_of_value() {
-        val value: Any = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        val exception: IllegalArgumentException = assertFailsWith {
-            EmailAddress.fromString(value)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressErrorDeprecated(
-            value,
-            EmailAddress.PATTERN
-        ).message
-        assertEquals(expected, actual)
+        val value: String = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
+        this.fromString_Any_failingTest(value)
     }
 
     @Test
     fun fromString_Any_should_fail_with_whitespaces_in_domain_second_label_of_value() {
-        val value: Any = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
+        val value: String = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
+        this.fromString_Any_failingTest(value)
+    }
+
+    private fun fromString_Any_failingTest(value: String) {
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressErrorDeprecated(
-            value,
-            EmailAddress.PATTERN
-        ).message
+        val expected: String = InvalidEmailAddress(value, EmailAddress.PATTERN)
+            .toString()
         assertEquals(expected, actual)
     }
 
@@ -191,14 +161,14 @@ class EmailAddressCompanionTest {
 
     @Test
     fun fromString_Any_Any_should_fail_with_invalid_value() {
-        val value: Any = "first-contact@kotools.org"
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val value = "first-contact@kotools.org"
+        val pattern = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected: String =
-            InvalidEmailAddressErrorDeprecated(value, pattern).message
+        val expected: String = InvalidEmailAddress(value, pattern)
+            .toString()
         assertEquals(expected, actual)
     }
 
@@ -210,10 +180,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressPatternErrorDeprecated(
-            pattern,
+        val expected: String = InvalidEmailAddressPattern(
+            "$pattern",
             validationPattern = EmailAddress.PATTERN
-        ).message
+        ).toString()
         assertEquals(expected, actual)
     }
 
