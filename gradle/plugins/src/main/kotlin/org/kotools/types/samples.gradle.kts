@@ -5,6 +5,7 @@ import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.kotools.types.samples.CheckNoInlinedSamples
+import org.kotools.types.samples.CheckSamplesResolution
 import org.kotools.types.samples.ExtractCodeSamples
 import org.kotools.types.samples.InlineSamples
 import org.kotools.types.samples.SamplesExtension
@@ -46,11 +47,20 @@ tasks.registering(CheckNoInlinedSamples::class) {
     sources = projectSources
 }
 
+private val checkSamplesResolution: TaskProvider<CheckSamplesResolution> by
+tasks.registering(CheckSamplesResolution::class) {
+    description = "Checks that sample references from the main sources " +
+            "target an existing file from the build directory."
+    group = samplesTaskGroup
+    samples = extractSamples.flatMap(ExtractCodeSamples::outputDirectory)
+    sources = projectSources
+}
+
 private val backupMainSources: TaskProvider<Copy> by
 tasks.registering(Copy::class) {
     description = "Copies main sources into the build directory."
     group = samplesTaskGroup
-    dependsOn += checkNoInlinedSamples
+    dependsOn(checkNoInlinedSamples, checkSamplesResolution)
     from(projectSources) { exclude("api", "*Test") }
     into(sourcesBackupDirectory)
 }
