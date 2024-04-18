@@ -12,12 +12,13 @@ import org.gradle.work.DisableCachingByDefault
 import java.io.File
 
 /**
- * Task responsible for checking the existence of KDoc samples.
+ * Task responsible for checking the existence of already inlined samples in
+ * main sources.
  * Fails if the specified [sources] have KDoc samples, indicating the
  * [solutionTaskPath] to run for fixing them.
  */
 @DisableCachingByDefault(because = "Only reading files doesn't worth caching.")
-public abstract class CheckKDoc : DefaultTask() {
+public abstract class CheckNoInlinedSamples : DefaultTask() {
     /** The directory containing the sources to check. */
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.NONE)
