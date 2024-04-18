@@ -7,7 +7,7 @@ import kotools.types.internal.InternalKotoolsTypesApi
  *
  * @constructor Creates an instance of [Error] with the specified [message] and
  * [reason], or throws an [IllegalArgumentException] if the [message] or the
- * [reason] is blank.
+ * [reason] is [blank][String.isBlank].
  */
 @InternalKotoolsTypesApi
 public class Error(
