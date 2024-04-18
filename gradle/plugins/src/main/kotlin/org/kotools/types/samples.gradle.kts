@@ -56,11 +56,18 @@ tasks.registering(CheckSamplesResolution::class) {
     sources = projectSources
 }
 
+private val checkSampleReferences: TaskProvider<Task> by tasks.registering {
+    description = "Checks sample references from the main sources."
+    group = samplesTaskGroup
+    dependsOn(checkNoInlinedSamples, checkSamplesResolution)
+}
+tasks.named("check").configure { dependsOn += checkSampleReferences }
+
 private val backupMainSources: TaskProvider<Copy> by
 tasks.registering(Copy::class) {
     description = "Copies main sources into the build directory."
     group = samplesTaskGroup
-    dependsOn(checkNoInlinedSamples, checkSamplesResolution)
+    dependsOn += checkSampleReferences
     from(projectSources) { exclude("api", "*Test") }
     into(sourcesBackupDirectory)
 }
