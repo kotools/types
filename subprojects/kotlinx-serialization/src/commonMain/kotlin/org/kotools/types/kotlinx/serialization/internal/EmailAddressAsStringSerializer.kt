@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
-import org.kotools.types.internal.InvalidEmailAddressError
+import org.kotools.types.internal.InvalidEmailAddressErrorDeprecated
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
@@ -27,10 +27,15 @@ internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
         val decodedValue: String = decoder.decodeString()
         val address: EmailAddress? = EmailAddress.fromStringOrNull(decodedValue)
         if (address != null) return address
-        val reason =
-            InvalidEmailAddressError(decodedValue, EmailAddress.PATTERN)
-        val error =
-            DeserializationError(deserializer = this, decodedValue, reason)
+        val reason = InvalidEmailAddressErrorDeprecated(
+            decodedValue,
+            EmailAddress.PATTERN
+        )
+        val error = DeserializationErrorDeprecated(
+            deserializer = this,
+            decodedValue,
+            reason
+        )
         throw SerializationException(error.message)
     }
 }

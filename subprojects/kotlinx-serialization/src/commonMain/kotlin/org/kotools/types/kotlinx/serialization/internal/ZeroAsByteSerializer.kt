@@ -28,7 +28,8 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
         val zero = Zero()
         val zeroAsByte: Byte = zero.toByte()
         if (decodedValue == zeroAsByte) return zero
-        val error = DeserializationError(deserializer = this, decodedValue)
+        val error =
+            DeserializationErrorDeprecated(deserializer = this, decodedValue)
         throw SerializationException(error.message)
     }
 }

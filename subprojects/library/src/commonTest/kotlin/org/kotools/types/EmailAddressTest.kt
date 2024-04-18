@@ -1,8 +1,8 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.InvalidEmailAddressError
-import org.kotools.types.internal.InvalidEmailAddressPatternError
+import org.kotools.types.internal.InvalidEmailAddressErrorDeprecated
+import org.kotools.types.internal.InvalidEmailAddressPatternErrorDeprecated
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -116,8 +116,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String =
-            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
+        val expected: String = InvalidEmailAddressErrorDeprecated(
+            value,
+            EmailAddress.PATTERN
+        ).message
         assertEquals(expected, actual)
     }
 
@@ -128,8 +130,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String =
-            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
+        val expected: String = InvalidEmailAddressErrorDeprecated(
+            value,
+            EmailAddress.PATTERN
+        ).message
         assertEquals(expected, actual)
     }
 
@@ -140,8 +144,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String =
-            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
+        val expected: String = InvalidEmailAddressErrorDeprecated(
+            value,
+            EmailAddress.PATTERN
+        ).message
         assertEquals(expected, actual)
     }
 
@@ -152,8 +158,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String =
-            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
+        val expected: String = InvalidEmailAddressErrorDeprecated(
+            value,
+            EmailAddress.PATTERN
+        ).message
         assertEquals(expected, actual)
     }
 
@@ -164,8 +172,10 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String =
-            InvalidEmailAddressError(value, EmailAddress.PATTERN).message
+        val expected: String = InvalidEmailAddressErrorDeprecated(
+            value,
+            EmailAddress.PATTERN
+        ).message
         assertEquals(expected, actual)
     }
 
@@ -187,7 +197,8 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressError(value, pattern).message
+        val expected: String =
+            InvalidEmailAddressErrorDeprecated(value, pattern).message
         assertEquals(expected, actual)
     }
 
@@ -199,7 +210,7 @@ class EmailAddressCompanionTest {
             EmailAddress.fromString(value, pattern)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressPatternError(
+        val expected: String = InvalidEmailAddressPatternErrorDeprecated(
             pattern,
             validationPattern = EmailAddress.PATTERN
         ).message

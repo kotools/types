@@ -4,7 +4,7 @@ import kotools.types.internal.InternalKotoolsTypesApi
 
 /** Classes inheriting from this interface represent an error. */
 @InternalKotoolsTypesApi
-public interface Error {
+public interface ErrorDeprecated {
     /** The message of this error. */
     public val message: String
 
@@ -19,10 +19,10 @@ public interface Error {
  * should match the specified [pattern].
  */
 @InternalKotoolsTypesApi
-public class InvalidEmailAddressError(
+public class InvalidEmailAddressErrorDeprecated(
     private val value: Any,
     private val pattern: Any
-) : Error {
+) : ErrorDeprecated {
     override val message: String
         get() {
             val formattedValue: String = super.format(this.value)
@@ -37,10 +37,10 @@ public class InvalidEmailAddressError(
  * addresses, and should match the [validationPattern].
  */
 @InternalKotoolsTypesApi
-public class InvalidEmailAddressPatternError(
+public class InvalidEmailAddressPatternErrorDeprecated(
     private val pattern: Any,
     private val validationPattern: Any
-) : Error {
+) : ErrorDeprecated {
     override val message: String
         get() {
             val formattedPattern: String = super.format(this.pattern)
