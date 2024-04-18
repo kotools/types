@@ -12,20 +12,26 @@ internal object EmailAddressCompanionKotlinSample {
     @Suppress("FunctionName")
     fun fromString_Any() {
         val value: Any = "contact@kotools.org"
-        val result: Result<EmailAddress> = kotlin.runCatching {
+        val isSuccess: Boolean = try {
             EmailAddress.fromString(value) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
         }
-        println(result.isSuccess) // true
+        println(isSuccess) // true
     } // END
 
     @Suppress("FunctionName")
     fun fromString_Any_Any() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
-        val result: Result<EmailAddress> = kotlin.runCatching {
+        val isSuccess: Boolean = try {
             EmailAddress.fromString(value, pattern) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
         }
-        println(result.isSuccess) // true
+        println(isSuccess) // true
     } // END
 
     @Suppress("FunctionName")
