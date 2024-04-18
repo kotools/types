@@ -26,4 +26,8 @@ class EmailAddressCompanionKotlinSampleTest {
     fun `fromStringOrNull(Any, Any) should pass`(): Unit = assertPrintsTrue(
         EmailAddressCompanionKotlinSample::fromStringOrNull_Any_Any
     )
+
+    @Test
+    fun `orNull(String) should pass`(): Unit =
+        assertPrintsTrue(EmailAddressCompanionKotlinSample::orNull_String)
 }

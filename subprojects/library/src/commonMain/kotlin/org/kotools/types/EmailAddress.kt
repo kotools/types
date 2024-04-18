@@ -42,6 +42,10 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
  *
  * SAMPLE: EmailAddressJavaSample.constructorString.md
  * </details>
+ * <br>
+ *
+ * You can use the [EmailAddress.Companion.orNull] function for returning `null`
+ * instead of throwing an exception in case of invalid value.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -364,6 +368,44 @@ public class EmailAddress(private val value: String) {
             val regex = Regex(pattern)
             return if (valueAsString matches regex) EmailAddress(valueAsString)
             else null
+        }
+
+        /**
+         * Creates an instance of [EmailAddress] with the specified [value], or
+         * returns `null` if the [value] doesn't match the
+         * [default pattern][PATTERN].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: EmailAddressCompanionKotlinSample.orNull_String.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: EmailAddressCompanionJavaSample.orNull_String.md
+         * </details>
+         * <br>
+         *
+         * You can use the constructor of [EmailAddress] for throwing an
+         * exception instead of returning `null` in case of invalid [value].
+         */
+        @JvmStatic
+        public fun orNull(value: String): EmailAddress? = try {
+            EmailAddress(value)
+        } catch (exception: IllegalArgumentException) {
+            null
         }
     }
 }

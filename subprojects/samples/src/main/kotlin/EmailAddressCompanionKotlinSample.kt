@@ -43,4 +43,10 @@ internal object EmailAddressCompanionKotlinSample {
             EmailAddress.fromStringOrNull(value, pattern) // TABS: 1
         println(address != null) // true
     } // END
+
+    @Suppress("FunctionName")
+    fun orNull_String() {
+        val address: EmailAddress? = EmailAddress.orNull("contact@kotools.org")
+        println(address != null) // true
+    } // END
 }

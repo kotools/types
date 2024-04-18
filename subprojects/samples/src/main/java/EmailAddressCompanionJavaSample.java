@@ -42,4 +42,9 @@ class EmailAddressCompanionJavaSample {
                 EmailAddress.fromStringOrNull(value, pattern); // TABS: 1
         System.out.println(address != null); // true
     } // END
+
+    void orNull_String() {
+        final EmailAddress address = EmailAddress.orNull("contact@kotools.org");
+        System.out.println(address != null); // true
+    } // END
 }
