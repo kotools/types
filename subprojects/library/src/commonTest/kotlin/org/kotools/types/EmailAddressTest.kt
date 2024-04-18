@@ -301,46 +301,4 @@ class EmailAddressCompanionTest {
             EmailAddress.fromStringOrNull(value, pattern)
         assertNull(actual)
     }
-
-    @Test
-    fun orNull_String_should_pass_with_a_valid_value() {
-        val value: String = Values.VALID
-        val actual: EmailAddress? = EmailAddress.orNull(value)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun orNull_String_should_fail_with_a_missing_at_sign_in_value() {
-        val value: String = Values.MISSING_AT_SIGN
-        this.orNull_String_failingTest(value)
-    }
-
-    @Test
-    fun orNull_String_should_fail_with_a_missing_dot_in_domain_of_value() {
-        val value: String = Values.MISSING_DOMAIN_DOT
-        this.orNull_String_failingTest(value)
-    }
-
-    @Test
-    fun orNull_String_should_fail_with_whitespaces_in_local_part_of_value() {
-        val value: String = Values.WHITESPACES_IN_LOCAL_PART
-        this.orNull_String_failingTest(value)
-    }
-
-    @Test
-    fun orNull_String_should_fail_with_whitespaces_in_domain_first_label_of_value() {
-        val value: String = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        this.orNull_String_failingTest(value)
-    }
-
-    @Test
-    fun orNull_String_should_fail_with_whitespaces_in_domain_second_label_of_value() {
-        val value: String = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-        this.orNull_String_failingTest(value)
-    }
-
-    private fun orNull_String_failingTest(value: String) {
-        val actual: EmailAddress? = EmailAddress.orNull(value)
-        assertNull(actual)
-    }
 }
