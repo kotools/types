@@ -60,6 +60,8 @@ jobs:
           gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
       - name: Check Gradle plugins
         run: ./gradlew :plugins:check
+      - name: Check sample references
+        run: ./gradlew :types:checkSampleReferences
       - name: Test on Kotlin/JS
         run: ./gradlew :types-kotlinx-serialization:jsTest
       - name: Test on Kotlin/JVM
