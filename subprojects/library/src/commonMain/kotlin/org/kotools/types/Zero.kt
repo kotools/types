@@ -4,6 +4,7 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmStatic
 
 private const val FINAL_WARNING: String = "RedundantModalityModifier"
 
@@ -132,4 +133,41 @@ public class Zero {
      */
     @Suppress(FINAL_WARNING)
     final override fun toString(): String = this.valueAsByte.toString()
+
+    // -------------------------------------------------------------------------
+
+    /** Contains static declarations for the [Zero] type. */
+    public companion object {
+        /**
+         * Creates an instance of [Zero] from the specified [number], or returns
+         * `null` if the [number] is other than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: ZeroCompanionKotlinSample.fromByteOrNull.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: ZeroCompanionJavaSample.fromByteOrNull.md
+         * </details>
+         */
+        @JvmStatic
+        public fun fromByteOrNull(number: Byte): Zero? {
+            val zero = Zero()
+            return if (zero.valueAsByte == number) zero else null
+        }
+    }
 }

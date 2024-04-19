@@ -4,6 +4,8 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class ZeroTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -55,5 +57,26 @@ class ZeroTest {
             .toString()
         val expected = "0"
         assertEquals(expected, actual)
+    }
+}
+
+class ZeroCompanionTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun fromByteOrNull_should_pass_with_a_Byte_that_equals_zero() {
+        val number: Byte = 0
+        val actual: Zero? = Zero.fromByteOrNull(number)
+        assertNotNull(actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun fromByteOrNull_should_fail_with_a_Byte_other_than_zero() {
+        val number: Byte = listOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
+            .random()
+            .random()
+            .toByte()
+        val actual: Zero? = Zero.fromByteOrNull(number)
+        assertNull(actual)
     }
 }
