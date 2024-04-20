@@ -27,7 +27,9 @@ kotlin.sourceSets {
         languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
     }
     val commonTest: KotlinSourceSet by getting
-    val nativeTest: KotlinSourceSet by creating { dependsOn(commonTest) }
+    val jvmAndNativeTest: KotlinSourceSet by creating { dependsOn(commonTest) }
+    val jvmTest: KotlinSourceSet by getting { dependsOn(jvmAndNativeTest) }
+    val nativeTest: KotlinSourceSet by creating { dependsOn(jvmAndNativeTest) }
     val linuxTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
     val macosTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
     val macosArm64Test: KotlinSourceSet by getting { dependsOn(nativeTest) }
