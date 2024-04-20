@@ -2,11 +2,14 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
 import org.kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
+import kotlin.reflect.KClass
 
 private const val FINAL_WARNING: String = "RedundantModalityModifier"
 
@@ -155,6 +158,42 @@ public class EmailAddress private constructor(private val value: String) {
          * </details>
          */
         public const val PATTERN: String = "^\\S+@\\S+\\.\\S+\$"
+
+        /**
+         * Returns the qualified name of the [EmailAddress] type.
+         * Matches the [KClass.qualifiedName] property on the Kotlin/JVM and
+         * the Kotlin Native platforms.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Kotlin code:
+         *
+         * SAMPLE: EmailAddressCompanionKotlinSample.qualifiedName.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Java code:
+         *
+         * SAMPLE: EmailAddressCompanionJavaSample.qualifiedName.md
+         * </details>
+         */
+        @get:JvmName("qualifiedName")
+        @get:JvmStatic
+        public val qualifiedName: String
+            get() {
+                val emailAddressSimpleName: String =
+                    simpleNameOf<EmailAddress>()
+                return "org.kotools.types.$emailAddressSimpleName"
+            }
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
