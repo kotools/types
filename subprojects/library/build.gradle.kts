@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
@@ -20,8 +22,16 @@ documentation {
     packages = layout.projectDirectory.file("packages.md").asFile
 }
 
-kotlin.sourceSets.all {
-    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+kotlin.sourceSets {
+    all {
+        languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+    }
+    val commonTest: KotlinSourceSet by getting
+    val nativeTest: KotlinSourceSet by creating { dependsOn(commonTest) }
+    val linuxTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
+    val macosTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
+    val macosArm64Test: KotlinSourceSet by getting { dependsOn(nativeTest) }
+    val windowsTest: KotlinSourceSet by getting { dependsOn(nativeTest) }
 }
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
