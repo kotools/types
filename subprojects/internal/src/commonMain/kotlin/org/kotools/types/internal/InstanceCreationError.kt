@@ -25,8 +25,8 @@ public class InstanceCreationError(
     override fun toString(): String {
         val message = "Unable to create an instance of " +
                 "'${this.typeQualifiedName}' from '${this.invalidValue}'."
-        val error = Error(message, this.reason)
-        return error.toString()
+        return Error(message, this.reason)
+            .toString()
     }
 
     internal companion object {
