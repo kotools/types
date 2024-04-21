@@ -12,14 +12,6 @@ class EmailAddressCompanionJavaSampleTest {
     }
 
     @Test
-    void qualifiedName_should_pass() {
-        final EmailAddressCompanionJavaSample sample =
-                new EmailAddressCompanionJavaSample();
-        final String expected = EmailAddress.class.getCanonicalName();
-        Assert.prints(expected, sample::qualifiedName);
-    }
-
-    @Test
     void fromString_Any_should_pass() {
         final EmailAddressCompanionJavaSample sample =
                 new EmailAddressCompanionJavaSample();

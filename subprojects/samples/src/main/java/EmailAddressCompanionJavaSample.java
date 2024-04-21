@@ -6,11 +6,6 @@ class EmailAddressCompanionJavaSample {
         System.out.println(pattern); // ^\S+@\S+\.\S+$
     } // END
 
-    void qualifiedName() {
-        final String qualifiedName = EmailAddress.qualifiedName();
-        System.out.println(qualifiedName); // org.kotools.types.EmailAddress
-    } // END
-
     void fromString_Any() {
         final Object value = "contact@kotools.org";
         try {

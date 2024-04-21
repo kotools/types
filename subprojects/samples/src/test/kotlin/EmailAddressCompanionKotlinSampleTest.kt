@@ -1,7 +1,5 @@
 package org.kotools.types
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.simpleNameOf
 import kotlin.test.Test
 
 class EmailAddressCompanionKotlinSampleTest {
@@ -9,16 +7,6 @@ class EmailAddressCompanionKotlinSampleTest {
     fun patternSample_should_pass() {
         val expected = "^\\S+@\\S+\\.\\S+\$"
         assertPrints(expected, EmailAddressCompanionKotlinSample::patternSample)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun `qualifiedName should pass`() {
-        val expected: String = checkNotNull(EmailAddress::class.qualifiedName) {
-            val type: String = simpleNameOf<EmailAddress>()
-            "Getting qualified name of '$type' shouldn't return null."
-        }
-        assertPrints(expected, EmailAddressCompanionKotlinSample::qualifiedName)
     }
 
     @Test

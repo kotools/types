@@ -9,11 +9,6 @@ internal object EmailAddressCompanionKotlinSample {
         println(pattern) // ^\S+@\S+\.\S+$
     } // END
 
-    fun qualifiedName() {
-        val qualifiedName: String = EmailAddress.qualifiedName
-        println(qualifiedName) // org.kotools.types.EmailAddress
-    } // END
-
     @Suppress("FunctionName")
     fun fromString_Any() {
         val value: Any = "contact@kotools.org"

@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
 import kotlin.test.Test
@@ -98,14 +97,6 @@ class EmailAddressCompanionCommonTest {
     fun pattern_should_pass() {
         val actual: String = EmailAddress.PATTERN
         val expected = "^\\S+@\\S+\\.\\S+\$"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun qualifiedName_should_pass() {
-        val actual: String = EmailAddress.qualifiedName
-        val emailAddressSimpleName: String = simpleNameOf<EmailAddress>()
-        val expected = "org.kotools.types.$emailAddressSimpleName"
         assertEquals(expected, actual)
     }
 
