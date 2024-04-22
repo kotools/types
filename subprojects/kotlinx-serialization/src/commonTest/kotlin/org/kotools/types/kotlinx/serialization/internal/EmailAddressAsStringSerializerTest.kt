@@ -84,10 +84,8 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString(deserializer, encoded)
         }
         val actual: String? = exception.message
-        val reason = InvalidEmailAddress(value, EmailAddress.PATTERN)
-        val error =
-            DeserializationError(deserializer, decodedValue = value, "$reason")
-        val expected: String = error.toString()
+        val expected: String = InvalidEmailAddress(value, EmailAddress.PATTERN)
+            .toString()
         assertEquals(expected, actual)
     }
 }
