@@ -3,8 +3,8 @@ package org.kotools.types;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 import org.junit.jupiter.api.Assertions;
 
-class Assert {
-    static void prints(final String expected, final Runnable block) {
+public class Assert {
+    public static void prints(final String expected, final Runnable block) {
         final String actual = Assertions.assertDoesNotThrow(
                 () -> SystemLambda.tapSystemOut(block::run)
         ).trim();

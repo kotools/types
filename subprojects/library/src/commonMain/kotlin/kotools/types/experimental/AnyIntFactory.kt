@@ -15,20 +15,28 @@ import kotlin.jvm.JvmName
 /**
  * Creates an instance of [AnyInt] with the specified [value].
  *
+ * <br>
+ * <details open>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
- * ```kotlin
- * val number = AnyInt(1)
- * println(number) // 1
- * ```
+ * SAMPLE: AnyIntFactoryKotlinSample.constructorLikeInt.md
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Java</b>
+ * </summary>
  *
  * The Java function generated from this one is `AnyIntFactory.create`.
  * Here's an example of calling it from Java code:
  *
- * ```java
- * AnyInt number = AnyIntFactory.create(1);
- * System.out.println(number); // 1
- * ```
+ * SAMPLE: AnyIntFactoryJavaSample.constructorLikeInt.md
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)

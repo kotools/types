@@ -64,6 +64,9 @@ NotBlankString.create(null) // compilation error
 NotBlankString.createOrNull(null) // compilation error
 ```
 
+- The documentation of the `AnyInt(Int)` **experimental** constructor-like
+  function now uses collapsing sections for splitting Kotlin and Java samples.
+
 ### 🗑️ Deprecated
 
 - The following annotations are now **hidden** from sources ([#334]):
