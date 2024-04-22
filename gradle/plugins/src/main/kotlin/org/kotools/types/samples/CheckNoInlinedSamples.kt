@@ -43,8 +43,8 @@ public abstract class CheckNoInlinedSamples : DefaultTask() {
             lines.any { tokens.any(it::endsWith) }
         }
         if (!hasSample) return
-        val errorMessage =
-            "The '${file.name}' file shouldn't have inlined KDoc samples!"
+        val errorMessage = "The following file shouldn't have inlined KDoc " +
+                "samples: ${file.path}."
         val solution: String = this.solutionTaskPath.get()
         val solutionMessage =
             "Fix it by running the './gradlew $solution' command."
