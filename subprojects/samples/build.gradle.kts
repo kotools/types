@@ -25,7 +25,6 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    javaPackagePrefix = "org.kotools.types"
     compilerOptions {
         allWarningsAsErrors.set(true)
         jvmTarget.set(JvmTarget.JVM_17)
