@@ -14,12 +14,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * ```kotlin
- * val number: NegativeInt = (-1).toNegativeInt()
- *     .getOrThrow()
- * val result: PositiveInt = -number // or number.unaryMinus()
- * println(result) // 1
- * ```
+ * SAMPLE: NegativeIntKotlinSample.unaryMinusOperator.md
  *
  * Please note that this function is not available yet for Java users.
  */
