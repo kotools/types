@@ -65,7 +65,8 @@ NotBlankString.createOrNull(null) // compilation error
 ```
 
 - The documentation of the `AnyInt(Int)` **experimental** constructor-like
-  function now uses collapsing sections for splitting Kotlin and Java samples.
+  function now uses collapsing sections for splitting Kotlin and Java samples
+  ([8eb80448]).
 
 ### 🗑️ Deprecated
 
@@ -99,6 +100,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 [#627]: https://github.com/kotools/types/pull/627
 [#635]: https://github.com/kotools/types/issues/635
 [#644]: https://github.com/kotools/types/issues/644
+[8eb80448]: https://github.com/kotools/types/commit/8eb804489141083d830d23c5f294d4c963db9a6f
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 
 ## 🔖 Releases
