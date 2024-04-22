@@ -3,6 +3,7 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -61,6 +62,28 @@ class ZeroTest {
 }
 
 class ZeroCompanionTest {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun fromByte_should_pass_with_a_Byte_that_equals_zero() {
+        val number: Byte = 0
+        Zero.fromByte(number)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun fromByte_should_fail_with_a_Byte_other_than_zero() {
+        val number: Byte = listOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
+            .random()
+            .random()
+            .toByte()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.fromByte(number)
+        }
+        val actual: String? = exception.message
+        val expected = "'$number' shouldn't be other than zero."
+        assertEquals(expected, actual)
+    }
+
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun fromByteOrNull_should_pass_with_a_Byte_that_equals_zero() {
