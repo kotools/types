@@ -65,10 +65,7 @@ class ZeroAsByteSerializerTest {
             Json.decodeFromString(deserializer, encoded)
         }
         val actual: String? = exception.message
-        val reason = "It should be equal to zero."
-        val error =
-            DeserializationError(deserializer, decodedValue = number, reason)
-        val expected: String = error.toString()
+        val expected = "'$number' shouldn't be other than zero."
         assertEquals(expected, actual)
     }
 }
