@@ -13,12 +13,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * ```kotlin
- * val number: NonZeroInt = 1.toNonZeroInt()
- *     .getOrThrow()
- * val result: NonZeroInt = -number // or number.unaryMinus()
- * println(result) // -1
- * ```
+ * SAMPLE: NonZeroIntKotlinSample.unaryMinusOperator.md
  *
  * Please note that this function is not available yet for Java users.
  */
