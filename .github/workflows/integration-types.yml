@@ -71,9 +71,9 @@ jobs:
       - name: Test on Kotlin/Native
         run: ./gradlew :types:linuxTest
   macos-checks:
-    name: Checks on macOS
+    name: Checks on macOS 13
     needs: gradle-wrapper-validation
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.2
