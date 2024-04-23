@@ -70,10 +70,10 @@ jobs:
         run: ./gradlew :types-kotlinx-serialization:apiCheck
       - name: Test on Kotlin/Native
         run: ./gradlew :types-kotlinx-serialization:linuxTest
-  macos-checks:
-    name: Checks on macOS
+  macos-12-checks:
+    name: Checks on macOS 12
     needs: gradle-wrapper-validation
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.2

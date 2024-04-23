@@ -70,7 +70,7 @@ jobs:
         run: ./gradlew :types:apiCheck
       - name: Test on Kotlin/Native
         run: ./gradlew :types:linuxTest
-  macos-checks:
+  macos-12-checks:
     name: Checks on macOS 12
     needs: gradle-wrapper-validation
     runs-on: macos-12
