@@ -1,5 +1,5 @@
 plugins {
-    id("org.kotools.types.gradle.plugins.base")
+    id("org.kotools.types.base")
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.dokka)
     id("org.kotools.types.documentation")

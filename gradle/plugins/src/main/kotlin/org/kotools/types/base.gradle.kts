@@ -1,4 +1,4 @@
-package org.kotools.types.gradle.plugins
+package org.kotools.types
 
 plugins { base }
 

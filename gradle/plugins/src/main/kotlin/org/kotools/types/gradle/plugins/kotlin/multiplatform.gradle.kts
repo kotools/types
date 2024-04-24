@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 plugins {
-    id("org.kotools.types.gradle.plugins.base")
+    id("org.kotools.types.base")
     id("org.jetbrains.kotlin.multiplatform")
 }
 
