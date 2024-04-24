@@ -1,5 +1,6 @@
 [versions]
 dokka = "1.8.20"
+junit-jupiter = "5.8.2"
 kotlin = "1.8.22"
 kotlinx-binary-compatibility-validator = "0.14.0"
 kotlinx-serialization = "1.5.1"
@@ -43,7 +44,7 @@ version.ref = "dokka"
 [libraries.junit-jupiter]
 group = "org.junit.jupiter"
 name = "junit-jupiter"
-version = "5.8.2"
+version.ref = "junit-jupiter"
 
 [libraries.kotlin-bom]
 group = "org.jetbrains.kotlin"
