@@ -1,4 +1,4 @@
-package org.kotools.types.gradle.plugins
+package org.kotools.types.gradle.plugins.kotlin
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension

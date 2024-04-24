@@ -1,5 +1,5 @@
 plugins {
-    id("org.kotools.types.gradle.plugins.kotlin-multiplatform")
+    id("org.kotools.types.gradle.plugins.kotlin.multiplatform")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dokka)
