@@ -1,9 +1,8 @@
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    id("org.kotools.types.gradle.plugins.kotlin-multiplatform")
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
-    id("kotools.types.multiplatform")
     id("org.kotools.types.documentation")
     id("kotools.types.publication")
 }
@@ -26,8 +25,4 @@ dependencies {
     jvmTestImplementation(libs.kotlin.test.junit5)
 
     jsTestImplementation(libs.kotlin.test.js)
-}
-
-tasks.compileTestDevelopmentExecutableKotlinJs.configure {
-    dependsOn += tasks.compileTestKotlinJs
 }

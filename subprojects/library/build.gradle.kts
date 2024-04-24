@@ -1,11 +1,10 @@
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    id("org.kotools.types.gradle.plugins.kotlin-multiplatform")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
-    id("kotools.types.multiplatform")
     id("org.kotools.types.documentation")
     id("kotools.types.publication")
     id("org.kotools.types.samples")
@@ -20,7 +19,7 @@ documentation {
     packages = layout.projectDirectory.file("packages.md").asFile
 }
 
-kotlin.sourceSets.all {
+kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
@@ -47,10 +46,4 @@ dependencies {
     jvmTestImplementation(libs.kotlin.test.junit5)
 
     jsTestImplementation(libs.kotlin.test.js)
-}
-
-// ----------------------------------- Tasks -----------------------------------
-
-tasks.compileTestDevelopmentExecutableKotlinJs.configure {
-    dependsOn += tasks.compileTestKotlinJs
 }

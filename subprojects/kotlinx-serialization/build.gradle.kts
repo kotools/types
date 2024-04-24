@@ -1,14 +1,11 @@
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
-    id("org.kotools.types.gradle.plugins.base")
-    alias(libs.plugins.kotlin.multiplatform)
+    id("org.kotools.types.gradle.plugins.kotlin-multiplatform")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
-    id("kotools.types.multiplatform")
     id("org.kotools.types.documentation")
     id("kotools.types.publication")
     id("org.kotools.types.samples")
@@ -20,18 +17,8 @@ apiValidation.apiDumpDirectory = "src/api"
 
 documentation.packages = layout.projectDirectory.file("packages.md").asFile
 
-kotlin.sourceSets {
-    all {
-        languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
-    }
-    val commonMain: KotlinSourceSet by getting
-    val jvmAndNativeMain: KotlinSourceSet by creating { dependsOn(commonMain) }
-    val jvmMain: KotlinSourceSet by getting { dependsOn(jvmAndNativeMain) }
-    val nativeMain: KotlinSourceSet by creating { dependsOn(jvmAndNativeMain) }
-    val linuxMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val macosMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val macosArm64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
-    val windowsMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
+kotlin.sourceSets.configureEach {
+    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
 publishing.publications.named<MavenPublication>("kotlinMultiplatform")
@@ -70,8 +57,4 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
         val url = "https://kotlinlang.org/api/kotlinx.serialization/"
         externalDocumentationLink(url)
     }
-}
-
-tasks.compileTestDevelopmentExecutableKotlinJs.configure {
-    dependsOn += tasks.compileTestKotlinJs
 }
