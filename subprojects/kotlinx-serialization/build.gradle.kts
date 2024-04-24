@@ -2,12 +2,12 @@ import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
+    id("org.kotools.types.gradle.plugins.base")
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
-    id("org.kotools.types.base")
     id("kotools.types.multiplatform")
     id("org.kotools.types.documentation")
     id("kotools.types.publication")
