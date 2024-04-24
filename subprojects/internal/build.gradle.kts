@@ -1,5 +1,5 @@
 plugins {
-    id("org.kotools.types.kotlin-multiplatform")
+    id("org.kotools.types.kotlin.multiplatform")
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
