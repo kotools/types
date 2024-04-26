@@ -1,46 +1,71 @@
 name: Delivery
 on:
   workflow_dispatch:
-    inputs:
-      gradleDryRun:
-        description: Run with all Gradle tasks actions disabled.
-        required: false
-        type: boolean
-        default: false
+env:
+  GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+  GIT_USER: ${{ secrets.GIT_USER }}
+  GRADLE_HOME_CACHE_CLEANUP: true
+  GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
+  MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+  MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 jobs:
-  delivery:
-    name: Publish to OSSRH
+  delivery-ubuntu:
+    name: Delivery on Ubuntu
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [ types-internal, types, types-kotlinx-serialization ]
     env:
-      GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-      GIT_USER: ${{ secrets.GIT_USER }}
-      GRADLE_DRY_RUN: ${{ inputs.gradleDryRun == true && '--dry-run' || '' }}
-      GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-      MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+      PROJECT: ${{ matrix.project }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.2
       - name: Setup Java
         uses: actions/setup-java@v4.2.1
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
         with:
-          gradle-home-cache-cleanup: true
-      - name: Publish 'internal' subproject
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Deliver for Kotlin/JVM
+        run: ./gradlew :$PROJECT:publishJvmPublicationToOSSRHRepository
+      - name: Deliver for Kotlin/JS
+        run: ./gradlew :$PROJECT:publishJsPublicationToOSSRHRepository
+      - name: Deliver for Linux x64 with Kotlin Native
+        run: ./gradlew :$PROJECT:publishLinuxPublicationToOSSRHRepository
+      - name: Deliver for MinGW x64 with Kotlin Native
         run: |
-          ./gradlew :types-internal:publishAllPublicationsToOSSRHRepository \
-          $GRADLE_DRY_RUN
-      - name: Publish 'kotlinx-serialization' subproject
+          ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
+      - name: Deliver for Kotlin Multiplatform
         run: |
           ./gradlew \
-          :types-kotlinx-serialization:publishAllPublicationsToOSSRHRepository \
-          $GRADLE_DRY_RUN
-      - name: Publish root project
-        run: |
-          ./gradlew :types:publishAllPublicationsToOSSRHRepository \
-          $GRADLE_DRY_RUN
+          :$PROJECT:publishKotlinMultiplatformPublicationToOSSRHRepository
+  delivery-macos:
+    name: Delivery on macOS 12
+    runs-on: macos-12
+    strategy:
+      matrix:
+        project: [ types-internal, types, types-kotlinx-serialization ]
+    env:
+      PROJECT: ${{ matrix.project }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
+      - name: Deliver for macOS x64 with Kotlin Native
+        run: ./gradlew :$PROJECT:publishMacosPublicationToOSSRHRepository
+      - name: Deliver for macOS arm64 with Kotlin Native
+        run: ./gradlew :$PROJECT:publishMacosArm64PublicationToOSSRHRepository
