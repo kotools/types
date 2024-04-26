@@ -40,7 +40,7 @@ jobs:
         run: ./gradlew :$PROJECT:publishLinuxPublicationToOSSRHRepository
       - name: Deliver for MinGW x64 with Kotlin Native
         run: |
-          ./gradlew :types-internal:publishWindowsPublicationToOSSRHRepository
+          ./gradlew :$PROJECT:publishWindowsPublicationToOSSRHRepository
       - name: Deliver for Kotlin Multiplatform
         run: |
           ./gradlew \
