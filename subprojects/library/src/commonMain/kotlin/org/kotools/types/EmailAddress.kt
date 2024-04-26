@@ -18,7 +18,7 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
  * of this type.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public class EmailAddress private constructor(private val value: String) {
     // -------------------- Structural equality operations ---------------------
 

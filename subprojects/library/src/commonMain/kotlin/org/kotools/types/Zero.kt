@@ -14,7 +14,7 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
  * @constructor Creates an instance of [Zero].
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public class Zero {
     private val valueAsByte: Byte = 0
 

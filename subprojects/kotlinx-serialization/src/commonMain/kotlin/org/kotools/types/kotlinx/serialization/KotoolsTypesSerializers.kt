@@ -16,7 +16,7 @@ import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
  * the kotlinx.serialization library.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public object KotoolsTypesSerializers {
     /**
      * Returns the module for serializing all types.

@@ -87,7 +87,7 @@ private const val TYPE_DEPRECATION_MESSAGE: String = "A better " +
  * </details>
  */
 @Deprecated(TYPE_DEPRECATION_MESSAGE)
-@DeprecatedAsWarningSince(KotoolsTypesVersion.Unreleased)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V4_5_1)
 @ExperimentalKotoolsTypesApi
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(EmailAddressSerializer::class)
@@ -298,7 +298,7 @@ public class EmailAddress internal constructor(private val value: String) {
             ReplaceWith("$NEW_TYPE_QUALIFIED_NAME.fromString(text)"),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_1)
         @Suppress(DEPRECATED_WARNING)
         public fun create(text: String): EmailAddress {
             require(text matches regex) {
@@ -347,7 +347,7 @@ public class EmailAddress internal constructor(private val value: String) {
             ReplaceWith("$NEW_TYPE_QUALIFIED_NAME.fromStringOrNull(text)"),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_1)
         @Suppress(DEPRECATED_WARNING)
         public fun createOrNull(text: String): EmailAddress? =
             if (text matches regex) EmailAddress(text)
