@@ -12,20 +12,21 @@ Issues of the milestone corresponding to this version should be done before reso
 
 ## ✅ Checklist
 
-- [ ] Set Gradle project's version, version of unreleased declarations and add this version in changelog.
-- [ ] Create a release branch for this new version.
-- [ ] Set Gradle project's version with the next version, suffixed by `SNAPSHOT`.
-- [ ] Check the copyright notice in the [license] documentation, then apply the corresponding commit to the release branch if updated.
-- [ ] Deliver packages to the [Maven central] by running the [delivery workflow].
-- [ ] Close valid packages and drop invalid ones on the [Maven central].
-- [ ] Release packages on the [Maven central].
-- [ ] Run the `publishApiReference.sh` script locally from the release branch and update the API reference.
-- [ ] Create a release on the GitHub repository.
-- [ ] Announce this release on [Slack] and on [Twitter].
-- [ ] Close this issue and the corresponding milestone as completed.
+- [ ] Set Gradle project's version to this new one.
+- [ ] Update versioning annotations of unreleased declarations.
+- [ ] Check the copyright notice in the [license] documentation.
+- [ ] Deliver packages to the Maven central by running the [delivery workflow].
+- [ ] Close valid packages and drop invalid ones on the Maven central.
+- [ ] Release packages on the Maven central.
+- [ ] Run the `./gradlew :publishApiReference` command for publishing the new API reference.
+- [ ] Move the unreleased changelog to a GitHub release draft.
+- [ ] Run the `./gradlew :tag` command for creating a Git annotated tag for this version.
+- [ ] Publish the GitHub release on the annotated tag.
+- [ ] Set Gradle project's version to the next snapshot.
+- [ ] Prepare announces for this release on [Reddit], [Slack] and on [Twitter].
 
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
-[maven central]: https://s01.oss.sonatype.org
+[reddit]: https://www.reddit.com/
 [slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
 [twitter]: https://twitter.com/KotoolsContact
