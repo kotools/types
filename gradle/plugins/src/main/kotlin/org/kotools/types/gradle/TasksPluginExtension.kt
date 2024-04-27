@@ -16,9 +16,10 @@ public abstract class TasksPluginExtension(
 
     /** Adds the specified tasks to the development tasks group. */
     public fun list(first: TaskProvider<*>, vararg others: TaskProvider<*>) {
+        val taskGroup: String = this.groupName.get()
         val tasks: List<TaskProvider<*>> = listOf(first) + others
         tasks.forEach {
-            it.configure { group = this@TasksPluginExtension.groupName.get() }
+            it.configure { group = taskGroup }
         }
     }
 }
