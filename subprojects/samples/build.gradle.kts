@@ -1,18 +1,12 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("org.kotools.types.gradle.tasks")
-    kotlin("jvm")
+    id("org.kotools.types.gradle.kotlin.jvm")
 }
 
 devTasks.list(tasks.check)
 
-kotlin {
-    explicitApi()
-    sourceSets.test {
-        languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
-    }
+kotlin.sourceSets.test {
+    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
 dependencies {
@@ -25,11 +19,3 @@ dependencies {
     testImplementation(libs.kotlin.test.junit5)
     testImplementation(libs.system.lambda)
 }
-
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions {
-        allWarningsAsErrors.set(true)
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-tasks.test.configure(Test::useJUnitPlatform)
