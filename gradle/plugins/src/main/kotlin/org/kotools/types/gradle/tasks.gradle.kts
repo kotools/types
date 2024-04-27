@@ -1,7 +1,5 @@
 package org.kotools.types.gradle
 
-plugins { base }
-
 private val extension: TasksPluginExtension = extensions.create("devTasks")
 
 private val devTasks by tasks.registering(TaskReportTask::class) {
