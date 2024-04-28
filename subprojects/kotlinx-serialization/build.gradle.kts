@@ -1,7 +1,8 @@
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 
 plugins {
-    id("org.kotools.types.kotlin.multiplatform")
+    id("org.kotools.types.gradle.tasks")
+    id("org.kotools.types.gradle.kotlin.multiplatform")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.dokka)
     `maven-publish`
@@ -14,6 +15,8 @@ plugins {
 // ----------------------------- Plugin extensions -----------------------------
 
 apiValidation.apiDumpDirectory = "src/api"
+
+devTasks.list(tasks.apiCheck, tasks.apiDump, tasks.checkJs, tasks.checkJvm)
 
 documentation.packages = layout.projectDirectory.file("packages.md").asFile
 
