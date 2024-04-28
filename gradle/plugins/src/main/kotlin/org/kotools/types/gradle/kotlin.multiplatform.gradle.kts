@@ -67,52 +67,15 @@ kotlin.targets.configureEach {
 // -------------------------------- Source sets --------------------------------
 
 kotlin.sourceSets {
-    val jvmAndNativeMain: NamedDomainObjectProvider<KotlinSourceSet>
-            by registering
-    jvmAndNativeMain.configure {
-        val evaluatedCommonMain: KotlinSourceSet = commonMain.get()
-        dependsOn(evaluatedCommonMain)
-    }
-
-    val jvmMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
-    jvmMain.configure {
-        val evaluatedJvmAndNativeMain: KotlinSourceSet = jvmAndNativeMain.get()
-        dependsOn(evaluatedJvmAndNativeMain)
-    }
-
-    val nativeMain: NamedDomainObjectProvider<KotlinSourceSet> by registering
-    nativeMain.configure {
-        val evaluatedJvmAndNativeMain: KotlinSourceSet = jvmAndNativeMain.get()
-        dependsOn(evaluatedJvmAndNativeMain)
-    }
-
-    val linuxMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
-    linuxMain.configure {
-        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
-        dependsOn(evaluatedNativeMain)
-    }
-
-    val macosMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
-    macosMain.configure {
-        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
-        dependsOn(evaluatedNativeMain)
-    }
-
-    val macosArm64Main: NamedDomainObjectProvider<KotlinSourceSet> by existing
-    macosArm64Main.configure {
-        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
-        dependsOn(evaluatedNativeMain)
-    }
-
-    val windowsMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
-    windowsMain.configure {
-        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
-        dependsOn(evaluatedNativeMain)
-    }
-
-    configureEach {
-        languageSettings.optIn("kotlin.RequiresOptIn")
-    }
+    val commonMain: KotlinSourceSet by getting
+    val jvmAndNativeMain: KotlinSourceSet by creating { dependsOn(commonMain) }
+    val jvmMain: KotlinSourceSet by getting { dependsOn(jvmAndNativeMain) }
+    val nativeMain: KotlinSourceSet by creating { dependsOn(jvmAndNativeMain) }
+    val linuxMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
+    val macosMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
+    val macosArm64Main: KotlinSourceSet by getting { dependsOn(nativeMain) }
+    val windowsMain: KotlinSourceSet by getting { dependsOn(nativeMain) }
+    configureEach { languageSettings.optIn("kotlin.RequiresOptIn") }
 }
 
 // ----------------------------------- Tasks -----------------------------------
