@@ -41,6 +41,10 @@ public class DocumentationPlugin : Plugin<Project> {
             val archiveApiReference: TaskProvider<Copy> =
                 tasks.archiveApiReference(extension)
             archiveApiReference.configure { dependsOn += dokkaHtmlMultiModule }
+            /*
+            We should delete the current API reference while keeping the CNAME
+            file before updating it.
+            */
             val setCurrentApiReference: TaskProvider<Copy> =
                 tasks.setCurrentApiReference(extension)
             setCurrentApiReference.configure {
