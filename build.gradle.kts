@@ -1,5 +1,9 @@
+allprojects {
+    group = "org.kotools"
+    repositories.mavenCentral()
+}
+
 plugins {
-    id("org.kotools.types.base")
     alias(libs.plugins.dokka)
     id("org.kotools.types.documentation")
 }
@@ -10,23 +14,18 @@ documentation.moduleName = projectCommercialName
 
 dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
 
-tasks.register("cleanAll").configure {
+private val cleanAll: TaskProvider<Task> by tasks.registering {
     description = "Deletes all build directories."
-    group = "recommended"
+    group = "build"
     allprojects.map { it.tasks.named("clean") }
         .let(this::setDependsOn)
 }
 
-tasks.register<Exec>("tag").configure {
+private val tag: TaskProvider<Exec> by tasks.registering(Exec::class) {
     description = "Creates a Git annotated tag for the current version."
     group = "release"
     val projectVersion = "$version"
     val gitmoji = "\uD83D\uDD16"
     val tagMessage = "$gitmoji $projectCommercialName $projectVersion"
     setCommandLine("git", "tag", projectVersion, "-s", "-m", tagMessage)
-}
-
-allprojects {
-    group = "org.kotools"
-    repositories.mavenCentral()
 }
