@@ -1,11 +1,14 @@
 plugins {
-    id("org.kotools.types.kotlin.multiplatform")
+    id("org.kotools.types.gradle.tasks")
+    id("org.kotools.types.gradle.kotlin.multiplatform")
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
     id("org.kotools.types.documentation")
     id("kotools.types.publication")
 }
+
+devTasks.list(tasks.checkJs, tasks.checkJvm)
 
 documentation.excludeFromParentApiReference = true
 
