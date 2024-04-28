@@ -1,4 +1,4 @@
-# 🔌 Support for [kotlinx.serialization]
+# 🔌 Support of [kotlinx.serialization]
 
 [![Latest version][kotools-types-kotlinx-serialization-badge]][kotools-types]
 [![Embedded Kotlin][kotlin-embedded-badge]][kotlin]
@@ -19,7 +19,7 @@ This module provides support for serializing types from Kotools Types using the
 
 You can add this module to your project by using Gradle or Maven.
 Just replace the `$version` or the `${kotools.types.version}` variables by the
-[latest version](#-support-for-kotlinxserialization) or by another one available
+[latest version](#-support-of-kotlinxserialization) or by another one available
 in the [changelog](../../CHANGELOG.md).
 
 > [!IMPORTANT]
