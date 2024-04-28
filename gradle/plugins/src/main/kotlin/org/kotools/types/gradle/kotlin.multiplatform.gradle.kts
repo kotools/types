@@ -23,9 +23,9 @@ kotlin.js(KotlinJsCompilerType.IR) {
     nodejs { testTask(KotlinJsTest::useMocha) }
     binaries.library()
 }
-plugins.withType<YarnPlugin>().configureEach {
+rootProject.plugins.withType<YarnPlugin>().configureEach {
     val yarn: YarnRootExtension = rootProject.extensions.getByType()
-    yarn.lockFileDirectory = rootDir
+    yarn.lockFileDirectory = rootProject.layout.projectDirectory.asFile
     yarn.resolution("follow-redirects", "1.15.4")
     yarn.resolution("webpack", "5.76.3")
 }
