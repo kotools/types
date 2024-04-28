@@ -14,24 +14,21 @@ import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 plugins { kotlin("multiplatform") }
 
+// ----------------------------- Plugin extensions -----------------------------
+
 private val kotlin: KotlinMultiplatformExtension = extensions.getByType()
 kotlin.explicitApi()
-
-// --------------------------------- Kotlin/JS ---------------------------------
 
 kotlin.js(KotlinJsCompilerType.IR) {
     nodejs { testTask(KotlinJsTest::useMocha) }
     binaries.library()
 }
-
 plugins.withType<YarnPlugin>().configureEach {
     val yarn: YarnRootExtension = rootProject.extensions.getByType()
     yarn.lockFileDirectory = rootDir
     yarn.resolution("follow-redirects", "1.15.4")
     yarn.resolution("webpack", "5.76.3")
 }
-
-// -------------------------------- Kotlin/JVM ---------------------------------
 
 kotlin.jvm {
     compilations.configureEach {
@@ -42,9 +39,7 @@ kotlin.jvm {
     }
 }
 
-// ------------------------------- Kotlin Native -------------------------------
-
-// Supported targets: https://kotlinlang.org/docs/native-target-support.html
+// Kotlin Native: https://kotlinlang.org/docs/native-target-support.html
 // Tier 1
 kotlin.macosX64("macos")
 kotlin.macosArm64()
@@ -52,8 +47,6 @@ kotlin.macosArm64()
 kotlin.linuxX64("linux")
 // Tier 3
 kotlin.mingwX64("windows")
-
-// -------------------------------- All targets --------------------------------
 
 kotlin.targets.configureEach {
     compilations.configureEach {
@@ -63,8 +56,6 @@ kotlin.targets.configureEach {
         }
     }
 }
-
-// -------------------------------- Source sets --------------------------------
 
 kotlin.sourceSets {
     val commonMain: KotlinSourceSet by getting
