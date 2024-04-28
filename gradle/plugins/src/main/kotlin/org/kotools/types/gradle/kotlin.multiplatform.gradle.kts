@@ -1,0 +1,151 @@
+package org.kotools.types.gradle
+
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
+import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+
+plugins { kotlin("multiplatform") }
+
+private val kotlin: KotlinMultiplatformExtension = extensions.getByType()
+kotlin.explicitApi()
+
+// --------------------------------- Kotlin/JS ---------------------------------
+
+kotlin.js(KotlinJsCompilerType.IR) {
+    nodejs { testTask(KotlinJsTest::useMocha) }
+    binaries.library()
+}
+
+plugins.withType<YarnPlugin>().configureEach {
+    val yarn: YarnRootExtension = rootProject.extensions.getByType()
+    yarn.lockFileDirectory = rootDir
+    yarn.resolution("follow-redirects", "1.15.4")
+    yarn.resolution("webpack", "5.76.3")
+}
+
+// -------------------------------- Kotlin/JVM ---------------------------------
+
+kotlin.jvm {
+    compilations.configureEach {
+        compilerOptions.configure { jvmTarget.set(JvmTarget.JVM_17) }
+    }
+    testRuns.configureEach {
+        executionTask.configure(KotlinJvmTest::useJUnitPlatform)
+    }
+}
+
+// ------------------------------- Kotlin Native -------------------------------
+
+// Supported targets: https://kotlinlang.org/docs/native-target-support.html
+// Tier 1
+kotlin.macosX64("macos")
+kotlin.macosArm64()
+// Tier 2
+kotlin.linuxX64("linux")
+// Tier 3
+kotlin.mingwX64("windows")
+
+// -------------------------------- All targets --------------------------------
+
+kotlin.targets.configureEach {
+    compilations.configureEach {
+        compilerOptions.configure {
+            allWarningsAsErrors.set(true)
+            languageVersion.set(KotlinVersion.KOTLIN_1_5)
+        }
+    }
+}
+
+// -------------------------------- Source sets --------------------------------
+
+kotlin.sourceSets {
+    val jvmAndNativeMain: NamedDomainObjectProvider<KotlinSourceSet>
+            by registering
+    jvmAndNativeMain.configure {
+        val evaluatedCommonMain: KotlinSourceSet = commonMain.get()
+        dependsOn(evaluatedCommonMain)
+    }
+
+    val jvmMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
+    jvmMain.configure {
+        val evaluatedJvmAndNativeMain: KotlinSourceSet = jvmAndNativeMain.get()
+        dependsOn(evaluatedJvmAndNativeMain)
+    }
+
+    val nativeMain: NamedDomainObjectProvider<KotlinSourceSet> by registering
+    nativeMain.configure {
+        val evaluatedJvmAndNativeMain: KotlinSourceSet = jvmAndNativeMain.get()
+        dependsOn(evaluatedJvmAndNativeMain)
+    }
+
+    val linuxMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
+    linuxMain.configure {
+        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
+        dependsOn(evaluatedNativeMain)
+    }
+
+    val macosMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
+    macosMain.configure {
+        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
+        dependsOn(evaluatedNativeMain)
+    }
+
+    val macosArm64Main: NamedDomainObjectProvider<KotlinSourceSet> by existing
+    macosArm64Main.configure {
+        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
+        dependsOn(evaluatedNativeMain)
+    }
+
+    val windowsMain: NamedDomainObjectProvider<KotlinSourceSet> by existing
+    windowsMain.configure {
+        val evaluatedNativeMain: KotlinSourceSet = nativeMain.get()
+        dependsOn(evaluatedNativeMain)
+    }
+
+    configureEach {
+        languageSettings.optIn("kotlin.RequiresOptIn")
+    }
+}
+
+// ----------------------------------- Tasks -----------------------------------
+
+private val compileTestKotlinJs: TaskProvider<Kotlin2JsCompile>
+        by tasks.existing(Kotlin2JsCompile::class)
+
+private val compileTestDevelopmentExecutableKotlinJs:
+        TaskProvider<KotlinJsIrLink>
+        by tasks.existing(KotlinJsIrLink::class)
+compileTestDevelopmentExecutableKotlinJs.configure {
+    dependsOn(compileTestKotlinJs)
+}
+
+private val jsNodeTest: TaskProvider<Task> by tasks.existing
+
+private val checkJs: TaskProvider<Task> by tasks.registering
+checkJs.configure {
+    description = "Runs all checks for the Kotlin/JS platform."
+    dependsOn(jsNodeTest)
+}
+
+private val jvmTest: TaskProvider<Task> by tasks.existing
+
+private val checkJvm: TaskProvider<Task> by tasks.registering
+checkJvm.configure {
+    description = "Runs all checks for the Kotlin/JVM platform."
+    dependsOn(jvmTest)
+}
+
+tasks.withType<Jar>().configureEach {
+    fun key(suffix: String): String = "Implementation-$suffix"
+    val name: Pair<String, String> = key("Title") to project.name
+    val version: Pair<String, Any> = key("Version") to project.version
+    manifest.attributes(name, version)
+}
