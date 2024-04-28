@@ -1,5 +1,6 @@
 plugins {
-    id("org.kotools.types.kotlin.multiplatform")
+    id("org.kotools.types.gradle.tasks")
+    id("org.kotools.types.gradle.kotlin.multiplatform")
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dokka)
@@ -13,6 +14,8 @@ plugins {
 // ----------------------------- Plugin extensions -----------------------------
 
 apiValidation.apiDumpDirectory = "src/api"
+
+devTasks.list(tasks.apiCheck, tasks.apiDump, tasks.checkJs, tasks.checkJvm)
 
 documentation {
     moduleName = "Kotools Types"
