@@ -16,97 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-### ✨ Added
-
-- Introduced the `Zero` **experimental** type representing the zero number in
-  the new `org.kotools.types` package ([#644]).
-  This package will contain reimplemented types and those from the
-  `kotools.types.*` packages will be deprecated incrementally.
-- Introduced the `EmailAddress` **experimental** type representing email
-  addresses in the `org.kotools.types` package ([#635]).
-  This new implementation provides new `fromString` and `fromStringOrNull`
-  factory functions accepting a `value` argument of type `Any`.
-  For simplicity purpose, the default pattern used for validating email
-  addresses is `^\S+@\S+\.\S+$`, which allows a wider range of values.
-  But it is also possible to provide a `pattern` argument of type `Any` to these
-  new factory functions for customizing the validation.
-
-```kotlin
-val value: Any = "contact@kotools.org"
-val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
-val result: Result<EmailAddress> = kotlin.runCatching {
-    EmailAddress.fromString(value, pattern)
-}
-println(result.isSuccess) // true
-```
-
-- New `types-kotlinx-serialization` module for supporting serialization of types
-  from the `org.kotools.types` package using the [kotlinx.serialization] library
-  ([#602]). See its [README](subprojects/kotlinx-serialization/README.md)
-  documentation for more details on how to use it.
-
-### ♻️ Changed
-
-- Our [versioning strategy](documentation/versioning-strategy.md) is now based
-  on backward compatibility, focusing on **behavioral**, **source** and
-  **binary** compatibilities.
-- The `create` and the `createOrNull` **experimental** functions of the
-  `NotBlankString.Companion` type now accept a value of type `Any` instead of
-  `Any?` ([#626]).
-
-```kotlin
-// Before
-NotBlankString.create(null) // pass
-NotBlankString.createOrNull(null) // pass
-
-// Now
-NotBlankString.create(null) // compilation error
-NotBlankString.createOrNull(null) // compilation error
-```
-
-- The documentation of the `AnyInt(Int)` **experimental** constructor-like
-  function now uses collapsing sections for splitting Kotlin and Java samples
-  ([8eb80448]).
-
-### 🗑️ Deprecated
-
-- The following annotations are now **hidden** from sources ([#334]):
-  `ExperimentalCollectionApi`, `ExperimentalNumberApi`, `ExperimentalRangeApi`,
-  `ExperimentalResultApi` and `ExperimentalTextApi`.
-- The `EmailAddress` **experimental** type from the `kotools.types.web` package
-  is now deprecated with a **warning level** for using the corresponding type
-  from the `org.kotools.types` package ([#635]).
-  Its `create` and `createOrNull` factory functions are also deprecated with an
-  **error level** for this reason.
-  These deprecated declarations will be removed in v4.7.
-
-### 🔥 Removed
-
-Due to an internal compilation error of Kotlin when comparing generics, the
-following types have been removed from the **experimental** API:
-`NotEmptyRange`, `Bound`, `InclusiveBound` and `ExclusiveBound` ([#627]).
-**Experimental** properties using these types were also removed.
-
----
-
-Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
-🙏
-
-[@augustomtt]: https://github.com/augustomtt
-[@LVMVRQUXL]: https://github.com/LVMVRQUXL
-[#334]: https://github.com/kotools/types/issues/334
-[#602]: https://github.com/kotools/types/issues/602
-[#626]: https://github.com/kotools/types/pull/626
-[#627]: https://github.com/kotools/types/pull/627
-[#635]: https://github.com/kotools/types/issues/635
-[#644]: https://github.com/kotools/types/issues/644
-[8eb80448]: https://github.com/kotools/types/commit/8eb804489141083d830d23c5f294d4c963db9a6f
-[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-
 ## 🔖 Releases
 
 | Version | Release date |
 |---------|--------------|
+| [4.5.1] | 2024-04-28   |
 | [4.5.0] | 2024-03-14   |
 | [4.4.2] | 2024-02-07   |
 | [4.4.1] | 2024-02-02   |
@@ -132,6 +46,7 @@ Thanks to [@augustomtt] and [@LVMVRQUXL] for contributing to this new release.
 | [1.0.1] | 2022-03-21   |
 | [1.0.0] | 2022-02-28   |
 
+[4.5.1]: https://github.com/kotools/types/releases/tag/4.5.1
 [4.5.0]: https://github.com/kotools/types/releases/tag/4.5.0
 [4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
 [4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
