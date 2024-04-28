@@ -69,6 +69,14 @@ kotlin.sourceSets {
     configureEach { languageSettings.optIn("kotlin.RequiresOptIn") }
 }
 
+extensions.findByType<PublishingExtension>()?.let {
+    it.publications.named<MavenPublication>("kotlinMultiplatform").configure {
+        groupId = "${project.group}"
+        artifactId = project.name
+        version = "${project.version}"
+    }
+}
+
 // ----------------------------------- Tasks -----------------------------------
 
 private val compileTestKotlinJs: TaskProvider<Kotlin2JsCompile>

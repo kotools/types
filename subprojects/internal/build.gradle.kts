@@ -12,13 +12,6 @@ devTasks.list(tasks.checkJs, tasks.checkJvm)
 
 documentation.excludeFromParentApiReference = true
 
-publishing.publications.named<MavenPublication>("kotlinMultiplatform")
-    .configure {
-        groupId = "${project.group}"
-        artifactId = project.name
-        version = "${project.version}"
-    }
-
 dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
 

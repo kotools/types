@@ -26,13 +26,6 @@ kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
-publishing.publications.named<MavenPublication>("kotlinMultiplatform")
-    .configure {
-        groupId = "${project.group}"
-        artifactId = project.name
-        version = "${project.version}"
-    }
-
 samples.project = project(":samples")
 
 // ------------------------------- Dependencies --------------------------------
