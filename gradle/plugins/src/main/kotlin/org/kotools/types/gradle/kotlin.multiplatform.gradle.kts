@@ -95,6 +95,12 @@ private val checkJvm: TaskProvider<Task> by tasks.registering
 checkJvm.configure {
     description = "Runs all checks for the Kotlin/JVM platform."
     dependsOn(jvmTest)
+    val hasKotlinBinaryCompatibilityValidatorPlugin: Boolean = pluginManager
+        .hasPlugin("org.jetbrains.kotlinx.binary-compatibility-validator")
+    if (hasKotlinBinaryCompatibilityValidatorPlugin) {
+        val jvmApiCheck: TaskProvider<Task> by tasks.existing
+        dependsOn(jvmApiCheck)
+    }
 }
 
 tasks.withType<Jar>().configureEach {
