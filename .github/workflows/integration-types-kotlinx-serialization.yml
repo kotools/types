@@ -64,10 +64,8 @@ jobs:
         run: ./gradlew :types-kotlinx-serialization:checkSampleReferences
       - name: Test on Kotlin/JS
         run: ./gradlew :types-kotlinx-serialization:jsTest
-      - name: Test on Kotlin/JVM
-        run: ./gradlew :types-kotlinx-serialization:jvmTest
-      - name: Check Application Binary Interface on Kotlin/JVM
-        run: ./gradlew :types-kotlinx-serialization:apiCheck
+      - name: Kotlin/JVM checks
+        run: ./gradlew :types-kotlinx-serialization:checkJvm
       - name: Test on Kotlin/Native for Linux x64
         run: ./gradlew :types-kotlinx-serialization:linuxTest
       - name: Test on Kotlin/Native for MinGW x64
