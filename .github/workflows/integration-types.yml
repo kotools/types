@@ -64,10 +64,8 @@ jobs:
         run: ./gradlew :types:checkSampleReferences
       - name: Test on Kotlin/JS
         run: ./gradlew :types:jsTest
-      - name: Test on Kotlin/JVM
-        run: ./gradlew :types:jvmTest
-      - name: Check Application Binary Interface (ABI) on Kotlin/JVM
-        run: ./gradlew :types:apiCheck
+      - name: Kotlin/JVM checks
+        run: ./gradlew :types:checkJvm
       - name: Test on Kotlin/Native for Linux x64
         run: ./gradlew :types:linuxTest
       - name: Test on Kotlin/Native for MinGW x64
