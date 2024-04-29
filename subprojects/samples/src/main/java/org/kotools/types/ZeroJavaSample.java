@@ -22,6 +22,13 @@ class ZeroJavaSample {
         System.out.println(number); // 0
     } // END
 
+    void toShort() {
+        final short number = new Zero()
+                .toShort(); // TABS: 2
+        final short expected = 0;
+        System.out.println(number == expected); // true
+    } // END
+
     void toStringSample() {
         final Zero zero = new Zero();
         final String message = zero.toString();

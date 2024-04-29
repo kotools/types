@@ -107,6 +107,34 @@ public class Zero {
     public fun toByte(): Byte = this.valueAsByte
 
     /**
+     * Returns this number as [Short].
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.toShort.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.toShort.md
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public fun toShort(): Short = this.valueAsByte.toShort()
+
+    /**
      * Returns the string representation of this number.
      *
      * <br>
