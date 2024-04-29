@@ -21,6 +21,11 @@ gradlePlugin {
             id = "${prefix}.dev.tasks"
             implementationClass = "${prefix}.DevTasksPlugin"
         }
+        register("KotlinMultiplatformConventionPlugin").configure {
+            val prefix = "org.kotools.types.gradle"
+            id = "${prefix}.kotlin.multiplatform"
+            implementationClass = "${prefix}.KotlinMultiplatformPlugin"
+        }
         register("KotlinJvmConventionPlugin").configure {
             val prefix = "org.kotools.types.gradle"
             id = "${prefix}.kotlin.jvm"
