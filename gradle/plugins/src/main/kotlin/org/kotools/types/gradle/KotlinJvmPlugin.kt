@@ -9,7 +9,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 public class KotlinJvmPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        project.pluginManager.apply("org.jetbrains.kotlin.jvm")
+        val pluginManager = PluginManager(project)
+        pluginManager.apply(PluginIdentifier.KotlinJvm)
         project.extensions.getByType<KotlinJvmProjectExtension>()
             .explicitApi()
         val taskManager = KotlinJvmTaskManager(project)
