@@ -7,7 +7,7 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.register
 
 /** Gradle convention plugin for listing development tasks. */
-public abstract class DevTasksPlugin : Plugin<Project> {
+public class DevTasksPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
         val extension: DevTasksPluginExtension =
