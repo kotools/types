@@ -9,8 +9,8 @@ import javax.inject.Inject
 public abstract class TasksPluginExtension(
     @Inject private val providerFactory: ProviderFactory
 ) {
-    /** The name of the development tasks group. */
-    public val groupName: Provider<String> = this.providerFactory.provider {
+    @get:JvmSynthetic
+    internal val groupName: Provider<String> = this.providerFactory.provider {
         "Development"
     }
 
