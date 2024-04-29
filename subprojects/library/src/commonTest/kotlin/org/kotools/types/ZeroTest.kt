@@ -53,6 +53,15 @@ class ZeroTest {
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
+    fun toShort_should_pass() {
+        val actual: Short = Zero()
+            .toShort()
+        val expected: Short = 0
+        assertEquals(expected, actual)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun toString_should_pass() {
         val actual: String = Zero()
             .toString()

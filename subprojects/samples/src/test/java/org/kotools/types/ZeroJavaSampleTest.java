@@ -23,6 +23,12 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void toShort_should_pass() {
+        final ZeroJavaSample sample = new ZeroJavaSample();
+        Assert.printsTrue(sample::toShort);
+    }
+
+    @Test
     void toStringSample_should_pass() {
         final ZeroJavaSample sample = new ZeroJavaSample();
         final String expected = "0";
