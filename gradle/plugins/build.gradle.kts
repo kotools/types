@@ -16,15 +16,20 @@ dependencies {
 gradlePlugin {
     plugins {
         kotoolsTypesPlugin("Publication")
-        register("KotoolsTypesDocumentationPlugin").configure {
-            val prefix = "org.kotools.types"
-            id = "${prefix}.documentation"
-            implementationClass = "${prefix}.plugins.DocumentationPlugin"
+        register("DevTasksConventionPlugin").configure {
+            val prefix = "org.kotools.types.gradle"
+            id = "${prefix}.dev.tasks"
+            implementationClass = "${prefix}.DevTasksPlugin"
         }
         register("KotlinJvmConventionPlugin").configure {
             val prefix = "org.kotools.types.gradle"
             id = "${prefix}.kotlin.jvm"
             implementationClass = "${prefix}.KotlinJvmPlugin"
+        }
+        register("KotoolsTypesDocumentationPlugin").configure {
+            val prefix = "org.kotools.types"
+            id = "${prefix}.documentation"
+            implementationClass = "${prefix}.plugins.DocumentationPlugin"
         }
     }
 }
