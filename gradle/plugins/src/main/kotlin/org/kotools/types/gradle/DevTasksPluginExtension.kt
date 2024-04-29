@@ -6,7 +6,7 @@ import org.gradle.api.tasks.TaskProvider
 import javax.inject.Inject
 
 /** Gradle plugin extension for configuring the [TasksPlugin]. */
-public abstract class TasksPluginExtension(
+public abstract class DevTasksPluginExtension(
     @Inject private val providerFactory: ProviderFactory
 ) {
     @get:JvmSynthetic
@@ -17,8 +17,10 @@ public abstract class TasksPluginExtension(
     /** Adds the specified tasks to the development tasks group. */
     public fun list(first: TaskProvider<*>, vararg others: TaskProvider<*>) {
         val tasks: List<TaskProvider<*>> = listOf(first) + others
-        tasks.forEach {
-            it.configure { group = this@TasksPluginExtension.groupName.get() }
-        }
+        tasks.forEach(this::addToDevTasks)
+    }
+
+    private fun addToDevTasks(task: TaskProvider<*>): Unit = task.configure {
+        this.group = this@DevTasksPluginExtension.groupName.get()
     }
 }
