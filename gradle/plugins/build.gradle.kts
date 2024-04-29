@@ -22,8 +22,9 @@ gradlePlugin {
             implementationClass = "${prefix}.plugins.DocumentationPlugin"
         }
         register("KotlinJvmConventionPlugin").configure {
-            id = "org.kotools.types.kotlin.jvm"
-            implementationClass = "org.kotools.types.gradle.KotlinJvmPlugin"
+            val prefix = "org.kotools.types.gradle"
+            id = "${prefix}.kotlin.jvm"
+            implementationClass = "${prefix}.KotlinJvmPlugin"
         }
     }
 }
