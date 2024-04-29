@@ -12,6 +12,7 @@ internal class PluginManager(private val project: Project) {
     fun has(identifier: PluginIdentifier): Boolean =
         this.project.pluginManager.hasPlugin("$identifier")
 
-    fun <T : Plugin<Project>> has(type: KClass<T>): Boolean =
-        this.project.plugins.hasPlugin(type)
+    fun <ProjectPlugin : Plugin<Project>> has(
+        type: KClass<ProjectPlugin>
+    ): Boolean = this.project.plugins.hasPlugin(type)
 }
