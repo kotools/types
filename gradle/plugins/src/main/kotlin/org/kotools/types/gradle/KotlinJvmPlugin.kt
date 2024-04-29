@@ -6,7 +6,7 @@ import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 /** Gradle plugin for configuring a Kotlin JVM project. */
-public abstract class KotlinJvmPlugin : Plugin<Project> {
+public class KotlinJvmPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
