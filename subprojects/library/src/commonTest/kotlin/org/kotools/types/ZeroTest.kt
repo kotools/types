@@ -8,8 +8,8 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun structural_equality_should_pass_with_another_Zero() {
         val first = Zero()
@@ -20,7 +20,6 @@ class ZeroTest {
         assertEquals(firstHashCode, secondHashCode)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun structural_equality_should_fail_with_null() {
         val first = Zero()
@@ -31,7 +30,6 @@ class ZeroTest {
         assertNotEquals(secondHashCode, firstHashCode)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun structural_equality_should_fail_with_another_type_than_Zero() {
         val first = Zero()
@@ -42,7 +40,6 @@ class ZeroTest {
         assertNotEquals(secondHashCode, firstHashCode)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun toByte_should_pass() {
         val actual: Byte = Zero()
@@ -51,7 +48,6 @@ class ZeroTest {
         assertEquals(expected, actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun toShort_should_pass() {
         val actual: Short = Zero()
@@ -60,7 +56,6 @@ class ZeroTest {
         assertEquals(expected, actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun toString_should_pass() {
         val actual: String = Zero()
@@ -70,15 +65,14 @@ class ZeroTest {
     }
 }
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCompanionTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun fromByte_should_pass_with_a_Byte_that_equals_zero() {
         val number: Byte = 0
         Zero.fromByte(number)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun fromByte_should_fail_with_a_Byte_other_than_zero() {
         val number: Byte = listOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
@@ -93,7 +87,6 @@ class ZeroCompanionTest {
         assertEquals(expected, actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun fromByteOrNull_should_pass_with_a_Byte_that_equals_zero() {
         val number: Byte = 0
@@ -101,7 +94,6 @@ class ZeroCompanionTest {
         assertNotNull(actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun fromByteOrNull_should_fail_with_a_Byte_other_than_zero() {
         val number: Byte = listOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
