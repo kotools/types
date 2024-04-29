@@ -47,7 +47,7 @@ class ZeroTest {
     fun toByte_should_pass() {
         val actual: Byte = Zero()
             .toByte()
-        val expected: Byte = 0.toByte()
+        val expected: Byte = 0
         assertEquals(expected, actual)
     }
 
