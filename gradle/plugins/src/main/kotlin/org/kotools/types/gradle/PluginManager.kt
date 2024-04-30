@@ -9,7 +9,7 @@ internal class PluginManager(private val project: Project) {
     operator fun plusAssign(identifier: PluginIdentifier): Unit =
         this.project.pluginManager.apply("$identifier")
 
-    fun has(identifier: PluginIdentifier): Boolean =
+    operator fun contains(identifier: PluginIdentifier): Boolean =
         this.project.pluginManager.hasPlugin("$identifier")
 
     fun <ProjectPlugin : Plugin<Project>> has(

@@ -147,9 +147,7 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
         checkJvm.configure {
             description = "Runs all checks for the Kotlin/JVM platform."
             dependsOn(jvmTest)
-            val hasKotlinBinaryCompatibilityValidatorPlugin: Boolean =
-                plugins.has(PluginIdentifier.BinaryCompatibilityValidator)
-            if (hasKotlinBinaryCompatibilityValidatorPlugin) {
+            if (PluginIdentifier.BinaryCompatibilityValidator in plugins) {
                 val jvmApiCheck: TaskProvider<Task> by project.tasks.existing
                 dependsOn(jvmApiCheck)
             }
