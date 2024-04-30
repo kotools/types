@@ -34,8 +34,8 @@ import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 public class KotlinMultiplatformPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        val pluginManager = PluginManager(project)
-        pluginManager.apply(PluginIdentifier.KotlinMultiplatform)
+        val plugins = PluginManager(project)
+        plugins += PluginIdentifier.KotlinMultiplatform
 
         // ------------------------- Plugin extensions -------------------------
 
@@ -148,7 +148,7 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
             description = "Runs all checks for the Kotlin/JVM platform."
             dependsOn(jvmTest)
             val hasKotlinBinaryCompatibilityValidatorPlugin: Boolean =
-                pluginManager.has(PluginIdentifier.BinaryCompatibilityValidator)
+                plugins.has(PluginIdentifier.BinaryCompatibilityValidator)
             if (hasKotlinBinaryCompatibilityValidatorPlugin) {
                 val jvmApiCheck: TaskProvider<Task> by project.tasks.existing
                 dependsOn(jvmApiCheck)

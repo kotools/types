@@ -6,7 +6,7 @@ import org.gradle.kotlin.dsl.hasPlugin
 import kotlin.reflect.KClass
 
 internal class PluginManager(private val project: Project) {
-    fun apply(identifier: PluginIdentifier): Unit =
+    operator fun plusAssign(identifier: PluginIdentifier): Unit =
         this.project.pluginManager.apply("$identifier")
 
     fun has(identifier: PluginIdentifier): Boolean =
