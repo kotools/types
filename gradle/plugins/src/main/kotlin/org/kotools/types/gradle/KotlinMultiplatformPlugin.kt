@@ -47,10 +47,8 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
             this.nodejs { this.testTask(KotlinJsTest::useMocha) }
             this.binaries.library()
         }
-        val rootProjectHasYarnPlugin: Boolean = PluginManager(
-            project.rootProject
-        ).has(YarnPlugin::class)
-        if (rootProjectHasYarnPlugin) {
+        val rootProjectPlugins = PluginManager(project.rootProject)
+        if (YarnPlugin::class in rootProjectPlugins) {
             val yarn: YarnRootExtension =
                 project.rootProject.extensions.getByType()
             yarn.lockFileDirectory =
