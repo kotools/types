@@ -3,6 +3,7 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmStatic
 
@@ -199,9 +200,7 @@ public class Zero {
         @JvmStatic
         public fun fromByte(number: Byte): Zero {
             val zero: Zero? = this.fromByteOrNull(number)
-            return requireNotNull(zero) {
-                "'$number' shouldn't be other than zero."
-            }
+            return requireNotNull(zero) { InvalidZero(number) }
         }
 
         /**
@@ -274,9 +273,7 @@ public class Zero {
         @JvmStatic
         public fun fromShort(number: Short): Zero {
             val zero: Zero? = this.fromShortOrNull(number)
-            return requireNotNull(zero) {
-                "'$number' shouldn't be other than zero."
-            }
+            return requireNotNull(zero) { InvalidZero(number) }
         }
 
         /**

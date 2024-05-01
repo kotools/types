@@ -9,6 +9,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
+import org.kotools.types.internal.InvalidZero
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroAsByteSerializer : KSerializer<Zero> {
@@ -27,7 +28,7 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
         val decodedValue: Byte = decoder.decodeByte()
         val zero: Zero? = Zero.fromByteOrNull(decodedValue)
         if (zero != null) return zero
-        val message = "'$decodedValue' shouldn't be other than zero."
-        throw SerializationException(message)
+        val error = InvalidZero(decodedValue)
+        throw SerializationException("$error")
     }
 }

@@ -9,6 +9,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
+import org.kotools.types.internal.InvalidZero
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -65,7 +66,8 @@ class ZeroAsByteSerializerTest {
             Json.decodeFromString(deserializer, encoded)
         }
         val actual: String? = exception.message
-        val expected = "'$number' shouldn't be other than zero."
+        val expected: String = InvalidZero(number)
+            .toString()
         assertEquals(expected, actual)
     }
 }
