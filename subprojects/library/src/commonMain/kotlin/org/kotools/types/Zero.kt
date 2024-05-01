@@ -231,5 +231,39 @@ public class Zero {
             val zero = Zero()
             return if (zero.valueAsByte == number) zero else null
         }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or returns
+         * `null` if the [number] is other than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: ZeroCompanionKotlinSample.fromShortOrNull.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: ZeroCompanionJavaSample.fromShortOrNull.md
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun fromShortOrNull(number: Short): Zero? {
+            val zero = Zero()
+            val zeroAsShort: Short = zero.toShort()
+            return if (zeroAsShort == number) zero else null
+        }
     }
 }
