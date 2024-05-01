@@ -21,6 +21,17 @@ internal object ZeroCompanionKotlinSample {
         println(zero != null) // true
     } // END
 
+    fun fromShort() {
+        val number: Short = 0
+        val isSuccess: Boolean = try {
+            Zero.fromShort(number) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
+        }
+        println(isSuccess) // true
+    } // END
+
     fun fromShortOrNull() {
         val number: Short = 0
         val zero: Zero? = Zero.fromShortOrNull(number)

@@ -105,6 +105,26 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun fromShort_should_pass_with_a_Short_that_equals_zero() {
+        val number: Short = 0
+        Zero.fromShort(number)
+    }
+
+    @Test
+    fun fromShort_should_fail_with_a_Short_other_than_zero() {
+        val number: Short = listOf(Short.MIN_VALUE..-1, 1..Short.MAX_VALUE)
+            .random()
+            .random()
+            .toShort()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.fromShort(number)
+        }
+        val actual: String? = exception.message
+        val expected = "'$number' shouldn't be other than zero."
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun fromShortOrNull_should_pass_with_a_Short_that_equals_zero() {
         val number: Short = 0
         val actual: Zero? = Zero.fromShortOrNull(number)
