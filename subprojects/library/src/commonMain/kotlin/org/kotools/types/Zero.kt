@@ -191,6 +191,10 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromByte.md
          * </details>
+         * <br>
+         *
+         * You can use the [fromByteOrNull] function for returning `null`
+         * instead of throwing an exception in case of invalid [number].
          */
         @JvmStatic
         public fun fromByte(number: Byte): Zero {
@@ -225,6 +229,10 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromByteOrNull.md
          * </details>
+         * <br>
+         *
+         * You can use the [fromByte] function for throwing an exception instead
+         * of returning `null` in case of invalid [number].
          */
         @JvmStatic
         public fun fromByteOrNull(number: Byte): Zero? {
