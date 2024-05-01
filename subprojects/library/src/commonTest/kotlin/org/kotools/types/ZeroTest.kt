@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.InvalidZero
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -83,7 +84,8 @@ class ZeroCompanionTest {
             Zero.fromByte(number)
         }
         val actual: String? = exception.message
-        val expected = "'$number' shouldn't be other than zero."
+        val expected: String = InvalidZero(number)
+            .toString()
         assertEquals(expected, actual)
     }
 
@@ -120,7 +122,8 @@ class ZeroCompanionTest {
             Zero.fromShort(number)
         }
         val actual: String? = exception.message
-        val expected = "'$number' shouldn't be other than zero."
+        val expected: String = InvalidZero(number)
+            .toString()
         assertEquals(expected, actual)
     }
 
