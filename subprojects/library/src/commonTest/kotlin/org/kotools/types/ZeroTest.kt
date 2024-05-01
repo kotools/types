@@ -103,4 +103,21 @@ class ZeroCompanionTest {
         val actual: Zero? = Zero.fromByteOrNull(number)
         assertNull(actual)
     }
+
+    @Test
+    fun fromShortOrNull_should_pass_with_a_Short_that_equals_zero() {
+        val number: Short = 0
+        val actual: Zero? = Zero.fromShortOrNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun fromShortOrNull_should_fail_with_a_Short_other_than_zero() {
+        val number: Short = listOf(Short.MIN_VALUE..-1, 1..Short.MAX_VALUE)
+            .random()
+            .random()
+            .toShort()
+        val actual: Zero? = Zero.fromShortOrNull(number)
+        assertNull(actual)
+    }
 }

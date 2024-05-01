@@ -2,8 +2,8 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroCompanionKotlinSample {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     fun fromByte() {
         val number: Byte = 0
         val isSuccess: Boolean = try {
@@ -15,10 +15,15 @@ internal object ZeroCompanionKotlinSample {
         println(isSuccess) // true
     } // END
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     fun fromByteOrNull() {
         val number: Byte = 0
         val zero: Zero? = Zero.fromByteOrNull(number)
+        println(zero != null) // true
+    } // END
+
+    fun fromShortOrNull() {
+        val number: Short = 0
+        val zero: Zero? = Zero.fromShortOrNull(number)
         println(zero != null) // true
     } // END
 }
