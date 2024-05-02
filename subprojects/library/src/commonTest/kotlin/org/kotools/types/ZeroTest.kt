@@ -82,6 +82,14 @@ class ZeroTest {
     }
 
     @Test
+    fun toDouble_should_pass() {
+        val actual: Double = Zero()
+            .toDouble()
+        val expected = 0.0
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun toString_should_pass() {
         val actual: String = Zero()
             .toString()

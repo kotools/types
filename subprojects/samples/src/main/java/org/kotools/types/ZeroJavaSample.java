@@ -50,6 +50,13 @@ class ZeroJavaSample {
         System.out.println(number == expected); // true
     } // END
 
+    void toDouble() {
+        final double number = new Zero()
+                .toDouble(); // TABS: 2
+        final double expected = 0.0;
+        System.out.println(number == expected); // true
+    } // END
+
     void toStringSample() {
         final Zero zero = new Zero();
         final String message = zero.toString();
