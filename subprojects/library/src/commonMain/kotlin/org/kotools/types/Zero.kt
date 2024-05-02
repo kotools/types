@@ -12,6 +12,9 @@ private const val FINAL_WARNING: String = "RedundantModalityModifier"
 /**
  * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
  *
+ * For creating an instance of this type, you can use its constructor or the
+ * additional factory functions provided by the [Zero.Companion] type.
+ *
  * @constructor Creates an instance of [Zero].
  */
 @ExperimentalKotoolsTypesApi
