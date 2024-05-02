@@ -68,6 +68,16 @@ internal object ZeroCompanionKotlinSample {
         println(zero != null) // true
     } // END
 
+    fun fromFloat() {
+        val isSuccess: Boolean = try {
+            Zero.fromFloat(0f) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
+        }
+        println(isSuccess) // true
+    } // END
+
     fun fromFloatOrNull() {
         val zero: Zero? = Zero.fromFloatOrNull(0f)
         println(zero != null) // true
