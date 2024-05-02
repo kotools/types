@@ -29,6 +29,12 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void toInt_should_pass() {
+        final ZeroJavaSample sample = new ZeroJavaSample();
+        Assert.printsTrue(sample::toInt);
+    }
+
+    @Test
     void toStringSample_should_pass() {
         final ZeroJavaSample sample = new ZeroJavaSample();
         final String expected = "0";

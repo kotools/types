@@ -22,6 +22,10 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::toShort)
 
     @Test
+    fun `toInt() should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::toInt)
+
+    @Test
     fun toStringSample_should_pass() {
         val expected = "0"
         assertPrints(expected, ZeroKotlinSample::toStringSample)

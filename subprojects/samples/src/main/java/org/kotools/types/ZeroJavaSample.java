@@ -29,6 +29,13 @@ class ZeroJavaSample {
         System.out.println(number == expected); // true
     } // END
 
+    void toInt() {
+        final int number = new Zero()
+                .toInt(); // TABS: 2
+        final int expected = 0;
+        System.out.println(number == expected); // true
+    } // END
+
     void toStringSample() {
         final Zero zero = new Zero();
         final String message = zero.toString();
