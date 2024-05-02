@@ -52,4 +52,9 @@ internal object ZeroCompanionKotlinSample {
         val zero: Zero? = Zero.fromIntOrNull(0)
         println(zero != null) // true
     } // END
+
+    fun fromLongOrNull() {
+        val zero: Zero? = Zero.fromLongOrNull(0L)
+        println(zero != null) // true
+    } // END
 }

@@ -194,4 +194,20 @@ class ZeroCompanionTest {
         val actual: Zero? = Zero.fromIntOrNull(number)
         assertNull(actual)
     }
+
+    @Test
+    fun fromLongOrNull_should_pass_with_a_Long_that_equals_zero() {
+        val number = 0L
+        val actual: Zero? = Zero.fromLongOrNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun fromLongOrNull_should_fail_with_a_Long_other_than_zero() {
+        val number: Long = listOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
+            .random()
+            .random()
+        val actual: Zero? = Zero.fromLongOrNull(number)
+        assertNull(actual)
+    }
 }
