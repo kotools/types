@@ -32,6 +32,11 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void toLong_should_pass() {
+        Assert.printsTrue(this.sample::toLong);
+    }
+
+    @Test
     void toStringSample_should_pass() {
         final String expected = "0";
         Assert.prints(expected, this.sample::toStringSample);

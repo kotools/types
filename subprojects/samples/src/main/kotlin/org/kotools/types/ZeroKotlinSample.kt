@@ -38,6 +38,13 @@ internal object ZeroKotlinSample {
         println(number == expected) // true
     } // END
 
+    fun toLong() {
+        val number: Long = Zero()
+            .toLong() // TABS: 1
+        val expected = 0L
+        println(number == expected) // true
+    } // END
+
     fun toStringSample() {
         val message: String = Zero()
             .toString() // TABS: 2

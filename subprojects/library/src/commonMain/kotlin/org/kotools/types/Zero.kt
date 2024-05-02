@@ -164,6 +164,34 @@ public class Zero {
     public fun toInt(): Int = this.valueAsByte.toInt()
 
     /**
+     * Returns this number as [Long].
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.toLong.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.toLong.md
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public fun toLong(): Long = this.valueAsByte.toLong()
+
+    /**
      * Returns the string representation of this number.
      *
      * <br>
