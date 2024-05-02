@@ -31,6 +31,13 @@ internal object ZeroKotlinSample {
         println(number == expected) // true
     } // END
 
+    fun toInt() {
+        val number: Int = Zero()
+            .toInt() // TABS: 1
+        val expected = 0
+        println(number == expected) // true
+    } // END
+
     fun toStringSample() {
         val message: String = Zero()
             .toString() // TABS: 2
