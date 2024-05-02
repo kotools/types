@@ -473,6 +473,7 @@ public final class org/kotools/types/Zero {
 	public static final fun fromShortOrNull (S)Lorg/kotools/types/Zero;
 	public final fun hashCode ()I
 	public final fun toByte ()B
+	public final fun toFloat ()F
 	public final fun toInt ()I
 	public final fun toLong ()J
 	public final fun toShort ()S

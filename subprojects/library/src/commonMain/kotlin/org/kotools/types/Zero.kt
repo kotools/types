@@ -192,6 +192,34 @@ public class Zero {
     public fun toLong(): Long = this.valueAsByte.toLong()
 
     /**
+     * Returns this number as [Float].
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.toFloat.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.toFloat.md
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public fun toFloat(): Float = this.valueAsByte.toFloat()
+
+    /**
      * Returns the string representation of this number.
      *
      * <br>

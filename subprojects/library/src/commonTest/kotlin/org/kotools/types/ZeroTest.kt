@@ -74,6 +74,14 @@ class ZeroTest {
     }
 
     @Test
+    fun toFloat_should_pass() {
+        val actual: Float = Zero()
+            .toFloat()
+        val expected = 0f
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun toString_should_pass() {
         val actual: String = Zero()
             .toString()

@@ -43,6 +43,13 @@ class ZeroJavaSample {
         System.out.println(number == expected); // true
     } // END
 
+    void toFloat() {
+        final float number = new Zero()
+                .toFloat(); // TABS: 2
+        final float expected = 0;
+        System.out.println(number == expected); // true
+    } // END
+
     void toStringSample() {
         final Zero zero = new Zero();
         final String message = zero.toString();
