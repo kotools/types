@@ -30,6 +30,10 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::toLong)
 
     @Test
+    fun `toFloat() should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::toFloat)
+
+    @Test
     fun toStringSample_should_pass() {
         val expected = "0"
         assertPrints(expected, ZeroKotlinSample::toStringSample)

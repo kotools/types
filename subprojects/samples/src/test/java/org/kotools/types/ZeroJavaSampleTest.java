@@ -37,6 +37,11 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void toFloat_should_pass() {
+        Assert.printsTrue(this.sample::toFloat);
+    }
+
+    @Test
     void toStringSample_should_pass() {
         final String expected = "0";
         Assert.prints(expected, this.sample::toStringSample);
