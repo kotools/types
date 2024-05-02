@@ -364,11 +364,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromShortOrNull(number: Short): Zero? {
-            val zero = Zero()
-            val zeroAsShort: Short = zero.toShort()
-            return if (zeroAsShort == number) zero else null
-        }
+        public fun fromShortOrNull(number: Short): Zero? = Zero()
+            .takeIf { it.toShort() == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
