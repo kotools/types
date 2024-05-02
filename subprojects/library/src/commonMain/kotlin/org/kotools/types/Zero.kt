@@ -439,11 +439,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromIntOrNull(number: Int): Zero? {
-            val zero = Zero()
-            val zeroAsInt: Int = zero.toInt()
-            return if (zeroAsInt == number) zero else null
-        }
+        public fun fromIntOrNull(number: Int): Zero? = Zero()
+            .takeIf { it.toInt() == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
