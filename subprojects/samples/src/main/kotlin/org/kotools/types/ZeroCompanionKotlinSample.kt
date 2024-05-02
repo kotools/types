@@ -38,6 +38,16 @@ internal object ZeroCompanionKotlinSample {
         println(zero != null) // true
     } // END
 
+    fun fromInt() {
+        val isSuccess: Boolean = try {
+            Zero.fromInt(0) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
+        }
+        println(isSuccess) // true
+    } // END
+
     fun fromIntOrNull() {
         val zero: Zero? = Zero.fromIntOrNull(0)
         println(zero != null) // true

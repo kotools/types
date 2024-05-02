@@ -153,6 +153,25 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun fromInt_should_pass_with_an_Int_that_equals_zero() {
+        Zero.fromInt(0)
+    }
+
+    @Test
+    fun fromInt_should_fail_with_an_Int_other_than_zero() {
+        val number: Int = listOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
+            .random()
+            .random()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.fromInt(number)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidZero(number)
+            .toString()
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun fromIntOrNull_should_pass_with_an_Int_that_equals_zero() {
         val number = 0
         val actual: Zero? = Zero.fromIntOrNull(number)
