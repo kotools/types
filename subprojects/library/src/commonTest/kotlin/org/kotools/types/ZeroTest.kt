@@ -240,6 +240,27 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun fromFloat_should_pass_with_a_Float_that_equals_zero() {
+        val number = 0f
+        Zero.fromFloat(number)
+    }
+
+    @Test
+    fun fromFloat_should_fail_with_a_Float_other_than_zero() {
+        val number: Float = listOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
+            .random()
+            .random()
+            .toFloat()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.fromFloat(number)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidZero(number)
+            .toString()
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun fromFloatOrNull_should_pass_with_a_Float_that_equals_zero() {
         val number = 0f
         val actual: Zero? = Zero.fromFloatOrNull(number)

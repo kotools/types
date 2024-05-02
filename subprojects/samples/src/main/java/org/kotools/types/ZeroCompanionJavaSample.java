@@ -69,6 +69,17 @@ class ZeroCompanionJavaSample {
         System.out.println(zero != null); // true
     } // END
 
+    void fromFloat() {
+        boolean isSuccess;
+        try {
+            Zero.fromFloat(0f); // TABS: 1
+            isSuccess = true; // TABS: 1
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false; // TABS: 1
+        }
+        System.out.println(isSuccess); // true
+    } // END
+
     void fromFloatOrNull() {
         final Zero zero = Zero.fromFloatOrNull(0f);
         System.out.println(zero != null); // true
