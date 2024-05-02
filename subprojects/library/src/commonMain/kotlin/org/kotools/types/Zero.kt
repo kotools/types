@@ -438,6 +438,43 @@ public class Zero {
             .takeIf { it.toInt() == number }
 
         /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: ZeroCompanionKotlinSample.fromLong.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: ZeroCompanionJavaSample.fromLong.md
+         * </details>
+         * <br>
+         *
+         * You can use the [fromLongOrNull] function for returning `null`
+         * instead of throwing an exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun fromLong(number: Long): Zero {
+            val zero: Zero? = this.fromLongOrNull(number)
+            return requireNotNull(zero) { InvalidZero(number) }
+        }
+
+        /**
          * Creates an instance of [Zero] from the specified [number], or returns
          * `null` if the [number] is other than zero.
          *
@@ -462,6 +499,10 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromLongOrNull.md
          * </details>
+         * <br>
+         *
+         * You can use the [fromLong] function for throwing an exception instead
+         * of returning `null` in case of invalid [number].
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
