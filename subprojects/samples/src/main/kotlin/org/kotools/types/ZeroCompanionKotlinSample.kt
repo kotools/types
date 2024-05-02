@@ -67,4 +67,9 @@ internal object ZeroCompanionKotlinSample {
         val zero: Zero? = Zero.fromLongOrNull(0L)
         println(zero != null) // true
     } // END
+
+    fun fromFloatOrNull() {
+        val zero: Zero? = Zero.fromFloatOrNull(0f)
+        println(zero != null) // true
+    } // END
 }
