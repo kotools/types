@@ -66,6 +66,14 @@ class ZeroTest {
     }
 
     @Test
+    fun toLong_should_pass() {
+        val actual: Long = Zero()
+            .toLong()
+        val expected = 0L
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun toString_should_pass() {
         val actual: String = Zero()
             .toString()

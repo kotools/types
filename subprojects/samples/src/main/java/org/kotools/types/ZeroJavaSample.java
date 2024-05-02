@@ -36,6 +36,13 @@ class ZeroJavaSample {
         System.out.println(number == expected); // true
     } // END
 
+    void toLong() {
+        final long number = new Zero()
+                .toLong(); // TABS: 2
+        final long expected = 0;
+        System.out.println(number == expected); // true
+    } // END
+
     void toStringSample() {
         final Zero zero = new Zero();
         final String message = zero.toString();
