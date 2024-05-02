@@ -467,6 +467,7 @@ public final class org/kotools/types/Zero {
 	public static final fun fromByteOrNull (B)Lorg/kotools/types/Zero;
 	public static final fun fromInt (I)Lorg/kotools/types/Zero;
 	public static final fun fromIntOrNull (I)Lorg/kotools/types/Zero;
+	public static final fun fromLongOrNull (J)Lorg/kotools/types/Zero;
 	public static final fun fromShort (S)Lorg/kotools/types/Zero;
 	public static final fun fromShortOrNull (S)Lorg/kotools/types/Zero;
 	public final fun hashCode ()I
@@ -482,6 +483,7 @@ public final class org/kotools/types/Zero$Companion {
 	public final fun fromByteOrNull (B)Lorg/kotools/types/Zero;
 	public final fun fromInt (I)Lorg/kotools/types/Zero;
 	public final fun fromIntOrNull (I)Lorg/kotools/types/Zero;
+	public final fun fromLongOrNull (J)Lorg/kotools/types/Zero;
 	public final fun fromShort (S)Lorg/kotools/types/Zero;
 	public final fun fromShortOrNull (S)Lorg/kotools/types/Zero;
 }
