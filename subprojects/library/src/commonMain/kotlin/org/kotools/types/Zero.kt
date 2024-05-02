@@ -223,6 +223,34 @@ public class Zero {
     public fun toFloat(): Float = this.valueAsByte.toFloat()
 
     /**
+     * Returns this number as [Double].
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.toDouble.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.toDouble.md
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public fun toDouble(): Double = this.valueAsByte.toDouble()
+
+    /**
      * Returns the string representation of this number.
      *
      * <br>

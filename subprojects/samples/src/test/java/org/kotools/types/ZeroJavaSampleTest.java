@@ -42,6 +42,11 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void toDouble_should_pass() {
+        Assert.printsTrue(this.sample::toDouble);
+    }
+
+    @Test
     void toStringSample_should_pass() {
         final String expected = "0";
         Assert.prints(expected, this.sample::toStringSample);
