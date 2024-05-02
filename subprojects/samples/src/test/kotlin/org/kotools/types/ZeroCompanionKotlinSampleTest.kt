@@ -34,4 +34,8 @@ class ZeroCompanionKotlinSampleTest {
     @Test
     fun `fromLongOrNull(Long) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::fromLongOrNull)
+
+    @Test
+    fun `fromFloatOrNull(Float) should pass`(): Unit =
+        assertPrintsTrue(ZeroCompanionKotlinSample::fromFloatOrNull)
 }

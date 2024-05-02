@@ -68,4 +68,9 @@ class ZeroCompanionJavaSample {
         final Zero zero = Zero.fromLongOrNull(0L);
         System.out.println(zero != null); // true
     } // END
+
+    void fromFloatOrNull() {
+        final Zero zero = Zero.fromFloatOrNull(0f);
+        System.out.println(zero != null); // true
+    } // END
 }
