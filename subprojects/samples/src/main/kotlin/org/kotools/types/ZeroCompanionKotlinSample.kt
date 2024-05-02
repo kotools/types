@@ -37,4 +37,9 @@ internal object ZeroCompanionKotlinSample {
         val zero: Zero? = Zero.fromShortOrNull(number)
         println(zero != null) // true
     } // END
+
+    fun fromIntOrNull() {
+        val zero: Zero? = Zero.fromIntOrNull(0)
+        println(zero != null) // true
+    } // END
 }

@@ -341,5 +341,39 @@ public class Zero {
             val zeroAsShort: Short = zero.toShort()
             return if (zeroAsShort == number) zero else null
         }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or returns
+         * `null` if the [number] is other than zero.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: ZeroCompanionKotlinSample.fromIntOrNull.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: ZeroCompanionJavaSample.fromIntOrNull.md
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun fromIntOrNull(number: Int): Zero? {
+            val zero = Zero()
+            val zeroAsInt: Int = zero.toInt()
+            return if (zeroAsInt == number) zero else null
+        }
     }
 }

@@ -36,4 +36,9 @@ class ZeroCompanionJavaSample {
         final Zero zero = Zero.fromShortOrNull(number);
         System.out.println(zero != null); // true
     } // END
+
+    void fromIntOrNull() {
+        final Zero zero = Zero.fromIntOrNull(0);
+        System.out.println(zero != null); // true
+    } // END
 }

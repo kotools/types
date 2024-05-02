@@ -26,4 +26,10 @@ class ZeroCompanionJavaSampleTest {
         final ZeroCompanionJavaSample sample = new ZeroCompanionJavaSample();
         Assert.printsTrue(sample::fromShortOrNull);
     }
+
+    @Test
+    void fromIntOrNull_should_pass() {
+        final ZeroCompanionJavaSample sample = new ZeroCompanionJavaSample();
+        Assert.printsTrue(sample::fromIntOrNull);
+    }
 }

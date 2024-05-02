@@ -18,4 +18,8 @@ class ZeroCompanionKotlinSampleTest {
     @Test
     fun `fromShortOrNull(Short) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::fromShortOrNull)
+
+    @Test
+    fun `fromIntOrNull(Int) should pass`(): Unit =
+        assertPrintsTrue(ZeroCompanionKotlinSample::fromIntOrNull)
 }
