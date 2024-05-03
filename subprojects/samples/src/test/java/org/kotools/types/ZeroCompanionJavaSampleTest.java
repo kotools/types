@@ -55,4 +55,9 @@ class ZeroCompanionJavaSampleTest {
     void fromFloatOrNull_should_pass() {
         Assert.printsTrue(this.sample::fromFloatOrNull);
     }
+
+    @Test
+    void fromDoubleOrNull_should_pass() {
+        Assert.printsTrue(this.sample::fromDoubleOrNull);
+    }
 }

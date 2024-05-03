@@ -284,4 +284,21 @@ class ZeroCompanionTest {
         val actual: Zero? = Zero.fromFloatOrNull(number)
         assertNull(actual)
     }
+
+    @Test
+    fun fromDoubleOrNull_should_pass_with_a_Double_that_equals_zero() {
+        val number = 0.0
+        val actual: Zero? = Zero.fromDoubleOrNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun fromDoubleOrNull_should_fail_with_a_Double_other_than_zero() {
+        val number: Double = listOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
+            .random()
+            .random()
+            .toDouble()
+        val actual: Zero? = Zero.fromDoubleOrNull(number)
+        assertNull(actual)
+    }
 }
