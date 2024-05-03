@@ -42,4 +42,8 @@ class ZeroCompanionKotlinSampleTest {
     @Test
     fun `fromFloatOrNull(Float) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::fromFloatOrNull)
+
+    @Test
+    fun `fromDoubleOrNull(Float) should pass`(): Unit =
+        assertPrintsTrue(ZeroCompanionKotlinSample::fromDoubleOrNull)
 }
