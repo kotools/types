@@ -645,6 +645,41 @@ public class Zero {
             .takeIf { it.toFloat() == number }
 
         /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         * For example, calling this function with `0.1` will throw an exception
+         * because it is not strictly equal to `0`.
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: ZeroCompanionKotlinSample.fromDouble.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: ZeroCompanionJavaSample.fromDouble.md
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun fromDouble(number: Double): Zero {
+            val zero: Zero? = this.fromDoubleOrNull(number)
+            return requireNotNull(zero) { InvalidZero(number) }
+        }
+
+        /**
          * Creates an instance of [Zero] from the specified [number], or returns
          * `null` if the [number] is other than zero.
          * For example, calling this function with `0.1` will return `null`
