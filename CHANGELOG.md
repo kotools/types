@@ -16,6 +16,18 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+The `Zero` type now supports bidirectional conversions with the following Kotlin
+types: `Short`, `Int`, `Long`, `Float` and `Double` ([#646]).
+
+---
+
+Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
+
+[@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#646]: https://github.com/kotools/types/issues/646
+
 ## 🔖 Releases
 
 | Version | Release date |
