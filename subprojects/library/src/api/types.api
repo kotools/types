@@ -465,6 +465,7 @@ public final class org/kotools/types/Zero {
 	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromByte (B)Lorg/kotools/types/Zero;
 	public static final fun fromByteOrNull (B)Lorg/kotools/types/Zero;
+	public static final fun fromDouble (D)Lorg/kotools/types/Zero;
 	public static final fun fromDoubleOrNull (D)Lorg/kotools/types/Zero;
 	public static final fun fromFloat (F)Lorg/kotools/types/Zero;
 	public static final fun fromFloatOrNull (F)Lorg/kotools/types/Zero;
@@ -487,6 +488,7 @@ public final class org/kotools/types/Zero {
 public final class org/kotools/types/Zero$Companion {
 	public final fun fromByte (B)Lorg/kotools/types/Zero;
 	public final fun fromByteOrNull (B)Lorg/kotools/types/Zero;
+	public final fun fromDouble (D)Lorg/kotools/types/Zero;
 	public final fun fromDoubleOrNull (D)Lorg/kotools/types/Zero;
 	public final fun fromFloat (F)Lorg/kotools/types/Zero;
 	public final fun fromFloatOrNull (F)Lorg/kotools/types/Zero;

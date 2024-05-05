@@ -286,6 +286,27 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun fromDouble_should_pass_with_a_Double_that_equals_zero() {
+        val number = 0.0
+        Zero.fromDouble(number)
+    }
+
+    @Test
+    fun fromDouble_should_fail_with_a_Double_other_than_zero() {
+        val number: Double = listOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
+            .random()
+            .random()
+            .toDouble()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.fromDouble(number)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidZero(number)
+            .toString()
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun fromDoubleOrNull_should_pass_with_a_Double_that_equals_zero() {
         val number = 0.0
         val actual: Zero? = Zero.fromDoubleOrNull(number)
