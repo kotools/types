@@ -99,13 +99,9 @@ public value class NotEmptyList<out E> private constructor(
     /**
      * Returns all elements of this list as a [List] of type [E].
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val notEmptyList: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
-     * val list: List<Int> = notEmptyList.toList()
-     * println(list) // [1, 2, 3]
-     * ```
+     * SAMPLE: NotEmptyListKotlinSample.toList.md
      */
     public fun toList(): List<E> = elements
 
