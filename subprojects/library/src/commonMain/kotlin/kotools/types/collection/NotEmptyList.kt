@@ -20,9 +20,13 @@ import kotlin.jvm.JvmSynthetic
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
  *
- * Here's a simple usage example:
+ * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: NotEmptyListKotlinSample.notEmptyListOf.md
+ *
+ * The [NotEmptyList] type being an
+ * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
+ * not recommended to call this function from Java code.
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
