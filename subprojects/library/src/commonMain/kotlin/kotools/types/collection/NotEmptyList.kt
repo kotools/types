@@ -89,6 +89,28 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
 public value class NotEmptyList<out E> private constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {
+    override val head: E get() = elements.first()
+
+    override val tail: NotEmptyList<E>?
+        get() = elements.drop(1)
+            .toNotEmptyList()
+            .getOrNull()
+
+    /**
+     * Returns all elements of this list as a [List] of type [E].
+     *
+     * Here's a simple usage example:
+     *
+     * ```kotlin
+     * val notEmptyList: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+     * val list: List<Int> = notEmptyList.toList()
+     * println(list) // [1, 2, 3]
+     * ```
+     */
+    public fun toList(): List<E> = elements
+
+    override fun toString(): String = "$elements"
+
     /** Contains static declarations for the [NotEmptyList] type. */
     public companion object {
         /**
@@ -213,28 +235,6 @@ public value class NotEmptyList<out E> private constructor(
             return NotEmptyList(elements)
         }
     }
-
-    override val head: E get() = elements.first()
-
-    override val tail: NotEmptyList<E>?
-        get() = elements.drop(1)
-            .toNotEmptyList()
-            .getOrNull()
-
-    /**
-     * Returns all elements of this list as a [List] of type [E].
-     *
-     * Here's a simple usage example:
-     *
-     * ```kotlin
-     * val notEmptyList: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
-     * val list: List<Int> = notEmptyList.toList()
-     * println(list) // [1, 2, 3]
-     * ```
-     */
-    public fun toList(): List<E> = elements
-
-    override fun toString(): String = "$elements"
 }
 
 @InternalKotoolsTypesApi
