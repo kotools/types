@@ -20,6 +20,13 @@ class NotEmptyListKotlinSampleTest {
     }
 
     @Test
+    fun `toList() should pass`() {
+        val expected = "[1, 2, 3]"
+        val sample = NotEmptyListKotlinSample()
+        assertPrints(expected, sample::toList)
+    }
+
+    @Test
     fun `toNotEmptyList() on Collection should pass`() {
         val exceptionMessage = "Given collection shouldn't be empty."
         val expected: String = listOf(

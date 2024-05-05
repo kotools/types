@@ -17,6 +17,12 @@ internal class NotEmptyListKotlinSample {
         println(decoded == string) // true
     } // END
 
+    fun toList() {
+        val notEmptyList: NotEmptyList<Int> = notEmptyListOf(1, 2, 3)
+        val list: List<Int> = notEmptyList.toList()
+        println(list) // [1, 2, 3]
+    } // END
+
     fun toNotEmptyListOnCollection() {
         var collection: Collection<Int> = listOf(1, 2, 3)
         var result: Result<NotEmptyList<Int>> = collection.toNotEmptyList()
