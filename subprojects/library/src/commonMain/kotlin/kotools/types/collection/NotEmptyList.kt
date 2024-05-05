@@ -116,11 +116,7 @@ public value class NotEmptyList<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val collection: Collection<Int> = listOf(1, 2, 3)
-         * val elements: NotEmptyList<Int> = NotEmptyList.create(collection)
-         * println(elements) // [1, 2, 3]
-         * ```
+         * SAMPLE: NotEmptyListCompanionKotlinSample.createWithCollection.md
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -129,16 +125,7 @@ public value class NotEmptyList<out E> private constructor(
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptyList].
          *
-         * ```kotlin
-         * val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
-         * val notEmptyList: NotEmptyList<Int> = NotEmptyList.create(original)
-         * println(original) // [1, 2, 3]
-         * println(notEmptyList) // [1, 2, 3]
-         *
-         * original.clear()
-         * println(original) // []
-         * println(notEmptyList) // [1, 2, 3]
-         * ```
+         * SAMPLE: NotEmptyListCompanionKotlinSample.createWithMutableCollection.md
          *
          * You can use the [NotEmptyList.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
