@@ -16,7 +16,7 @@ private fun Sequence<String>.getRawFunctions(): Map<String, List<String>> {
     var latestFunctionDetected: String? = null
     var read = false
     val functionHeaderRegex = Regex("fun [A-Za-z_]+\\(")
-    filter(String::isNotBlank).forEach {
+    forEach {
         if (functionHeaderRegex in it) {
             val functionName: String = it
                 .substringAfter("fun ")
