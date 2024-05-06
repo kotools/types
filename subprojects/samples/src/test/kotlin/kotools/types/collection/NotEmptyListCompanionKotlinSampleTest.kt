@@ -22,4 +22,23 @@ class NotEmptyListCompanionKotlinSampleTest {
         val sample = NotEmptyListCompanionKotlinSample()
         assertPrints(expected, sample::createWithMutableCollection)
     }
+
+    @Test
+    fun `createOrNull(Collection) should pass`() {
+        val expected = "[1, 2, 3]"
+        val sample = NotEmptyListCompanionKotlinSample()
+        assertPrints(expected, sample::createOrNullWithCollection)
+    }
+
+    @Test
+    fun `createOrNull(MutableCollection) should pass`() {
+        val expected: String = listOf(
+            "[1, 2, 3]",
+            "[1, 2, 3]",
+            "[]",
+            "[1, 2, 3]"
+        ).joinToString(separator = "\n")
+        val sample = NotEmptyListCompanionKotlinSample()
+        assertPrints(expected, sample::createOrNullWithMutableCollection)
+    }
 }
