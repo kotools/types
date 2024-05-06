@@ -41,4 +41,10 @@ internal class NotEmptyListCompanionKotlinSample {
         println(original) // []
         println(notEmptyList) // [1, 2, 3]
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun of() {
+        val integers: NotEmptyList<Int> = NotEmptyList.of(1, 2, 3)
+        println(integers) // [1, 2, 3]
+    } // END
 }

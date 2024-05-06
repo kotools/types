@@ -41,4 +41,11 @@ class NotEmptyListCompanionKotlinSampleTest {
         val sample = NotEmptyListCompanionKotlinSample()
         assertPrints(expected, sample::createOrNullWithMutableCollection)
     }
+
+    @Test
+    fun `of(E, vararg E) should pass`() {
+        val expected = "[1, 2, 3]"
+        val sample = NotEmptyListCompanionKotlinSample()
+        assertPrints(expected, sample::of)
+    }
 }
