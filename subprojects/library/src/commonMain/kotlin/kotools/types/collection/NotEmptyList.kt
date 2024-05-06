@@ -178,10 +178,7 @@ public value class NotEmptyList<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val integers: NotEmptyList<Int> = NotEmptyList.of(1, 2, 3)
-         * println(integers) // [1, 2, 3]
-         * ```
+         * SAMPLE: NotEmptyListCompanionKotlinSample.of.md
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
