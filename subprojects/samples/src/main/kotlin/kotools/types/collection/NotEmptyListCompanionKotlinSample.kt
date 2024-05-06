@@ -21,4 +21,24 @@ internal class NotEmptyListCompanionKotlinSample {
         println(original) // []
         println(notEmptyList) // [1, 2, 3]
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNullWithCollection() {
+        val collection: Collection<Int> = listOf(1, 2, 3)
+        val elements: NotEmptyList<Int>? = NotEmptyList.createOrNull(collection)
+        println(elements) // [1, 2, 3]
+    } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNullWithMutableCollection() {
+        val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
+        val notEmptyList: NotEmptyList<Int>? =
+            NotEmptyList.createOrNull(original) // TABS: 1
+        println(original) // [1, 2, 3]
+        println(notEmptyList) // [1, 2, 3]
+
+        original.clear()
+        println(original) // []
+        println(notEmptyList) // [1, 2, 3]
+    } // END
 }
