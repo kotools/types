@@ -1,15 +1,17 @@
 package org.kotools.types.gradle
 
 import org.gradle.api.Action
+import org.gradle.api.NamedDomainObjectProvider
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.creating
+import org.gradle.kotlin.dsl.existing
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
-import org.gradle.kotlin.dsl.named
+import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
@@ -130,11 +132,20 @@ internal class KotlinMultiplatformExtensionManager(
     fun configurePublishing() {
         val publishing: PublishingExtension =
             this.project.extensions.findByType() ?: return
-        publishing.publications.named<MavenPublication>("kotlinMultiplatform")
-            .configure {
-                groupId = "${project.group}"
-                artifactId = project.name
-                version = "${project.version}"
-            }
+        val kotlinMultiplatform: NamedDomainObjectProvider<MavenPublication> by
+        publishing.publications.existing(MavenPublication::class)
+        val configuration: Action<MavenPublication> =
+            this.mavenPublicationConfiguration()
+        kotlinMultiplatform.configure(configuration)
+    }
+
+    private fun mavenPublicationConfiguration():
+            Action<MavenPublication> = Action {
+        this.groupId =
+            this@KotlinMultiplatformExtensionManager.project.group.toString()
+        this.artifactId =
+            this@KotlinMultiplatformExtensionManager.project.name
+        this.version =
+            this@KotlinMultiplatformExtensionManager.project.version.toString()
     }
 }
