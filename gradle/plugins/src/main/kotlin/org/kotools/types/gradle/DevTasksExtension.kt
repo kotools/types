@@ -6,7 +6,7 @@ import org.gradle.api.tasks.TaskProvider
 import javax.inject.Inject
 
 /** Plugin extension for configuring [DevTasksPlugin]. */
-public abstract class DevTasksPluginExtension(
+public abstract class DevTasksExtension(
     @Inject private val providerFactory: ProviderFactory
 ) {
     @get:JvmSynthetic
@@ -21,6 +21,6 @@ public abstract class DevTasksPluginExtension(
     }
 
     private fun addToDevTasks(task: TaskProvider<*>): Unit = task.configure {
-        this.group = this@DevTasksPluginExtension.groupName.get()
+        this.group = this@DevTasksExtension.groupName.get()
     }
 }

@@ -10,8 +10,7 @@ import org.gradle.kotlin.dsl.register
 public class DevTasksPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        val extension: DevTasksPluginExtension =
-            project.extensions.create("devTasks")
+        val extension: DevTasksExtension = project.extensions.create("devTasks")
         project.tasks.register<TaskReportTask>("devTasks").configure {
             this.description = "Displays the recommended tasks for development."
             val evaluatedGroupName: String = extension.groupName.get()
