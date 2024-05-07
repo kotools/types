@@ -13,8 +13,8 @@ public class KotlinJvmPlugin : Plugin<Project> {
         plugins += PluginIdentifier.KotlinJvm
         project.extensions.getByType<KotlinJvmProjectExtension>()
             .explicitApi()
-        val taskManager = KotlinJvmTaskManager(project)
-        taskManager.configureKotlinCompile()
-        taskManager.configureTest()
+        val tasks = KotlinJvmTaskManager(project)
+        tasks.configureKotlinCompile()
+        tasks.configureTest()
     }
 }
