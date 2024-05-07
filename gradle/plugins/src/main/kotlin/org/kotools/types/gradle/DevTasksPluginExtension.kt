@@ -5,7 +5,7 @@ import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.TaskProvider
 import javax.inject.Inject
 
-/** Gradle plugin extension for configuring the [TasksPlugin]. */
+/** Plugin extension for configuring [DevTasksPlugin]. */
 public abstract class DevTasksPluginExtension(
     @Inject private val providerFactory: ProviderFactory
 ) {
