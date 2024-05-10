@@ -16,4 +16,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.4
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v3.1.0
+        uses: gradle/actions/dependency-submission@v3.3.2
