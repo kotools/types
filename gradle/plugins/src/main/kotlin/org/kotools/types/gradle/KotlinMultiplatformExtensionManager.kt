@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 internal class KotlinMultiplatformExtensionManager(
     private val project: Project
 ) {
-    fun configureKotlinMultiplatform() {
+    fun kotlinMultiplatform() {
         val kotlin: KotlinMultiplatformExtension =
             this.project.extensions.getByType()
         kotlin.explicitApi()
@@ -129,7 +129,7 @@ internal class KotlinMultiplatformExtensionManager(
         }
     }
 
-    fun configurePublishing() {
+    fun publishing() {
         val publishing: PublishingExtension =
             this.project.extensions.findByType() ?: return
         val kotlinMultiplatform: NamedDomainObjectProvider<MavenPublication> by
