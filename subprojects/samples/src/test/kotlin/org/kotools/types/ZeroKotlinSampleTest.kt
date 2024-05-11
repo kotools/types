@@ -12,6 +12,10 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::hashCodeOverride)
 
     @Test
+    fun `compareTo(Byte) should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::compareToByte)
+
+    @Test
     fun `toByte() should pass`() {
         val expected = "0"
         assertPrints(expected, ZeroKotlinSample::toByte)
