@@ -18,6 +18,13 @@ internal object ZeroKotlinSample {
         println(result) // true
     } // END
 
+    fun compareToByte() {
+        val zero = Zero()
+        val other: Byte = 0
+        val result: Int = zero.compareTo(other)
+        println(result == 0) // true
+    } // END
+
     fun toByte() {
         val number: Byte = Zero()
             .toByte() // TABS: 1

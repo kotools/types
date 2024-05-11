@@ -8,9 +8,12 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroTest {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun structural_equality_should_pass_with_another_Zero() {
         val first = Zero()
@@ -40,6 +43,38 @@ class ZeroTest {
         val secondHashCode: Int = second.hashCode()
         assertNotEquals(secondHashCode, firstHashCode)
     }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun compareTo_should_return_zero_with_the_same_Byte() {
+        val zero = Zero()
+        val other: Byte = 0
+        val actual: Int = zero.compareTo(other)
+        assertEquals(expected = 0, actual)
+    }
+
+    @Test
+    fun compareTo_should_return_a_negative_number_with_a_greater_Byte() {
+        val zero = Zero()
+        val other: Byte = (1..Byte.MAX_VALUE)
+            .random()
+            .toByte()
+        val actual: Int = zero.compareTo(other)
+        assertTrue { actual < 0 }
+    }
+
+    @Test
+    fun compareTo_should_return_a_positive_number_with_a_less_Byte() {
+        val zero = Zero()
+        val other: Byte = (Byte.MIN_VALUE..-1)
+            .random()
+            .toByte()
+        val actual: Int = zero.compareTo(other)
+        assertTrue { actual > 0 }
+    }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     fun toByte_should_pass() {

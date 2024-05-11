@@ -16,6 +16,13 @@ class ZeroJavaSample {
         System.out.println(first == second); // true
     } // END
 
+    void compareToByte() {
+        final Zero zero = new Zero();
+        final byte other = 0;
+        final int result = zero.compareTo(other);
+        System.out.println(result == 0); // true
+    } // END
+
     void toByte() {
         final Zero zero = new Zero();
         final byte number = zero.toByte();
