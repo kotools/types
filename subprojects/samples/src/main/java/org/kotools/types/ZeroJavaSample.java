@@ -18,9 +18,9 @@ class ZeroJavaSample {
 
     void compareToByte() {
         final Zero zero = new Zero();
-        final byte other = 0;
-        final int result = zero.compareTo(other);
-        System.out.println(result == 0); // true
+        final byte other = 1;
+        final boolean result = zero.compareTo(other) < 0;
+        System.out.println(result); // true
     } // END
 
     void toByte() {
