@@ -20,9 +20,9 @@ internal object ZeroKotlinSample {
 
     fun compareToByte() {
         val zero = Zero()
-        val other: Byte = 0
-        val result: Int = zero.compareTo(other)
-        println(result == 0) // true
+        val other: Byte = 1
+        val result: Boolean = zero < other // or zero.compareTo(other) < 0
+        println(result) // true
     } // END
 
     fun toByte() {
