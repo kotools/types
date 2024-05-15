@@ -115,6 +115,39 @@ public class Zero {
     public operator fun compareTo(other: Byte): Int =
         this.valueAsByte.compareTo(other)
 
+    /**
+     * Compares this number with the [other] one for order.
+     * Returns zero if this number equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.compareToShort.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.compareToShort.md
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public operator fun compareTo(other: Short): Int = this
+        .toShort()
+        .compareTo(other)
+
     // ------------------------------ Conversions ------------------------------
 
     /**

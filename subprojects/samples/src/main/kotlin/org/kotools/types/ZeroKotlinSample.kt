@@ -25,6 +25,13 @@ internal object ZeroKotlinSample {
         println(result) // true
     } // END
 
+    fun compareToShort() {
+        val zero = Zero()
+        val other: Short = 1
+        val result: Boolean = zero < other // or zero.compareTo(other) < 0
+        println(result) // true
+    } // END
+
     fun toByte() {
         val number: Byte = Zero()
             .toByte() // TABS: 1
