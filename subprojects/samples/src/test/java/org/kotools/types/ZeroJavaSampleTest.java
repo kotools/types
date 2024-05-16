@@ -26,6 +26,11 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void compareTo_Int_should_pass() {
+        Assert.printsTrue(this.sample::compareToInt);
+    }
+
+    @Test
     void toByte_should_pass() {
         final String expected = "0";
         Assert.prints(expected, this.sample::toByte);

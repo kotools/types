@@ -30,6 +30,13 @@ class ZeroJavaSample {
         System.out.println(result); // true
     } // END
 
+    void compareToInt() {
+        final Zero zero = new Zero();
+        final int other = 1;
+        final boolean result = zero.compareTo(other) < 0;
+        System.out.println(result); // true
+    } // END
+
     void toByte() {
         final Zero zero = new Zero();
         final byte number = zero.toByte();
