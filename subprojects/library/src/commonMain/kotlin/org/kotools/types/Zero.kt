@@ -144,9 +144,8 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-    public operator fun compareTo(other: Short): Int = this
-        .toShort()
-        .compareTo(other)
+    public operator fun compareTo(other: Short): Int =
+        this.valueAsByte.compareTo(other)
 
     /**
      * Compares this number with the [other] one for order.
