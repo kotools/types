@@ -51,6 +51,13 @@ class ZeroJavaSample {
         System.out.println(result); // true
     } // END
 
+    void compareToDouble() {
+        final Zero zero = new Zero();
+        final double other = 0.01;
+        final boolean result = zero.compareTo(other) < 0;
+        System.out.println(result); // true
+    } // END
+
     void toByte() {
         final Zero zero = new Zero();
         final byte number = zero.toByte();
