@@ -463,6 +463,7 @@ public final class org/kotools/types/Zero {
 	public static final field Companion Lorg/kotools/types/Zero$Companion;
 	public fun <init> ()V
 	public final fun compareTo (B)I
+	public final fun compareTo (D)I
 	public final fun compareTo (F)I
 	public final fun compareTo (I)I
 	public final fun compareTo (J)I
