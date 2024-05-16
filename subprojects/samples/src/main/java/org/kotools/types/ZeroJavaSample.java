@@ -44,6 +44,13 @@ class ZeroJavaSample {
         System.out.println(result); // true
     } // END
 
+    void compareToFloat() {
+        final Zero zero = new Zero();
+        final float other = 0.01f;
+        final boolean result = zero.compareTo(other) < 0;
+        System.out.println(result); // true
+    } // END
+
     void toByte() {
         final Zero zero = new Zero();
         final byte number = zero.toByte();

@@ -28,6 +28,10 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::compareToLong)
 
     @Test
+    fun `compareTo(Float) should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::compareToFloat)
+
+    @Test
     fun `toByte() should pass`() {
         val expected = "0"
         assertPrints(expected, ZeroKotlinSample::toByte)
