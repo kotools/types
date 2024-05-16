@@ -46,6 +46,13 @@ internal object ZeroKotlinSample {
         println(result) // true
     } // END
 
+    fun compareToFloat() {
+        val zero = Zero()
+        val other = 0.01f
+        val result: Boolean = zero < other // or zero.compareTo(other) < 0
+        println(result) // true
+    } // END
+
     fun toByte() {
         val number: Byte = Zero()
             .toByte() // TABS: 1
