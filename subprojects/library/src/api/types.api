@@ -464,6 +464,7 @@ public final class org/kotools/types/Zero {
 	public fun <init> ()V
 	public final fun compareTo (B)I
 	public final fun compareTo (I)I
+	public final fun compareTo (J)I
 	public final fun compareTo (S)I
 	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromByte (B)Lorg/kotools/types/Zero;
