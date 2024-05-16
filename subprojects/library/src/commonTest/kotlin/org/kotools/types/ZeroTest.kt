@@ -102,6 +102,32 @@ class ZeroTest {
         assertTrue { actual > 0 }
     }
 
+    @Test
+    fun compareTo_should_return_zero_with_the_same_Int() {
+        val zero = Zero()
+        val other = 0
+        val actual: Int = zero.compareTo(other)
+        assertEquals(expected = 0, actual)
+    }
+
+    @Test
+    fun compareTo_should_return_a_negative_number_with_a_greater_Int() {
+        val zero = Zero()
+        val other: Int = (1..Int.MAX_VALUE)
+            .random()
+        val actual: Int = zero.compareTo(other)
+        assertTrue { actual < 0 }
+    }
+
+    @Test
+    fun compareTo_should_return_a_positive_number_with_a_less_Int() {
+        val zero = Zero()
+        val other: Int = (Int.MIN_VALUE..-1)
+            .random()
+        val actual: Int = zero.compareTo(other)
+        assertTrue { actual > 0 }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
