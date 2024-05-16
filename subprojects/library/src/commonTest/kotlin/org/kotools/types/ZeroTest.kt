@@ -128,6 +128,32 @@ class ZeroTest {
         assertTrue { actual > 0 }
     }
 
+    @Test
+    fun compareTo_should_return_zero_with_the_same_Long() {
+        val zero = Zero()
+        val other: Long = 0
+        val actual: Int = zero.compareTo(other)
+        assertEquals(expected = 0, actual)
+    }
+
+    @Test
+    fun compareTo_should_return_a_negative_number_with_a_greater_Long() {
+        val zero = Zero()
+        val other: Long = (1..Long.MAX_VALUE)
+            .random()
+        val actual: Int = zero.compareTo(other)
+        assertTrue { actual < 0 }
+    }
+
+    @Test
+    fun compareTo_should_return_a_positive_number_with_a_less_Long() {
+        val zero = Zero()
+        val other: Long = (Long.MIN_VALUE..-1)
+            .random()
+        val actual: Int = zero.compareTo(other)
+        assertTrue { actual > 0 }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
