@@ -22,12 +22,9 @@ import kotlin.jvm.JvmSynthetic
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  *
- * Here's a simple usage example:
+ * Here's an example of calling this function from Kotlin code:
  *
- * ```kotlin
- * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
- * println(map) // {a=1, b=2}
- * ```
+ * SAMPLE: NotEmptyMapKtKotlinSample.notEmptyMapOf.md
  */
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
