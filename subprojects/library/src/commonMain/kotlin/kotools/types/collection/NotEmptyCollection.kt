@@ -23,7 +23,7 @@ public sealed interface NotEmptyCollection<out E> {
     /**
      * All elements of this collection except the [first one][head].
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: NotEmptyCollectionKotlinSample.tail.md
      */
