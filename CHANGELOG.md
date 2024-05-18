@@ -26,7 +26,8 @@ The `Zero` type now supports the following features:
 ### 🐛 Fixed
 
 - Kotlin samples of the `NotEmptyMap.Companion.create` ([1fa89b0c8]) and the
-  `NotEmptyMap.Companion.createOrNull` functions in the API reference.
+  `NotEmptyMap.Companion.createOrNull` functions ([35d599bcc]) in the API
+  reference.
 
 ---
 
@@ -36,6 +37,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
+[35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 
 ## 🔖 Releases
 
