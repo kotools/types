@@ -41,15 +41,9 @@ public sealed interface NotEmptyCollection<out E> {
      * Implementations of this function should behave like calling the
      * [Any.toString] function on an [Iterable].
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
-     * println(collection) // [1, 2, 3]
-     *
-     * val list: Iterable<Int> = listOf(1, 2, 3)
-     * println("$collection" == "$list") // true
-     * ```
+     * SAMPLE: NotEmptyCollectionKotlinSample.toStringOverride.md
      */
     override fun toString(): String
 }

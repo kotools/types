@@ -16,4 +16,12 @@ internal class NotEmptyCollectionKotlinSample {
         result = collection.tail
         println(result) // null
     } // END
+
+    fun toStringOverride() {
+        val collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
+        println(collection) // [1, 2, 3]
+
+        val list: Iterable<Int> = listOf(1, 2, 3)
+        println("$collection" == "$list") // true
+    } // END
 }

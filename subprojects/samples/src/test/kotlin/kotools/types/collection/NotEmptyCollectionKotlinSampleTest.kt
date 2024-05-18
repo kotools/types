@@ -18,4 +18,12 @@ class NotEmptyCollectionKotlinSampleTest {
         val sample = NotEmptyCollectionKotlinSample()
         assertPrints(expected, sample::tail)
     }
+
+    @Test
+    fun `toString() should pass`() {
+        val expected: String = listOf("[1, 2, 3]", "true")
+            .joinToString(separator = "\n")
+        val sample = NotEmptyCollectionKotlinSample()
+        assertPrints(expected, sample::toStringOverride)
+    }
 }
