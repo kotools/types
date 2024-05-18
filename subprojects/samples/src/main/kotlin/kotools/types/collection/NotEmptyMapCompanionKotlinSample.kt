@@ -21,4 +21,24 @@ internal class NotEmptyMapCompanionKotlinSample {
         println(original) // {}
         println(notEmptyMap) // {a=1, b=2}
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNullWithMap() {
+        val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
+        val result: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
+        println(result) // {a=1, b=2}
+    } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNullWithMutableMap() {
+        val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
+        val notEmptyMap: NotEmptyMap<Char, Int>? =
+            NotEmptyMap.createOrNull(original) // TABS: 1
+        println(original) // {a=1, b=2}
+        println(notEmptyMap) // {a=1, b=2}
+
+        original.clear()
+        println(original) // {}
+        println(notEmptyMap) // {a=1, b=2}
+    } // END
 }

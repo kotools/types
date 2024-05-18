@@ -122,11 +122,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          *
          * Here's an example for calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
-         * val result: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
-         * println(result) // {a=1, b=2}
-         * ```
+         * SAMPLE: NotEmptyMapCompanionKotlinSample.createOrNullWithMap.md
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -135,18 +131,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * Please note that changes made to the original map will not be
          * reflected on the resulting [NotEmptyMap].
          *
-         * ```kotlin
-         * val original: MutableMap<Char, Int> =
-         *     mutableMapOf('a' to 1, 'b' to 2)
-         * val notEmptyMap: NotEmptyMap<Char, Int>? =
-         *     NotEmptyMap.createOrNull(original)
-         * println(original) // {a=1, b=2}
-         * println(notEmptyMap) // {a=1, b=2}
-         *
-         * original.clear()
-         * println(original) // {}
-         * println(notEmptyMap) // {a=1, b=2}
-         * ```
+         * SAMPLE: NotEmptyMapCompanionKotlinSample.createOrNullWithMutableMap.md
          *
          * You can use the [NotEmptyMap.Companion.create] function for throwing
          * an exception instead of returning `null` in case of invalid [map].
