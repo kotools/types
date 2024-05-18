@@ -25,8 +25,8 @@ The `Zero` type now supports the following features:
 
 ### 🐛 Fixed
 
-- Kotlin samples of the `NotEmptyMap.Companion.create` function's documentation
-  in the API reference ([1fa89b0c8]). 
+- Kotlin samples of the `NotEmptyMap.Companion.create` ([1fa89b0c8]) and the
+  `NotEmptyMap.Companion.createOrNull` functions in the API reference.
 
 ---
 

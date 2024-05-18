@@ -125,7 +125,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          * ```kotlin
          * val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
          * val result: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
-         * println(result) // Success({a=1, b=2})
+         * println(result) // {a=1, b=2}
          * ```
          *
          * The [NotEmptyMap] type being an
