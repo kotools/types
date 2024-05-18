@@ -14,13 +14,9 @@ public sealed interface NotEmptyCollection<out E> {
     /**
      * The first element of this collection.
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this property from Kotlin code:
      *
-     * ```kotlin
-     * val collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
-     * val result: Int = collection.head
-     * println(result) // 1
-     * ```
+     * SAMPLE: NotEmptyCollectionKotlinSample.head.md
      */
     public val head: E
 
