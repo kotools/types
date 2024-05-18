@@ -6,4 +6,14 @@ internal class NotEmptyCollectionKotlinSample {
         val result: Int = collection.head
         println(result) // 1
     } // END
+
+    fun tail() {
+        var collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
+        var result: NotEmptyCollection<Int>? = collection.tail
+        println(result) // [2, 3]
+
+        collection = notEmptyListOf(-1)
+        result = collection.tail
+        println(result) // null
+    } // END
 }

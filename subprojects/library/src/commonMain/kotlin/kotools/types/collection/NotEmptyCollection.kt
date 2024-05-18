@@ -23,17 +23,9 @@ public sealed interface NotEmptyCollection<out E> {
     /**
      * All elements of this collection except the [first one][head].
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * var collection: NotEmptyCollection<Int> = notEmptyListOf(1, 2, 3)
-     * var result: NotEmptyCollection<Int>? = collection.tail
-     * println(result) // [2, 3]
-     *
-     * collection = notEmptyListOf(-1)
-     * result = collection.tail
-     * println(result) // null
-     * ```
+     * SAMPLE: NotEmptyCollectionKotlinSample.tail.md
      */
     public val tail: NotEmptyCollection<E>? get() = null
 

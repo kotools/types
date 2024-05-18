@@ -10,4 +10,12 @@ class NotEmptyCollectionKotlinSampleTest {
         val sample = NotEmptyCollectionKotlinSample()
         assertPrints(expected, sample::head)
     }
+
+    @Test
+    fun `tail should pass`() {
+        val expected: String = listOf("[2, 3]", "null")
+            .joinToString(separator = "\n")
+        val sample = NotEmptyCollectionKotlinSample()
+        assertPrints(expected, sample::tail)
+    }
 }
