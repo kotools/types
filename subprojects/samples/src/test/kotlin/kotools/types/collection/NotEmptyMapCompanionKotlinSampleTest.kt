@@ -41,4 +41,11 @@ class NotEmptyMapCompanionKotlinSampleTest {
         val sample = NotEmptyMapCompanionKotlinSample()
         assertPrints(expected, sample::createOrNullWithMutableMap)
     }
+
+    @Test
+    fun `of(Pair, vararg Pair) should pass`() {
+        val expected = "{a=1, b=2}"
+        val sample = NotEmptyMapCompanionKotlinSample()
+        assertPrints(expected, sample::of)
+    }
 }

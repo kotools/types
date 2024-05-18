@@ -41,4 +41,10 @@ internal class NotEmptyMapCompanionKotlinSample {
         println(original) // {}
         println(notEmptyMap) // {a=1, b=2}
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun of() {
+        val map: NotEmptyMap<Char, Int> = NotEmptyMap.of('a' to 1, 'b' to 2)
+        println(map) // {a=1, b=2}
+    } // END
 }
