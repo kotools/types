@@ -74,13 +74,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
- * val encoded: String = Json.encodeToString(map)
- * println(encoded) // {"a":1,"b":2}
- * val decoded: NotEmptyMap<Char, Int> = Json.decodeFromString(encoded)
- * println(decoded == map) // true
- * ```
+ * SAMPLE: NotEmptyMapKotlinSample.serialization.md
  * </details>
  */
 @JvmInline
