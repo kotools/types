@@ -23,6 +23,11 @@ The `Zero` type now supports the following features:
   ([#646]).
 - Comparisons with `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
 
+### 🐛 Fixed
+
+- Kotlin samples of the `NotEmptyMap.Companion.create` function's documentation
+  in the API reference ([1fa89b0c8]). 
+
 ---
 
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
@@ -30,6 +35,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
+[1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
 
 ## 🔖 Releases
 
