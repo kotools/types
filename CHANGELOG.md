@@ -18,10 +18,10 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-The `Zero` type now supports the following features:
-- Bidirectional conversions with `Short`, `Int`, `Long`, `Float` and `Double`
-  ([#646]).
-- Comparisons with `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
+- **Experimental** conversions for the `Zero` type with the following Kotlin
+  types: `Short`, `Int`, `Long`, `Float` and `Double` ([#646]).
+- **Experimental** comparisons for the `Zero` type with the following Kotlin
+  types: `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
 
 ### 🐛 Fixed
 
