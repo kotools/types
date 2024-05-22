@@ -36,32 +36,14 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  * collection, or returns an encapsulated [IllegalArgumentException] if this
  * collection is [empty][Collection.isEmpty].
  *
- * Here's a simple usage example:
+ * Here's an example of calling this function from Kotlin code:
  *
- * ```kotlin
- * var collection: Collection<Int> = setOf(1, 2, 3, 1)
- * var result: Result<NotEmptySet<Int>> = collection.toNotEmptySet()
- * println(result) // Success([1, 2, 3])
- *
- * collection = emptySet()
- * result = collection.toNotEmptySet()
- * println(result) // Failure(IllegalArgumentException)
- * ```
+ * SAMPLE: NotEmptySetKtKotlinSample.toNotEmptySetOnCollection.md
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptySet].
  *
- * ```kotlin
- * val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
- * val notEmptySet: NotEmptySet<Int> = original.toNotEmptySet()
- *     .getOrThrow()
- * println(original) // [1, 2, 3]
- * println(notEmptySet) // [1, 2, 3]
- *
- * original.clear()
- * println(original) // []
- * println(notEmptySet) // [1, 2, 3]
- * ```
+ * SAMPLE: NotEmptySetKtKotlinSample.toNotEmptySetOnMutableCollection.md
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
