@@ -183,7 +183,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The first entry of this map.
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: NotEmptyMapKotlinSample.head.md
      */
