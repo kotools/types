@@ -20,12 +20,9 @@ import kotlin.jvm.JvmSynthetic
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  *
- * Here's a simple usage example:
+ * Here's an example of calling this function from Kotlin code:
  *
- * ```kotlin
- * val integers: NotEmptySet<Int> = notEmptySetOf(1, 2, 3, 1)
- * println(integers) // [1, 2, 3]
- * ```
+ * SAMPLE: NotEmptySetKtKotlinSample.notEmptySetOf.md
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
