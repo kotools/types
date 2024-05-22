@@ -242,13 +242,9 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The size of this map.
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this property from Kotlin code:
      *
-     * ```kotlin
-     * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
-     * val size: StrictlyPositiveInt = map.size
-     * println(size) // 2
-     * ```
+     * SAMPLE: NotEmptyMapKotlinSample.size.md
      */
     public val size: StrictlyPositiveInt
         get() = delegate.size.toStrictlyPositiveInt()

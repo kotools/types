@@ -32,4 +32,8 @@ class NotEmptyMapKotlinSampleTest {
     @Test
     fun `values should pass`(): Unit =
         assertPrints(expected = "[1, 2]", this.sample::values)
+
+    @Test
+    fun `size should pass`(): Unit =
+        assertPrints(expected = "2", this.sample::size)
 }
