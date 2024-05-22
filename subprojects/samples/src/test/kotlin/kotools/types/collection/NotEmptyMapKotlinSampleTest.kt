@@ -14,26 +14,18 @@ class NotEmptyMapKotlinSampleTest {
     }
 
     @Test
-    fun `head should pass`() {
-        val expected = "(a, 1)"
-        assertPrints(expected, this.sample::head)
-    }
+    fun `head should pass`(): Unit =
+        assertPrints(expected = "(a, 1)", this.sample::head)
 
     @Test
-    fun `tail should pass`() {
-        val expected = "{b=2, c=3}"
-        assertPrints(expected, this.sample::tail)
-    }
+    fun `tail should pass`(): Unit =
+        assertPrints(expected = "{b=2, c=3}", this.sample::tail)
 
     @Test
-    fun `entries should pass`() {
-        val expected = "[a=1, b=2]"
-        assertPrints(expected, this.sample::entries)
-    }
+    fun `entries should pass`(): Unit =
+        assertPrints(expected = "[a=1, b=2]", this.sample::entries)
 
     @Test
-    fun `keys should pass`() {
-        val expected = "[a, b]"
-        assertPrints(expected, this.sample::keys)
-    }
+    fun `keys should pass`(): Unit =
+        assertPrints(expected = "[a, b]", this.sample::keys)
 }
