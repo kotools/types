@@ -30,4 +30,10 @@ internal class NotEmptyMapKotlinSample {
         val entries: NotEmptySet<Map.Entry<Char, Int>> = map.entries
         println(entries) // [a=1, b=2]
     } // END
+
+    fun keys() {
+        val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val keys: NotEmptySet<Char> = map.keys
+        println(keys) // [a, b]
+    } // END
 }
