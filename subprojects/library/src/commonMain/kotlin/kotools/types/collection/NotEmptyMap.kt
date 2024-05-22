@@ -194,14 +194,9 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All entries of this map except [the first one][head].
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this property from Kotlin code:
      *
-     * ```kotlin
-     * val map: NotEmptyMap<Char, Int> =
-     *     notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
-     * val tail: NotEmptyMap<Char, Int>? = map.tail
-     * println(tail) // {b=2, c=3}
-     * ```
+     * SAMPLE: NotEmptyMapKotlinSample.tail.md
      */
     public val tail: NotEmptyMap<K, V>?
         get() {

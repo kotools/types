@@ -17,4 +17,11 @@ internal class NotEmptyMapKotlinSample {
         val head: Pair<Char, Int> = map.head
         println(head) // (a, 1)
     } // END
+
+    fun tail() {
+        val map: NotEmptyMap<Char, Int> =
+            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3) // TABS: 1
+        val tail: NotEmptyMap<Char, Int>? = map.tail
+        println(tail) // {b=2, c=3}
+    } // END
 }
