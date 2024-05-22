@@ -183,13 +183,9 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The first entry of this map.
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
-     * val head: Pair<Char, Int> = map.head
-     * println(head) // (a, 1)
-     * ```
+     * SAMPLE: NotEmptyMapKotlinSample.head.md
      */
     public val head: Pair<K, V>
         get() = delegate.entries.first()
