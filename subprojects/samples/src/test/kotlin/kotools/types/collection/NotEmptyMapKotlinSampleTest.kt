@@ -11,4 +11,11 @@ class NotEmptyMapKotlinSampleTest {
         val sample = NotEmptyMapKotlinSample()
         assertPrints(expected, sample::serialization)
     }
+
+    @Test
+    fun `head should pass`() {
+        val expected = "(a, 1)"
+        val sample = NotEmptyMapKotlinSample()
+        assertPrints(expected, sample::head)
+    }
 }
