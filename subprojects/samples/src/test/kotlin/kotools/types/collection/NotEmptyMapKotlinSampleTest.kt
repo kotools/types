@@ -18,4 +18,11 @@ class NotEmptyMapKotlinSampleTest {
         val sample = NotEmptyMapKotlinSample()
         assertPrints(expected, sample::head)
     }
+
+    @Test
+    fun `tail should pass`() {
+        val expected = "{b=2, c=3}"
+        val sample = NotEmptyMapKotlinSample()
+        assertPrints(expected, sample::tail)
+    }
 }
