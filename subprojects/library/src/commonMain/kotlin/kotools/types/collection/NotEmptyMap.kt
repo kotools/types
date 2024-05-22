@@ -266,19 +266,9 @@ public value class NotEmptyMap<K, out V> private constructor(
      * This function should behave like calling the [Any.toString] function on
      * a [Map] with keys of type [K] and values of type [V].
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val notEmptyMap: NotEmptyMap<Char, Int> = notEmptyMapOf(
-     *     'a' to 1,
-     *     'b' to 2,
-     *     'c' to 3
-     * )
-     * println(notEmptyMap) // {a=1, b=2, c=3}
-     *
-     * val map: Map<Char, Int> = notEmptyMap.toMap()
-     * println("$notEmptyMap" == "$map") // true
-     * ```
+     * SAMPLE: NotEmptyMapKotlinSample.toStringOverride.md
      */
     override fun toString(): String = "$delegate"
 }

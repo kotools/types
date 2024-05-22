@@ -40,4 +40,9 @@ class NotEmptyMapKotlinSampleTest {
     @Test
     fun `toMap() should pass`(): Unit =
         assertPrints(expected = "{a=1, b=2, c=3}", this.sample::toMap)
+
+    @Test
+    fun `toString() should pass`(): Unit = listOf("{a=1, b=2, c=3}", "true")
+        .joinToString(separator = "\n")
+        .let { assertPrints(expected = it, this.sample::toStringOverride) }
 }
