@@ -71,13 +71,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val string: NotEmptySet<Int> = notEmptySetOf(1, 2, 3)
- * val encoded: String = Json.encodeToString(string)
- * println(encoded) // [1,2,3]
- * val decoded: NotEmptySet<Int> = Json.decodeFromString(encoded)
- * println(decoded == string) // true
- * ```
+ * SAMPLE: NotEmptySetKotlinSample.serialization.md
  * </details>
  */
 @JvmInline
