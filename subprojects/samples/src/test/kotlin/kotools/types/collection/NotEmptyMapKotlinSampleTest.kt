@@ -28,4 +28,8 @@ class NotEmptyMapKotlinSampleTest {
     @Test
     fun `keys should pass`(): Unit =
         assertPrints(expected = "[a, b]", this.sample::keys)
+
+    @Test
+    fun `values should pass`(): Unit =
+        assertPrints(expected = "[1, 2]", this.sample::values)
 }
