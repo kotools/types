@@ -24,4 +24,10 @@ internal class NotEmptyMapKotlinSample {
         val tail: NotEmptyMap<Char, Int>? = map.tail
         println(tail) // {b=2, c=3}
     } // END
+
+    fun entries() {
+        val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val entries: NotEmptySet<Map.Entry<Char, Int>> = map.entries
+        println(entries) // [a=1, b=2]
+    } // END
 }

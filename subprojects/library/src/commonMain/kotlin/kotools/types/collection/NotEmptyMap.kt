@@ -209,13 +209,9 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All entries of this map.
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this property from Kotlin code:
      *
-     * ```kotlin
-     * val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
-     * val entries: NotEmptySet<Map.Entry<Char, Int>> = map.entries
-     * println(entries) // [a=1, b=2]
-     * ```
+     * SAMPLE: NotEmptyMapKotlinSample.entries.md
      */
     public val entries: NotEmptySet<Map.Entry<K, V>>
         get() = delegate.entries.toNotEmptySet()
