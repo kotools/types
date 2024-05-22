@@ -49,4 +49,11 @@ internal class NotEmptyMapKotlinSample {
         val size: StrictlyPositiveInt = map.size
         println(size) // 2
     } // END
+
+    fun toMap() {
+        val notEmptyMap: NotEmptyMap<Char, Int> =
+            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3) // TABS: 1
+        val map: Map<Char, Int> = notEmptyMap.toMap()
+        println(map) // {a=1, b=2, c=3}
+    } // END
 }
