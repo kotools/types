@@ -30,4 +30,10 @@ class NotEmptyMapKotlinSampleTest {
         val expected = "[a=1, b=2]"
         assertPrints(expected, this.sample::entries)
     }
+
+    @Test
+    fun `keys should pass`() {
+        val expected = "[a, b]"
+        assertPrints(expected, this.sample::keys)
+    }
 }
