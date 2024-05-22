@@ -64,7 +64,7 @@ jobs:
         run: ./gradlew :types:checkSampleReferences
       - name: Test on Kotlin/JS
         run: ./gradlew :types:jsTest
-      - name: Kotlin/JVM checks
+      - name: Check on Kotlin/JVM
         run: ./gradlew :types:checkJvm
       - name: Test on Kotlin/Native for Linux x64
         run: ./gradlew :types:linuxTest

@@ -62,7 +62,7 @@ jobs:
         run: ./gradlew :plugins:check
       - name: Test on Kotlin/JS
         run: ./gradlew :types-internal:jsTest
-      - name: Kotlin/JVM checks
+      - name: Check on Kotlin/JVM
         run: ./gradlew :types-internal:checkJvm
       - name: Test on Kotlin/Native for Linux x64
         run: ./gradlew :types-internal:linuxTest
