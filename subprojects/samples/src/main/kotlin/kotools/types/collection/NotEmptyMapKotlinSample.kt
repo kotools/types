@@ -2,6 +2,7 @@ package kotools.types.collection
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotools.types.number.StrictlyPositiveInt
 
 internal class NotEmptyMapKotlinSample {
     fun serialization() {
@@ -41,5 +42,11 @@ internal class NotEmptyMapKotlinSample {
         val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
         val values: NotEmptyList<Int> = map.values
         println(values) // [1, 2]
+    } // END
+
+    fun size() {
+        val map: NotEmptyMap<Char, Int> = notEmptyMapOf('a' to 1, 'b' to 2)
+        val size: StrictlyPositiveInt = map.size
+        println(size) // 2
     } // END
 }
