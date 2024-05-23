@@ -4,10 +4,12 @@ import org.kotools.types.assertPrints
 import kotlin.test.Test
 
 class NotEmptySetCompanionKotlinSampleTest {
+    private val sample = NotEmptySetCompanionKotlinSample()
+
     @Test
     fun `create(Collection) should pass`() {
-        val sample = NotEmptySetCompanionKotlinSample()
-        assertPrints(expected = "[1, 2, 3]", sample::createWithCollection)
+        val expected = "[1, 2, 3]"
+        assertPrints(expected, this.sample::createWithCollection)
     }
 
     @Test
@@ -18,7 +20,23 @@ class NotEmptySetCompanionKotlinSampleTest {
             "[]",
             "[1, 2, 3]"
         ).joinToString(separator = "\n")
-        val sample = NotEmptySetCompanionKotlinSample()
-        assertPrints(expected, sample::createWithMutableCollection)
+        assertPrints(expected, this.sample::createWithMutableCollection)
+    }
+
+    @Test
+    fun `createOrNull(Collection) should pass`() {
+        val expected = "[1, 2, 3]"
+        assertPrints(expected, this.sample::createOrNullWithCollection)
+    }
+
+    @Test
+    fun `createOrNull(MutableCollection) should pass`() {
+        val expected: String = listOf(
+            "[1, 2, 3]",
+            "[1, 2, 3]",
+            "[]",
+            "[1, 2, 3]"
+        ).joinToString(separator = "\n")
+        assertPrints(expected, this.sample::createOrNullWithMutableCollection)
     }
 }

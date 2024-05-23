@@ -123,12 +123,7 @@ public value class NotEmptySet<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val collection: Collection<Int> = setOf(1, 2, 3)
-         * val elements: NotEmptySet<Int>? =
-         *     NotEmptySet.createOrNull(collection)
-         * println(elements) // [1, 2, 3]
-         * ```
+         * SAMPLE: NotEmptySetCompanionKotlinSample.createOrNullWithCollection.md
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -137,16 +132,7 @@ public value class NotEmptySet<out E> private constructor(
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptySet].
          *
-         * ```kotlin
-         * val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
-         * val integers: NotEmptySet<Int>? = NotEmptySet.createOrNull(original)
-         * println(original) // [1, 2, 3]
-         * println(integers) // [1, 2, 3]
-         *
-         * original.clear()
-         * println(original) // []
-         * println(integers) // [1, 2, 3]
-         * ```
+         * SAMPLE: NotEmptySetCompanionKotlinSample.createOrNullWithMutableCollection.md
          *
          * You can use the [NotEmptySet.Companion.create] function for throwing
          * an exception instead of returning `null` in case of invalid
