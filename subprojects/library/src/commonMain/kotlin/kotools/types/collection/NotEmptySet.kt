@@ -188,13 +188,9 @@ public value class NotEmptySet<out E> private constructor(
     /**
      * Returns all elements of this set as a [Set] of type [E].
      *
-     * Here's a simple usage example:
+     * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val notEmptySet: NotEmptySet<Int> = notEmptySetOf(1, 2, 3, 1)
-     * val set: Set<Int> = notEmptySet.toSet()
-     * println(set) // [1, 2, 3]
-     * ```
+     * SAMPLE: NotEmptySetKotlinSample.toSet.md
      */
     public fun toSet(): Set<E> = elements
 
