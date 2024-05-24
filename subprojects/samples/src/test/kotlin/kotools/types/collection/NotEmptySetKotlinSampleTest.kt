@@ -11,4 +11,11 @@ class NotEmptySetKotlinSampleTest {
         val sample = NotEmptySetKotlinSample()
         assertPrints(expected, sample::serialization)
     }
+
+    @Test
+    fun `toSet() should pass`() {
+        val expected = "[1, 2, 3]"
+        val sample = NotEmptySetKotlinSample()
+        assertPrints(expected, sample::toSet)
+    }
 }
