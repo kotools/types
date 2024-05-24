@@ -155,10 +155,7 @@ public value class NotEmptySet<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val integers: NotEmptySet<Int> = NotEmptySet.of(1, 2, 3, 1)
-         * println(integers) // [1, 2, 3]
-         * ```
+         * SAMPLE: NotEmptySetCompanionKotlinSample.of.md
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
