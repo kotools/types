@@ -40,4 +40,10 @@ internal class NotEmptySetCompanionKotlinSample {
         println(original) // []
         println(integers) // [1, 2, 3]
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun of() {
+        val integers: NotEmptySet<Int> = NotEmptySet.of(1, 2, 3, 1)
+        println(integers) // [1, 2, 3]
+    } // END
 }

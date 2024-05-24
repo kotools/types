@@ -39,4 +39,10 @@ class NotEmptySetCompanionKotlinSampleTest {
         ).joinToString(separator = "\n")
         assertPrints(expected, this.sample::createOrNullWithMutableCollection)
     }
+
+    @Test
+    fun `of(E, vararg E) should pass`() {
+        val expected = "[1, 2, 3]"
+        assertPrints(expected, this.sample::of)
+    }
 }
