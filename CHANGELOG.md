@@ -29,7 +29,8 @@ All notable changes to this project will be documented in this file.
   `NotEmptyMap.Companion.createOrNull` functions ([35d599bcc]) in the API
   reference.
 
----
+### 🔥 Removed
+- The `EmailAddress` type was fully removed from the `kotools.types.web` package and test. Additionally, we have performed a dump of the Application Binary Interface (ABI) to reflect these changes. 
 
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
