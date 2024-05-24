@@ -13,8 +13,8 @@ internal class NotEmptySetKotlinSample {
     } // END
 
     fun toSet() {
-        val notEmptySet: NotEmptySet<Int> = notEmptySetOf(1, 2, 3, 1)
-        val set: Set<Int> = notEmptySet.toSet()
-        println(set) // [1, 2, 3]
+        val integers: NotEmptySet<Int> = notEmptySetOf(1, 2, 3, 1)
+        val result: Set<Int> = integers.toSet()
+        println(result) // [1, 2, 3]
     } // END
 }
