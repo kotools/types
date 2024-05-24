@@ -37,13 +37,21 @@ All notable changes to this project will be documented in this file.
 - Java sample of the `StrictlyNegativeDouble.equals(Any?)` **experimental**
   function in the API reference ([c862e0cac]).
 
+### 🔥 Removed
+
+- The `kotools.types.web.EmailAddress` **deprecated** type from the
+  **experimental** API ([#663]). 
+
 ---
 
-Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
+Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
+🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[@MartiPresa]: https://github.com/MartiPresa
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
+[#663]: https://github.com/kotools/types/pull/663
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
