@@ -85,10 +85,7 @@ public sealed interface NegativeInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: NegativeInt = NegativeInt.create(-7)
-         * println(number) // -7
-         * ```
+         * SAMPLE: NegativeIntCompanionKotlinSample.create.md
          * </details>
          *
          * <br>
@@ -99,10 +96,7 @@ public sealed interface NegativeInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * ```java
-         * final NegativeInt number = NegativeInt.Companion.create(-7);
-         * System.out.println(number); // -7
-         * ```
+         * SAMPLE: NegativeIntCompanionJavaSample.create.md
          * </details>
          * <br>
          *
