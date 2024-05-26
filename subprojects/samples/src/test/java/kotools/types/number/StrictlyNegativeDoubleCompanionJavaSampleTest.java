@@ -10,4 +10,11 @@ class StrictlyNegativeDoubleCompanionJavaSampleTest {
                 new StrictlyNegativeDoubleCompanionJavaSample();
         Assert.printsTrue(sample::create);
     }
+
+    @Test
+    void createOrNull_should_pass() {
+        final StrictlyNegativeDoubleCompanionJavaSample sample =
+                new StrictlyNegativeDoubleCompanionJavaSample();
+        Assert.printsTrue(sample::createOrNull);
+    }
 }

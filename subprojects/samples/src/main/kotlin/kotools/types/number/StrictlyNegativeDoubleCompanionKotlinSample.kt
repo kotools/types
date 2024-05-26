@@ -1,6 +1,8 @@
 package kotools.types.number
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 internal class StrictlyNegativeDoubleCompanionKotlinSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -13,5 +15,13 @@ internal class StrictlyNegativeDoubleCompanionKotlinSample {
             false // TABS: 1
         }
         println(isSuccess) // true
+    } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNull() {
+        val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
+        val result: StrictlyNegativeDouble? =
+            StrictlyNegativeDouble.createOrNull(number) // TABS: 1
+        println(result != null) // true
     } // END
 }

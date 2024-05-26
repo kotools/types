@@ -101,12 +101,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
-         * val result: StrictlyNegativeDouble? =
-         *     StrictlyNegativeDouble.createOrNull(number)
-         * println(result != null) // true
-         * ```
+         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.createOrNull.md
          * </details>
          *
          * <br/>
@@ -117,13 +112,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * ```java
-         * final Random random = new Random();
-         * final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-         * final StrictlyNegativeDouble result =
-         *         StrictlyNegativeDouble.Companion.createOrNull(number);
-         * System.out.println(result != null); // true
-         * ```
+         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.createOrNull.md
          * </details>
          * <br/>
          *
