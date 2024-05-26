@@ -36,13 +36,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-42)
- * val encoded: String = Json.encodeToString(number)
- * println(encoded) // -42.0
- * val decoded: StrictlyNegativeDouble = Json.decodeFromString(encoded)
- * println(decoded == number) // true
- * ```
+ * SAMPLE: StrictlyNegativeDoubleKotlinSample.serialization.md
  * </details>
  */
 @ExperimentalKotoolsTypesApi
