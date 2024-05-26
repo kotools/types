@@ -10,4 +10,11 @@ class NonZeroIntCompanionKotlinSampleTest {
         val sample = NonZeroIntCompanionKotlinSample()
         assertPrints(expected, sample::create)
     }
+
+    @Test
+    fun `createOrNull(Number) should pass`() {
+        val expected = "23"
+        val sample = NonZeroIntCompanionKotlinSample()
+        assertPrints(expected, sample::createOrNull)
+    }
 }

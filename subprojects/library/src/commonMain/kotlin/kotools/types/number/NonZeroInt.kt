@@ -129,10 +129,7 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: NonZeroInt? = NonZeroInt.createOrNull(23)
-         * println(number) // 23
-         * ```
+         * SAMPLE: NonZeroIntCompanionKotlinSample.createOrNull.md
          * </details>
          *
          * <br>
@@ -143,10 +140,7 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * ```java
-         * final NonZeroInt number = NonZeroInt.Companion.createOrNull(23);
-         * System.out.println(number); // 23
-         * ```
+         * SAMPLE: NonZeroIntCompanionJavaSample.createOrNull.md
          * </details>
          * <br>
          *

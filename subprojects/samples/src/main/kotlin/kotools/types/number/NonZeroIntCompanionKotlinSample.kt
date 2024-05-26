@@ -8,4 +8,10 @@ internal class NonZeroIntCompanionKotlinSample {
         val number: NonZeroInt = NonZeroInt.create(23)
         println(number) // 23
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNull() {
+        val number: NonZeroInt? = NonZeroInt.createOrNull(23)
+        println(number) // 23
+    } // END
 }
