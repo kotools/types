@@ -8,4 +8,10 @@ internal class NegativeIntCompanionKotlinSample {
         val number: NegativeInt = NegativeInt.create(-7)
         println(number) // -7
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNull() {
+        val number: NegativeInt? = NegativeInt.createOrNull(-7)
+        println(number) // -7
+    } // END
 }
