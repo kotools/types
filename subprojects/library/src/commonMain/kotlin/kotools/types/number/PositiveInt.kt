@@ -86,10 +86,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: PositiveInt = PositiveInt.create(23)
-         * println(number) // 23
-         * ```
+         * SAMPLE: PositiveIntCompanionKotlinSample.create.md
          * </details>
          *
          * <br>
@@ -100,10 +97,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * ```java
-         * final PositiveInt number = PositiveInt.Companion.create(23);
-         * System.out.println(number); // 23
-         * ```
+         * SAMPLE: PositiveIntCompanionJavaSample.create.md
          * </details>
          * <br>
          *
