@@ -23,6 +23,12 @@ All notable changes to this project will be documented in this file.
 - **Experimental** comparisons for the `Zero` type with the following Kotlin
   types: `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
 
+### ♻️ Changed
+
+- Kotlin and Java samples of the
+  `StrictlyNegativeDouble.Companion.create(Number)` function in the API
+  reference ([0a4258f3]).
+
 ### 🐛 Fixed
 
 - Kotlin samples of the `NotEmptyMap.Companion.create` ([1fa89b0c8]) and the
@@ -36,6 +42,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
+[0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 
