@@ -62,12 +62,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val result: Result<StrictlyNegativeDouble> = runCatching {
-         *     StrictlyNegativeDouble.create(-23)
-         * }
-         * println(result.isSuccess) // true
-         * ```
+         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.create.md
          * </details>
          *
          * <br/>
@@ -78,16 +73,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * ```java
-         * // The following code prints 'Success'.
-         * try {
-         *     StrictlyNegativeDouble.Companion.create(-23);
-         *     System.out.println("Success");
-         * } catch (IllegalArgumentException exception) {
-         *     final String reason = exception.getMessage();
-         *     System.out.println("Failure: " + reason);
-         * }
-         * ```
+         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.create.md
          * </details>
          * <br/>
          *
