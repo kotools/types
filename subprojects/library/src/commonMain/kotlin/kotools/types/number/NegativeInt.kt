@@ -57,14 +57,7 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val number: NegativeInt = (-123).toNegativeInt()
- *     .getOrThrow()
- * val encoded: String = Json.encodeToString(number)
- * println(encoded) // -123
- * val decoded: NegativeInt = Json.decodeFromString(encoded)
- * println(decoded == number) // true
- * ```
+ * SAMPLE: NegativeIntKotlinSample.serialization.md
  * </details>
  */
 @OptIn(InternalKotoolsTypesApi::class)
