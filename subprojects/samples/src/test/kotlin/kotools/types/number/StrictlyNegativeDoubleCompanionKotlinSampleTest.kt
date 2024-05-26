@@ -9,4 +9,10 @@ class StrictlyNegativeDoubleCompanionKotlinSampleTest {
         val sample = StrictlyNegativeDoubleCompanionKotlinSample()
         assertPrintsTrue(sample::create)
     }
+
+    @Test
+    fun `createOrNull(Number) should pass`() {
+        val sample = StrictlyNegativeDoubleCompanionKotlinSample()
+        assertPrintsTrue(sample::createOrNull)
+    }
 }
