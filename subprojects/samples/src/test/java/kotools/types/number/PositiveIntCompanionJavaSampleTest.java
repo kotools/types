@@ -11,4 +11,12 @@ class PositiveIntCompanionJavaSampleTest {
                 new PositiveIntCompanionJavaSample();
         Assert.prints(expected, sample::create);
     }
+
+    @Test
+    void createOrNull_should_pass() {
+        final String expected = "23";
+        final PositiveIntCompanionJavaSample sample =
+                new PositiveIntCompanionJavaSample();
+        Assert.prints(expected, sample::createOrNull);
+    }
 }
