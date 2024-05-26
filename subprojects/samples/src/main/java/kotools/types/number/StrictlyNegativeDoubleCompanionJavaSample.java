@@ -2,13 +2,14 @@ package kotools.types.number;
 
 class StrictlyNegativeDoubleCompanionJavaSample {
     void create() {
-        // The following code prints 'Success'.
+        final Number number = -23;
+        boolean isSuccess;
         try {
-            StrictlyNegativeDouble.Companion.create(-23); // TABS: 1
-            System.out.println("Success"); // TABS: 1
-        } catch (IllegalArgumentException exception) {
-            final String reason = exception.getMessage(); // TABS: 1
-            System.out.println("Failure: " + reason); // TABS: 1
+            StrictlyNegativeDouble.Companion.create(number); // TABS: 1
+            isSuccess = true; // TABS: 1
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false; // TABS: 1
         }
+        System.out.println(isSuccess); // true
     } // END
 }
