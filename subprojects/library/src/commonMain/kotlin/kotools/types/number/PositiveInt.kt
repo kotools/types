@@ -125,10 +125,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: PositiveInt? = PositiveInt.createOrNull(23)
-         * println(number) // 23
-         * ```
+         * SAMPLE: PositiveIntCompanionKotlinSample.createOrNull.md
          * </details>
          *
          * <br>
@@ -139,10 +136,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * ```java
-         * final PositiveInt number = PositiveInt.Companion.createOrNull(23);
-         * System.out.println(number); // 23
-         * ```
+         * SAMPLE: PositiveIntCompanionJavaSample.createOrNull.md
          * </details>
          * <br>
          *

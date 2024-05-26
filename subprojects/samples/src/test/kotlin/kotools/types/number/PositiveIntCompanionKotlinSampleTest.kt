@@ -10,4 +10,11 @@ class PositiveIntCompanionKotlinSampleTest {
         val sample = PositiveIntCompanionKotlinSample()
         assertPrints(expected, sample::create)
     }
+
+    @Test
+    fun `createOrNull(Number) should pass`() {
+        val expected = "23"
+        val sample = PositiveIntCompanionKotlinSample()
+        assertPrints(expected, sample::createOrNull)
+    }
 }
