@@ -58,14 +58,7 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val number: PositiveInt = 123.toPositiveInt()
- *     .getOrThrow()
- * val encoded: String = Json.encodeToString(number)
- * println(encoded) // 123
- * val decoded: PositiveInt = Json.decodeFromString(encoded)
- * println(decoded == number) // true
- * ```
+ * SAMPLE: PositiveIntKotlinSample.serialization.md
  * </details>
  */
 @OptIn(InternalKotoolsTypesApi::class)
