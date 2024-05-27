@@ -34,6 +34,8 @@ All notable changes to this project will be documented in this file.
 - Kotlin samples of the `NotEmptyMap.Companion.create` ([1fa89b0c8]) and the
   `NotEmptyMap.Companion.createOrNull` functions ([35d599bcc]) in the API
   reference.
+- Java sample of the `StrictlyNegativeDouble.equals(Any?)` **experimental**
+  function in the API reference.
 
 ---
 

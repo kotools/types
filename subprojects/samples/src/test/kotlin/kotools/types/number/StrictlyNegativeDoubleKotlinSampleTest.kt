@@ -1,6 +1,7 @@
 package kotools.types.number
 
 import org.kotools.types.assertPrints
+import org.kotools.types.assertPrintsTrue
 import kotlin.test.Test
 
 class StrictlyNegativeDoubleKotlinSampleTest {
@@ -10,5 +11,11 @@ class StrictlyNegativeDoubleKotlinSampleTest {
             .joinToString(separator = "\n")
         val sample = StrictlyNegativeDoubleKotlinSample()
         assertPrints(expected, sample::serialization)
+    }
+
+    @Test
+    fun `equals(nullable Any) should pass`() {
+        val sample = StrictlyNegativeDoubleKotlinSample()
+        assertPrintsTrue(sample::equalsOverride)
     }
 }
