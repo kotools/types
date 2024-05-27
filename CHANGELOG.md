@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
   `NotEmptyMap.Companion.createOrNull` functions ([35d599bcc]) in the API
   reference.
 - Java sample of the `StrictlyNegativeDouble.equals(Any?)` **experimental**
-  function in the API reference.
+  function in the API reference ([c862e0cac]).
 
 ---
 
@@ -47,6 +47,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
+[c862e0cac]: https://github.com/kotools/types/commit/c862e0cac
 
 ## 🔖 Releases
 
