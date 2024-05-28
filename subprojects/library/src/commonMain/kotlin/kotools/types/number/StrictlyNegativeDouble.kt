@@ -170,14 +170,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val number: Number = -23
-     * val first: StrictlyNegativeDouble = StrictlyNegativeDouble.create(number)
-     * val second: StrictlyNegativeDouble =
-     *     StrictlyNegativeDouble.create(number)
-     * val result: Boolean = first.hashCode() == second.hashCode()
-     * println(result) // true
-     * ```
+     * SAMPLE: StrictlyNegativeDoubleKotlinSample.hashCodeOverride.md
      * </details>
      *
      * <br/>
@@ -188,15 +181,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * ```java
-     * final int number = -23;
-     * final StrictlyNegativeDouble first =
-     *         StrictlyNegativeDouble.Companion.create(number);
-     * final StrictlyNegativeDouble second =
-     *         StrictlyNegativeDouble.Companion.create(number);
-     * final boolean result = first.hashCode() == second.hashCode();
-     * System.out.println(result); // true
-     * ```
+     * SAMPLE: StrictlyNegativeDoubleJavaSample.hashCodeOverride.md
      * </details>
      */
     @Suppress("RedundantModalityModifier")
