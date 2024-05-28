@@ -5,23 +5,27 @@ import org.kotools.types.assertPrintsTrue
 import kotlin.test.Test
 
 class StrictlyNegativeDoubleKotlinSampleTest {
+    private val sample: StrictlyNegativeDoubleKotlinSample =
+        StrictlyNegativeDoubleKotlinSample()
+
     @Test
     fun `serialization processes should pass`() {
         val expected: String = listOf(-42.0, true)
             .joinToString(separator = "\n")
-        val sample = StrictlyNegativeDoubleKotlinSample()
-        assertPrints(expected, sample::serialization)
+        assertPrints(expected, this.sample::serialization)
     }
 
     @Test
-    fun `equals(nullable Any) should pass`() {
-        val sample = StrictlyNegativeDoubleKotlinSample()
-        assertPrintsTrue(sample::equalsOverride)
-    }
+    fun `equals(nullable Any) should pass`(): Unit =
+        assertPrintsTrue(this.sample::equalsOverride)
 
     @Test
-    fun `hashCode() should pass`() {
-        val sample = StrictlyNegativeDoubleKotlinSample()
-        assertPrintsTrue(sample::hashCodeOverride)
+    fun `hashCode() should pass`(): Unit =
+        assertPrintsTrue(this.sample::hashCodeOverride)
+
+    @Test
+    fun `toDouble() should pass`() {
+        val expected = "-7.0"
+        assertPrints(expected, this.sample::toDouble)
     }
 }

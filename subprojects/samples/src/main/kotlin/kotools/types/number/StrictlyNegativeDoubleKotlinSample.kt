@@ -33,4 +33,10 @@ internal class StrictlyNegativeDoubleKotlinSample {
         val result: Boolean = first.hashCode() == second.hashCode()
         println(result) // true
     } // END
+
+    fun toDouble() {
+        val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-7)
+        val result: Double = number.toDouble()
+        println(result) // -7.0
+    } // END
 }
