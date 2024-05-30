@@ -20,4 +20,11 @@ class StrictlyNegativeDoubleJavaSample {
         final boolean result = first.hashCode() == second.hashCode();
         System.out.println(result); // true
     } // END
+
+    void toDouble() {
+        final StrictlyNegativeDouble number =
+                StrictlyNegativeDouble.Companion.create(-7); // TABS: 2
+        final double result = number.toDouble();
+        System.out.println(result); // -7.0
+    } // END
 }

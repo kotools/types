@@ -200,11 +200,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-7)
-     * val result: Double = number.toDouble()
-     * println(result) // -7.0
-     * ```
+     * SAMPLE: StrictlyNegativeDoubleKotlinSample.toDouble.md
      * </details>
      *
      * <br/>
@@ -215,12 +211,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * ```java
-     * final StrictlyNegativeDouble number =
-     *         StrictlyNegativeDouble.Companion.create(-7);
-     * final double result = number.toDouble();
-     * System.out.println(result); // -7.0
-     * ```
+     * SAMPLE: StrictlyNegativeDoubleJavaSample.toDouble.md
      * </details>
      */
     public fun toDouble(): Double = value

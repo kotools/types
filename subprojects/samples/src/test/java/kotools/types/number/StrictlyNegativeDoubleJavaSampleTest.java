@@ -4,16 +4,22 @@ import org.junit.jupiter.api.Test;
 import org.kotools.types.Assert;
 
 class StrictlyNegativeDoubleJavaSampleTest {
+    private final StrictlyNegativeDoubleJavaSample sample =
+            new StrictlyNegativeDoubleJavaSample();
+
     @Test
     void equals_should_pass() {
-        final StrictlyNegativeDoubleJavaSample sample =
-                new StrictlyNegativeDoubleJavaSample();
-        Assert.printsTrue(sample::equalsOverride);
+        Assert.printsTrue(this.sample::equalsOverride);
     }
+
     @Test
     void hashCode_should_pass() {
-        final StrictlyNegativeDoubleJavaSample sample =
-                new StrictlyNegativeDoubleJavaSample();
-        Assert.printsTrue(sample::hashCodeOverride);
+        Assert.printsTrue(this.sample::hashCodeOverride);
+    }
+
+    @Test
+    void toDouble_should_pass() {
+        final String expected = "-7.0";
+        Assert.prints(expected, this.sample::toDouble);
     }
 }
