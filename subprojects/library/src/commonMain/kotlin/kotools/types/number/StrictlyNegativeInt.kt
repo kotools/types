@@ -70,6 +70,12 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 public value class StrictlyNegativeInt private constructor(
     private val value: Int
 ) : NonZeroInt, NegativeInt {
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toInt(): Int = value
+
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toString(): String = "$value"
+
     /**
      * Contains declarations for holding or building a [StrictlyNegativeInt].
      */
@@ -149,11 +155,6 @@ public value class StrictlyNegativeInt private constructor(
             .getOrThrow()
     }
 
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toInt(): Int = value
-
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toString(): String = "$value"
 }
 
 @InternalKotoolsTypesApi
