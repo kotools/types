@@ -46,86 +46,6 @@ import org.kotools.types.internal.KotoolsTypesVersion
 public class StrictlyNegativeDouble private constructor(
     private val value: Double
 ) {
-    /** Contains static declarations for the [StrictlyNegativeDouble] type. */
-    public companion object {
-        /**
-         * Creates a [StrictlyNegativeDouble] from the specified [number], which
-         * may involve rounding or truncation, or throws an
-         * [IllegalArgumentException] if the [number] is greater than or equals
-         * zero.
-         *
-         * <br/>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.create.md
-         * </details>
-         *
-         * <br/>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.create.md
-         * </details>
-         * <br/>
-         *
-         * You can use the [StrictlyNegativeDouble.Companion.createOrNull] for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [number].
-         */
-        public fun create(number: Number): StrictlyNegativeDouble {
-            val result: StrictlyNegativeDouble? = createOrNull(number)
-            return requireNotNull(result) {
-                ErrorMessage.shouldBeLessThanZero(number)
-            }
-        }
-
-        /**
-         * Creates a [StrictlyNegativeDouble] from the specified [number], which
-         * may involve rounding or truncation, or returns `null` if the [number]
-         * is greater than or equals zero.
-         *
-         * <br/>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.createOrNull.md
-         * </details>
-         *
-         * <br/>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.createOrNull.md
-         * </details>
-         * <br/>
-         *
-         * You can use the [StrictlyNegativeDouble.Companion.create] function
-         * for throwing an exception instead of returning `null` in case of
-         * invalid [number].
-         */
-        public fun createOrNull(number: Number): StrictlyNegativeDouble? {
-            val value: Double = number.toDouble()
-            return if (value < 0) StrictlyNegativeDouble(value) else null
-        }
-    }
-
     // -------------------------- Structural equality --------------------------
 
     /**
@@ -252,6 +172,88 @@ public class StrictlyNegativeDouble private constructor(
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = "$value"
+
+    // -------------------------------------------------------------------------
+
+    /** Contains static declarations for the [StrictlyNegativeDouble] type. */
+    public companion object {
+        /**
+         * Creates a [StrictlyNegativeDouble] from the specified [number], which
+         * may involve rounding or truncation, or throws an
+         * [IllegalArgumentException] if the [number] is greater than or equals
+         * zero.
+         *
+         * <br/>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.create.md
+         * </details>
+         *
+         * <br/>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.create.md
+         * </details>
+         * <br/>
+         *
+         * You can use the [StrictlyNegativeDouble.Companion.createOrNull] for
+         * returning `null` instead of throwing an exception in case of invalid
+         * [number].
+         */
+        public fun create(number: Number): StrictlyNegativeDouble {
+            val result: StrictlyNegativeDouble? = createOrNull(number)
+            return requireNotNull(result) {
+                ErrorMessage.shouldBeLessThanZero(number)
+            }
+        }
+
+        /**
+         * Creates a [StrictlyNegativeDouble] from the specified [number], which
+         * may involve rounding or truncation, or returns `null` if the [number]
+         * is greater than or equals zero.
+         *
+         * <br/>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.createOrNull.md
+         * </details>
+         *
+         * <br/>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.createOrNull.md
+         * </details>
+         * <br/>
+         *
+         * You can use the [StrictlyNegativeDouble.Companion.create] function
+         * for throwing an exception instead of returning `null` in case of
+         * invalid [number].
+         */
+        public fun createOrNull(number: Number): StrictlyNegativeDouble? {
+            val value: Double = number.toDouble()
+            return if (value < 0) StrictlyNegativeDouble(value) else null
+        }
+    }
 }
 
 @InternalKotoolsTypesApi
