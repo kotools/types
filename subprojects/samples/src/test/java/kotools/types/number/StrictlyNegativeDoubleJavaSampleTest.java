@@ -10,4 +10,10 @@ class StrictlyNegativeDoubleJavaSampleTest {
                 new StrictlyNegativeDoubleJavaSample();
         Assert.printsTrue(sample::equalsOverride);
     }
+    @Test
+    void hashCode_should_pass() {
+        final StrictlyNegativeDoubleJavaSample sample =
+                new StrictlyNegativeDoubleJavaSample();
+        Assert.printsTrue(sample::hashCodeOverride);
+    }
 }

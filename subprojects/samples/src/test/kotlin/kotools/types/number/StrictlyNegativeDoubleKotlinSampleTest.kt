@@ -18,4 +18,10 @@ class StrictlyNegativeDoubleKotlinSampleTest {
         val sample = StrictlyNegativeDoubleKotlinSample()
         assertPrintsTrue(sample::equalsOverride)
     }
+
+    @Test
+    fun `hashCode() should pass`() {
+        val sample = StrictlyNegativeDoubleKotlinSample()
+        assertPrintsTrue(sample::hashCodeOverride)
+    }
 }
