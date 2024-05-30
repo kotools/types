@@ -47,7 +47,7 @@ class ZeroJavaSampleTest {
 
     @Test
     void toByte_should_pass() {
-        final String expected = "0";
+        final int expected = 0;
         Assert.prints(expected, this.sample::toByte);
     }
 
@@ -78,7 +78,7 @@ class ZeroJavaSampleTest {
 
     @Test
     void toStringSample_should_pass() {
-        final String expected = "0";
+        final int expected = 0;
         Assert.prints(expected, this.sample::toStringSample);
     }
 }
