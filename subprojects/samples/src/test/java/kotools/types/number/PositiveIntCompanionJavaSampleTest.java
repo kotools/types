@@ -6,7 +6,7 @@ import org.kotools.types.Assert;
 class PositiveIntCompanionJavaSampleTest {
     @Test
     void create_should_pass() {
-        final String expected = "23";
+        final int expected = 23;
         final PositiveIntCompanionJavaSample sample =
                 new PositiveIntCompanionJavaSample();
         Assert.prints(expected, sample::create);
@@ -14,7 +14,7 @@ class PositiveIntCompanionJavaSampleTest {
 
     @Test
     void createOrNull_should_pass() {
-        final String expected = "23";
+        final int expected = 23;
         final PositiveIntCompanionJavaSample sample =
                 new PositiveIntCompanionJavaSample();
         Assert.prints(expected, sample::createOrNull);
