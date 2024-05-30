@@ -24,12 +24,10 @@ class StrictlyNegativeDoubleKotlinSampleTest {
         assertPrintsTrue(this.sample::hashCodeOverride)
 
     @Test
-    fun `toDouble() should pass`() {
-        val expected = "-7.0"
-        assertPrints(expected, this.sample::toDouble)
-    }
+    fun `toDouble() should pass`(): Unit =
+        assertPrints(expected = -7.0, this.sample::toDouble)
 
     @Test
     fun `toString() should pass`(): Unit =
-        assertPrints(expected = "-23.0", this.sample::toStringOverride)
+        assertPrints(expected = -23.0, this.sample::toStringOverride)
 }

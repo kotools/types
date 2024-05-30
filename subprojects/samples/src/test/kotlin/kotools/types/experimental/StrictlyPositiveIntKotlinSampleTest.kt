@@ -6,8 +6,7 @@ import kotlin.test.Test
 class StrictlyPositiveIntKotlinSampleTest {
     @Test
     fun `unaryMinus() should pass`() {
-        val expected = "-1"
         val sample = StrictlyPositiveIntKotlinSample()
-        assertPrints(expected, sample::unaryMinusOperator)
+        assertPrints(expected = -1, sample::unaryMinusOperator)
     }
 }

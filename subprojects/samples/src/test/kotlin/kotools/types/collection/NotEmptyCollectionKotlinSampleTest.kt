@@ -6,14 +6,13 @@ import kotlin.test.Test
 class NotEmptyCollectionKotlinSampleTest {
     @Test
     fun `head should pass`() {
-        val expected = "1"
         val sample = NotEmptyCollectionKotlinSample()
-        assertPrints(expected, sample::head)
+        assertPrints(expected = 1, sample::head)
     }
 
     @Test
     fun `tail should pass`() {
-        val expected: String = listOf("[2, 3]", "null")
+        val expected: String = listOf("[2, 3]", null)
             .joinToString(separator = "\n")
         val sample = NotEmptyCollectionKotlinSample()
         assertPrints(expected, sample::tail)
@@ -21,7 +20,7 @@ class NotEmptyCollectionKotlinSampleTest {
 
     @Test
     fun `toString() should pass`() {
-        val expected: String = listOf("[1, 2, 3]", "true")
+        val expected: String = listOf("[1, 2, 3]", true)
             .joinToString(separator = "\n")
         val sample = NotEmptyCollectionKotlinSample()
         assertPrints(expected, sample::toStringOverride)

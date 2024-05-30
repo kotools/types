@@ -4,10 +4,10 @@ import com.github.stefanbirkner.systemlambda.SystemLambda
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-internal fun assertPrints(expected: String, block: () -> Unit) {
+internal fun assertPrints(expected: Any, block: () -> Unit) {
     val actual: String = SystemLambda.tapSystemOut(block)
         .trim()
-    assertEquals(expected, actual)
+    assertEquals("$expected", actual)
 }
 
 internal fun assertPrintsTrue(block: () -> Unit) {

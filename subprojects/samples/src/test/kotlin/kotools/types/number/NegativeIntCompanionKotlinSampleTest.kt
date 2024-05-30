@@ -6,15 +6,13 @@ import kotlin.test.Test
 class NegativeIntCompanionKotlinSampleTest {
     @Test
     fun `create(Number) should pass`() {
-        val expected = "-7"
         val sample = NegativeIntCompanionKotlinSample()
-        assertPrints(expected, sample::create)
+        assertPrints(expected = -7, sample::create)
     }
 
     @Test
     fun `createOrNull(Number) should pass`() {
-        val expected = "-7"
         val sample = NegativeIntCompanionKotlinSample()
-        assertPrints(expected, sample::createOrNull)
+        assertPrints(expected = -7, sample::createOrNull)
     }
 }

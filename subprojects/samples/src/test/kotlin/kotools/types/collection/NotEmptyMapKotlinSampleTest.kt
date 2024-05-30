@@ -35,7 +35,7 @@ class NotEmptyMapKotlinSampleTest {
 
     @Test
     fun `size should pass`(): Unit =
-        assertPrints(expected = "2", this.sample::size)
+        assertPrints(expected = 2, this.sample::size)
 
     @Test
     fun `toMap() should pass`(): Unit =
@@ -43,7 +43,7 @@ class NotEmptyMapKotlinSampleTest {
 
     @Test
     fun `toString() should pass`() {
-        val expected: String = listOf("{a=1, b=2, c=3}", "true")
+        val expected: String = listOf("{a=1, b=2, c=3}", true)
             .joinToString(separator = "\n")
         assertPrints(expected, this.sample::toStringOverride)
     }

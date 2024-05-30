@@ -7,7 +7,6 @@ class PositiveIntKotlinSampleTest {
     @Test
     fun `unaryMinus() should pass`() {
         val sample = PositiveIntKotlinSample()
-        val expected = "-1"
-        assertPrints(expected, sample::unaryMinusOperator)
+        assertPrints(expected = -1, sample::unaryMinusOperator)
     }
 }
