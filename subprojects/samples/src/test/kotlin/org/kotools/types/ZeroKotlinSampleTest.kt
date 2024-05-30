@@ -36,10 +36,8 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::compareToDouble)
 
     @Test
-    fun `toByte() should pass`() {
-        val expected = "0"
-        assertPrints(expected, ZeroKotlinSample::toByte)
-    }
+    fun `toByte() should pass`(): Unit =
+        assertPrints(expected = 0, ZeroKotlinSample::toByte)
 
     @Test
     fun `toShort() should pass`(): Unit =
@@ -62,8 +60,6 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::toDouble)
 
     @Test
-    fun toStringSample_should_pass() {
-        val expected = "0"
-        assertPrints(expected, ZeroKotlinSample::toStringSample)
-    }
+    fun toStringSample_should_pass(): Unit =
+        assertPrints(expected = 0, ZeroKotlinSample::toStringSample)
 }
