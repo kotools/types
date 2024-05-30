@@ -22,4 +22,10 @@ class StrictlyNegativeDoubleJavaSampleTest {
         final String expected = "-7.0";
         Assert.prints(expected, this.sample::toDouble);
     }
+
+    @Test
+    void toString_should_pass() {
+        final String expected = "-23.0";
+        Assert.prints(expected, this.sample::toStringOverride);
+    }
 }

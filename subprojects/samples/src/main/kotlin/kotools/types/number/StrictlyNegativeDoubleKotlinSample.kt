@@ -39,4 +39,10 @@ internal class StrictlyNegativeDoubleKotlinSample {
         val result: Double = number.toDouble()
         println(result) // -7.0
     } // END
+
+    fun toStringOverride() {
+        val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-23)
+        val result = "$number" // or number.toString()
+        println(result) // -23.0
+    } // END
 }

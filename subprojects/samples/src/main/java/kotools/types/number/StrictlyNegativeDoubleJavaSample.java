@@ -27,4 +27,11 @@ class StrictlyNegativeDoubleJavaSample {
         final double result = number.toDouble();
         System.out.println(result); // -7.0
     } // END
+
+    void toStringOverride() {
+        final StrictlyNegativeDouble number =
+                StrictlyNegativeDouble.Companion.create(-23); // TABS: 2
+        final String result = number.toString();
+        System.out.println(result); // -23.0
+    } // END
 }

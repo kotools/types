@@ -147,11 +147,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-23)
-     * val result = "$number" // or number.toString()
-     * println(result) // -23.0
-     * ```
+     * SAMPLE: StrictlyNegativeDoubleKotlinSample.toStringOverride.md
      * </details>
      *
      * <br/>
@@ -162,12 +158,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * ```java
-     * final StrictlyNegativeDouble number =
-     *         StrictlyNegativeDouble.Companion.create(-23);
-     * final String result = number.toString();
-     * System.out.println(result); // -23.0
-     * ```
+     * SAMPLE: StrictlyNegativeDoubleJavaSample.toStringOverride.md
      * </details>
      */
     @Suppress("RedundantModalityModifier")

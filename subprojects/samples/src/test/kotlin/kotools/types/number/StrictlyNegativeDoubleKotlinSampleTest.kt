@@ -28,4 +28,8 @@ class StrictlyNegativeDoubleKotlinSampleTest {
         val expected = "-7.0"
         assertPrints(expected, this.sample::toDouble)
     }
+
+    @Test
+    fun `toString() should pass`(): Unit =
+        assertPrints(expected = "-23.0", this.sample::toStringOverride)
 }
