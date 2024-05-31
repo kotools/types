@@ -53,14 +53,7 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val number: StrictlyPositiveInt = 123.toStrictlyPositiveInt()
- *     .getOrThrow()
- * val encoded: String = Json.encodeToString(number)
- * println(encoded) // 123
- * val decoded: StrictlyPositiveInt = Json.decodeFromString(encoded)
- * println(decoded == number) // true
- * ```
+ * SAMPLE: StrictlyPositiveIntKotlinSample.serialization.md
  * </details>
  */
 @JvmInline
