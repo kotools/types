@@ -9,4 +9,10 @@ class NotBlankStringCompanionKotlinSampleTest {
         val sample = NotBlankStringCompanionKotlinSample()
         assertPrints(expected = "Kotools Types", sample::create)
     }
+
+    @Test
+    fun `createOrNull(Any) should pass`() {
+        val sample = NotBlankStringCompanionKotlinSample()
+        assertPrints(expected = "Kotools Types", sample::createOrNull)
+    }
 }
