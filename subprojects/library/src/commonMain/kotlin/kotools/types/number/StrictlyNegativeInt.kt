@@ -89,10 +89,7 @@ public value class StrictlyNegativeInt private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: StrictlyNegativeInt = StrictlyNegativeInt.create(-7)
-         * println(number) // -7
-         * ```
+         * SAMPLE: StrictlyNegativeIntCompanionKotlinSample.create.md
          *
          * The [StrictlyNegativeInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
