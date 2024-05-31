@@ -68,6 +68,48 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
 public value class NotBlankString private constructor(
     private val value: String
 ) : Comparable<NotBlankString> {
+    /** Returns the length of this string. */
+    public val length: StrictlyPositiveInt
+        get() = value.length.toStrictlyPositiveInt()
+            .getOrThrow()
+
+    /**
+     * Compares this string alphabetically with the [other] one for order.
+     * Returns zero if this string equals the [other] one, a negative number if
+     * it's less than the [other] one, or a positive number if it's greater than
+     * the [other] one.
+     */
+    @Since(KotoolsTypesVersion.V4_1_0)
+    override infix fun compareTo(other: NotBlankString): Int =
+        "$this".compareTo("$other")
+
+    /**
+     * Concatenates this string with the string representation of the [other]
+     * object.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * ```kotlin
+     * val text: NotBlankString = "hello".toNotBlankString()
+     *     .getOrThrow()
+     * val message: NotBlankString = text + " world"
+     * println(message) // hello world
+     * ```
+     *
+     * The [NotBlankString] type being an
+     * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
+     * this function is not available yet for Java users.
+     */
+    @ExperimentalKotoolsTypesApi
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
+    @JvmSynthetic
+    public operator fun plus(other: Any): NotBlankString = value.plus("$other")
+        .toNotBlankString()
+        .getOrThrow()
+
+    /** Returns this string as a [String]. */
+    override fun toString(): String = value
+
     /** Contains static declarations for the [NotBlankString] type. */
     public companion object {
         /**
@@ -136,48 +178,6 @@ public value class NotBlankString private constructor(
             if (value.isBlank()) null
             else NotBlankString(value)
     }
-
-    /** Returns the length of this string. */
-    public val length: StrictlyPositiveInt
-        get() = value.length.toStrictlyPositiveInt()
-            .getOrThrow()
-
-    /**
-     * Compares this string alphabetically with the [other] one for order.
-     * Returns zero if this string equals the [other] one, a negative number if
-     * it's less than the [other] one, or a positive number if it's greater than
-     * the [other] one.
-     */
-    @Since(KotoolsTypesVersion.V4_1_0)
-    override infix fun compareTo(other: NotBlankString): Int =
-        "$this".compareTo("$other")
-
-    /**
-     * Concatenates this string with the string representation of the [other]
-     * object.
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * ```kotlin
-     * val text: NotBlankString = "hello".toNotBlankString()
-     *     .getOrThrow()
-     * val message: NotBlankString = text + " world"
-     * println(message) // hello world
-     * ```
-     *
-     * The [NotBlankString] type being an
-     * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-     * this function is not available yet for Java users.
-     */
-    @ExperimentalKotoolsTypesApi
-    @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-    @JvmSynthetic
-    public operator fun plus(other: Any): NotBlankString = value.plus("$other")
-        .toNotBlankString()
-        .getOrThrow()
-
-    /** Returns this string as a [String]. */
-    override fun toString(): String = value
 }
 
 @InternalKotoolsTypesApi
