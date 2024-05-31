@@ -8,4 +8,10 @@ internal class StrictlyPositiveIntCompanionKotlinSample {
         val number: StrictlyPositiveInt = StrictlyPositiveInt.create(42)
         println(number) // 42
     } // END
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    fun createOrNull() {
+        val number: StrictlyPositiveInt? = StrictlyPositiveInt.createOrNull(42)
+        println(number) // 42
+    } // END
 }
