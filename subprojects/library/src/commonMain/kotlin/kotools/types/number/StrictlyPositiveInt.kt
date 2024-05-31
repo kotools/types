@@ -63,6 +63,12 @@ public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
 public value class StrictlyPositiveInt private constructor(
     private val value: Int
 ) : NonZeroInt, PositiveInt {
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toInt(): Int = value
+
+    @Since(KotoolsTypesVersion.V4_0_0)
+    override fun toString(): String = "$value"
+
     /**
      * Contains declarations for holding or building a [StrictlyPositiveInt].
      */
@@ -142,11 +148,6 @@ public value class StrictlyPositiveInt private constructor(
             .getOrThrow()
     }
 
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toInt(): Int = value
-
-    @Since(KotoolsTypesVersion.V4_0_0)
-    override fun toString(): String = "$value"
 }
 
 @InternalKotoolsTypesApi
