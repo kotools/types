@@ -9,4 +9,10 @@ class StrictlyPositiveIntCompanionKotlinSampleTest {
         val sample = StrictlyPositiveIntCompanionKotlinSample()
         assertPrints(expected = 42, sample::create)
     }
+
+    @Test
+    fun `createOrNull(Number) should pass`() {
+        val sample = StrictlyPositiveIntCompanionKotlinSample()
+        assertPrints(expected = 42, sample::createOrNull)
+    }
 }
