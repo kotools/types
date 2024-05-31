@@ -89,10 +89,7 @@ public value class StrictlyPositiveInt private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * ```kotlin
-         * val number: StrictlyPositiveInt = StrictlyPositiveInt.create(42)
-         * println(number) // 42
-         * ```
+         * SAMPLE: StrictlyPositiveIntCompanionKotlinSample.create.md
          *
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
