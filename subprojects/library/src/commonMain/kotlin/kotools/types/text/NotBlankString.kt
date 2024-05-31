@@ -89,12 +89,7 @@ public value class NotBlankString private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * ```kotlin
-     * val text: NotBlankString = "hello".toNotBlankString()
-     *     .getOrThrow()
-     * val message: NotBlankString = text + " world"
-     * println(message) // hello world
-     * ```
+     * SAMPLE: NotBlankStringKotlinSample.plusOperator.md
      *
      * The [NotBlankString] type being an
      * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
