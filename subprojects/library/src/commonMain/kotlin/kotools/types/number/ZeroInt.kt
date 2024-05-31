@@ -30,12 +30,7 @@ import org.kotools.types.internal.Since
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val encoded: String = Json.encodeToString(ZeroInt)
- * println(encoded) // 0
- * val decoded: ZeroInt = Json.decodeFromString(encoded)
- * println(decoded === ZeroInt) // true
- * ```
+ * SAMPLE: ZeroIntKotlinSample.serialization.md
  * </details>
  */
 @OptIn(InternalKotoolsTypesApi::class)
