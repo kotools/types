@@ -51,14 +51,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * ```kotlin
- * val string: NotBlankString = "hello world".toNotBlankString()
- *     .getOrThrow()
- * val encoded: String = Json.encodeToString(string)
- * println(encoded) // "hello world"
- * val decoded: NotBlankString = Json.decodeFromString(encoded)
- * println(decoded == string) // true
- * ```
+ * SAMPLE: NotBlankStringKotlinSample.serialization.md
  * </details>
  */
 @JvmInline
