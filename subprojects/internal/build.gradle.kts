@@ -1,6 +1,6 @@
 plugins {
     id("org.kotools.types.dev.tasks")
-    id("org.kotools.types.gradle.kotlin.multiplatform")
+    id("org.kotools.types.kotlin.multiplatform")
     alias(libs.plugins.dokka)
     `maven-publish`
     signing
