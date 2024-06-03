@@ -1,6 +1,6 @@
 plugins {
     id("org.kotools.types.dev.tasks")
-    id("org.kotools.types.gradle.kotlin.jvm")
+    id("org.kotools.types.kotlin.jvm")
 }
 
 devTasks.list(tasks.check)

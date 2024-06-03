@@ -26,10 +26,10 @@ gradlePlugin {
             id = "${prefix}.kotlin.multiplatform"
             implementationClass = "${prefix}.gradle.${this.name}Plugin"
         }
-        register("KotlinJvmConventionPlugin").configure {
-            val prefix = "org.kotools.types.gradle"
+        register("KotlinJvm").configure {
+            val prefix = "org.kotools.types"
             id = "${prefix}.kotlin.jvm"
-            implementationClass = "${prefix}.KotlinJvmPlugin"
+            implementationClass = "${prefix}.gradle.${this.name}Plugin"
         }
         register("KotoolsTypesDocumentationPlugin").configure {
             val prefix = "org.kotools.types"
