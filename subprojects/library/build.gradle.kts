@@ -26,7 +26,10 @@ kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
-samples.project = project(":samples")
+samples {
+    project = project(":samples")
+    sourcesWithoutInlinedSamples()
+}
 
 // ------------------------------- Dependencies --------------------------------
 
