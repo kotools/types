@@ -16,10 +16,10 @@ dependencies {
 gradlePlugin {
     plugins {
         kotoolsTypesPlugin("Publication")
-        register("DevTasksConventionPlugin").configure {
-            val prefix = "org.kotools.types.gradle"
+        register("DevTasks").configure {
+            val prefix = "org.kotools.types"
             id = "${prefix}.dev.tasks"
-            implementationClass = "${prefix}.DevTasksPlugin"
+            implementationClass = "${prefix}.gradle.${this.name}Plugin"
         }
         register("KotlinMultiplatformConventionPlugin").configure {
             val prefix = "org.kotools.types.gradle"

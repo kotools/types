@@ -1,5 +1,5 @@
 plugins {
-    id("org.kotools.types.gradle.dev.tasks")
+    id("org.kotools.types.dev.tasks")
     id("org.kotools.types.gradle.kotlin.jvm")
 }
 
