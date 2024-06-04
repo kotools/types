@@ -92,7 +92,7 @@ class EmailAddressTest {
 }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-class EmailAddressCompanionCommonTest {
+class EmailAddressCompanionTest {
     @Test
     fun pattern_should_pass() {
         val actual: String = EmailAddress.PATTERN
