@@ -123,14 +123,14 @@ public class EmailAddress private constructor(private val value: String) {
          * Here's the explanation associated to each symbol used in this
          * pattern:
          * - `^` **Beginning.** Matches the beginning of the string, or the
-         * beginning of a line if the multiline flag (m) is enabled.
+         * beginning of a line if the multiline flag (**m**) is enabled.
          * - `\S` **Not whitespace.** Matches any character that is not a
          * whitespace character (spaces, tabs, line breaks).
          * - `+` **Quantifier.** Match 1 or more of the preceding token.
          * - `@` **Character.** Match a "@" character (char code 64).
          * - `\.` **Escaped character.** Matches a "." character (char code 46).
          * - `$` **End.** Matches the end of the string, or the end of a line if
-         * the multiline flag (m) is enabled.
+         * the multiline flag (**m**) is enabled.
          *
          * <br>
          * <details open>
