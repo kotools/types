@@ -1,15 +1,15 @@
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 
 plugins {
-    id("org.kotools.types.dev.tasks")
-    id("org.kotools.types.kotlin.multiplatform")
+    alias(libs.plugins.kotools.types.dev.tasks)
+    alias(libs.plugins.kotools.types.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.kotools.types.documentation)
+    alias(libs.plugins.kotools.types.samples)
     `maven-publish`
     signing
-    id("org.kotools.types.documentation")
-    id("kotools.types.publication")
-    id("org.kotools.types.samples")
+    alias(libs.plugins.kotools.types.publication)
 }
 
 // ----------------------------- Plugin extensions -----------------------------
