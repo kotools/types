@@ -24,6 +24,24 @@ version.ref = "kotlinx-binary-compatibility-validator"
 id = "org.jetbrains.kotlin.plugin.serialization"
 version.ref = "kotlin"
 
+[plugins.kotools-types-dev-tasks]
+id = "org.kotools.types.dev.tasks"
+
+[plugins.kotools-types-documentation]
+id = "org.kotools.types.documentation"
+
+[plugins.kotools-types-kotlin-jvm]
+id = "org.kotools.types.kotlin.jvm"
+
+[plugins.kotools-types-kotlin-multiplatform]
+id = "org.kotools.types.kotlin.multiplatform"
+
+[plugins.kotools-types-publication]
+id = "kotools.types.publication"
+
+[plugins.kotools-types-samples]
+id = "org.kotools.types.samples"
+
 # --------------------------------- Libraries ----------------------------------
 
 [libraries.dokka-base]

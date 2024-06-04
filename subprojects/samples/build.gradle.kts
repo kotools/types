@@ -1,6 +1,6 @@
 plugins {
-    id("org.kotools.types.dev.tasks")
-    id("org.kotools.types.kotlin.jvm")
+    alias(libs.plugins.kotools.types.dev.tasks)
+    alias(libs.plugins.kotools.types.kotlin.jvm)
 }
 
 devTasks.list(tasks.check)

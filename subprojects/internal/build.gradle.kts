@@ -1,11 +1,11 @@
 plugins {
-    id("org.kotools.types.dev.tasks")
-    id("org.kotools.types.kotlin.multiplatform")
+    alias(libs.plugins.kotools.types.dev.tasks)
+    alias(libs.plugins.kotools.types.kotlin.multiplatform)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.kotools.types.documentation)
     `maven-publish`
     signing
-    id("org.kotools.types.documentation")
-    id("kotools.types.publication")
+    alias(libs.plugins.kotools.types.publication)
 }
 
 devTasks.list(tasks.checkJs, tasks.checkJvm)

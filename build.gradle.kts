@@ -5,7 +5,7 @@ allprojects {
 
 plugins {
     alias(libs.plugins.dokka)
-    id("org.kotools.types.documentation")
+    alias(libs.plugins.kotools.types.documentation)
 }
 
 private val projectCommercialName: String = "Kotools Types"
