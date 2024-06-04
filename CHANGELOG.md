@@ -29,7 +29,7 @@ All notable changes to this project will be documented in this file.
   `StrictlyNegativeDouble.Companion.create(Number)` function in the API
   reference ([0a4258f3]).
 - Make multiline flags bold in the API reference of the
-  `EmailAddress.Companion.PATTERN` property.
+  `EmailAddress.Companion.PATTERN` property ([1a0ea52b]).
 
 ### 🐛 Fixed
 
@@ -55,6 +55,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#650]: https://github.com/kotools/types/issues/650
 [#663]: https://github.com/kotools/types/pull/663
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
+[1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 [c862e0cac]: https://github.com/kotools/types/commit/c862e0cac
