@@ -911,6 +911,10 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromDouble.md
          * </details>
+         * <br>
+         *
+         * You can use the [fromDoubleOrNull] function for returning `null`
+         * instead of throwing an exception in case of invalid [number].
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
@@ -946,6 +950,10 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromDoubleOrNull.md
          * </details>
+         * <br>
+         *
+         * You can use the [fromDouble] function for throwing an exception
+         * instead of returning `null` in case of invalid [number].
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
