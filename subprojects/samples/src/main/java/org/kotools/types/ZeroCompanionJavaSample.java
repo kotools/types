@@ -1,6 +1,11 @@
 package org.kotools.types;
 
 class ZeroCompanionJavaSample {
+    void pattern() {
+        final String pattern = Zero.PATTERN;
+        System.out.println(pattern); // ^[+-]?0+(?:\.0+)?$
+    } // END
+
     void fromByte() {
         final byte number = 0;
         boolean isSuccess;

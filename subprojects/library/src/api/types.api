@@ -447,6 +447,7 @@ public final class org/kotools/types/EmailAddress$Companion {
 
 public final class org/kotools/types/Zero {
 	public static final field Companion Lorg/kotools/types/Zero$Companion;
+	public static final field PATTERN Ljava/lang/String;
 	public fun <init> ()V
 	public final fun compareTo (B)I
 	public final fun compareTo (D)I

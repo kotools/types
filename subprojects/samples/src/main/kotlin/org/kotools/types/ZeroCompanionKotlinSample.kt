@@ -4,6 +4,11 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroCompanionKotlinSample {
+    fun pattern() {
+        val pattern: String = Zero.PATTERN
+        println(pattern) // ^[+-]?0+(?:\.0+)?$
+    } // END
+
     fun fromByte() {
         val number: Byte = 0
         val isSuccess: Boolean = try {

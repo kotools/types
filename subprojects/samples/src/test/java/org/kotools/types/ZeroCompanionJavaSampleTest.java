@@ -7,6 +7,12 @@ class ZeroCompanionJavaSampleTest {
             new ZeroCompanionJavaSample();
 
     @Test
+    void pattern_should_pass() {
+        final String expected = "^[+-]?0+(?:\\.0+)?$";
+        Assert.prints(expected, this.sample::pattern);
+    }
+
+    @Test
     void fromByte_should_pass() {
         Assert.printsTrue(this.sample::fromByte);
     }
