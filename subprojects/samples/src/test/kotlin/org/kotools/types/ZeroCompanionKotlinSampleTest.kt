@@ -4,6 +4,12 @@ import kotlin.test.Test
 
 class ZeroCompanionKotlinSampleTest {
     @Test
+    fun `PATTERN should pass`() {
+        val expected = "^[+-]?0+(?:\\.0+)?\$"
+        assertPrints(expected, ZeroCompanionKotlinSample::pattern)
+    }
+
+    @Test
     fun `fromByte(Byte) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::fromByte)
 

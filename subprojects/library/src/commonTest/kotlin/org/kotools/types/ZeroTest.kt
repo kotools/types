@@ -272,6 +272,13 @@ class ZeroTest {
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCompanionTest {
     @Test
+    fun pattern_should_pass() {
+        val actual: String = Zero.PATTERN
+        val expected = "^[+-]?0+(?:\\.0+)?\$"
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun fromByte_should_pass_with_a_Byte_that_equals_zero() {
         val number: Byte = 0
         Zero.fromByte(number)
