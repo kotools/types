@@ -138,7 +138,7 @@ public class EmailAddress private constructor(private val value: String) {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this property from Kotlin code:
          *
          * SAMPLE: EmailAddressCompanionKotlinSample.patternSample.md
          * </details>
@@ -149,7 +149,7 @@ public class EmailAddress private constructor(private val value: String) {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this function from Java code:
+         * Here's an example of calling this property from Java code:
          *
          * SAMPLE: EmailAddressCompanionJavaSample.patternSample.md
          * </details>

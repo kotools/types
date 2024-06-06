@@ -28,8 +28,7 @@ All notable changes to this project will be documented in this file.
 - Kotlin and Java samples of the
   `StrictlyNegativeDouble.Companion.create(Number)` function in the API
   reference ([0a4258f3]).
-- Make multiline flags bold in the API reference of the
-  `EmailAddress.Companion.PATTERN` property ([1a0ea52b]).
+- Documentation of the `EmailAddress.Companion.PATTERN` property ([1a0ea52b]).
 
 ### 🐛 Fixed
 
