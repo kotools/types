@@ -106,6 +106,18 @@ class ZeroCompanionJavaSample {
         System.out.println(zero != null); // true
     } // END
 
+    void fromString() {
+        final Object number = "-000.000";
+        boolean isSuccess;
+        try {
+            Zero.fromString(number); // TABS: 1
+            isSuccess = true; // TABS: 1
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false; // TABS: 1
+        }
+        System.out.println(isSuccess); // true
+    } // END
+
     void fromStringOrNull() {
         final Object number = "-000.000";
         final Zero zero = Zero.fromStringOrNull(number);

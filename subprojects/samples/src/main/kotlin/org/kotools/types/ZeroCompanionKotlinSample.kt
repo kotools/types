@@ -103,6 +103,17 @@ internal object ZeroCompanionKotlinSample {
         println(zero != null) // true
     } // END
 
+    fun fromString() {
+        val number: Any = "-000.000"
+        val isSuccess: Boolean = try {
+            Zero.fromString(number) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
+        }
+        println(isSuccess) // true
+    } // END
+
     fun fromStringOrNull() {
         val number: Any = "-000.000"
         val zero: Zero? = Zero.fromStringOrNull(number)

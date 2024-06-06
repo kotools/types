@@ -73,6 +73,11 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
+    void fromString_should_pass() {
+        Assert.printsTrue(this.sample::fromString);
+    }
+
+    @Test
     void fromStringOrNull_should_pass() {
         Assert.printsTrue(this.sample::fromStringOrNull);
     }
