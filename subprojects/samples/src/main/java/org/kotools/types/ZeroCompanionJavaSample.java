@@ -105,4 +105,10 @@ class ZeroCompanionJavaSample {
         final Zero zero = Zero.fromDoubleOrNull(0.0);
         System.out.println(zero != null); // true
     } // END
+
+    void fromStringOrNull() {
+        final Object number = "-000.000";
+        final Zero zero = Zero.fromStringOrNull(number);
+        System.out.println(zero != null); // true
+    } // END
 }
