@@ -28,7 +28,8 @@ All notable changes to this project will be documented in this file.
 - Kotlin and Java samples of the
   `StrictlyNegativeDouble.Companion.create(Number)` function in the API
   reference ([0a4258f3]).
-- Documentation of the `EmailAddress.Companion.PATTERN` property ([1a0ea52b]).
+- Documentation of the `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and
+  [fd003c4a]).
 
 ### 🐛 Fixed
 
@@ -57,6 +58,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
+[fd003c4a]: https://github.com/kotools/types/commit/fd003c4a
 [c862e0cac]: https://github.com/kotools/types/commit/c862e0cac
 
 ## 🔖 Releases
