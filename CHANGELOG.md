@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
   types: `Short`, `Int`, `Long`, `Float` and `Double` ([#646]).
 - **Experimental** comparisons for the `Zero` type with the following Kotlin
   types: `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
+- **Experimental** factory functions for creating instances of the `Zero` type
+  from the `Any` Kotlin type ([#658]).
 
 ### ♻️ Changed
 
@@ -53,6 +55,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [@MartiPresa]: https://github.com/MartiPresa
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
+[#658]: https://github.com/kotools/types/issues/658
 [#663]: https://github.com/kotools/types/pull/663
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
