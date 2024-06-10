@@ -885,8 +885,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromFloatOrNull(number: Float): Zero? = Zero()
-            .takeIf { it.toFloat() == number }
+        public fun fromFloatOrNull(number: Float): Zero? =
+            if (0f == number) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
