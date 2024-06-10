@@ -737,8 +737,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromIntOrNull(number: Int): Zero? = Zero()
-            .takeIf { it.toInt() == number }
+        public fun fromIntOrNull(number: Int): Zero? =
+            if (0 == number) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
