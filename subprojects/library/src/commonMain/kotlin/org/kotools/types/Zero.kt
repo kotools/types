@@ -961,8 +961,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromDoubleOrNull(number: Double): Zero? = Zero()
-            .takeIf { it.toDouble() == number }
+        public fun fromDoubleOrNull(number: Double): Zero? =
+            if (0.0 == number) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the string representation of the
