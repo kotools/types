@@ -809,8 +809,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromLongOrNull(number: Long): Zero? = Zero()
-            .takeIf { it.toLong() == number }
+        public fun fromLongOrNull(number: Long): Zero? =
+            if (0L == number) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
