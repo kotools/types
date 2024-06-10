@@ -589,8 +589,10 @@ public class Zero {
          * of returning `null` in case of invalid [number].
          */
         @JvmStatic
-        public fun fromByteOrNull(number: Byte): Zero? = Zero()
-            .takeIf { it.valueAsByte == number }
+        public fun fromByteOrNull(number: Byte): Zero? {
+            val expected: Byte = 0
+            return if (expected == number) Zero() else null
+        }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
