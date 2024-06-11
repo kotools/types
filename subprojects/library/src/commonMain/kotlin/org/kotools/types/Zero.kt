@@ -589,10 +589,8 @@ public class Zero {
          * of returning `null` in case of invalid [number].
          */
         @JvmStatic
-        public fun fromByteOrNull(number: Byte): Zero? {
-            val expected: Byte = 0
-            return if (expected == number) Zero() else null
-        }
+        public fun fromByteOrNull(number: Byte): Zero? = Zero()
+            .takeIf { it.valueAsByte == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
@@ -663,10 +661,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromShortOrNull(number: Short): Zero? {
-            val expected: Short = 0
-            return if (expected == number) Zero() else null
-        }
+        public fun fromShortOrNull(number: Short): Zero? = Zero()
+            .takeIf { it.toShort() == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
@@ -737,8 +733,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromIntOrNull(number: Int): Zero? =
-            if (0 == number) Zero() else null
+        public fun fromIntOrNull(number: Int): Zero? = Zero()
+            .takeIf { it.toInt() == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
@@ -809,8 +805,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromLongOrNull(number: Long): Zero? =
-            if (0L == number) Zero() else null
+        public fun fromLongOrNull(number: Long): Zero? = Zero()
+            .takeIf { it.toLong() == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
@@ -885,8 +881,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromFloatOrNull(number: Float): Zero? =
-            if (0f == number) Zero() else null
+        public fun fromFloatOrNull(number: Float): Zero? = Zero()
+            .takeIf { it.toFloat() == number }
 
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
@@ -961,8 +957,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun fromDoubleOrNull(number: Double): Zero? =
-            if (0.0 == number) Zero() else null
+        public fun fromDoubleOrNull(number: Double): Zero? = Zero()
+            .takeIf { it.toDouble() == number }
 
         /**
          * Creates an instance of [Zero] from the string representation of the
