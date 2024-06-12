@@ -131,4 +131,15 @@ internal object ZeroCompanionKotlinSample {
         val zero: Zero? = Zero.orNull(number)
         println(zero != null) // true
     } // END
+
+    fun orThrow() {
+        val number: Any = "-000.000"
+        val isSuccess: Boolean = try {
+            Zero.orThrow(number) // TABS: 1
+            true // TABS: 1
+        } catch (exception: IllegalArgumentException) {
+            false // TABS: 1
+        }
+        println(isSuccess) // true
+    } // END
 }

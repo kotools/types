@@ -592,4 +592,33 @@ class ZeroCompanionTest {
             assertNull(actual, message)
         }
     }
+
+    @Test
+    fun orThrow_should_pass_with_a_valid_number() {
+        val numbers: List<Any> = listOf(
+            0, 0.0,
+            "+0", "+000", "+0.000", "+000.000", // with unary plus
+            "-0", "-000", "-0.000", "-000.000" // with unary minus
+        )
+        numbers.forEach(Zero.Companion::orThrow)
+    }
+
+    @Test
+    fun orThrow_should_fail_with_an_invalid_number() {
+        val numbers: List<Any> = listOf(
+            ".0", "+.0", "-.0", // integer part missing
+            "0,0", "+0,0", "-0,0", // comma as decimal point
+            "0.", "+0.", "-0.", // decimal part missing
+            "hello world", "123456789" // not zero number
+        )
+        numbers.forEach {
+            val exception: IllegalArgumentException = assertFailsWith {
+                Zero.orThrow(it)
+            }
+            val actual: String? = exception.message?.takeIf(String::isNotBlank)
+            assertNotNull(actual, message = "Exception should have a message.")
+            val expected = "'$it' is not a valid representation of zero."
+            assertEquals(expected, actual)
+        }
+    }
 }

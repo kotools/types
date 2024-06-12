@@ -1065,12 +1065,57 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.orNull.md
          * </details>
+         * <br>
+         *
+         * You can use the [orThrow] function for throwing an exception instead
+         * of returning `null` in case of invalid [number].
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public fun orNull(number: Any): Zero? {
             val regex = Regex(this.PATTERN)
             return if ("$number" matches regex) Zero() else null
+        }
+
+        /**
+         * Creates an instance of [Zero] from the string representation of the
+         * specified [number], or throws an [IllegalArgumentException] if the
+         * string representation of [number] doesn't match the
+         * [corresponding pattern][Zero.PATTERN].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: ZeroCompanionKotlinSample.orThrow.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: ZeroCompanionJavaSample.orThrow.md
+         * </details>
+         * <br>
+         *
+         * You can use the [orNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun orThrow(number: Any): Zero {
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) {
+                "'$number' is not a valid representation of zero."
+            }
         }
     }
 }

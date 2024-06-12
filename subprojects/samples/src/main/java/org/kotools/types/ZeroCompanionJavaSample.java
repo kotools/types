@@ -138,4 +138,16 @@ class ZeroCompanionJavaSample {
         final Zero zero = Zero.orNull(number);
         System.out.println(zero != null); // true
     } // END
+
+    void orThrow() {
+        final Object number = "-000.000";
+        boolean isSuccess;
+        try {
+            Zero.orThrow(number); // TABS: 1
+            isSuccess = true; // TABS: 1
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false; // TABS: 1
+        }
+        System.out.println(isSuccess); // true
+    } // END
 }

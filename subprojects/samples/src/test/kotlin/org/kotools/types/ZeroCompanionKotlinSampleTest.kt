@@ -66,4 +66,8 @@ class ZeroCompanionKotlinSampleTest {
     @Test
     fun `orNull(Any) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::orNull)
+
+    @Test
+    fun `orThrow(Any) should pass`(): Unit =
+        assertPrintsTrue(ZeroCompanionKotlinSample::orThrow)
 }

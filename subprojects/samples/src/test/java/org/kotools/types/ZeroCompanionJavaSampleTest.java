@@ -85,4 +85,9 @@ class ZeroCompanionJavaSampleTest {
     void orNull_should_pass() {
         Assert.printsTrue(this.sample::orNull);
     }
+
+    @Test
+    void orThrow_should_pass() {
+        Assert.printsTrue(this.sample::orThrow);
+    }
 }
