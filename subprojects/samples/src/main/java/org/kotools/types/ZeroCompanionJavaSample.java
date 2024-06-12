@@ -67,11 +67,6 @@ class ZeroCompanionJavaSample {
         System.out.println(zero != null); // true
     } // END
 
-    void fromLongOrNull() {
-        final Zero zero = Zero.fromLongOrNull(0L);
-        System.out.println(zero != null); // true
-    } // END
-
     void orNull() {
         final Object number = "-000.000";
         final Zero zero = Zero.orNull(number);
