@@ -32,11 +32,6 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
-    void fromInt_should_pass() {
-        Assert.printsTrue(this.sample::fromInt);
-    }
-
-    @Test
     void fromIntOrNull_should_pass() {
         Assert.printsTrue(this.sample::fromIntOrNull);
     }
