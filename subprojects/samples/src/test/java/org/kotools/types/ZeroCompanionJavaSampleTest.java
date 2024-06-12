@@ -22,11 +22,6 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
-    void fromShort_should_pass() {
-        Assert.printsTrue(this.sample::fromShort);
-    }
-
-    @Test
     void fromShortOrNull_should_pass() {
         Assert.printsTrue(this.sample::fromShortOrNull);
     }
