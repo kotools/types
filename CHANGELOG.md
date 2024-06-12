@@ -18,12 +18,14 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- **Experimental** conversions from the `Zero` type to the following Kotlin
-  types: `Short`, `Int`, `Long`, `Float` and `Double` ([#646]).
-- **Experimental** comparisons for the `Zero` type with the following Kotlin
-  types: `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
-- **Experimental** factory functions for creating instances of the `Zero` type
-  from the `Any` Kotlin type ([#658]).
+- The following declarations to the `Zero` **experimental** type:
+  - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()` and `toDouble()`
+    functions ([#646])
+  - `compareTo(Byte)`, `compareTo(Short)`, `compareTo(Int)`, `compareTo(Long)`,
+    `compareTo(Float)` and `compareTo(Double)` functions ([#650]). 
+- The following declarations to the `Zero.Companion` **experimental** type:
+  - `PATTERN` property ([#658])
+  - `orNull(Any)` and `orThrow(Any)` functions ([#668]).
 
 ### ♻️ Changed
 
@@ -44,7 +46,9 @@ All notable changes to this project will be documented in this file.
 ### 🔥 Removed
 
 - The `kotools.types.web.EmailAddress` **deprecated** type from the
-  **experimental** API ([#663]). 
+  **experimental** API ([#663]).
+- The `fromByte(Byte)` and the `fromByteOrNull(Byte)` **experimental** functions
+  from the `Zero.Companion` type ([#668]).
 
 ---
 
@@ -57,6 +61,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#650]: https://github.com/kotools/types/issues/650
 [#658]: https://github.com/kotools/types/issues/658
 [#663]: https://github.com/kotools/types/pull/663
+[#668]: https://github.com/kotools/types/issues/668
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
