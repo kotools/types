@@ -62,11 +62,6 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
-    void fromDoubleOrNull_should_pass() {
-        Assert.printsTrue(this.sample::fromDoubleOrNull);
-    }
-
-    @Test
     void orNull_should_pass() {
         Assert.printsTrue(this.sample::orNull);
     }
