@@ -471,6 +471,7 @@ public final class org/kotools/types/Zero {
 	public static final fun fromString (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 	public static final fun fromStringOrNull (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 	public final fun hashCode ()I
+	public static final fun orNull (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 	public final fun toByte ()B
 	public final fun toDouble ()D
 	public final fun toFloat ()F
@@ -495,5 +496,6 @@ public final class org/kotools/types/Zero$Companion {
 	public final fun fromShortOrNull (S)Lorg/kotools/types/Zero;
 	public final fun fromString (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 	public final fun fromStringOrNull (Ljava/lang/Object;)Lorg/kotools/types/Zero;
+	public final fun orNull (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 }
 

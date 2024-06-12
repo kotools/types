@@ -119,4 +119,10 @@ internal object ZeroCompanionKotlinSample {
         val zero: Zero? = Zero.fromStringOrNull(number)
         println(zero != null) // true
     } // END
+
+    fun orNull() {
+        val number: Any = "-000.000"
+        val zero: Zero? = Zero.orNull(number)
+        println(zero != null) // true
+    } // END
 }
