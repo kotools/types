@@ -83,11 +83,6 @@ class ZeroCompanionJavaSample {
         System.out.println(zero != null); // true
     } // END
 
-    void fromFloatOrNull() {
-        final Zero zero = Zero.fromFloatOrNull(0f);
-        System.out.println(zero != null); // true
-    } // END
-
     void orNull() {
         final Object number = "-000.000";
         final Zero zero = Zero.orNull(number);

@@ -427,23 +427,6 @@ class ZeroCompanionTest {
     }
 
     @Test
-    fun fromFloatOrNull_should_pass_with_a_Float_that_equals_zero() {
-        val number = 0f
-        val actual: Zero? = Zero.fromFloatOrNull(number)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun fromFloatOrNull_should_fail_with_a_Float_other_than_zero() {
-        val number: Float = listOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
-            .random()
-            .random()
-            .toFloat()
-        val actual: Zero? = Zero.fromFloatOrNull(number)
-        assertNull(actual)
-    }
-
-    @Test
     fun orNull_should_pass_with_a_valid_number() {
         val numbers: List<Any> = listOf(
             0, 0.0,
