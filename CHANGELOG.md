@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- **Experimental** conversions for the `Zero` type with the following Kotlin
+- **Experimental** conversions from the `Zero` type to the following Kotlin
   types: `Short`, `Int`, `Long`, `Float` and `Double` ([#646]).
 - **Experimental** comparisons for the `Zero` type with the following Kotlin
   types: `Byte`, `Short`, `Int`, `Long`, `Float`, `Double` ([#650]).
