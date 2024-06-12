@@ -279,23 +279,6 @@ class ZeroCompanionTest {
     }
 
     @Test
-    fun fromByteOrNull_should_pass_with_a_Byte_that_equals_zero() {
-        val number: Byte = 0
-        val actual: Zero? = Zero.fromByteOrNull(number)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun fromByteOrNull_should_fail_with_a_Byte_other_than_zero() {
-        val number: Byte = listOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
-            .random()
-            .random()
-            .toByte()
-        val actual: Zero? = Zero.fromByteOrNull(number)
-        assertNull(actual)
-    }
-
-    @Test
     fun orNull_should_pass_with_a_valid_number() {
         val numbers: List<Any> = listOf(
             0, 0.0,

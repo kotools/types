@@ -15,12 +15,6 @@ class ZeroCompanionJavaSample {
         System.out.println(numbersAreValid); // true
     } // END
 
-    void fromByteOrNull() {
-        final byte number = 0;
-        final Zero zero = Zero.fromByteOrNull(number);
-        System.out.println(zero != null); // true
-    } // END
-
     void orNull() {
         final Object number = "-000.000";
         final Zero zero = Zero.orNull(number);

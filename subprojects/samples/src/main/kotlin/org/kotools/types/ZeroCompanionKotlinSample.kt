@@ -15,12 +15,6 @@ internal object ZeroCompanionKotlinSample {
         println(numbersAreValid) // true
     } // END
 
-    fun fromByteOrNull() {
-        val number: Byte = 0
-        val zero: Zero? = Zero.fromByteOrNull(number)
-        println(zero != null) // true
-    } // END
-
     fun orNull() {
         val number: Any = "-000.000"
         val zero: Zero? = Zero.orNull(number)

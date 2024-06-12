@@ -12,11 +12,6 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
-    void fromByteOrNull_should_pass() {
-        Assert.printsTrue(this.sample::fromByteOrNull);
-    }
-
-    @Test
     void orNull_should_pass() {
         Assert.printsTrue(this.sample::orNull);
     }

@@ -8,10 +8,6 @@ class ZeroCompanionKotlinSampleTest {
         assertPrintsTrue(ZeroCompanionKotlinSample::pattern)
 
     @Test
-    fun `fromByteOrNull(Byte) should pass`(): Unit =
-        assertPrintsTrue(ZeroCompanionKotlinSample::fromByteOrNull)
-
-    @Test
     fun `orNull(Any) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::orNull)
 
