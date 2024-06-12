@@ -24,10 +24,6 @@ class ZeroCompanionKotlinSampleTest {
         assertPrintsTrue(ZeroCompanionKotlinSample::fromShortOrNull)
 
     @Test
-    fun `fromIntOrNull(Int) should pass`(): Unit =
-        assertPrintsTrue(ZeroCompanionKotlinSample::fromIntOrNull)
-
-    @Test
     fun `orNull(Any) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::orNull)
 

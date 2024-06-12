@@ -356,22 +356,6 @@ class ZeroCompanionTest {
     }
 
     @Test
-    fun fromIntOrNull_should_pass_with_an_Int_that_equals_zero() {
-        val number = 0
-        val actual: Zero? = Zero.fromIntOrNull(number)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun fromIntOrNull_should_fail_with_an_Int_other_than_zero() {
-        val number: Int = listOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
-            .random()
-            .random()
-        val actual: Zero? = Zero.fromIntOrNull(number)
-        assertNull(actual)
-    }
-
-    @Test
     fun orNull_should_pass_with_a_valid_number() {
         val numbers: List<Any> = listOf(
             0, 0.0,
