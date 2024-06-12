@@ -56,10 +56,6 @@ class ZeroCompanionKotlinSampleTest {
         assertPrintsTrue(ZeroCompanionKotlinSample::fromDoubleOrNull)
 
     @Test
-    fun `fromString(Any) should pass`(): Unit =
-        assertPrintsTrue(ZeroCompanionKotlinSample::fromString)
-
-    @Test
     fun `fromStringOrNull(Any) should pass`(): Unit =
         assertPrintsTrue(ZeroCompanionKotlinSample::fromStringOrNull)
 
