@@ -2,7 +2,6 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.internal.InvalidZero
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -276,27 +275,6 @@ class ZeroCompanionTest {
     fun pattern_should_pass() {
         val actual: String = Zero.PATTERN
         val expected = "^[+-]?0+(?:\\.0+)?\$"
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun fromByte_should_pass_with_a_Byte_that_equals_zero() {
-        val number: Byte = 0
-        Zero.fromByte(number)
-    }
-
-    @Test
-    fun fromByte_should_fail_with_a_Byte_other_than_zero() {
-        val number: Byte = listOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
-            .random()
-            .random()
-            .toByte()
-        val exception: IllegalArgumentException = assertFailsWith {
-            Zero.fromByte(number)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidZero(number)
-            .toString()
         assertEquals(expected, actual)
     }
 

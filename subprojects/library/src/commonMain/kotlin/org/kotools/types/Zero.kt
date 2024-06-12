@@ -3,7 +3,6 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmStatic
 
@@ -523,42 +522,6 @@ public class Zero {
         public const val PATTERN: String = "^[+-]?0+(?:\\.0+)?\$"
 
         /**
-         * Creates an instance of [Zero] from the specified [number], or throws
-         * an [IllegalArgumentException] if the [number] is other than zero.
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: ZeroCompanionKotlinSample.fromByte.md
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: ZeroCompanionJavaSample.fromByte.md
-         * </details>
-         * <br>
-         *
-         * You can use the [fromByteOrNull] function for returning `null`
-         * instead of throwing an exception in case of invalid [number].
-         */
-        @JvmStatic
-        public fun fromByte(number: Byte): Zero {
-            val zero: Zero? = this.fromByteOrNull(number)
-            return requireNotNull(zero) { InvalidZero(number) }
-        }
-
-        /**
          * Creates an instance of [Zero] from the specified [number], or returns
          * `null` if the [number] is other than zero.
          *
@@ -583,10 +546,6 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromByteOrNull.md
          * </details>
-         * <br>
-         *
-         * You can use the [fromByte] function for throwing an exception instead
-         * of returning `null` in case of invalid [number].
          */
         @JvmStatic
         public fun fromByteOrNull(number: Byte): Zero? = Zero()
