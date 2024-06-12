@@ -593,37 +593,6 @@ public class Zero {
             .takeIf { it.valueAsByte == number }
 
         /**
-         * Creates an instance of [Zero] from the specified [number], or returns
-         * `null` if the [number] is other than zero.
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: ZeroCompanionKotlinSample.fromShortOrNull.md
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: ZeroCompanionJavaSample.fromShortOrNull.md
-         * </details>
-         */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-        @JvmStatic
-        public fun fromShortOrNull(number: Short): Zero? = Zero()
-            .takeIf { it.toShort() == number }
-
-        /**
          * Creates an instance of [Zero] from the string representation of the
          * specified [number], or returns `null` if the string representation of
          * [number] doesn't match the [corresponding pattern][Zero.PATTERN].

@@ -33,12 +33,6 @@ class ZeroCompanionJavaSample {
         System.out.println(zero != null); // true
     } // END
 
-    void fromShortOrNull() {
-        final short number = 0;
-        final Zero zero = Zero.fromShortOrNull(number);
-        System.out.println(zero != null); // true
-    } // END
-
     void orNull() {
         final Object number = "-000.000";
         final Zero zero = Zero.orNull(number);

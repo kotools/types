@@ -32,12 +32,6 @@ internal object ZeroCompanionKotlinSample {
         println(zero != null) // true
     } // END
 
-    fun fromShortOrNull() {
-        val number: Short = 0
-        val zero: Zero? = Zero.fromShortOrNull(number)
-        println(zero != null) // true
-    } // END
-
     fun orNull() {
         val number: Any = "-000.000"
         val zero: Zero? = Zero.orNull(number)
