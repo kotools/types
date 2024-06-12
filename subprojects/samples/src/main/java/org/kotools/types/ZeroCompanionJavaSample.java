@@ -1,9 +1,18 @@
 package org.kotools.types;
 
+import java.util.List;
+
 class ZeroCompanionJavaSample {
     void pattern() {
-        final String pattern = Zero.PATTERN;
-        System.out.println(pattern); // ^[+-]?0+(?:\.0+)?$
+        List<Object> numbers = List.of(
+                0, 0.0, // TABS: 2
+                "+0", "+000", "+0.000", "+000.000", // with unary plus // TABS: 2
+                "-0", "-000", "-0.000", "-000.000" // with unary minus // TABS: 2
+        );
+        final String regex = Zero.PATTERN;
+        final boolean numbersAreValid = numbers.stream()
+                .allMatch(number -> number.toString().matches(regex)); // TABS: 2
+        System.out.println(numbersAreValid); // true
     } // END
 
     void fromByte() {

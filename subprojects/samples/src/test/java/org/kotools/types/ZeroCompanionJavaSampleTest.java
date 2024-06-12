@@ -8,8 +8,7 @@ class ZeroCompanionJavaSampleTest {
 
     @Test
     void pattern_should_pass() {
-        final String expected = "^[+-]?0+(?:\\.0+)?$";
-        Assert.prints(expected, this.sample::pattern);
+        Assert.printsTrue(this.sample::pattern);
     }
 
     @Test

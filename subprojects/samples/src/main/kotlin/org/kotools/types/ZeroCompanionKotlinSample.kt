@@ -5,8 +5,14 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object ZeroCompanionKotlinSample {
     fun pattern() {
-        val pattern: String = Zero.PATTERN
-        println(pattern) // ^[+-]?0+(?:\.0+)?$
+        val numbers: List<Any> = listOf(
+            0, 0.0, // TABS: 1
+            "+0", "+000", "+0.000", "+000.000", // with unary plus // TABS: 1
+            "-0", "-000", "-0.000", "-000.000" // with unary minus // TABS: 1
+        )
+        val regex = Regex(Zero.PATTERN)
+        val numbersAreValid: Boolean = numbers.all { "$it" matches regex }
+        println(numbersAreValid) // true
     } // END
 
     fun fromByte() {
