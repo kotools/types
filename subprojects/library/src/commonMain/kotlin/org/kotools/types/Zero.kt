@@ -809,45 +809,6 @@ public class Zero {
             .takeIf { it.toLong() == number }
 
         /**
-         * Creates an instance of [Zero] from the specified [number], or throws
-         * an [IllegalArgumentException] if the [number] is other than zero.
-         * For example, calling this function with `0.1` will throw an exception
-         * because it is not strictly equal to `0`.
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: ZeroCompanionKotlinSample.fromFloat.md
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: ZeroCompanionJavaSample.fromFloat.md
-         * </details>
-         * <br>
-         *
-         * You can use the [fromFloatOrNull] function for returning `null`
-         * instead of throwing an exception in case of invalid [number].
-         */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-        @JvmStatic
-        public fun fromFloat(number: Float): Zero {
-            val zero: Zero? = this.fromFloatOrNull(number)
-            return requireNotNull(zero) { InvalidZero(number) }
-        }
-
-        /**
          * Creates an instance of [Zero] from the specified [number], or returns
          * `null` if the [number] is other than zero.
          * For example, calling this function with `0.1` will return `null`
@@ -874,10 +835,6 @@ public class Zero {
          *
          * SAMPLE: ZeroCompanionJavaSample.fromFloatOrNull.md
          * </details>
-         * <br>
-         *
-         * You can use the [fromFloat] function for throwing an exception
-         * instead of returning `null` in case of invalid [number].
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic

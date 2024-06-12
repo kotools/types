@@ -52,11 +52,6 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
-    void fromFloat_should_pass() {
-        Assert.printsTrue(this.sample::fromFloat);
-    }
-
-    @Test
     void fromFloatOrNull_should_pass() {
         Assert.printsTrue(this.sample::fromFloatOrNull);
     }
