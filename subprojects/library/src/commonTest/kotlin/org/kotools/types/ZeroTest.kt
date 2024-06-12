@@ -391,26 +391,6 @@ class ZeroCompanionTest {
     }
 
     @Test
-    fun fromLong_should_pass_with_a_Long_that_equals_zero() {
-        val number = 0L
-        Zero.fromLong(number)
-    }
-
-    @Test
-    fun fromLong_should_fail_with_a_Long_other_than_zero() {
-        val number: Long = listOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
-            .random()
-            .random()
-        val exception: IllegalArgumentException = assertFailsWith {
-            Zero.fromLong(number)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidZero(number)
-            .toString()
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun fromLongOrNull_should_pass_with_a_Long_that_equals_zero() {
         val number = 0L
         val actual: Zero? = Zero.fromLongOrNull(number)

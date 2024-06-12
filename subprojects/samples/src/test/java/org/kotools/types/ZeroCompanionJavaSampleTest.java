@@ -42,11 +42,6 @@ class ZeroCompanionJavaSampleTest {
     }
 
     @Test
-    void fromLong_should_pass() {
-        Assert.printsTrue(this.sample::fromLong);
-    }
-
-    @Test
     void fromLongOrNull_should_pass() {
         Assert.printsTrue(this.sample::fromLongOrNull);
     }

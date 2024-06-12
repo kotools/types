@@ -64,16 +64,6 @@ internal object ZeroCompanionKotlinSample {
         println(zero != null) // true
     } // END
 
-    fun fromLong() {
-        val isSuccess: Boolean = try {
-            Zero.fromLong(0L) // TABS: 1
-            true // TABS: 1
-        } catch (exception: IllegalArgumentException) {
-            false // TABS: 1
-        }
-        println(isSuccess) // true
-    } // END
-
     fun fromLongOrNull() {
         val zero: Zero? = Zero.fromLongOrNull(0L)
         println(zero != null) // true
