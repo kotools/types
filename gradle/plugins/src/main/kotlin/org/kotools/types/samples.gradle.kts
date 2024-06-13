@@ -23,15 +23,17 @@ private val projectSources: Directory = layout.projectDirectory.dir("src")
 
 // ------------------------------ Internal tasks -------------------------------
 
-private val cleanSamples: TaskProvider<Delete> by
-tasks.registering(Delete::class) {
+private val cleanSamples: TaskProvider<Delete>
+        by tasks.registering(Delete::class)
+cleanSamples.configure {
     description = "Deletes the 'samples' build directory."
     group = samplesTaskGroup
     setDelete(samplesBuildDirectory)
 }
 
-private val extractSamples: TaskProvider<ExtractCodeSamples> by
-tasks.registering(ExtractCodeSamples::class) {
+private val extractSamples: TaskProvider<ExtractCodeSamples>
+        by tasks.registering(ExtractCodeSamples::class)
+extractSamples.configure {
     description = "Extract code samples from sources."
     group = samplesTaskGroup
     sourceDirectory =
@@ -39,16 +41,18 @@ tasks.registering(ExtractCodeSamples::class) {
     outputDirectory = samplesBuildDirectory.map { it.dir("extracted") }
 }
 
-private val checkNoInlinedSamples: TaskProvider<CheckNoInlinedSamples> by
-tasks.registering(CheckNoInlinedSamples::class) {
+private val checkNoInlinedSamples: TaskProvider<CheckNoInlinedSamples>
+        by tasks.registering(CheckNoInlinedSamples::class)
+checkNoInlinedSamples.configure {
     description = "Checks that main sources don't have KDoc samples."
     group = samplesTaskGroup
     onlyIf { samples.failOnSamplesInKDoc }
     sources = projectSources
 }
 
-private val checkSamplesResolution: TaskProvider<CheckSamplesResolution> by
-tasks.registering(CheckSamplesResolution::class) {
+private val checkSamplesResolution: TaskProvider<CheckSamplesResolution>
+        by tasks.registering(CheckSamplesResolution::class)
+checkSamplesResolution.configure {
     description = "Checks that sample references from the main sources " +
             "target an existing file from the build directory."
     group = samplesTaskGroup
@@ -56,15 +60,17 @@ tasks.registering(CheckSamplesResolution::class) {
     sources = projectSources
 }
 
-private val checkSampleReferences: TaskProvider<Task> by tasks.registering {
+private val checkSampleReferences: TaskProvider<Task> by tasks.registering
+checkSampleReferences.configure {
     description = "Checks sample references from the main sources."
     group = samplesTaskGroup
     dependsOn(checkNoInlinedSamples, checkSamplesResolution)
 }
 tasks.named("check").configure { dependsOn += checkSampleReferences }
 
-private val backupMainSources: TaskProvider<Copy> by
-tasks.registering(Copy::class) {
+private val backupMainSources: TaskProvider<Copy>
+        by tasks.registering(Copy::class)
+backupMainSources.configure {
     description = "Copies main sources into the build directory."
     group = samplesTaskGroup
     dependsOn += checkSampleReferences
@@ -72,8 +78,9 @@ tasks.registering(Copy::class) {
     into(sourcesBackupDirectory)
 }
 
-private val inlineSamples: TaskProvider<InlineSamples> by
-tasks.registering(InlineSamples::class) {
+private val inlineSamples: TaskProvider<InlineSamples>
+        by tasks.registering(InlineSamples::class)
+inlineSamples.configure {
     description = "Inlines KDoc samples in project sources."
     group = samplesTaskGroup
     dependsOn += backupMainSources
@@ -82,8 +89,9 @@ tasks.registering(InlineSamples::class) {
         extractSamples.flatMap(ExtractCodeSamples::outputDirectory)
 }
 
-private val restoreMainSources: TaskProvider<Copy> by
-tasks.registering(Copy::class) {
+private val restoreMainSources: TaskProvider<Copy>
+        by tasks.registering(Copy::class)
+restoreMainSources.configure {
     description = "Restores main sources backup from the build directory."
     group = samplesTaskGroup
     from(sourcesBackupDirectory)
