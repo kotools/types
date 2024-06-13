@@ -35,8 +35,47 @@ public abstract class ExtractCodeSamples : DefaultTask() {
     }
 }
 
-private fun File.parseOrNull(): ParsedFile? = when {
-    name.endsWith(KotlinFile.FILE_EXTENSION) -> KotlinFileParser.parse(this)
-    name.endsWith(JavaFile.FILE_EXTENSION) -> JavaFileParser.parse(this)
-    else -> null
+// ---------------------------------- Parsing ----------------------------------
+
+private fun File.parseOrNull(): ParsedFile? {
+    val language: ProgrammingLanguage = ProgrammingLanguage.orNull(this)
+        ?: return null
+    val functions: List<Function> = this
+        .useLines { it.getRawFunctions(language) }
+        .map { Function(name = it.key, body = it.value) }
+    return when (language) {
+        ProgrammingLanguage.Java -> JavaFile(this.name, functions)
+        ProgrammingLanguage.Kotlin -> KotlinFile(this.name, functions)
+    }
+}
+
+private fun Sequence<String>.getRawFunctions(
+    language: ProgrammingLanguage
+): Map<String, List<String>> {
+    val functions: MutableMap<String, MutableList<String>> = mutableMapOf()
+    var latestFunctionDetected: String? = null
+    var read = false
+    forEach {
+        if (language.functionHeaderRegex in it) {
+            val functionName: String = it.substringBefore('(')
+                .substringAfter("${language.functionKeyword} ")
+            functions += functionName to mutableListOf()
+            latestFunctionDetected = functionName
+            read = true
+        } else if (it.endsWith("} // END")) {
+            read = false
+            latestFunctionDetected = null
+        } else if (read) {
+            val line: String = if (Regex("TABS: \\d$") in it) buildString {
+                val numberOfTabs: Int = it.substringAfter("TABS: ")
+                    .toInt()
+                repeat(numberOfTabs) { append("    ") }
+                val code: String = it.substringBefore("// TABS:")
+                    .trim()
+                append(code)
+            } else it.trim()
+            functions[latestFunctionDetected]?.add(line)
+        }
+    }
+    return functions
 }
