@@ -35,15 +35,13 @@ public abstract class ExtractCodeSamples : DefaultTask() {
     }
 }
 
-// ---------------------------------- Parsing ----------------------------------
-
 private fun File.parseOrNull(): ParsedFile? {
     val language: ProgrammingLanguage = ProgrammingLanguage.orNull(this)
         ?: return null
-    val functions: List<Function> = this
-        .useLines { it.getRawFunctions(language) }
+    val functions: List<Function> = useLines { it.getRawFunctions(language) }
         .map { Function(name = it.key, body = it.value) }
-    return ParsedFile(this.name, language, functions)
+        .map(Function::formatBody)
+    return ParsedFile(name, language, functions)
 }
 
 private fun Sequence<String>.getRawFunctions(
@@ -62,17 +60,7 @@ private fun Sequence<String>.getRawFunctions(
         } else if (it.endsWith("} // END")) {
             read = false
             latestFunctionDetected = null
-        } else if (read) {
-            val line: String = if (Regex("TABS: \\d$") in it) buildString {
-                val numberOfTabs: Int = it.substringAfter("TABS: ")
-                    .toInt()
-                repeat(numberOfTabs) { append("    ") }
-                val code: String = it.substringBefore("// TABS:")
-                    .trim()
-                append(code)
-            } else it.trim()
-            functions[latestFunctionDetected]?.add(line)
-        }
+        } else if (read) functions[latestFunctionDetected]?.add(it)
     }
     return functions
 }
