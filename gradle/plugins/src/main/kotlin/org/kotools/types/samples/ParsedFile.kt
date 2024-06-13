@@ -11,9 +11,6 @@ internal class ParsedFile(
             .plus('.')
             .plus(it.name)
             .plus(".md")
-        when (this.language) {
-            ProgrammingLanguage.Java -> JavaSampleFile(name, function = it)
-            ProgrammingLanguage.Kotlin -> KotlinSampleFile(name, function = it)
-        }
+        SampleFile(name, language, it)
     }
 }
