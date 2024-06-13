@@ -14,7 +14,7 @@ public class KotlinJvmPlugin : Plugin<Project> {
         project.extensions.getByType<KotlinJvmProjectExtension>()
             .explicitApi()
         val tasks = KotlinJvmTaskManager(project)
-        tasks.configureKotlinCompile()
-        tasks.configureTest()
+        tasks.kotlinCompile()
+        tasks.test()
     }
 }

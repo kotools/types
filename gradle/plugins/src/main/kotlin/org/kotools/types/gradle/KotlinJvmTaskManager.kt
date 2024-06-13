@@ -9,16 +9,11 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal class KotlinJvmTaskManager(private val project: Project) {
-    fun configureKotlinCompile() {
-        val action: Action<KotlinCompile> = this.kotlinCompileAction()
-        this.project.tasks.withType<KotlinCompile>()
-            .configureEach(action)
-    }
-
-    private fun kotlinCompileAction(): Action<KotlinCompile> {
-        val compilerOptionsAction: Action<KotlinJvmCompilerOptions> =
+    fun kotlinCompile() {
+        val action: Action<KotlinJvmCompilerOptions> =
             this.kotlinJvmCompilerOptionsAction()
-        return Action { this.compilerOptions(compilerOptionsAction) }
+        this.project.tasks.withType<KotlinCompile>()
+            .configureEach { compilerOptions(action) }
     }
 
     private fun kotlinJvmCompilerOptionsAction():
@@ -27,6 +22,6 @@ internal class KotlinJvmTaskManager(private val project: Project) {
         this.jvmTarget.set(JvmTarget.JVM_17)
     }
 
-    fun configureTest(): Unit = this.project.tasks.withType<Test>()
+    fun test(): Unit = this.project.tasks.withType<Test>()
         .configureEach(Test::useJUnitPlatform)
 }
