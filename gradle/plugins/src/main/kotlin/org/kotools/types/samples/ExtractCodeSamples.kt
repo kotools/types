@@ -43,10 +43,7 @@ private fun File.parseOrNull(): ParsedFile? {
     val functions: List<Function> = this
         .useLines { it.getRawFunctions(language) }
         .map { Function(name = it.key, body = it.value) }
-    return when (language) {
-        ProgrammingLanguage.Java -> JavaFile(this.name, functions)
-        ProgrammingLanguage.Kotlin -> KotlinFile(this.name, functions)
-    }
+    return ParsedFile(this.name, language, functions)
 }
 
 private fun Sequence<String>.getRawFunctions(
