@@ -33,7 +33,7 @@ internal class NotEmptyMapCompanionKotlinSample {
     fun createOrNullWithMutableMap() {
         val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
         val notEmptyMap: NotEmptyMap<Char, Int>? =
-            NotEmptyMap.createOrNull(original) // TABS: 1
+            NotEmptyMap.createOrNull(original)
         println(original) // {a=1, b=2}
         println(notEmptyMap) // {a=1, b=2}
 

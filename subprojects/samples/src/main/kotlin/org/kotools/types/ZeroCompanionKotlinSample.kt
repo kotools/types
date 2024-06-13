@@ -6,9 +6,9 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 internal object ZeroCompanionKotlinSample {
     fun pattern() {
         val numbers: List<Any> = listOf(
-            0, 0.0, // TABS: 1
-            "+0", "+000", "+0.000", "+000.000", // with unary plus // TABS: 1
-            "-0", "-000", "-0.000", "-000.000" // with unary minus // TABS: 1
+            0, 0.0,
+            "+0", "+000", "+0.000", "+000.000", // with unary plus
+            "-0", "-000", "-0.000", "-000.000" // with unary minus
         )
         val regex = Regex(Zero.PATTERN)
         val numbersAreValid: Boolean = numbers.all { "$it" matches regex }
@@ -24,10 +24,10 @@ internal object ZeroCompanionKotlinSample {
     fun orThrow() {
         val number: Any = "-000.000"
         val isSuccess: Boolean = try {
-            Zero.orThrow(number) // TABS: 1
-            true // TABS: 1
+            Zero.orThrow(number)
+            true
         } catch (exception: IllegalArgumentException) {
-            false // TABS: 1
+            false
         }
         println(isSuccess) // true
     } // END

@@ -10,9 +10,9 @@ class ZeroJavaSample {
 
     void hashCodeOverride() {
         final int first = new Zero()
-                .hashCode(); // TABS: 2
+                .hashCode();
         final int second = new Zero()
-                .hashCode(); // TABS: 2
+                .hashCode();
         System.out.println(first == second); // true
     } // END
 
@@ -66,35 +66,35 @@ class ZeroJavaSample {
 
     void toShort() {
         final short number = new Zero()
-                .toShort(); // TABS: 2
+                .toShort();
         final short expected = 0;
         System.out.println(number == expected); // true
     } // END
 
     void toInt() {
         final int number = new Zero()
-                .toInt(); // TABS: 2
+                .toInt();
         final int expected = 0;
         System.out.println(number == expected); // true
     } // END
 
     void toLong() {
         final long number = new Zero()
-                .toLong(); // TABS: 2
+                .toLong();
         final long expected = 0;
         System.out.println(number == expected); // true
     } // END
 
     void toFloat() {
         final float number = new Zero()
-                .toFloat(); // TABS: 2
+                .toFloat();
         final float expected = 0;
         System.out.println(number == expected); // true
     } // END
 
     void toDouble() {
         final double number = new Zero()
-                .toDouble(); // TABS: 2
+                .toDouble();
         final double expected = 0.0;
         System.out.println(number == expected); // true
     } // END

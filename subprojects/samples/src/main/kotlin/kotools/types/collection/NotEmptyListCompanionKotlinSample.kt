@@ -33,7 +33,7 @@ internal class NotEmptyListCompanionKotlinSample {
     fun createOrNullWithMutableCollection() {
         val original: MutableCollection<Int> = mutableListOf(1, 2, 3)
         val notEmptyList: NotEmptyList<Int>? =
-            NotEmptyList.createOrNull(original) // TABS: 1
+            NotEmptyList.createOrNull(original)
         println(original) // [1, 2, 3]
         println(notEmptyList) // [1, 2, 3]
 

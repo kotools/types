@@ -19,7 +19,7 @@ internal class NotEmptySetKtKotlinSample {
     fun toNotEmptySetOnMutableCollection() {
         val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
         val notEmptySet: NotEmptySet<Int> = original.toNotEmptySet()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         println(original) // [1, 2, 3]
         println(notEmptySet) // [1, 2, 3]
 

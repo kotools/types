@@ -12,9 +12,9 @@ class EmailAddressJavaSample {
     void hashCode_override() {
         final Object value = "contact@kotools.org";
         final int first = EmailAddress.fromString(value)
-                .hashCode(); // TABS: 2
+                .hashCode();
         final int second = EmailAddress.fromString(value)
-                .hashCode(); // TABS: 2
+                .hashCode();
         final boolean result = first == second;
         System.out.println(result); // true
     } // END

@@ -19,7 +19,7 @@ internal class NotEmptyMapKtKotlinSample {
     fun toNotEmptyMapOnMutableMap() {
         val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
         val notEmptyMap: NotEmptyMap<Char, Int> = original.toNotEmptyMap()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         println(original) // {a=1, b=2}
         println(notEmptyMap) // {a=1, b=2}
 

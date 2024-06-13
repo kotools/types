@@ -21,7 +21,7 @@ internal class NotEmptyMapKotlinSample {
 
     fun tail() {
         val map: NotEmptyMap<Char, Int> =
-            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3) // TABS: 1
+            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
         val tail: NotEmptyMap<Char, Int>? = map.tail
         println(tail) // {b=2, c=3}
     } // END
@@ -52,14 +52,14 @@ internal class NotEmptyMapKotlinSample {
 
     fun toMap() {
         val notEmptyMap: NotEmptyMap<Char, Int> =
-            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3) // TABS: 1
+            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
         val map: Map<Char, Int> = notEmptyMap.toMap()
         println(map) // {a=1, b=2, c=3}
     } // END
 
     fun toStringOverride() {
         val notEmptyMap: NotEmptyMap<Char, Int> =
-            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3) // TABS: 1
+            notEmptyMapOf('a' to 1, 'b' to 2, 'c' to 3)
         println(notEmptyMap) // {a=1, b=2, c=3}
 
         val map: Map<Char, Int> = notEmptyMap.toMap()
