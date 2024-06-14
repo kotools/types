@@ -77,6 +77,11 @@ class ZeroJavaSampleTest {
     }
 
     @Test
+    void toChar_should_pass() {
+        Assert.printsTrue(this.sample::toChar);
+    }
+
+    @Test
     void toStringSample_should_pass() {
         final int expected = 0;
         Assert.prints(expected, this.sample::toStringSample);

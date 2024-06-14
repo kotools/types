@@ -261,6 +261,14 @@ class ZeroTest {
     }
 
     @Test
+    fun toChar_should_return_the_zero_character() {
+        val actual: Char = Zero()
+            .toChar()
+        val expected = '0'
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun toString_should_pass() {
         val actual: String = Zero()
             .toString()

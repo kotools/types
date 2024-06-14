@@ -99,6 +99,12 @@ class ZeroJavaSample {
         System.out.println(number == expected); // true
     } // END
 
+    void toChar() {
+        final char character = new Zero()
+                .toChar();
+        System.out.println(character == '0'); // true
+    } // END
+
     void toStringSample() {
         final Zero zero = new Zero();
         final String message = zero.toString();

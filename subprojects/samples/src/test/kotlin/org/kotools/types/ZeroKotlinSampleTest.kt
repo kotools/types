@@ -60,6 +60,10 @@ class ZeroKotlinSampleTest {
         assertPrintsTrue(ZeroKotlinSample::toDouble)
 
     @Test
+    fun `toChar() should pass`(): Unit =
+        assertPrintsTrue(ZeroKotlinSample::toChar)
+
+    @Test
     fun toStringSample_should_pass(): Unit =
         assertPrints(expected = 0, ZeroKotlinSample::toStringSample)
 }

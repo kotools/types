@@ -460,6 +460,7 @@ public final class org/kotools/types/Zero {
 	public static final fun orNull (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 	public static final fun orThrow (Ljava/lang/Object;)Lorg/kotools/types/Zero;
 	public final fun toByte ()B
+	public final fun toChar ()C
 	public final fun toDouble ()D
 	public final fun toFloat ()F
 	public final fun toInt ()I

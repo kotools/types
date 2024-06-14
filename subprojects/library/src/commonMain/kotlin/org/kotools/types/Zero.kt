@@ -444,6 +444,34 @@ public class Zero {
     public fun toDouble(): Double = this.valueAsByte.toDouble()
 
     /**
+     * Returns the character representation of this number.
+     *
+     * <br>
+     * <details open>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: ZeroKotlinSample.toChar.md
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: ZeroJavaSample.toChar.md
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public fun toChar(): Char = '0'
+
+    /**
      * Returns the string representation of this number.
      *
      * <br>

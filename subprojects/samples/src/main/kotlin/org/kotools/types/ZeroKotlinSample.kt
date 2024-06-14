@@ -101,6 +101,12 @@ internal object ZeroKotlinSample {
         println(number == expected) // true
     } // END
 
+    fun toChar() {
+        val character: Char = Zero()
+            .toChar()
+        println(character == '0') // true
+    } // END
+
     fun toStringSample() {
         val message: String = Zero()
             .toString()
