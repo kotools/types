@@ -13,10 +13,10 @@ internal object EmailAddressCompanionKotlinSample {
     fun fromString_Any() {
         val value: Any = "contact@kotools.org"
         val isSuccess: Boolean = try {
-            EmailAddress.fromString(value) // TABS: 1
-            true // TABS: 1
+            EmailAddress.fromString(value)
+            true
         } catch (exception: IllegalArgumentException) {
-            false // TABS: 1
+            false
         }
         println(isSuccess) // true
     } // END
@@ -26,10 +26,10 @@ internal object EmailAddressCompanionKotlinSample {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val isSuccess: Boolean = try {
-            EmailAddress.fromString(value, pattern) // TABS: 1
-            true // TABS: 1
+            EmailAddress.fromString(value, pattern)
+            true
         } catch (exception: IllegalArgumentException) {
-            false // TABS: 1
+            false
         }
         println(isSuccess) // true
     } // END
@@ -46,7 +46,7 @@ internal object EmailAddressCompanionKotlinSample {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val address: EmailAddress? =
-            EmailAddress.fromStringOrNull(value, pattern) // TABS: 1
+            EmailAddress.fromStringOrNull(value, pattern)
         println(address != null) // true
     } // END
 }

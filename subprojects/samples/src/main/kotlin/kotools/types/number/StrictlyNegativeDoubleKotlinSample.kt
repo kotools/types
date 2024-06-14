@@ -17,9 +17,9 @@ internal class StrictlyNegativeDoubleKotlinSample {
     fun equalsOverride() {
         val number: Number = -23
         val first: StrictlyNegativeDouble =
-            StrictlyNegativeDouble.create(number) // TABS: 1
+            StrictlyNegativeDouble.create(number)
         val second: StrictlyNegativeDouble =
-            StrictlyNegativeDouble.create(number) // TABS: 1
+            StrictlyNegativeDouble.create(number)
         val result: Boolean = first == second // or first.equals(second)
         println(result) // true
     } // END
@@ -27,9 +27,9 @@ internal class StrictlyNegativeDoubleKotlinSample {
     fun hashCodeOverride() {
         val number: Number = -23
         val first: StrictlyNegativeDouble =
-            StrictlyNegativeDouble.create(number) // TABS: 1
+            StrictlyNegativeDouble.create(number)
         val second: StrictlyNegativeDouble =
-            StrictlyNegativeDouble.create(number) // TABS: 1
+            StrictlyNegativeDouble.create(number)
         val result: Boolean = first.hashCode() == second.hashCode()
         println(result) // true
     } // END

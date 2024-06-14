@@ -9,10 +9,10 @@ internal class StrictlyNegativeDoubleCompanionKotlinSample {
     fun create() {
         val number: Number = -23
         val isSuccess: Boolean = try {
-            StrictlyNegativeDouble.create(number) // TABS: 1
-            true // TABS: 1
+            StrictlyNegativeDouble.create(number)
+            true
         } catch (exception: IllegalArgumentException) {
-            false // TABS: 1
+            false
         }
         println(isSuccess) // true
     } // END
@@ -21,7 +21,7 @@ internal class StrictlyNegativeDoubleCompanionKotlinSample {
     fun createOrNull() {
         val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
         val result: StrictlyNegativeDouble? =
-            StrictlyNegativeDouble.createOrNull(number) // TABS: 1
+            StrictlyNegativeDouble.createOrNull(number)
         println(result != null) // true
     } // END
 }

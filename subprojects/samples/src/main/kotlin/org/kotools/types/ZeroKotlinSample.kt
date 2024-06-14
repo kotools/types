@@ -62,48 +62,48 @@ internal object ZeroKotlinSample {
 
     fun toByte() {
         val number: Byte = Zero()
-            .toByte() // TABS: 1
+            .toByte()
         println(number) // 0
     } // END
 
     fun toShort() {
         val number: Short = Zero()
-            .toShort() // TABS: 1
+            .toShort()
         val expected: Short = 0
         println(number == expected) // true
     } // END
 
     fun toInt() {
         val number: Int = Zero()
-            .toInt() // TABS: 1
+            .toInt()
         val expected = 0
         println(number == expected) // true
     } // END
 
     fun toLong() {
         val number: Long = Zero()
-            .toLong() // TABS: 1
+            .toLong()
         val expected = 0L
         println(number == expected) // true
     } // END
 
     fun toFloat() {
         val number: Float = Zero()
-            .toFloat() // TABS: 1
+            .toFloat()
         val expected = 0f
         println(number == expected) // true
     } // END
 
     fun toDouble() {
         val number: Double = Zero()
-            .toDouble() // TABS: 1
+            .toDouble()
         val expected = 0.0
         println(number == expected) // true
     } // END
 
     fun toStringSample() {
         val message: String = Zero()
-            .toString() // TABS: 2
+            .toString()
         println(message) // 0
     } // END
 }

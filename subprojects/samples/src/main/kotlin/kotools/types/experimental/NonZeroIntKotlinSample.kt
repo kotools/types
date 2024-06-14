@@ -7,7 +7,7 @@ internal class NonZeroIntKotlinSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     fun unaryMinusOperator() {
         val number: NonZeroInt = 1.toNonZeroInt()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         val result: NonZeroInt = -number // or number.unaryMinus()
         println(result) // -1
     } // END

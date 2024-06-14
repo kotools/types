@@ -19,10 +19,10 @@ internal object KotoolsTypesSerializersKotlinSample {
 
     fun emailAddress() {
         val format = Json {
-            serializersModule = KotoolsTypesSerializers.emailAddress // TABS: 1
+            serializersModule = KotoolsTypesSerializers.emailAddress
         }
         val emailAddress: EmailAddress =
-            EmailAddress.fromString("contact@kotools.org") // TABS: 1
+            EmailAddress.fromString("contact@kotools.org")
         val encoded: String = format.encodeToString(emailAddress)
         println(encoded) // "contact@kotools.org"
         val decoded: EmailAddress = format.decodeFromString(encoded)

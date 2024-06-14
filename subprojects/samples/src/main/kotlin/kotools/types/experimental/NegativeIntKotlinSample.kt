@@ -8,7 +8,7 @@ internal class NegativeIntKotlinSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     fun unaryMinusOperator() {
         val number: NegativeInt = (-1).toNegativeInt()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         val result: PositiveInt = -number // or number.unaryMinus()
         println(result) // 1
     } // END

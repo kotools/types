@@ -6,7 +6,7 @@ import kotlinx.serialization.json.Json
 internal class NegativeIntKotlinSample {
     fun serialization() {
         val number: NegativeInt = (-123).toNegativeInt()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         val encoded: String = Json.encodeToString(number)
         println(encoded) // -123
         val decoded: NegativeInt = Json.decodeFromString(encoded)

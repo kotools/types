@@ -7,7 +7,7 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 internal class NotBlankStringKotlinSample {
     fun serialization() {
         val string: NotBlankString = "hello world".toNotBlankString()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         val encoded: String = Json.encodeToString(string)
         println(encoded) // "hello world"
         val decoded: NotBlankString = Json.decodeFromString(encoded)
@@ -17,7 +17,7 @@ internal class NotBlankStringKotlinSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     fun plusOperator() {
         val text: NotBlankString = "hello".toNotBlankString()
-            .getOrThrow() // TABS: 1
+            .getOrThrow()
         val message: NotBlankString = text + " world"
         println(message) // hello world
     } // END
