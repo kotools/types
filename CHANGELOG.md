@@ -19,8 +19,8 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - The following declarations to the `Zero` **experimental** type:
-  - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()` and `toDouble()`
-    functions ([#646])
+  - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()`, `toDouble()`
+    and `toChar()` functions ([#646])
   - `compareTo(Byte)`, `compareTo(Short)`, `compareTo(Int)`, `compareTo(Long)`,
     `compareTo(Float)` and `compareTo(Double)` functions ([#650]). 
 - The following declarations to the `Zero.Companion` **experimental** type:
