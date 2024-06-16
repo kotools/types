@@ -255,4 +255,42 @@ class EmailAddressCompanionTest {
             EmailAddress.fromStringOrNull(value, pattern)
         assertNull(actual)
     }
+
+    @Test
+    fun orNull_Any_should_pass_with_a_valid_value() {
+        val value: Any = Values.VALID
+        val actual: EmailAddress? = EmailAddress.orNull(value)
+        assertNotNull(
+            actual,
+            message = "'EmailAddress.orNull(Any)' should pass with '$value'."
+        )
+    }
+
+    @Test
+    fun orNull_Any_should_fail_with_a_missing_at_sign_in_value(): Unit =
+        this.orNullFailsWith(Values.MISSING_AT_SIGN)
+
+    @Test
+    fun orNull_Any_should_fail_with_a_missing_dot_in_domain_of_value(): Unit =
+        this.orNullFailsWith(Values.MISSING_DOMAIN_DOT)
+
+    @Test
+    fun orNull_Any_should_fail_with_whitespaces_in_local_part_of_value(): Unit =
+        this.orNullFailsWith(Values.WHITESPACES_IN_LOCAL_PART)
+
+    @Test
+    fun orNull_Any_should_fail_with_whitespaces_in_domain_first_label_of_value(): Unit =
+        this.orNullFailsWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
+
+    @Test
+    fun orNull_Any_should_fail_with_whitespaces_in_domain_second_label_of_value(): Unit =
+        this.orNullFailsWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
+
+    private fun orNullFailsWith(value: Any) {
+        val actual: EmailAddress? = EmailAddress.orNull(value)
+        assertNull(
+            actual,
+            message = "'EmailAddress.orNull(Any)' should fail with '$value'."
+        )
+    }
 }

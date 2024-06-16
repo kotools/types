@@ -33,4 +33,9 @@ class EmailAddressCompanionJavaSampleTest {
     void fromStringOrNull_Any_Any_should_pass() {
         Assert.printsTrue(this.sample::fromStringOrNull_Any_Any);
     }
+
+    @Test
+    void orNull_Any_should_pass() {
+        Assert.printsTrue(this.sample::orNull_Any);
+    }
 }

@@ -332,5 +332,43 @@ public class EmailAddress private constructor(private val value: String) {
             return if (valueAsString matches regex) EmailAddress(valueAsString)
             else null
         }
+
+        /**
+         * Creates an instance of [EmailAddress] from the string representation
+         * of the specified [value], or returns `null` if the string
+         * representation of [value] doesn't match the
+         * [default pattern][PATTERN].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: EmailAddressCompanionKotlinSample.orNull_Any.md
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: EmailAddressCompanionJavaSample.orNull_Any.md
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun orNull(value: Any): EmailAddress? {
+            val valueAsString = "$value"
+            val regex = Regex(this.PATTERN)
+            val valueIsInvalid: Boolean = !valueAsString.matches(regex)
+            if (valueIsInvalid) return null
+            return EmailAddress(valueAsString)
+        }
     }
 }
