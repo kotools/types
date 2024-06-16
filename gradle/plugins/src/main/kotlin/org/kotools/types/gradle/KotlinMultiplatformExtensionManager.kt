@@ -55,6 +55,7 @@ internal class KotlinMultiplatformExtensionManager(
             this.project.rootProject.extensions.getByType()
         yarn.lockFileDirectory =
             this.project.rootProject.layout.projectDirectory.asFile
+        yarn.resolution("braces", "3.0.3")
         yarn.resolution("follow-redirects", "1.15.4")
         yarn.resolution("webpack", "5.76.3")
     }
