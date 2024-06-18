@@ -5,7 +5,7 @@ plugins {
 
 devTasks.list(tasks.check)
 
-kotlin.sourceSets.test {
+kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 

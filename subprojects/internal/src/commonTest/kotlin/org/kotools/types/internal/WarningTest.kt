@@ -1,8 +1,10 @@
 package org.kotools.types.internal
 
+import kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@OptIn(InternalKotoolsTypesApi::class)
 class WarningTest {
     @Test
     @Suppress("TestFunctionName")
