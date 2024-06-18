@@ -31,4 +31,13 @@ public object Warning {
      * uppercase letter on purpose.
      */
     public const val TEST_FUNCTION_NAME: String = "TestFunctionName"
+
+    /**
+     * Warning indicating that the declaration is never used.
+     *
+     * This warning can be suppressed when a generic parameter within a function
+     * declared with the `expect` keyword is not used in its arguments and
+     * return type.
+     */
+    public const val UNUSED: String = "unused"
 }

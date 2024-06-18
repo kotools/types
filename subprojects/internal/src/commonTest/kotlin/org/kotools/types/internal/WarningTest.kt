@@ -29,4 +29,12 @@ class WarningTest {
         val actual: String = Warning.TEST_FUNCTION_NAME
         assertEquals(expected, actual)
     }
+
+    @Suppress(Warning.TEST_FUNCTION_NAME)
+    @Test
+    fun UNUSED_should_return_unused() {
+        val expected = "unused"
+        val actual: String = Warning.UNUSED
+        assertEquals(expected, actual)
+    }
 }
