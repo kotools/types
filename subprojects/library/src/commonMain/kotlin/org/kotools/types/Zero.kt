@@ -4,9 +4,8 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
-
-private const val FINAL_WARNING: String = "RedundantModalityModifier"
 
 /**
  * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
@@ -49,7 +48,7 @@ public class Zero {
      * SAMPLE: ZeroJavaSample.equalsOverride.md
      * </details>
      */
-    @Suppress(FINAL_WARNING)
+    @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean = other is Zero
 
     /**
@@ -77,7 +76,7 @@ public class Zero {
      * SAMPLE: ZeroJavaSample.hashCodeOverride.md
      * </details>
      */
-    @Suppress(FINAL_WARNING)
+    @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.valueAsByte)
 
     // ------------------------------ Comparisons ------------------------------
@@ -496,7 +495,7 @@ public class Zero {
      * SAMPLE: ZeroJavaSample.toStringSample.md
      * </details>
      */
-    @Suppress(FINAL_WARNING)
+    @Suppress(Warning.FINAL)
     final override fun toString(): String = this.valueAsByte.toString()
 
     // -------------------------------------------------------------------------

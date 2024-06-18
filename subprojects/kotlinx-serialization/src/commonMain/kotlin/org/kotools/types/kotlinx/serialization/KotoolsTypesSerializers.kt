@@ -8,6 +8,7 @@ import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
 
@@ -60,7 +61,7 @@ public object KotoolsTypesSerializers {
      *
      * SAMPLE: KotoolsTypesSerializersKotlinSample.toString_override.md
      */
-    @Suppress("RedundantModalityModifier")
+    @Suppress(Warning.FINAL)
     final override fun toString(): String =
         simpleNameOf<KotoolsTypesSerializers>()
 }
