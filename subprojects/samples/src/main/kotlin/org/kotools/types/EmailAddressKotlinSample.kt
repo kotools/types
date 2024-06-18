@@ -1,10 +1,11 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.Warning
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object EmailAddressKotlinSample {
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun equals_override() {
         val value: Any = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.fromString(value)
@@ -13,7 +14,7 @@ internal object EmailAddressKotlinSample {
         println(result) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun hashCode_override() {
         val value: Any = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.fromString(value)
@@ -22,7 +23,7 @@ internal object EmailAddressKotlinSample {
         println(result) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun toString_override() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress = EmailAddress.fromString(value)

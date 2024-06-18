@@ -5,6 +5,7 @@ import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
+import org.kotools.types.internal.Warning
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object KotoolsTypesSerializersKotlinSample {
@@ -38,7 +39,7 @@ internal object KotoolsTypesSerializersKotlinSample {
         println(zero == decoded) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun toString_override() {
         val message: String = KotoolsTypesSerializers.toString()
         println(message) // KotoolsTypesSerializers

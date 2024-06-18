@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.Warning
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal object EmailAddressCompanionKotlinSample {
@@ -9,7 +10,7 @@ internal object EmailAddressCompanionKotlinSample {
         println(pattern) // ^\S+@\S+\.\S+$
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun fromString_Any() {
         val value: Any = "contact@kotools.org"
         val isSuccess: Boolean = try {
@@ -21,7 +22,7 @@ internal object EmailAddressCompanionKotlinSample {
         println(isSuccess) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun fromString_Any_Any() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
@@ -34,14 +35,14 @@ internal object EmailAddressCompanionKotlinSample {
         println(isSuccess) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun fromStringOrNull_Any() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.fromStringOrNull(value)
         println(address != null) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun fromStringOrNull_Any_Any() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
@@ -50,7 +51,7 @@ internal object EmailAddressCompanionKotlinSample {
         println(address != null) // true
     } // END
 
-    @Suppress("FunctionName")
+    @Suppress(Warning.FUNCTION_NAME)
     fun orNull_Any() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.orNull(value)
