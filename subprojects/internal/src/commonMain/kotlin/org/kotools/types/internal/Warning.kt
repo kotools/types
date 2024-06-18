@@ -23,4 +23,12 @@ public object Warning {
      * uppercase letter or contains a special character, but on purpose.
      */
     public const val FUNCTION_NAME: String = "FunctionName"
+
+    /**
+     * Warning indicating that the test function name is invalid.
+     *
+     * This warning can be suppressed when the test function name starts with an
+     * uppercase letter on purpose.
+     */
+    public const val TEST_FUNCTION_NAME: String = "TestFunctionName"
 }
