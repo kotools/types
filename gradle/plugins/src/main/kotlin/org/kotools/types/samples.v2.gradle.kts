@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.kotools.types.gradle.tasks.CheckSampleSources
 import org.kotools.types.gradle.tasks.ExtractKDocSamples
 
 // ----------------------------- Plugin extensions -----------------------------
@@ -35,6 +36,25 @@ cleanSamples.configure {
     description = "Deletes the 'samples' build directory."
     group = samplesTaskGroup
     setDelete(samplesBuildDirectory)
+}
+
+private val checkAllSampleSources: TaskProvider<Task> by tasks.registering
+checkAllSampleSources.configure {
+    description = "Checks sources from all sample source sets."
+    group = samplesTaskGroup
+}
+sampleSourceSets.forEach { sourceSet: KotlinSourceSet ->
+    val sourceSetName: String = sourceSet.name
+    val task: TaskProvider<CheckSampleSources> = sourceSetName
+        .replaceFirstChar(Char::uppercaseChar)
+        .let { tasks.register<CheckSampleSources>("check${it}Sources") }
+    task.configure {
+        description = "Checks sources from '$sourceSetName' source set."
+        group = samplesTaskGroup
+        onlyIf { sourceSet.kotlin.sourceDirectories.asFileTree.any() }
+        sourceDirectories = sourceSet.kotlin.sourceDirectories
+    }
+    checkAllSampleSources.configure { dependsOn(task) }
 }
 
 private val extractAllSamples: TaskProvider<Task> by tasks.registering
