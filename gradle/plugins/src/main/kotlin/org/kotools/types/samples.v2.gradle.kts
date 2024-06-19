@@ -38,19 +38,20 @@ cleanSamples.configure {
     setDelete(samplesBuildDirectory)
 }
 
-private val checkPlatformSampleSources: List<TaskProvider<CheckSampleSources>> =
+private val sourceSetsHavingFiles: List<KotlinSourceSet> =
     sampleSourceSets.filter { it.kotlin.sourceDirectories.asFileTree.any() }
-        .map { sourceSet: KotlinSourceSet ->
-            val taskName: String = sourceSet.name
-                .replaceFirstChar(Char::uppercaseChar)
-                .let { "check${it}Sources" }
-            tasks.register<CheckSampleSources>(taskName) {
-                description =
-                    "Checks sources from '${sourceSet.name}' source set."
-                group = samplesTaskGroup
-                sourceDirectories = sourceSet.kotlin.sourceDirectories
-            }
+
+private val checkPlatformSampleSources: List<TaskProvider<CheckSampleSources>> =
+    sourceSetsHavingFiles.map { sourceSet: KotlinSourceSet ->
+        val taskName: String = sourceSet.name
+            .replaceFirstChar(Char::uppercaseChar)
+            .let { "check${it}Sources" }
+        tasks.register<CheckSampleSources>(taskName) {
+            description = "Checks sources from '${sourceSet.name}' source set."
+            group = samplesTaskGroup
+            sourceDirectories = sourceSet.kotlin.sourceDirectories
         }
+    }
 
 private val checkAllSampleSources: TaskProvider<Task> by tasks.registering
 checkAllSampleSources.configure {
@@ -60,28 +61,23 @@ checkAllSampleSources.configure {
 }
 
 private val extractPlatformSamples: List<TaskProvider<ExtractKDocSamples>> =
-    sampleSourceSets.filter { it.kotlin.sourceDirectories.asFileTree.any() }
-        .map { sourceSet: KotlinSourceSet ->
-            val sourceSetName: String = sourceSet.name
-            val taskName: String = sourceSetName
-                .replaceFirstChar(Char::uppercaseChar)
-                .let { "extract${it}s" }
-            tasks.register<ExtractKDocSamples>(taskName) {
-                description =
-                    "Extracts KDoc samples from '$sourceSetName' source set."
-                group = samplesTaskGroup
-                onlyIf { sourceSet.kotlin.sourceDirectories.asFileTree.any() }
-                sourceDirectories = sourceSet.kotlin.sourceDirectories
-                outputDirectory = samplesBuildDirectory.map {
-                    it.dir("extracted/$sourceSetName")
-                }
-                checkPlatformSampleSources
-                    .filter {
-                        it.name.contains(sourceSetName, ignoreCase = true)
-                    }
-                    .let(this::setDependsOn)
-            }
+    sourceSetsHavingFiles.map { sourceSet: KotlinSourceSet ->
+        val sourceSetName: String = sourceSet.name
+        val taskName: String = sourceSetName
+            .replaceFirstChar(Char::uppercaseChar)
+            .let { "extract${it}s" }
+        tasks.register<ExtractKDocSamples>(taskName) {
+            description =
+                "Extracts KDoc samples from '$sourceSetName' source set."
+            group = samplesTaskGroup
+            sourceDirectories = sourceSet.kotlin.sourceDirectories
+            outputDirectory =
+                samplesBuildDirectory.map { it.dir("extracted/$sourceSetName") }
+            checkPlatformSampleSources
+                .filter { it.name.contains(sourceSetName, ignoreCase = true) }
+                .let(this::setDependsOn)
         }
+    }
 
 private val extractAllSamples: TaskProvider<Task> by tasks.registering
 extractAllSamples.configure {
