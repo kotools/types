@@ -28,5 +28,14 @@ public abstract class CheckSampleSources : DefaultTask() {
 }
 
 private fun File.checkHasSingleClass() {
-    TODO()
+    val numberOfClasses: Int = this.useLines { lines: Sequence<String> ->
+        val classRegex = Regex("class [A-Z][A-Za-z]*")
+        lines.count { classRegex in it }
+    }
+    if (numberOfClasses == 1) return
+    val message: String = listOf(
+        "The '${this.name}' file should have a single class.",
+        "File location: ${this.path}"
+    ).joinToString(separator = "\n")
+    error(message)
 }
