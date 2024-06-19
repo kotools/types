@@ -38,6 +38,7 @@ sampleSourceSets.forEach { sourceSet: KotlinSourceSet ->
     task.configure {
         description = "Extract KDoc samples from '$sourceSetName' source set."
         group = "samples"
+        onlyIf { sourceSet.kotlin.sourceDirectories.asFileTree.any() }
         sourceDirectories = sourceSet.kotlin.sourceDirectories
         outputDirectory =
             layout.buildDirectory.dir("samples/extracted/$sourceSetName")
