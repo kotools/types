@@ -24,33 +24,36 @@ private val sampleSourceSets: List<KotlinSourceSet> = kotlin.sourceSets
 
 // ----------------------------------- Tasks -----------------------------------
 
+private val samplesTaskGroup: String = "samples"
+
+private val samplesBuildDirectory: Provider<Directory> =
+    layout.buildDirectory.dir("samples")
+
 private val cleanSamples: TaskProvider<Delete>
         by tasks.registering(Delete::class)
 cleanSamples.configure {
     description = "Deletes the 'samples' build directory."
-    group = "samples"
-    layout.buildDirectory.dir("samples")
-        .let(this::setDelete)
+    group = samplesTaskGroup
+    setDelete(samplesBuildDirectory)
 }
 
 private val extractAllSamples: TaskProvider<Task> by tasks.registering
 extractAllSamples.configure {
-    description = "Extract KDoc samples from all sample source sets."
-    group = "samples"
+    description = "Extracts KDoc samples from all sample source sets."
+    group = samplesTaskGroup
 }
-
 sampleSourceSets.forEach { sourceSet: KotlinSourceSet ->
     val sourceSetName: String = sourceSet.name
     val task: TaskProvider<ExtractKDocSamples> = sourceSetName
         .replaceFirstChar(Char::uppercaseChar)
         .let { tasks.register<ExtractKDocSamples>("extract${it}s") }
     task.configure {
-        description = "Extract KDoc samples from '$sourceSetName' source set."
-        group = "samples"
+        description = "Extracts KDoc samples from '$sourceSetName' source set."
+        group = samplesTaskGroup
         onlyIf { sourceSet.kotlin.sourceDirectories.asFileTree.any() }
         sourceDirectories = sourceSet.kotlin.sourceDirectories
         outputDirectory =
-            layout.buildDirectory.dir("samples/extracted/$sourceSetName")
+            samplesBuildDirectory.map { it.dir("extracted/$sourceSetName") }
     }
     extractAllSamples.configure { dependsOn(task) }
 }
