@@ -24,6 +24,15 @@ private val sampleSourceSets: List<KotlinSourceSet> = kotlin.sourceSets
 
 // ----------------------------------- Tasks -----------------------------------
 
+private val cleanSamples: TaskProvider<Delete>
+        by tasks.registering(Delete::class)
+cleanSamples.configure {
+    description = "Deletes the 'samples' build directory."
+    group = "samples"
+    layout.buildDirectory.dir("samples")
+        .let(this::setDelete)
+}
+
 private val extractAllSamples: TaskProvider<Task> by tasks.registering
 extractAllSamples.configure {
     description = "Extract KDoc samples from all sample source sets."
