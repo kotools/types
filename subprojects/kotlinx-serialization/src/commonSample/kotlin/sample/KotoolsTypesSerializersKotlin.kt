@@ -1,23 +1,27 @@
-package org.kotools.types.kotlinx.serialization
+package sample
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
-import org.kotools.types.internal.Warning
+import org.kotools.types.kotlinx.serialization.KotoolsTypesSerializers
+import kotlin.test.Test
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-internal object KotoolsTypesSerializersKotlinSample {
+class KotoolsTypesSerializersKotlin {
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun all() {
         val format = Json { serializersModule = KotoolsTypesSerializers.all }
         val zero = Zero()
         val encoded: String = format.encodeToString(zero)
-        println(encoded) // 0
+        check(encoded == "0")
         val decoded: Zero = format.decodeFromString(encoded)
-        println(zero == decoded) // true
-    } // END
+        check(decoded == zero)
+    }
 
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun emailAddress() {
         val format = Json {
             serializersModule = KotoolsTypesSerializers.emailAddress
@@ -25,23 +29,26 @@ internal object KotoolsTypesSerializersKotlinSample {
         val emailAddress: EmailAddress =
             EmailAddress.fromString("contact@kotools.org")
         val encoded: String = format.encodeToString(emailAddress)
-        println(encoded) // "contact@kotools.org"
+        check(encoded == "\"contact@kotools.org\"")
         val decoded: EmailAddress = format.decodeFromString(encoded)
-        println(emailAddress == decoded) // true
-    } // END
+        check(decoded == emailAddress)
+    }
 
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun zero() {
         val format = Json { serializersModule = KotoolsTypesSerializers.zero }
         val zero = Zero()
         val encoded: String = format.encodeToString(zero)
-        println(encoded) // 0
+        check(encoded == "0")
         val decoded: Zero = format.decodeFromString(encoded)
-        println(zero == decoded) // true
-    } // END
+        check(decoded == zero)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun toString_override() {
-        val message: String = KotoolsTypesSerializers.toString()
-        println(message) // KotoolsTypesSerializers
-    } // END
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun toStringOverride() {
+        val result: String = KotoolsTypesSerializers.toString()
+        check(result == "KotoolsTypesSerializers")
+    }
 }
