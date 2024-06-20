@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.kotools.types.gradle.tasks.CheckSampleResolutions
 import org.kotools.types.gradle.tasks.CheckSampleSources
 import org.kotools.types.gradle.tasks.ExtractKDocSamples
+import org.kotools.types.gradle.tasks.InlineKDocSamples
 
 // ----------------------------- Plugin extensions -----------------------------
 
@@ -135,4 +136,31 @@ restoreMainSources.configure {
     group = samplesTaskGroup
     from(sourcesBackupDirectory)
     into(projectSources)
+}
+
+private val inlinePlatformSamples: List<TaskProvider<InlineKDocSamples>> =
+    extractPlatformSamples.map { task: TaskProvider<ExtractKDocSamples> ->
+        val platform: String = task.name.substringAfter("extract")
+            .substringBefore("Samples")
+        val name = "inline${platform}Samples"
+        val sourceSet: KotlinSourceSet = kotlin.sourceSets.asSequence()
+            .filterNotNull()
+            .filter { it.name.contains(platform, ignoreCase = true) }
+            .first { it.name.endsWith("Main") }
+        tasks.register<InlineKDocSamples>(name) {
+            description =
+                "Inlines KDoc samples from '${sourceSet.name}' source set."
+            group = samplesTaskGroup
+            dependsOn(backupMainSources)
+            sourceDirectories = sourceSet.kotlin.sourceDirectories
+            extractedSamplesDirectory =
+                task.flatMap(ExtractKDocSamples::outputDirectory)
+        }
+    }
+
+private val inlineAllSamples: TaskProvider<Task> by tasks.registering
+inlineAllSamples.configure {
+    description = "Inlines KDoc samples from all source sets."
+    group = samplesTaskGroup
+    dependsOn(inlinePlatformSamples)
 }
