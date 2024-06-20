@@ -10,26 +10,23 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 public class KotoolsSamplesPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        project.shouldHaveKotlinMultiplatformPlugin()
-        project.shouldHaveDokkaPlugin()
+        val kotlinMultiplatform = ExternalPlugin(
+            name = "Kotlin Multiplatform",
+            identifier = "org.jetbrains.kotlin.multiplatform"
+        )
+        val dokka =
+            ExternalPlugin(name = "Dokka", identifier = "org.jetbrains.dokka")
+        listOf(kotlinMultiplatform, dokka)
+            .forEach { project.shouldHave(it) }
         val kotlin: KotlinMultiplatformExtension by project.extensions
         val platforms: Set<String> = kotlin.platforms()
         platforms.forEach { kotlin.sampleSourceSet(it) }
     }
 
-    private fun Project.shouldHaveKotlinMultiplatformPlugin() {
-        val isKotlinMultiplatformProject: Boolean = this.pluginManager
-            .hasPlugin("org.jetbrains.kotlin.multiplatform")
-        check(isKotlinMultiplatformProject) {
-            "'${this.path}' doesn't have the Kotlin Multiplatform plugin."
-        }
-    }
-
-    private fun Project.shouldHaveDokkaPlugin() {
-        val projectHasDokka: Boolean =
-            this.pluginManager.hasPlugin("org.jetbrains.dokka")
-        check(projectHasDokka) {
-            "'${this.path}' doesn't have the Dokka plugin."
+    private fun Project.shouldHave(plugin: ExternalPlugin) {
+        val hasPlugin: Boolean = this.pluginManager.hasPlugin(plugin.identifier)
+        check(hasPlugin) {
+            "'${this.path}' doesn't have the ${plugin.name} plugin."
         }
     }
 
