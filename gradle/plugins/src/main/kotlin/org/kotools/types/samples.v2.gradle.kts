@@ -114,14 +114,25 @@ checkAllSampleResolutions.configure {
     dependsOn(checkPlatformSampleResolutions)
 }
 
+private val projectSources: Directory = layout.projectDirectory.dir("src")
+private val sourcesBackupDirectory: Provider<Directory> =
+    samplesBuildDirectory.map { it.dir("sources-backup") }
+
 private val backupMainSources: TaskProvider<Copy>
         by tasks.registering(Copy::class)
 backupMainSources.configure {
     description = "Copies main sources into the build directory."
     group = samplesTaskGroup
     dependsOn += checkAllSampleResolutions
-    val source: Directory = layout.projectDirectory.dir("src")
-    from(source) { exclude("api", "*Sample", "*Test") }
-    val destination = samplesBuildDirectory.map { it.dir("sources-backup") }
-    into(destination)
+    from(projectSources) { exclude("api", "*Sample", "*Test") }
+    into(sourcesBackupDirectory)
+}
+
+private val restoreMainSources: TaskProvider<Copy>
+        by tasks.registering(Copy::class)
+restoreMainSources.configure {
+    description = "Restores main sources backup from the build directory."
+    group = samplesTaskGroup
+    from(sourcesBackupDirectory)
+    into(projectSources)
 }
