@@ -15,6 +15,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("KotoolsSamples").configure {
+            this.id = "org.kotools.samples"
+            this.implementationClass = "${this.id}.${this.name}Plugin"
+        }
         kotoolsTypesPlugin("Publication")
         register("DevTasks").configure {
             val prefix = "org.kotools.types"
