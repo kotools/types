@@ -38,11 +38,11 @@ cleanSamples.configure {
     setDelete(samplesBuildDirectory)
 }
 
-private val sourceSetsHavingFiles: List<KotlinSourceSet> =
+private val sampleSourceSetsHavingFiles: List<KotlinSourceSet> =
     sampleSourceSets.filter { it.kotlin.sourceDirectories.asFileTree.any() }
 
 private val checkPlatformSampleSources: List<TaskProvider<CheckSampleSources>> =
-    sourceSetsHavingFiles.map { sourceSet: KotlinSourceSet ->
+    sampleSourceSetsHavingFiles.map { sourceSet: KotlinSourceSet ->
         val taskName: String = sourceSet.name
             .replaceFirstChar(Char::uppercaseChar)
             .let { "check${it}Sources" }
@@ -61,7 +61,7 @@ checkAllSampleSources.configure {
 }
 
 private val extractPlatformSamples: List<TaskProvider<ExtractKDocSamples>> =
-    sourceSetsHavingFiles.map { sourceSet: KotlinSourceSet ->
+    sampleSourceSetsHavingFiles.map { sourceSet: KotlinSourceSet ->
         val sourceSetName: String = sourceSet.name
         val taskName: String = sourceSetName
             .replaceFirstChar(Char::uppercaseChar)
