@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.kotools.types.gradle.tasks.CheckSampleResolutions
 import org.kotools.types.gradle.tasks.CheckSampleSources
 import org.kotools.types.gradle.tasks.ExtractKDocSamples
 
@@ -84,4 +85,31 @@ extractAllSamples.configure {
     description = "Extracts KDoc samples from all sample source sets."
     group = samplesTaskGroup
     dependsOn(extractPlatformSamples)
+}
+
+private val checkPlatformSampleResolutions:
+        List<TaskProvider<CheckSampleResolutions>> = extractPlatformSamples
+    .map { task: TaskProvider<ExtractKDocSamples> ->
+        val platform: String = task.name.substringAfter("extract")
+            .substringBefore("Samples")
+        val name = "check${platform}SampleResolutions"
+        val sourceSet: KotlinSourceSet = kotlin.sourceSets.asSequence()
+            .filterNotNull()
+            .filter { it.name.contains(platform, ignoreCase = true) }
+            .first { it.name.endsWith("Main") }
+        tasks.register<CheckSampleResolutions>(name) {
+            description =
+                "Checks sample resolutions from '${sourceSet.name}' source set."
+            group = samplesTaskGroup
+            sourceDirectories = sourceSet.kotlin.sourceDirectories
+            extractedSamplesDirectory =
+                task.flatMap(ExtractKDocSamples::outputDirectory)
+        }
+    }
+
+private val checkAllSampleResolutions: TaskProvider<Task> by tasks.registering
+checkAllSampleResolutions.configure {
+    description = "Checks sample resolutions from all source sets."
+    group = samplesTaskGroup
+    dependsOn(checkPlatformSampleResolutions)
 }
