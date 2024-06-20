@@ -1,7 +1,10 @@
 package org.kotools.types
 
+import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.kotools.types.gradle.tasks.CheckSampleResolutions
 import org.kotools.types.gradle.tasks.CheckSampleSources
 import org.kotools.types.gradle.tasks.ExtractKDocSamples
@@ -164,3 +167,28 @@ inlineAllSamples.configure {
     group = samplesTaskGroup
     dependsOn(inlinePlatformSamples)
 }
+
+// ----------------------------- Dokka integration -----------------------------
+
+tasks.withType<AbstractDokkaLeafTask>().configureEach {
+    dependsOn += inlineAllSamples
+    finalizedBy(restoreMainSources)
+}
+
+rootProject.tasks.withType<DokkaMultiModuleTask>().configureEach {
+    dependsOn += restoreMainSources
+}
+
+// ---------------------------- Kotlin integration -----------------------------
+
+kotlin.targets
+    .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
+    .mapNotNull(tasks::findByName)
+    .forEach {
+        it.dependsOn += inlineAllSamples
+        it.finalizedBy(restoreMainSources)
+    }
+
+private val kotlinCompilationTasks: TaskCollection<KotlinCompilationTask<*>> =
+    tasks.withType(KotlinCompilationTask::class)
+restoreMainSources.configure { mustRunAfter(kotlinCompilationTasks) }
