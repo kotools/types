@@ -1,5 +1,7 @@
 package org.kotools.samples
 
+import org.gradle.api.Project
+
 /**
  * Represents an external plugin that Kotools Samples may depend on.
  *
@@ -25,9 +27,8 @@ package org.kotools.samples
  */
 internal class ExternalPlugin internal constructor(
     /** The name of this plugin. */
-    val name: String,
-    /** The identifier of this plugin. */
-    val identifier: String
+    internal val name: String,
+    private val identifier: String
 ) {
     init {
         val nameIsNotBlank: Boolean = this.name.isNotBlank()
@@ -36,6 +37,18 @@ internal class ExternalPlugin internal constructor(
         val identifierIsValid: Boolean = this.identifier matches regex
         require(identifierIsValid) {
             "'${this.identifier}' external plugin's identifier is invalid."
+        }
+    }
+
+    /**
+     * Returns [Unit] if this plugin was applied to the specified [project], or
+     * throws an [IllegalStateException] otherwise.
+     */
+    internal fun checkIn(project: Project) {
+        val projectHasPlugin: Boolean =
+            project.pluginManager.hasPlugin(this.identifier)
+        check(projectHasPlugin) {
+            "${this.name} plugin wasn't applied to '${project.name}' project."
         }
     }
 }

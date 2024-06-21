@@ -1,5 +1,7 @@
 package org.kotools.samples
 
+import org.gradle.api.Project
+import org.gradle.testfixtures.ProjectBuilder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -31,6 +33,30 @@ class ExternalPluginTest {
             assertFailsWith { ExternalPlugin(name, identifier) }
         val actual: String? = exception.message
         val expected = "'$identifier' external plugin's identifier is invalid."
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `checkIn should pass if this plugin was applied to project`() {
+        val identifier = "base"
+        val plugin = ExternalPlugin(name = "Base", identifier)
+        val project: Project = ProjectBuilder.builder()
+            .build()
+        project.pluginManager.apply(identifier)
+        plugin.checkIn(project)
+    }
+
+    @Test
+    fun `checkIn should fail if this plugin wasn't applied to project`() {
+        val plugin = ExternalPlugin(name = "Base", identifier = "base")
+        val project: Project = ProjectBuilder.builder()
+            .withName("test")
+            .build()
+        val exception: IllegalStateException =
+            assertFailsWith { plugin.checkIn(project) }
+        val actual: String? = exception.message
+        val expected =
+            "${plugin.name} plugin wasn't applied to '${project.name}' project."
         assertEquals(expected, actual)
     }
 }

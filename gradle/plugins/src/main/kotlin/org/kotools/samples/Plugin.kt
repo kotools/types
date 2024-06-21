@@ -17,17 +17,10 @@ public class KotoolsSamplesPlugin : Plugin<Project> {
         val dokka =
             ExternalPlugin(name = "Dokka", identifier = "org.jetbrains.dokka")
         listOf(kotlinMultiplatform, dokka)
-            .forEach { project.shouldHave(it) }
+            .forEach { it.checkIn(project) }
         val kotlin: KotlinMultiplatformExtension by project.extensions
         val platforms: Set<String> = kotlin.platforms()
         platforms.forEach { kotlin.sampleSourceSet(it) }
-    }
-
-    private fun Project.shouldHave(plugin: ExternalPlugin) {
-        val hasPlugin: Boolean = this.pluginManager.hasPlugin(plugin.identifier)
-        check(hasPlugin) {
-            "'${this.path}' doesn't have the ${plugin.name} plugin."
-        }
     }
 
     private fun KotlinMultiplatformExtension.platforms(): Set<String> = this
