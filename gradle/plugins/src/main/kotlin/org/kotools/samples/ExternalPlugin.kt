@@ -26,8 +26,7 @@ import org.gradle.api.Project
  * multiline flag (**m**) is enabled.
  */
 internal class ExternalPlugin internal constructor(
-    /** The name of this plugin. */
-    internal val name: String,
+    private val name: String,
     private val identifier: String
 ) {
     init {
@@ -47,9 +46,7 @@ internal class ExternalPlugin internal constructor(
     internal fun checkIn(project: Project) {
         val projectHasPlugin: Boolean =
             project.pluginManager.hasPlugin(this.identifier)
-        check(projectHasPlugin) {
-            "${this.name} plugin wasn't applied to '${project.name}' project."
-        }
+        check(projectHasPlugin) { "$this plugin wasn't applied to $project." }
     }
 
     /** Returns the string representation of this plugin. */
