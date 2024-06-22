@@ -62,10 +62,9 @@ class ExternalPluginTest {
     @Test
     fun `toString should pass`() {
         val name = "Base"
-        val identifier = "base"
-        val plugin = ExternalPlugin(name, identifier)
+        val plugin = ExternalPlugin(name, identifier = "base")
         val actual = "$plugin"
-        val expected = "$name ($identifier)"
+        val expected = "$name plugin"
         assertEquals(expected, actual)
     }
 }

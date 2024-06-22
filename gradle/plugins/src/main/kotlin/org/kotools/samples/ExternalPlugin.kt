@@ -50,5 +50,5 @@ internal class ExternalPlugin internal constructor(
     }
 
     /** Returns the string representation of this plugin. */
-    override fun toString(): String = "${this.name} (${this.identifier})"
+    override fun toString(): String = "${this.name} plugin"
 }
