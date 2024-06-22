@@ -55,7 +55,7 @@ class ExternalPluginTest {
         val exception: IllegalStateException =
             assertFailsWith { plugin.checkIn(project) }
         val actual: String? = exception.message
-        val expected = "$plugin plugin wasn't applied to $project."
+        val expected = "$plugin wasn't applied to $project."
         assertEquals(expected, actual)
     }
 

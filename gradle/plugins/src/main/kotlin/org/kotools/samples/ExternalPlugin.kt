@@ -46,7 +46,7 @@ internal class ExternalPlugin internal constructor(
     internal fun checkIn(project: Project) {
         val projectHasPlugin: Boolean =
             project.pluginManager.hasPlugin(this.identifier)
-        check(projectHasPlugin) { "$this plugin wasn't applied to $project." }
+        check(projectHasPlugin) { "$this wasn't applied to $project." }
     }
 
     /** Returns the string representation of this plugin. */
