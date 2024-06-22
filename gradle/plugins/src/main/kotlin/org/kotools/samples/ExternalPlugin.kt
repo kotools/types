@@ -51,4 +51,7 @@ internal class ExternalPlugin internal constructor(
             "${this.name} plugin wasn't applied to '${project.name}' project."
         }
     }
+
+    /** Returns the string representation of this plugin. */
+    override fun toString(): String = "${this.name} (${this.identifier})"
 }

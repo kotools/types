@@ -59,4 +59,14 @@ class ExternalPluginTest {
             "${plugin.name} plugin wasn't applied to '${project.name}' project."
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `toString should pass`() {
+        val name = "Base"
+        val identifier = "base"
+        val plugin = ExternalPlugin(name, identifier)
+        val actual = "$plugin"
+        val expected = "$name ($identifier)"
+        assertEquals(expected, actual)
+    }
 }
