@@ -40,6 +40,19 @@ internal class ExternalPlugin internal constructor(
     }
 
     /**
+     * Returns `true` if the [other] object is an instance of [ExternalPlugin]
+     * with the same [identifier], or returns `false` otherwise.
+     */
+    override fun equals(other: Any?): Boolean =
+        other is ExternalPlugin && this.identifier == other.identifier
+
+    /** Returns a hash code value for this plugin. */
+    override fun hashCode(): Int {
+        val prime = 31
+        return prime + this.identifier.hashCode()
+    }
+
+    /**
      * Returns [Unit] if this plugin was applied to the specified [project], or
      * throws an [IllegalStateException] otherwise.
      */
