@@ -24,6 +24,9 @@ version.ref = "kotlinx-binary-compatibility-validator"
 id = "org.jetbrains.kotlin.plugin.serialization"
 version.ref = "kotlin"
 
+[plugins.kotools-samples]
+id = "org.kotools.samples"
+
 [plugins.kotools-types-dev-tasks]
 id = "org.kotools.types.dev.tasks"
 
