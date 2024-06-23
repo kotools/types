@@ -10,13 +10,8 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 public class KotoolsSamplesPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        val kotlinMultiplatform = ExternalPlugin(
-            name = "Kotlin Multiplatform",
-            identifier = "org.jetbrains.kotlin.multiplatform"
-        )
-        val dokka =
-            ExternalPlugin(name = "Dokka", identifier = "org.jetbrains.dokka")
-        listOf(kotlinMultiplatform, dokka)
+        val plugins = ExternalPluginCatalog()
+        setOf(plugins.dokka, plugins.kotlinMultiplatform)
             .forEach { it.checkIn(project) }
         val kotlin: KotlinMultiplatformExtension by project.extensions
         val platforms: Set<String> = kotlin.platforms()
