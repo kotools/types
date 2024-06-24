@@ -2,6 +2,9 @@ package org.kotools
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.kotools.samples.CheckSampleSources
+
+// ----------------------------- Plugin extensions -----------------------------
 
 private val kotlin: KotlinMultiplatformExtension = extensions.findByType()
     ?: error("Kotlin Multiplatform plugin wasn't applied to ${this}.")
@@ -22,4 +25,11 @@ platforms.forEach {
         this.dependsOn(main)
     }
     test.dependsOn(sample)
+}
+
+// ----------------------------------- Tasks -----------------------------------
+
+tasks.register<CheckSampleSources>("checkSampleSources").configure {
+    this.description = "Checks the content of sample sources."
+    this.sourceDirectory = layout.projectDirectory.dir("src")
 }
