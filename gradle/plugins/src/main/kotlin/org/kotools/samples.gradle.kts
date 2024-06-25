@@ -2,6 +2,7 @@ package org.kotools
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.kotools.samples.CheckSampleSources
 
 // ----------------------------- Plugin extensions -----------------------------
@@ -25,6 +26,20 @@ platforms.forEach {
         this.dependsOn(main)
     }
     test.dependsOn(sample)
+}
+
+afterEvaluate {
+    val withJavaEnabled: Boolean = kotlin.targets.withType<KotlinJvmTarget>()
+        .firstOrNull()
+        ?.withJavaEnabled
+        ?: false
+    if (!withJavaEnabled) return@afterEvaluate
+    val java: JavaPluginExtension = extensions.getByType()
+    java.sourceSets.named("test").configure {
+        val directory: Directory =
+            layout.projectDirectory.dir("src/jvmSample/java")
+        this.java.srcDir(directory)
+    }
 }
 
 // ----------------------------------- Tasks -----------------------------------
