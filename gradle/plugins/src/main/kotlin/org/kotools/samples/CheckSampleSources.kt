@@ -22,7 +22,7 @@ public abstract class CheckSampleSources : DefaultTask() {
         this.sourceDirectory.asFileTree.asSequence()
             .filterNotNull()
             .filter { it.path.contains("Sample/") }
-            .filter { it.name.endsWith(".kt") }
+            .filter { it.name.endsWith(".kt") || it.name.endsWith(".java") }
             .firstOrNull { it.countClasses() != 1 }
             ?.fail()
     }
