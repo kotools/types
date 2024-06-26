@@ -7,12 +7,9 @@ internal class SampleSourceFile private constructor(private val file: File) {
         require("Sample/" in this.file.path) {
             "'${this.file.name}' file should be in a sample source set."
         }
-        val fileTypeIsSupported: Boolean = listOf(".kt", ".java")
-            .any(this.file.name::endsWith)
-        require(fileTypeIsSupported) {
-            "'${this.file.extension}' files are not supported."
-        }
     }
+
+    private val language: ProgrammingLanguage = ProgrammingLanguage(this.file)
 
     fun checkSingleClass() {
         val numberOfClasses: Int = this.countClasses()
@@ -26,9 +23,51 @@ internal class SampleSourceFile private constructor(private val file: File) {
 
     private fun countClasses(): Int =
         this.file.useLines { lines: Sequence<String> ->
-            val classRegex = Regex("class [A-Z][A-Za-z]*")
-            lines.count { classRegex in it }
+            lines.count { this.language.classHeaderRegex in it }
         }
+
+    fun samples(): Set<Sample> {
+        var identifier: MutableList<String> = mutableListOf()
+        val body: MutableList<String> = mutableListOf()
+        val samples: MutableList<Sample> = mutableListOf()
+        var numberOfUnclosedBracketsInSample = 0
+        var readBody = false
+        this.file.useLines { lines: Sequence<String> ->
+            lines.forEach {
+                when {
+                    it matches this.language.packageRegex -> identifier +=
+                        it.substringAfter("${this.language.packageKeyword} ")
+                            .substringBefore(';')
+                    this.language.classHeaderRegex in it -> identifier += it
+                        .substringAfter("${this.language.classKeyword} ")
+                        .substringBefore(" {")
+                    this.language.functionHeaderRegex in it -> {
+                        identifier += it.substringBefore('(')
+                            .substringAfter("${this.language.functionKeyword} ")
+                        numberOfUnclosedBracketsInSample++
+                        readBody = true
+                    }
+                    readBody -> {
+                        if ('{' in it) numberOfUnclosedBracketsInSample++
+                        if ('}' in it) numberOfUnclosedBracketsInSample--
+                        if (numberOfUnclosedBracketsInSample > 0) body += it
+                        else {
+                            readBody = false
+                            samples += Sample(
+                                identifier.toList(),
+                                body.toList(),
+                                this.language
+                            )
+                            identifier = identifier.dropLast(1)
+                                .toMutableList()
+                            body.clear()
+                        }
+                    }
+                }
+            }
+        }
+        return samples.toSet()
+    }
 
     companion object {
         fun orNull(file: File): SampleSourceFile? = try {
