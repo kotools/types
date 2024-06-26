@@ -38,6 +38,7 @@ internal class SampleSourceFile private constructor(private val file: File) {
                     it matches this.language.packageRegex -> identifier +=
                         it.substringAfter("${this.language.packageKeyword} ")
                             .substringBefore(';')
+                            .split('.')
                     this.language.classHeaderRegex in it -> identifier += it
                         .substringAfter("${this.language.classKeyword} ")
                         .substringBefore(" {")
