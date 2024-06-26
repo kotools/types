@@ -46,11 +46,13 @@ afterEvaluate {
 
 // ----------------------------------- Tasks -----------------------------------
 
+private val projectSources: Directory = layout.projectDirectory.dir("src")
+
 private val checkSampleSources: TaskProvider<CheckSampleSources>
         by tasks.registering(CheckSampleSources::class)
 checkSampleSources.configure {
     this.description = "Checks the content of sample sources."
-    this.sourceDirectory = layout.projectDirectory.dir("src")
+    this.sourceDirectory = projectSources
 }
 
 private val extractSamples: TaskProvider<ExtractSamples>
@@ -58,13 +60,27 @@ private val extractSamples: TaskProvider<ExtractSamples>
 extractSamples.configure {
     this.description = "Extracts samples for KDoc."
     this.dependsOn(checkSampleSources)
-    this.sourceDirectory = layout.projectDirectory.dir("src")
+    this.sourceDirectory = projectSources
     this.outputDirectory = layout.buildDirectory.dir("samples/extracted")
 }
 
-tasks.register<CheckSampleReferences>("checkSampleReferences").configure {
+private val checkSampleReferences: TaskProvider<CheckSampleReferences>
+        by tasks.registering(CheckSampleReferences::class)
+checkSampleReferences.configure {
     this.description = "Checks sample references from KDoc."
-    this.sourceDirectory = layout.projectDirectory.dir("src")
+    this.sourceDirectory = projectSources
     this.extractedSamplesDirectory =
         extractSamples.flatMap(ExtractSamples::outputDirectory)
 }
+
+private val backupMainSources: TaskProvider<Copy>
+        by tasks.registering(Copy::class)
+backupMainSources.configure {
+    this.description = "Copies main sources into the build directory."
+    this.dependsOn(checkSampleReferences)
+    this.from(projectSources) { exclude("api", "*Sample", "*Test") }
+    val destination: Provider<Directory> =
+        layout.buildDirectory.dir("samples/sources-backup")
+    this.into(destination)
+}
+
