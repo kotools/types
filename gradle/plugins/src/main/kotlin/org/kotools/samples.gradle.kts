@@ -3,6 +3,7 @@ package org.kotools
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
+import org.kotools.samples.CheckSampleReferences
 import org.kotools.samples.CheckSampleSources
 import org.kotools.samples.ExtractSamples
 
@@ -52,9 +53,18 @@ checkSampleSources.configure {
     this.sourceDirectory = layout.projectDirectory.dir("src")
 }
 
-tasks.register<ExtractSamples>("extractSamples").configure {
+private val extractSamples: TaskProvider<ExtractSamples>
+        by tasks.registering(ExtractSamples::class)
+extractSamples.configure {
     this.description = "Extracts samples for KDoc."
     this.dependsOn(checkSampleSources)
     this.sourceDirectory = layout.projectDirectory.dir("src")
     this.outputDirectory = layout.buildDirectory.dir("samples/extracted")
+}
+
+tasks.register<CheckSampleReferences>("checkSampleReferences").configure {
+    this.description = "Checks sample references from KDoc."
+    this.sourceDirectory = layout.projectDirectory.dir("src")
+    this.extractedSamplesDirectory =
+        extractSamples.flatMap(ExtractSamples::outputDirectory)
 }
