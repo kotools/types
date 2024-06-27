@@ -1,9 +1,13 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotlin.test.Test
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal object ZeroCompanionKotlinSample {
+class ZeroCompanionCommonSample {
+    @Test
     fun pattern() {
         val numbers: List<Any> = listOf(
             0, 0.0,
@@ -12,15 +16,17 @@ internal object ZeroCompanionKotlinSample {
         )
         val regex = Regex(Zero.PATTERN)
         val numbersAreValid: Boolean = numbers.all { "$it" matches regex }
-        println(numbersAreValid) // true
-    } // END
+        assertTrue(numbersAreValid)
+    }
 
+    @Test
     fun orNull() {
         val number: Any = "-000.000"
-        val zero: Zero? = Zero.orNull(number)
-        println(zero != null) // true
-    } // END
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
+    }
 
+    @Test
     fun orThrow() {
         val number: Any = "-000.000"
         val isSuccess: Boolean = try {
@@ -29,6 +35,6 @@ internal object ZeroCompanionKotlinSample {
         } catch (exception: IllegalArgumentException) {
             false
         }
-        println(isSuccess) // true
-    } // END
+        assertTrue(isSuccess)
+    }
 }

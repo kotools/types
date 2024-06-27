@@ -34,7 +34,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.equalsOverride.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.equalsOverride]
      * </details>
      *
      * <br>
@@ -45,7 +45,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.equalsOverride.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.equalsOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -62,7 +62,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.hashCodeOverride.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.hashCodeOverride]
      * </details>
      *
      * <br>
@@ -73,7 +73,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.hashCodeOverride.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.hashCodeOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -95,7 +95,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.compareToByte.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToByte]
      * </details>
      *
      * <br>
@@ -106,7 +106,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.compareToByte.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToByte]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -127,7 +127,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.compareToShort.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToShort]
      * </details>
      *
      * <br>
@@ -138,7 +138,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.compareToShort.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToShort]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -159,7 +159,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.compareToInt.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToInt]
      * </details>
      *
      * <br>
@@ -170,7 +170,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.compareToInt.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToInt]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -191,7 +191,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.compareToLong.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToLong]
      * </details>
      *
      * <br>
@@ -202,7 +202,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.compareToLong.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToLong]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -223,7 +223,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.compareToFloat.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToFloat]
      * </details>
      *
      * <br>
@@ -234,7 +234,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.compareToFloat.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToFloat]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -255,7 +255,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.compareToDouble.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToDouble]
      * </details>
      *
      * <br>
@@ -266,7 +266,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.compareToDouble.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToDouble]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -286,7 +286,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toByte.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toByte]
      * </details>
      *
      * <br>
@@ -297,7 +297,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toByte.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toByte]
      * </details>
      */
     public fun toByte(): Byte = this.valueAsByte
@@ -313,7 +313,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toShort.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toShort]
      * </details>
      *
      * <br>
@@ -324,7 +324,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toShort.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toShort]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -341,7 +341,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toInt.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toInt]
      * </details>
      *
      * <br>
@@ -352,7 +352,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toInt.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toInt]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -369,7 +369,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toLong.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toLong]
      * </details>
      *
      * <br>
@@ -380,7 +380,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toLong.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toLong]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -397,7 +397,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toFloat.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toFloat]
      * </details>
      *
      * <br>
@@ -408,7 +408,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toFloat.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toFloat]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -425,7 +425,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toDouble.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toDouble]
      * </details>
      *
      * <br>
@@ -436,7 +436,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toDouble.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toDouble]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -453,7 +453,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toChar.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toChar]
      * </details>
      *
      * <br>
@@ -464,7 +464,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toChar.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toChar]
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -481,7 +481,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: ZeroKotlinSample.toStringSample.md
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.toStringOverride]
      * </details>
      *
      * <br>
@@ -492,7 +492,7 @@ public class Zero {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: ZeroJavaSample.toStringSample.md
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.toStringOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -531,7 +531,7 @@ public class Zero {
          *
          * Here's an example of calling this property from Kotlin code:
          *
-         * SAMPLE: ZeroCompanionKotlinSample.pattern.md
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.pattern]
          * </details>
          *
          * <br>
@@ -542,7 +542,7 @@ public class Zero {
          *
          * Here's an example of calling this property from Java code:
          *
-         * SAMPLE: ZeroCompanionJavaSample.pattern.md
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.pattern]
          * </details>
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
@@ -561,7 +561,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: ZeroCompanionKotlinSample.orNull.md
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNull]
          * </details>
          *
          * <br>
@@ -572,7 +572,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: ZeroCompanionJavaSample.orNull.md
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orNull]
          * </details>
          * <br>
          *
@@ -600,7 +600,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: ZeroCompanionKotlinSample.orThrow.md
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrow]
          * </details>
          *
          * <br>
@@ -611,7 +611,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: ZeroCompanionJavaSample.orThrow.md
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrow]
          * </details>
          * <br>
          *

@@ -1,8 +1,13 @@
 package org.kotools.types;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
+@SuppressWarnings("NewClassNamingConvention")
 class ZeroCompanionJavaSample {
+    @Test
     void pattern() {
         List<Object> numbers = List.of(
                 0, 0.0,
@@ -12,15 +17,17 @@ class ZeroCompanionJavaSample {
         final String regex = Zero.PATTERN;
         final boolean numbersAreValid = numbers.stream()
                 .allMatch(number -> number.toString().matches(regex));
-        System.out.println(numbersAreValid); // true
-    } // END
+        Assertions.assertTrue(numbersAreValid);
+    }
 
+    @Test
     void orNull() {
         final Object number = "-000.000";
-        final Zero zero = Zero.orNull(number);
-        System.out.println(zero != null); // true
-    } // END
+        final Zero actual = Zero.orNull(number);
+        Assertions.assertNotNull(actual);
+    }
 
+    @Test
     void orThrow() {
         final Object number = "-000.000";
         boolean isSuccess;
@@ -30,6 +37,6 @@ class ZeroCompanionJavaSample {
         } catch (final IllegalArgumentException exception) {
             isSuccess = false;
         }
-        System.out.println(isSuccess); // true
-    } // END
+        Assertions.assertTrue(isSuccess);
+    }
 }
