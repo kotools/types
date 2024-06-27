@@ -7,6 +7,12 @@ import org.kotools.samples.CheckSampleReferences
 import org.kotools.samples.CheckSampleSources
 import org.kotools.samples.ExtractSamples
 
+// ----------------------------- Script properties -----------------------------
+
+private val projectSources: Directory = layout.projectDirectory.dir("src")
+private val samplesBuildDirectory: Provider<Directory> =
+    layout.buildDirectory.dir("samples")
+
 // ----------------------------- Plugin extensions -----------------------------
 
 private val kotlin: KotlinMultiplatformExtension = extensions.findByType()
@@ -38,15 +44,12 @@ afterEvaluate {
     if (!withJavaEnabled) return@afterEvaluate
     val java: JavaPluginExtension = extensions.getByType()
     java.sourceSets.named("test").configure {
-        val directory: Directory =
-            layout.projectDirectory.dir("src/jvmSample/java")
+        val directory: Directory = projectSources.dir("jvmSample/java")
         this.java.srcDir(directory)
     }
 }
 
 // ----------------------------------- Tasks -----------------------------------
-
-private val projectSources: Directory = layout.projectDirectory.dir("src")
 
 private val checkSampleSources: TaskProvider<CheckSampleSources>
         by tasks.registering(CheckSampleSources::class)
@@ -61,7 +64,7 @@ extractSamples.configure {
     this.description = "Extracts samples for KDoc."
     this.dependsOn(checkSampleSources)
     this.sourceDirectory = projectSources
-    this.outputDirectory = layout.buildDirectory.dir("samples/extracted")
+    this.outputDirectory = samplesBuildDirectory.map { it.dir("extracted") }
 }
 
 private val checkSampleReferences: TaskProvider<CheckSampleReferences>
@@ -80,7 +83,7 @@ backupMainSources.configure {
     this.dependsOn(checkSampleReferences)
     this.from(projectSources) { exclude("api", "*Sample", "*Test") }
     val destination: Provider<Directory> =
-        layout.buildDirectory.dir("samples/sources-backup")
+        samplesBuildDirectory.map { it.dir("sources-backup") }
     this.into(destination)
 }
 
