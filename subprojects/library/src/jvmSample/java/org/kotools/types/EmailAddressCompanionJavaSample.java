@@ -42,23 +42,23 @@ class EmailAddressCompanionJavaSample {
     @Test
     void fromStringOrNullAny() {
         final Object value = "contact@kotools.org";
-        final EmailAddress address = EmailAddress.fromStringOrNull(value);
-        Assertions.assertNotNull(address);
+        final EmailAddress actual = EmailAddress.fromStringOrNull(value);
+        Assertions.assertNotNull(actual);
     }
 
     @Test
     void fromStringOrNullAnyAny() {
         final Object value = "contact@kotools.org";
         final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
-        final EmailAddress address =
+        final EmailAddress actual =
                 EmailAddress.fromStringOrNull(value, pattern);
-        Assertions.assertNotNull(address);
+        Assertions.assertNotNull(actual);
     }
 
     @Test
     void orNullAny() {
         final Object value = "contact@kotools.org";
-        final EmailAddress address = EmailAddress.orNull(value);
-        Assertions.assertNotNull(address);
+        final EmailAddress actual = EmailAddress.orNull(value);
+        Assertions.assertNotNull(actual);
     }
 }

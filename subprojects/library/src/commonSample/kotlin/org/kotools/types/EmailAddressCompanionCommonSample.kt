@@ -2,13 +2,17 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionCommonSample {
     @Test
     fun patternSample() {
-        val pattern: String = EmailAddress.PATTERN
-        check(pattern == "^\\S+@\\S+\\.\\S+\$")
+        val actual: String = EmailAddress.PATTERN
+        val expected = "^\\S+@\\S+\\.\\S+\$"
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -20,7 +24,7 @@ class EmailAddressCompanionCommonSample {
         } catch (exception: IllegalArgumentException) {
             false
         }
-        check(isSuccess)
+        assertTrue(isSuccess)
     }
 
     @Test
@@ -33,29 +37,29 @@ class EmailAddressCompanionCommonSample {
         } catch (exception: IllegalArgumentException) {
             false
         }
-        check(isSuccess)
+        assertTrue(isSuccess)
     }
 
     @Test
     fun fromStringOrNullAny() {
         val value: Any = "contact@kotools.org"
-        val address: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        checkNotNull(address)
+        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
+        assertNotNull(actual)
     }
 
     @Test
     fun fromStringOrNullAnyAny() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
-        val address: EmailAddress? =
+        val actual: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
-        checkNotNull(address)
+        assertNotNull(actual)
     }
 
     @Test
     fun orNullAny() {
         val value: Any = "contact@kotools.org"
-        val address: EmailAddress? = EmailAddress.orNull(value)
-        checkNotNull(address)
+        val actual: EmailAddress? = EmailAddress.orNull(value)
+        assertNotNull(actual)
     }
 }

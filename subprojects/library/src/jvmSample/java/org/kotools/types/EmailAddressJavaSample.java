@@ -10,8 +10,8 @@ class EmailAddressJavaSample {
         final Object value = "contact@kotools.org";
         final EmailAddress first = EmailAddress.fromString(value);
         final EmailAddress second = EmailAddress.fromString(value);
-        final boolean result = first.equals(second);
-        Assertions.assertTrue(result);
+        final boolean actual = first.equals(second);
+        Assertions.assertTrue(actual);
     }
 
     @Test
@@ -21,15 +21,15 @@ class EmailAddressJavaSample {
                 .hashCode();
         final int second = EmailAddress.fromString(value)
                 .hashCode();
-        final boolean result = first == second;
-        Assertions.assertTrue(result);
+        final boolean actual = first == second;
+        Assertions.assertTrue(actual);
     }
 
     @Test
     void toStringOverride() {
         final Object value = "contact@kotools.org";
         final EmailAddress address = EmailAddress.fromString(value);
-        final String addressAsString = address.toString();
-        Assertions.assertEquals(value, addressAsString);
+        final String actual = address.toString();
+        Assertions.assertEquals(value, actual);
     }
 }

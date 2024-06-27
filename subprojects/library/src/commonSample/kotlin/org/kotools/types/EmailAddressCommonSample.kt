@@ -2,6 +2,8 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCommonSample {
@@ -10,8 +12,8 @@ class EmailAddressCommonSample {
         val value: Any = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.fromString(value)
         val second: EmailAddress = EmailAddress.fromString(value)
-        val result: Boolean = first == second // or first.equals(second)
-        check(result)
+        val actual: Boolean = first == second // or first.equals(second)
+        assertTrue(actual)
     }
 
     @Test
@@ -19,15 +21,15 @@ class EmailAddressCommonSample {
         val value: Any = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.fromString(value)
         val second: EmailAddress = EmailAddress.fromString(value)
-        val result: Boolean = first.hashCode() == second.hashCode()
-        check(result)
+        val actual: Boolean = first.hashCode() == second.hashCode()
+        assertTrue(actual)
     }
 
     @Test
     fun toStringOverride() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress = EmailAddress.fromString(value)
-        val addressAsString: String = address.toString()
-        check(addressAsString == value)
+        val actual = "$address" // or address.toString()
+        assertEquals(expected = value, actual)
     }
 }
