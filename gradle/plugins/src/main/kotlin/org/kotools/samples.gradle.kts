@@ -122,6 +122,10 @@ rootProject.tasks.withType<DokkaMultiModuleTask>().configureEach {
 
 // ---------------------------- Kotlin integration -----------------------------
 
+platforms.map { it.replaceFirstChar(Char::uppercaseChar) }
+    .mapNotNull { tasks.findByName("check$it") }
+    .forEach { it.dependsOn(checkSampleReferences) }
+
 kotlin.targets
     .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
     .mapNotNull(tasks::findByName)
