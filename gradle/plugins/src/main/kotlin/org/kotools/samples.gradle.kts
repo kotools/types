@@ -12,6 +12,8 @@ import org.kotools.samples.ExtractSamples
 private val projectSources: Directory = layout.projectDirectory.dir("src")
 private val samplesBuildDirectory: Provider<Directory> =
     layout.buildDirectory.dir("samples")
+private val sourcesBackupBuildDirectory: Provider<Directory> =
+    samplesBuildDirectory.map { it.dir("sources-backup") }
 
 // ----------------------------- Plugin extensions -----------------------------
 
@@ -82,8 +84,13 @@ backupMainSources.configure {
     this.description = "Copies main sources into the build directory."
     this.dependsOn(checkSampleReferences)
     this.from(projectSources) { exclude("api", "*Sample", "*Test") }
-    val destination: Provider<Directory> =
-        samplesBuildDirectory.map { it.dir("sources-backup") }
-    this.into(destination)
+    this.into(sourcesBackupBuildDirectory)
 }
 
+private val restoreMainSources: TaskProvider<Copy>
+        by tasks.registering(Copy::class)
+restoreMainSources.configure {
+    this.description = "Restores main sources backup from the build directory."
+    this.from(sourcesBackupBuildDirectory)
+    this.into(projectSources)
+}
