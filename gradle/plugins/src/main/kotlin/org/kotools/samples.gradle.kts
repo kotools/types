@@ -1,8 +1,11 @@
 package org.kotools
 
+import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.kotools.samples.CheckSampleReferences
 import org.kotools.samples.CheckSampleSources
 import org.kotools.samples.ExtractSamples
@@ -105,3 +108,28 @@ restoreMainSources.configure {
     this.from(sourcesBackupBuildDirectory)
     this.into(projectSources)
 }
+
+// ----------------------------- Dokka integration -----------------------------
+
+tasks.withType<AbstractDokkaLeafTask>().configureEach {
+    this.dependsOn(inlineSamples)
+    this.finalizedBy(restoreMainSources)
+}
+
+rootProject.tasks.withType<DokkaMultiModuleTask>().configureEach {
+    this.dependsOn(restoreMainSources)
+}
+
+// ---------------------------- Kotlin integration -----------------------------
+
+kotlin.targets
+    .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
+    .mapNotNull(tasks::findByName)
+    .forEach {
+        it.dependsOn(inlineSamples)
+        it.finalizedBy(restoreMainSources)
+    }
+
+private val kotlinCompilationTasks: TaskCollection<KotlinCompilationTask<*>> =
+    tasks.withType(KotlinCompilationTask::class)
+restoreMainSources.configure { this.mustRunAfter(kotlinCompilationTasks) }
