@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
+
 plugins {
     alias(libs.plugins.kotools.types.dev.tasks)
     alias(libs.plugins.kotools.types.kotlin.multiplatform)
@@ -5,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotools.types.documentation)
-    alias(libs.plugins.kotools.types.samples)
+    alias(libs.plugins.kotools.samples)
     `maven-publish`
     signing
     alias(libs.plugins.kotools.types.publication)
@@ -22,13 +24,9 @@ documentation {
     packages = layout.projectDirectory.file("packages.md").asFile
 }
 
+kotlin.jvm(KotlinJvmTarget::withJava)
 kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
-}
-
-samples {
-    project = project(":samples")
-    sourcesWithoutInlinedSamples()
 }
 
 // ------------------------------- Dependencies --------------------------------
@@ -38,8 +36,9 @@ dependencies {
     commonMainImplementation(project(":types-internal"))
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonTestImplementation(libs.kotlin.test.common)
-    commonTestImplementation(libs.kotlin.test.common.annotations)
+    commonSampleImplementation(libs.kotlin.test.common)
+    commonSampleImplementation(libs.kotlin.test.common.annotations)
+
     commonTestImplementation(libs.kotlinx.serialization.json)
 
     jvmTestImplementation(libs.kotlin.test.junit5)

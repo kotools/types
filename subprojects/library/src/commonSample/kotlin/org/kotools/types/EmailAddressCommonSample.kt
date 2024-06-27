@@ -1,33 +1,33 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.Warning
+import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal object EmailAddressKotlinSample {
-    @Suppress(Warning.FUNCTION_NAME)
-    fun equals_override() {
+class EmailAddressCommonSample {
+    @Test
+    fun equalsOverride() {
         val value: Any = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.fromString(value)
         val second: EmailAddress = EmailAddress.fromString(value)
         val result: Boolean = first == second // or first.equals(second)
-        println(result) // true
-    } // END
+        check(result)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun hashCode_override() {
+    @Test
+    fun hashCodeOverride() {
         val value: Any = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.fromString(value)
         val second: EmailAddress = EmailAddress.fromString(value)
         val result: Boolean = first.hashCode() == second.hashCode()
-        println(result) // true
-    } // END
+        check(result)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun toString_override() {
+    @Test
+    fun toStringOverride() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress = EmailAddress.fromString(value)
         val addressAsString: String = address.toString()
-        println(addressAsString == value) // true
-    } // END
+        check(addressAsString == value)
+    }
 }

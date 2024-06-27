@@ -34,7 +34,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: EmailAddressKotlinSample.equals_override.md
+     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.equalsOverride]
      * </details>
      *
      * <br>
@@ -45,7 +45,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: EmailAddressJavaSample.equals_override.md
+     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.equalsOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -63,7 +63,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: EmailAddressKotlinSample.hashCode_override.md
+     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.hashCodeOverride]
      * </details>
      *
      * <br>
@@ -74,7 +74,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: EmailAddressJavaSample.hashCode_override.md
+     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.hashCodeOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -93,7 +93,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: EmailAddressKotlinSample.toString_override.md
+     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.toStringOverride]
      * </details>
      *
      * <br>
@@ -104,7 +104,7 @@ public class EmailAddress private constructor(private val value: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: EmailAddressJavaSample.toString_override.md
+     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.toStringOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -139,7 +139,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this property from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.patternSample.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.patternSample]
          * </details>
          *
          * <br>
@@ -150,7 +150,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this property from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.patternSample.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.patternSample]
          * </details>
          */
         public const val PATTERN: String = "^\\S+@\\S+\\.\\S+\$"
@@ -169,7 +169,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromString_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringAny]
          * </details>
          *
          * <br>
@@ -180,7 +180,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromString_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringAny]
          * </details>
          * <br>
          *
@@ -207,7 +207,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromString_Any_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringAnyAny]
          * </details>
          *
          * <br>
@@ -218,7 +218,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromString_Any_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringAnyAny]
          * </details>
          * <br>
          *
@@ -258,7 +258,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNull_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringOrNullAny]
          * </details>
          *
          * <br>
@@ -269,7 +269,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNull_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringOrNullAny]
          * </details>
          * <br>
          *
@@ -296,7 +296,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.fromStringOrNull_Any_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringOrNullAnyAny]
          * </details>
          *
          * <br>
@@ -307,7 +307,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.fromStringOrNull_Any_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringOrNullAnyAny]
          * </details>
          * <br>
          *
@@ -346,7 +346,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: EmailAddressCompanionKotlinSample.orNull_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullAny]
          * </details>
          *
          * <br>
@@ -357,7 +357,7 @@ public class EmailAddress private constructor(private val value: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: EmailAddressCompanionJavaSample.orNull_Any.md
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orNullAny]
          * </details>
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)

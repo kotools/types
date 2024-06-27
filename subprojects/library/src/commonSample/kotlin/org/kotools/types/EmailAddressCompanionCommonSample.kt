@@ -1,17 +1,18 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.Warning
+import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal object EmailAddressCompanionKotlinSample {
+class EmailAddressCompanionCommonSample {
+    @Test
     fun patternSample() {
         val pattern: String = EmailAddress.PATTERN
-        println(pattern) // ^\S+@\S+\.\S+$
-    } // END
+        check(pattern == "^\\S+@\\S+\\.\\S+\$")
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun fromString_Any() {
+    @Test
+    fun fromStringAny() {
         val value: Any = "contact@kotools.org"
         val isSuccess: Boolean = try {
             EmailAddress.fromString(value)
@@ -19,11 +20,11 @@ internal object EmailAddressCompanionKotlinSample {
         } catch (exception: IllegalArgumentException) {
             false
         }
-        println(isSuccess) // true
-    } // END
+        check(isSuccess)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun fromString_Any_Any() {
+    @Test
+    fun fromStringAnyAny() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val isSuccess: Boolean = try {
@@ -32,29 +33,29 @@ internal object EmailAddressCompanionKotlinSample {
         } catch (exception: IllegalArgumentException) {
             false
         }
-        println(isSuccess) // true
-    } // END
+        check(isSuccess)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun fromStringOrNull_Any() {
+    @Test
+    fun fromStringOrNullAny() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        println(address != null) // true
-    } // END
+        checkNotNull(address)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun fromStringOrNull_Any_Any() {
+    @Test
+    fun fromStringOrNullAnyAny() {
         val value: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val address: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
-        println(address != null) // true
-    } // END
+        checkNotNull(address)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun orNull_Any() {
+    @Test
+    fun orNullAny() {
         val value: Any = "contact@kotools.org"
         val address: EmailAddress? = EmailAddress.orNull(value)
-        println(address != null) // true
-    } // END
+        checkNotNull(address)
+    }
 }

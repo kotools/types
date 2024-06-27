@@ -1,51 +1,64 @@
 package org.kotools.types;
 
-class EmailAddressCompanionJavaSample {
-    void patternSample() {
-        final String pattern = EmailAddress.PATTERN;
-        System.out.println(pattern); // ^\S+@\S+\.\S+$
-    } // END
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-    void fromString_Any() {
+@SuppressWarnings("NewClassNamingConvention")
+class EmailAddressCompanionJavaSample {
+    @Test
+    void patternSample() {
+        final String actual = EmailAddress.PATTERN;
+        final String expected = "^\\S+@\\S+\\.\\S+$";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void fromStringAny() {
         final Object value = "contact@kotools.org";
+        boolean isSuccess;
         try {
             EmailAddress.fromString(value);
-            System.out.println("success");
+            isSuccess = true;
         } catch (final IllegalArgumentException exception) {
-            System.out.println("failure");
+            isSuccess = false;
         }
-        // Output: success
-    } // END
+        Assertions.assertTrue(isSuccess);
+    }
 
-    void fromString_Any_Any() {
+    @Test
+    void fromStringAnyAny() {
         final Object value = "contact@kotools.org";
         final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
+        boolean isSuccess;
         try {
             EmailAddress.fromString(value, pattern);
-            System.out.println("success");
+            isSuccess = true;
         } catch (final IllegalArgumentException exception) {
-            System.out.println("failure");
+            isSuccess = false;
         }
-        // Output: success
-    } // END
+        Assertions.assertTrue(isSuccess);
+    }
 
-    void fromStringOrNull_Any() {
+    @Test
+    void fromStringOrNullAny() {
         final Object value = "contact@kotools.org";
         final EmailAddress address = EmailAddress.fromStringOrNull(value);
-        System.out.println(address != null); // true
-    } // END
+        Assertions.assertNotNull(address);
+    }
 
-    void fromStringOrNull_Any_Any() {
+    @Test
+    void fromStringOrNullAnyAny() {
         final Object value = "contact@kotools.org";
         final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
         final EmailAddress address =
                 EmailAddress.fromStringOrNull(value, pattern);
-        System.out.println(address != null); // true
-    } // END
+        Assertions.assertNotNull(address);
+    }
 
-    void orNull_Any() {
+    @Test
+    void orNullAny() {
         final Object value = "contact@kotools.org";
         final EmailAddress address = EmailAddress.orNull(value);
-        System.out.println(address != null); // true
-    } // END
+        Assertions.assertNotNull(address);
+    }
 }
