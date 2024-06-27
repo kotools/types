@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.kotools.samples.CheckSampleReferences
 import org.kotools.samples.CheckSampleSources
 import org.kotools.samples.ExtractSamples
+import org.kotools.samples.InlineSamples
 
 // ----------------------------- Script properties -----------------------------
 
@@ -85,6 +86,16 @@ backupMainSources.configure {
     this.dependsOn(checkSampleReferences)
     this.from(projectSources) { exclude("api", "*Sample", "*Test") }
     this.into(sourcesBackupBuildDirectory)
+}
+
+private val inlineSamples: TaskProvider<InlineSamples>
+        by tasks.registering(InlineSamples::class)
+inlineSamples.configure {
+    this.description = "Inlines KDoc samples."
+    this.dependsOn(backupMainSources)
+    this.sourceDirectory = projectSources
+    this.extractedSamplesDirectory =
+        extractSamples.flatMap(ExtractSamples::outputDirectory)
 }
 
 private val restoreMainSources: TaskProvider<Copy>
