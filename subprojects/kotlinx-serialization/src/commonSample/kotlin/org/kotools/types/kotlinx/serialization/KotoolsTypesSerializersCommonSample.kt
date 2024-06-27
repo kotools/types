@@ -45,7 +45,8 @@ internal class KotoolsTypesSerializersCommonSample {
 
     @Test
     fun toStringOverride() {
-        val actual: String = KotoolsTypesSerializers.toString()
+        val actual =
+            "$KotoolsTypesSerializers" // or KotoolsTypesSerializers.toString()
         val expected = "KotoolsTypesSerializers"
         assertEquals(expected, actual)
     }
