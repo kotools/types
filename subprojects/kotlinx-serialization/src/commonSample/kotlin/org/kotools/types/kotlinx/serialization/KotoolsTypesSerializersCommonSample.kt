@@ -5,19 +5,22 @@ import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
-import org.kotools.types.internal.Warning
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal object KotoolsTypesSerializersKotlinSample {
+internal class KotoolsTypesSerializersCommonSample {
+    @Test
     fun all() {
         val format = Json { serializersModule = KotoolsTypesSerializers.all }
         val zero = Zero()
         val encoded: String = format.encodeToString(zero)
-        println(encoded) // 0
+        assertEquals(expected = "0", actual = encoded)
         val decoded: Zero = format.decodeFromString(encoded)
-        println(zero == decoded) // true
-    } // END
+        assertEquals(expected = zero, actual = decoded)
+    }
 
+    @Test
     fun emailAddress() {
         val format = Json {
             serializersModule = KotoolsTypesSerializers.emailAddress
@@ -25,23 +28,25 @@ internal object KotoolsTypesSerializersKotlinSample {
         val emailAddress: EmailAddress =
             EmailAddress.fromString("contact@kotools.org")
         val encoded: String = format.encodeToString(emailAddress)
-        println(encoded) // "contact@kotools.org"
+        assertEquals(expected = "\"contact@kotools.org\"", actual = encoded)
         val decoded: EmailAddress = format.decodeFromString(encoded)
-        println(emailAddress == decoded) // true
-    } // END
+        assertEquals(expected = emailAddress, actual = decoded)
+    }
 
+    @Test
     fun zero() {
         val format = Json { serializersModule = KotoolsTypesSerializers.zero }
         val zero = Zero()
         val encoded: String = format.encodeToString(zero)
-        println(encoded) // 0
+        assertEquals(expected = "0", actual = encoded)
         val decoded: Zero = format.decodeFromString(encoded)
-        println(zero == decoded) // true
-    } // END
+        assertEquals(expected = zero, actual = decoded)
+    }
 
-    @Suppress(Warning.FUNCTION_NAME)
-    fun toString_override() {
-        val message: String = KotoolsTypesSerializers.toString()
-        println(message) // KotoolsTypesSerializers
-    } // END
+    @Test
+    fun toStringOverride() {
+        val actual: String = KotoolsTypesSerializers.toString()
+        val expected = "KotoolsTypesSerializers"
+        assertEquals(expected, actual)
+    }
 }

@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotools.types.documentation)
-    alias(libs.plugins.kotools.types.samples)
+    alias(libs.plugins.kotools.samples)
     `maven-publish`
     signing
     alias(libs.plugins.kotools.types.publication)
@@ -24,11 +24,6 @@ kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
-samples {
-    project = project(":samples")
-    sourcesWithoutInlinedSamples()
-}
-
 // ------------------------------- Dependencies --------------------------------
 
 dependencies {
@@ -37,9 +32,9 @@ dependencies {
     commonMainImplementation(project(":types-internal"))
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonTestImplementation(libs.kotlin.test.common)
-    commonTestImplementation(libs.kotlin.test.common.annotations)
-    commonTestImplementation(libs.kotlinx.serialization.json)
+    commonSampleImplementation(libs.kotlin.test.common)
+    commonSampleImplementation(libs.kotlin.test.common.annotations)
+    commonSampleImplementation(libs.kotlinx.serialization.json)
 
     jvmTestImplementation(libs.kotlin.test.junit5)
 

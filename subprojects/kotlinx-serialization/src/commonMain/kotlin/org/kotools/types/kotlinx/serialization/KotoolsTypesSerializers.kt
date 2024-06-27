@@ -24,7 +24,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: KotoolsTypesSerializersKotlinSample.all.md
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.all]
      */
     public val all: SerializersModule
         get() = SerializersModule {
@@ -37,7 +37,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: KotoolsTypesSerializersKotlinSample.emailAddress.md
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.emailAddress]
      */
     public val emailAddress: SerializersModule
         get() = SerializersModule {
@@ -49,7 +49,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: KotoolsTypesSerializersKotlinSample.zero.md
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.zero]
      */
     public val zero: SerializersModule
         get() = SerializersModule { contextual(ZeroAsByteSerializer) }
@@ -59,7 +59,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: KotoolsTypesSerializersKotlinSample.toString_override.md
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.toStringOverride]
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String =
