@@ -79,7 +79,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: NotEmptyListKotlinSample.serialization.md
+ * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.serialization]
  * </details>
  */
 @JvmInline
@@ -101,7 +101,7 @@ public value class NotEmptyList<out E> private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: NotEmptyListKotlinSample.toList.md
+     * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.toList]
      */
     public fun toList(): List<E> = elements
 
