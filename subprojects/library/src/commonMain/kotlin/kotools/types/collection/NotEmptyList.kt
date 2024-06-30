@@ -22,7 +22,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: NotEmptyListKtKotlinSample.notEmptyListOf.md
+ * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.notEmptyListOf]
  *
  * The [NotEmptyList] type being an
  * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
@@ -42,12 +42,12 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: NotEmptyListKtKotlinSample.toNotEmptyListOnCollection.md
+ * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnCollection]
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptyList].
  *
- * SAMPLE: NotEmptyListKtKotlinSample.toNotEmptyListOnMutableCollection.md
+ * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnMutableCollection]
  *
  * The [NotEmptyList] type being an
  * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
