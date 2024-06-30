@@ -116,7 +116,7 @@ public value class NotEmptyList<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotEmptyListCompanionKotlinSample.createWithCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createWithCollection]
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -125,7 +125,7 @@ public value class NotEmptyList<out E> private constructor(
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptyList].
          *
-         * SAMPLE: NotEmptyListCompanionKotlinSample.createWithMutableCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createWithMutableCollection]
          *
          * You can use the [NotEmptyList.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
@@ -146,7 +146,7 @@ public value class NotEmptyList<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotEmptyListCompanionKotlinSample.createOrNullWithCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithCollection]
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -155,7 +155,7 @@ public value class NotEmptyList<out E> private constructor(
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptyList].
          *
-         * SAMPLE: NotEmptyListCompanionKotlinSample.createOrNullWithMutableCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithMutableCollection]
          *
          * You can use the [NotEmptyList.Companion.create] function for throwing
          * an exception instead of returning `null` in case of invalid
@@ -178,7 +178,7 @@ public value class NotEmptyList<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotEmptyListCompanionKotlinSample.of.md
+         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.of]
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
