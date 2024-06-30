@@ -18,7 +18,6 @@ internal class Sample(
             "'$joinedIdentifier' is an invalid sample's identifier."
         }
         val bodyIsValid: Boolean = this.body.isNotEmpty()
-                && this.body.all(String::isNotBlank)
         require(bodyIsValid) { "Sample shouldn't have an empty body." }
     }
 
