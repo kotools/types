@@ -16,7 +16,7 @@ public sealed interface NotEmptyCollection<out E> {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: NotEmptyCollectionKotlinSample.head.md
+     * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.head]
      */
     public val head: E
 
@@ -25,7 +25,7 @@ public sealed interface NotEmptyCollection<out E> {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: NotEmptyCollectionKotlinSample.tail.md
+     * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.tail]
      */
     public val tail: NotEmptyCollection<E>? get() = null
 
@@ -43,7 +43,7 @@ public sealed interface NotEmptyCollection<out E> {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: NotEmptyCollectionKotlinSample.toStringOverride.md
+     * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.toStringOverride]
      */
     override fun toString(): String
 }
