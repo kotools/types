@@ -38,8 +38,7 @@ dependencies {
 
     commonSampleImplementation(libs.kotlin.test.common)
     commonSampleImplementation(libs.kotlin.test.common.annotations)
-
-    commonTestImplementation(libs.kotlinx.serialization.json)
+    commonSampleImplementation(libs.kotlinx.serialization.json)
 
     jvmTestImplementation(libs.kotlin.test.junit5)
 
