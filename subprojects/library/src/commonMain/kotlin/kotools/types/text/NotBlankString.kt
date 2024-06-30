@@ -107,7 +107,7 @@ public value class NotBlankString private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotBlankStringCompanionKotlinSample.create.md
+         * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.create]
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -134,7 +134,7 @@ public value class NotBlankString private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotBlankStringCompanionKotlinSample.createOrNull.md
+         * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.createOrNull]
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
