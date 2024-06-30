@@ -51,7 +51,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: NotBlankStringKotlinSample.serialization.md
+ * SAMPLE: [kotools.types.text.NotBlankStringCommonSample.serialization]
  * </details>
  */
 @JvmInline
@@ -82,7 +82,7 @@ public value class NotBlankString private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: NotBlankStringKotlinSample.plusOperator.md
+     * SAMPLE: [kotools.types.text.NotBlankStringCommonSample.plusOperator]
      *
      * The [NotBlankString] type being an
      * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
