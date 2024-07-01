@@ -1,8 +1,13 @@
 package kotools.types.number;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.Random;
 
+@SuppressWarnings("NewClassNamingConvention")
 class StrictlyNegativeDoubleCompanionJavaSample {
+    @Test
     void create() {
         final Number number = -23;
         boolean isSuccess;
@@ -12,14 +17,15 @@ class StrictlyNegativeDoubleCompanionJavaSample {
         } catch (final IllegalArgumentException exception) {
             isSuccess = false;
         }
-        System.out.println(isSuccess); // true
-    } // END
+        Assertions.assertTrue(isSuccess);
+    }
 
+    @Test
     void createOrNull() {
         final Random random = new Random();
         final Number number = random.nextInt(Integer.MIN_VALUE, 0);
-        final StrictlyNegativeDouble result =
+        final StrictlyNegativeDouble actual =
                 StrictlyNegativeDouble.Companion.createOrNull(number);
-        System.out.println(result != null); // true
-    } // END
+        Assertions.assertNotNull(actual);
+    }
 }

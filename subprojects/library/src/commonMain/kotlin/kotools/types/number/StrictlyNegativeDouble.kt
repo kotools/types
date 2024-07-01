@@ -194,7 +194,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.create.md
+         * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionJavaSample.create]
          * </details>
          * <br/>
          *
@@ -233,7 +233,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: StrictlyNegativeDoubleCompanionJavaSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionJavaSample.createOrNull]
          * </details>
          * <br/>
          *
