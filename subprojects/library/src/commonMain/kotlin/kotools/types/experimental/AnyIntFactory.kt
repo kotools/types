@@ -35,7 +35,7 @@ import kotlin.jvm.JvmName
  * The Java function generated from this one is `AnyIntFactory.create`.
  * Here's an example of calling it from Java code:
  *
- * SAMPLE: AnyIntFactoryJavaSample.constructorLikeInt.md
+ * SAMPLE: [kotools.types.experimental.AnyIntFactoryJavaSample.constructorLikeInt]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
