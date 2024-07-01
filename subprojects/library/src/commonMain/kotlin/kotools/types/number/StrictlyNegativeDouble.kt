@@ -73,7 +73,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: StrictlyNegativeDoubleJavaSample.equalsOverride.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.equalsOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -102,7 +102,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: StrictlyNegativeDoubleJavaSample.hashCodeOverride.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.hashCodeOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -132,7 +132,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: StrictlyNegativeDoubleJavaSample.toDouble.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.toDouble]
      * </details>
      */
     public fun toDouble(): Double = value
@@ -159,7 +159,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: StrictlyNegativeDoubleJavaSample.toStringOverride.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.toStringOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)
