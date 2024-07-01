@@ -96,7 +96,7 @@ public sealed interface NegativeInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: NegativeIntCompanionJavaSample.create.md
+         * SAMPLE: [kotools.types.number.NegativeIntCompanionJavaSample.create]
          * </details>
          * <br>
          *
@@ -135,7 +135,7 @@ public sealed interface NegativeInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: NegativeIntCompanionJavaSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.NegativeIntCompanionJavaSample.createOrNull]
          * </details>
          * <br>
          *
