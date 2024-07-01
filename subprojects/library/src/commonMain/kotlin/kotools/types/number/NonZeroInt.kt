@@ -101,7 +101,7 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: NonZeroIntCompanionJavaSample.create.md
+         * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.create]
          * </details>
          * <br>
          *
@@ -140,7 +140,7 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: NonZeroIntCompanionJavaSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.createOrNull]
          * </details>
          * <br>
          *
