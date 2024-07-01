@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.1.7
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v3.3.2
   # --------------------------------- Stage 2 ----------------------------------
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.1.7
       - name: Setup Java
         uses: actions/setup-java@v4.2.1
         with:
@@ -74,7 +74,7 @@ jobs:
     runs-on: macos-12
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.1.7
       - name: Setup Java
         uses: actions/setup-java@v4.2.1
         with:
