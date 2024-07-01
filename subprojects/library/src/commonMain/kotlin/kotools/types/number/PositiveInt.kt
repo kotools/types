@@ -97,7 +97,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: PositiveIntCompanionJavaSample.create.md
+         * SAMPLE: [kotools.types.number.PositiveIntCompanionJavaSample.create]
          * </details>
          * <br>
          *
@@ -136,7 +136,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: PositiveIntCompanionJavaSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.PositiveIntCompanionJavaSample.createOrNull]
          * </details>
          * <br>
          *
