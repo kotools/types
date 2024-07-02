@@ -1,50 +1,59 @@
 package kotools.types.collection
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
-internal class NotEmptyMapCompanionKotlinSample {
+internal class NotEmptyMapCompanionCommonSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createWithMap() {
         val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
-        val result: NotEmptyMap<Char, Int> = NotEmptyMap.create(map)
-        println(result) // {a=1, b=2}
-    } // END
+        val isSuccess: Boolean = try {
+            NotEmptyMap.create(map)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createWithMutableMap() {
         val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
         val notEmptyMap: NotEmptyMap<Char, Int> = NotEmptyMap.create(original)
-        println(original) // {a=1, b=2}
-        println(notEmptyMap) // {a=1, b=2}
-
+        assertEquals(expected = "$original", actual = "$notEmptyMap")
         original.clear()
-        println(original) // {}
-        println(notEmptyMap) // {a=1, b=2}
-    } // END
+        assertNotEquals(illegal = "$original", actual = "$notEmptyMap")
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNullWithMap() {
         val map: Map<Char, Int> = mapOf('a' to 1, 'b' to 2)
-        val result: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
-        println(result) // {a=1, b=2}
-    } // END
+        val actual: NotEmptyMap<Char, Int>? = NotEmptyMap.createOrNull(map)
+        assertNotNull(actual)
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNullWithMutableMap() {
         val original: MutableMap<Char, Int> = mutableMapOf('a' to 1, 'b' to 2)
         val notEmptyMap: NotEmptyMap<Char, Int>? =
             NotEmptyMap.createOrNull(original)
-        println(original) // {a=1, b=2}
-        println(notEmptyMap) // {a=1, b=2}
-
+        assertEquals(expected = "$original", actual = "$notEmptyMap")
         original.clear()
-        println(original) // {}
-        println(notEmptyMap) // {a=1, b=2}
-    } // END
+        assertNotEquals(illegal = "$original", actual = "$notEmptyMap")
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun of() {
         val map: NotEmptyMap<Char, Int> = NotEmptyMap.of('a' to 1, 'b' to 2)
-        println(map) // {a=1, b=2}
-    } // END
+        assertEquals(expected = "{a=1, b=2}", actual = "$map")
+    }
 }
