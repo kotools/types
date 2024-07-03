@@ -22,7 +22,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: NotEmptySetKtKotlinSample.notEmptySetOf.md
+ * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.notEmptySetOf]
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
@@ -38,12 +38,12 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: NotEmptySetKtKotlinSample.toNotEmptySetOnCollection.md
+ * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnCollection]
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptySet].
  *
- * SAMPLE: NotEmptySetKtKotlinSample.toNotEmptySetOnMutableCollection.md
+ * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnMutableCollection]
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
