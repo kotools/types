@@ -85,7 +85,7 @@ public sealed interface NegativeInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NegativeIntCompanionKotlinSample.create.md
+         * SAMPLE: [kotools.types.number.NegativeIntCompanionCommonSample.create]
          * </details>
          *
          * <br>
@@ -124,7 +124,7 @@ public sealed interface NegativeInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NegativeIntCompanionKotlinSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.NegativeIntCompanionCommonSample.createOrNull]
          * </details>
          *
          * <br>
