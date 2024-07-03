@@ -10,7 +10,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: AnyIntKotlinSample.unaryMinusOperator.md
+ * SAMPLE: [kotools.types.experimental.AnyIntCommonSample.unaryMinusOperator]
  *
  * Please note that this function is not available yet for Java users.
  */

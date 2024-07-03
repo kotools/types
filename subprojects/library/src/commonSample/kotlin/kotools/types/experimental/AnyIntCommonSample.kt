@@ -1,12 +1,15 @@
 package kotools.types.experimental
 
 import kotools.types.number.AnyInt
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-internal class AnyIntKotlinSample {
+internal class AnyIntCommonSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun unaryMinusOperator() {
         val number = AnyInt(1)
         val result: AnyInt = -number // or number.unaryMinus()
-        println(result) // -1
-    } // END
+        assertEquals(expected = "-1", actual = "$result")
+    }
 }
