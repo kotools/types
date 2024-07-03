@@ -90,7 +90,7 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NonZeroIntCompanionKotlinSample.create.md
+         * SAMPLE: [kotools.types.number.NonZeroIntCompanionCommonSample.create]
          * </details>
          *
          * <br>
@@ -129,7 +129,7 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NonZeroIntCompanionKotlinSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.NonZeroIntCompanionCommonSample.createOrNull]
          * </details>
          *
          * <br>
