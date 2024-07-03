@@ -14,7 +14,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: StrictlyNegativeIntKotlinSample.unaryMinusOperator.md
+ * SAMPLE: [kotools.types.experimental.StrictlyNegativeIntCommonSample.unaryMinusOperator]
  *
  * Please note that this function is not available yet for Java users.
  */
