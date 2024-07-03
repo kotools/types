@@ -24,7 +24,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: NotEmptyMapKtKotlinSample.notEmptyMapOf.md
+ * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.notEmptyMapOf]
  */
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
@@ -43,12 +43,12 @@ public fun <K, V> notEmptyMapOf(
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: NotEmptyMapKtKotlinSample.toNotEmptyMapOnMap.md
+ * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMap]
  *
  * Please note that changes made to the original map will not be reflected on
  * the resulting [NotEmptyMap].
  *
- * SAMPLE: NotEmptyMapKtKotlinSample.toNotEmptyMapOnMutableMap.md
+ * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMutableMap]
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
