@@ -1,49 +1,51 @@
 package kotools.types.collection
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
-internal class NotEmptySetCompanionKotlinSample {
+internal class NotEmptySetCompanionCommonSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createWithCollection() {
         val collection: Collection<Int> = setOf(1, 2, 3)
         val elements: NotEmptySet<Int> = NotEmptySet.create(collection)
-        println(elements) // [1, 2, 3]
-    } // END
+        assertEquals(expected = "[1, 2, 3]", actual = "$elements")
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createWithMutableCollection() {
         val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
         val integers: NotEmptySet<Int> = NotEmptySet.create(original)
-        println(original) // [1, 2, 3]
-        println(integers) // [1, 2, 3]
-
+        assertEquals(expected = "$original", actual = "$integers")
         original.clear()
-        println(original) // []
-        println(integers) // [1, 2, 3]
-    } // END
+        assertNotEquals(illegal = "$original", actual = "$integers")
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNullWithCollection() {
         val collection: Collection<Int> = setOf(1, 2, 3)
         val elements: NotEmptySet<Int>? = NotEmptySet.createOrNull(collection)
-        println(elements) // [1, 2, 3]
-    } // END
+        assertEquals(expected = "[1, 2, 3]", actual = "$elements")
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNullWithMutableCollection() {
         val original: MutableCollection<Int> = mutableSetOf(1, 2, 3)
         val integers: NotEmptySet<Int>? = NotEmptySet.createOrNull(original)
-        println(original) // [1, 2, 3]
-        println(integers) // [1, 2, 3]
-
+        assertEquals(expected = "$original", actual = "$integers")
         original.clear()
-        println(original) // []
-        println(integers) // [1, 2, 3]
-    } // END
+        assertNotEquals(illegal = "$original", actual = "$integers")
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun of() {
         val integers: NotEmptySet<Int> = NotEmptySet.of(1, 2, 3, 1)
-        println(integers) // [1, 2, 3]
-    } // END
+        assertEquals(expected = "[1, 2, 3]", actual = "$integers")
+    }
 }

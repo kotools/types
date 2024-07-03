@@ -90,7 +90,7 @@ public value class NotEmptySet<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotEmptySetCompanionKotlinSample.createWithCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithCollection]
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -99,7 +99,7 @@ public value class NotEmptySet<out E> private constructor(
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptySet].
          *
-         * SAMPLE: NotEmptySetCompanionKotlinSample.createWithMutableCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithMutableCollection]
          *
          * You can use the [NotEmptySet.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
@@ -123,7 +123,7 @@ public value class NotEmptySet<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotEmptySetCompanionKotlinSample.createOrNullWithCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithCollection]
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -132,7 +132,7 @@ public value class NotEmptySet<out E> private constructor(
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptySet].
          *
-         * SAMPLE: NotEmptySetCompanionKotlinSample.createOrNullWithMutableCollection.md
+         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithMutableCollection]
          *
          * You can use the [NotEmptySet.Companion.create] function for throwing
          * an exception instead of returning `null` in case of invalid
@@ -155,7 +155,7 @@ public value class NotEmptySet<out E> private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: NotEmptySetCompanionKotlinSample.of.md
+         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.of]
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
