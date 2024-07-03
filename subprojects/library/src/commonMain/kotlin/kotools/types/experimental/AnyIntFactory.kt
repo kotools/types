@@ -23,7 +23,7 @@ import kotlin.jvm.JvmName
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: AnyIntFactoryKotlinSample.constructorLikeInt.md
+ * SAMPLE: [kotools.types.experimental.AnyIntFactoryCommonSample.constructorLikeInt]
  * </details>
  *
  * <br>
