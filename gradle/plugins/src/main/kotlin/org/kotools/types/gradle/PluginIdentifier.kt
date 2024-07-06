@@ -4,7 +4,6 @@ internal enum class PluginIdentifier(private val value: String) {
     BinaryCompatibilityValidator(
         "org.jetbrains.kotlinx.binary-compatibility-validator"
     ),
-    KotlinJvm("org.jetbrains.kotlin.jvm"),
     KotlinMultiplatform("org.jetbrains.kotlin.multiplatform");
 
     init {
