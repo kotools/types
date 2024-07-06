@@ -11,9 +11,9 @@ import kotlin.test.assertTrue
 internal class StrictlyNegativeDoubleCommonSample {
     @Test
     fun serialization() {
-        val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-42)
+        val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-4.2)
         val encoded: String = Json.encodeToString(number)
-        assertEquals(expected = "-42.0", actual = encoded)
+        assertEquals(expected = "-4.2", actual = encoded)
         val decoded: StrictlyNegativeDouble = Json.decodeFromString(encoded)
         assertEquals(expected = number, actual = decoded)
     }
