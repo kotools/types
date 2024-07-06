@@ -89,7 +89,7 @@ public value class StrictlyPositiveInt private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: StrictlyPositiveIntCompanionKotlinSample.create.md
+         * SAMPLE: [kotools.types.number.StrictlyPositiveIntCompanionCommonSample.create]
          *
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -114,7 +114,7 @@ public value class StrictlyPositiveInt private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: StrictlyPositiveIntCompanionKotlinSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.StrictlyPositiveIntCompanionCommonSample.createOrNull]
          *
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
