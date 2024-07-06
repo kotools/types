@@ -3,9 +3,13 @@ package kotools.types.number
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.random.nextInt
+import kotlin.test.Test
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
-internal class StrictlyNegativeDoubleCompanionKotlinSample {
+internal class StrictlyNegativeDoubleCompanionCommonSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun create() {
         val number: Number = -23
         val isSuccess: Boolean = try {
@@ -14,14 +18,15 @@ internal class StrictlyNegativeDoubleCompanionKotlinSample {
         } catch (exception: IllegalArgumentException) {
             false
         }
-        println(isSuccess) // true
-    } // END
+        assertTrue(isSuccess)
+    }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
     fun createOrNull() {
         val number: Number = Random.nextInt(Int.MIN_VALUE until 0)
-        val result: StrictlyNegativeDouble? =
+        val actual: StrictlyNegativeDouble? =
             StrictlyNegativeDouble.createOrNull(number)
-        println(result != null) // true
-    } // END
+        assertNotNull(actual)
+    }
 }

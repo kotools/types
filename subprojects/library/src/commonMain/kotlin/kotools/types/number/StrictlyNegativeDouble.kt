@@ -183,7 +183,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.create.md
+         * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionCommonSample.create]
          * </details>
          *
          * <br/>
@@ -222,7 +222,7 @@ public class StrictlyNegativeDouble private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: StrictlyNegativeDoubleCompanionKotlinSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionCommonSample.createOrNull]
          * </details>
          *
          * <br/>
