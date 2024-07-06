@@ -86,7 +86,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: PositiveIntCompanionKotlinSample.create.md
+         * SAMPLE: [kotools.types.number.PositiveIntCompanionCommonSample.create]
          * </details>
          *
          * <br>
@@ -125,7 +125,7 @@ public sealed interface PositiveInt : AnyInt {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: PositiveIntCompanionKotlinSample.createOrNull.md
+         * SAMPLE: [kotools.types.number.PositiveIntCompanionCommonSample.createOrNull]
          * </details>
          *
          * <br>
