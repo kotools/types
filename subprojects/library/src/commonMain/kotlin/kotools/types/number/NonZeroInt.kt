@@ -58,7 +58,7 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: NonZeroIntKotlinSample.serialization.md
+ * SAMPLE: [kotools.types.number.NonZeroIntCommonSample.serialization]
  * </details>
  */
 @OptIn(InternalKotoolsTypesApi::class)
