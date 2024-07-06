@@ -37,7 +37,7 @@ import org.kotools.types.internal.Warning
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: StrictlyNegativeDoubleKotlinSample.serialization.md
+ * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.serialization]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
@@ -62,7 +62,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: StrictlyNegativeDoubleKotlinSample.equalsOverride.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.equalsOverride]
      * </details>
      *
      * <br/>
@@ -91,7 +91,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: StrictlyNegativeDoubleKotlinSample.hashCodeOverride.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.hashCodeOverride]
      * </details>
      *
      * <br/>
@@ -121,7 +121,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: StrictlyNegativeDoubleKotlinSample.toDouble.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.toDouble]
      * </details>
      *
      * <br/>
@@ -148,7 +148,7 @@ public class StrictlyNegativeDouble private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: StrictlyNegativeDoubleKotlinSample.toStringOverride.md
+     * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.toStringOverride]
      * </details>
      *
      * <br/>

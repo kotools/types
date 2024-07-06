@@ -3,46 +3,59 @@ package kotools.types.number
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal class StrictlyNegativeDoubleKotlinSample {
+internal class StrictlyNegativeDoubleCommonSample {
+    @Test
     fun serialization() {
         val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-42)
         val encoded: String = Json.encodeToString(number)
-        println(encoded) // -42.0
+        assertEquals(expected = "-42.0", actual = encoded)
         val decoded: StrictlyNegativeDouble = Json.decodeFromString(encoded)
-        println(decoded == number) // true
-    } // END
+        assertEquals(expected = number, actual = decoded)
+    }
 
+    @Test
     fun equalsOverride() {
         val number: Number = -23
         val first: StrictlyNegativeDouble =
             StrictlyNegativeDouble.create(number)
         val second: StrictlyNegativeDouble =
             StrictlyNegativeDouble.create(number)
-        val result: Boolean = first == second // or first.equals(second)
-        println(result) // true
-    } // END
+        val actual: Boolean = first == second // or first.equals(second)
+        assertTrue(actual)
+    }
 
+    @Test
     fun hashCodeOverride() {
         val number: Number = -23
         val first: StrictlyNegativeDouble =
             StrictlyNegativeDouble.create(number)
         val second: StrictlyNegativeDouble =
             StrictlyNegativeDouble.create(number)
-        val result: Boolean = first.hashCode() == second.hashCode()
-        println(result) // true
-    } // END
+        val actual: Boolean = first.hashCode() == second.hashCode()
+        assertTrue(actual)
+    }
 
+    @Test
     fun toDouble() {
-        val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-7)
-        val result: Double = number.toDouble()
-        println(result) // -7.0
-    } // END
+        val number = -7
+        val actual: Double = StrictlyNegativeDouble.create(number)
+            .toDouble()
+        val expected: Double = number.toDouble()
+        assertEquals(expected, actual)
+    }
 
+    @Test
     fun toStringOverride() {
-        val number: StrictlyNegativeDouble = StrictlyNegativeDouble.create(-23)
-        val result = "$number" // or number.toString()
-        println(result) // -23.0
-    } // END
+        val number = -23
+        val actual: String = StrictlyNegativeDouble.create(number)
+            .toString()
+        val expected: String = number.toDouble()
+            .toString()
+        assertEquals(expected, actual)
+    }
 }
