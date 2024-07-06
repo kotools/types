@@ -2,12 +2,16 @@ package kotools.types.number
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertSame
 
-internal class ZeroIntKotlinSample {
+internal class ZeroIntCommonSample {
+    @Test
     fun serialization() {
         val encoded: String = Json.encodeToString(ZeroInt)
-        println(encoded) // 0
+        assertEquals(expected = "0", actual = encoded)
         val decoded: ZeroInt = Json.decodeFromString(encoded)
-        println(decoded === ZeroInt) // true
-    } // END
+        assertSame(expected = ZeroInt, actual = decoded)
+    }
 }
