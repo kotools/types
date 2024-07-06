@@ -72,17 +72,17 @@ We recommend you to install the JDK 17 if this is not done yet.
 [IntelliJ IDEA]: https://www.jetbrains.com/fr-fr/idea
 [Java Development Kit]: https://www.oracle.com/fr/java/technologies/downloads
 
-### Running tests
+### Running checks
 
 Now that you have opened your fork in [IntelliJ IDEA], you can run the
-`JVM tests (types)` configuration for testing the library on the Kotlin/JVM
+`JVM checks (types)` configuration for checking the library on the Kotlin/JVM
 platform.
 
 Here's the list of recommended configurations for running tests:
 
-- `JVM tests (types)` for testing the `types` subproject on the Kotlin/JVM
+- `JVM checks (types)` for checking the `types` subproject on the Kotlin/JVM
   platform.
-- `JVM tests (kotlinx-serialization)` for testing the
+- `JVM checks (kotlinx-serialization)` for checking the
   `types-kotlinx-serialization` subproject on Kotlin/JVM.
 
 ### Serving the API reference
@@ -105,11 +105,11 @@ But if needed, feel free to [ask for help]; everyone is a beginner at first.
 
 ### Checking the Application Binary Interface (ABI)
 
-When introducing changes to the ABI, you can check this interface by running the
-`Check ABI (types)` configuration for the `types` subproject, or the
-`Check ABI (kotlinx-serialization)` configuration for the
-`types-kotlinx-serialization` subproject.
-This ensures that we are maintaining the binary compatibility of Kotools Types.
+For ensuring that we are maintaining the binary compatibility of Kotools Types,
+ABI checks are included when checking the library.
+
+> See the [Running checks](#running-checks) section for more details on run
+> configurations available.
 
 In some cases, this configuration will fail and will request you to update the
 ABI.
