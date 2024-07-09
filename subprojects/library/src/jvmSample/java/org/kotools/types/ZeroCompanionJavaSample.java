@@ -21,13 +21,6 @@ class ZeroCompanionJavaSample {
     }
 
     @Test
-    void orNull_Byte() {
-        final byte number = 0;
-        final Zero zero = Zero.orNull(number);
-        Assertions.assertNotNull(zero);
-    }
-
-    @Test
     void orNull() {
         final Object number = "-000.000";
         final Zero actual = Zero.orNull(number);
