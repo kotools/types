@@ -365,9 +365,8 @@ public class EmailAddress private constructor(private val value: String) {
         public fun orNull(value: Any): EmailAddress? {
             val valueAsString = "$value"
             val regex = Regex(this.PATTERN)
-            val valueIsInvalid: Boolean = !valueAsString.matches(regex)
-            if (valueIsInvalid) return null
-            return EmailAddress(valueAsString)
+            val valueMatchesRegex: Boolean = valueAsString.matches(regex)
+            return if (valueMatchesRegex) EmailAddress(valueAsString) else null
         }
     }
 }
