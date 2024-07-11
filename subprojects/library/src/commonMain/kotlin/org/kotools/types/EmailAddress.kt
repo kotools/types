@@ -368,5 +368,49 @@ public class EmailAddress private constructor(private val value: String) {
             val valueMatchesRegex: Boolean = valueAsString.matches(regex)
             return if (valueMatchesRegex) EmailAddress(valueAsString) else null
         }
+
+        /**
+         * Creates an instance of [EmailAddress] from the string representation
+         * of the specified [value].
+         * Returns `null` if the string representation of the specified
+         * [pattern] doesn't match the [default one][PATTERN], or if the string
+         * representation of [value] doesn't match the string representation of
+         * [pattern].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullAnyAny]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orNullAnyAny]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun orNull(value: Any, pattern: Any): EmailAddress? {
+            val patternAsString = "$pattern"
+            val defaultRegex = Regex(this.PATTERN)
+            val patternMatchesDefaultRegex: Boolean =
+                patternAsString matches defaultRegex
+            if (!patternMatchesDefaultRegex) return null
+            val valueAsString = "$value"
+            val regex = Regex(patternAsString)
+            val valueMatchesRegex: Boolean = valueAsString matches regex
+            return if (valueMatchesRegex) EmailAddress(valueAsString) else null
+        }
     }
 }

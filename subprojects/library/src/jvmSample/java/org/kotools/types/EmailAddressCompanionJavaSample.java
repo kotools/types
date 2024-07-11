@@ -61,4 +61,12 @@ class EmailAddressCompanionJavaSample {
         final EmailAddress actual = EmailAddress.orNull(value);
         Assertions.assertNotNull(actual);
     }
+
+    @Test
+    void orNullAnyAny() {
+        final Object value = "contact@kotools.org";
+        final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
+        final EmailAddress emailAddress = EmailAddress.orNull(value, pattern);
+        Assertions.assertNotNull(emailAddress);
+    }
 }
