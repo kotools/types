@@ -96,7 +96,7 @@ class EmailAddressCompanionTest {
     @Test
     fun pattern_should_pass() {
         val actual: String = EmailAddress.PATTERN
-        val expected = "^\\S+@\\S+\\.\\S+\$"
+        val expected = """^\S+@\S+\.\S+$"""
         assertEquals(expected, actual)
     }
 

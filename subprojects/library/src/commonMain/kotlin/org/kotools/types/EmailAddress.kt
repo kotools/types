@@ -153,7 +153,7 @@ public class EmailAddress private constructor(private val value: String) {
          * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.patternSample]
          * </details>
          */
-        public const val PATTERN: String = "^\\S+@\\S+\\.\\S+\$"
+        public const val PATTERN: String = """^\S+@\S+\.\S+$"""
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
