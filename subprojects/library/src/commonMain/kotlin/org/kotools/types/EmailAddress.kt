@@ -362,12 +362,8 @@ public class EmailAddress private constructor(private val value: String) {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun orNull(value: Any): EmailAddress? {
-            val valueAsString = "$value"
-            val regex = Regex(this.PATTERN)
-            val valueMatchesRegex: Boolean = valueAsString.matches(regex)
-            return if (valueMatchesRegex) EmailAddress(valueAsString) else null
-        }
+        public fun orNull(value: Any): EmailAddress? =
+            this.orNull(value, this.PATTERN)
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
@@ -407,8 +403,12 @@ public class EmailAddress private constructor(private val value: String) {
             val patternMatchesDefaultRegex: Boolean =
                 patternAsString matches defaultRegex
             if (!patternMatchesDefaultRegex) return null
+            return this.orNull(value, patternAsString)
+        }
+
+        private fun orNull(value: Any, pattern: String): EmailAddress? {
             val valueAsString = "$value"
-            val regex = Regex(patternAsString)
+            val regex = Regex(pattern)
             val valueMatchesRegex: Boolean = valueAsString matches regex
             return if (valueMatchesRegex) EmailAddress(valueAsString) else null
         }
