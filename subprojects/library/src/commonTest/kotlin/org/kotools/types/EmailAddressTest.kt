@@ -26,7 +26,7 @@ private object Values {
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressTest {
     @Test
-    fun structural_equality_should_pass_with_the_same_instance() {
+    fun structuralEqualityShouldPassWithSameInstance() {
         val first: EmailAddress = EmailAddress.fromString(Values.VALID)
         val second: Any = first
         val equality: Boolean = first.equals(second)
@@ -37,7 +37,7 @@ class EmailAddressTest {
     }
 
     @Test
-    fun structural_equality_should_pass_with_another_EmailAddress_having_the_same_string_representation() {
+    fun structuralEqualityShouldPassWithEmailAddressHavingSameStringRepresentation() {
         val value: Any = Values.VALID
         val first: EmailAddress = EmailAddress.fromString(value)
         val second: Any = EmailAddress.fromString(value)
@@ -49,7 +49,7 @@ class EmailAddressTest {
     }
 
     @Test
-    fun structural_equality_should_fail_with_null() {
+    fun structuralEqualityShouldFailWithNull() {
         val first: EmailAddress = EmailAddress.fromString(Values.VALID)
         val second: Any? = null
         val equality: Boolean = first.equals(second)
@@ -60,7 +60,7 @@ class EmailAddressTest {
     }
 
     @Test
-    fun structural_equality_should_fail_with_another_object_having_another_type_than_EmailAddress() {
+    fun structuralEqualityShouldFailWithAnotherTypeThanEmailAddress() {
         val value: Any = Values.VALID
         val first: EmailAddress = EmailAddress.fromString(value)
         val second: Any = value
@@ -72,7 +72,7 @@ class EmailAddressTest {
     }
 
     @Test
-    fun structural_equality_should_fail_with_another_EmailAddress_having_another_string_representation() {
+    fun structuralEqualityShouldFailWithEmailAddressHavingAnotherStringRepresentation() {
         val first: EmailAddress = EmailAddress.fromString(Values.VALID)
         val second: Any = EmailAddress.fromString("second@kotools.org")
         val equality: Boolean = first.equals(second)
@@ -83,7 +83,7 @@ class EmailAddressTest {
     }
 
     @Test
-    fun toString_should_pass() {
+    fun toStringShouldPass() {
         val value: Any = Values.VALID
         val address: EmailAddress = EmailAddress.fromString(value)
         val actual: String = address.toString()
