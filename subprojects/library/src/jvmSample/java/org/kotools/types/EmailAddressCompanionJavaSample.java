@@ -58,8 +58,8 @@ class EmailAddressCompanionJavaSample {
     @Test
     void orNullAny() {
         final Object value = "contact@kotools.org";
-        final EmailAddress actual = EmailAddress.orNull(value);
-        Assertions.assertNotNull(actual);
+        final EmailAddress emailAddress = EmailAddress.orNull(value);
+        Assertions.assertNotNull(emailAddress);
     }
 
     @Test
