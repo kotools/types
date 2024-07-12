@@ -72,14 +72,14 @@ class EmailAddressTest {
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
     @Test
-    fun pattern_should_pass() {
+    fun patternShouldPass() {
         val actual: String = EmailAddress.PATTERN
         val expected = """^\S+@\S+\.\S+$"""
         assertEquals(expected, actual)
     }
 
     @Test
-    fun fromString_Any_should_pass_with_a_valid_value() {
+    fun fromStringAnyShouldPassWithValidValue() {
         val value: Any = Values.VALID
         val actual: Result<EmailAddress> = kotlin.runCatching {
             EmailAddress.fromString(value)
@@ -88,49 +88,42 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun fromString_Any_should_fail_with_a_missing_at_sign_in_value() {
-        val value: String = Values.MISSING_AT_SIGN
-        this.fromString_Any_failingTest(value)
-    }
+    fun fromStringAnyShouldFailWithMissingAtSign(): Unit =
+        this.fromStringShouldFailWith(Values.MISSING_AT_SIGN)
 
     @Test
-    fun fromString_Any_should_fail_with_a_missing_dot_in_domain_of_value() {
-        val value: String = Values.MISSING_DOMAIN_DOT
-        this.fromString_Any_failingTest(value)
-    }
+    fun fromStringAnyShouldFailWithMissingDotInDomain(): Unit =
+        this.fromStringShouldFailWith(Values.MISSING_DOMAIN_DOT)
 
     @Test
-    fun fromString_Any_should_fail_with_whitespaces_in_local_part_of_value() {
-        val value: String = Values.WHITESPACES_IN_LOCAL_PART
-        this.fromString_Any_failingTest(value)
-    }
+    fun fromStringAnyShouldFailWithWhitespacesInLocalPart(): Unit =
+        this.fromStringShouldFailWith(Values.WHITESPACES_IN_LOCAL_PART)
 
     @Test
-    fun fromString_Any_should_fail_with_whitespaces_in_domain_first_label_of_value() {
-        val value: String = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        this.fromString_Any_failingTest(value)
-    }
+    fun fromStringAnyShouldFailWithWhitespacesInDomainFirstLabel(): Unit =
+        this.fromStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
 
     @Test
-    fun fromString_Any_should_fail_with_whitespaces_in_domain_second_label_of_value() {
-        val value: String = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-        this.fromString_Any_failingTest(value)
-    }
+    fun fromStringAnyShouldFailWithWhitespacesInDomainSecondLabel(): Unit =
+        this.fromStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
 
-    private fun fromString_Any_failingTest(value: String) {
+    private fun fromStringShouldFailWith(value: Any) {
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.fromString(value)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(value, EmailAddress.PATTERN)
-            .toString()
+        val valueAsString: String = value.toString()
+        val expected: String = InvalidEmailAddress(
+            value = valueAsString,
+            pattern = EmailAddress.PATTERN
+        ).toString()
         assertEquals(expected, actual)
     }
 
     @Test
-    fun fromString_Any_Any_should_pass_with_valid_value_and_pattern() {
+    fun fromStringAnyAnyShouldPassWithValidValueAndPattern() {
         val value: Any = Values.VALID
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val result: Result<EmailAddress> = kotlin.runCatching {
             EmailAddress.fromString(value, pattern)
         }
@@ -138,9 +131,9 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun fromString_Any_Any_should_fail_with_invalid_value() {
+    fun fromStringAnyAnyShouldFailWithInvalidValue() {
         val value = "first-contact@kotools.org"
-        val pattern = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.fromString(value, pattern)
         }
@@ -151,9 +144,9 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun fromString_Any_Any_should_fail_with_invalid_pattern() {
+    fun fromStringAnyAnyShouldFailWithInvalidPattern() {
         val value: Any = Values.VALID
-        val pattern: Any = "^[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+\.[a-z]+$"""
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.fromString(value, pattern)
         }
@@ -166,132 +159,129 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun fromStringOrNull_Any_should_pass_with_a_valid_value() {
+    fun fromStringOrNullAnyShouldPassWithValidValue() {
         val value: Any = Values.VALID
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
         assertNotNull(actual)
     }
 
     @Test
-    fun fromStringOrNull_Any_should_fail_with_a_missing_at_sign_in_value() {
+    fun fromStringOrNullAnyShouldFailWithMissingAtSign() {
         val value: Any = Values.MISSING_AT_SIGN
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        assertNull(actual)
+        this.fromStringOrNullShouldFailWith(value)
     }
 
     @Test
-    fun fromStringOrNull_Any_should_fail_with_a_missing_dot_in_domain_of_value() {
+    fun fromStringOrNullAnyShouldFailWithMissingDotInDomain() {
         val value: Any = Values.MISSING_DOMAIN_DOT
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        assertNull(actual)
+        this.fromStringOrNullShouldFailWith(value)
     }
 
     @Test
-    fun fromStringOrNull_Any_should_fail_with_whitespaces_in_local_part_of_value() {
+    fun fromStringOrNullAnyShouldFailWithWhitespacesInLocalPart() {
         val value: Any = Values.WHITESPACES_IN_LOCAL_PART
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        assertNull(actual)
+        this.fromStringOrNullShouldFailWith(value)
     }
 
     @Test
-    fun fromStringOrNull_Any_should_fail_with_whitespaces_in_domain_first_label_of_value() {
+    fun fromStringOrNullAnyShouldFailWithWhitespacesInDomainFirstLabel() {
         val value: Any = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
-        assertNull(actual)
+        this.fromStringOrNullShouldFailWith(value)
     }
 
     @Test
-    fun fromStringOrNull_Any_should_fail_with_whitespaces_in_domain_second_label_of_value() {
+    fun fromStringOrNullAnyShouldFailWithWhitespacesInDomainSecondLabel() {
         val value: Any = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
+        this.fromStringOrNullShouldFailWith(value)
+    }
+
+    private fun fromStringOrNullShouldFailWith(value: Any) {
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
         assertNull(actual)
     }
 
     @Test
-    fun fromStringOrNull_Any_Any_should_pass_with_valid_value_and_pattern() {
+    fun fromStringOrNullAnyAnyShouldPassWithValidValueAndPattern() {
         val value: Any = Values.VALID
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val actual: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
         assertNotNull(actual)
     }
 
     @Test
-    fun fromStringOrNull_Any_Any_should_fail_with_invalid_value() {
+    fun fromStringOrNullAnyAnyShouldFailWithInvalidValue() {
         val value: Any = "first-contact@kotools.org"
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val actual: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
         assertNull(actual)
     }
 
     @Test
-    fun fromStringOrNull_Any_Any_should_fail_with_invalid_pattern() {
+    fun fromStringOrNullAnyAnyShouldFailWithInvalidPattern() {
         val value: Any = Values.VALID
-        val pattern: Any = "^[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+\.[a-z]+$"""
         val actual: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
         assertNull(actual)
     }
 
     @Test
-    fun orNull_Any_should_pass_with_a_valid_value() {
+    fun orNullAnyShouldPassWithValidValue() {
         val value: Any = Values.VALID
         val actual: EmailAddress? = EmailAddress.orNull(value)
-        assertNotNull(
-            actual,
-            message = "'EmailAddress.orNull(Any)' should pass with '$value'."
-        )
+        assertNotNull(actual)
     }
 
     @Test
-    fun orNull_Any_should_fail_with_a_missing_at_sign_in_value(): Unit =
-        this.orNullFailsWith(Values.MISSING_AT_SIGN)
+    fun orNullAnyShouldFailWithMissingAtSign(): Unit =
+        this.orNullShouldFailWith(Values.MISSING_AT_SIGN)
 
     @Test
-    fun orNull_Any_should_fail_with_a_missing_dot_in_domain_of_value(): Unit =
-        this.orNullFailsWith(Values.MISSING_DOMAIN_DOT)
+    fun orNullAnyShouldFailWithMissingDotInDomain(): Unit =
+        this.orNullShouldFailWith(Values.MISSING_DOMAIN_DOT)
 
     @Test
-    fun orNull_Any_should_fail_with_whitespaces_in_local_part_of_value(): Unit =
-        this.orNullFailsWith(Values.WHITESPACES_IN_LOCAL_PART)
+    fun orNullAnyShouldFailWithWhitespacesInLocalPart(): Unit =
+        this.orNullShouldFailWith(Values.WHITESPACES_IN_LOCAL_PART)
 
     @Test
-    fun orNull_Any_should_fail_with_whitespaces_in_domain_first_label_of_value(): Unit =
-        this.orNullFailsWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
+    fun orNullAnyShouldFailWithWhitespacesInDomainFirstLabel(): Unit =
+        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
 
     @Test
-    fun orNull_Any_should_fail_with_whitespaces_in_domain_second_label_of_value(): Unit =
-        this.orNullFailsWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
+    fun orNullAnyShouldFailWithWhitespacesInDomainSecondLabel(): Unit =
+        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
 
-    private fun orNullFailsWith(value: Any) {
+    private fun orNullShouldFailWith(value: Any) {
         val actual: EmailAddress? = EmailAddress.orNull(value)
-        assertNull(
-            actual,
-            message = "'EmailAddress.orNull(Any)' should fail with '$value'."
-        )
+        assertNull(actual)
     }
 
     @Test
-    fun orNull_Any_Any_should_pass_with_valid_value_and_pattern() {
+    fun orNullAnyAnyShouldPassWithValidValueAndPattern() {
         val value: Any = Values.VALID
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val actual: EmailAddress? = EmailAddress.orNull(value, pattern)
         assertNotNull(actual)
     }
 
     @Test
-    fun orNull_Any_Any_should_fail_with_invalid_value() {
+    fun orNullAnyAnyShouldFailWithInvalidValue() {
         val value: Any = "first-contact@kotools.org"
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
-        val actual: EmailAddress? = EmailAddress.orNull(value, pattern)
-        assertNull(actual)
+        val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        this.orNullShouldFailWith(value, pattern)
     }
 
     @Test
-    fun orNull_Any_Any_should_fail_with_invalid_pattern() {
+    fun orNullAnyAnyShouldFailWithInvalidPattern() {
         val value: Any = Values.VALID
-        val pattern: Any = "^[a-z]+\\.[a-z]+\$"
+        val pattern: Any = """^[a-z]+\.[a-z]+$"""
+        this.orNullShouldFailWith(value, pattern)
+    }
+
+    private fun orNullShouldFailWith(value: Any, pattern: Any) {
         val actual: EmailAddress? = EmailAddress.orNull(value, pattern)
         assertNull(actual)
     }
