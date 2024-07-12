@@ -1,10 +1,11 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.hashCodeOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -14,33 +15,28 @@ class ZeroTest {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun structuralEqualityShouldPassWithZero() {
+    fun equalsShouldPassWithZero() {
         val first = Zero()
         val second = Zero()
-        assertEquals(first, second)
-        val firstHashCode: Int = first.hashCode()
-        val secondHashCode: Int = second.hashCode()
-        assertEquals(firstHashCode, secondHashCode)
+        val actual: Boolean = first.equals(second)
+        assertTrue(actual)
     }
 
     @Test
-    fun structuralEqualityShouldFailWithNull() {
-        val first = Zero()
-        val second: Any? = null
-        assertNotEquals(second, first)
-        val firstHashCode: Int = first.hashCode()
-        val secondHashCode: Int = second.hashCode()
-        assertNotEquals(secondHashCode, firstHashCode)
-    }
-
-    @Test
-    fun structuralEqualityShouldFailWithAnotherTypeThanZero() {
+    fun equalsShouldFailWithAnotherTypeThanZero() {
         val first = Zero()
         val second: Any = "oops"
-        assertNotEquals(second, first)
-        val firstHashCode: Int = first.hashCode()
-        val secondHashCode: Int = second.hashCode()
-        assertNotEquals(secondHashCode, firstHashCode)
+        val actual: Boolean = first.equals(second)
+        assertFalse(actual)
+    }
+
+    @Test
+    fun hashCodeShouldPass() {
+        val actual: Int = Zero()
+            .hashCode()
+        val expected: Int = 0.toByte()
+            .let(::hashCodeOf)
+        assertEquals(expected, actual)
     }
 
     // ------------------------------ Comparisons ------------------------------
