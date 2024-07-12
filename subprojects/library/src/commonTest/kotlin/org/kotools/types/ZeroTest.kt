@@ -14,7 +14,7 @@ class ZeroTest {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun structural_equality_should_pass_with_another_Zero() {
+    fun structuralEqualityShouldPassWithZero() {
         val first = Zero()
         val second = Zero()
         assertEquals(first, second)
@@ -24,7 +24,7 @@ class ZeroTest {
     }
 
     @Test
-    fun structural_equality_should_fail_with_null() {
+    fun structuralEqualityShouldFailWithNull() {
         val first = Zero()
         val second: Any? = null
         assertNotEquals(second, first)
@@ -34,7 +34,7 @@ class ZeroTest {
     }
 
     @Test
-    fun structural_equality_should_fail_with_another_type_than_Zero() {
+    fun structuralEqualityShouldFailWithAnotherTypeThanZero() {
         val first = Zero()
         val second: Any = "oops"
         assertNotEquals(second, first)
@@ -46,7 +46,7 @@ class ZeroTest {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun compareTo_should_return_zero_with_the_same_Byte() {
+    fun compareToShouldReturnZeroWithSameByte() {
         val zero = Zero()
         val other: Byte = 0
         val actual: Int = zero.compareTo(other)
@@ -54,7 +54,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_negative_number_with_a_greater_Byte() {
+    fun compareToShouldReturnNegativeNumberWithGreaterByte() {
         val zero = Zero()
         val other: Byte = (1..Byte.MAX_VALUE)
             .random()
@@ -64,7 +64,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_positive_number_with_a_less_Byte() {
+    fun compareToShouldReturnPositiveNumberWithLessByte() {
         val zero = Zero()
         val other: Byte = (Byte.MIN_VALUE..-1)
             .random()
@@ -74,7 +74,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_zero_with_the_same_Short() {
+    fun compareToShouldReturnZeroWithSameShort() {
         val zero = Zero()
         val other: Short = 0
         val actual: Int = zero.compareTo(other)
@@ -82,7 +82,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_negative_number_with_a_greater_Short() {
+    fun compareToShouldReturnNegativeNumberWithGreaterShort() {
         val zero = Zero()
         val other: Short = (1..Short.MAX_VALUE)
             .random()
@@ -92,7 +92,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_positive_number_with_a_less_Short() {
+    fun compareToShouldReturnPositiveNumberWithLessShort() {
         val zero = Zero()
         val other: Short = (Short.MIN_VALUE..-1)
             .random()
@@ -102,7 +102,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_zero_with_the_same_Int() {
+    fun compareToShouldReturnZeroWithSameInt() {
         val zero = Zero()
         val other = 0
         val actual: Int = zero.compareTo(other)
@@ -110,7 +110,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_negative_number_with_a_greater_Int() {
+    fun compareToShouldReturnNegativeNumberWithGreaterInt() {
         val zero = Zero()
         val other: Int = (1..Int.MAX_VALUE)
             .random()
@@ -119,7 +119,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_positive_number_with_a_less_Int() {
+    fun compareToShouldReturnPositiveNumberWithLessInt() {
         val zero = Zero()
         val other: Int = (Int.MIN_VALUE..-1)
             .random()
@@ -128,7 +128,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_zero_with_the_same_Long() {
+    fun compareToShouldReturnZeroWithSameLong() {
         val zero = Zero()
         val other: Long = 0
         val actual: Int = zero.compareTo(other)
@@ -136,7 +136,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_negative_number_with_a_greater_Long() {
+    fun compareToShouldReturnNegativeNumberWithGreaterLong() {
         val zero = Zero()
         val other: Long = (1..Long.MAX_VALUE)
             .random()
@@ -145,7 +145,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_positive_number_with_a_less_Long() {
+    fun compareToShouldReturnPositiveNumberWithLessLong() {
         val zero = Zero()
         val other: Long = (Long.MIN_VALUE..-1)
             .random()
@@ -154,7 +154,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_zero_with_the_same_Float() {
+    fun compareToShouldReturnZeroWithSameFloat() {
         val zero = Zero()
         val other = 0f
         val actual: Int = zero.compareTo(other)
@@ -162,7 +162,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_negative_number_with_a_greater_Float() {
+    fun compareToShouldReturnNegativeNumberWithGreaterFloat() {
         val zero = Zero()
         val other: Float = (1..Long.MAX_VALUE)
             .random()
@@ -172,7 +172,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_positive_number_with_a_less_Float() {
+    fun compareToShouldReturnPositiveNumberWithLessFloat() {
         val zero = Zero()
         val other: Float = (Long.MIN_VALUE..-1)
             .random()
@@ -182,7 +182,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_zero_with_the_same_Double() {
+    fun compareToShouldReturnZeroWithSameDouble() {
         val zero = Zero()
         val other = 0.0
         val actual: Int = zero.compareTo(other)
@@ -190,7 +190,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_negative_number_with_a_greater_Double() {
+    fun compareToShouldReturnNegativeNumberWithGreaterDouble() {
         val zero = Zero()
         val other: Double = (1..Long.MAX_VALUE)
             .random()
@@ -200,7 +200,7 @@ class ZeroTest {
     }
 
     @Test
-    fun compareTo_should_return_a_positive_number_with_a_less_Double() {
+    fun compareToShouldReturnPositiveNumberWithLessDouble() {
         val zero = Zero()
         val other: Double = (Long.MIN_VALUE..-1)
             .random()
@@ -212,7 +212,7 @@ class ZeroTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    fun toByte_should_pass() {
+    fun toByteShouldPass() {
         val actual: Byte = Zero()
             .toByte()
         val expected: Byte = 0
@@ -220,7 +220,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toShort_should_pass() {
+    fun toShortShouldPass() {
         val actual: Short = Zero()
             .toShort()
         val expected: Short = 0
@@ -228,7 +228,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toInt_should_pass() {
+    fun toIntShouldPass() {
         val actual: Int = Zero()
             .toInt()
         val expected = 0
@@ -236,7 +236,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toLong_should_pass() {
+    fun toLongShouldPass() {
         val actual: Long = Zero()
             .toLong()
         val expected = 0L
@@ -244,7 +244,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toFloat_should_pass() {
+    fun toFloatShouldPass() {
         val actual: Float = Zero()
             .toFloat()
         val expected = 0f
@@ -252,7 +252,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toDouble_should_pass() {
+    fun toDoubleShouldPass() {
         val actual: Double = Zero()
             .toDouble()
         val expected = 0.0
@@ -260,7 +260,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toChar_should_return_the_zero_character() {
+    fun toCharShouldPass() {
         val actual: Char = Zero()
             .toChar()
         val expected = '0'
@@ -268,7 +268,7 @@ class ZeroTest {
     }
 
     @Test
-    fun toString_should_pass() {
+    fun toStringShouldPass() {
         val actual: String = Zero()
             .toString()
         val expected = "0"
