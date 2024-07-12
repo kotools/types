@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.simpleNameOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -279,70 +278,53 @@ class ZeroTest {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCompanionTest {
+    private val validNumbers: List<Any>
+        get() = listOf(
+            0, 0.0,
+            "+0", "+000", "+0.000", "+000.000", // with unary plus
+            "-0", "-000", "-0.000", "-000.000" // with unary minus
+        )
+
+    private val invalidNumbers: List<Any>
+        get() = listOf<Any>(
+            ".0", "+.0", "-.0", // integer part missing
+            "0,0", "+0,0", "-0,0", // comma as decimal point
+            "0.", "+0.", "-0.", // decimal part missing
+            "hello world", "123456789" // not zero number
+        )
+
     @Test
-    fun pattern_should_pass() {
+    fun patternShouldPass() {
         val actual: String = Zero.PATTERN
-        val expected = "^[+-]?0+(?:\\.0+)?\$"
+        val expected = """^[+-]?0+(?:\.0+)?$"""
         assertEquals(expected, actual)
     }
 
     @Test
-    fun orNull_should_pass_with_a_valid_number() {
-        val numbers: List<Any> = listOf(
-            0, 0.0,
-            "+0", "+000", "+0.000", "+000.000", // with unary plus
-            "-0", "-000", "-0.000", "-000.000" // with unary minus
-        )
-        numbers.forEach {
+    fun orNullShouldPassWithValidNumber(): Unit = this.validNumbers.forEach {
+        val actual: Zero? = Zero.orNull(it)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNullShouldFailWithInvalidNumber(): Unit =
+        this.invalidNumbers.forEach {
             val actual: Zero? = Zero.orNull(it)
-            val zeroType: String = simpleNameOf<Zero>()
-            val message = "Converting '$it' to $zeroType should pass."
-            assertNotNull(actual, message)
+            assertNull(actual)
         }
-    }
 
     @Test
-    fun orNull_should_fail_with_an_invalid_number() {
-        val numbers: List<Any> = listOf(
-            ".0", "+.0", "-.0", // integer part missing
-            "0,0", "+0,0", "-0,0", // comma as decimal point
-            "0.", "+0.", "-0.", // decimal part missing
-            "hello world", "123456789" // not zero number
-        )
-        numbers.forEach {
-            val actual: Zero? = Zero.orNull(it)
-            val zeroType: String = simpleNameOf<Zero>()
-            val message = "Converting '$it' to $zeroType should fail."
-            assertNull(actual, message)
-        }
-    }
+    fun orThrowShouldPassWithValidNumber(): Unit =
+        this.validNumbers.forEach(Zero.Companion::orThrow)
 
     @Test
-    fun orThrow_should_pass_with_a_valid_number() {
-        val numbers: List<Any> = listOf(
-            0, 0.0,
-            "+0", "+000", "+0.000", "+000.000", // with unary plus
-            "-0", "-000", "-0.000", "-000.000" // with unary minus
-        )
-        numbers.forEach(Zero.Companion::orThrow)
-    }
-
-    @Test
-    fun orThrow_should_fail_with_an_invalid_number() {
-        val numbers: List<Any> = listOf(
-            ".0", "+.0", "-.0", // integer part missing
-            "0,0", "+0,0", "-0,0", // comma as decimal point
-            "0.", "+0.", "-0.", // decimal part missing
-            "hello world", "123456789" // not zero number
-        )
-        numbers.forEach {
-            val exception: IllegalArgumentException = assertFailsWith {
-                Zero.orThrow(it)
-            }
+    fun orThrowShouldFailWithInvalidNumber(): Unit =
+        this.invalidNumbers.forEach {
+            val exception: IllegalArgumentException =
+                assertFailsWith { Zero.orThrow(it) }
             val actual: String? = exception.message?.takeIf(String::isNotBlank)
             assertNotNull(actual, message = "Exception should have a message.")
             val expected = "'$it' is not a valid representation of zero."
             assertEquals(expected, actual)
         }
-    }
 }
