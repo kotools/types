@@ -7,6 +7,8 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCommonSample {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun equalsOverride() {
         val value: Any = "contact@kotools.org"
@@ -24,6 +26,8 @@ class EmailAddressCommonSample {
         val actual: Boolean = first.hashCode() == second.hashCode()
         assertTrue(actual)
     }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     fun toStringOverride() {

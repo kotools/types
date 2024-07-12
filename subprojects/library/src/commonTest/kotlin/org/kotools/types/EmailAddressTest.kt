@@ -25,6 +25,8 @@ private object Values {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressTest {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun equalsShouldPassWithEmailAddressHavingSameStringRepresentation() {
         val value: Any = Values.VALID
@@ -59,6 +61,8 @@ class EmailAddressTest {
         val expected: Int = hashCodeOf(value)
         assertEquals(expected, actual)
     }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     fun toStringShouldPass() {

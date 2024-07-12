@@ -80,7 +80,7 @@ public class EmailAddress private constructor(private val value: String) {
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.value)
 
-    // ------------------------------ Converters -------------------------------
+    // ------------------------------ Conversions ------------------------------
 
     /**
      * Returns the string representation of this email address.

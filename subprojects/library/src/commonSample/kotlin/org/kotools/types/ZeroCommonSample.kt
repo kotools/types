@@ -7,6 +7,8 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCommonSample {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun equalsOverride() {
         val first = Zero()
@@ -22,6 +24,8 @@ class ZeroCommonSample {
         val actual: Boolean = first.hashCode() == second.hashCode()
         assertTrue(actual)
     }
+
+    // ------------------------------ Comparisons ------------------------------
 
     @Test
     fun compareToByte() {
@@ -71,6 +75,8 @@ class ZeroCommonSample {
         assertTrue(actual)
     }
 
+    // ------------------------------ Conversions ------------------------------
+
     @Test
     fun toByte() {
         val actual: Byte = Zero()
@@ -117,7 +123,7 @@ class ZeroCommonSample {
             .toDouble()
         val expected = 0.0
         assertEquals(expected, actual)
-    } // END
+    }
 
     @Test
     fun toChar() {

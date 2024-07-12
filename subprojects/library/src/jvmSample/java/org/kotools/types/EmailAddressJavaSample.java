@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NewClassNamingConvention")
 class EmailAddressJavaSample {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     void equalsOverride() {
         final Object value = "contact@kotools.org";
@@ -24,6 +26,8 @@ class EmailAddressJavaSample {
         final boolean actual = first == second;
         Assertions.assertTrue(actual);
     }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     void toStringOverride() {

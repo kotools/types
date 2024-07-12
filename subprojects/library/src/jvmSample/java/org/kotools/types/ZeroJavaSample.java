@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroJavaSample {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     void equalsOverride() {
         final Zero first = new Zero();
@@ -21,6 +23,8 @@ class ZeroJavaSample {
                 .hashCode();
         Assertions.assertEquals(first, second);
     }
+
+    // ------------------------------ Comparisons ------------------------------
 
     @Test
     void compareToByte() {
@@ -69,6 +73,8 @@ class ZeroJavaSample {
         final boolean actual = zero.compareTo(other) < 0;
         Assertions.assertTrue(actual);
     }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     void toByte() {
