@@ -235,27 +235,14 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun orNullAnyShouldFailWithMissingAtSign(): Unit =
-        this.orNullShouldFailWith(Values.MISSING_AT_SIGN)
-
-    @Test
-    fun orNullAnyShouldFailWithMissingDotInDomain(): Unit =
-        this.orNullShouldFailWith(Values.MISSING_DOMAIN_DOT)
-
-    @Test
-    fun orNullAnyShouldFailWithWhitespacesInLocalPart(): Unit =
-        this.orNullShouldFailWith(Values.WHITESPACES_IN_LOCAL_PART)
-
-    @Test
-    fun orNullAnyShouldFailWithWhitespacesInDomainFirstLabel(): Unit =
-        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
-
-    @Test
-    fun orNullAnyShouldFailWithWhitespacesInDomainSecondLabel(): Unit =
-        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
-
-    private fun orNullShouldFailWith(value: Any) {
-        val actual: EmailAddress? = EmailAddress.orNull(value)
+    fun orNullShouldFailWithInvalidValue(): Unit = listOf<Any>(
+        Values.MISSING_AT_SIGN,
+        Values.MISSING_DOMAIN_DOT,
+        Values.WHITESPACES_IN_LOCAL_PART,
+        Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL,
+        Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
+    ).forEach {
+        val actual: EmailAddress? = EmailAddress.orNull(it)
         assertNull(actual)
     }
 
