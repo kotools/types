@@ -118,7 +118,7 @@ class EmailAddressCompanionTest {
         val actual: String? = exception.message
         val valueAsString: String = value.toString()
         val expected: String = InvalidEmailAddress(
-            value = valueAsString,
+            text = valueAsString,
             pattern = EmailAddress.PATTERN
         ).toString()
         assertEquals(expected, actual)
