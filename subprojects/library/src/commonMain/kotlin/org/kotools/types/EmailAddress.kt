@@ -334,8 +334,8 @@ public class EmailAddress private constructor(private val value: String) {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [value], or returns `null` if the string
-         * representation of [value] doesn't match the
+         * of the specified [text], or returns `null` if the string
+         * representation of [text] doesn't match the
          * [default pattern][PATTERN].
          *
          * <br>
@@ -362,8 +362,8 @@ public class EmailAddress private constructor(private val value: String) {
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
-        public fun orNull(value: Any): EmailAddress? =
-            this.orNull(value, this.PATTERN)
+        public fun orNull(text: Any): EmailAddress? =
+            this.orNull(text, this.PATTERN)
 
         /**
          * Creates an instance of [EmailAddress] from the string representation

@@ -233,8 +233,8 @@ class EmailAddressCompanionTest {
 
     @Test
     fun orNullAnyShouldPassWithValidValue() {
-        val value: Any = Values.VALID
-        val actual: EmailAddress? = EmailAddress.orNull(value)
+        val text: Any = Values.VALID
+        val actual: EmailAddress? = EmailAddress.orNull(text)
         assertNotNull(actual)
     }
 
