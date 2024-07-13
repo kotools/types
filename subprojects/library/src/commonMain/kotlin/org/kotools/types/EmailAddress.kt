@@ -18,7 +18,7 @@ import kotlin.jvm.JvmStatic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
-public class EmailAddress private constructor(private val value: String) {
+public class EmailAddress private constructor(private val text: String) {
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -50,7 +50,7 @@ public class EmailAddress private constructor(private val value: String) {
      */
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
-        other is EmailAddress && this.value == other.value
+        other is EmailAddress && this.text == other.text
 
     /**
      * Returns a hash code value for this email address.
@@ -78,7 +78,7 @@ public class EmailAddress private constructor(private val value: String) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun hashCode(): Int = hashCodeOf(this.value)
+    final override fun hashCode(): Int = hashCodeOf(this.text)
 
     // ------------------------------ Conversions ------------------------------
 
@@ -108,7 +108,7 @@ public class EmailAddress private constructor(private val value: String) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String = value
+    final override fun toString(): String = this.text
 
     // -------------------------------------------------------------------------
 
