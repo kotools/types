@@ -239,7 +239,7 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun orNullShouldFailWithInvalidValue(): Unit = listOf<Any>(
+    fun orNullAnyShouldFailWithInvalidValue(): Unit = listOf<Any>(
         Values.MISSING_AT_SIGN,
         Values.MISSING_DOMAIN_DOT,
         Values.WHITESPACES_IN_LOCAL_PART,
@@ -252,28 +252,25 @@ class EmailAddressCompanionTest {
 
     @Test
     fun orNullAnyAnyShouldPassWithValidValueAndPattern() {
-        val value: Any = Values.VALID
+        val text: Any = Values.VALID
         val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val actual: EmailAddress? = EmailAddress.orNull(value, pattern)
+        val actual: EmailAddress? = EmailAddress.orNull(text, pattern)
         assertNotNull(actual)
     }
 
     @Test
     fun orNullAnyAnyShouldFailWithInvalidValue() {
-        val value: Any = "first-contact@kotools.org"
+        val text: Any = "first-contact@kotools.org"
         val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        this.orNullShouldFailWith(value, pattern)
+        val actual: EmailAddress? = EmailAddress.orNull(text, pattern)
+        assertNull(actual)
     }
 
     @Test
     fun orNullAnyAnyShouldFailWithInvalidPattern() {
-        val value: Any = Values.VALID
+        val text: Any = Values.VALID
         val pattern: Any = """^[a-z]+\.[a-z]+$"""
-        this.orNullShouldFailWith(value, pattern)
-    }
-
-    private fun orNullShouldFailWith(value: Any, pattern: Any) {
-        val actual: EmailAddress? = EmailAddress.orNull(value, pattern)
+        val actual: EmailAddress? = EmailAddress.orNull(text, pattern)
         assertNull(actual)
     }
 }
