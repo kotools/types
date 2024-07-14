@@ -18,7 +18,31 @@ import kotlin.jvm.JvmStatic
 public class Zero {
     private val valueAsByte: Byte = 0
 
-    /** Creates an instance of [Zero]. */
+    /**
+     * Creates an instance of [Zero].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.secondaryConstructor]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Java code:
+     *
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.secondaryConstructor]
+     * </details>
+     */
     @Suppress("ConvertSecondaryConstructorToPrimary")
     public constructor()
 

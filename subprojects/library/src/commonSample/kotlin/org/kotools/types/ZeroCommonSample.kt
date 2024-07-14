@@ -7,6 +7,11 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCommonSample {
+    @Test
+    fun secondaryConstructor() {
+        Zero()
+    }
+
     // -------------------- Structural equality operations ---------------------
 
     @Test

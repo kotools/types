@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroJavaSample {
+    @Test
+    void secondaryConstructor() {
+        new Zero();
+    }
+
     // -------------------- Structural equality operations ---------------------
 
     @Test
