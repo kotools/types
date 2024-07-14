@@ -12,13 +12,15 @@ import kotlin.jvm.JvmStatic
  *
  * For creating an instance of this type, you can use its constructor or the
  * additional factory functions provided by the [Zero.Companion] type.
- *
- * @constructor Creates an instance of [Zero].
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public class Zero {
     private val valueAsByte: Byte = 0
+
+    /** Creates an instance of [Zero]. */
+    @Suppress("ConvertSecondaryConstructorToPrimary")
+    public constructor()
 
     // -------------------- Structural equality operations ---------------------
 
