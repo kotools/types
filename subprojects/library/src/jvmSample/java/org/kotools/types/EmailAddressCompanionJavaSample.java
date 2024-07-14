@@ -69,4 +69,17 @@ class EmailAddressCompanionJavaSample {
         final EmailAddress emailAddress = EmailAddress.orNull(text, pattern);
         Assertions.assertNotNull(emailAddress);
     }
+
+    @Test
+    void orThrowAny() {
+        final Object text = "contact@kotools.org";
+        boolean isSuccess;
+        try {
+            EmailAddress.orThrow(text);
+            isSuccess = true;
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false;
+        }
+        Assertions.assertTrue(isSuccess);
+    }
 }

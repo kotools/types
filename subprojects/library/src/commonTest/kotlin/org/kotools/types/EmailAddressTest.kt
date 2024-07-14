@@ -75,6 +75,14 @@ class EmailAddressTest {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
+    private val invalidTexts: List<Any> = listOf(
+        Values.MISSING_AT_SIGN,
+        Values.MISSING_DOMAIN_DOT,
+        Values.WHITESPACES_IN_LOCAL_PART,
+        Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL,
+        Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
+    )
+
     @Test
     fun patternShouldPass() {
         val actual: String = EmailAddress.PATTERN
@@ -239,13 +247,7 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun orNullAnyShouldFailWithInvalidText(): Unit = listOf<Any>(
-        Values.MISSING_AT_SIGN,
-        Values.MISSING_DOMAIN_DOT,
-        Values.WHITESPACES_IN_LOCAL_PART,
-        Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL,
-        Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-    ).forEach {
+    fun orNullAnyShouldFailWithInvalidText(): Unit = this.invalidTexts.forEach {
         val actual: EmailAddress? = EmailAddress.orNull(it)
         assertNull(actual)
     }
@@ -273,4 +275,24 @@ class EmailAddressCompanionTest {
         val actual: EmailAddress? = EmailAddress.orNull(text, pattern)
         assertNull(actual)
     }
+
+    @Test
+    fun orThrowAnyShouldPassWithValidText() {
+        val text: Any = Values.VALID
+        EmailAddress.orThrow(text)
+    }
+
+    @Test
+    fun orThrowAnyShouldFailWithInvalidText(): Unit =
+        this.invalidTexts.forEach {
+            val exception: IllegalArgumentException = assertFailsWith {
+                EmailAddress.orThrow(it)
+            }
+            val actual: String? = exception.message
+            val expected: String = InvalidEmailAddress(
+                "$it",
+                EmailAddress.PATTERN
+            ).toString()
+            assertEquals(expected, actual)
+        }
 }
