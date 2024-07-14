@@ -449,5 +449,54 @@ public class EmailAddress private constructor(private val text: String) {
                 InvalidEmailAddress("$text", this.PATTERN)
             }
         }
+
+        /**
+         * Creates an instance of [EmailAddress] from the string representation
+         * of the specified [text].
+         * Throws an [IllegalArgumentException] if the string representation of
+         * the specified [pattern] doesn't match the [default one][PATTERN], or
+         * if the string representation of [text] doesn't match the string
+         * representation of [pattern].
+         *
+         * <br>
+         * <details open>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orThrowAnyAny]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowAnyAny]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun orThrow(text: Any, pattern: Any): EmailAddress {
+            val patternAsString: String = pattern.toString()
+            val patternRegex = Regex(this.PATTERN)
+            val patternMatchesRegex: Boolean =
+                patternAsString.matches(patternRegex)
+            require(patternMatchesRegex) {
+                InvalidEmailAddressPattern(patternAsString, this.PATTERN)
+            }
+            val textAsString: String = text.toString()
+            val textRegex = Regex(patternAsString)
+            val textMatchesRegex: Boolean = textAsString.matches(textRegex)
+            require(textMatchesRegex) {
+                InvalidEmailAddress(textAsString, patternAsString)
+            }
+            return EmailAddress(textAsString)
+        }
     }
 }

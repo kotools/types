@@ -82,4 +82,17 @@ class EmailAddressCompanionCommonSample {
         }
         assertTrue(isSuccess)
     }
+
+    @Test
+    fun orThrowAnyAny() {
+        val text: Any = "contact@kotools.org"
+        val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        val isSuccess: Boolean = try {
+            EmailAddress.orThrow(text, pattern)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
 }
