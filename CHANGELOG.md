@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - The following declarations to the `Zero.Companion` **experimental** type:
   - `PATTERN` property ([#658])
   - `orNull(Any)` and `orThrow(Any)` functions ([#668]).
+- Samples to the documentation of the `Zero()` constructor ([7c8172d2]).
 
 ### ♻️ Changed
 
@@ -65,6 +66,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
+[7c8172d2]: https://github.com/kotools/types/commit/7c8172d2
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 [fd003c4a]: https://github.com/kotools/types/commit/fd003c4a
 [c862e0cac]: https://github.com/kotools/types/commit/c862e0cac
