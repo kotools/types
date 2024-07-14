@@ -12,6 +12,35 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroTest {
+    private val validNumbers: List<Any>
+        get() = listOf(
+            0, 0.0,
+            "+0", "+000", "+0.000", "+000.000", // with unary plus
+            "-0", "-000", "-0.000", "-000.000" // with unary minus
+        )
+
+    private val invalidNumbers: List<Any>
+        get() = listOf<Any>(
+            ".0", "+.0", "-.0", // integer part missing
+            "0,0", "+0,0", "-0,0", // comma as decimal point
+            "0.", "+0.", "-0.", // decimal part missing
+            "hello world", "123456789" // not zero number
+        )
+
+    @Test
+    fun constructorAnyShouldPassWithValidNumber(): Unit =
+        this.validNumbers.forEach(::Zero)
+
+    @Test
+    fun constructorAnyShouldFailWithInvalidNumber(): Unit =
+        this.invalidNumbers.forEach {
+            val exception: IllegalArgumentException =
+                assertFailsWith { Zero(it) }
+            val actual: String? = exception.message
+            val expected = "'$it' is not a valid representation of zero."
+            assertEquals(expected, actual)
+        }
+
     // -------------------- Structural equality operations ---------------------
 
     @Test

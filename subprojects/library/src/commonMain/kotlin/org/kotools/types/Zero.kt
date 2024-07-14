@@ -43,8 +43,43 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.secondaryConstructor]
      * </details>
      */
-    @Suppress("ConvertSecondaryConstructorToPrimary")
     public constructor()
+
+    /**
+     * Creates an instance of [Zero] from the string representation of the
+     * specified [number], or throws an [IllegalArgumentException] if the string
+     * representation of [number] doesn't match [Zero.PATTERN].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.ZeroCommonSample.constructorAny]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Java code:
+     *
+     * SAMPLE: [org.kotools.types.ZeroJavaSample.constructorAny]
+     * </details>
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public constructor(number: Any) {
+        val regex = Regex(PATTERN)
+        val numberMatchesRegex: Boolean = "$number".matches(regex)
+        require(numberMatchesRegex) {
+            "'$number' is not a valid representation of zero."
+        }
+    }
 
     // -------------------- Structural equality operations ---------------------
 

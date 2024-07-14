@@ -10,6 +10,19 @@ class ZeroJavaSample {
         new Zero();
     }
 
+    @Test
+    void constructorAny() {
+        final Object number = "0.000";
+        boolean isSuccess;
+        try {
+            new Zero(number);
+            isSuccess = true;
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false;
+        }
+        Assertions.assertTrue(isSuccess);
+    }
+
     // -------------------- Structural equality operations ---------------------
 
     @Test

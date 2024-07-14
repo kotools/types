@@ -12,6 +12,18 @@ class ZeroCommonSample {
         Zero()
     }
 
+    @Test
+    fun constructorAny() {
+        val number: Any = "0.000"
+        val isSuccess: Boolean = try {
+            Zero(number)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
     // -------------------- Structural equality operations ---------------------
 
     @Test
