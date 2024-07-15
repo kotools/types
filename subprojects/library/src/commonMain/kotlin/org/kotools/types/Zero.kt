@@ -601,6 +601,6 @@ public class Zero {
          * </details>
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-        public const val PATTERN: String = "^[+-]?0+(?:\\.0+)?\$"
+        public const val PATTERN: String = """^[+-]?0+(?:\.0+)?$"""
     }
 }
