@@ -337,19 +337,4 @@ class ZeroCompanionTest {
             val actual: Zero? = Zero.orNull(it)
             assertNull(actual)
         }
-
-    @Test
-    fun orThrowShouldPassWithValidNumber(): Unit =
-        this.validNumbers.forEach(Zero.Companion::orThrow)
-
-    @Test
-    fun orThrowShouldFailWithInvalidNumber(): Unit =
-        this.invalidNumbers.forEach {
-            val exception: IllegalArgumentException =
-                assertFailsWith { Zero.orThrow(it) }
-            val actual: String? = exception.message?.takeIf(String::isNotBlank)
-            assertNotNull(actual, message = "Exception should have a message.")
-            val expected = "'$it' is not a valid representation of zero."
-            assertEquals(expected, actual)
-        }
 }

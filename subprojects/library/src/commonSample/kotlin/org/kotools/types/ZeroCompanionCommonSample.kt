@@ -25,16 +25,4 @@ class ZeroCompanionCommonSample {
         val actual: Zero? = Zero.orNull(number)
         assertNotNull(actual)
     }
-
-    @Test
-    fun orThrow() {
-        val number: Any = "-000.000"
-        val isSuccess: Boolean = try {
-            Zero.orThrow(number)
-            true
-        } catch (exception: IllegalArgumentException) {
-            false
-        }
-        assertTrue(isSuccess)
-    }
 }

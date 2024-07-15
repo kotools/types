@@ -26,17 +26,4 @@ class ZeroCompanionJavaSample {
         final Zero actual = Zero.orNull(number);
         Assertions.assertNotNull(actual);
     }
-
-    @Test
-    void orThrow() {
-        final Object number = "-000.000";
-        boolean isSuccess;
-        try {
-            Zero.orThrow(number);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
 }
