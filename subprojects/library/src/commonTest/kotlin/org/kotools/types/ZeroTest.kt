@@ -298,13 +298,3 @@ class ZeroTest {
         assertEquals(expected, actual)
     }
 }
-
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class ZeroCompanionTest {
-    @Test
-    fun patternShouldPass() {
-        val actual: String = Zero.PATTERN
-        val expected = """^[+-]?0+(?:\.0+)?$"""
-        assertEquals(expected, actual)
-    }
-}

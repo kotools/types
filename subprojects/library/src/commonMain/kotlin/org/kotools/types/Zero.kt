@@ -573,51 +573,5 @@ public class Zero {
     // -------------------------------------------------------------------------
 
     /** Contains static declarations for the [Zero] type. */
-    public companion object {
-        /**
-         * The pattern a zero number should match.
-         *
-         * The underlying value is `^[+-]?0+(?:\.0+)?$`.
-         *
-         * Here's the explanation associated to each symbol used in this
-         * pattern:
-         * - `^` **Beginning.** Matches the beginning of the string, or the
-         * beginning of a line if the multiline flag (**m**) is enabled.
-         * - `[]` **Character set.** Matches any character in the set.
-         * - `+` **Character.** Matches a "+" character (char code 43).
-         * - `-` **Character.** Matches a "-" character (char code 45).
-         * - `?` **Quantifier.** Match between 0 and 1 of the preceding token.
-         * - `0` **Character.** Matches a "0" character (char code 48).
-         * - `+` **Quantifier.** Match 1 or more of the preceding token.
-         * - `(?:)` **Non-capturing group.** Groups multiple tokens together
-         * without creating a capture group.
-         * - `\.` **Escaped character.** Matches a "." character (char code 46).
-         * - `$` **End.** Matches the end of the string, or the end of a line if
-         * the multiline flag (**m**) is enabled.
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.pattern]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Java code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.pattern]
-         * </details>
-         */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-        public const val PATTERN: String = """^[+-]?0+(?:\.0+)?$"""
-    }
+    public companion object
 }
