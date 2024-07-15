@@ -46,8 +46,7 @@ All notable changes to this project will be documented in this file.
 
 - The `kotools.types.web.EmailAddress` **deprecated** type from the
   **experimental** API ([#663]).
-- The `fromByte(Byte)` and the `fromByteOrNull(Byte)` **experimental** functions
-  from the `Zero.Companion` type ([#668]).
+- The `Zero.Companion` type ([#668] and [#676]).
 
 ---
 
