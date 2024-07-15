@@ -7,12 +7,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 
-/**
- * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
- *
- * For creating an instance of this type, you can use its constructor or the
- * additional factory functions provided by the [Zero.Companion] type.
- */
+/** Represents the [zero](https://en.wikipedia.org/wiki/0) number. */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public class Zero {
