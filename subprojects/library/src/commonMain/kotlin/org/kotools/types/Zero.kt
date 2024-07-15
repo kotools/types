@@ -85,7 +85,7 @@ public class Zero {
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
     public constructor(number: Any) {
-        val regex = Regex(PATTERN)
+        val regex = Regex("""^[+-]?0+(?:\.0+)?$""")
         val numberMatchesRegex: Boolean = "$number".matches(regex)
         require(numberMatchesRegex) {
             "'$number' is not a valid representation of zero."
