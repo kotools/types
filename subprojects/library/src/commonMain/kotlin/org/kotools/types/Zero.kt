@@ -42,7 +42,24 @@ public class Zero {
     /**
      * Creates an instance of [Zero] from the string representation of the
      * specified [number], or throws an [IllegalArgumentException] if the string
-     * representation of [number] doesn't match [Zero.PATTERN].
+     * representation of [number] doesn't match the following pattern:
+     * `^[+-]?0+(?:\.0+)?$`.
+     *
+     * Here's the explanation associated to each symbol used in this
+     * pattern:
+     * - `^` **Beginning.** Matches the beginning of the string, or the
+     * beginning of a line if the multiline flag (**m**) is enabled.
+     * - `[]` **Character set.** Matches any character in the set.
+     * - `+` **Character.** Matches a "+" character (char code 43).
+     * - `-` **Character.** Matches a "-" character (char code 45).
+     * - `?` **Quantifier.** Match between 0 and 1 of the preceding token.
+     * - `0` **Character.** Matches a "0" character (char code 48).
+     * - `+` **Quantifier.** Match 1 or more of the preceding token.
+     * - `(?:)` **Non-capturing group.** Groups multiple tokens together
+     * without creating a capture group.
+     * - `\.` **Escaped character.** Matches a "." character (char code 46).
+     * - `$` **End.** Matches the end of the string, or the end of a line if
+     * the multiline flag (**m**) is enabled.
      *
      * <br>
      * <details>
