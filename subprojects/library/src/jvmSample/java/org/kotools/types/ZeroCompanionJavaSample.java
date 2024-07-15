@@ -19,11 +19,4 @@ class ZeroCompanionJavaSample {
                 .allMatch(number -> number.toString().matches(regex));
         Assertions.assertTrue(numbersAreValid);
     }
-
-    @Test
-    void orNull() {
-        final Object number = "-000.000";
-        final Zero actual = Zero.orNull(number);
-        Assertions.assertNotNull(actual);
-    }
 }

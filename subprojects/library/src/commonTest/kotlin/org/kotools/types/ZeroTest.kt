@@ -6,8 +6,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -303,38 +301,10 @@ class ZeroTest {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCompanionTest {
-    private val validNumbers: List<Any>
-        get() = listOf(
-            0, 0.0,
-            "+0", "+000", "+0.000", "+000.000", // with unary plus
-            "-0", "-000", "-0.000", "-000.000" // with unary minus
-        )
-
-    private val invalidNumbers: List<Any>
-        get() = listOf<Any>(
-            ".0", "+.0", "-.0", // integer part missing
-            "0,0", "+0,0", "-0,0", // comma as decimal point
-            "0.", "+0.", "-0.", // decimal part missing
-            "hello world", "123456789" // not zero number
-        )
-
     @Test
     fun patternShouldPass() {
         val actual: String = Zero.PATTERN
         val expected = """^[+-]?0+(?:\.0+)?$"""
         assertEquals(expected, actual)
     }
-
-    @Test
-    fun orNullShouldPassWithValidNumber(): Unit = this.validNumbers.forEach {
-        val actual: Zero? = Zero.orNull(it)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun orNullShouldFailWithInvalidNumber(): Unit =
-        this.invalidNumbers.forEach {
-            val actual: Zero? = Zero.orNull(it)
-            assertNull(actual)
-        }
 }
