@@ -569,9 +569,4 @@ public class Zero {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.valueAsByte.toString()
-
-    // -------------------------------------------------------------------------
-
-    /** Contains static declarations for the [Zero] type. */
-    public companion object
 }
