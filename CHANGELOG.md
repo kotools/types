@@ -19,13 +19,11 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - The following declarations to the `Zero` **experimental** type:
-  - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()`, `toDouble()`
-    and `toChar()` functions ([#646])
+  - `Zero(Any)` constructor ([#676])
   - `compareTo(Byte)`, `compareTo(Short)`, `compareTo(Int)`, `compareTo(Long)`,
-    `compareTo(Float)` and `compareTo(Double)` functions ([#650]). 
-- The following declarations to the `Zero.Companion` **experimental** type:
-  - `PATTERN` property ([#658])
-  - `orNull(Any)` and `orThrow(Any)` functions ([#668]).
+    `compareTo(Float)` and `compareTo(Double)` functions ([#650])
+  - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()`, `toDouble()`
+    and `toChar()` functions ([#646]).
 - Samples to the documentation of the `Zero()` constructor ([7c8172d2]).
 
 ### ♻️ Changed
@@ -60,9 +58,9 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [@MartiPresa]: https://github.com/MartiPresa
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
-[#658]: https://github.com/kotools/types/issues/658
 [#663]: https://github.com/kotools/types/pull/663
 [#668]: https://github.com/kotools/types/issues/668
+[#676]: https://github.com/kotools/types/issues/676
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
