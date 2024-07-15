@@ -46,7 +46,7 @@ All notable changes to this project will be documented in this file.
 
 - The `kotools.types.web.EmailAddress` **deprecated** type from the
   **experimental** API ([#663]).
-- The `Zero.Companion` type ([#668] and [#676]).
+- The `Zero.Companion` **experimental** type ([#668] and [#676]).
 
 ---
 
