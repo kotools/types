@@ -3,6 +3,7 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.InvalidZeroRepresentation
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 
@@ -87,9 +88,7 @@ public class Zero {
     public constructor(number: Any) {
         val regex = Regex("""^[+-]?0+(?:\.0+)?$""")
         val numberMatchesRegex: Boolean = "$number".matches(regex)
-        require(numberMatchesRegex) {
-            "'$number' is not a valid representation of zero."
-        }
+        require(numberMatchesRegex) { InvalidZeroRepresentation(number) }
     }
 
     // -------------------- Structural equality operations ---------------------

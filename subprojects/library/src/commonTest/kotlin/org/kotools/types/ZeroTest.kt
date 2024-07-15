@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.InvalidZeroRepresentation
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -35,7 +36,8 @@ class ZeroTest {
             val exception: IllegalArgumentException =
                 assertFailsWith { Zero(it) }
             val actual: String? = exception.message
-            val expected = "'$it' is not a valid representation of zero."
+            val expected: String = InvalidZeroRepresentation(it)
+                .toString()
             assertEquals(expected, actual)
         }
 
