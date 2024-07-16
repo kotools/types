@@ -19,7 +19,6 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - The following declarations to the `Zero` **experimental** type:
-  - `Zero(Any)` constructor ([#676])
   - `compareTo(Byte)`, `compareTo(Short)`, `compareTo(Int)`, `compareTo(Long)`,
     `compareTo(Float)` and `compareTo(Double)` functions ([#650])
   - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()`, `toDouble()`
@@ -62,7 +61,6 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
 [#663]: https://github.com/kotools/types/pull/663
-[#676]: https://github.com/kotools/types/issues/676
 [#681]: https://github.com/kotools/types/issues/681
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
