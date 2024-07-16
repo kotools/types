@@ -11,6 +11,9 @@ import kotlin.jvm.JvmStatic
 /**
  * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
  *
+ * For creating an instance of this type, see its constructor or the additional
+ * factory functions provided by the [Zero.Companion] type.
+ *
  * @constructor Creates an instance of [Zero].
  *
  * <br>

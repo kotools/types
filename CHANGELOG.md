@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file.
   reference ([0a4258f3]).
 - Documentation of the `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and
   [fd003c4a]).
-- Documentation of the `Zero.Companion.fromByte(Byte)` and the
+- Documentation of the `Zero` type, the `Zero.Companion.fromByte(Byte)` and the
   `Zero.Companion.fromByteOrNull(Byte)` functions ([#681]).
 
 ### 🐛 Fixed
