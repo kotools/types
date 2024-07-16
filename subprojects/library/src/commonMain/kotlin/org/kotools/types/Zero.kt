@@ -3,9 +3,11 @@ package org.kotools.types
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.InvalidZeroRepresentation
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
+import kotlin.jvm.JvmStatic
 
 /** Represents the [zero](https://en.wikipedia.org/wiki/0) number. */
 @ExperimentalKotoolsTypesApi
@@ -568,4 +570,40 @@ public class Zero {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.valueAsByte.toString()
+
+    /** Contains static declarations for the [Zero] type. */
+    public companion object {
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.fromByte]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.fromByte]
+         * </details>
+         */
+        @JvmStatic
+        public fun fromByte(number: Byte): Zero {
+            val zero = Zero()
+            require(number == zero.valueAsByte) { InvalidZero(number) }
+            return zero
+        }
+    }
 }
