@@ -598,12 +598,50 @@ public class Zero {
          *
          * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.fromByte]
          * </details>
+         * <br>
+         *
+         * See the [fromByteOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [number].
          */
         @JvmStatic
         public fun fromByte(number: Byte): Zero {
             val zero = Zero()
             require(number == zero.valueAsByte) { InvalidZero(number) }
             return zero
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or returns
+         * `null` if calling the [fromByte] function with the [number] throws an
+         * [IllegalArgumentException].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.fromByteOrNull]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.fromByteOrNull]
+         * </details>
+         */
+        @JvmStatic
+        public fun fromByteOrNull(number: Byte): Zero? = try {
+            this.fromByte(number)
+        } catch (exception: IllegalArgumentException) {
+            null
         }
     }
 }

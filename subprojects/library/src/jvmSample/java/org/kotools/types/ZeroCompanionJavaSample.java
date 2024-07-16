@@ -17,4 +17,11 @@ class ZeroCompanionJavaSample {
         }
         Assertions.assertTrue(isSuccess);
     }
+
+    @Test
+    void fromByteOrNull() {
+        final byte number = 0;
+        final Zero zero = Zero.fromByteOrNull(number);
+        Assertions.assertNotNull(zero);
+    }
 }
