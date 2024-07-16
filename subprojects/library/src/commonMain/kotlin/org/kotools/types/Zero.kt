@@ -4,94 +4,41 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidZero
-import org.kotools.types.internal.InvalidZeroRepresentation
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 
-/** Represents the [zero](https://en.wikipedia.org/wiki/0) number. */
+/**
+ * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
+ *
+ * @constructor Creates an instance of [Zero].
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of calling this constructor from Kotlin code:
+ *
+ * SAMPLE: [org.kotools.types.ZeroCommonSample.primaryConstructor]
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Java</b>
+ * </summary>
+ *
+ * Here's an example of calling this constructor from Java code:
+ *
+ * SAMPLE: [org.kotools.types.ZeroJavaSample.primaryConstructor]
+ * </details>
+ */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public class Zero {
     private val valueAsByte: Byte = 0
-
-    /**
-     * Creates an instance of [Zero].
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this constructor from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.ZeroCommonSample.secondaryConstructor]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this constructor from Java code:
-     *
-     * SAMPLE: [org.kotools.types.ZeroJavaSample.secondaryConstructor]
-     * </details>
-     */
-    public constructor()
-
-    /**
-     * Creates an instance of [Zero] from the string representation of the
-     * specified [number], or throws an [IllegalArgumentException] if the string
-     * representation of [number] doesn't match the following pattern:
-     * `^[+-]?0+(?:\.0+)?$`.
-     *
-     * Here's the explanation associated to each symbol used in this
-     * pattern:
-     * - `^` **Beginning.** Matches the beginning of the string, or the
-     * beginning of a line if the multiline flag (**m**) is enabled.
-     * - `[]` **Character set.** Matches any character in the set.
-     * - `+` **Character.** Matches a "+" character (char code 43).
-     * - `-` **Character.** Matches a "-" character (char code 45).
-     * - `?` **Quantifier.** Match between 0 and 1 of the preceding token.
-     * - `0` **Character.** Matches a "0" character (char code 48).
-     * - `+` **Quantifier.** Match 1 or more of the preceding token.
-     * - `(?:)` **Non-capturing group.** Groups multiple tokens together
-     * without creating a capture group.
-     * - `\.` **Escaped character.** Matches a "." character (char code 46).
-     * - `$` **End.** Matches the end of the string, or the end of a line if
-     * the multiline flag (**m**) is enabled.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this constructor from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.ZeroCommonSample.constructorAny]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this constructor from Java code:
-     *
-     * SAMPLE: [org.kotools.types.ZeroJavaSample.constructorAny]
-     * </details>
-     */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-    public constructor(number: Any) {
-        val regex = Regex("""^[+-]?0+(?:\.0+)?$""")
-        val numberMatchesRegex: Boolean = "$number".matches(regex)
-        require(numberMatchesRegex) { InvalidZeroRepresentation(number) }
-    }
 
     // -------------------- Structural equality operations ---------------------
 

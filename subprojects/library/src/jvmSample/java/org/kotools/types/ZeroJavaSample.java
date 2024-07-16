@@ -6,21 +6,8 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroJavaSample {
     @Test
-    void secondaryConstructor() {
+    void primaryConstructor() {
         new Zero();
-    }
-
-    @Test
-    void constructorAny() {
-        final Object number = "0.000";
-        boolean isSuccess;
-        try {
-            new Zero(number);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
     }
 
     // -------------------- Structural equality operations ---------------------

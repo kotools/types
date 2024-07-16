@@ -26,11 +26,10 @@ internal object ZeroAsByteSerializer : KSerializer<Zero> {
 
     override fun deserialize(decoder: Decoder): Zero {
         val decodedValue: Byte = decoder.decodeByte()
-        return try {
-            Zero(decodedValue)
-        } catch (exception: IllegalArgumentException) {
-            val error = InvalidZero(decodedValue)
-            throw SerializationException("$error")
-        }
+        val zero: Zero? = Zero.fromByteOrNull(decodedValue)
+        if (zero != null) return zero
+        val message: String = InvalidZero(decodedValue)
+            .toString()
+        throw SerializationException(message)
     }
 }
