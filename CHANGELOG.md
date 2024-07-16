@@ -28,12 +28,14 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
+- All samples from the API reference now use assertions instead of printing
+  values ([#641]).
 - Kotlin and Java samples of the
   `StrictlyNegativeDouble.Companion.create(Number)` function in the API
   reference ([0a4258f3]).
 - Documentation of the `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and
   [fd003c4a]).
-- Documentation and samples of the `Zero.Companion.fromByte(Byte)` and the
+- Documentation of the `Zero.Companion.fromByte(Byte)` and the
   `Zero.Companion.fromByteOrNull(Byte)` functions ([#681]).
 
 ### 🐛 Fixed
@@ -48,7 +50,6 @@ All notable changes to this project will be documented in this file.
 
 - The `kotools.types.web.EmailAddress` **deprecated** type from the
   **experimental** API ([#663]).
-- The `Zero.Companion` **experimental** type ([#668] and [#676]).
 
 ---
 
@@ -57,10 +58,10 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [@MartiPresa]: https://github.com/MartiPresa
+[#641]: https://github.com/kotools/types/issues/641
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
 [#663]: https://github.com/kotools/types/pull/663
-[#668]: https://github.com/kotools/types/issues/668
 [#676]: https://github.com/kotools/types/issues/676
 [#681]: https://github.com/kotools/types/issues/681
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
