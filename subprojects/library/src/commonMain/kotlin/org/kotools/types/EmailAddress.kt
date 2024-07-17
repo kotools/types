@@ -12,9 +12,8 @@ import kotlin.jvm.JvmStatic
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
  *
- * You can use the [EmailAddress.Companion.fromString] or the
- * [EmailAddress.Companion.fromStringOrNull] functions for creating an instance
- * of this type.
+ * For creating an instance of this type, see the factory functions provided by
+ * the [EmailAddress.Companion] type.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
