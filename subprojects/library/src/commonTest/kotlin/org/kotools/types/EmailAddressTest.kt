@@ -75,14 +75,6 @@ class EmailAddressTest {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
-    private val invalidTexts: List<Any> = listOf(
-        Values.MISSING_AT_SIGN,
-        Values.MISSING_DOMAIN_DOT,
-        Values.WHITESPACES_IN_LOCAL_PART,
-        Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL,
-        Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-    )
-
     @Test
     fun patternShouldPass() {
         val actual: String = EmailAddress.PATTERN
@@ -236,19 +228,6 @@ class EmailAddressCompanionTest {
         val pattern: Any = """^[a-z]+\.[a-z]+$"""
         val actual: EmailAddress? =
             EmailAddress.fromStringOrNull(value, pattern)
-        assertNull(actual)
-    }
-
-    @Test
-    fun orNullAnyShouldPassWithValidText() {
-        val text: Any = Values.VALID
-        val actual: EmailAddress? = EmailAddress.orNull(text)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun orNullAnyShouldFailWithInvalidText(): Unit = this.invalidTexts.forEach {
-        val actual: EmailAddress? = EmailAddress.orNull(it)
         assertNull(actual)
     }
 }
