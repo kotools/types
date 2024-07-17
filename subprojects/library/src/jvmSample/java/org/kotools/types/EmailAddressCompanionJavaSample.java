@@ -69,18 +69,4 @@ class EmailAddressCompanionJavaSample {
         final EmailAddress emailAddress = EmailAddress.orNull(text, pattern);
         Assertions.assertNotNull(emailAddress);
     }
-
-    @Test
-    void orThrowAnyAny() {
-        final Object text = "contact@kotools.org";
-        final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
-        boolean isSuccess;
-        try {
-            EmailAddress.orThrow(text, pattern);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
 }
