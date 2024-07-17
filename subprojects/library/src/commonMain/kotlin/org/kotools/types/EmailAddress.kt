@@ -365,47 +365,6 @@ public class EmailAddress private constructor(private val text: String) {
         public fun orNull(text: Any): EmailAddress? =
             this.orNull(text, this.PATTERN)
 
-        /**
-         * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [text].
-         * Returns `null` if the string representation of the specified
-         * [pattern] doesn't match the [default one][PATTERN], or if the string
-         * representation of [text] doesn't match the string representation of
-         * [pattern].
-         *
-         * <br>
-         * <details open>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullAnyAny]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orNullAnyAny]
-         * </details>
-         */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-        @JvmStatic
-        public fun orNull(text: Any, pattern: Any): EmailAddress? {
-            val patternAsString = "$pattern"
-            val defaultRegex = Regex(this.PATTERN)
-            val patternMatchesDefaultRegex: Boolean =
-                patternAsString matches defaultRegex
-            if (!patternMatchesDefaultRegex) return null
-            return this.orNull(text, patternAsString)
-        }
-
         private fun orNull(text: Any, pattern: String): EmailAddress? {
             val valueAsString = "$text"
             val regex = Regex(pattern)
