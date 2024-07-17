@@ -277,26 +277,6 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun orThrowAnyShouldPassWithValidText() {
-        val text: Any = Values.VALID
-        EmailAddress.orThrow(text)
-    }
-
-    @Test
-    fun orThrowAnyShouldFailWithInvalidText(): Unit =
-        this.invalidTexts.forEach {
-            val exception: IllegalArgumentException = assertFailsWith {
-                EmailAddress.orThrow(it)
-            }
-            val actual: String? = exception.message
-            val expected: String = InvalidEmailAddress(
-                "$it",
-                EmailAddress.PATTERN
-            ).toString()
-            assertEquals(expected, actual)
-        }
-
-    @Test
     fun orThrowAnyAnyShouldPassWithValidTextAndPattern() {
         val text: Any = Values.VALID
         val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""
