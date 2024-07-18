@@ -580,6 +580,9 @@ public class Zero {
          *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [fromByte] function for throwing an exception instead of
+         * returning `null` in case of invalid [number].
          */
         @JvmSynthetic
         public fun fromByteOrNull(number: Byte): Zero? = try {
