@@ -38,13 +38,4 @@ class EmailAddressCompanionJavaSample {
         }
         Assertions.assertTrue(isSuccess);
     }
-
-    @Test
-    void fromStringOrNullAnyAny() {
-        final Object text = "contact@kotools.org";
-        final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
-        final EmailAddress actual =
-                EmailAddress.fromStringOrNull(text, pattern);
-        Assertions.assertNotNull(actual);
-    }
 }

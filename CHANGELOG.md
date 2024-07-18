@@ -56,8 +56,8 @@ All notable changes to this project will be documented in this file.
   **experimental** API ([#663]).
 - Availability of the `Zero.Companion.fromByteOrNull(Byte)` **experimental**
   function from Java code ([#683]).
-- Availability of the `EmailAddress.Companion.fromStringOrNull(Any)`
-  **experimental** function from Java code ([#684]).
+- Availability of the `EmailAddress.Companion.fromStringOrNull` **experimental**
+  functions from Java code ([#684]).
 
 ---
 
