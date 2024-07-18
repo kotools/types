@@ -184,8 +184,8 @@ public class EmailAddress private constructor(private val text: String) {
          * </details>
          * <br>
          *
-         * You can use the [fromStringOrNull] function for returning `null`
-         * instead of throwing an exception in case of invalid [text].
+         * See the [fromStringOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [text].
          */
         @JvmStatic
         public fun fromString(text: Any): EmailAddress =
@@ -222,9 +222,8 @@ public class EmailAddress private constructor(private val text: String) {
          * </details>
          * <br>
          *
-         * You can use the [fromStringOrNull] function for returning `null`
-         * instead of throwing an exception in case of invalid [text] or
-         * [pattern].
+         * See the [fromStringOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [text] or [pattern].
          */
         @JvmStatic
         public fun fromString(text: Any, pattern: Any): EmailAddress {

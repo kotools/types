@@ -40,7 +40,8 @@ All notable changes to this project will be documented in this file.
   [fd003c4a]).
 - Documentation of the `Zero` type, the `Zero.Companion.fromByte(Byte)` and the
   `Zero.Companion.fromByteOrNull(Byte)` functions ([#681] and [ccaaa3a28]).
-- Documentation of the `EmailAddress` type ([f1ac24ca8]).
+- Documentation of the `EmailAddress` type ([f1ac24ca8]) and the
+  `EmailAddress.Companion.fromString` functions.
 
 ### 🐛 Fixed
 
