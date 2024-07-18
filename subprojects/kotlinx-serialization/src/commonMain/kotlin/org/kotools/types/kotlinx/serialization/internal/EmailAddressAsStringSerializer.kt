@@ -24,10 +24,10 @@ internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
         .let(encoder::encodeString)
 
     override fun deserialize(decoder: Decoder): EmailAddress {
-        val decodedValue: String = decoder.decodeString()
-        val address: EmailAddress? = EmailAddress.fromStringOrNull(decodedValue)
+        val text: String = decoder.decodeString()
+        val address: EmailAddress? = EmailAddress.fromStringOrNull(text)
         if (address != null) return address
-        val exception = InvalidEmailAddress(decodedValue, EmailAddress.PATTERN)
+        val exception = InvalidEmailAddress(text, EmailAddress.PATTERN)
         throw SerializationException("$exception")
     }
 }

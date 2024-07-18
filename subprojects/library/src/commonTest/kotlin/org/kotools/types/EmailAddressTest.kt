@@ -164,43 +164,43 @@ class EmailAddressCompanionTest {
 
     @Test
     fun fromStringOrNullAnyShouldPassWithValidValue() {
-        val value: Any = Values.VALID
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
+        val text: Any = Values.VALID
+        val actual: EmailAddress? = EmailAddress.fromStringOrNull(text)
         assertNotNull(actual)
     }
 
     @Test
     fun fromStringOrNullAnyShouldFailWithMissingAtSign() {
-        val value: Any = Values.MISSING_AT_SIGN
-        this.fromStringOrNullShouldFailWith(value)
+        val text: Any = Values.MISSING_AT_SIGN
+        this.fromStringOrNullShouldFailWith(text)
     }
 
     @Test
     fun fromStringOrNullAnyShouldFailWithMissingDotInDomain() {
-        val value: Any = Values.MISSING_DOMAIN_DOT
-        this.fromStringOrNullShouldFailWith(value)
+        val text: Any = Values.MISSING_DOMAIN_DOT
+        this.fromStringOrNullShouldFailWith(text)
     }
 
     @Test
     fun fromStringOrNullAnyShouldFailWithWhitespacesInLocalPart() {
-        val value: Any = Values.WHITESPACES_IN_LOCAL_PART
-        this.fromStringOrNullShouldFailWith(value)
+        val text: Any = Values.WHITESPACES_IN_LOCAL_PART
+        this.fromStringOrNullShouldFailWith(text)
     }
 
     @Test
     fun fromStringOrNullAnyShouldFailWithWhitespacesInDomainFirstLabel() {
-        val value: Any = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        this.fromStringOrNullShouldFailWith(value)
+        val text: Any = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
+        this.fromStringOrNullShouldFailWith(text)
     }
 
     @Test
     fun fromStringOrNullAnyShouldFailWithWhitespacesInDomainSecondLabel() {
-        val value: Any = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-        this.fromStringOrNullShouldFailWith(value)
+        val text: Any = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
+        this.fromStringOrNullShouldFailWith(text)
     }
 
-    private fun fromStringOrNullShouldFailWith(value: Any) {
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
+    private fun fromStringOrNullShouldFailWith(text: Any) {
+        val actual: EmailAddress? = EmailAddress.fromStringOrNull(text)
         assertNull(actual)
     }
 

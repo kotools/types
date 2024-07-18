@@ -27,8 +27,9 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
-- The `value` parameter of the `EmailAddress.Companion.fromString`
-  **experimental** functions renamed as `text` ([#682]).
+- The `value` parameter of the `EmailAddress.Companion.fromString` and the
+  `EmailAddress.Companion.fromStringOrNull` **experimental** functions, which
+  was renamed as `text` ([#682]).
   This is an **incompatible source change**.
 - Samples in the API reference for using assertions instead of printing values
   ([#641]).

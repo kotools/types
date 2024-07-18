@@ -41,8 +41,8 @@ class EmailAddressCompanionJavaSample {
 
     @Test
     void fromStringOrNullAny() {
-        final Object value = "contact@kotools.org";
-        final EmailAddress actual = EmailAddress.fromStringOrNull(value);
+        final Object text = "contact@kotools.org";
+        final EmailAddress actual = EmailAddress.fromStringOrNull(text);
         Assertions.assertNotNull(actual);
     }
 

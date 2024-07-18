@@ -42,8 +42,8 @@ class EmailAddressCompanionCommonSample {
 
     @Test
     fun fromStringOrNullAny() {
-        val value: Any = "contact@kotools.org"
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(value)
+        val text: Any = "contact@kotools.org"
+        val actual: EmailAddress? = EmailAddress.fromStringOrNull(text)
         assertNotNull(actual)
     }
 
