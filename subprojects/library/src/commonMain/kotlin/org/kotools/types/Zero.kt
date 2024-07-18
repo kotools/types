@@ -7,6 +7,7 @@ import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents the [zero](https://en.wikipedia.org/wiki/0) number.
@@ -575,19 +576,12 @@ public class Zero {
          *
          * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.fromByteOrNull]
          * </details>
-         *
          * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
          *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.fromByteOrNull]
-         * </details>
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          */
-        @JvmStatic
+        @JvmSynthetic
         public fun fromByteOrNull(number: Byte): Zero? = try {
             this.fromByte(number)
         } catch (exception: IllegalArgumentException) {

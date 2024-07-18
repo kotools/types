@@ -54,6 +54,8 @@ All notable changes to this project will be documented in this file.
 
 - The `kotools.types.web.EmailAddress` **deprecated** type from the
   **experimental** API ([#663]).
+- Availability of the `Zero.Companion.fromByteOrNull(Byte)` **experimental**
+  function from Java code ([#683]).
 
 ---
 
@@ -68,6 +70,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#663]: https://github.com/kotools/types/pull/663
 [#681]: https://github.com/kotools/types/issues/681
 [#682]: https://github.com/kotools/types/issues/682
+[#683]: https://github.com/kotools/types/issues/683
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
