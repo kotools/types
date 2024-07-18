@@ -40,13 +40,6 @@ class EmailAddressCompanionJavaSample {
     }
 
     @Test
-    void fromStringOrNullAny() {
-        final Object text = "contact@kotools.org";
-        final EmailAddress actual = EmailAddress.fromStringOrNull(text);
-        Assertions.assertNotNull(actual);
-    }
-
-    @Test
     void fromStringOrNullAnyAny() {
         final Object text = "contact@kotools.org";
         final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";

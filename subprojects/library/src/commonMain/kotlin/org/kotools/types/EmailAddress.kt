@@ -8,6 +8,7 @@ import org.kotools.types.internal.InvalidEmailAddressPattern
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
@@ -250,7 +251,7 @@ public class EmailAddress private constructor(private val text: String) {
          * [default pattern][PATTERN].
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>
@@ -259,23 +260,15 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringOrNullAny]
          * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringOrNullAny]
-         * </details>
          * <br>
          *
-         * You can use the [fromString] function for throwing an exception
-         * instead of returning `null` in case of invalid [text].
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [fromString] function for throwing an exception instead of
+         * returning `null` in case of invalid [text].
          */
-        @JvmStatic
+        @JvmSynthetic
         public fun fromStringOrNull(text: Any): EmailAddress? =
             this.fromStringOrNull(text, this.PATTERN)
 
