@@ -281,8 +281,8 @@ public class EmailAddress private constructor(private val text: String) {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [value].
-         * Returns `null` if the string representation of [value] doesn't match
+         * of the specified [text].
+         * Returns `null` if the string representation of [text] doesn't match
          * the string representation of the specified [pattern], or if the
          * string representation of [pattern] doesn't match the
          * [default pattern][PATTERN].
@@ -311,14 +311,14 @@ public class EmailAddress private constructor(private val text: String) {
          * <br>
          *
          * You can use the [fromString] function for throwing an exception
-         * instead of returning `null` in case of invalid [value] or [pattern].
+         * instead of returning `null` in case of invalid [text] or [pattern].
          */
         @JvmStatic
-        public fun fromStringOrNull(value: Any, pattern: Any): EmailAddress? {
+        public fun fromStringOrNull(text: Any, pattern: Any): EmailAddress? {
             val patternAsString: String = pattern.toString()
             val defaultRegex = Regex(PATTERN)
             if (!patternAsString.matches(defaultRegex)) return null
-            return fromStringOrNull(value, patternAsString)
+            return fromStringOrNull(text, patternAsString)
         }
 
         private fun fromStringOrNull(

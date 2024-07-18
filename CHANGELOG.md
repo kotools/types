@@ -27,9 +27,9 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
-- The `value` parameter of the `fromString(Any)`, the `fromString(Any, Any)` and
-  the `fromStringOrNull(Any)` functions, from the `EmailAddress.Companion`
-  **experimental** type, which was renamed as `text` ([#682]).
+- The `value` parameter of the `fromString` and the `fromStringOrNull` functions
+  from the `EmailAddress.Companion` **experimental** type, that is now named
+  `text` ([#682]).
   This is an **incompatible source change**.
 - Samples in the API reference for using assertions instead of printing values
   ([#641]).
