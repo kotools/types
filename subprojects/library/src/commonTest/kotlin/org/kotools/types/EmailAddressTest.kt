@@ -29,18 +29,18 @@ class EmailAddressTest {
 
     @Test
     fun equalsShouldPassWithEmailAddressHavingSameStringRepresentation() {
-        val value: Any = Values.VALID
-        val first: EmailAddress = EmailAddress.fromString(value)
-        val second: Any = EmailAddress.fromString(value)
+        val text: Any = Values.VALID
+        val first: EmailAddress = EmailAddress.fromString(text)
+        val second: Any = EmailAddress.fromString(text)
         val actual: Boolean = first.equals(second)
         assertTrue(actual)
     }
 
     @Test
     fun equalsShouldFailWithAnotherTypeThanEmailAddress() {
-        val value: Any = Values.VALID
-        val first: EmailAddress = EmailAddress.fromString(value)
-        val second: Any = value
+        val text: Any = Values.VALID
+        val first: EmailAddress = EmailAddress.fromString(text)
+        val second: Any = text
         val actual: Boolean = first.equals(second)
         assertFalse(actual)
     }
@@ -55,10 +55,10 @@ class EmailAddressTest {
 
     @Test
     fun hashCodeShouldPass() {
-        val value = "contact@kotools.org"
-        val actual: Int = EmailAddress.fromString(value)
+        val text = "contact@kotools.org"
+        val actual: Int = EmailAddress.fromString(text)
             .hashCode()
-        val expected: Int = hashCodeOf(value)
+        val expected: Int = hashCodeOf(text)
         assertEquals(expected, actual)
     }
 
@@ -66,10 +66,10 @@ class EmailAddressTest {
 
     @Test
     fun toStringShouldPass() {
-        val value: Any = Values.VALID
-        val address: EmailAddress = EmailAddress.fromString(value)
+        val text: Any = Values.VALID
+        val address: EmailAddress = EmailAddress.fromString(text)
         val actual: String = address.toString()
-        assertEquals(expected = value, actual)
+        assertEquals(expected = text, actual)
     }
 }
 
@@ -84,9 +84,9 @@ class EmailAddressCompanionTest {
 
     @Test
     fun fromStringAnyShouldPassWithValidValue() {
-        val value: Any = Values.VALID
+        val text: Any = Values.VALID
         val actual: Result<EmailAddress> = kotlin.runCatching {
-            EmailAddress.fromString(value)
+            EmailAddress.fromString(text)
         }
         assertTrue(actual.isSuccess)
     }
@@ -111,12 +111,12 @@ class EmailAddressCompanionTest {
     fun fromStringAnyShouldFailWithWhitespacesInDomainSecondLabel(): Unit =
         this.fromStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
 
-    private fun fromStringShouldFailWith(value: Any) {
+    private fun fromStringShouldFailWith(text: Any) {
         val exception: IllegalArgumentException = assertFailsWith {
-            EmailAddress.fromString(value)
+            EmailAddress.fromString(text)
         }
         val actual: String? = exception.message
-        val valueAsString: String = value.toString()
+        val valueAsString: String = text.toString()
         val expected: String = InvalidEmailAddress(
             text = valueAsString,
             pattern = EmailAddress.PATTERN

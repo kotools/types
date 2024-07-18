@@ -14,10 +14,10 @@ class EmailAddressCompanionJavaSample {
 
     @Test
     void fromStringAny() {
-        final Object value = "contact@kotools.org";
+        final Object text = "contact@kotools.org";
         boolean isSuccess;
         try {
-            EmailAddress.fromString(value);
+            EmailAddress.fromString(text);
             isSuccess = true;
         } catch (final IllegalArgumentException exception) {
             isSuccess = false;

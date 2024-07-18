@@ -37,22 +37,22 @@ class EmailAddressAsStringSerializerTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun serialization_should_behave_like_for_the_String_type() {
-        val value = "contact@kotools.org"
-        val address: EmailAddress = EmailAddress.fromString(value)
+        val text = "contact@kotools.org"
+        val address: EmailAddress = EmailAddress.fromString(text)
         val actual: String =
             Json.encodeToString(EmailAddressAsStringSerializer, address)
-        val expected: String = Json.encodeToString(value)
+        val expected: String = Json.encodeToString(text)
         assertEquals(expected, actual)
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserialization_should_pass_with_a_valid_String() {
-        val value = "contact@kotools.org"
-        val encoded: String = Json.encodeToString(value)
+        val text = "contact@kotools.org"
+        val encoded: String = Json.encodeToString(text)
         val actual: EmailAddress =
             Json.decodeFromString(EmailAddressAsStringSerializer, encoded)
-        val expected: EmailAddress = EmailAddress.fromString(value)
+        val expected: EmailAddress = EmailAddress.fromString(text)
         assertEquals(expected, actual)
     }
 

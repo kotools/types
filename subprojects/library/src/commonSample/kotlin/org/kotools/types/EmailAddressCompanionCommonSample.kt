@@ -17,9 +17,9 @@ class EmailAddressCompanionCommonSample {
 
     @Test
     fun fromStringAny() {
-        val value: Any = "contact@kotools.org"
+        val text: Any = "contact@kotools.org"
         val isSuccess: Boolean = try {
-            EmailAddress.fromString(value)
+            EmailAddress.fromString(text)
             true
         } catch (exception: IllegalArgumentException) {
             false

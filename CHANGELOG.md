@@ -27,6 +27,9 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
+- The `value` parameter of the `EmailAddress.Companion.fromString(Any)`
+  **experimental** function renamed as `text` ([#682]).
+  This is an **incompatible source change**.
 - Samples in the API reference for using assertions instead of printing values
   ([#641]).
 - Kotlin and Java samples of the
@@ -63,6 +66,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#650]: https://github.com/kotools/types/issues/650
 [#663]: https://github.com/kotools/types/pull/663
 [#681]: https://github.com/kotools/types/issues/681
+[#682]: https://github.com/kotools/types/issues/682
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
