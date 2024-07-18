@@ -80,9 +80,17 @@ public value class NotBlankString private constructor(
      * Concatenates this string with the string representation of the [other]
      * object.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.text.NotBlankStringCommonSample.plusOperator]
+     * </details>
+     * <br>
      *
      * The [NotBlankString] type being an
      * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -105,9 +113,17 @@ public value class NotBlankString private constructor(
          * specified [value], or throws an [IllegalArgumentException] if its
          * string representation is [blank][String.isBlank].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.create]
+         * </details>
+         * <br>
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -132,9 +148,17 @@ public value class NotBlankString private constructor(
          * specified [value], or returns `null` if its string representation is
          * [blank][String.isBlank].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.createOrNull]
+         * </details>
+         * <br>
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),

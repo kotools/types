@@ -55,7 +55,7 @@ public class StrictlyNegativeDouble private constructor(
      * otherwise.
      *
      * <br/>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -84,7 +84,7 @@ public class StrictlyNegativeDouble private constructor(
      * Returns a hash code value for this floating-point number.
      *
      * <br/>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -114,7 +114,7 @@ public class StrictlyNegativeDouble private constructor(
      * Returns this floating-point number as [Double].
      *
      * <br/>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -141,7 +141,7 @@ public class StrictlyNegativeDouble private constructor(
      * Returns the string representation of this floating-point number.
      *
      * <br/>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -176,7 +176,7 @@ public class StrictlyNegativeDouble private constructor(
          * zero.
          *
          * <br/>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>
@@ -215,7 +215,7 @@ public class StrictlyNegativeDouble private constructor(
          * is greater than or equals zero.
          *
          * <br/>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>

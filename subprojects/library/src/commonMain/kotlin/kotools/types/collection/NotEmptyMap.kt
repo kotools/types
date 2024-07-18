@@ -22,9 +22,16 @@ import kotlin.jvm.JvmSynthetic
  * Creates a [NotEmptyMap] starting with a [head] and containing all the entries
  * of the optional [tail].
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.notEmptyMapOf]
+ * </details>
  */
 @Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
@@ -41,9 +48,17 @@ public fun <K, V> notEmptyMapOf(
  * or returns an encapsulated [IllegalArgumentException] if this map is
  * [empty][Map.isEmpty].
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMap]
+ * </details>
+ * <br>
  *
  * Please note that changes made to the original map will not be reflected on
  * the resulting [NotEmptyMap].
@@ -91,9 +106,17 @@ public value class NotEmptyMap<K, out V> private constructor(
          * [map], or throws an [IllegalArgumentException] if the [map] is
          * [empty][Map.isEmpty].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example for calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createWithMap]
+         * </details>
+         * <br>
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -120,9 +143,17 @@ public value class NotEmptyMap<K, out V> private constructor(
          * Creates a [NotEmptyMap] containing all the entries of the specified
          * [map], or returns `null` if the [map] is [empty][Map.isEmpty].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example for calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createOrNullWithMap]
+         * </details>
+         * <br>
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -149,9 +180,17 @@ public value class NotEmptyMap<K, out V> private constructor(
          * Creates a [NotEmptyMap] starting with the [head] and containing all
          * the entries of the optional [tail].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.of]
+         * </details>
+         * <br>
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -183,9 +222,16 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The first entry of this map.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.head]
+     * </details>
      */
     public val head: Pair<K, V>
         get() = delegate.entries.first()
@@ -194,9 +240,16 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All entries of this map except [the first one][head].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.tail]
+     * </details>
      */
     public val tail: NotEmptyMap<K, V>?
         get() {
@@ -209,9 +262,16 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All entries of this map.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.entries]
+     * </details>
      */
     public val entries: NotEmptySet<Map.Entry<K, V>>
         get() = delegate.entries.toNotEmptySet()
@@ -220,9 +280,16 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All keys of this map.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.keys]
+     * </details>
      */
     public val keys: NotEmptySet<K>
         get() = delegate.keys.toNotEmptySet()
@@ -231,9 +298,16 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * All values of this map.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.values]
+     * </details>
      */
     public val values: NotEmptyList<V>
         get() = delegate.values.toNotEmptyList()
@@ -242,9 +316,16 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * The size of this map.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.size]
+     * </details>
      */
     public val size: StrictlyPositiveInt
         get() = delegate.size.toStrictlyPositiveInt()
@@ -254,9 +335,16 @@ public value class NotEmptyMap<K, out V> private constructor(
      * Returns all entries of this map as a [Map] with keys of type [K] and
      * values of type [V].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.toMap]
+     * </details>
      */
     public fun toMap(): Map<K, V> = delegate
 
@@ -266,9 +354,16 @@ public value class NotEmptyMap<K, out V> private constructor(
      * This function should behave like calling the [Any.toString] function on
      * a [Map] with keys of type [K] and values of type [V].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.toStringOverride]
+     * </details>
      */
     override fun toString(): String = "$delegate"
 }

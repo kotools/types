@@ -51,7 +51,7 @@ public class Zero {
      * `false` otherwise.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -79,7 +79,7 @@ public class Zero {
      * Returns a hash code value for this number.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -112,7 +112,7 @@ public class Zero {
      * the [other] one.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -144,7 +144,7 @@ public class Zero {
      * the [other] one.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -176,7 +176,7 @@ public class Zero {
      * the [other] one.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -208,7 +208,7 @@ public class Zero {
      * the [other] one.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -240,7 +240,7 @@ public class Zero {
      * the [other] one.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -272,7 +272,7 @@ public class Zero {
      * the [other] one.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -303,7 +303,7 @@ public class Zero {
      * Returns this number as [Byte].
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -330,7 +330,7 @@ public class Zero {
      * Returns this number as [Short].
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -358,7 +358,7 @@ public class Zero {
      * Returns this number as [Int].
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -386,7 +386,7 @@ public class Zero {
      * Returns this number as [Long].
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -414,7 +414,7 @@ public class Zero {
      * Returns this number as [Float].
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -442,7 +442,7 @@ public class Zero {
      * Returns this number as [Double].
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -470,7 +470,7 @@ public class Zero {
      * Returns the character representation of this number.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -498,7 +498,7 @@ public class Zero {
      * Returns the string representation of this number.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>

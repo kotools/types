@@ -83,7 +83,7 @@ public sealed interface NonZeroInt : AnyInt {
          * the [number] equals zero.
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>
@@ -122,7 +122,7 @@ public sealed interface NonZeroInt : AnyInt {
          * zero.
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>

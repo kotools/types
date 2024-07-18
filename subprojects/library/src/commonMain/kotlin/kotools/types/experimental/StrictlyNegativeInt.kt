@@ -12,9 +12,17 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Returns the negative of this integer number.
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.experimental.StrictlyNegativeIntCommonSample.unaryMinusOperator]
+ * </details>
+ * <br>
  *
  * Please note that this function is not available yet for Java users.
  */

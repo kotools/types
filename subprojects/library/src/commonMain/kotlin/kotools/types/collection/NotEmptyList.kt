@@ -20,9 +20,17 @@ import kotlin.jvm.JvmSynthetic
  * Creates a [NotEmptyList] starting with a [head] and containing all the
  * elements of the optional [tail].
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.notEmptyListOf]
+ * </details>
+ * <br>
  *
  * The [NotEmptyList] type being an
  * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
@@ -40,18 +48,26 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * collection, or returns an encapsulated [IllegalArgumentException] if this
  * collection is [empty][Collection.isEmpty].
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnCollection]
+ * </details>
+ * <br>
+ *
+ * The [NotEmptyList] type being an
+ * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
+ * not recommended to call this function from Java code.
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptyList].
  *
  * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnMutableCollection]
- *
- * The [NotEmptyList] type being an
- * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
- * not recommended to call this function from Java code.
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
@@ -99,9 +115,16 @@ public value class NotEmptyList<out E> private constructor(
     /**
      * Returns all elements of this list as a [List] of type [E].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.toList]
+     * </details>
      */
     public fun toList(): List<E> = elements
 
@@ -114,9 +137,17 @@ public value class NotEmptyList<out E> private constructor(
          * [collection], or throws an [IllegalArgumentException] if the
          * [collection] is [empty][Collection.isEmpty].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createWithCollection]
+         * </details>
+         * <br>
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -144,9 +175,17 @@ public value class NotEmptyList<out E> private constructor(
          * [collection], or returns `null` if the [collection] is
          * [empty][Collection.isEmpty].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithCollection]
+         * </details>
+         * <br>
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -176,9 +215,17 @@ public value class NotEmptyList<out E> private constructor(
          * Creates a [NotEmptyList] starting with a [head] and containing all
          * the elements of the optional [tail].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.of]
+         * </details>
+         * <br>
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),

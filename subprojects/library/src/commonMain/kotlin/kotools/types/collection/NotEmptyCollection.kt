@@ -14,18 +14,32 @@ public sealed interface NotEmptyCollection<out E> {
     /**
      * The first element of this collection.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.head]
+     * </details>
      */
     public val head: E
 
     /**
      * All elements of this collection except the [first one][head].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.tail]
+     * </details>
      */
     public val tail: NotEmptyCollection<E>? get() = null
 
@@ -41,9 +55,16 @@ public sealed interface NotEmptyCollection<out E> {
      * Implementations of this function should behave like calling the
      * [Any.toString] function on an [Iterable].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.toStringOverride]
+     * </details>
      */
     override fun toString(): String
 }

@@ -16,7 +16,7 @@ import kotlin.jvm.JvmName
  * Creates an instance of [AnyInt] with the specified [value].
  *
  * <br>
- * <details open>
+ * <details>
  * <summary>
  *     <b>Calling from Kotlin</b>
  * </summary>

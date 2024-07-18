@@ -87,9 +87,17 @@ public value class StrictlyNegativeInt private constructor(
          * [IllegalArgumentException] if the [number] is greater than or equals
          * zero.
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeIntCompanionCommonSample.create]
+         * </details>
+         * <br>
          *
          * The [StrictlyNegativeInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -112,9 +120,17 @@ public value class StrictlyNegativeInt private constructor(
          * may involve rounding or truncation, or returns `null` if the [number]
          * is greater than or equals zero.
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeIntCompanionCommonSample.createOrNull]
+         * </details>
+         * <br>
          *
          * The [StrictlyNegativeInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),

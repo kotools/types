@@ -78,7 +78,7 @@ public sealed interface NegativeInt : AnyInt {
          * [IllegalArgumentException] if the [number] is greater than zero.
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>
@@ -117,7 +117,7 @@ public sealed interface NegativeInt : AnyInt {
          * greater than zero.
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>

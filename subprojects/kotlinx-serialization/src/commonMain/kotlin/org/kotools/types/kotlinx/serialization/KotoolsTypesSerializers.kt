@@ -22,9 +22,16 @@ public object KotoolsTypesSerializers {
     /**
      * Returns the module for serializing all types.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.all]
+     * </details>
      */
     public val all: SerializersModule
         get() = SerializersModule {
@@ -35,9 +42,16 @@ public object KotoolsTypesSerializers {
     /**
      * Returns the module for serializing the [EmailAddress] type.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.emailAddress]
+     * </details>
      */
     public val emailAddress: SerializersModule
         get() = SerializersModule {
@@ -47,9 +61,16 @@ public object KotoolsTypesSerializers {
     /**
      * Returns the module for serializing the [Zero] type.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this property from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.zero]
+     * </details>
      */
     public val zero: SerializersModule
         get() = SerializersModule { contextual(ZeroAsByteSerializer) }
@@ -57,9 +78,16 @@ public object KotoolsTypesSerializers {
     /**
      * Returns the string representation of this object.
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.toStringOverride]
+     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String =

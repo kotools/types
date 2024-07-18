@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
   `text` ([#682]).
   This is an **incompatible source change**.
 - Samples in the API reference for using assertions instead of printing values
-  ([#641]).
+  ([#641]) and collapsing them by default ([#678]).
 - Kotlin and Java samples of the
   `StrictlyNegativeDouble.Companion.create(Number)` function in the API
   reference ([0a4258f3]).
@@ -70,6 +70,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#646]: https://github.com/kotools/types/issues/646
 [#650]: https://github.com/kotools/types/issues/650
 [#663]: https://github.com/kotools/types/pull/663
+[#678]: https://github.com/kotools/types/issues/678
 [#681]: https://github.com/kotools/types/issues/681
 [#682]: https://github.com/kotools/types/issues/682
 [#683]: https://github.com/kotools/types/issues/683

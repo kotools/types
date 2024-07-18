@@ -27,7 +27,7 @@ public class EmailAddress private constructor(private val text: String) {
      * `false` otherwise.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -56,7 +56,7 @@ public class EmailAddress private constructor(private val text: String) {
      * Returns a hash code value for this email address.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -86,7 +86,7 @@ public class EmailAddress private constructor(private val text: String) {
      * Returns the string representation of this email address.
      *
      * <br>
-     * <details open>
+     * <details>
      * <summary>
      *     <b>Calling from Kotlin</b>
      * </summary>
@@ -132,7 +132,7 @@ public class EmailAddress private constructor(private val text: String) {
          * the multiline flag (**m**) is enabled.
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>
@@ -162,7 +162,7 @@ public class EmailAddress private constructor(private val text: String) {
          * [default pattern][PATTERN].
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>
@@ -200,7 +200,7 @@ public class EmailAddress private constructor(private val text: String) {
          * the [default pattern][PATTERN].
          *
          * <br>
-         * <details open>
+         * <details>
          * <summary>
          *     <b>Calling from Kotlin</b>
          * </summary>

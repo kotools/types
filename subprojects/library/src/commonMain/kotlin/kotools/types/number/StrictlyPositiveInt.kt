@@ -87,9 +87,17 @@ public value class StrictlyPositiveInt private constructor(
          * [IllegalArgumentException] if the [number] is less than or equals
          * zero.
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyPositiveIntCompanionCommonSample.create]
+         * </details>
+         * <br>
          *
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -112,9 +120,17 @@ public value class StrictlyPositiveInt private constructor(
          * may involve rounding or truncation, or returns `null` if the [number]
          * is less than or equals zero.
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyPositiveIntCompanionCommonSample.createOrNull]
+         * </details>
+         * <br>
          *
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),

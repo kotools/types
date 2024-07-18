@@ -20,9 +20,16 @@ import kotlin.jvm.JvmSynthetic
  * Creates a [NotEmptySet] starting with a [head] and containing all the
  * elements of the optional [tail].
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.notEmptySetOf]
+ * </details>
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_0_0)
@@ -36,9 +43,17 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  * collection, or returns an encapsulated [IllegalArgumentException] if this
  * collection is [empty][Collection.isEmpty].
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
  * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnCollection]
+ * </details>
+ * <br>
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptySet].
@@ -88,9 +103,17 @@ public value class NotEmptySet<out E> private constructor(
          * [collection], or throws an [IllegalArgumentException] if the
          * [collection] is [empty][Collection.isEmpty].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithCollection]
+         * </details>
+         * <br>
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -121,9 +144,17 @@ public value class NotEmptySet<out E> private constructor(
          * [collection], or returns `null` if the [collection] is
          * [empty][Collection.isEmpty].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithCollection]
+         * </details>
+         * <br>
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -153,9 +184,17 @@ public value class NotEmptySet<out E> private constructor(
          * Creates a [NotEmptySet] starting with a [head] and containing all the
          * elements of the optional [tail].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.of]
+         * </details>
+         * <br>
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
@@ -188,9 +227,16 @@ public value class NotEmptySet<out E> private constructor(
     /**
      * Returns all elements of this set as a [Set] of type [E].
      *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptySetCommonSample.toSet]
+     * </details>
      */
     public fun toSet(): Set<E> = elements
 
