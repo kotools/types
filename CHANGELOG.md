@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
-- Samples from the API reference for using assertions instead of printing values
+- Samples in the API reference for using assertions instead of printing values
   ([#641]).
 - Kotlin and Java samples of the
   `StrictlyNegativeDouble.Companion.create(Number)` function in the API
