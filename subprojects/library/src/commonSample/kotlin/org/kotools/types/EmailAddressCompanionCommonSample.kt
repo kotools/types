@@ -29,10 +29,10 @@ class EmailAddressCompanionCommonSample {
 
     @Test
     fun fromStringAnyAny() {
-        val value: Any = "contact@kotools.org"
+        val text: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
         val isSuccess: Boolean = try {
-            EmailAddress.fromString(value, pattern)
+            EmailAddress.fromString(text, pattern)
             true
         } catch (exception: IllegalArgumentException) {
             false

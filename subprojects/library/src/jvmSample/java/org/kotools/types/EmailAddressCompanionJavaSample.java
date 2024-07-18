@@ -27,11 +27,11 @@ class EmailAddressCompanionJavaSample {
 
     @Test
     void fromStringAnyAny() {
-        final Object value = "contact@kotools.org";
+        final Object text = "contact@kotools.org";
         final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
         boolean isSuccess;
         try {
-            EmailAddress.fromString(value, pattern);
+            EmailAddress.fromString(text, pattern);
             isSuccess = true;
         } catch (final IllegalArgumentException exception) {
             isSuccess = false;

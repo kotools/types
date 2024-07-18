@@ -192,9 +192,9 @@ public class EmailAddress private constructor(private val text: String) {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [value].
+         * of the specified [text].
          * Throws an [IllegalArgumentException] if the string representation of
-         * [value] doesn't match the string representation of the specified
+         * [text] doesn't match the string representation of the specified
          * [pattern], or if the string representation of [pattern] doesn't match
          * the [default pattern][PATTERN].
          *
@@ -222,18 +222,18 @@ public class EmailAddress private constructor(private val text: String) {
          * <br>
          *
          * You can use the [fromStringOrNull] function for returning `null`
-         * instead of throwing an exception in case of invalid [value] or
+         * instead of throwing an exception in case of invalid [text] or
          * [pattern].
          */
         @JvmStatic
-        public fun fromString(value: Any, pattern: Any): EmailAddress {
+        public fun fromString(text: Any, pattern: Any): EmailAddress {
             val patternAsString: String = pattern.toString()
-            val validationPattern: String = PATTERN
+            val validationPattern: String = this.PATTERN
             val regex = Regex(validationPattern)
             require(patternAsString matches regex) {
                 InvalidEmailAddressPattern(patternAsString, validationPattern)
             }
-            return fromString(value, patternAsString)
+            return this.fromString(text, patternAsString)
         }
 
         private fun fromString(text: Any, pattern: String): EmailAddress {
