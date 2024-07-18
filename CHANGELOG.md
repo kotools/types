@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file.
 - Documentation of the `Zero` type, the `Zero.Companion.fromByte(Byte)` and the
   `Zero.Companion.fromByteOrNull(Byte)` functions ([#681] and [ccaaa3a28]).
 - Documentation of the `EmailAddress` type ([f1ac24ca8]) and the
-  `EmailAddress.Companion.fromString` functions.
+  `EmailAddress.Companion.fromString` functions ([4c188db70]).
 
 ### 🐛 Fixed
 
@@ -79,6 +79,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
+[4c188db70]: https://github.com/kotools/types/commit/4c188db70
 [7c8172d2]: https://github.com/kotools/types/commit/7c8172d2
 [35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 [c862e0cac]: https://github.com/kotools/types/commit/c862e0cac
