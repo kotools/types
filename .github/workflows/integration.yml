@@ -1,30 +1,28 @@
-name: Integration (types)
+name: Integration
 on:
   pull_request:
     branches: [ main ]
     paths:
-      - .github/workflows/integration-types.yml
+      - '**.api'
+      - '**.kt'
+      - '**.kts'
+      - .github/workflows/integration.yml
       - gradle/**
-      - subprojects/library/build.gradle.kts
-      - subprojects/library/src/**
-      - build.gradle.kts
       - gradle.properties
       - gradlew
       - gradlew.bat
-      - settings.gradle.kts
       - yarn.lock
   push:
     branches: [ main ]
     paths:
-      - .github/workflows/integration-types.yml
+      - '**.api'
+      - '**.kt'
+      - '**.kts'
+      - .github/workflows/integration.yml
       - gradle/**
-      - subprojects/library/build.gradle.kts
-      - subprojects/library/src/**
-      - build.gradle.kts
       - gradle.properties
       - gradlew
       - gradlew.bat
-      - settings.gradle.kts
       - yarn.lock
   workflow_dispatch:
 env:
@@ -60,14 +58,30 @@ jobs:
           gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
       - name: Check Gradle plugins
         run: ./gradlew :plugins:check
-      - name: Check on Kotlin/JS
+      - name: Check 'types-internal' on Kotlin/JS
+        run: ./gradlew :types-internal:checkJs
+      - name: Check 'types-internal' on Kotlin/JVM
+        run: ./gradlew :types-internal:checkJvm
+      - name: Test 'types-internal' on Kotlin/Native for Linux x64
+        run: ./gradlew :types-internal:linuxTest
+      - name: Test 'types-internal' on Kotlin/Native for MinGW x64
+        run: ./gradlew :types-internal:windowsTest
+      - name: Check 'types' on Kotlin/JS
         run: ./gradlew :types:checkJs
-      - name: Check on Kotlin/JVM
+      - name: Check 'types' on Kotlin/JVM
         run: ./gradlew :types:checkJvm
-      - name: Test on Kotlin/Native for Linux x64
+      - name: Test 'types' on Kotlin/Native for Linux x64
         run: ./gradlew :types:linuxTest
-      - name: Test on Kotlin/Native for MinGW x64
+      - name: Test 'types' on Kotlin/Native for MinGW x64
         run: ./gradlew :types:windowsTest
+      - name: Check 'types-kotlinx-serialization' on Kotlin/JS
+        run: ./gradlew :types-kotlinx-serialization:checkJs
+      - name: Check 'types-kotlinx-serialization' on Kotlin/JVM
+        run: ./gradlew :types-kotlinx-serialization:checkJvm
+      - name: Test 'types-kotlinx-serialization' on Kotlin/Native for Linux x64
+        run: ./gradlew :types-kotlinx-serialization:linuxTest
+      - name: Test 'types-kotlinx-serialization' on Kotlin/Native for MinGW x64
+        run: ./gradlew :types-kotlinx-serialization:windowsTest
   macos-12-checks:
     name: Checks on macOS 12
     needs: gradle-wrapper-validation
@@ -84,5 +98,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v3.4.2
         with:
           gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
-      - name: Test on Kotlin/Native for macOS x64
+      - name: Test 'types-internal' on Kotlin/Native for macOS x64
+        run: ./gradlew :types-internal:macosTest
+      - name: Test 'types' on Kotlin/Native for macOS x64
         run: ./gradlew :types:macosTest
+      - name: Test 'types-kotlinx-serialization' on Kotlin/Native for macOS x64
+        run: ./gradlew :types-kotlinx-serialization:macosTest
