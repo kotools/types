@@ -23,31 +23,29 @@ All notable changes to this project will be documented in this file.
     `compareTo(Float)` and `compareTo(Double)` functions ([#650])
   - `toByte()`, `toShort()`, `toInt()`, `toLong()`, `toFloat()`, `toDouble()`
     and `toChar()` functions ([#646]).
-- Samples to the documentation of the `Zero()` constructor ([7c8172d2]).
+- Samples to the `Zero()` constructor ([7c8172d2]).
 
 ### ♻️ Changed
 
 - The `value` parameter of the `fromString` and the `fromStringOrNull` functions
   from the `EmailAddress.Companion` **experimental** type, that is now named
   `text` ([#682]).
-- Documentation of the `EmailAddress` type ([f1ac24ca8]), the
-  `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and [fd003c4a]), and the
-  `EmailAddress.Companion.fromString` functions ([4c188db70]).
+- Documentation of the `EmailAddress` type, the `EmailAddress.Companion.PATTERN`
+  property, and the `EmailAddress.Companion.fromString` functions ([f1ac24ca8],
+  [1a0ea52b], [fd003c4a] and [4c188db70]).
 - Documentation of the `Zero` type, the `Zero.Companion.fromByte(Byte)` and the
   `Zero.Companion.fromByteOrNull(Byte)` functions ([#681] and [ccaaa3a28]).
-- Samples in the API reference for using assertions instead of printing values
-  ([#641]) and collapsing them by default ([#678]).
+- Samples for using assertions instead of printing values and collapsing them by
+  default ([#641] and [#678]).
 - Kotlin and Java samples of the
-  `StrictlyNegativeDouble.Companion.create(Number)` function in the API
-  reference ([0a4258f3]).
+  `StrictlyNegativeDouble.Companion.create(Number)` function ([0a4258f3]).
 
 ### 🐛 Fixed
 
-- Kotlin samples of the `NotEmptyMap.Companion.create` ([1fa89b0c8]) and the
-  `NotEmptyMap.Companion.createOrNull` functions ([35d599bcc]) in the API
-  reference.
+- Kotlin samples of the `create` and the `createOrNull` **experimental**
+  functions from the `NotEmptyMap.Companion` type ([1fa89b0c8] and [35d599bcc]).
 - Java sample of the `StrictlyNegativeDouble.equals(Any?)` **experimental**
-  function in the API reference ([c862e0cac]).
+  function ([c862e0cac]).
 
 ### 🔥 Removed
 
@@ -77,9 +75,9 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
+[35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 [4c188db70]: https://github.com/kotools/types/commit/4c188db70
 [7c8172d2]: https://github.com/kotools/types/commit/7c8172d2
-[35d599bcc]: https://github.com/kotools/types/commit/35d599bcc
 [c862e0cac]: https://github.com/kotools/types/commit/c862e0cac
 [ccaaa3a28]: https://github.com/kotools/types/commit/ccaaa3a28
 [f1ac24ca8]: https://github.com/kotools/types/commit/f1ac24ca8
