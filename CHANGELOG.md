@@ -30,7 +30,6 @@ All notable changes to this project will be documented in this file.
 - The `value` parameter of the `fromString` and the `fromStringOrNull` functions
   from the `EmailAddress.Companion` **experimental** type, that is now named
   `text` ([#682]).
-  This is an **incompatible source change**.
 - Documentation of the `EmailAddress` type ([f1ac24ca8]), the
   `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and[fd003c4a]), and the
   `EmailAddress.Companion.fromString` functions ([4c188db70]).
