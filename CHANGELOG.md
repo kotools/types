@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
   from the `EmailAddress.Companion` **experimental** type, that is now named
   `text` ([#682]).
 - Documentation of the `EmailAddress` type ([f1ac24ca8]), the
-  `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and[fd003c4a]), and the
+  `EmailAddress.Companion.PATTERN` property ([1a0ea52b] and [fd003c4a]), and the
   `EmailAddress.Companion.fromString` functions ([4c188db70]).
 - Documentation of the `Zero` type, the `Zero.Companion.fromByte(Byte)` and the
   `Zero.Companion.fromByteOrNull(Byte)` functions ([#681] and [ccaaa3a28]).
