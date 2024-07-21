@@ -133,7 +133,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToByte]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Byte): Int =
         this.valueAsByte.compareTo(other)
 
@@ -165,7 +165,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToShort]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Short): Int =
         this.valueAsByte.compareTo(other)
 
@@ -197,7 +197,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToInt]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Int): Int =
         this.valueAsByte.compareTo(other)
 
@@ -229,7 +229,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToLong]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Long): Int =
         this.valueAsByte.compareTo(other)
 
@@ -261,7 +261,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToFloat]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Float): Int =
         this.valueAsByte.compareTo(other)
 
@@ -293,7 +293,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToDouble]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Double): Int =
         this.valueAsByte.compareTo(other)
 
@@ -351,7 +351,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toShort]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public fun toShort(): Short = this.valueAsByte.toShort()
 
     /**
@@ -379,7 +379,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toInt]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public fun toInt(): Int = this.valueAsByte.toInt()
 
     /**
@@ -407,7 +407,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toLong]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public fun toLong(): Long = this.valueAsByte.toLong()
 
     /**
@@ -435,7 +435,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toFloat]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public fun toFloat(): Float = this.valueAsByte.toFloat()
 
     /**
@@ -463,7 +463,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toDouble]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public fun toDouble(): Double = this.valueAsByte.toDouble()
 
     /**
@@ -491,7 +491,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toChar]
      * </details>
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public fun toChar(): Char = '0'
 
     /**
