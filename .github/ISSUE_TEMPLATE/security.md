@@ -11,9 +11,11 @@ labels: security
 
 <!-- Describe the vulnerability right here. -->
 
+<!-- This section will be filled and uncommented by a maintainer.
 ## ✅ Checklist
 
-- [ ] Fix the security vulnerability.
-- [ ] Update the [unreleased changelog] for this issue.
+- [ ] 🔒 Fix the security vulnerability.
+- [ ] 📝 Update the [unreleased changelog] for this issue.
 
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
+-->
