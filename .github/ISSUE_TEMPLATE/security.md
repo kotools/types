@@ -1,6 +1,6 @@
 ---
 name: 🔒️ Security vulnerability
-about: Report a security vulnerability.
+about: Template for reporting a security vulnerability.
 title: 🔒️ Security vulnerability
 labels: security
 ---
@@ -14,6 +14,6 @@ labels: security
 ## ✅ Checklist
 
 - [ ] Fix the security vulnerability.
-- [ ] Add entry in the [unreleased changelog].
+- [ ] Update the [unreleased changelog] for this issue.
 
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
