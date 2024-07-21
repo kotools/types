@@ -12,10 +12,11 @@ about: Basic template for creating an issue.
 
 This issue is blocked by the following items:
 
-- [ ] #ITEM
+- [ ] ...
 -->
 
+<!-- This section will be filled and uncommented by a maintainer.
 ## ✅ Checklist
 
 - [ ] ...
-- [ ] Close this issue as completed and update tracking ones if present.
+-->
