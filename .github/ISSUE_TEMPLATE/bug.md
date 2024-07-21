@@ -1,6 +1,6 @@
 ---
 name: 🐛 Bug
-about: Report a bug.
+about: Template for reporting a bug.
 title: 🐛 $TITLE
 assignees: LVMVRQUXL
 labels: bug
@@ -15,6 +15,6 @@ labels: bug
 ## ✅ Checklist
 
 - [ ] Fix.
-- [ ] Add entry for this issue in the [unreleased changelog].
+- [ ] Update the [unreleased changelog] for this issue.
 
 [unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
