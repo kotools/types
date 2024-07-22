@@ -42,6 +42,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Fixed
 
+- API dependencies of the `types-kotlinx-serialization` subproject by exporting
+  the [kotlinx.serialization] library ([#700]).
 - Kotlin samples of the `create` and the `createOrNull` **experimental**
   functions from the `NotEmptyMap.Companion` type ([1fa89b0c8] and [35d599bcc]).
 - Java sample of the `StrictlyNegativeDouble.equals(Any?)` **experimental**
@@ -72,6 +74,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [#682]: https://github.com/kotools/types/issues/682
 [#683]: https://github.com/kotools/types/issues/683
 [#684]: https://github.com/kotools/types/issues/684
+[#700]: https://github.com/kotools/types/issues/700
 [0a4258f3]: https://github.com/kotools/types/commit/0a4258f3
 [1a0ea52b]: https://github.com/kotools/types/commit/1a0ea52b
 [1fa89b0c8]: https://github.com/kotools/types/commit/1fa89b0c8
@@ -82,6 +85,7 @@ Thanks to [@LVMVRQUXL] and [@MartiPresa] for contributing to this new release.
 [ccaaa3a28]: https://github.com/kotools/types/commit/ccaaa3a28
 [f1ac24ca8]: https://github.com/kotools/types/commit/f1ac24ca8
 [fd003c4a]: https://github.com/kotools/types/commit/fd003c4a
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 
 ## 🔖 Releases
 

@@ -27,10 +27,11 @@ kotlin.sourceSets.configureEach {
 // ------------------------------- Dependencies --------------------------------
 
 dependencies {
+    commonMainApi(libs.kotlinx.serialization.core)
+
     commonMainImplementation(platform(libs.kotlin.bom))
     commonMainImplementation(project(":types"))
     commonMainImplementation(project(":types-internal"))
-    commonMainImplementation(libs.kotlinx.serialization.core)
 
     commonSampleImplementation(libs.kotlin.test.common)
     commonSampleImplementation(libs.kotlin.test.common.annotations)
