@@ -1,15 +1,16 @@
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 
 plugins {
-    alias(libs.plugins.kotools.types.dev.tasks)
-    alias(libs.plugins.kotools.types.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.dokka)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotools.types.documentation)
-    alias(libs.plugins.kotools.samples)
     `maven-publish`
     signing
+    alias(libs.plugins.kotools.types.dev.tasks)
+    alias(libs.plugins.kotools.types.kotlin.multiplatform)
+    alias(libs.plugins.kotools.types.documentation)
+    alias(libs.plugins.kotools.samples)
     alias(libs.plugins.kotools.types.publication)
 }
 
