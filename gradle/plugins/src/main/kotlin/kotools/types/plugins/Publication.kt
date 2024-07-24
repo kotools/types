@@ -41,10 +41,10 @@ private fun RepositoryHandler.ossrh(project: Project) {
         val sonatypeUrl = "https://s01.oss.sonatype.org/"
         val isSnapshot: Boolean = project.version.toString()
             .endsWith("SNAPSHOT")
-        val repositoryUrl: String =
-            if (isSnapshot) "${sonatypeUrl}service/local/staging/deploy/maven2/"
-            else "${sonatypeUrl}content/repositories/snapshots/"
-        url = project.uri(repositoryUrl)
+        val repositoryPath: String =
+            if (isSnapshot) "content/repositories/snapshots/"
+            else "service/local/staging/deploy/maven2/"
+        url = project.uri("$sonatypeUrl$repositoryPath")
         credentials {
             username = Env.mavenUsername
             password = Env.mavenPassword
