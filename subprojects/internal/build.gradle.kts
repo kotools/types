@@ -27,3 +27,10 @@ dependencies {
 
     jsTestImplementation(libs.kotlin.test.js)
 }
+
+// ----------------------------------- Tasks -----------------------------------
+
+tasks.withType<PublishToMavenRepository>().configureEach {
+    val signingTasks: TaskCollection<Sign> = tasks.withType<Sign>()
+    this.mustRunAfter(signingTasks)
+}
