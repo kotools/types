@@ -48,8 +48,8 @@ private fun RepositoryHandler.ossrh(project: Project) {
         name = "OSSRH"
         url = project.sonatypeUrl()
         credentials {
-            username = Env.mavenUsername
-            password = Env.mavenPassword
+            username = Env.sonatypeUsernameOrNull()
+            password = Env.sonatypePasswordOrNull()
         }
     }
 }
