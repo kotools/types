@@ -10,9 +10,12 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
+import org.gradle.api.tasks.TaskCollection
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import java.net.URI
 
@@ -27,6 +30,11 @@ public class PublicationPlugin : Plugin<Project> {
         signing.sign(publishing.publications)
         publishing.publications.withType<MavenPublication>()
             .configureEach { configurePom() }
+        project.tasks.withType<PublishToMavenRepository>().configureEach {
+            val signingTasks: TaskCollection<Sign> =
+                project.tasks.withType<Sign>()
+            this.mustRunAfter(signingTasks)
+        }
         project.tasks.register<PrintTask>("version").configure {
             group(TaskGroup.HELP)
             description("Displays the project's version.")
