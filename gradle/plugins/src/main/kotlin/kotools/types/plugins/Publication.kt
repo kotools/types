@@ -60,6 +60,7 @@ private fun Project.sonatypeUrl(): URI {
     val suffix: String = if (isSnapshot) "content/repositories/snapshots"
     else {
         val releasePathSuffix: String = Env.sonatypeRepositoryIdentifierOrNull()
+            ?.takeIf { it != "${null}" }
             ?.let { "deployByRepositoryId/$it" }
             ?: "deploy/maven2"
         "service/local/staging/$releasePathSuffix"
