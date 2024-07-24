@@ -24,10 +24,9 @@ public class PublicationPlugin : Plugin<Project> {
         publishing.repositories.ossrh(project)
         val signing: SigningExtension = project.extensions.getByType()
         signing.useInMemoryPgpKeys(Env.gpgPrivateKey, Env.gpgPassword)
-        publishing.publications.withType<MavenPublication>().configureEach {
-            signing.sign(this)
-            configurePom()
-        }
+        signing.sign(publishing.publications)
+        publishing.publications.withType<MavenPublication>()
+            .configureEach { configurePom() }
         project.tasks.register<PrintTask>("version").configure {
             group(TaskGroup.HELP)
             description("Displays the project's version.")
