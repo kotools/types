@@ -29,4 +29,4 @@ Issues of the milestone corresponding to this version should be done before reso
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
 [slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
-[twitter]: https://twitter.com/KotoolsContact
+[twitter]: https://twitter.com/kotools_org
