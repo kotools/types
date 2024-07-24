@@ -25,82 +25,28 @@ on:
       - gradlew.bat
       - yarn.lock
   workflow_dispatch:
-env:
-  GRADLE_HOME_CACHE_CLEANUP: true
-  JAVA_DISTRIBUTION: temurin
-  JAVA_VERSION: 17
 jobs:
-  # --------------------------------- Stage 1 ----------------------------------
-  gradle-wrapper-validation:
-    name: Gradle wrapper validation
-    runs-on: ubuntu-latest
+  checks:
+    name: Checks
+    runs-on: macos-12
+    strategy:
+      matrix:
+        project: [ plugins, types-internal, types, types-kotlinx-serialization ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.7
+      - name: Setup Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: temurin
+          java-version: 17
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v3.4.2
-  # --------------------------------- Stage 2 ----------------------------------
-  ubuntu-checks:
-    name: Checks on Ubuntu
-    needs: gradle-wrapper-validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.7
-      - name: Setup Java
-        uses: actions/setup-java@v4.2.1
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.4.2
         with:
-          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
-      - name: Check Gradle plugins
-        run: ./gradlew :plugins:check
-      - name: Check 'types-internal' on Kotlin/JS
-        run: ./gradlew :types-internal:checkJs
-      - name: Check 'types-internal' on Kotlin/JVM
-        run: ./gradlew :types-internal:checkJvm
-      - name: Test 'types-internal' on Kotlin/Native for Linux x64
-        run: ./gradlew :types-internal:linuxTest
-      - name: Test 'types-internal' on Kotlin/Native for MinGW x64
-        run: ./gradlew :types-internal:windowsTest
-      - name: Check 'types' on Kotlin/JS
-        run: ./gradlew :types:checkJs
-      - name: Check 'types' on Kotlin/JVM
-        run: ./gradlew :types:checkJvm
-      - name: Test 'types' on Kotlin/Native for Linux x64
-        run: ./gradlew :types:linuxTest
-      - name: Test 'types' on Kotlin/Native for MinGW x64
-        run: ./gradlew :types:windowsTest
-      - name: Check 'types-kotlinx-serialization' on Kotlin/JS
-        run: ./gradlew :types-kotlinx-serialization:checkJs
-      - name: Check 'types-kotlinx-serialization' on Kotlin/JVM
-        run: ./gradlew :types-kotlinx-serialization:checkJvm
-      - name: Test 'types-kotlinx-serialization' on Kotlin/Native for Linux x64
-        run: ./gradlew :types-kotlinx-serialization:linuxTest
-      - name: Test 'types-kotlinx-serialization' on Kotlin/Native for MinGW x64
-        run: ./gradlew :types-kotlinx-serialization:windowsTest
-  macos-12-checks:
-    name: Checks on macOS 12
-    needs: gradle-wrapper-validation
-    runs-on: macos-12
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.7
-      - name: Setup Java
-        uses: actions/setup-java@v4.2.1
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.4.2
-        with:
-          gradle-home-cache-cleanup: ${{ env.GRADLE_HOME_CACHE_CLEANUP }}
-      - name: Test 'types-internal' on Kotlin/Native for macOS x64
-        run: ./gradlew :types-internal:macosTest
-      - name: Test 'types' on Kotlin/Native for macOS x64
-        run: ./gradlew :types:macosTest
-      - name: Test 'types-kotlinx-serialization' on Kotlin/Native for macOS x64
-        run: ./gradlew :types-kotlinx-serialization:macosTest
+          gradle-home-cache-cleanup: true
+      - name: Run all checks
+        run: ./gradlew :$PROJECT:check
+        env:
+          PROJECT: ${{ matrix.project }}
