@@ -3,6 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
+      - '**.gradle.kts'
       - .github/workflows/dependency-submission.yml
       - gradle/libs.versions.toml
       - yarn.lock
