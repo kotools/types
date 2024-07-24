@@ -8,7 +8,7 @@ env:
 jobs:
   # --------------------------------- Stage 1 ----------------------------------
   setup:
-    name: OSSRH Setup
+    name: Setup
     runs-on: ubuntu-latest
     outputs:
       repository_identifier: ${{ steps.create.outputs.repository_id }}
@@ -39,7 +39,7 @@ jobs:
             Kotools Types ${{ env.PROJECT_VERSION }} (${{ github.run_number }})
   # --------------------------------- Stage 2 ----------------------------------
   delivery:
-    name: OSSRH Delivery
+    name: Delivery
     needs: setup
     runs-on: macos-12
     strategy:
