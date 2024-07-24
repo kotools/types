@@ -8,5 +8,8 @@ internal object Env {
     internal val mavenPassword: String? by lazy { env("MAVEN_PASSWORD") }
     internal val mavenUsername: String? by lazy { env("MAVEN_USERNAME") }
 
+    internal fun sonatypeRepositoryIdentifierOrNull(): String? =
+        this.env("SONATYPE_REPOSITORY_IDENTIFIER")
+
     private fun env(name: String): String? = System.getenv(name)
 }

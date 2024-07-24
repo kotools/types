@@ -14,6 +14,7 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
+import java.net.URI
 
 /** Plugin configuring the publication of Kotools Types projects. */
 public class PublicationPlugin : Plugin<Project> {
@@ -38,18 +39,25 @@ public class PublicationPlugin : Plugin<Project> {
 private fun RepositoryHandler.ossrh(project: Project) {
     maven {
         name = "OSSRH"
-        val sonatypeUrl = "https://s01.oss.sonatype.org/"
-        val isSnapshot: Boolean = project.version.toString()
-            .endsWith("SNAPSHOT")
-        val repositoryPath: String =
-            if (isSnapshot) "content/repositories/snapshots/"
-            else "service/local/staging/deploy/maven2/"
-        url = project.uri("$sonatypeUrl$repositoryPath")
+        url = project.sonatypeUrl()
         credentials {
             username = Env.mavenUsername
             password = Env.mavenPassword
         }
     }
+}
+
+private fun Project.sonatypeUrl(): URI {
+    val prefix = "https://s01.oss.sonatype.org"
+    val isSnapshot: Boolean = "${this.version}".endsWith("SNAPSHOT")
+    val suffix: String = if (isSnapshot) "content/repositories/snapshots"
+    else {
+        val releasePathSuffix: String = Env.sonatypeRepositoryIdentifierOrNull()
+            ?.let { "deployByRepositoryId/$it" }
+            ?: "deploy/maven2"
+        "service/local/staging/$releasePathSuffix"
+    }
+    return this.uri("$prefix/$suffix/")
 }
 
 private fun MavenPublication.configurePom(): Unit = pom {
