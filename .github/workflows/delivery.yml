@@ -34,6 +34,7 @@ jobs:
           username: ${{ secrets.SONATYPE_USERNAME }}
           password: ${{ secrets.SONATYPE_PASSWORD }}
           staging_profile_id: ${{ secrets.SONATYPE_PROFILE }}
+          base_url: https://s01.oss.sonatype.org/service/local/
           description:
             Kotools Types ${{ env.PROJECT_VERSION }} (${{ github.run_number }})
   # --------------------------------- Stage 2 ----------------------------------
