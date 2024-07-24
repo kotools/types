@@ -38,9 +38,13 @@ public class PublicationPlugin : Plugin<Project> {
 private fun RepositoryHandler.ossrh(project: Project) {
     maven {
         name = "OSSRH"
-        url = project.uri(
-            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
-        )
+        val sonatypeUrl = "https://s01.oss.sonatype.org/"
+        val isSnapshot: Boolean = project.version.toString()
+            .endsWith("SNAPSHOT")
+        val repositoryUrl: String =
+            if (isSnapshot) "${sonatypeUrl}service/local/staging/deploy/maven2/"
+            else "${sonatypeUrl}content/repositories/snapshots/"
+        url = project.uri(repositoryUrl)
         credentials {
             username = Env.mavenUsername
             password = Env.mavenPassword
