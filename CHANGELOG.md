@@ -16,6 +16,12 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### 🔥 Removed
+
+- Versions `4.0.0` and `4.3.0` from the API reference ([#704]).
+
+[#704]: https://github.com/kotools/types/issues/704
+
 ## 🔖 Releases
 
 | Version | Release date |
