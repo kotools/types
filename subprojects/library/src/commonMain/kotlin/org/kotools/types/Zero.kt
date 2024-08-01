@@ -601,7 +601,7 @@ public class Zero {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrow]
          * </details>
@@ -612,7 +612,7 @@ public class Zero {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this function from Java code:
+         * Here's an example of calling this method from Java code:
          *
          * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrow]
          * </details>
