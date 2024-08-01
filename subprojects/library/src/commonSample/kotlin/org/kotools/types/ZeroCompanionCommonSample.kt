@@ -20,13 +20,6 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
-    fun fromByteOrNull() {
-        val number: Byte = 0
-        val zero: Zero? = Zero.fromByteOrNull(number)
-        assertNotNull(zero)
-    }
-
-    @Test
     fun orNull() {
         val number: Byte = 0
         val zero: Zero? = Zero.orNull(number)

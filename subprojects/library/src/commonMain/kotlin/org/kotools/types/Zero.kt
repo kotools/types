@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -566,24 +567,18 @@ public class Zero {
          * `null` if calling the [fromByte] function with the [number] throws an
          * [IllegalArgumentException].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.fromByteOrNull]
-         * </details>
-         * <br>
-         *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [fromByte] function for throwing an exception instead of
          * returning `null` in case of invalid [number].
          */
+        @Deprecated(
+            "Use the 'orNull' method instead.",
+            ReplaceWith("Zero.orNull(number)", "org.kotools.types.Zero"),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun fromByteOrNull(number: Byte): Zero? = try {
             this.fromByte(number)
