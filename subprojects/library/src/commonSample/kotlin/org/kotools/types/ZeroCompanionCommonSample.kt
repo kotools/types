@@ -25,4 +25,16 @@ class ZeroCompanionCommonSample {
         val zero: Zero? = Zero.fromByteOrNull(number)
         assertNotNull(zero)
     }
+
+    @Test
+    fun orThrow() {
+        val number: Byte = 0
+        val isSuccess: Boolean = try {
+            Zero.orThrow(number)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
 }

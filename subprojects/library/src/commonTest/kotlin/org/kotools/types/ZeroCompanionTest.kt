@@ -47,4 +47,25 @@ class ZeroCompanionTest {
         val actual: Zero? = Zero.fromByteOrNull(number)
         assertNull(actual)
     }
+
+    @Test
+    fun orThrowShouldPassWithByteThatEqualsZero() {
+        val number: Byte = 0
+        Zero.orThrow(number)
+    }
+
+    @Test
+    fun orThrowShouldFailWithByteOtherThanZero() {
+        val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
+            .random()
+            .random()
+            .toByte()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.orThrow(number)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidZero(number)
+            .toString()
+        assertEquals(expected, actual)
+    }
 }
