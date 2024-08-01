@@ -49,6 +49,23 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orNullShouldPassWithByteThatEqualsZero() {
+        val number: Byte = 0
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNullShouldFailWithByteOtherThanZero() {
+        val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
+            .random()
+            .random()
+            .toByte()
+        val actual: Zero? = Zero.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
     fun orThrowShouldPassWithByteThatEqualsZero() {
         val number: Byte = 0
         Zero.orThrow(number)
