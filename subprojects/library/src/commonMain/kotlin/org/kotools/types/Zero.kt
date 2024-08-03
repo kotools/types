@@ -529,32 +529,15 @@ public class Zero {
          * Creates an instance of [Zero] from the specified [number], or throws
          * an [IllegalArgumentException] if the [number] is other than zero.
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.fromByte]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.fromByte]
-         * </details>
-         * <br>
-         *
          * See the [fromByteOrNull] function for returning `null` instead of
          * throwing an exception in case of invalid [number].
          */
+        @Deprecated(
+            "Use the 'orThrow' method instead.",
+            ReplaceWith("Zero.orThrow(number)", "org.kotools.types.Zero"),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public fun fromByte(number: Byte): Zero {
             val zero = Zero()
@@ -581,7 +564,7 @@ public class Zero {
         @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun fromByteOrNull(number: Byte): Zero? = try {
-            this.fromByte(number)
+            this.orThrow(number)
         } catch (exception: IllegalArgumentException) {
             null
         }

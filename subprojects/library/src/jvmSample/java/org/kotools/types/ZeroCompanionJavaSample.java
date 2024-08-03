@@ -6,19 +6,6 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroCompanionJavaSample {
     @Test
-    void fromByte() {
-        final byte number = 0;
-        boolean isSuccess;
-        try {
-            Zero.fromByte(number);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
-
-    @Test
     void orThrow() {
         final byte number = 0;
         boolean isSuccess;

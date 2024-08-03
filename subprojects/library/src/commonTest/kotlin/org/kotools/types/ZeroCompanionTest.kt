@@ -11,27 +11,6 @@ import kotlin.test.assertNull
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCompanionTest {
     @Test
-    fun fromByteShouldPassWithByteThatEqualsZero() {
-        val number: Byte = 0
-        Zero.fromByte(number)
-    }
-
-    @Test
-    fun fromByteShouldFailWithByteOtherThanZero() {
-        val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
-            .random()
-            .random()
-            .toByte()
-        val exception: IllegalArgumentException = assertFailsWith {
-            Zero.fromByte(number)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidZero(number)
-            .toString()
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun orNullShouldPassWithByteThatEqualsZero() {
         val number: Byte = 0
         val actual: Zero? = Zero.orNull(number)
