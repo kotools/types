@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.kotools.types.dev.tasks)
     alias(libs.plugins.kotools.types.kotlin.multiplatform)
     alias(libs.plugins.kotools.types.documentation)
-    alias(libs.plugins.kotools.samples)
+    alias(libs.plugins.kotools.samples.multiplatform)
     alias(libs.plugins.kotools.types.publication)
 }
 

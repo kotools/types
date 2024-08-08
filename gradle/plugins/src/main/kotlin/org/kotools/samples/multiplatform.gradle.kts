@@ -1,4 +1,4 @@
-package org.kotools
+package org.kotools.samples
 
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
@@ -6,10 +6,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import org.kotools.samples.CheckSampleReferences
-import org.kotools.samples.CheckSampleSources
-import org.kotools.samples.ExtractSamples
-import org.kotools.samples.InlineSamples
 
 // ----------------------------- Script properties -----------------------------
 
@@ -22,7 +18,7 @@ private val sourcesBackupBuildDirectory: Provider<Directory> =
 // ----------------------------- Plugin extensions -----------------------------
 
 private val kotlin: KotlinMultiplatformExtension = extensions.findByType()
-    ?: error("Kotlin Multiplatform plugin wasn't applied to ${this}.")
+    ?: error("Kotlin Multiplatform plugin wasn't applied to ${project}.")
 
 private val platforms: Set<String> = kotlin.sourceSets.asSequence()
     .filterNotNull()
