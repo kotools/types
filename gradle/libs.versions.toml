@@ -28,6 +28,9 @@ version.ref = "kotlinx-binary-compatibility-validator"
 id = "org.jetbrains.kotlin.plugin.serialization"
 version.ref = "kotlin"
 
+[plugins.kotools-samples-jvm]
+id = "org.kotools.samples.jvm"
+
 [plugins.kotools-samples-multiplatform]
 id = "org.kotools.samples.multiplatform"
 

@@ -34,7 +34,7 @@ public abstract class InlineSamples : DefaultTask() {
     @TaskAction
     private fun execute(): Unit = this.sourceDirectory.asFileTree.asSequence()
         .filterNotNull()
-        .filter { "Main/" in it.path }
+        .filter { "Main/" in it.path || "main/" in it.path }
         .filter { it.name.endsWith(".kt") }
         .forEach(this::inlineSamples)
 

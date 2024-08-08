@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotools.types.documentation)
+    alias(libs.plugins.kotools.samples.jvm)
 }
 
 // ----------------------------- Plugin extensions -----------------------------
@@ -15,7 +16,7 @@ kotlin.explicitApi()
 dependencies {
     implementation(platform(libs.kotlin.bom))
 
-    testImplementation(libs.kotlin.test.junit5)
+    sampleImplementation(libs.kotlin.test.junit5)
 }
 
 // ----------------------------------- Tasks -----------------------------------

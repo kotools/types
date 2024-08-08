@@ -4,7 +4,7 @@ import java.io.File
 
 internal class SampleSourceFile private constructor(private val file: File) {
     init {
-        require("Sample/" in this.file.path) {
+        require("Sample/" in this.file.path || "sample/" in this.file.path) {
             "'${this.file.name}' file should be in a sample source set."
         }
     }

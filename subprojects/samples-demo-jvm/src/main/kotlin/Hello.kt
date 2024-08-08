@@ -9,7 +9,7 @@
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * TODO: Add Kotlin code sample.
+ * SAMPLE: [HelloKotlinSample.greet]
  * </details>
  *
  * <br>
