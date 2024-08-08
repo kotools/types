@@ -21,3 +21,7 @@ project(":${rootProject.name}-$kotlinxSerialization").projectDir =
 
 include(rootProject.name)
 project(":${rootProject.name}").projectDir = subprojects.resolve("library")
+
+private val samplesDemoJvm: String = "samples-demo-jvm"
+include(samplesDemoJvm)
+project(":$samplesDemoJvm").projectDir = subprojects.resolve(samplesDemoJvm)
