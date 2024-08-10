@@ -33,8 +33,14 @@ All notable changes to this project will be documented in this file.
 
 - Versions `4.0.0` and `4.3.0` from the API reference ([#704]).
 
+### 🐛 Fixed
+
+- Inappropriate usages of the `function` word instead of the `method` one in the
+  API reference ([#706]).
+
 [#688]: https://github.com/kotools/types/issues/688
 [#704]: https://github.com/kotools/types/issues/704
+[#706]: https://github.com/kotools/types/issues/706
 
 ## 🔖 Releases
 
