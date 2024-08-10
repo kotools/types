@@ -57,7 +57,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.equalsOverride]
      * </details>
@@ -68,7 +68,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.equalsOverride]
      * </details>
@@ -85,7 +85,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.hashCodeOverride]
      * </details>
@@ -96,7 +96,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.hashCodeOverride]
      * </details>
@@ -118,7 +118,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToByte]
      * </details>
@@ -129,7 +129,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToByte]
      * </details>
@@ -150,7 +150,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToShort]
      * </details>
@@ -161,7 +161,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToShort]
      * </details>
@@ -182,7 +182,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToInt]
      * </details>
@@ -193,7 +193,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToInt]
      * </details>
@@ -214,7 +214,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToLong]
      * </details>
@@ -225,7 +225,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToLong]
      * </details>
@@ -246,7 +246,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToFloat]
      * </details>
@@ -257,7 +257,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToFloat]
      * </details>
@@ -278,7 +278,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.compareToDouble]
      * </details>
@@ -289,7 +289,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.compareToDouble]
      * </details>
@@ -309,7 +309,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toByte]
      * </details>
@@ -320,7 +320,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toByte]
      * </details>
@@ -336,7 +336,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toShort]
      * </details>
@@ -347,7 +347,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toShort]
      * </details>
@@ -364,7 +364,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toInt]
      * </details>
@@ -375,7 +375,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toInt]
      * </details>
@@ -392,7 +392,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toLong]
      * </details>
@@ -403,7 +403,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toLong]
      * </details>
@@ -420,7 +420,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toFloat]
      * </details>
@@ -431,7 +431,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toFloat]
      * </details>
@@ -448,7 +448,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toDouble]
      * </details>
@@ -459,7 +459,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toDouble]
      * </details>
@@ -476,7 +476,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toChar]
      * </details>
@@ -487,7 +487,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toChar]
      * </details>
@@ -504,7 +504,7 @@ public class Zero {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.ZeroCommonSample.toStringOverride]
      * </details>
@@ -515,7 +515,7 @@ public class Zero {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toStringOverride]
      * </details>
@@ -529,7 +529,7 @@ public class Zero {
          * Creates an instance of [Zero] from the specified [number], or throws
          * an [IllegalArgumentException] if the [number] is other than zero.
          *
-         * See the [fromByteOrNull] function for returning `null` instead of
+         * See the [fromByteOrNull] method for returning `null` instead of
          * throwing an exception in case of invalid [number].
          */
         @Deprecated(
@@ -547,13 +547,13 @@ public class Zero {
 
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
-         * `null` if calling the [fromByte] function with the [number] throws an
+         * `null` if calling the [fromByte] method with the [number] throws an
          * [IllegalArgumentException].
          *
-         * This function is not available from Java code due to its non-explicit
+         * This method is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
-         * See the [fromByte] function for throwing an exception instead of
+         * See the [fromByte] method for throwing an exception instead of
          * returning `null` in case of invalid [number].
          */
         @Deprecated(
@@ -585,7 +585,7 @@ public class Zero {
          * </details>
          * <br>
          *
-         * This function is not available from Java code due to its non-explicit
+         * This method is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [orThrow] method for throwing an exception instead of

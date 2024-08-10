@@ -18,13 +18,13 @@ import kotlin.jvm.JvmSynthetic
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of calling this method from Kotlin code:
  *
  * SAMPLE: [kotools.types.experimental.PositiveIntCommonSample.unaryMinusOperator]
  * </details>
  * <br>
  *
- * Please note that this function is not available yet for Java users.
+ * Please note that this method is not available yet for Java users.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)

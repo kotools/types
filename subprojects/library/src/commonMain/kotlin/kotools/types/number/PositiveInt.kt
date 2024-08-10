@@ -43,8 +43,7 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  * Represents an integer number of type [Int] that is greater than or equals
  * zero.
  *
- * You can use the [toPositiveInt] function for creating an instance of this
- * type.
+ * You can use the [toPositiveInt] method for creating an instance of this type.
  *
  * <br>
  * <details>
@@ -84,7 +83,7 @@ public sealed interface PositiveInt : AnyInt {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.PositiveIntCompanionCommonSample.create]
          * </details>
@@ -95,13 +94,13 @@ public sealed interface PositiveInt : AnyInt {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this function from Java code:
+         * Here's an example of calling this method from Java code:
          *
          * SAMPLE: [kotools.types.number.PositiveIntCompanionJavaSample.create]
          * </details>
          * <br>
          *
-         * You can use the [PositiveInt.Companion.createOrNull] function for
+         * You can use the [PositiveInt.Companion.createOrNull] method for
          * returning `null` instead of throwing an exception in case of invalid
          * [number].
          */
@@ -123,7 +122,7 @@ public sealed interface PositiveInt : AnyInt {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.PositiveIntCompanionCommonSample.createOrNull]
          * </details>
@@ -134,14 +133,14 @@ public sealed interface PositiveInt : AnyInt {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this function from Java code:
+         * Here's an example of calling this method from Java code:
          *
          * SAMPLE: [kotools.types.number.PositiveIntCompanionJavaSample.createOrNull]
          * </details>
          * <br>
          *
-         * You can use the [PositiveInt.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid [number].
+         * You can use the [PositiveInt.Companion.create] method for throwing an
+         * exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)

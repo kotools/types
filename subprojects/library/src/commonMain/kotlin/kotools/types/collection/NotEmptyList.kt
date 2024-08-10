@@ -54,7 +54,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of calling this method from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnCollection]
  * </details>
@@ -62,7 +62,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  *
  * The [NotEmptyList] type being an
  * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
- * not recommended to call this function from Java code.
+ * not recommended to call this method from Java code.
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptyList].
@@ -121,7 +121,7 @@ public value class NotEmptyList<out E> private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.toList]
      * </details>
@@ -143,7 +143,7 @@ public value class NotEmptyList<out E> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createWithCollection]
          * </details>
@@ -151,14 +151,14 @@ public value class NotEmptyList<out E> private constructor(
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          *
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptyList].
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createWithMutableCollection]
          *
-         * You can use the [NotEmptyList.Companion.createOrNull] function for
+         * You can use the [NotEmptyList.Companion.createOrNull] method for
          * returning `null` instead of throwing an exception in case of invalid
          * [collection].
          */
@@ -181,7 +181,7 @@ public value class NotEmptyList<out E> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithCollection]
          * </details>
@@ -189,14 +189,14 @@ public value class NotEmptyList<out E> private constructor(
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          *
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptyList].
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithMutableCollection]
          *
-         * You can use the [NotEmptyList.Companion.create] function for throwing
+         * You can use the [NotEmptyList.Companion.create] method for throwing
          * an exception instead of returning `null` in case of invalid
          * [collection].
          */
@@ -221,7 +221,7 @@ public value class NotEmptyList<out E> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.of]
          * </details>
@@ -229,7 +229,7 @@ public value class NotEmptyList<out E> private constructor(
          *
          * The [NotEmptyList] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)

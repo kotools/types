@@ -38,7 +38,7 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
 /**
  * Represents an integer number of type [Int] that is less than zero.
  *
- * You can use the [toStrictlyNegativeInt] function for creating an instance of
+ * You can use the [toStrictlyNegativeInt] method for creating an instance of
  * this type.
  *
  * <br>
@@ -93,7 +93,7 @@ public value class StrictlyNegativeInt private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeIntCompanionCommonSample.create]
          * </details>
@@ -101,9 +101,9 @@ public value class StrictlyNegativeInt private constructor(
          *
          * The [StrictlyNegativeInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          *
-         * You can use the [StrictlyNegativeInt.Companion.createOrNull] function
+         * You can use the [StrictlyNegativeInt.Companion.createOrNull] method
          * for returning `null` instead of throwing an exception in case of
          * invalid [number].
          */
@@ -126,7 +126,7 @@ public value class StrictlyNegativeInt private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeIntCompanionCommonSample.createOrNull]
          * </details>
@@ -134,9 +134,9 @@ public value class StrictlyNegativeInt private constructor(
          *
          * The [StrictlyNegativeInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          *
-         * You can use the [StrictlyNegativeInt.Companion.create] function for
+         * You can use the [StrictlyNegativeInt.Companion.create] method for
          * throwing an exception instead of returning `null` in case of invalid
          * [number].
          */

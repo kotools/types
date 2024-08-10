@@ -49,7 +49,7 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of calling this method from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnCollection]
  * </details>
@@ -109,7 +109,7 @@ public value class NotEmptySet<out E> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithCollection]
          * </details>
@@ -117,14 +117,14 @@ public value class NotEmptySet<out E> private constructor(
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          *
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptySet].
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithMutableCollection]
          *
-         * You can use the [NotEmptySet.Companion.createOrNull] function for
+         * You can use the [NotEmptySet.Companion.createOrNull] method for
          * returning `null` instead of throwing an exception in case of invalid
          * [collection].
          */
@@ -150,7 +150,7 @@ public value class NotEmptySet<out E> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithCollection]
          * </details>
@@ -158,15 +158,15 @@ public value class NotEmptySet<out E> private constructor(
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          *
          * Please note that changes made to the original collection will not be
          * reflected on the resulting [NotEmptySet].
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithMutableCollection]
          *
-         * You can use the [NotEmptySet.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid
+         * You can use the [NotEmptySet.Companion.create] method for throwing an
+         * exception instead of returning `null` in case of invalid
          * [collection].
          */
         @ExperimentalKotoolsTypesApi
@@ -190,7 +190,7 @@ public value class NotEmptySet<out E> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.of]
          * </details>
@@ -198,7 +198,7 @@ public value class NotEmptySet<out E> private constructor(
          *
          * The [NotEmptySet] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
+         * this method is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
@@ -233,7 +233,7 @@ public value class NotEmptySet<out E> private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptySetCommonSample.toSet]
      * </details>

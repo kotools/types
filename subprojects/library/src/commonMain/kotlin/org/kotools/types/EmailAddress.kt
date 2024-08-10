@@ -32,7 +32,7 @@ public class EmailAddress private constructor(private val text: String) {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.EmailAddressCommonSample.equalsOverride]
      * </details>
@@ -43,7 +43,7 @@ public class EmailAddress private constructor(private val text: String) {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.EmailAddressJavaSample.equalsOverride]
      * </details>
@@ -61,7 +61,7 @@ public class EmailAddress private constructor(private val text: String) {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.EmailAddressCommonSample.hashCodeOverride]
      * </details>
@@ -72,7 +72,7 @@ public class EmailAddress private constructor(private val text: String) {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.EmailAddressJavaSample.hashCodeOverride]
      * </details>
@@ -91,7 +91,7 @@ public class EmailAddress private constructor(private val text: String) {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this method from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.EmailAddressCommonSample.toStringOverride]
      * </details>
@@ -102,7 +102,7 @@ public class EmailAddress private constructor(private val text: String) {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this method from Java code:
      *
      * SAMPLE: [org.kotools.types.EmailAddressJavaSample.toStringOverride]
      * </details>
@@ -167,7 +167,7 @@ public class EmailAddress private constructor(private val text: String) {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringAny]
          * </details>
@@ -178,13 +178,13 @@ public class EmailAddress private constructor(private val text: String) {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this function from Java code:
+         * Here's an example of calling this method from Java code:
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringAny]
          * </details>
          * <br>
          *
-         * See the [fromStringOrNull] function for returning `null` instead of
+         * See the [fromStringOrNull] method for returning `null` instead of
          * throwing an exception in case of invalid [text].
          */
         @JvmStatic
@@ -205,7 +205,7 @@ public class EmailAddress private constructor(private val text: String) {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringAnyAny]
          * </details>
@@ -216,13 +216,13 @@ public class EmailAddress private constructor(private val text: String) {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this function from Java code:
+         * Here's an example of calling this method from Java code:
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringAnyAny]
          * </details>
          * <br>
          *
-         * See the [fromStringOrNull] function for returning `null` instead of
+         * See the [fromStringOrNull] method for returning `null` instead of
          * throwing an exception in case of invalid [text] or [pattern].
          */
         @JvmStatic
@@ -255,16 +255,16 @@ public class EmailAddress private constructor(private val text: String) {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringOrNullAny]
          * </details>
          * <br>
          *
-         * This function is not available from Java code due to its non-explicit
+         * This method is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
-         * See the [fromString] function for throwing an exception instead of
+         * See the [fromString] method for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
         @JvmSynthetic
@@ -285,16 +285,16 @@ public class EmailAddress private constructor(private val text: String) {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this function from Kotlin code:
+         * Here's an example of calling this method from Kotlin code:
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringOrNullAnyAny]
          * </details>
          * <br>
          *
-         * This function is not available from Java code due to its non-explicit
+         * This method is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
-         * See the [fromString] function for throwing an exception instead of
+         * See the [fromString] method for throwing an exception instead of
          * returning `null` in case of invalid [text] or [pattern].
          */
         @JvmSynthetic
