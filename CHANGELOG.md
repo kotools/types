@@ -16,10 +16,24 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- The `Zero.Companion.orThrow(Byte)` **experimental** method for Kotlin and Java
+  platforms, and the `Zero.Companion.orNull(Byte)` **experimental** method only
+  for Kotlin platforms ([#688]).
+
+### 🗑️ Deprecated
+
+- The `Zero.Companion.fromByte(Byte)` method with an **error level** for using
+  the `Zero.Companion.orThrow(Byte)` one instead, and the
+  `Zero.Companion.fromByteOrNull(Byte)` method with an **error level** for using
+  the `Zero.Companion.orNull(Byte)` one instead ([#688]).
+
 ### 🔥 Removed
 
 - Versions `4.0.0` and `4.3.0` from the API reference ([#704]).
 
+[#688]: https://github.com/kotools/types/issues/688
 [#704]: https://github.com/kotools/types/issues/704
 
 ## 🔖 Releases
