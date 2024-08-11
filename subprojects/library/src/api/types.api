@@ -434,6 +434,7 @@ public final class org/kotools/types/EmailAddress {
 	public static final fun fromString (Ljava/lang/Object;Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public final fun hashCode ()I
 	public static final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
+	public static final fun orThrow (Ljava/lang/String;Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
 	public final fun toString ()Ljava/lang/String;
 }
 
@@ -443,6 +444,7 @@ public final class org/kotools/types/EmailAddress$Companion {
 	public final synthetic fun fromStringOrNull (Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public final synthetic fun fromStringOrNull (Ljava/lang/Object;Ljava/lang/Object;)Lorg/kotools/types/EmailAddress;
 	public final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
+	public final fun orThrow (Ljava/lang/String;Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
 }
 
 public final class org/kotools/types/Zero {
