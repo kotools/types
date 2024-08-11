@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
 import kotlin.test.Test
@@ -226,6 +227,42 @@ class EmailAddressCompanionTest {
         val pattern: Any = """^[a-z]+\.[a-z]+$"""
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(text, pattern)
         assertNull(actual)
+    }
+
+    @Test
+    fun orNullStringShouldPassWithValidText() {
+        val text: String = Values.VALID
+        val actual: EmailAddress? = EmailAddress.orNull(text)
+        val message: String = simpleNameOf<EmailAddress>()
+            .let { "Creating an instance of $it with '$text' should pass." }
+        assertNotNull(actual, message)
+    }
+
+    @Test
+    fun orNullStringShouldFailWithMissingAtSign(): Unit =
+        this.orNullShouldFailWith(Values.MISSING_AT_SIGN)
+
+    @Test
+    fun orNullStringShouldFailWithMissingDotInDomain(): Unit =
+        this.orNullShouldFailWith(Values.MISSING_DOMAIN_DOT)
+
+    @Test
+    fun orNullStringShouldFailWithWhitespacesInLocalPart(): Unit =
+        this.orNullShouldFailWith(Values.WHITESPACES_IN_LOCAL_PART)
+
+    @Test
+    fun orNullStringShouldFailWithWhitespacesInDomainFirstLabel(): Unit =
+        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
+
+    @Test
+    fun orNullStringShouldFailWithWhitespacesInDomainSecondLabel(): Unit =
+        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
+
+    private fun orNullShouldFailWith(text: String) {
+        val actual: EmailAddress? = EmailAddress.orNull(text)
+        val message: String = simpleNameOf<EmailAddress>()
+            .let { "Creating an instance of $it with '$text' should fail." }
+        assertNull(actual, message)
     }
 
     @Test

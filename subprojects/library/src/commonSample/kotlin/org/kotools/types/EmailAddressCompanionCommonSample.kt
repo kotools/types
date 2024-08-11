@@ -56,6 +56,13 @@ class EmailAddressCompanionCommonSample {
     }
 
     @Test
+    fun orNullString() {
+        val text = "contact@kotools.org"
+        val emailAddress: EmailAddress? = EmailAddress.orNull(text)
+        assertNotNull(emailAddress)
+    }
+
+    @Test
     fun orThrowString() {
         val text = "contact@kotools.org"
         val isSuccess: Boolean = try {
