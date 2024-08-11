@@ -314,5 +314,41 @@ public class EmailAddress private constructor(private val text: String) {
             return if (valueAsString matches regex) EmailAddress(valueAsString)
             else null
         }
+
+        /**
+         * Creates an instance of [EmailAddress] from the specified [text], or
+         * throws an [IllegalArgumentException] if the [text] doesn't match the
+         * [default pattern][PATTERN].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orThrowString]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowString]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmStatic
+        public fun orThrow(text: String): EmailAddress {
+            val pattern: String = this.PATTERN
+            val regex = Regex(pattern)
+            require(text matches regex) { InvalidEmailAddress(text, pattern) }
+            return EmailAddress(text)
+        }
     }
 }

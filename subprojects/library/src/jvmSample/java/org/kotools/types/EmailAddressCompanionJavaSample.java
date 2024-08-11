@@ -38,4 +38,17 @@ class EmailAddressCompanionJavaSample {
         }
         Assertions.assertTrue(isSuccess);
     }
+
+    @Test
+    void orThrowString() {
+        final String text = "contact@kotools.org";
+        boolean isSuccess;
+        try {
+            EmailAddress.orThrow(text);
+            isSuccess = true;
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false;
+        }
+        Assertions.assertTrue(isSuccess);
+    }
 }

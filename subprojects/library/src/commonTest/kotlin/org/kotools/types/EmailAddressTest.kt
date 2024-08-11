@@ -227,4 +227,40 @@ class EmailAddressCompanionTest {
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(text, pattern)
         assertNull(actual)
     }
+
+    @Test
+    fun orThrowStringShouldPassWithValidText() {
+        EmailAddress.orThrow(text = Values.VALID)
+    }
+
+    @Test
+    fun orThrowStringShouldFailWithMissingAtSign(): Unit =
+        this.orThrowStringShouldFailWith(Values.MISSING_AT_SIGN)
+
+    @Test
+    fun orThrowStringShouldFailWithMissingDotInDomain(): Unit =
+        this.orThrowStringShouldFailWith(Values.MISSING_DOMAIN_DOT)
+
+    @Test
+    fun orThrowStringShouldFailWithWhitespacesInLocalPart(): Unit =
+        this.orThrowStringShouldFailWith(Values.WHITESPACES_IN_LOCAL_PART)
+
+    @Test
+    fun orThrowStringShouldFailWithWhitespacesInDomainFirstLabel(): Unit = this
+        .orThrowStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
+
+    @Test
+    fun orThrowStringShouldFailWithWhitespacesInDomainSecondLabel(): Unit = this
+        .orThrowStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
+
+    private fun orThrowStringShouldFailWith(text: String) {
+        val exception: IllegalArgumentException =
+            assertFailsWith { EmailAddress.orThrow(text) }
+        val actual: String? = exception.message
+        val expected: String = InvalidEmailAddress(
+            text,
+            pattern = EmailAddress.PATTERN
+        ).toString()
+        assertEquals(expected, actual)
+    }
 }

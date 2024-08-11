@@ -54,4 +54,16 @@ class EmailAddressCompanionCommonSample {
         val actual: EmailAddress? = EmailAddress.fromStringOrNull(text, pattern)
         assertNotNull(actual)
     }
+
+    @Test
+    fun orThrowString() {
+        val text = "contact@kotools.org"
+        val isSuccess: Boolean = try {
+            EmailAddress.orThrow(text)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
 }
