@@ -4,8 +4,6 @@ kotlin = "1.8.22"
 kotlinx-binary-compatibility-validator = "0.14.0"
 kotlinx-serialization = "1.5.1"
 
-# ---------------------------------- Plugins -----------------------------------
-
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -18,8 +16,6 @@ kotools-types-dev-tasks = { id = "org.kotools.types.dev.tasks" }
 kotools-types-documentation = { id = "org.kotools.types.documentation" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 kotools-types-publication = { id = "kotools.types.publication" }
-
-# --------------------------------- Libraries ----------------------------------
 
 [libraries]
 dokka-base = { group = "org.jetbrains.dokka", name = "dokka-base", version.ref = "dokka" }
