@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 ### 🔥 Removed
 
 - Versions `4.0.0` and `4.3.0` from the API reference ([#704]).
+- [JUnit 5] and [System Lambda] unused dependencies ([#703]).
 
 ### 🐛 Fixed
 
@@ -39,8 +40,11 @@ All notable changes to this project will be documented in this file.
   API reference ([#706]).
 
 [#688]: https://github.com/kotools/types/issues/688
+[#703]: https://github.com/kotools/types/issues/703
 [#704]: https://github.com/kotools/types/issues/704
 [#706]: https://github.com/kotools/types/issues/706
+[junit 5]: https://github.com/junit-team/junit5
+[system lambda]: https://github.com/stefanbirkner/system-lambda
 
 ## 🔖 Releases
 
