@@ -38,7 +38,7 @@ class EmailAddressAsStringSerializerTest {
     @Test
     fun serialization_should_behave_like_for_the_String_type() {
         val text = "contact@kotools.org"
-        val address: EmailAddress = EmailAddress.fromString(text)
+        val address: EmailAddress = EmailAddress.orThrow(text)
         val actual: String =
             Json.encodeToString(EmailAddressAsStringSerializer, address)
         val expected: String = Json.encodeToString(text)
@@ -52,7 +52,7 @@ class EmailAddressAsStringSerializerTest {
         val encoded: String = Json.encodeToString(text)
         val actual: EmailAddress =
             Json.decodeFromString(EmailAddressAsStringSerializer, encoded)
-        val expected: EmailAddress = EmailAddress.fromString(text)
+        val expected: EmailAddress = EmailAddress.orThrow(text)
         assertEquals(expected, actual)
     }
 

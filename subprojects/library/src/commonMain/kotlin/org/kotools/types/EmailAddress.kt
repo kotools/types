@@ -162,32 +162,18 @@ public class EmailAddress private constructor(private val text: String) {
          * the string representation of [text] doesn't match the
          * [default pattern][PATTERN].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this method from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringAny]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this method from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.fromStringAny]
-         * </details>
-         * <br>
-         *
          * See the [fromStringOrNull] method for returning `null` instead of
          * throwing an exception in case of invalid [text].
          */
+        @Deprecated(
+            "Use the 'orThrow' method instead.",
+            ReplaceWith(
+                "EmailAddress.orThrow(\"\$text\")",
+                "org.kotools.types.EmailAddress"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public fun fromString(text: Any): EmailAddress =
             fromString(text, PATTERN)

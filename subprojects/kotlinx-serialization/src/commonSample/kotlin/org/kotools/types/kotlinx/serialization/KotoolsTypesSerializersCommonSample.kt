@@ -26,7 +26,7 @@ internal class KotoolsTypesSerializersCommonSample {
             serializersModule = KotoolsTypesSerializers.emailAddress
         }
         val emailAddress: EmailAddress =
-            EmailAddress.fromString("contact@kotools.org")
+            EmailAddress.orThrow("contact@kotools.org")
         val encoded: String = format.encodeToString(emailAddress)
         assertEquals(expected = "\"contact@kotools.org\"", actual = encoded)
         val decoded: EmailAddress = format.decodeFromString(encoded)
