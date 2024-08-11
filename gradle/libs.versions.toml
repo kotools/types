@@ -3,7 +3,6 @@ dokka = "1.8.20"
 kotlin = "1.8.22"
 kotlinx-binary-compatibility-validator = "0.14.0"
 kotlinx-serialization = "1.5.1"
-system-lambda = "1.2.1"
 
 # ---------------------------------- Plugins -----------------------------------
 
@@ -34,4 +33,3 @@ kotlin-test-js = { group = "org.jetbrains.kotlin", name = "kotlin-test-js", vers
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlin" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-system-lambda = { group = "com.github.stefanbirkner", name = "system-lambda", version.ref = "system-lambda" }
