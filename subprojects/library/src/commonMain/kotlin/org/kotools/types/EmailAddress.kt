@@ -277,24 +277,21 @@ public class EmailAddress private constructor(private val text: String) {
          * string representation of [pattern] doesn't match the
          * [default pattern][PATTERN].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this method from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.fromStringOrNullAnyAny]
-         * </details>
-         * <br>
-         *
          * This method is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [fromString] method for throwing an exception instead of
          * returning `null` in case of invalid [text] or [pattern].
          */
+        @Deprecated(
+            "Use the 'orNull' method instead.",
+            ReplaceWith(
+                "EmailAddress.orNull(\"\$text\", \"\$pattern\")",
+                "org.kotools.types.EmailAddress"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun fromStringOrNull(text: Any, pattern: Any): EmailAddress? {
             val patternAsString: String = pattern.toString()
