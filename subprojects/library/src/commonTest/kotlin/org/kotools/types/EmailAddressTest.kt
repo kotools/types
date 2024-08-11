@@ -164,48 +164,6 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun fromStringOrNullAnyShouldPassWithValidValue() {
-        val text: Any = Values.VALID
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(text)
-        assertNotNull(actual)
-    }
-
-    @Test
-    fun fromStringOrNullAnyShouldFailWithMissingAtSign() {
-        val text: Any = Values.MISSING_AT_SIGN
-        this.fromStringOrNullShouldFailWith(text)
-    }
-
-    @Test
-    fun fromStringOrNullAnyShouldFailWithMissingDotInDomain() {
-        val text: Any = Values.MISSING_DOMAIN_DOT
-        this.fromStringOrNullShouldFailWith(text)
-    }
-
-    @Test
-    fun fromStringOrNullAnyShouldFailWithWhitespacesInLocalPart() {
-        val text: Any = Values.WHITESPACES_IN_LOCAL_PART
-        this.fromStringOrNullShouldFailWith(text)
-    }
-
-    @Test
-    fun fromStringOrNullAnyShouldFailWithWhitespacesInDomainFirstLabel() {
-        val text: Any = Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL
-        this.fromStringOrNullShouldFailWith(text)
-    }
-
-    @Test
-    fun fromStringOrNullAnyShouldFailWithWhitespacesInDomainSecondLabel() {
-        val text: Any = Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL
-        this.fromStringOrNullShouldFailWith(text)
-    }
-
-    private fun fromStringOrNullShouldFailWith(text: Any) {
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(text)
-        assertNull(actual)
-    }
-
-    @Test
     fun fromStringOrNullAnyAnyShouldPassWithValidValueAndPattern() {
         val text: Any = Values.VALID
         val pattern: Any = """^[a-z]+@[a-z]+\.[a-z]+$"""

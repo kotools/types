@@ -25,7 +25,7 @@ internal object EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
 
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
-        val address: EmailAddress? = EmailAddress.fromStringOrNull(text)
+        val address: EmailAddress? = EmailAddress.orNull(text)
         if (address != null) return address
         val exception = InvalidEmailAddress(text, EmailAddress.PATTERN)
         throw SerializationException("$exception")

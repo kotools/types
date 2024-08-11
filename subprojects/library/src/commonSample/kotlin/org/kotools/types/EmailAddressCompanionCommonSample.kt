@@ -41,13 +41,6 @@ class EmailAddressCompanionCommonSample {
     }
 
     @Test
-    fun fromStringOrNullAny() {
-        val text: Any = "contact@kotools.org"
-        val actual: EmailAddress? = EmailAddress.fromStringOrNull(text)
-        assertNotNull(actual)
-    }
-
-    @Test
     fun fromStringOrNullAnyAny() {
         val text: Any = "contact@kotools.org"
         val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
