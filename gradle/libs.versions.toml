@@ -8,110 +8,33 @@ system-lambda = "1.2.1"
 
 # ---------------------------------- Plugins -----------------------------------
 
-[plugins.dokka]
-id = "org.jetbrains.dokka"
-version.ref = "dokka"
-
-[plugins.kotlin-jvm]
-id = "org.jetbrains.kotlin.jvm"
-version.ref = "kotlin"
-
-[plugins.kotlin-multiplatform]
-id = "org.jetbrains.kotlin.multiplatform"
-version.ref = "kotlin"
-
-[plugins.kotlinx-binary-compatibility-validator]
-id = "org.jetbrains.kotlinx.binary-compatibility-validator"
-version.ref = "kotlinx-binary-compatibility-validator"
-
-[plugins.kotlinx-serialization]
-id = "org.jetbrains.kotlin.plugin.serialization"
-version.ref = "kotlin"
-
-[plugins.kotools-samples-jvm]
-id = "org.kotools.samples.jvm"
-
-[plugins.kotools-samples-multiplatform]
-id = "org.kotools.samples.multiplatform"
-
-[plugins.kotools-types-dev-tasks]
-id = "org.kotools.types.dev.tasks"
-
-[plugins.kotools-types-documentation]
-id = "org.kotools.types.documentation"
-
-[plugins.kotools-types-kotlin-jvm]
-id = "org.kotools.types.kotlin.jvm"
-
-[plugins.kotools-types-kotlin-multiplatform]
-id = "org.kotools.types.kotlin.multiplatform"
-
-[plugins.kotools-types-publication]
-id = "kotools.types.publication"
+[plugins]
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotools-samples-jvm = { id = "org.kotools.samples.jvm" }
+kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
+kotools-types-dev-tasks = { id = "org.kotools.types.dev.tasks" }
+kotools-types-documentation = { id = "org.kotools.types.documentation" }
+kotools-types-kotlin-jvm = { id = "org.kotools.types.kotlin.jvm" }
+kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
+kotools-types-publication = { id = "kotools.types.publication" }
 
 # --------------------------------- Libraries ----------------------------------
 
-[libraries.dokka-base]
-group = "org.jetbrains.dokka"
-name = "dokka-base"
-version.ref = "dokka"
-
-[libraries.dokka-gradle-plugin]
-group = "org.jetbrains.dokka"
-name = "org.jetbrains.dokka.gradle.plugin"
-version.ref = "dokka"
-
-[libraries.dokka-versioning]
-group = "org.jetbrains.dokka"
-name = "versioning-plugin"
-version.ref = "dokka"
-
-[libraries.junit-jupiter]
-group = "org.junit.jupiter"
-name = "junit-jupiter"
-version.ref = "junit-jupiter"
-
-[libraries.kotlin-bom]
-group = "org.jetbrains.kotlin"
-name = "kotlin-bom"
-version.ref = "kotlin"
-
-[libraries.kotlin-gradle-plugin]
-group = "org.jetbrains.kotlin"
-name = "kotlin-gradle-plugin"
-version.ref = "kotlin"
-
-[libraries.kotlin-test-common]
-group = "org.jetbrains.kotlin"
-name = "kotlin-test-common"
-version.ref = "kotlin"
-
-[libraries.kotlin-test-common-annotations]
-group = "org.jetbrains.kotlin"
-name = "kotlin-test-annotations-common"
-version.ref = "kotlin"
-
-[libraries.kotlin-test-js]
-group = "org.jetbrains.kotlin"
-name = "kotlin-test-js"
-version.ref = "kotlin"
-
-[libraries.kotlin-test-junit5]
-group = "org.jetbrains.kotlin"
-name = "kotlin-test-junit5"
-version.ref = "kotlin"
-
-[libraries.kotlinx-serialization-core]
-group = "org.jetbrains.kotlinx"
-name = "kotlinx-serialization-core"
-version.ref = "kotlinx-serialization"
-
-[libraries.kotlinx-serialization-json]
-group = "org.jetbrains.kotlinx"
-name = "kotlinx-serialization-json"
-version.ref = "kotlinx-serialization"
-
-[libraries.system-lambda]
-group = "com.github.stefanbirkner"
-name = "system-lambda"
-version.ref = "system-lambda"
+[libraries]
+dokka-base = { group = "org.jetbrains.dokka", name = "dokka-base", version.ref = "dokka" }
+dokka-gradle-plugin = { group = "org.jetbrains.dokka", name = "org.jetbrains.dokka.gradle.plugin", version.ref = "dokka" }
+dokka-versioning = { group = "org.jetbrains.dokka", name = "versioning-plugin", version.ref = "dokka" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-test-common = { group = "org.jetbrains.kotlin", name = "kotlin-test-common", version.ref = "kotlin" }
+kotlin-test-common-annotations = { group = "org.jetbrains.kotlin", name = "kotlin-test-annotations-common", version.ref = "kotlin" }
+kotlin-test-js = { group = "org.jetbrains.kotlin", name = "kotlin-test-js", version.ref = "kotlin" }
+kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlin" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+system-lambda = { group = "com.github.stefanbirkner", name = "system-lambda", version.ref = "system-lambda" }
