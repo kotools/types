@@ -16,19 +16,6 @@ class EmailAddressCompanionCommonSample {
     }
 
     @Test
-    fun fromStringAnyAny() {
-        val text: Any = "contact@kotools.org"
-        val pattern: Any = "^[a-z]+@[a-z]+\\.[a-z]+\$"
-        val isSuccess: Boolean = try {
-            EmailAddress.fromString(text, pattern)
-            true
-        } catch (exception: IllegalArgumentException) {
-            false
-        }
-        assertTrue(isSuccess)
-    }
-
-    @Test
     fun orNullString() {
         val text = "contact@kotools.org"
         val emailAddress: EmailAddress? = EmailAddress.orNull(text)

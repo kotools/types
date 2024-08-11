@@ -13,20 +13,6 @@ class EmailAddressCompanionJavaSample {
     }
 
     @Test
-    void fromStringAnyAny() {
-        final Object text = "contact@kotools.org";
-        final Object pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
-        boolean isSuccess;
-        try {
-            EmailAddress.fromString(text, pattern);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
-
-    @Test
     void orThrowString() {
         final String text = "contact@kotools.org";
         boolean isSuccess;
