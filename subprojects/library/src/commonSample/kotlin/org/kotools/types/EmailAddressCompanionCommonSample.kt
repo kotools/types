@@ -63,6 +63,14 @@ class EmailAddressCompanionCommonSample {
     }
 
     @Test
+    fun orNullStringString() {
+        val text = "contact@kotools.org"
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        val emailAddress: EmailAddress? = EmailAddress.orNull(text, pattern)
+        assertNotNull(emailAddress)
+    }
+
+    @Test
     fun orThrowString() {
         val text = "contact@kotools.org"
         val isSuccess: Boolean = try {

@@ -347,6 +347,37 @@ public class EmailAddress private constructor(private val text: String) {
         }
 
         /**
+         * Creates an instance of [EmailAddress] from the specified [text].
+         * Returns `null` if the [text] doesn't match the specified [pattern],
+         * or if the [pattern] doesn't match the [default one][PATTERN].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullStringString]
+         * </details>
+         * <br>
+         *
+         * This method is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [orThrow] method for throwing an exception instead of
+         * returning `null` in case of invalid [text] or [pattern].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @JvmSynthetic
+        public fun orNull(text: String, pattern: String): EmailAddress? = try {
+            this.orThrow(text, pattern)
+        } catch (exception: IllegalArgumentException) {
+            null
+        }
+
+        /**
          * Creates an instance of [EmailAddress] from the specified [text], or
          * throws an [IllegalArgumentException] if the [text] doesn't match the
          * [default pattern][PATTERN].
@@ -413,6 +444,10 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowStringString]
          * </details>
+         * <br>
+         *
+         * See the [orNull] method for returning `null` instead of throwing an
+         * exception in case of invalid [text] or [pattern].
          */
         @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic

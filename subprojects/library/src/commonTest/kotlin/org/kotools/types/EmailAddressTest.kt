@@ -266,6 +266,43 @@ class EmailAddressCompanionTest {
     }
 
     @Test
+    fun orNullStringStringShouldPassWithValidTextAndPattern() {
+        val text: String = Values.VALID
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        val actual: EmailAddress? = EmailAddress.orNull(text, pattern)
+        val message: String = simpleNameOf<EmailAddress>()
+            .let {
+                "Creating an instance of $it from '$text' with '$pattern' " +
+                        "should pass."
+            }
+        assertNotNull(actual, message)
+    }
+
+    @Test
+    fun orNullStringStringShouldFailWithInvalidText() {
+        val text = "first-contact@kotools.org"
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        this.orNullShouldFailWith(text, pattern)
+    }
+
+    @Test
+    fun orNullStringStringShouldFailWithInvalidPattern() {
+        val text: String = Values.VALID
+        val pattern = """^[a-z]+\.[a-z]+$"""
+        this.orNullShouldFailWith(text, pattern)
+    }
+
+    private fun orNullShouldFailWith(text: String, pattern: String) {
+        val actual: EmailAddress? = EmailAddress.orNull(text, pattern)
+        val message: String = simpleNameOf<EmailAddress>()
+            .let {
+                "Creating an instance of $it from '$text' with '$pattern' " +
+                        "should fail."
+            }
+        assertNull(actual, message)
+    }
+
+    @Test
     fun orThrowStringShouldPassWithValidText() {
         EmailAddress.orThrow(text = Values.VALID)
     }
