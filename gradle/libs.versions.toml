@@ -18,7 +18,6 @@ kotools-samples-jvm = { id = "org.kotools.samples.jvm" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 kotools-types-dev-tasks = { id = "org.kotools.types.dev.tasks" }
 kotools-types-documentation = { id = "org.kotools.types.documentation" }
-kotools-types-kotlin-jvm = { id = "org.kotools.types.kotlin.jvm" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 kotools-types-publication = { id = "kotools.types.publication" }
 
