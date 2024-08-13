@@ -21,6 +21,10 @@ All notable changes to this project will be documented in this file.
 - The `Zero.Companion.orThrow(Byte)` **experimental** method for Kotlin and Java
   platforms, and the `Zero.Companion.orNull(Byte)` **experimental** method only
   for Kotlin platforms ([#688]).
+- In the `EmailAddress.Companion` **experimental** type, the `orThrow(String)`
+  and the `orThrow(String, String)` methods for Kotlin and Java platforms, and
+  the `orNull(String)` and the `orNull(String, String)` methods for Kotlin
+  platforms ([#692]).
 
 ### 🗑️ Deprecated
 
@@ -28,6 +32,9 @@ All notable changes to this project will be documented in this file.
   the `Zero.Companion.orThrow(Byte)` one instead, and the
   `Zero.Companion.fromByteOrNull(Byte)` method with an **error level** for using
   the `Zero.Companion.orNull(Byte)` one instead ([#688]).
+- In the `EmailAddress.Companion` **experimental** type, the `fromString` and
+  the `fromStringOrNull` methods with an **error level** for using the `orThrow`
+  and the `orNull` ones instead ([#692]).
 
 ### 🔥 Removed
 
@@ -40,6 +47,7 @@ All notable changes to this project will be documented in this file.
   API reference ([#706]).
 
 [#688]: https://github.com/kotools/types/issues/688
+[#692]: https://github.com/kotools/types/issues/692
 [#703]: https://github.com/kotools/types/issues/703
 [#704]: https://github.com/kotools/types/issues/704
 [#706]: https://github.com/kotools/types/issues/706
