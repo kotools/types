@@ -22,8 +22,8 @@ All notable changes to this project will be documented in this file.
   platforms, and the `Zero.Companion.orNull(Byte)` **experimental** method only
   for Kotlin platforms ([#688]).
 - In the `EmailAddress.Companion` **experimental** type, the `orThrow(String)`
-  and the `orThrow(String, String)` methods for Kotlin and Java platforms, and
-  the `orNull(String)` and the `orNull(String, String)` methods for Kotlin
+  and the `orThrow(String, String)` methods for Kotlin and Java platforms, the
+  `orNull(String)` and the `orNull(String, String)` methods only for Kotlin
   platforms ([#692]).
 
 ### 🗑️ Deprecated
