@@ -28,10 +28,9 @@ All notable changes to this project will be documented in this file.
 
 ### 🗑️ Deprecated
 
-- The `Zero.Companion.fromByte(Byte)` method with an **error level** for using
-  the `Zero.Companion.orThrow(Byte)` one instead, and the
-  `Zero.Companion.fromByteOrNull(Byte)` method with an **error level** for using
-  the `Zero.Companion.orNull(Byte)` one instead ([#688]).
+- In the `Zero.Companion` **experimental** type, the `fromByte` and the
+  `fromByteOrNull` methods with an **error level** for using the `orThrow` and
+  the `orNull` ones instead ([#688]).
 - In the `EmailAddress.Companion` **experimental** type, the `fromString` and
   the `fromStringOrNull` methods with an **error level** for using the `orThrow`
   and the `orNull` ones instead ([#692]).
