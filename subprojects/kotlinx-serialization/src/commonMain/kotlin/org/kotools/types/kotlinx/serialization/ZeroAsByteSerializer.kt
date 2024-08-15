@@ -1,6 +1,7 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
@@ -26,7 +27,6 @@ import kotlin.reflect.KClass
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-@Suppress("EqualsOrHashCode")
 public class ZeroAsByteSerializer {
     /**
      * Returns `true` if the [other] object is an instance of
@@ -46,6 +46,23 @@ public class ZeroAsByteSerializer {
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
         other is ZeroAsByteSerializer
+
+    /**
+     * Returns a hash code value for this serializer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this method from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.hashCodeOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun hashCode(): Int = hashCodeOf("$this")
 
     /**
      * Returns the string representation of this serializer, corresponding to

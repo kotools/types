@@ -21,6 +21,14 @@ internal class ZeroAsByteSerializerCommonSample {
     }
 
     @Test
+    fun hashCodeOverride() {
+        val serializer = ZeroAsByteSerializer()
+        val other = ZeroAsByteSerializer()
+        val equality: Boolean = serializer.hashCode() == other.hashCode()
+        assertTrue(equality)
+    }
+
+    @Test
     fun toStringOverride() {
         val serializerAsString: String = ZeroAsByteSerializer()
             .toString()

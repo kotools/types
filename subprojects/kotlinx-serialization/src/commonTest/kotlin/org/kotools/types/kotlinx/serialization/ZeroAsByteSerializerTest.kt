@@ -1,6 +1,7 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -28,6 +29,14 @@ class ZeroAsByteSerializerTest {
         val other: Any = "Oops"
         val actual: Boolean = serializer == other
         assertFalse(actual)
+    }
+
+    @Test
+    fun hashCodeShouldPass() {
+        val serializer = ZeroAsByteSerializer()
+        val actual: Int = serializer.hashCode()
+        val expected: Int = hashCodeOf("$serializer")
+        assertEquals(expected, actual)
     }
 
     @Test
