@@ -26,7 +26,27 @@ import kotlin.reflect.KClass
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@Suppress("EqualsOrHashCode")
 public class ZeroAsByteSerializer {
+    /**
+     * Returns `true` if the [other] object is an instance of
+     * [ZeroAsByteSerializer], or returns `false` otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this method from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.equalsOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun equals(other: Any?): Boolean =
+        other is ZeroAsByteSerializer
+
     /**
      * Returns the string representation of this serializer, corresponding to
      * its [simple name][KClass.simpleName].
