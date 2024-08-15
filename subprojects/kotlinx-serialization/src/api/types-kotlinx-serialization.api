@@ -6,3 +6,7 @@ public final class org/kotools/types/kotlinx/serialization/KotoolsTypesSerialize
 	public final fun toString ()Ljava/lang/String;
 }
 
+public final class org/kotools/types/kotlinx/serialization/ZeroAsByteSerializer {
+	public fun <init> ()V
+}
+
