@@ -14,9 +14,9 @@ internal class ZeroAsByteSerializerCommonSample {
 
     @Test
     fun equalsOverride() {
-        val first = ZeroAsByteSerializer()
-        val second = ZeroAsByteSerializer()
-        val equality: Boolean = first == second // or first.equals(second)
+        val serializer = ZeroAsByteSerializer()
+        val other = ZeroAsByteSerializer()
+        val equality: Boolean = serializer == other
         assertTrue(equality)
     }
 
