@@ -1,27 +1,17 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import kotools.types.internal.hashCodeOf
-import kotools.types.internal.simpleNameOf
+import org.kotools.types.internal.InvalidZero
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroAsByteSerializerTest {
-    @Test
-    fun constructorShouldPass() {
-        ZeroAsByteSerializer()
-    }
-
-    @Test
-    fun equalsShouldPassWithZeroAsByteSerializer() {
-        val serializer = ZeroAsByteSerializer()
-        val other = ZeroAsByteSerializer()
-        val actual: Boolean = serializer == other
-        assertTrue(actual)
-    }
+    // -------------------- Structural equality operations ---------------------
 
     @Test
     fun equalsShouldFailWithAnotherTypeThanZeroAsByteSerializer() {
@@ -31,19 +21,22 @@ class ZeroAsByteSerializerTest {
         assertFalse(actual)
     }
 
-    @Test
-    fun hashCodeShouldPass() {
-        val serializer = ZeroAsByteSerializer()
-        val actual: Int = serializer.hashCode()
-        val expected: Int = hashCodeOf("$serializer")
-        assertEquals(expected, actual)
-    }
+    // ----------------------- Serialization operations ------------------------
 
     @Test
-    fun toStringShouldPass() {
-        val serializer = ZeroAsByteSerializer()
-        val actual: String = serializer.toString()
-        val expected: String = simpleNameOf(serializer::class)
+    fun deserializeShouldFailWithByteOtherThanZero() {
+        val deserializer = ZeroAsByteSerializer()
+        val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
+            .random()
+            .random()
+            .toByte()
+        val encoded: String = Json.encodeToString(number)
+        val exception: IllegalArgumentException = assertFailsWith {
+            Json.decodeFromString(deserializer, string = encoded)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidZero(number)
+            .toString()
         assertEquals(expected, actual)
     }
 }
