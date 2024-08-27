@@ -1,5 +1,6 @@
 public final class org/kotools/types/kotlinx/serialization/EmailAddressAsStringSerializer {
 	public fun <init> ()V
+	public final fun equals (Ljava/lang/Object;)Z
 	public final fun toString ()Ljava/lang/String;
 }
 
