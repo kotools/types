@@ -36,25 +36,24 @@ public object KotoolsTypesSerializers {
      */
     public val all: SerializersModule
         get() = SerializersModule {
-            include(this@KotoolsTypesSerializers.emailAddress)
+            val emailAddressSerializer = EmailAddressAsStringSerializer()
+            this.contextual(emailAddressSerializer)
             val zeroSerializer = ZeroAsByteSerializer()
             this.contextual(zeroSerializer)
         }
 
-    /**
-     * Returns the module for serializing the [EmailAddress] type.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this property from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.emailAddress]
-     * </details>
-     */
+    /** Returns the module for serializing the [EmailAddress] type. */
+    @Deprecated(
+        "Use the 'EmailAddressAsStringSerializer' type instead.",
+        ReplaceWith(
+            "SerializersModule { contextual(EmailAddressAsStringSerializer()) }",
+            "kotlinx.serialization.modules.SerializersModule",
+            "kotlinx.serialization.modules.contextual",
+            "org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializer"
+        ),
+        DeprecationLevel.ERROR
+    )
+    @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
     public val emailAddress: SerializersModule
         get() = SerializersModule {
             contextual(EmailAddressAsStringSerializer)

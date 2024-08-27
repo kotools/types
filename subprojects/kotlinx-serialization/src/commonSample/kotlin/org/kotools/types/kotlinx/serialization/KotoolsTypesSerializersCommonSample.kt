@@ -3,7 +3,6 @@ package org.kotools.types.kotlinx.serialization
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
-import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,19 +17,6 @@ internal class KotoolsTypesSerializersCommonSample {
         assertEquals(expected = "0", actual = encoded)
         val decoded: Zero = format.decodeFromString(encoded)
         assertEquals(expected = zero, actual = decoded)
-    }
-
-    @Test
-    fun emailAddress() {
-        val format = Json {
-            serializersModule = KotoolsTypesSerializers.emailAddress
-        }
-        val emailAddress: EmailAddress =
-            EmailAddress.orThrow("contact@kotools.org")
-        val encoded: String = format.encodeToString(emailAddress)
-        assertEquals(expected = "\"contact@kotools.org\"", actual = encoded)
-        val decoded: EmailAddress = format.decodeFromString(encoded)
-        assertEquals(expected = emailAddress, actual = decoded)
     }
 
     @Test
