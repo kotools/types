@@ -28,6 +28,9 @@ All notable changes to this project will be documented in this file.
 - The `ZeroAsByteSerializer` **experimental** type, in the
   `types-kotlinx-serialization` subproject, for serializing the `Zero` type as
   `Byte` ([#690]).
+- The `EmailAddressAsStringSerializer` **experimental** type, in the
+  `types-kotlinx-serialization` subproject, for serializing the `EmailAddress`
+  type as `String` ([#691]).
 
 ### 🗑️ Deprecated
 
@@ -40,6 +43,9 @@ All notable changes to this project will be documented in this file.
 - The `KotoolsTypesSerializers.zero` **experimental** property, from the
   `types-kotlinx-serialization` subproject, with an **error level** for using
   the `ZeroAsByteSerializer` type instead ([#690]).
+- The `KotoolsTypesSerializers.emailAddress` **experimental** property, from the
+  `types-kotlinx-serialization` subproject, with an **error level** for using
+  the `EmailAddressAsStringSerializer` type instead ([#691]).
 
 ### 🔥 Removed
 
@@ -58,6 +64,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#688]: https://github.com/kotools/types/issues/688
 [#690]: https://github.com/kotools/types/issues/690
+[#691]: https://github.com/kotools/types/issues/691
 [#692]: https://github.com/kotools/types/issues/692
 [#703]: https://github.com/kotools/types/issues/703
 [#704]: https://github.com/kotools/types/issues/704
