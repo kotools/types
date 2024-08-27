@@ -20,7 +20,7 @@
  *
  * Here's an example of calling this function from Java code:
  *
- * TODO: Add Java code sample.
+ * SAMPLE: [HelloJavaSample.greet]
  * </details>
  */
 public fun greet(name: String = "World"): String = "Hello $name!"

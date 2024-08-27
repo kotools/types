@@ -18,12 +18,21 @@ private val sourcesBackupBuildDirectory: Provider<Directory> =
 
 private val kotlin: KotlinJvmProjectExtension = extensions.findByType()
     ?: error("Kotlin/JVM plugin wasn't applied to ${project}.")
+private val kotlinMain: KotlinSourceSet = kotlin.sourceSets.getByName("main")
+private val kotlinSample: KotlinSourceSet =
+    kotlin.sourceSets.create("sample") {
+        this.dependsOn(kotlinMain)
+        val directory: Directory = projectSources.dir("sample/java")
+        this.kotlin.srcDir(directory)
+    }
+kotlin.sourceSets.getByName("test")
+    .dependsOn(kotlinSample)
 
-private val mainSourceSet: KotlinSourceSet = kotlin.sourceSets.getByName("main")
-private val testSourceSet: KotlinSourceSet = kotlin.sourceSets.getByName("test")
-private val sampleSourceSet: KotlinSourceSet =
-    kotlin.sourceSets.create("sample") { this.dependsOn(mainSourceSet) }
-testSourceSet.dependsOn(sampleSourceSet)
+private val java: JavaPluginExtension = extensions.getByType()
+java.sourceSets.named("test") {
+    val directory: Directory = projectSources.dir("sample/java")
+    this.java.srcDir(directory)
+}
 
 // ----------------------------------- Tasks -----------------------------------
 
