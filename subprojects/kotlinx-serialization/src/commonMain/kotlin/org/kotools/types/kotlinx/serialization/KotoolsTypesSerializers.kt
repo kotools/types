@@ -6,6 +6,7 @@ import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
+import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -36,7 +37,8 @@ public object KotoolsTypesSerializers {
     public val all: SerializersModule
         get() = SerializersModule {
             include(this@KotoolsTypesSerializers.emailAddress)
-            include(this@KotoolsTypesSerializers.zero)
+            val zeroSerializer = ZeroAsByteSerializer()
+            this.contextual(zeroSerializer)
         }
 
     /**
@@ -58,20 +60,18 @@ public object KotoolsTypesSerializers {
             contextual(EmailAddressAsStringSerializer)
         }
 
-    /**
-     * Returns the module for serializing the [Zero] type.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this property from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.zero]
-     * </details>
-     */
+    /** Returns the module for serializing the [Zero] type. */
+    @Deprecated(
+        "Use the 'ZeroAsByteSerializer' type instead.",
+        ReplaceWith(
+            "SerializersModule { contextual(ZeroAsByteSerializer()) }",
+            "kotlinx.serialization.modules.SerializersModule",
+            "kotlinx.serialization.modules.contextual",
+            "org.kotools.types.kotlinx.serialization.ZeroAsByteSerializer"
+        ),
+        DeprecationLevel.ERROR
+    )
+    @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
     public val zero: SerializersModule
         get() = SerializersModule { contextual(ZeroAsByteSerializer) }
 

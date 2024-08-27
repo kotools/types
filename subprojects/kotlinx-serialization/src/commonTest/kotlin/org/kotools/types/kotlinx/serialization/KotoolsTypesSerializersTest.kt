@@ -8,7 +8,6 @@ import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.Zero
 import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
-import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertSame
@@ -27,13 +26,6 @@ class KotoolsTypesSerializersTest {
         val module: SerializersModule = KotoolsTypesSerializers.emailAddress
         val serializer: KSerializer<EmailAddress> = module.serializer()
         assertSame(EmailAddressAsStringSerializer, serializer)
-    }
-
-    @Test
-    fun zero_module_should_contain_serializer_for_Zero_type() {
-        val module: SerializersModule = KotoolsTypesSerializers.zero
-        val serializer: KSerializer<Zero> = module.serializer()
-        assertSame(ZeroAsByteSerializer, serializer)
     }
 
     @Test

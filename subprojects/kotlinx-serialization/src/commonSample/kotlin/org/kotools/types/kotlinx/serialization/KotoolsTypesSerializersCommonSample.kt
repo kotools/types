@@ -34,16 +34,6 @@ internal class KotoolsTypesSerializersCommonSample {
     }
 
     @Test
-    fun zero() {
-        val format = Json { serializersModule = KotoolsTypesSerializers.zero }
-        val zero = Zero()
-        val encoded: String = format.encodeToString(zero)
-        assertEquals(expected = "0", actual = encoded)
-        val decoded: Zero = format.decodeFromString(encoded)
-        assertEquals(expected = zero, actual = decoded)
-    }
-
-    @Test
     fun toStringOverride() {
         val actual =
             "$KotoolsTypesSerializers" // or KotoolsTypesSerializers.toString()
