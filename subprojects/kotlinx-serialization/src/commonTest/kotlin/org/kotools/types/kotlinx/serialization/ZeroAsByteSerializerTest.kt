@@ -18,7 +18,8 @@ class ZeroAsByteSerializerTest {
         val serializer = ZeroAsByteSerializer()
         val other: Any = "Oops"
         val actual: Boolean = serializer == other
-        assertFalse(actual)
+        val message = "Instance of '$serializer' shouldn't equal another type."
+        assertFalse(actual, message)
     }
 
     // ----------------------- Serialization operations ------------------------

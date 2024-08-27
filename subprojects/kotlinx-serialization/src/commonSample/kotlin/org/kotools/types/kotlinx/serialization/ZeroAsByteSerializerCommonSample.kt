@@ -36,7 +36,8 @@ internal class ZeroAsByteSerializerCommonSample {
         val serializer = ZeroAsByteSerializer()
         val other = ZeroAsByteSerializer()
         val equality: Boolean = serializer == other
-        assertTrue(equality)
+        val message = "Instances of '$serializer' should be equal."
+        assertTrue(equality, message)
     }
 
     @Test
