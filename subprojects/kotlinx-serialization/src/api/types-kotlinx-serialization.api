@@ -1,3 +1,7 @@
+public final class org/kotools/types/kotlinx/serialization/EmailAddressAsStringSerializer {
+	public fun <init> ()V
+}
+
 public final class org/kotools/types/kotlinx/serialization/KotoolsTypesSerializers {
 	public static final field INSTANCE Lorg/kotools/types/kotlinx/serialization/KotoolsTypesSerializers;
 	public final fun getAll ()Lkotlinx/serialization/modules/SerializersModule;
