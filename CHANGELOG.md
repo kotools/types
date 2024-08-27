@@ -45,6 +45,11 @@ All notable changes to this project will be documented in this file.
 - Inappropriate usages of the `function` word instead of the `method` one in the
   API reference ([#706]).
 
+---
+
+Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
+
+[@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#688]: https://github.com/kotools/types/issues/688
 [#692]: https://github.com/kotools/types/issues/692
 [#703]: https://github.com/kotools/types/issues/703
