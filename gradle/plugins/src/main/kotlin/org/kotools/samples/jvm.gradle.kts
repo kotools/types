@@ -86,6 +86,7 @@ restoreMainSources.configure {
     this.description = "Restores main sources backup from the build directory."
     this.from(sourcesBackupBuildDirectory)
     this.into(projectSources)
+    this.outputs.upToDateWhen { false }
 }
 
 // ----------------------------- Dokka integration -----------------------------
