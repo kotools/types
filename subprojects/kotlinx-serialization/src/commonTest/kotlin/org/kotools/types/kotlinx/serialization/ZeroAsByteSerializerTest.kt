@@ -3,6 +3,7 @@ package org.kotools.types.kotlinx.serialization
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.InvalidZero
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -20,6 +21,16 @@ class ZeroAsByteSerializerTest {
         val actual: Boolean = serializer == other
         val message = "Instance of '$serializer' shouldn't equal another type."
         assertFalse(actual, message)
+    }
+
+    @Test
+    fun hashCodeShouldUseToStringMethod() {
+        val serializer = ZeroAsByteSerializer()
+        val actual: Int = serializer.hashCode()
+        val expected: Int = hashCodeOf("$serializer")
+        val message = "Hash code of '$serializer' should be calculated from " +
+                "its string representation."
+        assertEquals(expected, actual, message)
     }
 
     // ----------------------- Serialization operations ------------------------

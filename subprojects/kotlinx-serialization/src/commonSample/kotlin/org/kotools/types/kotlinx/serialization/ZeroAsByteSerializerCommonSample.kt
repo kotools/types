@@ -45,7 +45,8 @@ internal class ZeroAsByteSerializerCommonSample {
         val serializer = ZeroAsByteSerializer()
         val other = ZeroAsByteSerializer()
         val equality: Boolean = serializer.hashCode() == other.hashCode()
-        assertTrue(equality)
+        val message = "Hash codes of '$serializer' should be equal."
+        assertTrue(equality, message)
     }
 
     // ----------------------- Serialization operations ------------------------
