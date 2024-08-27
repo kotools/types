@@ -25,6 +25,9 @@ All notable changes to this project will be documented in this file.
   and the `orThrow(String, String)` methods for Kotlin and Java platforms, the
   `orNull(String)` and the `orNull(String, String)` methods only for Kotlin
   platforms ([#692]).
+- The `ZeroAsByteSerializer` **experimental** type, in the
+  `types-kotlinx-serialization` subproject, for serializing the `Zero` type as
+  `Byte` ([#690]).
 
 ### 🗑️ Deprecated
 
@@ -34,6 +37,9 @@ All notable changes to this project will be documented in this file.
 - In the `EmailAddress.Companion` **experimental** type, the `fromString` and
   the `fromStringOrNull` methods with an **error level** for using the `orThrow`
   and the `orNull` ones instead ([#692]).
+- The `KotoolsTypesSerializers.zero` **experimental** property, from the
+  `types-kotlinx-serialization` subproject, with an **error level** for using
+  the `ZeroAsByteSerializer` type instead ([#690]).
 
 ### 🔥 Removed
 
@@ -51,6 +57,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#688]: https://github.com/kotools/types/issues/688
+[#690]: https://github.com/kotools/types/issues/690
 [#692]: https://github.com/kotools/types/issues/692
 [#703]: https://github.com/kotools/types/issues/703
 [#704]: https://github.com/kotools/types/issues/704
