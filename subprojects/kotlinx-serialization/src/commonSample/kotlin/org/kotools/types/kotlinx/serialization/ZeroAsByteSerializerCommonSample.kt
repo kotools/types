@@ -73,10 +73,9 @@ internal class ZeroAsByteSerializerCommonSample {
 
     @Test
     fun toStringOverride() {
-        val serializerAsString: String = ZeroAsByteSerializer()
-            .toString()
-        val expected: String =
-            checkNotNull(ZeroAsByteSerializer::class.simpleName)
+        val serializer = ZeroAsByteSerializer()
+        val serializerAsString: String = serializer.toString()
+        val expected: String = checkNotNull(serializer::class.simpleName)
         assertEquals(expected, serializerAsString)
     }
 }
