@@ -1,5 +1,11 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
@@ -27,7 +33,30 @@ import kotlin.reflect.KClass
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class EmailAddressAsStringSerializer {
+public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
+    /**
+     * Describes the structure of the serializable representation of
+     * [EmailAddress], produced by this serializer.
+     *
+     * See the [KSerializer.descriptor] property for more details.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this property from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.descriptor]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = "$this",
+        PrimitiveKind.STRING
+    )
+
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -65,6 +94,52 @@ public class EmailAddressAsStringSerializer {
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf("$this")
+
+    // ----------------------- Serialization operations ------------------------
+
+    /**
+     * Serializes the specified [value] using the format represented by the
+     * specified [encoder].
+     *
+     * See the [KSerializer.serialize] method for more details.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this method from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.serialize]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
+        encoder.encodeString("$value")
+
+    /**
+     * Deserializes the value of type [EmailAddress] using the format
+     * represented by the specified [decoder].
+     *
+     * See the [KSerializer.deserialize] method for more details.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this method from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.deserialize]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun deserialize(decoder: Decoder): EmailAddress {
+        val text: String = decoder.decodeString()
+        return EmailAddress.orThrow(text)
+    }
 
     // ------------------------------ Conversions ------------------------------
 

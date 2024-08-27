@@ -1,9 +1,13 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.json.Json
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.EmailAddress
+import org.kotools.types.internal.InvalidEmailAddress
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -27,5 +31,25 @@ class EmailAddressAsStringSerializerTest {
         val message = "Hash code of '$serializer' should be calculated from " +
                 "its string representation."
         assertEquals(expected, actual, message)
+    }
+
+    // ----------------------- Serialization operations ------------------------
+
+    @Test
+    fun deserializeShouldFailWithInvalidText(): Unit = setOf(
+        "contactKotools.org", // missing at-sign
+        "contact@kotoolsOrg", // missing domain dot
+        " cont  act @kotools.org", // whitespaces in local-part
+        "contact@ ko tools .org", // whitespaces in domain's first label
+        "contact@kotools. or  g " // whitespaces in domain's second label
+    ).forEach {
+        val deserializer = EmailAddressAsStringSerializer()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Json.decodeFromString(deserializer, "\"$it\"")
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidEmailAddress(it, EmailAddress.PATTERN)
+            .toString()
+        assertEquals(expected, actual)
     }
 }
