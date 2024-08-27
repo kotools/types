@@ -1,6 +1,7 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.internal.ExperimentalSince
@@ -26,8 +27,9 @@ import kotlin.reflect.KClass
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-@Suppress("EqualsOrHashCode")
 public class EmailAddressAsStringSerializer {
+    // -------------------- Structural equality operations ---------------------
+
     /**
      * Returns `true` if the [other] object is an instance of
      * [EmailAddressAsStringSerializer], or returns `false` otherwise.
@@ -46,6 +48,25 @@ public class EmailAddressAsStringSerializer {
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
         other is EmailAddressAsStringSerializer
+
+    /**
+     * Returns a hash code value for this serializer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this method from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.hashCodeOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun hashCode(): Int = hashCodeOf("$this")
+
+    // ------------------------------ Conversions ------------------------------
 
     /**
      * Returns the string representation of this serializer, corresponding to

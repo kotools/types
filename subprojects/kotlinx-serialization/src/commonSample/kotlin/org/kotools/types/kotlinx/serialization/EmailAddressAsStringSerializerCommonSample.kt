@@ -12,6 +12,8 @@ internal class EmailAddressAsStringSerializerCommonSample {
         EmailAddressAsStringSerializer()
     }
 
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun equalsOverride() {
         val serializer = EmailAddressAsStringSerializer()
@@ -20,6 +22,17 @@ internal class EmailAddressAsStringSerializerCommonSample {
         val message = "Instances of '$serializer' should be equal."
         assertTrue(equality, message)
     }
+
+    @Test
+    fun hashCodeOverride() {
+        val serializer = EmailAddressAsStringSerializer()
+        val other = EmailAddressAsStringSerializer()
+        val equality: Boolean = serializer.hashCode() == other.hashCode()
+        val message = "Hash codes of '$serializer' should be equal."
+        assertTrue(equality, message)
+    }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     fun toStringOverride() {
