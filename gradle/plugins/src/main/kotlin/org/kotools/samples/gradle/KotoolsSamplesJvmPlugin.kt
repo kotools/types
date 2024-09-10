@@ -28,13 +28,17 @@ public class KotoolsSamplesJvmPlugin : Plugin<Project> {
 
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
+        project.checkKotlinJvmPlugin()
+        TODO("Not yet implemented")
+    }
+
+    private fun Project.checkKotlinJvmPlugin() {
         val projectHasKotlinJvmPlugin: Boolean =
-            project.pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")
+            this.pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")
         if (!projectHasKotlinJvmPlugin) {
-            val message = KotlinJvmPluginNotFound(project)
+            val message = KotlinJvmPluginNotFound(this)
             error(message)
         }
-        TODO("Not yet implemented")
     }
 
     // ------------------------------ Conversions ------------------------------
