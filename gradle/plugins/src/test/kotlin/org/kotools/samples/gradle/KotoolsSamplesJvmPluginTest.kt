@@ -1,5 +1,6 @@
 package org.kotools.samples.gradle
 
+import java.util.Objects
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -29,6 +30,14 @@ class KotoolsSamplesJvmPluginTest {
         val actual: Boolean = plugin == other
         val message = "Gradle plugins with different types shouldn't be equal."
         assertFalse(actual, message)
+    }
+
+    @Test
+    fun `hashCode should pass`() {
+        val plugin = KotoolsSamplesJvmPlugin()
+        val actual: Int = plugin.hashCode()
+        val expected: Int = Objects.hash("$plugin")
+        assertEquals(expected, actual)
     }
 
     // ------------------------------ Conversions ------------------------------

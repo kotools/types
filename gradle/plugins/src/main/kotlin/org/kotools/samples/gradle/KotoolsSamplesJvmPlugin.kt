@@ -1,12 +1,13 @@
 package org.kotools.samples.gradle
 
+import java.util.Objects
+
 /**
  * Gradle plugin responsible for integrating tested samples in the API
  * reference of Kotlin/JVM projects.
  *
  * @constructor Creates an instance of this plugin.
  */
-@Suppress("EqualsOrHashCode")
 public class KotoolsSamplesJvmPlugin {
     // -------------------- Structural equality operations ---------------------
 
@@ -16,6 +17,9 @@ public class KotoolsSamplesJvmPlugin {
      */
     override fun equals(other: Any?): Boolean =
         other is KotoolsSamplesJvmPlugin
+
+    /** Returns a hash code value for this plugin. */
+    override fun hashCode(): Int = Objects.hash("$this")
 
     // ------------------------------ Conversions ------------------------------
 
