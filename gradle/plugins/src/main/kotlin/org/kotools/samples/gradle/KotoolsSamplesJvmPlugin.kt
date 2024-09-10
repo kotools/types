@@ -1,5 +1,8 @@
 package org.kotools.samples.gradle
 
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.kotools.samples.internal.KotlinJvmPluginNotFound
 import java.util.Objects
 
 /**
@@ -8,7 +11,7 @@ import java.util.Objects
  *
  * @constructor Creates an instance of this plugin.
  */
-public class KotoolsSamplesJvmPlugin {
+public class KotoolsSamplesJvmPlugin : Plugin<Project> {
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -20,6 +23,19 @@ public class KotoolsSamplesJvmPlugin {
 
     /** Returns a hash code value for this plugin. */
     override fun hashCode(): Int = Objects.hash("$this")
+
+    // ------------------------- Project configuration -------------------------
+
+    /** Applies this plugin to the specified [project]. */
+    override fun apply(project: Project) {
+        val projectHasKotlinJvmPlugin: Boolean =
+            project.pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")
+        if (!projectHasKotlinJvmPlugin) {
+            val message = KotlinJvmPluginNotFound(project)
+            error(message)
+        }
+        TODO("Not yet implemented")
+    }
 
     // ------------------------------ Conversions ------------------------------
 

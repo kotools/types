@@ -1,8 +1,14 @@
 package org.kotools.samples.gradle
 
+import org.gradle.api.Project
+import org.gradle.api.internal.plugins.PluginApplicationException
+import org.gradle.kotlin.dsl.apply
+import org.gradle.testfixtures.ProjectBuilder
+import org.kotools.samples.internal.KotlinJvmPluginNotFound
 import java.util.Objects
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -37,6 +43,21 @@ class KotoolsSamplesJvmPluginTest {
         val plugin = KotoolsSamplesJvmPlugin()
         val actual: Int = plugin.hashCode()
         val expected: Int = Objects.hash("$plugin")
+        assertEquals(expected, actual)
+    }
+
+    // ------------------------- Project configuration -------------------------
+
+    @Test
+    fun `apply should fail if Kotlin JVM plugin wasn't applied to project`() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
+        val exception: PluginApplicationException = assertFailsWith {
+            project.pluginManager.apply(KotoolsSamplesJvmPlugin::class)
+        }
+        val actual: String? = exception.cause?.message
+        val expected: String = KotlinJvmPluginNotFound(project)
+            .toString()
         assertEquals(expected, actual)
     }
 
