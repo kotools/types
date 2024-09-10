@@ -9,6 +9,8 @@ dependencies {
     implementation(libs.dokka.base)
     implementation(libs.dokka.gradle.plugin)
     implementation(libs.dokka.versioning)
+
+    testImplementation(libs.kotlin.test.junit5)
 }
 
 gradlePlugin {
@@ -43,3 +45,5 @@ tasks.withType<ValidatePlugins>().configureEach {
     failOnWarning.set(true)
     enableStricterValidation.set(true)
 }
+
+tasks.test.configure(Test::useJUnitPlatform)
