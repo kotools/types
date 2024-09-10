@@ -6,4 +6,10 @@ package org.kotools.samples.gradle
  *
  * @constructor Creates an instance of this plugin.
  */
-public class KotoolsSamplesJvmPlugin
+public class KotoolsSamplesJvmPlugin {
+    // ------------------------------ Conversions ------------------------------
+
+    /** Returns the string representation of this plugin. */
+    override fun toString(): String =
+        "Kotools Samples Gradle plugin for Kotlin/JVM projects"
+}
