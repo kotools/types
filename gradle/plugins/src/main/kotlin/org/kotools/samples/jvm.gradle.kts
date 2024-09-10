@@ -9,10 +9,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 // ----------------------------- Script properties -----------------------------
 
 private val projectSources: Directory = layout.projectDirectory.dir("src")
-private val samplesBuildDirectory: Provider<Directory> =
-    layout.buildDirectory.dir("samples")
-private val sourcesBackupBuildDirectory: Provider<Directory> =
-    samplesBuildDirectory.map { it.dir("sources-backup") }
+private val javaSamples: Directory = projectSources.dir("sample/java")
+
+private val output: Provider<Directory> = layout.buildDirectory.dir("samples")
+private val sourcesBackup: Provider<Directory> =
+    output.map { it.dir("sources-backup") }
 
 // ----------------------------- Plugin extensions -----------------------------
 
@@ -22,17 +23,13 @@ private val kotlinMain: KotlinSourceSet = kotlin.sourceSets.getByName("main")
 private val kotlinSample: KotlinSourceSet =
     kotlin.sourceSets.create("sample") {
         this.dependsOn(kotlinMain)
-        val directory: Directory = projectSources.dir("sample/java")
-        this.kotlin.srcDir(directory)
+        this.kotlin.srcDir(javaSamples)
     }
 kotlin.sourceSets.getByName("test")
     .dependsOn(kotlinSample)
 
 private val java: JavaPluginExtension = extensions.getByType()
-java.sourceSets.named("test") {
-    val directory: Directory = projectSources.dir("sample/java")
-    this.java.srcDir(directory)
-}
+java.sourceSets.named("test") { this.java.srcDir(javaSamples) }
 
 // ----------------------------------- Tasks -----------------------------------
 
@@ -49,7 +46,7 @@ extractSamples.configure {
     this.description = "Extracts samples for KDoc."
     this.dependsOn(checkSampleSources)
     this.sourceDirectory = projectSources
-    this.outputDirectory = samplesBuildDirectory.map { it.dir("extracted") }
+    this.outputDirectory = output.map { it.dir("extracted") }
 }
 
 private val checkSampleReferences: TaskProvider<CheckSampleReferences>
@@ -67,7 +64,7 @@ backupMainSources.configure {
     this.description = "Copies main sources into the build directory."
     this.dependsOn(checkSampleReferences)
     this.from(projectSources) { exclude("api", "sample", "test") }
-    this.into(sourcesBackupBuildDirectory)
+    this.into(sourcesBackup)
 }
 
 private val inlineSamples: TaskProvider<InlineSamples>
@@ -84,7 +81,7 @@ private val restoreMainSources: TaskProvider<Copy>
         by tasks.registering(Copy::class)
 restoreMainSources.configure {
     this.description = "Restores main sources backup from the build directory."
-    this.from(sourcesBackupBuildDirectory)
+    this.from(sourcesBackup)
     this.into(projectSources)
     this.outputs.upToDateWhen { false }
 }
