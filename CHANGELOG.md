@@ -57,6 +57,11 @@ All notable changes to this project will be documented in this file.
 - Inappropriate usages of the `function` word instead of the `method` one in the
   API reference ([#706]).
 
+### 🔒 Security
+
+- Bumped Webpack from version `5.76.3` to `5.94.0` for fixing DOM Clobbering
+  Gadget leading to XSS ([#728]).
+
 ---
 
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
@@ -69,6 +74,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#703]: https://github.com/kotools/types/issues/703
 [#704]: https://github.com/kotools/types/issues/704
 [#706]: https://github.com/kotools/types/issues/706
+[#728]: https://github.com/kotools/types/issues/728
 [junit 5]: https://github.com/junit-team/junit5
 [system lambda]: https://github.com/stefanbirkner/system-lambda
 
