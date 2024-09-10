@@ -5,14 +5,14 @@ import kotlin.test.assertEquals
 
 class KotoolsSamplesJvmPluginTest {
     @Test
-    fun primaryConstructorShouldPass() {
+    fun `primary constructor should pass`() {
         KotoolsSamplesJvmPlugin()
     }
 
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    fun toStringShouldPass() {
+    fun `toString should pass`() {
         val plugin = KotoolsSamplesJvmPlugin()
         val actual: String = plugin.toString()
         val expected = "Kotools Samples Gradle plugin for Kotlin/JVM projects"
