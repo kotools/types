@@ -30,6 +30,6 @@ public abstract class ExtractSamples : DefaultTask() {
             .filterNotNull()
             .mapNotNull(SampleSourceFile.Companion::orNull)
             .flatMap(SampleSourceFile::samples)
-            .forEach { it.saveIn(directory) }
+            .forEach { it.saveFileIn(directory) }
     }
 }

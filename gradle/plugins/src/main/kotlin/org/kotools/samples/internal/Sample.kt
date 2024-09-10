@@ -21,7 +21,7 @@ internal class Sample(
         require(bodyIsValid) { "Sample shouldn't have an empty body." }
     }
 
-    fun saveIn(directory: Directory) {
+    fun saveFileIn(directory: Directory) {
         val body: String = this.body.joinToString(separator = "\n")
             .trimIndent()
         val text: String = listOf(
