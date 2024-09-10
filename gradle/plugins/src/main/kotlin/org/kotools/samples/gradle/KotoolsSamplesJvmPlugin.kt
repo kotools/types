@@ -6,7 +6,17 @@ package org.kotools.samples.gradle
  *
  * @constructor Creates an instance of this plugin.
  */
+@Suppress("EqualsOrHashCode")
 public class KotoolsSamplesJvmPlugin {
+    // -------------------- Structural equality operations ---------------------
+
+    /**
+     * Returns `true` if the [other] object is an instance of
+     * [KotoolsSamplesJvmPlugin], or returns `false` otherwise.
+     */
+    override fun equals(other: Any?): Boolean =
+        other is KotoolsSamplesJvmPlugin
+
     // ------------------------------ Conversions ------------------------------
 
     /** Returns the string representation of this plugin. */
