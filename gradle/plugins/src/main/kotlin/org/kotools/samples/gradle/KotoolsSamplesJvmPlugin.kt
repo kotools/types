@@ -1,5 +1,6 @@
 package org.kotools.samples.gradle
 
+import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
@@ -38,15 +39,18 @@ public class KotoolsSamplesJvmPlugin : Plugin<Project> {
         val kotlin: KotlinJvmProjectExtension? = this.extensions.findByType()
         checkNotNull(kotlin) { KotlinJvmPluginNotFound(this) }
         val main: KotlinSourceSet = kotlin.sourceSets.getByName("main")
-        val sample: KotlinSourceSet = kotlin.sourceSets.create("sample") {
-            this.dependsOn(main)
-            val javaSamples: Directory = this@configureKotlinSourceSets.layout
-                .projectDirectory
-                .dir("src/sample/java")
-            this.kotlin.srcDir(javaSamples)
-        }
+        val sample: KotlinSourceSet = kotlin.sourceSets.sample(this)
+        sample.dependsOn(main)
         kotlin.sourceSets.getByName("test")
             .dependsOn(sample)
+    }
+
+    private fun NamedDomainObjectContainer<KotlinSourceSet>.sample(
+        project: Project
+    ): KotlinSourceSet = this.create("sample") {
+        val javaSamples: Directory =
+            project.layout.projectDirectory.dir("src/sample/java")
+        this.kotlin.srcDir(javaSamples)
     }
 
     // ------------------------------ Conversions ------------------------------
