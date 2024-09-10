@@ -1,15 +1,20 @@
 package org.kotools.samples.gradle
 
 import org.gradle.api.Project
+import org.gradle.api.file.Directory
 import org.gradle.api.internal.plugins.PluginApplicationException
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.kotools.samples.internal.KotlinJvmPluginNotFound
 import java.util.Objects
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class KotoolsSamplesJvmPluginTest {
@@ -59,6 +64,43 @@ class KotoolsSamplesJvmPluginTest {
         val expected: String = KotlinJvmPluginNotFound(project)
             .toString()
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `apply should configure Kotlin source sets properly`() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
+        project.pluginManager.apply("org.jetbrains.kotlin.jvm")
+        val plugin = KotoolsSamplesJvmPlugin()
+        project.pluginManager.apply(plugin::class)
+        val kotlin: KotlinJvmProjectExtension = project.extensions.getByType()
+        val sample: KotlinSourceSet? = kotlin.sourceSets.findByName("sample")
+        assertNotNull(
+            actual = sample,
+            message = "$plugin should create 'sample' source set"
+        )
+        val kotlinSamples: Directory =
+            project.layout.projectDirectory.dir("src/sample/kotlin")
+        assertTrue(
+            actual = kotlinSamples.asFile in sample.kotlin.sourceDirectories,
+            message = "Kotlin sample directory should be included in $sample"
+        )
+        val javaSamples: Directory =
+            project.layout.projectDirectory.dir("src/sample/java")
+        assertTrue(
+            actual = javaSamples.asFile in sample.kotlin.sourceDirectories,
+            message = "Java sample directory should be included in $sample"
+        )
+        val main: KotlinSourceSet = kotlin.sourceSets.getByName("main")
+        assertTrue(
+            actual = main in sample.dependsOn,
+            message = "$sample should depend on $main"
+        )
+        val test: KotlinSourceSet = kotlin.sourceSets.getByName("test")
+        assertTrue(
+            actual = sample in test.dependsOn,
+            message = "$test should depend on $sample"
+        )
     }
 
     // ------------------------------ Conversions ------------------------------

@@ -2,6 +2,10 @@ package org.kotools.samples.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.Directory
+import org.gradle.kotlin.dsl.findByType
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.kotools.samples.internal.KotlinJvmPluginNotFound
 import java.util.Objects
 
@@ -27,18 +31,22 @@ public class KotoolsSamplesJvmPlugin : Plugin<Project> {
     // ------------------------- Project configuration -------------------------
 
     /** Applies this plugin to the specified [project]. */
-    override fun apply(project: Project) {
-        project.checkKotlinJvmPlugin()
-        TODO("Not yet implemented")
-    }
+    override fun apply(project: Project): Unit =
+        project.configureKotlinSourceSets()
 
-    private fun Project.checkKotlinJvmPlugin() {
-        val projectHasKotlinJvmPlugin: Boolean =
-            this.pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")
-        if (!projectHasKotlinJvmPlugin) {
-            val message = KotlinJvmPluginNotFound(this)
-            error(message)
+    private fun Project.configureKotlinSourceSets() {
+        val kotlin: KotlinJvmProjectExtension? = this.extensions.findByType()
+        checkNotNull(kotlin) { KotlinJvmPluginNotFound(this) }
+        val main: KotlinSourceSet = kotlin.sourceSets.getByName("main")
+        val sample: KotlinSourceSet = kotlin.sourceSets.create("sample") {
+            this.dependsOn(main)
+            val javaSamples: Directory = this@configureKotlinSourceSets.layout
+                .projectDirectory
+                .dir("src/sample/java")
+            this.kotlin.srcDir(javaSamples)
         }
+        kotlin.sourceSets.getByName("test")
+            .dependsOn(sample)
     }
 
     // ------------------------------ Conversions ------------------------------
