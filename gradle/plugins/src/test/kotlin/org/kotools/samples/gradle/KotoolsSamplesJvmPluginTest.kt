@@ -67,7 +67,7 @@ class KotoolsSamplesJvmPluginTest {
     }
 
     @Test
-    fun `apply should configure Kotlin source sets properly`() {
+    fun `apply should create 'sample' Kotlin source set`() {
         val project: Project = ProjectBuilder.builder()
             .build()
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
@@ -79,23 +79,43 @@ class KotoolsSamplesJvmPluginTest {
             actual = sample,
             message = "$plugin should create 'sample' source set"
         )
-        val kotlinSamples: Directory =
-            project.layout.projectDirectory.dir("src/sample/kotlin")
+        val sampleSources: Directory =
+            project.layout.projectDirectory.dir("src/sample")
+        val kotlinSamples: Directory = sampleSources.dir("kotlin")
         assertTrue(
             actual = kotlinSamples.asFile in sample.kotlin.sourceDirectories,
             message = "Kotlin sample directory should be included in $sample"
         )
-        val javaSamples: Directory =
-            project.layout.projectDirectory.dir("src/sample/java")
+        val javaSamples: Directory = sampleSources.dir("java")
         assertTrue(
             actual = javaSamples.asFile in sample.kotlin.sourceDirectories,
             message = "Java sample directory should be included in $sample"
         )
+    }
+
+    @Test
+    fun `apply should configure 'main' Kotlin source set`() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
+        project.pluginManager.apply("org.jetbrains.kotlin.jvm")
+        project.pluginManager.apply(KotoolsSamplesJvmPlugin::class)
+        val kotlin: KotlinJvmProjectExtension = project.extensions.getByType()
         val main: KotlinSourceSet = kotlin.sourceSets.getByName("main")
+        val sample: KotlinSourceSet = kotlin.sourceSets.getByName("sample")
         assertTrue(
             actual = main in sample.dependsOn,
             message = "$sample should depend on $main"
         )
+    }
+
+    @Test
+    fun `apply should configure 'test' Kotlin source set`() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
+        project.pluginManager.apply("org.jetbrains.kotlin.jvm")
+        project.pluginManager.apply(KotoolsSamplesJvmPlugin::class)
+        val kotlin: KotlinJvmProjectExtension = project.extensions.getByType()
+        val sample: KotlinSourceSet = kotlin.sourceSets.getByName("sample")
         val test: KotlinSourceSet = kotlin.sourceSets.getByName("test")
         assertTrue(
             actual = sample in test.dependsOn,
