@@ -129,7 +129,7 @@ Join our thriving community! Connect, share insights, and collaborate with
 fellow developers to make Kotools Types even more powerful.
 
 - [GitHub Discussions](https://github.com/kotools/types/discussions)
-- [#kotools-types on Kotlin Slack](https://kotlinlang.slack.com/archives/C05H0L1LD25)
+- [#kotools on Kotlin Slack](https://kotlinlang.slack.com/archives/C05H0L1LD25)
 
 ## 📣 Show Your Support
 
