@@ -2,7 +2,10 @@ package org.kotools.samples.gradle
 
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
+import org.gradle.api.file.FileCollection
 import org.gradle.api.internal.plugins.PluginApplicationException
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.SourceSet
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
@@ -121,6 +124,24 @@ class KotoolsSamplesJvmPluginTest {
             actual = sample in test.dependsOn,
             message = "$test should depend on $sample"
         )
+    }
+
+    @Test
+    fun `apply should configure 'test' Java source set`() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
+        project.pluginManager.apply("org.jetbrains.kotlin.jvm")
+        project.pluginManager.apply(KotoolsSamplesJvmPlugin::class)
+        val test: SourceSet = project.extensions
+            .getByType<JavaPluginExtension>()
+            .sourceSets
+            .getByName("test")
+        val sourceDirectories: FileCollection = test.java.sourceDirectories
+        val javaSample: Directory =
+            project.layout.projectDirectory.dir("src/sample/java")
+        val actual: Boolean = javaSample.asFile in sourceDirectories
+        val message = "Java sample directory should be included in ${test}."
+        assertTrue(actual, message)
     }
 
     // ------------------------------ Conversions ------------------------------

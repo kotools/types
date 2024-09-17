@@ -4,7 +4,9 @@ import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.kotools.samples.internal.KotlinJvmPluginNotFound
@@ -32,8 +34,10 @@ public class KotoolsSamplesJvmPlugin : Plugin<Project> {
     // ------------------------- Project configuration -------------------------
 
     /** Applies this plugin to the specified [project]. */
-    override fun apply(project: Project): Unit =
+    override fun apply(project: Project) {
         project.configureKotlinSourceSets()
+        project.configureTestJavaSourceSet()
+    }
 
     private fun Project.configureKotlinSourceSets() {
         val kotlin: KotlinJvmProjectExtension? = this.extensions.findByType()
@@ -48,10 +52,18 @@ public class KotoolsSamplesJvmPlugin : Plugin<Project> {
     private fun NamedDomainObjectContainer<KotlinSourceSet>.sample(
         project: Project
     ): KotlinSourceSet = this.create("sample") {
-        val javaSamples: Directory =
-            project.layout.projectDirectory.dir("src/sample/java")
-        this.kotlin.srcDir(javaSamples)
+        this.kotlin.srcDir(project.javaSampleDirectory)
     }
+
+    private fun Project.configureTestJavaSourceSet() {
+        val sampleDirectory: Directory = this.javaSampleDirectory
+        this.extensions.getByType<JavaPluginExtension>()
+            .sourceSets
+            .named("test") { this.java.srcDir(sampleDirectory) }
+    }
+
+    private val Project.javaSampleDirectory: Directory
+        get() = this.layout.projectDirectory.dir("src/sample/java")
 
     // ------------------------------ Conversions ------------------------------
 
