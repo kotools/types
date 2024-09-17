@@ -127,8 +127,8 @@ class KotoolsSamplesJvmPluginTest {
 
     @Test
     fun `toString should pass`() {
-        val plugin = KotoolsSamplesJvmPlugin()
-        val actual: String = plugin.toString()
+        val actual: String = KotoolsSamplesJvmPlugin()
+            .toString()
         val expected = "Kotools Samples Gradle plugin for Kotlin/JVM projects"
         assertEquals(expected, actual)
     }
