@@ -14,4 +14,4 @@ following:
 
 [check]: https://github.com/kotools/types/issues?q=is%3Aopen+is%3Aissue+label%3Asecurity
 [latest release]: https://github.com/kotools/types/releases
-[report]: https://github.com/kotools/types/issues/new?template=security-template.md&labels=security
+[report]: https://github.com/kotools/types/issues/new?template=security.md
