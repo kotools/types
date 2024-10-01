@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.7
-      - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v4.0.1
       - name: Setup Java
         uses: actions/setup-java@v4.2.2
         with:
@@ -25,8 +23,6 @@ jobs:
           java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.0.1
-        with:
-          gradle-home-cache-cleanup: true
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@v1.0.20
         with:
