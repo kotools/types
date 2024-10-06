@@ -61,6 +61,8 @@ All notable changes to this project will be documented in this file.
 
 - Bumped Webpack from version `5.76.3` to `5.94.0` for fixing DOM Clobbering
   Gadget leading to XSS ([#728]).
+- Bumped `rollup` NPM package from version `2.68.0` to `2.79.2` for fixing DOM
+  Clobbering Gadget leading to XSS ([#730]).
 
 ---
 
@@ -75,6 +77,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#704]: https://github.com/kotools/types/issues/704
 [#706]: https://github.com/kotools/types/issues/706
 [#728]: https://github.com/kotools/types/issues/728
+[#730]: https://github.com/kotools/types/issues/730
 [junit 5]: https://github.com/junit-team/junit5
 [system lambda]: https://github.com/stefanbirkner/system-lambda
 
