@@ -15,7 +15,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.1
       - name: Setup Java
         uses: actions/setup-java@v4.4.0
         with:
