@@ -26,5 +26,7 @@ jobs:
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@v2.0.0
         with:
+          commit-message-template: ⬆️ Bump Gradle Wrapper to %targetVersion%
           labels: dependencies
+          pr-title-template: ⬆️ Gradle Wrapper %targetVersion%
           reviewers: LVMVRQUXL
