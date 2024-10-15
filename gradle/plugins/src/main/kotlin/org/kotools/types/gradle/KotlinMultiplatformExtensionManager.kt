@@ -1,6 +1,5 @@
 package org.kotools.types.gradle
 
-import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectProvider
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -12,8 +11,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
 import org.gradle.kotlin.dsl.provideDelegate
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
@@ -58,16 +55,12 @@ internal class KotlinMultiplatformExtensionManager(
     }
 
     private fun configureKotlinJvmTarget(kotlin: KotlinMultiplatformExtension) {
-        val compilerOptionsConfiguration: Action<KotlinJvmCompilerOptions> =
-            Action { this.jvmTarget.set(JvmTarget.JVM_17) }
         kotlin.jvm {
-            this.compilations.configureEach {
-                this.compilerOptions.configure(compilerOptionsConfiguration)
-            }
             this.testRuns.configureEach {
                 this.executionTask.configure(KotlinJvmTest::useJUnitPlatform)
             }
         }
+        kotlin.jvmToolchain(17)
     }
 
     private fun configureKotlinNativeTargets(
