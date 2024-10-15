@@ -30,7 +30,7 @@ kotlin.sourceSets.configureEach {
     languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
 }
 
-// ------------------------------- Dependencies --------------------------------
+// -----------------------------------------------------------------------------
 
 dependencies {
     commonMainImplementation(platform(libs.kotlin.bom))
