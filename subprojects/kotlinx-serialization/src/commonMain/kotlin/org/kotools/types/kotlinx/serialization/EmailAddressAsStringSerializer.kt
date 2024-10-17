@@ -32,7 +32,7 @@ import kotlin.reflect.KClass
  * </details>
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.V4_5_3)
 public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     /**
      * Describes the structure of the serializable representation of

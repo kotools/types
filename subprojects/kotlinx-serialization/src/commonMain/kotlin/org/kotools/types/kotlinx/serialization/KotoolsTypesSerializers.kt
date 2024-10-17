@@ -53,7 +53,7 @@ public object KotoolsTypesSerializers {
         ),
         DeprecationLevel.ERROR
     )
-    @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+    @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
     public val emailAddress: SerializersModule
         get() = SerializersModule {
             contextual(EmailAddressAsStringSerializer)
@@ -70,7 +70,7 @@ public object KotoolsTypesSerializers {
         ),
         DeprecationLevel.ERROR
     )
-    @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+    @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
     public val zero: SerializersModule
         get() = SerializersModule { contextual(ZeroAsByteSerializer) }
 

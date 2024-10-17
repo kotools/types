@@ -173,7 +173,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun fromString(text: Any): EmailAddress =
             fromString(text, PATTERN)
@@ -197,7 +197,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun fromString(text: Any, pattern: Any): EmailAddress {
             val patternAsString: String = pattern.toString()
@@ -236,7 +236,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun fromStringOrNull(text: Any): EmailAddress? =
             this.fromStringOrNull(text, this.PATTERN)
@@ -263,7 +263,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun fromStringOrNull(text: Any, pattern: Any): EmailAddress? {
             val patternAsString: String = pattern.toString()
@@ -305,7 +305,7 @@ public class EmailAddress private constructor(private val text: String) {
          * See the [orThrow] method for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(text: String): EmailAddress? = try {
             this.orThrow(text)
@@ -336,7 +336,7 @@ public class EmailAddress private constructor(private val text: String) {
          * See the [orThrow] method for throwing an exception instead of
          * returning `null` in case of invalid [text] or [pattern].
          */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(text: String, pattern: String): EmailAddress? = try {
             this.orThrow(text, pattern)
@@ -375,7 +375,7 @@ public class EmailAddress private constructor(private val text: String) {
          * See the [orNull] method for returning `null` instead of throwing an
          * exception in case of invalid [text].
          */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String): EmailAddress {
             val pattern: String = this.PATTERN
@@ -416,7 +416,7 @@ public class EmailAddress private constructor(private val text: String) {
          * See the [orNull] method for returning `null` instead of throwing an
          * exception in case of invalid [text] or [pattern].
          */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String, pattern: String): EmailAddress {
             val validationPattern: String = this.PATTERN

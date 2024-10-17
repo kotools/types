@@ -537,7 +537,7 @@ public class Zero {
             ReplaceWith("Zero.orThrow(number)", "org.kotools.types.Zero"),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun fromByte(number: Byte): Zero {
             val zero = Zero()
@@ -561,7 +561,7 @@ public class Zero {
             ReplaceWith("Zero.orNull(number)", "org.kotools.types.Zero"),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun fromByteOrNull(number: Byte): Zero? = try {
             this.orThrow(number)
@@ -591,7 +591,7 @@ public class Zero {
          * See the [orThrow] method for throwing an exception instead of
          * returning `null` in case of invalid [number].
          */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(number: Byte): Zero? = try {
             this.orThrow(number)
@@ -629,7 +629,7 @@ public class Zero {
          * See the [orNull] method for returning `null` instead of throwing an
          * exception in case of invalid [number].
          */
-        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(number: Byte): Zero {
             val zero = Zero()
