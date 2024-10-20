@@ -1,0 +1,12 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:types
+kotools.types.collection
+kotools.types.experimental
+kotools.types.number
+kotools.types.result
+kotools.types.text
+org.kotools.types
+module:types-kotlinx-serialization
+org.kotools.types.kotlinx.serialization
