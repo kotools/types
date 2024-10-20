@@ -16,6 +16,17 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### 🐛 Fixed
+
+- Links to the API reference from the README documentation ([#742]).
+
+---
+
+Thanks to [@bodiam] for contributing to this new release. 🙏
+
+[@bodiam]: https://github.com/bodiam
+[#742]: https://github.com/kotools/types/pull/742
+
 ## 🔖 Releases
 
 | Version | Release date |
