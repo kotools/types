@@ -31,6 +31,7 @@ Thanks to [@bodiam] for contributing to this new release. 🙏
 
 | Version | Release date |
 |---------|--------------|
+| [4.5.3] | 2024-10-20   |
 | [4.5.2] | 2024-07-24   |
 | [4.5.1] | 2024-04-28   |
 | [4.5.0] | 2024-03-14   |
@@ -58,6 +59,7 @@ Thanks to [@bodiam] for contributing to this new release. 🙏
 | [1.0.1] | 2022-03-21   |
 | [1.0.0] | 2022-02-28   |
 
+[4.5.3]: https://github.com/kotools/types/releases/tag/4.5.3
 [4.5.2]: https://github.com/kotools/types/releases/tag/4.5.2
 [4.5.1]: https://github.com/kotools/types/releases/tag/4.5.1
 [4.5.0]: https://github.com/kotools/types/releases/tag/4.5.0
