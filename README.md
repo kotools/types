@@ -109,9 +109,9 @@ Explore some of the types offered by this library:
 See the [API reference](https://types.kotools.org) for more types!
 
 [kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int
-[kotools.types.collection.NotEmptyList]: https://types.kotools.org/-kotools%20-types/kotools.types.collection/-not-empty-list/index.html
-[kotools.types.number.PositiveInt]: https://types.kotools.org/-kotools%20-types/kotools.types.number/-positive-int/index.html
-[kotools.types.text.NotBlankString]: https://types.kotools.org/-kotools%20-types/kotools.types.text/-not-blank-string/index.html
+[kotools.types.collection.NotEmptyList]: https://types.kotools.org/types/kotools.types.collection/-not-empty-list/index.html
+[kotools.types.number.PositiveInt]: https://types.kotools.org/types/kotools.types.number/-positive-int/index.html
+[kotools.types.text.NotBlankString]: https://types.kotools.org/types/kotools.types.text/-not-blank-string/index.html
 
 ## 📝 Documentation
 
