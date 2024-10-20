@@ -23,11 +23,13 @@ Issues of the milestone corresponding to this version should be done before reso
 - [ ] 🔖 Run the `./gradlew :tag` command for creating a Git annotated tag for this version.
 - [ ] 🔖 Publish the GitHub release on the annotated tag.
 - [ ] 🔖 Set Gradle project's version to the next snapshot.
+- [ ] 📝 Announce this release on [Reddit].
 - [ ] 📝 Announce this release on [Slack].
 - [ ] 📝 Announce this release on [Twitter].
 
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
 [maven central]: https://s01.oss.sonatype.org
+[reddit]: https://www.reddit.com/r/Kotlin
 [slack]: https://kotlinlang.slack.com/archives/C05H0L1LD25
 [twitter]: https://twitter.com/kotools_org
