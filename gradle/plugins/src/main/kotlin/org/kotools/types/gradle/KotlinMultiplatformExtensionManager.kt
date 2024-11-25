@@ -1,5 +1,6 @@
 package org.kotools.types.gradle
 
+import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectProvider
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -36,7 +37,10 @@ internal class KotlinMultiplatformExtensionManager(
 
     private fun configureKotlinJsTarget(kotlin: KotlinMultiplatformExtension) {
         kotlin.js(KotlinJsCompilerType.IR) {
-            this.nodejs { this.testTask(KotlinJsTest::useMocha) }
+            this.nodejs {
+                val useMocha: Action<KotlinJsTest> = Action { this.useMocha() }
+                this.testTask(useMocha)
+            }
             this.binaries.library()
         }
         val rootProjectPlugins = PluginManager(this.project.rootProject)
