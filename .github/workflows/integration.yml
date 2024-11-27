@@ -28,7 +28,7 @@ on:
 jobs:
   checks:
     name: Checks
-    runs-on: macos-12
+    runs-on: macos-13
     strategy:
       matrix:
         project: [ plugins, types-internal, types, types-kotlinx-serialization ]
