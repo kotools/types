@@ -16,15 +16,22 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ♻️ Changed
+
+- Bump embedded Kotlin from 1.8.22 to 1.9.10, Kotlin language version from 1.5
+  to 1.9, and kotlinx.serialization from 1.5.1 to 1.6.0 ([#407]).
+
 ### 🐛 Fixed
 
 - Links to the API reference from the README documentation ([#742]).
 
 ---
 
-Thanks to [@bodiam] for contributing to this new release. 🙏
+Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@bodiam]: https://github.com/bodiam
+[@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#407]: https://github.com/kotools/types/pull/407
 [#742]: https://github.com/kotools/types/pull/742
 
 ## 🔖 Releases
