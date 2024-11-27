@@ -72,12 +72,12 @@ internal class KotlinMultiplatformExtensionManager(
     ) {
         // Inspired from https://kotlinlang.org/docs/native-target-support.html.
         // Tier 1
-        kotlin.macosX64("macos")
+        kotlin.macosX64()
         kotlin.macosArm64()
         // Tier 2
-        kotlin.linuxX64("linux")
+        kotlin.linuxX64()
         // Tier 3
-        kotlin.mingwX64("windows")
+        kotlin.mingwX64()
     }
 
     private fun configureAllKotlinTargets(
@@ -101,14 +101,14 @@ internal class KotlinMultiplatformExtensionManager(
         jvmMain.dependsOn(jvmAndNativeMain)
         val nativeMain: KotlinSourceSet by this.creating
         nativeMain.dependsOn(jvmAndNativeMain)
-        val linuxMain: KotlinSourceSet by this.getting
-        linuxMain.dependsOn(nativeMain)
-        val macosMain: KotlinSourceSet by this.getting
-        macosMain.dependsOn(nativeMain)
+        val linuxX64Main: KotlinSourceSet by this.getting
+        linuxX64Main.dependsOn(nativeMain)
+        val macosX64Main: KotlinSourceSet by this.getting
+        macosX64Main.dependsOn(nativeMain)
         val macosArm64Main: KotlinSourceSet by this.getting
         macosArm64Main.dependsOn(nativeMain)
-        val windowsMain: KotlinSourceSet by this.getting
-        windowsMain.dependsOn(nativeMain)
+        val mingwX64Main: KotlinSourceSet by this.getting
+        mingwX64Main.dependsOn(nativeMain)
         this.configureEach {
             this.languageSettings.optIn("kotlin.RequiresOptIn")
         }
