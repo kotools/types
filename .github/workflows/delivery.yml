@@ -39,7 +39,7 @@ jobs:
   delivery:
     name: Delivery
     needs: setup
-    runs-on: macos-12
+    runs-on: macos-13
     env:
       GIT_USER: ${{ secrets.GIT_USER }}
       GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
