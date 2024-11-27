@@ -31,7 +31,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@bodiam]: https://github.com/bodiam
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
-[#407]: https://github.com/kotools/types/pull/407
+[#407]: https://github.com/kotools/types/issues/407
 [#742]: https://github.com/kotools/types/pull/742
 
 ## 🔖 Releases
