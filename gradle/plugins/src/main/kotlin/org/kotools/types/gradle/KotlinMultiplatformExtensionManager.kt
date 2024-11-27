@@ -52,6 +52,10 @@ internal class KotlinMultiplatformExtensionManager(
             this.project.rootProject.extensions.getByType()
         yarn.lockFileDirectory =
             this.project.rootProject.layout.projectDirectory.asFile
+        yarn.resolution("braces", "3.0.3")
+        yarn.resolution("follow-redirects", "1.15.6")
+        yarn.resolution("rollup", "2.79.2")
+        yarn.resolution("webpack", "5.94.0")
     }
 
     private fun configureKotlinJvmTarget(kotlin: KotlinMultiplatformExtension) {
