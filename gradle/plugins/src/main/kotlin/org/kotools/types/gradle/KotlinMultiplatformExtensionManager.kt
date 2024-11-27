@@ -86,7 +86,7 @@ internal class KotlinMultiplatformExtensionManager(
         this.compilations.configureEach {
             this.compilerOptions.configure {
                 this.allWarningsAsErrors.set(true)
-                this.languageVersion.set(KotlinVersion.KOTLIN_1_6)
+                this.languageVersion.set(KotlinVersion.KOTLIN_1_9)
             }
         }
     }
