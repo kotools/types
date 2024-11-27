@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 
 - Bump embedded Kotlin from 1.8.22 to 1.9.10, Kotlin language version from 1.5
   to 1.9, and kotlinx.serialization from 1.5.1 to 1.6.0 ([#407]).
+- Use default package names for Linux x64, macOS x64 and MinGW x64 ([#405]). 
 
 ### 🐛 Fixed
 
@@ -31,6 +32,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@bodiam]: https://github.com/bodiam
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
 [#742]: https://github.com/kotools/types/pull/742
 
