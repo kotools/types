@@ -1,11 +1,12 @@
-# Dependency compatibility
+# 📦 Dependency compatibility
 
 This file documents the compatibility of Kotools Types with its dependencies:
 the [Kotlin] language and the [kotlinx.serialization] library.
 
 ## Kotlin
 
-Here's the compatibility of this project with [Kotlin]:
+Here's the compatibility of this project with [Kotlin], including its embedded
+version and its language version for source compatibility:
 
 | Kotools Types version | Embedded Kotlin version | Kotlin Language version |
 |-----------------------|-------------------------|-------------------------|
