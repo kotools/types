@@ -8,7 +8,7 @@ the [Kotlin] language and the [kotlinx.serialization] library.
 Here's the compatibility of this project with [Kotlin], including its embedded
 version and its language version for source compatibility:
 
-| Kotools Types version | Embedded Kotlin version | Kotlin Language version |
+| Kotools Types version | Embedded Kotlin version | Kotlin language version |
 |-----------------------|-------------------------|-------------------------|
 | 5.0                   | 1.9.10                  | 1.9                     |
 | 4.5                   | 1.8.22                  | 1.5                     |
