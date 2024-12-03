@@ -14,7 +14,6 @@ public final class org/kotools/types/kotlinx/serialization/KotoolsTypesSerialize
 	public static final field INSTANCE Lorg/kotools/types/kotlinx/serialization/KotoolsTypesSerializers;
 	public final fun getAll ()Lkotlinx/serialization/modules/SerializersModule;
 	public final fun getEmailAddress ()Lkotlinx/serialization/modules/SerializersModule;
-	public final fun getZero ()Lkotlinx/serialization/modules/SerializersModule;
 	public final fun toString ()Ljava/lang/String;
 }
 
