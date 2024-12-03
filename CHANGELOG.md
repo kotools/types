@@ -26,6 +26,8 @@ All notable changes to this project will be documented in this file.
 
 - `KotoolsTypesSerializers.zero` **deprecated** property from the
   **experimental** API ([#723]).
+- `KotoolsTypesSerializers.emailAddress` **deprecated** property, from the
+  **experimental** API ([#727]).
 
 ### 🐛 Fixed
 
@@ -40,6 +42,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
 [#723]: https://github.com/kotools/types/issues/723
+[#727]: https://github.com/kotools/types/issues/727
 [#742]: https://github.com/kotools/types/pull/742
 
 ## 🔖 Releases
