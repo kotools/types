@@ -10,7 +10,6 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotools-samples-jvm = { id = "org.kotools.samples.jvm" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 kotools-types-dev-tasks = { id = "org.kotools.types.dev.tasks" }
 kotools-types-documentation = { id = "org.kotools.types.documentation" }
