@@ -5,17 +5,14 @@ import org.gradle.api.NamedDomainObjectProvider
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.kotlin.dsl.creating
 import org.gradle.kotlin.dsl.existing
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.getting
 import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
@@ -94,21 +91,6 @@ internal class KotlinMultiplatformExtensionManager(
     private fun configureKotlinSourceSets(
         kotlin: KotlinMultiplatformExtension
     ): Unit = kotlin.sourceSets.run {
-        val commonMain: KotlinSourceSet by this.getting
-        val jvmAndNativeMain: KotlinSourceSet by this.creating
-        jvmAndNativeMain.dependsOn(commonMain)
-        val jvmMain: KotlinSourceSet by this.getting
-        jvmMain.dependsOn(jvmAndNativeMain)
-        val nativeMain: KotlinSourceSet by this.creating
-        nativeMain.dependsOn(jvmAndNativeMain)
-        val linuxX64Main: KotlinSourceSet by this.getting
-        linuxX64Main.dependsOn(nativeMain)
-        val macosX64Main: KotlinSourceSet by this.getting
-        macosX64Main.dependsOn(nativeMain)
-        val macosArm64Main: KotlinSourceSet by this.getting
-        macosArm64Main.dependsOn(nativeMain)
-        val mingwX64Main: KotlinSourceSet by this.getting
-        mingwX64Main.dependsOn(nativeMain)
         this.configureEach {
             this.languageSettings.optIn("kotlin.RequiresOptIn")
         }
