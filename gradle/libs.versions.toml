@@ -4,18 +4,6 @@ kotlin = "1.9.10"
 kotlinx-binary-compatibility-validator = "0.14.0"
 kotlinx-serialization = "1.6.0"
 
-[plugins]
-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
-kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
-kotools-types-dev-tasks = { id = "org.kotools.types.dev.tasks" }
-kotools-types-documentation = { id = "org.kotools.types.documentation" }
-kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
-kotools-types-publication = { id = "kotools.types.publication" }
-
 [libraries]
 dokka-base = { group = "org.jetbrains.dokka", name = "dokka-base", version.ref = "dokka" }
 dokka-gradle-plugin = { group = "org.jetbrains.dokka", name = "org.jetbrains.dokka.gradle.plugin", version.ref = "dokka" }
@@ -28,3 +16,15 @@ kotlin-test-js = { group = "org.jetbrains.kotlin", name = "kotlin-test-js", vers
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlin" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+[plugins]
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
+kotools-types-dev-tasks = { id = "org.kotools.types.dev.tasks" }
+kotools-types-documentation = { id = "org.kotools.types.documentation" }
+kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
+kotools-types-publication = { id = "kotools.types.publication" }
