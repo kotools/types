@@ -3,8 +3,6 @@ package org.kotools.samples
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 // ----------------------------- Script properties -----------------------------
@@ -28,28 +26,6 @@ private val platforms: Set<String> = kotlin.sourceSets.asSequence()
         kotlin.sourceSets.any { it?.name == "${platform}Test" }
     }
     .toSet()
-
-platforms.forEach {
-    val main: KotlinSourceSet = kotlin.sourceSets.getByName("${it}Main")
-    val test: KotlinSourceSet = kotlin.sourceSets.getByName("${it}Test")
-    val sample: KotlinSourceSet = kotlin.sourceSets.create("${it}Sample") {
-        this.dependsOn(main)
-    }
-    test.dependsOn(sample)
-}
-
-afterEvaluate {
-    val withJavaEnabled: Boolean = kotlin.targets.withType<KotlinJvmTarget>()
-        .firstOrNull()
-        ?.withJavaEnabled
-        ?: false
-    if (!withJavaEnabled) return@afterEvaluate
-    val java: JavaPluginExtension = extensions.getByType()
-    java.sourceSets.named("test").configure {
-        val directory: Directory = projectSources.dir("jvmSample/java")
-        this.java.srcDir(directory)
-    }
-}
 
 // ----------------------------------- Tasks -----------------------------------
 
