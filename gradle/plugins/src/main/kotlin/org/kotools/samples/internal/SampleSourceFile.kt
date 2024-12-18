@@ -3,13 +3,20 @@ package org.kotools.samples.internal
 import java.io.File
 
 internal class SampleSourceFile private constructor(private val file: File) {
+    private val language: ProgrammingLanguage = ProgrammingLanguage(this.file)
+
     init {
-        require("Sample/" in this.file.path || "sample/" in this.file.path) {
-            "'${this.file.name}' file should be in a sample source set."
+        val fileIsInTestSourceSet: Boolean =
+            this.file.path.contains("test/", ignoreCase = true)
+        require(fileIsInTestSourceSet) {
+            "'${this.file.name}' file should be in a test source set."
+        }
+        val suffix = "Sample.${this.language.fileExtension}"
+        val fileNameHasValidSuffix: Boolean = this.file.name.endsWith(suffix)
+        require(fileNameHasValidSuffix) {
+            "'${this.file.name}' file's name should be suffixed by '$suffix'."
         }
     }
-
-    private val language: ProgrammingLanguage = ProgrammingLanguage(this.file)
 
     fun checkSingleClass() {
         val numberOfClasses: Int = this.countClasses()
