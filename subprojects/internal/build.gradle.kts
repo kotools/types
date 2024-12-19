@@ -20,10 +20,5 @@ documentation.excludeFromParentApiReference = true
 dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonTestImplementation(libs.kotlin.test.common)
-    commonTestImplementation(libs.kotlin.test.common.annotations)
-
-    jvmTestImplementation(libs.kotlin.test.junit5)
-
-    jsTestImplementation(libs.kotlin.test.js)
+    commonTestImplementation(libs.kotlin.test)
 }
