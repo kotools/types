@@ -15,6 +15,13 @@ documentation.moduleName = projectCommercialName
 
 dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
 
+tasks.register("checkAll").configure {
+    this.description = "Checks all projects."
+    this.group = "verification"
+    this.project.subprojects.mapNotNull { it?.tasks?.findByName("check") }
+        .let(this::setDependsOn)
+}
+
 private val tag: TaskProvider<Exec> by tasks.registering(Exec::class) {
     description = "Creates a Git annotated tag for the current version."
     group = "release"
