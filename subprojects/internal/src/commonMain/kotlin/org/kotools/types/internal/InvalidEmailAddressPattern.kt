@@ -18,13 +18,10 @@ public class InvalidEmailAddressPattern(
 ) {
     init {
         val patternIsNotBlank: Boolean = this.pattern.isNotBlank()
-        require(patternIsNotBlank, InvalidEmailAddress.Companion::BLANK_PATTERN)
+        require(patternIsNotBlank) { InvalidEmailAddress.BLANK_PATTERN }
         val validationPatternIsNotBlank: Boolean =
             this.validationPattern.isNotBlank()
-        require(
-            validationPatternIsNotBlank,
-            Companion::BLANK_VALIDATION_PATTERN
-        )
+        require(validationPatternIsNotBlank) { BLANK_VALIDATION_PATTERN }
     }
 
     /** Returns the string representation of this error. */

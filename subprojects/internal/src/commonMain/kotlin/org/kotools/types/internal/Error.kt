@@ -16,9 +16,9 @@ public class Error(
 ) {
     init {
         val messageIsNotBlank: Boolean = this.message.isNotBlank()
-        require(messageIsNotBlank, Companion::BLANK_MESSAGE)
+        require(messageIsNotBlank) { BLANK_MESSAGE }
         val reasonIsNotBlank: Boolean = this.reason.isNotBlank()
-        require(reasonIsNotBlank, Companion::BLANK_REASON)
+        require(reasonIsNotBlank) { BLANK_REASON }
     }
 
     /**

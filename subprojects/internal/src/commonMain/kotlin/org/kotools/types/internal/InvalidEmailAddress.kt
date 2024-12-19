@@ -18,9 +18,9 @@ public class InvalidEmailAddress(
 ) {
     init {
         val valueIsNotBlank: Boolean = this.text.isNotBlank()
-        require(valueIsNotBlank, Companion::BLANK_VALUE)
+        require(valueIsNotBlank) { BLANK_VALUE }
         val patternIsNotBlank: Boolean = this.pattern.isNotBlank()
-        require(patternIsNotBlank, Companion::BLANK_PATTERN)
+        require(patternIsNotBlank) { BLANK_PATTERN }
     }
 
     /** Returns the string representation of this error. */
