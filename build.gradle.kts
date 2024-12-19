@@ -1,19 +1,25 @@
 allprojects {
-    group = "org.kotools"
-    repositories.mavenCentral()
+    this.group = "org.kotools"
+    this.repositories.mavenCentral()
 }
+
+// ---------------------------------- Plugins ----------------------------------
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform) apply false
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotools.types.documentation)
+    this.alias(libs.plugins.kotlin.multiplatform) apply false
+    this.alias(libs.plugins.dokka)
+    this.alias(libs.plugins.kotools.types.documentation)
 }
 
-private val projectCommercialName: String = "Kotools Types"
+// ----------------------------- Plugin extensions -----------------------------
 
-documentation.moduleName = projectCommercialName
+documentation.moduleName = "Kotools Types"
+
+// ------------------------------- Dependencies --------------------------------
 
 dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
+
+// ----------------------------------- Tasks -----------------------------------
 
 tasks.register("checkAll").configure {
     this.description = "Checks all projects."
@@ -22,11 +28,12 @@ tasks.register("checkAll").configure {
         .let(this::setDependsOn)
 }
 
-private val tag: TaskProvider<Exec> by tasks.registering(Exec::class) {
-    description = "Creates a Git annotated tag for the current version."
-    group = "release"
-    val projectVersion = "$version"
+tasks.register<Exec>("tag").configure {
+    this.description = "Creates a Git annotated tag for the current version."
+    this.group = "release"
     val gitmoji = "\uD83D\uDD16"
-    val tagMessage = "$gitmoji $projectCommercialName $projectVersion"
-    setCommandLine("git", "tag", projectVersion, "-s", "-m", tagMessage)
+    val moduleName: String = documentation.moduleName.get()
+    val version: String = this.project.version.toString()
+    val tagMessage = "$gitmoji $moduleName $version"
+    this.setCommandLine("git", "tag", version, "-s", "-m", tagMessage)
 }
