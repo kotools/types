@@ -14,7 +14,6 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
         extensions.publishing()
         val tasks = KotlinMultiplatformTaskManager(project)
         tasks.compileTestDevelopmentExecutableKotlinJs()
-        tasks.checkJvm(plugins)
         tasks.jars()
     }
 }

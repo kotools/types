@@ -17,7 +17,7 @@ plugins {
 
 apiValidation.apiDumpDirectory = "src/api"
 
-devTasks.list(tasks.apiDump, tasks.checkJvm)
+devTasks.list(tasks.apiDump)
 
 documentation.packages = layout.projectDirectory.file("packages.md").asFile
 

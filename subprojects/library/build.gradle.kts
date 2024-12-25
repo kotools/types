@@ -18,7 +18,7 @@ plugins {
 
 apiValidation.apiDumpDirectory = "src/api"
 
-devTasks.list(tasks.apiDump, tasks.checkJvm)
+devTasks.list(tasks.apiDump)
 
 documentation {
     moduleName = "Kotools Types"
