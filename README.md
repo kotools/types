@@ -26,6 +26,7 @@ explicit type handling!
 [kotlin-native]: https://kotlinlang.org/docs/native-overview.html
 [kotlin/js]: https://kotlinlang.org/docs/js-overview.html
 [kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
+[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [kotools-types-badge]: https://img.shields.io/maven-central/v/org.kotools/types?label=Latest
 [kotools-types-project]: https://github.com/kotools/types
 [linux-x64-platform-badge]: https://img.shields.io/badge/Platform-Linux_x64-4b4bff
