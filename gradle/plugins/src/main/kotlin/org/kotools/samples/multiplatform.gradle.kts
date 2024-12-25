@@ -18,15 +18,6 @@ private val sourcesBackupBuildDirectory: Provider<Directory> =
 private val kotlin: KotlinMultiplatformExtension = extensions.findByType()
     ?: error("Kotlin Multiplatform plugin wasn't applied to ${project}.")
 
-private val platforms: Set<String> = kotlin.sourceSets.asSequence()
-    .filterNotNull()
-    .filter { it.name.endsWith("Main") }
-    .map { it.name.substringBefore("Main") }
-    .filter { platform: String ->
-        kotlin.sourceSets.any { it?.name == "${platform}Test" }
-    }
-    .toSet()
-
 // ----------------------------------- Tasks -----------------------------------
 
 private val checkSampleSources: TaskProvider<CheckSampleSources>
@@ -94,9 +85,8 @@ rootProject.tasks.withType<DokkaMultiModuleTask>().configureEach {
 
 // ---------------------------- Kotlin integration -----------------------------
 
-platforms.map { it.replaceFirstChar(Char::uppercaseChar) }
-    .mapNotNull { tasks.findByName("check$it") }
-    .forEach { it.dependsOn(checkSampleReferences) }
+tasks.named("check")
+    .configure { this.dependsOn(checkSampleReferences) }
 
 kotlin.targets
     .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
