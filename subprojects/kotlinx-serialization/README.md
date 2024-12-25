@@ -77,13 +77,13 @@ See the [API reference] of the `KotoolsTypesSerializers` type for more details.
 [js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00
 [jvm-platform-badge]: https://img.shields.io/badge/Platform-JVM-6bac25
 [kotlin]: https://kotlinlang.org
-[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.9.10-blue?logo=kotlin
+[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.9.25-blue?logo=kotlin
 [kotlin-language-badge]: https://img.shields.io/badge/Kotlin_language-1.9-blue?logo=kotlin
 [kotlin-native]: https://kotlinlang.org/docs/native-overview.html
 [kotlin/js]: https://kotlinlang.org/docs/js-overview.html
 [kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.6.0-blue
+[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.6.3-blue
 [kotlinx.serialization.json]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json
 [kotlinx.serialization.modules.SerializersModule]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.modules/-serializers-module
 [kotools-types]: https://github.com/kotools/types

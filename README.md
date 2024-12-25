@@ -3,7 +3,6 @@
 [![Kotools Types][kotools-types-badge]][kotools-types-project]
 [![Embedded Kotlin][kotlin-embedded-badge]][kotlin]
 [![Kotlin language][kotlin-language-badge]][kotlin]
-[![kotlinx.serialization][kotlinx.serialization-badge]][kotlinx.serialization]
 
 [![JVM Platform][jvm-platform-badge]][kotlin/jvm]
 [![JS Platform][js-platform-badge]][kotlin/js]
@@ -22,13 +21,11 @@ explicit type handling!
 [js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00
 [jvm-platform-badge]: https://img.shields.io/badge/Platform-JVM-6bac25
 [kotlin]: https://kotlinlang.org
-[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.9.10-blue?logo=kotlin
+[kotlin-embedded-badge]: https://img.shields.io/badge/Embedded_Kotlin-1.9.25-blue?logo=kotlin
 [kotlin-language-badge]: https://img.shields.io/badge/Kotlin_language-1.9-blue?logo=kotlin
 [kotlin-native]: https://kotlinlang.org/docs/native-overview.html
 [kotlin/js]: https://kotlinlang.org/docs/js-overview.html
 [kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
-[kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
-[kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.6.0-blue
 [kotools-types-badge]: https://img.shields.io/maven-central/v/org.kotools/types?label=Latest
 [kotools-types-project]: https://github.com/kotools/types
 [linux-x64-platform-badge]: https://img.shields.io/badge/Platform-Linux_x64-4b4bff
