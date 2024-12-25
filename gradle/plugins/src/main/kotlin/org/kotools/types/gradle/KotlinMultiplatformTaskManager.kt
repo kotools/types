@@ -14,15 +14,6 @@ import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 internal class KotlinMultiplatformTaskManager(private val project: Project) {
-    fun checkJs() {
-        val jsNodeTest: TaskProvider<Task> by project.tasks.existing
-        val checkJs: TaskProvider<Task> by project.tasks.registering
-        checkJs.configure {
-            description = "Runs all checks for the Kotlin/JS platform."
-            dependsOn(jsNodeTest)
-        }
-    }
-
     fun checkJvm(plugins: PluginManager) {
         val jvmTest: TaskProvider<Task> by project.tasks.existing
         val checkJvm: TaskProvider<Task> by project.tasks.registering

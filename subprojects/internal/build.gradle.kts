@@ -11,7 +11,7 @@ plugins {
 
 // ----------------------------- Plugin extensions -----------------------------
 
-devTasks.list(tasks.checkJs, tasks.checkJvm)
+devTasks.list(tasks.checkJvm)
 
 documentation.excludeFromParentApiReference = true
 
