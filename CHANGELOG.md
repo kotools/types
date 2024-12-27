@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
   **experimental** API ([#723]).
 - `KotoolsTypesSerializers.emailAddress` **deprecated** property, from the
   **experimental** API ([#727]).
+- **Hidden** annotations from the `kotools.types.experimental` package ([#318]).
 
 ### 🐛 Fixed
 
@@ -39,6 +40,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@bodiam]: https://github.com/bodiam
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#318]: https://github.com/kotools/types/issues/318
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
 [#723]: https://github.com/kotools/types/issues/723
