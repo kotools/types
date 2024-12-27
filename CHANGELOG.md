@@ -29,6 +29,8 @@ All notable changes to this project will be documented in this file.
 - `KotoolsTypesSerializers.emailAddress` **deprecated** property, from the
   **experimental** API ([#727]).
 - **Hidden** annotations from the `kotools.types.experimental` package ([#318]).
+- `Zero.Companion.fromByteOrNull` **deprecated** method from the
+  **experimental** API ([#715]).
 
 ### 🐛 Fixed
 
@@ -43,6 +45,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#318]: https://github.com/kotools/types/issues/318
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
+[#715]: https://github.com/kotools/types/issues/715
 [#723]: https://github.com/kotools/types/issues/723
 [#727]: https://github.com/kotools/types/issues/727
 [#740]: https://github.com/kotools/types/issues/740

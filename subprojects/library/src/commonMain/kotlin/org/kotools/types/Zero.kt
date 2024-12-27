@@ -528,9 +528,6 @@ public class Zero {
         /**
          * Creates an instance of [Zero] from the specified [number], or throws
          * an [IllegalArgumentException] if the [number] is other than zero.
-         *
-         * See the [fromByteOrNull] method for returning `null` instead of
-         * throwing an exception in case of invalid [number].
          */
         @Deprecated(
             "Use the 'orThrow' method instead.",
@@ -543,30 +540,6 @@ public class Zero {
             val zero = Zero()
             require(number == zero.valueAsByte) { InvalidZero(number) }
             return zero
-        }
-
-        /**
-         * Creates an instance of [Zero] from the specified [number], or returns
-         * `null` if calling the [fromByte] method with the [number] throws an
-         * [IllegalArgumentException].
-         *
-         * This method is not available from Java code due to its non-explicit
-         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [fromByte] method for throwing an exception instead of
-         * returning `null` in case of invalid [number].
-         */
-        @Deprecated(
-            "Use the 'orNull' method instead.",
-            ReplaceWith("Zero.orNull(number)", "org.kotools.types.Zero"),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
-        @JvmSynthetic
-        public fun fromByteOrNull(number: Byte): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
         }
 
         /**

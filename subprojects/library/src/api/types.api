@@ -459,7 +459,6 @@ public final class org/kotools/types/Zero {
 
 public final class org/kotools/types/Zero$Companion {
 	public final fun fromByte (B)Lorg/kotools/types/Zero;
-	public final synthetic fun fromByteOrNull (B)Lorg/kotools/types/Zero;
 	public final synthetic fun orNull (B)Lorg/kotools/types/Zero;
 	public final fun orThrow (B)Lorg/kotools/types/Zero;
 }
