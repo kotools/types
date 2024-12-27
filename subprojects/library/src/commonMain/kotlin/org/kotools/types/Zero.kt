@@ -2,7 +2,6 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -525,23 +524,6 @@ public class Zero {
 
     /** Contains static declarations for the [Zero] type. */
     public companion object {
-        /**
-         * Creates an instance of [Zero] from the specified [number], or throws
-         * an [IllegalArgumentException] if the [number] is other than zero.
-         */
-        @Deprecated(
-            "Use the 'orThrow' method instead.",
-            ReplaceWith("Zero.orThrow(number)", "org.kotools.types.Zero"),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
-        @JvmStatic
-        public fun fromByte(number: Byte): Zero {
-            val zero = Zero()
-            require(number == zero.valueAsByte) { InvalidZero(number) }
-            return zero
-        }
-
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
          * `null` if the [number] is other than zero.

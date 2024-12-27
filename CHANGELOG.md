@@ -29,8 +29,8 @@ All notable changes to this project will be documented in this file.
 - `KotoolsTypesSerializers.emailAddress` **deprecated** property, from the
   **experimental** API ([#727]).
 - **Hidden** annotations from the `kotools.types.experimental` package ([#318]).
-- `Zero.Companion.fromByteOrNull` **deprecated** method from the
-  **experimental** API ([#715]).
+- `Zero.Companion.fromByte` and `Zero.Companion.fromByteOrNull` **deprecated**
+  methods from the **experimental** API ([#715]).
 
 ### 🐛 Fixed
 

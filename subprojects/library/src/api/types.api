@@ -444,7 +444,6 @@ public final class org/kotools/types/Zero {
 	public final fun compareTo (J)I
 	public final fun compareTo (S)I
 	public final fun equals (Ljava/lang/Object;)Z
-	public static final fun fromByte (B)Lorg/kotools/types/Zero;
 	public final fun hashCode ()I
 	public static final fun orThrow (B)Lorg/kotools/types/Zero;
 	public final fun toByte ()B
@@ -458,7 +457,6 @@ public final class org/kotools/types/Zero {
 }
 
 public final class org/kotools/types/Zero$Companion {
-	public final fun fromByte (B)Lorg/kotools/types/Zero;
 	public final synthetic fun orNull (B)Lorg/kotools/types/Zero;
 	public final fun orThrow (B)Lorg/kotools/types/Zero;
 }
