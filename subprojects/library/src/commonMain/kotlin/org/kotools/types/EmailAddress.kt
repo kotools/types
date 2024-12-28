@@ -158,25 +158,6 @@ public class EmailAddress private constructor(private val text: String) {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [text], or throws an [IllegalArgumentException] if
-         * the string representation of [text] doesn't match the
-         * [default pattern][PATTERN].
-         */
-        @Deprecated(
-            "Use the 'orThrow' method instead.",
-            ReplaceWith(
-                "EmailAddress.orThrow(\"\$text\")",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
-        @JvmStatic
-        public fun fromString(text: Any): EmailAddress =
-            fromString(text, PATTERN)
-
-        /**
-         * Creates an instance of [EmailAddress] from the string representation
          * of the specified [text].
          * Throws an [IllegalArgumentException] if the string representation of
          * [text] doesn't match the string representation of the specified
