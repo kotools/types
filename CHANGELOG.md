@@ -31,6 +31,8 @@ All notable changes to this project will be documented in this file.
 - **Hidden** annotations from the `kotools.types.experimental` package ([#318]).
 - `Zero.Companion.fromByte` and `Zero.Companion.fromByteOrNull` **deprecated**
   methods from the **experimental** API ([#715]).
+- `EmailAddress.Companion.fromStringOrNull(Any)` **deprecated** method from the
+  **experimental** API ([#721]).
 
 ### 🐛 Fixed
 
@@ -46,6 +48,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
 [#715]: https://github.com/kotools/types/issues/715
+[#721]: https://github.com/kotools/types/issues/721
 [#723]: https://github.com/kotools/types/issues/723
 [#727]: https://github.com/kotools/types/issues/727
 [#740]: https://github.com/kotools/types/issues/740

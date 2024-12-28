@@ -218,31 +218,6 @@ public class EmailAddress private constructor(private val text: String) {
 
         /**
          * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [text], or returns `null` if the string
-         * representation of [text] doesn't match the
-         * [default pattern][PATTERN].
-         *
-         * This method is not available from Java code due to its non-explicit
-         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [fromString] method for throwing an exception instead of
-         * returning `null` in case of invalid [text].
-         */
-        @Deprecated(
-            "Use the 'orNull' method instead.",
-            ReplaceWith(
-                "EmailAddress.orNull(\"\$text\")",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
-        @JvmSynthetic
-        public fun fromStringOrNull(text: Any): EmailAddress? =
-            this.fromStringOrNull(text, this.PATTERN)
-
-        /**
-         * Creates an instance of [EmailAddress] from the string representation
          * of the specified [text].
          * Returns `null` if the string representation of [text] doesn't match
          * the string representation of the specified [pattern], or if the
