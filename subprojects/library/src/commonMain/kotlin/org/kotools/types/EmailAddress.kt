@@ -2,7 +2,6 @@ package org.kotools.types
 
 import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
@@ -155,51 +154,6 @@ public class EmailAddress private constructor(private val text: String) {
          * </details>
          */
         public const val PATTERN: String = """^\S+@\S+\.\S+$"""
-
-        /**
-         * Creates an instance of [EmailAddress] from the string representation
-         * of the specified [text].
-         * Throws an [IllegalArgumentException] if the string representation of
-         * [text] doesn't match the string representation of the specified
-         * [pattern], or if the string representation of [pattern] doesn't match
-         * the [default pattern][PATTERN].
-         */
-        @Deprecated(
-            "Use the 'orThrow' method instead.",
-            ReplaceWith(
-                "EmailAddress.orThrow(\"\$text\", \"\$pattern\")",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V4_5_3)
-        @JvmStatic
-        public fun fromString(text: Any, pattern: Any): EmailAddress {
-            val patternAsString: String = pattern.toString()
-            val validationPattern: String = this.PATTERN
-            val regex = Regex(validationPattern)
-            require(patternAsString matches regex) {
-                InvalidEmailAddressPattern(patternAsString, validationPattern)
-            }
-            return this.fromString(text, patternAsString)
-        }
-
-        private fun fromString(text: Any, pattern: String): EmailAddress {
-            val address: EmailAddress? = fromStringOrNull(text, pattern)
-            return requireNotNull(address) {
-                InvalidEmailAddress("$text", pattern)
-            }
-        }
-
-        private fun fromStringOrNull(
-            text: Any,
-            pattern: String
-        ): EmailAddress? {
-            val valueAsString: String = text.toString()
-            val regex = Regex(pattern)
-            return if (valueAsString matches regex) EmailAddress(valueAsString)
-            else null
-        }
 
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or

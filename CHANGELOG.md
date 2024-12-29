@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 - **Hidden** annotations from the `kotools.types.experimental` package ([#318]).
 - `Zero.Companion.fromByte` and `Zero.Companion.fromByteOrNull` **deprecated**
   methods from the **experimental** API ([#715]).
-- `EmailAddress.Companion.fromString(Any)` and
+- `EmailAddress.Companion.fromString` and
   `EmailAddress.Companion.fromStringOrNull` **deprecated** methods from the
   **experimental** API ([#721]).
 
