@@ -5,7 +5,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import kotlin.test.Test
 import kotlin.test.assertEquals

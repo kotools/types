@@ -3,6 +3,7 @@ package kotools.types.experimental
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.number.NonZeroInt
 import kotools.types.number.toNonZeroInt
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

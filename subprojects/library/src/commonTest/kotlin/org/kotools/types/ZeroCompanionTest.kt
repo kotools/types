@@ -1,6 +1,5 @@
 package org.kotools.types
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InvalidZero
 import kotlin.test.Test
 import kotlin.test.assertEquals

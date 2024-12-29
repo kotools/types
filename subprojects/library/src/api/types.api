@@ -428,6 +428,9 @@ public final class org/kotools/types/EmailAddress$Companion {
 	public final fun orThrow (Ljava/lang/String;Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
 }
 
+public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
+}
+
 public final class org/kotools/types/Zero {
 	public static final field Companion Lorg/kotools/types/Zero$Companion;
 	public fun <init> ()V

@@ -1,6 +1,5 @@
 package org.kotools.types
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotlin.test.Test
 import kotlin.test.assertEquals

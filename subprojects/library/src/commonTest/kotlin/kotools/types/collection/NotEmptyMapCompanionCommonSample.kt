@@ -1,6 +1,6 @@
 package kotools.types.collection
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

@@ -1,9 +1,9 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.json.Json
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.EmailAddress
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InvalidEmailAddress
 import kotlin.test.Test
 import kotlin.test.assertEquals

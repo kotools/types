@@ -1,6 +1,6 @@
 package kotools.types.number
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test

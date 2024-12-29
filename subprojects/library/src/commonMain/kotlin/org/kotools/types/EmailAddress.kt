@@ -1,6 +1,5 @@
 package org.kotools.types
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InvalidEmailAddress

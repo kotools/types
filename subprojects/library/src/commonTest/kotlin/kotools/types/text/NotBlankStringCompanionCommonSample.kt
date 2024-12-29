@@ -1,6 +1,6 @@
 package kotools.types.text
 
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue

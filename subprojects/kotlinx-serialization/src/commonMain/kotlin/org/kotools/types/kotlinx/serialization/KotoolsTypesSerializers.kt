@@ -2,8 +2,8 @@ package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning

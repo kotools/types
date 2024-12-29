@@ -7,13 +7,13 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning

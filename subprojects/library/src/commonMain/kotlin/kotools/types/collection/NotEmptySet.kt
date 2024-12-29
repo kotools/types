@@ -6,10 +6,10 @@ import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since

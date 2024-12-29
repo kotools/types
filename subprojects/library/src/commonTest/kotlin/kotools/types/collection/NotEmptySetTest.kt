@@ -9,7 +9,6 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
-import kotools.types.experimental.ExperimentalKotoolsTypesApi
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
@@ -20,6 +19,7 @@ import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContentEquals

@@ -14,6 +14,7 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.shouldBeGreaterThanZero
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
