@@ -20,7 +20,9 @@ All notable changes to this project will be documented in this file.
 
 - Bump embedded Kotlin from 1.8.22 to 1.9.25, Kotlin language version from 1.5
   to 1.9, and kotlinx.serialization from 1.5.1 to 1.6.3 ([#407] and [#740]).
-- Use default package names for Linux x64, macOS x64 and MinGW x64 ([#405]). 
+- Use default package names for Linux x64, macOS x64 and MinGW x64 ([#405]).
+- Move `ExperimentalKotoolsTypesApi` from the `kotools.types.experimental`
+  package to the `org.kotools.types` one ([#636]).
 
 ### 🔥 Removed
 
@@ -48,6 +50,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#318]: https://github.com/kotools/types/issues/318
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
+[#636]: https://github.com/kotools/types/issues/636
 [#715]: https://github.com/kotools/types/issues/715
 [#721]: https://github.com/kotools/types/issues/721
 [#723]: https://github.com/kotools/types/issues/723
