@@ -5,3 +5,4 @@ updates:
     schedule:
       interval: "monthly"
     labels: [ "dependencies", "github-actions" ]
+    reviewers: [ "LVMVRQUXL" ]
