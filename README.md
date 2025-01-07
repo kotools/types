@@ -6,6 +6,7 @@
 
 [![JVM Platform][jvm-platform-badge]][kotlin/jvm]
 [![JS Platform][js-platform-badge]][kotlin/js]
+[![iOS Simulator arm64 Platform][ios-simulator-arm64-platform-badge]][kotlin-native]
 [![Linux x64 Platform][linux-x64-platform-badge]][kotlin-native]
 [![macOS x64 Platform][macos-x64-platform-badge]][kotlin-native]
 [![macOS arm64 Platform][macos-arm64-platform-badge]][kotlin-native]
@@ -18,6 +19,7 @@ Unlock the true potential of Kotlin's type system across Kotlin/JVM, Kotlin/JS,
 and Kotlin Native platforms with Kotools Types – your comprehensive toolkit for
 explicit type handling!
 
+[ios-simulator-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_Simulator_arm64-4b4bff
 [js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00
 [jvm-platform-badge]: https://img.shields.io/badge/Platform-JVM-6bac25
 [kotlin]: https://kotlinlang.org

@@ -69,6 +69,7 @@ internal class KotlinMultiplatformExtensionManager(
     ) {
         // Inspired from https://kotlinlang.org/docs/native-target-support.html.
         // Tier 1
+        kotlin.iosSimulatorArm64()
         kotlin.macosX64()
         kotlin.macosArm64()
         // Tier 2

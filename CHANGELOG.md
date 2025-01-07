@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
+- Support iOS Simulator arm64 Kotlin Native target ([#415]).
 - Dependency upgrades strategy in the
   [dependency compatibility](documentation/dependencies.md) documentation
   ([#289]). 
@@ -57,6 +58,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#318]: https://github.com/kotools/types/issues/318
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
+[#415]: https://github.com/kotools/types/issues/415
 [#636]: https://github.com/kotools/types/issues/636
 [#715]: https://github.com/kotools/types/issues/715
 [#721]: https://github.com/kotools/types/issues/721
