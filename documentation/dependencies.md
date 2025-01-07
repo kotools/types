@@ -1,9 +1,9 @@
-# 📦 Dependency compatibility
+# 🔗 Dependency compatibility
 
 This file documents the compatibility of Kotools Types with its dependencies:
 the [Kotlin] language and the [kotlinx.serialization] library.
 
-## Kotlin
+## 📦 Kotlin
 
 Here's the compatibility of this project with [Kotlin], including its embedded
 version and its language version for source compatibility:
@@ -19,7 +19,7 @@ version and its language version for source compatibility:
 | 4.1                   | 1.5.32                  | 1.5                     |
 | <= 4.0                | 1.5.31                  | 1.5                     |
 
-## kotlinx.serialization
+## 📦 kotlinx.serialization
 
 Here's the compatibility of this project with [kotlinx.serialization] for
 serializing or deserializing the provided types:
@@ -32,6 +32,20 @@ serializing or deserializing the provided types:
 | 4.2                   | 1.3.3                         |
 | <= 4.1                | 1.3.1                         |
 | < 3.0                 | -                             |
+
+## ⬆️ Upgrades strategy
+
+Starting from Kotools Types 5.0, we have the following strategy for upgrading
+our dependencies:
+
+- Upgrading the embedded [Kotlin] version must be done for a **minor release**
+  or a **major release**.
+- Upgrading the [Kotlin] language version must be done for a **major release**.
+- Upgrading the [kotlinx.serialization] version must be done for a **minor
+  release** or a **major release**.
+
+See our [versioning strategy](versioning-strategy.md) for more details on these
+releases.
 
 <!-- Shared links -->
 

@@ -16,6 +16,12 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- Dependency upgrades strategy in the
+  [dependency compatibility](documentation/dependencies.md) documentation
+  ([#289]). 
+
 ### ♻️ Changed
 
 - Bump embedded Kotlin from 1.8.22 to 1.9.25, Kotlin language version from 1.5
@@ -47,6 +53,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@bodiam]: https://github.com/bodiam
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#289]: https://github.com/kotools/types/issues/289
 [#318]: https://github.com/kotools/types/issues/318
 [#405]: https://github.com/kotools/types/issues/405
 [#407]: https://github.com/kotools/types/issues/407
