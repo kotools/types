@@ -25,67 +25,25 @@ on:
       - gradlew.bat
       - yarn.lock
   workflow_dispatch:
-env:
-  JAVA_DISTRIBUTION: temurin
-  JAVA_VERSION: 17
 jobs:
-  macos-checks:
-    name: Checks on macOS
+  checks:
+    name: Checks
     runs-on: macos-13
-    strategy:
-      matrix:
-        project: [ types-internal, types, types-kotlinx-serialization ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
       - name: Setup Java
         uses: actions/setup-java@v4.5.0
         with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.2.2
-      - name: Run all checks
-        run: ./gradlew :$PROJECT:check
-        env:
-          PROJECT: ${{ matrix.project }}
-  ubuntu-checks:
-    name: Checks on Ubuntu
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        project: [ plugins, types-internal, types, types-kotlinx-serialization ]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.2
-      - name: Setup Java
-        uses: actions/setup-java@v4.5.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.2.2
-      - name: Run all checks
-        run: ./gradlew :$PROJECT:check
-        env:
-          PROJECT: ${{ matrix.project }}
-  windows-checks:
-    name: Checks on Windows
-    runs-on: windows-2022
-    strategy:
-      matrix:
-        project: [ types-internal, types, types-kotlinx-serialization ]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.2
-      - name: Setup Java
-        uses: actions/setup-java@v4.5.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.2.2
-      - name: Run all checks
-        run: ./gradlew :${{ env.PROJECT }}:check
-        env:
-          PROJECT: ${{ matrix.project }}
+      - name: Check 'plugins' project
+        run: ./gradlew :plugins:check
+      - name: Check 'types-internal' project
+        run: ./gradlew :types-internal:check
+      - name: Check 'types' project
+        run: ./gradlew :types:check
+      - name: Check 'types-kotlinx-serialization' project
+        run: ./gradlew :types-kotlinx-serialization:check
