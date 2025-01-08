@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
   ([#289]).
 - `orNull(Short)` and `orThrow(Short)` methods in the `Zero.Companion`
   **experimental** type ([#716]).
+- `orNull(Int)` and `orThrow(Int)` methods in the `Zero.Companion`
+  **experimental** type ([#717]).
 
 ### ♻️ Changed
 
@@ -67,6 +69,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#636]: https://github.com/kotools/types/issues/636
 [#715]: https://github.com/kotools/types/issues/715
 [#716]: https://github.com/kotools/types/issues/716
+[#717]: https://github.com/kotools/types/issues/717
 [#721]: https://github.com/kotools/types/issues/721
 [#723]: https://github.com/kotools/types/issues/723
 [#727]: https://github.com/kotools/types/issues/727
