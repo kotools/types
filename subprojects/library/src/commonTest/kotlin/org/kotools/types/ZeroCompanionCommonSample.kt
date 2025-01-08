@@ -43,4 +43,15 @@ class ZeroCompanionCommonSample {
         }
         assertTrue(isSuccess)
     }
+
+    @Test
+    fun orThrowWithInt() {
+        val isSuccess: Boolean = try {
+            Zero.orThrow(0)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
 }

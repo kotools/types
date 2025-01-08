@@ -34,13 +34,8 @@ class ZeroCompanionTest {
             .random()
             .random()
             .toByte()
-        val exception: IllegalArgumentException = assertFailsWith {
-            Zero.orThrow(number)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidZero(number)
-            .toString()
-        assertEquals(expected, actual)
+        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
+            .assertIsInvalidZero(number)
     }
 
     @Test
@@ -49,12 +44,23 @@ class ZeroCompanionTest {
             .random()
             .random()
             .toShort()
-        val exception: IllegalArgumentException = assertFailsWith {
-            Zero.orThrow(number)
-        }
-        val actual: String? = exception.message
-        val expected: String = InvalidZero(number)
-            .toString()
-        assertEquals(expected, actual)
+        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
+            .assertIsInvalidZero(number)
     }
+
+    @Test
+    fun orThrowShouldFailWithIntOtherThanZero() {
+        val number: Int = setOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
+            .random()
+            .random()
+        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
+            .assertIsInvalidZero(number)
+    }
+}
+
+private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
+    val actual: String? = this.message
+    val expected: String = InvalidZero(number)
+        .toString()
+    assertEquals(expected, actual)
 }
