@@ -22,7 +22,9 @@ All notable changes to this project will be documented in this file.
   [#416]).
 - Dependency upgrades strategy in the
   [dependency compatibility](documentation/dependencies.md) documentation
-  ([#289]). 
+  ([#289]).
+- `orNull(Short)` and `orThrow(Short)` methods in the `Zero.Companion`
+  **experimental** type ([#716]).
 
 ### ♻️ Changed
 
@@ -64,6 +66,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#416]: https://github.com/kotools/types/issues/416
 [#636]: https://github.com/kotools/types/issues/636
 [#715]: https://github.com/kotools/types/issues/715
+[#716]: https://github.com/kotools/types/issues/716
 [#721]: https://github.com/kotools/types/issues/721
 [#723]: https://github.com/kotools/types/issues/723
 [#727]: https://github.com/kotools/types/issues/727
