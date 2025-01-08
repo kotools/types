@@ -648,6 +648,10 @@ public class Zero {
          *
          * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithShort]
          * </details>
+         * <br>
+         *
+         * See the [orNull] method for returning `null` instead of throwing an
+         * exception in case of invalid [number].
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
