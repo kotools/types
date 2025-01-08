@@ -52,6 +52,5 @@ public object KotoolsTypesSerializers {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String =
-        simpleNameOf<KotoolsTypesSerializers>()
+    final override fun toString(): String = simpleNameOf(this::class)
 }
