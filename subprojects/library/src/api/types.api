@@ -120,9 +120,6 @@ public final class kotools/types/experimental/AnyIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/AnyInt;)Lkotools/types/number/AnyInt;
 }
 
-public abstract interface annotation class kotools/types/experimental/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
-}
-
 public final class kotools/types/experimental/NegativeIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
 }
