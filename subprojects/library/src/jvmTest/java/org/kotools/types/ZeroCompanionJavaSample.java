@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroCompanionJavaSample {
     @Test
-    void orThrow() {
+    void orThrowWithByte() {
         final byte number = 0;
         boolean isSuccess;
         try {

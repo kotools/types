@@ -521,6 +521,8 @@ public class Zero {
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.valueAsByte.toString()
 
+    // -------------------------------------------------------------------------
+
     /** Contains static declarations for the [Zero] type. */
     public companion object {
         /**
@@ -565,7 +567,7 @@ public class Zero {
          *
          * Here's an example of calling this method from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrow]
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithByte]
          * </details>
          *
          * <br>
@@ -576,7 +578,7 @@ public class Zero {
          *
          * Here's an example of calling this method from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrow]
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithByte]
          * </details>
          * <br>
          *
@@ -586,9 +588,9 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(number: Byte): Zero {
-            val zero = Zero()
-            require(number == zero.valueAsByte) { InvalidZero(number) }
-            return zero
+            val expected: Byte = 0
+            require(number == expected) { InvalidZero(number) }
+            return Zero()
         }
 
         /**

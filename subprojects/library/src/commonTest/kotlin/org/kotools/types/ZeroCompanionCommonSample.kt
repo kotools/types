@@ -14,7 +14,7 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
-    fun orThrow() {
+    fun orThrowWithByte() {
         val number: Byte = 0
         val isSuccess: Boolean = try {
             Zero.orThrow(number)
