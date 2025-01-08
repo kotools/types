@@ -13,7 +13,6 @@ Issues of the milestone corresponding to this version should be done before reso
 ## ✅ Checklist
 
 - [ ] 🔖 Set Gradle project's version to this new one.
-- [ ] 📝 Update versioning annotations of unreleased declarations.
 - [ ] 📝 Check the copyright notice in the [license] documentation.
 - [ ] 🚀 Deliver packages to the [Maven central] by running the [delivery workflow].
 - [ ] 🚀 Close valid packages and drop invalid ones on the [Maven central].
