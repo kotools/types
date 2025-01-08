@@ -21,5 +21,5 @@ labels: bug
 -->
 
 <!-- Include the following step in case of tracking issues.
-- [ ] 📝 Attach tracking issues to a milestone.
+- [ ] 📝 After closing this issue, attach tracking issues to a milestone.
 -->
