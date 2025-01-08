@@ -9,8 +9,6 @@ dependencies {
     implementation(libs.dokka.base)
     implementation(libs.dokka.gradle.plugin)
     implementation(libs.dokka.versioning)
-
-    testImplementation(libs.kotlin.test)
 }
 
 gradlePlugin {
