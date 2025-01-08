@@ -12,6 +12,8 @@ Issues of the milestone corresponding to this version should be done before reso
 
 ## ✅ Checklist
 
+> See the [_Issue implementation_ section in the contributing guidelines](https://github.com/kotools/types/blob/main/CONTRIBUTING.md#issue-implementation) before addressing the following checklist.
+
 - [ ] 🔖 Set Gradle project's version to this new one.
 - [ ] 📝 Check the copyright notice in the [license] documentation.
 - [ ] 🚀 Deliver packages to the [Maven central] by running the [delivery workflow].

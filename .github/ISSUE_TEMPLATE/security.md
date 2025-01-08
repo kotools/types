@@ -14,10 +14,10 @@ labels: security
 <!-- This section will be filled and uncommented by a maintainer.
 ## ✅ Checklist
 
-- [ ] 🔒 Fix the security vulnerability.
-- [ ] 📝 Update the [unreleased changelog] for this issue.
+> See the [_Issue implementation_ section in the contributing guidelines](https://github.com/kotools/types/blob/main/CONTRIBUTING.md#issue-implementation) before addressing the following checklist.
 
-[unreleased changelog]: https://github.com/kotools/types/blob/main/CHANGELOG.md#unreleased
+- [ ] 🔒 Fix the security vulnerability.
+- [ ] 📝 Update the unreleased changelog for this issue.
 -->
 
 <!-- Include the following step in case of tracking issues.
