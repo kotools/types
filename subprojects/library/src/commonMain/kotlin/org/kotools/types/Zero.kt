@@ -590,5 +590,39 @@ public class Zero {
             require(number == zero.valueAsByte) { InvalidZero(number) }
             return zero
         }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithShort]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithShort]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Short): Zero {
+            val expected: Short = 0
+            require(number == expected) { InvalidZero(number) }
+            return Zero()
+        }
     }
 }

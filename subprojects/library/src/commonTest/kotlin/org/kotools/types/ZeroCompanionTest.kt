@@ -46,4 +46,25 @@ class ZeroCompanionTest {
             .toString()
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun orThrowShouldPassWithShortThatEqualsZero() {
+        val number: Short = 0
+        Zero.orThrow(number)
+    }
+
+    @Test
+    fun orThrowShouldFailWithShortOtherThanZero() {
+        val number: Short = setOf(Short.MIN_VALUE..-1, 1..Short.MAX_VALUE)
+            .random()
+            .random()
+            .toShort()
+        val exception: IllegalArgumentException = assertFailsWith {
+            Zero.orThrow(number)
+        }
+        val actual: String? = exception.message
+        val expected: String = InvalidZero(number)
+            .toString()
+        assertEquals(expected, actual)
+    }
 }

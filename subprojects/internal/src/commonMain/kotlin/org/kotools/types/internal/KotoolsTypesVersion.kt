@@ -13,5 +13,6 @@ public enum class KotoolsTypesVersion {
     V4_5_0,
     V4_5_1,
     V4_5_2,
-    V4_5_3
+    V4_5_3,
+    V5_0_0
 }
