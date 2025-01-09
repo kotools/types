@@ -114,6 +114,22 @@ class ZeroCompanionTest {
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
     }
+
+    @Test
+    fun orThrowShouldPassWithValidText(): Unit =
+        listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
+            .forEach(Zero.Companion::orThrow)
+
+    @Test
+    fun orThrowShouldFailWithInvalidText(): Unit =
+        listOf("", " ", ".", "0.", ".0", "abc")
+            .forEach {
+                val exception: IllegalArgumentException =
+                    assertFailsWith { Zero.orThrow(it) }
+                val actual: String? = exception.message
+                val expected = "'$it' is not a valid representation of zero."
+                assertEquals(expected, actual)
+            }
 }
 
 // ----------------------------- Number extensions -----------------------------

@@ -444,6 +444,7 @@ public final class org/kotools/types/Zero {
 	public static final fun orThrow (F)Lorg/kotools/types/Zero;
 	public static final fun orThrow (I)Lorg/kotools/types/Zero;
 	public static final fun orThrow (J)Lorg/kotools/types/Zero;
+	public static final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/Zero;
 	public static final fun orThrow (S)Lorg/kotools/types/Zero;
 	public final fun toByte ()B
 	public final fun toChar ()C
@@ -467,6 +468,7 @@ public final class org/kotools/types/Zero$Companion {
 	public final fun orThrow (F)Lorg/kotools/types/Zero;
 	public final fun orThrow (I)Lorg/kotools/types/Zero;
 	public final fun orThrow (J)Lorg/kotools/types/Zero;
+	public final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/Zero;
 	public final fun orThrow (S)Lorg/kotools/types/Zero;
 }
 
