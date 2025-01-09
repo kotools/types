@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import org.kotools.types.internal.InvalidZero
+import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -83,7 +84,27 @@ class ZeroCompanionTest {
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
     }
+
+    @Test
+    fun orThrowShouldFailWithFloatOtherThanZero() {
+        val number: Float = Float.randomNonZero()
+        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
+            .assertIsInvalidZero(number)
+    }
 }
+
+// ----------------------------- Number extensions -----------------------------
+
+private fun Float.Companion.randomNonZero(): Float {
+    val negativeRange: IntRange = Byte.MIN_VALUE..-1
+    val positiveRange: IntRange = 1..Byte.MAX_VALUE
+    val integer: Int = negativeRange.plus(positiveRange)
+        .random()
+    val decimal: Float = Random.nextFloat()
+    return integer + decimal
+}
+
+// -------------------------------- Assertions ---------------------------------
 
 private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
     val actual: String? = this.message
