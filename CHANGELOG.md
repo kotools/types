@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
   **experimental** type ([#719]).
 - `orNull(Double)` and `orThrow(Double)` methods in the `Zero.Companion`
   **experimental** type ([#720]).
+- `orNull(String)` and `orThrow(String)` methods in the `Zero.Companion`
+  **experimental** type ([#761]).
 
 ### ♻️ Changed
 
@@ -86,6 +88,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 [#727]: https://github.com/kotools/types/issues/727
 [#740]: https://github.com/kotools/types/issues/740
 [#742]: https://github.com/kotools/types/pull/742
+[#761]: https://github.com/kotools/types/issues/761
 [#762]: https://github.com/kotools/types/issues/762
 
 ## 🔖 Releases
