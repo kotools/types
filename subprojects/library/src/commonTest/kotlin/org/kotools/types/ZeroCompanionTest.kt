@@ -11,10 +11,7 @@ import kotlin.test.assertNull
 class ZeroCompanionTest {
     @Test
     fun orNullShouldFailWithByteOtherThanZero() {
-        val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
-            .random()
-            .random()
-            .toByte()
+        val number: Byte = Byte.randomNonZero()
         val actual: Zero? = Zero.orNull(number)
         assertNull(actual)
     }
@@ -49,17 +46,16 @@ class ZeroCompanionTest {
 
     @Test
     fun orNullShouldFailWithFloatOtherThanZero() {
-        val number: Float = Float.randomNonZero()
+        val integer: Byte = Byte.randomNonZero()
+        val decimal: Float = Random.nextFloat()
+        val number: Float = integer + decimal
         val actual: Zero? = Zero.orNull(number)
         assertNull(actual)
     }
 
     @Test
     fun orThrowShouldFailWithByteOtherThanZero() {
-        val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
-            .random()
-            .random()
-            .toByte()
+        val number: Byte = Byte.randomNonZero()
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
     }
@@ -94,7 +90,9 @@ class ZeroCompanionTest {
 
     @Test
     fun orThrowShouldFailWithFloatOtherThanZero() {
-        val number: Float = Float.randomNonZero()
+        val integer: Byte = Byte.randomNonZero()
+        val decimal: Float = Random.nextFloat()
+        val number: Float = integer + decimal
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
     }
@@ -102,14 +100,11 @@ class ZeroCompanionTest {
 
 // ----------------------------- Number extensions -----------------------------
 
-private fun Float.Companion.randomNonZero(): Float {
-    val negativeRange: IntRange = Byte.MIN_VALUE..-1
-    val positiveRange: IntRange = 1..Byte.MAX_VALUE
-    val integer: Int = negativeRange.plus(positiveRange)
+private fun Byte.Companion.randomNonZero(): Byte =
+    listOf(MIN_VALUE..-1, 1..MAX_VALUE)
         .random()
-    val decimal: Float = Random.nextFloat()
-    return integer + decimal
-}
+        .random()
+        .toByte()
 
 // -------------------------------- Assertions ---------------------------------
 
