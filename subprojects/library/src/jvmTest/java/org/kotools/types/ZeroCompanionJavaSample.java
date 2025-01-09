@@ -69,4 +69,17 @@ class ZeroCompanionJavaSample {
         }
         Assertions.assertTrue(isSuccess);
     }
+
+    @Test
+    void orThrowWithDouble() {
+        final double number = 0;
+        boolean isSuccess;
+        try {
+            Zero.orThrow(number);
+            isSuccess = true;
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false;
+        }
+        Assertions.assertTrue(isSuccess);
+    }
 }

@@ -96,6 +96,15 @@ class ZeroCompanionTest {
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
     }
+
+    @Test
+    fun orThrowShouldFailWithDoubleOtherThanZero() {
+        val integer: Byte = Byte.randomNonZero()
+        val decimal: Double = Random.nextDouble()
+        val number: Double = integer + decimal
+        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
+            .assertIsInvalidZero(number)
+    }
 }
 
 // ----------------------------- Number extensions -----------------------------

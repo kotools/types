@@ -440,6 +440,7 @@ public final class org/kotools/types/Zero {
 	public final fun equals (Ljava/lang/Object;)Z
 	public final fun hashCode ()I
 	public static final fun orThrow (B)Lorg/kotools/types/Zero;
+	public static final fun orThrow (D)Lorg/kotools/types/Zero;
 	public static final fun orThrow (F)Lorg/kotools/types/Zero;
 	public static final fun orThrow (I)Lorg/kotools/types/Zero;
 	public static final fun orThrow (J)Lorg/kotools/types/Zero;
@@ -461,6 +462,7 @@ public final class org/kotools/types/Zero$Companion {
 	public final synthetic fun orNull (J)Lorg/kotools/types/Zero;
 	public final synthetic fun orNull (S)Lorg/kotools/types/Zero;
 	public final fun orThrow (B)Lorg/kotools/types/Zero;
+	public final fun orThrow (D)Lorg/kotools/types/Zero;
 	public final fun orThrow (F)Lorg/kotools/types/Zero;
 	public final fun orThrow (I)Lorg/kotools/types/Zero;
 	public final fun orThrow (J)Lorg/kotools/types/Zero;
