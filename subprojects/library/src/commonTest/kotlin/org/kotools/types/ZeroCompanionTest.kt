@@ -1,6 +1,6 @@
 package org.kotools.types
 
-import org.kotools.types.internal.InvalidZero
+import org.kotools.types.internal.ErrorMessage
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -238,7 +238,6 @@ private fun Byte.Companion.randomNonZero(): Byte =
 
 private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
     val actual: String? = this.message
-    val expected: String = InvalidZero(number)
-        .toString()
+    val expected: String = ErrorMessage.invalidZero(number)
     assertEquals(expected, actual)
 }

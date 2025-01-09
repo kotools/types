@@ -1,8 +1,8 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.ErrorMessage
 import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.InvalidZero
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
@@ -772,7 +772,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(number: Byte): Zero {
             val expected: Byte = 0
-            require(number == expected) { InvalidZero(number) }
+            require(number == expected) { ErrorMessage.invalidZero(number) }
             return Zero()
         }
 
@@ -810,7 +810,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(number: Short): Zero {
             val expected: Short = 0
-            require(number == expected) { InvalidZero(number) }
+            require(number == expected) { ErrorMessage.invalidZero(number) }
             return Zero()
         }
 
@@ -847,7 +847,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Int): Zero {
-            require(number == 0) { InvalidZero(number) }
+            require(number == 0) { ErrorMessage.invalidZero(number) }
             return Zero()
         }
 
@@ -884,7 +884,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Long): Zero {
-            require(number == 0L) { InvalidZero(number) }
+            require(number == 0L) { ErrorMessage.invalidZero(number) }
             return Zero()
         }
 
@@ -921,7 +921,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Float): Zero {
-            require(number == 0f) { InvalidZero(number) }
+            require(number == 0f) { ErrorMessage.invalidZero(number) }
             return Zero()
         }
 
@@ -958,7 +958,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Double): Zero {
-            require(number == 0.0) { InvalidZero(number) }
+            require(number == 0.0) { ErrorMessage.invalidZero(number) }
             return Zero()
         }
 

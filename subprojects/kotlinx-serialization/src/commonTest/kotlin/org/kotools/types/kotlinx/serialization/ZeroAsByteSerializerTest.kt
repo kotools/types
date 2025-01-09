@@ -4,7 +4,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.InvalidZero
+import org.kotools.types.internal.ErrorMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -47,8 +47,7 @@ class ZeroAsByteSerializerTest {
             Json.decodeFromString(deserializer, string = encoded)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidZero(number)
-            .toString()
+        val expected: String = ErrorMessage.invalidZero(number)
         assertEquals(expected, actual)
     }
 }
