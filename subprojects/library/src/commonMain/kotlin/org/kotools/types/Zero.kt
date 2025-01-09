@@ -1000,9 +1000,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(text: String): Zero {
             val regex = Regex("""^0+(?:\.0+)?$""")
-            require(text matches regex) {
-                "'$text' is not a valid representation of zero."
-            }
+            require(text matches regex) { ErrorMessage.invalidZero(text) }
             return Zero()
         }
     }

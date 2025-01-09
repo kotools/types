@@ -221,7 +221,7 @@ class ZeroCompanionTest {
                 val exception: IllegalArgumentException =
                     assertFailsWith { Zero.orThrow(it) }
                 val actual: String? = exception.message
-                val expected = "'$it' is not a valid representation of zero."
+                val expected: String = ErrorMessage.invalidZero(it)
                 assertEquals(expected, actual)
             }
 }
