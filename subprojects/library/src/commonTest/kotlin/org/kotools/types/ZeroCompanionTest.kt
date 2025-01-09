@@ -65,6 +65,15 @@ class ZeroCompanionTest {
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
     }
+
+    @Test
+    fun orThrowShouldFailWithLongOtherThanZero() {
+        val number: Long = setOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
+            .random()
+            .random()
+        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
+            .assertIsInvalidZero(number)
+    }
 }
 
 private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {

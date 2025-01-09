@@ -727,5 +727,42 @@ public class Zero {
             require(number == 0) { InvalidZero(number) }
             return Zero()
         }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithLong]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithLong]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] method for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Long): Zero {
+            require(number == 0L) { InvalidZero(number) }
+            return Zero()
+        }
     }
 }
