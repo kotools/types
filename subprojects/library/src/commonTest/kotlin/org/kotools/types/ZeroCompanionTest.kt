@@ -48,6 +48,13 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orNullShouldFailWithFloatOtherThanZero() {
+        val number: Float = Float.randomNonZero()
+        val actual: Zero? = Zero.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
     fun orThrowShouldFailWithByteOtherThanZero() {
         val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
             .random()
