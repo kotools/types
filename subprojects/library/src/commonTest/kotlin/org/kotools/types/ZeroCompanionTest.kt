@@ -38,6 +38,15 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orNullShouldFailWithLongOtherThanZero() {
+        val number: Long = setOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
+            .random()
+            .random()
+        val actual: Zero? = Zero.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
     fun orThrowShouldFailWithByteOtherThanZero() {
         val number: Byte = setOf(Byte.MIN_VALUE..-1, 1..Byte.MAX_VALUE)
             .random()

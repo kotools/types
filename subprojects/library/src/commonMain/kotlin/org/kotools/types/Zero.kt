@@ -616,6 +616,36 @@ public class Zero {
         }
 
         /**
+         * Creates an instance of [Zero] from the specified [number], or returns
+         * `null` if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithLong]
+         * </details>
+         * <br>
+         *
+         * This method is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [orThrow] method for throwing an exception instead of
+         * returning `null` in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmSynthetic
+        public fun orNull(number: Long): Zero? = try {
+            this.orThrow(number)
+        } catch (exception: IllegalArgumentException) {
+            null
+        }
+
+        /**
          * Creates an instance of [Zero] from the specified [number], or throws
          * an [IllegalArgumentException] if the [number] is other than zero.
          *
