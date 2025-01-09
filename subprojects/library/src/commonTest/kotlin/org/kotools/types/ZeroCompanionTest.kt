@@ -11,10 +11,24 @@ import kotlin.test.assertNull
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class ZeroCompanionTest {
     @Test
+    fun orNullShouldPassWithByteThatEqualsZero() {
+        val number: Byte = 0
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
     fun orNullShouldFailWithByteOtherThanZero() {
         val number: Byte = Byte.randomNonZero()
         val actual: Zero? = Zero.orNull(number)
         assertNull(actual)
+    }
+
+    @Test
+    fun orNullShouldPassWithShortThatEqualsZero() {
+        val number: Short = 0
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
     }
 
     @Test
@@ -28,12 +42,27 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orNullShouldPassWithIntThatEqualsZero() {
+        val number = 0
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
     fun orNullShouldFailWithIntOtherThanZero() {
         val number: Int = setOf(Short.MIN_VALUE..-1, 1..Short.MAX_VALUE)
             .random()
             .random()
         val actual: Zero? = Zero.orNull(number)
         assertNull(actual)
+    }
+
+
+    @Test
+    fun orNullShouldPassWithLongThatEqualsZero() {
+        val number: Long = 0
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
     }
 
     @Test
@@ -45,6 +74,14 @@ class ZeroCompanionTest {
         assertNull(actual)
     }
 
+
+    @Test
+    fun orNullShouldPassWithFloatThatEqualsZero() {
+        val number = 0f
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
+    }
+
     @Test
     fun orNullShouldFailWithFloatOtherThanZero() {
         val integer: Byte = Byte.randomNonZero()
@@ -52,6 +89,14 @@ class ZeroCompanionTest {
         val number: Float = integer + decimal
         val actual: Zero? = Zero.orNull(number)
         assertNull(actual)
+    }
+
+
+    @Test
+    fun orNullShouldPassWithDoubleThatEqualsZero() {
+        val number = 0.0
+        val actual: Zero? = Zero.orNull(number)
+        assertNotNull(actual)
     }
 
     @Test
@@ -64,22 +109,34 @@ class ZeroCompanionTest {
     }
 
     @Test
-    fun orNullShouldPassWithValidText(): Unit =
+    fun orNullShouldPassWithStringRepresentingZero(): Unit =
         sequenceOf("0", "000", "0.0", "0.000", "000.0", "000.000")
             .map(Zero.Companion::orNull)
             .forEach(::assertNotNull)
 
     @Test
-    fun orNullShouldFailWithInvalidText(): Unit =
+    fun orNullShouldFailWithStringNotRepresentingZero(): Unit =
         sequenceOf("", " ", ".", "0.", ".0", "abc")
             .map(Zero.Companion::orNull)
             .forEach(::assertNull)
+
+    @Test
+    fun orThrowShouldPassWithByteThatEqualsZero() {
+        val number: Byte = 0
+        Zero.orThrow(number)
+    }
 
     @Test
     fun orThrowShouldFailWithByteOtherThanZero() {
         val number: Byte = Byte.randomNonZero()
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
+    }
+
+    @Test
+    fun orThrowShouldPassWithShortThatEqualsZero() {
+        val number: Short = 0
+        Zero.orThrow(number)
     }
 
     @Test
@@ -93,12 +150,24 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orThrowShouldPassWithIntThatEqualsZero() {
+        val number = 0
+        Zero.orThrow(number)
+    }
+
+    @Test
     fun orThrowShouldFailWithIntOtherThanZero() {
         val number: Int = setOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
             .random()
             .random()
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
+    }
+
+    @Test
+    fun orThrowShouldPassWithLongThatEqualsZero() {
+        val number = 0L
+        Zero.orThrow(number)
     }
 
     @Test
@@ -111,12 +180,24 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orThrowShouldPassWithFloatThatEqualsZero() {
+        val number = 0f
+        Zero.orThrow(number)
+    }
+
+    @Test
     fun orThrowShouldFailWithFloatOtherThanZero() {
         val integer: Byte = Byte.randomNonZero()
         val decimal: Float = Random.nextFloat()
         val number: Float = integer + decimal
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
             .assertIsInvalidZero(number)
+    }
+
+    @Test
+    fun orThrowShouldPassWithDoubleThatEqualsZero() {
+        val number = 0.0
+        Zero.orThrow(number)
     }
 
     @Test
@@ -129,12 +210,12 @@ class ZeroCompanionTest {
     }
 
     @Test
-    fun orThrowShouldPassWithValidText(): Unit =
+    fun orThrowShouldPassWithStringRepresentingZero(): Unit =
         listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
             .forEach(Zero.Companion::orThrow)
 
     @Test
-    fun orThrowShouldFailWithInvalidText(): Unit =
+    fun orThrowShouldFailWithStringNotRepresentingZero(): Unit =
         listOf("", " ", ".", "0.", ".0", "abc")
             .forEach {
                 val exception: IllegalArgumentException =
