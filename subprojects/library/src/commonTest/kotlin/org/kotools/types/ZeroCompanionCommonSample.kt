@@ -39,6 +39,12 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
+    fun orNullWithDouble() {
+        val zero: Zero? = Zero.orNull(0.0)
+        assertNotNull(zero)
+    }
+
+    @Test
     fun orThrowWithByte() {
         val number: Byte = 0
         val isSuccess: Boolean = try {

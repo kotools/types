@@ -54,6 +54,15 @@ class ZeroCompanionTest {
     }
 
     @Test
+    fun orNullShouldFailWithDoubleOtherThanZero() {
+        val integer: Byte = Byte.randomNonZero()
+        val decimal: Double = Random.nextDouble()
+        val number: Double = integer + decimal
+        val actual: Zero? = Zero.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
     fun orThrowShouldFailWithByteOtherThanZero() {
         val number: Byte = Byte.randomNonZero()
         assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
