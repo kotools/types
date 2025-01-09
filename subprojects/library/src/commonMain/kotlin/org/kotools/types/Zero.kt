@@ -706,6 +706,39 @@ public class Zero {
         }
 
         /**
+         * Creates an instance of [Zero] from the specified [text], or returns
+         * `null` if the [text] is an invalid representation of zero.
+         *
+         * The [text] is a valid representation if it matches the following
+         * regular expression: [`^0+(?:\.0+)?$`](https://regexr.com/8arpu).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this method from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithString]
+         * </details>
+         * <br>
+         *
+         * This method is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [orThrow] method for throwing an exception instead of
+         * returning `null` in case of invalid [text].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmSynthetic
+        public fun orNull(text: String): Zero? = try {
+            this.orThrow(text)
+        } catch (exception: IllegalArgumentException) {
+            null
+        }
+
+        /**
          * Creates an instance of [Zero] from the specified [number], or throws
          * an [IllegalArgumentException] if the [number] is other than zero.
          *
@@ -958,6 +991,10 @@ public class Zero {
          *
          * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithString]
          * </details>
+         * <br>
+         *
+         * See the [orNull] method for returning `null` instead of throwing an
+         * exception in case of invalid [text].
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic

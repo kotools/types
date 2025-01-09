@@ -5,6 +5,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -61,6 +62,18 @@ class ZeroCompanionTest {
         val actual: Zero? = Zero.orNull(number)
         assertNull(actual)
     }
+
+    @Test
+    fun orNullShouldPassWithValidText(): Unit =
+        sequenceOf("0", "000", "0.0", "0.000", "000.0", "000.000")
+            .map(Zero.Companion::orNull)
+            .forEach(::assertNotNull)
+
+    @Test
+    fun orNullShouldFailWithInvalidText(): Unit =
+        sequenceOf("", " ", ".", "0.", ".0", "abc")
+            .map(Zero.Companion::orNull)
+            .forEach(::assertNull)
 
     @Test
     fun orThrowShouldFailWithByteOtherThanZero() {

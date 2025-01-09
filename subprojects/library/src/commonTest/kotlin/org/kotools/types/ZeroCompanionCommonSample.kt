@@ -45,6 +45,13 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
+    fun orNullWithString() {
+        listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
+            .map(Zero.Companion::orNull)
+            .forEach(::assertNotNull)
+    }
+
+    @Test
     fun orThrowWithByte() {
         val number: Byte = 0
         val isSuccess: Boolean = try {
