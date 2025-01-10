@@ -1,8 +1,8 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.ErrorMessage
 import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.InvalidEmailAddress
 import org.kotools.types.internal.InvalidEmailAddressPattern
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -240,7 +240,9 @@ public class EmailAddress private constructor(private val text: String) {
         public fun orThrow(text: String): EmailAddress {
             val pattern: String = this.PATTERN
             val regex = Regex(pattern)
-            require(text matches regex) { InvalidEmailAddress(text, pattern) }
+            require(text matches regex) {
+                ErrorMessage.invalidEmailAddress(text, pattern)
+            }
             return EmailAddress(text)
         }
 
@@ -286,7 +288,7 @@ public class EmailAddress private constructor(private val text: String) {
             }
             val textRegex = Regex(pattern)
             require(text matches textRegex) {
-                InvalidEmailAddress(text, pattern)
+                ErrorMessage.invalidEmailAddress(text, pattern)
             }
             return EmailAddress(text)
         }

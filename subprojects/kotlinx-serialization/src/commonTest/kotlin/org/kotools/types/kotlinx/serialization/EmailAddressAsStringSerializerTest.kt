@@ -4,7 +4,7 @@ import kotlinx.serialization.json.Json
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.InvalidEmailAddress
+import org.kotools.types.internal.ErrorMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -48,8 +48,8 @@ class EmailAddressAsStringSerializerTest {
             Json.decodeFromString(deserializer, "\"$it\"")
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddress(it, EmailAddress.PATTERN)
-            .toString()
+        val expected: String =
+            ErrorMessage.invalidEmailAddress(it, EmailAddress.PATTERN)
         assertEquals(expected, actual)
     }
 }
