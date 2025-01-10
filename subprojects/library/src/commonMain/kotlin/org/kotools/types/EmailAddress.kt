@@ -3,7 +3,6 @@ package org.kotools.types
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ErrorMessage
 import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.InvalidEmailAddressPattern
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
@@ -281,10 +280,10 @@ public class EmailAddress private constructor(private val text: String) {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String, pattern: String): EmailAddress {
-            val validationPattern: String = this.PATTERN
-            val patternRegex = Regex(validationPattern)
+            val patternRegex = Regex(this.PATTERN)
             require(pattern matches patternRegex) {
-                InvalidEmailAddressPattern(pattern, validationPattern)
+                val expected: String = patternRegex.pattern
+                ErrorMessage.invalidEmailAddressPattern(pattern, expected)
             }
             val textRegex = Regex(pattern)
             require(text matches textRegex) {

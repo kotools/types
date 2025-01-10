@@ -3,7 +3,6 @@ package org.kotools.types
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ErrorMessage
-import org.kotools.types.internal.InvalidEmailAddressPattern
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -216,10 +215,10 @@ class EmailAddressCompanionTest {
             EmailAddress.orThrow(text, pattern)
         }
         val actual: String? = exception.message
-        val expected: String = InvalidEmailAddressPattern(
+        val expected: String = ErrorMessage.invalidEmailAddressPattern(
             pattern,
-            validationPattern = EmailAddress.PATTERN
-        ).toString()
+            expected = EmailAddress.PATTERN
+        )
         assertEquals(expected, actual)
     }
 }
