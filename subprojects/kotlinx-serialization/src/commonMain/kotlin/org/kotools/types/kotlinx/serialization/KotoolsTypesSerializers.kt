@@ -46,7 +46,7 @@ public object KotoolsTypesSerializers {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.toStringOverride]
      * </details>

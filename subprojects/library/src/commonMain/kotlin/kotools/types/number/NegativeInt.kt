@@ -42,7 +42,8 @@ public fun Number.toNegativeInt(): Result<NegativeInt> {
 /**
  * Represents an integer number of type [Int] that is less than or equals zero.
  *
- * You can use the [toNegativeInt] method for creating an instance of this type.
+ * You can use the [toNegativeInt] function for creating an instance of this
+ * type.
  *
  * <br>
  * <details>
@@ -82,7 +83,7 @@ public sealed interface NegativeInt : AnyInt {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.NegativeIntCompanionCommonSample.create]
          * </details>
@@ -93,13 +94,13 @@ public sealed interface NegativeInt : AnyInt {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this method from Java code:
+         * Here's an example of calling this function from Java code:
          *
          * SAMPLE: [kotools.types.number.NegativeIntCompanionJavaSample.create]
          * </details>
          * <br>
          *
-         * You can use the [NegativeInt.Companion.createOrNull] method for
+         * You can use the [NegativeInt.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
          * [number].
          */
@@ -121,7 +122,7 @@ public sealed interface NegativeInt : AnyInt {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.NegativeIntCompanionCommonSample.createOrNull]
          * </details>
@@ -132,14 +133,14 @@ public sealed interface NegativeInt : AnyInt {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this method from Java code:
+         * Here's an example of calling this function from Java code:
          *
          * SAMPLE: [kotools.types.number.NegativeIntCompanionJavaSample.createOrNull]
          * </details>
          * <br>
          *
-         * You can use the [NegativeInt.Companion.create] method for throwing an
-         * exception instead of returning `null` in case of invalid [number].
+         * You can use the [NegativeInt.Companion.create] function for throwing
+         * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)

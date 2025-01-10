@@ -69,7 +69,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.equalsOverride]
      * </details>
@@ -87,7 +87,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.hashCodeOverride]
      * </details>
@@ -101,7 +101,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      * Serializes the specified [value] using the format represented by the
      * specified [encoder].
      *
-     * See the [KSerializer.serialize] method for more details.
+     * See the [KSerializer.serialize] function for more details.
      *
      * <br>
      * <details>
@@ -109,7 +109,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.serialize]
      * </details>
@@ -122,7 +122,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      * Deserializes the value of type [EmailAddress] using the format
      * represented by the specified [decoder].
      *
-     * See the [KSerializer.deserialize] method for more details.
+     * See the [KSerializer.deserialize] function for more details.
      *
      * <br>
      * <details>
@@ -130,7 +130,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.deserialize]
      * </details>
@@ -153,7 +153,7 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.toStringOverride]
      * </details>

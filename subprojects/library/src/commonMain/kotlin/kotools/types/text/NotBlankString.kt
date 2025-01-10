@@ -36,7 +36,7 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
 /**
  * Represents a string that has at least one character excluding whitespaces.
  *
- * You can use the [toNotBlankString] method for creating an instance of this
+ * You can use the [toNotBlankString] function for creating an instance of this
  * type.
  *
  * <br>
@@ -86,7 +86,7 @@ public value class NotBlankString private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.text.NotBlankStringCommonSample.plusOperator]
      * </details>
@@ -94,7 +94,7 @@ public value class NotBlankString private constructor(
      *
      * The [NotBlankString] type being an
      * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-     * this method is not available yet for Java users.
+     * this function is not available yet for Java users.
      */
     @ExperimentalKotoolsTypesApi
     @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
@@ -119,7 +119,7 @@ public value class NotBlankString private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.create]
          * </details>
@@ -127,9 +127,9 @@ public value class NotBlankString private constructor(
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this method is not available yet for Java users.
+         * this function is not available yet for Java users.
          *
-         * You can use the [NotBlankString.Companion.createOrNull] method for
+         * You can use the [NotBlankString.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
          * [value].
          */
@@ -154,7 +154,7 @@ public value class NotBlankString private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.createOrNull]
          * </details>
@@ -162,10 +162,11 @@ public value class NotBlankString private constructor(
          *
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this method is not available yet for Java users.
+         * this function is not available yet for Java users.
          *
-         * You can use the [NotBlankString.Companion.create] method for throwing
-         * an exception instead of returning `null` in case of invalid [value].
+         * You can use the [NotBlankString.Companion.create] function for
+         * throwing an exception instead of returning `null` in case of invalid
+         * [value].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)

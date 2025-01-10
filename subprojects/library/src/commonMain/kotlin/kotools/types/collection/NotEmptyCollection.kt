@@ -52,8 +52,8 @@ public sealed interface NotEmptyCollection<out E> {
     /**
      * Returns the string representation of this collection.
      *
-     * Implementations of this method should behave like calling the
-     * [Iterable.toString] method.
+     * Implementations of this function should behave like calling the
+     * [Iterable.toString] function.
      *
      * <br>
      * <details>
@@ -61,7 +61,7 @@ public sealed interface NotEmptyCollection<out E> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyCollectionCommonSample.toStringOverride]
      * </details>

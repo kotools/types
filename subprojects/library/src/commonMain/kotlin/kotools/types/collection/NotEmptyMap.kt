@@ -54,7 +54,7 @@ public fun <K, V> notEmptyMapOf(
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this method from Kotlin code:
+ * Here's an example of calling this function from Kotlin code:
  *
  * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMap]
  * </details>
@@ -112,7 +112,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example for calling this method from Kotlin code:
+         * Here's an example for calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createWithMap]
          * </details>
@@ -120,14 +120,14 @@ public value class NotEmptyMap<K, out V> private constructor(
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this method is not available yet for Java users.
+         * this function is not available yet for Java users.
          *
          * Please note that changes made to the original map will not be
          * reflected on the resulting [NotEmptyMap].
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createWithMutableMap]
          *
-         * You can use the [NotEmptyMap.Companion.createOrNull] method for
+         * You can use the [NotEmptyMap.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
          * [map].
          */
@@ -149,7 +149,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example for calling this method from Kotlin code:
+         * Here's an example for calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createOrNullWithMap]
          * </details>
@@ -157,15 +157,15 @@ public value class NotEmptyMap<K, out V> private constructor(
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this method is not available yet for Java users.
+         * this function is not available yet for Java users.
          *
          * Please note that changes made to the original map will not be
          * reflected on the resulting [NotEmptyMap].
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createOrNullWithMutableMap]
          *
-         * You can use the [NotEmptyMap.Companion.create] method for throwing an
-         * exception instead of returning `null` in case of invalid [map].
+         * You can use the [NotEmptyMap.Companion.create] function for throwing
+         * an exception instead of returning `null` in case of invalid [map].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
@@ -186,7 +186,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.of]
          * </details>
@@ -194,7 +194,7 @@ public value class NotEmptyMap<K, out V> private constructor(
          *
          * The [NotEmptyMap] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this method is not available yet for Java users.
+         * this function is not available yet for Java users.
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
@@ -341,7 +341,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.toMap]
      * </details>
@@ -351,7 +351,7 @@ public value class NotEmptyMap<K, out V> private constructor(
     /**
      * Returns the string representation of this map.
      *
-     * This method should behave like calling the [Map.toString] method.
+     * This function should behave like calling the [Map.toString] function.
      *
      * <br>
      * <details>
@@ -359,7 +359,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.toStringOverride]
      * </details>

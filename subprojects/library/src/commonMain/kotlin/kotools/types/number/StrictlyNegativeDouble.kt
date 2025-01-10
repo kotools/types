@@ -60,7 +60,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.equalsOverride]
      * </details>
@@ -71,7 +71,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this method from Java code:
+     * Here's an example of calling this function from Java code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.equalsOverride]
      * </details>
@@ -89,7 +89,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.hashCodeOverride]
      * </details>
@@ -100,7 +100,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this method from Java code:
+     * Here's an example of calling this function from Java code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.hashCodeOverride]
      * </details>
@@ -119,7 +119,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.toDouble]
      * </details>
@@ -130,7 +130,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this method from Java code:
+     * Here's an example of calling this function from Java code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.toDouble]
      * </details>
@@ -146,7 +146,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCommonSample.toStringOverride]
      * </details>
@@ -157,7 +157,7 @@ public class StrictlyNegativeDouble private constructor(
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this method from Java code:
+     * Here's an example of calling this function from Java code:
      *
      * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleJavaSample.toStringOverride]
      * </details>
@@ -181,7 +181,7 @@ public class StrictlyNegativeDouble private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionCommonSample.create]
          * </details>
@@ -192,7 +192,7 @@ public class StrictlyNegativeDouble private constructor(
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this method from Java code:
+         * Here's an example of calling this function from Java code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionJavaSample.create]
          * </details>
@@ -220,7 +220,7 @@ public class StrictlyNegativeDouble private constructor(
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionCommonSample.createOrNull]
          * </details>
@@ -231,15 +231,15 @@ public class StrictlyNegativeDouble private constructor(
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this method from Java code:
+         * Here's an example of calling this function from Java code:
          *
          * SAMPLE: [kotools.types.number.StrictlyNegativeDoubleCompanionJavaSample.createOrNull]
          * </details>
          * <br/>
          *
-         * You can use the [StrictlyNegativeDouble.Companion.create] method for
-         * throwing an exception instead of returning `null` in case of invalid
-         * [number].
+         * You can use the [StrictlyNegativeDouble.Companion.create] function
+         * for throwing an exception instead of returning `null` in case of
+         * invalid [number].
          */
         public fun createOrNull(number: Number): StrictlyNegativeDouble? {
             val value: Double = number.toDouble()

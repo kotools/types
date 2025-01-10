@@ -69,7 +69,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.equalsOverride]
      * </details>
@@ -87,7 +87,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.hashCodeOverride]
      * </details>
@@ -101,7 +101,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      * Serializes the specified [value] using the format represented by the
      * specified [encoder].
      *
-     * See the [KSerializer.serialize] method for more details.
+     * See the [KSerializer.serialize] function for more details.
      *
      * <br>
      * <details>
@@ -109,7 +109,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.serialize]
      * </details>
@@ -124,7 +124,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      * Deserializes the value of type [Zero] using the format represented by the
      * specified [decoder].
      *
-     * See the [KSerializer.deserialize] method for more details.
+     * See the [KSerializer.deserialize] function for more details.
      *
      * <br>
      * <details>
@@ -132,7 +132,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.deserialize]
      * </details>
@@ -155,7 +155,7 @@ public class ZeroAsByteSerializer : KSerializer<Zero> {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this method from Kotlin code:
+     * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsByteSerializerCommonSample.toStringOverride]
      * </details>

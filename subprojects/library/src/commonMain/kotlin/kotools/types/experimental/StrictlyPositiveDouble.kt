@@ -33,8 +33,8 @@ public fun Number.toStrictlyPositiveDouble(): Result<StrictlyPositiveDouble> =
  * Represents a floating-point number of type [Double] that is greater than
  * zero.
  *
- * You can use the [toStrictlyPositiveDouble] method for creating an instance of
- * this type.
+ * You can use the [toStrictlyPositiveDouble] function for creating an instance
+ * of this type.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_4_0)

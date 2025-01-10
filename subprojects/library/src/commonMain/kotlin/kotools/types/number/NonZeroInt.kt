@@ -43,7 +43,8 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
 /**
  * Represents an integer number of type [Int] that is other than zero.
  *
- * You can use the [toNonZeroInt] method for creating an instance of this type.
+ * You can use the [toNonZeroInt] function for creating an instance of this
+ * type.
  *
  * <br>
  * <details>
@@ -87,7 +88,7 @@ public sealed interface NonZeroInt : AnyInt {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.NonZeroIntCompanionCommonSample.create]
          * </details>
@@ -98,13 +99,13 @@ public sealed interface NonZeroInt : AnyInt {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this method from Java code:
+         * Here's an example of calling this function from Java code:
          *
          * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.create]
          * </details>
          * <br>
          *
-         * You can use the [NonZeroInt.Companion.createOrNull] method for
+         * You can use the [NonZeroInt.Companion.createOrNull] function for
          * returning `null` instead of throwing an exception in case of invalid
          * [number].
          */
@@ -126,7 +127,7 @@ public sealed interface NonZeroInt : AnyInt {
          *     <b>Calling from Kotlin</b>
          * </summary>
          *
-         * Here's an example of calling this method from Kotlin code:
+         * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: [kotools.types.number.NonZeroIntCompanionCommonSample.createOrNull]
          * </details>
@@ -137,14 +138,14 @@ public sealed interface NonZeroInt : AnyInt {
          *     <b>Calling from Java</b>
          * </summary>
          *
-         * Here's an example of calling this method from Java code:
+         * Here's an example of calling this function from Java code:
          *
          * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.createOrNull]
          * </details>
          * <br>
          *
-         * You can use the [NonZeroInt.Companion.create] method for throwing an
-         * exception instead of returning `null` in case of invalid [number].
+         * You can use the [NonZeroInt.Companion.create] function for throwing
+         * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
