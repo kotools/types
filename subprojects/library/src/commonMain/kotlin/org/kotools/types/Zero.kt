@@ -15,28 +15,6 @@ import kotlin.jvm.JvmSynthetic
  * factory functions provided by the [Zero.Companion] type.
  *
  * @constructor Creates an instance of [Zero].
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Calling from Kotlin</b>
- * </summary>
- *
- * Here's an example of calling this constructor from Kotlin code:
- *
- * SAMPLE: [org.kotools.types.ZeroCommonSample.primaryConstructor]
- * </details>
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Calling from Java</b>
- * </summary>
- *
- * Here's an example of calling this constructor from Java code:
- *
- * SAMPLE: [org.kotools.types.ZeroJavaSample.primaryConstructor]
- * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
