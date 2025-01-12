@@ -19,7 +19,7 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_1)
 public class Zero {
-    private val valueAsByte: Byte = 0
+    private val value: Byte = 0
 
     // -------------------- Structural equality operations ---------------------
 
@@ -78,7 +78,7 @@ public class Zero {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun hashCode(): Int = hashCodeOf(this.valueAsByte)
+    final override fun hashCode(): Int = hashCodeOf(this.value)
 
     // ------------------------------ Comparisons ------------------------------
 
@@ -112,7 +112,7 @@ public class Zero {
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Byte): Int =
-        this.valueAsByte.compareTo(other)
+        this.value.compareTo(other)
 
     /**
      * Compares this number with the [other] one for order.
@@ -144,7 +144,7 @@ public class Zero {
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Short): Int =
-        this.valueAsByte.compareTo(other)
+        this.value.compareTo(other)
 
     /**
      * Compares this number with the [other] one for order.
@@ -175,8 +175,7 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
-    public operator fun compareTo(other: Int): Int =
-        this.valueAsByte.compareTo(other)
+    public operator fun compareTo(other: Int): Int = this.value.compareTo(other)
 
     /**
      * Compares this number with the [other] one for order.
@@ -208,7 +207,7 @@ public class Zero {
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Long): Int =
-        this.valueAsByte.compareTo(other)
+        this.value.compareTo(other)
 
     /**
      * Compares this number with the [other] one for order.
@@ -240,7 +239,7 @@ public class Zero {
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Float): Int =
-        this.valueAsByte.compareTo(other)
+        this.value.compareTo(other)
 
     /**
      * Compares this number with the [other] one for order.
@@ -272,7 +271,7 @@ public class Zero {
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
     public operator fun compareTo(other: Double): Int =
-        this.valueAsByte.compareTo(other)
+        this.value.compareTo(other)
 
     // ------------------------------ Conversions ------------------------------
 
@@ -301,7 +300,7 @@ public class Zero {
      * SAMPLE: [org.kotools.types.ZeroJavaSample.toByte]
      * </details>
      */
-    public fun toByte(): Byte = this.valueAsByte
+    public fun toByte(): Byte = this.value
 
     /**
      * Returns this number as [Short].
@@ -329,7 +328,7 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
-    public fun toShort(): Short = this.valueAsByte.toShort()
+    public fun toShort(): Short = this.value.toShort()
 
     /**
      * Returns this number as [Int].
@@ -357,7 +356,7 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
-    public fun toInt(): Int = this.valueAsByte.toInt()
+    public fun toInt(): Int = this.value.toInt()
 
     /**
      * Returns this number as [Long].
@@ -385,7 +384,7 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
-    public fun toLong(): Long = this.valueAsByte.toLong()
+    public fun toLong(): Long = this.value.toLong()
 
     /**
      * Returns this number as [Float].
@@ -413,7 +412,7 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
-    public fun toFloat(): Float = this.valueAsByte.toFloat()
+    public fun toFloat(): Float = this.value.toFloat()
 
     /**
      * Returns this number as [Double].
@@ -441,7 +440,7 @@ public class Zero {
      * </details>
      */
     @ExperimentalSince(KotoolsTypesVersion.V4_5_2)
-    public fun toDouble(): Double = this.valueAsByte.toDouble()
+    public fun toDouble(): Double = this.value.toDouble()
 
     /**
      * Returns the character representation of this number.
@@ -497,7 +496,7 @@ public class Zero {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.valueAsByte.toString()
+    final override fun toString(): String = this.value.toString()
 
     // -------------------------------------------------------------------------
 
