@@ -1,9 +1,11 @@
 <!doctype html>
-<html>
+<html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>kotools.types.number</title>
-<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
@@ -16,12 +18,13 @@
         }
     }
     </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../styles/style.css" rel="Stylesheet">
-<link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
 <link href="../../styles/main.css" rel="Stylesheet">
 <link href="../../styles/prism.css" rel="Stylesheet">
 <link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <script type="text/javascript" src="../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
@@ -29,26 +32,32 @@
 <script type="text/javascript" src="../../scripts/prism.js" async></script>
 <script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-<a href="../../index.html">
-<span>Kotools Types</span>            </a>    </div>
-    <div>
-<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;kotools.types.number/index.html&quot;}">4.5.3</dokka-template-command>    </div>
-    <div class="pull-right d-flex">
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../index.html">
+                            Kotools Types
+                    </a>            </div>
+            <div class="library-version">
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;kotools.types.number/index.html&quot;}">5.0.0</dokka-template-command>            </div>
+        </div>
         <div class="filter-section" id="filter-section">
                 <button class="platform-tag platform-selector common-like" data-active="" data-filter=":types:dokkaHtmlPartial/commonMain">common</button>
         </div>
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
-        <div id="searchBar"></div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
-        <div id="sideMenu"></div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
     </div>
-    <div id="main">
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
 <div class="main-content" data-page-type="package" id="content" pageids="types::kotools.types.number////PointingToDeclaration//1975660236">
   <div class="breadcrumbs"><a href="../index.html">types</a><span class="delimiter">/</span><span class="current">kotools.types.number</span></div>
   <div class="cover ">
@@ -70,7 +79,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-any-int-serializer/index.html">AnyIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_0_0///PointingToDeclaration/">KotoolsTypesVersion.V4_0_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="-any-int/index.html">AnyInt</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html">Comparable</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-any-int/index.html">AnyInt</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-any-int-serializer/index.html">AnyIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_0_0///PointingToDeclaration/">KotoolsTypesVersion.V4_0_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-any-int/index.html">AnyInt</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html">Comparable</a><span class="token operator">&lt;</span><a href="-any-int/index.html">AnyInt</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -85,7 +94,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-negative-int-serializer/index.html">NegativeIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V1_1_0///PointingToDeclaration/">KotoolsTypesVersion.V1_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="-negative-int/index.html">NegativeInt</a> : <a href="-any-int/index.html">AnyInt</a></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> that is less than or equals zero.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-negative-int-serializer/index.html">NegativeIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V1_1_0///PointingToDeclaration/">KotoolsTypesVersion.V1_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-negative-int/index.html">NegativeInt</a> : <a href="-any-int/index.html">AnyInt</a></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> that is less than or equals zero.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -100,7 +109,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-non-zero-int-serializer/index.html">NonZeroIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V1_1_0///PointingToDeclaration/">KotoolsTypesVersion.V1_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="-non-zero-int/index.html">NonZeroInt</a> : <a href="-any-int/index.html">AnyInt</a></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> that is other than zero.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-non-zero-int-serializer/index.html">NonZeroIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V1_1_0///PointingToDeclaration/">KotoolsTypesVersion.V1_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-non-zero-int/index.html">NonZeroInt</a> : <a href="-any-int/index.html">AnyInt</a></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> that is other than zero.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -115,7 +124,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-positive-int-serializer/index.html">PositiveIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V1_1_0///PointingToDeclaration/">KotoolsTypesVersion.V1_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">interface </span><a href="-positive-int/index.html">PositiveInt</a> : <a href="-any-int/index.html">AnyInt</a></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> that is greater than or equals zero.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-positive-int-serializer/index.html">PositiveIntSerializer::class</a></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V1_1_0///PointingToDeclaration/">KotoolsTypesVersion.V1_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-positive-int/index.html">PositiveInt</a> : <a href="-any-int/index.html">AnyInt</a></div><div class="brief "><p class="paragraph">Represents an integer number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> that is greater than or equals zero.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -130,7 +139,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="../kotools.types.experimental/-experimental-kotools-types-api/index.html"><span class="token annotation builtin">ExperimentalKotoolsTypesApi</span></a></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/ExperimentalSince///PointingToDeclaration/"><span class="token annotation builtin">ExperimentalSince</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_5_0///PointingToDeclaration/">KotoolsTypesVersion.V4_5_0</span></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-strictly-negative-double-serializer/index.html">StrictlyNegativeDoubleSerializer::class</a></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="-strictly-negative-double/index.html">StrictlyNegativeDouble</a></div><div class="brief "><p class="paragraph">Represents a floating-point number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a> that is less than zero.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="../org.kotools.types/-experimental-kotools-types-api/index.html"><span class="token annotation builtin">ExperimentalKotoolsTypesApi</span></a></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/ExperimentalSince///PointingToDeclaration/"><span class="token annotation builtin">ExperimentalSince</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_5_0///PointingToDeclaration/">KotoolsTypesVersion.V4_5_0</span></span><wbr><span class="token punctuation">)</span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span><span class="token punctuation">(</span><span>with<span class="token operator"> = </span><a href="../../types/kotools.types.number/-strictly-negative-double-serializer/index.html">StrictlyNegativeDoubleSerializer::class</a></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="-strictly-negative-double/index.html">StrictlyNegativeDouble</a></div><div class="brief "><p class="paragraph">Represents a floating-point number of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a> that is less than zero.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -185,7 +194,7 @@
       <div data-togglable="EXTENSION_FUNCTION">
         <h2 class="">Functions</h2>
         <div class="table"><a data-name="-895345020%2FFunctions%2F1975660236" anchor-label="div" id="-895345020%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="div.html"><span><span>div</span></span></a></div>
@@ -200,7 +209,7 @@
             </div>
           </div>
 <a data-name="-775348318%2FFunctions%2F1975660236" anchor-label="minus" id="-775348318%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="minus.html"><span><span>minus</span></span></a></div>
@@ -215,7 +224,7 @@
             </div>
           </div>
 <a data-name="1266765622%2FFunctions%2F1975660236" anchor-label="plus" id="1266765622%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="plus.html"><span><span>plus</span></span></a></div>
@@ -230,7 +239,7 @@
             </div>
           </div>
 <a data-name="-262067268%2FFunctions%2F1975660236" anchor-label="rem" id="-262067268%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="rem.html"><span><span>rem</span></span></a></div>
@@ -245,7 +254,7 @@
             </div>
           </div>
 <a data-name="2087597132%2FFunctions%2F1975660236" anchor-label="times" id="2087597132%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="times.html"><span><span>times</span></span></a></div>
@@ -260,7 +269,7 @@
             </div>
           </div>
 <a data-name="-1121531713%2FFunctions%2F1975660236" anchor-label="toNegativeInt" id="-1121531713%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-negative-int.html"><span>to</span><wbr><span>Negative</span><wbr><span><span>Int</span></span></a></div>
@@ -269,13 +278,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-negative-int.html"><span class="token function">toNegativeInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-negative-int/index.html">NegativeInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-negative-int/index.html">NegativeInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-strictly-positive-int/index.html">strictly positive</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-negative-int.html"><span class="token function">toNegativeInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="-negative-int/index.html">NegativeInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-negative-int/index.html">NegativeInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-strictly-positive-int/index.html">strictly positive</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-376336449%2FFunctions%2F1975660236" anchor-label="toNonZeroInt" id="-376336449%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-non-zero-int.html"><span>to</span><wbr><span>Non</span><wbr><span>Zero</span><wbr><span><span>Int</span></span></a></div>
@@ -284,13 +293,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-non-zero-int.html"><span class="token function">toNonZeroInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-non-zero-int/index.html">NonZeroInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-non-zero-int/index.html">NonZeroInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number equals <a href="-zero-int/index.html">zero</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-non-zero-int.html"><span class="token function">toNonZeroInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="-non-zero-int/index.html">NonZeroInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-non-zero-int/index.html">NonZeroInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number equals <a href="-zero-int/index.html">zero</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="1268418427%2FFunctions%2F1975660236" anchor-label="toPositiveInt" id="1268418427%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-positive-int.html"><span>to</span><wbr><span>Positive</span><wbr><span><span>Int</span></span></a></div>
@@ -299,13 +308,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-positive-int.html"><span class="token function">toPositiveInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-positive-int/index.html">PositiveInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-positive-int/index.html">PositiveInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-strictly-negative-int/index.html">strictly negative</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-positive-int.html"><span class="token function">toPositiveInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="-positive-int/index.html">PositiveInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-positive-int/index.html">PositiveInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-strictly-negative-int/index.html">strictly negative</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="1853727049%2FFunctions%2F1975660236" anchor-label="toStrictlyNegativeInt" id="1853727049%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-strictly-negative-int.html"><span>to</span><wbr><span>Strictly</span><wbr><span>Negative</span><wbr><span><span>Int</span></span></a></div>
@@ -314,13 +323,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-strictly-negative-int.html"><span class="token function">toStrictlyNegativeInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-strictly-negative-int/index.html">StrictlyNegativeInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-strictly-negative-int/index.html">StrictlyNegativeInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-positive-int/index.html">positive</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-strictly-negative-int.html"><span class="token function">toStrictlyNegativeInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="-strictly-negative-int/index.html">StrictlyNegativeInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-strictly-negative-int/index.html">StrictlyNegativeInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-positive-int/index.html">positive</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-51290107%2FFunctions%2F1975660236" anchor-label="toStrictlyPositiveInt" id="-51290107%2FFunctions%2F1975660236" data-filterable-set=":types:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
+          <div class="table-row" data-filterable-current=":types:dokkaHtmlPartial/commonMain" data-filterable-set=":types:dokkaHtmlPartial/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-strictly-positive-int.html"><span>to</span><wbr><span>Strictly</span><wbr><span>Positive</span><wbr><span><span>Int</span></span></a></div>
@@ -329,7 +338,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-strictly-positive-int.html"><span class="token function">toStrictlyPositiveInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-strictly-positive-int/index.html">StrictlyPositiveInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-strictly-positive-int/index.html">StrictlyPositiveInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-negative-int/index.html">negative</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":types:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.kotools.types.internal/Since///PointingToDeclaration/"><span class="token annotation builtin">Since</span></span><span class="token punctuation">(</span><span>version<span class="token operator"> = </span><span data-unresolved-link="org.kotools.types.internal/KotoolsTypesVersion.V4_1_0///PointingToDeclaration/">KotoolsTypesVersion.V4_1_0</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-strictly-positive-int.html"><span class="token function">toStrictlyPositiveInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="-strictly-positive-int/index.html">StrictlyPositiveInt</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns this number as an encapsulated <a href="-strictly-positive-int/index.html">StrictlyPositiveInt</a>, which may involve rounding or truncation, or returns an encapsulated <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a> if this number is <a href="-negative-int/index.html">negative</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -340,10 +349,11 @@
   </div>
 </div>
       <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>Copyright (c) 2024 Kotools S.A.S.</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>Copyright (c) 2024-2025 Kotools S.A.S.</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
       </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>
 
