@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 Kotools S.A.S.
+Copyright (c) 2024-2025 Kotools S.A.S.
 Copyright (c) 2023 Loïc Lamarque and Kotools S.A.S.
 Copyright (c) 2022 Loïc Lamarque
 
