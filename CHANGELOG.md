@@ -16,85 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-### ✨ Added
-
-- Support iOS Simulator arm64 and iOS x64 Kotlin Native targets ([#415] and
-  [#416]).
-- Dependency upgrades strategy in the
-  [dependency compatibility](documentation/dependencies.md) documentation
-  ([#289]).
-- `orNull(Short)` and `orThrow(Short)` methods in the `Zero.Companion`
-  **experimental** type ([#716]).
-- `orNull(Int)` and `orThrow(Int)` methods in the `Zero.Companion`
-  **experimental** type ([#717]).
-- `orNull(Long)` and `orThrow(Long)` methods in the `Zero.Companion`
-  **experimental** type ([#718]).
-- `orNull(Float)` and `orThrow(Float)` methods in the `Zero.Companion`
-  **experimental** type ([#719]).
-- `orNull(Double)` and `orThrow(Double)` methods in the `Zero.Companion`
-  **experimental** type ([#720]).
-- `orNull(String)` and `orThrow(String)` methods in the `Zero.Companion`
-  **experimental** type ([#761]).
-
-### ♻️ Changed
-
-- Bump embedded Kotlin from 1.8.22 to 1.9.25, Kotlin language version from 1.5
-  to 1.9, and kotlinx.serialization from 1.5.1 to 1.6.3 ([#407] and [#740]).
-- Use default package names for Linux x64, macOS x64 and MinGW x64 Kotlin Native
-  targets ([#405]).
-- Move `ExperimentalKotoolsTypesApi` from the `kotools.types.experimental`
-  package to the `org.kotools.types` one ([#636]).
-- Documentation of `EmailAddress.Companion.PATTERN` that now refers to
-  [RegExr](https://regexr.com) ([#762]).
-
-### 🔥 Removed
-
-- `KotoolsTypesSerializers.zero` **deprecated** property from the
-  **experimental** API ([#723]).
-- `KotoolsTypesSerializers.emailAddress` **deprecated** property, from the
-  **experimental** API ([#727]).
-- **Hidden** annotations from the `kotools.types.experimental` package ([#318]).
-- `Zero.Companion.fromByte` and `Zero.Companion.fromByteOrNull` **deprecated**
-  methods from the **experimental** API ([#715]).
-- `EmailAddress.Companion.fromString` and
-  `EmailAddress.Companion.fromStringOrNull` **deprecated** methods from the
-  **experimental** API ([#721]).
-
-### 🐛 Fixed
-
-- Links to the API reference from the README documentation ([#742]).
-
----
-
-Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
-
-[@bodiam]: https://github.com/bodiam
-[@LVMVRQUXL]: https://github.com/LVMVRQUXL
-[#289]: https://github.com/kotools/types/issues/289
-[#318]: https://github.com/kotools/types/issues/318
-[#405]: https://github.com/kotools/types/issues/405
-[#407]: https://github.com/kotools/types/issues/407
-[#415]: https://github.com/kotools/types/issues/415
-[#416]: https://github.com/kotools/types/issues/416
-[#636]: https://github.com/kotools/types/issues/636
-[#715]: https://github.com/kotools/types/issues/715
-[#716]: https://github.com/kotools/types/issues/716
-[#717]: https://github.com/kotools/types/issues/717
-[#718]: https://github.com/kotools/types/issues/718
-[#719]: https://github.com/kotools/types/issues/719
-[#720]: https://github.com/kotools/types/issues/720
-[#721]: https://github.com/kotools/types/issues/721
-[#723]: https://github.com/kotools/types/issues/723
-[#727]: https://github.com/kotools/types/issues/727
-[#740]: https://github.com/kotools/types/issues/740
-[#742]: https://github.com/kotools/types/pull/742
-[#761]: https://github.com/kotools/types/issues/761
-[#762]: https://github.com/kotools/types/issues/762
-
 ## 🔖 Releases
 
 | Version | Release date |
 |---------|--------------|
+| [5.0.0] | 2025-01-13   |
 | [4.5.3] | 2024-10-20   |
 | [4.5.2] | 2024-07-24   |
 | [4.5.1] | 2024-04-28   |
@@ -123,6 +49,7 @@ Thanks to [@bodiam] and [@LVMVRQUXL] for contributing to this new release. 🙏
 | [1.0.1] | 2022-03-21   |
 | [1.0.0] | 2022-02-28   |
 
+[5.0.0]: https://github.com/kotools/types/releases/tag/5.0.0
 [4.5.3]: https://github.com/kotools/types/releases/tag/4.5.3
 [4.5.2]: https://github.com/kotools/types/releases/tag/4.5.2
 [4.5.1]: https://github.com/kotools/types/releases/tag/4.5.1
