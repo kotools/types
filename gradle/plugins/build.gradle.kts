@@ -6,30 +6,27 @@ repositories.mavenCentral()
 
 gradlePlugin {
     plugins {
-        kotoolsTypesPlugin("Publication")
         register("DevTasks").configure {
             val prefix = "org.kotools.types"
-            id = "${prefix}.dev.tasks"
-            implementationClass = "${prefix}.gradle.${this.name}Plugin"
+            this.id = "$prefix.dev.tasks"
+            this.implementationClass = "$prefix.gradle.${this.name}Plugin"
         }
         register("KotlinMultiplatform").configure {
             val prefix = "org.kotools.types"
-            id = "${prefix}.kotlin.multiplatform"
-            implementationClass = "${prefix}.gradle.${this.name}Plugin"
+            this.id = "$prefix.kotlin.multiplatform"
+            this.implementationClass = "$prefix.gradle.${this.name}Plugin"
         }
-        register("KotoolsTypesDocumentationPlugin").configure {
+        register("Documentation").configure {
             val prefix = "org.kotools.types"
-            id = "${prefix}.documentation"
-            implementationClass = "${prefix}.plugins.DocumentationPlugin"
+            this.id = "$prefix.${this.name.lowercase()}"
+            this.implementationClass = "$prefix.plugins.${this.name}Plugin"
+        }
+        register("Publication").configure {
+            val prefix = "kotools.types"
+            this.id = "$prefix.${this.name.lowercase()}"
+            this.implementationClass = "$prefix.plugins.${this.name}Plugin"
         }
     }
-}
-
-private fun NamedDomainObjectContainer<PluginDeclaration>.kotoolsTypesPlugin(
-    name: String
-): Unit = register("KotoolsTypes${name}Plugin").configure {
-    id = "kotools.types.${name.lowercase()}"
-    implementationClass = "kotools.types.plugins.${name}Plugin"
 }
 
 kotlin.explicitApi()
