@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     `maven-publish`
     signing
-    alias(libs.plugins.kotools.types.dev.tasks)
     alias(libs.plugins.kotools.types.kotlin.multiplatform)
     alias(libs.plugins.kotools.types.documentation)
     alias(libs.plugins.kotools.samples.multiplatform)
@@ -17,8 +16,6 @@ plugins {
 // ----------------------------- Plugin extensions -----------------------------
 
 apiValidation.apiDumpDirectory = "src/api"
-
-devTasks.list(tasks.apiDump)
 
 documentation {
     moduleName = "Kotools Types"

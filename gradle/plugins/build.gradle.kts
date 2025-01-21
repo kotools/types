@@ -6,11 +6,6 @@ repositories.mavenCentral()
 
 gradlePlugin {
     plugins {
-        register("DevTasks").configure {
-            val prefix = "org.kotools.types"
-            this.id = "$prefix.dev.tasks"
-            this.implementationClass = "$prefix.gradle.${this.name}Plugin"
-        }
         register("KotlinMultiplatform").configure {
             val prefix = "org.kotools.types"
             this.id = "$prefix.kotlin.multiplatform"
