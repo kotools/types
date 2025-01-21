@@ -2,14 +2,7 @@ plugins { `kotlin-dsl` }
 
 repositories.mavenCentral()
 
-kotlin.explicitApi()
-
-dependencies {
-    implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.dokka.base)
-    implementation(libs.dokka.gradle.plugin)
-    implementation(libs.dokka.versioning)
-}
+// ----------------------------- Plugin extensions -----------------------------
 
 gradlePlugin {
     plugins {
@@ -38,6 +31,19 @@ private fun NamedDomainObjectContainer<PluginDeclaration>.kotoolsTypesPlugin(
     id = "kotools.types.${name.lowercase()}"
     implementationClass = "kotools.types.plugins.${name}Plugin"
 }
+
+kotlin.explicitApi()
+
+// -----------------------------------------------------------------------------
+
+dependencies {
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.dokka.base)
+    implementation(libs.dokka.gradle.plugin)
+    implementation(libs.dokka.versioning)
+}
+
+// ----------------------------------- Tasks -----------------------------------
 
 tasks.withType<ValidatePlugins>().configureEach {
     failOnWarning.set(true)
