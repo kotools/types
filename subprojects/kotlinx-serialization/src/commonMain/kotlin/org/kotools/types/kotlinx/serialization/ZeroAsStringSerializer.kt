@@ -26,7 +26,7 @@ import kotlin.reflect.KClass
  * </details>
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 public class ZeroAsStringSerializer {
     // -------------------- Structural equality operations ---------------------
 
