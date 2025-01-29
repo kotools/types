@@ -22,12 +22,17 @@ All notable changes to this project will be documented in this file.
   `types-kotlinx-serialization` project, for serializing the `Zero` type as
   `String` ([#699]).
 
+### 🔥 Removed
+
+- Versions 4.5.0, 4.5.1 and 4.5.2 from the API reference ([#771]).
+
 ---
 
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#699]: https://github.com/kotools/types/issues/699
+[#771]: https://github.com/kotools/types/issues/771
 
 ## 🔖 Releases
 
