@@ -32,7 +32,7 @@ import kotlin.reflect.KClass
  * </details>
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
 public class ZeroAsStringSerializer : KSerializer<Zero> {
     /**
      * Describes the structure of the serializable representation of [Zero],
