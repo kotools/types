@@ -1,5 +1,11 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
@@ -27,7 +33,30 @@ import kotlin.reflect.KClass
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
-public class ZeroAsStringSerializer {
+public class ZeroAsStringSerializer : KSerializer<Zero> {
+    /**
+     * Describes the structure of the serializable representation of [Zero],
+     * produced by this serializer.
+     *
+     * See the [KSerializer.descriptor] property for more details.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this property from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsStringSerializerCommonSample.descriptor]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = "$this",
+        PrimitiveKind.STRING
+    )
+
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -65,6 +94,51 @@ public class ZeroAsStringSerializer {
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf("$this")
+
+    // ----------------------- Serialization operations ------------------------
+
+    /**
+     * Serializes the specified [value] using the format represented by the
+     * specified [encoder].
+     *
+     * See the [KSerializer.serialize] function for more details.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsStringSerializerCommonSample.serialize]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun serialize(encoder: Encoder, value: Zero): Unit =
+        encoder.encodeString("$value")
+
+    /**
+     * Deserializes the value of type [Zero] using the format represented by the
+     * specified [decoder].
+     *
+     * See the [KSerializer.deserialize] function for more details.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroAsStringSerializerCommonSample.deserialize]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun deserialize(decoder: Decoder): Zero = decoder
+        .decodeString()
+        .let(Zero.Companion::orThrow)
 
     // ------------------------------ Conversions ------------------------------
 
