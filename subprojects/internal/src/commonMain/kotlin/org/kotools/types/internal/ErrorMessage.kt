@@ -37,9 +37,9 @@ public object ErrorMessage {
         "'$number' shouldn't be other than zero."
 
     /**
-     * Returns an error message indicating that the specified [text] is not a
-     * valid representation of zero.
+     * Returns an error message indicating that the string representation of the
+     * specified [value] is an invalid representation of zero.
      */
-    public fun invalidZero(text: String): String =
-        "'$text' is not a valid representation of zero."
+    public fun invalidZero(value: Any): String =
+        "'$value' is an invalid representation of zero."
 }

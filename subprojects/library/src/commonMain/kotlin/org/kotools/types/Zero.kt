@@ -980,5 +980,47 @@ public class Zero {
             require(text matches regex) { ErrorMessage.invalidZero(text) }
             return Zero()
         }
+
+        /**
+         * Creates an instance of [Zero] from the string representation of the
+         * specified [value], or throws an [IllegalArgumentException] if it's an
+         * invalid representation of zero.
+         *
+         * The string representation of [value] must match the following regular
+         * expression: [`^0+(?:\.0+)?$`](https://regexr.com/8arpu).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithAny]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithAny]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [value].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+        @JvmStatic
+        public fun orThrow(value: Any): Zero {
+            val regex = Regex("""^0+(?:\.0+)?$""")
+            require("$value" matches regex) { ErrorMessage.invalidZero(value) }
+            return Zero()
+        }
     }
 }

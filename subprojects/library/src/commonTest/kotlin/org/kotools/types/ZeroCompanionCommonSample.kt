@@ -130,4 +130,16 @@ class ZeroCompanionCommonSample {
         }
         assertTrue(isSuccess)
     }
+
+    @Test
+    fun orThrowWithAny() {
+        val isSuccess: Boolean = try {
+            listOf(0, "000", 0.0, "0.000", "000.0", 000.000)
+                .forEach(Zero.Companion::orThrow)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
 }

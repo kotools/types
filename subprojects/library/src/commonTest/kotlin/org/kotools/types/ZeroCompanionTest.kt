@@ -224,6 +224,17 @@ class ZeroCompanionTest {
                 val expected: String = ErrorMessage.invalidZero(it)
                 assertEquals(expected, actual)
             }
+
+    @Test
+    fun orThrowShouldFailWithAnyNotRepresentingZero(): Unit =
+        listOf<Any>("", " ", ".", "0.", ".0", "abc")
+            .forEach {
+                val exception: IllegalArgumentException =
+                    assertFailsWith { Zero.orThrow(it) }
+                val actual: String? = exception.message
+                val expected: String = ErrorMessage.invalidZero(it)
+                assertEquals(expected, actual)
+            }
 }
 
 // ----------------------------- Number extensions -----------------------------
