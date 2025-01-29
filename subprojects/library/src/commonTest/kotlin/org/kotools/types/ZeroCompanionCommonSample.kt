@@ -52,18 +52,6 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
-    fun orThrowWithByte() {
-        val number: Byte = 0
-        val isSuccess: Boolean = try {
-            Zero.orThrow(number)
-            true
-        } catch (exception: IllegalArgumentException) {
-            false
-        }
-        assertTrue(isSuccess)
-    }
-
-    @Test
     fun orThrowWithShort() {
         val number: Short = 0
         val isSuccess: Boolean = try {
