@@ -121,7 +121,7 @@ class ZeroCompanionTest {
             .forEach(::assertNull)
 
     @Test
-    fun orThrowShouldFailWithAnyNotRepresentingZero(): Unit =
+    fun orThrowShouldFailWithNonZeroValue(): Unit =
         listOf<Any>("", " ", ".", "0.", ".0", "abc")
             .forEach {
                 val exception: IllegalArgumentException =

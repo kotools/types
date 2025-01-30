@@ -8,7 +8,7 @@ import java.util.Arrays;
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroCompanionJavaSample {
     @Test
-    void orThrowWithAny() {
+    void orThrow() {
         boolean isSuccess;
         try {
             Arrays.asList(0, "000", 0.0, "0.000", "000.0", 000.000)

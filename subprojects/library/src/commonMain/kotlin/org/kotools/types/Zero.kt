@@ -731,7 +731,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithAny]
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrow]
          * </details>
          *
          * <br>
@@ -742,7 +742,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithAny]
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrow]
          * </details>
          * <br>
          *
