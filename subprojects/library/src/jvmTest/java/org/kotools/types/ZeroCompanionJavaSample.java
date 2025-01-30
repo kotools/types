@@ -8,19 +8,6 @@ import java.util.Arrays;
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroCompanionJavaSample {
     @Test
-    void orThrowWithString() {
-        boolean isSuccess;
-        try {
-            Arrays.asList("0", "000", "0.0", "0.000", "000.0", "000.000")
-                    .forEach(Zero::orThrow);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
-
-    @Test
     void orThrowWithAny() {
         boolean isSuccess;
         try {

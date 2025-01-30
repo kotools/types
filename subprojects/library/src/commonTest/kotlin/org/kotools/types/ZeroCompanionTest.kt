@@ -121,22 +121,6 @@ class ZeroCompanionTest {
             .forEach(::assertNull)
 
     @Test
-    fun orThrowShouldPassWithStringRepresentingZero(): Unit =
-        listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
-            .forEach(Zero.Companion::orThrow)
-
-    @Test
-    fun orThrowShouldFailWithStringNotRepresentingZero(): Unit =
-        listOf("", " ", ".", "0.", ".0", "abc")
-            .forEach {
-                val exception: IllegalArgumentException =
-                    assertFailsWith { Zero.orThrow(it) }
-                val actual: String? = exception.message
-                val expected: String = ErrorMessage.invalidZero(it)
-                assertEquals(expected, actual)
-            }
-
-    @Test
     fun orThrowShouldFailWithAnyNotRepresentingZero(): Unit =
         listOf<Any>("", " ", ".", "0.", ".0", "abc")
             .forEach {
