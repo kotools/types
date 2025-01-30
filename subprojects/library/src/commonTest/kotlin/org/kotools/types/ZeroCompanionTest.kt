@@ -121,21 +121,6 @@ class ZeroCompanionTest {
             .forEach(::assertNull)
 
     @Test
-    fun orThrowShouldPassWithDoubleThatEqualsZero() {
-        val number = 0.0
-        Zero.orThrow(number)
-    }
-
-    @Test
-    fun orThrowShouldFailWithDoubleOtherThanZero() {
-        val integer: Byte = Byte.randomNonZero()
-        val decimal: Double = Random.nextDouble()
-        val number: Double = integer + decimal
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
-    }
-
-    @Test
     fun orThrowShouldPassWithStringRepresentingZero(): Unit =
         listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
             .forEach(Zero.Companion::orThrow)
@@ -170,11 +155,3 @@ private fun Byte.Companion.randomNonZero(): Byte =
         .random()
         .random()
         .toByte()
-
-// -------------------------------- Assertions ---------------------------------
-
-private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
-    val actual: String? = this.message
-    val expected: String = ErrorMessage.invalidZero(number)
-    assertEquals(expected, actual)
-}

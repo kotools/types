@@ -52,17 +52,6 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
-    fun orThrowWithDouble() {
-        val isSuccess: Boolean = try {
-            Zero.orThrow(0.0)
-            true
-        } catch (exception: IllegalArgumentException) {
-            false
-        }
-        assertTrue(isSuccess)
-    }
-
-    @Test
     fun orThrowWithString() {
         val isSuccess: Boolean = try {
             listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
