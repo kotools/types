@@ -727,43 +727,6 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithInt]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithInt]
-         * </details>
-         * <br>
-         *
-         * See the [orNull] function for returning `null` instead of throwing an
-         * exception in case of invalid [number].
-         */
-        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
-        @JvmStatic
-        public fun orThrow(number: Int): Zero {
-            require(number == 0) { ErrorMessage.invalidZero(number) }
-            return Zero()
-        }
-
-        /**
-         * Creates an instance of [Zero] from the specified [number], or throws
-         * an [IllegalArgumentException] if the [number] is other than zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
          * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithLong]
          * </details>
          *
