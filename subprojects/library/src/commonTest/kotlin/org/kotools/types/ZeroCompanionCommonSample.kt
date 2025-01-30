@@ -52,17 +52,6 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
-    fun orThrowWithLong() {
-        val isSuccess: Boolean = try {
-            Zero.orThrow(0L)
-            true
-        } catch (exception: IllegalArgumentException) {
-            false
-        }
-        assertTrue(isSuccess)
-    }
-
-    @Test
     fun orThrowWithFloat() {
         val isSuccess: Boolean = try {
             Zero.orThrow(0f)
