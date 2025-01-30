@@ -121,22 +121,6 @@ class ZeroCompanionTest {
             .forEach(::assertNull)
 
     @Test
-    fun orThrowShouldPassWithShortThatEqualsZero() {
-        val number: Short = 0
-        Zero.orThrow(number)
-    }
-
-    @Test
-    fun orThrowShouldFailWithShortOtherThanZero() {
-        val number: Short = setOf(Short.MIN_VALUE..-1, 1..Short.MAX_VALUE)
-            .random()
-            .random()
-            .toShort()
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
-    }
-
-    @Test
     fun orThrowShouldPassWithIntThatEqualsZero() {
         val number = 0
         Zero.orThrow(number)

@@ -8,19 +8,6 @@ import java.util.Arrays;
 @SuppressWarnings("NewClassNamingConvention")
 class ZeroCompanionJavaSample {
     @Test
-    void orThrowWithShort() {
-        final short number = 0;
-        boolean isSuccess;
-        try {
-            Zero.orThrow(number);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
-
-    @Test
     void orThrowWithInt() {
         final int number = 0;
         boolean isSuccess;
