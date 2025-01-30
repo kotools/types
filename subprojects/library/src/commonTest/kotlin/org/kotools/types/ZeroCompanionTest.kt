@@ -121,21 +121,6 @@ class ZeroCompanionTest {
             .forEach(::assertNull)
 
     @Test
-    fun orThrowShouldPassWithFloatThatEqualsZero() {
-        val number = 0f
-        Zero.orThrow(number)
-    }
-
-    @Test
-    fun orThrowShouldFailWithFloatOtherThanZero() {
-        val integer: Byte = Byte.randomNonZero()
-        val decimal: Float = Random.nextFloat()
-        val number: Float = integer + decimal
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
-    }
-
-    @Test
     fun orThrowShouldPassWithDoubleThatEqualsZero() {
         val number = 0.0
         Zero.orThrow(number)
