@@ -28,15 +28,3 @@ public final class org/kotools/types/kotlinx/serialization/ZeroAsByteSerializer 
 	public final fun toString ()Ljava/lang/String;
 }
 
-public final class org/kotools/types/kotlinx/serialization/ZeroAsStringSerializer : kotlinx/serialization/KSerializer {
-	public fun <init> ()V
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/kotools/types/Zero;
-	public final fun equals (Ljava/lang/Object;)Z
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun hashCode ()I
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/kotools/types/Zero;)V
-	public final fun toString ()Ljava/lang/String;
-}
-
