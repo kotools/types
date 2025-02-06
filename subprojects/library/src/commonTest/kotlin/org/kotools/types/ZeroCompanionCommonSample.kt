@@ -52,9 +52,77 @@ class ZeroCompanionCommonSample {
     }
 
     @Test
-    fun orThrow() {
+    fun orThrowWithByte() {
+        val number: Byte = 0
         val isSuccess: Boolean = try {
-            listOf(0, "000", 0.0, "0.000", "000.0", 000.000)
+            Zero.orThrow(number)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
+    @Test
+    fun orThrowWithShort() {
+        val number: Short = 0
+        val isSuccess: Boolean = try {
+            Zero.orThrow(number)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
+    @Test
+    fun orThrowWithInt() {
+        val isSuccess: Boolean = try {
+            Zero.orThrow(0)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
+    @Test
+    fun orThrowWithLong() {
+        val isSuccess: Boolean = try {
+            Zero.orThrow(0L)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
+    @Test
+    fun orThrowWithFloat() {
+        val isSuccess: Boolean = try {
+            Zero.orThrow(0f)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
+    @Test
+    fun orThrowWithDouble() {
+        val isSuccess: Boolean = try {
+            Zero.orThrow(0.0)
+            true
+        } catch (exception: IllegalArgumentException) {
+            false
+        }
+        assertTrue(isSuccess)
+    }
+
+    @Test
+    fun orThrowWithString() {
+        val isSuccess: Boolean = try {
+            listOf("0", "000", "0.0", "0.000", "000.0", "000.000")
                 .forEach(Zero.Companion::orThrow)
             true
         } catch (exception: IllegalArgumentException) {

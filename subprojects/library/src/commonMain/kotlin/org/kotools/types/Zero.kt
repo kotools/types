@@ -716,12 +716,8 @@ public class Zero {
         }
 
         /**
-         * Creates an instance of [Zero] from the string representation of the
-         * specified [value], or throws an [IllegalArgumentException] if it's an
-         * invalid representation of zero.
-         *
-         * The string representation of [value] must match the following regular
-         * expression: [`^0+(?:\.0+)?$`](https://regexr.com/8arpu).
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
          *
          * <br>
          * <details>
@@ -731,7 +727,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrow]
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithByte]
          * </details>
          *
          * <br>
@@ -742,18 +738,246 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrow]
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithByte]
          * </details>
          * <br>
          *
          * See the [orNull] function for returning `null` instead of throwing an
-         * exception in case of invalid [value].
+         * exception in case of invalid [number].
          */
-        @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
-        public fun orThrow(value: Any): Zero {
+        public fun orThrow(number: Byte): Zero {
+            val expected: Byte = 0
+            require(number == expected) { ErrorMessage.invalidZero(number) }
+            return Zero()
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithShort]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithShort]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Short): Zero {
+            val expected: Short = 0
+            require(number == expected) { ErrorMessage.invalidZero(number) }
+            return Zero()
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithInt]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithInt]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Int): Zero {
+            require(number == 0) { ErrorMessage.invalidZero(number) }
+            return Zero()
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithLong]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithLong]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Long): Zero {
+            require(number == 0L) { ErrorMessage.invalidZero(number) }
+            return Zero()
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithFloat]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithFloat]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Float): Zero {
+            require(number == 0f) { ErrorMessage.invalidZero(number) }
+            return Zero()
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [number], or throws
+         * an [IllegalArgumentException] if the [number] is other than zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithDouble]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithDouble]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(number: Double): Zero {
+            require(number == 0.0) { ErrorMessage.invalidZero(number) }
+            return Zero()
+        }
+
+        /**
+         * Creates an instance of [Zero] from the specified [text], or throws an
+         * [IllegalArgumentException] if the [text] is an invalid representation
+         * of zero.
+         *
+         * The [text] is a valid representation if it matches the following
+         * regular expression: [`^0+(?:\.0+)?$`](https://regexr.com/8arpu).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithString]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithString]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [text].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
+        @JvmStatic
+        public fun orThrow(text: String): Zero {
             val regex = Regex("""^0+(?:\.0+)?$""")
-            require("$value" matches regex) { ErrorMessage.invalidZero(value) }
+            require(text matches regex) { ErrorMessage.invalidZero(text) }
             return Zero()
         }
     }
