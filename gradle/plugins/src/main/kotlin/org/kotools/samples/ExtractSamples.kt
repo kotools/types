@@ -24,7 +24,7 @@ public abstract class ExtractSamples : DefaultTask() {
     public abstract val outputDirectory: DirectoryProperty
 
     @TaskAction
-    private fun execute() {
+    internal fun execute() {
         val directory: Directory = this.outputDirectory.get()
         this.sourceDirectory.asFileTree.asSequence()
             .filterNotNull()

@@ -32,7 +32,7 @@ public abstract class InlineSamples : DefaultTask() {
     public abstract val extractedSamplesDirectory: DirectoryProperty
 
     @TaskAction
-    private fun execute(): Unit = this.sourceDirectory.asFileTree.asSequence()
+    internal fun execute(): Unit = this.sourceDirectory.asFileTree.asSequence()
         .filterNotNull()
         .filter { "Main/" in it.path || "main/" in it.path }
         .filter { it.name.endsWith(".kt") }

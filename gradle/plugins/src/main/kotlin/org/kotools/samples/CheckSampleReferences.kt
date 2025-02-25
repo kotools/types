@@ -30,7 +30,7 @@ public abstract class CheckSampleReferences : DefaultTask() {
     public abstract val extractedSamplesDirectory: DirectoryProperty
 
     @TaskAction
-    private fun execute() {
+    internal fun execute() {
         val samplesDirectory: Directory = this.extractedSamplesDirectory.get()
         this.sourceDirectory.asFileTree.asSequence()
             .filterNotNull()

@@ -18,7 +18,7 @@ public abstract class CheckSampleSources : DefaultTask() {
     public abstract val sourceDirectory: DirectoryProperty
 
     @TaskAction
-    private fun execute(): Unit = this.sourceDirectory.asFileTree.asSequence()
+    internal fun execute(): Unit = this.sourceDirectory.asFileTree.asSequence()
         .filterNotNull()
         .mapNotNull(SampleSourceFile.Companion::orNull)
         .forEach(SampleSourceFile::checkSingleClass)
