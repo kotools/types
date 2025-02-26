@@ -67,10 +67,11 @@ Here's an example of using all serializers from Kotools Types using the
 
 ```kotlin
 val format = Json { serializersModule = KotoolsTypesSerializers.all }
-val encoded: String = format.encodeToString(Zero)
+val zero = Zero()
+val encoded: String = format.encodeToString(zero)
 println(encoded) // 0
 val decoded: Zero = format.decodeFromString(encoded)
-println(Zero === decoded) // true
+println(zero == decoded) // true
 ```
 
 See the [API reference] of the `KotoolsTypesSerializers` type for more details.
