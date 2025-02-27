@@ -142,3 +142,35 @@ public fun Zero.Companion.longSerializer(): KSerializer<Zero> =
         override fun deserialize(decoder: Decoder): Zero = decoder.decodeLong()
             .let(this@longSerializer::orThrow)
     }
+
+/**
+ * Returns an object responsible for serializing the [Zero] type as [Float].
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of calling this function from Kotlin code:
+ *
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.floatSerializer]
+ * </details>
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+@JvmSynthetic
+public fun Zero.Companion.floatSerializer(): KSerializer<Zero> =
+    object : KSerializer<Zero> {
+        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = "ZeroAsFloatSerializer",
+            PrimitiveKind.FLOAT
+        )
+
+        override fun serialize(encoder: Encoder, value: Zero): Unit = value
+            .toFloat()
+            .let(encoder::encodeFloat)
+
+        override fun deserialize(decoder: Decoder): Zero = decoder.decodeFloat()
+            .let(this@floatSerializer::orThrow)
+    }
