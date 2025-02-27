@@ -78,3 +78,35 @@ public fun Zero.Companion.shortSerializer(): KSerializer<Zero> =
         override fun deserialize(decoder: Decoder): Zero = decoder.decodeShort()
             .let(this@shortSerializer::orThrow)
     }
+
+/**
+ * Returns an object responsible for serializing the [Zero] type as [Int].
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of calling this function from Kotlin code:
+ *
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.intSerializer]
+ * </details>
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+@JvmSynthetic
+public fun Zero.Companion.intSerializer(): KSerializer<Zero> =
+    object : KSerializer<Zero> {
+        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = "ZeroAsIntSerializer",
+            PrimitiveKind.INT
+        )
+
+        override fun serialize(encoder: Encoder, value: Zero): Unit = value
+            .toInt()
+            .let(encoder::encodeInt)
+
+        override fun deserialize(decoder: Decoder): Zero = decoder.decodeShort()
+            .let(this@intSerializer::orThrow)
+    }

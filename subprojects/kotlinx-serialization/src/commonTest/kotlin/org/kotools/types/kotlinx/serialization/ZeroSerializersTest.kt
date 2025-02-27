@@ -38,4 +38,19 @@ class ZeroSerializersTest {
         )
         assertEquals(expected = PrimitiveKind.SHORT, actual = descriptor.kind)
     }
+
+    @OptIn(
+        ExperimentalKotoolsTypesApi::class,
+        ExperimentalSerializationApi::class
+    )
+    @Test
+    fun intSerializerShouldReturnValidDescriptor() {
+        val descriptor: SerialDescriptor = Zero.intSerializer()
+            .descriptor
+        assertEquals(
+            expected = "ZeroAsIntSerializer",
+            actual = descriptor.serialName
+        )
+        assertEquals(expected = PrimitiveKind.INT, actual = descriptor.kind)
+    }
 }
