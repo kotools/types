@@ -28,3 +28,7 @@ public final class org/kotools/types/kotlinx/serialization/ZeroAsByteSerializer 
 	public final fun toString ()Ljava/lang/String;
 }
 
+public final class org/kotools/types/kotlinx/serialization/ZeroSerializers {
+	public static final synthetic fun byteSerializer (Lorg/kotools/types/Zero$Companion;)Lkotlinx/serialization/KSerializer;
+}
+
