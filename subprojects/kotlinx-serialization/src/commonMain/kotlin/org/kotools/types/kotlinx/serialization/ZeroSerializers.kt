@@ -36,7 +36,7 @@ public fun Zero.Companion.byteSerializer(): KSerializer<Zero> =
     object : KSerializer<Zero> {
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
             serialName = "ZeroAsByteSerializer",
-            PrimitiveKind.STRING
+            PrimitiveKind.BYTE
         )
 
         override fun serialize(encoder: Encoder, value: Zero): Unit = value

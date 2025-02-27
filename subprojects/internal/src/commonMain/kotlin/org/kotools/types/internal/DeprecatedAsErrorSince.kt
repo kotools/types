@@ -12,6 +12,7 @@ import kotools.types.internal.InternalKotoolsTypesApi
 @Retention(AnnotationRetention.SOURCE)
 @Target(
     AnnotationTarget.CLASS,
+    AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY,
     AnnotationTarget.TYPEALIAS

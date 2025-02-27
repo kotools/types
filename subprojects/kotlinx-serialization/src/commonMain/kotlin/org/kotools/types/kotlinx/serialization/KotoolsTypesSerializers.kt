@@ -1,9 +1,11 @@
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -33,7 +35,7 @@ public object KotoolsTypesSerializers {
         get() = SerializersModule {
             val emailAddressSerializer = EmailAddressAsStringSerializer()
             this.contextual(emailAddressSerializer)
-            val zeroSerializer = ZeroAsByteSerializer()
+            val zeroSerializer: KSerializer<Zero> = Zero.byteSerializer()
             this.contextual(zeroSerializer)
         }
 
