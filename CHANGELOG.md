@@ -16,6 +16,22 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- The following extension functions on the `Zero.Companion` **experimental**
+  type, in the `types-kotlinx-serialization` Gradle subproject ([#793]):
+  - `byteSerializer` for serializing the `Zero` type as `Byte`.
+  - `shortSerializer` for serializing the `Zero` type as `Short`.
+  - `intSerializer` for serializing the `Zero` type as `Int`.
+  - `longSerializer` for serializing the `Zero` type as `Long`.
+  - `floatSerializer` for serializing the `Zero` type as `Float`.
+  - `doubleSerializer` for serializing the `Zero` type as `Double`.
+
+### 🗑️ Deprecated
+
+- In the `types-kotlinx-serialization` Gradle subproject, the
+  `ZeroAsByteSerializer` type with an **error level** ([#793]).
+
 ### 🔥 Removed
 
 - Versions 4.5.0, 4.5.1 and 4.5.2 from the API reference ([#771]).
@@ -26,6 +42,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#771]: https://github.com/kotools/types/issues/771
+[#793]: https://github.com/kotools/types/issues/793
 
 ## 🔖 Releases
 
