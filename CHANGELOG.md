@@ -26,11 +26,17 @@ All notable changes to this project will be documented in this file.
   - `longSerializer` for serializing the `Zero` type as `Long`.
   - `floatSerializer` for serializing the `Zero` type as `Float`.
   - `doubleSerializer` for serializing the `Zero` type as `Double`.
+- The `EmailAddress.Companion.stringSerializer` **experimental** function, in
+  the `types-kotlinx-serialization` Gradle subproject, for serializing the
+  `EmailAddress` type as `String` ([#794]).
 
 ### 🗑️ Deprecated
 
 - In the `types-kotlinx-serialization` Gradle subproject, the
   `ZeroAsByteSerializer` type with an **error level** ([#793]).
+- The `EmailAddressAsStringSerializer` **experimental** type with an
+  **error level**, in the `types-kotlinx-serialization` Gradle subproject
+  ([#794]).
 
 ### 🔥 Removed
 
@@ -43,6 +49,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#771]: https://github.com/kotools/types/issues/771
 [#793]: https://github.com/kotools/types/issues/793
+[#794]: https://github.com/kotools/types/issues/794
 
 ## 🔖 Releases
 
