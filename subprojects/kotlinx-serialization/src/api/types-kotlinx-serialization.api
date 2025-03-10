@@ -10,6 +10,10 @@ public final class org/kotools/types/kotlinx/serialization/EmailAddressAsStringS
 	public final fun toString ()Ljava/lang/String;
 }
 
+public final class org/kotools/types/kotlinx/serialization/EmailAddressSerializers {
+	public static final synthetic fun stringSerializer (Lorg/kotools/types/EmailAddress$Companion;)Lkotlinx/serialization/KSerializer;
+}
+
 public final class org/kotools/types/kotlinx/serialization/KotoolsTypesSerializers {
 	public static final field INSTANCE Lorg/kotools/types/kotlinx/serialization/KotoolsTypesSerializers;
 	public final fun getAll ()Lkotlinx/serialization/modules/SerializersModule;
