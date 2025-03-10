@@ -10,6 +10,8 @@ import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.DeprecatedAsErrorSince
+import org.kotools.types.internal.DeprecatedAsWarningSince
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -19,37 +21,31 @@ import kotlin.reflect.KClass
  * Class responsible for serializing the [EmailAddress] type as [String].
  *
  * @constructor Creates an instance of [EmailAddressAsStringSerializer].
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Calling from Kotlin</b>
- * </summary>
- *
- * Here's an example of calling this constructor from Kotlin code:
- *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.primaryConstructor]
- * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
-public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
+@Deprecated(
+    "Use the serializer returned by the " +
+            "'EmailAddress.Companion.stringSerializer' function instead."
+)
+@DeprecatedAsWarningSince(KotoolsTypesVersion.V5_0_1)
+public class EmailAddressAsStringSerializer
+@Deprecated(
+    "Use the 'EmailAddress.Companion.stringSerializer' function instead.",
+    ReplaceWith(
+        "EmailAddress.stringSerializer()",
+        "org.kotools.types.EmailAddress",
+        "org.kotools.types.kotlinx.serialization.stringSerializer"
+    ),
+    DeprecationLevel.ERROR
+)
+@DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_1)
+public constructor() : KSerializer<EmailAddress> {
     /**
      * Describes the structure of the serializable representation of
      * [EmailAddress], produced by this serializer.
      *
      * See the [KSerializer.descriptor] property for more details.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this property from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.descriptor]
-     * </details>
      */
     @Suppress(Warning.FINAL)
     final override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
@@ -62,36 +58,12 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     /**
      * Returns `true` if the [other] object is an instance of
      * [EmailAddressAsStringSerializer], or returns `false` otherwise.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.equalsOverride]
-     * </details>
      */
-    @Suppress(Warning.FINAL)
+    @Suppress(Warning.FINAL, "DEPRECATION")
     final override fun equals(other: Any?): Boolean =
         other is EmailAddressAsStringSerializer
 
-    /**
-     * Returns a hash code value for this serializer.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.hashCodeOverride]
-     * </details>
-     */
+    /** Returns a hash code value for this serializer. */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf("$this")
 
@@ -102,17 +74,6 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      * specified [encoder].
      *
      * See the [KSerializer.serialize] function for more details.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.serialize]
-     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
@@ -123,17 +84,6 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
      * represented by the specified [decoder].
      *
      * See the [KSerializer.deserialize] function for more details.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.deserialize]
-     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun deserialize(decoder: Decoder): EmailAddress {
@@ -146,17 +96,6 @@ public class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     /**
      * Returns the string representation of this serializer, corresponding to
      * its [simple name][KClass.simpleName].
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressAsStringSerializerCommonSample.toStringOverride]
-     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = simpleNameOf(this::class)
