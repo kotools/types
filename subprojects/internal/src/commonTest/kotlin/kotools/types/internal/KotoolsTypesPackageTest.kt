@@ -7,8 +7,7 @@ import kotlin.test.assertEquals
 class KotoolsTypesPackageTest {
     @Test
     fun toString_should_pass_on_each_values(): Unit = KotoolsTypesPackage
-        .values()
-        .asSequence()
+        .entries
         .map { "kotools.types.${it.name.lowercase()}" to "$it" }
         .forEach { assertEquals(expected = it.first, actual = it.second) }
 }
