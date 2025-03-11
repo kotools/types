@@ -12,10 +12,6 @@ plugins {
 
 documentation.excludeFromParentApiReference = true
 
-// -----------------------------------------------------------------------------
+// ------------------------------- Dependencies --------------------------------
 
-dependencies {
-    commonMainImplementation(libs.kotlinx.serialization.core)
-
-    commonTestImplementation(libs.kotlin.test)
-}
+dependencies.commonMainImplementation(libs.kotlinx.serialization.core)

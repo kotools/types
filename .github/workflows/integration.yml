@@ -41,8 +41,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4.3.0
       - name: Check 'plugins' project
         run: ./gradlew :plugins:check
-      - name: Check 'types-internal' project
-        run: ./gradlew :types-internal:check
       - name: Check 'types' project
         run: ./gradlew :types:check
       - name: Check 'types-kotlinx-serialization' project
