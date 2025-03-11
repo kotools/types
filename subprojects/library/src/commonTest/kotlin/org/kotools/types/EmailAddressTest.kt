@@ -2,7 +2,7 @@ package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.internal.ErrorMessage
+import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -182,9 +182,9 @@ class EmailAddressCompanionTest {
     private fun orThrowStringShouldFailWith(text: String) {
         val exception: IllegalArgumentException =
             assertFailsWith { EmailAddress.orThrow(text) }
-        val actual: String? = exception.message
-        val expected: String =
-            ErrorMessage.invalidEmailAddress(text, EmailAddress.PATTERN)
+        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val expected: ExceptionMessage =
+            EmailAddress.invalidText(text, EmailAddress.PATTERN)
         assertEquals(expected, actual)
     }
 
@@ -202,8 +202,8 @@ class EmailAddressCompanionTest {
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.orThrow(text, pattern)
         }
-        val actual: String? = exception.message
-        val expected: String = ErrorMessage.invalidEmailAddress(text, pattern)
+        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val expected: ExceptionMessage = EmailAddress.invalidText(text, pattern)
         assertEquals(expected, actual)
     }
 
@@ -214,8 +214,8 @@ class EmailAddressCompanionTest {
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.orThrow(text, pattern)
         }
-        val actual: String? = exception.message
-        val expected: String = ErrorMessage.invalidEmailAddressPattern(
+        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val expected: ExceptionMessage = EmailAddress.invalidPattern(
             pattern,
             expected = EmailAddress.PATTERN
         )

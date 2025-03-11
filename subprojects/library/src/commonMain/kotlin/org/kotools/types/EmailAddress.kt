@@ -1,7 +1,7 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.ErrorMessage
+import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -141,6 +141,8 @@ public class EmailAddress private constructor(private val text: String) {
          */
         public const val PATTERN: String = """^\S+@\S+\.\S+$"""
 
+        // ------------------------- Factory functions -------------------------
+
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or
          * returns `null` if the [text] doesn't match the
@@ -239,9 +241,7 @@ public class EmailAddress private constructor(private val text: String) {
         public fun orThrow(text: String): EmailAddress {
             val pattern: String = this.PATTERN
             val regex = Regex(pattern)
-            require(text matches regex) {
-                ErrorMessage.invalidEmailAddress(text, pattern)
-            }
+            require(text matches regex) { this.invalidText(text, pattern) }
             return EmailAddress(text)
         }
 
@@ -283,13 +283,34 @@ public class EmailAddress private constructor(private val text: String) {
             val patternRegex = Regex(this.PATTERN)
             require(pattern matches patternRegex) {
                 val expected: String = patternRegex.pattern
-                ErrorMessage.invalidEmailAddressPattern(pattern, expected)
+                this.invalidPattern(pattern, expected)
             }
             val textRegex = Regex(pattern)
-            require(text matches textRegex) {
-                ErrorMessage.invalidEmailAddress(text, pattern)
-            }
+            require(text matches textRegex) { this.invalidText(text, pattern) }
             return EmailAddress(text)
+        }
+
+        // ------------------------ Exception messages -------------------------
+
+        @JvmSynthetic
+        internal fun invalidPattern(
+            pattern: String,
+            expected: String
+        ): ExceptionMessage {
+            val message =
+                "'$pattern' is invalid for validating email addresses."
+            val reason = "It should match the following pattern: '$expected'."
+            return ExceptionMessage.orThrow("$message $reason")
+        }
+
+        @JvmSynthetic
+        internal fun invalidText(
+            text: String,
+            pattern: String
+        ): ExceptionMessage {
+            val message = "'$text' is an invalid email address."
+            val reason = "It should match the following pattern: '$pattern'."
+            return ExceptionMessage.orThrow("$message $reason")
         }
     }
 }
