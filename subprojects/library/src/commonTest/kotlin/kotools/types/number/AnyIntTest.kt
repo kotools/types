@@ -11,7 +11,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.experimental.AnyInt
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import org.kotools.types.ExperimentalKotoolsTypesApi
@@ -137,11 +136,12 @@ class AnyIntTest {
 }
 
 class AnyIntSerializerTest {
-    @ExperimentalSerializationApi
+    @OptIn(ExperimentalSerializationApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_AnyInt() {
         val actual: String = serializer<AnyInt>().descriptor.serialName
-        val expected = "${KotoolsTypesPackage.Number}." + simpleNameOf<AnyInt>()
+        val simpleName: String = simpleNameOf<AnyInt>()
+        val expected = "kotools.types.number.$simpleName"
         assertEquals(expected, actual)
     }
 

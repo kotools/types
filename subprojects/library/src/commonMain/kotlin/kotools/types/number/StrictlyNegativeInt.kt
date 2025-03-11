@@ -9,7 +9,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeStrictlyNegative
@@ -168,14 +167,12 @@ internal object StrictlyNegativeIntSerializer :
 
 private object StrictlyNegativeIntDeserializationStrategy :
     DeserializationStrategy<StrictlyNegativeInt> {
-    @OptIn(InternalKotoolsTypesApi::class)
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<StrictlyNegativeInt>()
-        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        val serialName = "kotools.types.number.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 
-    @OptIn(InternalKotoolsTypesApi::class)
     override fun deserialize(decoder: Decoder): StrictlyNegativeInt {
         val value: Int = decoder.decodeInt()
         return value.toStrictlyNegativeInt().getOrElse {

@@ -10,7 +10,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
@@ -131,15 +130,14 @@ class StrictlyNegativeIntTest {
 }
 
 class StrictlyNegativeIntSerializerTest {
-    @ExperimentalSerializationApi
-    @OptIn(InternalKotoolsTypesApi::class)
+    @OptIn(ExperimentalSerializationApi::class, InternalKotoolsTypesApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyNegativeInt() {
         val actual: String = serializer<StrictlyNegativeInt>()
             .descriptor
             .serialName
         val simpleName: String = simpleNameOf<StrictlyNegativeInt>()
-        val expected = "${KotoolsTypesPackage.Number}.$simpleName"
+        val expected = "kotools.types.number.$simpleName"
         assertEquals(expected, actual)
     }
 

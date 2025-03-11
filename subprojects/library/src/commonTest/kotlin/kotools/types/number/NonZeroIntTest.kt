@@ -9,7 +9,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import kotools.types.shouldNotEqual
@@ -128,13 +127,12 @@ class NonZeroIntTest {
 }
 
 class NonZeroIntSerializerTest {
-    @ExperimentalSerializationApi
-    @OptIn(InternalKotoolsTypesApi::class)
+    @OptIn(ExperimentalSerializationApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_NonZeroInt() {
         val actual: String = serializer<NonZeroInt>().descriptor.serialName
         val simpleName: String = simpleNameOf<NonZeroInt>()
-        val expected = "${KotoolsTypesPackage.Number}.$simpleName"
+        val expected = "kotools.types.number.$simpleName"
         assertEquals(expected, actual)
     }
 

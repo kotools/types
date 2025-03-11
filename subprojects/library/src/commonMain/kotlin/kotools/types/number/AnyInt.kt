@@ -8,7 +8,6 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.intSerializer
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
@@ -113,11 +112,10 @@ internal object AnyIntSerializer : KSerializer<AnyInt> by intSerializer(
     intConverter = { it.toInt() }
 )
 
-@InternalKotoolsTypesApi
 private object AnyIntDeserializationStrategy : DeserializationStrategy<AnyInt> {
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<AnyInt>()
-        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        val serialName = "kotools.types.number.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 

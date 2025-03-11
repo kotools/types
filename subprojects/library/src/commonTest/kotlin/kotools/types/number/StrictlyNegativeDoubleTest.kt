@@ -10,7 +10,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationErrorMessage
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
@@ -182,15 +181,18 @@ class StrictlyNegativeDoubleTest {
 }
 
 class StrictlyNegativeDoubleSerializerTest {
-    @ExperimentalSerializationApi
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
+    @OptIn(
+        ExperimentalKotoolsTypesApi::class,
+        ExperimentalSerializationApi::class,
+        InternalKotoolsTypesApi::class
+    )
     @Test
     fun descriptor_serialName_should_be_the_qualified_name_of_StrictlyNegativeDouble() {
         val actual: String = serializer<StrictlyNegativeDouble>()
             .descriptor
             .serialName
         val type: String = simpleNameOf<StrictlyNegativeDouble>()
-        val expected = "${KotoolsTypesPackage.Number}.$type"
+        val expected = "kotools.types.number.$type"
         assertEquals(expected, actual)
     }
 

@@ -11,7 +11,6 @@ import kotools.types.collection.NotEmptySet
 import kotools.types.collection.notEmptySetOf
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
@@ -194,18 +193,16 @@ public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 @Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
-@InternalKotoolsTypesApi
 private object NonZeroIntSerializer : KSerializer<NonZeroInt> by intSerializer(
     NonZeroIntDeserializationStrategy,
     intConverter = { it.toInt() }
 )
 
-@InternalKotoolsTypesApi
 private object NonZeroIntDeserializationStrategy :
     DeserializationStrategy<NonZeroInt> {
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<NonZeroInt>()
-        val serialName = "${KotoolsTypesPackage.Number}.$simpleName"
+        val serialName = "kotools.types.number.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.INT)
     }
 

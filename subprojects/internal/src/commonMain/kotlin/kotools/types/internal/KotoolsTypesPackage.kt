@@ -3,9 +3,6 @@ package kotools.types.internal
 /** Represents a package of Kotools Types. */
 @InternalKotoolsTypesApi
 public enum class KotoolsTypesPackage {
-    /** The package containing declarations for manipulating numbers. */
-    Number,
-
     /** The package containing declarations for manipulating texts. */
     Text;
 

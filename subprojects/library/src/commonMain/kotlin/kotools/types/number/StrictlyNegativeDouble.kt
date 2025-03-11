@@ -9,7 +9,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.deserializationError
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
@@ -254,7 +253,7 @@ internal object StrictlyNegativeDoubleSerializer :
     KSerializer<StrictlyNegativeDouble> {
     override val descriptor: SerialDescriptor by lazy {
         val type: String = simpleNameOf<StrictlyNegativeDouble>()
-        val serialName = "${KotoolsTypesPackage.Number}.$type"
+        val serialName = "kotools.types.number.$type"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.DOUBLE)
     }
 
