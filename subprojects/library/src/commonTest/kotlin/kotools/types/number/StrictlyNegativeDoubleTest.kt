@@ -183,8 +183,7 @@ class StrictlyNegativeDoubleTest {
 class StrictlyNegativeDoubleSerializerTest {
     @OptIn(
         ExperimentalKotoolsTypesApi::class,
-        ExperimentalSerializationApi::class,
-        InternalKotoolsTypesApi::class
+        ExperimentalSerializationApi::class
     )
     @Test
     fun descriptor_serialName_should_be_the_qualified_name_of_StrictlyNegativeDouble() {

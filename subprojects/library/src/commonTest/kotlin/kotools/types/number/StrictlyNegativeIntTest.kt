@@ -130,7 +130,7 @@ class StrictlyNegativeIntTest {
 }
 
 class StrictlyNegativeIntSerializerTest {
-    @OptIn(ExperimentalSerializationApi::class, InternalKotoolsTypesApi::class)
+    @OptIn(ExperimentalSerializationApi::class)
     @Test
     fun descriptor_serial_name_should_be_the_qualified_name_of_StrictlyNegativeInt() {
         val actual: String = serializer<StrictlyNegativeInt>()
