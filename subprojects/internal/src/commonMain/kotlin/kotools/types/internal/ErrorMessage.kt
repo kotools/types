@@ -1,5 +1,7 @@
 package kotools.types.internal
 
+import org.kotools.types.internal.InternalKotoolsTypesApi
+
 /**
  * Creates an error message from the message of the specified [throwable], or
  * throws an [IllegalArgumentException] if the [throwable] doesn't have a

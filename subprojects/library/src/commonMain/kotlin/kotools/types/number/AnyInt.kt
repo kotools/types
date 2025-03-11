@@ -7,10 +7,10 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.intSerializer
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
 

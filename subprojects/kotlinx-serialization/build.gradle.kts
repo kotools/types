@@ -19,10 +19,10 @@ apiValidation.apiDumpDirectory = "src/api"
 documentation.packages = layout.projectDirectory.file("packages.md").asFile
 
 kotlin.sourceSets.configureEach {
-    languageSettings.optIn("kotools.types.internal.InternalKotoolsTypesApi")
+    languageSettings.optIn("org.kotools.types.internal.InternalKotoolsTypesApi")
 }
 
-// -----------------------------------------------------------------------------
+// ------------------------------- Dependencies --------------------------------
 
 dependencies {
     commonMainApi(libs.kotlinx.serialization.core)
@@ -35,7 +35,7 @@ dependencies {
     commonTestImplementation(libs.kotlinx.serialization.json)
 }
 
-// -----------------------------------------------------------------------------
+// ----------------------------------- Tasks -----------------------------------
 
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
     dokkaSourceSets.configureEach {

@@ -10,10 +10,10 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.experimental.AnyInt
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals

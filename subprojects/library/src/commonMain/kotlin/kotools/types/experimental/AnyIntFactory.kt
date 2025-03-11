@@ -2,7 +2,6 @@
 
 package kotools.types.experimental
 
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.unexpectedCreationError
 import kotools.types.number.AnyInt
 import kotools.types.number.ZeroInt
@@ -10,6 +9,7 @@ import kotools.types.number.toStrictlyNegativeInt
 import kotools.types.number.toStrictlyPositiveInt
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmName
 

@@ -1,7 +1,5 @@
 package org.kotools.types.internal
 
-import kotools.types.internal.InternalKotoolsTypesApi
-
 /**
  * Specifies the first [version] of Kotools Types where a declaration has been
  * [hidden][DeprecationLevel.HIDDEN] from code.

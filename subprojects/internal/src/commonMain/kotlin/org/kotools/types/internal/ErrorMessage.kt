@@ -1,7 +1,5 @@
 package org.kotools.types.internal
 
-import kotools.types.internal.InternalKotoolsTypesApi
-
 /** Contains a collection of error messages. */
 @InternalKotoolsTypesApi
 public object ErrorMessage {

@@ -9,10 +9,10 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.deserializationErrorMessage
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test

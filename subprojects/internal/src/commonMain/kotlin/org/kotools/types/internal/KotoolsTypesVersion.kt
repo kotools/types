@@ -1,7 +1,5 @@
 package org.kotools.types.internal
 
-import kotools.types.internal.InternalKotoolsTypesApi
-
 /** Represents a version of Kotools Types. */
 @InternalKotoolsTypesApi
 public enum class KotoolsTypesVersion {

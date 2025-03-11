@@ -1,6 +1,7 @@
 package kotools.types.internal
 
 import kotlinx.serialization.SerializationException
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.reflect.KClass
 
 /** Throws a `SerializationException` with the specified [message]. */

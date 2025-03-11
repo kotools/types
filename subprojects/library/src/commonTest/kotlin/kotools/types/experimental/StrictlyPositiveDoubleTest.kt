@@ -11,10 +11,10 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.shouldBeGreaterThanZero
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals

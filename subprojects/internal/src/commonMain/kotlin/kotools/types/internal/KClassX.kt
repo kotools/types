@@ -1,5 +1,6 @@
 package kotools.types.internal
 
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.reflect.KClass
 
 /** Returns the [simple name][KClass.simpleName] of the type [T]. */

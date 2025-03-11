@@ -2,6 +2,7 @@
 
 package kotools.types.internal
 
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.jvm.JvmName
 
 /** Returns a unique hash code value for the specified objects. */

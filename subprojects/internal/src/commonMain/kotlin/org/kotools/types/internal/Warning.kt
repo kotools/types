@@ -1,7 +1,5 @@
 package org.kotools.types.internal
 
-import kotools.types.internal.InternalKotoolsTypesApi
-
 /**
  * Contains compilation warnings that can be suppressed using the [Suppress]
  * annotation.

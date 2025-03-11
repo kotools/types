@@ -8,7 +8,6 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.InternalKotoolsTypesApi
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
@@ -16,6 +15,7 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
