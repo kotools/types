@@ -1,7 +1,7 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.ErrorMessage
+import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -502,6 +502,8 @@ public class Zero {
 
     /** Contains static declarations for the [Zero] type. */
     public companion object {
+        // ------------------------- Factory functions -------------------------
+
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
          * `null` if the [number] is other than zero.
@@ -749,7 +751,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(number: Byte): Zero {
             val expected: Byte = 0
-            require(number == expected) { ErrorMessage.invalidZero(number) }
+            require(number == expected) { this.invalid(number) }
             return Zero()
         }
 
@@ -787,7 +789,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(number: Short): Zero {
             val expected: Short = 0
-            require(number == expected) { ErrorMessage.invalidZero(number) }
+            require(number == expected) { this.invalid(number) }
             return Zero()
         }
 
@@ -824,7 +826,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Int): Zero {
-            require(number == 0) { ErrorMessage.invalidZero(number) }
+            require(number == 0) { this.invalid(number) }
             return Zero()
         }
 
@@ -861,7 +863,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Long): Zero {
-            require(number == 0L) { ErrorMessage.invalidZero(number) }
+            require(number == 0L) { this.invalid(number) }
             return Zero()
         }
 
@@ -898,7 +900,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Float): Zero {
-            require(number == 0f) { ErrorMessage.invalidZero(number) }
+            require(number == 0f) { this.invalid(number) }
             return Zero()
         }
 
@@ -935,7 +937,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Double): Zero {
-            require(number == 0.0) { ErrorMessage.invalidZero(number) }
+            require(number == 0.0) { this.invalid(number) }
             return Zero()
         }
 
@@ -977,8 +979,20 @@ public class Zero {
         @JvmStatic
         public fun orThrow(text: String): Zero {
             val regex = Regex("""^0+(?:\.0+)?$""")
-            require(text matches regex) { ErrorMessage.invalidZero(text) }
+            require(text matches regex) { this.invalid(text) }
             return Zero()
         }
+
+        // ------------------------ Exception messages -------------------------
+
+        @JvmSynthetic
+        internal fun invalid(number: Number): ExceptionMessage =
+            ExceptionMessage.orThrow("'$number' shouldn't be other than zero.")
+
+        @JvmSynthetic
+        internal fun invalid(text: String): ExceptionMessage =
+            ExceptionMessage.orThrow(
+                "'$text' is not a valid representation of zero."
+            )
     }
 }

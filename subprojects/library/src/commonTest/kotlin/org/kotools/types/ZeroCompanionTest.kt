@@ -1,6 +1,6 @@
 package org.kotools.types
 
-import org.kotools.types.internal.ErrorMessage
+import org.kotools.types.internal.ExceptionMessage
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -220,8 +220,9 @@ class ZeroCompanionTest {
             .forEach {
                 val exception: IllegalArgumentException =
                     assertFailsWith { Zero.orThrow(it) }
-                val actual: String? = exception.message
-                val expected: String = ErrorMessage.invalidZero(it)
+                val actual: ExceptionMessage =
+                    ExceptionMessage.orThrow(exception)
+                val expected: ExceptionMessage = Zero.invalid(it)
                 assertEquals(expected, actual)
             }
 }
@@ -236,8 +237,9 @@ private fun Byte.Companion.randomNonZero(): Byte =
 
 // -------------------------------- Assertions ---------------------------------
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
-    val actual: String? = this.message
-    val expected: String = ErrorMessage.invalidZero(number)
+    val actual: ExceptionMessage = ExceptionMessage.orThrow(this)
+    val expected: ExceptionMessage = Zero.invalid(number)
     assertEquals(expected, actual)
 }
