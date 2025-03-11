@@ -9,7 +9,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.InternalKotoolsTypesApi
-import kotools.types.internal.KotoolsTypesPackage
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
@@ -191,12 +190,11 @@ internal object NotBlankStringSerializer :
         NotBlankStringDeserializationStrategy
     )
 
-@InternalKotoolsTypesApi
 private object NotBlankStringDeserializationStrategy :
     DeserializationStrategy<NotBlankString> {
     override val descriptor: SerialDescriptor by lazy {
         val simpleName: String = simpleNameOf<NotBlankString>()
-        val serialName = "${KotoolsTypesPackage.Text}.$simpleName"
+        val serialName = "kotools.types.text.$simpleName"
         PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
     }
 
