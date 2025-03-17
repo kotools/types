@@ -40,27 +40,6 @@ public class ExceptionMessage private constructor(private val text: String) {
 
         /**
          * Creates an instance of [ExceptionMessage] from the specified [text],
-         * or returns `null` if the [text] is blank.
-         */
-        public fun orNull(text: String): ExceptionMessage? = try {
-            this.orThrow(text)
-        } catch (_: IllegalArgumentException) {
-            null
-        }
-
-        /**
-         * Creates an instance of [ExceptionMessage] from the message of the
-         * specified [throwable], or returns `null` if the [throwable]'s message
-         * is blank.
-         */
-        public fun orNull(throwable: Throwable): ExceptionMessage? = try {
-            this.orThrow(throwable)
-        } catch (_: IllegalArgumentException) {
-            null
-        }
-
-        /**
-         * Creates an instance of [ExceptionMessage] from the specified [text],
          * or throws an [IllegalArgumentException] if the [text] is blank.
          */
         public fun orThrow(text: String): ExceptionMessage {
