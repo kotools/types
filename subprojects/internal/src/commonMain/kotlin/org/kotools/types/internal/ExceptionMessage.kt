@@ -27,7 +27,7 @@ public class ExceptionMessage private constructor(private val text: String) {
 
     /** Contains static declarations for the [ExceptionMessage] type. */
     public companion object {
-        // -------------- Email address related factory functions --------------
+        // --------------- Factory functions for email addresses ---------------
 
         /**
          * Returns an exception message indicating that the specified [text] is
@@ -46,7 +46,7 @@ public class ExceptionMessage private constructor(private val text: String) {
             "'$pattern' is invalid for validating email addresses."
         )
 
-        // ----------------- Number related factory functions ------------------
+        // ------------------- Factory functions for numbers -------------------
 
         /**
          * Returns an exception message indicating that the specified [number]
@@ -69,18 +69,7 @@ public class ExceptionMessage private constructor(private val text: String) {
         public fun nonZero(text: String): ExceptionMessage =
             ExceptionMessage("'$text' is not a valid representation of zero.")
 
-        // ---------------------- Other factory functions ----------------------
-
-        /**
-         * Creates an instance of [ExceptionMessage] from the specified [text],
-         * or throws an [IllegalArgumentException] if the [text] is blank.
-         */
-        public fun orThrow(text: String): ExceptionMessage {
-            require(text.isNotBlank()) {
-                "Exception's message shouldn't be blank."
-            }
-            return ExceptionMessage(text)
-        }
+        // ----------------- Factory functions for exceptions ------------------
 
         /**
          * Returns an exception message from the specified [throwable], or
