@@ -46,7 +46,8 @@ public class PositiveInteger private constructor() {
          */
         @JvmStatic
         public fun orThrow(number: Byte): PositiveInteger {
-            require(number > 0) { ExceptionMessage.nonPositive(number) }
+            val zero = Zero()
+            require(zero < number) { ExceptionMessage.nonPositive(number) }
             return PositiveInteger()
         }
     }

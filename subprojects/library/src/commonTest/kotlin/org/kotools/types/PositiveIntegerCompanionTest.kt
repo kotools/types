@@ -9,7 +9,8 @@ import kotlin.test.assertFailsWith
 class PositiveIntegerCompanionTest {
     @Test
     fun orThrowShouldFailWithByteThatEqualsZero() {
-        val number: Byte = 0
+        val number: Byte = Zero()
+            .toByte()
         val throwable: IllegalArgumentException = assertFailsWith {
             PositiveInteger.orThrow(number)
         }
