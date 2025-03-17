@@ -221,7 +221,7 @@ class ZeroCompanionTest {
                 val throwable: IllegalArgumentException =
                     assertFailsWith { Zero.orThrow(it) }
                 val actual: ExceptionMessage = ExceptionMessage.from(throwable)
-                val expected: ExceptionMessage = Zero.invalid(it)
+                val expected: ExceptionMessage = ExceptionMessage.nonZero(it)
                 assertEquals(expected, actual)
             }
 }
@@ -236,9 +236,8 @@ private fun Byte.Companion.randomNonZero(): Byte =
 
 // -------------------------------- Assertions ---------------------------------
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
 private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
     val actual: ExceptionMessage = ExceptionMessage.from(this)
-    val expected: ExceptionMessage = Zero.invalid(number)
+    val expected: ExceptionMessage = ExceptionMessage.nonZero(number)
     assertEquals(expected, actual)
 }

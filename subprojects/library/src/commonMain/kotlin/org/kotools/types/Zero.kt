@@ -751,7 +751,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(number: Byte): Zero {
             val expected: Byte = 0
-            require(number == expected) { this.invalid(number) }
+            require(number == expected) { ExceptionMessage.nonZero(number) }
             return Zero()
         }
 
@@ -789,7 +789,7 @@ public class Zero {
         @JvmStatic
         public fun orThrow(number: Short): Zero {
             val expected: Short = 0
-            require(number == expected) { this.invalid(number) }
+            require(number == expected) { ExceptionMessage.nonZero(number) }
             return Zero()
         }
 
@@ -826,7 +826,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Int): Zero {
-            require(number == 0) { this.invalid(number) }
+            require(number == 0) { ExceptionMessage.nonZero(number) }
             return Zero()
         }
 
@@ -863,7 +863,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Long): Zero {
-            require(number == 0L) { this.invalid(number) }
+            require(number == 0L) { ExceptionMessage.nonZero(number) }
             return Zero()
         }
 
@@ -900,7 +900,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Float): Zero {
-            require(number == 0f) { this.invalid(number) }
+            require(number == 0f) { ExceptionMessage.nonZero(number) }
             return Zero()
         }
 
@@ -937,7 +937,7 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Double): Zero {
-            require(number == 0.0) { this.invalid(number) }
+            require(number == 0.0) { ExceptionMessage.nonZero(number) }
             return Zero()
         }
 
@@ -979,20 +979,8 @@ public class Zero {
         @JvmStatic
         public fun orThrow(text: String): Zero {
             val regex = Regex("""^0+(?:\.0+)?$""")
-            require(text matches regex) { this.invalid(text) }
+            require(text matches regex) { ExceptionMessage.nonZero(text) }
             return Zero()
         }
-
-        // ------------------------ Exception messages -------------------------
-
-        @JvmSynthetic
-        internal fun invalid(number: Number): ExceptionMessage =
-            ExceptionMessage.orThrow("'$number' shouldn't be other than zero.")
-
-        @JvmSynthetic
-        internal fun invalid(text: String): ExceptionMessage =
-            ExceptionMessage.orThrow(
-                "'$text' is not a valid representation of zero."
-            )
     }
 }
