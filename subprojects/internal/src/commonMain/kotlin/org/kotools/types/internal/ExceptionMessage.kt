@@ -67,7 +67,7 @@ public class ExceptionMessage private constructor(private val text: String) {
          * an invalid representation of zero.
          */
         public fun nonZero(text: String): ExceptionMessage =
-            ExceptionMessage("'$text' is not a valid representation of zero.")
+            ExceptionMessage("'$text' is an invalid representation of zero.")
 
         // ----------------- Factory functions for exceptions ------------------
 
