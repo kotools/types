@@ -75,13 +75,6 @@ public class ErrorMessage(private val text: String) {
         }
 
         /**
-         * Returns an error message indicating that the specified [value] is an
-         * invalid email address.
-         */
-        public fun invalidEmailAddress(value: String): ErrorMessage =
-            ErrorMessage("\"$value\" is an invalid email address.")
-
-        /**
          * Returns an error message indicating that the specified [number]
          * should be less than zero.
          */
