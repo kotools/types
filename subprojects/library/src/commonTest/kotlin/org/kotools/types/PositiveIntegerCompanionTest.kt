@@ -10,10 +10,10 @@ class PositiveIntegerCompanionTest {
     @Test
     fun orThrowShouldFailWithByteThatEqualsZero() {
         val number: Byte = 0
-        val exception: IllegalArgumentException = assertFailsWith {
+        val throwable: IllegalArgumentException = assertFailsWith {
             PositiveInteger.orThrow(number)
         }
-        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
         val expected: ExceptionMessage = ExceptionMessage.nonPositive(number)
         assertEquals(expected, actual)
     }
@@ -23,10 +23,10 @@ class PositiveIntegerCompanionTest {
         val number: Byte = (Byte.MIN_VALUE..-1)
             .random()
             .toByte()
-        val exception: IllegalArgumentException = assertFailsWith {
+        val throwable: IllegalArgumentException = assertFailsWith {
             PositiveInteger.orThrow(number)
         }
-        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
         val expected: ExceptionMessage = ExceptionMessage.nonPositive(number)
         assertEquals(expected, actual)
     }

@@ -218,10 +218,9 @@ class ZeroCompanionTest {
     fun orThrowShouldFailWithStringNotRepresentingZero(): Unit =
         listOf("", " ", ".", "0.", ".0", "abc")
             .forEach {
-                val exception: IllegalArgumentException =
+                val throwable: IllegalArgumentException =
                     assertFailsWith { Zero.orThrow(it) }
-                val actual: ExceptionMessage =
-                    ExceptionMessage.orThrow(exception)
+                val actual: ExceptionMessage = ExceptionMessage.from(throwable)
                 val expected: ExceptionMessage = Zero.invalid(it)
                 assertEquals(expected, actual)
             }
@@ -239,7 +238,7 @@ private fun Byte.Companion.randomNonZero(): Byte =
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
-    val actual: ExceptionMessage = ExceptionMessage.orThrow(this)
+    val actual: ExceptionMessage = ExceptionMessage.from(this)
     val expected: ExceptionMessage = Zero.invalid(number)
     assertEquals(expected, actual)
 }

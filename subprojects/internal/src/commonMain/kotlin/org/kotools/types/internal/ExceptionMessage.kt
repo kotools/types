@@ -50,15 +50,18 @@ public class ExceptionMessage private constructor(private val text: String) {
         }
 
         /**
-         * Creates an instance of [ExceptionMessage] from the message of the
-         * specified [throwable], or throws an [IllegalArgumentException] if the
-         * [throwable]'s message is blank.
+         * Returns an exception message from the specified [throwable], or
+         * throws an [IllegalArgumentException] if the [throwable]'s message is
+         * `null` or [blank][CharSequence.isBlank].
          */
-        public fun orThrow(throwable: Throwable): ExceptionMessage {
+        public fun from(throwable: Throwable): ExceptionMessage {
             val text: String = requireNotNull(throwable.message) {
-                "Exception's message shouldn't be null."
+                "Exception's message is null ($throwable)."
             }
-            return this.orThrow(text)
+            require(text.isNotBlank()) {
+                "Exception's message is blank ($throwable)."
+            }
+            return ExceptionMessage(text)
         }
     }
 }

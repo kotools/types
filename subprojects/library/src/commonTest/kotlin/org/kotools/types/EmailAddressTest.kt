@@ -180,9 +180,9 @@ class EmailAddressCompanionTest {
         .orThrowStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
 
     private fun orThrowStringShouldFailWith(text: String) {
-        val exception: IllegalArgumentException =
+        val throwable: IllegalArgumentException =
             assertFailsWith { EmailAddress.orThrow(text) }
-        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
         val expected: ExceptionMessage =
             EmailAddress.invalidText(text, EmailAddress.PATTERN)
         assertEquals(expected, actual)
@@ -199,10 +199,10 @@ class EmailAddressCompanionTest {
     fun orThrowStringStringShouldFailWithInvalidText() {
         val text = "first-contact@kotools.org"
         val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val exception: IllegalArgumentException = assertFailsWith {
+        val throwable: IllegalArgumentException = assertFailsWith {
             EmailAddress.orThrow(text, pattern)
         }
-        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
         val expected: ExceptionMessage = EmailAddress.invalidText(text, pattern)
         assertEquals(expected, actual)
     }
@@ -211,10 +211,10 @@ class EmailAddressCompanionTest {
     fun orThrowStringStringShouldFailWithInvalidPattern() {
         val text: String = Values.VALID
         val pattern = """^[a-z]+\.[a-z]+$"""
-        val exception: IllegalArgumentException = assertFailsWith {
+        val throwable: IllegalArgumentException = assertFailsWith {
             EmailAddress.orThrow(text, pattern)
         }
-        val actual: ExceptionMessage = ExceptionMessage.orThrow(exception)
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
         val expected: ExceptionMessage = EmailAddress.invalidPattern(
             pattern,
             expected = EmailAddress.PATTERN
