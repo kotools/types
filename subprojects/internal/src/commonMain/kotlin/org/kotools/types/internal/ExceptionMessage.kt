@@ -27,6 +27,17 @@ public class ExceptionMessage private constructor(private val text: String) {
 
     /** Contains static declarations for the [ExceptionMessage] type. */
     public companion object {
+        // ----------------- Number-related factory functions ------------------
+
+        /**
+         * Returns an exception message indicating that the specified [number]
+         * is not positive.
+         */
+        public fun nonPositive(number: Number): ExceptionMessage =
+            ExceptionMessage("'$number' is not positive (> 0).")
+
+        // ---------------------- Other factory functions ----------------------
+
         /**
          * Creates an instance of [ExceptionMessage] from the specified [text],
          * or returns `null` if the [text] is blank.
