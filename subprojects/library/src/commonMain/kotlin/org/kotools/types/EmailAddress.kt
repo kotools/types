@@ -241,7 +241,9 @@ public class EmailAddress private constructor(private val text: String) {
         public fun orThrow(text: String): EmailAddress {
             val pattern: String = this.PATTERN
             val regex = Regex(pattern)
-            require(text matches regex) { this.invalidText(text, pattern) }
+            require(text matches regex) {
+                ExceptionMessage.invalidEmailAddress(text)
+            }
             return EmailAddress(text)
         }
 
@@ -282,35 +284,13 @@ public class EmailAddress private constructor(private val text: String) {
         public fun orThrow(text: String, pattern: String): EmailAddress {
             val patternRegex = Regex(this.PATTERN)
             require(pattern matches patternRegex) {
-                val expected: String = patternRegex.pattern
-                this.invalidPattern(pattern, expected)
+                ExceptionMessage.invalidEmailAddressPattern(pattern)
             }
             val textRegex = Regex(pattern)
-            require(text matches textRegex) { this.invalidText(text, pattern) }
+            require(text matches textRegex) {
+                ExceptionMessage.invalidEmailAddress(text)
+            }
             return EmailAddress(text)
-        }
-
-        // ------------------------ Exception messages -------------------------
-
-        @JvmSynthetic
-        internal fun invalidPattern(
-            pattern: String,
-            expected: String
-        ): ExceptionMessage {
-            val message =
-                "'$pattern' is invalid for validating email addresses."
-            val reason = "It should match the following pattern: '$expected'."
-            return ExceptionMessage.orThrow("$message $reason")
-        }
-
-        @JvmSynthetic
-        internal fun invalidText(
-            text: String,
-            pattern: String
-        ): ExceptionMessage {
-            val message = "'$text' is an invalid email address."
-            val reason = "It should match the following pattern: '$pattern'."
-            return ExceptionMessage.orThrow("$message $reason")
         }
     }
 }

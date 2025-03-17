@@ -184,7 +184,7 @@ class EmailAddressCompanionTest {
             assertFailsWith { EmailAddress.orThrow(text) }
         val actual: ExceptionMessage = ExceptionMessage.from(throwable)
         val expected: ExceptionMessage =
-            EmailAddress.invalidText(text, EmailAddress.PATTERN)
+            ExceptionMessage.invalidEmailAddress(text)
         assertEquals(expected, actual)
     }
 
@@ -203,7 +203,8 @@ class EmailAddressCompanionTest {
             EmailAddress.orThrow(text, pattern)
         }
         val actual: ExceptionMessage = ExceptionMessage.from(throwable)
-        val expected: ExceptionMessage = EmailAddress.invalidText(text, pattern)
+        val expected: ExceptionMessage =
+            ExceptionMessage.invalidEmailAddress(text)
         assertEquals(expected, actual)
     }
 
@@ -215,10 +216,8 @@ class EmailAddressCompanionTest {
             EmailAddress.orThrow(text, pattern)
         }
         val actual: ExceptionMessage = ExceptionMessage.from(throwable)
-        val expected: ExceptionMessage = EmailAddress.invalidPattern(
-            pattern,
-            expected = EmailAddress.PATTERN
-        )
+        val expected: ExceptionMessage =
+            ExceptionMessage.invalidEmailAddressPattern(pattern)
         assertEquals(expected, actual)
     }
 }

@@ -27,7 +27,26 @@ public class ExceptionMessage private constructor(private val text: String) {
 
     /** Contains static declarations for the [ExceptionMessage] type. */
     public companion object {
-        // ----------------- Number-related factory functions ------------------
+        // -------------- Email address related factory functions --------------
+
+        /**
+         * Returns an exception message indicating that the specified [text] is
+         * an invalid email address.
+         */
+        public fun invalidEmailAddress(text: String): ExceptionMessage =
+            ExceptionMessage("'$text' is an invalid email address.")
+
+        /**
+         * Returns an exception message indicating that the specified [pattern]
+         * is invalid for validating email addresses.
+         */
+        public fun invalidEmailAddressPattern(
+            pattern: String
+        ): ExceptionMessage = ExceptionMessage(
+            "'$pattern' is invalid for validating email addresses."
+        )
+
+        // ----------------- Number related factory functions ------------------
 
         /**
          * Returns an exception message indicating that the specified [number]
