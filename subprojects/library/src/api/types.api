@@ -428,15 +428,6 @@ public final class org/kotools/types/EmailAddress$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
-public final class org/kotools/types/PositiveInteger {
-	public static final field Companion Lorg/kotools/types/PositiveInteger$Companion;
-	public static final fun orThrow (B)Lorg/kotools/types/PositiveInteger;
-}
-
-public final class org/kotools/types/PositiveInteger$Companion {
-	public final fun orThrow (B)Lorg/kotools/types/PositiveInteger;
-}
-
 public final class org/kotools/types/Zero {
 	public static final field Companion Lorg/kotools/types/Zero$Companion;
 	public fun <init> ()V
