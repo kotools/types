@@ -199,10 +199,12 @@ public class EmailAddress private constructor(private val text: String) {
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
-        public fun orNull(text: String, pattern: String): EmailAddress? = try {
-            this.orThrow(text, pattern)
-        } catch (exception: IllegalArgumentException) {
-            null
+        public fun orNull(text: String, pattern: String): EmailAddress? {
+            val patternRegex = Regex(this.PATTERN)
+            val patternIsInvalid: Boolean = !pattern.matches(patternRegex)
+            if (patternIsInvalid) return null
+            val textRegex = Regex(pattern)
+            return if (text matches textRegex) EmailAddress(text) else null
         }
 
         /**
