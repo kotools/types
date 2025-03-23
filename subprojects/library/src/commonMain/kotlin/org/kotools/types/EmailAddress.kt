@@ -241,12 +241,10 @@ public class EmailAddress private constructor(private val text: String) {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String): EmailAddress {
-            val pattern: String = this.PATTERN
-            val regex = Regex(pattern)
-            require(text matches regex) {
+            val emailAddress: EmailAddress? = this.orNull(text)
+            return requireNotNull(emailAddress) {
                 ExceptionMessage.invalidEmailAddress(text)
             }
-            return EmailAddress(text)
         }
 
         /**
