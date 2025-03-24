@@ -32,9 +32,6 @@ All notable changes to this project will be documented in this file.
 
 ### 🗑️ Deprecated
 
-- The `ZeroAsByteSerializer` type with an **error level**, in the
-  `types-kotlinx-serialization` Gradle subproject, for using the
-  `Zero.Companion.byteSerializer()` function instead ([#793]).
 - The `EmailAddressAsStringSerializer` type with an **error level**, in the
   `types-kotlinx-serialization` Gradle subproject, for using the
   `EmailAddress.Companion.stringSerializer()` function instead ([#794]).
@@ -42,6 +39,9 @@ All notable changes to this project will be documented in this file.
 ### 🔥 Removed
 
 - Versions 4.5.0, 4.5.1 and 4.5.2 from the API reference ([#771]).
+- The `ZeroAsByteSerializer` **experimental** type, from the
+  `types-kotlinx-serialization` Gradle subproject, for using the
+  `Zero.Companion.byteSerializer()` function instead ([#795]).
 
 ---
 
@@ -51,6 +51,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#771]: https://github.com/kotools/types/issues/771
 [#793]: https://github.com/kotools/types/issues/793
 [#794]: https://github.com/kotools/types/issues/794
+[#795]: https://github.com/kotools/types/issues/795
 
 ## 🔖 Releases
 
