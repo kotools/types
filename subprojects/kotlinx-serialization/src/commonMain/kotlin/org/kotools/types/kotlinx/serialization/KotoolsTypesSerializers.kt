@@ -28,7 +28,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.all]
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersSample.all]
      * </details>
      */
     public val all: SerializersModule
@@ -50,7 +50,7 @@ public object KotoolsTypesSerializers {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersCommonSample.toStringOverride]
+     * SAMPLE: [org.kotools.types.kotlinx.serialization.KotoolsTypesSerializersSample.toStringOverride]
      * </details>
      */
     @Suppress(Warning.FINAL)

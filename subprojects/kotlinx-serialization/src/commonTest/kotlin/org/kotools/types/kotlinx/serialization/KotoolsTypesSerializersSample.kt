@@ -8,22 +8,21 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal class KotoolsTypesSerializersCommonSample {
+class KotoolsTypesSerializersSample {
     @Test
     fun all() {
         val format = Json { serializersModule = KotoolsTypesSerializers.all }
         val zero = Zero()
         val encoded: String = format.encodeToString(zero)
-        assertEquals(expected = "0", actual = encoded)
+        assertEquals("0", encoded)
         val decoded: Zero = format.decodeFromString(encoded)
-        assertEquals(expected = zero, actual = decoded)
+        assertEquals(zero, decoded)
     }
 
     @Test
     fun toStringOverride() {
-        val actual =
+        val result =
             "$KotoolsTypesSerializers" // or KotoolsTypesSerializers.toString()
-        val expected = "KotoolsTypesSerializers"
-        assertEquals(expected, actual)
+        assertEquals("KotoolsTypesSerializers", result)
     }
 }
