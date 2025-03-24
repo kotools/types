@@ -27,7 +27,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressSerializersCommonSample.stringSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressSerializersSample.stringSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi

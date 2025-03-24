@@ -7,7 +7,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class EmailAddressSerializersCommonSample {
+class EmailAddressSerializersSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun stringSerializer() {
