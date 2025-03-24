@@ -528,10 +528,9 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
-        public fun orNull(number: Byte): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
+        public fun orNull(number: Byte): Zero? {
+            val expected: Byte = 0
+            return if (number == expected) Zero() else null
         }
 
         /**
@@ -558,10 +557,9 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmSynthetic
-        public fun orNull(number: Short): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
+        public fun orNull(number: Short): Zero? {
+            val expected: Short = 0
+            return if (number == expected) Zero() else null
         }
 
         /**
@@ -588,11 +586,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmSynthetic
-        public fun orNull(number: Int): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
-        }
+        public fun orNull(number: Int): Zero? =
+            if (number == 0) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
@@ -618,11 +613,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmSynthetic
-        public fun orNull(number: Long): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
-        }
+        public fun orNull(number: Long): Zero? =
+            if (number == 0L) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
@@ -648,11 +640,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmSynthetic
-        public fun orNull(number: Float): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
-        }
+        public fun orNull(number: Float): Zero? =
+            if (number == 0f) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [number], or returns
@@ -678,11 +667,8 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmSynthetic
-        public fun orNull(number: Double): Zero? = try {
-            this.orThrow(number)
-        } catch (exception: IllegalArgumentException) {
-            null
-        }
+        public fun orNull(number: Double): Zero? =
+            if (number == 0.0) Zero() else null
 
         /**
          * Creates an instance of [Zero] from the specified [text], or returns
@@ -711,10 +697,9 @@ public class Zero {
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmSynthetic
-        public fun orNull(text: String): Zero? = try {
-            this.orThrow(text)
-        } catch (exception: IllegalArgumentException) {
-            null
+        public fun orNull(text: String): Zero? {
+            val regex = Regex("""^0+(?:\.0+)?$""")
+            return if (text matches regex) Zero() else null
         }
 
         /**
@@ -750,9 +735,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(number: Byte): Zero {
-            val expected: Byte = 0
-            require(number == expected) { ExceptionMessage.nonZero(number) }
-            return Zero()
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(number) }
         }
 
         /**
@@ -788,9 +772,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Short): Zero {
-            val expected: Short = 0
-            require(number == expected) { ExceptionMessage.nonZero(number) }
-            return Zero()
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(number) }
         }
 
         /**
@@ -826,8 +809,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Int): Zero {
-            require(number == 0) { ExceptionMessage.nonZero(number) }
-            return Zero()
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(number) }
         }
 
         /**
@@ -863,8 +846,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Long): Zero {
-            require(number == 0L) { ExceptionMessage.nonZero(number) }
-            return Zero()
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(number) }
         }
 
         /**
@@ -900,8 +883,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Float): Zero {
-            require(number == 0f) { ExceptionMessage.nonZero(number) }
-            return Zero()
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(number) }
         }
 
         /**
@@ -937,8 +920,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(number: Double): Zero {
-            require(number == 0.0) { ExceptionMessage.nonZero(number) }
-            return Zero()
+            val zero: Zero? = this.orNull(number)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(number) }
         }
 
         /**
@@ -978,9 +961,8 @@ public class Zero {
         @ExperimentalSince(KotoolsTypesVersion.V5_0_0)
         @JvmStatic
         public fun orThrow(text: String): Zero {
-            val regex = Regex("""^0+(?:\.0+)?$""")
-            require(text matches regex) { ExceptionMessage.nonZero(text) }
-            return Zero()
+            val zero: Zero? = this.orNull(text)
+            return requireNotNull(zero) { ExceptionMessage.nonZero(text) }
         }
     }
 }
