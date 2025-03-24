@@ -20,23 +20,24 @@ All notable changes to this project will be documented in this file.
 
 - The following extension functions on the `Zero.Companion` **experimental**
   type, in the `types-kotlinx-serialization` Gradle subproject ([#793]):
-  - `byteSerializer` for serializing the `Zero` type as `Byte`.
-  - `shortSerializer` for serializing the `Zero` type as `Short`.
-  - `intSerializer` for serializing the `Zero` type as `Int`.
-  - `longSerializer` for serializing the `Zero` type as `Long`.
-  - `floatSerializer` for serializing the `Zero` type as `Float`.
-  - `doubleSerializer` for serializing the `Zero` type as `Double`.
-- The `EmailAddress.Companion.stringSerializer` **experimental** function, in
+  - `byteSerializer()` for serializing the `Zero` type as `Byte`.
+  - `shortSerializer()` for serializing the `Zero` type as `Short`.
+  - `intSerializer()` for serializing the `Zero` type as `Int`.
+  - `longSerializer()` for serializing the `Zero` type as `Long`.
+  - `floatSerializer()` for serializing the `Zero` type as `Float`.
+  - `doubleSerializer()` for serializing the `Zero` type as `Double`.
+- The `EmailAddress.Companion.stringSerializer()` **experimental** function, in
   the `types-kotlinx-serialization` Gradle subproject, for serializing the
   `EmailAddress` type as `String` ([#794]).
 
 ### 🗑️ Deprecated
 
-- In the `types-kotlinx-serialization` Gradle subproject, the
-  `ZeroAsByteSerializer` type with an **error level** ([#793]).
-- The `EmailAddressAsStringSerializer` **experimental** type with an
-  **error level**, in the `types-kotlinx-serialization` Gradle subproject
-  ([#794]).
+- The `ZeroAsByteSerializer` type with an **error level**, in the
+  `types-kotlinx-serialization` Gradle subproject, for using the
+  `Zero.Companion.byteSerializer()` function instead ([#793]).
+- The `EmailAddressAsStringSerializer` type with an **error level**, in the
+  `types-kotlinx-serialization` Gradle subproject, for using the
+  `EmailAddress.Companion.stringSerializer()` function instead ([#794]).
 
 ### 🔥 Removed
 
