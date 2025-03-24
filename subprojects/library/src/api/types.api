@@ -116,10 +116,6 @@ public final class kotools/types/experimental/AnyIntFactory {
 	public static final fun create (I)Lkotools/types/number/AnyInt;
 }
 
-public final class kotools/types/experimental/AnyIntKt {
-	public static final synthetic fun unaryMinus (Lkotools/types/number/AnyInt;)Lkotools/types/number/AnyInt;
-}
-
 public final class kotools/types/experimental/NegativeIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
 }
