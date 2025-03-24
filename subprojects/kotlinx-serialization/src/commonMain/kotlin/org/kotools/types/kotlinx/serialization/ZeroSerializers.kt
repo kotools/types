@@ -26,7 +26,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.byteSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.byteSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
@@ -58,7 +58,7 @@ public fun Zero.Companion.byteSerializer(): KSerializer<Zero> =
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.shortSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.shortSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
@@ -90,7 +90,7 @@ public fun Zero.Companion.shortSerializer(): KSerializer<Zero> =
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.intSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.intSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
@@ -122,7 +122,7 @@ public fun Zero.Companion.intSerializer(): KSerializer<Zero> =
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.longSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.longSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
@@ -154,7 +154,7 @@ public fun Zero.Companion.longSerializer(): KSerializer<Zero> =
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.floatSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.floatSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
@@ -186,7 +186,7 @@ public fun Zero.Companion.floatSerializer(): KSerializer<Zero> =
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersCommonSample.doubleSerializer]
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.doubleSerializer]
  * </details>
  */
 @ExperimentalKotoolsTypesApi

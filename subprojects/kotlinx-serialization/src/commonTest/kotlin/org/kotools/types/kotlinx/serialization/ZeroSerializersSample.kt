@@ -7,7 +7,7 @@ import org.kotools.types.Zero
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ZeroSerializersCommonSample {
+class ZeroSerializersSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun byteSerializer() {
