@@ -8,10 +8,6 @@ Explicit types for [Kotlin Multiplatform].
 
 Contains types such as [NotEmptyList] for manipulating collections.
 
-# Package kotools.types.experimental
-
-Experimental APIs, subject to change in future versions.
-
 # Package kotools.types.number
 
 Contains types such as [NonZeroInt] for manipulating numbers.
