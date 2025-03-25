@@ -78,45 +78,6 @@ public sealed interface NonZeroInt : AnyInt {
 
         /**
          * Creates a [NonZeroInt] from the specified [number], which may involve
-         * rounding or truncation, or throws an [IllegalArgumentException] if
-         * the [number] equals zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.number.NonZeroIntCompanionCommonSample.create]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.create]
-         * </details>
-         * <br>
-         *
-         * You can use the [NonZeroInt.Companion.createOrNull] function for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [number].
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        public fun create(number: Number): NonZeroInt {
-            val result: NonZeroInt? = createOrNull(number)
-            return requireNotNull(result, ErrorMessage.Companion::zeroNumber)
-        }
-
-        /**
-         * Creates a [NonZeroInt] from the specified [number], which may involve
          * rounding or truncation, or returns `null` if the [number] equals
          * zero.
          *
@@ -141,10 +102,6 @@ public sealed interface NonZeroInt : AnyInt {
          *
          * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.createOrNull]
          * </details>
-         * <br>
-         *
-         * You can use the [NonZeroInt.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)

@@ -174,7 +174,6 @@ public abstract interface class kotools/types/number/NonZeroInt : kotools/types/
 }
 
 public final class kotools/types/number/NonZeroInt$Companion {
-	public final fun create (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public final fun createOrNull (Ljava/lang/Number;)Lkotools/types/number/NonZeroInt;
 	public final fun getMax-qaD5h0E ()I
 	public final fun getMin-r6XGqFM ()I

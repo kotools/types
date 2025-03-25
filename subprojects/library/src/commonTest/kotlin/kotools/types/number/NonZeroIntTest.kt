@@ -19,7 +19,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
-import kotlin.test.assertTrue
 
 class NonZeroIntCompanionTest {
     @Test
@@ -32,31 +31,6 @@ class NonZeroIntCompanionTest {
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = NonZeroInt.max
         result.toInt() shouldEqual Int.MAX_VALUE
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun create_should_pass_with_a_Number_other_than_zero() {
-        val number: Number = setOf(
-            Random.nextInt(from = 1, until = Int.MAX_VALUE),
-            Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        ).random()
-        val result: Result<NonZeroInt> = kotlin.runCatching {
-            NonZeroInt.create(number)
-        }
-        val type: String = simpleNameOf<NonZeroInt>()
-        assertTrue(result.isSuccess, "Converting $number to $type should pass")
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun create_should_fail_with_a_Number_that_equals_zero() {
-        val number: Number = 0
-        val exception: IllegalArgumentException =
-            assertFailsWith { NonZeroInt.create(number) }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage = ErrorMessage.zeroNumber
-        assertEquals(expected, actual)
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
