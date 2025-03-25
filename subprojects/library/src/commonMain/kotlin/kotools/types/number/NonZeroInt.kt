@@ -13,8 +13,6 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -75,44 +73,6 @@ public sealed interface NonZeroInt : AnyInt {
         public val max: StrictlyPositiveInt by lazy(
             StrictlyPositiveInt.Companion::max
         )
-
-        /**
-         * Creates a [NonZeroInt] from the specified [number], which may involve
-         * rounding or truncation, or returns `null` if the [number] equals
-         * zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.number.NonZeroIntCompanionCommonSample.createOrNull]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [kotools.types.number.NonZeroIntCompanionJavaSample.createOrNull]
-         * </details>
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        public fun createOrNull(number: Number): NonZeroInt? {
-            val value: Int = number.toInt()
-            return when {
-                value.isStrictlyPositive() -> StrictlyPositiveInt.create(value)
-                value.isStrictlyNegative() -> StrictlyNegativeInt.create(value)
-                else -> null
-            }
-        }
 
         /** Returns a random [NonZeroInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)

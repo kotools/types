@@ -11,14 +11,11 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import kotools.types.shouldNotEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 class NonZeroIntCompanionTest {
     @Test
@@ -31,24 +28,6 @@ class NonZeroIntCompanionTest {
     fun max_should_equal_the_maximum_value_of_Int() {
         val result: StrictlyPositiveInt = NonZeroInt.max
         result.toInt() shouldEqual Int.MAX_VALUE
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_pass_with_a_Number_other_than_zero() {
-        val number: Number = setOf(
-            Random.nextInt(from = 1, until = Int.MAX_VALUE),
-            Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        ).random()
-        val actual: NonZeroInt? = NonZeroInt.createOrNull(number)
-        assertNotNull(actual)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_fail_with_a_Number_that_equals_zero() {
-        val actual: NonZeroInt? = NonZeroInt.createOrNull(0)
-        assertNull(actual)
     }
 
     @Test
