@@ -120,10 +120,6 @@ public final class kotools/types/experimental/NegativeIntKt {
 	public static final synthetic fun unaryMinus (Lkotools/types/number/NegativeInt;)Lkotools/types/number/PositiveInt;
 }
 
-public final class kotools/types/experimental/PositiveIntKt {
-	public static final synthetic fun unaryMinus (Lkotools/types/number/PositiveInt;)Lkotools/types/number/NegativeInt;
-}
-
 public final class kotools/types/experimental/StrictlyNegativeIntKt {
 	public static final synthetic fun unaryMinus-I890jeU (I)I
 }
