@@ -12,8 +12,6 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBePositive
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -71,44 +69,6 @@ public sealed interface PositiveInt : AnyInt {
 
         /** The maximum value a [PositiveInt] can have. */
         public val max: StrictlyPositiveInt by lazy { StrictlyPositiveInt.max }
-
-        /**
-         * Creates a [PositiveInt] from the specified [number], which may
-         * involve rounding or truncation, or returns `null` if the [number] is
-         * less than zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.number.PositiveIntCompanionCommonSample.createOrNull]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [kotools.types.number.PositiveIntCompanionJavaSample.createOrNull]
-         * </details>
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        public fun createOrNull(number: Number): PositiveInt? {
-            val value: Int = number.toInt()
-            return when {
-                value == 0 -> ZeroInt
-                value.isStrictlyPositive() -> StrictlyPositiveInt.create(value)
-                else -> null
-            }
-        }
 
         /** Returns a random [PositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
