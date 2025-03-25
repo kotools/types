@@ -218,21 +218,6 @@ public final class kotools/types/number/PositiveIntKt {
 	public static final fun toPositiveInt (Ljava/lang/Number;)Ljava/lang/Object;
 }
 
-public final class kotools/types/number/StrictlyNegativeDouble {
-	public static final field Companion Lkotools/types/number/StrictlyNegativeDouble$Companion;
-	public synthetic fun <init> (DLkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun equals (Ljava/lang/Object;)Z
-	public final fun hashCode ()I
-	public final fun toDouble ()D
-	public final fun toString ()Ljava/lang/String;
-}
-
-public final class kotools/types/number/StrictlyNegativeDouble$Companion {
-	public final fun create (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeDouble;
-	public final fun createOrNull (Ljava/lang/Number;)Lkotools/types/number/StrictlyNegativeDouble;
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
 public final class kotools/types/number/StrictlyNegativeInt : kotools/types/number/NegativeInt, kotools/types/number/NonZeroInt {
 	public static final field Companion Lkotools/types/number/StrictlyNegativeInt$Companion;
 	public static final synthetic fun box-impl (I)Lkotools/types/number/StrictlyNegativeInt;
