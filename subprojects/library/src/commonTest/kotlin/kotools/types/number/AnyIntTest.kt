@@ -9,7 +9,6 @@ import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import kotools.types.experimental.AnyInt
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
 import org.kotools.types.ExperimentalKotoolsTypesApi
@@ -167,7 +166,11 @@ class AnyIntSerializerTest {
         val value: Int = Random.nextInt()
         val encoded: String = Json.encodeToString(value)
         val actual: AnyInt = Json.decodeFromString(encoded)
-        val expected = AnyInt(value)
+        val expected: AnyInt = when {
+            value == 0 -> ZeroInt
+            value > 0 -> value.toStrictlyPositiveInt().getOrThrow()
+            else -> value.toStrictlyNegativeInt().getOrThrow()
+        }
         assertEquals(expected, actual)
     }
 

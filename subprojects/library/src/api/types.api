@@ -112,10 +112,6 @@ public final class kotools/types/collection/NotEmptySetKt {
 	public static final fun toNotEmptySet (Ljava/util/Collection;)Ljava/lang/Object;
 }
 
-public final class kotools/types/experimental/AnyIntFactory {
-	public static final fun create (I)Lkotools/types/number/AnyInt;
-}
-
 public abstract interface class kotools/types/number/AnyInt : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/AnyInt$Companion;
 	public abstract fun compareTo (Lkotools/types/number/AnyInt;)I
