@@ -116,10 +116,6 @@ public final class kotools/types/experimental/AnyIntFactory {
 	public static final fun create (I)Lkotools/types/number/AnyInt;
 }
 
-public final class kotools/types/experimental/StrictlyNegativeIntKt {
-	public static final synthetic fun unaryMinus-I890jeU (I)I
-}
-
 public abstract interface class kotools/types/number/AnyInt : java/lang/Comparable {
 	public static final field Companion Lkotools/types/number/AnyInt$Companion;
 	public abstract fun compareTo (Lkotools/types/number/AnyInt;)I
