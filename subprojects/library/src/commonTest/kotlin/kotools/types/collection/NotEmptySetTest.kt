@@ -10,7 +10,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.internal.ErrorMessage
-import kotools.types.internal.simpleNameOf
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
@@ -25,46 +24,9 @@ import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 class NotEmptySetCompanionTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_pass_with_a_not_empty_Collection() {
-        val size = 5
-        val collection: Collection<Int> = List(size) { Random.nextInt() }
-            .toSet()
-        val integers: NotEmptySet<Int>? = NotEmptySet.createOrNull(collection)
-        val typeName: String = simpleNameOf<NotEmptySet<Int>>()
-        assertNotNull(integers, "$collection to $typeName should pass")
-        assertContentEquals(expected = collection, actual = integers.toSet())
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_pass_with_a_not_empty_MutableCollection() {
-        val size = 5
-        val original: MutableCollection<Int> =
-            MutableList(size) { Random.nextInt() }
-        val actual: NotEmptySet<Int>? = NotEmptySet.createOrNull(original)
-        val typeName: String = simpleNameOf<NotEmptySet<Int>>()
-        assertNotNull(actual, "$original to $typeName should pass")
-        assertContentEquals(expected = original, actual.toSet())
-        original.clear()
-        assertNotEquals(illegal = "$original", "$actual")
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_fail_with_an_empty_Collection() {
-        val collection: Collection<Int> = emptySet()
-        val actual: NotEmptySet<Int>? = NotEmptySet.createOrNull(collection)
-        val typeName: String = simpleNameOf<NotEmptySet<Int>>()
-        assertNull(actual, "$collection to $typeName should fail")
-    }
-
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun of_should_pass_with_a_head() {

@@ -99,43 +99,6 @@ public value class NotEmptySet<out E> private constructor(
     /** Contains static declarations for the [NotEmptySet] type. */
     public companion object {
         /**
-         * Creates a [NotEmptySet] containing all the elements of the specified
-         * [collection], or returns `null` if the [collection] is
-         * [empty][Collection.isEmpty].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithCollection]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptySet] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * Please note that changes made to the original collection will not be
-         * reflected on the resulting [NotEmptySet].
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithMutableCollection]
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <E> createOrNull(
-            collection: Collection<E>
-        ): NotEmptySet<E>? {
-            if (collection.isEmpty()) return null
-            val elements: Set<E> = collection.toSet()
-            return NotEmptySet(elements)
-        }
-
-        /**
          * Creates a [NotEmptySet] starting with a [head] and containing all the
          * elements of the optional [tail].
          *
