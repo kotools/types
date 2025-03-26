@@ -10,49 +10,17 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.internal.ErrorMessage
-import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
-
-class NotEmptySetCompanionTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun of_should_pass_with_a_head() {
-        val head: Int = Random.nextInt()
-        val actual: NotEmptySet<Int> = NotEmptySet.of(head)
-        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.orThrow(1)
-        assertEquals(expectedSize, actual.size)
-        assertEquals(expected = head, actual.head)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun of_should_pass_with_a_head_and_a_tail() {
-        val head: Int = Random.nextInt()
-        val tail: Array<Int> = Array(2) { Random.nextInt() }
-        val actual: NotEmptySet<Int> = NotEmptySet.of(head, *tail)
-        val expectedSize: StrictlyPositiveInt =
-            StrictlyPositiveInt.orThrow(1 + tail.size)
-        assertEquals(expectedSize, actual.size)
-        assertEquals(expected = head, actual.head)
-        val actualTail: Array<Int> = assertNotNull(actual.tail)
-            .toSet()
-            .toTypedArray()
-        assertContentEquals(expected = tail, actualTail)
-    }
-}
 
 class NotEmptySetTest {
     @Test
