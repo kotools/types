@@ -133,43 +133,6 @@ public value class NotEmptyList<out E> private constructor(
     /** Contains static declarations for the [NotEmptyList] type. */
     public companion object {
         /**
-         * Creates a [NotEmptyList] containing all the elements of the specified
-         * [collection], or returns `null` if the [collection] is
-         * [empty][Collection.isEmpty].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithCollection]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptyList] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * Please note that changes made to the original collection will not be
-         * reflected on the resulting [NotEmptyList].
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.createOrNullWithMutableCollection]
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <E> createOrNull(
-            collection: Collection<E>
-        ): NotEmptyList<E>? {
-            if (collection.isEmpty()) return null
-            val elements: List<E> = collection.toList()
-            return NotEmptyList(elements)
-        }
-
-        /**
          * Creates a [NotEmptyList] starting with a [head] and containing all
          * the elements of the optional [tail].
          *
