@@ -65,7 +65,6 @@ public final class kotools/types/collection/NotEmptyMap {
 }
 
 public final class kotools/types/collection/NotEmptyMap$Companion {
-	public final synthetic fun of-2HTncow (Lkotlin/Pair;[Lkotlin/Pair;)Ljava/util/Map;
 	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 

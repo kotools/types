@@ -17,38 +17,11 @@ import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-
-class NotEmptyMapCompanionTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun of_should_pass_with_a_head() {
-        val head: Pair<Char, Int> = 'a' to 1
-        val actual: NotEmptyMap<Char, Int> = NotEmptyMap.of(head)
-        val actualEntries: List<Pair<Char, Int>> = actual.entries.toSet()
-            .map(Map.Entry<Char, Int>::toPair)
-        val expectedEntries: List<Pair<Char, Int>> = listOf(head)
-        assertEquals(expectedEntries, actualEntries)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun of_should_pass_with_a_head_and_a_tail() {
-        val head: Pair<Char, Int> = 'a' to 1
-        val tail: Array<Pair<Char, Int>> = arrayOf('b' to 2, 'c' to 3)
-        val actual: NotEmptyMap<Char, Int> = NotEmptyMap.of(head, *tail)
-        val actualEntries: List<Pair<Char, Int>> = actual.entries.toSet()
-            .map(Map.Entry<Char, Int>::toPair)
-        val expectedEntries: List<Pair<Char, Int>> = listOf(head) + tail
-        assertContentEquals(expectedEntries, actualEntries)
-    }
-}
 
 class NotEmptyMapTest {
     @Test

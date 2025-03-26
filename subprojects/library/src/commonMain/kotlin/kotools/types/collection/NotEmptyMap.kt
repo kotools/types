@@ -10,8 +10,6 @@ import kotools.types.internal.ErrorMessage
 import kotools.types.internal.serializationError
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -101,37 +99,6 @@ public value class NotEmptyMap<K, out V> private constructor(
 ) {
     /** Contains static declarations for the [NotEmptyMap] type. */
     public companion object {
-        /**
-         * Creates a [NotEmptyMap] starting with the [head] and containing all
-         * the entries of the optional [tail].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.of]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptyMap] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <K, V> of(
-            head: Pair<K, V>,
-            vararg tail: Pair<K, V>
-        ): NotEmptyMap<K, V> = listOf(head)
-            .plus(tail)
-            .toMap()
-            .let(::NotEmptyMap)
-
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <K, V> orThrow(
