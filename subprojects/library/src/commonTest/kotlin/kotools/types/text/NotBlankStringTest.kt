@@ -13,7 +13,6 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.shouldEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -82,18 +81,6 @@ class NotBlankStringTest {
             .getOrThrow()
         val result: Int = x compareTo y
         assertTrue { result > ZeroInt.toInt() }
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun plus_should_pass() {
-        val first: NotBlankString = "hello".toNotBlankString()
-            .getOrThrow()
-        val second: Any = " world"
-        val actual: NotBlankString = first + second
-        val expected: NotBlankString = "$first$second".toNotBlankString()
-            .getOrThrow()
-        assertEquals(expected, actual)
     }
 }
 

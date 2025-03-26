@@ -13,8 +13,6 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.internal.stringSerializer
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -74,33 +72,6 @@ public value class NotBlankString private constructor(
     @Since(KotoolsTypesVersion.V4_1_0)
     override infix fun compareTo(other: NotBlankString): Int =
         "$this".compareTo("$other")
-
-    /**
-     * Concatenates this string with the string representation of the [other]
-     * object.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [kotools.types.text.NotBlankStringCommonSample.plusOperator]
-     * </details>
-     * <br>
-     *
-     * The [NotBlankString] type being an
-     * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-     * this function is not available yet for Java users.
-     */
-    @ExperimentalKotoolsTypesApi
-    @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-    @JvmSynthetic
-    public operator fun plus(other: Any): NotBlankString = value.plus("$other")
-        .toNotBlankString()
-        .getOrThrow()
 
     /** Returns this string as a [String]. */
     override fun toString(): String = value
