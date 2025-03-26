@@ -12,8 +12,6 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeStrictlyPositive
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -88,36 +86,6 @@ public value class StrictlyPositiveInt private constructor(
             return StrictlyPositiveInt(number)
         }
 
-        /**
-         * Creates a [StrictlyPositiveInt] from the specified [number], which
-         * may involve rounding or truncation, or returns `null` if the [number]
-         * is less than or equals zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.number.StrictlyPositiveIntCompanionCommonSample.createOrNull]
-         * </details>
-         * <br>
-         *
-         * The [StrictlyPositiveInt] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun createOrNull(number: Number): StrictlyPositiveInt? {
-            val value: Int = number.toInt()
-            val isValid: Boolean = value.isStrictlyPositive()
-            return if (isValid) StrictlyPositiveInt(value) else null
-        }
-
         /** Returns a random [StrictlyPositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
         public fun random(): StrictlyPositiveInt = (min.value..max.value)
@@ -125,7 +93,6 @@ public value class StrictlyPositiveInt private constructor(
             .toStrictlyPositiveInt()
             .getOrThrow()
     }
-
 }
 
 @InternalKotoolsTypesApi

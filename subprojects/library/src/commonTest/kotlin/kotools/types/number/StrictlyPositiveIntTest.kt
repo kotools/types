@@ -14,15 +14,12 @@ import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationFailure
 import kotools.types.shouldEqual
 import kotools.types.shouldNotEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 class StrictlyPositiveIntCompanionTest {
     @Test
@@ -38,32 +35,6 @@ class StrictlyPositiveIntCompanionTest {
         val expected: StrictlyPositiveInt = Int.MAX_VALUE
             .toStrictlyPositiveIntOrFailure()
         assertEquals(expected, actual)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_pass_with_a_Number_that_is_greater_than_zero() {
-        val number: Number = Random.nextInt(1..Int.MAX_VALUE)
-        val actual: StrictlyPositiveInt? =
-            StrictlyPositiveInt.createOrNull(number)
-        assertNotNull(actual)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_fail_with_a_Number_that_equals_zero() {
-        val actual: StrictlyPositiveInt? =
-            StrictlyPositiveInt.createOrNull(0)
-        assertNull(actual)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun createOrNull_should_fail_with_a_Number_that_is_less_than_zero() {
-        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        val actual: StrictlyPositiveInt? =
-            StrictlyPositiveInt.createOrNull(number)
-        assertNull(actual)
     }
 
     @Test
