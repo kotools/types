@@ -107,37 +107,6 @@ public value class NotBlankString private constructor(
 
     /** Contains static declarations for the [NotBlankString] type. */
     public companion object {
-        /**
-         * Creates a [NotBlankString] from the string representation of the
-         * specified [value], or returns `null` if its string representation is
-         * [blank][String.isBlank].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.createOrNull]
-         * </details>
-         * <br>
-         *
-         * The [NotBlankString] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun createOrNull(value: Any): NotBlankString? {
-            val text: String = value.toString()
-            val isValid: Boolean = text.isNotBlank()
-            return if (isValid) NotBlankString(text)
-            else null
-        }
-
         @JvmSynthetic
         internal infix fun of(value: String): NotBlankString? =
             if (value.isBlank()) null
