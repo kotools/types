@@ -102,40 +102,6 @@ public value class NotEmptyMap<K, out V> private constructor(
     /** Contains static declarations for the [NotEmptyMap] type. */
     public companion object {
         /**
-         * Creates a [NotEmptyMap] containing all the entries of the specified
-         * [map], or returns `null` if the [map] is [empty][Map.isEmpty].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example for calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createOrNullWithMap]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptyMap] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * Please note that changes made to the original map will not be
-         * reflected on the resulting [NotEmptyMap].
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createOrNullWithMutableMap]
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <K, V> createOrNull(map: Map<K, V>): NotEmptyMap<K, V>? = map
-            .takeIf(Map<K, V>::isNotEmpty)
-            ?.entries
-            ?.associate(Map.Entry<K, V>::toPair)
-            ?.let(::NotEmptyMap)
-
-        /**
          * Creates a [NotEmptyMap] starting with the [head] and containing all
          * the entries of the optional [tail].
          *
