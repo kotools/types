@@ -100,47 +100,6 @@ public value class NotEmptySet<out E> private constructor(
     public companion object {
         /**
          * Creates a [NotEmptySet] containing all the elements of the specified
-         * [collection], or throws an [IllegalArgumentException] if the
-         * [collection] is [empty][Collection.isEmpty].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithCollection]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptySet] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * Please note that changes made to the original collection will not be
-         * reflected on the resulting [NotEmptySet].
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createWithMutableCollection]
-         *
-         * You can use the [NotEmptySet.Companion.createOrNull] function for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [collection].
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <E> create(collection: Collection<E>): NotEmptySet<E> {
-            val result: NotEmptySet<E>? = createOrNull(collection)
-            return requireNotNull(
-                result,
-                ErrorMessage.Companion::emptyCollection
-            )
-        }
-
-        /**
-         * Creates a [NotEmptySet] containing all the elements of the specified
          * [collection], or returns `null` if the [collection] is
          * [empty][Collection.isEmpty].
          *
@@ -164,10 +123,6 @@ public value class NotEmptySet<out E> private constructor(
          * reflected on the resulting [NotEmptySet].
          *
          * SAMPLE: [kotools.types.collection.NotEmptySetCompanionCommonSample.createOrNullWithMutableCollection]
-         *
-         * You can use the [NotEmptySet.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid
-         * [collection].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
