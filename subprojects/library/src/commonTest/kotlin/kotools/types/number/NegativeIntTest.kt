@@ -22,7 +22,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
-import kotlin.test.assertTrue
 
 class NegativeIntCompanionTest {
     @Test
@@ -35,39 +34,6 @@ class NegativeIntCompanionTest {
     fun max_should_equal_zero() {
         val result: ZeroInt = NegativeInt.max
         result shouldEqual ZeroInt
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun create_should_pass_with_a_Number_that_is_less_than_zero() {
-        val number: Number = Random.nextInt(from = Int.MIN_VALUE, until = 0)
-        val result: Result<NegativeInt> = kotlin.runCatching {
-            NegativeInt.create(number)
-        }
-        val type: String = simpleNameOf<NegativeInt>()
-        assertTrue(result.isSuccess, "Converting $number to $type should pass")
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun create_should_pass_with_a_Number_that_equals_zero() {
-        val number: Number = 0
-        val result: Result<NegativeInt> = kotlin.runCatching {
-            NegativeInt.create(number)
-        }
-        val type: String = simpleNameOf<NegativeInt>()
-        assertTrue(result.isSuccess, "Converting $number to $type should pass")
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class, InternalKotoolsTypesApi::class)
-    @Test
-    fun create_should_fail_with_a_Number_that_is_greater_than_zero() {
-        val number: Number = Random.nextInt(from = 1, until = Int.MAX_VALUE)
-        val exception: IllegalArgumentException =
-            assertFailsWith { NegativeInt.create(number) }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage = number.shouldBeNegative()
-        assertEquals(expected, actual)
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)

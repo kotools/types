@@ -73,45 +73,6 @@ public sealed interface NegativeInt : AnyInt {
 
         /**
          * Creates a [NegativeInt] from the specified [number], which may
-         * involve rounding or truncation, or throws an
-         * [IllegalArgumentException] if the [number] is greater than zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.number.NegativeIntCompanionCommonSample.create]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [kotools.types.number.NegativeIntCompanionJavaSample.create]
-         * </details>
-         * <br>
-         *
-         * You can use the [NegativeInt.Companion.createOrNull] function for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [number].
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        public fun create(number: Number): NegativeInt {
-            val result: NegativeInt? = createOrNull(number)
-            return requireNotNull(result, number::shouldBeNegative)
-        }
-
-        /**
-         * Creates a [NegativeInt] from the specified [number], which may
          * involve rounding or truncation, or returns `null` if the [number] is
          * greater than zero.
          *
@@ -136,10 +97,6 @@ public sealed interface NegativeInt : AnyInt {
          *
          * SAMPLE: [kotools.types.number.NegativeIntCompanionJavaSample.createOrNull]
          * </details>
-         * <br>
-         *
-         * You can use the [NegativeInt.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
