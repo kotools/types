@@ -326,7 +326,6 @@ public final class kotools/types/text/NotBlankString : java/lang/Comparable {
 }
 
 public final class kotools/types/text/NotBlankString$Companion {
-	public final synthetic fun create-ORnXyy4 (Ljava/lang/Object;)Ljava/lang/String;
 	public final synthetic fun createOrNull-AlFjtQg (Ljava/lang/Object;)Ljava/lang/String;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }

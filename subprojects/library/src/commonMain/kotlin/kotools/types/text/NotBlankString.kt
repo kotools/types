@@ -109,41 +109,6 @@ public value class NotBlankString private constructor(
     public companion object {
         /**
          * Creates a [NotBlankString] from the string representation of the
-         * specified [value], or throws an [IllegalArgumentException] if its
-         * string representation is [blank][String.isBlank].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.text.NotBlankStringCompanionCommonSample.create]
-         * </details>
-         * <br>
-         *
-         * The [NotBlankString] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * You can use the [NotBlankString.Companion.createOrNull] function for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [value].
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun create(value: Any): NotBlankString {
-            val text: String = value.toString()
-            val isValid: Boolean = text.isNotBlank()
-            require(isValid) { ErrorMessage.blankString }
-            return NotBlankString(text)
-        }
-
-        /**
-         * Creates a [NotBlankString] from the string representation of the
          * specified [value], or returns `null` if its string representation is
          * [blank][String.isBlank].
          *
@@ -162,10 +127,6 @@ public value class NotBlankString private constructor(
          * The [NotBlankString] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
          * this function is not available yet for Java users.
-         *
-         * You can use the [NotBlankString.Companion.create] function for
-         * throwing an exception instead of returning `null` in case of invalid
-         * [value].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)

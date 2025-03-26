@@ -29,25 +29,6 @@ private object StringExample {
 
 @ExperimentalKotoolsTypesApi
 class NotBlankStringCompanionTest {
-
-    @Test
-    fun create_should_pass_with_an_object_having_a_not_blank_string_representation() {
-        val value: Any = StringExample.NOT_BLANK
-        NotBlankString.create(value)
-    }
-
-    @OptIn(InternalKotoolsTypesApi::class)
-    @Test
-    fun create_should_fail_with_an_object_having_a_blank_string_representation() {
-        val value: Any = StringExample.BLANK
-        val exception: IllegalArgumentException = assertFailsWith {
-            NotBlankString.create(value)
-        }
-        val actual = ErrorMessage(exception)
-        val expected: ErrorMessage = ErrorMessage.blankString
-        assertEquals(expected, actual)
-    }
-
     @Test
     fun createOrNull_should_pass_with_an_object_having_a_not_blank_string_representation() {
         val value: Any = StringExample.NOT_BLANK
