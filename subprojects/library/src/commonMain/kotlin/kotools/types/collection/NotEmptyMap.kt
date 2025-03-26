@@ -103,44 +103,6 @@ public value class NotEmptyMap<K, out V> private constructor(
     public companion object {
         /**
          * Creates a [NotEmptyMap] containing all the entries of the specified
-         * [map], or throws an [IllegalArgumentException] if the [map] is
-         * [empty][Map.isEmpty].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example for calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createWithMap]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptyMap] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * Please note that changes made to the original map will not be
-         * reflected on the resulting [NotEmptyMap].
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createWithMutableMap]
-         *
-         * You can use the [NotEmptyMap.Companion.createOrNull] function for
-         * returning `null` instead of throwing an exception in case of invalid
-         * [map].
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <K, V> create(map: Map<K, V>): NotEmptyMap<K, V> {
-            val result: NotEmptyMap<K, V>? = createOrNull(map)
-            return requireNotNull(result, ErrorMessage.Companion::emptyMap)
-        }
-
-        /**
-         * Creates a [NotEmptyMap] containing all the entries of the specified
          * [map], or returns `null` if the [map] is [empty][Map.isEmpty].
          *
          * <br>
@@ -163,9 +125,6 @@ public value class NotEmptyMap<K, out V> private constructor(
          * reflected on the resulting [NotEmptyMap].
          *
          * SAMPLE: [kotools.types.collection.NotEmptyMapCompanionCommonSample.createOrNullWithMutableMap]
-         *
-         * You can use the [NotEmptyMap.Companion.create] function for throwing
-         * an exception instead of returning `null` in case of invalid [map].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
