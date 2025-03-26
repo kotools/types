@@ -93,7 +93,7 @@ class NotEmptyListCompanionTest {
     fun of_should_pass_with_a_head() {
         val head = 1
         val integers: NotEmptyList<Int> = NotEmptyList.of(head)
-        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.create(1)
+        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.orThrow(1)
         assertEquals(expectedSize, actual = integers.size)
         assertEquals(expected = head, actual = integers.head)
     }
@@ -105,7 +105,7 @@ class NotEmptyListCompanionTest {
         val tail: Array<Int> = arrayOf(2, 3)
         val integers: NotEmptyList<Int> = NotEmptyList.of(head, *tail)
         val expectedSize: StrictlyPositiveInt =
-            StrictlyPositiveInt.create(1 + tail.size)
+            StrictlyPositiveInt.orThrow(1 + tail.size)
         assertEquals(expectedSize, actual = integers.size)
         assertEquals(expected = head, actual = integers.head)
         val actualTail: Array<Int> = assertNotNull(integers.tail)

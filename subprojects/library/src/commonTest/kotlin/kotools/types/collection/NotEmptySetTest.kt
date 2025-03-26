@@ -103,7 +103,7 @@ class NotEmptySetCompanionTest {
     fun of_should_pass_with_a_head() {
         val head: Int = Random.nextInt()
         val actual: NotEmptySet<Int> = NotEmptySet.of(head)
-        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.create(1)
+        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.orThrow(1)
         assertEquals(expectedSize, actual.size)
         assertEquals(expected = head, actual.head)
     }
@@ -115,7 +115,7 @@ class NotEmptySetCompanionTest {
         val tail: Array<Int> = Array(2) { Random.nextInt() }
         val actual: NotEmptySet<Int> = NotEmptySet.of(head, *tail)
         val expectedSize: StrictlyPositiveInt =
-            StrictlyPositiveInt.create(1 + tail.size)
+            StrictlyPositiveInt.orThrow(1 + tail.size)
         assertEquals(expectedSize, actual.size)
         assertEquals(expected = head, actual.head)
         val actualTail: Array<Int> = assertNotNull(actual.tail)

@@ -29,10 +29,12 @@ internal fun Int.isStrictlyPositive(): Boolean = this > 0
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [negative][NegativeInt].
  */
-@OptIn(ExperimentalKotoolsTypesApi::class)
 @Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyPositiveInt(): Result<StrictlyPositiveInt> =
-    runCatching(StrictlyPositiveInt.Companion::create)
+    runCatching {
+        val number: Int = this.toInt()
+        StrictlyPositiveInt.orThrow(number)
+    }
 
 /**
  * Represents an integer number of type [Int] that is greater than zero.
@@ -73,45 +75,17 @@ public value class StrictlyPositiveInt private constructor(
      */
     public companion object {
         /** The minimum value a [StrictlyPositiveInt] can have. */
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val min: StrictlyPositiveInt by lazy { create(1) }
+        public val min: StrictlyPositiveInt by lazy { this.orThrow(1) }
 
         /** The maximum value a [StrictlyPositiveInt] can have. */
-        @OptIn(ExperimentalKotoolsTypesApi::class)
-        public val max: StrictlyPositiveInt by lazy { create(Int.MAX_VALUE) }
+        public val max: StrictlyPositiveInt by lazy {
+            this.orThrow(Int.MAX_VALUE)
+        }
 
-        /**
-         * Creates a [StrictlyPositiveInt] from the specified [number], which
-         * may involve rounding or truncation, or throws an
-         * [IllegalArgumentException] if the [number] is less than or equals
-         * zero.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.number.StrictlyPositiveIntCompanionCommonSample.create]
-         * </details>
-         * <br>
-         *
-         * The [StrictlyPositiveInt] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         *
-         * You can use the [StrictlyPositiveInt.Companion.createOrNull] function
-         * for returning `null` instead of throwing an exception in case of
-         * invalid [number].
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
         @JvmSynthetic
-        public fun create(number: Number): StrictlyPositiveInt {
-            val result: StrictlyPositiveInt? = createOrNull(number)
-            return requireNotNull(result, number::shouldBeStrictlyPositive)
+        internal fun orThrow(number: Int): StrictlyPositiveInt {
+            require(number > 0, number::shouldBeStrictlyPositive)
+            return StrictlyPositiveInt(number)
         }
 
         /**
@@ -134,10 +108,6 @@ public value class StrictlyPositiveInt private constructor(
          * The [StrictlyPositiveInt] type being an
          * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
          * this function is not available yet for Java users.
-         *
-         * You can use the [StrictlyPositiveInt.Companion.create] function for
-         * throwing an exception instead of returning `null` in case of invalid
-         * [number].
          */
         @ExperimentalKotoolsTypesApi
         @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
