@@ -8,8 +8,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.serializationError
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -132,34 +130,6 @@ public value class NotEmptyList<out E> private constructor(
 
     /** Contains static declarations for the [NotEmptyList] type. */
     public companion object {
-        /**
-         * Creates a [NotEmptyList] starting with a [head] and containing all
-         * the elements of the optional [tail].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [kotools.types.collection.NotEmptyListCompanionCommonSample.of]
-         * </details>
-         * <br>
-         *
-         * The [NotEmptyList] type being an
-         * [inline value class](https://kotlinlang.org/docs/inline-classes.html),
-         * this function is not available yet for Java users.
-         */
-        @ExperimentalKotoolsTypesApi
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_0)
-        @JvmSynthetic
-        public fun <E> of(head: E, vararg tail: E): NotEmptyList<E> {
-            val elements: List<E> = listOf(head) + tail
-            return this.orThrow(elements)
-        }
-
         @InternalKotoolsTypesApi
         @JvmSynthetic
         internal fun <E> orThrow(elements: List<E>): NotEmptyList<E> {

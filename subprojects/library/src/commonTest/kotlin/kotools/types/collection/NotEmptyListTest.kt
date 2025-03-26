@@ -10,49 +10,17 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotools.types.contentShouldEqual
 import kotools.types.internal.ErrorMessage
-import kotools.types.number.StrictlyPositiveInt
 import kotools.types.shouldBeNotNull
 import kotools.types.shouldBeNull
 import kotools.types.shouldEqual
 import kotools.types.shouldFailWithIllegalArgumentException
 import kotools.types.shouldHaveAMessage
 import kotools.types.shouldNotEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
-
-class NotEmptyListCompanionTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun of_should_pass_with_a_head() {
-        val head = 1
-        val integers: NotEmptyList<Int> = NotEmptyList.of(head)
-        val expectedSize: StrictlyPositiveInt = StrictlyPositiveInt.orThrow(1)
-        assertEquals(expectedSize, actual = integers.size)
-        assertEquals(expected = head, actual = integers.head)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun of_should_pass_with_a_head_and_a_tail() {
-        val head = 1
-        val tail: Array<Int> = arrayOf(2, 3)
-        val integers: NotEmptyList<Int> = NotEmptyList.of(head, *tail)
-        val expectedSize: StrictlyPositiveInt =
-            StrictlyPositiveInt.orThrow(1 + tail.size)
-        assertEquals(expectedSize, actual = integers.size)
-        assertEquals(expected = head, actual = integers.head)
-        val actualTail: Array<Int> = assertNotNull(integers.tail)
-            .toList()
-            .toTypedArray()
-        assertContentEquals(expected = tail, actualTail)
-    }
-}
 
 class NotEmptyListTest {
     @Test
