@@ -3,16 +3,12 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsDoubleSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsFloatSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsIntSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsLongSerializer
@@ -138,17 +134,4 @@ public fun Zero.Companion.floatSerializer(): KSerializer<Zero> =
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 @JvmSynthetic
 public fun Zero.Companion.doubleSerializer(): KSerializer<Zero> =
-    object : KSerializer<Zero> {
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = "ZeroAsDoubleSerializer",
-            PrimitiveKind.DOUBLE
-        )
-
-        override fun serialize(encoder: Encoder, value: Zero): Unit = value
-            .toDouble()
-            .let(encoder::encodeDouble)
-
-        override fun deserialize(decoder: Decoder): Zero = decoder
-            .decodeDouble()
-            .let(this@doubleSerializer::orThrow)
-    }
+    ZeroAsDoubleSerializer()
