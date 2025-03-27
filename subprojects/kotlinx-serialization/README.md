@@ -62,19 +62,21 @@ implementation "org.kotools:types-kotlinx-serialization:$version"
 For using this module, you need to import the
 [serializers module][kotlinx.serialization.modules.SerializersModule] needed
 when configuring the serialization format.
-Here's an example of using all serializers from Kotools Types using the
+
+Here's an example using default serializers from Kotools Types with the
 [JavaScript Object Notation (JSON)][kotlinx.serialization.json] format:
 
 ```kotlin
-val format = Json { serializersModule = KotoolsTypesSerializers.all }
-val zero = Zero()
-val encoded: String = format.encodeToString(zero)
-println(encoded) // 0
-val decoded: Zero = format.decodeFromString(encoded)
-println(zero == decoded) // true
+val format = Json { serializersModule = KotoolsTypesSerializersModule() }
+val address: EmailAddress = EmailAddress.orThrow("contact@kotools.org")
+val encoded: String = format.encodeToString(address)
+assertEquals(expected = "\"$address\"", encoded)
+val decoded: EmailAddress = format.decodeFromString(encoded)
+assertEquals(expected = address, decoded)
 ```
 
-See the [API reference] of the `KotoolsTypesSerializers` type for more details.
+See the [API reference] of the `KotoolsTypesSerializersModule()` function for
+more details.
 
 [api reference]: https://types.kotools.org
 [ios-simulator-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_Simulator_arm64-4b4bff
