@@ -12,6 +12,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsIntSerializer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
 
@@ -97,19 +98,7 @@ public fun Zero.Companion.shortSerializer(): KSerializer<Zero> =
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 @JvmSynthetic
 public fun Zero.Companion.intSerializer(): KSerializer<Zero> =
-    object : KSerializer<Zero> {
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = "ZeroAsIntSerializer",
-            PrimitiveKind.INT
-        )
-
-        override fun serialize(encoder: Encoder, value: Zero): Unit = value
-            .toInt()
-            .let(encoder::encodeInt)
-
-        override fun deserialize(decoder: Decoder): Zero = decoder.decodeShort()
-            .let(this@intSerializer::orThrow)
-    }
+    ZeroAsIntSerializer()
 
 /**
  * Returns an object responsible for serializing the [Zero] type as [Long].
