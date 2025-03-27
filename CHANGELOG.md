@@ -33,6 +33,9 @@ All notable changes to this project will be documented in this file.
 ### 🔥 Removed
 
 - Versions 4.5.0, 4.5.1 and 4.5.2 from the API reference ([#771]).
+- **Experimental** declarations from the `kotools.types.*` packages in the
+  `types` Gradle subproject ([#802]). Better alternatives for these declarations
+  will be introduced in the `org.kotools.types` package.
 - The `ZeroAsByteSerializer` **experimental** type, from the
   `types-kotlinx-serialization` Gradle subproject, for using the
   `Zero.Companion.byteSerializer()` function instead ([#795]).
@@ -50,6 +53,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#794]: https://github.com/kotools/types/issues/794
 [#795]: https://github.com/kotools/types/issues/795
 [#796]: https://github.com/kotools/types/issues/796
+[#802]: https://github.com/kotools/types/issues/802
 
 ## 🔖 Releases
 
