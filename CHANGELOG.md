@@ -18,6 +18,9 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
+- The `KotoolsTypesSerializersModule()` **experimental** function, in the
+  `types-kotlinx-serialization` Gradle subproject, for providing a collection of
+  default serializers for serializing types provided by Kotools Types ([#790]).
 - The following extension functions on the `Zero.Companion` **experimental**
   type, in the `types-kotlinx-serialization` Gradle subproject ([#793]):
   - `byteSerializer()` for serializing the `Zero` type as `Byte`.
@@ -30,12 +33,21 @@ All notable changes to this project will be documented in this file.
   the `types-kotlinx-serialization` Gradle subproject, for serializing the
   `EmailAddress` type as `String` ([#794]).
 
+### ♻️ Changed
+
+- The README documentation of the `types-kotlinx-serialization` Gradle
+  subproject, for using the new `KotoolsTypesSerializersModule()` function
+  ([#790]).
+
 ### 🔥 Removed
 
 - Versions 4.5.0, 4.5.1 and 4.5.2 from the API reference ([#771]).
 - **Experimental** declarations from the `kotools.types.*` packages in the
   `types` Gradle subproject ([#802]). Better alternatives for these declarations
   will be introduced in the `org.kotools.types` package.
+- The `KotoolsTypesSerializers` **experimental** type from the
+  `types-kotlinx-serialization` Gradle subproject, for using the
+  `KotoolsTypesSerializersModule()` function instead ([#790]).
 - The `ZeroAsByteSerializer` **experimental** type, from the
   `types-kotlinx-serialization` Gradle subproject, for using the
   `Zero.Companion.byteSerializer()` function instead ([#795]).
@@ -49,6 +61,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#771]: https://github.com/kotools/types/issues/771
+[#790]: https://github.com/kotools/types/issues/790
 [#793]: https://github.com/kotools/types/issues/793
 [#794]: https://github.com/kotools/types/issues/794
 [#795]: https://github.com/kotools/types/issues/795
