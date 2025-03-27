@@ -14,6 +14,7 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsIntSerializer
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsLongSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsShortSerializer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
@@ -96,19 +97,7 @@ public fun Zero.Companion.intSerializer(): KSerializer<Zero> =
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 @JvmSynthetic
 public fun Zero.Companion.longSerializer(): KSerializer<Zero> =
-    object : KSerializer<Zero> {
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = "ZeroAsLongSerializer",
-            PrimitiveKind.LONG
-        )
-
-        override fun serialize(encoder: Encoder, value: Zero): Unit = value
-            .toLong()
-            .let(encoder::encodeLong)
-
-        override fun deserialize(decoder: Decoder): Zero = decoder.decodeLong()
-            .let(this@longSerializer::orThrow)
-    }
+    ZeroAsLongSerializer()
 
 /**
  * Returns an object responsible for serializing the [Zero] type as [Float].
