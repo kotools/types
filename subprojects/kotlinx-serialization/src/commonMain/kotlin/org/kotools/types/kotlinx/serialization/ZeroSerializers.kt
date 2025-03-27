@@ -12,6 +12,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsByteSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsIntSerializer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
@@ -34,19 +35,7 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 @JvmSynthetic
 public fun Zero.Companion.byteSerializer(): KSerializer<Zero> =
-    object : KSerializer<Zero> {
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = "ZeroAsByteSerializer",
-            PrimitiveKind.BYTE
-        )
-
-        override fun serialize(encoder: Encoder, value: Zero): Unit = value
-            .toByte()
-            .let(encoder::encodeByte)
-
-        override fun deserialize(decoder: Decoder): Zero = decoder.decodeByte()
-            .let(this@byteSerializer::orThrow)
-    }
+    ZeroAsByteSerializer()
 
 /**
  * Returns an object responsible for serializing the [Zero] type as [Short].
