@@ -675,7 +675,27 @@ public class Zero {
          * `null` if the [text] is an invalid representation of zero.
          *
          * The [text] is a valid representation if it matches the following
-         * regular expression: [`^0+(?:\.0+)?$`](https://regexr.com/8arpu).
+         * pattern: `^0+(?:\.0+)?$`.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Pattern symbols</b>
+         * </summary>
+         *
+         * Here's the explanation associated to each symbol used in this
+         * pattern:
+         * - `^` **Beginning.** Matches the beginning of the string, or the
+         * beginning of a line if the multiline flag (**m**) is enabled.
+         * - `0` **Character.** Matches a "0" character (char code 48).
+         * - `+` **Quantifier.** Match 1 or more of the preceding token.
+         * - `(?:)` **Non-capturing group.** Groups multiple tokens together
+         * without creating a capture group.
+         * - `\.` **Escaped character.** Matches a "." character (char code 46).
+         * - `?` **Quantifier.** Match between 0 and 1 of the preceding token.
+         * - `$` **End.** Matches the end of the string, or the end of a line if
+         * the multiline flag (**m**) is enabled.
+         * </details>
          *
          * <br>
          * <details>
@@ -930,7 +950,27 @@ public class Zero {
          * of zero.
          *
          * The [text] is a valid representation if it matches the following
-         * regular expression: [`^0+(?:\.0+)?$`](https://regexr.com/8arpu).
+         * pattern: `^0+(?:\.0+)?$`.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Pattern symbols</b>
+         * </summary>
+         *
+         * Here's the explanation associated to each symbol used in this
+         * pattern:
+         * - `^` **Beginning.** Matches the beginning of the string, or the
+         * beginning of a line if the multiline flag (**m**) is enabled.
+         * - `0` **Character.** Matches a "0" character (char code 48).
+         * - `+` **Quantifier.** Match 1 or more of the preceding token.
+         * - `(?:)` **Non-capturing group.** Groups multiple tokens together
+         * without creating a capture group.
+         * - `\.` **Escaped character.** Matches a "." character (char code 46).
+         * - `?` **Quantifier.** Match between 0 and 1 of the preceding token.
+         * - `$` **End.** Matches the end of the string, or the end of a line if
+         * the multiline flag (**m**) is enabled.
+         * </details>
          *
          * <br>
          * <details>
