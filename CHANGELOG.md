@@ -32,6 +32,8 @@ All notable changes to this project will be documented in this file.
 - The `EmailAddress.Companion.stringSerializer()` **experimental** function, in
   the `types-kotlinx-serialization` Gradle subproject, for serializing the
   `EmailAddress` type as `String` ([#794]).
+- Explanations associated to each symbol used in patterns present in the API
+  reference ([fba9c4e4]).
 
 ### ♻️ Changed
 
@@ -67,6 +69,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#795]: https://github.com/kotools/types/issues/795
 [#796]: https://github.com/kotools/types/issues/796
 [#802]: https://github.com/kotools/types/issues/802
+[fba9c4e4]: https://github.com/kotools/types/commit/fba9c4e4b9bfeef7a6239d7ed522f8140f97a92c
 
 ## 🔖 Releases
 
