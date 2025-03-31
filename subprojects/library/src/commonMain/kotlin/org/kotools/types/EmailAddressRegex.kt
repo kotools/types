@@ -7,8 +7,9 @@ import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
 /**
- * Represents a regular expression used for validating
- * [email addresses][EmailAddress].
+ * Represents a
+ * [regular expression](https://en.wikipedia.org/wiki/Regular_expression) for
+ * validating [email addresses][EmailAddress].
  *
  * For creating an instance of this type, see the factory functions provided by
  * the [EmailAddressRegex.Companion] type.
@@ -53,7 +54,7 @@ public class EmailAddressRegex private constructor(
     /** Contains static declarations for the [EmailAddressRegex] type. */
     public companion object {
         /**
-         * Returns the default regular expression used for validating
+         * Returns the default regular expression for validating
          * [email addresses][EmailAddress], corresponding to the following
          * pattern: `^\S+@\S+\.\S+$`.
          *
