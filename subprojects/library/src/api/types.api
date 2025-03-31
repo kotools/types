@@ -341,6 +341,9 @@ public final class org/kotools/types/EmailAddress$Companion {
 	public final fun orThrow (Ljava/lang/String;Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
 }
 
+public final class org/kotools/types/EmailAddressRegex {
+}
+
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
