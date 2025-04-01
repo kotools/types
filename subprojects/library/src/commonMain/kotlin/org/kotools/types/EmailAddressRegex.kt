@@ -5,6 +5,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a
@@ -107,5 +108,35 @@ public class EmailAddressRegex private constructor(
         @JvmStatic
         public fun default(): EmailAddressRegex =
             EmailAddressRegex("""^\S+@\S+\.\S+$""")
+
+        /**
+         * Returns a regular expression for validating
+         * [email addresses][EmailAddress] from the specified [pattern], or
+         * returns `null` if the [pattern] doesn't match the
+         * [default one][EmailAddressRegex.Companion.default].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.orNull]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         */
+        @JvmSynthetic
+        public fun orNull(pattern: String): EmailAddressRegex? {
+            val patternIsValid: Boolean = this.default()
+                .toString()
+                .toRegex()
+                .matches(pattern)
+            return if (patternIsValid) EmailAddressRegex(pattern) else null
+        }
     }
 }

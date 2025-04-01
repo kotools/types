@@ -350,6 +350,7 @@ public final class org/kotools/types/EmailAddressRegex {
 
 public final class org/kotools/types/EmailAddressRegex$Companion {
 	public final fun defaultPattern ()Lorg/kotools/types/EmailAddressRegex;
+	public final synthetic fun orNull (Ljava/lang/String;)Lorg/kotools/types/EmailAddressRegex;
 }
 
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
