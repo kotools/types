@@ -21,7 +21,9 @@ import kotlin.jvm.JvmSynthetic
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [EmailAddress]
+ * type using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.EmailAddressSerializersSample.stringSerializer]
  * </details>

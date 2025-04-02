@@ -25,7 +25,9 @@ import kotlin.jvm.JvmSynthetic
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.byteSerializer]
  * </details>
@@ -45,7 +47,9 @@ public fun Zero.Companion.byteSerializer(): KSerializer<Zero> =
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.shortSerializer]
  * </details>
@@ -65,7 +69,9 @@ public fun Zero.Companion.shortSerializer(): KSerializer<Zero> =
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.intSerializer]
  * </details>
@@ -85,7 +91,9 @@ public fun Zero.Companion.intSerializer(): KSerializer<Zero> =
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.longSerializer]
  * </details>
@@ -105,7 +113,9 @@ public fun Zero.Companion.longSerializer(): KSerializer<Zero> =
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.floatSerializer]
  * </details>
@@ -125,7 +135,9 @@ public fun Zero.Companion.floatSerializer(): KSerializer<Zero> =
  *     <b>Calling from Kotlin</b>
  * </summary>
  *
- * Here's an example of calling this function from Kotlin code:
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.doubleSerializer]
  * </details>
