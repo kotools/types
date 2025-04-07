@@ -20,4 +20,9 @@ class EmailAddressRegexCompanionCommonSample {
         val message = "'$pattern' is valid for validating email addresses."
         assertNotNull(regex, message)
     }
+
+    @Test
+    fun orThrow() {
+        EmailAddressRegex.orThrow("""^[a-z]+@[a-z]+\.[a-z]+$""")
+    }
 }

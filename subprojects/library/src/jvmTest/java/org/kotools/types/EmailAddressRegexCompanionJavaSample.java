@@ -12,4 +12,9 @@ class EmailAddressRegexCompanionJavaSample {
         final String expected = "^\\S+@\\S+\\.\\S+$";
         Assertions.assertEquals(expected, pattern);
     }
+
+    @Test
+    void orThrow() {
+        EmailAddressRegex.orThrow("^\\S+@\\S+\\.\\S+$");
+    }
 }
