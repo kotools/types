@@ -25,4 +25,11 @@ class EmailAddressRegexCompanionCommonSample {
     fun orThrow() {
         EmailAddressRegex.orThrow("""^[a-z]+@[a-z]+\.[a-z]+$""")
     }
+
+    @Test
+    fun alphabetic() {
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val expected = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        assertEquals(expected, "$regex")
+    }
 }

@@ -17,4 +17,12 @@ class EmailAddressRegexCompanionJavaSample {
     void orThrow() {
         EmailAddressRegex.orThrow("^\\S+@\\S+\\.\\S+$");
     }
+
+    @Test
+    void alphabetic() {
+        final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
+        final String pattern = regex.toString();
+        final String expected = "^[a-z]+@[a-z]+\\.[a-z]+$";
+        Assertions.assertEquals(expected, pattern);
+    }
 }
