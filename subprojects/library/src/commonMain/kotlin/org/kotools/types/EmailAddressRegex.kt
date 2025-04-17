@@ -233,5 +233,59 @@ public class EmailAddressRegex private constructor(
         @JvmStatic
         public fun alphabetic(): EmailAddressRegex =
             this.orThrow("""^[a-z]+@[a-z]+\.[a-z]+$""")
+
+        /**
+         * Returns a regular expression for validating
+         * [email addresses][EmailAddress] that only accepts lowercase letters
+         * and digits, corresponding to the following pattern:
+         * `^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$`.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Pattern symbols</b>
+         * </summary>
+         *
+         * Here's the explanation associated to each symbol used in this
+         * pattern:
+         * - `^` **Beginning.** Matches the beginning of the string, or the
+         * beginning of a line if the multiline flag (**m**) is enabled.
+         * - `[]` **Character set.** Match any character in the set.
+         * - `0-9` **Range.** Matches a character in the range "0" to "9" (char
+         * code 48 to 57). Case-sensitive.
+         * - `a-z` **Range.** Matches a character in the range "a" to "z" (char
+         * code 97 to 122). Case-sensitive.
+         * - `+` **Quantifier.** Match 1 or more of the preceding token.
+         * - `@` **Character.** Match a "@" character (char code 64).
+         * - `\.` **Escaped character.** Matches a "." character (char code 46).
+         * - `$` **End.** Matches the end of the string, or the end of a line if
+         * the multiline flag (**m**) is enabled.
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.alphanumeric]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionJavaSample.alphanumeric]
+         * </details>
+         */
+        @JvmStatic
+        public fun alphanumeric(): EmailAddressRegex =
+            this.orThrow("""^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$""")
     }
 }

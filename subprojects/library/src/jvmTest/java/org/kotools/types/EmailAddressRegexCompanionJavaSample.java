@@ -25,4 +25,12 @@ class EmailAddressRegexCompanionJavaSample {
         final String expected = "^[a-z]+@[a-z]+\\.[a-z]+$";
         Assertions.assertEquals(expected, pattern);
     }
+
+    @Test
+    void alphanumeric() {
+        final EmailAddressRegex regex = EmailAddressRegex.alphanumeric();
+        final String pattern = regex.toString();
+        final String expected = "^[0-9a-z]+@[0-9a-z]+\\.[0-9a-z]+$";
+        Assertions.assertEquals(expected, pattern);
+    }
 }

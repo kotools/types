@@ -32,4 +32,11 @@ class EmailAddressRegexCompanionCommonSample {
         val expected = """^[a-z]+@[a-z]+\.[a-z]+$"""
         assertEquals(expected, "$regex")
     }
+
+    @Test
+    fun alphanumeric() {
+        val regex: EmailAddressRegex = EmailAddressRegex.alphanumeric()
+        val expected = """^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$"""
+        assertEquals(expected, "$regex")
+    }
 }
