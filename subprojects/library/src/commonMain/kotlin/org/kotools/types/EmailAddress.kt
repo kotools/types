@@ -345,5 +345,48 @@ public class EmailAddress private constructor(private val text: String) {
             }
             return EmailAddress(text)
         }
+
+        /**
+         * Returns an email address from the specified [text], or throws an
+         * [IllegalArgumentException] if the [text] doesn't match the specified
+         * [regex].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orThrowStringEmailAddressRegex]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowStringEmailAddressRegex]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [text].
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+        @JvmStatic
+        public fun orThrow(
+            text: String,
+            regex: EmailAddressRegex
+        ): EmailAddress {
+            val emailAddress: EmailAddress? = this.orNull(text, regex)
+            return requireNotNull(emailAddress) {
+                ExceptionMessage.invalidEmailAddress(text)
+            }
+        }
     }
 }

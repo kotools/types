@@ -63,4 +63,11 @@ class EmailAddressCompanionCommonSample {
         }
         assertTrue(isSuccess)
     }
+
+    @Test
+    fun orThrowStringEmailAddressRegex() {
+        val text = "contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        EmailAddress.orThrow(text, regex)
+    }
 }

@@ -38,4 +38,11 @@ class EmailAddressCompanionJavaSample {
         }
         Assertions.assertTrue(isSuccess);
     }
+
+    @Test
+    void orThrowStringEmailAddressRegex() {
+        final String text = "contact@kotools.org";
+        final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
+        EmailAddress.orThrow(text, regex);
+    }
 }
