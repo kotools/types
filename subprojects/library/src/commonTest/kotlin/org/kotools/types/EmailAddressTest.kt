@@ -155,6 +155,26 @@ class EmailAddressCompanionTest {
     }
 
     @Test
+    fun orNullStringEmailAddressRegexShouldPassWithValidText() {
+        val text: String = Values.VALID
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val actual: EmailAddress? = EmailAddress.orNull(text, regex)
+        val message =
+            "'$text' matches the following regular expression: '$regex'."
+        assertNotNull(actual, message)
+    }
+
+    @Test
+    fun orNullStringEmailAddressRegexShouldFailWithInvalidText() {
+        val text = "first-contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val actual: EmailAddress? = EmailAddress.orNull(text, regex)
+        val message =
+            "'$text' doesn't match the following regular expression: '$regex'."
+        assertNull(actual, message)
+    }
+
+    @Test
     fun orThrowStringShouldPassWithValidText() {
         EmailAddress.orThrow(text = Values.VALID)
     }

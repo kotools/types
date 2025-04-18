@@ -22,6 +22,16 @@ class EmailAddressCompanionCommonSample {
     }
 
     @Test
+    fun orNullStringEmailAddressRegex() {
+        val text = "contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val emailAddress: EmailAddress? = EmailAddress.orNull(text, regex)
+        val message =
+            "'$text' matches the following regular expression: '$regex'."
+        assertNotNull(emailAddress, message)
+    }
+
+    @Test
     fun orNullStringString() {
         val text = "contact@kotools.org"
         val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
