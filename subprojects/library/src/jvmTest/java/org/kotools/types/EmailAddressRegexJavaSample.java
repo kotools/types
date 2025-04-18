@@ -28,6 +28,19 @@ class EmailAddressRegexJavaSample {
     }
 
     @Test
+    void matches() {
+        final String text = "contact@kotools.org";
+        final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
+        final boolean result = regex.matches(text);
+        final String message = String.format(
+                "'%s' matches the following regular expression: '%s'.",
+                text,
+                regex
+        );
+        Assertions.assertTrue(result, message);
+    }
+
+    @Test
     void toStringOverride() {
         final String pattern = EmailAddressRegex.defaultPattern()
                 .toString();

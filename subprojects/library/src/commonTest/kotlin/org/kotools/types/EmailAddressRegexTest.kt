@@ -59,6 +59,26 @@ class EmailAddressRegexTest {
             .let { "Hash code of '$it' is calculated from its pattern." }
         assertEquals(expected, actual, message)
     }
+
+    @Test
+    fun matchesShouldPassWithValidText() {
+        val text = "contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val actual: Boolean = regex.matches(text)
+        val message =
+            "'$text' matches the following regular expression: '$regex'."
+        assertTrue(actual, message)
+    }
+
+    @Test
+    fun matchesShouldFailWithInvalidText() {
+        val text = "invalid-contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val actual: Boolean = regex.matches(text)
+        val message =
+            "'$text' doesn't match the following regular expression: '$regex'."
+        assertFalse(actual, message)
+    }
 }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)

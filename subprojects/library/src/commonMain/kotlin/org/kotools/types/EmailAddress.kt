@@ -253,12 +253,7 @@ public class EmailAddress private constructor(private val text: String) {
         public fun orNull(
             text: String,
             regex: EmailAddressRegex
-        ): EmailAddress? {
-            val textMatchesRegex: Boolean = regex.toString()
-                .toRegex()
-                .matches(text)
-            return if (textMatchesRegex) EmailAddress(text) else null
-        }
+        ): EmailAddress? = if (regex matches text) EmailAddress(text) else null
 
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or

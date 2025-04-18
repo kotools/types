@@ -84,6 +84,37 @@ public class EmailAddressRegex private constructor(
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.pattern)
 
+    // ---------------------- Pattern matching operations ----------------------
+
+    /**
+     * Returns `true` if the specified [text] matches this regular expression,
+     * or returns `false` otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.matches]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.matches]
+     * </details>
+     */
+    public infix fun matches(text: CharSequence): Boolean =
+        Regex(this.pattern) matches text
+
     // ------------------------------ Conversions ------------------------------
 
     /**
