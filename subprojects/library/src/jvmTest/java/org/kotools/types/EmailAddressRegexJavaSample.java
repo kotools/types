@@ -16,6 +16,18 @@ class EmailAddressRegexJavaSample {
     }
 
     @Test
+    void hashCodeOverride() {
+        final int hashCode = EmailAddressRegex.defaultPattern()
+                .hashCode();
+        final int other = EmailAddressRegex.defaultPattern()
+                .hashCode();
+        final boolean result = hashCode == other;
+        final String message = "Regular expressions with the same pattern " +
+                "have the same hash code value.";
+        Assertions.assertTrue(result, message);
+    }
+
+    @Test
     void toStringOverride() {
         final String pattern = EmailAddressRegex.defaultPattern()
                 .toString();

@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
@@ -47,6 +48,16 @@ class EmailAddressRegexTest {
         val message =
             "Regular expressions with different pattern are not equal."
         assertFalse(actual, message)
+    }
+
+    @Test
+    fun hashCodeShouldPass() {
+        val regex: EmailAddressRegex = EmailAddressRegex.default()
+        val actual: Int = regex.hashCode()
+        val expected: Int = hashCodeOf("$regex")
+        val message = simpleNameOf(regex::class)
+            .let { "Hash code of '$it' is calculated from its pattern." }
+        assertEquals(expected, actual, message)
     }
 }
 

@@ -16,6 +16,18 @@ class EmailAddressRegexCommonSample {
     }
 
     @Test
+    fun hashCodeOverride() {
+        val hashCode: Int = EmailAddressRegex.default()
+            .hashCode()
+        val other: Int = EmailAddressRegex.default()
+            .hashCode()
+        val result: Boolean = hashCode == other
+        val message = "Regular expressions with the same pattern have the " +
+                "same hash code value."
+        assertTrue(result, message)
+    }
+
+    @Test
     fun toStringOverride() {
         val pattern: String = EmailAddressRegex.default()
             .toString()

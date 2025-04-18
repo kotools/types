@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -18,7 +19,6 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
-@Suppress("EqualsOrHashCode")
 public class EmailAddressRegex private constructor(
     private val pattern: String
 ) {
@@ -55,6 +55,34 @@ public class EmailAddressRegex private constructor(
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
         other is EmailAddressRegex && this.pattern == other.pattern
+
+    /**
+     * Returns a hash code value for this regular expression.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.hashCodeOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.hashCodeOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun hashCode(): Int = hashCodeOf(this.pattern)
 
     // ------------------------------ Conversions ------------------------------
 
