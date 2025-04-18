@@ -347,6 +347,7 @@ public final class org/kotools/types/EmailAddressRegex {
 	public static final fun alphabetic ()Lorg/kotools/types/EmailAddressRegex;
 	public static final fun alphanumeric ()Lorg/kotools/types/EmailAddressRegex;
 	public static final fun defaultPattern ()Lorg/kotools/types/EmailAddressRegex;
+	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/EmailAddressRegex;
 	public final fun toString ()Ljava/lang/String;
 }

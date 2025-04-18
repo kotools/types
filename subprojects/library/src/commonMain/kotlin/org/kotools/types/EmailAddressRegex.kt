@@ -18,9 +18,44 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+@Suppress("EqualsOrHashCode")
 public class EmailAddressRegex private constructor(
     private val pattern: String
 ) {
+    // -------------------- Structural equality operations ---------------------
+
+    /**
+     * Returns `true` if the [other] object is an instance of
+     * [EmailAddressRegex] with the same
+     * [string representation][EmailAddressRegex.toString], or returns `false`
+     * otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.equalsOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.equalsOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun equals(other: Any?): Boolean =
+        other is EmailAddressRegex && this.pattern == other.pattern
+
     // ------------------------------ Conversions ------------------------------
 
     /**
