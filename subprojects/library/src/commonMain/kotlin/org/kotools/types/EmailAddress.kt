@@ -186,18 +186,6 @@ public class EmailAddress private constructor(private val text: String) {
          * or if the [pattern] doesn't match the
          * [default one][EmailAddressRegex.Companion.default].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullStringString]
-         * </details>
-         * <br>
-         *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
@@ -205,6 +193,18 @@ public class EmailAddress private constructor(private val text: String) {
          * returning `null` in case of invalid [text] or [pattern].
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
+        @Deprecated(
+            "Use the 'EmailAddress.Companion.orNull(String, " +
+                    "EmailAddressRegex)' function instead.",
+            ReplaceWith(
+                "EmailAddressRegex.orNull(pattern)\n" +
+                        "\t?.let { EmailAddress.orNull(text, it) }",
+                "org.kotools.types.EmailAddress",
+                "org.kotools.types.EmailAddressRegex"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_1)
         @JvmSynthetic
         public fun orNull(text: String, pattern: String): EmailAddress? {
             val patternIsInvalid: Boolean = !EmailAddressRegex.default()
