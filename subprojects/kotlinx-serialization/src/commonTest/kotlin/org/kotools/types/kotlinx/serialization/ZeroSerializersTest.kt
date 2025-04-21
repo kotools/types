@@ -103,4 +103,21 @@ class ZeroSerializersTest {
         )
         assertEquals(expected = PrimitiveKind.DOUBLE, actual = descriptor.kind)
     }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun stringSerializerShouldPass() {
+        val serializer: KSerializer<Zero> = Zero.stringSerializer()
+        val actualDescriptor: SerialDescriptor = serializer.descriptor
+        val expectedDescriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = simpleNameOf(serializer::class),
+            kind = PrimitiveKind.STRING
+        )
+        assertEquals(expectedDescriptor, actualDescriptor)
+        val zero = Zero()
+        val encoded: String = Json.encodeToString(serializer, zero)
+        assertEquals(expected = "\"$zero\"", actual = encoded)
+        val decoded: Zero = Json.decodeFromString(serializer, encoded)
+        assertEquals(expected = zero, actual = decoded)
+    }
 }

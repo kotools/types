@@ -17,5 +17,6 @@ public final class org/kotools/types/kotlinx/serialization/ZeroSerializers {
 	public static final synthetic fun intSerializer (Lorg/kotools/types/Zero$Companion;)Lkotlinx/serialization/KSerializer;
 	public static final synthetic fun longSerializer (Lorg/kotools/types/Zero$Companion;)Lkotlinx/serialization/KSerializer;
 	public static final synthetic fun shortSerializer (Lorg/kotools/types/Zero$Companion;)Lkotlinx/serialization/KSerializer;
+	public static final synthetic fun stringSerializer (Lorg/kotools/types/Zero$Companion;)Lkotlinx/serialization/KSerializer;
 }
 

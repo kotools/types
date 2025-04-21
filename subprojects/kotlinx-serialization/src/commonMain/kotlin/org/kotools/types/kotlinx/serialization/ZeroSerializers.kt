@@ -13,6 +13,7 @@ import org.kotools.types.kotlinx.serialization.internal.ZeroAsFloatSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsIntSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsLongSerializer
 import org.kotools.types.kotlinx.serialization.internal.ZeroAsShortSerializer
+import org.kotools.types.kotlinx.serialization.internal.ZeroAsStringSerializer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
 
@@ -147,3 +148,25 @@ public fun Zero.Companion.floatSerializer(): KSerializer<Zero> =
 @JvmSynthetic
 public fun Zero.Companion.doubleSerializer(): KSerializer<Zero> =
     ZeroAsDoubleSerializer()
+
+/**
+ * Returns an object responsible for serializing the [Zero] type as [String].
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of Kotlin code that encodes and decodes the [Zero] type
+ * using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
+ * and this function:
+ *
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.ZeroSerializersSample.stringSerializer]
+ * </details>
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+@JvmSynthetic
+public fun Zero.Companion.stringSerializer(): KSerializer<Zero> =
+    ZeroAsStringSerializer()

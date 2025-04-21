@@ -77,4 +77,15 @@ class ZeroSerializersSample {
         val decoded: Zero = Json.decodeFromString(serializer, encoded)
         assertEquals(zero, decoded)
     }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun stringSerializer() {
+        val serializer: KSerializer<Zero> = Zero.stringSerializer()
+        val zero = Zero()
+        val encoded: String = Json.encodeToString(serializer, zero)
+        assertEquals(expected = "\"$zero\"", encoded)
+        val decoded: Zero = Json.decodeFromString(serializer, encoded)
+        assertEquals(zero, decoded)
+    }
 }
