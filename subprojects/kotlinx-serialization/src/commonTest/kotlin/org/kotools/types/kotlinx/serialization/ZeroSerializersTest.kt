@@ -15,18 +15,14 @@ import kotlin.test.assertEquals
 class ZeroSerializersTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun byteSerializerShouldPass() {
+    fun byteSerializerDescriptor() {
         val serializer: KSerializer<Zero> = Zero.byteSerializer()
-        val expectedDescriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        val actual: SerialDescriptor = serializer.descriptor
+        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
             serialName = simpleNameOf(serializer::class),
             kind = PrimitiveKind.BYTE
         )
-        assertEquals(expectedDescriptor, serializer.descriptor)
-        val zero = Zero()
-        val encoded: String = Json.encodeToString(serializer, zero)
-        assertEquals("$zero", encoded)
-        val decoded: Zero = Json.decodeFromString(serializer, encoded)
-        assertEquals(zero, decoded)
+        assertEquals(expected, actual)
     }
 
     @OptIn(
