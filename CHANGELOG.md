@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
   - `longSerializer()` for serializing the `Zero` type as `Long`.
   - `floatSerializer()` for serializing the `Zero` type as `Float`.
   - `doubleSerializer()` for serializing the `Zero` type as `Double`.
+  - `stringSerializer()` for serializing the `Zero` type as `String`.
 - The `EmailAddress.Companion.stringSerializer()` **experimental** function, in
   the `types-kotlinx-serialization` Gradle subproject, for serializing the
   `EmailAddress` type as `String` ([#794]).
