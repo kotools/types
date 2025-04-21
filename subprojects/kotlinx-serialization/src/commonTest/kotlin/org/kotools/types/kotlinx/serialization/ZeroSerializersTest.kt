@@ -1,6 +1,5 @@
 package org.kotools.types.kotlinx.serialization
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -73,19 +72,16 @@ class ZeroSerializersTest {
         assertEquals(expected, actual)
     }
 
-    @OptIn(
-        ExperimentalKotoolsTypesApi::class,
-        ExperimentalSerializationApi::class
-    )
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun doubleSerializerShouldReturnValidDescriptor() {
-        val descriptor: SerialDescriptor = Zero.doubleSerializer()
-            .descriptor
-        assertEquals(
-            expected = "ZeroAsDoubleSerializer",
-            actual = descriptor.serialName
+    fun doubleSerializerDescriptor() {
+        val serializer: KSerializer<Zero> = Zero.doubleSerializer()
+        val actual: SerialDescriptor = serializer.descriptor
+        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = simpleNameOf(serializer::class),
+            kind = PrimitiveKind.DOUBLE
         )
-        assertEquals(expected = PrimitiveKind.DOUBLE, actual = descriptor.kind)
+        assertEquals(expected, actual)
     }
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
