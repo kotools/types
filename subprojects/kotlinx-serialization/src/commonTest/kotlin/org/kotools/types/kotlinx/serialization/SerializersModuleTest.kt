@@ -1,14 +1,11 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.serializer
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class SerializersModuleTest {
@@ -34,14 +31,4 @@ class SerializersModuleTest {
         KotoolsTypesSerializersModule()
             .assertIncludes(expected)
     }
-}
-
-// -------------------------------- Assertions ---------------------------------
-
-private inline fun <reified T> SerializersModule.assertIncludes(
-    expected: KSerializer<T>
-) {
-    val actual: KSerializer<T> = this.serializer<T>()
-    val message = "Serializers module includes '$expected'."
-    assertEquals(expected, actual, message)
 }

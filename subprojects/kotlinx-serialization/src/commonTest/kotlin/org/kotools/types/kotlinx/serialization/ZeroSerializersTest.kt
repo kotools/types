@@ -1,14 +1,9 @@
 package org.kotools.types.kotlinx.serialization
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class ZeroSerializersTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -45,15 +40,4 @@ class ZeroSerializersTest {
     @Test
     fun stringSerializerDescriptor(): Unit = Zero.stringSerializer()
         .assertDescriptor(PrimitiveKind.STRING)
-}
-
-// -------------------------------- Assertions ---------------------------------
-
-private fun <T> KSerializer<T>.assertDescriptor(kind: PrimitiveKind) {
-    val actual: SerialDescriptor = this.descriptor
-    val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = simpleNameOf(this::class),
-        kind = kind
-    )
-    assertEquals(expected, actual)
 }
