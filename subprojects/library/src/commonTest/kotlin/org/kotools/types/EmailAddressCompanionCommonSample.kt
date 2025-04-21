@@ -36,19 +36,6 @@ class EmailAddressCompanionCommonSample {
     }
 
     @Test
-    fun orThrowStringString() {
-        val text = "contact@kotools.org"
-        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val isSuccess: Boolean = try {
-            EmailAddress.orThrow(text, pattern)
-            true
-        } catch (exception: IllegalArgumentException) {
-            false
-        }
-        assertTrue(isSuccess)
-    }
-
-    @Test
     fun orThrowStringEmailAddressRegex() {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()

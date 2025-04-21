@@ -19,20 +19,6 @@ class EmailAddressCompanionJavaSample {
     }
 
     @Test
-    void orThrowStringString() {
-        final String text = "contact@kotools.org";
-        final String pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
-        boolean isSuccess;
-        try {
-            EmailAddress.orThrow(text, pattern);
-            isSuccess = true;
-        } catch (final IllegalArgumentException exception) {
-            isSuccess = false;
-        }
-        Assertions.assertTrue(isSuccess);
-    }
-
-    @Test
     void orThrowStringEmailAddressRegex() {
         final String text = "contact@kotools.org";
         final EmailAddressRegex regex = EmailAddressRegex.alphabetic();

@@ -165,39 +165,6 @@ class EmailAddressCompanionTest {
     }
 
     @Test
-    fun orThrowStringStringShouldPassWithValidTextAndPattern() {
-        val text: String = Values.VALID
-        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        EmailAddress.orThrow(text, pattern)
-    }
-
-    @Test
-    fun orThrowStringStringShouldFailWithInvalidText() {
-        val text = "first-contact@kotools.org"
-        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val throwable: IllegalArgumentException = assertFailsWith {
-            EmailAddress.orThrow(text, pattern)
-        }
-        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
-        val expected: ExceptionMessage =
-            ExceptionMessage.invalidEmailAddress(text)
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun orThrowStringStringShouldFailWithInvalidPattern() {
-        val text: String = Values.VALID
-        val pattern = """^[a-z]+\.[a-z]+$"""
-        val throwable: IllegalArgumentException = assertFailsWith {
-            EmailAddress.orThrow(text, pattern)
-        }
-        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
-        val expected: ExceptionMessage =
-            ExceptionMessage.invalidEmailAddressPattern(pattern)
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun orThrowStringEmailAddressRegexShouldPassWithValidText() {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()

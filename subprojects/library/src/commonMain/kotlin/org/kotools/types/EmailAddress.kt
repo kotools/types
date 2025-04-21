@@ -289,33 +289,21 @@ public class EmailAddress private constructor(private val text: String) {
          * specified [pattern], or if the [pattern] doesn't match the
          * [default one][EmailAddressRegex.Companion.default].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orThrowStringString]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowStringString]
-         * </details>
-         * <br>
-         *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text] or [pattern].
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
+        @Deprecated(
+            "Use the 'EmailAddress.Companion.orThrow(String, " +
+                    "EmailAddressRegex)' function instead.",
+            ReplaceWith(
+                "this.orThrow(text, EmailAddressRegex.orThrow(pattern))",
+                "org.kotools.types.EmailAddress",
+                "org.kotools.types.EmailAddressRegex"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_1)
         @JvmStatic
         public fun orThrow(text: String, pattern: String): EmailAddress {
             val patternRegex: EmailAddressRegex = EmailAddressRegex.default()
