@@ -1,27 +1,32 @@
 package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.json.Json
+import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ZeroSerializersTest {
-    @OptIn(
-        ExperimentalKotoolsTypesApi::class,
-        ExperimentalSerializationApi::class
-    )
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun byteSerializerShouldReturnValidDescriptor() {
-        val descriptor: SerialDescriptor = Zero.byteSerializer()
-            .descriptor
-        assertEquals(
-            expected = "ZeroAsByteSerializer",
-            actual = descriptor.serialName
+    fun byteSerializerShouldPass() {
+        val serializer: KSerializer<Zero> = Zero.byteSerializer()
+        val expectedDescriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = simpleNameOf(serializer::class),
+            kind = PrimitiveKind.BYTE
         )
-        assertEquals(expected = PrimitiveKind.BYTE, actual = descriptor.kind)
+        assertEquals(expectedDescriptor, serializer.descriptor)
+        val zero = Zero()
+        val encoded: String = Json.encodeToString(serializer, zero)
+        assertEquals("$zero", encoded)
+        val decoded: Zero = Json.decodeFromString(serializer, encoded)
+        assertEquals(zero, decoded)
     }
 
     @OptIn(
