@@ -13,85 +13,47 @@ import kotlin.test.assertEquals
 class ZeroSerializersTest {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun byteSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.byteSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.BYTE
-        )
-        assertEquals(expected, actual)
-    }
+    fun byteSerializerDescriptor(): Unit = Zero.byteSerializer()
+        .assertDescriptor(PrimitiveKind.BYTE)
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun shortSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.shortSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.SHORT
-        )
-        assertEquals(expected, actual)
-    }
+    fun shortSerializerDescriptor(): Unit = Zero.shortSerializer()
+        .assertDescriptor(PrimitiveKind.SHORT)
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun intSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.intSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.INT
-        )
-        assertEquals(expected, actual)
-    }
+    fun intSerializerDescriptor(): Unit = Zero.intSerializer()
+        .assertDescriptor(PrimitiveKind.INT)
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun longSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.longSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.LONG
-        )
-        assertEquals(expected, actual)
-    }
+    fun longSerializerDescriptor(): Unit = Zero.longSerializer()
+        .assertDescriptor(PrimitiveKind.LONG)
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun floatSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.floatSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.FLOAT
-        )
-        assertEquals(expected, actual)
-    }
+    fun floatSerializerDescriptor(): Unit = Zero.floatSerializer()
+        .assertDescriptor(PrimitiveKind.FLOAT)
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun doubleSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.doubleSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.DOUBLE
-        )
-        assertEquals(expected, actual)
-    }
+    fun doubleSerializerDescriptor(): Unit = Zero.doubleSerializer()
+        .assertDescriptor(PrimitiveKind.DOUBLE)
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun stringSerializerDescriptor() {
-        val serializer: KSerializer<Zero> = Zero.stringSerializer()
-        val actual: SerialDescriptor = serializer.descriptor
-        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
-            serialName = simpleNameOf(serializer::class),
-            kind = PrimitiveKind.STRING
-        )
-        assertEquals(expected, actual)
-    }
+    fun stringSerializerDescriptor(): Unit = Zero.stringSerializer()
+        .assertDescriptor(PrimitiveKind.STRING)
+}
+
+// -------------------------------- Assertions ---------------------------------
+
+private fun <T> KSerializer<T>.assertDescriptor(kind: PrimitiveKind) {
+    val actual: SerialDescriptor = this.descriptor
+    val expected: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = simpleNameOf(this::class),
+        kind = kind
+    )
+    assertEquals(expected, actual)
 }
