@@ -18,6 +18,16 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
+- The `EmailAddressRegex` **experimental** type representing a regular
+  expression for validating email addresses, in the `types` Gradle subproject
+  ([#809]).
+- The `EmailAddress.Companion.orNull(String, EmailAddressRegex)` and the
+  `EmailAddress.Companion.orThrow(String, EmailAddressRegex)` **experimental**
+  functions, in the `types` Gradle subproject, for creating an email address
+  matching the specified regular expression ([#809]).
+- The `EmailAddressRegex.Companion.stringSerializer()` **experimental**
+  function, in the `types-kotlinx-serialization` Gradle subproject, for
+  serializing the `EmailAddressRegex` type as `String` ([#809]).
 - The `KotoolsTypesSerializersModule()` **experimental** function, in the
   `types-kotlinx-serialization` Gradle subproject, for providing a collection of
   default serializers for serializing types provided by Kotools Types ([#790]).
@@ -40,6 +50,18 @@ All notable changes to this project will be documented in this file.
 - The README documentation of the `types-kotlinx-serialization` Gradle
   subproject, for using the new `KotoolsTypesSerializersModule()` function
   ([#790]).
+
+### 🗑️ Deprecated
+
+- The `EmailAddress.Companion.PATTERN` **experimental** property with an
+  **error** level for using the `EmailAddressRegex.Companion.default()` function
+  instead ([#809]).
+- The `EmailAddress.Companion.orNull(String, String)` **experimental** function
+  with an **error** level for using the `orNull(String, EmailAddressRegex)`
+  overload instead ([#809]).
+- The `EmailAddress.Companion.orThrow(String, String)` **experimental** function
+  with an **error** level for using the `orThrow(String, EmailAddressRegex)`
+  overload instead ([#809]).
 
 ### 🔥 Removed
 
@@ -69,6 +91,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#795]: https://github.com/kotools/types/issues/795
 [#796]: https://github.com/kotools/types/issues/796
 [#802]: https://github.com/kotools/types/issues/802
+[#809]: https://github.com/kotools/types/issues/809
 [fba9c4e4]: https://github.com/kotools/types/commit/fba9c4e4b9bfeef7a6239d7ed522f8140f97a92c
 
 ## 🔖 Releases
