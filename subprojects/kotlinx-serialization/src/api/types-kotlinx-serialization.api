@@ -1,3 +1,7 @@
+public final class org/kotools/types/kotlinx/serialization/EmailAddressRegexSerializers {
+	public static final synthetic fun stringSerializer (Lorg/kotools/types/EmailAddressRegex$Companion;)Lkotlinx/serialization/KSerializer;
+}
+
 public final class org/kotools/types/kotlinx/serialization/EmailAddressSerializers {
 	public static final synthetic fun stringSerializer (Lorg/kotools/types/EmailAddress$Companion;)Lkotlinx/serialization/KSerializer;
 }
