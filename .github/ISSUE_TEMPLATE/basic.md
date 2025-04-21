@@ -24,5 +24,5 @@ This issue is blocked by the following items:
 -->
 
 <!-- Include the following step in case of tracking issues.
-- [ ] 📝 After closing this issue, update the milestone of tracking issues depending only on this one.
+- [ ] 📝 After closing this issue, update the status of tracking issues depending only on this one.
 -->
