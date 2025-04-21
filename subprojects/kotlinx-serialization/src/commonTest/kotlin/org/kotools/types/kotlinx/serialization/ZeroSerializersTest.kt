@@ -49,19 +49,16 @@ class ZeroSerializersTest {
         assertEquals(expected, actual)
     }
 
-    @OptIn(
-        ExperimentalKotoolsTypesApi::class,
-        ExperimentalSerializationApi::class
-    )
+    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun longSerializerShouldReturnValidDescriptor() {
-        val descriptor: SerialDescriptor = Zero.longSerializer()
-            .descriptor
-        assertEquals(
-            expected = "ZeroAsLongSerializer",
-            actual = descriptor.serialName
+    fun longSerializerDescriptor() {
+        val serializer: KSerializer<Zero> = Zero.longSerializer()
+        val actual: SerialDescriptor = serializer.descriptor
+        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = simpleNameOf(serializer::class),
+            kind = PrimitiveKind.LONG
         )
-        assertEquals(expected = PrimitiveKind.LONG, actual = descriptor.kind)
+        assertEquals(expected, actual)
     }
 
     @OptIn(
