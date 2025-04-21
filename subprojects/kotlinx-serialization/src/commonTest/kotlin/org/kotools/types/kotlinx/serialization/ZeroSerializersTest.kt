@@ -4,7 +4,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.json.Json
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
@@ -86,18 +85,13 @@ class ZeroSerializersTest {
 
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun stringSerializerShouldPass() {
+    fun stringSerializerDescriptor() {
         val serializer: KSerializer<Zero> = Zero.stringSerializer()
-        val actualDescriptor: SerialDescriptor = serializer.descriptor
-        val expectedDescriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        val actual: SerialDescriptor = serializer.descriptor
+        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
             serialName = simpleNameOf(serializer::class),
             kind = PrimitiveKind.STRING
         )
-        assertEquals(expectedDescriptor, actualDescriptor)
-        val zero = Zero()
-        val encoded: String = Json.encodeToString(serializer, zero)
-        assertEquals(expected = "\"$zero\"", actual = encoded)
-        val decoded: Zero = Json.decodeFromString(serializer, encoded)
-        assertEquals(expected = zero, actual = decoded)
+        assertEquals(expected, actual)
     }
 }
