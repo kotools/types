@@ -1,19 +1,11 @@
 package org.kotools.types
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionCommonSample {
-    @Test
-    fun patternSample() {
-        val actual: String = EmailAddress.PATTERN
-        val expected = "^\\S+@\\S+\\.\\S+\$"
-        assertEquals(expected, actual)
-    }
-
     @Test
     fun orNullString() {
         val text = "contact@kotools.org"

@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -135,29 +136,16 @@ public class EmailAddress private constructor(private val text: String) {
          * - `$` **End.** Matches the end of the string, or the end of a line if
          * the multiline flag (**m**) is enabled.
          * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.patternSample]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.patternSample]
-         * </details>
          */
+        @Deprecated(
+            "Use the 'EmailAddressRegex.Companion.default()' function instead.",
+            ReplaceWith(
+                "EmailAddressRegex.default().toString()",
+                "org.kotools.types.EmailAddressRegex"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_1)
         public const val PATTERN: String = """^\S+@\S+\.\S+$"""
 
         // ------------------------- Factory functions -------------------------
@@ -165,7 +153,7 @@ public class EmailAddress private constructor(private val text: String) {
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or
          * returns `null` if the [text] doesn't match the
-         * [default pattern][PATTERN].
+         * [default pattern][EmailAddressRegex.Companion.default].
          *
          * <br>
          * <details>
@@ -188,15 +176,15 @@ public class EmailAddress private constructor(private val text: String) {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(text: String): EmailAddress? {
-            val pattern: String = this.PATTERN
-            val regex = Regex(pattern)
-            return if (text matches regex) EmailAddress(text) else null
+            val regex: EmailAddressRegex = EmailAddressRegex.default()
+            return if (regex matches text) EmailAddress(text) else null
         }
 
         /**
          * Creates an instance of [EmailAddress] from the specified [text].
          * Returns `null` if the [text] doesn't match the specified [pattern],
-         * or if the [pattern] doesn't match the [default one][PATTERN].
+         * or if the [pattern] doesn't match the
+         * [default one][EmailAddressRegex.Companion.default].
          *
          * <br>
          * <details>
@@ -219,8 +207,8 @@ public class EmailAddress private constructor(private val text: String) {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(text: String, pattern: String): EmailAddress? {
-            val patternRegex = Regex(this.PATTERN)
-            val patternIsInvalid: Boolean = !pattern.matches(patternRegex)
+            val patternIsInvalid: Boolean = !EmailAddressRegex.default()
+                .matches(pattern)
             if (patternIsInvalid) return null
             val textRegex = Regex(pattern)
             return if (text matches textRegex) EmailAddress(text) else null
@@ -299,7 +287,7 @@ public class EmailAddress private constructor(private val text: String) {
          * Creates an instance of [EmailAddress] from the specified [text].
          * Throws an [IllegalArgumentException] if the [text] doesn't match the
          * specified [pattern], or if the [pattern] doesn't match the
-         * [default one][PATTERN].
+         * [default one][EmailAddressRegex.Companion.default].
          *
          * <br>
          * <details>
@@ -330,8 +318,8 @@ public class EmailAddress private constructor(private val text: String) {
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String, pattern: String): EmailAddress {
-            val patternRegex = Regex(this.PATTERN)
-            require(pattern matches patternRegex) {
+            val patternRegex: EmailAddressRegex = EmailAddressRegex.default()
+            require(patternRegex matches pattern) {
                 ExceptionMessage.invalidEmailAddressPattern(pattern)
             }
             val textRegex = Regex(pattern)

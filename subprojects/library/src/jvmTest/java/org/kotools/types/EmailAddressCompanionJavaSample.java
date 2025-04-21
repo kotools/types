@@ -6,13 +6,6 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("NewClassNamingConvention")
 class EmailAddressCompanionJavaSample {
     @Test
-    void patternSample() {
-        final String actual = EmailAddress.PATTERN;
-        final String expected = "^\\S+@\\S+\\.\\S+$";
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
     void orThrowString() {
         final String text = "contact@kotools.org";
         boolean isSuccess;

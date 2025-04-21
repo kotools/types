@@ -75,13 +75,6 @@ class EmailAddressTest {
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCompanionTest {
     @Test
-    fun patternShouldPass() {
-        val actual: String = EmailAddress.PATTERN
-        val expected = """^\S+@\S+\.\S+$"""
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun orNullStringShouldPassWithValidText() {
         val text: String = Values.VALID
         val actual: EmailAddress? = EmailAddress.orNull(text)
