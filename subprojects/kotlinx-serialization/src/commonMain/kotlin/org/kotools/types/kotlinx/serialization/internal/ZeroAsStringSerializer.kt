@@ -1,12 +1,23 @@
 package org.kotools.types.kotlinx.serialization.internal
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Zero
 
 @ExperimentalKotoolsTypesApi
-internal class ZeroAsStringSerializer : StringSerializer<Zero> {
+internal class ZeroAsStringSerializer : KSerializer<Zero> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = "$this",
+        PrimitiveKind.STRING
+    )
+
     // -------------------- Structural equality operations ---------------------
 
     override fun equals(other: Any?): Boolean = other is ZeroAsStringSerializer
@@ -15,7 +26,11 @@ internal class ZeroAsStringSerializer : StringSerializer<Zero> {
 
     // ----------------------- Serialization operations ------------------------
 
-    override fun stringToType(text: String): Zero = Zero.orThrow(text)
+    override fun serialize(encoder: Encoder, value: Zero): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): Zero = decoder.decodeString()
+        .let(Zero.Companion::orThrow)
 
     // ------------------------------ Conversions ------------------------------
 
