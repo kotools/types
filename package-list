@@ -3,7 +3,6 @@ $dokka.linkExtension:html
 
 module:types
 kotools.types.collection
-kotools.types.experimental
 kotools.types.number
 kotools.types.result
 kotools.types.text
