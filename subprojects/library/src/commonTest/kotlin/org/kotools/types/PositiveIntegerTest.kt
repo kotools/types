@@ -18,16 +18,45 @@ class PositiveIntegerCompanionTest {
     fun orNullShouldFailWithIntNumberThatEqualsZero() {
         val number: Int = Zero()
             .toInt()
-        val actual: PositiveInteger? = PositiveInteger.orNull(number)
-        val message = "$number is not greater than zero."
-        assertNull(actual, message)
+        PositiveInteger.orNull(number)
+            .assertNull(number)
     }
 
     @Test
     fun orNullShouldFailWithIntNumberLessThanZero() {
         val number: Int = (Int.MIN_VALUE..-1).random()
-        val actual: PositiveInteger? = PositiveInteger.orNull(number)
-        val message = "$number is not greater than zero."
-        assertNull(actual, message)
+        PositiveInteger.orNull(number)
+            .assertNull(number)
     }
+
+    @Test
+    fun orNullShouldPassWithLongNumberGreaterThanZero() {
+        val number: Long = (1..Long.MAX_VALUE).random()
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        val message = "$number is greater than zero."
+        assertNotNull(actual, message)
+    }
+
+    @Test
+    fun orNullShouldFailWithLongNumberThatEqualsZero() {
+        val number: Long = Zero()
+            .toLong()
+        PositiveInteger.orNull(number)
+            .assertNull(number)
+    }
+
+    @Test
+    fun orNullShouldFailWithLongNumberLessThanZero() {
+        val number: Long = (Long.MIN_VALUE..-1).random()
+        PositiveInteger.orNull(number)
+            .assertNull(number)
+    }
+}
+
+// -------------------------------- Assertions ---------------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private fun PositiveInteger?.assertNull(number: Number) {
+    val message = "$number is not greater than zero."
+    assertNull(this, message)
 }

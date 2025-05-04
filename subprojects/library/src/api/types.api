@@ -374,6 +374,7 @@ public final class org/kotools/types/PositiveInteger {
 
 public final class org/kotools/types/PositiveInteger$Companion {
 	public final synthetic fun orNull (I)Lorg/kotools/types/PositiveInteger;
+	public final synthetic fun orNull (J)Lorg/kotools/types/PositiveInteger;
 }
 
 public final class org/kotools/types/Zero {

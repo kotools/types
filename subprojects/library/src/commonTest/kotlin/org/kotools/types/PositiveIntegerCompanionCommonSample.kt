@@ -12,4 +12,12 @@ class PositiveIntegerCompanionCommonSample {
         val message = "$number is greater than zero."
         assertNotNull(integer, message)
     }
+
+    @Test
+    fun orNullLong() {
+        val number: Long = (1..Long.MAX_VALUE).random()
+        val integer: PositiveInteger? = PositiveInteger.orNull(number)
+        val message = "$number is greater than zero."
+        assertNotNull(integer, message)
+    }
 }
