@@ -73,6 +73,27 @@ class PositiveIntegerCompanionTest {
         assertThrowsIllegalArgumentException { PositiveInteger.orThrow(number) }
             .assertEquals { ExceptionMessage.nonPositive(number) }
     }
+
+    @Test
+    fun orThrowShouldPassWithLongNumberGreaterThanZero() {
+        val number: Long = (1..Long.MAX_VALUE).random()
+        PositiveInteger.orThrow(number)
+    }
+
+    @Test
+    fun orThrowShouldFailWithLongNumberThatEqualsZero() {
+        val number: Long = Zero()
+            .toLong()
+        assertThrowsIllegalArgumentException { PositiveInteger.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonPositive(number) }
+    }
+
+    @Test
+    fun orThrowShouldFailWithLongNumberLessThanZero() {
+        val number: Long = (Long.MIN_VALUE..-1).random()
+        assertThrowsIllegalArgumentException { PositiveInteger.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonPositive(number) }
+    }
 }
 
 // -------------------------------- Assertions ---------------------------------

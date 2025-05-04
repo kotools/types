@@ -13,4 +13,11 @@ class PositiveIntegerCompanionJavaSample {
                 .nextInt(1, Integer.MAX_VALUE);
         PositiveInteger.orThrow(number);
     }
+
+    @Test
+    void orThrowLong() {
+        final long number = new Random()
+                .nextLong(1, Long.MAX_VALUE);
+        PositiveInteger.orThrow(number);
+    }
 }

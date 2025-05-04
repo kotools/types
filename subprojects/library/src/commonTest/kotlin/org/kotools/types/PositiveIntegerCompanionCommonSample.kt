@@ -26,4 +26,10 @@ class PositiveIntegerCompanionCommonSample {
         val number: Int = (1..Int.MAX_VALUE).random()
         PositiveInteger.orThrow(number)
     }
+
+    @Test
+    fun orThrowLong() {
+        val number: Long = (1..Long.MAX_VALUE).random()
+        PositiveInteger.orThrow(number)
+    }
 }
