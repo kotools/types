@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -51,12 +52,34 @@ class PositiveIntegerCompanionTest {
         PositiveInteger.orNull(number)
             .assertNull(number)
     }
+
+    @Test
+    fun orThrowShouldPassWithIntNumberGreaterThanZero() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        PositiveInteger.orThrow(number)
+    }
+
+    @Test
+    fun orThrowShouldFailWithIntNumberThatEqualsZero() {
+        val number: Int = Zero()
+            .toInt()
+        assertThrowsIllegalArgumentException { PositiveInteger.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonPositive(number) }
+    }
+
+    @Test
+    fun orThrowShouldFailWithIntNumberLessThanZero() {
+        val number: Int = (Int.MIN_VALUE..-1).random()
+        assertThrowsIllegalArgumentException { PositiveInteger.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonPositive(number) }
+    }
 }
 
 // -------------------------------- Assertions ---------------------------------
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private fun PositiveInteger?.assertNull(number: Number) {
-    val message = "$number is not greater than zero."
+    val message: String = ExceptionMessage.nonPositive(number)
+        .toString()
     assertNull(this, message)
 }

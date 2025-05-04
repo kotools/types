@@ -5,7 +5,6 @@ import org.kotools.types.internal.ExceptionMessage
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -394,8 +393,8 @@ class ZeroCompanionTest {
     @Test
     fun orThrowShouldFailWithByteOtherThanZero() {
         val number: Byte = Byte.randomNonZero()
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
+        assertThrowsIllegalArgumentException { Zero.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonZero(number) }
     }
 
     @Test
@@ -410,8 +409,8 @@ class ZeroCompanionTest {
             .random()
             .random()
             .toShort()
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
+        assertThrowsIllegalArgumentException { Zero.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonZero(number) }
     }
 
     @Test
@@ -425,8 +424,8 @@ class ZeroCompanionTest {
         val number: Int = setOf(Int.MIN_VALUE..-1, 1..Int.MAX_VALUE)
             .random()
             .random()
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
+        assertThrowsIllegalArgumentException { Zero.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonZero(number) }
     }
 
     @Test
@@ -440,8 +439,8 @@ class ZeroCompanionTest {
         val number: Long = setOf(Long.MIN_VALUE..-1, 1..Long.MAX_VALUE)
             .random()
             .random()
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
+        assertThrowsIllegalArgumentException { Zero.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonZero(number) }
     }
 
     @Test
@@ -455,8 +454,8 @@ class ZeroCompanionTest {
         val integer: Byte = Byte.randomNonZero()
         val decimal: Float = Random.nextFloat()
         val number: Float = integer + decimal
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
+        assertThrowsIllegalArgumentException { Zero.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonZero(number) }
     }
 
     @Test
@@ -470,8 +469,8 @@ class ZeroCompanionTest {
         val integer: Byte = Byte.randomNonZero()
         val decimal: Double = Random.nextDouble()
         val number: Double = integer + decimal
-        assertFailsWith<IllegalArgumentException> { Zero.orThrow(number) }
-            .assertIsInvalidZero(number)
+        assertThrowsIllegalArgumentException { Zero.orThrow(number) }
+            .assertEquals { ExceptionMessage.nonZero(number) }
     }
 
     @Test
@@ -483,11 +482,8 @@ class ZeroCompanionTest {
     fun orThrowShouldFailWithStringNotRepresentingZero(): Unit =
         listOf("", " ", ".", "0.", ".0", "abc")
             .forEach {
-                val throwable: IllegalArgumentException =
-                    assertFailsWith { Zero.orThrow(it) }
-                val actual: ExceptionMessage = ExceptionMessage.from(throwable)
-                val expected: ExceptionMessage = ExceptionMessage.nonZero(it)
-                assertEquals(expected, actual)
+                assertThrowsIllegalArgumentException { Zero.orThrow(it) }
+                    .assertEquals { ExceptionMessage.nonZero(it) }
             }
 }
 
@@ -498,11 +494,3 @@ private fun Byte.Companion.randomNonZero(): Byte =
         .random()
         .random()
         .toByte()
-
-// -------------------------------- Assertions ---------------------------------
-
-private fun IllegalArgumentException.assertIsInvalidZero(number: Number) {
-    val actual: ExceptionMessage = ExceptionMessage.from(this)
-    val expected: ExceptionMessage = ExceptionMessage.nonZero(number)
-    assertEquals(expected, actual)
-}

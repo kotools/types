@@ -2,10 +2,11 @@ package org.kotools.types;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.kotools.types.internal.Warning;
 
 import java.util.Arrays;
 
-@SuppressWarnings("NewClassNamingConvention")
+@SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 class ZeroCompanionJavaSample {
     @Test
     void orThrowWithByte() {

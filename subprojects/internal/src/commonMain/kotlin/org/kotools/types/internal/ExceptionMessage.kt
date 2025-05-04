@@ -62,6 +62,13 @@ public class ExceptionMessage private constructor(private val text: String) {
         public fun nonZero(text: String): ExceptionMessage =
             ExceptionMessage("'$text' is an invalid representation of zero.")
 
+        /**
+         * Returns an exception message indicating that the specified [number]
+         * is not greater than zero.
+         */
+        public fun nonPositive(number: Number): ExceptionMessage =
+            ExceptionMessage("'$number' is not greater than zero.")
+
         // ----------------- Factory functions for exceptions ------------------
 
         /**

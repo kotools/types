@@ -5,7 +5,6 @@ import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -96,12 +95,8 @@ class EmailAddressRegexCompanionTest {
     @Test
     fun orThrowShouldFailWithInvalidPattern() {
         val pattern = """^[a-z]+\.[a-z]+$"""
-        val exception: IllegalArgumentException = assertFailsWith {
+        assertThrowsIllegalArgumentException {
             EmailAddressRegex.orThrow(pattern)
-        }
-        val actual: ExceptionMessage = ExceptionMessage.from(exception)
-        val expected: ExceptionMessage =
-            ExceptionMessage.invalidEmailAddressPattern(pattern)
-        assertEquals(expected, actual)
+        }.assertEquals { ExceptionMessage.invalidEmailAddressPattern(pattern) }
     }
 }

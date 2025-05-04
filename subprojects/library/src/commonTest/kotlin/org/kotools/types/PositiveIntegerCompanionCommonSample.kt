@@ -20,4 +20,10 @@ class PositiveIntegerCompanionCommonSample {
         val message = "$number is greater than zero."
         assertNotNull(integer, message)
     }
+
+    @Test
+    fun orThrowInt() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        PositiveInteger.orThrow(number)
+    }
 }

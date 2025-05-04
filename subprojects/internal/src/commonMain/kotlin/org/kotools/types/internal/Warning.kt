@@ -31,6 +31,13 @@ public object Warning {
     public const val TEST_FUNCTION_NAME: String = "TestFunctionName"
 
     /**
+     * Warning indicating that the Java test class name is invalid.
+     *
+     * This warning can be suppressed when the class contains only samples.
+     */
+    public const val TEST_JAVA_CLASS_NAME: String = "NewClassNamingConvention"
+
+    /**
      * Warning indicating that the declaration is never used.
      *
      * This warning can be suppressed when a generic parameter within a function
