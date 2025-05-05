@@ -22,6 +22,15 @@ class PositiveIntegerCompanionCommonSample {
     }
 
     @Test
+    fun orNullString() {
+        val text: String = (1..Long.MAX_VALUE).random()
+            .let { "+${it}1234567890" }
+        val integer: PositiveInteger? = PositiveInteger.orNull(text)
+        val message = "'$text' is an integer greater than zero."
+        assertNotNull(integer, message)
+    }
+
+    @Test
     fun orThrowInt() {
         val number: Int = (1..Int.MAX_VALUE).random()
         PositiveInteger.orThrow(number)

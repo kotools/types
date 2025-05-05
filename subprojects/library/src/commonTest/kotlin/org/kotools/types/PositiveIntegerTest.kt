@@ -54,6 +54,43 @@ class PositiveIntegerCompanionTest {
     }
 
     @Test
+    fun orNullShouldPassWithStringIntegerGreaterThanZero() {
+        val text: String = (1..Long.MAX_VALUE).random()
+            .toString()
+        val actual: PositiveInteger? = PositiveInteger.orNull(text)
+        val message = "'$text' is an integer greater than zero."
+        assertNotNull(actual, message)
+    }
+
+    @Test
+    fun orNullShouldPassWithStringSignedIntegerGreaterThanZero() {
+        val text: String = (1..Long.MAX_VALUE).random()
+            .toString()
+            .let { "+$it" }
+        val actual: PositiveInteger? = PositiveInteger.orNull(text)
+        val message = "'$text' is an integer greater than zero."
+        assertNotNull(actual, message)
+    }
+
+    @Test
+    fun orNullShouldFailWithStringIntegerRepresentingZero() {
+        val text: String = Zero()
+            .toString()
+        val actual: PositiveInteger? = PositiveInteger.orNull(text)
+        val message = "'$text' is zero."
+        assertNull(actual, message)
+    }
+
+    @Test
+    fun orNullShouldFailWithStringIntegerLessThanZero() {
+        val text: String = (Long.MIN_VALUE..-1).random()
+            .toString()
+        val actual: PositiveInteger? = PositiveInteger.orNull(text)
+        val message = "'$text' is an integer less than zero."
+        assertNull(actual, message)
+    }
+
+    @Test
     fun orThrowShouldPassWithIntNumberGreaterThanZero() {
         val number: Int = (1..Int.MAX_VALUE).random()
         PositiveInteger.orThrow(number)

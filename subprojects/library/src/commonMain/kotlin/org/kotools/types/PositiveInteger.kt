@@ -81,6 +81,35 @@ public class PositiveInteger private constructor() {
         }
 
         /**
+         * Creates an instance of [PositiveInteger] from the specified [text],
+         * or returns `null` if the [text] doesn't represent an integer that is
+         * greater than [zero][Zero].
+         *
+         * The integer represented by the [text] parameter may start with a plus
+         * sign (`+`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerCompanionCommonSample.orNullString]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         */
+        @JvmSynthetic
+        public fun orNull(text: String): PositiveInteger? {
+            val regex = Regex("""^\+?[1-9]\d*$""")
+            return if (text matches regex) PositiveInteger() else null
+        }
+
+        /**
          * Creates an instance of [PositiveInteger] from the specified [number],
          * or throws an [IllegalArgumentException] if the [number] is less than
          * or equal to [zero][Zero].
