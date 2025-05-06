@@ -3,6 +3,7 @@ package org.kotools.types
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -19,7 +20,39 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
-public class PositiveInteger private constructor() {
+public class PositiveInteger private constructor(private val text: String) {
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.toStringOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.toStringOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun toString(): String = this.text
+
+    // -------------------------------------------------------------------------
+
     /** Contains static declarations for the [PositiveInteger] type. */
     public companion object {
         /**
@@ -48,7 +81,7 @@ public class PositiveInteger private constructor() {
         @JvmSynthetic
         public fun orNull(number: Int): PositiveInteger? {
             val zero = Zero()
-            return if (zero < number) PositiveInteger() else null
+            return if (zero < number) PositiveInteger("$number") else null
         }
 
         /**
@@ -77,7 +110,7 @@ public class PositiveInteger private constructor() {
         @JvmSynthetic
         public fun orNull(number: Long): PositiveInteger? {
             val zero = Zero()
-            return if (zero < number) PositiveInteger() else null
+            return if (zero < number) PositiveInteger("$number") else null
         }
 
         /**
@@ -109,7 +142,7 @@ public class PositiveInteger private constructor() {
         @JvmSynthetic
         public fun orNull(text: String): PositiveInteger? {
             val regex = Regex("""^\+?[1-9]\d*$""")
-            return if (text matches regex) PositiveInteger() else null
+            return if (text matches regex) PositiveInteger(text) else null
         }
 
         /**

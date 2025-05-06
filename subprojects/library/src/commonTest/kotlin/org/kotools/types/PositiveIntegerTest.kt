@@ -2,8 +2,20 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+class PositiveIntegerTest {
+    @Test
+    fun toStringShouldPass() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        val actual: String = PositiveInteger.orThrow(number)
+            .toString()
+        assertEquals(expected = "$number", actual)
+    }
+}
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerCompanionTest {
