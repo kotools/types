@@ -102,6 +102,9 @@ public class PositiveInteger private constructor() {
          *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [orThrow] function for throwing an exception instead of
+         * returning `null` in case of invalid [text].
          */
         @JvmSynthetic
         public fun orNull(text: String): PositiveInteger? {
@@ -184,6 +187,40 @@ public class PositiveInteger private constructor() {
             val integer: PositiveInteger? = this.orNull(number)
             return requireNotNull(integer) {
                 ExceptionMessage.nonPositive(number)
+            }
+        }
+
+        /**
+         * Creates an instance of [PositiveInteger] from the specified [text],
+         * or throws an [IllegalArgumentException] if the [text] doesn't
+         * represent an integer that is greater than [zero][Zero].
+         *
+         * The integer represented by the [text] parameter may start with a plus
+         * sign (`+`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerCompanionCommonSample.orThrowString]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [text].
+         */
+        @JvmStatic
+        public fun orThrow(text: String): PositiveInteger {
+            val integer: PositiveInteger? = this.orNull(text)
+            return requireNotNull(integer) {
+                ExceptionMessage.nonPositiveInteger(text)
             }
         }
     }

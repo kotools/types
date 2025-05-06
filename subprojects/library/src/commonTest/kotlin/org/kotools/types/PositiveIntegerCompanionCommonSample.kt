@@ -41,4 +41,11 @@ class PositiveIntegerCompanionCommonSample {
         val number: Long = (1..Long.MAX_VALUE).random()
         PositiveInteger.orThrow(number)
     }
+
+    @Test
+    fun orThrowString() {
+        val text: String = (1..Long.MAX_VALUE).random()
+            .let { "+${it}1234567890" }
+        PositiveInteger.orThrow(text)
+    }
 }
