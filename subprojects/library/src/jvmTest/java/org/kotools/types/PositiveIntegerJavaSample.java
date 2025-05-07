@@ -21,6 +21,20 @@ class PositiveIntegerJavaSample {
     }
 
     @Test
+    void hashCodeOverride() {
+        final int number = new Random()
+                .nextInt(1, Integer.MAX_VALUE);
+        final int hashCode = PositiveInteger.orThrow(number)
+                .hashCode();
+        final int other = PositiveInteger.orThrow(number)
+                .hashCode();
+        final boolean equality = hashCode == other;
+        final String message =
+                "Same positive integers have the same hash code value.";
+        Assertions.assertTrue(equality, message);
+    }
+
+    @Test
     void toStringOverride() {
         final int number = new Random()
                 .nextInt(1, Integer.MAX_VALUE);

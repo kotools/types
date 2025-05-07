@@ -372,6 +372,7 @@ public final class org/kotools/types/PositiveInteger {
 	public static final field Companion Lorg/kotools/types/PositiveInteger$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun equals (Ljava/lang/Object;)Z
+	public final fun hashCode ()I
 	public static final fun orThrow (I)Lorg/kotools/types/PositiveInteger;
 	public static final fun orThrow (J)Lorg/kotools/types/PositiveInteger;
 	public static final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;

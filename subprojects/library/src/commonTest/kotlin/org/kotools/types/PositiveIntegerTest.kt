@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -48,6 +49,17 @@ class PositiveIntegerTest {
         val actual: Boolean = integer.equals(other)
         val message = "PositiveInteger never equals '$other'."
         assertFalse(actual, message)
+    }
+
+    @Test
+    fun hashCodeShouldPass() {
+        val integer: PositiveInteger = (1..Int.MAX_VALUE).random()
+            .let(PositiveInteger.Companion::orThrow)
+        val actual: Int = integer.hashCode()
+        val expected: Int = hashCodeOf("$integer")
+        val message = "Hash code of positive integer is calculated from its " +
+                "string representation."
+        assertEquals(expected, actual, message)
     }
 
     @Test

@@ -17,6 +17,18 @@ class PositiveIntegerCommonSample {
     }
 
     @Test
+    fun hashCodeOverride() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        val hashCode: Int = PositiveInteger.orThrow(number)
+            .hashCode()
+        val other: Int = PositiveInteger.orThrow(number)
+            .hashCode()
+        val equality: Boolean = hashCode == other
+        val message = "Same positive integers have the same hash code value."
+        assertTrue(equality, message)
+    }
+
+    @Test
     fun toStringOverride() {
         val number: Int = (1..Int.MAX_VALUE).random()
         val integerAsString: String = PositiveInteger.orThrow(number)

@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -20,7 +21,6 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
-@Suppress("EqualsOrHashCode")
 public class PositiveInteger private constructor(private val text: String) {
     // -------------------- Structural equality operations ---------------------
 
@@ -54,6 +54,34 @@ public class PositiveInteger private constructor(private val text: String) {
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
         other is PositiveInteger && this.text == other.text
+
+    /**
+     * Returns a hash code value for this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.hashCodeOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.hashCodeOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun hashCode(): Int = hashCodeOf(this.text)
 
     // ------------------------------ Conversions ------------------------------
 
