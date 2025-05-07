@@ -7,6 +7,7 @@ import kotlinx.serialization.modules.contextual
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.PositiveInteger
 import org.kotools.types.Zero
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -26,6 +27,7 @@ import kotlin.jvm.JvmName
  * Here's the list of serializers used by default for each type:
  * - [EmailAddress] - [EmailAddress.Companion.stringSerializer]
  * - [EmailAddressRegex] - [EmailAddressRegex.Companion.stringSerializer]
+ * - [PositiveInteger] - [PositiveInteger.Companion.stringSerializer]
  * - [Zero] - [Zero.Companion.intSerializer]
  * </details>
  *
@@ -50,6 +52,8 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
         EmailAddress.stringSerializer()
             .let(this::contextual)
         EmailAddressRegex.stringSerializer()
+            .let(this::contextual)
+        PositiveInteger.stringSerializer()
             .let(this::contextual)
         Zero.intSerializer()
             .let(this::contextual)

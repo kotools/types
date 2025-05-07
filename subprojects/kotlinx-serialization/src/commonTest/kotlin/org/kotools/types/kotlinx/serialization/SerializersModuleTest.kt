@@ -4,6 +4,7 @@ import kotlinx.serialization.KSerializer
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.PositiveInteger
 import org.kotools.types.Zero
 import kotlin.test.Test
 
@@ -21,6 +22,14 @@ class SerializersModuleTest {
     fun includesEmailAddressRegexAsStringSerializer() {
         val expected: KSerializer<EmailAddressRegex> =
             EmailAddressRegex.stringSerializer()
+        KotoolsTypesSerializersModule()
+            .assertIncludes(expected)
+    }
+
+    @Test
+    fun includesPositiveIntegerAsStringSerializer() {
+        val expected: KSerializer<PositiveInteger> =
+            PositiveInteger.stringSerializer()
         KotoolsTypesSerializersModule()
             .assertIncludes(expected)
     }
