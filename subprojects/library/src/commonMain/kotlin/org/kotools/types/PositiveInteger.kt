@@ -20,7 +20,41 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
+@Suppress("EqualsOrHashCode")
 public class PositiveInteger private constructor(private val text: String) {
+    // -------------------- Structural equality operations ---------------------
+
+    /**
+     * Returns `true` if the [other] object is an instance of [PositiveInteger]
+     * and has the same [string representation][PositiveInteger.toString] as
+     * this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.equalsOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.equalsOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun equals(other: Any?): Boolean =
+        other is PositiveInteger && this.text == other.text
+
     // ------------------------------ Conversions ------------------------------
 
     /**

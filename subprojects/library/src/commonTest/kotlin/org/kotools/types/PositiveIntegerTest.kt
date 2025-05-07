@@ -3,11 +3,53 @@ package org.kotools.types
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerTest {
+    @Test
+    fun equalsShouldPassWithPositiveIntegerHavingSameStringRepresentation() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        val integer: PositiveInteger = PositiveInteger.orThrow(number)
+        val other: PositiveInteger = PositiveInteger.orThrow(number)
+        val actual: Boolean = integer.equals(other)
+        val message = "Positive integers with the same value are equal."
+        assertTrue(actual, message)
+    }
+
+    @Test
+    fun equalsShouldFailWithPositiveIntegerHavingAnotherStringRepresentation() {
+        val integer: PositiveInteger = (1..Int.MAX_VALUE).random()
+            .let(PositiveInteger.Companion::orThrow)
+        val other: PositiveInteger = (1..Int.MAX_VALUE).random()
+            .let(PositiveInteger.Companion::orThrow)
+        val actual: Boolean = integer.equals(other)
+        val message = "Positive integers with different values are not equal."
+        assertFalse(actual, message)
+    }
+
+    @Test
+    fun equalsShouldFailWithAnotherTypeThanPositiveInteger() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        val integer: PositiveInteger = PositiveInteger.orThrow(number)
+        val actual: Boolean = integer.equals(other = number)
+        val message = "PositiveInteger doesn't equal objects with another type."
+        assertFalse(actual, message)
+    }
+
+    @Test
+    fun equalsShouldFailWithNull() {
+        val integer: PositiveInteger = (1..Int.MAX_VALUE).random()
+            .let(PositiveInteger.Companion::orThrow)
+        val other: Any? = null
+        val actual: Boolean = integer.equals(other)
+        val message = "PositiveInteger never equals '$other'."
+        assertFalse(actual, message)
+    }
+
     @Test
     fun toStringShouldPass() {
         val number: Int = (1..Int.MAX_VALUE).random()

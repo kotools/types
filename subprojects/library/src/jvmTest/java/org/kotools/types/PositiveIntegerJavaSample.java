@@ -9,6 +9,18 @@ import java.util.Random;
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 class PositiveIntegerJavaSample {
     @Test
+    void equalsOverride() {
+        final int number = new Random()
+                .nextInt(1, Integer.MAX_VALUE);
+        final PositiveInteger integer = PositiveInteger.orThrow(number);
+        final PositiveInteger other = PositiveInteger.orThrow(number);
+        final boolean equality = integer.equals(other);
+        final String message =
+                "Positive integers with the same value are equal.";
+        Assertions.assertTrue(equality, message);
+    }
+
+    @Test
     void toStringOverride() {
         final int number = new Random()
                 .nextInt(1, Integer.MAX_VALUE);
