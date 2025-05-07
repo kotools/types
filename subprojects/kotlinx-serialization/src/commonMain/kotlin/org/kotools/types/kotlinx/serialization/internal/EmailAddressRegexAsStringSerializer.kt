@@ -1,11 +1,5 @@
 package org.kotools.types.kotlinx.serialization.internal
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddressRegex
@@ -13,12 +7,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 
 @ExperimentalKotoolsTypesApi
 internal class EmailAddressRegexAsStringSerializer :
-    KSerializer<EmailAddressRegex> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "$this",
-        PrimitiveKind.STRING
-    )
-
+    StringSerializer<EmailAddressRegex> {
     // -------------------- Structural equality operations ---------------------
 
     override fun equals(other: Any?): Boolean =
@@ -29,12 +18,8 @@ internal class EmailAddressRegexAsStringSerializer :
 
     // ----------------------- Serialization operations ------------------------
 
-    override fun serialize(encoder: Encoder, value: EmailAddressRegex): Unit =
-        encoder.encodeString("$value")
-
-    override fun deserialize(decoder: Decoder): EmailAddressRegex = decoder
-        .decodeString()
-        .let(EmailAddressRegex.Companion::orThrow)
+    override fun deserialize(text: String): EmailAddressRegex =
+        EmailAddressRegex.orThrow(text)
 
     // ------------------------------ Conversions ------------------------------
 
