@@ -22,6 +22,16 @@ class PositiveIntegerTest {
     }
 
     @Test
+    fun equalsShouldPassWithSignedPositiveIntegerHavingSameStringRepresentation() {
+        val integer: PositiveInteger = (1..Int.MAX_VALUE).random()
+            .let(PositiveInteger.Companion::orThrow)
+        val other: PositiveInteger = PositiveInteger.orThrow("+$integer")
+        val actual: Boolean = integer.equals(other)
+        val message = "Positive integers with the same value are equal."
+        assertTrue(actual, message)
+    }
+
+    @Test
     fun equalsShouldFailWithPositiveIntegerHavingAnotherStringRepresentation() {
         val integer: PositiveInteger = (1..Int.MAX_VALUE).random()
             .let(PositiveInteger.Companion::orThrow)
@@ -63,9 +73,17 @@ class PositiveIntegerTest {
     }
 
     @Test
-    fun toStringShouldPass() {
+    fun toStringShouldPassFromUnsignedNumber() {
         val number: Int = (1..Int.MAX_VALUE).random()
         val actual: String = PositiveInteger.orThrow(number)
+            .toString()
+        assertEquals(expected = "$number", actual)
+    }
+
+    @Test
+    fun toStringShouldPassFromSignedNumber() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        val actual: String = PositiveInteger.orThrow("+$number")
             .toString()
         assertEquals(expected = "$number", actual)
     }

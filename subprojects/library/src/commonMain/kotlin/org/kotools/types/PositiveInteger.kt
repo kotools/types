@@ -203,8 +203,9 @@ public class PositiveInteger private constructor(private val text: String) {
          */
         @JvmSynthetic
         public fun orNull(text: String): PositiveInteger? {
-            val regex = Regex("""^\+?[1-9]\d*$""")
-            return if (text matches regex) PositiveInteger(text) else null
+            val number: String = text.removePrefix("+")
+            val regex = Regex("""^[1-9]\d*$""")
+            return if (number matches regex) PositiveInteger(number) else null
         }
 
         /**
