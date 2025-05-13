@@ -56,6 +56,32 @@ class NegativeIntegerTest {
         assertNull(actual)
     }
 
+    // ----------------------- Companion.orNull(String) ------------------------
+
+    @Test
+    fun orNullShouldPassWithStringIntegerLessThanZero() {
+        val text: String = (Long.MIN_VALUE..-1).random()
+            .toString()
+        val actual: NegativeInteger? = NegativeInteger.orNull(text)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNullShouldFailWithStringRepresentingZero() {
+        val text: String = Zero()
+            .toString()
+        val actual: NegativeInteger? = NegativeInteger.orNull(text)
+        assertNull(actual)
+    }
+
+    @Test
+    fun orNullShouldFailWithStringIntegerGreaterThanZero() {
+        val text: String = (1..Long.MAX_VALUE).random()
+            .toString()
+        val actual: NegativeInteger? = NegativeInteger.orNull(text)
+        assertNull(actual)
+    }
+
     // ------------------------ Companion.orThrow(Int) -------------------------
 
     @Test

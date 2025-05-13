@@ -22,6 +22,14 @@ class NegativeIntegerCommonSample {
     }
 
     @Test
+    fun orNullString() {
+        val text: String = (Long.MIN_VALUE..-1).random()
+            .toString()
+        val integer: NegativeInteger? = NegativeInteger.orNull(text)
+        assertNotNull(integer)
+    }
+
+    @Test
     fun orThrowInt() {
         val number: Int = (Int.MIN_VALUE..-1).random()
         NegativeInteger.orThrow(number)

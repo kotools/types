@@ -79,6 +79,32 @@ public class NegativeInteger private constructor() {
         }
 
         /**
+         * Creates an instance of [NegativeInteger] from the specified [text],
+         * or returns `null` if the [text] doesn't represent an integer that is
+         * less than [zero][Zero].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.NegativeIntegerCommonSample.orNullString]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         */
+        @JvmSynthetic
+        public fun orNull(text: String): NegativeInteger? {
+            val regex = Regex("""^-[1-9]\d*$""")
+            return if (text matches regex) NegativeInteger() else null
+        }
+
+        /**
          * Creates an instance of [NegativeInteger] from the specified [number],
          * or throws an [IllegalArgumentException] if the [number] is greater
          * than or equal to [zero][Zero].
