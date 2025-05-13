@@ -29,4 +29,28 @@ class NegativeIntegerTest {
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
         assertNull(actual)
     }
+
+    // ------------------------ Companion.orNull(Long) -------------------------
+
+    @Test
+    fun orNullShouldPassWithLongThatIsLessThanZero() {
+        val number: Long = (Long.MIN_VALUE..-1).random()
+        val actual: NegativeInteger? = NegativeInteger.orNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNullShouldFailWithLongThatEqualsZero() {
+        val number: Long = Zero()
+            .toLong()
+        val actual: NegativeInteger? = NegativeInteger.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
+    fun orNullShouldFailWithLongThatIsGreaterThanZero() {
+        val number: Long = (1..Long.MAX_VALUE).random()
+        val actual: NegativeInteger? = NegativeInteger.orNull(number)
+        assertNull(actual)
+    }
 }

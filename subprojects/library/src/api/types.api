@@ -374,6 +374,7 @@ public final class org/kotools/types/NegativeInteger {
 
 public final class org/kotools/types/NegativeInteger$Companion {
 	public final synthetic fun orNull (I)Lorg/kotools/types/NegativeInteger;
+	public final synthetic fun orNull (J)Lorg/kotools/types/NegativeInteger;
 }
 
 public final class org/kotools/types/PositiveInteger {

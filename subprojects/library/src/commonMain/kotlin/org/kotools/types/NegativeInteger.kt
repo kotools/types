@@ -45,5 +45,31 @@ public class NegativeInteger private constructor() {
             val zero = Zero()
             return if (zero > number) NegativeInteger() else null
         }
+
+        /**
+         * Creates an instance of [NegativeInteger] from the specified [number],
+         * or returns `null` if the [number] is greater than or equal to
+         * [zero][Zero].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.NegativeIntegerCommonSample.orNullLong]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         */
+        @JvmSynthetic
+        public fun orNull(number: Long): NegativeInteger? {
+            val zero = Zero()
+            return if (zero > number) NegativeInteger() else null
+        }
     }
 }

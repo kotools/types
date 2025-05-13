@@ -13,4 +13,11 @@ class NegativeIntegerCommonSample {
         val integer: NegativeInteger? = NegativeInteger.orNull(number)
         assertNotNull(integer)
     }
+
+    @Test
+    fun orNullLong() {
+        val number: Long = (Long.MIN_VALUE..-1).random()
+        val integer: NegativeInteger? = NegativeInteger.orNull(number)
+        assertNotNull(integer)
+    }
 }
