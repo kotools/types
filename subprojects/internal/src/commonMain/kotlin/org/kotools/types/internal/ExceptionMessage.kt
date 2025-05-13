@@ -78,6 +78,13 @@ public class ExceptionMessage private constructor(private val text: String) {
                 "'$text' doesn't represent an integer greater than zero."
             )
 
+        /**
+         * Returns an exception message indicating that the specified [number]
+         * is not less than zero.
+         */
+        public fun nonNegative(number: Number): ExceptionMessage =
+            ExceptionMessage("'$number' is not less than zero.")
+
         // ----------------- Factory functions for exceptions ------------------
 
         /**

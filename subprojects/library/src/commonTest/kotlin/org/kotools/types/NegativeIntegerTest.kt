@@ -1,6 +1,8 @@
 package org.kotools.types
 
+import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
@@ -52,5 +54,34 @@ class NegativeIntegerTest {
         val number: Long = (1..Long.MAX_VALUE).random()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
         assertNull(actual)
+    }
+
+    // ------------------------ Companion.orThrow(Int) -------------------------
+
+    @Test
+    fun orThrowShouldPassWithIntThatIsLessThanZero() {
+        val number: Int = (Int.MIN_VALUE..-1).random()
+        NegativeInteger.orThrow(number)
+    }
+
+    @Test
+    fun orThrowShouldFailWithIntThatEqualsZero() {
+        val number: Int = Zero()
+            .toInt()
+        val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
+            NegativeInteger.orThrow(number)
+        }
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun orThrowShouldFailWithIntThatIsGreaterThanZero() {
+        val number: Int = (1..Int.MAX_VALUE).random()
+        val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
+            NegativeInteger.orThrow(number)
+        }
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
+        assertEquals(expected, actual)
     }
 }

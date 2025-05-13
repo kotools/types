@@ -20,4 +20,10 @@ class NegativeIntegerCommonSample {
         val integer: NegativeInteger? = NegativeInteger.orNull(number)
         assertNotNull(integer)
     }
+
+    @Test
+    fun orThrowInt() {
+        val number: Int = (Int.MIN_VALUE..-1).random()
+        NegativeInteger.orThrow(number)
+    }
 }
