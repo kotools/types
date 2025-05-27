@@ -29,6 +29,8 @@ All notable changes to this project will be documented in this file.
 
 - The `KotoolsTypesSerializersModule()` **experimental** function now includes a
   default serializer for the `PositiveInteger` type ([#661]).
+- The [declarations lifecycle](documentation/declarations-lifecycle.md)
+  documentation ([1f9e8151a]).
 
 ---
 
@@ -36,6 +38,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#661]: https://github.com/kotools/types/issues/661
+[1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
 ## 🔖 Releases
 
