@@ -1,11 +1,12 @@
-# Declarations lifecycle
+# 🔂 Declarations lifecycle
 
-## Stability stages
+## 🤔 Stability stages
 
-This project provides different type of declarations:
+This project provides different types of declaration:
 
 - **Experimental** declarations that can be updated or removed freely from the
-  API, even by introducing incompatible changes.
+  Application Programming Interface (API), even by introducing incompatible
+  changes.
   These declarations are marked with an experimental annotation requiring an
   explicit [opt-in].
 - **Stable** declarations that can be used safely, even in most conservative
@@ -16,24 +17,27 @@ This project provides different type of declarations:
   These declarations are marked with the [Deprecated][kotlin.Deprecated]
   annotation from Kotlin.
 
-[kotlin.Deprecated]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecated
-[opt-in]: https://kotlinlang.org/docs/opt-in-requirements.html
+## 🧬 Evolution principles
 
-## Evolution principles
-
-### Experimental declarations
+### 🧪 Experimental declarations
 
 A new declaration should be introduced in **experimental** stage for collecting
-user feedbacks. This change can be included in a **patch release**.
-
-An **experimental** declaration shouldn't be promoted to **stable** if its
-implementation uses another **experimental** declaration.
+user feedbacks. This change can be included in any type of release.
 
 An **experimental** declaration can be promoted to **stable** by removing the
 experimental annotation marking it that requires an explicit [opt-in]. This
-change can be included in a **minor release**.
+change can be included in the second **minor release** after its introduction.
+For example, an **experimental** function introduced in the version 5.0 can be
+promoted to **stable** in the version 5.2.
 
-### Stable declarations
+| Stage       | Experimental | Stable      |
+|-------------|--------------|-------------|
+| **Version** | `X.Y.Z`      | `X.(Y+2).0` |
+
+Note that an **experimental** declaration shouldn't be promoted to **stable** if
+its implementation uses another **experimental** declaration.
+
+### ⚖️ Stable declarations
 
 A **stable** declaration introduced should be removed by:
 
@@ -45,6 +49,14 @@ A **stable** declaration introduced should be removed by:
   **minor release**.
 - Removing it in a **major release**.
 
+| Deprecation level | Warning | Error       | Hidden      | Removed     |
+|-------------------|---------|-------------|-------------|-------------|
+| **Version**       | `X.Y.Z` | `X.(Y+1).0` | `X.(Y+2).0` | `(X+1).0.0` |
+
+<!-- Links -->
+
+[kotlin.Deprecated]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecated
 [kotlin.DeprecationLevel.ERROR]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-e-r-r-o-r.html
 [kotlin.DeprecationLevel.HIDDEN]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-h-i-d-d-e-n.html
 [kotlin.DeprecationLevel.WARNING]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-w-a-r-n-i-n-g.html
+[opt-in]: https://kotlinlang.org/docs/opt-in-requirements.html
