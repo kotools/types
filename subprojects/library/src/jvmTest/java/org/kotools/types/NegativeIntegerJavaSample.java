@@ -15,4 +15,11 @@ class NegativeIntegerJavaSample {
                 .nextInt(Integer.MIN_VALUE, 0);
         NegativeInteger.orThrow(number);
     }
+
+    @Test
+    void orThrowLong() {
+        final long number = new Random()
+                .nextLong(Long.MIN_VALUE, 0);
+        NegativeInteger.orThrow(number);
+    }
 }

@@ -110,4 +110,33 @@ class NegativeIntegerTest {
         val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         assertEquals(expected, actual)
     }
+
+    // ------------------------ Companion.orThrow(Long) ------------------------
+
+    @Test
+    fun orThrowShouldPassWithLongThatIsLessThanZero() {
+        val number: Long = (Long.MIN_VALUE..-1).random()
+        NegativeInteger.orThrow(number)
+    }
+
+    @Test
+    fun orThrowShouldFailWithLongThatEqualsZero() {
+        val number: Long = Zero()
+            .toLong()
+        val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
+            NegativeInteger.orThrow(number)
+        }
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun orThrowShouldFailWithLongThatIsGreaterThanZero() {
+        val number: Long = (1..Long.MAX_VALUE).random()
+        val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
+            NegativeInteger.orThrow(number)
+        }
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
+        assertEquals(expected, actual)
+    }
 }

@@ -34,4 +34,10 @@ class NegativeIntegerCommonSample {
         val number: Int = (Int.MIN_VALUE..-1).random()
         NegativeInteger.orThrow(number)
     }
+
+    @Test
+    fun orThrowLong() {
+        val number: Long = (Long.MIN_VALUE..-1).random()
+        NegativeInteger.orThrow(number)
+    }
 }

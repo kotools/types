@@ -71,6 +71,9 @@ public class NegativeInteger private constructor() {
          *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [orThrow] function for throwing an exception instead of
+         * returning `null` in case of invalid [number].
          */
         @JvmSynthetic
         public fun orNull(number: Long): NegativeInteger? {
@@ -137,6 +140,45 @@ public class NegativeInteger private constructor() {
          */
         @JvmStatic
         public fun orThrow(number: Int): NegativeInteger {
+            val integer: NegativeInteger? = this.orNull(number)
+            return requireNotNull(integer) {
+                ExceptionMessage.nonNegative(number)
+            }
+        }
+
+        /**
+         * Creates an instance of [NegativeInteger] from the specified [number],
+         * or throws an [IllegalArgumentException] if the [number] is greater
+         * than or equal to [zero][Zero].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.NegativeIntegerCommonSample.orThrowLong]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.NegativeIntegerJavaSample.orThrowLong]
+         * </details>
+         * <br>
+         *
+         * See the [orNull] function for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        @JvmStatic
+        public fun orThrow(number: Long): NegativeInteger {
             val integer: NegativeInteger? = this.orNull(number)
             return requireNotNull(integer) {
                 ExceptionMessage.nonNegative(number)
