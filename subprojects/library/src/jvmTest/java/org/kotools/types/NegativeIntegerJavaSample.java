@@ -22,4 +22,12 @@ class NegativeIntegerJavaSample {
                 .nextLong(Long.MIN_VALUE, 0);
         NegativeInteger.orThrow(number);
     }
+
+    @Test
+    void orThrowString() {
+        final long number = new Random()
+                .nextLong(Long.MIN_VALUE, 0);
+        final String text = Long.toString(number);
+        NegativeInteger.orThrow(text);
+    }
 }
