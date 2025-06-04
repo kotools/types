@@ -8,6 +8,17 @@ import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NegativeIntegerTest {
+    // ------------------------------ toString() -------------------------------
+
+    @Test
+    fun toStringPass() {
+        val number: Int = (Int.MIN_VALUE..-1).random()
+        val expected: String = number.toString()
+        val actual: String = NegativeInteger.orThrow(number)
+            .toString()
+        assertEquals(expected, actual)
+    }
+
     // ------------------------- Companion.orNull(Int) -------------------------
 
     @Test

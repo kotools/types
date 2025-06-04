@@ -4,6 +4,7 @@ import org.kotools.types.PositiveInteger.Companion.orNull
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -20,7 +21,39 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
-public class NegativeInteger private constructor() {
+public class NegativeInteger private constructor(private val text: String) {
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.NegativeIntegerCommonSample.toStringOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.NegativeIntegerJavaSample.toStringOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun toString(): String = this.text
+
+    // -------------------------------------------------------------------------
+
     /** Contains static declarations for the [NegativeInteger] type. */
     public companion object {
         /**
@@ -49,7 +82,9 @@ public class NegativeInteger private constructor() {
         @JvmSynthetic
         public fun orNull(number: Int): NegativeInteger? {
             val zero = Zero()
-            return if (zero > number) NegativeInteger() else null
+            if (zero <= number) return null
+            val text: String = number.toString()
+            return NegativeInteger(text)
         }
 
         /**
@@ -78,7 +113,9 @@ public class NegativeInteger private constructor() {
         @JvmSynthetic
         public fun orNull(number: Long): NegativeInteger? {
             val zero = Zero()
-            return if (zero > number) NegativeInteger() else null
+            if (zero <= number) return null
+            val text: String = number.toString()
+            return NegativeInteger(text)
         }
 
         /**
@@ -107,7 +144,7 @@ public class NegativeInteger private constructor() {
         @JvmSynthetic
         public fun orNull(text: String): NegativeInteger? {
             val regex = Regex("""^-[1-9]\d*$""")
-            return if (text matches regex) NegativeInteger() else null
+            return if (text matches regex) NegativeInteger(text) else null
         }
 
         /**

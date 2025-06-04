@@ -1,10 +1,20 @@
 package org.kotools.types
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NegativeIntegerCommonSample {
+    @Test
+    fun toStringOverride() {
+        val number: Int = (Int.MIN_VALUE..-1).random()
+        val expected: String = number.toString()
+        val text: String = NegativeInteger.orThrow(number)
+            .toString()
+        assertEquals(expected, text)
+    }
+
     // ------------------------------- Companion -------------------------------
 
     @Test
