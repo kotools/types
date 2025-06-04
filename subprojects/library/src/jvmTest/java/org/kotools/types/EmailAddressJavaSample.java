@@ -6,8 +6,6 @@ import org.kotools.types.internal.Warning;
 
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 class EmailAddressJavaSample {
-    // -------------------- Structural equality operations ---------------------
-
     @Test
     void equalsOverride() {
         final String text = "contact@kotools.org";
@@ -28,13 +26,33 @@ class EmailAddressJavaSample {
         Assertions.assertTrue(actual);
     }
 
-    // ------------------------------ Conversions ------------------------------
-
     @Test
     void toStringOverride() {
         final String text = "contact@kotools.org";
         final EmailAddress address = EmailAddress.orThrow(text);
         final String actual = address.toString();
         Assertions.assertEquals(text, actual);
+    }
+
+    // ------------------------------- Companion -------------------------------
+
+    @Test
+    void orThrowString() {
+        final String text = "contact@kotools.org";
+        boolean isSuccess;
+        try {
+            EmailAddress.orThrow(text);
+            isSuccess = true;
+        } catch (final IllegalArgumentException exception) {
+            isSuccess = false;
+        }
+        Assertions.assertTrue(isSuccess);
+    }
+
+    @Test
+    void orThrowStringEmailAddressRegex() {
+        final String text = "contact@kotools.org";
+        final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
+        EmailAddress.orThrow(text, regex);
     }
 }

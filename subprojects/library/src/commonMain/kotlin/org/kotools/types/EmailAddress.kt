@@ -163,7 +163,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullString]
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullString]
          * </details>
          * <br>
          *
@@ -226,7 +226,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orNullStringEmailAddressRegex]
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullStringEmailAddressRegex]
          * </details>
          * <br>
          *
@@ -256,7 +256,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orThrowString]
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowString]
          * </details>
          *
          * <br>
@@ -267,7 +267,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowString]
+         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.orThrowString]
          * </details>
          * <br>
          *
@@ -330,7 +330,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionCommonSample.orThrowStringEmailAddressRegex]
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowStringEmailAddressRegex]
          * </details>
          *
          * <br>
@@ -341,7 +341,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCompanionJavaSample.orThrowStringEmailAddressRegex]
+         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.orThrowStringEmailAddressRegex]
          * </details>
          * <br>
          *
