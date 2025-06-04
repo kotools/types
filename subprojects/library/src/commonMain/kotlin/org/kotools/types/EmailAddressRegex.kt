@@ -181,7 +181,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.default]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.default]
          * </details>
          *
          * <br>
@@ -196,7 +196,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionJavaSample.defaultPattern]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.defaultPattern]
          * </details>
          */
         @JvmName("defaultPattern")
@@ -218,7 +218,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.orNull]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.orNull]
          * </details>
          * <br>
          *
@@ -251,7 +251,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.orThrow]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.orThrow]
          * </details>
          *
          * <br>
@@ -262,7 +262,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionJavaSample.orThrow]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.orThrow]
          * </details>
          * <br>
          *
@@ -310,7 +310,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.alphabetic]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.alphabetic]
          * </details>
          *
          * <br>
@@ -321,7 +321,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionJavaSample.alphabetic]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.alphabetic]
          * </details>
          */
         @JvmStatic
@@ -364,7 +364,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionCommonSample.alphanumeric]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.alphanumeric]
          * </details>
          *
          * <br>
@@ -375,7 +375,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCompanionJavaSample.alphanumeric]
+         * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.alphanumeric]
          * </details>
          */
         @JvmStatic
