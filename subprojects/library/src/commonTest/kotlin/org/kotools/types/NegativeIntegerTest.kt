@@ -22,14 +22,14 @@ class NegativeIntegerTest {
     // ------------------------- Companion.orNull(Int) -------------------------
 
     @Test
-    fun orNullShouldPassWithIntThatIsLessThanZero() {
+    fun orNullPassWithIntThatIsLessThanZero() {
         val number: Int = (Int.MIN_VALUE..-1).random()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
         assertNotNull(actual)
     }
 
     @Test
-    fun orNullShouldFailWithIntThatEqualsZero() {
+    fun orNullFailWithIntThatEqualsZero() {
         val number: Int = Zero()
             .toInt()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
@@ -37,7 +37,7 @@ class NegativeIntegerTest {
     }
 
     @Test
-    fun orNullShouldFailWithIntThatIsGreaterThanZero() {
+    fun orNullFailWithIntThatIsGreaterThanZero() {
         val number: Int = (1..Int.MAX_VALUE).random()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
         assertNull(actual)
@@ -46,14 +46,14 @@ class NegativeIntegerTest {
     // ------------------------ Companion.orNull(Long) -------------------------
 
     @Test
-    fun orNullShouldPassWithLongThatIsLessThanZero() {
+    fun orNullPassWithLongThatIsLessThanZero() {
         val number: Long = (Long.MIN_VALUE..-1).random()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
         assertNotNull(actual)
     }
 
     @Test
-    fun orNullShouldFailWithLongThatEqualsZero() {
+    fun orNullFailWithLongThatEqualsZero() {
         val number: Long = Zero()
             .toLong()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
@@ -61,7 +61,7 @@ class NegativeIntegerTest {
     }
 
     @Test
-    fun orNullShouldFailWithLongThatIsGreaterThanZero() {
+    fun orNullFailWithLongThatIsGreaterThanZero() {
         val number: Long = (1..Long.MAX_VALUE).random()
         val actual: NegativeInteger? = NegativeInteger.orNull(number)
         assertNull(actual)
@@ -70,7 +70,7 @@ class NegativeIntegerTest {
     // ----------------------- Companion.orNull(String) ------------------------
 
     @Test
-    fun orNullShouldPassWithStringIntegerLessThanZero() {
+    fun orNullPassWithStringIntegerLessThanZero() {
         val text: String = (Long.MIN_VALUE..-1).random()
             .toString()
         val actual: NegativeInteger? = NegativeInteger.orNull(text)
@@ -78,7 +78,7 @@ class NegativeIntegerTest {
     }
 
     @Test
-    fun orNullShouldFailWithStringRepresentingZero() {
+    fun orNullFailWithStringRepresentingZero() {
         val text: String = Zero()
             .toString()
         val actual: NegativeInteger? = NegativeInteger.orNull(text)
@@ -86,7 +86,7 @@ class NegativeIntegerTest {
     }
 
     @Test
-    fun orNullShouldFailWithStringIntegerGreaterThanZero() {
+    fun orNullFailWithStringIntegerGreaterThanZero() {
         val text: String = (1..Long.MAX_VALUE).random()
             .toString()
         val actual: NegativeInteger? = NegativeInteger.orNull(text)
@@ -96,91 +96,91 @@ class NegativeIntegerTest {
     // ------------------------ Companion.orThrow(Int) -------------------------
 
     @Test
-    fun orThrowShouldPassWithIntThatIsLessThanZero() {
+    fun orThrowPassWithIntThatIsLessThanZero() {
         val number: Int = (Int.MIN_VALUE..-1).random()
         NegativeInteger.orThrow(number)
     }
 
     @Test
-    fun orThrowShouldFailWithIntThatEqualsZero() {
+    fun orThrowFailWithIntThatEqualsZero() {
         val number: Int = Zero()
             .toInt()
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
             NegativeInteger.orThrow(number)
         }
-        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         assertEquals(expected, actual)
     }
 
     @Test
-    fun orThrowShouldFailWithIntThatIsGreaterThanZero() {
+    fun orThrowFailWithIntThatIsGreaterThanZero() {
         val number: Int = (1..Int.MAX_VALUE).random()
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
             NegativeInteger.orThrow(number)
         }
-        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         assertEquals(expected, actual)
     }
 
     // ------------------------ Companion.orThrow(Long) ------------------------
 
     @Test
-    fun orThrowShouldPassWithLongThatIsLessThanZero() {
+    fun orThrowPassWithLongThatIsLessThanZero() {
         val number: Long = (Long.MIN_VALUE..-1).random()
         NegativeInteger.orThrow(number)
     }
 
     @Test
-    fun orThrowShouldFailWithLongThatEqualsZero() {
+    fun orThrowFailWithLongThatEqualsZero() {
         val number: Long = Zero()
             .toLong()
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
             NegativeInteger.orThrow(number)
         }
-        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         assertEquals(expected, actual)
     }
 
     @Test
-    fun orThrowShouldFailWithLongThatIsGreaterThanZero() {
+    fun orThrowFailWithLongThatIsGreaterThanZero() {
         val number: Long = (1..Long.MAX_VALUE).random()
+        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
             NegativeInteger.orThrow(number)
         }
-        val expected: ExceptionMessage = ExceptionMessage.nonNegative(number)
         assertEquals(expected, actual)
     }
 
     // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test
-    fun orThrowShouldPassWithStringIntegerLessThanZero() {
+    fun orThrowPassWithStringIntegerLessThanZero() {
         val text: String = (Long.MIN_VALUE..-1).random()
             .toString()
         NegativeInteger.orThrow(text)
     }
 
     @Test
-    fun orThrowShouldFailWithStringRepresentingZero() {
+    fun orThrowFailWithStringRepresentingZero() {
         val text: String = Zero()
             .toString()
+        val expected: ExceptionMessage =
+            ExceptionMessage.nonNegativeInteger(text)
         val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
             NegativeInteger.orThrow(text)
         }
-        val expected: ExceptionMessage =
-            ExceptionMessage.nonNegativeInteger(text)
         assertEquals(expected, actual)
     }
 
     @Test
-    fun orThrowShouldFailWithStringIntegerGreaterThanZero() {
+    fun orThrowFailWithStringIntegerGreaterThanZero() {
         val text: String = (1..Long.MAX_VALUE).random()
             .toString()
+        val expected: ExceptionMessage =
+            ExceptionMessage.nonNegativeInteger(text)
         val actual: ExceptionMessage = assertThrowsIllegalArgumentException {
             NegativeInteger.orThrow(text)
         }
-        val expected: ExceptionMessage =
-            ExceptionMessage.nonNegativeInteger(text)
         assertEquals(expected, actual)
     }
 }
