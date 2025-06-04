@@ -31,6 +31,8 @@ All notable changes to this project will be documented in this file.
   default serializer for the `PositiveInteger` type ([#661]).
 - The [declarations lifecycle](documentation/declarations-lifecycle.md)
   documentation ([1f9e8151a]).
+- The samples of the `EmailAddress.Companion.orThrow(String)` function are now
+  easier to understand ([0e1470a48]).
 
 ---
 
@@ -38,6 +40,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#661]: https://github.com/kotools/types/issues/661
+[0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
 ## 🔖 Releases
