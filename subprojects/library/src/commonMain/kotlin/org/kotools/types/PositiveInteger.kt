@@ -20,7 +20,7 @@ import kotlin.jvm.JvmSynthetic
  * the [PositiveInteger.Companion] type.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+@ExperimentalSince(KotoolsTypesVersion.V5_0_2)
 public class PositiveInteger private constructor(private val text: String) {
     // -------------------- Structural equality operations ---------------------
 

@@ -20,7 +20,7 @@ import kotlin.jvm.JvmSynthetic
  * the [NegativeInteger.Companion] type.
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+@ExperimentalSince(KotoolsTypesVersion.V5_0_2)
 public class NegativeInteger private constructor(private val text: String) {
     // ------------------------------ Conversions ------------------------------
 

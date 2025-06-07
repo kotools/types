@@ -30,7 +30,7 @@ import kotlin.jvm.JvmSynthetic
  * </details>
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+@ExperimentalSince(KotoolsTypesVersion.V5_0_2)
 @JvmSynthetic
 public fun PositiveInteger.Companion.stringSerializer():
         KSerializer<PositiveInteger> = PositiveIntegerAsStringSerializer()
