@@ -22,3 +22,7 @@ tab_width = 4
 indent_size = 2
 indent_style = space
 tab_width = 2
+
+[.github/ISSUE_TEMPLATE/*.md]
+max_line_length = off
+ij_visual_guides = none
