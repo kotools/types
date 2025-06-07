@@ -1,6 +1,8 @@
 ---
-name: ⬆️ Kotlin NEXT_VERSION
+name: ⬆️ Kotlin upgrade
 about: Template for upgrading Kotlin.
+title: ⬆️ Kotlin NEXT_VERSION
+labels: dependencies
 ---
 
 ## 📝 Description
