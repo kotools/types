@@ -7,27 +7,21 @@ labels: dependencies
 
 ## 📝 Description
 
-We want to upgrade the embedded Kotlin version from **CURRENT_VERSION** to
-**NEXT_VERSION**. For more details on changes included in this new version, see
-what's new in Kotlin [NEXT_VERSION]().
+We want to upgrade the embedded Kotlin version from **CURRENT_VERSION** to **NEXT_VERSION**.
+For more details on changes included in this new version, see what's new in Kotlin [NEXT_VERSION]().
 
-<!--
-As an example, the link to the Kotlin documentation to specify for Kotlin 2.0.0
-is https://kotlinlang.org/docs/whatsnew20.html.
--->
+<!-- As an example, the link to the Kotlin documentation to specify for Kotlin 2.0.0 is https://kotlinlang.org/docs/whatsnew20.html. -->
 
-For aligning to this new Kotlin version, we also want to upgrade the following
-dependencies:
+For aligning to this new Kotlin version, we also want to upgrade the following dependencies:
 
 - Kotlin Serialization from [CURRENT_VERSION]() to [NEXT_VERSION]().
 - Gradle from [CURRENT_VERSION]() to [NEXT_VERSION]().
 - Dokka Gradle plugin from [CURRENT_VERSION]() to [NEXT_VERSION]().
-- Kotlin Binary Compatibility Validator Gradle plugin from [CURRENT_VERSION]()
-  to [NEXT_VERSION]().
+- Kotlin Binary Compatibility Validator Gradle plugin from [CURRENT_VERSION]() to [NEXT_VERSION]().
 
 <!--
-Links provided for each dependency listed above must point to their official
-website or GitHub project. Here's an example for each of these:
+Links provided for each dependency listed above must point to their official website or GitHub project.
+Here's an example for each of these:
 
 - Kotlin Serialization 1.7.3: https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.7.3
 - Gradle 8.14.2: https://docs.gradle.org/8.14.2/release-notes.html
