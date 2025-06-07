@@ -29,8 +29,8 @@ env:
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
 jobs:
-  check-plugins:
-    name: Check plugins
+  check-gradle-plugins:
+    name: Check Gradle plugins
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
