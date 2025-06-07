@@ -25,9 +25,27 @@ on:
       - gradlew.bat
       - yarn.lock
   workflow_dispatch:
+env:
+  JAVA_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
 jobs:
-  checks:
-    name: Checks
+  check-plugins:
+    name: Check plugins
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.7.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4.3.1
+      - name: Check 'plugins' project
+        run: ./gradlew :plugins:check
+  check-library:
+    name: Check library
     runs-on: macos-13
     steps:
       - name: Checkout code
@@ -35,13 +53,24 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Check 'plugins' project
-        run: ./gradlew :plugins:check
       - name: Check 'types' project
         run: ./gradlew :types:check
+  check-kotlin-serialization:
+    name: Check Kotlin Serialization support
+    runs-on: macos-13
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+      - name: Setup Java
+        uses: actions/setup-java@v4.7.0
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4.3.1
       - name: Check 'types-kotlinx-serialization' project
         run: ./gradlew :types-kotlinx-serialization:check
