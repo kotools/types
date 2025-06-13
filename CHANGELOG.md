@@ -18,17 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- The `PositiveInteger` **experimental** type, in the `org.kotools.types`
-  package of the `types` Gradle subproject, for representing an integer that is
-  greater than zero ([#661]).
-- The `PositiveInteger.Companion.stringSerializer()` **experimental** function,
-  in the `types-kotlinx-serialization` Gradle subproject, for serializing the
-  `PositiveInteger` type as `String` ([#661]).
-
 ### ♻️ Changed
 
-- The `KotoolsTypesSerializersModule()` **experimental** function now includes a
-  default serializer for the `PositiveInteger` type ([#661]).
 - The [declarations lifecycle](documentation/declarations-lifecycle.md)
   documentation ([1f9e8151a]).
 - The samples of the `EmailAddress.Companion.orThrow(String)` function are now
@@ -39,7 +30,6 @@ All notable changes to this project will be documented in this file.
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
-[#661]: https://github.com/kotools/types/issues/661
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 

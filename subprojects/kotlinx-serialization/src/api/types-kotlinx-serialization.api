@@ -6,10 +6,6 @@ public final class org/kotools/types/kotlinx/serialization/EmailAddressSerialize
 	public static final synthetic fun stringSerializer (Lorg/kotools/types/EmailAddress$Companion;)Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/kotools/types/kotlinx/serialization/PositiveIntegerSerializers {
-	public static final synthetic fun stringSerializer (Lorg/kotools/types/PositiveInteger$Companion;)Lkotlinx/serialization/KSerializer;
-}
-
 public final class org/kotools/types/kotlinx/serialization/SerializersModule {
 	public static final fun KotoolsTypesSerializersModule ()Lkotlinx/serialization/modules/SerializersModule;
 }
