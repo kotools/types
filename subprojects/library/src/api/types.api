@@ -368,24 +368,6 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
-public final class org/kotools/types/NegativeInteger {
-	public static final field Companion Lorg/kotools/types/NegativeInteger$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun orThrow (I)Lorg/kotools/types/NegativeInteger;
-	public static final fun orThrow (J)Lorg/kotools/types/NegativeInteger;
-	public static final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/NegativeInteger;
-	public final fun toString ()Ljava/lang/String;
-}
-
-public final class org/kotools/types/NegativeInteger$Companion {
-	public final synthetic fun orNull (I)Lorg/kotools/types/NegativeInteger;
-	public final synthetic fun orNull (J)Lorg/kotools/types/NegativeInteger;
-	public final synthetic fun orNull (Ljava/lang/String;)Lorg/kotools/types/NegativeInteger;
-	public final fun orThrow (I)Lorg/kotools/types/NegativeInteger;
-	public final fun orThrow (J)Lorg/kotools/types/NegativeInteger;
-	public final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/NegativeInteger;
-}
-
 public final class org/kotools/types/PositiveInteger {
 	public static final field Companion Lorg/kotools/types/PositiveInteger$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
