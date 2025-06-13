@@ -516,7 +516,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNull]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNull]
          * </details>
          * <br>
          *
@@ -545,7 +545,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithShort]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNullWithShort]
          * </details>
          * <br>
          *
@@ -574,7 +574,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithInt]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNullWithInt]
          * </details>
          * <br>
          *
@@ -601,7 +601,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithLong]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNullWithLong]
          * </details>
          * <br>
          *
@@ -628,7 +628,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithFloat]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNullWithFloat]
          * </details>
          * <br>
          *
@@ -655,7 +655,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithDouble]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNullWithDouble]
          * </details>
          * <br>
          *
@@ -705,7 +705,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orNullWithString]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orNullWithString]
          * </details>
          * <br>
          *
@@ -734,7 +734,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithByte]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithByte]
          * </details>
          *
          * <br>
@@ -745,7 +745,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithByte]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithByte]
          * </details>
          * <br>
          *
@@ -771,7 +771,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithShort]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithShort]
          * </details>
          *
          * <br>
@@ -782,7 +782,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithShort]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithShort]
          * </details>
          * <br>
          *
@@ -808,7 +808,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithInt]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithInt]
          * </details>
          *
          * <br>
@@ -819,7 +819,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithInt]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithInt]
          * </details>
          * <br>
          *
@@ -845,7 +845,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithLong]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithLong]
          * </details>
          *
          * <br>
@@ -856,7 +856,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithLong]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithLong]
          * </details>
          * <br>
          *
@@ -882,7 +882,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithFloat]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithFloat]
          * </details>
          *
          * <br>
@@ -893,7 +893,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithFloat]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithFloat]
          * </details>
          * <br>
          *
@@ -919,7 +919,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithDouble]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithDouble]
          * </details>
          *
          * <br>
@@ -930,7 +930,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithDouble]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithDouble]
          * </details>
          * <br>
          *
@@ -980,7 +980,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionCommonSample.orThrowWithString]
+         * SAMPLE: [org.kotools.types.ZeroCommonSample.orThrowWithString]
          * </details>
          *
          * <br>
@@ -991,7 +991,7 @@ public class Zero {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.ZeroCompanionJavaSample.orThrowWithString]
+         * SAMPLE: [org.kotools.types.ZeroJavaSample.orThrowWithString]
          * </details>
          * <br>
          *
