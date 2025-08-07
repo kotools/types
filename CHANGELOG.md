@@ -25,11 +25,16 @@ All notable changes to this project will be documented in this file.
 - The samples of the `EmailAddress.Companion.orThrow(String)` function are now
   easier to understand ([0e1470a48]).
 
+### 🔥 Removed
+
+- The version 5.0.0 from the API reference ([#841]).
+
 ---
 
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#841]: https://github.com/kotools/types/issues/841
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
