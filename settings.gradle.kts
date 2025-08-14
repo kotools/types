@@ -1,9 +1,6 @@
+// ------------------------------- Root project --------------------------------
+
 rootProject.name = "types"
-
-// ------------------------------ Included builds ------------------------------
-
-private val gradlePluginsDirectory: File = rootDir.resolve("gradle/plugins")
-includeBuild(gradlePluginsDirectory)
 
 // -------------------------------- Subprojects --------------------------------
 
@@ -18,3 +15,8 @@ private fun subproject(
 subproject("internal")
 subproject("kotlinx-serialization")
 subproject(path = "library", name = rootProject.name)
+
+// ------------------------------ Included builds ------------------------------
+
+private val gradlePluginsDirectory: File = rootDir.resolve("gradle/plugins")
+includeBuild(gradlePluginsDirectory)
