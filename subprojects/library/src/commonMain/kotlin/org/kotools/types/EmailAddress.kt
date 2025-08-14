@@ -153,7 +153,7 @@ public class EmailAddress private constructor(private val text: String) {
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or
          * returns `null` if the [text] doesn't match the
-         * [default pattern][EmailAddressRegex.Companion.default].
+         * [default regular expression][EmailAddressRegex.Companion.default].
          *
          * <br>
          * <details>
