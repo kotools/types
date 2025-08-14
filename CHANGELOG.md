@@ -24,6 +24,10 @@ All notable changes to this project will be documented in this file.
   documentation ([1f9e8151a]).
 - The samples of the `EmailAddress.Companion.orThrow(String)` function are now
   easier to understand ([0e1470a48]).
+- The documentation of the `EmailAddress.Companion.orNull(String)` and the
+  `EmailAddress.Companion.orThrow(String)` **experimental** functions refer to
+  the `EmailAddressRegex.Companion.default()` **experimental** function instead
+  of the `EmailAddress.Companion.PATTERN` **deprecated** property ([#838]).
 
 ### 🔥 Removed
 
@@ -34,6 +38,7 @@ All notable changes to this project will be documented in this file.
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#838]: https://github.com/kotools/types/issues/838
 [#841]: https://github.com/kotools/types/issues/841
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
