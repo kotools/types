@@ -246,7 +246,7 @@ public class EmailAddress private constructor(private val text: String) {
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or
          * throws an [IllegalArgumentException] if the [text] doesn't match the
-         * [default pattern][PATTERN].
+         * [default regular expression][EmailAddressRegex.default].
          *
          * <br>
          * <details>
