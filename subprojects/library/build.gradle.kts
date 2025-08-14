@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 
+// ---------------------------------- Plugins ----------------------------------
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)

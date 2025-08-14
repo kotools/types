@@ -1,4 +1,8 @@
+// ---------------------------------- Plugins ----------------------------------
+
 plugins { `kotlin-dsl` }
+
+// ------------------------------- Repositories --------------------------------
 
 repositories.mavenCentral()
 
@@ -26,7 +30,7 @@ gradlePlugin {
 
 kotlin.explicitApi()
 
-// -----------------------------------------------------------------------------
+// ------------------------------- Dependencies --------------------------------
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)

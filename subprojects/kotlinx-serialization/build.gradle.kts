@@ -1,5 +1,7 @@
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 
+// ---------------------------------- Plugins ----------------------------------
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.dokka)

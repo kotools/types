@@ -1,3 +1,5 @@
+// ------------------------------- All projects --------------------------------
+
 allprojects {
     this.group = "org.kotools"
     this.repositories.mavenCentral()
