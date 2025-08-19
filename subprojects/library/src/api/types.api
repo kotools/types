@@ -325,7 +325,6 @@ public final class kotools/types/text/NotBlankStringKt {
 
 public final class org/kotools/types/EmailAddress {
 	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
-	public static final field PATTERN Ljava/lang/String;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun equals (Ljava/lang/Object;)Z
 	public final fun hashCode ()I
