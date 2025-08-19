@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
 - The `PATTERN` **deprecated** property, the `orNull(String, String)` and the
   `orThrow(String, String)` **deprecated** functions from the
   `EmailAddress.Companion` **experimental** type ([#838]).
+- The `Zero` **experimental** type and all its serializers ([#844]). Use
+  directly the `0` value instead.
 
 ---
 
@@ -41,6 +43,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#838]: https://github.com/kotools/types/issues/838
 [#841]: https://github.com/kotools/types/issues/841
+[#844]: https://github.com/kotools/types/issues/844
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
