@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -212,40 +211,6 @@ public class EmailAddress private constructor(private val text: String) {
             return requireNotNull(emailAddress) {
                 ExceptionMessage.invalidEmailAddress(text)
             }
-        }
-
-        /**
-         * Creates an instance of [EmailAddress] from the specified [text].
-         * Throws an [IllegalArgumentException] if the [text] doesn't match the
-         * specified [pattern], or if the [pattern] doesn't match the
-         * [default one][EmailAddressRegex.Companion.default].
-         *
-         * See the [orNull] function for returning `null` instead of throwing an
-         * exception in case of invalid [text] or [pattern].
-         */
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
-        @Deprecated(
-            "Use the 'EmailAddress.Companion.orThrow(String, " +
-                    "EmailAddressRegex)' function instead.",
-            ReplaceWith(
-                "this.orThrow(text, EmailAddressRegex.orThrow(pattern))",
-                "org.kotools.types.EmailAddress",
-                "org.kotools.types.EmailAddressRegex"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_1)
-        @JvmStatic
-        public fun orThrow(text: String, pattern: String): EmailAddress {
-            val patternRegex: EmailAddressRegex = EmailAddressRegex.default()
-            require(patternRegex matches pattern) {
-                ExceptionMessage.invalidEmailAddressPattern(pattern)
-            }
-            val textRegex = Regex(pattern)
-            require(text matches textRegex) {
-                ExceptionMessage.invalidEmailAddress(text)
-            }
-            return EmailAddress(text)
         }
 
         /**
