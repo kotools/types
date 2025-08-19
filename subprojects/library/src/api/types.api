@@ -336,7 +336,6 @@ public final class org/kotools/types/EmailAddress {
 
 public final class org/kotools/types/EmailAddress$Companion {
 	public final synthetic fun orNull (Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
-	public final synthetic fun orNull (Ljava/lang/String;Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
 	public final synthetic fun orNull (Ljava/lang/String;Lorg/kotools/types/EmailAddressRegex;)Lorg/kotools/types/EmailAddress;
 	public final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/EmailAddress;
 	public final fun orThrow (Ljava/lang/String;Ljava/lang/String;)Lorg/kotools/types/EmailAddress;

@@ -146,40 +146,6 @@ public class EmailAddress private constructor(private val text: String) {
         }
 
         /**
-         * Creates an instance of [EmailAddress] from the specified [text].
-         * Returns `null` if the [text] doesn't match the specified [pattern],
-         * or if the [pattern] doesn't match the
-         * [default one][EmailAddressRegex.Companion.default].
-         *
-         * This function is not available from Java code due to its non-explicit
-         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [orThrow] function for throwing an exception instead of
-         * returning `null` in case of invalid [text] or [pattern].
-         */
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
-        @Deprecated(
-            "Use the 'EmailAddress.Companion.orNull(String, " +
-                    "EmailAddressRegex)' function instead.",
-            ReplaceWith(
-                "EmailAddressRegex.orNull(pattern)\n" +
-                        "\t?.let { EmailAddress.orNull(text, it) }",
-                "org.kotools.types.EmailAddress",
-                "org.kotools.types.EmailAddressRegex"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_1)
-        @JvmSynthetic
-        public fun orNull(text: String, pattern: String): EmailAddress? {
-            val patternIsInvalid: Boolean = !EmailAddressRegex.default()
-                .matches(pattern)
-            if (patternIsInvalid) return null
-            val textRegex = Regex(pattern)
-            return if (text matches textRegex) EmailAddress(text) else null
-        }
-
-        /**
          * Returns an email address from the specified [text], or returns `null`
          * if the [text] doesn't match the specified [regex].
          *
