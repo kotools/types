@@ -32,6 +32,9 @@ All notable changes to this project will be documented in this file.
 ### 🔥 Removed
 
 - The version 5.0.0 from the API reference ([#841]).
+- The `PATTERN` **deprecated** property, the `orNull(String, String)` and the
+  `orThrow(String, String)` **deprecated** functions from the
+  `EmailAddress.Companion` **experimental** type ([#838]).
 
 ---
 
