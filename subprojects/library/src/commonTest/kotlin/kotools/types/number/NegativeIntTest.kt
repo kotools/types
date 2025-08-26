@@ -27,6 +27,7 @@ class NegativeIntCompanionTest {
         result.toInt() shouldEqual Int.MIN_VALUE
     }
 
+    @Suppress("DEPRECATION")
     @Test
     fun max_should_equal_zero() {
         val result: ZeroInt = NegativeInt.max

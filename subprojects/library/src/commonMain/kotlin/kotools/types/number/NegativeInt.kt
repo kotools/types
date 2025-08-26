@@ -12,6 +12,7 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeNegative
 import kotools.types.internal.simpleNameOf
+import org.kotools.types.internal.DeprecatedAsWarningSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -67,11 +68,16 @@ public sealed interface NegativeInt : AnyInt {
         public val min: StrictlyNegativeInt by lazy { StrictlyNegativeInt.min }
 
         /** The maximum value a [NegativeInt] can have. */
+        @Deprecated(
+            "Use the '0' value of type 'Int' instead.",
+            ReplaceWith("0")
+        )
+        @DeprecatedAsWarningSince(KotoolsTypesVersion.V5_1_0)
         public val max: ZeroInt = ZeroInt
 
         /** Returns a random [NegativeInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
-        public fun random(): NegativeInt = (min.toInt()..max.toInt())
+        public fun random(): NegativeInt = (min.toInt()..0)
             .random()
             .toNegativeInt()
             .getOrThrow()
