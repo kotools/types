@@ -27,6 +27,11 @@ All notable changes to this project will be documented in this file.
   the `EmailAddressRegex.Companion.default()` **experimental** function instead
   of the `EmailAddress.Companion.PATTERN` **deprecated** property ([#838]).
 
+### 🗑️ Deprecated
+
+- The `PositiveInt.Companion.min` property with a **warning** level for using
+  the `0` value of type `Int` instead ([#845]).
+
 ### 🔥 Removed
 
 - The version 5.0.0 from the API reference ([#841]).
@@ -44,6 +49,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#838]: https://github.com/kotools/types/issues/838
 [#841]: https://github.com/kotools/types/issues/841
 [#844]: https://github.com/kotools/types/issues/844
+[#845]: https://github.com/kotools/types/issues/845
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
