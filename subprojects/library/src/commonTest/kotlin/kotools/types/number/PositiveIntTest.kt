@@ -21,6 +21,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class PositiveIntCompanionTest {
+    @Suppress("DEPRECATION")
     @Test
     fun min_should_equal_zero() {
         val result: ZeroInt = PositiveInt.min
