@@ -1,5 +1,5 @@
 [versions]
-dokka = "1.9.20"
+dokka = "1.9.20!!"
 kotlin = "1.9.25!!"
 kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
