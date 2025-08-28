@@ -12,8 +12,8 @@ class EmailAddressCommonSample {
         val text = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.orThrow(text)
         val second: EmailAddress = EmailAddress.orThrow(text)
-        val actual: Boolean = first == second // or first.equals(second)
-        assertTrue(actual)
+        val equality: Boolean = first == second // or first.equals(second)
+        assertTrue(equality)
     }
 
     @Test
@@ -21,16 +21,16 @@ class EmailAddressCommonSample {
         val text = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.orThrow(text)
         val second: EmailAddress = EmailAddress.orThrow(text)
-        val actual: Boolean = first.hashCode() == second.hashCode()
-        assertTrue(actual)
+        val equality: Boolean = first.hashCode() == second.hashCode()
+        assertTrue(equality)
     }
 
     @Test
     fun toStringOverride() {
         val text = "contact@kotools.org"
         val address: EmailAddress = EmailAddress.orThrow(text)
-        val actual = "$address" // or address.toString()
-        assertEquals(expected = text, actual)
+        val actualText = "$address" // or address.toString()
+        assertEquals(expected = text, actualText)
     }
 
     // ------------------------------- Companion -------------------------------
