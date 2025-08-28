@@ -4,15 +4,6 @@ kotlin = "1.9.25!!"
 kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
 
-[libraries]
-dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
-dokka-gradle-plugin = { module = "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin", version.ref = "dokka" }
-dokka-versioning = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -22,3 +13,12 @@ kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 kotools-types-documentation = { id = "org.kotools.types.documentation" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 kotools-types-publication = { id = "kotools.types.publication" }
+
+[libraries]
+dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin", version.ref = "dokka" }
+dokka-versioning = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
