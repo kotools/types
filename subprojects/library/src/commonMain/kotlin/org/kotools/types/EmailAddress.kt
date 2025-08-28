@@ -95,10 +95,8 @@ public class EmailAddress private constructor(private val text: String) {
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         public fun orThrow(text: String): EmailAddress {
-            val emailAddress: EmailAddress? = this.orNull(text)
-            return requireNotNull(emailAddress) {
-                ExceptionMessage.invalidEmailAddress(text)
-            }
+            val regex: EmailAddressRegex = EmailAddressRegex.default()
+            return this.orThrow(text, regex)
         }
 
         /**
