@@ -29,7 +29,6 @@ kotlin.sourceSets.configureEach {
 dependencies {
     commonMainApi(libs.kotlinx.serialization.core)
 
-    commonMainImplementation(platform(libs.kotlin.bom))
     commonMainImplementation(project(":types"))
     commonMainImplementation(project(":types-internal"))
 
