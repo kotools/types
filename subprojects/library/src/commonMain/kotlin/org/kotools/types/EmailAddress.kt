@@ -116,10 +116,10 @@ public class EmailAddress private constructor(private val text: String) {
             text: String,
             regex: EmailAddressRegex
         ): EmailAddress {
-            val emailAddress: EmailAddress? = this.orNull(text, regex)
-            return requireNotNull(emailAddress) {
+            require(regex matches text) {
                 ExceptionMessage.invalidEmailAddress(text)
             }
+            return EmailAddress(text)
         }
     }
 }
