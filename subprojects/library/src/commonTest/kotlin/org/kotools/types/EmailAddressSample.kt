@@ -6,7 +6,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-class EmailAddressCommonSample {
+class EmailAddressSample {
     @Test
     fun equalsOverride() {
         val text = "contact@kotools.org"

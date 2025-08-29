@@ -22,7 +22,7 @@ public class EmailAddress private constructor(private val text: String) {
      * has the same string representation as this email address, or returns
      * `false` otherwise.
      *
-     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.equalsOverride]
+     * SAMPLE: [org.kotools.types.EmailAddressSample.equalsOverride]
      */
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
@@ -31,7 +31,7 @@ public class EmailAddress private constructor(private val text: String) {
     /**
      * Returns a hash code value for this email address.
      *
-     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.hashCodeOverride]
+     * SAMPLE: [org.kotools.types.EmailAddressSample.hashCodeOverride]
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.text)
@@ -41,7 +41,7 @@ public class EmailAddress private constructor(private val text: String) {
     /**
      * Returns the string representation of this email address.
      *
-     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.toStringOverride]
+     * SAMPLE: [org.kotools.types.EmailAddressSample.toStringOverride]
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.text
@@ -57,7 +57,7 @@ public class EmailAddress private constructor(private val text: String) {
          * returns `null` if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.Companion.default].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullString]
+         * SAMPLE: [org.kotools.types.EmailAddressSample.orNullString]
          *
          * See the [orThrow] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
@@ -72,7 +72,7 @@ public class EmailAddress private constructor(private val text: String) {
          * Returns an email address from the specified [text], or returns `null`
          * if the [text] doesn't match the specified [regex].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullStringEmailAddressRegex]
+         * SAMPLE: [org.kotools.types.EmailAddressSample.orNullStringEmailAddressRegex]
          *
          * See the [orThrow] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
@@ -88,7 +88,7 @@ public class EmailAddress private constructor(private val text: String) {
          * throws an [IllegalArgumentException] if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.default].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowString]
+         * SAMPLE: [org.kotools.types.EmailAddressSample.orThrowString]
          *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text].
@@ -104,7 +104,7 @@ public class EmailAddress private constructor(private val text: String) {
          * [IllegalArgumentException] if the [text] doesn't match the specified
          * [regex].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowStringEmailAddressRegex]
+         * SAMPLE: [org.kotools.types.EmailAddressSample.orThrowStringEmailAddressRegex]
          *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text].
