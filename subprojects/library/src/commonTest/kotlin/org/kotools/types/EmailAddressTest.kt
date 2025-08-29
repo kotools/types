@@ -5,6 +5,7 @@ import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -154,9 +155,15 @@ class EmailAddressCompanionTest {
     fun orThrowStringShouldFailWithWhitespacesInDomainSecondLabel(): Unit = this
         .orThrowStringShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
 
-    private fun orThrowStringShouldFailWith(text: String): Unit =
-        assertThrowsIllegalArgumentException { EmailAddress.orThrow(text) }
-            .assertEquals { ExceptionMessage.invalidEmailAddress(text) }
+    private fun orThrowStringShouldFailWith(text: String) {
+        val exception: IllegalArgumentException = assertFailsWith {
+            EmailAddress.orThrow(text)
+        }
+        val actual: ExceptionMessage = ExceptionMessage.from(exception)
+        val expected: ExceptionMessage =
+            ExceptionMessage.invalidEmailAddress(text)
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun orThrowStringEmailAddressRegexShouldPassWithValidText() {
@@ -169,8 +176,12 @@ class EmailAddressCompanionTest {
     fun orThrowStringEmailAddressRegexShouldFailWithInvalidText() {
         val text = "invalid-contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        assertThrowsIllegalArgumentException {
+        val exception: IllegalArgumentException = assertFailsWith {
             EmailAddress.orThrow(text, regex)
-        }.assertEquals { ExceptionMessage.invalidEmailAddress(text) }
+        }
+        val actual: ExceptionMessage = ExceptionMessage.from(exception)
+        val expected: ExceptionMessage =
+            ExceptionMessage.invalidEmailAddress(text)
+        assertEquals(expected, actual)
     }
 }
