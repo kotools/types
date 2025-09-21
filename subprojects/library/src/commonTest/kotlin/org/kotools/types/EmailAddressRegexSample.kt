@@ -21,10 +21,7 @@ class EmailAddressRegexSample {
             .hashCode()
         val other: Int = EmailAddressRegex.default()
             .hashCode()
-        val result: Boolean = hashCode == other
-        val message = "Regular expressions with the same pattern have the " +
-                "same hash code value."
-        assertTrue(result, message)
+        assertEquals(hashCode, other)
     }
 
     @Test

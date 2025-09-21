@@ -51,13 +51,11 @@ class EmailAddressRegexTest {
     }
 
     @Test
-    fun hashCodeShouldPass() {
+    fun hashCodeUsesStringRepresentation() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
         val actual: Int = regex.hashCode()
         val expected: Int = hashCodeOf("$regex")
-        val message = simpleNameOf(regex::class)
-            .let { "Hash code of '$it' is calculated from its pattern." }
-        assertEquals(expected, actual, message)
+        assertEquals(expected, actual)
     }
 
     @Test
