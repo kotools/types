@@ -31,10 +31,7 @@ class EmailAddressRegexSample {
     fun matches() {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        val result: Boolean = regex.matches(text)
-        val message =
-            "'$text' matches the following regular expression: '$regex'."
-        assertTrue(result, message)
+        assertTrue(regex matches text)
     }
 
     @Test
