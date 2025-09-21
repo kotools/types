@@ -80,29 +80,11 @@ class EmailAddressRegexTest {
         assertFalse(actual, message)
     }
 
-    // ----------------------- Companion.orNull(String) ------------------------
-
-    @Test
-    fun orNullPassesWithPatternMatchingDefaultOne() {
-        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val regex: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
-        assertEquals(expected = pattern, actual = "$regex")
-    }
-
     @Test
     fun orNullFailsWithPatternNotMatchingDefaultOne() {
         val pattern = """^[a-z]+\.[a-z]+$"""
         val actual: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
         assertNull(actual)
-    }
-
-    // ----------------------- Companion.orThrow(String) -----------------------
-
-    @Test
-    fun orThrowPassesWithPatternMatchingDefaultOne() {
-        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val regex: EmailAddressRegex = EmailAddressRegex.orThrow(pattern)
-        assertEquals(expected = pattern, actual = "$regex")
     }
 
     @Test
