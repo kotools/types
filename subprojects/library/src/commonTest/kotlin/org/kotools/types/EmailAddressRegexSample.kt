@@ -11,8 +11,7 @@ class EmailAddressRegexSample {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
         val other: EmailAddressRegex = EmailAddressRegex.default()
         val result: Boolean = regex == other // or regex.equals(other)
-        val message = "Regular expressions with the same pattern are equal."
-        assertTrue(result, message)
+        assertTrue(result)
     }
 
     @Test
