@@ -42,8 +42,7 @@ class EmailAddressRegexSample {
     @Test
     fun default() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
-        val expected = """^\S+@\S+\.\S+$"""
-        assertEquals(expected, "$regex")
+        assertEquals(expected = """^\S+@\S+\.\S+$""", "$regex")
     }
 
     @Test
