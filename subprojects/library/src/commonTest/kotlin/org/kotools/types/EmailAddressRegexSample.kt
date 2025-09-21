@@ -33,10 +33,9 @@ class EmailAddressRegexSample {
 
     @Test
     fun toStringOverride() {
-        val pattern: String = EmailAddressRegex.default()
-            .toString()
-        val expected = """^\S+@\S+\.\S+$"""
-        assertEquals(expected, pattern)
+        val regex: EmailAddressRegex = EmailAddressRegex.default()
+        val result = "$regex" // or regex.toString()
+        assertEquals(expected = """^\S+@\S+\.\S+$""", result)
     }
 
     // ------------------------------- Companion -------------------------------
