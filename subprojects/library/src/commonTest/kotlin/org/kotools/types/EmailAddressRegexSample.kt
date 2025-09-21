@@ -62,8 +62,7 @@ class EmailAddressRegexSample {
     @Test
     fun alphabetic() {
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        val expected = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        assertEquals(expected, "$regex")
+        assertEquals(expected = """^[a-z]+@[a-z]+\.[a-z]+$""", "$regex")
     }
 
     @Test
