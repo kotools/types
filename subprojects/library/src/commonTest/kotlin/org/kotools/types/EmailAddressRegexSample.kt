@@ -2,7 +2,6 @@ package org.kotools.types
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -59,13 +58,14 @@ class EmailAddressRegexSample {
     fun orNull() {
         val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val regex: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
-        val message = "'$pattern' is valid for validating email addresses."
-        assertNotNull(regex, message)
+        assertEquals(expected = pattern, "$regex")
     }
 
     @Test
     fun orThrow() {
-        EmailAddressRegex.orThrow("""^[a-z]+@[a-z]+\.[a-z]+$""")
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        val regex: EmailAddressRegex = EmailAddressRegex.orThrow(pattern)
+        assertEquals(expected = pattern, "$regex")
     }
 
     @Test
