@@ -49,6 +49,8 @@ class EmailAddressRegexTest {
         assertFalse(regex matches text)
     }
 
+    // ------------------------------- Companion -------------------------------
+
     @Test
     fun orNullFailsWithPatternNotMatchingDefaultOne() {
         val pattern = """^[a-z]+\.[a-z]+$"""
