@@ -79,22 +79,34 @@ class EmailAddressRegexTest {
             "'$text' doesn't match the following regular expression: '$regex'."
         assertFalse(actual, message)
     }
-}
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class EmailAddressRegexCompanionTest {
+    // ----------------------- Companion.orNull(String) ------------------------
+
     @Test
-    fun orNullShouldFailWithInvalidPattern() {
-        val pattern = """^[a-z]+\.[a-z]+$"""
-        val actual: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
-        val message: String = ExceptionMessage
-            .invalidEmailAddressPattern(pattern)
-            .toString()
-        assertNull(actual, message)
+    fun orNullPassesWithPatternMatchingDefaultOne() {
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        val regex: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
+        assertEquals(expected = pattern, actual = "$regex")
     }
 
     @Test
-    fun orThrowShouldFailWithInvalidPattern() {
+    fun orNullFailsWithPatternNotMatchingDefaultOne() {
+        val pattern = """^[a-z]+\.[a-z]+$"""
+        val actual: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
+        assertNull(actual)
+    }
+
+    // ----------------------- Companion.orThrow(String) -----------------------
+
+    @Test
+    fun orThrowPassesWithPatternMatchingDefaultOne() {
+        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+        val regex: EmailAddressRegex = EmailAddressRegex.orThrow(pattern)
+        assertEquals(expected = pattern, actual = "$regex")
+    }
+
+    @Test
+    fun orThrowFailsWithPatternNotMatchingDefaultOne() {
         val pattern = """^[a-z]+\.[a-z]+$"""
         val exception: IllegalArgumentException = assertFailsWith {
             EmailAddressRegex.orThrow(pattern)
