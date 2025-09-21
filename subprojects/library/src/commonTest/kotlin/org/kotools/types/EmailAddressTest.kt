@@ -70,10 +70,9 @@ class EmailAddressTest {
         val actual: String = address.toString()
         assertEquals(expected = text, actual)
     }
-}
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class EmailAddressCompanionTest {
+    // ------------------------------- Companion -------------------------------
+
     @Test
     fun orNullStringShouldPassWithValidText() {
         val text: String = Values.VALID
