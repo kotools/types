@@ -41,6 +41,8 @@ All notable changes to this project will be documented in this file.
   `EmailAddress.Companion` **experimental** type ([#838]).
 - The `Zero` **experimental** type and all its serializers ([#844]). Use
   directly the `0` value instead.
+- Java support from `EmailAddress` and `EmailAddressRegex` **experimental**
+  types ([#849]).
 
 ---
 
@@ -52,6 +54,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#844]: https://github.com/kotools/types/issues/844
 [#845]: https://github.com/kotools/types/issues/845
 [#846]: https://github.com/kotools/types/issues/846
+[#849]: https://github.com/kotools/types/issues/849
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
