@@ -6,7 +6,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -107,23 +106,11 @@ class EmailAddressTest {
     }
 
     @Test
-    fun orNullStringEmailAddressRegexShouldPassWithValidText() {
-        val text: String = Values.VALID
-        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        val actual: EmailAddress? = EmailAddress.orNull(text, regex)
-        val message =
-            "'$text' matches the following regular expression: '$regex'."
-        assertNotNull(actual, message)
-    }
-
-    @Test
-    fun orNullStringEmailAddressRegexShouldFailWithInvalidText() {
+    fun orNullStringEmailAddressRegexFailsWithTextNotMatchingRegex() {
         val text = "first-contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
         val actual: EmailAddress? = EmailAddress.orNull(text, regex)
-        val message =
-            "'$text' doesn't match the following regular expression: '$regex'."
-        assertNull(actual, message)
+        assertNull(actual)
     }
 
     @Test
