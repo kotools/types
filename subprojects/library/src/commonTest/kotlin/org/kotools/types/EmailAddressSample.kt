@@ -2,7 +2,6 @@ package org.kotools.types
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -12,25 +11,26 @@ class EmailAddressSample {
         val text = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.orThrow(text)
         val second: EmailAddress = EmailAddress.orThrow(text)
-        val equality: Boolean = first == second // or first.equals(second)
-        assertTrue(equality)
+        val result: Boolean = first == second // or first.equals(second)
+        assertTrue(result)
     }
 
     @Test
     fun hashCodeOverride() {
         val text = "contact@kotools.org"
-        val first: EmailAddress = EmailAddress.orThrow(text)
-        val second: EmailAddress = EmailAddress.orThrow(text)
-        val equality: Boolean = first.hashCode() == second.hashCode()
-        assertTrue(equality)
+        val hashCode: Int = EmailAddress.orThrow(text)
+            .hashCode()
+        val other: Int = EmailAddress.orThrow(text)
+            .hashCode()
+        assertEquals(hashCode, other)
     }
 
     @Test
     fun toStringOverride() {
         val text = "contact@kotools.org"
-        val address: EmailAddress = EmailAddress.orThrow(text)
-        val actualText = "$address" // or address.toString()
-        assertEquals(expected = text, actualText)
+        val emailAddress: EmailAddress = EmailAddress.orThrow(text)
+        val result = "$emailAddress" // or emailAddress.toString()
+        assertEquals(expected = text, result)
     }
 
     // ------------------------------- Companion -------------------------------
@@ -47,21 +47,21 @@ class EmailAddressSample {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
         val emailAddress: EmailAddress? = EmailAddress.orNull(text, regex)
-        val message =
-            "'$text' matches the following regular expression: '$regex'."
-        assertNotNull(emailAddress, message)
+        assertEquals(expected = text, "$emailAddress")
     }
 
     @Test
     fun orThrowString() {
         val text = "contact@kotools.org"
-        EmailAddress.orThrow(text)
+        val emailAddress: EmailAddress = EmailAddress.orThrow(text)
+        assertEquals(expected = text, "$emailAddress")
     }
 
     @Test
     fun orThrowStringEmailAddressRegex() {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        EmailAddress.orThrow(text, regex)
+        val emailAddress: EmailAddress = EmailAddress.orThrow(text, regex)
+        assertEquals(expected = text, "$emailAddress")
     }
 }
