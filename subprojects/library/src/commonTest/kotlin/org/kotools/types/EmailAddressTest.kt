@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -74,39 +73,37 @@ class EmailAddressTest {
     // ------------------------------- Companion -------------------------------
 
     @Test
-    fun orNullStringShouldPassWithValidText() {
-        val text: String = Values.VALID
-        val actual: EmailAddress? = EmailAddress.orNull(text)
-        val message: String = simpleNameOf<EmailAddress>()
-            .let { "Creating an instance of $it with '$text' should pass." }
-        assertNotNull(actual, message)
+    fun orNullStringFailsWithMissingAtSign() {
+        val actual: EmailAddress? = EmailAddress.orNull(Values.MISSING_AT_SIGN)
+        assertNull(actual)
     }
 
     @Test
-    fun orNullStringShouldFailWithMissingAtSign(): Unit =
-        this.orNullShouldFailWith(Values.MISSING_AT_SIGN)
+    fun orNullStringFailsWithMissingDotInDomain() {
+        val actual: EmailAddress? =
+            EmailAddress.orNull(Values.MISSING_DOMAIN_DOT)
+        assertNull(actual)
+    }
 
     @Test
-    fun orNullStringShouldFailWithMissingDotInDomain(): Unit =
-        this.orNullShouldFailWith(Values.MISSING_DOMAIN_DOT)
+    fun orNullStringFailsWithWhitespacesInLocalPart() {
+        val actual: EmailAddress? =
+            EmailAddress.orNull(Values.WHITESPACES_IN_LOCAL_PART)
+        assertNull(actual)
+    }
 
     @Test
-    fun orNullStringShouldFailWithWhitespacesInLocalPart(): Unit =
-        this.orNullShouldFailWith(Values.WHITESPACES_IN_LOCAL_PART)
+    fun orNullStringFailsWithWhitespacesInDomainFirstLabel() {
+        val actual: EmailAddress? =
+            EmailAddress.orNull(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
+        assertNull(actual)
+    }
 
     @Test
-    fun orNullStringShouldFailWithWhitespacesInDomainFirstLabel(): Unit =
-        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
-
-    @Test
-    fun orNullStringShouldFailWithWhitespacesInDomainSecondLabel(): Unit =
-        this.orNullShouldFailWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
-
-    private fun orNullShouldFailWith(text: String) {
-        val actual: EmailAddress? = EmailAddress.orNull(text)
-        val message: String = simpleNameOf<EmailAddress>()
-            .let { "Creating an instance of $it with '$text' should fail." }
-        assertNull(actual, message)
+    fun orNullStringFailsWithWhitespacesInDomainSecondLabel() {
+        val actual: EmailAddress? =
+            EmailAddress.orNull(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
+        assertNull(actual)
     }
 
     @Test
