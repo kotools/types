@@ -39,7 +39,7 @@ class EmailAddressSample {
     fun orNullString() {
         val text = "contact@kotools.org"
         val emailAddress: EmailAddress? = EmailAddress.orNull(text)
-        assertNotNull(emailAddress)
+        assertEquals(expected = text, "$emailAddress")
     }
 
     @Test
