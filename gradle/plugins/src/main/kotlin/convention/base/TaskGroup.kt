@@ -2,6 +2,9 @@ package convention.base
 
 /** Represents a Gradle task group. */
 internal enum class TaskGroup {
+    /** The `documentation` Gradle task group. */
+    Documentation,
+
     /** The `module` Gradle task group. */
     Module,
 

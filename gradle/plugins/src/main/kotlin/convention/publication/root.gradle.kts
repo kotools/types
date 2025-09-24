@@ -21,6 +21,7 @@ private val archiveParentDirectory: Directory =
 private val archiveApiReference: TaskProvider<Copy> by tasks
     .registering(Copy::class) {
         description = "Archives the API reference in the project directory."
+        group = TaskGroup.Documentation.toString()
         from(apiReferenceBuildDirectory) { exclude("older/**") }
         into(archiveParentDirectory.dir("archive/${project.version}"))
         dependsOn += dokkaHtmlMultiModule
@@ -29,6 +30,7 @@ private val archiveApiReference: TaskProvider<Copy> by tasks
 private val setCurrentApiReference: TaskProvider<Copy> by tasks
     .registering(Copy::class) {
         description = "Sets the current API reference in the project directory."
+        group = TaskGroup.Documentation.toString()
         from(apiReferenceBuildDirectory)
         into(archiveParentDirectory.dir("current"))
         dependsOn += dokkaHtmlMultiModule
