@@ -1,27 +1,16 @@
-// ------------------------------- All projects --------------------------------
-
 allprojects {
     this.group = "org.kotools"
     this.repositories.mavenCentral()
 }
 
-// ---------------------------------- Plugins ----------------------------------
-
 plugins {
-    this.alias(libs.plugins.kotlin.multiplatform) apply false
-    this.alias(libs.plugins.dokka)
-    this.alias(libs.plugins.kotools.types.documentation)
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.convention.documentation.root)
 }
-
-// ----------------------------- Plugin extensions -----------------------------
 
 documentation.moduleName = "Kotools Types"
 
-// ------------------------------- Dependencies --------------------------------
-
 dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
-
-// ----------------------------------- Tasks -----------------------------------
 
 tasks.register("checkAll").configure {
     this.description = "Checks all projects."

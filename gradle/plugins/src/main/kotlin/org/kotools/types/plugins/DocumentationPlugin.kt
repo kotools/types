@@ -37,6 +37,7 @@ public class DocumentationPlugin : Plugin<Project> {
                 }
             dokkaHtmlMultiModule.configure { dependsOn += cleanApiReference }
             apiReference.configure { dependsOn += dokkaHtmlMultiModule }
+            // The code below should be in the Publication Root Plugin.
             if (project.hasSnapshotVersion()) return
             val archiveApiReference: TaskProvider<Copy> =
                 tasks.archiveApiReference(extension)
