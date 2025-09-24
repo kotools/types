@@ -13,13 +13,6 @@ documentation.moduleName = "Kotools Types"
 
 dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
 
-tasks.register("checkAll").configure {
-    this.description = "Checks all projects."
-    this.group = "verification"
-    this.project.subprojects.mapNotNull { it?.tasks?.findByName("check") }
-        .let(this::setDependsOn)
-}
-
 tasks.register<Exec>("tag").configure {
     this.description = "Creates a Git annotated tag for the current version."
     this.group = "release"
