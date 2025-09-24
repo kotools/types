@@ -5,6 +5,7 @@ kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.7.3!!"
 
 [plugins]
+convention-base-module = { id = "convention.base.module" }
 convention-documentation-module = { id = "convention.documentation.module" }
 convention-documentation-root = { id = "convention.documentation.root" }
 convention-publication-root = { id = "convention.publication.root" }

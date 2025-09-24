@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.convention.base.module)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     `maven-publish`
