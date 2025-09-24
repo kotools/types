@@ -51,6 +51,12 @@ private val apiReference: TaskProvider<Task> by tasks.registering {
     group = "documentation"
 }
 
+private val apiReferenceJar: TaskProvider<Jar> by tasks
+    .registering(Jar::class) {
+        description = "Archives the API reference in a JAR file."
+        group = "documentation"
+    }
+
 // ----------------------------- Dokka integration -----------------------------
 
 pluginManager.apply(DokkaPlugin::class)
@@ -70,7 +76,30 @@ tasks.withType<DokkaTask>().configureEach {
     }
 }
 
-tasks.withType<DokkaTaskPartial>()
-    .configureEach { group = "" }
+tasks.withType<DokkaTaskPartial>().configureEach {
+    group = ""
+    onlyIf { !extension.excludeFromParentApiReference.get() }
+    dokkaSourceSets.configureEach {
+        extension.packages.orNull?.let { includes.setFrom(it) }
+    }
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        footerMessage = copyrightNotice
+    }
+}
 
-apiReference.configure { dependsOn += tasks.named<DokkaTask>("dokkaHtml") }
+private val dokkaHtml: TaskProvider<DokkaTask> =
+    tasks.named<DokkaTask>("dokkaHtml")
+
+apiReference.configure { dependsOn += dokkaHtml }
+
+apiReferenceJar.configure {
+    from(dokkaHtml)
+    archiveClassifier.set("javadoc")
+}
+
+// ---------------------- Gradle Base Plugin integration -----------------------
+
+pluginManager.apply(BasePlugin::class)
+
+tasks.named(BasePlugin.ASSEMBLE_TASK_NAME)
+    .configure { dependsOn += apiReferenceJar }
