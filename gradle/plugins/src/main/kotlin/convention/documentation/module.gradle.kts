@@ -1,4 +1,4 @@
-package org.kotools.types.documentation
+package convention.documentation
 
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration

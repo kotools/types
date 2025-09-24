@@ -5,13 +5,13 @@ kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.7.3!!"
 
 [plugins]
+convention-documentation-module = { id = "convention.documentation.module" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 kotools-types-documentation = { id = "org.kotools.types.documentation" }
-kotools-types-documentation-module = { id = "org.kotools.types.documentation.module" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 kotools-types-publication = { id = "kotools.types.publication" }
 
