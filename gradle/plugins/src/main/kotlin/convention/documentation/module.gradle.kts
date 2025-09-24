@@ -2,6 +2,7 @@ package convention.documentation
 
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
+import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
@@ -18,6 +19,12 @@ public interface DocumentationModuleExtension {
      * project. Set to `false` by default.
      */
     public val excludeFromParentApiReference: Property<Boolean>
+
+    /**
+     * Links to use for resolving this project's dependencies in the
+     * documentation.
+     */
+    public val externalLinks: ListProperty<String>
 
     /** The file containing module and package documentation. */
     public val packages: Property<File>
@@ -61,14 +68,15 @@ private val apiReferenceJar: TaskProvider<Jar> by tasks
 
 pluginManager.apply(DokkaPlugin::class)
 
-tasks.withType<DokkaTask>().configureEach {
+tasks.withType<AbstractDokkaLeafTask>().configureEach {
     group = ""
     failOnWarning.set(true)
-    outputDirectory.set(buildDirectory)
     dokkaSourceSets.configureEach {
         extension.packages.orNull?.let { includes.setFrom(it) }
         reportUndocumented.set(true)
         skipEmptyPackages.set(true)
+        extension.externalLinks.orNull?.filterNotNull()
+            ?.forEach { externalDocumentationLink(it) }
     }
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
         customAssets = listOf(logoIcon)
@@ -76,15 +84,11 @@ tasks.withType<DokkaTask>().configureEach {
     }
 }
 
+tasks.withType<DokkaTask>()
+    .configureEach { outputDirectory.set(buildDirectory) }
+
 tasks.withType<DokkaTaskPartial>().configureEach {
-    group = ""
     onlyIf { !extension.excludeFromParentApiReference.get() }
-    dokkaSourceSets.configureEach {
-        extension.packages.orNull?.let { includes.setFrom(it) }
-    }
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        footerMessage = copyrightNotice
-    }
 }
 
 private val dokkaHtml: TaskProvider<DokkaTask> =
