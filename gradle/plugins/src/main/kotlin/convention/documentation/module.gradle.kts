@@ -1,5 +1,6 @@
 package convention.documentation
 
+import convention.base.TaskGroup
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
@@ -7,48 +8,14 @@ import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
-// ----------------------------- Plugin extension ------------------------------
+pluginManager.apply(BasePlugin::class)
+pluginManager.apply(DokkaPlugin::class)
 
 private val extension: DocumentationModuleExtension =
     extensions.create("documentation")
-
 extension.excludeFromParentApiReference.convention(false)
 
-// ----------------------------- Script properties -----------------------------
-
-private val buildDirectory: Provider<Directory> =
-    layout.buildDirectory.dir("api-reference")
-
-private val copyrightNotice: String = rootProject.layout.projectDirectory
-    .file("LICENSE.txt")
-    .asFile
-    .useLines { lines: Sequence<String> ->
-        lines.first { it.startsWith("Copyright (c)") }
-    }
-
-private val logoIcon: File = rootProject.layout.projectDirectory
-    .file("documentation/api-reference/logo-icon.svg")
-    .asFile
-
-// ----------------------------------- Tasks -----------------------------------
-
-private val apiReference: TaskProvider<Task> by tasks.registering {
-    description = "Generates the API reference for this project."
-    group = "documentation"
-}
-
-private val apiReferenceJar: TaskProvider<Jar> by tasks
-    .registering(Jar::class) {
-        description = "Archives the API reference in a JAR file."
-        group = "documentation"
-    }
-
-// ----------------------------- Dokka integration -----------------------------
-
-pluginManager.apply(DokkaPlugin::class)
-
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
-    group = ""
     failOnWarning.set(true)
     dokkaSourceSets.configureEach {
         extension.packages.orNull?.let { includes.setFrom(it) }
@@ -58,13 +25,22 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
             ?.forEach { externalDocumentationLink(it) }
     }
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        customAssets = listOf(logoIcon)
-        footerMessage = copyrightNotice
+        customAssets = rootProject.layout.projectDirectory
+            .file("documentation/api-reference/logo-icon.svg")
+            .asFile
+            .let(::listOf)
+        footerMessage = rootProject.layout.projectDirectory
+            .file("LICENSE.txt")
+            .asFile
+            .useLines { lines: Sequence<String> ->
+                lines.first { it.startsWith("Copyright (c)") }
+            }
     }
 }
 
-tasks.withType<DokkaTask>()
-    .configureEach { outputDirectory.set(buildDirectory) }
+tasks.withType<DokkaTask>().configureEach {
+    outputDirectory.set(layout.buildDirectory.dir("api-reference"))
+}
 
 tasks.withType<DokkaTaskPartial>().configureEach {
     onlyIf { !extension.excludeFromParentApiReference.get() }
@@ -73,16 +49,20 @@ tasks.withType<DokkaTaskPartial>().configureEach {
 private val dokkaHtml: TaskProvider<DokkaTask> =
     tasks.named<DokkaTask>("dokkaHtml")
 
-apiReference.configure { dependsOn += dokkaHtml }
-
-apiReferenceJar.configure {
-    from(dokkaHtml)
-    archiveClassifier.set("javadoc")
+private val apiReference: TaskProvider<Task> by tasks.registering
+apiReference.configure {
+    description = "Generates the API reference."
+    group = TaskGroup.Module.toString()
+    dependsOn += dokkaHtml
 }
 
-// ---------------------- Gradle Base Plugin integration -----------------------
-
-pluginManager.apply(BasePlugin::class)
+private val apiReferenceJar: TaskProvider<Jar> by tasks
+    .registering(Jar::class) {
+        description = "Archives the API reference in a JAR file."
+        group = TaskGroup.Documentation.toString()
+        from(dokkaHtml)
+        archiveClassifier.set("javadoc")
+    }
 
 tasks.named(BasePlugin.ASSEMBLE_TASK_NAME)
     .configure { dependsOn += apiReferenceJar }
