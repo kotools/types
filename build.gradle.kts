@@ -12,13 +12,3 @@ plugins {
 documentation.moduleName = "Kotools Types"
 
 dependencies.dokkaHtmlMultiModulePlugin(libs.dokka.versioning)
-
-tasks.register<Exec>("tag").configure {
-    this.description = "Creates a Git annotated tag for the current version."
-    this.group = "release"
-    val gitmoji = "\uD83D\uDD16"
-    val moduleName: String = documentation.moduleName.get()
-    val version: String = this.project.version.toString()
-    val tagMessage = "$gitmoji $moduleName $version"
-    this.setCommandLine("git", "tag", version, "-s", "-m", tagMessage)
-}
