@@ -11,7 +11,7 @@ import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 /**
  * The extension responsible for configuring the
- * `org.kotools.types.documentation.module` Gradle plugin.
+ * `convention.documentation.module` Gradle plugin.
  */
 public interface DocumentationModuleExtension {
     /**
