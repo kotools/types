@@ -1,13 +1,7 @@
 package convention.publication
 
 import convention.base.TaskGroup
-import convention.documentation.DocumentationRootExtension
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-import convention.documentation.RootPlugin as DocumentationRootPlugin
-
-pluginManager.apply(DocumentationRootPlugin::class)
-
-private val documentation: DocumentationRootExtension = extensions.getByType()
 
 private val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
     tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule")
@@ -48,7 +42,7 @@ tag.configure {
     description = "Creates a Git annotated tag for the current version."
     group = TaskGroup.Root.toString()
     val gitmoji = "\uD83D\uDD16"
-    val moduleName: String = documentation.moduleName.get()
+    val moduleName = "Kotools Types"
     val version = "$version"
     val tagMessage = "$gitmoji $moduleName $version"
     this.setCommandLine("git", "tag", version, "-s", "-m", tagMessage)
