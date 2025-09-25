@@ -20,4 +20,16 @@ class PositiveIntegerSample {
         val integer: PositiveInteger? = PositiveInteger.orNull(text)
         assertNotNull(integer)
     }
+
+    @Test
+    fun orThrowString() {
+        val text: String = Int.MAX_VALUE.toString()
+        PositiveInteger.orThrow(text)
+    }
+
+    @Test
+    fun orThrowStringSigned() {
+        val text: String = '+' + Int.MAX_VALUE.toString()
+        PositiveInteger.orThrow(text)
+    }
 }
