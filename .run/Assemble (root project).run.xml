@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="API reference" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="Assemble (root project)" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":apiReference" />
+          <option value=":assemble" />
         </list>
       </option>
       <option name="vmOptions" />

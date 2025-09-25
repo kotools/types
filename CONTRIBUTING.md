@@ -87,7 +87,7 @@ Here's the list of recommended configurations for running tests:
 
 ### Serving the API reference
 
-You can also generate the API reference by running the `API reference`
+You can also generate the API reference by running the `Assemble (root project)`
 configuration.
 
 For serving the documentation locally, right-click on the
