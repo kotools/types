@@ -15,6 +15,11 @@ gradlePlugin {
             this.id = "$prefix.base.root"
             this.implementationClass = "$prefix.gradle.${this.name}Plugin"
         }
+        register("DocumentationRoot").configure {
+            val prefix = "org.kotools.types"
+            this.id = "$prefix.documentation.root"
+            this.implementationClass = "$prefix.gradle.${this.name}Plugin"
+        }
         register("KotlinMultiplatform").configure {
             val prefix = "org.kotools.types"
             this.id = "$prefix.kotlin.multiplatform"
