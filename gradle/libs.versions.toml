@@ -2,7 +2,7 @@
 dokka = "1.9.20!!"
 kotlin = "2.0.21!!"
 kotlinx-binary-compatibility-validator = "0.16.3!!"
-kotlinx-serialization = "1.7.3!!"
+kotlinx-serialization = "1.6.3!!"
 
 [plugins]
 convention-base-module = { id = "convention.base.module" }
