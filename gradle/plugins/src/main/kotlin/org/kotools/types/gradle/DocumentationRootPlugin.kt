@@ -1,0 +1,72 @@
+package org.kotools.types.gradle
+
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.plugins.BasePlugin
+import org.gradle.api.tasks.TaskCollection
+import org.gradle.api.tasks.TaskProvider
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.dokka.versioning.VersioningConfiguration
+import org.jetbrains.dokka.versioning.VersioningPlugin
+
+/**
+ * Gradle convention plugin that configures the documentation of a root project.
+ */
+public class DocumentationRootPlugin : Plugin<Project> {
+    /** Applies this plugin to the specified [project]. */
+    override fun apply(project: Project): Unit =
+        project.pluginManager.withPlugin("org.jetbrains.dokka") {
+            val dokkaMultiModuleTasks: TaskCollection<DokkaMultiModuleTask> =
+                project.dokkaMultiModuleTasks()
+            project.onBasePlugin(dokkaMultiModuleTasks)
+        }
+}
+
+private fun Project.dokkaMultiModuleTasks():
+        TaskCollection<DokkaMultiModuleTask> {
+    val dokkaMultiModuleTasks: TaskCollection<DokkaMultiModuleTask> =
+        this.tasks.withType<DokkaMultiModuleTask>()
+    dokkaMultiModuleTasks.configureEach {
+        this.moduleName.set("Kotools Types")
+        this@dokkaMultiModuleTasks.layout.buildDirectory.dir("api-reference")
+            .let(this.outputDirectory::set)
+        this.dokkaBasePlugin(project = this@dokkaMultiModuleTasks)
+        this.dokkaVersioningPlugin(this@dokkaMultiModuleTasks)
+    }
+    return dokkaMultiModuleTasks
+}
+
+private fun DokkaMultiModuleTask.dokkaBasePlugin(project: Project): Unit =
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        this.customAssets = project.rootProject.layout.projectDirectory
+            .file("documentation/api-reference/logo-icon.svg")
+            .asFile
+            .let(::listOf)
+        this.footerMessage = project.rootProject.layout.projectDirectory
+            .file("LICENSE.txt")
+            .asFile
+            .useLines { lines: Sequence<String> ->
+                lines.first { it.startsWith("Copyright (c)") }
+            }
+    }
+
+private fun DokkaMultiModuleTask.dokkaVersioningPlugin(project: Project): Unit =
+    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+        this.version = project.version.toString()
+        this.olderVersionsDir = project.layout.projectDirectory
+            .dir("documentation/api-reference/archive")
+            .asFile
+        this.renderVersionsNavigationOnAllPages = false
+    }
+
+private fun Project.onBasePlugin(
+    dokkaMultiModuleTasks: TaskCollection<DokkaMultiModuleTask>
+): Unit = this.pluginManager.withPlugin("base") {
+    val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
+        dokkaMultiModuleTasks.named("dokkaHtmlMultiModule")
+    this@onBasePlugin.tasks.named(BasePlugin.ASSEMBLE_TASK_NAME)
+        .configure { this.dependsOn(dokkaHtmlMultiModule) }
+}
