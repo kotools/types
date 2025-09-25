@@ -83,11 +83,9 @@ internal class KotlinMultiplatformExtensionManager(
         kotlin: KotlinMultiplatformExtension
     ): Unit = kotlin.targets.configureEach {
         this.compilations.configureEach {
-            this.compileTaskProvider.configure {
-                this.compilerOptions {
-                    this.allWarningsAsErrors.set(true)
-                    this.languageVersion.set(KotlinVersion.KOTLIN_1_9)
-                }
+            this.compilerOptions.configure {
+                this.allWarningsAsErrors.set(true)
+                this.languageVersion.set(KotlinVersion.KOTLIN_1_9)
             }
         }
     }

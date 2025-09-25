@@ -16,7 +16,6 @@ build/
 ################################ Java & Kotlin #################################
 
 # Directories
-.kotlin/
 .mtj.tmp/
 target/
 
