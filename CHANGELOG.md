@@ -16,6 +16,13 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- The `PositiveInteger` **experimental** type, in the `types` module, for
+  representing an integer that is greater than zero. Contrarily to the integer
+  types provided by Kotlin (`Byte`, `Short`, `Int` and `Long`), this type has no
+  maximum value and can hold greater values than `Long.MAX_VALUE`.
+
 ### ♻️ Changed
 
 - The [declarations lifecycle](documentation/declarations-lifecycle.md)
