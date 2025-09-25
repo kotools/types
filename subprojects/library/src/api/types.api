@@ -363,5 +363,6 @@ public final class org/kotools/types/PositiveInteger {
 }
 
 public final class org/kotools/types/PositiveInteger$Companion {
+	public final fun orNull (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;
 }
 

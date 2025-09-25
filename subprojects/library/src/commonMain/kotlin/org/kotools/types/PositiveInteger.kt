@@ -18,5 +18,23 @@ import org.kotools.types.internal.KotoolsTypesVersion
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
 public class PositiveInteger private constructor() {
     /** Contains static declarations for the [PositiveInteger] type. */
-    public companion object
+    public companion object {
+        /**
+         * Returns a positive integer from the specified [text], or returns
+         * `null` if the [text] doesn't represent an integer that is greater
+         * than zero.
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerSample.orNullString]
+         *
+         * The integer represented by the [text] parameter may start with a plus
+         * sign (`+`).
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerSample.orNullStringSigned]
+         */
+        public fun orNull(text: String): PositiveInteger? {
+            val number: String = text.removePrefix("+")
+            val regex = Regex("""^[1-9]\d*$""")
+            return if (number matches regex) PositiveInteger() else null
+        }
+    }
 }
