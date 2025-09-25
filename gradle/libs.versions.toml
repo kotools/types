@@ -6,7 +6,6 @@ kotlinx-serialization = "1.6.3!!"
 
 [plugins]
 convention-base-module = { id = "convention.base.module" }
-convention-base-root = { id = "convention.base.root" }
 convention-documentation-module = { id = "convention.documentation.module" }
 convention-documentation-root = { id = "convention.documentation.root" }
 convention-publication-root = { id = "convention.publication.root" }
