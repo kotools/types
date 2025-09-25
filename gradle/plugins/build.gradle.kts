@@ -10,6 +10,11 @@ repositories.mavenCentral()
 
 gradlePlugin {
     plugins {
+        register("BaseRoot").configure {
+            val prefix = "org.kotools.types"
+            this.id = "$prefix.base.root"
+            this.implementationClass = "$prefix.gradle.${this.name}Plugin"
+        }
         register("KotlinMultiplatform").configure {
             val prefix = "org.kotools.types"
             this.id = "$prefix.kotlin.multiplatform"
