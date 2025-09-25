@@ -8,6 +8,6 @@ tasks.named<TaskReportTask>("tasks").configure {
     displayGroup = TaskGroup.Root.toString()
 }
 
-tasks.named(BasePlugin.CLEAN_TASK_NAME).configure {
+tasks.named(BasePlugin.ASSEMBLE_TASK_NAME).configure {
     group = TaskGroup.Root.toString()
 }
