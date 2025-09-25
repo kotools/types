@@ -20,53 +20,39 @@ public class DocumentationRootPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit =
         project.pluginManager.withPlugin("org.jetbrains.dokka") {
             val dokkaMultiModuleTasks: TaskCollection<DokkaMultiModuleTask> =
-                project.dokkaMultiModuleTasks()
-            project.onBasePlugin(dokkaMultiModuleTasks)
-        }
-}
-
-private fun Project.dokkaMultiModuleTasks():
-        TaskCollection<DokkaMultiModuleTask> {
-    val dokkaMultiModuleTasks: TaskCollection<DokkaMultiModuleTask> =
-        this.tasks.withType<DokkaMultiModuleTask>()
-    dokkaMultiModuleTasks.configureEach {
-        this.moduleName.set("Kotools Types")
-        this@dokkaMultiModuleTasks.layout.buildDirectory.dir("api-reference")
-            .let(this.outputDirectory::set)
-        this.dokkaBasePlugin(project = this@dokkaMultiModuleTasks)
-        this.dokkaVersioningPlugin(this@dokkaMultiModuleTasks)
-    }
-    return dokkaMultiModuleTasks
-}
-
-private fun DokkaMultiModuleTask.dokkaBasePlugin(project: Project): Unit =
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        this.customAssets = project.rootProject.layout.projectDirectory
-            .file("documentation/api-reference/logo-icon.svg")
-            .asFile
-            .let(::listOf)
-        this.footerMessage = project.rootProject.layout.projectDirectory
-            .file("LICENSE.txt")
-            .asFile
-            .useLines { lines: Sequence<String> ->
-                lines.first { it.startsWith("Copyright (c)") }
+                project.tasks.withType<DokkaMultiModuleTask>()
+            dokkaMultiModuleTasks.configureEach {
+                this.moduleName.set("Kotools Types")
+                this.outputDirectory.set(
+                    project.layout.buildDirectory.dir("api-reference")
+                )
+                this.pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+                    this.customAssets = project.rootProject.layout
+                        .projectDirectory
+                        .file("documentation/api-reference/logo-icon.svg")
+                        .asFile
+                        .let(::listOf)
+                    this.footerMessage = project.rootProject.layout
+                        .projectDirectory
+                        .file("LICENSE.txt")
+                        .asFile
+                        .useLines { lines: Sequence<String> ->
+                            lines.first { it.startsWith("Copyright (c)") }
+                        }
+                }
+                pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+                    this.version = project.version.toString()
+                    this.olderVersionsDir = project.layout.projectDirectory
+                        .dir("documentation/api-reference/archive")
+                        .asFile
+                    this.renderVersionsNavigationOnAllPages = false
+                }
             }
-    }
-
-private fun DokkaMultiModuleTask.dokkaVersioningPlugin(project: Project): Unit =
-    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-        this.version = project.version.toString()
-        this.olderVersionsDir = project.layout.projectDirectory
-            .dir("documentation/api-reference/archive")
-            .asFile
-        this.renderVersionsNavigationOnAllPages = false
-    }
-
-private fun Project.onBasePlugin(
-    dokkaMultiModuleTasks: TaskCollection<DokkaMultiModuleTask>
-): Unit = this.pluginManager.withPlugin("base") {
-    val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
-        dokkaMultiModuleTasks.named("dokkaHtmlMultiModule")
-    this@onBasePlugin.tasks.named(BasePlugin.ASSEMBLE_TASK_NAME)
-        .configure { this.dependsOn(dokkaHtmlMultiModule) }
+            val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
+                dokkaMultiModuleTasks.named("dokkaHtmlMultiModule")
+            project.pluginManager.withPlugin("base") {
+                project.tasks.named(BasePlugin.ASSEMBLE_TASK_NAME)
+                    .configure { this.dependsOn(dokkaHtmlMultiModule) }
+            }
+        }
 }
