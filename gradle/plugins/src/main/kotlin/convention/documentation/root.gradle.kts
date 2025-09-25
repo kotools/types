@@ -6,9 +6,7 @@ import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
-import convention.base.RootPlugin as BaseRootPlugin
 
-pluginManager.apply(BaseRootPlugin::class)
 pluginManager.apply(DokkaPlugin::class)
 
 private val extension: DocumentationRootExtension =
@@ -40,6 +38,7 @@ tasks.withType<DokkaMultiModuleTask>().configureEach {
 private val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
     tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule")
 
-tasks.named(BasePlugin.ASSEMBLE_TASK_NAME).configure {
-    dependsOn += dokkaHtmlMultiModule
+pluginManager.withPlugin("base") {
+    tasks.named(BasePlugin.ASSEMBLE_TASK_NAME)
+        .configure { dependsOn(dokkaHtmlMultiModule) }
 }
