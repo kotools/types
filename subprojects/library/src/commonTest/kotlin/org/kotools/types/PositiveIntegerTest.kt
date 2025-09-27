@@ -9,6 +9,31 @@ import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerTest {
+    // ------------------------ Companion.orNull(Byte) -------------------------
+
+    @Test
+    fun orNullPassesWithByteGreaterThanZero() {
+        val number: Byte = (1..Byte.MAX_VALUE).random()
+            .toByte()
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNullFailsWithByteThatEqualsZero() {
+        val number: Byte = 0
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
+    fun orNullFailsWithByteLessThanZero() {
+        val number: Byte = (Byte.MIN_VALUE..-1).random()
+            .toByte()
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        assertNull(actual)
+    }
+
     // ----------------------- Companion.orNull(String) ------------------------
 
     @Test

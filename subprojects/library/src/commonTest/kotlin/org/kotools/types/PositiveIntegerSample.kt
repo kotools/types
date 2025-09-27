@@ -8,6 +8,12 @@ class PositiveIntegerSample {
     // ------------------------------- Companion -------------------------------
 
     @Test
+    fun orNullByte() {
+        val integer: PositiveInteger? = PositiveInteger.orNull(Byte.MAX_VALUE)
+        assertNotNull(integer)
+    }
+
+    @Test
     fun orNullString() {
         val text: String = Byte.MAX_VALUE.toString()
         val integer: PositiveInteger? = PositiveInteger.orNull(text)
