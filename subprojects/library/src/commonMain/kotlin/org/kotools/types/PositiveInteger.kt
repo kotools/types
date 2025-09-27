@@ -37,6 +37,9 @@ public class PositiveInteger private constructor() {
          * `null` if the [number] is less than or equal to zero.
          *
          * SAMPLE: [org.kotools.types.PositiveIntegerSample.orNullShort]
+         *
+         * See the [orThrow] method for throwing an exception instead of
+         * returning `null` in case of invalid [number].
          */
         public fun orNull(number: Short): PositiveInteger? =
             if (number <= 0) null else PositiveInteger()
@@ -73,6 +76,21 @@ public class PositiveInteger private constructor() {
          * exception in case of invalid [number].
          */
         public fun orThrow(number: Byte): PositiveInteger {
+            require(number > 0) { ExceptionMessage.nonPositive(number) }
+            return PositiveInteger()
+        }
+
+        /**
+         * Returns a positive integer from the specified [number], or throws an
+         * [IllegalArgumentException] if the [number] is less than or equal to
+         * zero.
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerSample.orThrowShort]
+         *
+         * See the [orNull] method for returning `null` instead of throwing an
+         * exception in case of invalid [number].
+         */
+        public fun orThrow(number: Short): PositiveInteger {
             require(number > 0) { ExceptionMessage.nonPositive(number) }
             return PositiveInteger()
         }

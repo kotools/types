@@ -125,6 +125,38 @@ class PositiveIntegerTest {
         assertEquals(expected, actual)
     }
 
+    // ----------------------- Companion.orThrow(Short) ------------------------
+
+    @Test
+    fun orThrowPassesWithShortGreaterThanZero() {
+        val number: Short = (1..Short.MAX_VALUE).random()
+            .toShort()
+        PositiveInteger.orThrow(number)
+    }
+
+    @Test
+    fun orThrowFailsWithShortThatEqualsZero() {
+        val number: Short = 0
+        val throwable: IllegalArgumentException = assertFailsWith {
+            PositiveInteger.orThrow(number)
+        }
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
+        val expected: ExceptionMessage = ExceptionMessage.nonPositive(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun orThrowFailsWithShortLessThanZero() {
+        val number: Short = (Short.MIN_VALUE..-1).random()
+            .toShort()
+        val throwable: IllegalArgumentException = assertFailsWith {
+            PositiveInteger.orThrow(number)
+        }
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
+        val expected: ExceptionMessage = ExceptionMessage.nonPositive(number)
+        assertEquals(expected, actual)
+    }
+
     // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test
