@@ -68,6 +68,38 @@ class PositiveIntegerTest {
         assertNull(actual)
     }
 
+    // ------------------------ Companion.orThrow(Byte) ------------------------
+
+    @Test
+    fun orThrowPassesWithByteGreaterThanZero() {
+        val number: Byte = (1..Byte.MAX_VALUE).random()
+            .toByte()
+        PositiveInteger.orThrow(number)
+    }
+
+    @Test
+    fun orThrowFailsWithByteThatEqualsZero() {
+        val number: Byte = 0
+        val throwable: IllegalArgumentException = assertFailsWith {
+            PositiveInteger.orThrow(number)
+        }
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
+        val expected: ExceptionMessage = ExceptionMessage.nonPositive(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun orThrowFailsWithByteLessThanZero() {
+        val number: Byte = (Byte.MIN_VALUE..-1).random()
+            .toByte()
+        val throwable: IllegalArgumentException = assertFailsWith {
+            PositiveInteger.orThrow(number)
+        }
+        val actual: ExceptionMessage = ExceptionMessage.from(throwable)
+        val expected: ExceptionMessage = ExceptionMessage.nonPositive(number)
+        assertEquals(expected, actual)
+    }
+
     // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test

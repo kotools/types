@@ -28,6 +28,11 @@ class PositiveIntegerSample {
     }
 
     @Test
+    fun orThrowByte() {
+        PositiveInteger.orThrow(Byte.MAX_VALUE)
+    }
+
+    @Test
     fun orThrowString() {
         val text: String = Int.MAX_VALUE.toString()
         PositiveInteger.orThrow(text)
