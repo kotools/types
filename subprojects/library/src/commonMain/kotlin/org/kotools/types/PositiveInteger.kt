@@ -33,6 +33,15 @@ public class PositiveInteger private constructor() {
             if (number <= 0) null else PositiveInteger()
 
         /**
+         * Returns a positive integer from the specified [number], or returns
+         * `null` if the [number] is less than or equal to zero.
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerSample.orNullShort]
+         */
+        public fun orNull(number: Short): PositiveInteger? =
+            if (number <= 0) null else PositiveInteger()
+
+        /**
          * Returns a positive integer from the specified [text], or returns
          * `null` if the [text] doesn't represent an integer that is greater
          * than zero.

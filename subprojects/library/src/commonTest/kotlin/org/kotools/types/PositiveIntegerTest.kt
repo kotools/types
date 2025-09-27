@@ -34,6 +34,31 @@ class PositiveIntegerTest {
         assertNull(actual)
     }
 
+    // ------------------------ Companion.orNull(Short) ------------------------
+
+    @Test
+    fun orNullPassesWithShortGreaterThanZero() {
+        val number: Short = (1..Short.MAX_VALUE).random()
+            .toShort()
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun orNullFailsWithShortThatEqualsZero() {
+        val number: Short = 0
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        assertNull(actual)
+    }
+
+    @Test
+    fun orNullFailsWithShortLessThanZero() {
+        val number: Short = (Short.MIN_VALUE..-1).random()
+            .toShort()
+        val actual: PositiveInteger? = PositiveInteger.orNull(number)
+        assertNull(actual)
+    }
+
     // ----------------------- Companion.orNull(String) ------------------------
 
     @Test

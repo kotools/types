@@ -14,6 +14,12 @@ class PositiveIntegerSample {
     }
 
     @Test
+    fun orNullShort() {
+        val integer: PositiveInteger? = PositiveInteger.orNull(Short.MAX_VALUE)
+        assertNotNull(integer)
+    }
+
+    @Test
     fun orNullString() {
         val text: String = Byte.MAX_VALUE.toString()
         val integer: PositiveInteger? = PositiveInteger.orNull(text)
