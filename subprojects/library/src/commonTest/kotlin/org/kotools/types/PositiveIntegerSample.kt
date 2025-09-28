@@ -20,6 +20,21 @@ class PositiveIntegerSample {
             .toPositiveInteger()
     }
 
+    @Test
+    fun stringToPositiveIntegerOrNull() {
+        val integer: PositiveInteger? = Int.MAX_VALUE.toString()
+            .toPositiveIntegerOrNull()
+        assertNotNull(integer)
+    }
+
+    @Test
+    fun stringToPositiveIntegerOrNullSigned() {
+        val integer: PositiveInteger? = Int.MAX_VALUE.toString()
+            .let { "+$it" }
+            .toPositiveIntegerOrNull()
+        assertNotNull(integer)
+    }
+
     // ------------------------------- Companion -------------------------------
 
     @Test

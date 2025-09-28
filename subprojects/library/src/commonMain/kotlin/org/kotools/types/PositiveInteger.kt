@@ -17,6 +17,9 @@ import kotlin.jvm.JvmInline
  * The integer represented by this string may start with a plus sign (`+`).
  *
  * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerSigned]
+ *
+ * See the [String.toPositiveIntegerOrNull] function for returning `null`
+ * instead of throwing an exception in case of invalid string.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
@@ -27,6 +30,28 @@ public fun String.toPositiveInteger(): PositiveInteger {
         ExceptionMessage.nonPositiveInteger(text = this)
     }
     return PositiveInteger(number)
+}
+
+/**
+ * Returns a positive integer from this string, or returns `null` if it doesn't
+ * represent an integer that is greater than zero.
+ *
+ * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerOrNull]
+ *
+ * The integer represented by this string may start with a plus sign (`+`).
+ *
+ * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerOrNullSigned]
+ *
+ * See the [String.toPositiveInteger] function for throwing an exception instead
+ * of returning `null` in case of invalid string.
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+public fun String.toPositiveIntegerOrNull(): PositiveInteger? {
+    val number: String = this.removePrefix("+")
+    val regex = Regex("""^[1-9]\d*$""")
+    return if (number matches regex) PositiveInteger(number)
+    else null
 }
 
 // ----------------------------------- Type ------------------------------------
