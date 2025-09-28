@@ -64,8 +64,8 @@ public fun String.toPositiveIntegerOrNull(): PositiveInteger? {
  * and [Long]), this type has no maximum value and can hold greater values than
  * [Long.MAX_VALUE].
  *
- * For creating an instance of this type, see the factory functions provided by
- * the [PositiveInteger.Companion] type.
+ * See the [toPositiveInteger] and the [toPositiveIntegerOrNull] factory
+ * functions for creating an instance of this type.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
