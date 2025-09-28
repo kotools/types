@@ -5,6 +5,8 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 
+// ----------------------------- Factory functions -----------------------------
+
 /**
  * Returns a positive integer from this string, or throws an
  * [IllegalArgumentException] if it doesn't represent an integer that is greater
@@ -26,6 +28,8 @@ public fun String.toPositiveInteger(): PositiveInteger {
     }
     return PositiveInteger(number)
 }
+
+// ----------------------------------- Type ------------------------------------
 
 /**
  * Represents an [integer](https://en.wikipedia.org/wiki/Integer) that is
