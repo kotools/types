@@ -3,6 +3,7 @@ package org.kotools.types
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmInline
 
 /**
  * Represents an [integer](https://en.wikipedia.org/wiki/Integer) that is
@@ -17,7 +18,10 @@ import org.kotools.types.internal.KotoolsTypesVersion
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
-public class PositiveInteger private constructor() {
+@JvmInline
+public value class PositiveInteger private constructor(
+    private val text: String
+) {
     /** Contains static declarations for the [PositiveInteger] type. */
     public companion object {
         /**
@@ -38,7 +42,7 @@ public class PositiveInteger private constructor() {
         public fun orNull(text: String): PositiveInteger? {
             val number: String = text.removePrefix("+")
             val regex = Regex("""^[1-9]\d*$""")
-            return if (number matches regex) PositiveInteger() else null
+            return if (number matches regex) PositiveInteger(number) else null
         }
 
         /**
@@ -62,7 +66,7 @@ public class PositiveInteger private constructor() {
             require(number matches regex) {
                 ExceptionMessage.nonPositiveInteger(text)
             }
-            return PositiveInteger()
+            return PositiveInteger(number)
         }
     }
 }
