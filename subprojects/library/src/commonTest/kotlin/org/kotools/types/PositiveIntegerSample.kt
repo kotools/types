@@ -5,6 +5,21 @@ import kotlin.test.assertNotNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerSample {
+    // --------------------------- Factory functions ---------------------------
+
+    @Test
+    fun stringToPositiveInteger() {
+        Int.MAX_VALUE.toString()
+            .toPositiveInteger()
+    }
+
+    @Test
+    fun stringToPositiveIntegerSigned() {
+        Int.MAX_VALUE.toString()
+            .let { "+$it" }
+            .toPositiveInteger()
+    }
+
     // ------------------------------- Companion -------------------------------
 
     @Test

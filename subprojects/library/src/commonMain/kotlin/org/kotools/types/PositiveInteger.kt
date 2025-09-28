@@ -6,6 +6,28 @@ import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 
 /**
+ * Returns a positive integer from this string, or throws an
+ * [IllegalArgumentException] if it doesn't represent an integer that is greater
+ * than zero.
+ *
+ * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveInteger]
+ *
+ * The integer represented by this string may start with a plus sign (`+`).
+ *
+ * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerSigned]
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+public fun String.toPositiveInteger(): PositiveInteger {
+    val number: String = this.removePrefix("+")
+    val regex = Regex("""^[1-9]\d*$""")
+    require(number matches regex) {
+        ExceptionMessage.nonPositiveInteger(text = this)
+    }
+    return PositiveInteger(number)
+}
+
+/**
  * Represents an [integer](https://en.wikipedia.org/wiki/Integer) that is
  * greater than zero.
  *
@@ -19,7 +41,7 @@ import kotlin.jvm.JvmInline
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
 @JvmInline
-public value class PositiveInteger private constructor(
+public value class PositiveInteger internal constructor(
     private val text: String
 ) {
     /** Contains static declarations for the [PositiveInteger] type. */

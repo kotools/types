@@ -376,3 +376,7 @@ public final class org/kotools/types/PositiveInteger$Companion {
 	public final fun orThrow-Gwdb0GQ (Ljava/lang/String;)Ljava/lang/String;
 }
 
+public final class org/kotools/types/PositiveIntegerKt {
+	public static final fun toPositiveInteger (Ljava/lang/String;)Ljava/lang/String;
+}
+
