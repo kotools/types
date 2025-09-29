@@ -1,36 +1,10 @@
 package org.kotools.types
 
-import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 
 // ----------------------------- Factory functions -----------------------------
-
-/**
- * Returns a positive integer from this string, or throws an
- * [IllegalArgumentException] if it doesn't represent an integer that is greater
- * than zero.
- *
- * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveInteger]
- *
- * The integer represented by this string may start with a plus sign (`+`).
- *
- * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerSigned]
- *
- * See the [String.toPositiveIntegerOrNull] function for returning `null`
- * instead of throwing an exception in case of invalid string.
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
-public fun String.toPositiveInteger(): PositiveInteger {
-    val number: String = this.removePrefix("+")
-    val regex = Regex("""^[1-9]\d*$""")
-    require(number matches regex) {
-        ExceptionMessage.nonPositiveInteger(text = this)
-    }
-    return PositiveInteger(number)
-}
 
 /**
  * Returns a positive integer from this string, or returns `null` if it doesn't
@@ -41,9 +15,6 @@ public fun String.toPositiveInteger(): PositiveInteger {
  * The integer represented by this string may start with a plus sign (`+`).
  *
  * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerOrNullSigned]
- *
- * See the [String.toPositiveInteger] function for throwing an exception instead
- * of returning `null` in case of invalid string.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
