@@ -359,6 +359,7 @@ public abstract interface annotation class org/kotools/types/ExperimentalKotools
 }
 
 public final class org/kotools/types/PositiveInteger {
+	public static final field Companion Lorg/kotools/types/PositiveInteger$Companion;
 	public static final synthetic fun box-impl (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;
 	public fun equals (Ljava/lang/Object;)Z
 	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
@@ -368,6 +369,10 @@ public final class org/kotools/types/PositiveInteger {
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class org/kotools/types/PositiveInteger$Companion {
+	public final fun of-fDKdq84 (Ljava/lang/String;)Ljava/lang/String;
 }
 
 public final class org/kotools/types/PositiveIntegerKt {

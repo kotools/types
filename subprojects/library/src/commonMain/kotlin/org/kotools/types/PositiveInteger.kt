@@ -72,4 +72,26 @@ public fun String.toPositiveIntegerOrNull(): PositiveInteger? {
 @JvmInline
 public value class PositiveInteger internal constructor(
     private val text: String
-)
+) {
+    /** Contains static declarations for the [PositiveInteger] type. */
+    public companion object {
+        /**
+         * Returns a positive integer from the specified [text], or returns
+         * `null` if the [text] doesn't represent an integer that is greater
+         * than zero.
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerSample.ofString]
+         *
+         * The integer represented by the [text] may start with a plus sign
+         * (`+`).
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerSample.ofStringSigned]
+         */
+        public infix fun of(text: String): PositiveInteger? {
+            val number: String = text.removePrefix("+")
+            val regex = Regex("""^[1-9]\d*$""")
+            return if (number matches regex) PositiveInteger(number)
+            else null
+        }
+    }
+}

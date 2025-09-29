@@ -34,4 +34,18 @@ class PositiveIntegerSample {
             .toPositiveIntegerOrNull()
         assertNotNull(integer)
     }
+
+    // ------------------------------- Companion -------------------------------
+
+    @Test
+    fun ofString() {
+        val integer: PositiveInteger? = PositiveInteger of "123456789"
+        assertNotNull(integer)
+    }
+
+    @Test
+    fun ofStringSigned() {
+        val integer: PositiveInteger? = PositiveInteger of "+123456789"
+        assertNotNull(integer)
+    }
 }
