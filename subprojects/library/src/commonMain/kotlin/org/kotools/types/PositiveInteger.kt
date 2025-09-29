@@ -4,29 +4,6 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmInline
 
-// ----------------------------- Factory functions -----------------------------
-
-/**
- * Returns a positive integer from this string, or returns `null` if it doesn't
- * represent an integer that is greater than zero.
- *
- * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerOrNull]
- *
- * The integer represented by this string may start with a plus sign (`+`).
- *
- * SAMPLE: [org.kotools.types.PositiveIntegerSample.stringToPositiveIntegerOrNullSigned]
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
-public fun String.toPositiveIntegerOrNull(): PositiveInteger? {
-    val number: String = this.removePrefix("+")
-    val regex = Regex("""^[1-9]\d*$""")
-    return if (number matches regex) PositiveInteger(number)
-    else null
-}
-
-// ----------------------------------- Type ------------------------------------
-
 /**
  * Represents an [integer](https://en.wikipedia.org/wiki/Integer) that is
  * greater than zero.
@@ -41,7 +18,7 @@ public fun String.toPositiveIntegerOrNull(): PositiveInteger? {
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
 @JvmInline
-public value class PositiveInteger internal constructor(
+public value class PositiveInteger private constructor(
     private val text: String
 ) {
     /** Contains static declarations for the [PositiveInteger] type. */

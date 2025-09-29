@@ -375,7 +375,3 @@ public final class org/kotools/types/PositiveInteger$Companion {
 	public final fun of-fDKdq84 (Ljava/lang/String;)Ljava/lang/String;
 }
 
-public final class org/kotools/types/PositiveIntegerKt {
-	public static final fun toPositiveIntegerOrNull (Ljava/lang/String;)Ljava/lang/String;
-}
-
