@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmInline
 
 /**
@@ -21,6 +22,14 @@ import kotlin.jvm.JvmInline
 public value class PositiveInteger private constructor(
     private val text: String
 ) {
+    /**
+     * Returns the string representation of this integer.
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerSample.toStringOverride]
+     */
+    @Suppress(Warning.FINAL)
+    final override fun toString(): String = this.text
+
     /** Contains static declarations for the [PositiveInteger] type. */
     public companion object {
         /**

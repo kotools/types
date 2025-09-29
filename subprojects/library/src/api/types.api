@@ -366,8 +366,8 @@ public final class org/kotools/types/PositiveInteger {
 	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
 	public fun hashCode ()I
 	public static fun hashCode-impl (Ljava/lang/String;)I
-	public fun toString ()Ljava/lang/String;
-	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final fun toString ()Ljava/lang/String;
+	public static final fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 

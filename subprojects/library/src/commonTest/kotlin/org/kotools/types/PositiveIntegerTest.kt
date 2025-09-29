@@ -1,11 +1,21 @@
 package org.kotools.types
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerTest {
+    // ------------------------------ toString() -------------------------------
+
+    @Test
+    fun toStringReturnsOriginalText() {
+        val text = "123456789"
+        val integer: PositiveInteger? = PositiveInteger of text
+        assertEquals(expected = text, actual = "$integer")
+    }
+
     // ------------------------- Companion.of(String) --------------------------
 
     @Test
