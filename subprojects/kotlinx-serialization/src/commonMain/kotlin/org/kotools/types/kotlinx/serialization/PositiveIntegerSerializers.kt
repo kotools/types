@@ -21,10 +21,10 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
 @JvmSynthetic
 public fun PositiveInteger.Companion.stringSerializer():
-        KSerializer<PositiveInteger> = PositiveIntegerAsStringSerializer()
+        KSerializer<PositiveInteger> = PositiveIntegerAsStringSerializer
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-private class PositiveIntegerAsStringSerializer :
+@ExperimentalKotoolsTypesApi
+private object PositiveIntegerAsStringSerializer :
     StringSerializer<PositiveInteger> {
     override fun deserialize(text: String): PositiveInteger =
         requireNotNull(PositiveInteger of text) {
