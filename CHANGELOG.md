@@ -27,11 +27,6 @@ All notable changes to this project will be documented in this file.
   the `EmailAddressRegex.Companion.default()` **experimental** function instead
   of the `EmailAddress.Companion.PATTERN` **deprecated** property ([#838]).
 
-### 🗑️ Deprecated
-
-- The `NegativeInt.Companion.max` property with a **warning** level for using
-  the `0` value of type `Int` instead ([#846]).
-
 ### 🔥 Removed
 
 - The `PATTERN` **deprecated** property, the `orNull(String, String)` and the
@@ -49,7 +44,6 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#838]: https://github.com/kotools/types/issues/838
 [#844]: https://github.com/kotools/types/issues/844
-[#846]: https://github.com/kotools/types/issues/846
 [#849]: https://github.com/kotools/types/issues/849
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
