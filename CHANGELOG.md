@@ -29,9 +29,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🗑️ Deprecated
 
-- The `PositiveInt.Companion.min` and the `NegativeInt.Companion.max` properties
-  with a **warning** level for using the `0` value of type `Int` instead
-  ([#845] and [#846]).
+- The `NegativeInt.Companion.max` property with a **warning** level for using
+  the `0` value of type `Int` instead ([#846]).
 
 ### 🔥 Removed
 
@@ -50,7 +49,6 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#838]: https://github.com/kotools/types/issues/838
 [#844]: https://github.com/kotools/types/issues/844
-[#845]: https://github.com/kotools/types/issues/845
 [#846]: https://github.com/kotools/types/issues/846
 [#849]: https://github.com/kotools/types/issues/849
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48

@@ -12,7 +12,6 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBePositive
 import kotools.types.internal.simpleNameOf
-import org.kotools.types.internal.DeprecatedAsWarningSince
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Since
@@ -66,11 +65,6 @@ public sealed interface PositiveInt : AnyInt {
     /** Contains declarations for holding or building a [PositiveInt]. */
     public companion object {
         /** The minimum value a [PositiveInt] can have. */
-        @Deprecated(
-            "Use the '0' value of type 'Int' instead.",
-            ReplaceWith("0")
-        )
-        @DeprecatedAsWarningSince(KotoolsTypesVersion.V5_1_0)
         public val min: ZeroInt = ZeroInt
 
         /** The maximum value a [PositiveInt] can have. */
@@ -78,7 +72,7 @@ public sealed interface PositiveInt : AnyInt {
 
         /** Returns a random [PositiveInt]. */
         @Since(KotoolsTypesVersion.V3_0_0)
-        public fun random(): PositiveInt = (0..max.toInt())
+        public fun random(): PositiveInt = (min.toInt()..max.toInt())
             .random()
             .toPositiveInt()
             .getOrThrow()
