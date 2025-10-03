@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Fixed
 
-- Run configurations in contributing guidelines ([#854]).
+- Run configurations in [contributing guidelines](CONTRIBUTING.md) ([#854]).
 
 ---
 
