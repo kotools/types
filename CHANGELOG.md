@@ -37,6 +37,10 @@ All notable changes to this project will be documented in this file.
 - Java support from `EmailAddress` and `EmailAddressRegex` **experimental**
   types ([#849]).
 
+### 🐛 Fixed
+
+- Run configurations in contributing guidelines ([#854]).
+
 ---
 
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
@@ -45,6 +49,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#838]: https://github.com/kotools/types/issues/838
 [#844]: https://github.com/kotools/types/issues/844
 [#849]: https://github.com/kotools/types/issues/849
+[#854]: https://github.com/kotools/types/issues/854
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
