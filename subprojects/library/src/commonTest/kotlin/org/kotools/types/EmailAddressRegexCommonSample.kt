@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-class EmailAddressRegexSample {
+class EmailAddressRegexCommonSample {
     @Test
     fun equalsOverride() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()

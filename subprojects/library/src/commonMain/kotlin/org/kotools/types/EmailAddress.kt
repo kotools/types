@@ -5,6 +5,8 @@ import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
@@ -22,7 +24,27 @@ public class EmailAddress private constructor(private val text: String) {
      * has the same string representation as this email address, or returns
      * `false` otherwise.
      *
-     * SAMPLE: [org.kotools.types.EmailAddressSample.equalsOverride]
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.equalsOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.equalsOverride]
+     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
@@ -31,7 +53,27 @@ public class EmailAddress private constructor(private val text: String) {
     /**
      * Returns a hash code value for this email address.
      *
-     * SAMPLE: [org.kotools.types.EmailAddressSample.hashCodeOverride]
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.hashCodeOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.hashCodeOverride]
+     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.text)
@@ -41,7 +83,27 @@ public class EmailAddress private constructor(private val text: String) {
     /**
      * Returns the string representation of this email address.
      *
-     * SAMPLE: [org.kotools.types.EmailAddressSample.toStringOverride]
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.toStringOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.toStringOverride]
+     * </details>
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.text
@@ -57,27 +119,55 @@ public class EmailAddress private constructor(private val text: String) {
          * returns `null` if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.Companion.default].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressSample.orNullString]
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullString]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [orThrow] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
+        @JvmSynthetic
         public fun orNull(text: String): EmailAddress? {
             val regex: EmailAddressRegex = EmailAddressRegex.default()
-            return this.orNull(text, regex)
+            return if (regex matches text) EmailAddress(text) else null
         }
 
         /**
          * Returns an email address from the specified [text], or returns `null`
          * if the [text] doesn't match the specified [regex].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressSample.orNullStringEmailAddressRegex]
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullStringEmailAddressRegex]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code due to its non-explicit
+         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [orThrow] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+        @JvmSynthetic
         public fun orNull(
             text: String,
             regex: EmailAddressRegex
@@ -88,12 +178,34 @@ public class EmailAddress private constructor(private val text: String) {
          * throws an [IllegalArgumentException] if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.default].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressSample.orThrowString]
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowString]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.orThrowString]
+         * </details>
+         * <br>
          *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text].
          */
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
+        @JvmStatic
         public fun orThrow(text: String): EmailAddress {
             val regex: EmailAddressRegex = EmailAddressRegex.default()
             return this.orThrow(text, regex)
@@ -104,12 +216,34 @@ public class EmailAddress private constructor(private val text: String) {
          * [IllegalArgumentException] if the [text] doesn't match the specified
          * [regex].
          *
-         * SAMPLE: [org.kotools.types.EmailAddressSample.orThrowStringEmailAddressRegex]
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowStringEmailAddressRegex]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.orThrowStringEmailAddressRegex]
+         * </details>
+         * <br>
          *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text].
          */
         @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+        @JvmStatic
         public fun orThrow(
             text: String,
             regex: EmailAddressRegex
