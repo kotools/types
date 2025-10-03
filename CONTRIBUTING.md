@@ -75,15 +75,14 @@ We recommend you to install the JDK 17 if this is not done yet.
 ### Running checks
 
 Now that you have opened your fork in [IntelliJ IDEA], you can run the
-`JVM checks (types)` configuration for checking the library on the Kotlin/JVM
-platform.
+`Checks (types)` configuration for checking the `types` subproject on all
+platforms.
 
 Here's the list of recommended configurations for running tests:
 
-- `JVM checks (types)` for checking the `types` subproject on the Kotlin/JVM
-  platform.
-- `JVM checks (kotlinx-serialization)` for checking the
-  `types-kotlinx-serialization` subproject on Kotlin/JVM.
+- `Checks (plugins)` for checking the `plugins` included build.
+- `Checks (kotlinx-serialization)` for checking the
+  `types-kotlinx-serialization` subproject on all platforms.
 
 ### Serving the API reference
 
