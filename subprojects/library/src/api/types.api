@@ -366,8 +366,10 @@ public abstract interface annotation class org/kotools/types/ExperimentalKotools
 
 public final class org/kotools/types/PositiveInteger {
 	public static final field Companion Lorg/kotools/types/PositiveInteger$Companion;
+	public static final fun of (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;
 }
 
 public final class org/kotools/types/PositiveInteger$Companion {
+	public final fun of (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;
 }
 
