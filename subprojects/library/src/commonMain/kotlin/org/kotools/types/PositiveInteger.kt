@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 
 /**
@@ -17,7 +18,35 @@ import kotlin.jvm.JvmStatic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
-public class PositiveInteger private constructor() {
+public class PositiveInteger private constructor(private val text: String) {
+    /**
+     * Returns the string representation of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.toStringOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.toStringOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun toString(): String = this.text
+
     /** Contains static declarations for the [PositiveInteger] type. */
     public companion object {
         /**
@@ -54,7 +83,7 @@ public class PositiveInteger private constructor() {
         public infix fun of(text: String): PositiveInteger? {
             val number: String = text.removePrefix("+")
             val regex = Regex("""^[1-9]\d*$""")
-            return if (number matches regex) PositiveInteger()
+            return if (number matches regex) PositiveInteger(text = number)
             else null
         }
     }
