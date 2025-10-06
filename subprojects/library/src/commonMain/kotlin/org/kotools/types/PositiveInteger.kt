@@ -5,6 +5,7 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
+import kotlin.math.max
 
 /**
  * Represents an [integer](https://en.wikipedia.org/wiki/Integer) that is
@@ -81,6 +82,70 @@ public class PositiveInteger private constructor(private val text: String) {
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.text)
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Adds the [other] integer to this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.plus]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.plus]
+     * </details>
+     */
+    public operator fun plus(other: PositiveInteger): PositiveInteger {
+        val length: Int = max(this.text.length, other.text.length)
+        val x: String =
+            if (this.text.length == length) this.text
+            else buildString {
+                repeat(length - this@PositiveInteger.text.length) {
+                    this.append('0')
+                }
+                this.append(this@PositiveInteger.text)
+            }
+        val y: String =
+            if (other.text.length == length) other.text
+            else buildString {
+                repeat(length - other.text.length) { this.append('0') }
+                this.append(other.text)
+            }
+        val xReversed: String = x.reversed()
+        val yReversed: String = y.reversed()
+        var carry = 0
+        val result: String = xReversed
+            .zip(yReversed) { first: Char, second: Char ->
+                val intermediateResult: Int =
+                    first.digitToInt() + second.digitToInt() + carry
+                if (intermediateResult in 0..9) {
+                    carry = 0
+                    return@zip intermediateResult
+                }
+                carry = intermediateResult / 10
+                intermediateResult % 10
+            }
+            .joinToString(separator = "")
+            .reversed()
+        return of(result) ?: error(
+            "$this + $other = $result, which is not a positive integer."
+        )
+    }
 
     // ------------------------------ Conversions ------------------------------
 
