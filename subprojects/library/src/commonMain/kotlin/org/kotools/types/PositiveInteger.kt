@@ -20,6 +20,8 @@ import kotlin.jvm.JvmStatic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
 public class PositiveInteger private constructor(private val text: String) {
+    // -------------------- Structural equality operations ---------------------
+
     /**
      * Returns `true` if the [other] object is an instance of [PositiveInteger]
      * with the same [string representation][PositiveInteger.toString], or
@@ -80,6 +82,8 @@ public class PositiveInteger private constructor(private val text: String) {
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = hashCodeOf(this.text)
 
+    // ------------------------------ Conversions ------------------------------
+
     /**
      * Returns the string representation of this integer.
      *
@@ -107,6 +111,8 @@ public class PositiveInteger private constructor(private val text: String) {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.text
+
+    // -------------------------------------------------------------------------
 
     /** Contains static declarations for the [PositiveInteger] type. */
     public companion object {
