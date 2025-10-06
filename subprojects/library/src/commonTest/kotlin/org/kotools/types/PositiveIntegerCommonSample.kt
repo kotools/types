@@ -19,6 +19,17 @@ class PositiveIntegerCommonSample {
     }
 
     @Test
+    fun hashCodeOverride() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val hashCode: Int = integer.hashCode()
+        val other: Int = integer.toString()
+            .let(PositiveInteger.Companion::of)
+            ?.hashCode()
+            ?: fail()
+        assertEquals(hashCode, other)
+    }
+
+    @Test
     fun toStringOverride() {
         val text = "123456789"
         val integer: PositiveInteger = PositiveInteger.of(text) ?: fail()

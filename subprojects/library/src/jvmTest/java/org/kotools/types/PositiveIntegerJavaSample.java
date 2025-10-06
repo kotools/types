@@ -18,6 +18,18 @@ public class PositiveIntegerJavaSample {
     }
 
     @Test
+    void hashCodeOverride() {
+        final String text = "123456789";
+        final PositiveInteger integer = PositiveInteger.of(text);
+        Assertions.assertNotNull(integer);
+        final int hashCode = integer.hashCode();
+        final PositiveInteger otherInteger = PositiveInteger.of(text);
+        Assertions.assertNotNull(otherInteger);
+        final int otherHashCode = otherInteger.hashCode();
+        Assertions.assertEquals(hashCode, otherHashCode);
+    }
+
+    @Test
     void toStringOverride() {
         final String text = "123456789";
         final PositiveInteger integer = PositiveInteger.of(text);

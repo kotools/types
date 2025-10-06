@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.internal.hashCodeOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -47,6 +48,17 @@ class PositiveIntegerTest {
             ?: fail()
         val actual: Boolean = integer.equals(other)
         assertFalse(actual)
+    }
+
+    // ------------------------------ hashCode() -------------------------------
+
+    @Test
+    fun hashCodePasses() {
+        val text = "123456789"
+        val actual: Int? = PositiveInteger.of(text)
+            ?.hashCode()
+        val expected: Int = hashCodeOf(text)
+        assertEquals(expected, actual)
     }
 
     // ------------------------------ toString() -------------------------------
