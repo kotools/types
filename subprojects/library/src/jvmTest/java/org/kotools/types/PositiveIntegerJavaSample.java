@@ -30,6 +30,21 @@ public class PositiveIntegerJavaSample {
     }
 
     @Test
+    void plus() {
+        final PositiveInteger integer = PositiveInteger.of("123456789");
+        Assertions.assertNotNull(integer);
+        final String text = Long.valueOf(Long.MAX_VALUE)
+                .toString();
+        final PositiveInteger other = PositiveInteger.of(text);
+        Assertions.assertNotNull(other);
+        final PositiveInteger result = integer.plus(other);
+        final PositiveInteger expected =
+                PositiveInteger.of("9223372036978232596");
+        Assertions.assertNotNull(expected);
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
     void toStringOverride() {
         final String text = "123456789";
         final PositiveInteger integer = PositiveInteger.of(text);

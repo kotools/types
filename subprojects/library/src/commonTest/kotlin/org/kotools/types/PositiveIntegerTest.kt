@@ -61,6 +61,56 @@ class PositiveIntegerTest {
         assertEquals(expected, actual)
     }
 
+    // ------------------------- plus(PositiveInteger) -------------------------
+
+    @Test
+    fun plusPassesWithPositiveIntegerHavingSameNumberOfDigits() {
+        val integer: PositiveInteger = PositiveInteger.of("1234") ?: fail()
+        val other: PositiveInteger = PositiveInteger.of("1234") ?: fail()
+        val actual: PositiveInteger = integer + other
+        val expected: PositiveInteger = PositiveInteger.of("2468") ?: fail()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun plusPassesWithPositiveIntegerHavingMoreDigits() {
+        val integer: PositiveInteger = PositiveInteger.of("1234") ?: fail()
+        val other: PositiveInteger = PositiveInteger.of("12345") ?: fail()
+        val actual: PositiveInteger = integer + other
+        val expected: PositiveInteger = PositiveInteger.of("13579") ?: fail()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun plusPassesWithPositiveIntegerHavingLessDigits() {
+        val integer: PositiveInteger = PositiveInteger.of("1234") ?: fail()
+        val other: PositiveInteger = PositiveInteger.of("123") ?: fail()
+        val actual: PositiveInteger = integer + other
+        val expected: PositiveInteger = PositiveInteger.of("1357") ?: fail()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun plusPassesWithPositiveIntegerWithCarry() {
+        val integer: PositiveInteger = PositiveInteger.of("123456") ?: fail()
+        val other: PositiveInteger = PositiveInteger.of("123456") ?: fail()
+        val actual: PositiveInteger = integer + other
+        val expected: PositiveInteger = PositiveInteger.of("246912") ?: fail()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun plusPassesWithPositiveIntegerBeingMaximumValueOfLong() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val other: PositiveInteger = Long.MAX_VALUE.toString()
+            .let(PositiveInteger.Companion::of)
+            ?: fail()
+        val actual: PositiveInteger = integer + other
+        val expected: PositiveInteger =
+            PositiveInteger.of("9223372036978232596") ?: fail()
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ toString() -------------------------------
 
     @Test

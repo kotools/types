@@ -30,6 +30,18 @@ class PositiveIntegerCommonSample {
     }
 
     @Test
+    fun plus() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val other: PositiveInteger = Long.MAX_VALUE.toString()
+            .let(PositiveInteger.Companion::of)
+            ?: fail()
+        val result: PositiveInteger = integer + other
+        val expected: PositiveInteger =
+            PositiveInteger.of("9223372036978232596") ?: fail()
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun toStringOverride() {
         val text = "123456789"
         val integer: PositiveInteger = PositiveInteger.of(text) ?: fail()
