@@ -2,12 +2,53 @@ package org.kotools.types
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import kotlin.test.fail
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerTest {
+    // ----------------------------- equals(Any?) ------------------------------
+
+    @Test
+    fun equalsPassesWithPositiveIntegerHavingSameStringRepresentation() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val other: PositiveInteger = integer.toString()
+            .let(PositiveInteger.Companion::of)
+            ?: fail()
+        val actual: Boolean = integer.equals(other)
+        assertTrue(actual)
+    }
+
+    @Test
+    fun equalsFailsWithNull() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val other: Any? = null
+        val actual: Boolean = integer.equals(other)
+        assertFalse(actual)
+    }
+
+    @Test
+    fun equalsFailsWithAnotherTypeThanPositiveInteger() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val other: String = integer.toString()
+        val actual: Boolean = integer.equals(other)
+        assertFalse(actual)
+    }
+
+    @Test
+    fun equalsFailsWithPositiveIntegerHavingAnotherStringRepresentation() {
+        val integer: PositiveInteger = PositiveInteger.of("123456789") ?: fail()
+        val other: PositiveInteger = integer.toString()
+            .reversed()
+            .let(PositiveInteger.Companion::of)
+            ?: fail()
+        val actual: Boolean = integer.equals(other)
+        assertFalse(actual)
+    }
+
     // ------------------------------ toString() -------------------------------
 
     @Test
