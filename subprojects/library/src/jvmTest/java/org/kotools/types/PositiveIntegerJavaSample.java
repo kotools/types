@@ -60,4 +60,12 @@ public class PositiveIntegerJavaSample {
         final PositiveInteger actual = PositiveInteger.of("123456789");
         Assertions.assertNotNull(actual);
     }
+
+    @Test
+    void minimum() {
+        final PositiveInteger actual = PositiveInteger.minimum();
+        final PositiveInteger expected = PositiveInteger.of("1");
+        Assertions.assertNotNull(expected);
+        Assertions.assertEquals(expected, actual);
+    }
 }

@@ -218,5 +218,38 @@ public class PositiveInteger private constructor(private val text: String) {
             return if (number matches regex) PositiveInteger(text = number)
             else null
         }
+
+        /**
+         * Returns the minimum value that a positive integer can have.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.minimum]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.minimum]
+         * </details>
+         */
+        @JvmStatic
+        public fun minimum(): PositiveInteger {
+            val text = "1"
+            return this.of(text) ?: error(
+                "'$text' doesn't represent an integer greater than zero."
+            )
+        }
     }
 }
