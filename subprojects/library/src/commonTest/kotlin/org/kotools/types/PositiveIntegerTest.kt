@@ -92,10 +92,10 @@ class PositiveIntegerTest {
 
     @Test
     fun plusPassesWithPositiveIntegerWithCarry() {
-        val integer: PositiveInteger = PositiveInteger.of("123456") ?: fail()
-        val other: PositiveInteger = PositiveInteger.of("123456") ?: fail()
+        val integer: PositiveInteger = PositiveInteger.of("999") ?: fail()
+        val other: PositiveInteger = PositiveInteger.minimum()
         val actual: PositiveInteger = integer + other
-        val expected: PositiveInteger = PositiveInteger.of("246912") ?: fail()
+        val expected: PositiveInteger = PositiveInteger.of("1000") ?: fail()
         assertEquals(expected, actual)
     }
 

@@ -111,36 +111,23 @@ public class PositiveInteger private constructor(private val text: String) {
      */
     public operator fun plus(other: PositiveInteger): PositiveInteger {
         val length: Int = max(this.text.length, other.text.length)
-        val x: String =
-            if (this.text.length == length) this.text
-            else buildString {
-                repeat(length - this@PositiveInteger.text.length) {
-                    this.append('0')
-                }
-                this.append(this@PositiveInteger.text)
-            }
-        val y: String =
-            if (other.text.length == length) other.text
-            else buildString {
-                repeat(length - other.text.length) { this.append('0') }
-                this.append(other.text)
-            }
-        val xReversed: String = x.reversed()
-        val yReversed: String = y.reversed()
-        var carry = 0
-        val result: String = xReversed
-            .zip(yReversed) { first: Char, second: Char ->
-                val intermediateResult: Int =
-                    first.digitToInt() + second.digitToInt() + carry
-                if (intermediateResult in 0..9) {
-                    carry = 0
-                    return@zip intermediateResult
-                }
-                carry = intermediateResult / 10
-                intermediateResult % 10
-            }
-            .joinToString(separator = "")
+        val firstDigits: List<Int> = this.text.map(Char::digitToInt)
             .reversed()
+        val secondDigits: List<Int> = other.text.map(Char::digitToInt)
+            .reversed()
+        var carry = 0
+        val result: String = 1.rangeTo(length)
+            .map {
+                val index: Int = it - 1
+                val x: Int = firstDigits.getOrNull(index) ?: 0
+                val y: Int = secondDigits.getOrNull(index) ?: 0
+                val sum: Int = x + y + carry
+                if (it == length) return@map sum
+                carry = sum / 10
+                sum % 10
+            }
+            .reversed()
+            .joinToString(separator = "")
         return of(result) ?: error(
             "$this + $other = $result, which is not a positive integer."
         )
