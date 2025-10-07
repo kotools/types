@@ -46,6 +46,21 @@ public class PositiveIntegerJavaSample {
     }
 
     @Test
+    void times() {
+        final PositiveInteger integer = PositiveInteger.Companion.of("2");
+        Assertions.assertNotNull(integer);
+        final String text = Long.valueOf(Long.MAX_VALUE)
+                .toString();
+        final PositiveInteger other = PositiveInteger.Companion.of(text);
+        Assertions.assertNotNull(other);
+        final PositiveInteger result = integer.times(other);
+        final PositiveInteger expected =
+                PositiveInteger.Companion.of("18446744073709551614");
+        Assertions.assertNotNull(expected);
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
     void toStringOverride() {
         final String text = "123456789";
         final PositiveInteger integer = PositiveInteger.Companion.of(text);
