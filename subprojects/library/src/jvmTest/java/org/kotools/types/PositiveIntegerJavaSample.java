@@ -58,15 +58,15 @@ public class PositiveIntegerJavaSample {
 
     @Test
     void of() {
-        final PositiveInteger actual = PositiveInteger.Companion.of("123456");
-        Assertions.assertNotNull(actual);
+        final PositiveInteger result = PositiveInteger.Companion.of("123456");
+        Assertions.assertNotNull(result);
     }
 
     @Test
     void minimum() {
-        final PositiveInteger actual = PositiveInteger.Companion.minimum();
+        final PositiveInteger result = PositiveInteger.Companion.minimum();
         final PositiveInteger expected = PositiveInteger.Companion.of("1");
         Assertions.assertNotNull(expected);
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, result);
     }
 }
