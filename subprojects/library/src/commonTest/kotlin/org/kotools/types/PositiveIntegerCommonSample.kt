@@ -55,4 +55,11 @@ class PositiveIntegerCommonSample {
     fun of() {
         assertNotNull(PositiveInteger of "+123456789")
     }
+
+    @Test
+    fun minimum() {
+        val result: PositiveInteger = PositiveInteger.minimum()
+        val expected: PositiveInteger = PositiveInteger.of("1") ?: fail()
+        assertEquals(expected, result)
+    }
 }

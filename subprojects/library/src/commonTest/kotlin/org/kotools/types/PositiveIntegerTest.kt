@@ -154,4 +154,13 @@ class PositiveIntegerTest {
     @Test
     fun ofFailsWithStringIntegerLessThanZero(): Unit =
         assertNull(PositiveInteger of "-123456789")
+
+    // -------------------------- Companion.minimum() --------------------------
+
+    @Test
+    fun minimumReturns1() {
+        val actual: PositiveInteger = PositiveInteger.minimum()
+        val expected: PositiveInteger = PositiveInteger.of("1") ?: fail()
+        assertEquals(expected, actual)
+    }
 }
