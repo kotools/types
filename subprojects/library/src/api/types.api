@@ -370,6 +370,7 @@ public final class org/kotools/types/PositiveInteger {
 	public final fun equals (Ljava/lang/Object;)Z
 	public final fun hashCode ()I
 	public final fun plus (Lorg/kotools/types/PositiveInteger;)Lorg/kotools/types/PositiveInteger;
+	public final fun times (Lorg/kotools/types/PositiveInteger;)Lorg/kotools/types/PositiveInteger;
 	public final fun toString ()Ljava/lang/String;
 }
 

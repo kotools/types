@@ -111,6 +111,55 @@ class PositiveIntegerTest {
         assertEquals(expected, actual)
     }
 
+    // ------------------------ times(PositiveInteger) -------------------------
+
+    @Test
+    fun timesPassesWithMinimumValueOfPositiveInteger() {
+        val integer: PositiveInteger = PositiveInteger.of("1234") ?: fail()
+        val other: PositiveInteger = PositiveInteger.minimum()
+        val actual: PositiveInteger = integer * other
+        assertEquals(expected = integer, actual)
+    }
+
+    @Test
+    fun timesPassesOnMinimumValueOfPositiveInteger() {
+        val integer: PositiveInteger = PositiveInteger.minimum()
+        val other: PositiveInteger = PositiveInteger.of("5") ?: fail()
+        val actual: PositiveInteger = integer * other
+        assertEquals(expected = other, actual)
+    }
+
+    @Test
+    fun timesPassesWithSingleDigitPositiveInteger() {
+        val integer: PositiveInteger = PositiveInteger.of("809") ?: fail()
+        val other: PositiveInteger = PositiveInteger.of("3") ?: fail()
+        val actual: PositiveInteger = integer * other
+        val expected: PositiveInteger = PositiveInteger.of("2427") ?: fail()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun timesPassesWithMultipleDigitsPositiveInteger() {
+        val integer: PositiveInteger = PositiveInteger.of("23958233") ?: fail()
+        val other: PositiveInteger = PositiveInteger.of("5830") ?: fail()
+        val actual: PositiveInteger = integer * other
+        val expected: PositiveInteger = PositiveInteger.of("139676498390")
+            ?: fail()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun timesPassesWithPositiveIntegerBeingMaximumValueOfLong() {
+        val integer: PositiveInteger = PositiveInteger.of("2") ?: fail()
+        val other: PositiveInteger = Long.MAX_VALUE.toString()
+            .let(PositiveInteger.Companion::of)
+            ?: fail()
+        val actual: PositiveInteger = integer * other
+        val expected: PositiveInteger =
+            PositiveInteger.of("18446744073709551614") ?: fail()
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ toString() -------------------------------
 
     @Test

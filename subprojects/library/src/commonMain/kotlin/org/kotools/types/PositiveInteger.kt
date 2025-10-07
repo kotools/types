@@ -133,6 +133,61 @@ public class PositiveInteger private constructor(private val text: String) {
         )
     }
 
+    /**
+     * Multiplies this integer by the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerCommonSample.times]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.times]
+     * </details>
+     */
+    public operator fun times(other: PositiveInteger): PositiveInteger {
+        val one: PositiveInteger = minimum()
+        if (other == one) return this
+        if (this == one) return other
+        val multiplierDigits: List<Int> = this.text.map(Char::digitToInt)
+            .reversed()
+        return other.text.map(Char::digitToInt)
+            .reversed()
+            .mapIndexed { yIndex: Int, y: Int ->
+                var carry = 0
+                val trailingZeros: List<Int> = buildList {
+                    repeat(yIndex) { this += 0 }
+                }
+                multiplierDigits
+                    .mapIndexed { index: Int, x: Int ->
+                        val product: Int = x * y + carry
+                        if (index == multiplierDigits.size - 1) product
+                        else {
+                            carry = product / 10
+                            product % 10
+                        }
+                    }
+                    .reversed()
+                    .plus(trailingZeros)
+                    .joinToString(separator = "")
+            }
+            .mapNotNull(::of)
+            .reduce { x: PositiveInteger, y: PositiveInteger -> x + y }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     /**
