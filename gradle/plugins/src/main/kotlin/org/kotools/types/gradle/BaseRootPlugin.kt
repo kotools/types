@@ -17,11 +17,9 @@ public class BaseRootPlugin : Plugin<Project> {
     }
 }
 
-private fun Project.withBasePlugin() {
-    val project: Project = this
-    project.pluginManager.withPlugin("base") {
-        project.tasks
-            .named { it in setOf("clean", "check", "assemble", "build") }
+private fun Project.withBasePlugin(): Unit = this.pluginManager
+    .withPlugin("base") {
+        val tasks: Set<String> = setOf("clean", "check", "assemble", "build")
+        this@withBasePlugin.tasks.named(tasks::contains)
             .configureEach { this.group = TaskGroup.Root.toString() }
     }
-}
