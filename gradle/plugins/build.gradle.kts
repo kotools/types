@@ -20,6 +20,11 @@ gradlePlugin {
             this.id = "$prefix.base.root"
             this.implementationClass = "$prefix.gradle.${this.name}Plugin"
         }
+        register("DocumentationModule").configure {
+            val prefix = "org.kotools.types"
+            this.id = "$prefix.documentation.module"
+            this.implementationClass = "${prefix}.gradle.${this.name}Plugin"
+        }
         register("DocumentationRoot").configure {
             val prefix = "org.kotools.types"
             this.id = "$prefix.documentation.root"
