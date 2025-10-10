@@ -1,10 +1,10 @@
 package org.kotools.types.gradle
 
-import convention.base.TaskGroup
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.diagnostics.TaskReportTask
 import org.gradle.kotlin.dsl.named
+import org.kotools.types.gradle.internal.TaskGroup
 
 /** Gradle convention plugin that configures the basics of a module. */
 public class BaseModulePlugin : Plugin<Project> {

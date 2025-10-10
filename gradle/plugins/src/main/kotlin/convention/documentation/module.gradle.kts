@@ -1,12 +1,12 @@
 package convention.documentation
 
-import convention.base.TaskGroup
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
+import org.kotools.types.gradle.internal.TaskGroup
 
 pluginManager.apply(BasePlugin::class)
 pluginManager.apply(DokkaPlugin::class)
