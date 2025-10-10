@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.convention.base.module)
+    alias(libs.plugins.kotools.types.base.module)
     alias(libs.plugins.kotlin.multiplatform)
     `maven-publish`
     signing
