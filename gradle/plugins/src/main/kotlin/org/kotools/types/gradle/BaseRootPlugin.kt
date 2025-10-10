@@ -13,13 +13,11 @@ public class BaseRootPlugin : Plugin<Project> {
         project.repositories.mavenCentral()
         project.tasks.named<TaskReportTask>("tasks")
             .configure { this.displayGroup = TaskGroup.Root.toString() }
-        project.withBasePlugin()
+        project.pluginManager.withPlugin("base") {
+            val tasks: Set<String> =
+                setOf("clean", "check", "assemble", "build")
+            project.tasks.named(tasks::contains)
+                .configureEach { this.group = TaskGroup.Root.toString() }
+        }
     }
 }
-
-private fun Project.withBasePlugin(): Unit = this.pluginManager
-    .withPlugin("base") {
-        val tasks: Set<String> = setOf("clean", "check", "assemble", "build")
-        this@withBasePlugin.tasks.named(tasks::contains)
-            .configureEach { this.group = TaskGroup.Root.toString() }
-    }
