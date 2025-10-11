@@ -10,6 +10,8 @@ import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressTest {
+    // ----------------------------- equals(Any?) ------------------------------
+
     @Test
     fun equalsFailsWithAnotherTypeThanEmailAddress() {
         val text: String = Values.VALID
@@ -27,6 +29,8 @@ class EmailAddressTest {
         assertFalse(actual)
     }
 
+    // ------------------------------ hashCode() -------------------------------
+
     @Test
     fun hashCodeUsesOriginalText() {
         val text = "contact@kotools.org"
@@ -36,7 +40,7 @@ class EmailAddressTest {
         assertEquals(expected, actual)
     }
 
-    // ------------------------------- Companion -------------------------------
+    // ----------------------- Companion.orNull(String) ------------------------
 
     @Test
     fun orNullStringFailsWithMissingAtSign(): Unit =
@@ -63,6 +67,8 @@ class EmailAddressTest {
         assertNull(actual)
     }
 
+    // -------------- Companion.orNull(String, EmailAddressRegex) --------------
+
     @Test
     fun orNullStringEmailAddressRegexFailsWithTextNotMatchingRegex() {
         val text = "first-contact@kotools.org"
@@ -70,6 +76,8 @@ class EmailAddressTest {
         val actual: EmailAddress? = EmailAddress.orNull(text, regex)
         assertNull(actual)
     }
+
+    // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test
     fun orThrowStringFailsWithMissingAtSign(): Unit =
@@ -100,6 +108,8 @@ class EmailAddressTest {
             ExceptionMessage.invalidEmailAddress(text)
         assertEquals(expected, actual)
     }
+
+    // ------------- Companion.orThrow(String, EmailAddressRegex) --------------
 
     @Test
     fun orThrowStringEmailAddressRegexFailsWithTextNotMatchingRegex() {
