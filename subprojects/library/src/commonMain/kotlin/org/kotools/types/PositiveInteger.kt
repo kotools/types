@@ -4,6 +4,7 @@ import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
+import kotlin.jvm.JvmStatic
 import kotlin.math.max
 
 /**
@@ -252,6 +253,7 @@ public class PositiveInteger private constructor(private val text: String) {
          * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.of]
          * </details>
          */
+        @JvmStatic
         public infix fun of(text: String): PositiveInteger? {
             val number: String = text.removePrefix("+")
             val regex = Regex("""^[1-9]\d*$""")
@@ -284,6 +286,7 @@ public class PositiveInteger private constructor(private val text: String) {
          * SAMPLE: [org.kotools.types.PositiveIntegerJavaSample.minimum]
          * </details>
          */
+        @JvmStatic
         public fun minimum(): PositiveInteger {
             val text = "1"
             return this.of(text) ?: error(
