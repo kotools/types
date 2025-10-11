@@ -112,7 +112,36 @@ public class EmailAddress private constructor(private val text: String) {
 
     /** Contains static declarations for the [EmailAddress] type. */
     public companion object {
-        // ------------------------- Factory functions -------------------------
+        /**
+         * Returns an email address with the specified [text], or returns `null`
+         * if the [text] doesn't match the specified [regex].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.ofTextRegex]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.ofTextRegex]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
+        @JvmStatic
+        public fun of(text: String, regex: EmailAddressRegex): EmailAddress? =
+            if (regex matches text) EmailAddress(text) else null
 
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or

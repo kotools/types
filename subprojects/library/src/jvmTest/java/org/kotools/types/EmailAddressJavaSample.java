@@ -37,6 +37,14 @@ class EmailAddressJavaSample {
     // ------------------------------- Companion -------------------------------
 
     @Test
+    void ofTextRegex() {
+        final String text = "contact@kotools.org";
+        final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
+        final EmailAddress result = EmailAddress.of(text, regex);
+        Assertions.assertNotNull(result);
+    }
+
+    @Test
     void orThrowString() {
         final String text = "contact@kotools.org";
         EmailAddress.orThrow(text);

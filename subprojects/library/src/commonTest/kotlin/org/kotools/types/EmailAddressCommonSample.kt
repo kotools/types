@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -34,6 +35,14 @@ class EmailAddressCommonSample {
     }
 
     // ------------------------------- Companion -------------------------------
+
+    @Test
+    fun ofTextRegex() {
+        val text = "contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val result: EmailAddress? = EmailAddress.of(text, regex)
+        assertNotNull(result)
+    }
 
     @Test
     fun orNullString() {

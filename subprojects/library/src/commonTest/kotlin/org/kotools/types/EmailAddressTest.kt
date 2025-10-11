@@ -6,6 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -38,6 +39,24 @@ class EmailAddressTest {
             .hashCode()
         val expected: Int = hashCodeOf(text)
         assertEquals(expected, actual)
+    }
+
+    // ---------------- Companion.of(String, EmailAddressRegex) ----------------
+
+    @Test
+    fun ofPassesWithTextMatchingRegex() {
+        val text = "contact@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
+        val actual: EmailAddress? = EmailAddress.of(text, regex)
+        assertNotNull(actual)
+    }
+
+    @Test
+    fun ofFailsWithTextNotMatchingRegex() {
+        val text = "contact-2@kotools.org"
+        val regex: EmailAddressRegex = EmailAddressRegex.alphanumeric()
+        val actual: EmailAddress? = EmailAddress.of(text, regex)
+        assertNull(actual)
     }
 
     // ----------------------- Companion.orNull(String) ------------------------
