@@ -10,6 +10,8 @@ import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressRegexTest {
+    // ----------------------------- equals(Any?) ------------------------------
+
     @Test
     fun equalsFailsWithNull() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
@@ -34,6 +36,8 @@ class EmailAddressRegexTest {
         assertFalse(actual)
     }
 
+    // ------------------------------ hashCode() -------------------------------
+
     @Test
     fun hashCodeUsesStringRepresentation() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
@@ -42,6 +46,8 @@ class EmailAddressRegexTest {
         assertEquals(expected, actual)
     }
 
+    // ------------------------- matches(CharSequence) -------------------------
+
     @Test
     fun matchesFailsWithTextNotMatchingRegularExpression() {
         val text = "invalid-contact@kotools.org"
@@ -49,7 +55,7 @@ class EmailAddressRegexTest {
         assertFalse(regex matches text)
     }
 
-    // ------------------------------- Companion -------------------------------
+    // ----------------------- Companion.orNull(String) ------------------------
 
     @Test
     fun orNullFailsWithPatternNotMatchingDefaultOne() {
@@ -57,6 +63,8 @@ class EmailAddressRegexTest {
         val actual: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
         assertNull(actual)
     }
+
+    // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test
     fun orThrowFailsWithPatternNotMatchingDefaultOne() {
