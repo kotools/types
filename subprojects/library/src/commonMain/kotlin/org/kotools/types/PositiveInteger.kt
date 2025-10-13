@@ -129,9 +129,9 @@ public class PositiveInteger private constructor(private val text: String) {
             }
             .reversed()
             .joinToString(separator = "")
-        return of(result) ?: error(
+        return checkNotNull(PositiveInteger of result) {
             "$this + $other = $result, which is not a positive integer."
-        )
+        }
     }
 
     /**
