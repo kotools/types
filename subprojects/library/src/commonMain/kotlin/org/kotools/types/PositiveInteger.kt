@@ -289,9 +289,9 @@ public class PositiveInteger private constructor(private val text: String) {
         @JvmStatic
         public fun minimum(): PositiveInteger {
             val text = "1"
-            return this.of(text) ?: error(
+            return checkNotNull(this of text) {
                 "'$text' doesn't represent an integer greater than zero."
-            )
+            }
         }
     }
 }
