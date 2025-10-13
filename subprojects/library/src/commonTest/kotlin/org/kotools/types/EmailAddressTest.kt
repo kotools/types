@@ -41,6 +41,33 @@ class EmailAddressTest {
         assertEquals(expected, actual)
     }
 
+    // ------------------------- Companion.of(String) --------------------------
+
+    @Test
+    fun ofPassesWithTextMatchingDefaultRegex() {
+        assertNotNull(EmailAddress of "contact@kotools.org")
+    }
+
+    @Test
+    fun ofFailsWithTextNotHavingAtSign(): Unit =
+        assertNull(EmailAddress of "contactKotools.org")
+
+    @Test
+    fun ofFailsWithTextNotHavingDotInDomain(): Unit =
+        assertNull(EmailAddress of "contact@kotoolsOrg")
+
+    @Test
+    fun ofFailsWithTextHavingWhitespacesInLocalPart(): Unit =
+        assertNull(EmailAddress of " cont  act @kotools.org")
+
+    @Test
+    fun ofFailsWithTextHavingWhitespacesInFirstLabelOfDomain(): Unit =
+        assertNull(EmailAddress of "contact@ ko tools .org")
+
+    @Test
+    fun ofFailsWithTextHavingWhitespacesInSecondLabelOfDomain(): Unit =
+        assertNull(EmailAddress of "contact@kotools. or  g ")
+
     // ---------------- Companion.of(String, EmailAddressRegex) ----------------
 
     @Test

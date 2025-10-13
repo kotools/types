@@ -114,6 +114,39 @@ public class EmailAddress private constructor(private val text: String) {
     public companion object {
         /**
          * Returns an email address with the specified [text], or returns `null`
+         * if the [text] doesn't match [EmailAddressRegex.Companion.default].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.ofText]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.ofText]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
+        @JvmStatic
+        public infix fun of(text: String): EmailAddress? {
+            val regex: EmailAddressRegex = EmailAddressRegex.default()
+            return this.of(text, regex)
+        }
+
+        /**
+         * Returns an email address with the specified [text], or returns `null`
          * if the [text] doesn't match the specified [regex].
          *
          * <br>

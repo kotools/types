@@ -37,6 +37,11 @@ class EmailAddressCommonSample {
     // ------------------------------- Companion -------------------------------
 
     @Test
+    fun ofText() {
+        assertNotNull(EmailAddress of "contact@kotools.org")
+    }
+
+    @Test
     fun ofTextRegex() {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
