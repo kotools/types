@@ -201,7 +201,7 @@ public class EmailAddress private constructor(private val text: String) {
         @JvmSynthetic
         public fun orNull(text: String): EmailAddress? {
             val textType: String? = text::class.simpleName
-            error("'orNull($textType)' is deprecated as error.")
+            this.errorDeprecation(function = "orNull($textType)")
         }
 
         /**
@@ -231,7 +231,7 @@ public class EmailAddress private constructor(private val text: String) {
         ): EmailAddress? {
             val textType: String? = text::class.simpleName
             val regexType: String? = regex::class.simpleName
-            error("'orNull($textType, $regexType)' is deprecated as error.")
+            this.errorDeprecation(function = "orNull($textType, $regexType)")
         }
 
         /**
@@ -239,37 +239,23 @@ public class EmailAddress private constructor(private val text: String) {
          * throws an [IllegalArgumentException] if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.default].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowString]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.orThrowString]
-         * </details>
-         * <br>
-         *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text].
          */
+        @Deprecated(
+            "Use the 'of(String)' function instead.",
+            ReplaceWith(
+                "requireNotNull(EmailAddress of text)",
+                "org.kotools.types.EmailAddress"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String): EmailAddress {
-            val regex: EmailAddressRegex = EmailAddressRegex.default()
-            return this.orThrow(text, regex)
+            val textType: String? = text::class.simpleName
+            this.errorDeprecation(function = "orThrow($textType)")
         }
 
         /**
@@ -314,5 +300,8 @@ public class EmailAddress private constructor(private val text: String) {
             }
             return EmailAddress(text)
         }
+
+        private fun errorDeprecation(function: String): Nothing =
+            error("'$function' is deprecated as error.")
     }
 }

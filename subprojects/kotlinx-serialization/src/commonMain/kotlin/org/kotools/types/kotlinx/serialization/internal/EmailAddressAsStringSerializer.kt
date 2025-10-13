@@ -4,6 +4,7 @@ import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddress
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.ExceptionMessage
 
 @ExperimentalKotoolsTypesApi
 internal class EmailAddressAsStringSerializer : StringSerializer<EmailAddress> {
@@ -17,7 +18,9 @@ internal class EmailAddressAsStringSerializer : StringSerializer<EmailAddress> {
     // ----------------------- Serialization operations ------------------------
 
     override fun deserialize(text: String): EmailAddress =
-        EmailAddress.orThrow(text)
+        requireNotNull(EmailAddress of text) {
+            ExceptionMessage.invalidEmailAddress(text)
+        }
 
     // ------------------------------ Conversions ------------------------------
 

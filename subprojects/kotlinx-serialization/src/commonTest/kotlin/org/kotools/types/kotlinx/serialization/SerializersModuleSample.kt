@@ -6,6 +6,7 @@ import org.kotools.types.EmailAddress
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class SerializersModuleSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -14,7 +15,8 @@ class SerializersModuleSample {
         val format = Json {
             serializersModule = KotoolsTypesSerializersModule()
         }
-        val address: EmailAddress = EmailAddress.orThrow("contact@kotools.org")
+        val address: EmailAddress = EmailAddress.of("contact@kotools.org")
+            ?: fail()
         val encoded: String = format.encodeToString(address)
         assertEquals(expected = "\"$address\"", encoded)
         val decoded: EmailAddress = format.decodeFromString(encoded)

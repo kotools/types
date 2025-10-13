@@ -9,27 +9,32 @@ class EmailAddressJavaSample {
     @Test
     void equalsOverride() {
         final String text = "contact@kotools.org";
-        final EmailAddress first = EmailAddress.orThrow(text);
-        final EmailAddress second = EmailAddress.orThrow(text);
-        final boolean actual = first.equals(second);
-        Assertions.assertTrue(actual);
+        final EmailAddress first = EmailAddress.of(text);
+        Assertions.assertNotNull(first);
+        final EmailAddress second = EmailAddress.of(text);
+        Assertions.assertNotNull(second);
+        final boolean result = first.equals(second);
+        Assertions.assertTrue(result);
     }
 
     @Test
     void hashCodeOverride() {
         final String text = "contact@kotools.org";
-        final int first = EmailAddress.orThrow(text)
-                .hashCode();
-        final int second = EmailAddress.orThrow(text)
-                .hashCode();
-        final boolean actual = first == second;
-        Assertions.assertTrue(actual);
+        final EmailAddress address1 = EmailAddress.of(text);
+        Assertions.assertNotNull(address1);
+        final int hashCode1 = address1.hashCode();
+        final EmailAddress address2 = EmailAddress.of(text);
+        Assertions.assertNotNull(address2);
+        final int hashCode2 = address2.hashCode();
+        final boolean result = hashCode1 == hashCode2;
+        Assertions.assertTrue(result);
     }
 
     @Test
     void toStringOverride() {
         final String text = "contact@kotools.org";
-        final EmailAddress address = EmailAddress.orThrow(text);
+        final EmailAddress address = EmailAddress.of(text);
+        Assertions.assertNotNull(address);
         final String actual = address.toString();
         Assertions.assertEquals(text, actual);
     }
@@ -48,12 +53,6 @@ class EmailAddressJavaSample {
         final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
         final EmailAddress result = EmailAddress.of(text, regex);
         Assertions.assertNotNull(result);
-    }
-
-    @Test
-    void orThrowString() {
-        final String text = "contact@kotools.org";
-        EmailAddress.orThrow(text);
     }
 
     @Test

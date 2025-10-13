@@ -4,14 +4,15 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlin.test.fail
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressCommonSample {
     @Test
     fun equalsOverride() {
         val text = "contact@kotools.org"
-        val first: EmailAddress = EmailAddress.orThrow(text)
-        val second: EmailAddress = EmailAddress.orThrow(text)
+        val first: EmailAddress = EmailAddress.of(text) ?: fail()
+        val second: EmailAddress = EmailAddress.of(text) ?: fail()
         val result: Boolean = first == second // or first.equals(second)
         assertTrue(result)
     }
@@ -19,17 +20,19 @@ class EmailAddressCommonSample {
     @Test
     fun hashCodeOverride() {
         val text = "contact@kotools.org"
-        val hashCode: Int = EmailAddress.orThrow(text)
-            .hashCode()
-        val other: Int = EmailAddress.orThrow(text)
-            .hashCode()
+        val hashCode: Int = EmailAddress.of(text)
+            ?.hashCode()
+            ?: fail()
+        val other: Int = EmailAddress.of(text)
+            ?.hashCode()
+            ?: fail()
         assertEquals(hashCode, other)
     }
 
     @Test
     fun toStringOverride() {
         val text = "contact@kotools.org"
-        val emailAddress: EmailAddress = EmailAddress.orThrow(text)
+        val emailAddress: EmailAddress = EmailAddress.of(text) ?: fail()
         val result = "$emailAddress" // or emailAddress.toString()
         assertEquals(expected = text, result)
     }
@@ -47,13 +50,6 @@ class EmailAddressCommonSample {
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
         val result: EmailAddress? = EmailAddress.of(text, regex)
         assertNotNull(result)
-    }
-
-    @Test
-    fun orThrowString() {
-        val text = "contact@kotools.org"
-        val emailAddress: EmailAddress = EmailAddress.orThrow(text)
-        assertEquals(expected = text, "$emailAddress")
     }
 
     @Test
