@@ -191,7 +191,7 @@ public class EmailAddress private constructor(private val text: String) {
         @Deprecated(
             "Use the 'of(String)' function instead.",
             ReplaceWith(
-                "EmailAddress.of(text)",
+                "EmailAddress of text",
                 "org.kotools.types.EmailAddress"
             ),
             DeprecationLevel.ERROR
