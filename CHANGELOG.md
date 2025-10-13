@@ -23,6 +23,9 @@ All notable changes to this project will be documented in this file.
   than zero ([#661](https://github.com/kotools/types/issues/661)). Contrarily to
   the integer types provided by Kotlin (`Byte`, `Short`, `Int` and `Long`), this
   type has no maximum value and can hold greater values than `Long.MAX_VALUE`.
+- The `of(String)` and the `of(String, EmailAddressRegex)` **experimental**
+  functions in the `EmailAddress.Companion` type, for creating an instance of
+  `EmailAddress` from the specified `text` ([#865]).
 
 ### ♻️ Changed
 
@@ -34,6 +37,12 @@ All notable changes to this project will be documented in this file.
   `EmailAddress.Companion.orThrow(String)` **experimental** functions refer to
   the `EmailAddressRegex.Companion.default()` **experimental** function instead
   of the `EmailAddress.Companion.PATTERN` **deprecated** property ([#838]).
+
+### 🗑️ Deprecated
+
+- The `orNull` and the `orThrow` functions of the `EmailAddress.Companion`
+  **experimental** type, for using the `EmailAddress.Companion.of` functions
+  instead ([#865]).
 
 ### 🔥 Removed
 
@@ -55,6 +64,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#838]: https://github.com/kotools/types/issues/838
 [#844]: https://github.com/kotools/types/issues/844
 [#854]: https://github.com/kotools/types/issues/854
+[#865]: https://github.com/kotools/types/issues/865
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
