@@ -3,7 +3,10 @@ package org.kotools.types.gradle
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.diagnostics.TaskReportTask
+import org.gradle.api.tasks.testing.AbstractTestTask
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.named
+import org.gradle.kotlin.dsl.withType
 import org.kotools.types.gradle.internal.TaskGroup
 
 /** Gradle convention plugin that configures the basics of a module. */
@@ -27,6 +30,9 @@ public class BaseModulePlugin : Plugin<Project> {
                 setOf("clean", "check", "assemble", "build")
             project.tasks.named(tasks::contains)
                 .configureEach { this.group = TaskGroup.Module.toString() }
+            project.tasks.withType<AbstractTestTask>().configureEach {
+                this.testLogging { this.events(TestLogEvent.FAILED) }
+            }
         }
     }
 }
