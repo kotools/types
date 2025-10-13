@@ -206,6 +206,45 @@ public class EmailAddressRegex private constructor(
 
         /**
          * Returns a regular expression for validating
+         * [email addresses][EmailAddress] with the specified [pattern], or
+         * returns `null` if the [pattern] doesn't match the
+         * [default one][EmailAddressRegex.Companion.default].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.of]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.of]
+         * </details>
+         */
+        @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
+        @JvmStatic
+        public infix fun of(pattern: String): EmailAddressRegex? {
+            val isValidPattern: Boolean = this.default()
+                .toString()
+                .toRegex()
+                .matches(pattern)
+            return if (isValidPattern) EmailAddressRegex(pattern)
+            else null
+        }
+
+        /**
+         * Returns a regular expression for validating
          * [email addresses][EmailAddress] from the specified [pattern], or
          * returns `null` if the [pattern] doesn't match the
          * [default one][EmailAddressRegex.Companion.default].

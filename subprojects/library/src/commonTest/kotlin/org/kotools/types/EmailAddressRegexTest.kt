@@ -6,6 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -54,6 +55,17 @@ class EmailAddressRegexTest {
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
         assertFalse(regex matches text)
     }
+
+    // ------------------------- Companion.of(String) --------------------------
+
+    @Test
+    fun ofPassesWithPatternMatchingDefaultRegex() {
+        assertNotNull(EmailAddressRegex of """^[a-z]+@[a-z]+\.[a-z]+$""")
+    }
+
+    @Test
+    fun ofFailsWithPatternNotMatchingDefaultRegex(): Unit =
+        assertNull(EmailAddressRegex of """^[a-z]+\.[a-z]+$""")
 
     // ----------------------- Companion.orNull(String) ------------------------
 

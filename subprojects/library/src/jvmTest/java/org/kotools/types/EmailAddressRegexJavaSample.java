@@ -60,6 +60,13 @@ class EmailAddressRegexJavaSample {
     }
 
     @Test
+    void of() {
+        final String pattern = "^[a-z]+@[a-z]+\\.[a-z]+$";
+        final EmailAddressRegex result = EmailAddressRegex.of(pattern);
+        Assertions.assertNotNull(result);
+    }
+
+    @Test
     void orThrow() {
         EmailAddressRegex.orThrow("^\\S+@\\S+\\.\\S+$");
     }

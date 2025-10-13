@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -43,6 +44,11 @@ class EmailAddressRegexCommonSample {
     fun default() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
         assertEquals(expected = """^\S+@\S+\.\S+$""", "$regex")
+    }
+
+    @Test
+    fun of() {
+        assertNotNull(EmailAddressRegex of """^[a-z]+@[a-z]+\.[a-z]+$""")
     }
 
     @Test
