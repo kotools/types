@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.DeprecatedAsErrorSince
+import org.kotools.types.internal.Error
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -200,7 +201,7 @@ public class EmailAddress private constructor(private val text: String) {
         @JvmSynthetic
         public fun orNull(text: String): EmailAddress? {
             val textType: String? = text::class.simpleName
-            this.errorDeprecation(function = "orNull($textType)")
+            Error.deprecatedFunction("EmailAddress.Companion.orNull($textType)")
         }
 
         /**
@@ -230,7 +231,9 @@ public class EmailAddress private constructor(private val text: String) {
         ): EmailAddress? {
             val textType: String? = text::class.simpleName
             val regexType: String? = regex::class.simpleName
-            this.errorDeprecation(function = "orNull($textType, $regexType)")
+            Error.deprecatedFunction(
+                "EmailAddress.Companion.orNull($textType, $regexType)"
+            )
         }
 
         /**
@@ -254,7 +257,9 @@ public class EmailAddress private constructor(private val text: String) {
         @JvmStatic
         public fun orThrow(text: String): EmailAddress {
             val textType: String? = text::class.simpleName
-            this.errorDeprecation(function = "orThrow($textType)")
+            Error.deprecatedFunction(
+                "EmailAddress.Companion.orThrow($textType)"
+            )
         }
 
         /**
@@ -282,10 +287,9 @@ public class EmailAddress private constructor(private val text: String) {
         ): EmailAddress {
             val textType: String? = text::class.simpleName
             val regexType: String? = regex::class.simpleName
-            this.errorDeprecation(function = "orThrow($textType, $regexType)")
+            Error.deprecatedFunction(
+                "EmailAddress.Companion.orThrow($textType, $regexType)"
+            )
         }
-
-        private fun errorDeprecation(function: String): Nothing =
-            error("'$function' is deprecated as error.")
     }
 }
