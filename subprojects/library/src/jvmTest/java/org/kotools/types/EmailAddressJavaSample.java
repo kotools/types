@@ -54,11 +54,4 @@ class EmailAddressJavaSample {
         final EmailAddress result = EmailAddress.of(text, regex);
         Assertions.assertNotNull(result);
     }
-
-    @Test
-    void orThrowStringEmailAddressRegex() {
-        final String text = "contact@kotools.org";
-        final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
-        EmailAddress.orThrow(text, regex);
-    }
 }

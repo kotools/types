@@ -2,7 +2,6 @@ package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.DeprecatedAsErrorSince
-import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -263,42 +262,27 @@ public class EmailAddress private constructor(private val text: String) {
          * [IllegalArgumentException] if the [text] doesn't match the specified
          * [regex].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orThrowStringEmailAddressRegex]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.orThrowStringEmailAddressRegex]
-         * </details>
-         * <br>
-         *
          * See the [orNull] function for returning `null` instead of throwing an
          * exception in case of invalid [text].
          */
+        @Deprecated(
+            "Use the 'of(String, EmailAddressRegex)' function instead.",
+            ReplaceWith(
+                "requireNotNull(EmailAddress.of(text, regex))",
+                "org.kotools.types.EmailAddress"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
         @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
         @JvmStatic
         public fun orThrow(
             text: String,
             regex: EmailAddressRegex
         ): EmailAddress {
-            require(regex matches text) {
-                ExceptionMessage.invalidEmailAddress(text)
-            }
-            return EmailAddress(text)
+            val textType: String? = text::class.simpleName
+            val regexType: String? = regex::class.simpleName
+            this.errorDeprecation(function = "orThrow($textType, $regexType)")
         }
 
         private fun errorDeprecation(function: String): Nothing =
