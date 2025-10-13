@@ -67,15 +67,6 @@ class EmailAddressRegexTest {
     fun ofFailsWithPatternNotMatchingDefaultRegex(): Unit =
         assertNull(EmailAddressRegex of """^[a-z]+\.[a-z]+$""")
 
-    // ----------------------- Companion.orNull(String) ------------------------
-
-    @Test
-    fun orNullFailsWithPatternNotMatchingDefaultOne() {
-        val pattern = """^[a-z]+\.[a-z]+$"""
-        val actual: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
-        assertNull(actual)
-    }
-
     // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test

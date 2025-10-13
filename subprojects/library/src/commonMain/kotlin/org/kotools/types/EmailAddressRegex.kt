@@ -1,6 +1,8 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.DeprecatedAsErrorSince
+import org.kotools.types.internal.Error
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -249,31 +251,27 @@ public class EmailAddressRegex private constructor(
          * returns `null` if the [pattern] doesn't match the
          * [default one][EmailAddressRegex.Companion.default].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.orNull]
-         * </details>
-         * <br>
-         *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [orThrow] function for throwing an exception in case of
          * invalid [pattern] instead of returning `null`.
          */
+        @Deprecated(
+            "Use the 'of(String)' function instead.",
+            ReplaceWith(
+                "EmailAddressRegex of pattern",
+                "org.kotools.types.EmailAddressRegex"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
         @JvmSynthetic
         public fun orNull(pattern: String): EmailAddressRegex? {
-            val patternIsValid: Boolean = this.default()
-                .toString()
-                .toRegex()
-                .matches(pattern)
-            return if (patternIsValid) EmailAddressRegex(pattern) else null
+            val patternType: String? = pattern::class.simpleName
+            Error.deprecatedFunction(
+                "EmailAddressRegex.Companion.orNull($patternType)"
+            )
         }
 
         /**
@@ -310,7 +308,7 @@ public class EmailAddressRegex private constructor(
          */
         @JvmStatic
         public fun orThrow(pattern: String): EmailAddressRegex {
-            val regex: EmailAddressRegex? = this.orNull(pattern)
+            val regex: EmailAddressRegex? = this of pattern
             return requireNotNull(regex) {
                 ExceptionMessage.invalidEmailAddressPattern(pattern)
             }

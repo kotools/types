@@ -52,13 +52,6 @@ class EmailAddressRegexCommonSample {
     }
 
     @Test
-    fun orNull() {
-        val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-        val regex: EmailAddressRegex? = EmailAddressRegex.orNull(pattern)
-        assertEquals(expected = pattern, "$regex")
-    }
-
-    @Test
     fun orThrow() {
         val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
         val regex: EmailAddressRegex = EmailAddressRegex.orThrow(pattern)
