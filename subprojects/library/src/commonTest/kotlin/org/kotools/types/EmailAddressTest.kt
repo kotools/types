@@ -86,33 +86,6 @@ class EmailAddressTest {
         assertNull(actual)
     }
 
-    // ----------------------- Companion.orNull(String) ------------------------
-
-    @Test
-    fun orNullStringFailsWithMissingAtSign(): Unit =
-        this.orNullStringFailsWith(Values.MISSING_AT_SIGN)
-
-    @Test
-    fun orNullStringFailsWithMissingDotInDomain(): Unit =
-        this.orNullStringFailsWith(Values.MISSING_DOMAIN_DOT)
-
-    @Test
-    fun orNullStringFailsWithWhitespacesInLocalPart(): Unit =
-        this.orNullStringFailsWith(Values.WHITESPACES_IN_LOCAL_PART)
-
-    @Test
-    fun orNullStringFailsWithWhitespacesInDomainFirstLabel(): Unit =
-        this.orNullStringFailsWith(Values.WHITESPACES_IN_DOMAIN_FIRST_LABEL)
-
-    @Test
-    fun orNullStringFailsWithWhitespacesInDomainSecondLabel(): Unit =
-        this.orNullStringFailsWith(Values.WHITESPACES_IN_DOMAIN_SECOND_LABEL)
-
-    private fun orNullStringFailsWith(text: String) {
-        val actual: EmailAddress? = EmailAddress.orNull(text)
-        assertNull(actual)
-    }
-
     // -------------- Companion.orNull(String, EmailAddressRegex) --------------
 
     @Test

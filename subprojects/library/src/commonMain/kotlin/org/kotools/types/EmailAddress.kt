@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
@@ -181,29 +182,26 @@ public class EmailAddress private constructor(private val text: String) {
          * returns `null` if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.Companion.default].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.orNullString]
-         * </details>
-         * <br>
-         *
          * This function is not available from Java code due to its non-explicit
          * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
          * See the [orThrow] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
+        @Deprecated(
+            "Use the 'of(String)' function instead.",
+            ReplaceWith(
+                "EmailAddress.of(text)",
+                "org.kotools.types.EmailAddress"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(text: String): EmailAddress? {
-            val regex: EmailAddressRegex = EmailAddressRegex.default()
-            return if (regex matches text) EmailAddress(text) else null
+            val textType: String? = text::class.simpleName
+            error("'orNull($textType)' is deprecated as error.")
         }
 
         /**

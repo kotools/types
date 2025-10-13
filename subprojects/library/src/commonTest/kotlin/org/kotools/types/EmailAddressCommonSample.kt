@@ -50,13 +50,6 @@ class EmailAddressCommonSample {
     }
 
     @Test
-    fun orNullString() {
-        val text = "contact@kotools.org"
-        val emailAddress: EmailAddress? = EmailAddress.orNull(text)
-        assertEquals(expected = text, "$emailAddress")
-    }
-
-    @Test
     fun orNullStringEmailAddressRegex() {
         val text = "contact@kotools.org"
         val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
