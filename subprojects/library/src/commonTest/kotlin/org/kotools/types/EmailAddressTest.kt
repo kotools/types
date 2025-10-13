@@ -86,16 +86,6 @@ class EmailAddressTest {
         assertNull(actual)
     }
 
-    // -------------- Companion.orNull(String, EmailAddressRegex) --------------
-
-    @Test
-    fun orNullStringEmailAddressRegexFailsWithTextNotMatchingRegex() {
-        val text = "first-contact@kotools.org"
-        val regex: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        val actual: EmailAddress? = EmailAddress.orNull(text, regex)
-        assertNull(actual)
-    }
-
     // ----------------------- Companion.orThrow(String) -----------------------
 
     @Test
