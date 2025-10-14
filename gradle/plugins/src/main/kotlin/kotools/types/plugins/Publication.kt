@@ -55,7 +55,7 @@ private fun RepositoryHandler.ossrh(project: Project) {
 }
 
 private fun Project.sonatypeUrl(): URI {
-    val prefix = "https://s01.oss.sonatype.org"
+    val prefix = "https://ossrh-staging-api.central.sonatype.com"
     val isSnapshot: Boolean = "${this.version}".endsWith("SNAPSHOT")
     val suffix: String = if (isSnapshot) "content/repositories/snapshots"
     else {
