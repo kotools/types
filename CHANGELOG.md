@@ -20,9 +20,9 @@ All notable changes to this project will be documented in this file.
 
 - The `PositiveInteger` **experimental** type, in the `org.kotools.types`
   package of the `types` module, for representing an integer that is greater
-  than zero ([#661](https://github.com/kotools/types/issues/661)). Contrarily to
-  the integer types provided by Kotlin (`Byte`, `Short`, `Int` and `Long`), this
-  type has no maximum value and can hold greater values than `Long.MAX_VALUE`.
+  than zero ([#661]). Contrarily to the integer types provided by Kotlin
+  (`Byte`, `Short`, `Int` and `Long`), this type has no maximum value and can
+  hold greater values than `Long.MAX_VALUE`.
 - The `of(String)` and the `of(String, EmailAddressRegex)` **experimental**
   functions in the `EmailAddress.Companion` type, for creating an instance of
   `EmailAddress` from the specified `text` ([#865]).
@@ -67,6 +67,7 @@ All notable changes to this project will be documented in this file.
 Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
+[#661]: https://github.com/kotools/types/issues/661
 [#838]: https://github.com/kotools/types/issues/838
 [#844]: https://github.com/kotools/types/issues/844
 [#854]: https://github.com/kotools/types/issues/854
