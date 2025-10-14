@@ -29,8 +29,8 @@ jobs:
         id: create
         uses: nexus-actions/create-nexus-staging-repo@v1.3.0
         with:
-          username: ${{ secrets.SONATYPE_USERNAME }}
-          password: ${{ secrets.SONATYPE_PASSWORD }}
+          username: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
+          password: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
           staging_profile_id: ${{ secrets.SONATYPE_PROFILE }}
           base_url: https://s01.oss.sonatype.org/service/local/
           description:
@@ -45,8 +45,8 @@ jobs:
       GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+      SONATYPE_USERNAME: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
+      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
       SONATYPE_REPOSITORY_IDENTIFIER:
         ${{ needs.setup.outputs.repository_identifier }}
     steps:

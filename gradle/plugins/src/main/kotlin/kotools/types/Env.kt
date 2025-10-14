@@ -7,10 +7,10 @@ internal object Env {
     internal val gpgPrivateKey: String? by lazy { env("GPG_PRIVATE_KEY") }
 
     internal fun sonatypeUsernameOrNull(): String? =
-        this.env("SONATYPE_USERNAME")
+        this.env("SONATYPE_PORTAL_USERNAME")
 
     internal fun sonatypePasswordOrNull(): String? =
-        this.env("SONATYPE_PASSWORD")
+        this.env("SONATYPE_PORTAL_PASSWORD")
 
     internal fun sonatypeRepositoryIdentifierOrNull(): String? =
         this.env("SONATYPE_REPOSITORY_IDENTIFIER")
