@@ -4,6 +4,7 @@ import kotools.types.internal.hashCodeOf
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.ExceptionMessage
 
 @ExperimentalKotoolsTypesApi
 internal class EmailAddressRegexAsStringSerializer :
@@ -19,7 +20,9 @@ internal class EmailAddressRegexAsStringSerializer :
     // ----------------------- Serialization operations ------------------------
 
     override fun deserialize(text: String): EmailAddressRegex =
-        EmailAddressRegex.orThrow(text)
+        requireNotNull(EmailAddressRegex of text) {
+            ExceptionMessage.invalidEmailAddressPattern(text)
+        }
 
     // ------------------------------ Conversions ------------------------------
 

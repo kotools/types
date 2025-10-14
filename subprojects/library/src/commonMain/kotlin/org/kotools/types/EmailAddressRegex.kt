@@ -280,38 +280,24 @@ public class EmailAddressRegex private constructor(
          * throws an [IllegalArgumentException] if the [pattern] doesn't match
          * the [default one][EmailAddressRegex.Companion.default].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexCommonSample.orThrow]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.orThrow]
-         * </details>
-         * <br>
-         *
          * See the [orNull] function for returning `null` in case of invalid
          * [pattern] instead of throwing an exception.
          */
+        @Deprecated(
+            "Use the 'of(String)' function instead.",
+            ReplaceWith(
+                "requireNotNull(EmailAddressRegex of pattern)",
+                "org.kotools.types.EmailAddressRegex"
+            ),
+            DeprecationLevel.ERROR
+        )
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
         @JvmStatic
         public fun orThrow(pattern: String): EmailAddressRegex {
-            val regex: EmailAddressRegex? = this of pattern
-            return requireNotNull(regex) {
-                ExceptionMessage.invalidEmailAddressPattern(pattern)
-            }
+            val patternType: String? = pattern::class.simpleName
+            Error.deprecatedFunction(
+                "EmailAddressRegex.Companion.orThrow($patternType)"
+            )
         }
 
         /**
@@ -362,8 +348,12 @@ public class EmailAddressRegex private constructor(
          * </details>
          */
         @JvmStatic
-        public fun alphabetic(): EmailAddressRegex =
-            this.orThrow("""^[a-z]+@[a-z]+\.[a-z]+$""")
+        public fun alphabetic(): EmailAddressRegex {
+            val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
+            return checkNotNull(EmailAddressRegex of pattern) {
+                ExceptionMessage.invalidEmailAddressPattern(pattern)
+            }
+        }
 
         /**
          * Returns a regular expression for validating
@@ -416,7 +406,11 @@ public class EmailAddressRegex private constructor(
          * </details>
          */
         @JvmStatic
-        public fun alphanumeric(): EmailAddressRegex =
-            this.orThrow("""^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$""")
+        public fun alphanumeric(): EmailAddressRegex {
+            val pattern = """^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$"""
+            return checkNotNull(EmailAddressRegex of pattern) {
+                ExceptionMessage.invalidEmailAddressPattern(pattern)
+            }
+        }
     }
 }

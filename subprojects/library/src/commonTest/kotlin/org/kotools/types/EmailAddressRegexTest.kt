@@ -1,10 +1,8 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.ExceptionMessage
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -66,18 +64,4 @@ class EmailAddressRegexTest {
     @Test
     fun ofFailsWithPatternNotMatchingDefaultRegex(): Unit =
         assertNull(EmailAddressRegex of """^[a-z]+\.[a-z]+$""")
-
-    // ----------------------- Companion.orThrow(String) -----------------------
-
-    @Test
-    fun orThrowFailsWithPatternNotMatchingDefaultOne() {
-        val pattern = """^[a-z]+\.[a-z]+$"""
-        val exception: IllegalArgumentException = assertFailsWith {
-            EmailAddressRegex.orThrow(pattern)
-        }
-        val actual: ExceptionMessage = ExceptionMessage.from(exception)
-        val expected: ExceptionMessage =
-            ExceptionMessage.invalidEmailAddressPattern(pattern)
-        assertEquals(expected, actual)
-    }
 }

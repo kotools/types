@@ -67,11 +67,6 @@ class EmailAddressRegexJavaSample {
     }
 
     @Test
-    void orThrow() {
-        EmailAddressRegex.orThrow("^\\S+@\\S+\\.\\S+$");
-    }
-
-    @Test
     void alphabetic() {
         final EmailAddressRegex regex = EmailAddressRegex.alphabetic();
         final String pattern = regex.toString();
