@@ -26,6 +26,9 @@ All notable changes to this project will be documented in this file.
 - The `of(String)` and the `of(String, EmailAddressRegex)` **experimental**
   functions in the `EmailAddress.Companion` type, for creating an instance of
   `EmailAddress` from the specified `text` ([#865]).
+- The `EmailAddressRegex.Companion.of(String)` **experimental** function, for
+  creating an instance of `EmailAddressRegex` from the specified `pattern`
+  ([#868]).
 
 ### ♻️ Changed
 
@@ -43,6 +46,9 @@ All notable changes to this project will be documented in this file.
 - The `orNull` and the `orThrow` functions of the `EmailAddress.Companion`
   **experimental** type, for using the `EmailAddress.Companion.of` functions
   instead ([#865]).
+- The `orNull(String)` and the `orThrow(String)` functions of the
+  `EmailAddressRegex.Companion` **experimental** type, for using the
+  `EmailAddressRegex.Companion.of(String)` function instead ([#868]).
 
 ### 🔥 Removed
 
@@ -65,6 +71,7 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#844]: https://github.com/kotools/types/issues/844
 [#854]: https://github.com/kotools/types/issues/854
 [#865]: https://github.com/kotools/types/issues/865
+[#868]: https://github.com/kotools/types/issues/868
 [0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 
