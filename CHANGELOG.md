@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
   hold greater values than `Long.MAX_VALUE`.
 - The `of(String)` and the `of(String, EmailAddressRegex)` **experimental**
   functions in the `EmailAddress.Companion` type, for creating an instance of
-  `EmailAddress` from the specified `text` ([#865]).
+  `EmailAddress` from the specified `text` and `regex` ([#865]).
 - The `EmailAddressRegex.Companion.of(String)` **experimental** function, for
   creating an instance of `EmailAddressRegex` from the specified `pattern`
   ([#868]).
