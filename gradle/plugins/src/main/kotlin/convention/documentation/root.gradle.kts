@@ -1,11 +1,11 @@
 package convention.documentation
 
+import convention.base.TaskGroup
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
-import org.kotools.types.gradle.internal.TaskGroup
 
 plugins {
     base

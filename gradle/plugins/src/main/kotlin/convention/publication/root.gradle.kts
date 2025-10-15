@@ -1,7 +1,7 @@
 package convention.publication
 
+import convention.base.TaskGroup
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-import org.kotools.types.gradle.internal.TaskGroup
 
 private val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
     tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule")

@@ -1,4 +1,4 @@
-package org.kotools.types.gradle.internal
+package convention.base
 
 /** Represents a Gradle task group. */
 internal enum class TaskGroup {

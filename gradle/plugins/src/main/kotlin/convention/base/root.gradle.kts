@@ -1,7 +1,5 @@
 package convention.base
 
-import org.kotools.types.gradle.internal.TaskGroup
-
 plugins { base }
 
 repositories.mavenCentral()

@@ -1,7 +1,6 @@
 package convention.base
 
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.kotools.types.gradle.internal.TaskGroup
 
 plugins { base }
 
