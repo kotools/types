@@ -6,6 +6,7 @@ kotlinx-serialization = "1.6.3!!"
 
 [plugins]
 convention-base-root = { id = "convention.base.root" }
+convention-documentation-root = { id = "convention.documentation.root" }
 convention-publication-module = { id = "convention.publication.module" }
 convention-publication-root = { id = "convention.publication.root" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
@@ -15,7 +16,6 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 kotools-types-base-module = { id = "org.kotools.types.base.module" }
 kotools-types-documentation-module = { id = "org.kotools.types.documentation.module" }
-kotools-types-documentation-root = { id = "org.kotools.types.documentation.root" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 
 [libraries]
