@@ -2,6 +2,9 @@ package org.kotools.types.gradle.internal
 
 /** Represents a Gradle task group. */
 internal enum class TaskGroup {
+    /** The `CI` Gradle task group. */
+    CI,
+
     /** The `documentation` Gradle task group. */
     Documentation,
 

@@ -63,7 +63,7 @@ zipSources.configure {
 private val assembleSources: TaskProvider<Task> by tasks.registering
 assembleSources.configure {
     this.description = "Assembles the sources of the subprojects."
-    this.group = TaskGroup.Root.toString()
+    this.group = TaskGroup.CI.name
     this.dependsOn(zipSources)
 }
 
