@@ -5,6 +5,7 @@ kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
 
 [plugins]
+convention-base-module = { id = "convention.base.module" }
 convention-base-root = { id = "convention.base.root" }
 convention-documentation-root = { id = "convention.documentation.root" }
 convention-publication-module = { id = "convention.publication.module" }
@@ -14,7 +15,6 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
-kotools-types-base-module = { id = "org.kotools.types.base.module" }
 kotools-types-documentation-module = { id = "org.kotools.types.documentation.module" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 
