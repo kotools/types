@@ -6,8 +6,7 @@ plugins {
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.kotools.types.kotlin.multiplatform)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.kotools.types.documentation.module)
+    alias(libs.plugins.convention.documentation.module)
     alias(libs.plugins.kotools.samples.multiplatform)
     alias(libs.plugins.convention.publication.module)
 }

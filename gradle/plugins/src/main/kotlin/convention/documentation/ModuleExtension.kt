@@ -1,4 +1,4 @@
-package org.kotools.types.gradle
+package convention.documentation
 
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
