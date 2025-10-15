@@ -1,62 +1,26 @@
 name: Delivery
 on:
   workflow_dispatch:
-env:
-  GRADLE_CACHE_CLEANUP: true
-  JAVA_DISTRIBUTION: temurin
-  JAVA_VERSION: 17
 jobs:
-  # --------------------------------- Stage 1 ----------------------------------
-  setup:
-    name: Setup
-    runs-on: ubuntu-latest
-    outputs:
-      repository_identifier: ${{ steps.create.outputs.repository_id }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.2.2
-      - name: Setup Java
-        uses: actions/setup-java@v4.7.0
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Detect project version
-        run: |
-          echo "PROJECT_VERSION=$(./gradlew :types:version -q)" >> "$GITHUB_ENV"
-      - name: Create staging repository
-        id: create
-        uses: nexus-actions/create-nexus-staging-repo@v1.3.0
-        with:
-          username: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
-          password: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
-          staging_profile_id: ${{ secrets.SONATYPE_PROFILE }}
-          base_url: https://s01.oss.sonatype.org/service/local/
-          description:
-            Kotools Types ${{ env.PROJECT_VERSION }} (${{ github.run_number }})
-  # --------------------------------- Stage 2 ----------------------------------
   delivery:
     name: Delivery
-    needs: setup
     runs-on: macos-13
     env:
       GIT_USER: ${{ secrets.GIT_USER }}
       GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      SONATYPE_USERNAME: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
-      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
-      SONATYPE_REPOSITORY_IDENTIFIER:
-        ${{ needs.setup.outputs.repository_identifier }}
+      GRADLE_CACHE_CLEANUP: true
+      SONATYPE_PORTAL_USERNAME: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
+      SONATYPE_PORTAL_PASSWORD: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
       - name: Deliver 'types-internal' subproject
