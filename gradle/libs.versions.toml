@@ -9,6 +9,7 @@ convention-base-module = { id = "convention.base.module" }
 convention-base-root = { id = "convention.base.root" }
 convention-documentation-module = { id = "convention.documentation.module" }
 convention-documentation-root = { id = "convention.documentation.root" }
+convention-kotlin-multiplatform = { id = "convention.kotlin.multiplatform" }
 convention-publication-module = { id = "convention.publication.module" }
 convention-publication-root = { id = "convention.publication.root" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
@@ -16,7 +17,6 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
-kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
 
 [libraries]
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }

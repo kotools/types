@@ -13,7 +13,9 @@ publishing.repositories.maven {
     url = rootProject.layout.buildDirectory.dir("maven")
         .let(::uri)
 }
-publishing.publications.withType<MavenPublication>().configureEach {
+private val mavenPublications: NamedDomainObjectCollection<MavenPublication> =
+    publishing.publications.withType()
+mavenPublications.configureEach {
     pom {
         name.set("Kotools Types")
         description.set(
@@ -28,6 +30,12 @@ publishing.publications.withType<MavenPublication>().configureEach {
         }
     }
 }
+mavenPublications.matching { it.name == "kotlinMultiplatform" }
+    .configureEach {
+        groupId = project.group.toString()
+        artifactId = project.name
+        version = project.version.toString()
+    }
 
 private val gpgPrivateKey: String? = System.getenv("GPG_PRIVATE_KEY")
 private val gpgPassword: String? = System.getenv("GPG_PASSWORD")

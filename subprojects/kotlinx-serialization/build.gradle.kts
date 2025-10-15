@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.convention.base.module)
-    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.convention.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
-    alias(libs.plugins.kotools.types.kotlin.multiplatform)
     alias(libs.plugins.convention.documentation.module)
     alias(libs.plugins.kotools.samples.multiplatform)
     alias(libs.plugins.convention.publication.module)
