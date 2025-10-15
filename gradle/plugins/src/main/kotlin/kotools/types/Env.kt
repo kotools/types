@@ -12,8 +12,5 @@ internal object Env {
     internal fun sonatypePasswordOrNull(): String? =
         this.env("SONATYPE_PORTAL_PASSWORD")
 
-    internal fun sonatypeRepositoryIdentifierOrNull(): String? =
-        this.env("SONATYPE_REPOSITORY_IDENTIFIER")
-
     private fun env(name: String): String? = System.getenv(name)
 }
