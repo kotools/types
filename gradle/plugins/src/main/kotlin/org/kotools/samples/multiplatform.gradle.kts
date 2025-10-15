@@ -88,12 +88,12 @@ rootProject.tasks.withType<DokkaMultiModuleTask>().configureEach {
 tasks.named("check")
     .configure { this.dependsOn(checkSampleReferences) }
 
-kotlin.targets
+private val sourcesJarTaskNames: List<String> = kotlin.targets
     .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
-    .mapNotNull(tasks::findByName)
-    .forEach {
-        it.dependsOn(inlineSamples)
-        it.finalizedBy(restoreMainSources)
+tasks.named { it in sourcesJarTaskNames }
+    .configureEach {
+        this.dependsOn(inlineSamples)
+        this.finalizedBy(restoreMainSources)
     }
 
 private val kotlinCompilationTasks: TaskCollection<KotlinCompilationTask<*>> =
