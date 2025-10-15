@@ -1,0 +1,44 @@
+package convention.publication
+
+plugins {
+    `maven-publish`
+    signing
+}
+
+// ----------------------------- Plugin extensions -----------------------------
+
+private val publishing: PublishingExtension = extensions.getByType()
+publishing.repositories.maven {
+    name = "project"
+    url = rootProject.layout.buildDirectory.dir("maven")
+        .let(::uri)
+}
+publishing.publications.withType<MavenPublication>().configureEach {
+    pom {
+        name.set("Kotools Types")
+        description.set(
+            "Multiplatform library providing explicit types for Kotlin."
+        )
+        url.set("https://github.com/kotools/types")
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+    }
+}
+
+private val gpgPrivateKey: String? = System.getenv("GPG_PRIVATE_KEY")
+private val gpgPassword: String? = System.getenv("GPG_PASSWORD")
+if (gpgPrivateKey != null && gpgPassword != null) {
+    val signing: SigningExtension = extensions.getByType()
+    signing.useInMemoryPgpKeys(gpgPrivateKey, gpgPassword)
+    signing.sign(publishing.publications)
+}
+
+// ----------------------------------- Tasks -----------------------------------
+
+private val signTasks: TaskCollection<Sign> = tasks.withType<Sign>()
+tasks.withType<PublishToMavenRepository>()
+    .configureEach { dependsOn(signTasks) }

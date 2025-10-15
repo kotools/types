@@ -35,11 +35,6 @@ gradlePlugin {
             this.id = "$prefix.kotlin.multiplatform"
             this.implementationClass = "$prefix.gradle.${this.name}Plugin"
         }
-        register("Publication").configure {
-            val prefix = "kotools.types"
-            this.id = "$prefix.${this.name.lowercase()}"
-            this.implementationClass = "$prefix.plugins.${this.name}Plugin"
-        }
     }
 }
 

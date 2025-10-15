@@ -2,13 +2,11 @@ plugins {
     alias(libs.plugins.kotools.types.base.module)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
-    `maven-publish`
-    signing
     alias(libs.plugins.kotools.types.kotlin.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotools.types.documentation.module)
     alias(libs.plugins.kotools.samples.multiplatform)
-    alias(libs.plugins.kotools.types.publication)
+    alias(libs.plugins.convention.publication.module)
 }
 
 apiValidation.apiDumpDirectory = "src/api"

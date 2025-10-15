@@ -47,3 +47,25 @@ tag.configure {
     val tagMessage = "$gitmoji $moduleName $version"
     this.setCommandLine("git", "tag", version, "-s", "-m", tagMessage)
 }
+
+// ---------------------------- Sources publication ----------------------------
+
+private val zipSources: TaskProvider<Zip> by tasks.registering(Zip::class)
+zipSources.configure {
+    this.archiveBaseName = "kotools-types"
+    this.archiveVersion = project.version.toString()
+    this.from(layout.buildDirectory.dir("maven/"))
+    subprojects
+        .map { it.tasks.named("publishAllPublicationsToProjectRepository") }
+        .let(this::setDependsOn)
+}
+
+private val assembleSources: TaskProvider<Task> by tasks.registering
+assembleSources.configure {
+    this.description = "Assembles the sources of the subprojects."
+    this.group = TaskGroup.Root.toString()
+    this.dependsOn(zipSources)
+}
+
+tasks.named { it == "assemble" }
+    .configureEach { this.dependsOn(assembleSources) }

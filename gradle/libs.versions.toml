@@ -5,6 +5,7 @@ kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
 
 [plugins]
+convention-publication-module = { id = "convention.publication.module" }
 convention-publication-root = { id = "convention.publication.root" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -16,7 +17,6 @@ kotools-types-base-root = { id = "org.kotools.types.base.root" }
 kotools-types-documentation-module = { id = "org.kotools.types.documentation.module" }
 kotools-types-documentation-root = { id = "org.kotools.types.documentation.root" }
 kotools-types-kotlin-multiplatform = { id = "org.kotools.types.kotlin.multiplatform" }
-kotools-types-publication = { id = "kotools.types.publication" }
 
 [libraries]
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
