@@ -5,9 +5,6 @@ internal enum class TaskGroup {
     /** The `CI` Gradle task group. */
     CI,
 
-    /** The `documentation` Gradle task group. */
-    Documentation,
-
     /** The `module` Gradle task group. */
     Module,
 
