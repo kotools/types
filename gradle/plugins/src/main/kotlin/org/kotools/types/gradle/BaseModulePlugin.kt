@@ -13,7 +13,6 @@ import org.kotools.types.gradle.internal.TaskGroup
 public class BaseModulePlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
-        project.group = "org.kotools"
         project.repositories.mavenCentral()
         project.tasks.named<TaskReportTask>("tasks")
             .configure { this.displayGroup = TaskGroup.Module.toString() }
