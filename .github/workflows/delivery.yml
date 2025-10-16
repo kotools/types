@@ -6,6 +6,8 @@ jobs:
     name: Delivery
     runs-on: macos-13
     env:
+      GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+      GIT_USER: ${{ secrets.GIT_USER }}
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       GRADLE_CACHE_CLEANUP: true

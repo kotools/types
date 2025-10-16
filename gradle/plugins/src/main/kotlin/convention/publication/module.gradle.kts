@@ -21,11 +21,26 @@ mavenPublications.configureEach {
         description.set(
             "Multiplatform library providing explicit types for Kotlin."
         )
-        url.set("https://github.com/kotools/types")
+        val gitRepository = "https://github.com/kotools/types"
+        url.set(gitRepository)
         licenses {
             license {
                 name.set("MIT")
                 url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+        issueManagement {
+            system.set("GitHub")
+            url.set("$gitRepository/issues")
+        }
+        scm {
+            connection.set("$gitRepository.git")
+            url.set(gitRepository)
+        }
+        developers {
+            developer {
+                name.set(System.getenv("GIT_USER"))
+                email.set(System.getenv("GIT_EMAIL"))
             }
         }
     }
