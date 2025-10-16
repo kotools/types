@@ -51,5 +51,8 @@ apiReferenceJar.configure {
     this.archiveClassifier.set("javadoc")
 }
 
+tasks.withType<PublishToMavenRepository>()
+    .configureEach { this.dependsOn(apiReferenceJar) }
+
 tasks.named("assemble")
     .configure { this.dependsOn(apiReferenceJar) }
