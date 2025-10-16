@@ -1,6 +1,5 @@
 package convention.documentation
 
-import convention.base.TaskGroup
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
@@ -41,12 +40,5 @@ dokkaMultiModuleTasks.configureEach {
 private val dokkaHtmlMultiModule: TaskProvider<DokkaMultiModuleTask> =
     dokkaMultiModuleTasks.named("dokkaHtmlMultiModule")
 
-private val assembleApiReference: TaskProvider<Task> by tasks.registering
-assembleApiReference.configure {
-    this.description = "Assembles the API reference of this project."
-    this.group = TaskGroup.Root.toString()
-    this.dependsOn(dokkaHtmlMultiModule)
-}
-
 tasks.named("assemble")
-    .configure { this.dependsOn(assembleApiReference) }
+    .configure { this.dependsOn(dokkaHtmlMultiModule) }
