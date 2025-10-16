@@ -3,6 +3,7 @@ dokka = "1.9.20!!"
 kotlin = "1.9.25!!"
 kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
+maven-central-publishing = "1.2.0!!"
 
 [plugins]
 convention-base-module = { id = "convention.base.module" }
@@ -15,6 +16,7 @@ convention-publication-root = { id = "convention.publication.root" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
+maven-central-publishing = { id = "com.gradleup.nmcp.aggregation", version.ref = "maven-central-publishing" }
 
 [libraries]
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
