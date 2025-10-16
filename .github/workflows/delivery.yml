@@ -9,6 +9,8 @@ jobs:
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       GRADLE_CACHE_CLEANUP: true
+      SONATYPE_PORTAL_PASSWORD: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
+      SONATYPE_PORTAL_USERNAME: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
@@ -19,10 +21,5 @@ jobs:
           java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Assemble sources
-        run: ./gradlew :assembleSources
-      - name: Archive distribution
-        uses: actions/upload-artifact@v4
-        with:
-          name: distribution
-          path: build/distributions/*.zip
+      - name: Publish to Central Portal
+        run: ./gradlew :publishAggregationToCentralPortal
