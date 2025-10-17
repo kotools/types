@@ -51,8 +51,12 @@ apiReferenceJar.configure {
     this.archiveClassifier.set("javadoc")
 }
 
-tasks.withType<PublishToMavenRepository>()
-    .configureEach { this.dependsOn(apiReferenceJar) }
-
 tasks.named("assemble")
     .configure { this.dependsOn(apiReferenceJar) }
+
+pluginManager.withPlugin("maven-publish") {
+    project.extensions.getByType<PublishingExtension>()
+        .publications
+        .withType<MavenPublication>()
+        .configureEach { this.artifact(apiReferenceJar) }
+}
