@@ -370,20 +370,3 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
-public final class org/kotools/types/PositiveInteger {
-	public static final field Companion Lorg/kotools/types/PositiveInteger$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun equals (Ljava/lang/Object;)Z
-	public final fun hashCode ()I
-	public static final fun minimum ()Lorg/kotools/types/PositiveInteger;
-	public static final fun of (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;
-	public final fun plus (Lorg/kotools/types/PositiveInteger;)Lorg/kotools/types/PositiveInteger;
-	public final fun times (Lorg/kotools/types/PositiveInteger;)Lorg/kotools/types/PositiveInteger;
-	public final fun toString ()Ljava/lang/String;
-}
-
-public final class org/kotools/types/PositiveInteger$Companion {
-	public final fun minimum ()Lorg/kotools/types/PositiveInteger;
-	public final fun of (Ljava/lang/String;)Lorg/kotools/types/PositiveInteger;
-}
-
