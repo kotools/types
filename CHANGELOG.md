@@ -20,9 +20,9 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- The `of(String)` and the `of(String, EmailAddressRegex)` **experimental**
-  functions in the `EmailAddress.Companion` type, for creating an instance of
-  `EmailAddress` from the specified `text` and `regex` ([#865]).
+- `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
+  `EmailAddress.Companion` type, for creating an instance of `EmailAddress`
+  ([#865]).
 - The `EmailAddressRegex.Companion.of(String)` **experimental** function, for
   creating an instance of `EmailAddressRegex` from the specified `pattern`
   ([#868]).
@@ -34,9 +34,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🗑️ Deprecated
 
-- The `orNull` and the `orThrow` functions of the `EmailAddress.Companion`
-  **experimental** type, for using the `EmailAddress.Companion.of` functions
-  instead ([#865]).
+- `orNull` and `orThrow` functions of `EmailAddress.Companion` **experimental**
+  type, for using its `of` functions instead ([#865]).
 - The `orNull(String)` and the `orThrow(String)` functions of the
   `EmailAddressRegex.Companion` **experimental** type, for using the
   `EmailAddressRegex.Companion.of(String)` function instead ([#868]).
