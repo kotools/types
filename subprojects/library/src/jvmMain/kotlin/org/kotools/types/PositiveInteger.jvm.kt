@@ -27,8 +27,8 @@ import java.math.BigInteger
  *     <b>Calling from Java</b>
  * </summary>
  *
- * The `from` Java static method generated from this function is provided by the
- * `PositiveIntegers` generated class.
+ * The Java static method generated from this function is named `fromInteger`
+ * and can be called on the `PositiveIntegers` generated class.
  *
  * Here's an example of calling this function from Java code:
  *
@@ -37,7 +37,7 @@ import java.math.BigInteger
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
-@JvmName("from")
+@JvmName("fromInteger")
 public actual fun Long.toPositiveInteger(): PositiveInteger {
     require(this > 0) { "$this must be greater than zero." }
     val integer: BigInteger = BigInteger.valueOf(this)

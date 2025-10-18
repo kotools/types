@@ -9,7 +9,7 @@ public class PositiveIntegerJavaSample {
     @Test
     void longToPositiveInteger() {
         long number = 123456;
-        final String result = PositiveIntegers.from(number)
+        final String result = PositiveIntegers.fromInteger(number)
                 .toString();
         final String expected = String.valueOf(number);
         Assertions.assertEquals(expected, result);
