@@ -1,4 +1,5 @@
 @file:JvmName("PositiveIntegers")
+@file:JvmMultifileClass
 
 package org.kotools.types
 

@@ -6,6 +6,18 @@ import kotlin.test.assertFailsWith
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerNativeTest {
+    // ------------------------ Int.toPositiveInteger() ------------------------
+
+    @Test
+    fun toPositiveIntegerFailsOnInt() {
+        val number = 123456
+        val error: NotImplementedError =
+            assertFailsWith { number.toPositiveInteger() }
+        val actual: String? = error.message
+        val expected = "Not yet supported on Kotlin/Native."
+        assertEquals(expected, actual)
+    }
+
     // ----------------------- Long.toPositiveInteger() ------------------------
 
     @Test

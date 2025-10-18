@@ -6,6 +6,37 @@ import kotlin.test.assertFailsWith
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class PositiveIntegerJsJvmTest {
+    // ------------------------ Int.toPositiveInteger() ------------------------
+
+    @Test
+    fun toPositiveIntegerPassesOnIntGreaterThanZero() {
+        val number: Int = Int.MAX_VALUE
+        val actual: String = number.toPositiveInteger()
+            .toString()
+        val expected: String = number.toString()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun toPositiveIntegerFailsOnIntEqualToZero() {
+        val number = 0
+        val exception: IllegalArgumentException =
+            assertFailsWith { number.toPositiveInteger() }
+        val actual: String? = exception.message
+        val expected = "$number must be greater than zero."
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun toPositiveIntegerFailsOnIntLessThanZero() {
+        val number: Int = Int.MIN_VALUE
+        val exception: IllegalArgumentException =
+            assertFailsWith { number.toPositiveInteger() }
+        val actual: String? = exception.message
+        val expected = "$number must be greater than zero."
+        assertEquals(expected, actual)
+    }
+
     // ----------------------- Long.toPositiveInteger() ------------------------
 
     @Test
