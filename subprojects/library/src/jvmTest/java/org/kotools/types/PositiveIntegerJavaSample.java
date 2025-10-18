@@ -8,19 +8,17 @@ import org.kotools.types.internal.Warning;
 public class PositiveIntegerJavaSample {
     @Test
     void intToPositiveInteger() {
-        final int number = 123456;
-        final String result = PositiveIntegers.fromInteger(number)
+        final String result = PositiveIntegers.fromInteger(Integer.MAX_VALUE)
                 .toString();
-        final String expected = String.valueOf(number);
+        final String expected = "2147483647";
         Assertions.assertEquals(expected, result);
     }
 
     @Test
     void longToPositiveInteger() {
-        final long number = 123456;
-        final String result = PositiveIntegers.fromInteger(number)
+        final String result = PositiveIntegers.fromInteger(Long.MAX_VALUE)
                 .toString();
-        final String expected = String.valueOf(number);
+        final String expected = "9223372036854775807";
         Assertions.assertEquals(expected, result);
     }
 }

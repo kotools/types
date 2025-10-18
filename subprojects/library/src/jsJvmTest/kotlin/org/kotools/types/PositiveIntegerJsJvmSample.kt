@@ -7,17 +7,13 @@ import kotlin.test.assertEquals
 class PositiveIntegerJsJvmSample {
     @Test
     fun intToPositiveInteger() {
-        val number = 123456
-        val result: String = number.toPositiveInteger()
-            .toString()
-        assertEquals(expected = "$number", result)
+        val result: PositiveInteger = Int.MAX_VALUE.toPositiveInteger()
+        assertEquals(expected = "2147483647", "$result")
     }
 
     @Test
     fun longToPositiveInteger() {
-        val number = 123456L
-        val result: String = number.toPositiveInteger()
-            .toString()
-        assertEquals(expected = "$number", result)
+        val result: PositiveInteger = Long.MAX_VALUE.toPositiveInteger()
+        assertEquals(expected = "9223372036854775807", "$result")
     }
 }
