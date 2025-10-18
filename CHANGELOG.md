@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+> Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
+
 ### ✨ Added
 
 - The `of(String)` and the `of(String, EmailAddressRegex)` **experimental**
@@ -50,10 +52,6 @@ All notable changes to this project will be documented in this file.
 ### 🐛 Fixed
 
 - Run configurations in [contributing guidelines](CONTRIBUTING.md) ([#854]).
-
----
-
-Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#838]: https://github.com/kotools/types/issues/838
