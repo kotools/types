@@ -21,40 +21,43 @@ This project provides different types of declaration:
 
 ### 🧪 Experimentation
 
-A new declaration should be introduced in **experimental** stage for collecting
+A new declaration must be introduced in **experimental** stage for collecting
 user feedbacks. This change can be included in any type of release.
 
 ### ⚖️ Stabilization
 
-An **experimental** declaration can be promoted to **stable** by removing the
-experimental annotation marking it that requires an explicit [opt-in]. This
-change can be included in the second **minor release** after its introduction,
-or later.
+For being promoted to **stable**, an **experimental** declaration must meet the
+following requirements:
 
-| Stage       | Experimental | Stable      | Example                 |
-|-------------|--------------|-------------|-------------------------|
-| **Version** | `X.Y.Z`      | `X.(Y+2).0` | `5.0` -> `5.2` or later |
+- It was introduced in or before the second **minor** release before the
+  current version. For example, an **experimental** declaration introduced in
+  version `5.0` can be stabilized in or after version `5.2`.
+- It doesn't use another **experimental** declaration.
 
-Note that an **experimental** declaration shouldn't be promoted to **stable** if
-its implementation uses another **experimental** declaration.
+Stabilizing a declaration must be included in a **minor** or **major** release.
+
+| Stage       | Experimental | Stable      | Example         |
+|-------------|--------------|-------------|-----------------|
+| **Version** | `X.Y.Z`      | `X.(Y+2).0` | `5.0` -> `5.2+` |
 
 ### 🗑️ Deprecation
 
-A **stable** declaration introduced should be removed by:
+A **stable** declaration must be removed incrementally by addressing the
+following steps:
 
-- Deprecating it with a [warning level][kotlin.DeprecationLevel.WARNING] in a
-  **minor release**.
-- Deprecating it with an [error level][kotlin.DeprecationLevel.ERROR] in a
-  **minor release**.
-- Deprecating it with a [hidden level][kotlin.DeprecationLevel.HIDDEN] in a
-  **minor release**.
-- Removing it in a **major release**.
+1. Deprecate it with a [warning level][kotlin.DeprecationLevel.WARNING] in a
+   **minor** release.
+2. Deprecate it with an [error level][kotlin.DeprecationLevel.ERROR] in a
+   **minor** release.
+3. Deprecating it with a [hidden level][kotlin.DeprecationLevel.HIDDEN] in a
+   **minor** release.
+4. Removing it in a **major** release.
 
 | Deprecation level | Warning | Error       | Hidden      | Removed     |
 |-------------------|---------|-------------|-------------|-------------|
 | **Version**       | `X.Y.Z` | `X.(Y+1).0` | `X.(Y+2).0` | `(X+1).0.0` |
 
-<!-- Links -->
+<!----------------------------------- Links ----------------------------------->
 
 [kotlin.Deprecated]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecated
 [kotlin.DeprecationLevel.ERROR]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecation-level/-e-r-r-o-r.html
