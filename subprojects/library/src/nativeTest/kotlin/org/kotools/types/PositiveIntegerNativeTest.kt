@@ -10,7 +10,7 @@ class PositiveIntegerNativeTest {
 
     @Test
     fun toPositiveIntegerFailsOnInt() {
-        val number = 123456
+        val number: Int = Int.MAX_VALUE
         val error: NotImplementedError =
             assertFailsWith { number.toPositiveInteger() }
         val actual: String? = error.message
@@ -22,8 +22,9 @@ class PositiveIntegerNativeTest {
 
     @Test
     fun toPositiveIntegerFailsOnLong() {
+        val number: Long = Long.MAX_VALUE
         val error: NotImplementedError =
-            assertFailsWith { 123456L.toPositiveInteger() }
+            assertFailsWith { number.toPositiveInteger() }
         val actual: String? = error.message
         val expected = "Not yet supported on Kotlin/Native."
         assertEquals(expected, actual)
