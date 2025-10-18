@@ -29,8 +29,6 @@ All notable changes to this project will be documented in this file.
 
 - Improve [declarations lifecycle](documentation/declarations-lifecycle.md)
   documentation ([1f9e8151a], [7a8e483f] and [fd2f9b28]).
-- The samples of the `EmailAddress.Companion.orThrow(String)` function are now
-  easier to understand ([0e1470a48]).
 - The documentation of the `EmailAddress.Companion.orNull(String)` and the
   `EmailAddress.Companion.orThrow(String)` **experimental** functions refer to
   the `EmailAddressRegex.Companion.default()` **experimental** function instead
@@ -67,7 +65,6 @@ Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
 [#854]: https://github.com/kotools/types/issues/854
 [#865]: https://github.com/kotools/types/issues/865
 [#868]: https://github.com/kotools/types/issues/868
-[0e1470a48]: https://github.com/kotools/types/commit/0e1470a48
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 [7a8e483f]: https://github.com/kotools/types/commit/7a8e483f
 [fd2f9b28]: https://github.com/kotools/types/commit/fd2f9b28
