@@ -36,8 +36,8 @@ All notable changes to this project will be documented in this file.
 - `orNull` and `orThrow` functions of `EmailAddress.Companion` **experimental**
   type, with an **error** level, for using its `of` functions instead ([#865]).
 - `orNull(String)` and `orThrow(String)` functions of
-  `EmailAddressRegex.Companion` **experimental** type, for using its `of`
-  function instead ([#868]).
+  `EmailAddressRegex.Companion` **experimental** type, with an **error** level,
+  for using its `of` function instead ([#868]).
 
 ### 🔥 Removed
 
