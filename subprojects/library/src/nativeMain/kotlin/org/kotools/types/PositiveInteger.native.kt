@@ -10,4 +10,4 @@ import org.kotools.types.internal.KotoolsTypesVersion
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
 public actual fun Long.toPositiveInteger(): PositiveInteger =
-    TODO("Not yet supported on Kotlin/Native.")
+    throw NotImplementedError("Not yet supported on Kotlin/Native.")
