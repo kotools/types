@@ -19,25 +19,26 @@ This project provides different types of declaration:
 
 ## 🧬 Evolution principles
 
-### 🧪 Experimental declarations
+### 🧪 Experimentation
 
 A new declaration should be introduced in **experimental** stage for collecting
 user feedbacks. This change can be included in any type of release.
 
+### ⚖️ Stabilization
+
 An **experimental** declaration can be promoted to **stable** by removing the
 experimental annotation marking it that requires an explicit [opt-in]. This
-change can be included in the second **minor release** after its introduction.
-For example, an **experimental** function introduced in the version 5.0 can be
-promoted to **stable** in the version 5.2.
+change can be included in the second **minor release** after its introduction,
+or later.
 
-| Stage       | Experimental | Stable      |
-|-------------|--------------|-------------|
-| **Version** | `X.Y.Z`      | `X.(Y+2).0` |
+| Stage       | Experimental | Stable      | Example                 |
+|-------------|--------------|-------------|-------------------------|
+| **Version** | `X.Y.Z`      | `X.(Y+2).0` | `5.0` -> `5.2` or later |
 
 Note that an **experimental** declaration shouldn't be promoted to **stable** if
 its implementation uses another **experimental** declaration.
 
-### ⚖️ Stable declarations
+### 🗑️ Deprecation
 
 A **stable** declaration introduced should be removed by:
 
