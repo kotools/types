@@ -29,10 +29,6 @@ All notable changes to this project will be documented in this file.
 
 - Improve [declarations lifecycle](documentation/declarations-lifecycle.md)
   documentation ([1f9e8151a], [7a8e483f] and [fd2f9b28]).
-- The documentation of the `EmailAddress.Companion.orNull(String)` and the
-  `EmailAddress.Companion.orThrow(String)` **experimental** functions refer to
-  the `EmailAddressRegex.Companion.default()` **experimental** function instead
-  of the `EmailAddress.Companion.PATTERN` **deprecated** property ([#838]).
 
 ### 🗑️ Deprecated
 
@@ -45,9 +41,9 @@ All notable changes to this project will be documented in this file.
 
 ### 🔥 Removed
 
-- The `PATTERN` **deprecated** property, the `orNull(String, String)` and the
-  `orThrow(String, String)` **deprecated** functions from the
-  `EmailAddress.Companion` **experimental** type ([#838]).
+- Following **deprecated** declarations from `EmailAddress.Companion`
+  **experimental** type: `PATTERN` constant, `orNull(String, String)` and
+  `orThrow(String, String)` functions ([#838]).
 - The `Zero` **experimental** type and all its serializers ([#844]). Use
   directly the `0` value instead.
 
