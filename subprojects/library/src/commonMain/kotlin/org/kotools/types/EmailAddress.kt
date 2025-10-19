@@ -139,7 +139,7 @@ public class EmailAddress private constructor(private val text: String) {
          * SAMPLE: [org.kotools.types.EmailAddressJavaSample.ofText]
          * </details>
          */
-        @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public infix fun of(text: String): EmailAddress? {
             val regex: EmailAddressRegex = EmailAddressRegex.default()
@@ -172,7 +172,7 @@ public class EmailAddress private constructor(private val text: String) {
          * SAMPLE: [org.kotools.types.EmailAddressJavaSample.ofTextRegex]
          * </details>
          */
-        @ExperimentalSince(KotoolsTypesVersion.V5_0_2)
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public fun of(text: String, regex: EmailAddressRegex): EmailAddress? =
             if (regex matches text) EmailAddress(text) else null
@@ -196,7 +196,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmSynthetic
         public fun orNull(text: String): EmailAddress? {
@@ -222,7 +222,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
         @JvmSynthetic
         public fun orNull(
@@ -252,7 +252,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
         @JvmStatic
         public fun orThrow(text: String): EmailAddress {
@@ -278,7 +278,7 @@ public class EmailAddress private constructor(private val text: String) {
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_0_2)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
         @JvmStatic
         public fun orThrow(
