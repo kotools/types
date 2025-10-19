@@ -373,3 +373,7 @@ public abstract interface annotation class org/kotools/types/ExperimentalKotools
 public abstract interface class org/kotools/types/Integer {
 }
 
+public final class org/kotools/types/Integers {
+	public static final fun from (J)Lorg/kotools/types/Integer;
+}
+
