@@ -3,6 +3,8 @@ package org.kotools.types.internal
 /** Represents a version of Kotools Types. */
 @InternalKotoolsTypesApi
 public enum class KotoolsTypesVersion {
+    Unreleased,
+
     /** Version 1.0.0. */
     V1_1_0,
 
