@@ -1,5 +1,8 @@
 package org.kotools.types
 
+import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.KotoolsTypesVersion
+
 /**
  * Represents an integer.
  *
@@ -8,5 +11,5 @@ package org.kotools.types
  * [Long.MAX_VALUE] and lesser values than [Long.MIN_VALUE].
  */
 @ExperimentalKotoolsTypesApi
-// TODO: @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public interface Integer
