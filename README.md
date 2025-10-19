@@ -17,7 +17,7 @@
 > [@jmfayard](https://github.com/jmfayard)
 
 Unlock the true potential of Kotlin's type system across Kotlin/JVM, Kotlin/JS,
-and Kotlin Native platforms with Kotools Types – your comprehensive toolkit for
+and Kotlin/Native platforms with Kotools Types – your comprehensive toolkit for
 explicit type handling!
 
 [ios-simulator-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_Simulator_arm64-4b4bff
@@ -48,8 +48,8 @@ flexibility across diverse Kotlin platforms.
 ## ⭐️ Key Features
 
 - **Unified Type Handling:** Embrace a unified approach to handling types across
-  platforms, ensuring consistency in your Kotlin/JVM, Kotlin/JS, and Kotlin
-  Native projects.
+  platforms, ensuring consistency in your Kotlin/JVM, Kotlin/JS and
+  Kotlin/Native projects.
 - **Enhanced Type Safety:** Fortify your code with explicit types, catching
   errors at compile time to create robust and reliable applications.
 - **Automatic Serialization:** Seamlessly serialize and deserialize types using
