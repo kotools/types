@@ -50,6 +50,7 @@ All notable changes to this project will be documented in this file.
 ### 🐛 Fixed
 
 - Run configurations in [contributing guidelines](CONTRIBUTING.md) ([#854]).
+- Kotlin/Native typos in [README](README.md) of root project ([e4df56bf8]).
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#838]: https://github.com/kotools/types/issues/838
@@ -59,6 +60,7 @@ All notable changes to this project will be documented in this file.
 [#868]: https://github.com/kotools/types/issues/868
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 [7a8e483f]: https://github.com/kotools/types/commit/7a8e483f
+[e4df56bf8]: https://github.com/kotools/types/commit/e4df56bf8
 [fd2f9b28]: https://github.com/kotools/types/commit/fd2f9b28
 
 ## 🔖 Releases
