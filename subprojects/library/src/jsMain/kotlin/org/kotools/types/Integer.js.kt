@@ -16,21 +16,19 @@ import org.kotools.types.internal.KotoolsTypesVersion
  *
  * SAMPLE: [org.kotools.types.IntegerJsJvmSample.constructorLong]
  * </details>
- * <br>
- *
- * This function is not yet supported on Kotlin/Native.
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public expect fun Integer(number: Long): Integer
+public actual fun Integer(number: Long): Integer {
+    val integer = BigInt("$number")
+    return JsInteger(integer)
+}
 
-/**
- * Represents an integer.
- *
- * Contrarily to the Kotlin integer types ([Byte], [Short], [Int] and [Long]),
- * this type has no maximum and minimum values. It can hold greater values than
- * [Long.MAX_VALUE] and lesser values than [Long.MIN_VALUE].
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public interface Integer
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private class JsInteger(private val integer: BigInt) : Integer {
+    override fun toString(): String = this.integer.toString()
+}
+
+private external fun BigInt(value: String): BigInt
+
+private external object BigInt
