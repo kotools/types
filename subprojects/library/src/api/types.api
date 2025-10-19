@@ -370,11 +370,3 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
-public abstract interface class org/kotools/types/PositiveInteger {
-}
-
-public final class org/kotools/types/PositiveIntegers {
-	public static final fun fromInteger (I)Lorg/kotools/types/PositiveInteger;
-	public static final fun fromInteger (J)Lorg/kotools/types/PositiveInteger;
-}
-
