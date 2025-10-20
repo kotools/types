@@ -1,5 +1,6 @@
 ---
 name: 🐛 Bug
+about: Report bug
 title: 🐛 $TITLE
 labels: bug
 ---

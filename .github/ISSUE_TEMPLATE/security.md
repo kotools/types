@@ -1,5 +1,6 @@
 ---
 name: 🔒️ Security vulnerability
+about: Report security vulnerability
 title: 🔒️ Security vulnerability
 labels: security
 ---

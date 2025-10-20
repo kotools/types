@@ -1,5 +1,6 @@
 ---
 name: 💡 Feature
+about: Suggest feature
 labels: feature
 ---
 
