@@ -24,6 +24,8 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
         documentation.externalLinks.orNull?.filterNotNull()
             ?.forEach(this::externalDocumentationLink)
     }
+    dokkaSourceSets.matching { it.name == "jsJvmMain" }
+        .configureEach { suppress = true }
     this.pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
         this.customAssets = project.rootProject.layout.projectDirectory
             .file("documentation/api-reference/logo-icon.svg")
