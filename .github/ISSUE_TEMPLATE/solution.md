@@ -1,5 +1,5 @@
 ---
-name: Feature
+name: 💡 Feature
 about: Suggest feature
 labels: feature
 ---

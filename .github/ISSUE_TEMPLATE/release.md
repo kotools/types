@@ -1,5 +1,5 @@
 ---
-name: Release
+name: 🔖 Release
 about: Template for publishing a new version.
 title: 🔖 Release version $VERSION
 assignees: LVMVRQUXL
