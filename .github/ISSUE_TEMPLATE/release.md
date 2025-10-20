@@ -25,7 +25,6 @@ Issues of this version should be done before working on this issue.
 - [ ] 🔖 Set Gradle project's version to the next snapshot.
 - [ ] 📝 Announce this release on [Reddit].
 - [ ] 📝 Announce this release on [Slack].
-- [ ] 📝 Announce this release on [Twitter].
 
 [delivery workflow]: https://github.com/kotools/types/actions/workflows/delivery.yml
 [license]: https://github.com/kotools/types/blob/main/LICENSE.txt
