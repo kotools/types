@@ -45,14 +45,16 @@ checkSampleReferences.configure {
         extractSamples.flatMap(ExtractSamples::outputDirectory)
 }
 
+private val cleanMainSourcesBackup: TaskProvider<Delete> by tasks
+    .registering(Delete::class) { setDelete(sourcesBackupBuildDirectory) }
+
 private val backupMainSources: TaskProvider<Copy>
-        by tasks.registering(Copy::class)
-backupMainSources.configure {
-    this.description = "Copies main sources into the build directory."
-    this.dependsOn(checkSampleReferences)
-    this.from(projectSources) { exclude("api", "*Sample", "*Test") }
-    this.into(sourcesBackupBuildDirectory)
-}
+        by tasks.registering(Copy::class) {
+            description = "Copies main sources into the build directory."
+            dependsOn(checkSampleReferences, cleanMainSourcesBackup)
+            from(projectSources) { exclude("api", "*Sample", "*Test") }
+            into(sourcesBackupBuildDirectory)
+        }
 
 private val inlineSamples: TaskProvider<InlineSamples>
         by tasks.registering(InlineSamples::class)
