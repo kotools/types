@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 // ----------------------------- Script properties -----------------------------
 
 private val projectSources: Directory = layout.projectDirectory.dir("src")
+
 private val samplesBuildDirectory: Provider<Directory> =
-    layout.buildDirectory.dir("samples")
+    layout.buildDirectory.dir("kotools-samples")
+
 private val sourcesBackupBuildDirectory: Provider<Directory> =
     samplesBuildDirectory.map { it.dir("sources-backup") }
 
