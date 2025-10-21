@@ -1,5 +1,6 @@
 package convention.documentation
 
+import org.jetbrains.dokka.Platform
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
@@ -24,8 +25,9 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
         documentation.externalLinks.orNull?.filterNotNull()
             ?.forEach(this::externalDocumentationLink)
     }
-    dokkaSourceSets.matching { it.name == "jsJvmMain" }
-        .configureEach { suppress = true }
+    dokkaSourceSets.named("nativeMain").configure {
+        platform.set(Platform.native)
+    }
     this.pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
         this.customAssets = project.rootProject.layout.projectDirectory
             .file("documentation/api-reference/logo-icon.svg")

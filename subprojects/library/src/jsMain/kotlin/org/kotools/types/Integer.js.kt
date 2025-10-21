@@ -14,7 +14,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.IntegerJsJvmSample.constructorLong]
+ * SAMPLE: [org.kotools.types.IntegerSample.constructorLong]
  * </details>
  */
 @ExperimentalKotoolsTypesApi

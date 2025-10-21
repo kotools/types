@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-class IntegerJsJvmSample {
+class IntegerSample {
     @Test
     fun constructorLong() {
         val integer = Integer(Long.MAX_VALUE)

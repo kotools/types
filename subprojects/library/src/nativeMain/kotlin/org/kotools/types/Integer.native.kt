@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import com.ionspin.kotlin.bignum.integer.BigInteger
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 
@@ -14,9 +15,17 @@ import org.kotools.types.internal.KotoolsTypesVersion
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.IntegerJsJvmSample.constructorLong]
+ * SAMPLE: [org.kotools.types.IntegerSample.constructorLong]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public expect fun Integer(number: Long): Integer
+public actual fun Integer(number: Long): Integer {
+    val integer: BigInteger = BigInteger.fromLong(number)
+    return NativeInteger(integer)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private class NativeInteger(private val integer: BigInteger) : Integer {
+    override fun toString(): String = this.integer.toString()
+}
