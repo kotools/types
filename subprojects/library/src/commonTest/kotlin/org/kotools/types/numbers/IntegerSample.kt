@@ -1,5 +1,6 @@
-package org.kotools.types
+package org.kotools.types.numbers
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

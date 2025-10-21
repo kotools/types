@@ -1,7 +1,8 @@
 @file:JvmName("Integers")
 
-package org.kotools.types
+package org.kotools.types.numbers
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import java.math.BigInteger
@@ -17,7 +18,7 @@ import java.math.BigInteger
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [org.kotools.types.IntegerSample.constructorLong]
+ * SAMPLE: [org.kotools.types.numbers.IntegerSample.constructorLong]
  * </details>
  *
  * <br>
@@ -31,7 +32,7 @@ import java.math.BigInteger
  *
  * Here's an example of calling this function from Java code:
  *
- * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorLong]
+ * SAMPLE: [org.kotools.types.numbers.IntegerJavaSample.constructorLong]
  * </details>
  */
 @ExperimentalKotoolsTypesApi
