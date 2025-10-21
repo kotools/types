@@ -1,4 +1,5 @@
 [versions]
+bignum = "0.3.9!!"
 dokka = "1.9.20!!"
 kotlin = "1.9.25!!"
 kotlinx-binary-compatibility-validator = "0.16.3!!"
@@ -19,6 +20,7 @@ kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 maven-central-publishing = { id = "com.gradleup.nmcp.aggregation", version.ref = "maven-central-publishing" }
 
 [libraries]
+bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "bignum" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin", version.ref = "dokka" }
 dokka-versioning = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
