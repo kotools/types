@@ -67,7 +67,7 @@ public actual fun Integer(number: Long): Integer {
  *     <b>Calling from Java</b>
  * </summary>
  *
- * The Java static method generated from this function is named `from` and
+ * The Java static method generated from this function is named `parse` and
  * callable on the `Integers` generated class.
  *
  * Here's an example of calling this function from Java code:
@@ -77,7 +77,7 @@ public actual fun Integer(number: Long): Integer {
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-@JvmName("from")
+@JvmName("parse")
 public actual fun Integer(text: String): Integer {
     Integer.requirements(text)
     val integer = BigInteger(text)

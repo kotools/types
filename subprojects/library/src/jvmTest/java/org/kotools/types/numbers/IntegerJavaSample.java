@@ -20,7 +20,7 @@ public class IntegerJavaSample {
                 .toString();
         Assertions.assertEquals("9223372036854775807", integer);
 
-        final String plusSignedInteger = Integers.from("+" + Long.MAX_VALUE)
+        final String plusSignedInteger = Integers.parse("+" + Long.MAX_VALUE)
                 .toString();
         Assertions.assertEquals("9223372036854775807", plusSignedInteger);
 
@@ -37,7 +37,7 @@ public class IntegerJavaSample {
         // When
         final Integer sum = x.plus(y);
         // Then
-        final Integer expected = Integers.from("18446744073709551614");
+        final Integer expected = Integers.parse("18446744073709551614");
         Assertions.assertEquals(expected, sum);
     }
 }

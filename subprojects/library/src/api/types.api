@@ -380,6 +380,6 @@ public final class org/kotools/types/numbers/Integer$Companion {
 
 public final class org/kotools/types/numbers/Integers {
 	public static final fun from (J)Lorg/kotools/types/numbers/Integer;
-	public static final fun from (Ljava/lang/String;)Lorg/kotools/types/numbers/Integer;
+	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/numbers/Integer;
 }
 
