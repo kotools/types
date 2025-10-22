@@ -25,3 +25,8 @@ Contains types such as [NotBlankString] for manipulating text.
 
 Contains new implementations of declarations present in the `kotools.types.*`
 packages, which will be deprecated incrementally.
+
+# Package org.kotools.types.numbers
+
+Number abstractions with real-world behaviors, such as [Integer] functions that
+produce no overflow. Will deprecate types from `kotools.types.number` package.
