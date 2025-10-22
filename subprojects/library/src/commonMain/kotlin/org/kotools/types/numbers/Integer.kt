@@ -3,6 +3,7 @@ package org.kotools.types.numbers
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Creates an instance of [Integer] from the specified [number].
@@ -23,6 +24,28 @@ import org.kotools.types.internal.KotoolsTypesVersion
 public expect fun Integer(number: Long): Integer
 
 /**
+ * Creates an instance of [Integer] from the specified [text], or throws an
+ * [IllegalArgumentException] if the [text] doesn't represent an integer.
+ *
+ * The [text] parameter must only contain an optional plus (`+`) or minus (`-`)
+ * sign, followed by a sequence of digits.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Calling from Kotlin</b>
+ * </summary>
+ *
+ * Here's an example of calling this function from Kotlin code:
+ *
+ * SAMPLE: [org.kotools.types.numbers.IntegerSample.constructorString]
+ * </details>
+ */
+@ExperimentalKotoolsTypesApi
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
+public expect fun Integer(text: String): Integer
+
+/**
  * Represents an integer.
  *
  * Contrarily to the Kotlin integer types ([Byte], [Short], [Int] and [Long]),
@@ -31,4 +54,19 @@ public expect fun Integer(number: Long): Integer
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public interface Integer
+public interface Integer {
+    /** Contains class-level declarations for the [Integer] type. */
+    public companion object {
+        @JvmSynthetic
+        internal fun requirements(text: String) {
+            require(text.isNotBlank()) { "Integer should not be blank" }
+            val isNumericText: Boolean = text.removePrefix("+")
+                .removePrefix("-")
+                .all(Char::isDigit)
+            require(isNumericText) {
+                "Integer can only contain an optional + or - sign, followed " +
+                        "by a sequence of digits, was: $text"
+            }
+        }
+    }
+}

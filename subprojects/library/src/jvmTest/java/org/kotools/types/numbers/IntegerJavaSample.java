@@ -13,4 +13,19 @@ public class IntegerJavaSample {
         final String expected = "9223372036854775807";
         Assertions.assertEquals(expected, result);
     }
+
+    @Test
+    void constructorString() {
+        final String integer = Integers.from(Long.MAX_VALUE)
+                .toString();
+        Assertions.assertEquals("9223372036854775807", integer);
+
+        final String plusSignedInteger = Integers.from("+" + Long.MAX_VALUE)
+                .toString();
+        Assertions.assertEquals("9223372036854775807", plusSignedInteger);
+
+        final String minusSignedInteger = Integers.from(Long.MIN_VALUE)
+                .toString();
+        Assertions.assertEquals("-9223372036854775808", minusSignedInteger);
+    }
 }
