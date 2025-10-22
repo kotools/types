@@ -54,5 +54,15 @@ public actual fun Integer(text: String): Integer {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class NativeInteger(private val integer: BigInteger) : Integer {
+    override fun plus(other: Integer): Integer {
+        val sum: BigInteger = this.integer + BigInteger.parseString("$other")
+        return NativeInteger(sum)
+    }
+
+    override fun equals(other: Any?): Boolean =
+        other is NativeInteger && this.integer == other.integer
+
+    override fun hashCode(): Int = this.integer.hashCode()
+
     override fun toString(): String = this.integer.toString()
 }

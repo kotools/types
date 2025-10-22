@@ -55,6 +55,33 @@ public expect fun Integer(text: String): Integer
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public interface Integer {
+    /**
+     * Adds the [other] integer to this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.numbers.IntegerSample.plus]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.numbers.IntegerJavaSample.plus]
+     * </details>
+     */
+    public operator fun plus(other: Integer): Integer
+
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
         @JvmSynthetic

@@ -85,3 +85,18 @@ class IntegerInstanceCreationTest {
         assertEquals(expected, actual.message)
     }
 }
+
+@ExperimentalKotoolsTypesApi
+class IntegerArithmeticOperationTest {
+    @Test
+    fun plus() {
+        // Given
+        val x = Integer(Long.MAX_VALUE)
+        val y = Integer(1)
+        // When
+        val actual: Integer = x + y
+        // Then
+        val expected = Integer("9223372036854775808")
+        assertEquals(expected, actual)
+    }
+}

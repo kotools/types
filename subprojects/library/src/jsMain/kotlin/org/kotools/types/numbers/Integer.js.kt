@@ -53,9 +53,27 @@ public actual fun Integer(text: String): Integer {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class JsInteger(private val integer: BigInt) : Integer {
+    override fun plus(other: Integer): Integer {
+        val sum: BigInt = this.integer + BigInt("$other")
+        return JsInteger(sum)
+    }
+
+    override fun equals(other: Any?): Boolean =
+        other is JsInteger && this.integer == other.integer
+
+    override fun hashCode(): Int = this.integer.hashCode()
+
     override fun toString(): String = this.integer.toString()
 }
 
 private external fun BigInt(value: String): BigInt
 
 private external object BigInt
+
+@Suppress("UNUSED_VARIABLE")
+private operator fun BigInt.plus(other: BigInt): BigInt {
+    val x = this
+    val y = other
+    val sum: dynamic = js("x + y")
+    return BigInt("$sum")
+}

@@ -28,4 +28,16 @@ public class IntegerJavaSample {
                 .toString();
         Assertions.assertEquals("-9223372036854775808", minusSignedInteger);
     }
+
+    @Test
+    void plus() {
+        // Given
+        final Integer x = Integers.from(9223372036854775807L);
+        final Integer y = Integers.from(9223372036854775807L);
+        // When
+        final Integer sum = x.plus(y);
+        // Then
+        final Integer expected = Integers.from("18446744073709551614");
+        Assertions.assertEquals(expected, sum);
+    }
 }

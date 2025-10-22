@@ -86,5 +86,15 @@ public actual fun Integer(text: String): Integer {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class JvmInteger(private val integer: BigInteger) : Integer {
+    override fun plus(other: Integer): Integer {
+        val sum: BigInteger = this.integer + BigInteger("$other")
+        return JvmInteger(sum)
+    }
+
+    override fun equals(other: Any?): Boolean =
+        other is JvmInteger && this.integer == other.integer
+
+    override fun hashCode(): Int = this.integer.hashCode()
+
     override fun toString(): String = this.integer.toString()
 }
