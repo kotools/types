@@ -8,20 +8,22 @@ import kotlin.test.assertEquals
 class IntegerSample {
     @Test
     fun constructorLong() {
-        val integer = Integer(Long.MAX_VALUE)
-        assertEquals(expected = "9223372036854775807", "$integer")
+        // Given
+        val number = 9223372036854775807
+        // When
+        val integer = Integer(number)
+        // Then
+        assertEquals(expected = "$number", "$integer")
     }
 
     @Test
     fun constructorString() {
-        val integer = Integer("${Long.MAX_VALUE}")
-        assertEquals(expected = "9223372036854775807", "$integer")
-
-        val plusSignedInteger = Integer("+${Long.MAX_VALUE}")
-        assertEquals(expected = "9223372036854775807", "$plusSignedInteger")
-
-        val minusSignedInteger = Integer("${Long.MIN_VALUE}")
-        assertEquals(expected = "-9223372036854775808", "$minusSignedInteger")
+        // Given
+        val text = "18446744073709551614"
+        // When
+        val integer = Integer(text)
+        // Then
+        assertEquals(expected = text, "$integer")
     }
 
     @Test

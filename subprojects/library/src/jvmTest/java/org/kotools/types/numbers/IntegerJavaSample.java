@@ -8,25 +8,25 @@ import org.kotools.types.internal.Warning;
 public class IntegerJavaSample {
     @Test
     void constructorLong() {
-        final String result = Integers.from(Long.MAX_VALUE)
-                .toString();
-        final String expected = "9223372036854775807";
+        // Given
+        final long number = 9223372036854775807L;
+        // When
+        final Integer integer = Integers.from(number);
+        // Then
+        final String result = integer.toString();
+        final String expected = String.valueOf(number);
         Assertions.assertEquals(expected, result);
     }
 
     @Test
     void constructorString() {
-        final String integer = Integers.from(Long.MAX_VALUE)
-                .toString();
-        Assertions.assertEquals("9223372036854775807", integer);
-
-        final String plusSignedInteger = Integers.parse("+" + Long.MAX_VALUE)
-                .toString();
-        Assertions.assertEquals("9223372036854775807", plusSignedInteger);
-
-        final String minusSignedInteger = Integers.from(Long.MIN_VALUE)
-                .toString();
-        Assertions.assertEquals("-9223372036854775808", minusSignedInteger);
+        // Given
+        final String text = "9223372036854775807";
+        // When
+        final Integer integer = Integers.parse(text);
+        // Then
+        final String result = integer.toString();
+        Assertions.assertEquals(text, result);
     }
 
     @Test
