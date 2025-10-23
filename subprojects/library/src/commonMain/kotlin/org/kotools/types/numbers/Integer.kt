@@ -48,6 +48,12 @@ public expect fun Integer(text: String): Integer
 /**
  * Represents an integer.
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Motivations</b>
+ * </summary>
+ *
  * ### Overflow
  *
  * **Problem:** Adding, subtracting or multiplying Kotlin integer types ([Byte],
@@ -60,6 +66,7 @@ public expect fun Integer(text: String): Integer
  * [multiply][Integer.times] integers without producing an overflow.
  *
  * SAMPLE: [org.kotools.types.numbers.IntegerSample.overflowSolution]
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
