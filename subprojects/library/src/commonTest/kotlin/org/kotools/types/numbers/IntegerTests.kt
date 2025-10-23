@@ -4,6 +4,8 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerInstanceCreationTest {
@@ -86,7 +88,55 @@ class IntegerInstanceCreationTest {
     }
 }
 
-@ExperimentalKotoolsTypesApi
+@OptIn(ExperimentalKotoolsTypesApi::class)
+class IntegerStructuralEqualityOperations {
+    @Test
+    fun equalsWithIntegerHavingSameValue() {
+        // Given
+        val x = Integer(Long.MAX_VALUE)
+        val y = Integer(Long.MAX_VALUE)
+        // When
+        val actual: Boolean = x == y
+        // Then
+        assertTrue(actual)
+    }
+
+    @Test
+    fun equalsWithAnotherTypeThanInteger() {
+        // Given
+        val x = Integer(Long.MAX_VALUE)
+        val y: Long = Long.MAX_VALUE
+        // When
+        val actual: Boolean = x.equals(y)
+        // Then
+        assertFalse(actual)
+    }
+
+    @Test
+    fun equalsWithIntegerHavingAnotherValue() {
+        // Given
+        val x = Integer(Long.MAX_VALUE)
+        val y = Integer(Long.MIN_VALUE)
+        // When
+        val actual: Boolean = x == y
+        // Then
+        assertFalse(actual)
+    }
+
+    @Test
+    fun hashCodeReturnsHashCodeOfPlatformInteger() {
+        // Given
+        val integer = Integer(Long.MAX_VALUE)
+        // When
+        val actual: Int = integer.hashCode()
+        // Then
+        val expected: Int = PlatformInteger(Long.MAX_VALUE)
+            .hashCode()
+        assertEquals(expected, actual)
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerArithmeticOperationTest {
     @Test
     fun plus() {
@@ -122,5 +172,18 @@ class IntegerArithmeticOperationTest {
         // Then
         val expected = Integer("92233720368547758070")
         assertEquals(expected, product)
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+class IntegerConversionTest {
+    @Test
+    fun toStringPasses() {
+        // Given
+        val integer = Integer(Long.MAX_VALUE)
+        // When
+        val actual: String = integer.toString()
+        // Then
+        assertEquals(expected = "${Long.MAX_VALUE}", actual)
     }
 }

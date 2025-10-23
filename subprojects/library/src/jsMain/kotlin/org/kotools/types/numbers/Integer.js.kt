@@ -1,69 +1,28 @@
 package org.kotools.types.numbers
 
-import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
-
-/**
- * Creates an instance of [Integer] from the specified [number].
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Calling from Kotlin</b>
- * </summary>
- *
- * Here's an example of calling this function from Kotlin code:
- *
- * SAMPLE: [org.kotools.types.numbers.IntegerSample.constructorLong]
- * </details>
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public actual fun Integer(number: Long): Integer {
+internal actual fun PlatformInteger(number: Long): PlatformInteger {
     val integer = BigInt("$number")
     return JsInteger(integer)
 }
 
-/**
- * Creates an instance of [Integer] from the specified [text], or throws an
- * [IllegalArgumentException] if the [text] doesn't represent an integer.
- *
- * The [text] parameter must only contain an optional plus (`+`) or minus (`-`)
- * sign, followed by a sequence of digits.
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Calling from Kotlin</b>
- * </summary>
- *
- * Here's an example of calling this function from Kotlin code:
- *
- * SAMPLE: [org.kotools.types.numbers.IntegerSample.constructorString]
- * </details>
- */
-@ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public actual fun Integer(text: String): Integer {
-    Integer.requirements(text)
+internal actual fun PlatformInteger(text: String): PlatformInteger {
+    PlatformInteger.requirements(text)
     val integer = BigInt(text)
     return JsInteger(integer)
 }
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-private class JsInteger(private val integer: BigInt) : Integer {
-    override fun plus(other: Integer): Integer {
+private class JsInteger(private val integer: BigInt) : PlatformInteger {
+    override fun plus(other: PlatformInteger): PlatformInteger {
         val sum: BigInt = this.integer + BigInt("$other")
         return JsInteger(sum)
     }
 
-    override fun minus(other: Integer): Integer {
+    override fun minus(other: PlatformInteger): PlatformInteger {
         val difference: BigInt = this.integer - BigInt("$other")
         return JsInteger(difference)
     }
 
-    override fun times(other: Integer): Integer {
+    override fun times(other: PlatformInteger): PlatformInteger {
         val product: BigInt = this.integer * BigInt("$other")
         return JsInteger(product)
     }
