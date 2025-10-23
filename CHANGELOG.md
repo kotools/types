@@ -27,6 +27,8 @@ All notable changes to this project will be documented in this file.
   ([#865]).
 - `EmailAddressRegex.Companion.of(String)` **experimental** function for
   creating an instance of `EmailAddressRegex` ([#868]).
+- Java compatibility in
+  [dependency compatibility](documentation/dependencies.md) ([1dacbdae2]).
 
 ### ♻️ Changed
 
@@ -63,6 +65,7 @@ All notable changes to this project will be documented in this file.
 [#865]: https://github.com/kotools/types/issues/865
 [#868]: https://github.com/kotools/types/issues/868
 [#880]: https://github.com/kotools/types/issues/880
+[1dacbdae2]: https://github.com/kotools/types/commit/1dacbdae2
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 [7a8e483f]: https://github.com/kotools/types/commit/7a8e483f
 [c60c84d4]: https://github.com/kotools/types/commit/c60c84d4
