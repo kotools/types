@@ -1,7 +1,14 @@
 # 🔗 Dependency compatibility
 
 This file documents the compatibility of Kotools Types with its API
-dependencies: Kotlin and Kotlin Serialization.
+dependencies: Java, Kotlin and Kotlin Serialization.
+
+## 📦 Java
+
+| Kotools Types | Java |
+|---------------|------|
+| <= 5.0        | 17   |
+| <= 4.2        | 8    |
 
 ## 📦 Kotlin
 
