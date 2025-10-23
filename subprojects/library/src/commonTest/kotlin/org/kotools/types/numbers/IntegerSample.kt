@@ -6,6 +6,21 @@ import kotlin.test.assertEquals
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
+    @Suppress("INTEGER_OVERFLOW", "UnusedUnaryOperator")
+    @Test
+    fun overflowProblem() {
+        2147483647 + 1 // Expected: 2147483648, Actual: -2147483648
+        -2147483648 - 1 // Expected: -2147483649, Actual: 2147483647
+        2147483647 * 2 // Expected: 4294967294, Actual: -2
+    }
+
+    @Test
+    fun overflowSolution() {
+        Integer(2147483647) + Integer(1) // 2147483648
+        Integer(-2147483648) - Integer(1) // -2147483649
+        Integer(2147483647) * Integer(2) // 4294967294
+    }
+
     @Test
     fun constructorLong() {
         // Given

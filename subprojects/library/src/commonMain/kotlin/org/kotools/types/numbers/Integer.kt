@@ -48,9 +48,18 @@ public expect fun Integer(text: String): Integer
 /**
  * Represents an integer.
  *
- * Contrarily to the Kotlin integer types ([Byte], [Short], [Int] and [Long]),
- * this type has no maximum and minimum values. It can hold greater values than
- * [Long.MAX_VALUE] and lesser values than [Long.MIN_VALUE].
+ * ### Overflow
+ *
+ * **Problem:** Adding, subtracting or multiplying Kotlin integer types ([Byte],
+ * [Short], [Int] and [Long]) can lead to an overflow, which produces unexpected
+ * behavior.
+ *
+ * SAMPLE: [org.kotools.types.numbers.IntegerSample.overflowProblem]
+ *
+ * **Solution:** This type can [add][Integer.plus], [subtract][Integer.minus] or
+ * [multiply][Integer.times] integers without producing an overflow.
+ *
+ * SAMPLE: [org.kotools.types.numbers.IntegerSample.overflowSolution]
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
