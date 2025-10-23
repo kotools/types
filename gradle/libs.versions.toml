@@ -17,6 +17,7 @@ convention-publication-module = { id = "convention.publication.module" }
 convention-publication-root = { id = "convention.publication.root" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotools-compatibility = { id = "org.kotools.compatibility" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
 maven-central-publishing = { id = "com.gradleup.nmcp.aggregation", version.ref = "maven-central-publishing" }
 

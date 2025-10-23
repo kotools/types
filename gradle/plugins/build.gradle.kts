@@ -4,6 +4,11 @@ repositories.mavenCentral()
 
 kotlin.explicitApi()
 
+gradlePlugin.plugins.register("Compatibility").configure {
+    this.id = "org.kotools.compatibility"
+    this.implementationClass = "org.kotools.gradle.CompatibilityPlugin"
+}
+
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.dokka.base)
