@@ -6,6 +6,11 @@ plugins {
     alias(libs.plugins.convention.publication.module)
 }
 
+compatibility {
+    java = libs.versions.java
+    kotlin = libs.versions.kotlin
+}
+
 documentation.excludeFromParentApiReference = true
 
 dependencies.commonMainImplementation(libs.kotlinx.serialization.core)
