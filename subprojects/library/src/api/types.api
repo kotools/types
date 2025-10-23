@@ -372,6 +372,7 @@ public abstract interface annotation class org/kotools/types/ExperimentalKotools
 
 public abstract interface class org/kotools/types/numbers/Integer {
 	public static final field Companion Lorg/kotools/types/numbers/Integer$Companion;
+	public abstract fun minus (Lorg/kotools/types/numbers/Integer;)Lorg/kotools/types/numbers/Integer;
 	public abstract fun plus (Lorg/kotools/types/numbers/Integer;)Lorg/kotools/types/numbers/Integer;
 }
 

@@ -37,4 +37,16 @@ class IntegerSample {
         val expected = Integer("18446744073709551614")
         assertEquals(expected, sum)
     }
+
+    @Test
+    fun minus() {
+        // Given
+        val x = Integer(-9223372036854775807)
+        val y = Integer(9223372036854775807)
+        // When
+        val difference: Integer = x - y
+        // Then
+        val expected = Integer("-18446744073709551614")
+        assertEquals(expected, difference)
+    }
 }

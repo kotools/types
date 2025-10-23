@@ -82,6 +82,33 @@ public interface Integer {
      */
     public operator fun plus(other: Integer): Integer
 
+    /**
+     * Subtracts the [other] integer from this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.numbers.IntegerSample.minus]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.numbers.IntegerJavaSample.minus]
+     * </details>
+     */
+    public operator fun minus(other: Integer): Integer
+
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
         @JvmSynthetic

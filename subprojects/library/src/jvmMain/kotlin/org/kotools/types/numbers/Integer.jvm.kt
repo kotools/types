@@ -91,6 +91,11 @@ private class JvmInteger(private val integer: BigInteger) : Integer {
         return JvmInteger(sum)
     }
 
+    override fun minus(other: Integer): Integer {
+        val difference: BigInteger = this.integer - BigInteger("$other")
+        return JvmInteger(difference)
+    }
+
     override fun equals(other: Any?): Boolean =
         other is JvmInteger && this.integer == other.integer
 

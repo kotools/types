@@ -99,4 +99,16 @@ class IntegerArithmeticOperationTest {
         val expected = Integer("9223372036854775808")
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun minus() {
+        // Given
+        val x = Integer(-9223372036854775807)
+        val y = Integer(9223372036854775807)
+        // When
+        val actual: Integer = x - y
+        // Then
+        val expected = Integer("-18446744073709551614")
+        assertEquals(expected, actual)
+    }
 }

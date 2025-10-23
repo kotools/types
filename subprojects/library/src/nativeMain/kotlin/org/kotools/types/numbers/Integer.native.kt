@@ -59,6 +59,12 @@ private class NativeInteger(private val integer: BigInteger) : Integer {
         return NativeInteger(sum)
     }
 
+    override fun minus(other: Integer): Integer {
+        val difference: BigInteger =
+            this.integer - BigInteger.parseString("$other")
+        return NativeInteger(difference)
+    }
+
     override fun equals(other: Any?): Boolean =
         other is NativeInteger && this.integer == other.integer
 

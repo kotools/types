@@ -40,4 +40,16 @@ public class IntegerJavaSample {
         final Integer expected = Integers.parse("18446744073709551614");
         Assertions.assertEquals(expected, sum);
     }
+
+    @Test
+    void minus() {
+        // Given
+        final Integer x = Integers.from(-9223372036854775807L);
+        final Integer y = Integers.from(9223372036854775807L);
+        // When
+        final Integer difference = x.minus(y);
+        // Then
+        final Integer expected = Integers.parse("-18446744073709551614");
+        Assertions.assertEquals(expected, difference);
+    }
 }
