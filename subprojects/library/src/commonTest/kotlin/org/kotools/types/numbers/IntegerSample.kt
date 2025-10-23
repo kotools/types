@@ -49,4 +49,16 @@ class IntegerSample {
         val expected = Integer("-18446744073709551614")
         assertEquals(expected, difference)
     }
+
+    @Test
+    fun times() {
+        // Given
+        val x = Integer(9223372036854775807)
+        val y = Integer(10)
+        // When
+        val product: Integer = x * y
+        // Then
+        val expected = Integer("92233720368547758070")
+        assertEquals(expected, product)
+    }
 }

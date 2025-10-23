@@ -63,6 +63,11 @@ private class JsInteger(private val integer: BigInt) : Integer {
         return JsInteger(difference)
     }
 
+    override fun times(other: Integer): Integer {
+        val product: BigInt = this.integer * BigInt("$other")
+        return JsInteger(product)
+    }
+
     override fun equals(other: Any?): Boolean =
         other is JsInteger && this.integer == other.integer
 
@@ -89,4 +94,12 @@ private operator fun BigInt.minus(other: BigInt): BigInt {
     val y = other
     val difference: dynamic = js("x - y")
     return BigInt("$difference")
+}
+
+@Suppress("UNUSED_VARIABLE")
+private operator fun BigInt.times(other: BigInt): BigInt {
+    val x = this
+    val y = other
+    val product: dynamic = js("x * y")
+    return BigInt("$product")
 }

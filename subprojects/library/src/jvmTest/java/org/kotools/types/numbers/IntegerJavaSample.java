@@ -52,4 +52,16 @@ public class IntegerJavaSample {
         final Integer expected = Integers.parse("-18446744073709551614");
         Assertions.assertEquals(expected, difference);
     }
+
+    @Test
+    void times() {
+        // Given
+        final Integer x = Integers.from(9223372036854775807L);
+        final Integer y = Integers.from(10);
+        // When
+        final Integer product = x.times(y);
+        // Then
+        final Integer expected = Integers.parse("92233720368547758070");
+        Assertions.assertEquals(expected, product);
+    }
 }

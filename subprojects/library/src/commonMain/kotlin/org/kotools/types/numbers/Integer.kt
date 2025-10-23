@@ -109,6 +109,33 @@ public interface Integer {
      */
     public operator fun minus(other: Integer): Integer
 
+    /**
+     * Multiplies this integer by the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.numbers.IntegerSample.times]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.numbers.IntegerJavaSample.times]
+     * </details>
+     */
+    public operator fun times(other: Integer): Integer
+
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
         @JvmSynthetic

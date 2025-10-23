@@ -96,6 +96,11 @@ private class JvmInteger(private val integer: BigInteger) : Integer {
         return JvmInteger(difference)
     }
 
+    override fun times(other: Integer): Integer {
+        val product: BigInteger = this.integer * BigInteger("$other")
+        return JvmInteger(product)
+    }
+
     override fun equals(other: Any?): Boolean =
         other is JvmInteger && this.integer == other.integer
 
