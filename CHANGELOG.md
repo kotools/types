@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
+- `Integer` type for solving overflow issues when adding, subtracting or
+  multiplying integers ([#880]).
 - `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
   `EmailAddress.Companion` type, for creating an instance of `EmailAddress`
   ([#865]).
@@ -60,6 +62,7 @@ All notable changes to this project will be documented in this file.
 [#854]: https://github.com/kotools/types/issues/854
 [#865]: https://github.com/kotools/types/issues/865
 [#868]: https://github.com/kotools/types/issues/868
+[#880]: https://github.com/kotools/types/issues/880
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 [7a8e483f]: https://github.com/kotools/types/commit/7a8e483f
 [c60c84d4]: https://github.com/kotools/types/commit/c60c84d4
