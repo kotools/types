@@ -36,6 +36,7 @@ kotlin.jvm {
 // Tier 1
 kotlin.macosArm64()
 kotlin.iosSimulatorArm64()
+kotlin.iosArm64()
 // Tier 2
 kotlin.linuxX64()
 kotlin.macosX64()

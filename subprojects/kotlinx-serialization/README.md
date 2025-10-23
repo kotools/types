@@ -9,6 +9,7 @@
 [![JS Platform][js-platform-badge]][kotlin/js]
 [![iOS x64 Platform][ios-x64-platform-badge]][kotlin-native]
 [![iOS Simulator arm64 Platform][ios-simulator-arm64-platform-badge]][kotlin-native]
+[![iOS arm64 Platform][ios-arm64-platform-badge]][kotlin-native]
 [![Linux x64 Platform][linux-x64-platform-badge]][kotlin-native]
 [![macOS x64 Platform][macos-x64-platform-badge]][kotlin-native]
 [![macOS arm64 Platform][macos-arm64-platform-badge]][kotlin-native]
@@ -79,6 +80,7 @@ See the [API reference] of the `KotoolsTypesSerializersModule()` function for
 more details.
 
 [api reference]: https://types.kotools.org
+[ios-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_arm64-4b4bff
 [ios-simulator-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_Simulator_arm64-4b4bff
 [ios-x64-platform-badge]: https://img.shields.io/badge/Platform-iOS_x64-4b4bff
 [js-platform-badge]: https://img.shields.io/badge/Platform-JS-ff9b00

@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
+- Support `iOS arm64` Kotlin Native target ([#843]).
 - `Integer` type for solving overflow issues when adding, subtracting or
   multiplying integers ([#880]).
 - `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
@@ -60,6 +61,7 @@ All notable changes to this project will be documented in this file.
 
 [@LVMVRQUXL]: https://github.com/LVMVRQUXL
 [#838]: https://github.com/kotools/types/issues/838
+[#843]: https://github.com/kotools/types/issues/843
 [#844]: https://github.com/kotools/types/issues/844
 [#854]: https://github.com/kotools/types/issues/854
 [#865]: https://github.com/kotools/types/issues/865
