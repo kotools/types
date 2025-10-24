@@ -15,6 +15,7 @@ private val kotlin: KotlinMultiplatformExtension = extensions.getByType()
 kotlin.explicitApi()
 
 kotlin.js(KotlinJsCompilerType.IR) {
+    browser()
     nodejs()
     binaries.library()
 }

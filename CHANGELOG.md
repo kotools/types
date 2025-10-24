@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - Support `iOS arm64` Kotlin Native target ([#843]).
+- Support browser target for Kotlin/JS ([#874]).
 - `Integer` type for solving overflow issues when adding, subtracting or
   multiplying integers ([#880]).
 - `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
@@ -66,6 +67,7 @@ All notable changes to this project will be documented in this file.
 [#854]: https://github.com/kotools/types/issues/854
 [#865]: https://github.com/kotools/types/issues/865
 [#868]: https://github.com/kotools/types/issues/868
+[#874]: https://github.com/kotools/types/issues/874
 [#880]: https://github.com/kotools/types/issues/880
 [1dacbdae2]: https://github.com/kotools/types/commit/1dacbdae2
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
