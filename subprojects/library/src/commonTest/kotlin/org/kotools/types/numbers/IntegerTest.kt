@@ -8,9 +8,9 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-class IntegerInstanceCreationTest {
+class IntegerTest {
     @Test
-    fun withMaximumLong() {
+    fun constructorWithMaximumLong() {
         // Given
         val number: Long = Long.MAX_VALUE
         // When
@@ -20,7 +20,7 @@ class IntegerInstanceCreationTest {
     }
 
     @Test
-    fun withMinimumLong() {
+    fun constructorWithMinimumLong() {
         // Given
         val number: Long = Long.MIN_VALUE
         // When
@@ -30,7 +30,7 @@ class IntegerInstanceCreationTest {
     }
 
     @Test
-    fun withDecimalText() {
+    fun constructorWithDecimalText() {
         // Given
         val text: String = Long.MAX_VALUE.toString()
         // When
@@ -40,7 +40,7 @@ class IntegerInstanceCreationTest {
     }
 
     @Test
-    fun withPlusSignedDecimalText() {
+    fun constructorWithPlusSignedDecimalText() {
         // Given
         val number: Long = Long.MAX_VALUE
         val text = "+$number"
@@ -51,7 +51,7 @@ class IntegerInstanceCreationTest {
     }
 
     @Test
-    fun withMinusSignedDecimalText() {
+    fun constructorWithMinusSignedDecimalText() {
         // Given
         val text: String = Long.MIN_VALUE.toString()
         // When
@@ -61,7 +61,7 @@ class IntegerInstanceCreationTest {
     }
 
     @Test
-    fun withBlankText() {
+    fun constructorWithBlankText() {
         // Given
         val text = ""
         // When
@@ -74,7 +74,7 @@ class IntegerInstanceCreationTest {
     }
 
     @Test
-    fun withNonDecimalText() {
+    fun constructorWithNonDecimalText() {
         // Given
         val text = "hello"
         // When
@@ -86,10 +86,9 @@ class IntegerInstanceCreationTest {
                 "followed by a sequence of digits, was: $text"
         assertEquals(expected, actual.message)
     }
-}
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class IntegerStructuralEqualityOperations {
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun equalsWithIntegerHavingSameValue() {
         // Given
@@ -134,10 +133,9 @@ class IntegerStructuralEqualityOperations {
             .hashCode()
         assertEquals(expected, actual)
     }
-}
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class IntegerArithmeticOperationTest {
+    // ------------------------- Arithmetic operations -------------------------
+
     @Test
     fun plus() {
         // Given
@@ -173,10 +171,9 @@ class IntegerArithmeticOperationTest {
         val expected = Integer("92233720368547758070")
         assertEquals(expected, product)
     }
-}
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
-class IntegerConversionTest {
+    // ------------------------------ Conversions ------------------------------
+
     @Test
     fun toStringPasses() {
         // Given
