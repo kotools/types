@@ -29,8 +29,8 @@ env:
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
 jobs:
-  check-gradle-plugins:
-    name: Check Gradle plugins
+  gradle-plugins:
+    name: Gradle plugins
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -59,8 +59,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v4.3.1
       - name: Build 'types-internal' project
         run: ./gradlew :types:build
-  check-library:
-    name: Check library
+  library:
+    name: Library
     runs-on: macos-13
     steps:
       - name: Checkout code
@@ -74,8 +74,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v4.3.1
       - name: Check 'types' project
         run: ./gradlew :types:check
-  check-kotlin-serialization:
-    name: Check Kotlin Serialization support
+  kotlin-serialization:
+    name: Kotlin Serialization
     runs-on: macos-13
     steps:
       - name: Checkout code
