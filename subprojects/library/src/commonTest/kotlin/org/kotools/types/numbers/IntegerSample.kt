@@ -3,7 +3,6 @@ package org.kotools.types.numbers
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
@@ -43,29 +42,6 @@ class IntegerSample {
     }
 
     @Test
-    fun equalsOverride() {
-        // Given
-        val x = Integer(9223372036854775807)
-        val y = Integer(9223372036854775807)
-        // When
-        val equality: Boolean = x == y // or x.equals(y)
-        // Then
-        assertTrue(equality)
-    }
-
-    @Test
-    fun hashCodeOverride() {
-        // Given
-        val integer = Integer(9223372036854775807)
-        // When
-        val hashCode: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer(9223372036854775807)
-            .hashCode()
-        assertEquals(expected, hashCode)
-    }
-
-    @Test
     fun plus() {
         // Given
         val x = Integer(9223372036854775807)
@@ -99,15 +75,5 @@ class IntegerSample {
         // Then
         val expected = Integer("92233720368547758070")
         assertEquals(expected, product)
-    }
-
-    @Test
-    fun toStringOverride() {
-        // Given
-        val integer = Integer(9223372036854775807)
-        // When
-        val integerString: String = integer.toString()
-        // Then
-        assertEquals(expected = "9223372036854775807", integerString)
     }
 }

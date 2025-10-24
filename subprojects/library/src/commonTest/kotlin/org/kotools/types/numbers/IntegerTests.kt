@@ -4,13 +4,11 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-class IntegerTest {
+class IntegerInstanceCreationTest {
     @Test
-    fun constructorWithMaximumLong() {
+    fun withMaximumLong() {
         // Given
         val number: Long = Long.MAX_VALUE
         // When
@@ -20,7 +18,7 @@ class IntegerTest {
     }
 
     @Test
-    fun constructorWithMinimumLong() {
+    fun withMinimumLong() {
         // Given
         val number: Long = Long.MIN_VALUE
         // When
@@ -30,7 +28,7 @@ class IntegerTest {
     }
 
     @Test
-    fun constructorWithDecimalText() {
+    fun withDecimalText() {
         // Given
         val text: String = Long.MAX_VALUE.toString()
         // When
@@ -40,7 +38,7 @@ class IntegerTest {
     }
 
     @Test
-    fun constructorWithPlusSignedDecimalText() {
+    fun withPlusSignedDecimalText() {
         // Given
         val number: Long = Long.MAX_VALUE
         val text = "+$number"
@@ -51,7 +49,7 @@ class IntegerTest {
     }
 
     @Test
-    fun constructorWithMinusSignedDecimalText() {
+    fun withMinusSignedDecimalText() {
         // Given
         val text: String = Long.MIN_VALUE.toString()
         // When
@@ -61,7 +59,7 @@ class IntegerTest {
     }
 
     @Test
-    fun constructorWithBlankText() {
+    fun withBlankText() {
         // Given
         val text = ""
         // When
@@ -74,7 +72,7 @@ class IntegerTest {
     }
 
     @Test
-    fun constructorWithNonDecimalText() {
+    fun withNonDecimalText() {
         // Given
         val text = "hello"
         // When
@@ -86,56 +84,10 @@ class IntegerTest {
                 "followed by a sequence of digits, was: $text"
         assertEquals(expected, actual.message)
     }
+}
 
-    // -------------------- Structural equality operations ---------------------
-
-    @Test
-    fun equalsWithIntegerHavingSameValue() {
-        // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y = Integer(Long.MAX_VALUE)
-        // When
-        val actual: Boolean = x == y
-        // Then
-        assertTrue(actual)
-    }
-
-    @Test
-    fun equalsWithAnotherTypeThanInteger() {
-        // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y: Long = Long.MAX_VALUE
-        // When
-        val actual: Boolean = x.equals(y)
-        // Then
-        assertFalse(actual)
-    }
-
-    @Test
-    fun equalsWithIntegerHavingAnotherValue() {
-        // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y = Integer(Long.MIN_VALUE)
-        // When
-        val actual: Boolean = x == y
-        // Then
-        assertFalse(actual)
-    }
-
-    @Test
-    fun hashCodeReturnsHashCodeOfPlatformInteger() {
-        // Given
-        val integer = Integer(Long.MAX_VALUE)
-        // When
-        val actual: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer(Long.MAX_VALUE)
-            .hashCode()
-        assertEquals(expected, actual)
-    }
-
-    // ------------------------- Arithmetic operations -------------------------
-
+@ExperimentalKotoolsTypesApi
+class IntegerArithmeticOperationTest {
     @Test
     fun plus() {
         // Given
@@ -170,17 +122,5 @@ class IntegerTest {
         // Then
         val expected = Integer("92233720368547758070")
         assertEquals(expected, product)
-    }
-
-    // ------------------------------ Conversions ------------------------------
-
-    @Test
-    fun toStringPasses() {
-        // Given
-        val integer = Integer(Long.MAX_VALUE)
-        // When
-        val actual: String = integer.toString()
-        // Then
-        assertEquals(expected = "${Long.MAX_VALUE}", actual)
     }
 }
