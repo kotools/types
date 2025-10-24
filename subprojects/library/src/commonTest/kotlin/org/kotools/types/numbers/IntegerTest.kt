@@ -129,7 +129,7 @@ class IntegerTest {
         // When
         val actual: Int = integer.hashCode()
         // Then
-        val expected: Int = PlatformInteger(Long.MAX_VALUE)
+        val expected: Int = Integer(Long.MAX_VALUE)
             .hashCode()
         assertEquals(expected, actual)
     }

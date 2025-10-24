@@ -3,8 +3,8 @@ package org.kotools.types.numbers
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an integer.
@@ -276,27 +276,4 @@ public class Integer private constructor(private val value: PlatformInteger) {
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object
-}
-
-internal expect fun PlatformInteger(number: Long): PlatformInteger
-internal expect fun PlatformInteger(text: String): PlatformInteger
-
-internal interface PlatformInteger {
-    operator fun plus(other: PlatformInteger): PlatformInteger
-    operator fun minus(other: PlatformInteger): PlatformInteger
-    operator fun times(other: PlatformInteger): PlatformInteger
-
-    companion object {
-        @JvmSynthetic
-        internal fun requirements(text: String) {
-            require(text.isNotBlank()) { "Integer should not be blank" }
-            val isNumericText: Boolean = text.removePrefix("+")
-                .removePrefix("-")
-                .all(Char::isDigit)
-            require(isNumericText) {
-                "Integer can only contain an optional + or - sign, followed " +
-                        "by a sequence of digits, was: $text"
-            }
-        }
-    }
 }

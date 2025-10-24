@@ -1,16 +1,27 @@
-package org.kotools.types.numbers
+package org.kotools.types.internal
 
-internal actual fun PlatformInteger(number: Long): PlatformInteger {
+/** Creates an instance of [PlatformInteger] from the specified [number]. */
+@InternalKotoolsTypesApi
+public actual fun PlatformInteger(number: Long): PlatformInteger {
     val integer = BigInt("$number")
     return JsInteger(integer)
 }
 
-internal actual fun PlatformInteger(text: String): PlatformInteger {
+/**
+ * Creates an instance of [PlatformInteger] from the specified [text], or throws
+ * an [IllegalArgumentException] if the [text] doesn't represent an integer.
+ *
+ * The [text] parameter must only contain an optional plus (`+`) or minus
+ * (`-`) sign, followed by a sequence of digits.
+ */
+@InternalKotoolsTypesApi
+public actual fun PlatformInteger(text: String): PlatformInteger {
     PlatformInteger.requirements(text)
     val integer = BigInt(text)
     return JsInteger(integer)
 }
 
+@OptIn(InternalKotoolsTypesApi::class)
 private class JsInteger(private val integer: BigInt) : PlatformInteger {
     override fun plus(other: PlatformInteger): PlatformInteger {
         val sum: BigInt = this.integer + BigInt("$other")
