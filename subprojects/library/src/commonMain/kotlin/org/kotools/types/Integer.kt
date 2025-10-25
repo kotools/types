@@ -301,9 +301,4 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.value.toString()
-
-    // -------------------------------------------------------------------------
-
-    /** Contains class-level declarations for the [Integer] type. */
-    public companion object
 }
