@@ -24,7 +24,6 @@ rootProject.extensions.findByType<YarnRootExtension>()?.run {
     resolution("braces", "3.0.3")
     resolution("follow-redirects", "1.15.6")
     resolution("rollup", "2.79.2")
-    resolution("webpack", "5.94.0")
 }
 
 kotlin.jvm {
