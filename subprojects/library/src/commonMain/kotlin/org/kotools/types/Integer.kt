@@ -27,6 +27,21 @@ import org.kotools.types.internal.Warning
  *
  * SAMPLE: [org.kotools.types.IntegerSample.overflowSolution]
  * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Declarations</b>
+ * </summary>
+ *
+ * ### Declarations
+ *
+ * - **Structural equality operations:** [equals][Integer.equals] (`==`) and
+ * [hashCode][Integer.hashCode].
+ * - **Arithmetic operations:** [plus][Integer.plus] (`+`),
+ * [minus][Integer.minus] (`-`) and [times][Integer.times] (`*`).
+ * - **Conversions:** [toString][Integer.toString].
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
