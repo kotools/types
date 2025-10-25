@@ -1,4 +1,4 @@
-package org.kotools.types.numbers;
+package org.kotools.types;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
