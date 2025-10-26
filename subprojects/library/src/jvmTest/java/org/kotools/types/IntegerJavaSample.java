@@ -53,6 +53,17 @@ public class IntegerJavaSample {
     }
 
     @Test
+    void unaryMinus() {
+        // Given
+        final Integer integer = new Integer(9223372036854775807L);
+        // When
+        final Integer negative = integer.unaryMinus();
+        // Then
+        final Integer expected = new Integer(-9223372036854775807L);
+        Assertions.assertEquals(expected, negative);
+    }
+
+    @Test
     void plus() {
         // Given
         final Integer x = new Integer(9223372036854775807L);

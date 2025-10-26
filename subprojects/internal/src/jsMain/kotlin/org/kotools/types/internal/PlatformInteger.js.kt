@@ -23,6 +23,8 @@ public actual fun PlatformInteger(text: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class JsInteger(private val integer: BigInt) : PlatformInteger {
+    override fun unaryMinus(): PlatformInteger = JsInteger(-this.integer)
+
     override fun plus(other: PlatformInteger): PlatformInteger {
         val sum: BigInt = this.integer + BigInt("$other")
         return JsInteger(sum)
@@ -49,6 +51,13 @@ private class JsInteger(private val integer: BigInt) : PlatformInteger {
 private external fun BigInt(value: String): BigInt
 
 private external object BigInt
+
+@Suppress("UNUSED_VARIABLE")
+private operator fun BigInt.unaryMinus(): BigInt {
+    val x = this
+    val negative: dynamic = js("-x")
+    return BigInt("$negative")
+}
 
 @Suppress("UNUSED_VARIABLE")
 private operator fun BigInt.plus(other: BigInt): BigInt {

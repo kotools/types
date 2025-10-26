@@ -25,6 +25,8 @@ public actual fun PlatformInteger(text: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class JvmInteger(private val integer: BigInteger) : PlatformInteger {
+    override fun unaryMinus(): PlatformInteger = JvmInteger(-this.integer)
+
     override fun plus(other: PlatformInteger): PlatformInteger {
         val sum: BigInteger = this.integer + BigInteger("$other")
         return JvmInteger(sum)

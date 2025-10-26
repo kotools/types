@@ -136,6 +136,17 @@ class IntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinus() {
+        // Given
+        val integer = Integer("92233720368547758070")
+        // When
+        val actual: Integer = -integer
+        // Then
+        val expected = Integer("-92233720368547758070")
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun plus() {
         // Given
         val x = Integer(Long.MAX_VALUE)

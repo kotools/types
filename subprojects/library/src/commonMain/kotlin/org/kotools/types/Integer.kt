@@ -36,10 +36,11 @@ import org.kotools.types.internal.Warning
  *
  * ### Declarations
  *
- * - **Structural equality operations:** [equals][Integer.equals] (`==`) and
+ * - **Structural equality operations:** [equals][Integer.equals] (`x == y`) and
  * [hashCode][Integer.hashCode].
- * - **Arithmetic operations:** [plus][Integer.plus] (`+`),
- * [minus][Integer.minus] (`-`) and [times][Integer.times] (`*`).
+ * - **Arithmetic operations:** [unaryMinus][Integer.unaryMinus] (`-x`),
+ * [plus][Integer.plus] (`x + y`), [minus][Integer.minus] (`x - y`) and
+ * [times][Integer.times] (`x * y`).
  * - **Conversions:** [toString][Integer.toString].
  * </details>
  *
@@ -181,6 +182,33 @@ public class Integer private constructor(private val value: PlatformInteger) {
     final override fun hashCode(): Int = this.value.hashCode()
 
     // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.unaryMinus]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.unaryMinus]
+     * </details>
+     */
+    public operator fun unaryMinus(): Integer = Integer(-this.value)
 
     /**
      * Adds the [other] integer to this one.

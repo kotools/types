@@ -65,6 +65,17 @@ class IntegerSample {
     }
 
     @Test
+    fun unaryMinus() {
+        // Given
+        val integer = Integer(9223372036854775807)
+        // When
+        val negative: Integer = -integer // or integer.unaryMinus()
+        // Then
+        val expected = Integer(-9223372036854775807)
+        assertEquals(expected, negative)
+    }
+
+    @Test
     fun plus() {
         // Given
         val x = Integer(9223372036854775807)

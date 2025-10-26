@@ -19,6 +19,9 @@ public expect fun PlatformInteger(text: String): PlatformInteger
 /** Represents an integer with a platform-specific implementation. */
 @InternalKotoolsTypesApi
 public interface PlatformInteger {
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): PlatformInteger
+
     /** Adds the [other] integer to this one. */
     public operator fun plus(other: PlatformInteger): PlatformInteger
 
