@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
 
 /**
  * Represents an integer that is guaranteed to be non-zero.
@@ -41,4 +42,64 @@ import org.kotools.types.internal.KotoolsTypesVersion
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class NonZeroInteger private constructor()
+public class NonZeroInteger private constructor(private val integer: Integer) {
+    /**
+     * Creates an instance of [NonZeroInteger] from the specified [number], or
+     * throws an [IllegalArgumentException] if the [number] is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerSample.constructorInt]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerJavaSample.constructorInt]
+     * </details>
+     */
+    public constructor(number: Int) : this(Integer(number)) {
+        require(number != 0) { "NonZeroInteger shouldn't be zero" }
+    }
+
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerSample.toStringOverride]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerJavaSample.toStringOverride]
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun toString(): String = this.integer.toString()
+}
