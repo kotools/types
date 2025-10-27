@@ -389,3 +389,6 @@ public final class org/kotools/types/Integer$Literal {
 	public final synthetic fun getN (J)Lorg/kotools/types/Integer;
 }
 
+public final class org/kotools/types/NonZeroInteger {
+}
+
