@@ -76,6 +76,33 @@ public class NonZeroInteger private constructor(private val integer: Integer) {
     // ------------------------------ Conversions ------------------------------
 
     /**
+     * Returns this integer as [Integer].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerSample.toInteger]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerJavaSample.toInteger]
+     * </details>
+     */
+    public fun toInteger(): Integer = this.integer
+
+    /**
      * Returns the string representation of this integer.
      *
      * <br>

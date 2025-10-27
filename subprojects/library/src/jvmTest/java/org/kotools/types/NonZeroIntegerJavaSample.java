@@ -19,6 +19,18 @@ public class NonZeroIntegerJavaSample {
     }
 
     @Test
+    void toInteger() {
+        // Given
+        final int number = 2_147_483_647;
+        final NonZeroInteger x = new NonZeroInteger(number);
+        // When
+        final Integer result = x.toInteger();
+        // Then
+        final Integer expected = new Integer(number);
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
     void toStringOverride() {
         // Given
         final int number = 2147483647;

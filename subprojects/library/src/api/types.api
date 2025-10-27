@@ -391,6 +391,7 @@ public final class org/kotools/types/Integer$Literal {
 
 public final class org/kotools/types/NonZeroInteger {
 	public fun <init> (I)V
+	public final fun toInteger ()Lorg/kotools/types/Integer;
 	public final fun toString ()Ljava/lang/String;
 }
 
