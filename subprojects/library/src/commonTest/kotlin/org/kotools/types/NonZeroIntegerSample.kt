@@ -32,7 +32,7 @@ class NonZeroIntegerSample {
     @Test
     fun toStringOverride() {
         // Given
-        val number = 2147483647
+        val number = 2_147_483_647
         val integer = NonZeroInteger(number)
         // When
         val result: String = integer.toString()

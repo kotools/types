@@ -33,7 +33,7 @@ public class NonZeroIntegerJavaSample {
     @Test
     void toStringOverride() {
         // Given
-        final int number = 2147483647;
+        final int number = 2_147_483_647;
         final NonZeroInteger integer = new NonZeroInteger(number);
         // When
         final String result = integer.toString();

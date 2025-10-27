@@ -18,18 +18,4 @@ class NonZeroIntegerTest {
         val expected = "NonZeroInteger shouldn't be zero"
         assertEquals(expected, result.message)
     }
-
-    // ------------------------------ Conversions ------------------------------
-
-    @Test
-    fun toStringOverride() {
-        // Given
-        val number: Int = Int.MAX_VALUE
-        val integer = NonZeroInteger(number)
-        // When
-        val actual: String = integer.toString()
-        // Then
-        val expected: String = number.toString()
-        assertEquals(expected, actual)
-    }
 }
