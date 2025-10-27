@@ -43,22 +43,6 @@ import org.kotools.types.internal.Warning
  * [times][Integer.times] (`x * y`).
  * - **Conversions:** [toString][Integer.toString].
  * </details>
- *
- * <br>
- * <details>
- * <summary>
- *     <b>Evolution ideas</b>
- * </summary>
- *
- * ### Evolution ideas
- *
- * See the following discussions for contributing to the evolution of this type:
- *
- * - [Extension properties for instance creation](https://github.com/kotools/types/discussions/887).
- *
- * If you have an idea that is not listed above, feel free to
- * [open a discussion](https://github.com/kotools/types/discussions/new?category=ideas).
- * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
