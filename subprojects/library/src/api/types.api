@@ -382,3 +382,7 @@ public final class org/kotools/types/Integer {
 	public final fun unaryMinus ()Lorg/kotools/types/Integer;
 }
 
+public final class org/kotools/types/Integer$Literal {
+	public static final field INSTANCE Lorg/kotools/types/Integer$Literal;
+}
+

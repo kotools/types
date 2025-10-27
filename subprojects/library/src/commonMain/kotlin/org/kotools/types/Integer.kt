@@ -313,4 +313,12 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.value.toString()
+
+    // -------------------------- Literal extensions ---------------------------
+
+    /**
+     * Contains Kotlin extensions for creating an instance of [Integer] from
+     * decimal literals.
+     */
+    public object Literal
 }
