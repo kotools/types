@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import org.kotools.types.Integer.Literal.n
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -119,5 +120,12 @@ class IntegerSample {
         val integerString: String = integer.toString()
         // Then
         assertEquals(expected = "9223372036854775807", integerString)
+    }
+
+    @Test
+    fun nOnInt() {
+        val integer: Integer = 2147483647.n
+        val expected = Integer(2147483647L)
+        assertEquals(expected, integer)
     }
 }

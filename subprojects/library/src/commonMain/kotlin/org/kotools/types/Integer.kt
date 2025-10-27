@@ -4,6 +4,7 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an integer.
@@ -320,5 +321,29 @@ public class Integer private constructor(private val value: PlatformInteger) {
      * Contains Kotlin extensions for creating an instance of [Integer] from
      * decimal literals.
      */
-    public object Literal
+    public object Literal {
+        /**
+         * Creates an instance of [Integer] from this number.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.nOnInt]
+         * </details>
+         * <br>
+         *
+         * This property is not available from Java code.
+         */
+        @get:JvmSynthetic
+        public val Int.n: Integer
+            get() {
+                val number: Long = this.toLong()
+                return Integer(number)
+            }
+    }
 }

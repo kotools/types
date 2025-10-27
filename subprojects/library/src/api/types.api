@@ -384,5 +384,6 @@ public final class org/kotools/types/Integer {
 
 public final class org/kotools/types/Integer$Literal {
 	public static final field INSTANCE Lorg/kotools/types/Integer$Literal;
+	public final synthetic fun getN (I)Lorg/kotools/types/Integer;
 }
 

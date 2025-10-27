@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import org.kotools.types.Integer.Literal.n
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -192,5 +193,19 @@ class IntegerTest {
         val actual: String = integer.toString()
         // Then
         assertEquals(expected = "${Long.MAX_VALUE}", actual)
+    }
+
+    // -------------------------- Literal extensions ---------------------------
+
+    @Test
+    fun nOnInt() {
+        // Given
+        val number: Int = Int.MAX_VALUE
+        // When
+        val actual: Integer = number.n
+        // Then
+        val numberAsLong: Long = number.toLong()
+        val expected = Integer(numberAsLong)
+        assertEquals(expected, actual)
     }
 }
