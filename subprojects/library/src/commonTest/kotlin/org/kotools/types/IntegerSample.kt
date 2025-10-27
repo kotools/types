@@ -23,13 +23,15 @@ class IntegerSample {
     }
 
     @Test
-    fun constructorInt() {
+    fun constructorWithInt() {
         // Given
-        val number = 2147483647
+        val number = 2_147_483_647
         // When
-        val integer = Integer(number)
+        val result = Integer(number)
         // Then
-        assertEquals(expected = "$number", "$integer")
+        val resultAsString: String = result.toString()
+        val expected: String = number.toString()
+        assertEquals(expected, resultAsString)
     }
 
     @Test

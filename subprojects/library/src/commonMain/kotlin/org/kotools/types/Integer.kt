@@ -64,7 +64,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.constructorInt]
+     * SAMPLE: [org.kotools.types.IntegerSample.constructorWithInt]
      * </details>
      *
      * <br>
@@ -75,7 +75,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorInt]
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorWithInt]
      * </details>
      */
     public constructor(number: Int) : this(PlatformInteger(number.toLong()))
