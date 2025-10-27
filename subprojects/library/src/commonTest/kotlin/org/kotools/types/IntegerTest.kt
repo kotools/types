@@ -208,4 +208,15 @@ class IntegerTest {
         val expected = Integer(numberAsLong)
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun nOnLong() {
+        // Given
+        val number: Long = Long.MAX_VALUE
+        // When
+        val actual: Integer = number.n
+        // Then
+        val expected = Integer(number)
+        assertEquals(expected, actual)
+    }
 }

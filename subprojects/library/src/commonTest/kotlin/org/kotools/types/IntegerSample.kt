@@ -128,4 +128,11 @@ class IntegerSample {
         val expected = Integer(2147483647L)
         assertEquals(expected, integer)
     }
+
+    @Test
+    fun nOnLong() {
+        val integer: Integer = 2147483647L.n
+        val expected = Integer(2147483647L)
+        assertEquals(expected, integer)
+    }
 }

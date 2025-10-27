@@ -345,5 +345,25 @@ public class Integer private constructor(private val value: PlatformInteger) {
                 val number: Long = this.toLong()
                 return Integer(number)
             }
+
+        /**
+         * Creates an instance of [Integer] from this number.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this property from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.nOnLong]
+         * </details>
+         * <br>
+         *
+         * This property is not available from Java code.
+         */
+        @get:JvmSynthetic
+        public val Long.n: Integer get() = Integer(number = this)
     }
 }
