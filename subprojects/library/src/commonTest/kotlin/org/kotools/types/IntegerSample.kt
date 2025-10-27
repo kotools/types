@@ -17,9 +17,9 @@ class IntegerSample {
 
     @Test
     fun overflowSolution() {
-        Integer(2147483647) + Integer(1) // 2147483648
-        Integer(-2147483648) - Integer(1) // -2147483649
-        Integer(2147483647) * Integer(2) // 4294967294
+        2147483647.n + 1.n // 2147483648
+        (-2147483648).n - 1.n // -2147483649
+        2147483647.n * 2.n // 4294967294
     }
 
     @Test
