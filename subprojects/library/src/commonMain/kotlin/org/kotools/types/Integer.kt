@@ -37,6 +37,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Declarations
  *
+ * - **Instance creation:** constructors and
+ * [Kotlin literal extensions][Integer.Literal.n] (`Int.n` and `Long.n`).
  * - **Structural equality operations:** [equals][Integer.equals] (`x == y`) and
  * [hashCode][Integer.hashCode].
  * - **Arithmetic operations:** [unaryMinus][Integer.unaryMinus] (`-x`),
