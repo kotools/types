@@ -9,6 +9,9 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Represents an integer.
  *
+ * Use this type for preventing overflow when adding, subtracting or multiplying
+ * integers.
+ *
  * <br>
  * <details>
  * <summary>
