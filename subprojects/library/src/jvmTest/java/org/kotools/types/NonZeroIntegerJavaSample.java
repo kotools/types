@@ -7,9 +7,9 @@ import org.kotools.types.internal.Warning;
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class NonZeroIntegerJavaSample {
     @Test
-    void constructorInt() {
+    void constructorWithNonZeroInt() {
         // Given
-        final int number = 2147483647;
+        final int number = 2_147_483_647;
         // When
         final NonZeroInteger result = new NonZeroInteger(number);
         // Then

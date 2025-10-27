@@ -7,29 +7,16 @@ import kotlin.test.assertFailsWith
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonZeroIntegerTest {
     @Test
-    fun constructorWithNonZeroInt() {
-        // Given
-        val number: Int = Int.MAX_VALUE
-        // When
-        val integer = NonZeroInteger(number)
-        // Then
-        val actualAsString: String = integer.toString()
-        val expected: String = number.toString()
-        assertEquals(expected, actualAsString)
-    }
-
-    @Test
     fun constructorWithZeroInt() {
         // Given
         val number = 0
         // When
-        val exception: IllegalArgumentException = assertFailsWith {
+        val result: IllegalArgumentException = assertFailsWith {
             NonZeroInteger(number)
         }
         // Then
-        val actual: String? = exception.message
         val expected = "NonZeroInteger shouldn't be zero"
-        assertEquals(expected, actual)
+        assertEquals(expected, result.message)
     }
 
     // ------------------------------ Conversions ------------------------------

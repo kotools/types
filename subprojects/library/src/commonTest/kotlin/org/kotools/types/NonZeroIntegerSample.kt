@@ -6,9 +6,9 @@ import kotlin.test.assertEquals
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonZeroIntegerSample {
     @Test
-    fun constructorInt() {
+    fun constructorWithNonZeroInt() {
         // Given
-        val number = 2147483647
+        val number = 2_147_483_647
         // When
         val result = NonZeroInteger(number)
         // Then
