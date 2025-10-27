@@ -7,6 +7,18 @@ import org.kotools.types.internal.Warning;
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class IntegerJavaSample {
     @Test
+    void constructorInt() {
+        // Given
+        final int number = 2147483647;
+        // When
+        final Integer integer = new Integer(number);
+        // Then
+        final String result = integer.toString();
+        final String expected = String.valueOf(number);
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
     void constructorLong() {
         // Given
         final long number = 9223372036854775807L;

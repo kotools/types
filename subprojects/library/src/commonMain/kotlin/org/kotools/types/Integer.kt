@@ -61,6 +61,33 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
+     * SAMPLE: [org.kotools.types.IntegerSample.constructorInt]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorInt]
+     * </details>
+     */
+    public constructor(number: Int) : this(PlatformInteger(number.toLong()))
+
+    /**
+     * Creates an instance of [Integer] from the specified [number].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
      * SAMPLE: [org.kotools.types.IntegerSample.constructorLong]
      * </details>
      *

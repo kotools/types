@@ -23,6 +23,16 @@ class IntegerSample {
     }
 
     @Test
+    fun constructorInt() {
+        // Given
+        val number = 2147483647
+        // When
+        val integer = Integer(number)
+        // Then
+        assertEquals(expected = "$number", "$integer")
+    }
+
+    @Test
     fun constructorLong() {
         // Given
         val number = 9223372036854775807
