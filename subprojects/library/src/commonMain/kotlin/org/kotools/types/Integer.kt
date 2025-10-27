@@ -8,6 +8,9 @@ import org.kotools.types.internal.Warning
 /**
  * Represents an integer.
  *
+ * Use this type for preventing overflow when adding, subtracting or multiplying
+ * integers.
+ *
  * <br>
  * <details>
  * <summary>
