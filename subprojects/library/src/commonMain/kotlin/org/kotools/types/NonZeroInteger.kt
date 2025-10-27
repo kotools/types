@@ -39,6 +39,18 @@ import org.kotools.types.internal.Warning
  * See the [Integer.Literal.n] extension property for more details about
  * creating an instance of [Integer] from decimal literals.
  * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Declarations</b>
+ * </summary>
+ *
+ * ### Declarations
+ *
+ * - **Conversions:** [toInteger][NonZeroInteger.toInteger] and
+ * [toString][NonZeroInteger.toString].
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
