@@ -31,6 +31,17 @@ public class NonZeroIntegerJavaSample {
     }
 
     @Test
+    void constructorWithNonZeroDecimalString() {
+        // Given
+        final String text = "18446744073709551614";
+        // When
+        final NonZeroInteger result = new NonZeroInteger(text);
+        // Then
+        final String resultAsString = result.toString();
+        Assertions.assertEquals(text, resultAsString);
+    }
+
+    @Test
     void toInteger() {
         // Given
         final int number = 2_147_483_647;

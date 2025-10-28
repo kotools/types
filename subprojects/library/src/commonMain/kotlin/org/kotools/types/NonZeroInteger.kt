@@ -115,6 +115,45 @@ public class NonZeroInteger private constructor(private val integer: Integer) {
         require(number != 0L) { "NonZeroInteger shouldn't be zero" }
     }
 
+    /**
+     * Creates an instance of [NonZeroInteger] from the specified [text], or
+     * throws an [IllegalArgumentException] if the [text] doesn't represent a
+     * non-zero integer.
+     *
+     * The [text] parameter must only contain an optional plus (`+`) or minus
+     * (`-`) sign, followed by a sequence of digits, which must not be a
+     * sequence of zeros. For example, the `-123` text is valid, but the `+000`
+     * text is invalid.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerSample.constructorWithNonZeroDecimalString]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Java code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerJavaSample.constructorWithNonZeroDecimalString]
+     * </details>
+     */
+    public constructor(text: String) : this(Integer(text)) {
+        val isZero: Boolean = text.removePrefix("+")
+            .removePrefix("-")
+            .all { it == '0' }
+        require(!isZero) { "NonZeroInteger shouldn't be zero" }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     /**

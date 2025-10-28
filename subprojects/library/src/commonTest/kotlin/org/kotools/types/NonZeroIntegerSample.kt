@@ -30,6 +30,17 @@ class NonZeroIntegerSample {
     }
 
     @Test
+    fun constructorWithNonZeroDecimalString() {
+        // Given
+        val text = "18446744073709551614"
+        // When
+        val result = NonZeroInteger(text)
+        // Then
+        val resultAsString: String = result.toString()
+        assertEquals(expected = text, resultAsString)
+    }
+
+    @Test
     fun toInteger() {
         // Given
         val number = 2_147_483_647
