@@ -82,15 +82,16 @@ class IntegerSample {
     }
 
     @Test
-    fun hashCodeOverride() {
+    fun hashCodeWithIntegerHavingSameValue() {
         // Given
-        val integer = Integer(9223372036854775807)
+        val number: Long = Long.MAX_VALUE
+        val integer = Integer(number)
         // When
-        val hashCode: Int = integer.hashCode()
+        val result: Int = integer.hashCode()
         // Then
-        val expected: Int = Integer(9223372036854775807)
+        val expected: Int = Integer(number)
             .hashCode()
-        assertEquals(expected, hashCode)
+        assertEquals(expected, result)
     }
 
     // ------------------------- Arithmetic operations -------------------------

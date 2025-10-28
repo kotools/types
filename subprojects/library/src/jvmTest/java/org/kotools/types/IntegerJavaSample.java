@@ -45,15 +45,16 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void hashCodeOverride() {
+    void hashCodeWithIntegerHavingSameValue() {
         // Given
-        final Integer integer = new Integer(9223372036854775807L);
+        final long number = Long.MAX_VALUE;
+        final Integer integer = new Integer(number);
         // When
-        final int hashCode = integer.hashCode();
+        final int result = integer.hashCode();
         // Then
-        final int expected = new Integer(9223372036854775807L)
+        final int expected = new Integer(number)
                 .hashCode();
-        Assertions.assertEquals(expected, hashCode);
+        Assertions.assertEquals(expected, result);
     }
 
     // ------------------------- Arithmetic operations -------------------------

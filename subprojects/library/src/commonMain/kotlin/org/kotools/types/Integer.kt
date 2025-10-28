@@ -168,7 +168,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.hashCodeOverride]
+     * SAMPLE: [org.kotools.types.IntegerSample.hashCodeWithIntegerHavingSameValue]
      * </details>
      *
      * <br>
@@ -179,7 +179,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.hashCodeOverride]
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.hashCodeWithIntegerHavingSameValue]
      * </details>
      */
     @Suppress(Warning.FINAL)

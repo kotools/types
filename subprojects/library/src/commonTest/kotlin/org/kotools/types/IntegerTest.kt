@@ -85,18 +85,6 @@ class IntegerTest {
         assertFalse(result)
     }
 
-    @Test
-    fun hashCodeReturnsHashCodeOfPlatformInteger() {
-        // Given
-        val integer = Integer(Long.MAX_VALUE)
-        // When
-        val actual: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer(Long.MAX_VALUE)
-            .hashCode()
-        assertEquals(expected, actual)
-    }
-
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
