@@ -7,9 +7,9 @@ import org.kotools.types.internal.Warning;
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class IntegerJavaSample {
     @Test
-    void constructorLong() {
+    void constructorWithLong() {
         // Given
-        final long number = 9223372036854775807L;
+        final long number = 9_223_372_036_854_775_807L;
         // When
         final Integer integer = new Integer(number);
         // Then

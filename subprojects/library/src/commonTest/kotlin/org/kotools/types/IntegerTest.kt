@@ -9,26 +9,6 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
     @Test
-    fun constructorWithMaximumLong() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        // When
-        val actual = Integer(number)
-        // Then
-        assertEquals(expected = "$number", actual = "$actual")
-    }
-
-    @Test
-    fun constructorWithMinimumLong() {
-        // Given
-        val number: Long = Long.MIN_VALUE
-        // When
-        val actual = Integer(number)
-        // Then
-        assertEquals(expected = "$number", actual = "$actual")
-    }
-
-    @Test
     fun constructorWithDecimalText() {
         // Given
         val text: String = Long.MAX_VALUE.toString()
