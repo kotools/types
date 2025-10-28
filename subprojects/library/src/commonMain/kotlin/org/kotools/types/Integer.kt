@@ -65,6 +65,8 @@ import org.kotools.types.internal.Warning
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class Integer private constructor(private val value: PlatformInteger) {
+    // ----------------------------- Constructors ------------------------------
+
     /**
      * Creates an instance of [Integer] from the specified [number].
      *

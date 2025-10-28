@@ -6,6 +6,8 @@ import org.kotools.types.internal.Warning;
 
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class IntegerJavaSample {
+    // ----------------------------- Constructors ------------------------------
+
     @Test
     void constructorWithLong() {
         // Given
@@ -29,6 +31,8 @@ public class IntegerJavaSample {
         Assertions.assertEquals(text, result);
     }
 
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     void equalsOverride() {
         // Given
@@ -51,6 +55,8 @@ public class IntegerJavaSample {
                 .hashCode();
         Assertions.assertEquals(expected, hashCode);
     }
+
+    // ------------------------- Arithmetic operations -------------------------
 
     @Test
     void plus() {
@@ -87,6 +93,8 @@ public class IntegerJavaSample {
         final Integer expected = new Integer("92233720368547758070");
         Assertions.assertEquals(expected, product);
     }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     void toStringOverride() {

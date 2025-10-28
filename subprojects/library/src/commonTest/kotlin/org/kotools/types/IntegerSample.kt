@@ -43,6 +43,8 @@ class IntegerSample {
         assertEquals(expectedProduct, actualProduct)
     }
 
+    // ----------------------------- Constructors ------------------------------
+
     @Test
     fun constructorWithLong() {
         // Given
@@ -66,6 +68,8 @@ class IntegerSample {
         assertEquals(expected = text, result)
     }
 
+    // -------------------- Structural equality operations ---------------------
+
     @Test
     fun equalsOverride() {
         // Given
@@ -88,6 +92,8 @@ class IntegerSample {
             .hashCode()
         assertEquals(expected, hashCode)
     }
+
+    // ------------------------- Arithmetic operations -------------------------
 
     @Test
     fun plus() {
@@ -124,6 +130,8 @@ class IntegerSample {
         val expected = Integer("92233720368547758070")
         assertEquals(expected, product)
     }
+
+    // ------------------------------ Conversions ------------------------------
 
     @Test
     fun toStringOverride() {

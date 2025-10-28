@@ -8,6 +8,8 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
+    // ----------------------------- Constructors ------------------------------
+
     @Test
     fun constructorWithPlusSignedDecimalText() {
         // Given
