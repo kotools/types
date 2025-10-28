@@ -85,6 +85,36 @@ public class NonZeroInteger private constructor(private val integer: Integer) {
         require(number != 0) { "NonZeroInteger shouldn't be zero" }
     }
 
+    /**
+     * Creates an instance of [NonZeroInteger] from the specified [number], or
+     * throws an [IllegalArgumentException] if the [number] is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerSample.constructorWithNonZeroLong]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this constructor from Java code:
+     *
+     * SAMPLE: [org.kotools.types.NonZeroIntegerJavaSample.constructorWithNonZeroLong]
+     * </details>
+     */
+    public constructor(number: Long) : this(Integer(number)) {
+        require(number != 0L) { "NonZeroInteger shouldn't be zero" }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     /**

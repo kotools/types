@@ -18,4 +18,17 @@ class NonZeroIntegerTest {
         val expected = "NonZeroInteger shouldn't be zero"
         assertEquals(expected, result.message)
     }
+
+    @Test
+    fun constructorWithZeroLong() {
+        // Given
+        val number = 0L
+        // When
+        val result: IllegalArgumentException = assertFailsWith {
+            NonZeroInteger(number)
+        }
+        // Then
+        val expected = "NonZeroInteger shouldn't be zero"
+        assertEquals(expected, result.message)
+    }
 }

@@ -19,6 +19,18 @@ public class NonZeroIntegerJavaSample {
     }
 
     @Test
+    void constructorWithNonZeroLong() {
+        // Given
+        final long number = 9_223_372_036_854_775_807L;
+        // When
+        final NonZeroInteger result = new NonZeroInteger(number);
+        // Then
+        final String resultAsString = result.toString();
+        final String expected = String.valueOf(number);
+        Assertions.assertEquals(expected, resultAsString);
+    }
+
+    @Test
     void toInteger() {
         // Given
         final int number = 2_147_483_647;

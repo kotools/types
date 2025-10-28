@@ -18,6 +18,18 @@ class NonZeroIntegerSample {
     }
 
     @Test
+    fun constructorWithNonZeroLong() {
+        // Given
+        val number = 9_223_372_036_854_775_807
+        // When
+        val result = NonZeroInteger(number)
+        // Then
+        val resultAsString: String = result.toString()
+        val expected: String = number.toString()
+        assertEquals(expected, resultAsString)
+    }
+
+    @Test
     fun toInteger() {
         // Given
         val number = 2_147_483_647
