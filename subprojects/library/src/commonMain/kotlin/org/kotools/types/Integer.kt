@@ -139,7 +139,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.equalsOverride]
+     * SAMPLE: [org.kotools.types.IntegerSample.equalsWithIntegerHavingSameValue]
      * </details>
      *
      * <br>
@@ -150,7 +150,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.equalsOverride]
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.equalsWithIntegerHavingSameValue]
      * </details>
      */
     @Suppress(Warning.FINAL)

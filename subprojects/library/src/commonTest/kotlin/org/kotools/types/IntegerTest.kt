@@ -4,7 +4,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
@@ -65,36 +64,25 @@ class IntegerTest {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun equalsWithIntegerHavingSameValue() {
-        // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y = Integer(Long.MAX_VALUE)
-        // When
-        val actual: Boolean = x == y
-        // Then
-        assertTrue(actual)
-    }
-
-    @Test
     fun equalsWithAnotherTypeThanInteger() {
         // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y: Long = Long.MAX_VALUE
+        val number: Long = Long.MAX_VALUE
+        val integer = Integer(number)
         // When
-        val actual: Boolean = x.equals(y)
+        val result: Boolean = integer.equals(other = number)
         // Then
-        assertFalse(actual)
+        assertFalse(result)
     }
 
     @Test
     fun equalsWithIntegerHavingAnotherValue() {
         // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y = Integer(Long.MIN_VALUE)
+        val integer = Integer(Long.MAX_VALUE)
+        val other = Integer(Long.MIN_VALUE)
         // When
-        val actual: Boolean = x == y
+        val result: Boolean = integer == other
         // Then
-        assertFalse(actual)
+        assertFalse(result)
     }
 
     @Test

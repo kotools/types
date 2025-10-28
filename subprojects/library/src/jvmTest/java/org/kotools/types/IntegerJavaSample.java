@@ -34,14 +34,14 @@ public class IntegerJavaSample {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    void equalsOverride() {
+    void equalsWithIntegerHavingSameValue() {
         // Given
-        final Integer x = new Integer(9223372036854775807L);
-        final Integer y = new Integer(9223372036854775807L);
+        final Integer integer = new Integer(Long.MAX_VALUE);
+        final Integer other = new Integer(Long.MAX_VALUE);
         // When
-        final boolean equality = x.equals(y);
+        final boolean result = integer.equals(other);
         // Then
-        Assertions.assertTrue(equality);
+        Assertions.assertTrue(result);
     }
 
     @Test

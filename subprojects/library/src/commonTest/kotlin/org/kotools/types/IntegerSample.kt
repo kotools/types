@@ -71,14 +71,14 @@ class IntegerSample {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun equalsOverride() {
+    fun equalsWithIntegerHavingSameValue() {
         // Given
-        val x = Integer(9223372036854775807)
-        val y = Integer(9223372036854775807)
+        val integer = Integer(Long.MAX_VALUE)
+        val other = Integer(Long.MAX_VALUE)
         // When
-        val equality: Boolean = x == y // or x.equals(y)
+        val result: Boolean = integer == other // or integer.equals(other)
         // Then
-        assertTrue(equality)
+        assertTrue(result)
     }
 
     @Test
