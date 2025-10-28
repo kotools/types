@@ -19,15 +19,15 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void constructorLong() {
+    void constructorWithLong() {
         // Given
-        final long number = 9223372036854775807L;
+        final long number = 9_223_372_036_854_775_807L;
         // When
-        final Integer integer = new Integer(number);
+        final Integer result = new Integer(number);
         // Then
-        final String result = integer.toString();
+        final String resultAsString = result.toString();
         final String expected = String.valueOf(number);
-        Assertions.assertEquals(expected, result);
+        Assertions.assertEquals(expected, resultAsString);
     }
 
     @Test

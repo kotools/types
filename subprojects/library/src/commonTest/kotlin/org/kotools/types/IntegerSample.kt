@@ -35,13 +35,15 @@ class IntegerSample {
     }
 
     @Test
-    fun constructorLong() {
+    fun constructorWithLong() {
         // Given
-        val number = 9223372036854775807
+        val number = 9_223_372_036_854_775_807
         // When
-        val integer = Integer(number)
+        val result = Integer(number)
         // Then
-        assertEquals(expected = "$number", "$integer")
+        val resultAsString: String = result.toString()
+        val expected: String = number.toString()
+        assertEquals(expected, resultAsString)
     }
 
     @Test
