@@ -65,7 +65,7 @@ public class NonZeroInteger private constructor(private val integer: Integer) {
      *     <b>Calling from Kotlin</b>
      * </summary>
      *
-     * Here's an example of calling this function from Kotlin code:
+     * Here's an example of calling this constructor from Kotlin code:
      *
      * SAMPLE: [org.kotools.types.NonZeroIntegerSample.constructorWithNonZeroInt]
      * </details>
@@ -76,7 +76,7 @@ public class NonZeroInteger private constructor(private val integer: Integer) {
      *     <b>Calling from Java</b>
      * </summary>
      *
-     * Here's an example of calling this function from Java code:
+     * Here's an example of calling this constructor from Java code:
      *
      * SAMPLE: [org.kotools.types.NonZeroIntegerJavaSample.constructorWithNonZeroInt]
      * </details>
