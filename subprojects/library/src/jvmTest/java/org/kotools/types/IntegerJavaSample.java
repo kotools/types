@@ -19,9 +19,9 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void constructorString() {
+    void constructorWithDecimalString() {
         // Given
-        final String text = "9223372036854775807";
+        final String text = "18446744073709551614";
         // When
         final Integer integer = new Integer(text);
         // Then

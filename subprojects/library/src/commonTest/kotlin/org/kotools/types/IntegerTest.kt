@@ -9,34 +9,26 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
     @Test
-    fun constructorWithDecimalText() {
-        // Given
-        val text: String = Long.MAX_VALUE.toString()
-        // When
-        val actual = Integer(text)
-        // Then
-        assertEquals(expected = text, actual = "$actual")
-    }
-
-    @Test
     fun constructorWithPlusSignedDecimalText() {
         // Given
-        val number: Long = Long.MAX_VALUE
-        val text = "+$number"
+        val text = "+18446744073709551614"
         // When
-        val actual = Integer(text)
+        val integer = Integer(text)
         // Then
-        assertEquals(expected = "$number", actual = "$actual")
+        val result: String = integer.toString()
+        val expected: String = text.removePrefix("+")
+        assertEquals(expected, result)
     }
 
     @Test
     fun constructorWithMinusSignedDecimalText() {
         // Given
-        val text: String = Long.MIN_VALUE.toString()
+        val text = "-18446744073709551614"
         // When
-        val actual = Integer(text)
+        val integer = Integer(text)
         // Then
-        assertEquals(expected = text, actual = "$actual")
+        val result: String = integer.toString()
+        assertEquals(expected = text, result)
     }
 
     @Test
@@ -44,12 +36,13 @@ class IntegerTest {
         // Given
         val text = ""
         // When
-        val actual: IllegalArgumentException = assertFailsWith {
+        val exception: IllegalArgumentException = assertFailsWith {
             Integer(text)
         }
         // Then
+        val result: String? = exception.message
         val expected = "Integer should not be blank"
-        assertEquals(expected, actual.message)
+        assertEquals(expected, result)
     }
 
     @Test
@@ -57,13 +50,14 @@ class IntegerTest {
         // Given
         val text = "hello"
         // When
-        val actual: IllegalArgumentException = assertFailsWith {
+        val exception: IllegalArgumentException = assertFailsWith {
             Integer(text)
         }
         // Then
+        val result: String? = exception.message
         val expected = "Integer can only contain an optional + or - sign, " +
                 "followed by a sequence of digits, was: $text"
-        assertEquals(expected, actual.message)
+        assertEquals(expected, result)
     }
 
     // -------------------- Structural equality operations ---------------------

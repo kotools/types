@@ -54,13 +54,14 @@ class IntegerSample {
     }
 
     @Test
-    fun constructorString() {
+    fun constructorWithDecimalString() {
         // Given
         val text = "18446744073709551614"
         // When
         val integer = Integer(text)
         // Then
-        assertEquals(expected = text, "$integer")
+        val result: String = integer.toString()
+        assertEquals(expected = text, result)
     }
 
     @Test
