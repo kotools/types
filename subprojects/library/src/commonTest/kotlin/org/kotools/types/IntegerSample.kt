@@ -50,7 +50,9 @@ class IntegerSample {
         // When
         val integer = Integer(number)
         // Then
-        assertEquals(expected = "$number", "$integer")
+        val result: String = integer.toString()
+        val expected: String = number.toString()
+        assertEquals(expected, result)
     }
 
     @Test
