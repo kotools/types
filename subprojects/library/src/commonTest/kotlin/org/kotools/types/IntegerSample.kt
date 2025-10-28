@@ -60,7 +60,7 @@ class IntegerSample {
     @Test
     fun constructorWithDecimalString() {
         // Given
-        val text = "18446744073709551614"
+        val text: String = Long.MAX_VALUE.toString()
         // When
         val integer = Integer(text)
         // Then

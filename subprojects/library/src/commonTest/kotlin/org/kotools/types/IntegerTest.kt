@@ -12,7 +12,7 @@ class IntegerTest {
     @Test
     fun constructorWithPlusSignedDecimalText() {
         // Given
-        val text = "+18446744073709551614"
+        val text = "+${Long.MAX_VALUE}"
         // When
         val integer = Integer(text)
         // Then
@@ -24,7 +24,7 @@ class IntegerTest {
     @Test
     fun constructorWithMinusSignedDecimalText() {
         // Given
-        val text = "-18446744073709551614"
+        val text: String = Long.MIN_VALUE.toString()
         // When
         val integer = Integer(text)
         // Then

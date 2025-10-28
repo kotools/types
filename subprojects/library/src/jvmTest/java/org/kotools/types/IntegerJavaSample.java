@@ -23,7 +23,7 @@ public class IntegerJavaSample {
     @Test
     void constructorWithDecimalString() {
         // Given
-        final String text = "18446744073709551614";
+        final String text = String.valueOf(Long.MAX_VALUE);
         // When
         final Integer integer = new Integer(text);
         // Then
