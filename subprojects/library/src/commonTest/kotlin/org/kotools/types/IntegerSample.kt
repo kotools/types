@@ -48,7 +48,7 @@ class IntegerSample {
     @Test
     fun constructorWithLong() {
         // Given
-        val number = 9_223_372_036_854_775_807
+        val number: Long = Long.MAX_VALUE
         // When
         val integer = Integer(number)
         // Then

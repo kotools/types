@@ -11,7 +11,7 @@ public class IntegerJavaSample {
     @Test
     void constructorWithLong() {
         // Given
-        final long number = 9_223_372_036_854_775_807L;
+        final long number = Long.MAX_VALUE;
         // When
         final Integer integer = new Integer(number);
         // Then
