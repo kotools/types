@@ -6,19 +6,41 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
-    @Suppress("INTEGER_OVERFLOW", "UnusedUnaryOperator")
+    @Suppress("INTEGER_OVERFLOW")
     @Test
     fun overflowProblem() {
-        2147483647 + 1 // Expected: 2147483648, Actual: -2147483648
-        -2147483648 - 1 // Expected: -2147483649, Actual: 2147483647
-        2147483647 * 2 // Expected: 4294967294, Actual: -2
+        // Addition
+        val actualSum: Int = 2_147_483_647 + 1
+        val expectedSum: Int = -2_147_483_648
+        assertEquals(expectedSum, actualSum)
+
+        // Subtraction
+        val actualDifference: Int = -2_147_483_648 - 1
+        val expectedDifference = 2_147_483_647
+        assertEquals(expectedDifference, actualDifference)
+
+        // Multiplication
+        val actualProduct: Int = 2_147_483_647 * 2
+        val expectedProduct: Int = -2
+        assertEquals(expectedProduct, actualProduct)
     }
 
     @Test
     fun overflowSolution() {
-        Integer(2147483647) + Integer(1) // 2147483648
-        Integer(-2147483648) - Integer(1) // -2147483649
-        Integer(2147483647) * Integer(2) // 4294967294
+        // Addition
+        val actualSum: Integer = Integer(2_147_483_647) + Integer(1)
+        val expectedSum = Integer(2_147_483_648)
+        assertEquals(expectedSum, actualSum)
+
+        // Subtraction
+        val actualDifference: Integer = Integer(-2_147_483_648) - Integer(1)
+        val expectedDifference = Integer(-2_147_483_649)
+        assertEquals(expectedDifference, actualDifference)
+
+        // Multiplication
+        val actualProduct: Integer = Integer(2_147_483_647) * Integer(2)
+        val expectedProduct = Integer(4_294_967_294)
+        assertEquals(expectedProduct, actualProduct)
     }
 
     @Test
