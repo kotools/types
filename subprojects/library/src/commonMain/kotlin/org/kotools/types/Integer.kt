@@ -6,6 +6,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
 import org.kotools.types.internal.addition
+import org.kotools.types.internal.subtraction
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -220,8 +221,10 @@ public class Integer private constructor(private val value: PlatformInteger) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        val difference: PlatformInteger = this.value - other.value
-        return Integer(difference)
+        val x: String = this.toString()
+        val y: String = other.toString()
+        val difference: String = Integers.subtraction(x, y)
+        return Integer(PlatformInteger(difference))
     }
 
     /**

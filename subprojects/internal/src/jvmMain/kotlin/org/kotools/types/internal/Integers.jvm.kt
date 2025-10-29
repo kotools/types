@@ -8,3 +8,10 @@ public actual fun Integers.addition(x: String, y: String): String {
     val sum: BigInteger = BigInteger(x) + BigInteger(y)
     return sum.toString()
 }
+
+/** Returns the difference between [x] and [y] integers. */
+@InternalKotoolsTypesApi
+public actual fun Integers.subtraction(x: String, y: String): String {
+    val difference: BigInteger = BigInteger(x) - BigInteger(y)
+    return difference.toString()
+}
