@@ -48,7 +48,7 @@ class IntegerSample {
     @Test
     fun constructorWithLong() {
         // Given
-        val number: Long = Long.MAX_VALUE
+        val number = 9_223_372_036_854_775_807
         // When
         val integer = Integer(number)
         // Then
@@ -60,7 +60,7 @@ class IntegerSample {
     @Test
     fun constructorWithDecimalString() {
         // Given
-        val text: String = Long.MAX_VALUE.toString()
+        val text: String = 9_223_372_036_854_775_807.toString()
         // When
         val integer = Integer(text)
         // Then
@@ -73,8 +73,9 @@ class IntegerSample {
     @Test
     fun equalsWithIntegerHavingSameValue() {
         // Given
-        val integer = Integer(Long.MAX_VALUE)
-        val other = Integer(Long.MAX_VALUE)
+        val number = 9_223_372_036_854_775_807
+        val integer = Integer(number)
+        val other = Integer(number)
         // When
         val result: Boolean = integer == other // or integer.equals(other)
         // Then
@@ -82,9 +83,9 @@ class IntegerSample {
     }
 
     @Test
-    fun hashCodeWithIntegerHavingSameValue() {
+    fun hashCodeOverride() {
         // Given
-        val number: Long = Long.MAX_VALUE
+        val number = 9_223_372_036_854_775_807
         val integer = Integer(number)
         // When
         val result: Int = integer.hashCode()
@@ -99,37 +100,38 @@ class IntegerSample {
     @Test
     fun plus() {
         // Given
-        val x = Integer(9223372036854775807)
-        val y = Integer(9223372036854775807)
+        val number = 9_223_372_036_854_775_807
+        val x = Integer(number)
+        val y = Integer(number)
         // When
-        val sum: Integer = x + y
+        val result: Integer = x + y
         // Then
         val expected = Integer("18446744073709551614")
-        assertEquals(expected, sum)
+        assertEquals(expected, result)
     }
 
     @Test
     fun minus() {
         // Given
-        val x = Integer(-9223372036854775807)
-        val y = Integer(9223372036854775807)
+        val x = Integer(-9_223_372_036_854_775_807)
+        val y = Integer(9_223_372_036_854_775_807)
         // When
-        val difference: Integer = x - y
+        val result: Integer = x - y
         // Then
         val expected = Integer("-18446744073709551614")
-        assertEquals(expected, difference)
+        assertEquals(expected, result)
     }
 
     @Test
     fun times() {
         // Given
-        val x = Integer(9223372036854775807)
+        val x = Integer(9_223_372_036_854_775_807)
         val y = Integer(10)
         // When
-        val product: Integer = x * y
+        val result: Integer = x * y
         // Then
         val expected = Integer("92233720368547758070")
-        assertEquals(expected, product)
+        assertEquals(expected, result)
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -137,10 +139,12 @@ class IntegerSample {
     @Test
     fun toStringOverride() {
         // Given
-        val integer = Integer(9223372036854775807)
+        val number = 9_223_372_036_854_775_807
+        val integer = Integer(number)
         // When
-        val integerString: String = integer.toString()
+        val result: String = integer.toString()
         // Then
-        assertEquals(expected = "9223372036854775807", integerString)
+        val expected: String = number.toString()
+        assertEquals(expected, result)
     }
 }

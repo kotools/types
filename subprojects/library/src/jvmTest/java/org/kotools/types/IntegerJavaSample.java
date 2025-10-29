@@ -11,7 +11,7 @@ public class IntegerJavaSample {
     @Test
     void constructorWithLong() {
         // Given
-        final long number = Long.MAX_VALUE;
+        final long number = 9_223_372_036_854_775_807L;
         // When
         final Integer integer = new Integer(number);
         // Then
@@ -23,7 +23,7 @@ public class IntegerJavaSample {
     @Test
     void constructorWithDecimalString() {
         // Given
-        final String text = String.valueOf(Long.MAX_VALUE);
+        final String text = String.valueOf(9_223_372_036_854_775_807L);
         // When
         final Integer integer = new Integer(text);
         // Then
@@ -36,8 +36,9 @@ public class IntegerJavaSample {
     @Test
     void equalsWithIntegerHavingSameValue() {
         // Given
-        final Integer integer = new Integer(Long.MAX_VALUE);
-        final Integer other = new Integer(Long.MAX_VALUE);
+        final long number = 9_223_372_036_854_775_807L;
+        final Integer integer = new Integer(number);
+        final Integer other = new Integer(number);
         // When
         final boolean result = integer.equals(other);
         // Then
@@ -45,9 +46,9 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void hashCodeWithIntegerHavingSameValue() {
+    void hashCodeOverride() {
         // Given
-        final long number = Long.MAX_VALUE;
+        final long number = 9_223_372_036_854_775_807L;
         final Integer integer = new Integer(number);
         // When
         final int result = integer.hashCode();
@@ -62,37 +63,38 @@ public class IntegerJavaSample {
     @Test
     void plus() {
         // Given
-        final Integer x = new Integer(9223372036854775807L);
-        final Integer y = new Integer(9223372036854775807L);
+        final long number = 9_223_372_036_854_775_807L;
+        final Integer x = new Integer(number);
+        final Integer y = new Integer(number);
         // When
-        final Integer sum = x.plus(y);
+        final Integer result = x.plus(y);
         // Then
         final Integer expected = new Integer("18446744073709551614");
-        Assertions.assertEquals(expected, sum);
+        Assertions.assertEquals(expected, result);
     }
 
     @Test
     void minus() {
         // Given
-        final Integer x = new Integer(-9223372036854775807L);
-        final Integer y = new Integer(9223372036854775807L);
+        final Integer x = new Integer(-9_223_372_036_854_775_807L);
+        final Integer y = new Integer(9_223_372_036_854_775_807L);
         // When
-        final Integer difference = x.minus(y);
+        final Integer result = x.minus(y);
         // Then
         final Integer expected = new Integer("-18446744073709551614");
-        Assertions.assertEquals(expected, difference);
+        Assertions.assertEquals(expected, result);
     }
 
     @Test
     void times() {
         // Given
-        final Integer x = new Integer(9223372036854775807L);
+        final Integer x = new Integer(9_223_372_036_854_775_807L);
         final Integer y = new Integer(10);
         // When
-        final Integer product = x.times(y);
+        final Integer result = x.times(y);
         // Then
         final Integer expected = new Integer("92233720368547758070");
-        Assertions.assertEquals(expected, product);
+        Assertions.assertEquals(expected, result);
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -100,11 +102,12 @@ public class IntegerJavaSample {
     @Test
     void toStringOverride() {
         // Given
-        final Integer integer = new Integer(9223372036854775807L);
+        final long number = 9_223_372_036_854_775_807L;
+        final Integer integer = new Integer(number);
         // When
-        final String integerString = integer.toString();
+        final String result = integer.toString();
         // Then
-        final String expected = String.valueOf(9223372036854775807L);
-        Assertions.assertEquals(expected, integerString);
+        final String expected = String.valueOf(number);
+        Assertions.assertEquals(expected, result);
     }
 }

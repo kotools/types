@@ -12,7 +12,7 @@ class IntegerTest {
     @Test
     fun constructorWithPlusSignedDecimalText() {
         // Given
-        val text = "+${Long.MAX_VALUE}"
+        val text = "+9223372036854775807"
         // When
         val integer = Integer(text)
         // Then
@@ -24,7 +24,7 @@ class IntegerTest {
     @Test
     fun constructorWithMinusSignedDecimalText() {
         // Given
-        val text: String = Long.MIN_VALUE.toString()
+        val text = "-92233720368547758070"
         // When
         val integer = Integer(text)
         // Then
@@ -66,7 +66,7 @@ class IntegerTest {
     @Test
     fun equalsWithAnotherTypeThanInteger() {
         // Given
-        val number: Long = Long.MAX_VALUE
+        val number = 9_223_372_036_854_775_807
         val integer = Integer(number)
         // When
         val result: Boolean = integer.equals(other = number)
@@ -77,61 +77,11 @@ class IntegerTest {
     @Test
     fun equalsWithIntegerHavingAnotherValue() {
         // Given
-        val integer = Integer(Long.MAX_VALUE)
-        val other = Integer(Long.MIN_VALUE)
+        val integer = Integer(9_223_372_036_854_775_807)
+        val other = Integer(-9_223_372_036_854_775_807)
         // When
         val result: Boolean = integer == other
         // Then
         assertFalse(result)
-    }
-
-    // ------------------------- Arithmetic operations -------------------------
-
-    @Test
-    fun plus() {
-        // Given
-        val x = Integer(Long.MAX_VALUE)
-        val y = Integer(1)
-        // When
-        val actual: Integer = x + y
-        // Then
-        val expected = Integer("9223372036854775808")
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun minus() {
-        // Given
-        val x = Integer(-9223372036854775807)
-        val y = Integer(9223372036854775807)
-        // When
-        val actual: Integer = x - y
-        // Then
-        val expected = Integer("-18446744073709551614")
-        assertEquals(expected, actual)
-    }
-
-    @Test
-    fun times() {
-        // Given
-        val x = Integer(9223372036854775807)
-        val y = Integer(10)
-        // When
-        val product: Integer = x * y
-        // Then
-        val expected = Integer("92233720368547758070")
-        assertEquals(expected, product)
-    }
-
-    // ------------------------------ Conversions ------------------------------
-
-    @Test
-    fun toStringPasses() {
-        // Given
-        val integer = Integer(Long.MAX_VALUE)
-        // When
-        val actual: String = integer.toString()
-        // Then
-        assertEquals(expected = "${Long.MAX_VALUE}", actual)
     }
 }
