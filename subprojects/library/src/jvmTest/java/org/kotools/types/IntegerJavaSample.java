@@ -110,4 +110,17 @@ public class IntegerJavaSample {
         final String expected = String.valueOf(number);
         Assertions.assertEquals(expected, result);
     }
+
+    // ----------------------- Class-level declarations ------------------------
+
+    @Test
+    void parseWithDecimalString() {
+        // Given
+        final String text = "1234";
+        // When
+        final Integer integer = Integer.parse(text);
+        // Then
+        final String result = integer.toString();
+        Assertions.assertEquals(text, result);
+    }
 }

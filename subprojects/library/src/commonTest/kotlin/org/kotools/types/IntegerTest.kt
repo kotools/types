@@ -84,4 +84,59 @@ class IntegerTest {
         // Then
         assertFalse(result)
     }
+
+    // ----------------------- Class-level declarations ------------------------
+
+    @Test
+    fun parseWithPlusSignedDecimalString() {
+        // Given
+        val plusSign = "+"
+        val text = "${plusSign}1234"
+        // When
+        val integer: Integer = Integer.parse(text)
+        // Then
+        val result: String = integer.toString()
+        val expected: String = text.removePrefix(plusSign)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun parseWithMinusSignedDecimalString() {
+        // Given
+        val text = "-1234"
+        // When
+        val integer: Integer = Integer.parse(text)
+        // Then
+        val result: String = integer.toString()
+        assertEquals(expected = text, result)
+    }
+
+    @Test
+    fun parseWithBlankString() {
+        // Given
+        val text = "   "
+        // When
+        val exception: IllegalArgumentException = assertFailsWith {
+            Integer.parse(text)
+        }
+        // Then
+        val result: String? = exception.message
+        val expected = "Integer should not be blank"
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun parseWithNonDecimalString() {
+        // Given
+        val text = "oops"
+        // When
+        val exception: IllegalArgumentException = assertFailsWith {
+            Integer.parse(text)
+        }
+        // Then
+        val result: String? = exception.message
+        val expected = "Integer can only contain an optional + or - sign, " +
+                "followed by a sequence of digits, was: $text"
+        assertEquals(expected, result)
+    }
 }

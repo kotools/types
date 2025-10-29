@@ -4,6 +4,7 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
+import kotlin.jvm.JvmStatic
 
 /**
  * Represents an integer.
@@ -39,6 +40,7 @@ import org.kotools.types.internal.Warning
  *
  * ### Declarations
  *
+ * - **Instance creation:** constructors and [`parse`][Integer.Companion.parse].
  * - **Structural equality operations:** [`equals`][Integer.equals] (`==`) and
  * [`hashCode`][Integer.hashCode].
  * - **Arithmetic operations:** [`plus`][Integer.plus] (`+`),
@@ -306,4 +308,53 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.value.toString()
+
+    // ----------------------- Class-level declarations ------------------------
+
+    /** Contains class-level declarations for the [Integer] type. */
+    public companion object {
+        /**
+         * Creates an instance of [Integer] from the specified [text], or throws
+         * an [IllegalArgumentException] if the [text] doesn't represent an
+         * integer.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
+         * `+1234`, `-1234`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.parseWithDecimalString]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.parseWithDecimalString]
+         * </details>
+         */
+        @JvmStatic
+        public fun parse(text: String): Integer {
+            require(text.isNotBlank()) { "Integer should not be blank" }
+            val isDecimal: Boolean = text.removePrefix("+")
+                .removePrefix("-")
+                .all(Char::isDigit)
+            require(isDecimal) {
+                "Integer can only contain an optional + or - sign, followed " +
+                        "by a sequence of digits, was: $text"
+            }
+            return Integer(PlatformInteger(text))
+        }
+    }
 }

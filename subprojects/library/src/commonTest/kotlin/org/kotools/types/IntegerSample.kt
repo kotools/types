@@ -147,4 +147,17 @@ class IntegerSample {
         val expected: String = number.toString()
         assertEquals(expected, result)
     }
+
+    // ----------------------- Class-level declarations ------------------------
+
+    @Test
+    fun parseWithDecimalString() {
+        // Given
+        val text = "1234"
+        // When
+        val integer: Integer = Integer.parse(text)
+        // Then
+        val result: String = integer.toString()
+        assertEquals(expected = text, result)
+    }
 }
