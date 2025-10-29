@@ -5,6 +5,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an integer.
@@ -40,7 +41,8 @@ import kotlin.jvm.JvmStatic
  *
  * ### Declarations
  *
- * - **Instance creation:** constructors and [`parse`][Integer.Companion.parse].
+ * - **Instance creation:** constructors, [`parse`][Integer.Companion.parse] and
+ * [`parseOrNull`][Integer.Companion.parseOrNull].
  * - **Structural equality operations:** [`equals`][Integer.equals] (`==`) and
  * [`hashCode`][Integer.hashCode].
  * - **Arithmetic operations:** [`plus`][Integer.plus] (`+`),
@@ -343,6 +345,10 @@ public class Integer private constructor(private val value: PlatformInteger) {
          *
          * SAMPLE: [org.kotools.types.IntegerJavaSample.parseWithDecimalString]
          * </details>
+         * <br>
+         *
+         * See the [parseOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [text].
          */
         @JvmStatic
         public fun parse(text: String): Integer {
@@ -355,6 +361,42 @@ public class Integer private constructor(private val value: PlatformInteger) {
                         "by a sequence of digits, was: $text"
             }
             return Integer(PlatformInteger(text))
+        }
+
+        /**
+         * Creates an instance of [Integer] from the specified [text], or
+         * returns `null` if the [text] doesn't represent an integer.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
+         * `+1234`, `-1234`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.parseOrNullWithDecimalString]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code, due to its
+         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [parse] function for throwing an exception instead of
+         * returning `null` in case of invalid [text].
+         */
+        @JvmSynthetic
+        public fun parseOrNull(text: String): Integer? {
+            if (text.isBlank()) return null
+            val isDecimal: Boolean = text.removePrefix("+")
+                .removePrefix("-")
+                .all(Char::isDigit)
+            return if (!isDecimal) null
+            else Integer(PlatformInteger(text))
         }
     }
 }

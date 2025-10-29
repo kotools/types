@@ -386,5 +386,6 @@ public final class org/kotools/types/Integer {
 
 public final class org/kotools/types/Integer$Companion {
 	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/Integer;
+	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
 }
 

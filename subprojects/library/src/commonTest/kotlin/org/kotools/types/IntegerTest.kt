@@ -4,6 +4,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
@@ -138,5 +140,45 @@ class IntegerTest {
         val expected = "Integer can only contain an optional + or - sign, " +
                 "followed by a sequence of digits, was: $text"
         assertEquals(expected, result)
+    }
+
+    @Test
+    fun parseOrNullWithPlusSignedDecimalString() {
+        // Given
+        val text = "+1234"
+        // When
+        val result: Integer? = Integer.parseOrNull(text)
+        // Then
+        assertNotNull(result)
+    }
+
+    @Test
+    fun parseOrNullWithMinusSignedDecimalString() {
+        // Given
+        val text = "-1234"
+        // When
+        val result: Integer? = Integer.parseOrNull(text)
+        // Then
+        assertNotNull(result)
+    }
+
+    @Test
+    fun parseOrNullWithBlankString() {
+        // Given
+        val text = "  "
+        // When
+        val result: Integer? = Integer.parseOrNull(text)
+        // Then
+        assertNull(result)
+    }
+
+    @Test
+    fun parseOrNullWithNonDecimalString() {
+        // Given
+        val text = "oops"
+        // When
+        val result: Integer? = Integer.parseOrNull(text)
+        // Then
+        assertNull(result)
     }
 }
