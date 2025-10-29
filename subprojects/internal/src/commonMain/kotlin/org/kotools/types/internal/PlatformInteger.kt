@@ -19,9 +19,6 @@ public expect fun PlatformInteger(text: String): PlatformInteger
 /** Represents an integer with a platform-specific implementation. */
 @InternalKotoolsTypesApi
 public interface PlatformInteger {
-    /** Adds the [other] integer to this one. */
-    public operator fun plus(other: PlatformInteger): PlatformInteger
-
     /** Subtracts the [other] integer from this one. */
     public operator fun minus(other: PlatformInteger): PlatformInteger
 

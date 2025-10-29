@@ -1,9 +1,11 @@
 package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
+import org.kotools.types.internal.Integers
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
+import org.kotools.types.internal.addition
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -186,8 +188,10 @@ public class Integer private constructor(private val value: PlatformInteger) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        val sum: PlatformInteger = this.value + other.value
-        return Integer(sum)
+        val x: String = this.toString()
+        val y: String = other.toString()
+        val sum: String = Integers.addition(x, y)
+        return Integer(PlatformInteger(sum))
     }
 
     /**
