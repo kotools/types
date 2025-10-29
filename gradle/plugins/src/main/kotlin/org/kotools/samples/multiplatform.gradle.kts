@@ -1,7 +1,6 @@
 package org.kotools.samples
 
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
@@ -12,8 +11,8 @@ private val projectSources: Directory = layout.projectDirectory.dir("src")
 private val samplesBuildDirectory: Provider<Directory> =
     layout.buildDirectory.dir("kotools-samples")
 
-private val sourcesBackupBuildDirectory: Provider<Directory> =
-    samplesBuildDirectory.map { it.dir("sources-backup") }
+private val sourcesBuildDirectory: Provider<Directory> =
+    samplesBuildDirectory.map { it.dir("sources") }
 
 // ----------------------------- Plugin extensions -----------------------------
 
@@ -48,22 +47,21 @@ checkSampleReferences.configure {
 }
 
 private val cleanMainSourcesBackup: TaskProvider<Delete> by tasks
-    .registering(Delete::class) { setDelete(sourcesBackupBuildDirectory) }
+    .registering(Delete::class) { setDelete(sourcesBuildDirectory) }
 
 private val backupMainSources: TaskProvider<Copy>
         by tasks.registering(Copy::class) {
             description = "Copies main sources into the build directory."
             dependsOn(checkSampleReferences, cleanMainSourcesBackup)
             from(projectSources) { exclude("api", "*Sample", "*Test") }
-            into(sourcesBackupBuildDirectory)
+            into(sourcesBuildDirectory)
         }
 
 private val inlineSamples: TaskProvider<InlineSamples>
         by tasks.registering(InlineSamples::class)
 inlineSamples.configure {
     this.description = "Inlines KDoc samples."
-    this.dependsOn(backupMainSources)
-    this.sourceDirectory = projectSources
+    this.sourceDirectory = backupMainSources.map { it.destinationDir }
     this.extractedSamplesDirectory =
         extractSamples.flatMap(ExtractSamples::outputDirectory)
 }
@@ -72,7 +70,7 @@ private val restoreMainSources: TaskProvider<Copy>
         by tasks.registering(Copy::class)
 restoreMainSources.configure {
     this.description = "Restores main sources backup from the build directory."
-    this.from(sourcesBackupBuildDirectory)
+    this.from(sourcesBuildDirectory)
     this.into(projectSources)
 }
 
@@ -80,11 +78,13 @@ restoreMainSources.configure {
 
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
     this.dependsOn(inlineSamples)
-    this.finalizedBy(restoreMainSources)
-}
-
-rootProject.tasks.withType<DokkaMultiModuleTask>().configureEach {
-    this.dependsOn(restoreMainSources)
+    this.dokkaSourceSets
+        .matching { it.name.endsWith("Main") && !it.sourceRoots.isEmpty }
+        .configureEach {
+            val sourceDirectory: Provider<Directory> =
+                sourcesBuildDirectory.map { it.dir("${this.name}/kotlin") }
+            this.sourceRoots.setFrom(sourceDirectory)
+        }
 }
 
 // ---------------------------- Kotlin integration -----------------------------
