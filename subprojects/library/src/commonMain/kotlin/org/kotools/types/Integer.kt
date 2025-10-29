@@ -39,11 +39,11 @@ import org.kotools.types.internal.Warning
  *
  * ### Declarations
  *
- * - **Structural equality operations:** [equals][Integer.equals] (`==`) and
- * [hashCode][Integer.hashCode].
- * - **Arithmetic operations:** [plus][Integer.plus] (`+`),
- * [minus][Integer.minus] (`-`) and [times][Integer.times] (`*`).
- * - **Conversions:** [toString][Integer.toString].
+ * - **Structural equality operations:** [`equals`][Integer.equals] (`==`) and
+ * [`hashCode`][Integer.hashCode].
+ * - **Arithmetic operations:** [`plus`][Integer.plus] (`+`),
+ * [`minus`][Integer.minus] (`-`) and [`times`][Integer.times] (`*`).
+ * - **Conversions:** [`toString`][Integer.toString].
  * </details>
  *
  * <br>
