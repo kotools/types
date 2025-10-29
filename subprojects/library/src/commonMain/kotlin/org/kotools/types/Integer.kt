@@ -98,37 +98,6 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     public constructor(number: Long) : this(PlatformInteger(number))
 
-    /**
-     * Creates an instance of [Integer] from the specified [text], or throws an
-     * [IllegalArgumentException] if the [text] doesn't represent an integer.
-     *
-     * The [text] parameter must only contain an optional plus (`+`) or minus
-     * (`-`) sign, followed by a sequence of digits.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerSample.constructorWithDecimalString]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorWithDecimalString]
-     * </details>
-     */
-    public constructor(text: String) : this(PlatformInteger(text))
-
     // -------------------- Structural equality operations ---------------------
 
     /**

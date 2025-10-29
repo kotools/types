@@ -58,17 +58,6 @@ class IntegerSample {
         assertEquals(expected, result)
     }
 
-    @Test
-    fun constructorWithDecimalString() {
-        // Given
-        val text: String = 9_223_372_036_854_775_807.toString()
-        // When
-        val integer = Integer(text)
-        // Then
-        val result: String = integer.toString()
-        assertEquals(expected = text, result)
-    }
-
     // -------------------- Structural equality operations ---------------------
 
     @Test
@@ -107,7 +96,7 @@ class IntegerSample {
         // When
         val result: Integer = x + y
         // Then
-        val expected = Integer("18446744073709551614")
+        val expected: Integer = Integer.parse("18446744073709551614")
         assertEquals(expected, result)
     }
 
@@ -119,7 +108,7 @@ class IntegerSample {
         // When
         val result: Integer = x - y
         // Then
-        val expected = Integer("-18446744073709551614")
+        val expected: Integer = Integer.parse("-18446744073709551614")
         assertEquals(expected, result)
     }
 
@@ -131,7 +120,7 @@ class IntegerSample {
         // When
         val result: Integer = x * y
         // Then
-        val expected = Integer("92233720368547758070")
+        val expected: Integer = Integer.parse("92233720368547758070")
         assertEquals(expected, result)
     }
 

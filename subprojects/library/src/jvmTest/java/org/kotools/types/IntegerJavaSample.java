@@ -20,17 +20,6 @@ public class IntegerJavaSample {
         Assertions.assertEquals(expected, result);
     }
 
-    @Test
-    void constructorWithDecimalString() {
-        // Given
-        final String text = String.valueOf(9_223_372_036_854_775_807L);
-        // When
-        final Integer integer = new Integer(text);
-        // Then
-        final String result = integer.toString();
-        Assertions.assertEquals(text, result);
-    }
-
     // -------------------- Structural equality operations ---------------------
 
     @Test
@@ -69,7 +58,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = x.plus(y);
         // Then
-        final Integer expected = new Integer("18446744073709551614");
+        final Integer expected = Integer.parse("18446744073709551614");
         Assertions.assertEquals(expected, result);
     }
 
@@ -81,7 +70,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = x.minus(y);
         // Then
-        final Integer expected = new Integer("-18446744073709551614");
+        final Integer expected = Integer.parse("-18446744073709551614");
         Assertions.assertEquals(expected, result);
     }
 
@@ -93,7 +82,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = x.times(y);
         // Then
-        final Integer expected = new Integer("92233720368547758070");
+        final Integer expected = Integer.parse("92233720368547758070");
         Assertions.assertEquals(expected, result);
     }
 
