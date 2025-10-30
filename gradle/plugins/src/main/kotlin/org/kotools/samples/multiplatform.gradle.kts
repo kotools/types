@@ -49,10 +49,18 @@ private val checkSampleReferences: TaskProvider<CheckSampleReferences> by tasks
             extractSamples.flatMap(ExtractSamples::outputDirectory)
     }
 
+private val cleanInlinedMainSources: TaskProvider<Delete> by tasks.registering(
+    Delete::class
+) {
+    val target: Provider<Directory> =
+        layout.buildDirectory.dir("kotools-samples/main/inlined")
+    this.setDelete(target)
+}
+
 private val prepareSamplesInlining: TaskProvider<Copy> by tasks.registering(
     Copy::class
 ) {
-    this.dependsOn(checkSampleReferences)
+    this.dependsOn(checkSampleReferences, cleanInlinedMainSources)
     val source: Provider<File> = copyMainSources.map { it.destinationDir }
     this.from(source)
     val destination: Provider<File> =
