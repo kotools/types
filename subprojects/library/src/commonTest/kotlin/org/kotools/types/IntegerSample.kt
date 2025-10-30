@@ -1,8 +1,6 @@
 package org.kotools.types
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
@@ -95,14 +93,10 @@ class IntegerSample {
     }
 
     @Test
-    fun parseOrNullWithDecimalString() {
-        // Given
+    fun parseOrNull() {
         val text = "1234"
-        // When
         val integer: Integer? = Integer.parseOrNull(text)
-        // Then
-        assertNotNull(integer)
-        val result: String = integer.toString()
-        assertEquals(expected = text, result)
+        checkNotNull(integer)
+        check("$integer" == text)
     }
 }

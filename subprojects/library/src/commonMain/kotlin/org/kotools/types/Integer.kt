@@ -351,7 +351,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.parseOrNullWithDecimalString]
+         * SAMPLE: [org.kotools.types.IntegerSample.parseOrNull]
          * </details>
          * <br>
          *

@@ -140,48 +140,40 @@ class IntegerTest {
     }
 
     @Test
+    fun parseOrNullWithDecimalString() {
+        val text = "1234"
+        val integer: Integer? = Integer.parseOrNull(text)
+        assertNotNull(integer)
+        assertEquals(expected = text, actual = "$integer")
+    }
+
+    @Test
     fun parseOrNullWithPlusSignedDecimalString() {
-        // Given
         val plusSign = "+"
         val text = "${plusSign}1234"
-        // When
         val integer: Integer? = Integer.parseOrNull(text)
-        // Then
         assertNotNull(integer)
-        val result: String = integer.toString()
         val expected: String = text.removePrefix(plusSign)
-        assertEquals(expected, result)
+        assertEquals(expected, actual = "$integer")
     }
 
     @Test
     fun parseOrNullWithMinusSignedDecimalString() {
-        // Given
         val text = "-1234"
-        // When
         val integer: Integer? = Integer.parseOrNull(text)
-        // Then
         assertNotNull(integer)
-        val result: String = integer.toString()
-        assertEquals(expected = text, result)
+        assertEquals(expected = text, actual = "$integer")
     }
 
     @Test
     fun parseOrNullWithBlankString() {
-        // Given
-        val text = "  "
-        // When
-        val result: Integer? = Integer.parseOrNull(text)
-        // Then
-        assertNull(result)
+        val actual: Integer? = Integer.parseOrNull("  ")
+        assertNull(actual)
     }
 
     @Test
     fun parseOrNullWithNonDecimalString() {
-        // Given
-        val text = "oops"
-        // When
-        val result: Integer? = Integer.parseOrNull(text)
-        // Then
-        assertNull(result)
+        val actual: Integer? = Integer.parseOrNull("oops")
+        assertNull(actual)
     }
 }
