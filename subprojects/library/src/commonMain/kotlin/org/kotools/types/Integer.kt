@@ -193,7 +193,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
         val x: String = this.toString()
         val y: String = other.toString()
         val sum: String = Integers.addition(x, y)
-        return Integer(PlatformInteger(sum))
+        return parse(sum)
     }
 
     /**
