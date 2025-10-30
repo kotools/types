@@ -65,6 +65,15 @@ class IntegerTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun timesPasses() {
+        val x: Integer = Integer.from(9223372036854775807)
+        val y: Integer = Integer.from(1000)
+        val actual: Integer = x * y
+        val expected: Integer = Integer.parse("9223372036854775807000")
+        assertEquals(expected, actual)
+    }
+
     // ----------------------- Class-level declarations ------------------------
 
     @Test

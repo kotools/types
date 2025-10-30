@@ -50,14 +50,12 @@ public class IntegerJavaSample {
 
     @Test
     void times() {
-        // Given
-        final Integer x = Integer.from(9_223_372_036_854_775_807L);
+        final Integer x = Integer.from(9223372036854775807L);
         final Integer y = Integer.from(10);
-        // When
-        final Integer result = x.times(y);
-        // Then
+        final Integer product = x.times(y);
         final Integer expected = Integer.parse("92233720368547758070");
-        Assertions.assertEquals(expected, result);
+        final boolean result = product.equals(expected);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     // ------------------------------ Conversions ------------------------------

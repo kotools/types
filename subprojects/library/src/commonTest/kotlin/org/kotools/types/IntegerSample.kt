@@ -63,14 +63,10 @@ class IntegerSample {
 
     @Test
     fun times() {
-        // Given
-        val x: Integer = Integer.from(9_223_372_036_854_775_807)
+        val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(10)
-        // When
-        val result: Integer = x * y
-        // Then
         val expected: Integer = Integer.parse("92233720368547758070")
-        assertEquals(expected, result)
+        check(x * y == expected)
     }
 
     // ------------------------------ Conversions ------------------------------
