@@ -227,7 +227,7 @@ public class Integer private constructor(private val decimal: String) {
     // ------------------------------ Conversions ------------------------------
 
     /**
-     * Returns the string representation of this integer.
+     * Returns the programming-level string representation of this integer.
      *
      * <br>
      * <details>
