@@ -91,11 +91,15 @@ class IntegerTest {
     @Test
     fun parseOrNullWithPlusSignedDecimalString() {
         // Given
-        val text = "+1234"
+        val plusSign = "+"
+        val text = "${plusSign}1234"
         // When
-        val result: Integer? = Integer.parseOrNull(text)
+        val integer: Integer? = Integer.parseOrNull(text)
         // Then
-        assertNotNull(result)
+        assertNotNull(integer)
+        val result: String = integer.toString()
+        val expected: String = text.removePrefix(plusSign)
+        assertEquals(expected, result)
     }
 
     @Test
@@ -103,9 +107,11 @@ class IntegerTest {
         // Given
         val text = "-1234"
         // When
-        val result: Integer? = Integer.parseOrNull(text)
+        val integer: Integer? = Integer.parseOrNull(text)
         // Then
-        assertNotNull(result)
+        assertNotNull(integer)
+        val result: String = integer.toString()
+        assertEquals(expected = text, result)
     }
 
     @Test
