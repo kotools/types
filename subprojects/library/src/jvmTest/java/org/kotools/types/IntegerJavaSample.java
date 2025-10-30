@@ -62,14 +62,12 @@ public class IntegerJavaSample {
 
     @Test
     void toStringOverride() {
-        // Given
-        final long number = 9_223_372_036_854_775_807L;
-        final Integer integer = Integer.from(number);
-        // When
-        final String result = integer.toString();
-        // Then
+        final long number = 9223372036854775807L;
+        final String integerString = Integer.from(number)
+                .toString();
         final String expected = String.valueOf(number);
-        Assertions.assertEquals(expected, result);
+        final boolean result = integerString.equals(expected);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     // ----------------------- Class-level declarations ------------------------

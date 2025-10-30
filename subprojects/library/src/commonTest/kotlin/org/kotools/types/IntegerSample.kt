@@ -73,14 +73,9 @@ class IntegerSample {
 
     @Test
     fun toStringOverride() {
-        // Given
-        val number = 9_223_372_036_854_775_807
+        val number = 9223372036854775807
         val integer: Integer = Integer.from(number)
-        // When
-        val result: String = integer.toString()
-        // Then
-        val expected: String = number.toString()
-        assertEquals(expected, result)
+        check("$integer" == "$number")
     }
 
     // ----------------------- Class-level declarations ------------------------

@@ -76,6 +76,16 @@ class IntegerTest {
         assertEquals(expected, actual)
     }
 
+    // ------------------------------ Conversions ------------------------------
+
+    @Test
+    fun toStringPasses() {
+        val number: Long = Long.MAX_VALUE
+        val actual: String = Integer.from(number)
+            .toString()
+        assertEquals(expected = "$number", actual)
+    }
+
     // ----------------------- Class-level declarations ------------------------
 
     @Test
