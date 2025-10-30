@@ -143,10 +143,18 @@ class IntegerTest {
     }
 
     @Test
-    fun parsePassesWithLeadingZerosInNonZeroDecimalString() {
+    fun parsePassesWithLeadingZerosInPositiveDecimalString() {
         val number = 123L
         val actual: Integer = Integer.parse("000$number")
         val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun parsePassesWithLeadingZerosInNegativeDecimalString() {
+        val number = 123L
+        val actual: Integer = Integer.parse("-000$number")
+        val expected: Integer = Integer.from(-number)
         assertEquals(expected, actual)
     }
 
@@ -160,13 +168,32 @@ class IntegerTest {
     }
 
     @Test
+    fun parseFailsWithPlusSignString() {
+        val text = "+"
+        val exception: IllegalArgumentException = assertFailsWith {
+            Integer.parse(text)
+        }
+        val expected: String = Integer.syntaxErrorIn(text)
+        assertEquals(expected, actual = exception.message)
+    }
+
+    @Test
+    fun parseFailsWithMinusSignString() {
+        val text = "-"
+        val exception: IllegalArgumentException = assertFailsWith {
+            Integer.parse(text)
+        }
+        val expected: String = Integer.syntaxErrorIn(text)
+        assertEquals(expected, actual = exception.message)
+    }
+
+    @Test
     fun parseFailsWithNonDecimalString() {
         val text = "oops"
         val exception: IllegalArgumentException = assertFailsWith {
             Integer.parse(text)
         }
-        val expected = "Integer can only contain an optional + or - sign, " +
-                "followed by a sequence of digits, was: $text"
+        val expected: String = Integer.syntaxErrorIn(text)
         assertEquals(expected, actual = exception.message)
     }
 
@@ -219,7 +246,7 @@ class IntegerTest {
     }
 
     @Test
-    fun parseOrNullPassesWithLeadingZerosInNonZeroDecimalString() {
+    fun parseOrNullPassesWithLeadingZerosInPositiveDecimalString() {
         val number = 123L
         val actual: Integer? = Integer.parseOrNull("000$number")
         val expected: Integer = Integer.from(number)
@@ -227,8 +254,28 @@ class IntegerTest {
     }
 
     @Test
+    fun parseOrNullPassesWithLeadingZerosInNegativeDecimalString() {
+        val number = 123L
+        val actual: Integer = Integer.parse("-000$number")
+        val expected: Integer = Integer.from(-number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun parseOrNullFailsWithBlankString() {
         val actual: Integer? = Integer.parseOrNull("  ")
+        assertNull(actual)
+    }
+
+    @Test
+    fun parseOrNullFailsWithPlusSignString() {
+        val actual: Integer? = Integer.parseOrNull("+")
+        assertNull(actual)
+    }
+
+    @Test
+    fun parseOrNullFailsWithMinusSignString() {
+        val actual: Integer? = Integer.parseOrNull("-")
         assertNull(actual)
     }
 

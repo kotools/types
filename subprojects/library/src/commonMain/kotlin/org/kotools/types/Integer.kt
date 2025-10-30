@@ -102,7 +102,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
-        other is Integer && this.value == other.value
+        other is Integer && this.decimal == other.decimal
 
     /**
      * Returns a hash code value for this integer.
@@ -130,7 +130,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun hashCode(): Int = this.value.hashCode()
+    final override fun hashCode(): Int = this.decimal.hashCode()
 
     // ------------------------- Arithmetic operations -------------------------
 
@@ -327,15 +327,25 @@ public class Integer private constructor(private val decimal: String) {
         @JvmStatic
         public fun parse(text: String): Integer {
             require(text.isNotBlank()) { "Integer should not be blank" }
-            val isDecimal: Boolean = text.removePrefix("+")
-                .removePrefix("-")
-                .all(Char::isDigit)
-            require(isDecimal) {
-                "Integer can only contain an optional + or - sign, followed " +
-                        "by a sequence of digits, was: $text"
-            }
-            return Integer(text)
+            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
+            val unsignedText: String =
+                textWithoutPlusSignPrefix.removePrefix("-")
+            val isDecimal: Boolean =
+                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
+            require(isDecimal) { this.syntaxErrorIn(text) }
+            val isZero: Boolean = unsignedText.all { it == '0' }
+            if (isZero) return Zero
+            val sign: String =
+                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
+                else ""
+            val digits: String = unsignedText.trimStart('0')
+            return Integer(decimal = "$sign$digits")
         }
+
+        @JvmSynthetic
+        internal fun syntaxErrorIn(text: String): String = "Integer can only " +
+                "contain an optional + or - sign, followed by a sequence of " +
+                "digits, was: $text"
 
         /**
          * Creates an instance of [Integer] from the specified [text], or
@@ -366,11 +376,19 @@ public class Integer private constructor(private val decimal: String) {
         @JvmSynthetic
         public fun parseOrNull(text: String): Integer? {
             if (text.isBlank()) return null
-            val isDecimal: Boolean = text.removePrefix("+")
-                .removePrefix("-")
-                .all(Char::isDigit)
-            return if (!isDecimal) null
-            else Integer(text)
+            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
+            val unsignedText: String =
+                textWithoutPlusSignPrefix.removePrefix("-")
+            val isDecimal: Boolean =
+                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
+            if (!isDecimal) return null
+            val isZero: Boolean = unsignedText.all { it == '0' }
+            if (isZero) return Zero
+            val sign: String =
+                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
+                else ""
+            val digits: String = unsignedText.trimStart('0')
+            return Integer(decimal = "$sign$digits")
         }
     }
 }
