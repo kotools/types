@@ -225,7 +225,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
         val x: String = this.toString()
         val y: String = other.toString()
         val difference: String = Integers.subtraction(x, y)
-        return Integer(PlatformInteger(difference))
+        return parse(difference)
     }
 
     /**
