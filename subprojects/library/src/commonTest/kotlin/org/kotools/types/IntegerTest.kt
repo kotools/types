@@ -90,14 +90,9 @@ class IntegerTest {
 
     @Test
     fun fromPassesWithLong() {
-        // Given
         val number: Long = Long.MAX_VALUE
-        // When
         val integer: Integer = Integer.from(number)
-        // Then
-        val result: String = integer.toString()
-        val expected: String = number.toString()
-        assertEquals(expected, result)
+        assertEquals(expected = "$number", actual = "$integer")
     }
 
     @Test

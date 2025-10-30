@@ -74,14 +74,12 @@ public class IntegerJavaSample {
 
     @Test
     void from() {
-        // Given
-        final long number = 9_223_372_036_854_775_807L;
-        // When
-        final Integer integer = Integer.from(number);
-        // Then
-        final String result = integer.toString();
+        final long number = 9223372036854775807L;
+        final String integerString = Integer.from(number)
+                .toString();
         final String expected = String.valueOf(number);
-        Assertions.assertEquals(expected, result);
+        final boolean result = integerString.equals(expected);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     @Test

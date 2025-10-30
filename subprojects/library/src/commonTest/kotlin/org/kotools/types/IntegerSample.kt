@@ -82,14 +82,9 @@ class IntegerSample {
 
     @Test
     fun from() {
-        // Given
-        val number = 9_223_372_036_854_775_807
-        // When
+        val number = 9223372036854775807
         val integer: Integer = Integer.from(number)
-        // Then
-        val result: String = integer.toString()
-        val expected: String = number.toString()
-        assertEquals(expected, result)
+        check("$integer" == "$number")
     }
 
     @Test
