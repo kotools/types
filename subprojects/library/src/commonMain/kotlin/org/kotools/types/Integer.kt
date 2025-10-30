@@ -3,7 +3,6 @@ package org.kotools.types
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.Integers
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
 import org.kotools.types.internal.addition
 import org.kotools.types.internal.multiplication
@@ -72,7 +71,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class Integer private constructor(private val value: PlatformInteger) {
+public class Integer private constructor(private val decimal: String) {
     // ----------------------------- Constructors ------------------------------
 
     /**
@@ -100,7 +99,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorWithLong]
      * </details>
      */
-    public constructor(number: Long) : this(PlatformInteger(number))
+    public constructor(number: Long) : this("$number")
 
     // -------------------- Structural equality operations ---------------------
 
@@ -132,7 +131,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
-        other is Integer && this.value == other.value
+        other is Integer && this.decimal == other.decimal
 
     /**
      * Returns a hash code value for this integer.
@@ -160,7 +159,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun hashCode(): Int = this.value.hashCode()
+    final override fun hashCode(): Int = this.decimal.hashCode()
 
     // ------------------------- Arithmetic operations -------------------------
 
@@ -288,7 +287,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.value.toString()
+    final override fun toString(): String = this.decimal
 
     // ----------------------- Class-level declarations ------------------------
 
@@ -332,14 +331,14 @@ public class Integer private constructor(private val value: PlatformInteger) {
         @JvmStatic
         public fun parse(text: String): Integer {
             require(text.isNotBlank()) { "Integer should not be blank" }
-            val isDecimal: Boolean = text.removePrefix("+")
-                .removePrefix("-")
+            val decimal: String = text.removePrefix("+")
+            val isDecimal: Boolean = decimal.removePrefix("-")
                 .all(Char::isDigit)
             require(isDecimal) {
                 "Integer can only contain an optional + or - sign, followed " +
                         "by a sequence of digits, was: $text"
             }
-            return Integer(PlatformInteger(text))
+            return Integer(decimal)
         }
 
         /**
@@ -371,11 +370,11 @@ public class Integer private constructor(private val value: PlatformInteger) {
         @JvmSynthetic
         public fun parseOrNull(text: String): Integer? {
             if (text.isBlank()) return null
-            val isDecimal: Boolean = text.removePrefix("+")
-                .removePrefix("-")
+            val decimal: String = text.removePrefix("+")
+            val isDecimal: Boolean = decimal.removePrefix("-")
                 .all(Char::isDigit)
             return if (!isDecimal) null
-            else Integer(PlatformInteger(text))
+            else Integer(decimal)
         }
     }
 }
