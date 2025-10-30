@@ -1,78 +1,77 @@
 package org.kotools.samples
 
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-
-// ----------------------------- Script properties -----------------------------
-
-private val projectSources: Directory = layout.projectDirectory.dir("src")
-
-private val samplesBuildDirectory: Provider<Directory> =
-    layout.buildDirectory.dir("kotools-samples")
-
-private val sourcesBuildDirectory: Provider<Directory> =
-    samplesBuildDirectory.map { it.dir("sources") }
-
-// ----------------------------- Plugin extensions -----------------------------
-
-private val kotlin: KotlinMultiplatformExtension = extensions.findByType()
-    ?: error("Kotlin Multiplatform plugin wasn't applied to ${project}.")
 
 // ----------------------------------- Tasks -----------------------------------
 
-private val checkSampleSources: TaskProvider<CheckSampleSources>
-        by tasks.registering(CheckSampleSources::class)
-checkSampleSources.configure {
-    this.description = "Checks the content of sample sources."
-    this.sourceDirectory = projectSources
+private val copySampleSources: TaskProvider<Copy> by tasks.registering(
+    Copy::class
+) {
+    val source: Directory = layout.projectDirectory.dir("src")
+    this.from(source) {
+        this.include("**/*Sample.kt", "**/*Sample.java")
+        this.exclude("api/", "*Main/")
+    }
+    val destination: Provider<Directory> =
+        layout.buildDirectory.dir("kotools-samples/samples/sources")
+    this.into(destination)
 }
 
-private val extractSamples: TaskProvider<ExtractSamples>
-        by tasks.registering(ExtractSamples::class)
-extractSamples.configure {
-    this.description = "Extracts samples for KDoc."
+private val checkSampleSources: TaskProvider<CheckSampleSources> by tasks
+    .registering(CheckSampleSources::class) {
+        this.sourceDirectory = copySampleSources.map { it.destinationDir }
+    }
+
+private val extractSamples: TaskProvider<ExtractSamples> by tasks.registering(
+    ExtractSamples::class
+) {
     this.dependsOn(checkSampleSources)
-    this.sourceDirectory = projectSources
-    this.outputDirectory = samplesBuildDirectory.map { it.dir("extracted") }
+    this.sourceDirectory = copySampleSources.map { it.destinationDir }
+    this.outputDirectory = copySampleSources.map {
+        it.destinationDir.resolve("../extracted")
+    }
 }
 
-private val checkSampleReferences: TaskProvider<CheckSampleReferences>
-        by tasks.registering(CheckSampleReferences::class)
-checkSampleReferences.configure {
-    this.description = "Checks sample references from KDoc."
-    this.sourceDirectory = projectSources
+private val copyMainSources: TaskProvider<Copy> by tasks.registering(
+    Copy::class
+) {
+    val source: Directory = layout.projectDirectory.dir("src")
+    this.from(source) { exclude("api", "*Sample", "*Test") }
+    val destination: Provider<Directory> =
+        layout.buildDirectory.dir("kotools-samples/main/sources")
+    this.into(destination)
+}
+
+private val checkSampleReferences: TaskProvider<CheckSampleReferences> by tasks
+    .registering(CheckSampleReferences::class) {
+        this.sourceDirectory = copyMainSources.map { it.destinationDir }
+        this.extractedSamplesDirectory =
+            extractSamples.flatMap(ExtractSamples::outputDirectory)
+    }
+
+private val prepareSamplesInlining: TaskProvider<Copy> by tasks.registering(
+    Copy::class
+) {
+    this.dependsOn(checkSampleReferences)
+    val source: Provider<File> = copyMainSources.map { it.destinationDir }
+    this.from(source)
+    val destination: Provider<File> =
+        copyMainSources.map { it.destinationDir.resolve("../inlined") }
+    this.into(destination)
+}
+
+private val inlineSamples: TaskProvider<InlineSamples> by tasks.registering(
+    InlineSamples::class
+) {
+    this.sourceDirectory = prepareSamplesInlining.map { it.destinationDir }
     this.extractedSamplesDirectory =
         extractSamples.flatMap(ExtractSamples::outputDirectory)
 }
 
-private val cleanMainSourcesBackup: TaskProvider<Delete> by tasks
-    .registering(Delete::class) { setDelete(sourcesBuildDirectory) }
+// -------------------------- Base plugin integration --------------------------
 
-private val backupMainSources: TaskProvider<Copy>
-        by tasks.registering(Copy::class) {
-            description = "Copies main sources into the build directory."
-            dependsOn(checkSampleReferences, cleanMainSourcesBackup)
-            from(projectSources) { exclude("api", "*Sample", "*Test") }
-            into(sourcesBuildDirectory)
-        }
-
-private val inlineSamples: TaskProvider<InlineSamples>
-        by tasks.registering(InlineSamples::class)
-inlineSamples.configure {
-    this.description = "Inlines KDoc samples."
-    this.sourceDirectory = backupMainSources.map { it.destinationDir }
-    this.extractedSamplesDirectory =
-        extractSamples.flatMap(ExtractSamples::outputDirectory)
-}
-
-private val restoreMainSources: TaskProvider<Copy>
-        by tasks.registering(Copy::class)
-restoreMainSources.configure {
-    this.description = "Restores main sources backup from the build directory."
-    this.from(sourcesBuildDirectory)
-    this.into(projectSources)
-}
+tasks.named { it == "check" }
+    .configureEach { this.dependsOn(checkSampleReferences) }
 
 // ----------------------------- Dokka integration -----------------------------
 
@@ -81,25 +80,8 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
     this.dokkaSourceSets
         .matching { it.name.endsWith("Main") && !it.sourceRoots.isEmpty }
         .configureEach {
-            val sourceDirectory: Provider<Directory> =
-                sourcesBuildDirectory.map { it.dir("${this.name}/kotlin") }
-            this.sourceRoots.setFrom(sourceDirectory)
+            val source: Provider<File> =
+                prepareSamplesInlining.map { it.destinationDir }
+            this.sourceRoots.setFrom(source)
         }
 }
-
-// ---------------------------- Kotlin integration -----------------------------
-
-tasks.named("check")
-    .configure { this.dependsOn(checkSampleReferences) }
-
-private val sourcesJarTaskNames: List<String> = kotlin.targets
-    .map { if (it.name == "metadata") "sourcesJar" else "${it.name}SourcesJar" }
-tasks.named { it in sourcesJarTaskNames }
-    .configureEach {
-        this.dependsOn(inlineSamples)
-        this.finalizedBy(restoreMainSources)
-    }
-
-private val kotlinCompilationTasks: TaskCollection<KotlinCompilationTask<*>> =
-    tasks.withType(KotlinCompilationTask::class)
-restoreMainSources.configure { this.mustRunAfter(kotlinCompilationTasks) }
