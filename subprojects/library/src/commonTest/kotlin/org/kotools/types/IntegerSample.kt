@@ -30,19 +30,19 @@ class IntegerSample {
     fun overflowSolution() {
         // Addition
         val actualSum: Integer = Integer.from(2_147_483_647) + Integer.from(1)
-        val expectedSum = Integer.from(2_147_483_648)
+        val expectedSum: Integer = Integer.from(2_147_483_648)
         assertEquals(expectedSum, actualSum)
 
         // Subtraction
         val actualDifference: Integer =
             Integer.from(-2_147_483_648) - Integer.from(1)
-        val expectedDifference = Integer.from(-2_147_483_649)
+        val expectedDifference: Integer = Integer.from(-2_147_483_649)
         assertEquals(expectedDifference, actualDifference)
 
         // Multiplication
         val actualProduct: Integer =
             Integer.from(2_147_483_647) * Integer.from(2)
-        val expectedProduct = Integer.from(4_294_967_294)
+        val expectedProduct: Integer = Integer.from(4_294_967_294)
         assertEquals(expectedProduct, actualProduct)
     }
 
