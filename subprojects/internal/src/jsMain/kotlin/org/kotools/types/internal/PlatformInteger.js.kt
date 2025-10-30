@@ -23,11 +23,6 @@ public actual fun PlatformInteger(text: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class JsInteger(private val integer: BigInt) : PlatformInteger {
-    override fun times(other: PlatformInteger): PlatformInteger {
-        val product: BigInt = this.integer * BigInt("$other")
-        return JsInteger(product)
-    }
-
     override fun equals(other: Any?): Boolean =
         other is JsInteger && this.integer == other.integer
 

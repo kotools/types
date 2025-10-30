@@ -19,9 +19,6 @@ public expect fun PlatformInteger(text: String): PlatformInteger
 /** Represents an integer with a platform-specific implementation. */
 @InternalKotoolsTypesApi
 public interface PlatformInteger {
-    /** Multiplies this integer by the [other] one. */
-    public operator fun times(other: PlatformInteger): PlatformInteger
-
     /** Contains class-level declarations for the [PlatformInteger] type. */
     public companion object {
         @JvmSynthetic

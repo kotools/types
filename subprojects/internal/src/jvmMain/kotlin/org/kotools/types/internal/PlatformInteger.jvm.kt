@@ -25,11 +25,6 @@ public actual fun PlatformInteger(text: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class JvmInteger(private val integer: BigInteger) : PlatformInteger {
-    override fun times(other: PlatformInteger): PlatformInteger {
-        val product: BigInteger = this.integer * BigInteger("$other")
-        return JvmInteger(product)
-    }
-
     override fun equals(other: Any?): Boolean =
         other is JvmInteger && this.integer == other.integer
 
