@@ -69,7 +69,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class Integer private constructor(decimal: String) {
+public class Integer private constructor(private val decimal: String) {
     private val value: PlatformInteger = PlatformInteger(decimal)
 
     // -------------------- Structural equality operations ---------------------
@@ -252,7 +252,7 @@ public class Integer private constructor(decimal: String) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.value.toString()
+    final override fun toString(): String = this.decimal
 
     // ----------------------- Class-level declarations ------------------------
 
