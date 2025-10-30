@@ -1,12 +1,9 @@
 package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.Integers
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
-import org.kotools.types.internal.addition
-import org.kotools.types.internal.multiplication
-import org.kotools.types.internal.subtraction
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -71,7 +68,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class Integer private constructor(private val decimal: String) {
+public class Integer private constructor(private val value: PlatformInteger) {
     // ----------------------------- Constructors ------------------------------
 
     /**
@@ -99,7 +96,7 @@ public class Integer private constructor(private val decimal: String) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorWithLong]
      * </details>
      */
-    public constructor(number: Long) : this("$number")
+    public constructor(number: Long) : this(PlatformInteger(number))
 
     // -------------------- Structural equality operations ---------------------
 
@@ -131,7 +128,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     @Suppress(Warning.FINAL)
     final override fun equals(other: Any?): Boolean =
-        other is Integer && this.decimal == other.decimal
+        other is Integer && this.value == other.value
 
     /**
      * Returns a hash code value for this integer.
@@ -159,7 +156,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun hashCode(): Int = this.decimal.hashCode()
+    final override fun hashCode(): Int = this.value.hashCode()
 
     // ------------------------- Arithmetic operations -------------------------
 
@@ -189,10 +186,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        val x: String = this.toString()
-        val y: String = other.toString()
-        val sum: String = Integers.addition(x, y)
-        return parse(sum)
+        val sum: PlatformInteger = this.value + other.value
+        return Integer(sum)
     }
 
     /**
@@ -221,10 +216,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        val x: String = this.toString()
-        val y: String = other.toString()
-        val difference: String = Integers.subtraction(x, y)
-        return parse(difference)
+        val difference: PlatformInteger = this.value - other.value
+        return Integer(difference)
     }
 
     /**
@@ -253,10 +246,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
-        val x: String = this.toString()
-        val y: String = other.toString()
-        val product: String = Integers.multiplication(x, y)
-        return parse(product)
+        val product: PlatformInteger = this.value * other.value
+        return Integer(product)
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -287,7 +278,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.decimal
+    final override fun toString(): String = this.value.toString()
 
     // ----------------------- Class-level declarations ------------------------
 
@@ -331,14 +322,14 @@ public class Integer private constructor(private val decimal: String) {
         @JvmStatic
         public fun parse(text: String): Integer {
             require(text.isNotBlank()) { "Integer should not be blank" }
-            val decimal: String = text.removePrefix("+")
-            val isDecimal: Boolean = decimal.removePrefix("-")
+            val isDecimal: Boolean = text.removePrefix("+")
+                .removePrefix("-")
                 .all(Char::isDigit)
             require(isDecimal) {
                 "Integer can only contain an optional + or - sign, followed " +
                         "by a sequence of digits, was: $text"
             }
-            return Integer(decimal)
+            return Integer(PlatformInteger(text))
         }
 
         /**
@@ -370,11 +361,11 @@ public class Integer private constructor(private val decimal: String) {
         @JvmSynthetic
         public fun parseOrNull(text: String): Integer? {
             if (text.isBlank()) return null
-            val decimal: String = text.removePrefix("+")
-            val isDecimal: Boolean = decimal.removePrefix("-")
+            val isDecimal: Boolean = text.removePrefix("+")
+                .removePrefix("-")
                 .all(Char::isDigit)
             return if (!isDecimal) null
-            else Integer(decimal)
+            else Integer(PlatformInteger(text))
         }
     }
 }

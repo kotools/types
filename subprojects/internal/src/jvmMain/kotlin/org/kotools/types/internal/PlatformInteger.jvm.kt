@@ -25,6 +25,21 @@ public actual fun PlatformInteger(text: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class JvmInteger(private val integer: BigInteger) : PlatformInteger {
+    override fun plus(other: PlatformInteger): PlatformInteger {
+        val sum: BigInteger = this.integer + BigInteger("$other")
+        return JvmInteger(sum)
+    }
+
+    override fun minus(other: PlatformInteger): PlatformInteger {
+        val difference: BigInteger = this.integer - BigInteger("$other")
+        return JvmInteger(difference)
+    }
+
+    override fun times(other: PlatformInteger): PlatformInteger {
+        val product: BigInteger = this.integer * BigInteger("$other")
+        return JvmInteger(product)
+    }
+
     override fun equals(other: Any?): Boolean =
         other is JvmInteger && this.integer == other.integer
 
