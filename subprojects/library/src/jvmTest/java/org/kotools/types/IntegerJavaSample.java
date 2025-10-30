@@ -6,28 +6,14 @@ import org.kotools.types.internal.Warning;
 
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class IntegerJavaSample {
-    // ----------------------------- Constructors ------------------------------
-
-    @Test
-    void constructorWithLong() {
-        // Given
-        final long number = 9_223_372_036_854_775_807L;
-        // When
-        final Integer integer = new Integer(number);
-        // Then
-        final String result = integer.toString();
-        final String expected = String.valueOf(number);
-        Assertions.assertEquals(expected, result);
-    }
-
     // -------------------- Structural equality operations ---------------------
 
     @Test
     void equalsWithIntegerHavingSameValue() {
         // Given
         final long number = 9_223_372_036_854_775_807L;
-        final Integer integer = new Integer(number);
-        final Integer other = new Integer(number);
+        final Integer integer = Integer.from(number);
+        final Integer other = Integer.from(number);
         // When
         final boolean result = integer.equals(other);
         // Then
@@ -38,11 +24,11 @@ public class IntegerJavaSample {
     void hashCodeOverride() {
         // Given
         final long number = 9_223_372_036_854_775_807L;
-        final Integer integer = new Integer(number);
+        final Integer integer = Integer.from(number);
         // When
         final int result = integer.hashCode();
         // Then
-        final int expected = new Integer(number)
+        final int expected = Integer.from(number)
                 .hashCode();
         Assertions.assertEquals(expected, result);
     }
@@ -53,8 +39,8 @@ public class IntegerJavaSample {
     void plus() {
         // Given
         final long number = 9_223_372_036_854_775_807L;
-        final Integer x = new Integer(number);
-        final Integer y = new Integer(number);
+        final Integer x = Integer.from(number);
+        final Integer y = Integer.from(number);
         // When
         final Integer result = x.plus(y);
         // Then
@@ -65,8 +51,8 @@ public class IntegerJavaSample {
     @Test
     void minus() {
         // Given
-        final Integer x = new Integer(-9_223_372_036_854_775_807L);
-        final Integer y = new Integer(9_223_372_036_854_775_807L);
+        final Integer x = Integer.from(-9_223_372_036_854_775_807L);
+        final Integer y = Integer.from(9_223_372_036_854_775_807L);
         // When
         final Integer result = x.minus(y);
         // Then
@@ -77,8 +63,8 @@ public class IntegerJavaSample {
     @Test
     void times() {
         // Given
-        final Integer x = new Integer(9_223_372_036_854_775_807L);
-        final Integer y = new Integer(10);
+        final Integer x = Integer.from(9_223_372_036_854_775_807L);
+        final Integer y = Integer.from(10);
         // When
         final Integer result = x.times(y);
         // Then
@@ -92,7 +78,7 @@ public class IntegerJavaSample {
     void toStringOverride() {
         // Given
         final long number = 9_223_372_036_854_775_807L;
-        final Integer integer = new Integer(number);
+        final Integer integer = Integer.from(number);
         // When
         final String result = integer.toString();
         // Then

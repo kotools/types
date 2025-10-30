@@ -15,7 +15,7 @@ class IntegerTest {
     fun equalsWithAnotherTypeThanInteger() {
         // Given
         val number = 9_223_372_036_854_775_807
-        val integer = Integer(number)
+        val integer: Integer = Integer.from(number)
         // When
         val result: Boolean = integer.equals(other = number)
         // Then
@@ -25,8 +25,8 @@ class IntegerTest {
     @Test
     fun equalsWithIntegerHavingAnotherValue() {
         // Given
-        val integer = Integer(9_223_372_036_854_775_807)
-        val other = Integer(-9_223_372_036_854_775_807)
+        val integer: Integer = Integer.from(9_223_372_036_854_775_807)
+        val other: Integer = Integer.from(-9_223_372_036_854_775_807)
         // When
         val result: Boolean = integer == other
         // Then

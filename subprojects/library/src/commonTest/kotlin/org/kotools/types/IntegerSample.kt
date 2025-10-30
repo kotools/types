@@ -29,33 +29,21 @@ class IntegerSample {
     @Test
     fun overflowSolution() {
         // Addition
-        val actualSum: Integer = Integer(2_147_483_647) + Integer(1)
-        val expectedSum = Integer(2_147_483_648)
+        val actualSum: Integer = Integer.from(2_147_483_647) + Integer.from(1)
+        val expectedSum = Integer.from(2_147_483_648)
         assertEquals(expectedSum, actualSum)
 
         // Subtraction
-        val actualDifference: Integer = Integer(-2_147_483_648) - Integer(1)
-        val expectedDifference = Integer(-2_147_483_649)
+        val actualDifference: Integer =
+            Integer.from(-2_147_483_648) - Integer.from(1)
+        val expectedDifference = Integer.from(-2_147_483_649)
         assertEquals(expectedDifference, actualDifference)
 
         // Multiplication
-        val actualProduct: Integer = Integer(2_147_483_647) * Integer(2)
-        val expectedProduct = Integer(4_294_967_294)
+        val actualProduct: Integer =
+            Integer.from(2_147_483_647) * Integer.from(2)
+        val expectedProduct = Integer.from(4_294_967_294)
         assertEquals(expectedProduct, actualProduct)
-    }
-
-    // ----------------------------- Constructors ------------------------------
-
-    @Test
-    fun constructorWithLong() {
-        // Given
-        val number = 9_223_372_036_854_775_807
-        // When
-        val integer = Integer(number)
-        // Then
-        val result: String = integer.toString()
-        val expected: String = number.toString()
-        assertEquals(expected, result)
     }
 
     // -------------------- Structural equality operations ---------------------
@@ -64,8 +52,8 @@ class IntegerSample {
     fun equalsWithIntegerHavingSameValue() {
         // Given
         val number = 9_223_372_036_854_775_807
-        val integer = Integer(number)
-        val other = Integer(number)
+        val integer: Integer = Integer.from(number)
+        val other: Integer = Integer.from(number)
         // When
         val result: Boolean = integer == other // or integer.equals(other)
         // Then
@@ -76,11 +64,11 @@ class IntegerSample {
     fun hashCodeOverride() {
         // Given
         val number = 9_223_372_036_854_775_807
-        val integer = Integer(number)
+        val integer: Integer = Integer.from(number)
         // When
         val result: Int = integer.hashCode()
         // Then
-        val expected: Int = Integer(number)
+        val expected: Int = Integer.from(number)
             .hashCode()
         assertEquals(expected, result)
     }
@@ -91,8 +79,8 @@ class IntegerSample {
     fun plus() {
         // Given
         val number = 9_223_372_036_854_775_807
-        val x = Integer(number)
-        val y = Integer(number)
+        val x: Integer = Integer.from(number)
+        val y: Integer = Integer.from(number)
         // When
         val result: Integer = x + y
         // Then
@@ -103,8 +91,8 @@ class IntegerSample {
     @Test
     fun minus() {
         // Given
-        val x = Integer(-9_223_372_036_854_775_807)
-        val y = Integer(9_223_372_036_854_775_807)
+        val x: Integer = Integer.from(-9_223_372_036_854_775_807)
+        val y: Integer = Integer.from(9_223_372_036_854_775_807)
         // When
         val result: Integer = x - y
         // Then
@@ -115,8 +103,8 @@ class IntegerSample {
     @Test
     fun times() {
         // Given
-        val x = Integer(9_223_372_036_854_775_807)
-        val y = Integer(10)
+        val x: Integer = Integer.from(9_223_372_036_854_775_807)
+        val y: Integer = Integer.from(10)
         // When
         val result: Integer = x * y
         // Then
@@ -130,7 +118,7 @@ class IntegerSample {
     fun toStringOverride() {
         // Given
         val number = 9_223_372_036_854_775_807
-        val integer = Integer(number)
+        val integer: Integer = Integer.from(number)
         // When
         val result: String = integer.toString()
         // Then

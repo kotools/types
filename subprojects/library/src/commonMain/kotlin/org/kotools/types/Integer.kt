@@ -41,7 +41,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Declarations
  *
- * - **Instance creation:** constructors, [`from`][Integer.Companion.from],
+ * - **Instance creation:** [`from`][Integer.Companion.from],
  * [`parse`][Integer.Companion.parse] and
  * [`parseOrNull`][Integer.Companion.parseOrNull].
  * - **Structural equality operations:** [`equals`][Integer.equals] (`==`) and
@@ -70,35 +70,6 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class Integer private constructor(private val value: PlatformInteger) {
-    // ----------------------------- Constructors ------------------------------
-
-    /**
-     * Creates an instance of [Integer] from the specified [number].
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerSample.constructorWithLong]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.constructorWithLong]
-     * </details>
-     */
-    public constructor(number: Long) : this(PlatformInteger(number))
-
     // -------------------- Structural equality operations ---------------------
 
     /**
