@@ -83,10 +83,9 @@ public class IntegerJavaSample {
 
     @Test
     void parse() {
-        final String text = "1234";
-        final String integerString = Integer.parse(text)
-                .toString();
-        final boolean result = integerString.equals(text);
+        final Integer integer = Integer.parse("123456");
+        final Integer expected = Integer.from(123456L);
+        final boolean result = integer.equals(expected);
         if (!result) throw new IllegalStateException("Check failed.");
     }
 }

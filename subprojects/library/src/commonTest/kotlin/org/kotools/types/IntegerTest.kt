@@ -4,7 +4,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -96,40 +95,72 @@ class IntegerTest {
     }
 
     @Test
-    fun parseWithDecimalString() {
-        val text = "1234"
-        val integer: Integer = Integer.parse(text)
-        assertEquals(expected = text, actual = "$integer")
+    fun parsePassesWithNonZeroDecimalString() {
+        val number = 123456L
+        val actual: Integer = Integer.parse("$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun parseWithPlusSignedDecimalString() {
-        val plusSign = "+"
-        val text = "${plusSign}1234"
-        val integer: Integer = Integer.parse(text)
-        val expected: String = text.removePrefix(plusSign)
-        assertEquals(expected, actual = "$integer")
+    fun parsePassesWithPlusSignedNonZeroDecimalString() {
+        val number = 123456L
+        val actual: Integer = Integer.parse("+$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun parseWithMinusSignedDecimalString() {
-        val text = "-1234"
-        val integer: Integer = Integer.parse(text)
-        assertEquals(expected = text, actual = "$integer")
+    fun parsePassesWithMinusSignedNonZeroDecimalString() {
+        val number: Long = -123456L
+        val actual: Integer = Integer.parse("$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun parseWithBlankString() {
-        val text = "   "
+    fun parsePassesWithSingleZeroDecimalString() {
+        val actual: Integer = Integer.parse("0")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parsePassesWithMultipleZerosDecimalString() {
+        val actual: Integer = Integer.parse("000")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parsePassesWithPlusSignedZeroDecimalString() {
+        val actual: Integer = Integer.parse("+0")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parsePassesWithMinusSignedZeroDecimalString() {
+        val actual: Integer = Integer.parse("-0")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parsePassesWithLeadingZerosInNonZeroDecimalString() {
+        val number = 123L
+        val actual: Integer = Integer.parse("000$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun parseFailsWithBlankString() {
         val exception: IllegalArgumentException = assertFailsWith {
-            Integer.parse(text)
+            Integer.parse(" ")
         }
         val expected = "Integer should not be blank"
         assertEquals(expected, actual = exception.message)
     }
 
     @Test
-    fun parseWithNonDecimalString() {
+    fun parseFailsWithNonDecimalString() {
         val text = "oops"
         val exception: IllegalArgumentException = assertFailsWith {
             Integer.parse(text)
@@ -140,39 +171,69 @@ class IntegerTest {
     }
 
     @Test
-    fun parseOrNullWithDecimalString() {
-        val text = "1234"
-        val integer: Integer? = Integer.parseOrNull(text)
-        assertNotNull(integer)
-        assertEquals(expected = text, actual = "$integer")
+    fun parseOrNullPassesWithNonZeroDecimalString() {
+        val number = 123456L
+        val actual: Integer? = Integer.parseOrNull("$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun parseOrNullWithPlusSignedDecimalString() {
-        val plusSign = "+"
-        val text = "${plusSign}1234"
-        val integer: Integer? = Integer.parseOrNull(text)
-        assertNotNull(integer)
-        val expected: String = text.removePrefix(plusSign)
-        assertEquals(expected, actual = "$integer")
+    fun parseOrNullPassesWithPlusSignedNonZeroDecimalString() {
+        val number = 123456L
+        val actual: Integer? = Integer.parseOrNull("+$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun parseOrNullWithMinusSignedDecimalString() {
-        val text = "-1234"
-        val integer: Integer? = Integer.parseOrNull(text)
-        assertNotNull(integer)
-        assertEquals(expected = text, actual = "$integer")
+    fun parseOrNullPassesWithMinusSignedNonZeroDecimalString() {
+        val number: Long = -123456L
+        val actual: Integer? = Integer.parseOrNull("$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun parseOrNullWithBlankString() {
+    fun parseOrNullPassesWithSingleZeroDecimalString() {
+        val actual: Integer? = Integer.parseOrNull("0")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parseOrNullPassesWithMultipleZerosDecimalString() {
+        val actual: Integer? = Integer.parseOrNull("000")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parseOrNullPassesWithPlusSignedZeroDecimalString() {
+        val actual: Integer? = Integer.parseOrNull("+0")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parseOrNullPassesWithMinusSignedZeroDecimalString() {
+        val actual: Integer? = Integer.parseOrNull("-0")
+        assertEquals(expected = Integer.Zero, actual)
+    }
+
+    @Test
+    fun parseOrNullPassesWithLeadingZerosInNonZeroDecimalString() {
+        val number = 123L
+        val actual: Integer? = Integer.parseOrNull("000$number")
+        val expected: Integer = Integer.from(number)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun parseOrNullFailsWithBlankString() {
         val actual: Integer? = Integer.parseOrNull("  ")
         assertNull(actual)
     }
 
     @Test
-    fun parseOrNullWithNonDecimalString() {
+    fun parseOrNullFailsWithNonDecimalString() {
         val actual: Integer? = Integer.parseOrNull("oops")
         assertNull(actual)
     }

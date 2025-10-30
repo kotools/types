@@ -87,16 +87,17 @@ class IntegerSample {
 
     @Test
     fun parse() {
-        val text = "1234"
-        val integer: Integer = Integer.parse(text)
-        check("$integer" == text)
+        val number = 123456L
+        val result: Integer = Integer.parse("$number")
+        val expected: Integer = Integer.from(number)
+        check(result == expected)
     }
 
     @Test
     fun parseOrNull() {
-        val text = "1234"
-        val integer: Integer? = Integer.parseOrNull(text)
-        checkNotNull(integer)
-        check("$integer" == text)
+        val number = 123456L
+        val result: Integer? = Integer.parseOrNull("$number")
+        val expected: Integer = Integer.from(number)
+        check(result == expected)
     }
 }

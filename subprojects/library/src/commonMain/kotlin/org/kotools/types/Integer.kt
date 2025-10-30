@@ -69,7 +69,9 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class Integer private constructor(private val value: PlatformInteger) {
+public class Integer private constructor(decimal: String) {
+    private val value: PlatformInteger = PlatformInteger(decimal)
+
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -159,7 +161,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     public operator fun plus(other: Integer): Integer {
         val sum: PlatformInteger = this.value + other.value
-        return Integer(sum)
+        return Integer("$sum")
     }
 
     /**
@@ -189,7 +191,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     public operator fun minus(other: Integer): Integer {
         val difference: PlatformInteger = this.value - other.value
-        return Integer(difference)
+        return Integer("$difference")
     }
 
     /**
@@ -219,7 +221,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
      */
     public operator fun times(other: Integer): Integer {
         val product: PlatformInteger = this.value * other.value
-        return Integer(product)
+        return Integer("$product")
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -256,6 +258,9 @@ public class Integer private constructor(private val value: PlatformInteger) {
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
+        @get:JvmSynthetic
+        internal val Zero: Integer get() = this.from(0)
+
         /**
          * Creates an instance of [Integer] from the specified [number].
          *
@@ -282,10 +287,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
          * </details>
          */
         @JvmStatic
-        public fun from(number: Long): Integer {
-            val value = PlatformInteger(number)
-            return Integer(value)
-        }
+        public fun from(number: Long): Integer = Integer("$number")
 
         /**
          * Creates an instance of [Integer] from the specified [text], or throws
@@ -332,7 +334,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
                 "Integer can only contain an optional + or - sign, followed " +
                         "by a sequence of digits, was: $text"
             }
-            return Integer(PlatformInteger(text))
+            return Integer(text)
         }
 
         /**
@@ -368,7 +370,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
                 .removePrefix("-")
                 .all(Char::isDigit)
             return if (!isDecimal) null
-            else Integer(PlatformInteger(text))
+            else Integer(text)
         }
     }
 }
