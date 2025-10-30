@@ -30,15 +30,12 @@ public class IntegerJavaSample {
 
     @Test
     void plus() {
-        // Given
-        final long number = 9_223_372_036_854_775_807L;
-        final Integer x = Integer.from(number);
-        final Integer y = Integer.from(number);
-        // When
-        final Integer result = x.plus(y);
-        // Then
-        final Integer expected = Integer.parse("18446744073709551614");
-        Assertions.assertEquals(expected, result);
+        final Integer x = Integer.from(9223372036854775807L);
+        final Integer y = Integer.from(2);
+        final Integer sum = x.plus(y);
+        final Integer expected = Integer.parse("9223372036854775809");
+        final boolean result = sum.equals(expected);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     @Test
