@@ -9,15 +9,12 @@ public class IntegerJavaSample {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    void equalsWithIntegerHavingSameValue() {
-        // Given
-        final long number = 9_223_372_036_854_775_807L;
-        final Integer integer = Integer.from(number);
-        final Integer other = Integer.from(number);
-        // When
-        final boolean result = integer.equals(other);
-        // Then
-        Assertions.assertTrue(result);
+    void equalsOverride() {
+        final long number = Long.MAX_VALUE;
+        final Integer x = Integer.from(number);
+        final Integer y = Integer.from(number);
+        final boolean result = x.equals(y);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     @Test

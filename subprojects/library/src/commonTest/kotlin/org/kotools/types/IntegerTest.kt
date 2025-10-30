@@ -6,30 +6,34 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun equalsWithAnotherTypeThanInteger() {
-        // Given
-        val number = 9_223_372_036_854_775_807
+    fun equalsPassesWithIntegerHavingSameValue() {
+        val number: Long = Long.MAX_VALUE
         val integer: Integer = Integer.from(number)
-        // When
+        val other: Integer = Integer.from(number)
+        val result: Boolean = integer == other
+        assertTrue(result)
+    }
+
+    @Test
+    fun equalsFailsWithAnotherTypeThanInteger() {
+        val number: Long = Long.MAX_VALUE
+        val integer: Integer = Integer.from(number)
         val result: Boolean = integer.equals(other = number)
-        // Then
         assertFalse(result)
     }
 
     @Test
-    fun equalsWithIntegerHavingAnotherValue() {
-        // Given
-        val integer: Integer = Integer.from(9_223_372_036_854_775_807)
-        val other: Integer = Integer.from(-9_223_372_036_854_775_807)
-        // When
+    fun equalsFailsWithIntegerHavingAnotherValue() {
+        val integer: Integer = Integer.from(Long.MAX_VALUE)
+        val other: Integer = Integer.from(Long.MIN_VALUE)
         val result: Boolean = integer == other
-        // Then
         assertFalse(result)
     }
 

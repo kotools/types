@@ -3,7 +3,6 @@ package org.kotools.types
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
@@ -29,15 +28,11 @@ class IntegerSample {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun equalsWithIntegerHavingSameValue() {
-        // Given
-        val number = 9_223_372_036_854_775_807
-        val integer: Integer = Integer.from(number)
-        val other: Integer = Integer.from(number)
-        // When
-        val result: Boolean = integer == other // or integer.equals(other)
-        // Then
-        assertTrue(result)
+    fun equalsOverride() {
+        val number: Long = Long.MAX_VALUE
+        val x: Integer = Integer.from(number)
+        val y: Integer = Integer.from(number)
+        check(x == y)
     }
 
     @Test
