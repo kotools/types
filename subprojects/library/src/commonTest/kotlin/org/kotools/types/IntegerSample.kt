@@ -10,40 +10,20 @@ class IntegerSample {
     @Suppress("INTEGER_OVERFLOW")
     @Test
     fun overflowProblem() {
-        // Addition
-        val actualSum: Int = 2_147_483_647 + 1
-        val expectedSum: Int = -2_147_483_648
-        assertEquals(expectedSum, actualSum)
-
-        // Subtraction
-        val actualDifference: Int = -2_147_483_648 - 1
-        val expectedDifference = 2_147_483_647
-        assertEquals(expectedDifference, actualDifference)
-
-        // Multiplication
-        val actualProduct: Int = 2_147_483_647 * 2
-        val expectedProduct: Int = -2
-        assertEquals(expectedProduct, actualProduct)
+        val x = 9223372036854775807
+        val y = 2
+        check(x + y == -9223372036854775807) // instead of 9223372036854775809
+        check(-x - y == 9223372036854775807) // instead of -9223372036854775809
+        check(x * y == -2L) // instead of 18446744073709551614
     }
 
     @Test
     fun overflowSolution() {
-        // Addition
-        val actualSum: Integer = Integer.from(2_147_483_647) + Integer.from(1)
-        val expectedSum: Integer = Integer.from(2_147_483_648)
-        assertEquals(expectedSum, actualSum)
-
-        // Subtraction
-        val actualDifference: Integer =
-            Integer.from(-2_147_483_648) - Integer.from(1)
-        val expectedDifference: Integer = Integer.from(-2_147_483_649)
-        assertEquals(expectedDifference, actualDifference)
-
-        // Multiplication
-        val actualProduct: Integer =
-            Integer.from(2_147_483_647) * Integer.from(2)
-        val expectedProduct: Integer = Integer.from(4_294_967_294)
-        assertEquals(expectedProduct, actualProduct)
+        val x: Integer = Integer.from(9223372036854775807)
+        val y: Integer = Integer.from(2)
+        check(x + y == Integer.parse("9223372036854775809"))
+        check(Integer.parse("-$x") - y == Integer.parse("-9223372036854775809"))
+        check(x * y == Integer.parse("18446744073709551614"))
     }
 
     // -------------------- Structural equality operations ---------------------
