@@ -88,14 +88,10 @@ class IntegerSample {
     }
 
     @Test
-    fun parseWithDecimalString() {
-        // Given
+    fun parse() {
         val text = "1234"
-        // When
         val integer: Integer = Integer.parse(text)
-        // Then
-        val result: String = integer.toString()
-        assertEquals(expected = text, result)
+        check("$integer" == text)
     }
 
     @Test

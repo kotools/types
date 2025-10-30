@@ -304,7 +304,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.parseWithDecimalString]
+         * SAMPLE: [org.kotools.types.IntegerSample.parse]
          * </details>
          *
          * <br>
@@ -315,7 +315,7 @@ public class Integer private constructor(private val value: PlatformInteger) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.parseWithDecimalString]
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.parse]
          * </details>
          * <br>
          *

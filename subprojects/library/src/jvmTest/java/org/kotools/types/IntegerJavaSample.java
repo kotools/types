@@ -1,6 +1,5 @@
 package org.kotools.types;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kotools.types.internal.Warning;
 
@@ -83,13 +82,11 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void parseWithDecimalString() {
-        // Given
+    void parse() {
         final String text = "1234";
-        // When
-        final Integer integer = Integer.parse(text);
-        // Then
-        final String result = integer.toString();
-        Assertions.assertEquals(text, result);
+        final String integerString = Integer.parse(text)
+                .toString();
+        final boolean result = integerString.equals(text);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 }
