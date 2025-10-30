@@ -49,31 +49,14 @@ private val checkSampleReferences: TaskProvider<CheckSampleReferences> by tasks
             extractSamples.flatMap(ExtractSamples::outputDirectory)
     }
 
-private val cleanInlinedMainSources: TaskProvider<Delete> by tasks.registering(
-    Delete::class
-) {
-    val target: Provider<Directory> =
-        layout.buildDirectory.dir("kotools-samples/main/inlined")
-    this.setDelete(target)
-}
-
-private val prepareSamplesInlining: TaskProvider<Copy> by tasks.registering(
-    Copy::class
-) {
-    this.dependsOn(checkSampleReferences, cleanInlinedMainSources)
-    val source: Provider<File> = copyMainSources.map { it.destinationDir }
-    this.from(source)
-    val destination: Provider<File> =
-        copyMainSources.map { it.destinationDir.resolve("../inlined") }
-    this.into(destination)
-}
-
 private val inlineSamples: TaskProvider<InlineSamples> by tasks.registering(
     InlineSamples::class
 ) {
-    this.sourceDirectory = prepareSamplesInlining.map { it.destinationDir }
+    this.sourceDirectory = copyMainSources.map { it.destinationDir }
     this.extractedSamplesDirectory =
         extractSamples.flatMap(ExtractSamples::outputDirectory)
+    this.outputDirectory =
+        copyMainSources.map { it.destinationDir.resolve("../inlined") }
 }
 
 // -------------------------- Base plugin integration --------------------------
@@ -84,12 +67,11 @@ tasks.named { it == "check" }
 // ----------------------------- Dokka integration -----------------------------
 
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
-    this.dependsOn(inlineSamples)
     this.dokkaSourceSets
         .matching { it.name.endsWith("Main") && !it.sourceRoots.isEmpty }
         .configureEach {
-            val source: Provider<File> =
-                prepareSamplesInlining.map { it.destinationDir }
+            val source: Provider<Directory> =
+                inlineSamples.flatMap(InlineSamples::outputDirectory)
             this.sourceRoots.setFrom(source)
         }
 }

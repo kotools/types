@@ -2,11 +2,14 @@ package org.kotools.samples
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.work.DisableCachingByDefault
+import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import java.io.File
 
 /**
@@ -31,6 +34,10 @@ public abstract class InlineSamples : DefaultTask() {
     @get:PathSensitive(PathSensitivity.NONE)
     public abstract val extractedSamplesDirectory: DirectoryProperty
 
+    /** The directory that will contain the inlined main sources. */
+    @get:OutputDirectory
+    public abstract val outputDirectory: DirectoryProperty
+
     @TaskAction
     internal fun execute(): Unit = this.sourceDirectory.asFileTree.asSequence()
         .filterNotNull()
@@ -38,10 +45,20 @@ public abstract class InlineSamples : DefaultTask() {
         .filter { it.name.endsWith(".kt") }
         .forEach(this::inlineSamples)
 
-    private fun inlineSamples(file: File): Unit = file.useLines {
-        it.map(this::sampleOrOriginal)
-            .joinToString("\n")
-    }.let { file.writeText("$it\n") }
+    private fun inlineSamples(file: File) {
+        val content: String = file.useLines {
+            it.map(this::sampleOrOriginal)
+                .joinToString("\n")
+        }
+        val relativePath: Provider<String> = this.sourceDirectory.map {
+            file.path.removePrefix("${it.asFile.path}/")
+        }
+        this.outputDirectory.file(relativePath)
+            .get()
+            .asFile
+            .also(File::ensureParentDirsCreated)
+            .writeText(content)
+    }
 
     private fun sampleOrOriginal(line: String): String {
         val keyword = "SAMPLE: ["
