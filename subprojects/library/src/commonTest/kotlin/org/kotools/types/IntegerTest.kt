@@ -37,6 +37,14 @@ class IntegerTest {
         assertFalse(result)
     }
 
+    @Test
+    fun hashCodeReturnsSameValueForIntegersThatAreEqual() {
+        val number: Long = Long.MAX_VALUE
+        val x: Integer = Integer.from(number)
+        val y: Integer = Integer.from(number)
+        assertEquals(x.hashCode(), y.hashCode())
+    }
+
     // ----------------------- Class-level declarations ------------------------
 
     @Test

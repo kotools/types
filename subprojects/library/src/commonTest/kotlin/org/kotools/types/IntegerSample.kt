@@ -37,15 +37,10 @@ class IntegerSample {
 
     @Test
     fun hashCodeOverride() {
-        // Given
-        val number = 9_223_372_036_854_775_807
-        val integer: Integer = Integer.from(number)
-        // When
-        val result: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer.from(number)
-            .hashCode()
-        assertEquals(expected, result)
+        val number: Long = Long.MAX_VALUE
+        val x: Integer = Integer.from(number)
+        val y: Integer = Integer.from(number)
+        check(x.hashCode() == y.hashCode())
     }
 
     // ------------------------- Arithmetic operations -------------------------

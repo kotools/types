@@ -19,15 +19,11 @@ public class IntegerJavaSample {
 
     @Test
     void hashCodeOverride() {
-        // Given
-        final long number = 9_223_372_036_854_775_807L;
-        final Integer integer = Integer.from(number);
-        // When
-        final int result = integer.hashCode();
-        // Then
-        final int expected = Integer.from(number)
-                .hashCode();
-        Assertions.assertEquals(expected, result);
+        final long number = Long.MAX_VALUE;
+        final Integer x = Integer.from(number);
+        final Integer y = Integer.from(number);
+        final boolean result = x.hashCode() == y.hashCode();
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     // ------------------------- Arithmetic operations -------------------------
