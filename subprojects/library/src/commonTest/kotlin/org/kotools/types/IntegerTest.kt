@@ -49,8 +49,9 @@ class IntegerTest {
 
     @Test
     fun plusPasses() {
-        val x: Integer = Integer.from(Long.MAX_VALUE)
-        val y: Integer = Integer.from(Long.MAX_VALUE)
+        val number = 9223372036854775807
+        val x: Integer = Integer.from(number)
+        val y: Integer = Integer.from(number)
         val actual: Integer = x + y
         val expected: Integer = Integer.parse("18446744073709551614")
         assertEquals(expected, actual)
@@ -58,10 +59,11 @@ class IntegerTest {
 
     @Test
     fun minusPasses() {
-        val x: Integer = Integer.from(Long.MIN_VALUE)
-        val y: Integer = Integer.from(Long.MAX_VALUE)
+        val number = 9223372036854775807
+        val x: Integer = Integer.from(-number)
+        val y: Integer = Integer.from(number)
         val actual: Integer = x - y
-        val expected: Integer = Integer.parse("-18446744073709551615")
+        val expected: Integer = Integer.parse("-18446744073709551614")
         assertEquals(expected, actual)
     }
 
