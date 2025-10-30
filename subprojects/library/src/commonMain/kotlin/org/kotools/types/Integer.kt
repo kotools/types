@@ -41,7 +41,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Declarations
  *
- * - **Instance creation:** constructors, [`parse`][Integer.Companion.parse] and
+ * - **Instance creation:** constructors, [`from`][Integer.Companion.from],
+ * [`parse`][Integer.Companion.parse] and
  * [`parseOrNull`][Integer.Companion.parseOrNull].
  * - **Structural equality operations:** [`equals`][Integer.equals] (`==`) and
  * [`hashCode`][Integer.hashCode].
@@ -284,6 +285,37 @@ public class Integer private constructor(private val value: PlatformInteger) {
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
+        /**
+         * Creates an instance of [Integer] from the specified [number].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.from]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.from]
+         * </details>
+         */
+        @JvmStatic
+        public fun from(number: Long): Integer {
+            val value = PlatformInteger(number)
+            return Integer(value)
+        }
+
         /**
          * Creates an instance of [Integer] from the specified [text], or throws
          * an [IllegalArgumentException] if the [text] doesn't represent an

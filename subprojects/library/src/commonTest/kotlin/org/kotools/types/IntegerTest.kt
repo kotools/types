@@ -36,6 +36,18 @@ class IntegerTest {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
+    fun fromPassesWithLong() {
+        // Given
+        val number: Long = Long.MAX_VALUE
+        // When
+        val integer: Integer = Integer.from(number)
+        // Then
+        val result: String = integer.toString()
+        val expected: String = number.toString()
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun parseWithPlusSignedDecimalString() {
         // Given
         val plusSign = "+"

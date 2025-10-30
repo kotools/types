@@ -141,6 +141,18 @@ class IntegerSample {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
+    fun from() {
+        // Given
+        val number = 9_223_372_036_854_775_807
+        // When
+        val integer: Integer = Integer.from(number)
+        // Then
+        val result: String = integer.toString()
+        val expected: String = number.toString()
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun parseWithDecimalString() {
         // Given
         val text = "1234"

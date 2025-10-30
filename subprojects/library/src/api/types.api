@@ -375,6 +375,7 @@ public final class org/kotools/types/Integer {
 	public fun <init> (J)V
 	public synthetic fun <init> (Lorg/kotools/types/internal/PlatformInteger;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun equals (Ljava/lang/Object;)Z
+	public static final fun from (J)Lorg/kotools/types/Integer;
 	public final fun hashCode ()I
 	public final fun minus (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/Integer;
@@ -384,6 +385,7 @@ public final class org/kotools/types/Integer {
 }
 
 public final class org/kotools/types/Integer$Companion {
+	public final fun from (J)Lorg/kotools/types/Integer;
 	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/Integer;
 	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
 }

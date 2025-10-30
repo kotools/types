@@ -103,6 +103,18 @@ public class IntegerJavaSample {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
+    void from() {
+        // Given
+        final long number = 9_223_372_036_854_775_807L;
+        // When
+        final Integer integer = Integer.from(number);
+        // Then
+        final String result = integer.toString();
+        final String expected = String.valueOf(number);
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
     void parseWithDecimalString() {
         // Given
         final String text = "1234";
