@@ -55,14 +55,10 @@ class IntegerSample {
 
     @Test
     fun minus() {
-        // Given
-        val x: Integer = Integer.from(-9_223_372_036_854_775_807)
-        val y: Integer = Integer.from(9_223_372_036_854_775_807)
-        // When
-        val result: Integer = x - y
-        // Then
-        val expected: Integer = Integer.parse("-18446744073709551614")
-        assertEquals(expected, result)
+        val x: Integer = Integer.from(-9223372036854775807)
+        val y: Integer = Integer.from(2)
+        val expected: Integer = Integer.parse("-9223372036854775809")
+        check(x - y == expected)
     }
 
     @Test

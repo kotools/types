@@ -40,14 +40,12 @@ public class IntegerJavaSample {
 
     @Test
     void minus() {
-        // Given
-        final Integer x = Integer.from(-9_223_372_036_854_775_807L);
-        final Integer y = Integer.from(9_223_372_036_854_775_807L);
-        // When
-        final Integer result = x.minus(y);
-        // Then
-        final Integer expected = Integer.parse("-18446744073709551614");
-        Assertions.assertEquals(expected, result);
+        final Integer x = Integer.from(-9223372036854775807L);
+        final Integer y = Integer.from(2);
+        final Integer difference = x.minus(y);
+        final Integer expected = Integer.parse("-9223372036854775809");
+        final boolean result = difference.equals(expected);
+        if (!result) throw new IllegalStateException("Check failed.");
     }
 
     @Test

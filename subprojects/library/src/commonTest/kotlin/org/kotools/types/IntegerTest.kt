@@ -56,6 +56,15 @@ class IntegerTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun minusPasses() {
+        val x: Integer = Integer.from(Long.MIN_VALUE)
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        val actual: Integer = x - y
+        val expected: Integer = Integer.parse("-18446744073709551615")
+        assertEquals(expected, actual)
+    }
+
     // ----------------------- Class-level declarations ------------------------
 
     @Test
