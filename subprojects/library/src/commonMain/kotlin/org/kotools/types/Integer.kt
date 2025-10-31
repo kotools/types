@@ -2,8 +2,10 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
+import org.kotools.types.internal.integerAddition
+import org.kotools.types.internal.integerMultiplication
+import org.kotools.types.internal.integerSubtraction
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -54,8 +56,6 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class Integer private constructor(private val decimal: String) {
-    private val value: PlatformInteger = PlatformInteger(decimal)
-
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -144,8 +144,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        val sum: PlatformInteger = this.value + other.value
-        return Integer("$sum")
+        val sum: String = integerAddition(x = "$this", y = "$other")
+        return parse(sum)
     }
 
     /**
@@ -174,8 +174,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        val difference: PlatformInteger = this.value - other.value
-        return Integer("$difference")
+        val difference: String = integerSubtraction(x = "$this", y = "$other")
+        return parse(difference)
     }
 
     /**
@@ -204,8 +204,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
-        val product: PlatformInteger = this.value * other.value
-        return Integer("$product")
+        val product: String = integerMultiplication(x = "$this", y = "$other")
+        return parse(product)
     }
 
     // ------------------------------ Conversions ------------------------------
