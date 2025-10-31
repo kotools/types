@@ -72,8 +72,8 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Check 'types' project
-        run: ./gradlew :types:check
+      - name: Build 'types' project
+        run: ./gradlew :types:build
   kotlin-serialization:
     name: Kotlin Serialization
     runs-on: macos-13
@@ -87,5 +87,5 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Check 'types-kotlinx-serialization' project
-        run: ./gradlew :types-kotlinx-serialization:check
+      - name: Build 'types-kotlinx-serialization' project
+        run: ./gradlew :types-kotlinx-serialization:build
