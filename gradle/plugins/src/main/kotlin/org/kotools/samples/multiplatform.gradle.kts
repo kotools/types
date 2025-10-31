@@ -1,6 +1,8 @@
 package org.kotools.samples
 
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 // ----------------------------- Script properties -----------------------------
 
@@ -55,5 +57,27 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
             val source: Provider<Directory> =
                 inlineSamples.flatMap(InlineSamples::outputDirectory)
             this.sourceRoots.setFrom(source)
+        }
+}
+
+// --------------------- Kotlin Multiplatform integration ----------------------
+
+pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+    val kotlin: KotlinMultiplatformExtension = extensions.getByType()
+    tasks.withType<KotlinCompilationTask<*>>()
+        .configureEach { this.mustRunAfter(inlineSamples) }
+    tasks.withType<Jar>()
+        .named { it.endsWith("sourcesJar", ignoreCase = true) }
+        .configureEach {
+            this.dependsOn(inlineSamples)
+            this.doFirst {
+                kotlin.sourceSets.named { it.endsWith("Main") }
+                    .configureEach {
+                        val inlinedMainSources: Provider<Directory> = layout
+                            .buildDirectory
+                            .dir("kotools-samples/inlined/${this.name}/kotlin")
+                        this.kotlin.setSrcDirs(listOf(inlinedMainSources))
+                    }
+            }
         }
 }
