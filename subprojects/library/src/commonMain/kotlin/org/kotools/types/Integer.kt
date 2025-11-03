@@ -181,8 +181,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        if (this == Zero) return other
-        if (other == Zero) return this
+        val zero: Integer = Zero
+        if (this == zero) return other
+        if (other == zero) return this
         val sum: String = integerAddition(x = "$this", y = "$other")
         return parse(sum)
     }
@@ -213,8 +214,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        if (this == Zero) return -other
-        if (other == Zero) return this
+        val zero: Integer = Zero
+        if (this == zero) return -other
+        if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
         return parse(difference)
     }
