@@ -54,8 +54,9 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
     this.dokkaSourceSets
         .matching { it.name.endsWith("Main") && !it.sourceRoots.isEmpty }
         .configureEach {
-            val source: Provider<Directory> =
-                inlineSamples.flatMap(InlineSamples::outputDirectory)
+            val source: Provider<Directory> = inlineSamples.flatMap {
+                it.outputDirectory.dir("${this.name}/kotlin")
+            }
             this.sourceRoots.setFrom(source)
         }
 }
