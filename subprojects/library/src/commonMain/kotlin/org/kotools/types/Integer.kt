@@ -213,6 +213,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
+        if (this == Zero) return -other
+        if (other == Zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
         return parse(difference)
     }

@@ -113,13 +113,38 @@ class IntegerTest {
     }
 
     @Test
-    fun minusPasses() {
-        val number = 9223372036854775807
-        val x: Integer = Integer.from(-number)
-        val y: Integer = Integer.from(number)
+    fun minusPassesWithNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(-9223372036854775807)
+        val y: Integer = Integer.from(9223372036854775807)
+        // When
         val actual: Integer = x - y
+        // Then
         val expected: Integer = Integer.parse("-18446744073709551614")
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun minusPassesWithZeroAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.Zero
+        val y: Integer = Integer.from(123)
+        // When
+        val actual: Integer = x - y
+        // Then
+        val expected: Integer = -y
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun minusPassesWithNonZeroAndZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.Zero
+        // When
+        val actual: Integer = x - y
+        // Then
+        assertEquals(expected = x, actual)
     }
 
     @Test
