@@ -46,10 +46,11 @@ import kotlin.jvm.JvmSynthetic
  * - **Instance creation:** [`from`][Integer.Companion.from],
  * [`parse`][Integer.Companion.parse] and
  * [`parseOrNull`][Integer.Companion.parseOrNull].
- * - **Structural equality operations:** [`equals`][Integer.equals] (`==`) and
- * [`hashCode`][Integer.hashCode].
- * - **Arithmetic operations:** [`plus`][Integer.plus] (`+`),
- * [`minus`][Integer.minus] (`-`) and [`times`][Integer.times] (`*`).
+ * - **Structural equality operations:** [`equals`][Integer.equals] (`x == y`)
+ * and [`hashCode`][Integer.hashCode].
+ * - **Arithmetic operations:** [`unaryMinus`][Integer.unaryMinus] (`-x`),
+ * [`plus`][Integer.plus] (`x + y`), [`minus`][Integer.minus] (`x - y`) and
+ * [`times`][Integer.times] (`x * y`).
  * - **Conversions:** [`toString`][Integer.toString].
  * </details>
  */
@@ -117,6 +118,42 @@ public class Integer private constructor(private val decimal: String) {
     final override fun hashCode(): Int = this.decimal.hashCode()
 
     // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.unaryMinus]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.unaryMinus]
+     * </details>
+     */
+    public operator fun unaryMinus(): Integer {
+        if (this == Zero) return this
+        val isNegative: Boolean = this.decimal.startsWith('-')
+        if (isNegative) {
+            val text: String = this.decimal.removePrefix("-")
+            return parse(text)
+        }
+        val text = "-${this.decimal}"
+        return parse(text)
+    }
 
     /**
      * Adds the [other] integer to this one.

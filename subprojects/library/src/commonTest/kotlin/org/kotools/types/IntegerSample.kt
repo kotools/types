@@ -44,6 +44,18 @@ class IntegerSample {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinus() {
+        // Given
+        val number = 123456L
+        val x: Integer = Integer.from(number)
+        // When
+        val result: Integer = -x // or x.unaryMinus()
+        // Then
+        val expected: Integer = Integer.from(-number)
+        check(result == expected)
+    }
+
+    @Test
     fun plus() {
         val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(2)

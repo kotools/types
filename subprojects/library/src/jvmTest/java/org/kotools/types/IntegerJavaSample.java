@@ -28,6 +28,19 @@ public class IntegerJavaSample {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    void unaryMinus() {
+        // Given
+        final long number = 123456;
+        final Integer x = Integer.from(number);
+        // When
+        final Integer result = x.unaryMinus();
+        // Then
+        final Integer expected = Integer.from(-number);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void plus() {
         final Integer x = Integer.from(9223372036854775807L);
         final Integer y = Integer.from(2);
