@@ -19,7 +19,7 @@ class IntegerSample {
         val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(2)
         check(x + y == Integer.parse("9223372036854775809"))
-        check(Integer.parse("-$x") - y == Integer.parse("-9223372036854775809"))
+        check(-x - y == Integer.parse("-9223372036854775809"))
         check(x * y == Integer.parse("18446744073709551614"))
     }
 
