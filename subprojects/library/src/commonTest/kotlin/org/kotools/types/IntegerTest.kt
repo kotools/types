@@ -81,13 +81,35 @@ class IntegerTest {
     }
 
     @Test
-    fun plusPasses() {
+    fun plusPassesWithNonZeroIntegers() {
         val number = 9223372036854775807
         val x: Integer = Integer.from(number)
         val y: Integer = Integer.from(number)
         val actual: Integer = x + y
         val expected: Integer = Integer.parse("18446744073709551614")
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun plusPassesWithZeroAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.Zero
+        val y: Integer = Integer.from(123)
+        // When
+        val actual: Integer = x + y
+        // Then
+        assertEquals(expected = y, actual)
+    }
+
+    @Test
+    fun plusPassesWithNonZeroAndZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.Zero
+        // When
+        val actual: Integer = x + y
+        // Then
+        assertEquals(expected = x, actual)
     }
 
     @Test
