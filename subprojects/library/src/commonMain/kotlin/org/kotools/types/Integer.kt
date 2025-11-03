@@ -245,6 +245,11 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
+        val zero: Integer = Zero
+        if (this == zero || other == zero) return zero
+        val one: Integer = One
+        if (this == one) return other
+        if (other == one) return this
         val product: String = integerMultiplication(x = "$this", y = "$other")
         return parse(product)
     }
@@ -285,6 +290,9 @@ public class Integer private constructor(private val decimal: String) {
     public companion object {
         @get:JvmSynthetic
         internal val Zero: Integer get() = this.from(0)
+
+        @get:JvmSynthetic
+        internal val One: Integer get() = this.from(1)
 
         /**
          * Creates an instance of [Integer] from the specified [number].

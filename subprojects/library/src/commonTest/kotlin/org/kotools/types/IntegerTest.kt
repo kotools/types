@@ -148,12 +148,59 @@ class IntegerTest {
     }
 
     @Test
-    fun timesPasses() {
+    fun timesPassesWithNonZeroIntegers() {
+        // Given
         val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(1000)
+        // When
         val actual: Integer = x * y
+        // Then
         val expected: Integer = Integer.parse("9223372036854775807000")
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun timesPassesWithZeroAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.Zero
+        val y: Integer = Integer.from(123)
+        // When
+        val actual: Integer = x * y
+        // Then
+        assertEquals(expected = x, actual)
+    }
+
+    @Test
+    fun timesPassesWithNonZeroAndZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.Zero
+        // When
+        val actual: Integer = x * y
+        // Then
+        assertEquals(expected = y, actual)
+    }
+
+    @Test
+    fun timesPassesWithOneAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.One
+        val y: Integer = Integer.from(123)
+        // When
+        val actual: Integer = x * y
+        // Then
+        assertEquals(expected = y, actual)
+    }
+
+    @Test
+    fun timesPassesWithNonZeroAndOneIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.One
+        // When
+        val actual: Integer = x * y
+        // Then
+        assertEquals(expected = x, actual)
     }
 
     // ------------------------------ Conversions ------------------------------
