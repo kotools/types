@@ -15,6 +15,11 @@ internal actual fun integerMultiplication(x: String, y: String): String {
     return product.toString()
 }
 
+internal actual fun integerDivision(x: String, y: String): String {
+    val quotient: BigInt = BigInt(x) / BigInt(y)
+    return quotient.toString()
+}
+
 private external fun BigInt(value: String): BigInt
 
 private external object BigInt
@@ -41,4 +46,12 @@ private operator fun BigInt.times(other: BigInt): BigInt {
     val y = other
     val product: dynamic = js("x * y")
     return BigInt("$product")
+}
+
+@Suppress("UNUSED_VARIABLE")
+private operator fun BigInt.div(other: BigInt): BigInt {
+    val x = this
+    val y = other
+    val quotient: dynamic = js("x / y")
+    return BigInt("$quotient")
 }

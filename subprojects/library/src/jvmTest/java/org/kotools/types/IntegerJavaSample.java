@@ -87,6 +87,19 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void div() {
+        // Given
+        final Integer x = Integer.from(21);
+        final Integer y = Integer.from(5);
+        // When
+        final Integer result = x.div(y);
+        // Then
+        final Integer expected = Integer.from(4);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

@@ -4,6 +4,7 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import org.kotools.types.internal.integerAddition
+import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerSubtraction
 import kotlin.jvm.JvmStatic
@@ -46,11 +47,11 @@ import kotlin.jvm.JvmSynthetic
  * - **Instance creation:** [`from`][Integer.Companion.from],
  * [`fromDecimal`][Integer.Companion.fromDecimal] and
  * [`fromDecimalOrNull`][Integer.Companion.fromDecimalOrNull].
- * - **Structural equality operations:** [`equals`][Integer.equals] (`x == y`)
- * and [`hashCode`][Integer.hashCode].
+ * - **Structural equality operations:** [`equals`][Integer.equals] (`x == y`,
+ * `x != y`) and [`hashCode`][Integer.hashCode].
  * - **Arithmetic operations:** [`unaryMinus`][Integer.unaryMinus] (`-x`),
- * [`plus`][Integer.plus] (`x + y`), [`minus`][Integer.minus] (`x - y`) and
- * [`times`][Integer.times] (`x * y`).
+ * [`plus`][Integer.plus] (`x + y`), [`minus`][Integer.minus] (`x - y`),
+ * [`times`][Integer.times] (`x * y`) and [`div`][Integer.div] (`x / y`).
  * - **Conversions:** [`toString`][Integer.toString].
  * </details>
  */
@@ -254,6 +255,40 @@ public class Integer private constructor(private val decimal: String) {
         if (other == one) return this
         val product: String = integerMultiplication(x = "$this", y = "$other")
         return fromDecimal(product)
+    }
+
+    /**
+     * Returns the quotient of dividing this integer by the [other] one, or
+     * throws an [IllegalArgumentException] if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.div]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.div]
+     * </details>
+     */
+    public operator fun div(other: Integer): Integer {
+        val zero: Integer = Zero
+        require(other != zero) { "Integer can't be divided by zero." }
+        if (this == zero || other == One) return this
+        val quotient: String = integerDivision(x = "$this", y = "$other")
+        return fromDecimal(quotient)
     }
 
     // ------------------------------ Conversions ------------------------------
