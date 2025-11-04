@@ -45,16 +45,16 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Declarations
  *
- * - **Instance creation:** [`from`][Integer.Companion.from],
- * [`fromDecimal`][Integer.Companion.fromDecimal] and
- * [`fromDecimalOrNull`][Integer.Companion.fromDecimalOrNull].
- * - **Structural equality operations:** [`equals`][Integer.equals] (`x == y`,
- * `x != y`) and [`hashCode`][Integer.hashCode].
- * - **Arithmetic operations:** [`unaryMinus`][Integer.unaryMinus] (`-x`),
- * [`plus`][Integer.plus] (`x + y`), [`minus`][Integer.minus] (`x - y`),
- * [`times`][Integer.times] (`x * y`), [`div`][Integer.div] (`x / y`) and
- * [`rem`][Integer.rem] (`x % y`).
- * - **Conversions:** [`toString`][Integer.toString].
+ * - **Instance creation:** [from][Integer.Companion.from],
+ * [fromDecimal][Integer.Companion.fromDecimal] and
+ * [fromDecimalOrNull][Integer.Companion.fromDecimalOrNull].
+ * - **Structural equality operations:** [equals][Integer.equals] (`x == y`,
+ * `x != y`) and [hashCode][Integer.hashCode].
+ * - **Arithmetic operations:** [unaryMinus][Integer.unaryMinus] (`-x`),
+ * [plus][Integer.plus] (`x + y`), [minus][Integer.minus] (`x - y`),
+ * [times][Integer.times] (`x * y`), [div][Integer.div] (`x / y`) and
+ * [rem][Integer.rem] (`x % y`).
+ * - **Conversions:** [toString][Integer.toString].
  * </details>
  */
 @ExperimentalKotoolsTypesApi
