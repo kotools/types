@@ -377,11 +377,6 @@ public class Integer private constructor(private val decimal: String) {
             return Integer(decimal = "$sign$digits")
         }
 
-        @JvmSynthetic
-        internal fun syntaxErrorIn(text: String): String = "Integer can only " +
-                "contain an optional + or - sign, followed by a sequence of " +
-                "digits, was: $text"
-
         /**
          * Creates an instance of [Integer] from the specified [text], or
          * returns `null` if the [text] doesn't represent an integer.
@@ -425,5 +420,10 @@ public class Integer private constructor(private val decimal: String) {
             val digits: String = unsignedText.trimStart('0')
             return Integer(decimal = "$sign$digits")
         }
+
+        @JvmSynthetic
+        internal fun syntaxErrorIn(text: String): String = "Integer can only " +
+                "contain an optional + or - sign, followed by a sequence of " +
+                "digits, was: $text"
     }
 }
