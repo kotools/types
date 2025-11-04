@@ -129,8 +129,9 @@ class IntegerSample {
     fun fromDecimal() {
         // Given
         val number = 123456L
+        val text = "$number"
         // When
-        val result: Integer = Integer.fromDecimal("$number")
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         val expected: Integer = Integer.from(number)
         check(result == expected)
