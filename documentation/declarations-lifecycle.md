@@ -29,16 +29,16 @@ user feedbacks. This change can be included in any type of release.
 For being promoted to **stable**, an **experimental** declaration must meet the
 following requirements:
 
-- It was introduced in or before the second **minor** release before the
+- It was introduced in or before the latest **minor** release before the
   current version. For example, an **experimental** declaration introduced in
-  version `5.0` can be stabilized in or after version `5.2`.
+  version `5.0` can be stabilized in or after version `5.1`.
 - It doesn't use another **experimental** declaration.
 
 Stabilizing a declaration must be included in a **minor** or **major** release.
 
 | Stage       | Experimental | Stable      | Example         |
 |-------------|--------------|-------------|-----------------|
-| **Version** | `X.Y.Z`      | `X.(Y+2).0` | `5.0` -> `5.2+` |
+| **Version** | `X.Y.Z`      | `X.(Y+1).0` | `5.0` -> `5.1+` |
 
 ### 🗑️ Deprecation
 
