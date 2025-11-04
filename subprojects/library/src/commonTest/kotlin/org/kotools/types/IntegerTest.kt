@@ -491,7 +491,7 @@ class IntegerTest {
         val number = 123L
         val text = "-000$number"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer? = Integer.parseOrNull(text)
         // Then
         val expected: Integer = Integer.from(-number)
         assertEquals(expected, result)
