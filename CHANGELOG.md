@@ -52,8 +52,8 @@ All notable changes to this project will be documented in this file.
 - Following **deprecated** declarations from `EmailAddress.Companion`
   **experimental** type: `PATTERN` constant, `orNull(String, String)` and
   `orThrow(String, String)` functions ([#838]).
-- `Zero` **experimental** type and its serializers ([#844]). Use `0` literal
-  instead.
+- `Zero` **experimental** type and its serializers ([#844]). Use
+  `Integer.from(0)` instead.
 
 ### 🐛 Fixed
 
