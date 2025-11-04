@@ -274,7 +274,7 @@ class IntegerTest {
         // When
         val result: IllegalArgumentException = assertFailsWith { x / y }
         // Then
-        val expected = "Integer can't be divided by zero."
+        val expected: String = Integer.divisionByZeroError()
         assertEquals(expected, actual = result.message)
     }
 
@@ -412,7 +412,7 @@ class IntegerTest {
             Integer.fromDecimal(text)
         }
         // Then
-        val expected = "Integer should not be blank"
+        val expected: String = Integer.blankError()
         assertEquals(expected, result.message)
     }
 

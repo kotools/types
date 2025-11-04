@@ -285,7 +285,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     public operator fun div(other: Integer): Integer {
         val zero: Integer = Zero
-        require(other != zero) { "Integer can't be divided by zero." }
+        require(other != zero, ::divisionByZeroError)
         if (this == zero || other == One) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
@@ -396,7 +396,7 @@ public class Integer private constructor(private val decimal: String) {
          */
         @JvmStatic
         public fun fromDecimal(text: String): Integer {
-            require(text.isNotBlank()) { "Integer should not be blank" }
+            require(text.isNotBlank(), this::blankError)
             val textWithoutPlusSignPrefix: String = text.removePrefix("+")
             val unsignedText: String =
                 textWithoutPlusSignPrefix.removePrefix("-")
@@ -457,8 +457,15 @@ public class Integer private constructor(private val decimal: String) {
         }
 
         @JvmSynthetic
+        internal fun blankError(): String = "Integer can't be blank."
+
+        @JvmSynthetic
+        internal fun divisionByZeroError(): String =
+            "Integer can't be divided by zero."
+
+        @JvmSynthetic
         internal fun syntaxErrorIn(text: String): String = "Integer can only " +
                 "contain an optional + or - sign, followed by a sequence of " +
-                "digits, was: $text"
+                "digits (was: $text)."
     }
 }
