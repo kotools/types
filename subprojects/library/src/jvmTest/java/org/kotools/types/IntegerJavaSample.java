@@ -9,20 +9,28 @@ public class IntegerJavaSample {
 
     @Test
     void equalsOverride() {
+        // Given
         final long number = Long.MAX_VALUE;
         final Integer x = Integer.from(number);
         final Integer y = Integer.from(number);
+        // When
         final boolean result = x.equals(y);
+        // Then
         if (!result) throw new IllegalStateException("Check failed.");
     }
 
     @Test
     void hashCodeOverride() {
+        // Given
         final long number = Long.MAX_VALUE;
-        final Integer x = Integer.from(number);
-        final Integer y = Integer.from(number);
-        final boolean result = x.hashCode() == y.hashCode();
-        if (!result) throw new IllegalStateException("Check failed.");
+        final Integer integer = Integer.from(number);
+        // When
+        final int result = integer.hashCode();
+        // Then
+        final int expected = Integer.from(number)
+                .hashCode();
+        final boolean check = result == expected;
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 
     // ------------------------- Arithmetic operations -------------------------
@@ -42,63 +50,83 @@ public class IntegerJavaSample {
 
     @Test
     void plus() {
+        // Given
         final Integer x = Integer.from(9223372036854775807L);
         final Integer y = Integer.from(2);
-        final Integer sum = x.plus(y);
+        // When
+        final Integer result = x.plus(y);
+        // Then
         final Integer expected = Integer.parse("9223372036854775809");
-        final boolean result = sum.equals(expected);
-        if (!result) throw new IllegalStateException("Check failed.");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 
     @Test
     void minus() {
+        // Given
         final Integer x = Integer.from(-9223372036854775807L);
         final Integer y = Integer.from(2);
-        final Integer difference = x.minus(y);
+        // When
+        final Integer result = x.minus(y);
+        // Then
         final Integer expected = Integer.parse("-9223372036854775809");
-        final boolean result = difference.equals(expected);
-        if (!result) throw new IllegalStateException("Check failed.");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 
     @Test
     void times() {
+        // Given
         final Integer x = Integer.from(9223372036854775807L);
         final Integer y = Integer.from(10);
-        final Integer product = x.times(y);
+        // When
+        final Integer result = x.times(y);
+        // Then
         final Integer expected = Integer.parse("92233720368547758070");
-        final boolean result = product.equals(expected);
-        if (!result) throw new IllegalStateException("Check failed.");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 
     // ------------------------------ Conversions ------------------------------
 
     @Test
     void toStringOverride() {
+        // Given
         final long number = 9223372036854775807L;
-        final String integerString = Integer.from(number)
-                .toString();
+        final Integer integer = Integer.from(number);
+        // When
+        final String result = integer.toString();
+        // Then
         final String expected = String.valueOf(number);
-        final boolean result = integerString.equals(expected);
-        if (!result) throw new IllegalStateException("Check failed.");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 
     // ----------------------- Class-level declarations ------------------------
 
     @Test
     void from() {
+        // Given
         final long number = 9223372036854775807L;
-        final String integerString = Integer.from(number)
-                .toString();
+        // When
+        final Integer result = Integer.from(number);
+        // Then
+        final String resultAsString = result.toString();
         final String expected = String.valueOf(number);
-        final boolean result = integerString.equals(expected);
-        if (!result) throw new IllegalStateException("Check failed.");
+        final boolean check = resultAsString.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 
     @Test
     void parse() {
-        final Integer integer = Integer.parse("123456");
-        final Integer expected = Integer.from(123456L);
-        final boolean result = integer.equals(expected);
-        if (!result) throw new IllegalStateException("Check failed.");
+        // Given
+        final long number = 123456L;
+        final String text = String.valueOf(number);
+        // When
+        final Integer result = Integer.parse(text);
+        // Then
+        final Integer expected = Integer.from(number);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
     }
 }
