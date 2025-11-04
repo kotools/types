@@ -380,6 +380,7 @@ public final class org/kotools/types/Integer {
 	public final fun hashCode ()I
 	public final fun minus (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun plus (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
+	public final fun rem (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun times (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun toString ()Ljava/lang/String;
 	public final fun unaryMinus ()Lorg/kotools/types/Integer;

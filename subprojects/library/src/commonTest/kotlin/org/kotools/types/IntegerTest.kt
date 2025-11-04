@@ -278,6 +278,51 @@ class IntegerTest {
         assertEquals(expected, actual = result.message)
     }
 
+    @Test
+    fun remPassesWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.from(21)
+        val y: Integer = Integer.from(5)
+        // When
+        val result: Integer = x % y
+        // Then
+        assertEquals(expected = Integer.One, result)
+    }
+
+    @Test
+    fun remPassesWithOneInteger() {
+        // Given
+        val x: Integer = Integer.from(21)
+        val y: Integer = Integer.One
+        // When
+        val result: Integer = x % y
+        // Then
+        assertEquals(expected = Integer.Zero, result)
+    }
+
+    @Test
+    fun remPassesOnZeroIntegerAndWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.Zero
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer = x % y
+        // Then
+        assertEquals(expected = Integer.Zero, result)
+    }
+
+    @Test
+    fun remFailsWithZeroInteger() {
+        // Given
+        val x: Integer = Integer.from(21)
+        val y: Integer = Integer.Zero
+        // When
+        val result: IllegalArgumentException = assertFailsWith { x % y }
+        // Then
+        val expected: String = Integer.divisionByZeroError()
+        assertEquals(expected, result.message)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

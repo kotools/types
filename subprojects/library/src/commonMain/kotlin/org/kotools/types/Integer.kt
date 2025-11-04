@@ -6,6 +6,7 @@ import org.kotools.types.internal.Warning
 import org.kotools.types.internal.integerAddition
 import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
+import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
@@ -51,7 +52,8 @@ import kotlin.jvm.JvmSynthetic
  * `x != y`) and [`hashCode`][Integer.hashCode].
  * - **Arithmetic operations:** [`unaryMinus`][Integer.unaryMinus] (`-x`),
  * [`plus`][Integer.plus] (`x + y`), [`minus`][Integer.minus] (`x - y`),
- * [`times`][Integer.times] (`x * y`) and [`div`][Integer.div] (`x / y`).
+ * [`times`][Integer.times] (`x * y`), [`div`][Integer.div] (`x / y`) and
+ * [`rem`][Integer.rem] (`x % y`).
  * - **Conversions:** [`toString`][Integer.toString].
  * </details>
  */
@@ -289,6 +291,40 @@ public class Integer private constructor(private val decimal: String) {
         if (this == zero || other == One) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
+    }
+
+    /**
+     * Returns the remainder of dividing this integer by the [other] one, or
+     * throws an [IllegalArgumentException] if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.rem]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.rem]
+     * </details>
+     */
+    public operator fun rem(other: Integer): Integer {
+        val zero: Integer = Zero
+        require(other != zero, ::divisionByZeroError)
+        if (this == zero || other == One) return zero
+        val remainder: String = integerRemainder(x = "$this", y = "$other")
+        return fromDecimal(remainder)
     }
 
     // ------------------------------ Conversions ------------------------------
