@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
 ### ♻️ Changed
 
 - Improve [declarations lifecycle](documentation/declarations-lifecycle.md)
-  documentation ([1f9e8151a], [7a8e483f] and [fd2f9b28]).
+  documentation ([1f9e8151a], [7a8e483f], [fd2f9b28] and [7a1942ae1]).
 - Update [dependency compatibility](documentation/dependencies.md) documentation
   ([c60c84d4]).
 
@@ -71,6 +71,7 @@ All notable changes to this project will be documented in this file.
 [#880]: https://github.com/kotools/types/issues/880
 [1dacbdae2]: https://github.com/kotools/types/commit/1dacbdae2
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
+[7a1942ae1]: https://github.com/kotools/types/commit/7a1942ae1
 [7a8e483f]: https://github.com/kotools/types/commit/7a8e483f
 [c60c84d4]: https://github.com/kotools/types/commit/c60c84d4
 [e4df56bf8]: https://github.com/kotools/types/commit/e4df56bf8
