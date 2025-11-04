@@ -56,7 +56,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = x.plus(y);
         // Then
-        final Integer expected = Integer.parse("9223372036854775809");
+        final Integer expected = Integer.fromDecimal("9223372036854775809");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
@@ -69,7 +69,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = x.minus(y);
         // Then
-        final Integer expected = Integer.parse("-9223372036854775809");
+        final Integer expected = Integer.fromDecimal("-9223372036854775809");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
@@ -82,7 +82,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = x.times(y);
         // Then
-        final Integer expected = Integer.parse("92233720368547758070");
+        final Integer expected = Integer.fromDecimal("92233720368547758070");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
@@ -118,12 +118,12 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void parse() {
+    void fromDecimal() {
         // Given
         final long number = 123456L;
         final String text = String.valueOf(number);
         // When
-        final Integer result = Integer.parse(text);
+        final Integer result = Integer.fromDecimal(text);
         // Then
         final Integer expected = Integer.from(number);
         final boolean check = result.equals(expected);

@@ -44,7 +44,7 @@ import kotlin.jvm.JvmSynthetic
  * ### Declarations
  *
  * - **Instance creation:** [`from`][Integer.Companion.from],
- * [`parse`][Integer.Companion.parse] and
+ * [`fromDecimal`][Integer.Companion.fromDecimal] and
  * [`parseOrNull`][Integer.Companion.parseOrNull].
  * - **Structural equality operations:** [`equals`][Integer.equals] (`x == y`)
  * and [`hashCode`][Integer.hashCode].
@@ -149,10 +149,10 @@ public class Integer private constructor(private val decimal: String) {
         val isNegative: Boolean = this.decimal.startsWith('-')
         if (isNegative) {
             val text: String = this.decimal.removePrefix("-")
-            return parse(text)
+            return fromDecimal(text)
         }
         val text = "-${this.decimal}"
-        return parse(text)
+        return fromDecimal(text)
     }
 
     /**
@@ -185,7 +185,7 @@ public class Integer private constructor(private val decimal: String) {
         if (this == zero) return other
         if (other == zero) return this
         val sum: String = integerAddition(x = "$this", y = "$other")
-        return parse(sum)
+        return fromDecimal(sum)
     }
 
     /**
@@ -218,7 +218,7 @@ public class Integer private constructor(private val decimal: String) {
         if (this == zero) return -other
         if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
-        return parse(difference)
+        return fromDecimal(difference)
     }
 
     /**
@@ -253,7 +253,7 @@ public class Integer private constructor(private val decimal: String) {
         if (this == one) return other
         if (other == one) return this
         val product: String = integerMultiplication(x = "$this", y = "$other")
-        return parse(product)
+        return fromDecimal(product)
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -341,7 +341,7 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.parse]
+         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimal]
          * </details>
          *
          * <br>
@@ -352,7 +352,7 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.parse]
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.fromDecimal]
          * </details>
          * <br>
          *
@@ -360,7 +360,7 @@ public class Integer private constructor(private val decimal: String) {
          * throwing an exception in case of invalid [text].
          */
         @JvmStatic
-        public fun parse(text: String): Integer {
+        public fun fromDecimal(text: String): Integer {
             require(text.isNotBlank()) { "Integer should not be blank" }
             val textWithoutPlusSignPrefix: String = text.removePrefix("+")
             val unsignedText: String =
@@ -400,7 +400,7 @@ public class Integer private constructor(private val decimal: String) {
          * This function is not available from Java code, due to its
          * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
-         * See the [parse] function for throwing an exception instead of
+         * See the [fromDecimal] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
         @JvmSynthetic

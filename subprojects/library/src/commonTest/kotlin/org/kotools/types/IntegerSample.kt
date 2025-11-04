@@ -18,9 +18,9 @@ class IntegerSample {
     fun overflowSolution() {
         val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(2)
-        check(x + y == Integer.parse("9223372036854775809"))
-        check(-x - y == Integer.parse("-9223372036854775809"))
-        check(x * y == Integer.parse("18446744073709551614"))
+        check(x + y == Integer.fromDecimal("9223372036854775809"))
+        check(-x - y == Integer.fromDecimal("-9223372036854775809"))
+        check(x * y == Integer.fromDecimal("18446744073709551614"))
     }
 
     // -------------------- Structural equality operations ---------------------
@@ -72,7 +72,7 @@ class IntegerSample {
         // When
         val result: Integer = x + y
         // Then
-        val expected: Integer = Integer.parse("9223372036854775809")
+        val expected: Integer = Integer.fromDecimal("9223372036854775809")
         check(result == expected)
     }
 
@@ -84,7 +84,7 @@ class IntegerSample {
         // When
         val result: Integer = x - y
         // Then
-        val expected: Integer = Integer.parse("-9223372036854775809")
+        val expected: Integer = Integer.fromDecimal("-9223372036854775809")
         check(result == expected)
     }
 
@@ -96,7 +96,7 @@ class IntegerSample {
         // When
         val result: Integer = x * y
         // Then
-        val expected: Integer = Integer.parse("92233720368547758070")
+        val expected: Integer = Integer.fromDecimal("92233720368547758070")
         check(result == expected)
     }
 
@@ -126,11 +126,11 @@ class IntegerSample {
     }
 
     @Test
-    fun parse() {
+    fun fromDecimal() {
         // Given
         val number = 123456L
         // When
-        val result: Integer = Integer.parse("$number")
+        val result: Integer = Integer.fromDecimal("$number")
         // Then
         val expected: Integer = Integer.from(number)
         check(result == expected)

@@ -103,7 +103,7 @@ class IntegerTest {
         // When
         val result: Integer = x + y
         // Then
-        val expected: Integer = Integer.parse("18446744073709551614")
+        val expected: Integer = Integer.fromDecimal("18446744073709551614")
         assertEquals(expected, result)
     }
 
@@ -137,7 +137,7 @@ class IntegerTest {
         // When
         val result: Integer = x - y
         // Then
-        val expected: Integer = Integer.parse("-18446744073709551614")
+        val expected: Integer = Integer.fromDecimal("-18446744073709551614")
         assertEquals(expected, result)
     }
 
@@ -172,7 +172,7 @@ class IntegerTest {
         // When
         val result: Integer = x * y
         // Then
-        val expected: Integer = Integer.parse("9223372036854775807000")
+        val expected: Integer = Integer.fromDecimal("9223372036854775807000")
         assertEquals(expected, result)
     }
 
@@ -246,112 +246,112 @@ class IntegerTest {
     }
 
     @Test
-    fun parsePassesWithNonZeroDecimalString() {
+    fun fromDecimalPassesWithNonZeroDecimalString() {
         // Given
         val number = 123456L
         val text = "$number"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         val expected: Integer = Integer.from(number)
         assertEquals(expected, result)
     }
 
     @Test
-    fun parsePassesWithPlusSignedNonZeroDecimalString() {
+    fun fromDecimalPassesWithPlusSignedNonZeroDecimalString() {
         // Given
         val number = 123456L
         val text = "+$number"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         val expected: Integer = Integer.from(number)
         assertEquals(expected, result)
     }
 
     @Test
-    fun parsePassesWithMinusSignedNonZeroDecimalString() {
+    fun fromDecimalPassesWithMinusSignedNonZeroDecimalString() {
         // Given
         val number: Long = -123456L
         val text = "$number"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         val expected: Integer = Integer.from(number)
         assertEquals(expected, result)
     }
 
     @Test
-    fun parsePassesWithSingleZeroDecimalString() {
+    fun fromDecimalPassesWithSingleZeroDecimalString() {
         // Given
         val text = "0"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         assertEquals(expected = Integer.Zero, result)
     }
 
     @Test
-    fun parsePassesWithMultipleZerosDecimalString() {
+    fun fromDecimalPassesWithMultipleZerosDecimalString() {
         // Given
         val text = "000"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         assertEquals(expected = Integer.Zero, result)
     }
 
     @Test
-    fun parsePassesWithPlusSignedZeroDecimalString() {
+    fun fromDecimalPassesWithPlusSignedZeroDecimalString() {
         // Given
         val text = "+0"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         assertEquals(expected = Integer.Zero, result)
     }
 
     @Test
-    fun parsePassesWithMinusSignedZeroDecimalString() {
+    fun fromDecimalPassesWithMinusSignedZeroDecimalString() {
         // Given
         val text = "-0"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         assertEquals(expected = Integer.Zero, result)
     }
 
     @Test
-    fun parsePassesWithLeadingZerosInPositiveDecimalString() {
+    fun fromDecimalPassesWithLeadingZerosInPositiveDecimalString() {
         // Given
         val number = 123L
         val text = "000$number"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         val expected: Integer = Integer.from(number)
         assertEquals(expected, result)
     }
 
     @Test
-    fun parsePassesWithLeadingZerosInNegativeDecimalString() {
+    fun fromDecimalPassesWithLeadingZerosInNegativeDecimalString() {
         // Given
         val number = 123L
         val text = "-000$number"
         // When
-        val result: Integer = Integer.parse(text)
+        val result: Integer = Integer.fromDecimal(text)
         // Then
         val expected: Integer = Integer.from(-number)
         assertEquals(expected, result)
     }
 
     @Test
-    fun parseFailsWithBlankString() {
+    fun fromDecimalFailsWithBlankString() {
         // Given
         val text = " "
         // When
         val result: IllegalArgumentException = assertFailsWith {
-            Integer.parse(text)
+            Integer.fromDecimal(text)
         }
         // Then
         val expected = "Integer should not be blank"
@@ -359,12 +359,12 @@ class IntegerTest {
     }
 
     @Test
-    fun parseFailsWithPlusSignString() {
+    fun fromDecimalFailsWithPlusSignString() {
         // Given
         val text = "+"
         // When
         val result: IllegalArgumentException = assertFailsWith {
-            Integer.parse(text)
+            Integer.fromDecimal(text)
         }
         // Then
         val expected: String = Integer.syntaxErrorIn(text)
@@ -372,12 +372,12 @@ class IntegerTest {
     }
 
     @Test
-    fun parseFailsWithMinusSignString() {
+    fun fromDecimalFailsWithMinusSignString() {
         // Given
         val text = "-"
         // When
         val result: IllegalArgumentException = assertFailsWith {
-            Integer.parse(text)
+            Integer.fromDecimal(text)
         }
         // Then
         val expected: String = Integer.syntaxErrorIn(text)
@@ -385,12 +385,12 @@ class IntegerTest {
     }
 
     @Test
-    fun parseFailsWithNonDecimalString() {
+    fun fromDecimalFailsWithNonDecimalString() {
         // Given
         val text = "oops"
         // When
         val result: IllegalArgumentException = assertFailsWith {
-            Integer.parse(text)
+            Integer.fromDecimal(text)
         }
         // Then
         val expected: String = Integer.syntaxErrorIn(text)
