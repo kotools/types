@@ -45,7 +45,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * - **Instance creation:** [`from`][Integer.Companion.from],
  * [`fromDecimal`][Integer.Companion.fromDecimal] and
- * [`parseOrNull`][Integer.Companion.parseOrNull].
+ * [`fromDecimalOrNull`][Integer.Companion.fromDecimalOrNull].
  * - **Structural equality operations:** [`equals`][Integer.equals] (`x == y`)
  * and [`hashCode`][Integer.hashCode].
  * - **Arithmetic operations:** [`unaryMinus`][Integer.unaryMinus] (`-x`),
@@ -356,7 +356,7 @@ public class Integer private constructor(private val decimal: String) {
          * </details>
          * <br>
          *
-         * See the [parseOrNull] function for returning `null` instead of
+         * See the [fromDecimalOrNull] function for returning `null` instead of
          * throwing an exception in case of invalid [text].
          */
         @JvmStatic
@@ -393,7 +393,7 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.parseOrNull]
+         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimalOrNull]
          * </details>
          * <br>
          *
@@ -404,7 +404,7 @@ public class Integer private constructor(private val decimal: String) {
          * returning `null` in case of invalid [text].
          */
         @JvmSynthetic
-        public fun parseOrNull(text: String): Integer? {
+        public fun fromDecimalOrNull(text: String): Integer? {
             if (text.isBlank()) return null
             val textWithoutPlusSignPrefix: String = text.removePrefix("+")
             val unsignedText: String =

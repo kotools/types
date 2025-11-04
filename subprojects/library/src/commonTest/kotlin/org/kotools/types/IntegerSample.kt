@@ -137,11 +137,12 @@ class IntegerSample {
     }
 
     @Test
-    fun parseOrNull() {
+    fun fromDecimalOrNull() {
         // Given
         val number = 123456L
+        val text = "$number"
         // When
-        val result: Integer? = Integer.parseOrNull("$number")
+        val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
         val expected: Integer = Integer.from(number)
         check(result == expected)

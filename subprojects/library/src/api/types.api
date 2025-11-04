@@ -387,6 +387,6 @@ public final class org/kotools/types/Integer {
 public final class org/kotools/types/Integer$Companion {
 	public final fun from (J)Lorg/kotools/types/Integer;
 	public final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Integer;
-	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
+	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
 }
 
