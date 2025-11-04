@@ -50,6 +50,20 @@ class IntegerSample {
         check(result == expected)
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun compareTo() {
+        // Given
+        val x: Integer = Integer.fromDecimal("123")
+        val y: Integer = Integer.fromDecimal("123456")
+        // When
+        val result: Int = x.compareTo(y)
+        // Then
+        val expected: Int = "$x".compareTo("$y")
+        check(result == expected)
+    }
+
     // ------------------------- Arithmetic operations -------------------------
 
     @Test

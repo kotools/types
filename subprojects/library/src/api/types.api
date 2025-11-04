@@ -370,9 +370,11 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
-public final class org/kotools/types/Integer {
+public final class org/kotools/types/Integer : java/lang/Comparable {
 	public static final field Companion Lorg/kotools/types/Integer$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public final fun compareTo (Lorg/kotools/types/Integer;)I
 	public final fun div (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun from (J)Lorg/kotools/types/Integer;

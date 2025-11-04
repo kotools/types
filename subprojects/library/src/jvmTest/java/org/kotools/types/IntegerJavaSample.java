@@ -33,6 +33,22 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    void compareTo() {
+        // Given
+        final Integer x = Integer.fromDecimal("123");
+        final Integer y = Integer.fromDecimal("123456");
+        // When
+        final int result = x.compareTo(y);
+        // Then
+        final int expected = x.toString()
+                .compareTo(y.toString());
+        final boolean check = result == expected;
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------- Arithmetic operations -------------------------
 
     @Test

@@ -58,6 +58,20 @@ class IntegerTest {
         assertEquals(expected, result)
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun compareToDelegatesToStringsComparison() {
+        // Given
+        val x: Integer = Integer.fromDecimal("123")
+        val y: Integer = Integer.fromDecimal("-123456")
+        // When
+        val result: Int = x.compareTo(y)
+        // Then
+        val expected: Int = "$x".compareTo("$y")
+        assertEquals(expected, result)
+    }
+
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
