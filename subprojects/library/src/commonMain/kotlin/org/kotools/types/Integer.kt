@@ -60,7 +60,7 @@ import kotlin.jvm.JvmSynthetic
  * </details>
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class Integer private constructor(
     private val decimal: String
 ) : Comparable<Integer> {
