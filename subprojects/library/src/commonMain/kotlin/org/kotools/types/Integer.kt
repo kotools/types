@@ -23,8 +23,6 @@ import kotlin.jvm.JvmSynthetic
  *     <b>Motivations</b>
  * </summary>
  *
- * ### Overflow
- *
  * **Problem:** Adding, subtracting or multiplying Kotlin integer types ([Byte],
  * [Short], [Int] and [Long]) can lead to an overflow, which produces unexpected
  * behavior.
@@ -40,24 +38,25 @@ import kotlin.jvm.JvmSynthetic
  * <br>
  * <details>
  * <summary>
- *     <b>Declarations</b>
+ *     <b>Key features</b>
  * </summary>
  *
- * ### Declarations
+ * **Capabilities:**
  *
- * - **Instance creation:** [from][Integer.Companion.from],
- * [fromDecimal][Integer.Companion.fromDecimal],
- * [fromDecimalOrNull][Integer.Companion.fromDecimalOrNull] and
+ * - **Instance creation:** Create it from a [Long] number
+ * ([from][Integer.Companion.from]), from a decimal string
+ * ([fromDecimal][Integer.Companion.fromDecimal]), or use
  * [zero][Integer.Companion.zero].
- * - **Structural equality operations:** [equals][Integer.equals] (`x == y`,
- * `x != y`) and [hashCode][Integer.hashCode].
- * - **Comparisons:** [compareTo][Integer.compareTo] (`x > y`, `x >= y`,
- * `x < y`, `x <= y`).
- * - **Arithmetic operations:** [unaryMinus][Integer.unaryMinus] (`-x`),
- * [plus][Integer.plus] (`x + y`), [minus][Integer.minus] (`x - y`),
- * [times][Integer.times] (`x * y`), [div][Integer.div] (`x / y`) and
- * [rem][Integer.rem] (`x % y`).
- * - **Conversions:** [toString][Integer.toString].
+ * - **Comparisons:** Compare integers using
+ * [structural equality][Integer.equals] (`x == y`, `x != y`) and
+ * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
+ * operators.
+ * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
+ * [subtract][Integer.minus] (`x - y`), [multiply][Integer.times] (`x * y`),
+ * [divide][Integer.div] (`x / y`), compute [remainders][Integer.rem]
+ * (`x % y`) and [negate][Integer.unaryMinus] (`-x`) integers without overflow.
+ * - **Conversions:** Convert to its [decimal string][Integer.toString]
+ * representation.
  * </details>
  */
 @ExperimentalKotoolsTypesApi
