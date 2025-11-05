@@ -404,7 +404,7 @@ public class Integer private constructor(
         internal val One: Integer get() = this.from(1)
 
         /**
-         * Creates an instance of [Integer] from the specified [number].
+         * Creates an [Integer] from the specified [number].
          *
          * <br>
          * <details>
@@ -432,8 +432,8 @@ public class Integer private constructor(
         public fun from(number: Long): Integer = Integer("$number")
 
         /**
-         * Creates an instance of [Integer] from the specified [text], or throws
-         * an [IllegalArgumentException] if the [text] doesn't represent an
+         * Creates an [Integer] from the specified [text], or throws an
+         * [IllegalArgumentException] if the [text] doesn't represent an
          * integer.
          *
          * The [text] parameter must only contain an optional plus sign (`+`) or
@@ -488,8 +488,8 @@ public class Integer private constructor(
         }
 
         /**
-         * Creates an instance of [Integer] from the specified [text], or
-         * returns `null` if the [text] doesn't represent an integer.
+         * Creates an [Integer] from the specified [text], or returns `null` if
+         * the [text] doesn't represent an integer.
          *
          * The [text] parameter must only contain an optional plus sign (`+`) or
          * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
@@ -532,7 +532,7 @@ public class Integer private constructor(
         }
 
         /**
-         * Returns the [Integer] representing the number zero.
+         * Creates an [Integer] representing the number zero.
          *
          * <br>
          * <details>
