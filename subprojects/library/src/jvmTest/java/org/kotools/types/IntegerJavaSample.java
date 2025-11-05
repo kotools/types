@@ -147,6 +147,16 @@ public class IntegerJavaSample {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
+    void zero() {
+        // When
+        final Integer result = Integer.Zero();
+        // Then
+        final Integer expected = Integer.from(0);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void from() {
         // Given
         final long number = 9223372036854775807L;

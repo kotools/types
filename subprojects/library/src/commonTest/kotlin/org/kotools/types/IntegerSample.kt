@@ -154,6 +154,15 @@ class IntegerSample {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
+    fun zero() {
+        // When
+        val result: Integer = Integer.Zero
+        // Then
+        val expected: Integer = Integer.from(0)
+        check(result == expected)
+    }
+
+    @Test
     fun from() {
         // Given
         val number = 9223372036854775807
