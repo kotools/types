@@ -288,8 +288,8 @@ class IntegerTest {
         // When
         val result: IllegalArgumentException = assertFailsWith { x / y }
         // Then
-        val expected: String = Integer.divisionByZeroError()
-        assertEquals(expected, actual = result.message)
+        val expected = "Integer can't be divided by zero."
+        assertEquals(expected, result.message)
     }
 
     @Test
@@ -333,7 +333,7 @@ class IntegerTest {
         // When
         val result: IllegalArgumentException = assertFailsWith { x % y }
         // Then
-        val expected: String = Integer.divisionByZeroError()
+        val expected = "Integer can't be divided by zero."
         assertEquals(expected, result.message)
     }
 
@@ -471,7 +471,7 @@ class IntegerTest {
             Integer.fromDecimal(text)
         }
         // Then
-        val expected: String = Integer.blankError()
+        val expected = "Integer can't be blank."
         assertEquals(expected, result.message)
     }
 
@@ -484,7 +484,8 @@ class IntegerTest {
             Integer.fromDecimal(text)
         }
         // Then
-        val expected: String = Integer.syntaxErrorIn(text)
+        val expected: String = "Integer can only contain an optional + or - " +
+                "sign, followed by a sequence of digits (was: $text)."
         assertEquals(expected, result.message)
     }
 
@@ -497,7 +498,8 @@ class IntegerTest {
             Integer.fromDecimal(text)
         }
         // Then
-        val expected: String = Integer.syntaxErrorIn(text)
+        val expected: String = "Integer can only contain an optional + or - " +
+                "sign, followed by a sequence of digits (was: $text)."
         assertEquals(expected, result.message)
     }
 
@@ -510,7 +512,8 @@ class IntegerTest {
             Integer.fromDecimal(text)
         }
         // Then
-        val expected: String = Integer.syntaxErrorIn(text)
+        val expected: String = "Integer can only contain an optional + or - " +
+                "sign, followed by a sequence of digits (was: $text)."
         assertEquals(expected, result.message)
     }
 

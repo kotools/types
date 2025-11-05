@@ -323,7 +323,7 @@ public class Integer private constructor(
      */
     public operator fun div(other: Integer): Integer {
         val zero: Integer = Zero
-        require(other != zero, ::divisionByZeroError)
+        require(other != zero) { "Integer can't be divided by zero." }
         if (this == zero || other == One) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
@@ -357,7 +357,7 @@ public class Integer private constructor(
      */
     public operator fun rem(other: Integer): Integer {
         val zero: Integer = Zero
-        require(other != zero, ::divisionByZeroError)
+        require(other != zero) { "Integer can't be divided by zero." }
         if (this == zero || other == One) return zero
         val remainder: String = integerRemainder(x = "$this", y = "$other")
         return fromDecimal(remainder)
@@ -468,13 +468,16 @@ public class Integer private constructor(
          */
         @JvmStatic
         public fun fromDecimal(text: String): Integer {
-            require(text.isNotBlank(), this::blankError)
+            require(text.isNotBlank()) { "Integer can't be blank." }
             val textWithoutPlusSignPrefix: String = text.removePrefix("+")
             val unsignedText: String =
                 textWithoutPlusSignPrefix.removePrefix("-")
             val isDecimal: Boolean =
                 unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            require(isDecimal) { this.syntaxErrorIn(text) }
+            require(isDecimal) {
+                "Integer can only contain an optional + or - sign, followed " +
+                        "by a sequence of digits (was: $text)."
+            }
             val isZero: Boolean = unsignedText.all { it == '0' }
             if (isZero) return Zero
             val sign: String =
@@ -527,17 +530,5 @@ public class Integer private constructor(
             val digits: String = unsignedText.trimStart('0')
             return Integer(decimal = "$sign$digits")
         }
-
-        @JvmSynthetic
-        internal fun blankError(): String = "Integer can't be blank."
-
-        @JvmSynthetic
-        internal fun divisionByZeroError(): String =
-            "Integer can't be divided by zero."
-
-        @JvmSynthetic
-        internal fun syntaxErrorIn(text: String): String = "Integer can only " +
-                "contain an optional + or - sign, followed by a sequence of " +
-                "digits (was: $text)."
     }
 }
