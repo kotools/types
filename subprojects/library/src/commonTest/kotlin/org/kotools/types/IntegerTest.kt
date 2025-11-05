@@ -215,7 +215,7 @@ class IntegerTest {
     @Test
     fun timesPassesWithOneAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.One
+        val x: Integer = Integer.one()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x * y
@@ -227,7 +227,7 @@ class IntegerTest {
     fun timesPassesWithNonZeroAndOneIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.One
+        val y: Integer = Integer.one()
         // When
         val result: Integer = x * y
         // Then
@@ -262,7 +262,7 @@ class IntegerTest {
     fun divPassesWithOneInteger() {
         // Given
         val x: Integer = Integer.from(12)
-        val y: Integer = Integer.One
+        val y: Integer = Integer.one()
         // When
         val result: Integer = x / y
         // Then
@@ -300,14 +300,15 @@ class IntegerTest {
         // When
         val result: Integer = x % y
         // Then
-        assertEquals(expected = Integer.One, result)
+        val expected: Integer = Integer.one()
+        assertEquals(expected, result)
     }
 
     @Test
     fun remPassesWithOneInteger() {
         // Given
         val x: Integer = Integer.from(21)
-        val y: Integer = Integer.One
+        val y: Integer = Integer.one()
         // When
         val result: Integer = x % y
         // Then
@@ -672,6 +673,15 @@ class IntegerTest {
         val result: Integer = Integer.zero()
         // Then
         val expected: Integer = Integer.from(0)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun one() {
+        // When
+        val result: Integer = Integer.one()
+        // Then
+        val expected: Integer = Integer.from(1)
         assertEquals(expected, result)
     }
 }

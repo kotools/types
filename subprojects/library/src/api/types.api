@@ -381,6 +381,7 @@ public final class org/kotools/types/Integer : java/lang/Comparable {
 	public static final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Integer;
 	public final fun hashCode ()I
 	public final fun minus (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
+	public static final fun one ()Lorg/kotools/types/Integer;
 	public final fun plus (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun rem (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun times (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
@@ -393,6 +394,7 @@ public final class org/kotools/types/Integer$Companion {
 	public final fun from (J)Lorg/kotools/types/Integer;
 	public final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Integer;
 	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
+	public final fun one ()Lorg/kotools/types/Integer;
 	public final fun zero ()Lorg/kotools/types/Integer;
 }
 

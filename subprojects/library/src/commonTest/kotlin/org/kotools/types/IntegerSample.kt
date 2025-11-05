@@ -195,4 +195,13 @@ class IntegerSample {
         val expected: Integer = Integer.from(0)
         check(result == expected)
     }
+
+    @Test
+    fun one() {
+        // When
+        val result: Integer = Integer.one()
+        // Then
+        val expected: Integer = Integer.from(1)
+        check(result == expected)
+    }
 }
