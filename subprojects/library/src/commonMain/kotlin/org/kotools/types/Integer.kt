@@ -297,7 +297,8 @@ public class Integer private constructor(
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
-     * throws an [IllegalArgumentException] if the [other] integer is zero.
+     * throws an [IllegalArgumentException] if the [other] integer represents
+     * the number zero.
      *
      * <br>
      * <details>
@@ -331,7 +332,8 @@ public class Integer private constructor(
 
     /**
      * Returns the remainder of dividing this integer by the [other] one, or
-     * throws an [IllegalArgumentException] if the [other] integer is zero.
+     * throws an [IllegalArgumentException] if the [other] integer represents
+     * the number zero.
      *
      * <br>
      * <details>
