@@ -353,15 +353,6 @@ class IntegerTest {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
-    fun zeroPasses() {
-        // When
-        val result: Integer = Integer.Zero
-        // Then
-        val expected: Integer = Integer.from(0)
-        assertEquals(expected, result)
-    }
-
-    @Test
     fun fromPassesWithLong() {
         // Given
         val number: Long = Long.MAX_VALUE

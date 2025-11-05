@@ -8,7 +8,6 @@ import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
-import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -46,9 +45,9 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Declarations
  *
- * - **Instance creation:** [Zero][Integer.Companion.Zero],
- * [from][Integer.Companion.from], [fromDecimal][Integer.Companion.fromDecimal]
- * and [fromDecimalOrNull][Integer.Companion.fromDecimalOrNull].
+ * - **Instance creation:** [from][Integer.Companion.from],
+ * [fromDecimal][Integer.Companion.fromDecimal] and
+ * [fromDecimalOrNull][Integer.Companion.fromDecimalOrNull].
  * - **Structural equality operations:** [equals][Integer.equals] (`x == y`,
  * `x != y`) and [hashCode][Integer.hashCode].
  * - **Comparisons:** [compareTo][Integer.compareTo] (`x > y`, `x >= y`,
@@ -398,36 +397,8 @@ public class Integer private constructor(
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
-        /**
-         * Creates an instance of [Integer] with the zero number.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this property from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerSample.zero]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * The Java static method generated from this property is named `Zero`.
-         *
-         * Here's an example of calling this property from Java code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.zero]
-         * </details>
-         */
-        @JvmStatic
-        @get:JvmName("Zero")
-        public val Zero: Integer get() = this.from(0)
+        @get:JvmSynthetic
+        internal val Zero: Integer get() = this.from(0)
 
         @get:JvmSynthetic
         internal val One: Integer get() = this.from(1)

@@ -373,7 +373,6 @@ public abstract interface annotation class org/kotools/types/ExperimentalKotools
 public final class org/kotools/types/Integer : java/lang/Comparable {
 	public static final field Companion Lorg/kotools/types/Integer$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun Zero ()Lorg/kotools/types/Integer;
 	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public final fun compareTo (Lorg/kotools/types/Integer;)I
 	public final fun div (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
@@ -390,7 +389,6 @@ public final class org/kotools/types/Integer : java/lang/Comparable {
 }
 
 public final class org/kotools/types/Integer$Companion {
-	public final fun Zero ()Lorg/kotools/types/Integer;
 	public final fun from (J)Lorg/kotools/types/Integer;
 	public final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Integer;
 	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
