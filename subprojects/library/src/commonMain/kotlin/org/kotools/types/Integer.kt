@@ -370,7 +370,7 @@ public class Integer private constructor(
     // ------------------------------ Conversions ------------------------------
 
     /**
-     * Returns the programming-level string representation of this integer.
+     * Returns the decimal string representation of this integer.
      *
      * <br>
      * <details>
