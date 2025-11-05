@@ -12,7 +12,7 @@ class IntegerTest {
     // -------------------- Structural equality operations ---------------------
 
     @Test
-    fun equalsPassesWithIntegerHavingSameValue() {
+    fun equalsWithIntegerHavingSameValue() {
         // Given
         val number: Long = Long.MAX_VALUE
         val integer: Integer = Integer.from(number)
@@ -24,7 +24,7 @@ class IntegerTest {
     }
 
     @Test
-    fun equalsFailsWithAnotherTypeThanInteger() {
+    fun equalsWithAnotherTypeThanInteger() {
         // Given
         val number: Long = Long.MAX_VALUE
         val integer: Integer = Integer.from(number)
@@ -35,7 +35,7 @@ class IntegerTest {
     }
 
     @Test
-    fun equalsFailsWithIntegerHavingAnotherValue() {
+    fun equalsWithIntegerHavingAnotherValue() {
         // Given
         val integer: Integer = Integer.from(Long.MAX_VALUE)
         val other: Integer = Integer.from(Long.MIN_VALUE)
@@ -46,7 +46,7 @@ class IntegerTest {
     }
 
     @Test
-    fun hashCodeReturnsSameValueForIntegersThatAreEqual() {
+    fun hashCodeReturnsSameValueForEqualIntegers() {
         // Given
         val number: Long = Long.MAX_VALUE
         val integer: Integer = Integer.from(number)
@@ -61,7 +61,7 @@ class IntegerTest {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun compareToDelegatesToStringsComparison() {
+    fun compareTo() {
         // Given
         val x: Integer = Integer.fromDecimal("123")
         val y: Integer = Integer.fromDecimal("-123456")
@@ -75,7 +75,7 @@ class IntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
-    fun unaryMinusPassesOnZeroInteger() {
+    fun unaryMinusOnZeroInteger() {
         // Given
         val x: Integer = Integer.zero()
         // When
@@ -85,7 +85,7 @@ class IntegerTest {
     }
 
     @Test
-    fun unaryMinusPassesOnPositiveInteger() {
+    fun unaryMinusOnPositiveInteger() {
         // Given
         val number = 123456L
         val x: Integer = Integer.from(number)
@@ -97,7 +97,7 @@ class IntegerTest {
     }
 
     @Test
-    fun unaryMinusPassesOnNegativeInteger() {
+    fun unaryMinusOnNegativeInteger() {
         // Given
         val number = 123456L
         val x: Integer = Integer.from(-number)
@@ -109,7 +109,7 @@ class IntegerTest {
     }
 
     @Test
-    fun plusPassesWithNonZeroIntegers() {
+    fun plusWithNonZeroIntegers() {
         // Given
         val number = 9223372036854775807
         val x: Integer = Integer.from(number)
@@ -122,7 +122,7 @@ class IntegerTest {
     }
 
     @Test
-    fun plusPassesWithZeroAndNonZeroIntegers() {
+    fun plusWithZeroAndNonZeroIntegers() {
         // Given
         val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
@@ -133,7 +133,7 @@ class IntegerTest {
     }
 
     @Test
-    fun plusPassesWithNonZeroAndZeroIntegers() {
+    fun plusWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
         val y: Integer = Integer.zero()
@@ -144,7 +144,7 @@ class IntegerTest {
     }
 
     @Test
-    fun minusPassesWithNonZeroIntegers() {
+    fun minusWithNonZeroIntegers() {
         // Given
         val x: Integer = Integer.from(-9223372036854775807)
         val y: Integer = Integer.from(9223372036854775807)
@@ -156,7 +156,7 @@ class IntegerTest {
     }
 
     @Test
-    fun minusPassesWithZeroAndNonZeroIntegers() {
+    fun minusWithZeroAndNonZeroIntegers() {
         // Given
         val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
@@ -168,7 +168,7 @@ class IntegerTest {
     }
 
     @Test
-    fun minusPassesWithNonZeroAndZeroIntegers() {
+    fun minusWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
         val y: Integer = Integer.zero()
@@ -179,7 +179,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesPassesWithNonZeroIntegers() {
+    fun timesWithNonZeroIntegers() {
         // Given
         val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(1000)
@@ -191,7 +191,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesPassesWithZeroAndNonZeroIntegers() {
+    fun timesWithZeroAndNonZeroIntegers() {
         // Given
         val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
@@ -202,7 +202,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesPassesWithNonZeroAndZeroIntegers() {
+    fun timesWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
         val y: Integer = Integer.zero()
@@ -213,7 +213,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesPassesWithOneAndNonZeroIntegers() {
+    fun timesWithOneAndNonZeroIntegers() {
         // Given
         val x: Integer = Integer.one()
         val y: Integer = Integer.from(123)
@@ -224,7 +224,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesPassesWithNonZeroAndOneIntegers() {
+    fun timesWithNonZeroAndOneIntegers() {
         // Given
         val x: Integer = Integer.from(123)
         val y: Integer = Integer.one()
@@ -235,7 +235,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divPassesWithNonZeroIntegerProducingInteger() {
+    fun divWithNonZeroIntegerProducingInteger() {
         // Given
         val x: Integer = Integer.from(12)
         val y: Integer = Integer.from(3)
@@ -247,7 +247,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divPassesWithNonZeroIntegerProducingFloatingPointNumber() {
+    fun divWithNonZeroIntegerProducingFloatingPointNumber() {
         // Given
         val x: Integer = Integer.from(12)
         val y: Integer = Integer.from(5)
@@ -259,7 +259,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divPassesWithOneInteger() {
+    fun divWithOneInteger() {
         // Given
         val x: Integer = Integer.from(12)
         val y: Integer = Integer.one()
@@ -270,7 +270,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divPassesOnZeroIntegerAndWithNonZeroInteger() {
+    fun divOnZeroIntegerAndWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.zero()
         val y: Integer = Integer.from(3)
@@ -281,7 +281,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divFailsWithZeroInteger() {
+    fun divWithZeroInteger() {
         // Given
         val x: Integer = Integer.from(12)
         val y: Integer = Integer.zero()
@@ -293,7 +293,7 @@ class IntegerTest {
     }
 
     @Test
-    fun remPassesWithNonZeroInteger() {
+    fun remWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(21)
         val y: Integer = Integer.from(5)
@@ -305,7 +305,7 @@ class IntegerTest {
     }
 
     @Test
-    fun remPassesWithOneInteger() {
+    fun remWithOneInteger() {
         // Given
         val x: Integer = Integer.from(21)
         val y: Integer = Integer.one()
@@ -317,7 +317,7 @@ class IntegerTest {
     }
 
     @Test
-    fun remPassesOnZeroIntegerAndWithNonZeroInteger() {
+    fun remOnZeroIntegerAndWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.zero()
         val y: Integer = Integer.from(2)
@@ -328,7 +328,7 @@ class IntegerTest {
     }
 
     @Test
-    fun remFailsWithZeroInteger() {
+    fun remWithZeroInteger() {
         // Given
         val x: Integer = Integer.from(21)
         val y: Integer = Integer.zero()
@@ -342,7 +342,7 @@ class IntegerTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    fun toStringPasses() {
+    fun toStringReturnsDecimalString() {
         // Given
         val number: Long = Long.MAX_VALUE
         val integer: Integer = Integer.from(number)
@@ -355,7 +355,7 @@ class IntegerTest {
     // ----------------------- Class-level declarations ------------------------
 
     @Test
-    fun fromPassesWithLong() {
+    fun from() {
         // Given
         val number: Long = Long.MAX_VALUE
         // When
@@ -365,7 +365,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithNonZeroDecimalString() {
+    fun fromDecimalWithNonZeroDecimalString() {
         // Given
         val number = 123456L
         val text = "$number"
@@ -377,7 +377,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithPlusSignedNonZeroDecimalString() {
+    fun fromDecimalWithPlusSignedNonZeroDecimalString() {
         // Given
         val number = 123456L
         val text = "+$number"
@@ -389,7 +389,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithMinusSignedNonZeroDecimalString() {
+    fun fromDecimalWithMinusSignedNonZeroDecimalString() {
         // Given
         val number: Long = -123456L
         val text = "$number"
@@ -401,7 +401,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithSingleZeroDecimalString() {
+    fun fromDecimalWithSingleZeroDecimalString() {
         // Given
         val text = "0"
         // When
@@ -412,7 +412,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithMultipleZerosDecimalString() {
+    fun fromDecimalWithMultipleZerosDecimalString() {
         // Given
         val text = "000"
         // When
@@ -423,7 +423,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithPlusSignedZeroDecimalString() {
+    fun fromDecimalWithPlusSignedZeroDecimalString() {
         // Given
         val text = "+0"
         // When
@@ -434,7 +434,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithMinusSignedZeroDecimalString() {
+    fun fromDecimalWithMinusSignedZeroDecimalString() {
         // Given
         val text = "-0"
         // When
@@ -445,7 +445,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithLeadingZerosInPositiveDecimalString() {
+    fun fromDecimalWithLeadingZerosInPositiveDecimalString() {
         // Given
         val number = 123L
         val text = "000$number"
@@ -457,7 +457,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalPassesWithLeadingZerosInNegativeDecimalString() {
+    fun fromDecimalWithLeadingZerosInNegativeDecimalString() {
         // Given
         val number = 123L
         val text = "-000$number"
@@ -469,7 +469,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalFailsWithBlankString() {
+    fun fromDecimalWithBlankString() {
         // Given
         val text = " "
         // When
@@ -482,7 +482,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalFailsWithPlusSignString() {
+    fun fromDecimalWithPlusSignString() {
         // Given
         val text = "+"
         // When
@@ -496,7 +496,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalFailsWithMinusSignString() {
+    fun fromDecimalWithMinusSignString() {
         // Given
         val text = "-"
         // When
@@ -510,7 +510,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalFailsWithNonDecimalString() {
+    fun fromDecimalWithNonDecimalString() {
         // Given
         val text = "oops"
         // When
@@ -524,7 +524,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithNonZeroDecimalString() {
+    fun fromDecimalOrNullWithNonZeroDecimalString() {
         // Given
         val number = 123456L
         val text = "$number"
@@ -536,7 +536,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithPlusSignedNonZeroDecimalString() {
+    fun fromDecimalOrNullWithPlusSignedNonZeroDecimalString() {
         // Given
         val number = 123456L
         val text = "+$number"
@@ -548,7 +548,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithMinusSignedNonZeroDecimalString() {
+    fun fromDecimalOrNullWithMinusSignedNonZeroDecimalString() {
         // Given
         val number: Long = -123456L
         val text = "$number"
@@ -560,7 +560,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithSingleZeroDecimalString() {
+    fun fromDecimalOrNullWithSingleZeroDecimalString() {
         // Given
         val text = "0"
         // When
@@ -571,7 +571,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithMultipleZerosDecimalString() {
+    fun fromDecimalOrNullWithMultipleZerosDecimalString() {
         // Given
         val text = "000"
         // When
@@ -582,7 +582,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithPlusSignedZeroDecimalString() {
+    fun fromDecimalOrNullWithPlusSignedZeroDecimalString() {
         // Given
         val text = "+0"
         // When
@@ -593,7 +593,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithMinusSignedZeroDecimalString() {
+    fun fromDecimalOrNullWithMinusSignedZeroDecimalString() {
         // Given
         val text = "-0"
         // When
@@ -604,7 +604,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithLeadingZerosInPositiveDecimalString() {
+    fun fromDecimalOrNullWithLeadingZerosInPositiveDecimalString() {
         // Given
         val number = 123L
         val text = "000$number"
@@ -616,7 +616,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullPassesWithLeadingZerosInNegativeDecimalString() {
+    fun fromDecimalOrNullWithLeadingZerosInNegativeDecimalString() {
         // Given
         val number = 123L
         val text = "-000$number"
@@ -628,7 +628,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullFailsWithBlankString() {
+    fun fromDecimalOrNullWithBlankString() {
         // Given
         val text = "  "
         // When
@@ -638,7 +638,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullFailsWithPlusSignString() {
+    fun fromDecimalOrNullWithPlusSignString() {
         // Given
         val text = "+"
         // When
@@ -648,7 +648,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullFailsWithMinusSignString() {
+    fun fromDecimalOrNullWithMinusSignString() {
         // Given
         val text = "-"
         // When
@@ -658,7 +658,7 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalOrNullFailsWithNonDecimalString() {
+    fun fromDecimalOrNullWithNonDecimalString() {
         // Given
         val text = "oops"
         // When
