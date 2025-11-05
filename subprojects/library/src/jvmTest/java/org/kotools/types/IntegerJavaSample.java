@@ -5,7 +5,7 @@ import org.kotools.types.internal.Warning;
 
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class IntegerJavaSample {
-    // -------------------- Structural equality operations ---------------------
+    // ------------------------------ Comparisons ------------------------------
 
     @Test
     void equalsOverride() {
@@ -32,8 +32,6 @@ public class IntegerJavaSample {
         final boolean check = result == expected;
         if (!check) throw new IllegalStateException("Check failed.");
     }
-
-    // ------------------------------ Comparisons ------------------------------
 
     @Test
     void compareTo() {

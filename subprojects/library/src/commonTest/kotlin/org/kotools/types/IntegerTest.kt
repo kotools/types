@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
-    // -------------------- Structural equality operations ---------------------
+    // ------------------------------ Comparisons ------------------------------
 
     @Test
     fun equalsWithIntegerHavingSameValue() {
@@ -57,8 +57,6 @@ class IntegerTest {
             .hashCode()
         assertEquals(expected, result)
     }
-
-    // ------------------------------ Comparisons ------------------------------
 
     @Test
     fun compareTo() {

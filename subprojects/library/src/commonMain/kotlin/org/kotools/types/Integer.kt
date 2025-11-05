@@ -64,7 +64,7 @@ import kotlin.jvm.JvmSynthetic
 public class Integer private constructor(
     private val decimal: String
 ) : Comparable<Integer> {
-    // -------------------- Structural equality operations ---------------------
+    // ------------------------------ Comparisons ------------------------------
 
     /**
      * Returns `true` if the [other] object is an instance of [Integer] with the
@@ -123,8 +123,6 @@ public class Integer private constructor(
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = this.decimal.hashCode()
-
-    // ------------------------------ Comparisons ------------------------------
 
     /**
      * Compares this integer with the [other] one for order.

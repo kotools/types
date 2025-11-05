@@ -23,7 +23,7 @@ class IntegerSample {
         check(x * y == Integer.fromDecimal("18446744073709551614"))
     }
 
-    // -------------------- Structural equality operations ---------------------
+    // ------------------------------ Comparisons ------------------------------
 
     @Test
     fun equalsOverride() {
@@ -49,8 +49,6 @@ class IntegerSample {
             .hashCode()
         check(result == expected)
     }
-
-    // ------------------------------ Comparisons ------------------------------
 
     @Test
     fun compareTo() {
