@@ -128,6 +128,7 @@ public class Integer private constructor(
     // ------------------------------ Comparisons ------------------------------
 
     /**
+     * Compares this integer with the [other] one for order.
      * Returns a negative number, zero, or a positive number as this integer is
      * less than, equal to, or greater than the [other] one.
      *
