@@ -6,6 +6,9 @@ public enum class KotoolsTypesVersion {
     /** Not yet released version. */
     Unreleased,
 
+    /** Version 5.1.0. */
+    V5_1_0,
+
     /** Version 5.0.1. */
     V5_0_1,
 
