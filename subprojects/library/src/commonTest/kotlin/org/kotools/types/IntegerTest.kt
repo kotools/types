@@ -77,7 +77,7 @@ class IntegerTest {
     @Test
     fun unaryMinusPassesOnZeroInteger() {
         // Given
-        val x: Integer = Integer.Zero
+        val x: Integer = Integer.zero()
         // When
         val result: Integer = -x
         // Then
@@ -124,7 +124,7 @@ class IntegerTest {
     @Test
     fun plusPassesWithZeroAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.Zero
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x + y
@@ -136,7 +136,7 @@ class IntegerTest {
     fun plusPassesWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.Zero
+        val y: Integer = Integer.zero()
         // When
         val result: Integer = x + y
         // Then
@@ -158,7 +158,7 @@ class IntegerTest {
     @Test
     fun minusPassesWithZeroAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.Zero
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x - y
@@ -171,7 +171,7 @@ class IntegerTest {
     fun minusPassesWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.Zero
+        val y: Integer = Integer.zero()
         // When
         val result: Integer = x - y
         // Then
@@ -193,7 +193,7 @@ class IntegerTest {
     @Test
     fun timesPassesWithZeroAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.Zero
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x * y
@@ -205,7 +205,7 @@ class IntegerTest {
     fun timesPassesWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.Zero
+        val y: Integer = Integer.zero()
         // When
         val result: Integer = x * y
         // Then
@@ -272,7 +272,7 @@ class IntegerTest {
     @Test
     fun divPassesOnZeroIntegerAndWithNonZeroInteger() {
         // Given
-        val x: Integer = Integer.Zero
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(3)
         // When
         val result: Integer = x / y
@@ -284,7 +284,7 @@ class IntegerTest {
     fun divFailsWithZeroInteger() {
         // Given
         val x: Integer = Integer.from(12)
-        val y: Integer = Integer.Zero
+        val y: Integer = Integer.zero()
         // When
         val result: IllegalArgumentException = assertFailsWith { x / y }
         // Then
@@ -311,25 +311,26 @@ class IntegerTest {
         // When
         val result: Integer = x % y
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
     fun remPassesOnZeroIntegerAndWithNonZeroInteger() {
         // Given
-        val x: Integer = Integer.Zero
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(2)
         // When
         val result: Integer = x % y
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        assertEquals(expected = x, result)
     }
 
     @Test
     fun remFailsWithZeroInteger() {
         // Given
         val x: Integer = Integer.from(21)
-        val y: Integer = Integer.Zero
+        val y: Integer = Integer.zero()
         // When
         val result: IllegalArgumentException = assertFailsWith { x % y }
         // Then
@@ -405,7 +406,8 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -415,7 +417,8 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -425,7 +428,8 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -435,7 +439,8 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -560,7 +565,8 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -570,7 +576,8 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -580,7 +587,8 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -590,7 +598,8 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        assertEquals(expected = Integer.Zero, result)
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -655,5 +664,14 @@ class IntegerTest {
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
         assertNull(result)
+    }
+
+    @Test
+    fun zero() {
+        // When
+        val result: Integer = Integer.zero()
+        // Then
+        val expected: Integer = Integer.from(0)
+        assertEquals(expected, result)
     }
 }

@@ -46,8 +46,9 @@ import kotlin.jvm.JvmSynthetic
  * ### Declarations
  *
  * - **Instance creation:** [from][Integer.Companion.from],
- * [fromDecimal][Integer.Companion.fromDecimal] and
- * [fromDecimalOrNull][Integer.Companion.fromDecimalOrNull].
+ * [fromDecimal][Integer.Companion.fromDecimal],
+ * [fromDecimalOrNull][Integer.Companion.fromDecimalOrNull] and
+ * [zero][Integer.Companion.zero].
  * - **Structural equality operations:** [equals][Integer.equals] (`x == y`,
  * `x != y`) and [hashCode][Integer.hashCode].
  * - **Comparisons:** [compareTo][Integer.compareTo] (`x > y`, `x >= y`,
@@ -184,7 +185,7 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun unaryMinus(): Integer {
-        if (this == Zero) return this
+        if (this == zero()) return this
         val isNegative: Boolean = this.decimal.startsWith('-')
         if (isNegative) {
             val text: String = this.decimal.removePrefix("-")
@@ -220,7 +221,7 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        val zero: Integer = Zero
+        val zero: Integer = zero()
         if (this == zero) return other
         if (other == zero) return this
         val sum: String = integerAddition(x = "$this", y = "$other")
@@ -253,7 +254,7 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        val zero: Integer = Zero
+        val zero: Integer = zero()
         if (this == zero) return -other
         if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
@@ -286,7 +287,7 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun times(other: Integer): Integer {
-        val zero: Integer = Zero
+        val zero: Integer = zero()
         if (this == zero || other == zero) return zero
         val one: Integer = One
         if (this == one) return other
@@ -323,7 +324,7 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun div(other: Integer): Integer {
-        val zero: Integer = Zero
+        val zero: Integer = zero()
         require(other != zero) { "Integer can't be divided by zero." }
         if (this == zero || other == One) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
@@ -358,7 +359,7 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun rem(other: Integer): Integer {
-        val zero: Integer = Zero
+        val zero: Integer = zero()
         require(other != zero) { "Integer can't be divided by zero." }
         if (this == zero || other == One) return zero
         val remainder: String = integerRemainder(x = "$this", y = "$other")
@@ -399,9 +400,6 @@ public class Integer private constructor(
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
-        @get:JvmSynthetic
-        internal val Zero: Integer get() = this.from(0)
-
         @get:JvmSynthetic
         internal val One: Integer get() = this.from(1)
 
@@ -481,7 +479,7 @@ public class Integer private constructor(
                         "by a sequence of digits (was: $text)."
             }
             val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return Zero
+            if (isZero) return this.zero()
             val sign: String =
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
@@ -525,12 +523,40 @@ public class Integer private constructor(
                 unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
             if (!isDecimal) return null
             val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return Zero
+            if (isZero) return this.zero()
             val sign: String =
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
             val digits: String = unsignedText.trimStart('0')
             return Integer(decimal = "$sign$digits")
         }
+
+        /**
+         * Returns the [Integer] representing the number zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.zero]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.zero]
+         * </details>
+         */
+        @JvmStatic
+        public fun zero(): Integer = this.from(0)
     }
 }
