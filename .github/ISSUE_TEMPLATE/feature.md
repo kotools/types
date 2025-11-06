@@ -10,7 +10,7 @@ labels: feature
 
 **Solution:**
 
-**API needed/updated:**
+**API:**
 
 ```kotlin
 
