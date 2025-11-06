@@ -184,13 +184,4 @@ class IntegerSample {
         val expected: Integer = Integer.from(number)
         check(result == expected)
     }
-
-    @Test
-    fun zero() {
-        // When
-        val result: Integer = Integer.zero()
-        // Then
-        val expected: Integer = Integer.from(0)
-        check(result == expected)
-    }
 }

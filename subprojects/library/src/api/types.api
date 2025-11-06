@@ -386,13 +386,11 @@ public final class org/kotools/types/Integer : java/lang/Comparable {
 	public final fun times (Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public final fun toString ()Ljava/lang/String;
 	public final fun unaryMinus ()Lorg/kotools/types/Integer;
-	public static final fun zero ()Lorg/kotools/types/Integer;
 }
 
 public final class org/kotools/types/Integer$Companion {
 	public final fun from (J)Lorg/kotools/types/Integer;
 	public final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Integer;
 	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/Integer;
-	public final fun zero ()Lorg/kotools/types/Integer;
 }
 
