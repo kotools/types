@@ -49,8 +49,8 @@ import kotlin.jvm.JvmSynthetic
  * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
  * operators.
  * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
- * [subtract][Integer.minus] (`x - y`), [multiply][Integer.times] (`x * y`) and
- * [negate][Integer.unaryMinus] (`-x`) integers without overflow.
+ * [subtract][Integer.minus] (`x - y`) and [multiply][Integer.times] (`x * y`)
+ * integers without overflow.
  * - **Conversions:** Convert to its [decimal string][Integer.toString]
  * representation.
  * </details>
@@ -154,42 +154,6 @@ public class Integer private constructor(
     // ------------------------- Arithmetic operations -------------------------
 
     /**
-     * Returns the negative of this integer.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerSample.unaryMinus]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.unaryMinus]
-     * </details>
-     */
-    public operator fun unaryMinus(): Integer {
-        if (this == from(0)) return this
-        val isNegative: Boolean = this.decimal.startsWith('-')
-        if (isNegative) {
-            val text: String = this.decimal.removePrefix("-")
-            return fromDecimal(text)
-        }
-        val text = "-${this.decimal}"
-        return fromDecimal(text)
-    }
-
-    /**
      * Adds the [other] integer to this one.
      *
      * <br>
@@ -249,7 +213,6 @@ public class Integer private constructor(
      */
     public operator fun minus(other: Integer): Integer {
         val zero: Integer = from(0)
-        if (this == zero) return -other
         if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
         return fromDecimal(difference)

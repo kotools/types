@@ -16,11 +16,24 @@ class IntegerSample {
 
     @Test
     fun overflowSolution() {
-        val x: Integer = Integer.from(9223372036854775807)
-        val y: Integer = Integer.from(2)
-        check(x + y == Integer.fromDecimal("9223372036854775809"))
-        check(-x - y == Integer.fromDecimal("-9223372036854775809"))
-        check(x * y == Integer.fromDecimal("18446744073709551614"))
+        // Addition
+        val sum: Integer = Integer.from(9223372036854775807) + Integer.from(2)
+        val expectedSum: Integer = Integer.fromDecimal("9223372036854775809")
+        check(sum == expectedSum)
+
+        // Subtraction
+        val difference: Integer =
+            Integer.from(-9223372036854775807) - Integer.from(2)
+        val expectedDifference: Integer =
+            Integer.fromDecimal("-9223372036854775809")
+        check(difference == expectedDifference)
+
+        // Multiplication
+        val product: Integer =
+            Integer.from(9223372036854775807) * Integer.from(2)
+        val expectedProduct: Integer =
+            Integer.fromDecimal("18446744073709551614")
+        check(product == expectedProduct)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -63,18 +76,6 @@ class IntegerSample {
     }
 
     // ------------------------- Arithmetic operations -------------------------
-
-    @Test
-    fun unaryMinus() {
-        // Given
-        val number = 123456L
-        val x: Integer = Integer.from(number)
-        // When
-        val result: Integer = -x // or x.unaryMinus()
-        // Then
-        val expected: Integer = Integer.from(-number)
-        check(result == expected)
-    }
 
     @Test
     fun plus() {
