@@ -6,7 +6,6 @@ import org.kotools.types.internal.Warning
 import org.kotools.types.internal.integerAddition
 import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
-import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
@@ -52,8 +51,8 @@ import kotlin.jvm.JvmSynthetic
  * operators.
  * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
  * [subtract][Integer.minus] (`x - y`), [multiply][Integer.times] (`x * y`),
- * [divide][Integer.div] (`x / y`), compute [remainders][Integer.rem]
- * (`x % y`) and [negate][Integer.unaryMinus] (`-x`) integers without overflow.
+ * [divide][Integer.div] (`x / y`) and [negate][Integer.unaryMinus] (`-x`)
+ * integers without overflow.
  * - **Conversions:** Convert to its [decimal string][Integer.toString]
  * representation.
  * </details>
@@ -326,41 +325,6 @@ public class Integer private constructor(
         if (this == zero || other == from(1)) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
-    }
-
-    /**
-     * Returns the remainder of dividing this integer by the [other] one, or
-     * throws an [IllegalArgumentException] if the [other] integer represents
-     * the number zero.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerSample.rem]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.rem]
-     * </details>
-     */
-    public operator fun rem(other: Integer): Integer {
-        val zero: Integer = from(0)
-        require(other != zero) { "Integer can't be divided by zero." }
-        if (this == zero || other == from(1)) return zero
-        val remainder: String = integerRemainder(x = "$this", y = "$other")
-        return fromDecimal(remainder)
     }
 
     // ------------------------------ Conversions ------------------------------
