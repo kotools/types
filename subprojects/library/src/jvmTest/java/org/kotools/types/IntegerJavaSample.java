@@ -179,14 +179,4 @@ public class IntegerJavaSample {
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
-
-    @Test
-    void one() {
-        // When
-        final Integer result = Integer.one();
-        // Then
-        final Integer expected = Integer.from(1);
-        final boolean check = result.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
 }

@@ -46,7 +46,7 @@ import kotlin.jvm.JvmSynthetic
  * - **Instance creation:** Create it from a [Long] number
  * ([from][Integer.Companion.from]), from a decimal string
  * ([fromDecimal][Integer.Companion.fromDecimal]), or get constants
- * ([zero][Integer.Companion.zero], [one][Integer.Companion.one]).
+ * ([zero][Integer.Companion.zero]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
  * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
@@ -287,7 +287,7 @@ public class Integer private constructor(
     public operator fun times(other: Integer): Integer {
         val zero: Integer = zero()
         if (this == zero || other == zero) return zero
-        val one: Integer = one()
+        val one: Integer = from(1)
         if (this == one) return other
         if (other == one) return this
         val product: String = integerMultiplication(x = "$this", y = "$other")
@@ -324,7 +324,7 @@ public class Integer private constructor(
     public operator fun div(other: Integer): Integer {
         val zero: Integer = zero()
         require(other != zero) { "Integer can't be divided by zero." }
-        if (this == zero || other == one()) return this
+        if (this == zero || other == from(1)) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
     }
@@ -359,7 +359,7 @@ public class Integer private constructor(
     public operator fun rem(other: Integer): Integer {
         val zero: Integer = zero()
         require(other != zero) { "Integer can't be divided by zero." }
-        if (this == zero || other == one()) return zero
+        if (this == zero || other == from(1)) return zero
         val remainder: String = integerRemainder(x = "$this", y = "$other")
         return fromDecimal(remainder)
     }
@@ -553,33 +553,5 @@ public class Integer private constructor(
          */
         @JvmStatic
         public fun zero(): Integer = this.from(0)
-
-        /**
-         * Creates an [Integer] representing the number one.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerSample.one]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.one]
-         * </details>
-         */
-        @JvmStatic
-        public fun one(): Integer = this.from(1)
     }
 }
