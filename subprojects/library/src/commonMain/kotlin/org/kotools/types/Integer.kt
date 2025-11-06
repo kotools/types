@@ -55,6 +55,139 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class Integer private constructor(private val decimal: String) {
+    // ------------------------------- Creations -------------------------------
+
+    /** Contains class-level declarations for the [Integer] type. */
+    public companion object {
+        /**
+         * Creates an [Integer] from the specified [number].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.from]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.from]
+         * </details>
+         */
+        @JvmStatic
+        public fun from(number: Long): Integer = Integer("$number")
+
+        /**
+         * Creates an [Integer] from the specified [text], or throws an
+         * [IllegalArgumentException] if the [text] doesn't represent an
+         * integer.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
+         * `+1234`, `-1234`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimal]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerJavaSample.fromDecimal]
+         * </details>
+         * <br>
+         *
+         * See the [fromDecimalOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [text].
+         */
+        @JvmStatic
+        public fun fromDecimal(text: String): Integer {
+            require(text.isNotBlank()) { "Integer can't be blank." }
+            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
+            val unsignedText: String =
+                textWithoutPlusSignPrefix.removePrefix("-")
+            val isDecimal: Boolean =
+                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
+            require(isDecimal) {
+                "Integer can only contain an optional + or - sign, followed " +
+                        "by a sequence of digits (was: $text)."
+            }
+            val isZero: Boolean = unsignedText.all { it == '0' }
+            if (isZero) return this.from(0)
+            val sign: String =
+                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
+                else ""
+            val digits: String = unsignedText.trimStart('0')
+            return Integer(decimal = "$sign$digits")
+        }
+
+        /**
+         * Creates an [Integer] from the specified [text], or returns `null` if
+         * the [text] doesn't represent an integer.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
+         * `+1234`, `-1234`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimalOrNull]
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code, due to its
+         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [fromDecimal] function for throwing an exception instead of
+         * returning `null` in case of invalid [text].
+         */
+        @JvmSynthetic
+        public fun fromDecimalOrNull(text: String): Integer? {
+            if (text.isBlank()) return null
+            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
+            val unsignedText: String =
+                textWithoutPlusSignPrefix.removePrefix("-")
+            val isDecimal: Boolean =
+                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
+            if (!isDecimal) return null
+            val isZero: Boolean = unsignedText.all { it == '0' }
+            if (isZero) return this.from(0)
+            val sign: String =
+                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
+                else ""
+            val digits: String = unsignedText.trimStart('0')
+            return Integer(decimal = "$sign$digits")
+        }
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     /**
@@ -246,137 +379,4 @@ public class Integer private constructor(private val decimal: String) {
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.decimal
-
-    // ----------------------- Class-level declarations ------------------------
-
-    /** Contains class-level declarations for the [Integer] type. */
-    public companion object {
-        /**
-         * Creates an [Integer] from the specified [number].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerSample.from]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.from]
-         * </details>
-         */
-        @JvmStatic
-        public fun from(number: Long): Integer = Integer("$number")
-
-        /**
-         * Creates an [Integer] from the specified [text], or throws an
-         * [IllegalArgumentException] if the [text] doesn't represent an
-         * integer.
-         *
-         * The [text] parameter must only contain an optional plus sign (`+`) or
-         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
-         * `+1234`, `-1234`).
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimal]
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.fromDecimal]
-         * </details>
-         * <br>
-         *
-         * See the [fromDecimalOrNull] function for returning `null` instead of
-         * throwing an exception in case of invalid [text].
-         */
-        @JvmStatic
-        public fun fromDecimal(text: String): Integer {
-            require(text.isNotBlank()) { "Integer can't be blank." }
-            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
-            val unsignedText: String =
-                textWithoutPlusSignPrefix.removePrefix("-")
-            val isDecimal: Boolean =
-                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            require(isDecimal) {
-                "Integer can only contain an optional + or - sign, followed " +
-                        "by a sequence of digits (was: $text)."
-            }
-            val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.from(0)
-            val sign: String =
-                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
-                else ""
-            val digits: String = unsignedText.trimStart('0')
-            return Integer(decimal = "$sign$digits")
-        }
-
-        /**
-         * Creates an [Integer] from the specified [text], or returns `null` if
-         * the [text] doesn't represent an integer.
-         *
-         * The [text] parameter must only contain an optional plus sign (`+`) or
-         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
-         * `+1234`, `-1234`).
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimalOrNull]
-         * </details>
-         * <br>
-         *
-         * This function is not available from Java code, due to its
-         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [fromDecimal] function for throwing an exception instead of
-         * returning `null` in case of invalid [text].
-         */
-        @JvmSynthetic
-        public fun fromDecimalOrNull(text: String): Integer? {
-            if (text.isBlank()) return null
-            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
-            val unsignedText: String =
-                textWithoutPlusSignPrefix.removePrefix("-")
-            val isDecimal: Boolean =
-                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            if (!isDecimal) return null
-            val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.from(0)
-            val sign: String =
-                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
-                else ""
-            val digits: String = unsignedText.trimStart('0')
-            return Integer(decimal = "$sign$digits")
-        }
-    }
 }

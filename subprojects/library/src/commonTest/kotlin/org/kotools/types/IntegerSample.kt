@@ -4,6 +4,8 @@ import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
+    // ------------------------------ Motivations ------------------------------
+
     @Suppress("INTEGER_OVERFLOW")
     @Test
     fun overflowProblem() {
@@ -38,6 +40,42 @@ class IntegerSample {
         val product: Integer =
             Integer.from(9223372036854775807) * Integer.from(10)
         check(product == Integer.fromDecimal("92233720368547758070"))
+    }
+
+    // ------------------------------- Creations -------------------------------
+
+    @Test
+    fun from() {
+        // Given
+        val number = 9223372036854775807
+        // When
+        val result: Integer = Integer.from(number)
+        // Then
+        check("$result" == "$number")
+    }
+
+    @Test
+    fun fromDecimal() {
+        // Given
+        val number = 123456L
+        val text = "$number"
+        // When
+        val result: Integer = Integer.fromDecimal(text)
+        // Then
+        val expected: Integer = Integer.from(number)
+        check(result == expected)
+    }
+
+    @Test
+    fun fromDecimalOrNull() {
+        // Given
+        val number = 123456L
+        val text = "$number"
+        // When
+        val result: Integer? = Integer.fromDecimalOrNull(text)
+        // Then
+        val expected: Integer = Integer.from(number)
+        check(result == expected)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -116,41 +154,5 @@ class IntegerSample {
         val result = "$integer" // or integer.toString()
         // Then
         check(result == "$number")
-    }
-
-    // ----------------------- Class-level declarations ------------------------
-
-    @Test
-    fun from() {
-        // Given
-        val number = 9223372036854775807
-        // When
-        val result: Integer = Integer.from(number)
-        // Then
-        check("$result" == "$number")
-    }
-
-    @Test
-    fun fromDecimal() {
-        // Given
-        val number = 123456L
-        val text = "$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.from(number)
-        check(result == expected)
-    }
-
-    @Test
-    fun fromDecimalOrNull() {
-        // Given
-        val number = 123456L
-        val text = "$number"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.from(number)
-        check(result == expected)
     }
 }

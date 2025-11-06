@@ -5,6 +5,34 @@ import org.kotools.types.internal.Warning;
 
 @SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
 public class IntegerJavaSample {
+    // ------------------------------- Creations -------------------------------
+
+    @Test
+    void from() {
+        // Given
+        final long number = 9223372036854775807L;
+        // When
+        final Integer result = Integer.from(number);
+        // Then
+        final String resultAsString = result.toString();
+        final String expected = String.valueOf(number);
+        final boolean check = resultAsString.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
+    void fromDecimal() {
+        // Given
+        final long number = 123456L;
+        final String text = String.valueOf(number);
+        // When
+        final Integer result = Integer.fromDecimal(text);
+        // Then
+        final Integer expected = Integer.from(number);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test
@@ -85,34 +113,6 @@ public class IntegerJavaSample {
         final String result = integer.toString();
         // Then
         final String expected = String.valueOf(number);
-        final boolean check = result.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
-
-    // ----------------------- Class-level declarations ------------------------
-
-    @Test
-    void from() {
-        // Given
-        final long number = 9223372036854775807L;
-        // When
-        final Integer result = Integer.from(number);
-        // Then
-        final String resultAsString = result.toString();
-        final String expected = String.valueOf(number);
-        final boolean check = resultAsString.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
-
-    @Test
-    void fromDecimal() {
-        // Given
-        final long number = 123456L;
-        final String text = String.valueOf(number);
-        // When
-        final Integer result = Integer.fromDecimal(text);
-        // Then
-        final Integer expected = Integer.from(number);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
