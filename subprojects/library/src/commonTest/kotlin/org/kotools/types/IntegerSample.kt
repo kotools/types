@@ -7,33 +7,37 @@ class IntegerSample {
     @Suppress("INTEGER_OVERFLOW")
     @Test
     fun overflowProblem() {
-        val x = 9223372036854775807
-        val y = 2
-        check(x + y == -9223372036854775807) // instead of 9223372036854775809
-        check(-x - y == 9223372036854775807) // instead of -9223372036854775809
-        check(x * y == -2L) // instead of 18446744073709551614
+        // Addition
+        val sum: Long = 9223372036854775807 + 2
+        check(sum == -9223372036854775807)
+        // Expected: 9223372036854775807 + 2 = 9223372036854775809
+
+        // Subtraction
+        val difference: Long = -9223372036854775807 - 2
+        check(difference == 9223372036854775807)
+        // Expected: -9223372036854775807 - 2 = -9223372036854775809
+
+        // Multiplication
+        val product: Long = 9223372036854775807 * 10
+        check(product == -10L)
+        // Expected: 9223372036854775807 * 10 = 92233720368547758070
     }
 
     @Test
     fun overflowSolution() {
         // Addition
         val sum: Integer = Integer.from(9223372036854775807) + Integer.from(2)
-        val expectedSum: Integer = Integer.fromDecimal("9223372036854775809")
-        check(sum == expectedSum)
+        check(sum == Integer.fromDecimal("9223372036854775809"))
 
         // Subtraction
         val difference: Integer =
             Integer.from(-9223372036854775807) - Integer.from(2)
-        val expectedDifference: Integer =
-            Integer.fromDecimal("-9223372036854775809")
-        check(difference == expectedDifference)
+        check(difference == Integer.fromDecimal("-9223372036854775809"))
 
         // Multiplication
         val product: Integer =
-            Integer.from(9223372036854775807) * Integer.from(2)
-        val expectedProduct: Integer =
-            Integer.fromDecimal("18446744073709551614")
-        check(product == expectedProduct)
+            Integer.from(9223372036854775807) * Integer.from(10)
+        check(product == Integer.fromDecimal("92233720368547758070"))
     }
 
     // ------------------------------ Comparisons ------------------------------
