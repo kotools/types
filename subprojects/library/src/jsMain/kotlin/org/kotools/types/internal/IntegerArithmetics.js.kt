@@ -15,11 +15,6 @@ internal actual fun integerMultiplication(x: String, y: String): String {
     return product.toString()
 }
 
-internal actual fun integerDivision(x: String, y: String): String {
-    val quotient: BigInt = BigInt(x) / BigInt(y)
-    return quotient.toString()
-}
-
 private external fun BigInt(value: String): BigInt
 
 private external object BigInt

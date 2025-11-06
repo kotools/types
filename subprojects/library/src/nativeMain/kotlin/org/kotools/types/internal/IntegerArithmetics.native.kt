@@ -18,9 +18,3 @@ internal actual fun integerMultiplication(x: String, y: String): String {
         BigInteger.parseString(x) * BigInteger.parseString(y)
     return product.toString()
 }
-
-internal actual fun integerDivision(x: String, y: String): String {
-    val quotient: BigInteger =
-        BigInteger.parseString(x) / BigInteger.parseString(y)
-    return quotient.toString()
-}

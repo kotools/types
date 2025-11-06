@@ -232,64 +232,6 @@ class IntegerTest {
         assertEquals(expected = x, result)
     }
 
-    @Test
-    fun divWithNonZeroIntegerProducingInteger() {
-        // Given
-        val x: Integer = Integer.from(12)
-        val y: Integer = Integer.from(3)
-        // When
-        val result: Integer = x / y
-        // Then
-        val expected: Integer = Integer.from(4)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun divWithNonZeroIntegerProducingFloatingPointNumber() {
-        // Given
-        val x: Integer = Integer.from(12)
-        val y: Integer = Integer.from(5)
-        // When
-        val result: Integer = x / y
-        // Then
-        val expected: Integer = Integer.from(2)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun divWithOneInteger() {
-        // Given
-        val x: Integer = Integer.from(12)
-        val y: Integer = Integer.from(1)
-        // When
-        val result: Integer = x / y
-        // Then
-        assertEquals(expected = x, result)
-    }
-
-    @Test
-    fun divOnZeroIntegerAndWithNonZeroInteger() {
-        // Given
-        val x: Integer = Integer.from(0)
-        val y: Integer = Integer.from(3)
-        // When
-        val result: Integer = x / y
-        // Then
-        assertEquals(expected = x, result)
-    }
-
-    @Test
-    fun divWithZeroInteger() {
-        // Given
-        val x: Integer = Integer.from(12)
-        val y: Integer = Integer.from(0)
-        // When
-        val result: IllegalArgumentException = assertFailsWith { x / y }
-        // Then
-        val expected = "Integer can't be divided by zero."
-        assertEquals(expected, result.message)
-    }
-
     // ------------------------------ Conversions ------------------------------
 
     @Test
