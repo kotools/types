@@ -45,9 +45,7 @@ import kotlin.jvm.JvmSynthetic
  * ([from][Integer.Companion.from]) or decimal string
  * ([fromDecimal][Integer.Companion.fromDecimal]).
  * - **Comparisons:** Compare integers using
- * [structural equality][Integer.equals] (`x == y`, `x != y`) and
- * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
- * operators.
+ * [structural equality][Integer.equals] operators (`x == y`, `x != y`).
  * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
  * [subtract][Integer.minus] (`x - y`) and [multiply][Integer.times] (`x * y`)
  * integers without overflow.
@@ -57,9 +55,7 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class Integer private constructor(
-    private val decimal: String
-) : Comparable<Integer> {
+public class Integer private constructor(private val decimal: String) {
     // ------------------------------ Comparisons ------------------------------
 
     /**
@@ -119,37 +115,6 @@ public class Integer private constructor(
      */
     @Suppress(Warning.FINAL)
     final override fun hashCode(): Int = this.decimal.hashCode()
-
-    /**
-     * Compares this integer with the [other] one for order.
-     * Returns a negative number, zero, or a positive number as this integer is
-     * less than, equal to, or greater than the [other] one.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerSample.compareTo]
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.compareTo]
-     * </details>
-     */
-    @Suppress(Warning.FINAL)
-    final override fun compareTo(other: Integer): Int =
-        this.decimal.compareTo(other.decimal)
 
     // ------------------------- Arithmetic operations -------------------------
 
