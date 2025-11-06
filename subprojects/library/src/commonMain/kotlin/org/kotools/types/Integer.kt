@@ -41,9 +41,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * **Capabilities:**
  *
- * - **Instance creation:** Create from [Long] number
- * ([from][Integer.Companion.from]) or decimal string
- * ([fromDecimal][Integer.Companion.fromDecimal]).
+ * - **Creations:** Create from [Long] number ([from][Integer.Companion.from])
+ * or decimal string ([fromDecimal][Integer.Companion.fromDecimal]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] operators (`x == y`, `x != y`).
  * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
