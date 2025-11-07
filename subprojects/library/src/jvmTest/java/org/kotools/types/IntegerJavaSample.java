@@ -125,6 +125,19 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void div() {
+        // Given
+        final Integer x = Integer.fromDecimal("922337203685477580700");
+        final Integer y = Integer.from(10);
+        // When
+        final Integer result = x.div(y);
+        // Then
+        final Integer expected = Integer.fromDecimal("92233720368547758070");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

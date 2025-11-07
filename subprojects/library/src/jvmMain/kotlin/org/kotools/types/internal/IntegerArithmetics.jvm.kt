@@ -21,3 +21,9 @@ internal actual fun integerMultiplication(x: String, y: String): String {
     val product: BigInteger = BigInteger(x) * BigInteger(y)
     return product.toString()
 }
+
+@JvmSynthetic
+internal actual fun integerDivision(x: String, y: String): String {
+    val quotient: BigInteger = BigInteger(x) / BigInteger(y)
+    return quotient.toString()
+}

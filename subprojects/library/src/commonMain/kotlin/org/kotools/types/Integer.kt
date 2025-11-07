@@ -4,6 +4,7 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import org.kotools.types.internal.integerAddition
+import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerSubtraction
 import kotlin.jvm.JvmStatic
@@ -48,8 +49,9 @@ import kotlin.jvm.JvmSynthetic
  * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
  * operators.
  * - **Arithmetic operations:** [Negate][Integer.unaryMinus] (`-x`),
- * [add][Integer.plus] (`x + y`), [subtract][Integer.minus] (`x - y`) and
- * [multiply][Integer.times] (`x * y`) integers without overflow.
+ * [add][Integer.plus] (`x + y`), [subtract][Integer.minus] (`x - y`),
+ * [multiply][Integer.times] (`x * y`) and [divide][Integer.div] (`x / y`)
+ * integers without overflow.
  * - **Conversions:** Convert to its [decimal string][Integer.toString]
  * representation.
  * </details>
@@ -419,6 +421,41 @@ public class Integer private constructor(private val decimal: String) {
         if (other == one) return this
         val product: String = integerMultiplication(x = "$this", y = "$other")
         return fromDecimal(product)
+    }
+
+    /**
+     * Returns the quotient of dividing this integer by the [other] one, or
+     * throws an [ArithmeticException] if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.div]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.div]
+     * </details>
+     */
+    public operator fun div(other: Integer): Integer {
+        val zero: Integer = zero()
+        if (other == zero)
+            throw ArithmeticException("Integer can't be divided by zero.")
+        if (this == zero || other == from(1)) return this
+        val quotient: String = integerDivision(x = "$this", y = "$other")
+        return fromDecimal(quotient)
     }
 
     // ------------------------------ Conversions ------------------------------
