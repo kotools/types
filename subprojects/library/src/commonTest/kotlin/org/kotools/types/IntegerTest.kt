@@ -524,7 +524,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesWithZeroAndNonZeroIntegers() {
+    fun timesWithZeroAndNonZeroInteger() {
         // Given
         val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
@@ -535,7 +535,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesWithNonZeroAndZeroIntegers() {
+    fun timesWithNonZeroIntegerAndZero() {
         // Given
         val x: Integer = Integer.from(123)
         val y: Integer = Integer.zero()
@@ -546,7 +546,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesWithOneAndNonZeroIntegers() {
+    fun timesWithOneAndNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(1)
         val y: Integer = Integer.from(123)
@@ -557,7 +557,7 @@ class IntegerTest {
     }
 
     @Test
-    fun timesWithNonZeroAndOneIntegers() {
+    fun timesWithNonZeroIntegerAndOne() {
         // Given
         val x: Integer = Integer.from(123)
         val y: Integer = Integer.from(1)
@@ -565,6 +565,30 @@ class IntegerTest {
         val result: Integer = x * y
         // Then
         assertEquals(expected = x, result)
+    }
+
+    @Test
+    fun timesWithMultipleOfTenAndNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.from(1_000_000)
+        val y: Integer = Integer.from(42)
+        // When
+        val result: Integer = x * y
+        // Then
+        val expected: Integer = Integer.from(42_000_000)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun timesWithNonZeroIntegerAndMultipleOfTen() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.from(1_000_000)
+        // When
+        val result: Integer = x * y
+        // Then
+        val expected: Integer = Integer.from(42_000_000)
+        assertEquals(expected, result)
     }
 
     @Test

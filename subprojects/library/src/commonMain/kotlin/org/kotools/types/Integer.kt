@@ -424,9 +424,21 @@ public class Integer private constructor(private val decimal: String) {
         val one: Integer = from(1)
         if (this == one) return other
         if (other == one) return this
+        if (this.isMultipleOfTen()) {
+            val suffix: String = this.decimal.removePrefix("1")
+            return fromDecimal("$other$suffix")
+        }
+        if (other.isMultipleOfTen()) {
+            val suffix: String = other.decimal.removePrefix("1")
+            return fromDecimal("$this$suffix")
+        }
         val product: String = integerMultiplication(x = "$this", y = "$other")
         return fromDecimal(product)
     }
+
+    // Future implementation: this % from(10) == zero()
+    private fun isMultipleOfTen(): Boolean = this.decimal.startsWith('1')
+            && this.decimal.removePrefix("1").all { it == '0' }
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
