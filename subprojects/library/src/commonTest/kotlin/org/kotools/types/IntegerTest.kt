@@ -410,6 +410,38 @@ class IntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinusOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        // When
+        val result: Integer = -x
+        // Then
+        assertEquals(expected = x, result)
+    }
+
+    @Test
+    fun unaryMinusOnPositiveInteger() {
+        // Given
+        val x: Integer = Integer.from(123456789)
+        // When
+        val result: Integer = -x
+        // Then
+        val expected: Integer = Integer.from(-123456789)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun unaryMinusOnNegativeInteger() {
+        // Given
+        val x: Integer = Integer.from(-123456789)
+        // When
+        val result: Integer = -x
+        // Then
+        val expected: Integer = Integer.from(123456789)
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun plusWithNonZeroIntegers() {
         // Given
         val number = 9223372036854775807

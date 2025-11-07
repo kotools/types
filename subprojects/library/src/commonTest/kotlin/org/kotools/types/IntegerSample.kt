@@ -119,6 +119,17 @@ class IntegerSample {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinus() {
+        // Given
+        val x: Integer = Integer.from(9223372036854775807)
+        // When
+        val result: Integer = -x
+        // Then
+        val expected: Integer = Integer.from(-9223372036854775807)
+        check(result == expected)
+    }
+
+    @Test
     fun plus() {
         // Given
         val x: Integer = Integer.from(9223372036854775807)

@@ -75,6 +75,18 @@ public class IntegerJavaSample {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    void unaryMinus() {
+        // Given
+        final Integer x = Integer.from(9223372036854775807L);
+        // When
+        final Integer result = x.unaryMinus();
+        // Then
+        final Integer expected = Integer.from(-9223372036854775807L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void plus() {
         // Given
         final Integer x = Integer.from(9223372036854775807L);
