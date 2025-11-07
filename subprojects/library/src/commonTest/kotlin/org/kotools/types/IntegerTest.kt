@@ -376,7 +376,7 @@ class IntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
-    fun plus() {
+    fun plusWithNonZeroIntegers() {
         // Given
         val number = 9223372036854775807
         val x: Integer = Integer.from(number)
@@ -389,7 +389,29 @@ class IntegerTest {
     }
 
     @Test
-    fun minus() {
+    fun plusWithZeroAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(0)
+        val y: Integer = Integer.from(123)
+        // When
+        val result: Integer = x + y
+        // Then
+        assertEquals(expected = y, result)
+    }
+
+    @Test
+    fun plusWithNonZeroAndZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.from(0)
+        // When
+        val result: Integer = x + y
+        // Then
+        assertEquals(expected = x, result)
+    }
+
+    @Test
+    fun minusWithNonZeroIntegers() {
         // Given
         val x: Integer = Integer.from(-9223372036854775807)
         val y: Integer = Integer.from(9223372036854775807)
@@ -401,7 +423,30 @@ class IntegerTest {
     }
 
     @Test
-    fun times() {
+    fun minusWithZeroAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(0)
+        val y: Integer = Integer.from(123)
+        // When
+        val result: Integer = x - y
+        // Then
+        val expected: Integer = Integer.from(-123)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun minusWithNonZeroAndZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.from(0)
+        // When
+        val result: Integer = x - y
+        // Then
+        assertEquals(expected = x, result)
+    }
+
+    @Test
+    fun timesWithNonZeroIntegers() {
         // Given
         val x: Integer = Integer.from(9223372036854775807)
         val y: Integer = Integer.from(1000)
@@ -410,6 +455,50 @@ class IntegerTest {
         // Then
         val expected: Integer = Integer.fromDecimal("9223372036854775807000")
         assertEquals(expected, result)
+    }
+
+    @Test
+    fun timesWithZeroAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(0)
+        val y: Integer = Integer.from(123)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertEquals(expected = x, result)
+    }
+
+    @Test
+    fun timesWithNonZeroAndZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.from(0)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertEquals(expected = y, result)
+    }
+
+    @Test
+    fun timesWithOneAndNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(1)
+        val y: Integer = Integer.from(123)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertEquals(expected = y, result)
+    }
+
+    @Test
+    fun timesWithNonZeroAndOneIntegers() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.from(1)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertEquals(expected = x, result)
     }
 
     // ------------------------------ Conversions ------------------------------

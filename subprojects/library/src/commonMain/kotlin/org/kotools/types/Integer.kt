@@ -276,6 +276,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
+        val zero: Integer = from(0)
+        if (this == zero) return other
+        if (other == zero) return this
         val sum: String = integerAddition(x = "$this", y = "$other")
         return fromDecimal(sum)
     }
@@ -306,6 +309,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
+        val zero: Integer = from(0)
+        if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
         return fromDecimal(difference)
     }
@@ -336,6 +341,11 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
+        val zero: Integer = from(0)
+        if (this == zero || other == zero) return zero
+        val one: Integer = from(1)
+        if (this == one) return other
+        if (other == one) return this
         val product: String = integerMultiplication(x = "$this", y = "$other")
         return fromDecimal(product)
     }
