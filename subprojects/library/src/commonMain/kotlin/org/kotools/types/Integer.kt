@@ -100,6 +100,11 @@ public class Integer private constructor(private val decimal: String) {
          * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
          * `+1234`, `-1234`).
          *
+         * In case of invalid [text], this function throws an
+         * [IllegalArgumentException] instead of a [NumberFormatException] to
+         * ensure consistent behavior across all Kotlin platforms and to better
+         * reflect invalid argument semantics.
+         *
          * <br>
          * <details>
          * <summary>
