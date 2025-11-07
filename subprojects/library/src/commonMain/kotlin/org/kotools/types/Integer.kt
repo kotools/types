@@ -135,7 +135,7 @@ public class Integer private constructor(private val decimal: String) {
                         "by a sequence of digits (was: $text)."
             }
             val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.from(0)
+            if (isZero) return this.zero()
             val sign: String =
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
@@ -179,13 +179,16 @@ public class Integer private constructor(private val decimal: String) {
                 unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
             if (!isDecimal) return null
             val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.from(0)
+            if (isZero) return this.zero()
             val sign: String =
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
             val digits: String = unsignedText.trimStart('0')
             return Integer(decimal = "$sign$digits")
         }
+
+        @JvmSynthetic
+        internal fun zero(): Integer = from(0)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -276,7 +279,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        val zero: Integer = from(0)
+        val zero: Integer = zero()
         if (this == zero) return other
         if (other == zero) return this
         val sum: String = integerAddition(x = "$this", y = "$other")
@@ -309,7 +312,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        val zero: Integer = from(0)
+        val zero: Integer = zero()
         if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
         return fromDecimal(difference)
@@ -341,7 +344,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
-        val zero: Integer = from(0)
+        val zero: Integer = zero()
         if (this == zero || other == zero) return zero
         val one: Integer = from(1)
         if (this == one) return other

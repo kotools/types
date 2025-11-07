@@ -64,7 +64,7 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -75,7 +75,7 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -86,7 +86,7 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -97,7 +97,7 @@ class IntegerTest {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -223,7 +223,7 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -234,7 +234,7 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -245,7 +245,7 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -256,7 +256,7 @@ class IntegerTest {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        val expected: Integer = Integer.from(0)
+        val expected: Integer = Integer.zero()
         assertEquals(expected, result)
     }
 
@@ -391,7 +391,7 @@ class IntegerTest {
     @Test
     fun plusWithZeroAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.from(0)
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x + y
@@ -403,7 +403,7 @@ class IntegerTest {
     fun plusWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.from(0)
+        val y: Integer = Integer.zero()
         // When
         val result: Integer = x + y
         // Then
@@ -425,7 +425,7 @@ class IntegerTest {
     @Test
     fun minusWithZeroAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.from(0)
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x - y
@@ -438,7 +438,7 @@ class IntegerTest {
     fun minusWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.from(0)
+        val y: Integer = Integer.zero()
         // When
         val result: Integer = x - y
         // Then
@@ -460,7 +460,7 @@ class IntegerTest {
     @Test
     fun timesWithZeroAndNonZeroIntegers() {
         // Given
-        val x: Integer = Integer.from(0)
+        val x: Integer = Integer.zero()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x * y
@@ -472,7 +472,7 @@ class IntegerTest {
     fun timesWithNonZeroAndZeroIntegers() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.from(0)
+        val y: Integer = Integer.zero()
         // When
         val result: Integer = x * y
         // Then
