@@ -373,6 +373,40 @@ class IntegerTest {
         assertEquals(expected, result)
     }
 
+    @Test
+    fun compareToWithSameInteger() {
+        // Given
+        val number: Long = Long.MAX_VALUE
+        val x: Integer = Integer.from(number)
+        val y: Integer = Integer.from(number)
+        // When
+        val result: Int = x.compareTo(y)
+        // Then
+        assertEquals(expected = 0, result)
+    }
+
+    @Test
+    fun compareToWithGreaterInteger() {
+        // Given
+        val x: Integer = Integer.from(Long.MIN_VALUE)
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Int = x.compareTo(y)
+        // Then
+        assertTrue(result < 0)
+    }
+
+    @Test
+    fun compareToWithLesserInteger() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.from(Long.MIN_VALUE)
+        // When
+        val result: Int = x.compareTo(y)
+        // Then
+        assertTrue(result > 0)
+    }
+
     // ------------------------- Arithmetic operations -------------------------
 
     @Test

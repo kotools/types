@@ -61,6 +61,17 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void compareTo() {
+        // Given
+        final Integer x = Integer.from(Long.MIN_VALUE);
+        final Integer y = Integer.from(Long.MAX_VALUE);
+        // When
+        final boolean result = x.compareTo(y) < 0;
+        // Then
+        if (!result) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------- Arithmetic operations -------------------------
 
     @Test

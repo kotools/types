@@ -105,6 +105,17 @@ class IntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun compareTo() {
+        // Given
+        val x: Integer = Integer.from(Long.MIN_VALUE)
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Boolean = x < y // or x.compareTo(y) < 0
+        // Then
+        check(result)
+    }
+
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
