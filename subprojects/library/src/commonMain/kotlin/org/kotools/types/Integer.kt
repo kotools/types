@@ -199,9 +199,6 @@ public class Integer private constructor(private val decimal: String) {
 
         @JvmSynthetic
         internal fun zero(): Integer = this.from(0)
-
-        @JvmSynthetic
-        internal fun one(): Integer = this.from(1)
     }
 
     // ------------------------------ Comparisons ------------------------------
