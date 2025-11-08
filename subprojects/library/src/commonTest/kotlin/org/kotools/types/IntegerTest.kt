@@ -548,7 +548,7 @@ class IntegerTest {
     @Test
     fun timesWithOneAndNonZeroInteger() {
         // Given
-        val x: Integer = Integer.from(1)
+        val x: Integer = Integer.one()
         val y: Integer = Integer.from(123)
         // When
         val result: Integer = x * y
@@ -560,7 +560,7 @@ class IntegerTest {
     fun timesWithNonZeroIntegerAndOne() {
         // Given
         val x: Integer = Integer.from(123)
-        val y: Integer = Integer.from(1)
+        val y: Integer = Integer.one()
         // When
         val result: Integer = x * y
         // Then
@@ -618,7 +618,7 @@ class IntegerTest {
     fun divWithNonZeroIntegerAndOne() {
         // Given
         val x: Integer = Integer.from(42)
-        val y: Integer = Integer.from(1)
+        val y: Integer = Integer.one()
         // When
         val result: Integer = x / y
         // Then
@@ -675,7 +675,7 @@ class IntegerTest {
     fun divOrNullWithNonZeroIntegerAndOne() {
         // Given
         val x: Integer = Integer.from(42)
-        val y: Integer = Integer.from(1)
+        val y: Integer = Integer.one()
         // When
         val result: Integer? = x.divOrNull(y)
         // Then

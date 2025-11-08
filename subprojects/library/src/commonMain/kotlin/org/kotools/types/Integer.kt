@@ -197,7 +197,10 @@ public class Integer private constructor(private val decimal: String) {
         }
 
         @JvmSynthetic
-        internal fun zero(): Integer = from(0)
+        internal fun zero(): Integer = this.from(0)
+
+        @JvmSynthetic
+        internal fun one(): Integer = this.from(1)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -421,7 +424,7 @@ public class Integer private constructor(private val decimal: String) {
     public operator fun times(other: Integer): Integer {
         val zero: Integer = zero()
         if (this == zero || other == zero) return zero
-        val one: Integer = from(1)
+        val one: Integer = one()
         if (this == one) return other
         if (other == one) return this
         if (this.isMultipleOfTen()) {
@@ -474,7 +477,7 @@ public class Integer private constructor(private val decimal: String) {
         val zero: Integer = zero()
         if (other == zero)
             throw ArithmeticException("Integer can't be divided by zero.")
-        if (this == zero || other == from(1)) return this
+        if (this == zero || other == one()) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
     }
@@ -505,7 +508,7 @@ public class Integer private constructor(private val decimal: String) {
     public fun divOrNull(other: Integer): Integer? {
         val zero: Integer = zero()
         if (other == zero) return null
-        if (this == zero || other == from(1)) return this
+        if (this == zero || other == one()) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
     }
