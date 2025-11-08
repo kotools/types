@@ -358,9 +358,6 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (this == zero) return other
-        if (other == zero) return this
         val sum: String = integerAddition(x = "$this", y = "$other")
         return fromDecimal(sum)
     }
