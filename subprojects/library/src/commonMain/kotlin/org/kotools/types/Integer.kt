@@ -505,10 +505,43 @@ public class Integer private constructor(private val decimal: String) {
      *
      * SAMPLE: [org.kotools.types.IntegerJavaSample.rem]
      * </details>
+     * <br>
+     *
+     * See the [remOrNull] function for returning `null` instead of throwing an
+     * exception in case of invalid [other] integer.
      */
     public operator fun rem(other: Integer): Integer {
         if (other == zero())
             throw ArithmeticException("Integer can't be divided by zero.")
+        val remainder: String = integerRemainder(x = "$this", y = "$other")
+        return fromDecimal(remainder)
+    }
+
+    /**
+     * Returns the remainder of dividing this integer by the [other] one, or
+     * returns `null` if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.remOrNull]
+     * </details>
+     * <br>
+     *
+     * This function is not available from Java code, due to its
+     * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+     *
+     * See the [rem] function for throwing an exception instead of returning
+     * `null` in case of invalid [other] integer.
+     */
+    @JvmSynthetic
+    public fun remOrNull(other: Integer): Integer? {
+        if (other == zero()) return null
         val remainder: String = integerRemainder(x = "$this", y = "$other")
         return fromDecimal(remainder)
     }
