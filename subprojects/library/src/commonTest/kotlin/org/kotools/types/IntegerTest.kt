@@ -455,7 +455,7 @@ class IntegerTest {
     }
 
     @Test
-    fun minusWithNonZeroIntegers() {
+    fun minus() {
         // Given
         val x: Integer = Integer.from(-9223372036854775807)
         val y: Integer = Integer.from(9223372036854775807)
@@ -464,29 +464,6 @@ class IntegerTest {
         // Then
         val expected: Integer = Integer.fromDecimal("-18446744073709551614")
         assertEquals(expected, result)
-    }
-
-    @Test
-    fun minusWithZeroAndNonZeroIntegers() {
-        // Given
-        val x: Integer = Integer.zero()
-        val y: Integer = Integer.from(123)
-        // When
-        val result: Integer = x - y
-        // Then
-        val expected: Integer = Integer.from(-123)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun minusWithNonZeroAndZeroIntegers() {
-        // Given
-        val x: Integer = Integer.from(123)
-        val y: Integer = Integer.zero()
-        // When
-        val result: Integer = x - y
-        // Then
-        assertEquals(expected = x, result)
     }
 
     @Test

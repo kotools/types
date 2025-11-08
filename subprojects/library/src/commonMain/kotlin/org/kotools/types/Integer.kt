@@ -388,8 +388,6 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (other == zero) return this
         val difference: String = integerSubtraction(x = "$this", y = "$other")
         return fromDecimal(difference)
     }
