@@ -488,9 +488,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? {
-        val zero: Integer = zero()
-        if (other == zero) return null
-        if (this == zero || other == one()) return this
+        if (other == zero()) return null
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
     }
