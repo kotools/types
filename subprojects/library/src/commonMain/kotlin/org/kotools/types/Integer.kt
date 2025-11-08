@@ -458,10 +458,8 @@ public class Integer private constructor(private val decimal: String) {
      * exception in case of invalid [other] integer.
      */
     public operator fun div(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (other == zero)
+        if (other == zero())
             throw ArithmeticException("Integer can't be divided by zero.")
-        if (this == zero || other == one()) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
     }

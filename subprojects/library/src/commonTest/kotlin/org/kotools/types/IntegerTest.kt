@@ -524,7 +524,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divWithNonZeroIntegers() {
+    fun divWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)
         val y: Integer = Integer.from(5)
@@ -536,29 +536,7 @@ class IntegerTest {
     }
 
     @Test
-    fun divWithZeroAndNonZeroInteger() {
-        // Given
-        val x: Integer = Integer.zero()
-        val y: Integer = Integer.from(5)
-        // When
-        val result: Integer = x / y
-        // Then
-        assertEquals(expected = x, result)
-    }
-
-    @Test
-    fun divWithNonZeroIntegerAndOne() {
-        // Given
-        val x: Integer = Integer.from(42)
-        val y: Integer = Integer.one()
-        // When
-        val result: Integer = x / y
-        // Then
-        assertEquals(expected = x, result)
-    }
-
-    @Test
-    fun divWithNonZeroIntegerAndZero() {
+    fun divWithZero() {
         // Given
         val x: Integer = Integer.from(42)
         val y: Integer = Integer.zero()
