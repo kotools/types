@@ -6,6 +6,7 @@ import org.kotools.types.internal.Warning
 import org.kotools.types.internal.integerAddition
 import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
+import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
@@ -48,10 +49,10 @@ import kotlin.jvm.JvmSynthetic
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
  * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
  * operators.
- * - **Arithmetic operations:** [Negate][Integer.unaryMinus] (`-x`),
- * [add][Integer.plus] (`x + y`), [subtract][Integer.minus] (`x - y`),
- * [multiply][Integer.times] (`x * y`) and [divide][Integer.div] (`x / y`)
- * integers without overflow.
+ * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
+ * [subtract][Integer.minus] (`x - y`), [multiply][Integer.times] (`x * y`),
+ * [divide][Integer.div] (`x / y`), compute [remainders][Integer.rem] (`x % y`),
+ * and [negate][Integer.unaryMinus] (`-x`) integers without overflow.
  * - **Conversions:** Convert to its [decimal string][Integer.toString]
  * representation.
  * </details>
@@ -511,6 +512,39 @@ public class Integer private constructor(private val decimal: String) {
         if (this == zero || other == one()) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
+    }
+
+    /**
+     * Returns the remainder of dividing this integer by the [other] one, or
+     * throws an [ArithmeticException] if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.rem]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.rem]
+     * </details>
+     */
+    public operator fun rem(other: Integer): Integer {
+        if (other == zero())
+            throw ArithmeticException("Integer can't be divided by zero.")
+        val remainder: String = integerRemainder(x = "$this", y = "$other")
+        return fromDecimal(remainder)
     }
 
     // ------------------------------ Conversions ------------------------------

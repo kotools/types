@@ -138,6 +138,19 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void rem() {
+        // Given
+        final Integer x = Integer.from(42);
+        final Integer y = Integer.from(5);
+        // When
+        final Integer result = x.rem(y);
+        // Then
+        final Integer expected = Integer.from(2);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
