@@ -8,6 +8,7 @@ import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
+import org.kotools.types.internal.integerUnaryMinus
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -319,14 +320,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun unaryMinus(): Integer {
-        if (this == zero()) return this
-        val minusSign = "-"
-        val isNegative: Boolean = this.decimal.startsWith(minusSign)
-        if (isNegative) {
-            val text: String = this.decimal.removePrefix(minusSign)
-            return fromDecimal(text)
-        }
-        return fromDecimal("$minusSign${this.decimal}")
+        val negative: String = integerUnaryMinus("$this")
+        return fromDecimal(negative)
     }
 
     /**
