@@ -177,6 +177,18 @@ class IntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun divOrNull() {
+        // Given
+        val x: Integer = Integer.fromDecimal("922337203685477580700")
+        val y: Integer = Integer.from(10)
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        val expected: Integer = Integer.fromDecimal("92233720368547758070")
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

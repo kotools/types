@@ -637,6 +637,51 @@ class IntegerTest {
         assertEquals(expected, result.message)
     }
 
+    @Test
+    fun divOrNullWithNonZeroIntegers() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.from(5)
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        val expected: Integer = Integer.from(8)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun divOrNullWithZeroAndNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(5)
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertEquals(expected = x, result)
+    }
+
+    @Test
+    fun divOrNullWithNonZeroIntegerAndZero() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertNull(result)
+    }
+
+    @Test
+    fun divOrNullWithNonZeroIntegerAndOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.from(1)
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertEquals(expected = x, result)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

@@ -465,11 +465,46 @@ public class Integer private constructor(private val decimal: String) {
      *
      * SAMPLE: [org.kotools.types.IntegerJavaSample.div]
      * </details>
+     * <br>
+     *
+     * See the [divOrNull] function for returning `null` instead of throwing an
+     * exception in case of invalid [other] integer.
      */
     public operator fun div(other: Integer): Integer {
         val zero: Integer = zero()
         if (other == zero)
             throw ArithmeticException("Integer can't be divided by zero.")
+        if (this == zero || other == from(1)) return this
+        val quotient: String = integerDivision(x = "$this", y = "$other")
+        return fromDecimal(quotient)
+    }
+
+    /**
+     * Returns the quotient of dividing this integer by the [other] one, or
+     * returns `null` if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.divOrNull]
+     * </details>
+     * <br>
+     *
+     * This function is not available from Java code, due to its
+     * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+     *
+     * See the [div] function for throwing an exception instead of returning
+     * `null` in case of invalid [other] integer.
+     */
+    @JvmSynthetic
+    public fun divOrNull(other: Integer): Integer? {
+        val zero: Integer = zero()
+        if (other == zero) return null
         if (this == zero || other == from(1)) return this
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return fromDecimal(quotient)
