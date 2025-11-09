@@ -9,37 +9,31 @@ class IntegerSample {
     @Suppress("INTEGER_OVERFLOW")
     @Test
     fun overflowProblem() {
-        // Addition
-        val sum: Long = 9223372036854775807 + 2
-        check(sum == -9223372036854775807)
-        // Expected: 9223372036854775807 + 2 = 9223372036854775809
-
-        // Subtraction
-        val difference: Long = -9223372036854775807 - 2
-        check(difference == 9223372036854775807)
-        // Expected: -9223372036854775807 - 2 = -9223372036854775809
-
-        // Multiplication
-        val product: Long = 9223372036854775807 * 10
-        check(product == -10L)
-        // Expected: 9223372036854775807 * 10 = 92233720368547758070
+        val x = 9223372036854775807
+        val y = 10
+        check(x + y == -9223372036854775799) // instead of 9223372036854775817
+        check(-x - y == 9223372036854775799) // instead of -9223372036854775817
+        check(x * y == -10L) // instead of 92233720368547758070
     }
 
     @Test
     fun overflowSolution() {
-        // Addition
-        val sum: Integer = Integer.from(9223372036854775807) + Integer.from(2)
-        check(sum == Integer.fromDecimal("9223372036854775809"))
+        val x: Integer = Integer.from(9223372036854775807)
+        val y: Integer = Integer.from(10)
+        check(x + y == Integer.fromDecimal("9223372036854775817"))
+        check(-x - y == Integer.fromDecimal("-9223372036854775817"))
+        check(x * y == Integer.fromDecimal("92233720368547758070"))
+    }
 
-        // Subtraction
-        val difference: Integer =
-            Integer.from(-9223372036854775807) - Integer.from(2)
-        check(difference == Integer.fromDecimal("-9223372036854775809"))
-
-        // Multiplication
-        val product: Integer =
-            Integer.from(9223372036854775807) * Integer.from(10)
-        check(product == Integer.fromDecimal("92233720368547758070"))
+    @Test
+    fun divisionByZeroSolution() {
+        // Common code
+        val x: Integer = Integer.from(12)
+        val y: Integer = Integer.from(0)
+        val quotient: Result<Integer> = kotlin.runCatching { x / y }
+        val remainder: Result<Integer> = kotlin.runCatching { x % y }
+        check(quotient.exceptionOrNull() is ArithmeticException)
+        check(remainder.exceptionOrNull() is ArithmeticException)
     }
 
     // ------------------------------- Creations -------------------------------

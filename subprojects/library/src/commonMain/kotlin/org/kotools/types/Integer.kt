@@ -24,16 +24,37 @@ import kotlin.jvm.JvmSynthetic
  *     <b>Motivations</b>
  * </summary>
  *
+ * ### Motivations
+ *
+ * #### Integer overflow
+ *
  * **Problem:** Adding, subtracting or multiplying Kotlin integer types ([Byte],
  * [Short], [Int] and [Long]) can lead to an overflow, which produces unexpected
  * behavior.
  *
  * SAMPLE: [org.kotools.types.IntegerSample.overflowProblem]
  *
- * **Solution:** This type can [add][Integer.plus], [subtract][Integer.minus] or
- * [multiply][Integer.times] integers without producing an overflow.
+ * **Solution:** The [Integer] type can [add][Integer.plus],
+ * [subtract][Integer.minus] or [multiply][Integer.times] integers without
+ * producing an overflow.
  *
  * SAMPLE: [org.kotools.types.IntegerSample.overflowSolution]
+ *
+ * #### Division by zero
+ *
+ * **Problem:** Performing division and remainder operations by zero on Kotlin
+ * integer types have different behavior per platform: throw an
+ * [ArithmeticException] on JVM and Native platforms, and return `0` on JS
+ * platform.
+ *
+ * SAMPLE: [org.kotools.types.IntegerJvmNativeSample.divisionByZeroProblem]
+ *
+ * SAMPLE: [org.kotools.types.IntegerJsSample.divisionByZeroProblem]
+ *
+ * **Solution:** [Dividing][Integer.div] or computing [remainder][Integer.rem]
+ * of an [Integer] by zero throws an [ArithmeticException] on all platforms.
+ *
+ * SAMPLE: [org.kotools.types.IntegerSample.divisionByZeroSolution]
  * </details>
  *
  * <br>
@@ -42,7 +63,7 @@ import kotlin.jvm.JvmSynthetic
  *     <b>Key features</b>
  * </summary>
  *
- * **Capabilities:**
+ * ### Key features
  *
  * - **Creations:** Create from [Long] number ([from][Integer.Companion.from])
  * or decimal string ([fromDecimal][Integer.Companion.fromDecimal]).
