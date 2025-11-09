@@ -2,6 +2,7 @@ package convention.kotlin
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -53,6 +54,16 @@ kotlin.targets.configureEach {
 kotlin.applyDefaultHierarchyTemplate()
 kotlin.sourceSets {
     configureEach { languageSettings.optIn("kotlin.RequiresOptIn") }
+    val commonTest: KotlinSourceSet by this.getting
+    val jvmNativeTest: KotlinSourceSet by this.creating {
+        this.dependsOn(commonTest)
+    }
+    val jvmTest: KotlinSourceSet by this.getting {
+        this.dependsOn(jvmNativeTest)
+    }
+    val nativeTest: KotlinSourceSet by this.getting {
+        this.dependsOn(jvmNativeTest)
+    }
 }
 
 // ----------------------------------- Tasks -----------------------------------
