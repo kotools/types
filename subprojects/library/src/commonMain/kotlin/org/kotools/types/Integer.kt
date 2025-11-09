@@ -52,8 +52,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: [org.kotools.types.IntegerJsSample.divisionByZeroProblem]
  *
- * **Solution:** [Dividing][Integer.div] or computing [remainder][Integer.rem]
- * of an [Integer] by zero throws an [ArithmeticException] on all platforms.
+ * **Solution:** [Division][Integer.div] and [remainder][Integer.rem] operations
+ * by zero on [Integer] type throw an [ArithmeticException] on all platforms.
  *
  * SAMPLE: [org.kotools.types.IntegerSample.divisionByZeroSolution]
  * </details>
