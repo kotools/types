@@ -13,6 +13,7 @@ import org.kotools.types.internal.Warning
 import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
 import org.kotools.types.kotlinx.serialization.internal.EmailAddressRegexAsStringSerializer
 import kotlin.jvm.JvmName
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Returns a collection of default serializers for types located in
@@ -50,6 +51,7 @@ import kotlin.jvm.JvmName
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
+@JvmSynthetic
 @Suppress(Warning.FUNCTION_NAME)
 public fun KotoolsTypesSerializersModule(): SerializersModule =
     SerializersModule {

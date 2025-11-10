@@ -1,4 +1,4 @@
 public final class org/kotools/types/kotlinx/serialization/SerializersModule {
-	public static final fun KotoolsTypesSerializersModule ()Lkotlinx/serialization/modules/SerializersModule;
+	public static final synthetic fun KotoolsTypesSerializersModule ()Lkotlinx/serialization/modules/SerializersModule;
 }
 
