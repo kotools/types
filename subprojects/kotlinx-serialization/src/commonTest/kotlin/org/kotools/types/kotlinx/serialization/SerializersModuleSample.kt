@@ -28,9 +28,10 @@ class SerializersModuleSample {
         val format = Json {
             this.serializersModule = KotoolsTypesSerializersModule()
         }
-        val regex: EmailAddressRegex = EmailAddressRegex.default() // ^\S+@\S+\.\S+$
+        val regex: EmailAddressRegex =
+            EmailAddressRegex.default() // ^\S+@\S+\.\S+$
         val encoded: String = format.encodeToString(regex)
-        check(encoded == """"^\\S+@\\S+\\.\\S+$"""")
+        check(encoded == "\"^\\\\S+@\\\\S+\\\\.\\\\S+$\"")
         val decoded: EmailAddressRegex = format.decodeFromString(encoded)
         check(decoded == regex)
     }
