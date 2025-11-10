@@ -1,10 +1,9 @@
 package org.kotools.types.kotlinx.serialization
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.modules.SerializersModule
-import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
+import org.kotools.types.kotlinx.serialization.internal.EmailAddressRegexAsStringSerializer
 import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -20,9 +19,10 @@ class SerializersModuleTest {
 
     @Test
     fun includesEmailAddressRegexAsStringSerializer() {
-        val expected: KSerializer<EmailAddressRegex> =
-            EmailAddressRegex.stringSerializer()
-        KotoolsTypesSerializersModule()
-            .assertIncludes(expected)
+        // When
+        val result: SerializersModule = KotoolsTypesSerializersModule()
+        // Then
+        val expected = EmailAddressRegexAsStringSerializer()
+        result.assertIncludes(expected)
     }
 }
