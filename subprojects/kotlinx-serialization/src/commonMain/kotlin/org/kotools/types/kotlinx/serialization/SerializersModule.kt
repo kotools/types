@@ -2,6 +2,12 @@
 
 package org.kotools.types.kotlinx.serialization
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
 import org.kotools.types.EmailAddress
@@ -10,7 +16,6 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
-import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
 import org.kotools.types.kotlinx.serialization.internal.EmailAddressRegexAsStringSerializer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
@@ -58,3 +63,23 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
         this.contextual(EmailAddressAsStringSerializer())
         this.contextual(EmailAddressRegexAsStringSerializer())
     }
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
+    override val descriptor: SerialDescriptor
+        get() {
+            val serialName: String? = EmailAddress::class.simpleName
+            checkNotNull(serialName) { "Serial name can't be null." }
+            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+        }
+
+    override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): EmailAddress {
+        val text: String = decoder.decodeString()
+        return requireNotNull(EmailAddress of text) {
+            "Invalid email address (was: $text)."
+        }
+    }
+}
