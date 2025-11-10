@@ -13,31 +13,37 @@ import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmName
 
 /**
- * Returns a collection of default serializers used for serializing types
- * provided by Kotools Types.
+ * Returns a collection of default serializers for types located in
+ * `org.kotools.types` package.
  *
  * <br>
  * <details>
  * <summary>
- *     <b>Default serializers</b>
+ *     <b>EmailAddress</b>
  * </summary>
  *
- * Here's the list of serializers used by default for each type:
- * - [EmailAddress] - [EmailAddress.Companion.stringSerializer]
- * - [EmailAddressRegex] - [EmailAddressRegex.Companion.stringSerializer]
+ * This function provides an object for serializing and deserializing an
+ * [EmailAddress] as [String].
+ *
+ * Here's an example of calling it, using the JavaScript Object Notation (JSON)
+ * format:
+ *
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressAsString]
  * </details>
  *
  * <br>
  * <details>
  * <summary>
- *     <b>Calling from Kotlin</b>
+ *     <b>EmailAddressRegex</b>
  * </summary>
  *
- * Here's an example of Kotlin code that encodes and decodes the [EmailAddress]
- * type using the [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json)
- * and this function:
+ * This function provides an object for serializing and deserializing an
+ * [EmailAddressRegex] as [String].
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.kotoolsTypesSerializersModule]
+ * Here's an example of calling it, using the JavaScript Object Notation (JSON)
+ * format:
+ *
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressRegexAsString]
  * </details>
  */
 @ExperimentalKotoolsTypesApi

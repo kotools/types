@@ -3,23 +3,35 @@ package org.kotools.types.kotlinx.serialization
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kotools.types.EmailAddress
+import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.fail
 
 class SerializersModuleSample {
     @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
-    fun kotoolsTypesSerializersModule() {
+    fun emailAddressAsString() {
         val format = Json {
-            serializersModule = KotoolsTypesSerializersModule()
+            this.serializersModule = KotoolsTypesSerializersModule()
         }
-        val address: EmailAddress = EmailAddress.of("contact@kotools.org")
-            ?: fail()
-        val encoded: String = format.encodeToString(address)
-        assertEquals(expected = "\"$address\"", encoded)
+        val emailAddress: EmailAddress? = EmailAddress.of("contact@kotools.org")
+        checkNotNull(emailAddress)
+        val encoded: String = format.encodeToString(emailAddress)
+        check(encoded == "\"contact@kotools.org\"")
         val decoded: EmailAddress = format.decodeFromString(encoded)
-        assertEquals(expected = address, decoded)
+        check(decoded == emailAddress)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun emailAddressRegexAsString() {
+        val format = Json {
+            this.serializersModule = KotoolsTypesSerializersModule()
+        }
+        val regex: EmailAddressRegex = EmailAddressRegex.default() // ^\S+@\S+\.\S+$
+        val encoded: String = format.encodeToString(regex)
+        check(encoded == """"^\\S+@\\S+\\.\\S+$"""")
+        val decoded: EmailAddressRegex = format.decodeFromString(encoded)
+        check(decoded == regex)
     }
 }
