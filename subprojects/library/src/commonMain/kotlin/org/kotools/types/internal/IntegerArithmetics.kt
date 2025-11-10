@@ -1,7 +1,5 @@
 package org.kotools.types.internal
 
-internal expect fun integerUnaryMinus(x: String): String
-
 internal expect fun integerAddition(x: String, y: String): String
 
 internal expect fun integerSubtraction(x: String, y: String): String

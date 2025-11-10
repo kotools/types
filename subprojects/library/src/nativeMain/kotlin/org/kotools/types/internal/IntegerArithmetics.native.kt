@@ -2,11 +2,6 @@ package org.kotools.types.internal
 
 import com.ionspin.kotlin.bignum.integer.BigInteger
 
-internal actual fun integerUnaryMinus(x: String): String = BigInteger
-    .parseString(x)
-    .unaryMinus()
-    .toString()
-
 internal actual fun integerAddition(x: String, y: String): String {
     val sum: BigInteger = BigInteger.parseString(x) + BigInteger.parseString(y)
     return sum.toString()

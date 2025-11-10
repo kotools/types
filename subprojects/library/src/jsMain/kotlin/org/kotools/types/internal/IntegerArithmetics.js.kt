@@ -1,9 +1,5 @@
 package org.kotools.types.internal
 
-internal actual fun integerUnaryMinus(x: String): String = BigInt(x)
-    .unaryMinus()
-    .toString()
-
 internal actual fun integerAddition(x: String, y: String): String {
     val sum: BigInt = BigInt(x) + BigInt(y)
     return sum.toString()
@@ -32,12 +28,6 @@ internal actual fun integerRemainder(x: String, y: String): String {
 private external fun BigInt(value: String): BigInt
 
 private external object BigInt
-
-private operator fun BigInt.unaryMinus(): BigInt {
-    @Suppress("UNUSED_VARIABLE") val x: BigInt = this
-    val negative: dynamic = js("-x")
-    return BigInt("$negative")
-}
 
 @Suppress("UNUSED_VARIABLE")
 private operator fun BigInt.plus(other: BigInt): BigInt {
