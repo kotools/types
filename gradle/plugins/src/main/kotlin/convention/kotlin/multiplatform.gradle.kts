@@ -1,5 +1,6 @@
 package convention.kotlin
 
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
@@ -73,6 +74,14 @@ private val compileTestKotlinJs: TaskProvider<Kotlin2JsCompile>
 
 tasks.named<KotlinJsIrLink>("compileTestDevelopmentExecutableKotlinJs")
     .configure { dependsOn(compileTestKotlinJs) }
+
+tasks.withType<AbstractTestTask>().configureEach {
+    this.testLogging.events(
+        TestLogEvent.FAILED,
+        TestLogEvent.SKIPPED,
+        TestLogEvent.STANDARD_OUT
+    )
+}
 
 tasks.withType<Jar>().configureEach {
     manifest.attributes(
