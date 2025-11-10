@@ -10,6 +10,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
+import org.kotools.types.kotlinx.serialization.internal.EmailAddressAsStringSerializer
 import kotlin.jvm.JvmName
 
 /**
@@ -51,8 +52,7 @@ import kotlin.jvm.JvmName
 @Suppress(Warning.FUNCTION_NAME)
 public fun KotoolsTypesSerializersModule(): SerializersModule =
     SerializersModule {
-        EmailAddress.stringSerializer()
-            .let(this::contextual)
+        this.contextual(EmailAddressAsStringSerializer())
         EmailAddressRegex.stringSerializer()
             .let(this::contextual)
     }
