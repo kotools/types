@@ -38,6 +38,8 @@ All notable changes to this project will be documented in this file.
   documentation ([1f9e8151a], [7a8e483f], [fd2f9b28] and [7a1942ae1]).
 - Update [dependency compatibility](documentation/dependencies.md) documentation
   ([c60c84d4]).
+- Hide `KotoolsTypesSerializersModule()` **experimental** function from Java
+  code ([#897]).
 
 ### 🗑️ Deprecated
 
@@ -54,6 +56,8 @@ All notable changes to this project will be documented in this file.
   `orThrow(String, String)` functions ([#838]).
 - `Zero` **experimental** type and its serializers ([#844]). Use
   `Integer.from(0)` instead.
+- `stringSerializer()` **experimental** functions ([#897]). Use
+  `KotoolsTypesSerializersModule()` **experimental** function instead.
 
 ### 🐛 Fixed
 
@@ -69,6 +73,7 @@ All notable changes to this project will be documented in this file.
 [#868]: https://github.com/kotools/types/issues/868
 [#874]: https://github.com/kotools/types/issues/874
 [#880]: https://github.com/kotools/types/issues/880
+[#897]: https://github.com/kotools/types/issues/897
 [1dacbdae2]: https://github.com/kotools/types/commit/1dacbdae2
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 [7a1942ae1]: https://github.com/kotools/types/commit/7a1942ae1
