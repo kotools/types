@@ -16,7 +16,6 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
-import org.kotools.types.kotlinx.serialization.internal.EmailAddressRegexAsStringSerializer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
 
@@ -80,6 +79,27 @@ private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
         val text: String = decoder.decodeString()
         return requireNotNull(EmailAddress of text) {
             "Invalid email address (was: $text)."
+        }
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private class EmailAddressRegexAsStringSerializer :
+    KSerializer<EmailAddressRegex> {
+    override val descriptor: SerialDescriptor
+        get() {
+            val serialName: String? = EmailAddressRegex::class.simpleName
+            checkNotNull(serialName) { "Serial name can't be null." }
+            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+        }
+
+    override fun serialize(encoder: Encoder, value: EmailAddressRegex): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): EmailAddressRegex {
+        val text: String = decoder.decodeString()
+        return requireNotNull(EmailAddressRegex of text) {
+            "Invalid email address regex (was: $text)."
         }
     }
 }
