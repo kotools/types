@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
 - `Integer` **experimental** type for preventing overflow when performing
   arithmetic operations with integers, and for consistent behavior across all
   platforms when dividing an integer by zero ([#880]).
+- Serializer for `Integer` type, in `KotoolsTypesSerializersModule()`
+  **experimental** function ([#898]).
 - `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
   `EmailAddress.Companion` type, for creating an instance of `EmailAddress`
   ([#865]).
@@ -75,6 +77,7 @@ All notable changes to this project will be documented in this file.
 [#874]: https://github.com/kotools/types/issues/874
 [#880]: https://github.com/kotools/types/issues/880
 [#897]: https://github.com/kotools/types/issues/897
+[#898]: https://github.com/kotools/types/issues/898
 [1dacbdae2]: https://github.com/kotools/types/commit/1dacbdae2
 [1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
 [7a1942ae1]: https://github.com/kotools/types/commit/7a1942ae1
