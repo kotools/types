@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- Support `iOS arm64` Kotlin Native target ([#843]).
+- Support `iOS arm64` Kotlin/Native target ([#843]).
 - Support browser target for Kotlin/JS ([#874]).
 - `Integer` **experimental** type for preventing overflow when performing
   arithmetic operations with integers, and for consistent behavior across all
