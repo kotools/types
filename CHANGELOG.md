@@ -22,8 +22,9 @@ All notable changes to this project will be documented in this file.
 
 - Support `iOS arm64` Kotlin Native target ([#843]).
 - Support browser target for Kotlin/JS ([#874]).
-- `Integer` type for solving overflow issues when adding, subtracting or
-  multiplying integers ([#880]).
+- `Integer` **experimental** type for preventing overflow when performing
+  arithmetic operations with integers, and for consistent behavior across all
+  platforms when dividing an integer by zero ([#880]).
 - `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
   `EmailAddress.Companion` type, for creating an instance of `EmailAddress`
   ([#865]).
