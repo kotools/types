@@ -83,11 +83,7 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     override val descriptor: SerialDescriptor
-        get() {
-            val serialName: String? = EmailAddress::class.simpleName
-            checkNotNull(serialName) { "Serial name can't be null." }
-            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
-        }
+        get() = StringSerialDescriptor<EmailAddress>()
 
     override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
         encoder.encodeString("$value")
@@ -104,11 +100,7 @@ private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
 private class EmailAddressRegexAsStringSerializer :
     KSerializer<EmailAddressRegex> {
     override val descriptor: SerialDescriptor
-        get() {
-            val serialName: String? = EmailAddressRegex::class.simpleName
-            checkNotNull(serialName) { "Serial name can't be null." }
-            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
-        }
+        get() = StringSerialDescriptor<EmailAddressRegex>()
 
     override fun serialize(encoder: Encoder, value: EmailAddressRegex): Unit =
         encoder.encodeString("$value")
@@ -124,11 +116,7 @@ private class EmailAddressRegexAsStringSerializer :
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class IntegerAsStringSerializer : KSerializer<Integer> {
     override val descriptor: SerialDescriptor
-        get() {
-            val serialName: String? = Integer::class.simpleName
-            checkNotNull(serialName) { "Serial name can't be null." }
-            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
-        }
+        get() = StringSerialDescriptor<Integer>()
 
     override fun serialize(encoder: Encoder, value: Integer): Unit =
         encoder.encodeString("$value")
@@ -137,4 +125,12 @@ private class IntegerAsStringSerializer : KSerializer<Integer> {
         val text: String = decoder.decodeString()
         return Integer.fromDecimal(text)
     }
+}
+
+@Suppress("FunctionName")
+private inline fun <reified T : Any> StringSerialDescriptor():
+        SerialDescriptor {
+    val serialName: String? = T::class.simpleName
+    checkNotNull(serialName) { "Serial name can't be null." }
+    return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
 }
