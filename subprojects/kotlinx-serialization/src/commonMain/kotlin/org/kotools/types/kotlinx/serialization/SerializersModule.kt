@@ -13,6 +13,7 @@ import kotlinx.serialization.modules.contextual
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.Integer
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -52,6 +53,21 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressRegexAsString]
  * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Integer</b>
+ * </summary>
+ *
+ * This function provides an object for serializing and deserializing an
+ * [Integer] as [String].
+ *
+ * Here's an example of calling it, using the JavaScript Object Notation (JSON)
+ * format:
+ *
+ * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.integerAsString]
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
@@ -61,6 +77,7 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
     SerializersModule {
         this.contextual(EmailAddressAsStringSerializer())
         this.contextual(EmailAddressRegexAsStringSerializer())
+        this.contextual(IntegerAsStringSerializer())
     }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -101,5 +118,23 @@ private class EmailAddressRegexAsStringSerializer :
         return requireNotNull(EmailAddressRegex of text) {
             "Invalid email address regex (was: $text)."
         }
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private class IntegerAsStringSerializer : KSerializer<Integer> {
+    override val descriptor: SerialDescriptor
+        get() {
+            val serialName: String? = Integer::class.simpleName
+            checkNotNull(serialName) { "Serial name can't be null." }
+            return PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+        }
+
+    override fun serialize(encoder: Encoder, value: Integer): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): Integer {
+        val text: String = decoder.decodeString()
+        return Integer.fromDecimal(text)
     }
 }

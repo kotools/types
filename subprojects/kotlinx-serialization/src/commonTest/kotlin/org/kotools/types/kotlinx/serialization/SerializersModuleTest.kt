@@ -11,6 +11,7 @@ import kotlinx.serialization.serializer
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.Integer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -145,5 +146,64 @@ class EmailAddressRegexAsStringSerializerTest {
             .replace(oldValue = "\\\\", newValue = "\\")
         val expected = "Invalid email address regex (was: $text)."
         assertEquals(expected, result.message)
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+class IntegerAsStringSerializerTest {
+    @Test
+    fun descriptor() {
+        // Given
+        val module: SerializersModule = KotoolsTypesSerializersModule()
+        val serializer: KSerializer<Integer> = module.serializer()
+        // When
+        val result: SerialDescriptor = serializer.descriptor
+        // Then
+        val serialName: String = Integer::class.simpleName
+            ?: fail("Serial name can't be null.")
+        val expected: SerialDescriptor =
+            PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun serialize() {
+        // Given
+        val format = Json {
+            this.serializersModule = KotoolsTypesSerializersModule()
+        }
+        val integer: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: String = format.encodeToString(integer)
+        // Then
+        assertEquals(expected = "\"$integer\"", result)
+    }
+
+    @Test
+    fun deserializeWithDecimalString() {
+        // Given
+        val format = Json {
+            this.serializersModule = KotoolsTypesSerializersModule()
+        }
+        val encoded = "\"${Long.MAX_VALUE}\""
+        // When
+        val result: Integer = format.decodeFromString(encoded)
+        // Then
+        val text: String = encoded.trim('"')
+        val expected: Integer = Integer.fromDecimal(text)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun deserializeWithNonDecimalString() {
+        // Given
+        val format = Json {
+            this.serializersModule = KotoolsTypesSerializersModule()
+        }
+        val encoded = "\"oops\""
+        // When & Then
+        assertFailsWith<IllegalArgumentException> {
+            format.decodeFromString<Integer>(encoded)
+        }
     }
 }
