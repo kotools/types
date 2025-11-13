@@ -3,8 +3,12 @@ plugins {
     alias(libs.plugins.convention.kotlin.multiplatform)
     alias(libs.plugins.kotools.compatibility)
     alias(libs.plugins.convention.documentation.module)
-    alias(libs.plugins.convention.publication.module)
+
+    // Publication
+    `maven-publish`
+    signing
     alias(libs.plugins.nmcp)
+    alias(libs.plugins.convention.publication.module)
 }
 
 compatibility {
