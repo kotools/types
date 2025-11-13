@@ -234,7 +234,7 @@ public class EmailAddressRegex private constructor(
          * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.of]
          * </details>
          */
-        @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
+        @ExperimentalSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public infix fun of(pattern: String): EmailAddressRegex? {
             val isValidPattern: Boolean = this.default()
@@ -265,7 +265,7 @@ public class EmailAddressRegex private constructor(
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmSynthetic
         public fun orNull(pattern: String): EmailAddressRegex? {
             val patternType: String? = pattern::class.simpleName
@@ -291,7 +291,7 @@ public class EmailAddressRegex private constructor(
             ),
             DeprecationLevel.ERROR
         )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
+        @DeprecatedAsErrorSince(KotoolsTypesVersion.Unreleased)
         @JvmStatic
         public fun orThrow(pattern: String): EmailAddressRegex {
             val patternType: String? = pattern::class.simpleName
