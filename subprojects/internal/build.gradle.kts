@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotools.compatibility)
     alias(libs.plugins.convention.documentation.module)
     alias(libs.plugins.convention.publication.module)
+    alias(libs.plugins.nmcp)
 }
 
 compatibility {

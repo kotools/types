@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.convention.documentation.module)
     alias(libs.plugins.kotools.samples.multiplatform)
     alias(libs.plugins.convention.publication.module)
+    alias(libs.plugins.nmcp)
 }
 
 apiValidation.apiDumpDirectory = "src/api"

@@ -19,7 +19,8 @@ kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-co
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotools-compatibility = { id = "org.kotools.compatibility" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
-maven-central-publishing = { id = "com.gradleup.nmcp.aggregation", version.ref = "maven-central-publishing" }
+nmcp = { id = "com.gradleup.nmcp", version.ref = "maven-central-publishing" }
+nmcp-aggregation = { id = "com.gradleup.nmcp.aggregation", version.ref = "maven-central-publishing" }
 
 [libraries]
 bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "bignum" }
