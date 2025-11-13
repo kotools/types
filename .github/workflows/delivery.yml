@@ -23,5 +23,9 @@ jobs:
           java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Publish to Central Portal
-        run: ./gradlew :publishAggregationToCentralPortal
+      - name: Publish 'types-internal' project to Central Portal
+        run: ./gradlew :types-internal:publishAllPublicationsToNmcpRepository
+      - name: Publish 'types' project to Central Portal
+        run: ./gradlew :types:publishAllPublicationsToNmcpRepository
+      - name: Publish 'types-kotlinx-serialization' project to Central Portal
+        run: ./gradlew :types-kotlinx-serialization:publishAllPublicationsToNmcpRepository
