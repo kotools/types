@@ -12,7 +12,6 @@ convention-base-root = { id = "convention.base.root" }
 convention-documentation-module = { id = "convention.documentation.module" }
 convention-documentation-root = { id = "convention.documentation.root" }
 convention-kotlin-multiplatform = { id = "convention.kotlin.multiplatform" }
-convention-publication-module = { id = "convention.publication.module" }
 convention-publication-root = { id = "convention.publication.root" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
