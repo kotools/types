@@ -7,7 +7,7 @@ plugins {
     // Publication
     `maven-publish`
     signing
-    alias(libs.plugins.convention.publication.module)
+    alias(libs.plugins.kotools.types.publication)
 }
 
 compatibility {
