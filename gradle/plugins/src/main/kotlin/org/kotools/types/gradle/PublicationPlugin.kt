@@ -78,12 +78,12 @@ private fun Project.withKotlinMultiplatformPlugin(
 }
 
 private fun Project.withSigningPlugin(publishing: PublishingExtension) {
+    val gpgPrivateKey: String? = System.getenv("GPG_PRIVATE_KEY")
+    val gpgPassword: String? = System.getenv("GPG_PASSWORD")
+    if (gpgPrivateKey == null || gpgPassword == null) return
     val project: Project = this
     project.pluginManager.withPlugin("signing") {
         // Plugin extension
-        val gpgPrivateKey: String? = System.getenv("GPG_PRIVATE_KEY")
-        val gpgPassword: String? = System.getenv("GPG_PASSWORD")
-        if (gpgPrivateKey == null || gpgPassword == null) return@withPlugin
         val signing: SigningExtension = project.extensions.getByType()
         signing.useInMemoryPgpKeys(gpgPrivateKey, gpgPassword)
         signing.sign(publishing.publications)
