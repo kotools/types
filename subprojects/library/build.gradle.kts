@@ -12,7 +12,6 @@ plugins {
     // Publication
     `maven-publish`
     signing
-    alias(libs.plugins.nmcp)
     alias(libs.plugins.convention.publication.module)
 }
 
