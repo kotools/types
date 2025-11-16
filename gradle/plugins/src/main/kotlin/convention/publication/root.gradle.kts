@@ -45,3 +45,24 @@ tasks.register<Exec>("tag").configure {
     val tagMessage = "$gitmoji $moduleName $version"
     setCommandLine("git", "tag", version, "-s", "-m", tagMessage)
 }
+
+// -------------------------------- Publication --------------------------------
+
+private val zipSourcePublication: TaskProvider<Zip> by tasks.registering(
+    Zip::class
+) {
+    val publicationTasks: List<TaskProvider<Task>> = subprojects
+        .filter { it.pluginManager.hasPlugin("maven-publish") }
+        .map { it.tasks.named("publish") }
+    this.dependsOn(publicationTasks)
+    this.archiveBaseName = "kotools-types"
+    this.archiveVersion = project.version.toString()
+    this.from(layout.buildDirectory.dir("maven/"))
+}
+
+private val publishSources: TaskProvider<Task> by tasks.registering
+publishSources.configure {
+    this.description = "Publishes the sources of all subprojects."
+    this.group = TaskGroup.Root.toString()
+    this.dependsOn(zipSourcePublication)
+}
