@@ -6,13 +6,9 @@ jobs:
     name: Delivery
     runs-on: macos-13
     env:
-      GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-      GIT_USER: ${{ secrets.GIT_USER }}
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       GRADLE_CACHE_CLEANUP: true
-      SONATYPE_PORTAL_PASSWORD: ${{ secrets.SONATYPE_PORTAL_PASSWORD }}
-      SONATYPE_PORTAL_USERNAME: ${{ secrets.SONATYPE_PORTAL_USERNAME }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
@@ -23,9 +19,10 @@ jobs:
           java-version: 17
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.3.1
-      - name: Publish 'types-internal' project to Central Portal
-        run: ./gradlew :types-internal:publishAllPublicationsToNmcpRepository
-      - name: Publish 'types' project to Central Portal
-        run: ./gradlew :types:publishAllPublicationsToNmcpRepository
-      - name: Publish 'types-kotlinx-serialization' project to Central Portal
-        run: ./gradlew :types-kotlinx-serialization:publishAllPublicationsToNmcpRepository
+      - name: Publish sources
+        run: ./gradlew :publishSources
+      - name: Archive distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: distribution
+          path: build/distributions/*.zip
