@@ -18,7 +18,6 @@ kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-co
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotools-compatibility = { id = "org.kotools.compatibility" }
 kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
-kotools-types-publication = { id = "org.kotools.types.publication" }
 
 [libraries]
 bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "bignum" }
