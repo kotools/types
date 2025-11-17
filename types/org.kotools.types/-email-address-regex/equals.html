@@ -30,7 +30,8 @@
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
 <body>
     <div class="root">
 <nav class="navigation" id="navigation-wrapper">
@@ -42,7 +43,7 @@
                             Kotools Types
                     </a>            </div>
             <div class="library-version">
-<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;org.kotools.types/-email-address-regex/equals.html&quot;}">5.0.1</dokka-template-command>            </div>
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;org.kotools.types/-email-address-regex/equals.html&quot;}">5.1.0</dokka-template-command>            </div>
         </div>
         <div class="filter-section" id="filter-section">
                 <button class="platform-tag platform-selector common-like" data-active="" data-filter=":types:dokkaHtmlPartial/commonMain">common</button>
@@ -67,7 +68,7 @@
 <details>
 <summary>
     <b>Calling from Kotlin</b>
-</summary><p class="paragraph">Here's an example of calling this function from Kotlin code:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val regex: EmailAddressRegex = EmailAddressRegex.default()<br>val other: EmailAddressRegex = EmailAddressRegex.default()<br>val result: Boolean = regex == other // or regex.equals(other)<br>val message = "Regular expressions with the same pattern are equal."<br>assertTrue(result, message)</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></details><br>
+</summary><p class="paragraph">Here's an example of calling this function from Kotlin code:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val regex: EmailAddressRegex = EmailAddressRegex.default()<br>val other: EmailAddressRegex = EmailAddressRegex.default()<br>val result: Boolean = regex == other // or regex.equals(other)<br>assertTrue(result)</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></details><br>
 <details>
 <summary>
     <b>Calling from Java</b>
