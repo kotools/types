@@ -4,7 +4,7 @@ on:
 jobs:
   delivery:
     name: Delivery
-    runs-on: macos-13
+    runs-on: macos-14
     env:
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
