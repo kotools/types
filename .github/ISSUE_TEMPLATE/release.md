@@ -23,5 +23,5 @@ Issues of this version should be done before working on this issue.
 - [ ] 🔖 Publish GitHub release on Git tag.
 - [ ] 🔖 Set Gradle project's version to the next snapshot.
 - [ ] 📝 Announce this release on [r/Kotlin](https://www.reddit.com/r/Kotlin) and [r/KotlinMultiplatform](https://www.reddit.com/r/KotlinMultiplatform).
-- [ ] 📝 Announce this release on [Slack](https://kotlinlang.slack.com/archives/C05H0L1LD25).
+- [ ] 📝 Announce this release on [Slack](https://kotlinlang.slack.com/archives/C05H0L1LD25) (`kotools` and `multiplatform` channels).
 - [ ] 📝 Announce this release on [Twitter](https://twitter.com/kotools_org).
