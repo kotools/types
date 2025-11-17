@@ -46,7 +46,7 @@ jobs:
         run: ./gradlew :plugins:build
   internal:
     name: Internal
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
@@ -61,7 +61,7 @@ jobs:
         run: ./gradlew :types-internal:build
   library:
     name: Library
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
@@ -76,7 +76,7 @@ jobs:
         run: ./gradlew :types:build
   kotlin-serialization:
     name: Kotlin Serialization
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
