@@ -3,7 +3,6 @@ package org.kotools.types
 import kotools.types.internal.hashCodeOf
 import org.kotools.types.internal.DeprecatedAsErrorSince
 import org.kotools.types.internal.Error
-import org.kotools.types.internal.ExceptionMessage
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -351,7 +350,7 @@ public class EmailAddressRegex private constructor(
         public fun alphabetic(): EmailAddressRegex {
             val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
             return checkNotNull(EmailAddressRegex of pattern) {
-                ExceptionMessage.invalidEmailAddressPattern(pattern)
+                "'$pattern' is invalid for validating email addresses."
             }
         }
 
@@ -409,7 +408,7 @@ public class EmailAddressRegex private constructor(
         public fun alphanumeric(): EmailAddressRegex {
             val pattern = """^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$"""
             return checkNotNull(EmailAddressRegex of pattern) {
-                ExceptionMessage.invalidEmailAddressPattern(pattern)
+                "'$pattern' is invalid for validating email addresses."
             }
         }
     }
