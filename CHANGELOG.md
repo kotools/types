@@ -16,80 +16,14 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-> Thanks to [@LVMVRQUXL] for contributing to this new release. 🙏
-
-### ✨ Added
-
-- Support iOS arm64 Kotlin/Native target ([#843]).
-- Support browser target for Kotlin/JS ([#874]).
-- `Integer` **experimental** type for preventing overflow when performing
-  arithmetic operations with integers, and for consistent behavior across all
-  platforms when dividing an integer by zero ([#880]).
-- Serializer for `Integer` type, in `KotoolsTypesSerializersModule()`
-  **experimental** function ([#898]).
-- `of(String)` and `of(String, EmailAddressRegex)` **experimental** functions in
-  `EmailAddress.Companion` type, for creating an instance of `EmailAddress`
-  ([#865]).
-- `EmailAddressRegex.Companion.of(String)` **experimental** function for
-  creating an instance of `EmailAddressRegex` ([#868]).
-- Java compatibility in
-  [dependency compatibility](documentation/dependencies.md) ([1dacbdae2]).
-
-### ♻️ Changed
-
-- Improve [declarations lifecycle](documentation/declarations-lifecycle.md)
-  documentation ([1f9e8151a], [7a8e483f], [fd2f9b28] and [7a1942ae1]).
-- Update [dependency compatibility](documentation/dependencies.md) documentation
-  ([c60c84d4]).
-- Hide `KotoolsTypesSerializersModule()` **experimental** function from Java
-  code ([#897]).
-
-### 🗑️ Deprecated
-
-- `orNull` and `orThrow` functions of `EmailAddress.Companion` **experimental**
-  type, with an **error** level, for using its `of` functions instead ([#865]).
-- `orNull(String)` and `orThrow(String)` functions of
-  `EmailAddressRegex.Companion` **experimental** type, with an **error** level,
-  for using its `of` function instead ([#868]).
-
-### 🔥 Removed
-
-- Following **deprecated** declarations from `EmailAddress.Companion`
-  **experimental** type: `PATTERN` constant, `orNull(String, String)` and
-  `orThrow(String, String)` functions ([#838]).
-- `Zero` **experimental** type and its serializers ([#844]). Use
-  `Integer.from(0)` instead.
-- `stringSerializer()` **experimental** functions ([#897]). Use
-  `KotoolsTypesSerializersModule()` **experimental** function instead.
-
-### 🐛 Fixed
-
-- Run configurations in [contributing guidelines](CONTRIBUTING.md) ([#854]).
-- Kotlin/Native typos in [README](README.md) of root project ([e4df56bf8]).
-
-[@LVMVRQUXL]: https://github.com/LVMVRQUXL
-[#838]: https://github.com/kotools/types/issues/838
-[#843]: https://github.com/kotools/types/issues/843
-[#844]: https://github.com/kotools/types/issues/844
-[#854]: https://github.com/kotools/types/issues/854
-[#865]: https://github.com/kotools/types/issues/865
-[#868]: https://github.com/kotools/types/issues/868
-[#874]: https://github.com/kotools/types/issues/874
-[#880]: https://github.com/kotools/types/issues/880
-[#897]: https://github.com/kotools/types/issues/897
-[#898]: https://github.com/kotools/types/issues/898
-[1dacbdae2]: https://github.com/kotools/types/commit/1dacbdae2
-[1f9e8151a]: https://github.com/kotools/types/commit/1f9e8151a
-[7a1942ae1]: https://github.com/kotools/types/commit/7a1942ae1
-[7a8e483f]: https://github.com/kotools/types/commit/7a8e483f
-[c60c84d4]: https://github.com/kotools/types/commit/c60c84d4
-[e4df56bf8]: https://github.com/kotools/types/commit/e4df56bf8
-[fd2f9b28]: https://github.com/kotools/types/commit/fd2f9b28
+> Thanks to [@LVMVRQUXL](https://github.com/LVMVRQUXL) for contributing to this
+> new release. 🙏
 
 ## 🔖 Releases
 
 | Version | Release date |
 |---------|--------------|
+| [5.1.0] | 2025-11-17   |
 | [5.0.1] | 2025-04-26   |
 | [5.0.0] | 2025-01-13   |
 | [4.5.3] | 2024-10-20   |
@@ -120,6 +54,7 @@ All notable changes to this project will be documented in this file.
 | [1.0.1] | 2022-03-21   |
 | [1.0.0] | 2022-02-28   |
 
+[5.1.0]: https://github.com/kotools/types/releases/tag/5.1.0
 [5.0.1]: https://github.com/kotools/types/releases/tag/5.0.1
 [5.0.0]: https://github.com/kotools/types/releases/tag/5.0.0
 [4.5.3]: https://github.com/kotools/types/releases/tag/4.5.3
