@@ -6,19 +6,6 @@ kotlin = "1.9.25!!"
 kotlinx-binary-compatibility-validator = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
 
-[plugins]
-convention-base-module = { id = "convention.base.module" }
-convention-base-root = { id = "convention.base.root" }
-convention-documentation-module = { id = "convention.documentation.module" }
-convention-documentation-root = { id = "convention.documentation.root" }
-convention-kotlin-multiplatform = { id = "convention.kotlin.multiplatform" }
-convention-publication-module = { id = "convention.publication.module" }
-convention-publication-root = { id = "convention.publication.root" }
-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
-kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotools-compatibility = { id = "org.kotools.compatibility" }
-kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
-
 [libraries]
 bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "bignum" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
@@ -28,3 +15,18 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+[plugins]
+# Community plugins
+kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+# Convention plugins
+convention-base-module = { id = "convention.base.module" }
+convention-base-root = { id = "convention.base.root" }
+convention-documentation-module = { id = "convention.documentation.module" }
+convention-documentation-root = { id = "convention.documentation.root" }
+convention-kotlin-multiplatform = { id = "convention.kotlin.multiplatform" }
+convention-publication-module = { id = "convention.publication.module" }
+convention-publication-root = { id = "convention.publication.root" }
+kotools-compatibility = { id = "org.kotools.compatibility" }
+kotools-samples-multiplatform = { id = "org.kotools.samples.multiplatform" }
