@@ -6,7 +6,7 @@ kotlin.explicitApi()
 
 gradlePlugin.plugins.register("Compatibility").configure {
     this.id = "org.kotools.compatibility"
-    this.implementationClass = "org.kotools.gradle.CompatibilityPlugin"
+    this.implementationClass = "${this.id}.${this.name}Plugin"
 }
 
 dependencies {

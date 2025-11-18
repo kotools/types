@@ -1,4 +1,6 @@
-package org.kotools.gradle
+@file:JvmName("Plugin")
+
+package org.kotools.compatibility
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

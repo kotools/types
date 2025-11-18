@@ -1,4 +1,6 @@
-package org.kotools.gradle
+@file:JvmName("Extension")
+
+package org.kotools.compatibility
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
