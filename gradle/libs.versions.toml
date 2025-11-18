@@ -3,7 +3,7 @@ bignum = "0.3.9!!"
 dokka = "1.9.20!!"
 java = "17"
 kotlin = "1.9.25!!"
-kotlinx-binary-compatibility-validator = "0.16.3!!"
+kotlinx-bcv = "0.16.3!!"
 kotlinx-serialization = "1.6.3!!"
 
 [libraries]
@@ -18,7 +18,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 [plugins]
 # Community plugins
-kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binary-compatibility-validator" }
+kotlinx-bcv = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-bcv" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 # Convention plugins
 convention-base-module = { id = "convention.base.module" }
