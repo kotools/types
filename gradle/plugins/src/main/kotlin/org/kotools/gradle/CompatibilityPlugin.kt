@@ -4,7 +4,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
-import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
@@ -20,19 +19,18 @@ public class CompatibilityPlugin : Plugin<Project> {
     /** Applies this plugin to the specified [project]. */
     override fun apply(project: Project) {
         val compatibility = CompatibilityExtension(project)
-        project.tasks.javaCompile(compatibility)
+        project.withJava(compatibility)
         project.withKotlinMultiplatform(compatibility)
     }
 }
 
 // ----------------------------------- Java ------------------------------------
 
-private fun TaskContainer.javaCompile(
-    compatibility: CompatibilityExtension
-): Unit = this.withType<JavaCompile>().configureEach {
-    val version: Provider<Int> = compatibility.java.map(String::toInt)
-    this.options.release.set(version)
-}
+private fun Project.withJava(compatibility: CompatibilityExtension): Unit =
+    this.tasks.withType<JavaCompile>().configureEach {
+        val version: Provider<Int> = compatibility.java.map(String::toInt)
+        this.options.release.set(version)
+    }
 
 // --------------------------- Kotlin Multiplatform ----------------------------
 
