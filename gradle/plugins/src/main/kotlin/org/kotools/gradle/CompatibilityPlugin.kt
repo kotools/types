@@ -2,6 +2,7 @@ package org.kotools.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
@@ -24,6 +25,8 @@ public class CompatibilityPlugin : Plugin<Project> {
     }
 }
 
+// ----------------------------------- Java ------------------------------------
+
 private fun TaskContainer.javaCompile(
     compatibility: CompatibilityExtension
 ): Unit = this.withType<JavaCompile>().configureEach {
@@ -31,28 +34,40 @@ private fun TaskContainer.javaCompile(
     this.options.release.set(version)
 }
 
+// --------------------------- Kotlin Multiplatform ----------------------------
+
 private fun Project.withKotlinMultiplatform(
     compatibility: CompatibilityExtension
 ): Unit = this.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
-    val kotlin: KotlinMultiplatformExtension =
-        this@withKotlinMultiplatform.extensions.getByType()
-    kotlin.targets.withType<KotlinJvmTarget>().configureEach {
-        this.compilations.configureEach {
-            compatibility.java.map(JvmTarget.Companion::fromTarget)
-                .let(this.compilerOptions.options.jvmTarget::set)
-            compatibility.java.map {
-                val release = "-Xjdk-release=$it"
-                this.compilerOptions.options.freeCompilerArgs.add(release)
-            }
-        }
-    }
-    kotlin.targets.configureEach {
-        this.compilations.configureEach {
-            compatibility.kotlin.map { it.substringBeforeLast('.') }
-                .map(KotlinVersion.Companion::fromVersion)
-                .also(this.compilerOptions.options.apiVersion::set)
-                .let(this.compilerOptions.options.languageVersion::set)
-        }
-    }
+    val kotlin: KotlinMultiplatformExtension = project.extensions.getByType()
+    kotlin.configureAllTargets(compatibility)
+    kotlin.configureJvmTargets(compatibility)
     compatibility.kotlin.map { kotlin.coreLibrariesVersion = it }
+}
+
+private fun KotlinMultiplatformExtension.configureAllTargets(
+    compatibility: CompatibilityExtension
+): Unit = this.targets.configureEach {
+    this.compilations.configureEach {
+        val version: Provider<KotlinVersion> = compatibility.kotlin
+            .map { it.substringBeforeLast('.') }
+            .map(KotlinVersion.Companion::fromVersion)
+        this.compilerOptions.options.apiVersion.set(version)
+        this.compilerOptions.options.languageVersion.set(version)
+    }
+}
+
+private fun KotlinMultiplatformExtension.configureJvmTargets(
+    compatibility: CompatibilityExtension
+): Unit = this.targets.withType<KotlinJvmTarget>().configureEach {
+    this.compilations.configureEach {
+        val javaVersion: Property<String> = compatibility.java
+        val jvmTarget: Provider<JvmTarget> =
+            javaVersion.map(JvmTarget.Companion::fromTarget)
+        this.compilerOptions.options.jvmTarget.set(jvmTarget)
+        javaVersion.map {
+            val release = "-Xjdk-release=$it"
+            this.compilerOptions.options.freeCompilerArgs.add(release)
+        }
+    }
 }
