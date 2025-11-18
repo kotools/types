@@ -26,11 +26,30 @@ public class CompatibilityPlugin : Plugin<Project> {
 
 // ----------------------------------- Java ------------------------------------
 
-private fun Project.withJava(compatibility: CompatibilityExtension): Unit =
+private fun Project.withJava(compatibility: CompatibilityExtension) {
     this.tasks.withType<JavaCompile>().configureEach {
         val version: Provider<Int> = compatibility.java.map(String::toInt)
         this.options.release.set(version)
     }
+    this.tasks.register("javaCompatibility").configure {
+        this.description = "Prints Java compatibility of this project."
+        this.group = "compatibility"
+        this.doLast {
+            val version: String? = compatibility.java.orNull
+            if (version != null) return@doLast println("Java $version")
+            val javaCompileTask: JavaCompile = this@withJava.tasks
+                .withType<JavaCompile>()
+                .toList()
+                .first()
+            val sourceVersion: String = javaCompileTask.sourceCompatibility
+            val targetVersion: String = javaCompileTask.targetCompatibility
+            if (sourceVersion == targetVersion) println("Java $sourceVersion")
+            else println(
+                "Java $sourceVersion (source) and $targetVersion (target)"
+            )
+        }
+    }
+}
 
 // --------------------------- Kotlin Multiplatform ----------------------------
 
