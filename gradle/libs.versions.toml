@@ -1,10 +1,10 @@
 [versions]
-bignum = "0.3.9!!"
-dokka = "1.9.20!!"
+bignum = "0.3.9"
+dokka = "1.9.20"
 java = "17"
-kotlin = "1.9.25!!"
-kotlinx-bcv = "0.16.3!!"
-kotlinx-serialization = "1.6.3!!"
+kotlin = "1.9.25"
+kotlinx-bcv = "0.16.3"
+kotlinx-serialization = "1.6.3"
 
 [libraries]
 bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "bignum" }
