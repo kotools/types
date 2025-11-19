@@ -19,10 +19,16 @@ All notable changes to this project will be documented in this file.
 > Thanks to [@LVMVRQUXL](https://github.com/LVMVRQUXL) for contributing to this
 > new release. 🙏
 
+### ♻️ Changed
+
+- Improve dependency compatibility documentation ([8a6f2fcd5]).
+
 ### 🐛 Fixed
 
 - Incompatibility with different dependency versions
   ([#907](https://github.com/kotools/types/issues/907)).
+
+[8a6f2fcd5]: https://github.com/kotools/types/commit/8a6f2fcd566ade213da5428fd83ca47a97a5bd9a
 
 ## 🔖 Releases
 
