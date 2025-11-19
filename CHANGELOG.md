@@ -23,10 +23,15 @@ All notable changes to this project will be documented in this file.
 
 - Improve dependency compatibility documentation ([8a6f2fcd5]).
 
+### 🔥 Removed
+
+- Version 5.0.0 from API reference ([62652e1c]).
+
 ### 🐛 Fixed
 
 - Incompatibility with different dependency versions ([#907]).
 
+[62652e1c]: https://github.com/kotools/types/commit/62652e1c14fb2ef3fd40394052ff29fbef663c16
 [8a6f2fcd5]: https://github.com/kotools/types/commit/8a6f2fcd566ade213da5428fd83ca47a97a5bd9a
 [#907]: https://github.com/kotools/types/issues/907
 
