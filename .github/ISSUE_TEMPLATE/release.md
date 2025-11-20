@@ -18,7 +18,7 @@ Issues of this version should be done before working on this issue.
 - [ ] 🚀 Run [delivery workflow](https://github.com/kotools/types/actions/workflows/delivery.yml).
 - [ ] 🚀 Release distribution on [Maven Central](https://central.sonatype.com).
 - [ ] 🚀 Publish API reference with `./gradlew :publishApiReference`.
-- [ ] 📝 Move unreleased changelog to GitHub release draft.
+- [ ] 📝 Move unreleased changelog to GitHub release draft, and add new release in changelog.
 - [ ] 🔖 Create Git tag with `./gradlew :tag`.
 - [ ] 🔖 Publish GitHub release on Git tag.
 - [ ] 🔖 Set Gradle project's version to the next snapshot.
