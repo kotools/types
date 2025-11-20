@@ -16,29 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-> Thanks to [@LVMVRQUXL](https://github.com/LVMVRQUXL) for contributing to this
-> new release. 🙏
-
-### ♻️ Changed
-
-- Improve dependency compatibility documentation ([8a6f2fcd5]).
-
-### 🔥 Removed
-
-- Version 5.0.0 from API reference ([62652e1c]).
-
-### 🐛 Fixed
-
-- Incompatibility with different dependency versions ([#907]).
-
-[62652e1c]: https://github.com/kotools/types/commit/62652e1c14fb2ef3fd40394052ff29fbef663c16
-[8a6f2fcd5]: https://github.com/kotools/types/commit/8a6f2fcd566ade213da5428fd83ca47a97a5bd9a
-[#907]: https://github.com/kotools/types/issues/907
-
 ## 🔖 Releases
 
 | Version | Release date |
 |---------|--------------|
+| [5.1.1] | 2025-11-20   |
 | [5.1.0] | 2025-11-17   |
 | [5.0.1] | 2025-04-26   |
 | [5.0.0] | 2025-01-13   |
@@ -70,6 +52,7 @@ All notable changes to this project will be documented in this file.
 | [1.0.1] | 2022-03-21   |
 | [1.0.0] | 2022-02-28   |
 
+[5.1.1]: https://github.com/kotools/types/releases/tag/5.1.1
 [5.1.0]: https://github.com/kotools/types/releases/tag/5.1.0
 [5.0.1]: https://github.com/kotools/types/releases/tag/5.0.1
 [5.0.0]: https://github.com/kotools/types/releases/tag/5.0.0
