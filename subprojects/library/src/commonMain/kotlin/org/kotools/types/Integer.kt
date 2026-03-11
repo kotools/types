@@ -204,21 +204,10 @@ public class Integer private constructor(private val decimal: String) {
          * returning `null` in case of invalid [text].
          */
         @JvmSynthetic
-        public fun fromDecimalOrNull(text: String): Integer? {
-            if (text.isBlank()) return null
-            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
-            val unsignedText: String =
-                textWithoutPlusSignPrefix.removePrefix("-")
-            val isDecimal: Boolean =
-                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            if (!isDecimal) return null
-            val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.zero()
-            val sign: String =
-                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
-                else ""
-            val digits: String = unsignedText.trimStart('0')
-            return Integer(decimal = "$sign$digits")
+        public fun fromDecimalOrNull(text: String): Integer? = try {
+            this.fromDecimal(text)
+        } catch (_: IllegalArgumentException) {
+            null
         }
 
         @JvmSynthetic
