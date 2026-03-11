@@ -1,5 +1,7 @@
 package org.kotools.types
 
+import org.kotools.types.Integer.Companion.fromDecimal
+import org.kotools.types.Integer.Companion.fromDecimalOrNull
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -344,11 +346,10 @@ public class Integer private constructor(private val decimal: String) {
         if (this == zero()) return this
         val minusSign = "-"
         val isNegative: Boolean = this.decimal.startsWith(minusSign)
-        if (isNegative) {
-            val text: String = this.decimal.removePrefix(minusSign)
-            return fromDecimal(text)
-        }
-        return fromDecimal("$minusSign${this.decimal}")
+        val result: String =
+            if (isNegative) this.decimal.removePrefix(minusSign)
+            else "$minusSign${this.decimal}"
+        return fromDecimal(result)
     }
 
     /**
