@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ♻️ Changed
+
+- Improve the vision of Kotools Types in design goals, README and `Integer`
+  type's documentation ([#913](https://github.com/kotools/types/pull/913)).
+
 ## 🔖 Releases
 
 | Version | Release date |
