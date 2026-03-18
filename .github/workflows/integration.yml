@@ -41,7 +41,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.3.1
+        uses: gradle/actions/setup-gradle@v5.0.2
       - name: Build 'plugins' project
         run: ./gradlew :plugins:build
   internal:
@@ -56,7 +56,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.3.1
+        uses: gradle/actions/setup-gradle@v5.0.2
       - name: Build 'types-internal' project
         run: ./gradlew :types-internal:build
   library:
@@ -71,7 +71,7 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.3.1
+        uses: gradle/actions/setup-gradle@v5.0.2
       - name: Build 'types' project
         run: ./gradlew :types:build
   kotlin-serialization:
@@ -86,6 +86,6 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.3.1
+        uses: gradle/actions/setup-gradle@v5.0.2
       - name: Build 'types-kotlinx-serialization' project
         run: ./gradlew :types-kotlinx-serialization:build
