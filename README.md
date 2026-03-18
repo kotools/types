@@ -99,28 +99,11 @@ implementation "org.kotools:types:$version"
 > for serializing types from the `org.kotools.types` package using the
 > [kotlinx.serialization] library. 
 
-## 🎨 Included types
-
-Explore some of the types offered by this library:
-
-- [NotBlankString][kotools.types.text.NotBlankString] ensuring that your strings
-  have at least one character excluding whitespaces.
-- [PositiveInt][kotools.types.number.PositiveInt] representing an integer number
-  of type [Int][kotlin.Int] that is greater than or equals zero.
-- [NotEmptyList][kotools.types.collection.NotEmptyList] for grouping your data
-  in a list with at least one element.
-
-See the [API reference](https://types.kotools.org) for more types!
-
-[kotlin.Int]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int
-[kotools.types.collection.NotEmptyList]: https://types.kotools.org/types/kotools.types.collection/-not-empty-list/index.html
-[kotools.types.number.PositiveInt]: https://types.kotools.org/types/kotools.types.number/-positive-int/index.html
-[kotools.types.text.NotBlankString]: https://types.kotools.org/types/kotools.types.text/-not-blank-string/index.html
-
 ## 📝 Documentation
 
 Here's additional documentation for learning more about this project:
 
+- [API reference](https://types.kotools.org)
 - [Design goals](documentation/design-goals.md)
 - [Versioning strategy](documentation/versioning-strategy.md)
 - [Dependency compatibility](documentation/dependencies.md)
