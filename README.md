@@ -14,13 +14,6 @@
 [![macOS arm64 Platform][macos-arm64-platform-badge]][kotlin-native]
 [![MinGW x64 Platform][mingw-x64-platform-badge]][kotlin-native]
 
-> "Kool Types for Kotlin Multiplatform." -
-> [@jmfayard](https://github.com/jmfayard)
-
-Unlock the true potential of Kotlin's type system across Kotlin/JVM, Kotlin/JS,
-and Kotlin/Native platforms with Kotools Types – your comprehensive toolkit for
-explicit type handling!
-
 [ios-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_arm64-4b4bff
 [ios-simulator-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_Simulator_arm64-4b4bff
 [ios-x64-platform-badge]: https://img.shields.io/badge/Platform-iOS_x64-4b4bff
@@ -42,21 +35,28 @@ explicit type handling!
 
 ## 🚀 Introduction
 
-Kotools Types is not just a library; it's your gateway to seamless and
-expressive type manipulation in Kotlin projects.
-Dive into a world where types are your allies, providing clarity, safety, and
-flexibility across diverse Kotlin platforms.
+Kotools Types is a Kotlin Multiplatform library providing types that model
+real-world concepts with correct and predictable behavior.
+
+Instead of exposing the limitations of underlying platforms, these types follow
+their domain definitions. For example, the [Integer](https://types.kotools.org/types/org.kotools.types/-integer/index.html)
+type represents a mathematical integer and does not overflow.
+
+By using Kotools Types, you can build APIs that are more explicit, easier to
+reason about, and less error-prone across JVM, JS, and Native platforms.
 
 ## ⭐️ Key Features
 
-- **Unified Type Handling:** Embrace a unified approach to handling types across
-  platforms, ensuring consistency in your Kotlin/JVM, Kotlin/JS and
-  Kotlin/Native projects.
-- **Enhanced Type Safety:** Fortify your code with explicit types, catching
-  errors at compile time to create robust and reliable applications.
-- **Automatic Serialization:** Seamlessly serialize and deserialize types using
-  [kotlinx.serialization], making data interchange between platforms, APIs, 
-  databases and libraries a breeze.
+- **Correct by Design:** Types model real-world concepts and provide predictable
+  behavior, avoiding common pitfalls such as integer overflow.
+- **Explicit and Safe APIs:** Constraints and invariants are expressed directly
+  in types, helping prevent invalid states and making code easier to understand.
+- **Complete and Practical:** Each type comes with the operations needed for
+  real-world usage, not just constructors or wrappers.
+- **Multiplatform Ready:** Use the same reliable types across Kotlin/JVM,
+  Kotlin/JS, and Kotlin/Native.
+- **Seamless Serialization:** Built-in support for [kotlinx.serialization]
+  ensures smooth integration with APIs, databases, and external systems.
 
 ## 🛠️ Installation
 
