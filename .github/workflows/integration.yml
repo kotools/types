@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.1
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:
@@ -49,7 +49,7 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.1
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:
@@ -64,7 +64,7 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.1
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:
@@ -79,7 +79,7 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.1
       - name: Setup Java
         uses: actions/setup-java@v4.7.0
         with:
