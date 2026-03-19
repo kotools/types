@@ -15,6 +15,10 @@
 [![macOS arm64 Platform][macos-arm64-platform-badge]][kotlin-native]
 [![MinGW x64 Platform][mingw-x64-platform-badge]][kotlin-native]
 
+> [!IMPORTANT]
+> This module is experimental and not intended for production use.
+> It will be replaced by a stable solution in Kotools Types 6.0.
+
 This module provides support for serializing types from Kotools Types using the
 [kotlinx.serialization] library.
 
