@@ -8,7 +8,6 @@ import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a
@@ -247,40 +246,8 @@ public class EmailAddressRegex private constructor(
         /**
          * Returns a regular expression for validating
          * [email addresses][EmailAddress] from the specified [pattern], or
-         * returns `null` if the [pattern] doesn't match the
-         * [default one][EmailAddressRegex.Companion.default].
-         *
-         * This function is not available from Java code due to its non-explicit
-         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [orThrow] function for throwing an exception in case of
-         * invalid [pattern] instead of returning `null`.
-         */
-        @Deprecated(
-            "Use the 'of(String)' function instead.",
-            ReplaceWith(
-                "EmailAddressRegex of pattern",
-                "org.kotools.types.EmailAddressRegex"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
-        @JvmSynthetic
-        public fun orNull(pattern: String): EmailAddressRegex? {
-            val patternType: String? = pattern::class.simpleName
-            Error.deprecatedFunction(
-                "EmailAddressRegex.Companion.orNull($patternType)"
-            )
-        }
-
-        /**
-         * Returns a regular expression for validating
-         * [email addresses][EmailAddress] from the specified [pattern], or
          * throws an [IllegalArgumentException] if the [pattern] doesn't match
          * the [default one][EmailAddressRegex.Companion.default].
-         *
-         * See the [orNull] function for returning `null` in case of invalid
-         * [pattern] instead of throwing an exception.
          */
         @Deprecated(
             "Use the 'of(String)' function instead.",
