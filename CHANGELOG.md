@@ -21,6 +21,12 @@ All notable changes to this project will be documented in this file.
 - Improve the vision of Kotools Types in design goals, README and `Integer`
   type's documentation ([#913](https://github.com/kotools/types/pull/913)).
 
+### 🔥 Removed
+
+- `orNull` and `orThrow` **deprecated** functions from `EmailAddress.Companion`
+  **experimental** type ([#871](https://github.com/kotools/types/issues/871)).
+  Use its `of` functions instead.
+
 ## 🔖 Releases
 
 | Version | Release date |
