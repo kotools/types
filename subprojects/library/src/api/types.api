@@ -348,7 +348,6 @@ public final class org/kotools/types/EmailAddressRegex {
 	public final fun hashCode ()I
 	public final fun matches (Ljava/lang/CharSequence;)Z
 	public static final fun of (Ljava/lang/String;)Lorg/kotools/types/EmailAddressRegex;
-	public static final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/EmailAddressRegex;
 	public final fun toString ()Ljava/lang/String;
 }
 
@@ -357,7 +356,6 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 	public final fun alphanumeric ()Lorg/kotools/types/EmailAddressRegex;
 	public final fun defaultPattern ()Lorg/kotools/types/EmailAddressRegex;
 	public final fun of (Ljava/lang/String;)Lorg/kotools/types/EmailAddressRegex;
-	public final fun orThrow (Ljava/lang/String;)Lorg/kotools/types/EmailAddressRegex;
 }
 
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {

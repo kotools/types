@@ -1,8 +1,6 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.DeprecatedAsErrorSince
-import org.kotools.types.internal.Error
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -241,29 +239,6 @@ public class EmailAddressRegex private constructor(
                 .matches(pattern)
             return if (isValidPattern) EmailAddressRegex(pattern)
             else null
-        }
-
-        /**
-         * Returns a regular expression for validating
-         * [email addresses][EmailAddress] from the specified [pattern], or
-         * throws an [IllegalArgumentException] if the [pattern] doesn't match
-         * the [default one][EmailAddressRegex.Companion.default].
-         */
-        @Deprecated(
-            "Use the 'of(String)' function instead.",
-            ReplaceWith(
-                "requireNotNull(EmailAddressRegex of pattern)",
-                "org.kotools.types.EmailAddressRegex"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
-        @JvmStatic
-        public fun orThrow(pattern: String): EmailAddressRegex {
-            val patternType: String? = pattern::class.simpleName
-            Error.deprecatedFunction(
-                "EmailAddressRegex.Companion.orThrow($patternType)"
-            )
         }
 
         /**
