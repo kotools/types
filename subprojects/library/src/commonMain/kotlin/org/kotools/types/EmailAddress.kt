@@ -1,8 +1,6 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.DeprecatedAsErrorSince
-import org.kotools.types.internal.Error
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
@@ -175,55 +173,5 @@ public class EmailAddress private constructor(private val text: String) {
         @JvmStatic
         public fun of(text: String, regex: EmailAddressRegex): EmailAddress? =
             if (regex matches text) EmailAddress(text) else null
-
-        /**
-         * Creates an instance of [EmailAddress] from the specified [text], or
-         * throws an [IllegalArgumentException] if the [text] doesn't match the
-         * [default regular expression][EmailAddressRegex.default].
-         */
-        @Deprecated(
-            "Use the 'of(String)' function instead.",
-            ReplaceWith(
-                "requireNotNull(EmailAddress of text)",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
-        @JvmStatic
-        public fun orThrow(text: String): EmailAddress {
-            val textType: String? = text::class.simpleName
-            Error.deprecatedFunction(
-                "EmailAddress.Companion.orThrow($textType)"
-            )
-        }
-
-        /**
-         * Returns an email address from the specified [text], or throws an
-         * [IllegalArgumentException] if the [text] doesn't match the specified
-         * [regex].
-         */
-        @Deprecated(
-            "Use the 'of(String, EmailAddressRegex)' function instead.",
-            ReplaceWith(
-                "requireNotNull(EmailAddress.of(text, regex))",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
-        @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
-        @JvmStatic
-        public fun orThrow(
-            text: String,
-            regex: EmailAddressRegex
-        ): EmailAddress {
-            val textType: String? = text::class.simpleName
-            val regexType: String? = regex::class.simpleName
-            Error.deprecatedFunction(
-                "EmailAddress.Companion.orThrow($textType, $regexType)"
-            )
-        }
     }
 }
