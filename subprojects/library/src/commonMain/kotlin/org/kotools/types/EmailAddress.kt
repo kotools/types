@@ -7,7 +7,6 @@ import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
-import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an [email address](https://en.wikipedia.org/wiki/Email_address).
@@ -179,70 +178,8 @@ public class EmailAddress private constructor(private val text: String) {
 
         /**
          * Creates an instance of [EmailAddress] from the specified [text], or
-         * returns `null` if the [text] doesn't match the
-         * [default regular expression][EmailAddressRegex.Companion.default].
-         *
-         * This function is not available from Java code due to its non-explicit
-         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [orThrow] function for throwing an exception instead of
-         * returning `null` in case of invalid [text].
-         */
-        @Deprecated(
-            "Use the 'of(String)' function instead.",
-            ReplaceWith(
-                "EmailAddress of text",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
-        @ExperimentalSince(KotoolsTypesVersion.V4_5_3)
-        @JvmSynthetic
-        public fun orNull(text: String): EmailAddress? {
-            val textType: String? = text::class.simpleName
-            Error.deprecatedFunction("EmailAddress.Companion.orNull($textType)")
-        }
-
-        /**
-         * Returns an email address from the specified [text], or returns `null`
-         * if the [text] doesn't match the specified [regex].
-         *
-         * This function is not available from Java code due to its non-explicit
-         * [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [orThrow] function for throwing an exception instead of
-         * returning `null` in case of invalid [text].
-         */
-        @Deprecated(
-            "Use the 'of(String, EmailAddressRegex)' function instead.",
-            ReplaceWith(
-                "EmailAddress.of(text, regex)",
-                "org.kotools.types.EmailAddress"
-            ),
-            DeprecationLevel.ERROR
-        )
-        @DeprecatedAsErrorSince(KotoolsTypesVersion.V5_1_0)
-        @ExperimentalSince(KotoolsTypesVersion.V5_0_1)
-        @JvmSynthetic
-        public fun orNull(
-            text: String,
-            regex: EmailAddressRegex
-        ): EmailAddress? {
-            val textType: String? = text::class.simpleName
-            val regexType: String? = regex::class.simpleName
-            Error.deprecatedFunction(
-                "EmailAddress.Companion.orNull($textType, $regexType)"
-            )
-        }
-
-        /**
-         * Creates an instance of [EmailAddress] from the specified [text], or
          * throws an [IllegalArgumentException] if the [text] doesn't match the
          * [default regular expression][EmailAddressRegex.default].
-         *
-         * See the [orNull] function for returning `null` instead of throwing an
-         * exception in case of invalid [text].
          */
         @Deprecated(
             "Use the 'of(String)' function instead.",
@@ -266,9 +203,6 @@ public class EmailAddress private constructor(private val text: String) {
          * Returns an email address from the specified [text], or throws an
          * [IllegalArgumentException] if the [text] doesn't match the specified
          * [regex].
-         *
-         * See the [orNull] function for returning `null` instead of throwing an
-         * exception in case of invalid [text].
          */
         @Deprecated(
             "Use the 'of(String, EmailAddressRegex)' function instead.",
