@@ -20,6 +20,10 @@ All notable changes to this project will be documented in this file.
 
 - Improve the vision of Kotools Types in design goals, README and `Integer`
   type's documentation ([#913](https://github.com/kotools/types/pull/913)).
+- Store `Integer`'s internal with its platform-specific representation instead
+  of `String`. This change removes the need for serializing/deserializing the
+  number on each arithmetic operations, making them more efficient
+  ([#912](https://github.com/kotools/types/issues/912)).
 
 ### 🔥 Removed
 
