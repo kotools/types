@@ -35,6 +35,4 @@ dependencies {
 
     commonTestImplementation(libs.kotlin.test)
     commonTestImplementation(libs.kotlinx.serialization.json)
-
-    nativeMainImplementation(libs.bignum)
 }
