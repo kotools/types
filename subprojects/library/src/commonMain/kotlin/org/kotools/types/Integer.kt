@@ -102,7 +102,9 @@ import kotlin.jvm.JvmSynthetic
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
-public class Integer private constructor(private val decimal: PlatformInteger) {
+public class Integer private constructor(private val decimal: String) {
+    private var cached: PlatformInteger? = null
+
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
@@ -133,10 +135,7 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
          * </details>
          */
         @JvmStatic
-        public fun from(number: Long): Integer {
-            val decimal = PlatformInteger(number)
-            return Integer(decimal)
-        }
+        public fun from(number: Long): Integer = Integer("$number")
 
         /**
          * Creates an [Integer] from the specified [text], or throws an
@@ -196,8 +195,7 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
             val digits: String = unsignedText.trimStart('0')
-            val decimal = PlatformInteger("$sign$digits")
-            return Integer(decimal)
+            return Integer("$sign$digits")
         }
 
         /**
@@ -354,9 +352,15 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.unaryMinus]
      * </details>
      */
-    public operator fun unaryMinus(): Integer =
-        if (this == zero()) this
-        else Integer(-this.decimal)
+    public operator fun unaryMinus(): Integer {
+        if (this == zero()) return this
+        val minusSign = "-"
+        val isNegative: Boolean = this.decimal.startsWith(minusSign)
+        val result: String =
+            if (isNegative) this.decimal.removePrefix(minusSign)
+            else "$minusSign${this.decimal}"
+        return fromDecimal(result)
+    }
 
     /**
      * Adds the [other] integer to this one.
@@ -383,8 +387,12 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.plus]
      * </details>
      */
-    public operator fun plus(other: Integer): Integer =
-        Integer(this.decimal + other.decimal)
+    public operator fun plus(other: Integer): Integer {
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val sum: PlatformInteger = x + y
+        return fromDecimal("$sum")
+    }
 
     /**
      * Subtracts the [other] integer from this one.
@@ -411,8 +419,12 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.minus]
      * </details>
      */
-    public operator fun minus(other: Integer): Integer =
-        Integer(this.decimal - other.decimal)
+    public operator fun minus(other: Integer): Integer {
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val difference: PlatformInteger = x - y
+        return fromDecimal("$difference")
+    }
 
     /**
      * Multiplies this integer by the [other] one.
@@ -439,8 +451,12 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.times]
      * </details>
      */
-    public operator fun times(other: Integer): Integer =
-        Integer(this.decimal * other.decimal)
+    public operator fun times(other: Integer): Integer {
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val product: PlatformInteger = x * y
+        return fromDecimal("$product")
+    }
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
@@ -475,7 +491,10 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
     public operator fun div(other: Integer): Integer {
         if (other == zero())
             throw ArithmeticException("Integer can't be divided by zero.")
-        return Integer(this.decimal / other.decimal)
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val quotient: PlatformInteger = x / y
+        return fromDecimal("$quotient")
     }
 
     /**
@@ -501,9 +520,13 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * `null` in case of invalid [other] integer.
      */
     @JvmSynthetic
-    public fun divOrNull(other: Integer): Integer? =
-        if (other == zero()) null
-        else Integer(this.decimal / other.decimal)
+    public fun divOrNull(other: Integer): Integer? {
+        if (other == zero()) return null
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val quotient: PlatformInteger = x / y
+        return fromDecimal("$quotient")
+    }
 
     /**
      * Returns the remainder of dividing this integer by the [other] one, or
@@ -538,7 +561,10 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
     public operator fun rem(other: Integer): Integer {
         if (other == zero())
             throw ArithmeticException("Integer can't be divided by zero.")
-        return Integer(this.decimal % other.decimal)
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val remainder: PlatformInteger = x % y
+        return fromDecimal("$remainder")
     }
 
     /**
@@ -564,9 +590,13 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * `null` in case of invalid [other] integer.
      */
     @JvmSynthetic
-    public fun remOrNull(other: Integer): Integer? =
-        if (other == zero()) null
-        else Integer(this.decimal % other.decimal)
+    public fun remOrNull(other: Integer): Integer? {
+        if (other == zero()) return null
+        val x: PlatformInteger = this.toPlatformInteger()
+        val y: PlatformInteger = other.toPlatformInteger()
+        val remainder: PlatformInteger = x % y
+        return fromDecimal("$remainder")
+    }
 
     // ------------------------------ Conversions ------------------------------
 
@@ -596,5 +626,8 @@ public class Integer private constructor(private val decimal: PlatformInteger) {
      * </details>
      */
     @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.decimal.toString()
+    final override fun toString(): String = this.decimal
+
+    private fun toPlatformInteger(): PlatformInteger = this.cached
+        ?: PlatformInteger(this.decimal).also { this.cached = it }
 }
