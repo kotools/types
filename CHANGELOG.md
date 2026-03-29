@@ -16,14 +16,16 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- Cache the platform-specific representation of `Integer` when performing an
+  arithmetic operation. This avoids repeated parsing when the same instance is
+  involved in multiple operations ([#912](https://github.com/kotools/types/issues/912)).
+
 ### ♻️ Changed
 
 - Improve the vision of Kotools Types in design goals, README and `Integer`
   type's documentation ([#913](https://github.com/kotools/types/pull/913)).
-- Store `Integer`'s internal with its platform-specific representation instead
-  of `String`. This change removes the need for serializing/deserializing the
-  number on each arithmetic operations, making them more efficient
-  ([#912](https://github.com/kotools/types/issues/912)).
 
 ### 🔥 Removed
 
