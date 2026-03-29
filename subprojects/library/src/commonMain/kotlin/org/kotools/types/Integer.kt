@@ -99,6 +99,27 @@ import kotlin.jvm.JvmSynthetic
  * - **Conversions:** Convert to its [decimal string][Integer.toString]
  * representation.
  * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Implementation note</b>
+ * </summary>
+ *
+ * ### Implementation note
+ *
+ * The [Integer] type uses [String] as its canonical representation to ensure
+ * consistent behavior across platforms.
+ *
+ * For performance, each instance may cache its platform-specific numeric
+ * representation after the first use in an arithmetic operation. This avoids
+ * repeated parsing when the same instance is involved in multiple operations.
+ *
+ * This optimization is most effective when instances are reused, and has
+ * limited impact on short-lived intermediate results.
+ *
+ * SAMPLE: [org.kotools.types.IntegerSample.cache]
+ * </details>
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.V5_1_0)

@@ -4,7 +4,7 @@ import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
-    // ------------------------------ Motivations ------------------------------
+    // ----------------------------- Documentation -----------------------------
 
     @Suppress("INTEGER_OVERFLOW")
     @Test
@@ -34,6 +34,14 @@ class IntegerSample {
         val remainder: Result<Integer> = kotlin.runCatching { x % y }
         check(quotient.exceptionOrNull() is ArithmeticException)
         check(remainder.exceptionOrNull() is ArithmeticException)
+    }
+
+    @Test
+    fun cache() {
+        val x: Integer = Integer.from(9223372036854775807)
+        repeat(1000) {
+            x * x // x is parsed once
+        }
     }
 
     // ------------------------------- Creations -------------------------------
