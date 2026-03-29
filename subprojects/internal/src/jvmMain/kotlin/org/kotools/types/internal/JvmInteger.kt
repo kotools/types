@@ -14,27 +14,27 @@ internal class JvmInteger(private val integer: BigInteger) : PlatformInteger {
     // ------------------------- Arithmetic operations -------------------------
 
     override fun plus(other: PlatformInteger): PlatformInteger {
-        if (other !is JvmInteger) Error.prohibitedAddition(this, other)
+        check(other is JvmInteger)
         return JvmInteger(this.integer + other.integer)
     }
 
     override fun minus(other: PlatformInteger): PlatformInteger {
-        if (other !is JvmInteger) Error.prohibitedSubtraction(this, other)
+        check(other is JvmInteger)
         return JvmInteger(this.integer - other.integer)
     }
 
     override fun times(other: PlatformInteger): PlatformInteger {
-        if (other !is JvmInteger) Error.prohibitedMultiplication(this, other)
+        check(other is JvmInteger)
         return JvmInteger(this.integer * other.integer)
     }
 
     override fun div(other: PlatformInteger): PlatformInteger {
-        if (other !is JvmInteger) Error.prohibitedDivision(this, other)
+        check(other is JvmInteger)
         return JvmInteger(this.integer / other.integer)
     }
 
     override fun rem(other: PlatformInteger): PlatformInteger {
-        if (other !is JvmInteger) Error.prohibitedRemainder(this, other)
+        check(other is JvmInteger)
         return JvmInteger(this.integer % other.integer)
     }
 

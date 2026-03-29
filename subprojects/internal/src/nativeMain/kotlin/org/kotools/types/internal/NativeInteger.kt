@@ -16,27 +16,27 @@ internal class NativeInteger(
     // ------------------------- Arithmetic operations -------------------------
 
     override fun plus(other: PlatformInteger): PlatformInteger {
-        if (other !is NativeInteger) Error.prohibitedAddition(this, other)
+        check(other is NativeInteger)
         return NativeInteger(this.integer + other.integer)
     }
 
     override fun minus(other: PlatformInteger): PlatformInteger {
-        if (other !is NativeInteger) Error.prohibitedSubtraction(this, other)
+        check(other is NativeInteger)
         return NativeInteger(this.integer - other.integer)
     }
 
     override fun times(other: PlatformInteger): PlatformInteger {
-        if (other !is NativeInteger) Error.prohibitedMultiplication(this, other)
+        check(other is NativeInteger)
         return NativeInteger(this.integer * other.integer)
     }
 
     override fun div(other: PlatformInteger): PlatformInteger {
-        if (other !is NativeInteger) Error.prohibitedDivision(this, other)
+        check(other is NativeInteger)
         return NativeInteger(this.integer / other.integer)
     }
 
     override fun rem(other: PlatformInteger): PlatformInteger {
-        if (other !is NativeInteger) Error.prohibitedRemainder(this, other)
+        check(other is NativeInteger)
         return NativeInteger(this.integer % other.integer)
     }
 

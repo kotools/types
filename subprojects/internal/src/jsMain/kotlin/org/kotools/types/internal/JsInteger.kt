@@ -12,27 +12,27 @@ internal class JsInteger(private val integer: BigInt) : PlatformInteger {
     // ------------------------- Arithmetic operations -------------------------
 
     override fun plus(other: PlatformInteger): PlatformInteger {
-        if (other !is JsInteger) Error.prohibitedAddition(this, other)
+        check(other is JsInteger)
         return JsInteger(this.integer + other.integer)
     }
 
     override fun minus(other: PlatformInteger): PlatformInteger {
-        if (other !is JsInteger) Error.prohibitedSubtraction(this, other)
+        check(other is JsInteger)
         return JsInteger(this.integer - other.integer)
     }
 
     override fun times(other: PlatformInteger): PlatformInteger {
-        if (other !is JsInteger) Error.prohibitedMultiplication(this, other)
+        check(other is JsInteger)
         return JsInteger(this.integer * other.integer)
     }
 
     override fun div(other: PlatformInteger): PlatformInteger {
-        if (other !is JsInteger) Error.prohibitedDivision(this, other)
+        check(other is JsInteger)
         return JsInteger(this.integer / other.integer)
     }
 
     override fun rem(other: PlatformInteger): PlatformInteger {
-        if (other !is JsInteger) Error.prohibitedRemainder(this, other)
+        check(other is JsInteger)
         return JsInteger(this.integer % other.integer)
     }
 
