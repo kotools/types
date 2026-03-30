@@ -490,6 +490,29 @@ class IntegerTest {
     }
 
     @Test
+    fun minusOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(123)
+        // When
+        val result: Integer = x - y
+        // Then
+        val expected: Integer = -y
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun minusWithZero() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer = x - y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun times() {
         // Given
         val x: Integer = Integer.from(9223372036854775807)

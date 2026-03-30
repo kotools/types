@@ -443,6 +443,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
+        val zero: Integer = zero()
+        if (other == zero) return this
+        if (this == zero) return -other
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val difference: PlatformInteger = x - y
