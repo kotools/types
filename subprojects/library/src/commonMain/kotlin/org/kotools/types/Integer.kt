@@ -408,6 +408,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
+        val zero: Integer = zero()
+        if (this == zero) return other
+        if (other == zero) return this
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val sum: PlatformInteger = x + y

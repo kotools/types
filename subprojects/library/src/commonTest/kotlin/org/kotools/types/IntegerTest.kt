@@ -456,6 +456,28 @@ class IntegerTest {
     }
 
     @Test
+    fun plusOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Integer = x + y
+        // Then
+        assertSame(expected = y, result)
+    }
+
+    @Test
+    fun plusWithZero() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer = x + y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun minus() {
         // Given
         val x: Integer = Integer.from(-9223372036854775807)
