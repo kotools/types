@@ -20,7 +20,9 @@ All notable changes to this project will be documented in this file.
 
 - Cache the platform-specific representation of `Integer` when performing an
   arithmetic operation. This avoids repeated parsing when the same instance is
-  involved in multiple operations ([#912](https://github.com/kotools/types/issues/912)).
+  involved in multiple operations
+  ([#912](https://github.com/kotools/types/issues/912)). Thanks to
+  [@daniel-rusu](https://github.com/daniel-rusu) for reviewing the request.
 
 ### ♻️ Changed
 
