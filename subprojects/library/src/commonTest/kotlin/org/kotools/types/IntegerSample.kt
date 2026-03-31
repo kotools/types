@@ -227,4 +227,15 @@ class IntegerSample {
         // Then
         check(result == "$number")
     }
+
+    @Test
+    fun toSignedString() {
+        // Given
+        val number = 9223372036854775807
+        val integer: Integer = Integer.from(number)
+        // When
+        val result: String = integer.toSignedString()
+        // Then
+        check(result == "+$number")
+    }
 }
