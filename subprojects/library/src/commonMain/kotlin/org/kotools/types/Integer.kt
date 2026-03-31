@@ -522,8 +522,10 @@ public class Integer private constructor(private val decimal: String) {
      * exception in case of invalid [other] integer.
      */
     public operator fun div(other: Integer): Integer {
-        if (other == zero())
+        val zero: Integer = zero()
+        if (other == zero)
             throw ArithmeticException("Integer can't be divided by zero.")
+        if (this == zero || other == one()) return this
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val quotient: PlatformInteger = x / y

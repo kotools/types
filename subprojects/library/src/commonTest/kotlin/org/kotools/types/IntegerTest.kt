@@ -569,6 +569,28 @@ class IntegerTest {
     }
 
     @Test
+    fun divOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(42)
+        // When
+        val result: Integer = x / y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun divWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer = x / y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun divWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)
