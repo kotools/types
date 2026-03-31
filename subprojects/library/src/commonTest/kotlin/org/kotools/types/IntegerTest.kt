@@ -660,6 +660,29 @@ class IntegerTest {
     }
 
     @Test
+    fun remOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer = x % y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun remWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer = x % y
+        // Then
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun remWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)

@@ -588,8 +588,11 @@ public class Integer private constructor(private val decimal: String) {
      * exception in case of invalid [other] integer.
      */
     public operator fun rem(other: Integer): Integer {
-        if (other == zero())
+        val zero: Integer = zero()
+        if (other == zero)
             throw ArithmeticException("Integer can't be divided by zero.")
+        if (this == zero) return this
+        if (other == one()) return zero
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val remainder: PlatformInteger = x % y
