@@ -28,6 +28,8 @@ All notable changes to this project will be documented in this file.
 
 - Improve the vision of Kotools Types in design goals, README and `Integer`
   type's documentation ([#913](https://github.com/kotools/types/pull/913)).
+- Optimize arithmetic operations of `Integer` for cases involving zero (`0`) and
+  one (`1`) ([#921](https://github.com/kotools/types/pull/921)).
 
 ### 🔥 Removed
 
