@@ -587,17 +587,8 @@ public class Integer private constructor(private val decimal: String) {
      * See the [remOrNull] function for returning `null` instead of throwing an
      * exception in case of invalid [other] integer.
      */
-    public operator fun rem(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (other == zero)
-            throw ArithmeticException("Integer can't be divided by zero.")
-        if (this == zero) return this
-        if (other == one()) return zero
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val remainder: PlatformInteger = x % y
-        return fromDecimal("$remainder")
-    }
+    public operator fun rem(other: Integer): Integer = this.remOrNull(other)
+        ?: throw ArithmeticException("Integer can't be divided by zero.")
 
     /**
      * Returns the remainder of dividing this integer by the [other] one, or
@@ -623,7 +614,10 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun remOrNull(other: Integer): Integer? {
-        if (other == zero()) return null
+        val zero: Integer = zero()
+        if (other == zero) return null
+        if (this == zero) return this
+        if (other == one()) return zero
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val remainder: PlatformInteger = x % y

@@ -707,6 +707,29 @@ class IntegerTest {
     }
 
     @Test
+    fun remOrNullOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer? = x.remOrNull(y)
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun remOrNullWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer? = x.remOrNull(y)
+        // Then
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun remOrNullWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)
