@@ -584,4 +584,8 @@ class IntegerTest {
         // Then
         assertEquals(expected = "$number", result)
     }
+
+    // TODO: toSignedStringOnZero
+    // TODO: toSignedStringOnPositiveInteger
+    // TODO: toSignedStringOnNegativeInteger
 }

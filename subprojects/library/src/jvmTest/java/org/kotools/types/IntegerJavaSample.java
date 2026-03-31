@@ -165,4 +165,17 @@ public class IntegerJavaSample {
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
+
+    @Test
+    void toSignedString() {
+        // Given
+        final long number = 9223372036854775807L;
+        final Integer integer = Integer.from(number);
+        // When
+        final String result = integer.toSignedString();
+        // Then
+        final String expected = "+" + number;
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
 }
