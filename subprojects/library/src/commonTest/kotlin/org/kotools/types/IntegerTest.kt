@@ -615,6 +615,28 @@ class IntegerTest {
     }
 
     @Test
+    fun divOrNullOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun divOrNullWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun divOrNullWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)

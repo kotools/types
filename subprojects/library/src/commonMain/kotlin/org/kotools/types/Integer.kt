@@ -521,16 +521,8 @@ public class Integer private constructor(private val decimal: String) {
      * See the [divOrNull] function for returning `null` instead of throwing an
      * exception in case of invalid [other] integer.
      */
-    public operator fun div(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (other == zero)
-            throw ArithmeticException("Integer can't be divided by zero.")
-        if (this == zero || other == one()) return this
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val quotient: PlatformInteger = x / y
-        return fromDecimal("$quotient")
-    }
+    public operator fun div(other: Integer): Integer = this.divOrNull(other)
+        ?: throw ArithmeticException("Integer can't be divided by zero.")
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
@@ -556,7 +548,9 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? {
-        if (other == zero()) return null
+        val zero: Integer = zero()
+        if (other == zero) return null
+        if (this == zero || other == one()) return this
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val quotient: PlatformInteger = x / y
