@@ -525,6 +525,50 @@ class IntegerTest {
     }
 
     @Test
+    fun timesOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun timesOnOne() {
+        // Given
+        val x: Integer = Integer.one()
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = y, result)
+    }
+
+    @Test
+    fun timesWithZero() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = y, result)
+    }
+
+    @Test
+    fun timesWithOne() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun divWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)

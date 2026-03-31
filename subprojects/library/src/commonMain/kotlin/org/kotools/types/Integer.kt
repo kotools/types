@@ -253,6 +253,9 @@ public class Integer private constructor(private val decimal: String) {
 
         @JvmSynthetic
         internal fun zero(): Integer = this.from(0)
+
+        @JvmSynthetic
+        internal fun one(): Integer = this.from(1)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -478,6 +481,10 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
+        val zero: Integer = zero()
+        val one: Integer = one()
+        if (this == zero || other == one) return this
+        if (other == zero || this == one) return other
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val product: PlatformInteger = x * y
