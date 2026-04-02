@@ -585,7 +585,35 @@ class IntegerTest {
         assertEquals(expected = "$number", result)
     }
 
-    // TODO: toSignedStringOnZero
-    // TODO: toSignedStringOnPositiveInteger
-    // TODO: toSignedStringOnNegativeInteger
+    @Test
+    fun toSignedStringOnZero() {
+        // Given
+        val zero: Integer = Integer.zero()
+        // When
+        val result: String = zero.toSignedString()
+        // Then
+        assertEquals(expected = "0", result)
+    }
+
+    @Test
+    fun toSignedStringOnPositiveInteger() {
+        // Given
+        val number = 123456789L
+        val integer: Integer = Integer.from(number)
+        // When
+        val result: String = integer.toSignedString()
+        // Then
+        assertEquals(expected = "+$number", result)
+    }
+
+    @Test
+    fun toSignedStringOnNegativeInteger() {
+        // Given
+        val number = -123456789L
+        val integer: Integer = Integer.from(number)
+        // When
+        val result: String = integer.toSignedString()
+        // Then
+        assertEquals(expected = "$number", result)
+    }
 }

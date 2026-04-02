@@ -689,7 +689,9 @@ public class Integer private constructor(private val decimal: String) {
      */
     @ExperimentalSince(KotoolsTypesVersion.Unreleased)
     public fun toSignedString(): String {
-        TODO()
+        val zero: Integer = zero()
+        return if (this == zero || this < zero) this.decimal
+        else "+${this.decimal}"
     }
 
     private fun toPlatformInteger(): PlatformInteger = this.cached
