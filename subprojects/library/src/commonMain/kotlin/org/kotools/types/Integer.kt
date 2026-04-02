@@ -253,6 +253,9 @@ public class Integer private constructor(private val decimal: String) {
 
         @JvmSynthetic
         internal fun zero(): Integer = this.from(0)
+
+        @JvmSynthetic
+        internal fun one(): Integer = this.from(1)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -408,6 +411,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
+        val zero: Integer = zero()
+        if (this == zero) return other
+        if (other == zero) return this
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val sum: PlatformInteger = x + y
@@ -440,6 +446,9 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
+        val zero: Integer = zero()
+        if (other == zero) return this
+        if (this == zero) return -other
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val difference: PlatformInteger = x - y
@@ -472,6 +481,10 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun times(other: Integer): Integer {
+        val zero: Integer = zero()
+        val one: Integer = one()
+        if (this == zero || other == one) return this
+        if (other == zero || this == one) return other
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val product: PlatformInteger = x * y
@@ -508,14 +521,8 @@ public class Integer private constructor(private val decimal: String) {
      * See the [divOrNull] function for returning `null` instead of throwing an
      * exception in case of invalid [other] integer.
      */
-    public operator fun div(other: Integer): Integer {
-        if (other == zero())
-            throw ArithmeticException("Integer can't be divided by zero.")
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val quotient: PlatformInteger = x / y
-        return fromDecimal("$quotient")
-    }
+    public operator fun div(other: Integer): Integer = this.divOrNull(other)
+        ?: throw ArithmeticException("Integer can't be divided by zero.")
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
@@ -541,7 +548,9 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? {
-        if (other == zero()) return null
+        val zero: Integer = zero()
+        if (other == zero) return null
+        if (this == zero || other == one()) return this
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val quotient: PlatformInteger = x / y
@@ -578,14 +587,8 @@ public class Integer private constructor(private val decimal: String) {
      * See the [remOrNull] function for returning `null` instead of throwing an
      * exception in case of invalid [other] integer.
      */
-    public operator fun rem(other: Integer): Integer {
-        if (other == zero())
-            throw ArithmeticException("Integer can't be divided by zero.")
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val remainder: PlatformInteger = x % y
-        return fromDecimal("$remainder")
-    }
+    public operator fun rem(other: Integer): Integer = this.remOrNull(other)
+        ?: throw ArithmeticException("Integer can't be divided by zero.")
 
     /**
      * Returns the remainder of dividing this integer by the [other] one, or
@@ -611,7 +614,10 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun remOrNull(other: Integer): Integer? {
-        if (other == zero()) return null
+        val zero: Integer = zero()
+        if (other == zero) return null
+        if (this == zero) return this
+        if (other == one()) return zero
         val x: PlatformInteger = this.toPlatformInteger()
         val y: PlatformInteger = other.toPlatformInteger()
         val remainder: PlatformInteger = x % y

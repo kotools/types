@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -416,7 +417,7 @@ class IntegerTest {
         // When
         val result: Integer = -x
         // Then
-        assertEquals(expected = x, result)
+        assertSame(expected = x, result)
     }
 
     @Test
@@ -455,6 +456,28 @@ class IntegerTest {
     }
 
     @Test
+    fun plusOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Integer = x + y
+        // Then
+        assertSame(expected = y, result)
+    }
+
+    @Test
+    fun plusWithZero() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer = x + y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun minus() {
         // Given
         val x: Integer = Integer.from(-9223372036854775807)
@@ -467,6 +490,29 @@ class IntegerTest {
     }
 
     @Test
+    fun minusOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(123)
+        // When
+        val result: Integer = x - y
+        // Then
+        val expected: Integer = -y
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun minusWithZero() {
+        // Given
+        val x: Integer = Integer.from(123)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer = x - y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun times() {
         // Given
         val x: Integer = Integer.from(9223372036854775807)
@@ -476,6 +522,72 @@ class IntegerTest {
         // Then
         val expected: Integer = Integer.fromDecimal("9223372036854775807000")
         assertEquals(expected, result)
+    }
+
+    @Test
+    fun timesOnZero() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun timesOnOne() {
+        // Given
+        val x: Integer = Integer.one()
+        val y: Integer = Integer.from(Long.MAX_VALUE)
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = y, result)
+    }
+
+    @Test
+    fun timesWithZero() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.zero()
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = y, result)
+    }
+
+    @Test
+    fun timesWithOne() {
+        // Given
+        val x: Integer = Integer.from(Long.MAX_VALUE)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer = x * y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun divOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(42)
+        // When
+        val result: Integer = x / y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun divWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer = x / y
+        // Then
+        assertSame(expected = x, result)
     }
 
     @Test
@@ -503,6 +615,28 @@ class IntegerTest {
     }
 
     @Test
+    fun divOrNullOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun divOrNullWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer? = x.divOrNull(y)
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
     fun divOrNullWithNonZeroInteger() {
         // Given
         val x: Integer = Integer.from(42)
@@ -523,6 +657,29 @@ class IntegerTest {
         val result: Integer? = x.divOrNull(y)
         // Then
         assertNull(result)
+    }
+
+    @Test
+    fun remOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer = x % y
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun remWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer = x % y
+        // Then
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
@@ -547,6 +704,29 @@ class IntegerTest {
         // Then
         val expected = "Integer can't be divided by zero."
         assertEquals(expected, result.message)
+    }
+
+    @Test
+    fun remOrNullOnZeroWithNonZeroInteger() {
+        // Given
+        val x: Integer = Integer.zero()
+        val y: Integer = Integer.from(2)
+        // When
+        val result: Integer? = x.remOrNull(y)
+        // Then
+        assertSame(expected = x, result)
+    }
+
+    @Test
+    fun remOrNullWithOne() {
+        // Given
+        val x: Integer = Integer.from(42)
+        val y: Integer = Integer.one()
+        // When
+        val result: Integer? = x.remOrNull(y)
+        // Then
+        val expected: Integer = Integer.zero()
+        assertEquals(expected, result)
     }
 
     @Test
