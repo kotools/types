@@ -644,9 +644,55 @@ public class Integer private constructor(private val decimal: String) {
      *
      * SAMPLE: [org.kotools.types.IntegerJavaSample.toStringOverride]
      * </details>
+     * <br>
+     *
+     * See the [toSignedString] function for returning the signed decimal
+     * representation of this integer.
      */
     @Suppress(Warning.FINAL)
     final override fun toString(): String = this.decimal
+
+    /**
+     * Returns the decimal string representation of this integer, prefixed with
+     * its sign.
+     *
+     * When this integer is:
+     * - zero, the returned decimal doesn't have a sign.
+     * - positive (`> 0`), the returned decimal is signed with a plus (`+`).
+     * - negative (`< 0`), the returned decimal is signed with a minus (`-`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerSample.toSignedString]
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: [org.kotools.types.IntegerJavaSample.toSignedString]
+     * </details>
+     * <br>
+     *
+     * See the [Integer.toString] function for returning the unsigned decimal
+     * representation of this integer.
+     */
+    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
+    public fun toSignedString(): String {
+        val zero: Integer = zero()
+        return if (this == zero || this < zero) this.decimal
+        else "+${this.decimal}"
+    }
 
     private fun toPlatformInteger(): PlatformInteger = this.cached
         ?: PlatformInteger(this.decimal).also { this.cached = it }

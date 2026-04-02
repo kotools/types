@@ -23,6 +23,9 @@ All notable changes to this project will be documented in this file.
   involved in multiple operations
   ([#912](https://github.com/kotools/types/issues/912)). Thanks to
   [@daniel-rusu](https://github.com/daniel-rusu) for reviewing the request.
+- `Integer.toSignedString()` function for returning the signed decimal
+  representation of an integer
+  ([#922](https://github.com/kotools/types/pull/922)).
 
 ### ♻️ Changed
 
