@@ -323,6 +323,9 @@ public final class kotools/types/text/NotBlankStringKt {
 	public static final fun toNotBlankString (Ljava/lang/String;)Ljava/lang/Object;
 }
 
+public final class org/kotools/types/Decimal {
+}
+
 public final class org/kotools/types/EmailAddress {
 	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
