@@ -222,7 +222,7 @@ public class Decimal private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * TODO: Add Kotlin code sample.
+     * SAMPLE: [org.kotools.types.DecimalSample.toStringOverride]
      * </details>
      *
      * <br>
@@ -233,8 +233,9 @@ public class Decimal private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * TODO: Add Java code sample.
+     * SAMPLE: [org.kotools.types.DecimalJavaSample.toStringOverride]
      * </details>
      */
-    override fun toString(): String = this.text
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = this.text
 }
