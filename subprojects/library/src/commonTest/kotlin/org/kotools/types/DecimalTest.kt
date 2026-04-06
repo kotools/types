@@ -9,7 +9,7 @@ class DecimalTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun createsFromLong() {
+    fun fromIntegerWithLong() {
         // Given
         val number: Long = Long.MAX_VALUE
         // When
