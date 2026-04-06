@@ -2,6 +2,7 @@ package org.kotools.types
 
 import kotlin.test.Test
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class DecimalSample {
     // ----------------------------- Documentation -----------------------------
 
@@ -25,5 +26,17 @@ class DecimalSample {
         val x: Double = 1.0 / 0.0 // passes instead of throwing exception
         val y: Double = x + 10 // error silently propagates
         check(y == Double.POSITIVE_INFINITY)
+    }
+
+    // ------------------------------- Creations -------------------------------
+
+    @Test
+    fun fromIntegerLong() {
+        // Given
+        val number = 123456789L
+        // When
+        val result: Decimal = Decimal.fromInteger(number)
+        // Then
+        check("$result" == "$number")
     }
 }
