@@ -2,7 +2,6 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 
 /**
@@ -99,16 +98,121 @@ public class Decimal private constructor(private val text: String) {
          */
         @JvmStatic
         public fun fromInteger(number: Long): Decimal = Decimal("$number")
+
+        /**
+         * Creates a [Decimal] from the specified [text], or throws an
+         * [IllegalArgumentException] if the [text] doesn't represent a
+         * floating-point number.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits, then by an
+         * optional fractional part consisting of a radix point (`.`) and
+         * another sequence of digits (e.g., `1234`, `+1.234`, `-12.34`).
+         *
+         * Also, the [text] parameter is normalized by removing insignificant
+         * leading and trailing zeros. As a result, calling this function with
+         * `1`, `1.0` and `01` produces the same result.
+         *
+         * In case of invalid [text], this function throws an
+         * [IllegalArgumentException] instead of a [NumberFormatException] to
+         * ensure consistent behavior across all Kotlin platforms and to better
+         * reflect invalid argument semantics.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.DecimalSample.fromDecimalString]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.DecimalJavaSample.fromDecimalString]
+         * </details>
+         */
+        @JvmStatic
+        public fun fromDecimal(text: String): Decimal {
+            require(text.isNotBlank()) {
+                "Decimal floating-point number can't be blank."
+            }
+            val plusSign = '+'
+            require(text != "$plusSign") {
+                "Plus sign ($plusSign) is not a decimal floating-point number."
+            }
+            val minusSign = '-'
+            require(text != "$minusSign") {
+                "Minus sign ($minusSign) is not a decimal floating-point " +
+                        "number."
+            }
+            val radixPoint = '.'
+            require(text != "$radixPoint") {
+                "Radix point ($radixPoint) is not a decimal floating-point " +
+                        "number."
+            }
+            val unsignedText: String = text.removePrefix("$plusSign")
+                .removePrefix("$minusSign")
+            val isDecimalText: Boolean =
+                unsignedText.all { it.isDigit() || it == radixPoint }
+            require(isDecimalText) {
+                "Only digits, plus sign ($plusSign), minus sign " +
+                        "($minusSign), and radix point ($radixPoint) " +
+                        "characters are allowed in decimal floating-point " +
+                        "number (was: $text)."
+            }
+            val radixPointCount: Int = text.count { it == radixPoint }
+            require(radixPointCount < 2) {
+                "Decimal floating-point number can't have multiple radix " +
+                        "points (was: $text)."
+            }
+            if (radixPoint in text) {
+                val integerPartIsWellFormed: Boolean = unsignedText.first()
+                    .isDigit()
+                require(integerPartIsWellFormed) {
+                    "Integer part of decimal floating-point number is " +
+                            "malformed (was: $text)."
+                }
+                val fractionalPartIsWellFormed: Boolean = unsignedText.last()
+                    .isDigit()
+                require(fractionalPartIsWellFormed) {
+                    "Fractional part of decimal floating-point number is " +
+                            "malformed (was: $text)."
+                }
+            }
+            val zero = '0'
+            val isZero: Boolean =
+                unsignedText.all { it == zero || it == radixPoint }
+            if (isZero) return Decimal("$zero")
+            val sign: String =
+                if (text.startsWith(minusSign)) "-"
+                else ""
+            if (radixPoint !in unsignedText) {
+                val integerPart: String = unsignedText.trimStart(zero)
+                return Decimal("$sign$integerPart")
+            }
+            val parts: List<String> = unsignedText.split(radixPoint)
+            val integerPart: String = parts.first()
+                .trimStart(zero)
+            val fractionalPart: String = parts.last()
+                .trimEnd(zero)
+            return if (fractionalPart.isEmpty()) Decimal("$sign$integerPart")
+            else Decimal("$sign${integerPart}.$fractionalPart")
+        }
     }
 
     // ------------------------------ Conversions ------------------------------
 
     /**
      * Returns the string representation of this decimal floating-point number.
-     *
-     * The resulting string is normalized by removing insignificant trailing
-     * zeros. As a result, calling this function on `Decimal.fromInteger(1)` and
-     * `Decimal.fromDecimal("1.0")` produces the same `"1"` result.
      *
      * <br>
      * <details>
@@ -132,6 +236,5 @@ public class Decimal private constructor(private val text: String) {
      * TODO: Add Java code sample.
      * </details>
      */
-    @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.text
+    override fun toString(): String = this.text
 }
