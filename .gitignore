@@ -34,7 +34,7 @@ target/
 
 # Specific files
 hs_err_pid*
-Playground.kt
+*Playground.kt
 PlaygroundTest.java
 
 ################################ Jetbrains IDEs ################################
