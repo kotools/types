@@ -39,4 +39,15 @@ class DecimalSample {
         // Then
         check("$result" == "$number")
     }
+
+    @Test
+    fun fromDecimalString() {
+        // Given
+        val integer = 123
+        val text = "${integer}.000"
+        // When
+        val result: Decimal = Decimal.fromDecimal(text)
+        // Then
+        check("$result" == "$integer")
+    }
 }

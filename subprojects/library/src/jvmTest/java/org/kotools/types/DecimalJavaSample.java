@@ -19,4 +19,18 @@ public class DecimalJavaSample {
         final boolean check = resultAsString.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
+
+    @Test
+    void fromDecimalString() {
+        // Given
+        final int integer = 123;
+        final String text = integer + ".000";
+        // When
+        final Decimal result = Decimal.fromDecimal(text);
+        // Then
+        final String resultAsString = result.toString();
+        final String expected = String.valueOf(integer);
+        final boolean check = resultAsString.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
 }
