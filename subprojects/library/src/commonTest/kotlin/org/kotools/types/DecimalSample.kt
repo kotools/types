@@ -50,4 +50,17 @@ class DecimalSample {
         // Then
         check("$result" == "$integer")
     }
+
+    // ------------------------------ Conversions ------------------------------
+
+    @Test
+    fun toStringOverride() {
+        // Given
+        val number = 123456789L
+        val decimal: Decimal = Decimal.fromInteger(number)
+        // When
+        val result: String = decimal.toString()
+        // Then
+        check(result == "$number")
+    }
 }

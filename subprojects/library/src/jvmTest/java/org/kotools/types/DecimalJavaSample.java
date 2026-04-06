@@ -33,4 +33,19 @@ public class DecimalJavaSample {
         final boolean check = resultAsString.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
+
+    // ------------------------------ Conversions ------------------------------
+
+    @Test
+    void toStringOverride() {
+        // Given
+        final long number = 123456789L;
+        final Decimal decimal = Decimal.fromInteger(number);
+        // When
+        final String result = decimal.toString();
+        // Then
+        final String expected = String.valueOf(number);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
 }
