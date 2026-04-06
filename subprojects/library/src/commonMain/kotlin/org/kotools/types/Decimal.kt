@@ -6,8 +6,9 @@ import org.kotools.types.internal.KotoolsTypesVersion
 /**
  * Represents a decimal floating-point number with exact base-10 representation.
  *
- * Use this type when correctness matters and binary floating-point types
- * ([Float] and [Double]) are not suitable.
+ * Use this type when correctness matters (e.g., financial calculations, tax
+ * computations), and when binary floating-point types ([Float] and [Double])
+ * are not suitable.
  *
  * <br>
  * <details>
@@ -38,7 +39,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
  * binary formats. They are not suitable for domains requiring strict decimal
  * rounding rules, such as financial or tax computations.
  *
- * TODO: Add Kotlin sample.
+ * SAMPLE: [org.kotools.types.DecimalSample.precisionProblem]
  *
  * **Solution:** The [Decimal] type supports arbitrary precision by default,
  * allowing computations without premature rounding. When needed, precision can
@@ -53,7 +54,7 @@ import org.kotools.types.internal.KotoolsTypesVersion
  * `Infinity`, and operations such as division by zero do not fail, which can
  * silently propagate invalid results.
  *
- * TODO: Add Kotlin sample.
+ * SAMPLE: [org.kotools.types.DecimalSample.divisionByZeroProblem]
  *
  * **Solution:** The [Decimal] type follows strict arithmetic rules. Invalid
  * operations, such as division or remainder by zero, throw an
