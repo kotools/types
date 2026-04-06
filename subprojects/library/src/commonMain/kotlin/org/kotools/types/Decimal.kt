@@ -2,6 +2,8 @@ package org.kotools.types
 
 import org.kotools.types.internal.ExperimentalSince
 import org.kotools.types.internal.KotoolsTypesVersion
+import org.kotools.types.internal.Warning
+import kotlin.jvm.JvmStatic
 
 /**
  * Represents a decimal floating-point number with exact base-10 representation.
@@ -65,4 +67,71 @@ import org.kotools.types.internal.KotoolsTypesVersion
  */
 @ExperimentalKotoolsTypesApi
 @ExperimentalSince(KotoolsTypesVersion.Unreleased)
-public class Decimal private constructor()
+public class Decimal private constructor(private val text: String) {
+    // ------------------------------- Creations -------------------------------
+
+    /** Contains class-level declarations for the [Decimal] type. */
+    public companion object {
+        /**
+         * Creates a [Decimal] from the specified [number].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: [org.kotools.types.DecimalSample.fromIntegerLong]
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: [org.kotools.types.DecimalJavaSample.fromIntegerLong]
+         * </details>
+         */
+        @JvmStatic
+        public fun fromInteger(number: Long): Decimal = Decimal("$number")
+    }
+
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this decimal floating-point number.
+     *
+     * The resulting string is normalized by removing insignificant trailing
+     * zeros. As a result, calling this function on `Decimal.fromInteger(1)` and
+     * `Decimal.fromDecimal("1.0")` produces the same `"1"` result.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * TODO: Add Kotlin code sample.
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * TODO: Add Java code sample.
+     * </details>
+     */
+    @Suppress(Warning.FINAL)
+    final override fun toString(): String = this.text
+}
