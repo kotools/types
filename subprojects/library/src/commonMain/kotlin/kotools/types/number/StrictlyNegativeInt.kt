@@ -13,8 +13,6 @@ import kotools.types.internal.serializationError
 import kotools.types.internal.shouldBeStrictlyNegative
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -26,8 +24,9 @@ internal fun Int.isStrictlyNegative(): Boolean = this < 0
  * Returns this number as an encapsulated [StrictlyNegativeInt], which may
  * involve rounding or truncation, or returns an encapsulated
  * [IllegalArgumentException] if this number is [positive][PositiveInt].
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
     runCatching {
         val number: Int = this.toInt()
@@ -54,18 +53,17 @@ public fun Number.toStrictlyNegativeInt(): Result<StrictlyNegativeInt> =
  *
  * SAMPLE: [kotools.types.number.StrictlyNegativeIntCommonSample.serialization]
  * </details>
+ *
+ * @since 1.1.0
  */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(StrictlyNegativeIntSerializer::class)
-@Since(KotoolsTypesVersion.V1_1_0)
 public value class StrictlyNegativeInt private constructor(
     private val value: Int
 ) : NonZeroInt, NegativeInt {
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int = value
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String = "$value"
 
     /**
@@ -86,8 +84,11 @@ public value class StrictlyNegativeInt private constructor(
             return StrictlyNegativeInt(number)
         }
 
-        /** Returns a random [StrictlyNegativeInt]. */
-        @Since(KotoolsTypesVersion.V3_0_0)
+        /**
+         * Returns a random [StrictlyNegativeInt].
+         *
+         * @since 3.0.0
+         */
         public fun random(): StrictlyNegativeInt = (min.value..max.value)
             .random()
             .toStrictlyNegativeInt()

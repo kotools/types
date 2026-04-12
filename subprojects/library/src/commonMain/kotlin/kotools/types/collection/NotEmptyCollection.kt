@@ -5,11 +5,12 @@ import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.number.plus
 import kotools.types.number.toStrictlyPositiveInt
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 
-/** Represents a collection that has at least one element of type [E]. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Represents a collection that has at least one element of type [E].
+ *
+ * @since 4.1.0
+ */
 public sealed interface NotEmptyCollection<out E> {
     /**
      * The first element of this collection.
@@ -72,7 +73,8 @@ public sealed interface NotEmptyCollection<out E> {
 /**
  * Returns the size of this collection, or returns [ZeroInt] if this collection
  * is `null`.
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public val NotEmptyCollection<*>?.sizeOrZero: PositiveInt
     get() = this?.size ?: ZeroInt

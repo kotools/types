@@ -14,8 +14,6 @@ import kotools.types.internal.stringSerializer
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -23,9 +21,10 @@ import kotlin.jvm.JvmSynthetic
  * Returns this string as an encapsulated [NotBlankString], or returns an
  * encapsulated [IllegalArgumentException] if this string is
  * [blank][String.isBlank].
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
     requireNotNull(NotBlankString of this) { ErrorMessage.blankString }
 }
@@ -50,11 +49,12 @@ public fun String.toNotBlankString(): Result<NotBlankString> = runCatching {
  *
  * SAMPLE: [kotools.types.text.NotBlankStringCommonSample.serialization]
  * </details>
+ *
+ * @since 4.0.0
  */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotBlankStringSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotBlankString private constructor(
     private val value: String
 ) : Comparable<NotBlankString> {
@@ -68,8 +68,9 @@ public value class NotBlankString private constructor(
      * Returns zero if this string equals the [other] one, a negative number if
      * it's less than the [other] one, or a positive number if it's greater than
      * the [other] one.
+     *
+     * @since 4.1.0
      */
-    @Since(KotoolsTypesVersion.V4_1_0)
     override infix fun compareTo(other: NotBlankString): Int =
         "$this".compareTo("$other")
 

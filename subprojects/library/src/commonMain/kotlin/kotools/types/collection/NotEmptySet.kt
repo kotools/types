@@ -9,8 +9,6 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.serializationError
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -28,9 +26,10 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.notEmptySetOf]
  * </details>
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
     val elements: Set<E> = setOf(head) + tail
     return NotEmptySet.orThrow(elements)
@@ -57,9 +56,10 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  * reflected on the resulting [NotEmptySet].
  *
  * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnMutableCollection]
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
     runCatching {
         val elements: Set<E> = toSet()
@@ -86,11 +86,12 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
  *
  * SAMPLE: [kotools.types.collection.NotEmptySetCommonSample.serialization]
  * </details>
+ *
+ * @since 4.0.0
  */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptySetSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptySet<out E> private constructor(
     private val elements: Set<E>
 ) : NotEmptyCollection<E> {

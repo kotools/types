@@ -9,8 +9,6 @@ import kotlinx.serialization.encoding.Encoder
 import kotools.types.internal.ErrorMessage
 import kotools.types.internal.serializationError
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -33,9 +31,10 @@ import kotlin.jvm.JvmSynthetic
  * The [NotEmptyList] type being an
  * [inline value class](https://kotlinlang.org/docs/inline-classes.html), it is
  * not recommended to call this function from Java code.
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
     val elements: List<E> = listOf(head) + tail
     return NotEmptyList.orThrow(elements)
@@ -66,9 +65,10 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * reflected on the resulting [NotEmptyList].
  *
  * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnMutableCollection]
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
     runCatching {
         val elements: List<E> = toList()
@@ -95,11 +95,12 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  *
  * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.serialization]
  * </details>
+ *
+ * @since 4.0.0
  */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptyListSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyList<out E> private constructor(
     private val elements: List<E>
 ) : NotEmptyCollection<E> {

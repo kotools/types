@@ -10,8 +10,6 @@ import kotools.types.number.StrictlyNegativeInt
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.ZeroInt
 import kotools.types.text.NotBlankString
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotools.types.collection.toNotEmptyList as delegateToNotEmptyList
 import kotools.types.collection.toNotEmptyMap as delegateToNotEmptyMap
 import kotools.types.collection.toNotEmptySet as delegateToNotEmptySet
@@ -22,8 +20,11 @@ import kotools.types.number.toStrictlyNegativeInt as delegateToStrictlyNegativeI
 import kotools.types.number.toStrictlyPositiveInt as delegateToStrictlyPositiveInt
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
 
-/** Context available when calling the [resultOf] function. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Context available when calling the [resultOf] function.
+ *
+ * @since 4.1.0
+ */
 public sealed interface ResultContext {
     /**
      * Returns this number as a [NonZeroInt], which may involve rounding or
@@ -117,7 +118,8 @@ private object ResultContextImplementation : ResultContext
  * Returns an encapsulated result of calling the [block] function in the
  * [ResultContext], or returns an encapsulated [Throwable] if calling the
  * [block] function throws an exception.
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public inline fun <T> resultOf(block: ResultContext.() -> T): Result<T> =
     ResultContextImplementation.runCatching(block)

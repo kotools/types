@@ -11,8 +11,6 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.simpleNameOf
 import kotools.types.internal.unexpectedCreationError
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 
 /**
  * Represents an integer number of type [Int].
@@ -31,18 +29,20 @@ import org.kotools.types.internal.Since
  *
  * SAMPLE: [kotools.types.number.AnyIntCommonSample.serialization]
  * </details>
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(AnyIntSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public sealed interface AnyInt : Comparable<AnyInt> {
     /**
      * Compares this integer with the [other] one for order.
      * Returns zero if this integer equals the [other] one, a negative number if
      * it's less than the [other] one, or a positive number if it's greater than
      * the [other] one.
+     *
+     * @since 4.1.0
      */
-    @Since(KotoolsTypesVersion.V4_1_0)
     override infix fun compareTo(other: AnyInt): Int {
         val x: Int = toInt()
         val y: Int = other.toInt()
@@ -56,54 +56,83 @@ public sealed interface AnyInt : Comparable<AnyInt> {
     override fun toString(): String
 }
 
-/** Adds the [other] integer to this one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Adds the [other] integer to this one.
+ *
+ * @since 4.1.0
+ */
 public operator fun Int.plus(other: AnyInt): Int = this + other.toInt()
 
-/** Adds the [other] integer to this one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Adds the [other] integer to this one.
+ *
+ * @since 4.1.0
+ */
 public operator fun AnyInt.plus(other: Int): Int = toInt() + other
 
-/** Adds the [other] integer to this one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Adds the [other] integer to this one.
+ *
+ * @since 4.1.0
+ */
 public operator fun AnyInt.plus(other: AnyInt): Int = toInt() + other
 
-/** Subtracts the [other] integer from this one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Subtracts the [other] integer from this one.
+ *
+ * @since 4.1.0
+ */
 public operator fun Int.minus(other: AnyInt): Int = this - other.toInt()
 
-/** Subtracts the [other] integer from this one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Subtracts the [other] integer from this one.
+ *
+ * @since 4.1.0
+ */
 public operator fun AnyInt.minus(other: Int): Int = toInt() - other
 
-/** Subtracts the [other] integer from this one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Subtracts the [other] integer from this one.
+ *
+ * @since 4.1.0
+ */
 public operator fun AnyInt.minus(other: AnyInt): Int = toInt() - other
 
-/** Multiplies this integer by the [other] one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Multiplies this integer by the [other] one.
+ *
+ * @since 4.1.0
+ */
 public operator fun Int.times(other: AnyInt): Int = this * other.toInt()
 
-/** Multiplies this integer by the [other] one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Multiplies this integer by the [other] one.
+ *
+ * @since 4.1.0
+ */
 public operator fun AnyInt.times(other: Int): Int = toInt() * other
 
-/** Multiplies this integer by the [other] one. */
-@Since(KotoolsTypesVersion.V4_1_0)
+/**
+ * Multiplies this integer by the [other] one.
+ *
+ * @since 4.1.0
+ */
 public operator fun AnyInt.times(other: AnyInt): Int = toInt() * other
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.div(other: NonZeroInt): Int = toInt() / other
 
 /**
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun AnyInt.rem(other: NonZeroInt): Int = toInt() % other
 
 @InternalKotoolsTypesApi

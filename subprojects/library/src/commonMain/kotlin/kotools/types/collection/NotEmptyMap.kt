@@ -11,8 +11,6 @@ import kotools.types.internal.serializationError
 import kotools.types.number.StrictlyPositiveInt
 import kotools.types.number.toStrictlyPositiveInt
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
 
@@ -30,8 +28,9 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.notEmptyMapOf]
  * </details>
+ *
+ * @since 4.0.0
  */
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> notEmptyMapOf(
     head: Pair<K, V>,
     vararg tail: Pair<K, V>
@@ -62,9 +61,10 @@ public fun <K, V> notEmptyMapOf(
  * the resulting [NotEmptyMap].
  *
  * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMutableMap]
+ *
+ * @since 4.0.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
     runCatching { NotEmptyMap.orThrow(entries) }
 
@@ -89,11 +89,12 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  *
  * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.serialization]
  * </details>
+ *
+ * @since 4.0.0
  */
 @JvmInline
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NotEmptyMapSerializer::class)
-@Since(KotoolsTypesVersion.V4_0_0)
 public value class NotEmptyMap<K, out V> private constructor(
     private val delegate: Map<K, V>
 ) {

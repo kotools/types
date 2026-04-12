@@ -14,16 +14,15 @@ import kotools.types.internal.intSerializer
 import kotools.types.internal.serializationError
 import kotools.types.internal.simpleNameOf
 import org.kotools.types.internal.InternalKotoolsTypesApi
-import org.kotools.types.internal.KotoolsTypesVersion
-import org.kotools.types.internal.Since
 
 /**
  * Returns this number as an encapsulated [NonZeroInt], which may involve
  * rounding or truncation, or returns an encapsulated [IllegalArgumentException]
  * if this number equals [zero][ZeroInt].
+ *
+ * @since 4.1.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
-@Since(KotoolsTypesVersion.V4_1_0)
 public fun Number.toNonZeroInt(): Result<NonZeroInt> {
     val value: Int = toInt()
     return when {
@@ -57,10 +56,11 @@ public fun Number.toNonZeroInt(): Result<NonZeroInt> {
  *
  * SAMPLE: [kotools.types.number.NonZeroIntCommonSample.serialization]
  * </details>
+ *
+ * @since 1.1.0
  */
 @OptIn(InternalKotoolsTypesApi::class)
 @Serializable(NonZeroIntSerializer::class)
-@Since(KotoolsTypesVersion.V1_1_0)
 public sealed interface NonZeroInt : AnyInt {
     /** Contains declarations for holding or building a [NonZeroInt]. */
     public companion object {
@@ -74,8 +74,11 @@ public sealed interface NonZeroInt : AnyInt {
             StrictlyPositiveInt.Companion::max
         )
 
-        /** Returns a random [NonZeroInt]. */
-        @Since(KotoolsTypesVersion.V3_0_0)
+        /**
+         * Returns a random [NonZeroInt].
+         *
+         * @since 3.0.0
+         */
         public fun random(): NonZeroInt {
             val ranges: NotEmptySet<IntRange> = notEmptySetOf(
                 min.toInt()..StrictlyNegativeInt.max.toInt(),
@@ -89,25 +92,25 @@ public sealed interface NonZeroInt : AnyInt {
         }
     }
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toInt(): Int
 
-    @Since(KotoolsTypesVersion.V4_0_0)
     override fun toString(): String
 }
 
 /**
  * Divides this integer by the [other] one, truncating the result to an integer
  * that is closer to [zero][ZeroInt].
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.div(other: NonZeroInt): Int = this / other.toInt()
 
 /**
  * Calculates the remainder of truncating division of this integer by the
  * [other] one.
+ *
+ * @since 4.1.0
  */
-@Since(KotoolsTypesVersion.V4_1_0)
 public operator fun Int.rem(other: NonZeroInt): Int = this % other.toInt()
 
 private object NonZeroIntSerializer : KSerializer<NonZeroInt> by intSerializer(
