@@ -1,7 +1,5 @@
 package org.kotools.types
 
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import kotlin.jvm.JvmStatic
 
 /**
@@ -63,9 +61,10 @@ import kotlin.jvm.JvmStatic
  *
  * TODO: Add Kotlin sample.
  * </details>
+ *
+ * @since 5.2.0
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.Unreleased)
 public class Decimal private constructor(private val text: String) {
     // ------------------------------- Creations -------------------------------
 
