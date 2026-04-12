@@ -1,8 +1,6 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
@@ -14,9 +12,10 @@ import kotlin.jvm.JvmStatic
  *
  * For creating an instance of this type, see the factory functions provided by
  * the [EmailAddressRegex.Companion] type.
+ *
+ * @since 5.0.1
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 public class EmailAddressRegex private constructor(
     private val pattern: String
 ) {
@@ -229,8 +228,9 @@ public class EmailAddressRegex private constructor(
          *
          * SAMPLE: [org.kotools.types.EmailAddressRegexJavaSample.of]
          * </details>
+         *
+         * @since 5.1.0
          */
-        @ExperimentalSince(KotoolsTypesVersion.V5_1_0)
         @JvmStatic
         public infix fun of(pattern: String): EmailAddressRegex? {
             val isValidPattern: Boolean = this.default()

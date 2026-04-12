@@ -14,8 +14,6 @@ import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Integer
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
@@ -68,9 +66,10 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.integerAsString]
  * </details>
+ *
+ * @since 5.0.1
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_0_1)
 @JvmSynthetic
 @Suppress(Warning.FUNCTION_NAME)
 public fun KotoolsTypesSerializersModule(): SerializersModule =

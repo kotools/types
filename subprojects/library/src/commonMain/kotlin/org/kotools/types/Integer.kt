@@ -3,8 +3,6 @@ package org.kotools.types
 import org.kotools.types.Integer.Companion.from
 import org.kotools.types.Integer.Companion.fromDecimal
 import org.kotools.types.Integer.Companion.fromDecimalOrNull
-import org.kotools.types.internal.ExperimentalSince
-import org.kotools.types.internal.KotoolsTypesVersion
 import org.kotools.types.internal.PlatformInteger
 import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
@@ -119,9 +117,10 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: [org.kotools.types.IntegerSample.cache]
  * </details>
+ *
+ * @since 5.1.0
  */
 @ExperimentalKotoolsTypesApi
-@ExperimentalSince(KotoolsTypesVersion.V5_1_0)
 public class Integer private constructor(private val decimal: String) {
     private var cached: PlatformInteger? = null
 
@@ -692,8 +691,9 @@ public class Integer private constructor(private val decimal: String) {
      *
      * See the [Integer.toString] function for returning the unsigned decimal
      * representation of this integer.
+     *
+     * @since 5.2.0
      */
-    @ExperimentalSince(KotoolsTypesVersion.Unreleased)
     public fun toSignedString(): String {
         val zero: Integer = zero()
         return if (this == zero || this < zero) this.decimal
