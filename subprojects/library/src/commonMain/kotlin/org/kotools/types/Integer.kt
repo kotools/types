@@ -144,6 +144,10 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
          * `+1234`, `-1234`).
          *
+         * Also, the [text] is normalized by removing insignificant leading
+         * zeros. As a result, calling this function with `1` and `01` produces
+         * the same result.
+         *
          * In case of invalid [text], this function throws an
          * [IllegalArgumentException] instead of a [NumberFormatException] to
          * ensure consistent behavior across all Kotlin platforms and to better
@@ -204,6 +208,10 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          * The [text] parameter must only contain an optional plus sign (`+`) or
          * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
          * `+1234`, `-1234`).
+         *
+         * Also, the [text] is normalized by removing insignificant leading
+         * zeros. As a result, calling this function with `1` and `01` produces
+         * the same result.
          *
          * <br>
          * <details>
