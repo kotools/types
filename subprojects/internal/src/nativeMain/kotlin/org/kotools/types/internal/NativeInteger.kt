@@ -13,7 +13,21 @@ public actual fun PlatformInteger(decimal: String): PlatformInteger {
 internal class NativeInteger(
     private val integer: BigInteger
 ) : PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
+    override fun equals(other: Any?): Boolean =
+        other is NativeInteger && this.integer == other.integer
+
+    override fun hashCode(): Int = this.integer.hashCode()
+
+    override fun compareTo(other: PlatformInteger): Int {
+        check(other is NativeInteger)
+        return this.integer.compare(other.integer)
+    }
+
     // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): PlatformInteger = NativeInteger(-this.integer)
 
     override fun plus(other: PlatformInteger): PlatformInteger {
         check(other is NativeInteger)

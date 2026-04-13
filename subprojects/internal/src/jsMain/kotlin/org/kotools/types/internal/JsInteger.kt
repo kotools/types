@@ -9,7 +9,23 @@ public actual fun PlatformInteger(decimal: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 internal class JsInteger(private val integer: BigInt) : PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
+    override fun equals(other: Any?): Boolean =
+        other is JsInteger && this.integer.isEqualTo(other.integer)
+
+    override fun hashCode(): Int = this.integer.hashCode()
+
+    override fun compareTo(other: PlatformInteger): Int {
+        check(other is JsInteger)
+        val x: String = this.integer.toString()
+        val y: String = other.integer.toString()
+        return x.compareTo(y)
+    }
+
     // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): PlatformInteger = JsInteger(-this.integer)
 
     override fun plus(other: PlatformInteger): PlatformInteger {
         check(other is JsInteger)
@@ -44,6 +60,20 @@ internal class JsInteger(private val integer: BigInt) : PlatformInteger {
 private external fun BigInt(value: String): BigInt
 
 internal external object BigInt
+
+@Suppress("UNUSED_VARIABLE", "unused")
+private fun BigInt.isEqualTo(other: BigInt): Boolean {
+    val x = this
+    val y = other
+    return js("x == y")
+}
+
+@Suppress("UNUSED_VARIABLE", "unused")
+private operator fun BigInt.unaryMinus(): BigInt {
+    val x = this
+    val negative: dynamic = js("-x")
+    return BigInt("$negative")
+}
 
 @Suppress("UNUSED_VARIABLE", "unused")
 private operator fun BigInt.plus(other: BigInt): BigInt {

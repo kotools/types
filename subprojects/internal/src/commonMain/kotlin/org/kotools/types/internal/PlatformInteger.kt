@@ -7,7 +7,28 @@ public expect fun PlatformInteger(decimal: String): PlatformInteger
 /** Implementations of this interface represent a platform-specific integer. */
 @InternalKotoolsTypesApi
 public interface PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
+    /**
+     * Returns `true` if the [other] object has the same type and value as
+     * this integer, or returns `false` otherwise.
+     */
+    override fun equals(other: Any?): Boolean
+
+    /** Returns a hash code for this integer. */
+    override fun hashCode(): Int
+
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns a negative number, zero, or a positive number as this integer is
+     * less than, equal to, or greater than the [other] one.
+     */
+    public operator fun compareTo(other: PlatformInteger): Int
+
     // ------------------------- Arithmetic operations -------------------------
+
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): PlatformInteger
 
     /** Adds the [other] integer to this one. */
     public operator fun plus(other: PlatformInteger): PlatformInteger

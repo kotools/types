@@ -4,7 +4,6 @@ import org.kotools.types.Integer.Companion.from
 import org.kotools.types.Integer.Companion.fromDecimal
 import org.kotools.types.Integer.Companion.fromDecimalOrNull
 import org.kotools.types.internal.PlatformInteger
-import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -97,33 +96,10 @@ import kotlin.jvm.JvmSynthetic
  * representation.
  * </details>
  *
- * <br>
- * <details>
- * <summary>
- *     <b>Implementation note</b>
- * </summary>
- *
- * ### Implementation note
- *
- * The [Integer] type uses [String] as its canonical representation to ensure
- * consistent behavior across platforms.
- *
- * For performance, each instance may cache its platform-specific numeric
- * representation after the first use in an arithmetic operation. This avoids
- * repeated parsing when the same instance is involved in multiple operations.
- *
- * This optimization is most effective when instances are reused, and has
- * limited impact on short-lived intermediate results.
- *
- * SAMPLE: [org.kotools.types.IntegerSample.cache]
- * </details>
- *
  * @since 5.1.0
  */
 @ExperimentalKotoolsTypesApi
-public class Integer private constructor(private val decimal: String) {
-    private var cached: PlatformInteger? = null
-
+public class Integer private constructor(private val integer: PlatformInteger) {
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
@@ -154,7 +130,10 @@ public class Integer private constructor(private val decimal: String) {
          * </details>
          */
         @JvmStatic
-        public fun from(number: Long): Integer = Integer("$number")
+        public fun from(number: Long): Integer {
+            val integer = PlatformInteger("$number")
+            return Integer(integer)
+        }
 
         /**
          * Creates an [Integer] from the specified [text], or throws an
@@ -214,7 +193,8 @@ public class Integer private constructor(private val decimal: String) {
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
             val digits: String = unsignedText.trimStart('0')
-            return Integer("$sign$digits")
+            val integer = PlatformInteger("$sign$digits")
+            return Integer(integer)
         }
 
         /**
@@ -260,8 +240,8 @@ public class Integer private constructor(private val decimal: String) {
     // ------------------------------ Comparisons ------------------------------
 
     /**
-     * Returns `true` if the [other] object is an instance of [Integer] with the
-     * same value as this one, or returns `false` otherwise.
+     * Returns `true` if the [other] object is an instance of [Integer] and has
+     * the same value as this integer, or returns `false` otherwise.
      *
      * <br>
      * <details>
@@ -285,9 +265,9 @@ public class Integer private constructor(private val decimal: String) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.equalsOverride]
      * </details>
      */
-    @Suppress(Warning.FINAL)
+    @Suppress("RedundantModalityModifier")
     final override fun equals(other: Any?): Boolean =
-        other is Integer && this.decimal == other.decimal
+        other is Integer && this.integer == other.integer
 
     /**
      * Returns a hash code value for this integer.
@@ -314,8 +294,8 @@ public class Integer private constructor(private val decimal: String) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.hashCodeOverride]
      * </details>
      */
-    @Suppress(Warning.FINAL)
-    final override fun hashCode(): Int = this.decimal.hashCode()
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = this.integer.hashCode()
 
     /**
      * Compares this integer with the [other] one for order.
@@ -345,7 +325,7 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun compareTo(other: Integer): Int =
-        this.decimal.compareTo(other.decimal)
+        this.integer.compareTo(other.integer)
 
     // ------------------------- Arithmetic operations -------------------------
 
@@ -374,15 +354,9 @@ public class Integer private constructor(private val decimal: String) {
      * SAMPLE: [org.kotools.types.IntegerJavaSample.unaryMinus]
      * </details>
      */
-    public operator fun unaryMinus(): Integer {
-        if (this == zero()) return this
-        val minusSign = "-"
-        val isNegative: Boolean = this.decimal.startsWith(minusSign)
-        val result: String =
-            if (isNegative) this.decimal.removePrefix(minusSign)
-            else "$minusSign${this.decimal}"
-        return fromDecimal(result)
-    }
+    public operator fun unaryMinus(): Integer =
+        if (this == zero()) this
+        else Integer(-this.integer)
 
     /**
      * Adds the [other] integer to this one.
@@ -413,10 +387,8 @@ public class Integer private constructor(private val decimal: String) {
         val zero: Integer = zero()
         if (this == zero) return other
         if (other == zero) return this
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val sum: PlatformInteger = x + y
-        return fromDecimal("$sum")
+        val sum: PlatformInteger = this.integer + other.integer
+        return Integer(sum)
     }
 
     /**
@@ -448,10 +420,8 @@ public class Integer private constructor(private val decimal: String) {
         val zero: Integer = zero()
         if (other == zero) return this
         if (this == zero) return -other
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val difference: PlatformInteger = x - y
-        return fromDecimal("$difference")
+        val difference: PlatformInteger = this.integer - other.integer
+        return Integer(difference)
     }
 
     /**
@@ -484,10 +454,8 @@ public class Integer private constructor(private val decimal: String) {
         val one: Integer = one()
         if (this == zero || other == one) return this
         if (other == zero || this == one) return other
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val product: PlatformInteger = x * y
-        return fromDecimal("$product")
+        val product: PlatformInteger = this.integer * other.integer
+        return Integer(product)
     }
 
     /**
@@ -550,10 +518,8 @@ public class Integer private constructor(private val decimal: String) {
         val zero: Integer = zero()
         if (other == zero) return null
         if (this == zero || other == one()) return this
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val quotient: PlatformInteger = x / y
-        return fromDecimal("$quotient")
+        val quotient: PlatformInteger = this.integer / other.integer
+        return Integer(quotient)
     }
 
     /**
@@ -617,10 +583,8 @@ public class Integer private constructor(private val decimal: String) {
         if (other == zero) return null
         if (this == zero) return this
         if (other == one()) return zero
-        val x: PlatformInteger = this.toPlatformInteger()
-        val y: PlatformInteger = other.toPlatformInteger()
-        val remainder: PlatformInteger = x % y
-        return fromDecimal("$remainder")
+        val remainder: PlatformInteger = this.integer % other.integer
+        return Integer(remainder)
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -654,8 +618,8 @@ public class Integer private constructor(private val decimal: String) {
      * See the [toSignedString] function for returning the signed decimal
      * representation of this integer.
      */
-    @Suppress(Warning.FINAL)
-    final override fun toString(): String = this.decimal
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = this.integer.toString()
 
     /**
      * Returns the decimal string representation of this integer, prefixed with
@@ -696,10 +660,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     public fun toSignedString(): String {
         val zero: Integer = zero()
-        return if (this == zero || this < zero) this.decimal
-        else "+${this.decimal}"
+        return if (this == zero || this < zero) this.integer.toString()
+        else "+${this.integer}"
     }
-
-    private fun toPlatformInteger(): PlatformInteger = this.cached
-        ?: PlatformInteger(this.decimal).also { this.cached = it }
 }

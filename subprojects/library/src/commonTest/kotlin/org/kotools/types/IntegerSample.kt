@@ -36,14 +36,6 @@ class IntegerSample {
         check(remainder.exceptionOrNull() is ArithmeticException)
     }
 
-    @Test
-    fun cache() {
-        val x: Integer = Integer.from(9223372036854775807)
-        repeat(1000) {
-            x * x // x is parsed once
-        }
-    }
-
     // ------------------------------- Creations -------------------------------
 
     @Test
