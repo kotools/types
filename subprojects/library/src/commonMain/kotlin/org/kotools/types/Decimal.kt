@@ -24,7 +24,7 @@ import kotlin.jvm.JvmStatic
  * numbers (like `1.1` or `2.2`) cannot be represented exactly, leading to
  * surprising results in arithmetic operations.
  *
- * SAMPLE: [org.kotools.types.DecimalSample.representationProblem]
+ * SAMPLE: org.kotools.types.DecimalSample.representationProblem
  *
  * **Solution:** The [Decimal] type represents numbers using a base-10 format.
  * Values like `1.1` and `2.2` are stored exactly, ensuring predictable results
@@ -38,7 +38,7 @@ import kotlin.jvm.JvmStatic
  * binary formats. They are not suitable for domains requiring strict decimal
  * rounding rules, such as financial or tax computations.
  *
- * SAMPLE: [org.kotools.types.DecimalSample.precisionProblem]
+ * SAMPLE: org.kotools.types.DecimalSample.precisionProblem
  *
  * **Solution:** The [Decimal] type supports arbitrary precision by default,
  * allowing computations without premature rounding. When needed, precision can
@@ -53,7 +53,7 @@ import kotlin.jvm.JvmStatic
  * `Infinity`, and operations such as division by zero do not fail, which can
  * silently propagate invalid results.
  *
- * SAMPLE: [org.kotools.types.DecimalSample.divisionByZeroProblem]
+ * SAMPLE: org.kotools.types.DecimalSample.divisionByZeroProblem
  *
  * **Solution:** The [Decimal] type follows strict arithmetic rules. Invalid
  * operations, such as division or remainder by zero, throw an
@@ -81,7 +81,7 @@ public class Decimal private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.DecimalSample.fromIntegerLong]
+         * SAMPLE: org.kotools.types.DecimalSample.fromIntegerLong
          * </details>
          *
          * <br>
@@ -92,7 +92,7 @@ public class Decimal private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.DecimalJavaSample.fromIntegerLong]
+         * SAMPLE: org.kotools.types.DecimalJavaSample.fromIntegerLong
          * </details>
          */
         @JvmStatic
@@ -125,7 +125,7 @@ public class Decimal private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.DecimalSample.fromDecimalString]
+         * SAMPLE: org.kotools.types.DecimalSample.fromDecimalString
          * </details>
          *
          * <br>
@@ -136,7 +136,7 @@ public class Decimal private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.DecimalJavaSample.fromDecimalString]
+         * SAMPLE: org.kotools.types.DecimalJavaSample.fromDecimalString
          * </details>
          */
         @JvmStatic
@@ -221,7 +221,7 @@ public class Decimal private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.DecimalSample.toStringOverride]
+     * SAMPLE: org.kotools.types.DecimalSample.toStringOverride
      * </details>
      *
      * <br>
@@ -232,7 +232,7 @@ public class Decimal private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.DecimalJavaSample.toStringOverride]
+     * SAMPLE: org.kotools.types.DecimalJavaSample.toStringOverride
      * </details>
      */
     @Suppress("RedundantModalityModifier")

@@ -34,7 +34,7 @@ import kotlin.jvm.JvmSynthetic
  * Here's an example of calling it, using the JavaScript Object Notation (JSON)
  * format:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressAsString]
+ * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressAsString
  * </details>
  *
  * <br>
@@ -49,7 +49,7 @@ import kotlin.jvm.JvmSynthetic
  * Here's an example of calling it, using the JavaScript Object Notation (JSON)
  * format:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressRegexAsString]
+ * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressRegexAsString
  * </details>
  *
  * <br>
@@ -64,7 +64,7 @@ import kotlin.jvm.JvmSynthetic
  * Here's an example of calling it, using the JavaScript Object Notation (JSON)
  * format:
  *
- * SAMPLE: [org.kotools.types.kotlinx.serialization.SerializersModuleSample.integerAsString]
+ * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.integerAsString
  * </details>
  *
  * @since 5.0.1

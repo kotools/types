@@ -61,15 +61,14 @@ public abstract class InlineSamples : DefaultTask() {
     }
 
     private fun sampleOrOriginal(line: String): String {
-        val keyword = "SAMPLE: ["
-        return if (keyword in line) {
-            val prefix: String = line.substringBefore(keyword)
-            val path: String = line.substringAfter('[')
-                .substringBefore(']')
-                .replace('.', '/')
-                .plus(".md")
-            this.sampleText(prefix, path)
-        } else line
+        val keyword = "SAMPLE:"
+        if (keyword !in line) return line
+        val prefix: String = line.substringBefore(keyword)
+        val path: String = line.substringAfter(keyword)
+            .trim()
+            .replace('.', '/')
+            .plus(".md")
+        return this.sampleText(prefix, path)
     }
 
     private fun sampleText(prefix: String, path: String): String = this

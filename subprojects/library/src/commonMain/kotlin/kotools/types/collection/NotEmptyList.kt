@@ -24,7 +24,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.notEmptyListOf]
+ * SAMPLE: kotools.types.collection.NotEmptyListKtCommonSample.notEmptyListOf
  * </details>
  * <br>
  *
@@ -53,7 +53,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnCollection]
+ * SAMPLE: kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnCollection
  * </details>
  * <br>
  *
@@ -64,7 +64,7 @@ public fun <E> notEmptyListOf(head: E, vararg tail: E): NotEmptyList<E> {
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptyList].
  *
- * SAMPLE: [kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnMutableCollection]
+ * SAMPLE: kotools.types.collection.NotEmptyListKtCommonSample.toNotEmptyListOnMutableCollection
  *
  * @since 4.0.0
  */
@@ -93,7 +93,7 @@ public fun <E> Collection<E>.toNotEmptyList(): Result<NotEmptyList<E>> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.serialization]
+ * SAMPLE: kotools.types.collection.NotEmptyListCommonSample.serialization
  * </details>
  *
  * @since 4.0.0
@@ -122,7 +122,7 @@ public value class NotEmptyList<out E> private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyListCommonSample.toList]
+     * SAMPLE: kotools.types.collection.NotEmptyListCommonSample.toList
      * </details>
      */
     public fun toList(): List<E> = elements

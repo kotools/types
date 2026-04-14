@@ -42,9 +42,10 @@ public abstract class CheckSampleReferences : DefaultTask() {
 
 private fun File.checkSampleResolutions(directory: Directory) {
     val identifiers: Set<String> = this.useLines { lines: Sequence<String> ->
-        lines.filter { it.contains("SAMPLE: [") }
-            .map { it.substringAfter('[') }
-            .map { it.substringBefore(']') }
+        val keyword = "SAMPLE:"
+        lines.filter { keyword in it }
+            .map { it.substringAfter(keyword) }
+            .map(String::trim)
             .toSet()
     }
     val unresolvedIdentifier: String = identifiers.firstOrNull {

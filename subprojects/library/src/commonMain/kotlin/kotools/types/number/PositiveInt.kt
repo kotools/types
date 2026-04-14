@@ -54,7 +54,7 @@ public fun Number.toPositiveInt(): Result<PositiveInt> {
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: [kotools.types.number.PositiveIntCommonSample.serialization]
+ * SAMPLE: kotools.types.number.PositiveIntCommonSample.serialization
  * </details>
  *
  * @since 1.1.0

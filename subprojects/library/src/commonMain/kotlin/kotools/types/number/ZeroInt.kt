@@ -27,7 +27,7 @@ import org.kotools.types.internal.InternalKotoolsTypesApi
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: [kotools.types.number.ZeroIntCommonSample.serialization]
+ * SAMPLE: kotools.types.number.ZeroIntCommonSample.serialization
  * </details>
  *
  * @since 4.0.0

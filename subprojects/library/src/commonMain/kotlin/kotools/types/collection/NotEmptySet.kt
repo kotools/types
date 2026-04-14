@@ -24,7 +24,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.notEmptySetOf]
+ * SAMPLE: kotools.types.collection.NotEmptySetKtCommonSample.notEmptySetOf
  * </details>
  *
  * @since 4.0.0
@@ -48,14 +48,14 @@ public fun <E> notEmptySetOf(head: E, vararg tail: E): NotEmptySet<E> {
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnCollection]
+ * SAMPLE: kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnCollection
  * </details>
  * <br>
  *
  * Please note that changes made to the original collection will not be
  * reflected on the resulting [NotEmptySet].
  *
- * SAMPLE: [kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnMutableCollection]
+ * SAMPLE: kotools.types.collection.NotEmptySetKtCommonSample.toNotEmptySetOnMutableCollection
  *
  * @since 4.0.0
  */
@@ -84,7 +84,7 @@ public fun <E> Collection<E>.toNotEmptySet(): Result<NotEmptySet<E>> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: [kotools.types.collection.NotEmptySetCommonSample.serialization]
+ * SAMPLE: kotools.types.collection.NotEmptySetCommonSample.serialization
  * </details>
  *
  * @since 4.0.0
@@ -124,7 +124,7 @@ public value class NotEmptySet<out E> private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptySetCommonSample.toSet]
+     * SAMPLE: kotools.types.collection.NotEmptySetCommonSample.toSet
      * </details>
      */
     public fun toSet(): Set<E> = elements

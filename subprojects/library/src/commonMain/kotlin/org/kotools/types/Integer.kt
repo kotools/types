@@ -51,12 +51,12 @@ import kotlin.jvm.JvmSynthetic
  * [Short], [Int] and [Long]) can lead to an overflow, which produces unexpected
  * behavior.
  *
- * SAMPLE: [org.kotools.types.IntegerSample.overflowProblem]
+ * SAMPLE: org.kotools.types.IntegerSample.overflowProblem
  *
  * **Solution:** The [Integer] type can [add][plus], [subtract][minus] or
  * [multiply][times] integers without producing an overflow.
  *
- * SAMPLE: [org.kotools.types.IntegerSample.overflowSolution]
+ * SAMPLE: org.kotools.types.IntegerSample.overflowSolution
  *
  * #### Division by zero
  *
@@ -65,14 +65,14 @@ import kotlin.jvm.JvmSynthetic
  * [ArithmeticException] on JVM and Native platforms, and return `0` on JS
  * platform.
  *
- * SAMPLE: [org.kotools.types.IntegerJvmNativeSample.divisionByZeroProblem]
+ * SAMPLE: org.kotools.types.IntegerJvmNativeSample.divisionByZeroProblem
  *
- * SAMPLE: [org.kotools.types.IntegerJsSample.divisionByZeroProblem]
+ * SAMPLE: org.kotools.types.IntegerJsSample.divisionByZeroProblem
  *
  * **Solution:** [Division][div] and [remainder][rem] operations by zero on
  * [Integer] type throw an [ArithmeticException] on all platforms.
  *
- * SAMPLE: [org.kotools.types.IntegerSample.divisionByZeroSolution]
+ * SAMPLE: org.kotools.types.IntegerSample.divisionByZeroSolution
  * </details>
  *
  * <br>
@@ -115,7 +115,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.from]
+         * SAMPLE: org.kotools.types.IntegerSample.from
          * </details>
          *
          * <br>
@@ -126,7 +126,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.from]
+         * SAMPLE: org.kotools.types.IntegerJavaSample.from
          * </details>
          */
         @JvmStatic
@@ -161,7 +161,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimal]
+         * SAMPLE: org.kotools.types.IntegerSample.fromDecimal
          * </details>
          *
          * <br>
@@ -172,7 +172,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.IntegerJavaSample.fromDecimal]
+         * SAMPLE: org.kotools.types.IntegerJavaSample.fromDecimal
          * </details>
          * <br>
          *
@@ -221,7 +221,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.IntegerSample.fromDecimalOrNull]
+         * SAMPLE: org.kotools.types.IntegerSample.fromDecimalOrNull
          * </details>
          * <br>
          *
@@ -259,7 +259,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.equalsOverride]
+     * SAMPLE: org.kotools.types.IntegerSample.equalsOverride
      * </details>
      *
      * <br>
@@ -270,7 +270,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.equalsOverride]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.equalsOverride
      * </details>
      */
     @Suppress("RedundantModalityModifier")
@@ -288,7 +288,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.hashCodeOverride]
+     * SAMPLE: org.kotools.types.IntegerSample.hashCodeOverride
      * </details>
      *
      * <br>
@@ -299,7 +299,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.hashCodeOverride]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.hashCodeOverride
      * </details>
      */
     @Suppress("RedundantModalityModifier")
@@ -318,7 +318,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.compareTo]
+     * SAMPLE: org.kotools.types.IntegerSample.compareTo
      * </details>
      *
      * <br>
@@ -329,7 +329,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.compareTo]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.compareTo
      * </details>
      */
     public operator fun compareTo(other: Integer): Int =
@@ -348,7 +348,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.unaryMinus]
+     * SAMPLE: org.kotools.types.IntegerSample.unaryMinus
      * </details>
      *
      * <br>
@@ -359,7 +359,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.unaryMinus]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.unaryMinus
      * </details>
      */
     public operator fun unaryMinus(): Integer =
@@ -377,7 +377,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.plus]
+     * SAMPLE: org.kotools.types.IntegerSample.plus
      * </details>
      *
      * <br>
@@ -388,7 +388,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.plus]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.plus
      * </details>
      */
     public operator fun plus(other: Integer): Integer {
@@ -410,7 +410,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.minus]
+     * SAMPLE: org.kotools.types.IntegerSample.minus
      * </details>
      *
      * <br>
@@ -421,7 +421,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.minus]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.minus
      * </details>
      */
     public operator fun minus(other: Integer): Integer {
@@ -443,7 +443,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.times]
+     * SAMPLE: org.kotools.types.IntegerSample.times
      * </details>
      *
      * <br>
@@ -454,7 +454,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.times]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.times
      * </details>
      */
     public operator fun times(other: Integer): Integer {
@@ -478,7 +478,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.div]
+     * SAMPLE: org.kotools.types.IntegerSample.div
      * </details>
      *
      * <br>
@@ -489,7 +489,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.div]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.div
      * </details>
      * <br>
      *
@@ -511,7 +511,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.divOrNull]
+     * SAMPLE: org.kotools.types.IntegerSample.divOrNull
      * </details>
      * <br>
      *
@@ -542,7 +542,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.rem]
+     * SAMPLE: org.kotools.types.IntegerSample.rem
      * </details>
      *
      * <br>
@@ -553,7 +553,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.rem]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.rem
      * </details>
      * <br>
      *
@@ -575,7 +575,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.remOrNull]
+     * SAMPLE: org.kotools.types.IntegerSample.remOrNull
      * </details>
      * <br>
      *
@@ -608,7 +608,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.toStringOverride]
+     * SAMPLE: org.kotools.types.IntegerSample.toStringOverride
      * </details>
      *
      * <br>
@@ -619,7 +619,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.toStringOverride]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.toStringOverride
      * </details>
      * <br>
      *
@@ -646,7 +646,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.IntegerSample.toSignedString]
+     * SAMPLE: org.kotools.types.IntegerSample.toSignedString
      * </details>
      *
      * <br>
@@ -657,7 +657,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.IntegerJavaSample.toSignedString]
+     * SAMPLE: org.kotools.types.IntegerJavaSample.toSignedString
      * </details>
      * <br>
      *

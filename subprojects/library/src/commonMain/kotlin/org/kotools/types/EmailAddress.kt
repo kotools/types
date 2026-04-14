@@ -29,7 +29,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.equalsOverride]
+     * SAMPLE: org.kotools.types.EmailAddressCommonSample.equalsOverride
      * </details>
      *
      * <br>
@@ -40,7 +40,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.equalsOverride]
+     * SAMPLE: org.kotools.types.EmailAddressJavaSample.equalsOverride
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -58,7 +58,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.hashCodeOverride]
+     * SAMPLE: org.kotools.types.EmailAddressCommonSample.hashCodeOverride
      * </details>
      *
      * <br>
@@ -69,7 +69,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.hashCodeOverride]
+     * SAMPLE: org.kotools.types.EmailAddressJavaSample.hashCodeOverride
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -88,7 +88,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [org.kotools.types.EmailAddressCommonSample.toStringOverride]
+     * SAMPLE: org.kotools.types.EmailAddressCommonSample.toStringOverride
      * </details>
      *
      * <br>
@@ -99,7 +99,7 @@ public class EmailAddress private constructor(private val text: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: [org.kotools.types.EmailAddressJavaSample.toStringOverride]
+     * SAMPLE: org.kotools.types.EmailAddressJavaSample.toStringOverride
      * </details>
      */
     @Suppress(Warning.FINAL)
@@ -121,7 +121,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.ofText]
+         * SAMPLE: org.kotools.types.EmailAddressCommonSample.ofText
          * </details>
          *
          * <br>
@@ -132,7 +132,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.ofText]
+         * SAMPLE: org.kotools.types.EmailAddressJavaSample.ofText
          * </details>
          *
          * @since 5.1.0
@@ -155,7 +155,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressCommonSample.ofTextRegex]
+         * SAMPLE: org.kotools.types.EmailAddressCommonSample.ofTextRegex
          * </details>
          *
          * <br>
@@ -166,7 +166,7 @@ public class EmailAddress private constructor(private val text: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: [org.kotools.types.EmailAddressJavaSample.ofTextRegex]
+         * SAMPLE: org.kotools.types.EmailAddressJavaSample.ofTextRegex
          * </details>
          *
          * @since 5.1.0

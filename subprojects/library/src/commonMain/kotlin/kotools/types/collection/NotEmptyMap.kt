@@ -26,7 +26,7 @@ import kotlin.jvm.JvmSynthetic
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.notEmptyMapOf]
+ * SAMPLE: kotools.types.collection.NotEmptyMapKtCommonSample.notEmptyMapOf
  * </details>
  *
  * @since 4.0.0
@@ -53,14 +53,14 @@ public fun <K, V> notEmptyMapOf(
  *
  * Here's an example of calling this function from Kotlin code:
  *
- * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMap]
+ * SAMPLE: kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMap
  * </details>
  * <br>
  *
  * Please note that changes made to the original map will not be reflected on
  * the resulting [NotEmptyMap].
  *
- * SAMPLE: [kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMutableMap]
+ * SAMPLE: kotools.types.collection.NotEmptyMapKtCommonSample.toNotEmptyMapOnMutableMap
  *
  * @since 4.0.0
  */
@@ -87,7 +87,7 @@ public fun <K, V> Map<K, V>.toNotEmptyMap(): Result<NotEmptyMap<K, V>> =
  * Here's an example of Kotlin code that encodes and decodes this type using the
  * [JavaScript Object Notation (JSON) format from kotlinx.serialization](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json):
  *
- * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.serialization]
+ * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.serialization
  * </details>
  *
  * @since 4.0.0
@@ -123,7 +123,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.head]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.head
      * </details>
      */
     public val head: Pair<K, V>
@@ -141,7 +141,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.tail]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.tail
      * </details>
      */
     public val tail: NotEmptyMap<K, V>?
@@ -163,7 +163,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.entries]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.entries
      * </details>
      */
     public val entries: NotEmptySet<Map.Entry<K, V>>
@@ -181,7 +181,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.keys]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.keys
      * </details>
      */
     public val keys: NotEmptySet<K>
@@ -199,7 +199,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.values]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.values
      * </details>
      */
     public val values: NotEmptyList<V>
@@ -217,7 +217,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this property from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.size]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.size
      * </details>
      */
     public val size: StrictlyPositiveInt
@@ -236,7 +236,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.toMap]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.toMap
      * </details>
      */
     public fun toMap(): Map<K, V> = delegate
@@ -254,7 +254,7 @@ public value class NotEmptyMap<K, out V> private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: [kotools.types.collection.NotEmptyMapCommonSample.toStringOverride]
+     * SAMPLE: kotools.types.collection.NotEmptyMapCommonSample.toStringOverride
      * </details>
      */
     override fun toString(): String = "$delegate"
