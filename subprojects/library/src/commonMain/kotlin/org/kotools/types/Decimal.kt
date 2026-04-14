@@ -2,6 +2,9 @@ package org.kotools.types
 
 import kotlin.jvm.JvmStatic
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal expect fun Decimal(text: String): Decimal
+
 /**
  * Represents a decimal floating-point number with exact base-10 representation.
  *
@@ -65,7 +68,7 @@ import kotlin.jvm.JvmStatic
  * @since 5.2.0
  */
 @ExperimentalKotoolsTypesApi
-public class Decimal private constructor(private val text: String) {
+public interface Decimal {
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Decimal] type. */
@@ -235,6 +238,5 @@ public class Decimal private constructor(private val text: String) {
      * SAMPLE: org.kotools.types.DecimalJavaSample.toStringOverride
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = this.text
+    override fun toString(): String
 }

@@ -323,12 +323,11 @@ public final class kotools/types/text/NotBlankStringKt {
 	public static final fun toNotBlankString (Ljava/lang/String;)Ljava/lang/Object;
 }
 
-public final class org/kotools/types/Decimal {
+public abstract interface class org/kotools/types/Decimal {
 	public static final field Companion Lorg/kotools/types/Decimal$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Decimal;
-	public static final fun fromInteger (J)Lorg/kotools/types/Decimal;
-	public final fun toString ()Ljava/lang/String;
+	public static fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Decimal;
+	public static fun fromInteger (J)Lorg/kotools/types/Decimal;
+	public abstract fun toString ()Ljava/lang/String;
 }
 
 public final class org/kotools/types/Decimal$Companion {
