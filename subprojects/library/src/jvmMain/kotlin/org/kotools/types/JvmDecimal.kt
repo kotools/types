@@ -12,5 +12,7 @@ internal actual fun Decimal(text: String): Decimal {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class JvmDecimal(private val value: BigDecimal) : Decimal {
+    // ------------------------------ Conversions ------------------------------
+
     override fun toString(): String = this.value.toString()
 }

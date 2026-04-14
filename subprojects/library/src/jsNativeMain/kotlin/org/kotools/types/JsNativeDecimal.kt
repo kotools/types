@@ -6,10 +6,12 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 @Suppress("unused")
 internal actual fun Decimal(text: String): Decimal {
     val value: BigDecimal = BigDecimal.parseString(text)
-    return NativeDecimal(value)
+    return JsNativeDecimal(value)
 }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-private class NativeDecimal(private val value: BigDecimal) : Decimal {
+private class JsNativeDecimal(private val value: BigDecimal) : Decimal {
+    // ------------------------------ Conversions ------------------------------
+
     override fun toString(): String = this.value.toStringExpanded()
 }

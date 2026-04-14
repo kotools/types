@@ -55,12 +55,20 @@ kotlin.targets.configureEach {
 kotlin.applyDefaultHierarchyTemplate()
 kotlin.sourceSets {
     configureEach { languageSettings.optIn("kotlin.RequiresOptIn") }
+    val commonMain: KotlinSourceSet by this.getting
     val commonTest: KotlinSourceSet by this.getting
+    val jsNativeMain: KotlinSourceSet by this.creating {
+        this.dependsOn(commonMain)
+    }
     val jvmNativeTest: KotlinSourceSet by this.creating {
         this.dependsOn(commonTest)
     }
+    val jsMain: KotlinSourceSet by this.getting { this.dependsOn(jsNativeMain) }
     val jvmTest: KotlinSourceSet by this.getting {
         this.dependsOn(jvmNativeTest)
+    }
+    val nativeMain: KotlinSourceSet by this.getting {
+        this.dependsOn(jsNativeMain)
     }
     val nativeTest: KotlinSourceSet by this.getting {
         this.dependsOn(jvmNativeTest)
