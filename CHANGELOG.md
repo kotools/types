@@ -46,7 +46,6 @@ All notable changes to this project will be documented in this file.
 - Default serializer for `Integer` type
   ([0565df54](https://github.com/kotools/types/commit/0565df54)).
 
-
 ## 🔖 Releases
 
 | Version | Release date |
