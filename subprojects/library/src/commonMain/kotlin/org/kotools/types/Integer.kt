@@ -3,9 +3,11 @@ package org.kotools.types
 import org.kotools.types.Integer.Companion.from
 import org.kotools.types.Integer.Companion.fromDecimal
 import org.kotools.types.Integer.Companion.fromDecimalOrNull
-import org.kotools.types.internal.PlatformInteger
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal expect fun Integer(text: String): Integer
 
 /**
  * Represents an integer.
@@ -99,7 +101,7 @@ import kotlin.jvm.JvmSynthetic
  * @since 5.1.0
  */
 @ExperimentalKotoolsTypesApi
-public class Integer private constructor(private val integer: PlatformInteger) {
+public interface Integer {
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
@@ -130,10 +132,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
          * </details>
          */
         @JvmStatic
-        public fun from(number: Long): Integer {
-            val integer = PlatformInteger("$number")
-            return Integer(integer)
-        }
+        public fun from(number: Long): Integer = Integer("$number")
 
         /**
          * Creates an [Integer] from the specified [text], or throws an
@@ -197,8 +196,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
                 if (textWithoutPlusSignPrefix.startsWith('-')) "-"
                 else ""
             val digits: String = unsignedText.trimStart('0')
-            val integer = PlatformInteger("$sign$digits")
-            return Integer(integer)
+            return Integer("$sign$digits")
         }
 
         /**
@@ -248,8 +246,8 @@ public class Integer private constructor(private val integer: PlatformInteger) {
     // ------------------------------ Comparisons ------------------------------
 
     /**
-     * Returns `true` if the [other] object is an instance of [Integer] and has
-     * the same value as this integer, or returns `false` otherwise.
+     * Returns `true` if the [other] object is an instance of [Integer] with
+     * the same numeric value as this integer, or returns `false` otherwise.
      *
      * <br>
      * <details>
@@ -273,9 +271,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.equalsOverride
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
-    final override fun equals(other: Any?): Boolean =
-        other is Integer && this.integer == other.integer
+    override fun equals(other: Any?): Boolean
 
     /**
      * Returns a hash code value for this integer.
@@ -302,8 +298,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.hashCodeOverride
      * </details>
      */
-    @Suppress("RedundantModalityModifier")
-    final override fun hashCode(): Int = this.integer.hashCode()
+    override fun hashCode(): Int
 
     /**
      * Compares this integer with the [other] one for order.
@@ -332,8 +327,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.compareTo
      * </details>
      */
-    public operator fun compareTo(other: Integer): Int =
-        this.integer.compareTo(other.integer)
+    public operator fun compareTo(other: Integer): Int
 
     // ------------------------- Arithmetic operations -------------------------
 
@@ -362,9 +356,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.unaryMinus
      * </details>
      */
-    public operator fun unaryMinus(): Integer =
-        if (this == zero()) this
-        else Integer(-this.integer)
+    public operator fun unaryMinus(): Integer
 
     /**
      * Adds the [other] integer to this one.
@@ -391,13 +383,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.plus
      * </details>
      */
-    public operator fun plus(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (this == zero) return other
-        if (other == zero) return this
-        val sum: PlatformInteger = this.integer + other.integer
-        return Integer(sum)
-    }
+    public operator fun plus(other: Integer): Integer
 
     /**
      * Subtracts the [other] integer from this one.
@@ -424,13 +410,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.minus
      * </details>
      */
-    public operator fun minus(other: Integer): Integer {
-        val zero: Integer = zero()
-        if (other == zero) return this
-        if (this == zero) return -other
-        val difference: PlatformInteger = this.integer - other.integer
-        return Integer(difference)
-    }
+    public operator fun minus(other: Integer): Integer
 
     /**
      * Multiplies this integer by the [other] one.
@@ -457,14 +437,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * SAMPLE: org.kotools.types.IntegerJavaSample.times
      * </details>
      */
-    public operator fun times(other: Integer): Integer {
-        val zero: Integer = zero()
-        val one: Integer = one()
-        if (this == zero || other == one) return this
-        if (other == zero || this == one) return other
-        val product: PlatformInteger = this.integer * other.integer
-        return Integer(product)
-    }
+    public operator fun times(other: Integer): Integer
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
@@ -522,13 +495,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * `null` in case of invalid [other] integer.
      */
     @JvmSynthetic
-    public fun divOrNull(other: Integer): Integer? {
-        val zero: Integer = zero()
-        if (other == zero) return null
-        if (this == zero || other == one()) return this
-        val quotient: PlatformInteger = this.integer / other.integer
-        return Integer(quotient)
-    }
+    public fun divOrNull(other: Integer): Integer?
 
     /**
      * Returns the remainder of dividing this integer by the [other] one, or
@@ -586,14 +553,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * `null` in case of invalid [other] integer.
      */
     @JvmSynthetic
-    public fun remOrNull(other: Integer): Integer? {
-        val zero: Integer = zero()
-        if (other == zero) return null
-        if (this == zero) return this
-        if (other == one()) return zero
-        val remainder: PlatformInteger = this.integer % other.integer
-        return Integer(remainder)
-    }
+    public fun remOrNull(other: Integer): Integer?
 
     // ------------------------------ Conversions ------------------------------
 
@@ -626,8 +586,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      * See the [toSignedString] function for returning the signed decimal
      * representation of this integer.
      */
-    @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = this.integer.toString()
+    override fun toString(): String
 
     /**
      * Returns the decimal string representation of this integer, prefixed with
@@ -668,7 +627,7 @@ public class Integer private constructor(private val integer: PlatformInteger) {
      */
     public fun toSignedString(): String {
         val zero: Integer = zero()
-        return if (this == zero || this < zero) this.integer.toString()
-        else "+${this.integer}"
+        return if (this == zero || this < zero) this.toString()
+        else "+$this"
     }
 }
