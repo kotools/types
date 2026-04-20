@@ -26,14 +26,16 @@ All notable changes to this project will be documented in this file.
 
 - Improve the vision of Kotools Types in design goals, README and `Integer`
   type's documentation ([#913](https://github.com/kotools/types/pull/913)).
-- The `Integer` **experimental** type now stores its internal representation
-  using platform-specific types instead of `String`. This avoids parsing when
+- Convert `Integer` **experimental** type from class to interface
+  ([4f50f070](https://github.com/kotools/types/commit/4f50f070)).
+- The `Integer` type now stores its internal representation using
+  platform-specific types instead of `String`. This avoids parsing when
   performing arithmetic operations
   ([#912](https://github.com/kotools/types/issues/912), and
   [#914](https://github.com/kotools/types/pull/914) reviewed by
   [@daniel-rusu](https://github.com/daniel-rusu)).
-- Optimize arithmetic operations of `Integer` for cases involving zero (`0`) and
-  one (`1`) ([#921](https://github.com/kotools/types/pull/921)).
+- Optimize arithmetic operations of `Integer` for cases involving `0` and `1`
+  ([#921](https://github.com/kotools/types/pull/921)).
 
 ### 🔥 Removed
 
