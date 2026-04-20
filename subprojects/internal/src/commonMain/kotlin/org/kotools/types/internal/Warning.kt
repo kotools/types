@@ -15,14 +15,6 @@ public object Warning {
     public const val FINAL: String = "RedundantModalityModifier"
 
     /**
-     * Warning indicating that the function name is invalid.
-     *
-     * This warning can be suppressed when the function name starts with an
-     * uppercase letter or contains a special character, but on purpose.
-     */
-    public const val FUNCTION_NAME: String = "FunctionName"
-
-    /**
      * Warning indicating that the test function name is invalid.
      *
      * This warning can be suppressed when the test function name starts with an

@@ -5,7 +5,6 @@ import kotlinx.serialization.json.Json
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.Integer
 import kotlin.test.Test
 
 class SerializersModuleSample {
@@ -35,18 +34,5 @@ class SerializersModuleSample {
         check(encoded == "\"^\\\\S+@\\\\S+\\\\.\\\\S+$\"")
         val decoded: EmailAddressRegex = format.decodeFromString(encoded)
         check(decoded == regex)
-    }
-
-    @OptIn(ExperimentalKotoolsTypesApi::class)
-    @Test
-    fun integerAsString() {
-        val format = Json {
-            this.serializersModule = KotoolsTypesSerializersModule()
-        }
-        val integer: Integer = Integer.from(123456789)
-        val encoded: String = format.encodeToString(integer)
-        check(encoded == "\"123456789\"")
-        val decoded: Integer = format.decodeFromString(encoded)
-        check(decoded == integer)
     }
 }
