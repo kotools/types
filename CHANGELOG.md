@@ -43,6 +43,8 @@ All notable changes to this project will be documented in this file.
   and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
   functions instead ([#871](https://github.com/kotools/types/issues/871) and
   [#872](https://github.com/kotools/types/issues/872)).
+- Default serializer for `Integer` type
+  ([0565df54](https://github.com/kotools/types/commit/0565df54)).
 
 
 ## 🔖 Releases
