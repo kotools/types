@@ -35,21 +35,6 @@ internal expect fun Decimal(text: String): Decimal
  *
  * TODO: Add Kotlin sample.
  *
- * #### Controlled precision
- *
- * **Problem:** [Float] and [Double] provide fixed precision defined by IEEE 754
- * binary formats. They are not suitable for domains requiring strict decimal
- * rounding rules, such as financial or tax computations.
- *
- * SAMPLE: org.kotools.types.DecimalSample.precisionProblem
- *
- * **Solution:** The [Decimal] type supports arbitrary precision by default,
- * allowing computations without premature rounding. When needed, precision can
- * be explicitly controlled (e.g., decimal32, decimal64, decimal128) to match
- * domain-specific requirements.
- *
- * TODO: Add Kotlin sample.
- *
  * #### Strict arithmetic semantics
  *
  * **Problem:** Kotlin floating-point types allow special values like
