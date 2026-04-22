@@ -14,12 +14,9 @@ class IntegerTest {
 
     @Test
     fun from() {
-        // Given
         val number: Long = Long.MAX_VALUE
-        // When
-        val integer: Integer = Integer.from(number)
-        // Then
-        assertEquals(expected = "$number", actual = "$integer")
+        val result: Integer = Integer.from(number)
+        assertEquals(expected = "$number", "$result")
     }
 
     @Test
