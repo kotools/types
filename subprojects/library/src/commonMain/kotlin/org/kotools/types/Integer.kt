@@ -180,23 +180,18 @@ public interface Integer {
          */
         @JvmStatic
         public fun fromDecimal(text: String): Integer {
-            require(text.isNotBlank()) { "Integer can't be blank." }
-            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
-            val unsignedText: String =
-                textWithoutPlusSignPrefix.removePrefix("-")
-            val isDecimal: Boolean =
-                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            require(isDecimal) {
-                "Integer can only contain an optional + or - sign, followed " +
-                        "by a sequence of digits (was: $text)."
+            require(this.isValidInteger(text)) {
+                "\"$text\" is not a valid integer."
             }
-            val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.zero()
-            val sign: String =
-                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
-                else ""
-            val digits: String = unsignedText.trimStart('0')
-            return Integer("$sign$digits")
+            val normalizedText: String = Decimal.normalize(text)
+            return Integer(normalizedText)
+        }
+
+        private fun isValidInteger(text: String): Boolean {
+            if (text.isBlank()) return false
+            val unsignedText: String = text.removePrefix("+")
+                .removePrefix("-")
+            return unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
         }
 
         /**

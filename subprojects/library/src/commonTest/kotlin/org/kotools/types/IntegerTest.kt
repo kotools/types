@@ -23,163 +23,33 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalWithNonZeroDecimalString() {
-        // Given
-        val number = 123456L
-        val text = "$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.from(number)
-        assertEquals(expected, result)
+    fun fromDecimalWithZero(): Unit = listOf("0", "+0", "-0", "00").forEach {
+        val result: Integer = Integer.fromDecimal(it)
+        assertEquals(expected = "0", "$result")
     }
 
     @Test
-    fun fromDecimalWithPlusSignedNonZeroDecimalString() {
-        // Given
-        val number = 123456L
-        val text = "+$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.from(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithMinusSignedNonZeroDecimalString() {
-        // Given
-        val number: Long = -123456L
-        val text = "$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.from(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithSingleZeroDecimalString() {
-        // Given
-        val text = "0"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithMultipleZerosDecimalString() {
-        // Given
-        val text = "000"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithPlusSignedZeroDecimalString() {
-        // Given
-        val text = "+0"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithMinusSignedZeroDecimalString() {
-        // Given
-        val text = "-0"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithLeadingZerosInPositiveDecimalString() {
-        // Given
-        val number = 123L
-        val text = "000$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.from(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithLeadingZerosInNegativeDecimalString() {
-        // Given
-        val number = 123L
-        val text = "-000$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.from(-number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithBlankString() {
-        // Given
-        val text = " "
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
+    fun fromDecimalWithPositiveInteger(): Unit =
+        listOf("1", "+1", "01").forEach {
+            val result: Integer = Integer.fromDecimal(it)
+            assertEquals(expected = "1", "$result")
         }
-        // Then
-        val expected = "Integer can't be blank."
-        assertEquals(expected, result.message)
+
+    @Test
+    fun fromDecimalWithNegativeInteger(): Unit = listOf("-1", "-01").forEach {
+        val result: Integer = Integer.fromDecimal(it)
+        assertEquals(expected = "-1", "$result")
     }
 
     @Test
-    fun fromDecimalWithPlusSignString() {
-        // Given
-        val text = "+"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
+    fun fromDecimalWithInvalidString(): Unit =
+        listOf(" ", "+", "-", "oops").forEach {
+            val result: IllegalArgumentException = assertFailsWith {
+                Integer.fromDecimal(it)
+            }
+            val expected = "\"$it\" is not a valid integer."
+            assertEquals(expected, result.message)
         }
-        // Then
-        val expected: String = "Integer can only contain an optional + or - " +
-                "sign, followed by a sequence of digits (was: $text)."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithMinusSignString() {
-        // Given
-        val text = "-"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
-        }
-        // Then
-        val expected: String = "Integer can only contain an optional + or - " +
-                "sign, followed by a sequence of digits (was: $text)."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithNonDecimalString() {
-        // Given
-        val text = "oops"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
-        }
-        // Then
-        val expected: String = "Integer can only contain an optional + or - " +
-                "sign, followed by a sequence of digits (was: $text)."
-        assertEquals(expected, result.message)
-    }
 
     @Test
     fun fromDecimalOrNullWithNonZeroDecimalString() {

@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal expect fun Decimal(text: String): Decimal
@@ -151,7 +152,8 @@ public interface Decimal {
                     && unsignedText.last().isDigit()
         }
 
-        private fun normalize(text: String): String {
+        @JvmSynthetic
+        internal fun normalize(text: String): String {
             val isZero: Boolean = text.filter(Char::isDigit)
                 .all { it == '0' }
             if (isZero) return "0"
