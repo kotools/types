@@ -187,13 +187,6 @@ public interface Integer {
             return Integer(normalizedText)
         }
 
-        private fun isValidInteger(text: String): Boolean {
-            if (text.isBlank()) return false
-            val unsignedText: String = text.removePrefix("+")
-                .removePrefix("-")
-            return unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-        }
-
         /**
          * Creates an [Integer] from the specified [text], or returns `null` if
          * the [text] doesn't represent an integer.
@@ -225,10 +218,17 @@ public interface Integer {
          * returning `null` in case of invalid [text].
          */
         @JvmSynthetic
-        public fun fromDecimalOrNull(text: String): Integer? = try {
-            this.fromDecimal(text)
-        } catch (_: IllegalArgumentException) {
-            null
+        public fun fromDecimalOrNull(text: String): Integer? {
+            if (!this.isValidInteger(text)) return null
+            val normalizedText: String = Decimal.normalize(text)
+            return Integer(normalizedText)
+        }
+
+        private fun isValidInteger(text: String): Boolean {
+            if (text.isBlank()) return false
+            val unsignedText: String = text.removePrefix("+")
+                .removePrefix("-")
+            return unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
         }
 
         @JvmSynthetic
