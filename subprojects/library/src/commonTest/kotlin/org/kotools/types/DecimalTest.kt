@@ -9,12 +9,9 @@ class DecimalTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun fromIntegerWithLong() {
-        // Given
+    fun fromInteger() {
         val number: Long = Long.MAX_VALUE
-        // When
         val result: Decimal = Decimal.fromInteger(number)
-        // Then
         assertEquals(expected = "$number", "$result")
     }
 
