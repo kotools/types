@@ -36,6 +36,9 @@ All notable changes to this project will be documented in this file.
   [@daniel-rusu](https://github.com/daniel-rusu)).
 - Optimize arithmetic operations of `Integer` for cases involving `0` and `1`
   ([#921](https://github.com/kotools/types/pull/921)).
+- Error message of `Integer.Companion.fromInteger(Long)` **experimental**
+  function in case of invalid input
+  ([9dc7b938](https://github.com/kotools/types/commit/9dc7b938)).
 
 ### 🔥 Removed
 
