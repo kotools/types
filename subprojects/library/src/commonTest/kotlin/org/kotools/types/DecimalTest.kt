@@ -19,247 +19,47 @@ class DecimalTest {
     }
 
     @Test
-    fun fromDecimalWithUnsignedZeroAsString() {
-        // Given
-        val text = "000.000"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = "0", "$result")
-    }
-
-    @Test
-    fun fromDecimalWithPlusSignedZeroAsString() {
-        // Given
-        val text = "+000.000"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = "0", "$result")
-    }
-
-    @Test
-    fun fromDecimalWithMinusSignedZeroAsString() {
-        // Given
-        val text = "-000.000"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = "0", "$result")
-    }
-
-    @Test
-    fun fromDecimalWithUnsignedPositiveIntegerAsString() {
-        // Given
-        val text = "123"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = text, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithSignedPositiveIntegerAsString() {
-        // Given
-        val integer = 123
-        val text = "+$integer"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = "$integer", "$result")
-    }
-
-    @Test
-    fun fromDecimalWithNegativeIntegerAsString() {
-        // Given
-        val text = "-123"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = text, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithIntegerHavingLeadingZerosInString() {
-        // Given
-        val integer = 123
-        val text = "000$integer"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = "$integer", "$result")
-    }
-
-    @Test
-    fun fromDecimalWithIntegerHavingTrailingZerosInString() {
-        // Given
-        val integer = 123
-        val text = "$integer.000"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = "$integer", "$result")
-    }
-
-    @Test
-    fun fromDecimalWithUnsignedPositiveFloatingPointNumberAsString() {
-        // Given
-        val text = "123.456"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = text, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithSignedPositiveFloatingPointNumberAsString() {
-        // Given
-        val number = "123.456"
-        val text = "+$number"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = number, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithNegativeFloatingPointNumberAsString() {
-        // Given
-        val text = "-123.456"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = text, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithFloatingPointNumberHavingLeadingZerosInString() {
-        // Given
-        val number = "123.456"
-        val text = "000$number"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = number, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithFloatingPointNumberHavingTrailingZerosInString() {
-        // Given
-        val number = "123.456"
-        val text = "${number}000"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        assertEquals(expected = number, "$result")
-    }
-
-    @Test
-    fun fromDecimalWithBlankString() {
-        // Given
-        val text = " "
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
+    fun fromDecimalWithZero(): Unit =
+        listOf("0", "+0", "-0", "00", "00.00").forEach {
+            val result: Decimal = Decimal.fromDecimal(it)
+            assertEquals(expected = "0", "$result")
         }
-        // Then
-        val expected = "Decimal floating-point number can't be blank."
-        assertEquals(expected, result.message)
-    }
 
     @Test
-    fun fromDecimalWithPlusSignAsString() {
-        // Given
-        val text = "+"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
+    fun fromDecimalWithPositiveInteger(): Unit =
+        listOf("1", "+1", "01", "1.0").forEach {
+            val result: Decimal = Decimal.fromDecimal(it)
+            assertEquals(expected = "1", "$result")
         }
-        // Then
-        val expected = "Plus sign (+) is not a decimal floating-point number."
-        assertEquals(expected, result.message)
-    }
 
     @Test
-    fun fromDecimalWithMinusSignAsString() {
-        // Given
-        val text = "-"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
+    fun fromDecimalWithNegativeInteger(): Unit =
+        listOf("-1", "-01", "-1.0").forEach {
+            val result: Decimal = Decimal.fromDecimal(it)
+            assertEquals(expected = "-1", "$result")
         }
-        // Then
-        val expected = "Minus sign (-) is not a decimal floating-point number."
-        assertEquals(expected, result.message)
-    }
 
     @Test
-    fun fromDecimalWithRadixPointAsString() {
-        // Given
-        val text = "."
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
+    fun fromDecimalWithPositiveDecimalNumber(): Unit =
+        listOf("1.2", "+1.2", "01.2", "1.20").forEach {
+            val result: Decimal = Decimal.fromDecimal(it)
+            assertEquals(expected = "1.2", "$result")
         }
-        // Then
-        val expected = "Radix point (.) is not a decimal floating-point number."
-        assertEquals(expected, result.message)
-    }
 
     @Test
-    fun fromDecimalWithNonDecimalString() {
-        // Given
-        val text = "oops"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
+    fun fromDecimalWithNegativeDecimalNumber(): Unit =
+        listOf("-1.2", "-01.2", "-1.20").forEach {
+            val result: Decimal = Decimal.fromDecimal(it)
+            assertEquals(expected = "-1.2", "$result")
         }
-        // Then
-        val expected = "Only digits, plus sign (+), minus sign (-), and " +
-                "radix point (.) characters are allowed in decimal " +
-                "floating-point number (was: $text)."
-        assertEquals(expected, result.message)
-    }
 
     @Test
-    fun fromDecimalWithMultipleRadixPointsInString() {
-        // Given
-        val text = "1.2.3"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
+    fun fromDecimalWithInvalidString(): Unit =
+        listOf(" ", "+", "-", ".", "oops", "1.2.3", ".123", "1.").forEach {
+            val result: IllegalArgumentException = assertFailsWith {
+                Decimal.fromDecimal(it)
+            }
+            val expected = "\"$it\" is not a valid decimal number."
+            assertEquals(expected, result.message)
         }
-        // Then
-        val expected = "Decimal floating-point number can't have multiple " +
-                "radix points (was: $text)."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithMalformedIntegerPartInString() {
-        // Given
-        val text = ".123"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
-        }
-        // Then
-        val expected = "Integer part of decimal floating-point number is " +
-                "malformed (was: $text)."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithMalformedFractionalPartInString() {
-        // Given
-        val text = "1."
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Decimal.fromDecimal(text)
-        }
-        // Then
-        val expected = "Fractional part of decimal floating-point number is " +
-                "malformed (was: $text)."
-        assertEquals(expected, result.message)
-    }
 }

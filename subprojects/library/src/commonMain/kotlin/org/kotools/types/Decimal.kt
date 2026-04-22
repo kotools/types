@@ -129,70 +129,43 @@ public interface Decimal {
          */
         @JvmStatic
         public fun fromDecimal(text: String): Decimal {
-            require(text.isNotBlank()) {
-                "Decimal floating-point number can't be blank."
+            require(this.isDecimal(text)) {
+                "\"$text\" is not a valid decimal number."
             }
-            val plusSign = '+'
-            require(text != "$plusSign") {
-                "Plus sign ($plusSign) is not a decimal floating-point number."
-            }
-            val minusSign = '-'
-            require(text != "$minusSign") {
-                "Minus sign ($minusSign) is not a decimal floating-point " +
-                        "number."
-            }
-            val radixPoint = '.'
-            require(text != "$radixPoint") {
-                "Radix point ($radixPoint) is not a decimal floating-point " +
-                        "number."
-            }
-            val unsignedText: String = text.removePrefix("$plusSign")
-                .removePrefix("$minusSign")
-            val isDecimalText: Boolean =
-                unsignedText.all { it.isDigit() || it == radixPoint }
-            require(isDecimalText) {
-                "Only digits, plus sign ($plusSign), minus sign " +
-                        "($minusSign), and radix point ($radixPoint) " +
-                        "characters are allowed in decimal floating-point " +
-                        "number (was: $text)."
-            }
-            val radixPointCount: Int = text.count { it == radixPoint }
-            require(radixPointCount < 2) {
-                "Decimal floating-point number can't have multiple radix " +
-                        "points (was: $text)."
-            }
-            if (radixPoint in text) {
-                val integerPartIsWellFormed: Boolean = unsignedText.first()
-                    .isDigit()
-                require(integerPartIsWellFormed) {
-                    "Integer part of decimal floating-point number is " +
-                            "malformed (was: $text)."
-                }
-                val fractionalPartIsWellFormed: Boolean = unsignedText.last()
-                    .isDigit()
-                require(fractionalPartIsWellFormed) {
-                    "Fractional part of decimal floating-point number is " +
-                            "malformed (was: $text)."
-                }
-            }
-            val zero = '0'
-            val isZero: Boolean =
-                unsignedText.all { it == zero || it == radixPoint }
-            if (isZero) return Decimal("$zero")
-            val sign: String =
-                if (text.startsWith(minusSign)) "-"
-                else ""
-            if (radixPoint !in unsignedText) {
-                val integerPart: String = unsignedText.trimStart(zero)
-                return Decimal("$sign$integerPart")
-            }
-            val parts: List<String> = unsignedText.split(radixPoint)
+            val normalizedText: String = this.normalize(text)
+            return Decimal(normalizedText)
+        }
+
+        private fun isDecimal(text: String): Boolean {
+            if (text.isBlank()) return false
+            val allowedSpecialCharacters: List<Char> = listOf('+', '-', '.')
+            val hasAllowedCharacters: Boolean =
+                text.all { it.isDigit() || it in allowedSpecialCharacters }
+            if (!hasAllowedCharacters) return false
+            val radixPointCount: Int = text.count { it == '.' }
+            if (radixPointCount > 1) return false
+            val unsignedText: String = text.removePrefix("+")
+                .removePrefix("-")
+            return unsignedText.isNotEmpty()
+                    && unsignedText.first().isDigit()
+                    && unsignedText.last().isDigit()
+        }
+
+        private fun normalize(text: String): String {
+            val isZero: Boolean = text.filter(Char::isDigit)
+                .all { it == '0' }
+            if (isZero) return "0"
+            val sign: String = if (text.startsWith('-')) "-" else ""
+            val unsignedText: String = text.removePrefix("+")
+                .removePrefix("-")
+            if ('.' !in unsignedText) return sign + unsignedText.trimStart('0')
+            val parts: List<String> = unsignedText.split('.')
             val integerPart: String = parts.first()
-                .trimStart(zero)
+                .trimStart('0')
             val fractionalPart: String = parts.last()
-                .trimEnd(zero)
-            return if (fractionalPart.isEmpty()) Decimal("$sign$integerPart")
-            else Decimal("$sign${integerPart}.$fractionalPart")
+                .trimEnd('0')
+            return if (fractionalPart.isEmpty()) sign + integerPart
+            else "$sign${integerPart}.$fractionalPart"
         }
     }
 
