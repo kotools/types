@@ -94,7 +94,7 @@ public interface Decimal {
          *
          * The [text] parameter must only contain an optional plus sign (`+`) or
          * minus sign (`-`), followed by a sequence of digits, then by an
-         * optional fractional part consisting of a radix point (`.`) and
+         * optional fractional part consisting of a decimal separator (`.`) and
          * another sequence of digits (e.g., `1234`, `+1.234`, `-12.34`).
          *
          * Also, the [text] parameter is normalized by removing insignificant
