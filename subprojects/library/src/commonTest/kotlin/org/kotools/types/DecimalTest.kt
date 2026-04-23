@@ -1,5 +1,7 @@
 package org.kotools.types
 
+import kotlin.random.Random
+import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -11,12 +13,38 @@ class DecimalTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun fromInteger() {
-        val number: Long = Long.MAX_VALUE
-        val actual: String = Decimal.fromInteger(number)
+    fun fromIntegerRepresentsZeroUniquely(): Unit =
+        listOf<Long>(0, +0, -0).forEach {
+            val actual: String = Decimal.fromInteger(it)
+                .toString()
+            assertEquals(expected = "0", actual)
+        }
+
+    @Test
+    fun fromIntegerDoesNotAddPlusSignForPositiveNumbers(): Unit = repeatTest {
+        val number: Long = Random.nextLong(1..Long.MAX_VALUE)
+        val actual: Boolean = Decimal.fromInteger(number)
             .toString()
-        val expected: String = number.toString()
-        assertEquals(expected, actual)
+            .startsWith('+')
+        assertFalse(actual, message = "input: $number")
+    }
+
+    @Test
+    fun fromIntegerKeepsSignForNegativeIntegers(): Unit = repeatTest {
+        val number: Long = Random.nextLong(Long.MIN_VALUE..-1)
+        val actual: Boolean = Decimal.fromInteger(number)
+            .toString()
+            .startsWith('-')
+        assertTrue(actual, message = "input: $number")
+    }
+
+    @Test
+    fun fromIntegerDoesNotAddFractionalPart(): Unit = repeatTest {
+        val number: Long = Random.nextLong()
+        val actual: Boolean = Decimal.fromInteger(number)
+            .toString()
+            .contains('.')
+        assertFalse(actual, message = "input: $number")
     }
 
     @Test
