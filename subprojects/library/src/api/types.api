@@ -325,8 +325,10 @@ public final class kotools/types/text/NotBlankStringKt {
 
 public abstract interface class org/kotools/types/Decimal {
 	public static final field Companion Lorg/kotools/types/Decimal$Companion;
+	public abstract fun equals (Ljava/lang/Object;)Z
 	public static fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Decimal;
 	public static fun fromInteger (J)Lorg/kotools/types/Decimal;
+	public abstract fun hashCode ()I
 	public abstract fun toString ()Ljava/lang/String;
 }
 

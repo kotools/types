@@ -23,14 +23,30 @@ public class DecimalJavaSample {
     @Test
     void fromDecimalString() {
         // Given
-        final int integer = 123;
-        final String text = integer + ".000";
+        final String text = "+000.000123000";
         // When
         final Decimal result = Decimal.fromDecimal(text);
         // Then
         final String resultAsString = result.toString();
-        final String expected = String.valueOf(integer);
+        final String expected = "0.000123";
         final boolean check = resultAsString.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    void equality() {
+        // Given
+        final Decimal x = Decimal.fromInteger(1);
+        final Decimal y = Decimal.fromDecimal("+0001");
+        final Decimal z = Decimal.fromDecimal("+1.000");
+        // When
+        final boolean equality = x.equals(y) && y.equals(z);
+        final boolean hashConformity = x.hashCode() == y.hashCode()
+                && y.hashCode() == z.hashCode();
+        // Then
+        final boolean check = equality && hashConformity;
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
