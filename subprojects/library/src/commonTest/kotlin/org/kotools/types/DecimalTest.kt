@@ -48,58 +48,58 @@ class DecimalTest {
     }
 
     @Test
-    fun fromDecimalWithZero() {
-        // Given
-        val text = "-000.0000000"
-        // When
+    fun fromDecimalRepresentsZeroUniquely(): Unit = repeatTest {
+        val text: String = randomZeroString()
         val actual: Decimal = Decimal.fromDecimal(text)
-        // Then
         val expected: Decimal = Decimal.fromInteger(0)
         assertEquals(expected, actual)
     }
 
     @Test
-    fun fromDecimalWithPositiveInteger() {
-        // Given
-        val text = "+00123.00000"
-        // When
-        val actual: Decimal = Decimal.fromDecimal(text)
-        // Then
-        val expected: Decimal = Decimal.fromInteger(123)
-        assertEquals(expected, actual)
-    }
+    fun fromDecimalRemovesPlusSignFromPositiveDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomPositiveDecimalString()
+            val actual: Boolean = Decimal.fromDecimal(text)
+                .toString()
+                .startsWith('+')
+            assertFalse(actual, message = "input: $text")
+        }
 
     @Test
-    fun fromDecimalWithNegativeInteger() {
-        // Given
-        val text = "-00123.0000000"
-        // When
-        val actual: Decimal = Decimal.fromDecimal(text)
-        // Then
-        val expected: Decimal = Decimal.fromInteger(-123)
-        assertEquals(expected, actual)
-    }
+    fun fromDecimalKeepsMinusSignFromNegativeDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomNegativeDecimalString()
+            val actual: Boolean = Decimal.fromDecimal(text)
+                .toString()
+                .startsWith('-')
+            assertTrue(actual, message = "input: $text")
+        }
 
     @Test
-    fun fromDecimalWithPositiveDecimalNumber() {
-        // Given
-        val text = "+00.00010"
-        // When
-        val actual: String = Decimal.fromDecimal(text)
+    fun fromDecimalRemovesLeadingZerosFromNonZeroDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomNonZeroDecimalString()
+            val actual: Boolean = Decimal.fromDecimal(text)
+                .toString()
+                .startsWith('0')
+            assertFalse(actual, message = "input: $text")
+        }
+
+    @Test
+    fun fromDecimalRemovesTrailingZerosFromDecimalNumbers(): Unit = repeatTest {
+        val text: String = randomNonZeroDecimalString()
+        val actual: Boolean = Decimal.fromDecimal(text)
             .toString()
-        // Then
-        assertEquals(expected = "0.0001", actual)
+            .let { '.' !in it || !it.endsWith('0') }
+        assertTrue(actual, message = "input: $text")
     }
 
     @Test
-    fun fromDecimalWithNegativeDecimalNumber() {
-        // Given
-        val text = "-00.0001230"
-        // When
-        val actual: String = Decimal.fromDecimal(text)
-            .toString()
-        // Then
-        assertEquals(expected = "-0.000123", actual)
+    fun fromDecimalIsStableWithStringRepresentation(): Unit = repeatTest {
+        val text: String = randomNonZeroDecimalString()
+        val x: Decimal = Decimal.fromDecimal(text)
+        val y: Decimal = Decimal.fromDecimal("$x")
+        assertEquals(x, y, message = "input: $text")
     }
 
     @Test
