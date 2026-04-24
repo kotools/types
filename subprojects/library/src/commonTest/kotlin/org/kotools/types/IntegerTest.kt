@@ -3,7 +3,7 @@ package org.kotools.types
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
@@ -79,50 +79,30 @@ class IntegerTest {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun equalsWithIntegerHavingSameValue() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.from(number)
-        val other: Integer = Integer.from(number)
-        // When
-        val result: Boolean = integer == other
-        // Then
-        assertTrue(result)
+    fun equalsAndHashCodeWithSameNumber(): Unit = repeatTest {
+        val x: Integer = Integer.random()
+        val y: Integer = Integer.fromDecimal("$x")
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x, y, message)
+        assertEquals(x.hashCode(), y.hashCode(), message)
     }
 
     @Test
-    fun equalsWithAnotherTypeThanInteger() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.from(number)
-        // When
-        val result: Boolean = integer.equals(other = number)
-        // Then
-        assertFalse(result)
+    fun equalsAndHashCodeWithDifferentNumber(): Unit = repeatTest {
+        val x: Integer = Integer.random()
+        val y: Integer = Integer.randomExcept(x)
+        val message = "Inputs: x = $x, y = $y"
+        assertNotEquals(x, y, message)
+        assertNotEquals(x.hashCode(), y.hashCode(), message)
     }
 
     @Test
-    fun equalsWithIntegerHavingAnotherValue() {
-        // Given
-        val integer: Integer = Integer.from(Long.MAX_VALUE)
-        val other: Integer = Integer.from(Long.MIN_VALUE)
-        // When
-        val result: Boolean = integer == other
-        // Then
-        assertFalse(result)
-    }
-
-    @Test
-    fun hashCodeReturnsSameValueForEqualIntegers() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.from(number)
-        // When
-        val result: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer.from(number)
-            .hashCode()
-        assertEquals(expected, result)
+    fun equalsAndHashCodeWithAnotherTypeThanInteger(): Unit = repeatTest {
+        val x: Integer = Integer.random()
+        val y = "$x"
+        val message = "Inputs: x = $x, y = $y"
+        assertNotEquals(x, y as Any, message)
+        assertNotEquals(x.hashCode(), y.hashCode(), message)
     }
 
     @Test

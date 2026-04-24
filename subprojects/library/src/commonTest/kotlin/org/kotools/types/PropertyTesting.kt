@@ -3,6 +3,24 @@ package org.kotools.types
 internal inline fun repeatTest(block: () -> Unit): Unit =
     repeat(times = 1_000) { block() }
 
+// ------------------------------ Random integers ------------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Integer.Companion.random(): Integer {
+    val sign: String = listOf("", "+", "-").random()
+    val digits: List<Char> = ('0'..'9').toList()
+    val lengthRange: IntRange = 1..12
+    val number: String = randomStringWith(digits, lengthRange)
+    return Integer.fromDecimal("$sign$number")
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Integer.Companion.randomExcept(illegal: Integer): Integer {
+    var candidate: Integer = this.random()
+    while (candidate == illegal) candidate = this.random()
+    return candidate
+}
+
 // -------------------------- Random decimal numbers ---------------------------
 
 @OptIn(ExperimentalKotoolsTypesApi::class)

@@ -16,7 +16,7 @@ private class NativeInteger(private val value: BigInteger) : Integer {
     override fun equals(other: Any?): Boolean =
         other is NativeInteger && this.value == other.value
 
-    override fun hashCode(): Int = this.value.hashCode()
+    override fun hashCode(): Int = this.value.hashCode() + "$this".hashCode()
 
     override fun compareTo(other: Integer): Int {
         check(other is NativeInteger)
