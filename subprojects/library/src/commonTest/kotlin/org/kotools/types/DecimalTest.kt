@@ -103,51 +103,16 @@ class DecimalTest {
     }
 
     @Test
-    fun fromDecimalWithBlankString(): Unit = this.fromDecimalFailsWith(" ")
-
-    @Test
-    fun fromDecimalWithOnlyPlusSign(): Unit = this.fromDecimalFailsWith("+")
-
-    @Test
-    fun fromDecimalWithMultiplePlusSigns(): Unit =
-        this.fromDecimalFailsWith("++123")
-
-    @Test
-    fun fromDecimalWithOnlyMinusSign(): Unit = this.fromDecimalFailsWith("-")
-
-    @Test
-    fun fromDecimalWithMultipleMinusSigns(): Unit =
-        this.fromDecimalFailsWith("--123")
-
-    @Test
-    fun fromDecimalWithOnlyDecimalSeparator(): Unit =
-        this.fromDecimalFailsWith(".")
-
-    @Test
-    fun fromDecimalWithMultipleDecimalSeparators(): Unit =
-        this.fromDecimalFailsWith("1.2.3")
-
-    @Test
-    fun fromDecimalWithNonDigitCharacters(): Unit =
-        this.fromDecimalFailsWith("1aBc/")
-
-    @Test
-    fun fromDecimalWithMissingIntegerPart(): Unit =
-        this.fromDecimalFailsWith(".123")
-
-    @Test
-    fun fromDecimalWithMissingFractionalPart(): Unit =
-        this.fromDecimalFailsWith("123.")
-
-    private fun fromDecimalFailsWith(text: String) {
-        // When
-        val exception: IllegalArgumentException =
-            assertFailsWith { Decimal.fromDecimal(text) }
-        // Then
-        val actual: String? = exception.message
-        val expected = "\"$text\" is not a valid decimal number."
-        assertEquals(expected, actual)
-    }
+    fun fromDecimalThrowsExceptionWithMalformedDecimalStrings(): Unit =
+        repeatTest {
+            val text: String = randomMalformedDecimalString()
+            val exception: IllegalArgumentException = assertFailsWith {
+                Decimal.fromDecimal(text)
+            }
+            val actual: String? = exception.message
+            val expected = "\"$text\" is not a valid decimal number."
+            assertEquals(expected, actual)
+        }
 
     // ------------------------------ Comparisons ------------------------------
 

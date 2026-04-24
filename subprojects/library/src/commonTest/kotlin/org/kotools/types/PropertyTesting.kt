@@ -7,39 +7,28 @@ internal inline fun repeatTest(block: () -> Unit): Unit =
 
 internal fun randomZeroString(): String {
     val sign: String = listOf("", "+", "-").random()
-    val integerPart: String = buildString {
-        val times: Int = (1..24).random()
-        repeat(times) { this.append('0') }
-    }
+    val digits: List<Char> = listOf('0')
+    val lengthRange: IntRange = 1..256
+    val integerPart: String = randomStringWith(digits, lengthRange)
     val hasFractionalPart: Boolean = listOf(true, false).random()
     if (!hasFractionalPart) return "$sign$integerPart"
-    val fractionalPart: String = buildString {
-        val times: Int = (1..24).random()
-        repeat(times) { this.append('0') }
-    }
+    val fractionalPart: String = randomStringWith(digits, lengthRange)
     return "$sign${integerPart}.$fractionalPart"
 }
 
 internal fun randomPositiveDecimalString(): String {
     val sign: String = listOf("", "+").random()
-    var integerPart: String = buildString {
-        val times: Int = (1..24).random()
-        repeat(times) {
-            val digit: Int = (0..9).random()
-            this.append(digit)
-        }
-    }
+    val digits: List<Char> = ('0'..'9').toList()
+    val lengthRange: IntRange = 1..12
+    var integerPart: String = randomStringWith(digits, lengthRange)
     val isZero: Boolean = integerPart.all { it == '0' }
-    if (isZero) integerPart += (1..9).random()
+    if (isZero) {
+        val nonZeroDigits: List<Char> = digits.filter { it != '0' }
+        integerPart += randomStringWith(nonZeroDigits, lengthRange)
+    }
     val hasFractionalPart: Boolean = listOf(true, false).random()
     if (!hasFractionalPart) return "$sign$integerPart"
-    val fractionalPart: String = buildString {
-        val times: Int = (1..24).random()
-        repeat(times) {
-            val digit: Int = (0..9).random()
-            this.append(digit)
-        }
-    }
+    val fractionalPart: String = randomStringWith(digits, lengthRange)
     return "$sign${integerPart}.$fractionalPart"
 }
 
@@ -55,4 +44,26 @@ internal fun randomNonZeroDecimalString(): String {
     val number: String = randomPositiveDecimalString()
         .removePrefix("+")
     return "$sign$number"
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun randomMalformedDecimalString(): String {
+    val characters: List<Char> =
+        ('A'..'Z') + ('a'..'z') + ('0'..'9') + listOf(' ', '+', '-', '.')
+    val lengthRange: IntRange = 0..32
+    var text: String = randomStringWith(characters, lengthRange)
+    while (Decimal.isValid(text))
+        text = randomStringWith(characters, lengthRange)
+    return text
+}
+
+private fun randomStringWith(
+    characters: List<Char>,
+    lengthRange: IntRange
+): String = buildString {
+    val times: Int = lengthRange.random()
+    repeat(times) {
+        val character: Char = characters.random()
+        this.append(character)
+    }
 }

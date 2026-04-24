@@ -130,27 +130,16 @@ public interface Decimal {
          */
         @JvmStatic
         public fun fromDecimal(text: String): Decimal {
-            require(this.isDecimal(text)) {
+            require(this.isValid(text)) {
                 "\"$text\" is not a valid decimal number."
             }
             val normalizedText: String = this.normalize(text)
             return Decimal(normalizedText)
         }
 
-        private fun isDecimal(text: String): Boolean {
-            if (text.isBlank()) return false
-            val allowedSpecialCharacters: List<Char> = listOf('+', '-', '.')
-            val hasAllowedCharacters: Boolean =
-                text.all { it.isDigit() || it in allowedSpecialCharacters }
-            if (!hasAllowedCharacters) return false
-            val radixPointCount: Int = text.count { it == '.' }
-            if (radixPointCount > 1) return false
-            val unsignedText: String = text.removePrefix("+")
-                .removePrefix("-")
-            return unsignedText.isNotEmpty()
-                    && unsignedText.first().isDigit()
-                    && unsignedText.last().isDigit()
-        }
+        @JvmSynthetic
+        internal fun isValid(text: String): Boolean =
+            text matches Regex("""^[+-]?\d+(?:\.\d+)?$""")
 
         @JvmSynthetic
         internal fun normalize(text: String): String {
