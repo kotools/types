@@ -4,6 +4,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
@@ -23,32 +24,58 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalWithZero(): Unit = listOf("0", "+0", "-0", "00").forEach {
-        val result: Integer = Integer.fromDecimal(it)
-        assertEquals(expected = "0", "$result")
+    fun fromDecimalRepresentsZeroUniquely(): Unit = repeatTest {
+        val text: String = randomZeroIntegerString()
+        val actual: Integer = Integer.fromDecimal(text)
+        val expected: Integer = Integer.from(0)
+        assertEquals(expected, actual, message = "Input: $text")
     }
 
     @Test
-    fun fromDecimalWithPositiveInteger(): Unit =
-        listOf("1", "+1", "01").forEach {
-            val result: Integer = Integer.fromDecimal(it)
-            assertEquals(expected = "1", "$result")
-        }
-
-    @Test
-    fun fromDecimalWithNegativeInteger(): Unit = listOf("-1", "-01").forEach {
-        val result: Integer = Integer.fromDecimal(it)
-        assertEquals(expected = "-1", "$result")
+    fun fromDecimalRemovesPlusSignFromPositiveInteger(): Unit = repeatTest {
+        val text: String = randomPositiveIntegerString()
+        val actual: Boolean = Integer.fromDecimal(text)
+            .toString()
+            .startsWith('+')
+        assertFalse(actual, message = "Input: $text")
     }
 
     @Test
-    fun fromDecimalWithInvalidString(): Unit =
-        listOf(" ", "+", "-", "oops").forEach {
-            val result: IllegalArgumentException = assertFailsWith {
-                Integer.fromDecimal(it)
+    fun fromDecimalKeepsMinusSignFromNegativeInteger(): Unit = repeatTest {
+        val text: String = randomNegativeIntegerString()
+        val actual: Boolean = Integer.fromDecimal(text)
+            .toString()
+            .startsWith('-')
+        assertTrue(actual, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalRemovesLeadingZerosFromNonZeroInteger(): Unit = repeatTest {
+        val text: String = randomNonZeroIntegerString()
+        val actual: Boolean = Integer.fromDecimal(text)
+            .toString()
+            .startsWith('0')
+        assertFalse(actual, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalIsStableWithStringRepresentation(): Unit = repeatTest {
+        val text: String = randomNonZeroIntegerString()
+        val x: Integer = Integer.fromDecimal(text)
+        val y: Integer = Integer.fromDecimal("$x")
+        assertEquals(x, y, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalThrowsExceptionWithMalformedIntegerString(): Unit =
+        repeatTest {
+            val text: String = randomMalformedIntegerString()
+            val exception: IllegalArgumentException = assertFailsWith {
+                Integer.fromDecimal(text)
             }
-            val expected = "\"$it\" is not a valid integer."
-            assertEquals(expected, result.message)
+            val actual: String? = exception.message
+            val expected = "\"$text\" is not a valid integer."
+            assertEquals(expected, actual, message = "Input: $text")
         }
 
     @Test

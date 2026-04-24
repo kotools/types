@@ -26,7 +26,7 @@ class DecimalTest {
 
     @Test
     fun fromDecimalRepresentsZeroUniquely(): Unit = repeatTest {
-        val text: String = randomZeroString()
+        val text: String = randomZeroDecimalString()
         val actual: Decimal = Decimal.fromDecimal(text)
         val expected: Decimal = Decimal.fromInteger(0)
         assertEquals(expected, actual, message = "Input: $text")
@@ -93,7 +93,7 @@ class DecimalTest {
 
     @Test
     fun fromDecimalOrNullRepresentsZeroUniquely(): Unit = repeatTest {
-        val text: String = randomZeroString()
+        val text: String = randomZeroDecimalString()
         val actual: Decimal? = Decimal.fromDecimalOrNull(text)
         val expected: Decimal = Decimal.fromInteger(0)
         assertEquals(expected, actual, message = "Input: $text")

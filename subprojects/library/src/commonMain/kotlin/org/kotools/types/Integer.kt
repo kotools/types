@@ -180,9 +180,7 @@ public interface Integer {
          */
         @JvmStatic
         public fun fromDecimal(text: String): Integer {
-            require(this.isValidInteger(text)) {
-                "\"$text\" is not a valid integer."
-            }
+            require(this.isValid(text)) { "\"$text\" is not a valid integer." }
             val normalizedText: String = Decimal.normalize(text)
             return Integer(normalizedText)
         }
@@ -219,17 +217,14 @@ public interface Integer {
          */
         @JvmSynthetic
         public fun fromDecimalOrNull(text: String): Integer? {
-            if (!this.isValidInteger(text)) return null
+            if (!this.isValid(text)) return null
             val normalizedText: String = Decimal.normalize(text)
             return Integer(normalizedText)
         }
 
-        private fun isValidInteger(text: String): Boolean {
-            if (text.isBlank()) return false
-            val unsignedText: String = text.removePrefix("+")
-                .removePrefix("-")
-            return unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-        }
+        @JvmSynthetic
+        internal fun isValid(text: String): Boolean =
+            text matches Regex("""^[+-]?\d+$""")
 
         @JvmSynthetic
         internal fun zero(): Integer = this.from(0)
