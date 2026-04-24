@@ -16,7 +16,7 @@ private class JsNativeDecimal(private val value: BigDecimal) : Decimal {
     override fun equals(other: Any?): Boolean =
         other is JsNativeDecimal && this.value == other.value
 
-    override fun hashCode(): Int = this.value.hashCode()
+    override fun hashCode(): Int = this.value.hashCode() + "$this".hashCode()
 
     // ------------------------------ Conversions ------------------------------
 

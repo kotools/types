@@ -35,16 +35,22 @@ internal fun randomPositiveDecimalString(): String {
     val sign: String = listOf("", "+").random()
     val digits: List<Char> = ('0'..'9').toList()
     val lengthRange: IntRange = 1..12
-    var integerPart: String = randomStringWith(digits, lengthRange)
-    val isZero: Boolean = integerPart.all { it == '0' }
-    if (isZero) {
-        val nonZeroDigits: List<Char> = digits.filter { it != '0' }
-        integerPart += randomStringWith(nonZeroDigits, lengthRange)
-    }
+    val integerPart: String = randomStringWith(digits, lengthRange)
     val hasFractionalPart: Boolean = listOf(true, false).random()
-    if (!hasFractionalPart) return "$sign$integerPart"
+    if (!hasFractionalPart) {
+        val isZero: Boolean = integerPart.all { it == '0' }
+        if (!isZero) return "$sign$integerPart"
+        val nonZeroDigits: List<Char> = digits.filter { it != '0' }
+        val suffix: String = randomStringWith(nonZeroDigits, lengthRange)
+        return "$sign$integerPart$suffix"
+    }
     val fractionalPart: String = randomStringWith(digits, lengthRange)
-    return "$sign${integerPart}.$fractionalPart"
+    val isZero: Boolean = integerPart.all { it == '0' }
+            && fractionalPart.all { it == '0' }
+    if (!isZero) return "$sign${integerPart}.$fractionalPart"
+    val nonZeroDigits: List<Char> = digits.filter { it != '0' }
+    val suffix: String = randomStringWith(nonZeroDigits, lengthRange)
+    return "$sign${integerPart}.$fractionalPart$suffix"
 }
 
 internal fun randomNegativeDecimalString(): String {
