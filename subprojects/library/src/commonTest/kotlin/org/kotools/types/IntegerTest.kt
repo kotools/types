@@ -180,35 +180,23 @@ class IntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
-    fun unaryMinusOnZero() {
-        // Given
-        val x: Integer = Integer.zero()
-        // When
-        val result: Integer = -x
-        // Then
-        assertSame(expected = x, result)
+    fun unaryMinusReturnsSameInstanceOnZero(): Unit = repeatTest {
+        val text: String = randomZeroIntegerString()
+        val x: Integer = Integer.fromDecimal(text)
+        val actual: Integer = -x
+        assertSame(expected = x, actual, message = "Input: $text")
     }
 
     @Test
-    fun unaryMinusOnPositiveInteger() {
-        // Given
-        val x: Integer = Integer.from(123456789)
-        // When
-        val result: Integer = -x
-        // Then
-        val expected: Integer = Integer.from(-123456789)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun unaryMinusOnNegativeInteger() {
-        // Given
-        val x: Integer = Integer.from(-123456789)
-        // When
-        val result: Integer = -x
-        // Then
-        val expected: Integer = Integer.from(123456789)
-        assertEquals(expected, result)
+    fun unaryMinusInvertsSignOnNonZeroInteger(): Unit = repeatTest {
+        val text: String = randomNonZeroIntegerString()
+        val actual: Integer = Integer.fromDecimal(text)
+            .unaryMinus()
+        val sign: Char = if (text.startsWith('-')) '+' else '-'
+        val digits: String = text.removePrefix("+")
+            .removePrefix("-")
+        val expected: Integer = Integer.fromDecimal("$sign$digits")
+        assertEquals(expected, actual, message = "Input: $text")
     }
 
     @Test
