@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import kotlin.random.Random
-import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -14,46 +13,21 @@ class DecimalTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun fromIntegerRepresentsZeroUniquely(): Unit =
-        listOf<Long>(0, +0, -0).forEach {
-            val actual: String = Decimal.fromInteger(it)
+    fun fromIntegerUsesStringRepresentationOfSpecifiedNumber(): Unit =
+        repeatTest {
+            val number: Long = Random.nextLong()
+            val actual: String = Decimal.fromInteger(number)
                 .toString()
-            assertEquals(expected = "0", actual)
+            val expected: String = number.toString()
+            assertEquals(expected, actual, message = "Input: $number")
         }
-
-    @Test
-    fun fromIntegerDoesNotAddPlusSignForPositiveNumbers(): Unit = repeatTest {
-        val number: Long = Random.nextLong(1..Long.MAX_VALUE)
-        val actual: Boolean = Decimal.fromInteger(number)
-            .toString()
-            .startsWith('+')
-        assertFalse(actual, message = "input: $number")
-    }
-
-    @Test
-    fun fromIntegerKeepsSignForNegativeIntegers(): Unit = repeatTest {
-        val number: Long = Random.nextLong(Long.MIN_VALUE..-1)
-        val actual: Boolean = Decimal.fromInteger(number)
-            .toString()
-            .startsWith('-')
-        assertTrue(actual, message = "input: $number")
-    }
-
-    @Test
-    fun fromIntegerDoesNotAddFractionalPart(): Unit = repeatTest {
-        val number: Long = Random.nextLong()
-        val actual: Boolean = Decimal.fromInteger(number)
-            .toString()
-            .contains('.')
-        assertFalse(actual, message = "input: $number")
-    }
 
     @Test
     fun fromDecimalRepresentsZeroUniquely(): Unit = repeatTest {
         val text: String = randomZeroString()
         val actual: Decimal = Decimal.fromDecimal(text)
         val expected: Decimal = Decimal.fromInteger(0)
-        assertEquals(expected, actual)
+        assertEquals(expected, actual, message = "Input: $text")
     }
 
     @Test
@@ -63,7 +37,7 @@ class DecimalTest {
             val actual: Boolean = Decimal.fromDecimal(text)
                 .toString()
                 .startsWith('+')
-            assertFalse(actual, message = "input: $text")
+            assertFalse(actual, message = "Input: $text")
         }
 
     @Test
@@ -73,7 +47,7 @@ class DecimalTest {
             val actual: Boolean = Decimal.fromDecimal(text)
                 .toString()
                 .startsWith('-')
-            assertTrue(actual, message = "input: $text")
+            assertTrue(actual, message = "Input: $text")
         }
 
     @Test
@@ -83,7 +57,7 @@ class DecimalTest {
             val actual: Boolean = Decimal.fromDecimal(text)
                 .toString()
                 .startsWith('0')
-            assertFalse(actual, message = "input: $text")
+            assertFalse(actual, message = "Input: $text")
         }
 
     @Test
@@ -92,7 +66,7 @@ class DecimalTest {
         val actual: Boolean = Decimal.fromDecimal(text)
             .toString()
             .let { '.' !in it || !it.endsWith('0') }
-        assertTrue(actual, message = "input: $text")
+        assertTrue(actual, message = "Input: $text")
     }
 
     @Test
@@ -100,7 +74,7 @@ class DecimalTest {
         val text: String = randomNonZeroDecimalString()
         val x: Decimal = Decimal.fromDecimal(text)
         val y: Decimal = Decimal.fromDecimal("$x")
-        assertEquals(x, y, message = "input: $text")
+        assertEquals(x, y, message = "Input: $text")
     }
 
     @Test
