@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -13,10 +14,12 @@ class IntegerTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun from() {
-        val number: Long = Long.MAX_VALUE
-        val result: Integer = Integer.from(number)
-        assertEquals(expected = "$number", "$result")
+    fun fromUsesStringRepresentationOfSpecifiedNumber(): Unit = repeatTest {
+        val number: Long = Random.nextLong()
+        val actual: String = Integer.from(number)
+            .toString()
+        val expected: String = number.toString()
+        assertEquals(expected, actual, message = "Input: $number")
     }
 
     @Test
