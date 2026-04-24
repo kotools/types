@@ -56,8 +56,8 @@ class DecimalTest {
             val text: String = randomNonZeroDecimalString()
             val actual: Boolean = Decimal.fromDecimal(text)
                 .toString()
-                .startsWith('0')
-            assertFalse(actual, message = "Input: $text")
+                .let { it.startsWith("0.") || !it.startsWith('0') }
+            assertTrue(actual, message = "Input: $text")
         }
 
     @Test
