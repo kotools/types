@@ -136,16 +136,17 @@ class IntegerTest {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun equalsAndHashCodeWithSameNumber(): Unit = repeatTest {
+    fun equalityReturnsTrueWithSameNumber(): Unit = repeatTest {
         val x: Integer = Integer.random()
         val y: Integer = Integer.fromDecimal("$x")
         val message = "Inputs: x = $x, y = $y"
         assertEquals(x, y, message)
         assertEquals(x.hashCode(), y.hashCode(), message)
+        assertTrue(message) { x.compareTo(y) == 0 }
     }
 
     @Test
-    fun equalsAndHashCodeWithDifferentNumber(): Unit = repeatTest {
+    fun equalityReturnsFalseWithDifferentNumbers(): Unit = repeatTest {
         val x: Integer = Integer.random()
         val y: Integer = Integer.randomExcept(x)
         val message = "Inputs: x = $x, y = $y"
@@ -154,7 +155,7 @@ class IntegerTest {
     }
 
     @Test
-    fun equalsAndHashCodeWithAnotherTypeThanInteger(): Unit = repeatTest {
+    fun equalityReturnsFalseWithAnotherTypeThanInteger(): Unit = repeatTest {
         val x: Integer = Integer.random()
         val y = "$x"
         val message = "Inputs: x = $x, y = $y"
@@ -163,37 +164,17 @@ class IntegerTest {
     }
 
     @Test
-    fun compareToWithSameInteger() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val x: Integer = Integer.from(number)
-        val y: Integer = Integer.from(number)
-        // When
-        val result: Int = x.compareTo(y)
-        // Then
-        assertEquals(expected = 0, result)
+    fun compareToReturnsPositiveNumberWithLesserInteger(): Unit = repeatTest {
+        val x: Integer = Integer.fromDecimal(randomPositiveIntegerString())
+        val y: Integer = Integer.fromDecimal(randomNegativeIntegerString())
+        assertTrue(message = "Inputs: x = $x, y = $y") { x > y }
     }
 
     @Test
-    fun compareToWithGreaterInteger() {
-        // Given
-        val x: Integer = Integer.from(Long.MIN_VALUE)
-        val y: Integer = Integer.from(Long.MAX_VALUE)
-        // When
-        val result: Int = x.compareTo(y)
-        // Then
-        assertTrue(result < 0)
-    }
-
-    @Test
-    fun compareToWithLesserInteger() {
-        // Given
-        val x: Integer = Integer.from(Long.MAX_VALUE)
-        val y: Integer = Integer.from(Long.MIN_VALUE)
-        // When
-        val result: Int = x.compareTo(y)
-        // Then
-        assertTrue(result > 0)
+    fun compareToReturnsNegativeNumberWithGreaterInteger(): Unit = repeatTest {
+        val x: Integer = Integer.fromDecimal(randomNegativeIntegerString())
+        val y: Integer = Integer.fromDecimal(randomPositiveIntegerString())
+        assertTrue(message = "Inputs: x = $x, y = $y") { x < y }
     }
 
     // ------------------------- Arithmetic operations -------------------------
