@@ -6,6 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -117,42 +118,33 @@ class DecimalTest {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun equalsAndHashCodeWithSameDecimalNumbers() {
-        // Given
-        val x: Decimal = Decimal.fromInteger(1)
-        val y: Decimal = Decimal.fromDecimal("+0001.00")
-        // When
-        val equality: Boolean = x == y
-        val hashConformity: Boolean = x.hashCode() == y.hashCode()
-        // Then
-        assertTrue(equality, "$x and $y must be equal.")
-        assertTrue(hashConformity, "Hash code of $x and $y must be equal.")
+    fun equalsAndHashCodeWithSameDecimalNumbers(): Unit = repeatTest {
+        val text: String = randomNonZeroDecimalString()
+        val x: Decimal = Decimal.fromDecimal(text)
+        val y: Decimal = Decimal.fromDecimal(text)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x, y, message)
+        assertEquals(x.hashCode(), y.hashCode(), message)
     }
 
     @Test
-    fun equalsAndHashCodeWithDifferentDecimalNumbers() {
-        // Given
-        val x: Decimal = Decimal.fromDecimal("0.0001")
-        val y: Decimal = Decimal.fromDecimal("0.0000001")
-        // When
-        val equality: Boolean = x == y
-        val hashConformity: Boolean = x.hashCode() == y.hashCode()
-        // Then
-        assertFalse(equality, "$x and $y must be different.")
-        assertFalse(hashConformity, "Hash code of $x and $y must be different.")
+    fun equalsAndHashCodeWithDifferentDecimalNumbers(): Unit = repeatTest {
+        val x: Decimal = randomPositiveDecimalString()
+            .let(Decimal.Companion::fromDecimal)
+        val y: Decimal = randomNegativeDecimalString()
+            .let(Decimal.Companion::fromDecimal)
+        val message = "Inputs: x = $x, y = $y"
+        assertNotEquals(x, y, message)
+        assertNotEquals(x.hashCode(), y.hashCode(), message)
     }
 
     @Test
-    fun equalsAndHashCodeWithAnotherTypeThanDecimal() {
-        // Given
-        val x: Decimal = Decimal.fromDecimal("0.0001")
-        val y: String = x.toString()
-        // When
-        val equality: Boolean = x.equals(y)
-        val hashConformity: Boolean = x.hashCode() == y.hashCode()
-        // Then
-        assertFalse(equality, "$x (Decimal) and $y (String) must be different.")
-        assertFalse(hashConformity, "Hash code of $x and $y must be different.")
+    fun equalsAndHashCodeWithAnotherTypeThanDecimal(): Unit = repeatTest {
+        val y: String = randomNonZeroDecimalString()
+        val x: Decimal = Decimal.fromDecimal(y)
+        val message = "Inputs: x = $x, y = $y"
+        assertNotEquals(x, y as Any, message)
+        assertNotEquals(x.hashCode(), y.hashCode(), message)
     }
 
     // ------------------------------ Conversions ------------------------------
