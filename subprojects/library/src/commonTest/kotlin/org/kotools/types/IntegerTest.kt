@@ -6,6 +6,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
@@ -79,31 +80,57 @@ class IntegerTest {
         }
 
     @Test
-    fun fromDecimalOrNullWithZero(): Unit =
-        listOf("0", "+0", "-0", "00").forEach {
-            val result: Integer? = Integer.fromDecimalOrNull(it)
-            assertEquals(expected = "0", "$result")
+    fun fromDecimalOrNullRepresentsZeroUniquely(): Unit = repeatTest {
+        val text: String = randomZeroIntegerString()
+        val actual: Integer? = Integer.fromDecimalOrNull(text)
+        val expected: Integer = Integer.from(0)
+        assertEquals(expected, actual, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalOrNullRemovesPlusSignFromPositiveInteger(): Unit =
+        repeatTest {
+            val text: String = randomPositiveIntegerString()
+            val integer: Integer? = Integer.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(integer, message)
+            assertTrue(message) { !"$integer".startsWith('+') }
         }
 
     @Test
-    fun fromDecimalOrNullWithPositiveInteger(): Unit =
-        listOf("1", "+1", "01").forEach {
-            val result: Integer? = Integer.fromDecimalOrNull(it)
-            assertEquals(expected = "1", "$result")
+    fun fromDecimalOrNullKeepsMinusSignFromNegativeInteger(): Unit =
+        repeatTest {
+            val text: String = randomNegativeIntegerString()
+            val integer: Integer? = Integer.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(integer, message)
+            assertTrue(message) { "$integer".startsWith('-') }
         }
 
     @Test
-    fun fromDecimalOrNullWithNegativeInteger(): Unit =
-        listOf("-1", "-01").forEach {
-            val result: Integer? = Integer.fromDecimalOrNull(it)
-            assertEquals(expected = "-1", "$result")
+    fun fromDecimalOrNullRemovesLeadingZerosFromNonZeroInteger(): Unit =
+        repeatTest {
+            val text: String = randomNonZeroIntegerString()
+            val integer: Integer? = Integer.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(integer, message)
+            assertTrue(message) { !"$integer".startsWith('0') }
         }
 
     @Test
-    fun fromDecimalOrNullWithInvalidString(): Unit =
-        listOf(" ", "+", "-", "oops").forEach {
-            val result: Integer? = Integer.fromDecimalOrNull(it)
-            assertNull(result)
+    fun fromDecimalOrNullIsStableWithStringRepresentation(): Unit = repeatTest {
+        val text: String = randomNonZeroIntegerString()
+        val x: Integer? = Integer.fromDecimalOrNull(text)
+        val y: Integer? = Integer.fromDecimalOrNull("$x")
+        assertEquals(x, y, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalOrNullReturnsNullWithMalformedIntegerString(): Unit =
+        repeatTest {
+            val text: String = randomMalformedIntegerString()
+            val actual: Integer? = Integer.fromDecimalOrNull(text)
+            assertNull(actual, message = "Input: $text")
         }
 
     // ------------------------------ Comparisons ------------------------------
