@@ -42,6 +42,16 @@ class DecimalSample {
         check("$result" == "0.000123")
     }
 
+    @Test
+    fun fromDecimalStringOrNull() {
+        // Given
+        val text = "+000.000123000"
+        // When
+        val result: Decimal? = Decimal.fromDecimalOrNull(text)
+        // Then
+        check("$result" == "0.000123")
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

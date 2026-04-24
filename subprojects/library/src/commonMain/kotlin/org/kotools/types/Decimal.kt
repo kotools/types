@@ -1,5 +1,7 @@
 package org.kotools.types
 
+import org.kotools.types.Decimal.Companion.fromDecimal
+import org.kotools.types.Decimal.Companion.fromDecimalOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -89,7 +91,7 @@ public interface Decimal {
 
         /**
          * Creates a [Decimal] from the specified [text], or throws an
-         * [IllegalArgumentException] if the [text] doesn't represent a
+         * [IllegalArgumentException] if the [text] doesn't represent a decimal
          * floating-point number.
          *
          * The [text] parameter must only contain an optional plus sign (`+`) or
@@ -127,12 +129,59 @@ public interface Decimal {
          *
          * SAMPLE: org.kotools.types.DecimalJavaSample.fromDecimalString
          * </details>
+         * <br>
+         *
+         * See the [fromDecimalOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [text].
          */
         @JvmStatic
         public fun fromDecimal(text: String): Decimal {
             require(this.isValid(text)) {
                 "\"$text\" is not a valid decimal number."
             }
+            val normalizedText: String = this.normalize(text)
+            return Decimal(normalizedText)
+        }
+
+        /**
+         * Creates a [Decimal] from the specified [text], or returns `null` if
+         * the [text] doesn't represent a decimal floating-point number.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits, then by an
+         * optional fractional part consisting of a decimal separator (`.`) and
+         * another sequence of digits (e.g., `1234`, `+1.234`, `-12.34`).
+         *
+         * Also, the [text] parameter is normalized by removing insignificant
+         * leading and trailing zeros. As a result, calling this function with
+         * `1`, `1.0` and `01` produces the same result.
+         *
+         * In case of invalid [text], this function throws an
+         * [IllegalArgumentException] instead of a [NumberFormatException] to
+         * ensure consistent behavior across all Kotlin platforms and to better
+         * reflect invalid argument semantics.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.DecimalSample.fromDecimalStringOrNull
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code, due to its
+         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [fromDecimal] function for throwing an exception instead of
+         * returning `null` in case of invalid [text].
+         */
+        @JvmSynthetic
+        public fun fromDecimalOrNull(text: String): Decimal? {
+            if (!this.isValid(text)) return null
             val normalizedText: String = this.normalize(text)
             return Decimal(normalizedText)
         }

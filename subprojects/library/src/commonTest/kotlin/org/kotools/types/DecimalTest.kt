@@ -6,6 +6,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -87,6 +89,74 @@ class DecimalTest {
             val actual: String? = exception.message
             val expected = "\"$text\" is not a valid decimal number."
             assertEquals(expected, actual)
+        }
+
+    @Test
+    fun fromDecimalOrNullRepresentsZeroUniquely(): Unit = repeatTest {
+        val text: String = randomZeroString()
+        val actual: Decimal? = Decimal.fromDecimalOrNull(text)
+        val expected: Decimal = Decimal.fromInteger(0)
+        assertEquals(expected, actual, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalOrNullRemovesPlusSignFromPositiveDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomPositiveDecimalString()
+            val decimal: Decimal? = Decimal.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(decimal, message)
+            assertFalse(message) { "$decimal".startsWith('+') }
+        }
+
+    @Test
+    fun fromDecimalOrNullKeepsMinusSignFromNegativeDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomNegativeDecimalString()
+            val decimal: Decimal? = Decimal.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(decimal, message)
+            assertTrue(message) { "$decimal".startsWith('-') }
+        }
+
+    @Test
+    fun fromDecimalOrNullRemovesLeadingZerosFromNonZeroDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomNonZeroDecimalString()
+            val decimal: Decimal? = Decimal.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(decimal, message)
+            assertTrue(message) {
+                "$decimal".let { it.startsWith("0.") || !it.startsWith('0') }
+            }
+        }
+
+    @Test
+    fun fromDecimalOrNullRemovesTrailingZerosFromDecimalNumbers(): Unit =
+        repeatTest {
+            val text: String = randomNonZeroDecimalString()
+            val decimal: Decimal? = Decimal.fromDecimalOrNull(text)
+            val message = "Input: $text"
+            assertNotNull(decimal, message)
+            assertTrue(message) {
+                "$decimal".let { '.' !in it || !it.endsWith('0') }
+            }
+        }
+
+    @Test
+    fun fromDecimalOrNullIsStableWithStringRepresentation(): Unit = repeatTest {
+        val text: String = randomNonZeroDecimalString()
+        val x: Decimal? = Decimal.fromDecimalOrNull(text)
+        val y: Decimal? = Decimal.fromDecimalOrNull("$x")
+        assertEquals(x, y, message = "Input: $text")
+    }
+
+    @Test
+    fun fromDecimalOrNullReturnsNullWithMalformedDecimalStrings(): Unit =
+        repeatTest {
+            val text: String = randomMalformedDecimalString()
+            val actual: Decimal? = Decimal.fromDecimalOrNull(text)
+            assertNull(actual, message = "Input: $text")
         }
 
     // ------------------------------ Comparisons ------------------------------
