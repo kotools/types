@@ -49,6 +49,12 @@ All notable changes to this project will be documented in this file.
 - Default serializer for `Integer` type
   ([0565df54](https://github.com/kotools/types/commit/0565df54)).
 
+### 🐛 Fixed
+
+- Inconsistency in structural equality operations of `Integer` **experimental**
+  type, on Kotlin/Native
+  ([855fd176](https://github.com/kotools/types/commit/855fd176)).
+
 ## 🔖 Releases
 
 | Version | Release date |
