@@ -3,6 +3,21 @@ package org.kotools.types
 internal inline fun repeatTest(block: () -> Unit): Unit =
     repeat(times = 1_000) { block() }
 
+// -------------------------- Random decimal numbers ---------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Decimal.Companion.random(): Decimal {
+    val text: String = randomNonZeroDecimalString()
+    return Decimal.fromDecimal(text)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Decimal.Companion.randomExcept(illegal: Decimal): Decimal {
+    var candidate: Decimal = this.random()
+    while (candidate == illegal) candidate = this.random()
+    return candidate
+}
+
 // ------------------------------ Random strings -------------------------------
 
 internal fun randomZeroString(): String {

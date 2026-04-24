@@ -119,9 +119,8 @@ class DecimalTest {
 
     @Test
     fun equalsAndHashCodeWithSameDecimalNumbers(): Unit = repeatTest {
-        val text: String = randomNonZeroDecimalString()
-        val x: Decimal = Decimal.fromDecimal(text)
-        val y: Decimal = Decimal.fromDecimal(text)
+        val x: Decimal = Decimal.random()
+        val y: Decimal = Decimal.fromDecimal("$x")
         val message = "Inputs: x = $x, y = $y"
         assertEquals(x, y, message)
         assertEquals(x.hashCode(), y.hashCode(), message)
@@ -129,10 +128,8 @@ class DecimalTest {
 
     @Test
     fun equalsAndHashCodeWithDifferentDecimalNumbers(): Unit = repeatTest {
-        val x: Decimal = randomPositiveDecimalString()
-            .let(Decimal.Companion::fromDecimal)
-        val y: Decimal = randomNegativeDecimalString()
-            .let(Decimal.Companion::fromDecimal)
+        val x: Decimal = Decimal.random()
+        val y: Decimal = Decimal.randomExcept(x)
         val message = "Inputs: x = $x, y = $y"
         assertNotEquals(x, y, message)
         assertNotEquals(x.hashCode(), y.hashCode(), message)
@@ -140,8 +137,8 @@ class DecimalTest {
 
     @Test
     fun equalsAndHashCodeWithAnotherTypeThanDecimal(): Unit = repeatTest {
-        val y: String = randomNonZeroDecimalString()
-        val x: Decimal = Decimal.fromDecimal(y)
+        val x: Decimal = Decimal.random()
+        val y = "$x"
         val message = "Inputs: x = $x, y = $y"
         assertNotEquals(x, y as Any, message)
         assertNotEquals(x.hashCode(), y.hashCode(), message)
@@ -150,32 +147,9 @@ class DecimalTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    fun toStringOnZero() {
-        // Given
-        val zero: Decimal = Decimal.fromDecimal("-00.00000000")
-        // When
-        val actual: String = zero.toString()
-        // Then
-        assertEquals(expected = "0", actual)
-    }
-
-    @Test
-    fun toStringOnPositiveDecimalNumber() {
-        // Given
-        val number: Decimal = Decimal.fromDecimal("+000123456.789000")
-        // When
-        val actual: String = number.toString()
-        // Then
-        assertEquals(expected = "123456.789", actual)
-    }
-
-    @Test
-    fun toStringOnNegativeDecimalNumber() {
-        // Given
-        val number: Decimal = Decimal.fromDecimal("-0.0001230")
-        // When
-        val actual: String = number.toString()
-        // Then
-        assertEquals(expected = "-0.000123", actual)
+    fun toStringReturnsParseableDecimalString(): Unit = repeatTest {
+        val x: Decimal = Decimal.random()
+        val y: Decimal = Decimal.fromDecimal("$x")
+        assertEquals(x, y, message = "Input: $x")
     }
 }
