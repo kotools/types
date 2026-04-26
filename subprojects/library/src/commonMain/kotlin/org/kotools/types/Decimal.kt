@@ -6,6 +6,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
+internal expect fun Decimal(value: Long): Decimal
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
 internal expect fun Decimal(text: String): Decimal
 
 /**
@@ -62,7 +65,13 @@ public interface Decimal {
     /** Contains class-level declarations for the [Decimal] type. */
     public companion object {
         /**
-         * Creates a [Decimal] from the specified [number].
+         * Returns a [Decimal] representing the specified [value].
+         *
+         * This function provides an exact conversion from a [Long] to a
+         * [Decimal], without any loss of precision.
+         *
+         * The resulting [Decimal] has no fractional part and is equivalent to
+         * the mathematical integer defined by [value].
          *
          * <br>
          * <details>
@@ -72,7 +81,7 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.DecimalSample.fromIntegerLong
+         * SAMPLE: org.kotools.types.DecimalSample.ofLong
          * </details>
          *
          * <br>
@@ -83,11 +92,11 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.DecimalJavaSample.fromIntegerLong
+         * SAMPLE: org.kotools.types.DecimalJavaSample.ofLong
          * </details>
          */
         @JvmStatic
-        public fun fromInteger(number: Long): Decimal = Decimal("$number")
+        public fun of(value: Long): Decimal = Decimal(value)
 
         /**
          * Creates a [Decimal] from the specified [text], or throws an

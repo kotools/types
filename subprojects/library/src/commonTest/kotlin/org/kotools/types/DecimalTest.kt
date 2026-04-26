@@ -15,10 +15,10 @@ class DecimalTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun fromIntegerUsesStringRepresentationOfSpecifiedNumber(): Unit =
+    fun ofLongUsesStringRepresentationOfSpecifiedValue(): Unit =
         repeatTest {
             val number: Long = Random.nextLong()
-            val actual: String = Decimal.fromInteger(number)
+            val actual: String = Decimal.of(number)
                 .toString()
             val expected: String = number.toString()
             assertEquals(expected, actual, message = "Input: $number")
@@ -28,7 +28,7 @@ class DecimalTest {
     fun fromDecimalRepresentsZeroUniquely(): Unit = repeatTest {
         val text: String = randomZeroDecimalString()
         val actual: Decimal = Decimal.fromDecimal(text)
-        val expected: Decimal = Decimal.fromInteger(0)
+        val expected: Decimal = Decimal.of(0)
         assertEquals(expected, actual, message = "Input: $text")
     }
 
@@ -95,7 +95,7 @@ class DecimalTest {
     fun fromDecimalOrNullRepresentsZeroUniquely(): Unit = repeatTest {
         val text: String = randomZeroDecimalString()
         val actual: Decimal? = Decimal.fromDecimalOrNull(text)
-        val expected: Decimal = Decimal.fromInteger(0)
+        val expected: Decimal = Decimal.of(0)
         assertEquals(expected, actual, message = "Input: $text")
     }
 

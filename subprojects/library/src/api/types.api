@@ -327,15 +327,15 @@ public abstract interface class org/kotools/types/Decimal {
 	public static final field Companion Lorg/kotools/types/Decimal$Companion;
 	public abstract fun equals (Ljava/lang/Object;)Z
 	public static fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Decimal;
-	public static fun fromInteger (J)Lorg/kotools/types/Decimal;
 	public abstract fun hashCode ()I
+	public static fun of (J)Lorg/kotools/types/Decimal;
 	public abstract fun toString ()Ljava/lang/String;
 }
 
 public final class org/kotools/types/Decimal$Companion {
 	public final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/Decimal;
 	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/Decimal;
-	public final fun fromInteger (J)Lorg/kotools/types/Decimal;
+	public final fun of (J)Lorg/kotools/types/Decimal;
 }
 
 public final class org/kotools/types/EmailAddress {

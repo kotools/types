@@ -3,10 +3,15 @@ package org.kotools.types
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-@Suppress("unused")
+internal actual fun Decimal(value: Long): Decimal {
+    val x: BigDecimal = BigDecimal.fromLong(value)
+    return JsNativeDecimal(x)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
 internal actual fun Decimal(text: String): Decimal {
-    val value: BigDecimal = BigDecimal.parseString(text)
-    return JsNativeDecimal(value)
+    val x: BigDecimal = BigDecimal.parseString(text)
+    return JsNativeDecimal(x)
 }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)

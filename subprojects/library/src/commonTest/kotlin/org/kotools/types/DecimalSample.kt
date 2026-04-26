@@ -23,11 +23,11 @@ class DecimalSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun fromIntegerLong() {
+    fun ofLong() {
         // Given
         val number = 123456789L
         // When
-        val result: Decimal = Decimal.fromInteger(number)
+        val result: Decimal = Decimal.of(number)
         // Then
         check("$result" == "$number")
     }
@@ -57,7 +57,7 @@ class DecimalSample {
     @Test
     fun equality() {
         // Given
-        val x: Decimal = Decimal.fromInteger(1)
+        val x: Decimal = Decimal.of(1)
         val y: Decimal = Decimal.fromDecimal("+0001")
         val z: Decimal = Decimal.fromDecimal("+1.000")
         // When
@@ -75,7 +75,7 @@ class DecimalSample {
     fun toStringOverride() {
         // Given
         val number = 123456789L
-        val decimal: Decimal = Decimal.fromInteger(number)
+        val decimal: Decimal = Decimal.of(number)
         // When
         val result: String = decimal.toString()
         // Then

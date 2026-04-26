@@ -8,11 +8,11 @@ public class DecimalJavaSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    void fromIntegerLong() {
+    void ofLong() {
         // Given
         final long number = 123456789L;
         // When
-        final Decimal result = Decimal.fromInteger(number);
+        final Decimal result = Decimal.of(number);
         // Then
         final String resultAsString = result.toString();
         final String expected = String.valueOf(number);
@@ -38,7 +38,7 @@ public class DecimalJavaSample {
     @Test
     void equality() {
         // Given
-        final Decimal x = Decimal.fromInteger(1);
+        final Decimal x = Decimal.of(1);
         final Decimal y = Decimal.fromDecimal("+0001");
         final Decimal z = Decimal.fromDecimal("+1.000");
         // When
@@ -56,7 +56,7 @@ public class DecimalJavaSample {
     void toStringOverride() {
         // Given
         final long number = 123456789L;
-        final Decimal decimal = Decimal.fromInteger(number);
+        final Decimal decimal = Decimal.of(number);
         // When
         final String result = decimal.toString();
         // Then
