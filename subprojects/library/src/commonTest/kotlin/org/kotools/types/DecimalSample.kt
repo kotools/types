@@ -33,13 +33,10 @@ class DecimalSample {
     }
 
     @Test
-    fun fromDecimalString() {
-        // Given
-        val text = "+000.000123000"
-        // When
-        val result: Decimal = Decimal.fromDecimal(text)
-        // Then
-        check("$result" == "0.000123")
+    fun fromString() {
+        check(Decimal.fromString("000") == Decimal.of(0))
+        check(Decimal.fromString("+042.0") == Decimal.of(42))
+        check(Decimal.fromString("-3.140").toString() == "-3.14")
     }
 
     @Test
@@ -58,8 +55,8 @@ class DecimalSample {
     fun equality() {
         // Given
         val x: Decimal = Decimal.of(1)
-        val y: Decimal = Decimal.fromDecimal("+0001")
-        val z: Decimal = Decimal.fromDecimal("+1.000")
+        val y: Decimal = Decimal.fromString("+0001")
+        val z: Decimal = Decimal.fromString("+1.000")
         // When
         val equality: Boolean = x == y && y == z
         val hashConformity: Boolean = x.hashCode() == y.hashCode()

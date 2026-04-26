@@ -20,27 +20,14 @@ public class DecimalJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
-    @Test
-    void fromDecimalString() {
-        // Given
-        final String text = "+000.000123000";
-        // When
-        final Decimal result = Decimal.fromDecimal(text);
-        // Then
-        final String resultAsString = result.toString();
-        final String expected = "0.000123";
-        final boolean check = resultAsString.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
-
     // ------------------------------ Comparisons ------------------------------
 
     @Test
     void equality() {
         // Given
         final Decimal x = Decimal.of(1);
-        final Decimal y = Decimal.fromDecimal("+0001");
-        final Decimal z = Decimal.fromDecimal("+1.000");
+        final Decimal y = Decimal.Companion.fromString("+0001");
+        final Decimal z = Decimal.Companion.fromString("+1.000");
         // When
         final boolean equality = x.equals(y) && y.equals(z);
         final boolean hashConformity = x.hashCode() == y.hashCode()

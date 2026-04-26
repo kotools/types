@@ -25,66 +25,66 @@ class DecimalTest {
         }
 
     @Test
-    fun fromDecimalRepresentsZeroUniquely(): Unit = repeatTest {
+    fun fromStringRepresentsZeroUniquely(): Unit = repeatTest {
         val text: String = randomZeroDecimalString()
-        val actual: Decimal = Decimal.fromDecimal(text)
+        val actual: Decimal = Decimal.fromString(text)
         val expected: Decimal = Decimal.of(0)
         assertEquals(expected, actual, message = "Input: $text")
     }
 
     @Test
-    fun fromDecimalRemovesPlusSignFromPositiveDecimalNumbers(): Unit =
+    fun fromStringRemovesPlusSignFromPositiveDecimalNumbers(): Unit =
         repeatTest {
             val text: String = randomPositiveDecimalString()
-            val actual: Boolean = Decimal.fromDecimal(text)
+            val actual: Boolean = Decimal.fromString(text)
                 .toString()
                 .startsWith('+')
             assertFalse(actual, message = "Input: $text")
         }
 
     @Test
-    fun fromDecimalKeepsMinusSignFromNegativeDecimalNumbers(): Unit =
+    fun fromStringKeepsMinusSignFromNegativeDecimalNumbers(): Unit =
         repeatTest {
             val text: String = randomNegativeDecimalString()
-            val actual: Boolean = Decimal.fromDecimal(text)
+            val actual: Boolean = Decimal.fromString(text)
                 .toString()
                 .startsWith('-')
             assertTrue(actual, message = "Input: $text")
         }
 
     @Test
-    fun fromDecimalRemovesLeadingZerosFromNonZeroDecimalNumbers(): Unit =
+    fun fromStringRemovesLeadingZerosFromNonZeroDecimalNumbers(): Unit =
         repeatTest {
             val text: String = randomNonZeroDecimalString()
-            val actual: Boolean = Decimal.fromDecimal(text)
+            val actual: Boolean = Decimal.fromString(text)
                 .toString()
                 .let { it.startsWith("0.") || !it.startsWith('0') }
             assertTrue(actual, message = "Input: $text")
         }
 
     @Test
-    fun fromDecimalRemovesTrailingZerosFromDecimalNumbers(): Unit = repeatTest {
+    fun fromStringRemovesTrailingZerosFromDecimalNumbers(): Unit = repeatTest {
         val text: String = randomNonZeroDecimalString()
-        val actual: Boolean = Decimal.fromDecimal(text)
+        val actual: Boolean = Decimal.fromString(text)
             .toString()
             .let { '.' !in it || !it.endsWith('0') }
         assertTrue(actual, message = "Input: $text")
     }
 
     @Test
-    fun fromDecimalIsStableWithStringRepresentation(): Unit = repeatTest {
+    fun fromStringIsStableWithStringRepresentation(): Unit = repeatTest {
         val text: String = randomNonZeroDecimalString()
-        val x: Decimal = Decimal.fromDecimal(text)
-        val y: Decimal = Decimal.fromDecimal("$x")
+        val x: Decimal = Decimal.fromString(text)
+        val y: Decimal = Decimal.fromString("$x")
         assertEquals(x, y, message = "Input: $text")
     }
 
     @Test
-    fun fromDecimalThrowsExceptionWithMalformedDecimalStrings(): Unit =
+    fun fromStringThrowsExceptionWithMalformedDecimalStrings(): Unit =
         repeatTest {
             val text: String = randomMalformedDecimalString()
             val exception: IllegalArgumentException = assertFailsWith {
-                Decimal.fromDecimal(text)
+                Decimal.fromString(text)
             }
             val actual: String? = exception.message
             val expected = "\"$text\" is not a valid decimal number."
@@ -164,7 +164,7 @@ class DecimalTest {
     @Test
     fun equalsAndHashCodeWithSameDecimalNumbers(): Unit = repeatTest {
         val x: Decimal = Decimal.random()
-        val y: Decimal = Decimal.fromDecimal("$x")
+        val y: Decimal = Decimal.fromString("$x")
         val message = "Inputs: x = $x, y = $y"
         assertEquals(x, y, message)
         assertEquals(x.hashCode(), y.hashCode(), message)
@@ -193,7 +193,7 @@ class DecimalTest {
     @Test
     fun toStringReturnsParseableDecimalString(): Unit = repeatTest {
         val x: Decimal = Decimal.random()
-        val y: Decimal = Decimal.fromDecimal("$x")
+        val y: Decimal = Decimal.fromString("$x")
         assertEquals(x, y, message = "Input: $x")
     }
 }
