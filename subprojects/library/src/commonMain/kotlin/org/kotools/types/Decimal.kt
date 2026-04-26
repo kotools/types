@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import org.kotools.types.Decimal.Companion.fromString
-import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -64,37 +63,16 @@ public interface Decimal {
     /** Contains class-level declarations for the [Decimal] type. */
     public companion object {
         /**
-         * Returns a [Decimal] representing the specified [value].
-         *
-         * This function provides an exact conversion from a [Long] to a
-         * [Decimal], without any loss of precision.
+         * Returns a [Decimal] representing exactly the specified [value],
+         * without any loss of precision.
          *
          * The resulting [Decimal] has no fractional part and is equivalent to
          * the mathematical integer defined by [value].
          *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: org.kotools.types.DecimalSample.ofLong
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: org.kotools.types.DecimalJavaSample.ofLong
-         * </details>
          */
-        @JvmStatic
         public fun of(value: Long): Decimal = Decimal(value)
 
         /**

@@ -24,12 +24,9 @@ class DecimalSample {
 
     @Test
     fun ofLong() {
-        // Given
-        val number = 123456789L
-        // When
-        val result: Decimal = Decimal.of(number)
-        // Then
-        check("$result" == "$number")
+        check(Decimal.of(0).toString() == "0")
+        check(Decimal.of(42).toString() == "42")
+        check(Decimal.of(-3).toString() == "-3")
     }
 
     @Test

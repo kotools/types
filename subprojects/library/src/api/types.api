@@ -327,7 +327,6 @@ public abstract interface class org/kotools/types/Decimal {
 	public static final field Companion Lorg/kotools/types/Decimal$Companion;
 	public abstract fun equals (Ljava/lang/Object;)Z
 	public abstract fun hashCode ()I
-	public static fun of (J)Lorg/kotools/types/Decimal;
 	public abstract fun toString ()Ljava/lang/String;
 }
 
