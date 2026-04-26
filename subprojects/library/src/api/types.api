@@ -331,8 +331,8 @@ public abstract interface class org/kotools/types/Decimal {
 }
 
 public final class org/kotools/types/Decimal$Companion {
-	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/Decimal;
 	public final fun fromString (Ljava/lang/String;)Lorg/kotools/types/Decimal;
+	public final fun fromStringOrNull (Ljava/lang/String;)Lorg/kotools/types/Decimal;
 	public final fun of (J)Lorg/kotools/types/Decimal;
 }
 

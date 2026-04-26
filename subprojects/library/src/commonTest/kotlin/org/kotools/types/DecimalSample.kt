@@ -37,13 +37,10 @@ class DecimalSample {
     }
 
     @Test
-    fun fromDecimalStringOrNull() {
-        // Given
-        val text = "+000.000123000"
-        // When
-        val result: Decimal? = Decimal.fromDecimalOrNull(text)
-        // Then
-        check("$result" == "0.000123")
+    fun fromStringOrNull() {
+        check(Decimal.fromStringOrNull("000") == Decimal.of(0))
+        check(Decimal.fromStringOrNull("+042.0") == Decimal.of(42))
+        check(Decimal.fromStringOrNull("-3.140").toString() == "-3.14")
     }
 
     // ------------------------------ Comparisons ------------------------------

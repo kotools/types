@@ -1,7 +1,8 @@
 package org.kotools.types
 
 import org.kotools.types.Decimal.Companion.fromString
-import kotlin.jvm.JvmSynthetic
+import org.kotools.types.Decimal.Companion.fromStringOrNull
+
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal expect fun Decimal(value: Long): Decimal
@@ -100,8 +101,8 @@ public interface Decimal {
          *
          * SAMPLE: org.kotools.types.DecimalSample.fromString
          *
-         * See [Decimal.Companion.fromDecimalOrNull] for returning `null`
-         * instead of throwing an exception in case of invalid [value].
+         * See [fromStringOrNull] for returning `null` instead
+         * of throwing an exception in case of invalid [value].
          */
         public fun fromString(value: String): Decimal {
             require(this.isValid(value)) {
@@ -112,68 +113,55 @@ public interface Decimal {
         }
 
         /**
-         * Creates a [Decimal] from the specified [text], or returns `null` if
-         * the [text] doesn't represent a decimal floating-point number.
+         * Returns a [Decimal] representing exactly the numeric value described
+         * by [value], without any rounding or loss of precision, or returns
+         * `null` if the [value] doesn't represent a decimal number.
          *
-         * The [text] parameter must only contain an optional plus sign (`+`) or
-         * minus sign (`-`), followed by a sequence of digits, then by an
-         * optional fractional part consisting of a decimal separator (`.`) and
-         * another sequence of digits (e.g., `1234`, `+1.234`, `-12.34`).
+         * The specified [value] must be a valid decimal representation using a
+         * dot (`.`) as radix point, and an optional leading sign (`+` or `-`).
          *
-         * Also, the [text] parameter is normalized by removing insignificant
-         * leading and trailing zeros. As a result, calling this function with
-         * `1`, `1.0` and `01` produces the same result.
+         * ```
+         * decimal = [sign] integer [fraction]
+         * sign = "+" | "-"
+         * fraction = "." integer
+         * integer = digit {digit}
+         * digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+         * ```
          *
-         * In case of invalid [text], this function throws an
-         * [IllegalArgumentException] instead of a [NumberFormatException] to
-         * ensure consistent behavior across all Kotlin platforms and to better
-         * reflect invalid argument semantics.
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
+         * Also, note that this function removes insignificant leading and
+         * trailing zeros from the [value]. As a result, calling this function
+         * with `1`, `+1.00` and `001` produces the same result.
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.DecimalSample.fromDecimalStringOrNull
-         * </details>
-         * <br>
+         * SAMPLE: org.kotools.types.DecimalSample.fromStringOrNull
          *
-         * This function is not available from Java code, due to its
-         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [fromString] function for throwing an exception instead of
-         * returning `null` in case of invalid [text].
+         * See [fromString] for throwing an exception instead
+         * of returning `null` in case of invalid [value].
          */
-        @JvmSynthetic
-        public fun fromDecimalOrNull(text: String): Decimal? {
-            if (!this.isValid(text)) return null
-            val normalizedText: String = this.normalize(text)
+        public fun fromStringOrNull(value: String): Decimal? {
+            if (!this.isValid(value)) return null
+            val normalizedText: String = this.normalize(value)
             return Decimal(normalizedText)
         }
 
-        @JvmSynthetic
-        internal fun isValid(text: String): Boolean =
-            text matches Regex("""^[+-]?\d+(?:\.\d+)?$""")
+        internal fun isValid(value: String): Boolean =
+            value matches Regex("""^[+-]?\d+(?:\.\d+)?$""")
 
-        @JvmSynthetic
-        internal fun normalize(text: String): String {
-            val isZero: Boolean = text.filter(Char::isDigit)
+        internal fun normalize(value: String): String {
+            val isZero: Boolean = value.filter(Char::isDigit)
                 .all { it == '0' }
             if (isZero) return "0"
-            val sign: String = if (text.startsWith('-')) "-" else ""
-            val unsignedText: String = text.removePrefix("+")
+            val sign: String = if (value.startsWith('-')) "-" else ""
+            val integer: String = value.substringBefore('.')
+                .removePrefix("+")
                 .removePrefix("-")
-            if ('.' !in unsignedText) return sign + unsignedText.trimStart('0')
-            val parts: List<String> = unsignedText.split('.')
-            val integerPart: String = parts.first()
                 .trimStart('0')
-            val fractionalPart: String = parts.last()
+            if ('.' !in value) return "$sign$integer"
+            val fraction: String = value.substringAfter('.')
                 .trimEnd('0')
-            return if (fractionalPart.isEmpty()) sign + integerPart
-            else "$sign${integerPart}.$fractionalPart"
+            return if (fraction.isEmpty()) "$sign$integer"
+            else "$sign${integer}.$fraction"
         }
     }
 
