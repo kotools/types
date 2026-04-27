@@ -47,29 +47,23 @@ class DecimalSample {
 
     @Test
     fun equality() {
-        // Given
         val x: Decimal = Decimal.of(1)
         val y: Decimal = Decimal.fromString("+0001")
         val z: Decimal = Decimal.fromString("+1.000")
-        // When
+
         val equality: Boolean = x == y && y == z
         val hashConformity: Boolean = x.hashCode() == y.hashCode()
                 && y.hashCode() == z.hashCode()
-        // Then
-        check(equality)
-        check(hashConformity)
+
+        check(equality && hashConformity)
     }
 
     // ------------------------------ Conversions ------------------------------
 
     @Test
     fun toStringOverride() {
-        // Given
-        val number = 123456789L
-        val decimal: Decimal = Decimal.of(number)
-        // When
-        val result: String = decimal.toString()
-        // Then
-        check(result == "$number")
+        check(Decimal.of(0).toString() == "0")
+        check(Decimal.fromString("+42").toString() == "42")
+        check(Decimal.fromString("-3.14").toString() == "-3.14")
     }
 }

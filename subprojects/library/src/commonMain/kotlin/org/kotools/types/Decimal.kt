@@ -168,87 +168,32 @@ public interface Decimal {
     // ------------------------------ Comparisons ------------------------------
 
     /**
-     * Returns `true` if the [other] object is an instance of [Decimal], with
-     * the same numeric value as this decimal floating-point number, or returns
-     * `false` otherwise.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
+     * Returns `true` if the [other] object is a [Decimal] representing the same
+     * numeric value as this one, or returns `false` otherwise.
      *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: org.kotools.types.DecimalSample.equality
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.DecimalJavaSample.equality
-     * </details>
      */
     override fun equals(other: Any?): Boolean
 
     /**
-     * Returns a hash code for this decimal floating-point number.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
+     * Returns a hash code for this [Decimal].
      *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: org.kotools.types.DecimalSample.equality
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.DecimalJavaSample.equality
-     * </details>
      */
     override fun hashCode(): Int
 
     // ------------------------------ Conversions ------------------------------
 
     /**
-     * Returns the string representation of this decimal floating-point number.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
+     * Returns the string representation of this [Decimal].
      *
      * Here's an example of calling this function from Kotlin code:
      *
      * SAMPLE: org.kotools.types.DecimalSample.toStringOverride
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.DecimalJavaSample.toStringOverride
-     * </details>
      */
     override fun toString(): String
 }
