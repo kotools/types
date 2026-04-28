@@ -186,6 +186,18 @@ public interface Decimal {
      */
     override fun hashCode(): Int
 
+    /**
+     * Compares this [Decimal] with the [other] one for order.
+     *
+     * Returns a negative number, zero, or a positive number as this [Decimal]
+     * is less than, equal to, or greater than the [other] one.
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.DecimalSample.compareTo
+     */
+    public operator fun compareTo(other: Decimal): Int
+
     // ------------------------------ Conversions ------------------------------
 
     /**

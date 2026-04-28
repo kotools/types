@@ -23,6 +23,11 @@ private class JsNativeDecimal(private val value: BigDecimal) : Decimal {
 
     override fun hashCode(): Int = this.value.hashCode() + "$this".hashCode()
 
+    override fun compareTo(other: Decimal): Int {
+        check(other is JsNativeDecimal)
+        return this.value.compareTo(other.value)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.value.toStringExpanded()

@@ -25,6 +25,11 @@ private class JvmDecimal(private val value: BigDecimal) : Decimal {
 
     override fun hashCode(): Int = this.value.hashCode()
 
+    override fun compareTo(other: Decimal): Int {
+        check(other is JvmDecimal)
+        return this.value.compareTo(other.value)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.value.toString()

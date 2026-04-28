@@ -58,6 +58,11 @@ class DecimalSample {
         check(equality && hashConformity)
     }
 
+    @Test
+    fun compareTo() {
+        check(Decimal.of(0) < Decimal.fromString("0.001"))
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

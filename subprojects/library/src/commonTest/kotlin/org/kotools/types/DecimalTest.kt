@@ -188,6 +188,27 @@ class DecimalTest {
         assertNotEquals(x.hashCode(), y.hashCode(), message)
     }
 
+    @Test
+    fun compareToReturnsZeroWithSameDecimal(): Unit = repeatTest {
+        val x: Decimal = Decimal.random()
+        val y: Decimal = Decimal.fromString("$x")
+        assertTrue(message = "Inputs: x = $x, y = $y") { x.compareTo(y) == 0 }
+    }
+
+    @Test
+    fun compareToReturnsNegativeNumberWithGreaterDecimal(): Unit = repeatTest {
+        val x: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        val y: Decimal = Decimal.fromString(randomPositiveDecimalString())
+        assertTrue(message = "Inputs: x = $x, y = $y") { x < y }
+    }
+
+    @Test
+    fun compareToReturnsPositiveNumberWithLessDecimal(): Unit = repeatTest {
+        val x: Decimal = Decimal.fromString(randomPositiveDecimalString())
+        val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        assertTrue(message = "Inputs: x = $x, y = $y") { x > y }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
