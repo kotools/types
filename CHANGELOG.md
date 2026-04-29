@@ -16,12 +16,6 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-### ✨ Added
-
-- `Integer.toSignedString()` function for returning the signed decimal
-  representation of an integer
-  ([#922](https://github.com/kotools/types/pull/922)).
-
 ### ♻️ Changed
 
 - Improve the vision of Kotools Types in design goals, README and `Integer`
