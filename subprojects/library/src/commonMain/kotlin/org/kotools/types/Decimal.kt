@@ -178,7 +178,7 @@ public interface Decimal {
     override fun equals(other: Any?): Boolean
 
     /**
-     * Returns a hash code for this [Decimal].
+     * Returns a hash code for this decimal number.
      *
      * Here's an example of calling this function from Kotlin code:
      *
@@ -187,10 +187,10 @@ public interface Decimal {
     override fun hashCode(): Int
 
     /**
-     * Compares this [Decimal] with the [other] one for order.
+     * Compares this decimal number with the [other] one for order.
      *
-     * Returns a negative number, zero, or a positive number as this [Decimal]
-     * is less than, equal to, or greater than the [other] one.
+     * Returns a negative number, zero, or a positive number as this decimal
+     * number is less than, equal to, or greater than the [other] one.
      *
      * Here's an example of calling this function from Kotlin code:
      *
@@ -201,7 +201,7 @@ public interface Decimal {
     // ------------------------------ Conversions ------------------------------
 
     /**
-     * Returns the string representation of this [Decimal].
+     * Returns the string representation of this decimal number.
      *
      * Here's an example of calling this function from Kotlin code:
      *
