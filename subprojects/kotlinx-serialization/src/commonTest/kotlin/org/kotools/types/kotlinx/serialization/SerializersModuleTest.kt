@@ -8,16 +8,16 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.serializer
+import kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.fail
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressAsStringSerializerTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun descriptor() {
         // Given
@@ -33,7 +33,6 @@ class EmailAddressAsStringSerializerTest {
         assertEquals(expected, result)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun serialize() {
         // Given
@@ -48,7 +47,6 @@ class EmailAddressAsStringSerializerTest {
         assertEquals(expected = "\"$text\"", result)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserializeWithValidEmailAddress() {
         // Given
@@ -64,7 +62,6 @@ class EmailAddressAsStringSerializerTest {
         assertEquals(expected, result)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserializeWithInvalidEmailAddress() {
         // Given
@@ -82,8 +79,8 @@ class EmailAddressAsStringSerializerTest {
     }
 }
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressRegexAsStringSerializerTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun descriptor() {
         // Given
@@ -99,7 +96,6 @@ class EmailAddressRegexAsStringSerializerTest {
         assertEquals(expected, result)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun serialize() {
         // Given
@@ -115,7 +111,6 @@ class EmailAddressRegexAsStringSerializerTest {
         assertEquals(expected, result)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserializeWithValidRegex() {
         // Given
@@ -129,7 +124,6 @@ class EmailAddressRegexAsStringSerializerTest {
         assertEquals(expected, result)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserializeWithInvalidRegex() {
         // Given

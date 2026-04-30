@@ -2,9 +2,9 @@ package org.kotools.types.kotlinx.serialization
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 
 class SerializersModuleSample {

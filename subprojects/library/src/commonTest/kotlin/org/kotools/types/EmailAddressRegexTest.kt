@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -15,7 +16,7 @@ class EmailAddressRegexTest {
     fun equalsFailsWithNull() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
         val other: Any? = null
-        val actual: Boolean = regex.equals(other)
+        val actual: Boolean = regex == other
         assertFalse(actual)
     }
 
@@ -31,7 +32,7 @@ class EmailAddressRegexTest {
     fun equalsFailsWithEmailAddressRegexHavingAnotherPattern() {
         val regex: EmailAddressRegex = EmailAddressRegex.default()
         val other: EmailAddressRegex = EmailAddressRegex.alphabetic()
-        val actual: Boolean = regex.equals(other)
+        val actual: Boolean = regex == other
         assertFalse(actual)
     }
 

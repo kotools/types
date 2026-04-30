@@ -10,9 +10,9 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.contextual
+import kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
 

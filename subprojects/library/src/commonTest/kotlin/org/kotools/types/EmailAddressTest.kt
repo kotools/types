@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.ExperimentalKotoolsTypesApi
 import kotools.types.internal.hashCodeOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class EmailAddressTest {
         val text = "contact@kotools.org"
         val first: EmailAddress = EmailAddress.of(text) ?: fail()
         val second: Any = text
-        val actual: Boolean = first.equals(second)
+        val actual: Boolean = first == second
         assertFalse(actual)
     }
 
@@ -26,7 +27,7 @@ class EmailAddressTest {
         val first: EmailAddress = EmailAddress.of("contact@kotools.org")
             ?: fail()
         val second: Any = EmailAddress.of("second@kotools.org") ?: fail()
-        val actual: Boolean = first.equals(second)
+        val actual: Boolean = first == second
         assertFalse(actual)
     }
 

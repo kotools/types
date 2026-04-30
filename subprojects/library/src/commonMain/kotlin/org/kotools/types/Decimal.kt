@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.Decimal.Companion.fromString
 import org.kotools.types.Decimal.Companion.fromStringOrNull
 

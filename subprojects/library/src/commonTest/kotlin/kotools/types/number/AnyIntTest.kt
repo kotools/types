@@ -11,7 +11,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotools.types.internal.simpleNameOf
 import kotools.types.shouldEqual
-import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.InternalKotoolsTypesApi
 import kotlin.random.Random
 import kotlin.test.Test
@@ -160,7 +159,6 @@ class AnyIntSerializerTest {
         assertEquals(expected, actual)
     }
 
-    @ExperimentalKotoolsTypesApi
     @Test
     fun deserialize_should_pass_with_an_Int() {
         val value: Int = Random.nextInt()

@@ -1,5 +1,7 @@
 package org.kotools.types
 
+import kotools.types.ExperimentalKotoolsTypesApi
+
 @OptIn(ExperimentalKotoolsTypesApi::class)
 @Suppress("unused")
 internal actual fun Integer(text: String): Integer {

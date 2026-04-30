@@ -1,5 +1,7 @@
 package org.kotools.types
 
+import kotools.types.ExperimentalKotoolsTypesApi
+
 internal inline fun repeatTest(block: () -> Unit): Unit =
     repeat(times = 1_000) { block() }
 

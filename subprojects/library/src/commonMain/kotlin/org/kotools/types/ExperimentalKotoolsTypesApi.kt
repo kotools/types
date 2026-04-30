@@ -14,6 +14,10 @@ private const val OPT_IN_MESSAGE: String = "This declaration is experimental" +
  *
  * @since 4.4.0
  */
+@Deprecated(
+    message = "Moved to 'kotools.types' package.",
+    ReplaceWith("kotools.types.ExperimentalKotoolsTypesApi")
+)
 @MustBeDocumented
 @RequiresOptIn(OPT_IN_MESSAGE)
 @Retention(BINARY)

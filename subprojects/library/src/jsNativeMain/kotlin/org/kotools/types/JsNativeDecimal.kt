@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import kotools.types.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal actual fun Decimal(value: Long): Decimal {
