@@ -4,6 +4,11 @@ Explicit types for [Kotlin Multiplatform].
 
 [kotlin multiplatform]: https://www.jetbrains.com/kotlin-multiplatform
 
+# Package kotools.types
+
+Core namespace of the Kotools Types library, containing public APIs intended for
+general use.
+
 # Package kotools.types.collection
 
 Contains types such as [NotEmptyList] for manipulating collections.
