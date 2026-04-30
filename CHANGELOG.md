@@ -16,8 +16,17 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- `ExperimentalKotoolsTypesApi` annotation in `kotools.types` package, for
+  indicating that a declaration is experimental and can be incompatibly changed
+  in the future. ([#937](https://github.com/kotools/types/pull/937))
+
 ### ♻️ Changed
 
+- **Experimental** declarations are now marked with
+  `kotools.types.ExperimentalKotoolsTypesApi`.
+  ([#937](https://github.com/kotools/types/pull/937))
 - Improve the vision of Kotools Types in design goals, README and `Integer`
   type's documentation ([#913](https://github.com/kotools/types/pull/913)).
 - Convert `Integer` **experimental** type from class to interface
@@ -33,6 +42,12 @@ All notable changes to this project will be documented in this file.
 - Error message of `Integer.Companion.fromInteger(Long)` **experimental**
   function in case of invalid input
   ([9dc7b938](https://github.com/kotools/types/commit/9dc7b938)).
+
+### 🗑️ Deprecated
+
+- `org.kotools.types.ExperimentalKotoolsTypesApi` annotation with **warning**
+  level. Use `kotools.types.ExperimentalKotoolsTypesApi` instead.
+  ([#937](https://github.com/kotools/types/pull/937))
 
 ### 🔥 Removed
 
