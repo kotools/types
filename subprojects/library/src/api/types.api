@@ -1,3 +1,6 @@
+public abstract interface annotation class kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
+}
+
 public abstract interface class kotools/types/collection/NotEmptyCollection {
 	public abstract fun getHead ()Ljava/lang/Object;
 	public abstract fun getSize-qaD5h0E ()I
