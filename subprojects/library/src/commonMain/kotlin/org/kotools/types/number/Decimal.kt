@@ -1,14 +1,12 @@
-package org.kotools.types
+package org.kotools.types.number
 
-import org.kotools.types.Decimal.Companion.fromString
-import org.kotools.types.Decimal.Companion.fromStringOrNull
-
+import org.kotools.types.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal expect fun Decimal(value: Long): Decimal
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal expect fun Decimal(text: String): Decimal
+internal expect fun Decimal(value: String): Decimal
 
 /**
  * Represents a decimal floating-point number with exact base-10 representation.
@@ -32,7 +30,7 @@ internal expect fun Decimal(text: String): Decimal
  * numbers (like `1.1` or `2.2`) cannot be represented exactly, leading to
  * surprising results in arithmetic operations.
  *
- * SAMPLE: org.kotools.types.DecimalSample.representationProblem
+ * SAMPLE: org.kotools.types.number.DecimalSample.representationProblem
  *
  * **Solution:** The [Decimal] type represents numbers using a base-10 format.
  * Values like `1.1` and `2.2` are stored exactly, ensuring predictable results
@@ -46,7 +44,7 @@ internal expect fun Decimal(text: String): Decimal
  * `Infinity`, and operations such as division by zero do not fail, which can
  * silently propagate invalid results.
  *
- * SAMPLE: org.kotools.types.DecimalSample.divisionByZeroProblem
+ * SAMPLE: org.kotools.types.number.DecimalSample.divisionByZeroProblem
  *
  * **Solution:** The [Decimal] type follows strict arithmetic rules. Invalid
  * operations, such as division or remainder by zero, throw an
@@ -72,7 +70,7 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.DecimalSample.ofLong
+         * SAMPLE: org.kotools.types.number.DecimalSample.ofLong
          */
         public fun of(value: Long): Decimal = Decimal(value)
 
@@ -99,9 +97,9 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.DecimalSample.fromString
+         * SAMPLE: org.kotools.types.number.DecimalSample.fromString
          *
-         * See [fromStringOrNull] for returning `null` instead
+         * See [Decimal.Companion.fromStringOrNull] for returning `null` instead
          * of throwing an exception in case of invalid [value].
          */
         public fun fromString(value: String): Decimal {
@@ -134,9 +132,9 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.DecimalSample.fromStringOrNull
+         * SAMPLE: org.kotools.types.number.DecimalSample.fromStringOrNull
          *
-         * See [fromString] for throwing an exception instead
+         * See [Decimal.Companion.fromString] for throwing an exception instead
          * of returning `null` in case of invalid [value].
          */
         public fun fromStringOrNull(value: String): Decimal? {
@@ -173,7 +171,7 @@ public interface Decimal {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.DecimalSample.equality
+     * SAMPLE: org.kotools.types.number.DecimalSample.equality
      */
     override fun equals(other: Any?): Boolean
 
@@ -182,7 +180,7 @@ public interface Decimal {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.DecimalSample.equality
+     * SAMPLE: org.kotools.types.number.DecimalSample.equality
      */
     override fun hashCode(): Int
 
@@ -194,7 +192,7 @@ public interface Decimal {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.DecimalSample.compareTo
+     * SAMPLE: org.kotools.types.number.DecimalSample.compareTo
      */
     public operator fun compareTo(other: Decimal): Int
 
@@ -205,7 +203,7 @@ public interface Decimal {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.DecimalSample.toStringOverride
+     * SAMPLE: org.kotools.types.number.DecimalSample.toStringOverride
      */
     override fun toString(): String
 }

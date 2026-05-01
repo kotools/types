@@ -1,5 +1,6 @@
-package org.kotools.types
+package org.kotools.types.number
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import java.math.BigDecimal
 
 @JvmSynthetic
@@ -11,8 +12,8 @@ internal actual fun Decimal(value: Long): Decimal {
 
 @JvmSynthetic
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal actual fun Decimal(text: String): Decimal {
-    val x = BigDecimal(text)
+internal actual fun Decimal(value: String): Decimal {
+    val x = BigDecimal(value)
     return JvmDecimal(x)
 }
 

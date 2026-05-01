@@ -1,5 +1,6 @@
-package org.kotools.types
+package org.kotools.types.number
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)

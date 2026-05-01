@@ -1,5 +1,14 @@
-package org.kotools.types
+package org.kotools.types.number
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.random
+import org.kotools.types.randomExcept
+import org.kotools.types.randomMalformedDecimalString
+import org.kotools.types.randomNegativeDecimalString
+import org.kotools.types.randomNonZeroDecimalString
+import org.kotools.types.randomPositiveDecimalString
+import org.kotools.types.randomZeroDecimalString
+import org.kotools.types.repeatTest
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals

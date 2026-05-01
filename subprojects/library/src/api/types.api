@@ -323,20 +323,6 @@ public final class kotools/types/text/NotBlankStringKt {
 	public static final fun toNotBlankString (Ljava/lang/String;)Ljava/lang/Object;
 }
 
-public abstract interface class org/kotools/types/Decimal {
-	public static final field Companion Lorg/kotools/types/Decimal$Companion;
-	public abstract fun compareTo (Lorg/kotools/types/Decimal;)I
-	public abstract fun equals (Ljava/lang/Object;)Z
-	public abstract fun hashCode ()I
-	public abstract fun toString ()Ljava/lang/String;
-}
-
-public final class org/kotools/types/Decimal$Companion {
-	public final fun fromString (Ljava/lang/String;)Lorg/kotools/types/Decimal;
-	public final fun fromStringOrNull (Ljava/lang/String;)Lorg/kotools/types/Decimal;
-	public final fun of (J)Lorg/kotools/types/Decimal;
-}
-
 public final class org/kotools/types/EmailAddress {
 	public static final field Companion Lorg/kotools/types/EmailAddress$Companion;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
@@ -402,5 +388,19 @@ public final class org/kotools/types/Integer$Companion {
 public final class org/kotools/types/Integer$DefaultImpls {
 	public static fun div (Lorg/kotools/types/Integer;Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 	public static fun rem (Lorg/kotools/types/Integer;Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
+}
+
+public abstract interface class org/kotools/types/number/Decimal {
+	public static final field Companion Lorg/kotools/types/number/Decimal$Companion;
+	public abstract fun compareTo (Lorg/kotools/types/number/Decimal;)I
+	public abstract fun equals (Ljava/lang/Object;)Z
+	public abstract fun hashCode ()I
+	public abstract fun toString ()Ljava/lang/String;
+}
+
+public final class org/kotools/types/number/Decimal$Companion {
+	public final fun fromString (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
+	public final fun fromStringOrNull (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
+	public final fun of (J)Lorg/kotools/types/number/Decimal;
 }
 

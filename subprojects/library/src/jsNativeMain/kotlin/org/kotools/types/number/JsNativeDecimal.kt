@@ -1,6 +1,7 @@
-package org.kotools.types
+package org.kotools.types.number
 
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import org.kotools.types.ExperimentalKotoolsTypesApi
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal actual fun Decimal(value: Long): Decimal {
@@ -9,8 +10,8 @@ internal actual fun Decimal(value: Long): Decimal {
 }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal actual fun Decimal(text: String): Decimal {
-    val x: BigDecimal = BigDecimal.parseString(text)
+internal actual fun Decimal(value: String): Decimal {
+    val x: BigDecimal = BigDecimal.parseString(value)
     return JsNativeDecimal(x)
 }
 

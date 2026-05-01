@@ -3,6 +3,7 @@ package org.kotools.types
 import org.kotools.types.Integer.Companion.from
 import org.kotools.types.Integer.Companion.fromDecimal
 import org.kotools.types.Integer.Companion.fromDecimalOrNull
+import org.kotools.types.number.Decimal
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 

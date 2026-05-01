@@ -25,3 +25,7 @@ Contains types such as [NotBlankString] for manipulating text.
 
 Core namespace of Kotools Types, containing public APIs intended for general
 use.
+
+# Package org.kotools.types.number
+
+Provides types for representing and manipulating numeric values.

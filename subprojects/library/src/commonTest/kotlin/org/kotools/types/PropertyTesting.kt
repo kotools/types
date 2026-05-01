@@ -1,5 +1,7 @@
 package org.kotools.types
 
+import org.kotools.types.number.Decimal
+
 internal inline fun repeatTest(block: () -> Unit): Unit =
     repeat(times = 1_000) { block() }
 
