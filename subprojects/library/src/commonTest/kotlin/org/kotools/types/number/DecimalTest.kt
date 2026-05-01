@@ -263,6 +263,78 @@ class DecimalTest {
             }
         }
 
+    @Test
+    fun plusIsNeutralWithZero(): Unit = repeatTest {
+        val x: Decimal = Decimal.random()
+        val zero: Decimal = Decimal.fromString(randomZeroDecimalString())
+
+        // Neutrality: x + 0 = 0 + x = x
+        assertSame(expected = x, actual = x + zero)
+        assertSame(expected = x, actual = zero + x)
+    }
+
+    @Test
+    fun plusDoesNotOverflowWithPositiveDecimalNumbers(): Unit = repeatTest {
+        val x: Decimal = Decimal.fromString(randomPositiveDecimalString())
+        val y: Decimal = Decimal.fromString(randomPositiveDecimalString())
+
+        val actual: Decimal = x + y
+
+        assertTrue("$actual must be greater than ${x}.") { actual > x }
+        assertTrue("$actual must be greater than ${y}.") { actual > y }
+    }
+
+    @Test
+    fun plusDoesNotOverflowWithNegativeDecimalNumbers(): Unit = repeatTest {
+        val x: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
+
+        val actual: Decimal = x + y
+
+        assertTrue("$actual must be less than ${x}.") { actual < x }
+        assertTrue("$actual must be less than ${y}.") { actual < y }
+    }
+
+    @Test
+    fun plusIsCommutative(): Unit = repeatTest {
+        val x: Decimal = Decimal.random()
+        val y: Decimal = Decimal.random()
+
+        // Commutativity: x + y = y + x
+        assertEquals(x + y, y + x, "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun plusIsAssociative(): Unit = repeatTest {
+        val x: Decimal = Decimal.random()
+        val y: Decimal = Decimal.random()
+        val z: Decimal = Decimal.random()
+
+        // Associativity: (x + y) + z = x + (y + z)
+        assertEquals((x + y) + z, x + (y + z), "Inputs: x = $x, y = $y, z = $z")
+    }
+
+    @Test
+    fun plusHasAdditiveInverse(): Unit = repeatTest {
+        val x: Decimal = Decimal.random()
+
+        // Additive inverse: x + (-x) = 0
+        assertEquals(Decimal.of(0), x + (-x), "Input: $x")
+    }
+
+    @Test
+    fun plusPreservesOrdering(): Unit = repeatTest {
+        val x: Decimal = Decimal.fromString(randomPositiveDecimalString())
+        val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        val z: Decimal = Decimal.random()
+
+        // Ordering preservation: if x > y, then (x + z) > (y + z)
+        assertTrue("$x must be greater than ${y}.") { x > y }
+        assertTrue("($x + $z) must be greater than ($y + $z).") {
+            x + z > y + z
+        }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

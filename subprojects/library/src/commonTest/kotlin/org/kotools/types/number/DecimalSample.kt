@@ -76,6 +76,15 @@ class DecimalSample {
         check(-x == y)
     }
 
+    @Test
+    fun plus() {
+        val x: Decimal = Decimal.fromString("1.1")
+        val y: Decimal = Decimal.fromString("2.002")
+        val zero: Decimal = Decimal.of(0)
+        check(x + zero === x)
+        check(x + y == Decimal.fromString("3.102"))
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

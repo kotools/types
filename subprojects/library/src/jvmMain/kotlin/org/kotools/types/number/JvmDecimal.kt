@@ -37,7 +37,16 @@ private class JvmDecimal(private val value: BigDecimal) : Decimal {
         if (this.value == BigDecimal.ZERO) this
         else JvmDecimal(-this.value)
 
+    override fun plus(other: Decimal): Decimal {
+        check(other is JvmDecimal)
+        if (this.value == BigDecimal.ZERO) return other
+        if (other.value == BigDecimal.ZERO) return this
+        val sum: String = this.value.add(other.value)
+            .toPlainString()
+        return Decimal.fromString(sum)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
-    override fun toString(): String = this.value.toString()
+    override fun toString(): String = this.value.toPlainString()
 }

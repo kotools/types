@@ -35,6 +35,15 @@ private class JsNativeDecimal(private val value: BigDecimal) : Decimal {
         if (this.value == BigDecimal.ZERO) this
         else JsNativeDecimal(-this.value)
 
+    override fun plus(other: Decimal): Decimal {
+        check(other is JsNativeDecimal)
+        return when {
+            this.value == BigDecimal.ZERO -> other
+            other.value == BigDecimal.ZERO -> this
+            else -> JsNativeDecimal(this.value + other.value)
+        }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.value.toStringExpanded()

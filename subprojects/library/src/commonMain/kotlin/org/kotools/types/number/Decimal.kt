@@ -210,6 +210,16 @@ public interface Decimal {
      */
     public operator fun unaryMinus(): Decimal
 
+    /**
+     * Returns a [Decimal] representing the sum of this decimal number and the
+     * [other] one (`this + other`).
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.DecimalSample.plus
+     */
+    public operator fun plus(other: Decimal): Decimal
+
     // ------------------------------ Conversions ------------------------------
 
     /**
