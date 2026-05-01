@@ -23,5 +23,5 @@ Contains types such as [NotBlankString] for manipulating text.
 
 # Package org.kotools.types
 
-Contains new implementations of declarations present in the `kotools.types.*`
-packages, which will be deprecated incrementally.
+Core namespace of Kotools Types, containing public APIs intended for general
+use.
