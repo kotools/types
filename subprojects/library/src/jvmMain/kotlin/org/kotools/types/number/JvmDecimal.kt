@@ -31,6 +31,12 @@ private class JvmDecimal(private val value: BigDecimal) : Decimal {
         return this.value.compareTo(other.value)
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): Decimal =
+        if (this.value == BigDecimal.ZERO) this
+        else JvmDecimal(-this.value)
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.value.toString()

@@ -196,6 +196,20 @@ public interface Decimal {
      */
     public operator fun compareTo(other: Decimal): Int
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this decimal number.
+     *
+     * If this decimal number is zero, this function returns the same instance
+     * of [Decimal].
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.DecimalSample.unaryMinus
+     */
+    public operator fun unaryMinus(): Decimal
+
     // ------------------------------ Conversions ------------------------------
 
     /**

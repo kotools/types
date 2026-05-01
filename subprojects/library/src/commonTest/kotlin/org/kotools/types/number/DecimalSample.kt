@@ -64,6 +64,18 @@ class DecimalSample {
         check(Decimal.of(0) < Decimal.fromString("0.001"))
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinus() {
+        val zero: Decimal = Decimal.of(0)
+        check(-zero === zero)
+
+        val x: Decimal = Decimal.fromString("-0.120")
+        val y: Decimal = Decimal.fromString("0.12")
+        check(-x == y)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

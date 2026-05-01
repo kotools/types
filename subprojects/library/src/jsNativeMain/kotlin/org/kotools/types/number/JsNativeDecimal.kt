@@ -29,6 +29,12 @@ private class JsNativeDecimal(private val value: BigDecimal) : Decimal {
         return this.value.compareTo(other.value)
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): Decimal =
+        if (this.value == BigDecimal.ZERO) this
+        else JsNativeDecimal(-this.value)
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.value.toStringExpanded()

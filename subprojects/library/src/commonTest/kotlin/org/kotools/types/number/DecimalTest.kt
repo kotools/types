@@ -17,6 +17,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -217,6 +218,50 @@ class DecimalTest {
         val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
         assertTrue(message = "Inputs: x = $x, y = $y") { x > y }
     }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinusReturnsSameInstanceOnZero(): Unit = repeatTest {
+        val decimalString: String = randomZeroDecimalString()
+        val zero: Decimal = Decimal.fromString(decimalString)
+
+        val actual: Decimal = -zero
+
+        assertSame(expected = zero, actual)
+    }
+
+    @Test
+    fun unaryMinusReturnsNegativeNumberOnPositiveDecimalNumber(): Unit =
+        repeatTest {
+            val decimalString: String = randomPositiveDecimalString()
+            val number: Decimal = Decimal.fromString(decimalString)
+
+            val actual: Decimal = -number
+
+            val expected: Decimal = Decimal.fromString("-$number")
+            assertEquals(expected, actual, message = "Input: $number")
+            assertTrue(message = "$actual must be negative (< 0).") {
+                actual < Decimal.of(0)
+            }
+        }
+
+    @Test
+    fun unaryMinusReturnsPositiveNumberOnNegativeDecimalNumber(): Unit =
+        repeatTest {
+            val decimalString: String = randomNegativeDecimalString()
+            val number: Decimal = Decimal.fromString(decimalString)
+
+            val actual: Decimal = -number
+
+            val magnitude: String = number.toString()
+                .removePrefix("-")
+            val expected: Decimal = Decimal.fromString(magnitude)
+            assertEquals(expected, actual, message = "Input: $number")
+            assertTrue(message = "$actual must be positive (> 0).") {
+                actual > Decimal.of(0)
+            }
+        }
 
     // ------------------------------ Conversions ------------------------------
 
