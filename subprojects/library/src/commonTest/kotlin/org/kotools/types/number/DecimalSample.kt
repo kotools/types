@@ -28,9 +28,9 @@ class DecimalSample {
         // Given
         val value = 42L
         // When
-        val actual: Decimal = Decimal.of(value)
+        val result: Decimal = Decimal.of(value)
         // Then
-        check("$actual" == "42")
+        check("$result" == "42")
     }
 
     @Test

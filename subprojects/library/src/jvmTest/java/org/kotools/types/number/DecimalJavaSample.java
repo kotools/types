@@ -11,9 +11,9 @@ public class DecimalJavaSample {
         // Given
         final long value = 42;
         // When
-        final Decimal actual = Decimal.of(value);
+        final Decimal result = Decimal.of(value);
         // Then
-        final String s = String.valueOf(actual);
+        final String s = String.valueOf(result);
         final String expected = String.valueOf(value);
         final boolean check = expected.equals(s);
         if (!check) throw new IllegalStateException("Check failed.");
