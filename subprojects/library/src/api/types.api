@@ -390,21 +390,3 @@ public final class org/kotools/types/Integer$DefaultImpls {
 	public static fun rem (Lorg/kotools/types/Integer;Lorg/kotools/types/Integer;)Lorg/kotools/types/Integer;
 }
 
-public abstract interface class org/kotools/types/number/Decimal {
-	public static final field Companion Lorg/kotools/types/number/Decimal$Companion;
-	public abstract fun compareTo (Lorg/kotools/types/number/Decimal;)I
-	public abstract fun equals (Ljava/lang/Object;)Z
-	public abstract fun hashCode ()I
-	public static fun of (J)Lorg/kotools/types/number/Decimal;
-	public static fun parse (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
-	public abstract fun plus (Lorg/kotools/types/number/Decimal;)Lorg/kotools/types/number/Decimal;
-	public abstract fun toString ()Ljava/lang/String;
-	public abstract fun unaryMinus ()Lorg/kotools/types/number/Decimal;
-}
-
-public final class org/kotools/types/number/Decimal$Companion {
-	public final fun of (J)Lorg/kotools/types/number/Decimal;
-	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
-	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
-}
-

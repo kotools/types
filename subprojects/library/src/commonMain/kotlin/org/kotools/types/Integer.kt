@@ -3,7 +3,6 @@ package org.kotools.types
 import org.kotools.types.Integer.Companion.from
 import org.kotools.types.Integer.Companion.fromDecimal
 import org.kotools.types.Integer.Companion.fromDecimalOrNull
-import org.kotools.types.number.Decimal
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -182,7 +181,7 @@ public interface Integer {
         @JvmStatic
         public fun fromDecimal(text: String): Integer {
             require(this.isValid(text)) { "\"$text\" is not a valid integer." }
-            val normalizedText: String = Decimal.normalize(text)
+            val normalizedText: String = this.normalize(text)
             return Integer(normalizedText)
         }
 
@@ -219,13 +218,25 @@ public interface Integer {
         @JvmSynthetic
         public fun fromDecimalOrNull(text: String): Integer? {
             if (!this.isValid(text)) return null
-            val normalizedText: String = Decimal.normalize(text)
+            val normalizedText: String = this.normalize(text)
             return Integer(normalizedText)
         }
 
         @JvmSynthetic
         internal fun isValid(text: String): Boolean =
             text matches Regex("""^[+-]?\d+$""")
+
+        private fun normalize(value: String): String {
+            val isZero: Boolean = value.filter(Char::isDigit)
+                .all { it == '0' }
+            if (isZero) return "0"
+            val sign: String = if (value.startsWith('-')) "-" else ""
+            val integer: String = value.substringBefore('.')
+                .removePrefix("+")
+                .removePrefix("-")
+                .trimStart('0')
+            return "$sign$integer"
+        }
 
         @JvmSynthetic
         internal fun zero(): Integer = this.from(0)
