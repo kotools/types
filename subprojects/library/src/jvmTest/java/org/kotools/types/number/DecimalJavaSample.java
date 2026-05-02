@@ -18,4 +18,16 @@ public class DecimalJavaSample {
         final boolean check = expected.equals(s);
         if (!check) throw new IllegalStateException("Check failed.");
     }
+
+    @Test
+    void parse() {
+        // Given
+        final String value = "+042.0";
+        // When
+        final Decimal result = Decimal.parse(value);
+        // Then
+        final Decimal expected = Decimal.of(42);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
 }

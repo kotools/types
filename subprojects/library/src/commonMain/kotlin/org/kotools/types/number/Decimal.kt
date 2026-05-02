@@ -115,13 +115,33 @@ public interface Decimal {
          * trailing zeros from the [value]. As a result, calling this function
          * with `1`, `+1.00` and `001` produces the same result.
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: org.kotools.types.number.DecimalSample.parse
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.DecimalJavaSample.parse
+         * </details>
+         * <br>
          *
          * See [Decimal.Companion.parseOrNull] for returning `null` instead of
          * throwing an exception in case of invalid [value].
          */
+        @JvmStatic
         public fun parse(value: String): Decimal {
             require(this.isValid(value)) {
                 "\"$value\" is not a valid decimal number."

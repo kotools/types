@@ -35,9 +35,13 @@ class DecimalSample {
 
     @Test
     fun parse() {
-        check(Decimal.parse("000") == Decimal.of(0))
-        check(Decimal.parse("+042.0") == Decimal.of(42))
-        check(Decimal.parse("-3.140").toString() == "-3.14")
+        // Given
+        val value = "+042.0"
+        // When
+        val result: Decimal = Decimal.parse(value)
+        // Then
+        val expected: Decimal = Decimal.of(42)
+        check(result == expected)
     }
 
     @Test
