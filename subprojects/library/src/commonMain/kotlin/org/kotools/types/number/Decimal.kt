@@ -1,6 +1,7 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import kotlin.jvm.JvmStatic
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal expect fun Decimal(value: Long): Decimal
@@ -68,10 +69,29 @@ public interface Decimal {
          * The resulting [Decimal] has no fractional part and is equivalent to
          * the mathematical integer defined by [value].
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: org.kotools.types.number.DecimalSample.ofLong
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.DecimalJavaSample.ofLong
+         * </details>
          */
+        @JvmStatic
         public fun of(value: Long): Decimal = Decimal(value)
 
         /**

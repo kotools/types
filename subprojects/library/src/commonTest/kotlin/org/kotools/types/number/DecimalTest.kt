@@ -25,14 +25,14 @@ class DecimalTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun ofLongUsesStringRepresentationOfSpecifiedValue(): Unit =
-        repeatTest {
-            val number: Long = Random.nextLong()
-            val actual: String = Decimal.of(number)
-                .toString()
-            val expected: String = number.toString()
-            assertEquals(expected, actual, message = "Input: $number")
-        }
+    fun ofLongKeepsRepresentationOfSpecifiedValue(): Unit = repeatTest {
+        // Given
+        val value: Long = Random.nextLong()
+        // When
+        val actual: Decimal = Decimal.of(value)
+        // Then
+        assertEquals("$value", "$actual", message = "Input: $value")
+    }
 
     @Test
     fun parseRepresentsZeroUniquely(): Unit = repeatTest {

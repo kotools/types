@@ -25,9 +25,12 @@ class DecimalSample {
 
     @Test
     fun ofLong() {
-        check(Decimal.of(0).toString() == "0")
-        check(Decimal.of(42).toString() == "42")
-        check(Decimal.of(-3).toString() == "-3")
+        // Given
+        val value = 42L
+        // When
+        val actual: Decimal = Decimal.of(value)
+        // Then
+        check("$actual" == "42")
     }
 
     @Test
