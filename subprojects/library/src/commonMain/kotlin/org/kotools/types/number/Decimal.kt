@@ -97,12 +97,12 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.DecimalSample.fromString
+         * SAMPLE: org.kotools.types.number.DecimalSample.parse
          *
          * See [Decimal.Companion.fromStringOrNull] for returning `null` instead
          * of throwing an exception in case of invalid [value].
          */
-        public fun fromString(value: String): Decimal {
+        public fun parse(value: String): Decimal {
             require(this.isValid(value)) {
                 "\"$value\" is not a valid decimal number."
             }
@@ -134,8 +134,8 @@ public interface Decimal {
          *
          * SAMPLE: org.kotools.types.number.DecimalSample.fromStringOrNull
          *
-         * See [Decimal.Companion.fromString] for throwing an exception instead
-         * of returning `null` in case of invalid [value].
+         * See [Decimal.Companion.parse] for throwing an exception instead of
+         * returning `null` in case of invalid [value].
          */
         public fun fromStringOrNull(value: String): Decimal? {
             if (!this.isValid(value)) return null

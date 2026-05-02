@@ -43,7 +43,7 @@ private class JvmDecimal(private val value: BigDecimal) : Decimal {
         if (other.value == BigDecimal.ZERO) return this
         val sum: String = this.value.add(other.value)
             .toPlainString()
-        return Decimal.fromString(sum)
+        return Decimal.parse(sum)
     }
 
     // ------------------------------ Conversions ------------------------------

@@ -31,10 +31,10 @@ class DecimalSample {
     }
 
     @Test
-    fun fromString() {
-        check(Decimal.fromString("000") == Decimal.of(0))
-        check(Decimal.fromString("+042.0") == Decimal.of(42))
-        check(Decimal.fromString("-3.140").toString() == "-3.14")
+    fun parse() {
+        check(Decimal.parse("000") == Decimal.of(0))
+        check(Decimal.parse("+042.0") == Decimal.of(42))
+        check(Decimal.parse("-3.140").toString() == "-3.14")
     }
 
     @Test
@@ -49,8 +49,8 @@ class DecimalSample {
     @Test
     fun equality() {
         val x: Decimal = Decimal.of(1)
-        val y: Decimal = Decimal.fromString("+0001")
-        val z: Decimal = Decimal.fromString("+1.000")
+        val y: Decimal = Decimal.parse("+0001")
+        val z: Decimal = Decimal.parse("+1.000")
 
         val equality: Boolean = x == y && y == z
         val hashConformity: Boolean = x.hashCode() == y.hashCode()
@@ -61,7 +61,7 @@ class DecimalSample {
 
     @Test
     fun compareTo() {
-        check(Decimal.of(0) < Decimal.fromString("0.001"))
+        check(Decimal.of(0) < Decimal.parse("0.001"))
     }
 
     // ------------------------- Arithmetic operations -------------------------
@@ -71,18 +71,18 @@ class DecimalSample {
         val zero: Decimal = Decimal.of(0)
         check(-zero === zero)
 
-        val x: Decimal = Decimal.fromString("-0.120")
-        val y: Decimal = Decimal.fromString("0.12")
+        val x: Decimal = Decimal.parse("-0.120")
+        val y: Decimal = Decimal.parse("0.12")
         check(-x == y)
     }
 
     @Test
     fun plus() {
-        val x: Decimal = Decimal.fromString("1.1")
-        val y: Decimal = Decimal.fromString("2.002")
+        val x: Decimal = Decimal.parse("1.1")
+        val y: Decimal = Decimal.parse("2.002")
         val zero: Decimal = Decimal.of(0)
         check(x + zero === x)
-        check(x + y == Decimal.fromString("3.102"))
+        check(x + y == Decimal.parse("3.102"))
     }
 
     // ------------------------------ Conversions ------------------------------
@@ -90,7 +90,7 @@ class DecimalSample {
     @Test
     fun toStringOverride() {
         check(Decimal.of(0).toString() == "0")
-        check(Decimal.fromString("+42").toString() == "42")
-        check(Decimal.fromString("-3.14").toString() == "-3.14")
+        check(Decimal.parse("+42").toString() == "42")
+        check(Decimal.parse("-3.14").toString() == "-3.14")
     }
 }

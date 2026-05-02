@@ -28,7 +28,7 @@ internal fun Integer.Companion.randomExcept(illegal: Integer): Integer {
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Decimal.Companion.random(): Decimal {
     val text: String = randomNonZeroDecimalString()
-    return Decimal.fromString(text)
+    return Decimal.parse(text)
 }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)

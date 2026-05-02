@@ -35,71 +35,85 @@ class DecimalTest {
         }
 
     @Test
-    fun fromStringRepresentsZeroUniquely(): Unit = repeatTest {
-        val text: String = randomZeroDecimalString()
-        val actual: Decimal = Decimal.fromString(text)
+    fun parseRepresentsZeroUniquely(): Unit = repeatTest {
+        // Given
+        val value: String = randomZeroDecimalString()
+        // When
+        val actual: Decimal = Decimal.parse(value)
+        // Then
         val expected: Decimal = Decimal.of(0)
-        assertEquals(expected, actual, message = "Input: $text")
+        assertEquals(expected, actual, message = "Input: $value")
     }
 
     @Test
-    fun fromStringRemovesPlusSignFromPositiveDecimalNumbers(): Unit =
-        repeatTest {
-            val text: String = randomPositiveDecimalString()
-            val actual: Boolean = Decimal.fromString(text)
-                .toString()
-                .startsWith('+')
-            assertFalse(actual, message = "Input: $text")
-        }
-
-    @Test
-    fun fromStringKeepsMinusSignFromNegativeDecimalNumbers(): Unit =
-        repeatTest {
-            val text: String = randomNegativeDecimalString()
-            val actual: Boolean = Decimal.fromString(text)
-                .toString()
-                .startsWith('-')
-            assertTrue(actual, message = "Input: $text")
-        }
-
-    @Test
-    fun fromStringRemovesLeadingZerosFromNonZeroDecimalNumbers(): Unit =
-        repeatTest {
-            val text: String = randomNonZeroDecimalString()
-            val actual: Boolean = Decimal.fromString(text)
-                .toString()
-                .let { it.startsWith("0.") || !it.startsWith('0') }
-            assertTrue(actual, message = "Input: $text")
-        }
-
-    @Test
-    fun fromStringRemovesTrailingZerosFromDecimalNumbers(): Unit = repeatTest {
-        val text: String = randomNonZeroDecimalString()
-        val actual: Boolean = Decimal.fromString(text)
-            .toString()
-            .let { '.' !in it || !it.endsWith('0') }
-        assertTrue(actual, message = "Input: $text")
+    fun parseRemovesPlusSignFromPositiveDecimalNumbers(): Unit = repeatTest {
+        // Given
+        val value: String = randomPositiveDecimalString()
+        // When
+        val actual: Decimal = Decimal.parse(value)
+        // Then
+        assertFalse(message = "Input: $value") { "$actual".startsWith('+') }
     }
 
     @Test
-    fun fromStringIsStableWithStringRepresentation(): Unit = repeatTest {
-        val text: String = randomNonZeroDecimalString()
-        val x: Decimal = Decimal.fromString(text)
-        val y: Decimal = Decimal.fromString("$x")
-        assertEquals(x, y, message = "Input: $text")
+    fun parseKeepsMinusSignFromNegativeDecimalNumbers(): Unit = repeatTest {
+        // Given
+        val value: String = randomNegativeDecimalString()
+        // When
+        val actual: Decimal = Decimal.parse(value)
+        // Then
+        assertTrue(message = "Input: $value") { "$actual".startsWith('-') }
     }
 
     @Test
-    fun fromStringThrowsExceptionWithMalformedDecimalStrings(): Unit =
-        repeatTest {
-            val text: String = randomMalformedDecimalString()
-            val exception: IllegalArgumentException = assertFailsWith {
-                Decimal.fromString(text)
-            }
-            val actual: String? = exception.message
-            val expected = "\"$text\" is not a valid decimal number."
-            assertEquals(expected, actual)
+    fun parseRemovesLeadingZerosFromNonZeroDecimalNumbers(): Unit = repeatTest {
+        // Given
+        val value: String = randomNonZeroDecimalString()
+        // When
+        val actual: Decimal = Decimal.parse(value)
+        // Then
+        assertTrue(message = "Input: $value") {
+            val s: String = actual.toString()
+            s.startsWith("0.") || !s.startsWith('0')
         }
+    }
+
+    @Test
+    fun parseRemovesTrailingZerosFromDecimalNumbers(): Unit = repeatTest {
+        // Given
+        val value: String = randomNonZeroDecimalString()
+        // When
+        val actual: Decimal = Decimal.parse(value)
+        // Then
+        assertTrue(message = "Input: $value") {
+            val s: String = actual.toString()
+            '.' !in s || !s.endsWith('0')
+        }
+    }
+
+    @Test
+    fun parseIsStableWithStringRepresentation(): Unit = repeatTest {
+        // Given
+        val value: String = randomNonZeroDecimalString()
+        // When
+        val actual: Decimal = Decimal.parse(value)
+        // Then
+        val expected: Decimal = Decimal.parse("$actual")
+        assertEquals(expected, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun parseThrowsExceptionWithMalformedDecimalStrings(): Unit = repeatTest {
+        // Given
+        val value: String = randomMalformedDecimalString()
+        // When & Then
+        val exception: IllegalArgumentException = assertFailsWith {
+            Decimal.parse(value)
+        }
+        val actual: String? = exception.message
+        val expected = "\"$value\" is not a valid decimal number."
+        assertEquals(expected, actual)
+    }
 
     @Test
     fun fromStringOrNullRepresentsZeroUniquely(): Unit = repeatTest {
@@ -174,7 +188,7 @@ class DecimalTest {
     @Test
     fun equalsAndHashCodeWithSameDecimalNumbers(): Unit = repeatTest {
         val x: Decimal = Decimal.random()
-        val y: Decimal = Decimal.fromString("$x")
+        val y: Decimal = Decimal.parse("$x")
         val message = "Inputs: x = $x, y = $y"
         assertEquals(x, y, message)
         assertEquals(x.hashCode(), y.hashCode(), message)
@@ -201,21 +215,21 @@ class DecimalTest {
     @Test
     fun compareToReturnsZeroWithSameDecimal(): Unit = repeatTest {
         val x: Decimal = Decimal.random()
-        val y: Decimal = Decimal.fromString("$x")
+        val y: Decimal = Decimal.parse("$x")
         assertTrue(message = "Inputs: x = $x, y = $y") { x.compareTo(y) == 0 }
     }
 
     @Test
     fun compareToReturnsNegativeNumberWithGreaterDecimal(): Unit = repeatTest {
-        val x: Decimal = Decimal.fromString(randomNegativeDecimalString())
-        val y: Decimal = Decimal.fromString(randomPositiveDecimalString())
+        val x: Decimal = Decimal.parse(randomNegativeDecimalString())
+        val y: Decimal = Decimal.parse(randomPositiveDecimalString())
         assertTrue(message = "Inputs: x = $x, y = $y") { x < y }
     }
 
     @Test
     fun compareToReturnsPositiveNumberWithLessDecimal(): Unit = repeatTest {
-        val x: Decimal = Decimal.fromString(randomPositiveDecimalString())
-        val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        val x: Decimal = Decimal.parse(randomPositiveDecimalString())
+        val y: Decimal = Decimal.parse(randomNegativeDecimalString())
         assertTrue(message = "Inputs: x = $x, y = $y") { x > y }
     }
 
@@ -224,7 +238,7 @@ class DecimalTest {
     @Test
     fun unaryMinusReturnsSameInstanceOnZero(): Unit = repeatTest {
         val decimalString: String = randomZeroDecimalString()
-        val zero: Decimal = Decimal.fromString(decimalString)
+        val zero: Decimal = Decimal.parse(decimalString)
 
         val actual: Decimal = -zero
 
@@ -235,11 +249,11 @@ class DecimalTest {
     fun unaryMinusReturnsNegativeNumberOnPositiveDecimalNumber(): Unit =
         repeatTest {
             val decimalString: String = randomPositiveDecimalString()
-            val number: Decimal = Decimal.fromString(decimalString)
+            val number: Decimal = Decimal.parse(decimalString)
 
             val actual: Decimal = -number
 
-            val expected: Decimal = Decimal.fromString("-$number")
+            val expected: Decimal = Decimal.parse("-$number")
             assertEquals(expected, actual, message = "Input: $number")
             assertTrue(message = "$actual must be negative (< 0).") {
                 actual < Decimal.of(0)
@@ -250,13 +264,13 @@ class DecimalTest {
     fun unaryMinusReturnsPositiveNumberOnNegativeDecimalNumber(): Unit =
         repeatTest {
             val decimalString: String = randomNegativeDecimalString()
-            val number: Decimal = Decimal.fromString(decimalString)
+            val number: Decimal = Decimal.parse(decimalString)
 
             val actual: Decimal = -number
 
             val magnitude: String = number.toString()
                 .removePrefix("-")
-            val expected: Decimal = Decimal.fromString(magnitude)
+            val expected: Decimal = Decimal.parse(magnitude)
             assertEquals(expected, actual, message = "Input: $number")
             assertTrue(message = "$actual must be positive (> 0).") {
                 actual > Decimal.of(0)
@@ -266,7 +280,7 @@ class DecimalTest {
     @Test
     fun plusIsNeutralWithZero(): Unit = repeatTest {
         val x: Decimal = Decimal.random()
-        val zero: Decimal = Decimal.fromString(randomZeroDecimalString())
+        val zero: Decimal = Decimal.parse(randomZeroDecimalString())
 
         // Neutrality: x + 0 = 0 + x = x
         assertSame(expected = x, actual = x + zero)
@@ -275,8 +289,8 @@ class DecimalTest {
 
     @Test
     fun plusDoesNotOverflowWithPositiveDecimalNumbers(): Unit = repeatTest {
-        val x: Decimal = Decimal.fromString(randomPositiveDecimalString())
-        val y: Decimal = Decimal.fromString(randomPositiveDecimalString())
+        val x: Decimal = Decimal.parse(randomPositiveDecimalString())
+        val y: Decimal = Decimal.parse(randomPositiveDecimalString())
 
         val actual: Decimal = x + y
 
@@ -286,8 +300,8 @@ class DecimalTest {
 
     @Test
     fun plusDoesNotOverflowWithNegativeDecimalNumbers(): Unit = repeatTest {
-        val x: Decimal = Decimal.fromString(randomNegativeDecimalString())
-        val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        val x: Decimal = Decimal.parse(randomNegativeDecimalString())
+        val y: Decimal = Decimal.parse(randomNegativeDecimalString())
 
         val actual: Decimal = x + y
 
@@ -324,8 +338,8 @@ class DecimalTest {
 
     @Test
     fun plusPreservesOrdering(): Unit = repeatTest {
-        val x: Decimal = Decimal.fromString(randomPositiveDecimalString())
-        val y: Decimal = Decimal.fromString(randomNegativeDecimalString())
+        val x: Decimal = Decimal.parse(randomPositiveDecimalString())
+        val y: Decimal = Decimal.parse(randomNegativeDecimalString())
         val z: Decimal = Decimal.random()
 
         // Ordering preservation: if x > y, then (x + z) > (y + z)
@@ -340,7 +354,7 @@ class DecimalTest {
     @Test
     fun toStringReturnsParseableDecimalString(): Unit = repeatTest {
         val x: Decimal = Decimal.random()
-        val y: Decimal = Decimal.fromString("$x")
+        val y: Decimal = Decimal.parse("$x")
         assertEquals(x, y, message = "Input: $x")
     }
 }
