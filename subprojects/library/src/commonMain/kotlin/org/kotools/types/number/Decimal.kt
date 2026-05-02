@@ -99,8 +99,8 @@ public interface Decimal {
          *
          * SAMPLE: org.kotools.types.number.DecimalSample.parse
          *
-         * See [Decimal.Companion.fromStringOrNull] for returning `null` instead
-         * of throwing an exception in case of invalid [value].
+         * See [Decimal.Companion.parseOrNull] for returning `null` instead of
+         * throwing an exception in case of invalid [value].
          */
         public fun parse(value: String): Decimal {
             require(this.isValid(value)) {
@@ -132,12 +132,12 @@ public interface Decimal {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.DecimalSample.fromStringOrNull
+         * SAMPLE: org.kotools.types.number.DecimalSample.parseOrNull
          *
          * See [Decimal.Companion.parse] for throwing an exception instead of
          * returning `null` in case of invalid [value].
          */
-        public fun fromStringOrNull(value: String): Decimal? {
+        public fun parseOrNull(value: String): Decimal? {
             if (!this.isValid(value)) return null
             val normalizedText: String = this.normalize(value)
             return Decimal(normalizedText)

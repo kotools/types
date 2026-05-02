@@ -38,10 +38,10 @@ class DecimalSample {
     }
 
     @Test
-    fun fromStringOrNull() {
-        check(Decimal.fromStringOrNull("000") == Decimal.of(0))
-        check(Decimal.fromStringOrNull("+042.0") == Decimal.of(42))
-        check(Decimal.fromStringOrNull("-3.140").toString() == "-3.14")
+    fun parseOrNull() {
+        check(Decimal.parseOrNull("000") == Decimal.of(0))
+        check(Decimal.parseOrNull("+042.0") == Decimal.of(42))
+        check(Decimal.parseOrNull("-3.140").toString() == "-3.14")
     }
 
     // ------------------------------ Comparisons ------------------------------
