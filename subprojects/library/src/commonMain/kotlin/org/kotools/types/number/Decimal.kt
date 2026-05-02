@@ -2,6 +2,7 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal expect fun Decimal(value: Long): Decimal
@@ -170,13 +171,25 @@ public interface Decimal {
          * trailing zeros from the [value]. As a result, calling this function
          * with `1`, `+1.00` and `001` produces the same result.
          *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
          * Here's an example of calling this function from Kotlin code:
          *
          * SAMPLE: org.kotools.types.number.DecimalSample.parseOrNull
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code, due to its
+         * non-explicit support for nullable types.
          *
          * See [Decimal.Companion.parse] for throwing an exception instead of
          * returning `null` in case of invalid [value].
          */
+        @JvmSynthetic
         public fun parseOrNull(value: String): Decimal? {
             if (!this.isValid(value)) return null
             val normalizedText: String = this.normalize(value)
