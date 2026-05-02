@@ -361,3 +361,6 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
+public final class org/kotools/types/number/Integer {
+}
+
