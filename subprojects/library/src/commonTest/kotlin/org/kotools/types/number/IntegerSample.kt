@@ -1,7 +1,9 @@
 package org.kotools.types.number
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerSample {
     // -------------------------- Type documentation ---------------------------
 
@@ -13,5 +15,29 @@ class IntegerSample {
         check(x + y == -9223372036854775799) // instead of 9223372036854775817
         check(-x - y == 9223372036854775799) // instead of -9223372036854775817
         check(x * y == -10L) // instead of 92233720368547758070
+    }
+
+    // ------------------------------- Creations -------------------------------
+
+    @Test
+    fun ofLong() {
+        // Given
+        val value: Long = Long.MAX_VALUE
+        // When
+        val result: Integer = Integer.of(value)
+        // Then
+        check("$result" == "$value")
+    }
+
+    // ------------------------------ Conversions ------------------------------
+
+    @Test
+    fun toStringOverride() {
+        // Given
+        val integer: Integer = Integer.of(Long.MAX_VALUE)
+        // When
+        val result: String = integer.toString()
+        // Then
+        check(result == "9223372036854775807")
     }
 }
