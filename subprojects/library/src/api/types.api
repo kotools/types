@@ -361,14 +361,3 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
-public final class org/kotools/types/number/Integer {
-	public static final field Companion Lorg/kotools/types/number/Integer$Companion;
-	public synthetic fun <init> (Lorg/kotools/types/internal/number/PlatformInteger;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun of (J)Lorg/kotools/types/number/Integer;
-	public final fun toString ()Ljava/lang/String;
-}
-
-public final class org/kotools/types/number/Integer$Companion {
-	public final fun of (J)Lorg/kotools/types/number/Integer;
-}
-
