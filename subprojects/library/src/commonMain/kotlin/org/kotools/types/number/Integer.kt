@@ -84,7 +84,7 @@ public class Integer private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.IntegerJavaSample.ofLong
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.ofLong
          * </details>
          */
         @JvmStatic
@@ -118,7 +118,7 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.IntegerJavaSample.toStringOverride
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toStringOverride
      * </details>
      */
     @Suppress("RedundantModalityModifier")
