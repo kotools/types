@@ -1,8 +1,8 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.number.PlatformInteger
 import kotlin.jvm.JvmStatic
-import kotlin.math.abs
 
 /**
  * Represents a mathematical integer, with exact arithmetic.
@@ -56,15 +56,12 @@ import kotlin.math.abs
  */
 @ExperimentalKotoolsTypesApi
 public class Integer private constructor(
-    private val sign: Int,
-    private val magnitude: IntArray
+    private val delegate: PlatformInteger
 ) {
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
-        private val zero: Integer = Integer(sign = 0, magnitude = intArrayOf())
-
         /**
          * Returns an [Integer] representing exactly the specified [value].
          *
@@ -92,29 +89,8 @@ public class Integer private constructor(
          */
         @JvmStatic
         public fun of(value: Long): Integer {
-            if (value == 0L) return this.zero
-            val sign: Int = if (value > 0) 1 else -1
-            val magnitude: IntArray = this.magnitudeOf(value)
-            return Integer(sign, magnitude)
-        }
-
-        private fun magnitudeOf(value: Long): IntArray {
-            if (value == Long.MIN_VALUE) {
-                val retain = 1
-                val magnitude: IntArray = magnitudeOf(-(value + retain))
-                magnitude[0] += retain
-                return magnitude
-            }
-            val base = 1_000_000_000L
-            val digits = IntArray(size = 3)
-            var number: Long = abs(value)
-            var size = 0
-            while (number != 0L) {
-                val remainder: Int = (number % base).toInt()
-                number /= base
-                digits[size++] += remainder
-            }
-            return digits.copyOf(size)
+            val delegate = PlatformInteger(value)
+            return Integer(delegate)
         }
     }
 
@@ -146,17 +122,5 @@ public class Integer private constructor(
      * </details>
      */
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String {
-        if (this == zero) return "0"
-        val builder = StringBuilder()
-        if (this.sign < 0) builder.append('-')
-        val lastIndex: Int = this.magnitude.lastIndex
-        builder.append(this.magnitude[lastIndex])
-        for (index in lastIndex - 1 downTo 0) {
-            val block: Int = this.magnitude[index]
-            val s: String = "$block".padStart(length = 9, padChar = '0')
-            builder.append(s)
-        }
-        return builder.toString()
-    }
+    final override fun toString(): String = this.delegate.toString()
 }

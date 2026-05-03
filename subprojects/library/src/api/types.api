@@ -363,7 +363,7 @@ public abstract interface annotation class org/kotools/types/ExperimentalKotools
 
 public final class org/kotools/types/number/Integer {
 	public static final field Companion Lorg/kotools/types/number/Integer$Companion;
-	public synthetic fun <init> (I[ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lorg/kotools/types/internal/number/PlatformInteger;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public static final fun of (J)Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
 }
