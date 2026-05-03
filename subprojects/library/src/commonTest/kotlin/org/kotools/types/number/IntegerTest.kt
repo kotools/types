@@ -43,7 +43,7 @@ class IntegerTest {
     }
 
     @Test
-    fun ofWithRandomLong() {
+    fun ofWithRandomLong(): Unit = repeatTest {
         // Given
         val value: Long = Random.nextLong()
         // When
@@ -65,7 +65,7 @@ class IntegerTest {
     }
 
     @Test
-    fun toStringIgnoresPlusSignOnPositiveInteger() {
+    fun toStringIgnoresPlusSignOnPositiveInteger(): Unit = repeatTest {
         // Given
         val value: Long = Random.nextLong(1..Long.MAX_VALUE)
         val integer: Integer = Integer.of(value)
@@ -79,7 +79,7 @@ class IntegerTest {
     }
 
     @Test
-    fun toStringKeepsMinusSignOnNegativeInteger() {
+    fun toStringKeepsMinusSignOnNegativeInteger(): Unit = repeatTest {
         // Given
         val value: Long = Random.nextLong(Long.MIN_VALUE..-1)
         val integer: Integer = Integer.of(value)
@@ -91,4 +91,8 @@ class IntegerTest {
         }
         assertEquals(expected = "$value", actual)
     }
+}
+
+private inline fun repeatTest(block: () -> Unit): Unit = repeat(times = 1_000) {
+    block()
 }
