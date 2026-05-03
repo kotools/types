@@ -35,6 +35,16 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void compareTo() {
+        // Given
+        final Integer x = Integer.of(Long.MIN_VALUE);
+        final Integer y = Integer.of(Long.MAX_VALUE);
+        // When & Then
+        final boolean check = x.compareTo(y) < 0;
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

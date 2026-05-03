@@ -21,6 +21,11 @@ private class NativeInteger(
 
     override fun hashCode(): Int = this.delegate.hashCode()
 
+    override fun compareTo(other: PlatformInteger): Int {
+        check(other is NativeInteger)
+        return this.delegate.compare(other.delegate)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

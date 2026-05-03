@@ -103,6 +103,64 @@ class IntegerTest {
             )
         }
 
+    @Test
+    fun compareToReturnsZeroWithSameIntegerValue(): Unit = repeatTest {
+        // Given
+        val value: Long = Random.nextLong()
+        val x: Integer = Integer.of(value)
+        val y: Integer = Integer.of(value)
+        // When
+        val actual: Int = x.compareTo(y)
+        // Then
+        assertEquals(expected = 0, actual, "$x and $y must be equal.")
+    }
+
+    @Test
+    fun compareToReturnsPositiveNumberWithLesserIntegerValue(): Unit =
+        repeatTest {
+            // Given
+            val value: Long = Random.nextLong(
+                (Long.MIN_VALUE + 1)..Long.MAX_VALUE
+            )
+            val x: Integer = Integer.of(value)
+            val y: Integer = Integer.of(Random.nextLong(Long.MIN_VALUE..<value))
+            // When
+            val actual: Int = x.compareTo(y)
+            // Then
+            assertTrue("$x must be greater than ${y}.") { actual > 0 }
+        }
+
+    @Test
+    fun compareToReturnsNegativeNumberWithGreaterIntegerValue(): Unit =
+        repeatTest {
+            // Given
+            val value: Long = Random.nextLong(Long.MIN_VALUE..<Long.MAX_VALUE)
+            val x: Integer = Integer.of(value)
+            val y: Integer = Integer.of(
+                Random.nextLong((value + 1)..Long.MAX_VALUE)
+            )
+            // When
+            val actual: Int = x.compareTo(y)
+            // Then
+            assertTrue("$x must be less than ${y}.") { actual < 0 }
+        }
+
+    @Test
+    fun compareToIsAlignedWithLongComparisons() {
+        // Given
+        val random = Random.Default
+        val xValue: Long = random.nextLong()
+        val x: Integer = Integer.of(xValue)
+        val yValue: Long = random.nextLong()
+        val y: Integer = Integer.of(yValue)
+        // When
+        val actual: Int = x.compareTo(y)
+        // Then
+        val expected: Int = xValue.compareTo(yValue)
+        val message = "Integer must align with Long comparisons."
+        assertEquals(expected, actual, message)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

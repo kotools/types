@@ -154,6 +154,37 @@ public class Integer private constructor(
     @Suppress("RedundantModalityModifier")
     final override fun hashCode(): Int = this.delegate.hashCode()
 
+    /**
+     * Compares this integer with the [other] one for order.
+     *
+     * Returns a negative number, zero, or a positive number as this integer is
+     * less than, equal to, or greater than the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.compareTo
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.compareTo
+     * </details>
+     */
+    public operator fun compareTo(other: Integer): Int =
+        this.delegate.compareTo(other.delegate)
+
     // ------------------------------ Conversions ------------------------------
 
     /**

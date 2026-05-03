@@ -18,6 +18,19 @@ private class JsInteger(private val delegate: BigInt) : PlatformInteger {
 
     override fun hashCode(): Int = this.delegate.hashCode()
 
+    override fun compareTo(other: PlatformInteger): Int {
+        check(other is JsInteger)
+        if (this.delegate == other.delegate) return 0
+        val x: String = this.delegate.toString()
+        val y: String = other.delegate.toString()
+        if (!x.startsWith('-') && y.startsWith('-')) return 1
+        if (x.startsWith('-') && !y.startsWith('-')) return -1
+        val sign: Int = if (x.startsWith('-') && y.startsWith('-')) -1 else 1
+        if (x.length > y.length) return 1 * sign
+        if (x.length < y.length) return -1 * sign
+        return x.compareTo(y) * sign
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

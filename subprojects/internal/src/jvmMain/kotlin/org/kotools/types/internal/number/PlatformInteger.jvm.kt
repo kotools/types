@@ -19,6 +19,11 @@ private class JvmInteger(private val delegate: BigInteger) : PlatformInteger {
 
     override fun hashCode(): Int = this.delegate.hashCode()
 
+    override fun compareTo(other: PlatformInteger): Int {
+        check(other is JvmInteger)
+        return this.delegate.compareTo(other.delegate)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

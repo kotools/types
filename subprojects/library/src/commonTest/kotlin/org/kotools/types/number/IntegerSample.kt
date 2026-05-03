@@ -44,6 +44,15 @@ class IntegerSample {
         check(equality && hashConformity)
     }
 
+    @Test
+    fun compareTo() {
+        // Given
+        val x: Integer = Integer.of(Long.MIN_VALUE)
+        val y: Integer = Integer.of(Long.MAX_VALUE)
+        // When & Then
+        check(x < y)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
