@@ -1,6 +1,8 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.number.PlatformInteger
+import kotlin.jvm.JvmStatic
 
 /**
  * Represents a mathematical integer, with exact arithmetic.
@@ -53,4 +55,72 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
  * @since 5.2.0
  */
 @ExperimentalKotoolsTypesApi
-public class Integer private constructor()
+public class Integer private constructor(
+    private val delegate: PlatformInteger
+) {
+    // ------------------------------- Creations -------------------------------
+
+    /** Contains class-level declarations for the [Integer] type. */
+    public companion object {
+        /**
+         * Returns an [Integer] representing exactly the specified [value].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerSample.ofLong
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.IntegerJavaSample.ofLong
+         * </details>
+         */
+        @JvmStatic
+        public fun of(value: Long): Integer {
+            val delegate = PlatformInteger(value)
+            return Integer(delegate)
+        }
+    }
+
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toStringOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.toStringOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = this.delegate.toString()
+}
