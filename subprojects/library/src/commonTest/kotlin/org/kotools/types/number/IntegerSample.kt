@@ -29,6 +29,21 @@ class IntegerSample {
         check("$result" == "$value")
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun structuralEquality() {
+        // Given
+        val value: Long = Long.MAX_VALUE
+        val x: Integer = Integer.of(value)
+        val y: Integer = Integer.of(value)
+        // When
+        val equality: Boolean = x == y
+        val hashConformity: Boolean = x.hashCode() == y.hashCode()
+        // Then
+        check(equality && hashConformity)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

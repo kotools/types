@@ -52,6 +52,57 @@ class IntegerTest {
         assertEquals(expected = "$value", "$actual")
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun structuralEqualityReturnsTrueWithSameIntegerValue(): Unit = repeatTest {
+        // Given
+        val value: Long = Random.nextLong()
+        val x: Integer = Integer.of(value)
+        val y: Integer = Integer.of(value)
+        // When
+        val equality: Boolean = x == y
+        val hashConformity: Boolean = x.hashCode() == y.hashCode()
+        // Then
+        assertTrue(equality, "$x and $y must be structurally equal.")
+        assertTrue(hashConformity, "$x and $y must have the same hash code.")
+    }
+
+    @Test
+    fun structuralEqualityReturnsFalseWithAnotherTypeThanInteger(): Unit =
+        repeatTest {
+            // Given
+            val value: Long = Random.nextLong()
+            val x: Integer = Integer.of(value)
+            // When
+            val equality: Boolean = x.equals(value)
+            val hashConformity: Boolean = x.hashCode() == value.hashCode()
+            // Then
+            assertFalse(equality, "Integer can't be equal to another type.")
+            assertFalse(
+                hashConformity,
+                "Integer must produce a unique hash code."
+            )
+        }
+
+    @Test
+    fun structuralEqualityReturnsFalseWithAnotherIntegerValue(): Unit =
+        repeatTest {
+            // Given
+            val random = Random.Default
+            val x: Integer = Integer.of(random.nextLong())
+            val y: Integer = Integer.of(random.nextLong())
+            // When
+            val equality: Boolean = x == y
+            val hashConformity: Boolean = x.hashCode() == y.hashCode()
+            // Then
+            assertFalse(equality, "$x and $y must be different.")
+            assertFalse(
+                hashConformity,
+                "$x and $y must have different hash codes."
+            )
+        }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

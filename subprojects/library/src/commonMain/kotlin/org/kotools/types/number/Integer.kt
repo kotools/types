@@ -94,6 +94,66 @@ public class Integer private constructor(
         }
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    /**
+     * Returns `true` if the [other] object is an [Integer] representing the
+     * same numeric value as this one, or returns `false` otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.structuralEquality
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.structuralEquality
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean =
+        other is Integer && this.delegate == other.delegate
+
+    /**
+     * Returns a hash code value for this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.structuralEquality
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.structuralEquality
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = this.delegate.hashCode()
+
     // ------------------------------ Conversions ------------------------------
 
     /**

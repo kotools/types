@@ -19,6 +19,22 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    void structuralEquality() {
+        // Given
+        final long value = Long.MAX_VALUE;
+        final Integer x = Integer.of(value);
+        final Integer y = Integer.of(value);
+        // When
+        final boolean equality = x.equals(y);
+        final boolean hashConformity = x.hashCode() == y.hashCode();
+        // Then
+        final boolean check = equality && hashConformity;
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

@@ -14,6 +14,13 @@ public actual fun PlatformInteger(value: Long): PlatformInteger {
 private class NativeInteger(
     private val delegate: BigInteger
 ) : PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
+    override fun equals(other: Any?): Boolean =
+        other is NativeInteger && this.delegate == other.delegate
+
+    override fun hashCode(): Int = this.delegate.hashCode()
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

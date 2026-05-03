@@ -11,6 +11,13 @@ public actual fun PlatformInteger(value: Long): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class JsInteger(private val delegate: BigInt) : PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
+    override fun equals(other: Any?): Boolean =
+        other is JsInteger && this.delegate == other.delegate
+
+    override fun hashCode(): Int = this.delegate.hashCode()
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()
