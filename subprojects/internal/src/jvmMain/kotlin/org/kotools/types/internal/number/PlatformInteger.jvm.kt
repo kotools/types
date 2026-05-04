@@ -10,6 +10,13 @@ public actual fun PlatformInteger(value: Long): PlatformInteger {
     return JvmInteger(delegate)
 }
 
+@JvmSynthetic
+@OptIn(InternalKotoolsTypesApi::class)
+internal actual fun PlatformInteger(value: String): PlatformInteger {
+    val delegate = BigInteger(value)
+    return JvmInteger(delegate)
+}
+
 @OptIn(InternalKotoolsTypesApi::class)
 private class JvmInteger(private val delegate: BigInteger) : PlatformInteger {
     // ------------------------------ Comparisons ------------------------------

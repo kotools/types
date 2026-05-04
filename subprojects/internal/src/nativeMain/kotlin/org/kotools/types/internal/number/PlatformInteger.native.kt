@@ -11,6 +11,12 @@ public actual fun PlatformInteger(value: Long): PlatformInteger {
 }
 
 @OptIn(InternalKotoolsTypesApi::class)
+internal actual fun PlatformInteger(value: String): PlatformInteger {
+    val delegate: BigInteger = BigInteger.parseString(value)
+    return NativeInteger(delegate)
+}
+
+@OptIn(InternalKotoolsTypesApi::class)
 private class NativeInteger(
     private val delegate: BigInteger
 ) : PlatformInteger {

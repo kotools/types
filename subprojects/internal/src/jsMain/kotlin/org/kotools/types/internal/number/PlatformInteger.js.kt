@@ -10,6 +10,12 @@ public actual fun PlatformInteger(value: Long): PlatformInteger {
 }
 
 @OptIn(InternalKotoolsTypesApi::class)
+internal actual fun PlatformInteger(value: String): PlatformInteger {
+    val delegate = BigInt(value)
+    return JsInteger(delegate)
+}
+
+@OptIn(InternalKotoolsTypesApi::class)
 private class JsInteger(private val delegate: BigInt) : PlatformInteger {
     // ------------------------------ Comparisons ------------------------------
 

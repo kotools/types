@@ -29,6 +29,17 @@ class IntegerSample {
         check("$result" == "$value")
     }
 
+    @Test
+    fun parse() {
+        // Given
+        val value = "+000123"
+        // When
+        val result: Integer = Integer.parse(value)
+        // Then
+        val expected: Integer = Integer.of(123)
+        check(result == expected)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

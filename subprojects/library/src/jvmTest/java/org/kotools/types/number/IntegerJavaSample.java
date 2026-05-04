@@ -19,6 +19,18 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void parse() {
+        // Given
+        final String value = "+000123";
+        // When
+        final Integer result = Integer.parse(value);
+        // Then
+        final Integer expected = Integer.of(123);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

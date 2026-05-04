@@ -2,9 +2,11 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.random.Random
+import kotlin.random.nextInt
 import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -51,6 +53,187 @@ class IntegerTest {
         // Then
         assertEquals(expected = "$value", "$actual")
     }
+
+    @Test
+    fun parseHasUniqueRepresentationOfZero(): Unit = repeatTest {
+        // Given
+        val sign: String = listOf("", "+", "-").random()
+        val digits: String = buildString {
+            val times: Int = Random.nextInt(1..2_000)
+            repeat(times) { this.append(0) }
+        }
+        val value = "$sign$digits"
+        // When
+        val actual: Integer = Integer.parse(value)
+        // Then
+        val expected: Integer = Integer.of(0)
+        assertEquals(expected, actual, "Input: $value")
+    }
+
+    @Test
+    fun parseRemovesPlusSignFromPositiveInteger(): Unit = repeatTest {
+        // Given
+        val digits: String = buildString {
+            val firstDigit: Int = Random.nextInt(1..9)
+            this.append(firstDigit)
+            val times: Int = Random.nextInt(1..32)
+            repeat(times) {
+                val otherDigit: Int = Random.nextInt(0..9)
+                this.append(otherDigit)
+            }
+        }
+        val value = "+$digits"
+        // When
+        val actual: Integer = Integer.parse(value)
+        // Then
+        assertEquals(expected = digits, "$actual", "Input: $value")
+    }
+
+    @Test
+    fun parsePreservesRepresentationOfNegativeInteger(): Unit = repeatTest {
+        // Given
+        val digits: String = buildString {
+            val firstDigit: Int = Random.nextInt(1..9)
+            this.append(firstDigit)
+            val times: Int = Random.nextInt(1..32)
+            repeat(times) {
+                val otherDigit: Int = Random.nextInt(0..9)
+                this.append(otherDigit)
+            }
+        }
+        val value = "-$digits"
+        // When
+        val actual: Integer = Integer.parse(value)
+        // Then
+        assertEquals(expected = value, "$actual", "Input: $value")
+    }
+
+    @Test
+    fun parseRemovesInsignificantLeadingZerosFromInteger(): Unit = repeatTest {
+        // Given
+        val sign: String = listOf("", "+", "-").random()
+        val zeros: String = buildString {
+            val times: Int = Random.nextInt(1..16)
+            repeat(times) { this.append(0) }
+        }
+        val digits: String = buildString {
+            val firstDigit: Int = Random.nextInt(1..9)
+            this.append(firstDigit)
+            val times: Int = Random.nextInt(1..16)
+            repeat(times) {
+                val otherDigit: Int = Random.nextInt(0..9)
+                this.append(otherDigit)
+            }
+        }
+        val value = "$sign$zeros$digits"
+        // When
+        val actual: Integer = Integer.parse(value)
+        // Then
+        val expected: String = buildString {
+            if (sign != "+") this.append(sign)
+            this.append(digits)
+        }
+        assertEquals(expected, "$actual", "Input: $value")
+    }
+
+    @Test
+    fun parseThrowsWithEmptyString() {
+        // Given
+        val value = ""
+        // When & Then
+        val exception: NumberFormatException = assertFailsWith {
+            Integer.parse(value)
+        }
+        val actual: String? = exception.message
+        assertEquals(expected = "\"$value\" is not a valid integer.", actual)
+    }
+
+    @Test
+    fun parseThrowsNumberFormatExceptionWithSignOnly(): Unit = listOf("+", "-")
+        .forEach {
+            // Given, When & Then
+            val exception: NumberFormatException = assertFailsWith {
+                Integer.parse(it)
+            }
+            val actual: String? = exception.message
+            assertEquals(expected = "\"$it\" is not a valid integer.", actual)
+        }
+
+    @Test
+    fun parseThrowsNumberFormatExceptionWithMultipleSigns(): Unit = repeatTest {
+        // Given
+        val signs: String = buildString {
+            val signs: List<Char> = listOf('+', '-')
+            val times: Int = Random.nextInt(2..16)
+            repeat(times) {
+                val sign: Char = signs.random()
+                this.append(sign)
+            }
+        }
+        val digits: String = buildString {
+            val firstDigit: Int = Random.nextInt(1..9)
+            this.append(firstDigit)
+            val times: Int = Random.nextInt(1..16)
+            repeat(times) {
+                val otherDigit: Int = Random.nextInt(0..9)
+                this.append(otherDigit)
+            }
+        }
+        val value = "$signs$digits"
+        // When & Then
+        val exception: NumberFormatException = assertFailsWith {
+            Integer.parse(value)
+        }
+        val actual: String? = exception.message
+        assertEquals(expected = "\"$value\" is not a valid integer.", actual)
+    }
+
+    @Test
+    fun parseThrowsNumberFormatExceptionWithMalformedIntegerString(): Unit =
+        repeatTest {
+            // Given
+            val signs: List<Char> = listOf('+', '-')
+            val characters: List<Char> = ('0'..'9') + signs
+            val value: String = buildString {
+                var signCount = 0
+                while (signCount < 2) {
+                    val character: Char = characters.random()
+                    this.append(character)
+                    if (character in signs) signCount++
+                }
+            }
+            // When & Then
+            val exception: NumberFormatException = assertFailsWith {
+                Integer.parse(value)
+            }
+            val actual: String? = exception.message
+            val expected = "\"$value\" is not a valid integer."
+            assertEquals(expected, actual)
+        }
+
+    @Test
+    fun parseThrowsNumberFormatExceptionWithIllegalCharactersInString(): Unit =
+        repeatTest {
+            // Given
+            val allowedCharacters: List<Char> = ('0'..'9') + listOf('+', '-')
+            val characters: List<Char> =
+                allowedCharacters + ('a'..'z') + ('A'..'Z')
+            val value = buildString {
+                var illegalCharacterCount = 0
+                while (illegalCharacterCount == 0) {
+                    val character: Char = characters.random()
+                    this.append(character)
+                    if (character !in allowedCharacters) illegalCharacterCount++
+                }
+            }
+            // When & Then
+            val exception: NumberFormatException = assertFailsWith {
+                Integer.parse(value)
+            }
+            val actual: String? = exception.message
+            val expected = "\"$value\" is not a valid integer."
+            assertEquals(expected, actual)
+        }
 
     // ------------------------------ Comparisons ------------------------------
 

@@ -92,6 +92,50 @@ public class Integer private constructor(
             val delegate = PlatformInteger(value)
             return Integer(delegate)
         }
+
+        /**
+         * Returns an [Integer] representing exactly the number described by
+         * [value], or throws [NumberFormatException] if the [value] doesn't
+         * represent an integer.
+         *
+         * The specified [value] must be a numeric string, with an optional
+         * leading sign (`+` or `-`). Also, this function removes insignificant
+         * leading zeros from the [value]. As a result, calling this function
+         * with `123` and `+000123` produces the same result.
+         *
+         * ```
+         * integer = [sign] digit {digit}
+         * sign = "+" | "-"
+         * digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+         * ```
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerSample.parse
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.parse
+         * </details>
+         */
+        @JvmStatic
+        public fun parse(value: String): Integer {
+            val delegate: PlatformInteger = PlatformInteger.parse(value)
+            return Integer(delegate)
+        }
     }
 
     // ------------------------------ Comparisons ------------------------------
