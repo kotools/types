@@ -51,6 +51,19 @@ class IntegerSample {
         check(result == expected)
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinus() {
+        // Given
+        val integer: Integer = Integer.of(42)
+        // When
+        val result: Integer = -integer
+        // Then
+        val expected: Integer = Integer.of(-42)
+        check(result == expected)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

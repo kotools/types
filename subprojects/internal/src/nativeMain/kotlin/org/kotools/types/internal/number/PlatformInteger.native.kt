@@ -32,6 +32,10 @@ private class NativeInteger(
         return this.delegate.compare(other.delegate)
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): PlatformInteger = NativeInteger(-this.delegate)
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

@@ -9,6 +9,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -512,6 +513,42 @@ class IntegerTest {
         val expected: Int = xValue.compareTo(yValue)
         val message = "Integer must align with Long comparisons."
         assertEquals(expected, actual, message)
+    }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinusReturnsSameInstanceOnZero() {
+        // Given
+        val x: Integer = Integer.of(0)
+        // When
+        val actual: Integer = -x
+        // Then
+        assertSame(expected = x, actual)
+    }
+
+    @Test
+    fun unaryMinusReturnsNegativeIntegerOnPositiveInteger(): Unit = repeatTest {
+        // Given
+        val value: Long = Random.nextLong(1..Long.MAX_VALUE)
+        val x: Integer = Integer.of(value)
+        // When
+        val actual: Integer = -x
+        // Then
+        val expected: Integer = Integer.of(-value)
+        assertEquals(expected, actual, "Input: $value")
+    }
+
+    @Test
+    fun unaryMinusReturnsPositiveIntegerOnNegativeInteger(): Unit = repeatTest {
+        // Given
+        val value: Long = Random.nextLong((Long.MIN_VALUE + 1)..-1)
+        val x: Integer = Integer.of(value)
+        // When
+        val actual: Integer = -x
+        // Then
+        val expected: Integer = Integer.of(-value)
+        assertEquals(expected, actual, "Input: $value")
     }
 
     // ------------------------------ Conversions ------------------------------

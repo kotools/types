@@ -273,6 +273,38 @@ public class Integer private constructor(
     public operator fun compareTo(other: Integer): Int =
         this.delegate.compareTo(other.delegate)
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer, or the same instance if this
+     * integer represents zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.unaryMinus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.unaryMinus
+     * </details>
+     */
+    public operator fun unaryMinus(): Integer =
+        if (this == of(0)) this
+        else Integer(-this.delegate)
+
     // ------------------------------ Conversions ------------------------------
 
     /**

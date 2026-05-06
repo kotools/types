@@ -37,6 +37,16 @@ private class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return x.compareTo(y) * sign
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Suppress("UNUSED_VARIABLE", "unused")
+    override fun unaryMinus(): PlatformInteger {
+        val x: BigInt = this.delegate
+        val negative: dynamic = js("-x")
+        val delegate = BigInt("$negative")
+        return JsInteger(delegate)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

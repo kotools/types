@@ -31,6 +31,20 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    void unaryMinus() {
+        // Given
+        final Integer integer = Integer.of(42);
+        // When
+        final Integer result = integer.unaryMinus();
+        // Then
+        final Integer expected = Integer.of(-42);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

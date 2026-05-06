@@ -72,4 +72,9 @@ public interface PlatformInteger {
      * less than, equal to, or greater than the [other] one.
      */
     public operator fun compareTo(other: PlatformInteger): Int
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    /** Returns the negative of this integer. */
+    public operator fun unaryMinus(): PlatformInteger
 }

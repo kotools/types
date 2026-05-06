@@ -31,6 +31,10 @@ private class JvmInteger(private val delegate: BigInteger) : PlatformInteger {
         return this.delegate.compareTo(other.delegate)
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): PlatformInteger = JvmInteger(-this.delegate)
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()
