@@ -3,6 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.number.PlatformInteger
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a mathematical integer, with exact arithmetic.
@@ -130,12 +131,55 @@ public class Integer private constructor(
          *
          * SAMPLE: org.kotools.types.number.IntegerJavaSample.parse
          * </details>
+         * <br>
+         *
+         * See the [Integer.Companion.parseOrNull] function for returning `null`
+         * instead of throwing an exception in case of invalid [value].
          */
         @JvmStatic
         public fun parse(value: String): Integer {
             val delegate: PlatformInteger = PlatformInteger.parse(value)
             return Integer(delegate)
         }
+
+        /**
+         * Returns an [Integer] representing exactly the number described by
+         * [value], or returns `null` if the [value] doesn't represent an
+         * integer.
+         *
+         * The specified [value] must be a numeric string, with an optional
+         * leading sign (`+` or `-`). Also, this function removes insignificant
+         * leading zeros from the [value]. As a result, calling this function
+         * with `123` and `+000123` produces the same result.
+         *
+         * ```
+         * integer = [sign] digit {digit}
+         * sign = "+" | "-"
+         * digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+         * ```
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerSample.parseOrNull
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code, due to its
+         * non-explicit support for nullable types.
+         *
+         * See the [Integer.Companion.parse] function for throwing an exception
+         * instead of returning `null` in case of invalid [value].
+         */
+        @JvmSynthetic
+        public fun parseOrNull(value: String): Integer? = PlatformInteger
+            .parseOrNull(value)
+            ?.let(::Integer)
     }
 
     // ------------------------------ Comparisons ------------------------------

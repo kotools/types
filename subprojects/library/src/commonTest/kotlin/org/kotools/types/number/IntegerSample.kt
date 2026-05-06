@@ -40,6 +40,17 @@ class IntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun parseOrNull() {
+        // Given
+        val value = "+000123"
+        // When
+        val result: Integer? = Integer.parseOrNull(value)
+        // Then
+        val expected: Integer = Integer.of(123)
+        check(result == expected)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

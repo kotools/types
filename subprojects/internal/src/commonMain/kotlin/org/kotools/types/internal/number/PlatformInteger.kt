@@ -25,14 +25,19 @@ public interface PlatformInteger {
             if (!this.isValidInteger(value)) throw NumberFormatException(
                 "\"$value\" is not a valid integer."
             )
-            val sign: String = value.first()
-                .takeIf { it == '-' }
-                ?.toString()
-                ?: ""
-            val digits: String = value.removePrefix(sign)
-                .trimStart('0')
-                .ifEmpty { "0" }
-            return PlatformInteger("$sign$digits")
+            val normalizedValue: String = this.normalize(value)
+            return PlatformInteger(normalizedValue)
+        }
+
+        /**
+         * Returns a [PlatformInteger] representing exactly the number described
+         * by [value], or returns `null` if the [value] doesn't represent an
+         * integer.
+         */
+        public fun parseOrNull(value: String): PlatformInteger? {
+            if (!this.isValidInteger(value)) return null
+            val normalizedValue: String = this.normalize(value)
+            return PlatformInteger(normalizedValue)
         }
 
         private fun isValidInteger(value: String): Boolean {
@@ -44,6 +49,17 @@ public interface PlatformInteger {
             if (start == value.length) return false
             return value.substring(start)
                 .all(Char::isDigit)
+        }
+
+        private fun normalize(value: String): String {
+            val sign: String = value.first()
+                .takeIf { it == '-' }
+                ?.toString()
+                ?: ""
+            val digits: String = value.removePrefix(sign)
+                .trimStart('0')
+                .ifEmpty { "0" }
+            return "$sign$digits"
         }
     }
 
