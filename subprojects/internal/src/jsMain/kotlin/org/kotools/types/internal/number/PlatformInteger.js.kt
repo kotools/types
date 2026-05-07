@@ -43,8 +43,7 @@ private class JsInteger(private val delegate: BigInt) : PlatformInteger {
     override fun unaryMinus(): PlatformInteger {
         val x: BigInt = this.delegate
         val negative: dynamic = js("-x")
-        val delegate = BigInt("$negative")
-        return JsInteger(delegate)
+        return PlatformInteger.parse("$negative")
     }
 
     @Suppress("UNUSED_VARIABLE", "unused")
