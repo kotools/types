@@ -2,6 +2,8 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.number.PlatformInteger
+import org.kotools.types.number.Integer.Companion.parse
+import org.kotools.types.number.Integer.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -133,8 +135,8 @@ public class Integer private constructor(
          * </details>
          * <br>
          *
-         * See the [Integer.Companion.parseOrNull] function for returning `null`
-         * instead of throwing an exception in case of invalid [value].
+         * See the [parseOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [value].
          */
         @JvmStatic
         public fun parse(value: String): Integer {
@@ -173,8 +175,8 @@ public class Integer private constructor(
          * This function is not available from Java code, due to its
          * non-explicit support for nullable types.
          *
-         * See the [Integer.Companion.parse] function for throwing an exception
-         * instead of returning `null` in case of invalid [value].
+         * See the [parse] function for throwing an exception instead of
+         * returning `null` in case of invalid [value].
          */
         @JvmSynthetic
         public fun parseOrNull(value: String): Integer? = PlatformInteger
