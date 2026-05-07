@@ -311,15 +311,6 @@ public class Integer private constructor(
      * Returns the sum of this integer and the [other] one (`this + other`),
      * without producing an overflow.
      *
-     * This function satisfies the algebraic properties of integer addition:
-     * - Closure: adding two integers produces another integer.
-     * - Associativity: grouping integers preserves the result
-     * (`x + (y + z) = (x + y) + z`).
-     * - Commutativity: changing the order of integers preserves the result
-     * (`x + y = y + x`).
-     * - Identity element: adding `0` to an integer is neutral (`x + 0 = x`).
-     * - Inverse element: every integer has an opposite (`x + (-x) = 0`).
-     *
      * <br>
      * <details>
      * <summary>
