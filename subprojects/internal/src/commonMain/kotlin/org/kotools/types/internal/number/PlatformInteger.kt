@@ -77,4 +77,9 @@ public interface PlatformInteger {
 
     /** Returns the negative of this integer. */
     public operator fun unaryMinus(): PlatformInteger
+
+    /**
+     * Returns the sum of this integer with the [other] one (`this + other`).
+     */
+    public operator fun plus(other: PlatformInteger): PlatformInteger
 }

@@ -36,6 +36,11 @@ private class NativeInteger(
 
     override fun unaryMinus(): PlatformInteger = NativeInteger(-this.delegate)
 
+    override fun plus(other: PlatformInteger): PlatformInteger {
+        check(other is NativeInteger)
+        return NativeInteger(this.delegate + other.delegate)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

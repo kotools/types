@@ -551,6 +551,80 @@ class IntegerTest {
         assertEquals(expected, actual, "Input: $value")
     }
 
+    @Test
+    fun plusDoesNotOverflowWithPositiveIntegers(): Unit = repeatTest {
+        // Given
+        val range: LongRange = 1..Long.MAX_VALUE
+        val x: Integer = Integer.of(Random.nextLong(range))
+        val y: Integer = Integer.of(Random.nextLong(range))
+        // When
+        val sum: Integer = x + y
+        // Then
+        assertTrue("$sum must be greater than ${x}.") { sum > x }
+        assertTrue("$sum must be greater than ${y}.") { sum > y }
+    }
+
+    @Test
+    fun plusDoesNotOverflowWithNegativeIntegers(): Unit = repeatTest {
+        // Given
+        val range: LongRange = Long.MIN_VALUE..-1
+        val x: Integer = Integer.of(Random.nextLong(range))
+        val y: Integer = Integer.of(Random.nextLong(range))
+        // When
+        val sum: Integer = x + y
+        // Then
+        assertTrue("$sum must be less than ${x}.") { sum < x }
+        assertTrue("$sum must be less than ${y}.") { sum < y }
+    }
+
+    @Test
+    fun plusIsAssociative(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        val y: Integer = Integer.of(Random.nextLong())
+        val z: Integer = Integer.of(Random.nextLong())
+        // When
+        val sum: Integer = (x + y) + z
+        // Then
+        val expected: Integer = x + (y + z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual = sum, message)
+    }
+
+    @Test
+    fun plusIsCommutative(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        val y: Integer = Integer.of(Random.nextLong())
+        // When
+        val sum: Integer = x + y
+        // Then
+        val expected: Integer = y + x
+        assertEquals(expected, actual = sum, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun plusHasIdentityElement(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        val zero: Integer = Integer.of(0)
+        // When & Then
+        val message = "Input: $x"
+        assertSame(expected = x, actual = x + zero, message)
+        assertSame(expected = x, actual = zero + x, message)
+    }
+
+    @Test
+    fun plusHasInverseElement(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        // When
+        val actual: Integer = x + (-x)
+        // Then
+        val expected: Integer = Integer.of(0)
+        assertEquals(expected, actual, message = "Input: $x")
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

@@ -45,6 +45,19 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void plus() {
+        // Given
+        final Integer x = Integer.of(9223372036854775807L);
+        final Integer y = Integer.of(10);
+        // When
+        final Integer sum = x.plus(y);
+        // Then
+        final Integer expected = Integer.parse("9223372036854775817");
+        final boolean check = sum.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

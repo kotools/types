@@ -64,6 +64,18 @@ class IntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun plus() {
+        // Given
+        val x: Integer = Integer.of(9223372036854775807)
+        val y: Integer = Integer.of(10)
+        // When
+        val sum: Integer = x + y
+        // Then
+        val expected: Integer = Integer.parse("9223372036854775817")
+        check(sum == expected)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

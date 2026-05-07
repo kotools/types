@@ -47,6 +47,15 @@ private class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return JsInteger(delegate)
     }
 
+    @Suppress("UNUSED_VARIABLE", "unused")
+    override fun plus(other: PlatformInteger): PlatformInteger {
+        check(other is JsInteger)
+        val x: BigInt = this.delegate
+        val y: BigInt = other.delegate
+        val sum: dynamic = js("x + y")
+        return PlatformInteger.parse("$sum")
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()

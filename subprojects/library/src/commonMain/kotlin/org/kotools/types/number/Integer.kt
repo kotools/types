@@ -307,6 +307,48 @@ public class Integer private constructor(
         if (this == of(0)) this
         else Integer(-this.delegate)
 
+    /**
+     * Returns the sum of this integer and the [other] one (`this + other`),
+     * without producing an overflow.
+     *
+     * This function satisfies the algebraic properties of integer addition:
+     * - Closure: adding two integers produces another integer.
+     * - Associativity: grouping integers preserves the result
+     * (`x + (y + z) = (x + y) + z`).
+     * - Commutativity: changing the order of integers preserves the result
+     * (`x + y = y + x`).
+     * - Identity element: adding `0` to an integer is neutral (`x + 0 = x`).
+     * - Inverse element: every integer has an opposite (`x + (-x) = 0`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.plus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.plus
+     * </details>
+     */
+    public operator fun plus(other: Integer): Integer {
+        val zero: Integer = of(0)
+        if (this == zero) return other
+        if (other == zero) return this
+        return Integer(this.delegate + other.delegate)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     /**

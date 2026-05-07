@@ -35,6 +35,12 @@ private class JvmInteger(private val delegate: BigInteger) : PlatformInteger {
 
     override fun unaryMinus(): PlatformInteger = JvmInteger(-this.delegate)
 
+    override fun plus(other: PlatformInteger): PlatformInteger {
+        check(other is JvmInteger)
+        val sum: BigInteger = this.delegate.add(other.delegate)
+        return JvmInteger(sum)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String = this.delegate.toString()
