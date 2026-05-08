@@ -15,6 +15,74 @@ Unlike Kotlin integer types (`Byte`, `Short`, `Int`, `Long`), `Integer` does not
 model machine integers, overflow semantics, truncating division, IEEE-754
 behavior.
 
+## Motivations
+
+### Integer overflow
+
+**Problem:** Adding, subtracting or multiplying Kotlin integer types can lead to
+an overflow, which produces unexpected behavior.
+
+```kotlin
+val x = 9223372036854775807
+val y = 10
+
+check(x + y == -9223372036854775799) // instead of 9223372036854775817
+check(-x - y == 9223372036854775799) // instead of -9223372036854775817
+check(x * y == -10L) // instead of 92233720368547758070
+```
+
+**Solution:** The `Integer` type can add, subtract or multiply integers without
+producing an overflow.
+
+```kotlin
+val x: Integer = Integer.of(9223372036854775807)
+val y: Integer = Integer.of(10)
+
+check(x + y == Integer.parse("9223372036854775817"))
+check(-x - y == Integer.parse("-9223372036854775817"))
+check(x * y == Integer.parse("92233720368547758070"))
+```
+
+### Division by zero
+
+**Problem:** Performing division and remainder operations by zero on Kotlin
+integer types have different behavior per platform: throw an
+`ArithmeticException` on JVM and Native platforms, and return `0` on JS
+platform.
+
+```kotlin
+// JVM and Native platforms
+
+val quotient: Result<Int> = kotlin.runCatching { 12 / 0 }
+val remainder: Result<Int> = kotlin.runCatching { 12 % 0 }
+
+check(quotient.exceptionOrNull() is ArithmeticException)
+check(remainder.exceptionOrNull() is ArithmeticException)
+```
+
+```kotlin
+// JS platform
+
+check(12 / 0 == 0)
+check(12 % 0 == 0)
+```
+
+**Solution:** Division and remainder operations by zero on `Integer` type throw
+an `ArithmeticException` on all platforms.
+
+```kotlin
+ // Common code
+
+val x: Integer = Integer.from(12)
+val y: Integer = Integer.from(0)
+
+val quotient: Result<Integer> = kotlin.runCatching { x / y }
+val remainder: Result<Integer> = kotlin.runCatching { x % y }
+
+check(quotient.exceptionOrNull() is ArithmeticException)
+check(remainder.exceptionOrNull() is ArithmeticException)
+```
+
 ## Converting from/to `Long`
 
 ```kotlin
