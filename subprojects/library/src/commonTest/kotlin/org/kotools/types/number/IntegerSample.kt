@@ -76,6 +76,18 @@ class IntegerSample {
         check(sum == expected)
     }
 
+    @Test
+    fun minus() {
+        // Given
+        val x: Integer = Integer.of(-9223372036854775807)
+        val y: Integer = Integer.of(10)
+        // When
+        val difference: Integer = x - y
+        // Then
+        val expected: Integer = Integer.parse("-9223372036854775817")
+        check(difference == expected)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

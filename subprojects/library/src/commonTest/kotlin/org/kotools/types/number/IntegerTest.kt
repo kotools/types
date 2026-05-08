@@ -625,6 +625,82 @@ class IntegerTest {
         assertEquals(expected, actual, message = "Input: $x")
     }
 
+    @Test
+    fun minusDoesNotOverflowWithNegativeAndPositiveIntegers(): Unit =
+        repeatTest {
+            // Given
+            val x: Integer = Integer.of(Random.nextLong(Long.MIN_VALUE..-1))
+            val y: Integer = Integer.of(Random.nextLong(1..Long.MAX_VALUE))
+            // When
+            val difference: Integer = x - y
+            // Then
+            assertTrue("$difference must be less than ${x}.") { difference < x }
+            assertTrue("$difference must be less than ${y}.") { difference < y }
+        }
+
+    @Test
+    fun minusDoesNotOverflowWithPositiveAndNegativeIntegers(): Unit =
+        repeatTest {
+            // Given
+            val x: Integer = Integer.of(Random.nextLong(1..Long.MAX_VALUE))
+            val y: Integer = Integer.of(Random.nextLong(Long.MIN_VALUE..-1))
+            // When
+            val difference: Integer = x - y
+            // Then
+            assertTrue("$difference must be greater than ${x}.") {
+                difference > x
+            }
+            assertTrue("$difference must be greater than ${y}.") {
+                difference > y
+            }
+        }
+
+    @Test
+    fun minusIsAlignedWithIntegerAddition(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        val y: Integer = Integer.of(Random.nextLong())
+        // When
+        val difference: Integer = x - y
+        // Then
+        val expected: Integer = x + (-y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual = difference, message)
+    }
+
+    @Test
+    fun minusReturnsZeroWithSameInteger(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        // When
+        val difference: Integer = x - x
+        // Then
+        val expected: Integer = Integer.of(0)
+        assertEquals(expected, actual = difference, message = "Input: $x")
+    }
+
+    @Test
+    fun minusIsNeutralWithZero(): Unit = repeatTest {
+        // Given
+        val x: Integer = Integer.of(Random.nextLong())
+        val zero: Integer = Integer.of(0)
+        // When
+        val difference: Integer = x - zero
+        // Then
+        assertSame(expected = x, actual = difference, message = "Input: $x")
+    }
+
+    @Test
+    fun minusNegatesOtherIntegerOnZero(): Unit = repeatTest {
+        // Given
+        val zero: Integer = Integer.of(0)
+        val x: Integer = Integer.of(Random.nextLong())
+        // When
+        val difference: Integer = zero - x
+        // Then
+        assertEquals(expected = -x, actual = difference, message = "Input: $x")
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

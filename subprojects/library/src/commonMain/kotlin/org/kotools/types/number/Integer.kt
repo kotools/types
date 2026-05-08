@@ -340,6 +340,34 @@ public class Integer private constructor(
         return Integer(this.delegate + other.delegate)
     }
 
+    /**
+     * Returns the difference between this integer and the [other] one
+     * (`this - other`), without producing an overflow.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.minus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.minus
+     * </details>
+     */
+    public operator fun minus(other: Integer): Integer = this + (-other)
+
     // ------------------------------ Conversions ------------------------------
 
     /**

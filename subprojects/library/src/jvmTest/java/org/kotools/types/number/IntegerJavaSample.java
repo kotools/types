@@ -58,6 +58,19 @@ public class IntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void minus() {
+        // Given
+        final Integer x = Integer.of(-9223372036854775807L);
+        final Integer y = Integer.of(10);
+        // When
+        final Integer difference = x.minus(y);
+        // Then
+        final Integer expected = Integer.parse("-9223372036854775817");
+        final boolean check = difference.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test
