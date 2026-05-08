@@ -19,8 +19,9 @@ behavior.
 
 ### Integer overflow
 
-**Problem:** Adding, subtracting or multiplying Kotlin integer types can lead to
-an overflow, which produces unexpected behavior.
+**Problem:** Adding, subtracting, or multiplying Kotlin integer types uses
+bounded machine arithmetic, which may overflow and produce mathematically
+incorrect results.
 
 ```kotlin
 val x = 9223372036854775807
@@ -31,8 +32,8 @@ check(-x - y == 9223372036854775799) // instead of -9223372036854775817
 check(x * y == -10L) // instead of 92233720368547758070
 ```
 
-**Solution:** The `Integer` type can add, subtract or multiply integers without
-producing an overflow.
+**Solution:** The `Integer` type represents mathematical integers and performs
+arithmetic without overflow.
 
 ```kotlin
 val x: Integer = Integer.of(9223372036854775807)
@@ -45,10 +46,9 @@ check(x * y == Integer.parse("92233720368547758070"))
 
 ### Division by zero
 
-**Problem:** Performing division and remainder operations by zero on Kotlin
-integer types have different behavior per platform: throw an
-`ArithmeticException` on JVM and Native platforms, and return `0` on JS
-platform.
+**Problem:** Division by zero on Kotlin integer types has platform-dependent
+behavior: throw an `ArithmeticException` on JVM and Native platforms, and return
+`0` on JS platform.
 
 ```kotlin
 // JVM and Native platforms
@@ -67,23 +67,44 @@ check(12 / 0 == 0)
 check(12 % 0 == 0)
 ```
 
-**Solution:** Division and remainder operations by zero on `Integer` type throw
-an `ArithmeticException` on all platforms.
+**Solution:** `Integer` defines consistent Euclidean division semantics across
+all supported platforms. Dividing an `Integer` by zero always throws an
+`ArithmeticException`.
 
 ```kotlin
  // Common code
 
-val x: Integer = Integer.from(12)
-val y: Integer = Integer.from(0)
+val x: Integer = Integer.of(12)
+val y: Integer = Integer.of(0)
 
-val quotient: Result<Integer> = kotlin.runCatching { x / y }
-val remainder: Result<Integer> = kotlin.runCatching { x % y }
+val quotient: Result<Integer> = kotlin.runCatching { x quotient y }
+val remainder: Result<Integer> = kotlin.runCatching { x modulo y }
 
 check(quotient.exceptionOrNull() is ArithmeticException)
 check(remainder.exceptionOrNull() is ArithmeticException)
 ```
 
-## Converting from/to `Long`
+### Euclidean remainder
+
+**Problem**: Remainder operations on Kotlin integer types may produce negative
+results, which is not compatible with Euclidean division and modular arithmetic.
+
+```kotlin
+check(-7 % 3 == -1)
+```
+
+**Solution**: Remainder operation on `Integer` is always non-negative.
+
+```kotlin
+val x = Integer.of(-7)
+val y = Integer.of(3)
+
+check(x modulo y == Integer.of(2))
+```
+
+## Formal specifications
+
+### Converting from/to `Long`
 
 ```kotlin
 class Integer {
@@ -104,7 +125,7 @@ class Integer {
 - `toLongOrNull` is not available from Java code due to its non-explicit support
   for nullable types.
 
-## Converting from/to `String`
+### Converting from/to `String`
 
 ```kotlin
 class Integer {
@@ -133,7 +154,7 @@ class Integer {
   `parse(s).toString() == s`.
 - Negative zero has no representation: `parse("-0").toString() == "0"`.
 
-## Equality
+### Equality
 
 ```kotlin
 class Integer {
@@ -150,7 +171,7 @@ class Integer {
 - Equality is consistent with operations: if `x == y`, then `x + z == y + z`,
   `x * z == y * z`, and `x - z == y - z`.
 
-## Order
+### Order
 
 ```kotlin
 class Integer {
@@ -168,7 +189,7 @@ class Integer {
 - Comparison is consistent with equality: if `x == y`, then
   `x.compareTo(y) == 0`.
 
-## Absolute value
+### Absolute value
 
 ```kotlin
 class Integer {
@@ -181,7 +202,7 @@ class Integer {
 - Absolute value is symmetric: `|x| == |-x|`.
 - Absolute value has triangle inequality: `|x + y| <= |x| + |y|`.
 
-## Negation
+### Negation
 
 ```kotlin
 class Integer {
@@ -193,7 +214,7 @@ class Integer {
 - Negation distributes over addition: `-(x + y) == (-x) + (-y)`.
 - Negation is compatible with subtraction: `x - y == x + (-y)`.
 
-## Addition
+### Addition
 
 ```kotlin
 class Integer {
@@ -208,7 +229,7 @@ class Integer {
 - Addition has unique inverse element: if `x + y == 0`, then `x == -y`.
 - Addition satisfies cancellation: if `x + z == y + z`, then `x == y`.
 
-## Subtraction
+### Subtraction
 
 ```kotlin
 class Integer {
@@ -220,7 +241,7 @@ class Integer {
 - `0` is right-subtractive identity: `x - 0 == x`.
 - Subtraction has self-annihilation: `x - x == 0`.
 
-## Multiplication
+### Multiplication
 
 ```kotlin
 class Integer {
@@ -237,7 +258,7 @@ class Integer {
 - Multiplication supports cancellation if no zero involved: if `z != 0` and
   `x * z == y * z`, then `x == y`.
 
-## Euclidean division
+### Euclidean division
 
 ```kotlin
 class Integer {
@@ -276,7 +297,7 @@ class Integer {
 - `-1` is a special divisor in Euclidean division: `x quotient (-1) == -x` and
   `x modulo (-1) == 0`.
 
-## Sanity checks
+### Sanity checks
 
 - `1 + 1 == 2`
 - `1 * 0 == 0`
