@@ -308,8 +308,9 @@ public class Integer private constructor(
         else Integer(-this.delegate)
 
     /**
-     * Returns the sum of this integer and the [other] one (`this + other`),
-     * without producing an overflow.
+     * Returns the sum of this integer and the [other] one (`this + other`).
+     *
+     * This operation never overflows.
      *
      * <br>
      * <details>
@@ -342,7 +343,9 @@ public class Integer private constructor(
 
     /**
      * Returns the difference between this integer and the [other] one
-     * (`this - other`), without producing an overflow.
+     * (`this - other`).
+     *
+     * This operation never overflows.
      *
      * <br>
      * <details>
