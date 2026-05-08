@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- `Integer` specifications. ([162f711e], [c752c8c26], [b5feed142])
+- `Integer` specifications. ([162f711e], [c752c8c26], [b5feed142], [1b303bfdd])
 
 ### 🔥 Removed
 
@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 
 [0565df54]: https://github.com/kotools/types/commit/0565df54
 [162f711e]: https://github.com/kotools/types/commit/162f711e
+[1b303bfdd]: https://github.com/kotools/types/commit/1b303bfdd
 [70b2ef56]: https://github.com/kotools/types/commit/70b2ef56
 [b5feed142]: https://github.com/kotools/types/commit/b5feed142
 [c752c8c26]: https://github.com/kotools/types/commit/c752c8c26
