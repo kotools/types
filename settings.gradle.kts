@@ -13,7 +13,6 @@ private fun subproject(
 }
 
 subproject("internal")
-subproject("kotlinx-serialization")
 subproject(path = "library", name = rootProject.name)
 
 // ------------------------------ Included builds ------------------------------

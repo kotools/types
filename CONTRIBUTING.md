@@ -78,12 +78,6 @@ Now that you have opened your fork in [IntelliJ IDEA], you can run the
 `Checks (types)` configuration for checking the `types` subproject on all
 platforms.
 
-Here's the list of recommended configurations for running tests:
-
-- `Checks (plugins)` for checking the `plugins` included build.
-- `Checks (kotlinx-serialization)` for checking the
-  `types-kotlinx-serialization` subproject on all platforms.
-
 ### Serving the API reference
 
 You can also generate the API reference by running the `Assemble (root project)`

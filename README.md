@@ -56,10 +56,6 @@ reason about, and less error-prone across JVM, JS, and Native platforms.
 - **Multiplatform Ready:** Use the same reliable types across Kotlin/JVM,
   Kotlin/JS, and Kotlin/Native.
 
-> [!IMPORTANT]
-> Support of Kotlin Serialization is experimental and not intended for
-> production use. It will be replaced by a stable solution in Kotools Types 6.0.
-
 ## 🛠️ Installation
 
 You can add Kotools Types to your project by using Gradle or Maven.
@@ -96,10 +92,6 @@ implementation "org.kotools:types:$version"
 </dependencies>
 ```
 </details>
-
-> See [the dedicated documentation](subprojects/kotlinx-serialization/README.md)
-> for serializing types from the `org.kotools.types` package using the
-> [kotlinx.serialization] library. 
 
 ## 📝 Documentation
 
