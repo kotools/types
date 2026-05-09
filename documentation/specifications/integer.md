@@ -180,10 +180,6 @@ class Integer {
 - Order is total: `x == y` | `x < y` | `x > y`.
 - Order supports antisymmetry: if `x <= y` and `y <= x`, then `x == y`.
 - Order is transitive: if `x <= y` and `y <= z`, then `x <= z`.
-- Order is preserved over addition: if `x <= y`, then `x + z <= y + z`.
-- Order is preserved over multiplication:
-  - if `z > 0` and `x <= y`, then `x * z <= y * z`.
-  - if `z < 0` and `x <= y`, then `x * z >= y * z`.
 - Comparison is consistent with equality: if `x == y`, then
   `x.compareTo(y) == 0`.
 
@@ -227,6 +223,7 @@ class Integer {
 - Addition has unique inverse element: if `x + y == 0`, then `x == -y`.
 - Addition satisfies cancellation: if `x + z == y + z`, then `x == y`.
 - Addition is consistent with equality: if `x == y`, then `x + z == y + z`.
+- Addition preserves order: if `x <= y`, then `x + z <= y + z`.
 
 ### Subtraction
 
@@ -259,6 +256,9 @@ class Integer {
   `x * z == y * z`, then `x == y`.
 - Multiplication is consistent with equality: if `x == y`, then
   `x * z == y * z`.
+- Multiplication preserves order:
+  - if `z > 0` and `x <= y`, then `x * z <= y * z`.
+  - if `z < 0` and `x <= y`, then `x * z >= y * z`.
 
 ### Euclidean division
 
