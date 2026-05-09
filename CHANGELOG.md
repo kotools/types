@@ -18,8 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
-- `Integer` specifications. ([162f711e], [c752c8c26], [b5feed142], [1b303bfdd],
-  [5a99e6236], [efab8d33a], [42c472c42])
+- [`Integer` specifications](documentation/specifications/integer.md).
 
 ### 🔥 Removed
 
@@ -32,14 +31,7 @@ All notable changes to this project will be documented in this file.
 - Default serializer for `Integer` type. ([0565df54])
 
 [0565df54]: https://github.com/kotools/types/commit/0565df54
-[162f711e]: https://github.com/kotools/types/commit/162f711e
-[1b303bfdd]: https://github.com/kotools/types/commit/1b303bfdd
-[42c472c42]: https://github.com/kotools/types/commit/42c472c42
-[5a99e6236]: https://github.com/kotools/types/commit/5a99e6236
 [70b2ef56]: https://github.com/kotools/types/commit/70b2ef56
-[b5feed142]: https://github.com/kotools/types/commit/b5feed142
-[c752c8c26]: https://github.com/kotools/types/commit/c752c8c26
-[efab8d33a]: https://github.com/kotools/types/commit/efab8d33a
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 
