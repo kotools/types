@@ -168,8 +168,6 @@ class Integer {
 - `Integer` is reflexive: `x == x`.
 - `Integer` is symmetrical: if `x == y`, then `y == x`.
 - `Integer` is transitive: if `x == y` and `y == z`, then `x == z`.
-- Equality is consistent with operations: if `x == y`, then `x + z == y + z`,
-  `x * z == y * z`, and `x - z == y - z`.
 
 ### Order
 
@@ -228,6 +226,7 @@ class Integer {
 - Addition has inverse element: `x + (-x) == 0` and `(-x) + x == 0`.
 - Addition has unique inverse element: if `x + y == 0`, then `x == -y`.
 - Addition satisfies cancellation: if `x + z == y + z`, then `x == y`.
+- Addition is consistent with equality: if `x == y`, then `x + z == y + z`.
 
 ### Subtraction
 
@@ -240,6 +239,7 @@ class Integer {
 - Subtraction definition: `x - y == x + (-y)`.
 - `0` is right-subtractive identity: `x - 0 == x`.
 - Subtraction has self-annihilation: `x - x == 0`.
+- Subtraction is consistent with equality: if `x == y`, then `x - z == y - z`.
 
 ### Multiplication
 
@@ -255,8 +255,10 @@ class Integer {
 - `0` annihilates multiplication: `x * 0 == 0` and `0 * x == 0`.
 - Multiplication is distributive over addition:
   `x * (y + z) == (x * y) + (x * z)`, and `(x + y) * z == (x * z) + (y * z)`.
-- Multiplication supports cancellation if no zero involved: if `z != 0` and
+- Multiplication satisfies cancellation if no zero involved: if `z != 0` and
   `x * z == y * z`, then `x == y`.
+- Multiplication is consistent with equality: if `x == y`, then
+  `x * z == y * z`.
 
 ### Euclidean division
 
