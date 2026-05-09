@@ -62,28 +62,6 @@ implementation "org.kotools:types-kotlinx-serialization:$version"
 ```
 </details>
 
-## 👨‍💻 Usage
-
-For using this module, you need to import the
-[serializers module][kotlinx.serialization.modules.SerializersModule] needed
-when configuring the serialization format.
-
-Here's an example using default serializers from Kotools Types with the
-[JavaScript Object Notation (JSON)][kotlinx.serialization.json] format:
-
-```kotlin
-val format = Json { serializersModule = KotoolsTypesSerializersModule() }
-val address: EmailAddress = EmailAddress.orThrow("contact@kotools.org")
-val encoded: String = format.encodeToString(address)
-assertEquals(expected = "\"$address\"", encoded)
-val decoded: EmailAddress = format.decodeFromString(encoded)
-assertEquals(expected = address, decoded)
-```
-
-See the [API reference] of the `KotoolsTypesSerializersModule()` function for
-more details.
-
-[api reference]: https://types.kotools.org
 [ios-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_arm64-4b4bff
 [ios-simulator-arm64-platform-badge]: https://img.shields.io/badge/Platform-iOS_Simulator_arm64-4b4bff
 [ios-x64-platform-badge]: https://img.shields.io/badge/Platform-iOS_x64-4b4bff
@@ -97,8 +75,6 @@ more details.
 [kotlin/jvm]: https://kotlinlang.org/docs/jvm-get-started.html
 [kotlinx.serialization]: https://github.com/Kotlin/kotlinx.serialization
 [kotlinx.serialization-badge]: https://img.shields.io/badge/kotlinx.serialization-1.6.3-blue
-[kotlinx.serialization.json]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json
-[kotlinx.serialization.modules.SerializersModule]: https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/kotlinx.serialization.modules/-serializers-module
 [kotools-types]: https://github.com/kotools/types
 [kotools-types-kotlinx-serialization-badge]: https://img.shields.io/maven-central/v/org.kotools/types-kotlinx-serialization?label=Latest
 [linux-x64-platform-badge]: https://img.shields.io/badge/Platform-Linux_x64-4b4bff
