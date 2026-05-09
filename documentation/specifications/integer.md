@@ -192,7 +192,7 @@ class Integer {
 ```
 
 - Absolute value is always non-negative: `|x| >= 0`.
-  Absolute value is definite: if `x == 0`, then `|x| == 0`.
+- Absolute value is definite: if `x == 0`, then `|x| == 0`.
 - Absolute value is symmetric: `|x| == |-x|`.
 - Absolute value has triangle inequality: `|x + y| <= |x| + |y|`.
 
