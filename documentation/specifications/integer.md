@@ -204,9 +204,11 @@ class Integer {
 }
 ```
 
-- `Integer` supports double negation: `-(-x) == x`.
-- Negation distributes over addition: `-(x + y) == (-x) + (-y)`.
-- Negation is compatible with subtraction: `x - y == x + (-y)`.
+- Negation inverses sign:
+  - if `x > 0`, then `-x < 0`.
+  - if `x < 0`, then `-x > 0`.
+- Zero negation is neutral: `-0 == 0`.
+- Double negation is neutral: `-(-x) == x`.
 
 ### Addition
 
@@ -224,6 +226,7 @@ class Integer {
 - Addition satisfies cancellation: if `x + z == y + z`, then `x == y`.
 - Addition is consistent with equality: if `x == y`, then `x + z == y + z`.
 - Addition preserves order: if `x <= y`, then `x + z <= y + z`.
+- Addition distributes negation: `-(x + y) == (-x) + (-y)`.
 
 ### Subtraction
 
