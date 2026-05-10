@@ -104,26 +104,18 @@ check(x modulo y == Integer.of(2))
 
 ## Formal specifications
 
-### Converting from/to `Long`
+### Creation from `Long`
 
 ```kotlin
 class Integer {
   companion object {
     fun of(value: Long): Integer = TODO()
   }
-
-  fun toLong(): Long = TODO()
-  fun toLongOrNull(): Long? = TODO()
 }
 ```
 
 - Creation from `Long` preserves canonical representation:
   `Integer.of(x).toString() == "$x"`.
-- Outranged values can't be converted to `Long`: if `x > Long.MAX_VALUE` or
-  `x < Long.MIN_VALUE`, then `x.toLong()` throws an exception and
-  `x.toLongOrNull()` returns `null`.
-- `toLongOrNull` is not available from Java code due to its non-explicit support
-  for nullable types.
 
 ### Converting from/to `String`
 
