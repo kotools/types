@@ -117,7 +117,7 @@ class Integer {
 - Creation from `Long` preserves canonical representation:
   `Integer.of(x).toString() == "$x"`.
 
-### Converting from/to `String`
+### Parsing
 
 ```kotlin
 class Integer {
@@ -125,8 +125,6 @@ class Integer {
     fun parse(value: String): Integer = TODO()
     fun parseOrNull(value: String): Integer? = TODO()
   }
-
-  override fun toString(): String = TODO()
 }
 ```
 
@@ -141,10 +139,19 @@ class Integer {
   `parseOrNull(s)` returns `null`.
 - `parseOrNull` is not available from Java code due to its non-explicit support
   for nullable types.
-- `toString` function always returns canonical decimal representation.
 - Zero has unique decimal string representation: if `s = "0"`, then
   `parse(s).toString() == s`.
 - Negative zero has no representation: `parse("-0").toString() == "0"`.
+
+### Conversion to `String`
+
+```kotlin
+class Integer {
+  override fun toString(): String = TODO()
+}
+```
+
+- `toString` function always returns canonical decimal representation.
 
 ### Equality
 
