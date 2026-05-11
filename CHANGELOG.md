@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 ### ✨ Added
 
 - New `Integer` type and its
-  [specifications](documentation/specifications/integer.md). ([#940])
+  [specifications](documentation/specifications/integer.md). ([#940], [#942])
 
 ### 🔥 Removed
 
@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 [#872]: https://github.com/kotools/types/issues/872
 [#931]: https://github.com/kotools/types/issues/931
 [#940]: https://github.com/kotools/types/issues/940
+[#942]: https://github.com/kotools/types/issues/942
 [#958]: https://github.com/kotools/types/issues/958
 
 ## 🔖 Releases
