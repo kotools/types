@@ -19,8 +19,8 @@ class IntegerSample {
 
     @Test
     fun overflowSolution() {
-        val x: Integer = Integer.from(9223372036854775807)
-        val y: Integer = Integer.from(10)
+        val x: Integer = Integer.of(9223372036854775807)
+        val y: Integer = Integer.of(10)
         check(x + y == Integer.fromDecimal("9223372036854775817"))
         check(-x - y == Integer.fromDecimal("-9223372036854775817"))
         check(x * y == Integer.fromDecimal("92233720368547758070"))
@@ -29,8 +29,8 @@ class IntegerSample {
     @Test
     fun divisionByZeroSolution() {
         // Common code
-        val x: Integer = Integer.from(12)
-        val y: Integer = Integer.from(0)
+        val x: Integer = Integer.of(12)
+        val y: Integer = Integer.of(0)
         val quotient: Result<Integer> = runCatching { x / y }
         val remainder: Result<Integer> = runCatching { x % y }
         check(quotient.exceptionOrNull() is ArithmeticException)
@@ -40,13 +40,14 @@ class IntegerSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun from() {
-        // Given
-        val number = 9223372036854775807
-        // When
-        val result: Integer = Integer.from(number)
-        // Then
-        check("$result" == "$number")
+    fun of() {
+        val number = 9_223_372_036_854_775_807
+
+        val result: Integer = Integer.of(number)
+
+        val resultString: String = result.toString()
+        val expected: String = number.toString()
+        check(resultString == expected)
     }
 
     @Test
@@ -57,7 +58,7 @@ class IntegerSample {
         // When
         val result: Integer = Integer.fromDecimal(text)
         // Then
-        val expected: Integer = Integer.from(number)
+        val expected: Integer = Integer.of(number)
         check(result == expected)
     }
 
@@ -69,7 +70,7 @@ class IntegerSample {
         // When
         val result: Integer? = Integer.fromDecimalOrNull(text)
         // Then
-        val expected: Integer = Integer.from(number)
+        val expected: Integer = Integer.of(number)
         check(result == expected)
     }
 
@@ -79,8 +80,8 @@ class IntegerSample {
     fun equalsOverride() {
         // Given
         val number: Long = Long.MAX_VALUE
-        val x: Integer = Integer.from(number)
-        val y: Integer = Integer.from(number)
+        val x: Integer = Integer.of(number)
+        val y: Integer = Integer.of(number)
         // When
         val result: Boolean = x == y
         // Then
@@ -91,11 +92,11 @@ class IntegerSample {
     fun hashCodeOverride() {
         // Given
         val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.from(number)
+        val integer: Integer = Integer.of(number)
         // When
         val result: Int = integer.hashCode()
         // Then
-        val expected: Int = Integer.from(number)
+        val expected: Int = Integer.of(number)
             .hashCode()
         check(result == expected)
     }
@@ -103,8 +104,8 @@ class IntegerSample {
     @Test
     fun compareTo() {
         // Given
-        val x: Integer = Integer.from(Long.MIN_VALUE)
-        val y: Integer = Integer.from(Long.MAX_VALUE)
+        val x: Integer = Integer.of(Long.MIN_VALUE)
+        val y: Integer = Integer.of(Long.MAX_VALUE)
         // When
         val result: Boolean = x < y // or x.compareTo(y) < 0
         // Then
@@ -116,19 +117,19 @@ class IntegerSample {
     @Test
     fun unaryMinus() {
         // Given
-        val x: Integer = Integer.from(9223372036854775807)
+        val x: Integer = Integer.of(9223372036854775807)
         // When
         val result: Integer = -x
         // Then
-        val expected: Integer = Integer.from(-9223372036854775807)
+        val expected: Integer = Integer.of(-9223372036854775807)
         check(result == expected)
     }
 
     @Test
     fun plus() {
         // Given
-        val x: Integer = Integer.from(9223372036854775807)
-        val y: Integer = Integer.from(2)
+        val x: Integer = Integer.of(9223372036854775807)
+        val y: Integer = Integer.of(2)
         // When
         val result: Integer = x + y
         // Then
@@ -139,8 +140,8 @@ class IntegerSample {
     @Test
     fun minus() {
         // Given
-        val x: Integer = Integer.from(-9223372036854775807)
-        val y: Integer = Integer.from(2)
+        val x: Integer = Integer.of(-9223372036854775807)
+        val y: Integer = Integer.of(2)
         // When
         val result: Integer = x - y
         // Then
@@ -151,8 +152,8 @@ class IntegerSample {
     @Test
     fun times() {
         // Given
-        val x: Integer = Integer.from(9223372036854775807)
-        val y: Integer = Integer.from(10)
+        val x: Integer = Integer.of(9223372036854775807)
+        val y: Integer = Integer.of(10)
         // When
         val result: Integer = x * y
         // Then
@@ -164,7 +165,7 @@ class IntegerSample {
     fun div() {
         // Given
         val x: Integer = Integer.fromDecimal("922337203685477580700")
-        val y: Integer = Integer.from(10)
+        val y: Integer = Integer.of(10)
         // When
         val result: Integer = x / y
         // Then
@@ -176,7 +177,7 @@ class IntegerSample {
     fun divOrNull() {
         // Given
         val x: Integer = Integer.fromDecimal("922337203685477580700")
-        val y: Integer = Integer.from(10)
+        val y: Integer = Integer.of(10)
         // When
         val result: Integer? = x.divOrNull(y)
         // Then
@@ -187,24 +188,24 @@ class IntegerSample {
     @Test
     fun rem() {
         // Given
-        val x: Integer = Integer.from(42)
-        val y: Integer = Integer.from(5)
+        val x: Integer = Integer.of(42)
+        val y: Integer = Integer.of(5)
         // When
         val result: Integer = x % y
         // Then
-        val expected: Integer = Integer.from(2)
+        val expected: Integer = Integer.of(2)
         check(result == expected)
     }
 
     @Test
     fun remOrNull() {
         // Given
-        val x: Integer = Integer.from(42)
-        val y: Integer = Integer.from(5)
+        val x: Integer = Integer.of(42)
+        val y: Integer = Integer.of(5)
         // When
         val result: Integer? = x.remOrNull(y)
         // Then
-        val expected: Integer = Integer.from(2)
+        val expected: Integer = Integer.of(2)
         check(result == expected)
     }
 
@@ -214,7 +215,7 @@ class IntegerSample {
     fun toStringOverride() {
         // Given
         val number = 9223372036854775807
-        val integer: Integer = Integer.from(number)
+        val integer: Integer = Integer.of(number)
         // When
         val result = "$integer" // or integer.toString()
         // Then

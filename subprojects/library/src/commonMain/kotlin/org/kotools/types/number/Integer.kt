@@ -110,7 +110,7 @@ public class Integer private constructor(private val decimal: String) {
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
         /**
-         * Creates an [Integer] from the specified [number].
+         * Returns an [Integer] representing the specified [value].
          *
          * <br>
          * <details>
@@ -120,7 +120,7 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerSample.from
+         * SAMPLE: org.kotools.types.number.IntegerSample.of
          * </details>
          *
          * <br>
@@ -131,11 +131,14 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerJavaSample.from
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.of
          * </details>
          */
         @JvmStatic
-        public fun from(number: Long): Integer = Integer("$number")
+        public fun of(value: Long): Integer {
+            val decimal: String = value.toString()
+            return Integer(decimal)
+        }
 
         /**
          * Creates an [Integer] from the specified [text], or throws an
@@ -243,7 +246,7 @@ public class Integer private constructor(private val decimal: String) {
         }
 
         @JvmSynthetic
-        internal fun zero(): Integer = this.from(0)
+        internal fun zero(): Integer = this.of(0)
     }
 
     // ------------------------------ Comparisons ------------------------------

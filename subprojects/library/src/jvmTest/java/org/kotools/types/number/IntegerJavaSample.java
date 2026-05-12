@@ -7,15 +7,14 @@ public class IntegerJavaSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    void from() {
-        // Given
-        final long number = 9223372036854775807L;
-        // When
-        final Integer result = Integer.from(number);
-        // Then
-        final String resultAsString = result.toString();
+    void of() {
+        final long number = 9_223_372_036_854_775_807L;
+
+        final Integer result = Integer.of(number);
+
+        final String resultString = String.valueOf(result);
         final String expected = String.valueOf(number);
-        final boolean check = resultAsString.equals(expected);
+        final boolean check = resultString.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
@@ -27,7 +26,7 @@ public class IntegerJavaSample {
         // When
         final Integer result = Integer.fromDecimal(text);
         // Then
-        final Integer expected = Integer.from(number);
+        final Integer expected = Integer.of(number);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
@@ -38,8 +37,8 @@ public class IntegerJavaSample {
     void equalsOverride() {
         // Given
         final long number = Long.MAX_VALUE;
-        final Integer x = Integer.from(number);
-        final Integer y = Integer.from(number);
+        final Integer x = Integer.of(number);
+        final Integer y = Integer.of(number);
         // When
         final boolean result = x.equals(y);
         // Then
@@ -50,11 +49,11 @@ public class IntegerJavaSample {
     void hashCodeOverride() {
         // Given
         final long number = Long.MAX_VALUE;
-        final Integer integer = Integer.from(number);
+        final Integer integer = Integer.of(number);
         // When
         final int result = integer.hashCode();
         // Then
-        final int expected = Integer.from(number)
+        final int expected = Integer.of(number)
                 .hashCode();
         final boolean check = result == expected;
         if (!check) throw new IllegalStateException("Check failed.");
@@ -63,8 +62,8 @@ public class IntegerJavaSample {
     @Test
     void compareTo() {
         // Given
-        final Integer x = Integer.from(Long.MIN_VALUE);
-        final Integer y = Integer.from(Long.MAX_VALUE);
+        final Integer x = Integer.of(Long.MIN_VALUE);
+        final Integer y = Integer.of(Long.MAX_VALUE);
         // When
         final boolean result = x.compareTo(y) < 0;
         // Then
@@ -76,11 +75,11 @@ public class IntegerJavaSample {
     @Test
     void unaryMinus() {
         // Given
-        final Integer x = Integer.from(9223372036854775807L);
+        final Integer x = Integer.of(9223372036854775807L);
         // When
         final Integer result = x.unaryMinus();
         // Then
-        final Integer expected = Integer.from(-9223372036854775807L);
+        final Integer expected = Integer.of(-9223372036854775807L);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
@@ -88,8 +87,8 @@ public class IntegerJavaSample {
     @Test
     void plus() {
         // Given
-        final Integer x = Integer.from(9223372036854775807L);
-        final Integer y = Integer.from(2);
+        final Integer x = Integer.of(9223372036854775807L);
+        final Integer y = Integer.of(2);
         // When
         final Integer result = x.plus(y);
         // Then
@@ -101,8 +100,8 @@ public class IntegerJavaSample {
     @Test
     void minus() {
         // Given
-        final Integer x = Integer.from(-9223372036854775807L);
-        final Integer y = Integer.from(2);
+        final Integer x = Integer.of(-9223372036854775807L);
+        final Integer y = Integer.of(2);
         // When
         final Integer result = x.minus(y);
         // Then
@@ -114,8 +113,8 @@ public class IntegerJavaSample {
     @Test
     void times() {
         // Given
-        final Integer x = Integer.from(9223372036854775807L);
-        final Integer y = Integer.from(10);
+        final Integer x = Integer.of(9223372036854775807L);
+        final Integer y = Integer.of(10);
         // When
         final Integer result = x.times(y);
         // Then
@@ -128,7 +127,7 @@ public class IntegerJavaSample {
     void div() {
         // Given
         final Integer x = Integer.fromDecimal("922337203685477580700");
-        final Integer y = Integer.from(10);
+        final Integer y = Integer.of(10);
         // When
         final Integer result = x.div(y);
         // Then
@@ -140,12 +139,12 @@ public class IntegerJavaSample {
     @Test
     void rem() {
         // Given
-        final Integer x = Integer.from(42);
-        final Integer y = Integer.from(5);
+        final Integer x = Integer.of(42);
+        final Integer y = Integer.of(5);
         // When
         final Integer result = x.rem(y);
         // Then
-        final Integer expected = Integer.from(2);
+        final Integer expected = Integer.of(2);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
@@ -156,7 +155,7 @@ public class IntegerJavaSample {
     void toStringOverride() {
         // Given
         final long number = 9223372036854775807L;
-        final Integer integer = Integer.from(number);
+        final Integer integer = Integer.of(number);
         // When
         final String result = integer.toString();
         // Then

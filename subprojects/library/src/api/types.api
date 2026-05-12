@@ -368,10 +368,10 @@ public final class org/kotools/types/number/Integer {
 	public final fun div (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final synthetic fun divOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun equals (Ljava/lang/Object;)Z
-	public static final fun from (J)Lorg/kotools/types/number/Integer;
 	public static final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/number/Integer;
 	public final fun hashCode ()I
 	public final fun minus (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
+	public static final fun of (J)Lorg/kotools/types/number/Integer;
 	public final fun plus (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun rem (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final synthetic fun remOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
@@ -381,8 +381,8 @@ public final class org/kotools/types/number/Integer {
 }
 
 public final class org/kotools/types/number/Integer$Companion {
-	public final fun from (J)Lorg/kotools/types/number/Integer;
 	public final fun fromDecimal (Ljava/lang/String;)Lorg/kotools/types/number/Integer;
 	public final synthetic fun fromDecimalOrNull (Ljava/lang/String;)Lorg/kotools/types/number/Integer;
+	public final fun of (J)Lorg/kotools/types/number/Integer;
 }
 
