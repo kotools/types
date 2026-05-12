@@ -21,6 +21,28 @@ import kotlin.jvm.JvmSynthetic
  * <br>
  * <details>
  * <summary>
+ *     <b>Integer vs Int</b>
+ * </summary>
+ *
+ * ### Integer vs Int
+ *
+ * The [Integer] type is the default integer type provided by Kotools Types,
+ * designed to replace primitive integer types where correctness matters.
+ *
+ * It models a mathematical integer and provides exact arithmetic without
+ * overflow, unlike Kotlin's built-in number types ([Byte], [Short], [Int] and
+ * [Long]).
+ *
+ * This type intentionally avoids names like `BigInteger` or `BigInt`, as its
+ * behavior is part of its contract and not an implementation detail.
+ *
+ * On JVM, this type coexists with `java.lang.Integer`. In Kotlin, developers
+ * typically use [Int], so this rarely causes confusion in practice.
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
  *     <b>Motivations</b>
  * </summary>
  *
