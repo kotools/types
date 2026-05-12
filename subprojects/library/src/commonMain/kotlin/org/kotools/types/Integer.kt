@@ -1,0 +1,605 @@
+package org.kotools.types
+
+import org.kotools.types.Integer.Companion.fromDecimal
+import org.kotools.types.Integer.Companion.fromDecimalOrNull
+import org.kotools.types.internal.integerAddition
+import org.kotools.types.internal.integerDivision
+import org.kotools.types.internal.integerMultiplication
+import org.kotools.types.internal.integerRemainder
+import org.kotools.types.internal.integerSubtraction
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
+
+/**
+ * Represents an integer.
+ *
+ * Use this type for preventing overflow when performing arithmetic operations
+ * with integers, and for consistent behavior across all platforms when dividing
+ * an integer by zero.
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Motivations</b>
+ * </summary>
+ *
+ * ### Motivations
+ *
+ * #### Integer overflow
+ *
+ * **Problem:** Adding, subtracting or multiplying Kotlin integer types ([Byte],
+ * [Short], [Int] and [Long]) can lead to an overflow, which produces unexpected
+ * behavior.
+ *
+ * SAMPLE: org.kotools.types.IntegerSample.overflowProblem
+ *
+ * **Solution:** The [Integer] type can [add][Integer.plus],
+ * [subtract][Integer.minus] or [multiply][Integer.times] integers without
+ * producing an overflow.
+ *
+ * SAMPLE: org.kotools.types.IntegerSample.overflowSolution
+ *
+ * #### Division by zero
+ *
+ * **Problem:** Performing division and remainder operations by zero on Kotlin
+ * integer types have different behavior per platform: throw an
+ * [ArithmeticException] on JVM and Native platforms, and return `0` on JS
+ * platform.
+ *
+ * SAMPLE: org.kotools.types.IntegerJvmNativeSample.divisionByZeroProblem
+ *
+ * SAMPLE: org.kotools.types.IntegerJsSample.divisionByZeroProblem
+ *
+ * **Solution:** [Division][Integer.div] and [remainder][Integer.rem] operations
+ * by zero on [Integer] type throw an [ArithmeticException] on all platforms.
+ *
+ * SAMPLE: org.kotools.types.IntegerSample.divisionByZeroSolution
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Key features</b>
+ * </summary>
+ *
+ * ### Key features
+ *
+ * - **Creations:** Create from [Long] number ([from][Integer.Companion.from])
+ * or decimal string ([fromDecimal][Integer.Companion.fromDecimal]).
+ * - **Comparisons:** Compare integers using
+ * [structural equality][Integer.equals] (`x == y`, `x != y`) and
+ * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
+ * operators.
+ * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
+ * [subtract][Integer.minus] (`x - y`), [multiply][Integer.times] (`x * y`),
+ * [divide][Integer.div] (`x / y`), compute [remainders][Integer.rem] (`x % y`),
+ * and [negate][Integer.unaryMinus] (`-x`) integers without overflow.
+ * - **Conversions:** Convert to its [decimal string][Integer.toString]
+ * representation.
+ * </details>
+ *
+ * @since 5.1.0
+ */
+@ExperimentalKotoolsTypesApi
+public class Integer private constructor(private val decimal: String) {
+    // ------------------------------- Creations -------------------------------
+
+    /** Contains class-level declarations for the [Integer] type. */
+    public companion object {
+        /**
+         * Creates an [Integer] from the specified [number].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.IntegerSample.from
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.IntegerJavaSample.from
+         * </details>
+         */
+        @JvmStatic
+        public fun from(number: Long): Integer = Integer("$number")
+
+        /**
+         * Creates an [Integer] from the specified [text], or throws an
+         * [IllegalArgumentException] if the [text] doesn't represent an
+         * integer.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
+         * `+1234`, `-1234`).
+         *
+         * In case of invalid [text], this function throws an
+         * [IllegalArgumentException] instead of a [NumberFormatException] to
+         * ensure consistent behavior across all Kotlin platforms and to better
+         * reflect invalid argument semantics.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.IntegerSample.fromDecimal
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.IntegerJavaSample.fromDecimal
+         * </details>
+         * <br>
+         *
+         * See the [fromDecimalOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [text].
+         */
+        @JvmStatic
+        public fun fromDecimal(text: String): Integer {
+            require(text.isNotBlank()) { "Integer can't be blank." }
+            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
+            val unsignedText: String =
+                textWithoutPlusSignPrefix.removePrefix("-")
+            val isDecimal: Boolean =
+                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
+            require(isDecimal) {
+                "Integer can only contain an optional + or - sign, followed " +
+                        "by a sequence of digits (was: $text)."
+            }
+            val isZero: Boolean = unsignedText.all { it == '0' }
+            if (isZero) return this.zero()
+            val sign: String =
+                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
+                else ""
+            val digits: String = unsignedText.trimStart('0')
+            return Integer(decimal = "$sign$digits")
+        }
+
+        /**
+         * Creates an [Integer] from the specified [text], or returns `null` if
+         * the [text] doesn't represent an integer.
+         *
+         * The [text] parameter must only contain an optional plus sign (`+`) or
+         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
+         * `+1234`, `-1234`).
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.IntegerSample.fromDecimalOrNull
+         * </details>
+         * <br>
+         *
+         * This function is not available from Java code, due to its
+         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+         *
+         * See the [fromDecimal] function for throwing an exception instead of
+         * returning `null` in case of invalid [text].
+         */
+        @JvmSynthetic
+        public fun fromDecimalOrNull(text: String): Integer? {
+            if (text.isBlank()) return null
+            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
+            val unsignedText: String =
+                textWithoutPlusSignPrefix.removePrefix("-")
+            val isDecimal: Boolean =
+                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
+            if (!isDecimal) return null
+            val isZero: Boolean = unsignedText.all { it == '0' }
+            if (isZero) return this.zero()
+            val sign: String =
+                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
+                else ""
+            val digits: String = unsignedText.trimStart('0')
+            return Integer(decimal = "$sign$digits")
+        }
+
+        @JvmSynthetic
+        internal fun zero(): Integer = this.from(0)
+    }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    /**
+     * Returns `true` if the [other] object is an instance of [Integer] with the
+     * same value as this one, or returns `false` otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.equalsOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.equalsOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean =
+        other is Integer && this.decimal == other.decimal
+
+    /**
+     * Returns a hash code value for this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.hashCodeOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.hashCodeOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = this.decimal.hashCode()
+
+    /**
+     * Compares this integer with the [other] one for order.
+     * Returns a negative number, zero, or a positive number as this integer is
+     * less than, equal to, or greater than the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.compareTo
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.compareTo
+     * </details>
+     */
+    public operator fun compareTo(other: Integer): Int =
+        this.decimal.compareTo(other.decimal)
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.unaryMinus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.unaryMinus
+     * </details>
+     */
+    public operator fun unaryMinus(): Integer {
+        if (this == zero()) return this
+        val minusSign = "-"
+        val isNegative: Boolean = this.decimal.startsWith(minusSign)
+        if (isNegative) {
+            val text: String = this.decimal.removePrefix(minusSign)
+            return fromDecimal(text)
+        }
+        return fromDecimal("$minusSign${this.decimal}")
+    }
+
+    /**
+     * Adds the [other] integer to this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.plus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.plus
+     * </details>
+     */
+    public operator fun plus(other: Integer): Integer {
+        val sum: String = integerAddition(x = "$this", y = "$other")
+        return fromDecimal(sum)
+    }
+
+    /**
+     * Subtracts the [other] integer from this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.minus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.minus
+     * </details>
+     */
+    public operator fun minus(other: Integer): Integer {
+        val difference: String = integerSubtraction(x = "$this", y = "$other")
+        return fromDecimal(difference)
+    }
+
+    /**
+     * Multiplies this integer by the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.times
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.times
+     * </details>
+     */
+    public operator fun times(other: Integer): Integer {
+        val product: String = integerMultiplication(x = "$this", y = "$other")
+        return fromDecimal(product)
+    }
+
+    /**
+     * Returns the quotient of dividing this integer by the [other] one, or
+     * throws an [ArithmeticException] if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.div
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.div
+     * </details>
+     * <br>
+     *
+     * See the [divOrNull] function for returning `null` instead of throwing an
+     * exception in case of invalid [other] integer.
+     */
+    public operator fun div(other: Integer): Integer {
+        if (other == zero())
+            throw ArithmeticException("Integer can't be divided by zero.")
+        val quotient: String = integerDivision(x = "$this", y = "$other")
+        return fromDecimal(quotient)
+    }
+
+    /**
+     * Returns the quotient of dividing this integer by the [other] one, or
+     * returns `null` if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.divOrNull
+     * </details>
+     * <br>
+     *
+     * This function is not available from Java code, due to its
+     * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+     *
+     * See the [div] function for throwing an exception instead of returning
+     * `null` in case of invalid [other] integer.
+     */
+    @JvmSynthetic
+    public fun divOrNull(other: Integer): Integer? {
+        if (other == zero()) return null
+        val quotient: String = integerDivision(x = "$this", y = "$other")
+        return fromDecimal(quotient)
+    }
+
+    /**
+     * Returns the remainder of dividing this integer by the [other] one, or
+     * throws an [ArithmeticException] if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.rem
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.rem
+     * </details>
+     * <br>
+     *
+     * See the [remOrNull] function for returning `null` instead of throwing an
+     * exception in case of invalid [other] integer.
+     */
+    public operator fun rem(other: Integer): Integer {
+        if (other == zero())
+            throw ArithmeticException("Integer can't be divided by zero.")
+        val remainder: String = integerRemainder(x = "$this", y = "$other")
+        return fromDecimal(remainder)
+    }
+
+    /**
+     * Returns the remainder of dividing this integer by the [other] one, or
+     * returns `null` if the [other] integer is zero.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.remOrNull
+     * </details>
+     * <br>
+     *
+     * This function is not available from Java code, due to its
+     * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+     *
+     * See the [rem] function for throwing an exception instead of returning
+     * `null` in case of invalid [other] integer.
+     */
+    @JvmSynthetic
+    public fun remOrNull(other: Integer): Integer? {
+        if (other == zero()) return null
+        val remainder: String = integerRemainder(x = "$this", y = "$other")
+        return fromDecimal(remainder)
+    }
+
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the decimal string representation of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.IntegerSample.toStringOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.IntegerJavaSample.toStringOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = this.decimal
+}
