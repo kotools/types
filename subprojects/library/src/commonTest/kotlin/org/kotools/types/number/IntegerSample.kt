@@ -1,5 +1,6 @@
-package org.kotools.types
+package org.kotools.types.number
 
+import org.kotools.types.ExperimentalKotoolsTypesApi
 import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -30,8 +31,8 @@ class IntegerSample {
         // Common code
         val x: Integer = Integer.from(12)
         val y: Integer = Integer.from(0)
-        val quotient: Result<Integer> = kotlin.runCatching { x / y }
-        val remainder: Result<Integer> = kotlin.runCatching { x % y }
+        val quotient: Result<Integer> = runCatching { x / y }
+        val remainder: Result<Integer> = runCatching { x % y }
         check(quotient.exceptionOrNull() is ArithmeticException)
         check(remainder.exceptionOrNull() is ArithmeticException)
     }

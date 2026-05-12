@@ -1,4 +1,4 @@
-package org.kotools.types
+package org.kotools.types.number
 
 import kotlin.test.Test
 
@@ -7,8 +7,8 @@ class IntegerJvmNativeSample {
     @Test
     fun divisionByZeroProblem() {
         // JVM and Native platforms
-        val quotient: Result<Int> = kotlin.runCatching { 12 / 0 }
-        val remainder: Result<Int> = kotlin.runCatching { 12 % 0 }
+        val quotient: Result<Int> = runCatching { 12 / 0 }
+        val remainder: Result<Int> = runCatching { 12 % 0 }
         check(quotient.exceptionOrNull() is ArithmeticException)
         check(remainder.exceptionOrNull() is ArithmeticException)
     }

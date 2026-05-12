@@ -1,4 +1,4 @@
-package org.kotools.types
+package org.kotools.types.number
 
 import kotlin.test.Test
 

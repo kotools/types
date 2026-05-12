@@ -1,9 +1,8 @@
-package org.kotools.types;
+package org.kotools.types.number;
 
 import org.junit.jupiter.api.Test;
-import org.kotools.types.internal.Warning;
 
-@SuppressWarnings(Warning.TEST_JAVA_CLASS_NAME)
+@SuppressWarnings("NewClassNamingConvention")
 public class IntegerJavaSample {
     // ------------------------------- Creations -------------------------------
 
