@@ -8,6 +8,7 @@ import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
 import org.kotools.types.number.Integer.Companion.fromDecimal
 import org.kotools.types.number.Integer.Companion.fromDecimalOrNull
+import org.kotools.types.number.Integer.Companion.of
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -56,9 +57,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: org.kotools.types.number.IntegerSample.overflowProblem
  *
- * **Solution:** The [Integer] type can [add][Integer.plus],
- * [subtract][Integer.minus] or [multiply][Integer.times] integers without
- * producing an overflow.
+ * **Solution:** The [Integer] type can [add][plus], [subtract][minus] or
+ * [multiply][times] integers without producing an overflow.
  *
  * SAMPLE: org.kotools.types.number.IntegerSample.overflowSolution
  *
@@ -73,8 +73,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: org.kotools.types.number.IntegerJsSample.divisionByZeroProblem
  *
- * **Solution:** [Division][Integer.div] and [remainder][Integer.rem] operations
- * by zero on [Integer] type throw an [ArithmeticException] on all platforms.
+ * **Solution:** [Division][div] and [remainder][rem] operations by zero on
+ * [Integer] type throw an [ArithmeticException] on all platforms.
  *
  * SAMPLE: org.kotools.types.number.IntegerSample.divisionByZeroSolution
  * </details>
@@ -87,16 +87,15 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from [Long] number ([from][Integer.Companion.from])
- * or decimal string ([fromDecimal][Integer.Companion.fromDecimal]).
+ * - **Creations:** Create from [Long] number ([of]) or decimal string
+ * ([fromDecimal]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
- * [ordering][Integer.compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`)
- * operators.
- * - **Arithmetic operations:** [Add][Integer.plus] (`x + y`),
- * [subtract][Integer.minus] (`x - y`), [multiply][Integer.times] (`x * y`),
- * [divide][Integer.div] (`x / y`), compute [remainders][Integer.rem] (`x % y`),
- * and [negate][Integer.unaryMinus] (`-x`) integers without overflow.
+ * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
+ * - **Arithmetic operations:** [Add][plus] (`x + y`), [subtract][minus]
+ * (`x - y`), [multiply][times] (`x * y`), [divide][div] (`x / y`), compute
+ * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
+ * overflow.
  * - **Conversions:** Convert to its [decimal string][Integer.toString]
  * representation.
  * </details>
