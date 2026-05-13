@@ -6,9 +6,9 @@ import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
-import org.kotools.types.number.Integer.Companion.fromDecimal
 import org.kotools.types.number.Integer.Companion.fromDecimalOrNull
 import org.kotools.types.number.Integer.Companion.of
+import org.kotools.types.number.Integer.Companion.parse
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -88,7 +88,7 @@ import kotlin.jvm.JvmSynthetic
  * ### Key features
  *
  * - **Creations:** Create from [Long] number ([of]) or decimal string
- * ([fromDecimal]).
+ * ([parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
@@ -140,18 +140,20 @@ public class Integer private constructor(private val decimal: String) {
         }
 
         /**
-         * Creates an [Integer] from the specified [text], or throws an
-         * [IllegalArgumentException] if the [text] doesn't represent an
-         * integer.
+         * Returns an [Integer] representing exactly the number described by
+         * [value], or throws [NumberFormatException] if the [value] doesn't
+         * represent an integer.
          *
-         * The [text] parameter must only contain an optional plus sign (`+`) or
-         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
-         * `+1234`, `-1234`).
+         * The specified [value] must be a numeric string, with an optional
+         * leading sign (`+` or `-`). Also, this function removes insignificant
+         * leading zeros from the [value]. As a result, calling this function
+         * with `123` and `+000123` produces the same result.
          *
-         * In case of invalid [text], this function throws an
-         * [IllegalArgumentException] instead of a [NumberFormatException] to
-         * ensure consistent behavior across all Kotlin platforms and to better
-         * reflect invalid argument semantics.
+         * ```
+         * integer = [sign] digit {digit}
+         * sign = "+" | "-"
+         * digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+         * ```
          *
          * <br>
          * <details>
@@ -161,7 +163,7 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerSample.fromDecimal
+         * SAMPLE: org.kotools.types.number.IntegerSample.parse
          * </details>
          *
          * <br>
@@ -172,32 +174,40 @@ public class Integer private constructor(private val decimal: String) {
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromDecimal
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.parse
          * </details>
          * <br>
          *
          * See the [fromDecimalOrNull] function for returning `null` instead of
-         * throwing an exception in case of invalid [text].
+         * throwing an exception in case of invalid [value].
          */
         @JvmStatic
-        public fun fromDecimal(text: String): Integer {
-            require(text.isNotBlank()) { "Integer can't be blank." }
-            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
-            val unsignedText: String =
-                textWithoutPlusSignPrefix.removePrefix("-")
-            val isDecimal: Boolean =
-                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            require(isDecimal) {
-                "Integer can only contain an optional + or - sign, followed " +
-                        "by a sequence of digits (was: $text)."
-            }
-            val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.zero()
-            val sign: String =
-                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
-                else ""
-            val digits: String = unsignedText.trimStart('0')
-            return Integer(decimal = "$sign$digits")
+        public fun parse(value: String): Integer {
+            if (!value.isInteger()) throw NumberFormatException(
+                "\"$value\" is not a valid integer."
+            )
+            val normalized: String = value.normalizeInteger()
+            return Integer(normalized)
+        }
+
+        @JvmSynthetic
+        internal fun String.isInteger(): Boolean {
+            val range: CharRange = '0'..'9'
+            return this.removePrefix("+")
+                .removePrefix("-")
+                .ifBlank { return false }
+                .all { it in range }
+        }
+
+        private fun String.normalizeInteger(): String {
+            val sign: String = this.firstOrNull { it == '-' }
+                ?.toString()
+                ?: ""
+            val digits: String = this.removePrefix("+")
+                .removePrefix("-")
+                .trimStart('0')
+                .ifEmpty { return "0" }
+            return "$sign$digits"
         }
 
         /**
@@ -223,7 +233,7 @@ public class Integer private constructor(private val decimal: String) {
          * This function is not available from Java code, due to its
          * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
          *
-         * See the [fromDecimal] function for throwing an exception instead of
+         * See the [parse] function for throwing an exception instead of
          * returning `null` in case of invalid [text].
          */
         @JvmSynthetic
@@ -371,9 +381,9 @@ public class Integer private constructor(private val decimal: String) {
         val isNegative: Boolean = this.decimal.startsWith(minusSign)
         if (isNegative) {
             val text: String = this.decimal.removePrefix(minusSign)
-            return fromDecimal(text)
+            return parse(text)
         }
-        return fromDecimal("$minusSign${this.decimal}")
+        return parse("$minusSign${this.decimal}")
     }
 
     /**
@@ -403,7 +413,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     public operator fun plus(other: Integer): Integer {
         val sum: String = integerAddition(x = "$this", y = "$other")
-        return fromDecimal(sum)
+        return parse(sum)
     }
 
     /**
@@ -433,7 +443,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     public operator fun minus(other: Integer): Integer {
         val difference: String = integerSubtraction(x = "$this", y = "$other")
-        return fromDecimal(difference)
+        return parse(difference)
     }
 
     /**
@@ -463,7 +473,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     public operator fun times(other: Integer): Integer {
         val product: String = integerMultiplication(x = "$this", y = "$other")
-        return fromDecimal(product)
+        return parse(product)
     }
 
     /**
@@ -500,7 +510,7 @@ public class Integer private constructor(private val decimal: String) {
         if (other == zero())
             throw ArithmeticException("Integer can't be divided by zero.")
         val quotient: String = integerDivision(x = "$this", y = "$other")
-        return fromDecimal(quotient)
+        return parse(quotient)
     }
 
     /**
@@ -529,7 +539,7 @@ public class Integer private constructor(private val decimal: String) {
     public fun divOrNull(other: Integer): Integer? {
         if (other == zero()) return null
         val quotient: String = integerDivision(x = "$this", y = "$other")
-        return fromDecimal(quotient)
+        return parse(quotient)
     }
 
     /**
@@ -566,7 +576,7 @@ public class Integer private constructor(private val decimal: String) {
         if (other == zero())
             throw ArithmeticException("Integer can't be divided by zero.")
         val remainder: String = integerRemainder(x = "$this", y = "$other")
-        return fromDecimal(remainder)
+        return parse(remainder)
     }
 
     /**
@@ -595,7 +605,7 @@ public class Integer private constructor(private val decimal: String) {
     public fun remOrNull(other: Integer): Integer? {
         if (other == zero()) return null
         val remainder: String = integerRemainder(x = "$this", y = "$other")
-        return fromDecimal(remainder)
+        return parse(remainder)
     }
 
     // ------------------------------ Conversions ------------------------------

@@ -1,6 +1,12 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.negativeIntegerString
+import org.kotools.types.nonIntegerString
+import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
+import org.kotools.types.positiveIntegerString
+import org.kotools.types.repeatTest
+import org.kotools.types.zeroString
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,7 +20,7 @@ class IntegerTest {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun ofPreservesLongRepresentation(): Unit = repeat(times = 1_000) {
+    fun ofPreservesLongRepresentation(): Unit = repeatTest {
         val value: Long = Random.nextLong()
 
         val integer: Integer = Integer.of(value)
@@ -25,162 +31,59 @@ class IntegerTest {
     }
 
     @Test
-    fun fromDecimalWithNonZeroDecimalString() {
-        // Given
-        val number = 123456L
-        val text = "$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
+    fun parseNormalizesZero(): Unit = repeatTest {
+        val value: String = Random.zeroString()
+
+        val actual: Integer = Integer.parse(value)
+
+        val expected: Integer = Integer.of(0)
+        assertEquals(expected, actual, message = "Input: \"$value\"")
     }
 
     @Test
-    fun fromDecimalWithPlusSignedNonZeroDecimalString() {
-        // Given
-        val number = 123456L
-        val text = "+$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
+    fun parseIgnoresPlusSignFromPositiveValues(): Unit = repeatTest {
+        val value: String = Random.positiveIntegerString()
+
+        val integer: Integer = Integer.parse(value)
+
+        val actual: String = integer.toString()
+        assertFalse(
+            "\"$actual\" must not start with plus sign (input: \"$value\")."
+        ) { actual.startsWith('+') }
     }
 
     @Test
-    fun fromDecimalWithMinusSignedNonZeroDecimalString() {
-        // Given
-        val number: Long = -123456L
-        val text = "$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
+    fun parsePreservesRepresentationOfNegativeValues(): Unit = repeatTest {
+        val value: String = Random.negativeIntegerString()
+
+        val integer: Integer = Integer.parse(value)
+
+        val actual: String = integer.toString()
+        assertEquals(expected = value, actual, message = "Input: \"$value\"")
     }
 
     @Test
-    fun fromDecimalWithSingleZeroDecimalString() {
-        // Given
-        val text = "0"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
+    fun parseRemovesLeadingZerosFromNonZeroValues(): Unit = repeatTest {
+        val value: String = Random.nonZeroIntegerStringWithLeadingZeros()
+
+        val integer: Integer = Integer.parse(value)
+
+        val actual: String = integer.toString()
+        assertTrue(
+            "\"$actual\" must not have leading zeros (input: \"$value\")."
+        ) { actual.first(Char::isDigit) != '0' }
     }
 
     @Test
-    fun fromDecimalWithMultipleZerosDecimalString() {
-        // Given
-        val text = "000"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
+    fun parseThrowsExceptionWithNonIntegerValue(): Unit = repeatTest {
+        val value: String = Random.nonIntegerString()
 
-    @Test
-    fun fromDecimalWithPlusSignedZeroDecimalString() {
-        // Given
-        val text = "+0"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
+        val message = "Input: \"$value\""
+        val exception: NumberFormatException =
+            assertFailsWith(message) { Integer.parse(value) }
 
-    @Test
-    fun fromDecimalWithMinusSignedZeroDecimalString() {
-        // Given
-        val text = "-0"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithLeadingZerosInPositiveDecimalString() {
-        // Given
-        val number = 123L
-        val text = "000$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithLeadingZerosInNegativeDecimalString() {
-        // Given
-        val number = 123L
-        val text = "-000$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.of(-number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalWithBlankString() {
-        // Given
-        val text = " "
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
-        }
-        // Then
-        val expected = "Integer can't be blank."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithPlusSignString() {
-        // Given
-        val text = "+"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
-        }
-        // Then
-        val expected: String = "Integer can only contain an optional + or - " +
-                "sign, followed by a sequence of digits (was: $text)."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithMinusSignString() {
-        // Given
-        val text = "-"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
-        }
-        // Then
-        val expected: String = "Integer can only contain an optional + or - " +
-                "sign, followed by a sequence of digits (was: $text)."
-        assertEquals(expected, result.message)
-    }
-
-    @Test
-    fun fromDecimalWithNonDecimalString() {
-        // Given
-        val text = "oops"
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
-            Integer.fromDecimal(text)
-        }
-        // Then
-        val expected: String = "Integer can only contain an optional + or - " +
-                "sign, followed by a sequence of digits (was: $text)."
-        assertEquals(expected, result.message)
+        val expected = "\"$value\" is not a valid integer."
+        assertEquals(expected, actual = exception.message, message)
     }
 
     @Test
@@ -453,7 +356,7 @@ class IntegerTest {
         // When
         val result: Integer = x + y
         // Then
-        val expected: Integer = Integer.fromDecimal("18446744073709551614")
+        val expected: Integer = Integer.parse("18446744073709551614")
         assertEquals(expected, result)
     }
 
@@ -465,7 +368,7 @@ class IntegerTest {
         // When
         val result: Integer = x - y
         // Then
-        val expected: Integer = Integer.fromDecimal("-18446744073709551614")
+        val expected: Integer = Integer.parse("-18446744073709551614")
         assertEquals(expected, result)
     }
 
@@ -477,7 +380,7 @@ class IntegerTest {
         // When
         val result: Integer = x * y
         // Then
-        val expected: Integer = Integer.fromDecimal("9223372036854775807000")
+        val expected: Integer = Integer.parse("9223372036854775807000")
         assertEquals(expected, result)
     }
 

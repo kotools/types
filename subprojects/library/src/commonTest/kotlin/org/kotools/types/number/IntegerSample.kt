@@ -21,9 +21,9 @@ class IntegerSample {
     fun overflowSolution() {
         val x: Integer = Integer.of(9223372036854775807)
         val y: Integer = Integer.of(10)
-        check(x + y == Integer.fromDecimal("9223372036854775817"))
-        check(-x - y == Integer.fromDecimal("-9223372036854775817"))
-        check(x * y == Integer.fromDecimal("92233720368547758070"))
+        check(x + y == Integer.parse("9223372036854775817"))
+        check(-x - y == Integer.parse("-9223372036854775817"))
+        check(x * y == Integer.parse("92233720368547758070"))
     }
 
     @Test
@@ -41,24 +41,22 @@ class IntegerSample {
 
     @Test
     fun of() {
-        val number = 9_223_372_036_854_775_807
+        val value = 9_223_372_036_854_775_807
 
-        val result: Integer = Integer.of(number)
+        val result: Integer = Integer.of(value)
 
         val resultString: String = result.toString()
-        val expected: String = number.toString()
+        val expected: String = value.toString()
         check(resultString == expected)
     }
 
     @Test
-    fun fromDecimal() {
-        // Given
-        val number = 123456L
-        val text = "$number"
-        // When
-        val result: Integer = Integer.fromDecimal(text)
-        // Then
-        val expected: Integer = Integer.of(number)
+    fun parse() {
+        val value = "+000123"
+
+        val result: Integer = Integer.parse(value)
+
+        val expected: Integer = Integer.of(123)
         check(result == expected)
     }
 
@@ -133,7 +131,7 @@ class IntegerSample {
         // When
         val result: Integer = x + y
         // Then
-        val expected: Integer = Integer.fromDecimal("9223372036854775809")
+        val expected: Integer = Integer.parse("9223372036854775809")
         check(result == expected)
     }
 
@@ -145,7 +143,7 @@ class IntegerSample {
         // When
         val result: Integer = x - y
         // Then
-        val expected: Integer = Integer.fromDecimal("-9223372036854775809")
+        val expected: Integer = Integer.parse("-9223372036854775809")
         check(result == expected)
     }
 
@@ -157,31 +155,31 @@ class IntegerSample {
         // When
         val result: Integer = x * y
         // Then
-        val expected: Integer = Integer.fromDecimal("92233720368547758070")
+        val expected: Integer = Integer.parse("92233720368547758070")
         check(result == expected)
     }
 
     @Test
     fun div() {
         // Given
-        val x: Integer = Integer.fromDecimal("922337203685477580700")
+        val x: Integer = Integer.parse("922337203685477580700")
         val y: Integer = Integer.of(10)
         // When
         val result: Integer = x / y
         // Then
-        val expected: Integer = Integer.fromDecimal("92233720368547758070")
+        val expected: Integer = Integer.parse("92233720368547758070")
         check(result == expected)
     }
 
     @Test
     fun divOrNull() {
         // Given
-        val x: Integer = Integer.fromDecimal("922337203685477580700")
+        val x: Integer = Integer.parse("922337203685477580700")
         val y: Integer = Integer.of(10)
         // When
         val result: Integer? = x.divOrNull(y)
         // Then
-        val expected: Integer = Integer.fromDecimal("92233720368547758070")
+        val expected: Integer = Integer.parse("92233720368547758070")
         check(result == expected)
     }
 
