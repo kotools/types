@@ -190,8 +190,7 @@ public class Integer private constructor(private val decimal: String) {
             return Integer(normalized)
         }
 
-        @JvmSynthetic
-        internal fun String.isInteger(): Boolean {
+        private fun String.isInteger(): Boolean {
             val range: CharRange = '0'..'9'
             return this.removePrefix("+")
                 .removePrefix("-")

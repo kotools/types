@@ -1,6 +1,5 @@
 package org.kotools.types
 
-import org.kotools.types.number.Integer.Companion.isInteger
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextLong
@@ -51,10 +50,10 @@ internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
     return "$prefix$suffix"
 }
 
-@OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Random.nonIntegerString(): String {
     var candidate: String = this.string()
-    while (candidate.isInteger()) candidate = this.string()
+    val regex = Regex("""^[+-]?\d+$""")
+    while (candidate matches regex) candidate = this.string()
     return candidate
 }
 
