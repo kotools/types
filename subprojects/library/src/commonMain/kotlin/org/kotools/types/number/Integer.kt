@@ -140,20 +140,24 @@ public class Integer private constructor(private val decimal: String) {
         }
 
         /**
-         * Returns an [Integer] representing exactly the number described by
-         * [value], or throws [NumberFormatException] if the [value] doesn't
-         * represent an integer.
+         * Returns an [Integer] representing the number described by [value],
+         * or throws [NumberFormatException] if the [value] doesn't represent an
+         * integer.
          *
-         * The specified [value] must be a numeric string, with an optional
-         * leading sign (`+` or `-`). Also, this function removes insignificant
-         * leading zeros from the [value]. As a result, calling this function
-         * with `123` and `+000123` produces the same result.
+         * A valid integer representation is defined as:
          *
          * ```
          * integer = [sign] digit {digit}
          * sign = "+" | "-"
          * digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
          * ```
+         *
+         * _(grammar written in Wirth-style EBNF, where `[]` denotes
+         * optionality and `{}` denotes repetition)_
+         *
+         * Leading zeros and plus sign are ignored when interpreting [value]. As
+         * a result, calling this function with `123` and `+000123` produces the
+         * same integer.
          *
          * <br>
          * <details>
