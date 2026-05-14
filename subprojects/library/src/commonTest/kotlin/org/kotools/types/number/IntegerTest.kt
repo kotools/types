@@ -30,204 +30,72 @@ class IntegerTest {
     }
 
     @Test
-    fun parseNormalizesZero(): Unit = repeatTest {
+    fun parsingNormalizesZero(): Unit = repeatTest {
         val value: String = Random.zeroString()
 
-        val actual: Integer = Integer.parse(value)
+        val integer: Integer = Integer.parse(value)
+        val safeInteger: Integer? = Integer.parseOrNull(value)
 
         val expected: Integer = Integer.of(0)
-        assertEquals(expected, actual, message = "Input: \"$value\"")
+        val message = "Input: \"$value\""
+        assertEquals(expected, actual = integer, message)
+        assertEquals(expected, actual = safeInteger, message)
     }
 
     @Test
-    fun parseRemovesPlusSign(): Unit = repeatTest {
+    fun parsingRemovesPlusSign(): Unit = repeatTest {
         val value: String = Random.positiveIntegerString()
 
         val integer: Integer = Integer.parse(value)
+        val safeInteger: Integer? = Integer.parseOrNull(value)
 
         val actual: String = integer.toString()
         assertFalse(
             "\"$actual\" must not start with plus sign (input: \"$value\")."
         ) { actual.startsWith('+') }
+        assertEquals(integer, safeInteger, message = "Input: \"$value\"")
     }
 
     @Test
-    fun parseRemovesLeadingZerosFromNonZeroInteger(): Unit = repeatTest {
+    fun parsingRemovesLeadingZerosFromNonZeroInteger(): Unit = repeatTest {
         val value: String = Random.nonZeroIntegerStringWithLeadingZeros()
 
         val integer: Integer = Integer.parse(value)
+        val safeInteger: Integer? = Integer.parseOrNull(value)
 
         val actual: String = integer.toString()
         assertTrue(
             "\"$actual\" must not have leading zeros (input: \"$value\")."
         ) { actual.first(Char::isDigit) != '0' }
+        assertEquals(integer, safeInteger, message = "Input: \"$value\"")
     }
 
     @Test
-    fun parsePreservesCanonicalRepresentation(): Unit = repeatTest {
+    fun parsingPreservesCanonicalRepresentation(): Unit = repeatTest {
         val value: String = Random.nextLong()
             .toString()
 
         val integer: Integer = Integer.parse(value)
+        val safeInteger: Integer? = Integer.parseOrNull(value)
 
         val actual: String = integer.toString()
-        assertEquals(expected = value, actual, message = "Input: \"$value\"")
+        val message = "Input: \"$value\""
+        assertEquals(expected = value, actual, message)
+        assertEquals(integer, safeInteger, message)
     }
 
     @Test
-    fun parseThrowsExceptionWithNonintegerString(): Unit = repeatTest {
+    fun parsingFailsWithNonintegerString(): Unit = repeatTest {
         val value: String = Random.nonIntegerString()
 
         val message = "Input: \"$value\""
         val exception: NumberFormatException =
             assertFailsWith(message) { Integer.parse(value) }
-
         val expected = "\"$value\" is not a valid integer."
         assertEquals(expected, actual = exception.message, message)
-    }
 
-    @Test
-    fun fromDecimalOrNullWithNonZeroDecimalString() {
-        // Given
-        val number = 123456L
-        val text = "$number"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithPlusSignedNonZeroDecimalString() {
-        // Given
-        val number = 123456L
-        val text = "+$number"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithMinusSignedNonZeroDecimalString() {
-        // Given
-        val number: Long = -123456L
-        val text = "$number"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithSingleZeroDecimalString() {
-        // Given
-        val text = "0"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithMultipleZerosDecimalString() {
-        // Given
-        val text = "000"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithPlusSignedZeroDecimalString() {
-        // Given
-        val text = "+0"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithMinusSignedZeroDecimalString() {
-        // Given
-        val text = "-0"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.zero()
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithLeadingZerosInPositiveDecimalString() {
-        // Given
-        val number = 123L
-        val text = "000$number"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.of(number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithLeadingZerosInNegativeDecimalString() {
-        // Given
-        val number = 123L
-        val text = "-000$number"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        val expected: Integer = Integer.of(-number)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithBlankString() {
-        // Given
-        val text = "  "
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        assertNull(result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithPlusSignString() {
-        // Given
-        val text = "+"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        assertNull(result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithMinusSignString() {
-        // Given
-        val text = "-"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        assertNull(result)
-    }
-
-    @Test
-    fun fromDecimalOrNullWithNonDecimalString() {
-        // Given
-        val text = "oops"
-        // When
-        val result: Integer? = Integer.fromDecimalOrNull(text)
-        // Then
-        assertNull(result)
+        val safeInteger: Integer? = Integer.parseOrNull(value)
+        assertNull(safeInteger, message)
     }
 
     // ------------------------------ Comparisons ------------------------------

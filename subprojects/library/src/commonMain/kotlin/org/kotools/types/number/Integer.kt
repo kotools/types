@@ -6,9 +6,9 @@ import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
-import org.kotools.types.number.Integer.Companion.fromDecimalOrNull
 import org.kotools.types.number.Integer.Companion.of
 import org.kotools.types.number.Integer.Companion.parse
+import org.kotools.types.number.Integer.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -182,7 +182,7 @@ public class Integer private constructor(private val decimal: String) {
          * </details>
          * <br>
          *
-         * See the [fromDecimalOrNull] function for returning `null` instead of
+         * See the [parseOrNull] function for returning `null` instead of
          * throwing an exception in case of invalid [value].
          */
         @JvmStatic
@@ -193,6 +193,49 @@ public class Integer private constructor(private val decimal: String) {
             val normalized: String = value.normalizeInteger()
             return Integer(normalized)
         }
+
+        /**
+         * Returns an [Integer] representing the number described by [value],
+         * or returns `null` if the [value] doesn't represent an integer.
+         *
+         * A valid integer representation is defined as:
+         *
+         * ```
+         * integer = [sign] digit {digit}
+         * sign = "+" | "-"
+         * digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+         * ```
+         *
+         * _(grammar written in Wirth-style EBNF, where `[]` denotes
+         * optionality and `{}` denotes repetition)_
+         *
+         * Leading zeros and plus sign are ignored when interpreting [value]. As
+         * a result, calling this function with `123` and `+000123` produces the
+         * same integer.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerSample.parseOrNull
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [parse] function for throwing an exception instead of
+         * returning `null` in case of invalid [value].
+         */
+        @JvmSynthetic
+        public fun parseOrNull(value: String): Integer? = value
+            .takeIf { it.isInteger() }
+            ?.normalizeInteger()
+            ?.let(::Integer)
 
         private fun String.isInteger(): Boolean {
             val range: CharRange = '0'..'9'
@@ -211,50 +254,6 @@ public class Integer private constructor(private val decimal: String) {
                 .trimStart('0')
                 .ifEmpty { return "0" }
             return "$sign$digits"
-        }
-
-        /**
-         * Creates an [Integer] from the specified [text], or returns `null` if
-         * the [text] doesn't represent an integer.
-         *
-         * The [text] parameter must only contain an optional plus sign (`+`) or
-         * minus sign (`-`), followed by a sequence of digits (e.g., `1234`,
-         * `+1234`, `-1234`).
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: org.kotools.types.number.IntegerSample.fromDecimalOrNull
-         * </details>
-         * <br>
-         *
-         * This function is not available from Java code, due to its
-         * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
-         *
-         * See the [parse] function for throwing an exception instead of
-         * returning `null` in case of invalid [text].
-         */
-        @JvmSynthetic
-        public fun fromDecimalOrNull(text: String): Integer? {
-            if (text.isBlank()) return null
-            val textWithoutPlusSignPrefix: String = text.removePrefix("+")
-            val unsignedText: String =
-                textWithoutPlusSignPrefix.removePrefix("-")
-            val isDecimal: Boolean =
-                unsignedText.isNotEmpty() && unsignedText.all(Char::isDigit)
-            if (!isDecimal) return null
-            val isZero: Boolean = unsignedText.all { it == '0' }
-            if (isZero) return this.zero()
-            val sign: String =
-                if (textWithoutPlusSignPrefix.startsWith('-')) "-"
-                else ""
-            val digits: String = unsignedText.trimStart('0')
-            return Integer(decimal = "$sign$digits")
         }
 
         @JvmSynthetic
