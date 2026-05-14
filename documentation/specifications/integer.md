@@ -128,20 +128,71 @@ class Integer {
 }
 ```
 
-- Parsing preserves canonical representation: if `s` is canonical, then
-  `parse(s).toString() == s` and `parseOrNull(s).toString() == s`.
-- Parsing ignores plus sign: `parse("+1").toString() == "1"` and
-  `parseOrNull("+1").toString() == "1"`.
-- Parsing removes leading zeros: `parse("01").toString() == "1"` and
-  `parseOrNull("01").toString() == "1"`.
-- Strings that don't represent an integer can't be parsed: if `s` is not a valid
-  integer representation, `parse(s)` throws `NumberFormatException` and
-  `parseOrNull(s)` returns `null`.
-- `parseOrNull` is not available from Java code due to its non-explicit support
-  for nullable types.
-- Zero has unique decimal string representation: if `s = "0"`, then
-  `parse(s).toString() == s`.
-- Negative zero has no representation: `parse("-0").toString() == "0"`.
+`parseOrNull` behaves like `parse`, except that invalid inputs return `null`
+instead of throwing `NumberFormatException`.
+
+#### Successful parsing
+
+Parsing accepts any valid decimal integer representation and returns the
+corresponding canonical `Integer`.
+
+Grammar:
+
+```
+integer = [sign] digit {digit}
+sign = "+" | "-"
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+```
+
+Examples:
+
+```
+// Parsing normalizes zero:
+parse("0").toString() == "0"
+parse("+0").toString() == "0"
+parse("-0").toString() == "0"
+parse("000").toString() == "0"
+parse("+000").toString() == "0"
+parse("-000").toString() == "0"
+
+// Parsing removes leading plus sign:
+parse("+42").toString() == "42"
+
+// Parsing removes leading zeros:
+parse("00042").toString() == "42"
+parse("-00042").toString() == "-42"
+
+// Parsing preserves canonical representation:
+parse("42").toString() == "42"
+parse("-42").toString() == "-42"
+```
+
+#### Failed parsing
+
+Parsing fails when the input is not a valid decimal integer.
+
+Examples:
+
+```
+parse("") throws NumberFormatException
+parse("+") throws NumberFormatException
+parse("-") throws NumberFormatException
+parse("12a") throws NumberFormatException
+parse("3.14") throws NumberFormatException
+parse(" 42") throws NumberFormatException
+
+parseOrNull("") == null
+parseOrNull("+") == null
+parseOrNull("-") == null
+parseOrNull("12a") == null
+parseOrNull("3.14") == null
+parseOrNull(" 42") == null
+```
+
+#### Java interoperability
+
+`parseOrNull` is hidden from Java because nullability is not explicit in its
+type system.
 
 ### Conversion to `String`
 
