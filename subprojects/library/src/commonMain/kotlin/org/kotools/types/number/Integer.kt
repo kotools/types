@@ -255,9 +255,6 @@ public class Integer private constructor(private val decimal: String) {
                 .ifEmpty { return "0" }
             return "$sign$digits"
         }
-
-        @JvmSynthetic
-        internal fun zero(): Integer = this.of(0)
     }
 
     // ------------------------------ Comparisons ------------------------------
@@ -378,7 +375,8 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     public operator fun unaryMinus(): Integer {
-        if (this == zero()) return this
+        val zero: Integer = of(0)
+        if (this == zero) return this
         val minusSign = "-"
         val isNegative: Boolean = this.decimal.startsWith(minusSign)
         if (isNegative) {
@@ -509,7 +507,8 @@ public class Integer private constructor(private val decimal: String) {
      * exception in case of invalid [other] integer.
      */
     public operator fun div(other: Integer): Integer {
-        if (other == zero())
+        val zero: Integer = of(0)
+        if (other == zero)
             throw ArithmeticException("Integer can't be divided by zero.")
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return parse(quotient)
@@ -539,7 +538,8 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? {
-        if (other == zero()) return null
+        val zero: Integer = of(0)
+        if (other == zero) return null
         val quotient: String = integerDivision(x = "$this", y = "$other")
         return parse(quotient)
     }
@@ -575,7 +575,8 @@ public class Integer private constructor(private val decimal: String) {
      * exception in case of invalid [other] integer.
      */
     public operator fun rem(other: Integer): Integer {
-        if (other == zero())
+        val zero: Integer = of(0)
+        if (other == zero)
             throw ArithmeticException("Integer can't be divided by zero.")
         val remainder: String = integerRemainder(x = "$this", y = "$other")
         return parse(remainder)
@@ -605,7 +606,8 @@ public class Integer private constructor(private val decimal: String) {
      */
     @JvmSynthetic
     public fun remOrNull(other: Integer): Integer? {
-        if (other == zero()) return null
+        val zero: Integer = of(0)
+        if (other == zero) return null
         val remainder: String = integerRemainder(x = "$this", y = "$other")
         return parse(remainder)
     }

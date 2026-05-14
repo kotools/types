@@ -186,7 +186,7 @@ class IntegerTest {
     @Test
     fun unaryMinusOnZero() {
         // Given
-        val x: Integer = Integer.zero()
+        val x: Integer = Integer.of(0)
         // When
         val result: Integer = -x
         // Then
@@ -268,7 +268,7 @@ class IntegerTest {
     fun divWithZero() {
         // Given
         val x: Integer = Integer.of(42)
-        val y: Integer = Integer.zero()
+        val y: Integer = Integer.of(0)
         // When
         val result: ArithmeticException = assertFailsWith { x / y }
         // Then
@@ -292,7 +292,7 @@ class IntegerTest {
     fun divOrNullWithZero() {
         // Given
         val x: Integer = Integer.of(42)
-        val y: Integer = Integer.zero()
+        val y: Integer = Integer.of(0)
         // When
         val result: Integer? = x.divOrNull(y)
         // Then
@@ -315,7 +315,7 @@ class IntegerTest {
     fun remWithZero() {
         // Given
         val x: Integer = Integer.of(42)
-        val y: Integer = Integer.zero()
+        val y: Integer = Integer.of(0)
         // When
         val result: ArithmeticException = assertFailsWith { x % y }
         // Then
@@ -339,7 +339,7 @@ class IntegerTest {
     fun remOrNullWithZero() {
         // Given
         val x: Integer = Integer.of(42)
-        val y: Integer = Integer.zero()
+        val y: Integer = Integer.of(0)
         // When
         val result: Integer? = x.remOrNull(y)
         // Then
