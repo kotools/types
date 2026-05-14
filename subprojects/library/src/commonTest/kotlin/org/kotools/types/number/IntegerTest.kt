@@ -1,7 +1,6 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
-import org.kotools.types.negativeIntegerString
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
 import org.kotools.types.positiveIntegerString
@@ -41,7 +40,7 @@ class IntegerTest {
     }
 
     @Test
-    fun parseIgnoresPlusSignFromPositiveValues(): Unit = repeatTest {
+    fun parseRemovesPlusSign(): Unit = repeatTest {
         val value: String = Random.positiveIntegerString()
 
         val integer: Integer = Integer.parse(value)
@@ -53,17 +52,7 @@ class IntegerTest {
     }
 
     @Test
-    fun parsePreservesRepresentationOfNegativeValues(): Unit = repeatTest {
-        val value: String = Random.negativeIntegerString()
-
-        val integer: Integer = Integer.parse(value)
-
-        val actual: String = integer.toString()
-        assertEquals(expected = value, actual, message = "Input: \"$value\"")
-    }
-
-    @Test
-    fun parseRemovesLeadingZerosFromNonZeroValues(): Unit = repeatTest {
+    fun parseRemovesLeadingZerosFromNonZeroInteger(): Unit = repeatTest {
         val value: String = Random.nonZeroIntegerStringWithLeadingZeros()
 
         val integer: Integer = Integer.parse(value)
@@ -75,7 +64,18 @@ class IntegerTest {
     }
 
     @Test
-    fun parseThrowsExceptionWithNonIntegerValue(): Unit = repeatTest {
+    fun parsePreservesCanonicalRepresentation(): Unit = repeatTest {
+        val value: String = Random.nextLong()
+            .toString()
+
+        val integer: Integer = Integer.parse(value)
+
+        val actual: String = integer.toString()
+        assertEquals(expected = value, actual, message = "Input: \"$value\"")
+    }
+
+    @Test
+    fun parseThrowsExceptionWithNonintegerString(): Unit = repeatTest {
         val value: String = Random.nonIntegerString()
 
         val message = "Input: \"$value\""

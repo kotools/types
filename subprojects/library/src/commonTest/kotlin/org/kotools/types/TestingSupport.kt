@@ -37,12 +37,6 @@ internal fun Random.positiveIntegerString(): String {
     return "$sign$digits"
 }
 
-internal fun Random.negativeIntegerString(): String {
-    val digits: String = this.positiveIntegerString()
-        .removePrefix("+")
-    return "-$digits"
-}
-
 internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
     val prefix: String = this.zeroString()
     val suffix: String = this.positiveIntegerString()
