@@ -108,9 +108,9 @@ check(x modulo y == Integer.of(2))
 
 ```kotlin
 class Integer {
-  companion object {
-    fun of(value: Long): Integer = TODO()
-  }
+    companion object {
+        fun of(value: Long): Integer = TODO()
+    }
 }
 ```
 
@@ -121,10 +121,10 @@ class Integer {
 
 ```kotlin
 class Integer {
-  companion object {
-    fun parse(value: String): Integer = TODO()
-    fun parseOrNull(value: String): Integer? = TODO()
-  }
+    companion object {
+        fun parse(value: String): Integer = TODO()
+        fun parseOrNull(value: String): Integer? = TODO()
+    }
 }
 ```
 
@@ -147,7 +147,7 @@ class Integer {
 
 ```kotlin
 class Integer {
-  override fun toString(): String = TODO()
+    override fun toString(): String = TODO()
 }
 ```
 
@@ -157,8 +157,8 @@ class Integer {
 
 ```kotlin
 class Integer {
-  override fun equals(other: Any?): Boolean = TODO()
-  override fun hashCode(): Int = TODO()
+    override fun equals(other: Any?): Boolean = TODO()
+    override fun hashCode(): Int = TODO()
 }
 ```
 
@@ -172,7 +172,7 @@ class Integer {
 
 ```kotlin
 class Integer {
-  operator fun compareTo(other: Integer): Int = TODO()
+    operator fun compareTo(other: Integer): Int = TODO()
 }
 ```
 
@@ -186,7 +186,7 @@ class Integer {
 
 ```kotlin
 class Integer {
-  fun absoluteValue(): Integer = TODO()
+    fun absoluteValue(): Integer = TODO()
 }
 ```
 
@@ -199,13 +199,13 @@ class Integer {
 
 ```kotlin
 class Integer {
-  operator fun unaryMinus(): Integer = TODO()
+    operator fun unaryMinus(): Integer = TODO()
 }
 ```
 
 - Negation inverses sign:
-  - if `x > 0`, then `-x < 0`.
-  - if `x < 0`, then `-x > 0`.
+    - if `x > 0`, then `-x < 0`.
+    - if `x < 0`, then `-x > 0`.
 - Zero negation is neutral: `-0 == 0`.
 - Double negation is neutral: `-(-x) == x`.
 
@@ -213,7 +213,7 @@ class Integer {
 
 ```kotlin
 class Integer {
-  operator fun plus(other: Integer): Integer = TODO()
+    operator fun plus(other: Integer): Integer = TODO()
 }
 ```
 
@@ -231,7 +231,7 @@ class Integer {
 
 ```kotlin
 class Integer {
-  operator fun minus(other: Integer): Integer = TODO()
+    operator fun minus(other: Integer): Integer = TODO()
 }
 ```
 
@@ -244,7 +244,7 @@ class Integer {
 
 ```kotlin
 class Integer {
-  operator fun times(other: Integer): Integer = TODO()
+    operator fun times(other: Integer): Integer = TODO()
 }
 ```
 
@@ -259,15 +259,15 @@ class Integer {
 - Multiplication is consistent with equality: if `x == y`, then
   `x * z == y * z`.
 - Multiplication preserves order:
-  - if `z > 0` and `x <= y`, then `x * z <= y * z`.
-  - if `z < 0` and `x <= y`, then `x * z >= y * z`.
+    - if `z > 0` and `x <= y`, then `x * z <= y * z`.
+    - if `z < 0` and `x <= y`, then `x * z >= y * z`.
 
 ### Euclidean division
 
 ```kotlin
 class Integer {
-  infix fun quotient(other: Integer): Integer = TODO()
-  infix fun modulo(other: Integer): Integer = TODO()
+    infix fun quotient(other: Integer): Integer = TODO()
+    infix fun modulo(other: Integer): Integer = TODO()
 }
 ```
 
