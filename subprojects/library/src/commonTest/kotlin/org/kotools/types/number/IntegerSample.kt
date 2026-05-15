@@ -41,13 +41,11 @@ class IntegerSample {
 
     @Test
     fun of() {
-        val value = 9_223_372_036_854_775_807
-
-        val result: Integer = Integer.of(value)
-
-        val resultString: String = result.toString()
-        val expected: String = value.toString()
-        check(resultString == expected)
+        check(Integer.of(0).toString() == "0")
+        check(Integer.of(42).toString() == "42")
+        check(Integer.of(-42).toString() == "-42")
+        check(Integer.of(Long.MAX_VALUE).toString() == "9223372036854775807")
+        check(Integer.of(Long.MIN_VALUE).toString() == "-9223372036854775808")
     }
 
     @Test

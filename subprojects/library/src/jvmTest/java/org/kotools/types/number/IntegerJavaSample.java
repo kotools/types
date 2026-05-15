@@ -8,13 +8,13 @@ public class IntegerJavaSample {
 
     @Test
     void of() {
-        final long value = 9_223_372_036_854_775_807L;
-
-        final Integer result = Integer.of(value);
-
-        final String resultString = String.valueOf(result);
-        final String expected = String.valueOf(value);
-        final boolean check = resultString.equals(expected);
+        boolean check = String.valueOf(Integer.of(0)).equals("0");
+        check = check && String.valueOf(Integer.of(42)).equals("42");
+        check = check && String.valueOf(Integer.of(-42)).equals("-42");
+        check = check && String.valueOf(Integer.of(Long.MAX_VALUE))
+                .equals("9223372036854775807");
+        check = check && String.valueOf(Integer.of(Long.MIN_VALUE))
+                .equals("-9223372036854775808");
         if (!check) throw new IllegalStateException("Check failed.");
     }
 

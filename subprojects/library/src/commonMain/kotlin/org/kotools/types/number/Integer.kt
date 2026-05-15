@@ -115,6 +115,8 @@ public class Integer private constructor(
         /**
          * Returns an [Integer] representing the specified [value].
          *
+         * This function preserves the canonical representation of [value].
+         *
          * <br>
          * <details>
          * <summary>
