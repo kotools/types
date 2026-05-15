@@ -204,7 +204,7 @@ class Integer {
 
 - `toString` function always returns canonical decimal representation.
 
-### Equality
+### Structural equality
 
 ```kotlin
 class Integer {
@@ -213,11 +213,45 @@ class Integer {
 }
 ```
 
-- Equal integers have equal hash codes: if `x == y`, then
-  `x.hashCode() == y.hashCode()`.
-- `Integer` is reflexive: `x == x`.
-- `Integer` is symmetrical: if `x == y`, then `y == x`.
-- `Integer` is transitive: if `x == y` and `y == z`, then `x == z`.
+#### Successful equality
+
+- Two instances of `Integer` are equal if they represent the same numeric value.
+- Equal integers have equal hash codes.
+
+```kotlin
+Integer.of(0) == Integer.parse("-000")
+Integer.of(0).hashCode() == Integer.parse("-000").hashCode()
+
+Integer.of(42) == Integer.parse("+00042")
+Integer.of(42).hashCode() == Integer.parse("+00042").hashCode()
+
+Integer.of(-42) == Integer.parse("-00042")
+Integer.of(-42).hashCode() == Integer.parse("-00042").hashCode()
+```
+
+#### Failed equality
+
+- Two instances of `Integer` are not equal if they represent different numeric
+  values.
+- Different integers have different hash codes.
+- An `Integer` is never equal to `null`.
+- An `Integer` can't be equal to an object of different type.
+
+```kotlin
+Integer.of(0) != Integer.of(42)
+Integer.of(0).hashCode() != Integer.of(42).hashCode()
+
+Integer.of(0).equals(null) // returns false
+Integer.of(0).equals(42) // returns false
+```
+
+#### Algebraic laws
+
+`Integer` equality is:
+
+- reflexive: `x == x`.
+- symmetrical: if `x == y`, then `y == x`.
+- transitive: if `x == y` and `y == z`, then `x == z`.
 
 ### Order
 
