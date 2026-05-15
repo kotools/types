@@ -264,6 +264,8 @@ public class Integer private constructor(private val decimal: String) {
      * Returns `true` if the [other] object is an [Integer] representing the
      * same numeric value as this one, or returns `false` otherwise.
      *
+     * This function follows the contract of [Any.equals].
+     *
      * <br>
      * <details>
      * <summary>
@@ -292,6 +294,10 @@ public class Integer private constructor(private val decimal: String) {
 
     /**
      * Returns a hash code value for this integer.
+     *
+     * This function follows the contract of [Any.hashCode], with an additional
+     * property: if two instances of [Integer] are not equal, then calling this
+     * function on these objects must produce different hash codes.
      *
      * <br>
      * <details>
