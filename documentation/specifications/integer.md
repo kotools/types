@@ -245,13 +245,15 @@ Integer.of(0).equals(null) // returns false
 Integer.of(0).equals(42) // returns false
 ```
 
-#### Algebraic laws
+#### Inherited properties from `Any`
 
-`Integer` equality is:
+Structural equality of `Integer` is:
 
 - reflexive: `x == x`.
 - symmetrical: if `x == y`, then `y == x`.
 - transitive: if `x == y` and `y == z`, then `x == z`.
+- consistent: if invoked multiple times, `equals` and `hashCode` produce the
+  same result.
 
 ### Order
 
