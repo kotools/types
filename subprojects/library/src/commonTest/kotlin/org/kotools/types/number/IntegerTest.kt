@@ -1,6 +1,8 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.integer
+import org.kotools.types.integerExcept
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
 import org.kotools.types.positiveIntegerString
@@ -11,7 +13,9 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -101,50 +105,79 @@ class IntegerTest {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun equalsWithIntegerHavingSameValue() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.of(number)
-        val other: Integer = Integer.of(number)
-        // When
-        val result: Boolean = integer == other
-        // Then
-        assertTrue(result)
+    fun structuralEqualityPassesWithSameIntegers(): Unit = repeatTest {
+        val integer: Integer = Random.integer()
+        val other: Integer = Integer.parse("$integer")
+
+        val message = "Inputs: this = $integer, other = $other"
+        assertEquals(integer, other, message)
+        assertEquals(integer.hashCode(), other.hashCode(), message)
     }
 
     @Test
-    fun equalsWithAnotherTypeThanInteger() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.of(number)
-        // When
-        val result: Boolean = integer.equals(other = number)
-        // Then
-        assertFalse(result)
+    fun structuralEqualityFailsWithDifferentIntegers(): Unit = repeatTest {
+        val integer: Integer = Random.integer()
+        val other: Integer = Random.integerExcept(illegal = integer)
+
+        val message = "Inputs: this = $integer, other = $other"
+        assertNotEquals(integer, other, message)
+        assertNotEquals(integer.hashCode(), other.hashCode(), message)
     }
 
     @Test
-    fun equalsWithIntegerHavingAnotherValue() {
-        // Given
-        val integer: Integer = Integer.of(Long.MAX_VALUE)
-        val other: Integer = Integer.of(Long.MIN_VALUE)
-        // When
-        val result: Boolean = integer == other
-        // Then
-        assertFalse(result)
+    fun structuralEqualityFailsWithDifferentTypes(): Unit = repeatTest {
+        val integer: Integer = Random.integer()
+        val other: Any = integer.toString()
+
+        val message = "Inputs: this = $integer, other = \"$other\""
+        assertNotEquals(integer, other, message)
+        assertNotEquals(integer.hashCode(), other.hashCode(), message)
     }
 
     @Test
-    fun hashCodeReturnsSameValueForEqualIntegers() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.of(number)
-        // When
-        val result: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer.of(number)
-            .hashCode()
-        assertEquals(expected, result)
+    fun structuralEqualityIsReflexive(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+
+        val message = "Input: $x"
+        assertSame(x, x, message)
+        assertEquals(x.hashCode(), x.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityIsSymmetrical(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Integer.parse("$x")
+
+        val xHashCode: Int = x.hashCode()
+        val yHashCode: Int = y.hashCode()
+
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x, y, message)
+        assertEquals(xHashCode, yHashCode, message)
+
+        assertEquals(y, x, message)
+        assertEquals(yHashCode, xHashCode, message)
+    }
+
+    @Test
+    fun structuralEqualityIsTransitive(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Integer.parse("$x")
+        val z: Integer = Integer.parse("$y")
+
+        val xHashCode: Int = x.hashCode()
+        val yHashCode: Int = y.hashCode()
+        val zHashCode: Int = z.hashCode()
+
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(x, y, message)
+        assertEquals(xHashCode, yHashCode, message)
+
+        assertEquals(y, z, message)
+        assertEquals(yHashCode, zHashCode, message)
+
+        assertEquals(x, z, message)
+        assertEquals(xHashCode, zHashCode, message)
     }
 
     @Test

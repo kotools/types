@@ -73,28 +73,12 @@ class IntegerSample {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
-    fun equalsOverride() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val x: Integer = Integer.of(number)
-        val y: Integer = Integer.of(number)
-        // When
-        val result: Boolean = x == y
-        // Then
-        check(result)
-    }
+    fun structuralEquality() {
+        val x: Integer = Integer.of(-123)
+        val y: Integer = Integer.parse("-000123")
 
-    @Test
-    fun hashCodeOverride() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.of(number)
-        // When
-        val result: Int = integer.hashCode()
-        // Then
-        val expected: Int = Integer.of(number)
-            .hashCode()
-        check(result == expected)
+        check(x == y)
+        check(x.hashCode() == y.hashCode())
     }
 
     @Test

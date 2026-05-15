@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import org.kotools.types.number.Integer
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextLong
@@ -17,6 +18,31 @@ internal inline fun repeatTest(block: () -> Unit): Unit =
 
 // Functions below are grouped by types (e.g., String), and sorted from smaller
 // to greater range of values.
+
+// ------------------------------ Random integers ------------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.integer(): Integer {
+    val sign: String = listOf("", "+", "-").random()
+    val capacity: Int = this.nextInt(1..64) + sign.length
+    val builder = StringBuilder(capacity)
+
+    builder.append(sign)
+    repeat(times = capacity - sign.length) {
+        val digit: Int = (0..9).random()
+        builder.append(digit)
+    }
+
+    val value: String = builder.toString()
+    return Integer.parse(value)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.integerExcept(illegal: Integer): Integer {
+    var candidate = this.integer()
+    while (candidate == illegal) candidate = this.integer()
+    return candidate
+}
 
 // ------------------------------ Random strings -------------------------------
 

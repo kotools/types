@@ -1,6 +1,7 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.integerAddition
 import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
@@ -260,8 +261,8 @@ public class Integer private constructor(private val decimal: String) {
     // ------------------------------ Comparisons ------------------------------
 
     /**
-     * Returns `true` if the [other] object is an instance of [Integer] with the
-     * same value as this one, or returns `false` otherwise.
+     * Returns `true` if the [other] object is an [Integer] representing the
+     * same numeric value as this one, or returns `false` otherwise.
      *
      * <br>
      * <details>
@@ -271,7 +272,7 @@ public class Integer private constructor(private val decimal: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.equalsOverride
+     * SAMPLE: org.kotools.types.number.IntegerSample.structuralEquality
      * </details>
      *
      * <br>
@@ -282,7 +283,7 @@ public class Integer private constructor(private val decimal: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.equalsOverride
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.structuralEquality
      * </details>
      */
     @Suppress("RedundantModalityModifier")
@@ -300,7 +301,7 @@ public class Integer private constructor(private val decimal: String) {
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.hashCodeOverride
+     * SAMPLE: org.kotools.types.number.IntegerSample.structuralEquality
      * </details>
      *
      * <br>
@@ -311,11 +312,14 @@ public class Integer private constructor(private val decimal: String) {
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.hashCodeOverride
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.structuralEquality
      * </details>
      */
     @Suppress("RedundantModalityModifier")
-    final override fun hashCode(): Int = this.decimal.hashCode()
+    final override fun hashCode(): Int {
+        val seed: Int = HashSeed.Integer.toInt()
+        return 31 * seed + this.decimal.hashCode()
+    }
 
     /**
      * Compares this integer with the [other] one for order.

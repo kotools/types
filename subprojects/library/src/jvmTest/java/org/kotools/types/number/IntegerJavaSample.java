@@ -32,6 +32,15 @@ public class IntegerJavaSample {
     // ------------------------------ Comparisons ------------------------------
 
     @Test
+    void structuralEquality() {
+        final Integer x = Integer.of(-123);
+        final Integer y = Integer.parse("-000123");
+
+        final boolean check = x.equals(y) && x.hashCode() == y.hashCode();
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void equalsOverride() {
         // Given
         final long number = Long.MAX_VALUE;
