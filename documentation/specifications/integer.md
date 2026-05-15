@@ -1,5 +1,8 @@
 # 📐 `Integer` specifications
 
+> These specifications are being moved to the API reference for better
+> discoverability.
+
 This document is normative. Any implementation of `Integer` must satisfy all
 specifications described here.
 
