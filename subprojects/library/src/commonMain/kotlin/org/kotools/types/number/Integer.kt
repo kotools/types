@@ -7,6 +7,7 @@ import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.integerSubtraction
+import org.kotools.types.internal.number.PlatformInteger
 import org.kotools.types.number.Integer.Companion.of
 import org.kotools.types.number.Integer.Companion.parse
 import org.kotools.types.number.Integer.Companion.parseOrNull
@@ -104,7 +105,9 @@ import kotlin.jvm.JvmSynthetic
  * @since 5.1.0
  */
 @ExperimentalKotoolsTypesApi
-public class Integer private constructor(private val decimal: String) {
+public class Integer private constructor(
+    private val delegate: PlatformInteger
+) {
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
@@ -136,8 +139,8 @@ public class Integer private constructor(private val decimal: String) {
          */
         @JvmStatic
         public fun of(value: Long): Integer {
-            val decimal: String = value.toString()
-            return Integer(decimal)
+            val delegate = PlatformInteger(value)
+            return Integer(delegate)
         }
 
         /**
@@ -192,7 +195,8 @@ public class Integer private constructor(private val decimal: String) {
                 "\"$value\" is not a valid integer."
             )
             val normalized: String = value.normalizeInteger()
-            return Integer(normalized)
+            val delegate = PlatformInteger(normalized)
+            return Integer(delegate)
         }
 
         /**
@@ -233,10 +237,12 @@ public class Integer private constructor(private val decimal: String) {
          * returning `null` in case of invalid [value].
          */
         @JvmSynthetic
-        public fun parseOrNull(value: String): Integer? = value
-            .takeIf { it.isInteger() }
-            ?.normalizeInteger()
-            ?.let(::Integer)
+        public fun parseOrNull(value: String): Integer? {
+            if (!value.isInteger()) return null
+            val normalized: String = value.normalizeInteger()
+            val delegate = PlatformInteger(normalized)
+            return Integer(delegate)
+        }
 
         private fun String.isInteger(): Boolean {
             val range: CharRange = '0'..'9'
@@ -290,7 +296,7 @@ public class Integer private constructor(private val decimal: String) {
      */
     @Suppress("RedundantModalityModifier")
     final override fun equals(other: Any?): Boolean =
-        other is Integer && this.decimal == other.decimal
+        other is Integer && this.delegate == other.delegate
 
     /**
      * Returns a hash code value for this integer.
@@ -324,7 +330,7 @@ public class Integer private constructor(private val decimal: String) {
     @Suppress("RedundantModalityModifier")
     final override fun hashCode(): Int {
         val seed: Int = HashSeed.Integer.toInt()
-        return 31 * seed + this.decimal.hashCode()
+        return 31 * seed + this.delegate.hashCode()
     }
 
     /**
@@ -355,8 +361,11 @@ public class Integer private constructor(private val decimal: String) {
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.compareTo
      * </details>
      */
-    public operator fun compareTo(other: Integer): Int =
-        this.decimal.compareTo(other.decimal)
+    public operator fun compareTo(other: Integer): Int {
+        val x: String = this.delegate.toString()
+        val y: String = other.delegate.toString()
+        return x.compareTo(y)
+    }
 
     // ------------------------- Arithmetic operations -------------------------
 
@@ -389,12 +398,13 @@ public class Integer private constructor(private val decimal: String) {
         val zero: Integer = of(0)
         if (this == zero) return this
         val minusSign = "-"
-        val isNegative: Boolean = this.decimal.startsWith(minusSign)
+        val decimal: String = this.delegate.toString()
+        val isNegative: Boolean = decimal.startsWith(minusSign)
         if (isNegative) {
-            val text: String = this.decimal.removePrefix(minusSign)
+            val text: String = decimal.removePrefix(minusSign)
             return parse(text)
         }
-        return parse("$minusSign${this.decimal}")
+        return parse("$minusSign$decimal")
     }
 
     /**
@@ -651,5 +661,5 @@ public class Integer private constructor(private val decimal: String) {
      * </details>
      */
     @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = this.decimal
+    final override fun toString(): String = this.delegate.toString()
 }
