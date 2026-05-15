@@ -107,19 +107,6 @@ check(x modulo y == Integer.of(2))
 
 ## Formal specifications
 
-### Creation from `Long`
-
-```kotlin
-class Integer {
-    companion object {
-        fun of(value: Long): Integer = TODO()
-    }
-}
-```
-
-- Creation from `Long` preserves canonical representation:
-  `Integer.of(x).toString() == "$x"`.
-
 ### Parsing
 
 ```kotlin
