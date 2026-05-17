@@ -50,12 +50,41 @@ class IntegerSample {
 
     @Test
     fun parse() {
-        val value = "+000123"
+        fun parsesTo(input: String, expected: String): Unit =
+            check(Integer.parse(input).toString() == expected)
 
-        val result: Integer = Integer.parse(value)
+        fun parsingFailsWith(input: String) {
+            val exception: Throwable? = runCatching { Integer.parse(input) }
+                .exceptionOrNull()
+            check(exception is NumberFormatException)
+        }
 
-        val expected: Integer = Integer.of(123)
-        check(result == expected)
+        // Parsing normalizes zero:
+        parsesTo(input = "0", expected = "0")
+        parsesTo(input = "+0", expected = "0")
+        parsesTo(input = "-0", expected = "0")
+        parsesTo(input = "000", expected = "0")
+        parsesTo(input = "+000", expected = "0")
+        parsesTo(input = "-000", expected = "0")
+
+        // Parsing removes leading plus sign:
+        parsesTo(input = "+42", expected = "42")
+
+        // Parsing removes leading zeros:
+        parsesTo(input = "00042", expected = "42")
+        parsesTo(input = "-00042", expected = "-42")
+
+        // Parsing preserves canonical representation:
+        parsesTo(input = "42", expected = "42")
+        parsesTo(input = "-42", expected = "-42")
+
+        // Parsing fails with noninteger string:
+        parsingFailsWith("")
+        parsingFailsWith("+")
+        parsingFailsWith("-")
+        parsingFailsWith("12a")
+        parsingFailsWith("3.14")
+        parsingFailsWith(" 42")
     }
 
     @Test

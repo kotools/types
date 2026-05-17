@@ -2,6 +2,9 @@ package org.kotools.types.number;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 @SuppressWarnings("NewClassNamingConvention")
 public class IntegerJavaSample {
     // ------------------------------- Creations -------------------------------
@@ -20,13 +23,46 @@ public class IntegerJavaSample {
 
     @Test
     void parse() {
-        final String value = "+000123";
+        final BiConsumer<String, String> parsesTo = (input, expected) -> {
+            final boolean check = String.valueOf(Integer.parse(input))
+                    .equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
 
-        final Integer result = Integer.parse(value);
+        final Consumer<String> parsingFailsWith = (input) -> {
+            try {
+                Integer.parse(input);
+                throw new IllegalStateException("Check failed.");
+            } catch (NumberFormatException ignored) {
+            }
+        };
 
-        final Integer expected = Integer.of(123);
-        final boolean check = result.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
+        // Parsing normalizes zero:
+        parsesTo.accept("0", "0");
+        parsesTo.accept("+0", "0");
+        parsesTo.accept("-0", "0");
+        parsesTo.accept("000", "0");
+        parsesTo.accept("+000", "0");
+        parsesTo.accept("-000", "0");
+
+        // Parsing removes leading plus sign:
+        parsesTo.accept("+42", "42");
+
+        // Parsing removes leading zeros:
+        parsesTo.accept("00042", "42");
+        parsesTo.accept("-00042", "-42");
+
+        // Parsing preserves canonical representation:
+        parsesTo.accept("42", "42");
+        parsesTo.accept("-42", "-42");
+
+        // Parsing fails with noninteger string:
+        parsingFailsWith.accept("");
+        parsingFailsWith.accept("+");
+        parsingFailsWith.accept("-");
+        parsingFailsWith.accept("12a");
+        parsingFailsWith.accept("3.14");
+        parsingFailsWith.accept(" 42");
     }
 
     // ------------------------------ Comparisons ------------------------------
