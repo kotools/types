@@ -107,57 +107,6 @@ check(x modulo y == Integer.of(2))
 
 ## Formal specifications
 
-### Structural equality
-
-```kotlin
-class Integer {
-    override fun equals(other: Any?): Boolean = TODO()
-    override fun hashCode(): Int = TODO()
-}
-```
-
-#### Successful equality
-
-- Two instances of `Integer` are equal if they represent the same numeric value.
-- Equal integers have equal hash codes.
-
-```kotlin
-Integer.of(0) == Integer.parse("-000")
-Integer.of(0).hashCode() == Integer.parse("-000").hashCode()
-
-Integer.of(42) == Integer.parse("+00042")
-Integer.of(42).hashCode() == Integer.parse("+00042").hashCode()
-
-Integer.of(-42) == Integer.parse("-00042")
-Integer.of(-42).hashCode() == Integer.parse("-00042").hashCode()
-```
-
-#### Failed equality
-
-- Two instances of `Integer` are not equal if they represent different numeric
-  values.
-- Different integers have different hash codes.
-- An `Integer` is never equal to `null`.
-- An `Integer` can't be equal to an object of different type.
-
-```kotlin
-Integer.of(0) != Integer.of(42)
-Integer.of(0).hashCode() != Integer.of(42).hashCode()
-
-Integer.of(0).equals(null) // returns false
-Integer.of(0).equals(42) // returns false
-```
-
-#### Inherited properties from `Any`
-
-Structural equality of `Integer` is:
-
-- reflexive: `x == x`.
-- symmetrical: if `x == y`, then `y == x`.
-- transitive: if `x == y` and `y == z`, then `x == z`.
-- consistent: if invoked multiple times, `equals` and `hashCode` produce the
-  same result.
-
 ### Order
 
 ```kotlin
