@@ -408,13 +408,17 @@ class IntegerTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    fun toStringReturnsDecimalString() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val integer: Integer = Integer.of(number)
-        // When
-        val result = "$integer"
-        // Then
-        assertEquals(expected = "$number", result)
+    fun toStringReturnsCanonicalDecimalString(): Unit = repeatTest {
+        val integer: Integer = Random.integer()
+
+        val actual: String = integer.toString()
+
+        assertTrue("\"$actual\" must not have leading plus sign (+).") {
+            !actual.startsWith('+')
+        }
+        if (integer == Integer.of(0)) assertEquals(expected = "0", actual)
+        else assertTrue("\"$actual\" must not have leading zeros.") {
+            actual.first(Char::isDigit) != '0'
+        }
     }
 }

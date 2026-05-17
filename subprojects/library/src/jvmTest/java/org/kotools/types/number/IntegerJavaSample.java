@@ -199,14 +199,18 @@ public class IntegerJavaSample {
 
     @Test
     void toStringOverride() {
-        // Given
-        final long number = 9223372036854775807L;
-        final Integer integer = Integer.of(number);
-        // When
-        final String result = integer.toString();
-        // Then
-        final String expected = String.valueOf(number);
-        final boolean check = result.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
+        final BiConsumer<Integer, String> checkToString = (input, expected) -> {
+            final boolean check = String.valueOf(input).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        checkToString.accept(Integer.of(0), "0");
+        checkToString.accept(Integer.parse("+0"), "0");
+        checkToString.accept(Integer.parse("-0"), "0");
+        checkToString.accept(Integer.parse("+42"), "42");
+        checkToString.accept(Integer.of(-42), "-42");
+        checkToString.accept(Integer.parse("00042"), "42");
+        checkToString.accept(Integer.parse("+00042"), "42");
+        checkToString.accept(Integer.parse("-00042"), "-42");
     }
 }

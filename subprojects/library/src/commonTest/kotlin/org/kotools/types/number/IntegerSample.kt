@@ -225,12 +225,18 @@ class IntegerSample {
 
     @Test
     fun toStringOverride() {
-        // Given
-        val number = 9223372036854775807
-        val integer: Integer = Integer.of(number)
-        // When
-        val result = "$integer" // or integer.toString()
-        // Then
-        check(result == "$number")
+        fun checkToString(input: Integer, expected: String) {
+            val result: String = input.toString()
+            check(result == expected)
+        }
+
+        checkToString(input = Integer.of(0), expected = "0")
+        checkToString(input = Integer.parse("+0"), expected = "0")
+        checkToString(input = Integer.parse("-0"), expected = "0")
+        checkToString(input = Integer.parse("+42"), expected = "42")
+        checkToString(input = Integer.of(-42), expected = "-42")
+        checkToString(input = Integer.parse("00042"), expected = "42")
+        checkToString(input = Integer.parse("+00042"), expected = "42")
+        checkToString(input = Integer.parse("-00042"), expected = "-42")
     }
 }

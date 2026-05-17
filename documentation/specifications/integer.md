@@ -107,16 +107,6 @@ check(x modulo y == Integer.of(2))
 
 ## Formal specifications
 
-### Conversion to `String`
-
-```kotlin
-class Integer {
-    override fun toString(): String = TODO()
-}
-```
-
-- `toString` function always returns canonical decimal representation.
-
 ### Structural equality
 
 ```kotlin

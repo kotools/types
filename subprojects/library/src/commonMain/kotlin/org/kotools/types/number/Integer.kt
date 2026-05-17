@@ -640,6 +640,9 @@ public class Integer private constructor(
     /**
      * Returns the decimal string representation of this integer.
      *
+     * The resulting string is always canonical (no leading plus sign and
+     * zeros).
+     *
      * <br>
      * <details>
      * <summary>
