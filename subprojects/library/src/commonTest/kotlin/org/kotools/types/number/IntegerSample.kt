@@ -41,11 +41,22 @@ class IntegerSample {
 
     @Test
     fun of() {
-        check(Integer.of(0).toString() == "0")
-        check(Integer.of(42).toString() == "42")
-        check(Integer.of(-42).toString() == "-42")
-        check(Integer.of(Long.MAX_VALUE).toString() == "9223372036854775807")
-        check(Integer.of(Long.MIN_VALUE).toString() == "-9223372036854775808")
+        fun createsFromLong(input: Long, expected: String) {
+            val result: Integer = Integer.of(input)
+            check("$result" == expected)
+        }
+
+        createsFromLong(input = 0, expected = "0")
+        createsFromLong(input = 42, expected = "42")
+        createsFromLong(input = -42, expected = "-42")
+        createsFromLong(
+            input = Long.MAX_VALUE,
+            expected = "9223372036854775807"
+        )
+        createsFromLong(
+            input = Long.MIN_VALUE,
+            expected = "-9223372036854775808"
+        )
     }
 
     @Test

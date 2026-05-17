@@ -11,14 +11,17 @@ public class IntegerJavaSample {
 
     @Test
     void of() {
-        boolean check = String.valueOf(Integer.of(0)).equals("0");
-        check = check && String.valueOf(Integer.of(42)).equals("42");
-        check = check && String.valueOf(Integer.of(-42)).equals("-42");
-        check = check && String.valueOf(Integer.of(Long.MAX_VALUE))
-                .equals("9223372036854775807");
-        check = check && String.valueOf(Integer.of(Long.MIN_VALUE))
-                .equals("-9223372036854775808");
-        if (!check) throw new IllegalStateException("Check failed.");
+        final BiConsumer<Long, String> createsFromLong = (input, expected) -> {
+            final Integer result = Integer.of(input);
+            final boolean check = String.valueOf(result).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        createsFromLong.accept(0L, "0");
+        createsFromLong.accept(42L, "42");
+        createsFromLong.accept(-42L, "-42");
+        createsFromLong.accept(Long.MAX_VALUE, "9223372036854775807");
+        createsFromLong.accept(Long.MIN_VALUE, "-9223372036854775808");
     }
 
     @Test
