@@ -173,7 +173,7 @@ public class Integer private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerSample.parse
+         * SAMPLE: org.kotools.types.number.IntegerSample.parsing
          * </details>
          *
          * <br>
@@ -184,7 +184,7 @@ public class Integer private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerJavaSample.parse
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.parsing
          * </details>
          * <br>
          *
@@ -228,7 +228,7 @@ public class Integer private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerSample.parseOrNull
+         * SAMPLE: org.kotools.types.number.IntegerSample.parsing
          * </details>
          * <br>
          *

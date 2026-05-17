@@ -49,14 +49,18 @@ class IntegerSample {
     }
 
     @Test
-    fun parse() {
-        fun parsesTo(input: String, expected: String): Unit =
+    fun parsing() {
+        fun parsesTo(input: String, expected: String) {
             check(Integer.parse(input).toString() == expected)
+            check(Integer.parseOrNull(input).toString() == expected)
+        }
 
         fun parsingFailsWith(input: String) {
             val exception: Throwable? = runCatching { Integer.parse(input) }
                 .exceptionOrNull()
             check(exception is NumberFormatException)
+
+            check(Integer.parseOrNull(input) == null)
         }
 
         // Parsing normalizes zero:
@@ -85,16 +89,6 @@ class IntegerSample {
         parsingFailsWith("12a")
         parsingFailsWith("3.14")
         parsingFailsWith(" 42")
-    }
-
-    @Test
-    fun parseOrNull() {
-        val value = "+000123"
-
-        val result: Integer? = Integer.parseOrNull(value)
-
-        val expected: Integer = Integer.of(123)
-        check(result == expected)
     }
 
     // ------------------------------ Comparisons ------------------------------

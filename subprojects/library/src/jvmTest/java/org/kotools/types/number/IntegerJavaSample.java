@@ -22,7 +22,7 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void parse() {
+    void parsing() {
         final BiConsumer<String, String> parsesTo = (input, expected) -> {
             final boolean check = String.valueOf(Integer.parse(input))
                     .equals(expected);
