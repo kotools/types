@@ -2,6 +2,7 @@ package org.kotools.types.number;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -72,37 +73,29 @@ public class IntegerJavaSample {
 
     @Test
     void structuralEquality() {
-        final Integer x = Integer.of(-123);
-        final Integer y = Integer.parse("-000123");
+        final BiConsumer<Integer, Object> checkEquality = (integer, other) -> {
+            final boolean equality = Objects.equals(integer, other);
+            final boolean hashConformity =
+                    Objects.hashCode(integer) == Objects.hashCode(other);
+            final boolean check = equality && hashConformity;
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
 
-        final boolean check = x.equals(y) && x.hashCode() == y.hashCode();
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
+        final BiConsumer<Integer, Object> checkDiff = (integer, other) -> {
+            final boolean equality = !Objects.equals(integer, other);
+            final boolean hashConformity =
+                    Objects.hashCode(integer) != Objects.hashCode(other);
+            final boolean check = equality && hashConformity;
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
 
-    @Test
-    void equalsOverride() {
-        // Given
-        final long number = Long.MAX_VALUE;
-        final Integer x = Integer.of(number);
-        final Integer y = Integer.of(number);
-        // When
-        final boolean result = x.equals(y);
-        // Then
-        if (!result) throw new IllegalStateException("Check failed.");
-    }
+        checkEquality.accept(Integer.of(0), Integer.parse("-000"));
+        checkEquality.accept(Integer.of(42), Integer.parse("+00042"));
+        checkEquality.accept(Integer.of(-42), Integer.parse("-0042"));
 
-    @Test
-    void hashCodeOverride() {
-        // Given
-        final long number = Long.MAX_VALUE;
-        final Integer integer = Integer.of(number);
-        // When
-        final int result = integer.hashCode();
-        // Then
-        final int expected = Integer.of(number)
-                .hashCode();
-        final boolean check = result == expected;
-        if (!check) throw new IllegalStateException("Check failed.");
+        checkDiff.accept(Integer.of(0), Integer.of(1));
+        checkDiff.accept(Integer.of(42), 42);
+        checkDiff.accept(Integer.of(-42), null);
     }
 
     @Test

@@ -106,11 +106,23 @@ class IntegerSample {
 
     @Test
     fun structuralEquality() {
-        val x: Integer = Integer.of(-123)
-        val y: Integer = Integer.parse("-000123")
+        fun checkEquality(integer: Integer, other: Any?) {
+            check(integer == other)
+            check(integer.hashCode() == other.hashCode())
+        }
 
-        check(x == y)
-        check(x.hashCode() == y.hashCode())
+        fun checkDiff(integer: Integer, other: Any?) {
+            check(integer != other)
+            check(integer.hashCode() != other.hashCode())
+        }
+
+        checkEquality(integer = Integer.of(0), other = Integer.parse("-000"))
+        checkEquality(integer = Integer.of(42), other = Integer.parse("+00042"))
+        checkEquality(integer = Integer.of(-42), other = Integer.parse("-0042"))
+
+        checkDiff(integer = Integer.of(0), other = Integer.of(1))
+        checkDiff(integer = Integer.of(42), other = 42)
+        checkDiff(integer = Integer.of(-42), other = null)
     }
 
     @Test
