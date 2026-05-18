@@ -121,19 +121,6 @@ class Integer {
 - Comparison is consistent with equality: if `x == y`, then
   `x.compareTo(y) == 0`.
 
-### Absolute value
-
-```kotlin
-class Integer {
-    fun absoluteValue(): Integer = TODO()
-}
-```
-
-- Absolute value is always non-negative: `|x| >= 0`.
-- Absolute value is definite: if `x == 0`, then `|x| == 0`.
-- Absolute value is symmetric: `|x| == |-x|`.
-- Absolute value has triangle inequality: `|x + y| <= |x| + |y|`.
-
 ### Negation
 
 ```kotlin
