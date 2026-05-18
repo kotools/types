@@ -14,6 +14,7 @@ private fun subproject(
 
 subproject("internal")
 subproject(path = "library", name = rootProject.name)
+subproject("qr-code")
 
 // ------------------------------ Included builds ------------------------------
 
