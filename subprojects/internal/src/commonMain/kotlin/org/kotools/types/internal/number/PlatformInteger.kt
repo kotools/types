@@ -26,4 +26,7 @@ public interface PlatformInteger {
 
     /** Returns the difference of this integer and the [other] one. */
     public operator fun minus(other: PlatformInteger): PlatformInteger
+
+    /** Returns the product of this integer and the [other] one. */
+    public operator fun times(other: PlatformInteger): PlatformInteger
 }

@@ -3,7 +3,6 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.integerDivision
-import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.number.PlatformInteger
 import org.kotools.types.number.Integer.Companion.of
@@ -468,10 +467,8 @@ public class Integer private constructor(
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.times
      * </details>
      */
-    public operator fun times(other: Integer): Integer {
-        val product: String = integerMultiplication(x = "$this", y = "$other")
-        return parse(product)
-    }
+    public operator fun times(other: Integer): Integer =
+        Integer(this.delegate * other.delegate)
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or

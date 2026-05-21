@@ -163,13 +163,10 @@ class IntegerSample {
 
     @Test
     fun times() {
-        // Given
-        val x: Integer = Integer.of(9223372036854775807)
-        val y: Integer = Integer.of(10)
-        // When
+        val x: Integer = Integer.parse("99999999999999999999")
+        val y: Integer = Integer.parse("10")
         val result: Integer = x * y
-        // Then
-        val expected: Integer = Integer.parse("92233720368547758070")
+        val expected: Integer = Integer.parse("999999999999999999990")
         check(result == expected)
     }
 

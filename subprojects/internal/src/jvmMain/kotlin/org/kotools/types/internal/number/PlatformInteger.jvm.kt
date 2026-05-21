@@ -33,5 +33,8 @@ private value class JvmInteger(private val delegate: BigInteger) :
     override fun minus(other: PlatformInteger): PlatformInteger =
         JvmInteger(this.delegate - (other as JvmInteger).delegate)
 
+    override fun times(other: PlatformInteger): PlatformInteger =
+        JvmInteger(this.delegate * (other as JvmInteger).delegate)
+
     override fun toString(): String = this.delegate.toString()
 }

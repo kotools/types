@@ -335,15 +335,29 @@ class IntegerTest {
     }
 
     @Test
-    fun times() {
-        // Given
-        val x: Integer = Integer.of(9223372036854775807)
-        val y: Integer = Integer.of(1_000)
-        // When
-        val result: Integer = x * y
-        // Then
-        val expected: Integer = Integer.parse("9223372036854775807000")
-        assertEquals(expected, result)
+    fun timesIsCommutative(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x * y, y * x, message)
+    }
+
+    @Test
+    fun timesHasOneAsIdentityElement(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val one: Integer = Integer.of(1)
+        val message = "Input: $x"
+        assertEquals(x, x * one, message)
+        assertEquals(x, one * x, message)
+    }
+
+    @Test
+    fun timesSanityCheck() {
+        val x: Integer = Integer.parse("99999999999999999999")
+        val y: Integer = Integer.parse("10")
+        val actual: Integer = x * y
+        val expected: Integer = Integer.parse("999999999999999999990")
+        assertEquals(expected, actual)
     }
 
     @Test

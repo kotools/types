@@ -139,13 +139,10 @@ public class IntegerJavaSample {
 
     @Test
     void times() {
-        // Given
-        final Integer x = Integer.of(9223372036854775807L);
-        final Integer y = Integer.of(10);
-        // When
+        final Integer x = Integer.parse("99999999999999999999");
+        final Integer y = Integer.parse("10");
         final Integer result = x.times(y);
-        // Then
-        final Integer expected = Integer.parse("92233720368547758070");
+        final Integer expected = Integer.parse("999999999999999999990");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }
