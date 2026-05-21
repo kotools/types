@@ -188,45 +188,6 @@ class Integer {
     - if `z > 0` and `x <= y`, then `x * z <= y * z`.
     - if `z < 0` and `x <= y`, then `x * z >= y * z`.
 
-### Euclidean division
-
-```kotlin
-class Integer {
-    infix fun quotient(other: Integer): Integer = TODO()
-    infix fun modulo(other: Integer): Integer = TODO()
-}
-```
-
-- Euclidean division's definition: if `y != 0`, then
-  `x == y * (x quotient y) + (x modulo y)`.
-- Euclidean division is stable in case of dividend smaller than divisor: if
-  `0 <= x < |y|`, then `x quotient y == 0` and `x modulo y == x`.
-- Euclidean division is exact: if `x == y * k`, then `x quotient y == k` and
-  `x modulo y == 0`.
-- Euclidean division is stable under modular addition:
-  `(x + k * y) modulo y == x modulo y`.
-- Quotient of Euclidean division is unique: if `x == y * q1 + r1`,
-  `x == y * q2 + r2`, `0 <= r1 < |y|`, `0 <= r2 < |y|`, then `q1 == q2` and
-  `r1 == r2`.
-- Quotient of Euclidean division is monotonic with positive divisor: if `z > 0`
-  and `x <= y`, then `x quotient z <= y quotient z`.
-- Remainder of Euclidean division is always non-negative:
-  `0 <= (x modulo y) < |y|`.
-- Remainder of Euclidean division is independent of sign:
-  `x modulo y == x modulo (-y)`.
-- Remainder of Euclidean division is idempotent:
-  `(x modulo y) modulo y == x modulo y`.
-- Quotient and remainder of Euclidean division are compatible:
-  `x modulo y == x - y * (x quotient y)`.
-- `0` is stable under Euclidean division: `0 quotient x == 0` and
-  `0 modulo x == 0`.
-- Euclidean division by `0` is undefined: `x quotient 0` and `x modulo 0` throws
-  `ArithmeticException`.
-- `1` is a special divisor in Euclidean division: `x quotient 1 == x` and
-  `x modulo 1 == 0`.
-- `-1` is a special divisor in Euclidean division: `x quotient (-1) == -x` and
-  `x modulo (-1) == 0`.
-
 ### Sanity checks
 
 ```
