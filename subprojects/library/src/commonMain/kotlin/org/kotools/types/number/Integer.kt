@@ -386,8 +386,7 @@ public class Integer private constructor(
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.unaryMinus
      * </details>
      */
-    public operator fun unaryMinus(): Integer =
-        Integer(this.delegate.unaryMinus())
+    public operator fun unaryMinus(): Integer = Integer(-this.delegate)
 
     /**
      * Adds the [other] integer to this one.

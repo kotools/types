@@ -16,10 +16,10 @@ public expect fun PlatformInteger(value: String): PlatformInteger
 @InternalKotoolsTypesApi
 public interface PlatformInteger {
     /** Compares this integer with the [other] one for order. */
-    public fun compareTo(other: PlatformInteger): Int
+    public operator fun compareTo(other: PlatformInteger): Int
 
     /** Returns the negative of this integer. */
-    public fun unaryMinus(): PlatformInteger
+    public operator fun unaryMinus(): PlatformInteger
 
     /** Returns the sum of this integer and the [other] one. */
     public operator fun plus(other: PlatformInteger): PlatformInteger
