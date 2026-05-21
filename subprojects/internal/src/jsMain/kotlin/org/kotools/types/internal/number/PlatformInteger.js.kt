@@ -18,6 +18,12 @@ public actual fun PlatformInteger(value: String): PlatformInteger {
 
 @OptIn(InternalKotoolsTypesApi::class)
 private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
+    override fun compareTo(other: PlatformInteger): Int {
+        val x = this.delegate.asDynamic()
+        val y = (other as JsInteger).delegate.asDynamic()
+        return if (x < y) -1 else if (x > y) 1 else 0
+    }
+
     override fun toString(): String = this.delegate.toString()
 }
 

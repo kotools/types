@@ -127,12 +127,9 @@ class IntegerSample {
 
     @Test
     fun compareTo() {
-        // Given
-        val x: Integer = Integer.of(Long.MIN_VALUE)
-        val y: Integer = Integer.of(Long.MAX_VALUE)
-        // When
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val y: Integer = Integer.parse("99999999999999999999")
         val result: Boolean = x < y // or x.compareTo(y) < 0
-        // Then
         check(result)
     }
 

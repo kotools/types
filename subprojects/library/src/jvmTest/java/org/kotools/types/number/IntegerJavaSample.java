@@ -100,12 +100,9 @@ public class IntegerJavaSample {
 
     @Test
     void compareTo() {
-        // Given
-        final Integer x = Integer.of(Long.MIN_VALUE);
-        final Integer y = Integer.of(Long.MAX_VALUE);
-        // When
+        final Integer x = Integer.parse("-99999999999999999999");
+        final Integer y = Integer.parse("99999999999999999999");
         final boolean result = x.compareTo(y) < 0;
-        // Then
         if (!result) throw new IllegalStateException("Check failed.");
     }
 

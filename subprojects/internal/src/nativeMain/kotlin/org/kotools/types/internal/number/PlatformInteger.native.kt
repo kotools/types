@@ -20,5 +20,8 @@ public actual fun PlatformInteger(value: String): PlatformInteger {
 @OptIn(InternalKotoolsTypesApi::class)
 private value class NativeInteger(private val delegate: BigInteger) :
     PlatformInteger {
+    override fun compareTo(other: PlatformInteger): Int =
+        this.delegate.compareTo((other as NativeInteger).delegate)
+
     override fun toString(): String = this.delegate.toString()
 }

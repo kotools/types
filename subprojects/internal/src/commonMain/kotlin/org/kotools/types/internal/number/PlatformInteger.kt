@@ -14,4 +14,7 @@ public expect fun PlatformInteger(value: String): PlatformInteger
  * Represents an integer, with operations that can use platform-specific APIs.
  */
 @InternalKotoolsTypesApi
-public interface PlatformInteger
+public interface PlatformInteger {
+    /** Compares this integer with the [other] one for order. */
+    public fun compareTo(other: PlatformInteger): Int
+}

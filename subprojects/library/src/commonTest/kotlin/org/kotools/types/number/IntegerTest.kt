@@ -207,37 +207,48 @@ class IntegerTest {
     }
 
     @Test
-    fun compareToWithSameInteger() {
-        // Given
-        val number: Long = Long.MAX_VALUE
-        val x: Integer = Integer.of(number)
-        val y: Integer = Integer.of(number)
-        // When
-        val result: Int = x.compareTo(y)
-        // Then
-        assertEquals(expected = 0, result)
+    fun compareToIsReflexive(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val actual: Int = x.compareTo(x)
+        assertEquals(expected = 0, actual, message = "Input: $x")
     }
 
     @Test
-    fun compareToWithGreaterInteger() {
-        // Given
-        val x: Integer = Integer.of(Long.MIN_VALUE)
-        val y: Integer = Integer.of(Long.MAX_VALUE)
-        // When
-        val result: Int = x.compareTo(y)
-        // Then
-        assertTrue(result < 0)
+    fun compareToIsAntiSymmetric(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val xy: Int = x.compareTo(y)
+        val yx: Int = y.compareTo(x)
+        val message = "Inputs: x = $x, y = $y"
+        when {
+            xy < 0 -> assertTrue(yx > 0, message)
+            xy > 0 -> assertTrue(yx < 0, message)
+            else -> assertEquals(expected = 0, yx, message)
+        }
     }
 
     @Test
-    fun compareToWithLesserInteger() {
-        // Given
-        val x: Integer = Integer.of(Long.MAX_VALUE)
-        val y: Integer = Integer.of(Long.MIN_VALUE)
-        // When
-        val result: Int = x.compareTo(y)
-        // Then
-        assertTrue(result > 0)
+    fun compareToWithSmallerInteger() {
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val y: Integer = Integer.parse("99999999999999999999")
+        val actual: Int = x.compareTo(y)
+        assertTrue(actual < 0)
+    }
+
+    @Test
+    fun compareToWithEqualInteger() {
+        val x: Integer = Integer.parse("99999999999999999999")
+        val y: Integer = Integer.parse("99999999999999999999")
+        val actual: Int = x.compareTo(y)
+        assertEquals(expected = 0, actual)
+    }
+
+    @Test
+    fun compareToWithLargerInteger() {
+        val x: Integer = Integer.parse("99999999999999999999")
+        val y: Integer = Integer.parse("-99999999999999999999")
+        val actual: Int = x.compareTo(y)
+        assertTrue(actual > 0)
     }
 
     // ------------------------- Arithmetic operations -------------------------

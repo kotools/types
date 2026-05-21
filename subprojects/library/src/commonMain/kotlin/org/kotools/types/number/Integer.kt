@@ -357,11 +357,8 @@ public class Integer private constructor(
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.compareTo
      * </details>
      */
-    public operator fun compareTo(other: Integer): Int {
-        val x: String = this.delegate.toString()
-        val y: String = other.delegate.toString()
-        return x.compareTo(y)
-    }
+    public operator fun compareTo(other: Integer): Int =
+        this.delegate.compareTo(other.delegate)
 
     // ------------------------- Arithmetic operations -------------------------
 
