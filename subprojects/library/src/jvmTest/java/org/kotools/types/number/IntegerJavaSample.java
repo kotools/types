@@ -119,13 +119,10 @@ public class IntegerJavaSample {
 
     @Test
     void plus() {
-        // Given
-        final Integer x = Integer.of(9223372036854775807L);
-        final Integer y = Integer.of(2);
-        // When
+        final Integer x = Integer.parse("99999999999999999999");
+        final Integer y = Integer.parse("1");
         final Integer result = x.plus(y);
-        // Then
-        final Integer expected = Integer.parse("9223372036854775809");
+        final Integer expected = Integer.parse("100000000000000000000");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }

@@ -27,5 +27,8 @@ private value class JvmInteger(private val delegate: BigInteger) :
     override fun unaryMinus(): PlatformInteger =
         JvmInteger(this.delegate.negate())
 
+    override fun plus(other: PlatformInteger): PlatformInteger =
+        JvmInteger(this.delegate + (other as JvmInteger).delegate)
+
     override fun toString(): String = this.delegate.toString()
 }

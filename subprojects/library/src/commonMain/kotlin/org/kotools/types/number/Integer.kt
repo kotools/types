@@ -2,7 +2,6 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
-import org.kotools.types.internal.integerAddition
 import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
@@ -415,10 +414,8 @@ public class Integer private constructor(
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.plus
      * </details>
      */
-    public operator fun plus(other: Integer): Integer {
-        val sum: String = integerAddition(x = "$this", y = "$other")
-        return parse(sum)
-    }
+    public operator fun plus(other: Integer): Integer =
+        Integer(this.delegate + other.delegate)
 
     /**
      * Subtracts the [other] integer from this one.

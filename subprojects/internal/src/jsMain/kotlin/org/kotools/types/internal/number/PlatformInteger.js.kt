@@ -29,6 +29,13 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return JsInteger(negated)
     }
 
+    override fun plus(other: PlatformInteger): PlatformInteger {
+        val x: dynamic = this.delegate.asDynamic()
+        val y: dynamic = (other as JsInteger).delegate.asDynamic()
+        val sum: BigInt = (x + y).unsafeCast<BigInt>()
+        return JsInteger(sum)
+    }
+
     override fun toString(): String = this.delegate.toString()
 }
 

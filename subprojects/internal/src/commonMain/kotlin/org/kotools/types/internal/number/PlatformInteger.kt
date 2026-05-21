@@ -20,4 +20,7 @@ public interface PlatformInteger {
 
     /** Returns the negative of this integer. */
     public fun unaryMinus(): PlatformInteger
+
+    /** Returns the sum of this integer and the [other] one. */
+    public operator fun plus(other: PlatformInteger): PlatformInteger
 }

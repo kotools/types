@@ -26,5 +26,8 @@ private value class NativeInteger(private val delegate: BigInteger) :
     override fun unaryMinus(): PlatformInteger =
         NativeInteger(this.delegate.negate())
 
+    override fun plus(other: PlatformInteger): PlatformInteger =
+        NativeInteger(this.delegate + (other as NativeInteger).delegate)
+
     override fun toString(): String = this.delegate.toString()
 }

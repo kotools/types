@@ -1,10 +1,5 @@
 package org.kotools.types.internal
 
-internal actual fun integerAddition(x: String, y: String): String {
-    val sum: BigInt = BigInt(x) + BigInt(y)
-    return sum.toString()
-}
-
 internal actual fun integerSubtraction(x: String, y: String): String {
     val difference: BigInt = BigInt(x) - BigInt(y)
     return difference.toString()
@@ -28,14 +23,6 @@ internal actual fun integerRemainder(x: String, y: String): String {
 private external fun BigInt(value: String): BigInt
 
 private external object BigInt
-
-@Suppress("UNUSED_VARIABLE")
-private operator fun BigInt.plus(other: BigInt): BigInt {
-    val x = this
-    val y = other
-    val sum: dynamic = js("x + y")
-    return BigInt("$sum")
-}
 
 @Suppress("UNUSED_VARIABLE")
 private operator fun BigInt.minus(other: BigInt): BigInt {

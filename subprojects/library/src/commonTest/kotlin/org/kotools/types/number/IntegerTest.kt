@@ -284,16 +284,29 @@ class IntegerTest {
     }
 
     @Test
-    fun plus() {
-        // Given
-        val number = 9223372036854775807
-        val x: Integer = Integer.of(number)
-        val y: Integer = Integer.of(number)
-        // When
-        val result: Integer = x + y
-        // Then
-        val expected: Integer = Integer.parse("18446744073709551614")
-        assertEquals(expected, result)
+    fun plusIsCommutative(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x + y, y + x, message)
+    }
+
+    @Test
+    fun plusHasZeroAsIdentityElement(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+        val message = "Input: $x"
+        assertEquals(x, x + zero, message)
+        assertEquals(x, zero + x, message)
+    }
+
+    @Test
+    fun plusSanityCheck() {
+        val x: Integer = Integer.parse("99999999999999999999")
+        val y: Integer = Integer.parse("1")
+        val actual: Integer = x + y
+        val expected: Integer = Integer.parse("100000000000000000000")
+        assertEquals(expected, actual)
     }
 
     @Test
