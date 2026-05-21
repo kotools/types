@@ -15,11 +15,9 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 /**
- * Represents an integer.
- *
- * Use this type for preventing overflow when performing arithmetic operations
- * with integers, and for consistent behavior across all platforms when dividing
- * an integer by zero.
+ * Represents a mathematical integer (ℤ), with exact arithmetic operations that
+ * don't overflow, and consistent division-by-zero behavior across all
+ * platforms.
  *
  * <br>
  * <details>
@@ -30,11 +28,8 @@ import kotlin.jvm.JvmSynthetic
  * ### Integer vs Int
  *
  * The [Integer] type is the default integer type provided by Kotools Types,
- * designed to replace primitive integer types where correctness matters.
- *
- * It models a mathematical integer and provides exact arithmetic without
- * overflow, unlike Kotlin's built-in number types ([Byte], [Short], [Int] and
- * [Long]).
+ * designed to replace Kotlin integer types ([Byte], [Short], [Int] and [Long])
+ * where correctness matters.
  *
  * This type intentionally avoids names like `BigInteger` or `BigInt`, as its
  * behavior is part of its contract and not an implementation detail.
@@ -53,9 +48,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * #### Integer overflow
  *
- * **Problem:** Adding, subtracting or multiplying Kotlin integer types ([Byte],
- * [Short], [Int] and [Long]) can lead to an overflow, which produces unexpected
- * behavior.
+ * **Problem:** Adding, subtracting or multiplying Kotlin integer types can lead
+ * to an overflow, which produces unexpected behavior.
  *
  * SAMPLE: org.kotools.types.number.IntegerSample.overflowProblem
  *
@@ -89,8 +83,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from [Long] number ([of]) or decimal string
- * ([parse]).
+ * - **Creations:** Create from Kotlin integer types or decimal string (see [of]
+ * and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
@@ -98,8 +92,8 @@ import kotlin.jvm.JvmSynthetic
  * (`x - y`), [multiply][times] (`x * y`), [divide][div] (`x / y`), compute
  * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
  * overflow.
- * - **Conversions:** Convert to its [decimal string][Integer.toString]
- * representation.
+ * - **Conversions:** Convert to its decimal string representation (see
+ * [Integer.toString]).
  * </details>
  *
  * @since 5.1.0
