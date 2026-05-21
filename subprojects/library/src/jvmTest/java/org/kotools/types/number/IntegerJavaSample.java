@@ -110,12 +110,9 @@ public class IntegerJavaSample {
 
     @Test
     void unaryMinus() {
-        // Given
-        final Integer x = Integer.of(9223372036854775807L);
-        // When
+        final Integer x = Integer.parse("99999999999999999999");
         final Integer result = x.unaryMinus();
-        // Then
-        final Integer expected = Integer.of(-9223372036854775807L);
+        final Integer expected = Integer.parse("-99999999999999999999");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
     }

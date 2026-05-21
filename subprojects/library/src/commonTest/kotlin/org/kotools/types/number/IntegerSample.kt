@@ -137,12 +137,9 @@ class IntegerSample {
 
     @Test
     fun unaryMinus() {
-        // Given
-        val x: Integer = Integer.of(9223372036854775807)
-        // When
+        val x: Integer = Integer.parse("99999999999999999999")
         val result: Integer = -x
-        // Then
-        val expected: Integer = Integer.of(-9223372036854775807)
+        val expected: Integer = Integer.parse("-99999999999999999999")
         check(result == expected)
     }
 

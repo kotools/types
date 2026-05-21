@@ -24,5 +24,8 @@ private value class JvmInteger(private val delegate: BigInteger) :
     override fun compareTo(other: PlatformInteger): Int =
         this.delegate.compareTo((other as JvmInteger).delegate)
 
+    override fun unaryMinus(): PlatformInteger =
+        JvmInteger(this.delegate.negate())
+
     override fun toString(): String = this.delegate.toString()
 }

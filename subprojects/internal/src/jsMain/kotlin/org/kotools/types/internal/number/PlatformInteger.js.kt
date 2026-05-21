@@ -24,6 +24,11 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return if (x < y) -1 else if (x > y) 1 else 0
     }
 
+    override fun unaryMinus(): PlatformInteger {
+        val negated: BigInt = (-this.delegate.asDynamic()).unsafeCast<BigInt>()
+        return JsInteger(negated)
+    }
+
     override fun toString(): String = this.delegate.toString()
 }
 

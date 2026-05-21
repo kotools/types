@@ -254,35 +254,33 @@ class IntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinusIsInvolutory(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val actual: Integer = -(-x)
+        assertEquals(x, actual, message = "Input: $x")
+    }
+
+    @Test
     fun unaryMinusOnZero() {
-        // Given
         val x: Integer = Integer.of(0)
-        // When
-        val result: Integer = -x
-        // Then
-        assertEquals(expected = x, result)
+        val actual: Integer = -x
+        assertEquals(x, actual)
     }
 
     @Test
     fun unaryMinusOnPositiveInteger() {
-        // Given
-        val x: Integer = Integer.of(123456789)
-        // When
-        val result: Integer = -x
-        // Then
-        val expected: Integer = Integer.of(-123456789)
-        assertEquals(expected, result)
+        val x: Integer = Integer.parse("99999999999999999999")
+        val actual: Integer = -x
+        val expected: Integer = Integer.parse("-99999999999999999999")
+        assertEquals(expected, actual)
     }
 
     @Test
     fun unaryMinusOnNegativeInteger() {
-        // Given
-        val x: Integer = Integer.of(-123456789)
-        // When
-        val result: Integer = -x
-        // Then
-        val expected: Integer = Integer.of(123456789)
-        assertEquals(expected, result)
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val actual: Integer = -x
+        val expected: Integer = Integer.parse("99999999999999999999")
+        assertEquals(expected, actual)
     }
 
     @Test

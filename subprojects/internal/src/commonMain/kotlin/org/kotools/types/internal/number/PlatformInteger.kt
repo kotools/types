@@ -17,4 +17,7 @@ public expect fun PlatformInteger(value: String): PlatformInteger
 public interface PlatformInteger {
     /** Compares this integer with the [other] one for order. */
     public fun compareTo(other: PlatformInteger): Int
+
+    /** Returns the negative of this integer. */
+    public fun unaryMinus(): PlatformInteger
 }

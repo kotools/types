@@ -23,5 +23,8 @@ private value class NativeInteger(private val delegate: BigInteger) :
     override fun compareTo(other: PlatformInteger): Int =
         this.delegate.compareTo((other as NativeInteger).delegate)
 
+    override fun unaryMinus(): PlatformInteger =
+        NativeInteger(this.delegate.negate())
+
     override fun toString(): String = this.delegate.toString()
 }

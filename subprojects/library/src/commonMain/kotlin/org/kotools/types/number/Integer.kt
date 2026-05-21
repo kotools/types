@@ -387,18 +387,8 @@ public class Integer private constructor(
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.unaryMinus
      * </details>
      */
-    public operator fun unaryMinus(): Integer {
-        val zero: Integer = of(0)
-        if (this == zero) return this
-        val minusSign = "-"
-        val decimal: String = this.delegate.toString()
-        val isNegative: Boolean = decimal.startsWith(minusSign)
-        if (isNegative) {
-            val text: String = decimal.removePrefix(minusSign)
-            return parse(text)
-        }
-        return parse("$minusSign$decimal")
-    }
+    public operator fun unaryMinus(): Integer =
+        Integer(this.delegate.unaryMinus())
 
     /**
      * Adds the [other] integer to this one.
