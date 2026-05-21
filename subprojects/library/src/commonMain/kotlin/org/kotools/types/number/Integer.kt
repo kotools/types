@@ -5,7 +5,6 @@ import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerMultiplication
 import org.kotools.types.internal.integerRemainder
-import org.kotools.types.internal.integerSubtraction
 import org.kotools.types.internal.number.PlatformInteger
 import org.kotools.types.number.Integer.Companion.of
 import org.kotools.types.number.Integer.Companion.parse
@@ -441,10 +440,8 @@ public class Integer private constructor(
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.minus
      * </details>
      */
-    public operator fun minus(other: Integer): Integer {
-        val difference: String = integerSubtraction(x = "$this", y = "$other")
-        return parse(difference)
-    }
+    public operator fun minus(other: Integer): Integer =
+        Integer(this.delegate - other.delegate)
 
     /**
      * Multiplies this integer by the [other] one.

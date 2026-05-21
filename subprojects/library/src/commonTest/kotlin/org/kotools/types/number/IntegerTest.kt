@@ -310,15 +310,28 @@ class IntegerTest {
     }
 
     @Test
-    fun minus() {
-        // Given
-        val x: Integer = Integer.of(-9223372036854775807)
-        val y: Integer = Integer.of(9223372036854775807)
-        // When
-        val result: Integer = x - y
-        // Then
-        val expected: Integer = Integer.parse("-18446744073709551614")
-        assertEquals(expected, result)
+    fun minusHasZeroAsRightIdentityElement(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+        val message = "Input: $x"
+        assertEquals(x, x - zero, message)
+    }
+
+    @Test
+    fun minusOfSameIntegersIsZero(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+        val message = "Input: $x"
+        assertEquals(zero, x - x, message)
+    }
+
+    @Test
+    fun minusSanityCheck() {
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val y: Integer = Integer.parse("1")
+        val actual: Integer = x - y
+        val expected: Integer = Integer.parse("-100000000000000000000")
+        assertEquals(expected, actual)
     }
 
     @Test

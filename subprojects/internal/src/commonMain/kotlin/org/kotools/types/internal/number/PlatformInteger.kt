@@ -23,4 +23,7 @@ public interface PlatformInteger {
 
     /** Returns the sum of this integer and the [other] one. */
     public operator fun plus(other: PlatformInteger): PlatformInteger
+
+    /** Returns the difference of this integer and the [other] one. */
+    public operator fun minus(other: PlatformInteger): PlatformInteger
 }

@@ -154,13 +154,10 @@ class IntegerSample {
 
     @Test
     fun minus() {
-        // Given
-        val x: Integer = Integer.of(-9223372036854775807)
-        val y: Integer = Integer.of(2)
-        // When
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val y: Integer = Integer.parse("1")
         val result: Integer = x - y
-        // Then
-        val expected: Integer = Integer.parse("-9223372036854775809")
+        val expected: Integer = Integer.parse("-100000000000000000000")
         check(result == expected)
     }
 
