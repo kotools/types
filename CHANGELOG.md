@@ -32,6 +32,13 @@ All notable changes to this project will be documented in this file.
 - `KotoolsTypesSerializersModule()` **experimental** function. ([#931])
 - `types-kotlinx-serialization` module. ([#958])
 
+### 🐛 Fixed
+
+- Fixed `Integer.rem` and `Integer.remOrNull` **experimental** functions
+  returning incorrect remainder sign on Kotlin/Native when the divisor is
+  negative. ([1d14183b])
+
+[1d14183b]: https://github.com/kotools/types/commit/1d14183b
 [70b2ef56]: https://github.com/kotools/types/commit/70b2ef56
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
