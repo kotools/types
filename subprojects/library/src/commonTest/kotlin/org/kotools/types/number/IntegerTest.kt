@@ -373,6 +373,43 @@ class IntegerTest {
     }
 
     @Test
+    fun minusIsAntiCommutative(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val actual: Integer = x - y
+
+        val expected: Integer = -(y - x)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun minusIsConsistentWithPlus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val actual: Integer = x - y
+
+        val expected: Integer = x + (-y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun minusIsCompatibleWithOrdering(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Int = (x - z).compareTo(y - z)
+
+        val expected: Int = x.compareTo(y)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun minusSanityCheck() {
         val x: Integer = Integer.parse("-99999999999999999999")
         val y: Integer = Integer.parse("1")
