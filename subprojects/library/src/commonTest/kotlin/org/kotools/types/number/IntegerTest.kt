@@ -546,6 +546,28 @@ class IntegerTest {
     }
 
     @Test
+    fun divNegatesWithUnaryMinus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer = (-x) / y
+
+        val expected: Integer = -(x / y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun divIsConsistentWithTimes(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer = (x * y) / y
+
+        assertEquals(expected = x, actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
     fun divByZeroThrowsException(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val zero: Integer = Integer.of(0)
@@ -597,6 +619,18 @@ class IntegerTest {
 
         val expected: Integer = x / y
         assertEquals(expected, actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun divOrNullNegatesWithUnaryMinus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer? = (-x).divOrNull(y)
+
+        val expected: Integer = -(x / y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
     }
 
     @Test
