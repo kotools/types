@@ -42,7 +42,8 @@ private value class NativeInteger(private val delegate: BigInteger) :
 
     override fun rem(other: PlatformInteger): PlatformInteger {
         val divisor: BigInteger = (other as NativeInteger).delegate
-        return NativeInteger(this.delegate % divisor)
+        val quotient: BigInteger = this.delegate / divisor
+        return NativeInteger(this.delegate - quotient * divisor)
     }
 
     override fun toString(): String = this.delegate.toString()

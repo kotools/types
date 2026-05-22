@@ -372,6 +372,48 @@ class IntegerTest {
     }
 
     @Test
+    fun divHasRightIdentity(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val one: Integer = Integer.of(1)
+
+        val actual: Integer = x / one
+
+        assertEquals(expected = x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun divHasAbsorbingZeroDividend(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val other: Integer = Random.integerExcept(illegal = zero)
+
+        val actual: Integer = zero / other
+
+        assertEquals(expected = zero, actual, message = "Input: $other")
+    }
+
+    @Test
+    fun divOfSameIntegerIsOne(): Unit = repeatTest {
+        val x: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer = x / x
+
+        val one: Integer = Integer.of(1)
+        assertEquals(expected = one, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun divSatisfiesDivisionAlgorithm(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val quotient: Integer = x / y
+        val remainder: Integer = x % y
+        val actual: Integer = quotient * y + remainder
+
+        assertEquals(expected = x, actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
     fun divByZeroThrowsException(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val zero: Integer = Integer.of(0)
@@ -392,6 +434,37 @@ class IntegerTest {
 
         val expected: Integer = Integer.parse("92233720368547758070")
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun divOrNullHasRightIdentity(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val one: Integer = Integer.of(1)
+
+        val actual: Integer? = x.divOrNull(one)
+
+        assertEquals(expected = x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun divOrNullHasAbsorbingZeroDividend(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val other: Integer = Random.integerExcept(illegal = zero)
+
+        val actual: Integer? = zero.divOrNull(other)
+
+        assertEquals(expected = zero, actual, message = "Input: $other")
+    }
+
+    @Test
+    fun divOrNullIsConsistentWithDiv(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer? = x.divOrNull(y)
+
+        val expected: Integer = x / y
+        assertEquals(expected, actual, message = "Inputs: x = $x, y = $y")
     }
 
     @Test
