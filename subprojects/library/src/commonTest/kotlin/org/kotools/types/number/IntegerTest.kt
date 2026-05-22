@@ -655,6 +655,40 @@ class IntegerTest {
     }
 
     @Test
+    fun remByItselfIsZero(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val x: Integer = Random.integerExcept(illegal = zero)
+
+        val actual: Integer = x % x
+
+        assertEquals(expected = zero, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun remHasZeroForDivisibleIntegers(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+        val y: Integer = Random.integerExcept(illegal = zero)
+
+        val actual: Integer = (x * y) % y
+
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected = zero, actual, message)
+    }
+
+    @Test
+    fun remNegatesWithUnaryMinus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer = (-x) % y
+
+        val expected: Integer = -(x % y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun remByZeroThrowsException(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val y: Integer = Integer.of(0)
@@ -675,6 +709,29 @@ class IntegerTest {
 
         val expected: Integer = Integer.of(2)
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun remOrNullIsConsistentWithRem(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer? = x.remOrNull(y)
+
+        val expected: Integer = x % y
+        assertEquals(expected, actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun remOrNullNegatesWithUnaryMinus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Integer? = (-x).remOrNull(y)
+
+        val expected: Integer = -(x % y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
     }
 
     @Test
