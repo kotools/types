@@ -436,6 +436,54 @@ class IntegerTest {
     }
 
     @Test
+    fun timesIsAssociative(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Integer = (x * y) * z
+
+        val expected: Integer = x * (y * z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesHasZeroAsAbsorbingElement(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+
+        val message = "Input: $x"
+        assertEquals(zero, x * zero, message)
+        assertEquals(zero, zero * x, message)
+    }
+
+    @Test
+    fun timesDistributesOverPlus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Integer = x * (y + z)
+
+        val expected: Integer = x * y + x * z
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesNegatesWithUnaryMinus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val actual: Integer = (-x) * y
+
+        val expected: Integer = -(x * y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun timesSanityCheck() {
         val x: Integer = Integer.parse("99999999999999999999")
         val y: Integer = Integer.parse("10")
