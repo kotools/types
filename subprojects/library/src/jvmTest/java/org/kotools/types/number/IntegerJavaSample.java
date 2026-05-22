@@ -161,12 +161,11 @@ public class IntegerJavaSample {
 
     @Test
     void rem() {
-        // Given
         final Integer x = Integer.of(42);
         final Integer y = Integer.of(5);
-        // When
+
         final Integer result = x.rem(y);
-        // Then
+
         final Integer expected = Integer.of(2);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");

@@ -32,4 +32,7 @@ public interface PlatformInteger {
 
     /** Returns the quotient of dividing this integer by the [other] one. */
     public operator fun div(other: PlatformInteger): PlatformInteger
+
+    /** Returns the remainder of dividing this integer by the [other] one. */
+    public operator fun rem(other: PlatformInteger): PlatformInteger
 }

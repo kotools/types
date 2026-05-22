@@ -57,6 +57,13 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return JsInteger(quotient)
     }
 
+    override fun rem(other: PlatformInteger): PlatformInteger {
+        val x: dynamic = this.delegate.asDynamic()
+        val y: dynamic = (other as JsInteger).delegate.asDynamic()
+        val remainder: BigInt = (x % y).unsafeCast<BigInt>()
+        return JsInteger(remainder)
+    }
+
     override fun toString(): String = this.delegate.toString()
 }
 

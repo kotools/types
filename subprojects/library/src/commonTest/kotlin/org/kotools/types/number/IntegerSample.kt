@@ -194,24 +194,22 @@ class IntegerSample {
 
     @Test
     fun rem() {
-        // Given
         val x: Integer = Integer.of(42)
         val y: Integer = Integer.of(5)
-        // When
+
         val result: Integer = x % y
-        // Then
+
         val expected: Integer = Integer.of(2)
         check(result == expected)
     }
 
     @Test
     fun remOrNull() {
-        // Given
         val x: Integer = Integer.of(42)
         val y: Integer = Integer.of(5)
-        // When
+
         val result: Integer? = x.remOrNull(y)
-        // Then
+
         val expected: Integer = Integer.of(2)
         check(result == expected)
     }

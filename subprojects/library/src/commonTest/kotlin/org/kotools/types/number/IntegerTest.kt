@@ -445,50 +445,47 @@ class IntegerTest {
     }
 
     @Test
-    fun remWithNonZeroInteger() {
-        // Given
+    fun remSanityCheck() {
         val x: Integer = Integer.of(42)
         val y: Integer = Integer.of(5)
-        // When
-        val result: Integer = x % y
-        // Then
+
+        val actual: Integer = x % y
+
         val expected: Integer = Integer.of(2)
-        assertEquals(expected, result)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun remWithZero() {
-        // Given
-        val x: Integer = Integer.of(42)
+    fun remByZeroThrowsException(): Unit = repeatTest {
+        val x: Integer = Random.integer()
         val y: Integer = Integer.of(0)
-        // When
-        val result: ArithmeticException = assertFailsWith { x % y }
-        // Then
+
+        val exception: ArithmeticException = assertFailsWith { x % y }
+
         val expected = "Integer can't be divided by zero."
-        assertEquals(expected, result.message)
+        val message = "Input: $x"
+        assertEquals(expected, actual = exception.message, message)
     }
 
     @Test
-    fun remOrNullWithNonZeroInteger() {
-        // Given
+    fun remOrNullSanityCheck() {
         val x: Integer = Integer.of(42)
         val y: Integer = Integer.of(5)
-        // When
-        val result: Integer? = x.remOrNull(y)
-        // Then
+
+        val actual: Integer? = x.remOrNull(y)
+
         val expected: Integer = Integer.of(2)
-        assertEquals(expected, result)
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun remOrNullWithZero() {
-        // Given
-        val x: Integer = Integer.of(42)
+    fun remOrNullWithZeroReturnsNull(): Unit = repeatTest {
+        val x: Integer = Random.integer()
         val y: Integer = Integer.of(0)
-        // When
-        val result: Integer? = x.remOrNull(y)
-        // Then
-        assertNull(result)
+
+        val actual: Integer? = x.remOrNull(y)
+
+        assertNull(actual)
     }
 
     // ------------------------------ Conversions ------------------------------

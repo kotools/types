@@ -2,7 +2,6 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
-import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.number.PlatformInteger
 import org.kotools.types.number.Integer.Companion.of
 import org.kotools.types.number.Integer.Companion.parse
@@ -573,11 +572,9 @@ public class Integer private constructor(
      * exception in case of invalid [other] integer.
      */
     public operator fun rem(other: Integer): Integer {
-        val zero: Integer = of(0)
-        if (other == zero)
+        if (other == of(0))
             throw ArithmeticException("Integer can't be divided by zero.")
-        val remainder: String = integerRemainder(x = "$this", y = "$other")
-        return parse(remainder)
+        return Integer(this.delegate % other.delegate)
     }
 
     /**
@@ -603,12 +600,9 @@ public class Integer private constructor(
      * `null` in case of invalid [other] integer.
      */
     @JvmSynthetic
-    public fun remOrNull(other: Integer): Integer? {
-        val zero: Integer = of(0)
-        if (other == zero) return null
-        val remainder: String = integerRemainder(x = "$this", y = "$other")
-        return parse(remainder)
-    }
+    public fun remOrNull(other: Integer): Integer? =
+        if (other == of(0)) null
+        else Integer(this.delegate % other.delegate)
 
     // ------------------------------ Conversions ------------------------------
 
