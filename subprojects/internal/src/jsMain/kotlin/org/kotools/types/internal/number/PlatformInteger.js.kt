@@ -50,6 +50,13 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return JsInteger(product)
     }
 
+    override fun div(other: PlatformInteger): PlatformInteger {
+        val x: dynamic = this.delegate.asDynamic()
+        val y: dynamic = (other as JsInteger).delegate.asDynamic()
+        val quotient: BigInt = (x / y).unsafeCast<BigInt>()
+        return JsInteger(quotient)
+    }
+
     override fun toString(): String = this.delegate.toString()
 }
 

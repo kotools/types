@@ -172,26 +172,24 @@ class IntegerSample {
 
     @Test
     fun div() {
-        // Given
         val x: Integer = Integer.parse("922337203685477580700")
         val y: Integer = Integer.of(10)
-        // When
-        val result: Integer = x / y
-        // Then
+
+        val quotient: Integer = x / y
+
         val expected: Integer = Integer.parse("92233720368547758070")
-        check(result == expected)
+        check(quotient == expected)
     }
 
     @Test
     fun divOrNull() {
-        // Given
         val x: Integer = Integer.parse("922337203685477580700")
         val y: Integer = Integer.of(10)
-        // When
-        val result: Integer? = x.divOrNull(y)
-        // Then
+
+        val quotient: Integer? = x.divOrNull(y)
+
         val expected: Integer = Integer.parse("92233720368547758070")
-        check(result == expected)
+        check(quotient == expected)
     }
 
     @Test

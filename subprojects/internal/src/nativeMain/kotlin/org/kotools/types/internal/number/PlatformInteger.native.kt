@@ -35,5 +35,10 @@ private value class NativeInteger(private val delegate: BigInteger) :
     override fun times(other: PlatformInteger): PlatformInteger =
         NativeInteger(this.delegate * (other as NativeInteger).delegate)
 
+    override fun div(other: PlatformInteger): PlatformInteger {
+        val divisor: BigInteger = (other as NativeInteger).delegate
+        return NativeInteger(this.delegate / divisor)
+    }
+
     override fun toString(): String = this.delegate.toString()
 }

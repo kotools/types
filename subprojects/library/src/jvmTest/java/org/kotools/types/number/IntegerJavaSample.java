@@ -149,12 +149,11 @@ public class IntegerJavaSample {
 
     @Test
     void div() {
-        // Given
         final Integer x = Integer.parse("922337203685477580700");
         final Integer y = Integer.of(10);
-        // When
+
         final Integer result = x.div(y);
-        // Then
+
         final Integer expected = Integer.parse("92233720368547758070");
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");

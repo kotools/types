@@ -5,12 +5,6 @@ package org.kotools.types.internal
 import java.math.BigInteger
 
 @JvmSynthetic
-internal actual fun integerDivision(x: String, y: String): String {
-    val quotient: BigInteger = BigInteger(x) / BigInteger(y)
-    return quotient.toString()
-}
-
-@JvmSynthetic
 internal actual fun integerRemainder(x: String, y: String): String {
     val remainder: BigInteger = BigInteger(x) % BigInteger(y)
     return remainder.toString()

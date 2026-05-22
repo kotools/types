@@ -2,7 +2,6 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
-import org.kotools.types.internal.integerDivision
 import org.kotools.types.internal.integerRemainder
 import org.kotools.types.internal.number.PlatformInteger
 import org.kotools.types.number.Integer.Companion.of
@@ -502,10 +501,13 @@ public class Integer private constructor(
      */
     public operator fun div(other: Integer): Integer {
         val zero: Integer = of(0)
-        if (other == zero)
-            throw ArithmeticException("Integer can't be divided by zero.")
-        val quotient: String = integerDivision(x = "$this", y = "$other")
-        return parse(quotient)
+        return when {
+            other == zero -> throw ArithmeticException(
+                "Integer can't be divided by zero."
+            )
+            this == zero || other == of(1) -> this
+            else -> Integer(this.delegate / other.delegate)
+        }
     }
 
     /**
@@ -533,9 +535,11 @@ public class Integer private constructor(
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? {
         val zero: Integer = of(0)
-        if (other == zero) return null
-        val quotient: String = integerDivision(x = "$this", y = "$other")
-        return parse(quotient)
+        return when {
+            other == zero -> null
+            this == zero || other == of(1) -> this
+            else -> Integer(this.delegate / other.delegate)
+        }
     }
 
     /**

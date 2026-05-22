@@ -1,5 +1,3 @@
 package org.kotools.types.internal
 
-internal expect fun integerDivision(x: String, y: String): String
-
 internal expect fun integerRemainder(x: String, y: String): String

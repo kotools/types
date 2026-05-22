@@ -29,4 +29,7 @@ public interface PlatformInteger {
 
     /** Returns the product of this integer and the [other] one. */
     public operator fun times(other: PlatformInteger): PlatformInteger
+
+    /** Returns the quotient of dividing this integer by the [other] one. */
+    public operator fun div(other: PlatformInteger): PlatformInteger
 }

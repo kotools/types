@@ -36,5 +36,10 @@ private value class JvmInteger(private val delegate: BigInteger) :
     override fun times(other: PlatformInteger): PlatformInteger =
         JvmInteger(this.delegate * (other as JvmInteger).delegate)
 
+    override fun div(other: PlatformInteger): PlatformInteger {
+        val divisor: BigInteger = (other as JvmInteger).delegate
+        return JvmInteger(this.delegate / divisor)
+    }
+
     override fun toString(): String = this.delegate.toString()
 }

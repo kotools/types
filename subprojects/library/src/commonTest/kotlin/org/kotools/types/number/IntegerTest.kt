@@ -361,50 +361,87 @@ class IntegerTest {
     }
 
     @Test
-    fun divWithNonZeroInteger() {
-        // Given
-        val x: Integer = Integer.of(42)
-        val y: Integer = Integer.of(5)
-        // When
-        val result: Integer = x / y
-        // Then
-        val expected: Integer = Integer.of(8)
-        assertEquals(expected, result)
+    fun divSanityCheck() {
+        val x: Integer = Integer.parse("922337203685477580700")
+        val y: Integer = Integer.of(10)
+
+        val actual: Integer = x / y
+
+        val expected: Integer = Integer.parse("92233720368547758070")
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun divWithZero() {
-        // Given
-        val x: Integer = Integer.of(42)
-        val y: Integer = Integer.of(0)
-        // When
-        val result: ArithmeticException = assertFailsWith { x / y }
-        // Then
+    fun divOfZeroByNonZeroReturnsSameInstance(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val other: Integer = Random.integerExcept(illegal = zero)
+
+        val actual: Integer = zero / other
+
+        assertSame(expected = zero, actual, message = "Input: $other")
+    }
+
+    @Test
+    fun divByOneReturnsIdentity(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val one: Integer = Integer.of(1)
+
+        val actual: Integer = x / one
+
+        assertSame(expected = x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun divByZeroThrowsException(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+
+        val exception: ArithmeticException = assertFailsWith { x / zero }
+
         val expected = "Integer can't be divided by zero."
-        assertEquals(expected, result.message)
+        val message = "Input: $x"
+        assertEquals(expected, actual = exception.message, message)
     }
 
     @Test
-    fun divOrNullWithNonZeroInteger() {
-        // Given
-        val x: Integer = Integer.of(42)
-        val y: Integer = Integer.of(5)
-        // When
-        val result: Integer? = x.divOrNull(y)
-        // Then
-        val expected: Integer = Integer.of(8)
-        assertEquals(expected, result)
+    fun divOrNullSanityCheck() {
+        val x: Integer = Integer.parse("922337203685477580700")
+        val y: Integer = Integer.of(10)
+
+        val actual: Integer? = x.divOrNull(y)
+
+        val expected: Integer = Integer.parse("92233720368547758070")
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun divOrNullWithZero() {
-        // Given
-        val x: Integer = Integer.of(42)
+    fun divOrNullOfZeroByNonZeroReturnsSameInstance(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val other: Integer = Random.integerExcept(illegal = zero)
+
+        val actual: Integer? = zero.divOrNull(other)
+
+        assertSame(expected = zero, actual, message = "Input: $other")
+    }
+
+    @Test
+    fun divOrNullByOneReturnsIdentity(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val one: Integer = Integer.of(1)
+
+        val actual: Integer? = x.divOrNull(one)
+
+        assertSame(expected = x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun divOrNullWithZero(): Unit = repeatTest {
+        val x: Integer = Random.integer()
         val y: Integer = Integer.of(0)
-        // When
-        val result: Integer? = x.divOrNull(y)
-        // Then
-        assertNull(result)
+
+        val actual: Integer? = x.divOrNull(y)
+
+        assertNull(actual)
     }
 
     @Test
