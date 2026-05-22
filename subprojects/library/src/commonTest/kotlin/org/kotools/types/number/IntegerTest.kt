@@ -228,6 +228,32 @@ class IntegerTest {
     }
 
     @Test
+    fun compareToIsTransitive(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val xy: Int = x.compareTo(y)
+        val yz: Int = y.compareTo(z)
+
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        if (xy <= 0 && yz <= 0) assertTrue(x <= z, message)
+        if (xy >= 0 && yz >= 0) assertTrue(x >= z, message)
+    }
+
+    @Test
+    fun compareToIsConsistentWithEquals(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val actual: Boolean = x.compareTo(y) == 0
+
+        val expected: Boolean = x == y
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun compareToWithSmallerInteger() {
         val x: Integer = Integer.parse("-99999999999999999999")
         val y: Integer = Integer.parse("99999999999999999999")
@@ -759,5 +785,14 @@ class IntegerTest {
         else assertTrue("\"$actual\" must not have leading zeros.") {
             actual.first(Char::isDigit) != '0'
         }
+    }
+
+    @Test
+    fun toStringIsConsistentWithParsing(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+
+        val actual: Integer = Integer.parse(x.toString())
+
+        assertEquals(expected = x, actual, message = "Input: $x")
     }
 }
