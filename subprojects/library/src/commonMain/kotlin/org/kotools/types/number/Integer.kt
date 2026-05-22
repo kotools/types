@@ -498,16 +498,10 @@ public class Integer private constructor(
      * See the [divOrNull] function for returning `null` instead of throwing an
      * exception in case of invalid [other] integer.
      */
-    public operator fun div(other: Integer): Integer {
-        val zero: Integer = of(0)
-        return when {
-            other == zero -> throw ArithmeticException(
-                "Integer can't be divided by zero."
-            )
-            this == zero || other == of(1) -> this
-            else -> Integer(this.delegate / other.delegate)
-        }
-    }
+    public operator fun div(other: Integer): Integer =
+        if (other == of(0))
+            throw ArithmeticException("Integer can't be divided by zero.")
+        else Integer(this.delegate / other.delegate)
 
     /**
      * Returns the quotient of dividing this integer by the [other] one, or
@@ -532,14 +526,9 @@ public class Integer private constructor(
      * `null` in case of invalid [other] integer.
      */
     @JvmSynthetic
-    public fun divOrNull(other: Integer): Integer? {
-        val zero: Integer = of(0)
-        return when {
-            other == zero -> null
-            this == zero || other == of(1) -> this
-            else -> Integer(this.delegate / other.delegate)
-        }
-    }
+    public fun divOrNull(other: Integer): Integer? =
+        if (other == of(0)) null
+        else Integer(this.delegate / other.delegate)
 
     /**
      * Returns the remainder of dividing this integer by the [other] one, or

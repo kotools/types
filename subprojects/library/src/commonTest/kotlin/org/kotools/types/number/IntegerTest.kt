@@ -372,26 +372,6 @@ class IntegerTest {
     }
 
     @Test
-    fun divOfZeroByNonZeroReturnsSameInstance(): Unit = repeatTest {
-        val zero: Integer = Integer.of(0)
-        val other: Integer = Random.integerExcept(illegal = zero)
-
-        val actual: Integer = zero / other
-
-        assertSame(expected = zero, actual, message = "Input: $other")
-    }
-
-    @Test
-    fun divByOneReturnsIdentity(): Unit = repeatTest {
-        val x: Integer = Random.integer()
-        val one: Integer = Integer.of(1)
-
-        val actual: Integer = x / one
-
-        assertSame(expected = x, actual, message = "Input: $x")
-    }
-
-    @Test
     fun divByZeroThrowsException(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val zero: Integer = Integer.of(0)
@@ -412,26 +392,6 @@ class IntegerTest {
 
         val expected: Integer = Integer.parse("92233720368547758070")
         assertEquals(expected, actual)
-    }
-
-    @Test
-    fun divOrNullOfZeroByNonZeroReturnsSameInstance(): Unit = repeatTest {
-        val zero: Integer = Integer.of(0)
-        val other: Integer = Random.integerExcept(illegal = zero)
-
-        val actual: Integer? = zero.divOrNull(other)
-
-        assertSame(expected = zero, actual, message = "Input: $other")
-    }
-
-    @Test
-    fun divOrNullByOneReturnsIdentity(): Unit = repeatTest {
-        val x: Integer = Random.integer()
-        val one: Integer = Integer.of(1)
-
-        val actual: Integer? = x.divOrNull(one)
-
-        assertSame(expected = x, actual, message = "Input: $x")
     }
 
     @Test
