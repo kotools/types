@@ -44,6 +44,12 @@ internal fun Random.integerExcept(illegal: Integer): Integer {
     return candidate
 }
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.positiveInteger(): Integer {
+    val value: String = this.positiveIntegerString()
+    return Integer.parse(value)
+}
+
 // ------------------------------ Random strings -------------------------------
 
 internal fun Random.zeroString(): String {

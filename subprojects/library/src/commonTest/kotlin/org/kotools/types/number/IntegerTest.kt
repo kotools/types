@@ -5,6 +5,7 @@ import org.kotools.types.integer
 import org.kotools.types.integerExcept
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
+import org.kotools.types.positiveInteger
 import org.kotools.types.positiveIntegerString
 import org.kotools.types.repeatTest
 import org.kotools.types.zeroString
@@ -308,6 +309,21 @@ class IntegerTest {
     }
 
     @Test
+    fun unaryMinusInversesSign(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val x: Integer = Random.integerExcept(illegal = zero)
+
+        val xSign: Int = x.compareTo(zero)
+        val negXSign: Int = (-x).compareTo(zero)
+
+        val message = "Input: $x"
+        when {
+            xSign > 0 -> assertTrue(negXSign < 0, message)
+            else -> assertTrue(negXSign > 0, message)
+        }
+    }
+
+    @Test
     fun unaryMinusOnZero() {
         val x: Integer = Integer.of(0)
         val actual: Integer = -x
@@ -370,6 +386,44 @@ class IntegerTest {
 
         val expected: Int = x.compareTo(y)
         val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusHasUniqueInverseElement(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+
+        val actual: Boolean = x == -y
+
+        val expected: Boolean = x + y == zero
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusSatisfiesCancellation(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Boolean = x + z == y + z
+
+        val expected: Boolean = x == y
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusDistributesNegation(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val actual: Integer = -(x + y)
+
+        val expected: Integer = (-x) + (-y)
+        val message = "Inputs: x = $x, y = $y"
         assertEquals(expected, actual, message)
     }
 
@@ -507,6 +561,55 @@ class IntegerTest {
         val expected: Integer = -(x * y)
         val message = "Inputs: x = $x, y = $y"
         assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesHasRightDistributivityOverPlus(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Integer = (x + y) * z
+
+        val expected: Integer = x * z + y * z
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesSatisfiesCancellation(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val actual: Boolean = x * z == y * z
+
+        val expected: Boolean = x == y
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesPreservesOrderForPositiveMultiplier(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.positiveInteger()
+
+        val actual: Boolean = (x * z) <= y * z
+
+        val expected: Boolean = x <= y
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesPreservesOrderForNegativeMultiplier(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = -Random.positiveInteger()
+
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(x <= y, (x * z) >= y * z, message)
     }
 
     @Test
