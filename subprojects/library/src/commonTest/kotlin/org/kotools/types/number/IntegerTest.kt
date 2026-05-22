@@ -322,6 +322,32 @@ class IntegerTest {
     }
 
     @Test
+    fun plusIsAssociative(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Integer = (x + y) + z
+
+        val expected: Integer = x + (y + z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusIsCompatibleWithOrdering(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+        val z: Integer = Random.integer()
+
+        val actual: Int = (x + z).compareTo(y + z)
+
+        val expected: Int = x.compareTo(y)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun plusSanityCheck() {
         val x: Integer = Integer.parse("99999999999999999999")
         val y: Integer = Integer.parse("1")
