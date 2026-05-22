@@ -261,6 +261,27 @@ class IntegerTest {
     }
 
     @Test
+    fun unaryMinusIsAdditiveInverse(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+
+        val actual: Integer = x + (-x)
+
+        assertEquals(expected = zero, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun unaryMinusReversesComparison(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val actual: Int = (-y).compareTo(-x)
+
+        val expected: Int = x.compareTo(y)
+        assertEquals(expected, actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
     fun unaryMinusOnZero() {
         val x: Integer = Integer.of(0)
         val actual: Integer = -x
