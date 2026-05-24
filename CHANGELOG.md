@@ -16,16 +16,14 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
-### ✨ Added
+### ♻️ Changed
 
-- New `Integer` type and its
-  [specifications](documentation/specifications/integer.md). ([#940], [#942])
+- Moved `Integer` **experimental** type to `org.kotools.types.number` package,
+  and renamed some of its functions (`from` -> `of`, `fromDecimal` -> `parse`,
+  `fromDecimalOrNull` -> `parseOrNull`). ([#960])
 
 ### 🔥 Removed
 
-- `Integer` **experimental** type from `org.kotools.types` package. Another
-  class that satisfies `Integer` specifications will be implemented.
-  ([70b2ef56])
 - `orNull` and `orThrow` **deprecated** functions from `EmailAddress.Companion`
   and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
   functions instead. ([#871], [#872])
@@ -39,13 +37,11 @@ All notable changes to this project will be documented in this file.
   negative. ([1d14183b])
 
 [1d14183b]: https://github.com/kotools/types/commit/1d14183b
-[70b2ef56]: https://github.com/kotools/types/commit/70b2ef56
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 [#931]: https://github.com/kotools/types/issues/931
-[#940]: https://github.com/kotools/types/issues/940
-[#942]: https://github.com/kotools/types/issues/942
 [#958]: https://github.com/kotools/types/issues/958
+[#960]: https://github.com/kotools/types/issues/960
 
 ## 🔖 Releases
 
