@@ -53,16 +53,16 @@ documentation/      Design docs (design-goals, versioning-strategy,
 
 ### Source sets in `subprojects/library`
 
-| Source set      | Purpose |
-|-----------------|---------|
-| `commonMain`    | Shared public API (`org.kotools.types` and `kotools.types`)|
-| `jvmMain`       | JVM-specific `actual` implementations |
-| `jsMain`        | JS-specific `actual` implementations |
-| `nativeMain`    | Native-specific `actual` implementations |
-| `commonTest`    | Shared tests **and** code samples used in KDoc |
-| `jvmNativeTest` | Tests shared between JVM and Native |
-| `jvmTest`       | JVM-specific tests; also Java sample files (`*.java`) |
-| `jsTest`        | JS-specific samples |
+| Source set      | Purpose                                                     |
+|-----------------|-------------------------------------------------------------|
+| `commonMain`    | Shared public API (`org.kotools.types` and `kotools.types`) |
+| `jvmMain`       | JVM-specific `actual` implementations                       |
+| `jsMain`        | JS-specific `actual` implementations                        |
+| `nativeMain`    | Native-specific `actual` implementations                    |
+| `commonTest`    | Shared tests **and** code samples used in KDoc              |
+| `jvmNativeTest` | Tests shared between JVM and Native                         |
+| `jvmTest`       | JVM-specific tests; also Java sample files (`*.java`)       |
+| `jsTest`        | JS-specific samples                                         |
 
 `subprojects/internal` mirrors this layout with the same source set names.
 
