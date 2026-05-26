@@ -51,16 +51,30 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
     }
 
     override fun div(other: PlatformInteger): PlatformInteger {
-        val x: dynamic = this.delegate.asDynamic()
-        val y: dynamic = (other as JsInteger).delegate.asDynamic()
-        val quotient: BigInt = (x / y).unsafeCast<BigInt>()
+        val dividend: dynamic = this.delegate.asDynamic()
+        val divisor: dynamic = (other as JsInteger).delegate.asDynamic()
+        val remainder: dynamic =
+            ((this % other) as JsInteger).delegate.asDynamic()
+
+        val quotient: BigInt =
+            ((dividend - remainder) / divisor).unsafeCast<BigInt>()
+
         return JsInteger(quotient)
     }
 
     override fun rem(other: PlatformInteger): PlatformInteger {
-        val x: dynamic = this.delegate.asDynamic()
-        val y: dynamic = (other as JsInteger).delegate.asDynamic()
-        val remainder: BigInt = (x % y).unsafeCast<BigInt>()
+        val dividend: dynamic = this.delegate.asDynamic()
+        val divisor: dynamic = (other as JsInteger).delegate.asDynamic()
+
+        val zero: dynamic = BigInt("0")
+        val absoluteDivisor: dynamic = if (divisor < zero) -divisor else divisor
+
+        val truncatingRemainder: dynamic = dividend % divisor
+        val remainder: BigInt =
+            if (truncatingRemainder < zero)
+                (truncatingRemainder + absoluteDivisor).unsafeCast<BigInt>()
+            else truncatingRemainder.unsafeCast<BigInt>()
+
         return JsInteger(remainder)
     }
 

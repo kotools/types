@@ -171,47 +171,31 @@ class IntegerSample {
     }
 
     @Test
-    fun div() {
-        val x: Integer = Integer.parse("922337203685477580700")
-        val y: Integer = Integer.of(10)
+    fun euclideanDivision() {
+        val x: Integer = Integer.of(-7)
+        val y: Integer = Integer.of(2)
 
         val quotient: Integer = x / y
+        val remainder: Integer = x % y
 
-        val expected: Integer = Integer.parse("92233720368547758070")
-        check(quotient == expected)
+        check(quotient == Integer.of(-4))
+        check(remainder == Integer.of(1))
+        check(x == quotient * y + remainder)
     }
 
     @Test
-    fun divOrNull() {
-        val x: Integer = Integer.parse("922337203685477580700")
-        val y: Integer = Integer.of(10)
+    fun euclideanDivisionOrNull() {
+        val x: Integer = Integer.of(-7)
+        val y: Integer = Integer.of(2)
 
         val quotient: Integer? = x.divOrNull(y)
+        val remainder: Integer? = x.remOrNull(y)
 
-        val expected: Integer = Integer.parse("92233720368547758070")
-        check(quotient == expected)
-    }
-
-    @Test
-    fun rem() {
-        val x: Integer = Integer.of(42)
-        val y: Integer = Integer.of(5)
-
-        val result: Integer = x % y
-
-        val expected: Integer = Integer.of(2)
-        check(result == expected)
-    }
-
-    @Test
-    fun remOrNull() {
-        val x: Integer = Integer.of(42)
-        val y: Integer = Integer.of(5)
-
-        val result: Integer? = x.remOrNull(y)
-
-        val expected: Integer = Integer.of(2)
-        check(result == expected)
+        checkNotNull(quotient)
+        checkNotNull(remainder)
+        check(quotient == Integer.of(-4))
+        check(remainder == Integer.of(1))
+        check(x == quotient * y + remainder)
     }
 
     // ------------------------------ Conversions ------------------------------

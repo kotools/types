@@ -469,8 +469,11 @@ public class Integer private constructor(
         Integer(this.delegate * other.delegate)
 
     /**
-     * Returns the quotient of dividing this integer by the [other] one, or
-     * throws an [ArithmeticException] if the [other] integer is zero.
+     * Returns the Euclidean quotient of dividing this integer by the [other]
+     * one, or throws an [ArithmeticException] if the [other] integer is zero.
+     *
+     * This function uses Euclidean division: the remainder is always
+     * non-negative, regardless of the sign of this integer.
      *
      * <br>
      * <details>
@@ -480,7 +483,7 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.div
+     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivision
      * </details>
      *
      * <br>
@@ -491,12 +494,13 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.div
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.euclideanDivision
      * </details>
      * <br>
      *
-     * See the [divOrNull] function for returning `null` instead of throwing an
-     * exception in case of invalid [other] integer.
+     * See also:
+     * - [divOrNull] for returning `null` when dividing this integer by zero
+     * - [rem] or [remOrNull] for returning Euclidean remainder
      */
     public operator fun div(other: Integer): Integer =
         if (other == of(0))
@@ -504,8 +508,11 @@ public class Integer private constructor(
         else Integer(this.delegate / other.delegate)
 
     /**
-     * Returns the quotient of dividing this integer by the [other] one, or
-     * returns `null` if the [other] integer is zero.
+     * Returns the Euclidean quotient of dividing this integer by the [other]
+     * one, or returns `null` if the [other] integer is zero.
+     *
+     * This function uses Euclidean division: the remainder is always
+     * non-negative, regardless of the sign of this integer.
      *
      * <br>
      * <details>
@@ -515,15 +522,16 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.divOrNull
+     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionOrNull
      * </details>
      * <br>
      *
-     * This function is not available from Java code, due to its
-     * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+     * This function is hidden from Java, because nullability is not explicit in
+     * its type system.
      *
-     * See the [div] function for throwing an exception instead of returning
-     * `null` in case of invalid [other] integer.
+     * See also:
+     * - [div] for throwing an exception when dividing this integer by zero
+     * - [rem] or [remOrNull] for returning Euclidean remainder
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? =
@@ -531,8 +539,12 @@ public class Integer private constructor(
         else Integer(this.delegate / other.delegate)
 
     /**
-     * Returns the remainder of dividing this integer by the [other] one, or
-     * throws an [ArithmeticException] if the [other] integer is zero.
+     * Returns the Euclidean remainder of dividing this integer by the [other]
+     * one, or throws an [ArithmeticException] if the [other] integer is zero.
+     *
+     * This function uses Euclidean division: the remainder is always
+     * non-negative and less than the absolute value of [other]
+     * (`0 <= remainder < |other|`), regardless of the sign of this integer.
      *
      * <br>
      * <details>
@@ -542,7 +554,7 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.rem
+     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivision
      * </details>
      *
      * <br>
@@ -553,12 +565,13 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.rem
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.euclideanDivision
      * </details>
      * <br>
      *
-     * See the [remOrNull] function for returning `null` instead of throwing an
-     * exception in case of invalid [other] integer.
+     * See also:
+     * - [remOrNull] for returning `null` when dividing this integer by zero
+     * - [div] or [divOrNull] for returning Euclidean quotient
      */
     public operator fun rem(other: Integer): Integer {
         if (other == of(0))
@@ -567,8 +580,12 @@ public class Integer private constructor(
     }
 
     /**
-     * Returns the remainder of dividing this integer by the [other] one, or
-     * returns `null` if the [other] integer is zero.
+     * Returns the Euclidean remainder of dividing this integer by the [other]
+     * one, or returns `null` if the [other] integer is zero.
+     *
+     * This function uses Euclidean division: the remainder is always
+     * non-negative and less than the absolute value of [other]
+     * (`0 <= remainder < |other|`), regardless of the sign of this integer.
      *
      * <br>
      * <details>
@@ -578,15 +595,16 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.remOrNull
+     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionOrNull
      * </details>
      * <br>
      *
-     * This function is not available from Java code, due to its
-     * non-explicit [support for nullable types](https://kotlinlang.org/docs/java-to-kotlin-nullability-guide.html#support-for-nullable-types).
+     * This function is hidden from Java, because nullability is not explicit in
+     * its type system.
      *
-     * See the [rem] function for throwing an exception instead of returning
-     * `null` in case of invalid [other] integer.
+     * See also:
+     * - [rem] for throwing an exception when dividing this integer by zero
+     * - [div] or [divOrNull] for returning Euclidean quotient
      */
     @JvmSynthetic
     public fun remOrNull(other: Integer): Integer? =

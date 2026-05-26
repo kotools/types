@@ -675,15 +675,15 @@ class IntegerTest {
     }
 
     @Test
-    fun divNegatesWithUnaryMinus(): Unit = repeatTest {
-        val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+    fun divAndRemSanityCheckWithNegativeDividend() {
+        val x: Integer = Integer.of(-7)
+        val y: Integer = Integer.of(2)
 
-        val actual: Integer = (-x) / y
+        val quotient: Integer = x / y
+        val remainder: Integer = x % y
 
-        val expected: Integer = -(x / y)
-        val message = "Inputs: x = $x, y = $y"
-        assertEquals(expected, actual, message)
+        assertEquals(expected = Integer.of(-4), actual = quotient)
+        assertEquals(expected = Integer.of(1), actual = remainder)
     }
 
     @Test
@@ -751,18 +751,6 @@ class IntegerTest {
     }
 
     @Test
-    fun divOrNullNegatesWithUnaryMinus(): Unit = repeatTest {
-        val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
-
-        val actual: Integer? = (-x).divOrNull(y)
-
-        val expected: Integer = -(x / y)
-        val message = "Inputs: x = $x, y = $y"
-        assertEquals(expected, actual, message)
-    }
-
-    @Test
     fun divOrNullWithZero(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val y: Integer = Integer.of(0)
@@ -806,15 +794,26 @@ class IntegerTest {
     }
 
     @Test
-    fun remNegatesWithUnaryMinus(): Unit = repeatTest {
+    fun remIsAlwaysNonNegative(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
+        val zero: Integer = Integer.of(0)
+        val y: Integer = Random.integerExcept(illegal = zero)
 
-        val actual: Integer = (-x) % y
+        val remainder: Integer = x % y
 
-        val expected: Integer = -(x % y)
-        val message = "Inputs: x = $x, y = $y"
-        assertEquals(expected, actual, message)
+        assertTrue(remainder >= zero, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun remIsBoundedByAbsoluteValueOfDivisor(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val zero: Integer = Integer.of(0)
+        val y: Integer = Random.integerExcept(illegal = zero)
+
+        val remainder: Integer = x % y
+
+        val absY: Integer = if (y > zero) y else -y
+        assertTrue(remainder < absY, message = "Inputs: x = $x, y = $y")
     }
 
     @Test
@@ -849,18 +848,6 @@ class IntegerTest {
 
         val expected: Integer = x % y
         assertEquals(expected, actual, message = "Inputs: x = $x, y = $y")
-    }
-
-    @Test
-    fun remOrNullNegatesWithUnaryMinus(): Unit = repeatTest {
-        val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.of(0))
-
-        val actual: Integer? = (-x).remOrNull(y)
-
-        val expected: Integer = -(x % y)
-        val message = "Inputs: x = $x, y = $y"
-        assertEquals(expected, actual, message)
     }
 
     @Test

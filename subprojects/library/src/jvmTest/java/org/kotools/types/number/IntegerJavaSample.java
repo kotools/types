@@ -148,26 +148,15 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void div() {
-        final Integer x = Integer.parse("922337203685477580700");
-        final Integer y = Integer.of(10);
+    void euclideanDivision() {
+        final Integer x = Integer.of(-7);
+        final Integer y = Integer.of(2);
 
-        final Integer result = x.div(y);
+        final Integer quotient = x.div(y);
+        final Integer remainder = x.rem(y);
 
-        final Integer expected = Integer.parse("92233720368547758070");
-        final boolean check = result.equals(expected);
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
-
-    @Test
-    void rem() {
-        final Integer x = Integer.of(42);
-        final Integer y = Integer.of(5);
-
-        final Integer result = x.rem(y);
-
-        final Integer expected = Integer.of(2);
-        final boolean check = result.equals(expected);
+        final boolean check = quotient.equals(Integer.of(-4))
+                && remainder.equals(Integer.of(1));
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
