@@ -11,8 +11,8 @@ import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents a mathematical integer (ℤ), with exact arithmetic operations that
- * don't overflow, and consistent division-by-zero behavior across all
- * platforms.
+ * don't overflow, consistent division-by-zero behavior across all platforms,
+ * and Euclidean division semantics.
  *
  * <br>
  * <details>
@@ -68,6 +68,19 @@ import kotlin.jvm.JvmSynthetic
  * [Integer] type throw an [ArithmeticException] on all platforms.
  *
  * SAMPLE: org.kotools.types.number.IntegerSample.divisionByZeroSolution
+ *
+ * #### Euclidean division
+ *
+ * **Problem:** Performing a remainder operation on Kotlin integer types with a
+ * negative dividend returns a negative result, which differs from the
+ * mathematical definition of the remainder.
+ *
+ * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionProblem
+ *
+ * **Solution:** Division and remainder operations on [Integer] type follow
+ * Euclidean semantics: the remainder is always non-negative (`0 ≤ r < |b|`).
+ *
+ * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivision
  * </details>
  *
  * <br>

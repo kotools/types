@@ -37,6 +37,11 @@ class IntegerSample {
         check(remainder.exceptionOrNull() is ArithmeticException)
     }
 
+    @Test
+    fun euclideanDivisionProblem() {
+        check(-7 % 2 == -1) // instead of 1
+    }
+
     // ------------------------------- Creations -------------------------------
 
     @Test
