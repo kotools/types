@@ -687,6 +687,30 @@ class IntegerTest {
     }
 
     @Test
+    fun divAndRemSanityCheckWithNegativeDivisor() {
+        val x: Integer = Integer.of(7)
+        val y: Integer = Integer.of(-2)
+
+        val quotient: Integer = x / y
+        val remainder: Integer = x % y
+
+        assertEquals(expected = Integer.of(-3), actual = quotient)
+        assertEquals(expected = Integer.of(1), actual = remainder)
+    }
+
+    @Test
+    fun divAndRemSanityCheckWithNegativeOperands() {
+        val x: Integer = Integer.of(-7)
+        val y: Integer = Integer.of(-2)
+
+        val quotient: Integer = x / y
+        val remainder: Integer = x % y
+
+        assertEquals(expected = Integer.of(4), actual = quotient)
+        assertEquals(expected = Integer.of(1), actual = remainder)
+    }
+
+    @Test
     fun divIsConsistentWithTimes(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val y: Integer = Random.integerExcept(illegal = Integer.of(0))
