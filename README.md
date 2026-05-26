@@ -102,6 +102,7 @@ Here's additional documentation for learning more about this project:
 - [Versioning strategy](documentation/versioning-strategy.md)
 - [Dependency compatibility](documentation/dependencies.md)
 - [Declarations lifecycle](documentation/declarations-lifecycle.md)
+- [Architecture decisions](documentation/decisions/README.md)
 - [Security Policy](SECURITY.md)
 
 ## 🤝 Community
