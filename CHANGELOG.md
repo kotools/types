@@ -18,6 +18,9 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
+- Changed `Integer.div`, `Integer.divOrNull`, `Integer.rem` and
+  `Integer.remOrNull` **experimental** functions to use Euclidean division
+  semantics: the remainder is always non-negative (`0 ≤ r < |b|`). ([#952])
 - Moved `Integer` **experimental** type to `org.kotools.types.number` package,
   and renamed some of its functions (`from` -> `of`, `fromDecimal` -> `parse`,
   `fromDecimalOrNull` -> `parseOrNull`). ([#960])
@@ -30,16 +33,10 @@ All notable changes to this project will be documented in this file.
 - `KotoolsTypesSerializersModule()` **experimental** function. ([#931])
 - `types-kotlinx-serialization` module. ([#958])
 
-### 🐛 Fixed
-
-- Fixed `Integer.rem` and `Integer.remOrNull` **experimental** functions
-  returning incorrect remainder sign on Kotlin/Native when the divisor is
-  negative. ([1d14183b])
-
-[1d14183b]: https://github.com/kotools/types/commit/1d14183b
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 [#931]: https://github.com/kotools/types/issues/931
+[#952]: https://github.com/kotools/types/issues/952
 [#958]: https://github.com/kotools/types/issues/958
 [#960]: https://github.com/kotools/types/issues/960
 
