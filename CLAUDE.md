@@ -125,6 +125,3 @@ major release. Never remove a stable declaration in a single step. See
 ```
 
 Example: `⬆️ Bump binary-compatibility-validator to 0.14.0 (#380)`
-
-Branch naming: `<type>/<issue-id>` where type ∈
-`{automation, bug, documentation, feature, security}`.
