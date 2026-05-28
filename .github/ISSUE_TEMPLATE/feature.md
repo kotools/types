@@ -6,15 +6,7 @@ labels: feature
 
 ## 📝 Description
 
-**Problem:**
-
-**Solution:**
-
-**API:**
-
-```kotlin
-
-```
+**Goal:**
 
 <!-- This section will be filled and uncommented by a maintainer.
 ## ✅ Checklist
