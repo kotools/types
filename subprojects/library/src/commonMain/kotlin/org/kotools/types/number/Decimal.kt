@@ -520,12 +520,15 @@ public class Decimal private constructor(
 
     // ----------------------------- Internals ---------------------------------
 
-    // Multiplies unscaledValue by 10^(targetScale - scale) to align scale.
+    /**
+     * Multiplies [unscaledValue] by 10^([targetScale] - [scale]) to align
+     * scale.
+     */
     private fun scaleUpTo(targetScale: Int): Integer {
         if (this.scale == targetScale) return this.unscaledValue
         val ten: Integer = Integer.of(10)
         var result: Integer = this.unscaledValue
-        repeat(targetScale - this.scale) { result = result * ten }
+        repeat(targetScale - this.scale) { result *= ten }
         return result
     }
 
