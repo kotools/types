@@ -532,18 +532,26 @@ public class Decimal private constructor(
         return result
     }
 
-    // Strips trailing fractional zeros.
-    // Integer.rem uses Euclidean semantics (remainder ≥ 0), which correctly
-    // identifies divisibility by 10 for negative unscaled values.
-    // Example: -30 rem 10 = 0 (Euclidean) → strip → Decimal(Integer.of(-3), 0).
+    /**
+     * Strips trailing fractional zeros, or returns this decimal number if
+     * [scale] is `0`.
+     *
+     * [Integer.rem] uses Euclidean semantics (`remainder >= 0`), which
+     * correctly identifiers divisibility by 10 for negative unscaled values.
+     *
+     * Example: `-30 % 10 = 0` -> strip -> `Decimal(Integer.of(-3), scale = 0)`
+     */
     private fun normalize(): Decimal {
+        if (this.scale == 0) return this
         val zero: Integer = Integer.of(0)
         val ten: Integer = Integer.of(10)
-        var cur: Decimal = this
-        while (cur.scale > 0) {
-            if (cur.unscaledValue % ten != zero) break
-            cur = Decimal(cur.unscaledValue / ten, cur.scale - 1)
+        var current: Decimal = this
+        while (current.scale > 0) {
+            if (current.unscaledValue % ten != zero) break
+            val unscaledValue: Integer = current.unscaledValue / ten
+            val scale: Int = current.scale - 1
+            current = Decimal(unscaledValue, scale)
         }
-        return cur
+        return current
     }
 }
