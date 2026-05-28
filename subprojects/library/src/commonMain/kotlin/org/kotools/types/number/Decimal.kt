@@ -377,7 +377,8 @@ public class Decimal private constructor(
      * SAMPLE: org.kotools.types.number.DecimalJavaSample.unaryMinus
      * </details>
      */
-    public operator fun unaryMinus(): Decimal = Decimal(-this.unscaledValue, this.scale)
+    public operator fun unaryMinus(): Decimal =
+        Decimal(-this.unscaledValue, this.scale)
 
     /**
      * Adds the [other] decimal to this one.
