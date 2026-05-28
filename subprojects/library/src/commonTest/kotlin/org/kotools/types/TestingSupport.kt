@@ -56,6 +56,14 @@ internal fun Random.decimalExcept(illegal: Decimal): Decimal {
     return candidate
 }
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.positiveDecimal(): Decimal {
+    val zero: Decimal = Decimal.of(0)
+    var candidate: Decimal = this.decimal()
+    while (candidate <= zero) candidate = this.decimal()
+    return candidate
+}
+
 // ------------------------------ Random integers ------------------------------
 
 @OptIn(ExperimentalKotoolsTypesApi::class)

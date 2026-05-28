@@ -4,6 +4,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.decimal
 import org.kotools.types.decimalExcept
 import org.kotools.types.nonDecimalString
+import org.kotools.types.positiveDecimal
 import org.kotools.types.repeatTest
 import kotlin.random.Random
 import kotlin.test.Test
@@ -48,7 +49,7 @@ class DecimalTest {
 
     @Test
     fun parsingRemovesPlusSign(): Unit = repeatTest {
-        val value: String = "+${Random.nextLong(1, Long.MAX_VALUE)}"
+        val value = "+${Random.nextLong(1, Long.MAX_VALUE)}"
 
         val decimal: Decimal = Decimal.parse(value)
         val safeDecimal: Decimal? = Decimal.parseOrNull(value)
@@ -351,6 +352,21 @@ class DecimalTest {
     }
 
     @Test
+    fun unaryMinusInversesSign(): Unit = repeatTest {
+        val zero: Decimal = Decimal.of(0)
+        val x: Decimal = Random.decimalExcept(illegal = zero)
+
+        val xSign: Int = x.compareTo(zero)
+        val negXSign: Int = (-x).compareTo(zero)
+
+        val message = "Input: $x"
+        when {
+            xSign > 0 -> assertTrue(negXSign < 0, message)
+            else -> assertTrue(negXSign > 0, message)
+        }
+    }
+
+    @Test
     fun unaryMinusOnZero() {
         val x: Decimal = Decimal.of(0)
         val actual: Decimal = -x
@@ -404,11 +420,71 @@ class DecimalTest {
     }
 
     @Test
+    fun plusIsCompatibleWithOrdering(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = Random.decimal()
+
+        val actual: Int = (x + z).compareTo(y + z)
+
+        val expected: Int = x.compareTo(y)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusHasUniqueInverseElement(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val zero: Decimal = Decimal.of(0)
+
+        val actual: Boolean = x == -y
+
+        val expected: Boolean = x + y == zero
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusSatisfiesCancellation(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = Random.decimal()
+
+        val actual: Boolean = x + z == y + z
+
+        val expected: Boolean = x == y
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusDistributesNegation(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+
+        val actual: Decimal = -(x + y)
+
+        val expected: Decimal = (-x) + (-y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun plusSanityCheck() {
         val x: Decimal = Decimal.parse("1.5")
         val y: Decimal = Decimal.parse("1.25")
         val actual: Decimal = x + y
         val expected: Decimal = Decimal.parse("2.75")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun plusAvoidingFloatingPointImprecision() {
+        val x: Decimal = Decimal.parse("0.1")
+        val y: Decimal = Decimal.parse("0.2")
+        val actual: Decimal = x + y
+        val expected: Decimal = Decimal.parse("0.3")
         assertEquals(expected, actual)
     }
 
@@ -429,6 +505,18 @@ class DecimalTest {
     }
 
     @Test
+    fun minusIsAntiCommutative(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+
+        val actual: Decimal = x - y
+
+        val expected: Decimal = -(y - x)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
     fun minusIsConsistentWithPlus(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
         val y: Decimal = Random.decimal()
@@ -437,6 +525,19 @@ class DecimalTest {
 
         val expected: Decimal = x + (-y)
         val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun minusIsCompatibleWithOrdering(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = Random.decimal()
+
+        val actual: Int = (x - z).compareTo(y - z)
+
+        val expected: Int = x.compareTo(y)
+        val message = "Inputs: x = $x, y = $y, z = $z"
         assertEquals(expected, actual, message)
     }
 
@@ -455,6 +556,15 @@ class DecimalTest {
         val y: Decimal = Random.decimal()
         val message = "Inputs: x = $x, y = $y"
         assertEquals(x * y, y * x, message)
+    }
+
+    @Test
+    fun timesHasOneAsIdentityElement(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val one: Decimal = Decimal.of(1)
+        val message = "Input: $x"
+        assertEquals(x, x * one, message)
+        assertEquals(x, one * x, message)
     }
 
     @Test
@@ -491,6 +601,67 @@ class DecimalTest {
         val expected: Decimal = x * y + x * z
         val message = "Inputs: x = $x, y = $y, z = $z"
         assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesNegatesWithUnaryMinus(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+
+        val actual: Decimal = (-x) * y
+
+        val expected: Decimal = -(x * y)
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesHasRightDistributivityOverPlus(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = Random.decimal()
+
+        val actual: Decimal = (x + y) * z
+
+        val expected: Decimal = x * z + y * z
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesSatisfiesCancellation(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = Random.decimalExcept(illegal = Decimal.of(0))
+
+        val actual: Boolean = x * z == y * z
+
+        val expected: Boolean = x == y
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesPreservesOrderForPositiveMultiplier(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = Random.positiveDecimal()
+
+        val actual: Boolean = (x * z) <= y * z
+
+        val expected: Boolean = x <= y
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesPreservesOrderForNegativeMultiplier(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+        val y: Decimal = Random.decimal()
+        val z: Decimal = -Random.positiveDecimal()
+
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(x <= y, (x * z) >= y * z, message)
     }
 
     @Test
@@ -543,5 +714,14 @@ class DecimalTest {
 
         // Large values
         checkToString("99999999999999999999.99", "99999999999999999999.99")
+    }
+
+    @Test
+    fun toStringIsConsistentWithParsing(): Unit = repeatTest {
+        val x: Decimal = Random.decimal()
+
+        val actual: Decimal = Decimal.parse(x.toString())
+
+        assertEquals(expected = x, actual, message = "Input: $x")
     }
 }
