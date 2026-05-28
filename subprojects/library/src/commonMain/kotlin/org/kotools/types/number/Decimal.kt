@@ -227,27 +227,23 @@ public class Decimal private constructor(
                     && fractionalPart.all { it in digitRange }
         }
 
-        // Normalize the string, then build Decimal directly.
-        // The resulting Decimal is already canonical — no normalize() pass needed.
         private fun String.toDecimal(): Decimal {
-            val sign: String = if (this.startsWith('-')) "-" else ""
-            val s: String = this.removePrefix("+").removePrefix("-")
-            val dot: Int = s.indexOf('.')
-
-            if (dot == -1) {
-                val digits: String = s.trimStart('0').ifEmpty { "0" }
-                return Decimal(Integer.parse("$sign$digits"), 0)
+            val dot = '.'
+            if (dot !in this) {
+                val unscaled: Integer = Integer.parse(this)
+                return Decimal(unscaled, scale = 0)
             }
 
-            val intPart: String = s.substring(0, dot).trimStart('0').ifEmpty { "0" }
-            val fracPart: String = s.substring(dot + 1).trimEnd('0')
-            val scale: Int = fracPart.length
+            val sign: String = if (this.startsWith('-')) "-" else ""
+            val unsigned: String = this.removePrefix("+")
+                .removePrefix("-")
+            val integerPart: String = unsigned.substringBefore(dot)
+            val fractionalPart: String = unsigned.substringAfter(dot)
+                .trimEnd('0')
+            val unscaled: Integer =
+                Integer.parse("$sign$integerPart$fractionalPart")
 
-            val combined: String = (intPart + fracPart).trimStart('0').ifEmpty { "0" }
-            val unscaledStr: String =
-                if (combined == "0") "0" else "$sign$combined"
-
-            return Decimal(Integer.parse(unscaledStr), scale)
+            return Decimal(unscaled, scale = fractionalPart.length)
         }
     }
 
