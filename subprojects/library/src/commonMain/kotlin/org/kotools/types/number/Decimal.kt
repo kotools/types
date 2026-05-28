@@ -44,7 +44,7 @@ import kotlin.jvm.JvmSynthetic
  * from this type.
  *
  * This is consistent with how [Integer] excludes operations that would leave
- * the set of integers (square roots, non-integer divisions without remainder).
+ * the set of integers (square roots, noninteger divisions without remainder).
  * </details>
  *
  * <br>
@@ -227,7 +227,7 @@ public class Decimal private constructor(
                     && fractionalPart.all { it in digitRange }
         }
 
-        // Normalise the string, then build Decimal directly.
+        // Normalize the string, then build Decimal directly.
         // The resulting Decimal is already canonical — no normalize() pass needed.
         private fun String.toDecimal(): Decimal {
             val sign: String = if (this.startsWith('-')) "-" else ""
