@@ -278,10 +278,9 @@ public class Decimal private constructor(
      * </details>
      */
     @Suppress("RedundantModalityModifier")
-    final override fun equals(other: Any?): Boolean =
-        other is Decimal &&
-            this.unscaledValue == other.unscaledValue &&
-            this.scale == other.scale
+    final override fun equals(other: Any?): Boolean = other is Decimal
+            && this.unscaledValue == other.unscaledValue
+            && this.scale == other.scale
 
     /**
      * Returns a hash code value for this decimal.
