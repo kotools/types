@@ -16,6 +16,15 @@ All notable changes to this project will be documented in this file.
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- `Decimal` **experimental** type to `org.kotools.types.number` package,
+  representing mathematical decimal numbers with exact arithmetic. Supports
+  creation via `of(Long)`, `parse(String)` and `parseOrNull(String)`,
+  arithmetic operators (`+`, `-`, `*`, unary `-`), comparison, and canonical
+  string conversion. Division is intentionally excluded because the set of
+  terminating decimals is not closed under division. ([#925])
+
 ### ♻️ Changed
 
 - Changed `Integer.div`, `Integer.divOrNull`, `Integer.rem` and
@@ -35,6 +44,7 @@ All notable changes to this project will be documented in this file.
 
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
+[#925]: https://github.com/kotools/types/issues/925
 [#931]: https://github.com/kotools/types/issues/931
 [#952]: https://github.com/kotools/types/issues/952
 [#958]: https://github.com/kotools/types/issues/958
