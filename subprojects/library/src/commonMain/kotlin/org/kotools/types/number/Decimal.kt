@@ -227,6 +227,12 @@ public class Decimal private constructor(
                     && fractionalPart.all { it in digitRange }
         }
 
+        /**
+         * Normalizes this decimal string and returns a [Decimal] from it.
+         *
+         * The resulting [Decimal] is already canonical - no [Decimal.normalize]
+         * needed.
+         */
         private fun String.toDecimal(): Decimal {
             val dot = '.'
             if (dot !in this) {
