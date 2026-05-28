@@ -3,6 +3,9 @@ package org.kotools.types.internal
 /** Enumeration that provides a hash seed for a given type. */
 @InternalKotoolsTypesApi
 public enum class HashSeed {
+    /** Hash seed for the `Decimal` type. */
+    Decimal,
+
     /** Hash seed for the `Integer` type. */
     Integer;
 

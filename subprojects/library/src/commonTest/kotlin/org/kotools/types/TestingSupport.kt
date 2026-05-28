@@ -1,5 +1,6 @@
 package org.kotools.types
 
+import org.kotools.types.number.Decimal
 import org.kotools.types.number.Integer
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -18,6 +19,42 @@ internal inline fun repeatTest(block: () -> Unit): Unit =
 
 // Functions below are grouped by types (e.g., String), and sorted from smaller
 // to greater range of values.
+
+// ------------------------------ Random decimals ------------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.decimal(): Decimal {
+    val sign: String = listOf("", "+", "-").random()
+    val integerPartLength: Int = this.nextInt(1..31)
+    val fractionalPartLength: Int = this.nextInt(0..31)
+
+    val capacity: Int =
+        sign.length + integerPartLength + fractionalPartLength + 1 // for '.'
+    val builder = StringBuilder(capacity)
+
+    builder.append(sign)
+    repeat(integerPartLength) {
+        val digit: Int = (0..9).random()
+        builder.append(digit)
+    }
+    if (fractionalPartLength > 0) {
+        builder.append('.')
+        repeat(fractionalPartLength) {
+            val digit: Int = (0..9).random()
+            builder.append(digit)
+        }
+    }
+
+    val value: String = builder.toString()
+    return Decimal.parse(value)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.decimalExcept(illegal: Decimal): Decimal {
+    var candidate: Decimal = this.decimal()
+    while (candidate == illegal) candidate = this.decimal()
+    return candidate
+}
 
 // ------------------------------ Random integers ------------------------------
 
@@ -79,6 +116,13 @@ internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
 internal fun Random.nonIntegerString(): String {
     var candidate: String = this.string()
     val regex = Regex("""^[+-]?\d+$""")
+    while (candidate matches regex) candidate = this.string()
+    return candidate
+}
+
+internal fun Random.nonDecimalString(): String {
+    var candidate: String = this.string()
+    val regex = Regex("""^[+-]?\d+(\.\d+)?$""")
     while (candidate matches regex) candidate = this.string()
     return candidate
 }
