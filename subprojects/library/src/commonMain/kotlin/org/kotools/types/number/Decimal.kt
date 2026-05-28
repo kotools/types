@@ -211,16 +211,20 @@ public class Decimal private constructor(
         // EBNF: decimal = [sign] digit {digit} ['.' digit {digit}]
         // Rejects: empty string, ".", "1.2.3", "+", "1.5E3", ".5", "3."
         private fun String.isDecimal(): Boolean {
-            val s: String = this.removePrefix("+").removePrefix("-")
-            if (s.isEmpty()) return false
-            val dot: Int = s.indexOf('.')
-            return if (dot == -1) s.all(Char::isDigit)
-            else {
-                val intPart: String = s.substring(0, dot)
-                val fracPart: String = s.substring(dot + 1)
-                intPart.isNotEmpty() && intPart.all(Char::isDigit) &&
-                    fracPart.isNotEmpty() && fracPart.all(Char::isDigit)
-            }
+            val unsigned: String = this.removePrefix("+")
+                .removePrefix("-")
+            if (unsigned.isBlank()) return false
+
+            val dot = '.'
+            val digitRange: CharRange = '0'..'9'
+            if (dot !in unsigned) return unsigned.all { it in digitRange }
+
+            val integerPart: String = unsigned.substringBefore(dot)
+            val fractionalPart: String = unsigned.substringAfter(dot)
+            return integerPart.isNotEmpty()
+                    && integerPart.all { it in digitRange }
+                    && fractionalPart.isNotEmpty()
+                    && fractionalPart.all { it in digitRange }
         }
 
         // Normalise the string, then build Decimal directly.
