@@ -118,6 +118,12 @@ steps (WARNING → ERROR → HIDDEN across minor releases) before removal in a
 major release. Never remove a stable declaration in a single step. See
 `documentation/declarations-lifecycle.md` for the full policy.
 
+## Articles
+
+Community-facing articles (Reddit, Slack) live in `documentation/articles/`.
+See `documentation/articles/README.md` for naming conventions and distribution
+strategy.
+
 ## Commit message format
 
 ```
