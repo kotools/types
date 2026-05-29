@@ -1,7 +1,7 @@
 # Integer division teaser — Kotlin Slack cross-post
 
 Post this teaser in `#multiplatform`, `#library-development`, and `#general`,
-replacing `[link]` with the URL of the full post in `#kotools`.
+replacing the URL below with the published Dev.to article URL.
 
 ---
 
@@ -16,4 +16,4 @@ type in Kotools Types 5.1.1 fixes it consistently across all three targets —
 including null-safe `divOrNull` and `remOrNull` variants for those who prefer
 not to catch exceptions.
 
-[link]
+https://dev.to/kotools/<article-slug>

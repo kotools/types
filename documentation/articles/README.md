@@ -1,7 +1,7 @@
 # Articles
 
-This directory contains community-facing articles published on Reddit and
-Kotlin Slack.
+This directory contains community-facing articles published across Kotlin
+community channels.
 
 ## Naming convention
 
@@ -17,10 +17,53 @@ and increment it (e.g. the first article uses `1-`, the second uses `2-`).
 
 ## Distribution strategy
 
-| File | Published to |
-|------|-------------|
-| `<n>-<slug>.md` | Reddit (r/Kotlin, cross-post to r/KotlinMultiplatform) and Kotlin Slack `#kotools` |
-| `<n>-<slug>-teaser.md` | Kotlin Slack `#multiplatform`, `#library-development`, `#general` — each links back to the `#kotools` post |
+Publish in this order so that a canonical public URL exists before submitting
+to aggregators and newsletters.
+
+### Step 1 — Establish a canonical public URL (Dev.to)
+
+Publish `<n>-<slug>.md` on **Dev.to** first (tags: `kotlin`, `multiplatform`,
+`kmp`, `programming`). Dev.to renders Markdown natively. The resulting URL is
+used as the reference link in all subsequent steps.
+
+### Step 2 — Kotlin Slack (same day)
+
+| Channel | Action |
+|---------|--------|
+| `#kotools` | Post the full article — canonical Slack location |
+| `#multiplatform` | Post `<n>-<slug>-teaser.md` + Dev.to link |
+| `#library-development` | Post `<n>-<slug>-teaser.md` + Dev.to link |
+| `#general` | Post `<n>-<slug>-teaser.md` + Dev.to link |
+
+### Step 3 — Reddit (same day)
+
+Link to the Dev.to article:
+- Primary: r/Kotlin
+- Cross-post: r/KotlinMultiplatform
+
+### Step 4 — Kotlin Weekly (within the week)
+
+Submit the Dev.to URL to Kotlin Weekly (kotlinweekly.net, ~10k subscribers).
+Check the site for the current submission process.
+
+### Step 5 — Social media (same day as Dev.to)
+
+| Platform | Action |
+|----------|--------|
+| Twitter / X | Short post with `#kotlin` `#kmp` `#kotlinmultiplatform` + Dev.to link |
+| Mastodon (kotlin.social) | Same short post |
+| LinkedIn | Professional angle — cross-platform bugs in production |
+
+### Step 6 — JetBrains amplification (passive)
+
+Tag the Dev.to post and social posts with `#KotlinServerSide`. JetBrains scouts
+community content monthly and amplifies standout posts on @Kotlin and in Kotlin
+Blog roundups. No direct submission needed.
+
+### Step 7 — DZone (optional, longer lead time)
+
+DZone accepts articles ≥ 800 words with a 7–12 business-day review. Submit if
+broader reach beyond the Kotlin community is desired.
 
 ## Authoring guidelines
 
