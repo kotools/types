@@ -15,8 +15,19 @@ public actual fun PlatformInteger(value: String): PlatformInteger =
 @OptIn(InternalKotoolsTypesApi::class)
 private class NativeInteger private constructor(
     private val magnitude: LongArray, // little-endian base-2^32, no leading zeros
-    private val sign: Int             // -1 | 0 | 1
+    private val sign: Int
 ) : PlatformInteger {
+    // --------------------------- Class invariants ----------------------------
+
+    init {
+        require(this.sign in -1..1) {
+            "Sign must be -1 for negative values, 0 for zero, or 1 for " +
+                    "positive values (was: ${this.sign})."
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
     override fun compareTo(other: PlatformInteger): Int {
         check(other is NativeInteger)
         if (this.sign != other.sign) return this.sign.compareTo(other.sign)
