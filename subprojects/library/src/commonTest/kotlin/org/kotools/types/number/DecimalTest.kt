@@ -24,11 +24,10 @@ class DecimalTest {
     fun ofPreservesLongRepresentation(): Unit = repeatTest {
         val value: Long = Random.nextLong()
 
-        val decimal: Decimal = Decimal.of(value)
+        val actual: Decimal = Decimal.of(value)
 
-        val actual: String = decimal.toString()
         val expected: String = value.toString()
-        assertEquals(expected, actual, message = "Input: $value")
+        assertEquals(expected, actual = "$actual", message = "Input: $value")
     }
 
     @Test
