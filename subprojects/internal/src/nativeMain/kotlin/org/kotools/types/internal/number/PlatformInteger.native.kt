@@ -26,100 +26,12 @@ private class NativeInteger private constructor(
         }
     }
 
-    // -------------------------------------------------------------------------
-
-    override fun compareTo(other: PlatformInteger): Int {
-        check(other is NativeInteger)
-        if (this.sign != other.sign) return this.sign.compareTo(other.sign)
-        if (this.sign == 0) return 0
-        val magCmp: Int = compareMagnitudes(this.magnitude, other.magnitude)
-        return if (this.sign == 1) magCmp else -magCmp
-    }
-
-    override fun unaryMinus(): PlatformInteger =
-        NativeInteger(this.magnitude, -this.sign)
-
-    override fun plus(other: PlatformInteger): PlatformInteger {
-        val o = other as NativeInteger
-        if (this.sign == 0) return o
-        if (o.sign == 0) return this
-        return if (this.sign == o.sign) {
-            NativeInteger(addMagnitudes(this.magnitude, o.magnitude), this.sign)
-        } else {
-            val cmp = compareMagnitudes(this.magnitude, o.magnitude)
-            when {
-                cmp == 0 -> zero
-                cmp > 0 -> NativeInteger(
-                    subtractMagnitudes(this.magnitude, o.magnitude),
-                    this.sign
-                )
-                else -> NativeInteger(
-                    subtractMagnitudes(o.magnitude, this.magnitude),
-                    o.sign
-                )
-            }
-        }
-    }
-
-    override fun minus(other: PlatformInteger): PlatformInteger =
-        this + (-other)
-
-    override fun times(other: PlatformInteger): PlatformInteger {
-        val o = other as NativeInteger
-        if (this.sign == 0 || o.sign == 0) return zero
-        val mag = multiplyMagnitudes(this.magnitude, o.magnitude)
-        return NativeInteger(mag, this.sign * o.sign)
-    }
-
-    override fun div(other: PlatformInteger): PlatformInteger {
-        val divisor = other as NativeInteger
-        val remainder = (this.rem(other)) as NativeInteger
-        val exactDividend = (this + (-remainder)) as NativeInteger
-        return divTruncated(exactDividend, divisor)
-    }
-
-    override fun rem(other: PlatformInteger): PlatformInteger {
-        val divisor = (other as NativeInteger).abs()
-        if (divisor.sign == 0) throw ArithmeticException("Division by zero")
-        if (this.sign == 0) return zero
-        val cmp = compareMagnitudes(this.magnitude, divisor.magnitude)
-        if (cmp == 0) return zero
-        val (_, remMag) = divMagnitudes(this.magnitude, divisor.magnitude)
-        val trimmed = trimLeadingZeros(remMag)
-        if (trimmed.isEmpty()) return zero
-        return if (this.sign == -1) {
-            val truncRemainder = NativeInteger(trimmed, 1)
-            (divisor + (-truncRemainder)) as NativeInteger
-        } else {
-            NativeInteger(trimmed, 1)
-        }
-    }
-
-    override fun toString(): String {
-        if (sign == 0) return "0"
-        val sb = StringBuilder()
-        var remaining = magnitude.copyOf()
-        while (remaining.isNotEmpty()) {
-            val (quotient, digit) = divideByTen(remaining)
-            sb.append(digit)
-            remaining = trimLeadingZeros(quotient)
-        }
-        if (sign == -1) sb.append('-')
-        return sb.toString().reversed()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is NativeInteger) return false
-        return this.sign == other.sign && this.magnitude.contentEquals(other.magnitude)
-    }
-
-    override fun hashCode(): Int = 31 * sign + magnitude.contentHashCode()
-
-    private fun abs(): NativeInteger =
-        if (sign < 0) NativeInteger(magnitude, 1) else this
+    // ----------------------- Class-level declarations ------------------------
 
     companion object {
-        val zero: NativeInteger = NativeInteger(LongArray(0), 0)
+        // ------------------ Constants and factory functions ------------------
+
+        private val zero: NativeInteger = NativeInteger(LongArray(0), 0)
 
         fun fromLong(value: Long): NativeInteger {
             if (value == 0L) return zero
@@ -152,6 +64,8 @@ private class NativeInteger private constructor(
             val sign = if (trimmed.isEmpty()) 0 else if (negative) -1 else 1
             return NativeInteger(trimmed, sign)
         }
+
+        // ------------------------- Magnitude helpers -------------------------
 
         private fun divTruncated(
             dividend: NativeInteger,
@@ -301,5 +215,101 @@ private class NativeInteger private constructor(
             }
             return Pair(trimLeadingZeros(result), rem.toInt())
         }
+    }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is NativeInteger) return false
+        return this.sign == other.sign && this.magnitude.contentEquals(other.magnitude)
+    }
+
+    override fun hashCode(): Int = 31 * sign + magnitude.contentHashCode()
+
+    override fun compareTo(other: PlatformInteger): Int {
+        check(other is NativeInteger)
+        if (this.sign != other.sign) return this.sign.compareTo(other.sign)
+        if (this.sign == 0) return 0
+        val magCmp: Int = compareMagnitudes(this.magnitude, other.magnitude)
+        return if (this.sign == 1) magCmp else -magCmp
+    }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    override fun unaryMinus(): PlatformInteger =
+        NativeInteger(this.magnitude, -this.sign)
+
+    override fun plus(other: PlatformInteger): PlatformInteger {
+        val o = other as NativeInteger
+        if (this.sign == 0) return o
+        if (o.sign == 0) return this
+        return if (this.sign == o.sign) {
+            NativeInteger(addMagnitudes(this.magnitude, o.magnitude), this.sign)
+        } else {
+            val cmp = compareMagnitudes(this.magnitude, o.magnitude)
+            when {
+                cmp == 0 -> zero
+                cmp > 0 -> NativeInteger(
+                    subtractMagnitudes(this.magnitude, o.magnitude),
+                    this.sign
+                )
+                else -> NativeInteger(
+                    subtractMagnitudes(o.magnitude, this.magnitude),
+                    o.sign
+                )
+            }
+        }
+    }
+
+    override fun minus(other: PlatformInteger): PlatformInteger =
+        this + (-other)
+
+    override fun times(other: PlatformInteger): PlatformInteger {
+        val o = other as NativeInteger
+        if (this.sign == 0 || o.sign == 0) return zero
+        val mag = multiplyMagnitudes(this.magnitude, o.magnitude)
+        return NativeInteger(mag, this.sign * o.sign)
+    }
+
+    override fun div(other: PlatformInteger): PlatformInteger {
+        val divisor = other as NativeInteger
+        val remainder = (this.rem(other)) as NativeInteger
+        val exactDividend = (this + (-remainder)) as NativeInteger
+        return divTruncated(exactDividend, divisor)
+    }
+
+    override fun rem(other: PlatformInteger): PlatformInteger {
+        val divisor = (other as NativeInteger).abs()
+        if (divisor.sign == 0) throw ArithmeticException("Division by zero")
+        if (this.sign == 0) return zero
+        val cmp = compareMagnitudes(this.magnitude, divisor.magnitude)
+        if (cmp == 0) return zero
+        val (_, remMag) = divMagnitudes(this.magnitude, divisor.magnitude)
+        val trimmed = trimLeadingZeros(remMag)
+        if (trimmed.isEmpty()) return zero
+        return if (this.sign == -1) {
+            val truncRemainder = NativeInteger(trimmed, 1)
+            (divisor + (-truncRemainder)) as NativeInteger
+        } else {
+            NativeInteger(trimmed, 1)
+        }
+    }
+
+    private fun abs(): NativeInteger =
+        if (sign < 0) NativeInteger(magnitude, 1) else this
+
+    // ------------------------------ Conversions ------------------------------
+
+    override fun toString(): String {
+        if (sign == 0) return "0"
+        val sb = StringBuilder()
+        var remaining = magnitude.copyOf()
+        while (remaining.isNotEmpty()) {
+            val (quotient, digit) = divideByTen(remaining)
+            sb.append(digit)
+            remaining = trimLeadingZeros(quotient)
+        }
+        if (sign == -1) sb.append('-')
+        return sb.toString().reversed()
     }
 }
