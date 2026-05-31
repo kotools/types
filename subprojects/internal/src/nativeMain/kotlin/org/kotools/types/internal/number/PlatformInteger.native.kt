@@ -18,10 +18,10 @@ private class NativeInteger private constructor(
     private val sign: Int             // -1 | 0 | 1
 ) : PlatformInteger {
     override fun compareTo(other: PlatformInteger): Int {
-        val o = other as NativeInteger
-        if (this.sign != o.sign) return this.sign.compareTo(o.sign)
+        check(other is NativeInteger)
+        if (this.sign != other.sign) return this.sign.compareTo(other.sign)
         if (this.sign == 0) return 0
-        val magCmp = compareMagnitudes(this.magnitude, o.magnitude)
+        val magCmp: Int = compareMagnitudes(this.magnitude, other.magnitude)
         return if (this.sign == 1) magCmp else -magCmp
     }
 
@@ -50,7 +50,8 @@ private class NativeInteger private constructor(
         }
     }
 
-    override fun minus(other: PlatformInteger): PlatformInteger = this + (-other)
+    override fun minus(other: PlatformInteger): PlatformInteger =
+        this + (-other)
 
     override fun times(other: PlatformInteger): PlatformInteger {
         val o = other as NativeInteger
@@ -62,8 +63,8 @@ private class NativeInteger private constructor(
     override fun div(other: PlatformInteger): PlatformInteger {
         val divisor = other as NativeInteger
         val remainder = (this.rem(other)) as NativeInteger
-        val adjusted = (this + (-remainder)) as NativeInteger
-        return divTruncated(adjusted, divisor)
+        val exactDividend = (this + (-remainder)) as NativeInteger
+        return divTruncated(exactDividend, divisor)
     }
 
     override fun rem(other: PlatformInteger): PlatformInteger {
@@ -76,8 +77,8 @@ private class NativeInteger private constructor(
         val trimmed = trimLeadingZeros(remMag)
         if (trimmed.isEmpty()) return zero
         return if (this.sign == -1) {
-            val rem = NativeInteger(trimmed, 1)
-            (divisor + (-rem)) as NativeInteger
+            val truncRemainder = NativeInteger(trimmed, 1)
+            (divisor + (-truncRemainder)) as NativeInteger
         } else {
             NativeInteger(trimmed, 1)
         }
@@ -107,13 +108,16 @@ private class NativeInteger private constructor(
         if (sign < 0) NativeInteger(magnitude, 1) else this
 
     companion object {
-        val zero: NativeInteger get() = NativeInteger(LongArray(0), 0)
+        val zero: NativeInteger = NativeInteger(LongArray(0), 0)
 
         fun fromLong(value: Long): NativeInteger {
             if (value == 0L) return zero
             val sign = if (value > 0L) 1 else -1
             if (value == Long.MIN_VALUE) {
-                return NativeInteger(longArrayOf(0L, 0x80000000L), -1)
+                return NativeInteger(
+                    longArrayOf(0L, 0x80000000L),
+                    -1
+                ) // 2^63 = [0, 2^31] in base-2^32
             }
             val absVal = if (value < 0L) -value else value
             val lo = absVal and 0xFFFFFFFFL
@@ -146,8 +150,14 @@ private class NativeInteger private constructor(
             if (dividend.sign == 0) return zero
             val cmp = compareMagnitudes(dividend.magnitude, divisor.magnitude)
             if (cmp < 0) return zero
-            if (cmp == 0) return NativeInteger(longArrayOf(1L), dividend.sign * divisor.sign)
-            val (quotMag, _) = divMagnitudes(dividend.magnitude, divisor.magnitude)
+            if (cmp == 0) return NativeInteger(
+                longArrayOf(1L),
+                dividend.sign * divisor.sign
+            )
+            val (quotMag, _) = divMagnitudes(
+                dividend.magnitude,
+                divisor.magnitude
+            )
             val trimmed = trimLeadingZeros(quotMag)
             if (trimmed.isEmpty()) return zero
             return NativeInteger(trimmed, dividend.sign * divisor.sign)
@@ -173,7 +183,7 @@ private class NativeInteger private constructor(
             var carry = 0L
             for (i in 0 until len) {
                 val sum = (if (i < a.size) a[i] else 0L) +
-                    (if (i < b.size) b[i] else 0L) + carry
+                        (if (i < b.size) b[i] else 0L) + carry
                 result[i] = sum and 0xFFFFFFFFL
                 carry = sum ushr 32
             }
@@ -181,11 +191,15 @@ private class NativeInteger private constructor(
             return trimLeadingZeros(result)
         }
 
-        private fun subtractMagnitudes(larger: LongArray, smaller: LongArray): LongArray {
+        private fun subtractMagnitudes(
+            larger: LongArray,
+            smaller: LongArray
+        ): LongArray {
             val result = LongArray(larger.size)
             var borrow = 0L
             for (i in larger.indices) {
-                val diff = larger[i] - (if (i < smaller.size) smaller[i] else 0L) - borrow
+                val diff =
+                    larger[i] - (if (i < smaller.size) smaller[i] else 0L) - borrow
                 result[i] = diff and 0xFFFFFFFFL
                 borrow = if (diff < 0L) 1L else 0L
             }
@@ -209,7 +223,8 @@ private class NativeInteger private constructor(
 
         private fun bitLength(mag: LongArray): Int {
             if (mag.isEmpty()) return 0
-            return (mag.size - 1) * 32 + (32 - mag.last().toInt().countLeadingZeroBits())
+            return (mag.size - 1) * 32 + (32 - mag.last().toInt()
+                .countLeadingZeroBits())
         }
 
         private fun shiftLeftMag(mag: LongArray, bits: Int): LongArray {
