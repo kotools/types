@@ -214,8 +214,21 @@ public class Decimal private constructor(
             return value.toDecimal()
         }
 
-        // EBNF: decimal = [sign] digit {digit} ['.' digit {digit}]
-        // Rejects: empty string, ".", "1.2.3", "+", "1.5E3", ".5", "3."
+        /**
+         * Returns `true` if this string represents a decimal number, or returns
+         * `false` otherwise.
+         *
+         * A valid decimal representation is defined as:
+         *
+         * ```
+         * decimal = [sign] digit {digit} ['.' digit {digit}]
+         * sign    = "+" | "-"
+         * digit   = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+         * ```
+         *
+         * _(grammar written in Wirth-style EBNF, where `[]` denotes
+         * optionality and `{}` denotes repetition)_
+         */
         private fun String.isDecimal(): Boolean {
             val unsigned: String = this.removePrefix("+")
                 .removePrefix("-")
