@@ -72,8 +72,14 @@ import kotlin.jvm.JvmSynthetic
 @ExperimentalKotoolsTypesApi
 public class Decimal private constructor(
     private val unscaledValue: Integer,
-    private val scale: Int  // invariant: always >= 0
+    private val scale: Int
 ) {
+    init {
+        require(this.scale >= 0) {
+            "Decimal scale must be non-negative (was: ${this.scale})."
+        }
+    }
+
     // ------------------------------- Creations -------------------------------
 
     /** Contains class-level declarations for the [Decimal] type. */
