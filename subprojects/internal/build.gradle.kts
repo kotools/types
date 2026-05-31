@@ -19,6 +19,4 @@ documentation.excludeFromParentApiReference = true
 
 dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
-
-    nativeMainImplementation(libs.bignum)
 }
