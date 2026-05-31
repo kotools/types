@@ -26,6 +26,14 @@ Publish `<n>-<slug>.md` on **Dev.to** first (tags: `kotlin`, `multiplatform`,
 `kmp`, `programming`). Dev.to renders Markdown natively. The resulting URL is
 used as the reference link in all subsequent steps.
 
+> **Canonical URL tradeoff:** Publishing on Dev.to without setting a
+> `canonical_url` builds SEO authority for `dev.to`, not `kotools.org`. This
+> is acceptable for now, but if a dedicated blog under `kotools.org` is set up
+> in the future, the flow should change to: publish on `kotools.org` first →
+> syndicate to Dev.to with `canonical_url` pointing back to the Kotools post.
+> Reddit cannot be used as a canonical source — it does not support canonical
+> meta tags.
+
 ### Step 2 — Kotlin Slack (same day)
 
 | Channel | Action |
