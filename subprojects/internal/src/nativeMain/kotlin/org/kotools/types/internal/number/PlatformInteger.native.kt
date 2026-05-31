@@ -15,31 +15,27 @@ public actual fun PlatformInteger(value: String): PlatformInteger =
 @OptIn(InternalKotoolsTypesApi::class)
 private class NativeInteger private constructor(
     private val magnitude: LongArray, // little-endian base-2^32, no leading zeros
-    private val sign: Int
+    private val sign: IntegerSign
 ) : PlatformInteger {
-    // --------------------------- Class invariants ----------------------------
-
-    init {
-        require(this.sign in -1..1) {
-            "Sign must be -1 for negative values, 0 for zero, or 1 for " +
-                    "positive values (was: ${this.sign})."
-        }
-    }
-
     // ----------------------- Class-level declarations ------------------------
 
     companion object {
         // ------------------ Constants and factory functions ------------------
 
-        private val zero: NativeInteger = NativeInteger(LongArray(0), 0)
+        private val zero: NativeInteger = NativeInteger(
+            LongArray(0),
+            IntegerSign.Zero
+        )
 
         fun fromLong(value: Long): NativeInteger {
             if (value == 0L) return zero
-            val sign = if (value > 0L) 1 else -1
+            val sign: IntegerSign =
+                if (value > 0L) IntegerSign.Positive
+                else IntegerSign.Negative
             if (value == Long.MIN_VALUE) {
                 return NativeInteger(
                     longArrayOf(0L, 0x80000000L),
-                    -1
+                    IntegerSign.Negative
                 ) // 2^63 = [0, 2^31] in base-2^32
             }
             val absVal = if (value < 0L) -value else value
@@ -61,7 +57,11 @@ private class NativeInteger private constructor(
                 )
             }
             val trimmed = trimLeadingZeros(mag)
-            val sign = if (trimmed.isEmpty()) 0 else if (negative) -1 else 1
+            val sign: IntegerSign = when {
+                trimmed.isEmpty() -> IntegerSign.Zero
+                negative -> IntegerSign.Negative
+                else -> IntegerSign.Positive
+            }
             return NativeInteger(trimmed, sign)
         }
 
@@ -71,8 +71,9 @@ private class NativeInteger private constructor(
             dividend: NativeInteger,
             divisor: NativeInteger
         ): NativeInteger {
-            if (divisor.sign == 0) throw ArithmeticException("Division by zero")
-            if (dividend.sign == 0) return zero
+            if (divisor.sign == IntegerSign.Zero)
+                throw ArithmeticException("Division by zero")
+            if (dividend.sign == IntegerSign.Zero) return zero
             val cmp = compareMagnitudes(dividend.magnitude, divisor.magnitude)
             if (cmp < 0) return zero
             if (cmp == 0) return NativeInteger(
@@ -224,14 +225,15 @@ private class NativeInteger private constructor(
         return this.sign == other.sign && this.magnitude.contentEquals(other.magnitude)
     }
 
-    override fun hashCode(): Int = 31 * sign + magnitude.contentHashCode()
+    override fun hashCode(): Int =
+        31 * sign.hashCode() + magnitude.contentHashCode()
 
     override fun compareTo(other: PlatformInteger): Int {
         check(other is NativeInteger)
         if (this.sign != other.sign) return this.sign.compareTo(other.sign)
-        if (this.sign == 0) return 0
+        if (this.sign == IntegerSign.Zero) return 0
         val magCmp: Int = compareMagnitudes(this.magnitude, other.magnitude)
-        return if (this.sign == 1) magCmp else -magCmp
+        return if (this.sign == IntegerSign.Positive) magCmp else -magCmp
     }
 
     // ------------------------- Arithmetic operations -------------------------
@@ -241,8 +243,8 @@ private class NativeInteger private constructor(
 
     override fun plus(other: PlatformInteger): PlatformInteger {
         val o = other as NativeInteger
-        if (this.sign == 0) return o
-        if (o.sign == 0) return this
+        if (this.sign == IntegerSign.Zero) return o
+        if (o.sign == IntegerSign.Zero) return this
         return if (this.sign == o.sign) {
             NativeInteger(addMagnitudes(this.magnitude, o.magnitude), this.sign)
         } else {
@@ -266,7 +268,8 @@ private class NativeInteger private constructor(
 
     override fun times(other: PlatformInteger): PlatformInteger {
         val o = other as NativeInteger
-        if (this.sign == 0 || o.sign == 0) return zero
+        if (this.sign == IntegerSign.Zero || o.sign == IntegerSign.Zero)
+            return zero
         val mag = multiplyMagnitudes(this.magnitude, o.magnitude)
         return NativeInteger(mag, this.sign * o.sign)
     }
@@ -280,28 +283,31 @@ private class NativeInteger private constructor(
 
     override fun rem(other: PlatformInteger): PlatformInteger {
         val divisor = (other as NativeInteger).abs()
-        if (divisor.sign == 0) throw ArithmeticException("Division by zero")
-        if (this.sign == 0) return zero
+        if (divisor.sign == IntegerSign.Zero)
+            throw ArithmeticException("Division by zero")
+        if (this.sign == IntegerSign.Zero) return zero
         val cmp = compareMagnitudes(this.magnitude, divisor.magnitude)
         if (cmp == 0) return zero
         val (_, remMag) = divMagnitudes(this.magnitude, divisor.magnitude)
         val trimmed = trimLeadingZeros(remMag)
         if (trimmed.isEmpty()) return zero
-        return if (this.sign == -1) {
-            val truncRemainder = NativeInteger(trimmed, 1)
+        return if (this.sign == IntegerSign.Negative) {
+            val truncRemainder = NativeInteger(trimmed, IntegerSign.Positive)
             (divisor + (-truncRemainder)) as NativeInteger
         } else {
-            NativeInteger(trimmed, 1)
+            NativeInteger(trimmed, IntegerSign.Positive)
         }
     }
 
     private fun abs(): NativeInteger =
-        if (sign < 0) NativeInteger(magnitude, 1) else this
+        if (sign < IntegerSign.Zero)
+            NativeInteger(magnitude, IntegerSign.Positive)
+        else this
 
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String {
-        if (sign == 0) return "0"
+        if (sign == IntegerSign.Zero) return "0"
         val sb = StringBuilder()
         var remaining = magnitude.copyOf()
         while (remaining.isNotEmpty()) {
@@ -309,7 +315,7 @@ private class NativeInteger private constructor(
             sb.append(digit)
             remaining = trimLeadingZeros(quotient)
         }
-        if (sign == -1) sb.append('-')
+        if (sign == IntegerSign.Negative) sb.append('-')
         return sb.toString().reversed()
     }
 }
