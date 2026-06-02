@@ -361,6 +361,21 @@ public final class org/kotools/types/EmailAddressRegex$Companion {
 public abstract interface annotation class org/kotools/types/ExperimentalKotoolsTypesApi : java/lang/annotation/Annotation {
 }
 
+public final class org/kotools/types/geojson/GeoJsonType : java/lang/Enum {
+	public static final field Feature Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field FeatureCollection Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field GeometryCollection Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field LineString Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field MultiLineString Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field MultiPoint Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field MultiPolygon Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field Point Lorg/kotools/types/geojson/GeoJsonType;
+	public static final field Polygon Lorg/kotools/types/geojson/GeoJsonType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lorg/kotools/types/geojson/GeoJsonType;
+	public static fun values ()[Lorg/kotools/types/geojson/GeoJsonType;
+}
+
 public final class org/kotools/types/geojson/GeometryType : java/lang/Enum {
 	public static final field GeometryCollection Lorg/kotools/types/geojson/GeometryType;
 	public static final field LineString Lorg/kotools/types/geojson/GeometryType;
