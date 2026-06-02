@@ -26,6 +26,11 @@ Contains types such as [NotBlankString] for manipulating text.
 Core namespace of Kotools Types, containing public APIs intended for general
 use.
 
+# Package org.kotools.types.geojson
+
+Provides types for representing and manipulating GeoJSON data as defined in
+[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
+
 # Package org.kotools.types.number
 
 Provides types for representing and manipulating numeric values.
