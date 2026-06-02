@@ -29,5 +29,29 @@ public enum class GeometryType {
     MultiPolygon,
 
     /** The `GeometryCollection` geometry type. */
-    GeometryCollection
+    GeometryCollection;
+
+    /**
+     * Converts this geometry type to a [GeoJsonType].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.geojson.GeometryTypeSample.toGeoJsonType
+     * </details>
+     */
+    public fun toGeoJsonType(): GeoJsonType = when (this) {
+        Point -> GeoJsonType.Point
+        MultiPoint -> GeoJsonType.MultiPoint
+        LineString -> GeoJsonType.LineString
+        MultiLineString -> GeoJsonType.MultiLineString
+        Polygon -> GeoJsonType.Polygon
+        MultiPolygon -> GeoJsonType.MultiPolygon
+        GeometryCollection -> GeoJsonType.GeometryCollection
+    }
 }
