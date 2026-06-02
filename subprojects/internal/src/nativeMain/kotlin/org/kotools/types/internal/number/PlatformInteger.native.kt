@@ -14,6 +14,7 @@ public actual fun PlatformInteger(value: String): PlatformInteger =
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class NativeInteger private constructor(
+    // TODO: Create IntegerMagnitude type, then change type of magnitude property.
     private val magnitude: LongArray, // little-endian base-2^32, no leading zeros
     private val sign: IntegerSign
 ) : PlatformInteger {
