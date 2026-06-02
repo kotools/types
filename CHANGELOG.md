@@ -39,12 +39,10 @@ All notable changes to this project will be documented in this file.
 - `orNull` and `orThrow` **deprecated** functions from `EmailAddress.Companion`
   and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
   functions instead. ([#871], [#872])
-- `KotoolsTypesSerializersModule()` **experimental** function. ([#931])
 
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 [#925]: https://github.com/kotools/types/issues/925
-[#931]: https://github.com/kotools/types/issues/931
 [#952]: https://github.com/kotools/types/issues/952
 [#960]: https://github.com/kotools/types/issues/960
 
