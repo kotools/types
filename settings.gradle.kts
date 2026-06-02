@@ -1,3 +1,12 @@
+// ---------------------------- Plugin management ------------------------------
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://jitpack.io")
+    }
+}
+
 // ------------------------------- Root project --------------------------------
 
 rootProject.name = "types"

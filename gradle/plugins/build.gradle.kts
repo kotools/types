@@ -1,6 +1,9 @@
 plugins { `kotlin-dsl` }
 
-repositories.mavenCentral()
+repositories {
+    mavenCentral()
+    maven("https://jitpack.io")
+}
 
 kotlin.explicitApi()
 
@@ -11,6 +14,7 @@ gradlePlugin.plugins.register("Compatibility").configure {
 
 dependencies {
     implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.kotlinx.ast)
     implementation(libs.dokka.base)
     implementation(libs.dokka.gradle.plugin)
     implementation(libs.dokka.versioning)
