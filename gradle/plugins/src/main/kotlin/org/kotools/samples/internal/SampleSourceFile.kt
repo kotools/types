@@ -1,5 +1,6 @@
 package org.kotools.samples.internal
 
+import kotlinx.ast.common.klass.KlassDeclaration
 import java.io.File
 
 internal class SampleSourceFile private constructor(private val file: File) {
@@ -18,20 +19,20 @@ internal class SampleSourceFile private constructor(private val file: File) {
         }
     }
 
-    fun checkSingleClass() {
-        val numberOfClasses: Int = this.countClasses()
-        if (numberOfClasses == 1) return
-        val message: String = listOf(
-            "The '${this.file.name}' file should have a single class.",
-            "File location: ${this.file.path}"
-        ).joinToString(separator = "\n")
-        error(message)
+    fun checkContent(): Unit = when (this.language) {
+        ProgrammingLanguage.Java -> Unit
+        ProgrammingLanguage.Kotlin -> this.checkAbsenceOfTopLevelFunction()
     }
 
-    private fun countClasses(): Int =
-        this.file.useLines { lines: Sequence<String> ->
-            lines.count { this.language.classHeaderRegex in it }
-        }
+    private fun checkAbsenceOfTopLevelFunction() {
+        val topLevelFunctionFound: Boolean = this.file.parseNodes()
+            .filterIsInstance<KlassDeclaration>()
+            .any { it.keyword == this.language.functionKeyword }
+        if (topLevelFunctionFound) throw FileSystemException(
+            file = this.file,
+            reason = "Top-level function found in Kotlin sample source."
+        )
+    }
 
     fun samples(): Set<Sample> {
         var identifier: MutableList<String> = mutableListOf()
@@ -80,7 +81,7 @@ internal class SampleSourceFile private constructor(private val file: File) {
     companion object {
         fun orNull(file: File): SampleSourceFile? = try {
             SampleSourceFile(file)
-        } catch (exception: IllegalArgumentException) {
+        } catch (_: IllegalArgumentException) {
             null
         }
     }
