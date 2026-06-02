@@ -40,14 +40,12 @@ All notable changes to this project will be documented in this file.
   and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
   functions instead. ([#871], [#872])
 - `KotoolsTypesSerializersModule()` **experimental** function. ([#931])
-- `types-kotlinx-serialization` module. ([#958])
 
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 [#925]: https://github.com/kotools/types/issues/925
 [#931]: https://github.com/kotools/types/issues/931
 [#952]: https://github.com/kotools/types/issues/952
-[#958]: https://github.com/kotools/types/issues/958
 [#960]: https://github.com/kotools/types/issues/960
 
 ## 🔖 Releases
