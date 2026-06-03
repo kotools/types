@@ -4,7 +4,7 @@ import kotlinx.ast.common.klass.KlassDeclaration
 import java.io.File
 
 internal class SampleSourceFile private constructor(private val file: File) {
-    private val language: ProgrammingLanguage = ProgrammingLanguage(this.file)
+    val language: ProgrammingLanguage = ProgrammingLanguage(this.file)
 
     init {
         val fileIsInTestSourceSet: Boolean =
@@ -77,6 +77,8 @@ internal class SampleSourceFile private constructor(private val file: File) {
         }
         return samples.toSet()
     }
+
+    fun toFile(): File = this.file
 
     companion object {
         fun orNull(file: File): SampleSourceFile? = try {
