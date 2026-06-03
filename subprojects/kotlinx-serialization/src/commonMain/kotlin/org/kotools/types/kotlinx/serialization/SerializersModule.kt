@@ -20,6 +20,9 @@ import kotlin.jvm.JvmSynthetic
  * Returns a collection of default serializers for types located in
  * `org.kotools.types` package.
  *
+ * Note: All samples documented below use the JavaScript Object Notation (JSON)
+ * format.
+ *
  * <br>
  * <details>
  * <summary>
@@ -28,9 +31,6 @@ import kotlin.jvm.JvmSynthetic
  *
  * This function provides an object for serializing and deserializing an
  * [EmailAddress] as [String].
- *
- * Here's an example of calling it, using the JavaScript Object Notation (JSON)
- * format:
  *
  * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressAsString
  * </details>
@@ -43,9 +43,6 @@ import kotlin.jvm.JvmSynthetic
  *
  * This function provides an object for serializing and deserializing an
  * [EmailAddressRegex] as [String].
- *
- * Here's an example of calling it, using the JavaScript Object Notation (JSON)
- * format:
  *
  * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressRegexAsString
  * </details>
