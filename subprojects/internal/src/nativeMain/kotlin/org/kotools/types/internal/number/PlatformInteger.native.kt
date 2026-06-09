@@ -15,9 +15,18 @@ public actual fun PlatformInteger(value: String): PlatformInteger =
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class NativeInteger private constructor(
-    private val magnitude: UIntArray, // little-endian base-2^32, no leading zeros
+    private val magnitude: UIntArray,
     private val sign: IntegerSign
 ) : PlatformInteger {
+    init {
+        require(magnitude.isEmpty() || magnitude.last() != 0u) {
+            "Magnitude must not have a zero most-significant limb."
+        }
+        require(magnitude.isEmpty() == (sign == IntegerSign.Zero)) {
+            "Magnitude must be empty iff sign is Zero."
+        }
+    }
+
     // ----------------------- Class-level declarations ------------------------
 
     companion object {
