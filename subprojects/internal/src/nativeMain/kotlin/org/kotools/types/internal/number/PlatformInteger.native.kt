@@ -1,6 +1,7 @@
 package org.kotools.types.internal.number
 
 import org.kotools.types.internal.InternalKotoolsTypesApi
+import kotlin.math.absoluteValue
 
 /** Returns a [PlatformInteger] representing the specified [value]. */
 @InternalKotoolsTypesApi
@@ -14,7 +15,7 @@ public actual fun PlatformInteger(value: String): PlatformInteger =
 
 @OptIn(InternalKotoolsTypesApi::class)
 private class NativeInteger private constructor(
-    private val magnitude: IntArray, // little-endian base-2^32, no leading zeros
+    private val magnitude: UIntArray, // little-endian base-2^32, no leading zeros
     private val sign: IntegerSign
 ) : PlatformInteger {
     // ----------------------- Class-level declarations ------------------------
@@ -22,44 +23,48 @@ private class NativeInteger private constructor(
     companion object {
         // ------------------ Constants and factory functions ------------------
 
-        private val Zero: NativeInteger by lazy {
-            val magnitude = IntArray(size = 0)
-            NativeInteger(magnitude, IntegerSign.Zero)
-        }
+        private val Zero: NativeInteger = NativeInteger(
+            magnitude = UIntArray(size = 0),
+            IntegerSign.Zero
+        )
 
         fun fromLong(value: Long): NativeInteger {
             if (value == 0L) return Zero
+            if (value == Long.MIN_VALUE) return NativeInteger(
+                // 2^63 = [0, 2^31] in base-2^32
+                magnitude = uintArrayOf(0u, Int.MIN_VALUE.toUInt()),
+                IntegerSign.Negative
+            )
+
             val sign: IntegerSign =
                 if (value > 0L) IntegerSign.Positive
                 else IntegerSign.Negative
-            if (value == Long.MIN_VALUE) {
-                return NativeInteger(
-                    intArrayOf(0, Int.MIN_VALUE),
-                    IntegerSign.Negative
-                ) // 2^63 = [0, 2^31] in base-2^32
-            }
-            val absVal = if (value < 0L) -value else value
-            val lo = (absVal and 0xFFFFFFFFL).toInt()
-            val hi = (absVal ushr 32).toInt()
-            val mag = if (hi != 0) intArrayOf(lo, hi) else intArrayOf(lo)
-            return NativeInteger(mag, sign)
+
+            val absoluteValue: Long = value.absoluteValue
+            val lowBits: UInt = (absoluteValue and 0xFFFFFFFFL).toUInt()
+            val highBits: UInt = (absoluteValue ushr 32).toUInt()
+            val magnitude: UIntArray =
+                if (highBits != 0u) uintArrayOf(lowBits, highBits)
+                else uintArrayOf(lowBits)
+
+            return NativeInteger(magnitude, sign)
         }
 
         fun parse(value: String): NativeInteger {
-            val negative = value[0] == '-'
-            val digits = if (negative) value.substring(1) else value
+            val isNegative: Boolean = value.first() == '-'
+            val digits: String = if (isNegative) value.substring(1) else value
             if (digits == "0") return Zero
-            var mag = IntArray(0)
+            var mag = UIntArray(0)
             for (ch in digits) {
                 mag = addMagnitudes(
-                    multiplyMagnitudes(mag, intArrayOf(10)),
-                    intArrayOf(ch.digitToInt())
+                    multiplyMagnitudes(mag, uintArrayOf(10u)),
+                    uintArrayOf(ch.digitToInt().toUInt())
                 )
             }
-            val trimmed = trimLeadingZeros(mag)
+            val trimmed: UIntArray = trimLeadingZeros(mag)
             val sign: IntegerSign = when {
                 trimmed.isEmpty() -> IntegerSign.Zero
-                negative -> IntegerSign.Negative
+                isNegative -> IntegerSign.Negative
                 else -> IntegerSign.Positive
             }
             return NativeInteger(trimmed, sign)
@@ -77,7 +82,7 @@ private class NativeInteger private constructor(
             val cmp = compareMagnitudes(dividend.magnitude, divisor.magnitude)
             if (cmp < 0) return Zero
             if (cmp == 0) return NativeInteger(
-                intArrayOf(1),
+                uintArrayOf(1u),
                 dividend.sign * divisor.sign
             )
             val (quotMag, _) = divMagnitudes(
@@ -89,148 +94,147 @@ private class NativeInteger private constructor(
             return NativeInteger(trimmed, dividend.sign * divisor.sign)
         }
 
-        private fun trimLeadingZeros(mag: IntArray): IntArray {
+        private fun trimLeadingZeros(mag: UIntArray): UIntArray {
             var len = mag.size
-            while (len > 0 && mag[len - 1] == 0) len--
+            while (len > 0 && mag[len - 1] == 0u) len--
             return if (len == mag.size) mag else mag.copyOf(len)
         }
 
-        private fun compareMagnitudes(a: IntArray, b: IntArray): Int {
+        private fun compareMagnitudes(a: UIntArray, b: UIntArray): Int {
             if (a.size != b.size) return a.size.compareTo(b.size)
             for (i in a.indices.reversed()) {
-                val au = a[i].toUInt()
-                val bu = b[i].toUInt()
-                if (au != bu) return au.compareTo(bu)
+                if (a[i] != b[i]) return a[i].compareTo(b[i])
             }
             return 0
         }
 
-        private fun addMagnitudes(a: IntArray, b: IntArray): IntArray {
+        private fun addMagnitudes(a: UIntArray, b: UIntArray): UIntArray {
             val len = maxOf(a.size, b.size)
-            val result = IntArray(len + 1)
+            val result = UIntArray(len + 1)
             var carry = 0L
             for (i in 0 until len) {
                 val sum =
-                    (if (i < a.size) a[i].toLong() and 0xFFFFFFFFL else 0L) +
-                    (if (i < b.size) b[i].toLong() and 0xFFFFFFFFL else 0L) +
-                    carry
-                result[i] = (sum and 0xFFFFFFFFL).toInt()
+                    (if (i < a.size) a[i].toLong() else 0L) +
+                            (if (i < b.size) b[i].toLong() else 0L) +
+                            carry
+                result[i] = sum.toUInt()
                 carry = sum ushr 32
             }
-            result[len] = carry.toInt()
+            result[len] = carry.toUInt()
             return trimLeadingZeros(result)
         }
 
         private fun subtractMagnitudes(
-            larger: IntArray,
-            smaller: IntArray
-        ): IntArray {
-            val result = IntArray(larger.size)
+            larger: UIntArray,
+            smaller: UIntArray
+        ): UIntArray {
+            val result = UIntArray(larger.size)
             var borrow = 0L
             for (i in larger.indices) {
                 val diff =
-                    (larger[i].toLong() and 0xFFFFFFFFL) -
-                    (if (i < smaller.size) smaller[i].toLong() and 0xFFFFFFFFL
-                     else 0L) -
-                    borrow
-                result[i] = (diff and 0xFFFFFFFFL).toInt()
+                    larger[i].toLong() -
+                            (if (i < smaller.size) smaller[i].toLong()
+                            else 0L) -
+                            borrow
+                result[i] = diff.toUInt()
                 borrow = if (diff < 0L) 1L else 0L
             }
             return trimLeadingZeros(result)
         }
 
-        private fun multiplyMagnitudes(a: IntArray, b: IntArray): IntArray {
-            if (a.isEmpty() || b.isEmpty()) return IntArray(0)
-            val result = IntArray(a.size + b.size)
+        private fun multiplyMagnitudes(a: UIntArray, b: UIntArray): UIntArray {
+            if (a.isEmpty() || b.isEmpty()) return UIntArray(0)
+            val result = UIntArray(a.size + b.size)
             for (i in a.indices) {
                 var carry = 0L
                 for (j in b.indices) {
                     val prod =
-                        (a[i].toLong() and 0xFFFFFFFFL) *
-                        (b[j].toLong() and 0xFFFFFFFFL) +
-                        (result[i + j].toLong() and 0xFFFFFFFFL) +
-                        carry
-                    result[i + j] = (prod and 0xFFFFFFFFL).toInt()
+                        a[i].toLong() * b[j].toLong() +
+                                result[i + j].toLong() +
+                                carry
+                    result[i + j] = prod.toUInt()
                     carry = prod ushr 32
                 }
-                result[i + b.size] = carry.toInt()
+                result[i + b.size] = carry.toUInt()
             }
             return trimLeadingZeros(result)
         }
 
-        private fun bitLength(mag: IntArray): Int {
+        private fun bitLength(mag: UIntArray): Int {
             if (mag.isEmpty()) return 0
-            return (mag.size - 1) * 32 + (32 - mag.last().countLeadingZeroBits())
+            return (mag.size - 1) * 32 + (32 - mag.last()
+                .countLeadingZeroBits())
         }
 
-        private fun shiftLeftMag(mag: IntArray, bits: Int): IntArray {
+        private fun shiftLeftMag(mag: UIntArray, bits: Int): UIntArray {
             if (bits == 0 || mag.isEmpty()) return mag
             val limbShift = bits / 32
             val bitShift = bits % 32
-            val result = IntArray(mag.size + limbShift + 1)
+            val result = UIntArray(mag.size + limbShift + 1)
             for (i in mag.indices) {
-                val v = mag[i].toLong() and 0xFFFFFFFFL
+                val v = mag[i].toLong()
                 result[i + limbShift] = (
-                    (result[i + limbShift].toLong() and 0xFFFFFFFFL) or
-                    ((v shl bitShift) and 0xFFFFFFFFL)
-                ).toInt()
+                        result[i + limbShift].toLong() or
+                                ((v shl bitShift) and 0xFFFFFFFFL)
+                        ).toUInt()
                 if (bitShift > 0)
                     result[i + limbShift + 1] = (
-                        (result[i + limbShift + 1].toLong() and 0xFFFFFFFFL) or
-                        (v ushr (32 - bitShift))
-                    ).toInt()
+                            result[i + limbShift + 1].toLong() or
+                                    (v ushr (32 - bitShift))
+                            ).toUInt()
             }
             return trimLeadingZeros(result)
         }
 
-        private fun shiftRightMag(mag: IntArray, bits: Int): IntArray {
+        private fun shiftRightMag(mag: UIntArray, bits: Int): UIntArray {
             if (bits == 0 || mag.isEmpty()) return mag
             val limbShift = bits / 32
             val bitShift = bits % 32
-            if (limbShift >= mag.size) return IntArray(0)
-            val result = IntArray(mag.size - limbShift)
+            if (limbShift >= mag.size) return UIntArray(0)
+            val result = UIntArray(mag.size - limbShift)
             for (i in result.indices) {
-                val lo = (mag[i + limbShift].toLong() and 0xFFFFFFFFL) ushr bitShift
+                val lo =
+                    mag[i + limbShift].toLong() ushr bitShift
                 val hi =
                     if (bitShift > 0 && i + limbShift + 1 < mag.size)
-                        ((mag[i + limbShift + 1].toLong() and 0xFFFFFFFFL)
-                            shl (32 - bitShift)) and 0xFFFFFFFFL
+                        (mag[i + limbShift + 1].toLong()
+                                shl (32 - bitShift)) and 0xFFFFFFFFL
                     else 0L
-                result[i] = (lo or hi).toInt()
+                result[i] = (lo or hi).toUInt()
             }
             return trimLeadingZeros(result)
         }
 
         private fun divMagnitudes(
-            dividend: IntArray,
-            divisor: IntArray
-        ): Pair<IntArray, IntArray> {
+            dividend: UIntArray,
+            divisor: UIntArray
+        ): Pair<UIntArray, UIntArray> {
             val cmp = compareMagnitudes(dividend, divisor)
-            if (cmp < 0) return Pair(IntArray(0), dividend.copyOf())
-            if (cmp == 0) return Pair(intArrayOf(1), IntArray(0))
+            if (cmp < 0) return Pair(UIntArray(0), dividend.copyOf())
+            if (cmp == 0) return Pair(uintArrayOf(1u), UIntArray(0))
             val shift = bitLength(dividend) - bitLength(divisor)
-            val quotMag = IntArray(shift / 32 + 1)
+            val quotMag = UIntArray(shift / 32 + 1)
             var remainder = dividend.copyOf()
             var shifted = shiftLeftMag(divisor, shift)
             for (i in shift downTo 0) {
                 if (compareMagnitudes(remainder, shifted) >= 0) {
                     remainder = subtractMagnitudes(remainder, shifted)
                     quotMag[i / 32] = (
-                        (quotMag[i / 32].toLong() and 0xFFFFFFFFL) or
-                        (1L shl (i % 32))
-                    ).toInt()
+                            quotMag[i / 32].toLong() or
+                                    (1L shl (i % 32))
+                            ).toUInt()
                 }
                 if (i > 0) shifted = shiftRightMag(shifted, 1)
             }
             return Pair(trimLeadingZeros(quotMag), trimLeadingZeros(remainder))
         }
 
-        private fun divideByTen(mag: IntArray): Pair<IntArray, Int> {
-            val result = IntArray(mag.size)
+        private fun divideByTen(mag: UIntArray): Pair<UIntArray, Int> {
+            val result = UIntArray(mag.size)
             var rem = 0L
             for (i in mag.indices.reversed()) {
-                val cur = (rem shl 32) or (mag[i].toLong() and 0xFFFFFFFFL)
-                result[i] = (cur / 10L).toInt()
+                val cur = (rem shl 32) or mag[i].toLong()
+                result[i] = (cur / 10L).toUInt()
                 rem = cur % 10L
             }
             return Pair(trimLeadingZeros(result), rem.toInt())
