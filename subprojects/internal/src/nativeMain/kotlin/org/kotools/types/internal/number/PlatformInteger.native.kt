@@ -32,13 +32,13 @@ private class NativeInteger private constructor(
     companion object {
         // ------------------ Constants and factory functions ------------------
 
-        private val Zero: NativeInteger = NativeInteger(
+        private val ZERO: NativeInteger = NativeInteger(
             magnitude = UIntArray(size = 0),
             IntegerSign.Zero
         )
 
         fun fromLong(value: Long): NativeInteger {
-            if (value == 0L) return Zero
+            if (value == 0L) return ZERO
             if (value == Long.MIN_VALUE) return NativeInteger(
                 // 2^63 = [0, 2^31] in base-2^32
                 magnitude = uintArrayOf(0u, Int.MIN_VALUE.toUInt()),
@@ -62,7 +62,7 @@ private class NativeInteger private constructor(
         fun parse(value: String): NativeInteger {
             val isNegative: Boolean = value.first() == '-'
             val digits: String = if (isNegative) value.substring(1) else value
-            if (digits == "0") return Zero
+            if (digits == "0") return ZERO
             var mag = UIntArray(0)
             for (ch in digits) {
                 mag = addMagnitudes(
@@ -87,9 +87,9 @@ private class NativeInteger private constructor(
         ): NativeInteger {
             if (divisor.sign == IntegerSign.Zero)
                 throw ArithmeticException("Division by zero")
-            if (dividend.sign == IntegerSign.Zero) return Zero
+            if (dividend.sign == IntegerSign.Zero) return ZERO
             val cmp = compareMagnitudes(dividend.magnitude, divisor.magnitude)
-            if (cmp < 0) return Zero
+            if (cmp < 0) return ZERO
             if (cmp == 0) return NativeInteger(
                 uintArrayOf(1u),
                 dividend.sign * divisor.sign
@@ -99,7 +99,7 @@ private class NativeInteger private constructor(
                 divisor.magnitude
             )
             val trimmed = trimLeadingZeros(quotMag)
-            if (trimmed.isEmpty()) return Zero
+            if (trimmed.isEmpty()) return ZERO
             return NativeInteger(trimmed, dividend.sign * divisor.sign)
         }
 
@@ -282,7 +282,7 @@ private class NativeInteger private constructor(
         } else {
             val cmp = compareMagnitudes(this.magnitude, o.magnitude)
             when {
-                cmp == 0 -> Zero
+                cmp == 0 -> ZERO
                 cmp > 0 -> NativeInteger(
                     subtractMagnitudes(this.magnitude, o.magnitude),
                     this.sign
@@ -301,7 +301,7 @@ private class NativeInteger private constructor(
     override fun times(other: PlatformInteger): PlatformInteger {
         val o = other as NativeInteger
         if (this.sign == IntegerSign.Zero || o.sign == IntegerSign.Zero)
-            return Zero
+            return ZERO
         val mag = multiplyMagnitudes(this.magnitude, o.magnitude)
         return NativeInteger(mag, this.sign * o.sign)
     }
@@ -317,12 +317,12 @@ private class NativeInteger private constructor(
         val divisor = (other as NativeInteger).abs()
         if (divisor.sign == IntegerSign.Zero)
             throw ArithmeticException("Division by zero")
-        if (this.sign == IntegerSign.Zero) return Zero
+        if (this.sign == IntegerSign.Zero) return ZERO
         val cmp = compareMagnitudes(this.magnitude, divisor.magnitude)
-        if (cmp == 0) return Zero
+        if (cmp == 0) return ZERO
         val (_, remMag) = divMagnitudes(this.magnitude, divisor.magnitude)
         val trimmed = trimLeadingZeros(remMag)
-        if (trimmed.isEmpty()) return Zero
+        if (trimmed.isEmpty()) return ZERO
         return if (this.sign == IntegerSign.Negative) {
             val truncRemainder = NativeInteger(trimmed, IntegerSign.Positive)
             (divisor + (-truncRemainder)) as NativeInteger
