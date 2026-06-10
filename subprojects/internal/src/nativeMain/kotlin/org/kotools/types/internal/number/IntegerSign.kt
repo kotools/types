@@ -11,8 +11,9 @@ internal enum class IntegerSign(private val value: Int) {
         Positive -> Negative
     }
 
-    operator fun times(other: IntegerSign): IntegerSign {
-        val product: Int = this.value * other.value
-        return entries.first { it.value == product }
+    operator fun times(other: IntegerSign): IntegerSign = when {
+        this == Zero || other == Zero -> Zero
+        this == other -> Positive
+        else -> Negative
     }
 }
