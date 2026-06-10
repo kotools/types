@@ -252,19 +252,18 @@ private class NativeInteger private constructor(
 
     // ------------------------------ Comparisons ------------------------------
 
-    override fun equals(other: Any?): Boolean {
-        if (other !is NativeInteger) return false
-        return this.sign == other.sign && this.magnitude.contentEquals(other.magnitude)
-    }
+    override fun equals(other: Any?): Boolean = other is NativeInteger
+            && this.sign == other.sign
+            && this.magnitude.contentEquals(other.magnitude)
 
     override fun hashCode(): Int =
         31 * sign.hashCode() + magnitude.contentHashCode()
 
     override fun compareTo(other: PlatformInteger): Int {
-        check(other is NativeInteger)
-        if (this.sign != other.sign) return this.sign.compare(other.sign)
+        val oth = other as NativeInteger
+        if (this.sign != oth.sign) return this.sign.compare(oth.sign)
         if (this.sign == IntegerSign.Zero) return 0
-        val magCmp: Int = compareMagnitudes(this.magnitude, other.magnitude)
+        val magCmp: Int = compareMagnitudes(this.magnitude, oth.magnitude)
         return if (this.sign == IntegerSign.Positive) magCmp else -magCmp
     }
 
@@ -274,24 +273,24 @@ private class NativeInteger private constructor(
         NativeInteger(this.magnitude, -this.sign)
 
     override fun plus(other: PlatformInteger): PlatformInteger {
-        val o = other as NativeInteger
-        if (this.sign == IntegerSign.Zero) return o
-        if (o.sign == IntegerSign.Zero) return this
-        return if (this.sign == o.sign) {
-            NativeInteger(addMagnitudes(this.magnitude, o.magnitude), this.sign)
-        } else {
-            val cmp = compareMagnitudes(this.magnitude, o.magnitude)
-            when {
-                cmp == 0 -> ZERO
-                cmp > 0 -> NativeInteger(
-                    subtractMagnitudes(this.magnitude, o.magnitude),
-                    this.sign
-                )
-                else -> NativeInteger(
-                    subtractMagnitudes(o.magnitude, this.magnitude),
-                    o.sign
-                )
-            }
+        val oth = other as NativeInteger
+        if (this.sign == IntegerSign.Zero) return oth
+        if (oth.sign == IntegerSign.Zero) return this
+        if (this.sign == oth.sign) return NativeInteger(
+            addMagnitudes(this.magnitude, oth.magnitude),
+            this.sign
+        )
+        val cmp: Int = compareMagnitudes(this.magnitude, oth.magnitude)
+        return when {
+            cmp == 0 -> ZERO
+            cmp > 0 -> NativeInteger(
+                subtractMagnitudes(this.magnitude, oth.magnitude),
+                this.sign
+            )
+            else -> NativeInteger(
+                subtractMagnitudes(oth.magnitude, this.magnitude),
+                oth.sign
+            )
         }
     }
 
@@ -299,16 +298,16 @@ private class NativeInteger private constructor(
         this + (-other)
 
     override fun times(other: PlatformInteger): PlatformInteger {
-        val o = other as NativeInteger
-        if (this.sign == IntegerSign.Zero || o.sign == IntegerSign.Zero)
+        val oth = other as NativeInteger
+        if (this.sign == IntegerSign.Zero || oth.sign == IntegerSign.Zero)
             return ZERO
-        val mag = multiplyMagnitudes(this.magnitude, o.magnitude)
-        return NativeInteger(mag, this.sign * o.sign)
+        val mag: UIntArray = multiplyMagnitudes(this.magnitude, oth.magnitude)
+        return NativeInteger(mag, sign = this.sign * oth.sign)
     }
 
     override fun div(other: PlatformInteger): PlatformInteger {
         val divisor = other as NativeInteger
-        val remainder = (this.rem(other)) as NativeInteger
+        val remainder = (this % other) as NativeInteger
         val exactDividend = (this + (-remainder)) as NativeInteger
         return divTruncated(exactDividend, divisor)
     }
@@ -318,17 +317,16 @@ private class NativeInteger private constructor(
         if (divisor.sign == IntegerSign.Zero)
             throw ArithmeticException("Division by zero")
         if (this.sign == IntegerSign.Zero) return ZERO
-        val cmp = compareMagnitudes(this.magnitude, divisor.magnitude)
+        val cmp: Int = compareMagnitudes(this.magnitude, divisor.magnitude)
         if (cmp == 0) return ZERO
         val (_, remMag) = divMagnitudes(this.magnitude, divisor.magnitude)
-        val trimmed = trimLeadingZeros(remMag)
+        val trimmed: UIntArray = trimLeadingZeros(remMag)
         if (trimmed.isEmpty()) return ZERO
-        return if (this.sign == IntegerSign.Negative) {
-            val truncRemainder = NativeInteger(trimmed, IntegerSign.Positive)
-            (divisor + (-truncRemainder)) as NativeInteger
-        } else {
-            NativeInteger(trimmed, IntegerSign.Positive)
-        }
+        if (this.sign == IntegerSign.Positive)
+            return NativeInteger(trimmed, IntegerSign.Positive)
+        val truncRemainder = NativeInteger(trimmed, IntegerSign.Positive)
+        return (divisor + (-truncRemainder)) as NativeInteger
+
     }
 
     private fun abs(): NativeInteger =
@@ -339,15 +337,16 @@ private class NativeInteger private constructor(
     // ------------------------------ Conversions ------------------------------
 
     override fun toString(): String {
-        if (sign == IntegerSign.Zero) return "0"
-        val sb = StringBuilder()
-        var remaining = magnitude.copyOf()
+        if (this.sign == IntegerSign.Zero) return "0"
+        val builder = StringBuilder()
+        var remaining: UIntArray = this.magnitude.copyOf()
         while (remaining.isNotEmpty()) {
-            val (quotient, digit) = divideByTen(remaining)
-            sb.append(digit)
+            val (quotient: UIntArray, digit: Int) = divideByTen(remaining)
+            builder.append(digit)
             remaining = trimLeadingZeros(quotient)
         }
-        if (sign == IntegerSign.Negative) sb.append('-')
-        return sb.toString().reversed()
+        if (this.sign == IntegerSign.Negative) builder.append('-')
+        return builder.toString()
+            .reversed()
     }
 }
