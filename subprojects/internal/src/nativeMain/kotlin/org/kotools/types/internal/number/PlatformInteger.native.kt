@@ -262,7 +262,7 @@ private class NativeInteger private constructor(
 
     override fun compareTo(other: PlatformInteger): Int {
         check(other is NativeInteger)
-        if (this.sign != other.sign) return this.sign.compareTo(other.sign)
+        if (this.sign != other.sign) return this.sign.compare(other.sign)
         if (this.sign == IntegerSign.Zero) return 0
         val magCmp: Int = compareMagnitudes(this.magnitude, other.magnitude)
         return if (this.sign == IntegerSign.Positive) magCmp else -magCmp
@@ -332,7 +332,7 @@ private class NativeInteger private constructor(
     }
 
     private fun abs(): NativeInteger =
-        if (sign < IntegerSign.Zero)
+        if (this.sign == IntegerSign.Negative)
             NativeInteger(magnitude, IntegerSign.Positive)
         else this
 
