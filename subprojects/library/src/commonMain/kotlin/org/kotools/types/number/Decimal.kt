@@ -75,9 +75,7 @@ public class Decimal private constructor(
     private val scale: Int
 ) {
     init {
-        require(this.scale >= 0) {
-            "Decimal scale must be non-negative (was: ${this.scale})."
-        }
+        check(this.scale >= 0) { "Negative decimal scale: ${this.scale}" }
     }
 
     // ------------------------------- Creations -------------------------------
