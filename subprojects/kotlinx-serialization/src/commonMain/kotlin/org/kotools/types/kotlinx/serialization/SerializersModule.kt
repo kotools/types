@@ -61,7 +61,7 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "org.kotools.types.EmailAddress",
+        serialName = SerialName.EmailAddress.toString(),
         PrimitiveKind.STRING
     )
 
@@ -80,7 +80,7 @@ private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
 private class EmailAddressRegexAsStringSerializer :
     KSerializer<EmailAddressRegex> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "org.kotools.types.EmailAddressRegex",
+        serialName = SerialName.EmailAddressRegex.toString(),
         PrimitiveKind.STRING
     )
 
@@ -93,4 +93,11 @@ private class EmailAddressRegexAsStringSerializer :
             "Invalid email address regex (was: $text)."
         }
     }
+}
+
+private enum class SerialName(private val value: String) {
+    EmailAddress("org.kotools.types.EmailAddress"),
+    EmailAddressRegex("org.kotools.types.EmailAddressRegex");
+
+    override fun toString(): String = this.value
 }
