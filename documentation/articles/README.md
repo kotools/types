@@ -17,61 +17,51 @@ and increment it (e.g. the first article uses `1-`, the second uses `2-`).
 
 ## Distribution strategy
 
-Publish in this order so that a canonical public URL exists before submitting
-to aggregators and newsletters.
+A single checklist, doable in one sitting (~1-2 hours). Publish on GitHub
+Discussions first to establish the canonical URL, then reuse that link for every
+other step.
 
-### Step 1 — Establish a canonical public URL (Dev.to)
+Target cadence: one article per month, leaving room for core library
+development between releases.
 
-Publish `<n>-<slug>.md` on **Dev.to** first (tags: `kotlin`, `multiplatform`,
-`kmp`, `programming`). Dev.to renders Markdown natively. The resulting URL is
-used as the reference link in all subsequent steps.
+1. **GitHub Discussions** — Post `<n>-<slug>.md` as a new discussion in the
+   **Announcements** category of kotools/types. This is the canonical URL —
+   copy it for every step below.
+2. **Dev.to** — Publish `<n>-<slug>.md` (tags: `kotlin`, `multiplatform`, `kmp`,
+   `programming`, `kotlinserverside`) with `canonical_url` set to the GitHub
+   Discussion URL.
+3. **Kotlin Slack** — Post `<n>-<slug>-teaser.md` + the GitHub Discussion
+   link in `#kotools`, `#multiplatform`, `#library-development`, and `#general`.
+4. **Reddit** — Link to the GitHub Discussion in r/Kotlin, then cross-post to
+   r/KotlinMultiplatform.
+5. **Social media** — Short post + GitHub Discussion link, tagged `#kotlin`
+   `#kmp` `#kotlinmultiplatform` `#KotlinServerSide`:
+    - Twitter/X
+    - Mastodon (kotlin.social)
+    - LinkedIn — professional angle (e.g. cross-platform bugs in production)
+6. **Kotlin Weekly** — Submit the GitHub Discussion URL at kotlinweekly.net
+   (check the site for the current submission process).
 
-> **Canonical URL tradeoff:** Publishing on Dev.to without setting a
-> `canonical_url` builds SEO authority for `dev.to`, not `kotools.org`. This
-> is acceptable for now, but if a dedicated blog under `kotools.org` is set up
-> in the future, the flow should change to: publish on `kotools.org` first →
-> syndicate to Dev.to with `canonical_url` pointing back to the Kotools post.
-> Reddit cannot be used as a canonical source — it does not support canonical
-> meta tags.
+The `#KotlinServerSide` tag also covers JetBrains' monthly community scouting
+(amplification on @Kotlin / Kotlin Blog roundups) — no separate submission
+needed.
 
-### Step 2 — Kotlin Slack (same day)
+> **Canonical URL:** The GitHub Discussion is the canonical source — it already
+> lives in the project's own ecosystem, with no extra infrastructure to
+> maintain. Dev.to syndicates it via `canonical_url`, deferring its SEO
+> authority to the discussion. Reddit and social platforms don't support
+> canonical tags, but since they only link out (never host a copy of the full
+> text), this doesn't create duplicate-content issues.
 
-| Channel                | Action                                           |
-|------------------------|--------------------------------------------------|
-| `#kotools`             | Post the full article — canonical Slack location |
-| `#multiplatform`       | Post `<n>-<slug>-teaser.md` + Dev.to link        |
-| `#library-development` | Post `<n>-<slug>-teaser.md` + Dev.to link        |
-| `#general`             | Post `<n>-<slug>-teaser.md` + Dev.to link        |
+## Publishing status
 
-### Step 3 — Reddit (same day)
+| Article              | Status   |
+|----------------------|----------|
+| `1-integer-division` | 📝 Draft |
 
-Link to the Dev.to article:
-- Primary: r/Kotlin
-- Cross-post: r/KotlinMultiplatform
-
-### Step 4 — Kotlin Weekly (within the week)
-
-Submit the Dev.to URL to Kotlin Weekly (kotlinweekly.net, ~10k subscribers).
-Check the site for the current submission process.
-
-### Step 5 — Social media (same day as Dev.to)
-
-| Platform                 | Action                                                                |
-|--------------------------|-----------------------------------------------------------------------|
-| Twitter / X              | Short post with `#kotlin` `#kmp` `#kotlinmultiplatform` + Dev.to link |
-| Mastodon (kotlin.social) | Same short post                                                       |
-| LinkedIn                 | Professional angle — cross-platform bugs in production                |
-
-### Step 6 — JetBrains amplification (passive)
-
-Tag the Dev.to post and social posts with `#KotlinServerSide`. JetBrains scouts
-community content monthly and amplifies standout posts on @Kotlin and in Kotlin
-Blog roundups. No direct submission needed.
-
-### Step 7 — DZone (optional, longer lead time)
-
-DZone accepts articles ≥ 800 words with a 7–12 business-day review. Submit if
-broader reach beyond the Kotlin community is desired.
+Update the status to "✅ Published" once an article has gone through the full
+checklist above. Add a new row for each new article, named after its numeric
+prefix and slug.
 
 ## Authoring guidelines
 
