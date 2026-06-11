@@ -1,15 +1,12 @@
 ---
-name: 🔒️ Security vulnerability
-about: Report security vulnerability
-title: 🔒️ Security vulnerability
-labels: security
+name: 📝 Documentation
+about: Suggest documentation improvements
+labels: documentation
 ---
 
 ## 📝 Description
 
-**Bugged version:** Kotools Types $VERSION
-
-**Problem:**
+**Goal:**
 
 <!-- This section will be filled and uncommented by a maintainer.
 ## ✅ Checklist
@@ -18,12 +15,9 @@ labels: security
 
 - [ ] 🌿 Create a new branch and a draft pull request for resolving this issue.
 - [ ] …
-- [ ] 📝 Document technical decisions.
 - [ ] 📝 Update unreleased changelog.
 - [ ] 🏁 Mark pull request as ready to review.
-- [ ] 🧐 Review code with Claude (`code-review` built-in skill).
 - [ ] ♻️ Simplify code with Claude (`simplify` built-in skill).
-- [ ] 🔒️ Perform a security review with Claude (`security-review` built-in skill).
 - [ ] 🧐 Review final structure of code.
 - [ ] 🔀 Rebase and merge branch once validated.
 -->
