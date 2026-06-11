@@ -81,28 +81,6 @@ private class NativeInteger private constructor(
 
         // ------------------------- Magnitude helpers -------------------------
 
-        private fun divTruncated(
-            dividend: NativeInteger,
-            divisor: NativeInteger
-        ): NativeInteger {
-            if (divisor.sign == IntegerSign.Zero)
-                throw ArithmeticException("Division by zero")
-            if (dividend.sign == IntegerSign.Zero) return ZERO
-            val cmp = compareMagnitudes(dividend.magnitude, divisor.magnitude)
-            if (cmp < 0) return ZERO
-            if (cmp == 0) return NativeInteger(
-                uintArrayOf(1u),
-                dividend.sign * divisor.sign
-            )
-            val (quotMag, _) = divMagnitudes(
-                dividend.magnitude,
-                divisor.magnitude
-            )
-            val trimmed = trimLeadingZeros(quotMag)
-            if (trimmed.isEmpty()) return ZERO
-            return NativeInteger(trimmed, dividend.sign * divisor.sign)
-        }
-
         private fun trimLeadingZeros(mag: UIntArray): UIntArray {
             var len = mag.size
             while (len > 0 && mag[len - 1] == 0u) len--
@@ -305,28 +283,42 @@ private class NativeInteger private constructor(
         return NativeInteger(mag, sign = this.sign * oth.sign)
     }
 
-    override fun div(other: PlatformInteger): PlatformInteger {
-        val divisor = other as NativeInteger
-        val remainder = (this % other) as NativeInteger
-        val exactDividend = (this + (-remainder)) as NativeInteger
-        return divTruncated(exactDividend, divisor)
-    }
+    override fun div(other: PlatformInteger): PlatformInteger =
+        this.divModMagnitudes(other as NativeInteger).first
 
-    override fun rem(other: PlatformInteger): PlatformInteger {
-        val divisor = (other as NativeInteger).abs()
-        if (divisor.sign == IntegerSign.Zero)
-            throw ArithmeticException("Division by zero")
-        if (this.sign == IntegerSign.Zero) return ZERO
-        val cmp: Int = compareMagnitudes(this.magnitude, divisor.magnitude)
-        if (cmp == 0) return ZERO
-        val (_, remMag) = divMagnitudes(this.magnitude, divisor.magnitude)
-        val trimmed: UIntArray = trimLeadingZeros(remMag)
-        if (trimmed.isEmpty()) return ZERO
-        if (this.sign == IntegerSign.Positive)
-            return NativeInteger(trimmed, IntegerSign.Positive)
-        val truncRemainder = NativeInteger(trimmed, IntegerSign.Positive)
-        return (divisor + (-truncRemainder)) as NativeInteger
+    override fun rem(other: PlatformInteger): PlatformInteger =
+        this.divModMagnitudes(other as NativeInteger).second
 
+    private fun divModMagnitudes(
+        other: NativeInteger
+    ): Pair<NativeInteger, NativeInteger> {
+        val divisorAbs: NativeInteger = other.abs()
+        if (this.sign == IntegerSign.Zero) return ZERO to ZERO
+        val (magQuotient, magRemainder) = divMagnitudes(
+            this.magnitude,
+            divisorAbs.magnitude
+        )
+        val quotientSign: IntegerSign = this.sign * other.sign
+        if (this.sign == IntegerSign.Positive) {
+            val quotient: NativeInteger =
+                if (magQuotient.isEmpty()) ZERO
+                else NativeInteger(magQuotient, quotientSign)
+            val remainder: NativeInteger =
+                if (magRemainder.isEmpty()) ZERO
+                else NativeInteger(magRemainder, IntegerSign.Positive)
+            return quotient to remainder
+        }
+        if (magRemainder.isEmpty())
+            return NativeInteger(magQuotient, quotientSign) to ZERO
+        val quotient = NativeInteger(
+            addMagnitudes(magQuotient, uintArrayOf(1u)),
+            quotientSign
+        )
+        val remainder = NativeInteger(
+            subtractMagnitudes(divisorAbs.magnitude, magRemainder),
+            IntegerSign.Positive
+        )
+        return quotient to remainder
     }
 
     private fun abs(): NativeInteger =
