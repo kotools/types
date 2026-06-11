@@ -137,14 +137,6 @@ merged. Enforce this by:
 - **CI wiring travels with the change it enables**, not as a follow-up
   cleanup.
 
-## Code Review
-
-After making changes, always self-review before handing off:
-
-- **Source code changes** (`.kt`, `.kts`, `toml`, or any build/config file)
-  — run `/code-review`, then `/simplify`, then `/security-review`.
-- **Documentation-only changes** (`*.md` files) — run `/simplify`.
-
 ## Git & Version Control
 
 - **Never commit or push.** Do not run `git commit`, `git push`, or any
@@ -152,11 +144,3 @@ After making changes, always self-review before handing off:
   the working tree (unstaged) for the user to review and commit themselves.
   This applies even if a task seems complete or the user previously approved
   a plan.
-
-## Commit message format
-
-```
-<gitmoji> <message> (<#issue-or-PR>)
-```
-
-Example: `⬆️ Bump binary-compatibility-validator to 0.14.0 (#380)`
