@@ -7,9 +7,9 @@ community channels.
 
 Each article is a pair of files sharing the same numeric index prefix:
 
-| File | Purpose |
-|------|---------|
-| `<n>-<slug>.md` | Full article body |
+| File                   | Purpose                        |
+|------------------------|--------------------------------|
+| `<n>-<slug>.md`        | Full article body              |
 | `<n>-<slug>-teaser.md` | Short teaser for cross-posting |
 
 When creating a new article, check the highest existing index in this directory
@@ -36,12 +36,12 @@ used as the reference link in all subsequent steps.
 
 ### Step 2 — Kotlin Slack (same day)
 
-| Channel | Action |
-|---------|--------|
-| `#kotools` | Post the full article — canonical Slack location |
-| `#multiplatform` | Post `<n>-<slug>-teaser.md` + Dev.to link |
-| `#library-development` | Post `<n>-<slug>-teaser.md` + Dev.to link |
-| `#general` | Post `<n>-<slug>-teaser.md` + Dev.to link |
+| Channel                | Action                                           |
+|------------------------|--------------------------------------------------|
+| `#kotools`             | Post the full article — canonical Slack location |
+| `#multiplatform`       | Post `<n>-<slug>-teaser.md` + Dev.to link        |
+| `#library-development` | Post `<n>-<slug>-teaser.md` + Dev.to link        |
+| `#general`             | Post `<n>-<slug>-teaser.md` + Dev.to link        |
 
 ### Step 3 — Reddit (same day)
 
@@ -56,11 +56,11 @@ Check the site for the current submission process.
 
 ### Step 5 — Social media (same day as Dev.to)
 
-| Platform | Action |
-|----------|--------|
-| Twitter / X | Short post with `#kotlin` `#kmp` `#kotlinmultiplatform` + Dev.to link |
-| Mastodon (kotlin.social) | Same short post |
-| LinkedIn | Professional angle — cross-platform bugs in production |
+| Platform                 | Action                                                                |
+|--------------------------|-----------------------------------------------------------------------|
+| Twitter / X              | Short post with `#kotlin` `#kmp` `#kotlinmultiplatform` + Dev.to link |
+| Mastodon (kotlin.social) | Same short post                                                       |
+| LinkedIn                 | Professional angle — cross-platform bugs in production                |
 
 ### Step 6 — JetBrains amplification (passive)
 
