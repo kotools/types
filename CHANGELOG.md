@@ -36,6 +36,8 @@ All notable changes to this project will be documented in this file.
 
 ### 🔥 Removed
 
+- `com.ionspin.kotlin:bignum` dependency, previously used internally by the
+  Kotlin/Native implementation of the `Integer` **experimental** type. ([#962])
 - `orNull` and `orThrow` **deprecated** functions from `EmailAddress.Companion`
   and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
   functions instead. ([#871], [#872])
@@ -45,6 +47,7 @@ All notable changes to this project will be documented in this file.
 [#925]: https://github.com/kotools/types/issues/925
 [#952]: https://github.com/kotools/types/issues/952
 [#960]: https://github.com/kotools/types/issues/960
+[#962]: https://github.com/kotools/types/issues/962
 
 ## 🔖 Releases
 
