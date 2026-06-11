@@ -60,8 +60,10 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
-    override val descriptor: SerialDescriptor
-        get() = StringSerialDescriptor<EmailAddress>()
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = "org.kotools.types.EmailAddress",
+        PrimitiveKind.STRING
+    )
 
     override fun serialize(encoder: Encoder, value: EmailAddress): Unit =
         encoder.encodeString("$value")
