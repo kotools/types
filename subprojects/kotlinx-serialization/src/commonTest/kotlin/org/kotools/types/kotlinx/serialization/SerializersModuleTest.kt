@@ -75,68 +75,61 @@ class EmailAddressAsStringSerializerTest {
     }
 }
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
 class EmailAddressRegexAsStringSerializerTest {
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun descriptor() {
-        // Given
         val module: SerializersModule = KotoolsTypesSerializersModule()
         val serializer: KSerializer<EmailAddressRegex> = module.serializer()
-        // When
-        val result: SerialDescriptor = serializer.descriptor
-        // Then
-        val serialName: String = EmailAddressRegex::class.simpleName
-            ?: fail("Serial name can't be null.")
-        val expected: SerialDescriptor =
-            PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
-        assertEquals(expected, result)
+
+        val actual: SerialDescriptor = serializer.descriptor
+
+        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = "org.kotools.types.EmailAddressRegex",
+            PrimitiveKind.STRING
+        )
+        assertEquals(expected, actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun serialize() {
-        // Given
         val format =
             Json { this.serializersModule = KotoolsTypesSerializersModule() }
         val regex: EmailAddressRegex = EmailAddressRegex.default()
-        // When
-        val result: String = format.encodeToString(regex)
-        // Then
+
+        val actual: String = format.encodeToString(regex)
+
         val expected: String = regex.toString()
             .replace(oldValue = "\\", newValue = "\\\\")
             .let { "\"$it\"" }
-        assertEquals(expected, result)
+        assertEquals(expected, actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserializeWithValidRegex() {
-        // Given
         val format =
             Json { this.serializersModule = KotoolsTypesSerializersModule() }
         val encoded = """"^\\S+@\\S+\\.\\S+$""""
-        // When
-        val result: EmailAddressRegex = format.decodeFromString(encoded)
-        // Then
+
+        val actual: EmailAddressRegex = format.decodeFromString(encoded)
+
         val expected: EmailAddressRegex = EmailAddressRegex.default()
-        assertEquals(expected, result)
+        assertEquals(expected, actual)
     }
 
-    @OptIn(ExperimentalKotoolsTypesApi::class)
     @Test
     fun deserializeWithInvalidRegex() {
-        // Given
         val format =
             Json { this.serializersModule = KotoolsTypesSerializersModule() }
         val encoded = """"^\\S+\\S+\\.\\S+$""""
-        // When
-        val result: IllegalArgumentException = assertFailsWith {
+
+        val actual: IllegalArgumentException = assertFailsWith {
             format.decodeFromString<EmailAddressRegex>(encoded)
         }
-        // Then
+
         val text: String = encoded.trim('"')
             .replace(oldValue = "\\\\", newValue = "\\")
         val expected = "Invalid email address regex (was: $text)."
-        assertEquals(expected, result.message)
+        assertEquals(expected, actual.message)
     }
 }
