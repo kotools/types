@@ -519,10 +519,8 @@ public class Integer private constructor(
      * - [rem] or [remOrNull] for returning Euclidean remainder
      */
     public operator fun div(other: Integer): Integer =
-        if (other == of(0)) {
-            val message: String = errorMessage("Division by zero")
-            throw ArithmeticException(message)
-        } else Integer(this.delegate / other.delegate)
+        if (other == of(0)) this.divisionByZeroError()
+        else Integer(this.delegate / other.delegate)
 
     /**
      * Returns the Euclidean quotient of dividing this integer by the [other]
@@ -591,10 +589,8 @@ public class Integer private constructor(
      * - [div] or [divOrNull] for returning Euclidean quotient
      */
     public operator fun rem(other: Integer): Integer =
-        if (other == of(0)) {
-            val message: String = errorMessage("Division by zero")
-            throw ArithmeticException(message)
-        } else Integer(this.delegate % other.delegate)
+        if (other == of(0)) this.divisionByZeroError()
+        else Integer(this.delegate % other.delegate)
 
     /**
      * Returns the Euclidean remainder of dividing this integer by the [other]
@@ -627,6 +623,11 @@ public class Integer private constructor(
     public fun remOrNull(other: Integer): Integer? =
         if (other == of(0)) null
         else Integer(this.delegate % other.delegate)
+
+    private fun divisionByZeroError(): Nothing {
+        val message: String = errorMessage("Division by zero")
+        throw ArithmeticException(message)
+    }
 
     // ------------------------------ Conversions ------------------------------
 
