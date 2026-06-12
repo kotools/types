@@ -13,6 +13,7 @@ import kotlinx.serialization.modules.contextual
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.errorMessage
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
 
@@ -71,7 +72,7 @@ private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
         return requireNotNull(EmailAddress of text) {
-            "Invalid email address: '$text'"
+            errorMessage("Invalid email address", text)
         }
     }
 }
@@ -90,7 +91,7 @@ private class EmailAddressRegexAsStringSerializer :
     override fun deserialize(decoder: Decoder): EmailAddressRegex {
         val text: String = decoder.decodeString()
         return requireNotNull(EmailAddressRegex of text) {
-            "Invalid email address regex: '$text'"
+            errorMessage("Invalid email address regex", text)
         }
     }
 }

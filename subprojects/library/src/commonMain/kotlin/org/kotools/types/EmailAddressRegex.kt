@@ -1,6 +1,7 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
+import org.kotools.types.internal.errorMessage
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
@@ -347,7 +348,7 @@ public class EmailAddressRegex private constructor(
 
         private fun fromPattern(pattern: String): EmailAddressRegex =
             checkNotNull(EmailAddressRegex of pattern) {
-                "Invalid email address regex: '$pattern'"
+                errorMessage("Invalid email address regex", pattern)
             }
     }
 }
