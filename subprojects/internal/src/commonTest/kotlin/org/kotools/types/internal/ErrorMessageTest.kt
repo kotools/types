@@ -23,10 +23,10 @@ class ErrorMessageTest {
     }
 
     @Test
-    fun errorMessageSeparatesReasonAndValueWithSemicolon() {
+    fun errorMessageSeparatesReasonAndValueWithColon() {
         val reason = "Reason"
         val result: String = errorMessage(reason, "value")
-        assertTrue("Missing semicolon delimiter: '$result'") {
+        assertTrue("Missing colon delimiter: '$result'") {
             result.substringAfter(reason)
                 .startsWith(':')
         }
@@ -42,7 +42,16 @@ class ErrorMessageTest {
     }
 
     @Test
-    fun errorMessageLeftsNonStringValueUnquoted() {
+    fun errorMessageEscapesSingleQuotesInStringValue() {
+        val reason = "Reason"
+        val value = "O'Brien"
+        val result: String = errorMessage(reason, value)
+        val expected = "Reason: 'O\\'Brien'"
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun errorMessageLeavesNonStringValueUnquoted() {
         val reason = "Non-negative integer"
         val value = 123
         val result: String = errorMessage(reason, value)
