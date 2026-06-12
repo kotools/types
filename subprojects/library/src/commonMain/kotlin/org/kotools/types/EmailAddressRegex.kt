@@ -1,7 +1,6 @@
 package org.kotools.types
 
 import kotools.types.internal.hashCodeOf
-import org.kotools.types.internal.Warning
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
@@ -49,7 +48,7 @@ public class EmailAddressRegex private constructor(
      * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.equalsOverride
      * </details>
      */
-    @Suppress(Warning.FINAL)
+    @Suppress("RedundantModalityModifier")
     final override fun equals(other: Any?): Boolean =
         other is EmailAddressRegex && this.pattern == other.pattern
 
@@ -78,7 +77,7 @@ public class EmailAddressRegex private constructor(
      * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.hashCodeOverride
      * </details>
      */
-    @Suppress(Warning.FINAL)
+    @Suppress("RedundantModalityModifier")
     final override fun hashCode(): Int = hashCodeOf(this.pattern)
 
     // ---------------------- Pattern matching operations ----------------------
@@ -139,7 +138,7 @@ public class EmailAddressRegex private constructor(
      * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.toStringOverride
      * </details>
      */
-    @Suppress(Warning.FINAL)
+    @Suppress("RedundantModalityModifier")
     final override fun toString(): String = this.pattern
 
     // -------------------------------------------------------------------------
