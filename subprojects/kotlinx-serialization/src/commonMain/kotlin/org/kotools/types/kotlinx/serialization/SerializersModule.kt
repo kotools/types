@@ -71,7 +71,7 @@ private class EmailAddressAsStringSerializer : KSerializer<EmailAddress> {
     override fun deserialize(decoder: Decoder): EmailAddress {
         val text: String = decoder.decodeString()
         return requireNotNull(EmailAddress of text) {
-            "Invalid email address (was: $text)."
+            "Invalid email address: '$text'"
         }
     }
 }
@@ -90,7 +90,7 @@ private class EmailAddressRegexAsStringSerializer :
     override fun deserialize(decoder: Decoder): EmailAddressRegex {
         val text: String = decoder.decodeString()
         return requireNotNull(EmailAddressRegex of text) {
-            "Invalid email address regex (was: $text)."
+            "Invalid email address regex: '$text'"
         }
     }
 }

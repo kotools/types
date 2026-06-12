@@ -124,7 +124,7 @@ class DecimalTest {
         val message = "Input: \"$value\""
         val exception: NumberFormatException =
             assertFailsWith(message) { Decimal.parse(value) }
-        val expected = "\"$value\" is not a valid decimal."
+        val expected = "Invalid decimal representation: '$value'"
         assertEquals(expected, actual = exception.message, message)
 
         val safeDecimal: Decimal? = Decimal.parseOrNull(value)

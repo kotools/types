@@ -70,7 +70,7 @@ class EmailAddressAsStringSerializerTest {
         }
 
         val text: String = encoded.trim('"')
-        val expected = "Invalid email address (was: $text)."
+        val expected = "Invalid email address: '$text'"
         assertEquals(expected, actual.message)
     }
 }
@@ -129,7 +129,7 @@ class EmailAddressRegexAsStringSerializerTest {
 
         val text: String = encoded.trim('"')
             .replace(oldValue = "\\\\", newValue = "\\")
-        val expected = "Invalid email address regex (was: $text)."
+        val expected = "Invalid email address regex: '$text'"
         assertEquals(expected, actual.message)
     }
 }

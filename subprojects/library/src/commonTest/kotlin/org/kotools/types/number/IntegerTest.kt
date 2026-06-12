@@ -96,7 +96,7 @@ class IntegerTest {
         val message = "Input: \"$value\""
         val exception: NumberFormatException =
             assertFailsWith(message) { Integer.parse(value) }
-        val expected = "\"$value\" is not a valid integer."
+        val expected = "Invalid integer representation: '$value'"
         assertEquals(expected, actual = exception.message, message)
 
         val safeInteger: Integer? = Integer.parseOrNull(value)
@@ -727,7 +727,7 @@ class IntegerTest {
 
         val exception: ArithmeticException = assertFailsWith { x / zero }
 
-        val expected = "Integer can't be divided by zero."
+        val expected = "Division by zero"
         val message = "Input: $x"
         assertEquals(expected, actual = exception.message, message)
     }
@@ -847,7 +847,7 @@ class IntegerTest {
 
         val exception: ArithmeticException = assertFailsWith { x % y }
 
-        val expected = "Integer can't be divided by zero."
+        val expected = "Division by zero"
         val message = "Input: $x"
         assertEquals(expected, actual = exception.message, message)
     }

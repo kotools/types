@@ -196,7 +196,7 @@ public class Integer private constructor(
         @JvmStatic
         public fun parse(value: String): Integer {
             if (!value.isInteger()) throw NumberFormatException(
-                "\"$value\" is not a valid integer."
+                "Invalid integer representation: '$value'"
             )
             val normalized: String = value.normalizeInteger()
             val delegate = PlatformInteger(normalized)
@@ -516,8 +516,7 @@ public class Integer private constructor(
      * - [rem] or [remOrNull] for returning Euclidean remainder
      */
     public operator fun div(other: Integer): Integer =
-        if (other == of(0))
-            throw ArithmeticException("Integer can't be divided by zero.")
+        if (other == of(0)) throw ArithmeticException("Division by zero")
         else Integer(this.delegate / other.delegate)
 
     /**
@@ -586,11 +585,9 @@ public class Integer private constructor(
      * - [remOrNull] for returning `null` when dividing this integer by zero
      * - [div] or [divOrNull] for returning Euclidean quotient
      */
-    public operator fun rem(other: Integer): Integer {
-        if (other == of(0))
-            throw ArithmeticException("Integer can't be divided by zero.")
-        return Integer(this.delegate % other.delegate)
-    }
+    public operator fun rem(other: Integer): Integer =
+        if (other == of(0)) throw ArithmeticException("Division by zero")
+        else Integer(this.delegate % other.delegate)
 
     /**
      * Returns the Euclidean remainder of dividing this integer by the [other]

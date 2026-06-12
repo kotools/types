@@ -162,12 +162,11 @@ public class Decimal private constructor(
          * throwing an exception in case of invalid [value].
          */
         @JvmStatic
-        public fun parse(value: String): Decimal {
+        public fun parse(value: String): Decimal =
             if (!value.isDecimal()) throw NumberFormatException(
-                "\"$value\" is not a valid decimal."
+                "Invalid decimal representation: '$value'"
             )
-            return value.toDecimal()
-        }
+            else value.toDecimal()
 
         /**
          * Returns a [Decimal] representing the number described by [value],
