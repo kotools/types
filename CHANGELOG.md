@@ -42,12 +42,22 @@ All notable changes to this project will be documented in this file.
   and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
   functions instead. ([#871], [#872])
 
+### 🐛 Fixed
+
+- Fixed the `serialName` of the `SerialDescriptor` for the `EmailAddress` and
+  `EmailAddressRegex` **experimental** default serializers provided by
+  `KotoolsTypesSerializersModule()`. These now use explicit, fully-qualified
+  names (`org.kotools.types.EmailAddress` and
+  `org.kotools.types.EmailAddressRegex`) instead of the type's simple name.
+  ([#966])
+
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 [#925]: https://github.com/kotools/types/issues/925
 [#952]: https://github.com/kotools/types/issues/952
 [#960]: https://github.com/kotools/types/issues/960
 [#962]: https://github.com/kotools/types/issues/962
+[#966]: https://github.com/kotools/types/issues/966
 
 ## 🔖 Releases
 
