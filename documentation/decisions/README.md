@@ -18,6 +18,7 @@ rationale behind it, and its consequences.
 | [ADR-008](ADR-008-euclidean-division-platform-impl-v2.md) | Platform implementation of Euclidean division (v2)  | ✅ Accepted               |
 | [ADR-009](ADR-009-default-serializer-serial-names.md)     | Explicit serial names for default serializers       | ✅ Accepted               |
 | [ADR-010](ADR-010-error-message-format.md)                | Error message format for `org.kotools.types`        | ✅ Accepted               |
+| [ADR-011](ADR-011-error-message-quote-escaping.md)        | String value quote escaping for `org.kotools.types` | ✅ Accepted               |
 
 ## 🔄 Superseding records
 
