@@ -122,24 +122,25 @@ internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
 }
 
 internal fun Random.nonIntegerString(): String {
-    var candidate: String = this.string()
+    var candidate: String = this.stringAscii()
     val regex = Regex("""^[+-]?\d+$""")
-    while (candidate matches regex) candidate = this.string()
+    while (candidate matches regex) candidate = this.stringAscii()
     return candidate
 }
 
 internal fun Random.nonDecimalString(): String {
-    var candidate: String = this.string()
+    var candidate: String = this.stringAscii()
     val regex = Regex("""^[+-]?\d+(\.\d+)?$""")
-    while (candidate matches regex) candidate = this.string()
+    while (candidate matches regex) candidate = this.stringAscii()
     return candidate
 }
 
-private fun Random.string(): String {
-    val capacity: Int = this.nextInt(0..64)
+private fun Random.stringAscii(): String {
+    val capacity: Int = this.nextInt(0..32)
     val builder = StringBuilder(capacity)
 
-    val characterRange: CharRange = Char.MIN_VALUE..Char.MAX_VALUE
+    val characterRange: List<Char> = (Char.MIN_VALUE..Char.MAX_VALUE)
+        .take(128) // ASCII has 128 characters
     repeat(times = capacity) {
         val character: Char = characterRange.random()
         builder.append(character)

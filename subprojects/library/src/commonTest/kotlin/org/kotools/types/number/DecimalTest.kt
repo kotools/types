@@ -3,6 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.decimal
 import org.kotools.types.decimalExcept
+import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonDecimalString
 import org.kotools.types.positiveDecimal
 import org.kotools.types.repeatTest
@@ -121,11 +122,13 @@ class DecimalTest {
     fun parsingFailsWithNondecimalString(): Unit = repeatTest {
         val value: String = Random.nonDecimalString()
 
-        val message = "Input: \"$value\""
-        val exception: NumberFormatException =
-            assertFailsWith(message) { Decimal.parse(value) }
-        val expected = "Invalid decimal representation: '$value'"
-        assertEquals(expected, actual = exception.message, message)
+        val message: String = errorMessage("Input", value)
+        val exception: NumberFormatException = assertFailsWith(message) {
+            Decimal.parse(value)
+        }
+        val expected: String =
+            errorMessage("Invalid decimal representation", value)
+        assertEquals(expected, actual = exception.message)
 
         val safeDecimal: Decimal? = Decimal.parseOrNull(value)
         assertNull(safeDecimal, message)

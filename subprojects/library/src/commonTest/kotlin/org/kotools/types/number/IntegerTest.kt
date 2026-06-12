@@ -3,6 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.integer
 import org.kotools.types.integerExcept
+import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
 import org.kotools.types.positiveInteger
@@ -93,11 +94,13 @@ class IntegerTest {
     fun parsingFailsWithNonintegerString(): Unit = repeatTest {
         val value: String = Random.nonIntegerString()
 
-        val message = "Input: \"$value\""
-        val exception: NumberFormatException =
-            assertFailsWith(message) { Integer.parse(value) }
-        val expected = "Invalid integer representation: '$value'"
-        assertEquals(expected, actual = exception.message, message)
+        val message: String = errorMessage("Input", value)
+        val exception: NumberFormatException = assertFailsWith(message) {
+            Integer.parse(value)
+        }
+        val expected: String =
+            errorMessage("Invalid integer representation", value)
+        assertEquals(expected, actual = exception.message)
 
         val safeInteger: Integer? = Integer.parseOrNull(value)
         assertNull(safeInteger, message)
