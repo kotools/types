@@ -17,6 +17,7 @@ rationale behind it, and its consequences.
 | [ADR-007](ADR-007-native-integer-sign-magnitude-repr.md)  | Sign-magnitude representation for `NativeInteger`   | ✅ Accepted               |
 | [ADR-008](ADR-008-euclidean-division-platform-impl-v2.md) | Platform implementation of Euclidean division (v2)  | ✅ Accepted               |
 | [ADR-009](ADR-009-default-serializer-serial-names.md)     | Explicit serial names for default serializers       | ✅ Accepted               |
+| [ADR-010](ADR-010-error-message-format.md)                | Error message format for `org.kotools.types`        | ✅ Accepted               |
 
 ## 🔄 Superseding records
 
