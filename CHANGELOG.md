@@ -33,6 +33,10 @@ All notable changes to this project will be documented in this file.
 - Moved `Integer` **experimental** type to `org.kotools.types.number` package,
   and renamed some of its functions (`from` -> `of`, `fromDecimal` -> `parse`,
   `fromDecimalOrNull` -> `parseOrNull`). ([#960])
+- Reformatted error messages thrown by **experimental** declarations in
+  `org.kotools.types.*` (`Decimal`, `Integer`, `EmailAddressRegex`, and the
+  `kotlinx-serialization` serializers) to follow a consistent
+  `<description>: <value>` structure. ([#988])
 
 ### 🔥 Removed
 
@@ -58,6 +62,7 @@ All notable changes to this project will be documented in this file.
 [#960]: https://github.com/kotools/types/issues/960
 [#962]: https://github.com/kotools/types/issues/962
 [#966]: https://github.com/kotools/types/issues/966
+[#988]: https://github.com/kotools/types/issues/988
 
 ## 🔖 Releases
 
