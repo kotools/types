@@ -2,6 +2,7 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
+import org.kotools.types.internal.errorMessage
 import org.kotools.types.number.Decimal.Companion.of
 import org.kotools.types.number.Decimal.Companion.parse
 import org.kotools.types.number.Decimal.Companion.parseOrNull
@@ -162,11 +163,14 @@ public class Decimal private constructor(
          * throwing an exception in case of invalid [value].
          */
         @JvmStatic
-        public fun parse(value: String): Decimal =
-            if (!value.isDecimal()) throw NumberFormatException(
-                "Invalid decimal representation: '$value'"
-            )
-            else value.toDecimal()
+        public fun parse(value: String): Decimal {
+            if (!value.isDecimal()) {
+                val message: String =
+                    errorMessage("Invalid decimal representation", value)
+                throw NumberFormatException(message)
+            }
+            return value.toDecimal()
+        }
 
         /**
          * Returns a [Decimal] representing the number described by [value],
