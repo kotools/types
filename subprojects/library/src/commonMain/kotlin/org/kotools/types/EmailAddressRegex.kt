@@ -289,12 +289,8 @@ public class EmailAddressRegex private constructor(
          * </details>
          */
         @JvmStatic
-        public fun alphabetic(): EmailAddressRegex {
-            val pattern = """^[a-z]+@[a-z]+\.[a-z]+$"""
-            return checkNotNull(EmailAddressRegex of pattern) {
-                "Invalid email address regex: '$pattern'"
-            }
-        }
+        public fun alphabetic(): EmailAddressRegex =
+            this.fromPattern("""^[a-z]+@[a-z]+\.[a-z]+$""")
 
         /**
          * Returns a regular expression for validating
@@ -347,11 +343,12 @@ public class EmailAddressRegex private constructor(
          * </details>
          */
         @JvmStatic
-        public fun alphanumeric(): EmailAddressRegex {
-            val pattern = """^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$"""
-            return checkNotNull(EmailAddressRegex of pattern) {
+        public fun alphanumeric(): EmailAddressRegex =
+            this.fromPattern("""^[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+$""")
+
+        private fun fromPattern(pattern: String): EmailAddressRegex =
+            checkNotNull(EmailAddressRegex of pattern) {
                 "Invalid email address regex: '$pattern'"
             }
-        }
     }
 }
