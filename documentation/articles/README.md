@@ -59,9 +59,9 @@ needed.
 
 ## 📊 Publishing status
 
-| Article              | Status   |
-|----------------------|----------|
-| `1-integer-division` | 📝 Draft |
+| Article              | Status      |
+|----------------------|-------------|
+| `1-integer-division` | ✅ Published |
 
 Update the status to "✅ Published" once an article has gone through the full
 checklist above. Add a new row for each new article, named after its numeric
