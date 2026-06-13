@@ -7,6 +7,7 @@ import kotlinx.serialization.json.Json
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.number.Integer
 import kotlin.test.Test
 
 class SerializersModuleSample {
@@ -56,5 +57,25 @@ class SerializersModuleSample {
 
         val decoded: CustomEmailAddress = format.decodeFromString(encoded)
         check(decoded == customEmail)
+    }
+
+    @OptIn(ExperimentalKotoolsTypesApi::class)
+    @Test
+    fun integerAsString() {
+        @Serializable
+        data class Account(@Contextual val balance: Integer)
+
+        val balance: Integer = Integer.of(150)
+        val account = Account(balance)
+
+        val format = Json {
+            this.serializersModule = KotoolsTypesSerializersModule()
+        }
+
+        val encoded: String = format.encodeToString(account)
+        check(encoded == """{"balance":"150"}""")
+
+        val decoded: Account = format.decodeFromString(encoded)
+        check(decoded == account)
     }
 }

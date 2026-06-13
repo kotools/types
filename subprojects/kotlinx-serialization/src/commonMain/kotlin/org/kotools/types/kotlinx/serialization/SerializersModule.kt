@@ -14,6 +14,7 @@ import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.number.Integer
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmSynthetic
 
@@ -48,6 +49,18 @@ import kotlin.jvm.JvmSynthetic
  * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.emailAddressRegexAsString
  * </details>
  *
+ * <br>
+ * <details>
+ * <summary>
+ *     <b>Integer</b>
+ * </summary>
+ *
+ * This function provides an object for serializing and deserializing an
+ * [Integer] as [String].
+ *
+ * SAMPLE: org.kotools.types.kotlinx.serialization.SerializersModuleSample.integerAsString
+ * </details>
+ *
  * @since 5.0.1
  */
 @ExperimentalKotoolsTypesApi
@@ -57,6 +70,7 @@ public fun KotoolsTypesSerializersModule(): SerializersModule =
     SerializersModule {
         this.contextual(EmailAddressAsStringSerializer())
         this.contextual(EmailAddressRegexAsStringSerializer())
+        this.contextual(IntegerAsStringSerializer())
     }
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -96,9 +110,28 @@ private class EmailAddressRegexAsStringSerializer :
     }
 }
 
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private class IntegerAsStringSerializer : KSerializer<Integer> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        serialName = SerialName.Integer.toString(),
+        PrimitiveKind.STRING
+    )
+
+    override fun serialize(encoder: Encoder, value: Integer): Unit =
+        encoder.encodeString("$value")
+
+    override fun deserialize(decoder: Decoder): Integer {
+        val text: String = decoder.decodeString()
+        return checkNotNull(Integer.parseOrNull(text)) {
+            errorMessage("Invalid integer representation", text)
+        }
+    }
+}
+
 private enum class SerialName(private val value: String) {
     EmailAddress("org.kotools.types.EmailAddress"),
-    EmailAddressRegex("org.kotools.types.EmailAddressRegex");
+    EmailAddressRegex("org.kotools.types.EmailAddressRegex"),
+    Integer("org.kotools.types.number.Integer");
 
     override fun toString(): String = this.value
 }

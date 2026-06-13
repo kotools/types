@@ -11,6 +11,7 @@ import kotlinx.serialization.serializer
 import org.kotools.types.EmailAddress
 import org.kotools.types.EmailAddressRegex
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.number.Integer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -130,6 +131,63 @@ class EmailAddressRegexAsStringSerializerTest {
         val text: String = encoded.trim('"')
             .replace(oldValue = "\\\\", newValue = "\\")
         val expected = "Invalid email address regex: '$text'"
+        assertEquals(expected, actual.message)
+    }
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+class IntegerAsStringSerializerTest {
+    @Test
+    fun descriptor() {
+        val module: SerializersModule = KotoolsTypesSerializersModule()
+        val serializer: KSerializer<Integer> = module.serializer()
+
+        val actual: SerialDescriptor = serializer.descriptor
+
+        val expected: SerialDescriptor = PrimitiveSerialDescriptor(
+            serialName = "org.kotools.types.number.Integer",
+            PrimitiveKind.STRING
+        )
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun serialize() {
+        val format =
+            Json { this.serializersModule = KotoolsTypesSerializersModule() }
+        val value: Integer = Integer.of(150)
+
+        val actual: String = format.encodeToString(value)
+
+        assertEquals(expected = "\"${value}\"", actual)
+    }
+
+    @Test
+    fun deserializeWithValidInteger() {
+        val format =
+            Json { this.serializersModule = KotoolsTypesSerializersModule() }
+        val encoded = "\"150\""
+
+        val actual: Integer = format.decodeFromString(encoded)
+
+        val text: String = encoded.trim('"')
+        val expected: Integer = Integer.parseOrNull(text)
+            ?: fail("Null integer")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun deserializeWithInvalidInteger() {
+        val format =
+            Json { this.serializersModule = KotoolsTypesSerializersModule() }
+        val encoded = "\"abc\""
+
+        val actual: IllegalStateException = assertFailsWith {
+            format.decodeFromString<Integer>(encoded)
+        }
+
+        val text: String = encoded.trim('"')
+        val expected = "Invalid integer representation: '$text'"
         assertEquals(expected, actual.message)
     }
 }
