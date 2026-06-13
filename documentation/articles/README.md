@@ -37,7 +37,6 @@ development between releases.
 5. **Social media** — Short post + GitHub Discussion link, tagged `#kotlin`
    `#kmp` `#kotlinmultiplatform` `#KotlinServerSide`:
     - Twitter/X
-    - Mastodon (kotlin.social)
     - LinkedIn — professional angle (e.g. cross-platform bugs in production)
 6. **Kotlin Weekly** — Submit the GitHub Discussion URL at kotlinweekly.net
    (check the site for the current submission process).
