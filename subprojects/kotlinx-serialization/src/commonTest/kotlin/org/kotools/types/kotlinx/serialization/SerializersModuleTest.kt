@@ -65,7 +65,7 @@ class EmailAddressAsStringSerializerTest {
             Json { this.serializersModule = KotoolsTypesSerializersModule() }
         val encoded = "\"testDomain.org\""
 
-        val actual: IllegalArgumentException = assertFailsWith {
+        val actual: IllegalStateException = assertFailsWith {
             format.decodeFromString<EmailAddress>(encoded)
         }
 
@@ -123,7 +123,7 @@ class EmailAddressRegexAsStringSerializerTest {
             Json { this.serializersModule = KotoolsTypesSerializersModule() }
         val encoded = """"^\\S+\\S+\\.\\S+$""""
 
-        val actual: IllegalArgumentException = assertFailsWith {
+        val actual: IllegalStateException = assertFailsWith {
             format.decodeFromString<EmailAddressRegex>(encoded)
         }
 
