@@ -31,7 +31,7 @@ development between releases.
    account/organization (consistent with the `@kotools_org` handle used on
    other channels) with `canonical_url` set to the GitHub Discussion URL.
 3. **Kotlin Slack** — Post `<n>-<slug>-teaser.md` + the GitHub Discussion
-   link in `#kotools`, `#multiplatform`, `#library-development`, and `#general`.
+   link in `#kotools`, `#feed`, and `#library-development`.
 4. **Reddit** — Link to the GitHub Discussion in r/Kotlin, then cross-post to
    r/KotlinMultiplatform.
 5. **Social media** — Short post + GitHub Discussion link, tagged `#kotlin`
