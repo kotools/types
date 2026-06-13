@@ -139,8 +139,22 @@ merged. Enforce this by:
 
 ## Git & Version Control
 
-- **Never commit or push.** Do not run `git commit`, `git push`, or any
-  history-altering git command. Make the requested edits and leave them in
-  the working tree (unstaged) for the user to review and commit themselves.
-  This applies even if a task seems complete or the user previously approved
-  a plan.
+- **Never commit or push in interactive/local sessions.** Do not run
+  `git commit`, `git push`, or any history-altering git command. Make the
+  requested edits and leave them in the working tree (unstaged) for the user
+  to review and commit themselves. This applies even if a task seems
+  complete or the user previously approved a plan.
+- **Exception: automated GitHub workflows.** When running as the GitHub
+  Action responding to `@claude` mentions on issues and pull requests
+  (`.github/workflows/claude.yml`), committing and pushing is required to
+  deliver changes as a PR. In that context, commit messages follow the
+  Gitmoji convention from `CONTRIBUTING.md`:
+
+  ```text
+  <intention> <message> (<identifier>)
+  ```
+
+  - `intention`: an emoji from [Gitmoji](https://gitmoji.dev) describing the
+    type of change.
+  - `message`: a brief explanation of the change.
+  - `identifier`: a reference to the issue, discussion, or PR (e.g. `#988`).
