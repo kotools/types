@@ -16,4 +16,4 @@ Kotools Types 5.1.1 fixes it consistently across all three targets —
 including null-safe `divOrNull` and `remOrNull` variants for those who prefer
 not to catch exceptions.
 
-https://github.com/kotools/types/discussions/<discussion-id>
+[Read it here](https://github.com/kotools/types/discussions/996) 👇
