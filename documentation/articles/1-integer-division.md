@@ -1,4 +1,4 @@
-# Integer division by zero in Kotlin Multiplatform: silent on JavaScript, exception on JVM and Native — and how to fix it
+# The Kotlin Multiplatform division-by-zero trap
 
 If you write Kotlin Multiplatform code that involves integer division, you may
 have already hit this: the exact same expression behaves completely differently
@@ -14,7 +14,7 @@ val remainder = 12 % 0
 ```
 
 On **JVM and Native**, both lines throw an `ArithmeticException`. That is the
-behaviour most Kotlin developers expect and design around.
+behavior most Kotlin developers expect and design around.
 
 On **JavaScript**, both lines execute without any exception and silently return
 `0`.
@@ -43,9 +43,12 @@ check(remainder.exceptionOrNull() is ArithmeticException)  // passes
 
 ## Why it happens
 
-JavaScript's native `BigInt` type returns `0n` for `0n / 0n` by specification.
-The Kotlin/JS compiler does not wrap arithmetic operations in additional
-exception checks, so the platform behaviour leaks through.
+On Kotlin/JS, `Int` values are represented as JavaScript numbers, and
+`12 / 0` evaluates to `Infinity` while `12 % 0` evaluates to `NaN`. Kotlin/JS
+truncates `Int` arithmetic to 32 bits using JavaScript's `| 0` operator, and
+per the ECMAScript `ToInt32` conversion, both `Infinity | 0` and `NaN | 0`
+evaluate to `0` — so the division-by-zero result silently becomes `0`, with
+no exception thrown.
 
 JVM and Native follow Java's long-standing contract: integer division by zero
 is always an `ArithmeticException`.
@@ -64,8 +67,8 @@ consistently on JVM, JavaScript, and Native.
 ```kotlin
 @OptIn(ExperimentalKotoolsTypesApi::class)
 fun main() {
-    val a: Integer = Integer.of(12)
-    val b: Integer = Integer.of(0)
+    val a: Integer = Integer.from(12)
+    val b: Integer = Integer.from(0)
 
     a / b   // ArithmeticException on JVM, JS, and Native
     a % b   // ArithmeticException on JVM, JS, and Native
@@ -78,8 +81,8 @@ If you prefer to avoid exception handling altogether, `divOrNull` and
 ```kotlin
 @OptIn(ExperimentalKotoolsTypesApi::class)
 fun main() {
-    val a: Integer = Integer.of(12)
-    val b: Integer = Integer.of(0)
+    val a: Integer = Integer.from(12)
+    val b: Integer = Integer.from(0)
 
     val quotient: Integer? = a.divOrNull(b)   // null — no exception
     val remainder: Integer? = a.remOrNull(b)  // null — no exception
@@ -87,7 +90,9 @@ fun main() {
 ```
 
 `Integer` is annotated with `@ExperimentalKotoolsTypesApi` and will be
-stabilised in a future release.
+stabilized in a future release.
+
+See also: [API reference](https://types.kotools.org/types/org.kotools.types/-integer/index.html)
 
 ## Adding Kotools Types to your project
 
@@ -114,10 +119,9 @@ kotlin {
 }
 ```
 
+See also: [GitHub](https://github.com/kotools/types)
+
 ## Discussion
 
 Have you run into this inconsistency in a real project? How do you currently
 guard against division by zero in your multiplatform code?
-
-API reference: https://types.kotools.org/types/org.kotools.types/-integer/index.html  
-GitHub: https://github.com/kotools/types
