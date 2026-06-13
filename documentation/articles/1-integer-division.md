@@ -125,3 +125,12 @@ See also: [GitHub](https://github.com/kotools/types)
 
 Have you run into this inconsistency in a real project? How do you currently
 guard against division by zero in your multiplatform code?
+
+---
+
+## 🏷️ Metadata
+
+GitHub Discussion tags: `platform: js`, `platform: jvm`, `platform: native`,
+`type: promotion`
+
+Dev.to tags (only 4): `kotlin`, `kmp`, `programming`, `kotlinserverside`
