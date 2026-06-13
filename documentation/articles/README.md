@@ -15,6 +15,11 @@ Each article is a pair of files sharing the same numeric index prefix:
 When creating a new article, check the highest existing index in this directory
 and increment it (e.g. the first article uses `1-`, the second uses `2-`).
 
+The `0-` prefix is reserved for `0-future-topics.md`, a single living backlog
+of candidate topics for future articles. It has no teaser pair and isn't
+tracked in the publishing status table — new ideas are appended to it
+directly.
+
 ## 📤 Distribution strategy
 
 A single checklist, doable in one sitting (~1-2 hours). Publish on GitHub
