@@ -37,3 +37,5 @@ jobs:
           # Optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
+          claude_args: |
+            --allowedTools "Bash(./gradlew *)"
