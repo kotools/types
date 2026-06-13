@@ -27,9 +27,10 @@ development between releases.
 1. **GitHub Discussions** — Post `<n>-<slug>.md` as a new discussion in the
    **Announcements** category of kotools/types. This is the canonical URL —
    copy it for every step below.
-2. **Dev.to** — Publish `<n>-<slug>.md` (tags: `kotlin`, `multiplatform`, `kmp`,
-   `programming`, `kotlinserverside`) with `canonical_url` set to the GitHub
-   Discussion URL.
+2. **Dev.to** — Publish `<n>-<slug>.md` under the Kotools-branded Dev.to
+   account/organization (consistent with the `@kotools_org` handle used on
+   other channels) (tags: `kotlin`, `multiplatform`, `kmp`, `programming`,
+   `kotlinserverside`) with `canonical_url` set to the GitHub Discussion URL.
 3. **Kotlin Slack** — Post `<n>-<slug>-teaser.md` + the GitHub Discussion
    link in `#kotools`, `#multiplatform`, `#library-development`, and `#general`.
 4. **Reddit** — Link to the GitHub Discussion in r/Kotlin, then cross-post to
