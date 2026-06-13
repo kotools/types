@@ -1,9 +1,9 @@
-# Articles
+# 📰 Articles
 
 This directory contains community-facing articles published across Kotlin
 community channels.
 
-## Naming convention
+## 🏷️ Naming convention
 
 Each article is a pair of files sharing the same numeric index prefix:
 
@@ -15,7 +15,7 @@ Each article is a pair of files sharing the same numeric index prefix:
 When creating a new article, check the highest existing index in this directory
 and increment it (e.g. the first article uses `1-`, the second uses `2-`).
 
-## Distribution strategy
+## 📤 Distribution strategy
 
 A single checklist, doable in one sitting (~1-2 hours). Publish on GitHub
 Discussions first to establish the canonical URL, then reuse that link for every
@@ -53,7 +53,7 @@ needed.
 > canonical tags, but since they only link out (never host a copy of the full
 > text), this doesn't create duplicate-content issues.
 
-## Publishing status
+## 📊 Publishing status
 
 | Article              | Status   |
 |----------------------|----------|
@@ -63,7 +63,7 @@ Update the status to "✅ Published" once an article has gone through the full
 checklist above. Add a new row for each new article, named after its numeric
 prefix and slug.
 
-## Authoring guidelines
+## ✍️ Authoring guidelines
 
 - Write for a technical audience familiar with Kotlin and Kotlin Multiplatform.
 - Lead with the problem, then the cause, then the solution.

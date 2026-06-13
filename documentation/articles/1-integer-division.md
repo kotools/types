@@ -1,10 +1,10 @@
-# The Kotlin Multiplatform division-by-zero trap
+# ⚠️ The Kotlin Multiplatform division-by-zero trap
 
 If you write Kotlin Multiplatform code that involves integer division, you may
 have already hit this: the exact same expression behaves completely differently
 depending on which platform compiles it.
 
-## The problem
+## 🐛 The problem
 
 Take this innocuous expression:
 
@@ -41,7 +41,7 @@ check(remainder.exceptionOrNull() is ArithmeticException)  // passes
 | `12 / 0`   | `ArithmeticException` | `0`        |
 | `12 % 0`   | `ArithmeticException` | `0`        |
 
-## Why it happens
+## 🤔 Why it happens
 
 On Kotlin/JS, `Int` values are represented as JavaScript numbers, and
 `12 / 0` evaluates to `Infinity` while `12 % 0` evaluates to `NaN`. Kotlin/JS
@@ -58,7 +58,7 @@ The practical consequence is that any guard you write and test on JVM — a
 exception — is **silently bypassed** when the same code runs on JS. No compile
 error, no warning, just a wrong result.
 
-## The fix: `Integer` from Kotools Types 5.1.1
+## ✅ The fix: `Integer` from Kotools Types 5.1.1
 
 The `Integer` type in Kotools Types explicitly checks for a zero divisor before
 delegating to the platform, so both `div` and `rem` throw `ArithmeticException`
@@ -94,7 +94,7 @@ stabilized in a future release.
 
 See also: [API reference](https://types.kotools.org/types/org.kotools.types/-integer/index.html)
 
-## Adding Kotools Types to your project
+## 🛠️ Adding Kotools Types to your project
 
 ```kotlin
 // build.gradle.kts
@@ -121,7 +121,7 @@ kotlin {
 
 See also: [GitHub](https://github.com/kotools/types)
 
-## Discussion
+## 💬 Discussion
 
 Have you run into this inconsistency in a real project? How do you currently
 guard against division by zero in your multiplatform code?

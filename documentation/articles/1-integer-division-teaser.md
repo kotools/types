@@ -1,11 +1,11 @@
-# Integer division teaser — Kotlin Slack cross-post
+# 📣 Integer division teaser — Kotlin Slack cross-post
 
 Post this teaser in `#kotools`, `#multiplatform`, `#library-development`, and
 `#general`, replacing the URL below with the GitHub Discussion link.
 
 ---
 
-**The Kotlin Multiplatform division-by-zero trap: `12 / 0` behaves differently on every platform**
+**⚠️ The Kotlin Multiplatform division-by-zero trap: `12 / 0` behaves differently on every platform**
 
 On Kotlin/JS, `12 / 0` silently returns `0`. On JVM and Native it throws
 `ArithmeticException`. That guard you wrote and tested on JVM? It is silently
