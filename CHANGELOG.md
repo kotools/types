@@ -27,6 +27,10 @@ All notable changes to this project will be documented in this file.
 
 ### ♻️ Changed
 
+- Changed internal representation of `Integer` **experimental** type from
+  `String` to `java.lang.BigInteger` on Kotlin/JVM, `BigInt` on Kotlin/JS, and a
+  custom implementation on Kotlin/Native. This avoids parsing when performing
+  arithmetic operations. ([#912], [#914] reviewed by [@daniel-rusu]).
 - Changed `Integer.div`, `Integer.divOrNull`, `Integer.rem` and
   `Integer.remOrNull` **experimental** functions to use Euclidean division
   semantics: the remainder is always non-negative (`0 ≤ r < |b|`). ([#952])
@@ -55,8 +59,11 @@ All notable changes to this project will be documented in this file.
   `org.kotools.types.EmailAddressRegex`) instead of the type's simple name.
   ([#966])
 
+[@daniel-rusu]: https://github.com/daniel-rusu
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
+[#912]: https://github.com/kotools/types/issues/912
+[#914]: https://github.com/kotools/types/pull/914
 [#925]: https://github.com/kotools/types/issues/925
 [#952]: https://github.com/kotools/types/issues/952
 [#960]: https://github.com/kotools/types/issues/960
