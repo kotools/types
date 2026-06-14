@@ -58,9 +58,8 @@ All notable changes to this project will be documented in this file.
   names (`org.kotools.types.EmailAddress` and
   `org.kotools.types.EmailAddressRegex`) instead of the type's simple name.
   ([#966])
-- Fixed the `EmailAddress` and `EmailAddressRegex` **experimental** default
-  serializers provided by `KotoolsTypesSerializersModule()` to throw an
-  `IllegalStateException` instead of an `IllegalArgumentException` when
+- Fixed default serializers provided by `KotoolsTypesSerializersModule()` to
+  throw an `IllegalStateException` instead of an `IllegalArgumentException` when
   decoding an invalid value, aligning with the exception types recommended for
   `KSerializer` implementations. ([#990])
 
