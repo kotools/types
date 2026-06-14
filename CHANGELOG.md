@@ -24,9 +24,6 @@ All notable changes to this project will be documented in this file.
   arithmetic operators (`+`, `-`, `*`, unary `-`), comparison, and canonical
   string conversion. Division is intentionally excluded because the set of
   terminating decimals is not closed under division. ([#925])
-- Default serializer for the `Integer` **experimental** type to
-  `KotoolsTypesSerializersModule()`, serializing and deserializing it as a
-  `String` using `org.kotools.types.number.Integer` as serial name. ([#929])
 
 ### ♻️ Changed
 
@@ -72,7 +69,6 @@ All notable changes to this project will be documented in this file.
 [#912]: https://github.com/kotools/types/issues/912
 [#914]: https://github.com/kotools/types/pull/914
 [#925]: https://github.com/kotools/types/issues/925
-[#929]: https://github.com/kotools/types/issues/929
 [#952]: https://github.com/kotools/types/issues/952
 [#960]: https://github.com/kotools/types/issues/960
 [#962]: https://github.com/kotools/types/issues/962
