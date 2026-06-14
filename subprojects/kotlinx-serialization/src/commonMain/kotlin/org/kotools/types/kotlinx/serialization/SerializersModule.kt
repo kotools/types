@@ -121,9 +121,9 @@ private class IntegerAsStringSerializer : KSerializer<Integer> {
         encoder.encodeString("$value")
 
     override fun deserialize(decoder: Decoder): Integer {
-        val text: String = decoder.decodeString()
-        return checkNotNull(Integer.parseOrNull(text)) {
-            errorMessage("Invalid integer representation", text)
+        val decoded: String = decoder.decodeString()
+        return checkNotNull(Integer.parseOrNull(decoded)) {
+            errorMessage("Invalid integer representation", decoded)
         }
     }
 }
