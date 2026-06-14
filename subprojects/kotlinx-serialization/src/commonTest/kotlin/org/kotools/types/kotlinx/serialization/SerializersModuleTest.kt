@@ -171,8 +171,7 @@ class IntegerAsStringSerializerTest {
         val actual: Integer = format.decodeFromString(encoded)
 
         val text: String = encoded.trim('"')
-        val expected: Integer = Integer.parseOrNull(text)
-            ?: fail("Null integer")
+        val expected: Integer = Integer.parse(text)
         assertEquals(expected, actual)
     }
 
