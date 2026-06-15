@@ -267,4 +267,18 @@ public class IntegerJavaSample {
         } catch (ArithmeticException ignored) {
         }
     }
+
+    @Test
+    void toByte() {
+        final Integer x = Integer.fromLong(42);
+        final byte result = x.toByte();
+        if (result != 42) throw new IllegalStateException("Check failed.");
+
+        final Integer y = Integer.parse("999");
+        try {
+            y.toByte();
+            throw new IllegalStateException("Check failed.");
+        } catch (ArithmeticException ignored) {
+        }
+    }
 }

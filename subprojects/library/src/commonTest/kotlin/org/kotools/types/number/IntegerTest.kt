@@ -1088,4 +1088,31 @@ class IntegerTest {
 
         assertNull(actual, message = "Input: $value")
     }
+
+    @Test
+    fun toBytePreservesByteRepresentation(): Unit = repeatTest {
+        val range: IntRange = Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()
+        val value: Byte = Random.nextInt(range)
+            .toByte()
+        val integer: Integer = Integer.fromByte(value)
+
+        val actual: Byte = integer.toByte()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toByteFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfByteRange()
+        val integer: Integer = Integer.parse(value)
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toByte()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Byte", integer)
+        val message = "Input: $value"
+        assertEquals(expected, actual = exception.message, message)
+    }
 }

@@ -338,4 +338,16 @@ class IntegerSample {
         val y: Integer = Integer.parse("99999")
         check(y.toShortOrNull() == null)
     }
+
+    @Test
+    fun toByte() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Byte = x.toByte()
+        check(result == 42.toByte())
+
+        val y: Integer = Integer.parse("999")
+        val exception: Throwable? = runCatching { y.toByte() }
+            .exceptionOrNull()
+        check(exception is ArithmeticException)
+    }
 }

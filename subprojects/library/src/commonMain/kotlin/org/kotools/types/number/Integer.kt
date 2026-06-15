@@ -956,6 +956,41 @@ public class Integer private constructor(
         else null
     }
 
+    /**
+     * Returns the [Byte] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Byte] range
+     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toByte
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toByte
+     * </details>
+     */
+    public fun toByte(): Byte {
+        val range: LongRange =
+            Byte.MIN_VALUE.toLong()..Byte.MAX_VALUE.toLong()
+        val value: Long? = this.delegate.toLongOrNull()
+        return if (value != null && value in range) value.toByte()
+        else this.outOfRangeError("Byte")
+    }
+
     private fun outOfRangeError(targetType: String): Nothing {
         val message: String =
             errorMessage("Integer out of range for $targetType", this)
