@@ -65,7 +65,7 @@ class SerializersModuleSample {
         @Serializable
         data class Account(@Contextual val balance: Integer)
 
-        val balance: Integer = Integer.of(150)
+        val balance: Integer = Integer.fromLong(150)
         val account = Account(balance)
 
         val format = Json {

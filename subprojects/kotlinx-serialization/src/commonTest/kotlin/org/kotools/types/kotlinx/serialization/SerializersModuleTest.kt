@@ -155,7 +155,7 @@ class IntegerAsStringSerializerTest {
     fun serialize() {
         val format =
             Json { this.serializersModule = KotoolsTypesSerializersModule() }
-        val value: Integer = Integer.of(150)
+        val value: Integer = Integer.fromLong(150)
 
         val actual: String = format.encodeToString(value)
 
