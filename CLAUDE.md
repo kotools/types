@@ -137,6 +137,23 @@ merged. Enforce this by:
 - **CI wiring travels with the change it enables**, not as a follow-up
   cleanup.
 
+### Commit conventions for related API additions
+
+When an issue adds multiple related public API members (e.g. several
+`from<Type>` / `to<Type>` conversions), follow these conventions:
+
+- **One commit per public API member.** Each commit that adds or changes a
+  public API member ships its KDoc, Kotlin/Java samples, tests, and ABI dump
+  update together.
+- **Split closely-related pairs into separate commits.** A conversion and its
+  `OrNull` counterpart (e.g. `toLong()` and `toLongOrNull()`) are each their
+  own public API addition and get their own commit, even though they're
+  conceptually paired.
+- **Separate ADR documentation from changelog updates.** When an issue
+  requires both an Architecture Decision Record (ADR) and an unreleased
+  `CHANGELOG.md` update, these are two separate commits, with the ADR landing
+  first, followed by the changelog update.
+
 ## Git & Version Control
 
 - **Never commit or push in interactive/local sessions.** Do not run
