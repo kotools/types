@@ -1039,4 +1039,31 @@ class IntegerTest {
 
         assertNull(actual, message = "Input: $value")
     }
+
+    @Test
+    fun toShortPreservesShortRepresentation(): Unit = repeatTest {
+        val range: IntRange = Short.MIN_VALUE.toInt()..Short.MAX_VALUE.toInt()
+        val value: Short = Random.nextInt(range)
+            .toShort()
+        val integer: Integer = Integer.fromShort(value)
+
+        val actual: Short = integer.toShort()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toShortFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfShortRange()
+        val integer: Integer = Integer.parse(value)
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toShort()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Short", integer)
+        val message = "Input: $value"
+        assertEquals(expected, actual = exception.message, message)
+    }
 }

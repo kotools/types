@@ -885,6 +885,41 @@ public class Integer private constructor(
         return if (value != null && value in range) value.toInt() else null
     }
 
+    /**
+     * Returns the [Short] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Short] range
+     * (`Short.MIN_VALUE..Short.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toShort
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toShort
+     * </details>
+     */
+    public fun toShort(): Short {
+        val range: LongRange =
+            Short.MIN_VALUE.toLong()..Short.MAX_VALUE.toLong()
+        val value: Long? = this.delegate.toLongOrNull()
+        return if (value != null && value in range) value.toShort()
+        else this.outOfRangeError("Short")
+    }
+
     private fun outOfRangeError(targetType: String): Nothing {
         val message: String =
             errorMessage("Integer out of range for $targetType", this)

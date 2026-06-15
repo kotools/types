@@ -316,4 +316,16 @@ class IntegerSample {
         val y: Integer = Integer.parse("9999999999")
         check(y.toIntOrNull() == null)
     }
+
+    @Test
+    fun toShort() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Short = x.toShort()
+        check(result == 42.toShort())
+
+        val y: Integer = Integer.parse("99999")
+        val exception: Throwable? = runCatching { y.toShort() }
+            .exceptionOrNull()
+        check(exception is ArithmeticException)
+    }
 }

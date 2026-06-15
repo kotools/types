@@ -404,6 +404,7 @@ public final class org/kotools/types/number/Integer {
 	public final synthetic fun toIntOrNull ()Ljava/lang/Integer;
 	public final fun toLong ()J
 	public final synthetic fun toLongOrNull ()Ljava/lang/Long;
+	public final fun toShort ()S
 	public final fun toString ()Ljava/lang/String;
 	public final fun unaryMinus ()Lorg/kotools/types/number/Integer;
 }
