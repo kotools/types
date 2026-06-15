@@ -38,4 +38,4 @@ jobs:
           additional_permissions: |
             actions: read
           claude_args: |
-            --allowedTools "Bash(./gradlew *)"
+            --allowedTools "Bash(./gradlew *),Bash(git *)"

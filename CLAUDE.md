@@ -158,3 +158,8 @@ merged. Enforce this by:
     type of change.
   - `message`: a brief explanation of the change.
   - `identifier`: a reference to the issue, discussion, or PR (e.g. `#988`).
+
+  The Action may also `git fetch` and `git rebase` onto `main`, then
+  force-push, but only on its **own** `claude/issue-*` branches (e.g. to
+  pick up commits that landed on `main` after the branch was created).
+  Never rebase or force-push `main` itself.
