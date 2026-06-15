@@ -56,6 +56,23 @@ public class IntegerJavaSample {
     }
 
     @Test
+    void fromInt() {
+        final BiConsumer<java.lang.Integer, String> createsFromInt =
+                (input, expected) -> {
+                    final Integer result = Integer.fromInt(input);
+                    final boolean check =
+                            String.valueOf(result).equals(expected);
+                    if (!check) throw new IllegalStateException("Check failed.");
+                };
+
+        createsFromInt.accept(0, "0");
+        createsFromInt.accept(42, "42");
+        createsFromInt.accept(-42, "-42");
+        createsFromInt.accept(java.lang.Integer.MAX_VALUE, "2147483647");
+        createsFromInt.accept(java.lang.Integer.MIN_VALUE, "-2147483648");
+    }
+
+    @Test
     void parsing() {
         final BiConsumer<String, String> parsesTo = (input, expected) -> {
             final boolean check = String.valueOf(Integer.parse(input))

@@ -93,6 +93,20 @@ class IntegerSample {
     }
 
     @Test
+    fun fromInt() {
+        fun createsFromInt(input: Int, expected: String) {
+            val result: Integer = Integer.fromInt(input)
+            check("$result" == expected)
+        }
+
+        createsFromInt(input = 0, expected = "0")
+        createsFromInt(input = 42, expected = "42")
+        createsFromInt(input = -42, expected = "-42")
+        createsFromInt(input = Int.MAX_VALUE, expected = "2147483647")
+        createsFromInt(input = Int.MIN_VALUE, expected = "-2147483648")
+    }
+
+    @Test
     fun parsing() {
         fun parsesTo(input: String, expected: String) {
             check(Integer.parse(input).toString() == expected)

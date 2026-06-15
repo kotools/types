@@ -213,6 +213,37 @@ public class Integer private constructor(
         public fun fromShort(value: Short): Integer = of(value.toLong())
 
         /**
+         * Returns an [Integer] representing the specified [value].
+         *
+         * This function preserves the canonical representation of [value], and
+         * never fails since every [Int] value is within the range of [Integer].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerSample.fromInt
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromInt
+         * </details>
+         */
+        @JvmStatic
+        public fun fromInt(value: Int): Integer = of(value.toLong())
+
+        /**
          * Returns an [Integer] representing the number described by [value],
          * or throws [NumberFormatException] if the [value] doesn't represent an
          * integer.

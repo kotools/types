@@ -62,6 +62,17 @@ class IntegerTest {
     }
 
     @Test
+    fun fromIntPreservesIntRepresentation(): Unit = repeatTest {
+        val value: Int = Random.nextInt()
+
+        val integer: Integer = Integer.fromInt(value)
+
+        val actual: String = integer.toString()
+        val expected: String = value.toString()
+        assertEquals(expected, actual, message = "Input: $value")
+    }
+
+    @Test
     fun parsingNormalizesZero(): Unit = repeatTest {
         val value: String = Random.zeroString()
 
