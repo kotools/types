@@ -272,4 +272,16 @@ class IntegerSample {
         checkToString(input = Integer.parse("+00042"), expected = "42")
         checkToString(input = Integer.parse("-00042"), expected = "-42")
     }
+
+    @Test
+    fun toLong() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Long = x.toLong()
+        check(result == 42L)
+
+        val y: Integer = Integer.parse("99999999999999999999")
+        val exception: Throwable? = runCatching { y.toLong() }
+            .exceptionOrNull()
+        check(exception is ArithmeticException)
+    }
 }

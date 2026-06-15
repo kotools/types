@@ -949,4 +949,29 @@ class IntegerTest {
 
         assertEquals(expected = x, actual, message = "Input: $x")
     }
+
+    @Test
+    fun toLongPreservesLongRepresentation(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+        val integer: Integer = Integer.fromLong(value)
+
+        val actual: Long = integer.toLong()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toLongFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfLongRange()
+        val integer: Integer = Integer.parse(value)
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toLong()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Long", integer)
+        val message = "Input: $value"
+        assertEquals(expected, actual = exception.message, message)
+    }
 }

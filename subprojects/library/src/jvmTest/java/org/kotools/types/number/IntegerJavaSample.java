@@ -225,4 +225,18 @@ public class IntegerJavaSample {
         checkToString.accept(Integer.parse("+00042"), "42");
         checkToString.accept(Integer.parse("-00042"), "-42");
     }
+
+    @Test
+    void toLong() {
+        final Integer x = Integer.fromLong(42);
+        final long result = x.toLong();
+        if (result != 42L) throw new IllegalStateException("Check failed.");
+
+        final Integer y = Integer.parse("99999999999999999999");
+        try {
+            y.toLong();
+            throw new IllegalStateException("Check failed.");
+        } catch (ArithmeticException ignored) {
+        }
+    }
 }

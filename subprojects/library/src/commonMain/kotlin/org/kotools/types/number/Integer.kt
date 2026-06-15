@@ -756,4 +756,40 @@ public class Integer private constructor(
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = this.delegate.toString()
+
+    /**
+     * Returns the [Long] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Long] range
+     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toLong
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toLong
+     * </details>
+     */
+    public fun toLong(): Long =
+        this.delegate.toLongOrNull() ?: this.outOfRangeError("Long")
+
+    private fun outOfRangeError(targetType: String): Nothing {
+        val message: String =
+            errorMessage("Integer out of range for $targetType", this)
+        throw ArithmeticException(message)
+    }
 }
