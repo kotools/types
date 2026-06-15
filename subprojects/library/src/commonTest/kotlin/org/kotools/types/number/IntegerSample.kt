@@ -65,6 +65,20 @@ class IntegerSample {
     }
 
     @Test
+    fun fromByte() {
+        fun createsFromByte(input: Byte, expected: String) {
+            val result: Integer = Integer.fromByte(input)
+            check("$result" == expected)
+        }
+
+        createsFromByte(input = 0, expected = "0")
+        createsFromByte(input = 42, expected = "42")
+        createsFromByte(input = -42, expected = "-42")
+        createsFromByte(input = Byte.MAX_VALUE, expected = "127")
+        createsFromByte(input = Byte.MIN_VALUE, expected = "-128")
+    }
+
+    @Test
     fun parsing() {
         fun parsesTo(input: String, expected: String) {
             check(Integer.parse(input).toString() == expected)

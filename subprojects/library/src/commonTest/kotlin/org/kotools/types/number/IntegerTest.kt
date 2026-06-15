@@ -36,6 +36,19 @@ class IntegerTest {
     }
 
     @Test
+    fun fromBytePreservesByteRepresentation(): Unit = repeatTest {
+        val range: IntRange = Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()
+        val value: Byte = Random.nextInt(range)
+            .toByte()
+
+        val integer: Integer = Integer.fromByte(value)
+
+        val actual: String = integer.toString()
+        val expected: String = value.toString()
+        assertEquals(expected, actual, message = "Input: $value")
+    }
+
+    @Test
     fun parsingNormalizesZero(): Unit = repeatTest {
         val value: String = Random.zeroString()
 

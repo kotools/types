@@ -26,6 +26,21 @@ public class IntegerJavaSample {
     }
 
     @Test
+    void fromByte() {
+        final BiConsumer<Byte, String> createsFromByte = (input, expected) -> {
+            final Integer result = Integer.fromByte(input);
+            final boolean check = String.valueOf(result).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        createsFromByte.accept((byte) 0, "0");
+        createsFromByte.accept((byte) 42, "42");
+        createsFromByte.accept((byte) -42, "-42");
+        createsFromByte.accept(Byte.MAX_VALUE, "127");
+        createsFromByte.accept(Byte.MIN_VALUE, "-128");
+    }
+
+    @Test
     void parsing() {
         final BiConsumer<String, String> parsesTo = (input, expected) -> {
             final boolean check = String.valueOf(Integer.parse(input))
