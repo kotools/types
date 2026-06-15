@@ -328,4 +328,14 @@ class IntegerSample {
             .exceptionOrNull()
         check(exception is ArithmeticException)
     }
+
+    @Test
+    fun toShortOrNull() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Short? = x.toShortOrNull()
+        check(result == 42.toShort())
+
+        val y: Integer = Integer.parse("99999")
+        check(y.toShortOrNull() == null)
+    }
 }

@@ -911,6 +911,10 @@ public class Integer private constructor(
      *
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.toShort
      * </details>
+     * <br>
+     *
+     * See the [toShortOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Short] range.
      */
     public fun toShort(): Short {
         val range: LongRange =
@@ -918,6 +922,38 @@ public class Integer private constructor(
         val value: Long? = this.delegate.toLongOrNull()
         return if (value != null && value in range) value.toShort()
         else this.outOfRangeError("Short")
+    }
+
+    /**
+     * Returns the [Short] representation of this integer, or returns `null`
+     * if this integer is out of the [Short] range
+     * (`Short.MIN_VALUE..Short.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toShortOrNull
+     * </details>
+     * <br>
+     *
+     * This function is hidden from Java, because nullability is not explicit
+     * in its type system.
+     *
+     * See the [toShort] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Short] range.
+     */
+    @JvmSynthetic
+    public fun toShortOrNull(): Short? {
+        val range: LongRange =
+            Short.MIN_VALUE.toLong()..Short.MAX_VALUE.toLong()
+        val value: Long? = this.delegate.toLongOrNull()
+        return if (value != null && value in range) value.toShort()
+        else null
     }
 
     private fun outOfRangeError(targetType: String): Nothing {

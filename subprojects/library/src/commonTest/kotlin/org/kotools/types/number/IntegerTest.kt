@@ -1066,4 +1066,26 @@ class IntegerTest {
         val message = "Input: $value"
         assertEquals(expected, actual = exception.message, message)
     }
+
+    @Test
+    fun toShortOrNullPreservesShortRepresentation(): Unit = repeatTest {
+        val range: IntRange = Short.MIN_VALUE.toInt()..Short.MAX_VALUE.toInt()
+        val value: Short = Random.nextInt(range)
+            .toShort()
+        val integer: Integer = Integer.fromShort(value)
+
+        val actual: Short? = integer.toShortOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toShortOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfShortRange()
+        val integer: Integer = Integer.parse(value)
+
+        val actual: Short? = integer.toShortOrNull()
+
+        assertNull(actual, message = "Input: $value")
+    }
 }
