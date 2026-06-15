@@ -79,6 +79,20 @@ class IntegerSample {
     }
 
     @Test
+    fun fromShort() {
+        fun createsFromShort(input: Short, expected: String) {
+            val result: Integer = Integer.fromShort(input)
+            check("$result" == expected)
+        }
+
+        createsFromShort(input = 0, expected = "0")
+        createsFromShort(input = 42, expected = "42")
+        createsFromShort(input = -42, expected = "-42")
+        createsFromShort(input = Short.MAX_VALUE, expected = "32767")
+        createsFromShort(input = Short.MIN_VALUE, expected = "-32768")
+    }
+
+    @Test
     fun parsing() {
         fun parsesTo(input: String, expected: String) {
             check(Integer.parse(input).toString() == expected)

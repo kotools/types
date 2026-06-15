@@ -49,6 +49,19 @@ class IntegerTest {
     }
 
     @Test
+    fun fromShortPreservesShortRepresentation(): Unit = repeatTest {
+        val range: IntRange = Short.MIN_VALUE.toInt()..Short.MAX_VALUE.toInt()
+        val value: Short = Random.nextInt(range)
+            .toShort()
+
+        val integer: Integer = Integer.fromShort(value)
+
+        val actual: String = integer.toString()
+        val expected: String = value.toString()
+        assertEquals(expected, actual, message = "Input: $value")
+    }
+
+    @Test
     fun parsingNormalizesZero(): Unit = repeatTest {
         val value: String = Random.zeroString()
 

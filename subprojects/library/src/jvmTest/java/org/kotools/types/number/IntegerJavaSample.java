@@ -41,6 +41,21 @@ public class IntegerJavaSample {
     }
 
     @Test
+    void fromShort() {
+        final BiConsumer<Short, String> createsFromShort = (input, expected) -> {
+            final Integer result = Integer.fromShort(input);
+            final boolean check = String.valueOf(result).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        createsFromShort.accept((short) 0, "0");
+        createsFromShort.accept((short) 42, "42");
+        createsFromShort.accept((short) -42, "-42");
+        createsFromShort.accept(Short.MAX_VALUE, "32767");
+        createsFromShort.accept(Short.MIN_VALUE, "-32768");
+    }
+
+    @Test
     void parsing() {
         final BiConsumer<String, String> parsesTo = (input, expected) -> {
             final boolean check = String.valueOf(Integer.parse(input))
