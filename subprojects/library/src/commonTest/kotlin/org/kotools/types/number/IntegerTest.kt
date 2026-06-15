@@ -1115,4 +1115,26 @@ class IntegerTest {
         val message = "Input: $value"
         assertEquals(expected, actual = exception.message, message)
     }
+
+    @Test
+    fun toByteOrNullPreservesByteRepresentation(): Unit = repeatTest {
+        val range: IntRange = Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()
+        val value: Byte = Random.nextInt(range)
+            .toByte()
+        val integer: Integer = Integer.fromByte(value)
+
+        val actual: Byte? = integer.toByteOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toByteOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfByteRange()
+        val integer: Integer = Integer.parse(value)
+
+        val actual: Byte? = integer.toByteOrNull()
+
+        assertNull(actual, message = "Input: $value")
+    }
 }

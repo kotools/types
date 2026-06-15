@@ -982,6 +982,10 @@ public class Integer private constructor(
      *
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.toByte
      * </details>
+     * <br>
+     *
+     * See the [toByteOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Byte] range.
      */
     public fun toByte(): Byte {
         val range: LongRange =
@@ -989,6 +993,38 @@ public class Integer private constructor(
         val value: Long? = this.delegate.toLongOrNull()
         return if (value != null && value in range) value.toByte()
         else this.outOfRangeError("Byte")
+    }
+
+    /**
+     * Returns the [Byte] representation of this integer, or returns `null`
+     * if this integer is out of the [Byte] range
+     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toByteOrNull
+     * </details>
+     * <br>
+     *
+     * This function is hidden from Java, because nullability is not explicit
+     * in its type system.
+     *
+     * See the [toByte] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Byte] range.
+     */
+    @JvmSynthetic
+    public fun toByteOrNull(): Byte? {
+        val range: LongRange =
+            Byte.MIN_VALUE.toLong()..Byte.MAX_VALUE.toLong()
+        val value: Long? = this.delegate.toLongOrNull()
+        return if (value != null && value in range) value.toByte()
+        else null
     }
 
     private fun outOfRangeError(targetType: String): Nothing {

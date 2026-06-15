@@ -350,4 +350,14 @@ class IntegerSample {
             .exceptionOrNull()
         check(exception is ArithmeticException)
     }
+
+    @Test
+    fun toByteOrNull() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Byte? = x.toByteOrNull()
+        check(result == 42.toByte())
+
+        val y: Integer = Integer.parse("999")
+        check(y.toByteOrNull() == null)
+    }
 }
