@@ -1,7 +1,9 @@
-# 📣 Integer division teaser — Kotlin Slack cross-post
+# 📣 Integer division teaser — cross-posting
 
-Post this teaser in `#kotools`, `#multiplatform`, `#library-development`, and
-`#general`, replacing the URL below with the GitHub Discussion link.
+Post this teaser as a self (text) post on r/Kotlin (then cross-post to
+r/KotlinMultiplatform), and in `#kotools`, `#multiplatform`,
+`#library-development`, and `#general` on Kotlin Slack — replacing the URL
+below with the GitHub Discussion link.
 
 ---
 

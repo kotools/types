@@ -37,8 +37,9 @@ development between releases.
    other channels) with `canonical_url` set to the GitHub Discussion URL.
 3. **Kotlin Slack** — Post `<n>-<slug>-teaser.md` + the GitHub Discussion
    link in `#kotools`, `#feed`, and `#library-development`.
-4. **Reddit** — Link to the GitHub Discussion in r/Kotlin, then cross-post to
-   r/KotlinMultiplatform.
+4. **Reddit** — Post `<n>-<slug>-teaser.md` as a self (text) post in
+   r/Kotlin, including the GitHub Discussion link in the body as the full
+   writeup, then cross-post the same self post to r/KotlinMultiplatform.
 5. **Social media** — Short post + GitHub Discussion link, tagged `#kotlin`
    `#kmp` `#kotlinmultiplatform` `#KotlinServerSide`:
     - Twitter/X
@@ -54,8 +55,14 @@ needed.
 > lives in the project's own ecosystem, with no extra infrastructure to
 > maintain. Dev.to syndicates it via `canonical_url`, deferring its SEO
 > authority to the discussion. Reddit and social platforms don't support
-> canonical tags, but since they only link out (never host a copy of the full
-> text), this doesn't create duplicate-content issues.
+> canonical tags, but since they only link out or post short teasers (never
+> host a copy of the full text), this doesn't create duplicate-content issues.
+
+> **r/Kotlin format:** A bare link post for article 1 was removed by
+> AutoModerator with no reason given — likely its link-spam/self-promotion
+> filter for an external link with no surrounding text. Posting the teaser as
+> a self (text) post, with the GitHub Discussion link in the body, avoids
+> this.
 
 ## 📊 Publishing status
 
