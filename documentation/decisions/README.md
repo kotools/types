@@ -19,6 +19,7 @@ rationale behind it, and its consequences.
 | [ADR-009](ADR-009-default-serializer-serial-names.md)     | Explicit serial names for default serializers       | ✅ Accepted               |
 | [ADR-010](ADR-010-error-message-format.md)                | Error message format for `org.kotools.types`        | ✅ Accepted               |
 | [ADR-011](ADR-011-error-message-quote-escaping.md)        | String value quote escaping for `org.kotools.types` | ✅ Accepted               |
+| [ADR-012](ADR-012-integer-conversion-range-errors.md)     | Out-of-range error handling for `Integer` conversions | ✅ Accepted             |
 
 ## 🔄 Superseding records
 
