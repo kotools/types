@@ -974,4 +974,24 @@ class IntegerTest {
         val message = "Input: $value"
         assertEquals(expected, actual = exception.message, message)
     }
+
+    @Test
+    fun toLongOrNullPreservesLongRepresentation(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+        val integer: Integer = Integer.fromLong(value)
+
+        val actual: Long? = integer.toLongOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toLongOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfLongRange()
+        val integer: Integer = Integer.parse(value)
+
+        val actual: Long? = integer.toLongOrNull()
+
+        assertNull(actual, message = "Input: $value")
+    }
 }

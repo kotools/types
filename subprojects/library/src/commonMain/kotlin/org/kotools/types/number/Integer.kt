@@ -783,9 +783,39 @@ public class Integer private constructor(
      *
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.toLong
      * </details>
+     * <br>
+     *
+     * See the [toLongOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Long] range.
      */
     public fun toLong(): Long =
         this.delegate.toLongOrNull() ?: this.outOfRangeError("Long")
+
+    /**
+     * Returns the [Long] representation of this integer, or returns `null`
+     * if this integer is out of the [Long] range
+     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toLongOrNull
+     * </details>
+     * <br>
+     *
+     * This function is hidden from Java, because nullability is not explicit
+     * in its type system.
+     *
+     * See the [toLong] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Long] range.
+     */
+    @JvmSynthetic
+    public fun toLongOrNull(): Long? = this.delegate.toLongOrNull()
 
     private fun outOfRangeError(targetType: String): Nothing {
         val message: String =
