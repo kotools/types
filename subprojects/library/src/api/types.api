@@ -401,6 +401,7 @@ public final class org/kotools/types/number/Integer {
 	public final synthetic fun remOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun times (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun toInt ()I
+	public final synthetic fun toIntOrNull ()Ljava/lang/Integer;
 	public final fun toLong ()J
 	public final synthetic fun toLongOrNull ()Ljava/lang/Long;
 	public final fun toString ()Ljava/lang/String;

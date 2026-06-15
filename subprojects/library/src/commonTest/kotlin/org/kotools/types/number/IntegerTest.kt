@@ -1019,4 +1019,24 @@ class IntegerTest {
         val message = "Input: $value"
         assertEquals(expected, actual = exception.message, message)
     }
+
+    @Test
+    fun toIntOrNullPreservesIntRepresentation(): Unit = repeatTest {
+        val value: Int = Random.nextInt()
+        val integer: Integer = Integer.fromInt(value)
+
+        val actual: Int? = integer.toIntOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toIntOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfIntRange()
+        val integer: Integer = Integer.parse(value)
+
+        val actual: Int? = integer.toIntOrNull()
+
+        assertNull(actual, message = "Input: $value")
+    }
 }

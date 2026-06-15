@@ -843,12 +843,46 @@ public class Integer private constructor(
      *
      * SAMPLE: org.kotools.types.number.IntegerJavaSample.toInt
      * </details>
+     * <br>
+     *
+     * See the [toIntOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Int] range.
      */
     public fun toInt(): Int {
         val range: LongRange = Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong()
         val value: Long? = this.delegate.toLongOrNull()
         return if (value != null && value in range) value.toInt()
         else this.outOfRangeError("Int")
+    }
+
+    /**
+     * Returns the [Int] representation of this integer, or returns `null` if
+     * this integer is out of the [Int] range
+     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toIntOrNull
+     * </details>
+     * <br>
+     *
+     * This function is hidden from Java, because nullability is not explicit
+     * in its type system.
+     *
+     * See the [toInt] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Int] range.
+     */
+    @JvmSynthetic
+    public fun toIntOrNull(): Int? {
+        val range: LongRange = Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong()
+        val value: Long? = this.delegate.toLongOrNull()
+        return if (value != null && value in range) value.toInt() else null
     }
 
     private fun outOfRangeError(targetType: String): Nothing {
