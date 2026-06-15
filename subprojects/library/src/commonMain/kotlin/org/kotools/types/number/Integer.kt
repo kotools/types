@@ -817,6 +817,40 @@ public class Integer private constructor(
     @JvmSynthetic
     public fun toLongOrNull(): Long? = this.delegate.toLongOrNull()
 
+    /**
+     * Returns the [Int] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Int] range
+     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toInt
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toInt
+     * </details>
+     */
+    public fun toInt(): Int {
+        val range: LongRange = Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong()
+        val value: Long? = this.delegate.toLongOrNull()
+        return if (value != null && value in range) value.toInt()
+        else this.outOfRangeError("Int")
+    }
+
     private fun outOfRangeError(targetType: String): Nothing {
         val message: String =
             errorMessage("Integer out of range for $targetType", this)

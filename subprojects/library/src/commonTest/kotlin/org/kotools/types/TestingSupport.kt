@@ -128,6 +128,20 @@ internal fun Random.integerStringOutOfLongRange(): String {
     return "$sign$builder"
 }
 
+internal fun Random.integerStringOutOfIntRange(): String {
+    val sign: String = listOf("", "+", "-").random()
+    val length: Int = this.nextInt(11..18)
+    val builder = StringBuilder(length)
+
+    builder.append((1..9).random())
+    repeat(times = length - 1) {
+        val digit: Int = (0..9).random()
+        builder.append(digit)
+    }
+
+    return "$sign$builder"
+}
+
 internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
     val prefix: String = this.zeroString()
     val suffix: String = this.positiveIntegerString()

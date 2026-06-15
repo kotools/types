@@ -994,4 +994,29 @@ class IntegerTest {
 
         assertNull(actual, message = "Input: $value")
     }
+
+    @Test
+    fun toIntPreservesIntRepresentation(): Unit = repeatTest {
+        val value: Int = Random.nextInt()
+        val integer: Integer = Integer.fromInt(value)
+
+        val actual: Int = integer.toInt()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toIntFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val value: String = Random.integerStringOutOfIntRange()
+        val integer: Integer = Integer.parse(value)
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toInt()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Int", integer)
+        val message = "Input: $value"
+        assertEquals(expected, actual = exception.message, message)
+    }
 }
