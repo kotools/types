@@ -41,6 +41,10 @@ All notable changes to this project will be documented in this file.
   `org.kotools.types.*` (`Decimal`, `Integer`, `EmailAddressRegex`, and the
   `kotlinx-serialization` serializers) to follow a consistent
   `<description>: <value>` structure. ([#988])
+- Optimized `parse` and `toString` in the Kotlin/Native implementation of
+  `Integer` **experimental** type to process decimal digits in batches of 9
+  (10⁹ per step) instead of one digit at a time, reducing iteration count
+  ~9×. ([#989])
 
 ### 🔥 Removed
 
@@ -74,6 +78,7 @@ All notable changes to this project will be documented in this file.
 [#962]: https://github.com/kotools/types/issues/962
 [#966]: https://github.com/kotools/types/issues/966
 [#988]: https://github.com/kotools/types/issues/988
+[#989]: https://github.com/kotools/types/issues/989
 [#990]: https://github.com/kotools/types/issues/990
 
 ## 🔖 Releases
