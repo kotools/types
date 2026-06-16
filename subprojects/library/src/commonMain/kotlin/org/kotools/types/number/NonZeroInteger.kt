@@ -237,6 +237,57 @@ public class NonZeroInteger private constructor(private val value: Integer) {
         @JvmSynthetic
         public fun fromIntOrNull(value: Int): NonZeroInteger? =
             fromIntegerOrNull(Integer.of(value.toLong()))
+
+        /**
+         * Returns a [NonZeroInteger] from the specified [value], or throws an
+         * [IllegalArgumentException] if [value] is zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromLong
+         * </details>
+         * <br>
+         *
+         * See the [fromLongOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [value].
+         */
+        @JvmStatic
+        public fun fromLong(value: Long): NonZeroInteger =
+            fromLongOrNull(value) ?: throw IllegalArgumentException(
+                errorMessage("Value must be non-zero", value)
+            )
+
+        /**
+         * Returns a [NonZeroInteger] from the specified [value], or returns
+         * `null` if [value] is zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromLongOrNull
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromLong] function for throwing an exception instead of
+         * returning `null` in case of invalid [value].
+         */
+        @JvmSynthetic
+        public fun fromLongOrNull(value: Long): NonZeroInteger? =
+            fromIntegerOrNull(Integer.of(value))
     }
 
     // ------------------------------ Comparisons ------------------------------
