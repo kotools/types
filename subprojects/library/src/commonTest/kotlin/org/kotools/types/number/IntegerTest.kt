@@ -912,4 +912,32 @@ class IntegerTest {
 
         assertEquals(expected = x, actual, message = "Input: $x")
     }
+
+    @Test
+    fun parseAndToStringWithNineDigitInteger() {
+        val value = "123456789"
+        val actual: String = Integer.parse(value).toString()
+        assertEquals(expected = value, actual)
+    }
+
+    @Test
+    fun parseAndToStringWithTenDigitInteger() {
+        val value = "1234567890"
+        val actual: String = Integer.parse(value).toString()
+        assertEquals(expected = value, actual)
+    }
+
+    @Test
+    fun parseAndToStringWithEighteenDigitInteger() {
+        val value = "123456789123456789"
+        val actual: String = Integer.parse(value).toString()
+        assertEquals(expected = value, actual)
+    }
+
+    @Test
+    fun parseAndToStringWithLargeNegativeInteger() {
+        val value = "-99999999999999999999"
+        val actual: String = Integer.parse(value).toString()
+        assertEquals(expected = value, actual)
+    }
 }
