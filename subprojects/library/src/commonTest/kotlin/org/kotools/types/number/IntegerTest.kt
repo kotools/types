@@ -3,6 +3,10 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.integer
 import org.kotools.types.integerExcept
+import org.kotools.types.integerStringOutOfByteRange
+import org.kotools.types.integerStringOutOfIntRange
+import org.kotools.types.integerStringOutOfLongRange
+import org.kotools.types.integerStringOutOfShortRange
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
@@ -11,6 +15,7 @@ import org.kotools.types.positiveIntegerString
 import org.kotools.types.repeatTest
 import org.kotools.types.zeroString
 import kotlin.random.Random
+import kotlin.random.nextInt
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -37,7 +42,7 @@ class IntegerTest {
 
     @Test
     fun fromBytePreservesByteRepresentation(): Unit = repeatTest {
-        val range: IntRange = Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()
+        val range: IntRange = Byte.MIN_VALUE..Byte.MAX_VALUE
         val value: Byte = Random.nextInt(range)
             .toByte()
 
