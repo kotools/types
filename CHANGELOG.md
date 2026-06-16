@@ -18,6 +18,15 @@ All notable changes to this project will be documented in this file.
 
 ### ✨ Added
 
+- `NonZeroInteger` **experimental** type to `org.kotools.types.number` package,
+  representing an integer other than zero. Supports creation from an [Integer]
+  via `fromInteger`/`fromIntegerOrNull`, from `Byte`, `Short`, `Int` and `Long`
+  primitives via `fromByte`/`fromShort`/`fromInt`/`fromLong` (and their `OrNull`
+  counterparts), and from a `String` via `parse`/`parseOrNull`. Factory functions
+  throw `IllegalArgumentException` (or return `null`) when the value represents
+  zero, and `parse` additionally propagates `NumberFormatException` for
+  non-integer strings. Includes structural equality and string conversion
+  delegating to `Integer`. ([#997])
 - `Decimal` **experimental** type to `org.kotools.types.number` package,
   representing mathematical decimal numbers with exact arithmetic. Supports
   creation via `of(Long)`, `parse(String)` and `parseOrNull(String)`,
@@ -64,6 +73,7 @@ All notable changes to this project will be documented in this file.
   `KSerializer` implementations. ([#990])
 
 [@daniel-rusu]: https://github.com/daniel-rusu
+[#997]: https://github.com/kotools/types/issues/997
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
 [#912]: https://github.com/kotools/types/issues/912
