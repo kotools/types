@@ -143,6 +143,8 @@ public class Integer private constructor(
          *
          * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromByte
          * </details>
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun fromByte(value: Byte): Integer {
@@ -178,6 +180,8 @@ public class Integer private constructor(
          *
          * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromShort
          * </details>
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun fromShort(value: Short): Integer {
@@ -212,6 +216,8 @@ public class Integer private constructor(
          *
          * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromInt
          * </details>
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun fromInt(value: Int): Integer {
@@ -247,6 +253,8 @@ public class Integer private constructor(
          *
          * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromLong
          * </details>
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun fromLong(value: Long): Integer {
@@ -299,6 +307,8 @@ public class Integer private constructor(
          *
          * See the [parseOrNull] function for returning `null` instead of
          * throwing an exception in case of invalid [value].
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun parse(value: String): Integer {
@@ -348,6 +358,8 @@ public class Integer private constructor(
          *
          * See the [parse] function for throwing an exception instead of
          * returning `null` in case of invalid [value].
+         *
+         * @since 5.2.0
          */
         @JvmSynthetic
         public fun parseOrNull(value: String): Integer? {
@@ -767,6 +779,8 @@ public class Integer private constructor(
      *
      * See the [toByteOrNull] function for returning `null` instead of
      * throwing an exception if this integer is out of the [Byte] range.
+     *
+     * @since 5.2.0
      */
     public fun toByte(): Byte = this.toByteOrNull()
         ?: this.outOfRangeError<Byte>()
@@ -793,6 +807,8 @@ public class Integer private constructor(
      *
      * See the [toByte] function for throwing an exception instead of
      * returning `null` if this integer is out of the [Byte] range.
+     *
+     * @since 5.2.0
      */
     @JvmSynthetic
     public fun toByteOrNull(): Byte? {
@@ -831,6 +847,8 @@ public class Integer private constructor(
      *
      * See the [toShortOrNull] function for returning `null` instead of
      * throwing an exception if this integer is out of the [Short] range.
+     *
+     * @since 5.2.0
      */
     public fun toShort(): Short = this.toShortOrNull()
         ?: this.outOfRangeError<Short>()
@@ -857,6 +875,8 @@ public class Integer private constructor(
      *
      * See the [toShort] function for throwing an exception instead of
      * returning `null` if this integer is out of the [Short] range.
+     *
+     * @since 5.2.0
      */
     @JvmSynthetic
     public fun toShortOrNull(): Short? {
@@ -896,6 +916,8 @@ public class Integer private constructor(
      *
      * See the [toIntOrNull] function for returning `null` instead of
      * throwing an exception if this integer is out of the [Int] range.
+     *
+     * @since 5.2.0
      */
     public fun toInt(): Int = this.toIntOrNull() ?: this.outOfRangeError<Int>()
 
@@ -919,8 +941,10 @@ public class Integer private constructor(
      * This function is hidden from Java, because nullability is not explicit
      * in its type system.
      *
-     * See the [toInt] function for throwing an exception instead of
-     * returning `null` if this integer is out of the [Int] range.
+     * See the [toInt] function for throwing an exception instead of returning
+     * `null` if this integer is out of the [Int] range.
+     *
+     * @since 5.2.0
      */
     @JvmSynthetic
     public fun toIntOrNull(): Int? {
@@ -957,8 +981,10 @@ public class Integer private constructor(
      * </details>
      * <br>
      *
-     * See the [toLongOrNull] function for returning `null` instead of
-     * throwing an exception if this integer is out of the [Long] range.
+     * See the [toLongOrNull] function for returning `null` instead of throwing
+     * an exception if this integer is out of the [Long] range.
+     *
+     * @since 5.2.0
      */
     public fun toLong(): Long = this.toLongOrNull()
         ?: this.outOfRangeError<Long>()
@@ -983,8 +1009,10 @@ public class Integer private constructor(
      * This function is hidden from Java, because nullability is not explicit
      * in its type system.
      *
-     * See the [toLong] function for throwing an exception instead of
-     * returning `null` if this integer is out of the [Long] range.
+     * See the [toLong] function for throwing an exception instead of returning
+     * `null` if this integer is out of the [Long] range.
+     *
+     * @since 5.2.0
      */
     @JvmSynthetic
     public fun toLongOrNull(): Long? = this.delegate.toLongOrNull()
