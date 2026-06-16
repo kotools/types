@@ -84,6 +84,57 @@ public class NonZeroInteger private constructor(private val value: Integer) {
         @JvmSynthetic
         public fun fromIntegerOrNull(value: Integer): NonZeroInteger? =
             if (value == Integer.of(0)) null else NonZeroInteger(value)
+
+        /**
+         * Returns a [NonZeroInteger] from the specified [value], or throws an
+         * [IllegalArgumentException] if [value] is zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromByte
+         * </details>
+         * <br>
+         *
+         * See the [fromByteOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [value].
+         */
+        @JvmStatic
+        public fun fromByte(value: Byte): NonZeroInteger =
+            fromByteOrNull(value) ?: throw IllegalArgumentException(
+                errorMessage("Value must be non-zero", value)
+            )
+
+        /**
+         * Returns a [NonZeroInteger] from the specified [value], or returns
+         * `null` if [value] is zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromByteOrNull
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromByte] function for throwing an exception instead of
+         * returning `null` in case of invalid [value].
+         */
+        @JvmSynthetic
+        public fun fromByteOrNull(value: Byte): NonZeroInteger? =
+            fromIntegerOrNull(Integer.of(value.toLong()))
     }
 
     // ------------------------------ Comparisons ------------------------------

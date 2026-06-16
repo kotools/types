@@ -31,6 +31,30 @@ class NonZeroIntegerSample {
         check(NonZeroInteger.fromIntegerOrNull(zero) == null)
     }
 
+    @Test
+    fun fromByte() {
+        val value: Byte = 42
+        val result: NonZeroInteger = NonZeroInteger.fromByte(value)
+        check(result.toString() == "42")
+
+        val zero: Byte = 0
+        val exception: Throwable? = runCatching {
+            NonZeroInteger.fromByte(zero)
+        }.exceptionOrNull()
+        check(exception is IllegalArgumentException)
+    }
+
+    @Test
+    fun fromByteOrNull() {
+        val value: Byte = 42
+        val result: NonZeroInteger? = NonZeroInteger.fromByteOrNull(value)
+        checkNotNull(result)
+        check(result.toString() == "42")
+
+        val zero: Byte = 0
+        check(NonZeroInteger.fromByteOrNull(zero) == null)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test
