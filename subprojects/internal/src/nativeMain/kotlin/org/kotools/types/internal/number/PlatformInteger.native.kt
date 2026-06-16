@@ -64,20 +64,23 @@ private class NativeInteger private constructor(
             val digits: String = if (isNegative) value.substring(1) else value
             if (digits == "0") return ZERO
 
-            var tmpMag = UIntArray(0)
-            digits.forEach {
-                val x: UIntArray = tmpMag * uintArrayOf(10u)
-                val y: UIntArray = uintArrayOf(it.digitToInt().toUInt())
-                tmpMag = x + y
+            val firstLen: Int =
+                if (digits.length % 9 == 0) 9 else digits.length % 9
+            var tmpMag: UIntArray =
+                uintArrayOf(digits.substring(0, firstLen).toUInt())
+            var i = firstLen
+            while (i < digits.length) {
+                val chunk: UInt = digits.substring(i, i + 9).toUInt()
+                tmpMag = tmpMag * BILLION + uintArrayOf(chunk)
+                i += 9
             }
-            val magnitude: UIntArray = tmpMag.trimLeadingZeros()
 
+            val magnitude: UIntArray = tmpMag.trimLeadingZeros()
             val sign: IntegerSign = when {
                 magnitude.isEmpty() -> IntegerSign.Zero
                 isNegative -> IntegerSign.Negative
                 else -> IntegerSign.Positive
             }
-
             return NativeInteger(magnitude, sign)
         }
     }
@@ -178,16 +181,22 @@ private class NativeInteger private constructor(
 
     override fun toString(): String {
         if (this.sign == IntegerSign.Zero) return "0"
-        val builder = StringBuilder()
+
+        val chunks = mutableListOf<Int>()
         var remaining: UIntArray = this.magnitude
         while (remaining.isNotEmpty()) {
-            val (quotient: UIntArray, digit: Int) = remaining.divideByTen()
-            builder.append(digit)
-            remaining = quotient.trimLeadingZeros()
+            val (quotient: UIntArray, chunk: Int) = remaining.divideByBillion()
+            chunks.add(chunk)
+            remaining = quotient
         }
+
+        val builder = StringBuilder()
         if (this.sign == IntegerSign.Negative) builder.append('-')
+        builder.append(chunks.last())
+        (chunks.size - 2 downTo 0).forEach {
+            builder.append(chunks[it].toString().padStart(9, '0'))
+        }
         return builder.toString()
-            .reversed()
     }
 }
 
@@ -315,14 +324,15 @@ private fun UIntArray.shiftRight(bits: Int): UIntArray {
     return result.trimLeadingZeros()
 }
 
-private fun UIntArray.divideByTen(): Pair<UIntArray, Int> {
+private val BILLION: UIntArray = uintArrayOf(1_000_000_000u)
+
+private fun UIntArray.divideByBillion(): Pair<UIntArray, Int> {
     val result = UIntArray(this.size)
     var remainder = 0L
-    this.indices.reversed()
-        .forEach {
-            val current: Long = (remainder shl 32) or this[it].toLong()
-            result[it] = (current / 10L).toUInt()
-            remainder = current % 10L
-        }
+    this.indices.reversed().forEach {
+        val current: Long = (remainder shl 32) or this[it].toLong()
+        result[it] = (current / 1_000_000_000L).toUInt()
+        remainder = current % 1_000_000_000L
+    }
     return result.trimLeadingZeros() to remainder.toInt()
 }
