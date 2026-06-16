@@ -413,6 +413,7 @@ public final class org/kotools/types/number/NonZeroInteger {
 	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromByte (B)Lorg/kotools/types/number/NonZeroInteger;
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
+	public static final fun fromShort (S)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun hashCode ()I
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
@@ -423,5 +424,7 @@ public final class org/kotools/types/number/NonZeroInteger$Companion {
 	public final synthetic fun fromByteOrNull (B)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
 	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
+	public final fun fromShort (S)Lorg/kotools/types/number/NonZeroInteger;
+	public final synthetic fun fromShortOrNull (S)Lorg/kotools/types/number/NonZeroInteger;
 }
 
