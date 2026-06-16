@@ -738,10 +738,9 @@ public class Integer private constructor(
     // ------------------------------ Conversions ------------------------------
 
     /**
-     * Returns the decimal string representation of this integer.
-     *
-     * The resulting string is always canonical (no leading plus sign and
-     * zeros).
+     * Returns the [Byte] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Byte] range
+     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
      *
      * <br>
      * <details>
@@ -751,7 +750,7 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toStringOverride
+     * SAMPLE: org.kotools.types.number.IntegerSample.toByte
      * </details>
      *
      * <br>
@@ -762,16 +761,20 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toStringOverride
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toByte
      * </details>
+     * <br>
+     *
+     * See the [toByteOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Byte] range.
      */
-    @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = this.delegate.toString()
+    public fun toByte(): Byte = this.toByteOrNull()
+        ?: this.outOfRangeError<Byte>()
 
     /**
-     * Returns the [Long] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Long] range
-     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     * Returns the [Byte] representation of this integer, or returns `null`
+     * if this integer is out of the [Byte] range
+     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
      *
      * <br>
      * <details>
@@ -781,119 +784,21 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toLong
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toLong
-     * </details>
-     * <br>
-     *
-     * See the [toLongOrNull] function for returning `null` instead of
-     * throwing an exception if this integer is out of the [Long] range.
-     */
-    public fun toLong(): Long =
-        this.delegate.toLongOrNull() ?: this.outOfRangeError("Long")
-
-    /**
-     * Returns the [Long] representation of this integer, or returns `null`
-     * if this integer is out of the [Long] range
-     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toLongOrNull
+     * SAMPLE: org.kotools.types.number.IntegerSample.toByteOrNull
      * </details>
      * <br>
      *
      * This function is hidden from Java, because nullability is not explicit
      * in its type system.
      *
-     * See the [toLong] function for throwing an exception instead of
-     * returning `null` if this integer is out of the [Long] range.
+     * See the [toByte] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Byte] range.
      */
     @JvmSynthetic
-    public fun toLongOrNull(): Long? = this.delegate.toLongOrNull()
-
-    /**
-     * Returns the [Int] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Int] range
-     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toInt
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toInt
-     * </details>
-     * <br>
-     *
-     * See the [toIntOrNull] function for returning `null` instead of
-     * throwing an exception if this integer is out of the [Int] range.
-     */
-    public fun toInt(): Int {
-        val range: LongRange = Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong()
-        val value: Long? = this.delegate.toLongOrNull()
-        return if (value != null && value in range) value.toInt()
-        else this.outOfRangeError("Int")
-    }
-
-    /**
-     * Returns the [Int] representation of this integer, or returns `null` if
-     * this integer is out of the [Int] range
-     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toIntOrNull
-     * </details>
-     * <br>
-     *
-     * This function is hidden from Java, because nullability is not explicit
-     * in its type system.
-     *
-     * See the [toInt] function for throwing an exception instead of
-     * returning `null` if this integer is out of the [Int] range.
-     */
-    @JvmSynthetic
-    public fun toIntOrNull(): Int? {
-        val range: LongRange = Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong()
-        val value: Long? = this.delegate.toLongOrNull()
-        return if (value != null && value in range) value.toInt() else null
+    public fun toByteOrNull(): Byte? {
+        val value: Long = this.delegate.toLongOrNull() ?: return null
+        val range: LongRange = Byte.MIN_VALUE.toLong()..Byte.MAX_VALUE.toLong()
+        return if (value in range) value.toByte() else null
     }
 
     /**
@@ -927,13 +832,8 @@ public class Integer private constructor(
      * See the [toShortOrNull] function for returning `null` instead of
      * throwing an exception if this integer is out of the [Short] range.
      */
-    public fun toShort(): Short {
-        val range: LongRange =
-            Short.MIN_VALUE.toLong()..Short.MAX_VALUE.toLong()
-        val value: Long? = this.delegate.toLongOrNull()
-        return if (value != null && value in range) value.toShort()
-        else this.outOfRangeError("Short")
-    }
+    public fun toShort(): Short = this.toShortOrNull()
+        ?: this.outOfRangeError<Short>()
 
     /**
      * Returns the [Short] representation of this integer, or returns `null`
@@ -960,17 +860,16 @@ public class Integer private constructor(
      */
     @JvmSynthetic
     public fun toShortOrNull(): Short? {
+        val value: Long = this.delegate.toLongOrNull() ?: return null
         val range: LongRange =
             Short.MIN_VALUE.toLong()..Short.MAX_VALUE.toLong()
-        val value: Long? = this.delegate.toLongOrNull()
-        return if (value != null && value in range) value.toShort()
-        else null
+        return if (value in range) value.toShort() else null
     }
 
     /**
-     * Returns the [Byte] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Byte] range
-     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
+     * Returns the [Int] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Int] range
+     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
      *
      * <br>
      * <details>
@@ -980,7 +879,7 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toByte
+     * SAMPLE: org.kotools.types.number.IntegerSample.toInt
      * </details>
      *
      * <br>
@@ -991,25 +890,19 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toByte
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toInt
      * </details>
      * <br>
      *
-     * See the [toByteOrNull] function for returning `null` instead of
-     * throwing an exception if this integer is out of the [Byte] range.
+     * See the [toIntOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Int] range.
      */
-    public fun toByte(): Byte {
-        val range: LongRange =
-            Byte.MIN_VALUE.toLong()..Byte.MAX_VALUE.toLong()
-        val value: Long? = this.delegate.toLongOrNull()
-        return if (value != null && value in range) value.toByte()
-        else this.outOfRangeError("Byte")
-    }
+    public fun toInt(): Int = this.toIntOrNull() ?: this.outOfRangeError<Int>()
 
     /**
-     * Returns the [Byte] representation of this integer, or returns `null`
-     * if this integer is out of the [Byte] range
-     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
+     * Returns the [Int] representation of this integer, or returns `null` if
+     * this integer is out of the [Int] range
+     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
      *
      * <br>
      * <details>
@@ -1019,28 +912,118 @@ public class Integer private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.IntegerSample.toByteOrNull
+     * SAMPLE: org.kotools.types.number.IntegerSample.toIntOrNull
      * </details>
      * <br>
      *
      * This function is hidden from Java, because nullability is not explicit
      * in its type system.
      *
-     * See the [toByte] function for throwing an exception instead of
-     * returning `null` if this integer is out of the [Byte] range.
+     * See the [toInt] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Int] range.
      */
     @JvmSynthetic
-    public fun toByteOrNull(): Byte? {
-        val range: LongRange =
-            Byte.MIN_VALUE.toLong()..Byte.MAX_VALUE.toLong()
-        val value: Long? = this.delegate.toLongOrNull()
-        return if (value != null && value in range) value.toByte()
-        else null
+    public fun toIntOrNull(): Int? {
+        val value: Long = this.delegate.toLongOrNull() ?: return null
+        val range: LongRange = Int.MIN_VALUE.toLong()..Int.MAX_VALUE.toLong()
+        return if (value in range) value.toInt() else null
     }
 
-    private fun outOfRangeError(targetType: String): Nothing {
+    /**
+     * Returns the [Long] representation of this integer, or throws an
+     * [ArithmeticException] if this integer is out of the [Long] range
+     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toLong
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toLong
+     * </details>
+     * <br>
+     *
+     * See the [toLongOrNull] function for returning `null` instead of
+     * throwing an exception if this integer is out of the [Long] range.
+     */
+    public fun toLong(): Long = this.toLongOrNull()
+        ?: this.outOfRangeError<Long>()
+
+    /**
+     * Returns the [Long] representation of this integer, or returns `null`
+     * if this integer is out of the [Long] range
+     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toLongOrNull
+     * </details>
+     * <br>
+     *
+     * This function is hidden from Java, because nullability is not explicit
+     * in its type system.
+     *
+     * See the [toLong] function for throwing an exception instead of
+     * returning `null` if this integer is out of the [Long] range.
+     */
+    @JvmSynthetic
+    public fun toLongOrNull(): Long? = this.delegate.toLongOrNull()
+
+    private inline fun <reified T : Number> outOfRangeError(): Nothing {
+        val type: String? = T::class.simpleName
         val message: String =
-            errorMessage("Integer out of range for $targetType", this)
+            errorMessage("Integer out of range for $type", this)
         throw ArithmeticException(message)
     }
+
+    /**
+     * Returns the decimal string representation of this integer.
+     *
+     * The resulting string is always canonical (no leading plus sign and
+     * zeros).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toStringOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toStringOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = this.delegate.toString()
 }

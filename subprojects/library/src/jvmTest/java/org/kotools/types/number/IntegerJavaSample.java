@@ -210,45 +210,14 @@ public class IntegerJavaSample {
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    void toStringOverride() {
-        final BiConsumer<Integer, String> checkToString = (input, expected) -> {
-            final boolean check = String.valueOf(input).equals(expected);
-            if (!check) throw new IllegalStateException("Check failed.");
-        };
-
-        checkToString.accept(Integer.fromLong(0), "0");
-        checkToString.accept(Integer.parse("+0"), "0");
-        checkToString.accept(Integer.parse("-0"), "0");
-        checkToString.accept(Integer.parse("+42"), "42");
-        checkToString.accept(Integer.fromLong(-42), "-42");
-        checkToString.accept(Integer.parse("00042"), "42");
-        checkToString.accept(Integer.parse("+00042"), "42");
-        checkToString.accept(Integer.parse("-00042"), "-42");
-    }
-
-    @Test
-    void toLong() {
+    void toByte() {
         final Integer x = Integer.fromLong(42);
-        final long result = x.toLong();
-        if (result != 42L) throw new IllegalStateException("Check failed.");
-
-        final Integer y = Integer.parse("99999999999999999999");
-        try {
-            y.toLong();
-            throw new IllegalStateException("Check failed.");
-        } catch (ArithmeticException ignored) {
-        }
-    }
-
-    @Test
-    void toInt() {
-        final Integer x = Integer.fromLong(42);
-        final int result = x.toInt();
+        final byte result = x.toByte();
         if (result != 42) throw new IllegalStateException("Check failed.");
 
-        final Integer y = Integer.parse("9999999999");
+        final Integer y = Integer.parse("999");
         try {
-            y.toInt();
+            y.toByte();
             throw new IllegalStateException("Check failed.");
         } catch (ArithmeticException ignored) {
         }
@@ -269,16 +238,47 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void toByte() {
+    void toInt() {
         final Integer x = Integer.fromLong(42);
-        final byte result = x.toByte();
+        final int result = x.toInt();
         if (result != 42) throw new IllegalStateException("Check failed.");
 
-        final Integer y = Integer.parse("999");
+        final Integer y = Integer.parse("9999999999");
         try {
-            y.toByte();
+            y.toInt();
             throw new IllegalStateException("Check failed.");
         } catch (ArithmeticException ignored) {
         }
+    }
+
+    @Test
+    void toLong() {
+        final Integer x = Integer.fromLong(42);
+        final long result = x.toLong();
+        if (result != 42L) throw new IllegalStateException("Check failed.");
+
+        final Integer y = Integer.parse("99999999999999999999");
+        try {
+            y.toLong();
+            throw new IllegalStateException("Check failed.");
+        } catch (ArithmeticException ignored) {
+        }
+    }
+
+    @Test
+    void toStringOverride() {
+        final BiConsumer<Integer, String> checkToString = (input, expected) -> {
+            final boolean check = String.valueOf(input).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        checkToString.accept(Integer.fromLong(0), "0");
+        checkToString.accept(Integer.parse("+0"), "0");
+        checkToString.accept(Integer.parse("-0"), "0");
+        checkToString.accept(Integer.parse("+42"), "42");
+        checkToString.accept(Integer.fromLong(-42), "-42");
+        checkToString.accept(Integer.parse("00042"), "42");
+        checkToString.accept(Integer.parse("+00042"), "42");
+        checkToString.accept(Integer.parse("-00042"), "-42");
     }
 }

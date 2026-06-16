@@ -257,64 +257,25 @@ class IntegerSample {
     // ------------------------------ Conversions ------------------------------
 
     @Test
-    fun toStringOverride() {
-        fun checkToString(input: Integer, expected: String) {
-            val result: String = input.toString()
-            check(result == expected)
-        }
-
-        checkToString(input = Integer.fromLong(0), expected = "0")
-        checkToString(input = Integer.parse("+0"), expected = "0")
-        checkToString(input = Integer.parse("-0"), expected = "0")
-        checkToString(input = Integer.parse("+42"), expected = "42")
-        checkToString(input = Integer.fromLong(-42), expected = "-42")
-        checkToString(input = Integer.parse("00042"), expected = "42")
-        checkToString(input = Integer.parse("+00042"), expected = "42")
-        checkToString(input = Integer.parse("-00042"), expected = "-42")
-    }
-
-    @Test
-    fun toLong() {
+    fun toByte() {
         val x: Integer = Integer.fromLong(42)
-        val result: Long = x.toLong()
-        check(result == 42L)
+        val result: Byte = x.toByte()
+        check(result == 42.toByte())
 
-        val y: Integer = Integer.parse("99999999999999999999")
-        val exception: Throwable? = runCatching { y.toLong() }
+        val y: Integer = Integer.parse("999")
+        val exception: Throwable? = runCatching { y.toByte() }
             .exceptionOrNull()
         check(exception is ArithmeticException)
     }
 
     @Test
-    fun toLongOrNull() {
+    fun toByteOrNull() {
         val x: Integer = Integer.fromLong(42)
-        val result: Long? = x.toLongOrNull()
-        check(result == 42L)
+        val result: Byte? = x.toByteOrNull()
+        check(result == 42.toByte())
 
-        val y: Integer = Integer.parse("99999999999999999999")
-        check(y.toLongOrNull() == null)
-    }
-
-    @Test
-    fun toInt() {
-        val x: Integer = Integer.fromLong(42)
-        val result: Int = x.toInt()
-        check(result == 42)
-
-        val y: Integer = Integer.parse("9999999999")
-        val exception: Throwable? = runCatching { y.toInt() }
-            .exceptionOrNull()
-        check(exception is ArithmeticException)
-    }
-
-    @Test
-    fun toIntOrNull() {
-        val x: Integer = Integer.fromLong(42)
-        val result: Int? = x.toIntOrNull()
-        check(result == 42)
-
-        val y: Integer = Integer.parse("9999999999")
-        check(y.toIntOrNull() == null)
+        val y: Integer = Integer.parse("999")
+        check(y.toByteOrNull() == null)
     }
 
     @Test
@@ -340,24 +301,63 @@ class IntegerSample {
     }
 
     @Test
-    fun toByte() {
+    fun toInt() {
         val x: Integer = Integer.fromLong(42)
-        val result: Byte = x.toByte()
-        check(result == 42.toByte())
+        val result: Int = x.toInt()
+        check(result == 42)
 
-        val y: Integer = Integer.parse("999")
-        val exception: Throwable? = runCatching { y.toByte() }
+        val y: Integer = Integer.parse("9999999999")
+        val exception: Throwable? = runCatching { y.toInt() }
             .exceptionOrNull()
         check(exception is ArithmeticException)
     }
 
     @Test
-    fun toByteOrNull() {
+    fun toIntOrNull() {
         val x: Integer = Integer.fromLong(42)
-        val result: Byte? = x.toByteOrNull()
-        check(result == 42.toByte())
+        val result: Int? = x.toIntOrNull()
+        check(result == 42)
 
-        val y: Integer = Integer.parse("999")
-        check(y.toByteOrNull() == null)
+        val y: Integer = Integer.parse("9999999999")
+        check(y.toIntOrNull() == null)
+    }
+
+    @Test
+    fun toLong() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Long = x.toLong()
+        check(result == 42L)
+
+        val y: Integer = Integer.parse("99999999999999999999")
+        val exception: Throwable? = runCatching { y.toLong() }
+            .exceptionOrNull()
+        check(exception is ArithmeticException)
+    }
+
+    @Test
+    fun toLongOrNull() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Long? = x.toLongOrNull()
+        check(result == 42L)
+
+        val y: Integer = Integer.parse("99999999999999999999")
+        check(y.toLongOrNull() == null)
+    }
+
+    @Test
+    fun toStringOverride() {
+        fun checkToString(input: Integer, expected: String) {
+            val result: String = input.toString()
+            check(result == expected)
+        }
+
+        checkToString(input = Integer.fromLong(0), expected = "0")
+        checkToString(input = Integer.parse("+0"), expected = "0")
+        checkToString(input = Integer.parse("-0"), expected = "0")
+        checkToString(input = Integer.parse("+42"), expected = "42")
+        checkToString(input = Integer.fromLong(-42), expected = "-42")
+        checkToString(input = Integer.parse("00042"), expected = "42")
+        checkToString(input = Integer.parse("+00042"), expected = "42")
+        checkToString(input = Integer.parse("-00042"), expected = "-42")
     }
 }

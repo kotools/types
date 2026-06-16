@@ -3,10 +3,10 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.integer
 import org.kotools.types.integerExcept
-import org.kotools.types.integerStringOutOfByteRange
-import org.kotools.types.integerStringOutOfIntRange
-import org.kotools.types.integerStringOutOfLongRange
-import org.kotools.types.integerStringOutOfShortRange
+import org.kotools.types.integerOutOfByteRange
+import org.kotools.types.integerOutOfIntRange
+import org.kotools.types.integerOutOfLongRange
+import org.kotools.types.integerOutOfShortRange
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
@@ -932,6 +932,180 @@ class IntegerTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    fun toBytePreservesByteRepresentation(): Unit = repeatTest {
+        val value: Byte = Random.nextInt(Byte.MIN_VALUE..Byte.MAX_VALUE)
+            .toByte()
+        val integer: Integer = Integer.fromByte(value)
+
+        val actual: Byte = integer.toByte()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toByteFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfByteRange()
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toByte()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Byte", integer)
+        val message = "Input: $integer"
+        assertEquals(expected, actual = exception.message, message)
+    }
+
+    @Test
+    fun toByteOrNullPreservesByteRepresentation(): Unit = repeatTest {
+        val value: Byte = Random.nextInt(Byte.MIN_VALUE..Byte.MAX_VALUE)
+            .toByte()
+        val integer: Integer = Integer.fromByte(value)
+
+        val actual: Byte? = integer.toByteOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toByteOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfByteRange()
+
+        val actual: Byte? = integer.toByteOrNull()
+
+        assertNull(actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toShortPreservesShortRepresentation(): Unit = repeatTest {
+        val value: Short = Random.nextInt(Short.MIN_VALUE..Short.MAX_VALUE)
+            .toShort()
+        val integer: Integer = Integer.fromShort(value)
+
+        val actual: Short = integer.toShort()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toShortFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfShortRange()
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toShort()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Short", integer)
+        val message = "Input: $integer"
+        assertEquals(expected, actual = exception.message, message)
+    }
+
+    @Test
+    fun toShortOrNullPreservesShortRepresentation(): Unit = repeatTest {
+        val value: Short = Random.nextInt(Short.MIN_VALUE..Short.MAX_VALUE)
+            .toShort()
+        val integer: Integer = Integer.fromShort(value)
+
+        val actual: Short? = integer.toShortOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toShortOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfShortRange()
+
+        val actual: Short? = integer.toShortOrNull()
+
+        assertNull(actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toIntPreservesIntRepresentation(): Unit = repeatTest {
+        val value: Int = Random.nextInt()
+        val integer: Integer = Integer.fromInt(value)
+
+        val actual: Int = integer.toInt()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toIntFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfIntRange()
+
+        val exception: ArithmeticException = assertFailsWith { integer.toInt() }
+
+        val expected: String =
+            errorMessage("Integer out of range for Int", integer)
+        val message = "Input: $integer"
+        assertEquals(expected, actual = exception.message, message)
+    }
+
+    @Test
+    fun toIntOrNullPreservesIntRepresentation(): Unit = repeatTest {
+        val value: Int = Random.nextInt()
+        val integer: Integer = Integer.fromInt(value)
+
+        val actual: Int? = integer.toIntOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toIntOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfIntRange()
+
+        val actual: Int? = integer.toIntOrNull()
+
+        assertNull(actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toLongPreservesLongRepresentation(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+        val integer: Integer = Integer.fromLong(value)
+
+        val actual: Long = integer.toLong()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toLongFailsWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfLongRange()
+
+        val exception: ArithmeticException = assertFailsWith {
+            integer.toLong()
+        }
+
+        val expected: String =
+            errorMessage("Integer out of range for Long", integer)
+        val message = "Input: $integer"
+        assertEquals(expected, actual = exception.message, message)
+    }
+
+    @Test
+    fun toLongOrNullPreservesLongRepresentation(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+        val integer: Integer = Integer.fromLong(value)
+
+        val actual: Long? = integer.toLongOrNull()
+
+        assertEquals(expected = value, actual, message = "Input: $integer")
+    }
+
+    @Test
+    fun toLongOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerOutOfLongRange()
+
+        val actual: Long? = integer.toLongOrNull()
+
+        assertNull(actual, message = "Input: $integer")
+    }
+
+    @Test
     fun toStringReturnsCanonicalDecimalString(): Unit = repeatTest {
         val integer: Integer = Random.integer()
 
@@ -953,193 +1127,5 @@ class IntegerTest {
         val actual: Integer = Integer.parse(x.toString())
 
         assertEquals(expected = x, actual, message = "Input: $x")
-    }
-
-    @Test
-    fun toLongPreservesLongRepresentation(): Unit = repeatTest {
-        val value: Long = Random.nextLong()
-        val integer: Integer = Integer.fromLong(value)
-
-        val actual: Long = integer.toLong()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toLongFailsWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfLongRange()
-        val integer: Integer = Integer.parse(value)
-
-        val exception: ArithmeticException = assertFailsWith {
-            integer.toLong()
-        }
-
-        val expected: String =
-            errorMessage("Integer out of range for Long", integer)
-        val message = "Input: $value"
-        assertEquals(expected, actual = exception.message, message)
-    }
-
-    @Test
-    fun toLongOrNullPreservesLongRepresentation(): Unit = repeatTest {
-        val value: Long = Random.nextLong()
-        val integer: Integer = Integer.fromLong(value)
-
-        val actual: Long? = integer.toLongOrNull()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toLongOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfLongRange()
-        val integer: Integer = Integer.parse(value)
-
-        val actual: Long? = integer.toLongOrNull()
-
-        assertNull(actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toIntPreservesIntRepresentation(): Unit = repeatTest {
-        val value: Int = Random.nextInt()
-        val integer: Integer = Integer.fromInt(value)
-
-        val actual: Int = integer.toInt()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toIntFailsWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfIntRange()
-        val integer: Integer = Integer.parse(value)
-
-        val exception: ArithmeticException = assertFailsWith {
-            integer.toInt()
-        }
-
-        val expected: String =
-            errorMessage("Integer out of range for Int", integer)
-        val message = "Input: $value"
-        assertEquals(expected, actual = exception.message, message)
-    }
-
-    @Test
-    fun toIntOrNullPreservesIntRepresentation(): Unit = repeatTest {
-        val value: Int = Random.nextInt()
-        val integer: Integer = Integer.fromInt(value)
-
-        val actual: Int? = integer.toIntOrNull()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toIntOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfIntRange()
-        val integer: Integer = Integer.parse(value)
-
-        val actual: Int? = integer.toIntOrNull()
-
-        assertNull(actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toShortPreservesShortRepresentation(): Unit = repeatTest {
-        val range: IntRange = Short.MIN_VALUE.toInt()..Short.MAX_VALUE.toInt()
-        val value: Short = Random.nextInt(range)
-            .toShort()
-        val integer: Integer = Integer.fromShort(value)
-
-        val actual: Short = integer.toShort()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toShortFailsWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfShortRange()
-        val integer: Integer = Integer.parse(value)
-
-        val exception: ArithmeticException = assertFailsWith {
-            integer.toShort()
-        }
-
-        val expected: String =
-            errorMessage("Integer out of range for Short", integer)
-        val message = "Input: $value"
-        assertEquals(expected, actual = exception.message, message)
-    }
-
-    @Test
-    fun toShortOrNullPreservesShortRepresentation(): Unit = repeatTest {
-        val range: IntRange = Short.MIN_VALUE.toInt()..Short.MAX_VALUE.toInt()
-        val value: Short = Random.nextInt(range)
-            .toShort()
-        val integer: Integer = Integer.fromShort(value)
-
-        val actual: Short? = integer.toShortOrNull()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toShortOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfShortRange()
-        val integer: Integer = Integer.parse(value)
-
-        val actual: Short? = integer.toShortOrNull()
-
-        assertNull(actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toBytePreservesByteRepresentation(): Unit = repeatTest {
-        val range: IntRange = Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()
-        val value: Byte = Random.nextInt(range)
-            .toByte()
-        val integer: Integer = Integer.fromByte(value)
-
-        val actual: Byte = integer.toByte()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toByteFailsWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfByteRange()
-        val integer: Integer = Integer.parse(value)
-
-        val exception: ArithmeticException = assertFailsWith {
-            integer.toByte()
-        }
-
-        val expected: String =
-            errorMessage("Integer out of range for Byte", integer)
-        val message = "Input: $value"
-        assertEquals(expected, actual = exception.message, message)
-    }
-
-    @Test
-    fun toByteOrNullPreservesByteRepresentation(): Unit = repeatTest {
-        val range: IntRange = Byte.MIN_VALUE.toInt()..Byte.MAX_VALUE.toInt()
-        val value: Byte = Random.nextInt(range)
-            .toByte()
-        val integer: Integer = Integer.fromByte(value)
-
-        val actual: Byte? = integer.toByteOrNull()
-
-        assertEquals(expected = value, actual, message = "Input: $value")
-    }
-
-    @Test
-    fun toByteOrNullReturnsNullWithOutOfRangeInteger(): Unit = repeatTest {
-        val value: String = Random.integerStringOutOfByteRange()
-        val integer: Integer = Integer.parse(value)
-
-        val actual: Byte? = integer.toByteOrNull()
-
-        assertNull(actual, message = "Input: $value")
     }
 }

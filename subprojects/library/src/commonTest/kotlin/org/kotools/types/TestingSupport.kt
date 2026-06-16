@@ -74,7 +74,7 @@ internal fun Random.integer(): Integer {
 
     builder.append(sign)
     repeat(times = capacity - sign.length) {
-        val digit: Int = (0..9).random()
+        val digit: Int = this.nextInt(0..9)
         builder.append(digit)
     }
 
@@ -84,8 +84,45 @@ internal fun Random.integer(): Integer {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Random.integerExcept(illegal: Integer): Integer {
-    var candidate = this.integer()
+    var candidate: Integer = this.integer()
     while (candidate == illegal) candidate = this.integer()
+    return candidate
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.integerOutOfByteRange(): Integer {
+    val min: Integer = Integer.fromByte(Byte.MIN_VALUE)
+    val max: Integer = Integer.fromByte(Byte.MAX_VALUE)
+    return this.integerOutOfRange(min, max)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.integerOutOfShortRange(): Integer {
+    val min: Integer = Integer.fromShort(Short.MIN_VALUE)
+    val max: Integer = Integer.fromShort(Short.MAX_VALUE)
+    return this.integerOutOfRange(min, max)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.integerOutOfIntRange(): Integer {
+    val min: Integer = Integer.fromInt(Int.MIN_VALUE)
+    val max: Integer = Integer.fromInt(Int.MAX_VALUE)
+    return this.integerOutOfRange(min, max)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.integerOutOfLongRange(): Integer {
+    val min: Integer = Integer.fromLong(Long.MIN_VALUE)
+    val max: Integer = Integer.fromLong(Long.MAX_VALUE)
+    return this.integerOutOfRange(min, max)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+private fun Random.integerOutOfRange(min: Integer, max: Integer): Integer {
+    var candidate: Integer
+    do {
+        candidate = this.integer()
+    } while (candidate >= min && candidate <= max)
     return candidate
 }
 
@@ -112,62 +149,6 @@ internal fun Random.positiveIntegerString(): String {
     val sign: String = listOf("", "+").random()
     val digits: Long = this.nextLong(1..Long.MAX_VALUE)
     return "$sign$digits"
-}
-
-internal fun Random.integerStringOutOfLongRange(): String {
-    val sign: String = listOf("", "+", "-").random()
-    val length: Int = this.nextInt(20..64)
-    val builder = StringBuilder(length)
-
-    builder.append((1..9).random())
-    repeat(times = length - 1) {
-        val digit: Int = (0..9).random()
-        builder.append(digit)
-    }
-
-    return "$sign$builder"
-}
-
-internal fun Random.integerStringOutOfIntRange(): String {
-    val sign: String = listOf("", "+", "-").random()
-    val length: Int = this.nextInt(11..18)
-    val builder = StringBuilder(length)
-
-    builder.append((1..9).random())
-    repeat(times = length - 1) {
-        val digit: Int = (0..9).random()
-        builder.append(digit)
-    }
-
-    return "$sign$builder"
-}
-
-internal fun Random.integerStringOutOfShortRange(): String {
-    val sign: String = listOf("", "+", "-").random()
-    val length: Int = this.nextInt(6..9)
-    val builder = StringBuilder(length)
-
-    builder.append((1..9).random())
-    repeat(times = length - 1) {
-        val digit: Int = (0..9).random()
-        builder.append(digit)
-    }
-
-    return "$sign$builder"
-}
-
-internal fun Random.integerStringOutOfByteRange(): String {
-    val sign: String = listOf("", "+", "-").random()
-    val length = 4
-    val builder = StringBuilder(length)
-
-    builder.append((1..9).random())
-    repeat(times = length - 1) {
-        val digit: Int = (0..9).random()
-        builder.append(digit)
-    }
-
-    return "$sign$builder"
 }
 
 internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
