@@ -186,6 +186,57 @@ public class NonZeroInteger private constructor(private val value: Integer) {
         @JvmSynthetic
         public fun fromShortOrNull(value: Short): NonZeroInteger? =
             fromIntegerOrNull(Integer.of(value.toLong()))
+
+        /**
+         * Returns a [NonZeroInteger] from the specified [value], or throws an
+         * [IllegalArgumentException] if [value] is zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromInt
+         * </details>
+         * <br>
+         *
+         * See the [fromIntOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [value].
+         */
+        @JvmStatic
+        public fun fromInt(value: Int): NonZeroInteger =
+            fromIntOrNull(value) ?: throw IllegalArgumentException(
+                errorMessage("Value must be non-zero", value)
+            )
+
+        /**
+         * Returns a [NonZeroInteger] from the specified [value], or returns
+         * `null` if [value] is zero.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromIntOrNull
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromInt] function for throwing an exception instead of
+         * returning `null` in case of invalid [value].
+         */
+        @JvmSynthetic
+        public fun fromIntOrNull(value: Int): NonZeroInteger? =
+            fromIntegerOrNull(Integer.of(value.toLong()))
     }
 
     // ------------------------------ Comparisons ------------------------------

@@ -412,6 +412,7 @@ public final class org/kotools/types/number/NonZeroInteger {
 	public synthetic fun <init> (Lorg/kotools/types/number/Integer;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromByte (B)Lorg/kotools/types/number/NonZeroInteger;
+	public static final fun fromInt (I)Lorg/kotools/types/number/NonZeroInteger;
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
 	public static final fun fromShort (S)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun hashCode ()I
@@ -422,6 +423,8 @@ public final class org/kotools/types/number/NonZeroInteger {
 public final class org/kotools/types/number/NonZeroInteger$Companion {
 	public final fun fromByte (B)Lorg/kotools/types/number/NonZeroInteger;
 	public final synthetic fun fromByteOrNull (B)Lorg/kotools/types/number/NonZeroInteger;
+	public final fun fromInt (I)Lorg/kotools/types/number/NonZeroInteger;
+	public final synthetic fun fromIntOrNull (I)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
 	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun fromShort (S)Lorg/kotools/types/number/NonZeroInteger;

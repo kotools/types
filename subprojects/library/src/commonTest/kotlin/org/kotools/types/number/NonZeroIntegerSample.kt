@@ -79,6 +79,28 @@ class NonZeroIntegerSample {
         check(NonZeroInteger.fromShortOrNull(zero) == null)
     }
 
+    @Test
+    fun fromInt() {
+        val value = 42
+        val result: NonZeroInteger = NonZeroInteger.fromInt(value)
+        check(result.toString() == "42")
+
+        val exception: Throwable? = runCatching {
+            NonZeroInteger.fromInt(0)
+        }.exceptionOrNull()
+        check(exception is IllegalArgumentException)
+    }
+
+    @Test
+    fun fromIntOrNull() {
+        val value = 42
+        val result: NonZeroInteger? = NonZeroInteger.fromIntOrNull(value)
+        checkNotNull(result)
+        check(result.toString() == "42")
+
+        check(NonZeroInteger.fromIntOrNull(0) == null)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test
