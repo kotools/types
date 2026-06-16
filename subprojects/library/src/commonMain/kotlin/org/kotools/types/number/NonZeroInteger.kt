@@ -288,6 +288,72 @@ public class NonZeroInteger private constructor(private val value: Integer) {
         @JvmSynthetic
         public fun fromLongOrNull(value: Long): NonZeroInteger? =
             fromIntegerOrNull(Integer.of(value))
+
+        /**
+         * Returns a [NonZeroInteger] representing the number described by
+         * [value], or throws an exception if [value] is invalid.
+         *
+         * Throws [NumberFormatException] if [value] doesn't represent an
+         * integer. Throws [IllegalArgumentException] if [value] represents
+         * zero.
+         *
+         * See [Integer.parse] for the accepted integer string format.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.parsing
+         * </details>
+         * <br>
+         *
+         * See the [parseOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid [value].
+         */
+        @JvmStatic
+        public fun parse(value: String): NonZeroInteger {
+            val integer: Integer = Integer.parse(value)
+            return fromIntegerOrNull(integer) ?: throw IllegalArgumentException(
+                errorMessage("Value must be non-zero", value)
+            )
+        }
+
+        /**
+         * Returns a [NonZeroInteger] representing the number described by
+         * [value], or returns `null` if [value] is invalid.
+         *
+         * Returns `null` if [value] doesn't represent an integer, or if
+         * [value] represents zero.
+         *
+         * See [Integer.parseOrNull] for the accepted integer string format.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.parsing
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [parse] function for throwing an exception instead of
+         * returning `null` in case of invalid [value].
+         */
+        @JvmSynthetic
+        public fun parseOrNull(value: String): NonZeroInteger? {
+            val integer: Integer = Integer.parseOrNull(value) ?: return null
+            return fromIntegerOrNull(integer)
+        }
     }
 
     // ------------------------------ Comparisons ------------------------------

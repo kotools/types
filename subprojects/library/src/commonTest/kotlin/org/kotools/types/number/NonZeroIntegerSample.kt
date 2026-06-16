@@ -123,6 +123,45 @@ class NonZeroIntegerSample {
         check(NonZeroInteger.fromLongOrNull(0L) == null)
     }
 
+    @Test
+    fun parsing() {
+        fun parsesTo(input: String, expected: String) {
+            check(NonZeroInteger.parse(input).toString() == expected)
+            check(NonZeroInteger.parseOrNull(input)?.toString() == expected)
+        }
+
+        fun failsWithIllegalArg(input: String) {
+            val exception: Throwable? = runCatching {
+                NonZeroInteger.parse(input)
+            }.exceptionOrNull()
+            check(exception is IllegalArgumentException)
+            check(NonZeroInteger.parseOrNull(input) == null)
+        }
+
+        fun failsWithNumberFormat(input: String) {
+            val exception: Throwable? = runCatching {
+                NonZeroInteger.parse(input)
+            }.exceptionOrNull()
+            check(exception is NumberFormatException)
+            check(NonZeroInteger.parseOrNull(input) == null)
+        }
+
+        parsesTo(input = "42", expected = "42")
+        parsesTo(input = "-42", expected = "-42")
+        parsesTo(input = "+00042", expected = "42")
+
+        // Fails with IllegalArgumentException for zero:
+        failsWithIllegalArg("0")
+        failsWithIllegalArg("+0")
+        failsWithIllegalArg("-0")
+        failsWithIllegalArg("000")
+
+        // Fails with NumberFormatException for non-integer strings:
+        failsWithNumberFormat("")
+        failsWithNumberFormat("12a")
+        failsWithNumberFormat("3.14")
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

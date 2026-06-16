@@ -417,6 +417,7 @@ public final class org/kotools/types/number/NonZeroInteger {
 	public static final fun fromLong (J)Lorg/kotools/types/number/NonZeroInteger;
 	public static final fun fromShort (S)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun hashCode ()I
+	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
 }
@@ -432,5 +433,7 @@ public final class org/kotools/types/number/NonZeroInteger$Companion {
 	public final synthetic fun fromLongOrNull (J)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun fromShort (S)Lorg/kotools/types/number/NonZeroInteger;
 	public final synthetic fun fromShortOrNull (S)Lorg/kotools/types/number/NonZeroInteger;
+	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonZeroInteger;
+	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/number/NonZeroInteger;
 }
 
