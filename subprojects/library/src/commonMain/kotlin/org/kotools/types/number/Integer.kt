@@ -111,43 +111,10 @@ import kotlin.jvm.JvmSynthetic
 public class Integer private constructor(
     private val delegate: PlatformInteger
 ) {
-    // ------------------------------- Creations -------------------------------
+    // --------------------------- Factory functions ---------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
-        /**
-         * Returns an [Integer] representing the specified [value].
-         *
-         * This function preserves the canonical representation of [value].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: org.kotools.types.number.IntegerSample.fromLong
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromLong
-         * </details>
-         */
-        @JvmStatic
-        public fun fromLong(value: Long): Integer {
-            val delegate = PlatformInteger(value)
-            return Integer(delegate)
-        }
-
         /**
          * Returns an [Integer] representing the specified [value].
          *
@@ -178,7 +145,10 @@ public class Integer private constructor(
          * </details>
          */
         @JvmStatic
-        public fun fromByte(value: Byte): Integer = fromLong(value.toLong())
+        public fun fromByte(value: Byte): Integer {
+            val number: Long = value.toLong()
+            return this.fromLong(number)
+        }
 
         /**
          * Returns an [Integer] representing the specified [value].
@@ -210,7 +180,10 @@ public class Integer private constructor(
          * </details>
          */
         @JvmStatic
-        public fun fromShort(value: Short): Integer = fromLong(value.toLong())
+        public fun fromShort(value: Short): Integer {
+            val number = value.toLong()
+            return this.fromLong(number)
+        }
 
         /**
          * Returns an [Integer] representing the specified [value].
@@ -241,7 +214,45 @@ public class Integer private constructor(
          * </details>
          */
         @JvmStatic
-        public fun fromInt(value: Int): Integer = fromLong(value.toLong())
+        public fun fromInt(value: Int): Integer {
+            val number: Long = value.toLong()
+            return this.fromLong(number)
+        }
+
+        /**
+         * Returns an [Integer] representing the specified [value].
+         *
+         * This function preserves the canonical representation of [value], and
+         * never fails since every [Long] value is within the range of
+         * [Integer].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerSample.fromLong
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromLong
+         * </details>
+         */
+        @JvmStatic
+        public fun fromLong(value: Long): Integer {
+            val delegate = PlatformInteger(value)
+            return Integer(delegate)
+        }
 
         /**
          * Returns an [Integer] representing the number described by [value],

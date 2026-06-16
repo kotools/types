@@ -27,18 +27,7 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class IntegerTest {
-    // ------------------------------- Creations -------------------------------
-
-    @Test
-    fun fromLongPreservesLongRepresentation(): Unit = repeatTest {
-        val value: Long = Random.nextLong()
-
-        val integer: Integer = Integer.fromLong(value)
-
-        val actual: String = integer.toString()
-        val expected: String = value.toString()
-        assertEquals(expected, actual, message = "Input: $value")
-    }
+    // --------------------------- Factory functions ---------------------------
 
     @Test
     fun fromBytePreservesByteRepresentation(): Unit = repeatTest {
@@ -55,7 +44,7 @@ class IntegerTest {
 
     @Test
     fun fromShortPreservesShortRepresentation(): Unit = repeatTest {
-        val range: IntRange = Short.MIN_VALUE.toInt()..Short.MAX_VALUE.toInt()
+        val range: IntRange = Short.MIN_VALUE..Short.MAX_VALUE
         val value: Short = Random.nextInt(range)
             .toShort()
 
@@ -71,6 +60,17 @@ class IntegerTest {
         val value: Int = Random.nextInt()
 
         val integer: Integer = Integer.fromInt(value)
+
+        val actual: String = integer.toString()
+        val expected: String = value.toString()
+        assertEquals(expected, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun fromLongPreservesLongRepresentation(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+
+        val integer: Integer = Integer.fromLong(value)
 
         val actual: String = integer.toString()
         val expected: String = value.toString()

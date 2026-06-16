@@ -8,22 +8,7 @@ import java.util.function.Consumer;
 
 @SuppressWarnings("NewClassNamingConvention")
 public class IntegerJavaSample {
-    // ------------------------------- Creations -------------------------------
-
-    @Test
-    void fromLong() {
-        final BiConsumer<Long, String> createsFromLong = (input, expected) -> {
-            final Integer result = Integer.fromLong(input);
-            final boolean check = String.valueOf(result).equals(expected);
-            if (!check) throw new IllegalStateException("Check failed.");
-        };
-
-        createsFromLong.accept(0L, "0");
-        createsFromLong.accept(42L, "42");
-        createsFromLong.accept(-42L, "-42");
-        createsFromLong.accept(Long.MAX_VALUE, "9223372036854775807");
-        createsFromLong.accept(Long.MIN_VALUE, "-9223372036854775808");
-    }
+    // --------------------------- Factory functions ---------------------------
 
     @Test
     void fromByte() {
@@ -70,6 +55,21 @@ public class IntegerJavaSample {
         createsFromInt.accept(-42, "-42");
         createsFromInt.accept(java.lang.Integer.MAX_VALUE, "2147483647");
         createsFromInt.accept(java.lang.Integer.MIN_VALUE, "-2147483648");
+    }
+
+    @Test
+    void fromLong() {
+        final BiConsumer<Long, String> createsFromLong = (input, expected) -> {
+            final Integer result = Integer.fromLong(input);
+            final boolean check = String.valueOf(result).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        createsFromLong.accept(0L, "0");
+        createsFromLong.accept(42L, "42");
+        createsFromLong.accept(-42L, "-42");
+        createsFromLong.accept(Long.MAX_VALUE, "9223372036854775807");
+        createsFromLong.accept(Long.MIN_VALUE, "-9223372036854775808");
     }
 
     @Test

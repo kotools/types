@@ -42,27 +42,7 @@ class IntegerSample {
         check(-7 % 2 == -1) // instead of 1
     }
 
-    // ------------------------------- Creations -------------------------------
-
-    @Test
-    fun fromLong() {
-        fun createsFromLong(input: Long, expected: String) {
-            val result: Integer = Integer.fromLong(input)
-            check("$result" == expected)
-        }
-
-        createsFromLong(input = 0, expected = "0")
-        createsFromLong(input = 42, expected = "42")
-        createsFromLong(input = -42, expected = "-42")
-        createsFromLong(
-            input = Long.MAX_VALUE,
-            expected = "9223372036854775807"
-        )
-        createsFromLong(
-            input = Long.MIN_VALUE,
-            expected = "-9223372036854775808"
-        )
-    }
+    // --------------------------- Factory functions ---------------------------
 
     @Test
     fun fromByte() {
@@ -104,6 +84,26 @@ class IntegerSample {
         createsFromInt(input = -42, expected = "-42")
         createsFromInt(input = Int.MAX_VALUE, expected = "2147483647")
         createsFromInt(input = Int.MIN_VALUE, expected = "-2147483648")
+    }
+
+    @Test
+    fun fromLong() {
+        fun createsFromLong(input: Long, expected: String) {
+            val result: Integer = Integer.fromLong(input)
+            check("$result" == expected)
+        }
+
+        createsFromLong(input = 0, expected = "0")
+        createsFromLong(input = 42, expected = "42")
+        createsFromLong(input = -42, expected = "-42")
+        createsFromLong(
+            input = Long.MAX_VALUE,
+            expected = "9223372036854775807"
+        )
+        createsFromLong(
+            input = Long.MIN_VALUE,
+            expected = "-9223372036854775808"
+        )
     }
 
     @Test
