@@ -36,9 +36,11 @@ public interface PlatformInteger {
     /** Returns the remainder of dividing this integer by the [other] one. */
     public operator fun rem(other: PlatformInteger): PlatformInteger
 
+    // ------------------------------ Conversions ------------------------------
+
     /**
      * Returns the [Long] representation of this integer, or returns `null` if
      * this integer is out of the [Long] range.
      */
-    public fun toLongOrNull(): Long? = this.toString().toLongOrNull()
+    public fun toLongOrNull(): Long?
 }

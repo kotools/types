@@ -78,6 +78,11 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
         return JsInteger(remainder)
     }
 
+    // ------------------------------ Conversions ------------------------------
+
+    override fun toLongOrNull(): Long? = this.toString()
+        .toLongOrNull()
+
     override fun toString(): String = this.delegate.toString()
 }
 

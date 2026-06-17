@@ -55,5 +55,14 @@ private value class JvmInteger(private val delegate: BigInteger) :
         return JvmInteger(remainder)
     }
 
+    // ------------------------------ Conversions ------------------------------
+
+    override fun toLongOrNull(): Long? {
+        val min: BigInteger = BigInteger.valueOf(Long.MIN_VALUE)
+        val max: BigInteger = BigInteger.valueOf(Long.MAX_VALUE)
+        return this.delegate.takeIf { it in min..max }
+            ?.toLong()
+    }
+
     override fun toString(): String = this.delegate.toString()
 }

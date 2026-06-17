@@ -176,6 +176,25 @@ private class NativeInteger private constructor(
 
     // ------------------------------ Conversions ------------------------------
 
+    override fun toLongOrNull(): Long? {
+        if (this.sign == IntegerSign.Zero) return 0L
+        if (this.magnitude.size > 2) return null
+        val low: ULong = this.magnitude.getOrElse(0) { 0u }
+            .toULong()
+        val high: ULong = this.magnitude.getOrElse(1) { 0u }
+            .toULong()
+        val unsigned: ULong = low or (high shl 32)
+        return when {
+            this.sign == IntegerSign.Positive &&
+                unsigned <= Long.MAX_VALUE.toULong() -> unsigned.toLong()
+            this.sign == IntegerSign.Negative && unsigned == 1uL shl 63 ->
+                Long.MIN_VALUE
+            this.sign == IntegerSign.Negative && unsigned < 1uL shl 63 ->
+                -unsigned.toLong()
+            else -> null
+        }
+    }
+
     override fun toString(): String {
         if (this.sign == IntegerSign.Zero) return "0"
         val builder = StringBuilder()
