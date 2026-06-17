@@ -4,7 +4,10 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.internal.number.PlatformInteger
+import org.kotools.types.number.Integer.Companion.fromByte
+import org.kotools.types.number.Integer.Companion.fromInt
 import org.kotools.types.number.Integer.Companion.fromLong
+import org.kotools.types.number.Integer.Companion.fromShort
 import org.kotools.types.number.Integer.Companion.parse
 import org.kotools.types.number.Integer.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
@@ -93,7 +96,7 @@ import kotlin.jvm.JvmSynthetic
  * ### Key features
  *
  * - **Creations:** Create from Kotlin integer types or decimal string (see
- * [fromLong] and [parse]).
+ * [fromByte], [fromShort], [fromInt], [fromLong] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
@@ -101,7 +104,8 @@ import kotlin.jvm.JvmSynthetic
  * (`x - y`), [multiply][times] (`x * y`), [divide][div] (`x / y`), compute
  * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
  * overflow.
- * - **Conversions:** Convert to its decimal string representation (see
+ * - **Conversions:** Convert to Kotlin integer types or its decimal string
+ * representation (see [toByte], [toShort], [toInt], [toLong] and
  * [Integer.toString]).
  * </details>
  *
