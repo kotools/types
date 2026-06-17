@@ -80,8 +80,13 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
 
     // ------------------------------ Conversions ------------------------------
 
-    override fun toLongOrNull(): Long? = this.toString()
-        .toLongOrNull()
+    override fun toLongOrNull(): Long? {
+        val value: dynamic = this.delegate.asDynamic()
+        val min: dynamic = LONG_MIN_VALUE.asDynamic()
+        val max: dynamic = LONG_MAX_VALUE.asDynamic()
+        return if (value < min || value > max) null
+        else this.toString().toLong()
+    }
 
     override fun toString(): String = this.delegate.toString()
 }
@@ -89,3 +94,6 @@ private value class JsInteger(private val delegate: BigInt) : PlatformInteger {
 private external object BigInt
 
 private external fun BigInt(value: String): BigInt
+
+private val LONG_MIN_VALUE: BigInt = BigInt(Long.MIN_VALUE.toString())
+private val LONG_MAX_VALUE: BigInt = BigInt(Long.MAX_VALUE.toString())
