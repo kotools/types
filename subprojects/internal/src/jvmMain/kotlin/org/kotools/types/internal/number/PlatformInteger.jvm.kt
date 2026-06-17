@@ -21,8 +21,12 @@ public actual fun PlatformInteger(value: String): PlatformInteger {
 @OptIn(InternalKotoolsTypesApi::class)
 private value class JvmInteger(private val delegate: BigInteger) :
     PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
     override fun compareTo(other: PlatformInteger): Int =
         this.delegate.compareTo((other as JvmInteger).delegate)
+
+    // ------------------------- Arithmetic operations -------------------------
 
     override fun unaryMinus(): PlatformInteger =
         JvmInteger(this.delegate.negate())

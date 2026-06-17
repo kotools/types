@@ -15,8 +15,12 @@ public expect fun PlatformInteger(value: String): PlatformInteger
  */
 @InternalKotoolsTypesApi
 public interface PlatformInteger {
+    // ------------------------------ Comparisons ------------------------------
+
     /** Compares this integer with the [other] one for order. */
     public operator fun compareTo(other: PlatformInteger): Int
+
+    // ------------------------- Arithmetic operations -------------------------
 
     /** Returns the negative of this integer. */
     public operator fun unaryMinus(): PlatformInteger
