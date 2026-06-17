@@ -751,8 +751,8 @@ public class Integer private constructor(
 
     /**
      * Returns the [Byte] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Byte] range
-     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
+     * [ArithmeticException] if this integer is out of the [Byte] range, i.e.,
+     * less than [Byte.MIN_VALUE] or greater than [Byte.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -786,9 +786,9 @@ public class Integer private constructor(
         ?: this.outOfRangeError<Byte>()
 
     /**
-     * Returns the [Byte] representation of this integer, or returns `null`
-     * if this integer is out of the [Byte] range
-     * (`Byte.MIN_VALUE..Byte.MAX_VALUE`).
+     * Returns the [Byte] representation of this integer, or returns `null` if
+     * this integer is out of the [Byte] range, i.e., less than [Byte.MIN_VALUE]
+     * or greater than [Byte.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -819,8 +819,8 @@ public class Integer private constructor(
 
     /**
      * Returns the [Short] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Short] range
-     * (`Short.MIN_VALUE..Short.MAX_VALUE`).
+     * [ArithmeticException] if this integer is out of the [Short] range, i.e.,
+     * less than [Short.MIN_VALUE] or greater than [Short.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -854,9 +854,9 @@ public class Integer private constructor(
         ?: this.outOfRangeError<Short>()
 
     /**
-     * Returns the [Short] representation of this integer, or returns `null`
-     * if this integer is out of the [Short] range
-     * (`Short.MIN_VALUE..Short.MAX_VALUE`).
+     * Returns the [Short] representation of this integer, or returns `null` if
+     * this integer is out of the [Short] range, i.e., less than
+     * [Short.MIN_VALUE] or greater than [Short.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -888,8 +888,8 @@ public class Integer private constructor(
 
     /**
      * Returns the [Int] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Int] range
-     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
+     * [ArithmeticException] if this integer is out of the [Int] range, i.e.,
+     * less than [Int.MIN_VALUE] or greater than [Int.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -923,8 +923,8 @@ public class Integer private constructor(
 
     /**
      * Returns the [Int] representation of this integer, or returns `null` if
-     * this integer is out of the [Int] range
-     * (`Int.MIN_VALUE..Int.MAX_VALUE`).
+     * this integer is out of the [Int] range, i.e., less than [Int.MIN_VALUE]
+     * or greater than [Int.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -955,8 +955,8 @@ public class Integer private constructor(
 
     /**
      * Returns the [Long] representation of this integer, or throws an
-     * [ArithmeticException] if this integer is out of the [Long] range
-     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     * [ArithmeticException] if this integer is out of the [Long] range, i.e.,
+     * less than [Long.MIN_VALUE] or greater than [Long.MAX_VALUE].
      *
      * <br>
      * <details>
@@ -991,8 +991,8 @@ public class Integer private constructor(
 
     /**
      * Returns the [Long] representation of this integer, or returns `null`
-     * if this integer is out of the [Long] range
-     * (`Long.MIN_VALUE..Long.MAX_VALUE`).
+     * if this integer is out of the [Long] range, i.e., less than
+     * [Long.MIN_VALUE] or greater than [Long.MAX_VALUE].
      *
      * <br>
      * <details>
