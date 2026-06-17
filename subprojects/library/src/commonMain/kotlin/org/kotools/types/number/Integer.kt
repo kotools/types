@@ -787,7 +787,7 @@ public class Integer private constructor(
      * @since 5.2.0
      */
     public fun toByte(): Byte = this.toByteOrNull()
-        ?: this.outOfRangeError<Byte>()
+        ?: this.outOfRangeError("Byte")
 
     /**
      * Returns the [Byte] representation of this integer, or returns `null` if
@@ -855,7 +855,7 @@ public class Integer private constructor(
      * @since 5.2.0
      */
     public fun toShort(): Short = this.toShortOrNull()
-        ?: this.outOfRangeError<Short>()
+        ?: this.outOfRangeError("Short")
 
     /**
      * Returns the [Short] representation of this integer, or returns `null` if
@@ -923,7 +923,7 @@ public class Integer private constructor(
      *
      * @since 5.2.0
      */
-    public fun toInt(): Int = this.toIntOrNull() ?: this.outOfRangeError<Int>()
+    public fun toInt(): Int = this.toIntOrNull() ?: this.outOfRangeError("Int")
 
     /**
      * Returns the [Int] representation of this integer, or returns `null` if
@@ -991,7 +991,7 @@ public class Integer private constructor(
      * @since 5.2.0
      */
     public fun toLong(): Long = this.toLongOrNull()
-        ?: this.outOfRangeError<Long>()
+        ?: this.outOfRangeError("Long")
 
     /**
      * Returns the [Long] representation of this integer, or returns `null`
@@ -1021,8 +1021,7 @@ public class Integer private constructor(
     @JvmSynthetic
     public fun toLongOrNull(): Long? = this.delegate.toLongOrNull()
 
-    private inline fun <reified T : Number> outOfRangeError(): Nothing {
-        val type: String? = T::class.simpleName
+    private fun outOfRangeError(type: String): Nothing {
         val message: String =
             errorMessage("Integer out of range for $type", this)
         throw ArithmeticException(message)
