@@ -21,6 +21,8 @@ import kotlin.jvm.JvmSynthetic
  * (see [fromLong], [fromInteger] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonZeroInteger.equals] (`x == y`, `x != y`).
+ * - **Arithmetic operations:** [Negate][unaryMinus] (`-x`) non-zero
+ * integers, always producing another non-zero integer.
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see [NonZeroInteger.toString]).
  * </details>
@@ -303,6 +305,36 @@ public class NonZeroInteger private constructor(
         val seed: Int = HashSeed.NonZeroInteger.toInt()
         return 31 * seed + this.value.hashCode()
     }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.unaryMinus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.unaryMinus
+     * </details>
+     */
+    public operator fun unaryMinus(): NonZeroInteger =
+        NonZeroInteger(-this.value)
 
     // ------------------------------ Conversions ------------------------------
 

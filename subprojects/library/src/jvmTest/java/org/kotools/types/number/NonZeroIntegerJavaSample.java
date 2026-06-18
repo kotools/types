@@ -68,6 +68,17 @@ public class NonZeroIntegerJavaSample {
         if (!inequality) throw new IllegalStateException("Check failed.");
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    void unaryMinus() {
+        final NonZeroInteger x = NonZeroInteger.fromLong(42L);
+        final NonZeroInteger result = x.unaryMinus();
+        final NonZeroInteger expected = NonZeroInteger.fromLong(-42L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

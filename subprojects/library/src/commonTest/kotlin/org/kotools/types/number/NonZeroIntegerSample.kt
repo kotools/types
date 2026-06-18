@@ -67,6 +67,16 @@ class NonZeroIntegerSample {
         check(x.hashCode() != z.hashCode())
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinus() {
+        val x: NonZeroInteger = NonZeroInteger.fromLong(42)
+        val result: NonZeroInteger = -x
+        val expected: NonZeroInteger = NonZeroInteger.fromLong(-42)
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

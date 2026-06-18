@@ -214,6 +214,50 @@ class NonZeroIntegerTest {
         assertFalse(hashEquality, message)
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinusIsInvolutory(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val actual: NonZeroInteger = -(-x)
+        assertEquals(x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun unaryMinusInversesSign(): Unit = repeatTest {
+        val zero: Integer = Integer.of(0)
+        val x: NonZeroInteger = Random.nonZeroInteger()
+
+        val xSign: Int = x.toInteger()
+            .compareTo(zero)
+        val negXSign: Int = (-x).toInteger()
+            .compareTo(zero)
+
+        val message = "Input: $x"
+        when {
+            xSign > 0 -> assertTrue(negXSign < 0, message)
+            else -> assertTrue(negXSign > 0, message)
+        }
+    }
+
+    @Test
+    fun unaryMinusOnPositiveInteger() {
+        val x: NonZeroInteger = NonZeroInteger.parse("99999999999999999999")
+        val actual: NonZeroInteger = -x
+        val expected: NonZeroInteger =
+            NonZeroInteger.parse("-99999999999999999999")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun unaryMinusOnNegativeInteger() {
+        val x: NonZeroInteger = NonZeroInteger.parse("-99999999999999999999")
+        val actual: NonZeroInteger = -x
+        val expected: NonZeroInteger =
+            NonZeroInteger.parse("99999999999999999999")
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
