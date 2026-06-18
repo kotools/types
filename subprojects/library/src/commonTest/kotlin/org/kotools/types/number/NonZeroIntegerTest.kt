@@ -3,13 +3,17 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.integerExcept
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.nonIntegerString
+import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
 import org.kotools.types.repeatTest
+import org.kotools.types.zeroString
 import kotlin.random.Random
 import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonZeroIntegerTest {
@@ -41,6 +45,46 @@ class NonZeroIntegerTest {
         val safeNonZeroInteger: NonZeroInteger? =
             NonZeroInteger.fromLongOrNull(0)
         assertNull(safeNonZeroInteger)
+    }
+
+    @Test
+    fun parsingRemovesLeadingZeros(): Unit = repeatTest {
+        val value: String = Random.nonZeroIntegerStringWithLeadingZeros()
+
+        val nonZeroInteger: NonZeroInteger = NonZeroInteger.parse(value)
+        val safeNonZeroInteger: NonZeroInteger? =
+            NonZeroInteger.parseOrNull(value)
+
+        val actual: String = nonZeroInteger.toString()
+        val message = "Input: \"$value\""
+        assertTrue(
+            "\"$actual\" must not have leading zeros (input: \"$value\")."
+        ) { actual.first(Char::isDigit) != '0' }
+        assertEquals(actual, safeNonZeroInteger.toString(), message)
+    }
+
+    @Test
+    fun parsingFailsWithNonintegerString(): Unit = repeatTest {
+        val value: String = Random.nonIntegerString()
+
+        assertFailsWith<NumberFormatException>(message = "Input: \"$value\"") {
+            NonZeroInteger.parse(value)
+        }
+        assertNull(NonZeroInteger.parseOrNull(value), message = "Input: \"$value\"")
+    }
+
+    @Test
+    fun parsingFailsWithZero(): Unit = repeatTest {
+        val value: String = Random.zeroString()
+
+        val exception: IllegalArgumentException = assertFailsWith(
+            message = "Input: \"$value\""
+        ) { NonZeroInteger.parse(value) }
+        val expected: String =
+            errorMessage("Integer other than zero", Integer.of(0))
+        assertEquals(expected, actual = exception.message)
+
+        assertNull(NonZeroInteger.parseOrNull(value), message = "Input: \"$value\"")
     }
 
     @Test

@@ -20,6 +20,25 @@ public class NonZeroIntegerJavaSample {
     }
 
     @Test
+    void parsing() {
+        final NonZeroInteger result = NonZeroInteger.parse("+00042");
+        final boolean check = String.valueOf(result).equals("42");
+        if (!check) throw new IllegalStateException("Check failed.");
+
+        try {
+            NonZeroInteger.parse("3.14");
+            throw new IllegalStateException("Check failed.");
+        } catch (NumberFormatException ignored) {
+        }
+
+        try {
+            NonZeroInteger.parse("0");
+            throw new IllegalStateException("Check failed.");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
     void fromInteger() {
         final Integer value = Integer.of(42);
         final NonZeroInteger result = NonZeroInteger.fromInteger(value);

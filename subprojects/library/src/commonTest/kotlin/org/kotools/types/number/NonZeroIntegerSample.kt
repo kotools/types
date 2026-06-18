@@ -21,6 +21,23 @@ class NonZeroIntegerSample {
     }
 
     @Test
+    fun parsing() {
+        val result: NonZeroInteger = NonZeroInteger.parse("+00042")
+        check("$result" == "42")
+
+        val invalid: Throwable? =
+            runCatching { NonZeroInteger.parse("3.14") }.exceptionOrNull()
+        check(invalid is NumberFormatException)
+
+        val zero: Throwable? =
+            runCatching { NonZeroInteger.parse("0") }.exceptionOrNull()
+        check(zero is IllegalArgumentException)
+
+        check(NonZeroInteger.parseOrNull("3.14") == null)
+        check(NonZeroInteger.parseOrNull("0") == null)
+    }
+
+    @Test
     fun fromInteger() {
         val value: Integer = Integer.of(42)
         val result: NonZeroInteger = NonZeroInteger.fromInteger(value)
