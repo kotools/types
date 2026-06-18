@@ -565,8 +565,7 @@ public class Decimal private constructor(
      * [Integer.rem] uses Euclidean semantics (`remainder >= 0`), which
      * correctly identifiers divisibility by 10 for negative unscaled values.
      *
-     * Example: `-30 % 10 = 0` -> strip -> `Decimal(Integer.fromLong(-3),
-     * scale = 0)`
+     * `-30 % 10 = 0` -> strip -> `Decimal(Integer.fromLong(-3), scale = 0)`
      */
     private fun normalize(): Decimal {
         if (this.scale == 0) return this

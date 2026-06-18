@@ -896,7 +896,7 @@ class IntegerTest {
 
         val actual: Long = integer.toLong()
 
-        assertEquals(expected = value, actual, message = "Input: $value")
+        assertEquals(expected = value, actual, message = "Input: $integer")
     }
 
     @Test
@@ -924,7 +924,7 @@ class IntegerTest {
         val actual: Long? = integer.toLongOrNull()
 
         val expected: Long = integer.toLong()
-        assertEquals(expected, actual, message = "Input: $value")
+        assertEquals(expected, actual, message = "Input: $integer")
     }
 
     @Test

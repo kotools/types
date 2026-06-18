@@ -102,7 +102,7 @@ import kotlin.jvm.JvmSynthetic
  * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
  * overflow.
  * - **Conversions:** Convert to its decimal string representation (see
- * [Integer.toString]) or to a [Long] (see [toLong] and [toLongOrNull]).
+ * [Integer.toString]) or to a [Long] (see [toLong]).
  * </details>
  *
  * @since 5.1.0
@@ -141,6 +141,8 @@ public class Integer private constructor(
          *
          * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromLong
          * </details>
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun fromLong(value: Long): Integer {
@@ -661,6 +663,8 @@ public class Integer private constructor(
      *
      * See the [toLongOrNull] function for returning `null` instead of
      * throwing an exception when this integer is out of range for [Long].
+     *
+     * @since 5.2.0
      */
     public fun toLong(): Long {
         if (this < fromLong(Long.MIN_VALUE) || this > fromLong(Long.MAX_VALUE)) {
@@ -693,6 +697,8 @@ public class Integer private constructor(
      *
      * See the [toLong] function for throwing an exception instead of
      * returning `null` when this integer is out of range for [Long].
+     *
+     * @since 5.2.0
      */
     @JvmSynthetic
     public fun toLongOrNull(): Long? {
