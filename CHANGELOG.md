@@ -24,6 +24,10 @@ All notable changes to this project will be documented in this file.
   arithmetic operators (`+`, `-`, `*`, unary `-`), comparison, and canonical
   string conversion. Division is intentionally excluded because the set of
   terminating decimals is not closed under division. ([#925])
+- `Integer.toLong` and `Integer.toLongOrNull` **experimental** functions,
+  returning the `Long` representation of an `Integer`, or throwing an
+  `IllegalArgumentException` (`toLong`) or returning `null`
+  (`toLongOrNull`) if it's out of range for `Long`. ([#1010])
 
 ### ♻️ Changed
 
@@ -35,8 +39,8 @@ All notable changes to this project will be documented in this file.
   `Integer.remOrNull` **experimental** functions to use Euclidean division
   semantics: the remainder is always non-negative (`0 ≤ r < |b|`). ([#952])
 - Moved `Integer` **experimental** type to `org.kotools.types.number` package,
-  and renamed some of its functions (`from` -> `of`, `fromDecimal` -> `parse`,
-  `fromDecimalOrNull` -> `parseOrNull`). ([#960])
+  and renamed some of its functions (`from` -> `fromLong`, `fromDecimal` ->
+  `parse`, `fromDecimalOrNull` -> `parseOrNull`). ([#960], [#1010])
 - Reformatted error messages thrown by **experimental** declarations in
   `org.kotools.types.*` (`Decimal`, `Integer`, `EmailAddressRegex`, and the
   `kotlinx-serialization` serializers) to follow a consistent
@@ -80,6 +84,7 @@ All notable changes to this project will be documented in this file.
 [#988]: https://github.com/kotools/types/issues/988
 [#989]: https://github.com/kotools/types/issues/989
 [#990]: https://github.com/kotools/types/issues/990
+[#1010]: https://github.com/kotools/types/issues/1010
 
 ## 🔖 Releases
 
