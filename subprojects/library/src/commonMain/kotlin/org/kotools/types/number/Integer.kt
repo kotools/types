@@ -102,7 +102,7 @@ import kotlin.jvm.JvmSynthetic
  * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
  * overflow.
  * - **Conversions:** Convert to its decimal string representation (see
- * [Integer.toString]) or to a [Long] (see [toLong]).
+ * [Integer.toString]) or to a [Long] (see [toLong] and [toLongOrNull]).
  * </details>
  *
  * @since 5.1.0
@@ -669,6 +669,36 @@ public class Integer private constructor(
             throw IllegalArgumentException(message)
         }
         return this.toString().toLong()
+    }
+
+    /**
+     * Returns the [Long] representation of this integer, or returns `null`
+     * if this integer is out of range for [Long] (less than
+     * [Long.MIN_VALUE] or greater than [Long.MAX_VALUE]).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toLongOrNull
+     * </details>
+     * <br>
+     *
+     * This function is hidden from Java, because nullability is not explicit
+     * in its type system.
+     *
+     * See the [toLong] function for throwing an exception instead of
+     * returning `null` when this integer is out of range for [Long].
+     */
+    @JvmSynthetic
+    public fun toLongOrNull(): Long? {
+        val outOfRange: Boolean = this < fromLong(Long.MIN_VALUE) ||
+            this > fromLong(Long.MAX_VALUE)
+        return if (outOfRange) null else this.toString().toLong()
     }
 
     /**

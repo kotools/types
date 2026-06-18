@@ -219,6 +219,17 @@ class IntegerSample {
     }
 
     @Test
+    fun toLongOrNull() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Long? = x.toLongOrNull()
+        check(result == 42L)
+
+        val outOfRange: Integer =
+            Integer.fromLong(Long.MAX_VALUE) + Integer.fromLong(1)
+        check(outOfRange.toLongOrNull() == null)
+    }
+
+    @Test
     fun toStringOverride() {
         fun checkToString(input: Integer, expected: String) {
             val result: String = input.toString()

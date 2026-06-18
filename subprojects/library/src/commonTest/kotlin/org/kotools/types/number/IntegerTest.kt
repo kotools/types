@@ -917,6 +917,29 @@ class IntegerTest {
     }
 
     @Test
+    fun toLongOrNullIsConsistentWithToLong(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+        val integer: Integer = Integer.fromLong(value)
+
+        val actual: Long? = integer.toLongOrNull()
+
+        val expected: Long = integer.toLong()
+        assertEquals(expected, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toLongOrNullReturnsNullWhenOutOfRange() {
+        val aboveMax: Integer =
+            Integer.fromLong(Long.MAX_VALUE) + Integer.fromLong(1)
+        val belowMin: Integer =
+            Integer.fromLong(Long.MIN_VALUE) - Integer.fromLong(1)
+        listOf(aboveMax, belowMin).forEach { integer: Integer ->
+            val actual: Long? = integer.toLongOrNull()
+            assertNull(actual, message = "Input: $integer")
+        }
+    }
+
+    @Test
     fun toStringReturnsCanonicalDecimalString(): Unit = repeatTest {
         val integer: Integer = Random.integer()
 
