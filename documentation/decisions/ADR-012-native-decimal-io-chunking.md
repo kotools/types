@@ -1,4 +1,4 @@
-# 🏷️ ADR-013: 10⁹-chunk decimal I/O for `NativeInteger`
+# 🏷️ ADR-012: 10⁹-chunk decimal I/O for `NativeInteger`
 
 This document records the chunk size chosen for batching decimal digit
 processing in the Kotlin/Native implementation of `Integer`.
