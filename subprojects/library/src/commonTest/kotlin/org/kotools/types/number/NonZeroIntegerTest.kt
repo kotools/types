@@ -217,6 +217,16 @@ class NonZeroIntegerTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    fun toIntegerRoundTripsWithFromInteger(): Unit = repeatTest {
+        val integer: Integer = Random.integerExcept(illegal = Integer.of(0))
+
+        val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
+        val actual: Integer = nonZeroInteger.toInteger()
+
+        assertEquals(integer, actual, message = "Input: $integer")
+    }
+
+    @Test
     fun toStringDelegatesToInteger(): Unit = repeatTest {
         val integer: Integer = Random.integerExcept(illegal = Integer.of(0))
 

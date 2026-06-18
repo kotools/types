@@ -70,6 +70,13 @@ class NonZeroIntegerSample {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    fun toInteger() {
+        val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromLong(42)
+        val result: Integer = nonZeroInteger.toInteger()
+        check(result == Integer.of(42))
+    }
+
+    @Test
     fun toStringOverride() {
         val value: Integer = Integer.of(-42)
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(value)

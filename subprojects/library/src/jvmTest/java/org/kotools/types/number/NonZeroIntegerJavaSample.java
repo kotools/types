@@ -71,6 +71,14 @@ public class NonZeroIntegerJavaSample {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    void toInteger() {
+        final NonZeroInteger nonZeroInteger = NonZeroInteger.fromLong(42L);
+        final Integer result = nonZeroInteger.toInteger();
+        final boolean check = result.equals(Integer.of(42L));
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void toStringOverride() {
         final Integer value = Integer.of(-42);
         final NonZeroInteger nonZeroInteger = NonZeroInteger.fromInteger(value);

@@ -21,8 +21,8 @@ import kotlin.jvm.JvmSynthetic
  * (see [fromLong], [fromInteger] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonZeroInteger.equals] (`x == y`, `x != y`).
- * - **Conversions:** Convert to its decimal string representation (see
- * [NonZeroInteger.toString]).
+ * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
+ * or to its decimal string representation (see [NonZeroInteger.toString]).
  * </details>
  *
  * @since 5.2.0
@@ -305,6 +305,33 @@ public class NonZeroInteger private constructor(
     }
 
     // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns this integer as an [Integer].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.toInteger
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.toInteger
+     * </details>
+     */
+    public fun toInteger(): Integer = this.value
 
     /**
      * Returns the decimal string representation of this integer, delegating
