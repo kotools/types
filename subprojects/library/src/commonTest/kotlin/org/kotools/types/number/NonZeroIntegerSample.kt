@@ -53,6 +53,20 @@ class NonZeroIntegerSample {
         check(safeResult == null)
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun structuralEquality() {
+        val x: NonZeroInteger = NonZeroInteger.fromLong(42)
+        val y: NonZeroInteger = NonZeroInteger.parse("+00042")
+        check(x == y)
+        check(x.hashCode() == y.hashCode())
+
+        val z: NonZeroInteger = NonZeroInteger.fromLong(-42)
+        check(x != z)
+        check(x.hashCode() != z.hashCode())
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

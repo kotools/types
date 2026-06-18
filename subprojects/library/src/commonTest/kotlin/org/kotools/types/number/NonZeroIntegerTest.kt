@@ -4,6 +4,8 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.integerExcept
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonIntegerString
+import org.kotools.types.nonZeroInteger
+import org.kotools.types.nonZeroIntegerExcept
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
 import org.kotools.types.repeatTest
 import org.kotools.types.zeroString
@@ -12,7 +14,10 @@ import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
@@ -114,6 +119,99 @@ class NonZeroIntegerTest {
         val safeNonZeroInteger: NonZeroInteger? =
             NonZeroInteger.fromIntegerOrNull(zero)
         assertNull(safeNonZeroInteger)
+    }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun structuralEqualityPassesWithSameValues(): Unit = repeatTest {
+        val nonZeroInteger: NonZeroInteger = Random.nonZeroInteger()
+        val other: NonZeroInteger =
+            NonZeroInteger.parse("$nonZeroInteger")
+
+        val message = "Inputs: this = $nonZeroInteger, other = $other"
+        assertEquals(nonZeroInteger, other, message)
+        assertEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityIsReflexive(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+
+        val message = "Input: $x"
+        assertSame(x, x, message)
+        assertEquals(x.hashCode(), x.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityIsSymmetrical(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val y: NonZeroInteger = NonZeroInteger.parse("$x")
+
+        val xHashCode: Int = x.hashCode()
+        val yHashCode: Int = y.hashCode()
+
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x, y, message)
+        assertEquals(xHashCode, yHashCode, message)
+
+        assertEquals(y, x, message)
+        assertEquals(yHashCode, xHashCode, message)
+    }
+
+    @Test
+    fun structuralEqualityIsTransitive(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val y: NonZeroInteger = NonZeroInteger.parse("$x")
+        val z: NonZeroInteger = NonZeroInteger.parse("$y")
+
+        val xHashCode: Int = x.hashCode()
+        val yHashCode: Int = y.hashCode()
+        val zHashCode: Int = z.hashCode()
+
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(x, y, message)
+        assertEquals(xHashCode, yHashCode, message)
+
+        assertEquals(y, z, message)
+        assertEquals(yHashCode, zHashCode, message)
+
+        assertEquals(x, z, message)
+        assertEquals(xHashCode, zHashCode, message)
+    }
+
+    @Test
+    fun structuralEqualityFailsWithDifferentValues(): Unit = repeatTest {
+        val nonZeroInteger: NonZeroInteger = Random.nonZeroInteger()
+        val other: NonZeroInteger =
+            Random.nonZeroIntegerExcept(illegal = nonZeroInteger)
+
+        val message = "Inputs: this = $nonZeroInteger, other = $other"
+        assertNotEquals(nonZeroInteger, other, message)
+        assertNotEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityFailsWithDifferentTypes(): Unit = repeatTest {
+        val nonZeroInteger: NonZeroInteger = Random.nonZeroInteger()
+        val other: Any = nonZeroInteger.toString()
+
+        val message = "Inputs: this = $nonZeroInteger, other = \"$other\""
+        assertNotEquals(nonZeroInteger, other, message)
+        assertNotEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityFailsWithNull(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val y: Any? = null
+
+        val equality: Boolean = x == y
+        val hashEquality: Boolean = x.hashCode() == y.hashCode()
+
+        val message = "Structural equality must fail with null."
+        assertFalse(equality, message)
+        assertFalse(hashEquality, message)
     }
 
     // ------------------------------ Conversions ------------------------------

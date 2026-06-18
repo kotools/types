@@ -53,6 +53,21 @@ public class NonZeroIntegerJavaSample {
         }
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    void structuralEquality() {
+        final NonZeroInteger x = NonZeroInteger.fromLong(42L);
+        final NonZeroInteger y = NonZeroInteger.parse("+00042");
+        final boolean equality = x.equals(y) && x.hashCode() == y.hashCode();
+        if (!equality) throw new IllegalStateException("Check failed.");
+
+        final NonZeroInteger z = NonZeroInteger.fromLong(-42L);
+        final boolean inequality =
+                !x.equals(z) && x.hashCode() != z.hashCode();
+        if (!inequality) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

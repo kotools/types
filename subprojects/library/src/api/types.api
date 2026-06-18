@@ -412,8 +412,10 @@ public final class org/kotools/types/number/Integer$Companion {
 public final class org/kotools/types/number/NonZeroInteger {
 	public static final field Companion Lorg/kotools/types/number/NonZeroInteger$Companion;
 	public synthetic fun <init> (Lorg/kotools/types/number/Integer;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
 	public static final fun fromLong (J)Lorg/kotools/types/number/NonZeroInteger;
+	public final fun hashCode ()I
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun toString ()Ljava/lang/String;
 }

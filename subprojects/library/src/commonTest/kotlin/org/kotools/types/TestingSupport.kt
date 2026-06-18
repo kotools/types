@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.kotools.types.number.Decimal
 import org.kotools.types.number.Integer
+import org.kotools.types.number.NonZeroInteger
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextLong
@@ -93,6 +94,23 @@ internal fun Random.integerExcept(illegal: Integer): Integer {
 internal fun Random.positiveInteger(): Integer {
     val value: String = this.positiveIntegerString()
     return Integer.parse(value)
+}
+
+// --------------------------- Random non-zero integers ------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.nonZeroInteger(): NonZeroInteger {
+    val integer: Integer = this.integerExcept(illegal = Integer.of(0))
+    return NonZeroInteger.fromInteger(integer)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.nonZeroIntegerExcept(
+    illegal: NonZeroInteger
+): NonZeroInteger {
+    var candidate: NonZeroInteger = this.nonZeroInteger()
+    while (candidate == illegal) candidate = this.nonZeroInteger()
+    return candidate
 }
 
 // ------------------------------ Random strings -------------------------------

@@ -1,6 +1,7 @@
 package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
+import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
@@ -18,6 +19,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * - **Creations:** Create from a [Long], an [Integer], or a decimal string
  * (see [fromLong], [fromInteger] and [parse]).
+ * - **Comparisons:** Compare integers using
+ * [structural equality][NonZeroInteger.equals] (`x == y`, `x != y`).
  * - **Conversions:** Convert to its decimal string representation (see
  * [NonZeroInteger.toString]).
  * </details>
@@ -229,6 +232,76 @@ public class NonZeroInteger private constructor(
             val message: String = errorMessage("Integer other than zero", value)
             throw IllegalArgumentException(message)
         }
+    }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    /**
+     * Returns `true` if the [other] object is a [NonZeroInteger] representing
+     * the same numeric value as this one, or returns `false` otherwise.
+     *
+     * This function follows the contract of [Any.equals].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.structuralEquality
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.structuralEquality
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean =
+        other is NonZeroInteger && this.value == other.value
+
+    /**
+     * Returns a hash code value for this integer.
+     *
+     * This function follows the contract of [Any.hashCode], with an
+     * additional property: if two instances of [NonZeroInteger] are not
+     * equal, then calling this function on these objects must produce
+     * different hash codes.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.structuralEquality
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.structuralEquality
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int {
+        val seed: Int = HashSeed.NonZeroInteger.toInt()
+        return 31 * seed + this.value.hashCode()
     }
 
     // ------------------------------ Conversions ------------------------------
