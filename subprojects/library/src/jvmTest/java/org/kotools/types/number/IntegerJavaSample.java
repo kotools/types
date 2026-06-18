@@ -163,6 +163,21 @@ public class IntegerJavaSample {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    void toLong() {
+        final Integer x = Integer.fromLong(42);
+        final long result = x.toLong();
+        if (result != 42L) throw new IllegalStateException("Check failed.");
+
+        final Integer outOfRange =
+                Integer.fromLong(Long.MAX_VALUE).plus(Integer.fromLong(1));
+        try {
+            outOfRange.toLong();
+            throw new IllegalStateException("Check failed.");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
     void toStringOverride() {
         final BiConsumer<Integer, String> checkToString = (input, expected) -> {
             final boolean check = String.valueOf(input).equals(expected);

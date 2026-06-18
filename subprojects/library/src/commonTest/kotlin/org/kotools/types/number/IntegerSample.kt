@@ -206,6 +206,19 @@ class IntegerSample {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    fun toLong() {
+        val x: Integer = Integer.fromLong(42)
+        val result: Long = x.toLong()
+        check(result == 42L)
+
+        val outOfRange: Integer =
+            Integer.fromLong(Long.MAX_VALUE) + Integer.fromLong(1)
+        val exception: Throwable? =
+            runCatching(outOfRange::toLong).exceptionOrNull()
+        check(exception is IllegalArgumentException)
+    }
+
+    @Test
     fun toStringOverride() {
         fun checkToString(input: Integer, expected: String) {
             val result: String = input.toString()

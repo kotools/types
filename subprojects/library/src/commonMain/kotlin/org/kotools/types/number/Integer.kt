@@ -102,7 +102,7 @@ import kotlin.jvm.JvmSynthetic
  * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
  * overflow.
  * - **Conversions:** Convert to its decimal string representation (see
- * [Integer.toString]).
+ * [Integer.toString]) or to a [Long] (see [toLong]).
  * </details>
  *
  * @since 5.1.0
@@ -630,6 +630,46 @@ public class Integer private constructor(
     }
 
     // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the [Long] representation of this integer, or throws an
+     * [IllegalArgumentException] if this integer is out of range for [Long]
+     * (less than [Long.MIN_VALUE] or greater than [Long.MAX_VALUE]).
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.toLong
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.toLong
+     * </details>
+     * <br>
+     *
+     * See the [toLongOrNull] function for returning `null` instead of
+     * throwing an exception when this integer is out of range for [Long].
+     */
+    public fun toLong(): Long {
+        if (this < fromLong(Long.MIN_VALUE) || this > fromLong(Long.MAX_VALUE)) {
+            val message: String =
+                errorMessage("Integer out of range for Long", this)
+            throw IllegalArgumentException(message)
+        }
+        return this.toString().toLong()
+    }
 
     /**
      * Returns the decimal string representation of this integer.

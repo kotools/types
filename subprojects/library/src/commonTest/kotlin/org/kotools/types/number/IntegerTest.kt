@@ -890,6 +890,33 @@ class IntegerTest {
     // ------------------------------ Conversions ------------------------------
 
     @Test
+    fun toLongIsConsistentWithFromLong(): Unit = repeatTest {
+        val value: Long = Random.nextLong()
+        val integer: Integer = Integer.fromLong(value)
+
+        val actual: Long = integer.toLong()
+
+        assertEquals(expected = value, actual, message = "Input: $value")
+    }
+
+    @Test
+    fun toLongThrowsExceptionWhenOutOfRange() {
+        val aboveMax: Integer =
+            Integer.fromLong(Long.MAX_VALUE) + Integer.fromLong(1)
+        val belowMin: Integer =
+            Integer.fromLong(Long.MIN_VALUE) - Integer.fromLong(1)
+        listOf(aboveMax, belowMin).forEach { integer: Integer ->
+            val exception: IllegalArgumentException = assertFailsWith {
+                integer.toLong()
+            }
+            val expected: String =
+                errorMessage("Integer out of range for Long", integer)
+            val message = "Input: $integer"
+            assertEquals(expected, actual = exception.message, message)
+        }
+    }
+
+    @Test
     fun toStringReturnsCanonicalDecimalString(): Unit = repeatTest {
         val integer: Integer = Random.integer()
 
