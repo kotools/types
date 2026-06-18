@@ -28,6 +28,14 @@ All notable changes to this project will be documented in this file.
   returning the `Long` representation of an `Integer`, or throwing an
   `IllegalArgumentException` (`toLong`) or returning `null`
   (`toLongOrNull`) if it's out of range for `Long`. ([#1010])
+- `NonZeroInteger` **experimental** type to `org.kotools.types.number` package,
+  representing an `Integer` other than zero. Supports creation via
+  `fromLong(Long)`, `fromInteger(Integer)`, `parse(String)` and their
+  `OrNull` variants, structural equality, arithmetic operators (unary `-`
+  and `*`), and conversions back to `Integer` and to its decimal string
+  representation. Addition and subtraction are intentionally excluded
+  because the set of non-zero integers is not closed under these operations.
+  ([#1011])
 
 ### ♻️ Changed
 
@@ -85,6 +93,7 @@ All notable changes to this project will be documented in this file.
 [#989]: https://github.com/kotools/types/issues/989
 [#990]: https://github.com/kotools/types/issues/990
 [#1010]: https://github.com/kotools/types/issues/1010
+[#1011]: https://github.com/kotools/types/issues/1011
 
 ## 🔖 Releases
 
