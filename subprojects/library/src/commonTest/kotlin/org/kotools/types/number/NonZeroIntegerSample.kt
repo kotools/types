@@ -8,6 +8,19 @@ class NonZeroIntegerSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
+    fun fromLong() {
+        val result: NonZeroInteger = NonZeroInteger.fromLong(42)
+        check("$result" == "42")
+
+        val exception: Throwable? =
+            runCatching { NonZeroInteger.fromLong(0) }.exceptionOrNull()
+        check(exception is IllegalArgumentException)
+
+        val safeResult: NonZeroInteger? = NonZeroInteger.fromLongOrNull(0)
+        check(safeResult == null)
+    }
+
+    @Test
     fun fromInteger() {
         val value: Integer = Integer.of(42)
         val result: NonZeroInteger = NonZeroInteger.fromInteger(value)

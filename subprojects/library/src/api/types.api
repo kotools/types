@@ -413,11 +413,14 @@ public final class org/kotools/types/number/NonZeroInteger {
 	public static final field Companion Lorg/kotools/types/number/NonZeroInteger$Companion;
 	public synthetic fun <init> (Lorg/kotools/types/number/Integer;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
+	public static final fun fromLong (J)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun toString ()Ljava/lang/String;
 }
 
 public final class org/kotools/types/number/NonZeroInteger$Companion {
 	public final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
 	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonZeroInteger;
+	public final fun fromLong (J)Lorg/kotools/types/number/NonZeroInteger;
+	public final synthetic fun fromLongOrNull (J)Lorg/kotools/types/number/NonZeroInteger;
 }
 

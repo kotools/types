@@ -16,7 +16,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from an [Integer] (see [fromInteger]).
+ * - **Creations:** Create from a [Long] or an [Integer] (see [fromLong] and
+ * [fromInteger]).
  * - **Conversions:** Convert to its decimal string representation (see
  * [NonZeroInteger.toString]).
  * </details>
@@ -29,6 +30,66 @@ public class NonZeroInteger private constructor(
 ) {
     /** Contains class-level declarations for the [NonZeroInteger] type. */
     public companion object {
+        /**
+         * Returns a [NonZeroInteger] representing the specified [value], or
+         * throws an [IllegalArgumentException] if [value] is `0`.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromLong
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.fromLong
+         * </details>
+         * <br>
+         *
+         * See the [fromLongOrNull] function for returning `null` instead of
+         * throwing an exception when [value] is `0`.
+         */
+        @JvmStatic
+        public fun fromLong(value: Long): NonZeroInteger =
+            fromInteger(Integer.of(value))
+
+        /**
+         * Returns a [NonZeroInteger] representing the specified [value], or
+         * returns `null` if [value] is `0`.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.fromLong
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromLong] function for throwing an exception instead of
+         * returning `null` when [value] is `0`.
+         */
+        @JvmSynthetic
+        public fun fromLongOrNull(value: Long): NonZeroInteger? =
+            fromIntegerOrNull(Integer.of(value))
+
         /**
          * Returns a [NonZeroInteger] representing the specified [value], or
          * throws an [IllegalArgumentException] if [value] represents zero.

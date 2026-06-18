@@ -7,6 +7,19 @@ public class NonZeroIntegerJavaSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
+    void fromLong() {
+        final NonZeroInteger result = NonZeroInteger.fromLong(42L);
+        final boolean check = String.valueOf(result).equals("42");
+        if (!check) throw new IllegalStateException("Check failed.");
+
+        try {
+            NonZeroInteger.fromLong(0L);
+            throw new IllegalStateException("Check failed.");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
     void fromInteger() {
         final Integer value = Integer.of(42);
         final NonZeroInteger result = NonZeroInteger.fromInteger(value);
