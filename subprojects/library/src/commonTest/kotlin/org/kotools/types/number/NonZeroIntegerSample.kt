@@ -77,6 +77,16 @@ class NonZeroIntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun times() {
+        val x: NonZeroInteger = NonZeroInteger.fromLong(99999999999999999)
+        val y: NonZeroInteger = NonZeroInteger.fromLong(10)
+        val result: NonZeroInteger = x * y
+        val expected: NonZeroInteger =
+            NonZeroInteger.parse("999999999999999990")
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

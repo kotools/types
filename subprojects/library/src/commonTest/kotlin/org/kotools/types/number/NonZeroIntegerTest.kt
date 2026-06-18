@@ -258,6 +258,58 @@ class NonZeroIntegerTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun timesIsCommutative(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val y: NonZeroInteger = Random.nonZeroInteger()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x * y, y * x, message)
+    }
+
+    @Test
+    fun timesHasOneAsIdentityElement(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val one: NonZeroInteger = NonZeroInteger.fromLong(1)
+        val message = "Input: $x"
+        assertEquals(x, x * one, message)
+        assertEquals(x, one * x, message)
+    }
+
+    @Test
+    fun timesIsAssociative(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val y: NonZeroInteger = Random.nonZeroInteger()
+        val z: NonZeroInteger = Random.nonZeroInteger()
+
+        val actual: NonZeroInteger = (x * y) * z
+
+        val expected: NonZeroInteger = x * (y * z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesIsAlwaysNonZero(): Unit = repeatTest {
+        val x: NonZeroInteger = Random.nonZeroInteger()
+        val y: NonZeroInteger = Random.nonZeroInteger()
+
+        val result: NonZeroInteger = x * y // Throws if the result is zero.
+
+        val zero: Integer = Integer.of(0)
+        val message = "Inputs: x = $x, y = $y"
+        assertNotEquals(zero, result.toInteger(), message)
+    }
+
+    @Test
+    fun timesSanityCheck() {
+        val x: NonZeroInteger = NonZeroInteger.parse("99999999999999999999")
+        val y: NonZeroInteger = NonZeroInteger.parse("10")
+        val actual: NonZeroInteger = x * y
+        val expected: NonZeroInteger =
+            NonZeroInteger.parse("999999999999999999990")
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

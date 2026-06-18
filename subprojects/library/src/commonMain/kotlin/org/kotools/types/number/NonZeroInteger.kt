@@ -21,8 +21,11 @@ import kotlin.jvm.JvmSynthetic
  * (see [fromLong], [fromInteger] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonZeroInteger.equals] (`x == y`, `x != y`).
- * - **Arithmetic operations:** [Negate][unaryMinus] (`-x`) non-zero
- * integers, always producing another non-zero integer.
+ * - **Arithmetic operations:** [Negate][unaryMinus] (`-x`) or
+ * [multiply][times] (`x * y`) non-zero integers, always producing another
+ * non-zero integer. Addition and subtraction are intentionally absent,
+ * because the set of non-zero integers isn't closed under these operations
+ * (e.g., `x + (-x) = 0`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see [NonZeroInteger.toString]).
  * </details>
@@ -335,6 +338,34 @@ public class NonZeroInteger private constructor(
      */
     public operator fun unaryMinus(): NonZeroInteger =
         NonZeroInteger(-this.value)
+
+    /**
+     * Multiplies this integer by the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerSample.times
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.times
+     * </details>
+     */
+    public operator fun times(other: NonZeroInteger): NonZeroInteger =
+        NonZeroInteger(this.value * other.value)
 
     // ------------------------------ Conversions ------------------------------
 

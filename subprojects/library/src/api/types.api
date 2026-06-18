@@ -417,6 +417,7 @@ public final class org/kotools/types/number/NonZeroInteger {
 	public static final fun fromLong (J)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun hashCode ()I
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonZeroInteger;
+	public final fun times (Lorg/kotools/types/number/NonZeroInteger;)Lorg/kotools/types/number/NonZeroInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
 	public final fun unaryMinus ()Lorg/kotools/types/number/NonZeroInteger;

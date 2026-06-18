@@ -79,6 +79,17 @@ public class NonZeroIntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void times() {
+        final NonZeroInteger x = NonZeroInteger.fromLong(99999999999999999L);
+        final NonZeroInteger y = NonZeroInteger.fromLong(10L);
+        final NonZeroInteger result = x.times(y);
+        final NonZeroInteger expected =
+                NonZeroInteger.parse("999999999999999990");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
