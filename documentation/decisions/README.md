@@ -20,6 +20,7 @@ rationale behind it, and its consequences.
 | [ADR-010](ADR-010-error-message-format.md)                | Error message format for `org.kotools.types`        | ✅ Accepted               |
 | [ADR-011](ADR-011-error-message-quote-escaping.md)        | String value quote escaping for `org.kotools.types` | ✅ Accepted               |
 | [ADR-012](ADR-012-native-decimal-io-chunking.md)          | 10⁹-chunk decimal I/O for `NativeInteger`           | ✅ Accepted               |
+| [ADR-013](ADR-013-nonzerointeger-additive-exclusion.md)   | Exclusion of additive operations from `NonZeroInteger` arithmetic | ✅ Accepted |
 
 ## 🔄 Superseding records
 
