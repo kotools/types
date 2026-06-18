@@ -112,7 +112,7 @@ public class Decimal private constructor(
          */
         @JvmStatic
         public fun of(value: Long): Decimal {
-            val unscaled: Integer = Integer.of(value)
+            val unscaled: Integer = Integer.fromLong(value)
             return Decimal(unscaled, scale = 0)
         }
 
@@ -552,7 +552,7 @@ public class Decimal private constructor(
      */
     private fun scaleUpTo(targetScale: Int): Integer {
         if (this.scale == targetScale) return this.unscaledValue
-        val ten: Integer = Integer.of(10)
+        val ten: Integer = Integer.fromLong(10)
         var result: Integer = this.unscaledValue
         repeat(targetScale - this.scale) { result *= ten }
         return result
@@ -565,12 +565,13 @@ public class Decimal private constructor(
      * [Integer.rem] uses Euclidean semantics (`remainder >= 0`), which
      * correctly identifiers divisibility by 10 for negative unscaled values.
      *
-     * Example: `-30 % 10 = 0` -> strip -> `Decimal(Integer.of(-3), scale = 0)`
+     * Example: `-30 % 10 = 0` -> strip -> `Decimal(Integer.fromLong(-3),
+     * scale = 0)`
      */
     private fun normalize(): Decimal {
         if (this.scale == 0) return this
-        val zero: Integer = Integer.of(0)
-        val ten: Integer = Integer.of(10)
+        val zero: Integer = Integer.fromLong(0)
+        val ten: Integer = Integer.fromLong(10)
         var current: Decimal = this
         while (current.scale > 0) {
             if (current.unscaledValue % ten != zero) break

@@ -4,7 +4,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.internal.number.PlatformInteger
-import org.kotools.types.number.Integer.Companion.of
+import org.kotools.types.number.Integer.Companion.fromLong
 import org.kotools.types.number.Integer.Companion.parse
 import org.kotools.types.number.Integer.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
@@ -92,8 +92,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from Kotlin integer types or decimal string (see [of]
- * and [parse]).
+ * - **Creations:** Create from Kotlin integer types or decimal string (see
+ * [fromLong] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][Integer.equals] (`x == y`, `x != y`) and
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
@@ -128,7 +128,7 @@ public class Integer private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerSample.of
+         * SAMPLE: org.kotools.types.number.IntegerSample.fromLong
          * </details>
          *
          * <br>
@@ -139,11 +139,11 @@ public class Integer private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.number.IntegerJavaSample.of
+         * SAMPLE: org.kotools.types.number.IntegerJavaSample.fromLong
          * </details>
          */
         @JvmStatic
-        public fun of(value: Long): Integer {
+        public fun fromLong(value: Long): Integer {
             val delegate = PlatformInteger(value)
             return Integer(delegate)
         }
@@ -519,7 +519,7 @@ public class Integer private constructor(
      * - [rem] or [remOrNull] for returning Euclidean remainder
      */
     public operator fun div(other: Integer): Integer =
-        if (other == of(0)) this.divisionByZeroError()
+        if (other == fromLong(0)) this.divisionByZeroError()
         else Integer(this.delegate / other.delegate)
 
     /**
@@ -550,7 +550,7 @@ public class Integer private constructor(
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? =
-        if (other == of(0)) null
+        if (other == fromLong(0)) null
         else Integer(this.delegate / other.delegate)
 
     /**
@@ -589,7 +589,7 @@ public class Integer private constructor(
      * - [div] or [divOrNull] for returning Euclidean quotient
      */
     public operator fun rem(other: Integer): Integer =
-        if (other == of(0)) this.divisionByZeroError()
+        if (other == fromLong(0)) this.divisionByZeroError()
         else Integer(this.delegate % other.delegate)
 
     /**
@@ -621,7 +621,7 @@ public class Integer private constructor(
      */
     @JvmSynthetic
     public fun remOrNull(other: Integer): Integer? =
-        if (other == of(0)) null
+        if (other == fromLong(0)) null
         else Integer(this.delegate % other.delegate)
 
     private fun divisionByZeroError(): Nothing {

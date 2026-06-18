@@ -19,8 +19,8 @@ class IntegerSample {
 
     @Test
     fun overflowSolution() {
-        val x: Integer = Integer.of(9223372036854775807)
-        val y: Integer = Integer.of(10)
+        val x: Integer = Integer.fromLong(9223372036854775807)
+        val y: Integer = Integer.fromLong(10)
         check(x + y == Integer.parse("9223372036854775817"))
         check(-x - y == Integer.parse("-9223372036854775817"))
         check(x * y == Integer.parse("92233720368547758070"))
@@ -29,8 +29,8 @@ class IntegerSample {
     @Test
     fun divisionByZeroSolution() {
         // Common code
-        val x: Integer = Integer.of(12)
-        val y: Integer = Integer.of(0)
+        val x: Integer = Integer.fromLong(12)
+        val y: Integer = Integer.fromLong(0)
         val quotient: Result<Integer> = runCatching { x / y }
         val remainder: Result<Integer> = runCatching { x % y }
         check(quotient.exceptionOrNull() is ArithmeticException)
@@ -45,9 +45,9 @@ class IntegerSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun of() {
+    fun fromLong() {
         fun createsFromLong(input: Long, expected: String) {
-            val result: Integer = Integer.of(input)
+            val result: Integer = Integer.fromLong(input)
             check("$result" == expected)
         }
 
@@ -121,13 +121,13 @@ class IntegerSample {
             check(integer.hashCode() != other.hashCode())
         }
 
-        checkEquality(integer = Integer.of(0), other = Integer.parse("-000"))
-        checkEquality(integer = Integer.of(42), other = Integer.parse("+00042"))
-        checkEquality(integer = Integer.of(-42), other = Integer.parse("-0042"))
+        checkEquality(integer = Integer.fromLong(0), other = Integer.parse("-000"))
+        checkEquality(integer = Integer.fromLong(42), other = Integer.parse("+00042"))
+        checkEquality(integer = Integer.fromLong(-42), other = Integer.parse("-0042"))
 
-        checkDiff(integer = Integer.of(0), other = Integer.of(1))
-        checkDiff(integer = Integer.of(42), other = 42)
-        checkDiff(integer = Integer.of(-42), other = null)
+        checkDiff(integer = Integer.fromLong(0), other = Integer.fromLong(1))
+        checkDiff(integer = Integer.fromLong(42), other = 42)
+        checkDiff(integer = Integer.fromLong(-42), other = null)
     }
 
     @Test
@@ -177,29 +177,29 @@ class IntegerSample {
 
     @Test
     fun euclideanDivision() {
-        val x: Integer = Integer.of(-7)
-        val y: Integer = Integer.of(2)
+        val x: Integer = Integer.fromLong(-7)
+        val y: Integer = Integer.fromLong(2)
 
         val quotient: Integer = x / y
         val remainder: Integer = x % y
 
-        check(quotient == Integer.of(-4))
-        check(remainder == Integer.of(1))
+        check(quotient == Integer.fromLong(-4))
+        check(remainder == Integer.fromLong(1))
         check(x == quotient * y + remainder)
     }
 
     @Test
     fun euclideanDivisionOrNull() {
-        val x: Integer = Integer.of(-7)
-        val y: Integer = Integer.of(2)
+        val x: Integer = Integer.fromLong(-7)
+        val y: Integer = Integer.fromLong(2)
 
         val quotient: Integer? = x.divOrNull(y)
         val remainder: Integer? = x.remOrNull(y)
 
         checkNotNull(quotient)
         checkNotNull(remainder)
-        check(quotient == Integer.of(-4))
-        check(remainder == Integer.of(1))
+        check(quotient == Integer.fromLong(-4))
+        check(remainder == Integer.fromLong(1))
         check(x == quotient * y + remainder)
     }
 
@@ -212,11 +212,11 @@ class IntegerSample {
             check(result == expected)
         }
 
-        checkToString(input = Integer.of(0), expected = "0")
+        checkToString(input = Integer.fromLong(0), expected = "0")
         checkToString(input = Integer.parse("+0"), expected = "0")
         checkToString(input = Integer.parse("-0"), expected = "0")
         checkToString(input = Integer.parse("+42"), expected = "42")
-        checkToString(input = Integer.of(-42), expected = "-42")
+        checkToString(input = Integer.fromLong(-42), expected = "-42")
         checkToString(input = Integer.parse("00042"), expected = "42")
         checkToString(input = Integer.parse("+00042"), expected = "42")
         checkToString(input = Integer.parse("-00042"), expected = "-42")

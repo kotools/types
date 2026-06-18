@@ -11,9 +11,9 @@ public class IntegerJavaSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    void of() {
+    void fromLong() {
         final BiConsumer<Long, String> createsFromLong = (input, expected) -> {
-            final Integer result = Integer.of(input);
+            final Integer result = Integer.fromLong(input);
             final boolean check = String.valueOf(result).equals(expected);
             if (!check) throw new IllegalStateException("Check failed.");
         };
@@ -89,13 +89,13 @@ public class IntegerJavaSample {
             if (!check) throw new IllegalStateException("Check failed.");
         };
 
-        checkEquality.accept(Integer.of(0), Integer.parse("-000"));
-        checkEquality.accept(Integer.of(42), Integer.parse("+00042"));
-        checkEquality.accept(Integer.of(-42), Integer.parse("-0042"));
+        checkEquality.accept(Integer.fromLong(0), Integer.parse("-000"));
+        checkEquality.accept(Integer.fromLong(42), Integer.parse("+00042"));
+        checkEquality.accept(Integer.fromLong(-42), Integer.parse("-0042"));
 
-        checkDiff.accept(Integer.of(0), Integer.of(1));
-        checkDiff.accept(Integer.of(42), 42);
-        checkDiff.accept(Integer.of(-42), null);
+        checkDiff.accept(Integer.fromLong(0), Integer.fromLong(1));
+        checkDiff.accept(Integer.fromLong(42), 42);
+        checkDiff.accept(Integer.fromLong(-42), null);
     }
 
     @Test
@@ -149,14 +149,14 @@ public class IntegerJavaSample {
 
     @Test
     void euclideanDivision() {
-        final Integer x = Integer.of(-7);
-        final Integer y = Integer.of(2);
+        final Integer x = Integer.fromLong(-7);
+        final Integer y = Integer.fromLong(2);
 
         final Integer quotient = x.div(y);
         final Integer remainder = x.rem(y);
 
-        final boolean check = quotient.equals(Integer.of(-4))
-                && remainder.equals(Integer.of(1));
+        final boolean check = quotient.equals(Integer.fromLong(-4))
+                && remainder.equals(Integer.fromLong(1));
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
@@ -169,11 +169,11 @@ public class IntegerJavaSample {
             if (!check) throw new IllegalStateException("Check failed.");
         };
 
-        checkToString.accept(Integer.of(0), "0");
+        checkToString.accept(Integer.fromLong(0), "0");
         checkToString.accept(Integer.parse("+0"), "0");
         checkToString.accept(Integer.parse("-0"), "0");
         checkToString.accept(Integer.parse("+42"), "42");
-        checkToString.accept(Integer.of(-42), "-42");
+        checkToString.accept(Integer.fromLong(-42), "-42");
         checkToString.accept(Integer.parse("00042"), "42");
         checkToString.accept(Integer.parse("+00042"), "42");
         checkToString.accept(Integer.parse("-00042"), "-42");
