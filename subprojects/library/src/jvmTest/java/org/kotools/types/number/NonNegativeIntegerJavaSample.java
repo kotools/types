@@ -7,6 +7,19 @@ public class NonNegativeIntegerJavaSample {
     // --------------------------- Factory functions ---------------------------
 
     @Test
+    void fromLong() {
+        final NonNegativeInteger result = NonNegativeInteger.fromLong(42L);
+        final boolean check = String.valueOf(result).equals("42");
+        if (!check) throw new IllegalStateException("Check failed.");
+
+        try {
+            NonNegativeInteger.fromLong(-1L);
+            throw new IllegalStateException("Check failed.");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
     void fromInteger() {
         final Integer value = Integer.fromLong(42);
         final NonNegativeInteger result =

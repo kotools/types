@@ -17,7 +17,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from an [Integer] (see [fromInteger]).
+ * - **Creations:** Create from a [Long] or an [Integer] (see [fromLong] and
+ * [fromInteger]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonNegativeInteger.equals] (`x == y`, `x != y`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
@@ -35,6 +36,70 @@ public class NonNegativeInteger private constructor(
 
     /** Contains class-level declarations for the [NonNegativeInteger] type. */
     public companion object {
+        /**
+         * Returns a [NonNegativeInteger] representing the specified [value],
+         * or throws an [IllegalArgumentException] if [value] is negative.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.fromLong
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.fromLong
+         * </details>
+         * <br>
+         *
+         * See the [fromLongOrNull] function for returning `null` instead of
+         * throwing an exception when [value] is negative.
+         */
+        @JvmStatic
+        public fun fromLong(value: Long): NonNegativeInteger {
+            val integer: Integer = Integer.fromLong(value)
+            return this.fromInteger(integer)
+        }
+
+        /**
+         * Returns a [NonNegativeInteger] representing the specified [value],
+         * or returns `null` if [value] is negative.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.fromLong
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromLong] function for throwing an exception instead of
+         * returning `null` when [value] is negative.
+         */
+        @JvmSynthetic
+        public fun fromLongOrNull(value: Long): NonNegativeInteger? {
+            val integer: Integer = Integer.fromLong(value)
+            return this.fromIntegerOrNull(integer)
+        }
+
         /**
          * Returns a [NonNegativeInteger] representing the specified [value],
          * or throws an [IllegalArgumentException] if [value] is negative.
