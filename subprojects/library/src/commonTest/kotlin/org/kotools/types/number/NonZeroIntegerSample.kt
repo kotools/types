@@ -21,6 +21,22 @@ class NonZeroIntegerSample {
     }
 
     @Test
+    fun fromInteger() {
+        val value: Integer = Integer.fromLong(42)
+        val result: NonZeroInteger = NonZeroInteger.fromInteger(value)
+        check("$result" == "42")
+
+        val zero: Integer = Integer.fromLong(0)
+        val exception: Throwable? =
+            runCatching { NonZeroInteger.fromInteger(zero) }.exceptionOrNull()
+        check(exception is IllegalArgumentException)
+
+        val safeResult: NonZeroInteger? =
+            NonZeroInteger.fromIntegerOrNull(zero)
+        check(safeResult == null)
+    }
+
+    @Test
     fun parsing() {
         val result: NonZeroInteger = NonZeroInteger.parse("+00042")
         check("$result" == "42")
@@ -35,22 +51,6 @@ class NonZeroIntegerSample {
 
         check(NonZeroInteger.parseOrNull("3.14") == null)
         check(NonZeroInteger.parseOrNull("0") == null)
-    }
-
-    @Test
-    fun fromInteger() {
-        val value: Integer = Integer.fromLong(42)
-        val result: NonZeroInteger = NonZeroInteger.fromInteger(value)
-        check("$result" == "42")
-
-        val zero: Integer = Integer.fromLong(0)
-        val exception: Throwable? =
-            runCatching { NonZeroInteger.fromInteger(zero) }.exceptionOrNull()
-        check(exception is IllegalArgumentException)
-
-        val safeResult: NonZeroInteger? =
-            NonZeroInteger.fromIntegerOrNull(zero)
-        check(safeResult == null)
     }
 
     // ------------------------------ Comparisons ------------------------------

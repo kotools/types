@@ -53,6 +53,37 @@ class NonZeroIntegerTest {
     }
 
     @Test
+    fun fromIntegerPreservesValue(): Unit = repeatTest {
+        val integer: Integer = Random.integerExcept(
+            illegal = Integer.fromLong(0)
+        )
+
+        val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
+        val safeNonZeroInteger: NonZeroInteger? =
+            NonZeroInteger.fromIntegerOrNull(integer)
+
+        val expected: String = integer.toString()
+        val message = "Input: $integer"
+        assertEquals(expected, actual = nonZeroInteger.toString(), message)
+        assertEquals(expected, actual = safeNonZeroInteger.toString(), message)
+    }
+
+    @Test
+    fun fromIntegerFailsWithZero() {
+        val zero: Integer = Integer.fromLong(0)
+
+        val exception: IllegalArgumentException = assertFailsWith {
+            NonZeroInteger.fromInteger(zero)
+        }
+        val expected: String = errorMessage("Integer other than zero", zero)
+        assertEquals(expected, actual = exception.message)
+
+        val safeNonZeroInteger: NonZeroInteger? =
+            NonZeroInteger.fromIntegerOrNull(zero)
+        assertNull(safeNonZeroInteger)
+    }
+
+    @Test
     fun parsingRemovesLeadingZeros(): Unit = repeatTest {
         val value: String = Random.nonZeroIntegerStringWithLeadingZeros()
 
@@ -96,37 +127,6 @@ class NonZeroIntegerTest {
             NonZeroInteger.parseOrNull(value),
             message = "Input: \"$value\""
         )
-    }
-
-    @Test
-    fun fromIntegerPreservesValue(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(
-            illegal = Integer.fromLong(0)
-        )
-
-        val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
-        val safeNonZeroInteger: NonZeroInteger? =
-            NonZeroInteger.fromIntegerOrNull(integer)
-
-        val expected: String = integer.toString()
-        val message = "Input: $integer"
-        assertEquals(expected, actual = nonZeroInteger.toString(), message)
-        assertEquals(expected, actual = safeNonZeroInteger.toString(), message)
-    }
-
-    @Test
-    fun fromIntegerFailsWithZero() {
-        val zero: Integer = Integer.fromLong(0)
-
-        val exception: IllegalArgumentException = assertFailsWith {
-            NonZeroInteger.fromInteger(zero)
-        }
-        val expected: String = errorMessage("Integer other than zero", zero)
-        assertEquals(expected, actual = exception.message)
-
-        val safeNonZeroInteger: NonZeroInteger? =
-            NonZeroInteger.fromIntegerOrNull(zero)
-        assertNull(safeNonZeroInteger)
     }
 
     // ------------------------------ Comparisons ------------------------------

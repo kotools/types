@@ -20,6 +20,21 @@ public class NonZeroIntegerJavaSample {
     }
 
     @Test
+    void fromInteger() {
+        final Integer value = Integer.fromLong(42);
+        final NonZeroInteger result = NonZeroInteger.fromInteger(value);
+        final boolean check = String.valueOf(result).equals("42");
+        if (!check) throw new IllegalStateException("Check failed.");
+
+        final Integer zero = Integer.fromLong(0);
+        try {
+            NonZeroInteger.fromInteger(zero);
+            throw new IllegalStateException("Check failed.");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
     void parsing() {
         final NonZeroInteger result = NonZeroInteger.parse("+00042");
         final boolean check = String.valueOf(result).equals("42");
@@ -33,21 +48,6 @@ public class NonZeroIntegerJavaSample {
 
         try {
             NonZeroInteger.parse("0");
-            throw new IllegalStateException("Check failed.");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    @Test
-    void fromInteger() {
-        final Integer value = Integer.fromLong(42);
-        final NonZeroInteger result = NonZeroInteger.fromInteger(value);
-        final boolean check = String.valueOf(result).equals("42");
-        if (!check) throw new IllegalStateException("Check failed.");
-
-        final Integer zero = Integer.fromLong(0);
-        try {
-            NonZeroInteger.fromInteger(zero);
             throw new IllegalStateException("Check failed.");
         } catch (IllegalArgumentException ignored) {
         }
