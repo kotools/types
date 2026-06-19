@@ -36,6 +36,14 @@ All notable changes to this project will be documented in this file.
   representation. Addition and subtraction are intentionally excluded
   because the set of non-zero integers is not closed under these operations.
   ([#1011])
+- `NonNegativeInteger` **experimental** type to `org.kotools.types.number`
+  package, representing an `Integer` that is greater than or equal to zero.
+  Supports creation via `fromLong(Long)`, `fromInteger(Integer)`,
+  `parse(String)` and their `OrNull` variants, structural equality,
+  arithmetic operators (`+` and `*`), and conversions back to `Integer` and
+  to its decimal string representation. Subtraction is intentionally
+  excluded because the set of non-negative integers is not closed under this
+  operation. ([#998])
 
 ### ♻️ Changed
 
@@ -92,6 +100,7 @@ All notable changes to this project will be documented in this file.
 [#988]: https://github.com/kotools/types/issues/988
 [#989]: https://github.com/kotools/types/issues/989
 [#990]: https://github.com/kotools/types/issues/990
+[#998]: https://github.com/kotools/types/issues/998
 [#1010]: https://github.com/kotools/types/issues/1010
 [#1011]: https://github.com/kotools/types/issues/1011
 
