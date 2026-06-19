@@ -5,7 +5,7 @@ import kotlin.test.Test
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonZeroIntegerSample {
-    // ------------------------------- Creations -------------------------------
+    // --------------------------- Factory functions ---------------------------
 
     @Test
     fun fromLong() {
@@ -39,11 +39,11 @@ class NonZeroIntegerSample {
 
     @Test
     fun fromInteger() {
-        val value: Integer = Integer.of(42)
+        val value: Integer = Integer.fromLong(42)
         val result: NonZeroInteger = NonZeroInteger.fromInteger(value)
         check("$result" == "42")
 
-        val zero: Integer = Integer.of(0)
+        val zero: Integer = Integer.fromLong(0)
         val exception: Throwable? =
             runCatching { NonZeroInteger.fromInteger(zero) }.exceptionOrNull()
         check(exception is IllegalArgumentException)
@@ -93,12 +93,12 @@ class NonZeroIntegerSample {
     fun toInteger() {
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromLong(42)
         val result: Integer = nonZeroInteger.toInteger()
-        check(result == Integer.of(42))
+        check(result == Integer.fromLong(42))
     }
 
     @Test
     fun toStringOverride() {
-        val value: Integer = Integer.of(-42)
+        val value: Integer = Integer.fromLong(-42)
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(value)
         val result: String = nonZeroInteger.toString()
         check(result == "-42")

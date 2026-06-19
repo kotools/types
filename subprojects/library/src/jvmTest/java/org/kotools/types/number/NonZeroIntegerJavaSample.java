@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NewClassNamingConvention")
 public class NonZeroIntegerJavaSample {
-    // ------------------------------- Creations -------------------------------
+    // --------------------------- Factory functions ---------------------------
 
     @Test
     void fromLong() {
@@ -40,12 +40,12 @@ public class NonZeroIntegerJavaSample {
 
     @Test
     void fromInteger() {
-        final Integer value = Integer.of(42);
+        final Integer value = Integer.fromLong(42);
         final NonZeroInteger result = NonZeroInteger.fromInteger(value);
         final boolean check = String.valueOf(result).equals("42");
         if (!check) throw new IllegalStateException("Check failed.");
 
-        final Integer zero = Integer.of(0);
+        final Integer zero = Integer.fromLong(0);
         try {
             NonZeroInteger.fromInteger(zero);
             throw new IllegalStateException("Check failed.");
@@ -96,13 +96,13 @@ public class NonZeroIntegerJavaSample {
     void toInteger() {
         final NonZeroInteger nonZeroInteger = NonZeroInteger.fromLong(42L);
         final Integer result = nonZeroInteger.toInteger();
-        final boolean check = result.equals(Integer.of(42L));
+        final boolean check = result.equals(Integer.fromLong(42L));
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
     @Test
     void toStringOverride() {
-        final Integer value = Integer.of(-42);
+        final Integer value = Integer.fromLong(-42);
         final NonZeroInteger nonZeroInteger = NonZeroInteger.fromInteger(value);
         final String result = String.valueOf(nonZeroInteger);
         final boolean check = result.equals("-42");

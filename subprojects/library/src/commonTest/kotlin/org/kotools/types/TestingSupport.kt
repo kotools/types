@@ -100,7 +100,8 @@ internal fun Random.positiveInteger(): Integer {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Random.nonZeroInteger(): NonZeroInteger {
-    val integer: Integer = this.integerExcept(illegal = Integer.of(0))
+    val zero: Integer = Integer.fromLong(0)
+    val integer: Integer = this.integerExcept(zero)
     return NonZeroInteger.fromInteger(integer)
 }
 

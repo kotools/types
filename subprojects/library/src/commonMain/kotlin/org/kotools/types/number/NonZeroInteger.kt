@@ -3,6 +3,12 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.number.NonZeroInteger.Companion.fromInteger
+import org.kotools.types.number.NonZeroInteger.Companion.fromIntegerOrNull
+import org.kotools.types.number.NonZeroInteger.Companion.fromLong
+import org.kotools.types.number.NonZeroInteger.Companion.fromLongOrNull
+import org.kotools.types.number.NonZeroInteger.Companion.parse
+import org.kotools.types.number.NonZeroInteger.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -33,9 +39,9 @@ import kotlin.jvm.JvmSynthetic
  * @since 5.2.0
  */
 @ExperimentalKotoolsTypesApi
-public class NonZeroInteger private constructor(
-    private val value: Integer
-) {
+public class NonZeroInteger private constructor(private val value: Integer) {
+    // --------------------------- Factory functions ---------------------------
+
     /** Contains class-level declarations for the [NonZeroInteger] type. */
     public companion object {
         /**
@@ -69,8 +75,10 @@ public class NonZeroInteger private constructor(
          * throwing an exception when [value] is `0`.
          */
         @JvmStatic
-        public fun fromLong(value: Long): NonZeroInteger =
-            fromInteger(Integer.of(value))
+        public fun fromLong(value: Long): NonZeroInteger {
+            val integer: Integer = Integer.fromLong(value)
+            return this.fromInteger(integer)
+        }
 
         /**
          * Returns a [NonZeroInteger] representing the specified [value], or
@@ -95,8 +103,10 @@ public class NonZeroInteger private constructor(
          * returning `null` when [value] is `0`.
          */
         @JvmSynthetic
-        public fun fromLongOrNull(value: Long): NonZeroInteger? =
-            fromIntegerOrNull(Integer.of(value))
+        public fun fromLongOrNull(value: Long): NonZeroInteger? {
+            val integer: Integer = Integer.fromLong(value)
+            return this.fromIntegerOrNull(integer)
+        }
 
         /**
          * Returns a [NonZeroInteger] representing the specified [value], or
@@ -130,7 +140,11 @@ public class NonZeroInteger private constructor(
          */
         @JvmStatic
         public fun fromInteger(value: Integer): NonZeroInteger {
-            if (value == Integer.of(0)) zeroIntegerError(value)
+            if (value == Integer.fromLong(0)) {
+                val message: String =
+                    errorMessage("Integer other than zero", value)
+                throw IllegalArgumentException(message)
+            }
             return NonZeroInteger(value)
         }
 
@@ -158,7 +172,8 @@ public class NonZeroInteger private constructor(
          */
         @JvmSynthetic
         public fun fromIntegerOrNull(value: Integer): NonZeroInteger? =
-            if (value == Integer.of(0)) null else NonZeroInteger(value)
+            if (value == Integer.fromLong(0)) null
+            else NonZeroInteger(value)
 
         /**
          * Returns a [NonZeroInteger] representing the number described by
@@ -198,7 +213,7 @@ public class NonZeroInteger private constructor(
         @JvmStatic
         public fun parse(value: String): NonZeroInteger {
             val integer: Integer = Integer.parse(value)
-            return fromInteger(integer)
+            return this.fromInteger(integer)
         }
 
         /**
@@ -230,12 +245,7 @@ public class NonZeroInteger private constructor(
         @JvmSynthetic
         public fun parseOrNull(value: String): NonZeroInteger? {
             val integer: Integer = Integer.parseOrNull(value) ?: return null
-            return fromIntegerOrNull(integer)
-        }
-
-        private fun zeroIntegerError(value: Integer): Nothing {
-            val message: String = errorMessage("Integer other than zero", value)
-            throw IllegalArgumentException(message)
+            return this.fromIntegerOrNull(integer)
         }
     }
 

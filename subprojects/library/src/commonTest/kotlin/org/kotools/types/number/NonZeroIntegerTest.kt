@@ -22,7 +22,7 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonZeroIntegerTest {
-    // ------------------------------- Creations -------------------------------
+    // --------------------------- Factory functions ---------------------------
 
     @Test
     fun fromLongPreservesValue(): Unit = repeatTest {
@@ -44,7 +44,7 @@ class NonZeroIntegerTest {
         val exception: IllegalArgumentException =
             assertFailsWith { NonZeroInteger.fromLong(0) }
         val expected: String =
-            errorMessage("Integer other than zero", Integer.of(0))
+            errorMessage("Integer other than zero", Integer.fromLong(0))
         assertEquals(expected, actual = exception.message)
 
         val safeNonZeroInteger: NonZeroInteger? =
@@ -75,7 +75,10 @@ class NonZeroIntegerTest {
         assertFailsWith<NumberFormatException>(message = "Input: \"$value\"") {
             NonZeroInteger.parse(value)
         }
-        assertNull(NonZeroInteger.parseOrNull(value), message = "Input: \"$value\"")
+        assertNull(
+            NonZeroInteger.parseOrNull(value),
+            message = "Input: \"$value\""
+        )
     }
 
     @Test
@@ -86,15 +89,20 @@ class NonZeroIntegerTest {
             message = "Input: \"$value\""
         ) { NonZeroInteger.parse(value) }
         val expected: String =
-            errorMessage("Integer other than zero", Integer.of(0))
+            errorMessage("Integer other than zero", Integer.fromLong(0))
         assertEquals(expected, actual = exception.message)
 
-        assertNull(NonZeroInteger.parseOrNull(value), message = "Input: \"$value\"")
+        assertNull(
+            NonZeroInteger.parseOrNull(value),
+            message = "Input: \"$value\""
+        )
     }
 
     @Test
     fun fromIntegerPreservesValue(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(illegal = Integer.of(0))
+        val integer: Integer = Random.integerExcept(
+            illegal = Integer.fromLong(0)
+        )
 
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
         val safeNonZeroInteger: NonZeroInteger? =
@@ -108,7 +116,7 @@ class NonZeroIntegerTest {
 
     @Test
     fun fromIntegerFailsWithZero() {
-        val zero: Integer = Integer.of(0)
+        val zero: Integer = Integer.fromLong(0)
 
         val exception: IllegalArgumentException = assertFailsWith {
             NonZeroInteger.fromInteger(zero)
@@ -225,7 +233,7 @@ class NonZeroIntegerTest {
 
     @Test
     fun unaryMinusInversesSign(): Unit = repeatTest {
-        val zero: Integer = Integer.of(0)
+        val zero: Integer = Integer.fromLong(0)
         val x: NonZeroInteger = Random.nonZeroInteger()
 
         val xSign: Int = x.toInteger()
@@ -293,9 +301,9 @@ class NonZeroIntegerTest {
         val x: NonZeroInteger = Random.nonZeroInteger()
         val y: NonZeroInteger = Random.nonZeroInteger()
 
-        val result: NonZeroInteger = x * y // Throws if the result is zero.
+        val result: NonZeroInteger = x * y
 
-        val zero: Integer = Integer.of(0)
+        val zero: Integer = Integer.fromLong(0)
         val message = "Inputs: x = $x, y = $y"
         assertNotEquals(zero, result.toInteger(), message)
     }
@@ -314,7 +322,9 @@ class NonZeroIntegerTest {
 
     @Test
     fun toIntegerRoundTripsWithFromInteger(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(illegal = Integer.of(0))
+        val integer: Integer = Random.integerExcept(
+            illegal = Integer.fromLong(0)
+        )
 
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
         val actual: Integer = nonZeroInteger.toInteger()
@@ -324,7 +334,9 @@ class NonZeroIntegerTest {
 
     @Test
     fun toStringDelegatesToInteger(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(illegal = Integer.of(0))
+        val integer: Integer = Random.integerExcept(
+            illegal = Integer.fromLong(0)
+        )
 
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
 
