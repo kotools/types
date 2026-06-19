@@ -6,21 +6,21 @@ rationale behind it, and its consequences.
 
 ## 📄 Index
 
-| ADR                                                       | Title                                               | Status                   |
-|-----------------------------------------------------------|-----------------------------------------------------|--------------------------|
-| [ADR-001](ADR-001-integer-euclidean-division.md)          | Euclidean division for `Integer`                    | ✅ Accepted               |
-| [ADR-002](ADR-002-integer-value-semantics.md)             | Value semantics for `Integer` arithmetic operations | ✅ Accepted               |
-| [ADR-003](ADR-003-euclidean-division-platform-impl.md)    | Platform implementation of Euclidean division       | 🔄 Superseded by ADR-008 |
-| [ADR-004](ADR-004-decimal-scaled-integer-repr.md)         | Scaled-integer representation for `Decimal`         | ✅ Accepted               |
-| [ADR-005](ADR-005-decimal-canonical-form.md)              | Canonical form for `Decimal`                        | ✅ Accepted               |
-| [ADR-006](ADR-006-decimal-division-exclusion.md)          | Exclusion of division from `Decimal` arithmetic     | ✅ Accepted               |
-| [ADR-007](ADR-007-native-integer-sign-magnitude-repr.md)  | Sign-magnitude representation for `NativeInteger`   | ✅ Accepted               |
-| [ADR-008](ADR-008-euclidean-division-platform-impl-v2.md) | Platform implementation of Euclidean division (v2)  | ✅ Accepted               |
-| [ADR-009](ADR-009-default-serializer-serial-names.md)     | Explicit serial names for default serializers       | ✅ Accepted               |
-| [ADR-010](ADR-010-error-message-format.md)                | Error message format for `org.kotools.types`        | ✅ Accepted               |
-| [ADR-011](ADR-011-error-message-quote-escaping.md)        | String value quote escaping for `org.kotools.types` | ✅ Accepted               |
-| [ADR-012](ADR-012-native-decimal-io-chunking.md)          | 10⁹-chunk decimal I/O for `NativeInteger`           | ✅ Accepted               |
-| [ADR-013](ADR-013-nonzerointeger-additive-exclusion.md)   | Exclusion of additive operations from `NonZeroInteger` arithmetic | ✅ Accepted |
+| ADR                                                       | Title                                                             | Status                   |
+|-----------------------------------------------------------|-------------------------------------------------------------------|--------------------------|
+| [ADR-001](ADR-001-integer-euclidean-division.md)          | Euclidean division for `Integer`                                  | ✅ Accepted               |
+| [ADR-002](ADR-002-integer-value-semantics.md)             | Value semantics for `Integer` arithmetic operations               | ✅ Accepted               |
+| [ADR-003](ADR-003-euclidean-division-platform-impl.md)    | Platform implementation of Euclidean division                     | 🔄 Superseded by ADR-008 |
+| [ADR-004](ADR-004-decimal-scaled-integer-repr.md)         | Scaled-integer representation for `Decimal`                       | ✅ Accepted               |
+| [ADR-005](ADR-005-decimal-canonical-form.md)              | Canonical form for `Decimal`                                      | ✅ Accepted               |
+| [ADR-006](ADR-006-decimal-division-exclusion.md)          | Exclusion of division from `Decimal` arithmetic                   | ✅ Accepted               |
+| [ADR-007](ADR-007-native-integer-sign-magnitude-repr.md)  | Sign-magnitude representation for `NativeInteger`                 | ✅ Accepted               |
+| [ADR-008](ADR-008-euclidean-division-platform-impl-v2.md) | Platform implementation of Euclidean division (v2)                | ✅ Accepted               |
+| [ADR-009](ADR-009-default-serializer-serial-names.md)     | Explicit serial names for default serializers                     | ✅ Accepted               |
+| [ADR-010](ADR-010-error-message-format.md)                | Error message format for `org.kotools.types`                      | ✅ Accepted               |
+| [ADR-011](ADR-011-error-message-quote-escaping.md)        | String value quote escaping for `org.kotools.types`               | ✅ Accepted               |
+| [ADR-012](ADR-012-native-decimal-io-chunking.md)          | 10⁹-chunk decimal I/O for `NativeInteger`                         | ✅ Accepted               |
+| [ADR-013](ADR-013-nonzerointeger-additive-exclusion.md)   | Exclusion of additive operations from `NonZeroInteger` arithmetic | ✅ Accepted               |
 
 ## 🔄 Superseding records
 
