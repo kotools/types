@@ -38,6 +38,23 @@ class NonNegativeIntegerSample {
         check(safeResult == null)
     }
 
+    @Test
+    fun parsing() {
+        val result: NonNegativeInteger = NonNegativeInteger.parse("+00042")
+        check("$result" == "42")
+
+        val invalid: Throwable? =
+            runCatching { NonNegativeInteger.parse("3.14") }.exceptionOrNull()
+        check(invalid is NumberFormatException)
+
+        val negative: Throwable? =
+            runCatching { NonNegativeInteger.parse("-1") }.exceptionOrNull()
+        check(negative is IllegalArgumentException)
+
+        check(NonNegativeInteger.parseOrNull("3.14") == null)
+        check(NonNegativeInteger.parseOrNull("-1") == null)
+    }
+
     // ------------------------------ Comparisons ------------------------------
 
     @Test

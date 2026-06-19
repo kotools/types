@@ -17,8 +17,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from a [Long] or an [Integer] (see [fromLong] and
- * [fromInteger]).
+ * - **Creations:** Create from a [Long], an [Integer], or a decimal string
+ * (see [fromLong], [fromInteger] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonNegativeInteger.equals] (`x == y`, `x != y`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
@@ -166,6 +166,79 @@ public class NonNegativeInteger private constructor(
         public fun fromIntegerOrNull(value: Integer): NonNegativeInteger? {
             val zero: Integer = Integer.fromLong(0)
             return if (value < zero) null else NonNegativeInteger(value)
+        }
+
+        /**
+         * Returns a [NonNegativeInteger] representing the number described
+         * by [value], or throws [NumberFormatException] if [value] doesn't
+         * represent an integer, or [IllegalArgumentException] if [value]
+         * represents a negative integer.
+         *
+         * See the [Integer.Companion.parse] function for the grammar of a
+         * valid integer representation.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.parsing
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.parsing
+         * </details>
+         * <br>
+         *
+         * See the [parseOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid or negative [value].
+         */
+        @JvmStatic
+        public fun parse(value: String): NonNegativeInteger {
+            val integer: Integer = Integer.parse(value)
+            return this.fromInteger(integer)
+        }
+
+        /**
+         * Returns a [NonNegativeInteger] representing the number described
+         * by [value], or returns `null` if [value] doesn't represent an
+         * integer or represents a negative integer.
+         *
+         * See the [Integer.Companion.parse] function for the grammar of a
+         * valid integer representation.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.parsing
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [parse] function for throwing an exception instead of
+         * returning `null` in case of invalid or negative [value].
+         */
+        @JvmSynthetic
+        public fun parseOrNull(value: String): NonNegativeInteger? {
+            val integer: Integer = Integer.parseOrNull(value) ?: return null
+            return this.fromIntegerOrNull(integer)
         }
     }
 

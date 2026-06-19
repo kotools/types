@@ -2,10 +2,14 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.negativeIntegerString
+import org.kotools.types.nonIntegerString
 import org.kotools.types.nonNegativeInteger
 import org.kotools.types.nonNegativeIntegerExcept
 import org.kotools.types.positiveInteger
+import org.kotools.types.positiveIntegerString
 import org.kotools.types.repeatTest
+import org.kotools.types.zeroString
 import kotlin.random.Random
 import kotlin.random.nextLong
 import kotlin.test.Test
@@ -88,6 +92,70 @@ class NonNegativeIntegerTest {
         val safeNonNegativeInteger: NonNegativeInteger? =
             NonNegativeInteger.fromIntegerOrNull(integer)
         assertNull(safeNonNegativeInteger, message = "Input: $integer")
+    }
+
+    @Test
+    fun parsingPreservesValueWithZero(): Unit = repeatTest {
+        val value: String = Random.zeroString()
+
+        val nonNegativeInteger: NonNegativeInteger =
+            NonNegativeInteger.parse(value)
+        val safeNonNegativeInteger: NonNegativeInteger? =
+            NonNegativeInteger.parseOrNull(value)
+
+        val message = "Input: \"$value\""
+        assertEquals("0", actual = nonNegativeInteger.toString(), message)
+        assertEquals("0", actual = safeNonNegativeInteger.toString(), message)
+    }
+
+    @Test
+    fun parsingPreservesValueWithPositiveValue(): Unit = repeatTest {
+        val value: String = Random.positiveIntegerString()
+
+        val nonNegativeInteger: NonNegativeInteger =
+            NonNegativeInteger.parse(value)
+        val safeNonNegativeInteger: NonNegativeInteger? =
+            NonNegativeInteger.parseOrNull(value)
+
+        val expected: String = Integer.parse(value)
+            .toString()
+        val message = "Input: \"$value\""
+        assertEquals(expected, actual = nonNegativeInteger.toString(), message)
+        assertEquals(
+            expected,
+            actual = safeNonNegativeInteger.toString(),
+            message
+        )
+    }
+
+    @Test
+    fun parsingFailsWithNonIntegerString(): Unit = repeatTest {
+        val value: String = Random.nonIntegerString()
+
+        assertFailsWith<NumberFormatException>(message = "Input: \"$value\"") {
+            NonNegativeInteger.parse(value)
+        }
+        assertNull(
+            NonNegativeInteger.parseOrNull(value),
+            message = "Input: \"$value\""
+        )
+    }
+
+    @Test
+    fun parsingFailsWithNegativeValue(): Unit = repeatTest {
+        val value: String = Random.negativeIntegerString()
+
+        val exception: IllegalArgumentException = assertFailsWith(
+            message = "Input: \"$value\""
+        ) { NonNegativeInteger.parse(value) }
+        val integer: Integer = Integer.parse(value)
+        val expected: String = errorMessage("Negative integer", integer)
+        assertEquals(expected, actual = exception.message)
+
+        assertNull(
+            NonNegativeInteger.parseOrNull(value),
+            message = "Input: \"$value\""
+        )
     }
 
     // ------------------------------ Comparisons ------------------------------

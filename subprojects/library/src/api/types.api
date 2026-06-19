@@ -416,6 +416,7 @@ public final class org/kotools/types/number/NonNegativeInteger {
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonNegativeInteger;
 	public static final fun fromLong (J)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun hashCode ()I
+	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
 }
@@ -425,6 +426,8 @@ public final class org/kotools/types/number/NonNegativeInteger$Companion {
 	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun fromLong (J)Lorg/kotools/types/number/NonNegativeInteger;
 	public final synthetic fun fromLongOrNull (J)Lorg/kotools/types/number/NonNegativeInteger;
+	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonNegativeInteger;
+	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/number/NonNegativeInteger;
 }
 
 public final class org/kotools/types/number/NonZeroInteger {

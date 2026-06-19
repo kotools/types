@@ -153,6 +153,11 @@ internal fun Random.positiveIntegerString(): String {
     return "$sign$digits"
 }
 
+internal fun Random.negativeIntegerString(): String {
+    val digits: Long = this.nextLong(1..Long.MAX_VALUE)
+    return "-$digits"
+}
+
 internal fun Random.nonZeroIntegerStringWithLeadingZeros(): String {
     val prefix: String = this.zeroString()
     val suffix: String = this.positiveIntegerString()
