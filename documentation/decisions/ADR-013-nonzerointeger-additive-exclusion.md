@@ -35,7 +35,7 @@ arithmetic operations provided are unary minus (`-x`) and multiplication
 - **Consistent with `Decimal` design.** [ADR-006][ADR-006] excludes division
   from `Decimal` for the same underlying reason: the set of terminating
   decimals is not closed under division. `NonZeroInteger` follows the same
-  principle — only operations that keep results within the modelled set are
+  principle — only operations that keep results within the modeled set are
   exposed.
 - **`times` and `unaryMinus` stay because closure holds.** The product of two
   non-zero integers is always non-zero, and the negation of a non-zero
