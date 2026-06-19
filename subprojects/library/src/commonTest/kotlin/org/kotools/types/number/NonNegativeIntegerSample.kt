@@ -71,6 +71,28 @@ class NonNegativeIntegerSample {
         check(x.hashCode() != z.hashCode())
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun plus() {
+        val x: NonNegativeInteger = NonNegativeInteger.fromLong(42)
+        val y: NonNegativeInteger = NonNegativeInteger.fromLong(8)
+        val result: NonNegativeInteger = x + y
+        val expected: NonNegativeInteger = NonNegativeInteger.fromLong(50)
+        check(result == expected)
+    }
+
+    @Test
+    fun times() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.fromLong(99999999999999999)
+        val y: NonNegativeInteger = NonNegativeInteger.fromLong(10)
+        val result: NonNegativeInteger = x * y
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("999999999999999990")
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

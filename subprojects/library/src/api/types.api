@@ -417,6 +417,8 @@ public final class org/kotools/types/number/NonNegativeInteger {
 	public static final fun fromLong (J)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun hashCode ()I
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonNegativeInteger;
+	public final fun plus (Lorg/kotools/types/number/NonNegativeInteger;)Lorg/kotools/types/number/NonNegativeInteger;
+	public final fun times (Lorg/kotools/types/number/NonNegativeInteger;)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
 }

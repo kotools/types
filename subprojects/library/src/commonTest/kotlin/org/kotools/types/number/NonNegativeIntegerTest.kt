@@ -19,6 +19,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonNegativeIntegerTest {
@@ -260,6 +261,114 @@ class NonNegativeIntegerTest {
         val message = "Structural equality must fail with null."
         assertFalse(equality, message)
         assertFalse(hashEquality, message)
+    }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun plusIsCommutative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x + y, y + x, message)
+    }
+
+    @Test
+    fun plusHasZeroAsIdentityElement(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val zero: NonNegativeInteger = NonNegativeInteger.fromLong(0)
+        val message = "Input: $x"
+        assertEquals(x, x + zero, message)
+        assertEquals(x, zero + x, message)
+    }
+
+    @Test
+    fun plusIsAssociative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+        val z: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val actual: NonNegativeInteger = (x + y) + z
+
+        val expected: NonNegativeInteger = x + (y + z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusIsAlwaysNonNegative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val result: NonNegativeInteger = x + y
+
+        val zero: Integer = Integer.fromLong(0)
+        val message = "Inputs: x = $x, y = $y"
+        assertTrue(result.toInteger() >= zero, message)
+    }
+
+    @Test
+    fun plusSanityCheck() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        val y: NonNegativeInteger = NonNegativeInteger.parse("1")
+        val actual: NonNegativeInteger = x + y
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("100000000000000000000")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun timesIsCommutative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x * y, y * x, message)
+    }
+
+    @Test
+    fun timesHasOneAsIdentityElement(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val one: NonNegativeInteger = NonNegativeInteger.fromLong(1)
+        val message = "Input: $x"
+        assertEquals(x, x * one, message)
+        assertEquals(x, one * x, message)
+    }
+
+    @Test
+    fun timesIsAssociative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+        val z: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val actual: NonNegativeInteger = (x * y) * z
+
+        val expected: NonNegativeInteger = x * (y * z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun timesIsAlwaysNonNegative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val result: NonNegativeInteger = x * y
+
+        val zero: Integer = Integer.fromLong(0)
+        val message = "Inputs: x = $x, y = $y"
+        assertTrue(result.toInteger() >= zero, message)
+    }
+
+    @Test
+    fun timesSanityCheck() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        val y: NonNegativeInteger = NonNegativeInteger.parse("10")
+        val actual: NonNegativeInteger = x * y
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("999999999999999999990")
+        assertEquals(expected, actual)
     }
 
     // ------------------------------ Conversions ------------------------------

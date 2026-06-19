@@ -3,6 +3,12 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.number.NonNegativeInteger.Companion.fromInteger
+import org.kotools.types.number.NonNegativeInteger.Companion.fromIntegerOrNull
+import org.kotools.types.number.NonNegativeInteger.Companion.fromLong
+import org.kotools.types.number.NonNegativeInteger.Companion.fromLongOrNull
+import org.kotools.types.number.NonNegativeInteger.Companion.parse
+import org.kotools.types.number.NonNegativeInteger.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -21,6 +27,11 @@ import kotlin.jvm.JvmSynthetic
  * (see [fromLong], [fromInteger] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonNegativeInteger.equals] (`x == y`, `x != y`).
+ * - **Arithmetic operations:** [Add][plus] (`x + y`) or [multiply][times]
+ * (`x * y`) non-negative integers, always producing another non-negative
+ * integer. Subtraction is intentionally absent, because the set of
+ * non-negative integers isn't closed under this operation (e.g.,
+ * `1 - 2 = -1`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see
  * [NonNegativeInteger.toString]).
@@ -312,6 +323,64 @@ public class NonNegativeInteger private constructor(
         val seed: Int = HashSeed.NonNegativeInteger.toInt()
         return 31 * seed + this.value.hashCode()
     }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Adds the [other] integer to this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.plus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.plus
+     * </details>
+     */
+    public operator fun plus(other: NonNegativeInteger): NonNegativeInteger =
+        fromInteger(this.value + other.value)
+
+    /**
+     * Multiplies this integer by the [other] one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.times
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.times
+     * </details>
+     */
+    public operator fun times(other: NonNegativeInteger): NonNegativeInteger =
+        fromInteger(this.value * other.value)
 
     // ------------------------------ Conversions ------------------------------
 

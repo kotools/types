@@ -71,6 +71,30 @@ public class NonNegativeIntegerJavaSample {
         if (!inequality) throw new IllegalStateException("Check failed.");
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    void plus() {
+        final NonNegativeInteger x = NonNegativeInteger.fromLong(42L);
+        final NonNegativeInteger y = NonNegativeInteger.fromLong(8L);
+        final NonNegativeInteger result = x.plus(y);
+        final NonNegativeInteger expected = NonNegativeInteger.fromLong(50L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
+    void times() {
+        final NonNegativeInteger x =
+                NonNegativeInteger.fromLong(99999999999999999L);
+        final NonNegativeInteger y = NonNegativeInteger.fromLong(10L);
+        final NonNegativeInteger result = x.times(y);
+        final NonNegativeInteger expected =
+                NonNegativeInteger.parse("999999999999999990");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
