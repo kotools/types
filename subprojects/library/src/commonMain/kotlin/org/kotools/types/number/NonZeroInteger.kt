@@ -141,8 +141,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
         @JvmStatic
         public fun fromInteger(value: Integer): NonZeroInteger {
             if (value == Integer.fromLong(0)) {
-                val message: String =
-                    errorMessage("Integer other than zero", value)
+                val message: String = errorMessage("Zero integer")
                 throw IllegalArgumentException(message)
             }
             return NonZeroInteger(value)

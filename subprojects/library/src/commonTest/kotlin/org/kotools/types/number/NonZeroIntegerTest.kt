@@ -43,8 +43,7 @@ class NonZeroIntegerTest {
     fun fromLongFailsWithZero() {
         val exception: IllegalArgumentException =
             assertFailsWith { NonZeroInteger.fromLong(0) }
-        val expected: String =
-            errorMessage("Integer other than zero", Integer.fromLong(0))
+        val expected: String = errorMessage("Zero integer")
         assertEquals(expected, actual = exception.message)
 
         val safeNonZeroInteger: NonZeroInteger? =
@@ -75,7 +74,7 @@ class NonZeroIntegerTest {
         val exception: IllegalArgumentException = assertFailsWith {
             NonZeroInteger.fromInteger(zero)
         }
-        val expected: String = errorMessage("Integer other than zero", zero)
+        val expected: String = errorMessage("Zero integer")
         assertEquals(expected, actual = exception.message)
 
         val safeNonZeroInteger: NonZeroInteger? =
@@ -119,8 +118,7 @@ class NonZeroIntegerTest {
         val exception: IllegalArgumentException = assertFailsWith(
             message = "Input: \"$value\""
         ) { NonZeroInteger.parse(value) }
-        val expected: String =
-            errorMessage("Integer other than zero", Integer.fromLong(0))
+        val expected: String = errorMessage("Zero integer")
         assertEquals(expected, actual = exception.message)
 
         assertNull(
