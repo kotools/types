@@ -345,8 +345,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
      * SAMPLE: org.kotools.types.number.NonZeroIntegerJavaSample.unaryMinus
      * </details>
      */
-    public operator fun unaryMinus(): NonZeroInteger =
-        NonZeroInteger(-this.value)
+    public operator fun unaryMinus(): NonZeroInteger = fromInteger(-this.value)
 
     /**
      * Multiplies this integer by the [other] one.
@@ -374,7 +373,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
      * </details>
      */
     public operator fun times(other: NonZeroInteger): NonZeroInteger =
-        NonZeroInteger(this.value * other.value)
+        fromInteger(this.value * other.value)
 
     // ------------------------------ Conversions ------------------------------
 
