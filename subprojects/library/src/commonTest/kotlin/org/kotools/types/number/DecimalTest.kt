@@ -25,7 +25,7 @@ class DecimalTest {
     fun ofPreservesLongRepresentation(): Unit = repeatTest {
         val value: Long = Random.nextLong()
 
-        val actual: Decimal = Decimal.of(value)
+        val actual: Decimal = Decimal.fromLong(value)
 
         val expected: String = value.toString()
         assertEquals(expected, actual = "$actual", message = "Input: $value")
@@ -41,7 +41,7 @@ class DecimalTest {
         val decimal: Decimal = Decimal.parse(value)
         val safeDecimal: Decimal? = Decimal.parseOrNull(value)
 
-        val expected: Decimal = Decimal.of(0)
+        val expected: Decimal = Decimal.fromLong(0)
         val message = "Input: \"$value\""
         assertEquals(expected, actual = decimal, message)
         assertEquals(expected, actual = safeDecimal, message)
@@ -335,7 +335,7 @@ class DecimalTest {
     @Test
     fun unaryMinusIsAdditiveInverse(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
 
         val actual: Decimal = x + (-x)
 
@@ -355,7 +355,7 @@ class DecimalTest {
 
     @Test
     fun unaryMinusInversesSign(): Unit = repeatTest {
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
         val x: Decimal = Random.decimalExcept(illegal = zero)
 
         val xSign: Int = x.compareTo(zero)
@@ -370,7 +370,7 @@ class DecimalTest {
 
     @Test
     fun unaryMinusOnZero() {
-        val x: Decimal = Decimal.of(0)
+        val x: Decimal = Decimal.fromLong(0)
         val actual: Decimal = -x
         assertEquals(x, actual)
     }
@@ -402,7 +402,7 @@ class DecimalTest {
     @Test
     fun plusHasZeroAsIdentityElement(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
         val message = "Input: $x"
         assertEquals(x, x + zero, message)
         assertEquals(x, zero + x, message)
@@ -438,7 +438,7 @@ class DecimalTest {
     fun plusHasUniqueInverseElement(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
         val y: Decimal = Random.decimal()
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
 
         val actual: Boolean = x == -y
 
@@ -493,7 +493,7 @@ class DecimalTest {
     @Test
     fun minusHasZeroAsRightIdentityElement(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
         val message = "Input: $x"
         assertEquals(x, x - zero, message)
     }
@@ -501,7 +501,7 @@ class DecimalTest {
     @Test
     fun minusOfSameDecimalsIsZero(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
         val message = "Input: $x"
         assertEquals(zero, x - x, message)
     }
@@ -563,7 +563,7 @@ class DecimalTest {
     @Test
     fun timesHasOneAsIdentityElement(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
-        val one: Decimal = Decimal.of(1)
+        val one: Decimal = Decimal.fromLong(1)
         val message = "Input: $x"
         assertEquals(x, x * one, message)
         assertEquals(x, one * x, message)
@@ -585,7 +585,7 @@ class DecimalTest {
     @Test
     fun timesHasZeroAsAbsorbingElement(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
-        val zero: Decimal = Decimal.of(0)
+        val zero: Decimal = Decimal.fromLong(0)
 
         val message = "Input: $x"
         assertEquals(zero, x * zero, message)
@@ -634,7 +634,7 @@ class DecimalTest {
     fun timesSatisfiesCancellation(): Unit = repeatTest {
         val x: Decimal = Random.decimal()
         val y: Decimal = Random.decimal()
-        val z: Decimal = Random.decimalExcept(illegal = Decimal.of(0))
+        val z: Decimal = Random.decimalExcept(illegal = Decimal.fromLong(0))
 
         val actual: Boolean = x * z == y * z
 

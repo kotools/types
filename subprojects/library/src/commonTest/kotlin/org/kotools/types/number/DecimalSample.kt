@@ -8,9 +8,9 @@ class DecimalSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    fun of() {
+    fun fromLong() {
         fun createsFromLong(input: Long, expected: String) {
-            val result: Decimal = Decimal.of(input)
+            val result: Decimal = Decimal.fromLong(input)
             check("$result" == expected)
         }
 
@@ -91,7 +91,10 @@ class DecimalSample {
         }
 
         // Scale-normalised values are equal:
-        checkEquality(decimal = Decimal.of(0), other = Decimal.parse("-0.0"))
+        checkEquality(
+            decimal = Decimal.fromLong(0),
+            other = Decimal.parse("-0.0")
+        )
         checkEquality(
             decimal = Decimal.parse("3.14"),
             other = Decimal.parse("3.140")
@@ -102,9 +105,9 @@ class DecimalSample {
         )
 
         // Different values or types are not equal:
-        checkDiff(decimal = Decimal.of(0), other = Decimal.of(1))
+        checkDiff(decimal = Decimal.fromLong(0), other = Decimal.fromLong(1))
         checkDiff(decimal = Decimal.parse("3.14"), other = 3.14)
-        checkDiff(decimal = Decimal.of(-42), other = null)
+        checkDiff(decimal = Decimal.fromLong(-42), other = null)
     }
 
     @Test

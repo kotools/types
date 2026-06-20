@@ -366,9 +366,9 @@ public final class org/kotools/types/number/Decimal {
 	public synthetic fun <init> (Lorg/kotools/types/number/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun compareTo (Lorg/kotools/types/number/Decimal;)I
 	public final fun equals (Ljava/lang/Object;)Z
+	public static final fun fromLong (J)Lorg/kotools/types/number/Decimal;
 	public final fun hashCode ()I
 	public final fun minus (Lorg/kotools/types/number/Decimal;)Lorg/kotools/types/number/Decimal;
-	public static final fun of (J)Lorg/kotools/types/number/Decimal;
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
 	public final fun plus (Lorg/kotools/types/number/Decimal;)Lorg/kotools/types/number/Decimal;
 	public final fun times (Lorg/kotools/types/number/Decimal;)Lorg/kotools/types/number/Decimal;
@@ -377,7 +377,7 @@ public final class org/kotools/types/number/Decimal {
 }
 
 public final class org/kotools/types/number/Decimal$Companion {
-	public final fun of (J)Lorg/kotools/types/number/Decimal;
+	public final fun fromLong (J)Lorg/kotools/types/number/Decimal;
 	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
 	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/number/Decimal;
 }

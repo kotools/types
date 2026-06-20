@@ -3,7 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
-import org.kotools.types.number.Decimal.Companion.of
+import org.kotools.types.number.Decimal.Companion.fromLong
 import org.kotools.types.number.Decimal.Companion.parse
 import org.kotools.types.number.Decimal.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
@@ -56,8 +56,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from Kotlin integer types or decimal string (see [of]
- * and [parse]).
+ * - **Creations:** Create from Kotlin integer types or decimal string (see
+ * [fromLong] and [parse]).
  * - **Comparisons:** Compare decimals using
  * [structural equality][Decimal.equals] (`x == y`, `x != y`) and
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
@@ -96,7 +96,7 @@ public class Decimal private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.number.DecimalSample.of
+         * SAMPLE: org.kotools.types.number.DecimalSample.fromLong
          * </details>
          *
          * <br>
@@ -107,11 +107,11 @@ public class Decimal private constructor(
          *
          * Here's an example of calling this function from Java code:
          *
-         * SAMPLE: org.kotools.types.number.DecimalJavaSample.of
+         * SAMPLE: org.kotools.types.number.DecimalJavaSample.fromLong
          * </details>
          */
         @JvmStatic
-        public fun of(value: Long): Decimal {
+        public fun fromLong(value: Long): Decimal {
             val unscaled: Integer = Integer.fromLong(value)
             return Decimal(unscaled, scale = 0)
         }

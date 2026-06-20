@@ -11,9 +11,9 @@ public class DecimalJavaSample {
     // ------------------------------- Creations -------------------------------
 
     @Test
-    void of() {
+    void fromLong() {
         final BiConsumer<Long, String> createsFromLong = (input, expected) -> {
-            final Decimal result = Decimal.of(input);
+            final Decimal result = Decimal.fromLong(input);
             final boolean check = String.valueOf(result).equals(expected);
             if (!check) throw new IllegalStateException("Check failed.");
         };
@@ -97,14 +97,14 @@ public class DecimalJavaSample {
         };
 
         // Scale-normalised values are equal:
-        checkEquality.accept(Decimal.of(0), Decimal.parse("-0.0"));
+        checkEquality.accept(Decimal.fromLong(0), Decimal.parse("-0.0"));
         checkEquality.accept(Decimal.parse("3.14"), Decimal.parse("3.140"));
         checkEquality.accept(Decimal.parse("-2.5"), Decimal.parse("-2.50"));
 
         // Different values or types are not equal:
-        checkDiff.accept(Decimal.of(0), Decimal.of(1));
+        checkDiff.accept(Decimal.fromLong(0), Decimal.fromLong(1));
         checkDiff.accept(Decimal.parse("3.14"), 3.14);
-        checkDiff.accept(Decimal.of(-42), null);
+        checkDiff.accept(Decimal.fromLong(-42), null);
     }
 
     @Test

@@ -62,7 +62,7 @@ never divisible by 10 unless the fractional part is empty (scale = 0).
 
 - `Decimal.parse("3.14") == Decimal.parse("+03.140")` is `true`.
 - `Decimal.parse("3.14").hashCode() == Decimal.parse("3.140").hashCode()` is `true`.
-- `Decimal.of(0).toString()` returns `"0"` (not `"-0"` or `"0.0"`).
+- `Decimal.fromLong(0).toString()` returns `"0"` (not `"-0"` or `"0.0"`).
 - `compareTo` cannot rely on canonical form alone to order values: two decimals
   with different scales still require scale-alignment of their unscaled values
   before the `Integer` comparison.
