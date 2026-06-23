@@ -9,11 +9,11 @@ public enum class HashSeed {
     /** Hash seed for the `Integer` type. */
     Integer,
 
-    /** Hash seed for the `NonZeroInteger` type. */
-    NonZeroInteger,
-
     /** Hash seed for the `NonNegativeInteger` type. */
-    NonNegativeInteger;
+    NonNegativeInteger,
+
+    /** Hash seed for the `NonZeroInteger` type. */
+    NonZeroInteger;
 
     /** Returns a hash seed for this entry. */
     public fun toInt(): Int = this.name.hashCode()
