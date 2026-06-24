@@ -1,7 +1,7 @@
 ---
 name: 💡 Feature
 about: Suggest feature
-labels: feature
+labels: "type: feature"
 ---
 
 ## 🎯 Goal

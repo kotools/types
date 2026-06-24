@@ -2,7 +2,7 @@
 name: 🔒️ Security vulnerability
 about: Report security vulnerability
 title: 🔒️ Security vulnerability
-labels: security
+labels: "type: security"
 ---
 
 ## 🎯 Goal

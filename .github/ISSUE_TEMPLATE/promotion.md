@@ -2,7 +2,7 @@
 name: 🔈 Promotion
 about: Promote feature
 title: 🔈 TITLE
-labels: promotion
+labels: "type: promotion"
 ---
 
 ## 🎯 Goal

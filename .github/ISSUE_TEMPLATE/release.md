@@ -3,7 +3,7 @@ name: 🔖 Release
 about: Publish new version
 title: 🔖 Release version $VERSION
 assignees: LVMVRQUXL
-labels: release
+labels: "type: release"
 ---
 
 ## 🔗 Dependencies

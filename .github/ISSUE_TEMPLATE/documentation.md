@@ -1,7 +1,7 @@
 ---
 name: 📝 Documentation
 about: Suggest documentation improvements
-labels: documentation
+labels: "type: documentation"
 ---
 
 ## 🎯 Goal

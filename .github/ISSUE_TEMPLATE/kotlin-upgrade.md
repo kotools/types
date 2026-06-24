@@ -2,7 +2,7 @@
 name: ⬆️ Kotlin upgrade
 about: Suggest Kotlin upgrade
 title: ⬆️ Kotlin NEXT_VERSION
-labels: dependencies
+labels: "type: dependencies"
 ---
 
 ## 🎯 Goal
