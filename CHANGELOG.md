@@ -2,8 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-> The format of this document is based on
-> [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
+> The format of this document is based on [Keep a Changelog][keep-a-changelog].
 
 ## 🤔 Types of changes
 
@@ -88,24 +87,6 @@ All notable changes to this project will be documented in this file.
   decoding an invalid value, aligning with the exception types recommended for
   `KSerializer` implementations. ([#990])
 
-[@CLOVIS-AI]: https://github.com/CLOVIS-AI
-[@daniel-rusu]: https://github.com/daniel-rusu
-[#871]: https://github.com/kotools/types/issues/871
-[#872]: https://github.com/kotools/types/issues/872
-[#912]: https://github.com/kotools/types/issues/912
-[#914]: https://github.com/kotools/types/pull/914
-[#925]: https://github.com/kotools/types/issues/925
-[#952]: https://github.com/kotools/types/issues/952
-[#960]: https://github.com/kotools/types/issues/960
-[#962]: https://github.com/kotools/types/issues/962
-[#966]: https://github.com/kotools/types/issues/966
-[#988]: https://github.com/kotools/types/issues/988
-[#989]: https://github.com/kotools/types/issues/989
-[#990]: https://github.com/kotools/types/issues/990
-[#998]: https://github.com/kotools/types/issues/998
-[#1010]: https://github.com/kotools/types/issues/1010
-[#1011]: https://github.com/kotools/types/issues/1011
-
 ## 🔖 Releases
 
 | Version | Release date |
@@ -142,34 +123,57 @@ All notable changes to this project will be documented in this file.
 | [1.0.1] | 2022-03-21   |
 | [1.0.0] | 2022-02-28   |
 
-[5.1.1]: https://github.com/kotools/types/releases/tag/5.1.1
-[5.1.0]: https://github.com/kotools/types/releases/tag/5.1.0
-[5.0.1]: https://github.com/kotools/types/releases/tag/5.0.1
-[5.0.0]: https://github.com/kotools/types/releases/tag/5.0.0
-[4.5.3]: https://github.com/kotools/types/releases/tag/4.5.3
-[4.5.2]: https://github.com/kotools/types/releases/tag/4.5.2
-[4.5.1]: https://github.com/kotools/types/releases/tag/4.5.1
-[4.5.0]: https://github.com/kotools/types/releases/tag/4.5.0
-[4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
-[4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
-[4.4.0]: https://github.com/kotools/types/releases/tag/4.4.0
-[4.3.1]: https://github.com/kotools/types/releases/tag/4.3.1
-[4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
-[4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
-[4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
-[4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
-[4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
-[3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
-[3.1.1]: https://github.com/kotools/libraries/releases/tag/types-v3.1.1
-[3.1.0]: https://github.com/kotools/types-legacy/releases/tag/v3.1.0
-[3.0.1]: https://github.com/kotools/types-legacy/releases/tag/v3.0.1
-[3.0.0]: https://github.com/kotools/types-legacy/releases/tag/v3.0.0
-[2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
-[1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
-[1.3.0]: https://github.com/kotools/types-legacy/releases/tag/v1.3.0
-[1.2.1]: https://github.com/kotools/types-legacy/releases/tag/v1.2.1
-[1.2.0]: https://github.com/kotools/types-legacy/releases/tag/v1.2.0
-[1.1.1]: https://github.com/kotools/types-legacy/releases/tag/v1.1.1
-[1.1.0]: https://github.com/kotools/types-legacy/releases/tag/v1.1.0
-[1.0.1]: https://github.com/kotools/types-legacy/releases/tag/v1.0.1
+<!----------------------------------- LINKS ----------------------------------->
+
 [1.0.0]: https://github.com/kotools/types-legacy/releases/tag/v1.0.0
+[1.0.1]: https://github.com/kotools/types-legacy/releases/tag/v1.0.1
+[1.1.0]: https://github.com/kotools/types-legacy/releases/tag/v1.1.0
+[1.1.1]: https://github.com/kotools/types-legacy/releases/tag/v1.1.1
+[1.2.0]: https://github.com/kotools/types-legacy/releases/tag/v1.2.0
+[1.2.1]: https://github.com/kotools/types-legacy/releases/tag/v1.2.1
+[1.3.0]: https://github.com/kotools/types-legacy/releases/tag/v1.3.0
+[1.3.1]: https://github.com/kotools/types-legacy/releases/tag/v1.3.1
+[2.0.0]: https://github.com/kotools/types-legacy/releases/tag/v2.0.0
+[3.0.0]: https://github.com/kotools/types-legacy/releases/tag/v3.0.0
+[3.0.1]: https://github.com/kotools/types-legacy/releases/tag/v3.0.1
+[3.1.0]: https://github.com/kotools/types-legacy/releases/tag/v3.1.0
+[3.1.1]: https://github.com/kotools/libraries/releases/tag/types-v3.1.1
+[3.2.0]: https://github.com/kotools/libraries/releases/tag/types-v3.2.0
+[4.0.0]: https://github.com/kotools/types/releases/tag/4.0.0
+[4.0.1]: https://github.com/kotools/types/releases/tag/4.0.1
+[4.1.0]: https://github.com/kotools/types/releases/tag/4.1.0
+[4.2.0]: https://github.com/kotools/types/releases/tag/4.2.0
+[4.3.0]: https://github.com/kotools/types/releases/tag/4.3.0
+[4.3.1]: https://github.com/kotools/types/releases/tag/4.3.1
+[4.4.0]: https://github.com/kotools/types/releases/tag/4.4.0
+[4.4.1]: https://github.com/kotools/types/releases/tag/4.4.1
+[4.4.2]: https://github.com/kotools/types/releases/tag/4.4.2
+[4.5.0]: https://github.com/kotools/types/releases/tag/4.5.0
+[4.5.1]: https://github.com/kotools/types/releases/tag/4.5.1
+[4.5.2]: https://github.com/kotools/types/releases/tag/4.5.2
+[4.5.3]: https://github.com/kotools/types/releases/tag/4.5.3
+[5.0.0]: https://github.com/kotools/types/releases/tag/5.0.0
+[5.0.1]: https://github.com/kotools/types/releases/tag/5.0.1
+[5.1.0]: https://github.com/kotools/types/releases/tag/5.1.0
+[5.1.1]: https://github.com/kotools/types/releases/tag/5.1.1
+
+[keep-a-changelog]: https://keepachangelog.com/en/2.0.0
+
+[@CLOVIS-AI]: https://github.com/CLOVIS-AI
+[@daniel-rusu]: https://github.com/daniel-rusu
+
+[#871]: https://github.com/kotools/types/issues/871
+[#872]: https://github.com/kotools/types/issues/872
+[#912]: https://github.com/kotools/types/issues/912
+[#914]: https://github.com/kotools/types/pull/914
+[#925]: https://github.com/kotools/types/issues/925
+[#952]: https://github.com/kotools/types/issues/952
+[#960]: https://github.com/kotools/types/issues/960
+[#962]: https://github.com/kotools/types/issues/962
+[#966]: https://github.com/kotools/types/issues/966
+[#988]: https://github.com/kotools/types/issues/988
+[#989]: https://github.com/kotools/types/issues/989
+[#990]: https://github.com/kotools/types/issues/990
+[#998]: https://github.com/kotools/types/issues/998
+[#1010]: https://github.com/kotools/types/issues/1010
+[#1011]: https://github.com/kotools/types/issues/1011
