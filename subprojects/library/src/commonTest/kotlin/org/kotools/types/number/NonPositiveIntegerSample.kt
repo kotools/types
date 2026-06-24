@@ -8,6 +8,16 @@ class NonPositiveIntegerSample {
     // --------------------------- Factory functions ---------------------------
 
     @Test
+    fun fromLong() {
+        val result: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
+        check(result.toInteger() == Integer.fromLong(-42))
+
+        val exception: Throwable? =
+            runCatching { NonPositiveInteger.fromLong(1) }.exceptionOrNull()
+        check(exception is IllegalArgumentException)
+    }
+
+    @Test
     fun fromInteger() {
         val value: Integer = Integer.fromLong(-42)
         val result: NonPositiveInteger = NonPositiveInteger.fromInteger(value)

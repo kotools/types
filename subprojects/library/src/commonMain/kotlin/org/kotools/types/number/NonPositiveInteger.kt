@@ -16,7 +16,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from an [Integer] (see [fromInteger]).
+ * - **Creations:** Create from a [Long] or an [Integer] (see [fromLong] and
+ * [fromInteger]).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]).
  * </details>
  *
@@ -30,6 +31,38 @@ public class NonPositiveInteger private constructor(
 
     /** Contains class-level declarations for the [NonPositiveInteger] type. */
     public companion object {
+        /**
+         * Returns a [NonPositiveInteger] representing the specified [value],
+         * or throws an [IllegalArgumentException] if [value] is positive.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.fromLong
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.fromLong
+         * </details>
+         */
+        @JvmStatic
+        public fun fromLong(value: Long): NonPositiveInteger {
+            val integer: Integer = Integer.fromLong(value)
+            return this.fromInteger(integer)
+        }
+
         /**
          * Returns a [NonPositiveInteger] representing the specified [value],
          * or throws an [IllegalArgumentException] if [value] is positive.

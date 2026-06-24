@@ -6,6 +6,7 @@ import org.kotools.types.nonPositiveInteger
 import org.kotools.types.positiveInteger
 import org.kotools.types.repeatTest
 import kotlin.random.Random
+import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -14,6 +15,33 @@ import kotlin.test.assertNull
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonPositiveIntegerTest {
     // --------------------------- Factory functions ---------------------------
+
+    @Test
+    fun fromLongPreservesValue(): Unit = repeatTest {
+        val value: Long = Random.nextLong(Long.MIN_VALUE..0)
+
+        val nonPositiveInteger: NonPositiveInteger =
+            NonPositiveInteger.fromLong(value)
+
+        val expected: Integer = Integer.fromLong(value)
+        assertEquals(
+            expected,
+            actual = nonPositiveInteger.toInteger(),
+            message = "Input: $value"
+        )
+    }
+
+    @Test
+    fun fromLongFailsWithPositiveValue(): Unit = repeatTest {
+        val value: Long = Random.nextLong(1..Long.MAX_VALUE)
+
+        val exception: IllegalArgumentException = assertFailsWith(
+            message = "Input: $value"
+        ) { NonPositiveInteger.fromLong(value) }
+        val expected: String =
+            errorMessage("Positive integer", Integer.fromLong(value))
+        assertEquals(expected, actual = exception.message)
+    }
 
     @Test
     fun fromIntegerPreservesValue(): Unit = repeatTest {

@@ -436,12 +436,14 @@ public final class org/kotools/types/number/NonPositiveInteger {
 	public static final field Companion Lorg/kotools/types/number/NonPositiveInteger$Companion;
 	public synthetic fun <init> (Lorg/kotools/types/number/Integer;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonPositiveInteger;
+	public static final fun fromLong (J)Lorg/kotools/types/number/NonPositiveInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 }
 
 public final class org/kotools/types/number/NonPositiveInteger$Companion {
 	public final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonPositiveInteger;
 	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonPositiveInteger;
+	public final fun fromLong (J)Lorg/kotools/types/number/NonPositiveInteger;
 }
 
 public final class org/kotools/types/number/NonZeroInteger {
