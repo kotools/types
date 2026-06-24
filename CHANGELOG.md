@@ -32,18 +32,16 @@ adheres to its own [versioning strategy][versioning-strategy].
 
 ### ♻️ Changed
 
-- **Breaking:** Reformatted error messages thrown by **experimental**
-  declarations in `org.kotools.types.*` to follow a consistent
-  `<description>: <value>` structure. (modules: `types`,
-  `types-kotlinx-serialization`, ref: [#988])
+- Reformatted error messages thrown by **experimental** declarations in
+  `org.kotools.types.*` to follow a consistent `<description>: <value>`
+  structure. (modules: `types`, `types-kotlinx-serialization`, ref: [#988])
 - **Breaking:** Moved `Integer` **experimental** class to
   `org.kotools.types.number` package, and renamed some of its functions
   (`from` -> `fromLong`, `fromDecimal` -> `parse`, `fromDecimalOrNull` ->
   `parseOrNull`). (module: `types`, refs: [#960], [#1010])
-- **Breaking:** `div`, `divOrNull`, `rem` and `remOrNull` **experimental**
-  functions of `Integer` class to use Euclidean division semantics: the
-  remainder is always non-negative (`0 <= r < |b|`). (module: `types`, ref:
-  [#952])
+- `div`, `divOrNull`, `rem` and `remOrNull` **experimental** functions of
+  `Integer` class to use Euclidean division semantics: the remainder is always
+  non-negative (`0 <= r < |b|`). (module: `types`, ref: [#952])
 - Internal representation of `Integer` **experimental** class from `String` to
   `java.lang.BigInteger` on Kotlin/JVM, `BigInt` on Kotlin/JS, and a custom
   implementation on Kotlin/Native. This avoids parsing when performing
