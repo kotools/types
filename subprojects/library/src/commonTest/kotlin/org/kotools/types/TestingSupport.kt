@@ -3,6 +3,7 @@ package org.kotools.types
 import org.kotools.types.number.Decimal
 import org.kotools.types.number.Integer
 import org.kotools.types.number.NonNegativeInteger
+import org.kotools.types.number.NonPositiveInteger
 import org.kotools.types.number.NonZeroInteger
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -131,6 +132,25 @@ internal fun Random.nonNegativeIntegerExcept(
 ): NonNegativeInteger {
     var candidate: NonNegativeInteger = this.nonNegativeInteger()
     while (candidate == illegal) candidate = this.nonNegativeInteger()
+    return candidate
+}
+
+// ----------------------- Random non-positive integers -----------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.nonPositiveInteger(): NonPositiveInteger {
+    val zero: Integer = Integer.fromLong(0)
+    val integer: Integer = this.integer()
+        .let { if (it > zero) -it else it }
+    return NonPositiveInteger.fromInteger(integer)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.nonPositiveIntegerExcept(
+    illegal: NonPositiveInteger
+): NonPositiveInteger {
+    var candidate: NonPositiveInteger = this.nonPositiveInteger()
+    while (candidate == illegal) candidate = this.nonPositiveInteger()
     return candidate
 }
 
