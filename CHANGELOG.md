@@ -27,8 +27,8 @@ All notable changes to this project will be documented in this file.
   suggested by [@CLOVIS-AI])
 - `Integer.toLong` and `Integer.toLongOrNull` **experimental** functions,
   returning the `Long` representation of an `Integer`, or throwing an
-  `IllegalArgumentException` (`toLong`) or returning `null`
-  (`toLongOrNull`) if it's out of range for `Long`. ([#1010])
+  `ArithmeticException` (`toLong`) or returning `null` (`toLongOrNull`) if it's
+  out of range for `Long`. ([#1010])
 - `NonZeroInteger` **experimental** type to `org.kotools.types.number` package,
   representing an `Integer` other than zero. Supports creation via
   `fromLong(Long)`, `fromInteger(Integer)`, `parse(String)` and their

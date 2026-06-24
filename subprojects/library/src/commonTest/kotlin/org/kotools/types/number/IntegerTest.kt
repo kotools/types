@@ -906,7 +906,7 @@ class IntegerTest {
         val belowMin: Integer =
             Integer.fromLong(Long.MIN_VALUE) - Integer.fromLong(1)
         listOf(aboveMax, belowMin).forEach { integer: Integer ->
-            val exception: IllegalArgumentException = assertFailsWith {
+            val exception: ArithmeticException = assertFailsWith {
                 integer.toLong()
             }
             val expected: String =

@@ -173,7 +173,7 @@ public class IntegerJavaSample {
         try {
             outOfRange.toLong();
             throw new IllegalStateException("Check failed.");
-        } catch (IllegalArgumentException ignored) {
+        } catch (ArithmeticException ignored) {
         }
     }
 

@@ -635,8 +635,13 @@ public class Integer private constructor(
 
     /**
      * Returns the [Long] representation of this integer, or throws an
-     * [IllegalArgumentException] if this integer is out of range for [Long]
-     * (less than [Long.MIN_VALUE] or greater than [Long.MAX_VALUE]).
+     * [ArithmeticException] if this integer is out of range for [Long].
+     *
+     * This conversion validates the [Long] range directly against the
+     * platform-specific backing representation before extracting the numeric
+     * value of this integer. It deliberately avoids a textual round-trip such
+     * as `this.toString().toLong()`, which would allocate and parse an
+     * intermediate [String] on every call.
      *
      * <br>
      * <details>
@@ -667,12 +672,15 @@ public class Integer private constructor(
      * @since 5.2.0
      */
     public fun toLong(): Long {
-        if (this < fromLong(Long.MIN_VALUE) || this > fromLong(Long.MAX_VALUE)) {
+        val min: Integer = fromLong(Long.MIN_VALUE)
+        val max: Integer = fromLong(Long.MAX_VALUE)
+        if (this < min || this > max) {
             val message: String =
                 errorMessage("Integer out of range for Long", this)
-            throw IllegalArgumentException(message)
+            throw ArithmeticException(message)
         }
-        return this.toString().toLong()
+        return this.toString()
+            .toLong()
     }
 
     /**

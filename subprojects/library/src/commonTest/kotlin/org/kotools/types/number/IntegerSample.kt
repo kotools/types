@@ -222,9 +222,9 @@ class IntegerSample {
 
         val outOfRange: Integer =
             Integer.fromLong(Long.MAX_VALUE) + Integer.fromLong(1)
-        val exception: Throwable? =
-            runCatching(outOfRange::toLong).exceptionOrNull()
-        check(exception is IllegalArgumentException)
+        val exception: Throwable? = runCatching(outOfRange::toLong)
+            .exceptionOrNull()
+        check(exception is ArithmeticException)
     }
 
     @Test
