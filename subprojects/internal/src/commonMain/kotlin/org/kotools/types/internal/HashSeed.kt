@@ -12,6 +12,9 @@ public enum class HashSeed {
     /** Hash seed for the `NonNegativeInteger` type. */
     NonNegativeInteger,
 
+    /** Hash seed for the `NonPositiveInteger` type. */
+    NonPositiveInteger,
+
     /** Hash seed for the `NonZeroInteger` type. */
     NonZeroInteger;
 
