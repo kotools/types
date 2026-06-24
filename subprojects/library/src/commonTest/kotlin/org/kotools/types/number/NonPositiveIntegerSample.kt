@@ -38,6 +38,20 @@ class NonPositiveIntegerSample {
         check(safeResult == null)
     }
 
+    @Test
+    fun parsing() {
+        val result: NonPositiveInteger = NonPositiveInteger.parse("-00042")
+        check(result.toInteger() == Integer.fromLong(-42))
+
+        val invalid: Throwable? =
+            runCatching { NonPositiveInteger.parse("3.14") }.exceptionOrNull()
+        check(invalid is NumberFormatException)
+
+        val positive: Throwable? =
+            runCatching { NonPositiveInteger.parse("1") }.exceptionOrNull()
+        check(positive is IllegalArgumentException)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

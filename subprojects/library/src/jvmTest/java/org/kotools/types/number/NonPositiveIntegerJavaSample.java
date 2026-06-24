@@ -35,6 +35,25 @@ public class NonPositiveIntegerJavaSample {
         }
     }
 
+    @Test
+    void parsing() {
+        final NonPositiveInteger result = NonPositiveInteger.parse("-00042");
+        final boolean check = result.toInteger().equals(Integer.fromLong(-42));
+        if (!check) throw new IllegalStateException("Check failed.");
+
+        try {
+            NonPositiveInteger.parse("3.14");
+            throw new IllegalStateException("Check failed.");
+        } catch (NumberFormatException ignored) {
+        }
+
+        try {
+            NonPositiveInteger.parse("1");
+            throw new IllegalStateException("Check failed.");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

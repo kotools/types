@@ -16,8 +16,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from a [Long] or an [Integer] (see [fromLong] and
- * [fromInteger]).
+ * - **Creations:** Create from a [Long], an [Integer], or a decimal string
+ * (see [fromLong], [fromInteger] and [parse]).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]).
  * </details>
  *
@@ -161,6 +161,47 @@ public class NonPositiveInteger private constructor(
         public fun fromIntegerOrNull(value: Integer): NonPositiveInteger? {
             val zero: Integer = Integer.fromLong(0)
             return if (value > zero) null else NonPositiveInteger(value)
+        }
+
+        /**
+         * Returns a [NonPositiveInteger] representing the number described
+         * by [value], or throws [NumberFormatException] if [value] doesn't
+         * represent an integer, or [IllegalArgumentException] if [value]
+         * represents a positive integer.
+         *
+         * See the [Integer.Companion.parse] function for the grammar of a
+         * valid integer representation.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.parsing
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.parsing
+         * </details>
+         * <br>
+         *
+         * See the [parseOrNull] function for returning `null` instead of
+         * throwing an exception in case of invalid or positive [value].
+         */
+        @JvmStatic
+        public fun parse(value: String): NonPositiveInteger {
+            val integer: Integer = Integer.parse(value)
+            return this.fromInteger(integer)
         }
     }
 

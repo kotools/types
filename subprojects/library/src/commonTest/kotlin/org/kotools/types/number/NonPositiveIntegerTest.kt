@@ -2,9 +2,13 @@ package org.kotools.types.number
 
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.negativeIntegerString
+import org.kotools.types.nonIntegerString
 import org.kotools.types.nonPositiveInteger
 import org.kotools.types.positiveInteger
+import org.kotools.types.positiveIntegerString
 import org.kotools.types.repeatTest
+import org.kotools.types.zeroString
 import kotlin.random.Random
 import kotlin.random.nextLong
 import kotlin.test.Test
@@ -87,6 +91,55 @@ class NonPositiveIntegerTest {
         val safeNonPositiveInteger: NonPositiveInteger? =
             NonPositiveInteger.fromIntegerOrNull(integer)
         assertNull(safeNonPositiveInteger, message = "Input: $integer")
+    }
+
+    @Test
+    fun parsingPreservesValueWithZero(): Unit = repeatTest {
+        val value: String = Random.zeroString()
+
+        val nonPositiveInteger: NonPositiveInteger =
+            NonPositiveInteger.parse(value)
+
+        val zero: Integer = Integer.fromLong(0)
+        val message = "Input: \"$value\""
+        assertEquals(zero, actual = nonPositiveInteger.toInteger(), message)
+    }
+
+    @Test
+    fun parsingPreservesValueWithNegativeValue(): Unit = repeatTest {
+        val value: String = Random.negativeIntegerString()
+
+        val nonPositiveInteger: NonPositiveInteger =
+            NonPositiveInteger.parse(value)
+
+        val expected: Integer = Integer.parse(value)
+        val message = "Input: \"$value\""
+        assertEquals(
+            expected,
+            actual = nonPositiveInteger.toInteger(),
+            message
+        )
+    }
+
+    @Test
+    fun parsingFailsWithNonIntegerString(): Unit = repeatTest {
+        val value: String = Random.nonIntegerString()
+
+        assertFailsWith<NumberFormatException>(message = "Input: \"$value\"") {
+            NonPositiveInteger.parse(value)
+        }
+    }
+
+    @Test
+    fun parsingFailsWithPositiveValue(): Unit = repeatTest {
+        val value: String = Random.positiveIntegerString()
+
+        val exception: IllegalArgumentException = assertFailsWith(
+            message = "Input: \"$value\""
+        ) { NonPositiveInteger.parse(value) }
+        val integer: Integer = Integer.parse(value)
+        val expected: String = errorMessage("Positive integer", integer)
+        assertEquals(expected, actual = exception.message)
     }
 
     // ------------------------------ Conversions ------------------------------
