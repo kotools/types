@@ -79,7 +79,7 @@ public class Decimal private constructor(
         check(this.scale >= 0) { "Negative decimal scale: ${this.scale}" }
     }
 
-    // ------------------------------- Creations -------------------------------
+    // --------------------------- Factory functions ---------------------------
 
     /** Contains class-level declarations for the [Decimal] type. */
     public companion object {
