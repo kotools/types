@@ -54,6 +54,23 @@ public class NonPositiveIntegerJavaSample {
         }
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    void structuralEquality() {
+        final Integer value = Integer.fromLong(-42);
+        final NonPositiveInteger x = NonPositiveInteger.fromInteger(value);
+        final NonPositiveInteger y = NonPositiveInteger.fromInteger(value);
+        final boolean equality = x.equals(y) && x.hashCode() == y.hashCode();
+        if (!equality) throw new IllegalStateException("Check failed.");
+
+        final Integer other = Integer.fromLong(-7);
+        final NonPositiveInteger z = NonPositiveInteger.fromInteger(other);
+        final boolean inequality =
+                !x.equals(z) && x.hashCode() != z.hashCode();
+        if (!inequality) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

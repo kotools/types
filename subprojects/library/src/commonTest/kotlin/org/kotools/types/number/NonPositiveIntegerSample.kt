@@ -55,6 +55,22 @@ class NonPositiveIntegerSample {
         check(NonPositiveInteger.parseOrNull("1") == null)
     }
 
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun structuralEquality() {
+        val value: Integer = Integer.fromLong(-42)
+        val x: NonPositiveInteger = NonPositiveInteger.fromInteger(value)
+        val y: NonPositiveInteger = NonPositiveInteger.fromInteger(value)
+        check(x == y)
+        check(x.hashCode() == y.hashCode())
+
+        val other: Integer = Integer.fromLong(-7)
+        val z: NonPositiveInteger = NonPositiveInteger.fromInteger(other)
+        check(x != z)
+        check(x.hashCode() != z.hashCode())
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

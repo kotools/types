@@ -5,6 +5,7 @@ import org.kotools.types.internal.errorMessage
 import org.kotools.types.negativeIntegerString
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonPositiveInteger
+import org.kotools.types.nonPositiveIntegerExcept
 import org.kotools.types.positiveInteger
 import org.kotools.types.positiveIntegerString
 import org.kotools.types.repeatTest
@@ -14,7 +15,10 @@ import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
+import kotlin.test.assertSame
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonPositiveIntegerTest {
@@ -163,6 +167,110 @@ class NonPositiveIntegerTest {
             NonPositiveInteger.parseOrNull(value),
             message = "Input: \"$value\""
         )
+    }
+
+    // ------------------------------ Comparisons ------------------------------
+
+    @Test
+    fun structuralEqualityPassesWithSameValues(): Unit = repeatTest {
+        val nonPositiveInteger: NonPositiveInteger = Random.nonPositiveInteger()
+        val other: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(nonPositiveInteger.toInteger())
+
+        val message = "Inputs: this = $nonPositiveInteger, other = $other"
+        assertEquals(nonPositiveInteger, other, message)
+        assertEquals(nonPositiveInteger.hashCode(), other.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityIsReflexive(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val message = "Input: $x"
+        assertSame(x, x, message)
+        assertEquals(x.hashCode(), x.hashCode(), message)
+    }
+
+    @Test
+    fun structuralEqualityIsSymmetrical(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(x.toInteger())
+
+        val xHashCode: Int = x.hashCode()
+        val yHashCode: Int = y.hashCode()
+
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x, y, message)
+        assertEquals(xHashCode, yHashCode, message)
+
+        assertEquals(y, x, message)
+        assertEquals(yHashCode, xHashCode, message)
+    }
+
+    @Test
+    fun structuralEqualityIsTransitive(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(x.toInteger())
+        val z: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(y.toInteger())
+
+        val xHashCode: Int = x.hashCode()
+        val yHashCode: Int = y.hashCode()
+        val zHashCode: Int = z.hashCode()
+
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(x, y, message)
+        assertEquals(xHashCode, yHashCode, message)
+
+        assertEquals(y, z, message)
+        assertEquals(yHashCode, zHashCode, message)
+
+        assertEquals(x, z, message)
+        assertEquals(xHashCode, zHashCode, message)
+    }
+
+    @Test
+    fun structuralEqualityFailsWithDifferentValues(): Unit = repeatTest {
+        val nonPositiveInteger: NonPositiveInteger = Random.nonPositiveInteger()
+        val other: NonPositiveInteger =
+            Random.nonPositiveIntegerExcept(illegal = nonPositiveInteger)
+
+        val message = "Inputs: this = $nonPositiveInteger, other = $other"
+        assertNotEquals(nonPositiveInteger, other, message)
+        assertNotEquals(
+            nonPositiveInteger.hashCode(),
+            other.hashCode(),
+            message
+        )
+    }
+
+    @Test
+    fun structuralEqualityFailsWithDifferentTypes(): Unit = repeatTest {
+        val nonPositiveInteger: NonPositiveInteger = Random.nonPositiveInteger()
+        val other: Any = nonPositiveInteger.toInteger()
+
+        val message = "Inputs: this = $nonPositiveInteger, other = $other"
+        assertNotEquals(nonPositiveInteger, other, message)
+        assertNotEquals(
+            nonPositiveInteger.hashCode(),
+            other.hashCode(),
+            message
+        )
+    }
+
+    @Test
+    fun structuralEqualityFailsWithNull(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: Any? = null
+
+        val equality: Boolean = x == y
+        val hashEquality: Boolean = x.hashCode() == y.hashCode()
+
+        val message = "Structural equality must fail with null."
+        assertFalse(equality, message)
+        assertFalse(hashEquality, message)
     }
 
     // ------------------------------ Conversions ------------------------------
