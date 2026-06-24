@@ -203,6 +203,38 @@ public class NonPositiveInteger private constructor(
             val integer: Integer = Integer.parse(value)
             return this.fromInteger(integer)
         }
+
+        /**
+         * Returns a [NonPositiveInteger] representing the number described
+         * by [value], or returns `null` if [value] doesn't represent an
+         * integer or represents a positive integer.
+         *
+         * See the [Integer.Companion.parse] function for the grammar of a
+         * valid integer representation.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.parsing
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [parse] function for throwing an exception instead of
+         * returning `null` in case of invalid or positive [value].
+         */
+        @JvmSynthetic
+        public fun parseOrNull(value: String): NonPositiveInteger? {
+            val integer: Integer = Integer.parseOrNull(value) ?: return null
+            return this.fromIntegerOrNull(integer)
+        }
     }
 
     // ------------------------------ Conversions ------------------------------

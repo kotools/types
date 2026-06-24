@@ -99,10 +99,17 @@ class NonPositiveIntegerTest {
 
         val nonPositiveInteger: NonPositiveInteger =
             NonPositiveInteger.parse(value)
+        val safeNonPositiveInteger: NonPositiveInteger? =
+            NonPositiveInteger.parseOrNull(value)
 
         val zero: Integer = Integer.fromLong(0)
         val message = "Input: \"$value\""
         assertEquals(zero, actual = nonPositiveInteger.toInteger(), message)
+        assertEquals(
+            zero,
+            actual = safeNonPositiveInteger?.toInteger(),
+            message
+        )
     }
 
     @Test
@@ -111,12 +118,19 @@ class NonPositiveIntegerTest {
 
         val nonPositiveInteger: NonPositiveInteger =
             NonPositiveInteger.parse(value)
+        val safeNonPositiveInteger: NonPositiveInteger? =
+            NonPositiveInteger.parseOrNull(value)
 
         val expected: Integer = Integer.parse(value)
         val message = "Input: \"$value\""
         assertEquals(
             expected,
             actual = nonPositiveInteger.toInteger(),
+            message
+        )
+        assertEquals(
+            expected,
+            actual = safeNonPositiveInteger?.toInteger(),
             message
         )
     }
@@ -128,6 +142,10 @@ class NonPositiveIntegerTest {
         assertFailsWith<NumberFormatException>(message = "Input: \"$value\"") {
             NonPositiveInteger.parse(value)
         }
+        assertNull(
+            NonPositiveInteger.parseOrNull(value),
+            message = "Input: \"$value\""
+        )
     }
 
     @Test
@@ -140,6 +158,11 @@ class NonPositiveIntegerTest {
         val integer: Integer = Integer.parse(value)
         val expected: String = errorMessage("Positive integer", integer)
         assertEquals(expected, actual = exception.message)
+
+        assertNull(
+            NonPositiveInteger.parseOrNull(value),
+            message = "Input: \"$value\""
+        )
     }
 
     // ------------------------------ Conversions ------------------------------

@@ -50,6 +50,9 @@ class NonPositiveIntegerSample {
         val positive: Throwable? =
             runCatching { NonPositiveInteger.parse("1") }.exceptionOrNull()
         check(positive is IllegalArgumentException)
+
+        check(NonPositiveInteger.parseOrNull("3.14") == null)
+        check(NonPositiveInteger.parseOrNull("1") == null)
     }
 
     // ------------------------------ Conversions ------------------------------
