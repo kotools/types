@@ -56,11 +56,43 @@ public class NonPositiveInteger private constructor(
          *
          * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.fromLong
          * </details>
+         * <br>
+         *
+         * See the [fromLongOrNull] function for returning `null` instead of
+         * throwing an exception when [value] is positive.
          */
         @JvmStatic
         public fun fromLong(value: Long): NonPositiveInteger {
             val integer: Integer = Integer.fromLong(value)
             return this.fromInteger(integer)
+        }
+
+        /**
+         * Returns a [NonPositiveInteger] representing the specified [value],
+         * or returns `null` if [value] is positive.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.fromLong
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromLong] function for throwing an exception instead of
+         * returning `null` when [value] is positive.
+         */
+        @JvmSynthetic
+        public fun fromLongOrNull(value: Long): NonPositiveInteger? {
+            val integer: Integer = Integer.fromLong(value)
+            return this.fromIntegerOrNull(integer)
         }
 
         /**

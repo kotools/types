@@ -15,6 +15,10 @@ class NonPositiveIntegerSample {
         val exception: Throwable? =
             runCatching { NonPositiveInteger.fromLong(1) }.exceptionOrNull()
         check(exception is IllegalArgumentException)
+
+        val safeResult: NonPositiveInteger? =
+            NonPositiveInteger.fromLongOrNull(1)
+        check(safeResult == null)
     }
 
     @Test

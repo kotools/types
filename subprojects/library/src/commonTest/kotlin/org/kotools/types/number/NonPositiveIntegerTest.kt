@@ -22,12 +22,20 @@ class NonPositiveIntegerTest {
 
         val nonPositiveInteger: NonPositiveInteger =
             NonPositiveInteger.fromLong(value)
+        val safeNonPositiveInteger: NonPositiveInteger? =
+            NonPositiveInteger.fromLongOrNull(value)
 
         val expected: Integer = Integer.fromLong(value)
+        val message = "Input: $value"
         assertEquals(
             expected,
             actual = nonPositiveInteger.toInteger(),
-            message = "Input: $value"
+            message
+        )
+        assertEquals(
+            expected,
+            actual = safeNonPositiveInteger?.toInteger(),
+            message
         )
     }
 
@@ -41,6 +49,10 @@ class NonPositiveIntegerTest {
         val expected: String =
             errorMessage("Positive integer", Integer.fromLong(value))
         assertEquals(expected, actual = exception.message)
+
+        val safeNonPositiveInteger: NonPositiveInteger? =
+            NonPositiveInteger.fromLongOrNull(value)
+        assertNull(safeNonPositiveInteger, message = "Input: $value")
     }
 
     @Test
