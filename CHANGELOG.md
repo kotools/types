@@ -69,11 +69,11 @@ All notable changes to this project will be documented in this file.
 
 ### 🔥 Removed
 
-- `com.ionspin.kotlin:bignum` dependency, previously used internally by the
-  Kotlin/Native implementation of the `Integer` **experimental** type. ([#962])
-- `orNull` and `orThrow` **deprecated** functions from `EmailAddress.Companion`
-  and `EmailAddressRegex.Companion` **experimental** types. Use their `of`
-  functions instead. ([#871], [#872])
+- **Breaking:** `orNull` and `orThrow` functions from `EmailAddress` and
+  `EmailAddressRegex` **experimental** classes. Use their `of` function instead.
+  ([#871], [#872])
+- `com.ionspin.kotlin:bignum` dependency, previously used internally by
+  `Integer` on Kotlin/Native. ([#962])
 
 ### 🐛 Fixed
 
