@@ -18,6 +18,10 @@ class NonPositiveIntegerSample {
             NonPositiveInteger.fromInteger(positive)
         }.exceptionOrNull()
         check(exception is IllegalArgumentException)
+
+        val safeResult: NonPositiveInteger? =
+            NonPositiveInteger.fromIntegerOrNull(positive)
+        check(safeResult == null)
     }
 
     // ------------------------------ Conversions ------------------------------

@@ -3,6 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.errorMessage
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 /**
  * Represents an [Integer] that is less than or equal to zero.
@@ -54,6 +55,10 @@ public class NonPositiveInteger private constructor(
          *
          * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.fromInteger
          * </details>
+         * <br>
+         *
+         * See the [fromIntegerOrNull] function for returning `null` instead
+         * of throwing an exception when [value] is positive.
          */
         @JvmStatic
         public fun fromInteger(value: Integer): NonPositiveInteger {
@@ -63,6 +68,34 @@ public class NonPositiveInteger private constructor(
                 throw IllegalArgumentException(message)
             }
             return NonPositiveInteger(value)
+        }
+
+        /**
+         * Returns a [NonPositiveInteger] representing the specified [value],
+         * or returns `null` if [value] is positive.
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.fromInteger
+         * </details>
+         * <br>
+         *
+         * This function is hidden from Java, because nullability is not
+         * explicit in its type system.
+         *
+         * See the [fromInteger] function for throwing an exception instead
+         * of returning `null` when [value] is positive.
+         */
+        @JvmSynthetic
+        public fun fromIntegerOrNull(value: Integer): NonPositiveInteger? {
+            val zero: Integer = Integer.fromLong(0)
+            return if (value > zero) null else NonPositiveInteger(value)
         }
     }
 

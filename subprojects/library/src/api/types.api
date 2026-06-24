@@ -441,6 +441,7 @@ public final class org/kotools/types/number/NonPositiveInteger {
 
 public final class org/kotools/types/number/NonPositiveInteger$Companion {
 	public final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonPositiveInteger;
+	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonPositiveInteger;
 }
 
 public final class org/kotools/types/number/NonZeroInteger {

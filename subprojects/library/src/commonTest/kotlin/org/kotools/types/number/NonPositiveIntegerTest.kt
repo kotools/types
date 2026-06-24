@@ -9,10 +9,30 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonPositiveIntegerTest {
     // --------------------------- Factory functions ---------------------------
+
+    @Test
+    fun fromIntegerPreservesValue(): Unit = repeatTest {
+        val integer: Integer = Random.nonPositiveInteger()
+            .toInteger()
+
+        val nonPositiveInteger: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(integer)
+        val safeNonPositiveInteger: NonPositiveInteger? =
+            NonPositiveInteger.fromIntegerOrNull(integer)
+
+        val message = "Input: $integer"
+        assertEquals(integer, actual = nonPositiveInteger.toInteger(), message)
+        assertEquals(
+            integer,
+            actual = safeNonPositiveInteger?.toInteger(),
+            message
+        )
+    }
 
     @Test
     fun fromIntegerFailsWithPositiveValue(): Unit = repeatTest {
@@ -23,6 +43,10 @@ class NonPositiveIntegerTest {
         ) { NonPositiveInteger.fromInteger(integer) }
         val expected: String = errorMessage("Positive integer", integer)
         assertEquals(expected, actual = exception.message)
+
+        val safeNonPositiveInteger: NonPositiveInteger? =
+            NonPositiveInteger.fromIntegerOrNull(integer)
+        assertNull(safeNonPositiveInteger, message = "Input: $integer")
     }
 
     // ------------------------------ Conversions ------------------------------
