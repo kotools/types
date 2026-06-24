@@ -2,7 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-> The format of this document is based on [Keep a Changelog][keep-a-changelog].
+The format is based on [Keep a Changelog][keep-a-changelog], and this project
+adheres to its own [versioning strategy][versioning-strategy].
 
 ## 🤔 Types of changes
 
@@ -158,6 +159,7 @@ All notable changes to this project will be documented in this file.
 [5.1.1]: https://github.com/kotools/types/releases/tag/5.1.1
 
 [keep-a-changelog]: https://keepachangelog.com/en/2.0.0
+[versioning-strategy]: documentation/versioning-strategy.md
 
 [@CLOVIS-AI]: https://github.com/CLOVIS-AI
 [@daniel-rusu]: https://github.com/daniel-rusu
