@@ -82,4 +82,14 @@ public class NonPositiveIntegerJavaSample {
         final boolean check = result.equals(value);
         if (!check) throw new IllegalStateException("Check failed.");
     }
+
+    @Test
+    void toStringOverride() {
+        final Integer value = Integer.fromLong(-42);
+        final NonPositiveInteger nonPositiveInteger =
+                NonPositiveInteger.fromInteger(value);
+        final String result = String.valueOf(nonPositiveInteger);
+        final boolean check = result.equals("-42");
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
 }

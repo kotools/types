@@ -81,4 +81,13 @@ class NonPositiveIntegerSample {
         val result: Integer = nonPositiveInteger.toInteger()
         check(result == value)
     }
+
+    @Test
+    fun toStringOverride() {
+        val value: Integer = Integer.fromLong(-42)
+        val nonPositiveInteger: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(value)
+        val result: String = nonPositiveInteger.toString()
+        check(result == "-42")
+    }
 }

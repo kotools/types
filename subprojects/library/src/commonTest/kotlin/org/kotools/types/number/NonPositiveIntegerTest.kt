@@ -286,4 +286,17 @@ class NonPositiveIntegerTest {
 
         assertEquals(integer, actual, message = "Input: $integer")
     }
+
+    @Test
+    fun toStringDelegatesToInteger(): Unit = repeatTest {
+        val integer: Integer = Random.nonPositiveInteger()
+            .toInteger()
+
+        val nonPositiveInteger: NonPositiveInteger =
+            NonPositiveInteger.fromInteger(integer)
+
+        val actual: String = nonPositiveInteger.toString()
+        val expected: String = integer.toString()
+        assertEquals(expected, actual, message = "Input: $integer")
+    }
 }
