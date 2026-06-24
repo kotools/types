@@ -111,7 +111,7 @@ import kotlin.jvm.JvmSynthetic
 public class Integer private constructor(
     private val delegate: PlatformInteger
 ) {
-    // ------------------------------- Creations -------------------------------
+    // --------------------------- Factory functions ---------------------------
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
