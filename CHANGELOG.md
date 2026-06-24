@@ -18,75 +18,51 @@ adheres to its own [versioning strategy][versioning-strategy].
 
 ### ✨ Added
 
-- `Decimal` **experimental** type to `org.kotools.types.number` package,
-  representing mathematical decimal numbers with exact arithmetic. Supports
-  creation via `fromLong(Long)`, `parse(String)` and `parseOrNull(String)`,
-  arithmetic operators (`+`, `-`, `*`, unary `-`), comparison, and canonical
-  string conversion. Division is intentionally excluded because the set of
-  terminating decimals is not closed under division. ([#925] originally
-  suggested by [@CLOVIS-AI])
-- `Integer.toLong` and `Integer.toLongOrNull` **experimental** functions,
-  returning the `Long` representation of an `Integer`, or throwing an
-  `ArithmeticException` (`toLong`) or returning `null` (`toLongOrNull`) if it's
-  out of range for `Long`. ([#1010])
-- `NonZeroInteger` **experimental** type to `org.kotools.types.number` package,
-  representing an `Integer` other than zero. Supports creation via
-  `fromLong(Long)`, `fromInteger(Integer)`, `parse(String)` and their
-  `OrNull` variants, structural equality, arithmetic operators (unary `-`
-  and `*`), and conversions back to `Integer` and to its decimal string
-  representation. Addition and subtraction are intentionally excluded
-  because the set of non-zero integers is not closed under these operations.
-  ([#1011])
-- `NonNegativeInteger` **experimental** type to `org.kotools.types.number`
-  package, representing an `Integer` that is greater than or equal to zero.
-  Supports creation via `fromLong(Long)`, `fromInteger(Integer)`,
-  `parse(String)` and their `OrNull` variants, structural equality,
-  arithmetic operators (`+` and `*`), and conversions back to `Integer` and
-  to its decimal string representation. Subtraction is intentionally
-  excluded because the set of non-negative integers is not closed under this
-  operation. ([#998])
+- `toLong()` and `toLongOrNull()` **experimental** functions to `Integer` class,
+  returning the `Long` representation of an `Integer`. ([#1010])
+- `NonZeroInteger` **experimental** class to `org.kotools.types.number` package,
+  in `types` module, representing an `Integer` other than zero. ([#1011])
+- `NonNegativeInteger` **experimental** class to `org.kotools.types.number`
+  package, in `types` module, representing an `Integer` that is greater than or
+  equal to zero. ([#998])
+- `Decimal` **experimental** class to `org.kotools.types.number` package, in
+  `types` module, representing mathematical decimal numbers with exact
+  arithmetic. ([#925] originally suggested by [@CLOVIS-AI])
 
 ### ♻️ Changed
 
-- Changed internal representation of `Integer` **experimental** type from
-  `String` to `java.lang.BigInteger` on Kotlin/JVM, `BigInt` on Kotlin/JS, and a
-  custom implementation on Kotlin/Native. This avoids parsing when performing
-  arithmetic operations. ([#912], [#914] reviewed by [@daniel-rusu]).
-- Changed `Integer.div`, `Integer.divOrNull`, `Integer.rem` and
-  `Integer.remOrNull` **experimental** functions to use Euclidean division
-  semantics: the remainder is always non-negative (`0 ≤ r < |b|`). ([#952])
-- Moved `Integer` **experimental** type to `org.kotools.types.number` package,
-  and renamed some of its functions (`from` -> `fromLong`, `fromDecimal` ->
-  `parse`, `fromDecimalOrNull` -> `parseOrNull`). ([#960], [#1010])
-- Reformatted error messages thrown by **experimental** declarations in
-  `org.kotools.types.*` (`Decimal`, `Integer`, `EmailAddressRegex`, and the
-  `kotlinx-serialization` serializers) to follow a consistent
+- **Breaking:** Reformatted error messages thrown by **experimental**
+  declarations in `org.kotools.types.*` to follow a consistent
   `<description>: <value>` structure. ([#988])
-- Optimized `parse` and `toString` in the Kotlin/Native implementation of
-  `Integer` **experimental** type to process decimal digits in batches of 9
-  (10⁹ per step) instead of one digit at a time, reducing iteration count
-  ~9×. ([#989])
+- **Breaking:** Moved `Integer` **experimental** class to
+  `org.kotools.types.number` package, and renamed some of its functions
+  (`from` -> `fromLong`, `fromDecimal` -> `parse`, `fromDecimalOrNull` ->
+  `parseOrNull`). ([#960], [#1010])
+- **Breaking:** `div`, `divOrNull`, `rem` and `remOrNull` **experimental**
+  functions of `Integer` class to use Euclidean division semantics: the
+  remainder is always non-negative (`0 <= r < |b|`). ([#952])
+- Internal representation of `Integer` **experimental** class from `String` to
+  `java.lang.BigInteger` on Kotlin/JVM, `BigInt` on Kotlin/JS, and a custom
+  implementation on Kotlin/Native. This avoids parsing when performing
+  arithmetic operations. ([#912], [#914] reviewed by [@daniel-rusu], [#989]).
 
 ### 🔥 Removed
 
-- **Breaking:** `orNull` and `orThrow` functions from `EmailAddress` and
-  `EmailAddressRegex` **experimental** classes. Use their `of` function instead.
-  ([#871], [#872])
+- **Breaking:** `orNull` and `orThrow` **deprecated** functions from
+  `EmailAddress` and `EmailAddressRegex` **experimental** classes. Use their
+  `of` function instead. ([#871], [#872])
 - `com.ionspin.kotlin:bignum` dependency, previously used internally by
   `Integer` on Kotlin/Native. ([#962])
 
 ### 🐛 Fixed
 
-- Fixed the `serialName` of the `SerialDescriptor` for the `EmailAddress` and
-  `EmailAddressRegex` **experimental** default serializers provided by
-  `KotoolsTypesSerializersModule()`. These now use explicit, fully-qualified
-  names (`org.kotools.types.EmailAddress` and
-  `org.kotools.types.EmailAddressRegex`) instead of the type's simple name.
-  ([#966])
-- Fixed default serializers provided by `KotoolsTypesSerializersModule()` to
-  throw an `IllegalStateException` instead of an `IllegalArgumentException` when
-  decoding an invalid value, aligning with the exception types recommended for
-  `KSerializer` implementations. ([#990])
+- Serial name of default serializers provided by
+  `KotoolsTypesSerializersModule()` **experimental** function, in
+  `types-kotlinx-serialization` module, now uses fully-qualified names (e.g.,
+  `org.kotools.types.EmailAddress`) instead of the type's simple name. ([#966])
+- Default serializers provided by `KotoolsTypesSerializersModule()`
+  **experimental** function now throw an `IllegalStateException` instead of an
+  `IllegalArgumentException` when decoding an invalid value. ([#990])
 
 ## 🔖 Releases
 
