@@ -121,9 +121,18 @@ class IntegerSample {
             check(integer.hashCode() != other.hashCode())
         }
 
-        checkEquality(integer = Integer.fromLong(0), other = Integer.parse("-000"))
-        checkEquality(integer = Integer.fromLong(42), other = Integer.parse("+00042"))
-        checkEquality(integer = Integer.fromLong(-42), other = Integer.parse("-0042"))
+        checkEquality(
+            integer = Integer.fromLong(0),
+            other = Integer.parse("-000")
+        )
+        checkEquality(
+            integer = Integer.fromLong(42),
+            other = Integer.parse("+00042")
+        )
+        checkEquality(
+            integer = Integer.fromLong(-42),
+            other = Integer.parse("-0042")
+        )
 
         checkDiff(integer = Integer.fromLong(0), other = Integer.fromLong(1))
         checkDiff(integer = Integer.fromLong(42), other = 42)
