@@ -11,8 +11,8 @@ adheres to its own [versioning strategy][versioning-strategy].
 - `♻️ Changed` for changes in existing functionality.
 - `🗑️ Deprecated` for soon-to-be removed features.
 - `🔥 Removed` for now removed features.
-- `🐛 Fixed` for any bug fixes.
-- `🔒 Security` in case of vulnerabilities.
+- `🐛 Fixed` for bug fixes.
+- `🔒 Security` for vulnerabilities.
 
 ## 🚧 Unreleased
 
