@@ -20,10 +20,11 @@ All notable changes to this project will be documented in this file.
 
 - `Decimal` **experimental** type to `org.kotools.types.number` package,
   representing mathematical decimal numbers with exact arithmetic. Supports
-  creation via `of(Long)`, `parse(String)` and `parseOrNull(String)`,
+  creation via `fromLong(Long)`, `parse(String)` and `parseOrNull(String)`,
   arithmetic operators (`+`, `-`, `*`, unary `-`), comparison, and canonical
   string conversion. Division is intentionally excluded because the set of
-  terminating decimals is not closed under division. ([#925])
+  terminating decimals is not closed under division. ([#925] originally
+  suggested by [@CLOVIS-AI])
 - `Integer.toLong` and `Integer.toLongOrNull` **experimental** functions,
   returning the `Long` representation of an `Integer`, or throwing an
   `IllegalArgumentException` (`toLong`) or returning `null`
@@ -87,6 +88,7 @@ All notable changes to this project will be documented in this file.
   decoding an invalid value, aligning with the exception types recommended for
   `KSerializer` implementations. ([#990])
 
+[@CLOVIS-AI]: https://github.com/CLOVIS-AI
 [@daniel-rusu]: https://github.com/daniel-rusu
 [#871]: https://github.com/kotools/types/issues/871
 [#872]: https://github.com/kotools/types/issues/872
