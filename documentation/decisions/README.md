@@ -22,6 +22,7 @@ rationale behind it, and its consequences.
 | [ADR-012](ADR-012-native-decimal-io-chunking.md)          | 10⁹-chunk decimal I/O for `NativeInteger`                         | ✅ Accepted               |
 | [ADR-013](ADR-013-nonzerointeger-additive-exclusion.md)   | Exclusion of additive operations from `NonZeroInteger` arithmetic | ✅ Accepted               |
 | [ADR-014](ADR-014-nonnegativeinteger-subtractive-exclusion.md) | Exclusion of subtraction from `NonNegativeInteger` arithmetic | ✅ Accepted               |
+| [ADR-015](ADR-015-integer-typed-divisor-division.md)      | Typed-divisor Euclidean division for `Integer`                    | ✅ Accepted               |
 
 ## 🔄 Superseding records
 
