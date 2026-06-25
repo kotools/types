@@ -198,6 +198,8 @@ public class Integer private constructor(
          *
          * See the [parseOrNull] function for returning `null` instead of
          * throwing an exception in case of invalid [value].
+         *
+         * @since 5.2.0
          */
         @JvmStatic
         public fun parse(value: String): Integer {
@@ -247,6 +249,8 @@ public class Integer private constructor(
          *
          * See the [parse] function for throwing an exception instead of
          * returning `null` in case of invalid [value].
+         *
+         * @since 5.2.0
          */
         @JvmSynthetic
         public fun parseOrNull(value: String): Integer? {
