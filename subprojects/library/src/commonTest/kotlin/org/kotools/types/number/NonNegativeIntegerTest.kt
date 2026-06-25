@@ -6,6 +6,7 @@ import org.kotools.types.negativeIntegerString
 import org.kotools.types.nonIntegerString
 import org.kotools.types.nonNegativeInteger
 import org.kotools.types.nonNegativeIntegerExcept
+import org.kotools.types.nonPositiveInteger
 import org.kotools.types.positiveInteger
 import org.kotools.types.positiveIntegerString
 import org.kotools.types.repeatTest
@@ -395,6 +396,37 @@ class NonNegativeIntegerTest {
         val actual: NonNegativeInteger = x * y
         val expected: NonNegativeInteger =
             NonNegativeInteger.parse("999999999999999999990")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun timesWithNonPositiveIntegerIsAlwaysNonPositive(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val product: NonPositiveInteger = x * y
+
+        val actual: Boolean = product.toInteger() <= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun timesWithNonPositiveIntegerOnZero() {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val zero: NonPositiveInteger = NonPositiveInteger.fromLong(0)
+        val actual: NonPositiveInteger = x * zero
+        val expected: NonPositiveInteger = NonPositiveInteger.fromLong(0)
+        assertEquals(expected, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun timesWithNonPositiveIntegerSanityCheck() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        val y: NonPositiveInteger = NonPositiveInteger.parse("-10")
+        val actual: NonPositiveInteger = x * y
+        val expected: NonPositiveInteger =
+            NonPositiveInteger.parse("-999999999999999999990")
         assertEquals(expected, actual)
     }
 

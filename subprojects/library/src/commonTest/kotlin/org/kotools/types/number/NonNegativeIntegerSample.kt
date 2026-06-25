@@ -104,6 +104,17 @@ class NonNegativeIntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun timesWithNonPositiveInteger() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.fromLong(99999999999999999)
+        val y: NonPositiveInteger = NonPositiveInteger.fromLong(-10)
+        val result: NonPositiveInteger = x * y
+        val expected: NonPositiveInteger =
+            NonPositiveInteger.parse("-999999999999999990")
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
