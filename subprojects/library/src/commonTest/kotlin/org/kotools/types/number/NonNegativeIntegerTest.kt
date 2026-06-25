@@ -266,6 +266,34 @@ class NonNegativeIntegerTest {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinusIsAlwaysNonPositive(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val result: NonPositiveInteger = -x
+
+        val actual: Boolean = result.toInteger() <= Integer.ZERO
+        assertTrue(actual, message = "Input: $x")
+    }
+
+    @Test
+    fun unaryMinusOnZero() {
+        val zero: NonNegativeInteger = NonNegativeInteger.fromLong(0)
+        val actual: NonPositiveInteger = -zero
+        val expected: NonPositiveInteger = NonPositiveInteger.fromLong(0)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun unaryMinusSanityCheck() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        val actual: NonPositiveInteger = -x
+        val expected: NonPositiveInteger =
+            NonPositiveInteger.parse("-99999999999999999999")
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun plusIsCommutative(): Unit = repeatTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()

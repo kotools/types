@@ -423,6 +423,7 @@ public final class org/kotools/types/number/NonNegativeInteger {
 	public final fun times (Lorg/kotools/types/number/NonNegativeInteger;)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
+	public final fun unaryMinus ()Lorg/kotools/types/number/NonPositiveInteger;
 }
 
 public final class org/kotools/types/number/NonNegativeInteger$Companion {

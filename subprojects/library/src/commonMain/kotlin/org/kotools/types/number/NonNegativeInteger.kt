@@ -31,7 +31,9 @@ import kotlin.jvm.JvmSynthetic
  * (`x * y`) non-negative integers, always producing another non-negative
  * integer. Subtraction is intentionally absent, because the set of
  * non-negative integers isn't closed under this operation (e.g.,
- * `1 - 2 = -1`).
+ * `1 - 2 = -1`). [Negating][unaryMinus] (`-x`) a non-negative integer, or
+ * [multiplying][times] it by a [NonPositiveInteger], always produces a
+ * [NonPositiveInteger].
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see
  * [NonNegativeInteger.toString]).
@@ -323,6 +325,34 @@ public class NonNegativeInteger private constructor(
     }
 
     // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer, as a [NonPositiveInteger].
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.unaryMinus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.unaryMinus
+     * </details>
+     */
+    public operator fun unaryMinus(): NonPositiveInteger =
+        NonPositiveInteger.fromInteger(-this.value)
 
     /**
      * Adds the [other] integer to this one.

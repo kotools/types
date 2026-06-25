@@ -74,6 +74,20 @@ public class NonNegativeIntegerJavaSample {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    void unaryMinus() {
+        final NonNegativeInteger x = NonNegativeInteger.fromLong(42L);
+        final NonPositiveInteger result = x.unaryMinus();
+        final NonPositiveInteger expected = NonPositiveInteger.fromLong(-42L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+
+        final NonNegativeInteger zero = NonNegativeInteger.fromLong(0L);
+        final boolean zeroCheck =
+                zero.unaryMinus().equals(NonPositiveInteger.fromLong(0L));
+        if (!zeroCheck) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void plus() {
         final NonNegativeInteger x = NonNegativeInteger.fromLong(42L);
         final NonNegativeInteger y = NonNegativeInteger.fromLong(8L);

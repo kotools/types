@@ -74,6 +74,17 @@ class NonNegativeIntegerSample {
     // ------------------------- Arithmetic operations -------------------------
 
     @Test
+    fun unaryMinus() {
+        val x: NonNegativeInteger = NonNegativeInteger.fromLong(42)
+        val result: NonPositiveInteger = -x
+        val expected: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
+        check(result == expected)
+
+        val zero: NonNegativeInteger = NonNegativeInteger.fromLong(0)
+        check(-zero == NonPositiveInteger.fromLong(0))
+    }
+
+    @Test
     fun plus() {
         val x: NonNegativeInteger = NonNegativeInteger.fromLong(42)
         val y: NonNegativeInteger = NonNegativeInteger.fromLong(8)
