@@ -115,6 +115,9 @@ public class Integer private constructor(
 
     /** Contains class-level declarations for the [Integer] type. */
     public companion object {
+        @get:JvmSynthetic
+        internal val ZERO: Integer = this.fromLong(0)
+
         /**
          * Returns an [Integer] representing the specified [value].
          *
@@ -521,7 +524,7 @@ public class Integer private constructor(
      * - [rem] or [remOrNull] for returning Euclidean remainder
      */
     public operator fun div(other: Integer): Integer =
-        if (other == fromLong(0)) this.divisionByZeroError()
+        if (other == ZERO) this.divisionByZeroError()
         else Integer(this.delegate / other.delegate)
 
     /**
@@ -552,7 +555,7 @@ public class Integer private constructor(
      */
     @JvmSynthetic
     public fun divOrNull(other: Integer): Integer? =
-        if (other == fromLong(0)) null
+        if (other == ZERO) null
         else Integer(this.delegate / other.delegate)
 
     /**
@@ -591,7 +594,7 @@ public class Integer private constructor(
      * - [div] or [divOrNull] for returning Euclidean quotient
      */
     public operator fun rem(other: Integer): Integer =
-        if (other == fromLong(0)) this.divisionByZeroError()
+        if (other == ZERO) this.divisionByZeroError()
         else Integer(this.delegate % other.delegate)
 
     /**
@@ -623,7 +626,7 @@ public class Integer private constructor(
      */
     @JvmSynthetic
     public fun remOrNull(other: Integer): Integer? =
-        if (other == fromLong(0)) null
+        if (other == ZERO) null
         else Integer(this.delegate % other.delegate)
 
     private fun divisionByZeroError(): Nothing {

@@ -102,8 +102,7 @@ internal fun Random.positiveInteger(): Integer {
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Random.nonZeroInteger(): NonZeroInteger {
-    val zero: Integer = Integer.fromLong(0)
-    val integer: Integer = this.integerExcept(zero)
+    val integer: Integer = this.integerExcept(Integer.ZERO)
     return NonZeroInteger.fromInteger(integer)
 }
 
@@ -120,9 +119,8 @@ internal fun Random.nonZeroIntegerExcept(
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Random.nonNegativeInteger(): NonNegativeInteger {
-    val zero: Integer = Integer.fromLong(0)
     val integer: Integer = this.integer()
-        .let { if (it < zero) -it else it }
+        .let { if (it < Integer.ZERO) -it else it }
     return NonNegativeInteger.fromInteger(integer)
 }
 
@@ -139,9 +137,8 @@ internal fun Random.nonNegativeIntegerExcept(
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 internal fun Random.nonPositiveInteger(): NonPositiveInteger {
-    val zero: Integer = Integer.fromLong(0)
     val integer: Integer = this.integer()
-        .let { if (it > zero) -it else it }
+        .let { if (it > Integer.ZERO) -it else it }
     return NonPositiveInteger.fromInteger(integer)
 }
 

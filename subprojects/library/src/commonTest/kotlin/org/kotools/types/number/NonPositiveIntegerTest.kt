@@ -106,7 +106,7 @@ class NonPositiveIntegerTest {
         val safeNonPositiveInteger: NonPositiveInteger? =
             NonPositiveInteger.parseOrNull(value)
 
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val message = "Input: \"$value\""
         assertEquals(zero, actual = nonPositiveInteger.toInteger(), message)
         assertEquals(

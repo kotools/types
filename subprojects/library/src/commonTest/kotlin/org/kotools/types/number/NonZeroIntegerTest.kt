@@ -53,9 +53,7 @@ class NonZeroIntegerTest {
 
     @Test
     fun fromIntegerPreservesValue(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(
-            illegal = Integer.fromLong(0)
-        )
+        val integer: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
         val safeNonZeroInteger: NonZeroInteger? =
@@ -69,7 +67,7 @@ class NonZeroIntegerTest {
 
     @Test
     fun fromIntegerFailsWithZero() {
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
 
         val exception: IllegalArgumentException = assertFailsWith {
             NonZeroInteger.fromInteger(zero)
@@ -231,7 +229,7 @@ class NonZeroIntegerTest {
 
     @Test
     fun unaryMinusInversesSign(): Unit = repeatTest {
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val x: NonZeroInteger = Random.nonZeroInteger()
 
         val xSign: Int = x.toInteger()
@@ -299,11 +297,11 @@ class NonZeroIntegerTest {
         val x: NonZeroInteger = Random.nonZeroInteger()
         val y: NonZeroInteger = Random.nonZeroInteger()
 
-        val result: NonZeroInteger = x * y
+        val product: NonZeroInteger = x * y
 
-        val zero: Integer = Integer.fromLong(0)
+        val actual: Integer = product.toInteger()
         val message = "Inputs: x = $x, y = $y"
-        assertNotEquals(zero, result.toInteger(), message)
+        assertNotEquals(illegal = Integer.ZERO, actual, message)
     }
 
     @Test
@@ -320,21 +318,17 @@ class NonZeroIntegerTest {
 
     @Test
     fun toIntegerRoundTripsWithFromInteger(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(
-            illegal = Integer.fromLong(0)
-        )
+        val integer: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
         val actual: Integer = nonZeroInteger.toInteger()
 
-        assertEquals(integer, actual, message = "Input: $integer")
+        assertEquals(expected = integer, actual, message = "Input: $integer")
     }
 
     @Test
     fun toStringDelegatesToInteger(): Unit = repeatTest {
-        val integer: Integer = Random.integerExcept(
-            illegal = Integer.fromLong(0)
-        )
+        val integer: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val nonZeroInteger: NonZeroInteger = NonZeroInteger.fromInteger(integer)
 

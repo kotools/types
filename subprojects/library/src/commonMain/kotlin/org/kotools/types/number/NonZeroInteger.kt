@@ -140,7 +140,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
          */
         @JvmStatic
         public fun fromInteger(value: Integer): NonZeroInteger {
-            if (value == Integer.fromLong(0)) {
+            if (value == Integer.ZERO) {
                 val message: String = errorMessage("Zero integer")
                 throw IllegalArgumentException(message)
             }
@@ -171,7 +171,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
          */
         @JvmSynthetic
         public fun fromIntegerOrNull(value: Integer): NonZeroInteger? =
-            if (value == Integer.fromLong(0)) null
+            if (value == Integer.ZERO) null
             else NonZeroInteger(value)
 
         /**

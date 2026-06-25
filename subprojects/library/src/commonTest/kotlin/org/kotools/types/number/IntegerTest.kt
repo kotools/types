@@ -42,7 +42,7 @@ class IntegerTest {
         val integer: Integer = Integer.parse(value)
         val safeInteger: Integer? = Integer.parseOrNull(value)
 
-        val expected: Integer = Integer.fromLong(0)
+        val expected: Integer = Integer.ZERO
         val message = "Input: \"$value\""
         assertEquals(expected, actual = integer, message)
         assertEquals(expected, actual = safeInteger, message)
@@ -293,11 +293,10 @@ class IntegerTest {
     @Test
     fun unaryMinusIsAdditiveInverse(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
 
         val actual: Integer = x + (-x)
 
-        assertEquals(expected = zero, actual, message = "Input: $x")
+        assertEquals(expected = Integer.ZERO, actual, message = "Input: $x")
     }
 
     @Test
@@ -313,7 +312,7 @@ class IntegerTest {
 
     @Test
     fun unaryMinusInversesSign(): Unit = repeatTest {
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val x: Integer = Random.integerExcept(illegal = zero)
 
         val xSign: Int = x.compareTo(zero)
@@ -328,9 +327,11 @@ class IntegerTest {
 
     @Test
     fun unaryMinusOnZero() {
-        val x: Integer = Integer.fromLong(0)
+        val x: Integer = Integer.ZERO
+
         val actual: Integer = -x
-        assertEquals(x, actual)
+
+        assertEquals(expected = x, actual)
     }
 
     @Test
@@ -360,10 +361,13 @@ class IntegerTest {
     @Test
     fun plusHasZeroAsIdentityElement(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
+
+        val actual: Integer = x + zero
+
         val message = "Input: $x"
-        assertEquals(x, x + zero, message)
-        assertEquals(x, zero + x, message)
+        assertEquals(expected = x, actual, message)
+        assertEquals(expected = zero + x, actual, message)
     }
 
     @Test
@@ -396,11 +400,10 @@ class IntegerTest {
     fun plusHasUniqueInverseElement(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val y: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
 
         val actual: Boolean = x == -y
 
-        val expected: Boolean = x + y == zero
+        val expected: Boolean = x + y == Integer.ZERO
         val message = "Inputs: x = $x, y = $y"
         assertEquals(expected, actual, message)
     }
@@ -442,17 +445,20 @@ class IntegerTest {
     @Test
     fun minusHasZeroAsRightIdentityElement(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
-        val message = "Input: $x"
-        assertEquals(x, x - zero, message)
+        val zero: Integer = Integer.ZERO
+
+        val actual: Integer = x - zero
+
+        assertEquals(expected = x, actual, message = "Input: $x")
     }
 
     @Test
     fun minusOfSameIntegersIsZero(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
-        val message = "Input: $x"
-        assertEquals(zero, x - x, message)
+
+        val actual: Integer = x - x
+
+        assertEquals(expected = Integer.ZERO, actual, message = "Input: $x")
     }
 
     @Test
@@ -534,11 +540,11 @@ class IntegerTest {
     @Test
     fun timesHasZeroAsAbsorbingElement(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
 
         val message = "Input: $x"
-        assertEquals(zero, x * zero, message)
-        assertEquals(zero, zero * x, message)
+        assertEquals(expected = zero, actual = x * zero, message)
+        assertEquals(expected = zero, actual = zero * x, message)
     }
 
     @Test
@@ -583,7 +589,7 @@ class IntegerTest {
     fun timesSatisfiesCancellation(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val y: Integer = Random.integer()
-        val z: Integer = Random.integerExcept(illegal = Integer.fromLong(0))
+        val z: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val actual: Boolean = x * z == y * z
 
@@ -647,7 +653,7 @@ class IntegerTest {
 
     @Test
     fun divHasAbsorbingZeroDividend(): Unit = repeatTest {
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val other: Integer = Random.integerExcept(illegal = zero)
 
         val actual: Integer = zero / other
@@ -657,7 +663,7 @@ class IntegerTest {
 
     @Test
     fun divOfSameIntegerIsOne(): Unit = repeatTest {
-        val x: Integer = Random.integerExcept(illegal = Integer.fromLong(0))
+        val x: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val actual: Integer = x / x
 
@@ -668,7 +674,7 @@ class IntegerTest {
     @Test
     fun divSatisfiesDivisionAlgorithm(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.fromLong(0))
+        val y: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val quotient: Integer = x / y
         val remainder: Integer = x % y
@@ -716,7 +722,7 @@ class IntegerTest {
     @Test
     fun divIsConsistentWithTimes(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.fromLong(0))
+        val y: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val actual: Integer = (x * y) / y
 
@@ -726,9 +732,9 @@ class IntegerTest {
     @Test
     fun divByZeroThrowsException(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
+        val y: Integer = Integer.ZERO
 
-        val exception: ArithmeticException = assertFailsWith { x / zero }
+        val exception: ArithmeticException = assertFailsWith { x / y }
 
         val expected = "Division by zero"
         val message = "Input: $x"
@@ -758,7 +764,7 @@ class IntegerTest {
 
     @Test
     fun divOrNullHasAbsorbingZeroDividend(): Unit = repeatTest {
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val other: Integer = Random.integerExcept(illegal = zero)
 
         val actual: Integer? = zero.divOrNull(other)
@@ -769,7 +775,7 @@ class IntegerTest {
     @Test
     fun divOrNullIsConsistentWithDiv(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.fromLong(0))
+        val y: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val actual: Integer? = x.divOrNull(y)
 
@@ -780,7 +786,7 @@ class IntegerTest {
     @Test
     fun divOrNullWithZero(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Integer.fromLong(0)
+        val y: Integer = Integer.ZERO
 
         val actual: Integer? = x.divOrNull(y)
 
@@ -800,7 +806,7 @@ class IntegerTest {
 
     @Test
     fun remByItselfIsZero(): Unit = repeatTest {
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val x: Integer = Random.integerExcept(illegal = zero)
 
         val actual: Integer = x % x
@@ -811,7 +817,7 @@ class IntegerTest {
     @Test
     fun remHasZeroForDivisibleIntegers(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val y: Integer = Random.integerExcept(illegal = zero)
 
         val actual: Integer = (x * y) % y
@@ -823,7 +829,7 @@ class IntegerTest {
     @Test
     fun remIsAlwaysNonNegative(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val y: Integer = Random.integerExcept(illegal = zero)
 
         val remainder: Integer = x % y
@@ -834,7 +840,7 @@ class IntegerTest {
     @Test
     fun remIsBoundedByAbsoluteValueOfDivisor(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val zero: Integer = Integer.fromLong(0)
+        val zero: Integer = Integer.ZERO
         val y: Integer = Random.integerExcept(illegal = zero)
 
         val remainder: Integer = x % y
@@ -846,7 +852,7 @@ class IntegerTest {
     @Test
     fun remByZeroThrowsException(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Integer.fromLong(0)
+        val y: Integer = Integer.ZERO
 
         val exception: ArithmeticException = assertFailsWith { x % y }
 
@@ -869,7 +875,7 @@ class IntegerTest {
     @Test
     fun remOrNullIsConsistentWithRem(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Random.integerExcept(illegal = Integer.fromLong(0))
+        val y: Integer = Random.integerExcept(illegal = Integer.ZERO)
 
         val actual: Integer? = x.remOrNull(y)
 
@@ -880,7 +886,7 @@ class IntegerTest {
     @Test
     fun remOrNullWithZeroReturnsNull(): Unit = repeatTest {
         val x: Integer = Random.integer()
-        val y: Integer = Integer.fromLong(0)
+        val y: Integer = Integer.ZERO
 
         val actual: Integer? = x.remOrNull(y)
 
@@ -948,7 +954,7 @@ class IntegerTest {
         assertTrue("\"$actual\" must not have leading plus sign (+).") {
             !actual.startsWith('+')
         }
-        if (integer == Integer.fromLong(0)) assertEquals(expected = "0", actual)
+        if (integer == Integer.ZERO) assertEquals(expected = "0", actual)
         else assertTrue("\"$actual\" must not have leading zeros.") {
             actual.first(Char::isDigit) != '0'
         }

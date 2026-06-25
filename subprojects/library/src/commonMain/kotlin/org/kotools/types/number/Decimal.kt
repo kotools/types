@@ -570,11 +570,10 @@ public class Decimal private constructor(
      */
     private fun normalize(): Decimal {
         if (this.scale == 0) return this
-        val zero: Integer = Integer.fromLong(0)
         val ten: Integer = Integer.fromLong(10)
         var current: Decimal = this
         while (current.scale > 0) {
-            if (current.unscaledValue % ten != zero) break
+            if (current.unscaledValue % ten != Integer.ZERO) break
             val unscaledValue: Integer = current.unscaledValue / ten
             val scale: Int = current.scale - 1
             current = Decimal(unscaledValue, scale)

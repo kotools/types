@@ -143,8 +143,7 @@ public class NonNegativeInteger private constructor(
          */
         @JvmStatic
         public fun fromInteger(value: Integer): NonNegativeInteger {
-            val zero: Integer = Integer.fromLong(0)
-            if (value < zero) {
+            if (value < Integer.ZERO) {
                 val message: String = errorMessage("Negative integer", value)
                 throw IllegalArgumentException(message)
             }
@@ -174,10 +173,9 @@ public class NonNegativeInteger private constructor(
          * of returning `null` when [value] is negative.
          */
         @JvmSynthetic
-        public fun fromIntegerOrNull(value: Integer): NonNegativeInteger? {
-            val zero: Integer = Integer.fromLong(0)
-            return if (value < zero) null else NonNegativeInteger(value)
-        }
+        public fun fromIntegerOrNull(value: Integer): NonNegativeInteger? =
+            if (value < Integer.ZERO) null
+            else NonNegativeInteger(value)
 
         /**
          * Returns a [NonNegativeInteger] representing the number described

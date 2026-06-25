@@ -300,11 +300,10 @@ class NonNegativeIntegerTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()
 
-        val result: NonNegativeInteger = x + y
+        val sum: NonNegativeInteger = x + y
 
-        val zero: Integer = Integer.fromLong(0)
-        val message = "Inputs: x = $x, y = $y"
-        assertTrue(result.toInteger() >= zero, message)
+        val actual: Boolean = sum.toInteger() >= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
     }
 
     @Test
@@ -353,11 +352,10 @@ class NonNegativeIntegerTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()
 
-        val result: NonNegativeInteger = x * y
+        val product: NonNegativeInteger = x * y
 
-        val zero: Integer = Integer.fromLong(0)
-        val message = "Inputs: x = $x, y = $y"
-        assertTrue(result.toInteger() >= zero, message)
+        val actual: Boolean = product.toInteger() >= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
     }
 
     @Test
