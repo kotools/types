@@ -27,6 +27,12 @@ import kotlin.jvm.JvmSynthetic
  * (see [fromLong], [fromInteger] and [parse]).
  * - **Comparisons:** Compare integers using
  * [structural equality][NonPositiveInteger.equals] (`x == y`, `x != y`).
+ * - **Arithmetic operations:** [Negate][unaryMinus] (`-x`), [add][plus]
+ * (`x + y`), [subtract][minus] (`x - y`), or [multiply][times] (`x * y`)
+ * non-positive integers, each producing another non-positive or
+ * non-negative integer depending on the operation. Some combinations are
+ * intentionally absent, because the set of non-positive integers isn't
+ * closed under them (e.g., `-1 - (-5) = 4`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see
  * [NonPositiveInteger.toString]).
