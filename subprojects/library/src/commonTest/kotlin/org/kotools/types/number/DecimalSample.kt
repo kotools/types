@@ -28,6 +28,18 @@ class DecimalSample {
     }
 
     @Test
+    fun fromInteger() {
+        fun createsFromInteger(input: Integer, expected: String) {
+            val result: Decimal = Decimal.fromInteger(input)
+            check("$result" == expected)
+        }
+
+        createsFromInteger(input = Integer.fromLong(0), expected = "0")
+        createsFromInteger(input = Integer.fromLong(42), expected = "42")
+        createsFromInteger(input = Integer.fromLong(-42), expected = "-42")
+    }
+
+    @Test
     fun parsing() {
         fun parsesTo(input: String, expected: String) {
             check(Decimal.parse(input).toString() == expected)

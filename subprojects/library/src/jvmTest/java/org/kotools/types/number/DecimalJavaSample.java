@@ -26,6 +26,19 @@ public class DecimalJavaSample {
     }
 
     @Test
+    void fromInteger() {
+        final BiConsumer<Integer, String> creates = (input, expected) -> {
+            final Decimal result = Decimal.fromInteger(input);
+            final boolean check = String.valueOf(result).equals(expected);
+            if (!check) throw new IllegalStateException("Check failed.");
+        };
+
+        creates.accept(Integer.fromLong(0), "0");
+        creates.accept(Integer.fromLong(42), "42");
+        creates.accept(Integer.fromLong(-42), "-42");
+    }
+
+    @Test
     void parsing() {
         final BiConsumer<String, String> parsesTo = (input, expected) -> {
             final boolean check = String.valueOf(Decimal.parse(input))

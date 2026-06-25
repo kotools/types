@@ -34,8 +34,9 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   package, representing an `Integer` that is less than or equal to zero.
   (module: `types`, refs: [#1013], [#1024])
 - `Decimal` **experimental** class to `org.kotools.types.number` package,
-  representing mathematical decimal numbers with exact arithmetic. (module:
-  `types`, ref: [#925] originally suggested by [@CLOVIS-AI])
+  representing mathematical decimal numbers with exact arithmetic, with a
+  `fromInteger` factory function for creating a `Decimal` from an `Integer`.
+  (module: `types`, refs: [#925] originally suggested by [@CLOVIS-AI], [#992])
 
 ### ♻️ Changed
 
@@ -162,6 +163,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#988]: https://github.com/kotools/types/issues/988
 [#989]: https://github.com/kotools/types/issues/989
 [#990]: https://github.com/kotools/types/issues/990
+[#992]: https://github.com/kotools/types/issues/992
 [#998]: https://github.com/kotools/types/issues/998
 [#999]: https://github.com/kotools/types/issues/999
 [#1010]: https://github.com/kotools/types/issues/1010

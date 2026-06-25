@@ -3,6 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.decimal
 import org.kotools.types.decimalExcept
+import org.kotools.types.integer
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonDecimalString
 import org.kotools.types.positiveDecimal
@@ -26,6 +27,16 @@ class DecimalTest {
         val value: Long = Random.nextLong()
 
         val actual: Decimal = Decimal.fromLong(value)
+
+        val expected: String = value.toString()
+        assertEquals(expected, actual = "$actual", message = "Input: $value")
+    }
+
+    @Test
+    fun fromIntegerPreservesIntegerRepresentation(): Unit = repeatTest {
+        val value: Integer = Random.integer()
+
+        val actual: Decimal = Decimal.fromInteger(value)
 
         val expected: String = value.toString()
         assertEquals(expected, actual = "$actual", message = "Input: $value")

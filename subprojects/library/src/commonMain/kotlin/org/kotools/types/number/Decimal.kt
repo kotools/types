@@ -3,6 +3,7 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
+import org.kotools.types.number.Decimal.Companion.fromInteger
 import org.kotools.types.number.Decimal.Companion.fromLong
 import org.kotools.types.number.Decimal.Companion.parse
 import org.kotools.types.number.Decimal.Companion.parseOrNull
@@ -56,8 +57,8 @@ import kotlin.jvm.JvmSynthetic
  *
  * ### Key features
  *
- * - **Creations:** Create from Kotlin integer types or decimal string (see
- * [fromLong] and [parse]).
+ * - **Creations:** Create from Kotlin integer types, [Integer], or decimal
+ * string (see [fromLong], [fromInteger], and [parse]).
  * - **Comparisons:** Compare decimals using
  * [structural equality][Decimal.equals] (`x == y`, `x != y`) and
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
@@ -115,6 +116,37 @@ public class Decimal private constructor(
             val unscaled: Integer = Integer.fromLong(value)
             return Decimal(unscaled, scale = 0)
         }
+
+        /**
+         * Returns a [Decimal] representing the specified [value].
+         *
+         * This function preserves the canonical representation of [value].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.number.DecimalSample.fromInteger
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.number.DecimalJavaSample.fromInteger
+         * </details>
+         */
+        @JvmStatic
+        public fun fromInteger(value: Integer): Decimal =
+            Decimal(value, scale = 0)
 
         /**
          * Returns a [Decimal] representing the number described by [value],
