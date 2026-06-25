@@ -29,7 +29,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   representing an `Integer` other than zero. (module: `types`, ref: [#1011])
 - `NonNegativeInteger` **experimental** class to `org.kotools.types.number`
   package, representing an `Integer` that is greater than or equal to zero.
-  (module: `types`, ref: [#998])
+  (module: `types`, refs: [#998], [#1014])
 - `NonPositiveInteger` **experimental** class to `org.kotools.types.number`
   package, representing an `Integer` that is less than or equal to zero.
   (module: `types`, ref: [#1013])
@@ -167,3 +167,4 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1010]: https://github.com/kotools/types/issues/1010
 [#1011]: https://github.com/kotools/types/issues/1011
 [#1013]: https://github.com/kotools/types/issues/1013
+[#1014]: https://github.com/kotools/types/issues/1014
