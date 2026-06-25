@@ -21,6 +21,10 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 - `toLong()` and `toLongOrNull()` **experimental** functions to `Integer` class,
   returning the `Long` representation of an `Integer`. (module: `types`, ref:
   [#1010])
+- `div(NonZeroInteger)` and `rem(NonZeroInteger)` **experimental** functions to
+  `Integer` class, returning the Euclidean quotient and non-negative remainder
+  of dividing by a non-zero divisor without throwing. (module: `types`, ref:
+  [#999])
 - `NonZeroInteger` **experimental** class to `org.kotools.types.number` package,
   representing an `Integer` other than zero. (module: `types`, ref: [#1011])
 - `NonNegativeInteger` **experimental** class to `org.kotools.types.number`
@@ -159,6 +163,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#989]: https://github.com/kotools/types/issues/989
 [#990]: https://github.com/kotools/types/issues/990
 [#998]: https://github.com/kotools/types/issues/998
+[#999]: https://github.com/kotools/types/issues/999
 [#1010]: https://github.com/kotools/types/issues/1010
 [#1011]: https://github.com/kotools/types/issues/1011
 [#1013]: https://github.com/kotools/types/issues/1013
