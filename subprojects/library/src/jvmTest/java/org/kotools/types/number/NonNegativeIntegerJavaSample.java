@@ -84,7 +84,7 @@ public class NonNegativeIntegerJavaSample {
     }
 
     @Test
-    void times() {
+    void timesWithNonNegativeInteger() {
         final NonNegativeInteger x =
                 NonNegativeInteger.fromLong(99999999999999999L);
         final NonNegativeInteger y = NonNegativeInteger.fromLong(10L);

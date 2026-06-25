@@ -318,7 +318,7 @@ class NonNegativeIntegerTest {
     }
 
     @Test
-    fun timesIsCommutative(): Unit = repeatTest {
+    fun timesWithNonNegativeIntegerIsCommutative(): Unit = repeatTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()
         val message = "Inputs: x = $x, y = $y"
@@ -326,16 +326,17 @@ class NonNegativeIntegerTest {
     }
 
     @Test
-    fun timesHasOneAsIdentityElement(): Unit = repeatTest {
-        val x: NonNegativeInteger = Random.nonNegativeInteger()
-        val one: NonNegativeInteger = NonNegativeInteger.fromLong(1)
-        val message = "Input: $x"
-        assertEquals(x, x * one, message)
-        assertEquals(x, one * x, message)
-    }
+    fun timesWithNonNegativeIntegerHasOneAsIdentityElement(): Unit =
+        repeatTest {
+            val x: NonNegativeInteger = Random.nonNegativeInteger()
+            val one: NonNegativeInteger = NonNegativeInteger.fromLong(1)
+            val message = "Input: $x"
+            assertEquals(x, x * one, message)
+            assertEquals(x, one * x, message)
+        }
 
     @Test
-    fun timesIsAssociative(): Unit = repeatTest {
+    fun timesWithNonNegativeIntegerIsAssociative(): Unit = repeatTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()
         val z: NonNegativeInteger = Random.nonNegativeInteger()
@@ -348,7 +349,7 @@ class NonNegativeIntegerTest {
     }
 
     @Test
-    fun timesIsAlwaysNonNegative(): Unit = repeatTest {
+    fun timesWithNonNegativeIntegerIsAlwaysNonNegative(): Unit = repeatTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()
 
@@ -359,7 +360,7 @@ class NonNegativeIntegerTest {
     }
 
     @Test
-    fun timesSanityCheck() {
+    fun timesWithNonNegativeIntegerSanityCheck() {
         val x: NonNegativeInteger =
             NonNegativeInteger.parse("99999999999999999999")
         val y: NonNegativeInteger = NonNegativeInteger.parse("10")

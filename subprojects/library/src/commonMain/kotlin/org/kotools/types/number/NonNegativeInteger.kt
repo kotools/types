@@ -363,7 +363,7 @@ public class NonNegativeInteger private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.times
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.timesWithNonNegativeInteger
      * </details>
      *
      * <br>
@@ -374,7 +374,7 @@ public class NonNegativeInteger private constructor(
      *
      * Here's an example of calling this function from Java code:
      *
-     * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.times
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.timesWithNonNegativeInteger
      * </details>
      */
     public operator fun times(other: NonNegativeInteger): NonNegativeInteger =

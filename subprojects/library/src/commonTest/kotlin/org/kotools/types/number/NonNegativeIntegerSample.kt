@@ -83,7 +83,7 @@ class NonNegativeIntegerSample {
     }
 
     @Test
-    fun times() {
+    fun timesWithNonNegativeInteger() {
         val x: NonNegativeInteger =
             NonNegativeInteger.fromLong(99999999999999999)
         val y: NonNegativeInteger = NonNegativeInteger.fromLong(10)
