@@ -317,6 +317,36 @@ public class NonPositiveInteger private constructor(
         return 31 * seed + this.value.hashCode()
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    /**
+     * Returns the negative of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.unaryMinus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.unaryMinus
+     * </details>
+     */
+    public operator fun unaryMinus(): NonNegativeInteger =
+        NonNegativeInteger.fromInteger(-this.value)
+
     // ------------------------------ Conversions ------------------------------
 
     /**

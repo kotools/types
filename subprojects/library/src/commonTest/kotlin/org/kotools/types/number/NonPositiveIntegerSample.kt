@@ -71,6 +71,16 @@ class NonPositiveIntegerSample {
         check(x.hashCode() != z.hashCode())
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinus() {
+        val x: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
+        val result: NonNegativeInteger = -x
+        val expected: NonNegativeInteger = NonNegativeInteger.fromLong(42)
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

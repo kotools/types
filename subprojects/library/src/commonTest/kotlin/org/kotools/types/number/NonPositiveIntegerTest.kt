@@ -19,6 +19,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalKotoolsTypesApi::class)
 class NonPositiveIntegerTest {
@@ -271,6 +272,39 @@ class NonPositiveIntegerTest {
         val message = "Structural equality must fail with null."
         assertFalse(equality, message)
         assertFalse(hashEquality, message)
+    }
+
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    fun unaryMinusProducesNonNegativeInteger(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val result: NonNegativeInteger = -x
+
+        val actual: Boolean = result.toInteger() >= Integer.ZERO
+        assertTrue(actual, message = "Input: $x")
+    }
+
+    @Test
+    fun unaryMinusInversesValue(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val result: NonNegativeInteger = -x
+
+        val expected: Integer = -x.toInteger()
+        val message = "Input: $x"
+        assertEquals(expected, actual = result.toInteger(), message)
+    }
+
+    @Test
+    fun unaryMinusSanityCheck() {
+        val x: NonPositiveInteger =
+            NonPositiveInteger.parse("-99999999999999999999")
+        val actual: NonNegativeInteger = -x
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        assertEquals(expected, actual)
     }
 
     // ------------------------------ Conversions ------------------------------

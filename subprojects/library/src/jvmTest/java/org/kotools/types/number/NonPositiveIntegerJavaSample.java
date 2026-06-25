@@ -71,6 +71,17 @@ public class NonPositiveIntegerJavaSample {
         if (!inequality) throw new IllegalStateException("Check failed.");
     }
 
+    // ------------------------- Arithmetic operations -------------------------
+
+    @Test
+    void unaryMinus() {
+        final NonPositiveInteger x = NonPositiveInteger.fromLong(-42L);
+        final NonNegativeInteger result = x.unaryMinus();
+        final NonNegativeInteger expected = NonNegativeInteger.fromLong(42L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
