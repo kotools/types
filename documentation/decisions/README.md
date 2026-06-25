@@ -24,6 +24,7 @@ rationale behind it, and its consequences.
 | [ADR-014](ADR-014-nonnegativeinteger-subtractive-exclusion.md) | Exclusion of subtraction from `NonNegativeInteger` arithmetic     | ✅ Accepted               |
 | [ADR-015](ADR-015-integer-typed-divisor-division.md)           | Typed-divisor Euclidean division for `Integer`                    | ✅ Accepted               |
 | [ADR-016](ADR-016-nonnegativeinteger-cross-type-closure.md)    | Cross-type closure for `NonNegativeInteger` arithmetic            | ✅ Accepted               |
+| [ADR-017](ADR-017-nonpositiveinteger-exclusions.md)            | Exclusions from `NonPositiveInteger` arithmetic                   | ✅ Accepted               |
 
 ## 🔄 Superseding records
 
