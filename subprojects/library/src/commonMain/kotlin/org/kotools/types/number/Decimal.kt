@@ -114,7 +114,7 @@ public class Decimal private constructor(
         @JvmStatic
         public fun fromLong(value: Long): Decimal {
             val unscaled: Integer = Integer.fromLong(value)
-            return Decimal(unscaled, scale = 0)
+            return fromInteger(unscaled)
         }
 
         /**
