@@ -198,6 +198,16 @@ class IntegerSample {
     }
 
     @Test
+    fun euclideanDivisionByNonZeroInteger() {
+        val x: Integer = Integer.fromLong(-7)
+        val y: NonZeroInteger = NonZeroInteger.fromLong(2)
+
+        val quotient: Integer = x / y
+
+        check(quotient == Integer.fromLong(-4))
+    }
+
+    @Test
     fun euclideanDivisionOrNull() {
         val x: Integer = Integer.fromLong(-7)
         val y: Integer = Integer.fromLong(2)

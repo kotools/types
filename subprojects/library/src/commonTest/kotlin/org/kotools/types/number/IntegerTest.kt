@@ -5,6 +5,7 @@ import org.kotools.types.integer
 import org.kotools.types.integerExcept
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.nonIntegerString
+import org.kotools.types.nonZeroInteger
 import org.kotools.types.nonZeroIntegerStringWithLeadingZeros
 import org.kotools.types.positiveInteger
 import org.kotools.types.positiveIntegerString
@@ -791,6 +792,50 @@ class IntegerTest {
         val actual: Integer? = x.divOrNull(y)
 
         assertNull(actual)
+    }
+
+    @Test
+    fun divByNonZeroIntegerSanityCheck() {
+        val x: Integer = Integer.parse("922337203685477580700")
+        val y: NonZeroInteger = NonZeroInteger.fromLong(10)
+
+        val actual: Integer = x / y
+
+        val expected: Integer = Integer.parse("92233720368547758070")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun divByNonZeroIntegerHasRightIdentity(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val one: NonZeroInteger = NonZeroInteger.fromLong(1)
+
+        val actual: Integer = x / one
+
+        assertEquals(expected = x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun divByNonZeroIntegerIsConsistentWithDiv(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: NonZeroInteger = Random.nonZeroInteger()
+
+        val actual: Integer = x / y
+
+        val expected: Integer = x / y.toInteger()
+        assertEquals(expected, actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun divByNonZeroIntegerSatisfiesDivisionAlgorithm(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: NonZeroInteger = Random.nonZeroInteger()
+
+        val quotient: Integer = x / y
+        val remainder: Integer = x % y.toInteger()
+        val actual: Integer = quotient * y.toInteger() + remainder
+
+        assertEquals(expected = x, actual, message = "Inputs: x = $x, y = $y")
     }
 
     @Test

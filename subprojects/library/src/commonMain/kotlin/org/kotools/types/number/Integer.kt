@@ -495,6 +495,44 @@ public class Integer private constructor(
 
     /**
      * Returns the Euclidean quotient of dividing this integer by the [other]
+     * one.
+     *
+     * This function uses Euclidean division: the remainder is always
+     * non-negative, regardless of the sign of this integer. Since [other] is
+     * guaranteed to be other than zero, this function never throws.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionByNonZeroInteger
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.euclideanDivisionByNonZeroInteger
+     * </details>
+     * <br>
+     *
+     * See also [rem] for returning the Euclidean remainder of this division.
+     *
+     * @since 5.2.0
+     */
+    public operator fun div(other: NonZeroInteger): Integer =
+        Integer(this.delegate / other.toInteger().delegate)
+
+    /**
+     * Returns the Euclidean quotient of dividing this integer by the [other]
      * one, or throws an [ArithmeticException] if the [other] integer is zero.
      *
      * This function uses Euclidean division: the remainder is always
