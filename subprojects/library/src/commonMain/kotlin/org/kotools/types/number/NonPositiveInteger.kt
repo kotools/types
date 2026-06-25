@@ -347,6 +347,34 @@ public class NonPositiveInteger private constructor(
     public operator fun unaryMinus(): NonNegativeInteger =
         NonNegativeInteger.fromInteger(-this.value)
 
+    /**
+     * Adds the [other] integer to this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonPositiveIntegerSample.plus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.plus
+     * </details>
+     */
+    public operator fun plus(other: NonPositiveInteger): NonPositiveInteger =
+        fromInteger(this.value + other.value)
+
     // ------------------------------ Conversions ------------------------------
 
     /**

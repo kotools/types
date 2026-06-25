@@ -82,6 +82,16 @@ public class NonPositiveIntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void plus() {
+        final NonPositiveInteger x = NonPositiveInteger.fromLong(-42L);
+        final NonPositiveInteger y = NonPositiveInteger.fromLong(-8L);
+        final NonPositiveInteger result = x.plus(y);
+        final NonPositiveInteger expected = NonPositiveInteger.fromLong(-50L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

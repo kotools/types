@@ -307,6 +307,58 @@ class NonPositiveIntegerTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun plusIsCommutative(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x + y, y + x, message)
+    }
+
+    @Test
+    fun plusHasZeroAsIdentityElement(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val zero: NonPositiveInteger = NonPositiveInteger.fromLong(0)
+        val message = "Input: $x"
+        assertEquals(x, x + zero, message)
+        assertEquals(x, zero + x, message)
+    }
+
+    @Test
+    fun plusIsAssociative(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+        val z: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val actual: NonPositiveInteger = (x + y) + z
+
+        val expected: NonPositiveInteger = x + (y + z)
+        val message = "Inputs: x = $x, y = $y, z = $z"
+        assertEquals(expected, actual, message)
+    }
+
+    @Test
+    fun plusIsAlwaysNonPositive(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val sum: NonPositiveInteger = x + y
+
+        val actual: Boolean = sum.toInteger() <= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun plusSanityCheck() {
+        val x: NonPositiveInteger =
+            NonPositiveInteger.parse("-99999999999999999999")
+        val y: NonPositiveInteger = NonPositiveInteger.parse("-1")
+        val actual: NonPositiveInteger = x + y
+        val expected: NonPositiveInteger =
+            NonPositiveInteger.parse("-100000000000000000000")
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
