@@ -31,8 +31,9 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   package, representing an `Integer` that is greater than or equal to zero.
   (module: `types`, refs: [#998], [#1014])
 - `NonPositiveInteger` **experimental** class to `org.kotools.types.number`
-  package, representing an `Integer` that is less than or equal to zero.
-  (module: `types`, ref: [#1013])
+  package, representing an `Integer` that is less than or equal to zero,
+  with arithmetic operations for negation, addition, subtraction, and
+  multiplication. (module: `types`, refs: [#1013], [#1024])
 - `Decimal` **experimental** class to `org.kotools.types.number` package,
   representing mathematical decimal numbers with exact arithmetic. (module:
   `types`, ref: [#925] originally suggested by [@CLOVIS-AI])
@@ -168,3 +169,4 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1011]: https://github.com/kotools/types/issues/1011
 [#1013]: https://github.com/kotools/types/issues/1013
 [#1014]: https://github.com/kotools/types/issues/1014
+[#1024]: https://github.com/kotools/types/issues/1024
