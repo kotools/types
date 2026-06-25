@@ -102,6 +102,18 @@ public class NonPositiveIntegerJavaSample {
         if (!check) throw new IllegalStateException("Check failed.");
     }
 
+    @Test
+    void timesWithNonNegativeInteger() {
+        final NonPositiveInteger x =
+                NonPositiveInteger.fromLong(-99999999999999999L);
+        final NonNegativeInteger y = NonNegativeInteger.fromLong(10L);
+        final NonPositiveInteger result = x.times(y);
+        final NonPositiveInteger expected =
+                NonPositiveInteger.parse("-999999999999999990");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

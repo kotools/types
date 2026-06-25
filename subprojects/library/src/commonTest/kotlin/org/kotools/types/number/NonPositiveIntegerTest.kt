@@ -390,6 +390,47 @@ class NonPositiveIntegerTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun timesWithNonNegativeIntegerHasOneAsIdentityElement(): Unit =
+        repeatTest {
+            val x: NonPositiveInteger = Random.nonPositiveInteger()
+            val one: NonNegativeInteger = NonNegativeInteger.fromLong(1)
+            val actual: NonPositiveInteger = x * one
+            assertEquals(x, actual, message = "Input: $x")
+        }
+
+    @Test
+    fun timesWithNonNegativeIntegerHasZeroAsAbsorbingElement(): Unit =
+        repeatTest {
+            val x: NonPositiveInteger = Random.nonPositiveInteger()
+            val zero: NonNegativeInteger = NonNegativeInteger.fromLong(0)
+            val actual: NonPositiveInteger = x * zero
+            val expected: NonPositiveInteger = NonPositiveInteger.fromLong(0)
+            assertEquals(expected, actual, message = "Input: $x")
+        }
+
+    @Test
+    fun timesWithNonNegativeIntegerIsAlwaysNonPositive(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val product: NonPositiveInteger = x * y
+
+        val actual: Boolean = product.toInteger() <= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun timesWithNonNegativeIntegerSanityCheck() {
+        val x: NonPositiveInteger =
+            NonPositiveInteger.parse("-99999999999999999999")
+        val y: NonNegativeInteger = NonNegativeInteger.parse("10")
+        val actual: NonPositiveInteger = x * y
+        val expected: NonPositiveInteger =
+            NonPositiveInteger.parse("-999999999999999999990")
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
