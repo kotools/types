@@ -717,9 +717,11 @@ public class Integer private constructor(
      */
     @JvmSynthetic
     public fun toLongOrNull(): Long? {
-        val outOfRange: Boolean = this < fromLong(Long.MIN_VALUE) ||
-            this > fromLong(Long.MAX_VALUE)
-        return if (outOfRange) null else this.toString().toLong()
+        val min: Integer = fromLong(Long.MIN_VALUE)
+        val max: Integer = fromLong(Long.MAX_VALUE)
+        return if (this < min || this > max) null
+        else this.toString()
+            .toLong()
     }
 
     /**
