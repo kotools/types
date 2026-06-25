@@ -447,6 +447,7 @@ public final class org/kotools/types/number/NonPositiveInteger {
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonPositiveInteger;
 	public final fun plus (Lorg/kotools/types/number/NonPositiveInteger;)Lorg/kotools/types/number/NonPositiveInteger;
 	public final fun times (Lorg/kotools/types/number/NonNegativeInteger;)Lorg/kotools/types/number/NonPositiveInteger;
+	public final fun times (Lorg/kotools/types/number/NonPositiveInteger;)Lorg/kotools/types/number/NonNegativeInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;
 	public final fun toString ()Ljava/lang/String;
 	public final fun unaryMinus ()Lorg/kotools/types/number/NonNegativeInteger;

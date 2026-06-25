@@ -431,6 +431,36 @@ class NonPositiveIntegerTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun timesWithNonPositiveIntegerIsCommutative(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(x * y, y * x, message)
+    }
+
+    @Test
+    fun timesWithNonPositiveIntegerIsAlwaysNonNegative(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val product: NonNegativeInteger = x * y
+
+        val actual: Boolean = product.toInteger() >= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun timesWithNonPositiveIntegerSanityCheck() {
+        val x: NonPositiveInteger =
+            NonPositiveInteger.parse("-99999999999999999999")
+        val y: NonPositiveInteger = NonPositiveInteger.parse("-10")
+        val actual: NonNegativeInteger = x * y
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("999999999999999999990")
+        assertEquals(expected, actual)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test
