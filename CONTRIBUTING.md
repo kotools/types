@@ -100,7 +100,11 @@ Usually, the issue that you chose to work on contains a checklist that you can
 use as a reminder.
 But if needed, feel free to [ask for help]; everyone is a beginner at first.
 
+Please make sure to follow our [coding conventions] while implementing your
+changes.
+
 [ask for help]: https://github.com/kotools/types/discussions/new?category=q-a
+[coding conventions]: documentation/coding-conventions.md
 
 ### Checking the Application Binary Interface (ABI)
 
