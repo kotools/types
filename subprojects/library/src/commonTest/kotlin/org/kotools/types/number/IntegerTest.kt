@@ -839,6 +839,59 @@ class IntegerTest {
     }
 
     @Test
+    fun remByNonZeroIntegerSanityCheck() {
+        val x: Integer = Integer.fromLong(42)
+        val y: NonZeroInteger = NonZeroInteger.fromLong(5)
+
+        val actual: NonNegativeInteger = x % y
+
+        val expected: NonNegativeInteger = NonNegativeInteger.fromLong(2)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun remByNonZeroIntegerIsConsistentWithRem(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: NonZeroInteger = Random.nonZeroInteger()
+
+        val actual: NonNegativeInteger = x % y
+
+        val expected: Integer = x % y.toInteger()
+        val message = "Inputs: x = $x, y = $y"
+        assertEquals(expected, actual = actual.toInteger(), message)
+    }
+
+    @Test
+    fun remByNonZeroIntegerIsBoundedByAbsoluteValueOfDivisor(): Unit =
+        repeatTest {
+            val x: Integer = Random.integer()
+            val y: NonZeroInteger = Random.nonZeroInteger()
+
+            val remainder: NonNegativeInteger = x % y
+
+            val divisor: Integer = y.toInteger()
+            val absDivisor: Integer =
+                if (divisor > Integer.ZERO) divisor else -divisor
+            val message = "Inputs: x = $x, y = $y"
+            assertTrue(remainder.toInteger() < absDivisor, message)
+        }
+
+    @Test
+    fun divAndRemByNonZeroIntegerSatisfyDivisionAlgorithm(): Unit =
+        repeatTest {
+            val x: Integer = Random.integer()
+            val y: NonZeroInteger = Random.nonZeroInteger()
+
+            val quotient: Integer = x / y
+            val remainder: NonNegativeInteger = x % y
+            val actual: Integer =
+                quotient * y.toInteger() + remainder.toInteger()
+
+            val message = "Inputs: x = $x, y = $y"
+            assertEquals(expected = x, actual, message)
+        }
+
+    @Test
     fun remSanityCheck() {
         val x: Integer = Integer.fromLong(42)
         val y: Integer = Integer.fromLong(5)

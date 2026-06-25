@@ -166,8 +166,10 @@ public class IntegerJavaSample {
         final NonZeroInteger y = NonZeroInteger.fromLong(2);
 
         final Integer quotient = x.div(y);
+        final NonNegativeInteger remainder = x.rem(y);
 
-        final boolean check = quotient.equals(Integer.fromLong(-4));
+        final boolean check = quotient.equals(Integer.fromLong(-4))
+                && remainder.equals(NonNegativeInteger.fromLong(1));
         if (!check) throw new IllegalStateException("Check failed.");
     }
 

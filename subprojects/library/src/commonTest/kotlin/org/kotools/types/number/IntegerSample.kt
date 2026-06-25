@@ -203,8 +203,11 @@ class IntegerSample {
         val y: NonZeroInteger = NonZeroInteger.fromLong(2)
 
         val quotient: Integer = x / y
+        val remainder: NonNegativeInteger = x % y
 
         check(quotient == Integer.fromLong(-4))
+        check(remainder == NonNegativeInteger.fromLong(1))
+        check(x == quotient * y.toInteger() + remainder.toInteger())
     }
 
     @Test

@@ -396,6 +396,7 @@ public final class org/kotools/types/number/Integer {
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/Integer;
 	public final fun plus (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun rem (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
+	public final fun rem (Lorg/kotools/types/number/NonZeroInteger;)Lorg/kotools/types/number/NonNegativeInteger;
 	public final synthetic fun remOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun times (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun toLong ()J

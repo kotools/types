@@ -602,6 +602,48 @@ public class Integer private constructor(
 
     /**
      * Returns the Euclidean remainder of dividing this integer by the [other]
+     * one.
+     *
+     * This function uses Euclidean division: the remainder is always
+     * non-negative and less than the absolute value of [other]
+     * (`0 <= remainder < |other|`), regardless of the sign of this integer.
+     * Since [other] is guaranteed to be other than zero, this function never
+     * throws.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionByNonZeroInteger
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.euclideanDivisionByNonZeroInteger
+     * </details>
+     * <br>
+     *
+     * See also [div] for returning the Euclidean quotient of this division.
+     *
+     * @since 5.2.0
+     */
+    public operator fun rem(other: NonZeroInteger): NonNegativeInteger {
+        val remainder = Integer(this.delegate % other.toInteger().delegate)
+        return NonNegativeInteger.fromInteger(remainder)
+    }
+
+    /**
+     * Returns the Euclidean remainder of dividing this integer by the [other]
      * one, or throws an [ArithmeticException] if the [other] integer is zero.
      *
      * This function uses Euclidean division: the remainder is always
