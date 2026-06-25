@@ -443,6 +443,7 @@ public final class org/kotools/types/number/NonPositiveInteger {
 	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/NonPositiveInteger;
 	public static final fun fromLong (J)Lorg/kotools/types/number/NonPositiveInteger;
 	public final fun hashCode ()I
+	public final fun minus (Lorg/kotools/types/number/NonNegativeInteger;)Lorg/kotools/types/number/NonPositiveInteger;
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/NonPositiveInteger;
 	public final fun plus (Lorg/kotools/types/number/NonPositiveInteger;)Lorg/kotools/types/number/NonPositiveInteger;
 	public final fun toInteger ()Lorg/kotools/types/number/Integer;

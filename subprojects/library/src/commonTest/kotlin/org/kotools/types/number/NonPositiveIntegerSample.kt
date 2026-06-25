@@ -90,6 +90,15 @@ class NonPositiveIntegerSample {
         check(result == expected)
     }
 
+    @Test
+    fun minus() {
+        val x: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
+        val y: NonNegativeInteger = NonNegativeInteger.fromLong(8)
+        val result: NonPositiveInteger = x - y
+        val expected: NonPositiveInteger = NonPositiveInteger.fromLong(-50)
+        check(result == expected)
+    }
+
     // ------------------------------ Conversions ------------------------------
 
     @Test

@@ -4,6 +4,7 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.negativeIntegerString
 import org.kotools.types.nonIntegerString
+import org.kotools.types.nonNegativeInteger
 import org.kotools.types.nonPositiveInteger
 import org.kotools.types.nonPositiveIntegerExcept
 import org.kotools.types.positiveInteger
@@ -354,6 +355,36 @@ class NonPositiveIntegerTest {
             NonPositiveInteger.parse("-99999999999999999999")
         val y: NonPositiveInteger = NonPositiveInteger.parse("-1")
         val actual: NonPositiveInteger = x + y
+        val expected: NonPositiveInteger =
+            NonPositiveInteger.parse("-100000000000000000000")
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun minusHasZeroAsIdentityElement(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val zero: NonNegativeInteger = NonNegativeInteger.fromLong(0)
+        val actual: NonPositiveInteger = x - zero
+        assertEquals(x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun minusIsAlwaysNonPositive(): Unit = repeatTest {
+        val x: NonPositiveInteger = Random.nonPositiveInteger()
+        val y: NonNegativeInteger = Random.nonNegativeInteger()
+
+        val difference: NonPositiveInteger = x - y
+
+        val actual: Boolean = difference.toInteger() <= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun minusSanityCheck() {
+        val x: NonPositiveInteger =
+            NonPositiveInteger.parse("-99999999999999999999")
+        val y: NonNegativeInteger = NonNegativeInteger.parse("1")
+        val actual: NonPositiveInteger = x - y
         val expected: NonPositiveInteger =
             NonPositiveInteger.parse("-100000000000000000000")
         assertEquals(expected, actual)
