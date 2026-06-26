@@ -29,11 +29,10 @@ import kotlin.jvm.JvmSynthetic
  * [structural equality][NonNegativeInteger.equals] (`x == y`, `x != y`).
  * - **Arithmetic operations:** [Add][plus] (`x + y`) or [multiply][times]
  * (`x * y`) non-negative integers, always producing another non-negative
- * integer. Subtraction is intentionally absent, because the set of
- * non-negative integers isn't closed under this operation (e.g.,
- * `1 - 2 = -1`). [Negating][unaryMinus] (`-x`) a non-negative integer, or
+ * integer. [Negating][unaryMinus] (`-x`) a non-negative integer, or
  * [multiplying][times] it by a [NonPositiveInteger], always produces a
- * [NonPositiveInteger].
+ * [NonPositiveInteger]. Subtraction is intentionally absent, because the set of
+ * non-negative integers isn't closed under this operation (e.g., `1 - 2 = -1`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see
  * [NonNegativeInteger.toString]).
