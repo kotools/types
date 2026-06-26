@@ -1,4 +1,4 @@
-# ⚖️ ADR-015: Cross-type closure for `NonNegativeInteger` arithmetic
+# ⚖️ ADR-016: Cross-type closure for `NonNegativeInteger` arithmetic
 
 This document records the decision to expose `unaryMinus` and a
 `times(NonPositiveInteger)` overload on the `NonNegativeInteger` type, both
