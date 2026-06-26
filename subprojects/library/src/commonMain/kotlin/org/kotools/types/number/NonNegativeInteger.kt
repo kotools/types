@@ -410,8 +410,7 @@ public class NonNegativeInteger private constructor(
         fromInteger(this.value * other.value)
 
     /**
-     * Multiplies this integer by the [other] one, returning a
-     * [NonPositiveInteger].
+     * Multiplies this integer by the [other] one.
      *
      * <br>
      * <details>
