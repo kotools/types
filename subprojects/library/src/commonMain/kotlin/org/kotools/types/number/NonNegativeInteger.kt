@@ -326,7 +326,7 @@ public class NonNegativeInteger private constructor(
     // ------------------------- Arithmetic operations -------------------------
 
     /**
-     * Returns the negative of this integer, as a [NonPositiveInteger].
+     * Returns the negative of this integer.
      *
      * <br>
      * <details>
