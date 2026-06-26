@@ -1,10 +1,8 @@
 # ⚖️ ADR-015: Cross-type closure for `NonNegativeInteger` arithmetic
 
 This document records the decision to expose `unaryMinus` and a
-`times(NonPositiveInteger)` overload on the
-[`NonNegativeInteger`][NonNegativeInteger] type, both returning a
-[`NonPositiveInteger`][NonPositiveInteger] instead of `NonNegativeInteger` or
-`Integer`.
+`times(NonPositiveInteger)` overload on the `NonNegativeInteger` type, both
+returning a `NonPositiveInteger` instead of `NonNegativeInteger` or `Integer`.
 
 ## 🤔 Context
 
@@ -15,8 +13,8 @@ raises a related question for two other operations:
 - Negating a non-negative integer (`-x`) never produces another non-negative
   integer (except for `0`); the set of non-negative integers isn't closed
   under negation either.
-- Multiplying a non-negative integer by a [`NonPositiveInteger`][NonPositiveInteger]
-  (e.g. `3 * (-1) = -3`) never produces a non-negative integer.
+- Multiplying a non-negative integer by a `NonPositiveInteger` (e.g.
+  `3 * (-1) = -3`) never produces a non-negative integer.
 
 Unlike `minus`, however, both results are still fully constrained: negating a
 non-negative integer always yields a value less than or equal to zero, and so
@@ -49,8 +47,7 @@ information that's actually guaranteed by the input types).
   declared types" principle from [ADR-013][ADR-013] and [ADR-014][ADR-014].
 - **`0` resolves unambiguously.** `0` is both non-negative and non-positive.
   `-0 == 0` and `0 * y == 0` for any `NonPositiveInteger` `y`, and `0` is a
-  valid `NonPositiveInteger`
-  ([`NonPositiveInteger.fromInteger`][NonPositiveInteger] accepts values
+  valid `NonPositiveInteger` (`NonPositiveInteger.fromInteger` accepts values
   `<= 0`), so the boundary case resolves cleanly without any special-casing.
 - **Widening to `Integer` would discard a guarantee callers can rely on.**
   Callers already know the sign of the result from the types involved; using
@@ -77,7 +74,5 @@ information that's actually guaranteed by the input types).
 
 <!----------------------------------- Links ----------------------------------->
 
-[NonNegativeInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonNegativeInteger.kt
-[NonPositiveInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonPositiveInteger.kt
 [ADR-013]: ADR-013-nonzerointeger-additive-exclusion.md
 [ADR-014]: ADR-014-nonnegativeinteger-subtractive-exclusion.md
