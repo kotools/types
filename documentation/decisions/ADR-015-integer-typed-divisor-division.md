@@ -25,11 +25,11 @@ instead of being checked at runtime. The question that arose was: should
 
 **Rationale:**
 
-- **A `NonZeroInteger` divisor makes these total functions.** Since the
-  divisor can never be zero, there is no failure case left to handle: no
-  exception to throw, and no `null` to return. Consequently, no
-  `divOrNull(NonZeroInteger)` or `remOrNull(NonZeroInteger)` overloads are
-  added — they would be redundant given there's nothing to make nullable.
+- **A `NonZeroInteger` divisor makes these total functions.** Since the divisor
+  can never be zero, there is no failure case left to handle: no exception to
+  throw, and no `null` to return. Consequently, no `divOrNull(NonZeroInteger)`
+  or `remOrNull(NonZeroInteger)` overloads are added — they would be redundant
+  given there's nothing to make nullable.
 - **`rem(NonZeroInteger)` returns `NonNegativeInteger`, not `Integer`.**
   Euclidean division guarantees the remainder satisfies `0 <= r < |divisor|`
   (see [ADR-001]). Narrowing the return type to `NonNegativeInteger` encodes
@@ -44,11 +44,11 @@ instead of being checked at runtime. The question that arose was: should
 ## 🔗 Consequences
 
 - `div(NonZeroInteger)` and `rem(NonZeroInteger)` never throw and never return
-  `null`; their KDoc documents this explicitly so callers don't expect the
-  same failure modes as their `Integer`-parameter counterparts.
-- Future typed-divisor overloads (if any) should follow the same shape:
-  narrow the parameter to rule out the failure case, and narrow the return
-  type to encode the postcondition.
+  `null`; their KDoc documents this explicitly so callers don't expect the same
+  failure modes as their `Integer`-parameter counterparts.
+- Future typed-divisor overloads (if any) should follow the same shape: narrow
+  the parameter to rule out the failure case, and narrow the return type to
+  encode the postcondition.
 
 <!----------------------------------- Links ----------------------------------->
 
