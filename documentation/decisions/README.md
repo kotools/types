@@ -40,3 +40,18 @@ outdated, it is **not** edited in place. Instead:
 [ADR-003](ADR-003-euclidean-division-platform-impl.md) →
 [ADR-008](ADR-008-euclidean-division-platform-impl-v2.md) is the first
 example of this convention.
+
+## 🚫 No links to source files
+
+ADRs must not link to source files (e.g. `*.kt`). Source files are mutable
+implementation details that get renamed, moved, or restructured over time,
+while an ADR is a historical record of a decision at a point in time. A link
+to a source file may keep resolving after such a change while silently
+pointing to code that no longer matches what the ADR described, creating a
+false impression of accuracy.
+
+Cross-references in an ADR must instead target either:
+
+- another ADR, by number and title (e.g. "Supersedes ADR-003"), or
+- the published API documentation, when a link to a type's current
+  definition is genuinely needed.
