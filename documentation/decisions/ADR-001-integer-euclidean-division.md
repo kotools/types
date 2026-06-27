@@ -1,7 +1,7 @@
 # ⚖️ ADR-001: Euclidean division for `Integer`
 
 This document records two related architectural decisions made when implementing
-division semantics for the [`Integer`][Integer] type.
+division semantics for the `Integer` type.
 
 ## 🤔 Context
 
@@ -75,7 +75,3 @@ functions are introduced.
 - The division algorithm `a = q·b + r` always holds with `0 ≤ r < |b|`
 - A future `Rational` type must expose its construction through a dedicated API
   (factory function or infix operator) and must not reuse `div` / `rem`
-
-<!----------------------------------- Links ----------------------------------->
-
-[Integer]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Integer.kt
