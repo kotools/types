@@ -1,6 +1,6 @@
 # ⚖️ ADR-004: Scaled-integer representation for `Decimal`
 
-This document records the decision about how [`Decimal`][Decimal] stores
+This document records the decision about how `Decimal` stores
 decimal numbers internally.
 
 ## 🤔 Context
@@ -57,5 +57,4 @@ fractional digits.
 
 <!----------------------------------- Links ----------------------------------->
 
-[Decimal]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Decimal.kt
 [ADR-005]: ADR-005-decimal-canonical-form.md
