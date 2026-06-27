@@ -1,17 +1,17 @@
 # ⚖️ ADR-014: Exclusion of subtraction from `NonNegativeInteger` arithmetic
 
 This document records the decision to omit subtraction from the
-[`NonNegativeInteger`][NonNegativeInteger] type's arithmetic API.
+`NonNegativeInteger` type's arithmetic API.
 
 ## 🤔 Context
 
-`NonNegativeInteger` represents an [`Integer`][Integer] that is greater than or
+`NonNegativeInteger` represents an `Integer` that is greater than or
 equal to zero. Addition (`plus`) and multiplication (`times`) both keep results
 within this set: the sum and the product of two non-negative integers are always
 non-negative.
 
 The question that arose during design was: should `NonNegativeInteger` also
-provide a `minus` operator, like [`Integer`][Integer] does?
+provide a `minus` operator, like `Integer` does?
 
 ## ✅ Decision: Subtraction is excluded
 
@@ -40,8 +40,8 @@ operations provided are addition (`x + y`) and multiplication (`x * y`).
   two non-negative integers are always non-negative, so both operations are safe
   to expose as total functions returning `NonNegativeInteger`.
 - **Explicit delegation to the caller.** Users who need subtraction can convert
-  to [`Integer`][Integer] via [`toInteger`][toInteger], perform the operation
-  there, and convert back with [`fromInteger`][fromInteger] (or its `OrNull`
+  to `Integer` via `toInteger`, perform the operation
+  there, and convert back with `fromInteger` (or its `OrNull`
   variant) if they need to re-establish the non-negative invariant, making the
   negative case an explicit decision at the call site rather than a silent one
   inside `NonNegativeInteger`.
@@ -58,8 +58,4 @@ operations provided are addition (`x + y`) and multiplication (`x * y`).
 
 <!----------------------------------- Links ----------------------------------->
 
-[NonNegativeInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonNegativeInteger.kt
-[Integer]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Integer.kt
 [ADR-013]: ADR-013-nonzerointeger-additive-exclusion.md
-[toInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonNegativeInteger.kt
-[fromInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonNegativeInteger.kt
