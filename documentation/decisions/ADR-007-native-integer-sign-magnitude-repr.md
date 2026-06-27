@@ -1,8 +1,8 @@
 # ⚖️ ADR-007: Sign-magnitude representation for `NativeInteger`
 
 This document records the decision about how
-[`NativeInteger`][PlatformInteger.native] — the Kotlin/Native implementation
-of [`PlatformInteger`][PlatformInteger] — represents and computes
+`NativeInteger` — the Kotlin/Native implementation
+of `PlatformInteger` — represents and computes
 arbitrary-precision integers.
 
 ## 🤔 Context
@@ -24,7 +24,7 @@ arithmetic without relying on `kotlin-bignum`?
 - `magnitude` holds the absolute value in **little-endian base-2³² limbs**,
   trimmed so that it never has a zero most-significant limb (the empty array
   represents zero).
-- [`IntegerSign`][IntegerSign] is an internal enum (`Negative`, `Zero`,
+- `IntegerSign` is an internal enum (`Negative`, `Zero`,
   `Positive`) with `unaryMinus`, `times` (sign propagation for
   multiplication and division) and `compare` (for ordering).
 
@@ -41,9 +41,8 @@ formatting).
 **Rationale:**
 
 - **Removes the only Native-only third-party dependency.** Aligns with the
-  "avoid useless dependencies" design goal: `kotlin-bignum` is dropped from
-  `gradle/libs.versions.toml` and
-  `subprojects/internal/build.gradle.kts`.
+  "avoid useless dependencies" design goal: `kotlin-bignum` is dropped as a
+  runtime dependency.
 - **Well-understood representation.** Sign-magnitude is the same
   representation used internally by `java.math.BigInteger` and most
   arbitrary-precision integer implementations, with well-known algorithms for
@@ -69,15 +68,11 @@ formatting).
 - `IntegerSign` and the magnitude algorithms are private to `nativeMain` and
   have no impact on the common-API ABI dumps.
 - Future bug fixes and performance improvements to Native arbitrary-precision
-  arithmetic are made directly in
-  `subprojects/internal/src/nativeMain/kotlin/org/kotools/types/internal/number/PlatformInteger.native.kt`,
-  rather than tracked upstream in a third-party library.
+  arithmetic are made directly in the Native implementation, rather than
+  tracked upstream in a third-party library.
 
 <!----------------------------------- Links ----------------------------------->
 
-[PlatformInteger]: ../../subprojects/internal/src/commonMain/kotlin/org/kotools/types/internal/number/PlatformInteger.kt
-[PlatformInteger.native]: ../../subprojects/internal/src/nativeMain/kotlin/org/kotools/types/internal/number/PlatformInteger.native.kt
-[IntegerSign]: ../../subprojects/internal/src/nativeMain/kotlin/org/kotools/types/internal/number/IntegerSign.kt
 [ADR-003]: ADR-003-euclidean-division-platform-impl.md
 [ADR-005]: ADR-005-decimal-canonical-form.md
 [ADR-008]: ADR-008-euclidean-division-platform-impl-v2.md
