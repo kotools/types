@@ -1,7 +1,7 @@
 # ⚖️ ADR-002: Value semantics for `Integer` arithmetic operations
 
 This document records the decision to eliminate reference-identity
-short-circuits from [`Integer`][Integer] arithmetic operations.
+short-circuits from `Integer` arithmetic operations.
 
 ## 🤔 Context
 
@@ -43,7 +43,3 @@ No operation may return `this` or any input operand as its result.
   invalid by design and must not be written.
 - Future arithmetic operations must follow the same rule: never return `this`
   or any input operand.
-
-<!----------------------------------- Links ----------------------------------->
-
-[Integer]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Integer.kt
