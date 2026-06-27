@@ -434,8 +434,10 @@ public class NonPositiveInteger private constructor(
      * SAMPLE: org.kotools.types.number.NonPositiveIntegerJavaSample.timesWithNonNegativeInteger
      * </details>
      */
-    public operator fun times(other: NonNegativeInteger): NonPositiveInteger =
-        fromInteger(this.value * other.toInteger())
+    public operator fun times(other: NonNegativeInteger): NonPositiveInteger {
+        val product: Integer = this.value * other.toInteger()
+        return fromInteger(product)
+    }
 
     /**
      * Multiplies this integer by the [other] one.
