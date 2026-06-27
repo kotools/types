@@ -8,17 +8,17 @@ declarations in the `org.kotools.types` package and its sub-packages.
 Error messages thrown by `org.kotools.types.*` declarations had inconsistent
 formats:
 
-- [`Decimal.Companion.parse`][Decimal] and
-  [`Integer.Companion.parse`][Integer] put the offending value first, followed
+- `Decimal.Companion.parse` and
+  `Integer.Companion.parse` put the offending value first, followed
   by a description and a trailing period:
   `"\"abc\" is not a valid integer."`.
-- [`Integer.div`][Integer] and [`Integer.rem`][Integer] repeated the type name
+- `Integer.div` and `Integer.rem` repeated the type name
   in a sentence ending with a period: `"Integer can't be divided by zero."`.
-- [`EmailAddressRegex.Companion.alphabetic`][EmailAddressRegex] and
-  [`EmailAddressRegex.Companion.alphanumeric`][EmailAddressRegex] put the
+- `EmailAddressRegex.Companion.alphabetic` and
+  `EmailAddressRegex.Companion.alphanumeric` put the
   offending value first: `"'<pattern>' is invalid for validating email
   addresses."`.
-- The [`org.kotools.types.kotlinx.serialization`][SerializersModule]
+- The `org.kotools.types.kotlinx.serialization`
   serializers used a `(was: <value>)` parenthetical:
   `"Invalid email address (was: <text>)."`.
 
@@ -43,14 +43,14 @@ Error messages thrown by `org.kotools.types.*` declarations follow a
 
 | Declaration                                                                                                                     | Before                                                     | After                                        |
 |---------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|----------------------------------------------|
-| [`Decimal.Companion.parse`][Decimal]                                                                                            | `"\"abc\" is not a valid decimal."`                        | `"Invalid decimal representation: 'abc'"`    |
-| [`Integer.Companion.parse`][Integer]                                                                                            | `"\"abc\" is not a valid integer."`                        | `"Invalid integer representation: 'abc'"`    |
-| [`Integer.div`][Integer] / [`Integer.rem`][Integer]                                                                             | `"Integer can't be divided by zero."`                      | `"Division by zero"`                         |
-| [`EmailAddressRegex.Companion.alphabetic`][EmailAddressRegex] / [`EmailAddressRegex.Companion.alphanumeric`][EmailAddressRegex] | `"'<pattern>' is invalid for validating email addresses."` | `"Invalid email address regex: '<pattern>'"` |
-| [`org.kotools.types.kotlinx.serialization`][SerializersModule] (`EmailAddress`)                                                 | `"Invalid email address (was: <text>)."`                   | `"Invalid email address: '<text>'"`          |
-| [`org.kotools.types.kotlinx.serialization`][SerializersModule] (`EmailAddressRegex`)                                            | `"Invalid email address regex (was: <text>)."`             | `"Invalid email address regex: '<text>'"`    |
+| `Decimal.Companion.parse`                                                                                            | `"\"abc\" is not a valid decimal."`                        | `"Invalid decimal representation: 'abc'"`    |
+| `Integer.Companion.parse`                                                                                            | `"\"abc\" is not a valid integer."`                        | `"Invalid integer representation: 'abc'"`    |
+| `Integer.div` / `Integer.rem`                                                                             | `"Integer can't be divided by zero."`                      | `"Division by zero"`                         |
+| `EmailAddressRegex.Companion.alphabetic` / `EmailAddressRegex.Companion.alphanumeric` | `"'<pattern>' is invalid for validating email addresses."` | `"Invalid email address regex: '<pattern>'"` |
+| `org.kotools.types.kotlinx.serialization` (`EmailAddress`)                                                 | `"Invalid email address (was: <text>)."`                   | `"Invalid email address: '<text>'"`          |
+| `org.kotools.types.kotlinx.serialization` (`EmailAddressRegex`)                                            | `"Invalid email address regex (was: <text>)."`             | `"Invalid email address regex: '<text>'"`    |
 
-The [`Decimal`][Decimal] constructor's `"Negative decimal scale: <scale>"`
+The `Decimal` constructor's `"Negative decimal scale: <scale>"`
 check already followed this structure and is unchanged.
 
 ## 🔗 Consequences
@@ -64,10 +64,3 @@ check already followed this structure and is unchanged.
   `kotools.types.*` package has its own message conventions via
   `kotools.types.internal.ErrorMessage`, which are out of scope for this
   decision.
-
-<!----------------------------------- Links ----------------------------------->
-
-[Decimal]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Decimal.kt
-[Integer]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Integer.kt
-[EmailAddressRegex]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/EmailAddressRegex.kt
-[SerializersModule]: ../../subprojects/kotlinx-serialization/src/commonMain/kotlin/org/kotools/types/kotlinx/serialization/SerializersModule.kt
