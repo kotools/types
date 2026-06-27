@@ -407,7 +407,7 @@ public class NonPositiveInteger private constructor(
      * </details>
      */
     public operator fun minus(other: NonNegativeInteger): NonPositiveInteger =
-        fromInteger(this.value - other.toInteger())
+        this + (-other)
 
     /**
      * Multiplies this integer by the [other] one.
