@@ -1,7 +1,7 @@
 # ⚖️ ADR-006: Exclusion of division from `Decimal` arithmetic
 
 This document records the decision to omit division (and modulo) from the
-[`Decimal`][Decimal] type's arithmetic API.
+`Decimal` type's arithmetic API.
 
 ## 🤔 Context
 
@@ -53,7 +53,3 @@ operations provided are unary minus (`-x`), addition (`x + y`), subtraction
 - A future `Rational` type (ℚ) could accept two `Decimal` (or `Integer`)
   values as its numerator and denominator, covering the exact-division use
   case without compromising `Decimal`.
-
-<!----------------------------------- Links ----------------------------------->
-
-[Decimal]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Decimal.kt
