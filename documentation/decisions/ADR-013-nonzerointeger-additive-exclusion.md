@@ -1,17 +1,17 @@
 # ⚖️ ADR-013: Exclusion of additive operations from `NonZeroInteger` arithmetic
 
 This document records the decision to omit addition and subtraction from the
-[`NonZeroInteger`][NonZeroInteger] type's arithmetic API.
+`NonZeroInteger` type's arithmetic API.
 
 ## 🤔 Context
 
-`NonZeroInteger` represents an [`Integer`][Integer] that is other than zero.
+`NonZeroInteger` represents an `Integer` that is other than zero.
 Negation (`unaryMinus`) and multiplication (`times`) both keep results within
 this set: the negation of a non-zero integer is never zero, and the product
 of two non-zero integers is never zero either.
 
 The question that arose during design was: should `NonZeroInteger` also
-provide `plus` and `minus` operators, like [`Integer`][Integer] does?
+provide `plus` and `minus` operators, like `Integer` does?
 
 ## ✅ Decision: Addition and subtraction are excluded
 
@@ -42,9 +42,9 @@ arithmetic operations provided are unary minus (`-x`) and multiplication
   integer is always non-zero, so both operations are safe to expose as total
   functions returning `NonZeroInteger`.
 - **Explicit delegation to the caller.** Users who need addition or
-  subtraction can convert to [`Integer`][Integer] via [`toInteger`][toInteger],
+  subtraction can convert to `Integer` via `toInteger`,
   perform the operation there, and convert back with
-  [`fromInteger`][fromInteger] (or its `OrNull` variant) if they need to
+  `fromInteger` (or its `OrNull` variant) if they need to
   re-establish the non-zero invariant, making the zero case an explicit
   decision at the call site rather than a silent one inside
   `NonZeroInteger`.
@@ -61,8 +61,4 @@ arithmetic operations provided are unary minus (`-x`) and multiplication
 
 <!----------------------------------- Links ----------------------------------->
 
-[NonZeroInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonZeroInteger.kt
-[Integer]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Integer.kt
 [ADR-006]: ADR-006-decimal-division-exclusion.md
-[toInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonZeroInteger.kt
-[fromInteger]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/NonZeroInteger.kt
