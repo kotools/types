@@ -76,7 +76,9 @@ class NonPositiveIntegerSample {
     @Test
     fun unaryMinus() {
         val x: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
+
         val result: NonNegativeInteger = -x
+
         val expected: NonNegativeInteger = NonNegativeInteger.fromLong(42)
         check(result == expected)
     }
@@ -85,7 +87,9 @@ class NonPositiveIntegerSample {
     fun plus() {
         val x: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
         val y: NonPositiveInteger = NonPositiveInteger.fromLong(-8)
+
         val result: NonPositiveInteger = x + y
+
         val expected: NonPositiveInteger = NonPositiveInteger.fromLong(-50)
         check(result == expected)
     }
@@ -94,7 +98,9 @@ class NonPositiveIntegerSample {
     fun minus() {
         val x: NonPositiveInteger = NonPositiveInteger.fromLong(-42)
         val y: NonNegativeInteger = NonNegativeInteger.fromLong(8)
+
         val result: NonPositiveInteger = x - y
+
         val expected: NonPositiveInteger = NonPositiveInteger.fromLong(-50)
         check(result == expected)
     }
@@ -104,7 +110,9 @@ class NonPositiveIntegerSample {
         val x: NonPositiveInteger =
             NonPositiveInteger.fromLong(-99999999999999999)
         val y: NonNegativeInteger = NonNegativeInteger.fromLong(10)
+
         val result: NonPositiveInteger = x * y
+
         val expected: NonPositiveInteger =
             NonPositiveInteger.parse("-999999999999999990")
         check(result == expected)
@@ -115,7 +123,9 @@ class NonPositiveIntegerSample {
         val x: NonPositiveInteger =
             NonPositiveInteger.fromLong(-99999999999999999)
         val y: NonPositiveInteger = NonPositiveInteger.fromLong(-10)
+
         val result: NonNegativeInteger = x * y
+
         val expected: NonNegativeInteger =
             NonNegativeInteger.parse("999999999999999990")
         check(result == expected)

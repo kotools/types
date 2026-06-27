@@ -76,7 +76,9 @@ public class NonPositiveIntegerJavaSample {
     @Test
     void unaryMinus() {
         final NonPositiveInteger x = NonPositiveInteger.fromLong(-42L);
+
         final NonNegativeInteger result = x.unaryMinus();
+
         final NonNegativeInteger expected = NonNegativeInteger.fromLong(42L);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
@@ -86,7 +88,9 @@ public class NonPositiveIntegerJavaSample {
     void plus() {
         final NonPositiveInteger x = NonPositiveInteger.fromLong(-42L);
         final NonPositiveInteger y = NonPositiveInteger.fromLong(-8L);
+
         final NonPositiveInteger result = x.plus(y);
+
         final NonPositiveInteger expected = NonPositiveInteger.fromLong(-50L);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
@@ -96,7 +100,9 @@ public class NonPositiveIntegerJavaSample {
     void minus() {
         final NonPositiveInteger x = NonPositiveInteger.fromLong(-42L);
         final NonNegativeInteger y = NonNegativeInteger.fromLong(8L);
+
         final NonPositiveInteger result = x.minus(y);
+
         final NonPositiveInteger expected = NonPositiveInteger.fromLong(-50L);
         final boolean check = result.equals(expected);
         if (!check) throw new IllegalStateException("Check failed.");
@@ -107,7 +113,9 @@ public class NonPositiveIntegerJavaSample {
         final NonPositiveInteger x =
                 NonPositiveInteger.fromLong(-99999999999999999L);
         final NonNegativeInteger y = NonNegativeInteger.fromLong(10L);
+
         final NonPositiveInteger result = x.times(y);
+
         final NonPositiveInteger expected =
                 NonPositiveInteger.parse("-999999999999999990");
         final boolean check = result.equals(expected);
@@ -119,7 +127,9 @@ public class NonPositiveIntegerJavaSample {
         final NonPositiveInteger x =
                 NonPositiveInteger.fromLong(-99999999999999999L);
         final NonPositiveInteger y = NonPositiveInteger.fromLong(-10L);
+
         final NonNegativeInteger result = x.times(y);
+
         final NonNegativeInteger expected =
                 NonNegativeInteger.parse("999999999999999990");
         final boolean check = result.equals(expected);
