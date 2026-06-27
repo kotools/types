@@ -2,11 +2,11 @@
 
 This document records how the `SerialDescriptor.serialName` of the default
 `kotlinx.serialization` serializers is determined in
-[`SerializersModule`][SerializersModule].
+`SerializersModule`.
 
 ## 🤔 Context
 
-[`KotoolsTypesSerializersModule()`][SerializersModule] provides default
+`KotoolsTypesSerializersModule()` provides default
 serializers for `EmailAddress` and `EmailAddressRegex`, encoding and decoding
 both types as `String`.
 
@@ -58,12 +58,8 @@ lookup are removed entirely.
   JS and Native, where `KClass.simpleName` is not guaranteed to match the
   source-level class name.
 - Adding a default serializer for a new type to
-  [`KotoolsTypesSerializersModule()`][SerializersModule] requires adding a
+  `KotoolsTypesSerializersModule()` requires adding a
   matching entry to the private `SerialName` enum with the type's
   fully-qualified name, following the same pattern.
 - Tests assert against the literal fully-qualified serial name rather than
   `Type::class.simpleName`.
-
-<!----------------------------------- Links ----------------------------------->
-
-[SerializersModule]: ../../subprojects/kotlinx-serialization/src/commonMain/kotlin/org/kotools/types/kotlinx/serialization/SerializersModule.kt
