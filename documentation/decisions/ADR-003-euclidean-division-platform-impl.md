@@ -2,16 +2,16 @@
 
 This document records how Euclidean division semantics (decided in
 [ADR-001][ADR-001]) are implemented across the three
-[`PlatformInteger`][PlatformInteger] backends.
+`PlatformInteger` backends.
 
 ## 🤔 Context
 
 `Integer` delegates all arithmetic to `PlatformInteger`, an `expect`/`actual`
 interface with three implementations:
 
-- [`JvmInteger`][PlatformInteger.jvm] — wraps `java.math.BigInteger`
-- [`JsInteger`][PlatformInteger.js] — wraps JS `BigInt`
-- [`NativeInteger`][PlatformInteger.native] — wraps kotlin-bignum `BigInteger`
+- `JvmInteger` — wraps `java.math.BigInteger`
+- `JsInteger` — wraps JS `BigInt`
+- `NativeInteger` — wraps kotlin-bignum `BigInteger`
 
 ADR-001 decided *what* the semantics should be. This ADR records *how* they
 are achieved on each platform.
@@ -56,7 +56,3 @@ construction.
 <!----------------------------------- Links ----------------------------------->
 
 [ADR-001]: ADR-001-integer-euclidean-division.md
-[PlatformInteger]: ../../subprojects/internal/src/commonMain/kotlin/org/kotools/types/internal/number/PlatformInteger.kt
-[PlatformInteger.jvm]: ../../subprojects/internal/src/jvmMain/kotlin/org/kotools/types/internal/number/PlatformInteger.jvm.kt
-[PlatformInteger.js]: ../../subprojects/internal/src/jsMain/kotlin/org/kotools/types/internal/number/PlatformInteger.js.kt
-[PlatformInteger.native]: ../../subprojects/internal/src/nativeMain/kotlin/org/kotools/types/internal/number/PlatformInteger.native.kt
