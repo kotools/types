@@ -1,7 +1,7 @@
 # ⚖️ ADR-005: Canonical form for `Decimal`
 
 This document records the decision to enforce a unique canonical form for
-every [`Decimal`][Decimal] value, and how that invariant is maintained.
+every `Decimal` value, and how that invariant is maintained.
 
 ## 🤔 Context
 
@@ -73,5 +73,4 @@ never divisible by 10 unless the fractional part is empty (scale = 0).
 
 <!----------------------------------- Links ----------------------------------->
 
-[Decimal]: ../../subprojects/library/src/commonMain/kotlin/org/kotools/types/number/Decimal.kt
 [ADR-004]: ADR-004-decimal-scaled-integer-repr.md
