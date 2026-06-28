@@ -1,8 +1,7 @@
 # 🔧 ADR-003: Platform implementation of Euclidean division
 
-This document records how Euclidean division semantics (decided in
-[ADR-001][ADR-001]) are implemented across the three
-`PlatformInteger` backends.
+This document records how Euclidean division semantics (decided in [ADR-001])
+are implemented across the three `PlatformInteger` backends.
 
 ## 🤔 Context
 

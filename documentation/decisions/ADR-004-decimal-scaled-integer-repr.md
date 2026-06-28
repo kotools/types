@@ -1,7 +1,7 @@
 # ⚖️ ADR-004: Scaled-integer representation for `Decimal`
 
-This document records the decision about how `Decimal` stores
-decimal numbers internally.
+This document records the decision about how `Decimal` stores decimal numbers
+internally.
 
 ## 🤔 Context
 

@@ -5,9 +5,9 @@ This document records the decision to omit subtraction from the
 
 ## 🤔 Context
 
-`NonNegativeInteger` represents an `Integer` that is greater than or
-equal to zero. Addition (`plus`) and multiplication (`times`) both keep results
-within this set: the sum and the product of two non-negative integers are always
+`NonNegativeInteger` represents an `Integer` that is greater than or equal to
+zero. Addition (`plus`) and multiplication (`times`) both keep results within
+this set: the sum and the product of two non-negative integers are always
 non-negative.
 
 The question that arose during design was: should `NonNegativeInteger` also
@@ -31,20 +31,19 @@ operations provided are addition (`x + y`) and multiplication (`x * y`).
   Widening the return type to `Integer` would also be inconsistent: callers
   expecting closure under arithmetic operations would have to special-case
   `minus` among the type's operators.
-- **Consistent with `NonZeroInteger` design.** [ADR-013][ADR-013] excludes
-  addition and subtraction from `NonZeroInteger` for the same underlying
-  reason: the set of non-zero integers is not closed under these operations.
-  `NonNegativeInteger` follows the same principle — only operations that keep
-  results within the modeled set are exposed.
+- **Consistent with `NonZeroInteger` design.** [ADR-013] excludes addition and
+  subtraction from `NonZeroInteger` for the same underlying reason: the set of
+  non-zero integers is not closed under these operations. `NonNegativeInteger`
+  follows the same principle — only operations that keep results within the
+  modeled set are exposed.
 - **`plus` and `times` stay because closure holds.** The sum and the product of
   two non-negative integers are always non-negative, so both operations are safe
   to expose as total functions returning `NonNegativeInteger`.
 - **Explicit delegation to the caller.** Users who need subtraction can convert
-  to `Integer` via `toInteger`, perform the operation
-  there, and convert back with `fromInteger` (or its `OrNull`
-  variant) if they need to re-establish the non-negative invariant, making the
-  negative case an explicit decision at the call site rather than a silent one
-  inside `NonNegativeInteger`.
+  to `Integer` via `toInteger`, perform the operation there, and convert back
+  with `fromInteger` (or its `OrNull` variant) if they need to re-establish the
+  non-negative invariant, making the negative case an explicit decision at the
+  call site rather than a silent one inside `NonNegativeInteger`.
 
 ## 🔗 Consequences
 

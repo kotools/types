@@ -36,8 +36,8 @@ operations provided are unary minus (`-x`), addition (`x + y`), subtraction
   `Decimal` and would belong to a future `Rational` type.
 - **Consistent with `Integer` design.** The `Integer` type excludes
   operations that leave the set of integers: it has no square root and no
-  non-integer division. `Decimal` follows the same principle — only
-  operations that keep results within the modelled set are exposed.
+  noninteger division. `Decimal` follows the same principle — only
+  operations that keep results within the modeled set are exposed.
 - **Explicit delegation to the caller.** Users who need division can convert
   to `Double`, `Float`, or `java.math.BigDecimal` themselves, making the
   precision trade-off an explicit decision at the call site rather than a

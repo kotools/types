@@ -5,8 +5,8 @@ every `Decimal` value, and how that invariant is maintained.
 
 ## 🤔 Context
 
-The scaled-integer representation chosen in [ADR-004][ADR-004] allows the
-same mathematical value to be expressed in multiple ways:
+The scaled-integer representation chosen in [ADR-004] allows the same
+mathematical value to be expressed in multiple ways:
 
 - `3.14` → `(314, 2)` and `3.140` → `(3140, 3)` represent the same number.
 - `+42` and `42` and `042` all denote the same integer.

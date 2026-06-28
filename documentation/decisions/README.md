@@ -44,11 +44,11 @@ example of this convention.
 ## 🚫 No links to source files
 
 ADRs must not link to source files (e.g. `*.kt`). Source files are mutable
-implementation details that get renamed, moved, or restructured over time,
-while an ADR is a historical record of a decision at a point in time. A link
-to a source file may keep resolving after such a change while silently
-pointing to code that no longer matches what the ADR described, creating a
-false impression of accuracy.
+implementation details that get renamed, moved, or restructured over time, while
+an ADR is a historical record of a decision at a point in time. A link to a
+source file may keep resolving after such a change while silently pointing to
+code that no longer matches what the ADR described, creating a false impression
+of accuracy.
 
 Cross-references in an ADR must instead target either:
 
