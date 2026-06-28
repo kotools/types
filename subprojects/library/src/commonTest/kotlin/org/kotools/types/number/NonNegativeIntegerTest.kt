@@ -347,6 +347,36 @@ class NonNegativeIntegerTest {
     }
 
     @Test
+    fun minusHasZeroAsIdentityElement(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val zero: NonPositiveInteger = NonPositiveInteger.fromLong(0)
+        val actual: NonNegativeInteger = x - zero
+        assertEquals(x, actual, message = "Input: $x")
+    }
+
+    @Test
+    fun minusIsAlwaysNonNegative(): Unit = repeatTest {
+        val x: NonNegativeInteger = Random.nonNegativeInteger()
+        val y: NonPositiveInteger = Random.nonPositiveInteger()
+
+        val difference: NonNegativeInteger = x - y
+
+        val actual: Boolean = difference.toInteger() >= Integer.ZERO
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun minusSanityCheck() {
+        val x: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        val y: NonPositiveInteger = NonPositiveInteger.parse("-1")
+        val actual: NonNegativeInteger = x - y
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("100000000000000000000")
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun timesWithNonNegativeIntegerIsCommutative(): Unit = repeatTest {
         val x: NonNegativeInteger = Random.nonNegativeInteger()
         val y: NonNegativeInteger = Random.nonNegativeInteger()

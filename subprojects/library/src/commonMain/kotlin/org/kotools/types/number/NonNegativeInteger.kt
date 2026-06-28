@@ -29,10 +29,12 @@ import kotlin.jvm.JvmSynthetic
  * [structural equality][NonNegativeInteger.equals] (`x == y`, `x != y`).
  * - **Arithmetic operations:** [Add][plus] (`x + y`) or [multiply][times]
  * (`x * y`) non-negative integers, always producing another non-negative
- * integer. [Negating][unaryMinus] (`-x`) a non-negative integer, or
- * [multiplying][times] it by a [NonPositiveInteger], always produces a
- * [NonPositiveInteger]. Subtraction is intentionally absent, because the set of
- * non-negative integers isn't closed under this operation (e.g., `1 - 2 = -1`).
+ * integer. [Subtracting][minus] (`x - y`) a [NonPositiveInteger] also produces
+ * another non-negative integer. [Negating][unaryMinus] (`-x`) a non-negative
+ * integer, or [multiplying][times] it by a [NonPositiveInteger], always
+ * produces a [NonPositiveInteger]. Subtracting a [NonNegativeInteger] is
+ * intentionally absent, because the set of non-negative integers isn't closed
+ * under this operation (e.g., `1 - 2 = -1`).
  * - **Conversions:** Convert to its underlying [Integer] (see [toInteger]),
  * or to its decimal string representation (see
  * [NonNegativeInteger.toString]).
@@ -380,6 +382,34 @@ public class NonNegativeInteger private constructor(
      */
     public operator fun plus(other: NonNegativeInteger): NonNegativeInteger =
         fromInteger(this.value + other.value)
+
+    /**
+     * Subtracts the [other] integer from this one.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerSample.minus
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.NonNegativeIntegerJavaSample.minus
+     * </details>
+     */
+    public operator fun minus(other: NonPositiveInteger): NonNegativeInteger =
+        this + (-other)
 
     /**
      * Multiplies this integer by the [other] one.

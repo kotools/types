@@ -98,6 +98,18 @@ public class NonNegativeIntegerJavaSample {
     }
 
     @Test
+    void minus() {
+        final NonNegativeInteger x = NonNegativeInteger.fromLong(42L);
+        final NonPositiveInteger y = NonPositiveInteger.fromLong(-8L);
+
+        final NonNegativeInteger result = x.minus(y);
+
+        final NonNegativeInteger expected = NonNegativeInteger.fromLong(50L);
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void timesWithNonNegativeInteger() {
         final NonNegativeInteger x =
                 NonNegativeInteger.fromLong(99999999999999999L);

@@ -94,6 +94,15 @@ class NonNegativeIntegerSample {
     }
 
     @Test
+    fun minus() {
+        val x: NonNegativeInteger = NonNegativeInteger.fromLong(42)
+        val y: NonPositiveInteger = NonPositiveInteger.fromLong(-8)
+        val result: NonNegativeInteger = x - y
+        val expected: NonNegativeInteger = NonNegativeInteger.fromLong(50)
+        check(result == expected)
+    }
+
+    @Test
     fun timesWithNonNegativeInteger() {
         val x: NonNegativeInteger =
             NonNegativeInteger.fromLong(99999999999999999)
