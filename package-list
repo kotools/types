@@ -7,5 +7,6 @@ kotools.types.number
 kotools.types.result
 kotools.types.text
 org.kotools.types
+org.kotools.types.number
 module:types-kotlinx-serialization
 org.kotools.types.kotlinx.serialization
