@@ -62,6 +62,10 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   `of` function instead. (module: `types`, refs: [#871], [#872])
 - `com.ionspin.kotlin:bignum` dependency, previously used internally by
   `Integer` on Kotlin/Native. (module: `types`, ref: [#962])
+- **Breaking:** `div(Integer)`, `divOrNull(Integer)`, `rem(Integer)` and
+  `remOrNull(Integer)` **experimental** functions from `Integer` class. Use
+  `div(NonZeroInteger)` and `rem(NonZeroInteger)` instead, as their signature
+  rules out division by zero at compile time. (module: `types`, ref: [#1001])
 
 ### 🐛 Fixed
 
@@ -165,6 +169,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#992]: https://github.com/kotools/types/issues/992
 [#998]: https://github.com/kotools/types/issues/998
 [#999]: https://github.com/kotools/types/issues/999
+[#1001]: https://github.com/kotools/types/issues/1001
 [#1010]: https://github.com/kotools/types/issues/1010
 [#1011]: https://github.com/kotools/types/issues/1011
 [#1013]: https://github.com/kotools/types/issues/1013
