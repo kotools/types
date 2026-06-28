@@ -18,6 +18,52 @@ import kotlin.jvm.JvmSynthetic
  * <br>
  * <details>
  * <summary>
+ *     <b>Motivations</b>
+ * </summary>
+ *
+ * ### Motivations
+ *
+ * #### A standalone type instead of a runtime check
+ *
+ * Whether an integer is non-negative could be checked at runtime, inline,
+ * wherever such a guarantee is needed. Instead, this library models "an
+ * [Integer] that is greater than or equal to zero" as its own type. This is
+ * what lets [Integer.rem] express the non-negative half of the Euclidean
+ * division theorem directly in its return type, rather than merely asserting
+ * it in documentation prose: any value of type [NonNegativeInteger] is
+ * already known to satisfy `>= 0`, so callers of [Integer.rem] get that
+ * guarantee statically instead of having to trust and re-verify it
+ * themselves.
+ *
+ * #### A closure-driven arithmetic surface
+ *
+ * [plus] and [times] stay within [NonNegativeInteger], because the set of
+ * non-negative integers is closed under addition and under multiplication by
+ * another non-negative integer.
+ *
+ * [unaryMinus] and [times] with a [NonPositiveInteger] operand cross over to
+ * [NonPositiveInteger] instead of staying within [NonNegativeInteger]:
+ * negating a non-negative integer, or multiplying it by a non-positive one,
+ * never stays non-negative (except for zero), but its result is always
+ * representable as a [NonPositiveInteger]. Returning [NonPositiveInteger]
+ * keeps both operations total instead of omitting them or widening their
+ * result to the unconstrained [Integer].
+ *
+ * [minus] only accepts a [NonPositiveInteger] operand, not a
+ * [NonNegativeInteger] one: subtracting a non-positive integer from a
+ * non-negative one always stays non-negative (`x - y == x + (-y)`, and
+ * `-y >= 0`), but subtracting another non-negative integer can produce a
+ * negative result (e.g. `1 - 2 = -1`), which isn't representable as a
+ * [NonNegativeInteger]. Use [toInteger] together with [Integer.minus] for
+ * that case.
+ *
+ * Division and remainder operations are absent, since they would only
+ * duplicate the semantics already covered by [Integer.div] and [Integer.rem].
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
  *     <b>Key features</b>
  * </summary>
  *
