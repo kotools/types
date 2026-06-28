@@ -1,5 +1,6 @@
 ---
 description: "Phase 4 – report refactoring opportunities in branch changes (plan mode, no edits)"
+context: fork
 ---
 
 You are in **plan mode** — report only, apply no changes.
