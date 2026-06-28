@@ -49,7 +49,7 @@ import kotlin.jvm.JvmSynthetic
  * as a [NonZeroInteger]. Use [toInteger] together with [Integer.plus] or
  * [Integer.minus] if you need to add or subtract non-zero integers.
  *
- * Division and remainder operations are also absent, since they would only
+ * Division and remainder operations are absent, since they would only
  * duplicate the semantics already covered by [Integer.div] and [Integer.rem].
  * </details>
  *
