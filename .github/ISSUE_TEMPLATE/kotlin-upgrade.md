@@ -13,3 +13,4 @@ Upgrade embedded Kotlin version to **NEXT_VERSION**.
 
 - Badges in README documentations MUST be updated.
 - Dependency compatibility documentation MUST be updated.
+- Changelog (see `CHANGELOG.md` file) MUST be updated.
