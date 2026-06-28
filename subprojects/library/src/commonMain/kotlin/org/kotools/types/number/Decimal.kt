@@ -602,10 +602,11 @@ public class Decimal private constructor(
      */
     private fun normalize(): Decimal {
         if (this.scale == 0) return this
-        val ten: Integer = Integer.fromLong(10)
+        val ten: NonZeroInteger = NonZeroInteger.fromLong(10)
         var current: Decimal = this
         while (current.scale > 0) {
-            if (current.unscaledValue % ten != Integer.ZERO) break
+            val remainder: Integer = (current.unscaledValue % ten).toInteger()
+            if (remainder != Integer.ZERO) break
             val unscaledValue: Integer = current.unscaledValue / ten
             val scale: Int = current.scale - 1
             current = Decimal(unscaledValue, scale)
