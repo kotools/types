@@ -12,8 +12,8 @@ Issues of this version should be done before working on this issue.
 
 ## ✅ Checklist
 
-- [ ] 🔖 Set Gradle project's version to this new one.
 - [ ] 📄 Check copyright notice in [license].
+- [ ] 🔖 Set Gradle project's version to this new one.
 - [ ] 🚀 Run [delivery workflow].
 - [ ] 🚀 Release distribution on [Maven Central].
 - [ ] 🚀 Publish API reference with `./gradlew :publishApiReference`.
