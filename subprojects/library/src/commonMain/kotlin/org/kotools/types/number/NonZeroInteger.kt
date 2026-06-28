@@ -18,6 +18,44 @@ import kotlin.jvm.JvmSynthetic
  * <br>
  * <details>
  * <summary>
+ *     <b>Motivations</b>
+ * </summary>
+ *
+ * ### Motivations
+ *
+ * #### A standalone type instead of a runtime check
+ *
+ * Whether a divisor is zero could be checked at runtime, inline, every time a
+ * division is about to happen. Instead, this library models "an [Integer]
+ * that is other than zero" as its own type. This turns "the divisor isn't
+ * zero" from a precondition that [Integer.div] and [Integer.rem] would
+ * otherwise need to verify (and that callers would need to trust was
+ * verified) into a guarantee carried by the [NonZeroInteger] type itself: any
+ * value of this type is already known to be non-zero, so [Integer.div] and
+ * [Integer.rem] can accept it as a divisor and never throw or return `null`
+ * because of a zero divisor.
+ *
+ * #### A closure-driven arithmetic surface
+ *
+ * Only [unaryMinus] and [times] are defined as arithmetic operations on this
+ * type, because the set of non-zero integers is closed under negation and
+ * multiplication: negating or multiplying non-zero integers always produces
+ * another non-zero integer.
+ *
+ * Addition and subtraction are intentionally absent, because the set of
+ * non-zero integers isn't closed under either operation: for any non-zero
+ * integer `x`, `x + (-x) = 0` and `x - x = 0`, so the result of these
+ * operations on two non-zero integers can be zero, which isn't representable
+ * as a [NonZeroInteger]. Use [toInteger] together with [Integer.plus] or
+ * [Integer.minus] if you need to add or subtract non-zero integers.
+ *
+ * Division and remainder operations are also absent, since they would only
+ * duplicate the semantics already covered by [Integer.div] and [Integer.rem].
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
  *     <b>Key features</b>
  * </summary>
  *
