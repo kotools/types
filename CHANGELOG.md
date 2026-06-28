@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 
 ## 🚧 Unreleased
 
+## 🔖 [5.2.0] - 2026-06-28
+
 ### ✨ Added
 
 - `toLong()` and `toLongOrNull()` **experimental** functions to `Integer` class,
@@ -78,7 +80,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   `IllegalArgumentException` when decoding an invalid value. (module:
   `types-kotlinx-serialization`, ref: [#990])
 
-## 🔖 Releases
+## 🔖 Archives
 
 | Version | Release date |
 |---------|--------------|
@@ -147,6 +149,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [5.0.1]: https://github.com/kotools/types/releases/tag/5.0.1
 [5.1.0]: https://github.com/kotools/types/releases/tag/5.1.0
 [5.1.1]: https://github.com/kotools/types/releases/tag/5.1.1
+[5.2.0]: https://github.com/kotools/types/compare/5.1.1...5.2.0
 
 [keep a changelog]: https://keepachangelog.com/en/2.0.0
 [versioning strategy]: documentation/versioning-strategy.md
