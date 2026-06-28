@@ -4,6 +4,7 @@ on:
     types: [ opened, synchronize, ready_for_review, reopened ]
 jobs:
   claude-review:
+    if: github.event.pull_request.user.type != 'Bot'
     runs-on: ubuntu-latest
     permissions:
       contents: read
