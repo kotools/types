@@ -18,6 +18,48 @@ import kotlin.jvm.JvmSynthetic
  * <br>
  * <details>
  * <summary>
+ *     <b>Motivations</b>
+ * </summary>
+ *
+ * ### Motivations
+ *
+ * #### Completing the sign trichotomy
+ *
+ * Once [NonZeroInteger] and [NonNegativeInteger] exist as standalone types,
+ * "non-positive" is the natural remaining case: together, the three types
+ * make the sign of an [Integer] fully and symmetrically expressible in the
+ * type system, instead of leaving "less than or equal to zero" as a runtime
+ * check that callers would otherwise perform inline on an [Integer].
+ *
+ * #### A closure-driven arithmetic surface
+ *
+ * [unaryMinus], [plus], [minus] with a [NonNegativeInteger] operand, and both
+ * [times] overloads are defined because each always produces a value
+ * representable as a [NonPositiveInteger] or a [NonNegativeInteger]:
+ * negating a non-positive integer is always non-negative; adding two
+ * non-positive integers stays non-positive; subtracting a non-negative
+ * integer from a non-positive one stays non-positive (`x - y == x + (-y)`,
+ * and `-y <= 0`); multiplying a non-positive integer by a non-negative one
+ * stays non-positive; and multiplying two non-positive integers becomes
+ * non-negative.
+ *
+ * [minus] with a [NonPositiveInteger], [NonZeroInteger], or [Integer]
+ * operand is absent, because the set of non-positive integers isn't closed
+ * under any of them: for two non-positive integers `x` and `y` where
+ * `x > y`, `x - y` is positive (e.g. `-1 - (-5) = 4`), and the same
+ * unrestricted sign applies when subtracting a [NonZeroInteger] or an
+ * [Integer]. A [times] overload accepting a [NonZeroInteger] is absent for
+ * the same reason: a non-zero integer can be positive or negative, so the
+ * sign of the product is indeterminate. Use [toInteger] together with
+ * [Integer.minus] or [Integer.times] for these cases.
+ *
+ * Division and remainder operations are absent, since they would only
+ * duplicate the semantics already covered by [Integer.div] and [Integer.rem].
+ * </details>
+ *
+ * <br>
+ * <details>
+ * <summary>
  *     <b>Key features</b>
  * </summary>
  *
