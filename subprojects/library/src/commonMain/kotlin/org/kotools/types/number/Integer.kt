@@ -65,8 +65,10 @@ import kotlin.jvm.JvmSynthetic
  *
  * SAMPLE: org.kotools.types.number.IntegerJsSample.divisionByZeroProblem
  *
- * **Solution:** [Division][div] and [remainder][rem] operations by zero on
- * [Integer] type throw an [ArithmeticException] on all platforms.
+ * **Solution:** [Division][div] and [remainder][rem] operations on [Integer]
+ * type take a [NonZeroInteger] divisor, which rejects zero at construction.
+ * This makes dividing by zero unrepresentable: these operations can never
+ * throw or return `null` because of a zero divisor.
  *
  * SAMPLE: org.kotools.types.number.IntegerSample.divisionByZeroSolution
  *
@@ -81,7 +83,7 @@ import kotlin.jvm.JvmSynthetic
  * **Solution:** Division and remainder operations on [Integer] type follow
  * Euclidean semantics: the remainder is always non-negative (`0 ≤ r < |b|`).
  *
- * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivision
+ * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionByNonZeroInteger
  * </details>
  *
  * <br>
@@ -532,75 +534,6 @@ public class Integer private constructor(
         Integer(this.delegate / other.toInteger().delegate)
 
     /**
-     * Returns the Euclidean quotient of dividing this integer by the [other]
-     * one, or throws an [ArithmeticException] if the [other] integer is zero.
-     *
-     * This function uses Euclidean division: the remainder is always
-     * non-negative, regardless of the sign of this integer.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivision
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.euclideanDivision
-     * </details>
-     * <br>
-     *
-     * See also:
-     * - [divOrNull] for returning `null` when dividing this integer by zero
-     * - [rem] or [remOrNull] for returning Euclidean remainder
-     */
-    public operator fun div(other: Integer): Integer =
-        if (other == ZERO) this.divisionByZeroError()
-        else Integer(this.delegate / other.delegate)
-
-    /**
-     * Returns the Euclidean quotient of dividing this integer by the [other]
-     * one, or returns `null` if the [other] integer is zero.
-     *
-     * This function uses Euclidean division: the remainder is always
-     * non-negative, regardless of the sign of this integer.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionOrNull
-     * </details>
-     * <br>
-     *
-     * This function is hidden from Java, because nullability is not explicit in
-     * its type system.
-     *
-     * See also:
-     * - [div] for throwing an exception when dividing this integer by zero
-     * - [rem] or [remOrNull] for returning Euclidean remainder
-     */
-    @JvmSynthetic
-    public fun divOrNull(other: Integer): Integer? =
-        if (other == ZERO) null
-        else Integer(this.delegate / other.delegate)
-
-    /**
      * Returns the Euclidean remainder of dividing this integer by the [other]
      * one.
      *
@@ -640,82 +573,6 @@ public class Integer private constructor(
     public operator fun rem(other: NonZeroInteger): NonNegativeInteger {
         val remainder = Integer(this.delegate % other.toInteger().delegate)
         return NonNegativeInteger.fromInteger(remainder)
-    }
-
-    /**
-     * Returns the Euclidean remainder of dividing this integer by the [other]
-     * one, or throws an [ArithmeticException] if the [other] integer is zero.
-     *
-     * This function uses Euclidean division: the remainder is always
-     * non-negative and less than the absolute value of [other]
-     * (`0 <= remainder < |other|`), regardless of the sign of this integer.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivision
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerJavaSample.euclideanDivision
-     * </details>
-     * <br>
-     *
-     * See also:
-     * - [remOrNull] for returning `null` when dividing this integer by zero
-     * - [div] or [divOrNull] for returning Euclidean quotient
-     */
-    public operator fun rem(other: Integer): Integer =
-        if (other == ZERO) this.divisionByZeroError()
-        else Integer(this.delegate % other.delegate)
-
-    /**
-     * Returns the Euclidean remainder of dividing this integer by the [other]
-     * one, or returns `null` if the [other] integer is zero.
-     *
-     * This function uses Euclidean division: the remainder is always
-     * non-negative and less than the absolute value of [other]
-     * (`0 <= remainder < |other|`), regardless of the sign of this integer.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.number.IntegerSample.euclideanDivisionOrNull
-     * </details>
-     * <br>
-     *
-     * This function is hidden from Java, because nullability is not explicit in
-     * its type system.
-     *
-     * See also:
-     * - [rem] for throwing an exception when dividing this integer by zero
-     * - [div] or [divOrNull] for returning Euclidean quotient
-     */
-    @JvmSynthetic
-    public fun remOrNull(other: Integer): Integer? =
-        if (other == ZERO) null
-        else Integer(this.delegate % other.delegate)
-
-    private fun divisionByZeroError(): Nothing {
-        val message: String = errorMessage("Division by zero")
-        throw ArithmeticException(message)
     }
 
     // ------------------------------ Conversions ------------------------------

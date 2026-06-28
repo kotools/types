@@ -388,18 +388,14 @@ public final class org/kotools/types/number/Integer {
 	public static final field Companion Lorg/kotools/types/number/Integer$Companion;
 	public synthetic fun <init> (Lorg/kotools/types/internal/number/PlatformInteger;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun compareTo (Lorg/kotools/types/number/Integer;)I
-	public final fun div (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun div (Lorg/kotools/types/number/NonZeroInteger;)Lorg/kotools/types/number/Integer;
-	public final synthetic fun divOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun equals (Ljava/lang/Object;)Z
 	public static final fun fromLong (J)Lorg/kotools/types/number/Integer;
 	public final fun hashCode ()I
 	public final fun minus (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/Integer;
 	public final fun plus (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
-	public final fun rem (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun rem (Lorg/kotools/types/number/NonZeroInteger;)Lorg/kotools/types/number/NonNegativeInteger;
-	public final synthetic fun remOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun times (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/Integer;
 	public final fun toLong ()J
 	public final synthetic fun toLongOrNull ()Ljava/lang/Long;

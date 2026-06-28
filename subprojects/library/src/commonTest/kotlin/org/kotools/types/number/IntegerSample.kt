@@ -28,13 +28,9 @@ class IntegerSample {
 
     @Test
     fun divisionByZeroSolution() {
-        // Common code
-        val x: Integer = Integer.fromLong(12)
-        val y: Integer = Integer.fromLong(0)
-        val quotient: Result<Integer> = runCatching { x / y }
-        val remainder: Result<Integer> = runCatching { x % y }
-        check(quotient.exceptionOrNull() is ArithmeticException)
-        check(remainder.exceptionOrNull() is ArithmeticException)
+        val exception: Throwable? = runCatching { NonZeroInteger.fromLong(0) }
+            .exceptionOrNull()
+        check(exception is IllegalArgumentException)
     }
 
     @Test
@@ -185,19 +181,6 @@ class IntegerSample {
     }
 
     @Test
-    fun euclideanDivision() {
-        val x: Integer = Integer.fromLong(-7)
-        val y: Integer = Integer.fromLong(2)
-
-        val quotient: Integer = x / y
-        val remainder: Integer = x % y
-
-        check(quotient == Integer.fromLong(-4))
-        check(remainder == Integer.fromLong(1))
-        check(x == quotient * y + remainder)
-    }
-
-    @Test
     fun euclideanDivisionByNonZeroInteger() {
         val x: Integer = Integer.fromLong(-7)
         val y: NonZeroInteger = NonZeroInteger.fromLong(2)
@@ -208,21 +191,6 @@ class IntegerSample {
         check(quotient == Integer.fromLong(-4))
         check(remainder == NonNegativeInteger.fromLong(1))
         check(x == quotient * y.toInteger() + remainder.toInteger())
-    }
-
-    @Test
-    fun euclideanDivisionOrNull() {
-        val x: Integer = Integer.fromLong(-7)
-        val y: Integer = Integer.fromLong(2)
-
-        val quotient: Integer? = x.divOrNull(y)
-        val remainder: Integer? = x.remOrNull(y)
-
-        checkNotNull(quotient)
-        checkNotNull(remainder)
-        check(quotient == Integer.fromLong(-4))
-        check(remainder == Integer.fromLong(1))
-        check(x == quotient * y + remainder)
     }
 
     // ------------------------------ Conversions ------------------------------

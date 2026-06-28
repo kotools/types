@@ -148,19 +148,6 @@ public class IntegerJavaSample {
     }
 
     @Test
-    void euclideanDivision() {
-        final Integer x = Integer.fromLong(-7);
-        final Integer y = Integer.fromLong(2);
-
-        final Integer quotient = x.div(y);
-        final Integer remainder = x.rem(y);
-
-        final boolean check = quotient.equals(Integer.fromLong(-4))
-                && remainder.equals(Integer.fromLong(1));
-        if (!check) throw new IllegalStateException("Check failed.");
-    }
-
-    @Test
     void euclideanDivisionByNonZeroInteger() {
         final Integer x = Integer.fromLong(-7);
         final NonZeroInteger y = NonZeroInteger.fromLong(2);
