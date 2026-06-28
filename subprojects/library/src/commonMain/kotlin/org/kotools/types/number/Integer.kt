@@ -88,9 +88,9 @@ import kotlin.jvm.JvmSynthetic
  * This guarantee covers both halves of the Euclidean division theorem, each
  * encoded directly in the signature of [div] and [rem] rather than asserted
  * in documentation prose: the divisor can never be zero, because both
- * functions require a [NonZeroInteger] (see its Motivations section), and the
- * remainder can never be negative, because [rem] returns a
- * [NonNegativeInteger] instead of an [Integer] (see its Motivations section).
+ * functions require a [NonZeroInteger], and the remainder can never be
+ * negative, because [rem] returns a [NonNegativeInteger] instead of an
+ * [Integer].
  * </details>
  *
  * <br>
