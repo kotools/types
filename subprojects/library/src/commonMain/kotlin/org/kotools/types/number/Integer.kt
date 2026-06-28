@@ -120,6 +120,9 @@ public class Integer private constructor(
         @get:JvmSynthetic
         internal val ZERO: Integer = this.fromLong(0)
 
+        @get:JvmSynthetic
+        internal val TEN: Integer = this.fromLong(10)
+
         /**
          * Returns an [Integer] representing the specified [value].
          *

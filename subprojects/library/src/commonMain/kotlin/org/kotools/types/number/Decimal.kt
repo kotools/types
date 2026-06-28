@@ -584,9 +584,8 @@ public class Decimal private constructor(
      */
     private fun scaleUpTo(targetScale: Int): Integer {
         if (this.scale == targetScale) return this.unscaledValue
-        val ten: Integer = Integer.fromLong(10)
         var result: Integer = this.unscaledValue
-        repeat(targetScale - this.scale) { result *= ten }
+        repeat(targetScale - this.scale) { result *= Integer.TEN }
         return result
     }
 
@@ -602,7 +601,7 @@ public class Decimal private constructor(
      */
     private fun normalize(): Decimal {
         if (this.scale == 0) return this
-        val ten: NonZeroInteger = NonZeroInteger.fromLong(10)
+        val ten: NonZeroInteger = NonZeroInteger.fromInteger(Integer.TEN)
         var current: Decimal = this
         while (current.scale > 0) {
             val remainder: Integer = (current.unscaledValue % ten).toInteger()
