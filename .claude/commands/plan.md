@@ -10,7 +10,8 @@ make a detailed plan for resolving this issue. Include:
 - **Source code changes**: which files, what to add / modify / remove
 - **Documentation updates**: new ADR if a design decision is introduced;
   changelog entry for every public API change
-- **Commit breakdown**: one commit per logical unit of change, each keeping
-  `main` green; use gitmoji format `<emoji> <message> (<#issue>)`
+- **Change breakdown**: one logical unit of change per step, each keeping `main`
+  green. If the session will create commits (see CLAUDE.md's "Git & Version
+  Control" policy), use gitmoji format `<emoji> <message> (<#issue>)` for each.
 
 $ARGUMENTS
