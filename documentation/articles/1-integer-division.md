@@ -92,20 +92,12 @@ fun main() {
 `Integer` is annotated with `@ExperimentalKotoolsTypesApi` and will be
 stabilized in a future release.
 
-See also: [API reference](https://types.kotools.org/types/org.kotools.types/-integer/index.html)
+See also: [API reference]
 
 ## 🛠️ Adding Kotools Types to your project
 
-```kotlin
-// build.gradle.kts
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            implementation("org.kotools.types:types:5.1.1")
-        }
-    }
-}
-```
+See the [Installation] section of the project's README for Gradle/Maven setup —
+this article was written against version `5.1.1`.
 
 Opt in either per call-site with `@OptIn(ExperimentalKotoolsTypesApi::class)`
 or project-wide via the compiler argument:
@@ -119,12 +111,18 @@ kotlin {
 }
 ```
 
-See also: [GitHub](https://github.com/kotools/types)
+See also: [GitHub]
 
 ## 💬 Discussion
 
 Have you run into this inconsistency in a real project? How do you currently
 guard against division by zero in your multiplatform code?
+
+<!----------------------------------- LINKS ----------------------------------->
+
+[API reference]: https://types.kotools.org/older/5.1.1/types/org.kotools.types/-integer/index.html
+[GitHub]: https://github.com/kotools/types
+[Installation]: https://github.com/kotools/types/blob/5.1.1/README.md#%EF%B8%8F-installation
 
 ---
 
