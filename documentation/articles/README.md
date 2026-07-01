@@ -66,9 +66,14 @@ needed.
 
 ## 📊 Publishing status
 
-| Article              | Status      |
-|----------------------|-------------|
-| `1-integer-division` | ✅ Published |
+| Article                             | Status      |
+|-------------------------------------|-------------|
+| `1-integer-division`                | ✅ Published |
+| `2-whats-new-in-5.2.0`              | 📝 Draft    |
+| `3-integer-internal-representation` | 📝 Draft    |
+| `4-decimal-exact-arithmetic`        | 📝 Draft    |
+| `5-integer-euclidean-division`      | 📝 Draft    |
+| `6-integer-bounded-hierarchy`       | 📝 Draft    |
 
 Update the status to "✅ Published" once an article has gone through the full
 checklist above. Add a new row for each new article, named after its numeric
