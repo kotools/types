@@ -14,7 +14,6 @@ makes `Integer` division Euclidean and total, and introduces `NonZeroInteger`
 / `NonNegativeInteger` / `NonPositiveInteger` to turn sign constraints into
 types.
 
-We wrote a short tour of all four changes, each linking to its own deep-dive
-article.
+We wrote a short tour of all four changes.
 
-[Read it here]() 👇
+[Read it here](https://github.com/kotools/types/discussions/1049) 👇

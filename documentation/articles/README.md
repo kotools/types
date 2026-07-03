@@ -74,7 +74,7 @@ needed.
 | Article                             | Status      |
 |-------------------------------------|-------------|
 | `1-integer-division`                | ✅ Published |
-| `2-whats-new-in-5.2.0`              | 📝 Draft    |
+| `2-whats-new-in-5.2.0`              | ✅ Published |
 | `3-integer-internal-representation` | 📝 Draft    |
 | `4-decimal-exact-arithmetic`        | 📝 Draft    |
 | `5-integer-euclidean-division`      | 📝 Draft    |
