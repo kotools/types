@@ -5,12 +5,13 @@ community channels.
 
 ## 🏷️ Naming convention
 
-Each article is a pair of files sharing the same numeric index prefix:
+Each article is a trio of files sharing the same numeric index prefix:
 
-| File                   | Purpose                        |
-|------------------------|--------------------------------|
-| `<n>-<slug>.md`        | Full article body              |
-| `<n>-<slug>-teaser.md` | Short teaser for cross-posting |
+| File                        | Purpose                           |
+|-----------------------------|-----------------------------------|
+| `<n>-<slug>.md`             | Full article body                 |
+| `<n>-<slug>-teaser.md`      | Short teaser for cross-posting    |
+| `<n>-<slug>-linkedin-fr.md` | French-language post for LinkedIn |
 
 When creating a new article, check the highest existing index in this directory
 and increment it (e.g. the first article uses `1-`, the second uses `2-`).
@@ -43,7 +44,11 @@ development between releases.
 5. **Social media** — Short post + GitHub Discussion link, tagged `#kotlin`
    `#kmp` `#kotlinmultiplatform` `#KotlinServerSide`:
     - Twitter/X
-    - LinkedIn — professional angle (e.g. cross-platform bugs in production)
+    - LinkedIn — professional angle (e.g. cross-platform bugs in production).
+      Every article requires a `<n>-<slug>-linkedin-fr.md` post: post it as an
+      additional, required LinkedIn post targeting the French-speaking
+      audience, alongside the English one — as mandatory as `-teaser.md` is
+      for steps 3-4, not an optional extra.
 6. **Kotlin Weekly** — Submit the GitHub Discussion URL at kotlinweekly.net
    (check the site for the current submission process).
 
