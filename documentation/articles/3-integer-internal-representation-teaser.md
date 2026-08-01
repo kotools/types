@@ -16,4 +16,4 @@ Native), with parsing only happening at the actual boundaries.
 We wrote a short post about what changed and why, one of the most frequently
 requested changes from the community.
 
-[Read it here]() 👇
+[Read it here](https://github.com/kotools/types/discussions/1050) 👇

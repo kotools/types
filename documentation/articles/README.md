@@ -37,7 +37,7 @@ development between releases.
    account/organization (consistent with the `@kotools_org` handle used on
    other channels) with `canonical_url` set to the GitHub Discussion URL.
 3. **Kotlin Slack** — Post `<n>-<slug>-teaser.md` + the GitHub Discussion
-   link in `#kotools`, `#feed`, and `#library-development`.
+   link in `#kotools` and `#feed`.
 4. **Reddit** — Post `<n>-<slug>-teaser.md` as a self (text) post in
    r/Kotlin, including the GitHub Discussion link in the body as the full
    writeup, then cross-post the same self post to r/KotlinMultiplatform.
@@ -71,14 +71,14 @@ needed.
 
 ## 📊 Publishing status
 
-| Article                             | Status      |
-|-------------------------------------|-------------|
+| Article                             | Status       |
+|-------------------------------------|--------------|
 | `1-integer-division`                | ✅ Published |
 | `2-whats-new-in-5.2.0`              | ✅ Published |
-| `3-integer-internal-representation` | 📝 Draft    |
-| `4-decimal-exact-arithmetic`        | 📝 Draft    |
-| `5-integer-euclidean-division`      | 📝 Draft    |
-| `6-integer-bounded-hierarchy`       | 📝 Draft    |
+| `3-integer-internal-representation` | ✅ Published |
+| `4-decimal-exact-arithmetic`        | 📝 Draft     |
+| `5-integer-euclidean-division`      | 📝 Draft     |
+| `6-integer-bounded-hierarchy`       | 📝 Draft     |
 
 Update the status to "✅ Published" once an article has gone through the full
 checklist above. Add a new row for each new article, named after its numeric

@@ -20,4 +20,4 @@ deux opérations.
 Nous avons détaillé ce qui a changé, et pourquoi — l'un des changements les
 plus demandés par la communauté.
 
-[Lire l'article complet]() 👇
+[Lire l'article complet](https://github.com/kotools/types/discussions/1050) 👇
