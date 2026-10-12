@@ -4,9 +4,6 @@ import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
 import org.kotools.types.internal.number.PlatformInteger
-import org.kotools.types.number.Integer.Companion.fromLong
-import org.kotools.types.number.Integer.Companion.parse
-import org.kotools.types.number.Integer.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
