@@ -16,6 +16,12 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 
 ## 🚧 Unreleased
 
+### 🔥 Removed
+
+- Implementation details from the documentation of `NonZeroInteger.toString`,
+  `NonNegativeInteger.toString` and `NonPositiveInteger.toString` methods.
+  (module: `types`, ref: [#1048])
+
 ## 🔖 [5.2.0] - 2026-06-28
 
 ### ✨ Added
@@ -179,3 +185,4 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1014]: https://github.com/kotools/types/issues/1014
 [#1024]: https://github.com/kotools/types/issues/1024
 [#1032]: https://github.com/kotools/types/issues/1032
+[#1048]: https://github.com/kotools/types/issues/1048

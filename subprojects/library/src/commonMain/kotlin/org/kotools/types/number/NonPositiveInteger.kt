@@ -3,12 +3,6 @@ package org.kotools.types.number
 import org.kotools.types.ExperimentalKotoolsTypesApi
 import org.kotools.types.internal.HashSeed
 import org.kotools.types.internal.errorMessage
-import org.kotools.types.number.NonPositiveInteger.Companion.fromInteger
-import org.kotools.types.number.NonPositiveInteger.Companion.fromIntegerOrNull
-import org.kotools.types.number.NonPositiveInteger.Companion.fromLong
-import org.kotools.types.number.NonPositiveInteger.Companion.fromLongOrNull
-import org.kotools.types.number.NonPositiveInteger.Companion.parse
-import org.kotools.types.number.NonPositiveInteger.Companion.parseOrNull
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -539,8 +533,7 @@ public class NonPositiveInteger private constructor(
     public fun toInteger(): Integer = this.value
 
     /**
-     * Returns the decimal string representation of this integer, delegating
-     * to [Integer.toString].
+     * Returns the decimal string representation of this integer.
      *
      * <br>
      * <details>
