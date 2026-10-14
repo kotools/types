@@ -6,11 +6,8 @@ improving Kotools Types.
 ## 🌐 Model real-world concepts
 
 Kotools Types provides types that model real-world concepts with correct and
-predictable behavior.
-
-These types are designed to follow their domain definitions, rather than the
-limitations of underlying platforms. For example, the `Integer` type represents
-a mathematical integer and does not overflow.
+predictable behavior. These types are designed to follow their domain
+definitions, rather than the limitations of underlying platforms.
 
 By prioritizing correctness, Kotools Types helps developers build APIs that are
 easier to reason about and less error-prone.
@@ -26,6 +23,15 @@ preventing invalid states.
 Kotools Types provides complete and usable types, not just wrappers. Each type
 comes with the operations and APIs necessary to justify its use in real-world
 applications.
+
+## 🕳️ Prefer deep modules
+
+Kotools Types prefers deep modules over shallow ones: a small, simple interface
+that hides significant complexity.
+
+Each type exposes only the operations needed to use it correctly, while handling
+the hard parts internally. Callers stay free from implementation details, and
+the library can evolve without breaking them.
 
 ## 🧱 Avoid useless dependencies
 
