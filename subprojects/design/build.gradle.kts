@@ -8,3 +8,5 @@ compatibility {
     java = libs.versions.java
     kotlin = libs.versions.kotlin
 }
+
+dependencies.commonMainImplementation(project(":types"))
