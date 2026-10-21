@@ -48,8 +48,10 @@ jobs:
         uses: ./.github/actions/setup-java-gradle
       - name: Build project
         run: ./gradlew :types-qr-code:build
+  # --------------------------------- Stage 2 ----------------------------------
   types-internal:
     runs-on: macos-14
+    needs: gradle-plugins
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.1
@@ -57,7 +59,7 @@ jobs:
         uses: ./.github/actions/setup-java-gradle
       - name: Build project
         run: ./gradlew :types-internal:build
-  # --------------------------------- Stage 2 ----------------------------------
+  # --------------------------------- Stage 3 ----------------------------------
   types:
     runs-on: macos-14
     needs:
@@ -70,7 +72,7 @@ jobs:
         uses: ./.github/actions/setup-java-gradle
       - name: Build project
         run: ./gradlew :types:build
-  # --------------------------------- Stage 3 ----------------------------------
+  # --------------------------------- Stage 4 ----------------------------------
   types-design:
     runs-on: macos-14
     needs: types
