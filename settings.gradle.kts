@@ -21,6 +21,7 @@ private fun subproject(
     project(":$name").projectDir = rootDir.resolve("subprojects/$path")
 }
 
+subproject("design")
 subproject("internal")
 subproject("kotlinx-serialization")
 subproject(path = "library", name = rootProject.name)

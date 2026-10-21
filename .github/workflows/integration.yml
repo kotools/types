@@ -71,6 +71,16 @@ jobs:
       - name: Build project
         run: ./gradlew :types:build
   # --------------------------------- Stage 3 ----------------------------------
+  types-design:
+    runs-on: macos-14
+    needs: types
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.1
+      - name: Setup Java and Gradle
+        uses: ./.github/actions/setup-java-gradle
+      - name: Build project
+        run: ./gradlew :types-design:build
   types-kotlin-serialization:
     runs-on: macos-14
     needs: types
