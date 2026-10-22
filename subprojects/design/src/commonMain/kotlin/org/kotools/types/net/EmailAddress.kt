@@ -209,8 +209,8 @@ public class EmailAddress private constructor(
     /** Contains class-level declarations for the [EmailAddress] type. */
     public companion object {
         /**
-         * Returns an [EmailAddress] representing the specified [text], or
-         * throws an [IllegalArgumentException] if the [text] is not a valid
+         * Returns an [EmailAddress] representing the specified [value], or
+         * throws an [IllegalArgumentException] if the [value] is not a valid
          * email address.
          *
          * A valid email address follows the grammar and the limits described in
@@ -225,15 +225,15 @@ public class EmailAddress private constructor(
          * ```
          *
          * See the [parseOrNull] function for returning `null` instead of
-         * throwing an exception in case of invalid [text].
+         * throwing an exception in case of invalid [value].
          */
         @JvmStatic
         @Suppress("UNUSED_PARAMETER")
-        public fun parse(text: String): EmailAddress = TODO()
+        public fun parse(value: String): EmailAddress = TODO()
 
         /**
-         * Returns an [EmailAddress] representing the specified [text], or
-         * returns `null` if the [text] is not a valid email address.
+         * Returns an [EmailAddress] representing the specified [value], or
+         * returns `null` if the [value] is not a valid email address.
          *
          * A valid email address follows the grammar and the limits described in
          * the [EmailAddress] type. The [local part][EmailAddress.localPart] and
@@ -252,11 +252,11 @@ public class EmailAddress private constructor(
          * explicit in its type system.
          *
          * See the [parse] function for throwing an exception instead of
-         * returning `null` in case of invalid [text].
+         * returning `null` in case of invalid [value].
          */
         @JvmSynthetic
         @Suppress("RedundantNullableReturnType", "UNUSED_PARAMETER")
-        public fun parseOrNull(text: String): EmailAddress? = TODO()
+        public fun parseOrNull(value: String): EmailAddress? = TODO()
     }
 
     // -------------------- Structural equality operations ---------------------
