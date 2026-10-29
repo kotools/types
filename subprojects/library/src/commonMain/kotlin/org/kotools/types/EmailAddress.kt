@@ -13,6 +13,77 @@ import kotlin.jvm.JvmStatic
  */
 @ExperimentalKotoolsTypesApi
 public class EmailAddress private constructor(private val text: String) {
+    // --------------------------- Factory functions ---------------------------
+
+    /** Contains class-level declarations for the [EmailAddress] type. */
+    public companion object {
+        /**
+         * Returns an email address with the specified [text], or returns `null`
+         * if the [text] doesn't match [EmailAddressRegex.Companion.default].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.EmailAddressSample.ofText
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.EmailAddressJavaSample.ofText
+         * </details>
+         *
+         * @since 5.1.0
+         */
+        @JvmStatic
+        public infix fun of(text: String): EmailAddress? {
+            val regex: EmailAddressRegex = EmailAddressRegex.default()
+            return this.of(text, regex)
+        }
+
+        /**
+         * Returns an email address with the specified [text], or returns `null`
+         * if the [text] doesn't match the specified [regex].
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Kotlin</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Kotlin code:
+         *
+         * SAMPLE: org.kotools.types.EmailAddressSample.ofTextRegex
+         * </details>
+         *
+         * <br>
+         * <details>
+         * <summary>
+         *     <b>Calling from Java</b>
+         * </summary>
+         *
+         * Here's an example of calling this function from Java code:
+         *
+         * SAMPLE: org.kotools.types.EmailAddressJavaSample.ofTextRegex
+         * </details>
+         *
+         * @since 5.1.0
+         */
+        @JvmStatic
+        public fun of(text: String, regex: EmailAddressRegex): EmailAddress? =
+            if (regex matches text) EmailAddress(text) else null
+    }
+
     // -------------------- Structural equality operations ---------------------
 
     /**
@@ -103,75 +174,4 @@ public class EmailAddress private constructor(private val text: String) {
      */
     @Suppress("RedundantModalityModifier")
     final override fun toString(): String = this.text
-
-    // -------------------------------------------------------------------------
-
-    /** Contains static declarations for the [EmailAddress] type. */
-    public companion object {
-        /**
-         * Returns an email address with the specified [text], or returns `null`
-         * if the [text] doesn't match [EmailAddressRegex.Companion.default].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: org.kotools.types.EmailAddressSample.ofText
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: org.kotools.types.EmailAddressJavaSample.ofText
-         * </details>
-         *
-         * @since 5.1.0
-         */
-        @JvmStatic
-        public infix fun of(text: String): EmailAddress? {
-            val regex: EmailAddressRegex = EmailAddressRegex.default()
-            return this.of(text, regex)
-        }
-
-        /**
-         * Returns an email address with the specified [text], or returns `null`
-         * if the [text] doesn't match the specified [regex].
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Kotlin</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Kotlin code:
-         *
-         * SAMPLE: org.kotools.types.EmailAddressSample.ofTextRegex
-         * </details>
-         *
-         * <br>
-         * <details>
-         * <summary>
-         *     <b>Calling from Java</b>
-         * </summary>
-         *
-         * Here's an example of calling this function from Java code:
-         *
-         * SAMPLE: org.kotools.types.EmailAddressJavaSample.ofTextRegex
-         * </details>
-         *
-         * @since 5.1.0
-         */
-        @JvmStatic
-        public fun of(text: String, regex: EmailAddressRegex): EmailAddress? =
-            if (regex matches text) EmailAddress(text) else null
-    }
 }

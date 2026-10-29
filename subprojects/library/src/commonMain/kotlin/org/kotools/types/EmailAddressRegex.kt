@@ -19,132 +19,9 @@ import kotlin.jvm.JvmStatic
 public class EmailAddressRegex private constructor(
     private val pattern: String
 ) {
-    // -------------------- Structural equality operations ---------------------
+    // --------------------------- Factory functions ---------------------------
 
-    /**
-     * Returns `true` if the [other] object is an instance of
-     * [EmailAddressRegex] with the same
-     * [string representation][EmailAddressRegex.toString], or returns `false`
-     * otherwise.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexSample.equalsOverride
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.equalsOverride
-     * </details>
-     */
-    @Suppress("RedundantModalityModifier")
-    final override fun equals(other: Any?): Boolean =
-        other is EmailAddressRegex && this.pattern == other.pattern
-
-    /**
-     * Returns a hash code value for this regular expression.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexSample.hashCodeOverride
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.hashCodeOverride
-     * </details>
-     */
-    @Suppress("RedundantModalityModifier")
-    final override fun hashCode(): Int = hashCodeOf(this.pattern)
-
-    // ---------------------- Pattern matching operations ----------------------
-
-    /**
-     * Returns `true` if the specified [text] matches this regular expression,
-     * or returns `false` otherwise.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexSample.matches
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.matches
-     * </details>
-     */
-    public infix fun matches(text: CharSequence): Boolean =
-        Regex(this.pattern) matches text
-
-    // ------------------------------ Conversions ------------------------------
-
-    /**
-     * Returns the string representation of this regular expression.
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Kotlin</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Kotlin code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexSample.toStringOverride
-     * </details>
-     *
-     * <br>
-     * <details>
-     * <summary>
-     *     <b>Calling from Java</b>
-     * </summary>
-     *
-     * Here's an example of calling this function from Java code:
-     *
-     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.toStringOverride
-     * </details>
-     */
-    @Suppress("RedundantModalityModifier")
-    final override fun toString(): String = this.pattern
-
-    // -------------------------------------------------------------------------
-
-    /** Contains static declarations for the [EmailAddressRegex] type. */
+    /** Contains class-level declarations for the [EmailAddressRegex] type. */
     public companion object {
         /**
          * Returns the default regular expression for validating
@@ -351,4 +228,127 @@ public class EmailAddressRegex private constructor(
                 errorMessage("Invalid email address regex", pattern)
             }
     }
+
+    // -------------------- Structural equality operations ---------------------
+
+    /**
+     * Returns `true` if the [other] object is an instance of
+     * [EmailAddressRegex] with the same
+     * [string representation][EmailAddressRegex.toString], or returns `false`
+     * otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.equalsOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.equalsOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun equals(other: Any?): Boolean =
+        other is EmailAddressRegex && this.pattern == other.pattern
+
+    /**
+     * Returns a hash code value for this regular expression.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.hashCodeOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.hashCodeOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun hashCode(): Int = hashCodeOf(this.pattern)
+
+    // ---------------------- Pattern matching operations ----------------------
+
+    /**
+     * Returns `true` if the specified [text] matches this regular expression,
+     * or returns `false` otherwise.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.matches
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.matches
+     * </details>
+     */
+    public infix fun matches(text: CharSequence): Boolean =
+        Regex(this.pattern) matches text
+
+    // ------------------------------ Conversions ------------------------------
+
+    /**
+     * Returns the string representation of this regular expression.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.toStringOverride
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.EmailAddressRegexJavaSample.toStringOverride
+     * </details>
+     */
+    @Suppress("RedundantModalityModifier")
+    final override fun toString(): String = this.pattern
 }
