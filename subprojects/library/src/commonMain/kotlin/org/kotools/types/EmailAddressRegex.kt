@@ -35,7 +35,7 @@ public class EmailAddressRegex private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.equalsOverride
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.equalsOverride
      * </details>
      *
      * <br>
@@ -64,7 +64,7 @@ public class EmailAddressRegex private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.hashCodeOverride
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.hashCodeOverride
      * </details>
      *
      * <br>
@@ -95,7 +95,7 @@ public class EmailAddressRegex private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.matches
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.matches
      * </details>
      *
      * <br>
@@ -125,7 +125,7 @@ public class EmailAddressRegex private constructor(
      *
      * Here's an example of calling this function from Kotlin code:
      *
-     * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.toStringOverride
+     * SAMPLE: org.kotools.types.EmailAddressRegexSample.toStringOverride
      * </details>
      *
      * <br>
@@ -178,7 +178,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.default
+         * SAMPLE: org.kotools.types.EmailAddressRegexSample.default
          * </details>
          *
          * <br>
@@ -215,7 +215,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.of
+         * SAMPLE: org.kotools.types.EmailAddressRegexSample.of
          * </details>
          *
          * <br>
@@ -274,7 +274,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.alphabetic
+         * SAMPLE: org.kotools.types.EmailAddressRegexSample.alphabetic
          * </details>
          *
          * <br>
@@ -328,7 +328,7 @@ public class EmailAddressRegex private constructor(
          *
          * Here's an example of calling this function from Kotlin code:
          *
-         * SAMPLE: org.kotools.types.EmailAddressRegexCommonSample.alphanumeric
+         * SAMPLE: org.kotools.types.EmailAddressRegexSample.alphanumeric
          * </details>
          *
          * <br>
