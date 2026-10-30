@@ -9,8 +9,8 @@ argument-hint: "<type or concept to design>"
 
 Design the public API for the concept named in `$ARGUMENTS`. This is a
 **design-only** task: no implementation, no tests, no samples, no ABI dump, no
-ADR. The only output is the design document under `documentation/designs/`
-(today's date, kebab-case slug).
+ADR. The only output is the design document under
+`../../../documentation/design-notes` (today's date, kebab-case slug).
 
 Follow the Markdown conventions of `documentation/coding-conventions.md` in the
 document.
