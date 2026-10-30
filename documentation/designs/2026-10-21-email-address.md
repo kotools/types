@@ -30,7 +30,9 @@ Neither the JDK nor the Kotlin standard library offers an email address type.
 
 1. Remove `EmailAddress` and `EmailAddressRegex` from `org.kotools.types`,
    without a deprecation cycle. Remove their usages from `SerializersModule`
-   without migrating them. Source: user.
+   without migrating them. The new type gets no serializer while it is
+   experimental. A future design note covers it once the type is stable.
+   Source: user.
 2. Put the new type in the package `org.kotools.types.net`. Source: existing
    design.
 3. Introduce the type in the experimental stage, with
@@ -49,11 +51,12 @@ Neither the JDK nor the Kotlin standard library offers an email address type.
    characters, including its angle brackets. Source:
    [RFC 5321 section 4.5.3.1.3][rfc5321-4.5.3.1.3]. The figure 254 is derived
    by subtracting the two brackets.
-9. Convert the local part and the domain to lowercase when parsing. Domain
-   names are case-insensitive. The RFC says local parts are case-sensitive but
-   discourages relying on it. This choice deviates from the strict reading.
-   Source: [RFC 5321 section 2.4][rfc5321-2.4],
-   [RFC 5321 section 4.1.2][rfc5321-4.1.2] and existing design.
+9. Convert the local part and the domain to lowercase when parsing. Only ASCII
+   letters change, whatever the default locale. Domain names are
+   case-insensitive. The RFC says local parts are case-sensitive but discourages
+   relying on it. This choice deviates from the strict reading. Source:
+   [RFC 5321 section 2.4][rfc5321-2.4], [RFC 5321 section 4.1.2][rfc5321-4.1.2]
+   and existing design.
 10. Apply no other normalization. Provider rules, such as ignoring dots or
     `+tag` suffixes, are out of scope. Source: existing design.
 11. Compare addresses structurally on their local part and domain. Source:
@@ -65,6 +68,7 @@ Neither the JDK nor the Kotlin standard library offers an email address type.
     - Quoted-string local parts, such as `"john doe"@example.com`.
     - Comments and folding whitespace.
     - IP address literals as domains, such as `user@[192.0.2.1]`.
+    - Domains whose last label has no letter, such as `user@192.0.2.1`.
     - Display names and angle brackets.
     - Obsolete syntaxes, groups and address lists.
     - Non-ASCII characters in the local part or in the domain.
@@ -74,8 +78,14 @@ Neither the JDK nor the Kotlin standard library offers an email address type.
     [RFC 6531][rfc6531] and existing design.
 15. Never trim whitespace in `parse` and `parseOrNull`. Surrounding whitespace
     makes the value invalid. Callers trim themselves. Source: user.
-16. Use a fixed message for the `IllegalArgumentException`. It never echoes the
-    input, because email addresses are personal data. Source: user.
+16. Use the fixed message `Invalid email address` for the
+    `IllegalArgumentException`. It never echoes the input, because email
+    addresses are personal data and exceptions reach many sinks. Callers can log
+    the input themselves. Partial masking is not an option, because a masked
+    address is still personal data. Source: user.
+17. Return the full address from `toString`, without redaction. The text is the
+    only textual form of the value, and callers need it to send mail or render
+    a page. The KDoc warns callers not to log it blindly. Source: user.
 
 ## 🧩 API
 
@@ -116,7 +126,8 @@ ldh = ALPHA | DIGIT | "-" .
 ```
 
 The local part can't start or end with a dot. It can't contain two consecutive
-dots. A label can't start or end with a hyphen.
+dots. A label can't start or end with a hyphen. The last label must contain at
+least one letter, so an all-numeric domain such as `192.0.2.1` is invalid.
 
 Parsing normalizes the casing. The original casing is not preserved.
 
@@ -134,6 +145,7 @@ val x: EmailAddress = EmailAddress.parse("John@Example.COM")
 val y: EmailAddress? = EmailAddress.parseOrNull("john@example.com")
 check(x == y)
 check(EmailAddress.parseOrNull("john@localhost") == null)
+check(EmailAddress.parseOrNull("john@192.0.2.1") == null)
 ```
 
 `parse` throws an `IllegalArgumentException` for an invalid value.
@@ -165,6 +177,8 @@ equals the parsed text only when that text is already in lowercase.
 - Internationalized addresses are rejected until a later version.
 - Removing the old types breaks code that uses them, and drops the serializers
   for them. Both types are experimental, so this is allowed.
+- The new type has no serializer until it is stable.
+- `toString` returns personal data. Callers can leak it by logging the value.
 
 ## 🛠️ Implementation hand-off
 
