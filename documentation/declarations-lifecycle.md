@@ -57,6 +57,16 @@ following steps:
 |-------------------|---------|-------------|-------------|-------------|
 | **Version**       | `X.Y.Z` | `X.(Y+1).0` | `X.(Y+2).0` | `(X+1).0.0` |
 
+## 🔌 Integrations
+
+Integrations with other tools are designed for **stable** declarations only. An
+**experimental** declaration gets none, because it can change or disappear
+freely.
+
+Some existing integrations predate this rule and cover **experimental**
+declarations. They stay until their declarations are stabilized or removed. No
+new one is added for an **experimental** declaration.
+
 <!----------------------------------- Links ----------------------------------->
 
 [kotlin.Deprecated]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecated
