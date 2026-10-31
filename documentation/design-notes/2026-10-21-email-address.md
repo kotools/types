@@ -78,11 +78,10 @@ Neither the JDK nor the Kotlin standard library offers an email address type.
     [RFC 6531][rfc6531] and existing design.
 15. Never trim whitespace in `parse` and `parseOrNull`. Surrounding whitespace
     makes the value invalid. Callers trim themselves. Source: user.
-16. Use the fixed message `Invalid email address` for the
-    `IllegalArgumentException`. It never echoes the input, because email
-    addresses are personal data and exceptions reach many sinks. Callers can log
-    the input themselves. Partial masking is not an option, because a masked
-    address is still personal data. Source: user.
+16. Use a fixed message for `IllegalArgumentException`. It never echoes the
+    input, because email addresses are personal data and exceptions reach many
+    sinks. Callers can log the input themselves. Partial masking is not an
+    option, because a masked address is still personal data. Source: user.
 17. Return the full address from `toString`, without redaction. The text is the
     only textual form of the value, and callers need it to send mail or render
     a page. The KDoc warns callers not to log it blindly. Source: user.
