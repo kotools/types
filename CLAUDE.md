@@ -69,6 +69,11 @@ when merged. Enforce this by:
 - **Ship tests, samples, and the ABI dump in the same change as the feature.**
 - **CI wiring travels with the change it enables**, not as a follow-up cleanup.
 
+### Documentation
+
+- Write a new ADR for each design decision.
+- Add a changelog entry for each public API change.
+
 ### Git & Version Control
 
 **Never commit or push.** Do not run `git commit`, `git push`, or any

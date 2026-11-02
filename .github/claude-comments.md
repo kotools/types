@@ -3,13 +3,13 @@
 Copy-paste GitHub Issue comments that invoke Claude Code skills via
 `@claude` mentions. Post them in the order below.
 
-## Step 1 — Explore
+## Step 1: Resolve
 
 ```markdown
-@claude /explore
+@claude /resolve-issue
 ```
 
-## Step 2 — Answer questions (optional)
+## Step 2: Answer questions (optional)
 
 Post this after Step 1 if Claude asked clarifying questions.
 Replace each placeholder answer before posting.
@@ -20,15 +20,9 @@ Replace each placeholder answer before posting.
 **Question 1:** ANSWER
 ```
 
-## Step 3 — Plan
+## Step 3: Revise plan (optional)
 
-```markdown
-@claude /plan
-```
-
-## Step 4 — Revise plan (optional)
-
-Post this after Step 3 if you want changes to the plan.
+Post this after Claude presented its plan if you want changes.
 Fill in the sections before posting.
 
 ```markdown
@@ -37,17 +31,17 @@ Fill in the sections before posting.
 **Source code changes:** ...
 
 **Documentation updates:** ...
-
-**Commit breakdown:** ...
 ```
 
-## Step 5 — Implement
+## Step 4: Approve plan
+
+Post this once the plan is right. Claude then implements it.
 
 ```markdown
-@claude /implement
+@claude Plan approved. Implement it.
 ```
 
-## Step 6 — Refactor (optional)
+## Step 5: Refactor (optional)
 
 ```markdown
 @claude /refactor
