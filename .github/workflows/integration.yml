@@ -48,4 +48,4 @@ jobs:
       - name: Check integration with Kotlin Serialization
         run: ./gradlew :types-kotlinx-serialization:check
       - name: Generate API reference
-        run: ./gradlew :assemble
+        run: ./gradlew :dokkaHtmlMultiModule
