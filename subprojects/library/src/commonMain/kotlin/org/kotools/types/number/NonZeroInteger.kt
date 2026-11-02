@@ -317,10 +317,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
     /**
      * Returns a hash code value for this integer.
      *
-     * This function follows the contract of [Any.hashCode], with an
-     * additional property: if two instances of [NonZeroInteger] are not
-     * equal, then calling this function on these objects must produce
-     * different hash codes.
+     * This function follows the contract of [Any.hashCode].
      *
      * <br>
      * <details>

@@ -14,7 +14,6 @@ import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
@@ -190,9 +189,7 @@ class NonZeroIntegerTest {
         val other: NonZeroInteger =
             Random.nonZeroIntegerExcept(illegal = nonZeroInteger)
 
-        val message = "Inputs: this = $nonZeroInteger, other = $other"
-        assertNotEquals(nonZeroInteger, other, message)
-        assertNotEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
+        assertNotEquals(nonZeroInteger, other)
     }
 
     @Test
@@ -200,22 +197,15 @@ class NonZeroIntegerTest {
         val nonZeroInteger: NonZeroInteger = Random.nonZeroInteger()
         val other: Any = nonZeroInteger.toString()
 
-        val message = "Inputs: this = $nonZeroInteger, other = \"$other\""
-        assertNotEquals(nonZeroInteger, other, message)
-        assertNotEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
+        assertNotEquals(nonZeroInteger, other)
     }
 
     @Test
     fun structuralEqualityFailsWithNull(): Unit = repeatTest {
-        val x: NonZeroInteger = Random.nonZeroInteger()
-        val y: Any? = null
+        val nonZeroInteger: NonZeroInteger = Random.nonZeroInteger()
+        val other: Any? = null
 
-        val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
-
-        val message = "Structural equality must fail with null."
-        assertFalse(equality, message)
-        assertFalse(hashEquality, message)
+        assertNotEquals(nonZeroInteger, other)
     }
 
     // ------------------------- Arithmetic operations -------------------------

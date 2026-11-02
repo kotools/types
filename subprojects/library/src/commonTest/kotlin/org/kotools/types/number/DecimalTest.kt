@@ -221,9 +221,7 @@ class DecimalTest {
         val decimal: Decimal = Random.decimal()
         val other: Decimal = Random.decimalExcept(illegal = decimal)
 
-        val message = "Inputs: this = $decimal, other = $other"
-        assertNotEquals(decimal, other, message)
-        assertNotEquals(decimal.hashCode(), other.hashCode(), message)
+        assertNotEquals(decimal, other)
     }
 
     @Test
@@ -231,22 +229,15 @@ class DecimalTest {
         val decimal: Decimal = Random.decimal()
         val other: Any = decimal.toString()
 
-        val message = "Inputs: this = $decimal, other = \"$other\""
-        assertNotEquals(decimal, other, message)
-        assertNotEquals(decimal.hashCode(), other.hashCode(), message)
+        assertNotEquals(decimal, other)
     }
 
     @Test
     fun structuralEqualityFailsWithNull(): Unit = repeatTest {
-        val x: Decimal = Random.decimal()
-        val y: Any? = null
+        val decimal: Decimal = Random.decimal()
+        val other: Any? = null
 
-        val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
-
-        val message = "Structural equality must fail with null."
-        assertFalse(equality, message)
-        assertFalse(hashEquality, message)
+        assertNotEquals(decimal, other)
     }
 
     @Test

@@ -16,7 +16,6 @@ import kotlin.random.nextLong
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
@@ -239,13 +238,7 @@ class NonPositiveIntegerTest {
         val other: NonPositiveInteger =
             Random.nonPositiveIntegerExcept(illegal = nonPositiveInteger)
 
-        val message = "Inputs: this = $nonPositiveInteger, other = $other"
-        assertNotEquals(nonPositiveInteger, other, message)
-        assertNotEquals(
-            nonPositiveInteger.hashCode(),
-            other.hashCode(),
-            message
-        )
+        assertNotEquals(nonPositiveInteger, other)
     }
 
     @Test
@@ -253,26 +246,15 @@ class NonPositiveIntegerTest {
         val nonPositiveInteger: NonPositiveInteger = Random.nonPositiveInteger()
         val other: Any = nonPositiveInteger.toInteger()
 
-        val message = "Inputs: this = $nonPositiveInteger, other = $other"
-        assertNotEquals(nonPositiveInteger, other, message)
-        assertNotEquals(
-            nonPositiveInteger.hashCode(),
-            other.hashCode(),
-            message
-        )
+        assertNotEquals(nonPositiveInteger, other)
     }
 
     @Test
     fun structuralEqualityFailsWithNull(): Unit = repeatTest {
-        val x: NonPositiveInteger = Random.nonPositiveInteger()
-        val y: Any? = null
+        val nonPositiveInteger: NonPositiveInteger = Random.nonPositiveInteger()
+        val other: Any? = null
 
-        val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
-
-        val message = "Structural equality must fail with null."
-        assertFalse(equality, message)
-        assertFalse(hashEquality, message)
+        assertNotEquals(nonPositiveInteger, other)
     }
 
     // ------------------------- Arithmetic operations -------------------------

@@ -183,9 +183,7 @@ class IntegerTest {
         val integer: Integer = Random.integer()
         val other: Integer = Random.integerExcept(illegal = integer)
 
-        val message = "Inputs: this = $integer, other = $other"
-        assertNotEquals(integer, other, message)
-        assertNotEquals(integer.hashCode(), other.hashCode(), message)
+        assertNotEquals(integer, other)
     }
 
     @Test
@@ -193,22 +191,15 @@ class IntegerTest {
         val integer: Integer = Random.integer()
         val other: Any = integer.toString()
 
-        val message = "Inputs: this = $integer, other = \"$other\""
-        assertNotEquals(integer, other, message)
-        assertNotEquals(integer.hashCode(), other.hashCode(), message)
+        assertNotEquals(integer, other)
     }
 
     @Test
     fun structuralEqualityFailsWithNull(): Unit = repeatTest {
-        val x: Integer = Random.integer()
-        val y: Any? = null
+        val integer: Integer = Random.integer()
+        val other: Any? = null
 
-        val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
-
-        val message = "Structural equality must fail with null."
-        assertFalse(equality, message)
-        assertFalse(hashEquality, message)
+        assertNotEquals(integer, other)
     }
 
     @Test

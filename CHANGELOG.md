@@ -22,6 +22,12 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   `NonNegativeInteger.toString` and `NonPositiveInteger.toString` methods.
   (module: `types`, ref: [#1048])
 
+### 🐛 Fixed
+
+- Unsatisfiable claim about distinct hash codes in the documentation of
+  `hashCode` for `Decimal`, `Integer`, `NonNegativeInteger`,
+  `NonPositiveInteger` and `NonZeroInteger`. (module: `types`, ref: [#1051])
+
 ## 🔖 [5.2.0] - 2026-06-28
 
 ### ✨ Added
@@ -186,3 +192,4 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1024]: https://github.com/kotools/types/issues/1024
 [#1032]: https://github.com/kotools/types/issues/1032
 [#1048]: https://github.com/kotools/types/issues/1048
+[#1051]: https://github.com/kotools/types/issues/1051
