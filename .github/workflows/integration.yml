@@ -29,57 +29,21 @@ env:
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
 jobs:
-  # --------------------------------- Stage 1 ----------------------------------
-  gradle-plugins:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5.0.1
-      - name: Setup Java and Gradle
-        uses: ./.github/actions/setup-java-gradle
-      - name: Build project
-        run: ./gradlew :plugins:build
-  qr-code:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5.0.1
-      - name: Setup Java and Gradle
-        uses: ./.github/actions/setup-java-gradle
-      - name: Build project
-        run: ./gradlew :types-qr-code:build
-  # --------------------------------- Stage 2 ----------------------------------
-  types-internal:
+  check-kotlin-projects:
+    name: Check Kotlin projects
     runs-on: macos-14
-    needs: gradle-plugins
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.1
       - name: Setup Java and Gradle
         uses: ./.github/actions/setup-java-gradle
-      - name: Build project
-        run: ./gradlew :types-internal:build
-  # --------------------------------- Stage 3 ----------------------------------
-  types:
-    runs-on: macos-14
-    needs:
-      - gradle-plugins
-      - types-internal
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5.0.1
-      - name: Setup Java and Gradle
-        uses: ./.github/actions/setup-java-gradle
-      - name: Build project
-        run: ./gradlew :types:build
-  # --------------------------------- Stage 4 ----------------------------------
-  types-kotlin-serialization:
-    runs-on: macos-14
-    needs: types
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5.0.1
-      - name: Setup Java and Gradle
-        uses: ./.github/actions/setup-java-gradle
-      - name: Build project
-        run: ./gradlew :types-kotlinx-serialization:build
+      - name: Check Gradle plugins
+        run: ./gradlew :plugins:check
+      - name: Check QR code project
+        run: ./gradlew :types-qr-code:check
+      - name: Check internals
+        run: ./gradlew :types-internal:check
+      - name: Check core library
+        run: ./gradlew :types:check
+      - name: Check integration with Kotlin Serialization
+        run: ./gradlew :types-kotlinx-serialization:check
