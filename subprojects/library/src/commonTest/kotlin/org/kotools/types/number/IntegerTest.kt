@@ -185,7 +185,6 @@ class IntegerTest {
 
         val message = "Inputs: this = $integer, other = $other"
         assertNotEquals(integer, other, message)
-        assertNotEquals(integer.hashCode(), other.hashCode(), message)
     }
 
     @Test
@@ -195,7 +194,6 @@ class IntegerTest {
 
         val message = "Inputs: this = $integer, other = \"$other\""
         assertNotEquals(integer, other, message)
-        assertNotEquals(integer.hashCode(), other.hashCode(), message)
     }
 
     @Test
@@ -204,11 +202,9 @@ class IntegerTest {
         val y: Any? = null
 
         val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
 
         val message = "Structural equality must fail with null."
         assertFalse(equality, message)
-        assertFalse(hashEquality, message)
     }
 
     @Test

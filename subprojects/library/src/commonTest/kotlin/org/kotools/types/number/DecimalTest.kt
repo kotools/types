@@ -223,7 +223,6 @@ class DecimalTest {
 
         val message = "Inputs: this = $decimal, other = $other"
         assertNotEquals(decimal, other, message)
-        assertNotEquals(decimal.hashCode(), other.hashCode(), message)
     }
 
     @Test
@@ -233,7 +232,6 @@ class DecimalTest {
 
         val message = "Inputs: this = $decimal, other = \"$other\""
         assertNotEquals(decimal, other, message)
-        assertNotEquals(decimal.hashCode(), other.hashCode(), message)
     }
 
     @Test
@@ -242,11 +240,9 @@ class DecimalTest {
         val y: Any? = null
 
         val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
 
         val message = "Structural equality must fail with null."
         assertFalse(equality, message)
-        assertFalse(hashEquality, message)
     }
 
     @Test

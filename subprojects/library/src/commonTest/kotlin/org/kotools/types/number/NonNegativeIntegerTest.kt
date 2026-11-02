@@ -230,11 +230,6 @@ class NonNegativeIntegerTest {
 
         val message = "Inputs: this = $nonNegativeInteger, other = $other"
         assertNotEquals(nonNegativeInteger, other, message)
-        assertNotEquals(
-            nonNegativeInteger.hashCode(),
-            other.hashCode(),
-            message
-        )
     }
 
     @Test
@@ -244,11 +239,6 @@ class NonNegativeIntegerTest {
 
         val message = "Inputs: this = $nonNegativeInteger, other = \"$other\""
         assertNotEquals(nonNegativeInteger, other, message)
-        assertNotEquals(
-            nonNegativeInteger.hashCode(),
-            other.hashCode(),
-            message
-        )
     }
 
     @Test
@@ -257,11 +247,9 @@ class NonNegativeIntegerTest {
         val y: Any? = null
 
         val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
 
         val message = "Structural equality must fail with null."
         assertFalse(equality, message)
-        assertFalse(hashEquality, message)
     }
 
     // ------------------------- Arithmetic operations -------------------------

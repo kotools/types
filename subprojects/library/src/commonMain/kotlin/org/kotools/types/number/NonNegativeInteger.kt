@@ -332,10 +332,7 @@ public class NonNegativeInteger private constructor(
     /**
      * Returns a hash code value for this integer.
      *
-     * This function follows the contract of [Any.hashCode], with an
-     * additional property: if two instances of [NonNegativeInteger] are not
-     * equal, then calling this function on these objects must produce
-     * different hash codes.
+     * This function follows the contract of [Any.hashCode].
      *
      * <br>
      * <details>

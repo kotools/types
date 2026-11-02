@@ -192,7 +192,6 @@ class NonZeroIntegerTest {
 
         val message = "Inputs: this = $nonZeroInteger, other = $other"
         assertNotEquals(nonZeroInteger, other, message)
-        assertNotEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
     }
 
     @Test
@@ -202,7 +201,6 @@ class NonZeroIntegerTest {
 
         val message = "Inputs: this = $nonZeroInteger, other = \"$other\""
         assertNotEquals(nonZeroInteger, other, message)
-        assertNotEquals(nonZeroInteger.hashCode(), other.hashCode(), message)
     }
 
     @Test
@@ -211,11 +209,9 @@ class NonZeroIntegerTest {
         val y: Any? = null
 
         val equality: Boolean = x == y
-        val hashEquality: Boolean = x.hashCode() == y.hashCode()
 
         val message = "Structural equality must fail with null."
         assertFalse(equality, message)
-        assertFalse(hashEquality, message)
     }
 
     // ------------------------- Arithmetic operations -------------------------
