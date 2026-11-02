@@ -201,12 +201,11 @@ class NonPositiveIntegerTest {
         val xHashCode: Int = x.hashCode()
         val yHashCode: Int = y.hashCode()
 
-        val message = "Inputs: x = $x, y = $y"
-        assertEquals(x, y, message)
-        assertEquals(xHashCode, yHashCode, message)
-
-        assertEquals(y, x, message)
-        assertEquals(yHashCode, xHashCode, message)
+        val messageSuffix = "expected to be symmetrical (x = $x, y = $y)."
+        assertTrue("Integers equality $messageSuffix") { x == y && y == x }
+        assertTrue("Integers' hash code $messageSuffix") {
+            xHashCode == yHashCode && yHashCode == xHashCode
+        }
     }
 
     @Test
