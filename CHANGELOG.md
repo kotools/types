@@ -28,74 +28,11 @@ The format is based on [Keep a Changelog], and this project adheres to its own
   `hashCode` for `Decimal`, `Integer`, `NonNegativeInteger`,
   `NonPositiveInteger` and `NonZeroInteger`. (module: `types`, ref: [#1051])
 
-## 🔖 [5.2.0] - 2026-06-28
-
-### ✨ Added
-
-- `toLong()` and `toLongOrNull()` **experimental** functions to `Integer` class,
-  returning the `Long` representation of an `Integer`. (module: `types`, ref:
-  [#1010])
-- `div(NonZeroInteger)` and `rem(NonZeroInteger)` **experimental** functions to
-  `Integer` class, returning the Euclidean quotient and non-negative remainder
-  of dividing by a non-zero divisor without throwing. (module: `types`, ref:
-  [#999])
-- `NonZeroInteger` **experimental** class to `org.kotools.types.number` package,
-  representing an `Integer` other than zero. (module: `types`, ref: [#1011])
-- `NonNegativeInteger` **experimental** class to `org.kotools.types.number`
-  package, representing an `Integer` that is greater than or equal to zero.
-  (module: `types`, refs: [#998], [#1014], [#1032])
-- `NonPositiveInteger` **experimental** class to `org.kotools.types.number`
-  package, representing an `Integer` that is less than or equal to zero.
-  (module: `types`, refs: [#1013], [#1024])
-- `Decimal` **experimental** class to `org.kotools.types.number` package,
-  representing mathematical decimal numbers with exact arithmetic. (module:
-  `types`, refs: [#925] originally suggested by [@CLOVIS-AI], [#992])
-
-### ♻️ Changed
-
-- Reformatted error messages thrown by **experimental** declarations in
-  `org.kotools.types.*` to follow a consistent `<description>: <value>`
-  structure. (modules: `types`, `types-kotlinx-serialization`, ref: [#988])
-- **Breaking:** Moved `Integer` **experimental** class to
-  `org.kotools.types.number` package, and renamed some of its functions
-  (`from` -> `fromLong`, `fromDecimal` -> `parse`, `fromDecimalOrNull` ->
-  `parseOrNull`). (module: `types`, refs: [#960], [#1010])
-- `div`, `divOrNull`, `rem` and `remOrNull` **experimental** functions of
-  `Integer` class to use Euclidean division semantics: the remainder is always
-  non-negative (`0 <= r < |b|`). (module: `types`, ref: [#952])
-- Internal representation of `Integer` **experimental** class from `String` to
-  `java.lang.BigInteger` on Kotlin/JVM, `BigInt` on Kotlin/JS, and a custom
-  implementation on Kotlin/Native. This avoids parsing when performing
-  arithmetic operations. (module: `types`, refs: [#912], [#914] reviewed by
-  [@daniel-rusu], [#989])
-
-### 🔥 Removed
-
-- **Breaking:** `orNull` and `orThrow` **deprecated** functions from
-  `EmailAddress` and `EmailAddressRegex` **experimental** classes. Use their
-  `of` function instead. (module: `types`, refs: [#871], [#872])
-- `com.ionspin.kotlin:bignum` dependency, previously used internally by
-  `Integer` on Kotlin/Native. (module: `types`, ref: [#962])
-- **Breaking:** `div(Integer)`, `divOrNull(Integer)`, `rem(Integer)` and
-  `remOrNull(Integer)` **experimental** functions from `Integer` class. Use
-  `div(NonZeroInteger)` and `rem(NonZeroInteger)` instead, as their signature
-  rules out division by zero at compile time. (module: `types`, ref: [#1001])
-
-### 🐛 Fixed
-
-- Serial name of default serializers, provided by
-  `KotoolsTypesSerializersModule()` **experimental** function, now uses
-  fully-qualified names (e.g., `org.kotools.types.EmailAddress`) instead of the
-  type's simple name. (module: `types-kotlinx-serialization`, ref: [#966])
-- Default serializers provided by `KotoolsTypesSerializersModule()`
-  **experimental** function now throw an `IllegalStateException` instead of an
-  `IllegalArgumentException` when decoding an invalid value. (module:
-  `types-kotlinx-serialization`, ref: [#990])
-
 ## 🔖 Archives
 
 | Version | Release date |
 |---------|--------------|
+| [5.2.0] | 2026-06-28   |
 | [5.1.1] | 2025-11-20   |
 | [5.1.0] | 2025-11-17   |
 | [5.0.1] | 2025-04-26   |
@@ -161,7 +98,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [5.0.1]: https://github.com/kotools/types/releases/tag/5.0.1
 [5.1.0]: https://github.com/kotools/types/releases/tag/5.1.0
 [5.1.1]: https://github.com/kotools/types/releases/tag/5.1.1
-[5.2.0]: https://github.com/kotools/types/compare/5.1.1...5.2.0
+[5.2.0]: https://github.com/kotools/types/releases/tag/5.2.0
 
 [keep a changelog]: https://keepachangelog.com/en/2.0.0
 [versioning strategy]: documentation/versioning-strategy.md
