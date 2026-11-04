@@ -18,15 +18,14 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 
 ### 🔥 Removed
 
-- Implementation details from the documentation of `NonZeroInteger.toString`,
-  `NonNegativeInteger.toString` and `NonPositiveInteger.toString` methods.
-  (module: `types`, ref: [#1048])
+- Implementation details from the documentation of `toString` for
+  `NonZeroInteger`, `NonNegativeInteger` and `NonPositiveInteger`. ([#1048])
 
 ### 🐛 Fixed
 
 - Unsatisfiable claim about distinct hash codes in the documentation of
   `hashCode` for `Decimal`, `Integer`, `NonNegativeInteger`,
-  `NonPositiveInteger` and `NonZeroInteger`. (module: `types`, ref: [#1051])
+  `NonPositiveInteger` and `NonZeroInteger`. ([#1051])
 
 ## 🔖 Archives
 
