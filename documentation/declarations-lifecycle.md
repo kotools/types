@@ -18,6 +18,8 @@ This project provides different types of declaration:
 Our [versioning strategy] defines which types of release can include each change
 below.
 
+![Schema of the declarations lifecycle](declarations-lifecycle-schema.png)
+
 ### 🧪 Experimentation
 
 A new declaration must be introduced in **experimental** stage for collecting
