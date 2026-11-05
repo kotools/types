@@ -16,6 +16,11 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 
 ## 🚧 Unreleased
 
+### ♻️ Changed
+
+- Release type rules for **stable** and **experimental** declarations in the
+  [versioning strategy].
+
 ### 🔥 Removed
 
 - Implementation details from the documentation of `toString` for

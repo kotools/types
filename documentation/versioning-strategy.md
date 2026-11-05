@@ -1,44 +1,64 @@
 # 🔂 Versioning strategy
 
-For versioning the Application Programming Interfaces (APIs) of Kotools Types,
-we have a pragmatic approach based on the concept of [backward compatibility].
+For versioning Kotools Types, we have an approach based on backward
+compatibility.
 
-## 🤔 Types of compatibility
+See our [declarations lifecycle] for the stages that declarations go through.
+
+> [!NOTE]
+> Each rule in this document is expressed using an [RFC 2119] keyword.
+
+## 🧩 Types of compatibility
 
 We focus on three types of compatibility:
 
-- **Behavioral compatibility** ensures that new code doesn't change the behavior
-  of existing one.
-- **Source compatibility** ensures that client's code recompile correctly
-  against a newer version of Kotools Types.
-- **Binary compatibility** ensures that a newer version of Kotools Types can
-  replace a previously compiled version of this library.
+- **Behavioral**: A declaration MUST produce the same observable result for the
+  same input in a newer version.
+- **Source**: Client's code that compiles against a version MUST recompile
+  without error against a newer version.
+- **Binary**: Client's code compiled against a version MUST run against a newer
+  version, without loading or linkage error.
+
+A release breaks a type of compatibility when it doesn't satisfy the rule of
+that type.
 
 ## ⚖️ Stable API
 
 With these types of compatibility in mind, here are the different types of
 release that we ship for the stable API of Kotools Types:
 
-- **Incremental releases (`X.Y.Z`)** that can break the
-  **behavioral compatibility** for fixing bugs, but the **source compatibility**
-  and the **binary compatibility** should be preserved.
-- **Minor releases (`X.Y`)** that can break the **behavioral compatibility**
-  for fixing bugs and the **source compatibility** for deprecating declarations,
-  but the **binary compatibility** should be preserved.
-- **Major releases (`X`)** that can break the **behavioral compatibility**
-  for fixing bugs, the **source compatibility** for deprecating declaration, and
-  the **binary compatibility** for removing declarations.
+- **Patch (`X.Y.Z`)**:
+    - MUST only fix bugs in existing stable declarations.
+    - MAY change existing experimental declarations, except removing them.
+    - MAY break **behavioral** compatibility for fixing bugs.
+    - MUST NOT break **source** and **binary** compatibilities.
+- **Minor (`X.Y.0`)**:
+    - MAY add or deprecate declarations, and fix bugs.
+    - MAY break **behavioral** compatibility for fixing bugs.
+    - MAY break **source** compatibility for deprecating declarations.
+    - MUST NOT break **binary** compatibility.
+- **Major (`X.0.0`)**:
+    - MAY remove declarations, on top of what a minor release MAY do.
+    - MUST include upgrades of API dependencies.
+    - MAY break **behavioral** compatibility for fixing bugs.
+    - MAY break **source** compatibility for deprecating declarations.
+    - MAY break **binary** compatibility for removing declarations.
 
 ## 🧪 Experimental API
 
-We also ship an experimental API of Kotools Types for trying out ideas and
-collecting feedbacks from users.
-This API includes all declarations marked with the `ExperimentalKotoolsTypesApi`
-annotation requiring an explicit [opt-in].
+We also ship an experimental API for trying out ideas and collecting feedbacks.
+It includes declarations marked with `@ExperimentalKotoolsTypesApi`.
 
-Please note that this API doesn't have the same compatibility policy as the
-stable one: ***experimental changes can break any type of compatibility in
-any type of releases listed above***!
+This API doesn't have the same compatibility policy as the stable one:
 
-[backward compatibility]: https://kotlinlang.org/docs/jvm-api-guidelines-backward-compatibility.html#definition-of-backward-compatibility
-[opt-in]: https://kotlinlang.org/docs/opt-in-requirements.html
+- Experimental declarations MAY be added or removed in **minor** and **major**
+  releases only.
+- Existing experimental declarations MAY change in any type of release. ***These
+  changes can break any type of compatibility!***
+- Promoting an experimental declaration to stable MUST happen in **minor** and
+  **major** releases only.
+
+<!----------------------------------- Links ----------------------------------->
+
+[declarations lifecycle]: declarations-lifecycle.md
+[RFC 2119]: https://datatracker.ietf.org/doc/html/rfc2119
