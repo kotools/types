@@ -118,6 +118,16 @@ public class IntegerJavaSample {
     }
 
     @Test
+    void absoluteValue() {
+        final Integer x = Integer.parse("-99999999999999999999");
+        final NonNegativeInteger result = x.absoluteValue();
+        final NonNegativeInteger expected =
+                NonNegativeInteger.parse("99999999999999999999");
+        final boolean check = result.equals(expected);
+        if (!check) throw new IllegalStateException("Check failed.");
+    }
+
+    @Test
     void plus() {
         final Integer x = Integer.parse("99999999999999999999");
         final Integer y = Integer.parse("1");

@@ -16,6 +16,10 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 
 ## 🚧 Unreleased
 
+### ✨ Added
+
+- `absoluteValue` function to the **experimental** `Integer` type. ([#949])
+
 ### ♻️ Changed
 
 - Release type rules for **stable** and **experimental** declarations in the
@@ -138,5 +142,6 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1024]: https://github.com/kotools/types/issues/1024
 [#1032]: https://github.com/kotools/types/issues/1032
 [#1048]: https://github.com/kotools/types/issues/1048
+[#949]: https://github.com/kotools/types/issues/949
 [#1051]: https://github.com/kotools/types/issues/1051
 [#1061]: https://github.com/kotools/types/issues/1061

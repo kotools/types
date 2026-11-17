@@ -154,6 +154,15 @@ class IntegerSample {
     }
 
     @Test
+    fun absoluteValue() {
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val result: NonNegativeInteger = x.absoluteValue()
+        val expected: NonNegativeInteger =
+            NonNegativeInteger.parse("99999999999999999999")
+        check(result == expected)
+    }
+
+    @Test
     fun plus() {
         val x: Integer = Integer.parse("99999999999999999999")
         val y: Integer = Integer.parse("1")

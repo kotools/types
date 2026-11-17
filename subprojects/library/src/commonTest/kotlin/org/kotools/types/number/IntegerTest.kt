@@ -342,6 +342,52 @@ class IntegerTest {
     }
 
     @Test
+    fun absoluteValueIsDefinite() {
+        val x: Integer = Integer.ZERO
+
+        val result: NonNegativeInteger = x.absoluteValue()
+
+        val actual: Integer = result.toInteger()
+        assertEquals(expected = x, actual)
+    }
+
+    @Test
+    fun absoluteValueIsSymmetric(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+
+        val actual: NonNegativeInteger = x.absoluteValue()
+
+        val expected: NonNegativeInteger = (-x).absoluteValue()
+        assertEquals(expected, actual, "Input: $x")
+    }
+
+    @Test
+    fun absoluteValueHasTriangleInequality(): Unit = repeatTest {
+        val x: Integer = Random.integer()
+        val y: Integer = Random.integer()
+
+        val left: NonNegativeInteger = (x + y).absoluteValue()
+        val right: NonNegativeInteger = x.absoluteValue() + y.absoluteValue()
+        val actual: Boolean = left.toInteger() <= right.toInteger()
+
+        assertTrue(actual, message = "Inputs: x = $x, y = $y")
+    }
+
+    @Test
+    fun absoluteValueOnPositiveInteger() {
+        val x: Integer = Integer.parse("99999999999999999999")
+        val actual: NonNegativeInteger = x.absoluteValue()
+        assertEquals(expected = x, actual.toInteger())
+    }
+
+    @Test
+    fun absoluteValueOnNegativeInteger() {
+        val x: Integer = Integer.parse("-99999999999999999999")
+        val actual: NonNegativeInteger = x.absoluteValue()
+        assertEquals(expected = -x, actual.toInteger())
+    }
+
+    @Test
     fun plusIsCommutative(): Unit = repeatTest {
         val x: Integer = Random.integer()
         val y: Integer = Random.integer()

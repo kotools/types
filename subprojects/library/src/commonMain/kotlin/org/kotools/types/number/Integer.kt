@@ -105,8 +105,8 @@ import kotlin.jvm.JvmSynthetic
  * [ordering operators][compareTo] (`x < y`, `x <= y`, `x > y`, `x >= y`).
  * - **Arithmetic operations:** [Add][plus] (`x + y`), [subtract][minus]
  * (`x - y`), [multiply][times] (`x * y`), [divide][div] (`x / y`), compute
- * [remainders][rem] (`x % y`), and [negate][unaryMinus] (`-x`) integers without
- * overflow.
+ * [remainders][rem] (`x % y`), [negate][unaryMinus] (`-x`), and compute the
+ * [absolute value][absoluteValue] of integers without overflow.
  * - **Conversions:** Convert to its decimal string representation (see
  * [Integer.toString]) or to a [Long] (see [toLong]).
  * </details>
@@ -415,6 +415,38 @@ public class Integer private constructor(
      * </details>
      */
     public operator fun unaryMinus(): Integer = Integer(-this.delegate)
+
+    /**
+     * Returns the absolute value of this integer.
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Kotlin</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Kotlin code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerSample.absoluteValue
+     * </details>
+     *
+     * <br>
+     * <details>
+     * <summary>
+     *     <b>Calling from Java</b>
+     * </summary>
+     *
+     * Here's an example of calling this function from Java code:
+     *
+     * SAMPLE: org.kotools.types.number.IntegerJavaSample.absoluteValue
+     * </details>
+     *
+     * @since 5.3.0
+     */
+    public fun absoluteValue(): NonNegativeInteger {
+        val value: Integer = if (this < ZERO) -this else this
+        return NonNegativeInteger.fromInteger(value)
+    }
 
     /**
      * Adds the [other] integer to this one.
