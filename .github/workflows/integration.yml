@@ -31,7 +31,7 @@ env:
 jobs:
   check-kotlin-projects:
     name: Check Kotlin projects
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.1
