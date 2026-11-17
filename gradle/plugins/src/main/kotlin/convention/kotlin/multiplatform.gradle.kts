@@ -34,16 +34,17 @@ kotlin.jvm {
     }
 }
 
-// Inspired from https://kotlinlang.org/docs/native-target-support.html.
-// Tier 1
-kotlin.macosArm64()
-kotlin.iosSimulatorArm64()
-kotlin.iosArm64()
-// Tier 2
-kotlin.linuxX64()
-kotlin.macosX64()
+// Apple targets:
 kotlin.iosX64()
-// Tier 3
+kotlin.macosX64()
+kotlin.iosArm64()
+kotlin.iosSimulatorArm64()
+kotlin.macosArm64()
+
+// Linux targets:
+kotlin.linuxX64()
+
+// Windows targets:
 kotlin.mingwX64()
 
 kotlin.targets.configureEach {
