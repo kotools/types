@@ -5,6 +5,7 @@ import org.kotools.types.number.Integer
 import org.kotools.types.number.NonNegativeInteger
 import org.kotools.types.number.NonPositiveInteger
 import org.kotools.types.number.NonZeroInteger
+import org.kotools.types.number.PositiveInteger
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextLong
@@ -92,10 +93,21 @@ internal fun Random.integerExcept(illegal: Integer): Integer {
     return candidate
 }
 
+// ------------------------- Random positive integers --------------------------
+
 @OptIn(ExperimentalKotoolsTypesApi::class)
-internal fun Random.positiveInteger(): Integer {
+internal fun Random.positiveInteger(): PositiveInteger {
     val value: String = this.positiveIntegerString()
-    return Integer.parse(value)
+    return PositiveInteger.parse(value)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.positiveIntegerExcept(
+    illegal: PositiveInteger
+): PositiveInteger {
+    var candidate: PositiveInteger = this.positiveInteger()
+    while (candidate == illegal) candidate = this.positiveInteger()
+    return candidate
 }
 
 // --------------------------- Random non-zero integers ------------------------

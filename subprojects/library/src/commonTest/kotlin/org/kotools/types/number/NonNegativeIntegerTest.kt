@@ -83,6 +83,7 @@ class NonNegativeIntegerTest {
     @Test
     fun fromIntegerFailsWithNegativeValue(): Unit = repeatTest {
         val integer: Integer = -Random.positiveInteger()
+            .toInteger()
 
         val exception: IllegalArgumentException = assertFailsWith(
             message = "Input: $integer"

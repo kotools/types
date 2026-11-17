@@ -640,6 +640,7 @@ class IntegerTest {
         val x: Integer = Random.integer()
         val y: Integer = Random.integer()
         val z: Integer = Random.positiveInteger()
+            .toInteger()
 
         val actual: Boolean = (x * z) <= y * z
 
@@ -653,6 +654,7 @@ class IntegerTest {
         val x: Integer = Random.integer()
         val y: Integer = Random.integer()
         val z: Integer = -Random.positiveInteger()
+            .toInteger()
 
         val message = "Inputs: x = $x, y = $y, z = $z"
         assertEquals(x <= y, (x * z) >= y * z, message)

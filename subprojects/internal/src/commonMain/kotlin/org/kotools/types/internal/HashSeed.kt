@@ -16,7 +16,10 @@ public enum class HashSeed {
     NonPositiveInteger,
 
     /** Hash seed for the `NonZeroInteger` type. */
-    NonZeroInteger;
+    NonZeroInteger,
+
+    /** Hash seed for the `PositiveInteger` type. */
+    PositiveInteger;
 
     /** Returns a hash seed for this entry. */
     public fun toInt(): Int = this.name.hashCode()

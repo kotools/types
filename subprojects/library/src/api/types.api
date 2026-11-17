@@ -485,3 +485,26 @@ public final class org/kotools/types/number/NonZeroInteger$Companion {
 	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/number/NonZeroInteger;
 }
 
+public final class org/kotools/types/number/PositiveInteger {
+	public static final field Companion Lorg/kotools/types/number/PositiveInteger$Companion;
+	public synthetic fun <init> (Lorg/kotools/types/number/Integer;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun equals (Ljava/lang/Object;)Z
+	public static final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/PositiveInteger;
+	public static final fun fromLong (J)Lorg/kotools/types/number/PositiveInteger;
+	public final fun hashCode ()I
+	public static final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/PositiveInteger;
+	public final fun toInteger ()Lorg/kotools/types/number/Integer;
+	public final fun toNonNegativeInteger ()Lorg/kotools/types/number/NonNegativeInteger;
+	public final fun toNonZeroInteger ()Lorg/kotools/types/number/NonZeroInteger;
+	public final fun toString ()Ljava/lang/String;
+}
+
+public final class org/kotools/types/number/PositiveInteger$Companion {
+	public final fun fromInteger (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/PositiveInteger;
+	public final synthetic fun fromIntegerOrNull (Lorg/kotools/types/number/Integer;)Lorg/kotools/types/number/PositiveInteger;
+	public final fun fromLong (J)Lorg/kotools/types/number/PositiveInteger;
+	public final synthetic fun fromLongOrNull (J)Lorg/kotools/types/number/PositiveInteger;
+	public final fun parse (Ljava/lang/String;)Lorg/kotools/types/number/PositiveInteger;
+	public final synthetic fun parseOrNull (Ljava/lang/String;)Lorg/kotools/types/number/PositiveInteger;
+}
+
