@@ -29,9 +29,37 @@ env:
   JAVA_DISTRIBUTION: temurin
   JAVA_VERSION: 17
 jobs:
-  check-kotlin-projects:
-    name: Check Kotlin projects
-    runs-on: macos-15
+  check-on-macos-arm64:
+    name: Check on macOS arm64
+    runs-on: macos-26
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.1
+      - name: Setup Java and Gradle
+        uses: ./.github/actions/setup-java-gradle
+      - name: Check internals
+        run: ./gradlew :types-internal:check
+      - name: Check core library
+        run: ./gradlew :types:check
+      - name: Check integration with Kotlin Serialization
+        run: ./gradlew :types-kotlinx-serialization:check
+  check-on-macos-x64:
+    name: Check on macOS x64
+    runs-on: macos-26-intel
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.1
+      - name: Setup Java and Gradle
+        uses: ./.github/actions/setup-java-gradle
+      - name: Check internals
+        run: ./gradlew :types-internal:check
+      - name: Check core library
+        run: ./gradlew :types:check
+      - name: Check integration with Kotlin Serialization
+        run: ./gradlew :types-kotlinx-serialization:check
+  check-on-ubuntu-x64:
+    name: Check on Ubuntu x64
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.1
@@ -49,3 +77,17 @@ jobs:
         run: ./gradlew :types-kotlinx-serialization:check
       - name: Generate API reference
         run: ./gradlew :dokkaHtmlMultiModule
+  check-on-windows-x64:
+    name: Check on Windows x64
+    runs-on: windows-2025
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.1
+      - name: Setup Java and Gradle
+        uses: ./.github/actions/setup-java-gradle
+      - name: Check internals
+        run: ./gradlew :types-internal:check
+      - name: Check core library
+        run: ./gradlew :types:check
+      - name: Check integration with Kotlin Serialization
+        run: ./gradlew :types-kotlinx-serialization:check
