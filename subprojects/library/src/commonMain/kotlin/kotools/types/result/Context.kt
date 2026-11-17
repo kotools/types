@@ -20,11 +20,15 @@ import kotools.types.number.toStrictlyNegativeInt as delegateToStrictlyNegativeI
 import kotools.types.number.toStrictlyPositiveInt as delegateToStrictlyPositiveInt
 import kotools.types.text.toNotBlankString as delegateToNotBlankString
 
+private const val DEPRECATION_MESSAGE: String = "Use extension functions " +
+        "that return `Result` under `kotools.types.*` packages."
+
 /**
  * Context available when calling the [resultOf] function.
  *
  * @since 4.1.0
  */
+@Deprecated(message = DEPRECATION_MESSAGE, level = DeprecationLevel.WARNING)
 public sealed interface ResultContext {
     /**
      * Returns this number as a [NonZeroInt], which may involve rounding or
@@ -112,6 +116,7 @@ public sealed interface ResultContext {
             .getOrThrow()
 }
 
+@Suppress("DEPRECATION")
 private object ResultContextImplementation : ResultContext
 
 /**
@@ -121,5 +126,13 @@ private object ResultContextImplementation : ResultContext
  *
  * @since 4.1.0
  */
-public inline fun <T> resultOf(block: ResultContext.() -> T): Result<T> =
-    ResultContextImplementation.runCatching(block)
+@Deprecated(message = DEPRECATION_MESSAGE, level = DeprecationLevel.WARNING)
+@Suppress("DEPRECATION", "LESS_VISIBLE_TYPE_ACCESS_IN_INLINE_WARNING")
+public inline fun <T> resultOf(block: ResultContext.() -> T): Result<T> {
+    /*
+    Private `ResultContextImplementation` is accessed from this public inline
+    function. This will become an error in Kotlin language version 2.4. See
+    https://youtrack.jetbrains.com/issue/KTLC-283.
+    */
+    return ResultContextImplementation.runCatching(block)
+}

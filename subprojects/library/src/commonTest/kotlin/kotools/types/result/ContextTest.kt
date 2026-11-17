@@ -17,6 +17,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
+@Suppress("DEPRECATION")
 class ResultContextTest {
     @Test
     fun number_toNonZeroInt_should_pass_with_an_Int_other_than_zero() {

@@ -21,6 +21,11 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 - Release type rules for **stable** and **experimental** declarations in the
   [versioning strategy].
 
+### 🗑️ Deprecated
+
+- `resultOf` and `ResultContext` with a warning. Use extension functions that
+  return `Result` under `kotools.types.*` packages. ([#1061])
+
 ### 🔥 Removed
 
 - Implementation details from the documentation of `toString` for
@@ -134,3 +139,4 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1032]: https://github.com/kotools/types/issues/1032
 [#1048]: https://github.com/kotools/types/issues/1048
 [#1051]: https://github.com/kotools/types/issues/1051
+[#1061]: https://github.com/kotools/types/issues/1061
