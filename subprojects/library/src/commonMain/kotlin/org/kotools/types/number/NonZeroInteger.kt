@@ -172,10 +172,7 @@ public class NonZeroInteger private constructor(private val value: Integer) {
          */
         @JvmStatic
         public fun fromInteger(value: Integer): NonZeroInteger {
-            if (value == Integer.ZERO) {
-                val message: String = errorMessage("Zero integer")
-                throw IllegalArgumentException(message)
-            }
+            require(value != Integer.ZERO) { errorMessage("Zero integer") }
             return NonZeroInteger(value)
         }
 
@@ -202,9 +199,9 @@ public class NonZeroInteger private constructor(private val value: Integer) {
          * of returning `null` when [value] represents zero.
          */
         @JvmSynthetic
-        public fun fromIntegerOrNull(value: Integer): NonZeroInteger? =
-            if (value == Integer.ZERO) null
-            else NonZeroInteger(value)
+        public fun fromIntegerOrNull(value: Integer): NonZeroInteger? = value
+            .takeIf { it != Integer.ZERO }
+            ?.let(::NonZeroInteger)
 
         /**
          * Returns a [NonZeroInteger] representing the number described by
@@ -274,10 +271,9 @@ public class NonZeroInteger private constructor(private val value: Integer) {
          * returning `null` in case of invalid or zero [value].
          */
         @JvmSynthetic
-        public fun parseOrNull(value: String): NonZeroInteger? {
-            val integer: Integer = Integer.parseOrNull(value) ?: return null
-            return this.fromIntegerOrNull(integer)
-        }
+        public fun parseOrNull(value: String): NonZeroInteger? = Integer
+            .parseOrNull(value)
+            ?.let(this::fromIntegerOrNull)
     }
 
     // ------------------------------ Comparisons ------------------------------

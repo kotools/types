@@ -156,10 +156,8 @@ public class PositiveInteger private constructor(private val value: Integer) {
          */
         @JvmStatic
         public fun fromInteger(value: Integer): PositiveInteger {
-            if (value <= Integer.ZERO) {
-                val message: String =
-                    errorMessage("Non-positive integer", value)
-                throw IllegalArgumentException(message)
+            require(value > Integer.ZERO) {
+                errorMessage("Non-positive integer", value)
             }
             return PositiveInteger(value)
         }
@@ -187,9 +185,9 @@ public class PositiveInteger private constructor(private val value: Integer) {
          * returning `null` when [value] is less than or equal to zero.
          */
         @JvmSynthetic
-        public fun fromIntegerOrNull(value: Integer): PositiveInteger? =
-            if (value <= Integer.ZERO) null
-            else PositiveInteger(value)
+        public fun fromIntegerOrNull(value: Integer): PositiveInteger? = value
+            .takeIf { it > Integer.ZERO }
+            ?.let(::PositiveInteger)
 
         /**
          * Returns a [PositiveInteger] representing the number described by
@@ -259,10 +257,9 @@ public class PositiveInteger private constructor(private val value: Integer) {
          * returning `null` in case of invalid or non-positive [value].
          */
         @JvmSynthetic
-        public fun parseOrNull(value: String): PositiveInteger? {
-            val integer: Integer = Integer.parseOrNull(value) ?: return null
-            return this.fromIntegerOrNull(integer)
-        }
+        public fun parseOrNull(value: String): PositiveInteger? = Integer
+            .parseOrNull(value)
+            ?.let(this::fromIntegerOrNull)
     }
 
     // ------------------------------ Comparisons ------------------------------

@@ -186,9 +186,8 @@ public class NonNegativeInteger private constructor(
          */
         @JvmStatic
         public fun fromInteger(value: Integer): NonNegativeInteger {
-            if (value < Integer.ZERO) {
-                val message: String = errorMessage("Negative integer", value)
-                throw IllegalArgumentException(message)
+            require(value >= Integer.ZERO) {
+                errorMessage("Negative integer", value)
             }
             return NonNegativeInteger(value)
         }
@@ -217,8 +216,8 @@ public class NonNegativeInteger private constructor(
          */
         @JvmSynthetic
         public fun fromIntegerOrNull(value: Integer): NonNegativeInteger? =
-            if (value < Integer.ZERO) null
-            else NonNegativeInteger(value)
+            value.takeIf { it >= Integer.ZERO }
+                ?.let(::NonNegativeInteger)
 
         /**
          * Returns a [NonNegativeInteger] representing the number described
@@ -288,10 +287,9 @@ public class NonNegativeInteger private constructor(
          * returning `null` in case of invalid or negative [value].
          */
         @JvmSynthetic
-        public fun parseOrNull(value: String): NonNegativeInteger? {
-            val integer: Integer = Integer.parseOrNull(value) ?: return null
-            return this.fromIntegerOrNull(integer)
-        }
+        public fun parseOrNull(value: String): NonNegativeInteger? = Integer
+            .parseOrNull(value)
+            ?.let(this::fromIntegerOrNull)
     }
 
     // ------------------------------ Comparisons ------------------------------
