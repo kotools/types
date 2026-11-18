@@ -2,6 +2,7 @@ package org.kotools.types
 
 import org.kotools.types.number.Decimal
 import org.kotools.types.number.Integer
+import org.kotools.types.number.NegativeInteger
 import org.kotools.types.number.NonNegativeInteger
 import org.kotools.types.number.NonPositiveInteger
 import org.kotools.types.number.NonZeroInteger
@@ -107,6 +108,23 @@ internal fun Random.positiveIntegerExcept(
 ): PositiveInteger {
     var candidate: PositiveInteger = this.positiveInteger()
     while (candidate == illegal) candidate = this.positiveInteger()
+    return candidate
+}
+
+// ------------------------- Random negative integers --------------------------
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.negativeInteger(): NegativeInteger {
+    val value: String = this.negativeIntegerString()
+    return NegativeInteger.parse(value)
+}
+
+@OptIn(ExperimentalKotoolsTypesApi::class)
+internal fun Random.negativeIntegerExcept(
+    illegal: NegativeInteger
+): NegativeInteger {
+    var candidate: NegativeInteger = this.negativeInteger()
+    while (candidate == illegal) candidate = this.negativeInteger()
     return candidate
 }
 

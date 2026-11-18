@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 ### ✨ Added
 
 - `absoluteValue` function to the **experimental** `Integer` type. ([#949])
+- **Experimental** `NegativeInteger` type. ([#1047])
 - **Experimental** `PositiveInteger` type. ([#1018])
 
 ### ♻️ Changed
@@ -143,6 +144,7 @@ The format is based on [Keep a Changelog], and this project adheres to its own
 [#1018]: https://github.com/kotools/types/issues/1018
 [#1024]: https://github.com/kotools/types/issues/1024
 [#1032]: https://github.com/kotools/types/issues/1032
+[#1047]: https://github.com/kotools/types/issues/1047
 [#1048]: https://github.com/kotools/types/issues/1048
 [#949]: https://github.com/kotools/types/issues/949
 [#1051]: https://github.com/kotools/types/issues/1051

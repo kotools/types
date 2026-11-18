@@ -9,6 +9,9 @@ public enum class HashSeed {
     /** Hash seed for the `Integer` type. */
     Integer,
 
+    /** Hash seed for the `NegativeInteger` type. */
+    NegativeInteger,
+
     /** Hash seed for the `NonNegativeInteger` type. */
     NonNegativeInteger,
 
